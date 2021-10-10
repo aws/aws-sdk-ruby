@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-10-05)
+------------------
+
+* Feature - This release allows customers to change their inbound DMARC settings in Amazon WorkMail.
+
+1.41.0 (2021-09-30)
+------------------
+
+* Feature - This release adds support for mobile device access overrides management in Amazon WorkMail.
+
 1.40.0 (2021-09-01)
 ------------------
 

@@ -728,6 +728,51 @@ module Aws::WorkMail
     #
     class DeleteMailboxPermissionsResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteMobileDeviceAccessOverrideRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         user_id: "EntityIdentifier", # required
+    #         device_id: "DeviceId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization for which the access override will
+    #   be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The WorkMail user for which you want to delete the override. Accepts
+    #   the following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The mobile device for which you delete the override. `DeviceId` is
+    #   case insensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMobileDeviceAccessOverrideRequest AWS API Documentation
+    #
+    class DeleteMobileDeviceAccessOverrideRequest < Struct.new(
+      :organization_id,
+      :user_id,
+      :device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMobileDeviceAccessOverrideResponse AWS API Documentation
+    #
+    class DeleteMobileDeviceAccessOverrideResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteMobileDeviceAccessRuleRequest
     #   data as a hash:
     #
@@ -989,6 +1034,37 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInboundDmarcSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   Lists the ID of the given organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeInboundDmarcSettingsRequest AWS API Documentation
+    #
+    class DescribeInboundDmarcSettingsRequest < Struct.new(
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enforced
+    #   Lists the enforcement setting of the applied policy.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeInboundDmarcSettingsResponse AWS API Documentation
+    #
+    class DescribeInboundDmarcSettingsResponse < Struct.new(
+      :enforced)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1773,6 +1849,84 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMobileDeviceAccessOverrideRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         user_id: "EntityIdentifier", # required
+    #         device_id: "DeviceId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization to which you want to apply the
+    #   override.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   Identifies the WorkMail user for the override. Accepts the following
+    #   types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The mobile device to which the override applies. `DeviceId` is case
+    #   insensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMobileDeviceAccessOverrideRequest AWS API Documentation
+    #
+    class GetMobileDeviceAccessOverrideRequest < Struct.new(
+      :organization_id,
+      :user_id,
+      :device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_id
+    #   The WorkMail user to which the access override applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The device to which the access override applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the override, `ALLOW` or `DENY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the override.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The date the override was first created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] date_modified
+    #   The date the description was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMobileDeviceAccessOverrideResponse AWS API Documentation
+    #
+    class GetMobileDeviceAccessOverrideResponse < Struct.new(
+      :user_id,
+      :device_id,
+      :effect,
+      :description,
+      :date_created,
+      :date_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The representation of an Amazon WorkMail group.
     #
     # @!attribute [rw] id
@@ -2165,6 +2319,78 @@ module Aws::WorkMail
     #
     class ListMailboxPermissionsResponse < Struct.new(
       :permissions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMobileDeviceAccessOverridesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         user_id: "EntityIdentifier",
+    #         device_id: "DeviceId",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization under which to list mobile device
+    #   access overrides.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The WorkMail user under which you list the mobile device access
+    #   overrides. Accepts the following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The mobile device to which the access override applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The first
+    #   call does not require a token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMobileDeviceAccessOverridesRequest AWS API Documentation
+    #
+    class ListMobileDeviceAccessOverridesRequest < Struct.new(
+      :organization_id,
+      :user_id,
+      :device_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] overrides
+    #   The list of mobile device access overrides that exist for the
+    #   specified Amazon WorkMail organization and user.
+    #   @return [Array<Types::MobileDeviceAccessOverride>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   “null” when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMobileDeviceAccessOverridesResponse AWS API Documentation
+    #
+    class ListMobileDeviceAccessOverridesResponse < Struct.new(
+      :overrides,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2583,6 +2809,45 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # The override object.
+    #
+    # @!attribute [rw] user_id
+    #   The WorkMail user to which the access override applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The device to which the override applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the override, `ALLOW` or `DENY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the override.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The date the override was first created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] date_modified
+    #   The date the override was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/MobileDeviceAccessOverride AWS API Documentation
+    #
+    class MobileDeviceAccessOverride < Struct.new(
+      :user_id,
+      :device_id,
+      :effect,
+      :description,
+      :date_created,
+      :date_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A rule that controls access to mobile devices for an Amazon WorkMail
     # group.
     #
@@ -2859,6 +3124,36 @@ module Aws::WorkMail
     #
     class PutAccessControlRuleResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass PutInboundDmarcSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         enforced: false, # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization that you are applying the DMARC policy
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] enforced
+    #   Enforces or suspends a policy after it's applied.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutInboundDmarcSettingsRequest AWS API Documentation
+    #
+    class PutInboundDmarcSettingsRequest < Struct.new(
+      :organization_id,
+      :enforced)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutInboundDmarcSettingsResponse AWS API Documentation
+    #
+    class PutInboundDmarcSettingsResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass PutMailboxPermissionsRequest
     #   data as a hash:
     #
@@ -2908,6 +3203,63 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMailboxPermissionsResponse AWS API Documentation
     #
     class PutMailboxPermissionsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutMobileDeviceAccessOverrideRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         user_id: "EntityIdentifier", # required
+    #         device_id: "DeviceId", # required
+    #         effect: "ALLOW", # required, accepts ALLOW, DENY
+    #         description: "MobileDeviceAccessRuleDescription",
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   Identifies the Amazon WorkMail organization for which you create the
+    #   override.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The WorkMail user for which you create the override. Accepts the
+    #   following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The mobile device for which you create the override. `DeviceId` is
+    #   case insensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the override, `ALLOW` or `DENY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the override.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMobileDeviceAccessOverrideRequest AWS API Documentation
+    #
+    class PutMobileDeviceAccessOverrideRequest < Struct.new(
+      :organization_id,
+      :user_id,
+      :device_id,
+      :effect,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMobileDeviceAccessOverrideResponse AWS API Documentation
+    #
+    class PutMobileDeviceAccessOverrideResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutRetentionPolicyRequest
     #   data as a hash:

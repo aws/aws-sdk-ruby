@@ -39,6 +39,8 @@ module Aws::WAFV2
     # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
+    # JSON specification: `"All": \{\}`
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/All AWS API Documentation
@@ -49,6 +51,8 @@ module Aws::WAFV2
     #
     # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
+    #
+    # JSON specification: `"AllQueryArguments": \{\}`
     #
     # @api private
     #
@@ -353,6 +357,42 @@ module Aws::WAFV2
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #               key: "LabelMatchKey", # required
     #             },
+    #             regex_match_statement: {
+    #               regex_string: "RegexPatternString", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #       }
@@ -461,6 +501,8 @@ module Aws::WAFV2
     #
     # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
+    #
+    # JSON specification: `"Body": \{\}`
     #
     # @api private
     #
@@ -877,6 +919,42 @@ module Aws::WAFV2
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
+    #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
     #               },
     #             },
     #             action: {
@@ -1508,6 +1586,42 @@ module Aws::WAFV2
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
     #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
+    #               },
     #             },
     #             action: {
     #               block: {
@@ -1983,6 +2097,42 @@ module Aws::WAFV2
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
+    #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
     #               },
     #             },
     #             action: {
@@ -2954,6 +3104,14 @@ module Aws::WAFV2
     # requires it. To inspect more than one component of a web request,
     # create a separate rule statement for each component.
     #
+    # JSON specification for a `QueryString` field to match:
+    #
+    # ` "FieldToMatch": \{ "QueryString": \{\} \}`
+    #
+    # Example JSON for a `Method` field to match specification:
+    #
+    # ` "FieldToMatch": \{ "Method": \{ "Name": "DELETE" \} \}`
+    #
     # @note When making an API call, you may pass FieldToMatch
     #   data as a hash:
     #
@@ -3195,8 +3353,8 @@ module Aws::WAFV2
     #   provide the ARN of the rule group in this statement.
     #
     #   You cannot nest a `RuleGroupReferenceStatement`, for example for use
-    #   inside a `NotStatement` or `OrStatement`. It can only be referenced
-    #   as a top-level statement within a rule.
+    #   inside a `NotStatement` or `OrStatement`. You can only use a rule
+    #   group reference statement at the top level inside a web ACL.
     #   @return [Types::RuleGroupReferenceStatement]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FirewallManagerStatement AWS API Documentation
@@ -3525,6 +3683,7 @@ module Aws::WAFV2
     #         scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
     #         web_acl_name: "EntityName", # required
     #         web_acl_id: "EntityId", # required
+    #         rule_group_rule_name: "EntityName",
     #         rule_name: "EntityName", # required
     #       }
     #
@@ -3554,8 +3713,17 @@ module Aws::WAFV2
     #   like update and delete.
     #   @return [String]
     #
+    # @!attribute [rw] rule_group_rule_name
+    #   The name of the rule group reference statement in your web ACL. This
+    #   is required only when you have the rate-based rule nested inside a
+    #   rule group.
+    #   @return [String]
+    #
     # @!attribute [rw] rule_name
-    #   The name of the rate-based rule to get the keys for.
+    #   The name of the rate-based rule to get the keys for. If you have the
+    #   rule defined inside a rule group that you're using in your web ACL,
+    #   also provide the name of the rule group reference statement in the
+    #   request parameter `RuleGroupRuleName`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetRateBasedStatementManagedKeysRequest AWS API Documentation
@@ -3564,6 +3732,7 @@ module Aws::WAFV2
       :scope,
       :web_acl_name,
       :web_acl_id,
+      :rule_group_rule_name,
       :rule_name)
       SENSITIVE = []
       include Aws::Structure
@@ -4282,6 +4451,9 @@ module Aws::WAFV2
     # JSON body to inspect using the rule's inspection criteria. WAF
     # inspects only the parts of the JSON that result from the matches that
     # you indicate.
+    #
+    # Example JSON: `"JsonBody": \{ "MatchPattern": \{ "All": \{\} \},
+    # "MatchScope": "ALL" \}`
     #
     # @note When making an API call, you may pass JsonBody
     #   data as a hash:
@@ -5267,11 +5439,11 @@ module Aws::WAFV2
     #
     # @!attribute [rw] redacted_fields
     #   The parts of the request that you want to keep out of the logs. For
-    #   example, if you redact the `HEADER` field, the `HEADER` field in the
-    #   firehose will be `xxx`.
+    #   example, if you redact the `SingleHeader` field, the `HEADER` field
+    #   in the firehose will be `xxx`.
     #
-    #   <note markdown="1"> You must use one of the following values: `URI`, `QUERY_STRING`,
-    #   `HEADER`, or `METHOD`.
+    #   <note markdown="1"> You can specify only the following fields for redaction: `UriPath`,
+    #   `QueryString`, `SingleHeader`, `Method`, and `JsonBody`.
     #
     #    </note>
     #   @return [Array<Types::FieldToMatch>]
@@ -5620,6 +5792,42 @@ module Aws::WAFV2
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
     #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -5673,8 +5881,9 @@ module Aws::WAFV2
     # name and vendor name, that you provide when you add a
     # ManagedRuleGroupStatement to a web ACL. Managed rule groups include
     # Amazon Web Services Managed Rules rule groups, which are free of
-    # charge to WAF customers, and Marketplace managed rule groups, which
-    # you can subscribe to through Marketplace.
+    # charge to WAF customers, and Amazon Web Services Marketplace managed
+    # rule groups, which you can subscribe to through Amazon Web Services
+    # Marketplace.
     #
     # @!attribute [rw] vendor_name
     #   The name of the managed rule group vendor. You use this, along with
@@ -5688,7 +5897,8 @@ module Aws::WAFV2
     #
     # @!attribute [rw] description
     #   The description of the managed rule group, provided by Amazon Web
-    #   Services Managed Rules or the Marketplace seller who manages it.
+    #   Services Managed Rules or the Amazon Web Services Marketplace seller
+    #   who manages it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupSummary AWS API Documentation
@@ -5721,11 +5931,12 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # A set of rules that is managed by Amazon Web Services and Marketplace
-    # sellers to provide versioned managed rule groups for customers of WAF.
+    # A set of rules that is managed by Amazon Web Services and Amazon Web
+    # Services Marketplace sellers to provide versioned managed rule groups
+    # for customers of WAF.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your
@@ -5801,7 +6012,7 @@ module Aws::WAFV2
     # High-level information for a managed rule set.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your
@@ -5879,7 +6090,7 @@ module Aws::WAFV2
     # Information for a single version of a managed rule set.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your
@@ -5955,6 +6166,8 @@ module Aws::WAFV2
     # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
+    # JSON specification: `"Method": \{\}`
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Method AWS API Documentation
@@ -5967,6 +6180,8 @@ module Aws::WAFV2
     #
     # This is used in the context of other settings, for example to specify
     # values for RuleAction and web ACL DefaultAction.
+    #
+    # JSON specification: `"None": \{\}`
     #
     # @api private
     #
@@ -6231,6 +6446,42 @@ module Aws::WAFV2
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
+    #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
     #           },
     #         },
     #       }
@@ -6502,6 +6753,42 @@ module Aws::WAFV2
     #             label_match_statement: {
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #               key: "LabelMatchKey", # required
+    #             },
+    #             regex_match_statement: {
+    #               regex_string: "RegexPatternString", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -6812,6 +7099,8 @@ module Aws::WAFV2
     # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
+    # JSON specification: `"QueryString": \{\}`
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/QueryString AWS API Documentation
@@ -6823,6 +7112,15 @@ module Aws::WAFV2
     # that you specify on the number of requests in any 5-minute time span.
     # You can use this to put a temporary block on requests from an IP
     # address that is sending excessive requests.
+    #
+    # WAF tracks and manages web requests separately for each instance of a
+    # rate-based rule that you use. For example, if you provide the same
+    # rate-based rule settings in two web ACLs, each of the two rule
+    # statements represents a separate instance of the rate-based rule and
+    # gets its own tracking and management by WAF. If you define a
+    # rate-based rule inside a rule group, and then use that rule group in
+    # multiple places, each use creates a separate instance of the
+    # rate-based rule that gets its own tracking and management by WAF.
     #
     # When the rule action triggers, WAF blocks additional requests from the
     # IP address until the request rate falls below the limit.
@@ -6847,9 +7145,9 @@ module Aws::WAFV2
     # not meet both conditions are not counted towards the rate limit and
     # are not affected by this rule.
     #
-    # You cannot nest a `RateBasedStatement`, for example for use inside a
-    # `NotStatement` or `OrStatement`. It can only be referenced as a
-    # top-level statement within a rule.
+    # You cannot nest a `RateBasedStatement` inside another statement, for
+    # example inside a `NotStatement` or `OrStatement`. You can define a
+    # `RateBasedStatement` inside a web ACL and inside a rule group.
     #
     # @note When making an API call, you may pass RateBasedStatement
     #   data as a hash:
@@ -7108,6 +7406,42 @@ module Aws::WAFV2
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
     #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
+    #           },
     #         },
     #         forwarded_ip_config: {
     #           header_name: "ForwardedIPHeaderName", # required
@@ -7167,8 +7501,8 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The set of IP addresses that are currently blocked for a rate-based
-    # statement.
+    # The set of IP addresses that are currently blocked for a
+    # RateBasedStatement.
     #
     # @!attribute [rw] ip_address_version
     #   The version of the IP addresses, either `IPV4` or `IPV6`.
@@ -7204,6 +7538,77 @@ module Aws::WAFV2
     #
     class Regex < Struct.new(
       :regex_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule statement used to search web request components for a match
+    # against a single regular expression.
+    #
+    # @note When making an API call, you may pass RegexMatchStatement
+    #   data as a hash:
+    #
+    #       {
+    #         regex_string: "RegexPatternString", # required
+    #         field_to_match: { # required
+    #           single_header: {
+    #             name: "FieldToMatchData", # required
+    #           },
+    #           single_query_argument: {
+    #             name: "FieldToMatchData", # required
+    #           },
+    #           all_query_arguments: {
+    #           },
+    #           uri_path: {
+    #           },
+    #           query_string: {
+    #           },
+    #           body: {
+    #           },
+    #           method: {
+    #           },
+    #           json_body: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_paths: ["JsonPointerPath"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #           },
+    #         },
+    #         text_transformations: [ # required
+    #           {
+    #             priority: 1, # required
+    #             type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] regex_string
+    #   The string representing the regular expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_to_match
+    #   The part of a web request that you want WAF to inspect. For more
+    #   information, see FieldToMatch.
+    #   @return [Types::FieldToMatch]
+    #
+    # @!attribute [rw] text_transformations
+    #   Text transformations eliminate some of the unusual formatting that
+    #   attackers use in web requests in an effort to bypass detection. If
+    #   you specify one or more transformations in a rule statement, WAF
+    #   performs all transformations on the content of the request component
+    #   identified by `FieldToMatch`, starting from the lowest priority
+    #   setting, before inspecting the content for a match.
+    #   @return [Array<Types::TextTransformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RegexMatchStatement AWS API Documentation
+    #
+    class RegexMatchStatement < Struct.new(
+      :regex_string,
+      :field_to_match,
+      :text_transformations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7641,6 +8046,42 @@ module Aws::WAFV2
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #             key: "LabelMatchKey", # required
     #           },
+    #           regex_match_statement: {
+    #             regex_string: "RegexPatternString", # required
+    #             field_to_match: { # required
+    #               single_header: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               single_query_argument: {
+    #                 name: "FieldToMatchData", # required
+    #               },
+    #               all_query_arguments: {
+    #               },
+    #               uri_path: {
+    #               },
+    #               query_string: {
+    #               },
+    #               body: {
+    #               },
+    #               method: {
+    #               },
+    #               json_body: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_paths: ["JsonPointerPath"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #               },
+    #             },
+    #             text_transformations: [ # required
+    #               {
+    #                 priority: 1, # required
+    #                 type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #               },
+    #             ],
+    #           },
     #         },
     #         action: {
     #           block: {
@@ -7996,8 +8437,8 @@ module Aws::WAFV2
     # provide the ARN of the rule group in this statement.
     #
     # You cannot nest a `RuleGroupReferenceStatement`, for example for use
-    # inside a `NotStatement` or `OrStatement`. It can only be referenced as
-    # a top-level statement within a rule.
+    # inside a `NotStatement` or `OrStatement`. You can only use a rule
+    # group reference statement at the top level inside a web ACL.
     #
     # @note When making an API call, you may pass RuleGroupReferenceStatement
     #   data as a hash:
@@ -8179,6 +8620,8 @@ module Aws::WAFV2
     # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
+    # Example JSON: `"SingleHeader": \{ "Name": "haystack" \}`
+    #
     # @note When making an API call, you may pass SingleHeader
     #   data as a hash:
     #
@@ -8201,6 +8644,8 @@ module Aws::WAFV2
     # One query argument in a web request, identified by name, for example
     # *UserName* or *SalesRegion*. The name can be up to 30 characters long
     # and isn't case sensitive.
+    #
+    # Example JSON: `"SingleQueryArgument": \{ "Name": "myArgument" \}`
     #
     # @note When making an API call, you may pass SingleQueryArgument
     #   data as a hash:
@@ -8837,6 +9282,42 @@ module Aws::WAFV2
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #               key: "LabelMatchKey", # required
     #             },
+    #             regex_match_statement: {
+    #               regex_string: "RegexPatternString", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 },
+    #               ],
+    #             },
     #           },
     #           forwarded_ip_config: {
     #             header_name: "ForwardedIPHeaderName", # required
@@ -9090,6 +9571,42 @@ module Aws::WAFV2
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
     #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
+    #               },
     #             },
     #           ],
     #         },
@@ -9339,6 +9856,42 @@ module Aws::WAFV2
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
+    #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
     #               },
     #             },
     #           ],
@@ -9593,6 +10146,42 @@ module Aws::WAFV2
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #               key: "LabelMatchKey", # required
     #             },
+    #             regex_match_statement: {
+    #               regex_string: "RegexPatternString", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 },
+    #               ],
+    #             },
     #           },
     #         },
     #         managed_rule_group_statement: {
@@ -9845,11 +10434,83 @@ module Aws::WAFV2
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #               key: "LabelMatchKey", # required
     #             },
+    #             regex_match_statement: {
+    #               regex_string: "RegexPatternString", # required
+    #               field_to_match: { # required
+    #                 single_header: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 single_query_argument: {
+    #                   name: "FieldToMatchData", # required
+    #                 },
+    #                 all_query_arguments: {
+    #                 },
+    #                 uri_path: {
+    #                 },
+    #                 query_string: {
+    #                 },
+    #                 body: {
+    #                 },
+    #                 method: {
+    #                 },
+    #                 json_body: {
+    #                   match_pattern: { # required
+    #                     all: {
+    #                     },
+    #                     included_paths: ["JsonPointerPath"],
+    #                   },
+    #                   match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                   invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 },
+    #               },
+    #               text_transformations: [ # required
+    #                 {
+    #                   priority: 1, # required
+    #                   type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                 },
+    #               ],
+    #             },
     #           },
     #         },
     #         label_match_statement: {
     #           scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #           key: "LabelMatchKey", # required
+    #         },
+    #         regex_match_statement: {
+    #           regex_string: "RegexPatternString", # required
+    #           field_to_match: { # required
+    #             single_header: {
+    #               name: "FieldToMatchData", # required
+    #             },
+    #             single_query_argument: {
+    #               name: "FieldToMatchData", # required
+    #             },
+    #             all_query_arguments: {
+    #             },
+    #             uri_path: {
+    #             },
+    #             query_string: {
+    #             },
+    #             body: {
+    #             },
+    #             method: {
+    #             },
+    #             json_body: {
+    #               match_pattern: { # required
+    #                 all: {
+    #                 },
+    #                 included_paths: ["JsonPointerPath"],
+    #               },
+    #               match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #               invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             },
+    #           },
+    #           text_transformations: [ # required
+    #             {
+    #               priority: 1, # required
+    #               type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -9913,8 +10574,8 @@ module Aws::WAFV2
     #   provide the ARN of the rule group in this statement.
     #
     #   You cannot nest a `RuleGroupReferenceStatement`, for example for use
-    #   inside a `NotStatement` or `OrStatement`. It can only be referenced
-    #   as a top-level statement within a rule.
+    #   inside a `NotStatement` or `OrStatement`. You can only use a rule
+    #   group reference statement at the top level inside a web ACL.
     #   @return [Types::RuleGroupReferenceStatement]
     #
     # @!attribute [rw] ip_set_reference_statement
@@ -9952,6 +10613,15 @@ module Aws::WAFV2
     #   time span. You can use this to put a temporary block on requests
     #   from an IP address that is sending excessive requests.
     #
+    #   WAF tracks and manages web requests separately for each instance of
+    #   a rate-based rule that you use. For example, if you provide the same
+    #   rate-based rule settings in two web ACLs, each of the two rule
+    #   statements represents a separate instance of the rate-based rule and
+    #   gets its own tracking and management by WAF. If you define a
+    #   rate-based rule inside a rule group, and then use that rule group in
+    #   multiple places, each use creates a separate instance of the
+    #   rate-based rule that gets its own tracking and management by WAF.
+    #
     #   When the rule action triggers, WAF blocks additional requests from
     #   the IP address until the request rate falls below the limit.
     #
@@ -9975,9 +10645,9 @@ module Aws::WAFV2
     #   do not meet both conditions are not counted towards the rate limit
     #   and are not affected by this rule.
     #
-    #   You cannot nest a `RateBasedStatement`, for example for use inside a
-    #   `NotStatement` or `OrStatement`. It can only be referenced as a
-    #   top-level statement within a rule.
+    #   You cannot nest a `RateBasedStatement` inside another statement, for
+    #   example inside a `NotStatement` or `OrStatement`. You can define a
+    #   `RateBasedStatement` inside a web ACL and inside a rule group.
     #   @return [Types::RateBasedStatement]
     #
     # @!attribute [rw] and_statement
@@ -10023,6 +10693,11 @@ module Aws::WAFV2
     #   that were added in the same context as the label match statement.
     #   @return [Types::LabelMatchStatement]
     #
+    # @!attribute [rw] regex_match_statement
+    #   A rule statement used to search web request components for a match
+    #   against a single regular expression.
+    #   @return [Types::RegexMatchStatement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Statement AWS API Documentation
     #
     class Statement < Struct.new(
@@ -10039,7 +10714,8 @@ module Aws::WAFV2
       :or_statement,
       :not_statement,
       :managed_rule_group_statement,
-      :label_match_statement)
+      :label_match_statement,
+      :regex_match_statement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10965,6 +11641,42 @@ module Aws::WAFV2
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
     #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
+    #               },
     #             },
     #             action: {
     #               block: {
@@ -11431,6 +12143,42 @@ module Aws::WAFV2
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
     #                 key: "LabelMatchKey", # required
     #               },
+    #               regex_match_statement: {
+    #                 regex_string: "RegexPatternString", # required
+    #                 field_to_match: { # required
+    #                   single_header: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   single_query_argument: {
+    #                     name: "FieldToMatchData", # required
+    #                   },
+    #                   all_query_arguments: {
+    #                   },
+    #                   uri_path: {
+    #                   },
+    #                   query_string: {
+    #                   },
+    #                   body: {
+    #                   },
+    #                   method: {
+    #                   },
+    #                   json_body: {
+    #                     match_pattern: { # required
+    #                       all: {
+    #                       },
+    #                       included_paths: ["JsonPointerPath"],
+    #                     },
+    #                     match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                     invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                   },
+    #                 },
+    #                 text_transformations: [ # required
+    #                   {
+    #                     priority: 1, # required
+    #                     type: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE, BASE64_DECODE, HEX_DECODE, MD5, REPLACE_COMMENTS, ESCAPE_SEQ_DECODE, SQL_HEX_DECODE, CSS_DECODE, JS_DECODE, NORMALIZE_PATH, NORMALIZE_PATH_WIN, REMOVE_NULLS, REPLACE_NULLS, BASE64_DECODE_EXT, URL_DECODE_UNI, UTF8_TO_UNICODE
+    #                   },
+    #                 ],
+    #               },
     #             },
     #             action: {
     #               block: {
@@ -11623,6 +12371,8 @@ module Aws::WAFV2
     # This is used only to indicate the web request component for WAF to
     # inspect, in the FieldToMatch specification.
     #
+    # JSON specification: `"UriPath": \{\}`
+    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UriPath AWS API Documentation
@@ -11633,7 +12383,7 @@ module Aws::WAFV2
     # vendor publishes for use by customers.
     #
     # <note markdown="1"> This is intended for use only by vendors of managed rule sets. Vendors
-    # are Amazon Web Services and Marketplace sellers.
+    # are Amazon Web Services and Amazon Web Services Marketplace sellers.
     #
     #  Vendors, you can use the managed rule set APIs to provide controlled
     # rollout of your versioned managed rule group offerings for your

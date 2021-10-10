@@ -311,6 +311,7 @@ module Aws::ECR
     #   data as a hash:
     #
     #       {
+    #         registry_id: "RegistryId",
     #         repository_name: "RepositoryName", # required
     #         tags: [
     #           {
@@ -327,6 +328,12 @@ module Aws::ECR
     #           kms_key: "KmsKey",
     #         },
     #       }
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry to create the
+    #   repository. If you do not specify a registry, the default registry
+    #   is assumed.
+    #   @return [String]
     #
     # @!attribute [rw] repository_name
     #   The name to use for the repository. The repository name may be
@@ -365,6 +372,7 @@ module Aws::ECR
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryRequest AWS API Documentation
     #
     class CreateRepositoryRequest < Struct.new(
+      :registry_id,
       :repository_name,
       :tags,
       :image_tag_mutability,
@@ -558,6 +566,66 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeImageReplicationStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         image_id: { # required
+    #           image_digest: "ImageDigest",
+    #           image_tag: "ImageTag",
+    #         },
+    #         registry_id: "RegistryId",
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that the image is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   An object with identifying information for an image in an Amazon ECR
+    #   repository.
+    #   @return [Types::ImageIdentifier]
+    #
+    # @!attribute [rw] registry_id
+    #   The Amazon Web Services account ID associated with the registry. If
+    #   you do not specify a registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImageReplicationStatusRequest AWS API Documentation
+    #
+    class DescribeImageReplicationStatusRequest < Struct.new(
+      :repository_name,
+      :image_id,
+      :registry_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] repository_name
+    #   The repository name associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   An object with identifying information for an image in an Amazon ECR
+    #   repository.
+    #   @return [Types::ImageIdentifier]
+    #
+    # @!attribute [rw] replication_statuses
+    #   The replication status details for the images in the specified
+    #   repository.
+    #   @return [Array<Types::ImageReplicationStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImageReplicationStatusResponse AWS API Documentation
+    #
+    class DescribeImageReplicationStatusResponse < Struct.new(
+      :repository_name,
+      :image_id,
+      :replication_statuses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeImageScanFindingsRequest
     #   data as a hash:
     #
@@ -585,7 +653,8 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] image_id
-    #   An object with identifying information for an Amazon ECR image.
+    #   An object with identifying information for an image in an Amazon ECR
+    #   repository.
     #   @return [Types::ImageIdentifier]
     #
     # @!attribute [rw] next_token
@@ -630,7 +699,8 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] image_id
-    #   An object with identifying information for an Amazon ECR image.
+    #   An object with identifying information for an image in an Amazon ECR
+    #   repository.
     #   @return [Types::ImageIdentifier]
     #
     # @!attribute [rw] image_scan_status
@@ -1461,7 +1531,8 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # An object with identifying information for an Amazon ECR image.
+    # An object with identifying information for an image in an Amazon ECR
+    # repository.
     #
     # @note When making an API call, you may pass ImageIdentifier
     #   data as a hash:
@@ -1497,6 +1568,36 @@ module Aws::ECR
     #
     class ImageNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the replication process for an image.
+    #
+    # @!attribute [rw] region
+    #   The destination Region for the image replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_id
+    #   The AWS account ID associated with the registry to which the image
+    #   belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The image replication status.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code for a replication that has failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageReplicationStatus AWS API Documentation
+    #
+    class ImageReplicationStatus < Struct.new(
+      :region,
+      :registry_id,
+      :status,
+      :failure_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2494,6 +2595,12 @@ module Aws::ECR
     #                   registry_id: "RegistryId", # required
     #                 },
     #               ],
+    #               repository_filters: [
+    #                 {
+    #                   filter: "RepositoryFilterValue", # required
+    #                   filter_type: "PREFIX_MATCH", # required, accepts PREFIX_MATCH
+    #                 },
+    #               ],
     #             },
     #           ],
     #         },
@@ -2563,15 +2670,19 @@ module Aws::ECR
     #                 registry_id: "RegistryId", # required
     #               },
     #             ],
+    #             repository_filters: [
+    #               {
+    #                 filter: "RepositoryFilterValue", # required
+    #                 filter_type: "PREFIX_MATCH", # required, accepts PREFIX_MATCH
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] rules
-    #   An array of objects representing the replication rules for a
-    #   replication configuration. A replication configuration may contain
-    #   only one replication rule but the rule may contain one or more
-    #   replication destinations.
+    #   An array of objects representing the replication destinations and
+    #   repository filters for a replication configuration.
     #   @return [Array<Types::ReplicationRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationConfiguration AWS API Documentation
@@ -2582,8 +2693,8 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # An array of objects representing the details of a replication
-    # destination.
+    # An array of objects representing the destination for a replication
+    # rule.
     #
     # @note When making an API call, you may pass ReplicationDestination
     #   data as a hash:
@@ -2594,11 +2705,13 @@ module Aws::ECR
     #       }
     #
     # @!attribute [rw] region
-    #   A Region to replicate to.
+    #   The Region to replicate to.
     #   @return [String]
     #
     # @!attribute [rw] registry_id
-    #   The account ID of the destination registry to replicate to.
+    #   The Amazon Web Services account ID of the Amazon ECR private
+    #   registry to replicate to. When configuring cross-Region replication
+    #   within your own registry, specify your own account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationDestination AWS API Documentation
@@ -2610,10 +2723,8 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # An array of objects representing the replication destinations for a
-    # replication configuration. A replication configuration may contain
-    # only one replication rule but the rule may contain one or more
-    # replication destinations.
+    # An array of objects representing the replication destinations and
+    # repository filters for a replication configuration.
     #
     # @note When making an API call, you may pass ReplicationRule
     #   data as a hash:
@@ -2625,17 +2736,31 @@ module Aws::ECR
     #             registry_id: "RegistryId", # required
     #           },
     #         ],
+    #         repository_filters: [
+    #           {
+    #             filter: "RepositoryFilterValue", # required
+    #             filter_type: "PREFIX_MATCH", # required, accepts PREFIX_MATCH
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] destinations
-    #   An array of objects representing the details of a replication
-    #   destination.
+    #   An array of objects representing the destination for a replication
+    #   rule.
     #   @return [Array<Types::ReplicationDestination>]
+    #
+    # @!attribute [rw] repository_filters
+    #   An array of objects representing the filters for a replication rule.
+    #   Specifying a repository filter for a replication rule provides a
+    #   method for controlling which repositories in a private registry are
+    #   replicated.
+    #   @return [Array<Types::RepositoryFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationRule AWS API Documentation
     #
     class ReplicationRule < Struct.new(
-      :destinations)
+      :destinations,
+      :repository_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2707,6 +2832,41 @@ module Aws::ECR
     #
     class RepositoryAlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter settings used with image replication. Specifying a
+    # repository filter to a replication rule provides a method for
+    # controlling which repositories in a private registry are replicated.
+    # If no repository filter is specified, all images in the repository are
+    # replicated.
+    #
+    # @note When making an API call, you may pass RepositoryFilter
+    #   data as a hash:
+    #
+    #       {
+    #         filter: "RepositoryFilterValue", # required
+    #         filter_type: "PREFIX_MATCH", # required, accepts PREFIX_MATCH
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   The repository filter details. When the `PREFIX_MATCH` filter type
+    #   is specified, this value is required and should be the repository
+    #   name prefix to configure replication for.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_type
+    #   The repository filter type. The only supported value is
+    #   `PREFIX_MATCH`, which is a repository name prefix specified with the
+    #   `filter` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/RepositoryFilter AWS API Documentation
+    #
+    class RepositoryFilter < Struct.new(
+      :filter,
+      :filter_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2879,7 +3039,8 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] image_id
-    #   An object with identifying information for an Amazon ECR image.
+    #   An object with identifying information for an image in an Amazon ECR
+    #   repository.
     #   @return [Types::ImageIdentifier]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartImageScanRequest AWS API Documentation
@@ -2901,7 +3062,8 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] image_id
-    #   An object with identifying information for an Amazon ECR image.
+    #   An object with identifying information for an image in an Amazon ECR
+    #   repository.
     #   @return [Types::ImageIdentifier]
     #
     # @!attribute [rw] image_scan_status

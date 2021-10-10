@@ -292,6 +292,7 @@ RubyGems.org page under "LINKS" section.
 
 | Service Name                                          | Service Module                       | gem_name                                | API Version |
 | ----------------------------------------------------- | ------------------------------------ | --------------------------------------- | ----------- |
+| AWS Account                                           | Aws::Account                         | aws-sdk-account                         | 2021-02-01  |
 | AWS Amplify                                           | Aws::Amplify                         | aws-sdk-amplify                         | 2017-07-25  |
 | AWS App Mesh                                          | Aws::AppMesh                         | aws-sdk-appmesh                         | 2019-01-25  |
 | AWS App Runner                                        | Aws::AppRunner                       | aws-sdk-apprunner                       | 2020-05-15  |
@@ -305,6 +306,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Budgets                                           | Aws::Budgets                         | aws-sdk-budgets                         | 2016-10-20  |
 | AWS Certificate Manager                               | Aws::ACM                             | aws-sdk-acm                             | 2015-12-08  |
 | AWS Certificate Manager Private Certificate Authority | Aws::ACMPCA                          | aws-sdk-acmpca                          | 2017-08-22  |
+| AWS Cloud Control API                                 | Aws::CloudControlApi                 | aws-sdk-cloudcontrolapi                 | 2021-09-30  |
 | AWS Cloud Map                                         | Aws::ServiceDiscovery                | aws-sdk-servicediscovery                | 2017-03-14  |
 | AWS Cloud9                                            | Aws::Cloud9                          | aws-sdk-cloud9                          | 2017-09-23  |
 | AWS CloudFormation                                    | Aws::CloudFormation                  | aws-sdk-cloudformation                  | 2010-05-15  |
@@ -450,6 +452,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Connect Customer Profiles                      | Aws::CustomerProfiles                | aws-sdk-customerprofiles                | 2020-08-15  |
 | Amazon Connect Participant Service                    | Aws::ConnectParticipant              | aws-sdk-connectparticipant              | 2018-09-07  |
 | Amazon Connect Service                                | Aws::Connect                         | aws-sdk-connect                         | 2017-08-08  |
+| Amazon Connect Wisdom Service                         | Aws::ConnectWisdomService            | aws-sdk-connectwisdomservice            | 2020-10-19  |
 | Amazon Data Lifecycle Manager                         | Aws::DLM                             | aws-sdk-dlm                             | 2018-01-12  |
 | Amazon Detective                                      | Aws::Detective                       | aws-sdk-detective                       | 2018-10-26  |
 | Amazon DevOps Guru                                    | Aws::DevOpsGuru                      | aws-sdk-devopsguru                      | 2020-12-01  |
@@ -504,6 +507,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Macie                                          | Aws::Macie                           | aws-sdk-macie                           | 2017-12-19  |
 | Amazon Macie 2                                        | Aws::Macie2                          | aws-sdk-macie2                          | 2020-01-01  |
 | Amazon Managed Blockchain                             | Aws::ManagedBlockchain               | aws-sdk-managedblockchain               | 2018-09-24  |
+| Amazon Managed Grafana                                | Aws::ManagedGrafana                  | aws-sdk-managedgrafana                  | 2020-08-18  |
 | Amazon Mechanical Turk                                | Aws::MTurk                           | aws-sdk-mturk                           | 2017-01-17  |
 | Amazon MemoryDB                                       | Aws::MemoryDB                        | aws-sdk-memorydb                        | 2021-01-01  |
 | Amazon Neptune                                        | Aws::Neptune                         | aws-sdk-neptune                         | 2014-10-31  |
@@ -544,6 +548,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Transcribe Service                             | Aws::TranscribeService               | aws-sdk-transcribeservice               | 2017-10-26  |
 | Amazon Transcribe Streaming Service                   | Aws::TranscribeStreamingService      | aws-sdk-transcribestreamingservice      | 2017-10-26  |
 | Amazon Translate                                      | Aws::Translate                       | aws-sdk-translate                       | 2017-07-01  |
+| Amazon Voice ID                                       | Aws::VoiceID                         | aws-sdk-voiceid                         | 2021-09-27  |
 | Amazon WorkDocs                                       | Aws::WorkDocs                        | aws-sdk-workdocs                        | 2016-05-01  |
 | Amazon WorkLink                                       | Aws::WorkLink                        | aws-sdk-worklink                        | 2018-09-25  |
 | Amazon WorkMail                                       | Aws::WorkMail                        | aws-sdk-workmail                        | 2017-10-01  |
@@ -567,6 +572,7 @@ RubyGems.org page under "LINKS" section.
 | FinSpace User Environment Management service          | Aws::Finspace                        | aws-sdk-finspace                        | 2021-03-12  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
+| Managed Streaming for Kafka Connect                   | Aws::KafkaConnect                    | aws-sdk-kafkaconnect                    | 2021-09-14  |
 | Redshift Data API Service                             | Aws::RedshiftDataAPIService          | aws-sdk-redshiftdataapiservice          | 2019-12-20  |
 | Route53 Recovery Cluster                              | Aws::Route53RecoveryCluster          | aws-sdk-route53recoverycluster          | 2019-12-02  |
 | Schemas                                               | Aws::Schemas                         | aws-sdk-schemas                         | 2019-12-02  |

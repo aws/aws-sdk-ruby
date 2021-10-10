@@ -174,6 +174,11 @@ module Aws::DataExchange
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def exception_cause
+        @data[:exception_cause]
+      end
     end
 
   end

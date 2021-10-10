@@ -653,6 +653,11 @@ module Aws::ECR
     #
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html
     #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry to create the
+    #   repository. If you do not specify a registry, the default registry is
+    #   assumed.
+    #
     # @option params [required, String] :repository_name
     #   The name to use for the repository. The repository name may be
     #   specified on its own (such as `nginx-web-app`) or it can be prepended
@@ -708,6 +713,7 @@ module Aws::ECR
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_repository({
+    #     registry_id: "RegistryId",
     #     repository_name: "RepositoryName", # required
     #     tags: [
     #       {
@@ -931,6 +937,56 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Returns the replication status for a specified image.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that the image is in.
+    #
+    # @option params [required, Types::ImageIdentifier] :image_id
+    #   An object with identifying information for an image in an Amazon ECR
+    #   repository.
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry. If
+    #   you do not specify a registry, the default registry is assumed.
+    #
+    # @return [Types::DescribeImageReplicationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImageReplicationStatusResponse#repository_name #repository_name} => String
+    #   * {Types::DescribeImageReplicationStatusResponse#image_id #image_id} => Types::ImageIdentifier
+    #   * {Types::DescribeImageReplicationStatusResponse#replication_statuses #replication_statuses} => Array&lt;Types::ImageReplicationStatus&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_image_replication_status({
+    #     repository_name: "RepositoryName", # required
+    #     image_id: { # required
+    #       image_digest: "ImageDigest",
+    #       image_tag: "ImageTag",
+    #     },
+    #     registry_id: "RegistryId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_name #=> String
+    #   resp.image_id.image_digest #=> String
+    #   resp.image_id.image_tag #=> String
+    #   resp.replication_statuses #=> Array
+    #   resp.replication_statuses[0].region #=> String
+    #   resp.replication_statuses[0].registry_id #=> String
+    #   resp.replication_statuses[0].status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.replication_statuses[0].failure_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImageReplicationStatus AWS API Documentation
+    #
+    # @overload describe_image_replication_status(params = {})
+    # @param [Hash] params ({})
+    def describe_image_replication_status(params = {}, options = {})
+      req = build_request(:describe_image_replication_status, params)
+      req.send_request(options)
+    end
+
     # Returns the scan findings for the specified image.
     #
     # @option params [String] :registry_id
@@ -943,7 +999,8 @@ module Aws::ECR
     #   The repository for the image for which to describe the scan findings.
     #
     # @option params [required, Types::ImageIdentifier] :image_id
-    #   An object with identifying information for an Amazon ECR image.
+    #   An object with identifying information for an image in an Amazon ECR
+    #   repository.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
@@ -1137,6 +1194,9 @@ module Aws::ECR
     #   resp.replication_configuration.rules[0].destinations #=> Array
     #   resp.replication_configuration.rules[0].destinations[0].region #=> String
     #   resp.replication_configuration.rules[0].destinations[0].registry_id #=> String
+    #   resp.replication_configuration.rules[0].repository_filters #=> Array
+    #   resp.replication_configuration.rules[0].repository_filters[0].filter #=> String
+    #   resp.replication_configuration.rules[0].repository_filters[0].filter_type #=> String, one of "PREFIX_MATCH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRegistry AWS API Documentation
     #
@@ -2061,6 +2121,12 @@ module Aws::ECR
     #               registry_id: "RegistryId", # required
     #             },
     #           ],
+    #           repository_filters: [
+    #             {
+    #               filter: "RepositoryFilterValue", # required
+    #               filter_type: "PREFIX_MATCH", # required, accepts PREFIX_MATCH
+    #             },
+    #           ],
     #         },
     #       ],
     #     },
@@ -2072,6 +2138,9 @@ module Aws::ECR
     #   resp.replication_configuration.rules[0].destinations #=> Array
     #   resp.replication_configuration.rules[0].destinations[0].region #=> String
     #   resp.replication_configuration.rules[0].destinations[0].registry_id #=> String
+    #   resp.replication_configuration.rules[0].repository_filters #=> Array
+    #   resp.replication_configuration.rules[0].repository_filters[0].filter #=> String
+    #   resp.replication_configuration.rules[0].repository_filters[0].filter_type #=> String, one of "PREFIX_MATCH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutReplicationConfiguration AWS API Documentation
     #
@@ -2161,7 +2230,8 @@ module Aws::ECR
     #   The name of the repository that contains the images to scan.
     #
     # @option params [required, Types::ImageIdentifier] :image_id
-    #   An object with identifying information for an Amazon ECR image.
+    #   An object with identifying information for an image in an Amazon ECR
+    #   repository.
     #
     # @return [Types::StartImageScanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2394,7 +2464,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

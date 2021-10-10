@@ -105,14 +105,14 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Describes an AWS App Runner automatic scaling configuration resource.
+    # Describes an App Runner automatic scaling configuration resource.
     # Multiple revisions of a configuration have the same
     # `AutoScalingConfigurationName` and different
     # `AutoScalingConfigurationRevision` values.
     #
     # A higher `MinSize` increases the spread of your App Runner service
-    # over more Availability Zones in the AWS Region. The tradeoff is a
-    # higher minimal cost.
+    # over more Availability Zones in the Amazon Web Services Region. The
+    # tradeoff is a higher minimal cost.
     #
     # A lower `MaxSize` controls your cost. The tradeoff is lower
     # responsiveness during peak demand.
@@ -197,7 +197,7 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Provides summary information about an AWS App Runner automatic scaling
+    # Provides summary information about an App Runner automatic scaling
     # configuration resource.
     #
     # This type contains limited information about an auto scaling
@@ -269,8 +269,8 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Describes the configuration that AWS App Runner uses to build and run
-    # an App Runner service from a source code repository.
+    # Describes the configuration that App Runner uses to build and run an
+    # App Runner service from a source code repository.
     #
     # @note When making an API call, you may pass CodeConfiguration
     #   data as a hash:
@@ -318,7 +318,7 @@ module Aws::AppRunner
     end
 
     # Describes the basic configuration needed for building and running an
-    # AWS App Runner service. This type doesn't support the full set of
+    # App Runner service. This type doesn't support the full set of
     # possible configuration options. Fur full configuration capabilities,
     # use a `apprunner.yaml` file in the source code repository.
     #
@@ -420,7 +420,7 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Describes an AWS App Runner connection resource.
+    # Describes an App Runner connection resource.
     #
     # @!attribute [rw] connection_name
     #   The customer-provided connection name.
@@ -457,8 +457,7 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Provides summary information about an AWS App Runner connection
-    # resource.
+    # Provides summary information about an App Runner connection resource.
     #
     # @!attribute [rw] connection_name
     #   The customer-provided connection name.
@@ -513,9 +512,10 @@ module Aws::AppRunner
     #
     # @!attribute [rw] auto_scaling_configuration_name
     #   A name for the auto scaling configuration. When you use it for the
-    #   first time in an AWS Region, App Runner creates revision number `1`
-    #   of this name. When you use the same name in subsequent calls, App
-    #   Runner creates incremental revisions of the configuration.
+    #   first time in an Amazon Web Services Region, App Runner creates
+    #   revision number `1` of this name. When you use the same name in
+    #   subsequent calls, App Runner creates incremental revisions of the
+    #   configuration.
     #   @return [String]
     #
     # @!attribute [rw] max_concurrency
@@ -595,7 +595,8 @@ module Aws::AppRunner
     #
     # @!attribute [rw] connection_name
     #   A name for the new connection. It must be unique across all App
-    #   Runner connections for the AWS account in the AWS Region.
+    #   Runner connections for the Amazon Web Services account in the Amazon
+    #   Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
@@ -688,7 +689,7 @@ module Aws::AppRunner
     #         },
     #         health_check_configuration: {
     #           protocol: "TCP", # accepts TCP, HTTP
-    #           path: "String",
+    #           path: "HealthCheckPath",
     #           interval: 1,
     #           timeout: 1,
     #           healthy_threshold: 1,
@@ -699,7 +700,8 @@ module Aws::AppRunner
     #
     # @!attribute [rw] service_name
     #   A name for the new service. It must be unique across all the running
-    #   App Runner services in your AWS account in the AWS Region.
+    #   App Runner services in your Amazon Web Services account in the
+    #   Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] source_configuration
@@ -720,11 +722,12 @@ module Aws::AppRunner
     # @!attribute [rw] encryption_configuration
     #   An optional custom encryption key that App Runner uses to encrypt
     #   the copy of your source repository that it maintains and your
-    #   service logs. By default, App Runner uses an AWS managed CMK.
+    #   service logs. By default, App Runner uses an Amazon Web Services
+    #   managed CMK.
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] health_check_configuration
-    #   The settings for the health check that AWS App Runner performs to
+    #   The settings for the health check that App Runner performs to
     #   monitor the health of your service.
     #   @return [Types::HealthCheckConfiguration]
     #
@@ -773,7 +776,7 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Describes a custom domain that's associated with an AWS App Runner
+    # Describes a custom domain that's associated with an App Runner
     # service.
     #
     # @!attribute [rw] domain_name
@@ -1113,7 +1116,7 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Describes a custom encryption key that AWS App Runner uses to encrypt
+    # Describes a custom encryption key that App Runner uses to encrypt
     # copies of the source repository and service logs.
     #
     # @note When making an API call, you may pass EncryptionConfiguration
@@ -1135,15 +1138,15 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Describes the settings for the health check that AWS App Runner
-    # performs to monitor the health of a service.
+    # Describes the settings for the health check that App Runner performs
+    # to monitor the health of a service.
     #
     # @note When making an API call, you may pass HealthCheckConfiguration
     #   data as a hash:
     #
     #       {
     #         protocol: "TCP", # accepts TCP, HTTP
-    #         path: "String",
+    #         path: "HealthCheckPath",
     #         interval: 1,
     #         timeout: 1,
     #         healthy_threshold: 1,
@@ -1185,14 +1188,14 @@ module Aws::AppRunner
     #   The number of consecutive checks that must succeed before App Runner
     #   decides that the service is healthy.
     #
-    #   Default: `3`
+    #   Default: `1`
     #   @return [Integer]
     #
     # @!attribute [rw] unhealthy_threshold
     #   The number of consecutive checks that must fail before App Runner
     #   decides that the service is unhealthy.
     #
-    #   Default: `3`
+    #   Default: `5`
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/HealthCheckConfiguration AWS API Documentation
@@ -1208,8 +1211,8 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Describes the configuration that AWS App Runner uses to run an App
-    # Runner service using an image pulled from a source image repository.
+    # Describes the configuration that App Runner uses to run an App Runner
+    # service using an image pulled from a source image repository.
     #
     # @note When making an API call, you may pass ImageConfiguration
     #   data as a hash:
@@ -1298,8 +1301,8 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Describes the runtime configuration of an AWS App Runner service
-    # instance (scaling unit).
+    # Describes the runtime configuration of an App Runner service instance
+    # (scaling unit).
     #
     # @note When making an API call, you may pass InstanceConfiguration
     #   data as a hash:
@@ -1327,7 +1330,7 @@ module Aws::AppRunner
     # @!attribute [rw] instance_role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that provides
     #   permissions to your App Runner service. These are permissions that
-    #   your code needs when it calls any AWS APIs.
+    #   your code needs when it calls any Amazon Web Services APIs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/InstanceConfiguration AWS API Documentation
@@ -1671,8 +1674,8 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Provides summary information for an operation that occurred on an AWS
-    # App Runner service.
+    # Provides summary information for an operation that occurred on an App
+    # Runner service.
     #
     # @!attribute [rw] id
     #   A unique ID of this operation. It's unique in the scope of the App
@@ -1762,7 +1765,7 @@ module Aws::AppRunner
     end
 
     # A resource doesn't exist for the specified Amazon Resource Name (ARN)
-    # in your AWS account.
+    # in your Amazon Web Services account.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1815,7 +1818,7 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Describes an AWS App Runner service. It can describe a service in any
+    # Describes an App Runner service. It can describe a service in any
     # state, including deleted services.
     #
     # This type contains the full information about a service, including
@@ -1838,7 +1841,7 @@ module Aws::AppRunner
     #
     # @!attribute [rw] service_id
     #   An ID that App Runner generated for this service. It's unique
-    #   within the AWS Region.
+    #   within the Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] service_arn
@@ -1897,7 +1900,7 @@ module Aws::AppRunner
     #   The encryption key that App Runner uses to encrypt the service logs
     #   and the copy of the source repository that App Runner maintains for
     #   the service. It can be either a customer-provided encryption key or
-    #   an AWS managed CMK.
+    #   an Amazon Web Services managed CMK.
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] health_check_configuration
@@ -1933,8 +1936,8 @@ module Aws::AppRunner
     # App Runner can't create this resource. You've reached your account
     # quota for this resource type.
     #
-    # For App Runner per-resource quotas, see [AWS App Runner endpoints and
-    # quotas][1] in the *AWS General Reference*.
+    # For App Runner per-resource quotas, see [App Runner endpoints and
+    # quotas][1] in the *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1951,7 +1954,7 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Provides summary information for an AWS App Runner service.
+    # Provides summary information for an App Runner service.
     #
     # This type contains limited information about a service. It doesn't
     # include configuration details. It's returned by the [ListServices][1]
@@ -1973,7 +1976,7 @@ module Aws::AppRunner
     #
     # @!attribute [rw] service_id
     #   An ID that App Runner generated for this service. It's unique
-    #   within the AWS Region.
+    #   within the Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] service_arn
@@ -2026,8 +2029,8 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Identifies a version of code that AWS App Runner refers to within a
-    # source code repository.
+    # Identifies a version of code that App Runner refers to within a source
+    # code repository.
     #
     # @note When making an API call, you may pass SourceCodeVersion
     #   data as a hash:
@@ -2059,8 +2062,8 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Describes the source deployed to an AWS App Runner service. It can be
-    # a code or an image repository.
+    # Describes the source deployed to an App Runner service. It can be a
+    # code or an image repository.
     #
     # @note When making an API call, you may pass SourceConfiguration
     #   data as a hash:
@@ -2119,10 +2122,16 @@ module Aws::AppRunner
     #
     # @!attribute [rw] auto_deployments_enabled
     #   If `true`, continuous integration from the source repository is
-    #   enabled for the App Runner service. Each repository change (source
-    #   code commit or new image version) starts a deployment.
+    #   enabled for the App Runner service. Each repository change
+    #   (including any source code commit or new image version) starts a
+    #   deployment.
     #
-    #   Default: `true`
+    #   Default: App Runner sets to `false` for a source image that uses an
+    #   ECR Public repository or an ECR repository that's in an Amazon Web
+    #   Services account other than the one that the service is in. App
+    #   Runner sets to `true` in all other cases (which currently include a
+    #   source code repository or a source image using a same-account ECR
+    #   repository).
     #   @return [Boolean]
     #
     # @!attribute [rw] authentication_configuration
@@ -2175,8 +2184,8 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
-    # Describes a tag that is applied to an AWS App Runner resource. A tag
-    # is a metadata item consisting of a key-value pair.
+    # Describes a tag that is applied to an App Runner resource. A tag is a
+    # metadata item consisting of a key-value pair.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -2325,7 +2334,7 @@ module Aws::AppRunner
     #         auto_scaling_configuration_arn: "AppRunnerResourceArn",
     #         health_check_configuration: {
     #           protocol: "TCP", # accepts TCP, HTTP
-    #           path: "String",
+    #           path: "HealthCheckPath",
     #           interval: 1,
     #           timeout: 1,
     #           healthy_threshold: 1,
@@ -2362,7 +2371,7 @@ module Aws::AppRunner
     #   @return [String]
     #
     # @!attribute [rw] health_check_configuration
-    #   The settings for the health check that AWS App Runner performs to
+    #   The settings for the health check that App Runner performs to
     #   monitor the health of your service.
     #   @return [Types::HealthCheckConfiguration]
     #

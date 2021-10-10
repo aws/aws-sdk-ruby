@@ -2900,6 +2900,9 @@ module Aws::Glue
     #             availability_zone: "NameString",
     #           },
     #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -2912,11 +2915,16 @@ module Aws::Glue
     #   A `ConnectionInput` object defining the connection to create.
     #   @return [Types::ConnectionInput]
     #
+    # @!attribute [rw] tags
+    #   The tags you assign to the connection.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateConnectionRequest AWS API Documentation
     #
     class CreateConnectionRequest < Struct.new(
       :catalog_id,
-      :connection_input)
+      :connection_input,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8714,6 +8722,10 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] exclude_column_schema
+    #   When true, specifies not returning the partition column schema.
+    #   Useful when you are interested only in other partition attributes
+    #   such as partition values or location. This approach avoids the
+    #   problem of a large response by not returning duplicate data.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitionsRequest AWS API Documentation

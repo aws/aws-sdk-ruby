@@ -288,9 +288,10 @@ module Aws::IAM
     #   uses the default value of `false`. The result is that passwords do not
     #   require at least one lowercase character.
     # @option options [Boolean] :allow_users_to_change_password
-    #   Allows all IAM users in your account to use the Management Console to
-    #   change their own passwords. For more information, see [Letting IAM
-    #   users change their own passwords][1] in the *IAM User Guide*.
+    #   Allows all IAM users in your account to use the Amazon Web Services
+    #   Management Console to change their own passwords. For more
+    #   information, see [Letting IAM users change their own passwords][1] in
+    #   the *IAM User Guide*.
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that IAM users in the

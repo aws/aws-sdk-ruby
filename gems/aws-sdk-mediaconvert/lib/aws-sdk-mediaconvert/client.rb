@@ -753,7 +753,15 @@ module Aws::MediaConvert
     #                 type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #               },
     #               fragment_length: 1,
-    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #               image_based_trick_play_settings: {
+    #                 interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                 thumbnail_height: 1,
+    #                 thumbnail_interval: 1.0,
+    #                 thumbnail_width: 1,
+    #                 tile_height: 1,
+    #                 tile_width: 1,
+    #               },
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
@@ -802,7 +810,15 @@ module Aws::MediaConvert
     #               },
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
-    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #               image_based_trick_play_settings: {
+    #                 interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                 thumbnail_height: 1,
+    #                 thumbnail_interval: 1.0,
+    #                 thumbnail_width: 1,
+    #                 tile_height: 1,
+    #                 tile_width: 1,
+    #               },
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -881,7 +897,15 @@ module Aws::MediaConvert
     #                 },
     #                 type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #               },
-    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #               image_based_trick_play_settings: {
+    #                 interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                 thumbnail_height: 1,
+    #                 thumbnail_interval: 1.0,
+    #                 thumbnail_width: 1,
+    #                 tile_height: 1,
+    #                 tile_width: 1,
+    #               },
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_final_segment_length: 1.0,
@@ -1077,46 +1101,54 @@ module Aws::MediaConvert
     #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   destination_settings: {
     #                     burnin_destination_settings: {
-    #                       alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                       apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       background_opacity: 1,
-    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                       fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                       font_opacity: 1,
     #                       font_resolution: 1,
     #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
-    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                       hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                       outline_size: 1,
-    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       shadow_opacity: 1,
     #                       shadow_x_offset: 1,
     #                       shadow_y_offset: 1,
-    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
     #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                     dvb_sub_destination_settings: {
-    #                       alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                       apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       background_opacity: 1,
     #                       dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                       dds_x_coordinate: 1,
     #                       dds_y_coordinate: 1,
-    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                       fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                       font_opacity: 1,
     #                       font_resolution: 1,
     #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       height: 1,
-    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                       hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                       outline_size: 1,
-    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       shadow_opacity: 1,
     #                       shadow_x_offset: 1,
     #                       shadow_y_offset: 1,
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                       width: 1,
     #                       x_position: 1,
     #                       y_position: 1,
@@ -1905,7 +1937,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
-    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
@@ -1939,7 +1977,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
-    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
@@ -1989,7 +2033,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
-    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
@@ -2130,44 +2180,52 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.hex_font_color #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_x_offset #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_y_offset #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.hex_font_color #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
@@ -2952,7 +3010,15 @@ module Aws::MediaConvert
     #                 type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #               },
     #               fragment_length: 1,
-    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #               image_based_trick_play_settings: {
+    #                 interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                 thumbnail_height: 1,
+    #                 thumbnail_interval: 1.0,
+    #                 thumbnail_width: 1,
+    #                 tile_height: 1,
+    #                 tile_width: 1,
+    #               },
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
@@ -3001,7 +3067,15 @@ module Aws::MediaConvert
     #               },
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
-    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #               image_based_trick_play_settings: {
+    #                 interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                 thumbnail_height: 1,
+    #                 thumbnail_interval: 1.0,
+    #                 thumbnail_width: 1,
+    #                 tile_height: 1,
+    #                 tile_width: 1,
+    #               },
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -3080,7 +3154,15 @@ module Aws::MediaConvert
     #                 },
     #                 type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #               },
-    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #               image_based_trick_play_settings: {
+    #                 interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                 thumbnail_height: 1,
+    #                 thumbnail_interval: 1.0,
+    #                 thumbnail_width: 1,
+    #                 tile_height: 1,
+    #                 tile_width: 1,
+    #               },
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_final_segment_length: 1.0,
@@ -3276,46 +3358,54 @@ module Aws::MediaConvert
     #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   destination_settings: {
     #                     burnin_destination_settings: {
-    #                       alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                       apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       background_opacity: 1,
-    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                       fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                       font_opacity: 1,
     #                       font_resolution: 1,
     #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
-    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                       hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                       outline_size: 1,
-    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       shadow_opacity: 1,
     #                       shadow_x_offset: 1,
     #                       shadow_y_offset: 1,
-    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
     #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                     dvb_sub_destination_settings: {
-    #                       alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                       apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       background_opacity: 1,
     #                       dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                       dds_x_coordinate: 1,
     #                       dds_y_coordinate: 1,
-    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                       fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                       font_opacity: 1,
     #                       font_resolution: 1,
     #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       height: 1,
-    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                       hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                       outline_size: 1,
-    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       shadow_opacity: 1,
     #                       shadow_x_offset: 1,
     #                       shadow_y_offset: 1,
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                       width: 1,
     #                       x_position: 1,
     #                       y_position: 1,
@@ -4074,7 +4164,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
-    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
@@ -4108,7 +4204,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
-    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
@@ -4158,7 +4260,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
-    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
@@ -4299,44 +4407,52 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.hex_font_color #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_y_offset #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.hex_font_color #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
@@ -4944,46 +5060,54 @@ module Aws::MediaConvert
     #           custom_language_code: "__stringPatternAZaZ23AZaZ",
     #           destination_settings: {
     #             burnin_destination_settings: {
-    #               alignment: "CENTERED", # accepts CENTERED, LEFT
-    #               background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #               alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #               apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #               background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #               background_opacity: 1,
-    #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #               fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #               font_opacity: 1,
     #               font_resolution: 1,
     #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
-    #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #               hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #               outline_size: 1,
-    #               shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #               shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #               shadow_opacity: 1,
     #               shadow_x_offset: 1,
     #               shadow_y_offset: 1,
-    #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #               x_position: 1,
     #               y_position: 1,
     #             },
     #             destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #             dvb_sub_destination_settings: {
-    #               alignment: "CENTERED", # accepts CENTERED, LEFT
-    #               background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #               alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #               apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #               background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #               background_opacity: 1,
     #               dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #               dds_x_coordinate: 1,
     #               dds_y_coordinate: 1,
-    #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #               fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #               font_opacity: 1,
     #               font_resolution: 1,
     #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
     #               height: 1,
-    #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #               hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #               outline_size: 1,
-    #               shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #               shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #               shadow_opacity: 1,
     #               shadow_x_offset: 1,
     #               shadow_y_offset: 1,
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #               subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #               width: 1,
     #               x_position: 1,
     #               y_position: 1,
@@ -5631,44 +5755,52 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].stream_name #=> String
     #   resp.preset.settings.caption_descriptions #=> Array
     #   resp.preset.settings.caption_descriptions[0].custom_language_code #=> String
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.hex_font_color #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_x_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_y_offset #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.hex_font_color #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
@@ -6188,6 +6320,19 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
+    # Permanently delete a policy that you created.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeletePolicy AWS API Documentation
+    #
+    # @overload delete_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_policy(params = {}, options = {})
+      req = build_request(:delete_policy, params)
+      req.send_request(options)
+    end
+
     # Permanently delete a preset you have created.
     #
     # @option params [required, String] :name
@@ -6535,7 +6680,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
-    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
@@ -6569,7 +6720,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
-    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
@@ -6619,7 +6776,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
-    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
@@ -6760,44 +6923,52 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.hex_font_color #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_x_offset #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_y_offset #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.hex_font_color #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
@@ -7444,7 +7615,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
-    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
@@ -7478,7 +7655,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
-    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
@@ -7528,7 +7711,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
-    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
@@ -7669,44 +7858,52 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.hex_font_color #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_y_offset #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.hex_font_color #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
@@ -8143,6 +8340,27 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
+    # Retrieve the JSON for your policy.
+    #
+    # @return [Types::GetPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPolicyResponse#policy #policy} => Types::Policy
+    #
+    # @example Response structure
+    #
+    #   resp.policy.http_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #   resp.policy.https_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #   resp.policy.s3_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetPolicy AWS API Documentation
+    #
+    # @overload get_policy(params = {})
+    # @param [Hash] params ({})
+    def get_policy(params = {}, options = {})
+      req = build_request(:get_policy, params)
+      req.send_request(options)
+    end
+
     # Retrieve the JSON for a specific preset.
     #
     # @option params [required, String] :name
@@ -8269,44 +8487,52 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].stream_name #=> String
     #   resp.preset.settings.caption_descriptions #=> Array
     #   resp.preset.settings.caption_descriptions[0].custom_language_code #=> String
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.hex_font_color #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_x_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_y_offset #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.hex_font_color #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
@@ -9002,7 +9228,13 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
@@ -9036,7 +9268,13 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
-    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
@@ -9086,7 +9324,13 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
-    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
@@ -9227,44 +9471,52 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.hex_font_color #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_y_offset #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.hex_font_color #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
@@ -9961,7 +10213,13 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
@@ -9995,7 +10253,13 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
-    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
@@ -10045,7 +10309,13 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
-    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
@@ -10186,44 +10456,52 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.hex_font_color #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_x_offset #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_y_offset #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.hex_font_color #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
@@ -10824,44 +11102,52 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].stream_name #=> String
     #   resp.presets[0].settings.caption_descriptions #=> Array
     #   resp.presets[0].settings.caption_descriptions[0].custom_language_code #=> String
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.hex_font_color #=> String
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_x_offset #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_y_offset #=> Integer
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.hex_font_color #=> String
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
@@ -11379,6 +11665,45 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
+    # Create or change your policy. For more information about policies, see
+    # the user guide at
+    # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #
+    # @option params [required, Types::Policy] :policy
+    #   A policy configures behavior that you allow or disallow for your
+    #   account. For information about MediaConvert policies, see the user
+    #   guide at
+    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #
+    # @return [Types::PutPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutPolicyResponse#policy #policy} => Types::Policy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_policy({
+    #     policy: { # required
+    #       http_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #       https_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #       s3_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy.http_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #   resp.policy.https_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #   resp.policy.s3_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/PutPolicy AWS API Documentation
+    #
+    # @overload put_policy(params = {})
+    # @param [Hash] params ({})
+    def put_policy(params = {}, options = {})
+      req = build_request(:put_policy, params)
+      req.send_request(options)
+    end
+
     # Add tags to a MediaConvert queue, preset, or job template. For
     # information about tagging, see the User Guide at
     # https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
@@ -11771,7 +12096,15 @@ module Aws::MediaConvert
     #                 type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #               },
     #               fragment_length: 1,
-    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #               image_based_trick_play_settings: {
+    #                 interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                 thumbnail_height: 1,
+    #                 thumbnail_interval: 1.0,
+    #                 thumbnail_width: 1,
+    #                 tile_height: 1,
+    #                 tile_width: 1,
+    #               },
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_buffer_time: 1,
@@ -11820,7 +12153,15 @@ module Aws::MediaConvert
     #               },
     #               fragment_length: 1,
     #               hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
-    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #               image_based_trick_play_settings: {
+    #                 interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                 thumbnail_height: 1,
+    #                 thumbnail_interval: 1.0,
+    #                 thumbnail_width: 1,
+    #                 tile_height: 1,
+    #                 tile_width: 1,
+    #               },
     #               min_buffer_time: 1,
     #               min_final_segment_length: 1.0,
     #               mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -11899,7 +12240,15 @@ module Aws::MediaConvert
     #                 },
     #                 type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #               },
-    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #               image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #               image_based_trick_play_settings: {
+    #                 interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                 thumbnail_height: 1,
+    #                 thumbnail_interval: 1.0,
+    #                 thumbnail_width: 1,
+    #                 tile_height: 1,
+    #                 tile_width: 1,
+    #               },
     #               manifest_compression: "GZIP", # accepts GZIP, NONE
     #               manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #               min_final_segment_length: 1.0,
@@ -12095,46 +12444,54 @@ module Aws::MediaConvert
     #                   custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                   destination_settings: {
     #                     burnin_destination_settings: {
-    #                       alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                       apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       background_opacity: 1,
-    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                       fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                       font_opacity: 1,
     #                       font_resolution: 1,
     #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
-    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                       hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                       outline_size: 1,
-    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       shadow_opacity: 1,
     #                       shadow_x_offset: 1,
     #                       shadow_y_offset: 1,
-    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                       x_position: 1,
     #                       y_position: 1,
     #                     },
     #                     destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                     dvb_sub_destination_settings: {
-    #                       alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                       apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                       background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       background_opacity: 1,
     #                       dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                       dds_x_coordinate: 1,
     #                       dds_y_coordinate: 1,
-    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                       fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                       font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                       font_opacity: 1,
     #                       font_resolution: 1,
     #                       font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                       font_size: 1,
     #                       height: 1,
-    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                       hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                       outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                       outline_size: 1,
-    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                       shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                       shadow_opacity: 1,
     #                       shadow_x_offset: 1,
     #                       shadow_y_offset: 1,
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                       subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                       teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                       width: 1,
     #                       x_position: 1,
     #                       y_position: 1,
@@ -12890,7 +13247,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.fragment_length #=> Integer
-    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.min_buffer_time #=> Integer
@@ -12924,7 +13287,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.encryption.speke_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.fragment_length #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.hbbtv_compliance #=> String, one of "HBBTV_1_5", "NONE"
-    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_buffer_time #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.min_final_segment_length #=> Float
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.mpd_profile #=> String, one of "MAIN_PROFILE", "ON_DEMAND_PROFILE"
@@ -12974,7 +13343,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.static_key_value #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.static_key_provider.url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.encryption.type #=> String, one of "SPEKE", "STATIC_KEY"
-    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play #=> String, one of "NONE", "THUMBNAIL", "THUMBNAIL_AND_FULLFRAME", "ADVANCED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.interval_cadence #=> String, one of "FOLLOW_IFRAME", "FOLLOW_CUSTOM"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_interval #=> Float
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.thumbnail_width #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_height #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.image_based_trick_play_settings.tile_width #=> Integer
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_compression #=> String, one of "GZIP", "NONE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.manifest_duration_format #=> String, one of "FLOATING_POINT", "INTEGER"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.min_final_segment_length #=> Float
@@ -13115,44 +13490,52 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.hex_font_color #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_y_offset #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.hex_font_color #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
@@ -13754,46 +14137,54 @@ module Aws::MediaConvert
     #           custom_language_code: "__stringPatternAZaZ23AZaZ",
     #           destination_settings: {
     #             burnin_destination_settings: {
-    #               alignment: "CENTERED", # accepts CENTERED, LEFT
-    #               background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #               alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #               apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #               background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #               background_opacity: 1,
-    #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #               fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #               font_opacity: 1,
     #               font_resolution: 1,
     #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
-    #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #               hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #               outline_size: 1,
-    #               shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #               shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #               shadow_opacity: 1,
     #               shadow_x_offset: 1,
     #               shadow_y_offset: 1,
-    #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #               x_position: 1,
     #               y_position: 1,
     #             },
     #             destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #             dvb_sub_destination_settings: {
-    #               alignment: "CENTERED", # accepts CENTERED, LEFT
-    #               background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #               alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #               apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #               background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #               background_opacity: 1,
     #               dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #               dds_x_coordinate: 1,
     #               dds_y_coordinate: 1,
-    #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #               fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #               font_opacity: 1,
     #               font_resolution: 1,
     #               font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #               font_size: 1,
     #               height: 1,
-    #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #               hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #               outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #               outline_size: 1,
-    #               shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #               shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #               shadow_opacity: 1,
     #               shadow_x_offset: 1,
     #               shadow_y_offset: 1,
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #               subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #               teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #               width: 1,
     #               x_position: 1,
     #               y_position: 1,
@@ -14438,44 +14829,52 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].stream_name #=> String
     #   resp.preset.settings.caption_descriptions #=> Array
     #   resp.preset.settings.caption_descriptions[0].custom_language_code #=> String
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.font_size #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.hex_font_color #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.outline_size #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_x_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.shadow_y_offset #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.y_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.destination_type #=> String, one of "BURN_IN", "DVB_SUB", "EMBEDDED", "EMBEDDED_PLUS_SCTE20", "IMSC", "SCTE20_PLUS_EMBEDDED", "SCC", "SRT", "SMI", "TELETEXT", "TTML", "WEBVTT"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.alignment #=> String, one of "CENTERED", "LEFT", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.apply_font_color #=> String, one of "WHITE_TEXT_ONLY", "ALL_TEXT"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.background_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_handling #=> String, one of "NONE", "SPECIFIED", "NO_DISPLAY_WINDOW"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_x_coordinate #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.dds_y_coordinate #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.fallback_font #=> String, one of "BEST_MATCH", "MONOSPACED_SANSSERIF", "MONOSPACED_SERIF", "PROPORTIONAL_SANSSERIF", "PROPORTIONAL_SERIF"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "HEX", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_resolution #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_script #=> String, one of "AUTOMATIC", "HANS", "HANT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.font_size #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.height #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.hex_font_color #=> String
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_color #=> String, one of "BLACK", "WHITE", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.outline_size #=> Integer
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_opacity #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_x_offset #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.shadow_y_offset #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.subtitling_type #=> String, one of "HEARING_IMPAIRED", "STANDARD"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.teletext_spacing #=> String, one of "FIXED_GRID", "PROPORTIONAL", "AUTO"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.width #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.x_position #=> Integer
     #   resp.preset.settings.caption_descriptions[0].destination_settings.dvb_sub_destination_settings.y_position #=> Integer
@@ -14974,7 +15373,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1599,21 +1599,25 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         alignment: "CENTERED", # accepts CENTERED, LEFT
-    #         background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #         alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #         apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #         background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #         background_opacity: 1,
-    #         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #         fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #         font_opacity: 1,
     #         font_resolution: 1,
     #         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #         font_size: 1,
-    #         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #         hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #         outline_size: 1,
-    #         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #         shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #         shadow_opacity: 1,
     #         shadow_x_offset: 1,
     #         shadow_y_offset: 1,
-    #         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #         x_position: 1,
     #         y_position: 1,
     #       }
@@ -1631,6 +1635,19 @@ module Aws::MediaConvert
     #   settings must match.
     #   @return [String]
     #
+    # @!attribute [rw] apply_font_color
+    #   Ignore this setting unless your input captions are STL, any type of
+    #   608, teletext, or TTML, and your output captions are burned in.
+    #   Specify how the service applies the color specified in the setting
+    #   Font color (BurninSubtitleFontColor). By default, this color is
+    #   white. When you choose WHITE\_TEXT\_ONLY, the service uses the
+    #   specified font color only for text that is white in the input. When
+    #   you choose ALL\_TEXT, the service uses the specified font color for
+    #   all output captions text. If you leave both settings at their
+    #   default value, your output font color is the same as your input font
+    #   color.
+    #   @return [String]
+    #
     # @!attribute [rw] background_color
     #   Specifies the color of the rectangle behind the captions. All
     #   burn-in and DVB-Sub font settings must match.
@@ -1642,6 +1659,18 @@ module Aws::MediaConvert
     #   setting it to 0 (transparent). All burn-in and DVB-Sub font settings
     #   must match.
     #   @return [Integer]
+    #
+    # @!attribute [rw] fallback_font
+    #   Specify the font that you want the service to use for your burn in
+    #   captions when your input captions specify a font that MediaConvert
+    #   doesn't support. When you keep the default value, Best match
+    #   (BEST\_MATCH), MediaConvert uses a supported font that most closely
+    #   matches the font that your input captions specify. When there are
+    #   multiple unsupported fonts in your input captions, MediaConvert
+    #   matches each font with the supported font that matches best. When
+    #   you explicitly choose a replacement font, MediaConvert uses that
+    #   font to replace all unsupported fonts from your input.
+    #   @return [String]
     #
     # @!attribute [rw] font_color
     #   Specifies the color of the burned-in captions. This option is not
@@ -1673,6 +1702,15 @@ module Aws::MediaConvert
     #   for automatic font size selection. All burn-in and DVB-Sub font
     #   settings must match.
     #   @return [Integer]
+    #
+    # @!attribute [rw] hex_font_color
+    #   Ignore this setting unless your BurninSubtitleFontColor setting is
+    #   HEX. Format is six or eight hexidecimal digits, representing the
+    #   red, green, and blue components, with the two extra digits used for
+    #   an optional alpha value. For example a value of 1122AABB is a red
+    #   value of 0x11, a green value of 0x22, a blue value of 0xAA, and an
+    #   alpha value of 0xBB.
+    #   @return [String]
     #
     # @!attribute [rw] outline_color
     #   Specifies font outline color. This option is not valid for source
@@ -1713,6 +1751,17 @@ module Aws::MediaConvert
     #   above the text. All burn-in and DVB-Sub font settings must match.
     #   @return [Integer]
     #
+    # @!attribute [rw] style_passthrough
+    #   Ignore this setting unless your output captions are burned in.
+    #   Choose which set of style and position values the service applies to
+    #   your output captions. When you choose ENABLED, the service uses the
+    #   input style and position information from your input. When you
+    #   choose DISABLED, the service uses any style values that you specify
+    #   in your output settings. If you don't specify values, the service
+    #   uses default style and position values. When you choose DISABLED,
+    #   the service ignores all style and position values from your input.
+    #   @return [String]
+    #
     # @!attribute [rw] teletext_spacing
     #   Only applies to jobs with input captions in Teletext or STL formats.
     #   Specify whether the spacing between letters in your captions is set
@@ -1748,19 +1797,23 @@ module Aws::MediaConvert
     #
     class BurninDestinationSettings < Struct.new(
       :alignment,
+      :apply_font_color,
       :background_color,
       :background_opacity,
+      :fallback_font,
       :font_color,
       :font_opacity,
       :font_resolution,
       :font_script,
       :font_size,
+      :hex_font_color,
       :outline_color,
       :outline_size,
       :shadow_color,
       :shadow_opacity,
       :shadow_x_offset,
       :shadow_y_offset,
+      :style_passthrough,
       :teletext_spacing,
       :x_position,
       :y_position)
@@ -1807,46 +1860,54 @@ module Aws::MediaConvert
     #         custom_language_code: "__stringPatternAZaZ23AZaZ",
     #         destination_settings: {
     #           burnin_destination_settings: {
-    #             alignment: "CENTERED", # accepts CENTERED, LEFT
-    #             background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #             alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #             apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #             background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #             background_opacity: 1,
-    #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #             fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #             font_opacity: 1,
     #             font_resolution: 1,
     #             font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #             font_size: 1,
-    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #             hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #             outline_size: 1,
-    #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #             shadow_opacity: 1,
     #             shadow_x_offset: 1,
     #             shadow_y_offset: 1,
-    #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #             x_position: 1,
     #             y_position: 1,
     #           },
     #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #           dvb_sub_destination_settings: {
-    #             alignment: "CENTERED", # accepts CENTERED, LEFT
-    #             background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #             alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #             apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #             background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #             background_opacity: 1,
     #             dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #             dds_x_coordinate: 1,
     #             dds_y_coordinate: 1,
-    #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #             fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #             font_opacity: 1,
     #             font_resolution: 1,
     #             font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #             font_size: 1,
     #             height: 1,
-    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #             hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #             outline_size: 1,
-    #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #             shadow_opacity: 1,
     #             shadow_x_offset: 1,
     #             shadow_y_offset: 1,
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #             subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #             width: 1,
     #             x_position: 1,
     #             y_position: 1,
@@ -1943,46 +2004,54 @@ module Aws::MediaConvert
     #         custom_language_code: "__stringPatternAZaZ23AZaZ",
     #         destination_settings: {
     #           burnin_destination_settings: {
-    #             alignment: "CENTERED", # accepts CENTERED, LEFT
-    #             background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #             alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #             apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #             background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #             background_opacity: 1,
-    #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #             fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #             font_opacity: 1,
     #             font_resolution: 1,
     #             font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #             font_size: 1,
-    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #             hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #             outline_size: 1,
-    #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #             shadow_opacity: 1,
     #             shadow_x_offset: 1,
     #             shadow_y_offset: 1,
-    #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #             x_position: 1,
     #             y_position: 1,
     #           },
     #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #           dvb_sub_destination_settings: {
-    #             alignment: "CENTERED", # accepts CENTERED, LEFT
-    #             background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #             alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #             apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #             background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #             background_opacity: 1,
     #             dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #             dds_x_coordinate: 1,
     #             dds_y_coordinate: 1,
-    #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #             fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #             font_opacity: 1,
     #             font_resolution: 1,
     #             font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #             font_size: 1,
     #             height: 1,
-    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #             hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #             outline_size: 1,
-    #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #             shadow_opacity: 1,
     #             shadow_x_offset: 1,
     #             shadow_y_offset: 1,
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #             subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #             width: 1,
     #             x_position: 1,
     #             y_position: 1,
@@ -2078,46 +2147,54 @@ module Aws::MediaConvert
     #
     #       {
     #         burnin_destination_settings: {
-    #           alignment: "CENTERED", # accepts CENTERED, LEFT
-    #           background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #           alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #           apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #           background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #           background_opacity: 1,
-    #           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #           fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #           font_opacity: 1,
     #           font_resolution: 1,
     #           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #           font_size: 1,
-    #           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #           hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #           outline_size: 1,
-    #           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #           shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #           shadow_opacity: 1,
     #           shadow_x_offset: 1,
     #           shadow_y_offset: 1,
-    #           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #           x_position: 1,
     #           y_position: 1,
     #         },
     #         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #         dvb_sub_destination_settings: {
-    #           alignment: "CENTERED", # accepts CENTERED, LEFT
-    #           background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #           alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #           apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #           background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #           background_opacity: 1,
     #           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #           dds_x_coordinate: 1,
     #           dds_y_coordinate: 1,
-    #           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #           fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #           font_opacity: 1,
     #           font_resolution: 1,
     #           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #           font_size: 1,
     #           height: 1,
-    #           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #           hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #           outline_size: 1,
-    #           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #           shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #           shadow_opacity: 1,
     #           shadow_x_offset: 1,
     #           shadow_y_offset: 1,
+    #           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #           width: 1,
     #           x_position: 1,
     #           y_position: 1,
@@ -2699,7 +2776,15 @@ module Aws::MediaConvert
     #           type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #         },
     #         fragment_length: 1,
-    #         image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #         image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #         image_based_trick_play_settings: {
+    #           interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #           thumbnail_height: 1,
+    #           thumbnail_interval: 1.0,
+    #           thumbnail_width: 1,
+    #           tile_height: 1,
+    #           tile_width: 1,
+    #         },
     #         manifest_compression: "GZIP", # accepts GZIP, NONE
     #         manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #         min_buffer_time: 1,
@@ -2784,6 +2869,11 @@ module Aws::MediaConvert
     #   compatible with this Roku specification:
     #   https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
     #   @return [String]
+    #
+    # @!attribute [rw] image_based_trick_play_settings
+    #   Tile and thumbnail settings applicable when imageBasedTrickPlay is
+    #   ADVANCED
+    #   @return [Types::CmafImageBasedTrickPlaySettings]
     #
     # @!attribute [rw] manifest_compression
     #   When set to GZIP, compresses HLS playlist.
@@ -2916,6 +3006,7 @@ module Aws::MediaConvert
       :encryption,
       :fragment_length,
       :image_based_trick_play,
+      :image_based_trick_play_settings,
       :manifest_compression,
       :manifest_duration_format,
       :min_buffer_time,
@@ -2930,6 +3021,73 @@ module Aws::MediaConvert
       :write_dash_manifest,
       :write_hls_manifest,
       :write_segment_timeline_in_representation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Tile and thumbnail settings applicable when imageBasedTrickPlay is
+    # ADVANCED
+    #
+    # @note When making an API call, you may pass CmafImageBasedTrickPlaySettings
+    #   data as a hash:
+    #
+    #       {
+    #         interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #         thumbnail_height: 1,
+    #         thumbnail_interval: 1.0,
+    #         thumbnail_width: 1,
+    #         tile_height: 1,
+    #         tile_width: 1,
+    #       }
+    #
+    # @!attribute [rw] interval_cadence
+    #   The cadence MediaConvert follows for generating thumbnails. If set
+    #   to FOLLOW\_IFRAME, MediaConvert generates thumbnails for each IDR
+    #   frame in the output (matching the GOP cadence). If set to
+    #   FOLLOW\_CUSTOM, MediaConvert generates thumbnails according to the
+    #   interval you specify in thumbnailInterval.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_height
+    #   Height of each thumbnail within each tile image, in pixels. Leave
+    #   blank to maintain aspect ratio with thumbnail width. If following
+    #   the aspect ratio would lead to a total tile height greater than
+    #   4096, then the job will be rejected. Must be divisible by 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] thumbnail_interval
+    #   Enter the interval, in seconds, that MediaConvert uses to generate
+    #   thumbnails. If the interval you enter doesn't align with the output
+    #   frame rate, MediaConvert automatically rounds the interval to align
+    #   with the output frame rate. For example, if the output frame rate is
+    #   29.97 frames per second and you enter 5, MediaConvert uses a 150
+    #   frame interval to generate thumbnails.
+    #   @return [Float]
+    #
+    # @!attribute [rw] thumbnail_width
+    #   Width of each thumbnail within each tile image, in pixels. Default
+    #   is 312. Must be divisible by 8.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tile_height
+    #   Number of thumbnails in each column of a tile image. Set a value
+    #   between 2 and 2048. Must be divisible by 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tile_width
+    #   Number of thumbnails in each row of a tile image. Set a value
+    #   between 1 and 512.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmafImageBasedTrickPlaySettings AWS API Documentation
+    #
+    class CmafImageBasedTrickPlaySettings < Struct.new(
+      :interval_cadence,
+      :thumbnail_height,
+      :thumbnail_interval,
+      :thumbnail_width,
+      :tile_height,
+      :tile_width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3684,7 +3842,15 @@ module Aws::MediaConvert
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
     #                   fragment_length: 1,
-    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1,
+    #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
@@ -3733,7 +3899,15 @@ module Aws::MediaConvert
     #                   },
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
-    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1,
+    #                   },
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -3812,7 +3986,15 @@ module Aws::MediaConvert
     #                     },
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
-    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1,
+    #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_final_segment_length: 1.0,
@@ -4008,46 +4190,54 @@ module Aws::MediaConvert
     #                       custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                       destination_settings: {
     #                         burnin_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                           apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           background_opacity: 1,
-    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                           fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                           outline_size: 1,
-    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
     #                           shadow_y_offset: 1,
-    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
     #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                           apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           background_opacity: 1,
     #                           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                           dds_x_coordinate: 1,
     #                           dds_y_coordinate: 1,
-    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                           fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
     #                           height: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                           outline_size: 1,
-    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
     #                           shadow_y_offset: 1,
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                           width: 1,
     #                           x_position: 1,
     #                           y_position: 1,
@@ -5038,7 +5228,15 @@ module Aws::MediaConvert
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
     #                   fragment_length: 1,
-    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1,
+    #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
@@ -5087,7 +5285,15 @@ module Aws::MediaConvert
     #                   },
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
-    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1,
+    #                   },
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -5166,7 +5372,15 @@ module Aws::MediaConvert
     #                     },
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
-    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1,
+    #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_final_segment_length: 1.0,
@@ -5362,46 +5576,54 @@ module Aws::MediaConvert
     #                       custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                       destination_settings: {
     #                         burnin_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                           apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           background_opacity: 1,
-    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                           fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                           outline_size: 1,
-    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
     #                           shadow_y_offset: 1,
-    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
     #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                           apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           background_opacity: 1,
     #                           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                           dds_x_coordinate: 1,
     #                           dds_y_coordinate: 1,
-    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                           fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
     #                           height: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                           outline_size: 1,
-    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
     #                           shadow_y_offset: 1,
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                           width: 1,
     #                           x_position: 1,
     #                           y_position: 1,
@@ -6213,46 +6435,54 @@ module Aws::MediaConvert
     #               custom_language_code: "__stringPatternAZaZ23AZaZ",
     #               destination_settings: {
     #                 burnin_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                   alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                   apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                   background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                   background_opacity: 1,
-    #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                   fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                   font_opacity: 1,
     #                   font_resolution: 1,
     #                   font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                   font_size: 1,
-    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                   hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                   outline_size: 1,
-    #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                   shadow_opacity: 1,
     #                   shadow_x_offset: 1,
     #                   shadow_y_offset: 1,
-    #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
     #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                 dvb_sub_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                   alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                   apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                   background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                   background_opacity: 1,
     #                   dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                   dds_x_coordinate: 1,
     #                   dds_y_coordinate: 1,
-    #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                   fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                   font_opacity: 1,
     #                   font_resolution: 1,
     #                   font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                   font_size: 1,
     #                   height: 1,
-    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                   hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                   outline_size: 1,
-    #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                   shadow_opacity: 1,
     #                   shadow_x_offset: 1,
     #                   shadow_y_offset: 1,
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                   subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                   width: 1,
     #                   x_position: 1,
     #                   y_position: 1,
@@ -7046,7 +7276,15 @@ module Aws::MediaConvert
     #         },
     #         fragment_length: 1,
     #         hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
-    #         image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #         image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #         image_based_trick_play_settings: {
+    #           interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #           thumbnail_height: 1,
+    #           thumbnail_interval: 1.0,
+    #           thumbnail_width: 1,
+    #           tile_height: 1,
+    #           tile_width: 1,
+    #         },
     #         min_buffer_time: 1,
     #         min_final_segment_length: 1.0,
     #         mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -7128,6 +7366,11 @@ module Aws::MediaConvert
     #   this feature are compatible with this Roku specification:
     #   https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
     #   @return [String]
+    #
+    # @!attribute [rw] image_based_trick_play_settings
+    #   Tile and thumbnail settings applicable when imageBasedTrickPlay is
+    #   ADVANCED
+    #   @return [Types::DashIsoImageBasedTrickPlaySettings]
     #
     # @!attribute [rw] min_buffer_time
     #   Minimum time of initially buffered media that is needed to ensure
@@ -7223,6 +7466,7 @@ module Aws::MediaConvert
       :fragment_length,
       :hbbtv_compliance,
       :image_based_trick_play,
+      :image_based_trick_play_settings,
       :min_buffer_time,
       :min_final_segment_length,
       :mpd_profile,
@@ -7231,6 +7475,73 @@ module Aws::MediaConvert
       :segment_length,
       :segment_length_control,
       :write_segment_timeline_in_representation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Tile and thumbnail settings applicable when imageBasedTrickPlay is
+    # ADVANCED
+    #
+    # @note When making an API call, you may pass DashIsoImageBasedTrickPlaySettings
+    #   data as a hash:
+    #
+    #       {
+    #         interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #         thumbnail_height: 1,
+    #         thumbnail_interval: 1.0,
+    #         thumbnail_width: 1,
+    #         tile_height: 1,
+    #         tile_width: 1,
+    #       }
+    #
+    # @!attribute [rw] interval_cadence
+    #   The cadence MediaConvert follows for generating thumbnails. If set
+    #   to FOLLOW\_IFRAME, MediaConvert generates thumbnails for each IDR
+    #   frame in the output (matching the GOP cadence). If set to
+    #   FOLLOW\_CUSTOM, MediaConvert generates thumbnails according to the
+    #   interval you specify in thumbnailInterval.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_height
+    #   Height of each thumbnail within each tile image, in pixels. Leave
+    #   blank to maintain aspect ratio with thumbnail width. If following
+    #   the aspect ratio would lead to a total tile height greater than
+    #   4096, then the job will be rejected. Must be divisible by 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] thumbnail_interval
+    #   Enter the interval, in seconds, that MediaConvert uses to generate
+    #   thumbnails. If the interval you enter doesn't align with the output
+    #   frame rate, MediaConvert automatically rounds the interval to align
+    #   with the output frame rate. For example, if the output frame rate is
+    #   29.97 frames per second and you enter 5, MediaConvert uses a 150
+    #   frame interval to generate thumbnails.
+    #   @return [Float]
+    #
+    # @!attribute [rw] thumbnail_width
+    #   Width of each thumbnail within each tile image, in pixels. Default
+    #   is 312. Must be divisible by 8.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tile_height
+    #   Number of thumbnails in each column of a tile image. Set a value
+    #   between 2 and 2048. Must be divisible by 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tile_width
+    #   Number of thumbnails in each row of a tile image. Set a value
+    #   between 1 and 512.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DashIsoImageBasedTrickPlaySettings AWS API Documentation
+    #
+    class DashIsoImageBasedTrickPlaySettings < Struct.new(
+      :interval_cadence,
+      :thumbnail_height,
+      :thumbnail_interval,
+      :thumbnail_width,
+      :tile_height,
+      :tile_width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7313,6 +7624,20 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeleteJobTemplateResponse AWS API Documentation
     #
     class DeleteJobTemplateResponse < Aws::EmptyStructure; end
+
+    # Send a request to permanently delete a policy that you created.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeletePolicyRequest AWS API Documentation
+    #
+    class DeletePolicyRequest < Aws::EmptyStructure; end
+
+    # Successful DELETE policy requests will return an OK message.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeletePolicyResponse AWS API Documentation
+    #
+    class DeletePolicyResponse < Aws::EmptyStructure; end
 
     # Delete a preset by sending a request with the preset name
     #
@@ -7671,26 +7996,30 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         alignment: "CENTERED", # accepts CENTERED, LEFT
-    #         background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #         alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #         apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #         background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #         background_opacity: 1,
     #         dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #         dds_x_coordinate: 1,
     #         dds_y_coordinate: 1,
-    #         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #         fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #         font_opacity: 1,
     #         font_resolution: 1,
     #         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #         font_size: 1,
     #         height: 1,
-    #         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #         hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #         outline_size: 1,
-    #         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #         shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #         shadow_opacity: 1,
     #         shadow_x_offset: 1,
     #         shadow_y_offset: 1,
+    #         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #         width: 1,
     #         x_position: 1,
     #         y_position: 1,
@@ -7707,6 +8036,18 @@ module Aws::MediaConvert
     #   608/embedded or teletext. These source settings are already
     #   pre-defined by the caption stream. All burn-in and DVB-Sub font
     #   settings must match.
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_font_color
+    #   Ignore this setting unless your input captions are STL, any type of
+    #   608, teletext, or TTML, and your output captions are DVB-SUB.
+    #   Specify how the service applies the color specified in the setting
+    #   Font color (DvbSubtitleFontColor). By default, this color is white.
+    #   When you choose WHITE\_TEXT\_ONLY, the service uses the specified
+    #   font color only for text that is white in the input. When you choose
+    #   ALL\_TEXT, the service uses the specified font color for all output
+    #   captions text. If you leave both settings at their default value,
+    #   your output font color is the same as your input font color.
     #   @return [String]
     #
     # @!attribute [rw] background_color
@@ -7768,6 +8109,18 @@ module Aws::MediaConvert
     #   must match.
     #   @return [Integer]
     #
+    # @!attribute [rw] fallback_font
+    #   Specify the font that you want the service to use for your burn in
+    #   captions when your input captions specify a font that MediaConvert
+    #   doesn't support. When you keep the default value, Best match
+    #   (BEST\_MATCH), MediaConvert uses a supported font that most closely
+    #   matches the font that your input captions specify. When there are
+    #   multiple unsupported fonts in your input captions, MediaConvert
+    #   matches each font with the supported font that matches best. When
+    #   you explicitly choose a replacement font, MediaConvert uses that
+    #   font to replace all unsupported fonts from your input.
+    #   @return [String]
+    #
     # @!attribute [rw] font_color
     #   Specifies the color of the DVB-SUB captions. This option is not
     #   valid for source captions that are STL, 608/embedded or teletext.
@@ -7805,6 +8158,15 @@ module Aws::MediaConvert
     #   setting, you must set DDS handling (ddsHandling) to a value other
     #   than None (NONE). All burn-in and DVB-Sub font settings must match.
     #   @return [Integer]
+    #
+    # @!attribute [rw] hex_font_color
+    #   Ignore this setting unless your DvbSubtitleFontColor setting is HEX.
+    #   Format is six or eight hexidecimal digits, representing the red,
+    #   green, and blue components, with the two extra digits used for an
+    #   optional alpha value. For example a value of 1122AABB is a red value
+    #   of 0x11, a green value of 0x22, a blue value of 0xAA, and an alpha
+    #   value of 0xBB.
+    #   @return [String]
     #
     # @!attribute [rw] outline_color
     #   Specifies font outline color. This option is not valid for source
@@ -7844,6 +8206,16 @@ module Aws::MediaConvert
     #   in pixels. A value of -2 would result in a shadow offset 2 pixels
     #   above the text. All burn-in and DVB-Sub font settings must match.
     #   @return [Integer]
+    #
+    # @!attribute [rw] style_passthrough
+    #   Choose which set of style and position values the service applies to
+    #   your output captions. When you choose ENABLED, the service uses the
+    #   input style and position information from your input. When you
+    #   choose DISABLED, the service uses any style values that you specify
+    #   in your output settings. If you don't specify values, the service
+    #   uses default style and position values. When you choose DISABLED,
+    #   the service ignores all style and position values from your input.
+    #   @return [String]
     #
     # @!attribute [rw] subtitling_type
     #   Specify whether your DVB subtitles are standard or for hearing
@@ -7894,23 +8266,27 @@ module Aws::MediaConvert
     #
     class DvbSubDestinationSettings < Struct.new(
       :alignment,
+      :apply_font_color,
       :background_color,
       :background_opacity,
       :dds_handling,
       :dds_x_coordinate,
       :dds_y_coordinate,
+      :fallback_font,
       :font_color,
       :font_opacity,
       :font_resolution,
       :font_script,
       :font_size,
       :height,
+      :hex_font_color,
       :outline_color,
       :outline_size,
       :shadow_color,
       :shadow_opacity,
       :shadow_x_offset,
       :shadow_y_offset,
+      :style_passthrough,
       :subtitling_type,
       :teletext_spacing,
       :width,
@@ -8623,8 +8999,11 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Hexadecimal value as per EIA-608 Line 21 Data Services, section
-    # 9.5.1.5 05h Content Advisory.
+    # If your source content has EIA-608 Line 21 Data Services, enable this
+    # feature to specify what MediaConvert does with the Extended Data
+    # Services (XDS) packets. You can choose to pass through XDS packets, or
+    # remove them from the output. For more information about XDS, see
+    # EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory.
     #
     # @note When making an API call, you may pass ExtendedDataServices
     #   data as a hash:
@@ -8917,6 +9296,31 @@ module Aws::MediaConvert
     #
     class GetJobTemplateResponse < Struct.new(
       :job_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Send a request to retrieve the JSON for your policy.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetPolicyRequest AWS API Documentation
+    #
+    class GetPolicyRequest < Aws::EmptyStructure; end
+
+    # Successful GET policy requests will return the JSON for your policy.
+    #
+    # @!attribute [rw] policy
+    #   A policy configures behavior that you allow or disallow for your
+    #   account. For information about MediaConvert policies, see the user
+    #   guide at
+    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetPolicyResponse AWS API Documentation
+    #
+    class GetPolicyResponse < Struct.new(
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10457,7 +10861,15 @@ module Aws::MediaConvert
     #           },
     #           type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #         },
-    #         image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #         image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #         image_based_trick_play_settings: {
+    #           interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #           thumbnail_height: 1,
+    #           thumbnail_interval: 1.0,
+    #           thumbnail_width: 1,
+    #           tile_height: 1,
+    #           tile_width: 1,
+    #         },
     #         manifest_compression: "GZIP", # accepts GZIP, NONE
     #         manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #         min_final_segment_length: 1.0,
@@ -10567,6 +10979,11 @@ module Aws::MediaConvert
     #   compatible with this Roku specification:
     #   https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
     #   @return [String]
+    #
+    # @!attribute [rw] image_based_trick_play_settings
+    #   Tile and thumbnail settings applicable when imageBasedTrickPlay is
+    #   ADVANCED
+    #   @return [Types::HlsImageBasedTrickPlaySettings]
     #
     # @!attribute [rw] manifest_compression
     #   When set to GZIP, compresses HLS playlist.
@@ -10694,6 +11111,7 @@ module Aws::MediaConvert
       :directory_structure,
       :encryption,
       :image_based_trick_play,
+      :image_based_trick_play_settings,
       :manifest_compression,
       :manifest_duration_format,
       :min_final_segment_length,
@@ -10710,6 +11128,73 @@ module Aws::MediaConvert
       :timed_metadata_id_3_frame,
       :timed_metadata_id_3_period,
       :timestamp_delta_milliseconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Tile and thumbnail settings applicable when imageBasedTrickPlay is
+    # ADVANCED
+    #
+    # @note When making an API call, you may pass HlsImageBasedTrickPlaySettings
+    #   data as a hash:
+    #
+    #       {
+    #         interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #         thumbnail_height: 1,
+    #         thumbnail_interval: 1.0,
+    #         thumbnail_width: 1,
+    #         tile_height: 1,
+    #         tile_width: 1,
+    #       }
+    #
+    # @!attribute [rw] interval_cadence
+    #   The cadence MediaConvert follows for generating thumbnails. If set
+    #   to FOLLOW\_IFRAME, MediaConvert generates thumbnails for each IDR
+    #   frame in the output (matching the GOP cadence). If set to
+    #   FOLLOW\_CUSTOM, MediaConvert generates thumbnails according to the
+    #   interval you specify in thumbnailInterval.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_height
+    #   Height of each thumbnail within each tile image, in pixels. Leave
+    #   blank to maintain aspect ratio with thumbnail width. If following
+    #   the aspect ratio would lead to a total tile height greater than
+    #   4096, then the job will be rejected. Must be divisible by 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] thumbnail_interval
+    #   Enter the interval, in seconds, that MediaConvert uses to generate
+    #   thumbnails. If the interval you enter doesn't align with the output
+    #   frame rate, MediaConvert automatically rounds the interval to align
+    #   with the output frame rate. For example, if the output frame rate is
+    #   29.97 frames per second and you enter 5, MediaConvert uses a 150
+    #   frame interval to generate thumbnails.
+    #   @return [Float]
+    #
+    # @!attribute [rw] thumbnail_width
+    #   Width of each thumbnail within each tile image, in pixels. Default
+    #   is 312. Must be divisible by 8.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tile_height
+    #   Number of thumbnails in each column of a tile image. Set a value
+    #   between 2 and 2048. Must be divisible by 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tile_width
+    #   Number of thumbnails in each row of a tile image. Set a value
+    #   between 1 and 512.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HlsImageBasedTrickPlaySettings AWS API Documentation
+    #
+    class HlsImageBasedTrickPlaySettings < Struct.new(
+      :interval_cadence,
+      :thumbnail_height,
+      :thumbnail_interval,
+      :thumbnail_width,
+      :tile_height,
+      :tile_width)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12376,7 +12861,15 @@ module Aws::MediaConvert
     #                   type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                 },
     #                 fragment_length: 1,
-    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                 image_based_trick_play_settings: {
+    #                   interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1,
+    #                 },
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_buffer_time: 1,
@@ -12425,7 +12918,15 @@ module Aws::MediaConvert
     #                 },
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
-    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                 image_based_trick_play_settings: {
+    #                   interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1,
+    #                 },
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -12504,7 +13005,15 @@ module Aws::MediaConvert
     #                   },
     #                   type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                 },
-    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                 image_based_trick_play_settings: {
+    #                   interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1,
+    #                 },
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_final_segment_length: 1.0,
@@ -12700,46 +13209,54 @@ module Aws::MediaConvert
     #                     custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                     destination_settings: {
     #                       burnin_destination_settings: {
-    #                         alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                         alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                         apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                         background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                         background_opacity: 1,
-    #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                         fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                         font_opacity: 1,
     #                         font_resolution: 1,
     #                         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                         font_size: 1,
-    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                         hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                         outline_size: 1,
-    #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                         shadow_opacity: 1,
     #                         shadow_x_offset: 1,
     #                         shadow_y_offset: 1,
-    #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
     #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                       dvb_sub_destination_settings: {
-    #                         alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                         alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                         apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                         background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                         background_opacity: 1,
     #                         dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                         dds_x_coordinate: 1,
     #                         dds_y_coordinate: 1,
-    #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                         fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                         font_opacity: 1,
     #                         font_resolution: 1,
     #                         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                         font_size: 1,
     #                         height: 1,
-    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                         hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                         outline_size: 1,
-    #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                         shadow_opacity: 1,
     #                         shadow_x_offset: 1,
     #                         shadow_y_offset: 1,
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                         width: 1,
     #                         x_position: 1,
     #                         y_position: 1,
@@ -13320,8 +13837,12 @@ module Aws::MediaConvert
     #   @return [Types::EsamSettings]
     #
     # @!attribute [rw] extended_data_services
-    #   Hexadecimal value as per EIA-608 Line 21 Data Services, section
-    #   9.5.1.5 05h Content Advisory.
+    #   If your source content has EIA-608 Line 21 Data Services, enable
+    #   this feature to specify what MediaConvert does with the Extended
+    #   Data Services (XDS) packets. You can choose to pass through XDS
+    #   packets, or remove them from the output. For more information about
+    #   XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content
+    #   Advisory.
     #   @return [Types::ExtendedDataServices]
     #
     # @!attribute [rw] inputs
@@ -13776,7 +14297,15 @@ module Aws::MediaConvert
     #                   type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                 },
     #                 fragment_length: 1,
-    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                 image_based_trick_play_settings: {
+    #                   interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1,
+    #                 },
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_buffer_time: 1,
@@ -13825,7 +14354,15 @@ module Aws::MediaConvert
     #                 },
     #                 fragment_length: 1,
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
-    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                 image_based_trick_play_settings: {
+    #                   interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1,
+    #                 },
     #                 min_buffer_time: 1,
     #                 min_final_segment_length: 1.0,
     #                 mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -13904,7 +14441,15 @@ module Aws::MediaConvert
     #                   },
     #                   type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                 },
-    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                 image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                 image_based_trick_play_settings: {
+    #                   interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                   thumbnail_height: 1,
+    #                   thumbnail_interval: 1.0,
+    #                   thumbnail_width: 1,
+    #                   tile_height: 1,
+    #                   tile_width: 1,
+    #                 },
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                 min_final_segment_length: 1.0,
@@ -14100,46 +14645,54 @@ module Aws::MediaConvert
     #                     custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                     destination_settings: {
     #                       burnin_destination_settings: {
-    #                         alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                         alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                         apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                         background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                         background_opacity: 1,
-    #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                         fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                         font_opacity: 1,
     #                         font_resolution: 1,
     #                         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                         font_size: 1,
-    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                         hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                         outline_size: 1,
-    #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                         shadow_opacity: 1,
     #                         shadow_x_offset: 1,
     #                         shadow_y_offset: 1,
-    #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
     #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                       dvb_sub_destination_settings: {
-    #                         alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                         alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                         apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                         background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                         background_opacity: 1,
     #                         dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                         dds_x_coordinate: 1,
     #                         dds_y_coordinate: 1,
-    #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                         fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                         font_opacity: 1,
     #                         font_resolution: 1,
     #                         font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                         font_size: 1,
     #                         height: 1,
-    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                         hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                         outline_size: 1,
-    #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                         shadow_opacity: 1,
     #                         shadow_x_offset: 1,
     #                         shadow_y_offset: 1,
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                         width: 1,
     #                         x_position: 1,
     #                         y_position: 1,
@@ -14720,8 +15273,12 @@ module Aws::MediaConvert
     #   @return [Types::EsamSettings]
     #
     # @!attribute [rw] extended_data_services
-    #   Hexadecimal value as per EIA-608 Line 21 Data Services, section
-    #   9.5.1.5 05h Content Advisory.
+    #   If your source content has EIA-608 Line 21 Data Services, enable
+    #   this feature to specify what MediaConvert does with the Extended
+    #   Data Services (XDS) packets. You can choose to pass through XDS
+    #   packets, or remove them from the output. For more information about
+    #   XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content
+    #   Advisory.
     #   @return [Types::ExtendedDataServices]
     #
     # @!attribute [rw] inputs
@@ -17587,46 +18144,54 @@ module Aws::MediaConvert
     #             custom_language_code: "__stringPatternAZaZ23AZaZ",
     #             destination_settings: {
     #               burnin_destination_settings: {
-    #                 alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                 alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                 apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                 background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                 background_opacity: 1,
-    #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                 fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                 font_opacity: 1,
     #                 font_resolution: 1,
     #                 font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                 font_size: 1,
-    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                 hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                 outline_size: 1,
-    #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                 shadow_opacity: 1,
     #                 shadow_x_offset: 1,
     #                 shadow_y_offset: 1,
-    #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
     #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #               dvb_sub_destination_settings: {
-    #                 alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                 alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                 apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                 background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                 background_opacity: 1,
     #                 dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                 dds_x_coordinate: 1,
     #                 dds_y_coordinate: 1,
-    #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                 fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                 font_opacity: 1,
     #                 font_resolution: 1,
     #                 font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                 font_size: 1,
     #                 height: 1,
-    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                 hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                 outline_size: 1,
-    #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                 shadow_opacity: 1,
     #                 shadow_x_offset: 1,
     #                 shadow_y_offset: 1,
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                 width: 1,
     #                 x_position: 1,
     #                 y_position: 1,
@@ -18352,7 +18917,15 @@ module Aws::MediaConvert
     #               type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #             },
     #             fragment_length: 1,
-    #             image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #             image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #             image_based_trick_play_settings: {
+    #               interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #               thumbnail_height: 1,
+    #               thumbnail_interval: 1.0,
+    #               thumbnail_width: 1,
+    #               tile_height: 1,
+    #               tile_width: 1,
+    #             },
     #             manifest_compression: "GZIP", # accepts GZIP, NONE
     #             manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #             min_buffer_time: 1,
@@ -18401,7 +18974,15 @@ module Aws::MediaConvert
     #             },
     #             fragment_length: 1,
     #             hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
-    #             image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #             image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #             image_based_trick_play_settings: {
+    #               interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #               thumbnail_height: 1,
+    #               thumbnail_interval: 1.0,
+    #               thumbnail_width: 1,
+    #               tile_height: 1,
+    #               tile_width: 1,
+    #             },
     #             min_buffer_time: 1,
     #             min_final_segment_length: 1.0,
     #             mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -18480,7 +19061,15 @@ module Aws::MediaConvert
     #               },
     #               type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #             },
-    #             image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #             image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #             image_based_trick_play_settings: {
+    #               interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #               thumbnail_height: 1,
+    #               thumbnail_interval: 1.0,
+    #               thumbnail_width: 1,
+    #               tile_height: 1,
+    #               tile_width: 1,
+    #             },
     #             manifest_compression: "GZIP", # accepts GZIP, NONE
     #             manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #             min_final_segment_length: 1.0,
@@ -18676,46 +19265,54 @@ module Aws::MediaConvert
     #                 custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                 destination_settings: {
     #                   burnin_destination_settings: {
-    #                     alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                     background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                     alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                     apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                     background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                     background_opacity: 1,
-    #                     font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                     fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                     font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                     font_opacity: 1,
     #                     font_resolution: 1,
     #                     font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                     font_size: 1,
-    #                     outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                     hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                     outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                     outline_size: 1,
-    #                     shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                     shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                     shadow_opacity: 1,
     #                     shadow_x_offset: 1,
     #                     shadow_y_offset: 1,
-    #                     teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                     style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                     teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                     x_position: 1,
     #                     y_position: 1,
     #                   },
     #                   destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                   dvb_sub_destination_settings: {
-    #                     alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                     background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                     alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                     apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                     background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                     background_opacity: 1,
     #                     dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                     dds_x_coordinate: 1,
     #                     dds_y_coordinate: 1,
-    #                     font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                     fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                     font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                     font_opacity: 1,
     #                     font_resolution: 1,
     #                     font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                     font_size: 1,
     #                     height: 1,
-    #                     outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                     hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                     outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                     outline_size: 1,
-    #                     shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                     shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                     shadow_opacity: 1,
     #                     shadow_x_offset: 1,
     #                     shadow_y_offset: 1,
+    #                     style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                     subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                     teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                     teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                     width: 1,
     #                     x_position: 1,
     #                     y_position: 1,
@@ -19366,7 +19963,15 @@ module Aws::MediaConvert
     #             type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #           },
     #           fragment_length: 1,
-    #           image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #           image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #           image_based_trick_play_settings: {
+    #             interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #             thumbnail_height: 1,
+    #             thumbnail_interval: 1.0,
+    #             thumbnail_width: 1,
+    #             tile_height: 1,
+    #             tile_width: 1,
+    #           },
     #           manifest_compression: "GZIP", # accepts GZIP, NONE
     #           manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #           min_buffer_time: 1,
@@ -19415,7 +20020,15 @@ module Aws::MediaConvert
     #           },
     #           fragment_length: 1,
     #           hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
-    #           image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #           image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #           image_based_trick_play_settings: {
+    #             interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #             thumbnail_height: 1,
+    #             thumbnail_interval: 1.0,
+    #             thumbnail_width: 1,
+    #             tile_height: 1,
+    #             tile_width: 1,
+    #           },
     #           min_buffer_time: 1,
     #           min_final_segment_length: 1.0,
     #           mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -19494,7 +20107,15 @@ module Aws::MediaConvert
     #             },
     #             type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #           },
-    #           image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #           image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #           image_based_trick_play_settings: {
+    #             interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #             thumbnail_height: 1,
+    #             thumbnail_interval: 1.0,
+    #             thumbnail_width: 1,
+    #             tile_height: 1,
+    #             tile_width: 1,
+    #           },
     #           manifest_compression: "GZIP", # accepts GZIP, NONE
     #           manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #           min_final_segment_length: 1.0,
@@ -19665,6 +20286,42 @@ module Aws::MediaConvert
     #
     class PartnerWatermarking < Struct.new(
       :nexguard_file_marker_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A policy configures behavior that you allow or disallow for your
+    # account. For information about MediaConvert policies, see the user
+    # guide at
+    # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #
+    # @note When making an API call, you may pass Policy
+    #   data as a hash:
+    #
+    #       {
+    #         http_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #         https_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #         s3_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #       }
+    #
+    # @!attribute [rw] http_inputs
+    #   Allow or disallow jobs that specify HTTP inputs.
+    #   @return [String]
+    #
+    # @!attribute [rw] https_inputs
+    #   Allow or disallow jobs that specify HTTPS inputs.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_inputs
+    #   Allow or disallow jobs that specify Amazon S3 inputs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Policy AWS API Documentation
+    #
+    class Policy < Struct.new(
+      :http_inputs,
+      :https_inputs,
+      :s3_inputs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19868,46 +20525,54 @@ module Aws::MediaConvert
     #             custom_language_code: "__stringPatternAZaZ23AZaZ",
     #             destination_settings: {
     #               burnin_destination_settings: {
-    #                 alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                 alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                 apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                 background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                 background_opacity: 1,
-    #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                 fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                 font_opacity: 1,
     #                 font_resolution: 1,
     #                 font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                 font_size: 1,
-    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                 hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                 outline_size: 1,
-    #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                 shadow_opacity: 1,
     #                 shadow_x_offset: 1,
     #                 shadow_y_offset: 1,
-    #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
     #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #               dvb_sub_destination_settings: {
-    #                 alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                 alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                 apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                 background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                 background_opacity: 1,
     #                 dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                 dds_x_coordinate: 1,
     #                 dds_y_coordinate: 1,
-    #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                 fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                 font_opacity: 1,
     #                 font_resolution: 1,
     #                 font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                 font_size: 1,
     #                 height: 1,
-    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                 hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                 outline_size: 1,
-    #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                 shadow_opacity: 1,
     #                 shadow_x_offset: 1,
     #                 shadow_y_offset: 1,
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                 subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                 width: 1,
     #                 x_position: 1,
     #                 y_position: 1,
@@ -20673,6 +21338,52 @@ module Aws::MediaConvert
       :scan_type_conversion_mode,
       :slow_pal,
       :telecine)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Create or change a policy by sending a request that includes your
+    # policy in JSON.
+    #
+    # @note When making an API call, you may pass PutPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy: { # required
+    #           http_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #           https_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #           s3_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] policy
+    #   A policy configures behavior that you allow or disallow for your
+    #   account. For information about MediaConvert policies, see the user
+    #   guide at
+    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/PutPolicyRequest AWS API Documentation
+    #
+    class PutPolicyRequest < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Successful PUT policy requests will return your policy.
+    #
+    # @!attribute [rw] policy
+    #   A policy configures behavior that you allow or disallow for your
+    #   account. For information about MediaConvert policies, see the user
+    #   guide at
+    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/PutPolicyResponse AWS API Documentation
+    #
+    class PutPolicyResponse < Struct.new(
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22015,7 +22726,15 @@ module Aws::MediaConvert
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
     #                   fragment_length: 1,
-    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1,
+    #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_buffer_time: 1,
@@ -22064,7 +22783,15 @@ module Aws::MediaConvert
     #                   },
     #                   fragment_length: 1,
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
-    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1,
+    #                   },
     #                   min_buffer_time: 1,
     #                   min_final_segment_length: 1.0,
     #                   mpd_profile: "MAIN_PROFILE", # accepts MAIN_PROFILE, ON_DEMAND_PROFILE
@@ -22143,7 +22870,15 @@ module Aws::MediaConvert
     #                     },
     #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
     #                   },
-    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME
+    #                   image_based_trick_play: "NONE", # accepts NONE, THUMBNAIL, THUMBNAIL_AND_FULLFRAME, ADVANCED
+    #                   image_based_trick_play_settings: {
+    #                     interval_cadence: "FOLLOW_IFRAME", # accepts FOLLOW_IFRAME, FOLLOW_CUSTOM
+    #                     thumbnail_height: 1,
+    #                     thumbnail_interval: 1.0,
+    #                     thumbnail_width: 1,
+    #                     tile_height: 1,
+    #                     tile_width: 1,
+    #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
     #                   min_final_segment_length: 1.0,
@@ -22339,46 +23074,54 @@ module Aws::MediaConvert
     #                       custom_language_code: "__stringPatternAZaZ23AZaZ",
     #                       destination_settings: {
     #                         burnin_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                           apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           background_opacity: 1,
-    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                           fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                           outline_size: 1,
-    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
     #                           shadow_y_offset: 1,
-    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
     #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                           apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                           background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           background_opacity: 1,
     #                           dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                           dds_x_coordinate: 1,
     #                           dds_y_coordinate: 1,
-    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                           fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                           font_opacity: 1,
     #                           font_resolution: 1,
     #                           font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                           font_size: 1,
     #                           height: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                           outline_size: 1,
-    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
     #                           shadow_y_offset: 1,
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                           width: 1,
     #                           x_position: 1,
     #                           y_position: 1,
@@ -23177,46 +23920,54 @@ module Aws::MediaConvert
     #               custom_language_code: "__stringPatternAZaZ23AZaZ",
     #               destination_settings: {
     #                 burnin_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                   alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                   apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                   background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                   background_opacity: 1,
-    #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                   fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                   font_opacity: 1,
     #                   font_resolution: 1,
     #                   font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                   font_size: 1,
-    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                   hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                   outline_size: 1,
-    #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                   shadow_opacity: 1,
     #                   shadow_x_offset: 1,
     #                   shadow_y_offset: 1,
-    #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
     #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, EMBEDDED_PLUS_SCTE20, IMSC, SCTE20_PLUS_EMBEDDED, SCC, SRT, SMI, TELETEXT, TTML, WEBVTT
     #                 dvb_sub_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT
-    #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                   alignment: "CENTERED", # accepts CENTERED, LEFT, AUTO
+    #                   apply_font_color: "WHITE_TEXT_ONLY", # accepts WHITE_TEXT_ONLY, ALL_TEXT
+    #                   background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                   background_opacity: 1,
     #                   dds_handling: "NONE", # accepts NONE, SPECIFIED, NO_DISPLAY_WINDOW
     #                   dds_x_coordinate: 1,
     #                   dds_y_coordinate: 1,
-    #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
+    #                   fallback_font: "BEST_MATCH", # accepts BEST_MATCH, MONOSPACED_SANSSERIF, MONOSPACED_SERIF, PROPORTIONAL_SANSSERIF, PROPORTIONAL_SERIF
+    #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, HEX, AUTO
     #                   font_opacity: 1,
     #                   font_resolution: 1,
     #                   font_script: "AUTOMATIC", # accepts AUTOMATIC, HANS, HANT
     #                   font_size: 1,
     #                   height: 1,
-    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                   hex_font_color: "__stringMin6Max8Pattern09aFAF609aFAF2",
+    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE, AUTO
     #                   outline_size: 1,
-    #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
+    #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
     #                   shadow_opacity: 1,
     #                   shadow_x_offset: 1,
     #                   shadow_y_offset: 1,
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
     #                   subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
-    #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
+    #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL, AUTO
     #                   width: 1,
     #                   x_position: 1,
     #                   y_position: 1,

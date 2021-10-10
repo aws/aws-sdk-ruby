@@ -57,11 +57,11 @@ module Aws::LexRuntimeV2
     #   @return [Types::ActiveContextTimeToLive]
     #
     # @!attribute [rw] context_attributes
-    #   A lis tof contexts active for the request. A context can be
+    #   A list of contexts active for the request. A context can be
     #   activated when a previous intent is fulfilled, or by including the
     #   context in the request.
     #
-    #   If you don't specify a list of contexts, Amazon Lex will use the
+    #   If you don't specify a list of contexts, Amazon Lex V2 will use the
     #   current list of contexts for the session. If you specify an empty
     #   list, all contexts for the session are cleared.
     #   @return [Hash<String,String>]
@@ -256,7 +256,7 @@ module Aws::LexRuntimeV2
     #         response_content_type: "NonEmptyString", # required
     #         session_state: {
     #           dialog_action: {
-    #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot
+    #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #             slot_to_elicit: "NonEmptyString",
     #           },
     #           intent: {
@@ -276,7 +276,7 @@ module Aws::LexRuntimeV2
     #                 ],
     #               },
     #             },
-    #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
+    #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
     #             confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
     #           },
     #           active_contexts: [
@@ -366,8 +366,13 @@ module Aws::LexRuntimeV2
     #
     # @!attribute [rw] disable_playback
     #   Determines whether Amazon Lex V2 should send audio responses to the
-    #   client application. When this parameter if `false`, the client
-    #   application needs to create responses for the user.
+    #   client application.
+    #
+    #   Set this field to false when the client is operating in a playback
+    #   mode where audio responses are played to the user. If the client
+    #   isn't operating in playback mode, such as a text chat application,
+    #   set this to true so that Amazon Lex V2 doesn't wait for the prompt
+    #   to finish playing on the client.
     #   @return [Boolean]
     #
     # @!attribute [rw] event_id
@@ -531,7 +536,7 @@ module Aws::LexRuntimeV2
     #   data as a hash:
     #
     #       {
-    #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot
+    #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #         slot_to_elicit: "NonEmptyString",
     #       }
     #
@@ -770,7 +775,7 @@ module Aws::LexRuntimeV2
     #             ],
     #           },
     #         },
-    #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
+    #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
     #         confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
     #       }
     #
@@ -1040,7 +1045,7 @@ module Aws::LexRuntimeV2
     #         ],
     #         session_state: { # required
     #           dialog_action: {
-    #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot
+    #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #             slot_to_elicit: "NonEmptyString",
     #           },
     #           intent: {
@@ -1060,7 +1065,7 @@ module Aws::LexRuntimeV2
     #                 ],
     #               },
     #             },
-    #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
+    #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
     #             confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
     #           },
     #           active_contexts: [
@@ -1205,7 +1210,7 @@ module Aws::LexRuntimeV2
     #         text: "Text", # required
     #         session_state: {
     #           dialog_action: {
-    #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot
+    #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #             slot_to_elicit: "NonEmptyString",
     #           },
     #           intent: {
@@ -1225,7 +1230,7 @@ module Aws::LexRuntimeV2
     #                 ],
     #               },
     #             },
-    #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
+    #             state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
     #             confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
     #           },
     #           active_contexts: [
@@ -1657,7 +1662,7 @@ module Aws::LexRuntimeV2
     #
     #       {
     #         dialog_action: {
-    #           type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot
+    #           type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #           slot_to_elicit: "NonEmptyString",
     #         },
     #         intent: {
@@ -1677,7 +1682,7 @@ module Aws::LexRuntimeV2
     #               ],
     #             },
     #           },
-    #           state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
+    #           state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
     #           confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
     #         },
     #         active_contexts: [
@@ -2017,7 +2022,7 @@ module Aws::LexRuntimeV2
     #           response_content_type: "NonEmptyString", # required
     #           session_state: {
     #             dialog_action: {
-    #               type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot
+    #               type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #               slot_to_elicit: "NonEmptyString",
     #             },
     #             intent: {
@@ -2037,7 +2042,7 @@ module Aws::LexRuntimeV2
     #                   ],
     #                 },
     #               },
-    #               state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
+    #               state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
     #               confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
     #             },
     #             active_contexts: [

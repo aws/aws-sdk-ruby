@@ -372,8 +372,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
+    #   `[ \{ "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" \} ]`
     #
     #   In most cases, you can use this value instead of the session policy to
     #   lock down your user to the designated home directory ("`chroot`").
@@ -771,8 +771,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
+    #   `[ \{ "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" \} ]`
     #
     #   In most cases, you can use this value instead of the session policy to
     #   lock your user down to the designated home directory ("`chroot`").
@@ -929,12 +929,23 @@ module Aws::Transfer
     #
     #   * *Tag*\: add a tag to the file
     #
+    #   <note markdown="1"> Currently, copying and tagging are supported only on S3.
+    #
+    #    </note>
+    #
     #   For file location, you specify either the S3 bucket and key, or the
     #   EFS filesystem ID and path.
     #
     # @option params [Array<Types::WorkflowStep>] :on_exception_steps
-    #   Specifies the steps (actions) to take if any errors are encountered
-    #   during execution of the workflow.
+    #   Specifies the steps (actions) to take if errors are encountered during
+    #   execution of the workflow.
+    #
+    #   <note markdown="1"> For custom steps, the lambda function needs to send `FAILURE` to the
+    #   call back API to kick off the exception steps. Additionally, if the
+    #   lambda does not send `SUCCESS` before it times out, the exception
+    #   steps are executed.
+    #
+    #    </note>
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for workflows.
@@ -2263,8 +2274,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
+    #   `[ \{ "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" \} ]`
     #
     #   In most cases, you can use this value instead of the session policy to
     #   lock down your user to the designated home directory ("`chroot`").
@@ -2635,8 +2646,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
+    #   `[ \{ "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" \} ]`
     #
     #   In most cases, you can use this value instead of the session policy to
     #   lock down your user to the designated home directory ("`chroot`").
@@ -2769,7 +2780,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

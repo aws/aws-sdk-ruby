@@ -60,6 +60,8 @@ module Aws::WorkSpaces
     CreateIpGroupResult = Shapes::StructureShape.new(name: 'CreateIpGroupResult')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     CreateTagsResult = Shapes::StructureShape.new(name: 'CreateTagsResult')
+    CreateUpdatedWorkspaceImageRequest = Shapes::StructureShape.new(name: 'CreateUpdatedWorkspaceImageRequest')
+    CreateUpdatedWorkspaceImageResult = Shapes::StructureShape.new(name: 'CreateUpdatedWorkspaceImageResult')
     CreateWorkspaceBundleRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceBundleRequest')
     CreateWorkspaceBundleResult = Shapes::StructureShape.new(name: 'CreateWorkspaceBundleResult')
     CreateWorkspacesRequest = Shapes::StructureShape.new(name: 'CreateWorkspacesRequest')
@@ -238,6 +240,8 @@ module Aws::WorkSpaces
     UnsupportedWorkspaceConfigurationException = Shapes::StructureShape.new(name: 'UnsupportedWorkspaceConfigurationException')
     UpdateConnectionAliasPermissionRequest = Shapes::StructureShape.new(name: 'UpdateConnectionAliasPermissionRequest')
     UpdateConnectionAliasPermissionResult = Shapes::StructureShape.new(name: 'UpdateConnectionAliasPermissionResult')
+    UpdateDescription = Shapes::StringShape.new(name: 'UpdateDescription')
+    UpdateResult = Shapes::StructureShape.new(name: 'UpdateResult')
     UpdateRulesOfIpGroupRequest = Shapes::StructureShape.new(name: 'UpdateRulesOfIpGroupRequest')
     UpdateRulesOfIpGroupResult = Shapes::StructureShape.new(name: 'UpdateRulesOfIpGroupResult')
     UpdateWorkspaceBundleRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceBundleRequest')
@@ -387,6 +391,15 @@ module Aws::WorkSpaces
     CreateTagsRequest.struct_class = Types::CreateTagsRequest
 
     CreateTagsResult.struct_class = Types::CreateTagsResult
+
+    CreateUpdatedWorkspaceImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: WorkspaceImageName, required: true, location_name: "Name"))
+    CreateUpdatedWorkspaceImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: WorkspaceImageDescription, required: true, location_name: "Description"))
+    CreateUpdatedWorkspaceImageRequest.add_member(:source_image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, required: true, location_name: "SourceImageId"))
+    CreateUpdatedWorkspaceImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateUpdatedWorkspaceImageRequest.struct_class = Types::CreateUpdatedWorkspaceImageRequest
+
+    CreateUpdatedWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
+    CreateUpdatedWorkspaceImageResult.struct_class = Types::CreateUpdatedWorkspaceImageResult
 
     CreateWorkspaceBundleRequest.add_member(:bundle_name, Shapes::ShapeRef.new(shape: WorkspaceBundleName, required: true, location_name: "BundleName"))
     CreateWorkspaceBundleRequest.add_member(:bundle_description, Shapes::ShapeRef.new(shape: WorkspaceBundleDescription, required: true, location_name: "BundleDescription"))
@@ -847,6 +860,10 @@ module Aws::WorkSpaces
 
     UpdateConnectionAliasPermissionResult.struct_class = Types::UpdateConnectionAliasPermissionResult
 
+    UpdateResult.add_member(:update_available, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UpdateAvailable"))
+    UpdateResult.add_member(:description, Shapes::ShapeRef.new(shape: UpdateDescription, location_name: "Description"))
+    UpdateResult.struct_class = Types::UpdateResult
+
     UpdateRulesOfIpGroupRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: IpGroupId, required: true, location_name: "GroupId"))
     UpdateRulesOfIpGroupRequest.add_member(:user_rules, Shapes::ShapeRef.new(shape: IpRuleList, required: true, location_name: "UserRules"))
     UpdateRulesOfIpGroupRequest.struct_class = Types::UpdateRulesOfIpGroupRequest
@@ -954,6 +971,7 @@ module Aws::WorkSpaces
     WorkspaceImage.add_member(:error_message, Shapes::ShapeRef.new(shape: Description, location_name: "ErrorMessage"))
     WorkspaceImage.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Created"))
     WorkspaceImage.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: AwsAccount, location_name: "OwnerAccountId"))
+    WorkspaceImage.add_member(:updates, Shapes::ShapeRef.new(shape: UpdateResult, location_name: "Updates"))
     WorkspaceImage.struct_class = Types::WorkspaceImage
 
     WorkspaceImageIdList.member = Shapes::ShapeRef.new(shape: WorkspaceImageId)
@@ -1102,6 +1120,21 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+      end)
+
+      api.add_operation(:create_updated_workspace_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUpdatedWorkspaceImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateUpdatedWorkspaceImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateUpdatedWorkspaceImageResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
       end)
 
       api.add_operation(:create_workspace_bundle, Seahorse::Model::Operation.new.tap do |o|

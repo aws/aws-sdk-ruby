@@ -515,6 +515,7 @@ module Aws::LicenseManager
     #   * {Types::CheckoutLicenseResponse#node_id #node_id} => String
     #   * {Types::CheckoutLicenseResponse#issued_at #issued_at} => String
     #   * {Types::CheckoutLicenseResponse#expiration #expiration} => String
+    #   * {Types::CheckoutLicenseResponse#license_arn #license_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -546,6 +547,7 @@ module Aws::LicenseManager
     #   resp.node_id #=> String
     #   resp.issued_at #=> String
     #   resp.expiration #=> String
+    #   resp.license_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CheckoutLicense AWS API Documentation
     #
@@ -557,7 +559,7 @@ module Aws::LicenseManager
     end
 
     # Creates a grant for the specified license. A grant shares the use of
-    # license entitlements with specific AWS accounts.
+    # license entitlements with specific Amazon Web Services accounts.
     #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -629,6 +631,7 @@ module Aws::LicenseManager
     #   Grant status.
     #
     # @option params [String] :status_reason
+    #   Grant status reason.
     #
     # @option params [String] :source_version
     #   Current version of the grant.
@@ -876,7 +879,60 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Creates a new report generator.
+    # Creates a new license conversion task.
+    #
+    # @option params [required, String] :resource_arn
+    #   Amazon Resource Name (ARN) of the resource you are converting the
+    #   license type for.
+    #
+    # @option params [required, Types::LicenseConversionContext] :source_license_context
+    #   Information that identifies the license type you are converting from.
+    #   For the structure of the source license, see [Convert a license type
+    #   using the AWS CLI][1] in the *License Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli
+    #
+    # @option params [required, Types::LicenseConversionContext] :destination_license_context
+    #   Information that identifies the license type you are converting to.
+    #   For the structure of the destination license, see [Convert a license
+    #   type using the AWS CLI][1] in the *License Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli
+    #
+    # @return [Types::CreateLicenseConversionTaskForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLicenseConversionTaskForResourceResponse#license_conversion_task_id #license_conversion_task_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_license_conversion_task_for_resource({
+    #     resource_arn: "Arn", # required
+    #     source_license_context: { # required
+    #       usage_operation: "UsageOperation",
+    #     },
+    #     destination_license_context: { # required
+    #       usage_operation: "UsageOperation",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_conversion_task_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateLicenseConversionTaskForResource AWS API Documentation
+    #
+    # @overload create_license_conversion_task_for_resource(params = {})
+    # @param [Hash] params ({})
+    def create_license_conversion_task_for_resource(params = {}, options = {})
+      req = build_request(:create_license_conversion_task_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates a report generator.
     #
     # @option params [required, String] :report_generator_name
     #   Name of the report generator.
@@ -885,10 +941,10 @@ module Aws::LicenseManager
     #   Type of reports to generate. The following report types an be
     #   generated:
     #
-    #   * License configuration report - Reports on the number and details of
+    #   * License configuration report - Reports the number and details of
     #     consumed licenses for a license configuration.
     #
-    #   * Resource report - Reports on the tracked licenses and resource
+    #   * Resource report - Reports the tracked licenses and resource
     #     consumption for a license configuration.
     #
     # @option params [required, Types::ReportContext] :report_context
@@ -1119,6 +1175,7 @@ module Aws::LicenseManager
     #   Amazon Resource Name (ARN) of the grant.
     #
     # @option params [String] :status_reason
+    #   The Status reason for the delete request.
     #
     # @option params [required, String] :version
     #   Current version of the grant.
@@ -1210,15 +1267,14 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Delete an existing report generator.
+    # Deletes the specified report generator.
     #
     # This action deletes the report generator, which stops it from
-    # generating future reports and cannot be reversed. However, the
-    # previous reports from this generator will remain in your S3 bucket.
+    # generating future reports. The action cannot be reversed. It has no
+    # effect on the previous reports from this generator.
     #
     # @option params [required, String] :license_manager_report_generator_arn
-    #   Amazon Resource Number (ARN) of the report generator that will be
-    #   deleted.
+    #   Amazon Resource Name (ARN) of the report generator to be deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1503,11 +1559,54 @@ module Aws::LicenseManager
       req.send_request(options)
     end
 
-    # Gets information on the specified report generator.
+    # Gets information about the specified license type conversion task.
+    #
+    # @option params [required, String] :license_conversion_task_id
+    #   ID of the license type conversion task to retrieve information on.
+    #
+    # @return [Types::GetLicenseConversionTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLicenseConversionTaskResponse#license_conversion_task_id #license_conversion_task_id} => String
+    #   * {Types::GetLicenseConversionTaskResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetLicenseConversionTaskResponse#source_license_context #source_license_context} => Types::LicenseConversionContext
+    #   * {Types::GetLicenseConversionTaskResponse#destination_license_context #destination_license_context} => Types::LicenseConversionContext
+    #   * {Types::GetLicenseConversionTaskResponse#status_message #status_message} => String
+    #   * {Types::GetLicenseConversionTaskResponse#status #status} => String
+    #   * {Types::GetLicenseConversionTaskResponse#start_time #start_time} => Time
+    #   * {Types::GetLicenseConversionTaskResponse#license_conversion_time #license_conversion_time} => Time
+    #   * {Types::GetLicenseConversionTaskResponse#end_time #end_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_license_conversion_task({
+    #     license_conversion_task_id: "LicenseConversionTaskId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_conversion_task_id #=> String
+    #   resp.resource_arn #=> String
+    #   resp.source_license_context.usage_operation #=> String
+    #   resp.destination_license_context.usage_operation #=> String
+    #   resp.status_message #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.start_time #=> Time
+    #   resp.license_conversion_time #=> Time
+    #   resp.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetLicenseConversionTask AWS API Documentation
+    #
+    # @overload get_license_conversion_task(params = {})
+    # @param [Hash] params ({})
+    def get_license_conversion_task(params = {}, options = {})
+      req = build_request(:get_license_conversion_task, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the specified report generator.
     #
     # @option params [required, String] :license_manager_report_generator_arn
-    #   mazon Resource Number (ARN) of the report generator to retrieve
-    #   information on.
+    #   Amazon Resource Name (ARN) of the report generator.
     #
     # @return [Types::GetLicenseManagerReportGeneratorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1788,9 +1887,9 @@ module Aws::LicenseManager
     #   Filters to scope the results. The following filters and logical
     #   operators are supported:
     #
-    #   * `licenseCountingType` - The dimension on which licenses are counted.
-    #     Possible values are `vCPU` \| `Instance` \| `Core` \| `Socket`.
-    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #   * `licenseCountingType` - The dimension for which licenses are
+    #     counted. Possible values are `vCPU` \| `Instance` \| `Core` \|
+    #     `Socket`. Logical operators are `EQUALS` \| `NOT_EQUALS`.
     #
     #   * `enforceLicenseCount` - A Boolean value that indicates whether hard
     #     license enforcement is used. Logical operators are `EQUALS` \|
@@ -1857,6 +1956,59 @@ module Aws::LicenseManager
     # @param [Hash] params ({})
     def list_license_configurations(params = {}, options = {})
       req = build_request(:list_license_configurations, params)
+      req.send_request(options)
+    end
+
+    # Lists the license type conversion tasks for your account.
+    #
+    # @option params [String] :next_token
+    #   Token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single call.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters to scope the results. Valid filters are `ResourceArns` and
+    #   `Status`.
+    #
+    # @return [Types::ListLicenseConversionTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLicenseConversionTasksResponse#license_conversion_tasks #license_conversion_tasks} => Array&lt;Types::LicenseConversionTask&gt;
+    #   * {Types::ListLicenseConversionTasksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_license_conversion_tasks({
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "FilterName",
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.license_conversion_tasks #=> Array
+    #   resp.license_conversion_tasks[0].license_conversion_task_id #=> String
+    #   resp.license_conversion_tasks[0].resource_arn #=> String
+    #   resp.license_conversion_tasks[0].source_license_context.usage_operation #=> String
+    #   resp.license_conversion_tasks[0].destination_license_context.usage_operation #=> String
+    #   resp.license_conversion_tasks[0].status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.license_conversion_tasks[0].status_message #=> String
+    #   resp.license_conversion_tasks[0].start_time #=> Time
+    #   resp.license_conversion_tasks[0].license_conversion_time #=> Time
+    #   resp.license_conversion_tasks[0].end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListLicenseConversionTasks AWS API Documentation
+    #
+    # @overload list_license_conversion_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_license_conversion_tasks(params = {}, options = {})
+      req = build_request(:list_license_conversion_tasks, params)
       req.send_request(options)
     end
 
@@ -2285,8 +2437,8 @@ module Aws::LicenseManager
     #   Filters to scope the results. The following filters and logical
     #   operators are supported:
     #
-    #   * `account_id` - The ID of the AWS account that owns the resource.
-    #     Logical operators are `EQUALS` \| `NOT_EQUALS`.
+    #   * `account_id` - The ID of the Amazon Web Services account that owns
+    #     the resource. Logical operators are `EQUALS` \| `NOT_EQUALS`.
     #
     #   * `application_name` - The name of the application. Logical operators
     #     are `EQUALS` \| `BEGINS_WITH`.
@@ -2659,33 +2811,29 @@ module Aws::LicenseManager
 
     # Updates a report generator.
     #
-    # After you make changes to a report generator, it will start generating
-    # new reports within 60 minutes of being updated.
+    # After you make changes to a report generator, it starts generating new
+    # reports within 60 minutes of being updated.
     #
     # @option params [required, String] :license_manager_report_generator_arn
-    #   Amazon Resource Number (ARN) of the report generator to update.
+    #   Amazon Resource Name (ARN) of the report generator to update.
     #
     # @option params [required, String] :report_generator_name
     #   Name of the report generator.
     #
     # @option params [required, Array<String>] :type
-    #   Type of reports to generate. The following report types an be
-    #   generated:
+    #   Type of reports to generate. The following report types are supported:
     #
-    #   * License configuration report - Reports on the number and details of
+    #   * License configuration report - Reports the number and details of
     #     consumed licenses for a license configuration.
     #
-    #   * Resource report - Reports on the tracked licenses and resource
+    #   * Resource report - Reports the tracked licenses and resource
     #     consumption for a license configuration.
     #
     # @option params [required, Types::ReportContext] :report_context
-    #   ?
+    #   The report context.
     #
     # @option params [required, Types::ReportFrequency] :report_frequency
-    #   Frequency by which reports are generated. The following options are
-    #   avaiable:
-    #
-    #   ??? What are the APi value options?
+    #   Frequency by which reports are generated.
     #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -2723,15 +2871,15 @@ module Aws::LicenseManager
     end
 
     # Adds or removes the specified license configurations for the specified
-    # AWS resource.
+    # Amazon Web Services resource.
     #
     # You can update the license specifications of AMIs, instances, and
     # hosts. You cannot update the license specifications for launch
-    # templates and AWS CloudFormation templates, as they send license
+    # templates and CloudFormation templates, as they send license
     # configurations to the operation that creates the resource.
     #
     # @option params [required, String] :resource_arn
-    #   Amazon Resource Name (ARN) of the AWS resource.
+    #   Amazon Resource Name (ARN) of the Amazon Web Services resource.
     #
     # @option params [Array<Types::LicenseSpecification>] :add_license_specifications
     #   ARNs of the license configurations to add.
@@ -2779,8 +2927,7 @@ module Aws::LicenseManager
     #   Manager alerts.
     #
     # @option params [Types::OrganizationConfiguration] :organization_configuration
-    #   Enables integration with AWS Organizations for cross-account
-    #   discovery.
+    #   Enables integration with Organizations for cross-account discovery.
     #
     # @option params [Boolean] :enable_cross_accounts_discovery
     #   Activates cross-account discovery.
@@ -2820,7 +2967,7 @@ module Aws::LicenseManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -260,7 +260,7 @@ module Aws::SageMaker
     #       {
     #         training_image: "AlgorithmImage",
     #         algorithm_name: "ArnOrName",
-    #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #         metric_definitions: [
     #           {
     #             name: "MetricName", # required
@@ -293,27 +293,45 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
-    #   The input mode that the algorithm supports. For the input modes that
-    #   Amazon SageMaker algorithms support, see [Algorithms][1]. If an
-    #   algorithm supports the `File` input mode, Amazon SageMaker downloads
-    #   the training data from S3 to the provisioned ML storage Volume, and
-    #   mounts the directory to docker volume for training container. If an
-    #   algorithm supports the `Pipe` input mode, Amazon SageMaker streams
-    #   data directly from S3 to the container.
+    #   The training input mode that the algorithm supports. For more
+    #   information about input modes, see [Algorithms][1].
     #
-    #   In File mode, make sure you provision ML storage volume with
-    #   sufficient capacity to accommodate the data download from S3. In
-    #   addition to the training data, the ML storage volume also stores the
-    #   output model. The algorithm container use ML storage volume to also
-    #   store intermediate information, if any.
+    #   **Pipe mode**
     #
-    #   For distributed algorithms using File mode, training data is
-    #   distributed uniformly, and your training duration is predictable if
-    #   the input data objects size is approximately same. Amazon SageMaker
-    #   does not split the files any further for model training. If the
-    #   object sizes are skewed, training won't be optimal as the data
-    #   distribution is also skewed where one host in a training cluster is
-    #   overloaded, thus becoming bottleneck in training.
+    #   If an algorithm supports `Pipe` mode, Amazon SageMaker streams data
+    #   directly from Amazon S3 to the container.
+    #
+    #   **File mode**
+    #
+    #   If an algorithm supports `File` mode, SageMaker downloads the
+    #   training data from S3 to the provisioned ML storage volume, and
+    #   mounts the directory to the Docker volume for the training
+    #   container.
+    #
+    #   You must provision the ML storage volume with sufficient capacity to
+    #   accommodate the data downloaded from S3. In addition to the training
+    #   data, the ML storage volume also stores the output model. The
+    #   algorithm container uses the ML storage volume to also store
+    #   intermediate information, if any.
+    #
+    #   For distributed algorithms, training data is distributed uniformly.
+    #   Your training duration is predictable if the input data objects
+    #   sizes are approximately the same. SageMaker does not split the files
+    #   any further for model training. If the object sizes are skewed,
+    #   training won't be optimal as the data distribution is also skewed
+    #   when one host in a training cluster is overloaded, thus becoming a
+    #   bottleneck in training.
+    #
+    #   **FastFile mode**
+    #
+    #   If an algorithm supports `FastFile` mode, SageMaker streams data
+    #   directly from S3 to the container with no code changes, and provides
+    #   file system access to the data. Users can author their training
+    #   script to interact with these files as if they were stored on disk.
+    #
+    #   `FastFile` mode works best when the data is read sequentially.
+    #   Augmented manifest files aren't supported. The startup time is
+    #   lower when there are fewer files in the S3 bucket provided.
     #
     #
     #
@@ -451,7 +469,7 @@ module Aws::SageMaker
     #       {
     #         profile_name: "EntityName", # required
     #         training_job_definition: { # required
-    #           training_input_mode: "Pipe", # required, accepts Pipe, File
+    #           training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #           hyper_parameters: {
     #             "HyperParameterKey" => "HyperParameterValue",
     #           },
@@ -475,7 +493,7 @@ module Aws::SageMaker
     #               content_type: "ContentType",
     #               compression_type: "None", # accepts None, Gzip
     #               record_wrapper_type: "None", # accepts None, RecordIO
-    #               input_mode: "Pipe", # accepts Pipe, File
+    #               input_mode: "Pipe", # accepts Pipe, File, FastFile
     #               shuffle_config: {
     #                 seed: 1, # required
     #               },
@@ -565,7 +583,7 @@ module Aws::SageMaker
     #           {
     #             profile_name: "EntityName", # required
     #             training_job_definition: { # required
-    #               training_input_mode: "Pipe", # required, accepts Pipe, File
+    #               training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #               hyper_parameters: {
     #                 "HyperParameterKey" => "HyperParameterValue",
     #               },
@@ -589,7 +607,7 @@ module Aws::SageMaker
     #                   content_type: "ContentType",
     #                   compression_type: "None", # accepts None, Gzip
     #                   record_wrapper_type: "None", # accepts None, RecordIO
-    #                   input_mode: "Pipe", # accepts Pipe, File
+    #                   input_mode: "Pipe", # accepts Pipe, File, FastFile
     #                   shuffle_config: {
     #                     seed: 1, # required
     #                   },
@@ -1622,7 +1640,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AssociationSummary AWS API Documentation
@@ -2063,12 +2081,20 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] max_runtime_per_training_job_in_seconds
-    #   The maximum time, in seconds, a training job is allowed to run as
-    #   part of an AutoML job.
+    #   The maximum time, in seconds, that each training job is allowed to
+    #   run as part of a hyperparameter tuning job. For more information,
+    #   see the used by the action.
     #   @return [Integer]
     #
     # @!attribute [rw] max_auto_ml_job_runtime_in_seconds
     #   The maximum runtime, in seconds, an AutoML job has to complete.
+    #
+    #   If an AutoML job exceeds the maximum runtime, the job is stopped
+    #   automatically and its processing is ended gracefully. The AutoML job
+    #   identifies the best model whose training was completed and marks it
+    #   as the best-performing model. Any unfinished steps of the job, such
+    #   as automatic one-click Autopilot model deployment, will not be
+    #   completed.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobCompletionCriteria AWS API Documentation
@@ -2676,7 +2702,7 @@ module Aws::SageMaker
     #         content_type: "ContentType",
     #         compression_type: "None", # accepts None, Gzip
     #         record_wrapper_type: "None", # accepts None, RecordIO
-    #         input_mode: "Pipe", # accepts Pipe, File
+    #         input_mode: "Pipe", # accepts Pipe, File, FastFile
     #         shuffle_config: {
     #           seed: 1, # required
     #         },
@@ -2775,7 +2801,7 @@ module Aws::SageMaker
     #         is_required: false,
     #         supported_content_types: ["ContentType"], # required
     #         supported_compression_types: ["None"], # accepts None, Gzip
-    #         supported_input_modes: ["Pipe"], # required, accepts Pipe, File
+    #         supported_input_modes: ["Pipe"], # required, accepts Pipe, File, FastFile
     #       }
     #
     # @!attribute [rw] name
@@ -3549,7 +3575,7 @@ module Aws::SageMaker
     #               is_required: false,
     #               supported_content_types: ["ContentType"], # required
     #               supported_compression_types: ["None"], # accepts None, Gzip
-    #               supported_input_modes: ["Pipe"], # required, accepts Pipe, File
+    #               supported_input_modes: ["Pipe"], # required, accepts Pipe, File, FastFile
     #             },
     #           ],
     #           supported_tuning_job_objective_metrics: [
@@ -3583,7 +3609,7 @@ module Aws::SageMaker
     #             {
     #               profile_name: "EntityName", # required
     #               training_job_definition: { # required
-    #                 training_input_mode: "Pipe", # required, accepts Pipe, File
+    #                 training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #                 hyper_parameters: {
     #                   "HyperParameterKey" => "HyperParameterValue",
     #                 },
@@ -3607,7 +3633,7 @@ module Aws::SageMaker
     #                     content_type: "ContentType",
     #                     compression_type: "None", # accepts None, Gzip
     #                     record_wrapper_type: "None", # accepts None, RecordIO
-    #                     input_mode: "Pipe", # accepts Pipe, File
+    #                     input_mode: "Pipe", # accepts Pipe, File, FastFile
     #                     shuffle_config: {
     #                       seed: 1, # required
     #                     },
@@ -4738,9 +4764,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   SageMaker uses Amazon Web Services KMS to encrypt the EFS volume
-    #   attached to the domain with an Amazon Web Services managed customer
-    #   master key (CMK) by default. For more control, specify a customer
-    #   managed CMK.
+    #   attached to the domain with an Amazon Web Services managed key by
+    #   default. For more control, specify a customer managed key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
@@ -4829,8 +4854,8 @@ module Aws::SageMaker
     #   @return [Types::EdgeOutputConfig]
     #
     # @!attribute [rw] resource_key
-    #   The CMK to use when encrypting the EBS volume the edge packaging job
-    #   runs on.
+    #   The Amazon Web Services KMS key to use when encrypting the EBS
+    #   volume the edge packaging job runs on.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5256,12 +5281,19 @@ module Aws::SageMaker
     #     `OfflineStore`.
     #
     #   * A configuration for an Amazon Web Services Glue or Amazon Web
-    #     Services Hive data cataolgue.
+    #     Services Hive data catalog.
     #
     #   * An KMS encryption key to encrypt the Amazon S3 location used for
-    #     `OfflineStore`.
+    #     `OfflineStore`. If KMS encryption key is not specified, by default
+    #     we encrypt all data at rest using Amazon Web Services KMS key. By
+    #     defining your [bucket-level key][1] for SSE, you can reduce Amazon
+    #     Web Services KMS requests costs by up to 99 percent.
     #
     #   To learn more about this parameter, see OfflineStoreConfig.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
     #   @return [Types::OfflineStoreConfig]
     #
     # @!attribute [rw] role_arn
@@ -5545,7 +5577,7 @@ module Aws::SageMaker
     #           },
     #           algorithm_specification: { # required
     #             training_image: "AlgorithmImage",
-    #             training_input_mode: "Pipe", # required, accepts Pipe, File
+    #             training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #             algorithm_name: "ArnOrName",
     #             metric_definitions: [
     #               {
@@ -5575,7 +5607,7 @@ module Aws::SageMaker
     #               content_type: "ContentType",
     #               compression_type: "None", # accepts None, Gzip
     #               record_wrapper_type: "None", # accepts None, RecordIO
-    #               input_mode: "Pipe", # accepts Pipe, File
+    #               input_mode: "Pipe", # accepts Pipe, File, FastFile
     #               shuffle_config: {
     #                 seed: 1, # required
     #               },
@@ -5646,7 +5678,7 @@ module Aws::SageMaker
     #             },
     #             algorithm_specification: { # required
     #               training_image: "AlgorithmImage",
-    #               training_input_mode: "Pipe", # required, accepts Pipe, File
+    #               training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #               algorithm_name: "ArnOrName",
     #               metric_definitions: [
     #                 {
@@ -5676,7 +5708,7 @@ module Aws::SageMaker
     #                 content_type: "ContentType",
     #                 compression_type: "None", # accepts None, Gzip
     #                 record_wrapper_type: "None", # accepts None, RecordIO
-    #                 input_mode: "Pipe", # accepts Pipe, File
+    #                 input_mode: "Pipe", # accepts Pipe, File, FastFile
     #                 shuffle_config: {
     #                   seed: 1, # required
     #                 },
@@ -8049,7 +8081,7 @@ module Aws::SageMaker
     #         algorithm_specification: { # required
     #           training_image: "AlgorithmImage",
     #           algorithm_name: "ArnOrName",
-    #           training_input_mode: "Pipe", # required, accepts Pipe, File
+    #           training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #           metric_definitions: [
     #             {
     #               name: "MetricName", # required
@@ -8079,7 +8111,7 @@ module Aws::SageMaker
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
     #             record_wrapper_type: "None", # accepts None, RecordIO
-    #             input_mode: "Pipe", # accepts Pipe, File
+    #             input_mode: "Pipe", # accepts Pipe, File, FastFile
     #             shuffle_config: {
     #               seed: 1, # required
     #             },
@@ -9384,19 +9416,18 @@ module Aws::SageMaker
     #   specify `OutputFilter` as an additional filter to select a portion
     #   of the joined dataset and store it in the output file.
     #
-    #   For JSON or JSONLines objects, such as a JSON array, Amazon
-    #   SageMaker adds the transformed data to the input JSON object in an
-    #   attribute called `SageMakerOutput`. The joined result for JSON must
-    #   be a key-value pair object. If the input is not a key-value pair
-    #   object, Amazon SageMaker creates a new JSON file. In the new JSON
-    #   file, and the input data is stored under the `SageMakerInput` key
-    #   and the results are stored in `SageMakerOutput`.
+    #   For JSON or JSONLines objects, such as a JSON array, SageMaker adds
+    #   the transformed data to the input JSON object in an attribute called
+    #   `SageMakerOutput`. The joined result for JSON must be a key-value
+    #   pair object. If the input is not a key-value pair object, SageMaker
+    #   creates a new JSON file. In the new JSON file, and the input data is
+    #   stored under the `SageMakerInput` key and the results are stored in
+    #   `SageMakerOutput`.
     #
-    #   For CSV data, Amazon SageMaker takes each row as a JSON array and
-    #   joins the transformed data with the input by appending each
-    #   transformed row to the end of the input. The joined data has the
-    #   original input data followed by the transformed data and the output
-    #   is a CSV file.
+    #   For CSV data, SageMaker takes each row as a JSON array and joins the
+    #   transformed data with the input by appending each transformed row to
+    #   the end of the input. The joined data has the original input data
+    #   followed by the transformed data and the output is a CSV file.
     #
     #   For information on how joining in applied, see [Workflow for
     #   Associating Inferences with Input Records][1].
@@ -10937,7 +10968,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -10946,7 +10977,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -11174,6 +11205,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_user_activity_timestamp
     #   The timestamp of the last user's activity.
+    #   `LastUserActivityTimestamp` is also updated when SageMaker performs
+    #   health checks without user activity. As a result, this value is set
+    #   to the same value as `LastHealthCheckTimestamp`.
     #   @return [Time]
     #
     # @!attribute [rw] creation_time
@@ -11252,7 +11286,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -11261,7 +11295,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -11663,7 +11697,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -11672,7 +11706,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeContextResponse AWS API Documentation
@@ -12032,7 +12066,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Web Services KMS customer managed CMK used to encrypt the
+    #   The Amazon Web Services KMS customer managed key used to encrypt the
     #   EFS volume attached to the domain.
     #   @return [String]
     #
@@ -12110,7 +12144,8 @@ module Aws::SageMaker
     #   @return [Types::EdgeOutputConfig]
     #
     # @!attribute [rw] resource_key
-    #   The CMK to use when encrypting the EBS volume the job run on.
+    #   The Amazon Web Services KMS key to use when encrypting the EBS
+    #   volume the job run on.
     #   @return [String]
     #
     # @!attribute [rw] edge_packaging_job_status
@@ -13419,7 +13454,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -13521,7 +13556,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -13539,7 +13574,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] approval_description
@@ -14098,12 +14133,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecutionResponse AWS API Documentation
@@ -14185,12 +14220,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineResponse AWS API Documentation
@@ -14405,7 +14440,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] creation_time
@@ -14777,8 +14812,8 @@ module Aws::SageMaker
     #
     #   Multiply `BillableTimeInSeconds` by the number of instances
     #   (`InstanceCount`) in your training cluster to get the total compute
-    #   time Amazon SageMaker will bill you if you run distributed training.
-    #   The formula is as follows: `BillableTimeInSeconds * InstanceCount` .
+    #   time SageMaker will bill you if you run distributed training. The
+    #   formula is as follows: `BillableTimeInSeconds * InstanceCount` .
     #
     #   You can calculate the savings from using managed spot training using
     #   the formula `(1 - BillableTimeInSeconds / TrainingTimeInSeconds) *
@@ -15127,7 +15162,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Who created the component.
+    #   Who created the trial component.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -16072,7 +16107,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] s3_input_mode
     #   Whether the `Pipe` or `File` is used as the input mode for
-    #   transfering data for the monitoring job. `Pipe` mode is recommended
+    #   transferring data for the monitoring job. `Pipe` mode is recommended
     #   for large datasets. `File` mode is useful for small files that fit
     #   in memory. Defaults to `File`.
     #   @return [String]
@@ -16235,8 +16270,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   Who created the experiment.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -16245,7 +16279,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -17071,7 +17105,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
     #         suggestion_query: {
     #           property_name_query: {
     #             property_name_hint: "PropertyNameHint", # required
@@ -18384,7 +18418,7 @@ module Aws::SageMaker
     #
     #       {
     #         training_image: "AlgorithmImage",
-    #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #         algorithm_name: "ArnOrName",
     #         metric_definitions: [
     #           {
@@ -18410,21 +18444,45 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
-    #   The input mode that the algorithm supports: File or Pipe. In File
-    #   input mode, Amazon SageMaker downloads the training data from Amazon
-    #   S3 to the storage volume that is attached to the training instance
-    #   and mounts the directory to the Docker volume for the training
-    #   container. In Pipe input mode, Amazon SageMaker streams data
+    #   The training input mode that the algorithm supports. For more
+    #   information about input modes, see [Algorithms][1].
+    #
+    #   **Pipe mode**
+    #
+    #   If an algorithm supports `Pipe` mode, Amazon SageMaker streams data
     #   directly from Amazon S3 to the container.
     #
-    #   If you specify File mode, make sure that you provision the storage
-    #   volume that is attached to the training instance with enough
-    #   capacity to accommodate the training data downloaded from Amazon S3,
-    #   the model artifacts, and intermediate information.
+    #   **File mode**
     #
+    #   If an algorithm supports `File` mode, SageMaker downloads the
+    #   training data from S3 to the provisioned ML storage volume, and
+    #   mounts the directory to the Docker volume for the training
+    #   container.
     #
+    #   You must provision the ML storage volume with sufficient capacity to
+    #   accommodate the data downloaded from S3. In addition to the training
+    #   data, the ML storage volume also stores the output model. The
+    #   algorithm container uses the ML storage volume to also store
+    #   intermediate information, if any.
     #
-    #   For more information about input modes, see [Algorithms][1].
+    #   For distributed algorithms, training data is distributed uniformly.
+    #   Your training duration is predictable if the input data objects
+    #   sizes are approximately the same. SageMaker does not split the files
+    #   any further for model training. If the object sizes are skewed,
+    #   training won't be optimal as the data distribution is also skewed
+    #   when one host in a training cluster is overloaded, thus becoming a
+    #   bottleneck in training.
+    #
+    #   **FastFile mode**
+    #
+    #   If an algorithm supports `FastFile` mode, SageMaker streams data
+    #   directly from S3 to the container with no code changes, and provides
+    #   file system access to the data. Users can author their training
+    #   script to interact with these files as if they were stored on disk.
+    #
+    #   `FastFile` mode works best when the data is read sequentially.
+    #   Augmented manifest files aren't supported. The startup time is
+    #   lower when there are fewer files in the S3 bucket provided.
     #
     #
     #
@@ -18565,7 +18623,7 @@ module Aws::SageMaker
     #         },
     #         algorithm_specification: { # required
     #           training_image: "AlgorithmImage",
-    #           training_input_mode: "Pipe", # required, accepts Pipe, File
+    #           training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #           algorithm_name: "ArnOrName",
     #           metric_definitions: [
     #             {
@@ -18595,7 +18653,7 @@ module Aws::SageMaker
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
     #             record_wrapper_type: "None", # accepts None, RecordIO
-    #             input_mode: "Pipe", # accepts Pipe, File
+    #             input_mode: "Pipe", # accepts Pipe, File, FastFile
     #             shuffle_config: {
     #               seed: 1, # required
     #             },
@@ -19786,7 +19844,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] lifecycle_config_arns
     #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
-    #   attached to the KernelGatewayApp.
+    #   attached to the the user profile or domain.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelGatewayAppSettings AWS API Documentation
@@ -20239,10 +20297,10 @@ module Aws::SageMaker
     #   You can only specify a `VolumeKmsKeyId` when you create a labeling
     #   job with automated data labeling enabled using the API operation
     #   `CreateLabelingJob`. You cannot specify an Amazon Web Services KMS
-    #   customer managed CMK to encrypt the storage volume used for
-    #   automated data labeling model training and inference when you create
-    #   a labeling job using the console. To learn more, see [Output Data
-    #   and Storage Volume Encryption][1].
+    #   key to encrypt the storage volume used for automated data labeling
+    #   model training and inference when you create a labeling job using
+    #   the console. To learn more, see [Output Data and Storage Volume
+    #   Encryption][1].
     #
     #   The `VolumeKmsKeyId` can be any of the following formats:
     #
@@ -23252,8 +23310,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] name_contains
-    #   A string in the training job name. This filter returns only models
-    #   in the training job whose name contains the specified string.
+    #   A string in the model name. This filter returns only models whose
+    #   name contains the specified string.
     #   @return [String]
     #
     # @!attribute [rw] creation_time_before
@@ -25824,7 +25882,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -25842,7 +25900,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] approval_description
@@ -25981,7 +26039,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -28363,7 +28421,7 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you use a KMS key ID or an alias of your master key, the Amazon
+    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
     #   SageMaker execution role must include permissions to call
     #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
     #   uses the default KMS key for Amazon S3 for your role's account.
@@ -28654,12 +28712,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -28726,12 +28784,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] pipeline_parameters
@@ -29738,7 +29796,7 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you use a KMS key ID or an alias of your master key, the Amazon
+    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
     #   SageMaker execution role must include permissions to call
     #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
     #   uses the default KMS key for Amazon S3 for your role's account.
@@ -30018,6 +30076,84 @@ module Aws::SageMaker
       :rule_evaluation_status,
       :status_details,
       :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of a project as returned by the Search API.
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_id
+    #   The ID of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_description
+    #   The description of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_catalog_provisioning_details
+    #   Details that you specify to provision a service catalog product. For
+    #   information about service catalog, see [What is Amazon Web Services
+    #   Service Catalog][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
+    #   @return [Types::ServiceCatalogProvisioningDetails]
+    #
+    # @!attribute [rw] service_catalog_provisioned_product_details
+    #   Details of a provisioned service catalog product. For information
+    #   about service catalog, see [What is Amazon Web Services Service
+    #   Catalog][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
+    #   @return [Types::ServiceCatalogProvisionedProductDetails]
+    #
+    # @!attribute [rw] project_status
+    #   The status of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   Who created the project.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp specifying when the project was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Project AWS API Documentation
+    #
+    class Project < Struct.new(
+      :project_arn,
+      :project_name,
+      :project_id,
+      :project_description,
+      :service_catalog_provisioning_details,
+      :service_catalog_provisioned_product_details,
+      :project_status,
+      :created_by,
+      :creation_time,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30897,7 +31033,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_config_arn
-    #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
+    #   The Amazon Resource Name (ARN) of the Lifecycle Configuration
     #   attached to the Resource.
     #   @return [String]
     #
@@ -30933,6 +31069,48 @@ module Aws::SageMaker
     #
     class RetentionPolicy < Struct.new(
       :home_efs_file_system)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RetryPipelineExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_execution_arn: "PipelineExecutionArn", # required
+    #         client_request_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the pipeline execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the operation. An idempotent operation completes no
+    #   more than once.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RetryPipelineExecutionRequest AWS API Documentation
+    #
+    class RetryPipelineExecutionRequest < Struct.new(
+      :pipeline_execution_arn,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_execution_arn
+    #   The Amazon Resource Name (ARN) of the pipeline execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RetryPipelineExecutionResponse AWS API Documentation
+    #
+    class RetryPipelineExecutionResponse < Struct.new(
+      :pipeline_execution_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31338,6 +31516,10 @@ module Aws::SageMaker
     #   composed of features and values per features.
     #   @return [Types::FeatureGroup]
     #
+    # @!attribute [rw] project
+    #   The properties of a project.
+    #   @return [Types::Project]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
     #
     class SearchRecord < Struct.new(
@@ -31350,7 +31532,8 @@ module Aws::SageMaker
       :model_package_group,
       :pipeline,
       :pipeline_execution,
-      :feature_group)
+      :feature_group,
+      :project)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31359,7 +31542,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup
+    #         resource: "TrainingJob", # required, accepts TrainingJob, Experiment, ExperimentTrial, ExperimentTrialComponent, Endpoint, ModelPackage, ModelPackageGroup, Pipeline, PipelineExecution, FeatureGroup, Project
     #         search_expression: {
     #           filters: [
     #             {
@@ -31728,7 +31911,7 @@ module Aws::SageMaker
     end
 
     # Details that you specify to provision a service catalog product. For
-    # information about service catalog, see .[What is Amazon Web Services
+    # information about service catalog, see [What is Amazon Web Services
     # Service Catalog][1].
     #
     #
@@ -32036,7 +32219,7 @@ module Aws::SageMaker
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
-    #   more than one time.
+    #   more than once.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -32214,7 +32397,7 @@ module Aws::SageMaker
     # @!attribute [rw] client_request_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the operation. An idempotent operation completes no
-    #   more than one time.
+    #   more than once.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -32298,11 +32481,11 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies a limit to how long a model training job, model compilation
-    # job, or hyperparameter tuning job can run. It also specifies how long
-    # a managed Spot training job has to complete. When the job reaches the
-    # time limit, Amazon SageMaker ends the training or compilation job. Use
-    # this API to cap model training costs.
+    # Specifies a limit to how long a model training job or model
+    # compilation job can run. It also specifies how long a managed spot
+    # training job has to complete. When the job reaches the time limit,
+    # Amazon SageMaker ends the training or compilation job. Use this API to
+    # cap model training costs.
     #
     # To stop a training job, Amazon SageMaker sends the algorithm the
     # `SIGTERM` signal, which delays job termination for 120 seconds.
@@ -32464,12 +32647,12 @@ module Aws::SageMaker
     end
 
     # A tag object that consists of a key and an optional value, used to
-    # manage metadata for Amazon SageMaker Amazon Web Services resources.
+    # manage metadata for SageMaker Amazon Web Services resources.
     #
     # You can add tags to notebook instances, training jobs, hyperparameter
     # tuning jobs, batch transform jobs, models, labeling jobs, work teams,
     # endpoint configurations, and endpoints. For more information on adding
-    # tags to Amazon SageMaker resources, see AddTags.
+    # tags to SageMaker resources, see AddTags.
     #
     # For more information on adding metadata to your Amazon Web Services
     # resources with tagging, see [Tagging Amazon Web Services
@@ -32998,7 +33181,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #         hyper_parameters: {
     #           "HyperParameterKey" => "HyperParameterValue",
     #         },
@@ -33022,7 +33205,7 @@ module Aws::SageMaker
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
     #             record_wrapper_type: "None", # accepts None, RecordIO
-    #             input_mode: "Pipe", # accepts Pipe, File
+    #             input_mode: "Pipe", # accepts Pipe, File, FastFile
     #             shuffle_config: {
     #               seed: 1, # required
     #             },
@@ -33045,15 +33228,45 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] training_input_mode
-    #   The input mode used by the algorithm for the training job. For the
-    #   input modes that Amazon SageMaker algorithms support, see
-    #   [Algorithms][1].
+    #   The training input mode that the algorithm supports. For more
+    #   information about input modes, see [Algorithms][1].
     #
-    #   If an algorithm supports the `File` input mode, Amazon SageMaker
-    #   downloads the training data from S3 to the provisioned ML storage
-    #   Volume, and mounts the directory to docker volume for training
-    #   container. If an algorithm supports the `Pipe` input mode, Amazon
-    #   SageMaker streams data directly from S3 to the container.
+    #   **Pipe mode**
+    #
+    #   If an algorithm supports `Pipe` mode, Amazon SageMaker streams data
+    #   directly from Amazon S3 to the container.
+    #
+    #   **File mode**
+    #
+    #   If an algorithm supports `File` mode, SageMaker downloads the
+    #   training data from S3 to the provisioned ML storage volume, and
+    #   mounts the directory to the Docker volume for the training
+    #   container.
+    #
+    #   You must provision the ML storage volume with sufficient capacity to
+    #   accommodate the data downloaded from S3. In addition to the training
+    #   data, the ML storage volume also stores the output model. The
+    #   algorithm container uses the ML storage volume to also store
+    #   intermediate information, if any.
+    #
+    #   For distributed algorithms, training data is distributed uniformly.
+    #   Your training duration is predictable if the input data objects
+    #   sizes are approximately the same. SageMaker does not split the files
+    #   any further for model training. If the object sizes are skewed,
+    #   training won't be optimal as the data distribution is also skewed
+    #   when one host in a training cluster is overloaded, thus becoming a
+    #   bottleneck in training.
+    #
+    #   **FastFile mode**
+    #
+    #   If an algorithm supports `FastFile` mode, SageMaker streams data
+    #   directly from S3 to the container with no code changes, and provides
+    #   file system access to the data. Users can author their training
+    #   script to interact with these files as if they were stored on disk.
+    #
+    #   `FastFile` mode works best when the data is read sequentially.
+    #   Augmented manifest files aren't supported. The startup time is
+    #   lower when there are fewer files in the S3 bucket provided.
     #
     #
     #
@@ -33247,7 +33460,7 @@ module Aws::SageMaker
     #             is_required: false,
     #             supported_content_types: ["ContentType"], # required
     #             supported_compression_types: ["None"], # accepts None, Gzip
-    #             supported_input_modes: ["Pipe"], # required, accepts Pipe, File
+    #             supported_input_modes: ["Pipe"], # required, accepts Pipe, File, FastFile
     #           },
     #         ],
     #         supported_tuning_job_objective_metrics: [
@@ -34026,8 +34239,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   Who created the trial.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -34036,7 +34248,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -34110,8 +34322,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   Who created the trial component.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -34120,7 +34331,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parameters
@@ -34331,7 +34542,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, or trial component.
+    #   trial, trial component, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrialComponentSimpleSummary AWS API Documentation
@@ -34471,7 +34682,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   Who created the component.
+    #   Who created the trial component.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -36358,7 +36569,7 @@ module Aws::SageMaker
     end
 
     # Information about the user who created or modified an experiment,
-    # trial, or trial component.
+    # trial, trial component, or project.
     #
     # @!attribute [rw] user_profile_arn
     #   The Amazon Resource Name (ARN) of the user's profile.

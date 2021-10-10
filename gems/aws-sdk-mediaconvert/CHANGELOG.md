@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2021-10-08)
+------------------
+
+* Feature - AWS Elemental MediaConvert has added the ability to set account policies which control access restrictions for HTTP, HTTPS, and S3 content sources.
+
+1.75.0 (2021-09-23)
+------------------
+
+* Feature - This release adds style and positioning support for caption or subtitle burn-in from rich text sources such as TTML. This release also introduces configurable image-based trick play track generation.
+
 1.74.0 (2021-09-01)
 ------------------
 

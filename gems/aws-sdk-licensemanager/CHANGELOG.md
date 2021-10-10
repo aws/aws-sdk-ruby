@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-09-24)
+------------------
+
+* Feature - AWS License Manager now allows customers to get the LicenseArn in the Checkout API Response.
+
+1.33.0 (2021-09-22)
+------------------
+
+* Feature - AWS License Manager now allows customers to change their Windows Server or SQL license types from Bring-Your-Own-License (BYOL) to License Included or vice-versa (using the customer's media).
+
 1.32.0 (2021-09-01)
 ------------------
 

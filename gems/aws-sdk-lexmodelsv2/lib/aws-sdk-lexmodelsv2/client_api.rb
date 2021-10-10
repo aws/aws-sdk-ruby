@@ -13,6 +13,14 @@ module Aws::LexModelsV2
 
     include Seahorse::Model
 
+    AggregatedUtterancesFilter = Shapes::StructureShape.new(name: 'AggregatedUtterancesFilter')
+    AggregatedUtterancesFilterName = Shapes::StringShape.new(name: 'AggregatedUtterancesFilterName')
+    AggregatedUtterancesFilterOperator = Shapes::StringShape.new(name: 'AggregatedUtterancesFilterOperator')
+    AggregatedUtterancesFilters = Shapes::ListShape.new(name: 'AggregatedUtterancesFilters')
+    AggregatedUtterancesSortAttribute = Shapes::StringShape.new(name: 'AggregatedUtterancesSortAttribute')
+    AggregatedUtterancesSortBy = Shapes::StructureShape.new(name: 'AggregatedUtterancesSortBy')
+    AggregatedUtterancesSummary = Shapes::StructureShape.new(name: 'AggregatedUtterancesSummary')
+    AggregatedUtterancesSummaryList = Shapes::ListShape.new(name: 'AggregatedUtterancesSummaryList')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AttachmentTitle = Shapes::StringShape.new(name: 'AttachmentTitle')
     AttachmentUrl = Shapes::StringShape.new(name: 'AttachmentUrl')
@@ -136,6 +144,8 @@ module Aws::LexModelsV2
     DeleteResourcePolicyStatementResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyStatementResponse')
     DeleteSlotRequest = Shapes::StructureShape.new(name: 'DeleteSlotRequest')
     DeleteSlotTypeRequest = Shapes::StructureShape.new(name: 'DeleteSlotTypeRequest')
+    DeleteUtterancesRequest = Shapes::StructureShape.new(name: 'DeleteUtterancesRequest')
+    DeleteUtterancesResponse = Shapes::StructureShape.new(name: 'DeleteUtterancesResponse')
     DescribeBotAliasRequest = Shapes::StructureShape.new(name: 'DescribeBotAliasRequest')
     DescribeBotAliasResponse = Shapes::StructureShape.new(name: 'DescribeBotAliasResponse')
     DescribeBotLocaleRequest = Shapes::StructureShape.new(name: 'DescribeBotLocaleRequest')
@@ -176,6 +186,13 @@ module Aws::LexModelsV2
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     FulfillmentCodeHookSettings = Shapes::StructureShape.new(name: 'FulfillmentCodeHookSettings')
+    FulfillmentStartResponseDelay = Shapes::IntegerShape.new(name: 'FulfillmentStartResponseDelay')
+    FulfillmentStartResponseSpecification = Shapes::StructureShape.new(name: 'FulfillmentStartResponseSpecification')
+    FulfillmentTimeout = Shapes::IntegerShape.new(name: 'FulfillmentTimeout')
+    FulfillmentUpdateResponseFrequency = Shapes::IntegerShape.new(name: 'FulfillmentUpdateResponseFrequency')
+    FulfillmentUpdateResponseSpecification = Shapes::StructureShape.new(name: 'FulfillmentUpdateResponseSpecification')
+    FulfillmentUpdatesSpecification = Shapes::StructureShape.new(name: 'FulfillmentUpdatesSpecification')
+    HitCount = Shapes::IntegerShape.new(name: 'HitCount')
     Id = Shapes::StringShape.new(name: 'Id')
     ImageResponseCard = Shapes::StructureShape.new(name: 'ImageResponseCard')
     ImportExportFileFormat = Shapes::StringShape.new(name: 'ImportExportFileFormat')
@@ -210,6 +227,8 @@ module Aws::LexModelsV2
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LambdaARN = Shapes::StringShape.new(name: 'LambdaARN')
     LambdaCodeHook = Shapes::StructureShape.new(name: 'LambdaCodeHook')
+    ListAggregatedUtterancesRequest = Shapes::StructureShape.new(name: 'ListAggregatedUtterancesRequest')
+    ListAggregatedUtterancesResponse = Shapes::StructureShape.new(name: 'ListAggregatedUtterancesResponse')
     ListBotAliasesRequest = Shapes::StructureShape.new(name: 'ListBotAliasesRequest')
     ListBotAliasesResponse = Shapes::StructureShape.new(name: 'ListBotAliasesResponse')
     ListBotLocalesRequest = Shapes::StructureShape.new(name: 'ListBotLocalesRequest')
@@ -243,6 +262,7 @@ module Aws::LexModelsV2
     MessageGroup = Shapes::StructureShape.new(name: 'MessageGroup')
     MessageGroupsList = Shapes::ListShape.new(name: 'MessageGroupsList')
     MessageVariationsList = Shapes::ListShape.new(name: 'MessageVariationsList')
+    MissedCount = Shapes::IntegerShape.new(name: 'MissedCount')
     MultipleValuesSetting = Shapes::StructureShape.new(name: 'MultipleValuesSetting')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -256,6 +276,7 @@ module Aws::LexModelsV2
     PlainTextMessage = Shapes::StructureShape.new(name: 'PlainTextMessage')
     PlainTextMessageValue = Shapes::StringShape.new(name: 'PlainTextMessageValue')
     Policy = Shapes::StringShape.new(name: 'Policy')
+    PostFulfillmentStatusSpecification = Shapes::StructureShape.new(name: 'PostFulfillmentStatusSpecification')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     PresignedS3Url = Shapes::StringShape.new(name: 'PresignedS3Url')
     Principal = Shapes::StructureShape.new(name: 'Principal')
@@ -266,6 +287,7 @@ module Aws::LexModelsV2
     PromptSpecification = Shapes::StructureShape.new(name: 'PromptSpecification')
     QueryFilterString = Shapes::StringShape.new(name: 'QueryFilterString')
     RegexPattern = Shapes::StringShape.new(name: 'RegexPattern')
+    RelativeAggregationDuration = Shapes::StructureShape.new(name: 'RelativeAggregationDuration')
     ResourceCount = Shapes::IntegerShape.new(name: 'ResourceCount')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponseSpecification = Shapes::StructureShape.new(name: 'ResponseSpecification')
@@ -282,6 +304,7 @@ module Aws::LexModelsV2
     SentimentAnalysisSettings = Shapes::StructureShape.new(name: 'SentimentAnalysisSettings')
     ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SessionId = Shapes::StringShape.new(name: 'SessionId')
     SessionTTL = Shapes::IntegerShape.new(name: 'SessionTTL')
     SkipResourceInUseCheck = Shapes::BooleanShape.new(name: 'SkipResourceInUseCheck')
     SlotConstraint = Shapes::StringShape.new(name: 'SlotConstraint')
@@ -331,6 +354,8 @@ module Aws::LexModelsV2
     TextLogSetting = Shapes::StructureShape.new(name: 'TextLogSetting')
     TextLogSettingsList = Shapes::ListShape.new(name: 'TextLogSettingsList')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimeDimension = Shapes::StringShape.new(name: 'TimeDimension')
+    TimeValue = Shapes::IntegerShape.new(name: 'TimeValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -351,11 +376,33 @@ module Aws::LexModelsV2
     UpdateSlotTypeRequest = Shapes::StructureShape.new(name: 'UpdateSlotTypeRequest')
     UpdateSlotTypeResponse = Shapes::StructureShape.new(name: 'UpdateSlotTypeResponse')
     Utterance = Shapes::StringShape.new(name: 'Utterance')
+    UtteranceAggregationDuration = Shapes::StructureShape.new(name: 'UtteranceAggregationDuration')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
     VoiceId = Shapes::StringShape.new(name: 'VoiceId')
     VoiceSettings = Shapes::StructureShape.new(name: 'VoiceSettings')
     WaitAndContinueSpecification = Shapes::StructureShape.new(name: 'WaitAndContinueSpecification')
+
+    AggregatedUtterancesFilter.add_member(:name, Shapes::ShapeRef.new(shape: AggregatedUtterancesFilterName, required: true, location_name: "name"))
+    AggregatedUtterancesFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, required: true, location_name: "values"))
+    AggregatedUtterancesFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AggregatedUtterancesFilterOperator, required: true, location_name: "operator"))
+    AggregatedUtterancesFilter.struct_class = Types::AggregatedUtterancesFilter
+
+    AggregatedUtterancesFilters.member = Shapes::ShapeRef.new(shape: AggregatedUtterancesFilter)
+
+    AggregatedUtterancesSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: AggregatedUtterancesSortAttribute, required: true, location_name: "attribute"))
+    AggregatedUtterancesSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
+    AggregatedUtterancesSortBy.struct_class = Types::AggregatedUtterancesSortBy
+
+    AggregatedUtterancesSummary.add_member(:utterance, Shapes::ShapeRef.new(shape: Utterance, location_name: "utterance"))
+    AggregatedUtterancesSummary.add_member(:hit_count, Shapes::ShapeRef.new(shape: HitCount, location_name: "hitCount"))
+    AggregatedUtterancesSummary.add_member(:missed_count, Shapes::ShapeRef.new(shape: MissedCount, location_name: "missedCount"))
+    AggregatedUtterancesSummary.add_member(:utterance_first_recorded_in_aggregation_duration, Shapes::ShapeRef.new(shape: Timestamp, location_name: "utteranceFirstRecordedInAggregationDuration"))
+    AggregatedUtterancesSummary.add_member(:utterance_last_recorded_in_aggregation_duration, Shapes::ShapeRef.new(shape: Timestamp, location_name: "utteranceLastRecordedInAggregationDuration"))
+    AggregatedUtterancesSummary.add_member(:contains_data_from_deleted_resources, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "containsDataFromDeletedResources"))
+    AggregatedUtterancesSummary.struct_class = Types::AggregatedUtterancesSummary
+
+    AggregatedUtterancesSummaryList.member = Shapes::ShapeRef.new(shape: AggregatedUtterancesSummary)
 
     AudioLogDestination.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketLogDestination, required: true, location_name: "s3Bucket"))
     AudioLogDestination.struct_class = Types::AudioLogDestination
@@ -833,6 +880,13 @@ module Aws::LexModelsV2
     DeleteSlotTypeRequest.add_member(:skip_resource_in_use_check, Shapes::ShapeRef.new(shape: SkipResourceInUseCheck, location: "querystring", location_name: "skipResourceInUseCheck"))
     DeleteSlotTypeRequest.struct_class = Types::DeleteSlotTypeRequest
 
+    DeleteUtterancesRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    DeleteUtterancesRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location: "querystring", location_name: "localeId"))
+    DeleteUtterancesRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location: "querystring", location_name: "sessionId"))
+    DeleteUtterancesRequest.struct_class = Types::DeleteUtterancesRequest
+
+    DeleteUtterancesResponse.struct_class = Types::DeleteUtterancesResponse
+
     DescribeBotAliasRequest.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, required: true, location: "uri", location_name: "botAliasId"))
     DescribeBotAliasRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     DescribeBotAliasRequest.struct_class = Types::DescribeBotAliasRequest
@@ -1038,7 +1092,25 @@ module Aws::LexModelsV2
     FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
 
     FulfillmentCodeHookSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    FulfillmentCodeHookSettings.add_member(:post_fulfillment_status_specification, Shapes::ShapeRef.new(shape: PostFulfillmentStatusSpecification, location_name: "postFulfillmentStatusSpecification"))
+    FulfillmentCodeHookSettings.add_member(:fulfillment_updates_specification, Shapes::ShapeRef.new(shape: FulfillmentUpdatesSpecification, location_name: "fulfillmentUpdatesSpecification"))
     FulfillmentCodeHookSettings.struct_class = Types::FulfillmentCodeHookSettings
+
+    FulfillmentStartResponseSpecification.add_member(:delay_in_seconds, Shapes::ShapeRef.new(shape: FulfillmentStartResponseDelay, required: true, location_name: "delayInSeconds"))
+    FulfillmentStartResponseSpecification.add_member(:message_groups, Shapes::ShapeRef.new(shape: MessageGroupsList, required: true, location_name: "messageGroups"))
+    FulfillmentStartResponseSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
+    FulfillmentStartResponseSpecification.struct_class = Types::FulfillmentStartResponseSpecification
+
+    FulfillmentUpdateResponseSpecification.add_member(:frequency_in_seconds, Shapes::ShapeRef.new(shape: FulfillmentUpdateResponseFrequency, required: true, location_name: "frequencyInSeconds"))
+    FulfillmentUpdateResponseSpecification.add_member(:message_groups, Shapes::ShapeRef.new(shape: MessageGroupsList, required: true, location_name: "messageGroups"))
+    FulfillmentUpdateResponseSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
+    FulfillmentUpdateResponseSpecification.struct_class = Types::FulfillmentUpdateResponseSpecification
+
+    FulfillmentUpdatesSpecification.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "active"))
+    FulfillmentUpdatesSpecification.add_member(:start_response, Shapes::ShapeRef.new(shape: FulfillmentStartResponseSpecification, location_name: "startResponse"))
+    FulfillmentUpdatesSpecification.add_member(:update_response, Shapes::ShapeRef.new(shape: FulfillmentUpdateResponseSpecification, location_name: "updateResponse"))
+    FulfillmentUpdatesSpecification.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: FulfillmentTimeout, location_name: "timeoutInSeconds"))
+    FulfillmentUpdatesSpecification.struct_class = Types::FulfillmentUpdatesSpecification
 
     ImageResponseCard.add_member(:title, Shapes::ShapeRef.new(shape: AttachmentTitle, required: true, location_name: "title"))
     ImageResponseCard.add_member(:subtitle, Shapes::ShapeRef.new(shape: AttachmentTitle, location_name: "subtitle"))
@@ -1119,6 +1191,29 @@ module Aws::LexModelsV2
     LambdaCodeHook.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: LambdaARN, required: true, location_name: "lambdaARN"))
     LambdaCodeHook.add_member(:code_hook_interface_version, Shapes::ShapeRef.new(shape: CodeHookInterfaceVersion, required: true, location_name: "codeHookInterfaceVersion"))
     LambdaCodeHook.struct_class = Types::LambdaCodeHook
+
+    ListAggregatedUtterancesRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListAggregatedUtterancesRequest.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, location_name: "botAliasId"))
+    ListAggregatedUtterancesRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    ListAggregatedUtterancesRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location_name: "localeId"))
+    ListAggregatedUtterancesRequest.add_member(:aggregation_duration, Shapes::ShapeRef.new(shape: UtteranceAggregationDuration, required: true, location_name: "aggregationDuration"))
+    ListAggregatedUtterancesRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: AggregatedUtterancesSortBy, location_name: "sortBy"))
+    ListAggregatedUtterancesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AggregatedUtterancesFilters, location_name: "filters"))
+    ListAggregatedUtterancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListAggregatedUtterancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAggregatedUtterancesRequest.struct_class = Types::ListAggregatedUtterancesRequest
+
+    ListAggregatedUtterancesResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListAggregatedUtterancesResponse.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, location_name: "botAliasId"))
+    ListAggregatedUtterancesResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    ListAggregatedUtterancesResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    ListAggregatedUtterancesResponse.add_member(:aggregation_duration, Shapes::ShapeRef.new(shape: UtteranceAggregationDuration, location_name: "aggregationDuration"))
+    ListAggregatedUtterancesResponse.add_member(:aggregation_window_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "aggregationWindowStartTime"))
+    ListAggregatedUtterancesResponse.add_member(:aggregation_window_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "aggregationWindowEndTime"))
+    ListAggregatedUtterancesResponse.add_member(:aggregation_last_refreshed_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "aggregationLastRefreshedDateTime"))
+    ListAggregatedUtterancesResponse.add_member(:aggregated_utterances_summaries, Shapes::ShapeRef.new(shape: AggregatedUtterancesSummaryList, location_name: "aggregatedUtterancesSummaries"))
+    ListAggregatedUtterancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListAggregatedUtterancesResponse.struct_class = Types::ListAggregatedUtterancesResponse
 
     ListBotAliasesRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     ListBotAliasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -1303,6 +1398,11 @@ module Aws::LexModelsV2
     PlainTextMessage.add_member(:value, Shapes::ShapeRef.new(shape: PlainTextMessageValue, required: true, location_name: "value"))
     PlainTextMessage.struct_class = Types::PlainTextMessage
 
+    PostFulfillmentStatusSpecification.add_member(:success_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "successResponse"))
+    PostFulfillmentStatusSpecification.add_member(:failure_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "failureResponse"))
+    PostFulfillmentStatusSpecification.add_member(:timeout_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "timeoutResponse"))
+    PostFulfillmentStatusSpecification.struct_class = Types::PostFulfillmentStatusSpecification
+
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     PreconditionFailedException.struct_class = Types::PreconditionFailedException
 
@@ -1316,6 +1416,10 @@ module Aws::LexModelsV2
     PromptSpecification.add_member(:max_retries, Shapes::ShapeRef.new(shape: PromptMaxRetries, required: true, location_name: "maxRetries"))
     PromptSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
     PromptSpecification.struct_class = Types::PromptSpecification
+
+    RelativeAggregationDuration.add_member(:time_dimension, Shapes::ShapeRef.new(shape: TimeDimension, required: true, location_name: "timeDimension"))
+    RelativeAggregationDuration.add_member(:time_value, Shapes::ShapeRef.new(shape: TimeValue, required: true, location_name: "timeValue"))
+    RelativeAggregationDuration.struct_class = Types::RelativeAggregationDuration
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -1646,6 +1750,9 @@ module Aws::LexModelsV2
     UpdateSlotTypeResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     UpdateSlotTypeResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     UpdateSlotTypeResponse.struct_class = Types::UpdateSlotTypeResponse
+
+    UtteranceAggregationDuration.add_member(:relative_aggregation_duration, Shapes::ShapeRef.new(shape: RelativeAggregationDuration, required: true, location_name: "relativeAggregationDuration"))
+    UtteranceAggregationDuration.struct_class = Types::UtteranceAggregationDuration
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
@@ -1994,6 +2101,17 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_utterances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteUtterances"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/bots/{botId}/utterances/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteUtterancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteUtterancesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_bot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeBot"
         o.http_method = "GET"
@@ -2118,6 +2236,24 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_aggregated_utterances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAggregatedUtterances"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/aggregatedutterances/"
+        o.input = Shapes::ShapeRef.new(shape: ListAggregatedUtterancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAggregatedUtterancesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_bot_aliases, Seahorse::Model::Operation.new.tap do |o|

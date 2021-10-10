@@ -79,6 +79,7 @@ module Aws::Backup
     DeleteBackupSelectionInput = Shapes::StructureShape.new(name: 'DeleteBackupSelectionInput')
     DeleteBackupVaultAccessPolicyInput = Shapes::StructureShape.new(name: 'DeleteBackupVaultAccessPolicyInput')
     DeleteBackupVaultInput = Shapes::StructureShape.new(name: 'DeleteBackupVaultInput')
+    DeleteBackupVaultLockConfigurationInput = Shapes::StructureShape.new(name: 'DeleteBackupVaultLockConfigurationInput')
     DeleteBackupVaultNotificationsInput = Shapes::StructureShape.new(name: 'DeleteBackupVaultNotificationsInput')
     DeleteFrameworkInput = Shapes::StructureShape.new(name: 'DeleteFrameworkInput')
     DeleteRecoveryPointInput = Shapes::StructureShape.new(name: 'DeleteRecoveryPointInput')
@@ -185,6 +186,7 @@ module Aws::Backup
     ProtectedResource = Shapes::StructureShape.new(name: 'ProtectedResource')
     ProtectedResourcesList = Shapes::ListShape.new(name: 'ProtectedResourcesList')
     PutBackupVaultAccessPolicyInput = Shapes::StructureShape.new(name: 'PutBackupVaultAccessPolicyInput')
+    PutBackupVaultLockConfigurationInput = Shapes::StructureShape.new(name: 'PutBackupVaultLockConfigurationInput')
     PutBackupVaultNotificationsInput = Shapes::StructureShape.new(name: 'PutBackupVaultNotificationsInput')
     RecoveryPointByBackupVault = Shapes::StructureShape.new(name: 'RecoveryPointByBackupVault')
     RecoveryPointByBackupVaultList = Shapes::ListShape.new(name: 'RecoveryPointByBackupVaultList')
@@ -373,6 +375,10 @@ module Aws::Backup
     BackupVaultListMember.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "EncryptionKeyArn"))
     BackupVaultListMember.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
     BackupVaultListMember.add_member(:number_of_recovery_points, Shapes::ShapeRef.new(shape: long, location_name: "NumberOfRecoveryPoints"))
+    BackupVaultListMember.add_member(:locked, Shapes::ShapeRef.new(shape: Boolean, location_name: "Locked"))
+    BackupVaultListMember.add_member(:min_retention_days, Shapes::ShapeRef.new(shape: Long, location_name: "MinRetentionDays"))
+    BackupVaultListMember.add_member(:max_retention_days, Shapes::ShapeRef.new(shape: Long, location_name: "MaxRetentionDays"))
+    BackupVaultListMember.add_member(:lock_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LockDate"))
     BackupVaultListMember.struct_class = Types::BackupVaultListMember
 
     CalculatedLifecycle.add_member(:move_to_cold_storage_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "MoveToColdStorageAt"))
@@ -482,6 +488,7 @@ module Aws::Backup
 
     CreateReportPlanOutput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, location_name: "ReportPlanName"))
     CreateReportPlanOutput.add_member(:report_plan_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ReportPlanArn"))
+    CreateReportPlanOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
     CreateReportPlanOutput.struct_class = Types::CreateReportPlanOutput
 
     DeleteBackupPlanInput.add_member(:backup_plan_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupPlanId"))
@@ -502,6 +509,9 @@ module Aws::Backup
 
     DeleteBackupVaultInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "backupVaultName"))
     DeleteBackupVaultInput.struct_class = Types::DeleteBackupVaultInput
+
+    DeleteBackupVaultLockConfigurationInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
+    DeleteBackupVaultLockConfigurationInput.struct_class = Types::DeleteBackupVaultLockConfigurationInput
 
     DeleteBackupVaultNotificationsInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     DeleteBackupVaultNotificationsInput.struct_class = Types::DeleteBackupVaultNotificationsInput
@@ -556,6 +566,10 @@ module Aws::Backup
     DescribeBackupVaultOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     DescribeBackupVaultOutput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
     DescribeBackupVaultOutput.add_member(:number_of_recovery_points, Shapes::ShapeRef.new(shape: long, location_name: "NumberOfRecoveryPoints"))
+    DescribeBackupVaultOutput.add_member(:locked, Shapes::ShapeRef.new(shape: Boolean, location_name: "Locked"))
+    DescribeBackupVaultOutput.add_member(:min_retention_days, Shapes::ShapeRef.new(shape: Long, location_name: "MinRetentionDays"))
+    DescribeBackupVaultOutput.add_member(:max_retention_days, Shapes::ShapeRef.new(shape: Long, location_name: "MaxRetentionDays"))
+    DescribeBackupVaultOutput.add_member(:lock_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "LockDate"))
     DescribeBackupVaultOutput.struct_class = Types::DescribeBackupVaultOutput
 
     DescribeCopyJobInput.add_member(:copy_job_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "copyJobId"))
@@ -953,6 +967,12 @@ module Aws::Backup
     PutBackupVaultAccessPolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: IAMPolicy, location_name: "Policy"))
     PutBackupVaultAccessPolicyInput.struct_class = Types::PutBackupVaultAccessPolicyInput
 
+    PutBackupVaultLockConfigurationInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
+    PutBackupVaultLockConfigurationInput.add_member(:min_retention_days, Shapes::ShapeRef.new(shape: Long, location_name: "MinRetentionDays"))
+    PutBackupVaultLockConfigurationInput.add_member(:max_retention_days, Shapes::ShapeRef.new(shape: Long, location_name: "MaxRetentionDays"))
+    PutBackupVaultLockConfigurationInput.add_member(:changeable_for_days, Shapes::ShapeRef.new(shape: Long, location_name: "ChangeableForDays"))
+    PutBackupVaultLockConfigurationInput.struct_class = Types::PutBackupVaultLockConfigurationInput
+
     PutBackupVaultNotificationsInput.add_member(:backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location: "uri", location_name: "backupVaultName"))
     PutBackupVaultNotificationsInput.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "SNSTopicArn"))
     PutBackupVaultNotificationsInput.add_member(:backup_vault_events, Shapes::ShapeRef.new(shape: BackupVaultEvents, required: true, location_name: "BackupVaultEvents"))
@@ -1032,6 +1052,8 @@ module Aws::Backup
     ReportPlanList.member = Shapes::ShapeRef.new(shape: ReportPlan)
 
     ReportSetting.add_member(:report_template, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ReportTemplate"))
+    ReportSetting.add_member(:framework_arns, Shapes::ShapeRef.new(shape: stringList, location_name: "FrameworkArns"))
+    ReportSetting.add_member(:number_of_frameworks, Shapes::ShapeRef.new(shape: integer, location_name: "NumberOfFrameworks"))
     ReportSetting.struct_class = Types::ReportSetting
 
     ResourceArns.member = Shapes::ShapeRef.new(shape: ARN)
@@ -1318,6 +1340,19 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:delete_backup_vault_lock_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBackupVaultLockConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/backup-vaults/{backupVaultName}/vault-lock"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBackupVaultLockConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -1891,6 +1926,19 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:put_backup_vault_lock_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutBackupVaultLockConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/backup-vaults/{backupVaultName}/vault-lock"
+        o.input = Shapes::ShapeRef.new(shape: PutBackupVaultLockConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:put_backup_vault_notifications, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBackupVaultNotifications"
         o.http_method = "PUT"
@@ -2011,6 +2059,7 @@ module Aws::Backup
         o.http_request_uri = "/audit/frameworks/{frameworkName}"
         o.input = Shapes::ShapeRef.new(shape: UpdateFrameworkInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateFrameworkOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)

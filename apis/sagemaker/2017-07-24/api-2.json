@@ -2173,6 +2173,20 @@
         {"shape":"ResourceNotFound"}
       ]
     },
+    "RetryPipelineExecution":{
+      "name":"RetryPipelineExecution",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RetryPipelineExecutionRequest"},
+      "output":{"shape":"RetryPipelineExecutionResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"},
+        {"shape":"ResourceLimitExceeded"},
+        {"shape":"ConflictException"}
+      ]
+    },
     "Search":{
       "name":"Search",
       "http":{
@@ -12668,6 +12682,21 @@
         "Disabled"
       ]
     },
+    "Project":{
+      "type":"structure",
+      "members":{
+        "ProjectArn":{"shape":"ProjectArn"},
+        "ProjectName":{"shape":"ProjectEntityName"},
+        "ProjectId":{"shape":"ProjectId"},
+        "ProjectDescription":{"shape":"EntityDescription"},
+        "ServiceCatalogProvisioningDetails":{"shape":"ServiceCatalogProvisioningDetails"},
+        "ServiceCatalogProvisionedProductDetails":{"shape":"ServiceCatalogProvisionedProductDetails"},
+        "ProjectStatus":{"shape":"ProjectStatus"},
+        "CreatedBy":{"shape":"UserContext"},
+        "CreationTime":{"shape":"Timestamp"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "ProjectArn":{
       "type":"string",
       "max":2048,
@@ -13056,7 +13085,8 @@
         "ModelPackageGroup",
         "Pipeline",
         "PipelineExecution",
-        "FeatureGroup"
+        "FeatureGroup",
+        "Project"
       ]
     },
     "ResponseMIMEType":{
@@ -13080,6 +13110,26 @@
         "Retain",
         "Delete"
       ]
+    },
+    "RetryPipelineExecutionRequest":{
+      "type":"structure",
+      "required":[
+        "PipelineExecutionArn",
+        "ClientRequestToken"
+      ],
+      "members":{
+        "PipelineExecutionArn":{"shape":"PipelineExecutionArn"},
+        "ClientRequestToken":{
+          "shape":"IdempotencyToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "RetryPipelineExecutionResponse":{
+      "type":"structure",
+      "members":{
+        "PipelineExecutionArn":{"shape":"PipelineExecutionArn"}
+      }
     },
     "RetryStrategy":{
       "type":"structure",
@@ -13227,7 +13277,8 @@
         "ModelPackageGroup":{"shape":"ModelPackageGroup"},
         "Pipeline":{"shape":"Pipeline"},
         "PipelineExecution":{"shape":"PipelineExecution"},
-        "FeatureGroup":{"shape":"FeatureGroup"}
+        "FeatureGroup":{"shape":"FeatureGroup"},
+        "Project":{"shape":"Project"}
       }
     },
     "SearchRequest":{
@@ -14041,7 +14092,8 @@
       "type":"string",
       "enum":[
         "Pipe",
-        "File"
+        "File",
+        "FastFile"
       ]
     },
     "TrainingInstanceCount":{

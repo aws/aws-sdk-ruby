@@ -1180,6 +1180,13 @@ module Aws::MediaPackageVod
     #   The ID of the PackagingConfiguration being applied to the Asset.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The current processing status of the asset used for the packaging
+    #   configuration. The status can be either QUEUED, PROCESSING,
+    #   PLAYABLE, or FAILED. Status information won't be available for most
+    #   assets ingested before 2021-09-30.
+    #   @return [String]
+    #
     # @!attribute [rw] url
     #   The URL of the parent manifest for the repackaged Asset.
     #   @return [String]
@@ -1188,6 +1195,7 @@ module Aws::MediaPackageVod
     #
     class EgressEndpoint < Struct.new(
       :packaging_configuration_id,
+      :status,
       :url)
       SENSITIVE = []
       include Aws::Structure

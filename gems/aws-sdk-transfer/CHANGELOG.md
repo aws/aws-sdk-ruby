@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-09-28)
+------------------
+
+* Feature - Added changes for managed workflows feature APIs.
+
 1.39.0 (2021-09-02)
 ------------------
 

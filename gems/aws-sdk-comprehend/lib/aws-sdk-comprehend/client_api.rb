@@ -16,6 +16,7 @@ module Aws::Comprehend
     AnyLengthString = Shapes::StringShape.new(name: 'AnyLengthString')
     AttributeNamesList = Shapes::ListShape.new(name: 'AttributeNamesList')
     AttributeNamesListItem = Shapes::StringShape.new(name: 'AttributeNamesListItem')
+    AugmentedManifestsDocumentTypeFormat = Shapes::StringShape.new(name: 'AugmentedManifestsDocumentTypeFormat')
     AugmentedManifestsListItem = Shapes::StructureShape.new(name: 'AugmentedManifestsListItem')
     BatchDetectDominantLanguageItemResult = Shapes::StructureShape.new(name: 'BatchDetectDominantLanguageItemResult')
     BatchDetectDominantLanguageRequest = Shapes::StructureShape.new(name: 'BatchDetectDominantLanguageRequest')
@@ -110,7 +111,13 @@ module Aws::Comprehend
     DocumentClassifierOutputDataConfig = Shapes::StructureShape.new(name: 'DocumentClassifierOutputDataConfig')
     DocumentClassifierProperties = Shapes::StructureShape.new(name: 'DocumentClassifierProperties')
     DocumentClassifierPropertiesList = Shapes::ListShape.new(name: 'DocumentClassifierPropertiesList')
+    DocumentClassifierSummariesList = Shapes::ListShape.new(name: 'DocumentClassifierSummariesList')
+    DocumentClassifierSummary = Shapes::StructureShape.new(name: 'DocumentClassifierSummary')
     DocumentLabel = Shapes::StructureShape.new(name: 'DocumentLabel')
+    DocumentReadAction = Shapes::StringShape.new(name: 'DocumentReadAction')
+    DocumentReadFeatureTypes = Shapes::StringShape.new(name: 'DocumentReadFeatureTypes')
+    DocumentReadMode = Shapes::StringShape.new(name: 'DocumentReadMode')
+    DocumentReaderConfig = Shapes::StructureShape.new(name: 'DocumentReaderConfig')
     DominantLanguage = Shapes::StructureShape.new(name: 'DominantLanguage')
     DominantLanguageDetectionJobFilter = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobFilter')
     DominantLanguageDetectionJobProperties = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobProperties')
@@ -140,6 +147,8 @@ module Aws::Comprehend
     EntityRecognizerMetadataEntityTypesListItem = Shapes::StructureShape.new(name: 'EntityRecognizerMetadataEntityTypesListItem')
     EntityRecognizerProperties = Shapes::StructureShape.new(name: 'EntityRecognizerProperties')
     EntityRecognizerPropertiesList = Shapes::ListShape.new(name: 'EntityRecognizerPropertiesList')
+    EntityRecognizerSummariesList = Shapes::ListShape.new(name: 'EntityRecognizerSummariesList')
+    EntityRecognizerSummary = Shapes::StructureShape.new(name: 'EntityRecognizerSummary')
     EntityType = Shapes::StringShape.new(name: 'EntityType')
     EntityTypeName = Shapes::StringShape.new(name: 'EntityTypeName')
     EntityTypesEvaluationMetrics = Shapes::StructureShape.new(name: 'EntityTypesEvaluationMetrics')
@@ -172,6 +181,8 @@ module Aws::Comprehend
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     ListDocumentClassificationJobsRequest = Shapes::StructureShape.new(name: 'ListDocumentClassificationJobsRequest')
     ListDocumentClassificationJobsResponse = Shapes::StructureShape.new(name: 'ListDocumentClassificationJobsResponse')
+    ListDocumentClassifierSummariesRequest = Shapes::StructureShape.new(name: 'ListDocumentClassifierSummariesRequest')
+    ListDocumentClassifierSummariesResponse = Shapes::StructureShape.new(name: 'ListDocumentClassifierSummariesResponse')
     ListDocumentClassifiersRequest = Shapes::StructureShape.new(name: 'ListDocumentClassifiersRequest')
     ListDocumentClassifiersResponse = Shapes::StructureShape.new(name: 'ListDocumentClassifiersResponse')
     ListDominantLanguageDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListDominantLanguageDetectionJobsRequest')
@@ -180,6 +191,8 @@ module Aws::Comprehend
     ListEndpointsResponse = Shapes::StructureShape.new(name: 'ListEndpointsResponse')
     ListEntitiesDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListEntitiesDetectionJobsRequest')
     ListEntitiesDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListEntitiesDetectionJobsResponse')
+    ListEntityRecognizerSummariesRequest = Shapes::StructureShape.new(name: 'ListEntityRecognizerSummariesRequest')
+    ListEntityRecognizerSummariesResponse = Shapes::StructureShape.new(name: 'ListEntityRecognizerSummariesResponse')
     ListEntityRecognizersRequest = Shapes::StructureShape.new(name: 'ListEntityRecognizersRequest')
     ListEntityRecognizersResponse = Shapes::StructureShape.new(name: 'ListEntityRecognizersResponse')
     ListEventsDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListEventsDetectionJobsRequest')
@@ -192,6 +205,7 @@ module Aws::Comprehend
     ListOfDetectKeyPhrasesResult = Shapes::ListShape.new(name: 'ListOfDetectKeyPhrasesResult')
     ListOfDetectSentimentResult = Shapes::ListShape.new(name: 'ListOfDetectSentimentResult')
     ListOfDetectSyntaxResult = Shapes::ListShape.new(name: 'ListOfDetectSyntaxResult')
+    ListOfDocumentReadFeatureTypes = Shapes::ListShape.new(name: 'ListOfDocumentReadFeatureTypes')
     ListOfDominantLanguages = Shapes::ListShape.new(name: 'ListOfDominantLanguages')
     ListOfEntities = Shapes::ListShape.new(name: 'ListOfEntities')
     ListOfEntityLabels = Shapes::ListShape.new(name: 'ListOfEntityLabels')
@@ -236,6 +250,7 @@ module Aws::Comprehend
     SentimentDetectionJobPropertiesList = Shapes::ListShape.new(name: 'SentimentDetectionJobPropertiesList')
     SentimentScore = Shapes::StructureShape.new(name: 'SentimentScore')
     SentimentType = Shapes::StringShape.new(name: 'SentimentType')
+    Split = Shapes::StringShape.new(name: 'Split')
     StartDocumentClassificationJobRequest = Shapes::StructureShape.new(name: 'StartDocumentClassificationJobRequest')
     StartDocumentClassificationJobResponse = Shapes::StructureShape.new(name: 'StartDocumentClassificationJobResponse')
     StartDominantLanguageDetectionJobRequest = Shapes::StructureShape.new(name: 'StartDominantLanguageDetectionJobRequest')
@@ -294,12 +309,17 @@ module Aws::Comprehend
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateEndpointRequest = Shapes::StructureShape.new(name: 'UpdateEndpointRequest')
     UpdateEndpointResponse = Shapes::StructureShape.new(name: 'UpdateEndpointResponse')
+    VersionName = Shapes::StringShape.new(name: 'VersionName')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
 
     AttributeNamesList.member = Shapes::ShapeRef.new(shape: AttributeNamesListItem)
 
     AugmentedManifestsListItem.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    AugmentedManifestsListItem.add_member(:split, Shapes::ShapeRef.new(shape: Split, location_name: "Split"))
     AugmentedManifestsListItem.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNamesList, required: true, location_name: "AttributeNames"))
+    AugmentedManifestsListItem.add_member(:annotation_data_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "AnnotationDataS3Uri"))
+    AugmentedManifestsListItem.add_member(:source_documents_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "SourceDocumentsS3Uri"))
+    AugmentedManifestsListItem.add_member(:document_type, Shapes::ShapeRef.new(shape: AugmentedManifestsDocumentTypeFormat, location_name: "DocumentType"))
     AugmentedManifestsListItem.struct_class = Types::AugmentedManifestsListItem
 
     BatchDetectDominantLanguageItemResult.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
@@ -407,6 +427,7 @@ module Aws::Comprehend
     ContainsPiiEntitiesResponse.struct_class = Types::ContainsPiiEntitiesResponse
 
     CreateDocumentClassifierRequest.add_member(:document_classifier_name, Shapes::ShapeRef.new(shape: ComprehendArnName, required: true, location_name: "DocumentClassifierName"))
+    CreateDocumentClassifierRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
     CreateDocumentClassifierRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
     CreateDocumentClassifierRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDocumentClassifierRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: DocumentClassifierInputDataConfig, required: true, location_name: "InputDataConfig"))
@@ -434,6 +455,7 @@ module Aws::Comprehend
     CreateEndpointResponse.struct_class = Types::CreateEndpointResponse
 
     CreateEntityRecognizerRequest.add_member(:recognizer_name, Shapes::ShapeRef.new(shape: ComprehendArnName, required: true, location_name: "RecognizerName"))
+    CreateEntityRecognizerRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
     CreateEntityRecognizerRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
     CreateEntityRecognizerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateEntityRecognizerRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: EntityRecognizerInputDataConfig, required: true, location_name: "InputDataConfig"))
@@ -603,12 +625,14 @@ module Aws::Comprehend
     DocumentClassifierAugmentedManifestsList.member = Shapes::ShapeRef.new(shape: AugmentedManifestsListItem)
 
     DocumentClassifierFilter.add_member(:status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
+    DocumentClassifierFilter.add_member(:document_classifier_name, Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "DocumentClassifierName"))
     DocumentClassifierFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
     DocumentClassifierFilter.add_member(:submit_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
     DocumentClassifierFilter.struct_class = Types::DocumentClassifierFilter
 
     DocumentClassifierInputDataConfig.add_member(:data_format, Shapes::ShapeRef.new(shape: DocumentClassifierDataFormat, location_name: "DataFormat"))
     DocumentClassifierInputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
+    DocumentClassifierInputDataConfig.add_member(:test_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "TestS3Uri"))
     DocumentClassifierInputDataConfig.add_member(:label_delimiter, Shapes::ShapeRef.new(shape: LabelDelimiter, location_name: "LabelDelimiter"))
     DocumentClassifierInputDataConfig.add_member(:augmented_manifests, Shapes::ShapeRef.new(shape: DocumentClassifierAugmentedManifestsList, location_name: "AugmentedManifests"))
     DocumentClassifierInputDataConfig.struct_class = Types::DocumentClassifierInputDataConfig
@@ -633,13 +657,28 @@ module Aws::Comprehend
     DocumentClassifierProperties.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     DocumentClassifierProperties.add_member(:mode, Shapes::ShapeRef.new(shape: DocumentClassifierMode, location_name: "Mode"))
     DocumentClassifierProperties.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
+    DocumentClassifierProperties.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
     DocumentClassifierProperties.struct_class = Types::DocumentClassifierProperties
 
     DocumentClassifierPropertiesList.member = Shapes::ShapeRef.new(shape: DocumentClassifierProperties)
 
+    DocumentClassifierSummariesList.member = Shapes::ShapeRef.new(shape: DocumentClassifierSummary)
+
+    DocumentClassifierSummary.add_member(:document_classifier_name, Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "DocumentClassifierName"))
+    DocumentClassifierSummary.add_member(:number_of_versions, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfVersions"))
+    DocumentClassifierSummary.add_member(:latest_version_created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestVersionCreatedAt"))
+    DocumentClassifierSummary.add_member(:latest_version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "LatestVersionName"))
+    DocumentClassifierSummary.add_member(:latest_version_status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "LatestVersionStatus"))
+    DocumentClassifierSummary.struct_class = Types::DocumentClassifierSummary
+
     DocumentLabel.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     DocumentLabel.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
     DocumentLabel.struct_class = Types::DocumentLabel
+
+    DocumentReaderConfig.add_member(:document_read_action, Shapes::ShapeRef.new(shape: DocumentReadAction, required: true, location_name: "DocumentReadAction"))
+    DocumentReaderConfig.add_member(:document_read_mode, Shapes::ShapeRef.new(shape: DocumentReadMode, location_name: "DocumentReadMode"))
+    DocumentReaderConfig.add_member(:feature_types, Shapes::ShapeRef.new(shape: ListOfDocumentReadFeatureTypes, location_name: "FeatureTypes"))
+    DocumentReaderConfig.struct_class = Types::DocumentReaderConfig
 
     DominantLanguage.add_member(:language_code, Shapes::ShapeRef.new(shape: String, location_name: "LanguageCode"))
     DominantLanguage.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
@@ -677,11 +716,13 @@ module Aws::Comprehend
     EndpointProperties.add_member(:status, Shapes::ShapeRef.new(shape: EndpointStatus, location_name: "Status"))
     EndpointProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
     EndpointProperties.add_member(:model_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ModelArn"))
+    EndpointProperties.add_member(:desired_model_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "DesiredModelArn"))
     EndpointProperties.add_member(:desired_inference_units, Shapes::ShapeRef.new(shape: InferenceUnitsInteger, location_name: "DesiredInferenceUnits"))
     EndpointProperties.add_member(:current_inference_units, Shapes::ShapeRef.new(shape: InferenceUnitsInteger, location_name: "CurrentInferenceUnits"))
     EndpointProperties.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     EndpointProperties.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     EndpointProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
+    EndpointProperties.add_member(:desired_data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DesiredDataAccessRoleArn"))
     EndpointProperties.struct_class = Types::EndpointProperties
 
     EndpointPropertiesList.member = Shapes::ShapeRef.new(shape: EndpointProperties)
@@ -722,11 +763,14 @@ module Aws::Comprehend
     EntityLabel.struct_class = Types::EntityLabel
 
     EntityRecognizerAnnotations.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    EntityRecognizerAnnotations.add_member(:test_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "TestS3Uri"))
     EntityRecognizerAnnotations.struct_class = Types::EntityRecognizerAnnotations
 
     EntityRecognizerAugmentedManifestsList.member = Shapes::ShapeRef.new(shape: AugmentedManifestsListItem)
 
     EntityRecognizerDocuments.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    EntityRecognizerDocuments.add_member(:test_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "TestS3Uri"))
+    EntityRecognizerDocuments.add_member(:input_format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "InputFormat"))
     EntityRecognizerDocuments.struct_class = Types::EntityRecognizerDocuments
 
     EntityRecognizerEntityList.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
@@ -738,6 +782,7 @@ module Aws::Comprehend
     EntityRecognizerEvaluationMetrics.struct_class = Types::EntityRecognizerEvaluationMetrics
 
     EntityRecognizerFilter.add_member(:status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "Status"))
+    EntityRecognizerFilter.add_member(:recognizer_name, Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "RecognizerName"))
     EntityRecognizerFilter.add_member(:submit_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeBefore"))
     EntityRecognizerFilter.add_member(:submit_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmitTimeAfter"))
     EntityRecognizerFilter.struct_class = Types::EntityRecognizerFilter
@@ -777,9 +822,19 @@ module Aws::Comprehend
     EntityRecognizerProperties.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     EntityRecognizerProperties.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     EntityRecognizerProperties.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
+    EntityRecognizerProperties.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
     EntityRecognizerProperties.struct_class = Types::EntityRecognizerProperties
 
     EntityRecognizerPropertiesList.member = Shapes::ShapeRef.new(shape: EntityRecognizerProperties)
+
+    EntityRecognizerSummariesList.member = Shapes::ShapeRef.new(shape: EntityRecognizerSummary)
+
+    EntityRecognizerSummary.add_member(:recognizer_name, Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "RecognizerName"))
+    EntityRecognizerSummary.add_member(:number_of_versions, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfVersions"))
+    EntityRecognizerSummary.add_member(:latest_version_created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestVersionCreatedAt"))
+    EntityRecognizerSummary.add_member(:latest_version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "LatestVersionName"))
+    EntityRecognizerSummary.add_member(:latest_version_status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "LatestVersionStatus"))
+    EntityRecognizerSummary.struct_class = Types::EntityRecognizerSummary
 
     EntityTypesEvaluationMetrics.add_member(:precision, Shapes::ShapeRef.new(shape: Double, location_name: "Precision"))
     EntityTypesEvaluationMetrics.add_member(:recall, Shapes::ShapeRef.new(shape: Double, location_name: "Recall"))
@@ -815,6 +870,7 @@ module Aws::Comprehend
 
     InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     InputDataConfig.add_member(:input_format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "InputFormat"))
+    InputDataConfig.add_member(:document_reader_config, Shapes::ShapeRef.new(shape: DocumentReaderConfig, location_name: "DocumentReaderConfig"))
     InputDataConfig.struct_class = Types::InputDataConfig
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -870,6 +926,14 @@ module Aws::Comprehend
     ListDocumentClassificationJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListDocumentClassificationJobsResponse.struct_class = Types::ListDocumentClassificationJobsResponse
 
+    ListDocumentClassifierSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDocumentClassifierSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListDocumentClassifierSummariesRequest.struct_class = Types::ListDocumentClassifierSummariesRequest
+
+    ListDocumentClassifierSummariesResponse.add_member(:document_classifier_summaries_list, Shapes::ShapeRef.new(shape: DocumentClassifierSummariesList, location_name: "DocumentClassifierSummariesList"))
+    ListDocumentClassifierSummariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDocumentClassifierSummariesResponse.struct_class = Types::ListDocumentClassifierSummariesResponse
+
     ListDocumentClassifiersRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DocumentClassifierFilter, location_name: "Filter"))
     ListDocumentClassifiersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListDocumentClassifiersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
@@ -905,6 +969,14 @@ module Aws::Comprehend
     ListEntitiesDetectionJobsResponse.add_member(:entities_detection_job_properties_list, Shapes::ShapeRef.new(shape: EntitiesDetectionJobPropertiesList, location_name: "EntitiesDetectionJobPropertiesList"))
     ListEntitiesDetectionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListEntitiesDetectionJobsResponse.struct_class = Types::ListEntitiesDetectionJobsResponse
+
+    ListEntityRecognizerSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEntityRecognizerSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListEntityRecognizerSummariesRequest.struct_class = Types::ListEntityRecognizerSummariesRequest
+
+    ListEntityRecognizerSummariesResponse.add_member(:entity_recognizer_summaries_list, Shapes::ShapeRef.new(shape: EntityRecognizerSummariesList, location_name: "EntityRecognizerSummariesList"))
+    ListEntityRecognizerSummariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEntityRecognizerSummariesResponse.struct_class = Types::ListEntityRecognizerSummariesResponse
 
     ListEntityRecognizersRequest.add_member(:filter, Shapes::ShapeRef.new(shape: EntityRecognizerFilter, location_name: "Filter"))
     ListEntityRecognizersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -944,6 +1016,8 @@ module Aws::Comprehend
     ListOfDetectSentimentResult.member = Shapes::ShapeRef.new(shape: BatchDetectSentimentItemResult)
 
     ListOfDetectSyntaxResult.member = Shapes::ShapeRef.new(shape: BatchDetectSyntaxItemResult)
+
+    ListOfDocumentReadFeatureTypes.member = Shapes::ShapeRef.new(shape: DocumentReadFeatureTypes)
 
     ListOfDominantLanguages.member = Shapes::ShapeRef.new(shape: DominantLanguage)
 
@@ -1333,7 +1407,9 @@ module Aws::Comprehend
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateEndpointRequest.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: ComprehendEndpointArn, required: true, location_name: "EndpointArn"))
-    UpdateEndpointRequest.add_member(:desired_inference_units, Shapes::ShapeRef.new(shape: InferenceUnitsInteger, required: true, location_name: "DesiredInferenceUnits"))
+    UpdateEndpointRequest.add_member(:desired_model_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "DesiredModelArn"))
+    UpdateEndpointRequest.add_member(:desired_inference_units, Shapes::ShapeRef.new(shape: InferenceUnitsInteger, location_name: "DesiredInferenceUnits"))
+    UpdateEndpointRequest.add_member(:desired_data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DesiredDataAccessRoleArn"))
     UpdateEndpointRequest.struct_class = Types::UpdateEndpointRequest
 
     UpdateEndpointResponse.struct_class = Types::UpdateEndpointResponse
@@ -1760,6 +1836,23 @@ module Aws::Comprehend
         )
       end)
 
+      api.add_operation(:list_document_classifier_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDocumentClassifierSummaries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDocumentClassifierSummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDocumentClassifierSummariesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_document_classifiers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDocumentClassifiers"
         o.http_method = "POST"
@@ -1816,6 +1909,23 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_entity_recognizer_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEntityRecognizerSummaries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEntityRecognizerSummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEntityRecognizerSummariesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

@@ -383,6 +383,47 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The configuration for the artifacts.
+    #
+    # @note When making an API call, you may pass ArtifactsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         audio: { # required
+    #           mux_type: "AudioOnly", # required, accepts AudioOnly, AudioWithActiveSpeakerVideo
+    #         },
+    #         video: { # required
+    #           state: "Enabled", # required, accepts Enabled, Disabled
+    #           mux_type: "VideoOnly", # accepts VideoOnly
+    #         },
+    #         content: { # required
+    #           state: "Enabled", # required, accepts Enabled, Disabled
+    #           mux_type: "ContentOnly", # accepts ContentOnly
+    #         },
+    #       }
+    #
+    # @!attribute [rw] audio
+    #   The configuration for the audio artifacts.
+    #   @return [Types::AudioArtifactsConfiguration]
+    #
+    # @!attribute [rw] video
+    #   The configuration for the video artifacts.
+    #   @return [Types::VideoArtifactsConfiguration]
+    #
+    # @!attribute [rw] content
+    #   The configuration for the content artifacts.
+    #   @return [Types::ContentArtifactsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ArtifactsConfiguration AWS API Documentation
+    #
+    class ArtifactsConfiguration < Struct.new(
+      :audio,
+      :video,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociatePhoneNumberWithUserRequest
     #   data as a hash:
     #
@@ -577,6 +618,27 @@ module Aws::Chime
       :attendee_id,
       :join_token)
       SENSITIVE = [:external_user_id, :join_token]
+      include Aws::Structure
+    end
+
+    # The audio artifact configuration object.
+    #
+    # @note When making an API call, you may pass AudioArtifactsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         mux_type: "AudioOnly", # required, accepts AudioOnly, AudioWithActiveSpeakerVideo
+    #       }
+    #
+    # @!attribute [rw] mux_type
+    #   The MUX type of the audio artifact configuration object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AudioArtifactsConfiguration AWS API Documentation
+    #
+    class AudioArtifactsConfiguration < Struct.new(
+      :mux_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1498,6 +1560,52 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The configuration object of the Amazon Chime SDK meeting for a
+    # specified media capture pipeline. `SourceType` must be
+    # `ChimeSdkMeeting`.
+    #
+    # @note When making an API call, you may pass ChimeSdkMeetingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         source_configuration: {
+    #           selected_video_streams: {
+    #             attendee_ids: ["GuidString"],
+    #             external_user_ids: ["ExternalUserIdType"],
+    #           },
+    #         },
+    #         artifacts_configuration: {
+    #           audio: { # required
+    #             mux_type: "AudioOnly", # required, accepts AudioOnly, AudioWithActiveSpeakerVideo
+    #           },
+    #           video: { # required
+    #             state: "Enabled", # required, accepts Enabled, Disabled
+    #             mux_type: "VideoOnly", # accepts VideoOnly
+    #           },
+    #           content: { # required
+    #             state: "Enabled", # required, accepts Enabled, Disabled
+    #             mux_type: "ContentOnly", # accepts ContentOnly
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] source_configuration
+    #   The source configuration for a specified media capture pipline.
+    #   @return [Types::SourceConfiguration]
+    #
+    # @!attribute [rw] artifacts_configuration
+    #   The configuration for the artifacts in an Amazon Chime SDK meeting.
+    #   @return [Types::ArtifactsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ChimeSdkMeetingConfiguration AWS API Documentation
+    #
+    class ChimeSdkMeetingConfiguration < Struct.new(
+      :source_configuration,
+      :artifacts_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request could not be processed because of conflict in the current
     # state of the resource.
     #
@@ -1512,6 +1620,33 @@ module Aws::Chime
     class ConflictException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The content artifact object.
+    #
+    # @note When making an API call, you may pass ContentArtifactsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         state: "Enabled", # required, accepts Enabled, Disabled
+    #         mux_type: "ContentOnly", # accepts ContentOnly
+    #       }
+    #
+    # @!attribute [rw] state
+    #   Indicates whether the content artifact is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] mux_type
+    #   The MUX type of the artifact configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ContentArtifactsConfiguration AWS API Documentation
+    #
+    class ContentArtifactsConfiguration < Struct.new(
+      :state,
+      :mux_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2140,6 +2275,27 @@ module Aws::Chime
     #         sink_type: "S3Bucket", # required, accepts S3Bucket
     #         sink_arn: "Arn", # required
     #         client_request_token: "ClientRequestToken",
+    #         chime_sdk_meeting_configuration: {
+    #           source_configuration: {
+    #             selected_video_streams: {
+    #               attendee_ids: ["GuidString"],
+    #               external_user_ids: ["ExternalUserIdType"],
+    #             },
+    #           },
+    #           artifacts_configuration: {
+    #             audio: { # required
+    #               mux_type: "AudioOnly", # required, accepts AudioOnly, AudioWithActiveSpeakerVideo
+    #             },
+    #             video: { # required
+    #               state: "Enabled", # required, accepts Enabled, Disabled
+    #               mux_type: "VideoOnly", # accepts VideoOnly
+    #             },
+    #             content: { # required
+    #               state: "Enabled", # required, accepts Enabled, Disabled
+    #               mux_type: "ContentOnly", # accepts ContentOnly
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] source_type
@@ -2167,6 +2323,11 @@ module Aws::Chime
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] chime_sdk_meeting_configuration
+    #   The configuration for a specified media capture pipeline.
+    #   `SourceType` must be `ChimeSdkMeeting`.
+    #   @return [Types::ChimeSdkMeetingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMediaCapturePipelineRequest AWS API Documentation
     #
     class CreateMediaCapturePipelineRequest < Struct.new(
@@ -2174,7 +2335,8 @@ module Aws::Chime
       :source_arn,
       :sink_type,
       :sink_arn,
-      :client_request_token)
+      :client_request_token,
+      :chime_sdk_meeting_configuration)
       SENSITIVE = [:source_arn, :sink_arn, :client_request_token]
       include Aws::Structure
     end
@@ -2655,6 +2817,9 @@ module Aws::Chime
     #         from_phone_number: "E164PhoneNumber", # required
     #         to_phone_number: "E164PhoneNumber", # required
     #         sip_media_application_id: "NonEmptyString", # required
+    #         sip_headers: {
+    #           "SensitiveString" => "SensitiveString",
+    #         },
     #       }
     #
     # @!attribute [rw] from_phone_number
@@ -2670,12 +2835,17 @@ module Aws::Chime
     #   The ID of the SIP media application.
     #   @return [String]
     #
+    # @!attribute [rw] sip_headers
+    #   The SIP headers added to an outbound call leg.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateSipMediaApplicationCallRequest AWS API Documentation
     #
     class CreateSipMediaApplicationCallRequest < Struct.new(
       :from_phone_number,
       :to_phone_number,
-      :sip_media_application_id)
+      :sip_media_application_id,
+      :sip_headers)
       SENSITIVE = [:from_phone_number, :to_phone_number]
       include Aws::Structure
     end
@@ -7006,8 +7176,8 @@ module Aws::Chime
     #
     class LogoutUserResponse < Aws::EmptyStructure; end
 
-    # A media capture pipeline object. A string consisting of an ID, source
-    # type, a source ARN, a sink type, and a sink ARN.
+    # A media capture pipeline object consisting of an ID, source type,
+    # source ARN, a sink type, a sink ARN, and a configuration object.
     #
     # @!attribute [rw] media_pipeline_id
     #   The ID of a media capture pipeline.
@@ -7045,6 +7215,11 @@ module Aws::Chime
     #   format.
     #   @return [Time]
     #
+    # @!attribute [rw] chime_sdk_meeting_configuration
+    #   The configuration for a specified media capture pipeline.
+    #   `SourceType` must be `ChimeSdkMeeting`.
+    #   @return [Types::ChimeSdkMeetingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MediaCapturePipeline AWS API Documentation
     #
     class MediaCapturePipeline < Struct.new(
@@ -7055,7 +7230,8 @@ module Aws::Chime
       :sink_type,
       :sink_arn,
       :created_timestamp,
-      :updated_timestamp)
+      :updated_timestamp,
+      :chime_sdk_meeting_configuration)
       SENSITIVE = [:source_arn, :sink_arn]
       include Aws::Structure
     end
@@ -7092,7 +7268,7 @@ module Aws::Chime
     #   @return [String]
     #
     # @!attribute [rw] event_ingestion_url
-    #   The URL of the S3 bucket used to store the captured media.
+    #   The event ingestion URL.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MediaPlacement AWS API Documentation
@@ -7313,6 +7489,11 @@ module Aws::Chime
     # Origination settings enable your SIP hosts to receive inbound calls
     # using your Amazon Chime Voice Connector.
     #
+    # <note markdown="1"> The parameters listed below are not required, but you must use at
+    # least one.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass Origination
     #   data as a hash:
     #
@@ -7331,12 +7512,14 @@ module Aws::Chime
     #
     # @!attribute [rw] routes
     #   The call distribution properties defined for your SIP hosts. Valid
-    #   range: Minimum value of 1. Maximum value of 20.
+    #   range: Minimum value of 1. Maximum value of 20. This parameter is
+    #   not required, but you must specify this parameter or `Disabled`.
     #   @return [Array<Types::OriginationRoute>]
     #
     # @!attribute [rw] disabled
     #   When origination settings are disabled, inbound calls are not
-    #   enabled for your Amazon Chime Voice Connector.
+    #   enabled for your Amazon Chime Voice Connector. This parameter is not
+    #   required, but you must specify this parameter or `Routes`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Origination AWS API Documentation
@@ -7352,6 +7535,11 @@ module Aws::Chime
     # hosts to receive inbound calls using your Amazon Chime Voice
     # Connector. Limit: Ten origination routes for each Amazon Chime Voice
     # Connector.
+    #
+    # <note markdown="1"> The parameters listed below are not required, but you must use at
+    # least one.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass OriginationRoute
     #   data as a hash:
@@ -8745,6 +8933,36 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The video streams to capture for a specified media capture pipeline.
+    # The total number of video streams can't exceed 25.
+    #
+    # @note When making an API call, you may pass SelectedVideoStreams
+    #   data as a hash:
+    #
+    #       {
+    #         attendee_ids: ["GuidString"],
+    #         external_user_ids: ["ExternalUserIdType"],
+    #       }
+    #
+    # @!attribute [rw] attendee_ids
+    #   The attendee IDs of the streams selected for a media capture
+    #   pipeline.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] external_user_ids
+    #   The external user IDs of the streams selected for a media capture
+    #   pipeline.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SelectedVideoStreams AWS API Documentation
+    #
+    class SelectedVideoStreams < Struct.new(
+      :attendee_ids,
+      :external_user_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SendChannelMessageRequest
     #   data as a hash:
     #
@@ -9066,6 +9284,31 @@ module Aws::Chime
       :sip_media_application_id,
       :priority,
       :aws_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Source configuration for a specified media capture pipeline.
+    #
+    # @note When making an API call, you may pass SourceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         selected_video_streams: {
+    #           attendee_ids: ["GuidString"],
+    #           external_user_ids: ["ExternalUserIdType"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] selected_video_streams
+    #   The selected video streams to capture for a specified media capture
+    #   pipeline. The number of video streams can't exceed 25.
+    #   @return [Types::SelectedVideoStreams]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SourceConfiguration AWS API Documentation
+    #
+    class SourceConfiguration < Struct.new(
+      :selected_video_streams)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9474,8 +9717,8 @@ module Aws::Chime
     #   @return [Types::EngineTranscribeSettings]
     #
     # @!attribute [rw] engine_transcribe_medical_settings
-    #   The transcription configuration settings passed to Amazon
-    #   Transcribe.
+    #   The transcription configuration settings passed to Amazon Transcribe
+    #   Medical.
     #   @return [Types::EngineTranscribeMedicalSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/TranscriptionConfiguration AWS API Documentation
@@ -9964,10 +10207,10 @@ module Aws::Chime
     #   data as a hash:
     #
     #       {
-    #         business_calling: { # required
+    #         business_calling: {
     #           cdr_bucket: "String",
     #         },
-    #         voice_connector: { # required
+    #         voice_connector: {
     #           cdr_bucket: "String",
     #         },
     #       }
@@ -10728,6 +10971,33 @@ module Aws::Chime
     #
     class UserSettings < Struct.new(
       :telephony)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The video artifact configuration object.
+    #
+    # @note When making an API call, you may pass VideoArtifactsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         state: "Enabled", # required, accepts Enabled, Disabled
+    #         mux_type: "VideoOnly", # accepts VideoOnly
+    #       }
+    #
+    # @!attribute [rw] state
+    #   Indicates whether the video artifact is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] mux_type
+    #   The MUX type of the video artifact configuration object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/VideoArtifactsConfiguration AWS API Documentation
+    #
+    class VideoArtifactsConfiguration < Struct.new(
+      :state,
+      :mux_type)
       SENSITIVE = []
       include Aws::Structure
     end

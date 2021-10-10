@@ -964,6 +964,7 @@ module Aws::FSx
     #         },
     #         storage_type: "SSD", # accepts SSD, HDD
     #         kms_key_id: "KmsKeyId",
+    #         file_system_type_version: "FileSystemTypeVersion",
     #       }
     #
     # @!attribute [rw] backup_id
@@ -1052,6 +1053,17 @@ module Aws::FSx
     #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #   @return [String]
     #
+    # @!attribute [rw] file_system_type_version
+    #   Sets the version for the Amazon FSx for Lustre file system you're
+    #   creating from a backup. Valid values are `2.10` and `2.12`.
+    #
+    #   You don't need to specify `FileSystemTypeVersion` because it will
+    #   be applied using the backup's `FileSystemTypeVersion` setting. If
+    #   you choose to specify `FileSystemTypeVersion` when creating from
+    #   backup, the value must match the backup's `FileSystemTypeVersion`
+    #   setting.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackupRequest AWS API Documentation
     #
     class CreateFileSystemFromBackupRequest < Struct.new(
@@ -1063,7 +1075,8 @@ module Aws::FSx
       :windows_configuration,
       :lustre_configuration,
       :storage_type,
-      :kms_key_id)
+      :kms_key_id,
+      :file_system_type_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1481,6 +1494,7 @@ module Aws::FSx
     #           throughput_capacity: 1, # required
     #           weekly_maintenance_start_time: "WeeklyTime",
     #         },
+    #         file_system_type_version: "FileSystemTypeVersion",
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -1611,6 +1625,17 @@ module Aws::FSx
     #   system that you are creating.
     #   @return [Types::CreateFileSystemOntapConfiguration]
     #
+    # @!attribute [rw] file_system_type_version
+    #   Sets the version of the Amazon FSx for Lustre file system you're
+    #   creating. Valid values are `2.10` and `2.12`.
+    #
+    #   * Set the value to `2.10` to create a Lustre 2.10 file system.
+    #
+    #   * Set the value to `2.12` to create a Lustre 2.12 file system.
+    #
+    #   Default value is `2.10`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemRequest AWS API Documentation
     #
     class CreateFileSystemRequest < Struct.new(
@@ -1624,7 +1649,8 @@ module Aws::FSx
       :kms_key_id,
       :windows_configuration,
       :lustre_configuration,
-      :ontap_configuration)
+      :ontap_configuration,
+      :file_system_type_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1681,12 +1707,12 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] self_managed_active_directory_configuration
-    #   The configuration that Amazon FSx uses to join a Amazon FSx for
-    #   Windows File Server file system or an ONTAP storage virtual machine
-    #   (SVM) to a self-managed (including on-premises) Microsoft Active
-    #   Directory (AD) directory. For more information, see [ Using Amazon
-    #   FSx with your self-managed Microsoft Active Directory][1] or
-    #   [Managing SVMs][2].
+    #   The configuration that Amazon FSx uses to join a FSx for Windows
+    #   File Server file system or an ONTAP storage virtual machine (SVM) to
+    #   a self-managed (including on-premises) Microsoft Active Directory
+    #   (AD) directory. For more information, see [ Using Amazon FSx with
+    #   your self-managed Microsoft Active Directory][1] or [Managing
+    #   SVMs][2].
     #
     #
     #
@@ -2032,12 +2058,12 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] self_managed_active_directory_configuration
-    #   The configuration that Amazon FSx uses to join a Amazon FSx for
-    #   Windows File Server file system or an ONTAP storage virtual machine
-    #   (SVM) to a self-managed (including on-premises) Microsoft Active
-    #   Directory (AD) directory. For more information, see [ Using Amazon
-    #   FSx with your self-managed Microsoft Active Directory][1] or
-    #   [Managing SVMs][2].
+    #   The configuration that Amazon FSx uses to join a FSx for Windows
+    #   File Server file system or an ONTAP storage virtual machine (SVM) to
+    #   a self-managed (including on-premises) Microsoft Active Directory
+    #   (AD) directory. For more information, see [ Using Amazon FSx with
+    #   your self-managed Microsoft Active Directory][1] or [Managing
+    #   SVMs][2].
     #
     #
     #
@@ -3673,6 +3699,11 @@ module Aws::FSx
     #   The configuration for this FSx for NetApp ONTAP file system.
     #   @return [Types::OntapFileSystemConfiguration]
     #
+    # @!attribute [rw] file_system_type_version
+    #   The version of your Amazon FSx for Lustre file system, either `2.10`
+    #   or `2.12`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystem AWS API Documentation
     #
     class FileSystem < Struct.new(
@@ -3694,7 +3725,8 @@ module Aws::FSx
       :windows_configuration,
       :lustre_configuration,
       :administrative_actions,
-      :ontap_configuration)
+      :ontap_configuration,
+      :file_system_type_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4458,7 +4490,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] dns_ips
-    #   A list of up to two IP addresses of DNS servers or domain
+    #   A list of up to three IP addresses of DNS servers or domain
     #   controllers in the self-managed AD directory.
     #   @return [Array<String>]
     #
@@ -4474,12 +4506,11 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration that Amazon FSx uses to join a Amazon FSx for
-    # Windows File Server file system or an ONTAP storage virtual machine
-    # (SVM) to a self-managed (including on-premises) Microsoft Active
-    # Directory (AD) directory. For more information, see [ Using Amazon FSx
-    # with your self-managed Microsoft Active Directory][1] or [Managing
-    # SVMs][2].
+    # The configuration that Amazon FSx uses to join a FSx for Windows File
+    # Server file system or an ONTAP storage virtual machine (SVM) to a
+    # self-managed (including on-premises) Microsoft Active Directory (AD)
+    # directory. For more information, see [ Using Amazon FSx with your
+    # self-managed Microsoft Active Directory][1] or [Managing SVMs][2].
     #
     #
     #
@@ -4544,7 +4575,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] dns_ips
-    #   A list of up to two IP addresses of DNS servers or domain
+    #   A list of up to three IP addresses of DNS servers or domain
     #   controllers in the self-managed AD directory.
     #   @return [Array<String>]
     #
@@ -4587,7 +4618,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] dns_ips
-    #   A list of up to two IP addresses of DNS servers or domain
+    #   A list of up to three IP addresses of DNS servers or domain
     #   controllers in the self-managed AD directory.
     #   @return [Array<String>]
     #

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-09-28)
+------------------
+
+* Feature - Fix description for AmiDistributionConfiguration Name property, which actually refers to the output AMI name. Also updated for consistent terminology to use "base" image, and another update to fix description text.
+
+1.30.0 (2021-09-22)
+------------------
+
+* Feature - This feature adds support for specifying GP3 volume throughput and configuring instance metadata options for instances launched by EC2 Image Builder.
+
 1.29.0 (2021-09-01)
 ------------------
 

@@ -821,6 +821,7 @@ module Aws::EFS
         o.http_request_uri = "/2015-02-01/account-preferences"
         o.input = Shapes::ShapeRef.new(shape: PutAccountPreferencesRequest)
         o.output = Shapes::ShapeRef.new(shape: PutAccountPreferencesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

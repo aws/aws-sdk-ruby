@@ -1461,6 +1461,19 @@ module Aws::S3
     #   * {Types::CreateBucketOutput#location #location} => String
     #
     #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
+    #   }
+    #
     # @example Example: To create a bucket in a specific region
     #
     #   # The following example creates a bucket. The request specifies an AWS region where to create the bucket.
@@ -1475,19 +1488,6 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     location: "http://examplebucket.<Region>.s3.amazonaws.com/", 
-    #   }
-    #
-    # @example Example: To create a bucket 
-    #
-    #   # The following example creates a bucket.
-    #
-    #   resp = client.create_bucket({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     location: "/examplebucket", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -1558,15 +1558,14 @@ module Aws::S3
     # You can optionally request server-side encryption. For server-side
     # encryption, Amazon S3 encrypts your data as it writes it to disks in
     # its data centers and decrypts it when you access it. You can provide
-    # your own encryption key, or use Amazon Web Services Key Management
-    # Service (Amazon Web Services KMS) customer master keys (CMKs) or
-    # Amazon S3-managed encryption keys. If you choose to provide your own
+    # your own encryption key, or use Amazon Web Services KMS keys or Amazon
+    # S3-managed encryption keys. If you choose to provide your own
     # encryption key, the request headers you provide in [UploadPart][1] and
     # [UploadPartCopy][6] requests must match the headers you used in the
     # request to initiate the upload by using `CreateMultipartUpload`.
     #
     # To perform a multipart upload with encryption using an Amazon Web
-    # Services KMS CMK, the requester must have permission to the
+    # Services KMS key, the requester must have permission to the
     # `kms:Decrypt` and `kms:GenerateDataKey*` actions on the key. These
     # permissions are required because Amazon S3 must decrypt and read data
     # from the encrypted file parts before it completes the multipart
@@ -1574,11 +1573,10 @@ module Aws::S3
     # permissions][7] in the *Amazon S3 User Guide*.
     #
     # If your Identity and Access Management (IAM) user or role is in the
-    # same Amazon Web Services account as the Amazon Web Services KMS CMK,
-    # then you must have these permissions on the key policy. If your IAM
-    # user or role belongs to a different account than the key, then you
-    # must have the permissions on both the key policy and your IAM user or
-    # role.
+    # same Amazon Web Services account as the KMS key, then you must have
+    # these permissions on the key policy. If your IAM user or role belongs
+    # to a different account than the key, then you must have the
+    # permissions on both the key policy and your IAM user or role.
     #
     # For more information, see [Protecting Data Using Server-Side
     # Encryption][8].
@@ -1611,11 +1609,11 @@ module Aws::S3
     #   option you use depends on whether you want to use Amazon Web
     #   Services managed encryption keys or provide your own encryption key.
     #
-    #   * Use encryption keys managed by Amazon S3 or customer master keys
-    #     (CMKs) stored in Amazon Web Services Key Management Service
-    #     (Amazon Web Services KMS) – If you want Amazon Web Services to
-    #     manage the keys used to encrypt data, specify the following
-    #     headers in the request.
+    #   * Use encryption keys managed by Amazon S3 or customer managed key
+    #     stored in Amazon Web Services Key Management Service (Amazon Web
+    #     Services KMS) – If you want Amazon Web Services to manage the keys
+    #     used to encrypt data, specify the following headers in the
+    #     request.
     #
     #     * x-amz-server-side-encryption
     #
@@ -1625,7 +1623,7 @@ module Aws::S3
     #
     #     <note markdown="1"> If you specify `x-amz-server-side-encryption:aws:kms`, but don't
     #     provide `x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3
-    #     uses the Amazon Web Services managed CMK in Amazon Web Services
+    #     uses the Amazon Web Services managed key in Amazon Web Services
     #     KMS to protect the data.
     #
     #      </note>
@@ -1634,10 +1632,9 @@ module Aws::S3
     #     Services KMS fail if you don't make them with SSL or by using
     #     SigV4.
     #
-    #     For more information about server-side encryption with CMKs stored
-    #     in Amazon Web Services KMS (SSE-KMS), see [Protecting Data Using
-    #     Server-Side Encryption with CMKs stored in Amazon Web Services
-    #     KMS][11].
+    #     For more information about server-side encryption with KMS key
+    #     (SSE-KMS), see [Protecting Data Using Server-Side Encryption with
+    #     KMS keys][11].
     #
     #   * Use customer-provided encryption keys – If you want to manage your
     #     own encryption keys, provide all the following headers in the
@@ -1649,10 +1646,9 @@ module Aws::S3
     #
     #     * x-amz-server-side-encryption-customer-key-MD5
     #
-    #     For more information about server-side encryption with CMKs stored
-    #     in Amazon Web Services KMS (SSE-KMS), see [Protecting Data Using
-    #     Server-Side Encryption with CMKs stored in Amazon Web Services
-    #     KMS][11].
+    #     For more information about server-side encryption with KMS keys
+    #     (SSE-KMS), see [Protecting Data Using Server-Side Encryption with
+    #     KMS keys][11].
     #
     # Access-Control-List (ACL)-Specific Request Headers
     #
@@ -1877,13 +1873,13 @@ module Aws::S3
     #   ensure that the encryption key was transmitted without error.
     #
     # @option params [String] :ssekms_key_id
-    #   Specifies the ID of the symmetric customer managed Amazon Web Services
-    #   KMS CMK to use for object encryption. All GET and PUT requests for an
-    #   object protected by Amazon Web Services KMS will fail if not made via
-    #   SSL or using SigV4. For information about configuring using any of the
-    #   officially supported Amazon Web Services SDKs and Amazon Web Services
-    #   CLI, see [Specifying the Signature Version in Request
-    #   Authentication][1] in the *Amazon S3 User Guide*.
+    #   Specifies the ID of the symmetric customer managed key to use for
+    #   object encryption. All GET and PUT requests for an object protected by
+    #   Amazon Web Services KMS will fail if not made via SSL or using SigV4.
+    #   For information about configuring using any of the officially
+    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
+    #   [Specifying the Signature Version in Request Authentication][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -2253,21 +2249,23 @@ module Aws::S3
     #
     # The S3 Intelligent-Tiering storage class is designed to optimize
     # storage costs by automatically moving data to the most cost-effective
-    # storage access tier, without additional operational overhead. S3
-    # Intelligent-Tiering delivers automatic cost savings by moving data
-    # between access tiers, when access patterns change.
+    # storage access tier, without performance impact or operational
+    # overhead. S3 Intelligent-Tiering delivers automatic cost savings in
+    # two low latency and high throughput access tiers. For data that can be
+    # accessed asynchronously, you can choose to activate automatic
+    # archiving capabilities within the S3 Intelligent-Tiering storage
+    # class.
     #
-    # The S3 Intelligent-Tiering storage class is suitable for objects
-    # larger than 128 KB that you plan to store for at least 30 days. If the
-    # size of an object is less than 128 KB, it is not eligible for
-    # auto-tiering. Smaller objects can be stored, but they are always
-    # charged at the frequent access tier rates in the S3
-    # Intelligent-Tiering storage class.
+    # The S3 Intelligent-Tiering storage class is the ideal storage class
+    # for data with unknown, changing, or unpredictable access patterns,
+    # independent of object size or retention period. If the size of an
+    # object is less than 128 KB, it is not eligible for auto-tiering.
+    # Smaller objects can be stored, but they are always charged at the
+    # Frequent Access tier rates in the S3 Intelligent-Tiering storage
+    # class.
     #
-    # If you delete an object before the end of the 30-day minimum storage
-    # duration period, you are charged for 30 days. For more information,
-    # see [Storage class for automatically optimizing frequently and
-    # infrequently accessed objects][1].
+    # For more information, see [Storage class for automatically optimizing
+    # frequently and infrequently accessed objects][1].
     #
     # Operations related to `DeleteBucketIntelligentTieringConfiguration`
     # include:
@@ -3717,21 +3715,23 @@ module Aws::S3
     #
     # The S3 Intelligent-Tiering storage class is designed to optimize
     # storage costs by automatically moving data to the most cost-effective
-    # storage access tier, without additional operational overhead. S3
-    # Intelligent-Tiering delivers automatic cost savings by moving data
-    # between access tiers, when access patterns change.
+    # storage access tier, without performance impact or operational
+    # overhead. S3 Intelligent-Tiering delivers automatic cost savings in
+    # two low latency and high throughput access tiers. For data that can be
+    # accessed asynchronously, you can choose to activate automatic
+    # archiving capabilities within the S3 Intelligent-Tiering storage
+    # class.
     #
-    # The S3 Intelligent-Tiering storage class is suitable for objects
-    # larger than 128 KB that you plan to store for at least 30 days. If the
-    # size of an object is less than 128 KB, it is not eligible for
-    # auto-tiering. Smaller objects can be stored, but they are always
-    # charged at the frequent access tier rates in the S3
-    # Intelligent-Tiering storage class.
+    # The S3 Intelligent-Tiering storage class is the ideal storage class
+    # for data with unknown, changing, or unpredictable access patterns,
+    # independent of object size or retention period. If the size of an
+    # object is less than 128 KB, it is not eligible for auto-tiering.
+    # Smaller objects can be stored, but they are always charged at the
+    # Frequent Access tier rates in the S3 Intelligent-Tiering storage
+    # class.
     #
-    # If you delete an object before the end of the 30-day minimum storage
-    # duration period, you are charged for 30 days. For more information,
-    # see [Storage class for automatically optimizing frequently and
-    # infrequently accessed objects][1].
+    # For more information, see [Storage class for automatically optimizing
+    # frequently and infrequently accessed objects][1].
     #
     # Operations related to `GetBucketIntelligentTieringConfiguration`
     # include:
@@ -4298,10 +4298,12 @@ module Aws::S3
     #   resp.metrics_configuration.filter.prefix #=> String
     #   resp.metrics_configuration.filter.tag.key #=> String
     #   resp.metrics_configuration.filter.tag.value #=> String
+    #   resp.metrics_configuration.filter.access_point_arn #=> String
     #   resp.metrics_configuration.filter.and.prefix #=> String
     #   resp.metrics_configuration.filter.and.tags #=> Array
     #   resp.metrics_configuration.filter.and.tags[0].key #=> String
     #   resp.metrics_configuration.filter.and.tags[0].value #=> String
+    #   resp.metrics_configuration.filter.and.access_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetricsConfiguration AWS API Documentation
     #
@@ -5159,10 +5161,9 @@ module Aws::S3
     #
     # Encryption request headers, like `x-amz-server-side-encryption`,
     # should not be sent for GET requests if your object uses server-side
-    # encryption with CMKs stored in Amazon Web Services KMS (SSE-KMS) or
-    # server-side encryption with Amazon S3–managed encryption keys
-    # (SSE-S3). If your object does use these types of keys, you’ll get an
-    # HTTP 400 BadRequest error.
+    # encryption with KMS keys (SSE-KMS) or server-side encryption with
+    # Amazon S3–managed encryption keys (SSE-S3). If your object does use
+    # these types of keys, you’ll get an HTTP 400 BadRequest error.
     #
     # If you encrypt an object by using server-side encryption with
     # customer-provided encryption keys (SSE-C) when you store the object in
@@ -5296,6 +5297,9 @@ module Aws::S3
     #   Services SDKs, you provide the access point ARN in place of the bucket
     #   name. For more information about access point ARNs, see [Using access
     #   points][1] in the *Amazon S3 User Guide*.
+    #
+    #   When using an Object Lambda access point the hostname takes the form
+    #   *AccessPointName*-*AccountId*.s3-object-lambda.*Region*.amazonaws.com.
     #
     #   When using this action with Amazon S3 on Outposts, you must direct
     #   requests to the S3 on Outposts hostname. The S3 on Outposts hostname
@@ -5440,6 +5444,28 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To retrieve a byte range of an object 
     #
     #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
@@ -5461,28 +5487,6 @@ module Aws::S3
     #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
     #     metadata: {
     #     }, 
-    #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -6030,6 +6034,27 @@ module Aws::S3
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
     #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   }
+    #
     # @example Example: To retrieve tag set of an object
     #
     #   # The following example retrieves tag set of an object.
@@ -6052,27 +6077,6 @@ module Aws::S3
     #       }, 
     #     ], 
     #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -6386,10 +6390,9 @@ module Aws::S3
     #
     # <note markdown="1"> * Encryption request headers, like `x-amz-server-side-encryption`,
     #   should not be sent for GET requests if your object uses server-side
-    #   encryption with CMKs stored in Amazon Web Services KMS (SSE-KMS) or
-    #   server-side encryption with Amazon S3–managed encryption keys
-    #   (SSE-S3). If your object does use these types of keys, you’ll get an
-    #   HTTP 400 BadRequest error.
+    #   encryption with KMS keys (SSE-KMS) or server-side encryption with
+    #   Amazon S3–managed encryption keys (SSE-S3). If your object does use
+    #   these types of keys, you’ll get an HTTP 400 BadRequest error.
     #
     # * The last modified property in this case is the creation date of the
     #   object.
@@ -6775,21 +6778,23 @@ module Aws::S3
     #
     # The S3 Intelligent-Tiering storage class is designed to optimize
     # storage costs by automatically moving data to the most cost-effective
-    # storage access tier, without additional operational overhead. S3
-    # Intelligent-Tiering delivers automatic cost savings by moving data
-    # between access tiers, when access patterns change.
+    # storage access tier, without performance impact or operational
+    # overhead. S3 Intelligent-Tiering delivers automatic cost savings in
+    # two low latency and high throughput access tiers. For data that can be
+    # accessed asynchronously, you can choose to activate automatic
+    # archiving capabilities within the S3 Intelligent-Tiering storage
+    # class.
     #
-    # The S3 Intelligent-Tiering storage class is suitable for objects
-    # larger than 128 KB that you plan to store for at least 30 days. If the
-    # size of an object is less than 128 KB, it is not eligible for
-    # auto-tiering. Smaller objects can be stored, but they are always
-    # charged at the frequent access tier rates in the S3
-    # Intelligent-Tiering storage class.
+    # The S3 Intelligent-Tiering storage class is the ideal storage class
+    # for data with unknown, changing, or unpredictable access patterns,
+    # independent of object size or retention period. If the size of an
+    # object is less than 128 KB, it is not eligible for auto-tiering.
+    # Smaller objects can be stored, but they are always charged at the
+    # Frequent Access tier rates in the S3 Intelligent-Tiering storage
+    # class.
     #
-    # If you delete an object before the end of the 30-day minimum storage
-    # duration period, you are charged for 30 days. For more information,
-    # see [Storage class for automatically optimizing frequently and
-    # infrequently accessed objects][1].
+    # For more information, see [Storage class for automatically optimizing
+    # frequently and infrequently accessed objects][1].
     #
     # Operations related to `ListBucketIntelligentTieringConfigurations`
     # include:
@@ -7037,10 +7042,12 @@ module Aws::S3
     #   resp.metrics_configuration_list[0].filter.prefix #=> String
     #   resp.metrics_configuration_list[0].filter.tag.key #=> String
     #   resp.metrics_configuration_list[0].filter.tag.value #=> String
+    #   resp.metrics_configuration_list[0].filter.access_point_arn #=> String
     #   resp.metrics_configuration_list[0].filter.and.prefix #=> String
     #   resp.metrics_configuration_list[0].filter.and.tags #=> Array
     #   resp.metrics_configuration_list[0].filter.and.tags[0].key #=> String
     #   resp.metrics_configuration_list[0].filter.and.tags[0].value #=> String
+    #   resp.metrics_configuration_list[0].filter.and.access_point_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketMetricsConfigurations AWS API Documentation
     #
@@ -7254,6 +7261,48 @@ module Aws::S3
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
+    # @example Example: To list in-progress multipart uploads on a bucket
+    #
+    #   # The following example lists in-progress multipart uploads on a specific bucket.
+    #
+    #   resp = client.list_multipart_uploads({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     uploads: [
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
+    #       }, 
+    #       {
+    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
+    #         initiator: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         key: "JavaFile", 
+    #         owner: {
+    #           display_name: "display-name", 
+    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
+    #         }, 
+    #         storage_class: "STANDARD", 
+    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Example: List next set of multipart uploads when previous result is truncated
     #
     #   # The following example specifies the upload-id-marker and key-marker from previous truncated response to retrieve next
@@ -7303,48 +7352,6 @@ module Aws::S3
     #         }, 
     #         storage_class: "STANDARD", 
     #         upload_id: "b7tZSqIlo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
-    #       }, 
-    #     ], 
-    #   }
-    #
-    # @example Example: To list in-progress multipart uploads on a bucket
-    #
-    #   # The following example lists in-progress multipart uploads on a specific bucket.
-    #
-    #   resp = client.list_multipart_uploads({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     uploads: [
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:40:58.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--", 
-    #       }, 
-    #       {
-    #         initiated: Time.parse("2014-05-01T05:41:27.000Z"), 
-    #         initiator: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         key: "JavaFile", 
-    #         owner: {
-    #           display_name: "display-name", 
-    #           id: "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc", 
-    #         }, 
-    #         storage_class: "STANDARD", 
-    #         upload_id: "examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--", 
     #       }, 
     #     ], 
     #   }
@@ -8818,12 +8825,12 @@ module Aws::S3
     # encryption and Amazon S3 Bucket Key for an existing bucket.
     #
     # Default encryption for a bucket can use server-side encryption with
-    # Amazon S3-managed keys (SSE-S3) or Amazon Web Services KMS customer
-    # master keys (SSE-KMS). If you specify default encryption using
-    # SSE-KMS, you can also configure Amazon S3 Bucket Key. For information
-    # about default encryption, see [Amazon S3 default bucket encryption][1]
-    # in the *Amazon S3 User Guide*. For more information about S3 Bucket
-    # Keys, see [Amazon S3 Bucket Keys][2] in the *Amazon S3 User Guide*.
+    # Amazon S3-managed keys (SSE-S3) or customer managed keys (SSE-KMS). If
+    # you specify default encryption using SSE-KMS, you can also configure
+    # Amazon S3 Bucket Key. For information about default encryption, see
+    # [Amazon S3 default bucket encryption][1] in the *Amazon S3 User
+    # Guide*. For more information about S3 Bucket Keys, see [Amazon S3
+    # Bucket Keys][2] in the *Amazon S3 User Guide*.
     #
     # This action requires Amazon Web Services Signature Version 4. For more
     # information, see [ Authenticating Requests (Amazon Web Services
@@ -8855,10 +8862,10 @@ module Aws::S3
     #
     # @option params [required, String] :bucket
     #   Specifies default encryption for a bucket using server-side encryption
-    #   with Amazon S3-managed keys (SSE-S3) or customer master keys stored in
-    #   Amazon Web Services KMS (SSE-KMS). For information about the Amazon S3
-    #   default encryption feature, see [Amazon S3 Default Bucket
-    #   Encryption][1] in the *Amazon S3 User Guide*.
+    #   with Amazon S3-managed keys (SSE-S3) or customer managed keys
+    #   (SSE-KMS). For information about the Amazon S3 default encryption
+    #   feature, see [Amazon S3 Default Bucket Encryption][1] in the *Amazon
+    #   S3 User Guide*.
     #
     #
     #
@@ -8916,21 +8923,23 @@ module Aws::S3
     #
     # The S3 Intelligent-Tiering storage class is designed to optimize
     # storage costs by automatically moving data to the most cost-effective
-    # storage access tier, without additional operational overhead. S3
-    # Intelligent-Tiering delivers automatic cost savings by moving data
-    # between access tiers, when access patterns change.
+    # storage access tier, without performance impact or operational
+    # overhead. S3 Intelligent-Tiering delivers automatic cost savings in
+    # two low latency and high throughput access tiers. For data that can be
+    # accessed asynchronously, you can choose to activate automatic
+    # archiving capabilities within the S3 Intelligent-Tiering storage
+    # class.
     #
-    # The S3 Intelligent-Tiering storage class is suitable for objects
-    # larger than 128 KB that you plan to store for at least 30 days. If the
-    # size of an object is less than 128 KB, it is not eligible for
-    # auto-tiering. Smaller objects can be stored, but they are always
-    # charged at the frequent access tier rates in the S3
-    # Intelligent-Tiering storage class.
+    # The S3 Intelligent-Tiering storage class is the ideal storage class
+    # for data with unknown, changing, or unpredictable access patterns,
+    # independent of object size or retention period. If the size of an
+    # object is less than 128 KB, it is not eligible for auto-tiering.
+    # Smaller objects can be stored, but they are always charged at the
+    # Frequent Access tier rates in the S3 Intelligent-Tiering storage
+    # class.
     #
-    # If you delete an object before the end of the 30-day minimum storage
-    # duration period, you are charged for 30 days. For more information,
-    # see [Storage class for automatically optimizing frequently and
-    # infrequently accessed objects][1].
+    # For more information, see [Storage class for automatically optimizing
+    # frequently and infrequently accessed objects][1].
     #
     # Operations related to `PutBucketIntelligentTieringConfiguration`
     # include:
@@ -9648,7 +9657,7 @@ module Aws::S3
     #
     # * [DeleteBucketMetricsConfiguration][4]
     #
-    # * [PutBucketMetricsConfiguration][5]
+    # * [GetBucketMetricsConfiguration][5]
     #
     # * [ListBucketMetricsConfigurations][6]
     #
@@ -9667,7 +9676,7 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetricsConfiguration.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetricsConfiguration.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketMetricsConfigurations.html
     #
     # @option params [required, String] :bucket
@@ -9699,6 +9708,7 @@ module Aws::S3
     #           key: "ObjectKey", # required
     #           value: "Value", # required
     #         },
+    #         access_point_arn: "AccessPointArn",
     #         and: {
     #           prefix: "Prefix",
     #           tags: [
@@ -9707,6 +9717,7 @@ module Aws::S3
     #               value: "Value", # required
     #             },
     #           ],
+    #           access_point_arn: "AccessPointArn",
     #         },
     #       },
     #     },
@@ -10139,13 +10150,12 @@ module Aws::S3
     # **Handling Replication of Encrypted Objects**
     #
     # By default, Amazon S3 doesn't replicate objects that are stored at
-    # rest using server-side encryption with CMKs stored in Amazon Web
-    # Services KMS. To replicate Amazon Web Services KMS-encrypted objects,
-    # add the following: `SourceSelectionCriteria`,
-    # `SseKmsEncryptedObjects`, `Status`, `EncryptionConfiguration`, and
-    # `ReplicaKmsKeyID`. For information about replication configuration,
-    # see [Replicating Objects Created with SSE Using CMKs stored in Amazon
-    # Web Services KMS][4].
+    # rest using server-side encryption with KMS keys. To replicate Amazon
+    # Web Services KMS-encrypted objects, add the following:
+    # `SourceSelectionCriteria`, `SseKmsEncryptedObjects`, `Status`,
+    # `EncryptionConfiguration`, and `ReplicaKmsKeyID`. For information
+    # about replication configuration, see [Replicating Objects Created with
+    # SSE Using KMS keys][4].
     #
     # For information on `PutBucketReplication` errors, see [List of
     # replication-related error codes][5]
@@ -11108,12 +11118,12 @@ module Aws::S3
     #   If `x-amz-server-side-encryption` is present and has the value of
     #   `aws:kms`, this header specifies the ID of the Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) symmetrical customer
-    #   managed customer master key (CMK) that was used for the object. If you
-    #   specify `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   managed key that was used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
     #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
-    #   Amazon Web Services managed CMK in Amazon Web Services to protect the
-    #   data. If the KMS key does not exist in the same account issuing the
-    #   command, you must use the full ARN and not just the ID.
+    #   Amazon Web Services managed key to protect the data. If the KMS key
+    #   does not exist in the same account issuing the command, you must use
+    #   the full ARN and not just the ID.
     #
     # @option params [String] :ssekms_encryption_context
     #   Specifies the Amazon Web Services KMS Encryption Context to use for
@@ -11178,24 +11188,40 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload an object (specify optional headers)
+    # @example Example: To upload an object and specify optional tags
     #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
     #
     #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
+    #     body: "c:\\HappyFace.jpg", 
     #     bucket: "examplebucket", 
     #     key: "HappyFace.jpg", 
-    #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
+    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
     #   }
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
@@ -11234,6 +11260,43 @@ module Aws::S3
     #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
+    # @example Example: To upload an object (specify optional headers)
+    #
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     server_side_encryption: "AES256", 
+    #     storage_class: "STANDARD_IA", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
+    #   }
+    #
     # @example Example: To upload object and specify user-defined metadata
     #
     #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
@@ -11253,59 +11316,6 @@ module Aws::S3
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
-    #   }
-    #
-    # @example Example: To upload an object and specify canned ACL.
-    #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     acl: "authenticated-read", 
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
-    #   }
-    #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
-    #   }
-    #
-    # @example Example: To upload an object and specify optional tags
-    #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
     #   }
     #
     # @example Streaming a file from disk
@@ -12738,12 +12748,11 @@ module Aws::S3
     #   Encryption Keys)][5] in the *Amazon S3 User Guide*.
     #
     #   For objects that are encrypted with Amazon S3 managed encryption
-    #   keys (SSE-S3) and customer master keys (CMKs) stored in Amazon Web
-    #   Services Key Management Service (SSE-KMS), server-side encryption is
-    #   handled transparently, so you don't need to specify anything. For
-    #   more information about server-side encryption, including SSE-S3 and
-    #   SSE-KMS, see [Protecting Data Using Server-Side Encryption][6] in
-    #   the *Amazon S3 User Guide*.
+    #   keys (SSE-S3) and Amazon Web Services KMS keys (SSE-KMS),
+    #   server-side encryption is handled transparently, so you don't need
+    #   to specify anything. For more information about server-side
+    #   encryption, including SSE-S3 and SSE-KMS, see [Protecting Data Using
+    #   Server-Side Encryption][6] in the *Amazon S3 User Guide*.
     #
     # **Working with the Response Body**
     #
@@ -13650,6 +13659,26 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
+    #     }, 
+    #   }
+    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -13669,26 +13698,6 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
-    #     }, 
-    #   }
-    #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -13738,9 +13747,9 @@ module Aws::S3
     end
 
     # Passes transformed objects to a `GetObject` operation when using
-    # Object Lambda Access Points. For information about Object Lambda
-    # Access Points, see [Transforming objects with Object Lambda Access
-    # Points][1] in the *Amazon S3 User Guide*.
+    # Object Lambda access points. For information about Object Lambda
+    # access points, see [Transforming objects with Object Lambda access
+    # points][1] in the *Amazon S3 User Guide*.
     #
     # This operation supports metadata that can be returned by
     # [GetObject][2], in addition to `RequestRoute`, `RequestToken`,
@@ -13762,8 +13771,8 @@ module Aws::S3
     # identifiable information (PII) and decompress S3 objects. These Lambda
     # functions are available in the Amazon Web Services Serverless
     # Application Repository, and can be selected through the Amazon Web
-    # Services Management Console when you create your Object Lambda Access
-    # Point.
+    # Services Management Console when you create your Object Lambda access
+    # point.
     #
     # Example 1: PII Access Control - This Lambda function uses Amazon
     # Comprehend, a natural language processing (NLP) service using machine
@@ -13955,8 +13964,8 @@ module Aws::S3
     #
     # @option params [String] :ssekms_key_id
     #   If present, specifies the ID of the Amazon Web Services Key Management
-    #   Service (Amazon Web Services KMS) symmetric customer managed customer
-    #   master key (CMK) that was used for stored in Amazon S3 object.
+    #   Service (Amazon Web Services KMS) symmetric customer managed key that
+    #   was used for stored in Amazon S3 object.
     #
     # @option params [String] :sse_customer_key_md5
     #   128-bit MD5 digest of customer-provided encryption key used in Amazon
@@ -14048,7 +14057,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

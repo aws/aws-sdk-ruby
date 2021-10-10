@@ -494,7 +494,15 @@ module Aws::AppSync
     #   Amazon Web Services Lambda settings.
     #
     # @option params [Types::ElasticsearchDataSourceConfig] :elasticsearch_config
-    #   Amazon Elasticsearch Service settings.
+    #   Amazon OpenSearch Service settings.
+    #
+    #   As of September 2021, Amazon Elasticsearch service is Amazon
+    #   OpenSearch Service. This configuration is deprecated. For new data
+    #   sources, use CreateDataSourceRequest$openSearchServiceConfig to create
+    #   an OpenSearch data source.
+    #
+    # @option params [Types::OpenSearchServiceDataSourceConfig] :open_search_service_config
+    #   Amazon OpenSearch Service settings.
     #
     # @option params [Types::HttpDataSourceConfig] :http_config
     #   HTTP endpoint settings.
@@ -512,7 +520,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE, AMAZON_OPENSEARCH_SERVICE
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -529,6 +537,10 @@ module Aws::AppSync
     #       lambda_function_arn: "String", # required
     #     },
     #     elasticsearch_config: {
+    #       endpoint: "String", # required
+    #       aws_region: "String", # required
+    #     },
+    #     open_search_service_config: {
     #       endpoint: "String", # required
     #       aws_region: "String", # required
     #     },
@@ -559,7 +571,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -571,6 +583,8 @@ module Aws::AppSync
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
+    #   resp.data_source.open_search_service_config.endpoint #=> String
+    #   resp.data_source.open_search_service_config.aws_region #=> String
     #   resp.data_source.http_config.endpoint #=> String
     #   resp.data_source.http_config.authorization_config.authorization_type #=> String, one of "AWS_IAM"
     #   resp.data_source.http_config.authorization_config.aws_iam_config.signing_region #=> String
@@ -681,7 +695,7 @@ module Aws::AppSync
     #
     # @option params [required, String] :authentication_type
     #   The authentication type: API key, Identity and Access Management,
-    #   OIDC, or Amazon Cognito user pools.
+    #   OIDC, Amazon Cognito user pools, or Amazon Web Services Lambda.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
     #   The Amazon Cognito user pool configuration.
@@ -701,7 +715,7 @@ module Aws::AppSync
     #   `GraphqlApi`.
     #
     # @option params [Types::LambdaAuthorizerConfig] :lambda_authorizer_config
-    #   Configuration for AWS Lambda function authorization.
+    #   Configuration for Amazon Web Services Lambda function authorization.
     #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1222,7 +1236,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -1234,6 +1248,8 @@ module Aws::AppSync
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
+    #   resp.data_source.open_search_service_config.endpoint #=> String
+    #   resp.data_source.open_search_service_config.aws_region #=> String
     #   resp.data_source.http_config.endpoint #=> String
     #   resp.data_source.http_config.authorization_config.authorization_type #=> String, one of "AWS_IAM"
     #   resp.data_source.http_config.authorization_config.aws_iam_config.signing_region #=> String
@@ -1599,7 +1615,7 @@ module Aws::AppSync
     #   resp.data_sources[0].data_source_arn #=> String
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].description #=> String
-    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE"
+    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE"
     #   resp.data_sources[0].service_role_arn #=> String
     #   resp.data_sources[0].dynamodb_config.table_name #=> String
     #   resp.data_sources[0].dynamodb_config.aws_region #=> String
@@ -1611,6 +1627,8 @@ module Aws::AppSync
     #   resp.data_sources[0].lambda_config.lambda_function_arn #=> String
     #   resp.data_sources[0].elasticsearch_config.endpoint #=> String
     #   resp.data_sources[0].elasticsearch_config.aws_region #=> String
+    #   resp.data_sources[0].open_search_service_config.endpoint #=> String
+    #   resp.data_sources[0].open_search_service_config.aws_region #=> String
     #   resp.data_sources[0].http_config.endpoint #=> String
     #   resp.data_sources[0].http_config.authorization_config.authorization_type #=> String, one of "AWS_IAM"
     #   resp.data_sources[0].http_config.authorization_config.aws_iam_config.signing_region #=> String
@@ -2197,7 +2215,15 @@ module Aws::AppSync
     #   The new Amazon Web Services Lambda configuration.
     #
     # @option params [Types::ElasticsearchDataSourceConfig] :elasticsearch_config
-    #   The new Elasticsearch Service configuration.
+    #   The new OpenSearch configuration.
+    #
+    #   As of September 2021, Amazon Elasticsearch service is Amazon
+    #   OpenSearch Service. This configuration is deprecated. Instead, use
+    #   UpdateDataSourceRequest$openSearchServiceConfig to update an
+    #   OpenSearch data source.
+    #
+    # @option params [Types::OpenSearchServiceDataSourceConfig] :open_search_service_config
+    #   The new OpenSearch configuration.
     #
     # @option params [Types::HttpDataSourceConfig] :http_config
     #   The new HTTP endpoint configuration.
@@ -2215,7 +2241,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP, RELATIONAL_DATABASE, AMAZON_OPENSEARCH_SERVICE
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -2232,6 +2258,10 @@ module Aws::AppSync
     #       lambda_function_arn: "String", # required
     #     },
     #     elasticsearch_config: {
+    #       endpoint: "String", # required
+    #       aws_region: "String", # required
+    #     },
+    #     open_search_service_config: {
     #       endpoint: "String", # required
     #       aws_region: "String", # required
     #     },
@@ -2262,7 +2292,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP", "RELATIONAL_DATABASE", "AMAZON_OPENSEARCH_SERVICE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -2274,6 +2304,8 @@ module Aws::AppSync
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
+    #   resp.data_source.open_search_service_config.endpoint #=> String
+    #   resp.data_source.open_search_service_config.aws_region #=> String
     #   resp.data_source.http_config.endpoint #=> String
     #   resp.data_source.http_config.authorization_config.authorization_type #=> String, one of "AWS_IAM"
     #   resp.data_source.http_config.authorization_config.aws_iam_config.signing_region #=> String
@@ -2405,7 +2437,7 @@ module Aws::AppSync
     #   `GraphqlApi`.
     #
     # @option params [Types::LambdaAuthorizerConfig] :lambda_authorizer_config
-    #   Configuration for AWS Lambda function authorization.
+    #   Configuration for Amazon Web Services Lambda function authorization.
     #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2674,7 +2706,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

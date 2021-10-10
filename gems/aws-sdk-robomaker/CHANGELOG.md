@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-09-16)
+------------------
+
+* Feature - Adding support to create container based Robot and Simulation applications by introducing an environment field
+
 1.41.0 (2021-09-01)
 ------------------
 

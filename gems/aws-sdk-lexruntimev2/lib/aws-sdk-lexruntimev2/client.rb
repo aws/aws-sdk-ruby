@@ -466,9 +466,9 @@ module Aws::LexRuntimeV2
     #   resp.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
     #   resp.interpretations[0].intent.slots["NonEmptyString"].values #=> Array
     #   resp.interpretations[0].intent.slots["NonEmptyString"].values[0] #=> Types::Slot
-    #   resp.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
+    #   resp.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   resp.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
-    #   resp.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot"
+    #   resp.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot", "None"
     #   resp.session_state.dialog_action.slot_to_elicit #=> String
     #   resp.session_state.intent.name #=> String
     #   resp.session_state.intent.slots #=> Hash
@@ -479,7 +479,7 @@ module Aws::LexRuntimeV2
     #   resp.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
     #   resp.session_state.intent.slots["NonEmptyString"].values #=> Array
     #   resp.session_state.intent.slots["NonEmptyString"].values[0] #=> Types::Slot
-    #   resp.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
+    #   resp.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   resp.session_state.intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.session_state.active_contexts #=> Array
     #   resp.session_state.active_contexts[0].name #=> String
@@ -577,7 +577,7 @@ module Aws::LexRuntimeV2
     #     ],
     #     session_state: { # required
     #       dialog_action: {
-    #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot
+    #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #         slot_to_elicit: "NonEmptyString",
     #       },
     #       intent: {
@@ -597,7 +597,7 @@ module Aws::LexRuntimeV2
     #             ],
     #           },
     #         },
-    #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
+    #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
     #         confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
     #       },
     #       active_contexts: [
@@ -649,6 +649,30 @@ module Aws::LexRuntimeV2
     # In response, Amazon Lex V2 returns the next message to convey to the
     # user and an optional response card to display.
     #
+    # If the optional post-fulfillment response is specified, the messages
+    # are returned as follows. For more information, see
+    # [PostFulfillmentStatusSpecification][1].
+    #
+    # * **Success message** - Returned if the Lambda function completes
+    #   successfully and the intent state is fulfilled or ready fulfillment
+    #   if the message is present.
+    #
+    # * **Failed message** - The failed message is returned if the Lambda
+    #   function throws an exception or if the Lambda function returns a
+    #   failed intent state without a message.
+    #
+    # * **Timeout message** - If you don't configure a timeout message and
+    #   a timeout, and the Lambda function doesn't return within 30
+    #   seconds, the timeout message is returned. If you configure a
+    #   timeout, the timeout message is returned when the period times out.
+    #
+    # For more information, see [Completion message][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html
+    # [2]: https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html
+    #
     # @option params [required, String] :bot_id
     #   The identifier of the bot that processes the request.
     #
@@ -692,7 +716,7 @@ module Aws::LexRuntimeV2
     #     text: "Text", # required
     #     session_state: {
     #       dialog_action: {
-    #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot
+    #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #         slot_to_elicit: "NonEmptyString",
     #       },
     #       intent: {
@@ -712,7 +736,7 @@ module Aws::LexRuntimeV2
     #             ],
     #           },
     #         },
-    #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting
+    #         state: "Failed", # accepts Failed, Fulfilled, InProgress, ReadyForFulfillment, Waiting, FulfillmentInProgress
     #         confirmation_state: "Confirmed", # accepts Confirmed, Denied, None
     #       },
     #       active_contexts: [
@@ -748,7 +772,7 @@ module Aws::LexRuntimeV2
     #   resp.messages[0].image_response_card.buttons #=> Array
     #   resp.messages[0].image_response_card.buttons[0].text #=> String
     #   resp.messages[0].image_response_card.buttons[0].value #=> String
-    #   resp.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot"
+    #   resp.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot", "None"
     #   resp.session_state.dialog_action.slot_to_elicit #=> String
     #   resp.session_state.intent.name #=> String
     #   resp.session_state.intent.slots #=> Hash
@@ -759,7 +783,7 @@ module Aws::LexRuntimeV2
     #   resp.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
     #   resp.session_state.intent.slots["NonEmptyString"].values #=> Array
     #   resp.session_state.intent.slots["NonEmptyString"].values[0] #=> Types::Slot
-    #   resp.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
+    #   resp.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   resp.session_state.intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.session_state.active_contexts #=> Array
     #   resp.session_state.active_contexts[0].name #=> String
@@ -786,7 +810,7 @@ module Aws::LexRuntimeV2
     #   resp.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
     #   resp.interpretations[0].intent.slots["NonEmptyString"].values #=> Array
     #   resp.interpretations[0].intent.slots["NonEmptyString"].values[0] #=> Types::Slot
-    #   resp.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
+    #   resp.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   resp.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.request_attributes #=> Hash
     #   resp.request_attributes["NonEmptyString"] #=> String
@@ -830,6 +854,30 @@ module Aws::LexRuntimeV2
     # The example contains a Java application that compresses and encodes a
     # Java object to send to Amazon Lex V2, and a second that decodes and
     # decompresses a response from Amazon Lex V2.
+    #
+    # If the optional post-fulfillment response is specified, the messages
+    # are returned as follows. For more information, see
+    # [PostFulfillmentStatusSpecification][1].
+    #
+    # * **Success message** - Returned if the Lambda function completes
+    #   successfully and the intent state is fulfilled or ready fulfillment
+    #   if the message is present.
+    #
+    # * **Failed message** - The failed message is returned if the Lambda
+    #   function throws an exception or if the Lambda function returns a
+    #   failed intent state without a message.
+    #
+    # * **Timeout message** - If you don't configure a timeout message and
+    #   a timeout, and the Lambda function doesn't return within 30
+    #   seconds, the timeout message is returned. If you configure a
+    #   timeout, the timeout message is returned when the period times out.
+    #
+    # For more information, see [Completion message][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html
+    # [2]: https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html
     #
     # @option params [required, String] :bot_id
     #   The identifier of the bot that should receive the request.
@@ -981,7 +1029,7 @@ module Aws::LexRuntimeV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

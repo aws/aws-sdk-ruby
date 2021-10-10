@@ -335,7 +335,9 @@ module Aws::SESV2
     # configuration set are applied to the email.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set.
+    #   The name of the configuration set. The name can contain up to 64
+    #   alphanumeric characters, including letters, numbers, hyphens (-) and
+    #   underscores (\_) only.
     #
     # @option params [Types::TrackingOptions] :tracking_options
     #   An object that defines the open and click tracking options for emails
@@ -354,8 +356,8 @@ module Aws::SESV2
     #   you send using the configuration set.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of objects that define the tags (keys and values) that you
-    #   want to associate with the configuration set.
+    #   An array of objects that define the tags (keys and values) to
+    #   associate with the configuration set.
     #
     # @option params [Types::SuppressionOptions] :suppression_options
     #   An object that contains information about the suppression list
@@ -413,8 +415,7 @@ module Aws::SESV2
     # destination.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to add an event
-    #   destination to.
+    #   The name of the configuration set .
     #
     # @option params [required, String] :event_destination_name
     #   A name that identifies the event destination within the configuration
@@ -619,10 +620,10 @@ module Aws::SESV2
     end
 
     # Create a new pool of dedicated IP addresses. A pool can include one or
-    # more dedicated IP addresses that are associated with your AWS account.
-    # You can associate a pool with a configuration set. When you send an
-    # email that uses that configuration set, the message is sent from one
-    # of the addresses in the associated pool.
+    # more dedicated IP addresses that are associated with your Amazon Web
+    # Services account. You can associate a pool with a configuration set.
+    # When you send an email that uses that configuration set, the message
+    # is sent from one of the addresses in the associated pool.
     #
     # @option params [required, String] :pool_name
     #   The name of the dedicated IP pool.
@@ -763,8 +764,7 @@ module Aws::SESV2
     # `CreateEmailIdentity` operation has to include the
     # `DkimSigningAttributes` object. When you specify this object, you
     # provide a selector (a component of the DNS record name that identifies
-    # the public key that you want to use for DKIM authentication) and a
-    # private key.
+    # the public key to use for DKIM authentication) and a private key.
     #
     # When you verify a domain, this operation provides a set of DKIM
     # tokens, which you can convert into CNAME tokens. You add these CNAME
@@ -781,16 +781,16 @@ module Aws::SESV2
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #
     # @option params [required, String] :email_identity
-    #   The email address or domain that you want to verify.
+    #   The email address or domain to verify.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of objects that define the tags (keys and values) that you
-    #   want to associate with the email identity.
+    #   An array of objects that define the tags (keys and values) to
+    #   associate with the email identity.
     #
     # @option params [Types::DkimSigningAttributes] :dkim_signing_attributes
     #   If your request includes this object, Amazon SES configures the
     #   identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication
-    #   purposes, as opposed to the default method, [Easy DKIM][1].
+    #   purposes, or, configures the key length to be used for [Easy DKIM][1].
     #
     #   You can only specify this object if the email identity is a domain, as
     #   opposed to an address.
@@ -821,8 +821,9 @@ module Aws::SESV2
     #       },
     #     ],
     #     dkim_signing_attributes: {
-    #       domain_signing_selector: "Selector", # required
-    #       domain_signing_private_key: "PrivateKey", # required
+    #       domain_signing_selector: "Selector",
+    #       domain_signing_private_key: "PrivateKey",
+    #       next_signing_key_length: "RSA_1024_BIT", # accepts RSA_1024_BIT, RSA_2048_BIT
     #     },
     #     configuration_set_name: "ConfigurationSetName",
     #   })
@@ -836,6 +837,9 @@ module Aws::SESV2
     #   resp.dkim_attributes.tokens #=> Array
     #   resp.dkim_attributes.tokens[0] #=> String
     #   resp.dkim_attributes.signing_attributes_origin #=> String, one of "AWS_SES", "EXTERNAL"
+    #   resp.dkim_attributes.next_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
+    #   resp.dkim_attributes.current_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
+    #   resp.dkim_attributes.last_key_generation_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateEmailIdentity AWS API Documentation
     #
@@ -865,7 +869,7 @@ module Aws::SESV2
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #
     # @option params [required, String] :email_identity
-    #   The email identity for which you want to create a policy.
+    #   The email identity.
     #
     # @option params [required, String] :policy_name
     #   The name of the policy.
@@ -914,7 +918,7 @@ module Aws::SESV2
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
     #
     # @option params [required, String] :template_name
-    #   The name of the template you want to create.
+    #   The name of the template.
     #
     # @option params [required, Types::EmailTemplateContent] :template_content
     #   The content of the email template, composed of a subject line, an HTML
@@ -994,7 +998,7 @@ module Aws::SESV2
     # rules in that configuration set are applied to the email.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to delete.
+    #   The name of the configuration set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1024,10 +1028,10 @@ module Aws::SESV2
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set that contains the event destination
-    #   that you want to delete.
+    #   to delete.
     #
     # @option params [required, String] :event_destination_name
-    #   The name of the event destination that you want to delete.
+    #   The name of the event destination to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1105,7 +1109,7 @@ module Aws::SESV2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/es/latest/DeveloperGuide/send-email-verify-address-custom.html
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html
     #
     # @option params [required, String] :template_name
     #   The name of the custom verification email template that you want to
@@ -1154,8 +1158,7 @@ module Aws::SESV2
     # or a domain name.
     #
     # @option params [required, String] :email_identity
-    #   The identity (that is, the email address or domain) that you want to
-    #   delete.
+    #   The identity (that is, the email address or domain) to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1194,7 +1197,7 @@ module Aws::SESV2
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #
     # @option params [required, String] :email_identity
-    #   The email identity for which you want to delete a policy.
+    #   The email identity.
     #
     # @option params [required, String] :policy_name
     #   The name of the policy.
@@ -1268,7 +1271,7 @@ module Aws::SESV2
     end
 
     # Obtain information about the email-sending status and capabilities of
-    # your Amazon SES account in the current AWS Region.
+    # your Amazon SES account in the current Amazon Web Services Region.
     #
     # @return [Types::GetAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1355,8 +1358,7 @@ module Aws::SESV2
     # rules in that configuration set are applied to the email.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to obtain more
-    #   information about.
+    #   The name of the configuration set.
     #
     # @return [Types::GetConfigurationSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1598,7 +1600,7 @@ module Aws::SESV2
     # @option params [required, String] :ip
     #   The IP address that you want to obtain more information about. The
     #   value you specify has to be a dedicated IP address that's assocaited
-    #   with your AWS account.
+    #   with your Amazon Web Services account.
     #
     # @return [Types::GetDedicatedIpResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1626,8 +1628,8 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # List the dedicated IP addresses that are associated with your AWS
-    # account.
+    # List the dedicated IP addresses that are associated with your Amazon
+    # Web Services account.
     #
     # @option params [String] :pool_name
     #   The name of the IP pool that the dedicated IP address is associated
@@ -1684,9 +1686,9 @@ module Aws::SESV2
     #
     # When you use the Deliverability dashboard, you pay a monthly
     # subscription charge, in addition to any other fees that you accrue by
-    # using Amazon SES and other AWS services. For more information about
-    # the features and cost of a Deliverability dashboard subscription, see
-    # [Amazon SES Pricing][1].
+    # using Amazon SES and other Amazon Web Services services. For more
+    # information about the features and cost of a Deliverability dashboard
+    # subscription, see [Amazon SES Pricing][1].
     #
     #
     #
@@ -1894,7 +1896,7 @@ module Aws::SESV2
     # DKIM authentication status, and its custom Mail-From settings.
     #
     # @option params [required, String] :email_identity
-    #   The email identity that you want to retrieve details for.
+    #   The email identity.
     #
     # @return [Types::GetEmailIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1923,6 +1925,9 @@ module Aws::SESV2
     #   resp.dkim_attributes.tokens #=> Array
     #   resp.dkim_attributes.tokens[0] #=> String
     #   resp.dkim_attributes.signing_attributes_origin #=> String, one of "AWS_SES", "EXTERNAL"
+    #   resp.dkim_attributes.next_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
+    #   resp.dkim_attributes.current_signing_key_length #=> String, one of "RSA_1024_BIT", "RSA_2048_BIT"
+    #   resp.dkim_attributes.last_key_generation_timestamp #=> Time
     #   resp.mail_from_attributes.mail_from_domain #=> String
     #   resp.mail_from_attributes.mail_from_domain_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE"
     #   resp.mail_from_attributes.behavior_on_mx_failure #=> String, one of "USE_DEFAULT_VALUE", "REJECT_MESSAGE"
@@ -1963,7 +1968,7 @@ module Aws::SESV2
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #
     # @option params [required, String] :email_identity
-    #   The email identity that you want to retrieve policies for.
+    #   The email identity.
     #
     # @return [Types::GetEmailIdentityPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1995,7 +2000,7 @@ module Aws::SESV2
     # You can execute this operation no more than once per second.
     #
     # @option params [required, String] :template_name
-    #   The name of the template you want to retrieve.
+    #   The name of the template.
     #
     # @return [Types::GetEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2266,7 +2271,7 @@ module Aws::SESV2
     end
 
     # Lists the existing custom verification email templates for your
-    # account in the current AWS Region.
+    # account in the current Amazon Web Services Region.
     #
     # For more information about custom verification email templates, see
     # [Using Custom Verification Email Templates][1] in the *Amazon SES
@@ -2326,8 +2331,8 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # List all of the dedicated IP pools that exist in your AWS account in
-    # the current Region.
+    # List all of the dedicated IP pools that exist in your Amazon Web
+    # Services account in the current Region.
     #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListDedicatedIpPools` to
@@ -2499,10 +2504,10 @@ module Aws::SESV2
     end
 
     # Returns a list of all of the email identities that are associated with
-    # your AWS account. An identity can be either an email address or a
-    # domain. This operation returns identities that are verified as well as
-    # those that aren't. This operation returns identities that are
-    # associated with Amazon SES and Amazon Pinpoint.
+    # your Amazon Web Services account. An identity can be either an email
+    # address or a domain. This operation returns identities that are
+    # verified as well as those that aren't. This operation returns
+    # identities that are associated with Amazon SES and Amazon Pinpoint.
     #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListEmailIdentities` to
@@ -2549,7 +2554,7 @@ module Aws::SESV2
     end
 
     # Lists the email templates present in your Amazon SES account in the
-    # current AWS Region.
+    # current Amazon Web Services Region.
     #
     # You can execute this operation no more than once per second.
     #
@@ -2752,8 +2757,8 @@ module Aws::SESV2
     # @option params [Boolean] :auto_warmup_enabled
     #   Enables or disables the automatic warm-up feature for dedicated IP
     #   addresses that are associated with your Amazon SES account in the
-    #   current AWS Region. Set to `true` to enable the automatic warm-up
-    #   feature, or set to `false` to disable it.
+    #   current Amazon Web Services Region. Set to `true` to enable the
+    #   automatic warm-up feature, or set to `false` to disable it.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2793,7 +2798,7 @@ module Aws::SESV2
     #
     # @option params [Boolean] :production_access_enabled
     #   Indicates whether or not your account should have production access in
-    #   the current AWS Region.
+    #   the current Amazon Web Services Region.
     #
     #   If the value is `false`, then your account is in the *sandbox*. When
     #   your account is in the sandbox, you can only send email to verified
@@ -2835,8 +2840,9 @@ module Aws::SESV2
     #   `true` to enable email sending, or set to `false` to disable email
     #   sending.
     #
-    #   <note markdown="1"> If AWS paused your account's ability to send email, you can't use
-    #   this operation to resume your account's ability to send email.
+    #   <note markdown="1"> If Amazon Web Services paused your account's ability to send email,
+    #   you can't use this operation to resume your account's ability to
+    #   send email.
     #
     #    </note>
     #
@@ -2894,8 +2900,8 @@ module Aws::SESV2
     # sending specific types of email.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to associate with a
-    #   dedicated IP pool.
+    #   The name of the configuration set to associate with a dedicated IP
+    #   pool.
     #
     # @option params [String] :tls_policy
     #   Specifies whether messages that use the configuration set are required
@@ -2905,8 +2911,8 @@ module Aws::SESV2
     #   TLS connection can't be established.
     #
     # @option params [String] :sending_pool_name
-    #   The name of the dedicated IP pool that you want to associate with the
-    #   configuration set.
+    #   The name of the dedicated IP pool to associate with the configuration
+    #   set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2928,11 +2934,11 @@ module Aws::SESV2
     end
 
     # Enable or disable collection of reputation metrics for emails that you
-    # send using a particular configuration set in a specific AWS Region.
+    # send using a particular configuration set in a specific Amazon Web
+    # Services Region.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to enable or disable
-    #   reputation metric tracking for.
+    #   The name of the configuration set.
     #
     # @option params [Boolean] :reputation_metrics_enabled
     #   If `true`, tracking of reputation metrics is enabled for the
@@ -2958,11 +2964,11 @@ module Aws::SESV2
     end
 
     # Enable or disable email sending for messages that use a particular
-    # configuration set in a specific AWS Region.
+    # configuration set in a specific Amazon Web Services Region.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to enable or disable
-    #   email sending for.
+    #   The name of the configuration set to enable or disable email sending
+    #   for.
     #
     # @option params [Boolean] :sending_enabled
     #   If `true`, email sending is enabled for the configuration set. If
@@ -2990,8 +2996,8 @@ module Aws::SESV2
     # set.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to change the
-    #   suppression list preferences for.
+    #   The name of the configuration set to change the suppression list
+    #   preferences for.
     #
     # @option params [Array<String>] :suppressed_reasons
     #   A list that contains the reasons that email addresses are
@@ -3028,11 +3034,10 @@ module Aws::SESV2
     # email that you send.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to add a custom
-    #   tracking domain to.
+    #   The name of the configuration set.
     #
     # @option params [String] :custom_redirect_domain
-    #   The domain that you want to use to track open and click events.
+    #   The domain to use to track open and click events.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3055,7 +3060,7 @@ module Aws::SESV2
     # Move a dedicated IP address to an existing dedicated IP pool.
     #
     # <note markdown="1"> The dedicated IP address that you specify must already exist, and must
-    # be associated with your AWS account.
+    # be associated with your Amazon Web Services account.
     #
     #  The dedicated IP pool you specify must already exist. You can create a
     # new pool by using the `CreateDedicatedIpPool` operation.
@@ -3065,7 +3070,7 @@ module Aws::SESV2
     # @option params [required, String] :ip
     #   The IP address that you want to move to the dedicated IP pool. The
     #   value you specify has to be a dedicated IP address that's associated
-    #   with your AWS account.
+    #   with your Amazon Web Services account.
     #
     # @option params [required, String] :destination_pool_name
     #   The name of the IP pool that you want to add the dedicated IP address
@@ -3123,9 +3128,9 @@ module Aws::SESV2
     #
     # When you use the Deliverability dashboard, you pay a monthly
     # subscription charge, in addition to any other fees that you accrue by
-    # using Amazon SES and other AWS services. For more information about
-    # the features and cost of a Deliverability dashboard subscription, see
-    # [Amazon SES Pricing][1].
+    # using Amazon SES and other Amazon Web Services services. For more
+    # information about the features and cost of a Deliverability dashboard
+    # subscription, see [Amazon SES Pricing][1].
     #
     #
     #
@@ -3169,12 +3174,10 @@ module Aws::SESV2
     # Used to associate a configuration set with an email identity.
     #
     # @option params [required, String] :email_identity
-    #   The email address or domain that you want to associate with a
-    #   configuration set.
+    #   The email address or domain to associate with a configuration set.
     #
     # @option params [String] :configuration_set_name
-    #   The configuration set that you want to associate with an email
-    #   identity.
+    #   The configuration set to associate with an email identity.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3197,7 +3200,7 @@ module Aws::SESV2
     # Used to enable or disable DKIM authentication for an email identity.
     #
     # @option params [required, String] :email_identity
-    #   The email identity that you want to change the DKIM settings for.
+    #   The email identity.
     #
     # @option params [Boolean] :signing_enabled
     #   Sets the DKIM signing configuration for the identity.
@@ -3231,6 +3234,8 @@ module Aws::SESV2
     # * Update the signing attributes for an identity that uses Bring Your
     #   Own DKIM (BYODKIM).
     #
+    # * Update the key length that should be used for Easy DKIM.
+    #
     # * Change from using no DKIM authentication to using Easy DKIM.
     #
     # * Change from using no DKIM authentication to using BYODKIM.
@@ -3240,11 +3245,11 @@ module Aws::SESV2
     # * Change from using BYODKIM to using Easy DKIM.
     #
     # @option params [required, String] :email_identity
-    #   The email identity that you want to configure DKIM for.
+    #   The email identity.
     #
     # @option params [required, String] :signing_attributes_origin
-    #   The method that you want to use to configure DKIM for the identity.
-    #   There are two possible values:
+    #   The method to use to configure DKIM for the identity. There are the
+    #   following possible values:
     #
     #   * `AWS_SES` – Configure DKIM for the identity by using [Easy DKIM][1].
     #
@@ -3257,9 +3262,13 @@ module Aws::SESV2
     #
     # @option params [Types::DkimSigningAttributes] :signing_attributes
     #   An object that contains information about the private key and selector
-    #   that you want to use to configure DKIM for the identity. This object
-    #   is only required if you want to configure Bring Your Own DKIM
-    #   (BYODKIM) for the identity.
+    #   that you want to use to configure DKIM for the identity for Bring Your
+    #   Own DKIM (BYODKIM) for the identity, or, configures the key length to
+    #   be used for [Easy DKIM][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #
     # @return [Types::PutEmailIdentityDkimSigningAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3272,8 +3281,9 @@ module Aws::SESV2
     #     email_identity: "Identity", # required
     #     signing_attributes_origin: "AWS_SES", # required, accepts AWS_SES, EXTERNAL
     #     signing_attributes: {
-    #       domain_signing_selector: "Selector", # required
-    #       domain_signing_private_key: "PrivateKey", # required
+    #       domain_signing_selector: "Selector",
+    #       domain_signing_private_key: "PrivateKey",
+    #       next_signing_key_length: "RSA_1024_BIT", # accepts RSA_1024_BIT, RSA_2048_BIT
     #     },
     #   })
     #
@@ -3307,8 +3317,7 @@ module Aws::SESV2
     # occur (even if this setting is disabled).
     #
     # @option params [required, String] :email_identity
-    #   The email identity that you want to configure bounce and complaint
-    #   feedback forwarding for.
+    #   The email identity.
     #
     # @option params [Boolean] :email_forwarding_enabled
     #   Sets the feedback forwarding configuration for the identity.
@@ -3345,8 +3354,7 @@ module Aws::SESV2
     # for an email identity.
     #
     # @option params [required, String] :email_identity
-    #   The verified email identity that you want to set up the custom MAIL
-    #   FROM domain for.
+    #   The verified email identity.
     #
     # @option params [String] :mail_from_domain
     #   The custom MAIL FROM domain that you want the verified identity to
@@ -3360,12 +3368,12 @@ module Aws::SESV2
     #     destination for feedback forwarding emails.
     #
     # @option params [String] :behavior_on_mx_failure
-    #   The action that you want to take if the required MX record isn't
-    #   found when you send an email. When you set this value to
-    #   `UseDefaultValue`, the mail is sent using *amazonses.com* as the MAIL
-    #   FROM domain. When you set this value to `RejectMessage`, the Amazon
-    #   SES API v2 returns a `MailFromDomainNotVerified` error, and doesn't
-    #   attempt to deliver the email.
+    #   The action to take if the required MX record isn't found when you
+    #   send an email. When you set this value to `UseDefaultValue`, the mail
+    #   is sent using *amazonses.com* as the MAIL FROM domain. When you set
+    #   this value to `RejectMessage`, the Amazon SES API v2 returns a
+    #   `MailFromDomainNotVerified` error, and doesn't attempt to deliver the
+    #   email.
     #
     #   These behaviors are taken when the custom MAIL FROM domain
     #   configuration is in the `Pending`, `Failed`, and `TemporaryFailure`
@@ -3421,8 +3429,8 @@ module Aws::SESV2
     # Composes an email message to multiple destinations.
     #
     # @option params [String] :from_email_address
-    #   The email address that you want to use as the "From" address for the
-    #   email. The address that you specify has to be verified.
+    #   The email address to use as the "From" address for the email. The
+    #   address that you specify has to be verified.
     #
     # @option params [String] :from_email_address_identity_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3486,8 +3494,7 @@ module Aws::SESV2
     #   The list of bulk email entry objects.
     #
     # @option params [String] :configuration_set_name
-    #   The name of the configuration set that you want to use when sending
-    #   the email.
+    #   The name of the configuration set to use when sending the email.
     #
     # @return [Types::SendBulkEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3554,9 +3561,9 @@ module Aws::SESV2
     end
 
     # Adds an email address to the list of identities for your Amazon SES
-    # account in the current AWS Region and attempts to verify it. As a
-    # result of executing this operation, a customized verification email is
-    # sent to the specified address.
+    # account in the current Amazon Web Services Region and attempts to
+    # verify it. As a result of executing this operation, a customized
+    # verification email is sent to the specified address.
     #
     # To use this operation, you must first create a custom verification
     # email template. For more information about creating and using custom
@@ -3605,8 +3612,8 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # Sends an email message. You can use the Amazon SES API v2 to send two
-    # types of messages:
+    # Sends an email message. You can use the Amazon SES API v2 to send the
+    # following types of messages:
     #
     # * **Simple** – A standard email message. When you create this type of
     #   message, you specify the sender, the recipient, and the message
@@ -3623,8 +3630,8 @@ module Aws::SESV2
     #   replaces the tags with values that you specify.
     #
     # @option params [String] :from_email_address
-    #   The email address that you want to use as the "From" address for the
-    #   email. The address that you specify has to be verified.
+    #   The email address to use as the "From" address for the email. The
+    #   address that you specify has to be verified.
     #
     # @option params [String] :from_email_address_identity_arn
     #   This parameter is used only for sending authorization. It is the ARN
@@ -3692,8 +3699,7 @@ module Aws::SESV2
     #   email sending events.
     #
     # @option params [String] :configuration_set_name
-    #   The name of the configuration set that you want to use when sending
-    #   the email.
+    #   The name of the configuration set to use when sending the email.
     #
     # @option params [Types::ListManagementOptions] :list_management_options
     #   An object used to specify a list or topic to which an email belongs,
@@ -3818,7 +3824,7 @@ module Aws::SESV2
     # You can execute this operation no more than once per second.
     #
     # @option params [required, String] :template_name
-    #   The name of the template that you want to render.
+    #   The name of the template.
     #
     # @option params [required, String] :template_data
     #   A list of replacement values to apply to the template. This parameter
@@ -3895,10 +3901,10 @@ module Aws::SESV2
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set that contains the event destination
-    #   that you want to modify.
+    #   to modify.
     #
     # @option params [required, String] :event_destination_name
-    #   The name of the event destination that you want to modify.
+    #   The name of the event destination.
     #
     # @option params [required, Types::EventDestinationDefinition] :event_destination
     #   An object that defines the event destination.
@@ -4112,7 +4118,7 @@ module Aws::SESV2
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #
     # @option params [required, String] :email_identity
-    #   The email identity for which you want to update policy.
+    #   The email identity.
     #
     # @option params [required, String] :policy_name
     #   The name of the policy.
@@ -4161,7 +4167,7 @@ module Aws::SESV2
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
     #
     # @option params [required, String] :template_name
-    #   The name of the template you want to update.
+    #   The name of the template.
     #
     # @option params [required, Types::EmailTemplateContent] :template_content
     #   The content of the email template, composed of a subject line, an HTML
@@ -4202,7 +4208,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

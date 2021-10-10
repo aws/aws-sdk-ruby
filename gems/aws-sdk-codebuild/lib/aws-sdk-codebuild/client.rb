@@ -497,6 +497,7 @@ module Aws::CodeBuild
     #   resp.build_batches[0].build_batch_config.restrictions.compute_types_allowed #=> Array
     #   resp.build_batches[0].build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.build_batches[0].build_batch_config.timeout_in_mins #=> Integer
+    #   resp.build_batches[0].build_batch_config.batch_report_mode #=> String, one of "REPORT_INDIVIDUAL_BUILDS", "REPORT_AGGREGATED_BATCH"
     #   resp.build_batches[0].build_groups #=> Array
     #   resp.build_batches[0].build_groups[0].identifier #=> String
     #   resp.build_batches[0].build_groups[0].depends_on #=> Array
@@ -821,6 +822,7 @@ module Aws::CodeBuild
     #   resp.projects[0].build_batch_config.restrictions.compute_types_allowed #=> Array
     #   resp.projects[0].build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.projects[0].build_batch_config.timeout_in_mins #=> Integer
+    #   resp.projects[0].build_batch_config.batch_report_mode #=> String, one of "REPORT_INDIVIDUAL_BUILDS", "REPORT_AGGREGATED_BATCH"
     #   resp.projects[0].concurrent_build_limit #=> Integer
     #   resp.projects[0].project_visibility #=> String, one of "PUBLIC_READ", "PRIVATE"
     #   resp.projects[0].public_project_alias #=> String
@@ -1223,6 +1225,7 @@ module Aws::CodeBuild
     #         compute_types_allowed: ["NonEmptyString"],
     #       },
     #       timeout_in_mins: 1,
+    #       batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #     },
     #     concurrent_build_limit: 1,
     #   })
@@ -1344,6 +1347,7 @@ module Aws::CodeBuild
     #   resp.project.build_batch_config.restrictions.compute_types_allowed #=> Array
     #   resp.project.build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.project.build_batch_config.timeout_in_mins #=> Integer
+    #   resp.project.build_batch_config.batch_report_mode #=> String, one of "REPORT_INDIVIDUAL_BUILDS", "REPORT_AGGREGATED_BATCH"
     #   resp.project.concurrent_build_limit #=> Integer
     #   resp.project.project_visibility #=> String, one of "PUBLIC_READ", "PRIVATE"
     #   resp.project.public_project_alias #=> String
@@ -2222,14 +2226,17 @@ module Aws::CodeBuild
     #   The name of the CodeBuild project.
     #
     # @option params [String] :sort_order
-    #   The order to list results in. The results are sorted by build number,
-    #   not the build identifier.
+    #   The order to sort the results in. The results are sorted by build
+    #   number, not the build identifier. If this is not specified, the
+    #   results are sorted in descending order.
     #
     #   Valid values include:
     #
-    #   * `ASCENDING`\: List the build IDs in ascending order by build ID.
+    #   * `ASCENDING`\: List the build identifiers in ascending order, by
+    #     build number.
     #
-    #   * `DESCENDING`\: List the build IDs in descending order by build ID.
+    #   * `DESCENDING`\: List the build identifiers in descending order, by
+    #     build number.
     #
     #   If the project has more than 100 builds, setting the sort order will
     #   result in an error.
@@ -3035,6 +3042,7 @@ module Aws::CodeBuild
     #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed #=> Array
     #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.build_batch.build_batch_config.timeout_in_mins #=> Integer
+    #   resp.build_batch.build_batch_config.batch_report_mode #=> String, one of "REPORT_INDIVIDUAL_BUILDS", "REPORT_AGGREGATED_BATCH"
     #   resp.build_batch.build_groups #=> Array
     #   resp.build_batch.build_groups[0].identifier #=> String
     #   resp.build_batch.build_groups[0].depends_on #=> Array
@@ -3893,6 +3901,7 @@ module Aws::CodeBuild
     #         compute_types_allowed: ["NonEmptyString"],
     #       },
     #       timeout_in_mins: 1,
+    #       batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #     },
     #     debug_session_enabled: false,
     #   })
@@ -4007,6 +4016,7 @@ module Aws::CodeBuild
     #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed #=> Array
     #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.build_batch.build_batch_config.timeout_in_mins #=> Integer
+    #   resp.build_batch.build_batch_config.batch_report_mode #=> String, one of "REPORT_INDIVIDUAL_BUILDS", "REPORT_AGGREGATED_BATCH"
     #   resp.build_batch.build_groups #=> Array
     #   resp.build_batch.build_groups[0].identifier #=> String
     #   resp.build_batch.build_groups[0].depends_on #=> Array
@@ -4314,6 +4324,7 @@ module Aws::CodeBuild
     #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed #=> Array
     #   resp.build_batch.build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.build_batch.build_batch_config.timeout_in_mins #=> Integer
+    #   resp.build_batch.build_batch_config.batch_report_mode #=> String, one of "REPORT_INDIVIDUAL_BUILDS", "REPORT_AGGREGATED_BATCH"
     #   resp.build_batch.build_groups #=> Array
     #   resp.build_batch.build_groups[0].identifier #=> String
     #   resp.build_batch.build_groups[0].depends_on #=> Array
@@ -4412,7 +4423,7 @@ module Aws::CodeBuild
     #   build project.
     #
     # @option params [Array<Types::ProjectArtifacts>] :secondary_artifacts
-    #   An array of `ProjectSource` objects.
+    #   An array of `ProjectArtifact` objects.
     #
     # @option params [Types::ProjectCache] :cache
     #   Stores recently used information so that it can be quickly accessed at
@@ -4640,6 +4651,7 @@ module Aws::CodeBuild
     #         compute_types_allowed: ["NonEmptyString"],
     #       },
     #       timeout_in_mins: 1,
+    #       batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #     },
     #     concurrent_build_limit: 1,
     #   })
@@ -4761,6 +4773,7 @@ module Aws::CodeBuild
     #   resp.project.build_batch_config.restrictions.compute_types_allowed #=> Array
     #   resp.project.build_batch_config.restrictions.compute_types_allowed[0] #=> String
     #   resp.project.build_batch_config.timeout_in_mins #=> Integer
+    #   resp.project.build_batch_config.batch_report_mode #=> String, one of "REPORT_INDIVIDUAL_BUILDS", "REPORT_AGGREGATED_BATCH"
     #   resp.project.concurrent_build_limit #=> Integer
     #   resp.project.project_visibility #=> String, one of "PUBLIC_READ", "PRIVATE"
     #   resp.project.public_project_alias #=> String
@@ -5026,7 +5039,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -716,6 +716,7 @@ module Aws::FSx
     #   resp.backup.file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.backup.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.file_system.file_system_type_version #=> String
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #   resp.backup.directory_information.resource_arn #=> String
@@ -1010,6 +1011,7 @@ module Aws::FSx
     #   resp.backup.file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.backup.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.file_system.file_system_type_version #=> String
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #   resp.backup.directory_information.resource_arn #=> String
@@ -1312,6 +1314,16 @@ module Aws::FSx
     #   The ONTAP configuration properties of the FSx for NetApp ONTAP file
     #   system that you are creating.
     #
+    # @option params [String] :file_system_type_version
+    #   Sets the version of the Amazon FSx for Lustre file system you're
+    #   creating. Valid values are `2.10` and `2.12`.
+    #
+    #   * Set the value to `2.10` to create a Lustre 2.10 file system.
+    #
+    #   * Set the value to `2.12` to create a Lustre 2.12 file system.
+    #
+    #   Default value is `2.10`.
+    #
     # @return [Types::CreateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFileSystemResponse#file_system #file_system} => Types::FileSystem
@@ -1458,6 +1470,7 @@ module Aws::FSx
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
     #     },
+    #     file_system_type_version: "FileSystemTypeVersion",
     #   })
     #
     # @example Response structure
@@ -1566,6 +1579,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.file_system_type_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystem AWS API Documentation
     #
@@ -1689,6 +1703,15 @@ module Aws::FSx
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #
+    # @option params [String] :file_system_type_version
+    #   Sets the version for the Amazon FSx for Lustre file system you're
+    #   creating from a backup. Valid values are `2.10` and `2.12`.
+    #
+    #   You don't need to specify `FileSystemTypeVersion` because it will be
+    #   applied using the backup's `FileSystemTypeVersion` setting. If you
+    #   choose to specify `FileSystemTypeVersion` when creating from backup,
+    #   the value must match the backup's `FileSystemTypeVersion` setting.
+    #
     # @return [Types::CreateFileSystemFromBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFileSystemFromBackupResponse#file_system #file_system} => Types::FileSystem
@@ -1802,6 +1825,7 @@ module Aws::FSx
     #     },
     #     storage_type: "SSD", # accepts SSD, HDD
     #     kms_key_id: "KmsKeyId",
+    #     file_system_type_version: "FileSystemTypeVersion",
     #   })
     #
     # @example Response structure
@@ -1910,6 +1934,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.file_system_type_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackup AWS API Documentation
     #
@@ -2722,6 +2747,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.backups[0].file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backups[0].file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backups[0].file_system.file_system_type_version #=> String
     #   resp.backups[0].directory_information.domain_name #=> String
     #   resp.backups[0].directory_information.active_directory_id #=> String
     #   resp.backups[0].directory_information.resource_arn #=> String
@@ -3127,6 +3153,7 @@ module Aws::FSx
     #   resp.file_systems[0].ontap_configuration.route_table_ids[0] #=> String
     #   resp.file_systems[0].ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_systems[0].ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_systems[0].file_system_type_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystems AWS API Documentation
@@ -3832,6 +3859,7 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.route_table_ids[0] #=> String
     #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.file_system_type_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystem AWS API Documentation
     #
@@ -4013,7 +4041,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

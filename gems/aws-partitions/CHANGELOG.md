@@ -3,6 +3,75 @@ Unreleased Changes
 
 * Feature - Support modeled dualstack and fips endpoints in `Aws::Partitions::EndpointProvider`.
 
+1.513.0 (2021-10-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.512.0 (2021-10-07)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ManagedGrafana`.
+
+1.511.0 (2021-10-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.510.0 (2021-10-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.509.0 (2021-09-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CloudControlApi`.
+
+* Feature - Added support for enumerating regions for `Aws::Account`.
+
+1.508.0 (2021-09-29)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.507.0 (2021-09-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::VoiceID`.
+
+* Feature - Added support for enumerating regions for `Aws::ConnectWisdomService`.
+
+1.506.0 (2021-09-24)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.505.0 (2021-09-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.504.0 (2021-09-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.503.0 (2021-09-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.502.0 (2021-09-16)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::KafkaConnect`.
+
+1.501.0 (2021-09-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.500.0 (2021-09-10)
 ------------------
 

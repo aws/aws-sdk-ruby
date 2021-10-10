@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-10-07)
+------------------
+
+* Feature - Removing unused request/response objects.
+
 1.16.0 (2021-09-02)
 ------------------
 

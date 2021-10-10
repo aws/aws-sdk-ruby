@@ -135,8 +135,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
+    #   `[ \{ "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" \} ]`
     #
     #   In most cases, you can use this value instead of the session policy
     #   to lock down your user to the designated home directory
@@ -583,8 +583,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
+    #   `[ \{ "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" \} ]`
     #
     #   In most cases, you can use this value instead of the session policy
     #   to lock your user down to the designated home directory
@@ -817,13 +817,24 @@ module Aws::Transfer
     #
     #   * *Tag*\: add a tag to the file
     #
+    #   <note markdown="1"> Currently, copying and tagging are supported only on S3.
+    #
+    #    </note>
+    #
     #   For file location, you specify either the S3 bucket and key, or the
     #   EFS filesystem ID and path.
     #   @return [Array<Types::WorkflowStep>]
     #
     # @!attribute [rw] on_exception_steps
-    #   Specifies the steps (actions) to take if any errors are encountered
+    #   Specifies the steps (actions) to take if errors are encountered
     #   during execution of the workflow.
+    #
+    #   <note markdown="1"> For custom steps, the lambda function needs to send `FAILURE` to the
+    #   call back API to kick off the exception steps. Additionally, if the
+    #   lambda does not send `SUCCESS` before it times out, the exception
+    #   steps are executed.
+    #
+    #    </note>
     #   @return [Array<Types::WorkflowStep>]
     #
     # @!attribute [rw] tags
@@ -981,7 +992,7 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # The name of the step, used to identify the step that is being deleted.
+    # The name of the step, used to identify the delete step.
     #
     # @note When making an API call, you may pass DeleteStepDetails
     #   data as a hash:
@@ -1776,7 +1787,7 @@ module Aws::Transfer
     #   @return [Array<Types::WorkflowStep>]
     #
     # @!attribute [rw] on_exception_steps
-    #   Specifies the steps (actions) to take if any errors are encountered
+    #   Specifies the steps (actions) to take if errors are encountered
     #   during execution of the workflow.
     #   @return [Array<Types::WorkflowStep>]
     #
@@ -1802,22 +1813,7 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Specifies the details for the file location for the file being used in
-    # the workflow. Only applicable if you are using Amazon EFS for storage.
-    #
-    # You need to provide the file system ID and the pathname. The pathname
-    # can represent either a path or a file. This is determined by whether
-    # or not you end the path value with the forward slash (/) character. If
-    # the final character is "/", then your file is copied to the folder,
-    # and its name does not change. If, rather, the final character is
-    # alphanumeric, your uploaded file is renamed to the path value. In this
-    # case, if a file with that name already exists, it is overwritten.
-    #
-    # For example, if your path is `shared-files/bob/`, your uploaded files
-    # are copied to the `shared-files/bob/`, folder. If your path is
-    # `shared-files/today`, each uploaded file is copied to the
-    # `shared-files` folder and named `today`\: each upload overwrites the
-    # previous version of the `bob` file.
+    # Reserved for future use.
     #
     # @note When making an API call, you may pass EfsFileLocation
     #   data as a hash:
@@ -1977,7 +1973,7 @@ module Aws::Transfer
     #   @return [Array<Types::ExecutionStepResult>]
     #
     # @!attribute [rw] on_exception_steps
-    #   Specifies the steps (actions) to take if any errors are encountered
+    #   Specifies the steps (actions) to take if errors are encountered
     #   during execution of the workflow.
     #   @return [Array<Types::ExecutionStepResult>]
     #
@@ -2206,7 +2202,7 @@ module Aws::Transfer
     #   @return [Types::S3InputFileLocation]
     #
     # @!attribute [rw] efs_file_location
-    #   Specifies the details for the Amazon EFS file being copied.
+    #   Reserved for future use.
     #   @return [Types::EfsFileLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/InputFileLocation AWS API Documentation
@@ -3101,20 +3097,6 @@ module Aws::Transfer
     # Specifies the details for the file location for the file being used in
     # the workflow. Only applicable if you are using S3 storage.
     #
-    # You need to provide the bucket and key. The key can represent either a
-    # path or a file. This is determined by whether or not you end the key
-    # value with the forward slash (/) character. If the final character is
-    # "/", then your file is copied to the folder, and its name does not
-    # change. If, rather, the final character is alphanumeric, your uploaded
-    # file is renamed to the path value. In this case, if a file with that
-    # name already exists, it is overwritten.
-    #
-    # For example, if your path is `shared-files/bob/`, your uploaded files
-    # are copied to the `shared-files/bob/`, folder. If your path is
-    # `shared-files/today`, each uploaded file is copied to the
-    # `shared-files` folder and named `today`\: each upload overwrites the
-    # previous version of the *bob* file.
-    #
     # @!attribute [rw] bucket
     #   Specifies the S3 bucket that contains the file being used.
     #   @return [String]
@@ -3144,7 +3126,23 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Specifies the details for the S3 file being copied.
+    # Specifies the customer input S3 file location. If it is used inside
+    # `copyStepDetails.DestinationFileLocation`, it should be the S3 copy
+    # destination.
+    #
+    # You need to provide the bucket and key. The key can represent either a
+    # path or a file. This is determined by whether or not you end the key
+    # value with the forward slash (/) character. If the final character is
+    # "/", then your file is copied to the folder, and its name does not
+    # change. If, rather, the final character is alphanumeric, your uploaded
+    # file is renamed to the path value. In this case, if a file with that
+    # name already exists, it is overwritten.
+    #
+    # For example, if your path is `shared-files/bob/`, your uploaded files
+    # are copied to the `shared-files/bob/`, folder. If your path is
+    # `shared-files/today`, each uploaded file is copied to the
+    # `shared-files` folder and named `today`\: each upload overwrites the
+    # previous version of the *bob* file.
     #
     # @note When making an API call, you may pass S3InputFileLocation
     #   data as a hash:
@@ -3155,7 +3153,7 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] bucket
-    #   Specifies the S3 bucket that contains the file being copied.
+    #   Specifies the S3 bucket for the customer input file.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -3618,8 +3616,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
+    #   `[ \{ "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" \} ]`
     #
     #   In most cases, you can use this value instead of the session policy
     #   to lock down your user to the designated home directory
@@ -4031,8 +4029,8 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example.
     #
-    #   `[ \{ "Entry": "your-personal-report.pdf", "Target":
-    #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]`
+    #   `[ \{ "Entry": "/directory1", "Target":
+    #   "/bucket_name/home/mydirectory" \} ]`
     #
     #   In most cases, you can use this value instead of the session policy
     #   to lock down your user to the designated home directory
@@ -4300,7 +4298,7 @@ module Aws::Transfer
     #
     #   * A description
     #
-    #   * An S3 or EFS location for the destination of the file copy.
+    #   * An S3 location for the destination of the file copy.
     #
     #   * A flag that indicates whether or not to overwrite an existing file
     #     of the same name. The default is `FALSE`.
@@ -4314,7 +4312,7 @@ module Aws::Transfer
     #   @return [Types::CustomStepDetails]
     #
     # @!attribute [rw] delete_step_details
-    #   You need to specify the name of the file to be deleted.
+    #   Details for a step that deletes the file.
     #   @return [Types::DeleteStepDetails]
     #
     # @!attribute [rw] tag_step_details

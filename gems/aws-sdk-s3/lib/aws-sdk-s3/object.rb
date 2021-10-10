@@ -184,10 +184,10 @@ module Aws::S3
     end
 
     # If the object is stored using server-side encryption either with an
-    # Amazon Web Services KMS customer master key (CMK) or an Amazon
-    # S3-managed encryption key, the response includes this header with the
-    # value of the server-side encryption algorithm used when storing this
-    # object in Amazon S3 (for example, AES256, aws:kms).
+    # Amazon Web Services KMS key or an Amazon S3-managed encryption key,
+    # the response includes this header with the value of the server-side
+    # encryption algorithm used when storing this object in Amazon S3 (for
+    # example, AES256, aws:kms).
     # @return [String]
     def server_side_encryption
       data[:server_side_encryption]
@@ -217,8 +217,8 @@ module Aws::S3
     end
 
     # If present, specifies the ID of the Amazon Web Services Key Management
-    # Service (Amazon Web Services KMS) symmetric customer managed customer
-    # master key (CMK) that was used for the object.
+    # Service (Amazon Web Services KMS) symmetric customer managed key that
+    # was used for the object.
     # @return [String]
     def ssekms_key_id
       data[:ssekms_key_id]
@@ -1028,13 +1028,13 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
-    #   Specifies the ID of the symmetric customer managed Amazon Web Services
-    #   KMS CMK to use for object encryption. All GET and PUT requests for an
-    #   object protected by Amazon Web Services KMS will fail if not made via
-    #   SSL or using SigV4. For information about configuring using any of the
-    #   officially supported Amazon Web Services SDKs and Amazon Web Services
-    #   CLI, see [Specifying the Signature Version in Request
-    #   Authentication][1] in the *Amazon S3 User Guide*.
+    #   Specifies the ID of the symmetric customer managed key to use for
+    #   object encryption. All GET and PUT requests for an object protected by
+    #   Amazon Web Services KMS will fail if not made via SSL or using SigV4.
+    #   For information about configuring using any of the officially
+    #   supported Amazon Web Services SDKs and Amazon Web Services CLI, see
+    #   [Specifying the Signature Version in Request Authentication][1] in the
+    #   *Amazon S3 User Guide*.
     #
     #
     #
@@ -1277,12 +1277,12 @@ module Aws::S3
     #   If `x-amz-server-side-encryption` is present and has the value of
     #   `aws:kms`, this header specifies the ID of the Amazon Web Services Key
     #   Management Service (Amazon Web Services KMS) symmetrical customer
-    #   managed customer master key (CMK) that was used for the object. If you
-    #   specify `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   managed key that was used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
     #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the
-    #   Amazon Web Services managed CMK in Amazon Web Services to protect the
-    #   data. If the KMS key does not exist in the same account issuing the
-    #   command, you must use the full ARN and not just the ID.
+    #   Amazon Web Services managed key to protect the data. If the KMS key
+    #   does not exist in the same account issuing the command, you must use
+    #   the full ARN and not just the ID.
     # @option options [String] :ssekms_encryption_context
     #   Specifies the Amazon Web Services KMS Encryption Context to use for
     #   object encryption. The value of this header is a base64-encoded UTF-8

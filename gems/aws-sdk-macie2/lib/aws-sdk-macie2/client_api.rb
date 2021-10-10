@@ -38,6 +38,7 @@ module Aws::Macie2
     BucketCriteriaAdditionalProperties = Shapes::StructureShape.new(name: 'BucketCriteriaAdditionalProperties')
     BucketLevelPermissions = Shapes::StructureShape.new(name: 'BucketLevelPermissions')
     BucketMetadata = Shapes::StructureShape.new(name: 'BucketMetadata')
+    BucketMetadataErrorCode = Shapes::StringShape.new(name: 'BucketMetadataErrorCode')
     BucketPermissionConfiguration = Shapes::StructureShape.new(name: 'BucketPermissionConfiguration')
     BucketPolicy = Shapes::StructureShape.new(name: 'BucketPolicy')
     BucketPublicAccess = Shapes::StructureShape.new(name: 'BucketPublicAccess')
@@ -190,6 +191,8 @@ module Aws::Macie2
     ListJobsFilterTerm = Shapes::StructureShape.new(name: 'ListJobsFilterTerm')
     ListJobsSortAttributeName = Shapes::StringShape.new(name: 'ListJobsSortAttributeName')
     ListJobsSortCriteria = Shapes::StructureShape.new(name: 'ListJobsSortCriteria')
+    ListManagedDataIdentifiersRequest = Shapes::StructureShape.new(name: 'ListManagedDataIdentifiersRequest')
+    ListManagedDataIdentifiersResponse = Shapes::StructureShape.new(name: 'ListManagedDataIdentifiersResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
     ListOrganizationAdminAccountsRequest = Shapes::StructureShape.new(name: 'ListOrganizationAdminAccountsRequest')
@@ -197,6 +200,8 @@ module Aws::Macie2
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MacieStatus = Shapes::StringShape.new(name: 'MacieStatus')
+    ManagedDataIdentifierSelector = Shapes::StringShape.new(name: 'ManagedDataIdentifierSelector')
+    ManagedDataIdentifierSummary = Shapes::StructureShape.new(name: 'ManagedDataIdentifierSummary')
     MatchingBucket = Shapes::StructureShape.new(name: 'MatchingBucket')
     MatchingResource = Shapes::StructureShape.new(name: 'MatchingResource')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -320,6 +325,7 @@ module Aws::Macie2
     __listOfJobSummary = Shapes::ListShape.new(name: '__listOfJobSummary')
     __listOfKeyValuePair = Shapes::ListShape.new(name: '__listOfKeyValuePair')
     __listOfListJobsFilterTerm = Shapes::ListShape.new(name: '__listOfListJobsFilterTerm')
+    __listOfManagedDataIdentifierSummary = Shapes::ListShape.new(name: '__listOfManagedDataIdentifierSummary')
     __listOfMatchingResource = Shapes::ListShape.new(name: '__listOfMatchingResource')
     __listOfMember = Shapes::ListShape.new(name: '__listOfMember')
     __listOfS3BucketDefinitionForJob = Shapes::ListShape.new(name: '__listOfS3BucketDefinitionForJob')
@@ -451,6 +457,8 @@ module Aws::Macie2
     BucketMetadata.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
     BucketMetadata.add_member(:classifiable_object_count, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableObjectCount"))
     BucketMetadata.add_member(:classifiable_size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableSizeInBytes"))
+    BucketMetadata.add_member(:error_code, Shapes::ShapeRef.new(shape: BucketMetadataErrorCode, location_name: "errorCode"))
+    BucketMetadata.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
     BucketMetadata.add_member(:job_details, Shapes::ShapeRef.new(shape: JobDetails, location_name: "jobDetails"))
     BucketMetadata.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastUpdated"))
     BucketMetadata.add_member(:object_count, Shapes::ShapeRef.new(shape: __long, location_name: "objectCount"))
@@ -525,6 +533,8 @@ module Aws::Macie2
     CreateClassificationJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateClassificationJobRequest.add_member(:initial_run, Shapes::ShapeRef.new(shape: __boolean, location_name: "initialRun"))
     CreateClassificationJobRequest.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, required: true, location_name: "jobType"))
+    CreateClassificationJobRequest.add_member(:managed_data_identifier_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "managedDataIdentifierIds"))
+    CreateClassificationJobRequest.add_member(:managed_data_identifier_selector, Shapes::ShapeRef.new(shape: ManagedDataIdentifierSelector, location_name: "managedDataIdentifierSelector"))
     CreateClassificationJobRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreateClassificationJobRequest.add_member(:s3_job_definition, Shapes::ShapeRef.new(shape: S3JobDefinition, required: true, location_name: "s3JobDefinition"))
     CreateClassificationJobRequest.add_member(:sampling_percentage, Shapes::ShapeRef.new(shape: __integer, location_name: "samplingPercentage"))
@@ -680,6 +690,8 @@ module Aws::Macie2
     DescribeClassificationJobResponse.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "jobType"))
     DescribeClassificationJobResponse.add_member(:last_run_error_status, Shapes::ShapeRef.new(shape: LastRunErrorStatus, location_name: "lastRunErrorStatus"))
     DescribeClassificationJobResponse.add_member(:last_run_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastRunTime"))
+    DescribeClassificationJobResponse.add_member(:managed_data_identifier_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "managedDataIdentifierIds"))
+    DescribeClassificationJobResponse.add_member(:managed_data_identifier_selector, Shapes::ShapeRef.new(shape: ManagedDataIdentifierSelector, location_name: "managedDataIdentifierSelector"))
     DescribeClassificationJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     DescribeClassificationJobResponse.add_member(:s3_job_definition, Shapes::ShapeRef.new(shape: S3JobDefinition, location_name: "s3JobDefinition"))
     DescribeClassificationJobResponse.add_member(:sampling_percentage, Shapes::ShapeRef.new(shape: __integer, location_name: "samplingPercentage"))
@@ -1053,6 +1065,13 @@ module Aws::Macie2
     ListJobsSortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
     ListJobsSortCriteria.struct_class = Types::ListJobsSortCriteria
 
+    ListManagedDataIdentifiersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListManagedDataIdentifiersRequest.struct_class = Types::ListManagedDataIdentifiersRequest
+
+    ListManagedDataIdentifiersResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfManagedDataIdentifierSummary, location_name: "items"))
+    ListManagedDataIdentifiersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListManagedDataIdentifiersResponse.struct_class = Types::ListManagedDataIdentifiersResponse
+
     ListMembersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListMembersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListMembersRequest.add_member(:only_associated, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "onlyAssociated"))
@@ -1076,10 +1095,16 @@ module Aws::Macie2
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ManagedDataIdentifierSummary.add_member(:category, Shapes::ShapeRef.new(shape: SensitiveDataItemCategory, location_name: "category"))
+    ManagedDataIdentifierSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    ManagedDataIdentifierSummary.struct_class = Types::ManagedDataIdentifierSummary
+
     MatchingBucket.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
     MatchingBucket.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
     MatchingBucket.add_member(:classifiable_object_count, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableObjectCount"))
     MatchingBucket.add_member(:classifiable_size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableSizeInBytes"))
+    MatchingBucket.add_member(:error_code, Shapes::ShapeRef.new(shape: BucketMetadataErrorCode, location_name: "errorCode"))
+    MatchingBucket.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
     MatchingBucket.add_member(:job_details, Shapes::ShapeRef.new(shape: JobDetails, location_name: "jobDetails"))
     MatchingBucket.add_member(:object_count, Shapes::ShapeRef.new(shape: __long, location_name: "objectCount"))
     MatchingBucket.add_member(:object_count_by_encryption_type, Shapes::ShapeRef.new(shape: ObjectCountByEncryptionType, location_name: "objectCountByEncryptionType"))
@@ -1485,6 +1510,8 @@ module Aws::Macie2
     __listOfKeyValuePair.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 
     __listOfListJobsFilterTerm.member = Shapes::ShapeRef.new(shape: ListJobsFilterTerm)
+
+    __listOfManagedDataIdentifierSummary.member = Shapes::ShapeRef.new(shape: ManagedDataIdentifierSummary)
 
     __listOfMatchingResource.member = Shapes::ShapeRef.new(shape: MatchingResource)
 
@@ -2200,6 +2227,14 @@ module Aws::Macie2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_managed_data_identifiers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListManagedDataIdentifiers"
+        o.http_method = "POST"
+        o.http_request_uri = "/managed-data-identifiers/list"
+        o.input = Shapes::ShapeRef.new(shape: ListManagedDataIdentifiersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListManagedDataIdentifiersResponse)
       end)
 
       api.add_operation(:list_members, Seahorse::Model::Operation.new.tap do |o|

@@ -129,6 +129,7 @@ module Aws::OpenSearchService
     EncryptionAtRestOptions = Shapes::StructureShape.new(name: 'EncryptionAtRestOptions')
     EncryptionAtRestOptionsStatus = Shapes::StructureShape.new(name: 'EncryptionAtRestOptionsStatus')
     EndpointsMap = Shapes::MapShape.new(name: 'EndpointsMap')
+    EngineType = Shapes::StringShape.new(name: 'EngineType')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorType = Shapes::StringShape.new(name: 'ErrorType')
@@ -170,6 +171,7 @@ module Aws::OpenSearchService
     LimitValueList = Shapes::ListShape.new(name: 'LimitValueList')
     Limits = Shapes::StructureShape.new(name: 'Limits')
     LimitsByRole = Shapes::MapShape.new(name: 'LimitsByRole')
+    ListDomainNamesRequest = Shapes::StructureShape.new(name: 'ListDomainNamesRequest')
     ListDomainNamesResponse = Shapes::StructureShape.new(name: 'ListDomainNamesResponse')
     ListDomainsForPackageRequest = Shapes::StructureShape.new(name: 'ListDomainsForPackageRequest')
     ListDomainsForPackageResponse = Shapes::StructureShape.new(name: 'ListDomainsForPackageResponse')
@@ -631,6 +633,7 @@ module Aws::OpenSearchService
     DomainEndpointOptionsStatus.struct_class = Types::DomainEndpointOptionsStatus
 
     DomainInfo.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    DomainInfo.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "EngineType"))
     DomainInfo.struct_class = Types::DomainInfo
 
     DomainInfoList.member = Shapes::ShapeRef.new(shape: DomainInfo)
@@ -800,6 +803,9 @@ module Aws::OpenSearchService
 
     LimitsByRole.key = Shapes::ShapeRef.new(shape: InstanceRole)
     LimitsByRole.value = Shapes::ShapeRef.new(shape: Limits)
+
+    ListDomainNamesRequest.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location: "querystring", location_name: "engineType"))
+    ListDomainNamesRequest.struct_class = Types::ListDomainNamesRequest
 
     ListDomainNamesResponse.add_member(:domain_names, Shapes::ShapeRef.new(shape: DomainInfoList, location_name: "DomainNames"))
     ListDomainNamesResponse.struct_class = Types::ListDomainNamesResponse
@@ -1515,7 +1521,7 @@ module Aws::OpenSearchService
         o.name = "ListDomainNames"
         o.http_method = "GET"
         o.http_request_uri = "/2021-01-01/domain"
-        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.input = Shapes::ShapeRef.new(shape: ListDomainNamesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDomainNamesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

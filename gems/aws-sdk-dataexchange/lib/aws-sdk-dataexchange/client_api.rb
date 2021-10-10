@@ -14,6 +14,7 @@ module Aws::DataExchange
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    Action = Shapes::StructureShape.new(name: 'Action')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssetDestinationEntry = Shapes::StructureShape.new(name: 'AssetDestinationEntry')
     AssetDetails = Shapes::StructureShape.new(name: 'AssetDetails')
@@ -21,11 +22,15 @@ module Aws::DataExchange
     AssetName = Shapes::StringShape.new(name: 'AssetName')
     AssetSourceEntry = Shapes::StructureShape.new(name: 'AssetSourceEntry')
     AssetType = Shapes::StringShape.new(name: 'AssetType')
+    AutoExportRevisionDestinationEntry = Shapes::StructureShape.new(name: 'AutoExportRevisionDestinationEntry')
+    AutoExportRevisionToS3RequestDetails = Shapes::StructureShape.new(name: 'AutoExportRevisionToS3RequestDetails')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
     Code = Shapes::StringShape.new(name: 'Code')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateDataSetRequest = Shapes::StructureShape.new(name: 'CreateDataSetRequest')
     CreateDataSetResponse = Shapes::StructureShape.new(name: 'CreateDataSetResponse')
+    CreateEventActionRequest = Shapes::StructureShape.new(name: 'CreateEventActionRequest')
+    CreateEventActionResponse = Shapes::StructureShape.new(name: 'CreateEventActionResponse')
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
     CreateJobResponse = Shapes::StructureShape.new(name: 'CreateJobResponse')
     CreateRevisionRequest = Shapes::StructureShape.new(name: 'CreateRevisionRequest')
@@ -33,9 +38,13 @@ module Aws::DataExchange
     DataSetEntry = Shapes::StructureShape.new(name: 'DataSetEntry')
     DeleteAssetRequest = Shapes::StructureShape.new(name: 'DeleteAssetRequest')
     DeleteDataSetRequest = Shapes::StructureShape.new(name: 'DeleteDataSetRequest')
+    DeleteEventActionRequest = Shapes::StructureShape.new(name: 'DeleteEventActionRequest')
     DeleteRevisionRequest = Shapes::StructureShape.new(name: 'DeleteRevisionRequest')
     Description = Shapes::StringShape.new(name: 'Description')
     Details = Shapes::StructureShape.new(name: 'Details')
+    Event = Shapes::StructureShape.new(name: 'Event')
+    EventActionEntry = Shapes::StructureShape.new(name: 'EventActionEntry')
+    ExceptionCause = Shapes::StringShape.new(name: 'ExceptionCause')
     ExportAssetToSignedUrlRequestDetails = Shapes::StructureShape.new(name: 'ExportAssetToSignedUrlRequestDetails')
     ExportAssetToSignedUrlResponseDetails = Shapes::StructureShape.new(name: 'ExportAssetToSignedUrlResponseDetails')
     ExportAssetsToS3RequestDetails = Shapes::StructureShape.new(name: 'ExportAssetsToS3RequestDetails')
@@ -47,6 +56,8 @@ module Aws::DataExchange
     GetAssetResponse = Shapes::StructureShape.new(name: 'GetAssetResponse')
     GetDataSetRequest = Shapes::StructureShape.new(name: 'GetDataSetRequest')
     GetDataSetResponse = Shapes::StructureShape.new(name: 'GetDataSetResponse')
+    GetEventActionRequest = Shapes::StructureShape.new(name: 'GetEventActionRequest')
+    GetEventActionResponse = Shapes::StructureShape.new(name: 'GetEventActionResponse')
     GetJobRequest = Shapes::StructureShape.new(name: 'GetJobRequest')
     GetJobResponse = Shapes::StructureShape.new(name: 'GetJobResponse')
     GetRevisionRequest = Shapes::StructureShape.new(name: 'GetRevisionRequest')
@@ -67,12 +78,15 @@ module Aws::DataExchange
     ListDataSetRevisionsResponse = Shapes::StructureShape.new(name: 'ListDataSetRevisionsResponse')
     ListDataSetsRequest = Shapes::StructureShape.new(name: 'ListDataSetsRequest')
     ListDataSetsResponse = Shapes::StructureShape.new(name: 'ListDataSetsResponse')
+    ListEventActionsRequest = Shapes::StructureShape.new(name: 'ListEventActionsRequest')
+    ListEventActionsResponse = Shapes::StructureShape.new(name: 'ListEventActionsResponse')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
     ListOfAssetDestinationEntry = Shapes::ListShape.new(name: 'ListOfAssetDestinationEntry')
     ListOfAssetEntry = Shapes::ListShape.new(name: 'ListOfAssetEntry')
     ListOfAssetSourceEntry = Shapes::ListShape.new(name: 'ListOfAssetSourceEntry')
     ListOfDataSetEntry = Shapes::ListShape.new(name: 'ListOfDataSetEntry')
+    ListOfEventActionEntry = Shapes::ListShape.new(name: 'ListOfEventActionEntry')
     ListOfJobEntry = Shapes::ListShape.new(name: 'ListOfJobEntry')
     ListOfJobError = Shapes::ListShape.new(name: 'ListOfJobError')
     ListOfRevisionDestinationEntry = Shapes::ListShape.new(name: 'ListOfRevisionDestinationEntry')
@@ -94,6 +108,7 @@ module Aws::DataExchange
     ResponseDetails = Shapes::StructureShape.new(name: 'ResponseDetails')
     RevisionDestinationEntry = Shapes::StructureShape.new(name: 'RevisionDestinationEntry')
     RevisionEntry = Shapes::StructureShape.new(name: 'RevisionEntry')
+    RevisionPublished = Shapes::StructureShape.new(name: 'RevisionPublished')
     S3SnapshotAsset = Shapes::StructureShape.new(name: 'S3SnapshotAsset')
     ServerSideEncryptionTypes = Shapes::StringShape.new(name: 'ServerSideEncryptionTypes')
     ServiceLimitExceededException = Shapes::StructureShape.new(name: 'ServiceLimitExceededException')
@@ -109,6 +124,8 @@ module Aws::DataExchange
     UpdateAssetResponse = Shapes::StructureShape.new(name: 'UpdateAssetResponse')
     UpdateDataSetRequest = Shapes::StructureShape.new(name: 'UpdateDataSetRequest')
     UpdateDataSetResponse = Shapes::StructureShape.new(name: 'UpdateDataSetResponse')
+    UpdateEventActionRequest = Shapes::StructureShape.new(name: 'UpdateEventActionRequest')
+    UpdateEventActionResponse = Shapes::StructureShape.new(name: 'UpdateEventActionResponse')
     UpdateRevisionRequest = Shapes::StructureShape.new(name: 'UpdateRevisionRequest')
     UpdateRevisionResponse = Shapes::StructureShape.new(name: 'UpdateRevisionResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -121,6 +138,9 @@ module Aws::DataExchange
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    Action.add_member(:export_revision_to_s3, Shapes::ShapeRef.new(shape: AutoExportRevisionToS3RequestDetails, location_name: "ExportRevisionToS3"))
+    Action.struct_class = Types::Action
 
     AssetDestinationEntry.add_member(:asset_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "AssetId"))
     AssetDestinationEntry.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
@@ -145,6 +165,14 @@ module Aws::DataExchange
     AssetSourceEntry.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
     AssetSourceEntry.add_member(:key, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Key"))
     AssetSourceEntry.struct_class = Types::AssetSourceEntry
+
+    AutoExportRevisionDestinationEntry.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
+    AutoExportRevisionDestinationEntry.add_member(:key_pattern, Shapes::ShapeRef.new(shape: __string, location_name: "KeyPattern"))
+    AutoExportRevisionDestinationEntry.struct_class = Types::AutoExportRevisionDestinationEntry
+
+    AutoExportRevisionToS3RequestDetails.add_member(:encryption, Shapes::ShapeRef.new(shape: ExportServerSideEncryption, location_name: "Encryption"))
+    AutoExportRevisionToS3RequestDetails.add_member(:revision_destination, Shapes::ShapeRef.new(shape: AutoExportRevisionDestinationEntry, required: true, location_name: "RevisionDestination"))
+    AutoExportRevisionToS3RequestDetails.struct_class = Types::AutoExportRevisionToS3RequestDetails
 
     CancelJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "JobId"))
     CancelJobRequest.struct_class = Types::CancelJobRequest
@@ -172,6 +200,18 @@ module Aws::DataExchange
     CreateDataSetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Tags"))
     CreateDataSetResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     CreateDataSetResponse.struct_class = Types::CreateDataSetResponse
+
+    CreateEventActionRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
+    CreateEventActionRequest.add_member(:event, Shapes::ShapeRef.new(shape: Event, required: true, location_name: "Event"))
+    CreateEventActionRequest.struct_class = Types::CreateEventActionRequest
+
+    CreateEventActionResponse.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
+    CreateEventActionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    CreateEventActionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    CreateEventActionResponse.add_member(:event, Shapes::ShapeRef.new(shape: Event, location_name: "Event"))
+    CreateEventActionResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    CreateEventActionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    CreateEventActionResponse.struct_class = Types::CreateEventActionResponse
 
     CreateJobRequest.add_member(:details, Shapes::ShapeRef.new(shape: RequestDetails, required: true, location_name: "Details"))
     CreateJobRequest.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "Type"))
@@ -223,6 +263,9 @@ module Aws::DataExchange
     DeleteDataSetRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     DeleteDataSetRequest.struct_class = Types::DeleteDataSetRequest
 
+    DeleteEventActionRequest.add_member(:event_action_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "EventActionId"))
+    DeleteEventActionRequest.struct_class = Types::DeleteEventActionRequest
+
     DeleteRevisionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     DeleteRevisionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "RevisionId"))
     DeleteRevisionRequest.struct_class = Types::DeleteRevisionRequest
@@ -230,6 +273,17 @@ module Aws::DataExchange
     Details.add_member(:import_asset_from_signed_url_job_error_details, Shapes::ShapeRef.new(shape: ImportAssetFromSignedUrlJobErrorDetails, location_name: "ImportAssetFromSignedUrlJobErrorDetails"))
     Details.add_member(:import_assets_from_s3_job_error_details, Shapes::ShapeRef.new(shape: ListOfAssetSourceEntry, location_name: "ImportAssetsFromS3JobErrorDetails"))
     Details.struct_class = Types::Details
+
+    Event.add_member(:revision_published, Shapes::ShapeRef.new(shape: RevisionPublished, location_name: "RevisionPublished"))
+    Event.struct_class = Types::Event
+
+    EventActionEntry.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
+    EventActionEntry.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    EventActionEntry.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
+    EventActionEntry.add_member(:event, Shapes::ShapeRef.new(shape: Event, required: true, location_name: "Event"))
+    EventActionEntry.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    EventActionEntry.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    EventActionEntry.struct_class = Types::EventActionEntry
 
     ExportAssetToSignedUrlRequestDetails.add_member(:asset_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "AssetId"))
     ExportAssetToSignedUrlRequestDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
@@ -262,6 +316,7 @@ module Aws::DataExchange
 
     ExportRevisionsToS3ResponseDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
     ExportRevisionsToS3ResponseDetails.add_member(:encryption, Shapes::ShapeRef.new(shape: ExportServerSideEncryption, location_name: "Encryption"))
+    ExportRevisionsToS3ResponseDetails.add_member(:event_action_arn, Shapes::ShapeRef.new(shape: __string, location_name: "EventActionArn"))
     ExportRevisionsToS3ResponseDetails.add_member(:revision_destinations, Shapes::ShapeRef.new(shape: ListOfRevisionDestinationEntry, required: true, location_name: "RevisionDestinations"))
     ExportRevisionsToS3ResponseDetails.struct_class = Types::ExportRevisionsToS3ResponseDetails
 
@@ -301,6 +356,17 @@ module Aws::DataExchange
     GetDataSetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Tags"))
     GetDataSetResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     GetDataSetResponse.struct_class = Types::GetDataSetResponse
+
+    GetEventActionRequest.add_member(:event_action_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "EventActionId"))
+    GetEventActionRequest.struct_class = Types::GetEventActionRequest
+
+    GetEventActionResponse.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
+    GetEventActionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    GetEventActionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    GetEventActionResponse.add_member(:event, Shapes::ShapeRef.new(shape: Event, location_name: "Event"))
+    GetEventActionResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    GetEventActionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    GetEventActionResponse.struct_class = Types::GetEventActionResponse
 
     GetJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "JobId"))
     GetJobRequest.struct_class = Types::GetJobRequest
@@ -397,6 +463,15 @@ module Aws::DataExchange
     ListDataSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDataSetsResponse.struct_class = Types::ListDataSetsResponse
 
+    ListEventActionsRequest.add_member(:event_source_id, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "eventSourceId"))
+    ListEventActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListEventActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListEventActionsRequest.struct_class = Types::ListEventActionsRequest
+
+    ListEventActionsResponse.add_member(:event_actions, Shapes::ShapeRef.new(shape: ListOfEventActionEntry, location_name: "EventActions"))
+    ListEventActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEventActionsResponse.struct_class = Types::ListEventActionsResponse
+
     ListJobsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "dataSetId"))
     ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -414,6 +489,8 @@ module Aws::DataExchange
     ListOfAssetSourceEntry.member = Shapes::ShapeRef.new(shape: AssetSourceEntry)
 
     ListOfDataSetEntry.member = Shapes::ShapeRef.new(shape: DataSetEntry)
+
+    ListOfEventActionEntry.member = Shapes::ShapeRef.new(shape: EventActionEntry)
 
     ListOfJobEntry.member = Shapes::ShapeRef.new(shape: JobEntry)
 
@@ -481,6 +558,9 @@ module Aws::DataExchange
     RevisionEntry.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
     RevisionEntry.struct_class = Types::RevisionEntry
 
+    RevisionPublished.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    RevisionPublished.struct_class = Types::RevisionPublished
+
     S3SnapshotAsset.add_member(:size, Shapes::ShapeRef.new(shape: __doubleMin0, required: true, location_name: "Size"))
     S3SnapshotAsset.struct_class = Types::S3SnapshotAsset
 
@@ -540,6 +620,18 @@ module Aws::DataExchange
     UpdateDataSetResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     UpdateDataSetResponse.struct_class = Types::UpdateDataSetResponse
 
+    UpdateEventActionRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
+    UpdateEventActionRequest.add_member(:event_action_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "EventActionId"))
+    UpdateEventActionRequest.struct_class = Types::UpdateEventActionRequest
+
+    UpdateEventActionResponse.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
+    UpdateEventActionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    UpdateEventActionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    UpdateEventActionResponse.add_member(:event, Shapes::ShapeRef.new(shape: Event, location_name: "Event"))
+    UpdateEventActionResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    UpdateEventActionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    UpdateEventActionResponse.struct_class = Types::UpdateEventActionResponse
+
     UpdateRevisionRequest.add_member(:comment, Shapes::ShapeRef.new(shape: __stringMin0Max16384, location_name: "Comment"))
     UpdateRevisionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
     UpdateRevisionRequest.add_member(:finalized, Shapes::ShapeRef.new(shape: __boolean, location_name: "Finalized"))
@@ -557,6 +649,7 @@ module Aws::DataExchange
     UpdateRevisionResponse.struct_class = Types::UpdateRevisionResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
+    ValidationException.add_member(:exception_cause, Shapes::ShapeRef.new(shape: ExceptionCause, location_name: "ExceptionCause"))
     ValidationException.struct_class = Types::ValidationException
 
 
@@ -603,17 +696,30 @@ module Aws::DataExchange
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_event_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEventAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/event-actions"
+        o.input = Shapes::ShapeRef.new(shape: CreateEventActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateEventActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateJob"
         o.http_method = "POST"
         o.http_request_uri = "/v1/jobs"
         o.input = Shapes::ShapeRef.new(shape: CreateJobRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateJobResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_revision, Seahorse::Model::Operation.new.tap do |o|
@@ -657,6 +763,18 @@ module Aws::DataExchange
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_event_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEventAction"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/event-actions/{EventActionId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEventActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_revision, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRevision"
         o.http_method = "DELETE"
@@ -689,6 +807,18 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/data-sets/{DataSetId}"
         o.input = Shapes::ShapeRef.new(shape: GetDataSetRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDataSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_event_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEventAction"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/event-actions/{EventActionId}"
+        o.input = Shapes::ShapeRef.new(shape: GetEventActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEventActionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -743,6 +873,24 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/data-sets"
         o.input = Shapes::ShapeRef.new(shape: ListDataSetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDataSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_event_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEventActions"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/event-actions"
+        o.input = Shapes::ShapeRef.new(shape: ListEventActionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEventActionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -849,6 +997,19 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/data-sets/{DataSetId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateDataSetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDataSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_event_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEventAction"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v1/event-actions/{EventActionId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEventActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEventActionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

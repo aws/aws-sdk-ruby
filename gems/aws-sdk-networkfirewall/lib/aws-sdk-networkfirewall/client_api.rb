@@ -105,6 +105,7 @@ module Aws::NetworkFirewall
     LogType = Shapes::StringShape.new(name: 'LogType')
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     MatchAttributes = Shapes::StructureShape.new(name: 'MatchAttributes')
+    NumberOfAssociations = Shapes::IntegerShape.new(name: 'NumberOfAssociations')
     PaginationMaxResults = Shapes::IntegerShape.new(name: 'PaginationMaxResults')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PerObjectStatus = Shapes::StructureShape.new(name: 'PerObjectStatus')
@@ -137,6 +138,7 @@ module Aws::NetworkFirewall
     RuleGroups = Shapes::ListShape.new(name: 'RuleGroups')
     RuleOption = Shapes::StructureShape.new(name: 'RuleOption')
     RuleOptions = Shapes::ListShape.new(name: 'RuleOptions')
+    RuleOrder = Shapes::StringShape.new(name: 'RuleOrder')
     RuleTargets = Shapes::ListShape.new(name: 'RuleTargets')
     RuleVariableName = Shapes::StringShape.new(name: 'RuleVariableName')
     RuleVariables = Shapes::StructureShape.new(name: 'RuleVariables')
@@ -147,10 +149,13 @@ module Aws::NetworkFirewall
     Settings = Shapes::ListShape.new(name: 'Settings')
     Source = Shapes::StringShape.new(name: 'Source')
     StatefulAction = Shapes::StringShape.new(name: 'StatefulAction')
+    StatefulActions = Shapes::ListShape.new(name: 'StatefulActions')
+    StatefulEngineOptions = Shapes::StructureShape.new(name: 'StatefulEngineOptions')
     StatefulRule = Shapes::StructureShape.new(name: 'StatefulRule')
     StatefulRuleDirection = Shapes::StringShape.new(name: 'StatefulRuleDirection')
     StatefulRuleGroupReference = Shapes::StructureShape.new(name: 'StatefulRuleGroupReference')
     StatefulRuleGroupReferences = Shapes::ListShape.new(name: 'StatefulRuleGroupReferences')
+    StatefulRuleOptions = Shapes::StructureShape.new(name: 'StatefulRuleOptions')
     StatefulRuleProtocol = Shapes::StringShape.new(name: 'StatefulRuleProtocol')
     StatefulRules = Shapes::ListShape.new(name: 'StatefulRules')
     StatelessActions = Shapes::ListShape.new(name: 'StatelessActions')
@@ -397,6 +402,8 @@ module Aws::NetworkFirewall
     FirewallPolicy.add_member(:stateless_fragment_default_actions, Shapes::ShapeRef.new(shape: StatelessActions, required: true, location_name: "StatelessFragmentDefaultActions"))
     FirewallPolicy.add_member(:stateless_custom_actions, Shapes::ShapeRef.new(shape: CustomActions, location_name: "StatelessCustomActions"))
     FirewallPolicy.add_member(:stateful_rule_group_references, Shapes::ShapeRef.new(shape: StatefulRuleGroupReferences, location_name: "StatefulRuleGroupReferences"))
+    FirewallPolicy.add_member(:stateful_default_actions, Shapes::ShapeRef.new(shape: StatefulActions, location_name: "StatefulDefaultActions"))
+    FirewallPolicy.add_member(:stateful_engine_options, Shapes::ShapeRef.new(shape: StatefulEngineOptions, location_name: "StatefulEngineOptions"))
     FirewallPolicy.struct_class = Types::FirewallPolicy
 
     FirewallPolicyMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
@@ -409,6 +416,9 @@ module Aws::NetworkFirewall
     FirewallPolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     FirewallPolicyResponse.add_member(:firewall_policy_status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "FirewallPolicyStatus"))
     FirewallPolicyResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    FirewallPolicyResponse.add_member(:consumed_stateless_rule_capacity, Shapes::ShapeRef.new(shape: RuleCapacity, location_name: "ConsumedStatelessRuleCapacity"))
+    FirewallPolicyResponse.add_member(:consumed_stateful_rule_capacity, Shapes::ShapeRef.new(shape: RuleCapacity, location_name: "ConsumedStatefulRuleCapacity"))
+    FirewallPolicyResponse.add_member(:number_of_associations, Shapes::ShapeRef.new(shape: NumberOfAssociations, location_name: "NumberOfAssociations"))
     FirewallPolicyResponse.struct_class = Types::FirewallPolicyResponse
 
     FirewallStatus.add_member(:status, Shapes::ShapeRef.new(shape: FirewallStatusValue, required: true, location_name: "Status"))
@@ -552,6 +562,7 @@ module Aws::NetworkFirewall
 
     RuleGroup.add_member(:rule_variables, Shapes::ShapeRef.new(shape: RuleVariables, location_name: "RuleVariables"))
     RuleGroup.add_member(:rules_source, Shapes::ShapeRef.new(shape: RulesSource, required: true, location_name: "RulesSource"))
+    RuleGroup.add_member(:stateful_rule_options, Shapes::ShapeRef.new(shape: StatefulRuleOptions, location_name: "StatefulRuleOptions"))
     RuleGroup.struct_class = Types::RuleGroup
 
     RuleGroupMetadata.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
@@ -566,6 +577,8 @@ module Aws::NetworkFirewall
     RuleGroupResponse.add_member(:capacity, Shapes::ShapeRef.new(shape: RuleCapacity, location_name: "Capacity"))
     RuleGroupResponse.add_member(:rule_group_status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "RuleGroupStatus"))
     RuleGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    RuleGroupResponse.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: RuleCapacity, location_name: "ConsumedCapacity"))
+    RuleGroupResponse.add_member(:number_of_associations, Shapes::ShapeRef.new(shape: NumberOfAssociations, location_name: "NumberOfAssociations"))
     RuleGroupResponse.struct_class = Types::RuleGroupResponse
 
     RuleGroups.member = Shapes::ShapeRef.new(shape: RuleGroupMetadata)
@@ -595,15 +608,24 @@ module Aws::NetworkFirewall
 
     Settings.member = Shapes::ShapeRef.new(shape: Setting)
 
+    StatefulActions.member = Shapes::ShapeRef.new(shape: CollectionMember_String)
+
+    StatefulEngineOptions.add_member(:rule_order, Shapes::ShapeRef.new(shape: RuleOrder, location_name: "RuleOrder"))
+    StatefulEngineOptions.struct_class = Types::StatefulEngineOptions
+
     StatefulRule.add_member(:action, Shapes::ShapeRef.new(shape: StatefulAction, required: true, location_name: "Action"))
     StatefulRule.add_member(:header, Shapes::ShapeRef.new(shape: Header, required: true, location_name: "Header"))
     StatefulRule.add_member(:rule_options, Shapes::ShapeRef.new(shape: RuleOptions, required: true, location_name: "RuleOptions"))
     StatefulRule.struct_class = Types::StatefulRule
 
     StatefulRuleGroupReference.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    StatefulRuleGroupReference.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box"=>true}))
     StatefulRuleGroupReference.struct_class = Types::StatefulRuleGroupReference
 
     StatefulRuleGroupReferences.member = Shapes::ShapeRef.new(shape: StatefulRuleGroupReference)
+
+    StatefulRuleOptions.add_member(:rule_order, Shapes::ShapeRef.new(shape: RuleOrder, location_name: "RuleOrder"))
+    StatefulRuleOptions.struct_class = Types::StatefulRuleOptions
 
     StatefulRules.member = Shapes::ShapeRef.new(shape: StatefulRule)
 
@@ -889,6 +911,7 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourcePolicyException)
       end)
 
       api.add_operation(:delete_rule_group, Seahorse::Model::Operation.new.tap do |o|

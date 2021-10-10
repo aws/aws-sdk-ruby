@@ -256,7 +256,8 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] owner_account_id
-    #   The identifier of the AWS account that owns the connection alias.
+    #   The identifier of the Amazon Web Services account that owns the
+    #   connection alias.
     #   @return [String]
     #
     # @!attribute [rw] associations
@@ -288,8 +289,8 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] associated_account_id
-    #   The identifier of the AWS account that associated the connection
-    #   alias with a directory.
+    #   The identifier of the Amazon Web Services account that associated
+    #   the connection alias with a directory.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -330,13 +331,13 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] shared_account_id
-    #   The identifier of the AWS account that the connection alias is
-    #   shared with.
+    #   The identifier of the Amazon Web Services account that the
+    #   connection alias is shared with.
     #   @return [String]
     #
     # @!attribute [rw] allow_association
-    #   Indicates whether the specified AWS account is allowed to associate
-    #   the connection alias with a directory.
+    #   Indicates whether the specified Amazon Web Services account is
+    #   allowed to associate the connection alias with a directory.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ConnectionAliasPermission AWS API Documentation
@@ -426,10 +427,10 @@ module Aws::WorkSpaces
     #   (FQDN), such as `www.example.com`.
     #
     #   After you create a connection string, it is always associated to
-    #   your AWS account. You cannot recreate the same connection string
-    #   with a different account, even if you delete all instances of it
-    #   from the original account. The connection string is globally
-    #   reserved for your account.
+    #   your Amazon Web Services account. You cannot recreate the same
+    #   connection string with a different account, even if you delete all
+    #   instances of it from the original account. The connection string is
+    #   globally reserved for your account.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -551,6 +552,67 @@ module Aws::WorkSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsResult AWS API Documentation
     #
     class CreateTagsResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass CreateUpdatedWorkspaceImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "WorkspaceImageName", # required
+    #         description: "WorkspaceImageDescription", # required
+    #         source_image_id: "WorkspaceImageId", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the new updated WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of whether updates for the WorkSpace image are
+    #   available.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_image_id
+    #   The identifier of the source WorkSpace image.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you want to add to the new updated WorkSpace image.
+    #
+    #   <note markdown="1"> To add tags at the same time when you're creating the updated
+    #   image, you must create an IAM policy that grants your IAM user
+    #   permissions to use `workspaces:CreateTags`.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateUpdatedWorkspaceImageRequest AWS API Documentation
+    #
+    class CreateUpdatedWorkspaceImageRequest < Struct.new(
+      :name,
+      :description,
+      :source_image_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The identifier of the new updated WorkSpace image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateUpdatedWorkspaceImageResult AWS API Documentation
+    #
+    class CreateUpdatedWorkspaceImageResult < Struct.new(
+      :image_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateWorkspaceBundleRequest
     #   data as a hash:
@@ -1231,9 +1293,9 @@ module Aws::WorkSpaces
     #   The owner of the bundles. You cannot combine this parameter with any
     #   other filter.
     #
-    #   To describe the bundles provided by AWS, specify `AMAZON`. To
-    #   describe the bundles that belong to your account, don't specify a
-    #   value.
+    #   To describe the bundles provided by Amazon Web Services, specify
+    #   `AMAZON`. To describe the bundles that belong to your account,
+    #   don't specify a value.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1358,8 +1420,8 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] image_permissions
-    #   The identifiers of the AWS accounts that the image has been shared
-    #   with.
+    #   The identifiers of the Amazon Web Services accounts that the image
+    #   has been shared with.
     #   @return [Array<Types::ImagePermission>]
     #
     # @!attribute [rw] next_token
@@ -1704,17 +1766,17 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes the AWS accounts that have been granted permission to use a
-    # shared image. For more information about sharing images, see [ Share
-    # or Unshare a Custom WorkSpaces Image][1].
+    # Describes the Amazon Web Services accounts that have been granted
+    # permission to use a shared image. For more information about sharing
+    # images, see [ Share or Unshare a Custom WorkSpaces Image][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html
     #
     # @!attribute [rw] shared_account_id
-    #   The identifier of the AWS account that an image has been shared
-    #   with.
+    #   The identifier of the Amazon Web Services account that an image has
+    #   been shared with.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImagePermission AWS API Documentation
@@ -2424,10 +2486,11 @@ module Aws::WorkSpaces
     # @!attribute [rw] tenancy
     #   Indicates whether your WorkSpace directory is dedicated or shared.
     #   To use Bring Your Own License (BYOL) images, this value must be set
-    #   to `DEDICATED` and your AWS account must be enabled for BYOL. If
-    #   your account has not been enabled for BYOL, you will receive an
-    #   InvalidParameterValuesException error. For more information about
-    #   BYOL images, see [Bring Your Own Windows Desktop Images][1].
+    #   to `DEDICATED` and your Amazon Web Services account must be enabled
+    #   for BYOL. If your account has not been enabled for BYOL, you will
+    #   receive an InvalidParameterValuesException error. For more
+    #   information about BYOL images, see [Bring Your Own Windows Desktop
+    #   Images][1].
     #
     #
     #
@@ -2940,7 +3003,7 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] connection_alias_permission
     #   Indicates whether to share or unshare the connection alias with the
-    #   specified AWS account.
+    #   specified Amazon Web Services account.
     #   @return [Types::ConnectionAliasPermission]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectionAliasPermissionRequest AWS API Documentation
@@ -2955,6 +3018,33 @@ module Aws::WorkSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectionAliasPermissionResult AWS API Documentation
     #
     class UpdateConnectionAliasPermissionResult < Aws::EmptyStructure; end
+
+    # Describes whether a WorkSpace image needs to be updated with the
+    # latest drivers and other components required by Amazon WorkSpaces.
+    #
+    # <note markdown="1"> Only Windows 10 WorkSpace images can be programmatically updated at
+    # this time.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] update_available
+    #   Indicates whether updated drivers or other components are available
+    #   for the specified WorkSpace image.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   A description of whether updates for the WorkSpace image are pending
+    #   or available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateResult AWS API Documentation
+    #
+    class UpdateResult < Struct.new(
+      :update_available,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateRulesOfIpGroupRequest
     #   data as a hash:
@@ -3038,11 +3128,11 @@ module Aws::WorkSpaces
     #   @return [Boolean]
     #
     # @!attribute [rw] shared_account_id
-    #   The identifier of the AWS account to share or unshare the image
-    #   with.
+    #   The identifier of the Amazon Web Services account to share or
+    #   unshare the image with.
     #
     #   Before sharing the image, confirm that you are sharing to the
-    #   correct AWS account ID.
+    #   correct Amazon Web Services account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateWorkspaceImagePermissionRequest AWS API Documentation
@@ -3087,8 +3177,7 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] directory_id
-    #   The identifier of the AWS Directory Service directory for the
-    #   WorkSpace.
+    #   The identifier of the Directory Service directory for the WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -3144,9 +3233,8 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] volume_encryption_key
-    #   The symmetric AWS KMS customer master key (CMK) used to encrypt data
-    #   stored on your WorkSpace. Amazon WorkSpaces does not support
-    #   asymmetric CMKs.
+    #   The symmetric KMS key used to encrypt data stored on your WorkSpace.
+    #   Amazon WorkSpaces does not support asymmetric KMS keys.
     #   @return [String]
     #
     # @!attribute [rw] user_volume_encryption_enabled
@@ -3211,26 +3299,12 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] device_type_windows
     #   Indicates whether users can use Windows clients to access their
-    #   WorkSpaces. To restrict WorkSpaces access to trusted devices (also
-    #   known as managed devices) with valid certificates, specify a value
-    #   of `TRUST`. For more information, see [Restrict WorkSpaces Access to
-    #   Trusted Devices][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html
+    #   WorkSpaces.
     #   @return [String]
     #
     # @!attribute [rw] device_type_osx
     #   Indicates whether users can use macOS clients to access their
-    #   WorkSpaces. To restrict WorkSpaces access to trusted devices (also
-    #   known as managed devices) with valid certificates, specify a value
-    #   of `TRUST`. For more information, see [Restrict WorkSpaces Access to
-    #   Trusted Devices][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html
+    #   WorkSpaces.
     #   @return [String]
     #
     # @!attribute [rw] device_type_web
@@ -3244,8 +3318,8 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] device_type_android
-    #   Indicates whether users can use Android devices to access their
-    #   WorkSpaces.
+    #   Indicates whether users can use Android and Android-compatible
+    #   Chrome OS devices to access their WorkSpaces.
     #   @return [String]
     #
     # @!attribute [rw] device_type_chrome_os
@@ -3290,7 +3364,7 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] owner
     #   The owner of the bundle. This is the account identifier of the
-    #   owner, or `AMAZON` if the bundle is provided by AWS.
+    #   owner, or `AMAZON` if the bundle is provided by Amazon Web Services.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3628,13 +3702,18 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] created
     #   The date when the image was created. If the image has been shared,
-    #   the AWS account that the image has been shared with sees the
-    #   original creation date of the image.
+    #   the Amazon Web Services account that the image has been shared with
+    #   sees the original creation date of the image.
     #   @return [Time]
     #
     # @!attribute [rw] owner_account_id
-    #   The identifier of the AWS account that owns the image.
+    #   The identifier of the Amazon Web Services account that owns the
+    #   image.
     #   @return [String]
+    #
+    # @!attribute [rw] updates
+    #   The updates (if any) that are available for the specified image.
+    #   @return [Types::UpdateResult]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceImage AWS API Documentation
     #
@@ -3648,7 +3727,8 @@ module Aws::WorkSpaces
       :error_code,
       :error_message,
       :created,
-      :owner_account_id)
+      :owner_account_id,
+      :updates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3749,14 +3829,14 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] directory_id
-    #   The identifier of the AWS Directory Service directory for the
-    #   WorkSpace. You can use DescribeWorkspaceDirectories to list the
-    #   available directories.
+    #   The identifier of the Directory Service directory for the WorkSpace.
+    #   You can use DescribeWorkspaceDirectories to list the available
+    #   directories.
     #   @return [String]
     #
     # @!attribute [rw] user_name
     #   The user name of the user for the WorkSpace. This user name must
-    #   exist in the AWS Directory Service directory for the WorkSpace.
+    #   exist in the Directory Service directory for the WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
@@ -3765,9 +3845,8 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] volume_encryption_key
-    #   The symmetric AWS KMS customer master key (CMK) used to encrypt data
-    #   stored on your WorkSpace. Amazon WorkSpaces does not support
-    #   asymmetric CMKs.
+    #   The symmetric KMS key used to encrypt data stored on your WorkSpace.
+    #   Amazon WorkSpaces does not support asymmetric KMS keys.
     #   @return [String]
     #
     # @!attribute [rw] user_volume_encryption_enabled

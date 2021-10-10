@@ -276,6 +276,13 @@ module Aws::IoT
     #             "String" => "String",
     #           },
     #         },
+    #         open_search: {
+    #           role_arn: "AwsArn", # required
+    #           endpoint: "ElasticsearchEndpoint", # required
+    #           index: "ElasticsearchIndex", # required
+    #           type: "ElasticsearchType", # required
+    #           id: "ElasticsearchId", # required
+    #         },
     #       }
     #
     # @!attribute [rw] dynamo_db
@@ -329,7 +336,18 @@ module Aws::IoT
     #   @return [Types::CloudwatchLogsAction]
     #
     # @!attribute [rw] elasticsearch
-    #   Write data to an Amazon Elasticsearch Service domain.
+    #   Write data to an Amazon OpenSearch Service domain.
+    #
+    #   <note markdown="1"> The `Elasticsearch` action can only be used by existing rule
+    #   actions. To create a new rule action or to update an existing rule
+    #   action, use the `OpenSearch` rule action instead. For more
+    #   information, see [OpenSearchAction][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html
     #   @return [Types::ElasticsearchAction]
     #
     # @!attribute [rw] salesforce
@@ -372,6 +390,10 @@ module Aws::IoT
     #   (Amazon MSK) or self-managed Apache Kafka cluster.
     #   @return [Types::KafkaAction]
     #
+    # @!attribute [rw] open_search
+    #   Write data to an Amazon OpenSearch Service domain.
+    #   @return [Types::OpenSearchAction]
+    #
     class Action < Struct.new(
       :dynamo_db,
       :dynamo_d_bv_2,
@@ -393,7 +415,8 @@ module Aws::IoT
       :step_functions,
       :timestream,
       :http,
-      :kafka)
+      :kafka,
+      :open_search)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -426,6 +449,14 @@ module Aws::IoT
     #   The details of a violation event.
     #   @return [Types::ViolationEventAdditionalInfo]
     #
+    # @!attribute [rw] verification_state
+    #   The verification state of the violation (detect alarm).
+    #   @return [String]
+    #
+    # @!attribute [rw] verification_state_description
+    #   The description of the verification state of the violation.
+    #   @return [String]
+    #
     # @!attribute [rw] last_violation_time
     #   The time the most recent violation occurred.
     #   @return [Time]
@@ -441,6 +472,8 @@ module Aws::IoT
       :behavior,
       :last_violation_value,
       :violation_event_additional_info,
+      :verification_state,
+      :verification_state_description,
       :last_violation_time,
       :violation_start_time)
       SENSITIVE = []
@@ -2749,7 +2782,11 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   The epoch timestamp in seconds at which this suppression expires.
+    #   Each audit supression must have a unique client request token. If
+    #   you try to create a new audit suppression with the same token as one
+    #   that already exists, an exception occurs. If you omit this value,
+    #   Amazon Web Services SDKs will automatically generate a unique client
+    #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -5168,6 +5205,13 @@ module Aws::IoT
     #                   "String" => "String",
     #                 },
     #               },
+    #               open_search: {
+    #                 role_arn: "AwsArn", # required
+    #                 endpoint: "ElasticsearchEndpoint", # required
+    #                 index: "ElasticsearchIndex", # required
+    #                 type: "ElasticsearchType", # required
+    #                 id: "ElasticsearchId", # required
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -5338,6 +5382,13 @@ module Aws::IoT
     #               client_properties: { # required
     #                 "String" => "String",
     #               },
+    #             },
+    #             open_search: {
+    #               role_arn: "AwsArn", # required
+    #               endpoint: "ElasticsearchEndpoint", # required
+    #               index: "ElasticsearchIndex", # required
+    #               type: "ElasticsearchType", # required
+    #               id: "ElasticsearchId", # required
     #             },
     #           },
     #         },
@@ -8427,8 +8478,19 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Describes an action that writes data to an Amazon Elasticsearch
-    # Service domain.
+    # Describes an action that writes data to an Amazon OpenSearch Service
+    # domain.
+    #
+    # <note markdown="1"> The `Elasticsearch` action can only be used by existing rule actions.
+    # To create a new rule action or to update an existing rule action, use
+    # the `OpenSearch` rule action instead. For more information, see
+    # [OpenSearchAction][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html
     #
     # @note When making an API call, you may pass ElasticsearchAction
     #   data as a hash:
@@ -8442,15 +8504,15 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The IAM role ARN that has access to Elasticsearch.
+    #   The IAM role ARN that has access to OpenSearch.
     #   @return [String]
     #
     # @!attribute [rw] endpoint
-    #   The endpoint of your Elasticsearch domain.
+    #   The endpoint of your OpenSearch domain.
     #   @return [String]
     #
     # @!attribute [rw] index
-    #   The Elasticsearch index where you want to store your data.
+    #   The index where you want to store your data.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -10409,6 +10471,7 @@ module Aws::IoT
     #         security_profile_name: "SecurityProfileName",
     #         behavior_criteria_type: "STATIC", # accepts STATIC, STATISTICAL, MACHINE_LEARNING
     #         list_suppressed_alerts: false,
+    #         verification_state: "FALSE_POSITIVE", # accepts FALSE_POSITIVE, BENIGN_POSITIVE, TRUE_POSITIVE, UNKNOWN
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -10430,6 +10493,10 @@ module Aws::IoT
     #   A list of all suppressed alerts.
     #   @return [Boolean]
     #
+    # @!attribute [rw] verification_state
+    #   The verification state of the violation (detect alarm).
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of results.
     #   @return [String]
@@ -10443,6 +10510,7 @@ module Aws::IoT
       :security_profile_name,
       :behavior_criteria_type,
       :list_suppressed_alerts,
+      :verification_state,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -13212,6 +13280,7 @@ module Aws::IoT
     #         security_profile_name: "SecurityProfileName",
     #         behavior_criteria_type: "STATIC", # accepts STATIC, STATISTICAL, MACHINE_LEARNING
     #         list_suppressed_alerts: false,
+    #         verification_state: "FALSE_POSITIVE", # accepts FALSE_POSITIVE, BENIGN_POSITIVE, TRUE_POSITIVE, UNKNOWN
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -13242,6 +13311,10 @@ module Aws::IoT
     #   A list of all suppressed alerts.
     #   @return [Boolean]
     #
+    # @!attribute [rw] verification_state
+    #   The verification state of the violation (detect alarm).
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of results.
     #   @return [String]
@@ -13257,6 +13330,7 @@ module Aws::IoT
       :security_profile_name,
       :behavior_criteria_type,
       :list_suppressed_alerts,
+      :verification_state,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -13889,6 +13963,50 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Describes an action that writes data to an Amazon OpenSearch Service
+    # domain.
+    #
+    # @note When making an API call, you may pass OpenSearchAction
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "AwsArn", # required
+    #         endpoint: "ElasticsearchEndpoint", # required
+    #         index: "ElasticsearchIndex", # required
+    #         type: "ElasticsearchType", # required
+    #         id: "ElasticsearchId", # required
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role ARN that has access to OpenSearch.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint of your OpenSearch domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] index
+    #   The OpenSearch index where you want to store your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of document you are storing.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the document you are storing.
+    #   @return [String]
+    #
+    class OpenSearchAction < Struct.new(
+      :role_arn,
+      :endpoint,
+      :index,
+      :type,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A certificate that has been transferred but not yet accepted.
     #
     # @!attribute [rw] certificate_arn
@@ -14233,6 +14351,38 @@ module Aws::IoT
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutVerificationStateOnViolationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         violation_id: "ViolationId", # required
+    #         verification_state: "FALSE_POSITIVE", # required, accepts FALSE_POSITIVE, BENIGN_POSITIVE, TRUE_POSITIVE, UNKNOWN
+    #         verification_state_description: "VerificationStateDescription",
+    #       }
+    #
+    # @!attribute [rw] violation_id
+    #   The violation ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] verification_state
+    #   The verification state of the violation.
+    #   @return [String]
+    #
+    # @!attribute [rw] verification_state_description
+    #   The description of the verification state of the violation (detect
+    #   alarm).
+    #   @return [String]
+    #
+    class PutVerificationStateOnViolationRequest < Struct.new(
+      :violation_id,
+      :verification_state,
+      :verification_state_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class PutVerificationStateOnViolationResponse < Aws::EmptyStructure; end
 
     # Allows you to define a criteria to initiate the increase in rate of
     # rollout for a job.
@@ -14851,6 +15001,13 @@ module Aws::IoT
     #                   "String" => "String",
     #                 },
     #               },
+    #               open_search: {
+    #                 role_arn: "AwsArn", # required
+    #                 endpoint: "ElasticsearchEndpoint", # required
+    #                 index: "ElasticsearchIndex", # required
+    #                 type: "ElasticsearchType", # required
+    #                 id: "ElasticsearchId", # required
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -15021,6 +15178,13 @@ module Aws::IoT
     #               client_properties: { # required
     #                 "String" => "String",
     #               },
+    #             },
+    #             open_search: {
+    #               role_arn: "AwsArn", # required
+    #               endpoint: "ElasticsearchEndpoint", # required
+    #               index: "ElasticsearchIndex", # required
+    #               type: "ElasticsearchType", # required
+    #               id: "ElasticsearchId", # required
     #             },
     #           },
     #         },
@@ -16724,7 +16888,9 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] disconnect_reason
-    #   The reason why the client is disconnected.
+    #   The reason why the client is disconnected. If the thing has been
+    #   disconnected for approximately an hour, the `disconnectReason` value
+    #   might be missing.
     #   @return [String]
     #
     class ThingConnectivity < Struct.new(
@@ -17679,6 +17845,13 @@ module Aws::IoT
     #                 "String" => "String",
     #               },
     #             },
+    #             open_search: {
+    #               role_arn: "AwsArn", # required
+    #               endpoint: "ElasticsearchEndpoint", # required
+    #               index: "ElasticsearchIndex", # required
+    #               type: "ElasticsearchType", # required
+    #               id: "ElasticsearchId", # required
+    #             },
     #           },
     #         ],
     #         rule_disabled: false,
@@ -17849,6 +18022,13 @@ module Aws::IoT
     #             client_properties: { # required
     #               "String" => "String",
     #             },
+    #           },
+    #           open_search: {
+    #             role_arn: "AwsArn", # required
+    #             endpoint: "ElasticsearchEndpoint", # required
+    #             index: "ElasticsearchIndex", # required
+    #             type: "ElasticsearchType", # required
+    #             id: "ElasticsearchId", # required
     #           },
     #         },
     #       }
@@ -19721,6 +19901,14 @@ module Aws::IoT
     #   The type of violation event.
     #   @return [String]
     #
+    # @!attribute [rw] verification_state
+    #   The verification state of the violation (detect alarm).
+    #   @return [String]
+    #
+    # @!attribute [rw] verification_state_description
+    #   The description of the verification state of the violation.
+    #   @return [String]
+    #
     # @!attribute [rw] violation_event_time
     #   The time the violation event occurred.
     #   @return [Time]
@@ -19733,6 +19921,8 @@ module Aws::IoT
       :metric_value,
       :violation_event_additional_info,
       :violation_event_type,
+      :verification_state,
+      :verification_state_description,
       :violation_event_time)
       SENSITIVE = []
       include Aws::Structure

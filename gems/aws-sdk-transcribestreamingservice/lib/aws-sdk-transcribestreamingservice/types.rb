@@ -20,20 +20,31 @@ module Aws::TranscribeStreamingService
     #   One or more alternative interpretations of the input audio.
     #   @return [Array<Types::Item>]
     #
+    # @!attribute [rw] entities
+    #   Contains the entities identified as personally identifiable
+    #   information (PII) in the transcription output.
+    #   @return [Array<Types::Entity>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/Alternative AWS API Documentation
     #
     class Alternative < Struct.new(
       :transcript,
-      :items)
+      :items,
+      :entities)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Provides a wrapper for the audio chunks that you are sending.
     #
-    # For information on audio encoding in Amazon Transcribe, see input. For
-    # information on audio encoding formats in Amazon Transcribe Medical,
-    # see input-med.
+    # For information on audio encoding in Amazon Transcribe, see [Speech
+    # input][1]. For information on audio encoding formats in Amazon
+    # Transcribe Medical, see [Speech input][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/input.html
+    # [2]: https://docs.aws.amazon.com/transcribe/latest/dg/input-med.html
     #
     # @note When making an API call, you may pass AudioEvent
     #   data as a hash:
@@ -85,6 +96,50 @@ module Aws::TranscribeStreamingService
     class ConflictException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The entity identified as personally identifiable information (PII).
+    #
+    # @!attribute [rw] start_time
+    #   The start time of speech that was identified as PII.
+    #   @return [Float]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of speech that was identified as PII.
+    #   @return [Float]
+    #
+    # @!attribute [rw] category
+    #   The category of of information identified in this entity; for
+    #   example, PII.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of PII identified in this entity; for example, name or
+    #   credit card number.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The words in the transcription output that have been identified as a
+    #   PII entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   A value between zero and one that Amazon Transcribe assigns to PII
+    #   identified in the source audio. Larger values indicate a higher
+    #   confidence in PII identification.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/Entity AWS API Documentation
+    #
+    class Entity < Struct.new(
+      :start_time,
+      :end_time,
+      :category,
+      :type,
+      :content,
+      :confidence)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -478,8 +533,7 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate of the input audio in Hertz. Sample rates of 16000
-    #   Hz or higher are accepted.
+    #   The sample rate of the input audio in Hertz.
     #   @return [Integer]
     #
     # @!attribute [rw] media_encoding
@@ -569,7 +623,7 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate of the input audio in Hertz. Valid value: 16000 Hz.
+    #   The sample rate of the input audio in Hertz.
     #   @return [Integer]
     #
     # @!attribute [rw] media_encoding
@@ -653,6 +707,9 @@ module Aws::TranscribeStreamingService
     #         number_of_channels: 1,
     #         enable_partial_results_stabilization: false,
     #         partial_results_stability: "high", # accepts high, medium, low
+    #         content_identification_type: "PII", # accepts PII
+    #         content_redaction_type: "PII", # accepts PII
+    #         pii_entity_types: "PiiEntityTypes",
     #       }
     #
     # @!attribute [rw] language_code
@@ -661,7 +718,7 @@ module Aws::TranscribeStreamingService
     #
     # @!attribute [rw] media_sample_rate_hertz
     #   The sample rate, in Hertz, of the input audio. We suggest that you
-    #   use 8000 Hz for low quality audio and 16000 Hz for high quality
+    #   use 8,000 Hz for low quality audio and 16,000 Hz for high quality
     #   audio.
     #   @return [Integer]
     #
@@ -683,20 +740,20 @@ module Aws::TranscribeStreamingService
     #
     # @!attribute [rw] audio_stream
     #   PCM-encoded stream of audio blobs. The audio stream is encoded as an
-    #   HTTP2 data frame.
+    #   HTTP/2 data frame.
     #   @return [Types::AudioStream]
     #
     # @!attribute [rw] vocabulary_filter_name
     #   The name of the vocabulary filter you've created that is unique to
-    #   your AWS account. Provide the name in this field to successfully use
-    #   it in a stream.
+    #   your account. Provide the name in this field to successfully use it
+    #   in a stream.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_filter_method
     #   The manner in which you use your vocabulary filter to filter words
     #   in your transcript. `Remove` removes filtered words from your
-    #   transcription results. `Mask` masks those words with a `***` in your
-    #   transcription results. `Tag` keeps the filtered words in your
+    #   transcription results. `Mask` masks filtered words with a `***` in
+    #   your transcription results. `Tag` keeps the filtered words in your
     #   transcription results and tags them. The tag appears as
     #   `VocabularyFilterMatch` equal to `True`
     #   @return [String]
@@ -740,6 +797,41 @@ module Aws::TranscribeStreamingService
     #   levels can come with lower overall transcription accuracy.
     #   @return [String]
     #
+    # @!attribute [rw] content_identification_type
+    #   Set this field to PII to identify personally identifiable
+    #   information (PII) in the transcription output. Content
+    #   identification is performed only upon complete transcription of the
+    #   audio segments.
+    #
+    #   You can’t set both `ContentIdentificationType` and
+    #   `ContentRedactionType` in the same request. If you set both, your
+    #   request returns a `BadRequestException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_redaction_type
+    #   Set this field to PII to redact personally identifiable information
+    #   (PII) in the transcription output. Content redaction is performed
+    #   only upon complete transcription of the audio segments.
+    #
+    #   You can’t set both `ContentRedactionType` and
+    #   `ContentIdentificationType` in the same request. If you set both,
+    #   your request returns a `BadRequestException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pii_entity_types
+    #   List the PII entity types you want to identify or redact. In order
+    #   to specify entity types, you must have either
+    #   `ContentIdentificationType` or `ContentRedactionType` enabled.
+    #
+    #   `PIIEntityTypes` must be comma-separated; the available values are:
+    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_NUMBER`,
+    #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`,
+    #   `ADDRESS`, `NAME`, `PHONE`, `SSN`, and `ALL`.
+    #
+    #   `PiiEntityTypes` is an optional parameter with a default value of
+    #   `ALL`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionRequest AWS API Documentation
     #
     class StartStreamTranscriptionRequest < Struct.new(
@@ -755,7 +847,10 @@ module Aws::TranscribeStreamingService
       :enable_channel_identification,
       :number_of_channels,
       :enable_partial_results_stabilization,
-      :partial_results_stability)
+      :partial_results_stability,
+      :content_identification_type,
+      :content_redaction_type,
+      :pii_entity_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -769,8 +864,8 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate for the input audio stream. Use 8000 Hz for low
-    #   quality audio and 16000 Hz for high quality audio.
+    #   The sample rate for the input audio stream. Use 8,000 Hz for low
+    #   quality audio and 16,000 Hz for high quality audio.
     #   @return [Integer]
     #
     # @!attribute [rw] media_encoding
@@ -820,6 +915,18 @@ module Aws::TranscribeStreamingService
     #   shows the stability level.
     #   @return [String]
     #
+    # @!attribute [rw] content_identification_type
+    #   Shows whether content identification was enabled in this stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_redaction_type
+    #   Shows whether content redaction was enabled in this stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] pii_entity_types
+    #   Lists the PII entity types you specified in your request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionResponse AWS API Documentation
     #
     class StartStreamTranscriptionResponse < Struct.new(
@@ -836,7 +943,10 @@ module Aws::TranscribeStreamingService
       :enable_channel_identification,
       :number_of_channels,
       :enable_partial_results_stabilization,
-      :partial_results_stability)
+      :partial_results_stability,
+      :content_identification_type,
+      :content_redaction_type,
+      :pii_entity_types)
       SENSITIVE = []
       include Aws::Structure
     end

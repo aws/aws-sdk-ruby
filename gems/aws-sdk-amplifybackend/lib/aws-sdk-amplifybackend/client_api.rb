@@ -568,6 +568,7 @@ module Aws::AmplifyBackend
     GetBackendRequest.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, location_name: "backendEnvironmentName"))
     GetBackendRequest.struct_class = Types::GetBackendRequest
 
+    GetBackendRespObj.add_member(:amplify_feature_flags, Shapes::ShapeRef.new(shape: __string, location_name: "amplifyFeatureFlags"))
     GetBackendRespObj.add_member(:amplify_meta_config, Shapes::ShapeRef.new(shape: __string, location_name: "amplifyMetaConfig"))
     GetBackendRespObj.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "appId"))
     GetBackendRespObj.add_member(:app_name, Shapes::ShapeRef.new(shape: __string, location_name: "appName"))
@@ -576,6 +577,7 @@ module Aws::AmplifyBackend
     GetBackendRespObj.add_member(:error, Shapes::ShapeRef.new(shape: __string, location_name: "error"))
     GetBackendRespObj.struct_class = Types::GetBackendRespObj
 
+    GetBackendResponse.add_member(:amplify_feature_flags, Shapes::ShapeRef.new(shape: __string, location_name: "amplifyFeatureFlags"))
     GetBackendResponse.add_member(:amplify_meta_config, Shapes::ShapeRef.new(shape: __string, location_name: "amplifyMetaConfig"))
     GetBackendResponse.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, location_name: "appId"))
     GetBackendResponse.add_member(:app_name, Shapes::ShapeRef.new(shape: __string, location_name: "appName"))

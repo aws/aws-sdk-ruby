@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-09-27)
+------------------
+
+* Feature - Added support for journey with contact center activity
+
+1.57.0 (2021-09-16)
+------------------
+
+* Feature - This SDK release adds a new feature for Pinpoint campaigns, in-app messaging.
+
 1.56.0 (2021-09-01)
 ------------------
 

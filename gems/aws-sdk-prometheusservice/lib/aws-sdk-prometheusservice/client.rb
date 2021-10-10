@@ -327,6 +327,106 @@ module Aws::PrometheusService
 
     # @!group API Operations
 
+    # Create an alert manager definition.
+    #
+    # @option params [String] :client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String, StringIO, File] :data
+    #   The alert manager definition data.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace in which to create the alert manager
+    #   definition.
+    #
+    # @return [Types::CreateAlertManagerDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAlertManagerDefinitionResponse#status #status} => Types::AlertManagerDefinitionStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_alert_manager_definition({
+    #     client_token: "IdempotencyToken",
+    #     data: "data", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.status.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateAlertManagerDefinition AWS API Documentation
+    #
+    # @overload create_alert_manager_definition(params = {})
+    # @param [Hash] params ({})
+    def create_alert_manager_definition(params = {}, options = {})
+      req = build_request(:create_alert_manager_definition, params)
+      req.send_request(options)
+    end
+
+    # Create a rule group namespace.
+    #
+    # @option params [String] :client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String, StringIO, File] :data
+    #   The namespace data that define the rule groups.
+    #
+    # @option params [required, String] :name
+    #   The rule groups namespace name.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Optional, user-provided tags for this rule groups namespace.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace in which to create the rule group namespace.
+    #
+    # @return [Types::CreateRuleGroupsNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRuleGroupsNamespaceResponse#arn #arn} => String
+    #   * {Types::CreateRuleGroupsNamespaceResponse#name #name} => String
+    #   * {Types::CreateRuleGroupsNamespaceResponse#status #status} => Types::RuleGroupsNamespaceStatus
+    #   * {Types::CreateRuleGroupsNamespaceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_rule_groups_namespace({
+    #     client_token: "IdempotencyToken",
+    #     data: "data", # required
+    #     name: "RuleGroupsNamespaceName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.status.status_reason #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateRuleGroupsNamespace AWS API Documentation
+    #
+    # @overload create_rule_groups_namespace(params = {})
+    # @param [Hash] params ({})
+    def create_rule_groups_namespace(params = {}, options = {})
+      req = build_request(:create_rule_groups_namespace, params)
+      req.send_request(options)
+    end
+
     # Creates a new AMP workspace.
     #
     # @option params [String] :alias
@@ -377,6 +477,71 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Deletes an alert manager definition.
+    #
+    # @option params [String] :client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace in which to delete the alert manager
+    #   definition.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_alert_manager_definition({
+    #     client_token: "IdempotencyToken",
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteAlertManagerDefinition AWS API Documentation
+    #
+    # @overload delete_alert_manager_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_alert_manager_definition(params = {}, options = {})
+      req = build_request(:delete_alert_manager_definition, params)
+      req.send_request(options)
+    end
+
+    # Delete a rule groups namespace.
+    #
+    # @option params [String] :client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   The rule groups namespace name.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to delete rule group definition.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_rule_groups_namespace({
+    #     client_token: "IdempotencyToken",
+    #     name: "RuleGroupsNamespaceName", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteRuleGroupsNamespace AWS API Documentation
+    #
+    # @overload delete_rule_groups_namespace(params = {})
+    # @param [Hash] params ({})
+    def delete_rule_groups_namespace(params = {}, options = {})
+      req = build_request(:delete_rule_groups_namespace, params)
+      req.send_request(options)
+    end
+
     # Deletes an AMP workspace.
     #
     # @option params [String] :client_token
@@ -407,6 +572,78 @@ module Aws::PrometheusService
       req.send_request(options)
     end
 
+    # Describes an alert manager definition.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to describe.
+    #
+    # @return [Types::DescribeAlertManagerDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAlertManagerDefinitionResponse#alert_manager_definition #alert_manager_definition} => Types::AlertManagerDefinitionDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_alert_manager_definition({
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.alert_manager_definition.created_at #=> Time
+    #   resp.alert_manager_definition.data #=> String
+    #   resp.alert_manager_definition.modified_at #=> Time
+    #   resp.alert_manager_definition.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.alert_manager_definition.status.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeAlertManagerDefinition AWS API Documentation
+    #
+    # @overload describe_alert_manager_definition(params = {})
+    # @param [Hash] params ({})
+    def describe_alert_manager_definition(params = {}, options = {})
+      req = build_request(:describe_alert_manager_definition, params)
+      req.send_request(options)
+    end
+
+    # Describe a rule groups namespace.
+    #
+    # @option params [required, String] :name
+    #   The rule groups namespace.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to describe.
+    #
+    # @return [Types::DescribeRuleGroupsNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRuleGroupsNamespaceResponse#rule_groups_namespace #rule_groups_namespace} => Types::RuleGroupsNamespaceDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_rule_groups_namespace({
+    #     name: "RuleGroupsNamespaceName", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_groups_namespace.arn #=> String
+    #   resp.rule_groups_namespace.created_at #=> Time
+    #   resp.rule_groups_namespace.data #=> String
+    #   resp.rule_groups_namespace.modified_at #=> Time
+    #   resp.rule_groups_namespace.name #=> String
+    #   resp.rule_groups_namespace.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.rule_groups_namespace.status.status_reason #=> String
+    #   resp.rule_groups_namespace.tags #=> Hash
+    #   resp.rule_groups_namespace.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeRuleGroupsNamespace AWS API Documentation
+    #
+    # @overload describe_rule_groups_namespace(params = {})
+    # @param [Hash] params ({})
+    def describe_rule_groups_namespace(params = {}, options = {})
+      req = build_request(:describe_rule_groups_namespace, params)
+      req.send_request(options)
+    end
+
     # Describes an existing AMP workspace.
     #
     # @option params [required, String] :workspace_id
@@ -433,12 +670,73 @@ module Aws::PrometheusService
     #   resp.workspace.tags["TagKey"] #=> String
     #   resp.workspace.workspace_id #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * workspace_active
+    #   * workspace_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeWorkspace AWS API Documentation
     #
     # @overload describe_workspace(params = {})
     # @param [Hash] params ({})
     def describe_workspace(params = {}, options = {})
       req = build_request(:describe_workspace, params)
+      req.send_request(options)
+    end
+
+    # Lists rule groups namespaces.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum results to return in response (default=100, maximum=1000).
+    #
+    # @option params [String] :name
+    #   Optional filter for rule groups namespace name. Only the rule groups
+    #   namespace that begin with this value will be returned.
+    #
+    # @option params [String] :next_token
+    #   Pagination token to request the next page in a paginated list. This
+    #   token is obtained from the output of the previous
+    #   ListRuleGroupsNamespaces request.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace.
+    #
+    # @return [Types::ListRuleGroupsNamespacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRuleGroupsNamespacesResponse#next_token #next_token} => String
+    #   * {Types::ListRuleGroupsNamespacesResponse#rule_groups_namespaces #rule_groups_namespaces} => Array&lt;Types::RuleGroupsNamespaceSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_rule_groups_namespaces({
+    #     max_results: 1,
+    #     name: "RuleGroupsNamespaceName",
+    #     next_token: "PaginationToken",
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.rule_groups_namespaces #=> Array
+    #   resp.rule_groups_namespaces[0].arn #=> String
+    #   resp.rule_groups_namespaces[0].created_at #=> Time
+    #   resp.rule_groups_namespaces[0].modified_at #=> Time
+    #   resp.rule_groups_namespaces[0].name #=> String
+    #   resp.rule_groups_namespaces[0].status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.rule_groups_namespaces[0].status.status_reason #=> String
+    #   resp.rule_groups_namespaces[0].tags #=> Hash
+    #   resp.rule_groups_namespaces[0].tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListRuleGroupsNamespaces AWS API Documentation
+    #
+    # @overload list_rule_groups_namespaces(params = {})
+    # @param [Hash] params ({})
+    def list_rule_groups_namespaces(params = {}, options = {})
+      req = build_request(:list_rule_groups_namespaces, params)
       req.send_request(options)
     end
 
@@ -519,6 +817,100 @@ module Aws::PrometheusService
     # @param [Hash] params ({})
     def list_workspaces(params = {}, options = {})
       req = build_request(:list_workspaces, params)
+      req.send_request(options)
+    end
+
+    # Update an alert manager definition.
+    #
+    # @option params [String] :client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String, StringIO, File] :data
+    #   The alert manager definition data.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace in which to update the alert manager
+    #   definition.
+    #
+    # @return [Types::PutAlertManagerDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAlertManagerDefinitionResponse#status #status} => Types::AlertManagerDefinitionStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_alert_manager_definition({
+    #     client_token: "IdempotencyToken",
+    #     data: "data", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.status.status_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutAlertManagerDefinition AWS API Documentation
+    #
+    # @overload put_alert_manager_definition(params = {})
+    # @param [Hash] params ({})
+    def put_alert_manager_definition(params = {}, options = {})
+      req = build_request(:put_alert_manager_definition, params)
+      req.send_request(options)
+    end
+
+    # Update a rule groups namespace.
+    #
+    # @option params [String] :client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String, StringIO, File] :data
+    #   The namespace data that define the rule groups.
+    #
+    # @option params [required, String] :name
+    #   The rule groups namespace name.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace in which to update the rule group namespace.
+    #
+    # @return [Types::PutRuleGroupsNamespaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutRuleGroupsNamespaceResponse#arn #arn} => String
+    #   * {Types::PutRuleGroupsNamespaceResponse#name #name} => String
+    #   * {Types::PutRuleGroupsNamespaceResponse#status #status} => Types::RuleGroupsNamespaceStatus
+    #   * {Types::PutRuleGroupsNamespaceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_rule_groups_namespace({
+    #     client_token: "IdempotencyToken",
+    #     data: "data", # required
+    #     name: "RuleGroupsNamespaceName", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.status.status_code #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATION_FAILED", "UPDATE_FAILED"
+    #   resp.status.status_reason #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutRuleGroupsNamespace AWS API Documentation
+    #
+    # @overload put_rule_groups_namespace(params = {})
+    # @param [Hash] params ({})
+    def put_rule_groups_namespace(params = {}, options = {})
+      req = build_request(:put_rule_groups_namespace, params)
       req.send_request(options)
     end
 
@@ -623,14 +1015,129 @@ module Aws::PrometheusService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name       | params                      | :delay   | :max_attempts |
+    # | ----------------- | --------------------------- | -------- | ------------- |
+    # | workspace_active  | {Client#describe_workspace} | 2        | 60            |
+    # | workspace_deleted | {Client#describe_workspace} | 2        | 60            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        workspace_active: Waiters::WorkspaceActive,
+        workspace_deleted: Waiters::WorkspaceDeleted
+      }
     end
 
     class << self

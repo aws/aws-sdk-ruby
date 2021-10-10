@@ -753,6 +753,7 @@ module Aws::OpenSearchService
     #   @return [Integer]
     #
     # @!attribute [rw] cold_storage_options
+    #   Specifies the `ColdStorageOptions` config for a Domain
     #   @return [Types::ColdStorageOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ClusterConfig AWS API Documentation
@@ -859,6 +860,8 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Specifies the configuration for cold storage options such as enabled
+    #
     # @note When making an API call, you may pass ColdStorageOptions
     #   data as a hash:
     #
@@ -867,6 +870,7 @@ module Aws::OpenSearchService
     #       }
     #
     # @!attribute [rw] enabled
+    #   Enable cold storage option. Accepted values true or false
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ColdStorageOptions AWS API Documentation
@@ -2236,10 +2240,15 @@ module Aws::OpenSearchService
     #   The `DomainName`.
     #   @return [String]
     #
+    # @!attribute [rw] engine_type
+    #   Specifies the `EngineType` of the domain.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainInfo AWS API Documentation
     #
     class DomainInfo < Struct.new(
-      :domain_name)
+      :domain_name,
+      :engine_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3090,11 +3099,33 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the `ListDomainNames` operation.
+    #
+    # @note When making an API call, you may pass ListDomainNamesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         engine_type: "OpenSearch", # accepts OpenSearch, Elasticsearch
+    #       }
+    #
+    # @!attribute [rw] engine_type
+    #   Optional parameter to filter the output by domain engine type.
+    #   Acceptable values are 'Elasticsearch' and 'OpenSearch'.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDomainNamesRequest AWS API Documentation
+    #
+    class ListDomainNamesRequest < Struct.new(
+      :engine_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The result of a `ListDomainNames` operation. Contains the names of all
-    # domains owned by this account.
+    # domains owned by this account and their respective engine types.
     #
     # @!attribute [rw] domain_names
-    #   List of domain names.
+    #   List of domain names and respective engine types.
     #   @return [Array<Types::DomainInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/ListDomainNamesResponse AWS API Documentation

@@ -22,27 +22,8 @@ module Aws::SecretsManager
     #   either the Amazon Resource Name (ARN) or the friendly name of the
     #   secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CancelRotateSecretRequest AWS API Documentation
@@ -221,20 +202,13 @@ module Aws::SecretsManager
     #   rotation function knows how to parse.
     #
     #   For storing multiple values, we recommend that you use a JSON text
-    #   string argument and specify key/value pairs. For information on how
-    #   to format a JSON parameter for the various command line tool
-    #   environments, see [Using JSON for Parameters][1] in the *CLI User
-    #   Guide*. For example:
-    #
-    #   `\{"username":"bob","password":"abc123xyz456"\}`
-    #
-    #   If your command-line tool or SDK requires quotation marks around the
-    #   parameter, you should use single quotes to avoid confusion with the
-    #   double quotes required in the JSON text.
+    #   string argument and specify key/value pairs. For more information,
+    #   see [Specifying parameter values for the Amazon Web Services CLI][1]
+    #   in the Amazon Web Services CLI User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -381,27 +355,8 @@ module Aws::SecretsManager
     #   resource-based policy for. You can specify either the Amazon
     #   Resource Name (ARN) or the friendly name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteResourcePolicyRequest AWS API Documentation
@@ -444,27 +399,8 @@ module Aws::SecretsManager
     #   Specifies the secret to delete. You can specify either the Amazon
     #   Resource Name (ARN) or the friendly name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @!attribute [rw] recovery_window_in_days
@@ -546,27 +482,8 @@ module Aws::SecretsManager
     #   can specify either the Amazon Resource Name (ARN) or the friendly
     #   name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecretRequest AWS API Documentation
@@ -613,7 +530,8 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] rotation_rules
-    #   A structure with the rotation configuration for this secret.
+    #   A structure with the rotation configuration for this secret. This
+    #   field is only populated if rotation is configured.
     #   @return [Types::RotationRulesType]
     #
     # @!attribute [rw] last_rotated_date
@@ -864,27 +782,8 @@ module Aws::SecretsManager
     #   resource-based policy for. You can specify either the Amazon
     #   Resource Name (ARN) or the friendly name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/GetResourcePolicyRequest AWS API Documentation
@@ -944,27 +843,8 @@ module Aws::SecretsManager
     #   retrieve. You can specify either the Amazon Resource Name (ARN) or
     #   the friendly name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -1165,27 +1045,8 @@ module Aws::SecretsManager
     #   list. You can specify either the Amazon Resource Name (ARN) or the
     #   friendly name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1406,27 +1267,8 @@ module Aws::SecretsManager
     #   policy. You can specify either the ARN or the friendly name of the
     #   secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @!attribute [rw] resource_policy
@@ -1492,27 +1334,8 @@ module Aws::SecretsManager
     #   specify either the Amazon Resource Name (ARN) or the friendly name
     #   of the secret. The secret must already exist.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1585,22 +1408,13 @@ module Aws::SecretsManager
     #   Lambda rotation function knows how to parse.
     #
     #   For storing multiple values, we recommend that you use a JSON text
-    #   string argument and specify key/value pairs. For information on how
-    #   to format a JSON parameter for the various command line tool
-    #   environments, see [Using JSON for Parameters][1] in the *CLI User
-    #   Guide*.
-    #
-    #   For example:
-    #
-    #   `[\{"username":"bob"\},\{"password":"abc123xyz456"\}]`
-    #
-    #   If your command-line tool or SDK requires quotation marks around the
-    #   parameter, you should use single quotes to avoid confusion with the
-    #   double quotes required in the JSON text.
+    #   string argument and specify key/value pairs. For more information,
+    #   see [Specifying parameter values for the Amazon Web Services CLI][1]
+    #   in the Amazon Web Services CLI User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html
     #   @return [String]
     #
     # @!attribute [rw] version_stages
@@ -1866,27 +1680,8 @@ module Aws::SecretsManager
     #   scheduled deletion. You can specify either the Amazon Resource Name
     #   (ARN) or the friendly name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RestoreSecretRequest AWS API Documentation
@@ -1930,27 +1725,8 @@ module Aws::SecretsManager
     #   Specifies the secret that you want to rotate. You can specify either
     #   the Amazon Resource Name (ARN) or the friendly name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -2300,42 +2076,24 @@ module Aws::SecretsManager
     #   can specify either the Amazon Resource Name (ARN) or the friendly
     #   name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The tags to attach to the secret. Each element in the list consists
     #   of a `Key` and a `Value`.
     #
-    #   This parameter to the API requires a JSON text string argument. For
-    #   information on how to format a JSON parameter for the various
-    #   command line tool environments, see [Using JSON for Parameters][1]
-    #   in the *CLI User Guide*. For the CLI, you can also use the syntax:
-    #   `--Tags Key="Key1",Value="Value1" Key="Key2",Value="Value2"[,…]`
+    #   This parameter to the API requires a JSON text string argument.
+    #
+    #   For storing multiple values, we recommend that you use a JSON text
+    #   string argument and specify key/value pairs. For more information,
+    #   see [Specifying parameter values for the Amazon Web Services CLI][1]
+    #   in the Amazon Web Services CLI User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/TagResourceRequest AWS API Documentation
@@ -2360,27 +2118,8 @@ module Aws::SecretsManager
     #   can specify either the Amazon Resource Name (ARN) or the friendly
     #   name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -2388,14 +2127,16 @@ module Aws::SecretsManager
     #   specify the value. Both the key and its associated value are
     #   removed.
     #
-    #   This parameter to the API requires a JSON text string argument. For
-    #   information on how to format a JSON parameter for the various
-    #   command line tool environments, see [Using JSON for Parameters][1]
-    #   in the *CLI User Guide*.
+    #   This parameter to the API requires a JSON text string argument.
+    #
+    #   For storing multiple values, we recommend that you use a JSON text
+    #   string argument and specify key/value pairs. For more information,
+    #   see [Specifying parameter values for the Amazon Web Services CLI][1]
+    #   in the Amazon Web Services CLI User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UntagResourceRequest AWS API Documentation
@@ -2424,27 +2165,8 @@ module Aws::SecretsManager
     #   add a new version. You can specify either the Amazon Resource Name
     #   (ARN) or the friendly name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -2499,8 +2221,12 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] kms_key_id
     #   (Optional) Specifies an updated ARN or alias of the Amazon Web
-    #   Services KMS customer master key (CMK) to be used to encrypt the
-    #   protected text in new versions of this secret.
+    #   Services KMS customer master key (CMK) that Secrets Manager uses to
+    #   encrypt the protected text in new versions of this secret as well as
+    #   any existing versions of this secret that have the staging labels
+    #   AWSCURRENT, AWSPENDING, or AWSPREVIOUS. For more information about
+    #   staging labels, see [Staging Labels][1] in the *Amazon Web Services
+    #   Secrets Manager User Guide*.
     #
     #   You can only use the account's default CMK to encrypt and decrypt
     #   if you call this operation using credentials from the same account
@@ -2508,6 +2234,10 @@ module Aws::SecretsManager
     #   you must create a custom CMK and provide the ARN of that CMK in this
     #   field. The user making the call must have permissions to both the
     #   secret and the CMK in their respective accounts.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/terms-concepts.html#term_staging-label
     #   @return [String]
     #
     # @!attribute [rw] secret_binary
@@ -2535,25 +2265,13 @@ module Aws::SecretsManager
     #   Lambda rotation function knows how to parse.
     #
     #   For storing multiple values, we recommend that you use a JSON text
-    #   string argument and specify key/value pairs. For information on how
-    #   to format a JSON parameter for the various command line tool
-    #   environments, see [Using JSON for Parameters][1] in the *CLI User
-    #   Guide*. For example:
-    #
-    #   `[\{"username":"bob"\},\{"password":"abc123xyz456"\}]`
-    #
-    #   If your command-line tool or SDK requires quotation marks around the
-    #   parameter, you should use single quotes to avoid confusion with the
-    #   double quotes required in the JSON text. You can also 'escape' the
-    #   double quote character in the embedded JSON text by prefacing each
-    #   with a backslash. For example, the following string is surrounded by
-    #   double-quotes. All of the embedded double quotes are escaped:
-    #
-    #   `"[\{"username":"bob"\},\{"password":"abc123xyz456"\}]"`
+    #   string argument and specify key/value pairs. For more information,
+    #   see [Specifying parameter values for the Amazon Web Services CLI][1]
+    #   in the Amazon Web Services CLI User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretRequest AWS API Documentation
@@ -2617,27 +2335,8 @@ module Aws::SecretsManager
     #   labels you want to modify. You can specify either the Amazon
     #   Resource Name (ARN) or the friendly name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @!attribute [rw] version_stage
@@ -2705,27 +2404,8 @@ module Aws::SecretsManager
     #   policy you want to validate. You can specify either the Amazon
     #   Resource Name (ARN) or the friendly name of the secret.
     #
-    #   <note markdown="1"> If you specify an ARN, we generally recommend that you specify a
-    #   complete ARN. You can specify a partial ARN too—for example, if you
-    #   don’t include the final hyphen and six random characters that
-    #   Secrets Manager adds at the end of the ARN when you created the
-    #   secret. A partial ARN match can work as long as it uniquely matches
-    #   only one secret. However, if your secret has a name that ends in a
-    #   hyphen followed by six characters (before Secrets Manager adds the
-    #   hyphen and six characters to the ARN) and you try to use that as a
-    #   partial ARN, then those characters cause Secrets Manager to assume
-    #   that you’re specifying a complete ARN. This confusion can cause
-    #   unexpected results. To avoid this situation, we recommend that you
-    #   don’t create secret names ending with a hyphen followed by six
-    #   characters.
-    #
-    #    If you specify an incomplete ARN without the random suffix, and
-    #   instead provide the 'friendly name', you *must* not include the
-    #   random suffix. If you do include the random suffix added by Secrets
-    #   Manager, you receive either a *ResourceNotFoundException* or an
-    #   *AccessDeniedException* error, depending on your permissions.
-    #
-    #    </note>
+    #   For an ARN, we recommend that you specify a complete ARN rather than
+    #   a partial ARN.
     #   @return [String]
     #
     # @!attribute [rw] resource_policy

@@ -70,6 +70,7 @@ module Aws::AppRunner
     HealthCheckConfiguration = Shapes::StructureShape.new(name: 'HealthCheckConfiguration')
     HealthCheckHealthyThreshold = Shapes::IntegerShape.new(name: 'HealthCheckHealthyThreshold')
     HealthCheckInterval = Shapes::IntegerShape.new(name: 'HealthCheckInterval')
+    HealthCheckPath = Shapes::StringShape.new(name: 'HealthCheckPath')
     HealthCheckProtocol = Shapes::StringShape.new(name: 'HealthCheckProtocol')
     HealthCheckTimeout = Shapes::IntegerShape.new(name: 'HealthCheckTimeout')
     HealthCheckUnhealthyThreshold = Shapes::IntegerShape.new(name: 'HealthCheckUnhealthyThreshold')
@@ -309,7 +310,7 @@ module Aws::AppRunner
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
     HealthCheckConfiguration.add_member(:protocol, Shapes::ShapeRef.new(shape: HealthCheckProtocol, location_name: "Protocol"))
-    HealthCheckConfiguration.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "Path"))
+    HealthCheckConfiguration.add_member(:path, Shapes::ShapeRef.new(shape: HealthCheckPath, location_name: "Path"))
     HealthCheckConfiguration.add_member(:interval, Shapes::ShapeRef.new(shape: HealthCheckInterval, location_name: "Interval"))
     HealthCheckConfiguration.add_member(:timeout, Shapes::ShapeRef.new(shape: HealthCheckTimeout, location_name: "Timeout"))
     HealthCheckConfiguration.add_member(:healthy_threshold, Shapes::ShapeRef.new(shape: HealthCheckHealthyThreshold, location_name: "HealthyThreshold"))

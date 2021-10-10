@@ -145,6 +145,11 @@ module Aws::TranscribeService
     StartTranscriptionJobResponse = Shapes::StructureShape.new(name: 'StartTranscriptionJobResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringTargetList = Shapes::ListShape.new(name: 'StringTargetList')
+    SubtitleFileUris = Shapes::ListShape.new(name: 'SubtitleFileUris')
+    SubtitleFormat = Shapes::StringShape.new(name: 'SubtitleFormat')
+    SubtitleFormats = Shapes::ListShape.new(name: 'SubtitleFormats')
+    Subtitles = Shapes::StructureShape.new(name: 'Subtitles')
+    SubtitlesOutput = Shapes::StructureShape.new(name: 'SubtitlesOutput')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -676,6 +681,7 @@ module Aws::TranscribeService
     StartTranscriptionJobRequest.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
     StartTranscriptionJobRequest.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyLanguage"))
     StartTranscriptionJobRequest.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location_name: "LanguageOptions"))
+    StartTranscriptionJobRequest.add_member(:subtitles, Shapes::ShapeRef.new(shape: Subtitles, location_name: "Subtitles"))
     StartTranscriptionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     StartTranscriptionJobRequest.struct_class = Types::StartTranscriptionJobRequest
 
@@ -683,6 +689,17 @@ module Aws::TranscribeService
     StartTranscriptionJobResponse.struct_class = Types::StartTranscriptionJobResponse
 
     StringTargetList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    SubtitleFileUris.member = Shapes::ShapeRef.new(shape: Uri)
+
+    SubtitleFormats.member = Shapes::ShapeRef.new(shape: SubtitleFormat)
+
+    Subtitles.add_member(:formats, Shapes::ShapeRef.new(shape: SubtitleFormats, location_name: "Formats"))
+    Subtitles.struct_class = Types::Subtitles
+
+    SubtitlesOutput.add_member(:formats, Shapes::ShapeRef.new(shape: SubtitleFormats, location_name: "Formats"))
+    SubtitlesOutput.add_member(:subtitle_file_uris, Shapes::ShapeRef.new(shape: SubtitleFileUris, location_name: "SubtitleFileUris"))
+    SubtitlesOutput.struct_class = Types::SubtitlesOutput
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -729,6 +746,7 @@ module Aws::TranscribeService
     TranscriptionJob.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location_name: "LanguageOptions"))
     TranscriptionJob.add_member(:identified_language_score, Shapes::ShapeRef.new(shape: IdentifiedLanguageScore, location_name: "IdentifiedLanguageScore"))
     TranscriptionJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    TranscriptionJob.add_member(:subtitles, Shapes::ShapeRef.new(shape: SubtitlesOutput, location_name: "Subtitles"))
     TranscriptionJob.struct_class = Types::TranscriptionJob
 
     TranscriptionJobSummaries.member = Shapes::ShapeRef.new(shape: TranscriptionJobSummary)

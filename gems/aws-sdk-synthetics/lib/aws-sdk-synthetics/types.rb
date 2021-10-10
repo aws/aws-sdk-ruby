@@ -10,6 +10,58 @@
 module Aws::Synthetics
   module Types
 
+    # A structure that contains the configuration for canary artifacts,
+    # including the encryption-at-rest settings for artifacts that the
+    # canary uploads to Amazon S3.
+    #
+    # @note When making an API call, you may pass ArtifactConfigInput
+    #   data as a hash:
+    #
+    #       {
+    #         s3_encryption: {
+    #           encryption_mode: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_encryption
+    #   A structure that contains the configuration of the
+    #   encryption-at-rest settings for artifacts that the canary uploads to
+    #   Amazon S3. Artifact encryption functionality is available only for
+    #   canaries that use Synthetics runtime version
+    #   syn-nodejs-puppeteer-3.3 or later. For more information, see
+    #   [Encrypting canary artifacts][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html
+    #   @return [Types::S3EncryptionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ArtifactConfigInput AWS API Documentation
+    #
+    class ArtifactConfigInput < Struct.new(
+      :s3_encryption)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the configuration for canary artifacts,
+    # including the encryption-at-rest settings for artifacts that the
+    # canary uploads to Amazon S3.
+    #
+    # @!attribute [rw] s3_encryption
+    #   A structure that contains the configuration of encryption settings
+    #   for canary artifacts that are stored in Amazon S3.
+    #   @return [Types::S3EncryptionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/ArtifactConfigOutput AWS API Documentation
+    #
+    class ArtifactConfigOutput < Struct.new(
+      :s3_encryption)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure representing a screenshot that is used as a baseline
     # during visual monitoring comparisons made by the canary.
     #
@@ -139,6 +191,12 @@ module Aws::Synthetics
     #   The list of key-value pairs that are associated with the canary.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] artifact_config
+    #   A structure that contains the configuration for canary artifacts,
+    #   including the encryption-at-rest settings for artifacts that the
+    #   canary uploads to Amazon S3.
+    #   @return [Types::ArtifactConfigOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/Canary AWS API Documentation
     #
     class Canary < Struct.new(
@@ -157,7 +215,8 @@ module Aws::Synthetics
       :runtime_version,
       :vpc_config,
       :visual_reference,
-      :tags)
+      :tags,
+      :artifact_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -642,6 +701,12 @@ module Aws::Synthetics
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         artifact_config: {
+    #           s3_encryption: {
+    #             encryption_mode: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -745,6 +810,12 @@ module Aws::Synthetics
     #   tag values.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] artifact_config
+    #   A structure that contains the configuration for canary artifacts,
+    #   including the encryption-at-rest settings for artifacts that the
+    #   canary uploads to Amazon S3.
+    #   @return [Types::ArtifactConfigInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CreateCanaryRequest AWS API Documentation
     #
     class CreateCanaryRequest < Struct.new(
@@ -758,7 +829,8 @@ module Aws::Synthetics
       :failure_retention_period_in_days,
       :runtime_version,
       :vpc_config,
-      :tags)
+      :tags,
+      :artifact_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1138,6 +1210,47 @@ module Aws::Synthetics
       include Aws::Structure
     end
 
+    # A structure that contains the configuration of encryption-at-rest
+    # settings for canary artifacts that the canary uploads to Amazon S3.
+    #
+    # For more information, see [Encrypting canary artifacts][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html
+    #
+    # @note When making an API call, you may pass S3EncryptionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         encryption_mode: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #         kms_key_arn: "KmsKeyArn",
+    #       }
+    #
+    # @!attribute [rw] encryption_mode
+    #   The encryption method to use for artifacts created by this canary.
+    #   Specify `SSE_S3` to use server-side encryption (SSE) with an Amazon
+    #   S3-managed key. Specify `SSE-KMS` to use server-side encryption with
+    #   a customer-managed KMS key.
+    #
+    #   If you omit this parameter, an Amazon Web Services-managed KMS key
+    #   is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the customer-managed KMS key to use, if you specify
+    #   `SSE-KMS` for `EncryptionMode`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/S3EncryptionConfig AWS API Documentation
+    #
+    class S3EncryptionConfig < Struct.new(
+      :encryption_mode,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartCanaryRequest
     #   data as a hash:
     #
@@ -1301,6 +1414,13 @@ module Aws::Synthetics
     #           ],
     #           base_canary_run_id: "String", # required
     #         },
+    #         artifact_s3_location: "String",
+    #         artifact_config: {
+    #           s3_encryption: {
+    #             encryption_mode: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1397,6 +1517,19 @@ module Aws::Synthetics
     #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html
     #   @return [Types::VisualReferenceInput]
     #
+    # @!attribute [rw] artifact_s3_location
+    #   The location in Amazon S3 where Synthetics stores artifacts from the
+    #   test runs of this canary. Artifacts include the log file,
+    #   screenshots, and HAR files. The name of the S3 bucket can't include
+    #   a period (.).
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_config
+    #   A structure that contains the configuration for canary artifacts,
+    #   including the encryption-at-rest settings for artifacts that the
+    #   canary uploads to Amazon S3.
+    #   @return [Types::ArtifactConfigInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/UpdateCanaryRequest AWS API Documentation
     #
     class UpdateCanaryRequest < Struct.new(
@@ -1409,7 +1542,9 @@ module Aws::Synthetics
       :success_retention_period_in_days,
       :failure_retention_period_in_days,
       :vpc_config,
-      :visual_reference)
+      :visual_reference,
+      :artifact_s3_location,
+      :artifact_config)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -327,6 +327,94 @@ module Aws::AppIntegrationsService
 
     # @!group API Operations
 
+    # Creates and persists a DataIntegration resource.
+    #
+    # <note markdown="1"> You cannot create a DataIntegration association for a DataIntegration
+    # that has been previously associated. Use a different DataIntegration,
+    # or recreate the DataIntegration using the `CreateDataIntegration` API.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :name
+    #   The name of the DataIntegration.
+    #
+    # @option params [String] :description
+    #   A description of the DataIntegration.
+    #
+    # @option params [String] :kms_key
+    #   The KMS key for the DataIntegration.
+    #
+    # @option params [String] :source_uri
+    #   The URI of the data source.
+    #
+    # @option params [Types::ScheduleConfiguration] :schedule_config
+    #   The name of the data and how often it should be pulled from the
+    #   source.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   One or more tags.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateDataIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataIntegrationResponse#arn #arn} => String
+    #   * {Types::CreateDataIntegrationResponse#id #id} => String
+    #   * {Types::CreateDataIntegrationResponse#name #name} => String
+    #   * {Types::CreateDataIntegrationResponse#description #description} => String
+    #   * {Types::CreateDataIntegrationResponse#kms_key #kms_key} => String
+    #   * {Types::CreateDataIntegrationResponse#source_uri #source_uri} => String
+    #   * {Types::CreateDataIntegrationResponse#schedule_configuration #schedule_configuration} => Types::ScheduleConfiguration
+    #   * {Types::CreateDataIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateDataIntegrationResponse#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_integration({
+    #     name: "Name", # required
+    #     description: "Description",
+    #     kms_key: "NonBlankString",
+    #     source_uri: "NonBlankString",
+    #     schedule_config: {
+    #       first_execution_from: "NonBlankString",
+    #       object: "Object",
+    #       schedule_expression: "Schedule",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.kms_key #=> String
+    #   resp.source_uri #=> String
+    #   resp.schedule_configuration.first_execution_from #=> String
+    #   resp.schedule_configuration.object #=> String
+    #   resp.schedule_configuration.schedule_expression #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/CreateDataIntegration AWS API Documentation
+    #
+    # @overload create_data_integration(params = {})
+    # @param [Hash] params ({})
+    def create_data_integration(params = {}, options = {})
+      req = build_request(:create_data_integration, params)
+      req.send_request(options)
+    end
+
     # Creates an EventIntegration, given a specified name, description, and
     # a reference to an Amazon EventBridge bus in your account and a partner
     # event source that pushes events to that bus. No objects are created in
@@ -387,6 +475,42 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # Deletes the DataIntegration. Only DataIntegrations that don't have
+    # any DataIntegrationAssociations can be deleted. Deleting a
+    # DataIntegration also deletes the underlying Amazon AppFlow flow and
+    # service linked role.
+    #
+    # <note markdown="1"> You cannot create a DataIntegration association for a DataIntegration
+    # that has been previously associated. Use a different DataIntegration,
+    # or recreate the DataIntegration using the [CreateDataIntegration][1]
+    # API.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html
+    #
+    # @option params [required, String] :data_integration_identifier
+    #   A unique identifier for the DataIntegration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_integration({
+    #     data_integration_identifier: "Identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/DeleteDataIntegration AWS API Documentation
+    #
+    # @overload delete_data_integration(params = {})
+    # @param [Hash] params ({})
+    def delete_data_integration(params = {}, options = {})
+      req = build_request(:delete_data_integration, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified existing event integration. If the event
     # integration is associated with clients, the request is rejected.
     #
@@ -410,7 +534,63 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
-    # Return information about the event integration.
+    # Returns information about the DataIntegration.
+    #
+    # <note markdown="1"> You cannot create a DataIntegration association for a DataIntegration
+    # that has been previously associated. Use a different DataIntegration,
+    # or recreate the DataIntegration using the [CreateDataIntegration][1]
+    # API.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html
+    #
+    # @option params [required, String] :identifier
+    #   A unique identifier.
+    #
+    # @return [Types::GetDataIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataIntegrationResponse#arn #arn} => String
+    #   * {Types::GetDataIntegrationResponse#id #id} => String
+    #   * {Types::GetDataIntegrationResponse#name #name} => String
+    #   * {Types::GetDataIntegrationResponse#description #description} => String
+    #   * {Types::GetDataIntegrationResponse#kms_key #kms_key} => String
+    #   * {Types::GetDataIntegrationResponse#source_uri #source_uri} => String
+    #   * {Types::GetDataIntegrationResponse#schedule_configuration #schedule_configuration} => Types::ScheduleConfiguration
+    #   * {Types::GetDataIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_integration({
+    #     identifier: "Identifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.kms_key #=> String
+    #   resp.source_uri #=> String
+    #   resp.schedule_configuration.first_execution_from #=> String
+    #   resp.schedule_configuration.object #=> String
+    #   resp.schedule_configuration.schedule_expression #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetDataIntegration AWS API Documentation
+    #
+    # @overload get_data_integration(params = {})
+    # @param [Hash] params ({})
+    def get_data_integration(params = {}, options = {})
+      req = build_request(:get_data_integration, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the event integration.
     #
     # @option params [required, String] :name
     #   The name of the event integration.
@@ -446,6 +626,111 @@ module Aws::AppIntegrationsService
     # @param [Hash] params ({})
     def get_event_integration(params = {}, options = {})
       req = build_request(:get_event_integration, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of DataIntegration associations in the
+    # account.
+    #
+    # <note markdown="1"> You cannot create a DataIntegration association for a DataIntegration
+    # that has been previously associated. Use a different DataIntegration,
+    # or recreate the DataIntegration using the [CreateDataIntegration][1]
+    # API.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html
+    #
+    # @option params [required, String] :data_integration_identifier
+    #   A unique identifier for the DataIntegration.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListDataIntegrationAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataIntegrationAssociationsResponse#data_integration_associations #data_integration_associations} => Array&lt;Types::DataIntegrationAssociationSummary&gt;
+    #   * {Types::ListDataIntegrationAssociationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_integration_associations({
+    #     data_integration_identifier: "Identifier", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_integration_associations #=> Array
+    #   resp.data_integration_associations[0].data_integration_association_arn #=> String
+    #   resp.data_integration_associations[0].data_integration_arn #=> String
+    #   resp.data_integration_associations[0].client_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListDataIntegrationAssociations AWS API Documentation
+    #
+    # @overload list_data_integration_associations(params = {})
+    # @param [Hash] params ({})
+    def list_data_integration_associations(params = {}, options = {})
+      req = build_request(:list_data_integration_associations, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of DataIntegrations in the account.
+    #
+    # <note markdown="1"> You cannot create a DataIntegration association for a DataIntegration
+    # that has been previously associated. Use a different DataIntegration,
+    # or recreate the DataIntegration using the [CreateDataIntegration][1]
+    # API.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListDataIntegrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataIntegrationsResponse#data_integrations #data_integrations} => Array&lt;Types::DataIntegrationSummary&gt;
+    #   * {Types::ListDataIntegrationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_integrations({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_integrations #=> Array
+    #   resp.data_integrations[0].arn #=> String
+    #   resp.data_integrations[0].name #=> String
+    #   resp.data_integrations[0].source_uri #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListDataIntegrations AWS API Documentation
+    #
+    # @overload list_data_integrations(params = {})
+    # @param [Hash] params ({})
+    def list_data_integrations(params = {}, options = {})
+      req = build_request(:list_data_integrations, params)
       req.send_request(options)
     end
 
@@ -623,6 +908,47 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # Updates the description of a DataIntegration.
+    #
+    # <note markdown="1"> You cannot create a DataIntegration association for a DataIntegration
+    # that has been previously associated. Use a different DataIntegration,
+    # or recreate the DataIntegration using the [CreateDataIntegration][1]
+    # API.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html
+    #
+    # @option params [required, String] :identifier
+    #   A unique identifier for the DataIntegration.
+    #
+    # @option params [String] :name
+    #   The name of the DataIntegration.
+    #
+    # @option params [String] :description
+    #   A description of the DataIntegration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_integration({
+    #     identifier: "Identifier", # required
+    #     name: "Name",
+    #     description: "Description",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateDataIntegration AWS API Documentation
+    #
+    # @overload update_data_integration(params = {})
+    # @param [Hash] params ({})
+    def update_data_integration(params = {}, options = {})
+      req = build_request(:update_data_integration, params)
+      req.send_request(options)
+    end
+
     # Updates the description of an event integration.
     #
     # @option params [required, String] :name
@@ -662,7 +988,7 @@ module Aws::AppIntegrationsService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

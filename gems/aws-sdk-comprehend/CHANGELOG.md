@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-09-21)
+------------------
+
+* Feature - Amazon Comprehend now supports versioning of custom models, improved training with ONE_DOC_PER_FILE text documents for custom entity recognition, ability to provide specific test sets during training, and live migration to new model endpoints.
+
+1.51.0 (2021-09-14)
+------------------
+
+* Feature - Amazon Comprehend now allows you to train and run PDF and Word documents for custom entity recognition. With PDF and Word formats, you can extract information from documents containing headers, lists and tables.
+
 1.50.0 (2021-09-01)
 ------------------
 

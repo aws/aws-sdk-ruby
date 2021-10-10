@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2021-10-01)
+------------------
+
+* Feature - When "AutoApprovable" is true for a Change Template, then specifying --auto-approve (boolean) in Start-Change-Request-Execution will create a change request that bypasses approver review. (except for change calendar restrictions)
+
+1.118.0 (2021-09-23)
+------------------
+
+* Feature - Added cutoff behavior support for preventing new task invocations from starting when the maintenance window cutoff time is reached.
+
 1.117.0 (2021-09-01)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-09-30)
+------------------
+
+* Feature - Amazon S3 bucket metadata now indicates whether an error or a bucket's permissions settings prevented Amazon Macie from retrieving data about the bucket or the bucket's objects.
+
+1.34.0 (2021-09-16)
+------------------
+
+* Feature - This release adds support for specifying which managed data identifiers are used by a classification job, and retrieving a list of managed data identifiers that are available.
+
 1.33.0 (2021-09-01)
 ------------------
 

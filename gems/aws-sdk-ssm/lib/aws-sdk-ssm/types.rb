@@ -215,8 +215,6 @@ module Aws::SSM
     #   OpsCenter supports the following types:
     #
     #   `AWS::SSMIncidents::IncidentRecord`\: an Incident Manager incident.
-    #   Incident Manager is a capability of Amazon Web Services Systems
-    #   Manager.
     #
     #   `AWS::SSM::Document`\: a Systems Manager (SSM) document.
     #   @return [String]
@@ -282,7 +280,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The instances targeted by the request to create an association.
+    #   The instances targeted by the request to create an association. You
+    #   can target all instances in an Amazon Web Services account by
+    #   specifying the `InstanceIds` key with a value of `*`.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] last_execution_date
@@ -2014,8 +2014,10 @@ module Aws::SSM
     #     executions from before July 7, 2021.
     #
     #   * **Status**\: Specify a valid command status to see a list of all
-    #     command executions with that status. Status values you can specify
-    #     include:
+    #     command executions with that status. The status choices depend on
+    #     the API you call.
+    #
+    #     The status values you can specify for `ListCommands` are:
     #
     #     * `Pending`
     #
@@ -2027,9 +2029,48 @@ module Aws::SSM
     #
     #     * `Failed`
     #
-    #     * `TimedOut`
+    #     * `TimedOut` (this includes both Delivery and Execution time outs)
     #
-    #     * `Cancelling`
+    #     * `AccessDenied`
+    #
+    #     * `DeliveryTimedOut`
+    #
+    #     * `ExecutionTimedOut`
+    #
+    #     * `Incomplete`
+    #
+    #     * `NoInstancesInTag`
+    #
+    #     * `LimitExceeded`
+    #
+    #     The status values you can specify for `ListCommandInvocations`
+    #     are:
+    #
+    #     * `Pending`
+    #
+    #     * `InProgress`
+    #
+    #     * `Delayed`
+    #
+    #     * `Success`
+    #
+    #     * `Cancelled`
+    #
+    #     * `Failed`
+    #
+    #     * `TimedOut` (this includes both Delivery and Execution time outs)
+    #
+    #     * `AccessDenied`
+    #
+    #     * `DeliveryTimedOut`
+    #
+    #     * `ExecutionTimedOut`
+    #
+    #     * `Undeliverable`
+    #
+    #     * `InvalidPlatform`
+    #
+    #     * `Terminated`
     #
     #   * **DocumentName**\: Specify name of the Amazon Web Services Systems
     #     Manager document (SSM document) for which you want to see command
@@ -2071,9 +2112,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] instance_name
-    #   The name of the invocation target. For EC2 instances this is the
-    #   value for the `aws:Name` tag. For on-premises instances, this is the
-    #   name of the instance.
+    #   The fully qualified host name of the managed instance.
     #   @return [String]
     #
     # @!attribute [rw] comment
@@ -3129,10 +3168,12 @@ module Aws::SSM
     # @!attribute [rw] targets
     #   The targets for the association. You can target instances by using
     #   tags, Amazon Web Services resource groups, all instances in an
-    #   Amazon Web Services account, or individual instance IDs. For more
-    #   information about choosing targets for an association, see [Using
-    #   targets and rate controls with State Manager associations][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   Amazon Web Services account, or individual instance IDs. You can
+    #   target all instances in an Amazon Web Services account by specifying
+    #   the `InstanceIds` key with a value of `*`. For more information
+    #   about choosing targets for an association, see [Using targets and
+    #   rate controls with State Manager associations][1] in the *Amazon Web
+    #   Services Systems Manager User Guide*.
     #
     #
     #
@@ -6985,12 +7026,12 @@ module Aws::SSM
     #
     # @!attribute [rw] ops_item_id
     #   The ID of the OpsItem for which you want to delete an association
-    #   between the OpsItem and a related resource.
+    #   between the OpsItem and a related item.
     #   @return [String]
     #
     # @!attribute [rw] association_id
     #   The ID of the association for which you want to delete an
-    #   association between the OpsItem and a related resource.
+    #   association between the OpsItem and a related item.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DisassociateOpsItemRelatedItemRequest AWS API Documentation
@@ -9222,6 +9263,16 @@ module Aws::SSM
     #   The retrieved task description.
     #   @return [String]
     #
+    # @!attribute [rw] cutoff_behavior
+    #   The action to take on tasks when the maintenance window cutoff time
+    #   is reached. `CONTINUE_TASK` means that tasks continue to run. For
+    #   Automation, Lambda, Step Functions tasks, `CANCEL_TASK` means that
+    #   currently running task invocations continue, but no new task
+    #   invocations are started. For Run Command tasks, `CANCEL_TASK` means
+    #   the system attempts to stop the task by sending a `CancelCommand`
+    #   operation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTaskResult AWS API Documentation
     #
     class GetMaintenanceWindowTaskResult < Struct.new(
@@ -9238,7 +9289,8 @@ module Aws::SSM
       :max_errors,
       :logging_info,
       :name,
-      :description)
+      :description,
+      :cutoff_behavior)
       SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
@@ -9572,11 +9624,12 @@ module Aws::SSM
     # @!attribute [rw] parameter_filters
     #   Filters to limit the request results.
     #
-    #   <note markdown="1"> For `GetParametersByPath`, the following filter `Key` names are
-    #   supported: `Type`, `KeyId`, `Label`, and `DataType`.
+    #   <note markdown="1"> The following `Key` values are supported for `GetParametersByPath`\:
+    #   `Type`, `KeyId`, and `Label`.
     #
-    #    The following `Key` values are not supported for
-    #   `GetParametersByPath`\: `tag`, `Name`, `Path`, and `Tier`.
+    #    The following `Key` values aren't supported for
+    #   `GetParametersByPath`\: `tag`, `DataType`, `Name`, `Path`, and
+    #   `Tier`.
     #
     #    </note>
     #   @return [Array<Types::ParameterStringFilter>]
@@ -13609,6 +13662,11 @@ module Aws::SSM
     #   A description of the task.
     #   @return [String]
     #
+    # @!attribute [rw] cutoff_behavior
+    #   The specification for whether tasks should continue to run after the
+    #   cutoff time specified in the maintenance windows is reached.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTask AWS API Documentation
     #
     class MaintenanceWindowTask < Struct.new(
@@ -13624,7 +13682,8 @@ module Aws::SSM
       :max_concurrency,
       :max_errors,
       :name,
-      :description)
+      :description,
+      :cutoff_behavior)
       SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
@@ -15266,11 +15325,11 @@ module Aws::SSM
     #   and GetParametersByPath API operations. However, not all of the
     #   pattern values listed for `Key` can be used with both operations.
     #
-    #   For `DescribeActions`, all of the listed patterns are valid, with
-    #   the exception of `Label`.
+    #   For `DescribeActions`, all of the listed patterns are valid except
+    #   `Label`.
     #
     #   For `GetParametersByPath`, the following patterns listed for `Key`
-    #   aren't valid: `tag`, `Name`, `Path`, and `Tier`.
+    #   aren't valid: `tag`, `DataType`, `Name`, `Path`, and `Tier`.
     #
     #   For examples of Amazon Web Services CLI commands demonstrating valid
     #   parameter filter constructions, see [Searching for Systems Manager
@@ -16731,6 +16790,7 @@ module Aws::SSM
     #         name: "MaintenanceWindowName",
     #         description: "MaintenanceWindowDescription",
     #         client_token: "ClientToken",
+    #         cutoff_behavior: "CONTINUE_TASK", # accepts CONTINUE_TASK, CANCEL_TASK
     #       }
     #
     # @!attribute [rw] window_id
@@ -16870,6 +16930,28 @@ module Aws::SSM
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] cutoff_behavior
+    #   Indicates whether tasks should continue to run after the cutoff time
+    #   specified in the maintenance windows is reached.
+    #
+    #   * `CONTINUE_TASK`\: When the cutoff time is reached, any tasks that
+    #     are running continue. The default value.
+    #
+    #   * `CANCEL_TASK`\:
+    #
+    #     * For Automation, Lambda, Step Functions tasks: When the cutoff
+    #       time is reached, any task invocations that are already running
+    #       continue, but no new task invocations are started.
+    #
+    #     * For Run Command tasks: When the cutoff time is reached, the
+    #       system sends a CancelCommand operation that attempts to cancel
+    #       the command associated with the task. However, there is no
+    #       guarantee that the command will be terminated and the underlying
+    #       process stopped.
+    #
+    #     The status for tasks that are not completed is `TIMED_OUT`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindowRequest AWS API Documentation
     #
     class RegisterTaskWithMaintenanceWindowRequest < Struct.new(
@@ -16886,7 +16968,8 @@ module Aws::SSM
       :logging_info,
       :name,
       :description,
-      :client_token)
+      :client_token,
+      :cutoff_behavior)
       SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
@@ -17790,9 +17873,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] output_s3_region
-    #   (Deprecated) You can no longer specify this parameter. The system
-    #   ignores it. Instead, Amazon Web Services Systems Manager
-    #   automatically determines the Region of the S3 bucket.
+    #   The Amazon Web Services Region of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -17989,9 +18070,15 @@ module Aws::SSM
     #   The name of the Amazon Web Services Systems Manager document (SSM
     #   document) to run. This can be a public document or a custom
     #   document. To run a shared document belonging to another account,
-    #   specify the document ARN. For more information about how to use
-    #   shared documents, see [Using shared SSM documents][1] in the *Amazon
-    #   Web Services Systems Manager User Guide*.
+    #   specify the document Amazon Resource Name (ARN). For more
+    #   information about how to use shared documents, see [Using shared SSM
+    #   documents][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
+    #
+    #   <note markdown="1"> If you specify a document name or ARN that hasn't been shared with
+    #   your account, you receive an `InvalidDocument` error.
+    #
+    #    </note>
     #
     #
     #
@@ -18626,6 +18713,7 @@ module Aws::SSM
     #         },
     #         change_request_name: "ChangeRequestName",
     #         client_token: "IdempotencyToken",
+    #         auto_approve: false,
     #         runbooks: [ # required
     #           {
     #             document_name: "DocumentARN", # required
@@ -18699,6 +18787,23 @@ module Aws::SSM
     #   case insensitive, enforces the UUID format, and can't be reused.
     #   @return [String]
     #
+    # @!attribute [rw] auto_approve
+    #   Indicates whether the change request can be approved automatically
+    #   without the need for manual approvals.
+    #
+    #   If `AutoApprovable` is enabled in a change template, then setting
+    #   `AutoApprove` to `true` in `StartChangeRequestExecution` creates a
+    #   change request that bypasses approver review.
+    #
+    #   <note markdown="1"> Change Calendar restrictions are not bypassed in this scenario. If
+    #   the state of an associated calendar is `CLOSED`, change freeze
+    #   approvers must still grant permission for this change request to
+    #   run. If they don't, the change won't be processed until the
+    #   calendar state is again `OPEN`.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @!attribute [rw] runbooks
     #   Information about the Automation runbooks that are run during the
     #   runbook workflow.
@@ -18744,6 +18849,7 @@ module Aws::SSM
       :parameters,
       :change_request_name,
       :client_token,
+      :auto_approve,
       :runbooks,
       :tags,
       :scheduled_end_time,
@@ -20344,6 +20450,7 @@ module Aws::SSM
     #         name: "MaintenanceWindowName",
     #         description: "MaintenanceWindowDescription",
     #         replace: false,
+    #         cutoff_behavior: "CONTINUE_TASK", # accepts CONTINUE_TASK, CANCEL_TASK
     #       }
     #
     # @!attribute [rw] window_id
@@ -20499,6 +20606,28 @@ module Aws::SSM
     #   null.
     #   @return [Boolean]
     #
+    # @!attribute [rw] cutoff_behavior
+    #   Indicates whether tasks should continue to run after the cutoff time
+    #   specified in the maintenance windows is reached.
+    #
+    #   * `CONTINUE_TASK`\: When the cutoff time is reached, any tasks that
+    #     are running continue. The default value.
+    #
+    #   * `CANCEL_TASK`\:
+    #
+    #     * For Automation, Lambda, Step Functions tasks: When the cutoff
+    #       time is reached, any task invocations that are already running
+    #       continue, but no new task invocations are started.
+    #
+    #     * For Run Command tasks: When the cutoff time is reached, the
+    #       system sends a CancelCommand operation that attempts to cancel
+    #       the command associated with the task. However, there is no
+    #       guarantee that the command will be terminated and the underlying
+    #       process stopped.
+    #
+    #     The status for tasks that are not completed is `TIMED_OUT`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTaskRequest AWS API Documentation
     #
     class UpdateMaintenanceWindowTaskRequest < Struct.new(
@@ -20515,7 +20644,8 @@ module Aws::SSM
       :logging_info,
       :name,
       :description,
-      :replace)
+      :replace,
+      :cutoff_behavior)
       SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
@@ -20593,6 +20723,11 @@ module Aws::SSM
     #   The updated task description.
     #   @return [String]
     #
+    # @!attribute [rw] cutoff_behavior
+    #   The specification for whether tasks should continue to run after the
+    #   cutoff time specified in the maintenance windows is reached.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTaskResult AWS API Documentation
     #
     class UpdateMaintenanceWindowTaskResult < Struct.new(
@@ -20608,7 +20743,8 @@ module Aws::SSM
       :max_errors,
       :logging_info,
       :name,
-      :description)
+      :description,
+      :cutoff_behavior)
       SENSITIVE = [:task_parameters, :description]
       include Aws::Structure
     end
@@ -21178,29 +21314,25 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] setting_value
-    #   The new value to specify for the service setting. For the
-    #   `/ssm/parameter-store/default-parameter-tier` setting ID, the
-    #   setting value can be one of the following.
+    #   The new value to specify for the service setting. The following list
+    #   specifies the available values for each setting.
     #
-    #   * Standard
+    #   * `/ssm/parameter-store/default-parameter-tier`\: `Standard`,
+    #     `Advanced`, `Intelligent-Tiering`
     #
-    #   * Advanced
+    #   * `/ssm/parameter-store/high-throughput-enabled`\: `true` or `false`
     #
-    #   * Intelligent-Tiering
+    #   * `/ssm/managed-instance/activation-tier`\: `true` or `false`
     #
-    #   For the `/ssm/parameter-store/high-throughput-enabled`, and
-    #   `/ssm/managed-instance/activation-tier` setting IDs, the setting
-    #   value can be true or false.
+    #   * `/ssm/automation/customer-script-log-destination`\: `CloudWatch`
     #
-    #   For the `/ssm/automation/customer-script-log-destination` setting
-    #   ID, the setting value can be `CloudWatch`.
+    #   * `/ssm/automation/customer-script-log-group-name`\: the name of an
+    #     Amazon CloudWatch Logs log group
     #
-    #   For the `/ssm/automation/customer-script-log-group-name` setting ID,
-    #   the setting value can be the name of an Amazon CloudWatch Logs log
-    #   group.
+    #   * `/ssm/documents/console/public-sharing-permission`\: `Enable` or
+    #     `Disable`
     #
-    #   For the `/ssm/documents/console/public-sharing-permission` setting
-    #   ID, the setting value can be `Enable` or `Disable`.
+    #   * `/ssm/managed-instance/activation-tier`\: `standard` or `advanced`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingRequest AWS API Documentation

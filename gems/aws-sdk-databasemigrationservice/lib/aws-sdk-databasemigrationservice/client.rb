@@ -412,6 +412,8 @@ module Aws::DatabaseMigrationService
     # @option params [required, String] :apply_action
     #   The pending maintenance action to apply to this resource.
     #
+    #   Valid values: `os-upgrade`, `system-update`, `db-upgrade`
+    #
     # @option params [required, String] :opt_in_type
     #   A value that specifies the type of opt-in request, or undoes an opt-in
     #   request. You can't undo an opt-in request of type `immediate`.
@@ -613,8 +615,9 @@ module Aws::DatabaseMigrationService
     #
     #   Possible settings include the following:
     #
-    #   * `ServiceAccessRoleArn` - The IAM role that has permission to access
-    #     the Amazon S3 bucket. The role must allow the `iam:PassRole` action.
+    #   * `ServiceAccessRoleArn` - The Amazon Resource Name (ARN) used by the
+    #     service access IAM role. The role must allow the `iam:PassRole`
+    #     action.
     #
     #   * `BucketName` - The name of the S3 bucket to use.
     #
@@ -1790,6 +1793,10 @@ module Aws::DatabaseMigrationService
 
     # Creates a replication subnet group given a list of the subnet IDs in a
     # VPC.
+    #
+    # The VPC needs to have at least one subnet in at least two availability
+    # zones in the Amazon Web Services Region, otherwise the service will
+    # throw a `ReplicationSubnetGroupDoesNotCoverEnoughAZs` exception.
     #
     # @option params [required, String] :replication_subnet_group_identifier
     #   The name for the replication subnet group. This value is stored as a
@@ -5116,9 +5123,9 @@ module Aws::DatabaseMigrationService
     #
     #   Attributes include the following:
     #
-    #   * serviceAccessRoleArn - The Identity and Access Management (IAM) role
-    #     that has permission to access the Amazon S3 bucket. The role must
-    #     allow the `iam:PassRole` action.
+    #   * serviceAccessRoleArn - The Amazon Resource Name (ARN) used by the
+    #     service access IAM role. The role must allow the `iam:PassRole`
+    #     action.
     #
     #   * BucketName - The name of the S3 bucket to use.
     #
@@ -6473,8 +6480,16 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Boolean] :force_failover
     #   If this parameter is `true`, the reboot is conducted through a
-    #   Multi-AZ failover. (If the instance isn't configured for Multi-AZ,
-    #   then you can't specify `true`.)
+    #   Multi-AZ failover. If the instance isn't configured for Multi-AZ,
+    #   then you can't specify `true`. ( `--force-planned-failover` and
+    #   `--force-failover` can't both be set to `true`.)
+    #
+    # @option params [Boolean] :force_planned_failover
+    #   If this parameter is `true`, the reboot is conducted through a planned
+    #   Multi-AZ failover where resources are released and cleaned up prior to
+    #   conducting the failover. If the instance isn''t configured for
+    #   Multi-AZ, then you can't specify `true`. ( `--force-planned-failover`
+    #   and `--force-failover` can't both be set to `true`.)
     #
     # @return [Types::RebootReplicationInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6485,6 +6500,7 @@ module Aws::DatabaseMigrationService
     #   resp = client.reboot_replication_instance({
     #     replication_instance_arn: "String", # required
     #     force_failover: false,
+    #     force_planned_failover: false,
     #   })
     #
     # @example Response structure
@@ -6594,6 +6610,10 @@ module Aws::DatabaseMigrationService
     end
 
     # Reloads the target database table with the source data.
+    #
+    # You can only use this operation with a task in the `RUNNING` state,
+    # otherwise the service will throw an `InvalidResourceStateFault`
+    # exception.
     #
     # @option params [required, String] :replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
@@ -7158,7 +7178,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

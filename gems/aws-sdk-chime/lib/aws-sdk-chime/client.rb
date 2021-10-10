@@ -1433,6 +1433,10 @@ module Aws::Chime
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::ChimeSdkMeetingConfiguration] :chime_sdk_meeting_configuration
+    #   The configuration for a specified media capture pipeline. `SourceType`
+    #   must be `ChimeSdkMeeting`.
+    #
     # @return [Types::CreateMediaCapturePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMediaCapturePipelineResponse#media_capture_pipeline #media_capture_pipeline} => Types::MediaCapturePipeline
@@ -1445,6 +1449,27 @@ module Aws::Chime
     #     sink_type: "S3Bucket", # required, accepts S3Bucket
     #     sink_arn: "Arn", # required
     #     client_request_token: "ClientRequestToken",
+    #     chime_sdk_meeting_configuration: {
+    #       source_configuration: {
+    #         selected_video_streams: {
+    #           attendee_ids: ["GuidString"],
+    #           external_user_ids: ["ExternalUserIdType"],
+    #         },
+    #       },
+    #       artifacts_configuration: {
+    #         audio: { # required
+    #           mux_type: "AudioOnly", # required, accepts AudioOnly, AudioWithActiveSpeakerVideo
+    #         },
+    #         video: { # required
+    #           state: "Enabled", # required, accepts Enabled, Disabled
+    #           mux_type: "VideoOnly", # accepts VideoOnly
+    #         },
+    #         content: { # required
+    #           state: "Enabled", # required, accepts Enabled, Disabled
+    #           mux_type: "ContentOnly", # accepts ContentOnly
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1457,6 +1482,15 @@ module Aws::Chime
     #   resp.media_capture_pipeline.sink_arn #=> String
     #   resp.media_capture_pipeline.created_timestamp #=> Time
     #   resp.media_capture_pipeline.updated_timestamp #=> Time
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.attendee_ids #=> Array
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.attendee_ids[0] #=> String
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids #=> Array
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids[0] #=> String
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.audio.mux_type #=> String, one of "AudioOnly", "AudioWithActiveSpeakerVideo"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.video.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.video.mux_type #=> String, one of "VideoOnly"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.mux_type #=> String, one of "ContentOnly"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateMediaCapturePipeline AWS API Documentation
     #
@@ -1995,6 +2029,9 @@ module Aws::Chime
     # @option params [required, String] :sip_media_application_id
     #   The ID of the SIP media application.
     #
+    # @option params [Hash<String,String>] :sip_headers
+    #   The SIP headers added to an outbound call leg.
+    #
     # @return [Types::CreateSipMediaApplicationCallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSipMediaApplicationCallResponse#sip_media_application_call #sip_media_application_call} => Types::SipMediaApplicationCall
@@ -2005,6 +2042,9 @@ module Aws::Chime
     #     from_phone_number: "E164PhoneNumber", # required
     #     to_phone_number: "E164PhoneNumber", # required
     #     sip_media_application_id: "NonEmptyString", # required
+    #     sip_headers: {
+    #       "SensitiveString" => "SensitiveString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3890,6 +3930,15 @@ module Aws::Chime
     #   resp.media_capture_pipeline.sink_arn #=> String
     #   resp.media_capture_pipeline.created_timestamp #=> Time
     #   resp.media_capture_pipeline.updated_timestamp #=> Time
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.attendee_ids #=> Array
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.attendee_ids[0] #=> String
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids #=> Array
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids[0] #=> String
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.audio.mux_type #=> String, one of "AudioOnly", "AudioWithActiveSpeakerVideo"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.video.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.video.mux_type #=> String, one of "VideoOnly"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_capture_pipeline.chime_sdk_meeting_configuration.artifacts_configuration.content.mux_type #=> String, one of "ContentOnly"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetMediaCapturePipeline AWS API Documentation
     #
@@ -5529,6 +5578,15 @@ module Aws::Chime
     #   resp.media_capture_pipelines[0].sink_arn #=> String
     #   resp.media_capture_pipelines[0].created_timestamp #=> Time
     #   resp.media_capture_pipelines[0].updated_timestamp #=> Time
+    #   resp.media_capture_pipelines[0].chime_sdk_meeting_configuration.source_configuration.selected_video_streams.attendee_ids #=> Array
+    #   resp.media_capture_pipelines[0].chime_sdk_meeting_configuration.source_configuration.selected_video_streams.attendee_ids[0] #=> String
+    #   resp.media_capture_pipelines[0].chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids #=> Array
+    #   resp.media_capture_pipelines[0].chime_sdk_meeting_configuration.source_configuration.selected_video_streams.external_user_ids[0] #=> String
+    #   resp.media_capture_pipelines[0].chime_sdk_meeting_configuration.artifacts_configuration.audio.mux_type #=> String, one of "AudioOnly", "AudioWithActiveSpeakerVideo"
+    #   resp.media_capture_pipelines[0].chime_sdk_meeting_configuration.artifacts_configuration.video.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_capture_pipelines[0].chime_sdk_meeting_configuration.artifacts_configuration.video.mux_type #=> String, one of "VideoOnly"
+    #   resp.media_capture_pipelines[0].chime_sdk_meeting_configuration.artifacts_configuration.content.state #=> String, one of "Enabled", "Disabled"
+    #   resp.media_capture_pipelines[0].chime_sdk_meeting_configuration.artifacts_configuration.content.mux_type #=> String, one of "ContentOnly"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListMediaCapturePipelines AWS API Documentation
@@ -7193,7 +7251,7 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Start transcription for the specified `meetingId`.
+    # Starts transcription for the specified `meetingId`.
     #
     # @option params [required, String] :meeting_id
     #   The unique ID of the meeting being transcribed.
@@ -7789,10 +7847,10 @@ module Aws::Chime
     # Amazon Chime Business Calling and Amazon Chime Voice Connector
     # settings.
     #
-    # @option params [required, Types::BusinessCallingSettings] :business_calling
+    # @option params [Types::BusinessCallingSettings] :business_calling
     #   The Amazon Chime Business Calling settings.
     #
-    # @option params [required, Types::VoiceConnectorSettings] :voice_connector
+    # @option params [Types::VoiceConnectorSettings] :voice_connector
     #   The Amazon Chime Voice Connector settings.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -7800,10 +7858,10 @@ module Aws::Chime
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_global_settings({
-    #     business_calling: { # required
+    #     business_calling: {
     #       cdr_bucket: "String",
     #     },
-    #     voice_connector: { # required
+    #     voice_connector: {
     #       cdr_bucket: "String",
     #     },
     #   })
@@ -8405,7 +8463,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

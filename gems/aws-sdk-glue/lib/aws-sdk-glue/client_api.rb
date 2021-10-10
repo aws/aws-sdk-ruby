@@ -1303,6 +1303,7 @@ module Aws::Glue
 
     CreateConnectionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateConnectionRequest.add_member(:connection_input, Shapes::ShapeRef.new(shape: ConnectionInput, required: true, location_name: "ConnectionInput"))
+    CreateConnectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateConnectionRequest.struct_class = Types::CreateConnectionRequest
 
     CreateConnectionResponse.struct_class = Types::CreateConnectionResponse

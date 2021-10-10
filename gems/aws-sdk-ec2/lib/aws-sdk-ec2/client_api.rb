@@ -177,6 +177,11 @@ module Aws::EC2
     CancelBatchErrorCode = Shapes::StringShape.new(name: 'CancelBatchErrorCode')
     CancelBundleTaskRequest = Shapes::StructureShape.new(name: 'CancelBundleTaskRequest')
     CancelBundleTaskResult = Shapes::StructureShape.new(name: 'CancelBundleTaskResult')
+    CancelCapacityReservationFleetError = Shapes::StructureShape.new(name: 'CancelCapacityReservationFleetError')
+    CancelCapacityReservationFleetErrorCode = Shapes::StringShape.new(name: 'CancelCapacityReservationFleetErrorCode')
+    CancelCapacityReservationFleetErrorMessage = Shapes::StringShape.new(name: 'CancelCapacityReservationFleetErrorMessage')
+    CancelCapacityReservationFleetsRequest = Shapes::StructureShape.new(name: 'CancelCapacityReservationFleetsRequest')
+    CancelCapacityReservationFleetsResult = Shapes::StructureShape.new(name: 'CancelCapacityReservationFleetsResult')
     CancelCapacityReservationRequest = Shapes::StructureShape.new(name: 'CancelCapacityReservationRequest')
     CancelCapacityReservationResult = Shapes::StructureShape.new(name: 'CancelCapacityReservationResult')
     CancelConversionRequest = Shapes::StructureShape.new(name: 'CancelConversionRequest')
@@ -198,6 +203,13 @@ module Aws::EC2
     CancelledSpotInstanceRequest = Shapes::StructureShape.new(name: 'CancelledSpotInstanceRequest')
     CancelledSpotInstanceRequestList = Shapes::ListShape.new(name: 'CancelledSpotInstanceRequestList')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
+    CapacityReservationFleet = Shapes::StructureShape.new(name: 'CapacityReservationFleet')
+    CapacityReservationFleetCancellationState = Shapes::StructureShape.new(name: 'CapacityReservationFleetCancellationState')
+    CapacityReservationFleetCancellationStateSet = Shapes::ListShape.new(name: 'CapacityReservationFleetCancellationStateSet')
+    CapacityReservationFleetId = Shapes::StringShape.new(name: 'CapacityReservationFleetId')
+    CapacityReservationFleetIdSet = Shapes::ListShape.new(name: 'CapacityReservationFleetIdSet')
+    CapacityReservationFleetSet = Shapes::ListShape.new(name: 'CapacityReservationFleetSet')
+    CapacityReservationFleetState = Shapes::StringShape.new(name: 'CapacityReservationFleetState')
     CapacityReservationGroup = Shapes::StructureShape.new(name: 'CapacityReservationGroup')
     CapacityReservationGroupSet = Shapes::ListShape.new(name: 'CapacityReservationGroupSet')
     CapacityReservationId = Shapes::StringShape.new(name: 'CapacityReservationId')
@@ -294,6 +306,8 @@ module Aws::EC2
     CoreCountList = Shapes::ListShape.new(name: 'CoreCountList')
     CpuOptions = Shapes::StructureShape.new(name: 'CpuOptions')
     CpuOptionsRequest = Shapes::StructureShape.new(name: 'CpuOptionsRequest')
+    CreateCapacityReservationFleetRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationFleetRequest')
+    CreateCapacityReservationFleetResult = Shapes::StructureShape.new(name: 'CreateCapacityReservationFleetResult')
     CreateCapacityReservationRequest = Shapes::StructureShape.new(name: 'CreateCapacityReservationRequest')
     CreateCapacityReservationResult = Shapes::StructureShape.new(name: 'CreateCapacityReservationResult')
     CreateCarrierGatewayRequest = Shapes::StructureShape.new(name: 'CreateCarrierGatewayRequest')
@@ -576,6 +590,9 @@ module Aws::EC2
     DescribeByoipCidrsMaxResults = Shapes::IntegerShape.new(name: 'DescribeByoipCidrsMaxResults')
     DescribeByoipCidrsRequest = Shapes::StructureShape.new(name: 'DescribeByoipCidrsRequest')
     DescribeByoipCidrsResult = Shapes::StructureShape.new(name: 'DescribeByoipCidrsResult')
+    DescribeCapacityReservationFleetsMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityReservationFleetsMaxResults')
+    DescribeCapacityReservationFleetsRequest = Shapes::StructureShape.new(name: 'DescribeCapacityReservationFleetsRequest')
+    DescribeCapacityReservationFleetsResult = Shapes::StructureShape.new(name: 'DescribeCapacityReservationFleetsResult')
     DescribeCapacityReservationsMaxResults = Shapes::IntegerShape.new(name: 'DescribeCapacityReservationsMaxResults')
     DescribeCapacityReservationsRequest = Shapes::StructureShape.new(name: 'DescribeCapacityReservationsRequest')
     DescribeCapacityReservationsResult = Shapes::StructureShape.new(name: 'DescribeCapacityReservationsResult')
@@ -933,6 +950,7 @@ module Aws::EC2
     DnsSupportValue = Shapes::StringShape.new(name: 'DnsSupportValue')
     DomainType = Shapes::StringShape.new(name: 'DomainType')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DoubleWithConstraints = Shapes::FloatShape.new(name: 'DoubleWithConstraints')
     EbsBlockDevice = Shapes::StructureShape.new(name: 'EbsBlockDevice')
     EbsEncryptionSupport = Shapes::StringShape.new(name: 'EbsEncryptionSupport')
     EbsInfo = Shapes::StructureShape.new(name: 'EbsInfo')
@@ -1028,6 +1046,8 @@ module Aws::EC2
     ExportTransitGatewayRoutesRequest = Shapes::StructureShape.new(name: 'ExportTransitGatewayRoutesRequest')
     ExportTransitGatewayRoutesResult = Shapes::StructureShape.new(name: 'ExportTransitGatewayRoutesResult')
     ExportVmTaskId = Shapes::StringShape.new(name: 'ExportVmTaskId')
+    FailedCapacityReservationFleetCancellationResult = Shapes::StructureShape.new(name: 'FailedCapacityReservationFleetCancellationResult')
+    FailedCapacityReservationFleetCancellationResultSet = Shapes::ListShape.new(name: 'FailedCapacityReservationFleetCancellationResultSet')
     FailedQueuedPurchaseDeletion = Shapes::StructureShape.new(name: 'FailedQueuedPurchaseDeletion')
     FailedQueuedPurchaseDeletionSet = Shapes::ListShape.new(name: 'FailedQueuedPurchaseDeletionSet')
     FastSnapshotRestoreStateCode = Shapes::StringShape.new(name: 'FastSnapshotRestoreStateCode')
@@ -1036,12 +1056,16 @@ module Aws::EC2
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FleetActivityStatus = Shapes::StringShape.new(name: 'FleetActivityStatus')
+    FleetCapacityReservation = Shapes::StructureShape.new(name: 'FleetCapacityReservation')
+    FleetCapacityReservationSet = Shapes::ListShape.new(name: 'FleetCapacityReservationSet')
+    FleetCapacityReservationTenancy = Shapes::StringShape.new(name: 'FleetCapacityReservationTenancy')
     FleetCapacityReservationUsageStrategy = Shapes::StringShape.new(name: 'FleetCapacityReservationUsageStrategy')
     FleetData = Shapes::StructureShape.new(name: 'FleetData')
     FleetEventType = Shapes::StringShape.new(name: 'FleetEventType')
     FleetExcessCapacityTerminationPolicy = Shapes::StringShape.new(name: 'FleetExcessCapacityTerminationPolicy')
     FleetId = Shapes::StringShape.new(name: 'FleetId')
     FleetIdSet = Shapes::ListShape.new(name: 'FleetIdSet')
+    FleetInstanceMatchCriteria = Shapes::StringShape.new(name: 'FleetInstanceMatchCriteria')
     FleetLaunchTemplateConfig = Shapes::StructureShape.new(name: 'FleetLaunchTemplateConfig')
     FleetLaunchTemplateConfigList = Shapes::ListShape.new(name: 'FleetLaunchTemplateConfigList')
     FleetLaunchTemplateConfigListRequest = Shapes::ListShape.new(name: 'FleetLaunchTemplateConfigListRequest')
@@ -1085,6 +1109,7 @@ module Aws::EC2
     FpgaImageStateCode = Shapes::StringShape.new(name: 'FpgaImageStateCode')
     FpgaInfo = Shapes::StructureShape.new(name: 'FpgaInfo')
     FreeTierEligibleFlag = Shapes::BooleanShape.new(name: 'FreeTierEligibleFlag')
+    GVCDMaxResults = Shapes::IntegerShape.new(name: 'GVCDMaxResults')
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
     GetAssociatedEnclaveCertificateIamRolesRequest = Shapes::StructureShape.new(name: 'GetAssociatedEnclaveCertificateIamRolesRequest')
     GetAssociatedEnclaveCertificateIamRolesResult = Shapes::StructureShape.new(name: 'GetAssociatedEnclaveCertificateIamRolesResult')
@@ -1138,6 +1163,10 @@ module Aws::EC2
     GetTransitGatewayRouteTableAssociationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTableAssociationsResult')
     GetTransitGatewayRouteTablePropagationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTablePropagationsRequest')
     GetTransitGatewayRouteTablePropagationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayRouteTablePropagationsResult')
+    GetVpnConnectionDeviceSampleConfigurationRequest = Shapes::StructureShape.new(name: 'GetVpnConnectionDeviceSampleConfigurationRequest')
+    GetVpnConnectionDeviceSampleConfigurationResult = Shapes::StructureShape.new(name: 'GetVpnConnectionDeviceSampleConfigurationResult')
+    GetVpnConnectionDeviceTypesRequest = Shapes::StructureShape.new(name: 'GetVpnConnectionDeviceTypesRequest')
+    GetVpnConnectionDeviceTypesResult = Shapes::StructureShape.new(name: 'GetVpnConnectionDeviceTypesResult')
     GpuDeviceCount = Shapes::IntegerShape.new(name: 'GpuDeviceCount')
     GpuDeviceInfo = Shapes::StructureShape.new(name: 'GpuDeviceInfo')
     GpuDeviceInfoList = Shapes::ListShape.new(name: 'GpuDeviceInfoList')
@@ -1329,6 +1358,7 @@ module Aws::EC2
     InstanceUsage = Shapes::StructureShape.new(name: 'InstanceUsage')
     InstanceUsageSet = Shapes::ListShape.new(name: 'InstanceUsageSet')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegerWithConstraints = Shapes::IntegerShape.new(name: 'IntegerWithConstraints')
     IntegrateServices = Shapes::StructureShape.new(name: 'IntegrateServices')
     InterfacePermissionType = Shapes::StringShape.new(name: 'InterfacePermissionType')
     InterfaceProtocolType = Shapes::StringShape.new(name: 'InterfaceProtocolType')
@@ -1518,6 +1548,8 @@ module Aws::EC2
     ModifyAvailabilityZoneGroupRequest = Shapes::StructureShape.new(name: 'ModifyAvailabilityZoneGroupRequest')
     ModifyAvailabilityZoneGroupResult = Shapes::StructureShape.new(name: 'ModifyAvailabilityZoneGroupResult')
     ModifyAvailabilityZoneOptInStatus = Shapes::StringShape.new(name: 'ModifyAvailabilityZoneOptInStatus')
+    ModifyCapacityReservationFleetRequest = Shapes::StructureShape.new(name: 'ModifyCapacityReservationFleetRequest')
+    ModifyCapacityReservationFleetResult = Shapes::StructureShape.new(name: 'ModifyCapacityReservationFleetResult')
     ModifyCapacityReservationRequest = Shapes::StructureShape.new(name: 'ModifyCapacityReservationRequest')
     ModifyCapacityReservationResult = Shapes::StructureShape.new(name: 'ModifyCapacityReservationResult')
     ModifyClientVpnEndpointRequest = Shapes::StructureShape.new(name: 'ModifyClientVpnEndpointRequest')
@@ -1858,6 +1890,8 @@ module Aws::EC2
     RequestSpotLaunchSpecificationSecurityGroupIdList = Shapes::ListShape.new(name: 'RequestSpotLaunchSpecificationSecurityGroupIdList')
     RequestSpotLaunchSpecificationSecurityGroupList = Shapes::ListShape.new(name: 'RequestSpotLaunchSpecificationSecurityGroupList')
     Reservation = Shapes::StructureShape.new(name: 'Reservation')
+    ReservationFleetInstanceSpecification = Shapes::StructureShape.new(name: 'ReservationFleetInstanceSpecification')
+    ReservationFleetInstanceSpecificationList = Shapes::ListShape.new(name: 'ReservationFleetInstanceSpecificationList')
     ReservationId = Shapes::StringShape.new(name: 'ReservationId')
     ReservationList = Shapes::ListShape.new(name: 'ReservationList')
     ReservationState = Shapes::StringShape.new(name: 'ReservationState')
@@ -2336,6 +2370,10 @@ module Aws::EC2
     VpcState = Shapes::StringShape.new(name: 'VpcState')
     VpcTenancy = Shapes::StringShape.new(name: 'VpcTenancy')
     VpnConnection = Shapes::StructureShape.new(name: 'VpnConnection')
+    VpnConnectionDeviceSampleConfiguration = Shapes::StringShape.new(name: 'VpnConnectionDeviceSampleConfiguration')
+    VpnConnectionDeviceType = Shapes::StructureShape.new(name: 'VpnConnectionDeviceType')
+    VpnConnectionDeviceTypeId = Shapes::StringShape.new(name: 'VpnConnectionDeviceTypeId')
+    VpnConnectionDeviceTypeList = Shapes::ListShape.new(name: 'VpnConnectionDeviceTypeList')
     VpnConnectionId = Shapes::StringShape.new(name: 'VpnConnectionId')
     VpnConnectionIdStringList = Shapes::ListShape.new(name: 'VpnConnectionIdStringList')
     VpnConnectionList = Shapes::ListShape.new(name: 'VpnConnectionList')
@@ -2936,6 +2974,18 @@ module Aws::EC2
     CancelBundleTaskResult.add_member(:bundle_task, Shapes::ShapeRef.new(shape: BundleTask, location_name: "bundleInstanceTask"))
     CancelBundleTaskResult.struct_class = Types::CancelBundleTaskResult
 
+    CancelCapacityReservationFleetError.add_member(:code, Shapes::ShapeRef.new(shape: CancelCapacityReservationFleetErrorCode, location_name: "code"))
+    CancelCapacityReservationFleetError.add_member(:message, Shapes::ShapeRef.new(shape: CancelCapacityReservationFleetErrorMessage, location_name: "message"))
+    CancelCapacityReservationFleetError.struct_class = Types::CancelCapacityReservationFleetError
+
+    CancelCapacityReservationFleetsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CancelCapacityReservationFleetsRequest.add_member(:capacity_reservation_fleet_ids, Shapes::ShapeRef.new(shape: CapacityReservationFleetIdSet, required: true, location_name: "CapacityReservationFleetId"))
+    CancelCapacityReservationFleetsRequest.struct_class = Types::CancelCapacityReservationFleetsRequest
+
+    CancelCapacityReservationFleetsResult.add_member(:successful_fleet_cancellations, Shapes::ShapeRef.new(shape: CapacityReservationFleetCancellationStateSet, location_name: "successfulFleetCancellationSet"))
+    CancelCapacityReservationFleetsResult.add_member(:failed_fleet_cancellations, Shapes::ShapeRef.new(shape: FailedCapacityReservationFleetCancellationResultSet, location_name: "failedFleetCancellationSet"))
+    CancelCapacityReservationFleetsResult.struct_class = Types::CancelCapacityReservationFleetsResult
+
     CancelCapacityReservationRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     CancelCapacityReservationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CancelCapacityReservationRequest.struct_class = Types::CancelCapacityReservationRequest
@@ -3026,7 +3076,33 @@ module Aws::EC2
     CapacityReservation.add_member(:create_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "createDate"))
     CapacityReservation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     CapacityReservation.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, location_name: "outpostArn"))
+    CapacityReservation.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationFleetId"))
     CapacityReservation.struct_class = Types::CapacityReservation
+
+    CapacityReservationFleet.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: CapacityReservationFleetId, location_name: "capacityReservationFleetId"))
+    CapacityReservationFleet.add_member(:capacity_reservation_fleet_arn, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationFleetArn"))
+    CapacityReservationFleet.add_member(:state, Shapes::ShapeRef.new(shape: CapacityReservationFleetState, location_name: "state"))
+    CapacityReservationFleet.add_member(:total_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "totalTargetCapacity"))
+    CapacityReservationFleet.add_member(:total_fulfilled_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "totalFulfilledCapacity"))
+    CapacityReservationFleet.add_member(:tenancy, Shapes::ShapeRef.new(shape: FleetCapacityReservationTenancy, location_name: "tenancy"))
+    CapacityReservationFleet.add_member(:end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "endDate"))
+    CapacityReservationFleet.add_member(:create_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "createTime"))
+    CapacityReservationFleet.add_member(:instance_match_criteria, Shapes::ShapeRef.new(shape: FleetInstanceMatchCriteria, location_name: "instanceMatchCriteria"))
+    CapacityReservationFleet.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: String, location_name: "allocationStrategy"))
+    CapacityReservationFleet.add_member(:instance_type_specifications, Shapes::ShapeRef.new(shape: FleetCapacityReservationSet, location_name: "instanceTypeSpecificationSet"))
+    CapacityReservationFleet.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    CapacityReservationFleet.struct_class = Types::CapacityReservationFleet
+
+    CapacityReservationFleetCancellationState.add_member(:current_fleet_state, Shapes::ShapeRef.new(shape: CapacityReservationFleetState, location_name: "currentFleetState"))
+    CapacityReservationFleetCancellationState.add_member(:previous_fleet_state, Shapes::ShapeRef.new(shape: CapacityReservationFleetState, location_name: "previousFleetState"))
+    CapacityReservationFleetCancellationState.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: CapacityReservationFleetId, location_name: "capacityReservationFleetId"))
+    CapacityReservationFleetCancellationState.struct_class = Types::CapacityReservationFleetCancellationState
+
+    CapacityReservationFleetCancellationStateSet.member = Shapes::ShapeRef.new(shape: CapacityReservationFleetCancellationState, location_name: "item")
+
+    CapacityReservationFleetIdSet.member = Shapes::ShapeRef.new(shape: CapacityReservationFleetId, location_name: "item")
+
+    CapacityReservationFleetSet.member = Shapes::ShapeRef.new(shape: CapacityReservationFleet, location_name: "item")
 
     CapacityReservationGroup.add_member(:group_arn, Shapes::ShapeRef.new(shape: String, location_name: "groupArn"))
     CapacityReservationGroup.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
@@ -3332,6 +3408,30 @@ module Aws::EC2
     CpuOptionsRequest.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "ThreadsPerCore"))
     CpuOptionsRequest.struct_class = Types::CpuOptionsRequest
 
+    CreateCapacityReservationFleetRequest.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: String, location_name: "AllocationStrategy"))
+    CreateCapacityReservationFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateCapacityReservationFleetRequest.add_member(:instance_type_specifications, Shapes::ShapeRef.new(shape: ReservationFleetInstanceSpecificationList, required: true, location_name: "InstanceTypeSpecification"))
+    CreateCapacityReservationFleetRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: FleetCapacityReservationTenancy, location_name: "Tenancy"))
+    CreateCapacityReservationFleetRequest.add_member(:total_target_capacity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalTargetCapacity"))
+    CreateCapacityReservationFleetRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "EndDate"))
+    CreateCapacityReservationFleetRequest.add_member(:instance_match_criteria, Shapes::ShapeRef.new(shape: FleetInstanceMatchCriteria, location_name: "InstanceMatchCriteria"))
+    CreateCapacityReservationFleetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateCapacityReservationFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateCapacityReservationFleetRequest.struct_class = Types::CreateCapacityReservationFleetRequest
+
+    CreateCapacityReservationFleetResult.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: CapacityReservationFleetId, location_name: "capacityReservationFleetId"))
+    CreateCapacityReservationFleetResult.add_member(:state, Shapes::ShapeRef.new(shape: CapacityReservationFleetState, location_name: "state"))
+    CreateCapacityReservationFleetResult.add_member(:total_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "totalTargetCapacity"))
+    CreateCapacityReservationFleetResult.add_member(:total_fulfilled_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "totalFulfilledCapacity"))
+    CreateCapacityReservationFleetResult.add_member(:instance_match_criteria, Shapes::ShapeRef.new(shape: FleetInstanceMatchCriteria, location_name: "instanceMatchCriteria"))
+    CreateCapacityReservationFleetResult.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: String, location_name: "allocationStrategy"))
+    CreateCapacityReservationFleetResult.add_member(:create_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "createTime"))
+    CreateCapacityReservationFleetResult.add_member(:end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "endDate"))
+    CreateCapacityReservationFleetResult.add_member(:tenancy, Shapes::ShapeRef.new(shape: FleetCapacityReservationTenancy, location_name: "tenancy"))
+    CreateCapacityReservationFleetResult.add_member(:fleet_capacity_reservations, Shapes::ShapeRef.new(shape: FleetCapacityReservationSet, location_name: "fleetCapacityReservationSet"))
+    CreateCapacityReservationFleetResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    CreateCapacityReservationFleetResult.struct_class = Types::CreateCapacityReservationFleetResult
+
     CreateCapacityReservationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateCapacityReservationRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
     CreateCapacityReservationRequest.add_member(:instance_platform, Shapes::ShapeRef.new(shape: CapacityReservationInstancePlatform, required: true, location_name: "InstancePlatform"))
@@ -3580,8 +3680,8 @@ module Aws::EC2
 
     CreateLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
     CreateLocalGatewayRouteRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
-    CreateLocalGatewayRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateLocalGatewayRouteRequest.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceGroupId, required: true, location_name: "LocalGatewayVirtualInterfaceGroupId"))
+    CreateLocalGatewayRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateLocalGatewayRouteRequest.struct_class = Types::CreateLocalGatewayRouteRequest
 
     CreateLocalGatewayRouteResult.add_member(:route, Shapes::ShapeRef.new(shape: LocalGatewayRoute, location_name: "route"))
@@ -3813,11 +3913,11 @@ module Aws::EC2
     CreateSubnetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     CreateSubnetRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
+    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
     CreateSubnetRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "OutpostArn"))
     CreateSubnetRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     CreateSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.struct_class = Types::CreateSubnetRequest
 
     CreateSubnetResult.add_member(:subnet, Shapes::ShapeRef.new(shape: Subnet, location_name: "subnet"))
@@ -4064,6 +4164,7 @@ module Aws::EC2
     CreateVpcPeeringConnectionResult.add_member(:vpc_peering_connection, Shapes::ShapeRef.new(shape: VpcPeeringConnection, location_name: "vpcPeeringConnection"))
     CreateVpcPeeringConnectionResult.struct_class = Types::CreateVpcPeeringConnectionResult
 
+    CreateVpcRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateVpcRequest.add_member(:amazon_provided_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: Boolean, location_name: "amazonProvidedIpv6CidrBlock"))
     CreateVpcRequest.add_member(:ipv_6_pool, Shapes::ShapeRef.new(shape: Ipv6PoolEc2Id, location_name: "Ipv6Pool"))
     CreateVpcRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
@@ -4071,7 +4172,6 @@ module Aws::EC2
     CreateVpcRequest.add_member(:instance_tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "instanceTenancy"))
     CreateVpcRequest.add_member(:ipv_6_cidr_block_network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlockNetworkBorderGroup"))
     CreateVpcRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
-    CreateVpcRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateVpcRequest.struct_class = Types::CreateVpcRequest
 
     CreateVpcResult.add_member(:vpc, Shapes::ShapeRef.new(shape: Vpc, location_name: "vpc"))
@@ -4616,6 +4716,17 @@ module Aws::EC2
     DescribeByoipCidrsResult.add_member(:byoip_cidrs, Shapes::ShapeRef.new(shape: ByoipCidrSet, location_name: "byoipCidrSet"))
     DescribeByoipCidrsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeByoipCidrsResult.struct_class = Types::DescribeByoipCidrsResult
+
+    DescribeCapacityReservationFleetsRequest.add_member(:capacity_reservation_fleet_ids, Shapes::ShapeRef.new(shape: CapacityReservationFleetIdSet, location_name: "CapacityReservationFleetId"))
+    DescribeCapacityReservationFleetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeCapacityReservationFleetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeCapacityReservationFleetsMaxResults, location_name: "MaxResults"))
+    DescribeCapacityReservationFleetsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeCapacityReservationFleetsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeCapacityReservationFleetsRequest.struct_class = Types::DescribeCapacityReservationFleetsRequest
+
+    DescribeCapacityReservationFleetsResult.add_member(:capacity_reservation_fleets, Shapes::ShapeRef.new(shape: CapacityReservationFleetSet, location_name: "capacityReservationFleetSet"))
+    DescribeCapacityReservationFleetsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeCapacityReservationFleetsResult.struct_class = Types::DescribeCapacityReservationFleetsResult
 
     DescribeCapacityReservationsRequest.add_member(:capacity_reservation_ids, Shapes::ShapeRef.new(shape: CapacityReservationIdSet, location_name: "CapacityReservationId"))
     DescribeCapacityReservationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -6169,7 +6280,7 @@ module Aws::EC2
 
     EbsBlockDevice.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
     EbsBlockDevice.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "iops"))
-    EbsBlockDevice.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    EbsBlockDevice.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "snapshotId"))
     EbsBlockDevice.add_member(:volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeSize"))
     EbsBlockDevice.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
     EbsBlockDevice.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
@@ -6513,6 +6624,12 @@ module Aws::EC2
     ExportTransitGatewayRoutesResult.add_member(:s3_location, Shapes::ShapeRef.new(shape: String, location_name: "s3Location"))
     ExportTransitGatewayRoutesResult.struct_class = Types::ExportTransitGatewayRoutesResult
 
+    FailedCapacityReservationFleetCancellationResult.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: CapacityReservationFleetId, location_name: "capacityReservationFleetId"))
+    FailedCapacityReservationFleetCancellationResult.add_member(:cancel_capacity_reservation_fleet_error, Shapes::ShapeRef.new(shape: CancelCapacityReservationFleetError, location_name: "cancelCapacityReservationFleetError"))
+    FailedCapacityReservationFleetCancellationResult.struct_class = Types::FailedCapacityReservationFleetCancellationResult
+
+    FailedCapacityReservationFleetCancellationResultSet.member = Shapes::ShapeRef.new(shape: FailedCapacityReservationFleetCancellationResult, location_name: "item")
+
     FailedQueuedPurchaseDeletion.add_member(:error, Shapes::ShapeRef.new(shape: DeleteQueuedReservedInstancesError, location_name: "error"))
     FailedQueuedPurchaseDeletion.add_member(:reserved_instances_id, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesId"))
     FailedQueuedPurchaseDeletion.struct_class = Types::FailedQueuedPurchaseDeletion
@@ -6532,6 +6649,21 @@ module Aws::EC2
     Filter.struct_class = Types::Filter
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter, location_name: "Filter")
+
+    FleetCapacityReservation.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, location_name: "capacityReservationId"))
+    FleetCapacityReservation.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
+    FleetCapacityReservation.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
+    FleetCapacityReservation.add_member(:instance_platform, Shapes::ShapeRef.new(shape: CapacityReservationInstancePlatform, location_name: "instancePlatform"))
+    FleetCapacityReservation.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    FleetCapacityReservation.add_member(:total_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalInstanceCount"))
+    FleetCapacityReservation.add_member(:fulfilled_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "fulfilledCapacity"))
+    FleetCapacityReservation.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsOptimized"))
+    FleetCapacityReservation.add_member(:create_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "createDate"))
+    FleetCapacityReservation.add_member(:weight, Shapes::ShapeRef.new(shape: DoubleWithConstraints, location_name: "weight"))
+    FleetCapacityReservation.add_member(:priority, Shapes::ShapeRef.new(shape: IntegerWithConstraints, location_name: "priority"))
+    FleetCapacityReservation.struct_class = Types::FleetCapacityReservation
+
+    FleetCapacityReservationSet.member = Shapes::ShapeRef.new(shape: FleetCapacityReservation, location_name: "item")
 
     FleetData.add_member(:activity_status, Shapes::ShapeRef.new(shape: FleetActivityStatus, location_name: "activityStatus"))
     FleetData.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "createTime"))
@@ -6922,6 +7054,24 @@ module Aws::EC2
     GetTransitGatewayRouteTablePropagationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetTransitGatewayRouteTablePropagationsResult.struct_class = Types::GetTransitGatewayRouteTablePropagationsResult
 
+    GetVpnConnectionDeviceSampleConfigurationRequest.add_member(:vpn_connection_id, Shapes::ShapeRef.new(shape: VpnConnectionId, required: true, location_name: "VpnConnectionId"))
+    GetVpnConnectionDeviceSampleConfigurationRequest.add_member(:vpn_connection_device_type_id, Shapes::ShapeRef.new(shape: VpnConnectionDeviceTypeId, required: true, location_name: "VpnConnectionDeviceTypeId"))
+    GetVpnConnectionDeviceSampleConfigurationRequest.add_member(:internet_key_exchange_version, Shapes::ShapeRef.new(shape: String, location_name: "InternetKeyExchangeVersion"))
+    GetVpnConnectionDeviceSampleConfigurationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetVpnConnectionDeviceSampleConfigurationRequest.struct_class = Types::GetVpnConnectionDeviceSampleConfigurationRequest
+
+    GetVpnConnectionDeviceSampleConfigurationResult.add_member(:vpn_connection_device_sample_configuration, Shapes::ShapeRef.new(shape: VpnConnectionDeviceSampleConfiguration, location_name: "vpnConnectionDeviceSampleConfiguration"))
+    GetVpnConnectionDeviceSampleConfigurationResult.struct_class = Types::GetVpnConnectionDeviceSampleConfigurationResult
+
+    GetVpnConnectionDeviceTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GVCDMaxResults, location_name: "MaxResults"))
+    GetVpnConnectionDeviceTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetVpnConnectionDeviceTypesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetVpnConnectionDeviceTypesRequest.struct_class = Types::GetVpnConnectionDeviceTypesRequest
+
+    GetVpnConnectionDeviceTypesResult.add_member(:vpn_connection_device_types, Shapes::ShapeRef.new(shape: VpnConnectionDeviceTypeList, location_name: "vpnConnectionDeviceTypeSet"))
+    GetVpnConnectionDeviceTypesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetVpnConnectionDeviceTypesResult.struct_class = Types::GetVpnConnectionDeviceTypesResult
+
     GpuDeviceInfo.add_member(:name, Shapes::ShapeRef.new(shape: GpuDeviceName, location_name: "name"))
     GpuDeviceInfo.add_member(:manufacturer, Shapes::ShapeRef.new(shape: GpuDeviceManufacturerName, location_name: "manufacturer"))
     GpuDeviceInfo.add_member(:count, Shapes::ShapeRef.new(shape: GpuDeviceCount, location_name: "count"))
@@ -6937,7 +7087,7 @@ module Aws::EC2
     GpuInfo.add_member(:total_gpu_memory_in_mi_b, Shapes::ShapeRef.new(shape: totalGpuMemory, location_name: "totalGpuMemoryInMiB"))
     GpuInfo.struct_class = Types::GpuInfo
 
-    GroupIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "groupId")
+    GroupIdStringList.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "groupId")
 
     GroupIdentifier.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     GroupIdentifier.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
@@ -7366,6 +7516,9 @@ module Aws::EC2
     Instance.add_member(:metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptionsResponse, location_name: "metadataOptions"))
     Instance.add_member(:enclave_options, Shapes::ShapeRef.new(shape: EnclaveOptions, location_name: "enclaveOptions"))
     Instance.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootModeValues, location_name: "bootMode"))
+    Instance.add_member(:platform_details, Shapes::ShapeRef.new(shape: String, location_name: "platformDetails"))
+    Instance.add_member(:usage_operation, Shapes::ShapeRef.new(shape: String, location_name: "usageOperation"))
+    Instance.add_member(:usage_operation_update_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "usageOperationUpdateTime"))
     Instance.struct_class = Types::Instance
 
     InstanceAttribute.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "groupSet"))
@@ -7575,7 +7728,7 @@ module Aws::EC2
     InstanceNetworkInterfaceSpecification.add_member(:groups, Shapes::ShapeRef.new(shape: SecurityGroupIdStringList, location_name: "SecurityGroupId"))
     InstanceNetworkInterfaceSpecification.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6AddressCount"))
     InstanceNetworkInterfaceSpecification.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: InstanceIpv6AddressList, location_name: "ipv6AddressesSet", metadata: {"queryName"=>"Ipv6Addresses"}))
-    InstanceNetworkInterfaceSpecification.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
+    InstanceNetworkInterfaceSpecification.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "networkInterfaceId"))
     InstanceNetworkInterfaceSpecification.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
     InstanceNetworkInterfaceSpecification.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddressSpecificationList, location_name: "privateIpAddressesSet", metadata: {"queryName"=>"PrivateIpAddresses"}))
     InstanceNetworkInterfaceSpecification.add_member(:secondary_private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "secondaryPrivateIpAddressCount"))
@@ -8040,7 +8193,7 @@ module Aws::EC2
 
     LaunchTemplateOverrides.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     LaunchTemplateOverrides.add_member(:spot_price, Shapes::ShapeRef.new(shape: String, location_name: "spotPrice"))
-    LaunchTemplateOverrides.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
+    LaunchTemplateOverrides.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
     LaunchTemplateOverrides.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     LaunchTemplateOverrides.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "weightedCapacity"))
     LaunchTemplateOverrides.add_member(:priority, Shapes::ShapeRef.new(shape: Double, location_name: "priority"))
@@ -8270,6 +8423,16 @@ module Aws::EC2
 
     ModifyAvailabilityZoneGroupResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyAvailabilityZoneGroupResult.struct_class = Types::ModifyAvailabilityZoneGroupResult
+
+    ModifyCapacityReservationFleetRequest.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: CapacityReservationFleetId, required: true, location_name: "CapacityReservationFleetId"))
+    ModifyCapacityReservationFleetRequest.add_member(:total_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalTargetCapacity"))
+    ModifyCapacityReservationFleetRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "EndDate"))
+    ModifyCapacityReservationFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyCapacityReservationFleetRequest.add_member(:remove_end_date, Shapes::ShapeRef.new(shape: Boolean, location_name: "RemoveEndDate"))
+    ModifyCapacityReservationFleetRequest.struct_class = Types::ModifyCapacityReservationFleetRequest
+
+    ModifyCapacityReservationFleetResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifyCapacityReservationFleetResult.struct_class = Types::ModifyCapacityReservationFleetResult
 
     ModifyCapacityReservationRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     ModifyCapacityReservationRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstanceCount"))
@@ -9103,7 +9266,7 @@ module Aws::EC2
 
     Placement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     Placement.add_member(:affinity, Shapes::ShapeRef.new(shape: String, location_name: "affinity"))
-    Placement.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    Placement.add_member(:group_name, Shapes::ShapeRef.new(shape: PlacementGroupName, location_name: "groupName"))
     Placement.add_member(:partition_number, Shapes::ShapeRef.new(shape: Integer, location_name: "partitionNumber"))
     Placement.add_member(:host_id, Shapes::ShapeRef.new(shape: String, location_name: "hostId"))
     Placement.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "tenancy"))
@@ -9130,7 +9293,7 @@ module Aws::EC2
 
     PlacementGroupStringList.member = Shapes::ShapeRef.new(shape: PlacementGroupName)
 
-    PlacementResponse.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    PlacementResponse.add_member(:group_name, Shapes::ShapeRef.new(shape: PlacementGroupName, location_name: "groupName"))
     PlacementResponse.struct_class = Types::PlacementResponse
 
     PoolCidrBlock.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "poolCidrBlock"))
@@ -9646,6 +9809,17 @@ module Aws::EC2
     Reservation.add_member(:reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "reservationId"))
     Reservation.struct_class = Types::Reservation
 
+    ReservationFleetInstanceSpecification.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "InstanceType"))
+    ReservationFleetInstanceSpecification.add_member(:instance_platform, Shapes::ShapeRef.new(shape: CapacityReservationInstancePlatform, location_name: "InstancePlatform"))
+    ReservationFleetInstanceSpecification.add_member(:weight, Shapes::ShapeRef.new(shape: DoubleWithConstraints, location_name: "Weight"))
+    ReservationFleetInstanceSpecification.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    ReservationFleetInstanceSpecification.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
+    ReservationFleetInstanceSpecification.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "EbsOptimized"))
+    ReservationFleetInstanceSpecification.add_member(:priority, Shapes::ShapeRef.new(shape: IntegerWithConstraints, location_name: "Priority"))
+    ReservationFleetInstanceSpecification.struct_class = Types::ReservationFleetInstanceSpecification
+
+    ReservationFleetInstanceSpecificationList.member = Shapes::ShapeRef.new(shape: ReservationFleetInstanceSpecification)
+
     ReservationList.member = Shapes::ShapeRef.new(shape: Reservation, location_name: "item")
 
     ReservationValue.add_member(:hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "hourlyPrice"))
@@ -10140,7 +10314,7 @@ module Aws::EC2
     ScheduledInstancesSecurityGroupIdSet.member = Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupId")
 
     SearchLocalGatewayRoutesRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
-    SearchLocalGatewayRoutesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, required: true, location_name: "Filter"))
+    SearchLocalGatewayRoutesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     SearchLocalGatewayRoutesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     SearchLocalGatewayRoutesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     SearchLocalGatewayRoutesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -10374,16 +10548,16 @@ module Aws::EC2
     SpotFleetLaunchSpecification.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingList, location_name: "blockDeviceMapping"))
     SpotFleetLaunchSpecification.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsOptimized"))
     SpotFleetLaunchSpecification.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: IamInstanceProfileSpecification, location_name: "iamInstanceProfile"))
-    SpotFleetLaunchSpecification.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
+    SpotFleetLaunchSpecification.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "imageId"))
     SpotFleetLaunchSpecification.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     SpotFleetLaunchSpecification.add_member(:kernel_id, Shapes::ShapeRef.new(shape: String, location_name: "kernelId"))
-    SpotFleetLaunchSpecification.add_member(:key_name, Shapes::ShapeRef.new(shape: String, location_name: "keyName"))
+    SpotFleetLaunchSpecification.add_member(:key_name, Shapes::ShapeRef.new(shape: KeyPairName, location_name: "keyName"))
     SpotFleetLaunchSpecification.add_member(:monitoring, Shapes::ShapeRef.new(shape: SpotFleetMonitoring, location_name: "monitoring"))
     SpotFleetLaunchSpecification.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecificationList, location_name: "networkInterfaceSet"))
     SpotFleetLaunchSpecification.add_member(:placement, Shapes::ShapeRef.new(shape: SpotPlacement, location_name: "placement"))
     SpotFleetLaunchSpecification.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: String, location_name: "ramdiskId"))
     SpotFleetLaunchSpecification.add_member(:spot_price, Shapes::ShapeRef.new(shape: String, location_name: "spotPrice"))
-    SpotFleetLaunchSpecification.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
+    SpotFleetLaunchSpecification.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "subnetId"))
     SpotFleetLaunchSpecification.add_member(:user_data, Shapes::ShapeRef.new(shape: String, location_name: "userData"))
     SpotFleetLaunchSpecification.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "weightedCapacity"))
     SpotFleetLaunchSpecification.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: SpotFleetTagSpecificationList, location_name: "tagSpecificationSet"))
@@ -10502,7 +10676,7 @@ module Aws::EC2
     SpotOptionsRequest.struct_class = Types::SpotOptionsRequest
 
     SpotPlacement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
-    SpotPlacement.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    SpotPlacement.add_member(:group_name, Shapes::ShapeRef.new(shape: PlacementGroupName, location_name: "groupName"))
     SpotPlacement.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "tenancy"))
     SpotPlacement.struct_class = Types::SpotPlacement
 
@@ -11502,6 +11676,14 @@ module Aws::EC2
     VpnConnection.add_member(:vgw_telemetry, Shapes::ShapeRef.new(shape: VgwTelemetryList, location_name: "vgwTelemetry"))
     VpnConnection.struct_class = Types::VpnConnection
 
+    VpnConnectionDeviceType.add_member(:vpn_connection_device_type_id, Shapes::ShapeRef.new(shape: String, location_name: "vpnConnectionDeviceTypeId"))
+    VpnConnectionDeviceType.add_member(:vendor, Shapes::ShapeRef.new(shape: String, location_name: "vendor"))
+    VpnConnectionDeviceType.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "platform"))
+    VpnConnectionDeviceType.add_member(:software, Shapes::ShapeRef.new(shape: String, location_name: "software"))
+    VpnConnectionDeviceType.struct_class = Types::VpnConnectionDeviceType
+
+    VpnConnectionDeviceTypeList.member = Shapes::ShapeRef.new(shape: VpnConnectionDeviceType, location_name: "item")
+
     VpnConnectionIdStringList.member = Shapes::ShapeRef.new(shape: VpnConnectionId, location_name: "VpnConnectionId")
 
     VpnConnectionList.member = Shapes::ShapeRef.new(shape: VpnConnection, location_name: "item")
@@ -11877,6 +12059,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CancelCapacityReservationResult)
       end)
 
+      api.add_operation(:cancel_capacity_reservation_fleets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelCapacityReservationFleets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelCapacityReservationFleetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelCapacityReservationFleetsResult)
+      end)
+
       api.add_operation(:cancel_conversion_task, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelConversionTask"
         o.http_method = "POST"
@@ -11963,6 +12153,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCapacityReservationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCapacityReservationResult)
+      end)
+
+      api.add_operation(:create_capacity_reservation_fleet, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCapacityReservationFleet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCapacityReservationFleetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCapacityReservationFleetResult)
       end)
 
       api.add_operation(:create_carrier_gateway, Seahorse::Model::Operation.new.tap do |o|
@@ -13017,6 +13215,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeByoipCidrsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeByoipCidrsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_capacity_reservation_fleets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCapacityReservationFleets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCapacityReservationFleetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCapacityReservationFleetsResult)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -15038,6 +15250,28 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:get_vpn_connection_device_sample_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVpnConnectionDeviceSampleConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetVpnConnectionDeviceSampleConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVpnConnectionDeviceSampleConfigurationResult)
+      end)
+
+      api.add_operation(:get_vpn_connection_device_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVpnConnectionDeviceTypes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetVpnConnectionDeviceTypesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVpnConnectionDeviceTypesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:import_client_vpn_client_certificate_revocation_list, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ImportClientVpnClientCertificateRevocationList"
         o.http_method = "POST"
@@ -15108,6 +15342,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyCapacityReservationRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyCapacityReservationResult)
+      end)
+
+      api.add_operation(:modify_capacity_reservation_fleet, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyCapacityReservationFleet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyCapacityReservationFleetRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyCapacityReservationFleetResult)
       end)
 
       api.add_operation(:modify_client_vpn_endpoint, Seahorse::Model::Operation.new.tap do |o|

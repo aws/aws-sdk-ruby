@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2021-10-06)
+------------------
+
+* Feature - This release adds a new TrainingInputMode FastFile for SageMaker Training APIs.
+
+1.101.0 (2021-09-16)
+------------------
+
+* Feature - Add API for users to retry a failed pipeline execution or resume a stopped one.
+
+1.100.0 (2021-09-14)
+------------------
+
+* Feature - This release adds support for "Project Search"
+
 1.99.0 (2021-09-10)
 ------------------
 

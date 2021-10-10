@@ -545,8 +545,13 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about an S3 bucket that Amazon Macie monitors and
-    # analyzes.
+    # Provides statistical data and other information about an S3 bucket
+    # that Amazon Macie monitors and analyzes for your account. If an error
+    # occurs when Macie attempts to retrieve and process information about
+    # the bucket or the bucket's objects, the value for most of these
+    # properties is null. Exceptions are accountId, bucketArn,
+    # bucketCreatedAt, bucketName, lastUpdated, and region. To identify the
+    # cause of the error, refer to the errorCode and errorMessage values.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -568,6 +573,15 @@ module Aws::Macie2
     #
     # @!attribute [rw] classifiable_size_in_bytes
     #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   The error code for an error that prevented Amazon Macie from
+    #   retrieving and processing information about an S3 bucket and the
+    #   bucket's objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
     #
     # @!attribute [rw] job_details
     #   Specifies whether any one-time or recurring classification jobs are
@@ -630,7 +644,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -641,7 +655,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -660,6 +674,8 @@ module Aws::Macie2
       :bucket_name,
       :classifiable_object_count,
       :classifiable_size_in_bytes,
+      :error_code,
+      :error_message,
       :job_details,
       :last_updated,
       :object_count,
@@ -959,6 +975,8 @@ module Aws::Macie2
     #         description: "__string",
     #         initial_run: false,
     #         job_type: "ONE_TIME", # required, accepts ONE_TIME, SCHEDULED
+    #         managed_data_identifier_ids: ["__string"],
+    #         managed_data_identifier_selector: "ALL", # accepts ALL, EXCLUDE, INCLUDE, NONE
     #         name: "__string", # required
     #         s3_job_definition: { # required
     #           bucket_definitions: [
@@ -1090,6 +1108,14 @@ module Aws::Macie2
     #   The schedule for running a classification job. Valid values are:
     #   @return [String]
     #
+    # @!attribute [rw] managed_data_identifier_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] managed_data_identifier_selector
+    #   The selection type that determines which managed data identifiers a
+    #   classification job uses to analyze data. Valid values are:
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -1124,6 +1150,8 @@ module Aws::Macie2
       :description,
       :initial_run,
       :job_type,
+      :managed_data_identifier_ids,
+      :managed_data_identifier_selector,
       :name,
       :s3_job_definition,
       :sampling_percentage,
@@ -1151,7 +1179,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies the criteria and other settings for a new custom data
+    # Specifies the criteria and other settings for a custom data
     # identifier. You can't change a custom data identifier after you
     # create it. This helps ensure that you have an immutable history of
     # sensitive data findings and discovery results for data privacy and
@@ -1646,8 +1674,8 @@ module Aws::Macie2
     #
     # @!attribute [rw] occurrences
     #   Specifies the location of 1-15 occurrences of sensitive data that
-    #   was detected by managed data identifiers or a custom data identifier
-    #   and produced a sensitive data finding.
+    #   was detected by a managed data identifier or a custom data
+    #   identifier and produced a sensitive data finding.
     #   @return [Types::Occurrences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/CustomDetection AWS API Documentation
@@ -1707,15 +1735,15 @@ module Aws::Macie2
     end
 
     # Provides information about a type of sensitive data that was detected
-    # by managed data identifiers and produced a sensitive data finding.
+    # by a managed data identifier and produced a sensitive data finding.
     #
     # @!attribute [rw] count
     #   @return [Integer]
     #
     # @!attribute [rw] occurrences
     #   Specifies the location of 1-15 occurrences of sensitive data that
-    #   was detected by managed data identifiers or a custom data identifier
-    #   and produced a sensitive data finding.
+    #   was detected by a managed data identifier or a custom data
+    #   identifier and produced a sensitive data finding.
     #   @return [Types::Occurrences]
     #
     # @!attribute [rw] type
@@ -1888,7 +1916,7 @@ module Aws::Macie2
 
     # Provides the results of a query that retrieved statistical data and
     # other information about one or more S3 buckets that Amazon Macie
-    # monitors and analyzes.
+    # monitors and analyzes for your account.
     #
     # @!attribute [rw] buckets
     #   @return [Array<Types::BucketMetadata>]
@@ -1971,6 +1999,14 @@ module Aws::Macie2
     # @!attribute [rw] last_run_time
     #   @return [Time]
     #
+    # @!attribute [rw] managed_data_identifier_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] managed_data_identifier_selector
+    #   The selection type that determines which managed data identifiers a
+    #   classification job uses to analyze data. Valid values are:
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -2026,6 +2062,8 @@ module Aws::Macie2
       :job_type,
       :last_run_error_status,
       :last_run_time,
+      :managed_data_identifier_ids,
+      :managed_data_identifier_selector,
       :name,
       :s3_job_definition,
       :sampling_percentage,
@@ -2567,7 +2605,7 @@ module Aws::Macie2
 
     # Provides the results of a query that retrieved aggregated statistical
     # data for all the S3 buckets that Amazon Macie monitors and analyzes
-    # for an account.
+    # for your account.
     #
     # @!attribute [rw] bucket_count
     #   @return [Integer]
@@ -2624,7 +2662,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -2635,7 +2673,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -4084,6 +4122,45 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies criteria for paginating the results of a request for
+    # information about managed data identifiers.
+    #
+    # @note When making an API call, you may pass ListManagedDataIdentifiersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListManagedDataIdentifiersRequest AWS API Documentation
+    #
+    class ListManagedDataIdentifiersRequest < Struct.new(
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the managed data identifiers that Amazon
+    # Macie currently provides.
+    #
+    # @!attribute [rw] items
+    #   @return [Array<Types::ManagedDataIdentifierSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListManagedDataIdentifiersResponse AWS API Documentation
+    #
+    class ListManagedDataIdentifiersResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListMembersRequest
     #   data as a hash:
     #
@@ -4207,8 +4284,40 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Provides information about a managed data identifier. For additional
+    # information, see [Using managed data identifiers][1] in the *Amazon
+    # Macie User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html
+    #
+    # @!attribute [rw] category
+    #   For a finding, the category of sensitive data that was detected and
+    #   produced the finding. For a managed data identifier, the category of
+    #   sensitive data that the managed data identifier detects. Possible
+    #   values are:
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ManagedDataIdentifierSummary AWS API Documentation
+    #
+    class ManagedDataIdentifierSummary < Struct.new(
+      :category,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides statistical data and other information about an S3 bucket
-    # that Amazon Macie monitors and analyzes.
+    # that Amazon Macie monitors and analyzes for your account. If an error
+    # occurs when Macie attempts to retrieve and process information about
+    # the bucket or the bucket's objects, the value for most of these
+    # properties is null. Exceptions are accountId and bucketName. To
+    # identify the cause of the error, refer to the errorCode and
+    # errorMessage values.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -4221,6 +4330,15 @@ module Aws::Macie2
     #
     # @!attribute [rw] classifiable_size_in_bytes
     #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   The error code for an error that prevented Amazon Macie from
+    #   retrieving and processing information about an S3 bucket and the
+    #   bucket's objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
     #
     # @!attribute [rw] job_details
     #   Specifies whether any one-time or recurring classification jobs are
@@ -4248,7 +4366,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -4259,7 +4377,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -4272,6 +4390,8 @@ module Aws::Macie2
       :bucket_name,
       :classifiable_object_count,
       :classifiable_size_in_bytes,
+      :error_code,
+      :error_message,
       :job_details,
       :object_count,
       :object_count_by_encryption_type,
@@ -4284,11 +4404,17 @@ module Aws::Macie2
     end
 
     # Provides statistical data and other information about an Amazon Web
-    # Services resource that Amazon Macie monitors and analyzes.
+    # Services resource that Amazon Macie monitors and analyzes for your
+    # account.
     #
     # @!attribute [rw] matching_bucket
     #   Provides statistical data and other information about an S3 bucket
-    #   that Amazon Macie monitors and analyzes.
+    #   that Amazon Macie monitors and analyzes for your account. If an
+    #   error occurs when Macie attempts to retrieve and process information
+    #   about the bucket or the bucket's objects, the value for most of
+    #   these properties is null. Exceptions are accountId and bucketName.
+    #   To identify the cause of the error, refer to the errorCode and
+    #   errorMessage values.
     #   @return [Types::MatchingBucket]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/MatchingResource AWS API Documentation
@@ -4407,7 +4533,7 @@ module Aws::Macie2
     # of objects that Amazon Macie can't analyze in one or more S3 buckets.
     # In a BucketMetadata or MatchingBucket object, this data is for a
     # specific bucket. In a GetBucketStatisticsResponse object, this data is
-    # aggregated for all the buckets in the query results. If versioning is
+    # aggregated for the buckets in the query results. If versioning is
     # enabled for a bucket, total storage size values are based on the size
     # of the latest version of each applicable object in the bucket.
     #
@@ -4431,7 +4557,7 @@ module Aws::Macie2
     end
 
     # Specifies the location of 1-15 occurrences of sensitive data that was
-    # detected by managed data identifiers or a custom data identifier and
+    # detected by a managed data identifier or a custom data identifier and
     # produced a sensitive data finding.
     #
     # @!attribute [rw] cells
@@ -4722,7 +4848,8 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   Provides information about the user who owns an S3 bucket.
+    #   Provides information about the Amazon Web Services account that owns
+    #   an S3 bucket.
     #   @return [Types::S3BucketOwner]
     #
     # @!attribute [rw] public_access
@@ -4849,7 +4976,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about the user who owns an S3 bucket.
+    # Provides information about the Amazon Web Services account that owns
+    # an S3 bucket.
     #
     # @!attribute [rw] display_name
     #   @return [String]
@@ -5411,7 +5539,7 @@ module Aws::Macie2
 
     # Provides the results of a query that retrieved statistical data and
     # other information about Amazon Web Services resources that Amazon
-    # Macie monitors and analyzes.
+    # Macie monitors and analyzes for your account.
     #
     # @!attribute [rw] matching_resources
     #   @return [Array<Types::MatchingResource>]
@@ -5590,8 +5718,10 @@ module Aws::Macie2
     # sensitive data that produced a sensitive data finding.
     #
     # @!attribute [rw] category
-    #   The category of sensitive data that was detected and produced the
-    #   finding. Possible values are:
+    #   For a finding, the category of sensitive data that was detected and
+    #   produced the finding. For a managed data identifier, the category of
+    #   sensitive data that the managed data identifier detects. Possible
+    #   values are:
     #   @return [String]
     #
     # @!attribute [rw] detections

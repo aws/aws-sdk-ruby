@@ -17,8 +17,16 @@ module Aws::AppIntegrationsService
     Arn = Shapes::StringShape.new(name: 'Arn')
     ClientAssociationMetadata = Shapes::MapShape.new(name: 'ClientAssociationMetadata')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
+    CreateDataIntegrationRequest = Shapes::StructureShape.new(name: 'CreateDataIntegrationRequest')
+    CreateDataIntegrationResponse = Shapes::StructureShape.new(name: 'CreateDataIntegrationResponse')
     CreateEventIntegrationRequest = Shapes::StructureShape.new(name: 'CreateEventIntegrationRequest')
     CreateEventIntegrationResponse = Shapes::StructureShape.new(name: 'CreateEventIntegrationResponse')
+    DataIntegrationAssociationSummary = Shapes::StructureShape.new(name: 'DataIntegrationAssociationSummary')
+    DataIntegrationAssociationsList = Shapes::ListShape.new(name: 'DataIntegrationAssociationsList')
+    DataIntegrationSummary = Shapes::StructureShape.new(name: 'DataIntegrationSummary')
+    DataIntegrationsList = Shapes::ListShape.new(name: 'DataIntegrationsList')
+    DeleteDataIntegrationRequest = Shapes::StructureShape.new(name: 'DeleteDataIntegrationRequest')
+    DeleteDataIntegrationResponse = Shapes::StructureShape.new(name: 'DeleteDataIntegrationResponse')
     DeleteEventIntegrationRequest = Shapes::StructureShape.new(name: 'DeleteEventIntegrationRequest')
     DeleteEventIntegrationResponse = Shapes::StructureShape.new(name: 'DeleteEventIntegrationResponse')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -30,11 +38,18 @@ module Aws::AppIntegrationsService
     EventIntegrationAssociation = Shapes::StructureShape.new(name: 'EventIntegrationAssociation')
     EventIntegrationAssociationsList = Shapes::ListShape.new(name: 'EventIntegrationAssociationsList')
     EventIntegrationsList = Shapes::ListShape.new(name: 'EventIntegrationsList')
+    GetDataIntegrationRequest = Shapes::StructureShape.new(name: 'GetDataIntegrationRequest')
+    GetDataIntegrationResponse = Shapes::StructureShape.new(name: 'GetDataIntegrationResponse')
     GetEventIntegrationRequest = Shapes::StructureShape.new(name: 'GetEventIntegrationRequest')
     GetEventIntegrationResponse = Shapes::StructureShape.new(name: 'GetEventIntegrationResponse')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
+    Identifier = Shapes::StringShape.new(name: 'Identifier')
     InternalServiceError = Shapes::StructureShape.new(name: 'InternalServiceError')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    ListDataIntegrationAssociationsRequest = Shapes::StructureShape.new(name: 'ListDataIntegrationAssociationsRequest')
+    ListDataIntegrationAssociationsResponse = Shapes::StructureShape.new(name: 'ListDataIntegrationAssociationsResponse')
+    ListDataIntegrationsRequest = Shapes::StructureShape.new(name: 'ListDataIntegrationsRequest')
+    ListDataIntegrationsResponse = Shapes::StructureShape.new(name: 'ListDataIntegrationsResponse')
     ListEventIntegrationAssociationsRequest = Shapes::StructureShape.new(name: 'ListEventIntegrationAssociationsRequest')
     ListEventIntegrationAssociationsResponse = Shapes::StructureShape.new(name: 'ListEventIntegrationAssociationsResponse')
     ListEventIntegrationsRequest = Shapes::StructureShape.new(name: 'ListEventIntegrationsRequest')
@@ -46,8 +61,11 @@ module Aws::AppIntegrationsService
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
+    Object = Shapes::StringShape.new(name: 'Object')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceQuotaExceededException = Shapes::StructureShape.new(name: 'ResourceQuotaExceededException')
+    Schedule = Shapes::StringShape.new(name: 'Schedule')
+    ScheduleConfiguration = Shapes::StructureShape.new(name: 'ScheduleConfiguration')
     Source = Shapes::StringShape.new(name: 'Source')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -59,6 +77,8 @@ module Aws::AppIntegrationsService
     UUID = Shapes::StringShape.new(name: 'UUID')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateDataIntegrationRequest = Shapes::StructureShape.new(name: 'UpdateDataIntegrationRequest')
+    UpdateDataIntegrationResponse = Shapes::StructureShape.new(name: 'UpdateDataIntegrationResponse')
     UpdateEventIntegrationRequest = Shapes::StructureShape.new(name: 'UpdateEventIntegrationRequest')
     UpdateEventIntegrationResponse = Shapes::StructureShape.new(name: 'UpdateEventIntegrationResponse')
 
@@ -67,6 +87,26 @@ module Aws::AppIntegrationsService
 
     ClientAssociationMetadata.key = Shapes::ShapeRef.new(shape: NonBlankString)
     ClientAssociationMetadata.value = Shapes::ShapeRef.new(shape: NonBlankString)
+
+    CreateDataIntegrationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    CreateDataIntegrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateDataIntegrationRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "KmsKey"))
+    CreateDataIntegrationRequest.add_member(:source_uri, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "SourceURI"))
+    CreateDataIntegrationRequest.add_member(:schedule_config, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfig"))
+    CreateDataIntegrationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateDataIntegrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataIntegrationRequest.struct_class = Types::CreateDataIntegrationRequest
+
+    CreateDataIntegrationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    CreateDataIntegrationResponse.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "Id"))
+    CreateDataIntegrationResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    CreateDataIntegrationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateDataIntegrationResponse.add_member(:kms_key, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "KmsKey"))
+    CreateDataIntegrationResponse.add_member(:source_uri, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "SourceURI"))
+    CreateDataIntegrationResponse.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfiguration"))
+    CreateDataIntegrationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateDataIntegrationResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken"))
+    CreateDataIntegrationResponse.struct_class = Types::CreateDataIntegrationResponse
 
     CreateEventIntegrationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateEventIntegrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -78,6 +118,25 @@ module Aws::AppIntegrationsService
 
     CreateEventIntegrationResponse.add_member(:event_integration_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "EventIntegrationArn"))
     CreateEventIntegrationResponse.struct_class = Types::CreateEventIntegrationResponse
+
+    DataIntegrationAssociationSummary.add_member(:data_integration_association_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DataIntegrationAssociationArn"))
+    DataIntegrationAssociationSummary.add_member(:data_integration_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DataIntegrationArn"))
+    DataIntegrationAssociationSummary.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "ClientId"))
+    DataIntegrationAssociationSummary.struct_class = Types::DataIntegrationAssociationSummary
+
+    DataIntegrationAssociationsList.member = Shapes::ShapeRef.new(shape: DataIntegrationAssociationSummary)
+
+    DataIntegrationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    DataIntegrationSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    DataIntegrationSummary.add_member(:source_uri, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "SourceURI"))
+    DataIntegrationSummary.struct_class = Types::DataIntegrationSummary
+
+    DataIntegrationsList.member = Shapes::ShapeRef.new(shape: DataIntegrationSummary)
+
+    DeleteDataIntegrationRequest.add_member(:data_integration_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
+    DeleteDataIntegrationRequest.struct_class = Types::DeleteDataIntegrationRequest
+
+    DeleteDataIntegrationResponse.struct_class = Types::DeleteDataIntegrationResponse
 
     DeleteEventIntegrationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "Name"))
     DeleteEventIntegrationRequest.struct_class = Types::DeleteEventIntegrationRequest
@@ -110,6 +169,19 @@ module Aws::AppIntegrationsService
 
     EventIntegrationsList.member = Shapes::ShapeRef.new(shape: EventIntegration)
 
+    GetDataIntegrationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
+    GetDataIntegrationRequest.struct_class = Types::GetDataIntegrationRequest
+
+    GetDataIntegrationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    GetDataIntegrationResponse.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "Id"))
+    GetDataIntegrationResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    GetDataIntegrationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    GetDataIntegrationResponse.add_member(:kms_key, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "KmsKey"))
+    GetDataIntegrationResponse.add_member(:source_uri, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "SourceURI"))
+    GetDataIntegrationResponse.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfiguration"))
+    GetDataIntegrationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetDataIntegrationResponse.struct_class = Types::GetDataIntegrationResponse
+
     GetEventIntegrationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "Name"))
     GetEventIntegrationRequest.struct_class = Types::GetEventIntegrationRequest
 
@@ -126,6 +198,23 @@ module Aws::AppIntegrationsService
 
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    ListDataIntegrationAssociationsRequest.add_member(:data_integration_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
+    ListDataIntegrationAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListDataIntegrationAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListDataIntegrationAssociationsRequest.struct_class = Types::ListDataIntegrationAssociationsRequest
+
+    ListDataIntegrationAssociationsResponse.add_member(:data_integration_associations, Shapes::ShapeRef.new(shape: DataIntegrationAssociationsList, location_name: "DataIntegrationAssociations"))
+    ListDataIntegrationAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDataIntegrationAssociationsResponse.struct_class = Types::ListDataIntegrationAssociationsResponse
+
+    ListDataIntegrationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListDataIntegrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListDataIntegrationsRequest.struct_class = Types::ListDataIntegrationsRequest
+
+    ListDataIntegrationsResponse.add_member(:data_integrations, Shapes::ShapeRef.new(shape: DataIntegrationsList, location_name: "DataIntegrations"))
+    ListDataIntegrationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDataIntegrationsResponse.struct_class = Types::ListDataIntegrationsResponse
 
     ListEventIntegrationAssociationsRequest.add_member(:event_integration_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "Name"))
     ListEventIntegrationAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -156,6 +245,11 @@ module Aws::AppIntegrationsService
     ResourceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ResourceQuotaExceededException.struct_class = Types::ResourceQuotaExceededException
 
+    ScheduleConfiguration.add_member(:first_execution_from, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "FirstExecutionFrom"))
+    ScheduleConfiguration.add_member(:object, Shapes::ShapeRef.new(shape: Object, location_name: "Object"))
+    ScheduleConfiguration.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: Schedule, location_name: "ScheduleExpression"))
+    ScheduleConfiguration.struct_class = Types::ScheduleConfiguration
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -175,6 +269,13 @@ module Aws::AppIntegrationsService
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateDataIntegrationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
+    UpdateDataIntegrationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    UpdateDataIntegrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateDataIntegrationRequest.struct_class = Types::UpdateDataIntegrationRequest
+
+    UpdateDataIntegrationResponse.struct_class = Types::UpdateDataIntegrationResponse
 
     UpdateEventIntegrationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "Name"))
     UpdateEventIntegrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -200,6 +301,20 @@ module Aws::AppIntegrationsService
         "uid" => "appintegrations-2020-07-29",
       }
 
+      api.add_operation(:create_data_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/dataIntegrations"
+        o.input = Shapes::ShapeRef.new(shape: CreateDataIntegrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataIntegrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_event_integration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEventIntegration"
         o.http_method = "POST"
@@ -210,6 +325,19 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_data_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataIntegration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/dataIntegrations/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataIntegrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataIntegrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -227,6 +355,19 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_data_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataIntegration"
+        o.http_method = "GET"
+        o.http_request_uri = "/dataIntegrations/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetDataIntegrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataIntegrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_event_integration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEventIntegration"
         o.http_method = "GET"
@@ -236,6 +377,31 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_data_integration_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataIntegrationAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/dataIntegrations/{Identifier}/associations"
+        o.input = Shapes::ShapeRef.new(shape: ListDataIntegrationAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataIntegrationAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_data_integrations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataIntegrations"
+        o.http_method = "GET"
+        o.http_request_uri = "/dataIntegrations"
+        o.input = Shapes::ShapeRef.new(shape: ListDataIntegrationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataIntegrationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -299,6 +465,19 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_data_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDataIntegration"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/dataIntegrations/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDataIntegrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDataIntegrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_event_integration, Seahorse::Model::Operation.new.tap do |o|

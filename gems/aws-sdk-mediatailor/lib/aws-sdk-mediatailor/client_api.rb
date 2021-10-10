@@ -26,6 +26,8 @@ module Aws::MediaTailor
     ChannelState = Shapes::StringShape.new(name: 'ChannelState')
     ConfigurationAliasesRequest = Shapes::MapShape.new(name: 'ConfigurationAliasesRequest')
     ConfigurationAliasesResponse = Shapes::MapShape.new(name: 'ConfigurationAliasesResponse')
+    ConfigureLogsForPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'ConfigureLogsForPlaybackConfigurationRequest')
+    ConfigureLogsForPlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'ConfigureLogsForPlaybackConfigurationResponse')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
     CreateProgramRequest = Shapes::StructureShape.new(name: 'CreateProgramRequest')
@@ -82,6 +84,7 @@ module Aws::MediaTailor
     ListVodSourcesRequest = Shapes::StructureShape.new(name: 'ListVodSourcesRequest')
     ListVodSourcesResponse = Shapes::StructureShape.new(name: 'ListVodSourcesResponse')
     LivePreRollConfiguration = Shapes::StructureShape.new(name: 'LivePreRollConfiguration')
+    LogConfiguration = Shapes::StructureShape.new(name: 'LogConfiguration')
     ManifestProcessingRules = Shapes::StructureShape.new(name: 'ManifestProcessingRules')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
@@ -189,6 +192,14 @@ module Aws::MediaTailor
 
     ConfigurationAliasesResponse.key = Shapes::ShapeRef.new(shape: __string)
     ConfigurationAliasesResponse.value = Shapes::ShapeRef.new(shape: __mapOf__string)
+
+    ConfigureLogsForPlaybackConfigurationRequest.add_member(:percent_enabled, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "PercentEnabled"))
+    ConfigureLogsForPlaybackConfigurationRequest.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "PlaybackConfigurationName"))
+    ConfigureLogsForPlaybackConfigurationRequest.struct_class = Types::ConfigureLogsForPlaybackConfigurationRequest
+
+    ConfigureLogsForPlaybackConfigurationResponse.add_member(:percent_enabled, Shapes::ShapeRef.new(shape: __integer, location_name: "PercentEnabled"))
+    ConfigureLogsForPlaybackConfigurationResponse.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationName"))
+    ConfigureLogsForPlaybackConfigurationResponse.struct_class = Types::ConfigureLogsForPlaybackConfigurationResponse
 
     CreateChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelName"))
     CreateChannelRequest.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
@@ -389,6 +400,7 @@ module Aws::MediaTailor
     GetPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:live_pre_roll_configuration, Shapes::ShapeRef.new(shape: LivePreRollConfiguration, location_name: "LivePreRollConfiguration"))
+    GetPlaybackConfigurationResponse.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "LogConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:manifest_processing_rules, Shapes::ShapeRef.new(shape: ManifestProcessingRules, location_name: "ManifestProcessingRules"))
     GetPlaybackConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     GetPlaybackConfigurationResponse.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
@@ -469,6 +481,9 @@ module Aws::MediaTailor
     LivePreRollConfiguration.add_member(:max_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "MaxDurationSeconds"))
     LivePreRollConfiguration.struct_class = Types::LivePreRollConfiguration
 
+    LogConfiguration.add_member(:percent_enabled, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "PercentEnabled"))
+    LogConfiguration.struct_class = Types::LogConfiguration
+
     ManifestProcessingRules.add_member(:ad_marker_passthrough, Shapes::ShapeRef.new(shape: AdMarkerPassthrough, location_name: "AdMarkerPassthrough"))
     ManifestProcessingRules.struct_class = Types::ManifestProcessingRules
 
@@ -480,6 +495,7 @@ module Aws::MediaTailor
     PlaybackConfiguration.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     PlaybackConfiguration.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))
     PlaybackConfiguration.add_member(:live_pre_roll_configuration, Shapes::ShapeRef.new(shape: LivePreRollConfiguration, location_name: "LivePreRollConfiguration"))
+    PlaybackConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "LogConfiguration"))
     PlaybackConfiguration.add_member(:manifest_processing_rules, Shapes::ShapeRef.new(shape: ManifestProcessingRules, location_name: "ManifestProcessingRules"))
     PlaybackConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     PlaybackConfiguration.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
@@ -522,6 +538,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:live_pre_roll_configuration, Shapes::ShapeRef.new(shape: LivePreRollConfiguration, location_name: "LivePreRollConfiguration"))
+    PutPlaybackConfigurationResponse.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "LogConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:manifest_processing_rules, Shapes::ShapeRef.new(shape: ManifestProcessingRules, location_name: "ManifestProcessingRules"))
     PutPlaybackConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     PutPlaybackConfigurationResponse.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
@@ -713,6 +730,14 @@ module Aws::MediaTailor
         "signingName" => "mediatailor",
         "uid" => "mediatailor-2018-04-23",
       }
+
+      api.add_operation(:configure_logs_for_playback_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ConfigureLogsForPlaybackConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/configureLogs/playbackConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: ConfigureLogsForPlaybackConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ConfigureLogsForPlaybackConfigurationResponse)
+      end)
 
       api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateChannel"

@@ -1329,6 +1329,10 @@ module Aws::TranscribeService
     #   resp.transcription_job.tags #=> Array
     #   resp.transcription_job.tags[0].key #=> String
     #   resp.transcription_job.tags[0].value #=> String
+    #   resp.transcription_job.subtitles.formats #=> Array
+    #   resp.transcription_job.subtitles.formats[0] #=> String, one of "vtt", "srt"
+    #   resp.transcription_job.subtitles.subtitle_file_uris #=> Array
+    #   resp.transcription_job.subtitles.subtitle_file_uris[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -2488,6 +2492,9 @@ module Aws::TranscribeService
     #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio or
     #   video file must be encoded at a sample rate of 16,000 Hz or higher.
     #
+    # @option params [Types::Subtitles] :subtitles
+    #   Add subtitles to your batch transcription job.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Add tags to an Amazon Transcribe transcription job.
     #
@@ -2535,6 +2542,9 @@ module Aws::TranscribeService
     #     },
     #     identify_language: false,
     #     language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #     subtitles: {
+    #       formats: ["vtt"], # accepts vtt, srt
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -2578,6 +2588,10 @@ module Aws::TranscribeService
     #   resp.transcription_job.tags #=> Array
     #   resp.transcription_job.tags[0].key #=> String
     #   resp.transcription_job.tags[0].value #=> String
+    #   resp.transcription_job.subtitles.formats #=> Array
+    #   resp.transcription_job.subtitles.formats[0] #=> String, one of "vtt", "srt"
+    #   resp.transcription_job.subtitles.subtitle_file_uris #=> Array
+    #   resp.transcription_job.subtitles.subtitle_file_uris[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -3020,7 +3034,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

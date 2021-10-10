@@ -899,7 +899,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Create an AppIntegration association with an Amazon Connect instance.
+    # Creates an AWS resource association with an Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -911,14 +911,17 @@ module Aws::Connect
     # @option params [required, String] :integration_arn
     #   The Amazon Resource Name (ARN) of the integration.
     #
-    # @option params [required, String] :source_application_url
-    #   The URL for the external application.
+    # @option params [String] :source_application_url
+    #   The URL for the external application. This field is only required for
+    #   the EVENT integration type.
     #
-    # @option params [required, String] :source_application_name
-    #   The name of the external application.
+    # @option params [String] :source_application_name
+    #   The name of the external application. This field is only required for
+    #   the EVENT integration type.
     #
-    # @option params [required, String] :source_type
-    #   The type of the data source.
+    # @option params [String] :source_type
+    #   The type of the data source. This field is only required for the EVENT
+    #   integration type.
     #
     # @option params [Hash<String,String>] :tags
     #   One or more tags.
@@ -932,11 +935,11 @@ module Aws::Connect
     #
     #   resp = client.create_integration_association({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # required, accepts EVENT
+    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE
     #     integration_arn: "ARN", # required
-    #     source_application_url: "URI", # required
-    #     source_application_name: "SourceApplicationName", # required
-    #     source_type: "SALESFORCE", # required, accepts SALESFORCE, ZENDESK
+    #     source_application_url: "URI",
+    #     source_application_name: "SourceApplicationName",
+    #     source_type: "SALESFORCE", # accepts SALESFORCE, ZENDESK
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1161,19 +1164,18 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Creates a use case for an AppIntegration association.
+    # Creates a use case for an integration association.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :integration_association_id
-    #   The identifier for the AppIntegration association.
+    #   The identifier for the integration association.
     #
     # @option params [required, String] :use_case_type
-    #   The type of use case to associate to the AppIntegration association.
-    #   Each AppIntegration association can have only one of each use case
-    #   type.
+    #   The type of use case to associate to the integration association. Each
+    #   integration association can have only one of each use case type.
     #
     # @option params [Hash<String,String>] :tags
     #   One or more tags.
@@ -1188,7 +1190,7 @@ module Aws::Connect
     #   resp = client.create_use_case({
     #     instance_id: "InstanceId", # required
     #     integration_association_id: "IntegrationAssociationId", # required
-    #     use_case_type: "RULES_EVALUATION", # required, accepts RULES_EVALUATION
+    #     use_case_type: "RULES_EVALUATION", # required, accepts RULES_EVALUATION, CONNECT_CAMPAIGNS
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1413,7 +1415,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Deletes an AppIntegration association from an Amazon Connect instance.
+    # Deletes an AWS resource association from an Amazon Connect instance.
     # The association must not have any use cases associated with it.
     #
     # @option params [required, String] :instance_id
@@ -1421,7 +1423,7 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :integration_association_id
-    #   The identifier for the AppIntegration association.
+    #   The identifier for the integration association.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1468,14 +1470,14 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Deletes a use case from an AppIntegration association.
+    # Deletes a use case from an integration association.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :integration_association_id
-    #   The identifier for the AppIntegration association.
+    #   The identifier for the integration association.
     #
     # @option params [required, String] :use_case_id
     #   The identifier for the use case.
@@ -2527,8 +2529,12 @@ module Aws::Connect
     #
     #   : Unit: SECONDS
     #
-    #     When you use groupings, Unit says SECONDS but the Value is returned
-    #     in MILLISECONDS. For example, if you get a response like this:
+    #     When you use groupings, Unit says SECONDS and the Value is returned
+    #     in SECONDS.
+    #
+    #     When you do not use groupings, Unit says SECONDS but the Value is
+    #     returned in MILLISECONDS. For example, if you get a response like
+    #     this:
     #
     #     `\{ "Metric": \{ "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" \},
     #     "Value": 24113.0 `\\}
@@ -3394,12 +3400,14 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Provides summary information about the AppIntegration associations for
+    # Provides summary information about the AWS resource associations for
     # the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :integration_type
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -3420,6 +3428,7 @@ module Aws::Connect
     #
     #   resp = client.list_integration_associations({
     #     instance_id: "InstanceId", # required
+    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -3430,7 +3439,7 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].integration_association_id #=> String
     #   resp.integration_association_summary_list[0].integration_association_arn #=> String
     #   resp.integration_association_summary_list[0].instance_id #=> String
-    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT"
+    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE"
     #   resp.integration_association_summary_list[0].integration_arn #=> String
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
@@ -4076,7 +4085,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Lists the use cases.
+    # Lists the use cases for the integration association.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -4114,7 +4123,7 @@ module Aws::Connect
     #   resp.use_case_summary_list #=> Array
     #   resp.use_case_summary_list[0].use_case_id #=> String
     #   resp.use_case_summary_list[0].use_case_arn #=> String
-    #   resp.use_case_summary_list[0].use_case_type #=> String, one of "RULES_EVALUATION"
+    #   resp.use_case_summary_list[0].use_case_type #=> String, one of "RULES_EVALUATION", "CONNECT_CAMPAIGNS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUseCases AWS API Documentation
@@ -4437,6 +4446,13 @@ module Aws::Connect
     #
     #  </note>
     #
+    # <note markdown="1"> Campaign calls are not allowed by default. Before you can make a call
+    # with `TrafficType` = `CAMPAIGN`, you must submit a service quota
+    # increase request. For more information, see [Amazon Connect Service
+    # Quotas][1] in the *Amazon Connect Administrator Guide*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
@@ -4486,6 +4502,19 @@ module Aws::Connect
     #   contact. Attribute keys can include only alphanumeric, dash, and
     #   underscore characters.
     #
+    # @option params [Types::AnswerMachineDetectionConfig] :answer_machine_detection_config
+    #   Configuration of the answering machine detection for this outbound
+    #   call.
+    #
+    # @option params [String] :campaign_id
+    #   The campaign identifier of the outbound communication.
+    #
+    # @option params [String] :traffic_type
+    #   Denotes the class of traffic. Calls with different traffic types are
+    #   handled differently by Amazon Connect. The default value is `GENERAL`.
+    #   Use `CAMPAIGN` if `EnableAnswerMachineDetection` is set to `true`. For
+    #   all other cases, use `GENERAL`.
+    #
     # @return [Types::StartOutboundVoiceContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartOutboundVoiceContactResponse#contact_id #contact_id} => String
@@ -4502,6 +4531,12 @@ module Aws::Connect
     #     attributes: {
     #       "AttributeName" => "AttributeValue",
     #     },
+    #     answer_machine_detection_config: {
+    #       enable_answer_machine_detection: false,
+    #       await_answer_machine_prompt: false,
+    #     },
+    #     campaign_id: "CampaignId",
+    #     traffic_type: "GENERAL", # accepts GENERAL, CAMPAIGN
     #   })
     #
     # @example Response structure
@@ -5044,6 +5079,11 @@ module Aws::Connect
     #
     # @option params [required, String] :attribute_type
     #   The type of attribute.
+    #
+    #   <note markdown="1"> Only allowlisted customers can consume USE\_CUSTOM\_TTS\_VOICES. To
+    #   access this feature, contact AWS Support for allowlisting.
+    #
+    #    </note>
     #
     # @option params [required, String] :value
     #   The value for the attribute. Maximum character limit is 100.
@@ -5809,7 +5849,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

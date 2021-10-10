@@ -38,6 +38,8 @@ module Aws::Chime
     AppInstanceUserSummary = Shapes::StructureShape.new(name: 'AppInstanceUserSummary')
     AreaCode = Shapes::StringShape.new(name: 'AreaCode')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    ArtifactsConfiguration = Shapes::StructureShape.new(name: 'ArtifactsConfiguration')
+    ArtifactsState = Shapes::StringShape.new(name: 'ArtifactsState')
     AssociatePhoneNumberWithUserRequest = Shapes::StructureShape.new(name: 'AssociatePhoneNumberWithUserRequest')
     AssociatePhoneNumberWithUserResponse = Shapes::StructureShape.new(name: 'AssociatePhoneNumberWithUserResponse')
     AssociatePhoneNumbersWithVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'AssociatePhoneNumbersWithVoiceConnectorGroupRequest')
@@ -47,9 +49,12 @@ module Aws::Chime
     AssociateSigninDelegateGroupsWithAccountRequest = Shapes::StructureShape.new(name: 'AssociateSigninDelegateGroupsWithAccountRequest')
     AssociateSigninDelegateGroupsWithAccountResponse = Shapes::StructureShape.new(name: 'AssociateSigninDelegateGroupsWithAccountResponse')
     Attendee = Shapes::StructureShape.new(name: 'Attendee')
+    AttendeeIdList = Shapes::ListShape.new(name: 'AttendeeIdList')
     AttendeeList = Shapes::ListShape.new(name: 'AttendeeList')
     AttendeeTagKeyList = Shapes::ListShape.new(name: 'AttendeeTagKeyList')
     AttendeeTagList = Shapes::ListShape.new(name: 'AttendeeTagList')
+    AudioArtifactsConfiguration = Shapes::StructureShape.new(name: 'AudioArtifactsConfiguration')
+    AudioMuxType = Shapes::StringShape.new(name: 'AudioMuxType')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BatchChannelMemberships = Shapes::StructureShape.new(name: 'BatchChannelMemberships')
     BatchCreateAttendeeErrorList = Shapes::ListShape.new(name: 'BatchCreateAttendeeErrorList')
@@ -108,9 +113,12 @@ module Aws::Chime
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
     ChannelSummaryList = Shapes::ListShape.new(name: 'ChannelSummaryList')
     ChimeArn = Shapes::StringShape.new(name: 'ChimeArn')
+    ChimeSdkMeetingConfiguration = Shapes::StructureShape.new(name: 'ChimeSdkMeetingConfiguration')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Content = Shapes::StringShape.new(name: 'Content')
+    ContentArtifactsConfiguration = Shapes::StructureShape.new(name: 'ContentArtifactsConfiguration')
+    ContentMuxType = Shapes::StringShape.new(name: 'ContentMuxType')
     ConversationRetentionSettings = Shapes::StructureShape.new(name: 'ConversationRetentionSettings')
     Country = Shapes::StringShape.new(name: 'Country')
     CountryList = Shapes::ListShape.new(name: 'CountryList')
@@ -237,6 +245,7 @@ module Aws::Chime
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     EventsConfiguration = Shapes::StructureShape.new(name: 'EventsConfiguration')
     ExternalMeetingIdType = Shapes::StringShape.new(name: 'ExternalMeetingIdType')
+    ExternalUserIdList = Shapes::ListShape.new(name: 'ExternalUserIdList')
     ExternalUserIdType = Shapes::StringShape.new(name: 'ExternalUserIdType')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
@@ -502,6 +511,7 @@ module Aws::Chime
     SMAUpdateCallArgumentsMap = Shapes::MapShape.new(name: 'SMAUpdateCallArgumentsMap')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
+    SelectedVideoStreams = Shapes::StructureShape.new(name: 'SelectedVideoStreams')
     SendChannelMessageRequest = Shapes::StructureShape.new(name: 'SendChannelMessageRequest')
     SendChannelMessageResponse = Shapes::StructureShape.new(name: 'SendChannelMessageResponse')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
@@ -511,6 +521,7 @@ module Aws::Chime
     SigninDelegateGroup = Shapes::StructureShape.new(name: 'SigninDelegateGroup')
     SigninDelegateGroupList = Shapes::ListShape.new(name: 'SigninDelegateGroupList')
     SipApplicationPriority = Shapes::IntegerShape.new(name: 'SipApplicationPriority')
+    SipHeadersMap = Shapes::MapShape.new(name: 'SipHeadersMap')
     SipMediaApplication = Shapes::StructureShape.new(name: 'SipMediaApplication')
     SipMediaApplicationCall = Shapes::StructureShape.new(name: 'SipMediaApplicationCall')
     SipMediaApplicationEndpoint = Shapes::StructureShape.new(name: 'SipMediaApplicationEndpoint')
@@ -525,6 +536,7 @@ module Aws::Chime
     SipRuleTargetApplicationList = Shapes::ListShape.new(name: 'SipRuleTargetApplicationList')
     SipRuleTriggerType = Shapes::StringShape.new(name: 'SipRuleTriggerType')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    SourceConfiguration = Shapes::StructureShape.new(name: 'SourceConfiguration')
     StartMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StartMeetingTranscriptionRequest')
     StartMeetingTranscriptionResponse = Shapes::StructureShape.new(name: 'StartMeetingTranscriptionResponse')
     StopMeetingTranscriptionRequest = Shapes::StructureShape.new(name: 'StopMeetingTranscriptionRequest')
@@ -617,6 +629,8 @@ module Aws::Chime
     UserName = Shapes::StringShape.new(name: 'UserName')
     UserSettings = Shapes::StructureShape.new(name: 'UserSettings')
     UserType = Shapes::StringShape.new(name: 'UserType')
+    VideoArtifactsConfiguration = Shapes::StructureShape.new(name: 'VideoArtifactsConfiguration')
+    VideoMuxType = Shapes::StringShape.new(name: 'VideoMuxType')
     VoiceConnector = Shapes::StructureShape.new(name: 'VoiceConnector')
     VoiceConnectorAwsRegion = Shapes::StringShape.new(name: 'VoiceConnectorAwsRegion')
     VoiceConnectorGroup = Shapes::StructureShape.new(name: 'VoiceConnectorGroup')
@@ -705,6 +719,11 @@ module Aws::Chime
     AppInstanceUserSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     AppInstanceUserSummary.struct_class = Types::AppInstanceUserSummary
 
+    ArtifactsConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioArtifactsConfiguration, required: true, location_name: "Audio"))
+    ArtifactsConfiguration.add_member(:video, Shapes::ShapeRef.new(shape: VideoArtifactsConfiguration, required: true, location_name: "Video"))
+    ArtifactsConfiguration.add_member(:content, Shapes::ShapeRef.new(shape: ContentArtifactsConfiguration, required: true, location_name: "Content"))
+    ArtifactsConfiguration.struct_class = Types::ArtifactsConfiguration
+
     AssociatePhoneNumberWithUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "accountId"))
     AssociatePhoneNumberWithUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "userId"))
     AssociatePhoneNumberWithUserRequest.add_member(:e164_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "E164PhoneNumber"))
@@ -739,11 +758,16 @@ module Aws::Chime
     Attendee.add_member(:join_token, Shapes::ShapeRef.new(shape: JoinTokenString, location_name: "JoinToken"))
     Attendee.struct_class = Types::Attendee
 
+    AttendeeIdList.member = Shapes::ShapeRef.new(shape: GuidString)
+
     AttendeeList.member = Shapes::ShapeRef.new(shape: Attendee)
 
     AttendeeTagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     AttendeeTagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    AudioArtifactsConfiguration.add_member(:mux_type, Shapes::ShapeRef.new(shape: AudioMuxType, required: true, location_name: "MuxType"))
+    AudioArtifactsConfiguration.struct_class = Types::AudioArtifactsConfiguration
 
     BadRequestException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -939,9 +963,17 @@ module Aws::Chime
 
     ChannelSummaryList.member = Shapes::ShapeRef.new(shape: ChannelSummary)
 
+    ChimeSdkMeetingConfiguration.add_member(:source_configuration, Shapes::ShapeRef.new(shape: SourceConfiguration, location_name: "SourceConfiguration"))
+    ChimeSdkMeetingConfiguration.add_member(:artifacts_configuration, Shapes::ShapeRef.new(shape: ArtifactsConfiguration, location_name: "ArtifactsConfiguration"))
+    ChimeSdkMeetingConfiguration.struct_class = Types::ChimeSdkMeetingConfiguration
+
     ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
+
+    ContentArtifactsConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ArtifactsState, required: true, location_name: "State"))
+    ContentArtifactsConfiguration.add_member(:mux_type, Shapes::ShapeRef.new(shape: ContentMuxType, location_name: "MuxType"))
+    ContentArtifactsConfiguration.struct_class = Types::ContentArtifactsConfiguration
 
     ConversationRetentionSettings.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
     ConversationRetentionSettings.struct_class = Types::ConversationRetentionSettings
@@ -1055,6 +1087,7 @@ module Aws::Chime
     CreateMediaCapturePipelineRequest.add_member(:sink_type, Shapes::ShapeRef.new(shape: MediaPipelineSinkType, required: true, location_name: "SinkType"))
     CreateMediaCapturePipelineRequest.add_member(:sink_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SinkArn"))
     CreateMediaCapturePipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMediaCapturePipelineRequest.add_member(:chime_sdk_meeting_configuration, Shapes::ShapeRef.new(shape: ChimeSdkMeetingConfiguration, location_name: "ChimeSdkMeetingConfiguration"))
     CreateMediaCapturePipelineRequest.struct_class = Types::CreateMediaCapturePipelineRequest
 
     CreateMediaCapturePipelineResponse.add_member(:media_capture_pipeline, Shapes::ShapeRef.new(shape: MediaCapturePipeline, location_name: "MediaCapturePipeline"))
@@ -1136,6 +1169,7 @@ module Aws::Chime
     CreateSipMediaApplicationCallRequest.add_member(:from_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "FromPhoneNumber"))
     CreateSipMediaApplicationCallRequest.add_member(:to_phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "ToPhoneNumber"))
     CreateSipMediaApplicationCallRequest.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "sipMediaApplicationId"))
+    CreateSipMediaApplicationCallRequest.add_member(:sip_headers, Shapes::ShapeRef.new(shape: SipHeadersMap, location_name: "SipHeaders"))
     CreateSipMediaApplicationCallRequest.struct_class = Types::CreateSipMediaApplicationCallRequest
 
     CreateSipMediaApplicationCallResponse.add_member(:sip_media_application_call, Shapes::ShapeRef.new(shape: SipMediaApplicationCall, location_name: "SipMediaApplicationCall"))
@@ -1414,6 +1448,8 @@ module Aws::Chime
     EventsConfiguration.add_member(:outbound_events_https_endpoint, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "OutboundEventsHTTPSEndpoint"))
     EventsConfiguration.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "LambdaFunctionArn"))
     EventsConfiguration.struct_class = Types::EventsConfiguration
+
+    ExternalUserIdList.member = Shapes::ShapeRef.new(shape: ExternalUserIdType)
 
     ForbiddenException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1936,6 +1972,7 @@ module Aws::Chime
     MediaCapturePipeline.add_member(:sink_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SinkArn"))
     MediaCapturePipeline.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
     MediaCapturePipeline.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    MediaCapturePipeline.add_member(:chime_sdk_meeting_configuration, Shapes::ShapeRef.new(shape: ChimeSdkMeetingConfiguration, location_name: "ChimeSdkMeetingConfiguration"))
     MediaCapturePipeline.struct_class = Types::MediaCapturePipeline
 
     MediaCapturePipelineList.member = Shapes::ShapeRef.new(shape: MediaCapturePipeline)
@@ -2284,6 +2321,10 @@ module Aws::Chime
     SearchAvailablePhoneNumbersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     SearchAvailablePhoneNumbersResponse.struct_class = Types::SearchAvailablePhoneNumbersResponse
 
+    SelectedVideoStreams.add_member(:attendee_ids, Shapes::ShapeRef.new(shape: AttendeeIdList, location_name: "AttendeeIds"))
+    SelectedVideoStreams.add_member(:external_user_ids, Shapes::ShapeRef.new(shape: ExternalUserIdList, location_name: "ExternalUserIds"))
+    SelectedVideoStreams.struct_class = Types::SelectedVideoStreams
+
     SendChannelMessageRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
     SendChannelMessageRequest.add_member(:content, Shapes::ShapeRef.new(shape: NonEmptyContent, required: true, location_name: "Content"))
     SendChannelMessageRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMessageType, required: true, location_name: "Type"))
@@ -2311,6 +2352,9 @@ module Aws::Chime
     SigninDelegateGroup.struct_class = Types::SigninDelegateGroup
 
     SigninDelegateGroupList.member = Shapes::ShapeRef.new(shape: SigninDelegateGroup)
+
+    SipHeadersMap.key = Shapes::ShapeRef.new(shape: SensitiveString)
+    SipHeadersMap.value = Shapes::ShapeRef.new(shape: SensitiveString)
 
     SipMediaApplication.add_member(:sip_media_application_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SipMediaApplicationId"))
     SipMediaApplication.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location_name: "AwsRegion"))
@@ -2351,6 +2395,9 @@ module Aws::Chime
     SipRuleTargetApplication.struct_class = Types::SipRuleTargetApplication
 
     SipRuleTargetApplicationList.member = Shapes::ShapeRef.new(shape: SipRuleTargetApplication)
+
+    SourceConfiguration.add_member(:selected_video_streams, Shapes::ShapeRef.new(shape: SelectedVideoStreams, location_name: "SelectedVideoStreams"))
+    SourceConfiguration.struct_class = Types::SourceConfiguration
 
     StartMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     StartMeetingTranscriptionRequest.add_member(:transcription_configuration, Shapes::ShapeRef.new(shape: TranscriptionConfiguration, required: true, location_name: "TranscriptionConfiguration"))
@@ -2507,8 +2554,8 @@ module Aws::Chime
     UpdateChannelResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
 
-    UpdateGlobalSettingsRequest.add_member(:business_calling, Shapes::ShapeRef.new(shape: BusinessCallingSettings, required: true, location_name: "BusinessCalling"))
-    UpdateGlobalSettingsRequest.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnectorSettings, required: true, location_name: "VoiceConnector"))
+    UpdateGlobalSettingsRequest.add_member(:business_calling, Shapes::ShapeRef.new(shape: BusinessCallingSettings, location_name: "BusinessCalling"))
+    UpdateGlobalSettingsRequest.add_member(:voice_connector, Shapes::ShapeRef.new(shape: VoiceConnectorSettings, location_name: "VoiceConnector"))
     UpdateGlobalSettingsRequest.struct_class = Types::UpdateGlobalSettingsRequest
 
     UpdatePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "phoneNumberId"))
@@ -2649,6 +2696,10 @@ module Aws::Chime
 
     UserSettings.add_member(:telephony, Shapes::ShapeRef.new(shape: TelephonySettings, required: true, location_name: "Telephony"))
     UserSettings.struct_class = Types::UserSettings
+
+    VideoArtifactsConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: ArtifactsState, required: true, location_name: "State"))
+    VideoArtifactsConfiguration.add_member(:mux_type, Shapes::ShapeRef.new(shape: VideoMuxType, location_name: "MuxType"))
+    VideoArtifactsConfiguration.struct_class = Types::VideoArtifactsConfiguration
 
     VoiceConnector.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VoiceConnectorId"))
     VoiceConnector.add_member(:aws_region, Shapes::ShapeRef.new(shape: VoiceConnectorAwsRegion, location_name: "AwsRegion"))
@@ -3213,6 +3264,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -5670,6 +5722,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

@@ -79,9 +79,12 @@ module Aws::MediaConvert
     AvcIntraUhdSettings = Shapes::StructureShape.new(name: 'AvcIntraUhdSettings')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BillingTagsSource = Shapes::StringShape.new(name: 'BillingTagsSource')
+    BurnInSubtitleStylePassthrough = Shapes::StringShape.new(name: 'BurnInSubtitleStylePassthrough')
     BurninDestinationSettings = Shapes::StructureShape.new(name: 'BurninDestinationSettings')
     BurninSubtitleAlignment = Shapes::StringShape.new(name: 'BurninSubtitleAlignment')
+    BurninSubtitleApplyFontColor = Shapes::StringShape.new(name: 'BurninSubtitleApplyFontColor')
     BurninSubtitleBackgroundColor = Shapes::StringShape.new(name: 'BurninSubtitleBackgroundColor')
+    BurninSubtitleFallbackFont = Shapes::StringShape.new(name: 'BurninSubtitleFallbackFont')
     BurninSubtitleFontColor = Shapes::StringShape.new(name: 'BurninSubtitleFontColor')
     BurninSubtitleOutlineColor = Shapes::StringShape.new(name: 'BurninSubtitleOutlineColor')
     BurninSubtitleShadowColor = Shapes::StringShape.new(name: 'BurninSubtitleShadowColor')
@@ -104,7 +107,9 @@ module Aws::MediaConvert
     CmafEncryptionType = Shapes::StringShape.new(name: 'CmafEncryptionType')
     CmafGroupSettings = Shapes::StructureShape.new(name: 'CmafGroupSettings')
     CmafImageBasedTrickPlay = Shapes::StringShape.new(name: 'CmafImageBasedTrickPlay')
+    CmafImageBasedTrickPlaySettings = Shapes::StructureShape.new(name: 'CmafImageBasedTrickPlaySettings')
     CmafInitializationVectorInManifest = Shapes::StringShape.new(name: 'CmafInitializationVectorInManifest')
+    CmafIntervalCadence = Shapes::StringShape.new(name: 'CmafIntervalCadence')
     CmafKeyProviderType = Shapes::StringShape.new(name: 'CmafKeyProviderType')
     CmafManifestCompression = Shapes::StringShape.new(name: 'CmafManifestCompression')
     CmafManifestDurationFormat = Shapes::StringShape.new(name: 'CmafManifestDurationFormat')
@@ -148,6 +153,8 @@ module Aws::MediaConvert
     DashIsoGroupSettings = Shapes::StructureShape.new(name: 'DashIsoGroupSettings')
     DashIsoHbbtvCompliance = Shapes::StringShape.new(name: 'DashIsoHbbtvCompliance')
     DashIsoImageBasedTrickPlay = Shapes::StringShape.new(name: 'DashIsoImageBasedTrickPlay')
+    DashIsoImageBasedTrickPlaySettings = Shapes::StructureShape.new(name: 'DashIsoImageBasedTrickPlaySettings')
+    DashIsoIntervalCadence = Shapes::StringShape.new(name: 'DashIsoIntervalCadence')
     DashIsoMpdProfile = Shapes::StringShape.new(name: 'DashIsoMpdProfile')
     DashIsoPlaybackDeviceCompatibility = Shapes::StringShape.new(name: 'DashIsoPlaybackDeviceCompatibility')
     DashIsoPtsOffsetHandlingForBFrames = Shapes::StringShape.new(name: 'DashIsoPtsOffsetHandlingForBFrames')
@@ -161,6 +168,8 @@ module Aws::MediaConvert
     DeinterlacerMode = Shapes::StringShape.new(name: 'DeinterlacerMode')
     DeleteJobTemplateRequest = Shapes::StructureShape.new(name: 'DeleteJobTemplateRequest')
     DeleteJobTemplateResponse = Shapes::StructureShape.new(name: 'DeleteJobTemplateResponse')
+    DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
+    DeletePolicyResponse = Shapes::StructureShape.new(name: 'DeletePolicyResponse')
     DeletePresetRequest = Shapes::StructureShape.new(name: 'DeletePresetRequest')
     DeletePresetResponse = Shapes::StructureShape.new(name: 'DeletePresetResponse')
     DeleteQueueRequest = Shapes::StructureShape.new(name: 'DeleteQueueRequest')
@@ -180,11 +189,14 @@ module Aws::MediaConvert
     DvbSdtSettings = Shapes::StructureShape.new(name: 'DvbSdtSettings')
     DvbSubDestinationSettings = Shapes::StructureShape.new(name: 'DvbSubDestinationSettings')
     DvbSubSourceSettings = Shapes::StructureShape.new(name: 'DvbSubSourceSettings')
+    DvbSubSubtitleFallbackFont = Shapes::StringShape.new(name: 'DvbSubSubtitleFallbackFont')
     DvbSubtitleAlignment = Shapes::StringShape.new(name: 'DvbSubtitleAlignment')
+    DvbSubtitleApplyFontColor = Shapes::StringShape.new(name: 'DvbSubtitleApplyFontColor')
     DvbSubtitleBackgroundColor = Shapes::StringShape.new(name: 'DvbSubtitleBackgroundColor')
     DvbSubtitleFontColor = Shapes::StringShape.new(name: 'DvbSubtitleFontColor')
     DvbSubtitleOutlineColor = Shapes::StringShape.new(name: 'DvbSubtitleOutlineColor')
     DvbSubtitleShadowColor = Shapes::StringShape.new(name: 'DvbSubtitleShadowColor')
+    DvbSubtitleStylePassthrough = Shapes::StringShape.new(name: 'DvbSubtitleStylePassthrough')
     DvbSubtitleTeletextSpacing = Shapes::StringShape.new(name: 'DvbSubtitleTeletextSpacing')
     DvbSubtitlingType = Shapes::StringShape.new(name: 'DvbSubtitlingType')
     DvbTdtSettings = Shapes::StructureShape.new(name: 'DvbTdtSettings')
@@ -237,6 +249,8 @@ module Aws::MediaConvert
     GetJobResponse = Shapes::StructureShape.new(name: 'GetJobResponse')
     GetJobTemplateRequest = Shapes::StructureShape.new(name: 'GetJobTemplateRequest')
     GetJobTemplateResponse = Shapes::StructureShape.new(name: 'GetJobTemplateResponse')
+    GetPolicyRequest = Shapes::StructureShape.new(name: 'GetPolicyRequest')
+    GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
     GetPresetRequest = Shapes::StructureShape.new(name: 'GetPresetRequest')
     GetPresetResponse = Shapes::StructureShape.new(name: 'GetPresetResponse')
     GetQueueRequest = Shapes::StructureShape.new(name: 'GetQueueRequest')
@@ -312,7 +326,9 @@ module Aws::MediaConvert
     HlsGroupSettings = Shapes::StructureShape.new(name: 'HlsGroupSettings')
     HlsIFrameOnlyManifest = Shapes::StringShape.new(name: 'HlsIFrameOnlyManifest')
     HlsImageBasedTrickPlay = Shapes::StringShape.new(name: 'HlsImageBasedTrickPlay')
+    HlsImageBasedTrickPlaySettings = Shapes::StructureShape.new(name: 'HlsImageBasedTrickPlaySettings')
     HlsInitializationVectorInManifest = Shapes::StringShape.new(name: 'HlsInitializationVectorInManifest')
+    HlsIntervalCadence = Shapes::StringShape.new(name: 'HlsIntervalCadence')
     HlsKeyProviderType = Shapes::StringShape.new(name: 'HlsKeyProviderType')
     HlsManifestCompression = Shapes::StringShape.new(name: 'HlsManifestCompression')
     HlsManifestDurationFormat = Shapes::StringShape.new(name: 'HlsManifestDurationFormat')
@@ -337,6 +353,7 @@ module Aws::MediaConvert
     InputDecryptionSettings = Shapes::StructureShape.new(name: 'InputDecryptionSettings')
     InputDenoiseFilter = Shapes::StringShape.new(name: 'InputDenoiseFilter')
     InputFilterEnable = Shapes::StringShape.new(name: 'InputFilterEnable')
+    InputPolicy = Shapes::StringShape.new(name: 'InputPolicy')
     InputPsiControl = Shapes::StringShape.new(name: 'InputPsiControl')
     InputRotate = Shapes::StringShape.new(name: 'InputRotate')
     InputSampleRange = Shapes::StringShape.new(name: 'InputSampleRange')
@@ -467,6 +484,7 @@ module Aws::MediaConvert
     OutputSdt = Shapes::StringShape.new(name: 'OutputSdt')
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
     PartnerWatermarking = Shapes::StructureShape.new(name: 'PartnerWatermarking')
+    Policy = Shapes::StructureShape.new(name: 'Policy')
     Preset = Shapes::StructureShape.new(name: 'Preset')
     PresetListBy = Shapes::StringShape.new(name: 'PresetListBy')
     PresetSettings = Shapes::StructureShape.new(name: 'PresetSettings')
@@ -481,6 +499,8 @@ module Aws::MediaConvert
     ProresSettings = Shapes::StructureShape.new(name: 'ProresSettings')
     ProresSlowPal = Shapes::StringShape.new(name: 'ProresSlowPal')
     ProresTelecine = Shapes::StringShape.new(name: 'ProresTelecine')
+    PutPolicyRequest = Shapes::StructureShape.new(name: 'PutPolicyRequest')
+    PutPolicyResponse = Shapes::StructureShape.new(name: 'PutPolicyResponse')
     Queue = Shapes::StructureShape.new(name: 'Queue')
     QueueListBy = Shapes::StringShape.new(name: 'QueueListBy')
     QueueStatus = Shapes::StringShape.new(name: 'QueueStatus')
@@ -655,11 +675,14 @@ module Aws::MediaConvert
     __integerMin1Max17895697 = Shapes::IntegerShape.new(name: '__integerMin1Max17895697')
     __integerMin1Max2 = Shapes::IntegerShape.new(name: '__integerMin1Max2')
     __integerMin1Max20 = Shapes::IntegerShape.new(name: '__integerMin1Max20')
+    __integerMin1Max2048 = Shapes::IntegerShape.new(name: '__integerMin1Max2048')
     __integerMin1Max2147483640 = Shapes::IntegerShape.new(name: '__integerMin1Max2147483640')
     __integerMin1Max2147483647 = Shapes::IntegerShape.new(name: '__integerMin1Max2147483647')
     __integerMin1Max31 = Shapes::IntegerShape.new(name: '__integerMin1Max31')
     __integerMin1Max32 = Shapes::IntegerShape.new(name: '__integerMin1Max32')
     __integerMin1Max4 = Shapes::IntegerShape.new(name: '__integerMin1Max4')
+    __integerMin1Max4096 = Shapes::IntegerShape.new(name: '__integerMin1Max4096')
+    __integerMin1Max512 = Shapes::IntegerShape.new(name: '__integerMin1Max512')
     __integerMin1Max6 = Shapes::IntegerShape.new(name: '__integerMin1Max6')
     __integerMin1Max60000 = Shapes::IntegerShape.new(name: '__integerMin1Max60000')
     __integerMin1Max64 = Shapes::IntegerShape.new(name: '__integerMin1Max64')
@@ -668,6 +691,7 @@ module Aws::MediaConvert
     __integerMin25Max10000 = Shapes::IntegerShape.new(name: '__integerMin25Max10000')
     __integerMin25Max2000 = Shapes::IntegerShape.new(name: '__integerMin25Max2000')
     __integerMin2Max2147483647 = Shapes::IntegerShape.new(name: '__integerMin2Max2147483647')
+    __integerMin2Max4096 = Shapes::IntegerShape.new(name: '__integerMin2Max4096')
     __integerMin32000Max192000 = Shapes::IntegerShape.new(name: '__integerMin32000Max192000')
     __integerMin32000Max384000 = Shapes::IntegerShape.new(name: '__integerMin32000Max384000')
     __integerMin32000Max48000 = Shapes::IntegerShape.new(name: '__integerMin32000Max48000')
@@ -682,6 +706,7 @@ module Aws::MediaConvert
     __integerMin8000Max192000 = Shapes::IntegerShape.new(name: '__integerMin8000Max192000')
     __integerMin8000Max96000 = Shapes::IntegerShape.new(name: '__integerMin8000Max96000')
     __integerMin8Max12 = Shapes::IntegerShape.new(name: '__integerMin8Max12')
+    __integerMin8Max4096 = Shapes::IntegerShape.new(name: '__integerMin8Max4096')
     __integerMin96Max600 = Shapes::IntegerShape.new(name: '__integerMin96Max600')
     __integerMinNegative1000Max1000 = Shapes::IntegerShape.new(name: '__integerMinNegative1000Max1000')
     __integerMinNegative180Max180 = Shapes::IntegerShape.new(name: '__integerMinNegative180Max180')
@@ -753,6 +778,7 @@ module Aws::MediaConvert
     __stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = Shapes::StringShape.new(name: '__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12')
     __stringMin3Max3Pattern1809aFAF09aEAE = Shapes::StringShape.new(name: '__stringMin3Max3Pattern1809aFAF09aEAE')
     __stringMin3Max3PatternAZaZ3 = Shapes::StringShape.new(name: '__stringMin3Max3PatternAZaZ3')
+    __stringMin6Max8Pattern09aFAF609aFAF2 = Shapes::StringShape.new(name: '__stringMin6Max8Pattern09aFAF609aFAF2')
     __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912 = Shapes::StringShape.new(name: '__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912')
     __stringPattern = Shapes::StringShape.new(name: '__stringPattern')
     __stringPattern010920405090509092 = Shapes::StringShape.new(name: '__stringPattern010920405090509092')
@@ -922,19 +948,23 @@ module Aws::MediaConvert
     BadRequestException.struct_class = Types::BadRequestException
 
     BurninDestinationSettings.add_member(:alignment, Shapes::ShapeRef.new(shape: BurninSubtitleAlignment, location_name: "alignment"))
+    BurninDestinationSettings.add_member(:apply_font_color, Shapes::ShapeRef.new(shape: BurninSubtitleApplyFontColor, location_name: "applyFontColor"))
     BurninDestinationSettings.add_member(:background_color, Shapes::ShapeRef.new(shape: BurninSubtitleBackgroundColor, location_name: "backgroundColor"))
     BurninDestinationSettings.add_member(:background_opacity, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "backgroundOpacity"))
+    BurninDestinationSettings.add_member(:fallback_font, Shapes::ShapeRef.new(shape: BurninSubtitleFallbackFont, location_name: "fallbackFont"))
     BurninDestinationSettings.add_member(:font_color, Shapes::ShapeRef.new(shape: BurninSubtitleFontColor, location_name: "fontColor"))
     BurninDestinationSettings.add_member(:font_opacity, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "fontOpacity"))
     BurninDestinationSettings.add_member(:font_resolution, Shapes::ShapeRef.new(shape: __integerMin96Max600, location_name: "fontResolution"))
     BurninDestinationSettings.add_member(:font_script, Shapes::ShapeRef.new(shape: FontScript, location_name: "fontScript"))
     BurninDestinationSettings.add_member(:font_size, Shapes::ShapeRef.new(shape: __integerMin0Max96, location_name: "fontSize"))
+    BurninDestinationSettings.add_member(:hex_font_color, Shapes::ShapeRef.new(shape: __stringMin6Max8Pattern09aFAF609aFAF2, location_name: "hexFontColor"))
     BurninDestinationSettings.add_member(:outline_color, Shapes::ShapeRef.new(shape: BurninSubtitleOutlineColor, location_name: "outlineColor"))
     BurninDestinationSettings.add_member(:outline_size, Shapes::ShapeRef.new(shape: __integerMin0Max10, location_name: "outlineSize"))
     BurninDestinationSettings.add_member(:shadow_color, Shapes::ShapeRef.new(shape: BurninSubtitleShadowColor, location_name: "shadowColor"))
     BurninDestinationSettings.add_member(:shadow_opacity, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "shadowOpacity"))
     BurninDestinationSettings.add_member(:shadow_x_offset, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "shadowXOffset"))
     BurninDestinationSettings.add_member(:shadow_y_offset, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "shadowYOffset"))
+    BurninDestinationSettings.add_member(:style_passthrough, Shapes::ShapeRef.new(shape: BurnInSubtitleStylePassthrough, location_name: "stylePassthrough"))
     BurninDestinationSettings.add_member(:teletext_spacing, Shapes::ShapeRef.new(shape: BurninSubtitleTeletextSpacing, location_name: "teletextSpacing"))
     BurninDestinationSettings.add_member(:x_position, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "xPosition"))
     BurninDestinationSettings.add_member(:y_position, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "yPosition"))
@@ -1013,6 +1043,7 @@ module Aws::MediaConvert
     CmafGroupSettings.add_member(:encryption, Shapes::ShapeRef.new(shape: CmafEncryptionSettings, location_name: "encryption"))
     CmafGroupSettings.add_member(:fragment_length, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "fragmentLength"))
     CmafGroupSettings.add_member(:image_based_trick_play, Shapes::ShapeRef.new(shape: CmafImageBasedTrickPlay, location_name: "imageBasedTrickPlay"))
+    CmafGroupSettings.add_member(:image_based_trick_play_settings, Shapes::ShapeRef.new(shape: CmafImageBasedTrickPlaySettings, location_name: "imageBasedTrickPlaySettings"))
     CmafGroupSettings.add_member(:manifest_compression, Shapes::ShapeRef.new(shape: CmafManifestCompression, location_name: "manifestCompression"))
     CmafGroupSettings.add_member(:manifest_duration_format, Shapes::ShapeRef.new(shape: CmafManifestDurationFormat, location_name: "manifestDurationFormat"))
     CmafGroupSettings.add_member(:min_buffer_time, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "minBufferTime"))
@@ -1028,6 +1059,14 @@ module Aws::MediaConvert
     CmafGroupSettings.add_member(:write_hls_manifest, Shapes::ShapeRef.new(shape: CmafWriteHLSManifest, location_name: "writeHlsManifest"))
     CmafGroupSettings.add_member(:write_segment_timeline_in_representation, Shapes::ShapeRef.new(shape: CmafWriteSegmentTimelineInRepresentation, location_name: "writeSegmentTimelineInRepresentation"))
     CmafGroupSettings.struct_class = Types::CmafGroupSettings
+
+    CmafImageBasedTrickPlaySettings.add_member(:interval_cadence, Shapes::ShapeRef.new(shape: CmafIntervalCadence, location_name: "intervalCadence"))
+    CmafImageBasedTrickPlaySettings.add_member(:thumbnail_height, Shapes::ShapeRef.new(shape: __integerMin2Max4096, location_name: "thumbnailHeight"))
+    CmafImageBasedTrickPlaySettings.add_member(:thumbnail_interval, Shapes::ShapeRef.new(shape: __doubleMin0Max2147483647, location_name: "thumbnailInterval"))
+    CmafImageBasedTrickPlaySettings.add_member(:thumbnail_width, Shapes::ShapeRef.new(shape: __integerMin8Max4096, location_name: "thumbnailWidth"))
+    CmafImageBasedTrickPlaySettings.add_member(:tile_height, Shapes::ShapeRef.new(shape: __integerMin1Max2048, location_name: "tileHeight"))
+    CmafImageBasedTrickPlaySettings.add_member(:tile_width, Shapes::ShapeRef.new(shape: __integerMin1Max512, location_name: "tileWidth"))
+    CmafImageBasedTrickPlaySettings.struct_class = Types::CmafImageBasedTrickPlaySettings
 
     CmfcSettings.add_member(:audio_duration, Shapes::ShapeRef.new(shape: CmfcAudioDuration, location_name: "audioDuration"))
     CmfcSettings.add_member(:audio_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "audioGroupId"))
@@ -1133,6 +1172,7 @@ module Aws::MediaConvert
     DashIsoGroupSettings.add_member(:fragment_length, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "fragmentLength"))
     DashIsoGroupSettings.add_member(:hbbtv_compliance, Shapes::ShapeRef.new(shape: DashIsoHbbtvCompliance, location_name: "hbbtvCompliance"))
     DashIsoGroupSettings.add_member(:image_based_trick_play, Shapes::ShapeRef.new(shape: DashIsoImageBasedTrickPlay, location_name: "imageBasedTrickPlay"))
+    DashIsoGroupSettings.add_member(:image_based_trick_play_settings, Shapes::ShapeRef.new(shape: DashIsoImageBasedTrickPlaySettings, location_name: "imageBasedTrickPlaySettings"))
     DashIsoGroupSettings.add_member(:min_buffer_time, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "minBufferTime"))
     DashIsoGroupSettings.add_member(:min_final_segment_length, Shapes::ShapeRef.new(shape: __doubleMin0Max2147483647, location_name: "minFinalSegmentLength"))
     DashIsoGroupSettings.add_member(:mpd_profile, Shapes::ShapeRef.new(shape: DashIsoMpdProfile, location_name: "mpdProfile"))
@@ -1143,6 +1183,14 @@ module Aws::MediaConvert
     DashIsoGroupSettings.add_member(:write_segment_timeline_in_representation, Shapes::ShapeRef.new(shape: DashIsoWriteSegmentTimelineInRepresentation, location_name: "writeSegmentTimelineInRepresentation"))
     DashIsoGroupSettings.struct_class = Types::DashIsoGroupSettings
 
+    DashIsoImageBasedTrickPlaySettings.add_member(:interval_cadence, Shapes::ShapeRef.new(shape: DashIsoIntervalCadence, location_name: "intervalCadence"))
+    DashIsoImageBasedTrickPlaySettings.add_member(:thumbnail_height, Shapes::ShapeRef.new(shape: __integerMin1Max4096, location_name: "thumbnailHeight"))
+    DashIsoImageBasedTrickPlaySettings.add_member(:thumbnail_interval, Shapes::ShapeRef.new(shape: __doubleMin0Max2147483647, location_name: "thumbnailInterval"))
+    DashIsoImageBasedTrickPlaySettings.add_member(:thumbnail_width, Shapes::ShapeRef.new(shape: __integerMin8Max4096, location_name: "thumbnailWidth"))
+    DashIsoImageBasedTrickPlaySettings.add_member(:tile_height, Shapes::ShapeRef.new(shape: __integerMin1Max2048, location_name: "tileHeight"))
+    DashIsoImageBasedTrickPlaySettings.add_member(:tile_width, Shapes::ShapeRef.new(shape: __integerMin1Max512, location_name: "tileWidth"))
+    DashIsoImageBasedTrickPlaySettings.struct_class = Types::DashIsoImageBasedTrickPlaySettings
+
     Deinterlacer.add_member(:algorithm, Shapes::ShapeRef.new(shape: DeinterlaceAlgorithm, location_name: "algorithm"))
     Deinterlacer.add_member(:control, Shapes::ShapeRef.new(shape: DeinterlacerControl, location_name: "control"))
     Deinterlacer.add_member(:mode, Shapes::ShapeRef.new(shape: DeinterlacerMode, location_name: "mode"))
@@ -1152,6 +1200,10 @@ module Aws::MediaConvert
     DeleteJobTemplateRequest.struct_class = Types::DeleteJobTemplateRequest
 
     DeleteJobTemplateResponse.struct_class = Types::DeleteJobTemplateResponse
+
+    DeletePolicyRequest.struct_class = Types::DeletePolicyRequest
+
+    DeletePolicyResponse.struct_class = Types::DeletePolicyResponse
 
     DeletePresetRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "name"))
     DeletePresetRequest.struct_class = Types::DeletePresetRequest
@@ -1201,23 +1253,27 @@ module Aws::MediaConvert
     DvbSdtSettings.struct_class = Types::DvbSdtSettings
 
     DvbSubDestinationSettings.add_member(:alignment, Shapes::ShapeRef.new(shape: DvbSubtitleAlignment, location_name: "alignment"))
+    DvbSubDestinationSettings.add_member(:apply_font_color, Shapes::ShapeRef.new(shape: DvbSubtitleApplyFontColor, location_name: "applyFontColor"))
     DvbSubDestinationSettings.add_member(:background_color, Shapes::ShapeRef.new(shape: DvbSubtitleBackgroundColor, location_name: "backgroundColor"))
     DvbSubDestinationSettings.add_member(:background_opacity, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "backgroundOpacity"))
     DvbSubDestinationSettings.add_member(:dds_handling, Shapes::ShapeRef.new(shape: DvbddsHandling, location_name: "ddsHandling"))
     DvbSubDestinationSettings.add_member(:dds_x_coordinate, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "ddsXCoordinate"))
     DvbSubDestinationSettings.add_member(:dds_y_coordinate, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "ddsYCoordinate"))
+    DvbSubDestinationSettings.add_member(:fallback_font, Shapes::ShapeRef.new(shape: DvbSubSubtitleFallbackFont, location_name: "fallbackFont"))
     DvbSubDestinationSettings.add_member(:font_color, Shapes::ShapeRef.new(shape: DvbSubtitleFontColor, location_name: "fontColor"))
     DvbSubDestinationSettings.add_member(:font_opacity, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "fontOpacity"))
     DvbSubDestinationSettings.add_member(:font_resolution, Shapes::ShapeRef.new(shape: __integerMin96Max600, location_name: "fontResolution"))
     DvbSubDestinationSettings.add_member(:font_script, Shapes::ShapeRef.new(shape: FontScript, location_name: "fontScript"))
     DvbSubDestinationSettings.add_member(:font_size, Shapes::ShapeRef.new(shape: __integerMin0Max96, location_name: "fontSize"))
     DvbSubDestinationSettings.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "height"))
+    DvbSubDestinationSettings.add_member(:hex_font_color, Shapes::ShapeRef.new(shape: __stringMin6Max8Pattern09aFAF609aFAF2, location_name: "hexFontColor"))
     DvbSubDestinationSettings.add_member(:outline_color, Shapes::ShapeRef.new(shape: DvbSubtitleOutlineColor, location_name: "outlineColor"))
     DvbSubDestinationSettings.add_member(:outline_size, Shapes::ShapeRef.new(shape: __integerMin0Max10, location_name: "outlineSize"))
     DvbSubDestinationSettings.add_member(:shadow_color, Shapes::ShapeRef.new(shape: DvbSubtitleShadowColor, location_name: "shadowColor"))
     DvbSubDestinationSettings.add_member(:shadow_opacity, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "shadowOpacity"))
     DvbSubDestinationSettings.add_member(:shadow_x_offset, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "shadowXOffset"))
     DvbSubDestinationSettings.add_member(:shadow_y_offset, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "shadowYOffset"))
+    DvbSubDestinationSettings.add_member(:style_passthrough, Shapes::ShapeRef.new(shape: DvbSubtitleStylePassthrough, location_name: "stylePassthrough"))
     DvbSubDestinationSettings.add_member(:subtitling_type, Shapes::ShapeRef.new(shape: DvbSubtitlingType, location_name: "subtitlingType"))
     DvbSubDestinationSettings.add_member(:teletext_spacing, Shapes::ShapeRef.new(shape: DvbSubtitleTeletextSpacing, location_name: "teletextSpacing"))
     DvbSubDestinationSettings.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "width"))
@@ -1337,6 +1393,11 @@ module Aws::MediaConvert
 
     GetJobTemplateResponse.add_member(:job_template, Shapes::ShapeRef.new(shape: JobTemplate, location_name: "jobTemplate"))
     GetJobTemplateResponse.struct_class = Types::GetJobTemplateResponse
+
+    GetPolicyRequest.struct_class = Types::GetPolicyRequest
+
+    GetPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "policy"))
+    GetPolicyResponse.struct_class = Types::GetPolicyResponse
 
     GetPresetRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "name"))
     GetPresetRequest.struct_class = Types::GetPresetRequest
@@ -1494,6 +1555,7 @@ module Aws::MediaConvert
     HlsGroupSettings.add_member(:directory_structure, Shapes::ShapeRef.new(shape: HlsDirectoryStructure, location_name: "directoryStructure"))
     HlsGroupSettings.add_member(:encryption, Shapes::ShapeRef.new(shape: HlsEncryptionSettings, location_name: "encryption"))
     HlsGroupSettings.add_member(:image_based_trick_play, Shapes::ShapeRef.new(shape: HlsImageBasedTrickPlay, location_name: "imageBasedTrickPlay"))
+    HlsGroupSettings.add_member(:image_based_trick_play_settings, Shapes::ShapeRef.new(shape: HlsImageBasedTrickPlaySettings, location_name: "imageBasedTrickPlaySettings"))
     HlsGroupSettings.add_member(:manifest_compression, Shapes::ShapeRef.new(shape: HlsManifestCompression, location_name: "manifestCompression"))
     HlsGroupSettings.add_member(:manifest_duration_format, Shapes::ShapeRef.new(shape: HlsManifestDurationFormat, location_name: "manifestDurationFormat"))
     HlsGroupSettings.add_member(:min_final_segment_length, Shapes::ShapeRef.new(shape: __doubleMin0Max2147483647, location_name: "minFinalSegmentLength"))
@@ -1511,6 +1573,14 @@ module Aws::MediaConvert
     HlsGroupSettings.add_member(:timed_metadata_id_3_period, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timedMetadataId3Period"))
     HlsGroupSettings.add_member(:timestamp_delta_milliseconds, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timestampDeltaMilliseconds"))
     HlsGroupSettings.struct_class = Types::HlsGroupSettings
+
+    HlsImageBasedTrickPlaySettings.add_member(:interval_cadence, Shapes::ShapeRef.new(shape: HlsIntervalCadence, location_name: "intervalCadence"))
+    HlsImageBasedTrickPlaySettings.add_member(:thumbnail_height, Shapes::ShapeRef.new(shape: __integerMin2Max4096, location_name: "thumbnailHeight"))
+    HlsImageBasedTrickPlaySettings.add_member(:thumbnail_interval, Shapes::ShapeRef.new(shape: __doubleMin0Max2147483647, location_name: "thumbnailInterval"))
+    HlsImageBasedTrickPlaySettings.add_member(:thumbnail_width, Shapes::ShapeRef.new(shape: __integerMin8Max4096, location_name: "thumbnailWidth"))
+    HlsImageBasedTrickPlaySettings.add_member(:tile_height, Shapes::ShapeRef.new(shape: __integerMin1Max2048, location_name: "tileHeight"))
+    HlsImageBasedTrickPlaySettings.add_member(:tile_width, Shapes::ShapeRef.new(shape: __integerMin1Max512, location_name: "tileWidth"))
+    HlsImageBasedTrickPlaySettings.struct_class = Types::HlsImageBasedTrickPlaySettings
 
     HlsRenditionGroupSettings.add_member(:rendition_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "renditionGroupId"))
     HlsRenditionGroupSettings.add_member(:rendition_language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "renditionLanguageCode"))
@@ -2013,6 +2083,11 @@ module Aws::MediaConvert
     PartnerWatermarking.add_member(:nexguard_file_marker_settings, Shapes::ShapeRef.new(shape: NexGuardFileMarkerSettings, location_name: "nexguardFileMarkerSettings"))
     PartnerWatermarking.struct_class = Types::PartnerWatermarking
 
+    Policy.add_member(:http_inputs, Shapes::ShapeRef.new(shape: InputPolicy, location_name: "httpInputs"))
+    Policy.add_member(:https_inputs, Shapes::ShapeRef.new(shape: InputPolicy, location_name: "httpsInputs"))
+    Policy.add_member(:s3_inputs, Shapes::ShapeRef.new(shape: InputPolicy, location_name: "s3Inputs"))
+    Policy.struct_class = Types::Policy
+
     Preset.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Preset.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     Preset.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
@@ -2043,6 +2118,12 @@ module Aws::MediaConvert
     ProresSettings.add_member(:slow_pal, Shapes::ShapeRef.new(shape: ProresSlowPal, location_name: "slowPal"))
     ProresSettings.add_member(:telecine, Shapes::ShapeRef.new(shape: ProresTelecine, location_name: "telecine"))
     ProresSettings.struct_class = Types::ProresSettings
+
+    PutPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "policy"))
+    PutPolicyRequest.struct_class = Types::PutPolicyRequest
+
+    PutPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "policy"))
+    PutPolicyResponse.struct_class = Types::PutPolicyResponse
 
     Queue.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Queue.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
@@ -2570,6 +2651,20 @@ module Aws::MediaConvert
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2017-08-29/policy"
+        o.input = Shapes::ShapeRef.new(shape: DeletePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_preset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePreset"
         o.http_method = "DELETE"
@@ -2652,6 +2747,20 @@ module Aws::MediaConvert
         o.http_request_uri = "/2017-08-29/jobTemplates/{name}"
         o.input = Shapes::ShapeRef.new(shape: GetJobTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: GetJobTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:get_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/2017-08-29/policy"
+        o.input = Shapes::ShapeRef.new(shape: GetPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -2774,6 +2883,20 @@ module Aws::MediaConvert
         o.http_request_uri = "/2017-08-29/tags/{arn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:put_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2017-08-29/policy"
+        o.input = Shapes::ShapeRef.new(shape: PutPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

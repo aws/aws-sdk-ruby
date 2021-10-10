@@ -45,8 +45,8 @@ module Aws::IAM
     # @option options [required, String] :old_password
     #   The IAM user's current password.
     # @option options [required, String] :new_password
-    #   The new password. The new password must conform to the account's
-    #   password policy, if one exists.
+    #   The new password. The new password must conform to the Amazon Web
+    #   Services account's password policy, if one exists.
     #
     #   The [regex pattern][1] that is used to validate this parameter is a
     #   string of characters. That string can include almost any printable
@@ -54,8 +54,9 @@ module Aws::IAM
     #   character range (`\u00FF`). You can also include the tab (`\u0009`),
     #   line feed (`\u000A`), and carriage return (`\u000D`) characters. Any
     #   of these characters are valid in a password. However, many tools, such
-    #   as the Management Console, might restrict the ability to type certain
-    #   characters because they have special meaning within that tool.
+    #   as the Amazon Web Services Management Console, might restrict the
+    #   ability to type certain characters because they have special meaning
+    #   within that tool.
     #
     #
     #
@@ -139,9 +140,10 @@ module Aws::IAM
     #   uses the default value of `false`. The result is that passwords do not
     #   require at least one lowercase character.
     # @option options [Boolean] :allow_users_to_change_password
-    #   Allows all IAM users in your account to use the Management Console to
-    #   change their own passwords. For more information, see [Letting IAM
-    #   users change their own passwords][1] in the *IAM User Guide*.
+    #   Allows all IAM users in your account to use the Amazon Web Services
+    #   Management Console to change their own passwords. For more
+    #   information, see [Letting IAM users change their own passwords][1] in
+    #   the *IAM User Guide*.
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that IAM users in the
@@ -324,6 +326,10 @@ module Aws::IAM
     #   can contain any ASCII character from the ! (`\u0021`) through the DEL
     #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
+    #
+    #   <note markdown="1"> You cannot use an asterisk (*) in the path name.
+    #
+    #    </note>
     #
     #
     #
@@ -1015,8 +1021,8 @@ module Aws::IAM
     #   The scope to use for filtering the results.
     #
     #   To list only Amazon Web Services managed policies, set `Scope` to
-    #   `AWS`. To list only the customer managed policies in your account, set
-    #   `Scope` to `Local`.
+    #   `AWS`. To list only the customer managed policies in your Amazon Web
+    #   Services account, set `Scope` to `Local`.
     #
     #   This parameter is optional. If it is not included, or if it is set to
     #   `All`, all policies are returned.

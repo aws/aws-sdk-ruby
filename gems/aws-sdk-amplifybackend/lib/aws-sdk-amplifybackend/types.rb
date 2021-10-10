@@ -2472,6 +2472,10 @@ module Aws::AmplifyBackend
 
     # The response object for this operation.
     #
+    # @!attribute [rw] amplify_feature_flags
+    #   A stringified version of the cli.json file for your Amplify project.
+    #   @return [String]
+    #
     # @!attribute [rw] amplify_meta_config
     #   A stringified version of the current configs for your Amplify
     #   project.
@@ -2500,6 +2504,7 @@ module Aws::AmplifyBackend
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendRespObj AWS API Documentation
     #
     class GetBackendRespObj < Struct.new(
+      :amplify_feature_flags,
       :amplify_meta_config,
       :app_id,
       :app_name,
@@ -2510,6 +2515,9 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
+    # @!attribute [rw] amplify_feature_flags
+    #   @return [String]
+    #
     # @!attribute [rw] amplify_meta_config
     #   @return [String]
     #
@@ -2531,6 +2539,7 @@ module Aws::AmplifyBackend
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendResponse AWS API Documentation
     #
     class GetBackendResponse < Struct.new(
+      :amplify_feature_flags,
       :amplify_meta_config,
       :app_id,
       :app_name,

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-09-29)
+------------------
+
+* Feature - This release adds alert manager and rule group namespace APIs
+
 1.7.0 (2021-09-07)
 ------------------
 

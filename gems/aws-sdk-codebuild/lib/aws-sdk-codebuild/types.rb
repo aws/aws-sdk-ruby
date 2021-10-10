@@ -1591,6 +1591,7 @@ module Aws::CodeBuild
     #             compute_types_allowed: ["NonEmptyString"],
     #           },
     #           timeout_in_mins: 1,
+    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #         },
     #         concurrent_build_limit: 1,
     #       }
@@ -2877,14 +2878,17 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The order to list results in. The results are sorted by build
-    #   number, not the build identifier.
+    #   The order to sort the results in. The results are sorted by build
+    #   number, not the build identifier. If this is not specified, the
+    #   results are sorted in descending order.
     #
     #   Valid values include:
     #
-    #   * `ASCENDING`\: List the build IDs in ascending order by build ID.
+    #   * `ASCENDING`\: List the build identifiers in ascending order, by
+    #     build number.
     #
-    #   * `DESCENDING`\: List the build IDs in descending order by build ID.
+    #   * `DESCENDING`\: List the build identifiers in descending order, by
+    #     build number.
     #
     #   If the project has more than 100 builds, setting the sort order will
     #   result in an error.
@@ -2911,8 +2915,8 @@ module Aws::CodeBuild
     end
 
     # @!attribute [rw] ids
-    #   A list of build IDs for the specified build project, with each build
-    #   ID representing a single build.
+    #   A list of build identifiers for the specified build project, with
+    #   each build ID representing a single build.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -4124,6 +4128,7 @@ module Aws::CodeBuild
     #           compute_types_allowed: ["NonEmptyString"],
     #         },
     #         timeout_in_mins: 1,
+    #         batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #       }
     #
     # @!attribute [rw] service_role
@@ -4145,13 +4150,31 @@ module Aws::CodeBuild
     #   build must be completed in.
     #   @return [Integer]
     #
+    # @!attribute [rw] batch_report_mode
+    #   Specifies how build status reports are sent to the source provider
+    #   for the batch build. This property is only used when the source
+    #   provider for your project is Bitbucket, GitHub, or GitHub
+    #   Enterprise, and your project is configured to report build statuses
+    #   to the source provider.
+    #
+    #   REPORT\_AGGREGATED\_BATCH
+    #
+    #   : (Default) Aggregate all of the build statuses into a single status
+    #     report.
+    #
+    #   REPORT\_INDIVIDUAL\_BUILDS
+    #
+    #   : Send a separate status report for each individual build.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectBuildBatchConfig AWS API Documentation
     #
     class ProjectBuildBatchConfig < Struct.new(
       :service_role,
       :combine_artifacts,
       :restrictions,
-      :timeout_in_mins)
+      :timeout_in_mins,
+      :batch_report_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5601,6 +5624,7 @@ module Aws::CodeBuild
     #             compute_types_allowed: ["NonEmptyString"],
     #           },
     #           timeout_in_mins: 1,
+    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #         },
     #         debug_session_enabled: false,
     #       }
@@ -6700,6 +6724,7 @@ module Aws::CodeBuild
     #             compute_types_allowed: ["NonEmptyString"],
     #           },
     #           timeout_in_mins: 1,
+    #           batch_report_mode: "REPORT_INDIVIDUAL_BUILDS", # accepts REPORT_INDIVIDUAL_BUILDS, REPORT_AGGREGATED_BATCH
     #         },
     #         concurrent_build_limit: 1,
     #       }
@@ -6772,7 +6797,7 @@ module Aws::CodeBuild
     #   @return [Types::ProjectArtifacts]
     #
     # @!attribute [rw] secondary_artifacts
-    #   An array of `ProjectSource` objects.
+    #   An array of `ProjectArtifact` objects.
     #   @return [Array<Types::ProjectArtifacts>]
     #
     # @!attribute [rw] cache
