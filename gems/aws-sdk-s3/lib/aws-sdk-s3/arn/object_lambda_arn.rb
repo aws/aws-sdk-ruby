@@ -19,18 +19,18 @@ module Aws
 
       def validate_arn!
         unless @service == 's3-object-lambda'
-          raise ArgumentError, 'Must provide a valid S3 Object Lambdas ARN.'
+          raise ArgumentError, 'Must provide a valid S3 Object Lambda ARN.'
         end
 
         if @region.empty? || @account_id.empty?
           raise ArgumentError,
                 'S3 Object Lambdas ARNs must contain both a region '\
-                'and an account id.'
+                'and an account ID.'
         end
 
         if @region.include?('-fips') || @region.include?('fips-')
           raise ArgumentError,
-                'S3 Access Point ARNs cannot contain a FIPS region'
+                'S3 Object Lambda ARNs cannot contain a FIPS region'
         end
 
         if @type != 'accesspoint'
@@ -38,12 +38,12 @@ module Aws
         end
 
         if @access_point_name.nil? || @access_point_name.empty?
-          raise ArgumentError, 'Missing ARN accesspoint name.'
+          raise ArgumentError, 'Missing ARN Access Point name.'
         end
 
         if @extra
           raise ArgumentError,
-                'ARN accesspoint resource must be a single value.'
+                'ARN Access Point resource must be a single value.'
         end
 
         unless Seahorse::Util.host_label?(

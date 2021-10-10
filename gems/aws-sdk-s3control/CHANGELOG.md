@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support FIPS endpoints for S3 Outposts using Bucket and Access Point ARNs.
+
 1.40.0 (2021-09-02)
 ------------------
 

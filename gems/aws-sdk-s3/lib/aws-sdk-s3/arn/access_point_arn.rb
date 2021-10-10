@@ -25,25 +25,25 @@ module Aws
         if @region.empty? || @account_id.empty?
           raise ArgumentError,
                 'S3 Access Point ARNs must contain both a region '\
-                'and an account id.'
+                'and an account ID.'
         end
 
         if @region.include?('-fips') || @region.include?('fips-')
           raise ArgumentError,
-                'S3 Access Point ARNs cannot contain a FIPS region'
+                'S3 Access Point ARNs cannot contain a FIPS region.'
         end
 
         if @type != 'accesspoint'
-          raise ArgumentError, 'Invalid ARN, resource format is not correct'
+          raise ArgumentError, 'Invalid ARN, resource format is not correct.'
         end
 
         if @access_point_name.nil? || @access_point_name.empty?
-          raise ArgumentError, 'Missing ARN accesspoint name.'
+          raise ArgumentError, 'Missing ARN Access Point name.'
         end
 
         if @extra
           raise ArgumentError,
-                'ARN accesspoint resource must be a single value.'
+                'ARN Access Point resource must be a single value.'
         end
 
         unless Seahorse::Util.host_label?(

@@ -116,31 +116,50 @@ module Aws
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
         end
 
-        it 'raises when given a fips arn' do
+        it 's3_use_arn_region false; can create a fips endpoint' do
           client = Aws::S3Control::Client.new(
             stub_responses: true,
-            region: 'fips-us-gov-east-1'
+            region: 'us-gov-west-1',
+            s3_use_arn_region: false,
+            use_fips_endpoint: true
           )
-          arn = 'arn:aws-us-gov:s3-outposts:fips-us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
-          expect do
-            client.get_bucket(bucket: arn)
-          end.to raise_error(ArgumentError)
-        end
-
-        it 'accepts an access point arn in us-gov and fips client region' do
-          client = Aws::S3Control::Client.new(
-            stub_responses: true,
-            region: 'fips-us-gov-east-1'
-          )
-          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect_sigv4_service('s3-outposts')
           resp = client.get_bucket(bucket: arn)
-          host = 's3-outposts.us-gov-east-1.amazonaws.com'
+          host = 's3-outposts-fips.us-gov-west-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
           account_header = '123456789012'
           expect(resp.context.http_request.endpoint.host).to eq(host)
           expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
+        end
+
+        it 'can create a fips endpoint' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1',
+            use_fips_endpoint: true
+          )
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          expect_sigv4_service('s3-outposts')
+          resp = client.get_bucket(bucket: arn)
+          host = 's3-outposts-fips.us-gov-east-1.amazonaws.com'
+          outpost_header = 'op-01234567890123456'
+          account_header = '123456789012'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+          expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
+          expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
+        end
+
+        it 'raises when given a fips arn' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-east-1'
+          )
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
+          expect do
+            client.get_bucket(bucket: arn)
+          end.to raise_error(ArgumentError)
         end
 
         it 'raises when use_dualstack_endpoint is set' do
@@ -276,31 +295,50 @@ module Aws
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
         end
 
-        it 'raises when given a fips arn' do
+        it 's3_use_arn_region false; can create a fips endpoint' do
           client = Aws::S3Control::Client.new(
             stub_responses: true,
-            region: 'fips-us-gov-east-1'
+            region: 'us-gov-west-1',
+            s3_use_arn_region: false,
+            use_fips_endpoint: true
           )
-          arn = 'arn:aws-us-gov:s3-outposts:fips-us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
-          expect do
-            client.get_bucket(bucket: arn)
-          end.to raise_error(ArgumentError)
-        end
-
-        it 'accepts an access point arn in us-gov and fips client region' do
-          client = Aws::S3Control::Client.new(
-            stub_responses: true,
-            region: 'fips-us-gov-east-1'
-          )
-          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
           expect_sigv4_service('s3-outposts')
           resp = client.get_bucket(bucket: arn)
-          host = 's3-outposts.us-gov-east-1.amazonaws.com'
+          host = 's3-outposts-fips.us-gov-west-1.amazonaws.com'
           outpost_header = 'op-01234567890123456'
           account_header = '123456789012'
           expect(resp.context.http_request.endpoint.host).to eq(host)
           expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
+        end
+
+        it 'can create a fips endpoint' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-west-1',
+            use_fips_endpoint: true
+          )
+          arn = 'arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          expect_sigv4_service('s3-outposts')
+          resp = client.get_bucket(bucket: arn)
+          host = 's3-outposts-fips.us-gov-east-1.amazonaws.com'
+          outpost_header = 'op-01234567890123456'
+          account_header = '123456789012'
+          expect(resp.context.http_request.endpoint.host).to eq(host)
+          expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
+          expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
+        end
+
+        it 'raises when given a fips arn' do
+          client = Aws::S3Control::Client.new(
+            stub_responses: true,
+            region: 'us-gov-east-1'
+          )
+          arn = 'arn:aws:s3-outposts:us-gov-west-1-fips:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          expect do
+            client.get_bucket(bucket: arn)
+          end.to raise_error(ArgumentError)
         end
 
         it 'raises when use_dualstack_endpoint is set' do
@@ -428,6 +466,22 @@ module Aws
             expect(resp.context.http_request.endpoint.host).to eq(host)
             expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
           end
+
+          it 'sets the fips endpoint and signs with the correct service' do
+            client = Aws::S3Control::Client.new(
+              stub_responses: true,
+              region: 'us-west-2',
+              use_fips_endpoint: true
+            )
+            expect_sigv4_service('s3-outposts')
+            resp = client.create_bucket(
+              bucket: 'bucket', outpost_id: 'op-01234567890123456'
+            )
+            host = 's3-outposts-fips.us-west-2.amazonaws.com'
+            outpost_header = 'op-01234567890123456'
+            expect(resp.context.http_request.endpoint.host).to eq(host)
+            expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
+          end
         end
 
         describe '#list_regional_buckets' do
@@ -445,6 +499,22 @@ module Aws
             expect(resp.context.http_request.endpoint.host).to eq(host)
             expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
           end
+
+          it 'sets the fips endpoint and signs with the correct service' do
+            client = Aws::S3Control::Client.new(
+              stub_responses: true,
+              region: 'us-west-2',
+              use_fips_endpoint: true
+            )
+            expect_sigv4_service('s3-outposts')
+            resp = client.list_regional_buckets(
+              outpost_id: 'op-01234567890123456', account_id: '123456789012'
+            )
+            host = 's3-outposts-fips.us-west-2.amazonaws.com'
+            outpost_header = 'op-01234567890123456'
+            expect(resp.context.http_request.endpoint.host).to eq(host)
+            expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
+          end
         end
 
         describe '#create_access_point' do
@@ -457,6 +527,23 @@ module Aws
             arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
             resp = client.create_access_point(bucket: arn, name: 'myaccesspoint')
             host = 's3-outposts.us-west-2.amazonaws.com'
+            outpost_header = 'op-01234567890123456'
+            expect(resp.context.http_request.endpoint.host).to eq(host)
+            expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)
+            resp.context.http_request.body.rewind
+            expect(resp.context.http_request.body.read).to match(/<Bucket>mybucket<\/Bucket>/)
+          end
+
+          it 'creates a fips outposts access point with an outposts bucket arn' do
+            client = Aws::S3Control::Client.new(
+              stub_responses: true,
+              region: 'us-west-2',
+              use_fips_endpoint: true
+            )
+            expect_sigv4_service('s3-outposts')
+            arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+            resp = client.create_access_point(bucket: arn, name: 'myaccesspoint')
+            host = 's3-outposts-fips.us-west-2.amazonaws.com'
             outpost_header = 'op-01234567890123456'
             expect(resp.context.http_request.endpoint.host).to eq(host)
             expect(resp.context.http_request.headers['x-amz-outpost-id']).to eq(outpost_header)

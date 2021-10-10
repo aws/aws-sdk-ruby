@@ -39,6 +39,7 @@ client's region instead.
                 context.http_request.endpoint,
                 context.metadata[:s3_arn][:arn],
                 context.metadata[:s3_arn][:resolved_region],
+                context.metadata[:s3_arn][:fips],
                 context.metadata[:s3_arn][:dualstack],
                 # if regional_endpoint is false, a custom endpoint was provided
                 # in this case, we want to prefix the endpoint using the ARN
@@ -78,6 +79,7 @@ client's region instead.
                 context.metadata[:s3_arn] = {
                   arn: arn,
                   resolved_region: resolved_region,
+                  fips: context.config.use_fips_endpoint,
                   dualstack: extract_dualstack_config!(context)
                 }
               end
@@ -165,9 +167,9 @@ client's region instead.
           end
 
           # @api private
-          def resolve_url!(url, arn, region, dualstack = false, has_custom_endpoint = false)
+          def resolve_url!(url, arn, region, fips = false, dualstack = false, has_custom_endpoint = false)
             custom_endpoint = url.host if has_custom_endpoint
-            url.host = arn.host_url(region, dualstack, custom_endpoint)
+            url.host = arn.host_url(region, fips, dualstack, custom_endpoint)
             url
           end
 
@@ -189,35 +191,13 @@ client's region instead.
           end
 
           def validate_region_config!(arn, region, use_arn_region)
-            fips = arn.support_fips?
+            if use_arn_region &&
+               !Aws::Partitions.partition(arn.partition).region?(region)
+              raise Aws::Errors::InvalidARNPartitionError
+            end
 
-            # s3-external-1 is specific just to s3 and not part of partitions
-            # aws-global is a partition region
-            unless arn.partition == 'aws' &&
-                   (region == 's3-external-1' || region == 'aws-global')
-              if !fips && arn.region.include?('fips')
-                raise ArgumentError,
-                      'FIPS region ARNs are not supported for this type of ARN.'
-              end
-
-              if !fips && !use_arn_region && region.include?('fips')
-                raise ArgumentError,
-                      'FIPS client regions are not supported for this type of '\
-                      'ARN without `:s3_use_arn_region`.'
-              end
-
-              # if it's a fips region, attempt to normalize it
-              if fips || use_arn_region
-                region = region.gsub('fips-', '').gsub('-fips', '')
-              end
-              if use_arn_region &&
-                 !Aws::Partitions.partition(arn.partition).region?(region)
-                raise Aws::Errors::InvalidARNPartitionError
-              end
-
-              if !use_arn_region && region != arn.region
-                raise Aws::Errors::InvalidARNRegionError
-              end
+            if !use_arn_region && region != arn.region
+              raise Aws::Errors::InvalidARNRegionError
             end
           end
         end
