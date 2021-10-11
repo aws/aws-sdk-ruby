@@ -760,23 +760,19 @@ module Aws::EC2
     #
     # @option params [String] :network_border_group
     #   A unique set of Availability Zones, Local Zones, or Wavelength Zones
-    #   from which AWS advertises IP addresses. Use this parameter to limit
-    #   the IP address to this location. IP addresses cannot move between
-    #   network border groups.
+    #   from which Amazon Web Services advertises IP addresses. Use this
+    #   parameter to limit the IP address to this location. IP addresses
+    #   cannot move between network border groups.
     #
     #   Use [DescribeAvailabilityZones][1] to view the network border groups.
     #
-    #   <note markdown="1"> You cannot use a network border group with EC2 Classic. If you attempt
-    #   this operation on EC2 classic, you will receive an
-    #   `InvalidParameterCombination` error. For more information, see [Error
-    #   Codes][2].
-    #
-    #    </note>
+    #   You cannot use a network border group with EC2 Classic. If you attempt
+    #   this operation on EC2 Classic, you receive an
+    #   `InvalidParameterCombination` error.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #
     # @option params [String] :customer_owned_ipv_4_pool
     #   The ID of a customer-owned address pool. Use this parameter to let
@@ -3638,7 +3634,7 @@ module Aws::EC2
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #
     #
@@ -5632,8 +5628,8 @@ module Aws::EC2
     #   least one field.
     #
     #   Specify the fields using the `$\{field-id\}` format, separated by
-    #   spaces. For the CLI, use single quotation marks (' ') to surround
-    #   the parameter value.
+    #   spaces. For the CLI, surround this parameter value with single quotes
+    #   on Linux or double quotes on Windows.
     #
     #
     #
@@ -5717,8 +5713,8 @@ module Aws::EC2
     #
     # An AFI contains the FPGA bitstream that is ready to download to an
     # FPGA. You can securely deploy an AFI on multiple FPGA-accelerated
-    # instances. For more information, see the [AWS FPGA Hardware
-    # Development Kit][1].
+    # instances. For more information, see the [Amazon Web Services FPGA
+    # Hardware Development Kit][1].
     #
     #
     #
@@ -6354,7 +6350,7 @@ module Aws::EC2
     # to launch an instance. When you launch an instance using RunInstances,
     # you can specify a launch template instead of providing the launch
     # parameters in the request. For more information, see [Launching an
-    # instance from a launch template][1]in the *Amazon Elastic Compute
+    # instance from a launch template][1] in the *Amazon Elastic Compute
     # Cloud User Guide*.
     #
     #
@@ -9579,8 +9575,8 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -9672,7 +9668,7 @@ module Aws::EC2
     #   The ID of the filter that this rule is associated with.
     #
     # @option params [required, String] :traffic_direction
-    #   The type of traffic (`ingress` \| `egress`).
+    #   The type of traffic.
     #
     # @option params [required, Integer] :rule_number
     #   The number of the Traffic Mirror rule. This number must be unique for
@@ -9680,7 +9676,7 @@ module Aws::EC2
     #   in ascending order by rule number.
     #
     # @option params [required, String] :rule_action
-    #   The action to take (`accept` \| `reject`) on the filtered traffic.
+    #   The action to take on the filtered traffic.
     #
     # @option params [Types::TrafficMirrorPortRangeRequest] :destination_port_range
     #   The destination port range.
@@ -9715,8 +9711,8 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -9847,8 +9843,8 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -9950,8 +9946,8 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -11176,15 +11172,16 @@ module Aws::EC2
 
     # Creates a VPC endpoint for a specified service. An endpoint enables
     # you to create a private connection between your VPC and the service.
-    # The service may be provided by AWS, an AWS Marketplace Partner, or
-    # another AWS account. For more information, see [VPC Endpoints][1] in
-    # the *Amazon Virtual Private Cloud User Guide*.
+    # The service may be provided by Amazon Web Services, an Amazon Web
+    # Services Marketplace Partner, or another Amazon Web Services account.
+    # For more information, see [VPC Endpoints][1] in the *Amazon Virtual
+    # Private Cloud User Guide*.
     #
     # A `gateway` endpoint serves as a target for a route in your route
-    # table for traffic destined for the AWS service. You can specify an
-    # endpoint policy to attach to the endpoint, which will control access
-    # to the service from your VPC. You can also specify the VPC route
-    # tables that use the endpoint.
+    # table for traffic destined for the Amazon Web Service. You can specify
+    # an endpoint policy to attach to the endpoint, which will control
+    # access to the service from your VPC. You can also specify the VPC
+    # route tables that use the endpoint.
     #
     # An `interface` endpoint is a network interface in your subnet that
     # serves as an endpoint for communicating with the specified service.
@@ -11240,8 +11237,8 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #
     #
@@ -11370,8 +11367,8 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #
     #
@@ -11415,7 +11412,8 @@ module Aws::EC2
     end
 
     # Creates a VPC endpoint service configuration to which service
-    # consumers (AWS accounts, IAM users, and IAM roles) can connect.
+    # consumers (Amazon Web Services accounts, IAM users, and IAM roles) can
+    # connect.
     #
     # To create an endpoint service configuration, you must first create one
     # of the following for your service:
@@ -11466,8 +11464,8 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #
     #
@@ -15244,8 +15242,8 @@ module Aws::EC2
     # that zone.
     #
     # For more information about Availability Zones, Local Zones, and
-    # Wavelength Zones, see [Regions, Zones and Outposts][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # Wavelength Zones, see [Regions and zones][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
     #
     #
@@ -17170,12 +17168,12 @@ module Aws::EC2
     # and not miss a recorded event. EC2 Fleet events are available for 48
     # hours.
     #
-    # For more information, see [Monitoring your EC2 Fleet][1] in the
-    # *Amazon EC2 User Guide*.
+    # For more information, see [Monitor fleet events using Amazon
+    # EventBridge][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-monitor.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17630,7 +17628,8 @@ module Aws::EC2
 
     # Describes the Amazon FPGA Images (AFIs) available to you. These
     # include public AFIs, private AFIs that you own, and AFIs owned by
-    # other AWS accounts for which you have load permissions.
+    # other Amazon Web Services accounts for which you have load
+    # permissions.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -17642,9 +17641,9 @@ module Aws::EC2
     #   The AFI IDs.
     #
     # @option params [Array<String>] :owners
-    #   Filters the AFI by owner. Specify an AWS account ID, `self` (owner is
-    #   the sender of the request), or an AWS owner alias (valid values are
-    #   `amazon` \| `aws-marketplace`).
+    #   Filters the AFI by owner. Specify an Amazon Web Services account ID,
+    #   `self` (owner is the sender of the request), or an Amazon Web Services
+    #   owner alias (valid values are `amazon` \| `aws-marketplace`).
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -17657,12 +17656,12 @@ module Aws::EC2
     #
     #   * `name` - The name of the AFI.
     #
-    #   * `owner-id` - The AWS account ID of the AFI owner.
+    #   * `owner-id` - The Amazon Web Services account ID of the AFI owner.
     #
     #   * `product-code` - The product code.
     #
-    #   * `shell-version` - The version of the AWS Shell that was used to
-    #     create the bitstream.
+    #   * `shell-version` - The version of the Amazon Web Services Shell that
+    #     was used to create the bitstream.
     #
     #   * `state` - The state of the AFI (`pending` \| `failed` \| `available`
     #     \| `unavailable`).
@@ -18150,12 +18149,13 @@ module Aws::EC2
     # `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`.
     #
     # These settings apply to the IAM user who makes the request; they do
-    # not apply to the entire AWS account. By default, an IAM user defaults
-    # to the same settings as the root user, unless they explicitly override
-    # the settings by running the ModifyIdFormat command. Resources created
-    # with longer IDs are visible to all IAM users, regardless of these
-    # settings and provided that they have permission to use the relevant
-    # `Describe` command for the resource type.
+    # not apply to the entire Amazon Web Services account. By default, an
+    # IAM user defaults to the same settings as the root user, unless they
+    # explicitly override the settings by running the ModifyIdFormat
+    # command. Resources created with longer IDs are visible to all IAM
+    # users, regardless of these settings and provided that they have
+    # permission to use the relevant `Describe` command for the resource
+    # type.
     #
     # @option params [String] :resource
     #   The type of resource: `bundle` \| `conversion-task` \|
@@ -23190,15 +23190,16 @@ module Aws::EC2
     # Describes the Regions that are enabled for your account, or all
     # Regions.
     #
-    # For a list of the Regions supported by Amazon EC2, see [ Regions and
-    # Endpoints][1].
+    # For a list of the Regions supported by Amazon EC2, see [ Amazon
+    # Elastic Compute Cloud endpoints and quotas][1].
     #
     # For information about enabling and disabling Regions for your account,
-    # see [Managing AWS Regions][2] in the *AWS General Reference*.
+    # see [Managing Amazon Web Services Regions][2] in the *Amazon Web
+    # Services General Reference*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/ec2-service.html
     # [2]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html
     #
     # @option params [Array<Types::Filter>] :filters
@@ -25336,6 +25337,13 @@ module Aws::EC2
     # described. This ensures that you can query by the last evaluated time
     # and not miss a recorded event. Spot Fleet events are available for 48
     # hours.
+    #
+    # For more information, see [Monitor fleet events using Amazon
+    # EventBridge][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-monitor.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -28669,8 +28677,8 @@ module Aws::EC2
     #
     #   * `service-id` - The ID of the service.
     #
-    #   * `vpc-endpoint-owner` - The AWS account number of the owner of the
-    #     endpoint.
+    #   * `vpc-endpoint-owner` - The ID of the Amazon Web Services account ID
+    #     that owns the endpoint.
     #
     #   * `vpc-endpoint-state` - The state of the endpoint
     #     (`pendingAcceptance` \| `pending` \| `available` \| `deleting` \|
@@ -33203,9 +33211,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Download an AWS-provided sample configuration file to be used with the
-    # customer gateway device specified for your Site-to-Site VPN
-    # connection.
+    # Download an Amazon Web Services-provided sample configuration file to
+    # be used with the customer gateway device specified for your
+    # Site-to-Site VPN connection.
     #
     # @option params [required, String] :vpn_connection_id
     #   The `VpnConnectionId` specifies the Site-to-Site VPN connection used
@@ -33492,13 +33500,12 @@ module Aws::EC2
     #   The tags to apply to the import image task during creation.
     #
     # @option params [String] :usage_operation
-    #   The usage operation value. For more information, see [AMI billing
-    #   information fields][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   The usage operation value. For more information, see [Licensing
+    #   options][1] in the *VM Import/Export User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html
+    #   [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#prerequisites
     #
     # @option params [String] :boot_mode
     #   The boot mode of the virtual machine.
@@ -34143,7 +34150,7 @@ module Aws::EC2
     # @option params [required, String] :opt_in_status
     #   Indicates whether you are opted in to the Local Zone group or
     #   Wavelength Zone group. The only valid value is `opted-in`. You must
-    #   contact [AWS Support][1] to opt out of a Local Zone group, or
+    #   contact [Amazon Web Services Support][1] to opt out of a Local Zone or
     #   Wavelength Zone group.
     #
     #
@@ -34731,8 +34738,8 @@ module Aws::EC2
     #   The operation type.
     #
     # @option params [Array<String>] :user_ids
-    #   The AWS account IDs. This parameter is valid only when modifying the
-    #   `loadPermission` attribute.
+    #   The Amazon Web Services account IDs. This parameter is valid only when
+    #   modifying the `loadPermission` attribute.
     #
     # @option params [Array<String>] :user_groups
     #   The user groups. This parameter is valid only when modifying the
@@ -34904,12 +34911,12 @@ module Aws::EC2
     # `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`.
     #
     # This setting applies to the IAM user who makes the request; it does
-    # not apply to the entire AWS account. By default, an IAM user defaults
-    # to the same settings as the root user. If you're using this action as
-    # the root user, then these settings apply to the entire account, unless
-    # an IAM user explicitly overrides these settings for themselves. For
-    # more information, see [Resource IDs][1] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # not apply to the entire Amazon Web Services account. By default, an
+    # IAM user defaults to the same settings as the root user. If you're
+    # using this action as the root user, then these settings apply to the
+    # entire account, unless an IAM user explicitly overrides these settings
+    # for themselves. For more information, see [Resource IDs][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     # Resources created with longer IDs are visible to all IAM roles and
     # users, regardless of these settings and provided that they have
@@ -36574,13 +36581,6 @@ module Aws::EC2
     # `RemoveNetworkServices` to remove the network services from the
     # Traffic Mirror filter.
     #
-    # For information about filter rule properties, see [Network
-    # Services][1] in the <i>Traffic Mirroring User Guide </i>.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/mirroring/traffic-mirroring-considerations.html
-    #
     # @option params [required, String] :traffic_mirror_filter_id
     #   The ID of the Traffic Mirror filter.
     #
@@ -36666,7 +36666,7 @@ module Aws::EC2
     #   The ID of the Traffic Mirror rule.
     #
     # @option params [String] :traffic_direction
-    #   The type of traffic (`ingress` \| `egress`) to assign to the rule.
+    #   The type of traffic to assign to the rule.
     #
     # @option params [Integer] :rule_number
     #   The number of the Traffic Mirror rule. This number must be unique for
@@ -37556,7 +37556,7 @@ module Aws::EC2
 
     # Modifies the permissions for your [VPC endpoint service][1]. You can
     # add or remove permissions for service consumers (IAM users, IAM roles,
-    # and AWS accounts) to connect to your endpoint service.
+    # and Amazon Web Services accounts) to connect to your endpoint service.
     #
     # If you grant permissions to all principals, the service is public. Any
     # users who know the name of a public service can send a request to
@@ -39458,22 +39458,14 @@ module Aws::EC2
     #
     # @option params [String] :network_border_group
     #   The set of Availability Zones, Local Zones, or Wavelength Zones from
-    #   which AWS advertises IP addresses.
+    #   which Amazon Web Services advertises IP addresses.
     #
-    #   If you provide an incorrect network border group, you will receive an
-    #   `InvalidAddress.NotFound` error. For more information, see [Error
-    #   Codes][1].
+    #   If you provide an incorrect network border group, you receive an
+    #   `InvalidAddress.NotFound` error.
     #
-    #   <note markdown="1"> You cannot use a network border group with EC2 Classic. If you attempt
-    #   this operation on EC2 classic, you will receive an
-    #   `InvalidParameterCombination` error. For more information, see [Error
-    #   Codes][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
+    #   You cannot use a network border group with EC2 Classic. If you attempt
+    #   this operation on EC2 classic, you receive an
+    #   `InvalidParameterCombination` error.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -44169,7 +44161,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.267.0'
+      context[:gem_version] = '1.268.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.268.0 (2021-10-11)
+------------------
+
+* Feature - Documentation update for Amazon EC2.
+
 1.267.0 (2021-10-08)
 ------------------
 

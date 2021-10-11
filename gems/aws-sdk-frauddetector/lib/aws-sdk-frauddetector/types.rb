@@ -160,6 +160,80 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # The batch import job details.
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the batch import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the batch import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason batch import job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   Timestamp of when the batch import job started.
+    #   @return [String]
+    #
+    # @!attribute [rw] completion_time
+    #   Timestamp of when batch import job completed.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_path
+    #   The Amazon S3 location of your data file for batch import.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_path
+    #   The Amazon S3 location of your output file.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The name of the event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role to use for this job request.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the batch import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] processed_records_count
+    #   The number of records processed by batch import job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_records_count
+    #   The number of records that failed to import.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_records_count
+    #   The total number of records in the batch import job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/BatchImport AWS API Documentation
+    #
+    class BatchImport < Struct.new(
+      :job_id,
+      :status,
+      :failure_reason,
+      :start_time,
+      :completion_time,
+      :input_path,
+      :output_path,
+      :event_type_name,
+      :iam_role_arn,
+      :arn,
+      :processed_records_count,
+      :failed_records_count,
+      :total_records_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The batch prediction details.
     #
     # @!attribute [rw] job_id
@@ -179,7 +253,7 @@ module Aws::FraudDetector
     #   @return [String]
     #
     # @!attribute [rw] completion_time
-    #   Timestamp of when the batch prediction job comleted.
+    #   Timestamp of when the batch prediction job completed.
     #   @return [String]
     #
     # @!attribute [rw] last_heartbeat_time
@@ -245,6 +319,32 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelBatchImportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of an in-progress batch import job to cancel.
+    #
+    #   Amazon Fraud Detector will throw an error if the batch import job is
+    #   in `FAILED`, `CANCELED`, or `COMPLETED` state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CancelBatchImportJobRequest AWS API Documentation
+    #
+    class CancelBatchImportJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CancelBatchImportJobResult AWS API Documentation
+    #
+    class CancelBatchImportJobResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CancelBatchPredictionJobRequest
     #   data as a hash:
     #
@@ -269,18 +369,7 @@ module Aws::FraudDetector
     class CancelBatchPredictionJobResult < Aws::EmptyStructure; end
 
     # An exception indicating there was a conflict during a delete
-    # operation. The following delete operations can cause a conflict
-    # exception:
-    #
-    # * DeleteDetector: A conflict exception will occur if the detector has
-    #   associated `Rules` or `DetectorVersions`. You can only delete a
-    #   detector if it has no `Rules` or `DetectorVersions`.
-    #
-    # * DeleteDetectorVersion: A conflict exception will occur if the
-    #   `DetectorVersion` status is `ACTIVE`.
-    #
-    # * DeleteRule: A conflict exception will occur if the `RuleVersion` is
-    #   in use by an associated `ACTIVE` or `INACTIVE DetectorVersion`.
+    # operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -292,6 +381,68 @@ module Aws::FraudDetector
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CreateBatchImportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier", # required
+    #         input_path: "s3BucketLocation", # required
+    #         output_path: "s3BucketLocation", # required
+    #         event_type_name: "identifier", # required
+    #         iam_role_arn: "iamRoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "tagKey", # required
+    #             value: "tagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the batch import job. The ID cannot be of a past job,
+    #   unless the job exists in `CREATE_FAILED` state.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_path
+    #   The URI that points to the Amazon S3 location of your data file.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_path
+    #   The URI that points to the Amazon S3 location for storing your
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The name of the event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role created for Amazon S3 bucket that holds your
+    #   data file. The IAM role must have read and write permissions to both
+    #   input and output S3 buckets.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs associated with this request.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateBatchImportJobRequest AWS API Documentation
+    #
+    class CreateBatchImportJobRequest < Struct.new(
+      :job_id,
+      :input_path,
+      :output_path,
+      :event_type_name,
+      :iam_role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateBatchImportJobResult AWS API Documentation
+    #
+    class CreateBatchImportJobResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateBatchPredictionJobRequest
     #   data as a hash:
@@ -380,8 +531,8 @@ module Aws::FraudDetector
     #         model_versions: [
     #           {
     #             model_id: "modelIdentifier", # required
-    #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
-    #             model_version_number: "nonEmptyString", # required
+    #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #             model_version_number: "floatVersionString", # required
     #             arn: "fraudDetectorArn",
     #           },
     #         ],
@@ -478,7 +629,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #         description: "description",
     #         event_type_name: "string", # required
     #         tags: [
@@ -530,19 +681,26 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
-    #         training_data_source: "EXTERNAL_EVENTS", # required, accepts EXTERNAL_EVENTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         training_data_source: "EXTERNAL_EVENTS", # required, accepts EXTERNAL_EVENTS, INGESTED_EVENTS
     #         training_data_schema: { # required
     #           model_variables: ["string"], # required
     #           label_schema: { # required
     #             label_mapper: { # required
     #               "string" => ["string"],
     #             },
+    #             unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
     #           },
     #         },
     #         external_events_detail: {
     #           data_location: "s3BucketLocation", # required
     #           data_access_role_arn: "iamRoleArn", # required
+    #         },
+    #         ingested_events_detail: {
+    #           ingested_events_time_window: { # required
+    #             start_time: "time", # required
+    #             end_time: "time", # required
+    #           },
     #         },
     #         tags: [
     #           {
@@ -569,9 +727,14 @@ module Aws::FraudDetector
     #   @return [Types::TrainingDataSchema]
     #
     # @!attribute [rw] external_events_detail
-    #   Details for the external events data used for model version
-    #   training. Required if `trainingDataSource` is `EXTERNAL_EVENTS`.
+    #   Details of the external events data used for model version training.
+    #   Required if `trainingDataSource` is `EXTERNAL_EVENTS`.
     #   @return [Types::ExternalEventsDetail]
+    #
+    # @!attribute [rw] ingested_events_detail
+    #   Details of the ingested events data used for model version training.
+    #   Required if `trainingDataSource` is `INGESTED_EVENTS`.
+    #   @return [Types::IngestedEventsDetail]
     #
     # @!attribute [rw] tags
     #   A collection of key and value pairs.
@@ -585,6 +748,7 @@ module Aws::FraudDetector
       :training_data_source,
       :training_data_schema,
       :external_events_detail,
+      :ingested_events_detail,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -786,6 +950,29 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteBatchImportJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the batch import job to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteBatchImportJobRequest AWS API Documentation
+    #
+    class DeleteBatchImportJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteBatchImportJobResult AWS API Documentation
+    #
+    class DeleteBatchImportJobResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteBatchPredictionJobRequest
     #   data as a hash:
     #
@@ -890,6 +1077,7 @@ module Aws::FraudDetector
     #       {
     #         event_id: "identifier", # required
     #         event_type_name: "identifier", # required
+    #         delete_audit_history: false,
     #       }
     #
     # @!attribute [rw] event_id
@@ -900,11 +1088,17 @@ module Aws::FraudDetector
     #   The name of the event type.
     #   @return [String]
     #
+    # @!attribute [rw] delete_audit_history
+    #   Specifies whether or not to delete any predictions associated with
+    #   the event.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventRequest AWS API Documentation
     #
     class DeleteEventRequest < Struct.new(
       :event_id,
-      :event_type_name)
+      :event_type_name,
+      :delete_audit_history)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -935,6 +1129,42 @@ module Aws::FraudDetector
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventTypeResult AWS API Documentation
     #
     class DeleteEventTypeResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteEventsByEventTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_type_name: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] event_type_name
+    #   The name of the event type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventsByEventTypeRequest AWS API Documentation
+    #
+    class DeleteEventsByEventTypeRequest < Struct.new(
+      :event_type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_type_name
+    #   Name of event type for which to delete the events.
+    #   @return [String]
+    #
+    # @!attribute [rw] events_deletion_status
+    #   The status of the delete request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventsByEventTypeResult AWS API Documentation
+    #
+    class DeleteEventsByEventTypeResult < Struct.new(
+      :event_type_name,
+      :events_deletion_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteExternalModelRequest
     #   data as a hash:
@@ -987,7 +1217,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #       }
     #
     # @!attribute [rw] model_id
@@ -1016,7 +1246,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #         model_version_number: "floatVersionString", # required
     #       }
     #
@@ -1183,7 +1413,7 @@ module Aws::FraudDetector
     #       {
     #         model_id: "modelIdentifier",
     #         model_version_number: "floatVersionString",
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #         next_token: "string",
     #         max_results: 1,
     #       }
@@ -1312,7 +1542,7 @@ module Aws::FraudDetector
     #
     #       {
     #         entity_type: "string", # required
-    #         entity_id: "identifier", # required
+    #         entity_id: "entityRestrictedString", # required
     #       }
     #
     # @!attribute [rw] entity_type
@@ -1367,6 +1597,54 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # The event details.
+    #
+    # @!attribute [rw] event_id
+    #   The event ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_timestamp
+    #   The timestamp that defines when the event under evaluation occurred.
+    #   The timestamp must be specified using ISO 8601 standard in UTC.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_variables
+    #   Names of the event type's variables you defined in Amazon Fraud
+    #   Detector to represent data elements and their corresponding values
+    #   for the event you are sending for evaluation.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] current_label
+    #   The label associated with the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_timestamp
+    #   The timestamp associated with the label to update. The timestamp
+    #   must be specified using ISO 8601 standard in UTC.
+    #   @return [String]
+    #
+    # @!attribute [rw] entities
+    #   The event entities.
+    #   @return [Array<Types::Entity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/Event AWS API Documentation
+    #
+    class Event < Struct.new(
+      :event_id,
+      :event_type_name,
+      :event_timestamp,
+      :event_variables,
+      :current_label,
+      :label_timestamp,
+      :entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The event type details.
     #
     # @!attribute [rw] name
@@ -1389,6 +1667,18 @@ module Aws::FraudDetector
     #   The event type entity types.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] event_ingestion
+    #   If `Enabled`, Amazon Fraud Detector stores event data when you
+    #   generate a prediction and uses that data to update calculated
+    #   variables in near real-time. Amazon Fraud Detector uses this data,
+    #   known as `INGESTED_EVENTS`, to train your model and improve fraud
+    #   predictions.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingested_event_statistics
+    #   Data about the stored events.
+    #   @return [Types::IngestedEventStatistics]
+    #
     # @!attribute [rw] last_updated_time
     #   Timestamp of when the event type was last updated.
     #   @return [String]
@@ -1409,6 +1699,8 @@ module Aws::FraudDetector
       :event_variables,
       :labels,
       :entity_types,
+      :event_ingestion,
+      :ingested_event_statistics,
       :last_updated_time,
       :created_time,
       :arn)
@@ -1594,6 +1886,54 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetBatchImportJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "identifier",
+    #         max_results: 1,
+    #         next_token: "string",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the batch import job to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects to return for request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The next token from the previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetBatchImportJobsRequest AWS API Documentation
+    #
+    class GetBatchImportJobsRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] batch_imports
+    #   An array containing the details of each batch import job.
+    #   @return [Array<Types::BatchImport>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token for the subsequent resquest.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetBatchImportJobsResult AWS API Documentation
+    #
+    class GetBatchImportJobsResult < Struct.new(
+      :batch_imports,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetBatchPredictionJobsRequest
     #   data as a hash:
     #
@@ -1638,6 +1978,42 @@ module Aws::FraudDetector
     class GetBatchPredictionJobsResult < Struct.new(
       :batch_predictions,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDeleteEventsByEventTypeStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_type_name: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] event_type_name
+    #   Name of event type for which to get the deletion status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetDeleteEventsByEventTypeStatusRequest AWS API Documentation
+    #
+    class GetDeleteEventsByEventTypeStatusRequest < Struct.new(
+      :event_type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_type_name
+    #   The event type name.
+    #   @return [String]
+    #
+    # @!attribute [rw] events_deletion_status
+    #   The deletion status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetDeleteEventsByEventTypeStatusResult AWS API Documentation
+    #
+    class GetDeleteEventsByEventTypeStatusResult < Struct.new(
+      :event_type_name,
+      :events_deletion_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1847,7 +2223,7 @@ module Aws::FraudDetector
     #         entities: [ # required
     #           {
     #             entity_type: "string", # required
-    #             entity_id: "identifier", # required
+    #             entity_id: "entityRestrictedString", # required
     #           },
     #         ],
     #         event_timestamp: "utcTimestampISO8601", # required
@@ -1855,7 +2231,7 @@ module Aws::FraudDetector
     #           "variableName" => "variableValue",
     #         },
     #         external_model_endpoint_data_blobs: {
-    #           "string" => {
+    #           "sageMakerEndpointIdentifier" => {
     #             byte_buffer: "data",
     #             content_type: "contentType",
     #           },
@@ -1886,7 +2262,8 @@ module Aws::FraudDetector
     #   @return [Array<Types::Entity>]
     #
     # @!attribute [rw] event_timestamp
-    #   Timestamp that defines when the event under evaluation occurred.
+    #   Timestamp that defines when the event under evaluation occurred. The
+    #   timestamp must be specified using ISO 8601 standard in UTC.
     #   @return [String]
     #
     # @!attribute [rw] event_variables
@@ -1894,13 +2271,10 @@ module Aws::FraudDetector
     #   Detector to represent data elements and their corresponding values
     #   for the event you are sending for evaluation.
     #
-    #   * You must provide at least one eventVariable
+    #   You must provide at least one eventVariable
     #
-    #   * If detectorVersion is associated with a modelVersion, you must
-    #     provide at least one associated eventVariable
-    #
-    #   To ensure highest possible fraud prediction and to simplify your
-    #   data preparation, Amazon Fraud Detector will replace all missing
+    #   To ensure most accurate fraud prediction and to simplify your data
+    #   preparation, Amazon Fraud Detector will replace all missing
     #   variables or values as follows:
     #
     #   **For Amazon Fraud Detector trained models:**
@@ -1911,7 +2285,7 @@ module Aws::FraudDetector
     #   calculated default mean/medians for numeric variables and with
     #   special values for categorical variables.
     #
-    #   **For External models ( for example, imported SageMaker):**
+    #   **For imported SageMaker models:**
     #
     #   If a null value is provided explicitly for a variable, the model and
     #   rules will use “null” as the value. If a variable is not provided
@@ -1961,6 +2335,43 @@ module Aws::FraudDetector
       :model_scores,
       :rule_results,
       :external_model_outputs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetEventRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_id: "string", # required
+    #         event_type_name: "string", # required
+    #       }
+    #
+    # @!attribute [rw] event_id
+    #   The ID of the event to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The event type of the event to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetEventRequest AWS API Documentation
+    #
+    class GetEventRequest < Struct.new(
+      :event_id,
+      :event_type_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event
+    #   The details of the event.
+    #   @return [Types::Event]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetEventResult AWS API Documentation
+    #
+    class GetEventResult < Struct.new(
+      :event)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2126,7 +2537,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #         model_version_number: "floatVersionString", # required
     #       }
     #
@@ -2173,8 +2584,16 @@ module Aws::FraudDetector
     #   @return [Types::TrainingDataSchema]
     #
     # @!attribute [rw] external_events_detail
-    #   The event details.
+    #   The details of the external events data used for training the model
+    #   version. This will be populated if the `trainingDataSource` is
+    #   `EXTERNAL_EVENTS`
     #   @return [Types::ExternalEventsDetail]
+    #
+    # @!attribute [rw] ingested_events_detail
+    #   The details of the ingested events data used for training the model
+    #   version. This will be populated if the `trainingDataSource` is
+    #   `INGESTED_EVENTS`.
+    #   @return [Types::IngestedEventsDetail]
     #
     # @!attribute [rw] status
     #   The model version status.
@@ -2213,6 +2632,7 @@ module Aws::FraudDetector
       :training_data_source,
       :training_data_schema,
       :external_events_detail,
+      :ingested_events_detail,
       :status,
       :arn)
       SENSITIVE = []
@@ -2224,7 +2644,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier",
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #         next_token: "string",
     #         max_results: 1,
     #       }
@@ -2429,6 +2849,91 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # Data about the stored events.
+    #
+    # @!attribute [rw] number_of_events
+    #   The number of stored events.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] event_data_size_in_bytes
+    #   The total size of the stored events.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] least_recent_event
+    #   The oldest stored event.
+    #   @return [String]
+    #
+    # @!attribute [rw] most_recent_event
+    #   The newest stored event.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   Timestamp of when the stored event was last updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/IngestedEventStatistics AWS API Documentation
+    #
+    class IngestedEventStatistics < Struct.new(
+      :number_of_events,
+      :event_data_size_in_bytes,
+      :least_recent_event,
+      :most_recent_event,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the ingested event.
+    #
+    # @note When making an API call, you may pass IngestedEventsDetail
+    #   data as a hash:
+    #
+    #       {
+    #         ingested_events_time_window: { # required
+    #           start_time: "time", # required
+    #           end_time: "time", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ingested_events_time_window
+    #   The start and stop time of the ingested events.
+    #   @return [Types::IngestedEventsTimeWindow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/IngestedEventsDetail AWS API Documentation
+    #
+    class IngestedEventsDetail < Struct.new(
+      :ingested_events_time_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The start and stop time of the ingested events.
+    #
+    # @note When making an API call, you may pass IngestedEventsTimeWindow
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: "time", # required
+    #         end_time: "time", # required
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   Timestamp of the first ingensted event.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   Timestamp of the final ingested event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/IngestedEventsTimeWindow AWS API Documentation
+    #
+    class IngestedEventsTimeWindow < Struct.new(
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An exception indicating an internal server error.
     #
     # @!attribute [rw] message
@@ -2499,6 +3004,7 @@ module Aws::FraudDetector
     #         label_mapper: { # required
     #           "string" => ["string"],
     #         },
+    #         unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
     #       }
     #
     # @!attribute [rw] label_mapper
@@ -2513,10 +3019,15 @@ module Aws::FraudDetector
     #   for a single Amazon Fraud Detector label.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] unlabeled_events_treatment
+    #   The action to take for unlabeled events.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/LabelSchema AWS API Documentation
     #
     class LabelSchema < Struct.new(
-      :label_mapper)
+      :label_mapper,
+      :unlabeled_events_treatment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2716,8 +3227,8 @@ module Aws::FraudDetector
     #         event_type_name: "identifier",
     #         format: "TEXT_CSV", # accepts TEXT_CSV, APPLICATION_JSON
     #         use_event_variables: false, # required
-    #         json_input_template: "string",
-    #         csv_input_template: "string",
+    #         json_input_template: "modelInputTemplate",
+    #         csv_input_template: "modelInputTemplate",
     #       }
     #
     # @!attribute [rw] event_type_name
@@ -2825,8 +3336,8 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
-    #         model_version_number: "nonEmptyString", # required
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_version_number: "floatVersionString", # required
     #         arn: "fraudDetectorArn",
     #       }
     #
@@ -2884,8 +3395,16 @@ module Aws::FraudDetector
     #   @return [Types::TrainingDataSchema]
     #
     # @!attribute [rw] external_events_detail
-    #   The event details.
+    #   The external events data details. This will be populated if the
+    #   `trainingDataSource` for the model version is specified as
+    #   `EXTERNAL_EVENTS`.
     #   @return [Types::ExternalEventsDetail]
+    #
+    # @!attribute [rw] ingested_events_detail
+    #   The ingested events data details. This will be populated if the
+    #   `trainingDataSource` for the model version is specified as
+    #   `INGESTED_EVENTS`.
+    #   @return [Types::IngestedEventsDetail]
     #
     # @!attribute [rw] training_result
     #   The training results.
@@ -2913,6 +3432,7 @@ module Aws::FraudDetector
       :training_data_source,
       :training_data_schema,
       :external_events_detail,
+      :ingested_events_detail,
       :training_result,
       :last_updated_time,
       :created_time,
@@ -3050,6 +3570,7 @@ module Aws::FraudDetector
     #         event_variables: ["string"], # required
     #         labels: ["string"],
     #         entity_types: ["string"], # required
+    #         event_ingestion: "ENABLED", # accepts ENABLED, DISABLED
     #         tags: [
     #           {
     #             key: "tagKey", # required
@@ -3079,6 +3600,10 @@ module Aws::FraudDetector
     #   merchant, account.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] event_ingestion
+    #   Specifies if ingenstion is enabled or disabled.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A collection of key and value pairs.
     #   @return [Array<Types::Tag>]
@@ -3091,6 +3616,7 @@ module Aws::FraudDetector
       :event_variables,
       :labels,
       :entity_types,
+      :event_ingestion,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -3111,8 +3637,8 @@ module Aws::FraudDetector
     #           event_type_name: "identifier",
     #           format: "TEXT_CSV", # accepts TEXT_CSV, APPLICATION_JSON
     #           use_event_variables: false, # required
-    #           json_input_template: "string",
-    #           csv_input_template: "string",
+    #           json_input_template: "modelInputTemplate",
+    #           csv_input_template: "modelInputTemplate",
     #         },
     #         output_configuration: { # required
     #           format: "TEXT_CSV", # required, accepts TEXT_CSV, APPLICATION_JSONLINES
@@ -3280,9 +3806,7 @@ module Aws::FraudDetector
     #
     class PutOutcomeResult < Aws::EmptyStructure; end
 
-    # An exception indicating the specified resource was not found. This can
-    # occur if you submit a request, such as `CreateBatchPredictionJob`, but
-    # the detector name or version does not exist.
+    # An exception indicating the specified resource was not found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3420,6 +3944,77 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SendEventRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_id: "identifier", # required
+    #         event_type_name: "identifier", # required
+    #         event_timestamp: "utcTimestampISO8601", # required
+    #         event_variables: { # required
+    #           "variableName" => "variableValue",
+    #         },
+    #         assigned_label: "identifier",
+    #         label_timestamp: "utcTimestampISO8601",
+    #         entities: [ # required
+    #           {
+    #             entity_type: "string", # required
+    #             entity_id: "entityRestrictedString", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] event_id
+    #   The event ID to upload.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The event type name of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_timestamp
+    #   The timestamp that defines when the event under evaluation occurred.
+    #   The timestamp must be specified using ISO 8601 standard in UTC.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_variables
+    #   Names of the event type's variables you defined in Amazon Fraud
+    #   Detector to represent data elements and their corresponding values
+    #   for the event you are sending for evaluation.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] assigned_label
+    #   The label to associate with the event. Required if specifying
+    #   `labelTimestamp`.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_timestamp
+    #   The timestamp associated with the label. Required if specifying
+    #   `assignedLabel`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entities
+    #   An array of entities.
+    #   @return [Array<Types::Entity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/SendEventRequest AWS API Documentation
+    #
+    class SendEventRequest < Struct.new(
+      :event_id,
+      :event_type_name,
+      :event_timestamp,
+      :event_variables,
+      :assigned_label,
+      :label_timestamp,
+      :entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/SendEventResult AWS API Documentation
+    #
+    class SendEventResult < Aws::EmptyStructure; end
+
     # A key and value pair.
     #
     # @note When making an API call, you may pass Tag
@@ -3505,6 +4100,7 @@ module Aws::FraudDetector
     #           label_mapper: { # required
     #             "string" => ["string"],
     #           },
+    #           unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
     #         },
     #       }
     #
@@ -3653,8 +4249,8 @@ module Aws::FraudDetector
     #         model_versions: [
     #           {
     #             model_id: "modelIdentifier", # required
-    #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
-    #             model_version_number: "nonEmptyString", # required
+    #             model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #             model_version_number: "floatVersionString", # required
     #             arn: "fraudDetectorArn",
     #           },
     #         ],
@@ -3755,12 +4351,54 @@ module Aws::FraudDetector
     #
     class UpdateDetectorVersionStatusResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateEventLabelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_id: "identifier", # required
+    #         event_type_name: "identifier", # required
+    #         assigned_label: "identifier", # required
+    #         label_timestamp: "utcTimestampISO8601", # required
+    #       }
+    #
+    # @!attribute [rw] event_id
+    #   The ID of the event associated with the label to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The event type of the event associated with the label to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] assigned_label
+    #   The new label to assign to the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_timestamp
+    #   The timestamp associated with the label. The timestamp must be
+    #   specified using ISO 8601 standard in UTC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateEventLabelRequest AWS API Documentation
+    #
+    class UpdateEventLabelRequest < Struct.new(
+      :event_id,
+      :event_type_name,
+      :assigned_label,
+      :label_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateEventLabelResult AWS API Documentation
+    #
+    class UpdateEventLabelResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateModelRequest
     #   data as a hash:
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #         description: "description",
     #       }
     #
@@ -3795,11 +4433,17 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #         major_version_number: "wholeNumberVersionString", # required
     #         external_events_detail: {
     #           data_location: "s3BucketLocation", # required
     #           data_access_role_arn: "iamRoleArn", # required
+    #         },
+    #         ingested_events_detail: {
+    #           ingested_events_time_window: { # required
+    #             start_time: "time", # required
+    #             end_time: "time", # required
+    #           },
     #         },
     #         tags: [
     #           {
@@ -3822,8 +4466,14 @@ module Aws::FraudDetector
     #   @return [String]
     #
     # @!attribute [rw] external_events_detail
-    #   The event details.
+    #   The details of the external events data used for training the model
+    #   version. Required if `trainingDataSource` is `EXTERNAL_EVENTS`.
     #   @return [Types::ExternalEventsDetail]
+    #
+    # @!attribute [rw] ingested_events_detail
+    #   The details of the ingested event used for training the model
+    #   version. Required if your `trainingDataSource` is `INGESTED_EVENTS`.
+    #   @return [Types::IngestedEventsDetail]
     #
     # @!attribute [rw] tags
     #   A collection of key and value pairs.
@@ -3836,6 +4486,7 @@ module Aws::FraudDetector
       :model_type,
       :major_version_number,
       :external_events_detail,
+      :ingested_events_detail,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -3873,7 +4524,7 @@ module Aws::FraudDetector
     #
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #         model_version_number: "floatVersionString", # required
     #         status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, TRAINING_CANCELLED
     #       }

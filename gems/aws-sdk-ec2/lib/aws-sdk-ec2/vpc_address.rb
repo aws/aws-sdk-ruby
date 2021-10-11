@@ -92,7 +92,8 @@ module Aws::EC2
     end
 
     # The name of the unique set of Availability Zones, Local Zones, or
-    # Wavelength Zones from which AWS advertises IP addresses.
+    # Wavelength Zones from which Amazon Web Services advertises IP
+    # addresses.
     # @return [String]
     def network_border_group
       data[:network_border_group]
@@ -314,22 +315,14 @@ module Aws::EC2
     #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
     # @option options [String] :network_border_group
     #   The set of Availability Zones, Local Zones, or Wavelength Zones from
-    #   which AWS advertises IP addresses.
+    #   which Amazon Web Services advertises IP addresses.
     #
-    #   If you provide an incorrect network border group, you will receive an
-    #   `InvalidAddress.NotFound` error. For more information, see [Error
-    #   Codes][1].
+    #   If you provide an incorrect network border group, you receive an
+    #   `InvalidAddress.NotFound` error.
     #
-    #   <note markdown="1"> You cannot use a network border group with EC2 Classic. If you attempt
-    #   this operation on EC2 classic, you will receive an
-    #   `InvalidParameterCombination` error. For more information, see [Error
-    #   Codes][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
+    #   You cannot use a network border group with EC2 Classic. If you attempt
+    #   this operation on EC2 classic, you receive an
+    #   `InvalidParameterCombination` error.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

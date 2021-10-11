@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2021-10-11)
+------------------
+
+* Feature - This release adds support for Transport Stream files as an input type to MediaLive encoders.
+
 1.76.0 (2021-09-01)
 ------------------
 

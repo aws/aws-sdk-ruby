@@ -62,6 +62,7 @@ module Aws::MediaLive
     AudioTrack = Shapes::StructureShape.new(name: 'AudioTrack')
     AudioTrackSelection = Shapes::StructureShape.new(name: 'AudioTrackSelection')
     AudioType = Shapes::StringShape.new(name: 'AudioType')
+    AudioWatermarkSettings = Shapes::StructureShape.new(name: 'AudioWatermarkSettings')
     AuthenticationScheme = Shapes::StringShape.new(name: 'AuthenticationScheme')
     AutomaticInputFailoverSettings = Shapes::StructureShape.new(name: 'AutomaticInputFailoverSettings')
     AvailBlanking = Shapes::StructureShape.new(name: 'AvailBlanking')
@@ -117,6 +118,8 @@ module Aws::MediaLive
     ChannelEgressEndpoint = Shapes::StructureShape.new(name: 'ChannelEgressEndpoint')
     ChannelState = Shapes::StringShape.new(name: 'ChannelState')
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
+    ClaimDeviceRequest = Shapes::StructureShape.new(name: 'ClaimDeviceRequest')
+    ClaimDeviceResponse = Shapes::StructureShape.new(name: 'ClaimDeviceResponse')
     ColorSpacePassthroughSettings = Shapes::StructureShape.new(name: 'ColorSpacePassthroughSettings')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
@@ -496,8 +499,13 @@ module Aws::MediaLive
     MultiplexVideoSettings = Shapes::StructureShape.new(name: 'MultiplexVideoSettings')
     NetworkInputServerValidation = Shapes::StringShape.new(name: 'NetworkInputServerValidation')
     NetworkInputSettings = Shapes::StructureShape.new(name: 'NetworkInputSettings')
+    NielsenCBET = Shapes::StructureShape.new(name: 'NielsenCBET')
     NielsenConfiguration = Shapes::StructureShape.new(name: 'NielsenConfiguration')
+    NielsenNaesIiNw = Shapes::StructureShape.new(name: 'NielsenNaesIiNw')
     NielsenPcmToId3TaggingState = Shapes::StringShape.new(name: 'NielsenPcmToId3TaggingState')
+    NielsenWatermarksCbetStepaside = Shapes::StringShape.new(name: 'NielsenWatermarksCbetStepaside')
+    NielsenWatermarksDistributionTypes = Shapes::StringShape.new(name: 'NielsenWatermarksDistributionTypes')
+    NielsenWatermarksSettings = Shapes::StructureShape.new(name: 'NielsenWatermarksSettings')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     Offering = Shapes::StructureShape.new(name: 'Offering')
     OfferingDurationUnits = Shapes::StringShape.new(name: 'OfferingDurationUnits')
@@ -674,6 +682,7 @@ module Aws::MediaLive
     __doubleMin0Max1 = Shapes::FloatShape.new(name: '__doubleMin0Max1')
     __doubleMin0Max100 = Shapes::FloatShape.new(name: '__doubleMin0Max100')
     __doubleMin1 = Shapes::FloatShape.new(name: '__doubleMin1')
+    __doubleMin1Max65535 = Shapes::FloatShape.new(name: '__doubleMin1Max65535')
     __doubleMinNegative59Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative59Max0')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin0 = Shapes::IntegerShape.new(name: '__integerMin0')
@@ -788,6 +797,8 @@ module Aws::MediaLive
     __stringMin1Max255 = Shapes::StringShape.new(name: '__stringMin1Max255')
     __stringMin1Max256 = Shapes::StringShape.new(name: '__stringMin1Max256')
     __stringMin1Max35 = Shapes::StringShape.new(name: '__stringMin1Max35')
+    __stringMin1Max7 = Shapes::StringShape.new(name: '__stringMin1Max7')
+    __stringMin2Max2 = Shapes::StringShape.new(name: '__stringMin2Max2')
     __stringMin32Max32 = Shapes::StringShape.new(name: '__stringMin32Max32')
     __stringMin34Max34 = Shapes::StringShape.new(name: '__stringMin34Max34')
     __stringMin3Max3 = Shapes::StringShape.new(name: '__stringMin3Max3')
@@ -867,6 +878,7 @@ module Aws::MediaLive
     AudioDescription.add_member(:audio_selector_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "audioSelectorName"))
     AudioDescription.add_member(:audio_type, Shapes::ShapeRef.new(shape: AudioType, location_name: "audioType"))
     AudioDescription.add_member(:audio_type_control, Shapes::ShapeRef.new(shape: AudioDescriptionAudioTypeControl, location_name: "audioTypeControl"))
+    AudioDescription.add_member(:audio_watermarking_settings, Shapes::ShapeRef.new(shape: AudioWatermarkSettings, location_name: "audioWatermarkingSettings"))
     AudioDescription.add_member(:codec_settings, Shapes::ShapeRef.new(shape: AudioCodecSettings, location_name: "codecSettings"))
     AudioDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: __stringMin1Max35, location_name: "languageCode"))
     AudioDescription.add_member(:language_code_control, Shapes::ShapeRef.new(shape: AudioDescriptionLanguageCodeControl, location_name: "languageCodeControl"))
@@ -916,6 +928,9 @@ module Aws::MediaLive
 
     AudioTrackSelection.add_member(:tracks, Shapes::ShapeRef.new(shape: __listOfAudioTrack, required: true, location_name: "tracks"))
     AudioTrackSelection.struct_class = Types::AudioTrackSelection
+
+    AudioWatermarkSettings.add_member(:nielsen_watermarks_settings, Shapes::ShapeRef.new(shape: NielsenWatermarksSettings, location_name: "nielsenWatermarksSettings"))
+    AudioWatermarkSettings.struct_class = Types::AudioWatermarkSettings
 
     AutomaticInputFailoverSettings.add_member(:error_clear_time_msec, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "errorClearTimeMsec"))
     AutomaticInputFailoverSettings.add_member(:failover_conditions, Shapes::ShapeRef.new(shape: __listOfFailoverCondition, location_name: "failoverConditions"))
@@ -1151,6 +1166,11 @@ module Aws::MediaLive
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ChannelSummary.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
     ChannelSummary.struct_class = Types::ChannelSummary
+
+    ClaimDeviceRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    ClaimDeviceRequest.struct_class = Types::ClaimDeviceRequest
+
+    ClaimDeviceResponse.struct_class = Types::ClaimDeviceResponse
 
     ColorSpacePassthroughSettings.struct_class = Types::ColorSpacePassthroughSettings
 
@@ -2488,9 +2508,23 @@ module Aws::MediaLive
     NetworkInputSettings.add_member(:server_validation, Shapes::ShapeRef.new(shape: NetworkInputServerValidation, location_name: "serverValidation"))
     NetworkInputSettings.struct_class = Types::NetworkInputSettings
 
+    NielsenCBET.add_member(:cbet_check_digit_string, Shapes::ShapeRef.new(shape: __stringMin2Max2, required: true, location_name: "cbetCheckDigitString"))
+    NielsenCBET.add_member(:cbet_stepaside, Shapes::ShapeRef.new(shape: NielsenWatermarksCbetStepaside, required: true, location_name: "cbetStepaside"))
+    NielsenCBET.add_member(:csid, Shapes::ShapeRef.new(shape: __stringMin1Max7, required: true, location_name: "csid"))
+    NielsenCBET.struct_class = Types::NielsenCBET
+
     NielsenConfiguration.add_member(:distributor_id, Shapes::ShapeRef.new(shape: __string, location_name: "distributorId"))
     NielsenConfiguration.add_member(:nielsen_pcm_to_id_3_tagging, Shapes::ShapeRef.new(shape: NielsenPcmToId3TaggingState, location_name: "nielsenPcmToId3Tagging"))
     NielsenConfiguration.struct_class = Types::NielsenConfiguration
+
+    NielsenNaesIiNw.add_member(:check_digit_string, Shapes::ShapeRef.new(shape: __stringMin2Max2, required: true, location_name: "checkDigitString"))
+    NielsenNaesIiNw.add_member(:sid, Shapes::ShapeRef.new(shape: __doubleMin1Max65535, required: true, location_name: "sid"))
+    NielsenNaesIiNw.struct_class = Types::NielsenNaesIiNw
+
+    NielsenWatermarksSettings.add_member(:nielsen_cbet_settings, Shapes::ShapeRef.new(shape: NielsenCBET, location_name: "nielsenCbetSettings"))
+    NielsenWatermarksSettings.add_member(:nielsen_distribution_type, Shapes::ShapeRef.new(shape: NielsenWatermarksDistributionTypes, location_name: "nielsenDistributionType"))
+    NielsenWatermarksSettings.add_member(:nielsen_naes_ii_nw_settings, Shapes::ShapeRef.new(shape: NielsenNaesIiNw, location_name: "nielsenNaesIiNwSettings"))
+    NielsenWatermarksSettings.struct_class = Types::NielsenWatermarksSettings
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
@@ -3336,6 +3370,22 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:claim_device, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ClaimDevice"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/claimDevice"
+        o.input = Shapes::ShapeRef.new(shape: ClaimDeviceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ClaimDeviceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:create_channel, Seahorse::Model::Operation.new.tap do |o|

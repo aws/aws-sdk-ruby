@@ -263,6 +263,7 @@ module Aws::ElasticLoadBalancingV2
     TargetGroupAttributeKey = Shapes::StringShape.new(name: 'TargetGroupAttributeKey')
     TargetGroupAttributeValue = Shapes::StringShape.new(name: 'TargetGroupAttributeValue')
     TargetGroupAttributes = Shapes::ListShape.new(name: 'TargetGroupAttributes')
+    TargetGroupIpAddressTypeEnum = Shapes::StringShape.new(name: 'TargetGroupIpAddressTypeEnum')
     TargetGroupList = Shapes::ListShape.new(name: 'TargetGroupList')
     TargetGroupName = Shapes::StringShape.new(name: 'TargetGroupName')
     TargetGroupNames = Shapes::ListShape.new(name: 'TargetGroupNames')
@@ -432,6 +433,7 @@ module Aws::ElasticLoadBalancingV2
     CreateTargetGroupInput.add_member(:matcher, Shapes::ShapeRef.new(shape: Matcher, location_name: "Matcher"))
     CreateTargetGroupInput.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetTypeEnum, location_name: "TargetType"))
     CreateTargetGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTargetGroupInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: TargetGroupIpAddressTypeEnum, location_name: "IpAddressType"))
     CreateTargetGroupInput.struct_class = Types::CreateTargetGroupInput
 
     CreateTargetGroupOutput.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, location_name: "TargetGroups"))
@@ -891,6 +893,7 @@ module Aws::ElasticLoadBalancingV2
     TargetGroup.add_member(:load_balancer_arns, Shapes::ShapeRef.new(shape: LoadBalancerArns, location_name: "LoadBalancerArns"))
     TargetGroup.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetTypeEnum, location_name: "TargetType"))
     TargetGroup.add_member(:protocol_version, Shapes::ShapeRef.new(shape: ProtocolVersion, location_name: "ProtocolVersion"))
+    TargetGroup.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: TargetGroupIpAddressTypeEnum, location_name: "IpAddressType"))
     TargetGroup.struct_class = Types::TargetGroup
 
     TargetGroupArns.member = Shapes::ShapeRef.new(shape: TargetGroupArn)

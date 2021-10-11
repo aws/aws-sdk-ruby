@@ -1424,6 +1424,11 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Array<Types::Tag>] :tags
     #   The tags to assign to the target group.
     #
+    # @option params [String] :ip_address_type
+    #   The type of IP address used for this target group. The possible values
+    #   are `ipv4` and `ipv6`. This is an optional parameter. If not
+    #   specified, the IP address type defaults to `ipv4`.
+    #
     # @return [Types::CreateTargetGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTargetGroupOutput#target_groups #target_groups} => Array&lt;Types::TargetGroup&gt;
@@ -1491,6 +1496,7 @@ module Aws::ElasticLoadBalancingV2
     #         value: "TagValue",
     #       },
     #     ],
+    #     ip_address_type: "ipv4", # accepts ipv4, ipv6
     #   })
     #
     # @example Response structure
@@ -1515,6 +1521,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
     #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda", "alb"
     #   resp.target_groups[0].protocol_version #=> String
+    #   resp.target_groups[0].ip_address_type #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroup AWS API Documentation
     #
@@ -2694,6 +2701,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
     #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda", "alb"
     #   resp.target_groups[0].protocol_version #=> String
+    #   resp.target_groups[0].ip_address_type #=> String, one of "ipv4", "ipv6"
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroups AWS API Documentation
@@ -3659,6 +3667,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
     #   resp.target_groups[0].target_type #=> String, one of "instance", "ip", "lambda", "alb"
     #   resp.target_groups[0].protocol_version #=> String
+    #   resp.target_groups[0].ip_address_type #=> String, one of "ipv4", "ipv6"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroup AWS API Documentation
     #
@@ -4274,7 +4283,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
