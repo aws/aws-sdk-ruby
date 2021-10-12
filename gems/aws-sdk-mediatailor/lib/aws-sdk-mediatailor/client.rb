@@ -470,6 +470,92 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
+    # Creates a new prefetch schedule for the specified playback
+    # configuration.
+    #
+    # @option params [required, Types::PrefetchConsumption] :consumption
+    #   The configuration settings for MediaTailor's *consumption* of the
+    #   prefetched ads from the ad decision server. Each consumption
+    #   configuration contains an end time and an optional start time that
+    #   define the *consumption window*. Prefetch schedules automatically
+    #   expire no earlier than seven days after the end time.
+    #
+    # @option params [required, String] :name
+    #
+    # @option params [required, String] :playback_configuration_name
+    #
+    # @option params [required, Types::PrefetchRetrieval] :retrieval
+    #   The configuration settings for retrieval of prefetched ads from the ad
+    #   decision server. Only one set of prefetched ads will be retrieved and
+    #   subsequently consumed for each ad break.
+    #
+    # @option params [String] :stream_id
+    #   An optional stream identifier that MediaTailor uses to prefetch ads
+    #   for multiple streams that use the same playback configuration. If
+    #   StreamId is specified, MediaTailor returns all of the prefetch
+    #   schedules with an exact match on StreamId. If not specified,
+    #   MediaTailor returns all of the prefetch schedules for the playback
+    #   configuration, regardless of StreamId.
+    #
+    # @return [Types::CreatePrefetchScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePrefetchScheduleResponse#arn #arn} => String
+    #   * {Types::CreatePrefetchScheduleResponse#consumption #consumption} => Types::PrefetchConsumption
+    #   * {Types::CreatePrefetchScheduleResponse#name #name} => String
+    #   * {Types::CreatePrefetchScheduleResponse#playback_configuration_name #playback_configuration_name} => String
+    #   * {Types::CreatePrefetchScheduleResponse#retrieval #retrieval} => Types::PrefetchRetrieval
+    #   * {Types::CreatePrefetchScheduleResponse#stream_id #stream_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_prefetch_schedule({
+    #     consumption: { # required
+    #       avail_matching_criteria: [
+    #         {
+    #           dynamic_variable: "__string", # required
+    #           operator: "EQUALS", # required, accepts EQUALS
+    #         },
+    #       ],
+    #       end_time: Time.now, # required
+    #       start_time: Time.now,
+    #     },
+    #     name: "__string", # required
+    #     playback_configuration_name: "__string", # required
+    #     retrieval: { # required
+    #       dynamic_variables: {
+    #         "__string" => "__string",
+    #       },
+    #       end_time: Time.now, # required
+    #       start_time: Time.now,
+    #     },
+    #     stream_id: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.consumption.avail_matching_criteria #=> Array
+    #   resp.consumption.avail_matching_criteria[0].dynamic_variable #=> String
+    #   resp.consumption.avail_matching_criteria[0].operator #=> String, one of "EQUALS"
+    #   resp.consumption.end_time #=> Time
+    #   resp.consumption.start_time #=> Time
+    #   resp.name #=> String
+    #   resp.playback_configuration_name #=> String
+    #   resp.retrieval.dynamic_variables #=> Hash
+    #   resp.retrieval.dynamic_variables["__string"] #=> String
+    #   resp.retrieval.end_time #=> Time
+    #   resp.retrieval.start_time #=> Time
+    #   resp.stream_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreatePrefetchSchedule AWS API Documentation
+    #
+    # @overload create_prefetch_schedule(params = {})
+    # @param [Hash] params ({})
+    def create_prefetch_schedule(params = {}, options = {})
+      req = build_request(:create_prefetch_schedule, params)
+      req.send_request(options)
+    end
+
     # Creates a program.
     #
     # @option params [Array<Types::AdBreak>] :ad_breaks
@@ -757,6 +843,32 @@ module Aws::MediaTailor
     # @param [Hash] params ({})
     def delete_playback_configuration(params = {}, options = {})
       req = build_request(:delete_playback_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes a prefetch schedule for a specific playback configuration. If
+    # you call DeletePrefetchSchedule on an expired prefetch schedule,
+    # MediaTailor returns an HTTP 404 status code.
+    #
+    # @option params [required, String] :name
+    #
+    # @option params [required, String] :playback_configuration_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_prefetch_schedule({
+    #     name: "__string", # required
+    #     playback_configuration_name: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePrefetchSchedule AWS API Documentation
+    #
+    # @overload delete_prefetch_schedule(params = {})
+    # @param [Hash] params ({})
+    def delete_prefetch_schedule(params = {}, options = {})
+      req = build_request(:delete_prefetch_schedule, params)
       req.send_request(options)
     end
 
@@ -1178,6 +1290,55 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
+    # Returns information about the prefetch schedule for a specific
+    # playback configuration. If you call GetPrefetchSchedule on an expired
+    # prefetch schedule, MediaTailor returns an HTTP 404 status code.
+    #
+    # @option params [required, String] :name
+    #
+    # @option params [required, String] :playback_configuration_name
+    #
+    # @return [Types::GetPrefetchScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPrefetchScheduleResponse#arn #arn} => String
+    #   * {Types::GetPrefetchScheduleResponse#consumption #consumption} => Types::PrefetchConsumption
+    #   * {Types::GetPrefetchScheduleResponse#name #name} => String
+    #   * {Types::GetPrefetchScheduleResponse#playback_configuration_name #playback_configuration_name} => String
+    #   * {Types::GetPrefetchScheduleResponse#retrieval #retrieval} => Types::PrefetchRetrieval
+    #   * {Types::GetPrefetchScheduleResponse#stream_id #stream_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_prefetch_schedule({
+    #     name: "__string", # required
+    #     playback_configuration_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.consumption.avail_matching_criteria #=> Array
+    #   resp.consumption.avail_matching_criteria[0].dynamic_variable #=> String
+    #   resp.consumption.avail_matching_criteria[0].operator #=> String, one of "EQUALS"
+    #   resp.consumption.end_time #=> Time
+    #   resp.consumption.start_time #=> Time
+    #   resp.name #=> String
+    #   resp.playback_configuration_name #=> String
+    #   resp.retrieval.dynamic_variables #=> Hash
+    #   resp.retrieval.dynamic_variables["__string"] #=> String
+    #   resp.retrieval.end_time #=> Time
+    #   resp.retrieval.start_time #=> Time
+    #   resp.stream_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPrefetchSchedule AWS API Documentation
+    #
+    # @overload get_prefetch_schedule(params = {})
+    # @param [Hash] params ({})
+    def get_prefetch_schedule(params = {}, options = {})
+      req = build_request(:get_prefetch_schedule, params)
+      req.send_request(options)
+    end
+
     # Returns a list of alerts for the given resource.
     #
     # @option params [Integer] :max_results
@@ -1338,6 +1499,77 @@ module Aws::MediaTailor
     # @param [Hash] params ({})
     def list_playback_configurations(params = {}, options = {})
       req = build_request(:list_playback_configurations, params)
+      req.send_request(options)
+    end
+
+    # Creates a new prefetch schedule.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of prefetch schedules that you want MediaTailor to
+    #   return in response to the current request. If the playback
+    #   configuration has more than MaxResults prefetch schedules, use the
+    #   value of NextToken in the response to get the next page of results.
+    #
+    # @option params [String] :next_token
+    #   (Optional) If the playback configuration has more than MaxResults
+    #   prefetch schedules, use NextToken to get the second and subsequent
+    #   pages of results.
+    #
+    #   For the first ListPrefetchSchedulesRequest request, omit this value.
+    #
+    #   For the second and subsequent requests, get the value of NextToken
+    #   from the previous response and specify that value for NextToken in the
+    #   request.
+    #
+    #   If the previous response didn't include a NextToken element, there
+    #   are no more prefetch schedules to get.
+    #
+    # @option params [required, String] :playback_configuration_name
+    #
+    # @option params [String] :stream_id
+    #   An optional filtering parameter whereby MediaTailor filters the
+    #   prefetch schedules to include only specific streams.
+    #
+    # @return [Types::ListPrefetchSchedulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPrefetchSchedulesResponse#items #items} => Array&lt;Types::PrefetchSchedule&gt;
+    #   * {Types::ListPrefetchSchedulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_prefetch_schedules({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     playback_configuration_name: "__string", # required
+    #     stream_id: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].consumption.avail_matching_criteria #=> Array
+    #   resp.items[0].consumption.avail_matching_criteria[0].dynamic_variable #=> String
+    #   resp.items[0].consumption.avail_matching_criteria[0].operator #=> String, one of "EQUALS"
+    #   resp.items[0].consumption.end_time #=> Time
+    #   resp.items[0].consumption.start_time #=> Time
+    #   resp.items[0].name #=> String
+    #   resp.items[0].playback_configuration_name #=> String
+    #   resp.items[0].retrieval.dynamic_variables #=> Hash
+    #   resp.items[0].retrieval.dynamic_variables["__string"] #=> String
+    #   resp.items[0].retrieval.end_time #=> Time
+    #   resp.items[0].retrieval.start_time #=> Time
+    #   resp.items[0].stream_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPrefetchSchedules AWS API Documentation
+    #
+    # @overload list_prefetch_schedules(params = {})
+    # @param [Hash] params ({})
+    def list_prefetch_schedules(params = {}, options = {})
+      req = build_request(:list_prefetch_schedules, params)
       req.send_request(options)
     end
 
@@ -1989,7 +2221,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

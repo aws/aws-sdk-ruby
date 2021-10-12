@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.269.0 (2021-10-12)
+------------------
+
+* Feature - EncryptionSupport for InstanceStorageInfo added to DescribeInstanceTypes API
+
 1.268.0 (2021-10-11)
 ------------------
 

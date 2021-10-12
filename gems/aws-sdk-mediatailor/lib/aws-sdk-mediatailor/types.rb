@@ -179,6 +179,61 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # MediaTailor only places (consumes) prefetched ads if the ad break
+    # meets the criteria defined by the dynamic variables. This gives you
+    # granular control over which ad break to place the prefetched ads into.
+    #
+    # As an example, let's say that you set DynamicVariable to
+    # scte.event\_id and Operator to EQUALS, and your playback configuration
+    # has an ADS URL of
+    # https://my.ads.server.com/path?&amp;podId=\[scte.avail\_num\]&amp;event=\[scte.event\_id\]&amp;duration=\[session.avail\_duration\_secs\].
+    # And the prefetch request to the ADS contains these values
+    # https://my.ads.server.com/path?&amp;podId=3&amp;event=my-awesome-event&amp;duration=30.
+    # MediaTailor will only insert the prefetched ads into the ad break if
+    # has a SCTE marker with an event id of my-awesome-event, since it must
+    # match the event id that MediaTailor uses to query the ADS.
+    #
+    # You can specify up to five AvailMatchingCriteria. If you specify
+    # multiple AvailMatchingCriteria, MediaTailor combines them to match
+    # using a logical AND. You can model logical OR combinations by creating
+    # multiple prefetch schedules.
+    #
+    # @note When making an API call, you may pass AvailMatchingCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         dynamic_variable: "__string", # required
+    #         operator: "EQUALS", # required, accepts EQUALS
+    #       }
+    #
+    # @!attribute [rw] dynamic_variable
+    #   The dynamic variable(s) that MediaTailor should use as avail
+    #   matching criteria. MediaTailor only places the prefetched ads into
+    #   the avail if the avail matches the criteria defined by the dynamic
+    #   variable. For information about dynamic variables, see [Using
+    #   dynamic ad variables][1] in the *MediaTailor User Guide*.
+    #
+    #   You can include up to 100 dynamic variables.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/variables.html
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   For the DynamicVariable specified in AvailMatchingCriteria, the
+    #   Operator that is used for the comparison.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AvailMatchingCriteria AWS API Documentation
+    #
+    class AvailMatchingCriteria < Struct.new(
+      :dynamic_variable,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for avail suppression, also known as ad suppression.
     # For more information about ad suppression, see [Ad Suppression][1].
     #
@@ -545,6 +600,112 @@ module Aws::MediaTailor
       :outputs,
       :playback_mode,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that contains configuration settings for retrieval,
+    # consumption, and an optional stream ID.
+    #
+    # @note When making an API call, you may pass CreatePrefetchScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         consumption: { # required
+    #           avail_matching_criteria: [
+    #             {
+    #               dynamic_variable: "__string", # required
+    #               operator: "EQUALS", # required, accepts EQUALS
+    #             },
+    #           ],
+    #           end_time: Time.now, # required
+    #           start_time: Time.now,
+    #         },
+    #         name: "__string", # required
+    #         playback_configuration_name: "__string", # required
+    #         retrieval: { # required
+    #           dynamic_variables: {
+    #             "__string" => "__string",
+    #           },
+    #           end_time: Time.now, # required
+    #           start_time: Time.now,
+    #         },
+    #         stream_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] consumption
+    #   The configuration settings for MediaTailor's *consumption* of the
+    #   prefetched ads from the ad decision server. Each consumption
+    #   configuration contains an end time and an optional start time that
+    #   define the *consumption window*. Prefetch schedules automatically
+    #   expire no earlier than seven days after the end time.
+    #   @return [Types::PrefetchConsumption]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_configuration_name
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval
+    #   The configuration settings for retrieval of prefetched ads from the
+    #   ad decision server. Only one set of prefetched ads will be retrieved
+    #   and subsequently consumed for each ad break.
+    #   @return [Types::PrefetchRetrieval]
+    #
+    # @!attribute [rw] stream_id
+    #   An optional stream identifier that MediaTailor uses to prefetch ads
+    #   for multiple streams that use the same playback configuration. If
+    #   StreamId is specified, MediaTailor returns all of the prefetch
+    #   schedules with an exact match on StreamId. If not specified,
+    #   MediaTailor returns all of the prefetch schedules for the playback
+    #   configuration, regardless of StreamId.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreatePrefetchScheduleRequest AWS API Documentation
+    #
+    class CreatePrefetchScheduleRequest < Struct.new(
+      :consumption,
+      :name,
+      :playback_configuration_name,
+      :retrieval,
+      :stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] consumption
+    #   A complex type that contains settings that determine how and when
+    #   that MediaTailor places prefetched ads into upcoming ad breaks.
+    #   @return [Types::PrefetchConsumption]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_configuration_name
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval
+    #   A complex type that contains settings governing when MediaTailor
+    #   prefetches ads, and which dynamic variables that MediaTailor
+    #   includes in the request to the ad decision server.
+    #   @return [Types::PrefetchRetrieval]
+    #
+    # @!attribute [rw] stream_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreatePrefetchScheduleResponse AWS API Documentation
+    #
+    class CreatePrefetchScheduleResponse < Struct.new(
+      :arn,
+      :consumption,
+      :name,
+      :playback_configuration_name,
+      :retrieval,
+      :stream_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1071,6 +1232,36 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePlaybackConfigurationResponse AWS API Documentation
     #
     class DeletePlaybackConfigurationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeletePrefetchScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "__string", # required
+    #         playback_configuration_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_configuration_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePrefetchScheduleRequest AWS API Documentation
+    #
+    class DeletePrefetchScheduleRequest < Struct.new(
+      :name,
+      :playback_configuration_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If the action is successful, the service sends back an HTTP 204
+    # response with an empty HTTP body.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeletePrefetchScheduleResponse AWS API Documentation
+    #
+    class DeletePrefetchScheduleResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteProgramRequest
     #   data as a hash:
@@ -1694,6 +1885,65 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetPrefetchScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "__string", # required
+    #         playback_configuration_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_configuration_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPrefetchScheduleRequest AWS API Documentation
+    #
+    class GetPrefetchScheduleRequest < Struct.new(
+      :name,
+      :playback_configuration_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] consumption
+    #   A complex type that contains settings that determine how and when
+    #   that MediaTailor places prefetched ads into upcoming ad breaks.
+    #   @return [Types::PrefetchConsumption]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_configuration_name
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval
+    #   A complex type that contains settings governing when MediaTailor
+    #   prefetches ads, and which dynamic variables that MediaTailor
+    #   includes in the request to the ad decision server.
+    #   @return [Types::PrefetchRetrieval]
+    #
+    # @!attribute [rw] stream_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPrefetchScheduleResponse AWS API Documentation
+    #
+    class GetPrefetchScheduleResponse < Struct.new(
+      :arn,
+      :consumption,
+      :name,
+      :playback_configuration_name,
+      :retrieval,
+      :stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for HLS content.
     #
     # @!attribute [rw] manifest_endpoint_prefix
@@ -1922,6 +2172,81 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPlaybackConfigurationsResponse AWS API Documentation
     #
     class ListPlaybackConfigurationsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Retrieves the prefetch schedule(s) for a specific playback
+    # configuration.
+    #
+    # @note When making an API call, you may pass ListPrefetchSchedulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #         playback_configuration_name: "__string", # required
+    #         stream_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of prefetch schedules that you want MediaTailor
+    #   to return in response to the current request. If the playback
+    #   configuration has more than MaxResults prefetch schedules, use the
+    #   value of NextToken in the response to get the next page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) If the playback configuration has more than MaxResults
+    #   prefetch schedules, use NextToken to get the second and subsequent
+    #   pages of results.
+    #
+    #   For the first ListPrefetchSchedulesRequest request, omit this value.
+    #
+    #   For the second and subsequent requests, get the value of NextToken
+    #   from the previous response and specify that value for NextToken in
+    #   the request.
+    #
+    #   If the previous response didn't include a NextToken element, there
+    #   are no more prefetch schedules to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_configuration_name
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_id
+    #   An optional filtering parameter whereby MediaTailor filters the
+    #   prefetch schedules to include only specific streams.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPrefetchSchedulesRequest AWS API Documentation
+    #
+    class ListPrefetchSchedulesRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :playback_configuration_name,
+      :stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of prefetch schedules.
+    #
+    # @!attribute [rw] items
+    #   Lists the prefetch schedules. An empty Items list doesn't mean
+    #   there aren't more items to fetch, just that that page was empty.
+    #   @return [Array<Types::PrefetchSchedule>]
+    #
+    # @!attribute [rw] next_token
+    #   The value that you will use forNextToken in the next
+    #   ListPrefetchSchedulesRequest request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPrefetchSchedulesResponse AWS API Documentation
+    #
+    class ListPrefetchSchedulesResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -2296,6 +2621,154 @@ module Aws::MediaTailor
       :tags,
       :transcode_profile_name,
       :video_content_source_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that contains settings that determine how and when that
+    # MediaTailor places prefetched ads into upcoming ad breaks.
+    #
+    # @note When making an API call, you may pass PrefetchConsumption
+    #   data as a hash:
+    #
+    #       {
+    #         avail_matching_criteria: [
+    #           {
+    #             dynamic_variable: "__string", # required
+    #             operator: "EQUALS", # required, accepts EQUALS
+    #           },
+    #         ],
+    #         end_time: Time.now, # required
+    #         start_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] avail_matching_criteria
+    #   If you only want MediaTailor to insert prefetched ads into avails
+    #   (ad breaks) that match specific dynamic variables, such as
+    #   scte.event\_id, set the avail matching criteria.
+    #   @return [Array<Types::AvailMatchingCriteria>]
+    #
+    # @!attribute [rw] end_time
+    #   The time when MediaTailor no longer considers the prefetched ads for
+    #   use in an ad break. MediaTailor automatically deletes prefetch
+    #   schedules no less than seven days after the end time. If you'd like
+    #   to manually delete the prefetch schedule, you can call
+    #   DeletePrefetchSchedule.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The time when prefetched ads are considered for use in an ad break.
+    #   If you don't specify StartTime, the prefetched ads are available
+    #   after MediaTailor retrives them from the ad decision server.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PrefetchConsumption AWS API Documentation
+    #
+    class PrefetchConsumption < Struct.new(
+      :avail_matching_criteria,
+      :end_time,
+      :start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that contains settings governing when MediaTailor
+    # prefetches ads, and which dynamic variables that MediaTailor includes
+    # in the request to the ad decision server.
+    #
+    # @note When making an API call, you may pass PrefetchRetrieval
+    #   data as a hash:
+    #
+    #       {
+    #         dynamic_variables: {
+    #           "__string" => "__string",
+    #         },
+    #         end_time: Time.now, # required
+    #         start_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] dynamic_variables
+    #   The dynamic variables to use for substitution during prefetch
+    #   requests to the ad decision server (ADS).
+    #
+    #   You intially configure [dynamic variables][1] for the ADS URL when
+    #   you set up your playback configuration. When you specify
+    #   DynamicVariables for prefetch retrieval, MediaTailor includes the
+    #   dynamic variables in the request to the ADS.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/variables.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] end_time
+    #   The time when prefetch retrieval ends for the ad break. Prefetching
+    #   will be attempted for manifest requests that occur at or before this
+    #   time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The time when prefetch retrievals can start for this break. Ad
+    #   prefetching will be attempted for manifest requests that occur at or
+    #   after this time. Defaults to the current time. If not specified, the
+    #   prefetch retrieval starts as soon as possible.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PrefetchRetrieval AWS API Documentation
+    #
+    class PrefetchRetrieval < Struct.new(
+      :dynamic_variables,
+      :end_time,
+      :start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that contains prefetch schedule information.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the prefetch schedule.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumption
+    #   Consumption settings determine how, and when, MediaTailor places the
+    #   prefetched ads into ad breaks. Ad consumption occurs within a span
+    #   of time that you define, called a *consumption window*. You can
+    #   designate which ad breaks that MediaTailor fills with prefetch ads
+    #   by setting avail matching criteria.
+    #   @return [Types::PrefetchConsumption]
+    #
+    # @!attribute [rw] name
+    #   The name of the prefetch schedule. The name must be unique among all
+    #   prefetch schedules that are associated with the specified playback
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_configuration_name
+    #   The name of the playback configuration to create the prefetch
+    #   schedule for.
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval
+    #   A complex type that contains settings for prefetch retrieval from
+    #   the ad decision server (ADS).
+    #   @return [Types::PrefetchRetrieval]
+    #
+    # @!attribute [rw] stream_id
+    #   An optional stream identifier that you can specify in order to
+    #   prefetch for multiple streams that use the same playback
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PrefetchSchedule AWS API Documentation
+    #
+    class PrefetchSchedule < Struct.new(
+      :arn,
+      :consumption,
+      :name,
+      :playback_configuration_name,
+      :retrieval,
+      :stream_id)
       SENSITIVE = []
       include Aws::Structure
     end

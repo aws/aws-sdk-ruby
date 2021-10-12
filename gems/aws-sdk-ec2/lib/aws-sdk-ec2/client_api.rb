@@ -1344,6 +1344,7 @@ module Aws::EC2
     InstanceStatusEventList = Shapes::ListShape.new(name: 'InstanceStatusEventList')
     InstanceStatusList = Shapes::ListShape.new(name: 'InstanceStatusList')
     InstanceStatusSummary = Shapes::StructureShape.new(name: 'InstanceStatusSummary')
+    InstanceStorageEncryptionSupport = Shapes::StringShape.new(name: 'InstanceStorageEncryptionSupport')
     InstanceStorageFlag = Shapes::BooleanShape.new(name: 'InstanceStorageFlag')
     InstanceStorageInfo = Shapes::StructureShape.new(name: 'InstanceStorageInfo')
     InstanceTagKeySet = Shapes::ListShape.new(name: 'InstanceTagKeySet')
@@ -7802,6 +7803,7 @@ module Aws::EC2
     InstanceStorageInfo.add_member(:total_size_in_gb, Shapes::ShapeRef.new(shape: DiskSize, location_name: "totalSizeInGB"))
     InstanceStorageInfo.add_member(:disks, Shapes::ShapeRef.new(shape: DiskInfoList, location_name: "disks"))
     InstanceStorageInfo.add_member(:nvme_support, Shapes::ShapeRef.new(shape: EphemeralNvmeSupport, location_name: "nvmeSupport"))
+    InstanceStorageInfo.add_member(:encryption_support, Shapes::ShapeRef.new(shape: InstanceStorageEncryptionSupport, location_name: "encryptionSupport"))
     InstanceStorageInfo.struct_class = Types::InstanceStorageInfo
 
     InstanceTagKeySet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-10-12)
+------------------
+
+* Feature - Adds an additional validation exception for Amazon CloudSearch configuration APIs for better error handling.
+
 1.33.0 (2021-09-01)
 ------------------
 

@@ -19574,9 +19574,12 @@ module Aws::EC2
     #   * `instance-storage-info.disk.type` - The storage technology for the
     #     local instance storage disks (`hdd` \| `ssd`).
     #
+    #   * `instance-storage-info.encryption-supported` - Indicates whether
+    #     data is encrypted at rest (`required` \| `unsupported`).
+    #
     #   * `instance-storage-info.nvme-support` - Indicates whether
     #     non-volatile memory express (NVMe) is supported for instance store
-    #     (`required` \| `supported`) \| `unsupported`).
+    #     (`required` \| `supported` \| `unsupported`).
     #
     #   * `instance-storage-info.total-size-in-gb` - The total amount of
     #     storage available from all local instance storage, in GB.
@@ -19695,7 +19698,7 @@ module Aws::EC2
     #   resp.instance_types[0].bare_metal #=> Boolean
     #   resp.instance_types[0].hypervisor #=> String, one of "nitro", "xen"
     #   resp.instance_types[0].processor_info.supported_architectures #=> Array
-    #   resp.instance_types[0].processor_info.supported_architectures[0] #=> String, one of "i386", "x86_64", "arm64"
+    #   resp.instance_types[0].processor_info.supported_architectures[0] #=> String, one of "i386", "x86_64", "arm64", "x86_64_mac"
     #   resp.instance_types[0].processor_info.sustained_clock_speed_in_ghz #=> Float
     #   resp.instance_types[0].v_cpu_info.default_v_cpus #=> Integer
     #   resp.instance_types[0].v_cpu_info.default_cores #=> Integer
@@ -19712,6 +19715,7 @@ module Aws::EC2
     #   resp.instance_types[0].instance_storage_info.disks[0].count #=> Integer
     #   resp.instance_types[0].instance_storage_info.disks[0].type #=> String, one of "hdd", "ssd"
     #   resp.instance_types[0].instance_storage_info.nvme_support #=> String, one of "unsupported", "supported", "required"
+    #   resp.instance_types[0].instance_storage_info.encryption_support #=> String, one of "unsupported", "required"
     #   resp.instance_types[0].ebs_info.ebs_optimized_support #=> String, one of "unsupported", "supported", "default"
     #   resp.instance_types[0].ebs_info.encryption_support #=> String, one of "unsupported", "supported"
     #   resp.instance_types[0].ebs_info.ebs_optimized_info.baseline_bandwidth_in_mbps #=> Integer
@@ -44161,7 +44165,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.268.0'
+      context[:gem_version] = '1.269.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

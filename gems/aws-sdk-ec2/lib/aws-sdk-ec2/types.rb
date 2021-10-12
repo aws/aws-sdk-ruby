@@ -19259,9 +19259,12 @@ module Aws::EC2
     #   * `instance-storage-info.disk.type` - The storage technology for the
     #     local instance storage disks (`hdd` \| `ssd`).
     #
+    #   * `instance-storage-info.encryption-supported` - Indicates whether
+    #     data is encrypted at rest (`required` \| `unsupported`).
+    #
     #   * `instance-storage-info.nvme-support` - Indicates whether
     #     non-volatile memory express (NVMe) is supported for instance store
-    #     (`required` \| `supported`) \| `unsupported`).
+    #     (`required` \| `supported` \| `unsupported`).
     #
     #   * `instance-storage-info.total-size-in-gb` - The total amount of
     #     storage available from all local instance storage, in GB.
@@ -28275,7 +28278,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the disk.
+    # Describes a disk.
     #
     # @!attribute [rw] size_in_gb
     #   The size of the disk in GB.
@@ -37011,7 +37014,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the disks that are available for the instance type.
+    # Describes the instance store features that are supported by the
+    # instance type.
     #
     # @!attribute [rw] total_size_in_gb
     #   The total size of the disks, in GB.
@@ -37022,8 +37026,11 @@ module Aws::EC2
     #   @return [Array<Types::DiskInfo>]
     #
     # @!attribute [rw] nvme_support
-    #   Indicates whether non-volatile memory express (NVMe) is supported
-    #   for instance store.
+    #   Indicates whether non-volatile memory express (NVMe) is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_support
+    #   Indicates whether data is encrypted at rest.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStorageInfo AWS API Documentation
@@ -37031,7 +37038,8 @@ module Aws::EC2
     class InstanceStorageInfo < Struct.new(
       :total_size_in_gb,
       :disks,
-      :nvme_support)
+      :nvme_support,
+      :encryption_support)
       SENSITIVE = []
       include Aws::Structure
     end
