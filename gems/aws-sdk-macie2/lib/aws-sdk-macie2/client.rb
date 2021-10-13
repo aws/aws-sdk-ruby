@@ -980,6 +980,8 @@ module Aws::Macie2
     #   resp.buckets[0].bucket_name #=> String
     #   resp.buckets[0].classifiable_object_count #=> Integer
     #   resp.buckets[0].classifiable_size_in_bytes #=> Integer
+    #   resp.buckets[0].error_code #=> String, one of "ACCESS_DENIED"
+    #   resp.buckets[0].error_message #=> String
     #   resp.buckets[0].job_details.is_defined_in_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.buckets[0].job_details.is_monitored_by_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.buckets[0].job_details.last_job_id #=> String
@@ -2626,6 +2628,8 @@ module Aws::Macie2
     #   resp.matching_resources[0].matching_bucket.bucket_name #=> String
     #   resp.matching_resources[0].matching_bucket.classifiable_object_count #=> Integer
     #   resp.matching_resources[0].matching_bucket.classifiable_size_in_bytes #=> Integer
+    #   resp.matching_resources[0].matching_bucket.error_code #=> String, one of "ACCESS_DENIED"
+    #   resp.matching_resources[0].matching_bucket.error_message #=> String
     #   resp.matching_resources[0].matching_bucket.job_details.is_defined_in_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.matching_resources[0].matching_bucket.job_details.is_monitored_by_job #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.matching_resources[0].matching_bucket.job_details.last_job_id #=> String
@@ -2937,7 +2941,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

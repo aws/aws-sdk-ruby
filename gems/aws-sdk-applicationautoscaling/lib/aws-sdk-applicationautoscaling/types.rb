@@ -130,9 +130,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "ResourceIdMaxLen1600", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
     #       }
     #
     # @!attribute [rw] policy_name
@@ -153,8 +153,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -174,8 +174,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -211,6 +211,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -227,7 +230,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -249,7 +252,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -279,6 +282,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
@@ -300,10 +306,10 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
     #         scheduled_action_name: "ResourceIdMaxLen1600", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -324,8 +330,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -345,8 +351,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -382,6 +388,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -398,7 +407,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -420,7 +429,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -450,6 +459,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledActionRequest AWS API Documentation
@@ -471,9 +483,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -490,8 +502,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -511,8 +523,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -548,6 +560,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -565,7 +580,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -587,7 +602,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -617,6 +632,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
@@ -637,9 +655,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
     #         resource_ids: ["ResourceIdMaxLen1600"],
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -658,8 +676,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -679,8 +697,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -716,6 +734,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -734,7 +755,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -756,7 +777,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -786,6 +807,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -837,9 +861,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -858,8 +882,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -879,8 +903,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -916,6 +940,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -933,7 +960,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -955,7 +982,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -985,6 +1012,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1037,9 +1067,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -1062,8 +1092,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1083,8 +1113,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -1120,6 +1150,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1137,7 +1170,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -1159,7 +1192,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -1189,16 +1222,19 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of scalable targets. This value can be between 1
-    #   and 50. The default value is 50.
+    #   and 10. The default value is 10.
     #
     #   If this parameter is used, the operation returns up to `MaxResults`
     #   results at a time, along with a `NextToken` value. To get the next
     #   set of results, include the `NextToken` value in a subsequent call.
-    #   If this parameter is not used, the operation returns up to 50
+    #   If this parameter is not used, the operation returns up to 10
     #   results and a `NextToken` value, if applicable.
     #   @return [Integer]
     #
@@ -1242,9 +1278,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         scheduled_action_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -1267,8 +1303,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1288,8 +1324,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -1325,6 +1361,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1342,7 +1381,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -1364,7 +1403,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -1394,6 +1433,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1569,7 +1611,7 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage
+    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage, NeptuneReaderAverageCPUUtilization
     #         resource_label: "ResourceLabel",
     #       }
     #
@@ -1623,9 +1665,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "PolicyName", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
     #         policy_type: "StepScaling", # accepts StepScaling, TargetTrackingScaling
     #         step_scaling_policy_configuration: {
     #           adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -1643,7 +1685,7 @@ module Aws::ApplicationAutoScaling
     #         target_tracking_scaling_policy_configuration: {
     #           target_value: 1.0, # required
     #           predefined_metric_specification: {
-    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage
+    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage, NeptuneReaderAverageCPUUtilization
     #             resource_label: "ResourceLabel",
     #           },
     #           customized_metric_specification: {
@@ -1682,8 +1724,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1703,8 +1745,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -1740,6 +1782,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1756,7 +1801,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -1778,7 +1823,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -1808,6 +1853,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -1819,8 +1867,7 @@ module Aws::ApplicationAutoScaling
     #   `TargetTrackingScaling`—Not supported for Amazon EMR
     #
     #   `StepScaling`—Not supported for DynamoDB, Amazon Comprehend, Lambda,
-    #   Amazon Keyspaces (for Apache Cassandra), Amazon MSK, or Amazon
-    #   ElastiCache for Redis.
+    #   Amazon Keyspaces, Amazon MSK, Amazon ElastiCache, or Neptune.
     #
     #   For more information, see [Target tracking scaling policies][1] and
     #   [Step scaling policies][2] in the *Application Auto Scaling User
@@ -1883,12 +1930,12 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
     #         schedule: "ResourceIdMaxLen1600",
     #         timezone: "ResourceIdMaxLen1600",
     #         scheduled_action_name: "ScheduledActionName", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         scalable_target_action: {
@@ -1964,8 +2011,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -1985,8 +2032,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -2022,6 +2069,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2038,7 +2088,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -2060,7 +2110,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -2090,6 +2140,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -2133,9 +2186,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra, kafka, elasticache, neptune
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, comprehend:entity-recognizer-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits, kafka:broker-storage:VolumeSize, elasticache:replication-group:NodeGroups, elasticache:replication-group:Replicas, neptune:cluster:ReadReplicaCount
     #         min_capacity: 1,
     #         max_capacity: 1,
     #         role_arn: "ResourceIdMaxLen1600",
@@ -2161,8 +2214,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -2182,8 +2235,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -2219,6 +2272,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2236,7 +2292,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -2258,7 +2314,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -2288,6 +2344,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2402,8 +2461,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -2423,8 +2482,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -2460,6 +2519,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2477,7 +2539,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -2499,7 +2561,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -2529,6 +2591,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2632,8 +2697,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -2653,8 +2718,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -2690,6 +2755,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2706,7 +2774,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -2728,7 +2796,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -2758,6 +2826,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2838,8 +2909,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -2859,8 +2930,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -2896,6 +2967,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2912,7 +2986,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -2934,7 +3008,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -2964,6 +3038,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -3065,8 +3142,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name and service name. Example:
     #     `service/default/sample-webapp`.
     #
-    #   * Spot Fleet request - The resource type is `spot-fleet-request` and
-    #     the unique identifier is the Spot Fleet request ID. Example:
+    #   * Spot Fleet - The resource type is `spot-fleet-request` and the
+    #     unique identifier is the Spot Fleet request ID. Example:
     #     `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
     #
     #   * EMR cluster - The resource type is `instancegroup` and the unique
@@ -3086,8 +3163,8 @@ module Aws::ApplicationAutoScaling
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
-    #   * Amazon SageMaker endpoint variant - The resource type is `variant`
-    #     and the unique identifier is the resource ID. Example:
+    #   * SageMaker endpoint variant - The resource type is `variant` and
+    #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
     #   * Custom resources are not supported with a resource type. This
@@ -3123,6 +3200,9 @@ module Aws::ApplicationAutoScaling
     #     `replication-group` and the unique identifier is the replication
     #     group name. Example: `replication-group/mycluster`.
     #
+    #   * Neptune cluster - The resource type is `cluster` and the unique
+    #     identifier is the cluster name. Example: `cluster:mycluster`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -3139,7 +3219,7 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #
     #   * `ec2:spot-fleet-request:TargetCapacity` - The target capacity of a
-    #     Spot Fleet request.
+    #     Spot Fleet.
     #
     #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
     #     AppStream 2.0 fleet.
@@ -3161,7 +3241,7 @@ module Aws::ApplicationAutoScaling
     #     edition and Aurora PostgreSQL-compatible edition.
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
-    #     instances for an Amazon SageMaker model endpoint variant.
+    #     instances for an SageMaker model endpoint variant.
     #
     #   * `custom-resource:ResourceType:Property` - The scalable dimension
     #     for a custom resource provided by your own application or service.
@@ -3191,6 +3271,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticache:replication-group:Replicas` - The number of replicas
     #     per node group for an Amazon ElastiCache replication group.
+    #
+    #   * `neptune:cluster:ReadReplicaCount` - The count of read replicas in
+    #     an Amazon Neptune DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -3396,32 +3479,32 @@ module Aws::ApplicationAutoScaling
     #   ElastiCache replication groups and a default value of 300 for the
     #   following scalable targets:
     #
-    #   * ECS services
-    #
-    #   * Spot Fleet requests
-    #
-    #   * EMR clusters
-    #
     #   * AppStream 2.0 fleets
     #
     #   * Aurora DB clusters
     #
-    #   * Amazon SageMaker endpoint variants
+    #   * ECS services
+    #
+    #   * EMR clusters
+    #
+    #   * Neptune clusters
+    #
+    #   * SageMaker endpoint variants
+    #
+    #   * Spot Fleets
     #
     #   * Custom resources
     #
     #   For all other scalable targets, the default value is 0:
     #
-    #   * DynamoDB tables
-    #
-    #   * DynamoDB global secondary indexes
-    #
     #   * Amazon Comprehend document classification and entity recognizer
     #     endpoints
     #
-    #   * Lambda provisioned concurrency
+    #   * DynamoDB tables and global secondary indexes
     #
     #   * Amazon Keyspaces tables
+    #
+    #   * Lambda provisioned concurrency
     #
     #   * Amazon MSK broker storage
     #   @return [Integer]
@@ -3495,7 +3578,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         target_value: 1.0, # required
     #         predefined_metric_specification: {
-    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage
+    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization, KafkaBrokerStorageUtilization, ElastiCachePrimaryEngineCPUUtilization, ElastiCacheReplicaEngineCPUUtilization, ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage, NeptuneReaderAverageCPUUtilization
     #           resource_label: "ResourceLabel",
     #         },
     #         customized_metric_specification: {
@@ -3553,32 +3636,32 @@ module Aws::ApplicationAutoScaling
     #   ElastiCache replication groups and a default value of 300 for the
     #   following scalable targets:
     #
-    #   * ECS services
-    #
-    #   * Spot Fleet requests
-    #
-    #   * EMR clusters
-    #
     #   * AppStream 2.0 fleets
     #
     #   * Aurora DB clusters
     #
-    #   * Amazon SageMaker endpoint variants
+    #   * ECS services
+    #
+    #   * EMR clusters
+    #
+    #   * Neptune clusters
+    #
+    #   * SageMaker endpoint variants
+    #
+    #   * Spot Fleets
     #
     #   * Custom resources
     #
     #   For all other scalable targets, the default value is 0:
     #
-    #   * DynamoDB tables
-    #
-    #   * DynamoDB global secondary indexes
-    #
     #   * Amazon Comprehend document classification and entity recognizer
     #     endpoints
     #
-    #   * Lambda provisioned concurrency
+    #   * DynamoDB tables and global secondary indexes
     #
     #   * Amazon Keyspaces tables
+    #
+    #   * Lambda provisioned concurrency
     #
     #   * Amazon MSK broker storage
     #   @return [Integer]
@@ -3599,32 +3682,32 @@ module Aws::ApplicationAutoScaling
     #   ElastiCache replication groups and a default value of 300 for the
     #   following scalable targets:
     #
-    #   * ECS services
-    #
-    #   * Spot Fleet requests
-    #
-    #   * EMR clusters
-    #
     #   * AppStream 2.0 fleets
     #
     #   * Aurora DB clusters
     #
-    #   * Amazon SageMaker endpoint variants
+    #   * ECS services
+    #
+    #   * EMR clusters
+    #
+    #   * Neptune clusters
+    #
+    #   * SageMaker endpoint variants
+    #
+    #   * Spot Fleets
     #
     #   * Custom resources
     #
     #   For all other scalable targets, the default value is 0:
     #
-    #   * DynamoDB tables
-    #
-    #   * DynamoDB global secondary indexes
-    #
     #   * Amazon Comprehend document classification and entity recognizer
     #     endpoints
     #
-    #   * Lambda provisioned concurrency
+    #   * DynamoDB tables and global secondary indexes
     #
     #   * Amazon Keyspaces tables
+    #
+    #   * Lambda provisioned concurrency
     #
     #   * Amazon MSK broker storage
     #   @return [Integer]

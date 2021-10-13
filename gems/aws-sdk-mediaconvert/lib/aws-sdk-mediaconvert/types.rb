@@ -7625,6 +7625,20 @@ module Aws::MediaConvert
     #
     class DeleteJobTemplateResponse < Aws::EmptyStructure; end
 
+    # Send a request to permanently delete a policy that you created.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeletePolicyRequest AWS API Documentation
+    #
+    class DeletePolicyRequest < Aws::EmptyStructure; end
+
+    # Successful DELETE policy requests will return an OK message.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeletePolicyResponse AWS API Documentation
+    #
+    class DeletePolicyResponse < Aws::EmptyStructure; end
+
     # Delete a preset by sending a request with the preset name
     #
     # @note When making an API call, you may pass DeletePresetRequest
@@ -9282,6 +9296,31 @@ module Aws::MediaConvert
     #
     class GetJobTemplateResponse < Struct.new(
       :job_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Send a request to retrieve the JSON for your policy.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetPolicyRequest AWS API Documentation
+    #
+    class GetPolicyRequest < Aws::EmptyStructure; end
+
+    # Successful GET policy requests will return the JSON for your policy.
+    #
+    # @!attribute [rw] policy
+    #   A policy configures behavior that you allow or disallow for your
+    #   account. For information about MediaConvert policies, see the user
+    #   guide at
+    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetPolicyResponse AWS API Documentation
+    #
+    class GetPolicyResponse < Struct.new(
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20251,6 +20290,42 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # A policy configures behavior that you allow or disallow for your
+    # account. For information about MediaConvert policies, see the user
+    # guide at
+    # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #
+    # @note When making an API call, you may pass Policy
+    #   data as a hash:
+    #
+    #       {
+    #         http_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #         https_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #         s3_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #       }
+    #
+    # @!attribute [rw] http_inputs
+    #   Allow or disallow jobs that specify HTTP inputs.
+    #   @return [String]
+    #
+    # @!attribute [rw] https_inputs
+    #   Allow or disallow jobs that specify HTTPS inputs.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_inputs
+    #   Allow or disallow jobs that specify Amazon S3 inputs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Policy AWS API Documentation
+    #
+    class Policy < Struct.new(
+      :http_inputs,
+      :https_inputs,
+      :s3_inputs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A preset is a collection of preconfigured media conversion settings
     # that you want MediaConvert to apply to the output during the
     # conversion process.
@@ -21263,6 +21338,52 @@ module Aws::MediaConvert
       :scan_type_conversion_mode,
       :slow_pal,
       :telecine)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Create or change a policy by sending a request that includes your
+    # policy in JSON.
+    #
+    # @note When making an API call, you may pass PutPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy: { # required
+    #           http_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #           https_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #           s3_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] policy
+    #   A policy configures behavior that you allow or disallow for your
+    #   account. For information about MediaConvert policies, see the user
+    #   guide at
+    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/PutPolicyRequest AWS API Documentation
+    #
+    class PutPolicyRequest < Struct.new(
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Successful PUT policy requests will return your policy.
+    #
+    # @!attribute [rw] policy
+    #   A policy configures behavior that you allow or disallow for your
+    #   account. For information about MediaConvert policies, see the user
+    #   guide at
+    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/PutPolicyResponse AWS API Documentation
+    #
+    class PutPolicyResponse < Struct.new(
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end

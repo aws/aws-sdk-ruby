@@ -79,10 +79,6 @@ module Aws::Schemas
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
-    LockServiceLinkedRoleInput = Shapes::StructureShape.new(name: 'LockServiceLinkedRoleInput')
-    LockServiceLinkedRoleOutput = Shapes::StructureShape.new(name: 'LockServiceLinkedRoleOutput')
-    LockServiceLinkedRoleRequest = Shapes::StructureShape.new(name: 'LockServiceLinkedRoleRequest')
-    LockServiceLinkedRoleResponse = Shapes::StructureShape.new(name: 'LockServiceLinkedRoleResponse')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     PutCodeBindingRequest = Shapes::StructureShape.new(name: 'PutCodeBindingRequest')
@@ -112,9 +108,6 @@ module Aws::Schemas
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     Type = Shapes::StringShape.new(name: 'Type')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
-    UnlockServiceLinkedRoleInput = Shapes::StructureShape.new(name: 'UnlockServiceLinkedRoleInput')
-    UnlockServiceLinkedRoleRequest = Shapes::StructureShape.new(name: 'UnlockServiceLinkedRoleRequest')
-    UnlockServiceLinkedRoleResponse = Shapes::StructureShape.new(name: 'UnlockServiceLinkedRoleResponse')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateDiscovererInput = Shapes::StructureShape.new(name: 'UpdateDiscovererInput')
     UpdateDiscovererRequest = Shapes::StructureShape.new(name: 'UpdateDiscovererRequest')
@@ -457,24 +450,6 @@ module Aws::Schemas
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    LockServiceLinkedRoleInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: __stringMin1Max1600, required: true, location_name: "RoleArn"))
-    LockServiceLinkedRoleInput.add_member(:timeout, Shapes::ShapeRef.new(shape: __integerMin1Max29000, required: true, location_name: "Timeout"))
-    LockServiceLinkedRoleInput.struct_class = Types::LockServiceLinkedRoleInput
-
-    LockServiceLinkedRoleOutput.add_member(:can_be_deleted, Shapes::ShapeRef.new(shape: __boolean, location_name: "CanBeDeleted"))
-    LockServiceLinkedRoleOutput.add_member(:reason_of_failure, Shapes::ShapeRef.new(shape: __stringMin1Max1600, location_name: "ReasonOfFailure"))
-    LockServiceLinkedRoleOutput.add_member(:related_resources, Shapes::ShapeRef.new(shape: __listOfDiscovererSummary, location_name: "RelatedResources"))
-    LockServiceLinkedRoleOutput.struct_class = Types::LockServiceLinkedRoleOutput
-
-    LockServiceLinkedRoleRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __stringMin1Max1600, required: true, location_name: "RoleArn"))
-    LockServiceLinkedRoleRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: __integerMin1Max29000, required: true, location_name: "Timeout"))
-    LockServiceLinkedRoleRequest.struct_class = Types::LockServiceLinkedRoleRequest
-
-    LockServiceLinkedRoleResponse.add_member(:can_be_deleted, Shapes::ShapeRef.new(shape: __boolean, location_name: "CanBeDeleted"))
-    LockServiceLinkedRoleResponse.add_member(:reason_of_failure, Shapes::ShapeRef.new(shape: __stringMin1Max1600, location_name: "ReasonOfFailure"))
-    LockServiceLinkedRoleResponse.add_member(:related_resources, Shapes::ShapeRef.new(shape: __listOfDiscovererSummary, location_name: "RelatedResources"))
-    LockServiceLinkedRoleResponse.struct_class = Types::LockServiceLinkedRoleResponse
-
     NotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Code"))
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
@@ -606,14 +581,6 @@ module Aws::Schemas
     UnauthorizedException.add_member(:code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Code"))
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
-
-    UnlockServiceLinkedRoleInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: __stringMin1Max1600, required: true, location_name: "RoleArn"))
-    UnlockServiceLinkedRoleInput.struct_class = Types::UnlockServiceLinkedRoleInput
-
-    UnlockServiceLinkedRoleRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __stringMin1Max1600, required: true, location_name: "RoleArn"))
-    UnlockServiceLinkedRoleRequest.struct_class = Types::UnlockServiceLinkedRoleRequest
-
-    UnlockServiceLinkedRoleResponse.struct_class = Types::UnlockServiceLinkedRoleResponse
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))

@@ -709,7 +709,7 @@ module Aws::SageMaker
     #           is_required: false,
     #           supported_content_types: ["ContentType"], # required
     #           supported_compression_types: ["None"], # accepts None, Gzip
-    #           supported_input_modes: ["Pipe"], # required, accepts Pipe, File
+    #           supported_input_modes: ["Pipe"], # required, accepts Pipe, File, FastFile
     #         },
     #       ],
     #       supported_tuning_job_objective_metrics: [
@@ -743,7 +743,7 @@ module Aws::SageMaker
     #         {
     #           profile_name: "EntityName", # required
     #           training_job_definition: { # required
-    #             training_input_mode: "Pipe", # required, accepts Pipe, File
+    #             training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #             hyper_parameters: {
     #               "HyperParameterKey" => "HyperParameterValue",
     #             },
@@ -767,7 +767,7 @@ module Aws::SageMaker
     #                 content_type: "ContentType",
     #                 compression_type: "None", # accepts None, Gzip
     #                 record_wrapper_type: "None", # accepts None, RecordIO
-    #                 input_mode: "Pipe", # accepts Pipe, File
+    #                 input_mode: "Pipe", # accepts Pipe, File, FastFile
     #                 shuffle_config: {
     #                   seed: 1, # required
     #                 },
@@ -1964,7 +1964,7 @@ module Aws::SageMaker
     # and CreateEndpointConfig API operations, add the following policies to
     # the role.
     #
-    #  * Option 1: For a full Amazon SageMaker access, search and attach the
+    #  * Option 1: For a full SageMaker access, search and attach the
     #   `AmazonSageMakerFullAccess` policy.
     #
     # * Option 2: For granting a limited access to an IAM role, paste the
@@ -1982,8 +1982,8 @@ module Aws::SageMaker
     #
     #   `]`
     #
-    #   For more information, see [Amazon SageMaker API Permissions:
-    #   Actions, Permissions, and Resources Reference][5].
+    #   For more information, see [SageMaker API Permissions: Actions,
+    #   Permissions, and Resources Reference][5].
     #
     #  </note>
     #
@@ -2401,12 +2401,19 @@ module Aws::SageMaker
     #     `OfflineStore`.
     #
     #   * A configuration for an Amazon Web Services Glue or Amazon Web
-    #     Services Hive data cataolgue.
+    #     Services Hive data catalog.
     #
     #   * An KMS encryption key to encrypt the Amazon S3 location used for
-    #     `OfflineStore`.
+    #     `OfflineStore`. If KMS encryption key is not specified, by default
+    #     we encrypt all data at rest using Amazon Web Services KMS key. By
+    #     defining your [bucket-level key][1] for SSE, you can reduce Amazon
+    #     Web Services KMS requests costs by up to 99 percent.
     #
     #   To learn more about this parameter, see OfflineStoreConfig.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM execution role used to
@@ -2767,7 +2774,7 @@ module Aws::SageMaker
     #       },
     #       algorithm_specification: { # required
     #         training_image: "AlgorithmImage",
-    #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #         algorithm_name: "ArnOrName",
     #         metric_definitions: [
     #           {
@@ -2797,7 +2804,7 @@ module Aws::SageMaker
     #           content_type: "ContentType",
     #           compression_type: "None", # accepts None, Gzip
     #           record_wrapper_type: "None", # accepts None, RecordIO
-    #           input_mode: "Pipe", # accepts Pipe, File
+    #           input_mode: "Pipe", # accepts Pipe, File, FastFile
     #           shuffle_config: {
     #             seed: 1, # required
     #           },
@@ -2868,7 +2875,7 @@ module Aws::SageMaker
     #         },
     #         algorithm_specification: { # required
     #           training_image: "AlgorithmImage",
-    #           training_input_mode: "Pipe", # required, accepts Pipe, File
+    #           training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #           algorithm_name: "ArnOrName",
     #           metric_definitions: [
     #             {
@@ -2898,7 +2905,7 @@ module Aws::SageMaker
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
     #             record_wrapper_type: "None", # accepts None, RecordIO
-    #             input_mode: "Pipe", # accepts Pipe, File
+    #             input_mode: "Pipe", # accepts Pipe, File, FastFile
     #             shuffle_config: {
     #               seed: 1, # required
     #             },
@@ -5417,7 +5424,7 @@ module Aws::SageMaker
     #     algorithm_specification: { # required
     #       training_image: "AlgorithmImage",
     #       algorithm_name: "ArnOrName",
-    #       training_input_mode: "Pipe", # required, accepts Pipe, File
+    #       training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #       metric_definitions: [
     #         {
     #           name: "MetricName", # required
@@ -5447,7 +5454,7 @@ module Aws::SageMaker
     #         content_type: "ContentType",
     #         compression_type: "None", # accepts None, Gzip
     #         record_wrapper_type: "None", # accepts None, RecordIO
-    #         input_mode: "Pipe", # accepts Pipe, File
+    #         input_mode: "Pipe", # accepts Pipe, File, FastFile
     #         shuffle_config: {
     #           seed: 1, # required
     #         },
@@ -7479,7 +7486,7 @@ module Aws::SageMaker
     #   resp.training_specification.training_channels[0].supported_compression_types #=> Array
     #   resp.training_specification.training_channels[0].supported_compression_types[0] #=> String, one of "None", "Gzip"
     #   resp.training_specification.training_channels[0].supported_input_modes #=> Array
-    #   resp.training_specification.training_channels[0].supported_input_modes[0] #=> String, one of "Pipe", "File"
+    #   resp.training_specification.training_channels[0].supported_input_modes[0] #=> String, one of "Pipe", "File", "FastFile"
     #   resp.training_specification.supported_tuning_job_objective_metrics #=> Array
     #   resp.training_specification.supported_tuning_job_objective_metrics[0].type #=> String, one of "Maximize", "Minimize"
     #   resp.training_specification.supported_tuning_job_objective_metrics[0].metric_name #=> String
@@ -7502,7 +7509,7 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_role #=> String
     #   resp.validation_specification.validation_profiles #=> Array
     #   resp.validation_specification.validation_profiles[0].profile_name #=> String
-    #   resp.validation_specification.validation_profiles[0].training_job_definition.training_input_mode #=> String, one of "Pipe", "File"
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.training_input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.hyper_parameters #=> Hash
     #   resp.validation_specification.validation_profiles[0].training_job_definition.hyper_parameters["HyperParameterKey"] #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config #=> Array
@@ -7519,7 +7526,7 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].content_type #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
-    #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].input_mode #=> String, one of "Pipe", "File"
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.output_data_config.kms_key_id #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.output_data_config.s3_output_path #=> String
@@ -8766,7 +8773,7 @@ module Aws::SageMaker
     #   resp.training_job_definition.static_hyper_parameters #=> Hash
     #   resp.training_job_definition.static_hyper_parameters["HyperParameterKey"] #=> String
     #   resp.training_job_definition.algorithm_specification.training_image #=> String
-    #   resp.training_job_definition.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
+    #   resp.training_job_definition.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.training_job_definition.algorithm_specification.algorithm_name #=> String
     #   resp.training_job_definition.algorithm_specification.metric_definitions #=> Array
     #   resp.training_job_definition.algorithm_specification.metric_definitions[0].name #=> String
@@ -8786,7 +8793,7 @@ module Aws::SageMaker
     #   resp.training_job_definition.input_data_config[0].content_type #=> String
     #   resp.training_job_definition.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.training_job_definition.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
-    #   resp.training_job_definition.input_data_config[0].input_mode #=> String, one of "Pipe", "File"
+    #   resp.training_job_definition.input_data_config[0].input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.training_job_definition.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.training_job_definition.vpc_config.security_group_ids #=> Array
     #   resp.training_job_definition.vpc_config.security_group_ids[0] #=> String
@@ -8827,7 +8834,7 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].static_hyper_parameters #=> Hash
     #   resp.training_job_definitions[0].static_hyper_parameters["HyperParameterKey"] #=> String
     #   resp.training_job_definitions[0].algorithm_specification.training_image #=> String
-    #   resp.training_job_definitions[0].algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
+    #   resp.training_job_definitions[0].algorithm_specification.training_input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.training_job_definitions[0].algorithm_specification.algorithm_name #=> String
     #   resp.training_job_definitions[0].algorithm_specification.metric_definitions #=> Array
     #   resp.training_job_definitions[0].algorithm_specification.metric_definitions[0].name #=> String
@@ -8847,7 +8854,7 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].input_data_config[0].content_type #=> String
     #   resp.training_job_definitions[0].input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.training_job_definitions[0].input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
-    #   resp.training_job_definitions[0].input_data_config[0].input_mode #=> String, one of "Pipe", "File"
+    #   resp.training_job_definitions[0].input_data_config[0].input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.training_job_definitions[0].input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.training_job_definitions[0].vpc_config.security_group_ids #=> Array
     #   resp.training_job_definitions[0].vpc_config.security_group_ids[0] #=> String
@@ -10282,7 +10289,7 @@ module Aws::SageMaker
     #   resp.hyper_parameters["HyperParameterKey"] #=> String
     #   resp.algorithm_specification.training_image #=> String
     #   resp.algorithm_specification.algorithm_name #=> String
-    #   resp.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
+    #   resp.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.algorithm_specification.metric_definitions #=> Array
     #   resp.algorithm_specification.metric_definitions[0].name #=> String
     #   resp.algorithm_specification.metric_definitions[0].regex #=> String
@@ -10302,7 +10309,7 @@ module Aws::SageMaker
     #   resp.input_data_config[0].content_type #=> String
     #   resp.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
-    #   resp.input_data_config[0].input_mode #=> String, one of "Pipe", "File"
+    #   resp.input_data_config[0].input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
@@ -15345,7 +15352,7 @@ module Aws::SageMaker
     #   resp.results[0].training_job.hyper_parameters["HyperParameterKey"] #=> String
     #   resp.results[0].training_job.algorithm_specification.training_image #=> String
     #   resp.results[0].training_job.algorithm_specification.algorithm_name #=> String
-    #   resp.results[0].training_job.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
+    #   resp.results[0].training_job.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.results[0].training_job.algorithm_specification.metric_definitions #=> Array
     #   resp.results[0].training_job.algorithm_specification.metric_definitions[0].name #=> String
     #   resp.results[0].training_job.algorithm_specification.metric_definitions[0].regex #=> String
@@ -15365,7 +15372,7 @@ module Aws::SageMaker
     #   resp.results[0].training_job.input_data_config[0].content_type #=> String
     #   resp.results[0].training_job.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.results[0].training_job.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
-    #   resp.results[0].training_job.input_data_config[0].input_mode #=> String, one of "Pipe", "File"
+    #   resp.results[0].training_job.input_data_config[0].input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.results[0].training_job.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.results[0].training_job.output_data_config.kms_key_id #=> String
     #   resp.results[0].training_job.output_data_config.s3_output_path #=> String
@@ -15534,7 +15541,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.hyper_parameters["HyperParameterKey"] #=> String
     #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.training_image #=> String
     #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.algorithm_name #=> String
-    #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
+    #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.metric_definitions #=> Array
     #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.metric_definitions[0].name #=> String
     #   resp.results[0].trial_component.source_detail.training_job.algorithm_specification.metric_definitions[0].regex #=> String
@@ -15554,7 +15561,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].content_type #=> String
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
-    #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].input_mode #=> String, one of "Pipe", "File"
+    #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].input_mode #=> String, one of "Pipe", "File", "FastFile"
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.output_data_config.kms_key_id #=> String
     #   resp.results[0].trial_component.source_detail.training_job.output_data_config.s3_output_path #=> String
@@ -18032,7 +18039,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

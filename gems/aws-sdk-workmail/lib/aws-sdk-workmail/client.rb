@@ -751,6 +751,12 @@ module Aws::WorkMail
     # Deletes an access control rule for the specified WorkMail
     # organization.
     #
+    # <note markdown="1"> Deleting already deleted and non-existing rules does not produce an
+    # error. In those cases, the service sends back an HTTP 200 response
+    # with an empty HTTP body.
+    #
+    #  </note>
+    #
     # @option params [required, String] :organization_id
     #   The identifier for the organization.
     #
@@ -867,8 +873,61 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Deletes the mobile device access override for the given WorkMail
+    # organization, user, and device.
+    #
+    # <note markdown="1"> Deleting already deleted and non-existing overrides does not produce
+    # an error. In those cases, the service sends back an HTTP 200 response
+    # with an empty HTTP body.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which the access override will be
+    #   deleted.
+    #
+    # @option params [required, String] :user_id
+    #   The WorkMail user for which you want to delete the override. Accepts
+    #   the following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #
+    # @option params [required, String] :device_id
+    #   The mobile device for which you delete the override. `DeviceId` is
+    #   case insensitive.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_mobile_device_access_override({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "EntityIdentifier", # required
+    #     device_id: "DeviceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMobileDeviceAccessOverride AWS API Documentation
+    #
+    # @overload delete_mobile_device_access_override(params = {})
+    # @param [Hash] params ({})
+    def delete_mobile_device_access_override(params = {}, options = {})
+      req = build_request(:delete_mobile_device_access_override, params)
+      req.send_request(options)
+    end
+
     # Deletes a mobile device access rule for the specified Amazon WorkMail
     # organization.
+    #
+    # <note markdown="1"> Deleting already deleted and non-existing rules does not produce an
+    # error. In those cases, the service sends back an HTTP 200 response
+    # with an empty HTTP body.
+    #
+    #  </note>
     #
     # @option params [required, String] :organization_id
     #   The Amazon WorkMail organization under which the rule will be deleted.
@@ -1059,6 +1118,37 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Removes a domain from Amazon WorkMail, stops email routing to
+    # WorkMail, and removes the authorization allowing WorkMail use. SES
+    # keeps the domain because other applications may use it. You must first
+    # remove any email address used by WorkMail entities before you remove
+    # the domain.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which the domain will be
+    #   deregistered.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain to deregister in WorkMail and SES.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_mail_domain({
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "WorkMailDomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeregisterMailDomain AWS API Documentation
+    #
+    # @overload deregister_mail_domain(params = {})
+    # @param [Hash] params ({})
+    def deregister_mail_domain(params = {}, options = {})
+      req = build_request(:deregister_mail_domain, params)
+      req.send_request(options)
+    end
+
     # Returns the data available for the group.
     #
     # @option params [required, String] :organization_id
@@ -1098,6 +1188,34 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def describe_group(params = {}, options = {})
       req = build_request(:describe_group, params)
+      req.send_request(options)
+    end
+
+    # Lists the settings in a DMARC policy for a specified organization.
+    #
+    # @option params [required, String] :organization_id
+    #   Lists the ID of the given organization.
+    #
+    # @return [Types::DescribeInboundDmarcSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInboundDmarcSettingsResponse#enforced #enforced} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inbound_dmarc_settings({
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.enforced #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeInboundDmarcSettings AWS API Documentation
+    #
+    # @overload describe_inbound_dmarc_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_inbound_dmarc_settings(params = {}, options = {})
+      req = build_request(:describe_inbound_dmarc_settings, params)
       req.send_request(options)
     end
 
@@ -1441,6 +1559,50 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Gets details for a mail domain, including domain records required to
+    # configure your domain with recommended security.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which the domain is retrieved.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain from which you want to retrieve details.
+    #
+    # @return [Types::GetMailDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMailDomainResponse#records #records} => Array&lt;Types::DnsRecord&gt;
+    #   * {Types::GetMailDomainResponse#is_test_domain #is_test_domain} => Boolean
+    #   * {Types::GetMailDomainResponse#is_default #is_default} => Boolean
+    #   * {Types::GetMailDomainResponse#ownership_verification_status #ownership_verification_status} => String
+    #   * {Types::GetMailDomainResponse#dkim_verification_status #dkim_verification_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_mail_domain({
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "WorkMailDomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.records #=> Array
+    #   resp.records[0].type #=> String
+    #   resp.records[0].hostname #=> String
+    #   resp.records[0].value #=> String
+    #   resp.is_test_domain #=> Boolean
+    #   resp.is_default #=> Boolean
+    #   resp.ownership_verification_status #=> String, one of "PENDING", "VERIFIED", "FAILED"
+    #   resp.dkim_verification_status #=> String, one of "PENDING", "VERIFIED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMailDomain AWS API Documentation
+    #
+    # @overload get_mail_domain(params = {})
+    # @param [Hash] params ({})
+    def get_mail_domain(params = {}, options = {})
+      req = build_request(:get_mail_domain, params)
+      req.send_request(options)
+    end
+
     # Requests a user's mailbox details for a specified organization and
     # user.
     #
@@ -1525,6 +1687,63 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def get_mobile_device_access_effect(params = {}, options = {})
       req = build_request(:get_mobile_device_access_effect, params)
+      req.send_request(options)
+    end
+
+    # Gets the mobile device access override for the given WorkMail
+    # organization, user, and device.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization to which you want to apply the
+    #   override.
+    #
+    # @option params [required, String] :user_id
+    #   Identifies the WorkMail user for the override. Accepts the following
+    #   types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #
+    # @option params [required, String] :device_id
+    #   The mobile device to which the override applies. `DeviceId` is case
+    #   insensitive.
+    #
+    # @return [Types::GetMobileDeviceAccessOverrideResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#user_id #user_id} => String
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#device_id #device_id} => String
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#effect #effect} => String
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#description #description} => String
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#date_created #date_created} => Time
+    #   * {Types::GetMobileDeviceAccessOverrideResponse#date_modified #date_modified} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_mobile_device_access_override({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "EntityIdentifier", # required
+    #     device_id: "DeviceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user_id #=> String
+    #   resp.device_id #=> String
+    #   resp.effect #=> String, one of "ALLOW", "DENY"
+    #   resp.description #=> String
+    #   resp.date_created #=> Time
+    #   resp.date_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMobileDeviceAccessOverride AWS API Documentation
+    #
+    # @overload get_mobile_device_access_override(params = {})
+    # @param [Hash] params ({})
+    def get_mobile_device_access_override(params = {}, options = {})
+      req = build_request(:get_mobile_device_access_override, params)
       req.send_request(options)
     end
 
@@ -1720,6 +1939,49 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Lists the mail domains in a given Amazon WorkMail organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which to list domains.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results. The first call
+    #   does not require a token.
+    #
+    # @return [Types::ListMailDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMailDomainsResponse#mail_domains #mail_domains} => Array&lt;Types::MailDomainSummary&gt;
+    #   * {Types::ListMailDomainsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_mail_domains({
+    #     organization_id: "OrganizationId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mail_domains #=> Array
+    #   resp.mail_domains[0].domain_name #=> String
+    #   resp.mail_domains[0].default_domain #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailDomains AWS API Documentation
+    #
+    # @overload list_mail_domains(params = {})
+    # @param [Hash] params ({})
+    def list_mail_domains(params = {}, options = {})
+      req = build_request(:list_mail_domains, params)
+      req.send_request(options)
+    end
+
     # Lists the mailbox export jobs started for the specified organization
     # within the last seven days.
     #
@@ -1819,6 +2081,71 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def list_mailbox_permissions(params = {}, options = {})
       req = build_request(:list_mailbox_permissions, params)
+      req.send_request(options)
+    end
+
+    # Lists all the mobile device access overrides for any given combination
+    # of WorkMail organization, user, or device.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization under which to list mobile device
+    #   access overrides.
+    #
+    # @option params [String] :user_id
+    #   The WorkMail user under which you list the mobile device access
+    #   overrides. Accepts the following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #
+    # @option params [String] :device_id
+    #   The mobile device to which the access override applies.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results. The first call
+    #   does not require a token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListMobileDeviceAccessOverridesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMobileDeviceAccessOverridesResponse#overrides #overrides} => Array&lt;Types::MobileDeviceAccessOverride&gt;
+    #   * {Types::ListMobileDeviceAccessOverridesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_mobile_device_access_overrides({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "EntityIdentifier",
+    #     device_id: "DeviceId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.overrides #=> Array
+    #   resp.overrides[0].user_id #=> String
+    #   resp.overrides[0].device_id #=> String
+    #   resp.overrides[0].effect #=> String, one of "ALLOW", "DENY"
+    #   resp.overrides[0].description #=> String
+    #   resp.overrides[0].date_created #=> Time
+    #   resp.overrides[0].date_modified #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMobileDeviceAccessOverrides AWS API Documentation
+    #
+    # @overload list_mobile_device_access_overrides(params = {})
+    # @param [Hash] params ({})
+    def list_mobile_device_access_overrides(params = {}, options = {})
+      req = build_request(:list_mobile_device_access_overrides, params)
       req.send_request(options)
     end
 
@@ -2156,6 +2483,32 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Enables or disables a DMARC policy for a given organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The ID of the organization that you are applying the DMARC policy to.
+    #
+    # @option params [required, Boolean] :enforced
+    #   Enforces or suspends a policy after it's applied.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_inbound_dmarc_settings({
+    #     organization_id: "OrganizationId", # required
+    #     enforced: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutInboundDmarcSettings AWS API Documentation
+    #
+    # @overload put_inbound_dmarc_settings(params = {})
+    # @param [Hash] params ({})
+    def put_inbound_dmarc_settings(params = {}, options = {})
+      req = build_request(:put_inbound_dmarc_settings, params)
+      req.send_request(options)
+    end
+
     # Sets permissions for a user, group, or resource. This replaces any
     # pre-existing permissions.
     #
@@ -2200,6 +2553,55 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Creates or updates a mobile device access override for the given
+    # WorkMail organization, user, and device.
+    #
+    # @option params [required, String] :organization_id
+    #   Identifies the Amazon WorkMail organization for which you create the
+    #   override.
+    #
+    # @option params [required, String] :user_id
+    #   The WorkMail user for which you create the override. Accepts the
+    #   following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #
+    # @option params [required, String] :device_id
+    #   The mobile device for which you create the override. `DeviceId` is
+    #   case insensitive.
+    #
+    # @option params [required, String] :effect
+    #   The effect of the override, `ALLOW` or `DENY`.
+    #
+    # @option params [String] :description
+    #   A description of the override.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_mobile_device_access_override({
+    #     organization_id: "OrganizationId", # required
+    #     user_id: "EntityIdentifier", # required
+    #     device_id: "DeviceId", # required
+    #     effect: "ALLOW", # required, accepts ALLOW, DENY
+    #     description: "MobileDeviceAccessRuleDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMobileDeviceAccessOverride AWS API Documentation
+    #
+    # @overload put_mobile_device_access_override(params = {})
+    # @param [Hash] params ({})
+    def put_mobile_device_access_override(params = {}, options = {})
+      req = build_request(:put_mobile_device_access_override, params)
+      req.send_request(options)
+    end
+
     # Puts a retention policy to the specified organization.
     #
     # @option params [required, String] :organization_id
@@ -2241,6 +2643,44 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def put_retention_policy(params = {}, options = {})
       req = build_request(:put_retention_policy, params)
+      req.send_request(options)
+    end
+
+    # Registers a new domain in Amazon WorkMail and SES, and configures it
+    # for use by WorkMail. Emails received by SES for this domain are routed
+    # to the specified WorkMail organization, and WorkMail has permanent
+    # permission to use the specified domain for sending your users'
+    # emails.
+    #
+    # @option params [String] :client_token
+    #   Idempotency token used when retrying requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization under which you're creating the
+    #   domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the mail domain to create in Amazon WorkMail and SES.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_mail_domain({
+    #     client_token: "IdempotencyClientToken",
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "WorkMailDomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/RegisterMailDomain AWS API Documentation
+    #
+    # @overload register_mail_domain(params = {})
+    # @param [Hash] params ({})
+    def register_mail_domain(params = {}, options = {})
+      req = build_request(:register_mail_domain, params)
       req.send_request(options)
     end
 
@@ -2448,6 +2888,34 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Updates the default mail domain for an organization. The default mail
+    # domain is used by the WorkMail AWS Console to suggest an email address
+    # when enabling a mail user. You can only have one default domain.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which to list domains.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain name that will become the default domain.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_default_mail_domain({
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "WorkMailDomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateDefaultMailDomain AWS API Documentation
+    #
+    # @overload update_default_mail_domain(params = {})
+    # @param [Hash] params ({})
+    def update_default_mail_domain(params = {}, options = {})
+      req = build_request(:update_default_mail_domain, params)
+      req.send_request(options)
+    end
+
     # Updates a user's current mailbox quota for a specified organization
     # and user.
     #
@@ -2644,7 +3112,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

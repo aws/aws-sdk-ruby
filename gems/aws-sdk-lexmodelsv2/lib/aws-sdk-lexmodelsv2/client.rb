@@ -654,8 +654,8 @@ module Aws::LexModelsV2
     #   For example, suppose a bot is configured with the confidence threshold
     #   of 0.80 and the `AMAZON.FallbackIntent`. Amazon Lex returns three
     #   alternative intents with the following confidence scores: IntentA
-    #   (0.70), IntentB (0.60), IntentC (0.50). The response from the PostText
-    #   operation would be:
+    #   (0.70), IntentB (0.60), IntentC (0.50). The response from the
+    #   `RecognizeText` operation would be:
     #
     #   * AMAZON.FallbackIntent
     #
@@ -1019,6 +1019,279 @@ module Aws::LexModelsV2
     #     },
     #     fulfillment_code_hook: {
     #       enabled: false, # required
+    #       post_fulfillment_status_specification: {
+    #         success_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         failure_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         timeout_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #       },
+    #       fulfillment_updates_specification: {
+    #         active: false, # required
+    #         start_response: {
+    #           delay_in_seconds: 1, # required
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         update_response: {
+    #           frequency_in_seconds: 1, # required
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         timeout_in_seconds: 1,
+    #       },
     #     },
     #     intent_confirmation_setting: {
     #       prompt_specification: { # required
@@ -1218,6 +1491,115 @@ module Aws::LexModelsV2
     #   resp.sample_utterances[0].utterance #=> String
     #   resp.dialog_code_hook.enabled #=> Boolean
     #   resp.fulfillment_code_hook.enabled #=> Boolean
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.active #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.delay_in_seconds #=> Integer
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.frequency_in_seconds #=> Integer
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.timeout_in_seconds #=> Integer
     #   resp.intent_confirmation_setting.prompt_specification.message_groups #=> Array
     #   resp.intent_confirmation_setting.prompt_specification.message_groups[0].message.plain_text_message.value #=> String
     #   resp.intent_confirmation_setting.prompt_specification.message_groups[0].message.custom_payload.value #=> String
@@ -2991,6 +3373,115 @@ module Aws::LexModelsV2
     #   resp.sample_utterances[0].utterance #=> String
     #   resp.dialog_code_hook.enabled #=> Boolean
     #   resp.fulfillment_code_hook.enabled #=> Boolean
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.active #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.delay_in_seconds #=> Integer
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.frequency_in_seconds #=> Integer
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.timeout_in_seconds #=> Integer
     #   resp.slot_priorities #=> Array
     #   resp.slot_priorities[0].priority #=> Integer
     #   resp.slot_priorities[0].slot_id #=> String
@@ -3921,7 +4412,7 @@ module Aws::LexModelsV2
     #   of results are returned.
     #
     # @option params [String] :next_token
-    #   If the response from the `ListExports` operation contans more results
+    #   If the response from the `ListExports` operation contains more results
     #   that specified in the `maxResults` parameter, a token is returned in
     #   the response. Use that token in the `nextToken` parameter to return
     #   the next page of results.
@@ -4988,6 +5479,279 @@ module Aws::LexModelsV2
     #     },
     #     fulfillment_code_hook: {
     #       enabled: false, # required
+    #       post_fulfillment_status_specification: {
+    #         success_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         failure_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         timeout_response: {
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #       },
+    #       fulfillment_updates_specification: {
+    #         active: false, # required
+    #         start_response: {
+    #           delay_in_seconds: 1, # required
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         update_response: {
+    #           frequency_in_seconds: 1, # required
+    #           message_groups: [ # required
+    #             {
+    #               message: { # required
+    #                 plain_text_message: {
+    #                   value: "PlainTextMessageValue", # required
+    #                 },
+    #                 custom_payload: {
+    #                   value: "CustomPayloadValue", # required
+    #                 },
+    #                 ssml_message: {
+    #                   value: "SSMLMessageValue", # required
+    #                 },
+    #                 image_response_card: {
+    #                   title: "AttachmentTitle", # required
+    #                   subtitle: "AttachmentTitle",
+    #                   image_url: "AttachmentUrl",
+    #                   buttons: [
+    #                     {
+    #                       text: "ButtonText", # required
+    #                       value: "ButtonValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               variations: [
+    #                 {
+    #                   plain_text_message: {
+    #                     value: "PlainTextMessageValue", # required
+    #                   },
+    #                   custom_payload: {
+    #                     value: "CustomPayloadValue", # required
+    #                   },
+    #                   ssml_message: {
+    #                     value: "SSMLMessageValue", # required
+    #                   },
+    #                   image_response_card: {
+    #                     title: "AttachmentTitle", # required
+    #                     subtitle: "AttachmentTitle",
+    #                     image_url: "AttachmentUrl",
+    #                     buttons: [
+    #                       {
+    #                         text: "ButtonText", # required
+    #                         value: "ButtonValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           allow_interrupt: false,
+    #         },
+    #         timeout_in_seconds: 1,
+    #       },
     #     },
     #     slot_priorities: [
     #       {
@@ -5193,6 +5957,115 @@ module Aws::LexModelsV2
     #   resp.sample_utterances[0].utterance #=> String
     #   resp.dialog_code_hook.enabled #=> Boolean
     #   resp.fulfillment_code_hook.enabled #=> Boolean
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.active #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.delay_in_seconds #=> Integer
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.start_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.frequency_in_seconds #=> Integer
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].message.image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].plain_text_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].custom_payload.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].ssml_message.value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.title #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.subtitle #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.image_url #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.buttons #=> Array
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.buttons[0].text #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups[0].variations[0].image_response_card.buttons[0].value #=> String
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.update_response.allow_interrupt #=> Boolean
+    #   resp.fulfillment_code_hook.fulfillment_updates_specification.timeout_in_seconds #=> Integer
     #   resp.slot_priorities #=> Array
     #   resp.slot_priorities[0].priority #=> Integer
     #   resp.slot_priorities[0].slot_id #=> String
@@ -5899,7 +6772,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -144,6 +144,7 @@ module Aws::FSx
     FileSystemMaintenanceOperations = Shapes::ListShape.new(name: 'FileSystemMaintenanceOperations')
     FileSystemNotFound = Shapes::StructureShape.new(name: 'FileSystemNotFound')
     FileSystemType = Shapes::StringShape.new(name: 'FileSystemType')
+    FileSystemTypeVersion = Shapes::StringShape.new(name: 'FileSystemTypeVersion')
     FileSystems = Shapes::ListShape.new(name: 'FileSystems')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
@@ -422,6 +423,7 @@ module Aws::FSx
     CreateFileSystemFromBackupRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
     CreateFileSystemFromBackupRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
     CreateFileSystemFromBackupRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    CreateFileSystemFromBackupRequest.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
     CreateFileSystemFromBackupRequest.struct_class = Types::CreateFileSystemFromBackupRequest
 
     CreateFileSystemFromBackupResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -464,6 +466,7 @@ module Aws::FSx
     CreateFileSystemRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
     CreateFileSystemRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
     CreateFileSystemRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
+    CreateFileSystemRequest.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
     CreateFileSystemRequest.struct_class = Types::CreateFileSystemRequest
 
     CreateFileSystemResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -736,6 +739,7 @@ module Aws::FSx
     FileSystem.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: LustreFileSystemConfiguration, location_name: "LustreConfiguration"))
     FileSystem.add_member(:administrative_actions, Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
     FileSystem.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: OntapFileSystemConfiguration, location_name: "OntapConfiguration"))
+    FileSystem.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
     FileSystem.struct_class = Types::FileSystem
 
     FileSystemEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))

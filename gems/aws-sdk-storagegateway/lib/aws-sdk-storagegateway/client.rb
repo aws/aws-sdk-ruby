@@ -338,12 +338,12 @@ module Aws::StorageGateway
     # @!group API Operations
 
     # Activates the gateway you previously deployed on your host. In the
-    # activation process, you specify information such as the Region that
-    # you want to use for storing snapshots or tapes, the time zone for
-    # scheduled snapshots the gateway snapshot schedule window, an
-    # activation key, and a name for your gateway. The activation process
-    # also associates your gateway with your account. For more information,
-    # see UpdateGatewayInformation.
+    # activation process, you specify information such as the Amazon Web
+    # Services Region that you want to use for storing snapshots or tapes,
+    # the time zone for scheduled snapshots the gateway snapshot schedule
+    # window, an activation key, and a name for your gateway. The activation
+    # process also associates your gateway with your account. For more
+    # information, see UpdateGatewayInformation.
     #
     # <note markdown="1"> You must turn on the gateway VM before you can activate your gateway.
     #
@@ -378,12 +378,13 @@ module Aws::StorageGateway
     #   schedule.
     #
     # @option params [required, String] :gateway_region
-    #   A value that indicates the Region where you want to store your data.
-    #   The gateway Region specified must be the same Region as the Region in
-    #   your `Host` header in the request. For more information about
-    #   available Regions and endpoints for Storage Gateway, see [ Storage
-    #   Gateway endpoints and quotas][1] in the *Amazon Web Services General
-    #   Reference*.
+    #   A value that indicates the Amazon Web Services Region where you want
+    #   to store your data. The gateway Amazon Web Services Region specified
+    #   must be the same Amazon Web Services Region as the Amazon Web Services
+    #   Region in your `Host` header in the request. For more information
+    #   about available Amazon Web Services Regions and endpoints for Storage
+    #   Gateway, see [ Storage Gateway endpoints and quotas][1] in the *Amazon
+    #   Web Services General Reference*.
     #
     #   Valid Values: See [ Storage Gateway endpoints and quotas][1] in the
     #   *Amazon Web Services General Reference*.
@@ -493,7 +494,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, Array<String>] :disk_ids
     #   An array of strings that identify disks that are to be configured as
@@ -637,7 +639,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, Array<String>] :disk_ids
     #   An array of strings that identify disks that are to be configured as
@@ -703,7 +706,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, Array<String>] :disk_ids
     #   An array of strings that identify disks that are to be configured as
@@ -828,7 +832,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the Amazon FSx file system to
@@ -965,7 +970,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :tape_arn
     #   The Amazon Resource Name (ARN) of the virtual tape you want to cancel
@@ -1017,7 +1023,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :tape_arn
     #   The Amazon Resource Name (ARN) of the virtual tape you want to cancel
@@ -1087,7 +1094,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, Integer] :volume_size_in_bytes
     #   The size of the volume in bytes.
@@ -1221,12 +1229,15 @@ module Aws::StorageGateway
     # using an NFS interface. This operation is only supported for S3 File
     # Gateways.
     #
-    # S3 File gateway requires Security Token Service (STS) to be activated
-    # to enable you to create a file share. Make sure STS is activated in
-    # the Region you are creating your S3 File Gateway in. If STS is not
-    # activated in the Region, activate it. For information about how to
-    # activate STS, see [Activating and deactivating STS in an Region][1] in
-    # the *Identity and Access Management User Guide*.
+    # S3 File gateway requires Security Token Service (Amazon Web Services
+    # STS) to be activated to enable you to create a file share. Make sure
+    # Amazon Web Services STS is activated in the Amazon Web Services Region
+    # you are creating your S3 File Gateway in. If Amazon Web Services STS
+    # is not activated in the Amazon Web Services Region, activate it. For
+    # information about how to activate Amazon Web Services STS, see
+    # [Activating and deactivating Amazon Web Services STS in an Amazon Web
+    # Services Region][1] in the *Identity and Access Management User
+    # Guide*.
     #
     #  S3 File Gateways do not support creating hard or symbolic links on a
     # file share.
@@ -1263,18 +1274,29 @@ module Aws::StorageGateway
     #   File Gateway assumes when it accesses the underlying storage.
     #
     # @option params [required, String] :location_arn
-    #   The ARN of the backend storage used for storing file data. A prefix
-    #   name can be added to the S3 bucket name. It must end with a "/".
+    #   A custom ARN for the backend storage used for storing data for file
+    #   shares. It includes a resource ARN with an optional prefix
+    #   concatenation. The prefix must end with a forward slash (/).
     #
-    #   <note markdown="1"> You can specify a bucket attached to an access point using a complete
-    #   ARN that includes the bucket region as shown:
+    #   <note markdown="1"> You can specify LocationARN as a bucket ARN, access point ARN or
+    #   access point alias, as shown in the following examples.
     #
-    #    `arn:aws:s3:region:account-id:accesspoint/access-point-name `
+    #    Bucket ARN:
     #
-    #    If you specify a bucket attached to an access point, the bucket policy
-    #   must be configured to delegate access control to the access point. For
-    #   information, see [Delegating access control to access points][1] in
-    #   the *Amazon S3 User Guide*.
+    #    `arn:aws:s3:::my-bucket/prefix/`
+    #
+    #    Access point ARN:
+    #
+    #    `arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/`
+    #
+    #    If you specify an access point, the bucket policy must be configured
+    #   to delegate access control to the access point. For information, see
+    #   [Delegating access control to access points][1] in the *Amazon S3 User
+    #   Guide*.
+    #
+    #    Access point alias:
+    #
+    #    `test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias`
     #
     #    </note>
     #
@@ -1353,7 +1375,7 @@ module Aws::StorageGateway
     #   The name of the file share. Optional.
     #
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
-    #   `LocationARN`.
+    #   `LocationARN`, or if an access point or access point alias is used.
     #
     #    </note>
     #
@@ -1403,6 +1425,9 @@ module Aws::StorageGateway
     #
     #    </note>
     #
+    # @option params [String] :audit_destination_arn
+    #   The Amazon Resource Name (ARN) of the storage used for audit logs.
+    #
     # @return [Types::CreateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNFSFileShareOutput#file_share_arn #file_share_arn} => String
@@ -1442,6 +1467,7 @@ module Aws::StorageGateway
     #     notification_policy: "NotificationPolicy",
     #     vpc_endpoint_dns_name: "DNSHostName",
     #     bucket_region: "RegionId",
+    #     audit_destination_arn: "AuditDestinationARN",
     #   })
     #
     # @example Response structure
@@ -1463,12 +1489,15 @@ module Aws::StorageGateway
     # using an SMB interface. This operation is only supported for S3 File
     # Gateways.
     #
-    # S3 File Gateways require Security Token Service (STS) to be activated
-    # to enable you to create a file share. Make sure that STS is activated
-    # in the Region you are creating your S3 File Gateway in. If STS is not
-    # activated in this Region, activate it. For information about how to
-    # activate STS, see [Activating and deactivating STS in an Region][1] in
-    # the *Identity and Access Management User Guide*.
+    # S3 File Gateways require Security Token Service (Amazon Web Services
+    # STS) to be activated to enable you to create a file share. Make sure
+    # that Amazon Web Services STS is activated in the Amazon Web Services
+    # Region you are creating your S3 File Gateway in. If Amazon Web
+    # Services STS is not activated in this Amazon Web Services Region,
+    # activate it. For information about how to activate Amazon Web Services
+    # STS, see [Activating and deactivating Amazon Web Services STS in an
+    # Amazon Web Services Region][1] in the *Identity and Access Management
+    # User Guide*.
     #
     #  File gateways don't support creating hard or symbolic links on a
     # file
@@ -1503,18 +1532,29 @@ module Aws::StorageGateway
     #   File Gateway assumes when it accesses the underlying storage.
     #
     # @option params [required, String] :location_arn
-    #   The ARN of the backend storage used for storing file data. A prefix
-    #   name can be added to the S3 bucket name. It must end with a "/".
+    #   A custom ARN for the backend storage used for storing data for file
+    #   shares. It includes a resource ARN with an optional prefix
+    #   concatenation. The prefix must end with a forward slash (/).
     #
-    #   <note markdown="1"> You can specify a bucket attached to an access point using a complete
-    #   ARN that includes the bucket region as shown:
+    #   <note markdown="1"> You can specify LocationARN as a bucket ARN, access point ARN or
+    #   access point alias, as shown in the following examples.
     #
-    #    `arn:aws:s3:region:account-id:accesspoint/access-point-name `
+    #    Bucket ARN:
     #
-    #    If you specify a bucket attached to an access point, the bucket policy
-    #   must be configured to delegate access control to the access point. For
-    #   information, see [Delegating access control to access points][1] in
-    #   the *Amazon S3 User Guide*.
+    #    `arn:aws:s3:::my-bucket/prefix/`
+    #
+    #    Access point ARN:
+    #
+    #    `arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/`
+    #
+    #    If you specify an access point, the bucket policy must be configured
+    #   to delegate access control to the access point. For information, see
+    #   [Delegating access control to access points][1] in the *Amazon S3 User
+    #   Guide*.
+    #
+    #    Access point alias:
+    #
+    #    `test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias`
     #
     #    </note>
     #
@@ -1634,7 +1674,7 @@ module Aws::StorageGateway
     #   The name of the file share. Optional.
     #
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
-    #   `LocationARN`.
+    #   `LocationARN`, or if an access point or access point alias is used.
     #
     #    </note>
     #
@@ -1973,7 +2013,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :disk_id
     #   The unique identifier for the gateway local disk that is configured as
@@ -2117,10 +2158,11 @@ module Aws::StorageGateway
     #
     # @option params [String] :retention_lock_type
     #   Tape retention lock can be configured in two modes. When configured in
-    #   governance mode, accounts with specific IAM permissions are authorized
-    #   to remove the tape retention lock from archived virtual tapes. When
-    #   configured in compliance mode, the tape retention lock cannot be
-    #   removed by any user, including the root account.
+    #   governance mode, Amazon Web Services accounts with specific IAM
+    #   permissions are authorized to remove the tape retention lock from
+    #   archived virtual tapes. When configured in compliance mode, the tape
+    #   retention lock cannot be removed by any user, including the root
+    #   Amazon Web Services account.
     #
     # @option params [Integer] :retention_lock_time_in_days
     #   Tape retention lock time is set in days. Tape retention lock can be
@@ -2184,7 +2226,8 @@ module Aws::StorageGateway
     # @option params [required, String] :gateway_arn
     #   The unique Amazon Resource Name (ARN) that represents the gateway to
     #   associate the virtual tape with. Use the ListGateways operation to
-    #   return a list of gateways for your account and Region.
+    #   return a list of gateways for your account and Amazon Web Services
+    #   Region.
     #
     # @option params [required, Integer] :tape_size_in_bytes
     #   The size, in bytes, of the virtual tape that you want to create.
@@ -2301,7 +2344,8 @@ module Aws::StorageGateway
     # @option params [required, String] :gateway_arn
     #   The unique Amazon Resource Name (ARN) that represents the gateway to
     #   associate the virtual tapes with. Use the ListGateways operation to
-    #   return a list of gateways for your account and Region.
+    #   return a list of gateways for your account and Amazon Web Services
+    #   Region.
     #
     # @option params [required, Integer] :tape_size_in_bytes
     #   The size, in bytes, of the virtual tapes that you want to create.
@@ -2435,7 +2479,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DeleteAutomaticTapeCreationPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2469,7 +2514,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :bandwidth_type
     #   One of the BandwidthType values that indicates the gateway bandwidth
@@ -2635,7 +2681,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DeleteGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2740,7 +2787,8 @@ module Aws::StorageGateway
     # @option params [required, String] :gateway_arn
     #   The unique Amazon Resource Name (ARN) of the gateway that the virtual
     #   tape to delete is associated with. Use the ListGateways operation to
-    #   return a list of gateways for your account and Region.
+    #   return a list of gateways for your account and Amazon Web Services
+    #   Region.
     #
     # @option params [required, String] :tape_arn
     #   The Amazon Resource Name (ARN) of the virtual tape to delete.
@@ -2942,7 +2990,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DescribeAvailabilityMonitorTestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2984,7 +3033,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DescribeBandwidthRateLimitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3052,7 +3102,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DescribeBandwidthRateLimitScheduleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3095,7 +3146,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DescribeCacheOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3330,6 +3382,8 @@ module Aws::StorageGateway
     #   resp.file_system_association_info_list[0].cache_attributes.cache_stale_timeout_in_seconds #=> Integer
     #   resp.file_system_association_info_list[0].endpoint_network_configuration.ip_addresses #=> Array
     #   resp.file_system_association_info_list[0].endpoint_network_configuration.ip_addresses[0] #=> String
+    #   resp.file_system_association_info_list[0].file_system_association_status_details #=> Array
+    #   resp.file_system_association_info_list[0].file_system_association_status_details[0].error_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeFileSystemAssociations AWS API Documentation
     #
@@ -3347,7 +3401,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DescribeGatewayInformationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3449,7 +3504,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DescribeMaintenanceStartTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3552,6 +3608,7 @@ module Aws::StorageGateway
     #   resp.nfs_file_share_info_list[0].notification_policy #=> String
     #   resp.nfs_file_share_info_list[0].vpc_endpoint_dns_name #=> String
     #   resp.nfs_file_share_info_list[0].bucket_region #=> String
+    #   resp.nfs_file_share_info_list[0].audit_destination_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileShares AWS API Documentation
     #
@@ -3633,7 +3690,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DescribeSMBSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3643,6 +3701,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeSMBSettingsOutput#smb_guest_password_set #smb_guest_password_set} => Boolean
     #   * {Types::DescribeSMBSettingsOutput#smb_security_strategy #smb_security_strategy} => String
     #   * {Types::DescribeSMBSettingsOutput#file_shares_visible #file_shares_visible} => Boolean
+    #   * {Types::DescribeSMBSettingsOutput#smb_local_groups #smb_local_groups} => Types::SMBLocalGroups
     #
     # @example Request syntax with placeholder values
     #
@@ -3658,6 +3717,8 @@ module Aws::StorageGateway
     #   resp.smb_guest_password_set #=> Boolean
     #   resp.smb_security_strategy #=> String, one of "ClientSpecified", "MandatorySigning", "MandatoryEncryption"
     #   resp.file_shares_visible #=> Boolean
+    #   resp.smb_local_groups.gateway_admins #=> Array
+    #   resp.smb_local_groups.gateway_admins[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettings AWS API Documentation
     #
@@ -3925,7 +3986,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [String] :marker
     #   An opaque string that indicates the position at which to begin
@@ -4002,7 +4064,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [Array<String>] :tape_arns
     #   Specifies one or more unique Amazon Resource Names (ARNs) that
@@ -4113,7 +4176,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DescribeUploadBufferOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4194,7 +4258,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [Array<String>] :vtl_device_arns
     #   An array of strings, where each string represents the Amazon Resource
@@ -4327,7 +4392,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DescribeWorkingStorageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4436,7 +4502,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::DisableGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4521,7 +4588,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the `ListGateways`
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :domain_name
     #   The name of the domain that you want the gateway to join.
@@ -4591,7 +4659,8 @@ module Aws::StorageGateway
     #
     # @option params [String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::ListAutomaticTapeCreationPoliciesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4683,7 +4752,8 @@ module Aws::StorageGateway
     #
     # @option params [String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [Integer] :limit
     #   The maximum number of file system associations to return in the
@@ -4731,9 +4801,9 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Lists gateways owned by an account in an Region specified in the
-    # request. The returned list is ordered by gateway Amazon Resource Name
-    # (ARN).
+    # Lists gateways owned by an Amazon Web Services account in an Amazon
+    # Web Services Region specified in the request. The returned list is
+    # ordered by gateway Amazon Resource Name (ARN).
     #
     # By default, the operation returns a maximum of 100 gateways. This
     # operation supports pagination that allows you to optionally reduce the
@@ -4825,7 +4895,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::ListLocalDisksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5133,7 +5204,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::ListVolumeRecoveryPointsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5202,7 +5274,8 @@ module Aws::StorageGateway
     #
     # @option params [String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [String] :marker
     #   A string that indicates the position at which to begin the returned
@@ -5493,7 +5566,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::ResetCacheOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5551,7 +5625,7 @@ module Aws::StorageGateway
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway you want to retrieve the
     #   virtual tape to. Use the ListGateways operation to return a list of
-    #   gateways for your account and Region.
+    #   gateways for your account and Amazon Web Services Region.
     #
     #   You retrieve archived virtual tapes to only one gateway and the
     #   gateway must be a tape gateway.
@@ -5616,7 +5690,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::RetrieveTapeRecoveryPointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5664,7 +5739,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :local_console_password
     #   The password you want to set for your VM local console.
@@ -5774,7 +5850,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::ShutdownGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5828,7 +5905,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::StartAvailabilityMonitorTestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5871,7 +5949,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::StartGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5927,7 +6006,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::UpdateAutomaticTapeCreationPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5977,7 +6057,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [Integer] :average_upload_rate_limit_in_bits_per_sec
     #   The average upload bandwidth rate limit in bits per second.
@@ -6035,7 +6116,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, Array<Types::BandwidthRateLimitInterval>] :bandwidth_rate_limit_intervals
     #   An array containing bandwidth rate limit schedule intervals for a
@@ -6219,7 +6301,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [String] :gateway_name
     #   The name you configured for your gateway.
@@ -6310,7 +6393,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @return [Types::UpdateGatewaySoftwareNowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6355,7 +6439,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, Integer] :hour_of_day
     #   The hour component of the maintenance start time represented as *hh*,
@@ -6520,12 +6605,12 @@ module Aws::StorageGateway
     #   The name of the file share. Optional.
     #
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
-    #   `LocationARN`.
+    #   `LocationARN`, or if an access point or access point alias is used.
     #
     #    </note>
     #
     # @option params [Types::CacheAttributes] :cache_attributes
-    #   specifies refresh cache information for the file share.
+    #   Specifies refresh cache information for the file share.
     #
     # @option params [String] :notification_policy
     #   The notification policy of the file share. `SettlingTimeInSeconds`
@@ -6549,6 +6634,9 @@ module Aws::StorageGateway
     #   The following example sets `NotificationPolicy` off.
     #
     #   `\{\}`
+    #
+    # @option params [String] :audit_destination_arn
+    #   The Amazon Resource Name (ARN) of the storage used for audit logs.
     #
     # @return [Types::UpdateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6578,6 +6666,7 @@ module Aws::StorageGateway
     #       cache_stale_timeout_in_seconds: 1,
     #     },
     #     notification_policy: "NotificationPolicy",
+    #     audit_destination_arn: "AuditDestinationARN",
     #   })
     #
     # @example Response structure
@@ -6601,12 +6690,15 @@ module Aws::StorageGateway
     #
     #  </note>
     #
-    # File gateways require Security Token Service (STS) to be activated to
-    # enable you to create a file share. Make sure that STS is activated in
-    # the Region you are creating your file gateway in. If STS is not
-    # activated in this Region, activate it. For information about how to
-    # activate STS, see [Activating and deactivating STS in an Region][1] in
-    # the *Identity and Access Management User Guide*.
+    # File gateways require Security Token Service (Amazon Web Services STS)
+    # to be activated to enable you to create a file share. Make sure that
+    # Amazon Web Services STS is activated in the Amazon Web Services Region
+    # you are creating your file gateway in. If Amazon Web Services STS is
+    # not activated in this Amazon Web Services Region, activate it. For
+    # information about how to activate Amazon Web Services STS, see
+    # [Activating and deactivating Amazon Web Services STS in an Amazon Web
+    # Services Region][1] in the *Identity and Access Management User
+    # Guide*.
     #
     #  File gateways don't support creating hard or symbolic links on a
     # file
@@ -6725,7 +6817,7 @@ module Aws::StorageGateway
     #   The name of the file share. Optional.
     #
     #   <note markdown="1"> `FileShareName` must be set if an S3 prefix name is set in
-    #   `LocationARN`.
+    #   `LocationARN`, or if an access point or access point alias is used.
     #
     #    </note>
     #
@@ -6816,7 +6908,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, Boolean] :file_shares_visible
     #   The shares on this gateway appear when listing shares.
@@ -6845,6 +6938,44 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Updates the list of Active Directory users and groups that have
+    # special permissions for SMB file shares on the gateway.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
+    #
+    # @option params [required, Types::SMBLocalGroups] :smb_local_groups
+    #   A list of Active Directory users and groups that you want to grant
+    #   special permissions for SMB file shares on the gateway.
+    #
+    # @return [Types::UpdateSMBLocalGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSMBLocalGroupsOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_smb_local_groups({
+    #     gateway_arn: "GatewayARN", # required
+    #     smb_local_groups: { # required
+    #       gateway_admins: ["UserListUser"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBLocalGroups AWS API Documentation
+    #
+    # @overload update_smb_local_groups(params = {})
+    # @param [Hash] params ({})
+    def update_smb_local_groups(params = {}, options = {})
+      req = build_request(:update_smb_local_groups, params)
+      req.send_request(options)
+    end
+
     # Updates the SMB security strategy on a file gateway. This action is
     # only supported in file gateways.
     #
@@ -6856,7 +6987,8 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
-    #   operation to return a list of gateways for your account and Region.
+    #   operation to return a list of gateways for your account and Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :smb_security_strategy
     #   Specifies the type of security strategy.
@@ -7057,7 +7189,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

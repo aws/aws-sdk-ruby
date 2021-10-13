@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-10-07)
+------------------
+
+* Feature - This release enables customers to configure Chime MediaCapturePipeline via API.
+
 1.57.0 (2021-09-14)
 ------------------
 

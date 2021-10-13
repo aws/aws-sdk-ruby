@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-09-30)
+------------------
+
+* Feature - This release adds support for strict ordering for stateful rule groups. Using strict ordering, stateful rules are evaluated in the exact order in which you provide them.
+
 1.7.0 (2021-09-01)
 ------------------
 

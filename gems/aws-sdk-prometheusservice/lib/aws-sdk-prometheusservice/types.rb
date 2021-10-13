@@ -24,6 +24,54 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Represents the properties of an alert manager definition.
+    #
+    # @!attribute [rw] created_at
+    #   The time when the alert manager definition was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data
+    #   The alert manager definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   The time when the alert manager definition was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of alert manager definition.
+    #   @return [Types::AlertManagerDefinitionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/AlertManagerDefinitionDescription AWS API Documentation
+    #
+    class AlertManagerDefinitionDescription < Struct.new(
+      :created_at,
+      :data,
+      :modified_at,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the status of a definition.
+    #
+    # @!attribute [rw] status_code
+    #   Status code of this definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for failure if any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/AlertManagerDefinitionStatus AWS API Documentation
+    #
+    class AlertManagerDefinitionStatus < Struct.new(
+      :status_code,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Updating or deleting a resource can cause an inconsistent state.
     #
     # @!attribute [rw] message
@@ -44,6 +92,138 @@ module Aws::PrometheusService
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a CreateAlertManagerDefinition operation.
+    #
+    # @note When making an API call, you may pass CreateAlertManagerDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyToken",
+    #         data: "data", # required
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The alert manager definition data.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace in which to create the alert manager
+    #   definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateAlertManagerDefinitionRequest AWS API Documentation
+    #
+    class CreateAlertManagerDefinitionRequest < Struct.new(
+      :client_token,
+      :data,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a CreateAlertManagerDefinition operation.
+    #
+    # @!attribute [rw] status
+    #   The status of alert manager definition.
+    #   @return [Types::AlertManagerDefinitionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateAlertManagerDefinitionResponse AWS API Documentation
+    #
+    class CreateAlertManagerDefinitionResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a CreateRuleGroupsNamespace operation.
+    #
+    # @note When making an API call, you may pass CreateRuleGroupsNamespaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyToken",
+    #         data: "data", # required
+    #         name: "RuleGroupsNamespaceName", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The namespace data that define the rule groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The rule groups namespace name.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Optional, user-provided tags for this rule groups namespace.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace in which to create the rule group namespace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateRuleGroupsNamespaceRequest AWS API Documentation
+    #
+    class CreateRuleGroupsNamespaceRequest < Struct.new(
+      :client_token,
+      :data,
+      :name,
+      :tags,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a CreateRuleGroupsNamespace operation.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of this rule groups namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The rule groups namespace name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of rule groups namespace.
+    #   @return [Types::RuleGroupsNamespaceStatus]
+    #
+    # @!attribute [rw] tags
+    #   The tags of this rule groups namespace.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateRuleGroupsNamespaceResponse AWS API Documentation
+    #
+    class CreateRuleGroupsNamespaceResponse < Struct.new(
+      :arn,
+      :name,
+      :status,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -118,6 +298,75 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Represents the input of a DeleteAlertManagerDefinition operation.
+    #
+    # @note When making an API call, you may pass DeleteAlertManagerDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyToken",
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace in which to delete the alert manager
+    #   definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteAlertManagerDefinitionRequest AWS API Documentation
+    #
+    class DeleteAlertManagerDefinitionRequest < Struct.new(
+      :client_token,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a DeleteRuleGroupsNamespace operation.
+    #
+    # @note When making an API call, you may pass DeleteRuleGroupsNamespaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyToken",
+    #         name: "RuleGroupsNamespaceName", # required
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The rule groups namespace name.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to delete rule group definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteRuleGroupsNamespaceRequest AWS API Documentation
+    #
+    class DeleteRuleGroupsNamespaceRequest < Struct.new(
+      :client_token,
+      :name,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input of a DeleteWorkspace operation.
     #
     # @note When making an API call, you may pass DeleteWorkspaceRequest
@@ -145,6 +394,83 @@ module Aws::PrometheusService
     class DeleteWorkspaceRequest < Struct.new(
       :client_token,
       :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a DescribeAlertManagerDefinition operation.
+    #
+    # @note When making an API call, you may pass DescribeAlertManagerDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeAlertManagerDefinitionRequest AWS API Documentation
+    #
+    class DescribeAlertManagerDefinitionRequest < Struct.new(
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a DescribeAlertManagerDefinition operation.
+    #
+    # @!attribute [rw] alert_manager_definition
+    #   The properties of the selected workspace's alert manager
+    #   definition.
+    #   @return [Types::AlertManagerDefinitionDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeAlertManagerDefinitionResponse AWS API Documentation
+    #
+    class DescribeAlertManagerDefinitionResponse < Struct.new(
+      :alert_manager_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a DescribeRuleGroupsNamespace operation.
+    #
+    # @note When making an API call, you may pass DescribeRuleGroupsNamespaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "RuleGroupsNamespaceName", # required
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The rule groups namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeRuleGroupsNamespaceRequest AWS API Documentation
+    #
+    class DescribeRuleGroupsNamespaceRequest < Struct.new(
+      :name,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a DescribeRuleGroupsNamespace operation.
+    #
+    # @!attribute [rw] rule_groups_namespace
+    #   The selected rule groups namespace.
+    #   @return [Types::RuleGroupsNamespaceDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeRuleGroupsNamespaceResponse AWS API Documentation
+    #
+    class DescribeRuleGroupsNamespaceResponse < Struct.new(
+      :rule_groups_namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -199,6 +525,67 @@ module Aws::PrometheusService
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a ListRuleGroupsNamespaces operation.
+    #
+    # @note When making an API call, you may pass ListRuleGroupsNamespacesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         name: "RuleGroupsNamespaceName",
+    #         next_token: "PaginationToken",
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   Maximum results to return in response (default=100, maximum=1000).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   Optional filter for rule groups namespace name. Only the rule groups
+    #   namespace that begin with this value will be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to request the next page in a paginated list. This
+    #   token is obtained from the output of the previous
+    #   ListRuleGroupsNamespaces request.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListRuleGroupsNamespacesRequest AWS API Documentation
+    #
+    class ListRuleGroupsNamespacesRequest < Struct.new(
+      :max_results,
+      :name,
+      :next_token,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a ListRuleGroupsNamespaces operation.
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token to use when requesting the next page in this list.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_groups_namespaces
+    #   The list of the selected rule groups namespaces.
+    #   @return [Array<Types::RuleGroupsNamespaceSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListRuleGroupsNamespacesResponse AWS API Documentation
+    #
+    class ListRuleGroupsNamespacesResponse < Struct.new(
+      :next_token,
+      :rule_groups_namespaces)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -290,6 +677,130 @@ module Aws::PrometheusService
       include Aws::Structure
     end
 
+    # Represents the input of a PutAlertManagerDefinition operation.
+    #
+    # @note When making an API call, you may pass PutAlertManagerDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyToken",
+    #         data: "data", # required
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The alert manager definition data.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace in which to update the alert manager
+    #   definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutAlertManagerDefinitionRequest AWS API Documentation
+    #
+    class PutAlertManagerDefinitionRequest < Struct.new(
+      :client_token,
+      :data,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a PutAlertManagerDefinition operation.
+    #
+    # @!attribute [rw] status
+    #   The status of alert manager definition.
+    #   @return [Types::AlertManagerDefinitionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutAlertManagerDefinitionResponse AWS API Documentation
+    #
+    class PutAlertManagerDefinitionResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the input of a PutRuleGroupsNamespace operation.
+    #
+    # @note When making an API call, you may pass PutRuleGroupsNamespaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyToken",
+    #         data: "data", # required
+    #         name: "RuleGroupsNamespaceName", # required
+    #         workspace_id: "WorkspaceId", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Optional, unique, case-sensitive, user-provided identifier to ensure
+    #   the idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] data
+    #   The namespace data that define the rule groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The rule groups namespace name.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the workspace in which to update the rule group namespace.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutRuleGroupsNamespaceRequest AWS API Documentation
+    #
+    class PutRuleGroupsNamespaceRequest < Struct.new(
+      :client_token,
+      :data,
+      :name,
+      :workspace_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a PutRuleGroupsNamespace operation.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of this rule groups namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The rule groups namespace name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of rule groups namespace.
+    #   @return [Types::RuleGroupsNamespaceStatus]
+    #
+    # @!attribute [rw] tags
+    #   The tags of this rule groups namespace.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/PutRuleGroupsNamespaceResponse AWS API Documentation
+    #
+    class PutRuleGroupsNamespaceResponse < Struct.new(
+      :arn,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request references a resource which does not exist.
     #
     # @!attribute [rw] message
@@ -310,6 +821,108 @@ module Aws::PrometheusService
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a description of the rule groups namespace.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of this rule groups namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the rule groups namespace was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data
+    #   The rule groups namespace data.
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   The time when the rule groups namespace was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The rule groups namespace name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of rule groups namespace.
+    #   @return [Types::RuleGroupsNamespaceStatus]
+    #
+    # @!attribute [rw] tags
+    #   The tags of this rule groups namespace.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/RuleGroupsNamespaceDescription AWS API Documentation
+    #
+    class RuleGroupsNamespaceDescription < Struct.new(
+      :arn,
+      :created_at,
+      :data,
+      :modified_at,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the status of a namespace.
+    #
+    # @!attribute [rw] status_code
+    #   Status code of this namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for failure if any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/RuleGroupsNamespaceStatus AWS API Documentation
+    #
+    class RuleGroupsNamespaceStatus < Struct.new(
+      :status_code,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a summary of the rule groups namespace.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of this rule groups namespace.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the rule groups namespace was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_at
+    #   The time when the rule groups namespace was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The rule groups namespace name.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of rule groups namespace.
+    #   @return [Types::RuleGroupsNamespaceStatus]
+    #
+    # @!attribute [rw] tags
+    #   The tags of this rule groups namespace.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/RuleGroupsNamespaceSummary AWS API Documentation
+    #
+    class RuleGroupsNamespaceSummary < Struct.new(
+      :arn,
+      :created_at,
+      :modified_at,
+      :name,
+      :status,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

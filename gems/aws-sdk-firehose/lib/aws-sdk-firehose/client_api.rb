@@ -14,6 +14,20 @@ module Aws::Firehose
     include Seahorse::Model
 
     AWSKMSKeyARN = Shapes::StringShape.new(name: 'AWSKMSKeyARN')
+    AmazonopensearchserviceBufferingHints = Shapes::StructureShape.new(name: 'AmazonopensearchserviceBufferingHints')
+    AmazonopensearchserviceBufferingIntervalInSeconds = Shapes::IntegerShape.new(name: 'AmazonopensearchserviceBufferingIntervalInSeconds')
+    AmazonopensearchserviceBufferingSizeInMBs = Shapes::IntegerShape.new(name: 'AmazonopensearchserviceBufferingSizeInMBs')
+    AmazonopensearchserviceClusterEndpoint = Shapes::StringShape.new(name: 'AmazonopensearchserviceClusterEndpoint')
+    AmazonopensearchserviceDestinationConfiguration = Shapes::StructureShape.new(name: 'AmazonopensearchserviceDestinationConfiguration')
+    AmazonopensearchserviceDestinationDescription = Shapes::StructureShape.new(name: 'AmazonopensearchserviceDestinationDescription')
+    AmazonopensearchserviceDestinationUpdate = Shapes::StructureShape.new(name: 'AmazonopensearchserviceDestinationUpdate')
+    AmazonopensearchserviceDomainARN = Shapes::StringShape.new(name: 'AmazonopensearchserviceDomainARN')
+    AmazonopensearchserviceIndexName = Shapes::StringShape.new(name: 'AmazonopensearchserviceIndexName')
+    AmazonopensearchserviceIndexRotationPeriod = Shapes::StringShape.new(name: 'AmazonopensearchserviceIndexRotationPeriod')
+    AmazonopensearchserviceRetryDurationInSeconds = Shapes::IntegerShape.new(name: 'AmazonopensearchserviceRetryDurationInSeconds')
+    AmazonopensearchserviceRetryOptions = Shapes::StructureShape.new(name: 'AmazonopensearchserviceRetryOptions')
+    AmazonopensearchserviceS3BackupMode = Shapes::StringShape.new(name: 'AmazonopensearchserviceS3BackupMode')
+    AmazonopensearchserviceTypeName = Shapes::StringShape.new(name: 'AmazonopensearchserviceTypeName')
     BlockSizeBytes = Shapes::IntegerShape.new(name: 'BlockSizeBytes')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BucketARN = Shapes::StringShape.new(name: 'BucketARN')
@@ -204,6 +218,56 @@ module Aws::Firehose
     VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     VpcConfigurationDescription = Shapes::StructureShape.new(name: 'VpcConfigurationDescription')
 
+    AmazonopensearchserviceBufferingHints.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: AmazonopensearchserviceBufferingIntervalInSeconds, location_name: "IntervalInSeconds"))
+    AmazonopensearchserviceBufferingHints.add_member(:size_in_m_bs, Shapes::ShapeRef.new(shape: AmazonopensearchserviceBufferingSizeInMBs, location_name: "SizeInMBs"))
+    AmazonopensearchserviceBufferingHints.struct_class = Types::AmazonopensearchserviceBufferingHints
+
+    AmazonopensearchserviceDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:domain_arn, Shapes::ShapeRef.new(shape: AmazonopensearchserviceDomainARN, location_name: "DomainARN"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:cluster_endpoint, Shapes::ShapeRef.new(shape: AmazonopensearchserviceClusterEndpoint, location_name: "ClusterEndpoint"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:index_name, Shapes::ShapeRef.new(shape: AmazonopensearchserviceIndexName, required: true, location_name: "IndexName"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:type_name, Shapes::ShapeRef.new(shape: AmazonopensearchserviceTypeName, location_name: "TypeName"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:index_rotation_period, Shapes::ShapeRef.new(shape: AmazonopensearchserviceIndexRotationPeriod, location_name: "IndexRotationPeriod"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: AmazonopensearchserviceBufferingHints, location_name: "BufferingHints"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: AmazonopensearchserviceRetryOptions, location_name: "RetryOptions"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: AmazonopensearchserviceS3BackupMode, location_name: "S3BackupMode"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    AmazonopensearchserviceDestinationConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
+    AmazonopensearchserviceDestinationConfiguration.struct_class = Types::AmazonopensearchserviceDestinationConfiguration
+
+    AmazonopensearchserviceDestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    AmazonopensearchserviceDestinationDescription.add_member(:domain_arn, Shapes::ShapeRef.new(shape: AmazonopensearchserviceDomainARN, location_name: "DomainARN"))
+    AmazonopensearchserviceDestinationDescription.add_member(:cluster_endpoint, Shapes::ShapeRef.new(shape: AmazonopensearchserviceClusterEndpoint, location_name: "ClusterEndpoint"))
+    AmazonopensearchserviceDestinationDescription.add_member(:index_name, Shapes::ShapeRef.new(shape: AmazonopensearchserviceIndexName, location_name: "IndexName"))
+    AmazonopensearchserviceDestinationDescription.add_member(:type_name, Shapes::ShapeRef.new(shape: AmazonopensearchserviceTypeName, location_name: "TypeName"))
+    AmazonopensearchserviceDestinationDescription.add_member(:index_rotation_period, Shapes::ShapeRef.new(shape: AmazonopensearchserviceIndexRotationPeriod, location_name: "IndexRotationPeriod"))
+    AmazonopensearchserviceDestinationDescription.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: AmazonopensearchserviceBufferingHints, location_name: "BufferingHints"))
+    AmazonopensearchserviceDestinationDescription.add_member(:retry_options, Shapes::ShapeRef.new(shape: AmazonopensearchserviceRetryOptions, location_name: "RetryOptions"))
+    AmazonopensearchserviceDestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: AmazonopensearchserviceS3BackupMode, location_name: "S3BackupMode"))
+    AmazonopensearchserviceDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
+    AmazonopensearchserviceDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    AmazonopensearchserviceDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    AmazonopensearchserviceDestinationDescription.add_member(:vpc_configuration_description, Shapes::ShapeRef.new(shape: VpcConfigurationDescription, location_name: "VpcConfigurationDescription"))
+    AmazonopensearchserviceDestinationDescription.struct_class = Types::AmazonopensearchserviceDestinationDescription
+
+    AmazonopensearchserviceDestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    AmazonopensearchserviceDestinationUpdate.add_member(:domain_arn, Shapes::ShapeRef.new(shape: AmazonopensearchserviceDomainARN, location_name: "DomainARN"))
+    AmazonopensearchserviceDestinationUpdate.add_member(:cluster_endpoint, Shapes::ShapeRef.new(shape: AmazonopensearchserviceClusterEndpoint, location_name: "ClusterEndpoint"))
+    AmazonopensearchserviceDestinationUpdate.add_member(:index_name, Shapes::ShapeRef.new(shape: AmazonopensearchserviceIndexName, location_name: "IndexName"))
+    AmazonopensearchserviceDestinationUpdate.add_member(:type_name, Shapes::ShapeRef.new(shape: AmazonopensearchserviceTypeName, location_name: "TypeName"))
+    AmazonopensearchserviceDestinationUpdate.add_member(:index_rotation_period, Shapes::ShapeRef.new(shape: AmazonopensearchserviceIndexRotationPeriod, location_name: "IndexRotationPeriod"))
+    AmazonopensearchserviceDestinationUpdate.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: AmazonopensearchserviceBufferingHints, location_name: "BufferingHints"))
+    AmazonopensearchserviceDestinationUpdate.add_member(:retry_options, Shapes::ShapeRef.new(shape: AmazonopensearchserviceRetryOptions, location_name: "RetryOptions"))
+    AmazonopensearchserviceDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
+    AmazonopensearchserviceDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    AmazonopensearchserviceDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    AmazonopensearchserviceDestinationUpdate.struct_class = Types::AmazonopensearchserviceDestinationUpdate
+
+    AmazonopensearchserviceRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: AmazonopensearchserviceRetryDurationInSeconds, location_name: "DurationInSeconds"))
+    AmazonopensearchserviceRetryOptions.struct_class = Types::AmazonopensearchserviceRetryOptions
+
     BufferingHints.add_member(:size_in_m_bs, Shapes::ShapeRef.new(shape: SizeInMBs, location_name: "SizeInMBs"))
     BufferingHints.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: IntervalInSeconds, location_name: "IntervalInSeconds"))
     BufferingHints.struct_class = Types::BufferingHints
@@ -232,6 +296,7 @@ module Aws::Firehose
     CreateDeliveryStreamInput.add_member(:extended_s3_destination_configuration, Shapes::ShapeRef.new(shape: ExtendedS3DestinationConfiguration, location_name: "ExtendedS3DestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:redshift_destination_configuration, Shapes::ShapeRef.new(shape: RedshiftDestinationConfiguration, location_name: "RedshiftDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:elasticsearch_destination_configuration, Shapes::ShapeRef.new(shape: ElasticsearchDestinationConfiguration, location_name: "ElasticsearchDestinationConfiguration"))
+    CreateDeliveryStreamInput.add_member(:amazonopensearchservice_destination_configuration, Shapes::ShapeRef.new(shape: AmazonopensearchserviceDestinationConfiguration, location_name: "AmazonopensearchserviceDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:splunk_destination_configuration, Shapes::ShapeRef.new(shape: SplunkDestinationConfiguration, location_name: "SplunkDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:http_endpoint_destination_configuration, Shapes::ShapeRef.new(shape: HttpEndpointDestinationConfiguration, location_name: "HttpEndpointDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagDeliveryStreamInputTagList, location_name: "Tags"))
@@ -295,6 +360,7 @@ module Aws::Firehose
     DestinationDescription.add_member(:extended_s3_destination_description, Shapes::ShapeRef.new(shape: ExtendedS3DestinationDescription, location_name: "ExtendedS3DestinationDescription"))
     DestinationDescription.add_member(:redshift_destination_description, Shapes::ShapeRef.new(shape: RedshiftDestinationDescription, location_name: "RedshiftDestinationDescription"))
     DestinationDescription.add_member(:elasticsearch_destination_description, Shapes::ShapeRef.new(shape: ElasticsearchDestinationDescription, location_name: "ElasticsearchDestinationDescription"))
+    DestinationDescription.add_member(:amazonopensearchservice_destination_description, Shapes::ShapeRef.new(shape: AmazonopensearchserviceDestinationDescription, location_name: "AmazonopensearchserviceDestinationDescription"))
     DestinationDescription.add_member(:splunk_destination_description, Shapes::ShapeRef.new(shape: SplunkDestinationDescription, location_name: "SplunkDestinationDescription"))
     DestinationDescription.add_member(:http_endpoint_destination_description, Shapes::ShapeRef.new(shape: HttpEndpointDestinationDescription, location_name: "HttpEndpointDestinationDescription"))
     DestinationDescription.struct_class = Types::DestinationDescription
@@ -768,6 +834,7 @@ module Aws::Firehose
     UpdateDestinationInput.add_member(:extended_s3_destination_update, Shapes::ShapeRef.new(shape: ExtendedS3DestinationUpdate, location_name: "ExtendedS3DestinationUpdate"))
     UpdateDestinationInput.add_member(:redshift_destination_update, Shapes::ShapeRef.new(shape: RedshiftDestinationUpdate, location_name: "RedshiftDestinationUpdate"))
     UpdateDestinationInput.add_member(:elasticsearch_destination_update, Shapes::ShapeRef.new(shape: ElasticsearchDestinationUpdate, location_name: "ElasticsearchDestinationUpdate"))
+    UpdateDestinationInput.add_member(:amazonopensearchservice_destination_update, Shapes::ShapeRef.new(shape: AmazonopensearchserviceDestinationUpdate, location_name: "AmazonopensearchserviceDestinationUpdate"))
     UpdateDestinationInput.add_member(:splunk_destination_update, Shapes::ShapeRef.new(shape: SplunkDestinationUpdate, location_name: "SplunkDestinationUpdate"))
     UpdateDestinationInput.add_member(:http_endpoint_destination_update, Shapes::ShapeRef.new(shape: HttpEndpointDestinationUpdate, location_name: "HttpEndpointDestinationUpdate"))
     UpdateDestinationInput.struct_class = Types::UpdateDestinationInput

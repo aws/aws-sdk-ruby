@@ -24,6 +24,34 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass Action
+    #   data as a hash:
+    #
+    #       {
+    #         export_revision_to_s3: {
+    #           encryption: {
+    #             kms_key_arn: "__string",
+    #             type: "aws:kms", # required, accepts aws:kms, AES256
+    #           },
+    #           revision_destination: { # required
+    #             bucket: "__string", # required
+    #             key_pattern: "__string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] export_revision_to_s3
+    #   Details of the operation to be performed by the job.
+    #   @return [Types::AutoExportRevisionToS3RequestDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/Action AWS API Documentation
+    #
+    class Action < Struct.new(
+      :export_revision_to_s3)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The destination for the asset.
     #
     # @note When making an API call, you may pass AssetDestinationEntry
@@ -160,6 +188,76 @@ module Aws::DataExchange
     class AssetSourceEntry < Struct.new(
       :bucket,
       :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A revision destination is the Amazon S3 bucket folder destination to
+    # where the export will be sent.
+    #
+    # @note When making an API call, you may pass AutoExportRevisionDestinationEntry
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "__string", # required
+    #         key_pattern: "__string",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The S3 bucket that is the destination for the event action.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pattern
+    #   A string representing the pattern for generated names of the
+    #   individual assets in the revision. For more information about key
+    #   patterns, see [Key patterns when exporting revisions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/AutoExportRevisionDestinationEntry AWS API Documentation
+    #
+    class AutoExportRevisionDestinationEntry < Struct.new(
+      :bucket,
+      :key_pattern)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the operation to be performed by the job.
+    #
+    # @note When making an API call, you may pass AutoExportRevisionToS3RequestDetails
+    #   data as a hash:
+    #
+    #       {
+    #         encryption: {
+    #           kms_key_arn: "__string",
+    #           type: "aws:kms", # required, accepts aws:kms, AES256
+    #         },
+    #         revision_destination: { # required
+    #           bucket: "__string", # required
+    #           key_pattern: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] encryption
+    #   Encryption configuration of the export job. Includes the encryption
+    #   type in addition to the AWS KMS key. The KMS key is only necessary
+    #   if you chose the KMS encryption. type.
+    #   @return [Types::ExportServerSideEncryption]
+    #
+    # @!attribute [rw] revision_destination
+    #   A revision destination is the Amazon S3 bucket folder destination to
+    #   where the export will be sent.
+    #   @return [Types::AutoExportRevisionDestinationEntry]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/AutoExportRevisionToS3RequestDetails AWS API Documentation
+    #
+    class AutoExportRevisionToS3RequestDetails < Struct.new(
+      :encryption,
+      :revision_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -318,6 +416,86 @@ module Aws::DataExchange
       :origin_details,
       :source_id,
       :tags,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A request to create an event action.
+    #
+    # @note When making an API call, you may pass CreateEventActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action: { # required
+    #           export_revision_to_s3: {
+    #             encryption: {
+    #               kms_key_arn: "__string",
+    #               type: "aws:kms", # required, accepts aws:kms, AES256
+    #             },
+    #             revision_destination: { # required
+    #               bucket: "__string", # required
+    #               key_pattern: "__string",
+    #             },
+    #           },
+    #         },
+    #         event: { # required
+    #           revision_published: {
+    #             data_set_id: "Id", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action
+    #   What occurs after a certain event.
+    #   @return [Types::Action]
+    #
+    # @!attribute [rw] event
+    #   What occurs to start an action.
+    #   @return [Types::Event]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateEventActionRequest AWS API Documentation
+    #
+    class CreateEventActionRequest < Struct.new(
+      :action,
+      :event)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action
+    #   @return [Types::Action]
+    #
+    # @!attribute [rw] arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event
+    #   @return [Types::Event]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateEventActionResponse AWS API Documentation
+    #
+    class CreateEventActionResponse < Struct.new(
+      :action,
+      :arn,
+      :created_at,
+      :event,
+      :id,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
@@ -656,6 +834,24 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteEventActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_action_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] event_action_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DeleteEventActionRequest AWS API Documentation
+    #
+    class DeleteEventActionRequest < Struct.new(
+      :event_action_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteRevisionRequest
     #   data as a hash:
     #
@@ -691,6 +887,69 @@ module Aws::DataExchange
     class Details < Struct.new(
       :import_asset_from_signed_url_job_error_details,
       :import_assets_from_s3_job_error_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass Event
+    #   data as a hash:
+    #
+    #       {
+    #         revision_published: {
+    #           data_set_id: "Id", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] revision_published
+    #   @return [Types::RevisionPublished]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/Event AWS API Documentation
+    #
+    class Event < Struct.new(
+      :revision_published)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An event action is an object that defines the relationship between a
+    # specific event and an automated action that will be taken on behalf of
+    # the customer.
+    #
+    # @!attribute [rw] action
+    #   What occurs after a certain event.
+    #   @return [Types::Action]
+    #
+    # @!attribute [rw] arn
+    #   The ARN for the event action.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the event action was created, in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event
+    #   What occurs to start an action.
+    #   @return [Types::Event]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the event action.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time that the event action was last updated, in ISO
+    #   8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/EventActionEntry AWS API Documentation
+    #
+    class EventActionEntry < Struct.new(
+      :action,
+      :arn,
+      :created_at,
+      :event,
+      :id,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -902,6 +1161,10 @@ module Aws::DataExchange
     #   Encryption configuration of the export job.
     #   @return [Types::ExportServerSideEncryption]
     #
+    # @!attribute [rw] event_action_arn
+    #   The ARN for the event action.
+    #   @return [String]
+    #
     # @!attribute [rw] revision_destinations
     #   The destination in Amazon S3 where the revision is exported.
     #   @return [Array<Types::RevisionDestinationEntry>]
@@ -911,14 +1174,15 @@ module Aws::DataExchange
     class ExportRevisionsToS3ResponseDetails < Struct.new(
       :data_set_id,
       :encryption,
+      :event_action_arn,
       :revision_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Encryption configuration of the export job. Includes the encryption
-    # type as well as the AWS KMS key. The KMS key is only necessary if you
-    # chose the KMS encryption type.
+    # type in addition to the AWS KMS key. The KMS key is only necessary if
+    # you chose the KMS encryption. type.
     #
     # @note When making an API call, you may pass ExportServerSideEncryption
     #   data as a hash:
@@ -929,9 +1193,9 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the the AWS KMS key you want to
-    #   use to encrypt the Amazon S3 objects. This parameter is required if
-    #   you choose aws:kms as an encryption type.
+    #   The Amazon Resource Name (ARN) of the AWS KMS key you want to use to
+    #   encrypt the Amazon S3 objects. This parameter is required if you
+    #   choose aws:kms as an encryption type.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1119,6 +1383,62 @@ module Aws::DataExchange
       :origin_details,
       :source_id,
       :tags,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetEventActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_action_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] event_action_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetEventActionRequest AWS API Documentation
+    #
+    class GetEventActionRequest < Struct.new(
+      :event_action_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action
+    #   @return [Types::Action]
+    #
+    # @!attribute [rw] arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event
+    #   @return [Types::Event]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetEventActionResponse AWS API Documentation
+    #
+    class GetEventActionResponse < Struct.new(
+      :action,
+      :arn,
+      :created_at,
+      :event,
+      :id,
       :updated_at)
       SENSITIVE = []
       include Aws::Structure
@@ -1631,6 +1951,51 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListEventActionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_source_id: "__string",
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] event_source_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListEventActionsRequest AWS API Documentation
+    #
+    class ListEventActionsRequest < Struct.new(
+      :event_source_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_actions
+    #   @return [Array<Types::EventActionEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ListEventActionsResponse AWS API Documentation
+    #
+    class ListEventActionsResponse < Struct.new(
+      :event_actions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListJobsRequest
     #   data as a hash:
     #
@@ -2021,6 +2386,25 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RevisionPublished
+    #   data as a hash:
+    #
+    #       {
+    #         data_set_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] data_set_id
+    #   A unique identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RevisionPublished AWS API Documentation
+    #
+    class RevisionPublished < Struct.new(
+      :data_set_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The S3 object that is the asset.
     #
     # @!attribute [rw] size
@@ -2336,6 +2720,81 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # The request to update an event action.
+    #
+    # @note When making an API call, you may pass UpdateEventActionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action: {
+    #           export_revision_to_s3: {
+    #             encryption: {
+    #               kms_key_arn: "__string",
+    #               type: "aws:kms", # required, accepts aws:kms, AES256
+    #             },
+    #             revision_destination: { # required
+    #               bucket: "__string", # required
+    #               key_pattern: "__string",
+    #             },
+    #           },
+    #         },
+    #         event_action_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] action
+    #   What occurs after a certain event.
+    #   @return [Types::Action]
+    #
+    # @!attribute [rw] event_action_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/UpdateEventActionRequest AWS API Documentation
+    #
+    class UpdateEventActionRequest < Struct.new(
+      :action,
+      :event_action_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action
+    #   @return [Types::Action]
+    #
+    # @!attribute [rw] arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event
+    #   @return [Types::Event]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/UpdateEventActionResponse AWS API Documentation
+    #
+    class UpdateEventActionResponse < Struct.new(
+      :action,
+      :arn,
+      :created_at,
+      :event,
+      :id,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request to update a revision.
     #
     # @note When making an API call, you may pass UpdateRevisionRequest
@@ -2430,10 +2889,15 @@ module Aws::DataExchange
     #   request.
     #   @return [String]
     #
+    # @!attribute [rw] exception_cause
+    #   The message that informs you about what the exception was.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :message)
+      :message,
+      :exception_cause)
       SENSITIVE = []
       include Aws::Structure
     end

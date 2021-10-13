@@ -448,18 +448,16 @@ module Aws::WorkSpaces
     # Region. For more information about copying images, see [ Copy a Custom
     # WorkSpaces Image][1].
     #
-    # <note markdown="1"> In the China (Ningxia) Region, you can copy images only within the
+    # In the China (Ningxia) Region, you can copy images only within the
     # same Region.
     #
-    #  In the AWS GovCloud (US-West) Region, to copy images to and from other
-    # AWS Regions, contact AWS Support.
-    #
-    #  </note>
+    # In Amazon Web Services GovCloud (US), to copy images to and from other
+    # Regions, contact Amazon Web Services Support.
     #
     # Before copying a shared image, be sure to verify that it has been
-    # shared from the correct AWS account. To determine if an image has been
-    # shared and to see the AWS account ID that owns an image, use the
-    # [DescribeWorkSpaceImages][2] and
+    # shared from the correct Amazon Web Services account. To determine if
+    # an image has been shared and to see the ID of the Amazon Web Services
+    # account that owns an image, use the [DescribeWorkSpaceImages][2] and
     # [DescribeWorkspaceImagePermissions][3] API operations.
     #
     #
@@ -528,10 +526,10 @@ module Aws::WorkSpaces
     #   (FQDN), such as `www.example.com`.
     #
     #   After you create a connection string, it is always associated to your
-    #   AWS account. You cannot recreate the same connection string with a
-    #   different account, even if you delete all instances of it from the
-    #   original account. The connection string is globally reserved for your
-    #   account.
+    #   Amazon Web Services account. You cannot recreate the same connection
+    #   string with a different account, even if you delete all instances of
+    #   it from the original account. The connection string is globally
+    #   reserved for your account.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to associate with the connection alias.
@@ -659,6 +657,79 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def create_tags(params = {}, options = {})
       req = build_request(:create_tags, params)
+      req.send_request(options)
+    end
+
+    # Creates a new updated WorkSpace image based on the specified source
+    # image. The new updated WorkSpace image has the latest drivers and
+    # other updates required by the Amazon WorkSpaces components.
+    #
+    # To determine which WorkSpace images need to be updated with the latest
+    # Amazon WorkSpaces requirements, use [ DescribeWorkspaceImages][1].
+    #
+    # <note markdown="1"> * Only Windows 10 WorkSpace images can be programmatically updated at
+    #   this time.
+    #
+    # * Microsoft Windows updates and other application updates are not
+    #   included in the update process.
+    #
+    # * The source WorkSpace image is not deleted. You can delete the source
+    #   image after you've verified your new updated image and created a
+    #   new bundle.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html
+    #
+    # @option params [required, String] :name
+    #   The name of the new updated WorkSpace image.
+    #
+    # @option params [required, String] :description
+    #   A description of whether updates for the WorkSpace image are
+    #   available.
+    #
+    # @option params [required, String] :source_image_id
+    #   The identifier of the source WorkSpace image.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags that you want to add to the new updated WorkSpace image.
+    #
+    #   <note markdown="1"> To add tags at the same time when you're creating the updated image,
+    #   you must create an IAM policy that grants your IAM user permissions to
+    #   use `workspaces:CreateTags`.
+    #
+    #    </note>
+    #
+    # @return [Types::CreateUpdatedWorkspaceImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUpdatedWorkspaceImageResult#image_id #image_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_updated_workspace_image({
+    #     name: "WorkspaceImageName", # required
+    #     description: "WorkspaceImageDescription", # required
+    #     source_image_id: "WorkspaceImageId", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateUpdatedWorkspaceImage AWS API Documentation
+    #
+    # @overload create_updated_workspace_image(params = {})
+    # @param [Hash] params ({})
+    def create_updated_workspace_image(params = {}, options = {})
+      req = build_request(:create_updated_workspace_image, params)
       req.send_request(options)
     end
 
@@ -995,8 +1066,8 @@ module Aws::WorkSpaces
     # use with WorkSpaces. If there are no WorkSpaces being used with your
     # Simple AD or AD Connector directory for 30 consecutive days, this
     # directory will be automatically deregistered for use with Amazon
-    # WorkSpaces, and you will be charged for this directory as per the [AWS
-    # Directory Services pricing terms][1].
+    # WorkSpaces, and you will be charged for this directory as per the
+    # [Directory Service pricing terms][1].
     #
     #  To delete empty directories, see [ Delete the Directory for Your
     # WorkSpaces][2]. If you delete your Simple AD or AD Connector
@@ -1125,9 +1196,9 @@ module Aws::WorkSpaces
     end
 
     # Describes the permissions that the owner of a connection alias has
-    # granted to another AWS account for the specified connection alias. For
-    # more information, see [ Cross-Region Redirection for Amazon
-    # WorkSpaces][1].
+    # granted to another Amazon Web Services account for the specified
+    # connection alias. For more information, see [ Cross-Region Redirection
+    # for Amazon WorkSpaces][1].
     #
     #
     #
@@ -1322,8 +1393,9 @@ module Aws::WorkSpaces
     #   The owner of the bundles. You cannot combine this parameter with any
     #   other filter.
     #
-    #   To describe the bundles provided by AWS, specify `AMAZON`. To describe
-    #   the bundles that belong to your account, don't specify a value.
+    #   To describe the bundles provided by Amazon Web Services, specify
+    #   `AMAZON`. To describe the bundles that belong to your account, don't
+    #   specify a value.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. (You received this token from a
@@ -1447,7 +1519,7 @@ module Aws::WorkSpaces
     end
 
     # Describes the permissions that the owner of an image has granted to
-    # other AWS accounts for an image.
+    # other Amazon Web Services accounts for an image.
     #
     # @option params [required, String] :image_id
     #   The identifier of the image.
@@ -1533,6 +1605,8 @@ module Aws::WorkSpaces
     #   resp.images[0].error_message #=> String
     #   resp.images[0].created #=> Time
     #   resp.images[0].owner_account_id #=> String
+    #   resp.images[0].updates.update_available #=> Boolean
+    #   resp.images[0].updates.description #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceImages AWS API Documentation
@@ -1705,7 +1779,7 @@ module Aws::WorkSpaces
 
     # Disassociates a connection alias from a directory. Disassociating a
     # connection alias disables cross-Region redirection between two
-    # directories in different AWS Regions. For more information, see [
+    # directories in different Regions. For more information, see [
     # Cross-Region Redirection for Amazon WorkSpaces][1].
     #
     # <note markdown="1"> Before performing this operation, call [ DescribeConnectionAliases][2]
@@ -1768,9 +1842,9 @@ module Aws::WorkSpaces
 
     # Imports the specified Windows 10 Bring Your Own License (BYOL) image
     # into Amazon WorkSpaces. The image must be an already licensed Amazon
-    # EC2 image that is in your AWS account, and you must own the image. For
-    # more information about creating BYOL images, see [ Bring Your Own
-    # Windows Desktop Licenses][1].
+    # EC2 image that is in your Amazon Web Services account, and you must
+    # own the image. For more information about creating BYOL images, see [
+    # Bring Your Own Windows Desktop Licenses][1].
     #
     #
     #
@@ -1851,9 +1925,9 @@ module Aws::WorkSpaces
     # that you can use for the network management interface when you enable
     # Bring Your Own License (BYOL).
     #
-    # This operation can be run only by AWS accounts that are enabled for
-    # BYOL. If your account isn't enabled for BYOL, you'll receive an
-    # `AccessDeniedException` error.
+    # This operation can be run only by Amazon Web Services accounts that
+    # are enabled for BYOL. If your account isn't enabled for BYOL, you'll
+    # receive an `AccessDeniedException` error.
     #
     # The management network interface is connected to a secure Amazon
     # WorkSpaces management network. It is used for interactive streaming of
@@ -2322,10 +2396,10 @@ module Aws::WorkSpaces
     # @option params [String] :tenancy
     #   Indicates whether your WorkSpace directory is dedicated or shared. To
     #   use Bring Your Own License (BYOL) images, this value must be set to
-    #   `DEDICATED` and your AWS account must be enabled for BYOL. If your
-    #   account has not been enabled for BYOL, you will receive an
-    #   InvalidParameterValuesException error. For more information about BYOL
-    #   images, see [Bring Your Own Windows Desktop Images][1].
+    #   `DEDICATED` and your Amazon Web Services account must be enabled for
+    #   BYOL. If your account has not been enabled for BYOL, you will receive
+    #   an InvalidParameterValuesException error. For more information about
+    #   BYOL images, see [Bring Your Own Windows Desktop Images][1].
     #
     #
     #
@@ -2503,7 +2577,7 @@ module Aws::WorkSpaces
     #
     # Terminating a WorkSpace is a permanent action and cannot be undone.
     # The user's data is destroyed. If you need to archive any user data,
-    # contact AWS Support before terminating the WorkSpace.
+    # contact Amazon Web Services Support before terminating the WorkSpace.
     #
     # You can terminate a WorkSpace that is in any state except `SUSPENDED`.
     #
@@ -2519,8 +2593,8 @@ module Aws::WorkSpaces
     # use with WorkSpaces. If there are no WorkSpaces being used with your
     # Simple AD or AD Connector directory for 30 consecutive days, this
     # directory will be automatically deregistered for use with Amazon
-    # WorkSpaces, and you will be charged for this directory as per the [AWS
-    # Directory Services pricing terms][2].
+    # WorkSpaces, and you will be charged for this directory as per the
+    # [Directory Service pricing terms][2].
     #
     #  To delete empty directories, see [ Delete the Directory for Your
     # WorkSpaces][3]. If you delete your Simple AD or AD Connector
@@ -2600,7 +2674,7 @@ module Aws::WorkSpaces
     #
     # @option params [required, Types::ConnectionAliasPermission] :connection_alias_permission
     #   Indicates whether to share or unshare the connection alias with the
-    #   specified AWS account.
+    #   specified Amazon Web Services account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2692,22 +2766,20 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Shares or unshares an image with one account in the same AWS Region by
-    # specifying whether that account has permission to copy the image. If
-    # the copy image permission is granted, the image is shared with that
-    # account. If the copy image permission is revoked, the image is
-    # unshared with the account.
+    # Shares or unshares an image with one account in the same Amazon Web
+    # Services Region by specifying whether that account has permission to
+    # copy the image. If the copy image permission is granted, the image is
+    # shared with that account. If the copy image permission is revoked, the
+    # image is unshared with the account.
     #
     # After an image has been shared, the recipient account can copy the
-    # image to other AWS Regions as needed.
+    # image to other Regions as needed.
     #
-    # <note markdown="1"> In the China (Ningxia) Region, you can copy images only within the
+    # In the China (Ningxia) Region, you can copy images only within the
     # same Region.
     #
-    #  In the AWS GovCloud (US-West) Region, to copy images to and from other
-    # AWS Regions, contact AWS Support.
-    #
-    #  </note>
+    # In Amazon Web Services GovCloud (US), to copy images to and from other
+    # Regions, contact Amazon Web Services Support.
     #
     # For more information about sharing images, see [ Share or Unshare a
     # Custom WorkSpaces Image][1].
@@ -2715,10 +2787,11 @@ module Aws::WorkSpaces
     # <note markdown="1"> * To delete an image that has been shared, you must unshare the image
     #   before you delete it.
     #
-    # * Sharing Bring Your Own License (BYOL) images across AWS accounts
-    #   isn't supported at this time in the AWS GovCloud (US-West) Region.
-    #   To share BYOL images across accounts in the AWS GovCloud (US-West)
-    #   Region, contact AWS Support.
+    # * Sharing Bring Your Own License (BYOL) images across Amazon Web
+    #   Services accounts isn't supported at this time in Amazon Web
+    #   Services GovCloud (US). To share BYOL images across accounts in
+    #   Amazon Web Services GovCloud (US), contact Amazon Web Services
+    #   Support.
     #
     #  </note>
     #
@@ -2734,10 +2807,11 @@ module Aws::WorkSpaces
     #   after an image has been shared.
     #
     # @option params [required, String] :shared_account_id
-    #   The identifier of the AWS account to share or unshare the image with.
+    #   The identifier of the Amazon Web Services account to share or unshare
+    #   the image with.
     #
     #   Before sharing the image, confirm that you are sharing to the correct
-    #   AWS account ID.
+    #   Amazon Web Services account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2771,7 +2845,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

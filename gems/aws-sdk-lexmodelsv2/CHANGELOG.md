@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Remove a plugin that sets the `Content-Type` header and instead depend on a new version of `aws-sdk-core` that does.
 
+1.12.0 (2021-10-08)
+------------------
+
+* Feature - Added configuration support for an Amazon Lex bot to provide fulfillment progress updates to users while their requests are being processed. See documentation for more details: https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html
+
 1.11.0 (2021-09-22)
 ------------------
 

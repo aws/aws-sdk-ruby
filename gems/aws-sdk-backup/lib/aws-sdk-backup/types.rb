@@ -285,8 +285,7 @@ module Aws::Backup
 
     # Contains an optional backup plan display name and an array of
     # `BackupRule` objects, each of which specifies a backup rule. Each rule
-    # in a backup plan is a separate scheduled task and can back up a
-    # different selection of Amazon Web Services resources.
+    # in a backup plan is a separate scheduled task.
     #
     # @note When making an API call, you may pass BackupPlanInput
     #   data as a hash:
@@ -774,6 +773,56 @@ module Aws::Backup
     #   The number of recovery points that are stored in a backup vault.
     #   @return [Integer]
     #
+    # @!attribute [rw] locked
+    #   A Boolean value that indicates whether Backup Vault Lock applies to
+    #   the selected backup vault. If `true`, Vault Lock prevents delete and
+    #   update operations on the recovery points in the selected vault.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] min_retention_days
+    #   The Backup Vault Lock setting that specifies the minimum retention
+    #   period that the vault retains its recovery points. If this parameter
+    #   is not specified, Vault Lock does not enforce a minimum retention
+    #   period.
+    #
+    #   If specified, any backup or copy job to the vault must have a
+    #   lifecycle policy with a retention period equal to or longer than the
+    #   minimum retention period. If the job's retention period is shorter
+    #   than that minimum retention period, then the vault fails the backup
+    #   or copy job, and you should either modify your lifecycle settings or
+    #   use a different vault. Recovery points already stored in the vault
+    #   prior to Vault Lock are not affected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_retention_days
+    #   The Backup Vault Lock setting that specifies the maximum retention
+    #   period that the vault retains its recovery points. If this parameter
+    #   is not specified, Vault Lock does not enforce a maximum retention
+    #   period on the recovery points in the vault (allowing indefinite
+    #   storage).
+    #
+    #   If specified, any backup or copy job to the vault must have a
+    #   lifecycle policy with a retention period equal to or shorter than
+    #   the maximum retention period. If the job's retention period is
+    #   longer than that maximum retention period, then the vault fails the
+    #   backup or copy job, and you should either modify your lifecycle
+    #   settings or use a different vault. Recovery points already stored in
+    #   the vault prior to Vault Lock are not affected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lock_date
+    #   The date and time when Backup Vault Lock configuration becomes
+    #   immutable, meaning it cannot be changed or deleted.
+    #
+    #   If you applied Vault Lock to your vault without specifying a lock
+    #   date, you can change your Vault Lock settings, or delete Vault Lock
+    #   from the vault entirely, at any time.
+    #
+    #   This value is in Unix format, Coordinated Universal Time (UTC), and
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupVaultListMember AWS API Documentation
     #
     class BackupVaultListMember < Struct.new(
@@ -782,7 +831,11 @@ module Aws::Backup
       :creation_date,
       :encryption_key_arn,
       :creator_request_id,
-      :number_of_recovery_points)
+      :number_of_recovery_points,
+      :locked,
+      :min_retention_days,
+      :max_retention_days,
+      :lock_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -941,8 +994,8 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] compliance_resource_ids
-    #   Describes whether the control scope includes a specific resource
-    #   identified by its unique Amazon Resource Name (ARN).
+    #   The ID of the only Amazon Web Services resource that you want your
+    #   control scope to contain.
     #   @return [Array<String>]
     #
     # @!attribute [rw] compliance_resource_types
@@ -1484,6 +1537,8 @@ module Aws::Backup
     #         },
     #         report_setting: { # required
     #           report_template: "string", # required
+    #           framework_arns: ["string"],
+    #           number_of_frameworks: 1,
     #         },
     #         report_plan_tags: {
     #           "string" => "string",
@@ -1512,11 +1567,16 @@ module Aws::Backup
     #   Identifies the report template for the report. Reports are built
     #   using a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #
+    #   If the report template is `RESOURCE_COMPLIANCE_REPORT` or
+    #   `CONTROL_COMPLIANCE_REPORT`, this API resource also describes the
+    #   report coverage by Amazon Web Services Regions and frameworks.
     #   @return [Types::ReportSetting]
     #
     # @!attribute [rw] report_plan_tags
-    #   Metadata that you can assign to help organize the frameworks that
+    #   Metadata that you can assign to help organize the report plans that
     #   you create. Each tag is a key-value pair.
     #   @return [Hash<String,String>]
     #
@@ -1552,11 +1612,19 @@ module Aws::Backup
     #   The format of the ARN depends on the resource type.
     #   @return [String]
     #
+    # @!attribute [rw] creation_time
+    #   The date and time a backup vault is created, in Unix format and
+    #   Coordinated Universal Time (UTC). The value of `CreationTime` is
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateReportPlanOutput AWS API Documentation
     #
     class CreateReportPlanOutput < Struct.new(
       :report_plan_name,
-      :report_plan_arn)
+      :report_plan_arn,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1678,6 +1746,25 @@ module Aws::Backup
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupVaultInput AWS API Documentation
     #
     class DeleteBackupVaultInput < Struct.new(
+      :backup_vault_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteBackupVaultLockConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         backup_vault_name: "BackupVaultName", # required
+    #       }
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The name of the backup vault from which to delete Backup Vault Lock.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DeleteBackupVaultLockConfigurationInput AWS API Documentation
+    #
+    class DeleteBackupVaultLockConfigurationInput < Struct.new(
       :backup_vault_name)
       SENSITIVE = []
       include Aws::Structure
@@ -2019,6 +2106,57 @@ module Aws::Backup
     #   The number of recovery points that are stored in a backup vault.
     #   @return [Integer]
     #
+    # @!attribute [rw] locked
+    #   A Boolean that indicates whether Backup Vault Lock is currently
+    #   protecting the backup vault. `True` means that Vault Lock causes
+    #   delete or update operations on the recovery points stored in the
+    #   vault to fail.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] min_retention_days
+    #   The Backup Vault Lock setting that specifies the minimum retention
+    #   period that the vault retains its recovery points. If this parameter
+    #   is not specified, Vault Lock does not enforce a minimum retention
+    #   period.
+    #
+    #   If specified, any backup or copy job to the vault must have a
+    #   lifecycle policy with a retention period equal to or longer than the
+    #   minimum retention period. If the job's retention period is shorter
+    #   than that minimum retention period, then the vault fails the backup
+    #   or copy job, and you should either modify your lifecycle settings or
+    #   use a different vault. Recovery points already stored in the vault
+    #   prior to Vault Lock are not affected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_retention_days
+    #   The Backup Vault Lock setting that specifies the maximum retention
+    #   period that the vault retains its recovery points. If this parameter
+    #   is not specified, Vault Lock does not enforce a maximum retention
+    #   period on the recovery points in the vault (allowing indefinite
+    #   storage).
+    #
+    #   If specified, any backup or copy job to the vault must have a
+    #   lifecycle policy with a retention period equal to or shorter than
+    #   the maximum retention period. If the job's retention period is
+    #   longer than that maximum retention period, then the vault fails the
+    #   backup or copy job, and you should either modify your lifecycle
+    #   settings or use a different vault. Recovery points already stored in
+    #   the vault prior to Vault Lock are not affected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lock_date
+    #   The date and time when Backup Vault Lock configuration cannot be
+    #   changed or deleted.
+    #
+    #   If you applied Vault Lock to your vault without specifying a lock
+    #   date, you can change any of your Vault Lock settings, or delete
+    #   Vault Lock from the vault entirely, at any time.
+    #
+    #   This value is in Unix format, Coordinated Universal Time (UTC), and
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeBackupVaultOutput AWS API Documentation
     #
     class DescribeBackupVaultOutput < Struct.new(
@@ -2027,7 +2165,11 @@ module Aws::Backup
       :encryption_key_arn,
       :creation_date,
       :creator_request_id,
-      :number_of_recovery_points)
+      :number_of_recovery_points,
+      :locked,
+      :min_retention_days,
+      :max_retention_days,
+      :lock_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3169,6 +3311,8 @@ module Aws::Backup
     #   Contains a string with the supported Amazon Web Services resource
     #   types:
     #
+    #   * `Aurora` for Amazon Aurora
+    #
     #   * `DynamoDB` for Amazon DynamoDB
     #
     #   * `EBS` for Amazon Elastic Block Store
@@ -3177,9 +3321,9 @@ module Aws::Backup
     #
     #   * `EFS` for Amazon Elastic File System
     #
-    #   * `RDS` for Amazon Relational Database Service
+    #   * `FSX` for Amazon FSx
     #
-    #   * `Aurora` for Amazon Aurora
+    #   * `RDS` for Amazon Relational Database Service
     #
     #   * `Storage Gateway` for Storage Gateway
     #   @return [Array<String>]
@@ -4437,6 +4581,94 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutBackupVaultLockConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         backup_vault_name: "BackupVaultName", # required
+    #         min_retention_days: 1,
+    #         max_retention_days: 1,
+    #         changeable_for_days: 1,
+    #       }
+    #
+    # @!attribute [rw] backup_vault_name
+    #   The Backup Vault Lock configuration that specifies the name of the
+    #   backup vault it protects.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_retention_days
+    #   The Backup Vault Lock configuration that specifies the minimum
+    #   retention period that the vault retains its recovery points. This
+    #   setting can be useful if, for example, your organization's policies
+    #   require you to retain certain data for at least seven years (2555
+    #   days).
+    #
+    #   If this parameter is not specified, Vault Lock will not enforce a
+    #   minimum retention period.
+    #
+    #   If this parameter is specified, any backup or copy job to the vault
+    #   must have a lifecycle policy with a retention period equal to or
+    #   longer than the minimum retention period. If the job's retention
+    #   period is shorter than that minimum retention period, then the vault
+    #   fails that backup or copy job, and you should either modify your
+    #   lifecycle settings or use a different vault. Recovery points already
+    #   saved in the vault prior to Vault Lock are not affected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_retention_days
+    #   The Backup Vault Lock configuration that specifies the maximum
+    #   retention period that the vault retains its recovery points. This
+    #   setting can be useful if, for example, your organization's policies
+    #   require you to destroy certain data after retaining it for four
+    #   years (1460 days).
+    #
+    #   If this parameter is not included, Vault Lock does not enforce a
+    #   maximum retention period on the recovery points in the vault. If
+    #   this parameter is included without a value, Vault Lock will not
+    #   enforce a maximum retention period.
+    #
+    #   If this parameter is specified, any backup or copy job to the vault
+    #   must have a lifecycle policy with a retention period equal to or
+    #   shorter than the maximum retention period. If the job's retention
+    #   period is longer than that maximum retention period, then the vault
+    #   fails the backup or copy job, and you should either modify your
+    #   lifecycle settings or use a different vault. Recovery points already
+    #   saved in the vault prior to Vault Lock are not affected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] changeable_for_days
+    #   The Backup Vault Lock configuration that specifies the number of
+    #   days before the lock date. For example, setting `ChangeableForDays`
+    #   to 30 on Jan. 1, 2022 at 8pm UTC will set the lock date to Jan. 31,
+    #   2022 at 8pm UTC.
+    #
+    #   Backup enforces a 72-hour cooling-off period before Vault Lock takes
+    #   effect and becomes immutable. Therefore, you must set
+    #   `ChangeableForDays` to 3 or greater.
+    #
+    #   Before the lock date, you can delete Vault Lock from the vault using
+    #   `DeleteBackupVaultLockConfiguration` or change the Vault Lock
+    #   configuration using `PutBackupVaultLockConfiguration`. On and after
+    #   the lock date, the Vault Lock becomes immutable and cannot be
+    #   changed or deleted.
+    #
+    #   If this parameter is not specified, you can delete Vault Lock from
+    #   the vault using `DeleteBackupVaultLockConfiguration` or change the
+    #   Vault Lock configuration using `PutBackupVaultLockConfiguration` at
+    #   any time.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultLockConfigurationInput AWS API Documentation
+    #
+    class PutBackupVaultLockConfigurationInput < Struct.new(
+      :backup_vault_name,
+      :min_retention_days,
+      :max_retention_days,
+      :changeable_for_days)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutBackupVaultNotificationsInput
     #   data as a hash:
     #
@@ -4801,7 +5033,8 @@ module Aws::Backup
     #   Identifies the report template for the report. Reports are built
     #   using a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -4874,7 +5107,12 @@ module Aws::Backup
     #   Identifies the report template for the report. Reports are built
     #   using a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #
+    #   If the report template is `RESOURCE_COMPLIANCE_REPORT` or
+    #   `CONTROL_COMPLIANCE_REPORT`, this API resource also describes the
+    #   report coverage by Amazon Web Services Regions and frameworks.
     #   @return [Types::ReportSetting]
     #
     # @!attribute [rw] report_delivery_channel
@@ -4936,19 +5174,32 @@ module Aws::Backup
     #
     #       {
     #         report_template: "string", # required
+    #         framework_arns: ["string"],
+    #         number_of_frameworks: 1,
     #       }
     #
     # @!attribute [rw] report_template
     #   Identifies the report template for the report. Reports are built
     #   using a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
     #   @return [String]
+    #
+    # @!attribute [rw] framework_arns
+    #   The Amazon Resource Names (ARNs) of the frameworks a report covers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] number_of_frameworks
+    #   The number of frameworks a report covers.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ReportSetting AWS API Documentation
     #
     class ReportSetting < Struct.new(
-      :report_template)
+      :report_template,
+      :framework_arns,
+      :number_of_frameworks)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5899,6 +6150,8 @@ module Aws::Backup
     #         },
     #         report_setting: {
     #           report_template: "string", # required
+    #           framework_arns: ["string"],
+    #           number_of_frameworks: 1,
     #         },
     #         idempotency_token: "string",
     #       }
@@ -5924,7 +6177,12 @@ module Aws::Backup
     #   Identifies the report template for the report. Reports are built
     #   using a report template. The report templates are:
     #
-    #   `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #   `RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT |
+    #   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
+    #
+    #   If the report template is `RESOURCE_COMPLIANCE_REPORT` or
+    #   `CONTROL_COMPLIANCE_REPORT`, this API resource also describes the
+    #   report coverage by Amazon Web Services Regions and frameworks.
     #   @return [Types::ReportSetting]
     #
     # @!attribute [rw] idempotency_token

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2021-09-29)
+------------------
+
+* Feature - This release includes the ability to use 2048 bits RSA key pairs for DKIM in SES, either with Easy DKIM or Bring Your Own DKIM.
+
 1.20.0 (2021-09-01)
 ------------------
 

@@ -675,7 +675,9 @@ module Aws::LocationService
     #   ^
     #
     #   <note markdown="1"> If you specify a departure that's not located on a road, Amazon
-    #   Location [moves the position to the nearest road][2].
+    #   Location [moves the position to the nearest road][2]. If Esri is the
+    #   provider for your route calculator, specifying a route that is
+    #   longer than 400 km returns a `400 RoutesValidationException` error.
     #
     #    </note>
     #
@@ -782,6 +784,10 @@ module Aws::LocationService
     #    Specifying more than 23 waypoints returns a `400
     #   ValidationException` error.
     #
+    #    If Esri is the provider for your route calculator, specifying a
+    #   route that is longer than 400 km returns a `400
+    #   RoutesValidationException` error.
+    #
     #    </note>
     #
     #   Valid Values: `[-180 to 180,-90 to 90]`
@@ -878,9 +884,9 @@ module Aws::LocationService
     #   The total distance covered by the route. The sum of the distance
     #   travelled between every stop on the route.
     #
-    #   <note markdown="1"> The route `distance` can't be greater than 250 km. If the route
-    #   exceeds 250 km, the response returns a `400
-    #   RoutesValidationException` error.
+    #   <note markdown="1"> If Esri is the data source for the route calculator, the route
+    #   distance can’t be greater than 400 km. If the route exceeds 400 km,
+    #   the response is a `400 RoutesValidationException` error.
     #
     #    </note>
     #   @return [Float]
@@ -912,8 +918,8 @@ module Aws::LocationService
     #   * The third `bbox` position is the X coordinate, or longitude of the
     #     upper northeast corner.
     #
-    #   * The fourth `bbox` position is the Y coordinate, or longitude of
-    #     the upper northeast corner.
+    #   * The fourth `bbox` position is the Y coordinate, or latitude of the
+    #     upper northeast corner.
     #   @return [Array<Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteSummary AWS API Documentation
@@ -1185,7 +1191,7 @@ module Aws::LocationService
     #   Specifies the pricing plan for your map resource.
     #
     #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
+    #   see [Amazon Location Service pricing][1].
     #
     #
     #
@@ -1287,9 +1293,9 @@ module Aws::LocationService
     #     your region of interest, see [Esri details on geocoding
     #     coverage][2].
     #
-    #   * `Here` – For additional information about [HERE
-    #     Technologies][3]'s coverage in your region of interest, see [HERE
-    #     details on goecoding coverage][4].
+    #   * `Here` – For additional information about [HERE Technologies][3]'
+    #     coverage in your region of interest, see [HERE details on
+    #     goecoding coverage][4].
     #
     #     Place index resources using HERE Technologies as a data provider
     #     can't [store results][5] for locations in Japan. For more
@@ -1335,7 +1341,7 @@ module Aws::LocationService
     #   Specifies the pricing plan for your place index resource.
     #
     #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
+    #   see [Amazon Location Service pricing][1].
     #
     #
     #
@@ -1439,7 +1445,9 @@ module Aws::LocationService
     #   Specifies the data provider of traffic and road network data.
     #
     #   <note markdown="1"> This field is case-sensitive. Enter the valid values as shown. For
-    #   example, entering `HERE` returns an error.
+    #   example, entering `HERE` returns an error. Route calculators that
+    #   use Esri as a data source only calculate routes that are shorter
+    #   than 400 km.
     #
     #    </note>
     #
@@ -1449,9 +1457,9 @@ module Aws::LocationService
     #     your region of interest, see [Esri details on street networks and
     #     traffic coverage][2].
     #
-    #   * `Here` – For additional information about [HERE
-    #     Technologies][3]'s coverage in your region of interest, see [HERE
-    #     car routing coverage][4] and [HERE truck routing coverage][5].
+    #   * `Here` – For additional information about [HERE Technologies][3]'
+    #     coverage in your region of interest, see [HERE car routing
+    #     coverage][4] and [HERE truck routing coverage][5].
     #
     #   For additional information , see [Data providers][6] on the *Amazon
     #   Location Service Developer Guide*.
@@ -1565,6 +1573,7 @@ module Aws::LocationService
     #       {
     #         description: "ResourceDescription",
     #         kms_key_id: "KmsKeyId",
+    #         position_filtering: "TimeBased", # accepts TimeBased, DistanceBased
     #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #         pricing_plan_data_source: "String",
     #         tags: {
@@ -1586,11 +1595,33 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
     #   @return [String]
     #
+    # @!attribute [rw] position_filtering
+    #   Specifies the position filtering for the tracker resource.
+    #
+    #   Valid values:
+    #
+    #   * `TimeBased` - Location updates are evaluated against linked
+    #     geofence collections, but not every location update is stored. If
+    #     your update frequency is more often than 30 seconds, only one
+    #     update per 30 seconds is stored for each unique device ID.
+    #
+    #   * `DistanceBased` - If the device has moved less than 30 m (98.4
+    #     ft), location updates are ignored. Location updates within this
+    #     distance are neither evaluated against linked geofence
+    #     collections, nor stored. This helps control costs by reducing the
+    #     number of geofence evaluations and device positions to retrieve.
+    #     Distance-based filtering can also reduce the jitter effect when
+    #     displaying device trajectory on a map.
+    #
+    #   This field is optional. If not specified, the default value is
+    #   `TimeBased`.
+    #   @return [String]
+    #
     # @!attribute [rw] pricing_plan
     #   Specifies the pricing plan for the tracker resource.
     #
     #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
+    #   see [Amazon Location Service pricing][1].
     #
     #
     #
@@ -1615,7 +1646,7 @@ module Aws::LocationService
     #
     #    </note>
     #
-    #   Valid Values: `Esri` \| `Here`
+    #   Valid values: `Esri` \| `Here`
     #
     #
     #
@@ -1662,6 +1693,7 @@ module Aws::LocationService
     class CreateTrackerRequest < Struct.new(
       :description,
       :kms_key_id,
+      :position_filtering,
       :pricing_plan,
       :pricing_plan_data_source,
       :tags,
@@ -2022,7 +2054,7 @@ module Aws::LocationService
     # @!attribute [rw] pricing_plan
     #   The pricing plan selected for the specified map resource.
     #
-    #        <p>For additional details and restrictions on each pricing plan option, see the <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing page</a>.</p>
+    #        <p>For additional details and restrictions on each pricing plan option, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2090,8 +2122,8 @@ module Aws::LocationService
     #
     #   * `Here`
     #
-    #   For additional details on data providers, see the [Amazon Location
-    #   Service data providers page][1].
+    #   For additional details on data providers, see [Amazon Location
+    #   Service data providers][1].
     #
     #
     #
@@ -2124,7 +2156,7 @@ module Aws::LocationService
     #   The pricing plan selected for the specified place index resource.
     #
     #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
+    #   see [Amazon Location Service pricing][1].
     #
     #
     #
@@ -2311,11 +2343,15 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
     #   @return [String]
     #
+    # @!attribute [rw] position_filtering
+    #   The position filtering method of the tracker resource.
+    #   @return [String]
+    #
     # @!attribute [rw] pricing_plan
     #   The pricing plan selected for the specified tracker resource.
     #
     #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
+    #   see [Amazon Location Service pricing][1].
     #
     #
     #
@@ -2359,6 +2395,7 @@ module Aws::LocationService
       :create_time,
       :description,
       :kms_key_id,
+      :position_filtering,
       :pricing_plan,
       :pricing_plan_data_source,
       :tags,
@@ -2776,7 +2813,7 @@ module Aws::LocationService
     #   A comma-separated list of fonts to load glyphs from in order of
     #   preference. For example, `Noto Sans Regular, Arial Unicode`.
     #
-    #   Valid fonts for [Esri][1] styles:
+    #   Valid fonts stacks for [Esri][1] styles:
     #
     #   * VectorEsriDarkGrayCanvas – `Ubuntu Medium Italic` \| `Ubuntu
     #     Medium` \| `Ubuntu Italic` \| `Ubuntu Regular` \| `Ubuntu Bold`
@@ -2794,9 +2831,9 @@ module Aws::LocationService
     #   * VectorEsriNavigation – `Arial Regular` \| `Arial Italic` \| `Arial
     #     Bold`
     #
-    #   Valid fonts for [HERE Technologies][2] styles:
+    #   Valid font stacks for [HERE Technologies][2] styles:
     #
-    #   * `VectorHereBerlin` – `Fira GO Regular` \| `Fira GO Bold`
+    #   * VectorHereBerlin – `Fira GO Regular` \| `Fira GO Bold`
     #
     #   ^
     #
@@ -3500,7 +3537,7 @@ module Aws::LocationService
     #   The pricing plan for the specified map resource.
     #
     #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
+    #   see [Amazon Location Service pricing][1].
     #
     #
     #
@@ -3599,8 +3636,8 @@ module Aws::LocationService
     #
     #   * `Here`
     #
-    #   For additional details on data providers, see the [Amazon Location
-    #   Service data providers page][1].
+    #   For additional details on data providers, see [Amazon Location
+    #   Service data providers][1].
     #
     #
     #
@@ -3619,7 +3656,7 @@ module Aws::LocationService
     #   The pricing plan for the specified place index resource.
     #
     #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
+    #   see [Amazon Location Service pricing][1].
     #
     #
     #
@@ -3947,7 +3984,7 @@ module Aws::LocationService
     #   The pricing plan for the specified tracker resource.
     #
     #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
+    #   see [Amazon Location Service pricing][1].
     #
     #
     #
@@ -3995,13 +4032,8 @@ module Aws::LocationService
     #
     # @!attribute [rw] style
     #   Specifies the map style selected from an available data provider.
-    #   For additional information on each map style and to preview each map
-    #   style, see [Esri map
-    #   styles](location/latest/developerguide/esri.html#esri-map-styles)
-    #   and [HERE map
-    #   styles](location/latest/developerguide/HERE.html#HERE-map-styles).
     #
-    #   Valid [Esri][1] styles:
+    #   Valid [Esri map styles][1]\:
     #
     #   * `VectorEsriDarkGrayCanvas` – The Esri Dark Gray Canvas map style.
     #     A vector basemap with a dark gray, neutral background with minimal
@@ -4031,7 +4063,7 @@ module Aws::LocationService
     #     custom navigation map style that's designed for use during the
     #     day in mobile devices.
     #
-    #   Valid [HERE Technologies][2] styles:
+    #   Valid [HERE Technologies map styles][2]\:
     #
     #   * `VectorHereBerlin` – The HERE Berlin map style is a high contrast
     #     detailed base map of the world that blends 3D and 2D rendering.
@@ -4343,8 +4375,8 @@ module Aws::LocationService
     #
     #   * HERE
     #
-    #   For additional details on data providers, see the [Amazon Location
-    #   Service data providers page][1].
+    #   For additional details on data providers, see [Amazon Location
+    #   Service data providers][1].
     #
     #
     #
@@ -4500,8 +4532,8 @@ module Aws::LocationService
     #
     #   * HERE
     #
-    #   For additional details on data providers, see the [Amazon Location
-    #   Service data providers page][1].
+    #   For additional details on data providers, see [Amazon Location
+    #   Service data providers][1].
     #
     #
     #
@@ -5117,6 +5149,7 @@ module Aws::LocationService
     #
     #       {
     #         description: "ResourceDescription",
+    #         position_filtering: "TimeBased", # accepts TimeBased, DistanceBased
     #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #         pricing_plan_data_source: "String",
     #         tracker_name: "ResourceName", # required
@@ -5124,6 +5157,25 @@ module Aws::LocationService
     #
     # @!attribute [rw] description
     #   Updates the description for the tracker resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] position_filtering
+    #   Updates the position filtering for the tracker resource.
+    #
+    #   Valid values:
+    #
+    #   * `TimeBased` - Location updates are evaluated against linked
+    #     geofence collections, but not every location update is stored. If
+    #     your update frequency is more often than 30 seconds, only one
+    #     update per 30 seconds is stored for each unique device ID.
+    #
+    #   * `DistanceBased` - If the device has moved less than 30 m (98.4
+    #     ft), location updates are ignored. Location updates within this
+    #     distance are neither evaluated against linked geofence
+    #     collections, nor stored. This helps control costs by reducing the
+    #     number of geofence evaluations and device positions to retrieve.
+    #     Distance-based filtering can also reduce the jitter effect when
+    #     displaying device trajectory on a map.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
@@ -5170,6 +5222,7 @@ module Aws::LocationService
     #
     class UpdateTrackerRequest < Struct.new(
       :description,
+      :position_filtering,
       :pricing_plan,
       :pricing_plan_data_source,
       :tracker_name)

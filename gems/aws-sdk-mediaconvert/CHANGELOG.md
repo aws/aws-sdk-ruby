@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2021-10-08)
+------------------
+
+* Feature - AWS Elemental MediaConvert has added the ability to set account policies which control access restrictions for HTTP, HTTPS, and S3 content sources.
+
 1.75.0 (2021-09-23)
 ------------------
 

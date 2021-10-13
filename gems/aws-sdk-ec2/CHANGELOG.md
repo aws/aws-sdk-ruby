@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.270.0 (2021-10-13)
+------------------
+
+* Feature - This release adds support for additional VPC Flow Logs delivery options to S3, such as Apache Parquet formatted files, Hourly partitions and Hive-compatible S3 prefixes
+
+1.269.0 (2021-10-12)
+------------------
+
+* Feature - EncryptionSupport for InstanceStorageInfo added to DescribeInstanceTypes API
+
+1.268.0 (2021-10-11)
+------------------
+
+* Feature - Documentation update for Amazon EC2.
+
+1.267.0 (2021-10-08)
+------------------
+
+* Feature - This release removes a requirement for filters on SearchLocalGatewayRoutes operations.
+
+1.266.0 (2021-10-05)
+------------------
+
+* Feature - Released Capacity Reservation Fleet, a feature of Amazon EC2 Capacity Reservations, which provides a way to manage reserved capacity across instance types. For more information: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cr-fleets.html
+
 1.265.0 (2021-09-24)
 ------------------
 

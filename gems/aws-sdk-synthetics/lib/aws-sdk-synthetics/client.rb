@@ -441,6 +441,11 @@ module Aws::Synthetics
     #   use them to scope user permissions, by granting a user permission to
     #   access or change only the resources that have certain tag values.
     #
+    # @option params [Types::ArtifactConfigInput] :artifact_config
+    #   A structure that contains the configuration for canary artifacts,
+    #   including the encryption-at-rest settings for artifacts that the
+    #   canary uploads to Amazon S3.
+    #
     # @return [Types::CreateCanaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCanaryResponse#canary #canary} => Types::Canary
@@ -480,6 +485,12 @@ module Aws::Synthetics
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     artifact_config: {
+    #       s3_encryption: {
+    #         encryption_mode: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -518,6 +529,8 @@ module Aws::Synthetics
     #   resp.canary.visual_reference.base_canary_run_id #=> String
     #   resp.canary.tags #=> Hash
     #   resp.canary.tags["TagKey"] #=> String
+    #   resp.canary.artifact_config.s3_encryption.encryption_mode #=> String, one of "SSE_S3", "SSE_KMS"
+    #   resp.canary.artifact_config.s3_encryption.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CreateCanary AWS API Documentation
     #
@@ -649,6 +662,8 @@ module Aws::Synthetics
     #   resp.canaries[0].visual_reference.base_canary_run_id #=> String
     #   resp.canaries[0].tags #=> Hash
     #   resp.canaries[0].tags["TagKey"] #=> String
+    #   resp.canaries[0].artifact_config.s3_encryption.encryption_mode #=> String, one of "SSE_S3", "SSE_KMS"
+    #   resp.canaries[0].artifact_config.s3_encryption.kms_key_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DescribeCanaries AWS API Documentation
@@ -816,6 +831,8 @@ module Aws::Synthetics
     #   resp.canary.visual_reference.base_canary_run_id #=> String
     #   resp.canary.tags #=> Hash
     #   resp.canary.tags["TagKey"] #=> String
+    #   resp.canary.artifact_config.s3_encryption.encryption_mode #=> String, one of "SSE_S3", "SSE_KMS"
+    #   resp.canary.artifact_config.s3_encryption.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/GetCanary AWS API Documentation
     #
@@ -1146,6 +1163,16 @@ module Aws::Synthetics
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html
     #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html
     #
+    # @option params [String] :artifact_s3_location
+    #   The location in Amazon S3 where Synthetics stores artifacts from the
+    #   test runs of this canary. Artifacts include the log file, screenshots,
+    #   and HAR files. The name of the S3 bucket can't include a period (.).
+    #
+    # @option params [Types::ArtifactConfigInput] :artifact_config
+    #   A structure that contains the configuration for canary artifacts,
+    #   including the encryption-at-rest settings for artifacts that the
+    #   canary uploads to Amazon S3.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1188,6 +1215,13 @@ module Aws::Synthetics
     #       ],
     #       base_canary_run_id: "String", # required
     #     },
+    #     artifact_s3_location: "String",
+    #     artifact_config: {
+    #       s3_encryption: {
+    #         encryption_mode: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/UpdateCanary AWS API Documentation
@@ -1212,7 +1246,7 @@ module Aws::Synthetics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

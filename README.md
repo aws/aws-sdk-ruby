@@ -292,6 +292,7 @@ RubyGems.org page under "LINKS" section.
 
 | Service Name                                          | Service Module                       | gem_name                                | API Version |
 | ----------------------------------------------------- | ------------------------------------ | --------------------------------------- | ----------- |
+| AWS Account                                           | Aws::Account                         | aws-sdk-account                         | 2021-02-01  |
 | AWS Amplify                                           | Aws::Amplify                         | aws-sdk-amplify                         | 2017-07-25  |
 | AWS App Mesh                                          | Aws::AppMesh                         | aws-sdk-appmesh                         | 2019-01-25  |
 | AWS App Runner                                        | Aws::AppRunner                       | aws-sdk-apprunner                       | 2020-05-15  |
@@ -305,6 +306,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Budgets                                           | Aws::Budgets                         | aws-sdk-budgets                         | 2016-10-20  |
 | AWS Certificate Manager                               | Aws::ACM                             | aws-sdk-acm                             | 2015-12-08  |
 | AWS Certificate Manager Private Certificate Authority | Aws::ACMPCA                          | aws-sdk-acmpca                          | 2017-08-22  |
+| AWS Cloud Control API                                 | Aws::CloudControlApi                 | aws-sdk-cloudcontrolapi                 | 2021-09-30  |
 | AWS Cloud Map                                         | Aws::ServiceDiscovery                | aws-sdk-servicediscovery                | 2017-03-14  |
 | AWS Cloud9                                            | Aws::Cloud9                          | aws-sdk-cloud9                          | 2017-09-23  |
 | AWS CloudFormation                                    | Aws::CloudFormation                  | aws-sdk-cloudformation                  | 2010-05-15  |
@@ -505,6 +507,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Macie                                          | Aws::Macie                           | aws-sdk-macie                           | 2017-12-19  |
 | Amazon Macie 2                                        | Aws::Macie2                          | aws-sdk-macie2                          | 2020-01-01  |
 | Amazon Managed Blockchain                             | Aws::ManagedBlockchain               | aws-sdk-managedblockchain               | 2018-09-24  |
+| Amazon Managed Grafana                                | Aws::ManagedGrafana                  | aws-sdk-managedgrafana                  | 2020-08-18  |
 | Amazon Mechanical Turk                                | Aws::MTurk                           | aws-sdk-mturk                           | 2017-01-17  |
 | Amazon MemoryDB                                       | Aws::MemoryDB                        | aws-sdk-memorydb                        | 2021-01-01  |
 | Amazon Neptune                                        | Aws::Neptune                         | aws-sdk-neptune                         | 2014-10-31  |

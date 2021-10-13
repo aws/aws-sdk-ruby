@@ -692,8 +692,13 @@ module Aws::NetworkFirewall
     #       stateful_rule_group_references: [
     #         {
     #           resource_arn: "ResourceArn", # required
+    #           priority: 1,
     #         },
     #       ],
+    #       stateful_default_actions: ["CollectionMember_String"],
+    #       stateful_engine_options: {
+    #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #       },
     #     },
     #     description: "Description",
     #     tags: [
@@ -716,6 +721,9 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.tags #=> Array
     #   resp.firewall_policy_response.tags[0].key #=> String
     #   resp.firewall_policy_response.tags[0].value #=> String
+    #   resp.firewall_policy_response.consumed_stateless_rule_capacity #=> Integer
+    #   resp.firewall_policy_response.consumed_stateful_rule_capacity #=> Integer
+    #   resp.firewall_policy_response.number_of_associations #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewallPolicy AWS API Documentation
     #
@@ -938,6 +946,9 @@ module Aws::NetworkFirewall
     #           ],
     #         },
     #       },
+    #       stateful_rule_options: {
+    #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #       },
     #     },
     #     rules: "RulesString",
     #     type: "STATELESS", # required, accepts STATELESS, STATEFUL
@@ -965,6 +976,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.tags #=> Array
     #   resp.rule_group_response.tags[0].key #=> String
     #   resp.rule_group_response.tags[0].value #=> String
+    #   resp.rule_group_response.consumed_capacity #=> Integer
+    #   resp.rule_group_response.number_of_associations #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateRuleGroup AWS API Documentation
     #
@@ -1083,6 +1096,9 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.tags #=> Array
     #   resp.firewall_policy_response.tags[0].key #=> String
     #   resp.firewall_policy_response.tags[0].value #=> String
+    #   resp.firewall_policy_response.consumed_stateless_rule_capacity #=> Integer
+    #   resp.firewall_policy_response.consumed_stateful_rule_capacity #=> Integer
+    #   resp.firewall_policy_response.number_of_associations #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewallPolicy AWS API Documentation
     #
@@ -1164,6 +1180,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.tags #=> Array
     #   resp.rule_group_response.tags[0].key #=> String
     #   resp.rule_group_response.tags[0].value #=> String
+    #   resp.rule_group_response.consumed_capacity #=> Integer
+    #   resp.rule_group_response.number_of_associations #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteRuleGroup AWS API Documentation
     #
@@ -1273,6 +1291,9 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.tags #=> Array
     #   resp.firewall_policy_response.tags[0].key #=> String
     #   resp.firewall_policy_response.tags[0].value #=> String
+    #   resp.firewall_policy_response.consumed_stateless_rule_capacity #=> Integer
+    #   resp.firewall_policy_response.consumed_stateful_rule_capacity #=> Integer
+    #   resp.firewall_policy_response.number_of_associations #=> Integer
     #   resp.firewall_policy.stateless_rule_group_references #=> Array
     #   resp.firewall_policy.stateless_rule_group_references[0].resource_arn #=> String
     #   resp.firewall_policy.stateless_rule_group_references[0].priority #=> Integer
@@ -1286,6 +1307,10 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy.stateless_custom_actions[0].action_definition.publish_metric_action.dimensions[0].value #=> String
     #   resp.firewall_policy.stateful_rule_group_references #=> Array
     #   resp.firewall_policy.stateful_rule_group_references[0].resource_arn #=> String
+    #   resp.firewall_policy.stateful_rule_group_references[0].priority #=> Integer
+    #   resp.firewall_policy.stateful_default_actions #=> Array
+    #   resp.firewall_policy.stateful_default_actions[0] #=> String
+    #   resp.firewall_policy.stateful_engine_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeFirewallPolicy AWS API Documentation
     #
@@ -1458,6 +1483,7 @@ module Aws::NetworkFirewall
     #   resp.rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions[0].action_name #=> String
     #   resp.rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions[0].action_definition.publish_metric_action.dimensions #=> Array
     #   resp.rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions[0].action_definition.publish_metric_action.dimensions[0].value #=> String
+    #   resp.rule_group.stateful_rule_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
     #   resp.rule_group_response.rule_group_arn #=> String
     #   resp.rule_group_response.rule_group_name #=> String
     #   resp.rule_group_response.rule_group_id #=> String
@@ -1468,6 +1494,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.tags #=> Array
     #   resp.rule_group_response.tags[0].key #=> String
     #   resp.rule_group_response.tags[0].value #=> String
+    #   resp.rule_group_response.consumed_capacity #=> Integer
+    #   resp.rule_group_response.number_of_associations #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroup AWS API Documentation
     #
@@ -2136,8 +2164,13 @@ module Aws::NetworkFirewall
     #       stateful_rule_group_references: [
     #         {
     #           resource_arn: "ResourceArn", # required
+    #           priority: 1,
     #         },
     #       ],
+    #       stateful_default_actions: ["CollectionMember_String"],
+    #       stateful_engine_options: {
+    #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #       },
     #     },
     #     description: "Description",
     #     dry_run: false,
@@ -2154,6 +2187,9 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.tags #=> Array
     #   resp.firewall_policy_response.tags[0].key #=> String
     #   resp.firewall_policy_response.tags[0].value #=> String
+    #   resp.firewall_policy_response.consumed_stateless_rule_capacity #=> Integer
+    #   resp.firewall_policy_response.consumed_stateful_rule_capacity #=> Integer
+    #   resp.firewall_policy_response.number_of_associations #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallPolicy AWS API Documentation
     #
@@ -2505,6 +2541,9 @@ module Aws::NetworkFirewall
     #           ],
     #         },
     #       },
+    #       stateful_rule_options: {
+    #         rule_order: "DEFAULT_ACTION_ORDER", # accepts DEFAULT_ACTION_ORDER, STRICT_ORDER
+    #       },
     #     },
     #     rules: "RulesString",
     #     type: "STATELESS", # accepts STATELESS, STATEFUL
@@ -2525,6 +2564,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.tags #=> Array
     #   resp.rule_group_response.tags[0].key #=> String
     #   resp.rule_group_response.tags[0].value #=> String
+    #   resp.rule_group_response.consumed_capacity #=> Integer
+    #   resp.rule_group_response.number_of_associations #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateRuleGroup AWS API Documentation
     #
@@ -2617,7 +2658,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

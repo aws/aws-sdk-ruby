@@ -612,12 +612,12 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Creates a data source that you use to with an Amazon Kendra index.
+    # Creates a data source that you want to use with an Amazon Kendra
+    # index.
     #
     # You specify a name, data source connector type and description for
-    # your data source. You also specify configuration information such as
-    # document metadata (author, source URI, and so on) and user context
-    # information.
+    # your data source. You also specify configuration information for the
+    # data source connector.
     #
     # `CreateDataSource` is a synchronous operation. The operation returns
     # 200 if the data source was successfully created. Otherwise, an
@@ -684,6 +684,16 @@ module Aws::Kendra
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [String] :language_code
+    #   The code for a language. This allows you to support a language for all
+    #   documents when creating the data source. English is supported by
+    #   default. For more information on supported languages, including their
+    #   codes, see [Adding documents in languages other than English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
     #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1017,6 +1027,7 @@ module Aws::Kendra
     #       },
     #     ],
     #     client_token: "ClientTokenName",
+    #     language_code: "LanguageCode",
     #   })
     #
     # @example Response structure
@@ -1083,6 +1094,16 @@ module Aws::Kendra
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :language_code
+    #   The code for a language. This allows you to support a language for the
+    #   FAQ document. English is supported by default. For more information on
+    #   supported languages, including their codes, see [Adding documents in
+    #   languages other than English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #
     # @return [Types::CreateFaqResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFaqResponse#id #id} => String
@@ -1106,6 +1127,7 @@ module Aws::Kendra
     #     ],
     #     file_format: "CSV", # accepts CSV, CSV_WITH_HEADER, JSON
     #     client_token: "ClientTokenName",
+    #     language_code: "LanguageCode",
     #   })
     #
     # @example Response structure
@@ -1186,14 +1208,24 @@ module Aws::Kendra
     #   ATTRIBUTE\_FILTER
     #
     #   : All indexed content is searchable and displayable for all users. If
-    #     there is an access control list, it is ignored. You can filter on
-    #     user and group attributes.
+    #     you want to filter search results on user context, you can use the
+    #     attribute filters of `_user_id` and `_group_ids` or you can provide
+    #     user and group information in `UserContext`.
     #
     #   USER\_TOKEN
     #
-    #   : Enables SSO and token-based user access control. All documents with
-    #     no access control and all documents accessible to the user will be
-    #     searchable and displayable.
+    #   : Enables token-based user access control to filter search results on
+    #     user context. All documents with no access control and all documents
+    #     accessible to the user will be searchable and displayable.
+    #
+    # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
+    #   Enables fetching access levels of groups and users from an AWS Single
+    #   Sign-On identity source. To configure this, see
+    #   [UserGroupResolutionConfiguration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html
     #
     # @return [Types::CreateIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1234,6 +1266,9 @@ module Aws::Kendra
     #       },
     #     ],
     #     user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
+    #     user_group_resolution_configuration: {
+    #       user_group_resolution_mode: "AWS_SSO", # required, accepts AWS_SSO, NONE
+    #     },
     #   })
     #
     # @example Response structure
@@ -1378,7 +1413,7 @@ module Aws::Kendra
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create a
     #   thesaurus. Multiple calls to the `CreateThesaurus` operation with the
-    #   same client token will create only one index.
+    #   same client token will create only one thesaurus.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1655,6 +1690,7 @@ module Aws::Kendra
     #   * {Types::DescribeDataSourceResponse#schedule #schedule} => String
     #   * {Types::DescribeDataSourceResponse#role_arn #role_arn} => String
     #   * {Types::DescribeDataSourceResponse#error_message #error_message} => String
+    #   * {Types::DescribeDataSourceResponse#language_code #language_code} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1894,6 +1930,7 @@ module Aws::Kendra
     #   resp.schedule #=> String
     #   resp.role_arn #=> String
     #   resp.error_message #=> String
+    #   resp.language_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeDataSource AWS API Documentation
     #
@@ -1925,6 +1962,7 @@ module Aws::Kendra
     #   * {Types::DescribeFaqResponse#role_arn #role_arn} => String
     #   * {Types::DescribeFaqResponse#error_message #error_message} => String
     #   * {Types::DescribeFaqResponse#file_format #file_format} => String
+    #   * {Types::DescribeFaqResponse#language_code #language_code} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1947,6 +1985,7 @@ module Aws::Kendra
     #   resp.role_arn #=> String
     #   resp.error_message #=> String
     #   resp.file_format #=> String, one of "CSV", "CSV_WITH_HEADER", "JSON"
+    #   resp.language_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeFaq AWS API Documentation
     #
@@ -1979,6 +2018,7 @@ module Aws::Kendra
     #   * {Types::DescribeIndexResponse#capacity_units #capacity_units} => Types::CapacityUnitsConfiguration
     #   * {Types::DescribeIndexResponse#user_token_configurations #user_token_configurations} => Array&lt;Types::UserTokenConfiguration&gt;
     #   * {Types::DescribeIndexResponse#user_context_policy #user_context_policy} => String
+    #   * {Types::DescribeIndexResponse#user_group_resolution_configuration #user_group_resolution_configuration} => Types::UserGroupResolutionConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -2027,6 +2067,7 @@ module Aws::Kendra
     #   resp.user_token_configurations[0].json_token_type_configuration.user_name_attribute_field #=> String
     #   resp.user_token_configurations[0].json_token_type_configuration.group_attribute_field #=> String
     #   resp.user_context_policy #=> String, one of "ATTRIBUTE_FILTER", "USER_TOKEN"
+    #   resp.user_group_resolution_configuration.user_group_resolution_mode #=> String, one of "AWS_SSO", "NONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndex AWS API Documentation
     #
@@ -2316,8 +2357,9 @@ module Aws::Kendra
     #   The identifier of the index that contains the data source.
     #
     # @option params [String] :next_token
-    #   If the result of the previous request to `GetDataSourceSyncJobHistory`
-    #   was truncated, include the `NextToken` to fetch the next set of jobs.
+    #   If the previous response was incomplete (because there is more data to
+    #   retrieve), Amazon Kendra returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of jobs.
     #
     # @option params [Integer] :max_results
     #   The maximum number of synchronization jobs to return in the response.
@@ -2417,6 +2459,7 @@ module Aws::Kendra
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
+    #   resp.summary_items[0].language_code #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListDataSources AWS API Documentation
@@ -2434,8 +2477,9 @@ module Aws::Kendra
     #   The index that contains the FAQ lists.
     #
     # @option params [String] :next_token
-    #   If the result of the previous request to `ListFaqs` was truncated,
-    #   include the `NextToken` to fetch the next set of FAQs.
+    #   If the previous response was incomplete (because there is more data to
+    #   retrieve), Amazon Kendra returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of FAQs.
     #
     # @option params [Integer] :max_results
     #   The maximum number of FAQs to return in the response. If there are
@@ -2465,6 +2509,7 @@ module Aws::Kendra
     #   resp.faq_summary_items[0].created_at #=> Time
     #   resp.faq_summary_items[0].updated_at #=> Time
     #   resp.faq_summary_items[0].file_format #=> String, one of "CSV", "CSV_WITH_HEADER", "JSON"
+    #   resp.faq_summary_items[0].language_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListFaqs AWS API Documentation
     #
@@ -2491,11 +2536,15 @@ module Aws::Kendra
     #   for mapping users to their groups.
     #
     # @option params [String] :next_token
-    #   The next items in the list of groups that go beyond the maximum.
+    #   If the previous response was incomplete (because there is more data to
+    #   retrieve), Amazon Kendra returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of groups
+    #   that are mapped to users before a given ordering or timestamp
+    #   identifier.
     #
     # @option params [Integer] :max_results
-    #   The maximum results shown for a list of groups that are mapped to
-    #   users before a given ordering or timestamp identifier.
+    #   The maximum number of returned groups that are mapped to users before
+    #   a given ordering or timestamp identifier.
     #
     # @return [Types::ListGroupsOlderThanOrderingIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2713,13 +2762,16 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Maps users to their groups. You can also map sub groups to groups. For
-    # example, the group "Company Intellectual Property Teams" includes
-    # sub groups "Research" and "Engineering". These sub groups include
-    # their own list of users or people who work in these teams. Only users
-    # who work in research and engineering, and therefore belong in the
-    # intellectual property group, can see top-secret company documents in
-    # their search results.
+    # Maps users to their groups so that you only need to provide the user
+    # ID when you issue the query.
+    #
+    # You can also map sub groups to groups. For example, the group
+    # "Company Intellectual Property Teams" includes sub groups
+    # "Research" and "Engineering". These sub groups include their own
+    # list of users or people who work in these teams. Only users who work
+    # in research and engineering, and therefore belong in the intellectual
+    # property group, can see top-secret company documents in their search
+    # results.
     #
     # You map users to their groups when you want to filter search results
     # for different users based on their group’s access to documents. For
@@ -2921,7 +2973,7 @@ module Aws::Kendra
     #   the relevance that Amazon Kendra determines for the result.
     #
     # @option params [Types::UserContext] :user_context
-    #   The user context token.
+    #   The user context token or user and group information.
     #
     # @option params [String] :visitor_id
     #   Provides an identifier for a specific user. The `VisitorId` should be
@@ -3096,7 +3148,7 @@ module Aws::Kendra
     #   resp.result_items[0].document_attributes[0].value.string_list_value[0] #=> String
     #   resp.result_items[0].document_attributes[0].value.long_value #=> Integer
     #   resp.result_items[0].document_attributes[0].value.date_value #=> Time
-    #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM", "LOW"
+    #   resp.result_items[0].score_attributes.score_confidence #=> String, one of "VERY_HIGH", "HIGH", "MEDIUM", "LOW", "NOT_AVAILABLE"
     #   resp.result_items[0].feedback_token #=> String
     #   resp.facet_results #=> Array
     #   resp.facet_results[0].document_attribute_key #=> String
@@ -3318,6 +3370,16 @@ module Aws::Kendra
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the new role to use when the data
     #   source is accessing resources on your behalf.
+    #
+    # @option params [String] :language_code
+    #   The code for a language. This allows you to support a language for all
+    #   documents when updating the data source. English is supported by
+    #   default. For more information on supported languages, including their
+    #   codes, see [Adding documents in languages other than English][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3642,6 +3704,7 @@ module Aws::Kendra
     #     description: "Description",
     #     schedule: "ScanSchedule",
     #     role_arn: "RoleArn",
+    #     language_code: "LanguageCode",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateDataSource AWS API Documentation
@@ -3683,7 +3746,16 @@ module Aws::Kendra
     #   The user token configuration.
     #
     # @option params [String] :user_context_policy
-    #   The user user token context policy.
+    #   The user context policy.
+    #
+    # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
+    #   Enables fetching access levels of groups and users from an AWS Single
+    #   Sign-On identity source. To configure this, see
+    #   [UserGroupResolutionConfiguration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3737,6 +3809,9 @@ module Aws::Kendra
     #       },
     #     ],
     #     user_context_policy: "ATTRIBUTE_FILTER", # accepts ATTRIBUTE_FILTER, USER_TOKEN
+    #     user_group_resolution_configuration: {
+    #       user_group_resolution_mode: "AWS_SSO", # required, accepts AWS_SSO, NONE
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateIndex AWS API Documentation
@@ -3967,7 +4042,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

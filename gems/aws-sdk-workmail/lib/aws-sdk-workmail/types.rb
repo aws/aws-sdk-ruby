@@ -728,6 +728,51 @@ module Aws::WorkMail
     #
     class DeleteMailboxPermissionsResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteMobileDeviceAccessOverrideRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         user_id: "EntityIdentifier", # required
+    #         device_id: "DeviceId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization for which the access override will
+    #   be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The WorkMail user for which you want to delete the override. Accepts
+    #   the following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The mobile device for which you delete the override. `DeviceId` is
+    #   case insensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMobileDeviceAccessOverrideRequest AWS API Documentation
+    #
+    class DeleteMobileDeviceAccessOverrideRequest < Struct.new(
+      :organization_id,
+      :user_id,
+      :device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMobileDeviceAccessOverrideResponse AWS API Documentation
+    #
+    class DeleteMobileDeviceAccessOverrideResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteMobileDeviceAccessRuleRequest
     #   data as a hash:
     #
@@ -928,6 +973,36 @@ module Aws::WorkMail
     #
     class DeregisterFromWorkMailResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeregisterMailDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         domain_name: "WorkMailDomainName", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization for which the domain will be
+    #   deregistered.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain to deregister in WorkMail and SES.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeregisterMailDomainRequest AWS API Documentation
+    #
+    class DeregisterMailDomainRequest < Struct.new(
+      :organization_id,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeregisterMailDomainResponse AWS API Documentation
+    #
+    class DeregisterMailDomainResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeGroupRequest
     #   data as a hash:
     #
@@ -989,6 +1064,37 @@ module Aws::WorkMail
       :state,
       :enabled_date,
       :disabled_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInboundDmarcSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   Lists the ID of the given organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeInboundDmarcSettingsRequest AWS API Documentation
+    #
+    class DescribeInboundDmarcSettingsRequest < Struct.new(
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enforced
+    #   Lists the enforcement setting of the applied policy.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeInboundDmarcSettingsResponse AWS API Documentation
+    #
+    class DescribeInboundDmarcSettingsResponse < Struct.new(
+      :enforced)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1435,6 +1541,31 @@ module Aws::WorkMail
     #
     class DisassociateMemberFromGroupResponse < Aws::EmptyStructure; end
 
+    # A DNS record uploaded to your DNS provider.
+    #
+    # @!attribute [rw] type
+    #   The RFC 1035 record type. Possible values: `CNAME`, `A`, `MX`.
+    #   @return [String]
+    #
+    # @!attribute [rw] hostname
+    #   The DNS hostname.- For example, `domain.example.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value returned by the DNS for a query to that hostname and
+    #   record type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DnsRecord AWS API Documentation
+    #
+    class DnsRecord < Struct.new(
+      :type,
+      :hostname,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The domain to associate with an Amazon WorkMail organization.
     #
     # When you configure a domain hosted in Amazon Route 53 (Route 53), all
@@ -1550,8 +1681,8 @@ module Aws::WorkMail
     #   @return [String]
     #
     # @!attribute [rw] period
-    #   The period of time at which the folder configuration action is
-    #   applied.
+    #   The number of days for which the folder-configuration action
+    #   applies.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/FolderConfiguration AWS API Documentation
@@ -1666,6 +1797,68 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMailDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         domain_name: "WorkMailDomainName", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization for which the domain is retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain from which you want to retrieve details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMailDomainRequest AWS API Documentation
+    #
+    class GetMailDomainRequest < Struct.new(
+      :organization_id,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] records
+    #   A list of the DNS records that Amazon WorkMail recommends adding in
+    #   your DNS provider for the best user experience. The records
+    #   configure your domain with DMARC, SPF, DKIM, and direct incoming
+    #   email traffic to SES. See admin guide for more details.
+    #   @return [Array<Types::DnsRecord>]
+    #
+    # @!attribute [rw] is_test_domain
+    #   Specifies whether the domain is a test domain provided by WorkMail,
+    #   or a custom domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_default
+    #   Specifies whether the domain is the default domain for your
+    #   organization.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ownership_verification_status
+    #   Indicates the status of the domain ownership verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] dkim_verification_status
+    #   Indicates the status of a DKIM verification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMailDomainResponse AWS API Documentation
+    #
+    class GetMailDomainResponse < Struct.new(
+      :records,
+      :is_test_domain,
+      :is_default,
+      :ownership_verification_status,
+      :dkim_verification_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMailboxDetailsRequest
     #   data as a hash:
     #
@@ -1773,6 +1966,84 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMobileDeviceAccessOverrideRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         user_id: "EntityIdentifier", # required
+    #         device_id: "DeviceId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization to which you want to apply the
+    #   override.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   Identifies the WorkMail user for the override. Accepts the following
+    #   types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The mobile device to which the override applies. `DeviceId` is case
+    #   insensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMobileDeviceAccessOverrideRequest AWS API Documentation
+    #
+    class GetMobileDeviceAccessOverrideRequest < Struct.new(
+      :organization_id,
+      :user_id,
+      :device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_id
+    #   The WorkMail user to which the access override applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The device to which the access override applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the override, `ALLOW` or `DENY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the override.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The date the override was first created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] date_modified
+    #   The date the description was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMobileDeviceAccessOverrideResponse AWS API Documentation
+    #
+    class GetMobileDeviceAccessOverrideResponse < Struct.new(
+      :user_id,
+      :device_id,
+      :effect,
+      :description,
+      :date_created,
+      :date_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The representation of an Amazon WorkMail group.
     #
     # @!attribute [rw] id
@@ -1824,6 +2095,25 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/InvalidConfigurationException AWS API Documentation
     #
     class InvalidConfigurationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You SES configuration has customizations that Amazon WorkMail cannot
+    # save. The error message lists the invalid setting. For examples of
+    # invalid settings, refer to [CreateReceiptRule][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/InvalidCustomSesConfigurationException AWS API Documentation
+    #
+    class InvalidCustomSesConfigurationException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -2064,6 +2354,58 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMailDomainsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization for which to list domains.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The first
+    #   call does not require a token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailDomainsRequest AWS API Documentation
+    #
+    class ListMailDomainsRequest < Struct.new(
+      :organization_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mail_domains
+    #   The list of mail domain summaries, specifying domains that exist in
+    #   the specified Amazon WorkMail organization, along with the
+    #   information about whether the domain is or isn't the default.
+    #   @return [Array<Types::MailDomainSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value
+    #   becomes `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailDomainsResponse AWS API Documentation
+    #
+    class ListMailDomainsResponse < Struct.new(
+      :mail_domains,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListMailboxExportJobsRequest
     #   data as a hash:
     #
@@ -2165,6 +2507,78 @@ module Aws::WorkMail
     #
     class ListMailboxPermissionsResponse < Struct.new(
       :permissions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMobileDeviceAccessOverridesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         user_id: "EntityIdentifier",
+    #         device_id: "DeviceId",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization under which to list mobile device
+    #   access overrides.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The WorkMail user under which you list the mobile device access
+    #   overrides. Accepts the following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The mobile device to which the access override applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The first
+    #   call does not require a token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMobileDeviceAccessOverridesRequest AWS API Documentation
+    #
+    class ListMobileDeviceAccessOverridesRequest < Struct.new(
+      :organization_id,
+      :user_id,
+      :device_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] overrides
+    #   The list of mobile device access overrides that exist for the
+    #   specified Amazon WorkMail organization and user.
+    #   @return [Array<Types::MobileDeviceAccessOverride>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   “null” when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMobileDeviceAccessOverridesResponse AWS API Documentation
+    #
+    class ListMobileDeviceAccessOverridesResponse < Struct.new(
+      :overrides,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2437,8 +2851,21 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
-    # For an email or alias to be created in Amazon WorkMail, the included
-    # domain must be defined in the organization.
+    # The domain you're trying to change is in use by another user or
+    # organization in your account. See the error message for details.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/MailDomainInUseException AWS API Documentation
+    #
+    class MailDomainInUseException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The domain specified is not found in your organization.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2461,6 +2888,25 @@ module Aws::WorkMail
     #
     class MailDomainStateException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data for a given domain.
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_domain
+    #   Whether the domain is default or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/MailDomainSummary AWS API Documentation
+    #
+    class MailDomainSummary < Struct.new(
+      :domain_name,
+      :default_domain)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2579,6 +3025,45 @@ module Aws::WorkMail
     class MobileDeviceAccessMatchedRule < Struct.new(
       :mobile_device_access_rule_id,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The override object.
+    #
+    # @!attribute [rw] user_id
+    #   The WorkMail user to which the access override applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The device to which the override applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the override, `ALLOW` or `DENY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the override.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_created
+    #   The date the override was first created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] date_modified
+    #   The date the override was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/MobileDeviceAccessOverride AWS API Documentation
+    #
+    class MobileDeviceAccessOverride < Struct.new(
+      :user_id,
+      :device_id,
+      :effect,
+      :description,
+      :date_created,
+      :date_modified)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2859,6 +3344,36 @@ module Aws::WorkMail
     #
     class PutAccessControlRuleResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass PutInboundDmarcSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         enforced: false, # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization that you are applying the DMARC policy
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] enforced
+    #   Enforces or suspends a policy after it's applied.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutInboundDmarcSettingsRequest AWS API Documentation
+    #
+    class PutInboundDmarcSettingsRequest < Struct.new(
+      :organization_id,
+      :enforced)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutInboundDmarcSettingsResponse AWS API Documentation
+    #
+    class PutInboundDmarcSettingsResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass PutMailboxPermissionsRequest
     #   data as a hash:
     #
@@ -2908,6 +3423,63 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMailboxPermissionsResponse AWS API Documentation
     #
     class PutMailboxPermissionsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutMobileDeviceAccessOverrideRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         user_id: "EntityIdentifier", # required
+    #         device_id: "DeviceId", # required
+    #         effect: "ALLOW", # required, accepts ALLOW, DENY
+    #         description: "MobileDeviceAccessRuleDescription",
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   Identifies the Amazon WorkMail organization for which you create the
+    #   override.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The WorkMail user for which you create the override. Accepts the
+    #   following types of user identities:
+    #
+    #   * User ID: `12345678-1234-1234-1234-123456789012` or
+    #     `S-1-1-12-1234567890-123456789-123456789-1234`
+    #
+    #   * Email address: `user@domain.tld`
+    #
+    #   * User name: `user`
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The mobile device for which you create the override. `DeviceId` is
+    #   case insensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The effect of the override, `ALLOW` or `DENY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the override.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMobileDeviceAccessOverrideRequest AWS API Documentation
+    #
+    class PutMobileDeviceAccessOverrideRequest < Struct.new(
+      :organization_id,
+      :user_id,
+      :device_id,
+      :effect,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMobileDeviceAccessOverrideResponse AWS API Documentation
+    #
+    class PutMobileDeviceAccessOverrideResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutRetentionPolicyRequest
     #   data as a hash:
@@ -2961,6 +3533,45 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutRetentionPolicyResponse AWS API Documentation
     #
     class PutRetentionPolicyResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RegisterMailDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "IdempotencyClientToken",
+    #         organization_id: "OrganizationId", # required
+    #         domain_name: "WorkMailDomainName", # required
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   Idempotency token used when retrying requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization under which you're creating the
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the mail domain to create in Amazon WorkMail and SES.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/RegisterMailDomainRequest AWS API Documentation
+    #
+    class RegisterMailDomainRequest < Struct.new(
+      :client_token,
+      :organization_id,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/RegisterMailDomainResponse AWS API Documentation
+    #
+    class RegisterMailDomainResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RegisterToWorkMailRequest
     #   data as a hash:
@@ -3300,6 +3911,35 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateDefaultMailDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         domain_name: "WorkMailDomainName", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The Amazon WorkMail organization for which to list domains.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name that will become the default domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateDefaultMailDomainRequest AWS API Documentation
+    #
+    class UpdateDefaultMailDomainRequest < Struct.new(
+      :organization_id,
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateDefaultMailDomainResponse AWS API Documentation
+    #
+    class UpdateDefaultMailDomainResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateMailboxQuotaRequest
     #   data as a hash:

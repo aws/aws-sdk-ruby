@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2021-10-11)
+------------------
+
+* Feature - Enable support for ALB IPv6 Target Groups (IP Address Type)
+
 1.68.0 (2021-09-27)
 ------------------
 

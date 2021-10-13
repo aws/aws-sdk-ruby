@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2021-10-04)
+------------------
+
+* Feature - CodeBuild now allows you to select how batch build statuses are sent to the source provider for a project.
+
 1.81.0 (2021-09-01)
 ------------------
 

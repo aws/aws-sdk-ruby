@@ -260,7 +260,7 @@ module Aws::SageMaker
     #       {
     #         training_image: "AlgorithmImage",
     #         algorithm_name: "ArnOrName",
-    #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #         metric_definitions: [
     #           {
     #             name: "MetricName", # required
@@ -293,27 +293,45 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
-    #   The input mode that the algorithm supports. For the input modes that
-    #   Amazon SageMaker algorithms support, see [Algorithms][1]. If an
-    #   algorithm supports the `File` input mode, Amazon SageMaker downloads
-    #   the training data from S3 to the provisioned ML storage Volume, and
-    #   mounts the directory to docker volume for training container. If an
-    #   algorithm supports the `Pipe` input mode, Amazon SageMaker streams
-    #   data directly from S3 to the container.
+    #   The training input mode that the algorithm supports. For more
+    #   information about input modes, see [Algorithms][1].
     #
-    #   In File mode, make sure you provision ML storage volume with
-    #   sufficient capacity to accommodate the data download from S3. In
-    #   addition to the training data, the ML storage volume also stores the
-    #   output model. The algorithm container use ML storage volume to also
-    #   store intermediate information, if any.
+    #   **Pipe mode**
     #
-    #   For distributed algorithms using File mode, training data is
-    #   distributed uniformly, and your training duration is predictable if
-    #   the input data objects size is approximately same. Amazon SageMaker
-    #   does not split the files any further for model training. If the
-    #   object sizes are skewed, training won't be optimal as the data
-    #   distribution is also skewed where one host in a training cluster is
-    #   overloaded, thus becoming bottleneck in training.
+    #   If an algorithm supports `Pipe` mode, Amazon SageMaker streams data
+    #   directly from Amazon S3 to the container.
+    #
+    #   **File mode**
+    #
+    #   If an algorithm supports `File` mode, SageMaker downloads the
+    #   training data from S3 to the provisioned ML storage volume, and
+    #   mounts the directory to the Docker volume for the training
+    #   container.
+    #
+    #   You must provision the ML storage volume with sufficient capacity to
+    #   accommodate the data downloaded from S3. In addition to the training
+    #   data, the ML storage volume also stores the output model. The
+    #   algorithm container uses the ML storage volume to also store
+    #   intermediate information, if any.
+    #
+    #   For distributed algorithms, training data is distributed uniformly.
+    #   Your training duration is predictable if the input data objects
+    #   sizes are approximately the same. SageMaker does not split the files
+    #   any further for model training. If the object sizes are skewed,
+    #   training won't be optimal as the data distribution is also skewed
+    #   when one host in a training cluster is overloaded, thus becoming a
+    #   bottleneck in training.
+    #
+    #   **FastFile mode**
+    #
+    #   If an algorithm supports `FastFile` mode, SageMaker streams data
+    #   directly from S3 to the container with no code changes, and provides
+    #   file system access to the data. Users can author their training
+    #   script to interact with these files as if they were stored on disk.
+    #
+    #   `FastFile` mode works best when the data is read sequentially.
+    #   Augmented manifest files aren't supported. The startup time is
+    #   lower when there are fewer files in the S3 bucket provided.
     #
     #
     #
@@ -451,7 +469,7 @@ module Aws::SageMaker
     #       {
     #         profile_name: "EntityName", # required
     #         training_job_definition: { # required
-    #           training_input_mode: "Pipe", # required, accepts Pipe, File
+    #           training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #           hyper_parameters: {
     #             "HyperParameterKey" => "HyperParameterValue",
     #           },
@@ -475,7 +493,7 @@ module Aws::SageMaker
     #               content_type: "ContentType",
     #               compression_type: "None", # accepts None, Gzip
     #               record_wrapper_type: "None", # accepts None, RecordIO
-    #               input_mode: "Pipe", # accepts Pipe, File
+    #               input_mode: "Pipe", # accepts Pipe, File, FastFile
     #               shuffle_config: {
     #                 seed: 1, # required
     #               },
@@ -565,7 +583,7 @@ module Aws::SageMaker
     #           {
     #             profile_name: "EntityName", # required
     #             training_job_definition: { # required
-    #               training_input_mode: "Pipe", # required, accepts Pipe, File
+    #               training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #               hyper_parameters: {
     #                 "HyperParameterKey" => "HyperParameterValue",
     #               },
@@ -589,7 +607,7 @@ module Aws::SageMaker
     #                   content_type: "ContentType",
     #                   compression_type: "None", # accepts None, Gzip
     #                   record_wrapper_type: "None", # accepts None, RecordIO
-    #                   input_mode: "Pipe", # accepts Pipe, File
+    #                   input_mode: "Pipe", # accepts Pipe, File, FastFile
     #                   shuffle_config: {
     #                     seed: 1, # required
     #                   },
@@ -2063,12 +2081,20 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] max_runtime_per_training_job_in_seconds
-    #   The maximum time, in seconds, a training job is allowed to run as
-    #   part of an AutoML job.
+    #   The maximum time, in seconds, that each training job is allowed to
+    #   run as part of a hyperparameter tuning job. For more information,
+    #   see the used by the action.
     #   @return [Integer]
     #
     # @!attribute [rw] max_auto_ml_job_runtime_in_seconds
     #   The maximum runtime, in seconds, an AutoML job has to complete.
+    #
+    #   If an AutoML job exceeds the maximum runtime, the job is stopped
+    #   automatically and its processing is ended gracefully. The AutoML job
+    #   identifies the best model whose training was completed and marks it
+    #   as the best-performing model. Any unfinished steps of the job, such
+    #   as automatic one-click Autopilot model deployment, will not be
+    #   completed.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobCompletionCriteria AWS API Documentation
@@ -2676,7 +2702,7 @@ module Aws::SageMaker
     #         content_type: "ContentType",
     #         compression_type: "None", # accepts None, Gzip
     #         record_wrapper_type: "None", # accepts None, RecordIO
-    #         input_mode: "Pipe", # accepts Pipe, File
+    #         input_mode: "Pipe", # accepts Pipe, File, FastFile
     #         shuffle_config: {
     #           seed: 1, # required
     #         },
@@ -2775,7 +2801,7 @@ module Aws::SageMaker
     #         is_required: false,
     #         supported_content_types: ["ContentType"], # required
     #         supported_compression_types: ["None"], # accepts None, Gzip
-    #         supported_input_modes: ["Pipe"], # required, accepts Pipe, File
+    #         supported_input_modes: ["Pipe"], # required, accepts Pipe, File, FastFile
     #       }
     #
     # @!attribute [rw] name
@@ -3549,7 +3575,7 @@ module Aws::SageMaker
     #               is_required: false,
     #               supported_content_types: ["ContentType"], # required
     #               supported_compression_types: ["None"], # accepts None, Gzip
-    #               supported_input_modes: ["Pipe"], # required, accepts Pipe, File
+    #               supported_input_modes: ["Pipe"], # required, accepts Pipe, File, FastFile
     #             },
     #           ],
     #           supported_tuning_job_objective_metrics: [
@@ -3583,7 +3609,7 @@ module Aws::SageMaker
     #             {
     #               profile_name: "EntityName", # required
     #               training_job_definition: { # required
-    #                 training_input_mode: "Pipe", # required, accepts Pipe, File
+    #                 training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #                 hyper_parameters: {
     #                   "HyperParameterKey" => "HyperParameterValue",
     #                 },
@@ -3607,7 +3633,7 @@ module Aws::SageMaker
     #                     content_type: "ContentType",
     #                     compression_type: "None", # accepts None, Gzip
     #                     record_wrapper_type: "None", # accepts None, RecordIO
-    #                     input_mode: "Pipe", # accepts Pipe, File
+    #                     input_mode: "Pipe", # accepts Pipe, File, FastFile
     #                     shuffle_config: {
     #                       seed: 1, # required
     #                     },
@@ -5255,12 +5281,19 @@ module Aws::SageMaker
     #     `OfflineStore`.
     #
     #   * A configuration for an Amazon Web Services Glue or Amazon Web
-    #     Services Hive data cataolgue.
+    #     Services Hive data catalog.
     #
     #   * An KMS encryption key to encrypt the Amazon S3 location used for
-    #     `OfflineStore`.
+    #     `OfflineStore`. If KMS encryption key is not specified, by default
+    #     we encrypt all data at rest using Amazon Web Services KMS key. By
+    #     defining your [bucket-level key][1] for SSE, you can reduce Amazon
+    #     Web Services KMS requests costs by up to 99 percent.
     #
     #   To learn more about this parameter, see OfflineStoreConfig.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html
     #   @return [Types::OfflineStoreConfig]
     #
     # @!attribute [rw] role_arn
@@ -5544,7 +5577,7 @@ module Aws::SageMaker
     #           },
     #           algorithm_specification: { # required
     #             training_image: "AlgorithmImage",
-    #             training_input_mode: "Pipe", # required, accepts Pipe, File
+    #             training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #             algorithm_name: "ArnOrName",
     #             metric_definitions: [
     #               {
@@ -5574,7 +5607,7 @@ module Aws::SageMaker
     #               content_type: "ContentType",
     #               compression_type: "None", # accepts None, Gzip
     #               record_wrapper_type: "None", # accepts None, RecordIO
-    #               input_mode: "Pipe", # accepts Pipe, File
+    #               input_mode: "Pipe", # accepts Pipe, File, FastFile
     #               shuffle_config: {
     #                 seed: 1, # required
     #               },
@@ -5645,7 +5678,7 @@ module Aws::SageMaker
     #             },
     #             algorithm_specification: { # required
     #               training_image: "AlgorithmImage",
-    #               training_input_mode: "Pipe", # required, accepts Pipe, File
+    #               training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #               algorithm_name: "ArnOrName",
     #               metric_definitions: [
     #                 {
@@ -5675,7 +5708,7 @@ module Aws::SageMaker
     #                 content_type: "ContentType",
     #                 compression_type: "None", # accepts None, Gzip
     #                 record_wrapper_type: "None", # accepts None, RecordIO
-    #                 input_mode: "Pipe", # accepts Pipe, File
+    #                 input_mode: "Pipe", # accepts Pipe, File, FastFile
     #                 shuffle_config: {
     #                   seed: 1, # required
     #                 },
@@ -8048,7 +8081,7 @@ module Aws::SageMaker
     #         algorithm_specification: { # required
     #           training_image: "AlgorithmImage",
     #           algorithm_name: "ArnOrName",
-    #           training_input_mode: "Pipe", # required, accepts Pipe, File
+    #           training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #           metric_definitions: [
     #             {
     #               name: "MetricName", # required
@@ -8078,7 +8111,7 @@ module Aws::SageMaker
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
     #             record_wrapper_type: "None", # accepts None, RecordIO
-    #             input_mode: "Pipe", # accepts Pipe, File
+    #             input_mode: "Pipe", # accepts Pipe, File, FastFile
     #             shuffle_config: {
     #               seed: 1, # required
     #             },
@@ -9383,19 +9416,18 @@ module Aws::SageMaker
     #   specify `OutputFilter` as an additional filter to select a portion
     #   of the joined dataset and store it in the output file.
     #
-    #   For JSON or JSONLines objects, such as a JSON array, Amazon
-    #   SageMaker adds the transformed data to the input JSON object in an
-    #   attribute called `SageMakerOutput`. The joined result for JSON must
-    #   be a key-value pair object. If the input is not a key-value pair
-    #   object, Amazon SageMaker creates a new JSON file. In the new JSON
-    #   file, and the input data is stored under the `SageMakerInput` key
-    #   and the results are stored in `SageMakerOutput`.
+    #   For JSON or JSONLines objects, such as a JSON array, SageMaker adds
+    #   the transformed data to the input JSON object in an attribute called
+    #   `SageMakerOutput`. The joined result for JSON must be a key-value
+    #   pair object. If the input is not a key-value pair object, SageMaker
+    #   creates a new JSON file. In the new JSON file, and the input data is
+    #   stored under the `SageMakerInput` key and the results are stored in
+    #   `SageMakerOutput`.
     #
-    #   For CSV data, Amazon SageMaker takes each row as a JSON array and
-    #   joins the transformed data with the input by appending each
-    #   transformed row to the end of the input. The joined data has the
-    #   original input data followed by the transformed data and the output
-    #   is a CSV file.
+    #   For CSV data, SageMaker takes each row as a JSON array and joins the
+    #   transformed data with the input by appending each transformed row to
+    #   the end of the input. The joined data has the original input data
+    #   followed by the transformed data and the output is a CSV file.
     #
     #   For information on how joining in applied, see [Workflow for
     #   Associating Inferences with Input Records][1].
@@ -11173,6 +11205,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_user_activity_timestamp
     #   The timestamp of the last user's activity.
+    #   `LastUserActivityTimestamp` is also updated when SageMaker performs
+    #   health checks without user activity. As a result, this value is set
+    #   to the same value as `LastHealthCheckTimestamp`.
     #   @return [Time]
     #
     # @!attribute [rw] creation_time
@@ -14777,8 +14812,8 @@ module Aws::SageMaker
     #
     #   Multiply `BillableTimeInSeconds` by the number of instances
     #   (`InstanceCount`) in your training cluster to get the total compute
-    #   time Amazon SageMaker will bill you if you run distributed training.
-    #   The formula is as follows: `BillableTimeInSeconds * InstanceCount` .
+    #   time SageMaker will bill you if you run distributed training. The
+    #   formula is as follows: `BillableTimeInSeconds * InstanceCount` .
     #
     #   You can calculate the savings from using managed spot training using
     #   the formula `(1 - BillableTimeInSeconds / TrainingTimeInSeconds) *
@@ -16072,7 +16107,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] s3_input_mode
     #   Whether the `Pipe` or `File` is used as the input mode for
-    #   transfering data for the monitoring job. `Pipe` mode is recommended
+    #   transferring data for the monitoring job. `Pipe` mode is recommended
     #   for large datasets. `File` mode is useful for small files that fit
     #   in memory. Defaults to `File`.
     #   @return [String]
@@ -18383,7 +18418,7 @@ module Aws::SageMaker
     #
     #       {
     #         training_image: "AlgorithmImage",
-    #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #         algorithm_name: "ArnOrName",
     #         metric_definitions: [
     #           {
@@ -18409,21 +18444,45 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
-    #   The input mode that the algorithm supports: File or Pipe. In File
-    #   input mode, Amazon SageMaker downloads the training data from Amazon
-    #   S3 to the storage volume that is attached to the training instance
-    #   and mounts the directory to the Docker volume for the training
-    #   container. In Pipe input mode, Amazon SageMaker streams data
+    #   The training input mode that the algorithm supports. For more
+    #   information about input modes, see [Algorithms][1].
+    #
+    #   **Pipe mode**
+    #
+    #   If an algorithm supports `Pipe` mode, Amazon SageMaker streams data
     #   directly from Amazon S3 to the container.
     #
-    #   If you specify File mode, make sure that you provision the storage
-    #   volume that is attached to the training instance with enough
-    #   capacity to accommodate the training data downloaded from Amazon S3,
-    #   the model artifacts, and intermediate information.
+    #   **File mode**
     #
+    #   If an algorithm supports `File` mode, SageMaker downloads the
+    #   training data from S3 to the provisioned ML storage volume, and
+    #   mounts the directory to the Docker volume for the training
+    #   container.
     #
+    #   You must provision the ML storage volume with sufficient capacity to
+    #   accommodate the data downloaded from S3. In addition to the training
+    #   data, the ML storage volume also stores the output model. The
+    #   algorithm container uses the ML storage volume to also store
+    #   intermediate information, if any.
     #
-    #   For more information about input modes, see [Algorithms][1].
+    #   For distributed algorithms, training data is distributed uniformly.
+    #   Your training duration is predictable if the input data objects
+    #   sizes are approximately the same. SageMaker does not split the files
+    #   any further for model training. If the object sizes are skewed,
+    #   training won't be optimal as the data distribution is also skewed
+    #   when one host in a training cluster is overloaded, thus becoming a
+    #   bottleneck in training.
+    #
+    #   **FastFile mode**
+    #
+    #   If an algorithm supports `FastFile` mode, SageMaker streams data
+    #   directly from S3 to the container with no code changes, and provides
+    #   file system access to the data. Users can author their training
+    #   script to interact with these files as if they were stored on disk.
+    #
+    #   `FastFile` mode works best when the data is read sequentially.
+    #   Augmented manifest files aren't supported. The startup time is
+    #   lower when there are fewer files in the S3 bucket provided.
     #
     #
     #
@@ -18564,7 +18623,7 @@ module Aws::SageMaker
     #         },
     #         algorithm_specification: { # required
     #           training_image: "AlgorithmImage",
-    #           training_input_mode: "Pipe", # required, accepts Pipe, File
+    #           training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #           algorithm_name: "ArnOrName",
     #           metric_definitions: [
     #             {
@@ -18594,7 +18653,7 @@ module Aws::SageMaker
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
     #             record_wrapper_type: "None", # accepts None, RecordIO
-    #             input_mode: "Pipe", # accepts Pipe, File
+    #             input_mode: "Pipe", # accepts Pipe, File, FastFile
     #             shuffle_config: {
     #               seed: 1, # required
     #             },
@@ -32422,11 +32481,11 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies a limit to how long a model training job, model compilation
-    # job, or hyperparameter tuning job can run. It also specifies how long
-    # a managed Spot training job has to complete. When the job reaches the
-    # time limit, Amazon SageMaker ends the training or compilation job. Use
-    # this API to cap model training costs.
+    # Specifies a limit to how long a model training job or model
+    # compilation job can run. It also specifies how long a managed spot
+    # training job has to complete. When the job reaches the time limit,
+    # Amazon SageMaker ends the training or compilation job. Use this API to
+    # cap model training costs.
     #
     # To stop a training job, Amazon SageMaker sends the algorithm the
     # `SIGTERM` signal, which delays job termination for 120 seconds.
@@ -32588,12 +32647,12 @@ module Aws::SageMaker
     end
 
     # A tag object that consists of a key and an optional value, used to
-    # manage metadata for Amazon SageMaker Amazon Web Services resources.
+    # manage metadata for SageMaker Amazon Web Services resources.
     #
     # You can add tags to notebook instances, training jobs, hyperparameter
     # tuning jobs, batch transform jobs, models, labeling jobs, work teams,
     # endpoint configurations, and endpoints. For more information on adding
-    # tags to Amazon SageMaker resources, see AddTags.
+    # tags to SageMaker resources, see AddTags.
     #
     # For more information on adding metadata to your Amazon Web Services
     # resources with tagging, see [Tagging Amazon Web Services
@@ -33122,7 +33181,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         training_input_mode: "Pipe", # required, accepts Pipe, File, FastFile
     #         hyper_parameters: {
     #           "HyperParameterKey" => "HyperParameterValue",
     #         },
@@ -33146,7 +33205,7 @@ module Aws::SageMaker
     #             content_type: "ContentType",
     #             compression_type: "None", # accepts None, Gzip
     #             record_wrapper_type: "None", # accepts None, RecordIO
-    #             input_mode: "Pipe", # accepts Pipe, File
+    #             input_mode: "Pipe", # accepts Pipe, File, FastFile
     #             shuffle_config: {
     #               seed: 1, # required
     #             },
@@ -33169,15 +33228,45 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] training_input_mode
-    #   The input mode used by the algorithm for the training job. For the
-    #   input modes that Amazon SageMaker algorithms support, see
-    #   [Algorithms][1].
+    #   The training input mode that the algorithm supports. For more
+    #   information about input modes, see [Algorithms][1].
     #
-    #   If an algorithm supports the `File` input mode, Amazon SageMaker
-    #   downloads the training data from S3 to the provisioned ML storage
-    #   Volume, and mounts the directory to docker volume for training
-    #   container. If an algorithm supports the `Pipe` input mode, Amazon
-    #   SageMaker streams data directly from S3 to the container.
+    #   **Pipe mode**
+    #
+    #   If an algorithm supports `Pipe` mode, Amazon SageMaker streams data
+    #   directly from Amazon S3 to the container.
+    #
+    #   **File mode**
+    #
+    #   If an algorithm supports `File` mode, SageMaker downloads the
+    #   training data from S3 to the provisioned ML storage volume, and
+    #   mounts the directory to the Docker volume for the training
+    #   container.
+    #
+    #   You must provision the ML storage volume with sufficient capacity to
+    #   accommodate the data downloaded from S3. In addition to the training
+    #   data, the ML storage volume also stores the output model. The
+    #   algorithm container uses the ML storage volume to also store
+    #   intermediate information, if any.
+    #
+    #   For distributed algorithms, training data is distributed uniformly.
+    #   Your training duration is predictable if the input data objects
+    #   sizes are approximately the same. SageMaker does not split the files
+    #   any further for model training. If the object sizes are skewed,
+    #   training won't be optimal as the data distribution is also skewed
+    #   when one host in a training cluster is overloaded, thus becoming a
+    #   bottleneck in training.
+    #
+    #   **FastFile mode**
+    #
+    #   If an algorithm supports `FastFile` mode, SageMaker streams data
+    #   directly from S3 to the container with no code changes, and provides
+    #   file system access to the data. Users can author their training
+    #   script to interact with these files as if they were stored on disk.
+    #
+    #   `FastFile` mode works best when the data is read sequentially.
+    #   Augmented manifest files aren't supported. The startup time is
+    #   lower when there are fewer files in the S3 bucket provided.
     #
     #
     #
@@ -33371,7 +33460,7 @@ module Aws::SageMaker
     #             is_required: false,
     #             supported_content_types: ["ContentType"], # required
     #             supported_compression_types: ["None"], # accepts None, Gzip
-    #             supported_input_modes: ["Pipe"], # required, accepts Pipe, File
+    #             supported_input_modes: ["Pipe"], # required, accepts Pipe, File, FastFile
     #           },
     #         ],
     #         supported_tuning_job_objective_metrics: [

@@ -6320,6 +6320,19 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
+    # Permanently delete a policy that you created.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeletePolicy AWS API Documentation
+    #
+    # @overload delete_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_policy(params = {}, options = {})
+      req = build_request(:delete_policy, params)
+      req.send_request(options)
+    end
+
     # Permanently delete a preset you have created.
     #
     # @option params [required, String] :name
@@ -8324,6 +8337,27 @@ module Aws::MediaConvert
     # @param [Hash] params ({})
     def get_job_template(params = {}, options = {})
       req = build_request(:get_job_template, params)
+      req.send_request(options)
+    end
+
+    # Retrieve the JSON for your policy.
+    #
+    # @return [Types::GetPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPolicyResponse#policy #policy} => Types::Policy
+    #
+    # @example Response structure
+    #
+    #   resp.policy.http_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #   resp.policy.https_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #   resp.policy.s3_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetPolicy AWS API Documentation
+    #
+    # @overload get_policy(params = {})
+    # @param [Hash] params ({})
+    def get_policy(params = {}, options = {})
+      req = build_request(:get_policy, params)
       req.send_request(options)
     end
 
@@ -11628,6 +11662,45 @@ module Aws::MediaConvert
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Create or change your policy. For more information about policies, see
+    # the user guide at
+    # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #
+    # @option params [required, Types::Policy] :policy
+    #   A policy configures behavior that you allow or disallow for your
+    #   account. For information about MediaConvert policies, see the user
+    #   guide at
+    #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #
+    # @return [Types::PutPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutPolicyResponse#policy #policy} => Types::Policy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_policy({
+    #     policy: { # required
+    #       http_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #       https_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #       s3_inputs: "ALLOWED", # accepts ALLOWED, DISALLOWED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy.http_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #   resp.policy.https_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #   resp.policy.s3_inputs #=> String, one of "ALLOWED", "DISALLOWED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/PutPolicy AWS API Documentation
+    #
+    # @overload put_policy(params = {})
+    # @param [Hash] params ({})
+    def put_policy(params = {}, options = {})
+      req = build_request(:put_policy, params)
       req.send_request(options)
     end
 
@@ -15300,7 +15373,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2021-10-13)
+------------------
+
+* Feature - Adding Config support for AWS::OpenSearch::Domain
+
 1.66.0 (2021-09-01)
 ------------------
 

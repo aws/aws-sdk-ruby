@@ -27,6 +27,8 @@ module Aws::Lambda
     AliasList = Shapes::ListShape.new(name: 'AliasList')
     AliasRoutingConfiguration = Shapes::StructureShape.new(name: 'AliasRoutingConfiguration')
     AllowedPublishers = Shapes::StructureShape.new(name: 'AllowedPublishers')
+    Architecture = Shapes::StringShape.new(name: 'Architecture')
+    ArchitecturesList = Shapes::ListShape.new(name: 'ArchitecturesList')
     Arn = Shapes::StringShape.new(name: 'Arn')
     BatchSize = Shapes::IntegerShape.new(name: 'BatchSize')
     BisectBatchOnFunctionError = Shapes::BooleanShape.new(name: 'BisectBatchOnFunctionError')
@@ -42,6 +44,7 @@ module Aws::Lambda
     CodeSigningPolicy = Shapes::StringShape.new(name: 'CodeSigningPolicy')
     CodeStorageExceededException = Shapes::StructureShape.new(name: 'CodeStorageExceededException')
     CodeVerificationFailedException = Shapes::StructureShape.new(name: 'CodeVerificationFailedException')
+    CompatibleArchitectures = Shapes::ListShape.new(name: 'CompatibleArchitectures')
     CompatibleRuntimes = Shapes::ListShape.new(name: 'CompatibleRuntimes')
     Concurrency = Shapes::StructureShape.new(name: 'Concurrency')
     CreateAliasRequest = Shapes::StructureShape.new(name: 'CreateAliasRequest')
@@ -355,6 +358,8 @@ module Aws::Lambda
     AllowedPublishers.add_member(:signing_profile_version_arns, Shapes::ShapeRef.new(shape: SigningProfileVersionArns, required: true, location_name: "SigningProfileVersionArns"))
     AllowedPublishers.struct_class = Types::AllowedPublishers
 
+    ArchitecturesList.member = Shapes::ShapeRef.new(shape: Architecture)
+
     CodeSigningConfig.add_member(:code_signing_config_id, Shapes::ShapeRef.new(shape: CodeSigningConfigId, required: true, location_name: "CodeSigningConfigId"))
     CodeSigningConfig.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, required: true, location_name: "CodeSigningConfigArn"))
     CodeSigningConfig.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -379,6 +384,8 @@ module Aws::Lambda
     CodeVerificationFailedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     CodeVerificationFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     CodeVerificationFailedException.struct_class = Types::CodeVerificationFailedException
+
+    CompatibleArchitectures.member = Shapes::ShapeRef.new(shape: Architecture)
 
     CompatibleRuntimes.member = Shapes::ShapeRef.new(shape: Runtime)
 
@@ -440,6 +447,7 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
     CreateFunctionRequest.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
     CreateFunctionRequest.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, location_name: "CodeSigningConfigArn"))
+    CreateFunctionRequest.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     DeadLetterConfig.add_member(:target_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TargetArn"))
@@ -613,6 +621,7 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:image_config_response, Shapes::ShapeRef.new(shape: ImageConfigResponse, location_name: "ImageConfigResponse"))
     FunctionConfiguration.add_member(:signing_profile_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningProfileVersionArn"))
     FunctionConfiguration.add_member(:signing_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningJobArn"))
+    FunctionConfiguration.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionEventInvokeConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
@@ -701,6 +710,7 @@ module Aws::Lambda
     GetLayerVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: LayerVersionNumber, location_name: "Version"))
     GetLayerVersionResponse.add_member(:compatible_runtimes, Shapes::ShapeRef.new(shape: CompatibleRuntimes, location_name: "CompatibleRuntimes"))
     GetLayerVersionResponse.add_member(:license_info, Shapes::ShapeRef.new(shape: LicenseInfo, location_name: "LicenseInfo"))
+    GetLayerVersionResponse.add_member(:compatible_architectures, Shapes::ShapeRef.new(shape: CompatibleArchitectures, location_name: "CompatibleArchitectures"))
     GetLayerVersionResponse.struct_class = Types::GetLayerVersionResponse
 
     GetPolicyRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -837,6 +847,7 @@ module Aws::Lambda
     LayerVersionsListItem.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedDate"))
     LayerVersionsListItem.add_member(:compatible_runtimes, Shapes::ShapeRef.new(shape: CompatibleRuntimes, location_name: "CompatibleRuntimes"))
     LayerVersionsListItem.add_member(:license_info, Shapes::ShapeRef.new(shape: LicenseInfo, location_name: "LicenseInfo"))
+    LayerVersionsListItem.add_member(:compatible_architectures, Shapes::ShapeRef.new(shape: CompatibleArchitectures, location_name: "CompatibleArchitectures"))
     LayerVersionsListItem.struct_class = Types::LayerVersionsListItem
 
     LayersList.member = Shapes::ShapeRef.new(shape: LayersListItem)
@@ -908,6 +919,7 @@ module Aws::Lambda
     ListLayerVersionsRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
     ListLayerVersionsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
     ListLayerVersionsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxLayerListItems, location: "querystring", location_name: "MaxItems"))
+    ListLayerVersionsRequest.add_member(:compatible_architecture, Shapes::ShapeRef.new(shape: Architecture, location: "querystring", location_name: "CompatibleArchitecture"))
     ListLayerVersionsRequest.struct_class = Types::ListLayerVersionsRequest
 
     ListLayerVersionsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
@@ -917,6 +929,7 @@ module Aws::Lambda
     ListLayersRequest.add_member(:compatible_runtime, Shapes::ShapeRef.new(shape: Runtime, location: "querystring", location_name: "CompatibleRuntime"))
     ListLayersRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
     ListLayersRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxLayerListItems, location: "querystring", location_name: "MaxItems"))
+    ListLayersRequest.add_member(:compatible_architecture, Shapes::ShapeRef.new(shape: Architecture, location: "querystring", location_name: "CompatibleArchitecture"))
     ListLayersRequest.struct_class = Types::ListLayersRequest
 
     ListLayersResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
@@ -981,6 +994,7 @@ module Aws::Lambda
     PublishLayerVersionRequest.add_member(:content, Shapes::ShapeRef.new(shape: LayerVersionContentInput, required: true, location_name: "Content"))
     PublishLayerVersionRequest.add_member(:compatible_runtimes, Shapes::ShapeRef.new(shape: CompatibleRuntimes, location_name: "CompatibleRuntimes"))
     PublishLayerVersionRequest.add_member(:license_info, Shapes::ShapeRef.new(shape: LicenseInfo, location_name: "LicenseInfo"))
+    PublishLayerVersionRequest.add_member(:compatible_architectures, Shapes::ShapeRef.new(shape: CompatibleArchitectures, location_name: "CompatibleArchitectures"))
     PublishLayerVersionRequest.struct_class = Types::PublishLayerVersionRequest
 
     PublishLayerVersionResponse.add_member(:content, Shapes::ShapeRef.new(shape: LayerVersionContentOutput, location_name: "Content"))
@@ -991,6 +1005,7 @@ module Aws::Lambda
     PublishLayerVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: LayerVersionNumber, location_name: "Version"))
     PublishLayerVersionResponse.add_member(:compatible_runtimes, Shapes::ShapeRef.new(shape: CompatibleRuntimes, location_name: "CompatibleRuntimes"))
     PublishLayerVersionResponse.add_member(:license_info, Shapes::ShapeRef.new(shape: LicenseInfo, location_name: "LicenseInfo"))
+    PublishLayerVersionResponse.add_member(:compatible_architectures, Shapes::ShapeRef.new(shape: CompatibleArchitectures, location_name: "CompatibleArchitectures"))
     PublishLayerVersionResponse.struct_class = Types::PublishLayerVersionResponse
 
     PublishVersionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -1162,6 +1177,7 @@ module Aws::Lambda
     UpdateFunctionCodeRequest.add_member(:publish, Shapes::ShapeRef.new(shape: Boolean, location_name: "Publish"))
     UpdateFunctionCodeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     UpdateFunctionCodeRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
+    UpdateFunctionCodeRequest.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
     UpdateFunctionCodeRequest.struct_class = Types::UpdateFunctionCodeRequest
 
     UpdateFunctionConfigurationRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))

@@ -14,6 +14,9 @@
   "AccessAnalyzer": {
     "models": "accessanalyzer/2019-11-01"
   },
+  "Account": {
+    "models": "account/2021-02-01"
+  },
   "AlexaForBusiness": {
     "models": "alexaforbusiness/2017-11-09"
   },
@@ -104,6 +107,9 @@
   },
   "Cloud9": {
     "models": "cloud9/2017-09-23"
+  },
+  "CloudControlApi": {
+    "models": "cloudcontrol/2021-09-30"
   },
   "CloudDirectory": {
     "models": "clouddirectory/2017-01-11"
@@ -558,6 +564,9 @@
   },
   "ManagedBlockchain": {
     "models": "managedblockchain/2018-09-24"
+  },
+  "ManagedGrafana": {
+    "models": "grafana/2020-08-18"
   },
   "MarketplaceCatalog": {
     "models": "marketplace-catalog/2018-09-17"

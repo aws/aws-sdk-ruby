@@ -404,7 +404,8 @@ module Aws::Lambda
     # use a function. You can apply the policy at the function level, or
     # specify a qualifier to restrict access to a single version or alias.
     # If you use a qualifier, the invoker must use the full Amazon Resource
-    # Name (ARN) of that version or alias to invoke the function.
+    # Name (ARN) of that version or alias to invoke the function. Note:
+    # Lambda does not support adding policies to version $LATEST.
     #
     # To grant permission to another account, specify the account ID as the
     # `Principal`. For Amazon Web Services services, the principal is a
@@ -457,6 +458,9 @@ module Aws::Lambda
     #   For Amazon Web Services services, the ARN of the Amazon Web Services
     #   resource that invokes the function. For example, an Amazon S3 bucket
     #   or Amazon SNS topic.
+    #
+    #   Note that Lambda configures the comparison using the `StringLike`
+    #   operator.
     #
     # @option params [String] :source_account
     #   For Amazon S3, the ID of the account that owns the resource. Use this
@@ -650,15 +654,13 @@ module Aws::Lambda
     # Creates a mapping between an event source and an Lambda function.
     # Lambda reads items from the event source and triggers the function.
     #
-    # For details about each event source type, see the following topics. In
-    # particular, each of the topics describes the required and optional
-    # parameters for the specific event source.
+    # For details about each event source type, see the following topics.
     #
     # * [ Configuring a Dynamo DB stream as an event source][1]
     #
     # * [ Configuring a Kinesis stream as an event source][2]
     #
-    # * [ Configuring an SQS queue as an event source][3]
+    # * [ Configuring an Amazon SQS queue as an event source][3]
     #
     # * [ Configuring an MQ broker as an event source][4]
     #
@@ -727,11 +729,16 @@ module Aws::Lambda
     #   only the function name, it's limited to 64 characters in length.
     #
     # @option params [Boolean] :enabled
-    #   If true, the event source mapping is active. Set to false to pause
-    #   polling and invocation.
+    #   When true, the event source mapping is active. When false, Lambda
+    #   pauses polling and invocation.
+    #
+    #   Default: True
     #
     # @option params [Integer] :batch_size
-    #   The maximum number of items to retrieve in a single batch.
+    #   The maximum number of records in each batch that Lambda pulls from
+    #   your stream or queue and sends to your function. Lambda passes all of
+    #   the records in the batch to the function in a single call, up to the
+    #   payload limit for synchronous invocation (6 MB).
     #
     #   * **Amazon Kinesis** - Default 100. Max 10,000.
     #
@@ -746,8 +753,14 @@ module Aws::Lambda
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
     #
     # @option params [Integer] :maximum_batching_window_in_seconds
-    #   (Streams and SQS standard queues) The maximum amount of time to gather
-    #   records before invoking the function, in seconds.
+    #   (Streams and Amazon SQS standard queues) The maximum amount of time,
+    #   in seconds, that Lambda spends gathering records before invoking the
+    #   function.
+    #
+    #   Default: 0
+    #
+    #   Related setting: When you set `BatchSize` to a value greater than 10,
+    #   you must set `MaximumBatchingWindowInSeconds` to at least 1.
     #
     # @option params [Integer] :parallelization_factor
     #   (Streams only) The number of batches to process from each shard
@@ -921,7 +934,10 @@ module Aws::Lambda
     # You set the package type to `Zip` if the deployment package is a [.zip
     # file archive][4]. For a .zip file archive, the code property specifies
     # the location of the .zip file. You must also specify the handler and
-    # runtime properties.
+    # runtime properties. The code in the deployment package must be
+    # compatible with the target instruction set architecture of the
+    # function (`x86-64` or `arm64`). If you do not specify the
+    # architecture, the default value is `x86-64`.
     #
     # When you create a function, Lambda provisions an instance of the
     # function and its supporting resources. If your function connects to a
@@ -1111,6 +1127,11 @@ module Aws::Lambda
     #   set of signing profiles, which define the trusted publishers for this
     #   function.
     #
+    # @option params [Array<String>] :architectures
+    #   The instruction set architecture that the function supports. Enter a
+    #   string array with one of the valid values. The default value is
+    #   `x86_64`.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -1144,6 +1165,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
+    #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1196,6 +1218,7 @@ module Aws::Lambda
     #       working_directory: "WorkingDirectory",
     #     },
     #     code_signing_config_arn: "CodeSigningConfigArn",
+    #     architectures: ["x86_64"], # accepts x86_64, arm64
     #   })
     #
     # @example Response structure
@@ -1250,6 +1273,8 @@ module Aws::Lambda
     #   resp.image_config_response.error.message #=> String
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
+    #   resp.architectures #=> Array
+    #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -1936,6 +1961,8 @@ module Aws::Lambda
     #   resp.configuration.image_config_response.error.message #=> String
     #   resp.configuration.signing_profile_version_arn #=> String
     #   resp.configuration.signing_job_arn #=> String
+    #   resp.configuration.architectures #=> Array
+    #   resp.configuration.architectures[0] #=> String, one of "x86_64", "arm64"
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.code.image_uri #=> String
@@ -2103,6 +2130,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
+    #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2163,6 +2191,8 @@ module Aws::Lambda
     #   resp.image_config_response.error.message #=> String
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
+    #   resp.architectures #=> Array
+    #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2261,6 +2291,7 @@ module Aws::Lambda
     #   * {Types::GetLayerVersionResponse#version #version} => Integer
     #   * {Types::GetLayerVersionResponse#compatible_runtimes #compatible_runtimes} => Array&lt;String&gt;
     #   * {Types::GetLayerVersionResponse#license_info #license_info} => String
+    #   * {Types::GetLayerVersionResponse#compatible_architectures #compatible_architectures} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2284,6 +2315,8 @@ module Aws::Lambda
     #   resp.compatible_runtimes #=> Array
     #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
+    #   resp.compatible_architectures #=> Array
+    #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersion AWS API Documentation
     #
@@ -2314,6 +2347,7 @@ module Aws::Lambda
     #   * {Types::GetLayerVersionResponse#version #version} => Integer
     #   * {Types::GetLayerVersionResponse#compatible_runtimes #compatible_runtimes} => Array&lt;String&gt;
     #   * {Types::GetLayerVersionResponse#license_info #license_info} => String
+    #   * {Types::GetLayerVersionResponse#compatible_architectures #compatible_architectures} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2336,6 +2370,8 @@ module Aws::Lambda
     #   resp.compatible_runtimes #=> Array
     #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
+    #   resp.compatible_architectures #=> Array
+    #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionByArn AWS API Documentation
     #
@@ -2576,7 +2612,8 @@ module Aws::Lambda
     #     role has permission to invoke the function.
     #
     # @option params [String] :log_type
-    #   Set to `Tail` to include the execution log in the response.
+    #   Set to `Tail` to include the execution log in the response. Applies to
+    #   synchronously invoked functions only.
     #
     # @option params [String] :client_context
     #   Up to 3583 bytes of base64-encoded data about the invoking client to
@@ -3059,6 +3096,8 @@ module Aws::Lambda
     #   resp.functions[0].image_config_response.error.message #=> String
     #   resp.functions[0].signing_profile_version_arn #=> String
     #   resp.functions[0].signing_job_arn #=> String
+    #   resp.functions[0].architectures #=> Array
+    #   resp.functions[0].architectures[0] #=> String, one of "x86_64", "arm64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -3116,6 +3155,8 @@ module Aws::Lambda
     # Lists the versions of an [Lambda layer][1]. Versions that have been
     # deleted aren't listed. Specify a [runtime identifier][2] to list only
     # versions that indicate that they're compatible with that runtime.
+    # Specify a compatible architecture to include only layer versions that
+    # are compatible with that architecture.
     #
     #
     #
@@ -3134,6 +3175,13 @@ module Aws::Lambda
     # @option params [Integer] :max_items
     #   The maximum number of versions to return.
     #
+    # @option params [String] :compatible_architecture
+    #   The compatible [instruction set architecture][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
+    #
     # @return [Types::ListLayerVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListLayerVersionsResponse#next_marker #next_marker} => String
@@ -3148,6 +3196,7 @@ module Aws::Lambda
     #     layer_name: "LayerName", # required
     #     marker: "String",
     #     max_items: 1,
+    #     compatible_architecture: "x86_64", # accepts x86_64, arm64
     #   })
     #
     # @example Response structure
@@ -3161,6 +3210,8 @@ module Aws::Lambda
     #   resp.layer_versions[0].compatible_runtimes #=> Array
     #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.layer_versions[0].license_info #=> String
+    #   resp.layer_versions[0].compatible_architectures #=> Array
+    #   resp.layer_versions[0].compatible_architectures[0] #=> String, one of "x86_64", "arm64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersions AWS API Documentation
     #
@@ -3173,12 +3224,15 @@ module Aws::Lambda
 
     # Lists [Lambda layers][1] and shows information about the latest
     # version of each. Specify a [runtime identifier][2] to list only layers
-    # that indicate that they're compatible with that runtime.
+    # that indicate that they're compatible with that runtime. Specify a
+    # compatible architecture to include only layers that are compatible
+    # with that [instruction set architecture][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
     #
     # @option params [String] :compatible_runtime
     #   A runtime identifier. For example, `go1.x`.
@@ -3188,6 +3242,13 @@ module Aws::Lambda
     #
     # @option params [Integer] :max_items
     #   The maximum number of layers to return.
+    #
+    # @option params [String] :compatible_architecture
+    #   The compatible [instruction set architecture][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
     #
     # @return [Types::ListLayersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3202,6 +3263,7 @@ module Aws::Lambda
     #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     marker: "String",
     #     max_items: 1,
+    #     compatible_architecture: "x86_64", # accepts x86_64, arm64
     #   })
     #
     # @example Response structure
@@ -3217,6 +3279,8 @@ module Aws::Lambda
     #   resp.layers[0].latest_matching_version.compatible_runtimes #=> Array
     #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.layers[0].latest_matching_version.license_info #=> String
+    #   resp.layers[0].latest_matching_version.compatible_architectures #=> Array
+    #   resp.layers[0].latest_matching_version.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayers AWS API Documentation
     #
@@ -3296,7 +3360,8 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #
     # @option params [required, String] :resource
-    #   The function's Amazon Resource Name (ARN).
+    #   The function's Amazon Resource Name (ARN). Note: Lambda does not
+    #   support adding tags to aliases or versions.
     #
     # @return [Types::ListTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3422,6 +3487,8 @@ module Aws::Lambda
     #   resp.versions[0].image_config_response.error.message #=> String
     #   resp.versions[0].signing_profile_version_arn #=> String
     #   resp.versions[0].signing_job_arn #=> String
+    #   resp.versions[0].architectures #=> Array
+    #   resp.versions[0].architectures[0] #=> String, one of "x86_64", "arm64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -3474,6 +3541,13 @@ module Aws::Lambda
     #
     #   [1]: https://spdx.org/licenses/
     #
+    # @option params [Array<String>] :compatible_architectures
+    #   A list of compatible [instruction set architectures][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
+    #
     # @return [Types::PublishLayerVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PublishLayerVersionResponse#content #content} => Types::LayerVersionContentOutput
@@ -3484,6 +3558,7 @@ module Aws::Lambda
     #   * {Types::PublishLayerVersionResponse#version #version} => Integer
     #   * {Types::PublishLayerVersionResponse#compatible_runtimes #compatible_runtimes} => Array&lt;String&gt;
     #   * {Types::PublishLayerVersionResponse#license_info #license_info} => String
+    #   * {Types::PublishLayerVersionResponse#compatible_architectures #compatible_architectures} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3498,6 +3573,7 @@ module Aws::Lambda
     #     },
     #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, nodejs14.x, java8, java8.al2, java11, python2.7, python3.6, python3.7, python3.8, python3.9, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided, provided.al2
     #     license_info: "LicenseInfo",
+    #     compatible_architectures: ["x86_64"], # accepts x86_64, arm64
     #   })
     #
     # @example Response structure
@@ -3515,6 +3591,8 @@ module Aws::Lambda
     #   resp.compatible_runtimes #=> Array
     #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "nodejs14.x", "java8", "java8.al2", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "python3.9", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided", "provided.al2"
     #   resp.license_info #=> String
+    #   resp.compatible_architectures #=> Array
+    #   resp.compatible_architectures[0] #=> String, one of "x86_64", "arm64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersion AWS API Documentation
     #
@@ -3605,6 +3683,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
+    #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3667,6 +3746,8 @@ module Aws::Lambda
     #   resp.image_config_response.error.message #=> String
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
+    #   resp.architectures #=> Array
+    #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -4296,11 +4377,16 @@ module Aws::Lambda
     #   only the function name, it's limited to 64 characters in length.
     #
     # @option params [Boolean] :enabled
-    #   If true, the event source mapping is active. Set to false to pause
-    #   polling and invocation.
+    #   When true, the event source mapping is active. When false, Lambda
+    #   pauses polling and invocation.
+    #
+    #   Default: True
     #
     # @option params [Integer] :batch_size
-    #   The maximum number of items to retrieve in a single batch.
+    #   The maximum number of records in each batch that Lambda pulls from
+    #   your stream or queue and sends to your function. Lambda passes all of
+    #   the records in the batch to the function in a single call, up to the
+    #   payload limit for synchronous invocation (6 MB).
     #
     #   * **Amazon Kinesis** - Default 100. Max 10,000.
     #
@@ -4315,8 +4401,14 @@ module Aws::Lambda
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
     #
     # @option params [Integer] :maximum_batching_window_in_seconds
-    #   (Streams and SQS standard queues) The maximum amount of time to gather
-    #   records before invoking the function, in seconds.
+    #   (Streams and Amazon SQS standard queues) The maximum amount of time,
+    #   in seconds, that Lambda spends gathering records before invoking the
+    #   function.
+    #
+    #   Default: 0
+    #
+    #   Related setting: When you set `BatchSize` to a value greater than 10,
+    #   you must set `MaximumBatchingWindowInSeconds` to at least 1.
     #
     # @option params [Types::DestinationConfig] :destination_config
     #   (Streams only) An Amazon SQS queue or Amazon SNS topic destination for
@@ -4514,6 +4606,11 @@ module Aws::Lambda
     #   specified. Use this option to avoid modifying a function that has
     #   changed since you last read it.
     #
+    # @option params [Array<String>] :architectures
+    #   The instruction set architecture that the function supports. Enter a
+    #   string array with one of the valid values. The default value is
+    #   `x86_64`.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -4547,6 +4644,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
+    #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4560,6 +4658,7 @@ module Aws::Lambda
     #     publish: false,
     #     dry_run: false,
     #     revision_id: "String",
+    #     architectures: ["x86_64"], # accepts x86_64, arm64
     #   })
     #
     # @example Response structure
@@ -4614,6 +4713,8 @@ module Aws::Lambda
     #   resp.image_config_response.error.message #=> String
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
+    #   resp.architectures #=> Array
+    #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -4760,7 +4861,7 @@ module Aws::Lambda
     #
     # @option params [Types::ImageConfig] :image_config
     #   [Container image configuration values][1] that override the values in
-    #   the container image Dockerfile.
+    #   the container image Docker file.
     #
     #
     #
@@ -4799,6 +4900,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#image_config_response #image_config_response} => Types::ImageConfigResponse
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
+    #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4893,6 +4995,8 @@ module Aws::Lambda
     #   resp.image_config_response.error.message #=> String
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
+    #   resp.architectures #=> Array
+    #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -5007,7 +5111,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

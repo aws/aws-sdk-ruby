@@ -186,6 +186,12 @@ module Aws::LexModelsV2
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     FulfillmentCodeHookSettings = Shapes::StructureShape.new(name: 'FulfillmentCodeHookSettings')
+    FulfillmentStartResponseDelay = Shapes::IntegerShape.new(name: 'FulfillmentStartResponseDelay')
+    FulfillmentStartResponseSpecification = Shapes::StructureShape.new(name: 'FulfillmentStartResponseSpecification')
+    FulfillmentTimeout = Shapes::IntegerShape.new(name: 'FulfillmentTimeout')
+    FulfillmentUpdateResponseFrequency = Shapes::IntegerShape.new(name: 'FulfillmentUpdateResponseFrequency')
+    FulfillmentUpdateResponseSpecification = Shapes::StructureShape.new(name: 'FulfillmentUpdateResponseSpecification')
+    FulfillmentUpdatesSpecification = Shapes::StructureShape.new(name: 'FulfillmentUpdatesSpecification')
     HitCount = Shapes::IntegerShape.new(name: 'HitCount')
     Id = Shapes::StringShape.new(name: 'Id')
     ImageResponseCard = Shapes::StructureShape.new(name: 'ImageResponseCard')
@@ -270,6 +276,7 @@ module Aws::LexModelsV2
     PlainTextMessage = Shapes::StructureShape.new(name: 'PlainTextMessage')
     PlainTextMessageValue = Shapes::StringShape.new(name: 'PlainTextMessageValue')
     Policy = Shapes::StringShape.new(name: 'Policy')
+    PostFulfillmentStatusSpecification = Shapes::StructureShape.new(name: 'PostFulfillmentStatusSpecification')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     PresignedS3Url = Shapes::StringShape.new(name: 'PresignedS3Url')
     Principal = Shapes::StructureShape.new(name: 'Principal')
@@ -1085,7 +1092,25 @@ module Aws::LexModelsV2
     FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
 
     FulfillmentCodeHookSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    FulfillmentCodeHookSettings.add_member(:post_fulfillment_status_specification, Shapes::ShapeRef.new(shape: PostFulfillmentStatusSpecification, location_name: "postFulfillmentStatusSpecification"))
+    FulfillmentCodeHookSettings.add_member(:fulfillment_updates_specification, Shapes::ShapeRef.new(shape: FulfillmentUpdatesSpecification, location_name: "fulfillmentUpdatesSpecification"))
     FulfillmentCodeHookSettings.struct_class = Types::FulfillmentCodeHookSettings
+
+    FulfillmentStartResponseSpecification.add_member(:delay_in_seconds, Shapes::ShapeRef.new(shape: FulfillmentStartResponseDelay, required: true, location_name: "delayInSeconds"))
+    FulfillmentStartResponseSpecification.add_member(:message_groups, Shapes::ShapeRef.new(shape: MessageGroupsList, required: true, location_name: "messageGroups"))
+    FulfillmentStartResponseSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
+    FulfillmentStartResponseSpecification.struct_class = Types::FulfillmentStartResponseSpecification
+
+    FulfillmentUpdateResponseSpecification.add_member(:frequency_in_seconds, Shapes::ShapeRef.new(shape: FulfillmentUpdateResponseFrequency, required: true, location_name: "frequencyInSeconds"))
+    FulfillmentUpdateResponseSpecification.add_member(:message_groups, Shapes::ShapeRef.new(shape: MessageGroupsList, required: true, location_name: "messageGroups"))
+    FulfillmentUpdateResponseSpecification.add_member(:allow_interrupt, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "allowInterrupt"))
+    FulfillmentUpdateResponseSpecification.struct_class = Types::FulfillmentUpdateResponseSpecification
+
+    FulfillmentUpdatesSpecification.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "active"))
+    FulfillmentUpdatesSpecification.add_member(:start_response, Shapes::ShapeRef.new(shape: FulfillmentStartResponseSpecification, location_name: "startResponse"))
+    FulfillmentUpdatesSpecification.add_member(:update_response, Shapes::ShapeRef.new(shape: FulfillmentUpdateResponseSpecification, location_name: "updateResponse"))
+    FulfillmentUpdatesSpecification.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: FulfillmentTimeout, location_name: "timeoutInSeconds"))
+    FulfillmentUpdatesSpecification.struct_class = Types::FulfillmentUpdatesSpecification
 
     ImageResponseCard.add_member(:title, Shapes::ShapeRef.new(shape: AttachmentTitle, required: true, location_name: "title"))
     ImageResponseCard.add_member(:subtitle, Shapes::ShapeRef.new(shape: AttachmentTitle, location_name: "subtitle"))
@@ -1372,6 +1397,11 @@ module Aws::LexModelsV2
 
     PlainTextMessage.add_member(:value, Shapes::ShapeRef.new(shape: PlainTextMessageValue, required: true, location_name: "value"))
     PlainTextMessage.struct_class = Types::PlainTextMessage
+
+    PostFulfillmentStatusSpecification.add_member(:success_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "successResponse"))
+    PostFulfillmentStatusSpecification.add_member(:failure_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "failureResponse"))
+    PostFulfillmentStatusSpecification.add_member(:timeout_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "timeoutResponse"))
+    PostFulfillmentStatusSpecification.struct_class = Types::PostFulfillmentStatusSpecification
 
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     PreconditionFailedException.struct_class = Types::PreconditionFailedException

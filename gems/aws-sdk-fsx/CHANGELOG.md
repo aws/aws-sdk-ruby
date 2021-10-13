@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-10-06)
+------------------
+
+* Feature - This release adds support for Lustre 2.12 to FSx for Lustre.
+
 1.42.0 (2021-09-02)
 ------------------
 

@@ -15,6 +15,7 @@ require_relative 'aws-sdk-prometheusservice/types'
 require_relative 'aws-sdk-prometheusservice/client_api'
 require_relative 'aws-sdk-prometheusservice/client'
 require_relative 'aws-sdk-prometheusservice/errors'
+require_relative 'aws-sdk-prometheusservice/waiters'
 require_relative 'aws-sdk-prometheusservice/resource'
 require_relative 'aws-sdk-prometheusservice/customizations'
 
@@ -28,7 +29,7 @@ require_relative 'aws-sdk-prometheusservice/customizations'
 # structure.
 #
 #     prometheus_service = Aws::PrometheusService::Client.new
-#     resp = prometheus_service.create_workspace(params)
+#     resp = prometheus_service.create_alert_manager_definition(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-prometheusservice/customizations'
 # @!group service
 module Aws::PrometheusService
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end

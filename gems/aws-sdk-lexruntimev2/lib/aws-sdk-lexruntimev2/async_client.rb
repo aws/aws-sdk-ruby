@@ -243,20 +243,49 @@ module Aws::LexRuntimeV2
     # sample-rate=8000 sample-size-bits=16 channel-count=1;
     # is-big-endian=false`.
     #
+    # If the optional post-fulfillment response is specified, the messages
+    # are returned as follows. For more information, see
+    # [PostFulfillmentStatusSpecification][1].
+    #
+    # * **Success message** - Returned if the Lambda function completes
+    #   successfully and the intent state is fulfilled or ready fulfillment
+    #   if the message is present.
+    #
+    # * **Failed message** - The failed message is returned if the Lambda
+    #   function throws an exception or if the Lambda function returns a
+    #   failed intent state without a message.
+    #
+    # * **Timeout message** - If you don't configure a timeout message and
+    #   a timeout, and the Lambda function doesn't return within 30
+    #   seconds, the timeout message is returned. If you configure a
+    #   timeout, the timeout message is returned when the period times out.
+    #
+    # For more information, see [Completion message][2].
+    #
+    # If the optional update message is configured, it is played at the
+    # specified frequency while the Lambda function is running and the
+    # update message state is active. If the fulfillment update message is
+    # not active, the Lambda function runs with a 30 second timeout.
+    #
+    # For more information, see [Update message ][3]
+    #
     # The `StartConversation` operation is supported only in the following
     # SDKs:
     #
-    # * [AWS SDK for C++][1]
+    # * [AWS SDK for C++][4]
     #
-    # * [AWS SDK for Java V2][2]
+    # * [AWS SDK for Java V2][5]
     #
-    # * [AWS SDK for Ruby V3][3]
+    # * [AWS SDK for Ruby V3][6]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/goto/SdkForCpp/runtime.lex.v2-2020-08-07/StartConversation
-    # [2]: https://docs.aws.amazon.com/goto/SdkForJavaV2/runtime.lex.v2-2020-08-07/StartConversation
-    # [3]: https://docs.aws.amazon.com/goto/SdkForRubyV3/runtime.lex.v2-2020-08-07/StartConversation
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html
+    # [2]: https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html
+    # [3]: https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-update.html
+    # [4]: https://docs.aws.amazon.com/goto/SdkForCpp/runtime.lex.v2-2020-08-07/StartConversation
+    # [5]: https://docs.aws.amazon.com/goto/SdkForJavaV2/runtime.lex.v2-2020-08-07/StartConversation
+    # [6]: https://docs.aws.amazon.com/goto/SdkForRubyV3/runtime.lex.v2-2020-08-07/StartConversation
     #
     # @option params [required, String] :bot_id
     #   The identifier of the bot to process the request.
@@ -472,9 +501,9 @@ module Aws::LexRuntimeV2
     #   event.interpretations[0].intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
     #   event.interpretations[0].intent.slots["NonEmptyString"].values #=> Array
     #   event.interpretations[0].intent.slots["NonEmptyString"].values[0] #=> Types::Slot
-    #   event.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
+    #   event.interpretations[0].intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   event.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
-    #   event.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot"
+    #   event.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot", "None"
     #   event.session_state.dialog_action.slot_to_elicit #=> String
     #   event.session_state.intent.name #=> String
     #   event.session_state.intent.slots #=> Hash
@@ -485,7 +514,7 @@ module Aws::LexRuntimeV2
     #   event.session_state.intent.slots["NonEmptyString"].shape #=> String, one of "Scalar", "List"
     #   event.session_state.intent.slots["NonEmptyString"].values #=> Array
     #   event.session_state.intent.slots["NonEmptyString"].values[0] #=> Types::Slot
-    #   event.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting"
+    #   event.session_state.intent.state #=> String, one of "Failed", "Fulfilled", "InProgress", "ReadyForFulfillment", "Waiting", "FulfillmentInProgress"
     #   event.session_state.intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   event.session_state.active_contexts #=> Array
     #   event.session_state.active_contexts[0].name #=> String
@@ -588,7 +617,7 @@ module Aws::LexRuntimeV2
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

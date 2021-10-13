@@ -545,8 +545,13 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about an S3 bucket that Amazon Macie monitors and
-    # analyzes.
+    # Provides statistical data and other information about an S3 bucket
+    # that Amazon Macie monitors and analyzes for your account. If an error
+    # occurs when Macie attempts to retrieve and process information about
+    # the bucket or the bucket's objects, the value for most of these
+    # properties is null. Exceptions are accountId, bucketArn,
+    # bucketCreatedAt, bucketName, lastUpdated, and region. To identify the
+    # cause of the error, refer to the errorCode and errorMessage values.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -568,6 +573,15 @@ module Aws::Macie2
     #
     # @!attribute [rw] classifiable_size_in_bytes
     #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   The error code for an error that prevented Amazon Macie from
+    #   retrieving and processing information about an S3 bucket and the
+    #   bucket's objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
     #
     # @!attribute [rw] job_details
     #   Specifies whether any one-time or recurring classification jobs are
@@ -630,7 +644,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -641,7 +655,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -660,6 +674,8 @@ module Aws::Macie2
       :bucket_name,
       :classifiable_object_count,
       :classifiable_size_in_bytes,
+      :error_code,
+      :error_message,
       :job_details,
       :last_updated,
       :object_count,
@@ -1900,7 +1916,7 @@ module Aws::Macie2
 
     # Provides the results of a query that retrieved statistical data and
     # other information about one or more S3 buckets that Amazon Macie
-    # monitors and analyzes.
+    # monitors and analyzes for your account.
     #
     # @!attribute [rw] buckets
     #   @return [Array<Types::BucketMetadata>]
@@ -2589,7 +2605,7 @@ module Aws::Macie2
 
     # Provides the results of a query that retrieved aggregated statistical
     # data for all the S3 buckets that Amazon Macie monitors and analyzes
-    # for an account.
+    # for your account.
     #
     # @!attribute [rw] bucket_count
     #   @return [Integer]
@@ -2646,7 +2662,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -2657,7 +2673,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -4296,7 +4312,12 @@ module Aws::Macie2
     end
 
     # Provides statistical data and other information about an S3 bucket
-    # that Amazon Macie monitors and analyzes.
+    # that Amazon Macie monitors and analyzes for your account. If an error
+    # occurs when Macie attempts to retrieve and process information about
+    # the bucket or the bucket's objects, the value for most of these
+    # properties is null. Exceptions are accountId and bucketName. To
+    # identify the cause of the error, refer to the errorCode and
+    # errorMessage values.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -4309,6 +4330,15 @@ module Aws::Macie2
     #
     # @!attribute [rw] classifiable_size_in_bytes
     #   @return [Integer]
+    #
+    # @!attribute [rw] error_code
+    #   The error code for an error that prevented Amazon Macie from
+    #   retrieving and processing information about an S3 bucket and the
+    #   bucket's objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
     #
     # @!attribute [rw] job_details
     #   Specifies whether any one-time or recurring classification jobs are
@@ -4336,7 +4366,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -4347,7 +4377,7 @@ module Aws::Macie2
     #   number of objects that Amazon Macie can't analyze in one or more S3
     #   buckets. In a BucketMetadata or MatchingBucket object, this data is
     #   for a specific bucket. In a GetBucketStatisticsResponse object, this
-    #   data is aggregated for all the buckets in the query results. If
+    #   data is aggregated for the buckets in the query results. If
     #   versioning is enabled for a bucket, total storage size values are
     #   based on the size of the latest version of each applicable object in
     #   the bucket.
@@ -4360,6 +4390,8 @@ module Aws::Macie2
       :bucket_name,
       :classifiable_object_count,
       :classifiable_size_in_bytes,
+      :error_code,
+      :error_message,
       :job_details,
       :object_count,
       :object_count_by_encryption_type,
@@ -4372,11 +4404,17 @@ module Aws::Macie2
     end
 
     # Provides statistical data and other information about an Amazon Web
-    # Services resource that Amazon Macie monitors and analyzes.
+    # Services resource that Amazon Macie monitors and analyzes for your
+    # account.
     #
     # @!attribute [rw] matching_bucket
     #   Provides statistical data and other information about an S3 bucket
-    #   that Amazon Macie monitors and analyzes.
+    #   that Amazon Macie monitors and analyzes for your account. If an
+    #   error occurs when Macie attempts to retrieve and process information
+    #   about the bucket or the bucket's objects, the value for most of
+    #   these properties is null. Exceptions are accountId and bucketName.
+    #   To identify the cause of the error, refer to the errorCode and
+    #   errorMessage values.
     #   @return [Types::MatchingBucket]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/MatchingResource AWS API Documentation
@@ -4495,7 +4533,7 @@ module Aws::Macie2
     # of objects that Amazon Macie can't analyze in one or more S3 buckets.
     # In a BucketMetadata or MatchingBucket object, this data is for a
     # specific bucket. In a GetBucketStatisticsResponse object, this data is
-    # aggregated for all the buckets in the query results. If versioning is
+    # aggregated for the buckets in the query results. If versioning is
     # enabled for a bucket, total storage size values are based on the size
     # of the latest version of each applicable object in the bucket.
     #
@@ -5501,7 +5539,7 @@ module Aws::Macie2
 
     # Provides the results of a query that retrieved statistical data and
     # other information about Amazon Web Services resources that Amazon
-    # Macie monitors and analyzes.
+    # Macie monitors and analyzes for your account.
     #
     # @!attribute [rw] matching_resources
     #   @return [Array<Types::MatchingResource>]

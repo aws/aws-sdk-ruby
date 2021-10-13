@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-10-12)
+------------------
+
+* Feature - MediaTailor now supports ad prefetching.
+
 1.45.0 (2021-09-22)
 ------------------
 
