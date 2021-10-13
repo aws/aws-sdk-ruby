@@ -803,8 +803,8 @@
         },
         "params": {
           "foo": {
-            "a": "b",
-            "c": "d"
+            "x-foo-a": "b",
+            "x-foo-c": "d"
           }
         },
         "serialized": {

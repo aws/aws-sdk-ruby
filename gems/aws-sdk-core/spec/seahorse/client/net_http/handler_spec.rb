@@ -193,20 +193,6 @@ module Seahorse
               make_request
             end
 
-            it 'populates a default content-type header' do
-              # this prevents net/http from setting content-type on our behalf
-              stub_request(:any, endpoint).
-                with(:headers => { 'content-type' => '' })
-              make_request
-            end
-
-            it 'does not clobber a custom content-type' do
-              http_request.headers['Content-Type'] = 'application/json'
-              stub_request(:any, endpoint).
-                with(:headers => { 'content-type' => 'application/json' })
-              make_request
-            end
-
             it 'populates a default accept-encoding header' do
               # this prevents net/http from setting accept-encoding on our behalf
               stub_request(:any, endpoint).
