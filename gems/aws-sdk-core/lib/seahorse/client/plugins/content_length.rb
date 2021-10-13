@@ -8,7 +8,7 @@ module Seahorse
         # @api private
         class Handler < Client::Handler
           # https://github.com/ruby/net-http/blob/master/lib/net/http/requests.rb
-          # Methods without body is forwards compatible, because content-length
+          # Methods without body are forwards compatible, because content-length
           # may be set for requests without body but is technically incorrect.
           METHODS_WITHOUT_BODY = Set.new(
             %w[GET HEAD DELETE OPTIONS TRACE COPY MOVE]
