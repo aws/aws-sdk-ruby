@@ -1623,6 +1623,27 @@
       },
       {
         "given": {
+          "name": "TestBodyNoParams",
+          "input": {
+            "shape": "TestBodyRequest"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/body"
+          }
+        },
+        "params": {},
+        "serialized": {
+          "uri": "/body",
+          "body": "{}",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "host": "rest-json-test.amazonaws.com"
+        }
+      },
+      {
+        "given": {
           "name": "TestPayloadNoParams",
           "input": {
             "shape": "TestPayloadRequest"
