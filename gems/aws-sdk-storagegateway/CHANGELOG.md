@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-10-13)
+------------------
+
+* Feature - Adding support for Audit Logs on NFS shares and Force Closing Files on SMB shares.
+
 1.59.0 (2021-09-01)
 ------------------
 

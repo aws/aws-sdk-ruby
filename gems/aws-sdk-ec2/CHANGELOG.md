@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.270.0 (2021-10-13)
+------------------
+
+* Feature - This release adds support for additional VPC Flow Logs delivery options to S3, such as Apache Parquet formatted files, Hourly partitions and Hive-compatible S3 prefixes
+
 1.269.0 (2021-10-12)
 ------------------
 

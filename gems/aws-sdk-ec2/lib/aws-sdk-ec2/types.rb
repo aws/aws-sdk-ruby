@@ -7298,6 +7298,11 @@ module Aws::EC2
     #           },
     #         ],
     #         max_aggregation_interval: 1,
+    #         destination_options: {
+    #           file_format: "plain-text", # accepts plain-text, parquet
+    #           hive_compatible_partitions: false,
+    #           per_hour_partition: false,
+    #         },
     #       }
     #
     # @!attribute [rw] dry_run
@@ -7352,8 +7357,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] log_destination_type
-    #   Specifies the type of destination to which the flow log data is to
-    #   be published. Flow log data can be published to CloudWatch Logs or
+    #   The type of destination to which the flow log data is to be
+    #   published. Flow log data can be published to CloudWatch Logs or
     #   Amazon S3. To publish flow log data to CloudWatch Logs, specify
     #   `cloud-watch-logs`. To publish flow log data to Amazon S3, specify
     #   `s3`.
@@ -7365,10 +7370,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] log_destination
-    #   Specifies the destination to which the flow log data is to be
-    #   published. Flow log data can be published to a CloudWatch Logs log
-    #   group or an Amazon S3 bucket. The value specified for this parameter
-    #   depends on the value specified for `LogDestinationType`.
+    #   The destination to which the flow log data is to be published. Flow
+    #   log data can be published to a CloudWatch Logs log group or an
+    #   Amazon S3 bucket. The value specified for this parameter depends on
+    #   the value specified for `LogDestinationType`.
     #
     #   If `LogDestinationType` is not specified or `cloud-watch-logs`,
     #   specify the Amazon Resource Name (ARN) of the CloudWatch Logs log
@@ -7421,6 +7426,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     #   @return [Integer]
     #
+    # @!attribute [rw] destination_options
+    #   The destination options.
+    #   @return [Types::DestinationOptionsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogsRequest AWS API Documentation
     #
     class CreateFlowLogsRequest < Struct.new(
@@ -7435,7 +7444,8 @@ module Aws::EC2
       :log_destination,
       :log_format,
       :tag_specifications,
-      :max_aggregation_interval)
+      :max_aggregation_interval,
+      :destination_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26872,6 +26882,66 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the destination options for a flow log.
+    #
+    # @note When making an API call, you may pass DestinationOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         file_format: "plain-text", # accepts plain-text, parquet
+    #         hive_compatible_partitions: false,
+    #         per_hour_partition: false,
+    #       }
+    #
+    # @!attribute [rw] file_format
+    #   The format for the flow log. The default is `plain-text`.
+    #   @return [String]
+    #
+    # @!attribute [rw] hive_compatible_partitions
+    #   Indicates whether to use Hive-compatible prefixes for flow logs
+    #   stored in Amazon S3. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] per_hour_partition
+    #   Indicates whether to partition the flow log per hour. This reduces
+    #   the cost and response time for queries. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DestinationOptionsRequest AWS API Documentation
+    #
+    class DestinationOptionsRequest < Struct.new(
+      :file_format,
+      :hive_compatible_partitions,
+      :per_hour_partition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the destination options for a flow log.
+    #
+    # @!attribute [rw] file_format
+    #   The format for the flow log.
+    #   @return [String]
+    #
+    # @!attribute [rw] hive_compatible_partitions
+    #   Indicates whether to use Hive-compatible prefixes for flow logs
+    #   stored in Amazon S3.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] per_hour_partition
+    #   Indicates whether to partition the flow log per hour.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DestinationOptionsResponse AWS API Documentation
+    #
+    class DestinationOptionsResponse < Struct.new(
+      :file_format,
+      :hive_compatible_partitions,
+      :per_hour_partition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DetachClassicLinkVpcRequest
     #   data as a hash:
     #
@@ -31142,15 +31212,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] log_destination_type
-    #   Specifies the type of destination to which the flow log data is
-    #   published. Flow log data can be published to CloudWatch Logs or
-    #   Amazon S3.
+    #   The type of destination to which the flow log data is published.
+    #   Flow log data can be published to CloudWatch Logs or Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] log_destination
-    #   Specifies the destination to which the flow log data is published.
-    #   Flow log data can be published to an CloudWatch Logs log group or an
-    #   Amazon S3 bucket. If the flow log publishes to CloudWatch Logs, this
+    #   The destination to which the flow log data is published. Flow log
+    #   data can be published to an CloudWatch Logs log group or an Amazon
+    #   S3 bucket. If the flow log publishes to CloudWatch Logs, this
     #   element indicates the Amazon Resource Name (ARN) of the CloudWatch
     #   Logs log group to which the data is published. If the flow log
     #   publishes to Amazon S3, this element indicates the ARN of the Amazon
@@ -31180,6 +31249,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     #   @return [Integer]
     #
+    # @!attribute [rw] destination_options
+    #   The destination options.
+    #   @return [Types::DestinationOptionsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlowLog AWS API Documentation
     #
     class FlowLog < Struct.new(
@@ -31196,7 +31269,8 @@ module Aws::EC2
       :log_destination,
       :log_format,
       :tags,
-      :max_aggregation_interval)
+      :max_aggregation_interval,
+      :destination_options)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -35,9 +35,11 @@ module Aws::WorkMail
   # * {EntityNotFoundException}
   # * {EntityStateException}
   # * {InvalidConfigurationException}
+  # * {InvalidCustomSesConfigurationException}
   # * {InvalidParameterException}
   # * {InvalidPasswordException}
   # * {LimitExceededException}
+  # * {MailDomainInUseException}
   # * {MailDomainNotFoundException}
   # * {MailDomainStateException}
   # * {NameAvailabilityException}
@@ -174,6 +176,21 @@ module Aws::WorkMail
       end
     end
 
+    class InvalidCustomSesConfigurationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkMail::Types::InvalidCustomSesConfigurationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InvalidParameterException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -209,6 +226,21 @@ module Aws::WorkMail
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::WorkMail::Types::LimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class MailDomainInUseException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkMail::Types::MailDomainInUseException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

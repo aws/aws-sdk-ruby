@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-10-13)
+------------------
+
+* Feature - This release adds APIs for adding, removing and retrieving details of mail domains
+
 1.42.0 (2021-10-05)
 ------------------
 

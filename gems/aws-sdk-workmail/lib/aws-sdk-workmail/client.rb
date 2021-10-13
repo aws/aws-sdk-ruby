@@ -751,6 +751,12 @@ module Aws::WorkMail
     # Deletes an access control rule for the specified WorkMail
     # organization.
     #
+    # <note markdown="1"> Deleting already deleted and non-existing rules does not produce an
+    # error. In those cases, the service sends back an HTTP 200 response
+    # with an empty HTTP body.
+    #
+    #  </note>
+    #
     # @option params [required, String] :organization_id
     #   The identifier for the organization.
     #
@@ -870,6 +876,12 @@ module Aws::WorkMail
     # Deletes the mobile device access override for the given WorkMail
     # organization, user, and device.
     #
+    # <note markdown="1"> Deleting already deleted and non-existing overrides does not produce
+    # an error. In those cases, the service sends back an HTTP 200 response
+    # with an empty HTTP body.
+    #
+    #  </note>
+    #
     # @option params [required, String] :organization_id
     #   The Amazon WorkMail organization for which the access override will be
     #   deleted.
@@ -910,6 +922,12 @@ module Aws::WorkMail
 
     # Deletes a mobile device access rule for the specified Amazon WorkMail
     # organization.
+    #
+    # <note markdown="1"> Deleting already deleted and non-existing rules does not produce an
+    # error. In those cases, the service sends back an HTTP 200 response
+    # with an empty HTTP body.
+    #
+    #  </note>
     #
     # @option params [required, String] :organization_id
     #   The Amazon WorkMail organization under which the rule will be deleted.
@@ -1097,6 +1115,37 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def deregister_from_work_mail(params = {}, options = {})
       req = build_request(:deregister_from_work_mail, params)
+      req.send_request(options)
+    end
+
+    # Removes a domain from Amazon WorkMail, stops email routing to
+    # WorkMail, and removes the authorization allowing WorkMail use. SES
+    # keeps the domain because other applications may use it. You must first
+    # remove any email address used by WorkMail entities before you remove
+    # the domain.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which the domain will be
+    #   deregistered.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain to deregister in WorkMail and SES.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_mail_domain({
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "WorkMailDomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeregisterMailDomain AWS API Documentation
+    #
+    # @overload deregister_mail_domain(params = {})
+    # @param [Hash] params ({})
+    def deregister_mail_domain(params = {}, options = {})
+      req = build_request(:deregister_mail_domain, params)
       req.send_request(options)
     end
 
@@ -1510,6 +1559,50 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Gets details for a mail domain, including domain records required to
+    # configure your domain with recommended security.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which the domain is retrieved.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain from which you want to retrieve details.
+    #
+    # @return [Types::GetMailDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMailDomainResponse#records #records} => Array&lt;Types::DnsRecord&gt;
+    #   * {Types::GetMailDomainResponse#is_test_domain #is_test_domain} => Boolean
+    #   * {Types::GetMailDomainResponse#is_default #is_default} => Boolean
+    #   * {Types::GetMailDomainResponse#ownership_verification_status #ownership_verification_status} => String
+    #   * {Types::GetMailDomainResponse#dkim_verification_status #dkim_verification_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_mail_domain({
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "WorkMailDomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.records #=> Array
+    #   resp.records[0].type #=> String
+    #   resp.records[0].hostname #=> String
+    #   resp.records[0].value #=> String
+    #   resp.is_test_domain #=> Boolean
+    #   resp.is_default #=> Boolean
+    #   resp.ownership_verification_status #=> String, one of "PENDING", "VERIFIED", "FAILED"
+    #   resp.dkim_verification_status #=> String, one of "PENDING", "VERIFIED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMailDomain AWS API Documentation
+    #
+    # @overload get_mail_domain(params = {})
+    # @param [Hash] params ({})
+    def get_mail_domain(params = {}, options = {})
+      req = build_request(:get_mail_domain, params)
+      req.send_request(options)
+    end
+
     # Requests a user's mailbox details for a specified organization and
     # user.
     #
@@ -1843,6 +1936,49 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def list_groups(params = {}, options = {})
       req = build_request(:list_groups, params)
+      req.send_request(options)
+    end
+
+    # Lists the mail domains in a given Amazon WorkMail organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which to list domains.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results. The first call
+    #   does not require a token.
+    #
+    # @return [Types::ListMailDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMailDomainsResponse#mail_domains #mail_domains} => Array&lt;Types::MailDomainSummary&gt;
+    #   * {Types::ListMailDomainsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_mail_domains({
+    #     organization_id: "OrganizationId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mail_domains #=> Array
+    #   resp.mail_domains[0].domain_name #=> String
+    #   resp.mail_domains[0].default_domain #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailDomains AWS API Documentation
+    #
+    # @overload list_mail_domains(params = {})
+    # @param [Hash] params ({})
+    def list_mail_domains(params = {}, options = {})
+      req = build_request(:list_mail_domains, params)
       req.send_request(options)
     end
 
@@ -2510,6 +2646,44 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Registers a new domain in Amazon WorkMail and SES, and configures it
+    # for use by WorkMail. Emails received by SES for this domain are routed
+    # to the specified WorkMail organization, and WorkMail has permanent
+    # permission to use the specified domain for sending your users'
+    # emails.
+    #
+    # @option params [String] :client_token
+    #   Idempotency token used when retrying requests.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization under which you're creating the
+    #   domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the mail domain to create in Amazon WorkMail and SES.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_mail_domain({
+    #     client_token: "IdempotencyClientToken",
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "WorkMailDomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/RegisterMailDomain AWS API Documentation
+    #
+    # @overload register_mail_domain(params = {})
+    # @param [Hash] params ({})
+    def register_mail_domain(params = {}, options = {})
+      req = build_request(:register_mail_domain, params)
+      req.send_request(options)
+    end
+
     # Registers an existing and disabled user, group, or resource for Amazon
     # WorkMail use by associating a mailbox and calendaring capabilities. It
     # performs no change if the user, group, or resource is enabled and
@@ -2714,6 +2888,34 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Updates the default mail domain for an organization. The default mail
+    # domain is used by the WorkMail AWS Console to suggest an email address
+    # when enabling a mail user. You can only have one default domain.
+    #
+    # @option params [required, String] :organization_id
+    #   The Amazon WorkMail organization for which to list domains.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain name that will become the default domain.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_default_mail_domain({
+    #     organization_id: "OrganizationId", # required
+    #     domain_name: "WorkMailDomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateDefaultMailDomain AWS API Documentation
+    #
+    # @overload update_default_mail_domain(params = {})
+    # @param [Hash] params ({})
+    def update_default_mail_domain(params = {}, options = {})
+      req = build_request(:update_default_mail_domain, params)
+      req.send_request(options)
+    end
+
     # Updates a user's current mailbox quota for a specified organization
     # and user.
     #
@@ -2910,7 +3112,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

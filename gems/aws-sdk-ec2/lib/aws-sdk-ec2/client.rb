@@ -5589,11 +5589,10 @@ module Aws::EC2
     #   accepts or rejects, or all traffic.
     #
     # @option params [String] :log_destination_type
-    #   Specifies the type of destination to which the flow log data is to be
-    #   published. Flow log data can be published to CloudWatch Logs or Amazon
-    #   S3. To publish flow log data to CloudWatch Logs, specify
-    #   `cloud-watch-logs`. To publish flow log data to Amazon S3, specify
-    #   `s3`.
+    #   The type of destination to which the flow log data is to be published.
+    #   Flow log data can be published to CloudWatch Logs or Amazon S3. To
+    #   publish flow log data to CloudWatch Logs, specify `cloud-watch-logs`.
+    #   To publish flow log data to Amazon S3, specify `s3`.
     #
     #   If you specify `LogDestinationType` as `s3`, do not specify
     #   `DeliverLogsPermissionArn` or `LogGroupName`.
@@ -5601,10 +5600,10 @@ module Aws::EC2
     #   Default: `cloud-watch-logs`
     #
     # @option params [String] :log_destination
-    #   Specifies the destination to which the flow log data is to be
-    #   published. Flow log data can be published to a CloudWatch Logs log
-    #   group or an Amazon S3 bucket. The value specified for this parameter
-    #   depends on the value specified for `LogDestinationType`.
+    #   The destination to which the flow log data is to be published. Flow
+    #   log data can be published to a CloudWatch Logs log group or an Amazon
+    #   S3 bucket. The value specified for this parameter depends on the value
+    #   specified for `LogDestinationType`.
     #
     #   If `LogDestinationType` is not specified or `cloud-watch-logs`,
     #   specify the Amazon Resource Name (ARN) of the CloudWatch Logs log
@@ -5653,6 +5652,9 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     #
+    # @option params [Types::DestinationOptionsRequest] :destination_options
+    #   The destination options.
+    #
     # @return [Types::CreateFlowLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFlowLogsResult#client_token #client_token} => String
@@ -5684,6 +5686,11 @@ module Aws::EC2
     #       },
     #     ],
     #     max_aggregation_interval: 1,
+    #     destination_options: {
+    #       file_format: "plain-text", # accepts plain-text, parquet
+    #       hive_compatible_partitions: false,
+    #       per_hour_partition: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -17567,6 +17574,9 @@ module Aws::EC2
     #   resp.flow_logs[0].tags[0].key #=> String
     #   resp.flow_logs[0].tags[0].value #=> String
     #   resp.flow_logs[0].max_aggregation_interval #=> Integer
+    #   resp.flow_logs[0].destination_options.file_format #=> String, one of "plain-text", "parquet"
+    #   resp.flow_logs[0].destination_options.hive_compatible_partitions #=> Boolean
+    #   resp.flow_logs[0].destination_options.per_hour_partition #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogs AWS API Documentation
@@ -44165,7 +44175,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.269.0'
+      context[:gem_version] = '1.270.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
