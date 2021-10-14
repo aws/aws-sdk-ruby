@@ -17,7 +17,7 @@
           },
           {
             "dnsSuffix": "api.aws",
-            "hostname": "{service}.{region}.{dnsSuffix}",
+            "hostname": "{service}-fips.{region}.{dnsSuffix}",
             "tags": ["dualstack", "fips"]
           }
         ]
@@ -50,7 +50,6 @@
                   "tags": ["fips", "dualstack"]
                 },
                 {
-                  "hostname": "dynamodb.us-west-2.api.aws",
                   "tags": ["dualstack"]
                 }
               ]

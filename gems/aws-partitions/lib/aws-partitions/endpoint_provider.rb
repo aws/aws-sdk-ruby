@@ -94,11 +94,6 @@ module Aws
         partition_variant = get_variant(
           partition.fetch('defaults', {}).fetch('variants', []), variants
         )
-        default_endpoint = if partition_variant.empty?
-          partition['defaults']['hostname']
-        else
-          partition_variant['hostname']
-        end
         if variants[:dualstack] == true && partition_variant.empty?
           raise ArgumentError,
                 'Dualstack is not supported for this region and partition'
@@ -106,6 +101,11 @@ module Aws
         if variants[:fips] == true && partition_variant.empty?
           raise ArgumentError,
                 'FIPS is not supported for this region and partition'
+        end
+        default_endpoint = if partition_variant.empty?
+          partition['defaults']['hostname']
+        else
+          partition_variant['hostname']
         end
 
         # service default endpoint
@@ -141,7 +141,7 @@ module Aws
         default_endpoint = if region_variant.empty?
           endpoints.fetch(region, {}).fetch('hostname', default_endpoint)
         else
-          region_variant['hostname']
+          region_variant.fetch('hostname', default_endpoint)
         end
 
         # Replace placeholders from the endpoints

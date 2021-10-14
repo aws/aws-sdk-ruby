@@ -17,7 +17,7 @@
           },
           {
             "dnsSuffix": "api.aws",
-            "hostname": "{service}.{region}.{dnsSuffix}",
+            "hostname": "{service}-fips.{region}.{dnsSuffix}",
             "tags": ["dualstack", "fips"]
           }
         ]
@@ -42,7 +42,6 @@
             "us-west-2": {
               "variants":[
                 {
-                  "hostname": "dynamodb-fips.us-west-2.amazonaws.com",
                   "tags": ["fips"]
                 },
                 {
