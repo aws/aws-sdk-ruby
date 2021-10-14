@@ -74,9 +74,8 @@ module Seahorse
         # @return [void]
         def transmit(config, req, resp)
           session(config, req) do |http|
-            # Monkey patch default content-type set by Net::HTTP
-            Thread.current[:net_http_skip_default_content_type] = true
             http.request(build_net_request(req)) do |net_resp|
+
               status_code = net_resp.code.to_i
               headers = extract_headers(net_resp)
 
@@ -97,9 +96,6 @@ module Seahorse
         rescue => error
           # not retryable
           resp.signal_error(error)
-        ensure
-          # ensure we turn off monkey patch in case of error
-          Thread.current[:net_http_skip_default_content_type] = nil
         end
 
         def complete_response(req, resp, bytes_received)
@@ -151,12 +147,7 @@ module Seahorse
         def build_net_request(request)
           request_class = net_http_request_class(request)
           req = request_class.new(request.endpoint.request_uri, headers(request))
-          # Net::HTTP adds a default Content-Type when a body is present.
-          # Set the body stream when it has an unknown size or when it is > 0.
-          if !request.body.respond_to?(:size) ||
-             (request.body.respond_to?(:size) && request.body.size > 0)
-            req.body_stream = request.body
-          end
+          req.body_stream = request.body
           req
         end
 
@@ -175,13 +166,14 @@ module Seahorse
         # @return [Hash] Returns a vanilla hash of headers to send with the
         #   HTTP request.
         def headers(request)
-          # Net::HTTP adds a default header for accept-encoding (2.0.0+).
-          # Setting a default empty value defeats this.
+          # Net::HTTP adds default headers for content-type to POSTs (1.8.7+)
+          # and accept-encoding (2.0.0+). Setting a default empty value defeats
+          # this.
           #
-          # Removing this is necessary for most services to not break request
+          # Removing these are necessary for most services to not break request
           # signatures as well as dynamodb crc32 checks (these fail if the
           # response is gzipped).
-          headers = { 'accept-encoding' => '' }
+          headers = { 'content-type' => '', 'accept-encoding' => '' }
           request.headers.each_pair do |key, value|
             headers[key] = value
           end

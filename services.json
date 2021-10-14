@@ -350,10 +350,16 @@
     "models": "fsx/2018-03-01"
   },
   "FinSpaceData": {
-    "models": "finspace-data/2020-07-13"
+    "models": "finspace-data/2020-07-13",
+    "addPlugins": [
+      "Aws::FinSpaceData::Plugins::ContentType"
+    ]
   },
   "Finspace": {
-    "models": "finspace/2021-03-12"
+    "models": "finspace/2021-03-12",
+    "addPlugins": [
+      "Aws::Finspace::Plugins::ContentType"
+    ]
   },
   "Firehose": {
     "models": "firehose/2015-08-04"
@@ -518,7 +524,10 @@
     "models": "lex-models/2017-04-19"
   },
   "LexModelsV2": {
-    "models": "models.lex.v2/2020-08-07"
+    "models": "models.lex.v2/2020-08-07",
+    "addPlugins": [
+      "Aws::LexModelsV2::Plugins::ContentType"
+    ]
   },
   "LexRuntimeV2": {
     "models": "runtime.lex.v2/2020-08-07"
@@ -536,7 +545,10 @@
     "models": "lookoutequipment/2020-12-15"
   },
   "LookoutMetrics": {
-    "models": "lookoutmetrics/2017-07-25"
+    "models": "lookoutmetrics/2017-07-25",
+    "addPlugins": [
+      "Aws::LookoutMetrics::Plugins::ContentType"
+    ]
   },
   "LookoutforVision": {
     "models": "lookoutvision/2020-11-20"
@@ -632,7 +644,10 @@
     "models": "networkmanager/2019-07-05"
   },
   "NimbleStudio": {
-    "models": "nimble/2020-08-01"
+    "models": "nimble/2020-08-01",
+    "addPlugins": [
+      "Aws::NimbleStudio::Plugins::ContentType"
+    ]
   },
   "OpenSearchService": {
     "models": "opensearch/2021-01-01"
@@ -823,6 +838,9 @@
   },
   "SSO": {
     "models": "sso/2019-06-10",
+    "addPlugins": [
+      "Aws::SSO::Plugins::ContentType"
+    ],
     "gemName": "aws-sdk-core"
   },
   "SSOAdmin": {

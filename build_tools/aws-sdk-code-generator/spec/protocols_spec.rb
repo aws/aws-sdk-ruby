@@ -137,17 +137,10 @@ end
 
 def match_req_headers(group, test_case, http_req, it)
   if expected_headers = test_case['serialized']['headers']
+    http_req.headers.delete('user-agent')
     headers = normalize_headers(http_req.headers)
     expected_headers = normalize_headers(expected_headers)
-    it.expect(headers).to include(expected_headers)
-  end
-end
-
-def exclude_req_headers(group, test_case, http_req, it)
-  if excluded_headers = test_case['serialized']['forbidHeaders']
-    headers = normalize_headers(http_req.headers)
-    excluded_headers = excluded_headers.map(&:downcase) # normalize array
-    it.expect(headers.keys).to_not include(*excluded_headers)
+    it.expect(headers).to eq(headers)
   end
 end
 
@@ -160,7 +153,7 @@ def match_req_body(group, suite, test_case, http_req, it)
       body = body.split('&').sort.join('&')
       expected_body = expected_body.split('&').sort.join('&')
     when 'json'
-      body = Aws::Json.load(body)
+      body = Aws::Json.load(body) unless body == ''
       expected_body = Aws::Json.load(expected_body)
     when 'rest-json'
       if body[0] == '{'
@@ -207,7 +200,6 @@ fixtures.each do |directory, files|
           match_req_method(group, test_case, ctx.http_request, self)
           match_req_uri(group, test_case, ctx.http_request, self)
           match_req_headers(group, test_case, ctx.http_request, self)
-          exclude_req_headers(group, test_case, ctx.http_request, self)
           match_req_body(group, suite, test_case, ctx.http_request, self)
 
         end

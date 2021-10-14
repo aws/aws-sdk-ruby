@@ -1,12 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Issue - Fix an issue where Rest JSON services do not have a `Content-Type` header.
-
-* Issue - Remove blank `Content-Type` header from Net::HTTP handler, and prevent a default from being set.
-
-* Issue - Set `Content-Length` only for HTTP methods that take a body.
-
 3.121.1 (2021-09-24)
 ------------------
 
