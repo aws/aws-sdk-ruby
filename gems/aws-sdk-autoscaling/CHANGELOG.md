@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2021-10-14)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling now supports filtering describe Auto Scaling groups API using tags
+
 1.68.0 (2021-09-01)
 ------------------
 

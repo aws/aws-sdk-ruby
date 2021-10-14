@@ -456,6 +456,12 @@ module Aws::AutoScaling
     #         auto_scaling_group_names: ["XmlStringMaxLen255"],
     #         next_token: "XmlString",
     #         max_records: 1,
+    #         filters: [
+    #           {
+    #             name: "XmlString",
+    #             values: ["XmlString"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] auto_scaling_group_names
@@ -476,12 +482,17 @@ module Aws::AutoScaling
     #   value is `50` and the maximum value is `100`.
     #   @return [Integer]
     #
+    # @!attribute [rw] filters
+    #   One or more filters to limit the results based on specific tags.
+    #   @return [Array<Types::Filter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroupNamesType AWS API Documentation
     #
     class AutoScalingGroupNamesType < Struct.new(
       :auto_scaling_group_names,
       :next_token,
-      :max_records)
+      :max_records,
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1506,7 +1517,7 @@ module Aws::AutoScaling
     #   with all instance types. Additional fees are incurred when you
     #   enable EBS optimization for an instance type that is not
     #   EBS-optimized by default. For more information, see [Amazon
-    #   EBS-Optimized Instances][1] in the *Amazon EC2 User Guide for Linux
+    #   EBS-optimized instances][1] in the *Amazon EC2 User Guide for Linux
     #   Instances*.
     #
     #   The default value is `false`.
@@ -2832,8 +2843,8 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type. For more information, see [Amazon EBS Volume
-    #   Types][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   The volume type. For more information, see [Amazon EBS volume
+    #   types][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #   Valid Values: `standard` \| `io1` \| `gp2` \| `st1` \| `sc1` \|
     #   `gp3`
@@ -2878,38 +2889,29 @@ module Aws::AutoScaling
     # @!attribute [rw] encrypted
     #   Specifies whether the volume should be encrypted. Encrypted EBS
     #   volumes can only be attached to instances that support Amazon EBS
-    #   encryption. For more information, see [Supported Instance Types][1].
+    #   encryption. For more information, see [Supported instance types][1].
     #   If your AMI uses encrypted volumes, you can also only launch it on
     #   supported instance types.
     #
-    #   <note markdown="1"> If you are creating a volume from a snapshot, you cannot specify an
-    #   encryption value. Volumes that are created from encrypted snapshots
-    #   are automatically encrypted, and volumes that are created from
-    #   unencrypted snapshots are automatically unencrypted. By default,
-    #   encrypted snapshots use the Amazon Web Services managed CMK that is
-    #   used for EBS encryption, but you can specify a custom CMK when you
-    #   create the snapshot. The ability to encrypt a snapshot during
-    #   copying also allows you to apply a new CMK to an already-encrypted
-    #   snapshot. Volumes restored from the resulting copy are only
-    #   accessible using the new CMK.
+    #   <note markdown="1"> If you are creating a volume from a snapshot, you cannot create an
+    #   unencrypted volume from an encrypted snapshot. Also, you cannot
+    #   specify a KMS key ID when using a launch configuration.
     #
-    #    Enabling [encryption by default][2] results in all EBS volumes being
-    #   encrypted with the Amazon Web Services managed CMK or a customer
-    #   managed CMK, whether or not the snapshot was encrypted.
+    #    If you enable encryption by default, the EBS volumes that you create
+    #   are always encrypted, either using the Amazon Web Services managed
+    #   KMS key or a customer-managed KMS key, regardless of whether the
+    #   snapshot was encrypted.
+    #
+    #    For more information, see [Using Amazon Web Services KMS keys to
+    #   encrypt Amazon EBS volumes][2] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #    </note>
-    #
-    #   For more information, see [Using Encryption with EBS-Backed AMIs][3]
-    #   in the *Amazon EC2 User Guide for Linux Instances* and [Required CMK
-    #   key policy for use with encrypted volumes][4] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
-    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html
-    #   [4]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/key-policy-requirements-EBS-encryption.html
+    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-data-protection.html#encryption
     #   @return [Boolean]
     #
     # @!attribute [rw] throughput
@@ -3241,7 +3243,11 @@ module Aws::AutoScaling
     end
 
     # Describes a filter that is used to return a more specific list of
-    # results when describing tags.
+    # results from a describe operation.
+    #
+    # If you specify multiple filters, the filters are joined with an `AND`,
+    # and the request returns only results that match all of the specified
+    # filters.
     #
     # For more information, see [Tagging Auto Scaling groups and
     # instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
@@ -3259,12 +3265,58 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the filter. The valid values are: `auto-scaling-group`,
-    #   `key`, `value`, and `propagate-at-launch`.
+    #   The name of the filter.
+    #
+    #   The valid values for `Name` depend on the API operation that you are
+    #   including the filter in, DescribeAutoScalingGroups or DescribeTags.
+    #
+    #   **DescribeAutoScalingGroups**
+    #
+    #   Valid values for `Name` include the following:
+    #
+    #   * `tag-key` - Accepts tag keys. The results will only include
+    #     information about the Auto Scaling groups associated with these
+    #     tag keys.
+    #
+    #   * `tag-value` - Accepts tag values. The results will only include
+    #     information about the Auto Scaling groups associated with these
+    #     tag values.
+    #
+    #   * `tag:<key>` - Accepts the key/value combination of the tag. Use
+    #     the tag key in the filter name and the tag value as the filter
+    #     value. The results will only include information about the Auto
+    #     Scaling groups associated with the specified key/value
+    #     combination.
+    #
+    #   **DescribeTags**
+    #
+    #   Valid values for `Name` include the following:
+    #
+    #   * `auto-scaling-group` - Accepts the names of Auto Scaling groups.
+    #     The results will only include information about the tags
+    #     associated with these Auto Scaling groups.
+    #
+    #   * `key` - Accepts tag keys. The results will only include
+    #     information about the tags associated with these tag keys.
+    #
+    #   * `value` - Accepts tag values. The results will only include
+    #     information about the tags associated with these tag values.
+    #
+    #   * `propagate-at-launch` - Accepts a boolean value, which specifies
+    #     whether tags propagate to instances at launch. The results will
+    #     only include information about the tags associated with the
+    #     specified boolean value.
     #   @return [String]
     #
     # @!attribute [rw] values
     #   One or more filter values. Filter values are case-sensitive.
+    #
+    #   If you specify multiple values for a filter, the values are joined
+    #   with an `OR`, and the request returns all results that match any of
+    #   the specified values. For example, specify "tag:environment" for
+    #   the filter name and "production,development" for the filter values
+    #   to find Auto Scaling groups with the tag "environment=production"
+    #   or "environment=development".
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Filter AWS API Documentation

@@ -418,6 +418,7 @@ module Aws::AutoScaling
     AutoScalingGroupNamesType.add_member(:auto_scaling_group_names, Shapes::ShapeRef.new(shape: AutoScalingGroupNames, location_name: "AutoScalingGroupNames"))
     AutoScalingGroupNamesType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     AutoScalingGroupNamesType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+    AutoScalingGroupNamesType.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
     AutoScalingGroupNamesType.struct_class = Types::AutoScalingGroupNamesType
 
     AutoScalingGroups.member = Shapes::ShapeRef.new(shape: AutoScalingGroup)
@@ -1594,6 +1595,7 @@ module Aws::AutoScaling
         o.input = Shapes::ShapeRef.new(shape: DescribeLoadBalancerTargetGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancerTargetGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
       end)
 
       api.add_operation(:describe_load_balancers, Seahorse::Model::Operation.new.tap do |o|
@@ -1603,6 +1605,7 @@ module Aws::AutoScaling
         o.input = Shapes::ShapeRef.new(shape: DescribeLoadBalancersRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
       end)
 
       api.add_operation(:describe_metric_collection_types, Seahorse::Model::Operation.new.tap do |o|

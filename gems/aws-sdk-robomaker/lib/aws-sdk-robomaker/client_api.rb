@@ -36,8 +36,10 @@ module Aws::RoboMaker
     CancelWorldGenerationJobResponse = Shapes::StructureShape.new(name: 'CancelWorldGenerationJobResponse')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     Command = Shapes::StringShape.new(name: 'Command')
+    CommandList = Shapes::ListShape.new(name: 'CommandList')
     Compute = Shapes::StructureShape.new(name: 'Compute')
     ComputeResponse = Shapes::StructureShape.new(name: 'ComputeResponse')
+    ComputeType = Shapes::StringShape.new(name: 'ComputeType')
     ConcurrentDeploymentException = Shapes::StructureShape.new(name: 'ConcurrentDeploymentException')
     CreateDeploymentJobRequest = Shapes::StructureShape.new(name: 'CreateDeploymentJobRequest')
     CreateDeploymentJobResponse = Shapes::StructureShape.new(name: 'CreateDeploymentJobResponse')
@@ -67,6 +69,7 @@ module Aws::RoboMaker
     DataSourceConfig = Shapes::StructureShape.new(name: 'DataSourceConfig')
     DataSourceConfigs = Shapes::ListShape.new(name: 'DataSourceConfigs')
     DataSourceNames = Shapes::ListShape.new(name: 'DataSourceNames')
+    DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DataSources = Shapes::ListShape.new(name: 'DataSources')
     DeleteFleetRequest = Shapes::StructureShape.new(name: 'DeleteFleetRequest')
     DeleteFleetResponse = Shapes::StructureShape.new(name: 'DeleteFleetResponse')
@@ -129,6 +132,7 @@ module Aws::RoboMaker
     Fleet = Shapes::StructureShape.new(name: 'Fleet')
     Fleets = Shapes::ListShape.new(name: 'Fleets')
     FloorplanCount = Shapes::IntegerShape.new(name: 'FloorplanCount')
+    GPUUnit = Shapes::IntegerShape.new(name: 'GPUUnit')
     GenericInteger = Shapes::IntegerShape.new(name: 'GenericInteger')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     GetWorldTemplateBodyRequest = Shapes::StructureShape.new(name: 'GetWorldTemplateBodyRequest')
@@ -217,9 +221,10 @@ module Aws::RoboMaker
     S3Etag = Shapes::StringShape.new(name: 'S3Etag')
     S3Etags = Shapes::ListShape.new(name: 'S3Etags')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
+    S3KeyOrPrefix = Shapes::StringShape.new(name: 'S3KeyOrPrefix')
     S3KeyOutput = Shapes::StructureShape.new(name: 'S3KeyOutput')
     S3KeyOutputs = Shapes::ListShape.new(name: 'S3KeyOutputs')
-    S3Keys = Shapes::ListShape.new(name: 'S3Keys')
+    S3KeysOrPrefixes = Shapes::ListShape.new(name: 'S3KeysOrPrefixes')
     S3Object = Shapes::StructureShape.new(name: 'S3Object')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
@@ -343,10 +348,16 @@ module Aws::RoboMaker
 
     CancelWorldGenerationJobResponse.struct_class = Types::CancelWorldGenerationJobResponse
 
+    CommandList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
     Compute.add_member(:simulation_unit_limit, Shapes::ShapeRef.new(shape: SimulationUnit, location_name: "simulationUnitLimit"))
+    Compute.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "computeType"))
+    Compute.add_member(:gpu_unit_limit, Shapes::ShapeRef.new(shape: GPUUnit, location_name: "gpuUnitLimit"))
     Compute.struct_class = Types::Compute
 
     ComputeResponse.add_member(:simulation_unit_limit, Shapes::ShapeRef.new(shape: SimulationUnit, location_name: "simulationUnitLimit"))
+    ComputeResponse.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "computeType"))
+    ComputeResponse.add_member(:gpu_unit_limit, Shapes::ShapeRef.new(shape: GPUUnit, location_name: "gpuUnitLimit"))
     ComputeResponse.struct_class = Types::ComputeResponse
 
     ConcurrentDeploymentException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -556,11 +567,15 @@ module Aws::RoboMaker
     DataSource.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     DataSource.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "s3Bucket"))
     DataSource.add_member(:s3_keys, Shapes::ShapeRef.new(shape: S3KeyOutputs, location_name: "s3Keys"))
+    DataSource.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "type"))
+    DataSource.add_member(:destination, Shapes::ShapeRef.new(shape: Path, location_name: "destination"))
     DataSource.struct_class = Types::DataSource
 
     DataSourceConfig.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     DataSourceConfig.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "s3Bucket"))
-    DataSourceConfig.add_member(:s3_keys, Shapes::ShapeRef.new(shape: S3Keys, required: true, location_name: "s3Keys"))
+    DataSourceConfig.add_member(:s3_keys, Shapes::ShapeRef.new(shape: S3KeysOrPrefixes, required: true, location_name: "s3Keys"))
+    DataSourceConfig.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, location_name: "type"))
+    DataSourceConfig.add_member(:destination, Shapes::ShapeRef.new(shape: Path, location_name: "destination"))
     DataSourceConfig.struct_class = Types::DataSourceConfig
 
     DataSourceConfigs.member = Shapes::ShapeRef.new(shape: DataSourceConfig)
@@ -867,11 +882,12 @@ module Aws::RoboMaker
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
-    LaunchConfig.add_member(:package_name, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "packageName"))
-    LaunchConfig.add_member(:launch_file, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "launchFile"))
+    LaunchConfig.add_member(:package_name, Shapes::ShapeRef.new(shape: Command, location_name: "packageName"))
+    LaunchConfig.add_member(:launch_file, Shapes::ShapeRef.new(shape: Command, location_name: "launchFile"))
     LaunchConfig.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariableMap, location_name: "environmentVariables"))
     LaunchConfig.add_member(:port_forwarding_config, Shapes::ShapeRef.new(shape: PortForwardingConfig, location_name: "portForwardingConfig"))
     LaunchConfig.add_member(:stream_ui, Shapes::ShapeRef.new(shape: Boolean, location_name: "streamUI"))
+    LaunchConfig.add_member(:command, Shapes::ShapeRef.new(shape: CommandList, location_name: "command"))
     LaunchConfig.struct_class = Types::LaunchConfig
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -1086,13 +1102,13 @@ module Aws::RoboMaker
 
     S3Etags.member = Shapes::ShapeRef.new(shape: S3Etag)
 
-    S3KeyOutput.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "s3Key"))
+    S3KeyOutput.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3KeyOrPrefix, location_name: "s3Key"))
     S3KeyOutput.add_member(:etag, Shapes::ShapeRef.new(shape: S3Etag, location_name: "etag"))
     S3KeyOutput.struct_class = Types::S3KeyOutput
 
     S3KeyOutputs.member = Shapes::ShapeRef.new(shape: S3KeyOutput)
 
-    S3Keys.member = Shapes::ShapeRef.new(shape: S3Key)
+    S3KeysOrPrefixes.member = Shapes::ShapeRef.new(shape: S3KeyOrPrefix)
 
     S3Object.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "bucket"))
     S3Object.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "key"))
@@ -1185,6 +1201,7 @@ module Aws::RoboMaker
     SimulationJobSummary.add_member(:simulation_application_names, Shapes::ShapeRef.new(shape: SimulationApplicationNames, location_name: "simulationApplicationNames"))
     SimulationJobSummary.add_member(:robot_application_names, Shapes::ShapeRef.new(shape: RobotApplicationNames, location_name: "robotApplicationNames"))
     SimulationJobSummary.add_member(:data_source_names, Shapes::ShapeRef.new(shape: DataSourceNames, location_name: "dataSourceNames"))
+    SimulationJobSummary.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "computeType"))
     SimulationJobSummary.struct_class = Types::SimulationJobSummary
 
     SimulationJobs.member = Shapes::ShapeRef.new(shape: SimulationJob)

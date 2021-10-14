@@ -5772,7 +5772,7 @@ module Aws::SageMaker
     ServiceCatalogProvisionedProductDetails.struct_class = Types::ServiceCatalogProvisionedProductDetails
 
     ServiceCatalogProvisioningDetails.add_member(:product_id, Shapes::ShapeRef.new(shape: ServiceCatalogEntityId, required: true, location_name: "ProductId"))
-    ServiceCatalogProvisioningDetails.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: ServiceCatalogEntityId, required: true, location_name: "ProvisioningArtifactId"))
+    ServiceCatalogProvisioningDetails.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: ServiceCatalogEntityId, location_name: "ProvisioningArtifactId"))
     ServiceCatalogProvisioningDetails.add_member(:path_id, Shapes::ShapeRef.new(shape: ServiceCatalogEntityId, location_name: "PathId"))
     ServiceCatalogProvisioningDetails.add_member(:provisioning_parameters, Shapes::ShapeRef.new(shape: ProvisioningParameters, location_name: "ProvisioningParameters"))
     ServiceCatalogProvisioningDetails.struct_class = Types::ServiceCatalogProvisioningDetails

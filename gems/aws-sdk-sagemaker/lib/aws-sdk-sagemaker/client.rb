@@ -5046,8 +5046,10 @@ module Aws::SageMaker
     #
     # @option params [required, Types::ServiceCatalogProvisioningDetails] :service_catalog_provisioning_details
     #   The product ID and provisioning artifact ID to provision a service
-    #   catalog. For information, see [What is Amazon Web Services Service
-    #   Catalog][1].
+    #   catalog. The provisioning artifact ID will default to the latest
+    #   provisioning artifact ID of the product, if you don't provide the
+    #   provisioning artifact ID. For more information, see [What is Amazon
+    #   Web Services Service Catalog][1].
     #
     #
     #
@@ -5075,7 +5077,7 @@ module Aws::SageMaker
     #     project_description: "EntityDescription",
     #     service_catalog_provisioning_details: { # required
     #       product_id: "ServiceCatalogEntityId", # required
-    #       provisioning_artifact_id: "ServiceCatalogEntityId", # required
+    #       provisioning_artifact_id: "ServiceCatalogEntityId",
     #       path_id: "ServiceCatalogEntityId",
     #       provisioning_parameters: [
     #         {
@@ -18039,7 +18041,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -521,6 +521,7 @@ module Aws::ElasticLoadBalancingV2
     DescribeSSLPoliciesInput.add_member(:names, Shapes::ShapeRef.new(shape: SslPolicyNames, location_name: "Names"))
     DescribeSSLPoliciesInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     DescribeSSLPoliciesInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    DescribeSSLPoliciesInput.add_member(:load_balancer_type, Shapes::ShapeRef.new(shape: LoadBalancerTypeEnum, location_name: "LoadBalancerType"))
     DescribeSSLPoliciesInput.struct_class = Types::DescribeSSLPoliciesInput
 
     DescribeSSLPoliciesOutput.add_member(:ssl_policies, Shapes::ShapeRef.new(shape: SslPolicies, location_name: "SslPolicies"))
@@ -837,6 +838,7 @@ module Aws::ElasticLoadBalancingV2
     SslPolicy.add_member(:ssl_protocols, Shapes::ShapeRef.new(shape: SslProtocols, location_name: "SslProtocols"))
     SslPolicy.add_member(:ciphers, Shapes::ShapeRef.new(shape: Ciphers, location_name: "Ciphers"))
     SslPolicy.add_member(:name, Shapes::ShapeRef.new(shape: SslPolicyName, location_name: "Name"))
+    SslPolicy.add_member(:supported_load_balancer_types, Shapes::ShapeRef.new(shape: ListOfString, location_name: "SupportedLoadBalancerTypes"))
     SslPolicy.struct_class = Types::SslPolicy
 
     SslPolicyNames.member = Shapes::ShapeRef.new(shape: SslPolicyName)

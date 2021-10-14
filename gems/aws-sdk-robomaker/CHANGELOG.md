@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-10-14)
+------------------
+
+* Feature - Adding support to GPU simulation jobs as well as non-ROS simulation jobs.
+
 1.42.0 (2021-09-16)
 ------------------
 

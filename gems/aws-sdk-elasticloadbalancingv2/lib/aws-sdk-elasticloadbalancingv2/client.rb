@@ -2325,6 +2325,10 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Integer] :page_size
     #   The maximum number of results to return with this call.
     #
+    # @option params [String] :load_balancer_type
+    #   The type of load balancer. The default lists the SSL policies for all
+    #   load balancers.
+    #
     # @return [Types::DescribeSSLPoliciesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSSLPoliciesOutput#ssl_policies #ssl_policies} => Array&lt;Types::SslPolicy&gt;
@@ -2439,6 +2443,7 @@ module Aws::ElasticLoadBalancingV2
     #     names: ["SslPolicyName"],
     #     marker: "Marker",
     #     page_size: 1,
+    #     load_balancer_type: "application", # accepts application, network, gateway
     #   })
     #
     # @example Response structure
@@ -2450,6 +2455,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.ssl_policies[0].ciphers[0].name #=> String
     #   resp.ssl_policies[0].ciphers[0].priority #=> Integer
     #   resp.ssl_policies[0].name #=> String
+    #   resp.ssl_policies[0].supported_load_balancer_types #=> Array
+    #   resp.ssl_policies[0].supported_load_balancer_types[0] #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeSSLPolicies AWS API Documentation
@@ -4283,7 +4290,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2021-10-14)
+------------------
+
+* Feature - Adds new option to filter by availability on each type of load balancer when describing ssl policies.
+
 1.69.0 (2021-10-11)
 ------------------
 
