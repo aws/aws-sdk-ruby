@@ -723,6 +723,8 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.s3_targets[0].sample_size #=> Integer
+    #   resp.crawlers[0].targets.s3_targets[0].event_queue_arn #=> String
+    #   resp.crawlers[0].targets.s3_targets[0].dlq_event_queue_arn #=> String
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -744,7 +746,7 @@ module Aws::Glue
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
     #   resp.crawlers[0].classifiers[0] #=> String
-    #   resp.crawlers[0].recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
+    #   resp.crawlers[0].recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY", "CRAWL_EVENT_MODE"
     #   resp.crawlers[0].schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawlers[0].schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
     #   resp.crawlers[0].lineage_configuration.crawler_lineage_settings #=> String, one of "ENABLE", "DISABLE"
@@ -1712,6 +1714,8 @@ module Aws::Glue
     #           exclusions: ["Path"],
     #           connection_name: "ConnectionName",
     #           sample_size: 1,
+    #           event_queue_arn: "EventQueueArn",
+    #           dlq_event_queue_arn: "EventQueueArn",
     #         },
     #       ],
     #       jdbc_targets: [
@@ -1750,7 +1754,7 @@ module Aws::Glue
     #       delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #     },
     #     recrawl_policy: {
-    #       recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
+    #       recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY, CRAWL_EVENT_MODE
     #     },
     #     lineage_configuration: {
     #       crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
@@ -4572,6 +4576,8 @@ module Aws::Glue
     #   resp.crawler.targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawler.targets.s3_targets[0].connection_name #=> String
     #   resp.crawler.targets.s3_targets[0].sample_size #=> Integer
+    #   resp.crawler.targets.s3_targets[0].event_queue_arn #=> String
+    #   resp.crawler.targets.s3_targets[0].dlq_event_queue_arn #=> String
     #   resp.crawler.targets.jdbc_targets #=> Array
     #   resp.crawler.targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawler.targets.jdbc_targets[0].path #=> String
@@ -4593,7 +4599,7 @@ module Aws::Glue
     #   resp.crawler.description #=> String
     #   resp.crawler.classifiers #=> Array
     #   resp.crawler.classifiers[0] #=> String
-    #   resp.crawler.recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
+    #   resp.crawler.recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY", "CRAWL_EVENT_MODE"
     #   resp.crawler.schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawler.schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
     #   resp.crawler.lineage_configuration.crawler_lineage_settings #=> String, one of "ENABLE", "DISABLE"
@@ -4704,6 +4710,8 @@ module Aws::Glue
     #   resp.crawlers[0].targets.s3_targets[0].exclusions[0] #=> String
     #   resp.crawlers[0].targets.s3_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.s3_targets[0].sample_size #=> Integer
+    #   resp.crawlers[0].targets.s3_targets[0].event_queue_arn #=> String
+    #   resp.crawlers[0].targets.s3_targets[0].dlq_event_queue_arn #=> String
     #   resp.crawlers[0].targets.jdbc_targets #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].connection_name #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
@@ -4725,7 +4733,7 @@ module Aws::Glue
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
     #   resp.crawlers[0].classifiers[0] #=> String
-    #   resp.crawlers[0].recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY"
+    #   resp.crawlers[0].recrawl_policy.recrawl_behavior #=> String, one of "CRAWL_EVERYTHING", "CRAWL_NEW_FOLDERS_ONLY", "CRAWL_EVENT_MODE"
     #   resp.crawlers[0].schema_change_policy.update_behavior #=> String, one of "LOG", "UPDATE_IN_DATABASE"
     #   resp.crawlers[0].schema_change_policy.delete_behavior #=> String, one of "LOG", "DELETE_FROM_DATABASE", "DEPRECATE_IN_DATABASE"
     #   resp.crawlers[0].lineage_configuration.crawler_lineage_settings #=> String, one of "ENABLE", "DISABLE"
@@ -10133,6 +10141,8 @@ module Aws::Glue
     #           exclusions: ["Path"],
     #           connection_name: "ConnectionName",
     #           sample_size: 1,
+    #           event_queue_arn: "EventQueueArn",
+    #           dlq_event_queue_arn: "EventQueueArn",
     #         },
     #       ],
     #       jdbc_targets: [
@@ -10171,7 +10181,7 @@ module Aws::Glue
     #       delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #     },
     #     recrawl_policy: {
-    #       recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
+    #       recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY, CRAWL_EVENT_MODE
     #     },
     #     lineage_configuration: {
     #       crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
@@ -11058,7 +11068,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

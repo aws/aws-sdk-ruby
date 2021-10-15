@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2021-10-15)
+------------------
+
+* Feature - Enable S3 event base crawler API.
+
 1.96.0 (2021-10-05)
 ------------------
 

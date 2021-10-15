@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-10-15)
+------------------
+
+* Feature - EFS adds documentation for a new exception for short identifiers to be thrown after its migration to long resource identifiers.
+
 1.45.0 (2021-10-04)
 ------------------
 

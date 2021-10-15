@@ -1548,8 +1548,25 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Describes a policy used by EFS lifecycle management to transition
-    # files to the Infrequent Access (IA) storage class.
+    # Describes a policy used by EFS lifecycle management and EFS
+    # intelligent tiering that specifies when to transition files into and
+    # out of the file system's Infrequent Access (IA) storage class. For
+    # more information, see [EFS Intelligent‐Tiering and EFS Lifecycle
+    # Management][1].
+    #
+    # <note markdown="1"> When using the `put-lifecycle-configuration` CLI command or the
+    # `PutLifecycleConfiguration` API action, Amazon EFS requires that each
+    # `LifecyclePolicy` object have only a single transition. This means
+    # that in a request body, `LifecyclePolicies` needs to be structured as
+    # an array of `LifecyclePolicy` objects, one object for each transition,
+    # `TransitionToIA`, `TransitionToPrimaryStorageClass`. For more
+    # information, see the request examples in PutLifecycleConfiguration.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html
     #
     # @note When making an API call, you may pass LifecyclePolicy
     #   data as a hash:
@@ -1561,14 +1578,15 @@ module Aws::EFS
     #
     # @!attribute [rw] transition_to_ia
     #   Describes the period of time that a file is not accessed, after
-    #   which it transitions to the IA storage class. Metadata operations
-    #   such as listing the contents of a directory don't count as file
-    #   access events.
+    #   which it transitions to IA storage. Metadata operations such as
+    #   listing the contents of a directory don't count as file access
+    #   events.
     #   @return [String]
     #
     # @!attribute [rw] transition_to_primary_storage_class
-    #   Describes the policy used to transition a file from infequent access
-    #   storage to primary storage.
+    #   Describes when to transition a file from IA storage to primary
+    #   storage. Metadata operations such as listing the contents of a
+    #   directory don't count as file access events.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/LifecyclePolicy AWS API Documentation
@@ -1878,6 +1896,13 @@ module Aws::EFS
     #   Amazon Web Services account, in the current Amazon Web Services
     #   Region, either `LONG_ID` (17 characters), or `SHORT_ID` (8
     #   characters).
+    #
+    #   <note markdown="1"> Starting in October, 2021, you will receive an error when setting
+    #   the account preference to `SHORT_ID`. Contact Amazon Web Services
+    #   support if you receive an error and need to use short IDs for file
+    #   system and mount target resources.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutAccountPreferencesRequest AWS API Documentation
@@ -1997,8 +2022,24 @@ module Aws::EFS
     # @!attribute [rw] lifecycle_policies
     #   An array of `LifecyclePolicy` objects that define the file system's
     #   `LifecycleConfiguration` object. A `LifecycleConfiguration` object
-    #   tells lifecycle management when to transition files from the
-    #   Standard storage class to the Infrequent Access storage class.
+    #   informs EFS lifecycle management and intelligent tiering of the
+    #   following:
+    #
+    #   * When to move files in the file system from primary storage to the
+    #     IA storage class.
+    #
+    #   * When to move files that are in IA storage to primary storage.
+    #
+    #   <note markdown="1"> When using the `put-lifecycle-configuration` CLI command or the
+    #   `PutLifecycleConfiguration` API action, Amazon EFS requires that
+    #   each `LifecyclePolicy` object have only a single transition. This
+    #   means that in a request body, `LifecyclePolicies` needs to be
+    #   structured as an array of `LifecyclePolicy` objects, one object for
+    #   each transition, `TransitionToIA`,
+    #   `TransitionToPrimaryStorageClass`. See the example requests in the
+    #   following section for more information.
+    #
+    #    </note>
     #   @return [Array<Types::LifecyclePolicy>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutLifecycleConfigurationRequest AWS API Documentation
