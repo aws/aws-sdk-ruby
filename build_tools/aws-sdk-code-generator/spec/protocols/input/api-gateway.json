@@ -273,7 +273,7 @@
           }
         },
         "serialized": {
-          "body": "{\"RecursiveStructure\": {\"RecursiveMember\": {\"RecursiveMember\": {\"NoRecursiveMember\": \"foo\"}}}}", 
+          "body": "{\"RecursiveStructure\": {\"RecursiveMember\": {\"RecursiveMember\": {\"NoRecursiveMember\": \"foo\"}}}}",
           "uri": "/test/noauth/enums/simple",
           "headers": {}
         }
