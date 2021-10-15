@@ -1149,11 +1149,11 @@
           "name": "OperationName"
         },
         "params": {
-          "Attr": "{\"Foo\":\"Bar\"}"
+          "Attr": {"Foo":"Bar"}
         },
         "serialized": {
           "uri": "/",
-          "headers": {"X-Amz-Foo": "IntcIkZvb1wiOlwiQmFyXCJ9Ig=="},
+          "headers": {"X-Amz-Foo": "eyJGb28iOiJCYXIifQ=="},
           "body": ""
         }
       },
