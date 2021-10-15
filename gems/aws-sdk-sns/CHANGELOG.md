@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add additional validation to the SNS SigningCert.
+
 1.45.0 (2021-09-01)
 ------------------
 

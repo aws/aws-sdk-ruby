@@ -123,7 +123,9 @@ module Aws
 
       def download_pem(uri)
         verify_uri!(uri)
-        https_get(uri)
+        pem = https_get(uri)
+        verify_pem_format!(pem)
+        pem
       end
 
       def verify_uri!(uri)
@@ -149,6 +151,14 @@ module Aws
       def verify_pem!(uri)
         unless File.extname(uri.path) == '.pem'
           msg = "the SigningCertURL must link to a .pem file"
+          raise VerificationError, msg
+        end
+      end
+
+      def verify_pem_format!(pem)
+        cert_regex = /\A[\s]*-----BEGIN [A-Z]+-----\n[A-Za-z\d+\/\n]+[=]{0,2}\n-----END [A-Z]+-----[\s]*\Z/
+        unless pem =~ cert_regex
+          msg = 'The certificate does not match expected X509 PEM format.'
           raise VerificationError, msg
         end
       end
