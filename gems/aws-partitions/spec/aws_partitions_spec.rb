@@ -200,6 +200,14 @@ module Aws
         expect(svc.regions).to include('us-west-1')
         expect(svc.regions).to include('us-west-2')
       end
+
+      it '#fips_regions returns a list of fips compatible regions' do
+        # TODO - can't do these until they are shipped
+      end
+
+      it '#dualstack_regions returns a list of dualstack compatible regions' do
+        # TODO - can't do these until they are shipped
+      end
     end
 
     describe 'symmetry' do

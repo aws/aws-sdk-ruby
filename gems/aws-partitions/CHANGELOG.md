@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Feature - Support modeled dualstack and fips endpoints in `Aws::Partitions::EndpointProvider`.
 
+* Feature - Support `#fips_regions` and `#dualstack_regions` in `Aws::Partitions::Service`.
+
 1.513.0 (2021-10-08)
 ------------------
 

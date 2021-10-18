@@ -16,6 +16,8 @@ module Aws
         @name = options[:name]
         @partition_name = options[:partition_name]
         @regions = options[:regions]
+        @fips_regions = options[:fips_regions]
+        @dualstack_regions = options[:dualstack_regions]
         @regionalized = options[:regionalized]
         @partition_region = options[:partition_region]
       end
@@ -30,6 +32,14 @@ module Aws
       # @return [Set<String>] The regions this service is available in.
       #   Regions are scoped to the partition.
       attr_reader :regions
+
+      # @return [Set<String>] The FIPS compatible regions this service is
+      #   available in. Regions are scoped to the partition.
+      attr_reader :fips_regions
+
+      # @return [Set<String>] The Dualstack compatible regions this service is
+      #   available in. Regions are scoped to the partition.
+      attr_reader :dualstack_regions
 
       # @return [String,nil] The global patition endpoint for this service.
       #   May be `nil`.
@@ -54,6 +64,8 @@ module Aws
             name: service_name,
             partition_name: partition['partition'],
             regions: regions(service, partition),
+            fips_regions: variant_regions('fips', service, partition),
+            dualstack_regions: variant_regions('dualstack', service, partition),
             regionalized: service['isRegionalized'] != false,
             partition_region: partition_region(service)
           )
@@ -64,6 +76,21 @@ module Aws
         def regions(service, partition)
           svc_endpoints = service.key?('endpoints') ? service['endpoints'].keys : []
           names = Set.new(partition['regions'].keys & svc_endpoints)
+          names - ["#{partition['partition']}-global"]
+        end
+
+        def variant_regions(variant_name, service, partition)
+          svc_endpoints = service.fetch('endpoints', {})
+          names = Set.new
+          svc_endpoints.each do |key, value|
+            variants = value.fetch('variants', [])
+            variants.each do |variant|
+              tags = variant.fetch('tags', [])
+              if tags.include?(variant_name) && partition['regions'].key?(key)
+                names << key
+              end
+            end
+          end
           names - ["#{partition['partition']}-global"]
         end
 
