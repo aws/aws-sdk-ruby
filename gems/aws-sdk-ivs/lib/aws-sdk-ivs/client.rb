@@ -347,15 +347,15 @@ module Aws::IVS
     #
     #   resp.channels #=> Array
     #   resp.channels[0].arn #=> String
-    #   resp.channels[0].name #=> String
-    #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
-    #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD"
-    #   resp.channels[0].recording_configuration_arn #=> String
-    #   resp.channels[0].ingest_endpoint #=> String
-    #   resp.channels[0].playback_url #=> String
     #   resp.channels[0].authorized #=> Boolean
+    #   resp.channels[0].ingest_endpoint #=> String
+    #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channels[0].name #=> String
+    #   resp.channels[0].playback_url #=> String
+    #   resp.channels[0].recording_configuration_arn #=> String
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
+    #   resp.channels[0].type #=> String, one of "BASIC", "STANDARD"
     #   resp.errors #=> Array
     #   resp.errors[0].arn #=> String
     #   resp.errors[0].code #=> String
@@ -377,8 +377,8 @@ module Aws::IVS
     #
     # @return [Types::BatchGetStreamKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::BatchGetStreamKeyResponse#stream_keys #stream_keys} => Array&lt;Types::StreamKey&gt;
     #   * {Types::BatchGetStreamKeyResponse#errors #errors} => Array&lt;Types::BatchError&gt;
+    #   * {Types::BatchGetStreamKeyResponse#stream_keys #stream_keys} => Array&lt;Types::StreamKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -388,16 +388,16 @@ module Aws::IVS
     #
     # @example Response structure
     #
-    #   resp.stream_keys #=> Array
-    #   resp.stream_keys[0].arn #=> String
-    #   resp.stream_keys[0].value #=> String
-    #   resp.stream_keys[0].channel_arn #=> String
-    #   resp.stream_keys[0].tags #=> Hash
-    #   resp.stream_keys[0].tags["TagKey"] #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].arn #=> String
     #   resp.errors[0].code #=> String
     #   resp.errors[0].message #=> String
+    #   resp.stream_keys #=> Array
+    #   resp.stream_keys[0].arn #=> String
+    #   resp.stream_keys[0].channel_arn #=> String
+    #   resp.stream_keys[0].tags #=> Hash
+    #   resp.stream_keys[0].tags["TagKey"] #=> String
+    #   resp.stream_keys[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchGetStreamKey AWS API Documentation
     #
@@ -410,14 +410,25 @@ module Aws::IVS
 
     # Creates a new channel and an associated stream key to start streaming.
     #
-    # @option params [String] :name
-    #   Channel name.
+    # @option params [Boolean] :authorized
+    #   Whether the channel is private (enabled for playback authorization).
+    #   Default: `false`.
     #
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
     #   (Note: In the Amazon IVS console, `LOW` and `NORMAL` correspond to
     #   Ultra-low and Standard, respectively.) Default: `LOW`.
+    #
+    # @option params [String] :name
+    #   Channel name.
+    #
+    # @option params [String] :recording_configuration_arn
+    #   Recording-configuration ARN. Default: "" (empty string, recording is
+    #   disabled).
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #
     # @option params [String] :type
     #   Channel type, which determines the allowable resolution and bitrate.
@@ -427,24 +438,13 @@ module Aws::IVS
     #
     #   * `STANDARD`\: Multiple qualities are generated from the original
     #     input, to automatically give viewers the best experience for their
-    #     devices and network conditions. Vertical resolution can be up to
-    #     1080 and bitrate can be up to 8.5 Mbps.
+    #     devices and network conditions. Resolution can be up to 1080p and
+    #     bitrate can be up to 8.5 Mbps. Audio is transcoded only for
+    #     renditions 360p and below; above that, audio is passed through.
     #
     #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
     #     viewer’s video-quality choice is limited to the original input.
-    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
-    #     Mbps.
-    #
-    # @option params [Boolean] :authorized
-    #   Whether the channel is private (enabled for playback authorization).
-    #   Default: `false`.
-    #
-    # @option params [String] :recording_configuration_arn
-    #   Recording-configuration ARN. Default: "" (empty string, recording is
-    #   disabled).
-    #
-    # @option params [Hash<String,String>] :tags
-    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #     Resolution can be up to 480p and bitrate can be up to 1.5 Mbps.
     #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -454,33 +454,33 @@ module Aws::IVS
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_channel({
-    #     name: "ChannelName",
-    #     latency_mode: "NORMAL", # accepts NORMAL, LOW
-    #     type: "BASIC", # accepts BASIC, STANDARD
     #     authorized: false,
+    #     latency_mode: "NORMAL", # accepts NORMAL, LOW
+    #     name: "ChannelName",
     #     recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     type: "BASIC", # accepts BASIC, STANDARD
     #   })
     #
     # @example Response structure
     #
     #   resp.channel.arn #=> String
-    #   resp.channel.name #=> String
-    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
-    #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
-    #   resp.channel.recording_configuration_arn #=> String
-    #   resp.channel.ingest_endpoint #=> String
-    #   resp.channel.playback_url #=> String
     #   resp.channel.authorized #=> Boolean
+    #   resp.channel.ingest_endpoint #=> String
+    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channel.name #=> String
+    #   resp.channel.playback_url #=> String
+    #   resp.channel.recording_configuration_arn #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
+    #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
     #   resp.stream_key.arn #=> String
-    #   resp.stream_key.value #=> String
     #   resp.stream_key.channel_arn #=> String
     #   resp.stream_key.tags #=> Hash
     #   resp.stream_key.tags["TagKey"] #=> String
+    #   resp.stream_key.value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateChannel AWS API Documentation
     #
@@ -494,12 +494,12 @@ module Aws::IVS
     # Creates a new recording configuration, used to enable recording to
     # Amazon S3.
     #
-    # **Known issue:** In the us-east-1 region, if you use the AWS CLI to
-    # create a recording configuration, it returns success even if the S3
-    # bucket is in a different region. In this case, the `state` of the
-    # recording configuration is `CREATE_FAILED` (instead of `ACTIVE`). (In
-    # other regions, the CLI correctly returns failure if the bucket is in a
-    # different region.)
+    # **Known issue:** In the us-east-1 region, if you use the Amazon Web
+    # Services CLI to create a recording configuration, it returns success
+    # even if the S3 bucket is in a different region. In this case, the
+    # `state` of the recording configuration is `CREATE_FAILED` (instead of
+    # `ACTIVE`). (In other regions, the CLI correctly returns failure if the
+    # bucket is in a different region.)
     #
     # **Workaround:** Ensure that your S3 bucket is in the same region as
     # the recording configuration. If you create a recording configuration
@@ -507,13 +507,12 @@ module Aws::IVS
     # configuration and create a new one with an S3 bucket from the correct
     # region.
     #
-    # @option params [String] :name
-    #   An arbitrary string (a nickname) that helps the customer identify that
-    #   resource. The value does not need to be unique.
-    #
     # @option params [required, Types::DestinationConfiguration] :destination_configuration
     #   A complex type that contains a destination configuration for where
     #   recorded video will be stored.
+    #
+    # @option params [String] :name
+    #   Recording-configuration name. The value does not need to be unique.
     #
     # @option params [Hash<String,String>] :tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
@@ -525,12 +524,12 @@ module Aws::IVS
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_recording_configuration({
-    #     name: "RecordingConfigurationName",
     #     destination_configuration: { # required
     #       s3: {
     #         bucket_name: "S3DestinationBucketName", # required
     #       },
     #     },
+    #     name: "RecordingConfigurationName",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -539,8 +538,8 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.recording_configuration.arn #=> String
-    #   resp.recording_configuration.name #=> String
     #   resp.recording_configuration.destination_configuration.s3.bucket_name #=> String
+    #   resp.recording_configuration.name #=> String
     #   resp.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configuration.tags #=> Hash
     #   resp.recording_configuration.tags["TagKey"] #=> String
@@ -585,10 +584,10 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.stream_key.arn #=> String
-    #   resp.stream_key.value #=> String
     #   resp.stream_key.channel_arn #=> String
     #   resp.stream_key.tags #=> Hash
     #   resp.stream_key.tags["TagKey"] #=> String
+    #   resp.stream_key.value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateStreamKey AWS API Documentation
     #
@@ -730,15 +729,15 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.channel.arn #=> String
-    #   resp.channel.name #=> String
-    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
-    #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
-    #   resp.channel.recording_configuration_arn #=> String
-    #   resp.channel.ingest_endpoint #=> String
-    #   resp.channel.playback_url #=> String
     #   resp.channel.authorized #=> Boolean
+    #   resp.channel.ingest_endpoint #=> String
+    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channel.name #=> String
+    #   resp.channel.playback_url #=> String
+    #   resp.channel.recording_configuration_arn #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
+    #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetChannel AWS API Documentation
     #
@@ -775,8 +774,8 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.key_pair.arn #=> String
-    #   resp.key_pair.name #=> String
     #   resp.key_pair.fingerprint #=> String
+    #   resp.key_pair.name #=> String
     #   resp.key_pair.tags #=> Hash
     #   resp.key_pair.tags["TagKey"] #=> String
     #
@@ -807,8 +806,8 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.recording_configuration.arn #=> String
-    #   resp.recording_configuration.name #=> String
     #   resp.recording_configuration.destination_configuration.s3.bucket_name #=> String
+    #   resp.recording_configuration.name #=> String
     #   resp.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configuration.tags #=> Hash
     #   resp.recording_configuration.tags["TagKey"] #=> String
@@ -841,10 +840,10 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.stream.channel_arn #=> String
+    #   resp.stream.health #=> String, one of "HEALTHY", "STARVING", "UNKNOWN"
     #   resp.stream.playback_url #=> String
     #   resp.stream.start_time #=> Time
     #   resp.stream.state #=> String, one of "LIVE", "OFFLINE"
-    #   resp.stream.health #=> String, one of "HEALTHY", "STARVING", "UNKNOWN"
     #   resp.stream.viewer_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStream AWS API Documentation
@@ -874,10 +873,10 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.stream_key.arn #=> String
-    #   resp.stream_key.value #=> String
     #   resp.stream_key.channel_arn #=> String
     #   resp.stream_key.tags #=> Hash
     #   resp.stream_key.tags["TagKey"] #=> String
+    #   resp.stream_key.value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStreamKey AWS API Documentation
     #
@@ -898,13 +897,11 @@ module Aws::IVS
     #
     # [1]: https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html
     #
+    # @option params [String] :name
+    #   Playback-key-pair name. The value does not need to be unique.
+    #
     # @option params [required, String] :public_key_material
     #   The public portion of a customer-generated key pair.
-    #
-    # @option params [String] :name
-    #   An arbitrary string (a nickname) assigned to a playback key pair that
-    #   helps the customer identify that resource. The value does not need to
-    #   be unique.
     #
     # @option params [Hash<String,String>] :tags
     #   Any tags provided with the request are added to the playback key pair
@@ -917,8 +914,8 @@ module Aws::IVS
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_playback_key_pair({
-    #     public_key_material: "PlaybackPublicKeyMaterial", # required
     #     name: "PlaybackKeyPairName",
+    #     public_key_material: "PlaybackPublicKeyMaterial", # required
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -927,8 +924,8 @@ module Aws::IVS
     # @example Response structure
     #
     #   resp.key_pair.arn #=> String
-    #   resp.key_pair.name #=> String
     #   resp.key_pair.fingerprint #=> String
+    #   resp.key_pair.name #=> String
     #   resp.key_pair.tags #=> Hash
     #   resp.key_pair.tags["TagKey"] #=> String
     #
@@ -942,10 +939,11 @@ module Aws::IVS
     end
 
     # Gets summary information about all channels in your account, in the
-    # AWS region where the API request is processed. This list can be
-    # filtered to match a specified name or recording-configuration ARN.
-    # Filters are mutually exclusive and cannot be used together. If you try
-    # to use both filters, you will get an error (409 ConflictException).
+    # Amazon Web Services region where the API request is processed. This
+    # list can be filtered to match a specified name or
+    # recording-configuration ARN. Filters are mutually exclusive and cannot
+    # be used together. If you try to use both filters, you will get an
+    # error (409 ConflictException).
     #
     # @option params [String] :filter_by_name
     #   Filters the channel list to match the specified name.
@@ -954,12 +952,12 @@ module Aws::IVS
     #   Filters the channel list to match the specified
     #   recording-configuration ARN.
     #
+    # @option params [Integer] :max_results
+    #   Maximum number of channels to return. Default: 50.
+    #
     # @option params [String] :next_token
     #   The first channel to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
-    #
-    # @option params [Integer] :max_results
-    #   Maximum number of channels to return. Default: 50.
     #
     # @return [Types::ListChannelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -973,17 +971,17 @@ module Aws::IVS
     #   resp = client.list_channels({
     #     filter_by_name: "ChannelName",
     #     filter_by_recording_configuration_arn: "ChannelRecordingConfigurationArn",
-    #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.channels #=> Array
     #   resp.channels[0].arn #=> String
-    #   resp.channels[0].name #=> String
-    #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
     #   resp.channels[0].authorized #=> Boolean
+    #   resp.channels[0].latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channels[0].name #=> String
     #   resp.channels[0].recording_configuration_arn #=> String
     #   resp.channels[0].tags #=> Hash
     #   resp.channels[0].tags["TagKey"] #=> String
@@ -1006,12 +1004,12 @@ module Aws::IVS
     #
     # [1]: https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html
     #
-    # @option params [String] :next_token
-    #   Maximum number of key pairs to return.
-    #
     # @option params [Integer] :max_results
     #   The first key pair to retrieve. This is used for pagination; see the
     #   `nextToken` response field. Default: 50.
+    #
+    # @option params [String] :next_token
+    #   Maximum number of key pairs to return.
     #
     # @return [Types::ListPlaybackKeyPairsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1023,8 +1021,8 @@ module Aws::IVS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_playback_key_pairs({
-    #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
@@ -1046,39 +1044,40 @@ module Aws::IVS
     end
 
     # Gets summary information about all recording configurations in your
-    # account, in the AWS region where the API request is processed.
+    # account, in the Amazon Web Services region where the API request is
+    # processed.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of recording configurations to return. Default: 50.
     #
     # @option params [String] :next_token
     #   The first recording configuration to retrieve. This is used for
     #   pagination; see the `nextToken` response field.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of recording configurations to return. Default: 50.
-    #
     # @return [Types::ListRecordingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListRecordingConfigurationsResponse#recording_configurations #recording_configurations} => Array&lt;Types::RecordingConfigurationSummary&gt;
     #   * {Types::ListRecordingConfigurationsResponse#next_token #next_token} => String
+    #   * {Types::ListRecordingConfigurationsResponse#recording_configurations #recording_configurations} => Array&lt;Types::RecordingConfigurationSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_recording_configurations({
-    #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.recording_configurations #=> Array
     #   resp.recording_configurations[0].arn #=> String
-    #   resp.recording_configurations[0].name #=> String
     #   resp.recording_configurations[0].destination_configuration.s3.bucket_name #=> String
+    #   resp.recording_configurations[0].name #=> String
     #   resp.recording_configurations[0].state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configurations[0].tags #=> Hash
     #   resp.recording_configurations[0].tags["TagKey"] #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListRecordingConfigurations AWS API Documentation
     #
@@ -1094,17 +1093,17 @@ module Aws::IVS
     # @option params [required, String] :channel_arn
     #   Channel ARN used to filter the list.
     #
+    # @option params [Integer] :max_results
+    #   Maximum number of streamKeys to return. Default: 50.
+    #
     # @option params [String] :next_token
     #   The first stream key to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of streamKeys to return. Default: 50.
-    #
     # @return [Types::ListStreamKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListStreamKeysResponse#stream_keys #stream_keys} => Array&lt;Types::StreamKeySummary&gt;
     #   * {Types::ListStreamKeysResponse#next_token #next_token} => String
+    #   * {Types::ListStreamKeysResponse#stream_keys #stream_keys} => Array&lt;Types::StreamKeySummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1112,18 +1111,18 @@ module Aws::IVS
     #
     #   resp = client.list_stream_keys({
     #     channel_arn: "ChannelArn", # required
-    #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.stream_keys #=> Array
     #   resp.stream_keys[0].arn #=> String
     #   resp.stream_keys[0].channel_arn #=> String
     #   resp.stream_keys[0].tags #=> Hash
     #   resp.stream_keys[0].tags["TagKey"] #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamKeys AWS API Documentation
     #
@@ -1135,38 +1134,38 @@ module Aws::IVS
     end
 
     # Gets summary information about live streams in your account, in the
-    # AWS region where the API request is processed.
+    # Amazon Web Services region where the API request is processed.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of streams to return. Default: 50.
     #
     # @option params [String] :next_token
     #   The first stream to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of streams to return. Default: 50.
-    #
     # @return [Types::ListStreamsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListStreamsResponse#streams #streams} => Array&lt;Types::StreamSummary&gt;
     #   * {Types::ListStreamsResponse#next_token #next_token} => String
+    #   * {Types::ListStreamsResponse#streams #streams} => Array&lt;Types::StreamSummary&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_streams({
-    #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     next_token: "PaginationToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.streams #=> Array
     #   resp.streams[0].channel_arn #=> String
-    #   resp.streams[0].state #=> String, one of "LIVE", "OFFLINE"
     #   resp.streams[0].health #=> String, one of "HEALTHY", "STARVING", "UNKNOWN"
-    #   resp.streams[0].viewer_count #=> Integer
     #   resp.streams[0].start_time #=> Time
-    #   resp.next_token #=> String
+    #   resp.streams[0].state #=> String, one of "LIVE", "OFFLINE"
+    #   resp.streams[0].viewer_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreams AWS API Documentation
     #
@@ -1177,38 +1176,25 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Gets information about AWS tags for the specified ARN.
+    # Gets information about Amazon Web Services tags for the specified ARN.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the resource to be retrieved.
     #
-    # @option params [String] :next_token
-    #   The first tag to retrieve. This is used for pagination; see the
-    #   `nextToken` response field.
-    #
-    # @option params [Integer] :max_results
-    #   Maximum number of tags to return. Default: 50.
-    #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
     #     resource_arn: "ResourceArn", # required
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListTagsForResource AWS API Documentation
     #
@@ -1219,12 +1205,12 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Inserts metadata into the active stream of the specified channel. A
-    # maximum of 5 requests per second per channel is allowed, each with a
+    # Inserts metadata into the active stream of the specified channel. At
+    # most 5 requests per second per channel are allowed, each with a
     # maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we
-    # recommend batching your data into a single PutMetadata call.) Also see
-    # [Embedding Metadata within a Video Stream][1] in the *Amazon IVS User
-    # Guide*.
+    # recommend batching your data into a single PutMetadata call.) At most
+    # 155 requests per second per account are allowed. Also see [Embedding
+    # Metadata within a Video Stream][1] in the *Amazon IVS User Guide*.
     #
     #
     #
@@ -1285,7 +1271,8 @@ module Aws::IVS
       req.send_request(options)
     end
 
-    # Adds or updates tags for the AWS resource with the specified ARN.
+    # Adds or updates tags for the Amazon Web Services resource with the
+    # specified ARN.
     #
     # @option params [required, String] :resource_arn
     #   ARN of the resource for which tags are to be added or updated.
@@ -1346,14 +1333,22 @@ module Aws::IVS
     # @option params [required, String] :arn
     #   ARN of the channel to be updated.
     #
-    # @option params [String] :name
-    #   Channel name.
+    # @option params [Boolean] :authorized
+    #   Whether the channel is private (enabled for playback authorization).
     #
     # @option params [String] :latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live video
     #   up to Full HD. Use `LOW` for near-real-time interaction with viewers.
     #   (Note: In the Amazon IVS console, `LOW` and `NORMAL` correspond to
     #   Ultra-low and Standard, respectively.)
+    #
+    # @option params [String] :name
+    #   Channel name.
+    #
+    # @option params [String] :recording_configuration_arn
+    #   Recording-configuration ARN. If this is set to an empty string,
+    #   recording is disabled. A value other than an empty string indicates
+    #   that recording is enabled
     #
     # @option params [String] :type
     #   Channel type, which determines the allowable resolution and bitrate.
@@ -1362,21 +1357,13 @@ module Aws::IVS
     #
     #   * `STANDARD`\: Multiple qualities are generated from the original
     #     input, to automatically give viewers the best experience for their
-    #     devices and network conditions. Vertical resolution can be up to
-    #     1080 and bitrate can be up to 8.5 Mbps.
+    #     devices and network conditions. Resolution can be up to 1080p and
+    #     bitrate can be up to 8.5 Mbps. Audio is transcoded only for
+    #     renditions 360p and below; above that, audio is passed through.
     #
     #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
     #     viewer’s video-quality choice is limited to the original input.
-    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
-    #     Mbps.
-    #
-    # @option params [Boolean] :authorized
-    #   Whether the channel is private (enabled for playback authorization).
-    #
-    # @option params [String] :recording_configuration_arn
-    #   Recording-configuration ARN. If this is set to an empty string,
-    #   recording is disabled. A value other than an empty string indicates
-    #   that recording is enabled
+    #     Resolution can be up to 480p and bitrate can be up to 1.5 Mbps.
     #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1386,25 +1373,25 @@ module Aws::IVS
     #
     #   resp = client.update_channel({
     #     arn: "ChannelArn", # required
-    #     name: "ChannelName",
-    #     latency_mode: "NORMAL", # accepts NORMAL, LOW
-    #     type: "BASIC", # accepts BASIC, STANDARD
     #     authorized: false,
+    #     latency_mode: "NORMAL", # accepts NORMAL, LOW
+    #     name: "ChannelName",
     #     recording_configuration_arn: "ChannelRecordingConfigurationArn",
+    #     type: "BASIC", # accepts BASIC, STANDARD
     #   })
     #
     # @example Response structure
     #
     #   resp.channel.arn #=> String
-    #   resp.channel.name #=> String
-    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
-    #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
-    #   resp.channel.recording_configuration_arn #=> String
-    #   resp.channel.ingest_endpoint #=> String
-    #   resp.channel.playback_url #=> String
     #   resp.channel.authorized #=> Boolean
+    #   resp.channel.ingest_endpoint #=> String
+    #   resp.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.channel.name #=> String
+    #   resp.channel.playback_url #=> String
+    #   resp.channel.recording_configuration_arn #=> String
     #   resp.channel.tags #=> Hash
     #   resp.channel.tags["TagKey"] #=> String
+    #   resp.channel.type #=> String, one of "BASIC", "STANDARD"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannel AWS API Documentation
     #
@@ -1428,7 +1415,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

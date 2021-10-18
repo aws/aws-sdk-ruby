@@ -349,7 +349,7 @@ module Aws::QuickSight
     #
     #   resp = client.cancel_ingestion({
     #     aws_account_id: "AwsAccountId", # required
-    #     data_set_id: "string", # required
+    #     data_set_id: "String", # required
     #     ingestion_id: "IngestionId", # required
     #   })
     #
@@ -370,7 +370,7 @@ module Aws::QuickSight
     end
 
     # Creates Amazon QuickSight customizations the current Amazon Web
-    # Services Region;. Currently, you can add a custom default theme by
+    # Services Region. Currently, you can add a custom default theme by
     # using the `CreateAccountCustomization` or `UpdateAccountCustomization`
     # API operation. To further customize Amazon QuickSight by removing
     # Amazon QuickSight sample assets and videos for all new users, see
@@ -407,7 +407,7 @@ module Aws::QuickSight
     #
     # @option params [required, Types::AccountCustomization] :account_customization
     #   The Amazon QuickSight customizations you're adding in the current
-    #   Amazon Web Services Region;. You can add these to an Amazon Web
+    #   Amazon Web Services Region. You can add these to an Amazon Web
     #   Services account and a Amazon QuickSight namespace.
     #
     #   For example, you can add a default theme by setting
@@ -630,7 +630,7 @@ module Aws::QuickSight
     #   the CreateTemplate API operation. For `SourceTemplate`, specify the
     #   Amazon Resource Name (ARN) of the source template. The
     #   `SourceTemplate`ARN can contain any Amazon Web Services account and
-    #   any Amazon QuickSight-supported Amazon Web Services Region;.
+    #   any Amazon QuickSight-supported Amazon Web Services Region.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` to list the
     #   replacement datasets for the placeholders listed in the original. The
@@ -771,7 +771,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   An ID for the dataset that you want to create. This ID is unique per
-    #   Amazon Web Services Region; for each Amazon Web Services account.
+    #   Amazon Web Services Region for each Amazon Web Services account.
     #
     # @option params [required, String] :name
     #   The display name for the dataset.
@@ -1023,7 +1023,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_source_id
     #   An ID for the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account.
+    #   Region for each Amazon Web Services account.
     #
     # @option params [required, String] :name
     #   A display name for the data source.
@@ -1032,7 +1032,7 @@ module Aws::QuickSight
     #   The type of the data source. To return a list of all data sources, use
     #   `ListDataSources`.
     #
-    #   Use `AMAZON_ELASTICSEARCH` for Amazon Elasticsearch Service.
+    #   Use `AMAZON_ELASTICSEARCH` for Amazon OpenSearch Service.
     #
     # @option params [Types::DataSourceParameters] :data_source_parameters
     #   The parameters that Amazon QuickSight uses to connect to your
@@ -1632,6 +1632,9 @@ module Aws::QuickSight
     # @option params [required, String] :aws_account_id
     #   The Amazon Web Services account ID.
     #
+    # @option params [String] :ingestion_type
+    #   The type of ingestion that you want to create.
+    #
     # @return [Types::CreateIngestionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIngestionResponse#arn #arn} => String
@@ -1643,9 +1646,10 @@ module Aws::QuickSight
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_ingestion({
-    #     data_set_id: "string", # required
+    #     data_set_id: "String", # required
     #     ingestion_id: "IngestionId", # required
     #     aws_account_id: "AwsAccountId", # required
+    #     ingestion_type: "INCREMENTAL_REFRESH", # accepts INCREMENTAL_REFRESH, FULL_REFRESH
     #   })
     #
     # @example Response structure
@@ -1771,7 +1775,7 @@ module Aws::QuickSight
     #   For `SourceTemplate`, specify the ARN of the source template. For
     #   `SourceAnalysis`, specify the ARN of the source analysis. The
     #   `SourceTemplate` ARN can contain any Amazon Web Services account and
-    #   any Amazon QuickSight-supported Amazon Web Services Region;.
+    #   any Amazon QuickSight-supported Amazon Web Services Region.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` or
     #   `SourceAnalysis` to list the replacement datasets for the placeholders
@@ -2082,13 +2086,13 @@ module Aws::QuickSight
     end
 
     # Deletes all Amazon QuickSight customizations in this Amazon Web
-    # Services Region; for the specified Amazon Web Services account and
+    # Services Region for the specified Amazon Web Services account and
     # Amazon QuickSight namespace.
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the Amazon Web Services account that you want to delete
     #   Amazon QuickSight customizations from in this Amazon Web Services
-    #   Region;.
+    #   Region.
     #
     # @option params [String] :namespace
     #   The Amazon QuickSight namespace that you're deleting the
@@ -2242,7 +2246,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to create. This ID is unique per
-    #   Amazon Web Services Region; for each Amazon Web Services account.
+    #   Amazon Web Services Region for each Amazon Web Services account.
     #
     # @return [Types::DeleteDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2282,7 +2286,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_source_id
     #   The ID of the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account.
+    #   Region for each Amazon Web Services account.
     #
     # @return [Types::DeleteDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2836,7 +2840,7 @@ module Aws::QuickSight
 
     # Describes the customizations associated with the provided Amazon Web
     # Services account and Amazon Amazon QuickSight namespace in an Amazon
-    # Web Services Region;. The Amazon QuickSight console evaluates which
+    # Web Services Region. The Amazon QuickSight console evaluates which
     # customizations to apply by running this API operation with the
     # `Resolved` flag included.
     #
@@ -2845,21 +2849,21 @@ module Aws::QuickSight
     #
     # * `Amazon Web Services account` - The Amazon Web Services account
     #   exists at the top of the hierarchy. It has the potential to use all
-    #   of the Amazon Web Services Regions; and AWS Services. When you
+    #   of the Amazon Web Services Regions and AWS Services. When you
     #   subscribe to Amazon QuickSight, you choose one Amazon Web Services
-    #   Region; to use as your home Region. That's where your free SPICE
+    #   Region to use as your home Region. That's where your free SPICE
     #   capacity is located. You can use Amazon QuickSight in any supported
-    #   Amazon Web Services Region;.
+    #   Amazon Web Services Region.
     #
-    # * `Amazon Web Services Region;` - In each Amazon Web Services Region;
+    # * `Amazon Web Services Region` - In each Amazon Web Services Region
     #   where you sign in to Amazon QuickSight at least once, Amazon
     #   QuickSight acts as a separate instance of the same service. If you
     #   have a user directory, it resides in us-east-1, which is the US East
     #   (N. Virginia). Generally speaking, these users have access to Amazon
-    #   QuickSight in any Amazon Web Services Region;, unless they are
+    #   QuickSight in any Amazon Web Services Region, unless they are
     #   constrained to a namespace.
     #
-    #   To run the command in a different Amazon Web Services Region;, you
+    #   To run the command in a different Amazon Web Services Region, you
     #   change your Region settings. If you're using the AWS CLI, you can
     #   use one of the following options:
     #
@@ -2868,8 +2872,8 @@ module Aws::QuickSight
     #   * Use [named profiles][2].
     #
     #   * Run `aws configure` to change your default Amazon Web Services
-    #     Region;. Use Enter to key the same settings for your keys. For
-    #     more information, see [Configuring the AWS CLI][3].
+    #     Region. Use Enter to key the same settings for your keys. For more
+    #     information, see [Configuring the AWS CLI][3].
     #
     # * `Namespace` - A Amazon QuickSight namespace is a partition that
     #   contains users and assets (data sources, datasets, dashboards, and
@@ -2877,16 +2881,16 @@ module Aws::QuickSight
     #   groups must also be part of the same namespace. People who share a
     #   namespace are completely isolated from users and assets in other
     #   namespaces, even if they are in the same Amazon Web Services account
-    #   and Amazon Web Services Region;.
+    #   and Amazon Web Services Region.
     #
-    # * `Applied customizations` - Within an Amazon Web Services Region;, a
+    # * `Applied customizations` - Within an Amazon Web Services Region, a
     #   set of Amazon QuickSight customizations can apply to an Amazon Web
     #   Services account or to a namespace. Settings that you apply to a
     #   namespace override settings that you apply to an Amazon Web Services
     #   account. All settings are isolated to a single Amazon Web Services
-    #   Region;. To apply them in other Amazon Web Services Regions;, run
-    #   the `CreateAccountCustomization` command in each Amazon Web Services
-    #   Region; where you want to apply the same customizations.
+    #   Region. To apply them in other Amazon Web Services Regions, run the
+    #   `CreateAccountCustomization` command in each Amazon Web Services
+    #   Region where you want to apply the same customizations.
     #
     #
     #
@@ -3198,7 +3202,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to create. This ID is unique per
-    #   Amazon Web Services Region; for each Amazon Web Services account.
+    #   Amazon Web Services Region for each Amazon Web Services account.
     #
     # @return [Types::DescribeDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3328,7 +3332,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to create. This ID is unique per
-    #   Amazon Web Services Region; for each Amazon Web Services account.
+    #   Amazon Web Services Region for each Amazon Web Services account.
     #
     # @return [Types::DescribeDataSetPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3372,7 +3376,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_source_id
     #   The ID of the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account.
+    #   Region for each Amazon Web Services account.
     #
     # @return [Types::DescribeDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3516,7 +3520,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_source_id
     #   The ID of the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account.
+    #   Region for each Amazon Web Services account.
     #
     # @return [Types::DescribeDataSourcePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3800,7 +3804,7 @@ module Aws::QuickSight
     #
     #   resp = client.describe_ingestion({
     #     aws_account_id: "AwsAccountId", # required
-    #     data_set_id: "string", # required
+    #     data_set_id: "String", # required
     #     ingestion_id: "IngestionId", # required
     #   })
     #
@@ -3809,10 +3813,11 @@ module Aws::QuickSight
     #   resp.ingestion.arn #=> String
     #   resp.ingestion.ingestion_id #=> String
     #   resp.ingestion.ingestion_status #=> String, one of "INITIALIZED", "QUEUED", "RUNNING", "FAILED", "COMPLETED", "CANCELLED"
-    #   resp.ingestion.error_info.type #=> String, one of "FAILURE_TO_ASSUME_ROLE", "INGESTION_SUPERSEDED", "INGESTION_CANCELED", "DATA_SET_DELETED", "DATA_SET_NOT_SPICE", "S3_UPLOADED_FILE_DELETED", "S3_MANIFEST_ERROR", "DATA_TOLERANCE_EXCEPTION", "SPICE_TABLE_NOT_FOUND", "DATA_SET_SIZE_LIMIT_EXCEEDED", "ROW_SIZE_LIMIT_EXCEEDED", "ACCOUNT_CAPACITY_LIMIT_EXCEEDED", "CUSTOMER_ERROR", "DATA_SOURCE_NOT_FOUND", "IAM_ROLE_NOT_AVAILABLE", "CONNECTION_FAILURE", "SQL_TABLE_NOT_FOUND", "PERMISSION_DENIED", "SSL_CERTIFICATE_VALIDATION_FAILURE", "OAUTH_TOKEN_FAILURE", "SOURCE_API_LIMIT_EXCEEDED_FAILURE", "PASSWORD_AUTHENTICATION_FAILURE", "SQL_SCHEMA_MISMATCH_ERROR", "INVALID_DATE_FORMAT", "INVALID_DATAPREP_SYNTAX", "SOURCE_RESOURCE_LIMIT_EXCEEDED", "SQL_INVALID_PARAMETER_VALUE", "QUERY_TIMEOUT", "SQL_NUMERIC_OVERFLOW", "UNRESOLVABLE_HOST", "UNROUTABLE_HOST", "SQL_EXCEPTION", "S3_FILE_INACCESSIBLE", "IOT_FILE_NOT_FOUND", "IOT_DATA_SET_FILE_EMPTY", "INVALID_DATA_SOURCE_CONFIG", "DATA_SOURCE_AUTH_FAILED", "DATA_SOURCE_CONNECTION_FAILED", "FAILURE_TO_PROCESS_JSON_FILE", "INTERNAL_SERVICE_ERROR"
+    #   resp.ingestion.error_info.type #=> String, one of "FAILURE_TO_ASSUME_ROLE", "INGESTION_SUPERSEDED", "INGESTION_CANCELED", "DATA_SET_DELETED", "DATA_SET_NOT_SPICE", "S3_UPLOADED_FILE_DELETED", "S3_MANIFEST_ERROR", "DATA_TOLERANCE_EXCEPTION", "SPICE_TABLE_NOT_FOUND", "DATA_SET_SIZE_LIMIT_EXCEEDED", "ROW_SIZE_LIMIT_EXCEEDED", "ACCOUNT_CAPACITY_LIMIT_EXCEEDED", "CUSTOMER_ERROR", "DATA_SOURCE_NOT_FOUND", "IAM_ROLE_NOT_AVAILABLE", "CONNECTION_FAILURE", "SQL_TABLE_NOT_FOUND", "PERMISSION_DENIED", "SSL_CERTIFICATE_VALIDATION_FAILURE", "OAUTH_TOKEN_FAILURE", "SOURCE_API_LIMIT_EXCEEDED_FAILURE", "PASSWORD_AUTHENTICATION_FAILURE", "SQL_SCHEMA_MISMATCH_ERROR", "INVALID_DATE_FORMAT", "INVALID_DATAPREP_SYNTAX", "SOURCE_RESOURCE_LIMIT_EXCEEDED", "SQL_INVALID_PARAMETER_VALUE", "QUERY_TIMEOUT", "SQL_NUMERIC_OVERFLOW", "UNRESOLVABLE_HOST", "UNROUTABLE_HOST", "SQL_EXCEPTION", "S3_FILE_INACCESSIBLE", "IOT_FILE_NOT_FOUND", "IOT_DATA_SET_FILE_EMPTY", "INVALID_DATA_SOURCE_CONFIG", "DATA_SOURCE_AUTH_FAILED", "DATA_SOURCE_CONNECTION_FAILED", "FAILURE_TO_PROCESS_JSON_FILE", "INTERNAL_SERVICE_ERROR", "REFRESH_SUPPRESSED_BY_EDIT", "PERMISSION_NOT_FOUND", "ELASTICSEARCH_CURSOR_NOT_ENABLED", "CURSOR_NOT_ENABLED"
     #   resp.ingestion.error_info.message #=> String
     #   resp.ingestion.row_info.rows_ingested #=> Integer
     #   resp.ingestion.row_info.rows_dropped #=> Integer
+    #   resp.ingestion.row_info.total_rows_in_dataset #=> Integer
     #   resp.ingestion.queue_info.waiting_on_ingestion #=> String
     #   resp.ingestion.queue_info.queued_ingestion #=> String
     #   resp.ingestion.created_time #=> Time
@@ -3829,6 +3834,43 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def describe_ingestion(params = {}, options = {})
       req = build_request(:describe_ingestion, params)
+      req.send_request(options)
+    end
+
+    # Provides a summary and status of IP Rules.
+    #
+    # @option params [required, String] :aws_account_id
+    #   Your AWS account ID.
+    #
+    # @return [Types::DescribeIpRestrictionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeIpRestrictionResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::DescribeIpRestrictionResponse#ip_restriction_rule_map #ip_restriction_rule_map} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeIpRestrictionResponse#enabled #enabled} => Boolean
+    #   * {Types::DescribeIpRestrictionResponse#request_id #request_id} => String
+    #   * {Types::DescribeIpRestrictionResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_ip_restriction({
+    #     aws_account_id: "AwsAccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aws_account_id #=> String
+    #   resp.ip_restriction_rule_map #=> Hash
+    #   resp.ip_restriction_rule_map["CIDR"] #=> String
+    #   resp.enabled #=> Boolean
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeIpRestriction AWS API Documentation
+    #
+    # @overload describe_ip_restriction(params = {})
+    # @param [Hash] params ({})
+    def describe_ip_restriction(params = {}, options = {})
+      req = build_request(:describe_ip_restriction, params)
       req.send_request(options)
     end
 
@@ -4852,7 +4894,7 @@ module Aws::QuickSight
     end
 
     # Lists all of the datasets belonging to the current Amazon Web Services
-    # account in an Amazon Web Services Region;.
+    # account in an Amazon Web Services Region.
     #
     # The permissions resource is
     # `arn:aws:quicksight:region:aws-account-id:dataset/*`.
@@ -4913,7 +4955,7 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists data sources in current Amazon Web Services Region; that belong
+    # Lists data sources in current Amazon Web Services Region that belong
     # to this Amazon Web Services account.
     #
     # @option params [required, String] :aws_account_id
@@ -5408,8 +5450,8 @@ module Aws::QuickSight
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ingestions({
-    #     data_set_id: "string", # required
-    #     next_token: "string",
+    #     data_set_id: "String", # required
+    #     next_token: "String",
     #     aws_account_id: "AwsAccountId", # required
     #     max_results: 1,
     #   })
@@ -5420,10 +5462,11 @@ module Aws::QuickSight
     #   resp.ingestions[0].arn #=> String
     #   resp.ingestions[0].ingestion_id #=> String
     #   resp.ingestions[0].ingestion_status #=> String, one of "INITIALIZED", "QUEUED", "RUNNING", "FAILED", "COMPLETED", "CANCELLED"
-    #   resp.ingestions[0].error_info.type #=> String, one of "FAILURE_TO_ASSUME_ROLE", "INGESTION_SUPERSEDED", "INGESTION_CANCELED", "DATA_SET_DELETED", "DATA_SET_NOT_SPICE", "S3_UPLOADED_FILE_DELETED", "S3_MANIFEST_ERROR", "DATA_TOLERANCE_EXCEPTION", "SPICE_TABLE_NOT_FOUND", "DATA_SET_SIZE_LIMIT_EXCEEDED", "ROW_SIZE_LIMIT_EXCEEDED", "ACCOUNT_CAPACITY_LIMIT_EXCEEDED", "CUSTOMER_ERROR", "DATA_SOURCE_NOT_FOUND", "IAM_ROLE_NOT_AVAILABLE", "CONNECTION_FAILURE", "SQL_TABLE_NOT_FOUND", "PERMISSION_DENIED", "SSL_CERTIFICATE_VALIDATION_FAILURE", "OAUTH_TOKEN_FAILURE", "SOURCE_API_LIMIT_EXCEEDED_FAILURE", "PASSWORD_AUTHENTICATION_FAILURE", "SQL_SCHEMA_MISMATCH_ERROR", "INVALID_DATE_FORMAT", "INVALID_DATAPREP_SYNTAX", "SOURCE_RESOURCE_LIMIT_EXCEEDED", "SQL_INVALID_PARAMETER_VALUE", "QUERY_TIMEOUT", "SQL_NUMERIC_OVERFLOW", "UNRESOLVABLE_HOST", "UNROUTABLE_HOST", "SQL_EXCEPTION", "S3_FILE_INACCESSIBLE", "IOT_FILE_NOT_FOUND", "IOT_DATA_SET_FILE_EMPTY", "INVALID_DATA_SOURCE_CONFIG", "DATA_SOURCE_AUTH_FAILED", "DATA_SOURCE_CONNECTION_FAILED", "FAILURE_TO_PROCESS_JSON_FILE", "INTERNAL_SERVICE_ERROR"
+    #   resp.ingestions[0].error_info.type #=> String, one of "FAILURE_TO_ASSUME_ROLE", "INGESTION_SUPERSEDED", "INGESTION_CANCELED", "DATA_SET_DELETED", "DATA_SET_NOT_SPICE", "S3_UPLOADED_FILE_DELETED", "S3_MANIFEST_ERROR", "DATA_TOLERANCE_EXCEPTION", "SPICE_TABLE_NOT_FOUND", "DATA_SET_SIZE_LIMIT_EXCEEDED", "ROW_SIZE_LIMIT_EXCEEDED", "ACCOUNT_CAPACITY_LIMIT_EXCEEDED", "CUSTOMER_ERROR", "DATA_SOURCE_NOT_FOUND", "IAM_ROLE_NOT_AVAILABLE", "CONNECTION_FAILURE", "SQL_TABLE_NOT_FOUND", "PERMISSION_DENIED", "SSL_CERTIFICATE_VALIDATION_FAILURE", "OAUTH_TOKEN_FAILURE", "SOURCE_API_LIMIT_EXCEEDED_FAILURE", "PASSWORD_AUTHENTICATION_FAILURE", "SQL_SCHEMA_MISMATCH_ERROR", "INVALID_DATE_FORMAT", "INVALID_DATAPREP_SYNTAX", "SOURCE_RESOURCE_LIMIT_EXCEEDED", "SQL_INVALID_PARAMETER_VALUE", "QUERY_TIMEOUT", "SQL_NUMERIC_OVERFLOW", "UNRESOLVABLE_HOST", "UNROUTABLE_HOST", "SQL_EXCEPTION", "S3_FILE_INACCESSIBLE", "IOT_FILE_NOT_FOUND", "IOT_DATA_SET_FILE_EMPTY", "INVALID_DATA_SOURCE_CONFIG", "DATA_SOURCE_AUTH_FAILED", "DATA_SOURCE_CONNECTION_FAILED", "FAILURE_TO_PROCESS_JSON_FILE", "INTERNAL_SERVICE_ERROR", "REFRESH_SUPPRESSED_BY_EDIT", "PERMISSION_NOT_FOUND", "ELASTICSEARCH_CURSOR_NOT_ENABLED", "CURSOR_NOT_ENABLED"
     #   resp.ingestions[0].error_info.message #=> String
     #   resp.ingestions[0].row_info.rows_ingested #=> Integer
     #   resp.ingestions[0].row_info.rows_dropped #=> Integer
+    #   resp.ingestions[0].row_info.total_rows_in_dataset #=> Integer
     #   resp.ingestions[0].queue_info.waiting_on_ingestion #=> String
     #   resp.ingestions[0].queue_info.queued_ingestion #=> String
     #   resp.ingestions[0].created_time #=> Time
@@ -6487,7 +6530,7 @@ module Aws::QuickSight
     end
 
     # Updates Amazon QuickSight customizations the current Amazon Web
-    # Services Region;. Currently, the only customization you can use is a
+    # Services Region. Currently, the only customization you can use is a
     # theme.
     #
     # You can use customizations for your Amazon Web Services account or, if
@@ -6507,7 +6550,7 @@ module Aws::QuickSight
     #
     # @option params [required, Types::AccountCustomization] :account_customization
     #   The Amazon QuickSight customizations you're updating in the current
-    #   Amazon Web Services Region;.
+    #   Amazon Web Services Region.
     #
     # @return [Types::UpdateAccountCustomizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6785,7 +6828,7 @@ module Aws::QuickSight
     #   the CreateTemplate API operation. For `SourceTemplate`, specify the
     #   Amazon Resource Name (ARN) of the source template. The
     #   `SourceTemplate` ARN can contain any Amazon Web Services account and
-    #   any Amazon QuickSight-supported Amazon Web Services Region;.
+    #   any Amazon QuickSight-supported Amazon Web Services Region.
     #
     #   Use the `DataSetReferences` entity within `SourceTemplate` to list the
     #   replacement datasets for the placeholders listed in the original. The
@@ -7021,7 +7064,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to update. This ID is unique per
-    #   Amazon Web Services Region; for each Amazon Web Services account.
+    #   Amazon Web Services Region for each Amazon Web Services account.
     #
     # @option params [required, String] :name
     #   The display name for the dataset.
@@ -7256,7 +7299,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset whose permissions you want to update. This ID
-    #   is unique per Amazon Web Services Region; for each Amazon Web Services
+    #   is unique per Amazon Web Services Region for each Amazon Web Services
     #   account.
     #
     # @option params [Array<Types::ResourcePermission>] :grant_permissions
@@ -7314,7 +7357,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_source_id
     #   The ID of the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account.
+    #   Region for each Amazon Web Services account.
     #
     # @option params [required, String] :name
     #   A display name for the data source.
@@ -7579,7 +7622,7 @@ module Aws::QuickSight
     #
     # @option params [required, String] :data_source_id
     #   The ID of the data source. This ID is unique per Amazon Web Services
-    #   Region; for each Amazon Web Services account.
+    #   Region for each Amazon Web Services account.
     #
     # @option params [Array<Types::ResourcePermission>] :grant_permissions
     #   A list of resource permissions that you want to grant on the data
@@ -7859,6 +7902,48 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def update_iam_policy_assignment(params = {}, options = {})
       req = build_request(:update_iam_policy_assignment, params)
+      req.send_request(options)
+    end
+
+    # Updates content and status of IP Rules.
+    #
+    # @option params [required, String] :aws_account_id
+    #   Your AWS account ID.
+    #
+    # @option params [Hash<String,String>] :ip_restriction_rule_map
+    #   Describes updated IP rules.
+    #
+    # @option params [Boolean] :enabled
+    #   Whether or not IP rules are enabled.
+    #
+    # @return [Types::UpdateIpRestrictionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateIpRestrictionResponse#aws_account_id #aws_account_id} => String
+    #   * {Types::UpdateIpRestrictionResponse#request_id #request_id} => String
+    #   * {Types::UpdateIpRestrictionResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ip_restriction({
+    #     aws_account_id: "AwsAccountId", # required
+    #     ip_restriction_rule_map: {
+    #       "CIDR" => "IpRestrictionRuleDescription",
+    #     },
+    #     enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aws_account_id #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateIpRestriction AWS API Documentation
+    #
+    # @overload update_ip_restriction(params = {})
+    # @param [Hash] params ({})
+    def update_ip_restriction(params = {}, options = {})
+      req = build_request(:update_ip_restriction, params)
       req.send_request(options)
     end
 
@@ -8465,7 +8550,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2021-10-18)
+------------------
+
+* Feature - Bug fix: remove unsupported maxResults and nextToken pagination parameters from ListTagsForResource
+
 1.12.0 (2021-09-01)
 ------------------
 

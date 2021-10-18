@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-10-18)
+------------------
+
+* Feature - AWS QuickSight Service  Features    - Add IP Restriction UI and public APIs support.
+
 1.54.0 (2021-09-10)
 ------------------
 

@@ -48,6 +48,6 @@ require_relative 'aws-sdk-workmailmessageflow/customizations'
 # @!group service
 module Aws::WorkMailMessageFlow
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end

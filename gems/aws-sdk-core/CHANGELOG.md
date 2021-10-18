@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.121.2 (2021-10-18)
+------------------
+
 * Issue - Fix an issue where Rest JSON services do not have a `Content-Type` header.
 
 * Issue - Remove blank `Content-Type` header from Net::HTTP handler, and prevent a default from being set.

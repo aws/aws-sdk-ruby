@@ -77,7 +77,6 @@ module Aws::IVS
     MaxRecordingConfigurationResults = Shapes::IntegerShape.new(name: 'MaxRecordingConfigurationResults')
     MaxStreamKeyResults = Shapes::IntegerShape.new(name: 'MaxStreamKeyResults')
     MaxStreamResults = Shapes::IntegerShape.new(name: 'MaxStreamResults')
-    MaxTagResults = Shapes::IntegerShape.new(name: 'MaxTagResults')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PendingVerification = Shapes::StructureShape.new(name: 'PendingVerification')
     PlaybackKeyPair = Shapes::StructureShape.new(name: 'PlaybackKeyPair')
@@ -118,7 +117,6 @@ module Aws::IVS
     StreamSummary = Shapes::StructureShape.new(name: 'StreamSummary')
     StreamUnavailable = Shapes::StructureShape.new(name: 'StreamUnavailable')
     StreamViewerCount = Shapes::IntegerShape.new(name: 'StreamViewerCount')
-    String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -154,19 +152,19 @@ module Aws::IVS
     BatchGetStreamKeyRequest.add_member(:arns, Shapes::ShapeRef.new(shape: StreamKeyArnList, required: true, location_name: "arns"))
     BatchGetStreamKeyRequest.struct_class = Types::BatchGetStreamKeyRequest
 
-    BatchGetStreamKeyResponse.add_member(:stream_keys, Shapes::ShapeRef.new(shape: StreamKeys, location_name: "streamKeys"))
     BatchGetStreamKeyResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchErrors, location_name: "errors"))
+    BatchGetStreamKeyResponse.add_member(:stream_keys, Shapes::ShapeRef.new(shape: StreamKeys, location_name: "streamKeys"))
     BatchGetStreamKeyResponse.struct_class = Types::BatchGetStreamKeyResponse
 
     Channel.add_member(:arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "arn"))
-    Channel.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    Channel.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
-    Channel.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
-    Channel.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
-    Channel.add_member(:ingest_endpoint, Shapes::ShapeRef.new(shape: IngestEndpoint, location_name: "ingestEndpoint"))
-    Channel.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
     Channel.add_member(:authorized, Shapes::ShapeRef.new(shape: IsAuthorized, location_name: "authorized"))
+    Channel.add_member(:ingest_endpoint, Shapes::ShapeRef.new(shape: IngestEndpoint, location_name: "ingestEndpoint"))
+    Channel.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
+    Channel.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
+    Channel.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
+    Channel.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     Channel.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    Channel.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     Channel.struct_class = Types::Channel
 
     ChannelArnList.member = Shapes::ShapeRef.new(shape: ChannelArn)
@@ -177,9 +175,9 @@ module Aws::IVS
     ChannelNotBroadcasting.struct_class = Types::ChannelNotBroadcasting
 
     ChannelSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "arn"))
-    ChannelSummary.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    ChannelSummary.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
     ChannelSummary.add_member(:authorized, Shapes::ShapeRef.new(shape: IsAuthorized, location_name: "authorized"))
+    ChannelSummary.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
+    ChannelSummary.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
     ChannelSummary.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     ChannelSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ChannelSummary.struct_class = Types::ChannelSummary
@@ -189,20 +187,20 @@ module Aws::IVS
     ConflictException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    CreateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
-    CreateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     CreateChannelRequest.add_member(:authorized, Shapes::ShapeRef.new(shape: Boolean, location_name: "authorized"))
+    CreateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
+    CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
     CreateChannelRequest.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     CreateChannelResponse.add_member(:stream_key, Shapes::ShapeRef.new(shape: StreamKey, location_name: "streamKey"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
 
-    CreateRecordingConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
     CreateRecordingConfigurationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
+    CreateRecordingConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
     CreateRecordingConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateRecordingConfigurationRequest.struct_class = Types::CreateRecordingConfigurationRequest
 
@@ -263,8 +261,8 @@ module Aws::IVS
     GetStreamResponse.add_member(:stream, Shapes::ShapeRef.new(shape: Stream, location_name: "stream"))
     GetStreamResponse.struct_class = Types::GetStreamResponse
 
-    ImportPlaybackKeyPairRequest.add_member(:public_key_material, Shapes::ShapeRef.new(shape: PlaybackPublicKeyMaterial, required: true, location_name: "publicKeyMaterial"))
     ImportPlaybackKeyPairRequest.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackKeyPairName, location_name: "name"))
+    ImportPlaybackKeyPairRequest.add_member(:public_key_material, Shapes::ShapeRef.new(shape: PlaybackPublicKeyMaterial, required: true, location_name: "publicKeyMaterial"))
     ImportPlaybackKeyPairRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ImportPlaybackKeyPairRequest.struct_class = Types::ImportPlaybackKeyPairRequest
 
@@ -276,62 +274,59 @@ module Aws::IVS
 
     ListChannelsRequest.add_member(:filter_by_name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "filterByName"))
     ListChannelsRequest.add_member(:filter_by_recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "filterByRecordingConfigurationArn"))
-    ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxChannelResults, location_name: "maxResults"))
+    ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListChannelsRequest.struct_class = Types::ListChannelsRequest
 
     ListChannelsResponse.add_member(:channels, Shapes::ShapeRef.new(shape: ChannelList, required: true, location_name: "channels"))
     ListChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListChannelsResponse.struct_class = Types::ListChannelsResponse
 
-    ListPlaybackKeyPairsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPlaybackKeyPairsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPlaybackKeyPairResults, location_name: "maxResults"))
+    ListPlaybackKeyPairsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPlaybackKeyPairsRequest.struct_class = Types::ListPlaybackKeyPairsRequest
 
     ListPlaybackKeyPairsResponse.add_member(:key_pairs, Shapes::ShapeRef.new(shape: PlaybackKeyPairList, required: true, location_name: "keyPairs"))
     ListPlaybackKeyPairsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPlaybackKeyPairsResponse.struct_class = Types::ListPlaybackKeyPairsResponse
 
-    ListRecordingConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListRecordingConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxRecordingConfigurationResults, location_name: "maxResults"))
+    ListRecordingConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListRecordingConfigurationsRequest.struct_class = Types::ListRecordingConfigurationsRequest
 
-    ListRecordingConfigurationsResponse.add_member(:recording_configurations, Shapes::ShapeRef.new(shape: RecordingConfigurationList, required: true, location_name: "recordingConfigurations"))
     ListRecordingConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListRecordingConfigurationsResponse.add_member(:recording_configurations, Shapes::ShapeRef.new(shape: RecordingConfigurationList, required: true, location_name: "recordingConfigurations"))
     ListRecordingConfigurationsResponse.struct_class = Types::ListRecordingConfigurationsResponse
 
     ListStreamKeysRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
-    ListStreamKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStreamKeysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStreamKeyResults, location_name: "maxResults"))
+    ListStreamKeysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStreamKeysRequest.struct_class = Types::ListStreamKeysRequest
 
-    ListStreamKeysResponse.add_member(:stream_keys, Shapes::ShapeRef.new(shape: StreamKeyList, required: true, location_name: "streamKeys"))
     ListStreamKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStreamKeysResponse.add_member(:stream_keys, Shapes::ShapeRef.new(shape: StreamKeyList, required: true, location_name: "streamKeys"))
     ListStreamKeysResponse.struct_class = Types::ListStreamKeysResponse
 
-    ListStreamsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStreamsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStreamResults, location_name: "maxResults"))
+    ListStreamsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStreamsRequest.struct_class = Types::ListStreamsRequest
 
-    ListStreamsResponse.add_member(:streams, Shapes::ShapeRef.new(shape: StreamList, required: true, location_name: "streams"))
     ListStreamsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStreamsResponse.add_member(:streams, Shapes::ShapeRef.new(shape: StreamList, required: true, location_name: "streams"))
     ListStreamsResponse.struct_class = Types::ListStreamsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
-    ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxTagResults, location_name: "maxResults"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
-    ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     PendingVerification.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     PendingVerification.struct_class = Types::PendingVerification
 
     PlaybackKeyPair.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackKeyPairArn, location_name: "arn"))
-    PlaybackKeyPair.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackKeyPairName, location_name: "name"))
     PlaybackKeyPair.add_member(:fingerprint, Shapes::ShapeRef.new(shape: PlaybackKeyPairFingerprint, location_name: "fingerprint"))
+    PlaybackKeyPair.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackKeyPairName, location_name: "name"))
     PlaybackKeyPair.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PlaybackKeyPair.struct_class = Types::PlaybackKeyPair
 
@@ -347,8 +342,8 @@ module Aws::IVS
     PutMetadataRequest.struct_class = Types::PutMetadataRequest
 
     RecordingConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: RecordingConfigurationArn, required: true, location_name: "arn"))
-    RecordingConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
     RecordingConfiguration.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
+    RecordingConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
     RecordingConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: RecordingConfigurationState, required: true, location_name: "state"))
     RecordingConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RecordingConfiguration.struct_class = Types::RecordingConfiguration
@@ -356,8 +351,8 @@ module Aws::IVS
     RecordingConfigurationList.member = Shapes::ShapeRef.new(shape: RecordingConfigurationSummary)
 
     RecordingConfigurationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: RecordingConfigurationArn, required: true, location_name: "arn"))
-    RecordingConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
     RecordingConfigurationSummary.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
+    RecordingConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
     RecordingConfigurationSummary.add_member(:state, Shapes::ShapeRef.new(shape: RecordingConfigurationState, required: true, location_name: "state"))
     RecordingConfigurationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     RecordingConfigurationSummary.struct_class = Types::RecordingConfigurationSummary
@@ -377,17 +372,17 @@ module Aws::IVS
     StopStreamResponse.struct_class = Types::StopStreamResponse
 
     Stream.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
+    Stream.add_member(:health, Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
     Stream.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
     Stream.add_member(:start_time, Shapes::ShapeRef.new(shape: StreamStartTime, location_name: "startTime"))
     Stream.add_member(:state, Shapes::ShapeRef.new(shape: StreamState, location_name: "state"))
-    Stream.add_member(:health, Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
     Stream.add_member(:viewer_count, Shapes::ShapeRef.new(shape: StreamViewerCount, location_name: "viewerCount"))
     Stream.struct_class = Types::Stream
 
     StreamKey.add_member(:arn, Shapes::ShapeRef.new(shape: StreamKeyArn, location_name: "arn"))
-    StreamKey.add_member(:value, Shapes::ShapeRef.new(shape: StreamKeyValue, location_name: "value"))
     StreamKey.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
     StreamKey.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    StreamKey.add_member(:value, Shapes::ShapeRef.new(shape: StreamKeyValue, location_name: "value"))
     StreamKey.struct_class = Types::StreamKey
 
     StreamKeyArnList.member = Shapes::ShapeRef.new(shape: StreamKeyArn)
@@ -404,10 +399,10 @@ module Aws::IVS
     StreamList.member = Shapes::ShapeRef.new(shape: StreamSummary)
 
     StreamSummary.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
-    StreamSummary.add_member(:state, Shapes::ShapeRef.new(shape: StreamState, location_name: "state"))
     StreamSummary.add_member(:health, Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
-    StreamSummary.add_member(:viewer_count, Shapes::ShapeRef.new(shape: StreamViewerCount, location_name: "viewerCount"))
     StreamSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: StreamStartTime, location_name: "startTime"))
+    StreamSummary.add_member(:state, Shapes::ShapeRef.new(shape: StreamState, location_name: "state"))
+    StreamSummary.add_member(:viewer_count, Shapes::ShapeRef.new(shape: StreamViewerCount, location_name: "viewerCount"))
     StreamSummary.struct_class = Types::StreamSummary
 
     StreamUnavailable.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
@@ -434,11 +429,11 @@ module Aws::IVS
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateChannelRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "arn"))
-    UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
-    UpdateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
-    UpdateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     UpdateChannelRequest.add_member(:authorized, Shapes::ShapeRef.new(shape: Boolean, location_name: "authorized"))
+    UpdateChannelRequest.add_member(:latency_mode, Shapes::ShapeRef.new(shape: ChannelLatencyMode, location_name: "latencyMode"))
+    UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "name"))
     UpdateChannelRequest.add_member(:recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "recordingConfigurationArn"))
+    UpdateChannelRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
 
     UpdateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
@@ -456,6 +451,7 @@ module Aws::IVS
       api.metadata = {
         "apiVersion" => "2020-07-14",
         "endpointPrefix" => "ivs",
+        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceAbbreviation" => "Amazon IVS",
         "serviceFullName" => "Amazon Interactive Video Service",
@@ -487,11 +483,11 @@ module Aws::IVS
         o.http_request_uri = "/CreateChannel"
         o.input = Shapes::ShapeRef.new(shape: CreateChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateChannelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_recording_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -500,12 +496,12 @@ module Aws::IVS
         o.http_request_uri = "/CreateRecordingConfiguration"
         o.input = Shapes::ShapeRef.new(shape: CreateRecordingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateRecordingConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_stream_key, Seahorse::Model::Operation.new.tap do |o|
@@ -514,11 +510,11 @@ module Aws::IVS
         o.http_request_uri = "/CreateStreamKey"
         o.input = Shapes::ShapeRef.new(shape: CreateStreamKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateStreamKeyResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:delete_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -527,11 +523,11 @@ module Aws::IVS
         o.http_request_uri = "/DeleteChannel"
         o.input = Shapes::ShapeRef.new(shape: DeleteChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_playback_key_pair, Seahorse::Model::Operation.new.tap do |o|
@@ -540,9 +536,9 @@ module Aws::IVS
         o.http_request_uri = "/DeletePlaybackKeyPair"
         o.input = Shapes::ShapeRef.new(shape: DeletePlaybackKeyPairRequest)
         o.output = Shapes::ShapeRef.new(shape: DeletePlaybackKeyPairResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
@@ -552,11 +548,11 @@ module Aws::IVS
         o.http_request_uri = "/DeleteRecordingConfiguration"
         o.input = Shapes::ShapeRef.new(shape: DeleteRecordingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_stream_key, Seahorse::Model::Operation.new.tap do |o|
@@ -565,9 +561,9 @@ module Aws::IVS
         o.http_request_uri = "/DeleteStreamKey"
         o.input = Shapes::ShapeRef.new(shape: DeleteStreamKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
       end)
 
@@ -577,9 +573,9 @@ module Aws::IVS
         o.http_request_uri = "/GetChannel"
         o.input = Shapes::ShapeRef.new(shape: GetChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: GetChannelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_playback_key_pair, Seahorse::Model::Operation.new.tap do |o|
@@ -588,9 +584,9 @@ module Aws::IVS
         o.http_request_uri = "/GetPlaybackKeyPair"
         o.input = Shapes::ShapeRef.new(shape: GetPlaybackKeyPairRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPlaybackKeyPairResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_recording_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -599,9 +595,9 @@ module Aws::IVS
         o.http_request_uri = "/GetRecordingConfiguration"
         o.input = Shapes::ShapeRef.new(shape: GetRecordingConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetRecordingConfigurationResponse)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -612,8 +608,8 @@ module Aws::IVS
         o.input = Shapes::ShapeRef.new(shape: GetStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStreamResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ChannelNotBroadcasting)
       end)
 
@@ -623,9 +619,9 @@ module Aws::IVS
         o.http_request_uri = "/GetStreamKey"
         o.input = Shapes::ShapeRef.new(shape: GetStreamKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStreamKeyResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:import_playback_key_pair, Seahorse::Model::Operation.new.tap do |o|
@@ -634,11 +630,11 @@ module Aws::IVS
         o.http_request_uri = "/ImportPlaybackKeyPair"
         o.input = Shapes::ShapeRef.new(shape: ImportPlaybackKeyPairRequest)
         o.output = Shapes::ShapeRef.new(shape: ImportPlaybackKeyPairResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:list_channels, Seahorse::Model::Operation.new.tap do |o|
@@ -647,8 +643,8 @@ module Aws::IVS
         o.http_request_uri = "/ListChannels"
         o.input = Shapes::ShapeRef.new(shape: ListChannelsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListChannelsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -664,8 +660,8 @@ module Aws::IVS
         o.http_request_uri = "/ListPlaybackKeyPairs"
         o.input = Shapes::ShapeRef.new(shape: ListPlaybackKeyPairsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPlaybackKeyPairsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -680,8 +676,8 @@ module Aws::IVS
         o.http_request_uri = "/ListRecordingConfigurations"
         o.input = Shapes::ShapeRef.new(shape: ListRecordingConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRecordingConfigurationsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -697,9 +693,9 @@ module Aws::IVS
         o.http_request_uri = "/ListStreamKeys"
         o.input = Shapes::ShapeRef.new(shape: ListStreamKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: ListStreamKeysResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -729,15 +725,9 @@ module Aws::IVS
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
       end)
 
       api.add_operation(:put_metadata, Seahorse::Model::Operation.new.tap do |o|
@@ -746,11 +736,11 @@ module Aws::IVS
         o.http_request_uri = "/PutMetadata"
         o.input = Shapes::ShapeRef.new(shape: PutMetadataRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ChannelNotBroadcasting)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelNotBroadcasting)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:stop_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -760,9 +750,9 @@ module Aws::IVS
         o.input = Shapes::ShapeRef.new(shape: StopStreamRequest)
         o.output = Shapes::ShapeRef.new(shape: StopStreamResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ChannelNotBroadcasting)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ChannelNotBroadcasting)
         o.errors << Shapes::ShapeRef.new(shape: StreamUnavailable)
       end)
 
@@ -772,9 +762,9 @@ module Aws::IVS
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -783,9 +773,9 @@ module Aws::IVS
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -794,11 +784,11 @@ module Aws::IVS
         o.http_request_uri = "/UpdateChannel"
         o.input = Shapes::ShapeRef.new(shape: UpdateChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateChannelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 
