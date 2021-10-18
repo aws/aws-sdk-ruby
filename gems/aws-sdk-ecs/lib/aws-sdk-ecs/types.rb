@@ -3049,7 +3049,8 @@ module Aws::ECS
     #   the service to the tasks in the service. If no value is specified,
     #   the tags are not propagated. Tags can only be propagated to the
     #   tasks within the service during service creation. To add tags to a
-    #   task after service creation, use the TagResource API action.
+    #   task after service creation or task creation, use the TagResource
+    #   API action.
     #   @return [String]
     #
     # @!attribute [rw] enable_execute_command
@@ -5440,7 +5441,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html
     #
     # @note When making an API call, you may pass InferenceAccelerator
     #   data as a hash:
@@ -5477,7 +5478,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html
     #
     # @note When making an API call, you may pass InferenceAcceleratorOverride
     #   data as a hash:
@@ -8458,7 +8459,7 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html
     #
     # @note When making an API call, you may pass ResourceRequirement
     #   data as a hash:
@@ -8782,6 +8783,13 @@ module Aws::ECS
     #   The `family` and `revision` (`family:revision`) or full ARN of the
     #   task definition to run. If a `revision` is not specified, the latest
     #   `ACTIVE` revision is used.
+    #
+    #   The full ARN value must match the value that you specified ias the
+    #   `Resource` of the IAM principal's permissions policy. For example,
+    #   if the `Resource` is
+    #   arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*,
+    #   the `taskDefinition` ARN value must be
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskRequest AWS API Documentation
@@ -10847,7 +10855,13 @@ module Aws::ECS
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the task execution IAM role
-    #   override for the task.
+    #   override for the task. For more information, see [Amazon ECS task
+    #   execution IAM role][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] memory
@@ -10857,7 +10871,13 @@ module Aws::ECS
     # @!attribute [rw] task_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that containers in
     #   this task can assume. All containers in this task are granted the
-    #   permissions that are specified in this role.
+    #   permissions that are specified in this role. For more information,
+    #   see [IAM Role for Tasks][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
     #   @return [String]
     #
     # @!attribute [rw] ephemeral_storage

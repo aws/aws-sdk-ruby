@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2021-10-12)
+------------------
+
+* Feature - MediaTailor now supports ad prefetching.
+
 1.45.0 (2021-09-22)
 ------------------
 

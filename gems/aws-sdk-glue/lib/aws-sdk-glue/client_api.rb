@@ -296,6 +296,7 @@ module Aws::Glue
     ErrorString = Shapes::StringShape.new(name: 'ErrorString')
     EvaluationMetrics = Shapes::StructureShape.new(name: 'EvaluationMetrics')
     EventBatchingCondition = Shapes::StructureShape.new(name: 'EventBatchingCondition')
+    EventQueueArn = Shapes::StringShape.new(name: 'EventQueueArn')
     ExecutionProperty = Shapes::StructureShape.new(name: 'ExecutionProperty')
     ExecutionTime = Shapes::IntegerShape.new(name: 'ExecutionTime')
     ExistCondition = Shapes::StringShape.new(name: 'ExistCondition')
@@ -2991,6 +2992,8 @@ module Aws::Glue
     S3Target.add_member(:exclusions, Shapes::ShapeRef.new(shape: PathList, location_name: "Exclusions"))
     S3Target.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
     S3Target.add_member(:sample_size, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "SampleSize"))
+    S3Target.add_member(:event_queue_arn, Shapes::ShapeRef.new(shape: EventQueueArn, location_name: "EventQueueArn"))
+    S3Target.add_member(:dlq_event_queue_arn, Shapes::ShapeRef.new(shape: EventQueueArn, location_name: "DlqEventQueueArn"))
     S3Target.struct_class = Types::S3Target
 
     S3TargetList.member = Shapes::ShapeRef.new(shape: S3Target)

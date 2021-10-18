@@ -430,7 +430,8 @@ module Aws::EC2
     #
     # @!attribute [rw] network_border_group
     #   The name of the unique set of Availability Zones, Local Zones, or
-    #   Wavelength Zones from which AWS advertises IP addresses.
+    #   Wavelength Zones from which Amazon Web Services advertises IP
+    #   addresses.
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ip
@@ -584,24 +585,20 @@ module Aws::EC2
     #
     # @!attribute [rw] network_border_group
     #   A unique set of Availability Zones, Local Zones, or Wavelength Zones
-    #   from which AWS advertises IP addresses. Use this parameter to limit
-    #   the IP address to this location. IP addresses cannot move between
-    #   network border groups.
+    #   from which Amazon Web Services advertises IP addresses. Use this
+    #   parameter to limit the IP address to this location. IP addresses
+    #   cannot move between network border groups.
     #
     #   Use [DescribeAvailabilityZones][1] to view the network border
     #   groups.
     #
-    #   <note markdown="1"> You cannot use a network border group with EC2 Classic. If you
-    #   attempt this operation on EC2 classic, you will receive an
-    #   `InvalidParameterCombination` error. For more information, see
-    #   [Error Codes][2].
-    #
-    #    </note>
+    #   You cannot use a network border group with EC2 Classic. If you
+    #   attempt this operation on EC2 Classic, you receive an
+    #   `InvalidParameterCombination` error.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ipv_4_pool
@@ -651,7 +648,7 @@ module Aws::EC2
     #
     # @!attribute [rw] network_border_group
     #   The set of Availability Zones, Local Zones, or Wavelength Zones from
-    #   which AWS advertises IP addresses.
+    #   which Amazon Web Services advertises IP addresses.
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -5162,11 +5159,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID.
+    #   The Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] aws_service
-    #   The AWS service.
+    #   The Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] co_ip
@@ -5467,7 +5464,7 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #
     #
@@ -7301,6 +7298,11 @@ module Aws::EC2
     #           },
     #         ],
     #         max_aggregation_interval: 1,
+    #         destination_options: {
+    #           file_format: "plain-text", # accepts plain-text, parquet
+    #           hive_compatible_partitions: false,
+    #           per_hour_partition: false,
+    #         },
     #       }
     #
     # @!attribute [rw] dry_run
@@ -7355,8 +7357,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] log_destination_type
-    #   Specifies the type of destination to which the flow log data is to
-    #   be published. Flow log data can be published to CloudWatch Logs or
+    #   The type of destination to which the flow log data is to be
+    #   published. Flow log data can be published to CloudWatch Logs or
     #   Amazon S3. To publish flow log data to CloudWatch Logs, specify
     #   `cloud-watch-logs`. To publish flow log data to Amazon S3, specify
     #   `s3`.
@@ -7368,10 +7370,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] log_destination
-    #   Specifies the destination to which the flow log data is to be
-    #   published. Flow log data can be published to a CloudWatch Logs log
-    #   group or an Amazon S3 bucket. The value specified for this parameter
-    #   depends on the value specified for `LogDestinationType`.
+    #   The destination to which the flow log data is to be published. Flow
+    #   log data can be published to a CloudWatch Logs log group or an
+    #   Amazon S3 bucket. The value specified for this parameter depends on
+    #   the value specified for `LogDestinationType`.
     #
     #   If `LogDestinationType` is not specified or `cloud-watch-logs`,
     #   specify the Amazon Resource Name (ARN) of the CloudWatch Logs log
@@ -7396,8 +7398,8 @@ module Aws::EC2
     #   specify at least one field.
     #
     #   Specify the fields using the `$\{field-id\}` format, separated by
-    #   spaces. For the CLI, use single quotation marks (' ') to surround
-    #   the parameter value.
+    #   spaces. For the CLI, surround this parameter value with single
+    #   quotes on Linux or double quotes on Windows.
     #
     #
     #
@@ -7424,6 +7426,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     #   @return [Integer]
     #
+    # @!attribute [rw] destination_options
+    #   The destination options.
+    #   @return [Types::DestinationOptionsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogsRequest AWS API Documentation
     #
     class CreateFlowLogsRequest < Struct.new(
@@ -7438,7 +7444,8 @@ module Aws::EC2
       :log_destination,
       :log_format,
       :tag_specifications,
-      :max_aggregation_interval)
+      :max_aggregation_interval,
+      :destination_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10441,8 +10448,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -10469,8 +10476,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #
     #
@@ -10515,7 +10522,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] traffic_direction
-    #   The type of traffic (`ingress` \| `egress`).
+    #   The type of traffic.
     #   @return [String]
     #
     # @!attribute [rw] rule_number
@@ -10525,7 +10532,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] rule_action
-    #   The action to take (`accept` \| `reject`) on the filtered traffic.
+    #   The action to take on the filtered traffic.
     #   @return [String]
     #
     # @!attribute [rw] destination_port_range
@@ -10568,8 +10575,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -10604,8 +10611,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #
     #
@@ -10707,8 +10714,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -10741,8 +10748,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #
     #
@@ -10806,8 +10813,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -10836,8 +10843,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #
     #
@@ -11893,8 +11900,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #
     #
@@ -12008,8 +12015,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #
     #
@@ -12128,8 +12135,8 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency][1].
     #
     #
     #
@@ -17836,9 +17843,10 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] owners
-    #   Filters the AFI by owner. Specify an AWS account ID, `self` (owner
-    #   is the sender of the request), or an AWS owner alias (valid values
-    #   are `amazon` \| `aws-marketplace`).
+    #   Filters the AFI by owner. Specify an Amazon Web Services account ID,
+    #   `self` (owner is the sender of the request), or an Amazon Web
+    #   Services owner alias (valid values are `amazon` \|
+    #   `aws-marketplace`).
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
@@ -17853,12 +17861,12 @@ module Aws::EC2
     #
     #   * `name` - The name of the AFI.
     #
-    #   * `owner-id` - The AWS account ID of the AFI owner.
+    #   * `owner-id` - The Amazon Web Services account ID of the AFI owner.
     #
     #   * `product-code` - The product code.
     #
-    #   * `shell-version` - The version of the AWS Shell that was used to
-    #     create the bitstream.
+    #   * `shell-version` - The version of the Amazon Web Services Shell
+    #     that was used to create the bitstream.
     #
     #   * `state` - The state of the AFI (`pending` \| `failed` \|
     #     `available` \| `unavailable`).
@@ -19261,9 +19269,12 @@ module Aws::EC2
     #   * `instance-storage-info.disk.type` - The storage technology for the
     #     local instance storage disks (`hdd` \| `ssd`).
     #
+    #   * `instance-storage-info.encryption-supported` - Indicates whether
+    #     data is encrypted at rest (`required` \| `unsupported`).
+    #
     #   * `instance-storage-info.nvme-support` - Indicates whether
     #     non-volatile memory express (NVMe) is supported for instance store
-    #     (`required` \| `supported`) \| `unsupported`).
+    #     (`required` \| `supported` \| `unsupported`).
     #
     #   * `instance-storage-info.total-size-in-gb` - The total amount of
     #     storage available from all local instance storage, in GB.
@@ -26036,8 +26047,8 @@ module Aws::EC2
     #
     #   * `service-id` - The ID of the service.
     #
-    #   * `vpc-endpoint-owner` - The AWS account number of the owner of the
-    #     endpoint.
+    #   * `vpc-endpoint-owner` - The ID of the Amazon Web Services account
+    #     ID that owns the endpoint.
     #
     #   * `vpc-endpoint-state` - The state of the endpoint
     #     (`pendingAcceptance` \| `pending` \| `available` \| `deleting` \|
@@ -26867,6 +26878,66 @@ module Aws::EC2
     #
     class DescribeVpnGatewaysResult < Struct.new(
       :vpn_gateways)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the destination options for a flow log.
+    #
+    # @note When making an API call, you may pass DestinationOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         file_format: "plain-text", # accepts plain-text, parquet
+    #         hive_compatible_partitions: false,
+    #         per_hour_partition: false,
+    #       }
+    #
+    # @!attribute [rw] file_format
+    #   The format for the flow log. The default is `plain-text`.
+    #   @return [String]
+    #
+    # @!attribute [rw] hive_compatible_partitions
+    #   Indicates whether to use Hive-compatible prefixes for flow logs
+    #   stored in Amazon S3. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] per_hour_partition
+    #   Indicates whether to partition the flow log per hour. This reduces
+    #   the cost and response time for queries. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DestinationOptionsRequest AWS API Documentation
+    #
+    class DestinationOptionsRequest < Struct.new(
+      :file_format,
+      :hive_compatible_partitions,
+      :per_hour_partition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the destination options for a flow log.
+    #
+    # @!attribute [rw] file_format
+    #   The format for the flow log.
+    #   @return [String]
+    #
+    # @!attribute [rw] hive_compatible_partitions
+    #   Indicates whether to use Hive-compatible prefixes for flow logs
+    #   stored in Amazon S3.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] per_hour_partition
+    #   Indicates whether to partition the flow log per hour.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DestinationOptionsResponse AWS API Documentation
+    #
+    class DestinationOptionsResponse < Struct.new(
+      :file_format,
+      :hive_compatible_partitions,
+      :per_hour_partition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28277,7 +28348,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the disk.
+    # Describes a disk.
     #
     # @!attribute [rw] size_in_gb
     #   The size of the disk in GB.
@@ -29432,71 +29503,91 @@ module Aws::EC2
     # @!attribute [rw] event_sub_type
     #   The event.
     #
-    #   The following are the `error` events:
+    #   `error` events:
     #
-    #   * `iamFleetRoleInvalid` - The EC2 Fleet or Spot Fleet did not have
+    #   * `iamFleetRoleInvalid` - The EC2 Fleet or Spot Fleet does not have
     #     the required permissions either to launch or terminate an
     #     instance.
     #
-    #   * `spotFleetRequestConfigurationInvalid` - The configuration is not
-    #     valid. For more information, see the description of the event.
+    #   * `allLaunchSpecsTemporarilyBlacklisted` - None of the
+    #     configurations are valid, and several attempts to launch instances
+    #     have failed. For more information, see the description of the
+    #     event.
     #
     #   * `spotInstanceCountLimitExceeded` - You've reached the limit on
     #     the number of Spot Instances that you can launch.
     #
-    #   The following are the `fleetRequestChange` events:
+    #   * `spotFleetRequestConfigurationInvalid` - The configuration is not
+    #     valid. For more information, see the description of the event.
+    #
+    #   `fleetRequestChange` events:
     #
     #   * `active` - The EC2 Fleet or Spot Fleet request has been validated
     #     and Amazon EC2 is attempting to maintain the target number of
-    #     running Spot Instances.
+    #     running instances.
     #
     #   * `cancelled` - The EC2 Fleet or Spot Fleet request is canceled and
-    #     has no running Spot Instances. The EC2 Fleet or Spot Fleet will be
-    #     deleted two days after its instances were terminated.
+    #     has no running instances. The EC2 Fleet or Spot Fleet will be
+    #     deleted two days after its instances are terminated.
     #
     #   * `cancelled_running` - The EC2 Fleet or Spot Fleet request is
-    #     canceled and does not launch additional Spot Instances. Existing
-    #     Spot Instances continue to run until they are interrupted or
-    #     terminated.
+    #     canceled and does not launch additional instances. Its existing
+    #     instances continue to run until they are interrupted or
+    #     terminated. The request remains in this state until all instances
+    #     are interrupted or terminated.
     #
     #   * `cancelled_terminating` - The EC2 Fleet or Spot Fleet request is
-    #     canceled and its Spot Instances are terminating.
+    #     canceled and its instances are terminating. The request remains in
+    #     this state until all instances are terminated.
     #
-    #   * `expired` - The EC2 Fleet or Spot Fleet request has expired. A
-    #     subsequent event indicates that the instances were terminated, if
+    #   * `expired` - The EC2 Fleet or Spot Fleet request has expired. If
     #     the request was created with `TerminateInstancesWithExpiration`
-    #     set.
+    #     set, a subsequent `terminated` event indicates that the instances
+    #     are terminated.
     #
-    #   * `modify_in_progress` - A request to modify the EC2 Fleet or Spot
-    #     Fleet request was accepted and is in progress.
+    #   * `modify_in_progress` - The EC2 Fleet or Spot Fleet request is
+    #     being modified. The request remains in this state until the
+    #     modification is fully processed.
     #
     #   * `modify_succeeded` - The EC2 Fleet or Spot Fleet request was
     #     modified.
     #
     #   * `submitted` - The EC2 Fleet or Spot Fleet request is being
     #     evaluated and Amazon EC2 is preparing to launch the target number
-    #     of Spot Instances.
+    #     of instances.
     #
-    #   The following are the `instanceChange` events:
+    #   * `progress` - The EC2 Fleet or Spot Fleet request is in the process
+    #     of being fulfilled.
     #
-    #   * `launched` - A request was fulfilled and a new instance was
-    #     launched.
+    #   `instanceChange` events:
+    #
+    #   * `launched` - A new instance was launched.
     #
     #   * `terminated` - An instance was terminated by the user.
     #
-    #   The following are the `Information` events:
+    #   * `termination_notified` - An instance termination notification was
+    #     sent when a Spot Instance was terminated by Amazon EC2 during
+    #     scale-down, when the target capacity of the fleet was modified
+    #     down, for example, from a target capacity of 4 to a target
+    #     capacity of 3.
+    #
+    #   `Information` events:
+    #
+    #   * `fleetProgressHalted` - The price in every launch specification is
+    #     not valid because it is below the Spot price (all the launch
+    #     specifications have produced `launchSpecUnusable` events). A
+    #     launch specification might become valid if the Spot price changes.
     #
     #   * `launchSpecTemporarilyBlacklisted` - The configuration is not
     #     valid and several attempts to launch instances have failed. For
     #     more information, see the description of the event.
     #
     #   * `launchSpecUnusable` - The price in a launch specification is not
-    #     valid because it is below the Spot price or the Spot price is
-    #     above the On-Demand price.
+    #     valid because it is below the Spot price.
     #
-    #   * `fleetProgressHalted` - The price in every launch specification is
-    #     not valid. A launch specification might become valid if the Spot
-    #     price changes.
+    #   * `registerWithLoadBalancersFailed` - An attempt to register
+    #     instances with load balancers failed. For more information, see
+    #     the description of the event.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -31121,15 +31212,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] log_destination_type
-    #   Specifies the type of destination to which the flow log data is
-    #   published. Flow log data can be published to CloudWatch Logs or
-    #   Amazon S3.
+    #   The type of destination to which the flow log data is published.
+    #   Flow log data can be published to CloudWatch Logs or Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] log_destination
-    #   Specifies the destination to which the flow log data is published.
-    #   Flow log data can be published to an CloudWatch Logs log group or an
-    #   Amazon S3 bucket. If the flow log publishes to CloudWatch Logs, this
+    #   The destination to which the flow log data is published. Flow log
+    #   data can be published to an CloudWatch Logs log group or an Amazon
+    #   S3 bucket. If the flow log publishes to CloudWatch Logs, this
     #   element indicates the Amazon Resource Name (ARN) of the CloudWatch
     #   Logs log group to which the data is published. If the flow log
     #   publishes to Amazon S3, this element indicates the ARN of the Amazon
@@ -31159,6 +31249,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
     #   @return [Integer]
     #
+    # @!attribute [rw] destination_options
+    #   The destination options.
+    #   @return [Types::DestinationOptionsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlowLog AWS API Documentation
     #
     class FlowLog < Struct.new(
@@ -31175,7 +31269,8 @@ module Aws::EC2
       :log_destination,
       :log_format,
       :tags,
-      :max_aggregation_interval)
+      :max_aggregation_interval,
+      :destination_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31242,7 +31337,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] shell_version
-    #   The version of the AWS Shell that was used to create the bitstream.
+    #   The version of the Amazon Web Services Shell that was used to create
+    #   the bitstream.
     #   @return [String]
     #
     # @!attribute [rw] pci_id
@@ -31262,7 +31358,7 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID of the AFI owner.
+    #   The ID of the Amazon Web Services account that owns the AFI.
     #   @return [String]
     #
     # @!attribute [rw] owner_alias
@@ -34316,13 +34412,12 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] usage_operation
-    #   The usage operation value. For more information, see [AMI billing
-    #   information fields][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   The usage operation value. For more information, see [Licensing
+    #   options][1] in the *VM Import/Export User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html
+    #   [1]: https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#prerequisites
     #   @return [String]
     #
     # @!attribute [rw] boot_mode
@@ -36222,14 +36317,11 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] http_endpoint
-    #   This parameter enables or disables the HTTP metadata endpoint on
-    #   your instances. If the parameter is not specified, the default state
-    #   is `enabled`.
+    #   Enables or disables the HTTP metadata endpoint on your instances. If
+    #   the parameter is not specified, the default state is `enabled`.
     #
-    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
+    #   If you specify a value of `disabled`, you will not be able to access
     #   your instance metadata.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] http_protocol_ipv_6
@@ -36289,19 +36381,13 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] http_endpoint
-    #   This parameter enables or disables the HTTP metadata endpoint on
-    #   your instances. If the parameter is not specified, the default state
-    #   is `enabled`.
-    #
-    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
-    #   your instance metadata.
-    #
-    #    </note>
+    #   Indicates whether the HTTP metadata endpoint on your instances is
+    #   enabled or disabled.
     #   @return [String]
     #
     # @!attribute [rw] http_protocol_ipv_6
-    #   Whether or not the IPv6 endpoint for the instance metadata service
-    #   is enabled or disabled.
+    #   Indicates whether the IPv6 endpoint for the instance metadata
+    #   service is enabled or disabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMetadataOptionsResponse AWS API Documentation
@@ -37002,7 +37088,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the disks that are available for the instance type.
+    # Describes the instance store features that are supported by the
+    # instance type.
     #
     # @!attribute [rw] total_size_in_gb
     #   The total size of the disks, in GB.
@@ -37013,8 +37100,11 @@ module Aws::EC2
     #   @return [Array<Types::DiskInfo>]
     #
     # @!attribute [rw] nvme_support
-    #   Indicates whether non-volatile memory express (NVMe) is supported
-    #   for instance store.
+    #   Indicates whether non-volatile memory express (NVMe) is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_support
+    #   Indicates whether data is encrypted at rest.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStorageInfo AWS API Documentation
@@ -37022,7 +37112,8 @@ module Aws::EC2
     class InstanceStorageInfo < Struct.new(
       :total_size_in_gb,
       :disks,
-      :nvme_support)
+      :nvme_support,
+      :encryption_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39677,7 +39768,7 @@ module Aws::EC2
     # Describes a load permission.
     #
     # @!attribute [rw] user_id
-    #   The AWS account ID.
+    #   The Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] group
@@ -39746,7 +39837,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The AWS account ID.
+    #   The Amazon Web Services account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LoadPermissionRequest AWS API Documentation
@@ -39769,7 +39860,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID that owns the local gateway.
+    #   The ID of the Amazon Web Services account that owns the local
+    #   gateway.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -39819,7 +39911,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID that owns the local gateway route.
+    #   The ID of the Amazon Web Services account that owns the local
+    #   gateway route.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayRoute AWS API Documentation
@@ -39855,7 +39948,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID that owns the local gateway route table.
+    #   The ID of the Amazon Web Services account that owns the local
+    #   gateway route table.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -39905,8 +39999,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID that owns the local gateway virtual interface
-    #   group association.
+    #   The ID of the Amazon Web Services account that owns the local
+    #   gateway virtual interface group association.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -39957,8 +40051,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID that owns the local gateway route table for the
-    #   association.
+    #   The ID of the Amazon Web Services account that owns the local
+    #   gateway route table for the association.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -40016,7 +40110,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID that owns the local gateway virtual interface.
+    #   The ID of the Amazon Web Services account that owns the local
+    #   gateway virtual interface.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -40054,8 +40149,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The AWS account ID that owns the local gateway virtual interface
-    #   group.
+    #   The ID of the Amazon Web Services account that owns the local
+    #   gateway virtual interface group.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -40210,8 +40305,8 @@ module Aws::EC2
     # @!attribute [rw] opt_in_status
     #   Indicates whether you are opted in to the Local Zone group or
     #   Wavelength Zone group. The only valid value is `opted-in`. You must
-    #   contact [AWS Support][1] to opt out of a Local Zone group, or
-    #   Wavelength Zone group.
+    #   contact [Amazon Web Services Support][1] to opt out of a Local Zone
+    #   or Wavelength Zone group.
     #
     #
     #
@@ -40820,8 +40915,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_ids
-    #   The AWS account IDs. This parameter is valid only when modifying the
-    #   `loadPermission` attribute.
+    #   The Amazon Web Services account IDs. This parameter is valid only
+    #   when modifying the `loadPermission` attribute.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_groups
@@ -42425,7 +42520,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] traffic_direction
-    #   The type of traffic (`ingress` \| `egress`) to assign to the rule.
+    #   The type of traffic to assign to the rule.
     #   @return [String]
     #
     # @!attribute [rw] rule_number
@@ -47479,22 +47574,14 @@ module Aws::EC2
     #
     # @!attribute [rw] network_border_group
     #   The set of Availability Zones, Local Zones, or Wavelength Zones from
-    #   which AWS advertises IP addresses.
+    #   which Amazon Web Services advertises IP addresses.
     #
-    #   If you provide an incorrect network border group, you will receive
-    #   an `InvalidAddress.NotFound` error. For more information, see [Error
-    #   Codes][1].
+    #   If you provide an incorrect network border group, you receive an
+    #   `InvalidAddress.NotFound` error.
     #
-    #   <note markdown="1"> You cannot use a network border group with EC2 Classic. If you
-    #   attempt this operation on EC2 classic, you will receive an
-    #   `InvalidParameterCombination` error. For more information, see
-    #   [Error Codes][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
+    #   You cannot use a network border group with EC2 Classic. If you
+    #   attempt this operation on EC2 classic, you receive an
+    #   `InvalidParameterCombination` error.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -53216,8 +53303,8 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] acceptance_required
-    #   Indicates whether requests from other AWS accounts to create an
-    #   endpoint to the service must first be accepted.
+    #   Indicates whether requests from other Amazon Web Services accounts
+    #   to create an endpoint to the service must first be accepted.
     #   @return [Boolean]
     #
     # @!attribute [rw] manages_vpc_endpoints
@@ -53292,7 +53379,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] owner
-    #   The AWS account ID of the service owner.
+    #   The Amazon Web Services account ID of the service owner.
     #   @return [String]
     #
     # @!attribute [rw] base_endpoint_dns_names
@@ -55999,33 +56086,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The type of resource to tag on creation. The possible values are:
-    #   `capacity-reservation` \| `carrier-gateway` \| `client-vpn-endpoint`
-    #   \| `customer-gateway` \| `dedicated-host` \| `dhcp-options` \|
-    #   `egress-only-internet-gateway` \| `elastic-gpu` \| `elastic-ip` \|
-    #   `export-image-task` \| `export-instance-task` \| `fleet` \|
-    #   `fpga-image` \| `host-reservation` \| `image` \| `import-image-task`
-    #   \| `import-snapshot-task` \| `instance` \| `instance-event-window`
-    #   \| `internet-gateway` \| `ipv4pool-ec2` \| `ipv6pool-ec2` \|
-    #   `key-pair` \| `launch-template` \|
-    #   `local-gateway-route-table-vpc-association` \| `natgateway` \|
-    #   `network-acl` \| `network-insights-analysis` \|
-    #   `network-insights-path` \| `network-interface` \| `placement-group`
-    #   \| `prefix-list` \| `reserved-instances` \| `route-table` \|
-    #   `security-group` \| `security-group-rule` \| `snapshot` \|
-    #   `spot-fleet-request` \| `spot-instances-request` \| `subnet` \|
-    #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
-    #   `traffic-mirror-target` \| `transit-gateway` \|
-    #   `transit-gateway-attachment` \| `transit-gateway-multicast-domain`
-    #   \| `transit-gateway-route-table` \| `volume` \| `vpc` \|
-    #   `vpc-endpoint` \| `vpc-endpoint-service` \| `vpc-flow-log` \|
-    #   `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`.
-    #
-    #   To tag a resource after it has been created, see [CreateTags][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #   The type of resource to tag on creation.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -59421,7 +59482,8 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the AWS account that owns the VPC endpoint.
+    #   The ID of the Amazon Web Services account that owns the VPC
+    #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] last_error
@@ -59463,7 +59525,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_owner
-    #   The AWS account ID of the owner of the VPC endpoint.
+    #   The ID of the Amazon Web Services account that owns the VPC
+    #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_state
@@ -59519,8 +59582,8 @@ module Aws::EC2
     #
     # @!attribute [rw] network_border_group
     #   The name of the unique set of Availability Zones, Local Zones, or
-    #   Wavelength Zones from which AWS advertises IP addresses, for
-    #   example, `us-east-1-wl1-bos-wlz-1`.
+    #   Wavelength Zones from which Amazon Web Services advertises IP
+    #   addresses, for example, `us-east-1-wl1-bos-wlz-1`.
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_pool

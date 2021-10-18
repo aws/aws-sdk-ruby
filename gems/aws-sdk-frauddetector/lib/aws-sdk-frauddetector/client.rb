@@ -428,6 +428,31 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Cancels an in-progress batch import job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of an in-progress batch import job to cancel.
+    #
+    #   Amazon Fraud Detector will throw an error if the batch import job is
+    #   in `FAILED`, `CANCELED`, or `COMPLETED` state.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_batch_import_job({
+    #     job_id: "identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CancelBatchImportJob AWS API Documentation
+    #
+    # @overload cancel_batch_import_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_batch_import_job(params = {}, options = {})
+      req = build_request(:cancel_batch_import_job, params)
+      req.send_request(options)
+    end
+
     # Cancels the specified batch prediction job.
     #
     # @option params [required, String] :job_id
@@ -447,6 +472,57 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def cancel_batch_prediction_job(params = {}, options = {})
       req = build_request(:cancel_batch_prediction_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a batch import job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the batch import job. The ID cannot be of a past job, unless
+    #   the job exists in `CREATE_FAILED` state.
+    #
+    # @option params [required, String] :input_path
+    #   The URI that points to the Amazon S3 location of your data file.
+    #
+    # @option params [required, String] :output_path
+    #   The URI that points to the Amazon S3 location for storing your
+    #   results.
+    #
+    # @option params [required, String] :event_type_name
+    #   The name of the event type.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The ARN of the IAM role created for Amazon S3 bucket that holds your
+    #   data file. The IAM role must have read and write permissions to both
+    #   input and output S3 buckets.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A collection of key-value pairs associated with this request.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_batch_import_job({
+    #     job_id: "identifier", # required
+    #     input_path: "s3BucketLocation", # required
+    #     output_path: "s3BucketLocation", # required
+    #     event_type_name: "identifier", # required
+    #     iam_role_arn: "iamRoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "tagKey", # required
+    #         value: "tagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateBatchImportJob AWS API Documentation
+    #
+    # @overload create_batch_import_job(params = {})
+    # @param [Hash] params ({})
+    def create_batch_import_job(params = {}, options = {})
+      req = build_request(:create_batch_import_job, params)
       req.send_request(options)
     end
 
@@ -566,8 +642,8 @@ module Aws::FraudDetector
     #     model_versions: [
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
-    #         model_version_number: "nonEmptyString", # required
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_version_number: "floatVersionString", # required
     #         arn: "fraudDetectorArn",
     #       },
     #     ],
@@ -618,7 +694,7 @@ module Aws::FraudDetector
     #
     #   resp = client.create_model({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #     description: "description",
     #     event_type_name: "string", # required
     #     tags: [
@@ -654,8 +730,12 @@ module Aws::FraudDetector
     #   The training data schema.
     #
     # @option params [Types::ExternalEventsDetail] :external_events_detail
-    #   Details for the external events data used for model version training.
+    #   Details of the external events data used for model version training.
     #   Required if `trainingDataSource` is `EXTERNAL_EVENTS`.
+    #
+    # @option params [Types::IngestedEventsDetail] :ingested_events_detail
+    #   Details of the ingested events data used for model version training.
+    #   Required if `trainingDataSource` is `INGESTED_EVENTS`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A collection of key and value pairs.
@@ -671,19 +751,26 @@ module Aws::FraudDetector
     #
     #   resp = client.create_model_version({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
-    #     training_data_source: "EXTERNAL_EVENTS", # required, accepts EXTERNAL_EVENTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #     training_data_source: "EXTERNAL_EVENTS", # required, accepts EXTERNAL_EVENTS, INGESTED_EVENTS
     #     training_data_schema: { # required
     #       model_variables: ["string"], # required
     #       label_schema: { # required
     #         label_mapper: { # required
     #           "string" => ["string"],
     #         },
+    #         unlabeled_events_treatment: "IGNORE", # accepts IGNORE, FRAUD, LEGIT
     #       },
     #     },
     #     external_events_detail: {
     #       data_location: "s3BucketLocation", # required
     #       data_access_role_arn: "iamRoleArn", # required
+    #     },
+    #     ingested_events_detail: {
+    #       ingested_events_time_window: { # required
+    #         start_time: "time", # required
+    #         end_time: "time", # required
+    #       },
     #     },
     #     tags: [
     #       {
@@ -696,7 +783,7 @@ module Aws::FraudDetector
     # @example Response structure
     #
     #   resp.model_id #=> String
-    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS"
+    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
     #   resp.model_version_number #=> String
     #   resp.status #=> String
     #
@@ -832,6 +919,28 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Deletes data that was batch imported to Amazon Fraud Detector.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the batch import job to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_batch_import_job({
+    #     job_id: "identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteBatchImportJob AWS API Documentation
+    #
+    # @overload delete_batch_import_job(params = {})
+    # @param [Hash] params ({})
+    def delete_batch_import_job(params = {}, options = {})
+      req = build_request(:delete_batch_import_job, params)
+      req.send_request(options)
+    end
+
     # Deletes a batch prediction job.
     #
     # @option params [required, String] :job_id
@@ -953,6 +1062,10 @@ module Aws::FraudDetector
     # @option params [required, String] :event_type_name
     #   The name of the event type.
     #
+    # @option params [Boolean] :delete_audit_history
+    #   Specifies whether or not to delete any predictions associated with the
+    #   event.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -960,6 +1073,7 @@ module Aws::FraudDetector
     #   resp = client.delete_event({
     #     event_id: "identifier", # required
     #     event_type_name: "identifier", # required
+    #     delete_audit_history: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEvent AWS API Documentation
@@ -975,8 +1089,8 @@ module Aws::FraudDetector
     #
     # You cannot delete an event type that is used in a detector or a model.
     #
-    # When you delete an entity type, Amazon Fraud Detector permanently
-    # deletes that entity type and the data is no longer stored in Amazon
+    # When you delete an event type, Amazon Fraud Detector permanently
+    # deletes that event type and the data is no longer stored in Amazon
     # Fraud Detector.
     #
     # @option params [required, String] :name
@@ -996,6 +1110,36 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def delete_event_type(params = {}, options = {})
       req = build_request(:delete_event_type, params)
+      req.send_request(options)
+    end
+
+    # Deletes all events of a particular event type.
+    #
+    # @option params [required, String] :event_type_name
+    #   The name of the event type.
+    #
+    # @return [Types::DeleteEventsByEventTypeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteEventsByEventTypeResult#event_type_name #event_type_name} => String
+    #   * {Types::DeleteEventsByEventTypeResult#events_deletion_status #events_deletion_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_events_by_event_type({
+    #     event_type_name: "identifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_type_name #=> String
+    #   resp.events_deletion_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventsByEventType AWS API Documentation
+    #
+    # @overload delete_events_by_event_type(params = {})
+    # @param [Hash] params ({})
+    def delete_events_by_event_type(params = {}, options = {})
+      req = build_request(:delete_events_by_event_type, params)
       req.send_request(options)
     end
 
@@ -1076,7 +1220,7 @@ module Aws::FraudDetector
     #
     #   resp = client.delete_model({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteModel AWS API Documentation
@@ -1112,7 +1256,7 @@ module Aws::FraudDetector
     #
     #   resp = client.delete_model_version({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #     model_version_number: "floatVersionString", # required
     #   })
     #
@@ -1293,7 +1437,7 @@ module Aws::FraudDetector
     #   resp = client.describe_model_versions({
     #     model_id: "modelIdentifier",
     #     model_version_number: "floatVersionString",
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #     next_token: "string",
     #     max_results: 1,
     #   })
@@ -1302,17 +1446,20 @@ module Aws::FraudDetector
     #
     #   resp.model_version_details #=> Array
     #   resp.model_version_details[0].model_id #=> String
-    #   resp.model_version_details[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS"
+    #   resp.model_version_details[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
     #   resp.model_version_details[0].model_version_number #=> String
     #   resp.model_version_details[0].status #=> String
-    #   resp.model_version_details[0].training_data_source #=> String, one of "EXTERNAL_EVENTS"
+    #   resp.model_version_details[0].training_data_source #=> String, one of "EXTERNAL_EVENTS", "INGESTED_EVENTS"
     #   resp.model_version_details[0].training_data_schema.model_variables #=> Array
     #   resp.model_version_details[0].training_data_schema.model_variables[0] #=> String
     #   resp.model_version_details[0].training_data_schema.label_schema.label_mapper #=> Hash
     #   resp.model_version_details[0].training_data_schema.label_schema.label_mapper["string"] #=> Array
     #   resp.model_version_details[0].training_data_schema.label_schema.label_mapper["string"][0] #=> String
+    #   resp.model_version_details[0].training_data_schema.label_schema.unlabeled_events_treatment #=> String, one of "IGNORE", "FRAUD", "LEGIT"
     #   resp.model_version_details[0].external_events_detail.data_location #=> String
     #   resp.model_version_details[0].external_events_detail.data_access_role_arn #=> String
+    #   resp.model_version_details[0].ingested_events_detail.ingested_events_time_window.start_time #=> String
+    #   resp.model_version_details[0].ingested_events_detail.ingested_events_time_window.end_time #=> String
     #   resp.model_version_details[0].training_result.data_validation_metrics.file_level_messages #=> Array
     #   resp.model_version_details[0].training_result.data_validation_metrics.file_level_messages[0].title #=> String
     #   resp.model_version_details[0].training_result.data_validation_metrics.file_level_messages[0].content #=> String
@@ -1344,6 +1491,65 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def describe_model_versions(params = {}, options = {})
       req = build_request(:describe_model_versions, params)
+      req.send_request(options)
+    end
+
+    # Gets all batch import jobs or a specific job of the specified ID. This
+    # is a paginated API. If you provide a null `maxResults`, this action
+    # retrieves a maximum of 50 records per page. If you provide a
+    # `maxResults`, the value must be between 1 and 50. To get the next page
+    # results, provide the pagination token from the
+    # `GetBatchImportJobsResponse` as part of your request. A null
+    # pagination token fetches the records from the beginning.
+    #
+    # @option params [String] :job_id
+    #   The ID of the batch import job to get.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects to return for request.
+    #
+    # @option params [String] :next_token
+    #   The next token from the previous request.
+    #
+    # @return [Types::GetBatchImportJobsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBatchImportJobsResult#batch_imports #batch_imports} => Array&lt;Types::BatchImport&gt;
+    #   * {Types::GetBatchImportJobsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_batch_import_jobs({
+    #     job_id: "identifier",
+    #     max_results: 1,
+    #     next_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.batch_imports #=> Array
+    #   resp.batch_imports[0].job_id #=> String
+    #   resp.batch_imports[0].status #=> String, one of "IN_PROGRESS_INITIALIZING", "IN_PROGRESS", "CANCEL_IN_PROGRESS", "CANCELED", "COMPLETE", "FAILED"
+    #   resp.batch_imports[0].failure_reason #=> String
+    #   resp.batch_imports[0].start_time #=> String
+    #   resp.batch_imports[0].completion_time #=> String
+    #   resp.batch_imports[0].input_path #=> String
+    #   resp.batch_imports[0].output_path #=> String
+    #   resp.batch_imports[0].event_type_name #=> String
+    #   resp.batch_imports[0].iam_role_arn #=> String
+    #   resp.batch_imports[0].arn #=> String
+    #   resp.batch_imports[0].processed_records_count #=> Integer
+    #   resp.batch_imports[0].failed_records_count #=> Integer
+    #   resp.batch_imports[0].total_records_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetBatchImportJobs AWS API Documentation
+    #
+    # @overload get_batch_import_jobs(params = {})
+    # @param [Hash] params ({})
+    def get_batch_import_jobs(params = {}, options = {})
+      req = build_request(:get_batch_import_jobs, params)
       req.send_request(options)
     end
 
@@ -1408,6 +1614,36 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Retrieves the status of a `DeleteEventsByEventType` action.
+    #
+    # @option params [required, String] :event_type_name
+    #   Name of event type for which to get the deletion status.
+    #
+    # @return [Types::GetDeleteEventsByEventTypeStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeleteEventsByEventTypeStatusResult#event_type_name #event_type_name} => String
+    #   * {Types::GetDeleteEventsByEventTypeStatusResult#events_deletion_status #events_deletion_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_delete_events_by_event_type_status({
+    #     event_type_name: "identifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_type_name #=> String
+    #   resp.events_deletion_status #=> String, one of "IN_PROGRESS_INITIALIZING", "IN_PROGRESS", "CANCEL_IN_PROGRESS", "CANCELED", "COMPLETE", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetDeleteEventsByEventTypeStatus AWS API Documentation
+    #
+    # @overload get_delete_events_by_event_type_status(params = {})
+    # @param [Hash] params ({})
+    def get_delete_events_by_event_type_status(params = {}, options = {})
+      req = build_request(:get_delete_events_by_event_type_status, params)
+      req.send_request(options)
+    end
+
     # Gets a particular detector version.
     #
     # @option params [required, String] :detector_id
@@ -1446,7 +1682,7 @@ module Aws::FraudDetector
     #   resp.external_model_endpoints[0] #=> String
     #   resp.model_versions #=> Array
     #   resp.model_versions[0].model_id #=> String
-    #   resp.model_versions[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS"
+    #   resp.model_versions[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
     #   resp.model_versions[0].model_version_number #=> String
     #   resp.model_versions[0].arn #=> String
     #   resp.rules #=> Array
@@ -1571,6 +1807,48 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Retrieves details of events stored with Amazon Fraud Detector. This
+    # action does not retrieve prediction results.
+    #
+    # @option params [required, String] :event_id
+    #   The ID of the event to retrieve.
+    #
+    # @option params [required, String] :event_type_name
+    #   The event type of the event to retrieve.
+    #
+    # @return [Types::GetEventResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventResult#event #event} => Types::Event
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_event({
+    #     event_id: "string", # required
+    #     event_type_name: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event.event_id #=> String
+    #   resp.event.event_type_name #=> String
+    #   resp.event.event_timestamp #=> String
+    #   resp.event.event_variables #=> Hash
+    #   resp.event.event_variables["attributeKey"] #=> String
+    #   resp.event.current_label #=> String
+    #   resp.event.label_timestamp #=> String
+    #   resp.event.entities #=> Array
+    #   resp.event.entities[0].entity_type #=> String
+    #   resp.event.entities[0].entity_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetEvent AWS API Documentation
+    #
+    # @overload get_event(params = {})
+    # @param [Hash] params ({})
+    def get_event(params = {}, options = {})
+      req = build_request(:get_event, params)
+      req.send_request(options)
+    end
+
     # Evaluates an event against a detector version. If a version ID is not
     # provided, the detector’s (`ACTIVE`) version is used.
     #
@@ -1593,19 +1871,17 @@ module Aws::FraudDetector
     #   id is not available, use "UNKNOWN."
     #
     # @option params [required, String] :event_timestamp
-    #   Timestamp that defines when the event under evaluation occurred.
+    #   Timestamp that defines when the event under evaluation occurred. The
+    #   timestamp must be specified using ISO 8601 standard in UTC.
     #
     # @option params [required, Hash<String,String>] :event_variables
     #   Names of the event type's variables you defined in Amazon Fraud
     #   Detector to represent data elements and their corresponding values for
     #   the event you are sending for evaluation.
     #
-    #   * You must provide at least one eventVariable
+    #   You must provide at least one eventVariable
     #
-    #   * If detectorVersion is associated with a modelVersion, you must
-    #     provide at least one associated eventVariable
-    #
-    #   To ensure highest possible fraud prediction and to simplify your data
+    #   To ensure most accurate fraud prediction and to simplify your data
     #   preparation, Amazon Fraud Detector will replace all missing variables
     #   or values as follows:
     #
@@ -1617,7 +1893,7 @@ module Aws::FraudDetector
     #   mean/medians for numeric variables and with special values for
     #   categorical variables.
     #
-    #   **For External models ( for example, imported SageMaker):**
+    #   **For imported SageMaker models:**
     #
     #   If a null value is provided explicitly for a variable, the model and
     #   rules will use “null” as the value. If a variable is not provided (no
@@ -1643,7 +1919,7 @@ module Aws::FraudDetector
     #     entities: [ # required
     #       {
     #         entity_type: "string", # required
-    #         entity_id: "identifier", # required
+    #         entity_id: "entityRestrictedString", # required
     #       },
     #     ],
     #     event_timestamp: "utcTimestampISO8601", # required
@@ -1651,7 +1927,7 @@ module Aws::FraudDetector
     #       "variableName" => "variableValue",
     #     },
     #     external_model_endpoint_data_blobs: {
-    #       "string" => {
+    #       "sageMakerEndpointIdentifier" => {
     #         byte_buffer: "data",
     #         content_type: "contentType",
     #       },
@@ -1662,7 +1938,7 @@ module Aws::FraudDetector
     #
     #   resp.model_scores #=> Array
     #   resp.model_scores[0].model_version.model_id #=> String
-    #   resp.model_scores[0].model_version.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS"
+    #   resp.model_scores[0].model_version.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
     #   resp.model_scores[0].model_version.model_version_number #=> String
     #   resp.model_scores[0].model_version.arn #=> String
     #   resp.model_scores[0].scores #=> Hash
@@ -1729,6 +2005,12 @@ module Aws::FraudDetector
     #   resp.event_types[0].labels[0] #=> String
     #   resp.event_types[0].entity_types #=> Array
     #   resp.event_types[0].entity_types[0] #=> String
+    #   resp.event_types[0].event_ingestion #=> String, one of "ENABLED", "DISABLED"
+    #   resp.event_types[0].ingested_event_statistics.number_of_events #=> Integer
+    #   resp.event_types[0].ingested_event_statistics.event_data_size_in_bytes #=> Integer
+    #   resp.event_types[0].ingested_event_statistics.least_recent_event #=> String
+    #   resp.event_types[0].ingested_event_statistics.most_recent_event #=> String
+    #   resp.event_types[0].ingested_event_statistics.last_updated_time #=> String
     #   resp.event_types[0].last_updated_time #=> String
     #   resp.event_types[0].created_time #=> String
     #   resp.event_types[0].arn #=> String
@@ -1806,9 +2088,8 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
-    # Gets the encryption key if a Key Management Service (KMS) customer
-    # master key (CMK) has been specified to be used to encrypt content in
-    # Amazon Fraud Detector.
+    # Gets the encryption key if a KMS key has been specified to be used to
+    # encrypt content in Amazon Fraud Detector.
     #
     # @return [Types::GetKMSEncryptionKeyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1897,6 +2178,7 @@ module Aws::FraudDetector
     #   * {Types::GetModelVersionResult#training_data_source #training_data_source} => String
     #   * {Types::GetModelVersionResult#training_data_schema #training_data_schema} => Types::TrainingDataSchema
     #   * {Types::GetModelVersionResult#external_events_detail #external_events_detail} => Types::ExternalEventsDetail
+    #   * {Types::GetModelVersionResult#ingested_events_detail #ingested_events_detail} => Types::IngestedEventsDetail
     #   * {Types::GetModelVersionResult#status #status} => String
     #   * {Types::GetModelVersionResult#arn #arn} => String
     #
@@ -1904,23 +2186,26 @@ module Aws::FraudDetector
     #
     #   resp = client.get_model_version({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #     model_version_number: "floatVersionString", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.model_id #=> String
-    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS"
+    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
     #   resp.model_version_number #=> String
-    #   resp.training_data_source #=> String, one of "EXTERNAL_EVENTS"
+    #   resp.training_data_source #=> String, one of "EXTERNAL_EVENTS", "INGESTED_EVENTS"
     #   resp.training_data_schema.model_variables #=> Array
     #   resp.training_data_schema.model_variables[0] #=> String
     #   resp.training_data_schema.label_schema.label_mapper #=> Hash
     #   resp.training_data_schema.label_schema.label_mapper["string"] #=> Array
     #   resp.training_data_schema.label_schema.label_mapper["string"][0] #=> String
+    #   resp.training_data_schema.label_schema.unlabeled_events_treatment #=> String, one of "IGNORE", "FRAUD", "LEGIT"
     #   resp.external_events_detail.data_location #=> String
     #   resp.external_events_detail.data_access_role_arn #=> String
+    #   resp.ingested_events_detail.ingested_events_time_window.start_time #=> String
+    #   resp.ingested_events_detail.ingested_events_time_window.end_time #=> String
     #   resp.status #=> String
     #   resp.arn #=> String
     #
@@ -1969,7 +2254,7 @@ module Aws::FraudDetector
     #
     #   resp = client.get_models({
     #     model_id: "modelIdentifier",
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #     next_token: "string",
     #     max_results: 1,
     #   })
@@ -1979,7 +2264,7 @@ module Aws::FraudDetector
     #   resp.next_token #=> String
     #   resp.models #=> Array
     #   resp.models[0].model_id #=> String
-    #   resp.models[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS"
+    #   resp.models[0].model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
     #   resp.models[0].description #=> String
     #   resp.models[0].event_type_name #=> String
     #   resp.models[0].created_time #=> String
@@ -2315,6 +2600,9 @@ module Aws::FraudDetector
     #   The entity type for the event type. Example entity types: customer,
     #   merchant, account.
     #
+    # @option params [String] :event_ingestion
+    #   Specifies if ingenstion is enabled or disabled.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A collection of key and value pairs.
     #
@@ -2328,6 +2616,7 @@ module Aws::FraudDetector
     #     event_variables: ["string"], # required
     #     labels: ["string"],
     #     entity_types: ["string"], # required
+    #     event_ingestion: "ENABLED", # accepts ENABLED, DISABLED
     #     tags: [
     #       {
     #         key: "tagKey", # required
@@ -2382,8 +2671,8 @@ module Aws::FraudDetector
     #       event_type_name: "identifier",
     #       format: "TEXT_CSV", # accepts TEXT_CSV, APPLICATION_JSON
     #       use_event_variables: false, # required
-    #       json_input_template: "string",
-    #       csv_input_template: "string",
+    #       json_input_template: "modelInputTemplate",
+    #       csv_input_template: "modelInputTemplate",
     #     },
     #     output_configuration: { # required
     #       format: "TEXT_CSV", # required, accepts TEXT_CSV, APPLICATION_JSONLINES
@@ -2412,8 +2701,8 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
-    # Specifies the Key Management Service (KMS) customer master key (CMK)
-    # to be used to encrypt content in Amazon Fraud Detector.
+    # Specifies the KMS key to be used to encrypt content in Amazon Fraud
+    # Detector.
     #
     # @option params [required, String] :kms_encryption_key_arn
     #   The KMS encryption key ARN.
@@ -2503,6 +2792,67 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def put_outcome(params = {}, options = {})
       req = build_request(:put_outcome, params)
+      req.send_request(options)
+    end
+
+    # Stores events in Amazon Fraud Detector without generating fraud
+    # predictions for those events. For example, you can use `SendEvent` to
+    # upload a historical dataset, which you can then later use to train a
+    # model.
+    #
+    # @option params [required, String] :event_id
+    #   The event ID to upload.
+    #
+    # @option params [required, String] :event_type_name
+    #   The event type name of the event.
+    #
+    # @option params [required, String] :event_timestamp
+    #   The timestamp that defines when the event under evaluation occurred.
+    #   The timestamp must be specified using ISO 8601 standard in UTC.
+    #
+    # @option params [required, Hash<String,String>] :event_variables
+    #   Names of the event type's variables you defined in Amazon Fraud
+    #   Detector to represent data elements and their corresponding values for
+    #   the event you are sending for evaluation.
+    #
+    # @option params [String] :assigned_label
+    #   The label to associate with the event. Required if specifying
+    #   `labelTimestamp`.
+    #
+    # @option params [String] :label_timestamp
+    #   The timestamp associated with the label. Required if specifying
+    #   `assignedLabel`.
+    #
+    # @option params [required, Array<Types::Entity>] :entities
+    #   An array of entities.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_event({
+    #     event_id: "identifier", # required
+    #     event_type_name: "identifier", # required
+    #     event_timestamp: "utcTimestampISO8601", # required
+    #     event_variables: { # required
+    #       "variableName" => "variableValue",
+    #     },
+    #     assigned_label: "identifier",
+    #     label_timestamp: "utcTimestampISO8601",
+    #     entities: [ # required
+    #       {
+    #         entity_type: "string", # required
+    #         entity_id: "entityRestrictedString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/SendEvent AWS API Documentation
+    #
+    # @overload send_event(params = {})
+    # @param [Hash] params ({})
+    def send_event(params = {}, options = {})
+      req = build_request(:send_event, params)
       req.send_request(options)
     end
 
@@ -2621,8 +2971,8 @@ module Aws::FraudDetector
     #     model_versions: [
     #       {
     #         model_id: "modelIdentifier", # required
-    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
-    #         model_version_number: "nonEmptyString", # required
+    #         model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
+    #         model_version_number: "floatVersionString", # required
     #         arn: "fraudDetectorArn",
     #       },
     #     ],
@@ -2701,8 +3051,42 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
-    # Updates a model. You can update the description attribute using this
-    # action.
+    # Updates the specified event with a new label.
+    #
+    # @option params [required, String] :event_id
+    #   The ID of the event associated with the label to update.
+    #
+    # @option params [required, String] :event_type_name
+    #   The event type of the event associated with the label to update.
+    #
+    # @option params [required, String] :assigned_label
+    #   The new label to assign to the event.
+    #
+    # @option params [required, String] :label_timestamp
+    #   The timestamp associated with the label. The timestamp must be
+    #   specified using ISO 8601 standard in UTC.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_event_label({
+    #     event_id: "identifier", # required
+    #     event_type_name: "identifier", # required
+    #     assigned_label: "identifier", # required
+    #     label_timestamp: "utcTimestampISO8601", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateEventLabel AWS API Documentation
+    #
+    # @overload update_event_label(params = {})
+    # @param [Hash] params ({})
+    def update_event_label(params = {}, options = {})
+      req = build_request(:update_event_label, params)
+      req.send_request(options)
+    end
+
+    # Updates model description.
     #
     # @option params [required, String] :model_id
     #   The model ID.
@@ -2719,7 +3103,7 @@ module Aws::FraudDetector
     #
     #   resp = client.update_model({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #     description: "description",
     #   })
     #
@@ -2749,7 +3133,12 @@ module Aws::FraudDetector
     #   The major version number.
     #
     # @option params [Types::ExternalEventsDetail] :external_events_detail
-    #   The event details.
+    #   The details of the external events data used for training the model
+    #   version. Required if `trainingDataSource` is `EXTERNAL_EVENTS`.
+    #
+    # @option params [Types::IngestedEventsDetail] :ingested_events_detail
+    #   The details of the ingested event used for training the model version.
+    #   Required if your `trainingDataSource` is `INGESTED_EVENTS`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A collection of key and value pairs.
@@ -2765,11 +3154,17 @@ module Aws::FraudDetector
     #
     #   resp = client.update_model_version({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #     major_version_number: "wholeNumberVersionString", # required
     #     external_events_detail: {
     #       data_location: "s3BucketLocation", # required
     #       data_access_role_arn: "iamRoleArn", # required
+    #     },
+    #     ingested_events_detail: {
+    #       ingested_events_time_window: { # required
+    #         start_time: "time", # required
+    #         end_time: "time", # required
+    #       },
     #     },
     #     tags: [
     #       {
@@ -2782,7 +3177,7 @@ module Aws::FraudDetector
     # @example Response structure
     #
     #   resp.model_id #=> String
-    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS"
+    #   resp.model_type #=> String, one of "ONLINE_FRAUD_INSIGHTS", "TRANSACTION_FRAUD_INSIGHTS"
     #   resp.model_version_number #=> String
     #   resp.status #=> String
     #
@@ -2801,7 +3196,7 @@ module Aws::FraudDetector
     #
     # 1.  Change the `TRAINING_COMPLETE` status to `ACTIVE`.
     #
-    # 2.  Change `ACTIVE`to `INACTIVE`.
+    # 2.  Change `ACTIVE` to `INACTIVE`.
     #
     # @option params [required, String] :model_id
     #   The model ID of the model version to update.
@@ -2821,7 +3216,7 @@ module Aws::FraudDetector
     #
     #   resp = client.update_model_version_status({
     #     model_id: "modelIdentifier", # required
-    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS
+    #     model_type: "ONLINE_FRAUD_INSIGHTS", # required, accepts ONLINE_FRAUD_INSIGHTS, TRANSACTION_FRAUD_INSIGHTS
     #     model_version_number: "floatVersionString", # required
     #     status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, TRAINING_CANCELLED
     #   })
@@ -2976,7 +3371,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -562,7 +562,7 @@ module Aws::AutoScaling
     #   provide optimal I/O performance. This optimization is not available
     #   with all instance types. Additional fees are incurred when you enable
     #   EBS optimization for an instance type that is not EBS-optimized by
-    #   default. For more information, see [Amazon EBS-Optimized Instances][1]
+    #   default. For more information, see [Amazon EBS-optimized instances][1]
     #   in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #   The default value is `false`.
@@ -694,6 +694,12 @@ module Aws::AutoScaling
     #
     #   groups = auto_scaling.groups({
     #     auto_scaling_group_names: ["XmlStringMaxLen255"],
+    #     filters: [
+    #       {
+    #         name: "XmlString",
+    #         values: ["XmlString"],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :auto_scaling_group_names
@@ -702,6 +708,8 @@ module Aws::AutoScaling
     #   `MaxRecords` parameter.
     #
     #   If you omit this parameter, all Auto Scaling groups are described.
+    # @option options [Array<Types::Filter>] :filters
+    #   One or more filters to limit the results based on specific tags.
     # @return [AutoScalingGroup::Collection]
     def groups(options = {})
       batches = Enumerator.new do |y|

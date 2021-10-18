@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2021-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2021-10-14)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling now supports filtering describe Auto Scaling groups API using tags
+
 1.68.0 (2021-09-01)
 ------------------
 

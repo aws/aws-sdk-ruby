@@ -1514,7 +1514,7 @@ module Aws::Schemas
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-schemas'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

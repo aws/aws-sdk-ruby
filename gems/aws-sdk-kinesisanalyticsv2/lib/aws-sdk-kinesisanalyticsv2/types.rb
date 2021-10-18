@@ -297,7 +297,7 @@ module Aws::KinesisAnalyticsV2
     #   An array of objects, each describing one output configuration. In
     #   the output configuration, you specify the name of an in-application
     #   stream, a destination (that is, a Kinesis data stream, a Kinesis
-    #   Data Firehose delivery stream, or an AWS Lambda function), and
+    #   Data Firehose delivery stream, or an Amazon Lambda function), and
     #   record the formation to use when writing to the destination.
     #   @return [Types::Output]
     #
@@ -1041,12 +1041,12 @@ module Aws::KinesisAnalyticsV2
     #           },
     #           catalog_configuration_update: {
     #             glue_data_catalog_configuration_update: { # required
-    #               database_arn_update: "DatabaseARN",
+    #               database_arn_update: "DatabaseARN", # required
     #             },
     #           },
     #           deploy_as_application_configuration_update: {
-    #             s3_content_location_update: { # required
-    #               bucket_arn_update: "BucketARN", # required
+    #             s3_content_location_update: {
+    #               bucket_arn_update: "BucketARN",
     #               base_path_update: "BasePath",
     #             },
     #           },
@@ -1454,7 +1454,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # The configuration parameters for the default AWS Glue database. You
+    # The configuration parameters for the default Amazon Glue database. You
     # use this database for SQL queries that you write in a Kinesis Data
     # Analytics Studio notebook.
     #
@@ -1468,8 +1468,8 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] glue_data_catalog_configuration
-    #   The configuration parameters for the default AWS Glue database. You
-    #   use this database for Apache Flink SQL queries and table API
+    #   The configuration parameters for the default Amazon Glue database.
+    #   You use this database for Apache Flink SQL queries and table API
     #   transforms that you write in a Kinesis Data Analytics Studio
     #   notebook.
     #   @return [Types::GlueDataCatalogConfiguration]
@@ -1482,14 +1482,14 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # The configuration parameters for the default AWS Glue database. You
+    # The configuration parameters for the default Amazon Glue database. You
     # use this database for Apache Flink SQL queries and table API
     # transforms that you write in a Kinesis Data Analytics Studio notebook.
     #
     # @!attribute [rw] glue_data_catalog_configuration_description
-    #   The configuration parameters for the default AWS Glue database. You
-    #   use this database for SQL queries that you write in a Kinesis Data
-    #   Analytics Studio notebook.
+    #   The configuration parameters for the default Amazon Glue database.
+    #   You use this database for SQL queries that you write in a Kinesis
+    #   Data Analytics Studio notebook.
     #   @return [Types::GlueDataCatalogConfigurationDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CatalogConfigurationDescription AWS API Documentation
@@ -1500,19 +1500,21 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # Updates to
+    # Updates to the configuration parameters for the default Amazon Glue
+    # database. You use this database for SQL queries that you write in a
+    # Kinesis Data Analytics Studio notebook.
     #
     # @note When making an API call, you may pass CatalogConfigurationUpdate
     #   data as a hash:
     #
     #       {
     #         glue_data_catalog_configuration_update: { # required
-    #           database_arn_update: "DatabaseARN",
+    #           database_arn_update: "DatabaseARN", # required
     #         },
     #       }
     #
     # @!attribute [rw] glue_data_catalog_configuration_update
-    #   Updates to the configuration parameters for the default AWS Glue
+    #   Updates to the configuration parameters for the default Amazon Glue
     #   database. You use this database for SQL queries that you write in a
     #   Kinesis Data Analytics Studio notebook.
     #   @return [Types::GlueDataCatalogConfigurationUpdate]
@@ -2037,7 +2039,7 @@ module Aws::KinesisAnalyticsV2
     #       {
     #         application_name: "ApplicationName", # required
     #         application_description: "ApplicationDescription",
-    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, ZEPPELIN-FLINK-1_0
+    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0
     #         service_execution_role: "RoleARN", # required
     #         application_configuration: {
     #           sql_application_configuration: {
@@ -2776,7 +2778,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # The information required to deploy a Kinesis Data Analytics Studio
-    # notebook as an application with durable state..
+    # notebook as an application with durable state.
     #
     # @note When making an API call, you may pass DeployAsApplicationConfiguration
     #   data as a hash:
@@ -2821,14 +2823,14 @@ module Aws::KinesisAnalyticsV2
     end
 
     # Updates to the configuration information required to deploy an Amazon
-    # Data Analytics Studio notebook as an application with durable state..
+    # Data Analytics Studio notebook as an application with durable state.
     #
     # @note When making an API call, you may pass DeployAsApplicationConfigurationUpdate
     #   data as a hash:
     #
     #       {
-    #         s3_content_location_update: { # required
-    #           bucket_arn_update: "BucketARN", # required
+    #         s3_content_location_update: {
+    #           bucket_arn_update: "BucketARN",
     #           base_path_update: "BasePath",
     #         },
     #       }
@@ -3385,7 +3387,7 @@ module Aws::KinesisAnalyticsV2
     #   data as a hash:
     #
     #       {
-    #         database_arn_update: "DatabaseARN",
+    #         database_arn_update: "DatabaseARN", # required
     #       }
     #
     # @!attribute [rw] database_arn_update
@@ -3564,7 +3566,7 @@ module Aws::KinesisAnalyticsV2
       include Aws::Structure
     end
 
-    # An object that contains the Amazon Resource Name (ARN) of the AWS
+    # An object that contains the Amazon Resource Name (ARN) of the Amazon
     # Lambda function that is used to preprocess records in the stream in a
     # SQL-based Kinesis Data Analytics application.
     #
@@ -3576,13 +3578,13 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the AWS Lambda function that operates on records in the
-    #   stream.
+    #   The ARN of the Amazon Lambda function that operates on records in
+    #   the stream.
     #
     #   <note markdown="1"> To specify an earlier version of the Lambda function than the
     #   latest, include the Lambda function version in the Lambda function
-    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
-    #   Lambda][1]
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs:
+    #   Amazon Lambda][1]
     #
     #    </note>
     #
@@ -3600,17 +3602,17 @@ module Aws::KinesisAnalyticsV2
     end
 
     # For a SQL-based Kinesis Data Analytics application, an object that
-    # contains the Amazon Resource Name (ARN) of the AWS Lambda function
+    # contains the Amazon Resource Name (ARN) of the Amazon Lambda function
     # that is used to preprocess records in the stream.
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the AWS Lambda function that is used to preprocess the
+    #   The ARN of the Amazon Lambda function that is used to preprocess the
     #   records in the stream.
     #
     #   <note markdown="1"> To specify an earlier version of the Lambda function than the
     #   latest, include the Lambda function version in the Lambda function
-    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
-    #   Lambda][1]
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs:
+    #   Amazon Lambda][1]
     #
     #    </note>
     #
@@ -3620,7 +3622,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that is used to access the AWS Lambda
+    #   The ARN of the IAM role that is used to access the Amazon Lambda
     #   function.
     #
     #   <note markdown="1"> Provided for backward compatibility. Applications that are created
@@ -3651,13 +3653,13 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] resource_arn_update
-    #   The Amazon Resource Name (ARN) of the new AWS Lambda function that
-    #   is used to preprocess the records in the stream.
+    #   The Amazon Resource Name (ARN) of the new Amazon Lambda function
+    #   that is used to preprocess the records in the stream.
     #
     #   <note markdown="1"> To specify an earlier version of the Lambda function than the
     #   latest, include the Lambda function version in the Lambda function
-    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
-    #   Lambda][1]
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs:
+    #   Amazon Lambda][1]
     #
     #    </note>
     #
@@ -3723,7 +3725,7 @@ module Aws::KinesisAnalyticsV2
     # For a SQL-based Kinesis Data Analytics application, describes a
     # processor that is used to preprocess the records in the stream before
     # being processed by your application code. Currently, the only input
-    # processor available is [AWS Lambda][1].
+    # processor available is [Amazon Lambda][1].
     #
     #
     #
@@ -3753,7 +3755,7 @@ module Aws::KinesisAnalyticsV2
 
     # For a SQL-based Kinesis Data Analytics application, provides the
     # configuration information about an input processor. Currently, the
-    # only input processor available is [AWS Lambda][1].
+    # only input processor available is [Amazon Lambda][1].
     #
     #
     #
@@ -4344,7 +4346,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # When you configure a SQL-based Kinesis Data Analytics application's
-    # output, identifies an AWS Lambda function as the destination. You
+    # output, identifies an Amazon Lambda function as the destination. You
     # provide the function Amazon Resource Name (ARN) of the Lambda
     # function.
     #
@@ -4361,8 +4363,8 @@ module Aws::KinesisAnalyticsV2
     #
     #   <note markdown="1"> To specify an earlier version of the Lambda function than the
     #   latest, include the Lambda function version in the Lambda function
-    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
-    #   Lambda][1]
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs:
+    #   Amazon Lambda][1]
     #
     #    </note>
     #
@@ -4380,7 +4382,7 @@ module Aws::KinesisAnalyticsV2
     end
 
     # For a SQL-based Kinesis Data Analytics application's output,
-    # describes the AWS Lambda function that is configured as its
+    # describes the Amazon Lambda function that is configured as its
     # destination.
     #
     # @!attribute [rw] resource_arn
@@ -4409,7 +4411,7 @@ module Aws::KinesisAnalyticsV2
 
     # When you update an SQL-based Kinesis Data Analytics application's
     # output configuration using the UpdateApplication operation, provides
-    # information about an AWS Lambda function that is configured as the
+    # information about an Amazon Lambda function that is configured as the
     # destination.
     #
     # @note When making an API call, you may pass LambdaOutputUpdate
@@ -4420,13 +4422,13 @@ module Aws::KinesisAnalyticsV2
     #       }
     #
     # @!attribute [rw] resource_arn_update
-    #   The Amazon Resource Name (ARN) of the destination AWS Lambda
+    #   The Amazon Resource Name (ARN) of the destination Amazon Lambda
     #   function.
     #
     #   <note markdown="1"> To specify an earlier version of the Lambda function than the
     #   latest, include the Lambda function version in the Lambda function
-    #   ARN. For more information about Lambda ARNs, see [Example ARNs: AWS
-    #   Lambda][1]
+    #   ARN. For more information about Lambda ARNs, see [Example ARNs:
+    #   Amazon Lambda][1]
     #
     #    </note>
     #
@@ -4530,7 +4532,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] next_token
     #   If a previous invocation of this operation returned a pagination
     #   token, pass it into this value to retrieve the next set of results.
-    #   For more information about pagination, see [Using the AWS Command
+    #   For more information about pagination, see [Using the Amazon Command
     #   Line Interface's Pagination Options][1].
     #
     #
@@ -4561,7 +4563,7 @@ module Aws::KinesisAnalyticsV2
     #   The pagination token for the next set of results, or `null` if there
     #   are no additional results. To retrieve the next set of items, pass
     #   this token into a subsequent invocation of this operation. For more
-    #   information about pagination, see [Using the AWS Command Line
+    #   information about pagination, see [Using the Amazon Command Line
     #   Interface's Pagination Options][1].
     #
     #
@@ -4593,7 +4595,7 @@ module Aws::KinesisAnalyticsV2
     # @!attribute [rw] next_token
     #   If a previous command returned a pagination token, pass it into this
     #   value to retrieve the next set of results. For more information
-    #   about pagination, see [Using the AWS Command Line Interface's
+    #   about pagination, see [Using the Amazon Command Line Interface's
     #   Pagination Options][1].
     #
     #
@@ -4618,8 +4620,8 @@ module Aws::KinesisAnalyticsV2
     #   The pagination token for the next set of results, or `null` if there
     #   are no additional results. Pass this token into a subsequent command
     #   to retrieve the next set of items For more information about
-    #   pagination, see [Using the AWS Command Line Interface's Pagination
-    #   Options][1].
+    #   pagination, see [Using the Amazon Command Line Interface's
+    #   Pagination Options][1].
     #
     #
     #
@@ -4887,7 +4889,7 @@ module Aws::KinesisAnalyticsV2
     #   @return [Types::KinesisFirehoseOutput]
     #
     # @!attribute [rw] lambda_output
-    #   Identifies an AWS Lambda function as the destination.
+    #   Identifies an Amazon Lambda function as the destination.
     #   @return [Types::LambdaOutput]
     #
     # @!attribute [rw] destination_schema
@@ -4997,7 +4999,8 @@ module Aws::KinesisAnalyticsV2
     #   @return [Types::KinesisFirehoseOutputUpdate]
     #
     # @!attribute [rw] lambda_output_update
-    #   Describes an AWS Lambda function as the destination for the output.
+    #   Describes an Amazon Lambda function as the destination for the
+    #   output.
     #   @return [Types::LambdaOutputUpdate]
     #
     # @!attribute [rw] destination_schema_update
@@ -5788,7 +5791,7 @@ module Aws::KinesisAnalyticsV2
     #   data as a hash:
     #
     #       {
-    #         bucket_arn_update: "BucketARN", # required
+    #         bucket_arn_update: "BucketARN",
     #         base_path_update: "BasePath",
     #       }
     #
@@ -6472,11 +6475,11 @@ module Aws::KinesisAnalyticsV2
     class StopApplicationResponse < Aws::EmptyStructure; end
 
     # A key-value pair (the value is optional) that you can define and
-    # assign to AWS resources. If you specify a tag that already exists, the
-    # tag value is replaced with the value that you specify in the request.
-    # Note that the maximum number of application tags includes system tags.
-    # The maximum number of user-defined application tags is 50. For more
-    # information, see [Using Tagging][1].
+    # assign to Amazon resources. If you specify a tag that already exists,
+    # the tag value is replaced with the value that you specify in the
+    # request. Note that the maximum number of application tags includes
+    # system tags. The maximum number of user-defined application tags is
+    # 50. For more information, see [Using Tagging][1].
     #
     #
     #
@@ -6830,12 +6833,12 @@ module Aws::KinesisAnalyticsV2
     #             },
     #             catalog_configuration_update: {
     #               glue_data_catalog_configuration_update: { # required
-    #                 database_arn_update: "DatabaseARN",
+    #                 database_arn_update: "DatabaseARN", # required
     #               },
     #             },
     #             deploy_as_application_configuration_update: {
-    #               s3_content_location_update: { # required
-    #                 bucket_arn_update: "BucketARN", # required
+    #               s3_content_location_update: {
+    #                 bucket_arn_update: "BucketARN",
     #                 base_path_update: "BasePath",
     #               },
     #             },
@@ -7099,13 +7102,13 @@ module Aws::KinesisAnalyticsV2
     #   @return [Types::ZeppelinMonitoringConfiguration]
     #
     # @!attribute [rw] catalog_configuration
-    #   The AWS Glue Data Catalog that you use in queries in a Kinesis Data
-    #   Analytics Studio notebook.
+    #   The Amazon Glue Data Catalog that you use in queries in a Kinesis
+    #   Data Analytics Studio notebook.
     #   @return [Types::CatalogConfiguration]
     #
     # @!attribute [rw] deploy_as_application_configuration
     #   The information required to deploy a Kinesis Data Analytics Studio
-    #   notebook as an application with durable state..
+    #   notebook as an application with durable state.
     #   @return [Types::DeployAsApplicationConfiguration]
     #
     # @!attribute [rw] custom_artifacts_configuration
@@ -7132,13 +7135,13 @@ module Aws::KinesisAnalyticsV2
     #   @return [Types::ZeppelinMonitoringConfigurationDescription]
     #
     # @!attribute [rw] catalog_configuration_description
-    #   The AWS Glue Data Catalog that is associated with the Kinesis Data
-    #   Analytics Studio notebook.
+    #   The Amazon Glue Data Catalog that is associated with the Kinesis
+    #   Data Analytics Studio notebook.
     #   @return [Types::CatalogConfigurationDescription]
     #
     # @!attribute [rw] deploy_as_application_configuration_description
     #   The parameters required to deploy a Kinesis Data Analytics Studio
-    #   notebook as an application with durable state..
+    #   notebook as an application with durable state.
     #   @return [Types::DeployAsApplicationConfigurationDescription]
     #
     # @!attribute [rw] custom_artifacts_configuration_description
@@ -7169,12 +7172,12 @@ module Aws::KinesisAnalyticsV2
     #         },
     #         catalog_configuration_update: {
     #           glue_data_catalog_configuration_update: { # required
-    #             database_arn_update: "DatabaseARN",
+    #             database_arn_update: "DatabaseARN", # required
     #           },
     #         },
     #         deploy_as_application_configuration_update: {
-    #           s3_content_location_update: { # required
-    #             bucket_arn_update: "BucketARN", # required
+    #           s3_content_location_update: {
+    #             bucket_arn_update: "BucketARN",
     #             base_path_update: "BasePath",
     #           },
     #         },
@@ -7201,14 +7204,14 @@ module Aws::KinesisAnalyticsV2
     #   @return [Types::ZeppelinMonitoringConfigurationUpdate]
     #
     # @!attribute [rw] catalog_configuration_update
-    #   Updates to the configuration of the AWS Glue Data Catalog that is
+    #   Updates to the configuration of the Amazon Glue Data Catalog that is
     #   associated with the Kinesis Data Analytics Studio notebook.
     #   @return [Types::CatalogConfigurationUpdate]
     #
     # @!attribute [rw] deploy_as_application_configuration_update
     #   Updates to the configuration information required to deploy an
     #   Amazon Data Analytics Studio notebook as an application with durable
-    #   state..
+    #   state.
     #   @return [Types::DeployAsApplicationConfigurationUpdate]
     #
     # @!attribute [rw] custom_artifacts_configuration_update

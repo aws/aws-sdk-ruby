@@ -2706,6 +2706,8 @@ module Aws::Glue
     #             exclusions: ["Path"],
     #             connection_name: "ConnectionName",
     #             sample_size: 1,
+    #             event_queue_arn: "EventQueueArn",
+    #             dlq_event_queue_arn: "EventQueueArn",
     #           },
     #         ],
     #         jdbc_targets: [
@@ -2948,6 +2950,8 @@ module Aws::Glue
     #               exclusions: ["Path"],
     #               connection_name: "ConnectionName",
     #               sample_size: 1,
+    #               event_queue_arn: "EventQueueArn",
+    #               dlq_event_queue_arn: "EventQueueArn",
     #             },
     #           ],
     #           jdbc_targets: [
@@ -2986,7 +2990,7 @@ module Aws::Glue
     #           delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #         },
     #         recrawl_policy: {
-    #           recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
+    #           recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY, CRAWL_EVENT_MODE
     #         },
     #         lineage_configuration: {
     #           crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
@@ -13229,7 +13233,7 @@ module Aws::Glue
     #   data as a hash:
     #
     #       {
-    #         recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
+    #         recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY, CRAWL_EVENT_MODE
     #       }
     #
     # @!attribute [rw] recrawl_behavior
@@ -13241,6 +13245,9 @@ module Aws::Glue
     #
     #   A value of `CRAWL_NEW_FOLDERS_ONLY` specifies crawling only folders
     #   that were added since the last crawler run.
+    #
+    #   A value of `CRAWL_EVENT_MODE` specifies crawling only the changes
+    #   identified by Amazon S3 events.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RecrawlPolicy AWS API Documentation
@@ -13644,6 +13651,8 @@ module Aws::Glue
     #         exclusions: ["Path"],
     #         connection_name: "ConnectionName",
     #         sample_size: 1,
+    #         event_queue_arn: "EventQueueArn",
+    #         dlq_event_queue_arn: "EventQueueArn",
     #       }
     #
     # @!attribute [rw] path
@@ -13671,13 +13680,25 @@ module Aws::Glue
     #   crawled. A valid value is an integer between 1 and 249.
     #   @return [Integer]
     #
+    # @!attribute [rw] event_queue_arn
+    #   A valid Amazon SQS ARN. For example,
+    #   `arn:aws:sqs:region:account:sqs`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dlq_event_queue_arn
+    #   A valid Amazon dead-letter SQS ARN. For example,
+    #   `arn:aws:sqs:region:account:deadLetterQueue`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3Target AWS API Documentation
     #
     class S3Target < Struct.new(
       :path,
       :exclusions,
       :connection_name,
-      :sample_size)
+      :sample_size,
+      :event_queue_arn,
+      :dlq_event_queue_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16406,6 +16427,8 @@ module Aws::Glue
     #               exclusions: ["Path"],
     #               connection_name: "ConnectionName",
     #               sample_size: 1,
+    #               event_queue_arn: "EventQueueArn",
+    #               dlq_event_queue_arn: "EventQueueArn",
     #             },
     #           ],
     #           jdbc_targets: [
@@ -16444,7 +16467,7 @@ module Aws::Glue
     #           delete_behavior: "LOG", # accepts LOG, DELETE_FROM_DATABASE, DEPRECATE_IN_DATABASE
     #         },
     #         recrawl_policy: {
-    #           recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY
+    #           recrawl_behavior: "CRAWL_EVERYTHING", # accepts CRAWL_EVERYTHING, CRAWL_NEW_FOLDERS_ONLY, CRAWL_EVENT_MODE
     #         },
     #         lineage_configuration: {
     #           crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE

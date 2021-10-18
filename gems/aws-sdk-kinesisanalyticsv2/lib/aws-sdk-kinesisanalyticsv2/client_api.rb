@@ -650,7 +650,7 @@ module Aws::KinesisAnalyticsV2
     DeployAsApplicationConfigurationDescription.add_member(:s3_content_location_description, Shapes::ShapeRef.new(shape: S3ContentBaseLocationDescription, required: true, location_name: "S3ContentLocationDescription"))
     DeployAsApplicationConfigurationDescription.struct_class = Types::DeployAsApplicationConfigurationDescription
 
-    DeployAsApplicationConfigurationUpdate.add_member(:s3_content_location_update, Shapes::ShapeRef.new(shape: S3ContentBaseLocationUpdate, required: true, location_name: "S3ContentLocationUpdate"))
+    DeployAsApplicationConfigurationUpdate.add_member(:s3_content_location_update, Shapes::ShapeRef.new(shape: S3ContentBaseLocationUpdate, location_name: "S3ContentLocationUpdate"))
     DeployAsApplicationConfigurationUpdate.struct_class = Types::DeployAsApplicationConfigurationUpdate
 
     DescribeApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
@@ -724,7 +724,7 @@ module Aws::KinesisAnalyticsV2
     GlueDataCatalogConfigurationDescription.add_member(:database_arn, Shapes::ShapeRef.new(shape: DatabaseARN, required: true, location_name: "DatabaseARN"))
     GlueDataCatalogConfigurationDescription.struct_class = Types::GlueDataCatalogConfigurationDescription
 
-    GlueDataCatalogConfigurationUpdate.add_member(:database_arn_update, Shapes::ShapeRef.new(shape: DatabaseARN, location_name: "DatabaseARNUpdate"))
+    GlueDataCatalogConfigurationUpdate.add_member(:database_arn_update, Shapes::ShapeRef.new(shape: DatabaseARN, required: true, location_name: "DatabaseARNUpdate"))
     GlueDataCatalogConfigurationUpdate.struct_class = Types::GlueDataCatalogConfigurationUpdate
 
     InAppStreamNames.member = Shapes::ShapeRef.new(shape: InAppStreamName)
@@ -1062,7 +1062,7 @@ module Aws::KinesisAnalyticsV2
     S3ContentBaseLocationDescription.add_member(:base_path, Shapes::ShapeRef.new(shape: BasePath, location_name: "BasePath"))
     S3ContentBaseLocationDescription.struct_class = Types::S3ContentBaseLocationDescription
 
-    S3ContentBaseLocationUpdate.add_member(:bucket_arn_update, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARNUpdate"))
+    S3ContentBaseLocationUpdate.add_member(:bucket_arn_update, Shapes::ShapeRef.new(shape: BucketARN, location_name: "BucketARNUpdate"))
     S3ContentBaseLocationUpdate.add_member(:base_path_update, Shapes::ShapeRef.new(shape: BasePath, location_name: "BasePathUpdate"))
     S3ContentBaseLocationUpdate.struct_class = Types::S3ContentBaseLocationUpdate
 
@@ -1354,6 +1354,7 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:create_application_presigned_url, Seahorse::Model::Operation.new.tap do |o|
@@ -1519,6 +1520,7 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: ResourceProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:list_application_snapshots, Seahorse::Model::Operation.new.tap do |o|

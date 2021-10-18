@@ -1375,7 +1375,7 @@ module Aws::AutoScaling
     #   provide optimal I/O performance. This optimization is not available
     #   with all instance types. Additional fees are incurred when you enable
     #   EBS optimization for an instance type that is not EBS-optimized by
-    #   default. For more information, see [Amazon EBS-Optimized Instances][1]
+    #   default. For more information, see [Amazon EBS-optimized instances][1]
     #   in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #   The default value is `false`.
@@ -1917,11 +1917,11 @@ module Aws::AutoScaling
     # Describes the current Amazon EC2 Auto Scaling resource quotas for your
     # account.
     #
-    # When you establish an account, the account has initial quotas on the
-    # maximum number of Auto Scaling groups and launch configurations that
-    # you can create in a given Region. For more information, see [Amazon
-    # EC2 Auto Scaling service quotas][1] in the *Amazon EC2 Auto Scaling
-    # User Guide*.
+    # When you establish an Amazon Web Services account, the account has
+    # initial quotas on the maximum number of Auto Scaling groups and launch
+    # configurations that you can create in a given Region. For more
+    # information, see [Amazon EC2 Auto Scaling service quotas][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -2021,9 +2021,16 @@ module Aws::AutoScaling
     # Gets information about the Auto Scaling groups in the account and
     # Region.
     #
-    # This operation returns information about instances in Auto Scaling
-    # groups. To retrieve information about the instances in a warm pool,
-    # you must call the DescribeWarmPool API.
+    # If you specify Auto Scaling group names, the output includes
+    # information for only the specified Auto Scaling groups. If you specify
+    # filters, the output includes information for only those Auto Scaling
+    # groups that meet the filter criteria. If you do not specify group
+    # names or filters, the output includes information for all Auto Scaling
+    # groups.
+    #
+    # This operation also returns information about instances in Auto
+    # Scaling groups. To retrieve information about the instances in a warm
+    # pool, you must call the DescribeWarmPool API.
     #
     # @option params [Array<String>] :auto_scaling_group_names
     #   The names of the Auto Scaling groups. By default, you can only specify
@@ -2039,6 +2046,9 @@ module Aws::AutoScaling
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
     #   value is `50` and the maximum value is `100`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters to limit the results based on specific tags.
     #
     # @return [Types::AutoScalingGroupsType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2108,6 +2118,12 @@ module Aws::AutoScaling
     #     auto_scaling_group_names: ["XmlStringMaxLen255"],
     #     next_token: "XmlString",
     #     max_records: 1,
+    #     filters: [
+    #       {
+    #         name: "XmlString",
+    #         values: ["XmlString"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5990,7 +6006,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

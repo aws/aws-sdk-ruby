@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.271.0 (2021-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.270.0 (2021-10-13)
+------------------
+
+* Feature - This release adds support for additional VPC Flow Logs delivery options to S3, such as Apache Parquet formatted files, Hourly partitions and Hive-compatible S3 prefixes
+
+1.269.0 (2021-10-12)
+------------------
+
+* Feature - EncryptionSupport for InstanceStorageInfo added to DescribeInstanceTypes API
+
+1.268.0 (2021-10-11)
+------------------
+
+* Feature - Documentation update for Amazon EC2.
+
 1.267.0 (2021-10-08)
 ------------------
 

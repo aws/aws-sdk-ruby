@@ -1079,7 +1079,8 @@ module Aws::ECS
     #   the service to the tasks in the service. If no value is specified, the
     #   tags are not propagated. Tags can only be propagated to the tasks
     #   within the service during service creation. To add tags to a task
-    #   after service creation, use the TagResource API action.
+    #   after service creation or task creation, use the TagResource API
+    #   action.
     #
     # @option params [Boolean] :enable_execute_command
     #   Whether or not the execute command functionality is enabled for the
@@ -6331,6 +6332,13 @@ module Aws::ECS
     #   task definition to run. If a `revision` is not specified, the latest
     #   `ACTIVE` revision is used.
     #
+    #   The full ARN value must match the value that you specified ias the
+    #   `Resource` of the IAM principal's permissions policy. For example, if
+    #   the `Resource` is
+    #   arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*,
+    #   the `taskDefinition` ARN value must be
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`.
+    #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunTaskResponse#tasks #tasks} => Array&lt;Types::Task&gt;
@@ -8499,7 +8507,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

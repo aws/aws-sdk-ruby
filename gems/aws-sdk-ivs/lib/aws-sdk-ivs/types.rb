@@ -100,17 +100,17 @@ module Aws::IVS
       include Aws::Structure
     end
 
-    # @!attribute [rw] stream_keys
-    #   @return [Array<Types::StreamKey>]
-    #
     # @!attribute [rw] errors
     #   @return [Array<Types::BatchError>]
+    #
+    # @!attribute [rw] stream_keys
+    #   @return [Array<Types::StreamKey>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchGetStreamKeyResponse AWS API Documentation
     #
     class BatchGetStreamKeyResponse < Struct.new(
-      :stream_keys,
-      :errors)
+      :errors,
+      :stream_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -121,8 +121,14 @@ module Aws::IVS
     #   Channel ARN.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   Channel name.
+    # @!attribute [rw] authorized
+    #   Whether the channel is private (enabled for playback authorization).
+    #   Default: `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ingest_endpoint
+    #   Channel ingest endpoint, part of the definition of an ingest server,
+    #   used when you set up streaming software.
     #   @return [String]
     #
     # @!attribute [rw] latency_mode
@@ -132,21 +138,12 @@ module Aws::IVS
     #   `NORMAL` correspond to Ultra-low and Standard, respectively.)
     #   @return [String]
     #
-    # @!attribute [rw] type
-    #   Channel type, which determines the allowable resolution and bitrate.
-    #   *If you exceed the allowable resolution or bitrate, the stream
-    #   probably will disconnect immediately.* Default: `STANDARD`. Valid
-    #   values:
+    # @!attribute [rw] name
+    #   Channel name.
+    #   @return [String]
     #
-    #   * `STANDARD`\: Multiple qualities are generated from the original
-    #     input, to automatically give viewers the best experience for their
-    #     devices and network conditions. Vertical resolution can be up to
-    #     1080 and bitrate can be up to 8.5 Mbps.
-    #
-    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
-    #     viewer’s video-quality choice is limited to the original input.
-    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
-    #     Mbps.
+    # @!attribute [rw] playback_url
+    #   Channel playback URL.
     #   @return [String]
     #
     # @!attribute [rw] recording_configuration_arn
@@ -155,36 +152,39 @@ module Aws::IVS
     #   recording is disabled).
     #   @return [String]
     #
-    # @!attribute [rw] ingest_endpoint
-    #   Channel ingest endpoint, part of the definition of an ingest server,
-    #   used when you set up streaming software.
-    #   @return [String]
-    #
-    # @!attribute [rw] playback_url
-    #   Channel playback URL.
-    #   @return [String]
-    #
-    # @!attribute [rw] authorized
-    #   Whether the channel is private (enabled for playback authorization).
-    #   Default: `false`.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] type
+    #   Channel type, which determines the allowable resolution and bitrate.
+    #   *If you exceed the allowable resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Default: `STANDARD`. Valid
+    #   values:
+    #
+    #   * `STANDARD`\: Multiple qualities are generated from the original
+    #     input, to automatically give viewers the best experience for their
+    #     devices and network conditions. Resolution can be up to 1080p and
+    #     bitrate can be up to 8.5 Mbps. Audio is transcoded only for
+    #     renditions 360p and below; above that, audio is passed through.
+    #
+    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
+    #     viewer’s video-quality choice is limited to the original input.
+    #     Resolution can be up to 480p and bitrate can be up to 1.5 Mbps.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/Channel AWS API Documentation
     #
     class Channel < Struct.new(
       :arn,
-      :name,
-      :latency_mode,
-      :type,
-      :recording_configuration_arn,
-      :ingest_endpoint,
-      :playback_url,
       :authorized,
-      :tags)
+      :ingest_endpoint,
+      :latency_mode,
+      :name,
+      :playback_url,
+      :recording_configuration_arn,
+      :tags,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -207,9 +207,10 @@ module Aws::IVS
     #   Channel ARN.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   Channel name.
-    #   @return [String]
+    # @!attribute [rw] authorized
+    #   Whether the channel is private (enabled for playback authorization).
+    #   Default: `false`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
@@ -218,10 +219,9 @@ module Aws::IVS
     #   `NORMAL` correspond to Ultra-low and Standard, respectively.)
     #   @return [String]
     #
-    # @!attribute [rw] authorized
-    #   Whether the channel is private (enabled for playback authorization).
-    #   Default: `false`.
-    #   @return [Boolean]
+    # @!attribute [rw] name
+    #   Channel name.
+    #   @return [String]
     #
     # @!attribute [rw] recording_configuration_arn
     #   Recording-configuration ARN. A value other than an empty string
@@ -237,9 +237,9 @@ module Aws::IVS
     #
     class ChannelSummary < Struct.new(
       :arn,
-      :name,
-      :latency_mode,
       :authorized,
+      :latency_mode,
+      :name,
       :recording_configuration_arn,
       :tags)
       SENSITIVE = []
@@ -262,19 +262,20 @@ module Aws::IVS
     #   data as a hash:
     #
     #       {
-    #         name: "ChannelName",
-    #         latency_mode: "NORMAL", # accepts NORMAL, LOW
-    #         type: "BASIC", # accepts BASIC, STANDARD
     #         authorized: false,
+    #         latency_mode: "NORMAL", # accepts NORMAL, LOW
+    #         name: "ChannelName",
     #         recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         type: "BASIC", # accepts BASIC, STANDARD
     #       }
     #
-    # @!attribute [rw] name
-    #   Channel name.
-    #   @return [String]
+    # @!attribute [rw] authorized
+    #   Whether the channel is private (enabled for playback authorization).
+    #   Default: `false`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
@@ -283,27 +284,9 @@ module Aws::IVS
     #   correspond to Ultra-low and Standard, respectively.) Default: `LOW`.
     #   @return [String]
     #
-    # @!attribute [rw] type
-    #   Channel type, which determines the allowable resolution and bitrate.
-    #   *If you exceed the allowable resolution or bitrate, the stream
-    #   probably will disconnect immediately.* Default: `STANDARD`. Valid
-    #   values:
-    #
-    #   * `STANDARD`\: Multiple qualities are generated from the original
-    #     input, to automatically give viewers the best experience for their
-    #     devices and network conditions. Vertical resolution can be up to
-    #     1080 and bitrate can be up to 8.5 Mbps.
-    #
-    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
-    #     viewer’s video-quality choice is limited to the original input.
-    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
-    #     Mbps.
+    # @!attribute [rw] name
+    #   Channel name.
     #   @return [String]
-    #
-    # @!attribute [rw] authorized
-    #   Whether the channel is private (enabled for playback authorization).
-    #   Default: `false`.
-    #   @return [Boolean]
     #
     # @!attribute [rw] recording_configuration_arn
     #   Recording-configuration ARN. Default: "" (empty string, recording
@@ -314,25 +297,40 @@ module Aws::IVS
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] type
+    #   Channel type, which determines the allowable resolution and bitrate.
+    #   *If you exceed the allowable resolution or bitrate, the stream
+    #   probably will disconnect immediately.* Default: `STANDARD`. Valid
+    #   values:
+    #
+    #   * `STANDARD`\: Multiple qualities are generated from the original
+    #     input, to automatically give viewers the best experience for their
+    #     devices and network conditions. Resolution can be up to 1080p and
+    #     bitrate can be up to 8.5 Mbps. Audio is transcoded only for
+    #     renditions 360p and below; above that, audio is passed through.
+    #
+    #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
+    #     viewer’s video-quality choice is limited to the original input.
+    #     Resolution can be up to 480p and bitrate can be up to 1.5 Mbps.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
-      :name,
-      :latency_mode,
-      :type,
       :authorized,
+      :latency_mode,
+      :name,
       :recording_configuration_arn,
-      :tags)
+      :tags,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] channel
-    #   Object specifying a channel.
     #   @return [Types::Channel]
     #
     # @!attribute [rw] stream_key
-    #   Object specifying a stream key.
     #   @return [Types::StreamKey]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateChannelResponse AWS API Documentation
@@ -348,26 +346,25 @@ module Aws::IVS
     #   data as a hash:
     #
     #       {
-    #         name: "RecordingConfigurationName",
     #         destination_configuration: { # required
     #           s3: {
     #             bucket_name: "S3DestinationBucketName", # required
     #           },
     #         },
+    #         name: "RecordingConfigurationName",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
     #       }
     #
-    # @!attribute [rw] name
-    #   An arbitrary string (a nickname) that helps the customer identify
-    #   that resource. The value does not need to be unique.
-    #   @return [String]
-    #
     # @!attribute [rw] destination_configuration
     #   A complex type that contains a destination configuration for where
     #   recorded video will be stored.
     #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] name
+    #   Recording-configuration name. The value does not need to be unique.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
@@ -376,15 +373,17 @@ module Aws::IVS
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateRecordingConfigurationRequest AWS API Documentation
     #
     class CreateRecordingConfigurationRequest < Struct.new(
-      :name,
       :destination_configuration,
+      :name,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] recording_configuration
-    #   An object representing a configuration to record a channel stream.
+    #   <zonbook />
+    #
+    #   <xhtml />
     #   @return [Types::RecordingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateRecordingConfigurationResponse AWS API Documentation
@@ -561,7 +560,6 @@ module Aws::IVS
     end
 
     # @!attribute [rw] channel
-    #   Object specifying a channel.
     #   @return [Types::Channel]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetChannelResponse AWS API Documentation
@@ -592,7 +590,9 @@ module Aws::IVS
     end
 
     # @!attribute [rw] key_pair
-    #   A key pair used to sign and validate a playback authorization token.
+    #   <zonbook />
+    #
+    #   <xhtml />
     #   @return [Types::PlaybackKeyPair]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetPlaybackKeyPairResponse AWS API Documentation
@@ -623,7 +623,9 @@ module Aws::IVS
     end
 
     # @!attribute [rw] recording_configuration
-    #   An object representing a configuration to record a channel stream.
+    #   <zonbook />
+    #
+    #   <xhtml />
     #   @return [Types::RecordingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetRecordingConfigurationResponse AWS API Documentation
@@ -654,7 +656,9 @@ module Aws::IVS
     end
 
     # @!attribute [rw] stream_key
-    #   Object specifying a stream key.
+    #   <zonbook />
+    #
+    #   <xhtml />
     #   @return [Types::StreamKey]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStreamKeyResponse AWS API Documentation
@@ -685,8 +689,6 @@ module Aws::IVS
     end
 
     # @!attribute [rw] stream
-    #   Specifies a live video stream that has been ingested and
-    #   distributed.
     #   @return [Types::Stream]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStreamResponse AWS API Documentation
@@ -701,21 +703,19 @@ module Aws::IVS
     #   data as a hash:
     #
     #       {
-    #         public_key_material: "PlaybackPublicKeyMaterial", # required
     #         name: "PlaybackKeyPairName",
+    #         public_key_material: "PlaybackPublicKeyMaterial", # required
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
     #       }
     #
-    # @!attribute [rw] public_key_material
-    #   The public portion of a customer-generated key pair.
+    # @!attribute [rw] name
+    #   Playback-key-pair name. The value does not need to be unique.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   An arbitrary string (a nickname) assigned to a playback key pair
-    #   that helps the customer identify that resource. The value does not
-    #   need to be unique.
+    # @!attribute [rw] public_key_material
+    #   The public portion of a customer-generated key pair.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -726,15 +726,14 @@ module Aws::IVS
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ImportPlaybackKeyPairRequest AWS API Documentation
     #
     class ImportPlaybackKeyPairRequest < Struct.new(
-      :public_key_material,
       :name,
+      :public_key_material,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] key_pair
-    #   A key pair used to sign and validate a playback authorization token.
     #   @return [Types::PlaybackKeyPair]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ImportPlaybackKeyPairResponse AWS API Documentation
@@ -763,8 +762,8 @@ module Aws::IVS
     #       {
     #         filter_by_name: "ChannelName",
     #         filter_by_recording_configuration_arn: "ChannelRecordingConfigurationArn",
-    #         next_token: "PaginationToken",
     #         max_results: 1,
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] filter_by_name
@@ -776,22 +775,22 @@ module Aws::IVS
     #   recording-configuration ARN.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   Maximum number of channels to return. Default: 50.
+    #   @return [Integer]
+    #
     # @!attribute [rw] next_token
     #   The first channel to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   Maximum number of channels to return. Default: 50.
-    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListChannelsRequest AWS API Documentation
     #
     class ListChannelsRequest < Struct.new(
       :filter_by_name,
       :filter_by_recording_configuration_arn,
-      :next_token,
-      :max_results)
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -818,24 +817,24 @@ module Aws::IVS
     #   data as a hash:
     #
     #       {
-    #         next_token: "PaginationToken",
     #         max_results: 1,
+    #         next_token: "PaginationToken",
     #       }
-    #
-    # @!attribute [rw] next_token
-    #   Maximum number of key pairs to return.
-    #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The first key pair to retrieve. This is used for pagination; see the
     #   `nextToken` response field. Default: 50.
     #   @return [Integer]
     #
+    # @!attribute [rw] next_token
+    #   Maximum number of key pairs to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackKeyPairsRequest AWS API Documentation
     #
     class ListPlaybackKeyPairsRequest < Struct.new(
-      :next_token,
-      :max_results)
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -862,42 +861,42 @@ module Aws::IVS
     #   data as a hash:
     #
     #       {
-    #         next_token: "PaginationToken",
     #         max_results: 1,
+    #         next_token: "PaginationToken",
     #       }
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of recording configurations to return. Default: 50.
+    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The first recording configuration to retrieve. This is used for
     #   pagination; see the `nextToken` response field.
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   Maximum number of recording configurations to return. Default: 50.
-    #   @return [Integer]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListRecordingConfigurationsRequest AWS API Documentation
     #
     class ListRecordingConfigurationsRequest < Struct.new(
-      :next_token,
-      :max_results)
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] recording_configurations
-    #   List of the matching recording configurations.
-    #   @return [Array<Types::RecordingConfigurationSummary>]
-    #
     # @!attribute [rw] next_token
     #   If there are more recording configurations than `maxResults`, use
     #   `nextToken` in the request to get the next set.
     #   @return [String]
     #
+    # @!attribute [rw] recording_configurations
+    #   List of the matching recording configurations.
+    #   @return [Array<Types::RecordingConfigurationSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListRecordingConfigurationsResponse AWS API Documentation
     #
     class ListRecordingConfigurationsResponse < Struct.new(
-      :recording_configurations,
-      :next_token)
+      :next_token,
+      :recording_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -907,47 +906,47 @@ module Aws::IVS
     #
     #       {
     #         channel_arn: "ChannelArn", # required
-    #         next_token: "PaginationToken",
     #         max_results: 1,
+    #         next_token: "PaginationToken",
     #       }
     #
     # @!attribute [rw] channel_arn
     #   Channel ARN used to filter the list.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   Maximum number of streamKeys to return. Default: 50.
+    #   @return [Integer]
+    #
     # @!attribute [rw] next_token
     #   The first stream key to retrieve. This is used for pagination; see
     #   the `nextToken` response field.
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   Maximum number of streamKeys to return. Default: 50.
-    #   @return [Integer]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamKeysRequest AWS API Documentation
     #
     class ListStreamKeysRequest < Struct.new(
       :channel_arn,
-      :next_token,
-      :max_results)
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] stream_keys
-    #   List of stream keys.
-    #   @return [Array<Types::StreamKeySummary>]
-    #
     # @!attribute [rw] next_token
     #   If there are more stream keys than `maxResults`, use `nextToken` in
     #   the request to get the next set.
     #   @return [String]
     #
+    # @!attribute [rw] stream_keys
+    #   List of stream keys.
+    #   @return [Array<Types::StreamKeySummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamKeysResponse AWS API Documentation
     #
     class ListStreamKeysResponse < Struct.new(
-      :stream_keys,
-      :next_token)
+      :next_token,
+      :stream_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -956,42 +955,42 @@ module Aws::IVS
     #   data as a hash:
     #
     #       {
-    #         next_token: "PaginationToken",
     #         max_results: 1,
+    #         next_token: "PaginationToken",
     #       }
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of streams to return. Default: 50.
+    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The first stream to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   Maximum number of streams to return. Default: 50.
-    #   @return [Integer]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamsRequest AWS API Documentation
     #
     class ListStreamsRequest < Struct.new(
-      :next_token,
-      :max_results)
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] streams
-    #   List of streams.
-    #   @return [Array<Types::StreamSummary>]
-    #
     # @!attribute [rw] next_token
     #   If there are more streams than `maxResults`, use `nextToken` in the
     #   request to get the next set.
     #   @return [String]
     #
+    # @!attribute [rw] streams
+    #   List of streams.
+    #   @return [Array<Types::StreamSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamsResponse AWS API Documentation
     #
     class ListStreamsResponse < Struct.new(
-      :streams,
-      :next_token)
+      :next_token,
+      :streams)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1001,29 +1000,16 @@ module Aws::IVS
     #
     #       {
     #         resource_arn: "ResourceArn", # required
-    #         next_token: "String",
-    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to be retrieved.
     #   @return [String]
     #
-    # @!attribute [rw] next_token
-    #   The first tag to retrieve. This is used for pagination; see the
-    #   `nextToken` response field.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   Maximum number of tags to return. Default: 50.
-    #   @return [Integer]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListTagsForResourceRequest AWS API Documentation
     #
     class ListTagsForResourceRequest < Struct.new(
-      :resource_arn,
-      :next_token,
-      :max_results)
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1031,16 +1017,10 @@ module Aws::IVS
     # @!attribute [rw] tags
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] next_token
-    #   If there are more tags than `maxResults`, use `nextToken` in the
-    #   request to get the next set.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
-      :tags,
-      :next_token)
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1063,14 +1043,12 @@ module Aws::IVS
     #   Key-pair ARN.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   An arbitrary string (a nickname) assigned to a playback key pair
-    #   that helps the customer identify that resource. The value does not
-    #   need to be unique.
-    #   @return [String]
-    #
     # @!attribute [rw] fingerprint
     #   Key-pair identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Playback-key-pair name. The value does not need to be unique.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1081,8 +1059,8 @@ module Aws::IVS
     #
     class PlaybackKeyPair < Struct.new(
       :arn,
-      :name,
       :fingerprint,
+      :name,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1095,9 +1073,7 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   An arbitrary string (a nickname) assigned to a playback key pair
-    #   that helps the customer identify that resource. The value does not
-    #   need to be unique.
+    #   Playback-key-pair name. The value does not need to be unique.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1136,7 +1112,7 @@ module Aws::IVS
     class PutMetadataRequest < Struct.new(
       :channel_arn,
       :metadata)
-      SENSITIVE = []
+      SENSITIVE = [:metadata]
       include Aws::Structure
     end
 
@@ -1146,16 +1122,14 @@ module Aws::IVS
     #   Recording-configuration ARN.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   An arbitrary string (a nickname) assigned to a recording
-    #   configuration that helps the customer identify that resource. The
-    #   value does not need to be unique.
-    #   @return [String]
-    #
     # @!attribute [rw] destination_configuration
     #   A complex type that contains information about where recorded video
     #   will be stored.
     #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] name
+    #   Recording-configuration name. The value does not need to be unique.
+    #   @return [String]
     #
     # @!attribute [rw] state
     #   Indicates the current state of the recording configuration. When the
@@ -1171,8 +1145,8 @@ module Aws::IVS
     #
     class RecordingConfiguration < Struct.new(
       :arn,
-      :name,
       :destination_configuration,
+      :name,
       :state,
       :tags)
       SENSITIVE = []
@@ -1185,16 +1159,14 @@ module Aws::IVS
     #   Recording-configuration ARN.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   An arbitrary string (a nickname) assigned to a recording
-    #   configuration that helps the customer identify that resource. The
-    #   value does not need to be unique.
-    #   @return [String]
-    #
     # @!attribute [rw] destination_configuration
     #   A complex type that contains information about where recorded video
     #   will be stored.
     #   @return [Types::DestinationConfiguration]
+    #
+    # @!attribute [rw] name
+    #   Recording-configuration name. The value does not need to be unique.
+    #   @return [String]
     #
     # @!attribute [rw] state
     #   Indicates the current state of the recording configuration. When the
@@ -1210,8 +1182,8 @@ module Aws::IVS
     #
     class RecordingConfigurationSummary < Struct.new(
       :arn,
-      :name,
       :destination_configuration,
+      :name,
       :state,
       :tags)
       SENSITIVE = []
@@ -1293,36 +1265,40 @@ module Aws::IVS
     #   Channel ARN for the stream.
     #   @return [String]
     #
+    # @!attribute [rw] health
+    #   The stream’s health.
+    #   @return [String]
+    #
     # @!attribute [rw] playback_url
     #   URL of the master playlist, required by the video player to play the
     #   HLS stream.
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   ISO-8601 formatted timestamp of the stream’s start.
+    #   Time of the stream’s start. This is an ISO 8601 timestamp returned
+    #   as a string.
     #   @return [Time]
     #
     # @!attribute [rw] state
     #   The stream’s state.
     #   @return [String]
     #
-    # @!attribute [rw] health
-    #   The stream’s health.
-    #   @return [String]
-    #
     # @!attribute [rw] viewer_count
-    #   Number of current viewers of the stream. A value of -1 indicates
-    #   that the request timed out; in this case, retry.
+    #   A count of concurrent views of the stream. Typically, a new view
+    #   appears in `viewerCount` within 15 seconds of when video playback
+    #   starts and a view is removed from `viewerCount` within 1 minute of
+    #   when video playback ends. A value of -1 indicates that the request
+    #   timed out; in this case, retry.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/Stream AWS API Documentation
     #
     class Stream < Struct.new(
       :channel_arn,
+      :health,
       :playback_url,
       :start_time,
       :state,
-      :health,
       :viewer_count)
       SENSITIVE = []
       include Aws::Structure
@@ -1334,10 +1310,6 @@ module Aws::IVS
     #   Stream-key ARN.
     #   @return [String]
     #
-    # @!attribute [rw] value
-    #   Stream-key value.
-    #   @return [String]
-    #
     # @!attribute [rw] channel_arn
     #   Channel ARN for the stream.
     #   @return [String]
@@ -1346,14 +1318,18 @@ module Aws::IVS
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] value
+    #   Stream-key value.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamKey AWS API Documentation
     #
     class StreamKey < Struct.new(
       :arn,
-      :value,
       :channel_arn,
-      :tags)
-      SENSITIVE = []
+      :tags,
+      :value)
+      SENSITIVE = [:value]
       include Aws::Structure
     end
 
@@ -1387,31 +1363,35 @@ module Aws::IVS
     #   Channel ARN for the stream.
     #   @return [String]
     #
-    # @!attribute [rw] state
-    #   The stream’s state.
-    #   @return [String]
-    #
     # @!attribute [rw] health
     #   The stream’s health.
     #   @return [String]
     #
-    # @!attribute [rw] viewer_count
-    #   Number of current viewers of the stream. A value of -1 indicates
-    #   that the request timed out; in this case, retry.
-    #   @return [Integer]
-    #
     # @!attribute [rw] start_time
-    #   ISO-8601 formatted timestamp of the stream’s start.
+    #   Time of the stream’s start. This is an ISO 8601 timestamp returned
+    #   as a string.
     #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The stream’s state.
+    #   @return [String]
+    #
+    # @!attribute [rw] viewer_count
+    #   A count of concurrent views of the stream. Typically, a new view
+    #   appears in `viewerCount` within 15 seconds of when video playback
+    #   starts and a view is removed from `viewerCount` within 1 minute of
+    #   when video playback ends. A value of -1 indicates that the request
+    #   timed out; in this case, retry.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamSummary AWS API Documentation
     #
     class StreamSummary < Struct.new(
       :channel_arn,
-      :state,
       :health,
-      :viewer_count,
-      :start_time)
+      :start_time,
+      :state,
+      :viewer_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1505,26 +1485,36 @@ module Aws::IVS
     #
     #       {
     #         arn: "ChannelArn", # required
-    #         name: "ChannelName",
-    #         latency_mode: "NORMAL", # accepts NORMAL, LOW
-    #         type: "BASIC", # accepts BASIC, STANDARD
     #         authorized: false,
+    #         latency_mode: "NORMAL", # accepts NORMAL, LOW
+    #         name: "ChannelName",
     #         recording_configuration_arn: "ChannelRecordingConfigurationArn",
+    #         type: "BASIC", # accepts BASIC, STANDARD
     #       }
     #
     # @!attribute [rw] arn
     #   ARN of the channel to be updated.
     #   @return [String]
     #
-    # @!attribute [rw] name
-    #   Channel name.
-    #   @return [String]
+    # @!attribute [rw] authorized
+    #   Whether the channel is private (enabled for playback authorization).
+    #   @return [Boolean]
     #
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
     #   viewers. (Note: In the Amazon IVS console, `LOW` and `NORMAL`
     #   correspond to Ultra-low and Standard, respectively.)
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Channel name.
+    #   @return [String]
+    #
+    # @!attribute [rw] recording_configuration_arn
+    #   Recording-configuration ARN. If this is set to an empty string,
+    #   recording is disabled. A value other than an empty string indicates
+    #   that recording is enabled
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1534,34 +1524,24 @@ module Aws::IVS
     #
     #   * `STANDARD`\: Multiple qualities are generated from the original
     #     input, to automatically give viewers the best experience for their
-    #     devices and network conditions. Vertical resolution can be up to
-    #     1080 and bitrate can be up to 8.5 Mbps.
+    #     devices and network conditions. Resolution can be up to 1080p and
+    #     bitrate can be up to 8.5 Mbps. Audio is transcoded only for
+    #     renditions 360p and below; above that, audio is passed through.
     #
     #   * `BASIC`\: Amazon IVS delivers the original input to viewers. The
     #     viewer’s video-quality choice is limited to the original input.
-    #     Vertical resolution can be up to 480 and bitrate can be up to 1.5
-    #     Mbps.
-    #   @return [String]
-    #
-    # @!attribute [rw] authorized
-    #   Whether the channel is private (enabled for playback authorization).
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] recording_configuration_arn
-    #   Recording-configuration ARN. If this is set to an empty string,
-    #   recording is disabled. A value other than an empty string indicates
-    #   that recording is enabled
+    #     Resolution can be up to 480p and bitrate can be up to 1.5 Mbps.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
       :arn,
-      :name,
-      :latency_mode,
-      :type,
       :authorized,
-      :recording_configuration_arn)
+      :latency_mode,
+      :name,
+      :recording_configuration_arn,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1579,8 +1559,8 @@ module Aws::IVS
     end
 
     # @!attribute [rw] exception_message
-    #   The input fails to satisfy the constraints specified by an AWS
-    #   service.
+    #   The input fails to satisfy the constraints specified by an Amazon
+    #   Web Services service.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ValidationException AWS API Documentation

@@ -23,11 +23,17 @@ module Aws::FraudDetector
     BatchGetVariableErrorList = Shapes::ListShape.new(name: 'BatchGetVariableErrorList')
     BatchGetVariableRequest = Shapes::StructureShape.new(name: 'BatchGetVariableRequest')
     BatchGetVariableResult = Shapes::StructureShape.new(name: 'BatchGetVariableResult')
+    BatchImport = Shapes::StructureShape.new(name: 'BatchImport')
+    BatchImportList = Shapes::ListShape.new(name: 'BatchImportList')
     BatchPrediction = Shapes::StructureShape.new(name: 'BatchPrediction')
     BatchPredictionList = Shapes::ListShape.new(name: 'BatchPredictionList')
+    CancelBatchImportJobRequest = Shapes::StructureShape.new(name: 'CancelBatchImportJobRequest')
+    CancelBatchImportJobResult = Shapes::StructureShape.new(name: 'CancelBatchImportJobResult')
     CancelBatchPredictionJobRequest = Shapes::StructureShape.new(name: 'CancelBatchPredictionJobRequest')
     CancelBatchPredictionJobResult = Shapes::StructureShape.new(name: 'CancelBatchPredictionJobResult')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateBatchImportJobRequest = Shapes::StructureShape.new(name: 'CreateBatchImportJobRequest')
+    CreateBatchImportJobResult = Shapes::StructureShape.new(name: 'CreateBatchImportJobResult')
     CreateBatchPredictionJobRequest = Shapes::StructureShape.new(name: 'CreateBatchPredictionJobRequest')
     CreateBatchPredictionJobResult = Shapes::StructureShape.new(name: 'CreateBatchPredictionJobResult')
     CreateDetectorVersionRequest = Shapes::StructureShape.new(name: 'CreateDetectorVersionRequest')
@@ -44,6 +50,9 @@ module Aws::FraudDetector
     DataSource = Shapes::StringShape.new(name: 'DataSource')
     DataType = Shapes::StringShape.new(name: 'DataType')
     DataValidationMetrics = Shapes::StructureShape.new(name: 'DataValidationMetrics')
+    DeleteAuditHistory = Shapes::BooleanShape.new(name: 'DeleteAuditHistory')
+    DeleteBatchImportJobRequest = Shapes::StructureShape.new(name: 'DeleteBatchImportJobRequest')
+    DeleteBatchImportJobResult = Shapes::StructureShape.new(name: 'DeleteBatchImportJobResult')
     DeleteBatchPredictionJobRequest = Shapes::StructureShape.new(name: 'DeleteBatchPredictionJobRequest')
     DeleteBatchPredictionJobResult = Shapes::StructureShape.new(name: 'DeleteBatchPredictionJobResult')
     DeleteDetectorRequest = Shapes::StructureShape.new(name: 'DeleteDetectorRequest')
@@ -56,6 +65,8 @@ module Aws::FraudDetector
     DeleteEventResult = Shapes::StructureShape.new(name: 'DeleteEventResult')
     DeleteEventTypeRequest = Shapes::StructureShape.new(name: 'DeleteEventTypeRequest')
     DeleteEventTypeResult = Shapes::StructureShape.new(name: 'DeleteEventTypeResult')
+    DeleteEventsByEventTypeRequest = Shapes::StructureShape.new(name: 'DeleteEventsByEventTypeRequest')
+    DeleteEventsByEventTypeResult = Shapes::StructureShape.new(name: 'DeleteEventsByEventTypeResult')
     DeleteExternalModelRequest = Shapes::StructureShape.new(name: 'DeleteExternalModelRequest')
     DeleteExternalModelResult = Shapes::StructureShape.new(name: 'DeleteExternalModelResult')
     DeleteLabelRequest = Shapes::StructureShape.new(name: 'DeleteLabelRequest')
@@ -83,6 +94,9 @@ module Aws::FraudDetector
     DetectorsMaxResults = Shapes::IntegerShape.new(name: 'DetectorsMaxResults')
     Entity = Shapes::StructureShape.new(name: 'Entity')
     EntityType = Shapes::StructureShape.new(name: 'EntityType')
+    Event = Shapes::StructureShape.new(name: 'Event')
+    EventAttributeMap = Shapes::MapShape.new(name: 'EventAttributeMap')
+    EventIngestion = Shapes::StringShape.new(name: 'EventIngestion')
     EventType = Shapes::StructureShape.new(name: 'EventType')
     EventVariableMap = Shapes::MapShape.new(name: 'EventVariableMap')
     ExternalEventsDetail = Shapes::StructureShape.new(name: 'ExternalEventsDetail')
@@ -95,8 +109,12 @@ module Aws::FraudDetector
     ExternalModelsMaxResults = Shapes::IntegerShape.new(name: 'ExternalModelsMaxResults')
     FieldValidationMessage = Shapes::StructureShape.new(name: 'FieldValidationMessage')
     FileValidationMessage = Shapes::StructureShape.new(name: 'FileValidationMessage')
+    GetBatchImportJobsRequest = Shapes::StructureShape.new(name: 'GetBatchImportJobsRequest')
+    GetBatchImportJobsResult = Shapes::StructureShape.new(name: 'GetBatchImportJobsResult')
     GetBatchPredictionJobsRequest = Shapes::StructureShape.new(name: 'GetBatchPredictionJobsRequest')
     GetBatchPredictionJobsResult = Shapes::StructureShape.new(name: 'GetBatchPredictionJobsResult')
+    GetDeleteEventsByEventTypeStatusRequest = Shapes::StructureShape.new(name: 'GetDeleteEventsByEventTypeStatusRequest')
+    GetDeleteEventsByEventTypeStatusResult = Shapes::StructureShape.new(name: 'GetDeleteEventsByEventTypeStatusResult')
     GetDetectorVersionRequest = Shapes::StructureShape.new(name: 'GetDetectorVersionRequest')
     GetDetectorVersionResult = Shapes::StructureShape.new(name: 'GetDetectorVersionResult')
     GetDetectorsRequest = Shapes::StructureShape.new(name: 'GetDetectorsRequest')
@@ -105,6 +123,8 @@ module Aws::FraudDetector
     GetEntityTypesResult = Shapes::StructureShape.new(name: 'GetEntityTypesResult')
     GetEventPredictionRequest = Shapes::StructureShape.new(name: 'GetEventPredictionRequest')
     GetEventPredictionResult = Shapes::StructureShape.new(name: 'GetEventPredictionResult')
+    GetEventRequest = Shapes::StructureShape.new(name: 'GetEventRequest')
+    GetEventResult = Shapes::StructureShape.new(name: 'GetEventResult')
     GetEventTypesRequest = Shapes::StructureShape.new(name: 'GetEventTypesRequest')
     GetEventTypesResult = Shapes::StructureShape.new(name: 'GetEventTypesResult')
     GetExternalModelsRequest = Shapes::StructureShape.new(name: 'GetExternalModelsRequest')
@@ -122,6 +142,9 @@ module Aws::FraudDetector
     GetRulesResult = Shapes::StructureShape.new(name: 'GetRulesResult')
     GetVariablesRequest = Shapes::StructureShape.new(name: 'GetVariablesRequest')
     GetVariablesResult = Shapes::StructureShape.new(name: 'GetVariablesResult')
+    IngestedEventStatistics = Shapes::StructureShape.new(name: 'IngestedEventStatistics')
+    IngestedEventsDetail = Shapes::StructureShape.new(name: 'IngestedEventsDetail')
+    IngestedEventsTimeWindow = Shapes::StructureShape.new(name: 'IngestedEventsTimeWindow')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JsonKeyToVariableMap = Shapes::MapShape.new(name: 'JsonKeyToVariableMap')
@@ -139,6 +162,7 @@ module Aws::FraudDetector
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
     LogOddsMetric = Shapes::StructureShape.new(name: 'LogOddsMetric')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MetricDataPoint = Shapes::StructureShape.new(name: 'MetricDataPoint')
     Model = Shapes::StructureShape.new(name: 'Model')
     ModelEndpointDataBlob = Shapes::StructureShape.new(name: 'ModelEndpointDataBlob')
@@ -182,6 +206,8 @@ module Aws::FraudDetector
     RuleList = Shapes::ListShape.new(name: 'RuleList')
     RuleResult = Shapes::StructureShape.new(name: 'RuleResult')
     RulesMaxResults = Shapes::IntegerShape.new(name: 'RulesMaxResults')
+    SendEventRequest = Shapes::StructureShape.new(name: 'SendEventRequest')
+    SendEventResult = Shapes::StructureShape.new(name: 'SendEventResult')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResult = Shapes::StructureShape.new(name: 'TagResourceResult')
@@ -191,6 +217,7 @@ module Aws::FraudDetector
     TrainingDataSourceEnum = Shapes::StringShape.new(name: 'TrainingDataSourceEnum')
     TrainingMetrics = Shapes::StructureShape.new(name: 'TrainingMetrics')
     TrainingResult = Shapes::StructureShape.new(name: 'TrainingResult')
+    UnlabeledEventsTreatment = Shapes::StringShape.new(name: 'UnlabeledEventsTreatment')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResult = Shapes::StructureShape.new(name: 'UntagResourceResult')
     UpdateDetectorVersionMetadataRequest = Shapes::StructureShape.new(name: 'UpdateDetectorVersionMetadataRequest')
@@ -199,6 +226,8 @@ module Aws::FraudDetector
     UpdateDetectorVersionResult = Shapes::StructureShape.new(name: 'UpdateDetectorVersionResult')
     UpdateDetectorVersionStatusRequest = Shapes::StructureShape.new(name: 'UpdateDetectorVersionStatusRequest')
     UpdateDetectorVersionStatusResult = Shapes::StructureShape.new(name: 'UpdateDetectorVersionStatusResult')
+    UpdateEventLabelRequest = Shapes::StructureShape.new(name: 'UpdateEventLabelRequest')
+    UpdateEventLabelResult = Shapes::StructureShape.new(name: 'UpdateEventLabelResult')
     UpdateModelRequest = Shapes::StructureShape.new(name: 'UpdateModelRequest')
     UpdateModelResult = Shapes::StructureShape.new(name: 'UpdateModelResult')
     UpdateModelVersionRequest = Shapes::StructureShape.new(name: 'UpdateModelVersionRequest')
@@ -219,10 +248,14 @@ module Aws::FraudDetector
     VariableImportanceMetrics = Shapes::StructureShape.new(name: 'VariableImportanceMetrics')
     VariableList = Shapes::ListShape.new(name: 'VariableList')
     VariablesMaxResults = Shapes::IntegerShape.new(name: 'VariablesMaxResults')
+    attributeKey = Shapes::StringShape.new(name: 'attributeKey')
+    attributeValue = Shapes::StringShape.new(name: 'attributeValue')
+    batchImportsMaxPageSize = Shapes::IntegerShape.new(name: 'batchImportsMaxPageSize')
     batchPredictionsMaxPageSize = Shapes::IntegerShape.new(name: 'batchPredictionsMaxPageSize')
     blob = Shapes::BlobShape.new(name: 'blob')
     contentType = Shapes::StringShape.new(name: 'contentType')
     description = Shapes::StringShape.new(name: 'description')
+    entityRestrictedString = Shapes::StringShape.new(name: 'entityRestrictedString')
     entityTypeList = Shapes::ListShape.new(name: 'entityTypeList')
     entityTypesMaxResults = Shapes::IntegerShape.new(name: 'entityTypesMaxResults')
     eventTypeList = Shapes::ListShape.new(name: 'eventTypeList')
@@ -241,10 +274,10 @@ module Aws::FraudDetector
     listOfEntities = Shapes::ListShape.new(name: 'listOfEntities')
     metricDataPointsList = Shapes::ListShape.new(name: 'metricDataPointsList')
     modelIdentifier = Shapes::StringShape.new(name: 'modelIdentifier')
+    modelInputTemplate = Shapes::StringShape.new(name: 'modelInputTemplate')
     modelList = Shapes::ListShape.new(name: 'modelList')
     modelVersionDetailList = Shapes::ListShape.new(name: 'modelVersionDetailList')
     modelsMaxPageSize = Shapes::IntegerShape.new(name: 'modelsMaxPageSize')
-    nonEmptyString = Shapes::StringShape.new(name: 'nonEmptyString')
     ruleExpression = Shapes::StringShape.new(name: 'ruleExpression')
     s3BucketLocation = Shapes::StringShape.new(name: 's3BucketLocation')
     sageMakerEndpointIdentifier = Shapes::StringShape.new(name: 'sageMakerEndpointIdentifier')
@@ -290,6 +323,23 @@ module Aws::FraudDetector
     BatchGetVariableResult.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetVariableErrorList, location_name: "errors"))
     BatchGetVariableResult.struct_class = Types::BatchGetVariableResult
 
+    BatchImport.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, location_name: "jobId"))
+    BatchImport.add_member(:status, Shapes::ShapeRef.new(shape: AsyncJobStatus, location_name: "status"))
+    BatchImport.add_member(:failure_reason, Shapes::ShapeRef.new(shape: string, location_name: "failureReason"))
+    BatchImport.add_member(:start_time, Shapes::ShapeRef.new(shape: time, location_name: "startTime"))
+    BatchImport.add_member(:completion_time, Shapes::ShapeRef.new(shape: time, location_name: "completionTime"))
+    BatchImport.add_member(:input_path, Shapes::ShapeRef.new(shape: s3BucketLocation, location_name: "inputPath"))
+    BatchImport.add_member(:output_path, Shapes::ShapeRef.new(shape: s3BucketLocation, location_name: "outputPath"))
+    BatchImport.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, location_name: "eventTypeName"))
+    BatchImport.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: iamRoleArn, location_name: "iamRoleArn"))
+    BatchImport.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
+    BatchImport.add_member(:processed_records_count, Shapes::ShapeRef.new(shape: Integer, location_name: "processedRecordsCount"))
+    BatchImport.add_member(:failed_records_count, Shapes::ShapeRef.new(shape: Integer, location_name: "failedRecordsCount"))
+    BatchImport.add_member(:total_records_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalRecordsCount"))
+    BatchImport.struct_class = Types::BatchImport
+
+    BatchImportList.member = Shapes::ShapeRef.new(shape: BatchImport)
+
     BatchPrediction.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, location_name: "jobId"))
     BatchPrediction.add_member(:status, Shapes::ShapeRef.new(shape: AsyncJobStatus, location_name: "status"))
     BatchPrediction.add_member(:failure_reason, Shapes::ShapeRef.new(shape: string, location_name: "failureReason"))
@@ -309,6 +359,11 @@ module Aws::FraudDetector
 
     BatchPredictionList.member = Shapes::ShapeRef.new(shape: BatchPrediction)
 
+    CancelBatchImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "jobId"))
+    CancelBatchImportJobRequest.struct_class = Types::CancelBatchImportJobRequest
+
+    CancelBatchImportJobResult.struct_class = Types::CancelBatchImportJobResult
+
     CancelBatchPredictionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "jobId"))
     CancelBatchPredictionJobRequest.struct_class = Types::CancelBatchPredictionJobRequest
 
@@ -316,6 +371,16 @@ module Aws::FraudDetector
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: string, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateBatchImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "jobId"))
+    CreateBatchImportJobRequest.add_member(:input_path, Shapes::ShapeRef.new(shape: s3BucketLocation, required: true, location_name: "inputPath"))
+    CreateBatchImportJobRequest.add_member(:output_path, Shapes::ShapeRef.new(shape: s3BucketLocation, required: true, location_name: "outputPath"))
+    CreateBatchImportJobRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventTypeName"))
+    CreateBatchImportJobRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: iamRoleArn, required: true, location_name: "iamRoleArn"))
+    CreateBatchImportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagList, location_name: "tags"))
+    CreateBatchImportJobRequest.struct_class = Types::CreateBatchImportJobRequest
+
+    CreateBatchImportJobResult.struct_class = Types::CreateBatchImportJobResult
 
     CreateBatchPredictionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "jobId"))
     CreateBatchPredictionJobRequest.add_member(:input_path, Shapes::ShapeRef.new(shape: s3BucketLocation, required: true, location_name: "inputPath"))
@@ -339,7 +404,7 @@ module Aws::FraudDetector
     CreateDetectorVersionRequest.struct_class = Types::CreateDetectorVersionRequest
 
     CreateDetectorVersionResult.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, location_name: "detectorId"))
-    CreateDetectorVersionResult.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: nonEmptyString, location_name: "detectorVersionId"))
+    CreateDetectorVersionResult.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: wholeNumberVersionString, location_name: "detectorVersionId"))
     CreateDetectorVersionResult.add_member(:status, Shapes::ShapeRef.new(shape: DetectorVersionStatus, location_name: "status"))
     CreateDetectorVersionResult.struct_class = Types::CreateDetectorVersionResult
 
@@ -357,12 +422,13 @@ module Aws::FraudDetector
     CreateModelVersionRequest.add_member(:training_data_source, Shapes::ShapeRef.new(shape: TrainingDataSourceEnum, required: true, location_name: "trainingDataSource"))
     CreateModelVersionRequest.add_member(:training_data_schema, Shapes::ShapeRef.new(shape: TrainingDataSchema, required: true, location_name: "trainingDataSchema"))
     CreateModelVersionRequest.add_member(:external_events_detail, Shapes::ShapeRef.new(shape: ExternalEventsDetail, location_name: "externalEventsDetail"))
+    CreateModelVersionRequest.add_member(:ingested_events_detail, Shapes::ShapeRef.new(shape: IngestedEventsDetail, location_name: "ingestedEventsDetail"))
     CreateModelVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagList, location_name: "tags"))
     CreateModelVersionRequest.struct_class = Types::CreateModelVersionRequest
 
     CreateModelVersionResult.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, location_name: "modelId"))
     CreateModelVersionResult.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, location_name: "modelType"))
-    CreateModelVersionResult.add_member(:model_version_number, Shapes::ShapeRef.new(shape: nonEmptyString, location_name: "modelVersionNumber"))
+    CreateModelVersionResult.add_member(:model_version_number, Shapes::ShapeRef.new(shape: floatVersionString, location_name: "modelVersionNumber"))
     CreateModelVersionResult.add_member(:status, Shapes::ShapeRef.new(shape: string, location_name: "status"))
     CreateModelVersionResult.struct_class = Types::CreateModelVersionResult
 
@@ -396,6 +462,11 @@ module Aws::FraudDetector
     DataValidationMetrics.add_member(:field_level_messages, Shapes::ShapeRef.new(shape: fieldValidationMessageList, location_name: "fieldLevelMessages"))
     DataValidationMetrics.struct_class = Types::DataValidationMetrics
 
+    DeleteBatchImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "jobId"))
+    DeleteBatchImportJobRequest.struct_class = Types::DeleteBatchImportJobRequest
+
+    DeleteBatchImportJobResult.struct_class = Types::DeleteBatchImportJobResult
+
     DeleteBatchPredictionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "jobId"))
     DeleteBatchPredictionJobRequest.struct_class = Types::DeleteBatchPredictionJobRequest
 
@@ -419,6 +490,7 @@ module Aws::FraudDetector
 
     DeleteEventRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventId"))
     DeleteEventRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventTypeName"))
+    DeleteEventRequest.add_member(:delete_audit_history, Shapes::ShapeRef.new(shape: DeleteAuditHistory, location_name: "deleteAuditHistory"))
     DeleteEventRequest.struct_class = Types::DeleteEventRequest
 
     DeleteEventResult.struct_class = Types::DeleteEventResult
@@ -427,6 +499,13 @@ module Aws::FraudDetector
     DeleteEventTypeRequest.struct_class = Types::DeleteEventTypeRequest
 
     DeleteEventTypeResult.struct_class = Types::DeleteEventTypeResult
+
+    DeleteEventsByEventTypeRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventTypeName"))
+    DeleteEventsByEventTypeRequest.struct_class = Types::DeleteEventsByEventTypeRequest
+
+    DeleteEventsByEventTypeResult.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, location_name: "eventTypeName"))
+    DeleteEventsByEventTypeResult.add_member(:events_deletion_status, Shapes::ShapeRef.new(shape: string, location_name: "eventsDeletionStatus"))
+    DeleteEventsByEventTypeResult.struct_class = Types::DeleteEventsByEventTypeResult
 
     DeleteExternalModelRequest.add_member(:model_endpoint, Shapes::ShapeRef.new(shape: sageMakerEndpointIdentifier, required: true, location_name: "modelEndpoint"))
     DeleteExternalModelRequest.struct_class = Types::DeleteExternalModelRequest
@@ -498,7 +577,7 @@ module Aws::FraudDetector
 
     DetectorList.member = Shapes::ShapeRef.new(shape: Detector)
 
-    DetectorVersionSummary.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: nonEmptyString, location_name: "detectorVersionId"))
+    DetectorVersionSummary.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: wholeNumberVersionString, location_name: "detectorVersionId"))
     DetectorVersionSummary.add_member(:status, Shapes::ShapeRef.new(shape: DetectorVersionStatus, location_name: "status"))
     DetectorVersionSummary.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
     DetectorVersionSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: time, location_name: "lastUpdatedTime"))
@@ -507,7 +586,7 @@ module Aws::FraudDetector
     DetectorVersionSummaryList.member = Shapes::ShapeRef.new(shape: DetectorVersionSummary)
 
     Entity.add_member(:entity_type, Shapes::ShapeRef.new(shape: string, required: true, location_name: "entityType"))
-    Entity.add_member(:entity_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "entityId"))
+    Entity.add_member(:entity_id, Shapes::ShapeRef.new(shape: entityRestrictedString, required: true, location_name: "entityId"))
     Entity.struct_class = Types::Entity
 
     EntityType.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
@@ -517,11 +596,25 @@ module Aws::FraudDetector
     EntityType.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
     EntityType.struct_class = Types::EntityType
 
+    Event.add_member(:event_id, Shapes::ShapeRef.new(shape: string, location_name: "eventId"))
+    Event.add_member(:event_type_name, Shapes::ShapeRef.new(shape: string, location_name: "eventTypeName"))
+    Event.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: string, location_name: "eventTimestamp"))
+    Event.add_member(:event_variables, Shapes::ShapeRef.new(shape: EventAttributeMap, location_name: "eventVariables"))
+    Event.add_member(:current_label, Shapes::ShapeRef.new(shape: string, location_name: "currentLabel"))
+    Event.add_member(:label_timestamp, Shapes::ShapeRef.new(shape: string, location_name: "labelTimestamp"))
+    Event.add_member(:entities, Shapes::ShapeRef.new(shape: listOfEntities, location_name: "entities"))
+    Event.struct_class = Types::Event
+
+    EventAttributeMap.key = Shapes::ShapeRef.new(shape: attributeKey)
+    EventAttributeMap.value = Shapes::ShapeRef.new(shape: attributeValue)
+
     EventType.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
     EventType.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
     EventType.add_member(:event_variables, Shapes::ShapeRef.new(shape: ListOfStrings, location_name: "eventVariables"))
     EventType.add_member(:labels, Shapes::ShapeRef.new(shape: ListOfStrings, location_name: "labels"))
     EventType.add_member(:entity_types, Shapes::ShapeRef.new(shape: NonEmptyListOfStrings, location_name: "entityTypes"))
+    EventType.add_member(:event_ingestion, Shapes::ShapeRef.new(shape: EventIngestion, location_name: "eventIngestion"))
+    EventType.add_member(:ingested_event_statistics, Shapes::ShapeRef.new(shape: IngestedEventStatistics, location_name: "ingestedEventStatistics"))
     EventType.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: time, location_name: "lastUpdatedTime"))
     EventType.add_member(:created_time, Shapes::ShapeRef.new(shape: time, location_name: "createdTime"))
     EventType.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
@@ -545,7 +638,7 @@ module Aws::FraudDetector
     ExternalModel.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
     ExternalModel.struct_class = Types::ExternalModel
 
-    ExternalModelEndpointDataBlobMap.key = Shapes::ShapeRef.new(shape: string)
+    ExternalModelEndpointDataBlobMap.key = Shapes::ShapeRef.new(shape: sageMakerEndpointIdentifier)
     ExternalModelEndpointDataBlobMap.value = Shapes::ShapeRef.new(shape: ModelEndpointDataBlob)
 
     ExternalModelList.member = Shapes::ShapeRef.new(shape: ExternalModel)
@@ -573,6 +666,15 @@ module Aws::FraudDetector
     FileValidationMessage.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
     FileValidationMessage.struct_class = Types::FileValidationMessage
 
+    GetBatchImportJobsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, location_name: "jobId"))
+    GetBatchImportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: batchImportsMaxPageSize, location_name: "maxResults"))
+    GetBatchImportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
+    GetBatchImportJobsRequest.struct_class = Types::GetBatchImportJobsRequest
+
+    GetBatchImportJobsResult.add_member(:batch_imports, Shapes::ShapeRef.new(shape: BatchImportList, location_name: "batchImports"))
+    GetBatchImportJobsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
+    GetBatchImportJobsResult.struct_class = Types::GetBatchImportJobsResult
+
     GetBatchPredictionJobsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, location_name: "jobId"))
     GetBatchPredictionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: batchPredictionsMaxPageSize, location_name: "maxResults"))
     GetBatchPredictionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
@@ -581,6 +683,13 @@ module Aws::FraudDetector
     GetBatchPredictionJobsResult.add_member(:batch_predictions, Shapes::ShapeRef.new(shape: BatchPredictionList, location_name: "batchPredictions"))
     GetBatchPredictionJobsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
     GetBatchPredictionJobsResult.struct_class = Types::GetBatchPredictionJobsResult
+
+    GetDeleteEventsByEventTypeStatusRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventTypeName"))
+    GetDeleteEventsByEventTypeStatusRequest.struct_class = Types::GetDeleteEventsByEventTypeStatusRequest
+
+    GetDeleteEventsByEventTypeStatusResult.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, location_name: "eventTypeName"))
+    GetDeleteEventsByEventTypeStatusResult.add_member(:events_deletion_status, Shapes::ShapeRef.new(shape: AsyncJobStatus, location_name: "eventsDeletionStatus"))
+    GetDeleteEventsByEventTypeStatusResult.struct_class = Types::GetDeleteEventsByEventTypeStatusResult
 
     GetDetectorVersionRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
     GetDetectorVersionRequest.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: wholeNumberVersionString, required: true, location_name: "detectorVersionId"))
@@ -632,6 +741,13 @@ module Aws::FraudDetector
     GetEventPredictionResult.add_member(:external_model_outputs, Shapes::ShapeRef.new(shape: ListOfExternalModelOutputs, location_name: "externalModelOutputs"))
     GetEventPredictionResult.struct_class = Types::GetEventPredictionResult
 
+    GetEventRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "eventId"))
+    GetEventRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "eventTypeName"))
+    GetEventRequest.struct_class = Types::GetEventRequest
+
+    GetEventResult.add_member(:event, Shapes::ShapeRef.new(shape: Event, location_name: "event"))
+    GetEventResult.struct_class = Types::GetEventResult
+
     GetEventTypesRequest.add_member(:name, Shapes::ShapeRef.new(shape: identifier, location_name: "name"))
     GetEventTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
     GetEventTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: eventTypesMaxResults, location_name: "maxResults"))
@@ -673,6 +789,7 @@ module Aws::FraudDetector
     GetModelVersionResult.add_member(:training_data_source, Shapes::ShapeRef.new(shape: TrainingDataSourceEnum, location_name: "trainingDataSource"))
     GetModelVersionResult.add_member(:training_data_schema, Shapes::ShapeRef.new(shape: TrainingDataSchema, location_name: "trainingDataSchema"))
     GetModelVersionResult.add_member(:external_events_detail, Shapes::ShapeRef.new(shape: ExternalEventsDetail, location_name: "externalEventsDetail"))
+    GetModelVersionResult.add_member(:ingested_events_detail, Shapes::ShapeRef.new(shape: IngestedEventsDetail, location_name: "ingestedEventsDetail"))
     GetModelVersionResult.add_member(:status, Shapes::ShapeRef.new(shape: string, location_name: "status"))
     GetModelVersionResult.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
     GetModelVersionResult.struct_class = Types::GetModelVersionResult
@@ -716,6 +833,20 @@ module Aws::FraudDetector
     GetVariablesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
     GetVariablesResult.struct_class = Types::GetVariablesResult
 
+    IngestedEventStatistics.add_member(:number_of_events, Shapes::ShapeRef.new(shape: Long, location_name: "numberOfEvents"))
+    IngestedEventStatistics.add_member(:event_data_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "eventDataSizeInBytes"))
+    IngestedEventStatistics.add_member(:least_recent_event, Shapes::ShapeRef.new(shape: time, location_name: "leastRecentEvent"))
+    IngestedEventStatistics.add_member(:most_recent_event, Shapes::ShapeRef.new(shape: time, location_name: "mostRecentEvent"))
+    IngestedEventStatistics.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: time, location_name: "lastUpdatedTime"))
+    IngestedEventStatistics.struct_class = Types::IngestedEventStatistics
+
+    IngestedEventsDetail.add_member(:ingested_events_time_window, Shapes::ShapeRef.new(shape: IngestedEventsTimeWindow, required: true, location_name: "ingestedEventsTimeWindow"))
+    IngestedEventsDetail.struct_class = Types::IngestedEventsDetail
+
+    IngestedEventsTimeWindow.add_member(:start_time, Shapes::ShapeRef.new(shape: time, required: true, location_name: "startTime"))
+    IngestedEventsTimeWindow.add_member(:end_time, Shapes::ShapeRef.new(shape: time, required: true, location_name: "endTime"))
+    IngestedEventsTimeWindow.struct_class = Types::IngestedEventsTimeWindow
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: string, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -733,6 +864,7 @@ module Aws::FraudDetector
     Label.struct_class = Types::Label
 
     LabelSchema.add_member(:label_mapper, Shapes::ShapeRef.new(shape: labelMapper, required: true, location_name: "labelMapper"))
+    LabelSchema.add_member(:unlabeled_events_treatment, Shapes::ShapeRef.new(shape: UnlabeledEventsTreatment, location_name: "unlabeledEventsTreatment"))
     LabelSchema.struct_class = Types::LabelSchema
 
     ListOfExternalModelOutputs.member = Shapes::ShapeRef.new(shape: ExternalModelOutputs)
@@ -783,8 +915,8 @@ module Aws::FraudDetector
     ModelInputConfiguration.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, location_name: "eventTypeName"))
     ModelInputConfiguration.add_member(:format, Shapes::ShapeRef.new(shape: ModelInputDataFormat, location_name: "format"))
     ModelInputConfiguration.add_member(:use_event_variables, Shapes::ShapeRef.new(shape: UseEventVariables, required: true, location_name: "useEventVariables"))
-    ModelInputConfiguration.add_member(:json_input_template, Shapes::ShapeRef.new(shape: string, location_name: "jsonInputTemplate"))
-    ModelInputConfiguration.add_member(:csv_input_template, Shapes::ShapeRef.new(shape: string, location_name: "csvInputTemplate"))
+    ModelInputConfiguration.add_member(:json_input_template, Shapes::ShapeRef.new(shape: modelInputTemplate, location_name: "jsonInputTemplate"))
+    ModelInputConfiguration.add_member(:csv_input_template, Shapes::ShapeRef.new(shape: modelInputTemplate, location_name: "csvInputTemplate"))
     ModelInputConfiguration.struct_class = Types::ModelInputConfiguration
 
     ModelOutputConfiguration.add_member(:format, Shapes::ShapeRef.new(shape: ModelOutputDataFormat, required: true, location_name: "format"))
@@ -801,7 +933,7 @@ module Aws::FraudDetector
 
     ModelVersion.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     ModelVersion.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
-    ModelVersion.add_member(:model_version_number, Shapes::ShapeRef.new(shape: nonEmptyString, required: true, location_name: "modelVersionNumber"))
+    ModelVersion.add_member(:model_version_number, Shapes::ShapeRef.new(shape: floatVersionString, required: true, location_name: "modelVersionNumber"))
     ModelVersion.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
     ModelVersion.struct_class = Types::ModelVersion
 
@@ -812,6 +944,7 @@ module Aws::FraudDetector
     ModelVersionDetail.add_member(:training_data_source, Shapes::ShapeRef.new(shape: TrainingDataSourceEnum, location_name: "trainingDataSource"))
     ModelVersionDetail.add_member(:training_data_schema, Shapes::ShapeRef.new(shape: TrainingDataSchema, location_name: "trainingDataSchema"))
     ModelVersionDetail.add_member(:external_events_detail, Shapes::ShapeRef.new(shape: ExternalEventsDetail, location_name: "externalEventsDetail"))
+    ModelVersionDetail.add_member(:ingested_events_detail, Shapes::ShapeRef.new(shape: IngestedEventsDetail, location_name: "ingestedEventsDetail"))
     ModelVersionDetail.add_member(:training_result, Shapes::ShapeRef.new(shape: TrainingResult, location_name: "trainingResult"))
     ModelVersionDetail.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: time, location_name: "lastUpdatedTime"))
     ModelVersionDetail.add_member(:created_time, Shapes::ShapeRef.new(shape: time, location_name: "createdTime"))
@@ -851,6 +984,7 @@ module Aws::FraudDetector
     PutEventTypeRequest.add_member(:event_variables, Shapes::ShapeRef.new(shape: NonEmptyListOfStrings, required: true, location_name: "eventVariables"))
     PutEventTypeRequest.add_member(:labels, Shapes::ShapeRef.new(shape: ListOfStrings, location_name: "labels"))
     PutEventTypeRequest.add_member(:entity_types, Shapes::ShapeRef.new(shape: NonEmptyListOfStrings, required: true, location_name: "entityTypes"))
+    PutEventTypeRequest.add_member(:event_ingestion, Shapes::ShapeRef.new(shape: EventIngestion, location_name: "eventIngestion"))
     PutEventTypeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagList, location_name: "tags"))
     PutEventTypeRequest.struct_class = Types::PutEventTypeRequest
 
@@ -917,6 +1051,17 @@ module Aws::FraudDetector
     RuleResult.add_member(:outcomes, Shapes::ShapeRef.new(shape: ListOfStrings, location_name: "outcomes"))
     RuleResult.struct_class = Types::RuleResult
 
+    SendEventRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventId"))
+    SendEventRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventTypeName"))
+    SendEventRequest.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: utcTimestampISO8601, required: true, location_name: "eventTimestamp"))
+    SendEventRequest.add_member(:event_variables, Shapes::ShapeRef.new(shape: EventVariableMap, required: true, location_name: "eventVariables"))
+    SendEventRequest.add_member(:assigned_label, Shapes::ShapeRef.new(shape: identifier, location_name: "assignedLabel"))
+    SendEventRequest.add_member(:label_timestamp, Shapes::ShapeRef.new(shape: utcTimestampISO8601, location_name: "labelTimestamp"))
+    SendEventRequest.add_member(:entities, Shapes::ShapeRef.new(shape: listOfEntities, required: true, location_name: "entities"))
+    SendEventRequest.struct_class = Types::SendEventRequest
+
+    SendEventResult.struct_class = Types::SendEventResult
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: tagKey, required: true, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: tagValue, required: true, location_name: "value"))
     Tag.struct_class = Types::Tag
@@ -974,6 +1119,14 @@ module Aws::FraudDetector
 
     UpdateDetectorVersionStatusResult.struct_class = Types::UpdateDetectorVersionStatusResult
 
+    UpdateEventLabelRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventId"))
+    UpdateEventLabelRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventTypeName"))
+    UpdateEventLabelRequest.add_member(:assigned_label, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "assignedLabel"))
+    UpdateEventLabelRequest.add_member(:label_timestamp, Shapes::ShapeRef.new(shape: utcTimestampISO8601, required: true, location_name: "labelTimestamp"))
+    UpdateEventLabelRequest.struct_class = Types::UpdateEventLabelRequest
+
+    UpdateEventLabelResult.struct_class = Types::UpdateEventLabelResult
+
     UpdateModelRequest.add_member(:model_id, Shapes::ShapeRef.new(shape: modelIdentifier, required: true, location_name: "modelId"))
     UpdateModelRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     UpdateModelRequest.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
@@ -985,6 +1138,7 @@ module Aws::FraudDetector
     UpdateModelVersionRequest.add_member(:model_type, Shapes::ShapeRef.new(shape: ModelTypeEnum, required: true, location_name: "modelType"))
     UpdateModelVersionRequest.add_member(:major_version_number, Shapes::ShapeRef.new(shape: wholeNumberVersionString, required: true, location_name: "majorVersionNumber"))
     UpdateModelVersionRequest.add_member(:external_events_detail, Shapes::ShapeRef.new(shape: ExternalEventsDetail, location_name: "externalEventsDetail"))
+    UpdateModelVersionRequest.add_member(:ingested_events_detail, Shapes::ShapeRef.new(shape: IngestedEventsDetail, location_name: "ingestedEventsDetail"))
     UpdateModelVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagList, location_name: "tags"))
     UpdateModelVersionRequest.struct_class = Types::UpdateModelVersionRequest
 
@@ -1123,12 +1277,38 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:cancel_batch_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelBatchImportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelBatchImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelBatchImportJobResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:cancel_batch_prediction_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelBatchPredictionJob"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CancelBatchPredictionJobRequest)
         o.output = Shapes::ShapeRef.new(shape: CancelBatchPredictionJobResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_batch_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBatchImportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateBatchImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBatchImportJobResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1211,6 +1391,18 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_batch_import_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBatchImportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBatchImportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBatchImportJobResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_batch_prediction_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBatchPredictionJob"
         o.http_method = "POST"
@@ -1218,7 +1410,6 @@ module Aws::FraudDetector
         o.input = Shapes::ShapeRef.new(shape: DeleteBatchPredictionJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteBatchPredictionJobResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1284,6 +1475,20 @@ module Aws::FraudDetector
         o.output = Shapes::ShapeRef.new(shape: DeleteEventTypeResult)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_events_by_event_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEventsByEventType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEventsByEventTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEventsByEventTypeResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1411,6 +1616,25 @@ module Aws::FraudDetector
         )
       end)
 
+      api.add_operation(:get_batch_import_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBatchImportJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBatchImportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBatchImportJobsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_batch_prediction_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBatchPredictionJobs"
         o.http_method = "POST"
@@ -1428,6 +1652,19 @@ module Aws::FraudDetector
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_delete_events_by_event_type_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDeleteEventsByEventTypeStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDeleteEventsByEventTypeStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDeleteEventsByEventTypeStatusResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_detector_version, Seahorse::Model::Operation.new.tap do |o|
@@ -1479,6 +1716,19 @@ module Aws::FraudDetector
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_event, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEvent"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetEventRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEventResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:get_event_prediction, Seahorse::Model::Operation.new.tap do |o|
@@ -1764,6 +2014,20 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:send_event, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendEvent"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendEventRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendEventResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -1821,6 +2085,20 @@ module Aws::FraudDetector
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateDetectorVersionStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDetectorVersionStatusResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_event_label, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEventLabel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEventLabelRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEventLabelResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

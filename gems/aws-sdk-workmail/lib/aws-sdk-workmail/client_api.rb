@@ -67,6 +67,8 @@ module Aws::WorkMail
     DeleteUserResponse = Shapes::StructureShape.new(name: 'DeleteUserResponse')
     DeregisterFromWorkMailRequest = Shapes::StructureShape.new(name: 'DeregisterFromWorkMailRequest')
     DeregisterFromWorkMailResponse = Shapes::StructureShape.new(name: 'DeregisterFromWorkMailResponse')
+    DeregisterMailDomainRequest = Shapes::StructureShape.new(name: 'DeregisterMailDomainRequest')
+    DeregisterMailDomainResponse = Shapes::StructureShape.new(name: 'DeregisterMailDomainResponse')
     DescribeGroupRequest = Shapes::StructureShape.new(name: 'DescribeGroupRequest')
     DescribeGroupResponse = Shapes::StructureShape.new(name: 'DescribeGroupResponse')
     DescribeInboundDmarcSettingsRequest = Shapes::StructureShape.new(name: 'DescribeInboundDmarcSettingsRequest')
@@ -97,6 +99,9 @@ module Aws::WorkMail
     DisassociateDelegateFromResourceResponse = Shapes::StructureShape.new(name: 'DisassociateDelegateFromResourceResponse')
     DisassociateMemberFromGroupRequest = Shapes::StructureShape.new(name: 'DisassociateMemberFromGroupRequest')
     DisassociateMemberFromGroupResponse = Shapes::StructureShape.new(name: 'DisassociateMemberFromGroupResponse')
+    DnsRecord = Shapes::StructureShape.new(name: 'DnsRecord')
+    DnsRecordVerificationStatus = Shapes::StringShape.new(name: 'DnsRecordVerificationStatus')
+    DnsRecords = Shapes::ListShape.new(name: 'DnsRecords')
     Domain = Shapes::StructureShape.new(name: 'Domain')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     Domains = Shapes::ListShape.new(name: 'Domains')
@@ -114,6 +119,8 @@ module Aws::WorkMail
     GetAccessControlEffectResponse = Shapes::StructureShape.new(name: 'GetAccessControlEffectResponse')
     GetDefaultRetentionPolicyRequest = Shapes::StructureShape.new(name: 'GetDefaultRetentionPolicyRequest')
     GetDefaultRetentionPolicyResponse = Shapes::StructureShape.new(name: 'GetDefaultRetentionPolicyResponse')
+    GetMailDomainRequest = Shapes::StructureShape.new(name: 'GetMailDomainRequest')
+    GetMailDomainResponse = Shapes::StructureShape.new(name: 'GetMailDomainResponse')
     GetMailboxDetailsRequest = Shapes::StructureShape.new(name: 'GetMailboxDetailsRequest')
     GetMailboxDetailsResponse = Shapes::StructureShape.new(name: 'GetMailboxDetailsResponse')
     GetMobileDeviceAccessEffectRequest = Shapes::StructureShape.new(name: 'GetMobileDeviceAccessEffectRequest')
@@ -126,6 +133,7 @@ module Aws::WorkMail
     HostedZoneId = Shapes::StringShape.new(name: 'HostedZoneId')
     IdempotencyClientToken = Shapes::StringShape.new(name: 'IdempotencyClientToken')
     InvalidConfigurationException = Shapes::StructureShape.new(name: 'InvalidConfigurationException')
+    InvalidCustomSesConfigurationException = Shapes::StructureShape.new(name: 'InvalidCustomSesConfigurationException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidPasswordException = Shapes::StructureShape.new(name: 'InvalidPasswordException')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
@@ -142,6 +150,8 @@ module Aws::WorkMail
     ListGroupMembersResponse = Shapes::StructureShape.new(name: 'ListGroupMembersResponse')
     ListGroupsRequest = Shapes::StructureShape.new(name: 'ListGroupsRequest')
     ListGroupsResponse = Shapes::StructureShape.new(name: 'ListGroupsResponse')
+    ListMailDomainsRequest = Shapes::StructureShape.new(name: 'ListMailDomainsRequest')
+    ListMailDomainsResponse = Shapes::StructureShape.new(name: 'ListMailDomainsResponse')
     ListMailboxExportJobsRequest = Shapes::StructureShape.new(name: 'ListMailboxExportJobsRequest')
     ListMailboxExportJobsResponse = Shapes::StructureShape.new(name: 'ListMailboxExportJobsResponse')
     ListMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'ListMailboxPermissionsRequest')
@@ -160,8 +170,11 @@ module Aws::WorkMail
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
+    MailDomainInUseException = Shapes::StructureShape.new(name: 'MailDomainInUseException')
     MailDomainNotFoundException = Shapes::StructureShape.new(name: 'MailDomainNotFoundException')
     MailDomainStateException = Shapes::StructureShape.new(name: 'MailDomainStateException')
+    MailDomainSummary = Shapes::StructureShape.new(name: 'MailDomainSummary')
+    MailDomains = Shapes::ListShape.new(name: 'MailDomains')
     MailboxExportErrorInfo = Shapes::StringShape.new(name: 'MailboxExportErrorInfo')
     MailboxExportJob = Shapes::StructureShape.new(name: 'MailboxExportJob')
     MailboxExportJobId = Shapes::StringShape.new(name: 'MailboxExportJobId')
@@ -207,6 +220,8 @@ module Aws::WorkMail
     PutMobileDeviceAccessOverrideResponse = Shapes::StructureShape.new(name: 'PutMobileDeviceAccessOverrideResponse')
     PutRetentionPolicyRequest = Shapes::StructureShape.new(name: 'PutRetentionPolicyRequest')
     PutRetentionPolicyResponse = Shapes::StructureShape.new(name: 'PutRetentionPolicyResponse')
+    RegisterMailDomainRequest = Shapes::StructureShape.new(name: 'RegisterMailDomainRequest')
+    RegisterMailDomainResponse = Shapes::StructureShape.new(name: 'RegisterMailDomainResponse')
     RegisterToWorkMailRequest = Shapes::StructureShape.new(name: 'RegisterToWorkMailRequest')
     RegisterToWorkMailResponse = Shapes::StructureShape.new(name: 'RegisterToWorkMailResponse')
     ReservedNameException = Shapes::StructureShape.new(name: 'ReservedNameException')
@@ -240,6 +255,8 @@ module Aws::WorkMail
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateDefaultMailDomainRequest = Shapes::StructureShape.new(name: 'UpdateDefaultMailDomainRequest')
+    UpdateDefaultMailDomainResponse = Shapes::StructureShape.new(name: 'UpdateDefaultMailDomainResponse')
     UpdateMailboxQuotaRequest = Shapes::StructureShape.new(name: 'UpdateMailboxQuotaRequest')
     UpdateMailboxQuotaResponse = Shapes::StructureShape.new(name: 'UpdateMailboxQuotaResponse')
     UpdateMobileDeviceAccessRuleRequest = Shapes::StructureShape.new(name: 'UpdateMobileDeviceAccessRuleRequest')
@@ -253,6 +270,7 @@ module Aws::WorkMail
     UserName = Shapes::StringShape.new(name: 'UserName')
     UserRole = Shapes::StringShape.new(name: 'UserRole')
     Users = Shapes::ListShape.new(name: 'Users')
+    WorkMailDomainName = Shapes::StringShape.new(name: 'WorkMailDomainName')
     WorkMailIdentifier = Shapes::StringShape.new(name: 'WorkMailIdentifier')
 
     AccessControlRule.add_member(:name, Shapes::ShapeRef.new(shape: AccessControlRuleName, location_name: "Name"))
@@ -438,6 +456,12 @@ module Aws::WorkMail
 
     DeregisterFromWorkMailResponse.struct_class = Types::DeregisterFromWorkMailResponse
 
+    DeregisterMailDomainRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DeregisterMailDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: WorkMailDomainName, required: true, location_name: "DomainName"))
+    DeregisterMailDomainRequest.struct_class = Types::DeregisterMailDomainRequest
+
+    DeregisterMailDomainResponse.struct_class = Types::DeregisterMailDomainResponse
+
     DescribeGroupRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DescribeGroupRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "GroupId"))
     DescribeGroupRequest.struct_class = Types::DescribeGroupRequest
@@ -547,6 +571,13 @@ module Aws::WorkMail
 
     DisassociateMemberFromGroupResponse.struct_class = Types::DisassociateMemberFromGroupResponse
 
+    DnsRecord.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    DnsRecord.add_member(:hostname, Shapes::ShapeRef.new(shape: String, location_name: "Hostname"))
+    DnsRecord.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    DnsRecord.struct_class = Types::DnsRecord
+
+    DnsRecords.member = Shapes::ShapeRef.new(shape: DnsRecord)
+
     Domain.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     Domain.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: HostedZoneId, location_name: "HostedZoneId"))
     Domain.struct_class = Types::Domain
@@ -590,6 +621,17 @@ module Aws::WorkMail
     GetDefaultRetentionPolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     GetDefaultRetentionPolicyResponse.add_member(:folder_configurations, Shapes::ShapeRef.new(shape: FolderConfigurations, location_name: "FolderConfigurations"))
     GetDefaultRetentionPolicyResponse.struct_class = Types::GetDefaultRetentionPolicyResponse
+
+    GetMailDomainRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    GetMailDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: WorkMailDomainName, required: true, location_name: "DomainName"))
+    GetMailDomainRequest.struct_class = Types::GetMailDomainRequest
+
+    GetMailDomainResponse.add_member(:records, Shapes::ShapeRef.new(shape: DnsRecords, location_name: "Records"))
+    GetMailDomainResponse.add_member(:is_test_domain, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsTestDomain"))
+    GetMailDomainResponse.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
+    GetMailDomainResponse.add_member(:ownership_verification_status, Shapes::ShapeRef.new(shape: DnsRecordVerificationStatus, location_name: "OwnershipVerificationStatus"))
+    GetMailDomainResponse.add_member(:dkim_verification_status, Shapes::ShapeRef.new(shape: DnsRecordVerificationStatus, location_name: "DkimVerificationStatus"))
+    GetMailDomainResponse.struct_class = Types::GetMailDomainResponse
 
     GetMailboxDetailsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     GetMailboxDetailsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "UserId"))
@@ -635,6 +677,9 @@ module Aws::WorkMail
 
     InvalidConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidConfigurationException.struct_class = Types::InvalidConfigurationException
+
+    InvalidCustomSesConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidCustomSesConfigurationException.struct_class = Types::InvalidCustomSesConfigurationException
 
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
@@ -683,6 +728,15 @@ module Aws::WorkMail
     ListGroupsResponse.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "Groups"))
     ListGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupsResponse.struct_class = Types::ListGroupsResponse
+
+    ListMailDomainsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    ListMailDomainsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMailDomainsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMailDomainsRequest.struct_class = Types::ListMailDomainsRequest
+
+    ListMailDomainsResponse.add_member(:mail_domains, Shapes::ShapeRef.new(shape: MailDomains, location_name: "MailDomains"))
+    ListMailDomainsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMailDomainsResponse.struct_class = Types::ListMailDomainsResponse
 
     ListMailboxExportJobsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     ListMailboxExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -762,11 +816,20 @@ module Aws::WorkMail
     ListUsersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListUsersResponse.struct_class = Types::ListUsersResponse
 
+    MailDomainInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    MailDomainInUseException.struct_class = Types::MailDomainInUseException
+
     MailDomainNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     MailDomainNotFoundException.struct_class = Types::MailDomainNotFoundException
 
     MailDomainStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     MailDomainStateException.struct_class = Types::MailDomainStateException
+
+    MailDomainSummary.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    MailDomainSummary.add_member(:default_domain, Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultDomain"))
+    MailDomainSummary.struct_class = Types::MailDomainSummary
+
+    MailDomains.member = Shapes::ShapeRef.new(shape: MailDomainSummary)
 
     MailboxExportJob.add_member(:job_id, Shapes::ShapeRef.new(shape: MailboxExportJobId, location_name: "JobId"))
     MailboxExportJob.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, location_name: "EntityId"))
@@ -896,6 +959,13 @@ module Aws::WorkMail
 
     PutRetentionPolicyResponse.struct_class = Types::PutRetentionPolicyResponse
 
+    RegisterMailDomainRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    RegisterMailDomainRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    RegisterMailDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: WorkMailDomainName, required: true, location_name: "DomainName"))
+    RegisterMailDomainRequest.struct_class = Types::RegisterMailDomainRequest
+
+    RegisterMailDomainResponse.struct_class = Types::RegisterMailDomainResponse
+
     RegisterToWorkMailRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     RegisterToWorkMailRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
     RegisterToWorkMailRequest.add_member(:email, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "Email"))
@@ -967,6 +1037,12 @@ module Aws::WorkMail
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateDefaultMailDomainRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    UpdateDefaultMailDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: WorkMailDomainName, required: true, location_name: "DomainName"))
+    UpdateDefaultMailDomainRequest.struct_class = Types::UpdateDefaultMailDomainRequest
+
+    UpdateDefaultMailDomainResponse.struct_class = Types::UpdateDefaultMailDomainResponse
 
     UpdateMailboxQuotaRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     UpdateMailboxQuotaRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "UserId"))
@@ -1306,6 +1382,19 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
+      api.add_operation(:deregister_mail_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterMailDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterMailDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeregisterMailDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MailDomainInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCustomSesConfigurationException)
+      end)
+
       api.add_operation(:describe_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeGroup"
         o.http_method = "POST"
@@ -1427,6 +1516,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
       end)
 
+      api.add_operation(:get_mail_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMailDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMailDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMailDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MailDomainNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:get_mailbox_details, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMailboxDetails"
         o.http_method = "POST"
@@ -1517,6 +1618,23 @@ module Aws::WorkMail
         o.input = Shapes::ShapeRef.new(shape: ListGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_mail_domains, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMailDomains"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMailDomainsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMailDomainsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
@@ -1730,6 +1848,19 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:register_mail_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterMailDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterMailDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterMailDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MailDomainInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:register_to_work_mail, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RegisterToWorkMail"
         o.http_method = "POST"
@@ -1797,6 +1928,19 @@ module Aws::WorkMail
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_default_mail_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDefaultMailDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDefaultMailDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDefaultMailDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MailDomainNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MailDomainStateException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:update_mailbox_quota, Seahorse::Model::Operation.new.tap do |o|

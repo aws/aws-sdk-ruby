@@ -49,6 +49,7 @@ module Aws::QuickSight
     AwsIotAnalyticsParameters = Shapes::StructureShape.new(name: 'AwsIotAnalyticsParameters')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BorderStyle = Shapes::StructureShape.new(name: 'BorderStyle')
+    CIDR = Shapes::StringShape.new(name: 'CIDR')
     CalculatedColumn = Shapes::StructureShape.new(name: 'CalculatedColumn')
     CalculatedColumnList = Shapes::ListShape.new(name: 'CalculatedColumnList')
     CancelIngestionRequest = Shapes::StructureShape.new(name: 'CancelIngestionRequest')
@@ -229,6 +230,8 @@ module Aws::QuickSight
     DescribeIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'DescribeIAMPolicyAssignmentResponse')
     DescribeIngestionRequest = Shapes::StructureShape.new(name: 'DescribeIngestionRequest')
     DescribeIngestionResponse = Shapes::StructureShape.new(name: 'DescribeIngestionResponse')
+    DescribeIpRestrictionRequest = Shapes::StructureShape.new(name: 'DescribeIpRestrictionRequest')
+    DescribeIpRestrictionResponse = Shapes::StructureShape.new(name: 'DescribeIpRestrictionResponse')
     DescribeNamespaceRequest = Shapes::StructureShape.new(name: 'DescribeNamespaceRequest')
     DescribeNamespaceResponse = Shapes::StructureShape.new(name: 'DescribeNamespaceResponse')
     DescribeTemplateAliasRequest = Shapes::StructureShape.new(name: 'DescribeTemplateAliasRequest')
@@ -314,6 +317,7 @@ module Aws::QuickSight
     IngestionRequestSource = Shapes::StringShape.new(name: 'IngestionRequestSource')
     IngestionRequestType = Shapes::StringShape.new(name: 'IngestionRequestType')
     IngestionStatus = Shapes::StringShape.new(name: 'IngestionStatus')
+    IngestionType = Shapes::StringShape.new(name: 'IngestionType')
     Ingestions = Shapes::ListShape.new(name: 'Ingestions')
     InputColumn = Shapes::StructureShape.new(name: 'InputColumn')
     InputColumnDataType = Shapes::StringShape.new(name: 'InputColumnDataType')
@@ -324,6 +328,8 @@ module Aws::QuickSight
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
+    IpRestrictionRuleDescription = Shapes::StringShape.new(name: 'IpRestrictionRuleDescription')
+    IpRestrictionRuleMap = Shapes::MapShape.new(name: 'IpRestrictionRuleMap')
     JiraParameters = Shapes::StructureShape.new(name: 'JiraParameters')
     JoinInstruction = Shapes::StructureShape.new(name: 'JoinInstruction')
     JoinKeyProperties = Shapes::StructureShape.new(name: 'JoinKeyProperties')
@@ -394,6 +400,7 @@ module Aws::QuickSight
     NamespaceStatus = Shapes::StringShape.new(name: 'NamespaceStatus')
     Namespaces = Shapes::ListShape.new(name: 'Namespaces')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     OnClause = Shapes::StringShape.new(name: 'OnClause')
     OptionalPort = Shapes::IntegerShape.new(name: 'OptionalPort')
     OracleParameters = Shapes::StructureShape.new(name: 'OracleParameters')
@@ -568,6 +575,8 @@ module Aws::QuickSight
     UpdateGroupResponse = Shapes::StructureShape.new(name: 'UpdateGroupResponse')
     UpdateIAMPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'UpdateIAMPolicyAssignmentRequest')
     UpdateIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'UpdateIAMPolicyAssignmentResponse')
+    UpdateIpRestrictionRequest = Shapes::StructureShape.new(name: 'UpdateIpRestrictionRequest')
+    UpdateIpRestrictionResponse = Shapes::StructureShape.new(name: 'UpdateIpRestrictionResponse')
     UpdateResourcePermissionList = Shapes::ListShape.new(name: 'UpdateResourcePermissionList')
     UpdateTemplateAliasRequest = Shapes::StructureShape.new(name: 'UpdateTemplateAliasRequest')
     UpdateTemplateAliasResponse = Shapes::StructureShape.new(name: 'UpdateTemplateAliasResponse')
@@ -595,9 +604,6 @@ module Aws::QuickSight
     Warehouse = Shapes::StringShape.new(name: 'Warehouse')
     WorkGroup = Shapes::StringShape.new(name: 'WorkGroup')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
-    long = Shapes::IntegerShape.new(name: 'long')
-    string = Shapes::StringShape.new(name: 'string')
-    timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
@@ -708,13 +714,13 @@ module Aws::QuickSight
     CalculatedColumnList.member = Shapes::ShapeRef.new(shape: CalculatedColumn)
 
     CancelIngestionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
-    CancelIngestionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DataSetId"))
+    CancelIngestionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "DataSetId"))
     CancelIngestionRequest.add_member(:ingestion_id, Shapes::ShapeRef.new(shape: IngestionId, required: true, location: "uri", location_name: "IngestionId"))
     CancelIngestionRequest.struct_class = Types::CancelIngestionRequest
 
     CancelIngestionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     CancelIngestionResponse.add_member(:ingestion_id, Shapes::ShapeRef.new(shape: IngestionId, location_name: "IngestionId"))
-    CancelIngestionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: string, location_name: "RequestId"))
+    CancelIngestionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     CancelIngestionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     CancelIngestionResponse.struct_class = Types::CancelIngestionResponse
 
@@ -939,15 +945,16 @@ module Aws::QuickSight
     CreateIAMPolicyAssignmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     CreateIAMPolicyAssignmentResponse.struct_class = Types::CreateIAMPolicyAssignmentResponse
 
-    CreateIngestionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DataSetId"))
+    CreateIngestionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "DataSetId"))
     CreateIngestionRequest.add_member(:ingestion_id, Shapes::ShapeRef.new(shape: IngestionId, required: true, location: "uri", location_name: "IngestionId"))
     CreateIngestionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    CreateIngestionRequest.add_member(:ingestion_type, Shapes::ShapeRef.new(shape: IngestionType, location_name: "IngestionType"))
     CreateIngestionRequest.struct_class = Types::CreateIngestionRequest
 
     CreateIngestionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     CreateIngestionResponse.add_member(:ingestion_id, Shapes::ShapeRef.new(shape: IngestionId, location_name: "IngestionId"))
     CreateIngestionResponse.add_member(:ingestion_status, Shapes::ShapeRef.new(shape: IngestionStatus, location_name: "IngestionStatus"))
-    CreateIngestionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: string, location_name: "RequestId"))
+    CreateIngestionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     CreateIngestionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     CreateIngestionResponse.struct_class = Types::CreateIngestionResponse
 
@@ -1548,14 +1555,24 @@ module Aws::QuickSight
     DescribeIAMPolicyAssignmentResponse.struct_class = Types::DescribeIAMPolicyAssignmentResponse
 
     DescribeIngestionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
-    DescribeIngestionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DataSetId"))
+    DescribeIngestionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "DataSetId"))
     DescribeIngestionRequest.add_member(:ingestion_id, Shapes::ShapeRef.new(shape: IngestionId, required: true, location: "uri", location_name: "IngestionId"))
     DescribeIngestionRequest.struct_class = Types::DescribeIngestionRequest
 
     DescribeIngestionResponse.add_member(:ingestion, Shapes::ShapeRef.new(shape: Ingestion, location_name: "Ingestion"))
-    DescribeIngestionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: string, location_name: "RequestId"))
+    DescribeIngestionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeIngestionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeIngestionResponse.struct_class = Types::DescribeIngestionResponse
+
+    DescribeIpRestrictionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeIpRestrictionRequest.struct_class = Types::DescribeIpRestrictionRequest
+
+    DescribeIpRestrictionResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
+    DescribeIpRestrictionResponse.add_member(:ip_restriction_rule_map, Shapes::ShapeRef.new(shape: IpRestrictionRuleMap, location_name: "IpRestrictionRuleMap"))
+    DescribeIpRestrictionResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Enabled"))
+    DescribeIpRestrictionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeIpRestrictionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeIpRestrictionResponse.struct_class = Types::DescribeIpRestrictionResponse
 
     DescribeNamespaceRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
@@ -1647,7 +1664,7 @@ module Aws::QuickSight
     DoubleList.member = Shapes::ShapeRef.new(shape: Double)
 
     ErrorInfo.add_member(:type, Shapes::ShapeRef.new(shape: IngestionErrorType, location_name: "Type"))
-    ErrorInfo.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    ErrorInfo.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ErrorInfo.struct_class = Types::ErrorInfo
 
     ExportToCSVOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
@@ -1800,9 +1817,9 @@ module Aws::QuickSight
     Ingestion.add_member(:error_info, Shapes::ShapeRef.new(shape: ErrorInfo, location_name: "ErrorInfo"))
     Ingestion.add_member(:row_info, Shapes::ShapeRef.new(shape: RowInfo, location_name: "RowInfo"))
     Ingestion.add_member(:queue_info, Shapes::ShapeRef.new(shape: QueueInfo, location_name: "QueueInfo"))
-    Ingestion.add_member(:created_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedTime"))
-    Ingestion.add_member(:ingestion_time_in_seconds, Shapes::ShapeRef.new(shape: long, location_name: "IngestionTimeInSeconds", metadata: {"box"=>true}))
-    Ingestion.add_member(:ingestion_size_in_bytes, Shapes::ShapeRef.new(shape: long, location_name: "IngestionSizeInBytes", metadata: {"box"=>true}))
+    Ingestion.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
+    Ingestion.add_member(:ingestion_time_in_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "IngestionTimeInSeconds", metadata: {"box"=>true}))
+    Ingestion.add_member(:ingestion_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "IngestionSizeInBytes", metadata: {"box"=>true}))
     Ingestion.add_member(:request_source, Shapes::ShapeRef.new(shape: IngestionRequestSource, location_name: "RequestSource"))
     Ingestion.add_member(:request_type, Shapes::ShapeRef.new(shape: IngestionRequestType, location_name: "RequestType"))
     Ingestion.struct_class = Types::Ingestion
@@ -1832,6 +1849,9 @@ module Aws::QuickSight
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidParameterValueException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    IpRestrictionRuleMap.key = Shapes::ShapeRef.new(shape: CIDR)
+    IpRestrictionRuleMap.value = Shapes::ShapeRef.new(shape: IpRestrictionRuleDescription)
 
     JiraParameters.add_member(:site_base_url, Shapes::ShapeRef.new(shape: SiteBaseUrl, required: true, location_name: "SiteBaseUrl"))
     JiraParameters.struct_class = Types::JiraParameters
@@ -1982,15 +2002,15 @@ module Aws::QuickSight
     ListIAMPolicyAssignmentsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     ListIAMPolicyAssignmentsResponse.struct_class = Types::ListIAMPolicyAssignmentsResponse
 
-    ListIngestionsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DataSetId"))
-    ListIngestionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "next-token"))
+    ListIngestionsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "DataSetId"))
+    ListIngestionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListIngestionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListIngestionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: IngestionMaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
     ListIngestionsRequest.struct_class = Types::ListIngestionsRequest
 
     ListIngestionsResponse.add_member(:ingestions, Shapes::ShapeRef.new(shape: Ingestions, location_name: "Ingestions"))
-    ListIngestionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
-    ListIngestionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: string, location_name: "RequestId"))
+    ListIngestionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListIngestionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ListIngestionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     ListIngestionsResponse.struct_class = Types::ListIngestionsResponse
 
@@ -2208,8 +2228,8 @@ module Aws::QuickSight
 
     ProjectedColumnList.member = Shapes::ShapeRef.new(shape: String)
 
-    QueueInfo.add_member(:waiting_on_ingestion, Shapes::ShapeRef.new(shape: string, required: true, location_name: "WaitingOnIngestion"))
-    QueueInfo.add_member(:queued_ingestion, Shapes::ShapeRef.new(shape: string, required: true, location_name: "QueuedIngestion"))
+    QueueInfo.add_member(:waiting_on_ingestion, Shapes::ShapeRef.new(shape: String, required: true, location_name: "WaitingOnIngestion"))
+    QueueInfo.add_member(:queued_ingestion, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueuedIngestion"))
     QueueInfo.struct_class = Types::QueueInfo
 
     QuickSightUserNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -2298,8 +2318,9 @@ module Aws::QuickSight
     RestoreAnalysisResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     RestoreAnalysisResponse.struct_class = Types::RestoreAnalysisResponse
 
-    RowInfo.add_member(:rows_ingested, Shapes::ShapeRef.new(shape: long, location_name: "RowsIngested", metadata: {"box"=>true}))
-    RowInfo.add_member(:rows_dropped, Shapes::ShapeRef.new(shape: long, location_name: "RowsDropped", metadata: {"box"=>true}))
+    RowInfo.add_member(:rows_ingested, Shapes::ShapeRef.new(shape: Long, location_name: "RowsIngested", metadata: {"box"=>true}))
+    RowInfo.add_member(:rows_dropped, Shapes::ShapeRef.new(shape: Long, location_name: "RowsDropped", metadata: {"box"=>true}))
+    RowInfo.add_member(:total_rows_in_dataset, Shapes::ShapeRef.new(shape: Long, location_name: "TotalRowsInDataset", metadata: {"box"=>true}))
     RowInfo.struct_class = Types::RowInfo
 
     RowLevelPermissionDataSet.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
@@ -2830,6 +2851,16 @@ module Aws::QuickSight
     UpdateIAMPolicyAssignmentResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateIAMPolicyAssignmentResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateIAMPolicyAssignmentResponse.struct_class = Types::UpdateIAMPolicyAssignmentResponse
+
+    UpdateIpRestrictionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateIpRestrictionRequest.add_member(:ip_restriction_rule_map, Shapes::ShapeRef.new(shape: IpRestrictionRuleMap, location_name: "IpRestrictionRuleMap"))
+    UpdateIpRestrictionRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "Enabled"))
+    UpdateIpRestrictionRequest.struct_class = Types::UpdateIpRestrictionRequest
+
+    UpdateIpRestrictionResponse.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AwsAccountId"))
+    UpdateIpRestrictionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateIpRestrictionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateIpRestrictionResponse.struct_class = Types::UpdateIpRestrictionResponse
 
     UpdateResourcePermissionList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
 
@@ -3702,6 +3733,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:describe_ip_restriction, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIpRestriction"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/ip-restriction"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIpRestrictionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIpRestrictionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -4606,6 +4650,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdatingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_ip_restriction, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIpRestriction"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/ip-restriction"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIpRestrictionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateIpRestrictionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

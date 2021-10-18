@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2021-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.103.0 (2021-10-14)
+------------------
+
+* Feature - This release updates the provisioning artifact ID to an optional parameter in CreateProject API. The provisioning artifact ID defaults to the latest provisioning artifact ID of the product if you don't provide one.
+
 1.102.0 (2021-10-06)
 ------------------
 

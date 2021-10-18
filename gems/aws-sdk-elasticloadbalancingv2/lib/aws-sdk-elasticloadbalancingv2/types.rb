@@ -1034,6 +1034,7 @@ module Aws::ElasticLoadBalancingV2
     #             value: "TagValue",
     #           },
     #         ],
+    #         ip_address_type: "ipv4", # accepts ipv4, ipv6
     #       }
     #
     # @!attribute [rw] name
@@ -1173,6 +1174,12 @@ module Aws::ElasticLoadBalancingV2
     #   The tags to assign to the target group.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP address used for this target group. The possible
+    #   values are `ipv4` and `ipv6`. This is an optional parameter. If not
+    #   specified, the IP address type defaults to `ipv4`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroupInput AWS API Documentation
     #
     class CreateTargetGroupInput < Struct.new(
@@ -1191,7 +1198,8 @@ module Aws::ElasticLoadBalancingV2
       :unhealthy_threshold_count,
       :matcher,
       :target_type,
-      :tags)
+      :tags,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1638,6 +1646,7 @@ module Aws::ElasticLoadBalancingV2
     #         names: ["SslPolicyName"],
     #         marker: "Marker",
     #         page_size: 1,
+    #         load_balancer_type: "application", # accepts application, network, gateway
     #       }
     #
     # @!attribute [rw] names
@@ -1653,12 +1662,18 @@ module Aws::ElasticLoadBalancingV2
     #   The maximum number of results to return with this call.
     #   @return [Integer]
     #
+    # @!attribute [rw] load_balancer_type
+    #   The type of load balancer. The default lists the SSL policies for
+    #   all load balancers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeSSLPoliciesInput AWS API Documentation
     #
     class DescribeSSLPoliciesInput < Struct.new(
       :names,
       :marker,
-      :page_size)
+      :page_size,
+      :load_balancer_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2489,6 +2504,9 @@ module Aws::ElasticLoadBalancingV2
     #
     #   For Network Load Balancers and Gateway Load Balancers, this must be
     #   "200–399".
+    #
+    #   Note that when using shorthand syntax, some values such as commas
+    #   need to be escaped.
     #   @return [String]
     #
     # @!attribute [rw] grpc_code
@@ -3779,12 +3797,17 @@ module Aws::ElasticLoadBalancingV2
     #   The name of the policy.
     #   @return [String]
     #
+    # @!attribute [rw] supported_load_balancer_types
+    #   The supported load balancers.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SslPolicy AWS API Documentation
     #
     class SslPolicy < Struct.new(
       :ssl_protocols,
       :ciphers,
-      :name)
+      :name,
+      :supported_load_balancer_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4024,6 +4047,12 @@ module Aws::ElasticLoadBalancingV2
     #   are `GRPC`, `HTTP1`, and `HTTP2`.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP address used for this target group. The possible
+    #   values are `ipv4` and `ipv6`. This is an optional parameter. If not
+    #   specified, the IP address type defaults to `ipv4`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroup AWS API Documentation
     #
     class TargetGroup < Struct.new(
@@ -4043,7 +4072,8 @@ module Aws::ElasticLoadBalancingV2
       :matcher,
       :load_balancer_arns,
       :target_type,
-      :protocol_version)
+      :protocol_version,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

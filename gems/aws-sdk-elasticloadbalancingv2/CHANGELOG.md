@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2021-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2021-10-14)
+------------------
+
+* Feature - Adds new option to filter by availability on each type of load balancer when describing ssl policies.
+
+1.69.0 (2021-10-11)
+------------------
+
+* Feature - Enable support for ALB IPv6 Target Groups (IP Address Type)
+
 1.68.0 (2021-09-27)
 ------------------
 

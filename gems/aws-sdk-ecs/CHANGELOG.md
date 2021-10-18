@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2021-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.86.0 (2021-10-12)
+------------------
+
+* Feature - Documentation only update to address tickets.
+
 1.85.0 (2021-09-01)
 ------------------
 

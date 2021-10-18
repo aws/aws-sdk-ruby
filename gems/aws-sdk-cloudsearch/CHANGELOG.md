@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-10-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2021-10-12)
+------------------
+
+* Feature - Adds an additional validation exception for Amazon CloudSearch configuration APIs for better error handling.
+
 1.33.0 (2021-09-01)
 ------------------
 

@@ -7939,7 +7939,7 @@ module Aws::SageMaker
     #         project_description: "EntityDescription",
     #         service_catalog_provisioning_details: { # required
     #           product_id: "ServiceCatalogEntityId", # required
-    #           provisioning_artifact_id: "ServiceCatalogEntityId", # required
+    #           provisioning_artifact_id: "ServiceCatalogEntityId",
     #           path_id: "ServiceCatalogEntityId",
     #           provisioning_parameters: [
     #             {
@@ -7966,8 +7966,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] service_catalog_provisioning_details
     #   The product ID and provisioning artifact ID to provision a service
-    #   catalog. For information, see [What is Amazon Web Services Service
-    #   Catalog][1].
+    #   catalog. The provisioning artifact ID will default to the latest
+    #   provisioning artifact ID of the product, if you don't provide the
+    #   provisioning artifact ID. For more information, see [What is Amazon
+    #   Web Services Service Catalog][1].
     #
     #
     #
@@ -25355,7 +25357,7 @@ module Aws::SageMaker
     # model artifacts.
     #
     # Model artifacts are the output that results from training a model, and
-    # typically consist of trained parameters, a model defintion that
+    # typically consist of trained parameters, a model definition that
     # describes how to compute inferences, and other metadata.
     #
     # @!attribute [rw] s3_model_artifacts
@@ -31923,7 +31925,7 @@ module Aws::SageMaker
     #
     #       {
     #         product_id: "ServiceCatalogEntityId", # required
-    #         provisioning_artifact_id: "ServiceCatalogEntityId", # required
+    #         provisioning_artifact_id: "ServiceCatalogEntityId",
     #         path_id: "ServiceCatalogEntityId",
     #         provisioning_parameters: [
     #           {

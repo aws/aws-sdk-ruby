@@ -145,7 +145,7 @@ kMFvPxlw0XwWsvjTGPFCBIR7NZXnwQfVYbdFu88TjT10wTCZ/E3yCp77aDWD1JLV
           expect(a_request(:get, signing_cert_url)).to have_been_made.times(3)
         end
 
-        it 'raises when the signing cert can not be downloaded due to networking erros' do
+        it 'raises when the signing cert can not be downloaded due to networking errors' do
           stub_request(:get, signing_cert_url).to_raise(StandardError, 'oops')
           expect {
             verifier.authenticate!(message)
@@ -157,6 +157,15 @@ kMFvPxlw0XwWsvjTGPFCBIR7NZXnwQfVYbdFu88TjT10wTCZ/E3yCp77aDWD1JLV
           expect {
             verifier.authenticate!(message)
           }.to raise_error(MessageVerifier::VerificationError, 'bad')
+        end
+
+        it 'raises when the signing cert contains additional characters' do
+          cert_with_extra = "<xml><value>\n#{cert}\n<value></xml>"
+          stub_request(:get, signing_cert_url).to_return(status:200, body: cert_with_extra)
+          expect {
+            verifier.authenticate!(message)
+          }.to raise_error(MessageVerifier::VerificationError,
+                           /certificate does not match expected X509 PEM format/)
         end
 
       end

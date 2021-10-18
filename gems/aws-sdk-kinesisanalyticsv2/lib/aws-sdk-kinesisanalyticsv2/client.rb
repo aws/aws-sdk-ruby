@@ -511,7 +511,7 @@ module Aws::KinesisAnalyticsV2
     # Adds an InputProcessingConfiguration to a SQL-based Kinesis Data
     # Analytics application. An input processor pre-processes records on the
     # input stream before the application's SQL code executes. Currently,
-    # the only input processor available is [AWS Lambda][1].
+    # the only input processor available is [Amazon Lambda][1].
     #
     #
     #
@@ -579,7 +579,7 @@ module Aws::KinesisAnalyticsV2
     # If you want Kinesis Data Analytics to deliver data from an
     # in-application stream within your application to an external
     # destination (such as an Kinesis data stream, a Kinesis Data Firehose
-    # delivery stream, or an AWS Lambda function), you add the relevant
+    # delivery stream, or an Amazon Lambda function), you add the relevant
     # configuration to your application using this operation. You can
     # configure one or more outputs for your application. Each output
     # configuration maps an in-application stream and an external
@@ -608,8 +608,8 @@ module Aws::KinesisAnalyticsV2
     #   An array of objects, each describing one output configuration. In the
     #   output configuration, you specify the name of an in-application
     #   stream, a destination (that is, a Kinesis data stream, a Kinesis Data
-    #   Firehose delivery stream, or an AWS Lambda function), and record the
-    #   formation to use when writing to the destination.
+    #   Firehose delivery stream, or an Amazon Lambda function), and record
+    #   the formation to use when writing to the destination.
     #
     # @return [Types::AddApplicationOutputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -888,7 +888,7 @@ module Aws::KinesisAnalyticsV2
     #   resp = client.create_application({
     #     application_name: "ApplicationName", # required
     #     application_description: "ApplicationDescription",
-    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, ZEPPELIN-FLINK-1_0
+    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8, ZEPPELIN-FLINK-1_0, FLINK-1_11, FLINK-1_13, ZEPPELIN-FLINK-2_0
     #     service_execution_role: "RoleARN", # required
     #     application_configuration: {
     #       sql_application_configuration: {
@@ -1083,9 +1083,9 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -1625,9 +1625,9 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -1815,9 +1815,9 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_version_detail.application_arn #=> String
     #   resp.application_version_detail.application_description #=> String
     #   resp.application_version_detail.application_name #=> String
-    #   resp.application_version_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
+    #   resp.application_version_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0"
     #   resp.application_version_detail.service_execution_role #=> String
-    #   resp.application_version_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.application_version_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_version_detail.application_version_id #=> Integer
     #   resp.application_version_detail.create_timestamp #=> Time
     #   resp.application_version_detail.last_update_timestamp #=> Time
@@ -2086,8 +2086,8 @@ module Aws::KinesisAnalyticsV2
     # @option params [String] :next_token
     #   If a previous invocation of this operation returned a pagination
     #   token, pass it into this value to retrieve the next set of results.
-    #   For more information about pagination, see [Using the AWS Command Line
-    #   Interface's Pagination Options][1].
+    #   For more information about pagination, see [Using the Amazon Command
+    #   Line Interface's Pagination Options][1].
     #
     #
     #
@@ -2110,7 +2110,7 @@ module Aws::KinesisAnalyticsV2
     #
     #   resp.application_version_summaries #=> Array
     #   resp.application_version_summaries[0].application_version_id #=> Integer
-    #   resp.application_version_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.application_version_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplicationVersions AWS API Documentation
@@ -2135,7 +2135,7 @@ module Aws::KinesisAnalyticsV2
     # @option params [String] :next_token
     #   If a previous command returned a pagination token, pass it into this
     #   value to retrieve the next set of results. For more information about
-    #   pagination, see [Using the AWS Command Line Interface's Pagination
+    #   pagination, see [Using the Amazon Command Line Interface's Pagination
     #   Options][1].
     #
     #
@@ -2159,9 +2159,9 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_summaries #=> Array
     #   resp.application_summaries[0].application_name #=> String
     #   resp.application_summaries[0].application_arn #=> String
-    #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_summaries[0].application_version_id #=> Integer
-    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
+    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0"
     #   resp.application_summaries[0].application_mode #=> String, one of "STREAMING", "INTERACTIVE"
     #   resp.next_token #=> String
     #
@@ -2245,9 +2245,9 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -2738,12 +2738,12 @@ module Aws::KinesisAnalyticsV2
     #         },
     #         catalog_configuration_update: {
     #           glue_data_catalog_configuration_update: { # required
-    #             database_arn_update: "DatabaseARN",
+    #             database_arn_update: "DatabaseARN", # required
     #           },
     #         },
     #         deploy_as_application_configuration_update: {
-    #           s3_content_location_update: { # required
-    #             bucket_arn_update: "BucketARN", # required
+    #           s3_content_location_update: {
+    #             bucket_arn_update: "BucketARN",
     #             base_path_update: "BasePath",
     #           },
     #         },
@@ -2788,9 +2788,9 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "FLINK-1_11", "ZEPPELIN-FLINK-1_0"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8", "ZEPPELIN-FLINK-1_0", "FLINK-1_11", "FLINK-1_13", "ZEPPELIN-FLINK-2_0"
     #   resp.application_detail.service_execution_role #=> String
-    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "MAINTENANCE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING", "AUTOSCALING", "FORCE_STOPPING", "ROLLING_BACK", "MAINTENANCE", "ROLLED_BACK"
     #   resp.application_detail.application_version_id #=> Integer
     #   resp.application_detail.create_timestamp #=> Time
     #   resp.application_detail.last_update_timestamp #=> Time
@@ -2988,7 +2988,7 @@ module Aws::KinesisAnalyticsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

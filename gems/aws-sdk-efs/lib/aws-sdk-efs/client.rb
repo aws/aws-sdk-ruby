@@ -1979,17 +1979,35 @@ module Aws::EFS
     end
 
     # Use this operation to set the account preference in the current Amazon
-    # Web Services Region to use either long 17 character (63 bit) or short
-    # 8 character (32 bit) IDs for new EFS file systems and mount targets
-    # created. All existing resource IDs are not affected by any changes you
-    # make. You can set the ID preference during the opt-in period as EFS
-    # transitions to long resource IDs. For more information, see [Managing
-    # Amazon EFS resource IDs](efs/latest/ug/manage-efs-resource-ids.html).
+    # Web Services Region to use long 17 character (63 bit) or short 8
+    # character (32 bit) resource IDs for new EFS file system and mount
+    # target resources. All existing resource IDs are not affected by any
+    # changes you make. You can set the ID preference during the opt-in
+    # period as EFS transitions to long resource IDs. For more information,
+    # see [Managing Amazon EFS resource IDs][1].
+    #
+    # <note markdown="1"> Starting in October, 2021, you will receive an error if you try to set
+    # the account preference to use the short 8 character format resource
+    # ID. Contact Amazon Web Services support if you receive an error and
+    # need to use short IDs for file system and mount target resources.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/manage-efs-resource-ids.html
     #
     # @option params [required, String] :resource_id_type
     #   Specifies the EFS resource ID preference to set for the user's Amazon
     #   Web Services account, in the current Amazon Web Services Region,
     #   either `LONG_ID` (17 characters), or `SHORT_ID` (8 characters).
+    #
+    #   <note markdown="1"> Starting in October, 2021, you will receive an error when setting the
+    #   account preference to `SHORT_ID`. Contact Amazon Web Services support
+    #   if you receive an error and need to use short IDs for file system and
+    #   mount target resources.
+    #
+    #    </note>
     #
     # @return [Types::PutAccountPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2060,7 +2078,9 @@ module Aws::EFS
     # the default policy. For more information about the default file system
     # policy, see [Default EFS File System Policy][1].
     #
-    # EFS file system policies have a 20,000 character limit.
+    # <note markdown="1"> EFS file system policies have a 20,000 character limit.
+    #
+    #  </note>
     #
     # This operation requires permissions for the
     # `elasticfilesystem:PutFileSystemPolicy` action.
@@ -2129,15 +2149,14 @@ module Aws::EFS
     # `TransitionToPrimaryStorageClass` to `AFTER_1_ACCESS`. For more
     # information, see [EFS Lifecycle Management][1].
     #
-    # A `LifecycleConfiguration` applies to all files in a file system.
-    #
     # Each Amazon EFS file system supports one lifecycle configuration,
     # which applies to all files in the file system. If a
     # `LifecycleConfiguration` object already exists for the specified file
     # system, a `PutLifecycleConfiguration` call modifies the existing
     # configuration. A `PutLifecycleConfiguration` call with an empty
     # `LifecyclePolicies` array in the request body deletes any existing
-    # `LifecycleConfiguration` and disables lifecycle management.
+    # `LifecycleConfiguration` and turns off lifecycle management for the
+    # file system.
     #
     # In the request, specify the following:
     #
@@ -2145,8 +2164,11 @@ module Aws::EFS
     #   modifying lifecycle management.
     #
     # * A `LifecyclePolicies` array of `LifecyclePolicy` objects that define
-    #   when files are moved to the IA storage class. The array can contain
-    #   only one `LifecyclePolicy` item.
+    #   when files are moved to the IA storage class. Amazon EFS requires
+    #   that each `LifecyclePolicy` object have only have a single
+    #   transition, so the `LifecyclePolicies` array needs to be structured
+    #   with separate `LifecyclePolicy` objects. See the example requests in
+    #   the following section for more information.
     #
     # This operation requires permissions for the
     # `elasticfilesystem:PutLifecycleConfiguration` operation.
@@ -2166,8 +2188,23 @@ module Aws::EFS
     # @option params [required, Array<Types::LifecyclePolicy>] :lifecycle_policies
     #   An array of `LifecyclePolicy` objects that define the file system's
     #   `LifecycleConfiguration` object. A `LifecycleConfiguration` object
-    #   tells lifecycle management when to transition files from the Standard
-    #   storage class to the Infrequent Access storage class.
+    #   informs EFS lifecycle management and intelligent tiering of the
+    #   following:
+    #
+    #   * When to move files in the file system from primary storage to the IA
+    #     storage class.
+    #
+    #   * When to move files that are in IA storage to primary storage.
+    #
+    #   <note markdown="1"> When using the `put-lifecycle-configuration` CLI command or the
+    #   `PutLifecycleConfiguration` API action, Amazon EFS requires that each
+    #   `LifecyclePolicy` object have only a single transition. This means
+    #   that in a request body, `LifecyclePolicies` needs to be structured as
+    #   an array of `LifecyclePolicy` objects, one object for each transition,
+    #   `TransitionToIA`, `TransitionToPrimaryStorageClass`. See the example
+    #   requests in the following section for more information.
+    #
+    #    </note>
     #
     # @return [Types::LifecycleConfigurationDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2387,7 +2424,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

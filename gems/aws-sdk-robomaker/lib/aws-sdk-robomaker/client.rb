@@ -403,6 +403,8 @@ module Aws::RoboMaker
     #   resp.jobs[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.jobs[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.jobs[0].robot_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.jobs[0].robot_applications[0].launch_config.command #=> Array
+    #   resp.jobs[0].robot_applications[0].launch_config.command[0] #=> String
     #   resp.jobs[0].robot_applications[0].upload_configurations #=> Array
     #   resp.jobs[0].robot_applications[0].upload_configurations[0].name #=> String
     #   resp.jobs[0].robot_applications[0].upload_configurations[0].path #=> String
@@ -427,6 +429,8 @@ module Aws::RoboMaker
     #   resp.jobs[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.jobs[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.jobs[0].simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.jobs[0].simulation_applications[0].launch_config.command #=> Array
+    #   resp.jobs[0].simulation_applications[0].launch_config.command[0] #=> String
     #   resp.jobs[0].simulation_applications[0].upload_configurations #=> Array
     #   resp.jobs[0].simulation_applications[0].upload_configurations[0].name #=> String
     #   resp.jobs[0].simulation_applications[0].upload_configurations[0].path #=> String
@@ -447,6 +451,8 @@ module Aws::RoboMaker
     #   resp.jobs[0].data_sources[0].s3_keys #=> Array
     #   resp.jobs[0].data_sources[0].s3_keys[0].s3_key #=> String
     #   resp.jobs[0].data_sources[0].s3_keys[0].etag #=> String
+    #   resp.jobs[0].data_sources[0].type #=> String, one of "Prefix", "Archive", "File"
+    #   resp.jobs[0].data_sources[0].destination #=> String
     #   resp.jobs[0].tags #=> Hash
     #   resp.jobs[0].tags["TagKey"] #=> String
     #   resp.jobs[0].vpc_config.subnets #=> Array
@@ -459,6 +465,8 @@ module Aws::RoboMaker
     #   resp.jobs[0].network_interface.private_ip_address #=> String
     #   resp.jobs[0].network_interface.public_ip_address #=> String
     #   resp.jobs[0].compute.simulation_unit_limit #=> Integer
+    #   resp.jobs[0].compute.compute_type #=> String, one of "CPU", "GPU_AND_CPU"
+    #   resp.jobs[0].compute.gpu_unit_limit #=> Integer
     #   resp.unprocessed_jobs #=> Array
     #   resp.unprocessed_jobs[0] #=> String
     #
@@ -843,7 +851,7 @@ module Aws::RoboMaker
     #       },
     #     ],
     #     robot_software_suite: { # required
-    #       name: "ROS", # accepts ROS, ROS2
+    #       name: "ROS", # accepts ROS, ROS2, General
     #       version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #     },
     #     tags: {
@@ -864,7 +872,7 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2", "General"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
@@ -929,7 +937,7 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2", "General"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
@@ -996,11 +1004,11 @@ module Aws::RoboMaker
     #       },
     #     ],
     #     simulation_software_suite: { # required
-    #       name: "Gazebo", # accepts Gazebo, RosbagPlay
+    #       name: "Gazebo", # accepts Gazebo, RosbagPlay, SimulationRuntime
     #       version: "SimulationSoftwareSuiteVersionType",
     #     },
     #     robot_software_suite: { # required
-    #       name: "ROS", # accepts ROS, ROS2
+    #       name: "ROS", # accepts ROS, ROS2, General
     #       version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #     },
     #     rendering_engine: {
@@ -1025,9 +1033,9 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
+    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay", "SimulationRuntime"
     #   resp.simulation_software_suite.version #=> String
-    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2", "General"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
@@ -1096,9 +1104,9 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
+    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay", "SimulationRuntime"
     #   resp.simulation_software_suite.version #=> String
-    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2", "General"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
@@ -1226,8 +1234,8 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "Version",
     #         launch_config: { # required
-    #           package_name: "Command", # required
-    #           launch_file: "Command", # required
+    #           package_name: "Command",
+    #           launch_file: "Command",
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
@@ -1241,6 +1249,7 @@ module Aws::RoboMaker
     #             ],
     #           },
     #           stream_ui: false,
+    #           command: ["NonEmptyString"],
     #         },
     #         upload_configurations: [
     #           {
@@ -1267,8 +1276,8 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "Version",
     #         launch_config: { # required
-    #           package_name: "Command", # required
-    #           launch_file: "Command", # required
+    #           package_name: "Command",
+    #           launch_file: "Command",
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
@@ -1282,6 +1291,7 @@ module Aws::RoboMaker
     #             ],
     #           },
     #           stream_ui: false,
+    #           command: ["NonEmptyString"],
     #         },
     #         upload_configurations: [
     #           {
@@ -1312,7 +1322,9 @@ module Aws::RoboMaker
     #       {
     #         name: "Name", # required
     #         s3_bucket: "S3Bucket", # required
-    #         s3_keys: ["S3Key"], # required
+    #         s3_keys: ["S3KeyOrPrefix"], # required
+    #         type: "Prefix", # accepts Prefix, Archive, File
+    #         destination: "Path",
     #       },
     #     ],
     #     tags: {
@@ -1325,6 +1337,8 @@ module Aws::RoboMaker
     #     },
     #     compute: {
     #       simulation_unit_limit: 1,
+    #       compute_type: "CPU", # accepts CPU, GPU_AND_CPU
+    #       gpu_unit_limit: 1,
     #     },
     #   })
     #
@@ -1355,6 +1369,8 @@ module Aws::RoboMaker
     #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.robot_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.robot_applications[0].launch_config.command #=> Array
+    #   resp.robot_applications[0].launch_config.command[0] #=> String
     #   resp.robot_applications[0].upload_configurations #=> Array
     #   resp.robot_applications[0].upload_configurations[0].name #=> String
     #   resp.robot_applications[0].upload_configurations[0].path #=> String
@@ -1379,6 +1395,8 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.simulation_applications[0].launch_config.command #=> Array
+    #   resp.simulation_applications[0].launch_config.command[0] #=> String
     #   resp.simulation_applications[0].upload_configurations #=> Array
     #   resp.simulation_applications[0].upload_configurations[0].name #=> String
     #   resp.simulation_applications[0].upload_configurations[0].path #=> String
@@ -1399,6 +1417,8 @@ module Aws::RoboMaker
     #   resp.data_sources[0].s3_keys #=> Array
     #   resp.data_sources[0].s3_keys[0].s3_key #=> String
     #   resp.data_sources[0].s3_keys[0].etag #=> String
+    #   resp.data_sources[0].type #=> String, one of "Prefix", "Archive", "File"
+    #   resp.data_sources[0].destination #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.vpc_config.subnets #=> Array
@@ -1408,6 +1428,8 @@ module Aws::RoboMaker
     #   resp.vpc_config.vpc_id #=> String
     #   resp.vpc_config.assign_public_ip #=> Boolean
     #   resp.compute.simulation_unit_limit #=> Integer
+    #   resp.compute.compute_type #=> String, one of "CPU", "GPU_AND_CPU"
+    #   resp.compute.gpu_unit_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationJob AWS API Documentation
     #
@@ -1987,7 +2009,7 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2", "General"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
     #   resp.revision_id #=> String
     #   resp.last_updated_at #=> Time
@@ -2045,9 +2067,9 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
+    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay", "SimulationRuntime"
     #   resp.simulation_software_suite.version #=> String
-    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2", "General"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
@@ -2131,6 +2153,8 @@ module Aws::RoboMaker
     #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.robot_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.robot_applications[0].launch_config.command #=> Array
+    #   resp.robot_applications[0].launch_config.command[0] #=> String
     #   resp.robot_applications[0].upload_configurations #=> Array
     #   resp.robot_applications[0].upload_configurations[0].name #=> String
     #   resp.robot_applications[0].upload_configurations[0].path #=> String
@@ -2155,6 +2179,8 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.simulation_applications[0].launch_config.command #=> Array
+    #   resp.simulation_applications[0].launch_config.command[0] #=> String
     #   resp.simulation_applications[0].upload_configurations #=> Array
     #   resp.simulation_applications[0].upload_configurations[0].name #=> String
     #   resp.simulation_applications[0].upload_configurations[0].path #=> String
@@ -2175,6 +2201,8 @@ module Aws::RoboMaker
     #   resp.data_sources[0].s3_keys #=> Array
     #   resp.data_sources[0].s3_keys[0].s3_key #=> String
     #   resp.data_sources[0].s3_keys[0].etag #=> String
+    #   resp.data_sources[0].type #=> String, one of "Prefix", "Archive", "File"
+    #   resp.data_sources[0].destination #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.vpc_config.subnets #=> Array
@@ -2187,6 +2215,8 @@ module Aws::RoboMaker
     #   resp.network_interface.private_ip_address #=> String
     #   resp.network_interface.public_ip_address #=> String
     #   resp.compute.simulation_unit_limit #=> Integer
+    #   resp.compute.compute_type #=> String, one of "CPU", "GPU_AND_CPU"
+    #   resp.compute.gpu_unit_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationJob AWS API Documentation
     #
@@ -2254,6 +2284,8 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.command #=> Array
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.command[0] #=> String
     #   resp.failed_requests[0].request.robot_applications[0].upload_configurations #=> Array
     #   resp.failed_requests[0].request.robot_applications[0].upload_configurations[0].name #=> String
     #   resp.failed_requests[0].request.robot_applications[0].upload_configurations[0].path #=> String
@@ -2278,6 +2310,8 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.command #=> Array
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.command[0] #=> String
     #   resp.failed_requests[0].request.simulation_applications[0].upload_configurations #=> Array
     #   resp.failed_requests[0].request.simulation_applications[0].upload_configurations[0].name #=> String
     #   resp.failed_requests[0].request.simulation_applications[0].upload_configurations[0].path #=> String
@@ -2297,12 +2331,16 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.data_sources[0].s3_bucket #=> String
     #   resp.failed_requests[0].request.data_sources[0].s3_keys #=> Array
     #   resp.failed_requests[0].request.data_sources[0].s3_keys[0] #=> String
+    #   resp.failed_requests[0].request.data_sources[0].type #=> String, one of "Prefix", "Archive", "File"
+    #   resp.failed_requests[0].request.data_sources[0].destination #=> String
     #   resp.failed_requests[0].request.vpc_config.subnets #=> Array
     #   resp.failed_requests[0].request.vpc_config.subnets[0] #=> String
     #   resp.failed_requests[0].request.vpc_config.security_groups #=> Array
     #   resp.failed_requests[0].request.vpc_config.security_groups[0] #=> String
     #   resp.failed_requests[0].request.vpc_config.assign_public_ip #=> Boolean
     #   resp.failed_requests[0].request.compute.simulation_unit_limit #=> Integer
+    #   resp.failed_requests[0].request.compute.compute_type #=> String, one of "CPU", "GPU_AND_CPU"
+    #   resp.failed_requests[0].request.compute.gpu_unit_limit #=> Integer
     #   resp.failed_requests[0].request.tags #=> Hash
     #   resp.failed_requests[0].request.tags["TagKey"] #=> String
     #   resp.failed_requests[0].failure_reason #=> String
@@ -2328,6 +2366,8 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.pending_requests[0].robot_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.pending_requests[0].robot_applications[0].launch_config.command #=> Array
+    #   resp.pending_requests[0].robot_applications[0].launch_config.command[0] #=> String
     #   resp.pending_requests[0].robot_applications[0].upload_configurations #=> Array
     #   resp.pending_requests[0].robot_applications[0].upload_configurations[0].name #=> String
     #   resp.pending_requests[0].robot_applications[0].upload_configurations[0].path #=> String
@@ -2352,6 +2392,8 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.pending_requests[0].simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.command #=> Array
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.command[0] #=> String
     #   resp.pending_requests[0].simulation_applications[0].upload_configurations #=> Array
     #   resp.pending_requests[0].simulation_applications[0].upload_configurations[0].name #=> String
     #   resp.pending_requests[0].simulation_applications[0].upload_configurations[0].path #=> String
@@ -2371,12 +2413,16 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].data_sources[0].s3_bucket #=> String
     #   resp.pending_requests[0].data_sources[0].s3_keys #=> Array
     #   resp.pending_requests[0].data_sources[0].s3_keys[0] #=> String
+    #   resp.pending_requests[0].data_sources[0].type #=> String, one of "Prefix", "Archive", "File"
+    #   resp.pending_requests[0].data_sources[0].destination #=> String
     #   resp.pending_requests[0].vpc_config.subnets #=> Array
     #   resp.pending_requests[0].vpc_config.subnets[0] #=> String
     #   resp.pending_requests[0].vpc_config.security_groups #=> Array
     #   resp.pending_requests[0].vpc_config.security_groups[0] #=> String
     #   resp.pending_requests[0].vpc_config.assign_public_ip #=> Boolean
     #   resp.pending_requests[0].compute.simulation_unit_limit #=> Integer
+    #   resp.pending_requests[0].compute.compute_type #=> String, one of "CPU", "GPU_AND_CPU"
+    #   resp.pending_requests[0].compute.gpu_unit_limit #=> Integer
     #   resp.pending_requests[0].tags #=> Hash
     #   resp.pending_requests[0].tags["TagKey"] #=> String
     #   resp.created_requests #=> Array
@@ -2390,6 +2436,7 @@ module Aws::RoboMaker
     #   resp.created_requests[0].robot_application_names[0] #=> String
     #   resp.created_requests[0].data_source_names #=> Array
     #   resp.created_requests[0].data_source_names[0] #=> String
+    #   resp.created_requests[0].compute_type #=> String, one of "CPU", "GPU_AND_CPU"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -2836,7 +2883,7 @@ module Aws::RoboMaker
     #   resp.robot_application_summaries[0].arn #=> String
     #   resp.robot_application_summaries[0].version #=> String
     #   resp.robot_application_summaries[0].last_updated_at #=> Time
-    #   resp.robot_application_summaries[0].robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_application_summaries[0].robot_software_suite.name #=> String, one of "ROS", "ROS2", "General"
     #   resp.robot_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
     #   resp.next_token #=> String
     #
@@ -2979,9 +3026,9 @@ module Aws::RoboMaker
     #   resp.simulation_application_summaries[0].arn #=> String
     #   resp.simulation_application_summaries[0].version #=> String
     #   resp.simulation_application_summaries[0].last_updated_at #=> Time
-    #   resp.simulation_application_summaries[0].robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.simulation_application_summaries[0].robot_software_suite.name #=> String, one of "ROS", "ROS2", "General"
     #   resp.simulation_application_summaries[0].robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
-    #   resp.simulation_application_summaries[0].simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
+    #   resp.simulation_application_summaries[0].simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay", "SimulationRuntime"
     #   resp.simulation_application_summaries[0].simulation_software_suite.version #=> String
     #   resp.next_token #=> String
     #
@@ -3118,6 +3165,7 @@ module Aws::RoboMaker
     #   resp.simulation_job_summaries[0].robot_application_names[0] #=> String
     #   resp.simulation_job_summaries[0].data_source_names #=> Array
     #   resp.simulation_job_summaries[0].data_source_names[0] #=> String
+    #   resp.simulation_job_summaries[0].compute_type #=> String, one of "CPU", "GPU_AND_CPU"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationJobs AWS API Documentation
@@ -3514,8 +3562,8 @@ module Aws::RoboMaker
     #             application: "Arn", # required
     #             application_version: "Version",
     #             launch_config: { # required
-    #               package_name: "Command", # required
-    #               launch_file: "Command", # required
+    #               package_name: "Command",
+    #               launch_file: "Command",
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #               },
@@ -3529,6 +3577,7 @@ module Aws::RoboMaker
     #                 ],
     #               },
     #               stream_ui: false,
+    #               command: ["NonEmptyString"],
     #             },
     #             upload_configurations: [
     #               {
@@ -3555,8 +3604,8 @@ module Aws::RoboMaker
     #             application: "Arn", # required
     #             application_version: "Version",
     #             launch_config: { # required
-    #               package_name: "Command", # required
-    #               launch_file: "Command", # required
+    #               package_name: "Command",
+    #               launch_file: "Command",
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #               },
@@ -3570,6 +3619,7 @@ module Aws::RoboMaker
     #                 ],
     #               },
     #               stream_ui: false,
+    #               command: ["NonEmptyString"],
     #             },
     #             upload_configurations: [
     #               {
@@ -3600,7 +3650,9 @@ module Aws::RoboMaker
     #           {
     #             name: "Name", # required
     #             s3_bucket: "S3Bucket", # required
-    #             s3_keys: ["S3Key"], # required
+    #             s3_keys: ["S3KeyOrPrefix"], # required
+    #             type: "Prefix", # accepts Prefix, Archive, File
+    #             destination: "Path",
     #           },
     #         ],
     #         vpc_config: {
@@ -3610,6 +3662,8 @@ module Aws::RoboMaker
     #         },
     #         compute: {
     #           simulation_unit_limit: 1,
+    #           compute_type: "CPU", # accepts CPU, GPU_AND_CPU
+    #           gpu_unit_limit: 1,
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -3651,6 +3705,8 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.command #=> Array
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.command[0] #=> String
     #   resp.failed_requests[0].request.robot_applications[0].upload_configurations #=> Array
     #   resp.failed_requests[0].request.robot_applications[0].upload_configurations[0].name #=> String
     #   resp.failed_requests[0].request.robot_applications[0].upload_configurations[0].path #=> String
@@ -3675,6 +3731,8 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.command #=> Array
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.command[0] #=> String
     #   resp.failed_requests[0].request.simulation_applications[0].upload_configurations #=> Array
     #   resp.failed_requests[0].request.simulation_applications[0].upload_configurations[0].name #=> String
     #   resp.failed_requests[0].request.simulation_applications[0].upload_configurations[0].path #=> String
@@ -3694,12 +3752,16 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.data_sources[0].s3_bucket #=> String
     #   resp.failed_requests[0].request.data_sources[0].s3_keys #=> Array
     #   resp.failed_requests[0].request.data_sources[0].s3_keys[0] #=> String
+    #   resp.failed_requests[0].request.data_sources[0].type #=> String, one of "Prefix", "Archive", "File"
+    #   resp.failed_requests[0].request.data_sources[0].destination #=> String
     #   resp.failed_requests[0].request.vpc_config.subnets #=> Array
     #   resp.failed_requests[0].request.vpc_config.subnets[0] #=> String
     #   resp.failed_requests[0].request.vpc_config.security_groups #=> Array
     #   resp.failed_requests[0].request.vpc_config.security_groups[0] #=> String
     #   resp.failed_requests[0].request.vpc_config.assign_public_ip #=> Boolean
     #   resp.failed_requests[0].request.compute.simulation_unit_limit #=> Integer
+    #   resp.failed_requests[0].request.compute.compute_type #=> String, one of "CPU", "GPU_AND_CPU"
+    #   resp.failed_requests[0].request.compute.gpu_unit_limit #=> Integer
     #   resp.failed_requests[0].request.tags #=> Hash
     #   resp.failed_requests[0].request.tags["TagKey"] #=> String
     #   resp.failed_requests[0].failure_reason #=> String
@@ -3725,6 +3787,8 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.pending_requests[0].robot_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.pending_requests[0].robot_applications[0].launch_config.command #=> Array
+    #   resp.pending_requests[0].robot_applications[0].launch_config.command[0] #=> String
     #   resp.pending_requests[0].robot_applications[0].upload_configurations #=> Array
     #   resp.pending_requests[0].robot_applications[0].upload_configurations[0].name #=> String
     #   resp.pending_requests[0].robot_applications[0].upload_configurations[0].path #=> String
@@ -3749,6 +3813,8 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
     #   resp.pending_requests[0].simulation_applications[0].launch_config.stream_ui #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.command #=> Array
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.command[0] #=> String
     #   resp.pending_requests[0].simulation_applications[0].upload_configurations #=> Array
     #   resp.pending_requests[0].simulation_applications[0].upload_configurations[0].name #=> String
     #   resp.pending_requests[0].simulation_applications[0].upload_configurations[0].path #=> String
@@ -3768,12 +3834,16 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].data_sources[0].s3_bucket #=> String
     #   resp.pending_requests[0].data_sources[0].s3_keys #=> Array
     #   resp.pending_requests[0].data_sources[0].s3_keys[0] #=> String
+    #   resp.pending_requests[0].data_sources[0].type #=> String, one of "Prefix", "Archive", "File"
+    #   resp.pending_requests[0].data_sources[0].destination #=> String
     #   resp.pending_requests[0].vpc_config.subnets #=> Array
     #   resp.pending_requests[0].vpc_config.subnets[0] #=> String
     #   resp.pending_requests[0].vpc_config.security_groups #=> Array
     #   resp.pending_requests[0].vpc_config.security_groups[0] #=> String
     #   resp.pending_requests[0].vpc_config.assign_public_ip #=> Boolean
     #   resp.pending_requests[0].compute.simulation_unit_limit #=> Integer
+    #   resp.pending_requests[0].compute.compute_type #=> String, one of "CPU", "GPU_AND_CPU"
+    #   resp.pending_requests[0].compute.gpu_unit_limit #=> Integer
     #   resp.pending_requests[0].tags #=> Hash
     #   resp.pending_requests[0].tags["TagKey"] #=> String
     #   resp.created_requests #=> Array
@@ -3787,6 +3857,7 @@ module Aws::RoboMaker
     #   resp.created_requests[0].robot_application_names[0] #=> String
     #   resp.created_requests[0].data_source_names #=> Array
     #   resp.created_requests[0].data_source_names[0] #=> String
+    #   resp.created_requests[0].compute_type #=> String, one of "CPU", "GPU_AND_CPU"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -3981,7 +4052,7 @@ module Aws::RoboMaker
     #       },
     #     ],
     #     robot_software_suite: { # required
-    #       name: "ROS", # accepts ROS, ROS2
+    #       name: "ROS", # accepts ROS, ROS2, General
     #       version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #     },
     #     current_revision_id: "RevisionId",
@@ -4000,7 +4071,7 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2", "General"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
     #   resp.last_updated_at #=> Time
     #   resp.revision_id #=> String
@@ -4064,11 +4135,11 @@ module Aws::RoboMaker
     #       },
     #     ],
     #     simulation_software_suite: { # required
-    #       name: "Gazebo", # accepts Gazebo, RosbagPlay
+    #       name: "Gazebo", # accepts Gazebo, RosbagPlay, SimulationRuntime
     #       version: "SimulationSoftwareSuiteVersionType",
     #     },
     #     robot_software_suite: { # required
-    #       name: "ROS", # accepts ROS, ROS2
+    #       name: "ROS", # accepts ROS, ROS2, General
     #       version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #     },
     #     rendering_engine: {
@@ -4091,9 +4162,9 @@ module Aws::RoboMaker
     #   resp.sources[0].s3_key #=> String
     #   resp.sources[0].etag #=> String
     #   resp.sources[0].architecture #=> String, one of "X86_64", "ARM64", "ARMHF"
-    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay"
+    #   resp.simulation_software_suite.name #=> String, one of "Gazebo", "RosbagPlay", "SimulationRuntime"
     #   resp.simulation_software_suite.version #=> String
-    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2"
+    #   resp.robot_software_suite.name #=> String, one of "ROS", "ROS2", "General"
     #   resp.robot_software_suite.version #=> String, one of "Kinetic", "Melodic", "Dashing", "Foxy"
     #   resp.rendering_engine.name #=> String, one of "OGRE"
     #   resp.rendering_engine.version #=> String
@@ -4172,7 +4243,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -241,20 +241,33 @@ module Aws::RoboMaker
     #
     #       {
     #         simulation_unit_limit: 1,
+    #         compute_type: "CPU", # accepts CPU, GPU_AND_CPU
+    #         gpu_unit_limit: 1,
     #       }
     #
     # @!attribute [rw] simulation_unit_limit
     #   The simulation unit limit. Your simulation is allocated CPU and
     #   memory proportional to the supplied simulation unit limit. A
     #   simulation unit is 1 vcpu and 2GB of memory. You are only billed for
-    #   the SU utilization you consume up to the maximim value provided. The
+    #   the SU utilization you consume up to the maximum value provided. The
     #   default is 15.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compute_type
+    #   Compute type information for the simulation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] gpu_unit_limit
+    #   Compute GPU unit limit for the simulation job. It is the same as the
+    #   number of GPUs allocated to the SimulationJob.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Compute AWS API Documentation
     #
     class Compute < Struct.new(
-      :simulation_unit_limit)
+      :simulation_unit_limit,
+      :compute_type,
+      :gpu_unit_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -265,14 +278,25 @@ module Aws::RoboMaker
     #   The simulation unit limit. Your simulation is allocated CPU and
     #   memory proportional to the supplied simulation unit limit. A
     #   simulation unit is 1 vcpu and 2GB of memory. You are only billed for
-    #   the SU utilization you consume up to the maximim value provided. The
+    #   the SU utilization you consume up to the maximum value provided. The
     #   default is 15.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compute_type
+    #   Compute type response information for the simulation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] gpu_unit_limit
+    #   Compute GPU unit limit for the simulation job. It is the same as the
+    #   number of GPUs allocated to the SimulationJob.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ComputeResponse AWS API Documentation
     #
     class ComputeResponse < Struct.new(
-      :simulation_unit_limit)
+      :simulation_unit_limit,
+      :compute_type,
+      :gpu_unit_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -547,7 +571,7 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS, ROS2
+    #           name: "ROS", # accepts ROS, ROS2, General
     #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #         },
     #         tags: {
@@ -831,11 +855,11 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         simulation_software_suite: { # required
-    #           name: "Gazebo", # accepts Gazebo, RosbagPlay
+    #           name: "Gazebo", # accepts Gazebo, RosbagPlay, SimulationRuntime
     #           version: "SimulationSoftwareSuiteVersionType",
     #         },
     #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS, ROS2
+    #           name: "ROS", # accepts ROS, ROS2, General
     #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #         },
     #         rendering_engine: {
@@ -1079,8 +1103,8 @@ module Aws::RoboMaker
     #             application: "Arn", # required
     #             application_version: "Version",
     #             launch_config: { # required
-    #               package_name: "Command", # required
-    #               launch_file: "Command", # required
+    #               package_name: "Command",
+    #               launch_file: "Command",
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #               },
@@ -1094,6 +1118,7 @@ module Aws::RoboMaker
     #                 ],
     #               },
     #               stream_ui: false,
+    #               command: ["NonEmptyString"],
     #             },
     #             upload_configurations: [
     #               {
@@ -1120,8 +1145,8 @@ module Aws::RoboMaker
     #             application: "Arn", # required
     #             application_version: "Version",
     #             launch_config: { # required
-    #               package_name: "Command", # required
-    #               launch_file: "Command", # required
+    #               package_name: "Command",
+    #               launch_file: "Command",
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #               },
@@ -1135,6 +1160,7 @@ module Aws::RoboMaker
     #                 ],
     #               },
     #               stream_ui: false,
+    #               command: ["NonEmptyString"],
     #             },
     #             upload_configurations: [
     #               {
@@ -1165,7 +1191,9 @@ module Aws::RoboMaker
     #           {
     #             name: "Name", # required
     #             s3_bucket: "S3Bucket", # required
-    #             s3_keys: ["S3Key"], # required
+    #             s3_keys: ["S3KeyOrPrefix"], # required
+    #             type: "Prefix", # accepts Prefix, Archive, File
+    #             destination: "Path",
     #           },
     #         ],
     #         tags: {
@@ -1178,6 +1206,8 @@ module Aws::RoboMaker
     #         },
     #         compute: {
     #           simulation_unit_limit: 1,
+    #           compute_type: "CPU", # accepts CPU, GPU_AND_CPU
+    #           gpu_unit_limit: 1,
     #         },
     #       }
     #
@@ -1867,12 +1897,39 @@ module Aws::RoboMaker
     #   The list of S3 keys identifying the data source files.
     #   @return [Array<Types::S3KeyOutput>]
     #
+    # @!attribute [rw] type
+    #   The data type for the data source that you're using for your
+    #   container image or simulation job. You can use this field to specify
+    #   whether your data source is an Archive, an Amazon S3 prefix, or a
+    #   file.
+    #
+    #   If you don't specify a field, the default value is `File`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The location where your files are mounted in the container image.
+    #
+    #   If you've specified the `type` of the data source as an `Archive`,
+    #   you must provide an Amazon S3 object key to your archive. The object
+    #   key must point to either a `.zip` or `.tar.gz` file.
+    #
+    #   If you've specified the `type` of the data source as a `Prefix`,
+    #   you provide the Amazon S3 prefix that points to the files that you
+    #   are using for your data source.
+    #
+    #   If you've specified the `type` of the data source as a `File`, you
+    #   provide the Amazon S3 path to the file that you're using as your
+    #   data source.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DataSource AWS API Documentation
     #
     class DataSource < Struct.new(
       :name,
       :s3_bucket,
-      :s3_keys)
+      :s3_keys,
+      :type,
+      :destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1885,7 +1942,9 @@ module Aws::RoboMaker
     #       {
     #         name: "Name", # required
     #         s3_bucket: "S3Bucket", # required
-    #         s3_keys: ["S3Key"], # required
+    #         s3_keys: ["S3KeyOrPrefix"], # required
+    #         type: "Prefix", # accepts Prefix, Archive, File
+    #         destination: "Path",
     #       }
     #
     # @!attribute [rw] name
@@ -1900,12 +1959,39 @@ module Aws::RoboMaker
     #   The list of S3 keys identifying the data source files.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] type
+    #   The data type for the data source that you're using for your
+    #   container image or simulation job. You can use this field to specify
+    #   whether your data source is an Archive, an Amazon S3 prefix, or a
+    #   file.
+    #
+    #   If you don't specify a field, the default value is `File`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The location where your files are mounted in the container image.
+    #
+    #   If you've specified the `type` of the data source as an `Archive`,
+    #   you must provide an Amazon S3 object key to your archive. The object
+    #   key must point to either a `.zip` or `.tar.gz` file.
+    #
+    #   If you've specified the `type` of the data source as a `Prefix`,
+    #   you provide the Amazon S3 prefix that points to the files that you
+    #   are using for your data source.
+    #
+    #   If you've specified the `type` of the data source as a `File`, you
+    #   provide the Amazon S3 path to the file that you're using as your
+    #   data source.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DataSourceConfig AWS API Documentation
     #
     class DataSourceConfig < Struct.new(
       :name,
       :s3_bucket,
-      :s3_keys)
+      :s3_keys,
+      :type,
+      :destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3655,8 +3741,8 @@ module Aws::RoboMaker
     #   data as a hash:
     #
     #       {
-    #         package_name: "Command", # required
-    #         launch_file: "Command", # required
+    #         package_name: "Command",
+    #         launch_file: "Command",
     #         environment_variables: {
     #           "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #         },
@@ -3670,6 +3756,7 @@ module Aws::RoboMaker
     #           ],
     #         },
     #         stream_ui: false,
+    #         command: ["NonEmptyString"],
     #       }
     #
     # @!attribute [rw] package_name
@@ -3696,6 +3783,16 @@ module Aws::RoboMaker
     #   component. It must have a graphical user interface.
     #   @return [Boolean]
     #
+    # @!attribute [rw] command
+    #   If you've specified `General` as the value for your
+    #   `RobotSoftwareSuite`, you can use this field to specify a list of
+    #   commands for your container image.
+    #
+    #   If you've specified `SimulationRuntime` as the value for your
+    #   `SimulationSoftwareSuite`, you can use this field to specify a list
+    #   of commands for your container image.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LaunchConfig AWS API Documentation
     #
     class LaunchConfig < Struct.new(
@@ -3703,7 +3800,8 @@ module Aws::RoboMaker
       :launch_file,
       :environment_variables,
       :port_forwarding_config,
-      :stream_ui)
+      :stream_ui,
+      :command)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4936,8 +5034,8 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "Version",
     #         launch_config: { # required
-    #           package_name: "Command", # required
-    #           launch_file: "Command", # required
+    #           package_name: "Command",
+    #           launch_file: "Command",
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
@@ -4951,6 +5049,7 @@ module Aws::RoboMaker
     #             ],
     #           },
     #           stream_ui: false,
+    #           command: ["NonEmptyString"],
     #         },
     #         upload_configurations: [
     #           {
@@ -5107,7 +5206,7 @@ module Aws::RoboMaker
     #   data as a hash:
     #
     #       {
-    #         name: "ROS", # accepts ROS, ROS2
+    #         name: "ROS", # accepts ROS, ROS2, General
     #         version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #       }
     #
@@ -5202,8 +5301,8 @@ module Aws::RoboMaker
     #         application: "Arn", # required
     #         application_version: "Version",
     #         launch_config: { # required
-    #           package_name: "Command", # required
-    #           launch_file: "Command", # required
+    #           package_name: "Command",
+    #           launch_file: "Command",
     #           environment_variables: {
     #             "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #           },
@@ -5217,6 +5316,7 @@ module Aws::RoboMaker
     #             ],
     #           },
     #           stream_ui: false,
+    #           command: ["NonEmptyString"],
     #         },
     #         upload_configurations: [
     #           {
@@ -5583,8 +5683,8 @@ module Aws::RoboMaker
     #             application: "Arn", # required
     #             application_version: "Version",
     #             launch_config: { # required
-    #               package_name: "Command", # required
-    #               launch_file: "Command", # required
+    #               package_name: "Command",
+    #               launch_file: "Command",
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #               },
@@ -5598,6 +5698,7 @@ module Aws::RoboMaker
     #                 ],
     #               },
     #               stream_ui: false,
+    #               command: ["NonEmptyString"],
     #             },
     #             upload_configurations: [
     #               {
@@ -5624,8 +5725,8 @@ module Aws::RoboMaker
     #             application: "Arn", # required
     #             application_version: "Version",
     #             launch_config: { # required
-    #               package_name: "Command", # required
-    #               launch_file: "Command", # required
+    #               package_name: "Command",
+    #               launch_file: "Command",
     #               environment_variables: {
     #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #               },
@@ -5639,6 +5740,7 @@ module Aws::RoboMaker
     #                 ],
     #               },
     #               stream_ui: false,
+    #               command: ["NonEmptyString"],
     #             },
     #             upload_configurations: [
     #               {
@@ -5669,7 +5771,9 @@ module Aws::RoboMaker
     #           {
     #             name: "Name", # required
     #             s3_bucket: "S3Bucket", # required
-    #             s3_keys: ["S3Key"], # required
+    #             s3_keys: ["S3KeyOrPrefix"], # required
+    #             type: "Prefix", # accepts Prefix, Archive, File
+    #             destination: "Path",
     #           },
     #         ],
     #         vpc_config: {
@@ -5679,6 +5783,8 @@ module Aws::RoboMaker
     #         },
     #         compute: {
     #           simulation_unit_limit: 1,
+    #           compute_type: "CPU", # accepts CPU, GPU_AND_CPU
+    #           gpu_unit_limit: 1,
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -5809,6 +5915,10 @@ module Aws::RoboMaker
     #   The names of the data sources.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] compute_type
+    #   The compute type for the simulation job summary.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJobSummary AWS API Documentation
     #
     class SimulationJobSummary < Struct.new(
@@ -5818,7 +5928,8 @@ module Aws::RoboMaker
       :status,
       :simulation_application_names,
       :robot_application_names,
-      :data_source_names)
+      :data_source_names,
+      :compute_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5829,7 +5940,7 @@ module Aws::RoboMaker
     #   data as a hash:
     #
     #       {
-    #         name: "Gazebo", # accepts Gazebo, RosbagPlay
+    #         name: "Gazebo", # accepts Gazebo, RosbagPlay, SimulationRuntime
     #         version: "SimulationSoftwareSuiteVersionType",
     #       }
     #
@@ -5939,8 +6050,8 @@ module Aws::RoboMaker
     #                 application: "Arn", # required
     #                 application_version: "Version",
     #                 launch_config: { # required
-    #                   package_name: "Command", # required
-    #                   launch_file: "Command", # required
+    #                   package_name: "Command",
+    #                   launch_file: "Command",
     #                   environment_variables: {
     #                     "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #                   },
@@ -5954,6 +6065,7 @@ module Aws::RoboMaker
     #                     ],
     #                   },
     #                   stream_ui: false,
+    #                   command: ["NonEmptyString"],
     #                 },
     #                 upload_configurations: [
     #                   {
@@ -5980,8 +6092,8 @@ module Aws::RoboMaker
     #                 application: "Arn", # required
     #                 application_version: "Version",
     #                 launch_config: { # required
-    #                   package_name: "Command", # required
-    #                   launch_file: "Command", # required
+    #                   package_name: "Command",
+    #                   launch_file: "Command",
     #                   environment_variables: {
     #                     "EnvironmentVariableKey" => "EnvironmentVariableValue",
     #                   },
@@ -5995,6 +6107,7 @@ module Aws::RoboMaker
     #                     ],
     #                   },
     #                   stream_ui: false,
+    #                   command: ["NonEmptyString"],
     #                 },
     #                 upload_configurations: [
     #                   {
@@ -6025,7 +6138,9 @@ module Aws::RoboMaker
     #               {
     #                 name: "Name", # required
     #                 s3_bucket: "S3Bucket", # required
-    #                 s3_keys: ["S3Key"], # required
+    #                 s3_keys: ["S3KeyOrPrefix"], # required
+    #                 type: "Prefix", # accepts Prefix, Archive, File
+    #                 destination: "Path",
     #               },
     #             ],
     #             vpc_config: {
@@ -6035,6 +6150,8 @@ module Aws::RoboMaker
     #             },
     #             compute: {
     #               simulation_unit_limit: 1,
+    #               compute_type: "CPU", # accepts CPU, GPU_AND_CPU
+    #               gpu_unit_limit: 1,
     #             },
     #             tags: {
     #               "TagKey" => "TagValue",
@@ -6540,7 +6657,7 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS, ROS2
+    #           name: "ROS", # accepts ROS, ROS2, General
     #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #         },
     #         current_revision_id: "RevisionId",
@@ -6646,11 +6763,11 @@ module Aws::RoboMaker
     #           },
     #         ],
     #         simulation_software_suite: { # required
-    #           name: "Gazebo", # accepts Gazebo, RosbagPlay
+    #           name: "Gazebo", # accepts Gazebo, RosbagPlay, SimulationRuntime
     #           version: "SimulationSoftwareSuiteVersionType",
     #         },
     #         robot_software_suite: { # required
-    #           name: "ROS", # accepts ROS, ROS2
+    #           name: "ROS", # accepts ROS, ROS2, General
     #           version: "Kinetic", # accepts Kinetic, Melodic, Dashing, Foxy
     #         },
     #         rendering_engine: {

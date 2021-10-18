@@ -650,6 +650,20 @@ module Aws::MediaLive
     #         audio_selector_name: "__string", # required
     #         audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
     #         audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
+    #         audio_watermarking_settings: {
+    #           nielsen_watermarks_settings: {
+    #             nielsen_cbet_settings: {
+    #               cbet_check_digit_string: "__stringMin2Max2", # required
+    #               cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
+    #               csid: "__stringMin1Max7", # required
+    #             },
+    #             nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
+    #             nielsen_naes_ii_nw_settings: {
+    #               check_digit_string: "__stringMin2Max2", # required
+    #               sid: 1.0, # required
+    #             },
+    #           },
+    #         },
     #         codec_settings: {
     #           aac_settings: {
     #             bitrate: 1.0,
@@ -750,6 +764,11 @@ module Aws::MediaLive
     #   audioType are both ignored if inputType is broadcasterMixedAd.
     #   @return [String]
     #
+    # @!attribute [rw] audio_watermarking_settings
+    #   Settings to configure one or more solutions that insert audio
+    #   watermarks in the audio encode
+    #   @return [Types::AudioWatermarkSettings]
+    #
     # @!attribute [rw] codec_settings
     #   Audio codec settings.
     #   @return [Types::AudioCodecSettings]
@@ -791,6 +810,7 @@ module Aws::MediaLive
       :audio_selector_name,
       :audio_type,
       :audio_type_control,
+      :audio_watermarking_settings,
       :codec_settings,
       :language_code,
       :language_code_control,
@@ -1154,6 +1174,38 @@ module Aws::MediaLive
     #
     class AudioTrackSelection < Struct.new(
       :tracks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Audio Watermark Settings
+    #
+    # @note When making an API call, you may pass AudioWatermarkSettings
+    #   data as a hash:
+    #
+    #       {
+    #         nielsen_watermarks_settings: {
+    #           nielsen_cbet_settings: {
+    #             cbet_check_digit_string: "__stringMin2Max2", # required
+    #             cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
+    #             csid: "__stringMin1Max7", # required
+    #           },
+    #           nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
+    #           nielsen_naes_ii_nw_settings: {
+    #             check_digit_string: "__stringMin2Max2", # required
+    #             sid: 1.0, # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] nielsen_watermarks_settings
+    #   Settings to configure Nielsen Watermarks in the audio encode
+    #   @return [Types::NielsenWatermarksSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioWatermarkSettings AWS API Documentation
+    #
+    class AudioWatermarkSettings < Struct.new(
+      :nielsen_watermarks_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3023,7 +3075,7 @@ module Aws::MediaLive
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vpc
-    #   Settings for VPC output
+    #   Settings for any VPC outputs.
     #   @return [Types::VpcOutputSettingsDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ChannelSummary AWS API Documentation
@@ -3047,6 +3099,32 @@ module Aws::MediaLive
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Request to claim an AWS Elemental device that you have purchased from
+    # a third-party vendor.
+    #
+    # @note When making an API call, you may pass ClaimDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "__string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The id of the device you want to claim.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ClaimDeviceRequest AWS API Documentation
+    #
+    class ClaimDeviceRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ClaimDeviceResponse AWS API Documentation
+    #
+    class ClaimDeviceResponse < Aws::EmptyStructure; end
 
     # Passthrough applies no color space conversion to the output
     #
@@ -3118,7 +3196,7 @@ module Aws::MediaLive
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vpc
-    #   Settings for VPC output
+    #   Settings for the VPC outputs
     #   @return [Types::VpcOutputSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateChannel AWS API Documentation
@@ -3182,6 +3260,20 @@ module Aws::MediaLive
     #               audio_selector_name: "__string", # required
     #               audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
     #               audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
+    #               audio_watermarking_settings: {
+    #                 nielsen_watermarks_settings: {
+    #                   nielsen_cbet_settings: {
+    #                     cbet_check_digit_string: "__stringMin2Max2", # required
+    #                     cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                     csid: "__stringMin1Max7", # required
+    #                   },
+    #                   nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
+    #                   nielsen_naes_ii_nw_settings: {
+    #                     check_digit_string: "__stringMin2Max2", # required
+    #                     sid: 1.0, # required
+    #                   },
+    #                 },
+    #               },
     #               codec_settings: {
     #                 aac_settings: {
     #                   bitrate: 1.0,
@@ -4227,6 +4319,7 @@ module Aws::MediaLive
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
+    #   The different types of inputs that AWS Elemental MediaLive supports.
     #   @return [String]
     #
     # @!attribute [rw] vpc
@@ -4288,7 +4381,7 @@ module Aws::MediaLive
     #         tags: {
     #           "__string" => "__string",
     #         },
-    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE, AWS_CDI
+    #         type: "UDP_PUSH", # accepts UDP_PUSH, RTP_PUSH, RTMP_PUSH, RTMP_PULL, URL_PULL, MP4_FILE, MEDIACONNECT, INPUT_DEVICE, AWS_CDI, TS_FILE
     #         vpc: {
     #           security_group_ids: ["__string"],
     #           subnet_ids: ["__string"], # required
@@ -4325,6 +4418,7 @@ module Aws::MediaLive
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
+    #   The different types of inputs that AWS Elemental MediaLive supports.
     #   @return [String]
     #
     # @!attribute [rw] vpc
@@ -5416,9 +5510,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_source_type
     #   There are two types of input sources, static and dynamic. If an
     #   input source is dynamic you can change the source url of the input
-    #   dynamically using an input switch action. However, the only input
-    #   type to support a dynamic url at this time is MP4\_FILE. By default
-    #   all input sources are static.
+    #   dynamically using an input switch action. Currently, two input types
+    #   support a dynamic url at this time, MP4\_FILE and TS\_FILE. By
+    #   default all input sources are static.
     #   @return [String]
     #
     # @!attribute [rw] media_connect_flows
@@ -5443,6 +5537,7 @@ module Aws::MediaLive
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
+    #   The different types of inputs that AWS Elemental MediaLive supports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputResponse AWS API Documentation
@@ -6468,6 +6563,20 @@ module Aws::MediaLive
     #             audio_selector_name: "__string", # required
     #             audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
     #             audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
+    #             audio_watermarking_settings: {
+    #               nielsen_watermarks_settings: {
+    #                 nielsen_cbet_settings: {
+    #                   cbet_check_digit_string: "__stringMin2Max2", # required
+    #                   cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                   csid: "__stringMin1Max7", # required
+    #                 },
+    #                 nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
+    #                 nielsen_naes_ii_nw_settings: {
+    #                   check_digit_string: "__stringMin2Max2", # required
+    #                   sid: 1.0, # required
+    #                 },
+    #               },
+    #             },
     #             codec_settings: {
     #               aac_settings: {
     #                 bitrate: 1.0,
@@ -9632,7 +9741,8 @@ module Aws::MediaLive
     # @!attribute [rw] input_source_type
     #   Certain pull input sources can be dynamic, meaning that they can
     #   have their URL's dynamically changes during input switch actions.
-    #   Presently, this functionality only works with MP4\_FILE inputs.
+    #   Presently, this functionality only works with MP4\_FILE and TS\_FILE
+    #   inputs.
     #   @return [String]
     #
     # @!attribute [rw] media_connect_flows
@@ -9665,6 +9775,7 @@ module Aws::MediaLive
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
+    #   The different types of inputs that AWS Elemental MediaLive supports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Input AWS API Documentation
@@ -13454,6 +13565,40 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Nielsen CBET
+    #
+    # @note When making an API call, you may pass NielsenCBET
+    #   data as a hash:
+    #
+    #       {
+    #         cbet_check_digit_string: "__stringMin2Max2", # required
+    #         cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
+    #         csid: "__stringMin1Max7", # required
+    #       }
+    #
+    # @!attribute [rw] cbet_check_digit_string
+    #   Enter the CBET check digits to use in the watermark.
+    #   @return [String]
+    #
+    # @!attribute [rw] cbet_stepaside
+    #   Determines the method of CBET insertion mode when prior encoding is
+    #   detected on the same layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] csid
+    #   Enter the CBET Source ID (CSID) to use in the watermark
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NielsenCBET AWS API Documentation
+    #
+    class NielsenCBET < Struct.new(
+      :cbet_check_digit_string,
+      :cbet_stepaside,
+      :csid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Nielsen Configuration
     #
     # @note When making an API call, you may pass NielsenConfiguration
@@ -13477,6 +13622,76 @@ module Aws::MediaLive
     class NielsenConfiguration < Struct.new(
       :distributor_id,
       :nielsen_pcm_to_id_3_tagging)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Nielsen Naes Ii Nw
+    #
+    # @note When making an API call, you may pass NielsenNaesIiNw
+    #   data as a hash:
+    #
+    #       {
+    #         check_digit_string: "__stringMin2Max2", # required
+    #         sid: 1.0, # required
+    #       }
+    #
+    # @!attribute [rw] check_digit_string
+    #   Enter the check digit string for the watermark
+    #   @return [String]
+    #
+    # @!attribute [rw] sid
+    #   Enter the Nielsen Source ID (SID) to include in the watermark
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NielsenNaesIiNw AWS API Documentation
+    #
+    class NielsenNaesIiNw < Struct.new(
+      :check_digit_string,
+      :sid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Nielsen Watermarks Settings
+    #
+    # @note When making an API call, you may pass NielsenWatermarksSettings
+    #   data as a hash:
+    #
+    #       {
+    #         nielsen_cbet_settings: {
+    #           cbet_check_digit_string: "__stringMin2Max2", # required
+    #           cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
+    #           csid: "__stringMin1Max7", # required
+    #         },
+    #         nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
+    #         nielsen_naes_ii_nw_settings: {
+    #           check_digit_string: "__stringMin2Max2", # required
+    #           sid: 1.0, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] nielsen_cbet_settings
+    #   Complete these fields only if you want to insert watermarks of type
+    #   Nielsen CBET
+    #   @return [Types::NielsenCBET]
+    #
+    # @!attribute [rw] nielsen_distribution_type
+    #   Choose the distribution types that you want to assign to the
+    #   watermarks: - PROGRAM\_CONTENT - FINAL\_DISTRIBUTOR
+    #   @return [String]
+    #
+    # @!attribute [rw] nielsen_naes_ii_nw_settings
+    #   Complete these fields only if you want to insert watermarks of type
+    #   Nielsen NAES II (N2) and Nielsen NAES VI (NW).
+    #   @return [Types::NielsenNaesIiNw]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NielsenWatermarksSettings AWS API Documentation
+    #
+    class NielsenWatermarksSettings < Struct.new(
+      :nielsen_cbet_settings,
+      :nielsen_distribution_type,
+      :nielsen_naes_ii_nw_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17582,6 +17797,20 @@ module Aws::MediaLive
     #               audio_selector_name: "__string", # required
     #               audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
     #               audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
+    #               audio_watermarking_settings: {
+    #                 nielsen_watermarks_settings: {
+    #                   nielsen_cbet_settings: {
+    #                     cbet_check_digit_string: "__stringMin2Max2", # required
+    #                     cbet_stepaside: "DISABLED", # required, accepts DISABLED, ENABLED
+    #                     csid: "__stringMin1Max7", # required
+    #                   },
+    #                   nielsen_distribution_type: "FINAL_DISTRIBUTOR", # accepts FINAL_DISTRIBUTOR, PROGRAM_CONTENT
+    #                   nielsen_naes_ii_nw_settings: {
+    #                     check_digit_string: "__stringMin2Max2", # required
+    #                     sid: 1.0, # required
+    #                   },
+    #                 },
+    #               },
     #               codec_settings: {
     #                 aac_settings: {
     #                   bitrate: 1.0,

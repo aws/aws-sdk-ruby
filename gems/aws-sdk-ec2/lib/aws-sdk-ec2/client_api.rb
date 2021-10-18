@@ -874,6 +874,9 @@ module Aws::EC2
     DescribeVpnConnectionsResult = Shapes::StructureShape.new(name: 'DescribeVpnConnectionsResult')
     DescribeVpnGatewaysRequest = Shapes::StructureShape.new(name: 'DescribeVpnGatewaysRequest')
     DescribeVpnGatewaysResult = Shapes::StructureShape.new(name: 'DescribeVpnGatewaysResult')
+    DestinationFileFormat = Shapes::StringShape.new(name: 'DestinationFileFormat')
+    DestinationOptionsRequest = Shapes::StructureShape.new(name: 'DestinationOptionsRequest')
+    DestinationOptionsResponse = Shapes::StructureShape.new(name: 'DestinationOptionsResponse')
     DetachClassicLinkVpcRequest = Shapes::StructureShape.new(name: 'DetachClassicLinkVpcRequest')
     DetachClassicLinkVpcResult = Shapes::StructureShape.new(name: 'DetachClassicLinkVpcResult')
     DetachInternetGatewayRequest = Shapes::StructureShape.new(name: 'DetachInternetGatewayRequest')
@@ -1344,6 +1347,7 @@ module Aws::EC2
     InstanceStatusEventList = Shapes::ListShape.new(name: 'InstanceStatusEventList')
     InstanceStatusList = Shapes::ListShape.new(name: 'InstanceStatusList')
     InstanceStatusSummary = Shapes::StructureShape.new(name: 'InstanceStatusSummary')
+    InstanceStorageEncryptionSupport = Shapes::StringShape.new(name: 'InstanceStorageEncryptionSupport')
     InstanceStorageFlag = Shapes::BooleanShape.new(name: 'InstanceStorageFlag')
     InstanceStorageInfo = Shapes::StructureShape.new(name: 'InstanceStorageInfo')
     InstanceTagKeySet = Shapes::ListShape.new(name: 'InstanceTagKeySet')
@@ -3588,6 +3592,7 @@ module Aws::EC2
     CreateFlowLogsRequest.add_member(:log_format, Shapes::ShapeRef.new(shape: String, location_name: "LogFormat"))
     CreateFlowLogsRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateFlowLogsRequest.add_member(:max_aggregation_interval, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxAggregationInterval"))
+    CreateFlowLogsRequest.add_member(:destination_options, Shapes::ShapeRef.new(shape: DestinationOptionsRequest, location_name: "DestinationOptions"))
     CreateFlowLogsRequest.struct_class = Types::CreateFlowLogsRequest
 
     CreateFlowLogsResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
@@ -6019,6 +6024,16 @@ module Aws::EC2
     DescribeVpnGatewaysResult.add_member(:vpn_gateways, Shapes::ShapeRef.new(shape: VpnGatewayList, location_name: "vpnGatewaySet"))
     DescribeVpnGatewaysResult.struct_class = Types::DescribeVpnGatewaysResult
 
+    DestinationOptionsRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: DestinationFileFormat, location_name: "FileFormat"))
+    DestinationOptionsRequest.add_member(:hive_compatible_partitions, Shapes::ShapeRef.new(shape: Boolean, location_name: "HiveCompatiblePartitions"))
+    DestinationOptionsRequest.add_member(:per_hour_partition, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerHourPartition"))
+    DestinationOptionsRequest.struct_class = Types::DestinationOptionsRequest
+
+    DestinationOptionsResponse.add_member(:file_format, Shapes::ShapeRef.new(shape: DestinationFileFormat, location_name: "fileFormat"))
+    DestinationOptionsResponse.add_member(:hive_compatible_partitions, Shapes::ShapeRef.new(shape: Boolean, location_name: "hiveCompatiblePartitions"))
+    DestinationOptionsResponse.add_member(:per_hour_partition, Shapes::ShapeRef.new(shape: Boolean, location_name: "perHourPartition"))
+    DestinationOptionsResponse.struct_class = Types::DestinationOptionsResponse
+
     DetachClassicLinkVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DetachClassicLinkVpcRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
     DetachClassicLinkVpcRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
@@ -6762,6 +6777,7 @@ module Aws::EC2
     FlowLog.add_member(:log_format, Shapes::ShapeRef.new(shape: String, location_name: "logFormat"))
     FlowLog.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     FlowLog.add_member(:max_aggregation_interval, Shapes::ShapeRef.new(shape: Integer, location_name: "maxAggregationInterval"))
+    FlowLog.add_member(:destination_options, Shapes::ShapeRef.new(shape: DestinationOptionsResponse, location_name: "destinationOptions"))
     FlowLog.struct_class = Types::FlowLog
 
     FlowLogIdList.member = Shapes::ShapeRef.new(shape: VpcFlowLogId, location_name: "item")
@@ -7802,6 +7818,7 @@ module Aws::EC2
     InstanceStorageInfo.add_member(:total_size_in_gb, Shapes::ShapeRef.new(shape: DiskSize, location_name: "totalSizeInGB"))
     InstanceStorageInfo.add_member(:disks, Shapes::ShapeRef.new(shape: DiskInfoList, location_name: "disks"))
     InstanceStorageInfo.add_member(:nvme_support, Shapes::ShapeRef.new(shape: EphemeralNvmeSupport, location_name: "nvmeSupport"))
+    InstanceStorageInfo.add_member(:encryption_support, Shapes::ShapeRef.new(shape: InstanceStorageEncryptionSupport, location_name: "encryptionSupport"))
     InstanceStorageInfo.struct_class = Types::InstanceStorageInfo
 
     InstanceTagKeySet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")

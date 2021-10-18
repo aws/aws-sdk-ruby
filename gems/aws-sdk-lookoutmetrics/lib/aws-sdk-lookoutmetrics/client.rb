@@ -29,7 +29,6 @@ require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
-require 'aws-sdk-lookoutmetrics/plugins/content_type.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:lookoutmetrics)
 
@@ -76,7 +75,6 @@ module Aws::LookoutMetrics
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
-    add_plugin(Aws::LookoutMetrics::Plugins::ContentType)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -1646,7 +1644,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -48,6 +48,6 @@ require_relative 'aws-sdk-applicationcostprofiler/customizations'
 # @!group service
 module Aws::ApplicationCostProfiler
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end

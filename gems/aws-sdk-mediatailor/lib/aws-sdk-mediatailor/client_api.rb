@@ -18,6 +18,7 @@ module Aws::MediaTailor
     AdBreak = Shapes::StructureShape.new(name: 'AdBreak')
     AdMarkerPassthrough = Shapes::StructureShape.new(name: 'AdMarkerPassthrough')
     Alert = Shapes::StructureShape.new(name: 'Alert')
+    AvailMatchingCriteria = Shapes::StructureShape.new(name: 'AvailMatchingCriteria')
     AvailSuppression = Shapes::StructureShape.new(name: 'AvailSuppression')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Bumper = Shapes::StructureShape.new(name: 'Bumper')
@@ -30,6 +31,8 @@ module Aws::MediaTailor
     ConfigureLogsForPlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'ConfigureLogsForPlaybackConfigurationResponse')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
+    CreatePrefetchScheduleRequest = Shapes::StructureShape.new(name: 'CreatePrefetchScheduleRequest')
+    CreatePrefetchScheduleResponse = Shapes::StructureShape.new(name: 'CreatePrefetchScheduleResponse')
     CreateProgramRequest = Shapes::StructureShape.new(name: 'CreateProgramRequest')
     CreateProgramResponse = Shapes::StructureShape.new(name: 'CreateProgramResponse')
     CreateSourceLocationRequest = Shapes::StructureShape.new(name: 'CreateSourceLocationRequest')
@@ -46,6 +49,8 @@ module Aws::MediaTailor
     DeleteChannelResponse = Shapes::StructureShape.new(name: 'DeleteChannelResponse')
     DeletePlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'DeletePlaybackConfigurationRequest')
     DeletePlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'DeletePlaybackConfigurationResponse')
+    DeletePrefetchScheduleRequest = Shapes::StructureShape.new(name: 'DeletePrefetchScheduleRequest')
+    DeletePrefetchScheduleResponse = Shapes::StructureShape.new(name: 'DeletePrefetchScheduleResponse')
     DeleteProgramRequest = Shapes::StructureShape.new(name: 'DeleteProgramRequest')
     DeleteProgramResponse = Shapes::StructureShape.new(name: 'DeleteProgramResponse')
     DeleteSourceLocationRequest = Shapes::StructureShape.new(name: 'DeleteSourceLocationRequest')
@@ -66,6 +71,8 @@ module Aws::MediaTailor
     GetChannelScheduleResponse = Shapes::StructureShape.new(name: 'GetChannelScheduleResponse')
     GetPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'GetPlaybackConfigurationRequest')
     GetPlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'GetPlaybackConfigurationResponse')
+    GetPrefetchScheduleRequest = Shapes::StructureShape.new(name: 'GetPrefetchScheduleRequest')
+    GetPrefetchScheduleResponse = Shapes::StructureShape.new(name: 'GetPrefetchScheduleResponse')
     HlsConfiguration = Shapes::StructureShape.new(name: 'HlsConfiguration')
     HlsPlaylistSettings = Shapes::StructureShape.new(name: 'HlsPlaylistSettings')
     HttpConfiguration = Shapes::StructureShape.new(name: 'HttpConfiguration')
@@ -77,6 +84,8 @@ module Aws::MediaTailor
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListPlaybackConfigurationsRequest = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsRequest')
     ListPlaybackConfigurationsResponse = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsResponse')
+    ListPrefetchSchedulesRequest = Shapes::StructureShape.new(name: 'ListPrefetchSchedulesRequest')
+    ListPrefetchSchedulesResponse = Shapes::StructureShape.new(name: 'ListPrefetchSchedulesResponse')
     ListSourceLocationsRequest = Shapes::StructureShape.new(name: 'ListSourceLocationsRequest')
     ListSourceLocationsResponse = Shapes::StructureShape.new(name: 'ListSourceLocationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -89,9 +98,13 @@ module Aws::MediaTailor
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     Mode = Shapes::StringShape.new(name: 'Mode')
+    Operator = Shapes::StringShape.new(name: 'Operator')
     OriginManifestType = Shapes::StringShape.new(name: 'OriginManifestType')
     PlaybackConfiguration = Shapes::StructureShape.new(name: 'PlaybackConfiguration')
     PlaybackMode = Shapes::StringShape.new(name: 'PlaybackMode')
+    PrefetchConsumption = Shapes::StructureShape.new(name: 'PrefetchConsumption')
+    PrefetchRetrieval = Shapes::StructureShape.new(name: 'PrefetchRetrieval')
+    PrefetchSchedule = Shapes::StructureShape.new(name: 'PrefetchSchedule')
     PutChannelPolicyRequest = Shapes::StructureShape.new(name: 'PutChannelPolicyRequest')
     PutChannelPolicyResponse = Shapes::StructureShape.new(name: 'PutChannelPolicyResponse')
     PutPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'PutPlaybackConfigurationRequest')
@@ -127,10 +140,13 @@ module Aws::MediaTailor
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
+    __integerMin1Max100 = Shapes::IntegerShape.new(name: '__integerMin1Max100')
     __listOfAdBreak = Shapes::ListShape.new(name: '__listOfAdBreak')
     __listOfAlert = Shapes::ListShape.new(name: '__listOfAlert')
+    __listOfAvailMatchingCriteria = Shapes::ListShape.new(name: '__listOfAvailMatchingCriteria')
     __listOfChannel = Shapes::ListShape.new(name: '__listOfChannel')
     __listOfPlaybackConfiguration = Shapes::ListShape.new(name: '__listOfPlaybackConfiguration')
+    __listOfPrefetchSchedule = Shapes::ListShape.new(name: '__listOfPrefetchSchedule')
     __listOfScheduleAdBreak = Shapes::ListShape.new(name: '__listOfScheduleAdBreak')
     __listOfScheduleEntry = Shapes::ListShape.new(name: '__listOfScheduleEntry')
     __listOfSourceLocation = Shapes::ListShape.new(name: '__listOfSourceLocation')
@@ -160,6 +176,10 @@ module Aws::MediaTailor
     Alert.add_member(:related_resource_arns, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "RelatedResourceArns"))
     Alert.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ResourceArn"))
     Alert.struct_class = Types::Alert
+
+    AvailMatchingCriteria.add_member(:dynamic_variable, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "DynamicVariable"))
+    AvailMatchingCriteria.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, required: true, location_name: "Operator"))
+    AvailMatchingCriteria.struct_class = Types::AvailMatchingCriteria
 
     AvailSuppression.add_member(:mode, Shapes::ShapeRef.new(shape: Mode, location_name: "Mode"))
     AvailSuppression.add_member(:value, Shapes::ShapeRef.new(shape: __string, location_name: "Value"))
@@ -218,6 +238,21 @@ module Aws::MediaTailor
     CreateChannelResponse.add_member(:playback_mode, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackMode"))
     CreateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
+
+    CreatePrefetchScheduleRequest.add_member(:consumption, Shapes::ShapeRef.new(shape: PrefetchConsumption, required: true, location_name: "Consumption"))
+    CreatePrefetchScheduleRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
+    CreatePrefetchScheduleRequest.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "PlaybackConfigurationName"))
+    CreatePrefetchScheduleRequest.add_member(:retrieval, Shapes::ShapeRef.new(shape: PrefetchRetrieval, required: true, location_name: "Retrieval"))
+    CreatePrefetchScheduleRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "StreamId"))
+    CreatePrefetchScheduleRequest.struct_class = Types::CreatePrefetchScheduleRequest
+
+    CreatePrefetchScheduleResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    CreatePrefetchScheduleResponse.add_member(:consumption, Shapes::ShapeRef.new(shape: PrefetchConsumption, location_name: "Consumption"))
+    CreatePrefetchScheduleResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    CreatePrefetchScheduleResponse.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationName"))
+    CreatePrefetchScheduleResponse.add_member(:retrieval, Shapes::ShapeRef.new(shape: PrefetchRetrieval, location_name: "Retrieval"))
+    CreatePrefetchScheduleResponse.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "StreamId"))
+    CreatePrefetchScheduleResponse.struct_class = Types::CreatePrefetchScheduleResponse
 
     CreateProgramRequest.add_member(:ad_breaks, Shapes::ShapeRef.new(shape: __listOfAdBreak, location_name: "AdBreaks"))
     CreateProgramRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelName"))
@@ -301,6 +336,12 @@ module Aws::MediaTailor
     DeletePlaybackConfigurationRequest.struct_class = Types::DeletePlaybackConfigurationRequest
 
     DeletePlaybackConfigurationResponse.struct_class = Types::DeletePlaybackConfigurationResponse
+
+    DeletePrefetchScheduleRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
+    DeletePrefetchScheduleRequest.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "PlaybackConfigurationName"))
+    DeletePrefetchScheduleRequest.struct_class = Types::DeletePrefetchScheduleRequest
+
+    DeletePrefetchScheduleResponse.struct_class = Types::DeletePrefetchScheduleResponse
 
     DeleteProgramRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelName"))
     DeleteProgramRequest.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "programName"))
@@ -413,6 +454,18 @@ module Aws::MediaTailor
     GetPlaybackConfigurationResponse.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     GetPlaybackConfigurationResponse.struct_class = Types::GetPlaybackConfigurationResponse
 
+    GetPrefetchScheduleRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
+    GetPrefetchScheduleRequest.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "PlaybackConfigurationName"))
+    GetPrefetchScheduleRequest.struct_class = Types::GetPrefetchScheduleRequest
+
+    GetPrefetchScheduleResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    GetPrefetchScheduleResponse.add_member(:consumption, Shapes::ShapeRef.new(shape: PrefetchConsumption, location_name: "Consumption"))
+    GetPrefetchScheduleResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    GetPrefetchScheduleResponse.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationName"))
+    GetPrefetchScheduleResponse.add_member(:retrieval, Shapes::ShapeRef.new(shape: PrefetchRetrieval, location_name: "Retrieval"))
+    GetPrefetchScheduleResponse.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "StreamId"))
+    GetPrefetchScheduleResponse.struct_class = Types::GetPrefetchScheduleResponse
+
     HlsConfiguration.add_member(:manifest_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ManifestEndpointPrefix"))
     HlsConfiguration.struct_class = Types::HlsConfiguration
 
@@ -453,6 +506,16 @@ module Aws::MediaTailor
     ListPlaybackConfigurationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfPlaybackConfiguration, location_name: "Items"))
     ListPlaybackConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ListPlaybackConfigurationsResponse.struct_class = Types::ListPlaybackConfigurationsResponse
+
+    ListPrefetchSchedulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin1Max100, location_name: "MaxResults"))
+    ListPrefetchSchedulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ListPrefetchSchedulesRequest.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "PlaybackConfigurationName"))
+    ListPrefetchSchedulesRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "StreamId"))
+    ListPrefetchSchedulesRequest.struct_class = Types::ListPrefetchSchedulesRequest
+
+    ListPrefetchSchedulesResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfPrefetchSchedule, location_name: "Items"))
+    ListPrefetchSchedulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ListPrefetchSchedulesResponse.struct_class = Types::ListPrefetchSchedulesResponse
 
     ListSourceLocationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListSourceLocationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -507,6 +570,24 @@ module Aws::MediaTailor
     PlaybackConfiguration.add_member(:transcode_profile_name, Shapes::ShapeRef.new(shape: __string, location_name: "TranscodeProfileName"))
     PlaybackConfiguration.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     PlaybackConfiguration.struct_class = Types::PlaybackConfiguration
+
+    PrefetchConsumption.add_member(:avail_matching_criteria, Shapes::ShapeRef.new(shape: __listOfAvailMatchingCriteria, location_name: "AvailMatchingCriteria"))
+    PrefetchConsumption.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampUnix, required: true, location_name: "EndTime"))
+    PrefetchConsumption.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "StartTime"))
+    PrefetchConsumption.struct_class = Types::PrefetchConsumption
+
+    PrefetchRetrieval.add_member(:dynamic_variables, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "DynamicVariables"))
+    PrefetchRetrieval.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampUnix, required: true, location_name: "EndTime"))
+    PrefetchRetrieval.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "StartTime"))
+    PrefetchRetrieval.struct_class = Types::PrefetchRetrieval
+
+    PrefetchSchedule.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
+    PrefetchSchedule.add_member(:consumption, Shapes::ShapeRef.new(shape: PrefetchConsumption, required: true, location_name: "Consumption"))
+    PrefetchSchedule.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Name"))
+    PrefetchSchedule.add_member(:playback_configuration_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "PlaybackConfigurationName"))
+    PrefetchSchedule.add_member(:retrieval, Shapes::ShapeRef.new(shape: PrefetchRetrieval, required: true, location_name: "Retrieval"))
+    PrefetchSchedule.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "StreamId"))
+    PrefetchSchedule.struct_class = Types::PrefetchSchedule
 
     PutChannelPolicyRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelName"))
     PutChannelPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Policy"))
@@ -695,9 +776,13 @@ module Aws::MediaTailor
 
     __listOfAlert.member = Shapes::ShapeRef.new(shape: Alert)
 
+    __listOfAvailMatchingCriteria.member = Shapes::ShapeRef.new(shape: AvailMatchingCriteria)
+
     __listOfChannel.member = Shapes::ShapeRef.new(shape: Channel)
 
     __listOfPlaybackConfiguration.member = Shapes::ShapeRef.new(shape: PlaybackConfiguration)
+
+    __listOfPrefetchSchedule.member = Shapes::ShapeRef.new(shape: PrefetchSchedule)
 
     __listOfScheduleAdBreak.member = Shapes::ShapeRef.new(shape: ScheduleAdBreak)
 
@@ -747,6 +832,14 @@ module Aws::MediaTailor
         o.output = Shapes::ShapeRef.new(shape: CreateChannelResponse)
       end)
 
+      api.add_operation(:create_prefetch_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePrefetchSchedule"
+        o.http_method = "POST"
+        o.http_request_uri = "/prefetchSchedule/{PlaybackConfigurationName}/{Name}"
+        o.input = Shapes::ShapeRef.new(shape: CreatePrefetchScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePrefetchScheduleResponse)
+      end)
+
       api.add_operation(:create_program, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateProgram"
         o.http_method = "POST"
@@ -793,6 +886,14 @@ module Aws::MediaTailor
         o.http_request_uri = "/playbackConfiguration/{Name}"
         o.input = Shapes::ShapeRef.new(shape: DeletePlaybackConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeletePlaybackConfigurationResponse)
+      end)
+
+      api.add_operation(:delete_prefetch_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePrefetchSchedule"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prefetchSchedule/{PlaybackConfigurationName}/{Name}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePrefetchScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePrefetchScheduleResponse)
       end)
 
       api.add_operation(:delete_program, Seahorse::Model::Operation.new.tap do |o|
@@ -881,6 +982,14 @@ module Aws::MediaTailor
         o.output = Shapes::ShapeRef.new(shape: GetPlaybackConfigurationResponse)
       end)
 
+      api.add_operation(:get_prefetch_schedule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPrefetchSchedule"
+        o.http_method = "GET"
+        o.http_request_uri = "/prefetchSchedule/{PlaybackConfigurationName}/{Name}"
+        o.input = Shapes::ShapeRef.new(shape: GetPrefetchScheduleRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPrefetchScheduleResponse)
+      end)
+
       api.add_operation(:list_alerts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAlerts"
         o.http_method = "GET"
@@ -915,6 +1024,20 @@ module Aws::MediaTailor
         o.http_request_uri = "/playbackConfigurations"
         o.input = Shapes::ShapeRef.new(shape: ListPlaybackConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPlaybackConfigurationsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_prefetch_schedules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPrefetchSchedules"
+        o.http_method = "POST"
+        o.http_request_uri = "/prefetchSchedule/{PlaybackConfigurationName}"
+        o.input = Shapes::ShapeRef.new(shape: ListPrefetchSchedulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPrefetchSchedulesResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
