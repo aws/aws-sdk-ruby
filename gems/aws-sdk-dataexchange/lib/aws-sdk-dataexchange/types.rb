@@ -24,6 +24,8 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # What occurs after a certain event.
+    #
     # @note When making an API call, you may pass Action
     #   data as a hash:
     #
@@ -41,7 +43,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] export_revision_to_s3
-    #   Details of the operation to be performed by the job.
+    #   Details for the export revision to Amazon S3 action.
     #   @return [Types::AutoExportRevisionToS3RequestDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/Action AWS API Documentation
@@ -85,34 +87,41 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # Information about the asset.
+    #
     # @!attribute [rw] s3_snapshot_asset
     #   The S3 object that is the asset.
     #   @return [Types::S3SnapshotAsset]
     #
+    # @!attribute [rw] redshift_data_share_asset
+    #   The Amazon Redshift datashare that is the asset.
+    #   @return [Types::RedshiftDataShareAsset]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/AssetDetails AWS API Documentation
     #
     class AssetDetails < Struct.new(
-      :s3_snapshot_asset)
+      :s3_snapshot_asset,
+      :redshift_data_share_asset)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # An asset in AWS Data Exchange is a piece of data that can be stored as
-    # an S3 object. The asset can be a structured data file, an image file,
-    # or some other data file. When you create an import job for your files,
-    # you create an asset in AWS Data Exchange for each of those files.
+    # An asset in AWS Data Exchange is a piece of data. The asset can be a
+    # structured data file, an image file, or some other data file that can
+    # be stored as an S3 object, or an Amazon Redshift datashare (Preview).
+    # When you create an import job for your files, you create an asset in
+    # AWS Data Exchange for each of those files.
     #
     # @!attribute [rw] arn
     #   The ARN for the asset.
     #   @return [String]
     #
     # @!attribute [rw] asset_details
-    #   Information about the asset, including its size.
+    #   Information about the asset.
     #   @return [Types::AssetDetails]
     #
     # @!attribute [rw] asset_type
-    #   The type of file your data is stored in. Currently, the supported
-    #   asset type is S3\_SNAPSHOT.
+    #   The type of asset that is added to a data set.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -243,9 +252,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] encryption
-    #   Encryption configuration of the export job. Includes the encryption
-    #   type in addition to the AWS KMS key. The KMS key is only necessary
-    #   if you chose the KMS encryption. type.
+    #   Encryption configuration for the auto export job.
     #   @return [Types::ExportServerSideEncryption]
     #
     # @!attribute [rw] revision_destination
@@ -312,7 +319,7 @@ module Aws::DataExchange
     #   data as a hash:
     #
     #       {
-    #         asset_type: "S3_SNAPSHOT", # required, accepts S3_SNAPSHOT
+    #         asset_type: "S3_SNAPSHOT", # required, accepts S3_SNAPSHOT, REDSHIFT_DATA_SHARE
     #         description: "Description", # required
     #         name: "Name", # required
     #         tags: {
@@ -321,8 +328,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] asset_type
-    #   The type of file your data is stored in. Currently, the supported
-    #   asset type is S3\_SNAPSHOT.
+    #   The type of asset that is added to a data set.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -359,8 +365,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] asset_type
-    #   The type of file your data is stored in. Currently, the supported
-    #   asset type is S3\_SNAPSHOT.
+    #   The type of asset that is added to a data set.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -389,6 +394,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] origin_details
+    #   Information about the origin of the data set.
     #   @return [Types::OriginDetails]
     #
     # @!attribute [rw] source_id
@@ -464,6 +470,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] action
+    #   What occurs after a certain event.
     #   @return [Types::Action]
     #
     # @!attribute [rw] arn
@@ -477,6 +484,7 @@ module Aws::DataExchange
     #   @return [Time]
     #
     # @!attribute [rw] event
+    #   What occurs to start an action.
     #   @return [Types::Event]
     #
     # @!attribute [rw] id
@@ -562,8 +570,17 @@ module Aws::DataExchange
     #             data_set_id: "Id", # required
     #             revision_id: "Id", # required
     #           },
+    #           import_assets_from_redshift_data_shares: {
+    #             asset_sources: [ # required
+    #               {
+    #                 data_share_arn: "__string", # required
+    #               },
+    #             ],
+    #             data_set_id: "Id", # required
+    #             revision_id: "Id", # required
+    #           },
     #         },
-    #         type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3
+    #         type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3, IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES
     #       }
     #
     # @!attribute [rw] details
@@ -730,8 +747,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] asset_type
-    #   The type of file your data is stored in. Currently, the supported
-    #   asset type is S3\_SNAPSHOT.
+    #   The type of asset that is added to a data set.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -875,11 +891,14 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # Information about the job error.
+    #
     # @!attribute [rw] import_asset_from_signed_url_job_error_details
+    #   Information about the job error.
     #   @return [Types::ImportAssetFromSignedUrlJobErrorDetails]
     #
     # @!attribute [rw] import_assets_from_s3_job_error_details
-    #   The list of sources for the assets.
+    #   Information about the job error.
     #   @return [Array<Types::AssetSourceEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/Details AWS API Documentation
@@ -891,6 +910,8 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # What occurs to start an action.
+    #
     # @note When making an API call, you may pass Event
     #   data as a hash:
     #
@@ -901,6 +922,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] revision_published
+    #   What occurs to start the revision publish action.
     #   @return [Types::RevisionPublished]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/Event AWS API Documentation
@@ -920,7 +942,7 @@ module Aws::DataExchange
     #   @return [Types::Action]
     #
     # @!attribute [rw] arn
-    #   The ARN for the event action.
+    #   The Amazon Resource Name (ARN) for the event action.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1161,21 +1183,21 @@ module Aws::DataExchange
     #   Encryption configuration of the export job.
     #   @return [Types::ExportServerSideEncryption]
     #
-    # @!attribute [rw] event_action_arn
-    #   The ARN for the event action.
-    #   @return [String]
-    #
     # @!attribute [rw] revision_destinations
     #   The destination in Amazon S3 where the revision is exported.
     #   @return [Array<Types::RevisionDestinationEntry>]
+    #
+    # @!attribute [rw] event_action_arn
+    #   The Amazon Resource Name (ARN) of the event action.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ExportRevisionsToS3ResponseDetails AWS API Documentation
     #
     class ExportRevisionsToS3ResponseDetails < Struct.new(
       :data_set_id,
       :encryption,
-      :event_action_arn,
-      :revision_destinations)
+      :revision_destinations,
+      :event_action_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1246,11 +1268,11 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] asset_details
+    #   Information about the asset.
     #   @return [Types::AssetDetails]
     #
     # @!attribute [rw] asset_type
-    #   The type of file your data is stored in. Currently, the supported
-    #   asset type is S3\_SNAPSHOT.
+    #   The type of asset that is added to a data set.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1326,8 +1348,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] asset_type
-    #   The type of file your data is stored in. Currently, the supported
-    #   asset type is S3\_SNAPSHOT.
+    #   The type of asset that is added to a data set.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1356,6 +1377,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] origin_details
+    #   Information about the origin of the data set.
     #   @return [Types::OriginDetails]
     #
     # @!attribute [rw] source_id
@@ -1407,6 +1429,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] action
+    #   What occurs after a certain event.
     #   @return [Types::Action]
     #
     # @!attribute [rw] arn
@@ -1420,6 +1443,7 @@ module Aws::DataExchange
     #   @return [Time]
     #
     # @!attribute [rw] event
+    #   What occurs to start an action.
     #   @return [Types::Event]
     #
     # @!attribute [rw] id
@@ -1584,10 +1608,10 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # Information about the job error.
+    #
     # @!attribute [rw] asset_name
-    #   The name of the asset. When importing from Amazon S3, the S3 object
-    #   key is used as the asset name. When exporting to Amazon S3, the
-    #   asset name is used as default target S3 object key.
+    #   Information about the job error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ImportAssetFromSignedUrlJobErrorDetails AWS API Documentation
@@ -1645,7 +1669,7 @@ module Aws::DataExchange
     # signed URL and other information.
     #
     # @!attribute [rw] asset_name
-    #   The name for the asset associated with this import response.
+    #   The name for the asset associated with this import job.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
@@ -1681,6 +1705,71 @@ module Aws::DataExchange
       :revision_id,
       :signed_url,
       :signed_url_expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details from an import from Amazon Redshift datashare request.
+    #
+    # @note When making an API call, you may pass ImportAssetsFromRedshiftDataSharesRequestDetails
+    #   data as a hash:
+    #
+    #       {
+    #         asset_sources: [ # required
+    #           {
+    #             data_share_arn: "__string", # required
+    #           },
+    #         ],
+    #         data_set_id: "Id", # required
+    #         revision_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] asset_sources
+    #   A list of Amazon Redshift datashare assets.
+    #   @return [Array<Types::RedshiftDataShareAssetSourceEntry>]
+    #
+    # @!attribute [rw] data_set_id
+    #   The unique identifier for the data set associated with this import
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The unique identifier for the revision associated with this import
+    #   job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ImportAssetsFromRedshiftDataSharesRequestDetails AWS API Documentation
+    #
+    class ImportAssetsFromRedshiftDataSharesRequestDetails < Struct.new(
+      :asset_sources,
+      :data_set_id,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details from an import from Amazon Redshift datashare response.
+    #
+    # @!attribute [rw] asset_sources
+    #   A list of Amazon Redshift datashare asset sources.
+    #   @return [Array<Types::RedshiftDataShareAssetSourceEntry>]
+    #
+    # @!attribute [rw] data_set_id
+    #   The unique identifier for the data set associated with this import
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The unique identifier for the revision associated with this import
+    #   job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ImportAssetsFromRedshiftDataSharesResponseDetails AWS API Documentation
+    #
+    class ImportAssetsFromRedshiftDataSharesResponseDetails < Struct.new(
+      :asset_sources,
+      :data_set_id,
+      :revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1825,6 +1914,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] details
+    #   The details about the job error.
     #   @return [Types::Details]
     #
     # @!attribute [rw] limit_name
@@ -2125,13 +2215,51 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # Information about the origin of the data set.
+    #
     # @!attribute [rw] product_id
+    #   The product ID of the origin of the data set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/OriginDetails AWS API Documentation
     #
     class OriginDetails < Struct.new(
       :product_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Redshift datashare asset.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the datashare asset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RedshiftDataShareAsset AWS API Documentation
+    #
+    class RedshiftDataShareAsset < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of the Amazon Redshift datashare asset.
+    #
+    # @note When making an API call, you may pass RedshiftDataShareAssetSourceEntry
+    #   data as a hash:
+    #
+    #       {
+    #         data_share_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] data_share_arn
+    #   The Amazon Resource Name (ARN) of the datashare asset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RedshiftDataShareAssetSourceEntry AWS API Documentation
+    #
+    class RedshiftDataShareAssetSourceEntry < Struct.new(
+      :data_share_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2192,6 +2320,15 @@ module Aws::DataExchange
     #           data_set_id: "Id", # required
     #           revision_id: "Id", # required
     #         },
+    #         import_assets_from_redshift_data_shares: {
+    #           asset_sources: [ # required
+    #             {
+    #               data_share_arn: "__string", # required
+    #             },
+    #           ],
+    #           data_set_id: "Id", # required
+    #           revision_id: "Id", # required
+    #         },
     #       }
     #
     # @!attribute [rw] export_asset_to_signed_url
@@ -2214,6 +2351,10 @@ module Aws::DataExchange
     #   Details about the import from Amazon S3 request.
     #   @return [Types::ImportAssetsFromS3RequestDetails]
     #
+    # @!attribute [rw] import_assets_from_redshift_data_shares
+    #   Details from an import from Amazon Redshift datashare request.
+    #   @return [Types::ImportAssetsFromRedshiftDataSharesRequestDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RequestDetails AWS API Documentation
     #
     class RequestDetails < Struct.new(
@@ -2221,7 +2362,8 @@ module Aws::DataExchange
       :export_assets_to_s3,
       :export_revisions_to_s3,
       :import_asset_from_signed_url,
-      :import_assets_from_s3)
+      :import_assets_from_s3,
+      :import_assets_from_redshift_data_shares)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2272,6 +2414,10 @@ module Aws::DataExchange
     #   Details for the import from Amazon S3 response.
     #   @return [Types::ImportAssetsFromS3ResponseDetails]
     #
+    # @!attribute [rw] import_assets_from_redshift_data_shares
+    #   Details from an import from Amazon Redshift datashare response.
+    #   @return [Types::ImportAssetsFromRedshiftDataSharesResponseDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ResponseDetails AWS API Documentation
     #
     class ResponseDetails < Struct.new(
@@ -2279,7 +2425,8 @@ module Aws::DataExchange
       :export_assets_to_s3,
       :export_revisions_to_s3,
       :import_asset_from_signed_url,
-      :import_assets_from_s3)
+      :import_assets_from_s3,
+      :import_assets_from_redshift_data_shares)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2386,6 +2533,8 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # Information about the published revision.
+    #
     # @note When making an API call, you may pass RevisionPublished
     #   data as a hash:
     #
@@ -2394,7 +2543,7 @@ module Aws::DataExchange
     #       }
     #
     # @!attribute [rw] data_set_id
-    #   A unique identifier.
+    #   The data set ID of the published revision.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RevisionPublished AWS API Documentation
@@ -2568,11 +2717,11 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] asset_details
+    #   Information about the asset.
     #   @return [Types::AssetDetails]
     #
     # @!attribute [rw] asset_type
-    #   The type of file your data is stored in. Currently, the supported
-    #   asset type is S3\_SNAPSHOT.
+    #   The type of asset that is added to a data set.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -2662,8 +2811,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] asset_type
-    #   The type of file your data is stored in. Currently, the supported
-    #   asset type is S3\_SNAPSHOT.
+    #   The type of asset that is added to a data set.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -2692,6 +2840,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] origin_details
+    #   Information about the origin of the data set.
     #   @return [Types::OriginDetails]
     #
     # @!attribute [rw] source_id
@@ -2758,6 +2907,7 @@ module Aws::DataExchange
     end
 
     # @!attribute [rw] action
+    #   What occurs after a certain event.
     #   @return [Types::Action]
     #
     # @!attribute [rw] arn
@@ -2771,6 +2921,7 @@ module Aws::DataExchange
     #   @return [Time]
     #
     # @!attribute [rw] event
+    #   What occurs to start an action.
     #   @return [Types::Event]
     #
     # @!attribute [rw] id

@@ -28,7 +28,7 @@ require_relative 'aws-sdk-chimesdkmessaging/customizations'
 # structure.
 #
 #     chime_sdk_messaging = Aws::ChimeSDKMessaging::Client.new
-#     resp = chime_sdk_messaging.batch_create_channel_membership(params)
+#     resp = chime_sdk_messaging.associate_channel_flow(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-chimesdkmessaging/customizations'
 # @!group service
 module Aws::ChimeSDKMessaging
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end

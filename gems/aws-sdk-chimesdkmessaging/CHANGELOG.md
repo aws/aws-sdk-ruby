@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-10-19)
+------------------
+
+* Feature - The Amazon Chime SDK now allows developers to execute business logic on in-flight messages before they are delivered to members of a messaging channel with channel flows.
+
 1.3.0 (2021-10-18)
 ------------------
 

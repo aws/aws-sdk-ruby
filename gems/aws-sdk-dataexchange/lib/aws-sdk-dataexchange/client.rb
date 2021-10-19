@@ -352,8 +352,7 @@ module Aws::DataExchange
     # This operation creates a data set.
     #
     # @option params [required, String] :asset_type
-    #   The type of file your data is stored in. Currently, the supported
-    #   asset type is S3\_SNAPSHOT.
+    #   The type of asset that is added to a data set.
     #
     # @option params [required, String] :description
     #   A description for the data set. This value can be up to 16,348
@@ -386,7 +385,7 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_set({
-    #     asset_type: "S3_SNAPSHOT", # required, accepts S3_SNAPSHOT
+    #     asset_type: "S3_SNAPSHOT", # required, accepts S3_SNAPSHOT, REDSHIFT_DATA_SHARE
     #     description: "Description", # required
     #     name: "Name", # required
     #     tags: {
@@ -397,7 +396,7 @@ module Aws::DataExchange
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT"
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id #=> String
@@ -551,8 +550,17 @@ module Aws::DataExchange
     #         data_set_id: "Id", # required
     #         revision_id: "Id", # required
     #       },
+    #       import_assets_from_redshift_data_shares: {
+    #         asset_sources: [ # required
+    #           {
+    #             data_share_arn: "__string", # required
+    #           },
+    #         ],
+    #         data_set_id: "Id", # required
+    #         revision_id: "Id", # required
+    #       },
     #     },
-    #     type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3
+    #     type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3, IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES
     #   })
     #
     # @example Response structure
@@ -575,11 +583,11 @@ module Aws::DataExchange
     #   resp.details.export_revisions_to_s3.data_set_id #=> String
     #   resp.details.export_revisions_to_s3.encryption.kms_key_arn #=> String
     #   resp.details.export_revisions_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
-    #   resp.details.export_revisions_to_s3.event_action_arn #=> String
     #   resp.details.export_revisions_to_s3.revision_destinations #=> Array
     #   resp.details.export_revisions_to_s3.revision_destinations[0].bucket #=> String
     #   resp.details.export_revisions_to_s3.revision_destinations[0].key_pattern #=> String
     #   resp.details.export_revisions_to_s3.revision_destinations[0].revision_id #=> String
+    #   resp.details.export_revisions_to_s3.event_action_arn #=> String
     #   resp.details.import_asset_from_signed_url.asset_name #=> String
     #   resp.details.import_asset_from_signed_url.data_set_id #=> String
     #   resp.details.import_asset_from_signed_url.md_5_hash #=> String
@@ -591,20 +599,24 @@ module Aws::DataExchange
     #   resp.details.import_assets_from_s3.asset_sources[0].key #=> String
     #   resp.details.import_assets_from_s3.data_set_id #=> String
     #   resp.details.import_assets_from_s3.revision_id #=> String
+    #   resp.details.import_assets_from_redshift_data_shares.asset_sources #=> Array
+    #   resp.details.import_assets_from_redshift_data_shares.asset_sources[0].data_share_arn #=> String
+    #   resp.details.import_assets_from_redshift_data_shares.data_set_id #=> String
+    #   resp.details.import_assets_from_redshift_data_shares.revision_id #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].code #=> String, one of "ACCESS_DENIED_EXCEPTION", "INTERNAL_SERVER_EXCEPTION", "MALWARE_DETECTED", "RESOURCE_NOT_FOUND_EXCEPTION", "SERVICE_QUOTA_EXCEEDED_EXCEPTION", "VALIDATION_EXCEPTION", "MALWARE_SCAN_ENCRYPTED_FILE"
     #   resp.errors[0].details.import_asset_from_signed_url_job_error_details.asset_name #=> String
     #   resp.errors[0].details.import_assets_from_s3_job_error_details #=> Array
     #   resp.errors[0].details.import_assets_from_s3_job_error_details[0].bucket #=> String
     #   resp.errors[0].details.import_assets_from_s3_job_error_details[0].key #=> String
-    #   resp.errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB"
+    #   resp.errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB", "Amazon Redshift datashare assets per revision"
     #   resp.errors[0].limit_value #=> Float
     #   resp.errors[0].message #=> String
     #   resp.errors[0].resource_id #=> String
     #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.id #=> String
     #   resp.state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3"
+    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateJob AWS API Documentation
@@ -800,7 +812,8 @@ module Aws::DataExchange
     #
     #   resp.arn #=> String
     #   resp.asset_details.s3_snapshot_asset.size #=> Float
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT"
+    #   resp.asset_details.redshift_data_share_asset.arn #=> String
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
     #   resp.created_at #=> Time
     #   resp.data_set_id #=> String
     #   resp.id #=> String
@@ -845,7 +858,7 @@ module Aws::DataExchange
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT"
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id #=> String
@@ -947,11 +960,11 @@ module Aws::DataExchange
     #   resp.details.export_revisions_to_s3.data_set_id #=> String
     #   resp.details.export_revisions_to_s3.encryption.kms_key_arn #=> String
     #   resp.details.export_revisions_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
-    #   resp.details.export_revisions_to_s3.event_action_arn #=> String
     #   resp.details.export_revisions_to_s3.revision_destinations #=> Array
     #   resp.details.export_revisions_to_s3.revision_destinations[0].bucket #=> String
     #   resp.details.export_revisions_to_s3.revision_destinations[0].key_pattern #=> String
     #   resp.details.export_revisions_to_s3.revision_destinations[0].revision_id #=> String
+    #   resp.details.export_revisions_to_s3.event_action_arn #=> String
     #   resp.details.import_asset_from_signed_url.asset_name #=> String
     #   resp.details.import_asset_from_signed_url.data_set_id #=> String
     #   resp.details.import_asset_from_signed_url.md_5_hash #=> String
@@ -963,20 +976,24 @@ module Aws::DataExchange
     #   resp.details.import_assets_from_s3.asset_sources[0].key #=> String
     #   resp.details.import_assets_from_s3.data_set_id #=> String
     #   resp.details.import_assets_from_s3.revision_id #=> String
+    #   resp.details.import_assets_from_redshift_data_shares.asset_sources #=> Array
+    #   resp.details.import_assets_from_redshift_data_shares.asset_sources[0].data_share_arn #=> String
+    #   resp.details.import_assets_from_redshift_data_shares.data_set_id #=> String
+    #   resp.details.import_assets_from_redshift_data_shares.revision_id #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].code #=> String, one of "ACCESS_DENIED_EXCEPTION", "INTERNAL_SERVER_EXCEPTION", "MALWARE_DETECTED", "RESOURCE_NOT_FOUND_EXCEPTION", "SERVICE_QUOTA_EXCEEDED_EXCEPTION", "VALIDATION_EXCEPTION", "MALWARE_SCAN_ENCRYPTED_FILE"
     #   resp.errors[0].details.import_asset_from_signed_url_job_error_details.asset_name #=> String
     #   resp.errors[0].details.import_assets_from_s3_job_error_details #=> Array
     #   resp.errors[0].details.import_assets_from_s3_job_error_details[0].bucket #=> String
     #   resp.errors[0].details.import_assets_from_s3_job_error_details[0].key #=> String
-    #   resp.errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB"
+    #   resp.errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB", "Amazon Redshift datashare assets per revision"
     #   resp.errors[0].limit_value #=> Float
     #   resp.errors[0].message #=> String
     #   resp.errors[0].resource_id #=> String
     #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.id #=> String
     #   resp.state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3"
+    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetJob AWS API Documentation
@@ -1111,7 +1128,7 @@ module Aws::DataExchange
     #
     #   resp.data_sets #=> Array
     #   resp.data_sets[0].arn #=> String
-    #   resp.data_sets[0].asset_type #=> String, one of "S3_SNAPSHOT"
+    #   resp.data_sets[0].asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
     #   resp.data_sets[0].created_at #=> Time
     #   resp.data_sets[0].description #=> String
     #   resp.data_sets[0].id #=> String
@@ -1225,11 +1242,11 @@ module Aws::DataExchange
     #   resp.jobs[0].details.export_revisions_to_s3.data_set_id #=> String
     #   resp.jobs[0].details.export_revisions_to_s3.encryption.kms_key_arn #=> String
     #   resp.jobs[0].details.export_revisions_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
-    #   resp.jobs[0].details.export_revisions_to_s3.event_action_arn #=> String
     #   resp.jobs[0].details.export_revisions_to_s3.revision_destinations #=> Array
     #   resp.jobs[0].details.export_revisions_to_s3.revision_destinations[0].bucket #=> String
     #   resp.jobs[0].details.export_revisions_to_s3.revision_destinations[0].key_pattern #=> String
     #   resp.jobs[0].details.export_revisions_to_s3.revision_destinations[0].revision_id #=> String
+    #   resp.jobs[0].details.export_revisions_to_s3.event_action_arn #=> String
     #   resp.jobs[0].details.import_asset_from_signed_url.asset_name #=> String
     #   resp.jobs[0].details.import_asset_from_signed_url.data_set_id #=> String
     #   resp.jobs[0].details.import_asset_from_signed_url.md_5_hash #=> String
@@ -1241,20 +1258,24 @@ module Aws::DataExchange
     #   resp.jobs[0].details.import_assets_from_s3.asset_sources[0].key #=> String
     #   resp.jobs[0].details.import_assets_from_s3.data_set_id #=> String
     #   resp.jobs[0].details.import_assets_from_s3.revision_id #=> String
+    #   resp.jobs[0].details.import_assets_from_redshift_data_shares.asset_sources #=> Array
+    #   resp.jobs[0].details.import_assets_from_redshift_data_shares.asset_sources[0].data_share_arn #=> String
+    #   resp.jobs[0].details.import_assets_from_redshift_data_shares.data_set_id #=> String
+    #   resp.jobs[0].details.import_assets_from_redshift_data_shares.revision_id #=> String
     #   resp.jobs[0].errors #=> Array
     #   resp.jobs[0].errors[0].code #=> String, one of "ACCESS_DENIED_EXCEPTION", "INTERNAL_SERVER_EXCEPTION", "MALWARE_DETECTED", "RESOURCE_NOT_FOUND_EXCEPTION", "SERVICE_QUOTA_EXCEEDED_EXCEPTION", "VALIDATION_EXCEPTION", "MALWARE_SCAN_ENCRYPTED_FILE"
     #   resp.jobs[0].errors[0].details.import_asset_from_signed_url_job_error_details.asset_name #=> String
     #   resp.jobs[0].errors[0].details.import_assets_from_s3_job_error_details #=> Array
     #   resp.jobs[0].errors[0].details.import_assets_from_s3_job_error_details[0].bucket #=> String
     #   resp.jobs[0].errors[0].details.import_assets_from_s3_job_error_details[0].key #=> String
-    #   resp.jobs[0].errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB"
+    #   resp.jobs[0].errors[0].limit_name #=> String, one of "Assets per revision", "Asset size in GB", "Amazon Redshift datashare assets per revision"
     #   resp.jobs[0].errors[0].limit_value #=> Float
     #   resp.jobs[0].errors[0].message #=> String
     #   resp.jobs[0].errors[0].resource_id #=> String
     #   resp.jobs[0].errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.jobs[0].id #=> String
     #   resp.jobs[0].state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.jobs[0].type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3"
+    #   resp.jobs[0].type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"
     #   resp.jobs[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -1299,7 +1320,8 @@ module Aws::DataExchange
     #   resp.assets #=> Array
     #   resp.assets[0].arn #=> String
     #   resp.assets[0].asset_details.s3_snapshot_asset.size #=> Float
-    #   resp.assets[0].asset_type #=> String, one of "S3_SNAPSHOT"
+    #   resp.assets[0].asset_details.redshift_data_share_asset.arn #=> String
+    #   resp.assets[0].asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
     #   resp.assets[0].created_at #=> Time
     #   resp.assets[0].data_set_id #=> String
     #   resp.assets[0].id #=> String
@@ -1456,7 +1478,8 @@ module Aws::DataExchange
     #
     #   resp.arn #=> String
     #   resp.asset_details.s3_snapshot_asset.size #=> Float
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT"
+    #   resp.asset_details.redshift_data_share_asset.arn #=> String
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
     #   resp.created_at #=> Time
     #   resp.data_set_id #=> String
     #   resp.id #=> String
@@ -1508,7 +1531,7 @@ module Aws::DataExchange
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT"
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id #=> String
@@ -1649,7 +1672,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

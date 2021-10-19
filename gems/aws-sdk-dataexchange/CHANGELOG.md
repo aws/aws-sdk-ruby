@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-10-19)
+------------------
+
+* Feature - This release adds support for our public preview of AWS Data Exchange for Amazon Redshift. This enables data providers to list products including AWS Data Exchange datashares for Amazon Redshift, giving subscribers read-only access to provider data in Amazon Redshift.
+
 1.18.0 (2021-10-18)
 ------------------
 
