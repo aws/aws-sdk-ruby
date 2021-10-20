@@ -316,6 +316,7 @@ module Aws::MediaPackageVod
 
     HlsPackage.add_member(:encryption, Shapes::ShapeRef.new(shape: HlsEncryption, location_name: "encryption"))
     HlsPackage.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: __listOfHlsManifest, required: true, location_name: "hlsManifests"))
+    HlsPackage.add_member(:include_dvb_subtitles, Shapes::ShapeRef.new(shape: __boolean, location_name: "includeDvbSubtitles"))
     HlsPackage.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
     HlsPackage.add_member(:use_audio_rendition_group, Shapes::ShapeRef.new(shape: __boolean, location_name: "useAudioRenditionGroup"))
     HlsPackage.struct_class = Types::HlsPackage

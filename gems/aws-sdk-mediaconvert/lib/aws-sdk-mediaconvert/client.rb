@@ -559,6 +559,7 @@ module Aws::MediaConvert
     #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                   time_delta: 1,
+    #                   time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #                 },
     #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                 teletext_source_settings: {
@@ -1805,6 +1806,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta_units #=> String, one of "SECONDS", "MILLISECONDS"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
@@ -2824,6 +2826,7 @@ module Aws::MediaConvert
     #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                   time_delta: 1,
+    #                   time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #                 },
     #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                 teletext_source_settings: {
@@ -4039,6 +4042,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta_units #=> String, one of "SECONDS", "MILLISECONDS"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
@@ -6548,6 +6552,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta_units #=> String, one of "SECONDS", "MILLISECONDS"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
@@ -7490,6 +7495,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta_units #=> String, one of "SECONDS", "MILLISECONDS"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
@@ -9103,6 +9109,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta_units #=> String, one of "SECONDS", "MILLISECONDS"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
@@ -10081,6 +10088,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta_units #=> String, one of "SECONDS", "MILLISECONDS"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
@@ -11910,6 +11918,7 @@ module Aws::MediaConvert
     #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                   time_delta: 1,
+    #                   time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #                 },
     #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                 teletext_source_settings: {
@@ -13122,6 +13131,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta_units #=> String, one of "SECONDS", "MILLISECONDS"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "SMPTE_TT", "TELETEXT", "NULL_SOURCE", "IMSC", "WEBVTT"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.teletext_source_settings.page_number #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.track_source_settings.track_number #=> Integer
@@ -15373,7 +15383,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

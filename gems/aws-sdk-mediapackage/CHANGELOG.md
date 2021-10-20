@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2021-10-20)
+------------------
+
+* Feature - When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.
+
 1.45.0 (2021-10-18)
 ------------------
 

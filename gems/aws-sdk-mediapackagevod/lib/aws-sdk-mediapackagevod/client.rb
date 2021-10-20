@@ -549,6 +549,7 @@ module Aws::MediaPackageVod
     #           },
     #         },
     #       ],
+    #       include_dvb_subtitles: false,
     #       segment_duration_seconds: 1,
     #       use_audio_rendition_group: false,
     #     },
@@ -630,6 +631,7 @@ module Aws::MediaPackageVod
     #   resp.hls_package.hls_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.hls_package.hls_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.hls_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.hls_package.include_dvb_subtitles #=> Boolean
     #   resp.hls_package.segment_duration_seconds #=> Integer
     #   resp.hls_package.use_audio_rendition_group #=> Boolean
     #   resp.id #=> String
@@ -897,6 +899,7 @@ module Aws::MediaPackageVod
     #   resp.hls_package.hls_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.hls_package.hls_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.hls_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.hls_package.include_dvb_subtitles #=> Boolean
     #   resp.hls_package.segment_duration_seconds #=> Integer
     #   resp.hls_package.use_audio_rendition_group #=> Boolean
     #   resp.id #=> String
@@ -1085,6 +1088,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].hls_package.hls_manifests[0].stream_selection.max_video_bits_per_second #=> Integer
     #   resp.packaging_configurations[0].hls_package.hls_manifests[0].stream_selection.min_video_bits_per_second #=> Integer
     #   resp.packaging_configurations[0].hls_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
+    #   resp.packaging_configurations[0].hls_package.include_dvb_subtitles #=> Boolean
     #   resp.packaging_configurations[0].hls_package.segment_duration_seconds #=> Integer
     #   resp.packaging_configurations[0].hls_package.use_audio_rendition_group #=> Boolean
     #   resp.packaging_configurations[0].id #=> String
@@ -1293,7 +1297,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

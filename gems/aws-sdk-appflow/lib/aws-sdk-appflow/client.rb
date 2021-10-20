@@ -650,6 +650,9 @@ module Aws::Appflow
     #         s3: {
     #           bucket_name: "BucketName", # required
     #           bucket_prefix: "BucketPrefix",
+    #           s3_input_format_config: {
+    #             s3_input_file_type: "CSV", # accepts CSV, JSON
+    #           },
     #         },
     #         salesforce: {
     #           object: "Object", # required
@@ -1150,6 +1153,7 @@ module Aws::Appflow
     #   resp.source_flow_config.source_connector_properties.marketo.object #=> String
     #   resp.source_flow_config.source_connector_properties.s3.bucket_name #=> String
     #   resp.source_flow_config.source_connector_properties.s3.bucket_prefix #=> String
+    #   resp.source_flow_config.source_connector_properties.s3.s3_input_format_config.s3_input_file_type #=> String, one of "CSV", "JSON"
     #   resp.source_flow_config.source_connector_properties.salesforce.object #=> String
     #   resp.source_flow_config.source_connector_properties.salesforce.enable_dynamic_field_update #=> Boolean
     #   resp.source_flow_config.source_connector_properties.salesforce.include_deleted_records #=> Boolean
@@ -1863,6 +1867,9 @@ module Aws::Appflow
     #         s3: {
     #           bucket_name: "BucketName", # required
     #           bucket_prefix: "BucketPrefix",
+    #           s3_input_format_config: {
+    #             s3_input_file_type: "CSV", # accepts CSV, JSON
+    #           },
     #         },
     #         salesforce: {
     #           object: "Object", # required
@@ -2052,7 +2059,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -425,6 +425,7 @@ module Aws
             'Organizations' => 'organizations',
             'Outposts' => 'outposts',
             'PI' => 'pi',
+            'Panorama' => 'panorama',
             'Personalize' => 'personalize',
             'PersonalizeEvents' => 'personalize-events',
             'PersonalizeRuntime' => 'personalize-runtime',

@@ -1485,6 +1485,9 @@ module Aws::Appflow
     #             s3: {
     #               bucket_name: "BucketName", # required
     #               bucket_prefix: "BucketPrefix",
+    #               s3_input_format_config: {
+    #                 s3_input_file_type: "CSV", # accepts CSV, JSON
+    #               },
     #             },
     #             salesforce: {
     #               object: "Object", # required
@@ -3797,6 +3800,28 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # When you use Amazon S3 as the source, the configuration format that
+    # you provide the flow input data.
+    #
+    # @note When making an API call, you may pass S3InputFormatConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_input_file_type: "CSV", # accepts CSV, JSON
+    #       }
+    #
+    # @!attribute [rw] s3_input_file_type
+    #   The file type that Amazon AppFlow gets from your Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/S3InputFormatConfig AWS API Documentation
+    #
+    class S3InputFormatConfig < Struct.new(
+      :s3_input_file_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The connector metadata specific to Amazon S3.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/S3Metadata AWS API Documentation
@@ -3855,6 +3880,9 @@ module Aws::Appflow
     #       {
     #         bucket_name: "BucketName", # required
     #         bucket_prefix: "BucketPrefix",
+    #         s3_input_format_config: {
+    #           s3_input_file_type: "CSV", # accepts CSV, JSON
+    #         },
     #       }
     #
     # @!attribute [rw] bucket_name
@@ -3866,11 +3894,17 @@ module Aws::Appflow
     #   are stored.
     #   @return [String]
     #
+    # @!attribute [rw] s3_input_format_config
+    #   When you use Amazon S3 as the source, the configuration format that
+    #   you provide the flow input data.
+    #   @return [Types::S3InputFormatConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/S3SourceProperties AWS API Documentation
     #
     class S3SourceProperties < Struct.new(
       :bucket_name,
-      :bucket_prefix)
+      :bucket_prefix,
+      :s3_input_format_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4683,6 +4717,9 @@ module Aws::Appflow
     #         s3: {
     #           bucket_name: "BucketName", # required
     #           bucket_prefix: "BucketPrefix",
+    #           s3_input_format_config: {
+    #             s3_input_file_type: "CSV", # accepts CSV, JSON
+    #           },
     #         },
     #         salesforce: {
     #           object: "Object", # required
@@ -4851,6 +4888,9 @@ module Aws::Appflow
     #           s3: {
     #             bucket_name: "BucketName", # required
     #             bucket_prefix: "BucketPrefix",
+    #             s3_input_format_config: {
+    #               s3_input_file_type: "CSV", # accepts CSV, JSON
+    #             },
     #           },
     #           salesforce: {
     #             object: "Object", # required
@@ -5559,6 +5599,9 @@ module Aws::Appflow
     #             s3: {
     #               bucket_name: "BucketName", # required
     #               bucket_prefix: "BucketPrefix",
+    #               s3_input_format_config: {
+    #                 s3_input_file_type: "CSV", # accepts CSV, JSON
+    #               },
     #             },
     #             salesforce: {
     #               object: "Object", # required

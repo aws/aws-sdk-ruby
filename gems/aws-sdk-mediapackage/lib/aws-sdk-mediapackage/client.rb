@@ -655,6 +655,7 @@ module Aws::MediaPackage
     #           url: "__string", # required
     #         },
     #       },
+    #       include_dvb_subtitles: false,
     #       include_iframe_only_stream: false,
     #       playlist_type: "NONE", # accepts NONE, EVENT, VOD
     #       playlist_window_seconds: 1,
@@ -774,6 +775,7 @@ module Aws::MediaPackage
     #   resp.hls_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.hls_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.hls_package.encryption.speke_key_provider.url #=> String
+    #   resp.hls_package.include_dvb_subtitles #=> Boolean
     #   resp.hls_package.include_iframe_only_stream #=> Boolean
     #   resp.hls_package.playlist_type #=> String, one of "NONE", "EVENT", "VOD"
     #   resp.hls_package.playlist_window_seconds #=> Integer
@@ -1050,6 +1052,7 @@ module Aws::MediaPackage
     #   resp.hls_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.hls_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.hls_package.encryption.speke_key_provider.url #=> String
+    #   resp.hls_package.include_dvb_subtitles #=> Boolean
     #   resp.hls_package.include_iframe_only_stream #=> Boolean
     #   resp.hls_package.playlist_type #=> String, one of "NONE", "EVENT", "VOD"
     #   resp.hls_package.playlist_window_seconds #=> Integer
@@ -1288,6 +1291,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.origin_endpoints[0].hls_package.encryption.speke_key_provider.url #=> String
+    #   resp.origin_endpoints[0].hls_package.include_dvb_subtitles #=> Boolean
     #   resp.origin_endpoints[0].hls_package.include_iframe_only_stream #=> Boolean
     #   resp.origin_endpoints[0].hls_package.playlist_type #=> String, one of "NONE", "EVENT", "VOD"
     #   resp.origin_endpoints[0].hls_package.playlist_window_seconds #=> Integer
@@ -1693,6 +1697,7 @@ module Aws::MediaPackage
     #           url: "__string", # required
     #         },
     #       },
+    #       include_dvb_subtitles: false,
     #       include_iframe_only_stream: false,
     #       playlist_type: "NONE", # accepts NONE, EVENT, VOD
     #       playlist_window_seconds: 1,
@@ -1809,6 +1814,7 @@ module Aws::MediaPackage
     #   resp.hls_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.hls_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.hls_package.encryption.speke_key_provider.url #=> String
+    #   resp.hls_package.include_dvb_subtitles #=> Boolean
     #   resp.hls_package.include_iframe_only_stream #=> Boolean
     #   resp.hls_package.playlist_type #=> String, one of "NONE", "EVENT", "VOD"
     #   resp.hls_package.playlist_window_seconds #=> Integer
@@ -1864,7 +1870,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

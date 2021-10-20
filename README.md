@@ -382,6 +382,7 @@ RubyGems.org page under "LINKS" section.
 | AWS OpsWorks CM                                       | Aws::OpsWorksCM                      | aws-sdk-opsworkscm                      | 2016-11-01  |
 | AWS Organizations                                     | Aws::Organizations                   | aws-sdk-organizations                   | 2016-11-28  |
 | AWS Outposts                                          | Aws::Outposts                        | aws-sdk-outposts                        | 2019-12-03  |
+| AWS Panorama                                          | Aws::Panorama                        | aws-sdk-panorama                        | 2019-07-24  |
 | AWS Performance Insights                              | Aws::PI                              | aws-sdk-pi                              | 2018-02-27  |
 | AWS Price List Service                                | Aws::Pricing                         | aws-sdk-pricing                         | 2017-10-15  |
 | AWS Proton                                            | Aws::Proton                          | aws-sdk-proton                          | 2020-07-20  |

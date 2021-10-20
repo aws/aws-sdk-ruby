@@ -710,6 +710,7 @@ module Aws::TranscribeStreamingService
     #         content_identification_type: "PII", # accepts PII
     #         content_redaction_type: "PII", # accepts PII
     #         pii_entity_types: "PiiEntityTypes",
+    #         language_model_name: "ModelName",
     #       }
     #
     # @!attribute [rw] language_code
@@ -823,13 +824,12 @@ module Aws::TranscribeStreamingService
     #   to specify entity types, you must have either
     #   `ContentIdentificationType` or `ContentRedactionType` enabled.
     #
-    #   `PIIEntityTypes` must be comma-separated; the available values are:
-    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_NUMBER`,
-    #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`,
-    #   `ADDRESS`, `NAME`, `PHONE`, `SSN`, and `ALL`.
-    #
     #   `PiiEntityTypes` is an optional parameter with a default value of
     #   `ALL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_model_name
+    #   The name of the language model you want to use.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionRequest AWS API Documentation
@@ -850,7 +850,8 @@ module Aws::TranscribeStreamingService
       :partial_results_stability,
       :content_identification_type,
       :content_redaction_type,
-      :pii_entity_types)
+      :pii_entity_types,
+      :language_model_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -927,6 +928,9 @@ module Aws::TranscribeStreamingService
     #   Lists the PII entity types you specified in your request.
     #   @return [String]
     #
+    # @!attribute [rw] language_model_name
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionResponse AWS API Documentation
     #
     class StartStreamTranscriptionResponse < Struct.new(
@@ -946,7 +950,8 @@ module Aws::TranscribeStreamingService
       :partial_results_stability,
       :content_identification_type,
       :content_redaction_type,
-      :pii_entity_types)
+      :pii_entity_types,
+      :language_model_name)
       SENSITIVE = []
       include Aws::Structure
     end

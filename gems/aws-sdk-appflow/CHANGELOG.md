@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-10-20)
+------------------
+
+* Feature - Feature to add support for  JSON-L format for S3 as a source.
+
 1.16.0 (2021-10-18)
 ------------------
 

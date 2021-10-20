@@ -218,6 +218,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-organizations', '~> 1')
   spec.add_dependency('aws-sdk-outposts', '~> 1')
   spec.add_dependency('aws-sdk-pi', '~> 1')
+  spec.add_dependency('aws-sdk-panorama', '~> 1')
   spec.add_dependency('aws-sdk-personalize', '~> 1')
   spec.add_dependency('aws-sdk-personalizeevents', '~> 1')
   spec.add_dependency('aws-sdk-personalizeruntime', '~> 1')

@@ -347,8 +347,8 @@ module Aws::DirectConnect
     #   The ID of the request proposal.
     #
     # @option params [required, String] :associated_gateway_owner_account
-    #   The ID of the account that owns the virtual private gateway or transit
-    #   gateway.
+    #   The ID of the Amazon Web Services account that owns the virtual
+    #   private gateway or transit gateway.
     #
     # @option params [Array<Types::RouteFilterPrefix>] :override_allowed_prefixes_to_direct_connect_gateway
     #   Overrides the Amazon VPC prefixes advertised to the Direct Connect
@@ -426,8 +426,8 @@ module Aws::DirectConnect
     #   The name of the provisioned connection.
     #
     # @option params [required, String] :owner_account
-    #   The ID of the account of the customer for whom the connection will be
-    #   provisioned.
+    #   The ID of the Amazon Web Services account of the customer for whom the
+    #   connection will be provisioned.
     #
     # @option params [required, String] :interconnect_id
     #   The ID of the interconnect on which the connection will be
@@ -528,7 +528,8 @@ module Aws::DirectConnect
     #   The ID of the interconnect or LAG.
     #
     # @option params [required, String] :owner_account
-    #   The ID of the account ID of the customer for the connection.
+    #   The ID of the Amazon Web Services account ID of the customer for the
+    #   connection.
     #
     # @option params [required, String] :bandwidth
     #   The bandwidth of the connection. The possible values are 50Mbps,
@@ -628,7 +629,7 @@ module Aws::DirectConnect
     end
 
     # Provisions a private virtual interface to be owned by the specified
-    # account.
+    # Amazon Web Services account.
     #
     # Virtual interfaces created using this action must be confirmed by the
     # owner using ConfirmPrivateVirtualInterface. Until then, the virtual
@@ -640,7 +641,8 @@ module Aws::DirectConnect
     #   provisioned.
     #
     # @option params [required, String] :owner_account
-    #   The ID of the account that owns the virtual private interface.
+    #   The ID of the Amazon Web Services account that owns the virtual
+    #   private interface.
     #
     # @option params [required, Types::NewPrivateVirtualInterfaceAllocation] :new_private_virtual_interface_allocation
     #   Information about the private virtual interface.
@@ -747,10 +749,11 @@ module Aws::DirectConnect
     end
 
     # Provisions a public virtual interface to be owned by the specified
-    # account.
+    # Amazon Web Services account.
     #
     # The owner of a connection calls this function to provision a public
-    # virtual interface to be owned by the specified account.
+    # virtual interface to be owned by the specified Amazon Web Services
+    # account.
     #
     # Virtual interfaces created using this function must be confirmed by
     # the owner using ConfirmPublicVirtualInterface. Until this step has
@@ -767,7 +770,8 @@ module Aws::DirectConnect
     #   provisioned.
     #
     # @option params [required, String] :owner_account
-    #   The ID of the account that owns the public virtual interface.
+    #   The ID of the Amazon Web Services account that owns the public virtual
+    #   interface.
     #
     # @option params [required, Types::NewPublicVirtualInterfaceAllocation] :new_public_virtual_interface_allocation
     #   Information about the public virtual interface.
@@ -878,11 +882,11 @@ module Aws::DirectConnect
     end
 
     # Provisions a transit virtual interface to be owned by the specified
-    # account. Use this type of interface to connect a transit gateway to
-    # your Direct Connect gateway.
+    # Amazon Web Services account. Use this type of interface to connect a
+    # transit gateway to your Direct Connect gateway.
     #
     # The owner of a connection provisions a transit virtual interface to be
-    # owned by the specified account.
+    # owned by the specified Amazon Web Services account.
     #
     # After you create a transit virtual interface, it must be confirmed by
     # the owner using ConfirmTransitVirtualInterface. Until this step has
@@ -894,7 +898,8 @@ module Aws::DirectConnect
     #   provisioned.
     #
     # @option params [required, String] :owner_account
-    #   The ID of the account that owns the transit virtual interface.
+    #   The ID of the Amazon Web Services account that owns the transit
+    #   virtual interface.
     #
     # @option params [required, Types::NewTransitVirtualInterfaceAllocation] :new_transit_virtual_interface_allocation
     #   Information about the transit virtual interface.
@@ -1390,8 +1395,37 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # The confirmation of the terms of agreement when creating the
+    # connection/link aggregation group (LAG).
+    #
+    # @option params [String] :agreement_name
+    #   The name of the customer agreement.
+    #
+    # @return [Types::ConfirmCustomerAgreementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConfirmCustomerAgreementResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.confirm_customer_agreement({
+    #     agreement_name: "AgreementName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmCustomerAgreement AWS API Documentation
+    #
+    # @overload confirm_customer_agreement(params = {})
+    # @param [Hash] params ({})
+    def confirm_customer_agreement(params = {}, options = {})
+      req = build_request(:confirm_customer_agreement, params)
+      req.send_request(options)
+    end
+
     # Accepts ownership of a private virtual interface created by another
-    # account.
+    # Amazon Web Services account.
     #
     # After the virtual interface owner makes this call, the virtual
     # interface is created and attached to the specified virtual private
@@ -1433,7 +1467,7 @@ module Aws::DirectConnect
     end
 
     # Accepts ownership of a public virtual interface created by another
-    # account.
+    # Amazon Web Services account.
     #
     # After the virtual interface owner makes this call, the specified
     # virtual interface is created and made available to handle traffic.
@@ -1465,7 +1499,7 @@ module Aws::DirectConnect
     end
 
     # Accepts ownership of a transit virtual interface created by another
-    # account.
+    # Amazon Web Services account.
     #
     # After the owner of the transit virtual interface makes this call, the
     # specified transit virtual interface is created and made available to
@@ -1722,12 +1756,13 @@ module Aws::DirectConnect
 
     # Creates a Direct Connect gateway, which is an intermediate object that
     # enables you to connect a set of virtual interfaces and virtual private
-    # gateways. A Direct Connect gateway is global and visible in any Region
-    # after it is created. The virtual interfaces and virtual private
-    # gateways that are connected through a Direct Connect gateway can be in
-    # different Regions. This enables you to connect to a VPC in any Region,
-    # regardless of the Region in which the virtual interfaces are located,
-    # and pass traffic between them.
+    # gateways. A Direct Connect gateway is global and visible in any Amazon
+    # Web Services Region after it is created. The virtual interfaces and
+    # virtual private gateways that are connected through a Direct Connect
+    # gateway can be in different Amazon Web Services Regions. This enables
+    # you to connect to a VPC in any Region, regardless of the Region in
+    # which the virtual interfaces are located, and pass traffic between
+    # them.
     #
     # @option params [required, String] :direct_connect_gateway_name
     #   The name of the Direct Connect gateway.
@@ -1840,13 +1875,14 @@ module Aws::DirectConnect
     # or transit gateway with the specified Direct Connect gateway.
     #
     # You can associate a Direct Connect gateway and virtual private gateway
-    # or transit gateway that is owned by any account.
+    # or transit gateway that is owned by any Amazon Web Services account.
     #
     # @option params [required, String] :direct_connect_gateway_id
     #   The ID of the Direct Connect gateway.
     #
     # @option params [required, String] :direct_connect_gateway_owner_account
-    #   The ID of the account that owns the Direct Connect gateway.
+    #   The ID of the Amazon Web Services account that owns the Direct Connect
+    #   gateway.
     #
     # @option params [required, String] :gateway_id
     #   The ID of the virtual private gateway or transit gateway.
@@ -2034,10 +2070,10 @@ module Aws::DirectConnect
     # with the dedicated connection are automatically disassociated and
     # re-associated with the LAG. The connection ID does not change.
     #
-    # If the account used to create a LAG is a registered Direct Connect
-    # Partner, the LAG is automatically enabled to host sub-connections. For
-    # a LAG owned by a partner, any associated virtual interfaces cannot be
-    # directly configured.
+    # If the Amazon Web Services account used to create a LAG is a
+    # registered Direct Connect Partner, the LAG is automatically enabled to
+    # host sub-connections. For a LAG owned by a partner, any associated
+    # virtual interfaces cannot be directly configured.
     #
     # @option params [required, Integer] :number_of_connections
     #   The number of physical dedicated connections initially provisioned and
@@ -2198,9 +2234,9 @@ module Aws::DirectConnect
     # can be connected to either a Direct Connect gateway or a Virtual
     # Private Gateway (VGW). Connecting the private virtual interface to a
     # Direct Connect gateway enables the possibility for connecting to
-    # multiple VPCs, including VPCs in different Regions. Connecting the
-    # private virtual interface to a VGW only provides access to a single
-    # VPC within the same Region.
+    # multiple VPCs, including VPCs in different Amazon Web Services
+    # Regions. Connecting the private virtual interface to a VGW only
+    # provides access to a single VPC within the same Region.
     #
     # Setting the MTU of a virtual interface to 9001 (jumbo frames) can
     # cause an update to the underlying physical connection if it wasn't
@@ -3171,6 +3207,31 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Get and view a list of customer agreements, along with their signed
+    # status and whether the customer is an NNIPartner, NNIPartnerV2, or a
+    # nonPartner.
+    #
+    # @return [Types::DescribeCustomerMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCustomerMetadataResponse#agreements #agreements} => Array&lt;Types::CustomerAgreement&gt;
+    #   * {Types::DescribeCustomerMetadataResponse#nni_partner_type #nni_partner_type} => String
+    #
+    # @example Response structure
+    #
+    #   resp.agreements #=> Array
+    #   resp.agreements[0].agreement_name #=> String
+    #   resp.agreements[0].status #=> String
+    #   resp.nni_partner_type #=> String, one of "v1", "v2", "nonPartner"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeCustomerMetadata AWS API Documentation
+    #
+    # @overload describe_customer_metadata(params = {})
+    # @param [Hash] params ({})
+    def describe_customer_metadata(params = {}, options = {})
+      req = build_request(:describe_customer_metadata, params)
+      req.send_request(options)
+    end
+
     # Describes one or more association proposals for connection between a
     # virtual private gateway or transit gateway and a Direct Connect
     # gateway.
@@ -3555,8 +3616,8 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Lists the interconnects owned by the account or only the specified
-    # interconnect.
+    # Lists the interconnects owned by the Amazon Web Services account or
+    # only the specified interconnect.
     #
     # @option params [String] :interconnect_id
     #   The ID of the interconnect.
@@ -3737,9 +3798,9 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Lists the Direct Connect locations in the current Region. These are
-    # the locations that can be selected when calling CreateConnection or
-    # CreateInterconnect.
+    # Lists the Direct Connect locations in the current Amazon Web Services
+    # Region. These are the locations that can be selected when calling
+    # CreateConnection or CreateInterconnect.
     #
     # @return [Types::Locations] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3764,6 +3825,51 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def describe_locations(params = {}, options = {})
       req = build_request(:describe_locations, params)
+      req.send_request(options)
+    end
+
+    # Details about the router.
+    #
+    # @option params [required, String] :virtual_interface_id
+    #   The ID of the virtual interface.
+    #
+    # @option params [String] :router_type_identifier
+    #   Identifies the router by a combination of vendor, platform, and
+    #   software version. For example,
+    #   `CiscoSystemsInc-2900SeriesRouters-IOS124`.
+    #
+    # @return [Types::DescribeRouterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRouterConfigurationResponse#customer_router_config #customer_router_config} => String
+    #   * {Types::DescribeRouterConfigurationResponse#router #router} => Types::RouterType
+    #   * {Types::DescribeRouterConfigurationResponse#virtual_interface_id #virtual_interface_id} => String
+    #   * {Types::DescribeRouterConfigurationResponse#virtual_interface_name #virtual_interface_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_router_configuration({
+    #     virtual_interface_id: "VirtualInterfaceId", # required
+    #     router_type_identifier: "RouterTypeIdentifier",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.customer_router_config #=> String
+    #   resp.router.vendor #=> String
+    #   resp.router.platform #=> String
+    #   resp.router.software #=> String
+    #   resp.router.xslt_template_name #=> String
+    #   resp.router.xslt_template_name_for_mac_sec #=> String
+    #   resp.router.router_type_identifier #=> String
+    #   resp.virtual_interface_id #=> String
+    #   resp.virtual_interface_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeRouterConfiguration AWS API Documentation
+    #
+    # @overload describe_router_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_router_configuration(params = {}, options = {})
+      req = build_request(:describe_router_configuration, params)
       req.send_request(options)
     end
 
@@ -3800,7 +3906,8 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Lists the virtual private gateways owned by the account.
+    # Lists the virtual private gateways owned by the Amazon Web Services
+    # account.
     #
     # You can create one or more Direct Connect private virtual interfaces
     # linked to a virtual private gateway.
@@ -3824,11 +3931,12 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Displays all virtual interfaces for an account. Virtual interfaces
-    # deleted fewer than 15 minutes before you make the request are also
-    # returned. If you specify a connection ID, only the virtual interfaces
-    # associated with the connection are returned. If you specify a virtual
-    # interface ID, then only a single virtual interface is returned.
+    # Displays all virtual interfaces for an Amazon Web Services account.
+    # Virtual interfaces deleted fewer than 15 minutes before you make the
+    # request are also returned. If you specify a connection ID, only the
+    # virtual interfaces associated with the connection are returned. If you
+    # specify a virtual interface ID, then only a single virtual interface
+    # is returned.
     #
     # A virtual interface (VLAN) transmits the traffic between the Direct
     # Connect location and the customer network.
@@ -4364,6 +4472,43 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Updates the name of a current Direct Connect gateway.
+    #
+    # @option params [required, String] :direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway to update.
+    #
+    # @option params [required, String] :new_direct_connect_gateway_name
+    #   The new name for the Direct Connect gateway.
+    #
+    # @return [Types::UpdateDirectConnectGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDirectConnectGatewayResponse#direct_connect_gateway #direct_connect_gateway} => Types::DirectConnectGateway
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_direct_connect_gateway({
+    #     direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #     new_direct_connect_gateway_name: "DirectConnectGatewayName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.direct_connect_gateway.direct_connect_gateway_id #=> String
+    #   resp.direct_connect_gateway.direct_connect_gateway_name #=> String
+    #   resp.direct_connect_gateway.amazon_side_asn #=> Integer
+    #   resp.direct_connect_gateway.owner_account #=> String
+    #   resp.direct_connect_gateway.direct_connect_gateway_state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.direct_connect_gateway.state_change_error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateDirectConnectGateway AWS API Documentation
+    #
+    # @overload update_direct_connect_gateway(params = {})
+    # @param [Hash] params ({})
+    def update_direct_connect_gateway(params = {}, options = {})
+      req = build_request(:update_direct_connect_gateway, params)
+      req.send_request(options)
+    end
+
     # Updates the specified attributes of the Direct Connect gateway
     # association.
     #
@@ -4680,7 +4825,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

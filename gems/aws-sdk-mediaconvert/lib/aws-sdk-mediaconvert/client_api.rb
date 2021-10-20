@@ -242,6 +242,7 @@ module Aws::MediaConvert
     FileGroupSettings = Shapes::StructureShape.new(name: 'FileGroupSettings')
     FileSourceConvert608To708 = Shapes::StringShape.new(name: 'FileSourceConvert608To708')
     FileSourceSettings = Shapes::StructureShape.new(name: 'FileSourceSettings')
+    FileSourceTimeDeltaUnits = Shapes::StringShape.new(name: 'FileSourceTimeDeltaUnits')
     FontScript = Shapes::StringShape.new(name: 'FontScript')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     FrameCaptureSettings = Shapes::StructureShape.new(name: 'FrameCaptureSettings')
@@ -1371,6 +1372,7 @@ module Aws::MediaConvert
     FileSourceSettings.add_member(:framerate, Shapes::ShapeRef.new(shape: CaptionSourceFramerate, location_name: "framerate"))
     FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT, location_name: "sourceFile"))
     FileSourceSettings.add_member(:time_delta, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timeDelta"))
+    FileSourceSettings.add_member(:time_delta_units, Shapes::ShapeRef.new(shape: FileSourceTimeDeltaUnits, location_name: "timeDeltaUnits"))
     FileSourceSettings.struct_class = Types::FileSourceSettings
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))

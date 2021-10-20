@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2021-10-20)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for specifying caption time delta in milliseconds and the ability to apply color range legalization to source content other than AVC video.
+
 1.77.0 (2021-10-18)
 ------------------
 

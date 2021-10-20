@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.41.1 (2021-10-20)
+------------------
+
 * Issue - use the correct service with the `EndpointProvider` to determine `sigv4_region`.
 
 1.41.0 (2021-10-18)
