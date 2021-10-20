@@ -88,6 +88,24 @@ module Aws
           expect(client.config.sigv4_region).to eq('eu-west-1')
         end
 
+        it 'uses the endpointPrefix to find the signing_region' do
+          svc = ApiHelper.sample_service(metadata: {
+            'signatureVersion' => 'v4',
+            'signingName' => 'signing-name',
+            'endpointPrefix' => 'api.service',
+          })
+          expect(Aws::Partitions::EndpointProvider)
+            .to receive(:signing_region)
+            .with('fips-us-east-1', 'api.service')
+            .and_return('us-east-1')
+
+          client = svc::Client.new(options.merge(
+            region: 'fips-us-east-1',
+            ))
+          expect(client.config.sigv4_name).to eq('signing-name')
+          expect(client.config.sigv4_region).to eq('us-east-1')
+        end
+
       end
 
       describe 'apply authtype trait' do

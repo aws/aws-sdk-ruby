@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Use endpointPrefix when looking up the `signing_region` from the `EndpointProvider`.
+
 3.121.2 (2021-10-18)
 ------------------
 
