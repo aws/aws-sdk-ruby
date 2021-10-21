@@ -546,6 +546,7 @@ module Aws::MediaPackageVod
     #               },
     #             },
     #           ],
+    #           include_dvb_subtitles: false,
     #           segment_duration_seconds: 1,
     #           use_audio_rendition_group: false,
     #         },
@@ -1351,6 +1352,7 @@ module Aws::MediaPackageVod
     #             },
     #           },
     #         ],
+    #         include_dvb_subtitles: false,
     #         segment_duration_seconds: 1,
     #         use_audio_rendition_group: false,
     #       }
@@ -1362,6 +1364,11 @@ module Aws::MediaPackageVod
     # @!attribute [rw] hls_manifests
     #   A list of HLS manifest configurations.
     #   @return [Array<Types::HlsManifest>]
+    #
+    # @!attribute [rw] include_dvb_subtitles
+    #   When enabled, MediaPackage passes through digital video broadcasting
+    #   (DVB) subtitles into the output.
+    #   @return [Boolean]
     #
     # @!attribute [rw] segment_duration_seconds
     #   Duration (in seconds) of each fragment. Actual fragments will be
@@ -1378,6 +1385,7 @@ module Aws::MediaPackageVod
     class HlsPackage < Struct.new(
       :encryption,
       :hls_manifests,
+      :include_dvb_subtitles,
       :segment_duration_seconds,
       :use_audio_rendition_group)
       SENSITIVE = []

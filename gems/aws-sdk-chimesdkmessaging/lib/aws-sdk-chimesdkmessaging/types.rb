@@ -29,6 +29,37 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateChannelFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         channel_flow_arn: "ChimeArn", # required
+    #         chime_bearer: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_flow_arn
+    #   The ARN of the channel flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] chime_bearer
+    #   The `AppInstanceUserArn` of the user making the API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/AssociateChannelFlowRequest AWS API Documentation
+    #
+    class AssociateChannelFlowRequest < Struct.new(
+      :channel_arn,
+      :channel_flow_arn,
+      :chime_bearer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input parameters don't match the service's restrictions.
     #
     # @!attribute [rw] code
@@ -198,6 +229,10 @@ module Aws::ChimeSDKMessaging
     #   The time at which a channel was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] channel_flow_arn
+    #   The ARN of the channel flow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/Channel AWS API Documentation
     #
     class Channel < Struct.new(
@@ -209,7 +244,42 @@ module Aws::ChimeSDKMessaging
       :created_by,
       :created_timestamp,
       :last_message_timestamp,
-      :last_updated_timestamp)
+      :last_updated_timestamp,
+      :channel_flow_arn)
+      SENSITIVE = [:name, :metadata]
+      include Aws::Structure
+    end
+
+    # Summary of details of a channel associated with channel flow.
+    #
+    # @!attribute [rw] name
+    #   The name of the channel flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The mode of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy
+    #   The channel's privacy setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The channel's metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelAssociatedWithFlowSummary AWS API Documentation
+    #
+    class ChannelAssociatedWithFlowSummary < Struct.new(
+      :name,
+      :channel_arn,
+      :mode,
+      :privacy,
+      :metadata)
       SENSITIVE = [:name, :metadata]
       include Aws::Structure
     end
@@ -254,6 +324,127 @@ module Aws::ChimeSDKMessaging
     class ChannelBanSummary < Struct.new(
       :member)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a channel flow.
+    #
+    # @!attribute [rw] channel_flow_arn
+    #   The ARN of the channel flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] processors
+    #   Information about the processor Lambda functions.
+    #   @return [Array<Types::Processor>]
+    #
+    # @!attribute [rw] name
+    #   The name of the channel flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which the channel flow was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The time at which a channel flow was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelFlow AWS API Documentation
+    #
+    class ChannelFlow < Struct.new(
+      :channel_flow_arn,
+      :processors,
+      :name,
+      :created_timestamp,
+      :last_updated_timestamp)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ChannelFlowCallbackRequest
+    #   data as a hash:
+    #
+    #       {
+    #         callback_id: "CallbackIdType", # required
+    #         channel_arn: "ChimeArn", # required
+    #         delete_resource: false,
+    #         channel_message: { # required
+    #           message_id: "MessageId", # required
+    #           content: "NonEmptyContent",
+    #           metadata: "Metadata",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] callback_id
+    #   The identifier passed to the processor by the service when invoked.
+    #   Use the identifier to call back the service.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_resource
+    #   When a processor determines that a message needs to be `DENIED`,
+    #   pass this parameter with a value of true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] channel_message
+    #   Stores information about the processed message.
+    #   @return [Types::ChannelMessageCallback]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelFlowCallbackRequest AWS API Documentation
+    #
+    class ChannelFlowCallbackRequest < Struct.new(
+      :callback_id,
+      :channel_arn,
+      :delete_resource,
+      :channel_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] callback_id
+    #   The call back ID passed in the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelFlowCallbackResponse AWS API Documentation
+    #
+    class ChannelFlowCallbackResponse < Struct.new(
+      :channel_arn,
+      :callback_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of details of a channel flow.
+    #
+    # @!attribute [rw] channel_flow_arn
+    #   The ARN of the channel flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the channel flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] processors
+    #   Information about the processor Lambda functions.
+    #   @return [Array<Types::Processor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelFlowSummary AWS API Documentation
+    #
+    class ChannelFlowSummary < Struct.new(
+      :channel_flow_arn,
+      :name,
+      :processors)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 
@@ -375,6 +566,10 @@ module Aws::ChimeSDKMessaging
     #   The persistence setting for a channel message.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the channel message.
+    #   @return [Types::ChannelMessageStatusStructure]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessage AWS API Documentation
     #
     class ChannelMessage < Struct.new(
@@ -388,8 +583,61 @@ module Aws::ChimeSDKMessaging
       :last_updated_timestamp,
       :sender,
       :redacted,
-      :persistence)
+      :persistence,
+      :status)
       SENSITIVE = [:content, :metadata]
+      include Aws::Structure
+    end
+
+    # Stores information about a callback.
+    #
+    # @note When making an API call, you may pass ChannelMessageCallback
+    #   data as a hash:
+    #
+    #       {
+    #         message_id: "MessageId", # required
+    #         content: "NonEmptyContent",
+    #         metadata: "Metadata",
+    #       }
+    #
+    # @!attribute [rw] message_id
+    #   The message ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The message content.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The message metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessageCallback AWS API Documentation
+    #
+    class ChannelMessageCallback < Struct.new(
+      :message_id,
+      :content,
+      :metadata)
+      SENSITIVE = [:content, :metadata]
+      include Aws::Structure
+    end
+
+    # Stores information about a message status.
+    #
+    # @!attribute [rw] value
+    #   The message status value.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   Contains more details about the messasge status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessageStatusStructure AWS API Documentation
+    #
+    class ChannelMessageStatusStructure < Struct.new(
+      :value,
+      :detail)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -431,6 +679,12 @@ module Aws::ChimeSDKMessaging
     #   Indicates whether a message was redacted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] status
+    #   The message status. The status value is `SENT` for messages sent to
+    #   a channel without a channel flow. For channels associated with
+    #   channel flow, the value determines the processing stage.
+    #   @return [Types::ChannelMessageStatusStructure]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessageSummary AWS API Documentation
     #
     class ChannelMessageSummary < Struct.new(
@@ -442,7 +696,8 @@ module Aws::ChimeSDKMessaging
       :last_updated_timestamp,
       :last_edited_timestamp,
       :sender,
-      :redacted)
+      :redacted,
+      :status)
       SENSITIVE = [:content, :metadata]
       include Aws::Structure
     end
@@ -606,6 +861,78 @@ module Aws::ChimeSDKMessaging
     class CreateChannelBanResponse < Struct.new(
       :channel_arn,
       :member)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateChannelFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #         processors: [ # required
+    #           {
+    #             name: "NonEmptyResourceName", # required
+    #             configuration: { # required
+    #               lambda: { # required
+    #                 resource_arn: "LambdaFunctionArn", # required
+    #                 invocation_type: "ASYNC", # required, accepts ASYNC
+    #               },
+    #             },
+    #             execution_order: 1, # required
+    #             fallback_action: "CONTINUE", # required, accepts CONTINUE, ABORT
+    #           },
+    #         ],
+    #         name: "NonEmptyResourceName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the channel flow request.
+    #   @return [String]
+    #
+    # @!attribute [rw] processors
+    #   Information about the processor Lambda functions.
+    #   @return [Array<Types::Processor>]
+    #
+    # @!attribute [rw] name
+    #   The name of the channel flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the creation request.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_request_token
+    #   The client token for the request. An Idempotency token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/CreateChannelFlowRequest AWS API Documentation
+    #
+    class CreateChannelFlowRequest < Struct.new(
+      :app_instance_arn,
+      :processors,
+      :name,
+      :tags,
+      :client_request_token)
+      SENSITIVE = [:name, :client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_flow_arn
+    #   The ARN of the channel flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/CreateChannelFlowResponse AWS API Documentation
+    #
+    class CreateChannelFlowResponse < Struct.new(
+      :channel_flow_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -833,6 +1160,25 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteChannelFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_flow_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_flow_arn
+    #   The ARN of the channel flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteChannelFlowRequest AWS API Documentation
+    #
+    class DeleteChannelFlowRequest < Struct.new(
+      :channel_flow_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteChannelMembershipRequest
     #   data as a hash:
     #
@@ -990,6 +1336,37 @@ module Aws::ChimeSDKMessaging
     #
     class DescribeChannelBanResponse < Struct.new(
       :channel_ban)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeChannelFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_flow_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_flow_arn
+    #   The ARN of the channel flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DescribeChannelFlowRequest AWS API Documentation
+    #
+    class DescribeChannelFlowRequest < Struct.new(
+      :channel_flow_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_flow
+    #   The channel flow details.
+    #   @return [Types::ChannelFlow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DescribeChannelFlowResponse AWS API Documentation
+    #
+    class DescribeChannelFlowResponse < Struct.new(
+      :channel_flow)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1203,6 +1580,37 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateChannelFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         channel_flow_arn: "ChimeArn", # required
+    #         chime_bearer: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_flow_arn
+    #   The ARN of the channel flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] chime_bearer
+    #   The `AppInstanceUserArn` of the user making the API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DisassociateChannelFlowRequest AWS API Documentation
+    #
+    class DisassociateChannelFlowRequest < Struct.new(
+      :channel_arn,
+      :channel_flow_arn,
+      :chime_bearer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The client is permanently forbidden from making the request.
     #
     # @!attribute [rw] code
@@ -1263,6 +1671,49 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetChannelMessageStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         message_id: "MessageId", # required
+    #         chime_bearer: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The ID of the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] chime_bearer
+    #   The `AppInstanceUserArn` of the user making the API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMessageStatusRequest AWS API Documentation
+    #
+    class GetChannelMessageStatusRequest < Struct.new(
+      :channel_arn,
+      :message_id,
+      :chime_bearer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The message status and details.
+    #   @return [Types::ChannelMessageStatusStructure]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMessageStatusResponse AWS API Documentation
+    #
+    class GetChannelMessageStatusResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetMessagingSessionEndpointRequest AWS API Documentation
@@ -1297,6 +1748,33 @@ module Aws::ChimeSDKMessaging
       :arn,
       :name)
       SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # Stores metadata about a Lambda processor.
+    #
+    # @note When making an API call, you may pass LambdaConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "LambdaFunctionArn", # required
+    #         invocation_type: "ASYNC", # required, accepts ASYNC
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the Lambda message processing function.
+    #   @return [String]
+    #
+    # @!attribute [rw] invocation_type
+    #   Controls how the Lambda function is invoked.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/LambdaConfiguration AWS API Documentation
+    #
+    class LambdaConfiguration < Struct.new(
+      :resource_arn,
+      :invocation_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1357,6 +1835,56 @@ module Aws::ChimeSDKMessaging
       :channel_arn,
       :next_token,
       :channel_bans)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListChannelFlowsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_arn: "ChimeArn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] app_instance_arn
+    #   The ARN of the app instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of channel flows that you want to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested channel
+    #   flows are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelFlowsRequest AWS API Documentation
+    #
+    class ListChannelFlowsRequest < Struct.new(
+      :app_instance_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_flows
+    #   The information about each channel flow.
+    #   @return [Array<Types::ChannelFlowSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested channels
+    #   are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelFlowsResponse AWS API Documentation
+    #
+    class ListChannelFlowsResponse < Struct.new(
+      :channel_flows,
+      :next_token)
       SENSITIVE = [:next_token]
       include Aws::Structure
     end
@@ -1630,6 +2158,56 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListChannelsAssociatedWithChannelFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_flow_arn: "ChimeArn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] channel_flow_arn
+    #   The ARN of the channel flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of channels that you want to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested channels
+    #   are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelsAssociatedWithChannelFlowRequest AWS API Documentation
+    #
+    class ListChannelsAssociatedWithChannelFlowRequest < Struct.new(
+      :channel_flow_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channels
+    #   The information about each channel.
+    #   @return [Array<Types::ChannelAssociatedWithFlowSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested channels
+    #   are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelsAssociatedWithChannelFlowResponse AWS API Documentation
+    #
+    class ListChannelsAssociatedWithChannelFlowResponse < Struct.new(
+      :channels,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListChannelsModeratedByAppInstanceUserRequest
     #   data as a hash:
     #
@@ -1750,6 +2328,37 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tag key-value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The websocket endpoint used to connect to Amazon Chime SDK messaging.
     #
     # @!attribute [rw] url
@@ -1778,6 +2387,81 @@ module Aws::ChimeSDKMessaging
     class NotFoundException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information about a processor in a channel flow.
+    #
+    # @note When making an API call, you may pass Processor
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyResourceName", # required
+    #         configuration: { # required
+    #           lambda: { # required
+    #             resource_arn: "LambdaFunctionArn", # required
+    #             invocation_type: "ASYNC", # required, accepts ASYNC
+    #           },
+    #         },
+    #         execution_order: 1, # required
+    #         fallback_action: "CONTINUE", # required, accepts CONTINUE, ABORT
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the channel flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The information about the type of processor and its identifier.
+    #   @return [Types::ProcessorConfiguration]
+    #
+    # @!attribute [rw] execution_order
+    #   The sequence in which processors run. If you have multiple
+    #   processors in a channel flow, message processing goes through each
+    #   processor in the sequence. The value determines the sequence. At
+    #   this point, we support only 1 processor within a flow.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fallback_action
+    #   Determines whether to continue or stop processing if communication
+    #   with processor fails. If the last processor in a channel flow
+    #   sequence has a fallback action of CONTINUE, and communication with
+    #   the processor fails, the message is considered processed and sent to
+    #   the recipients in the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/Processor AWS API Documentation
+    #
+    class Processor < Struct.new(
+      :name,
+      :configuration,
+      :execution_order,
+      :fallback_action)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # A processor's metadata.
+    #
+    # @note When making an API call, you may pass ProcessorConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         lambda: { # required
+    #           resource_arn: "LambdaFunctionArn", # required
+    #           invocation_type: "ASYNC", # required, accepts ASYNC
+    #         },
+    #       }
+    #
+    # @!attribute [rw] lambda
+    #   Indicates that the processor is of type Lambda.
+    #   @return [Types::LambdaConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ProcessorConfiguration AWS API Documentation
+    #
+    class ProcessorConfiguration < Struct.new(
+      :lambda)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1916,11 +2600,16 @@ module Aws::ChimeSDKMessaging
     #   The ID string assigned to each message.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the channel message.
+    #   @return [Types::ChannelMessageStatusStructure]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SendChannelMessageResponse AWS API Documentation
     #
     class SendChannelMessageResponse < Struct.new(
       :channel_arn,
-      :message_id)
+      :message_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1959,7 +2648,7 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
-    # Describes a tag applied to a resource.
+    # A tag object containing a key-value pair.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -1970,11 +2659,11 @@ module Aws::ChimeSDKMessaging
     #       }
     #
     # @!attribute [rw] key
-    #   The key of the tag.
+    #   The key in a tag.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the tag.
+    #   The value in a tag.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/Tag AWS API Documentation
@@ -1983,6 +2672,36 @@ module Aws::ChimeSDKMessaging
       :key,
       :value)
       SENSITIVE = [:key, :value]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ChimeArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag key-value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2016,6 +2735,86 @@ module Aws::ChimeSDKMessaging
     class UnauthorizedClientException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ChimeArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateChannelFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_flow_arn: "ChimeArn", # required
+    #         processors: [ # required
+    #           {
+    #             name: "NonEmptyResourceName", # required
+    #             configuration: { # required
+    #               lambda: { # required
+    #                 resource_arn: "LambdaFunctionArn", # required
+    #                 invocation_type: "ASYNC", # required, accepts ASYNC
+    #               },
+    #             },
+    #             execution_order: 1, # required
+    #             fallback_action: "CONTINUE", # required, accepts CONTINUE, ABORT
+    #           },
+    #         ],
+    #         name: "NonEmptyResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] channel_flow_arn
+    #   The ARN of the channel flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] processors
+    #   Information about the processor Lambda functions
+    #   @return [Array<Types::Processor>]
+    #
+    # @!attribute [rw] name
+    #   The name of the channel flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelFlowRequest AWS API Documentation
+    #
+    class UpdateChannelFlowRequest < Struct.new(
+      :channel_flow_arn,
+      :processors,
+      :name)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_flow_arn
+    #   The ARN of the channel flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelFlowResponse AWS API Documentation
+    #
+    class UpdateChannelFlowResponse < Struct.new(
+      :channel_flow_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2071,11 +2870,16 @@ module Aws::ChimeSDKMessaging
     #   The ID string of the message being updated.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the message update.
+    #   @return [Types::ChannelMessageStatusStructure]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelMessageResponse AWS API Documentation
     #
     class UpdateChannelMessageResponse < Struct.new(
       :channel_arn,
-      :message_id)
+      :message_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

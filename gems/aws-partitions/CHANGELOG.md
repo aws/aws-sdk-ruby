@@ -5,6 +5,11 @@ Unreleased Changes
 
 * Feature - Support `#fips_regions` and `#dualstack_regions` in `Aws::Partitions::Service`.
 
+1.517.0 (2021-10-20)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Panorama`.
+
 1.516.0 (2021-10-14)
 ------------------
 

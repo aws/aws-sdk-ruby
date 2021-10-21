@@ -25203,6 +25203,90 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateFindingAggregatorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         region_linking_mode: "NonEmptyString", # required
+    #         regions: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] region_linking_mode
+    #   Indicates whether to aggregate findings from all of the available
+    #   Regions in the current partition. Also determines whether to
+    #   automatically aggregate findings from new Regions as Security Hub
+    #   supports them and you opt into them.
+    #
+    #   The selected option also determines how to use the Regions provided
+    #   in the Regions list.
+    #
+    #   The options are as follows:
+    #
+    #   * `ALL_REGIONS` - Indicates to aggregate findings from all of the
+    #     Regions where Security Hub is enabled. When you choose this
+    #     option, Security Hub also automatically aggregates findings from
+    #     new Regions as Security Hub supports them and you opt into them.
+    #
+    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Indicates to aggregate findings
+    #     from all of the Regions where Security Hub is enabled, except for
+    #     the Regions listed in the `Regions` parameter. When you choose
+    #     this option, Security Hub also automatically aggregates findings
+    #     from new Regions as Security Hub supports them and you opt into
+    #     them.
+    #
+    #   * `SPECIFIED_REGIONS` - Indicates to aggregate findings only from
+    #     the Regions listed in the `Regions` parameter. Security Hub does
+    #     not automatically aggregate findings from new Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this
+    #   is a comma-separated list of Regions that do not aggregate findings
+    #   to the aggregation Region.
+    #
+    #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
+    #   comma-separated list of Regions that do aggregate findings to the
+    #   aggregation Region.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateFindingAggregatorRequest AWS API Documentation
+    #
+    class CreateFindingAggregatorRequest < Struct.new(
+      :region_linking_mode,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] finding_aggregator_arn
+    #   The ARN of the finding aggregator. You use the finding aggregator
+    #   ARN to retrieve details for, update, and stop finding aggregation.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_aggregation_region
+    #   The aggregation Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_linking_mode
+    #   Indicates whether to link all Regions, all Regions except for a list
+    #   of excluded Regions, or a list of included Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The list of excluded Regions or included Regions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateFindingAggregatorResponse AWS API Documentation
+    #
+    class CreateFindingAggregatorResponse < Struct.new(
+      :finding_aggregator_arn,
+      :finding_aggregation_region,
+      :region_linking_mode,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateInsightRequest
     #   data as a hash:
     #
@@ -26398,6 +26482,30 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteFindingAggregatorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         finding_aggregator_arn: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] finding_aggregator_arn
+    #   The ARN of the finding aggregator to delete. To obtain the ARN, use
+    #   `ListFindingAggregators`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteFindingAggregatorRequest AWS API Documentation
+    #
+    class DeleteFindingAggregatorRequest < Struct.new(
+      :finding_aggregator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteFindingAggregatorResponse AWS API Documentation
+    #
+    class DeleteFindingAggregatorResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteInsightRequest
     #   data as a hash:
     #
@@ -27010,6 +27118,23 @@ module Aws::SecurityHub
     #
     class EnableSecurityHubResponse < Aws::EmptyStructure; end
 
+    # A finding aggregator. A finding aggregator contains the configuration
+    # for finding aggregation.
+    #
+    # @!attribute [rw] finding_aggregator_arn
+    #   The ARN of the finding aggregator. You use the finding aggregator
+    #   ARN to retrieve details for, update, and delete the finding
+    #   aggregator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingAggregator AWS API Documentation
+    #
+    class FindingAggregator < Struct.new(
+      :finding_aggregator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # In a `BatchImportFindings` request, finding providers use
     # `FindingProviderFields` to provide and update values for confidence,
     # criticality, related findings, severity, and types.
@@ -27204,6 +27329,54 @@ module Aws::SecurityHub
     class GetEnabledStandardsResponse < Struct.new(
       :standards_subscriptions,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFindingAggregatorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         finding_aggregator_arn: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] finding_aggregator_arn
+    #   The ARN of the finding aggregator to return details for. To obtain
+    #   the ARN, use `ListFindingAggregators`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingAggregatorRequest AWS API Documentation
+    #
+    class GetFindingAggregatorRequest < Struct.new(
+      :finding_aggregator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] finding_aggregator_arn
+    #   The ARN of the finding aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_aggregation_region
+    #   The aggregation Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_linking_mode
+    #   Indicates whether to link all Regions, all Regions except for a list
+    #   of excluded Regions, or a list of included Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The list of excluded Regions or included Regions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingAggregatorResponse AWS API Documentation
+    #
+    class GetFindingAggregatorResponse < Struct.new(
+      :finding_aggregator_arn,
+      :finding_aggregation_region,
+      :region_linking_mode,
+      :regions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28495,6 +28668,54 @@ module Aws::SecurityHub
     #
     class ListEnabledProductsForImportResponse < Struct.new(
       :product_subscriptions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFindingAggregatorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token returned with the previous set of results. Identifies the
+    #   next set of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. This operation currently
+    #   only returns a single result.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListFindingAggregatorsRequest AWS API Documentation
+    #
+    class ListFindingAggregatorsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] finding_aggregators
+    #   The list of finding aggregators. This operation currently only
+    #   returns a single result.
+    #   @return [Array<Types::FindingAggregator>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more results, this is the token to provide in the next
+    #   call to `ListFindingAggregators`.
+    #
+    #   This operation currently only returns a single result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListFindingAggregatorsResponse AWS API Documentation
+    #
+    class ListFindingAggregatorsResponse < Struct.new(
+      :finding_aggregators,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -35902,6 +36123,96 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateActionTargetResponse AWS API Documentation
     #
     class UpdateActionTargetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateFindingAggregatorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         finding_aggregator_arn: "NonEmptyString", # required
+    #         region_linking_mode: "NonEmptyString", # required
+    #         regions: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] finding_aggregator_arn
+    #   The ARN of the finding aggregator. To obtain the ARN, use
+    #   `ListFindingAggregators`.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_linking_mode
+    #   Indicates whether to aggregate findings from all of the available
+    #   Regions in the current partition. Also determines whether to
+    #   automatically aggregate findings from new Regions as Security Hub
+    #   supports them and you opt into them.
+    #
+    #   The selected option also determines how to use the Regions provided
+    #   in the Regions list.
+    #
+    #   The options are as follows:
+    #
+    #   * `ALL_REGIONS` - Indicates to aggregate findings from all of the
+    #     Regions where Security Hub is enabled. When you choose this
+    #     option, Security Hub also automatically aggregates findings from
+    #     new Regions as Security Hub supports them and you opt into them.
+    #
+    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Indicates to aggregate findings
+    #     from all of the Regions where Security Hub is enabled, except for
+    #     the Regions listed in the `Regions` parameter. When you choose
+    #     this option, Security Hub also automatically aggregates findings
+    #     from new Regions as Security Hub supports them and you opt into
+    #     them.
+    #
+    #   * `SPECIFIED_REGIONS` - Indicates to aggregate findings only from
+    #     the Regions listed in the `Regions` parameter. Security Hub does
+    #     not automatically aggregate findings from new Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this
+    #   is a comma-separated list of Regions that do not aggregate findings
+    #   to the aggregation Region.
+    #
+    #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
+    #   comma-separated list of Regions that do aggregate findings to the
+    #   aggregation Region.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateFindingAggregatorRequest AWS API Documentation
+    #
+    class UpdateFindingAggregatorRequest < Struct.new(
+      :finding_aggregator_arn,
+      :region_linking_mode,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] finding_aggregator_arn
+    #   The ARN of the finding aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_aggregation_region
+    #   The aggregation Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_linking_mode
+    #   Indicates whether to link all Regions, all Regions except for a list
+    #   of excluded Regions, or a list of included Regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The list of excluded Regions or included Regions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateFindingAggregatorResponse AWS API Documentation
+    #
+    class UpdateFindingAggregatorResponse < Struct.new(
+      :finding_aggregator_arn,
+      :finding_aggregation_region,
+      :region_linking_mode,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateFindingsRequest
     #   data as a hash:

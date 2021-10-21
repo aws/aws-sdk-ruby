@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.116.0 (2021-10-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-panorama` gem.
+
 3.115.0 (2021-10-07)
 ------------------
 

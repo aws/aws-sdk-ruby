@@ -66,6 +66,8 @@ module Aws::DataExchange
     ImportAssetFromSignedUrlJobErrorDetails = Shapes::StructureShape.new(name: 'ImportAssetFromSignedUrlJobErrorDetails')
     ImportAssetFromSignedUrlRequestDetails = Shapes::StructureShape.new(name: 'ImportAssetFromSignedUrlRequestDetails')
     ImportAssetFromSignedUrlResponseDetails = Shapes::StructureShape.new(name: 'ImportAssetFromSignedUrlResponseDetails')
+    ImportAssetsFromRedshiftDataSharesRequestDetails = Shapes::StructureShape.new(name: 'ImportAssetsFromRedshiftDataSharesRequestDetails')
+    ImportAssetsFromRedshiftDataSharesResponseDetails = Shapes::StructureShape.new(name: 'ImportAssetsFromRedshiftDataSharesResponseDetails')
     ImportAssetsFromS3RequestDetails = Shapes::StructureShape.new(name: 'ImportAssetsFromS3RequestDetails')
     ImportAssetsFromS3ResponseDetails = Shapes::StructureShape.new(name: 'ImportAssetsFromS3ResponseDetails')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -89,6 +91,7 @@ module Aws::DataExchange
     ListOfEventActionEntry = Shapes::ListShape.new(name: 'ListOfEventActionEntry')
     ListOfJobEntry = Shapes::ListShape.new(name: 'ListOfJobEntry')
     ListOfJobError = Shapes::ListShape.new(name: 'ListOfJobError')
+    ListOfRedshiftDataShareAssetSourceEntry = Shapes::ListShape.new(name: 'ListOfRedshiftDataShareAssetSourceEntry')
     ListOfRevisionDestinationEntry = Shapes::ListShape.new(name: 'ListOfRevisionDestinationEntry')
     ListOfRevisionEntry = Shapes::ListShape.new(name: 'ListOfRevisionEntry')
     ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
@@ -102,6 +105,8 @@ module Aws::DataExchange
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Origin = Shapes::StringShape.new(name: 'Origin')
     OriginDetails = Shapes::StructureShape.new(name: 'OriginDetails')
+    RedshiftDataShareAsset = Shapes::StructureShape.new(name: 'RedshiftDataShareAsset')
+    RedshiftDataShareAssetSourceEntry = Shapes::StructureShape.new(name: 'RedshiftDataShareAssetSourceEntry')
     RequestDetails = Shapes::StructureShape.new(name: 'RequestDetails')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -148,6 +153,7 @@ module Aws::DataExchange
     AssetDestinationEntry.struct_class = Types::AssetDestinationEntry
 
     AssetDetails.add_member(:s3_snapshot_asset, Shapes::ShapeRef.new(shape: S3SnapshotAsset, location_name: "S3SnapshotAsset"))
+    AssetDetails.add_member(:redshift_data_share_asset, Shapes::ShapeRef.new(shape: RedshiftDataShareAsset, location_name: "RedshiftDataShareAsset"))
     AssetDetails.struct_class = Types::AssetDetails
 
     AssetEntry.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -316,8 +322,8 @@ module Aws::DataExchange
 
     ExportRevisionsToS3ResponseDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
     ExportRevisionsToS3ResponseDetails.add_member(:encryption, Shapes::ShapeRef.new(shape: ExportServerSideEncryption, location_name: "Encryption"))
-    ExportRevisionsToS3ResponseDetails.add_member(:event_action_arn, Shapes::ShapeRef.new(shape: __string, location_name: "EventActionArn"))
     ExportRevisionsToS3ResponseDetails.add_member(:revision_destinations, Shapes::ShapeRef.new(shape: ListOfRevisionDestinationEntry, required: true, location_name: "RevisionDestinations"))
+    ExportRevisionsToS3ResponseDetails.add_member(:event_action_arn, Shapes::ShapeRef.new(shape: __string, location_name: "EventActionArn"))
     ExportRevisionsToS3ResponseDetails.struct_class = Types::ExportRevisionsToS3ResponseDetails
 
     ExportServerSideEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: __string, location_name: "KmsKeyArn"))
@@ -413,6 +419,16 @@ module Aws::DataExchange
     ImportAssetFromSignedUrlResponseDetails.add_member(:signed_url_expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SignedUrlExpiresAt"))
     ImportAssetFromSignedUrlResponseDetails.struct_class = Types::ImportAssetFromSignedUrlResponseDetails
 
+    ImportAssetsFromRedshiftDataSharesRequestDetails.add_member(:asset_sources, Shapes::ShapeRef.new(shape: ListOfRedshiftDataShareAssetSourceEntry, required: true, location_name: "AssetSources"))
+    ImportAssetsFromRedshiftDataSharesRequestDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    ImportAssetsFromRedshiftDataSharesRequestDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
+    ImportAssetsFromRedshiftDataSharesRequestDetails.struct_class = Types::ImportAssetsFromRedshiftDataSharesRequestDetails
+
+    ImportAssetsFromRedshiftDataSharesResponseDetails.add_member(:asset_sources, Shapes::ShapeRef.new(shape: ListOfRedshiftDataShareAssetSourceEntry, required: true, location_name: "AssetSources"))
+    ImportAssetsFromRedshiftDataSharesResponseDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    ImportAssetsFromRedshiftDataSharesResponseDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
+    ImportAssetsFromRedshiftDataSharesResponseDetails.struct_class = Types::ImportAssetsFromRedshiftDataSharesResponseDetails
+
     ImportAssetsFromS3RequestDetails.add_member(:asset_sources, Shapes::ShapeRef.new(shape: ListOfAssetSourceEntry, required: true, location_name: "AssetSources"))
     ImportAssetsFromS3RequestDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
     ImportAssetsFromS3RequestDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
@@ -496,6 +512,8 @@ module Aws::DataExchange
 
     ListOfJobError.member = Shapes::ShapeRef.new(shape: JobError)
 
+    ListOfRedshiftDataShareAssetSourceEntry.member = Shapes::ShapeRef.new(shape: RedshiftDataShareAssetSourceEntry)
+
     ListOfRevisionDestinationEntry.member = Shapes::ShapeRef.new(shape: RevisionDestinationEntry)
 
     ListOfRevisionEntry.member = Shapes::ShapeRef.new(shape: RevisionEntry)
@@ -524,11 +542,18 @@ module Aws::DataExchange
     OriginDetails.add_member(:product_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ProductId"))
     OriginDetails.struct_class = Types::OriginDetails
 
+    RedshiftDataShareAsset.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
+    RedshiftDataShareAsset.struct_class = Types::RedshiftDataShareAsset
+
+    RedshiftDataShareAssetSourceEntry.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "DataShareArn"))
+    RedshiftDataShareAssetSourceEntry.struct_class = Types::RedshiftDataShareAssetSourceEntry
+
     RequestDetails.add_member(:export_asset_to_signed_url, Shapes::ShapeRef.new(shape: ExportAssetToSignedUrlRequestDetails, location_name: "ExportAssetToSignedUrl"))
     RequestDetails.add_member(:export_assets_to_s3, Shapes::ShapeRef.new(shape: ExportAssetsToS3RequestDetails, location_name: "ExportAssetsToS3"))
     RequestDetails.add_member(:export_revisions_to_s3, Shapes::ShapeRef.new(shape: ExportRevisionsToS3RequestDetails, location_name: "ExportRevisionsToS3"))
     RequestDetails.add_member(:import_asset_from_signed_url, Shapes::ShapeRef.new(shape: ImportAssetFromSignedUrlRequestDetails, location_name: "ImportAssetFromSignedUrl"))
     RequestDetails.add_member(:import_assets_from_s3, Shapes::ShapeRef.new(shape: ImportAssetsFromS3RequestDetails, location_name: "ImportAssetsFromS3"))
+    RequestDetails.add_member(:import_assets_from_redshift_data_shares, Shapes::ShapeRef.new(shape: ImportAssetsFromRedshiftDataSharesRequestDetails, location_name: "ImportAssetsFromRedshiftDataShares"))
     RequestDetails.struct_class = Types::RequestDetails
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
@@ -541,6 +566,7 @@ module Aws::DataExchange
     ResponseDetails.add_member(:export_revisions_to_s3, Shapes::ShapeRef.new(shape: ExportRevisionsToS3ResponseDetails, location_name: "ExportRevisionsToS3"))
     ResponseDetails.add_member(:import_asset_from_signed_url, Shapes::ShapeRef.new(shape: ImportAssetFromSignedUrlResponseDetails, location_name: "ImportAssetFromSignedUrl"))
     ResponseDetails.add_member(:import_assets_from_s3, Shapes::ShapeRef.new(shape: ImportAssetsFromS3ResponseDetails, location_name: "ImportAssetsFromS3"))
+    ResponseDetails.add_member(:import_assets_from_redshift_data_shares, Shapes::ShapeRef.new(shape: ImportAssetsFromRedshiftDataSharesResponseDetails, location_name: "ImportAssetsFromRedshiftDataShares"))
     ResponseDetails.struct_class = Types::ResponseDetails
 
     RevisionDestinationEntry.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
@@ -715,11 +741,11 @@ module Aws::DataExchange
         o.http_request_uri = "/v1/jobs"
         o.input = Shapes::ShapeRef.new(shape: CreateJobRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_revision, Seahorse::Model::Operation.new.tap do |o|

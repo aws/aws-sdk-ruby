@@ -327,6 +327,45 @@ module Aws::ChimeSDKMessaging
 
     # @!group API Operations
 
+    # Associates a channel flow with a channel. Once associated, all
+    # messages to that channel go through channel flow processors. To stop
+    # processing, use the `DisassociateChannelFlow` API.
+    #
+    # <note markdown="1"> Only administrators or channel moderators can associate a channel
+    # flow. The `x-amz-chime-bearer` request header is mandatory. Use the
+    # `AppInstanceUserArn` of the user that makes the API call as the value
+    # in the header.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :channel_flow_arn
+    #   The ARN of the channel flow.
+    #
+    # @option params [required, String] :chime_bearer
+    #   The `AppInstanceUserArn` of the user making the API call.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_channel_flow({
+    #     channel_arn: "ChimeArn", # required
+    #     channel_flow_arn: "ChimeArn", # required
+    #     chime_bearer: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/AssociateChannelFlow AWS API Documentation
+    #
+    # @overload associate_channel_flow(params = {})
+    # @param [Hash] params ({})
+    def associate_channel_flow(params = {}, options = {})
+      req = build_request(:associate_channel_flow, params)
+      req.send_request(options)
+    end
+
     # Adds a specified number of users to a channel.
     #
     # @option params [required, String] :channel_arn
@@ -379,6 +418,67 @@ module Aws::ChimeSDKMessaging
     # @param [Hash] params ({})
     def batch_create_channel_membership(params = {}, options = {})
       req = build_request(:batch_create_channel_membership, params)
+      req.send_request(options)
+    end
+
+    # Calls back Chime SDK Messaging with a processing response message.
+    # This should be invoked from the processor Lambda. This is a developer
+    # API.
+    #
+    # You can return one of the following processing responses:
+    #
+    # * Update message content or metadata
+    #
+    # * Deny a message
+    #
+    # * Make no changes to the message
+    #
+    # @option params [required, String] :callback_id
+    #   The identifier passed to the processor by the service when invoked.
+    #   Use the identifier to call back the service.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [Boolean] :delete_resource
+    #   When a processor determines that a message needs to be `DENIED`, pass
+    #   this parameter with a value of true.
+    #
+    # @option params [required, Types::ChannelMessageCallback] :channel_message
+    #   Stores information about the processed message.
+    #
+    # @return [Types::ChannelFlowCallbackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ChannelFlowCallbackResponse#channel_arn #channel_arn} => String
+    #   * {Types::ChannelFlowCallbackResponse#callback_id #callback_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.channel_flow_callback({
+    #     callback_id: "CallbackIdType", # required
+    #     channel_arn: "ChimeArn", # required
+    #     delete_resource: false,
+    #     channel_message: { # required
+    #       message_id: "MessageId", # required
+    #       content: "NonEmptyContent",
+    #       metadata: "Metadata",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.callback_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelFlowCallback AWS API Documentation
+    #
+    # @overload channel_flow_callback(params = {})
+    # @param [Hash] params ({})
+    def channel_flow_callback(params = {}, options = {})
+      req = build_request(:channel_flow_callback, params)
       req.send_request(options)
     end
 
@@ -507,6 +607,89 @@ module Aws::ChimeSDKMessaging
     # @param [Hash] params ({})
     def create_channel_ban(params = {}, options = {})
       req = build_request(:create_channel_ban, params)
+      req.send_request(options)
+    end
+
+    # Creates a channel flow, a container for processors. Processors are AWS
+    # Lambda functions that perform actions on chat messages, such as
+    # stripping out profanity. You can associate channel flows with
+    # channels, and the processors in the channel flow then take action on
+    # all messages sent to that channel. This is a developer API.
+    #
+    # Channel flows process the following items:
+    #
+    # 1.  New and updated messages
+    #
+    # 2.  Persistent and non-persistent messages
+    #
+    # 3.  The Standard message type
+    #
+    # <note markdown="1"> Channel flows don't process Control or System messages. For more
+    # information about the message types provided by Chime SDK Messaging,
+    # refer to [Message types][1] in the *Amazon Chime developer guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/using-the-messaging-sdk.html#msg-types
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the channel flow request.
+    #
+    # @option params [required, Array<Types::Processor>] :processors
+    #   Information about the processor Lambda functions.
+    #
+    # @option params [required, String] :name
+    #   The name of the channel flow.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the creation request.
+    #
+    # @option params [required, String] :client_request_token
+    #   The client token for the request. An Idempotency token.
+    #
+    # @return [Types::CreateChannelFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateChannelFlowResponse#channel_flow_arn #channel_flow_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_channel_flow({
+    #     app_instance_arn: "ChimeArn", # required
+    #     processors: [ # required
+    #       {
+    #         name: "NonEmptyResourceName", # required
+    #         configuration: { # required
+    #           lambda: { # required
+    #             resource_arn: "LambdaFunctionArn", # required
+    #             invocation_type: "ASYNC", # required, accepts ASYNC
+    #           },
+    #         },
+    #         execution_order: 1, # required
+    #         fallback_action: "CONTINUE", # required, accepts CONTINUE, ABORT
+    #       },
+    #     ],
+    #     name: "NonEmptyResourceName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_flow_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/CreateChannelFlow AWS API Documentation
+    #
+    # @overload create_channel_flow(params = {})
+    # @param [Hash] params ({})
+    def create_channel_flow(params = {}, options = {})
+      req = build_request(:create_channel_flow, params)
       req.send_request(options)
     end
 
@@ -705,6 +888,37 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
+    # Deletes a channel flow, an irreversible process. This is a developer
+    # API.
+    #
+    # <note markdown="1"> This API works only when the channel flow is not associated with any
+    # channel. To get a list of all channels that a channel flow is
+    # associated with, use the `ListChannelsAssociatedWithChannelFlow` API.
+    # Use the `DisassociateChannelFlow` API to disassociate a channel flow
+    # from all channels.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :channel_flow_arn
+    #   The ARN of the channel flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_channel_flow({
+    #     channel_flow_arn: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DeleteChannelFlow AWS API Documentation
+    #
+    # @overload delete_channel_flow(params = {})
+    # @param [Hash] params ({})
+    def delete_channel_flow(params = {}, options = {})
+      req = build_request(:delete_channel_flow, params)
+      req.send_request(options)
+    end
+
     # Removes a member from a channel.
     #
     # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
@@ -853,6 +1067,7 @@ module Aws::ChimeSDKMessaging
     #   resp.channel.created_timestamp #=> Time
     #   resp.channel.last_message_timestamp #=> Time
     #   resp.channel.last_updated_timestamp #=> Time
+    #   resp.channel.channel_flow_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DescribeChannel AWS API Documentation
     #
@@ -907,6 +1122,44 @@ module Aws::ChimeSDKMessaging
     # @param [Hash] params ({})
     def describe_channel_ban(params = {}, options = {})
       req = build_request(:describe_channel_ban, params)
+      req.send_request(options)
+    end
+
+    # Returns the full details of a channel flow in an Amazon Chime
+    # `AppInstance`. This is a developer API.
+    #
+    # @option params [required, String] :channel_flow_arn
+    #   The ARN of the channel flow.
+    #
+    # @return [Types::DescribeChannelFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeChannelFlowResponse#channel_flow #channel_flow} => Types::ChannelFlow
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_channel_flow({
+    #     channel_flow_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_flow.channel_flow_arn #=> String
+    #   resp.channel_flow.processors #=> Array
+    #   resp.channel_flow.processors[0].name #=> String
+    #   resp.channel_flow.processors[0].configuration.lambda.resource_arn #=> String
+    #   resp.channel_flow.processors[0].configuration.lambda.invocation_type #=> String, one of "ASYNC"
+    #   resp.channel_flow.processors[0].execution_order #=> Integer
+    #   resp.channel_flow.processors[0].fallback_action #=> String, one of "CONTINUE", "ABORT"
+    #   resp.channel_flow.name #=> String
+    #   resp.channel_flow.created_timestamp #=> Time
+    #   resp.channel_flow.last_updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DescribeChannelFlow AWS API Documentation
+    #
+    # @overload describe_channel_flow(params = {})
+    # @param [Hash] params ({})
+    def describe_channel_flow(params = {}, options = {})
+      req = build_request(:describe_channel_flow, params)
       req.send_request(options)
     end
 
@@ -1104,6 +1357,45 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
+    # Disassociates a channel flow from all its channels. Once
+    # disassociated, all messages to that channel stop going through the
+    # channel flow processor.
+    #
+    # <note markdown="1"> Only administrators or channel moderators can disassociate a channel
+    # flow. The `x-amz-chime-bearer` request header is mandatory. Use the
+    # `AppInstanceUserArn` of the user that makes the API call as the value
+    # in the header.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :channel_flow_arn
+    #   The ARN of the channel flow.
+    #
+    # @option params [required, String] :chime_bearer
+    #   The `AppInstanceUserArn` of the user making the API call.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_channel_flow({
+    #     channel_arn: "ChimeArn", # required
+    #     channel_flow_arn: "ChimeArn", # required
+    #     chime_bearer: "ChimeArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/DisassociateChannelFlow AWS API Documentation
+    #
+    # @overload disassociate_channel_flow(params = {})
+    # @param [Hash] params ({})
+    def disassociate_channel_flow(params = {}, options = {})
+      req = build_request(:disassociate_channel_flow, params)
+      req.send_request(options)
+    end
+
     # Gets the full details of a channel message.
     #
     # <note markdown="1"> The x-amz-chime-bearer request header is mandatory. Use the
@@ -1147,6 +1439,8 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_message.sender.name #=> String
     #   resp.channel_message.redacted #=> Boolean
     #   resp.channel_message.persistence #=> String, one of "PERSISTENT", "NON_PERSISTENT"
+    #   resp.channel_message.status.value #=> String, one of "SENT", "PENDING", "FAILED", "DENIED"
+    #   resp.channel_message.status.detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMessage AWS API Documentation
     #
@@ -1154,6 +1448,76 @@ module Aws::ChimeSDKMessaging
     # @param [Hash] params ({})
     def get_channel_message(params = {}, options = {})
       req = build_request(:get_channel_message, params)
+      req.send_request(options)
+    end
+
+    # Gets message status for a specified `messageId`. Use this API to
+    # determine the intermediate status of messages going through channel
+    # flow processing. The API provides an alternative to retrieving message
+    # status if the event was not received because a client wasn't
+    # connected to a websocket.
+    #
+    # Messages can have any one of these statuses.
+    #
+    # SENT
+    #
+    # : Message processed successfully
+    #
+    # PENDING
+    #
+    # : Ongoing processing
+    #
+    # FAILED
+    #
+    # : Processing failed
+    #
+    # DENIED
+    #
+    # : Messasge denied by the processor
+    #
+    # <note markdown="1"> * This API does not return statuses for denied messages, because we
+    #   don't store them once the processor denies them.
+    #
+    # * Only the message sender can invoke this API.
+    #
+    # * The `x-amz-chime-bearer` request header is mandatory. Use the
+    #   `AppInstanceUserArn` of the user that makes the API call as the
+    #   value in the header
+    #
+    #  </note>
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel
+    #
+    # @option params [required, String] :message_id
+    #   The ID of the message.
+    #
+    # @option params [required, String] :chime_bearer
+    #   The `AppInstanceUserArn` of the user making the API call.
+    #
+    # @return [Types::GetChannelMessageStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChannelMessageStatusResponse#status #status} => Types::ChannelMessageStatusStructure
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_channel_message_status({
+    #     channel_arn: "ChimeArn", # required
+    #     message_id: "MessageId", # required
+    #     chime_bearer: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status.value #=> String, one of "SENT", "PENDING", "FAILED", "DENIED"
+    #   resp.status.detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMessageStatus AWS API Documentation
+    #
+    # @overload get_channel_message_status(params = {})
+    # @param [Hash] params ({})
+    def get_channel_message_status(params = {}, options = {})
+      req = build_request(:get_channel_message_status, params)
       req.send_request(options)
     end
 
@@ -1228,6 +1592,56 @@ module Aws::ChimeSDKMessaging
     # @param [Hash] params ({})
     def list_channel_bans(params = {}, options = {})
       req = build_request(:list_channel_bans, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated lists of all the channel flows created under a
+    # single Chime. This is a developer API.
+    #
+    # @option params [required, String] :app_instance_arn
+    #   The ARN of the app instance.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of channel flows that you want to return.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API calls until all requested channel
+    #   flows are returned.
+    #
+    # @return [Types::ListChannelFlowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelFlowsResponse#channel_flows #channel_flows} => Array&lt;Types::ChannelFlowSummary&gt;
+    #   * {Types::ListChannelFlowsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channel_flows({
+    #     app_instance_arn: "ChimeArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_flows #=> Array
+    #   resp.channel_flows[0].channel_flow_arn #=> String
+    #   resp.channel_flows[0].name #=> String
+    #   resp.channel_flows[0].processors #=> Array
+    #   resp.channel_flows[0].processors[0].name #=> String
+    #   resp.channel_flows[0].processors[0].configuration.lambda.resource_arn #=> String
+    #   resp.channel_flows[0].processors[0].configuration.lambda.invocation_type #=> String, one of "ASYNC"
+    #   resp.channel_flows[0].processors[0].execution_order #=> Integer
+    #   resp.channel_flows[0].processors[0].fallback_action #=> String, one of "CONTINUE", "ABORT"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelFlows AWS API Documentation
+    #
+    # @overload list_channel_flows(params = {})
+    # @param [Hash] params ({})
+    def list_channel_flows(params = {}, options = {})
+      req = build_request(:list_channel_flows, params)
       req.send_request(options)
     end
 
@@ -1427,6 +1841,8 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_messages[0].sender.arn #=> String
     #   resp.channel_messages[0].sender.name #=> String
     #   resp.channel_messages[0].redacted #=> Boolean
+    #   resp.channel_messages[0].status.value #=> String, one of "SENT", "PENDING", "FAILED", "DENIED"
+    #   resp.channel_messages[0].status.detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelMessages AWS API Documentation
     #
@@ -1564,6 +1980,54 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
+    # Lists all channels associated with a specified channel flow. You can
+    # associate a channel flow with multiple channels, but you can only
+    # associate a channel with one channel flow. This is a developer API.
+    #
+    # @option params [required, String] :channel_flow_arn
+    #   The ARN of the channel flow.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of channels that you want to return.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API calls until all requested channels
+    #   are returned.
+    #
+    # @return [Types::ListChannelsAssociatedWithChannelFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChannelsAssociatedWithChannelFlowResponse#channels #channels} => Array&lt;Types::ChannelAssociatedWithFlowSummary&gt;
+    #   * {Types::ListChannelsAssociatedWithChannelFlowResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_channels_associated_with_channel_flow({
+    #     channel_flow_arn: "ChimeArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channels #=> Array
+    #   resp.channels[0].name #=> String
+    #   resp.channels[0].channel_arn #=> String
+    #   resp.channels[0].mode #=> String, one of "UNRESTRICTED", "RESTRICTED"
+    #   resp.channels[0].privacy #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.channels[0].metadata #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelsAssociatedWithChannelFlow AWS API Documentation
+    #
+    # @overload list_channels_associated_with_channel_flow(params = {})
+    # @param [Hash] params ({})
+    def list_channels_associated_with_channel_flow(params = {}, options = {})
+      req = build_request(:list_channels_associated_with_channel_flow, params)
+      req.send_request(options)
+    end
+
     # A list of the channels moderated by an `AppInstanceUser`.
     #
     # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
@@ -1618,6 +2082,36 @@ module Aws::ChimeSDKMessaging
     # @param [Hash] params ({})
     def list_channels_moderated_by_app_instance_user(params = {}, options = {})
       req = build_request(:list_channels_moderated_by_app_instance_user, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags applied to an Amazon Chime SDK messaging resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1709,6 +2203,7 @@ module Aws::ChimeSDKMessaging
     #
     #   * {Types::SendChannelMessageResponse#channel_arn #channel_arn} => String
     #   * {Types::SendChannelMessageResponse#message_id #message_id} => String
+    #   * {Types::SendChannelMessageResponse#status #status} => Types::ChannelMessageStatusStructure
     #
     # @example Request syntax with placeholder values
     #
@@ -1726,6 +2221,8 @@ module Aws::ChimeSDKMessaging
     #
     #   resp.channel_arn #=> String
     #   resp.message_id #=> String
+    #   resp.status.value #=> String, one of "SENT", "PENDING", "FAILED", "DENIED"
+    #   resp.status.detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SendChannelMessage AWS API Documentation
     #
@@ -1733,6 +2230,65 @@ module Aws::ChimeSDKMessaging
     # @param [Hash] params ({})
     def send_channel_message(params = {}, options = {})
       req = build_request(:send_channel_message, params)
+      req.send_request(options)
+    end
+
+    # Applies the specified tags to the specified Amazon Chime SDK messaging
+    # resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The resource ARN.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tag key-value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ChimeArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from the specified Amazon Chime SDK
+    # messaging resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The resource ARN.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ChimeArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1788,6 +2344,54 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
+    # Updates channel flow attributes. This is a developer API.
+    #
+    # @option params [required, String] :channel_flow_arn
+    #   The ARN of the channel flow.
+    #
+    # @option params [required, Array<Types::Processor>] :processors
+    #   Information about the processor Lambda functions
+    #
+    # @option params [required, String] :name
+    #   The name of the channel flow.
+    #
+    # @return [Types::UpdateChannelFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateChannelFlowResponse#channel_flow_arn #channel_flow_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_channel_flow({
+    #     channel_flow_arn: "ChimeArn", # required
+    #     processors: [ # required
+    #       {
+    #         name: "NonEmptyResourceName", # required
+    #         configuration: { # required
+    #           lambda: { # required
+    #             resource_arn: "LambdaFunctionArn", # required
+    #             invocation_type: "ASYNC", # required, accepts ASYNC
+    #           },
+    #         },
+    #         execution_order: 1, # required
+    #         fallback_action: "CONTINUE", # required, accepts CONTINUE, ABORT
+    #       },
+    #     ],
+    #     name: "NonEmptyResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_flow_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelFlow AWS API Documentation
+    #
+    # @overload update_channel_flow(params = {})
+    # @param [Hash] params ({})
+    def update_channel_flow(params = {}, options = {})
+      req = build_request(:update_channel_flow, params)
+      req.send_request(options)
+    end
+
     # Updates the content of a message.
     #
     # <note markdown="1"> The `x-amz-chime-bearer` request header is mandatory. Use the
@@ -1815,6 +2419,7 @@ module Aws::ChimeSDKMessaging
     #
     #   * {Types::UpdateChannelMessageResponse#channel_arn #channel_arn} => String
     #   * {Types::UpdateChannelMessageResponse#message_id #message_id} => String
+    #   * {Types::UpdateChannelMessageResponse#status #status} => Types::ChannelMessageStatusStructure
     #
     # @example Request syntax with placeholder values
     #
@@ -1830,6 +2435,8 @@ module Aws::ChimeSDKMessaging
     #
     #   resp.channel_arn #=> String
     #   resp.message_id #=> String
+    #   resp.status.value #=> String, one of "SENT", "PENDING", "FAILED", "DENIED"
+    #   resp.status.detail #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/UpdateChannelMessage AWS API Documentation
     #
@@ -1891,7 +2498,7 @@ module Aws::ChimeSDKMessaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

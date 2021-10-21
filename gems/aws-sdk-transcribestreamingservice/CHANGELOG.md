@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-10-20)
+------------------
+
+* Feature - This release adds custom language support for streaming transcription.
+
 1.34.0 (2021-10-18)
 ------------------
 

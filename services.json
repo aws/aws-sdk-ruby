@@ -658,6 +658,9 @@
   "PI": {
     "models": "pi/2018-02-27"
   },
+  "Panorama": {
+    "models": "panorama/2019-07-24"
+  },
   "Personalize": {
     "models": "personalize/2018-05-22"
   },

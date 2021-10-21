@@ -5,6 +5,11 @@ Unreleased Changes
 
 * Feature - Support modeled fips endpoints. It can be configured with shared configuration (`use_fips_endpoint`), an ENV variable (`AWS_USE_FIPS_ENDPOINT`), and a constructor option (`:use_fips_endpoint`). Requests made to services without a fips endpoint will fail.
 
+3.121.3 (2021-10-20)
+------------------
+
+* Issue - Use endpointPrefix when looking up the `signing_region` from the `EndpointProvider`.
+
 3.121.2 (2021-10-18)
 ------------------
 

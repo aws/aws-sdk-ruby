@@ -3454,6 +3454,80 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Used to enable finding aggregation. Must be called from the
+    # aggregation Region.
+    #
+    # For more details about cross-Region replication, see [Configuring
+    # finding
+    # aggregation](securityhub/latest/userguide/finding-aggregation.html) in
+    # the *Security Hub User Guide*.
+    #
+    # @option params [required, String] :region_linking_mode
+    #   Indicates whether to aggregate findings from all of the available
+    #   Regions in the current partition. Also determines whether to
+    #   automatically aggregate findings from new Regions as Security Hub
+    #   supports them and you opt into them.
+    #
+    #   The selected option also determines how to use the Regions provided in
+    #   the Regions list.
+    #
+    #   The options are as follows:
+    #
+    #   * `ALL_REGIONS` - Indicates to aggregate findings from all of the
+    #     Regions where Security Hub is enabled. When you choose this option,
+    #     Security Hub also automatically aggregates findings from new Regions
+    #     as Security Hub supports them and you opt into them.
+    #
+    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Indicates to aggregate findings
+    #     from all of the Regions where Security Hub is enabled, except for
+    #     the Regions listed in the `Regions` parameter. When you choose this
+    #     option, Security Hub also automatically aggregates findings from new
+    #     Regions as Security Hub supports them and you opt into them.
+    #
+    #   * `SPECIFIED_REGIONS` - Indicates to aggregate findings only from the
+    #     Regions listed in the `Regions` parameter. Security Hub does not
+    #     automatically aggregate findings from new Regions.
+    #
+    # @option params [Array<String>] :regions
+    #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is
+    #   a comma-separated list of Regions that do not aggregate findings to
+    #   the aggregation Region.
+    #
+    #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
+    #   comma-separated list of Regions that do aggregate findings to the
+    #   aggregation Region.
+    #
+    # @return [Types::CreateFindingAggregatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFindingAggregatorResponse#finding_aggregator_arn #finding_aggregator_arn} => String
+    #   * {Types::CreateFindingAggregatorResponse#finding_aggregation_region #finding_aggregation_region} => String
+    #   * {Types::CreateFindingAggregatorResponse#region_linking_mode #region_linking_mode} => String
+    #   * {Types::CreateFindingAggregatorResponse#regions #regions} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_finding_aggregator({
+    #     region_linking_mode: "NonEmptyString", # required
+    #     regions: ["NonEmptyString"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.finding_aggregator_arn #=> String
+    #   resp.finding_aggregation_region #=> String
+    #   resp.region_linking_mode #=> String
+    #   resp.regions #=> Array
+    #   resp.regions[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateFindingAggregator AWS API Documentation
+    #
+    # @overload create_finding_aggregator(params = {})
+    # @param [Hash] params ({})
+    def create_finding_aggregator(params = {}, options = {})
+      req = build_request(:create_finding_aggregator, params)
+      req.send_request(options)
+    end
+
     # Creates a custom insight in Security Hub. An insight is a
     # consolidation of findings that relate to a security issue that
     # requires attention or remediation.
@@ -4266,6 +4340,35 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Deletes a finding aggregator. When you delete the finding aggregator,
+    # you stop finding aggregation.
+    #
+    # When you stop finding aggregation, findings that were already
+    # aggregated to the aggregation Region are still visible from the
+    # aggregation Region. New findings and finding updates are not
+    # aggregated.
+    #
+    # @option params [required, String] :finding_aggregator_arn
+    #   The ARN of the finding aggregator to delete. To obtain the ARN, use
+    #   `ListFindingAggregators`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_finding_aggregator({
+    #     finding_aggregator_arn: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteFindingAggregator AWS API Documentation
+    #
+    # @overload delete_finding_aggregator(params = {})
+    # @param [Hash] params ({})
+    def delete_finding_aggregator(params = {}, options = {})
+      req = build_request(:delete_finding_aggregator, params)
+      req.send_request(options)
+    end
+
     # Deletes the insight specified by the `InsightArn`.
     #
     # @option params [required, String] :insight_arn
@@ -4987,7 +5090,47 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Returns the current finding aggregation configuration.
+    #
+    # @option params [required, String] :finding_aggregator_arn
+    #   The ARN of the finding aggregator to return details for. To obtain the
+    #   ARN, use `ListFindingAggregators`.
+    #
+    # @return [Types::GetFindingAggregatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFindingAggregatorResponse#finding_aggregator_arn #finding_aggregator_arn} => String
+    #   * {Types::GetFindingAggregatorResponse#finding_aggregation_region #finding_aggregation_region} => String
+    #   * {Types::GetFindingAggregatorResponse#region_linking_mode #region_linking_mode} => String
+    #   * {Types::GetFindingAggregatorResponse#regions #regions} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_finding_aggregator({
+    #     finding_aggregator_arn: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.finding_aggregator_arn #=> String
+    #   resp.finding_aggregation_region #=> String
+    #   resp.region_linking_mode #=> String
+    #   resp.regions #=> Array
+    #   resp.regions[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingAggregator AWS API Documentation
+    #
+    # @overload get_finding_aggregator(params = {})
+    # @param [Hash] params ({})
+    def get_finding_aggregator(params = {}, options = {})
+      req = build_request(:get_finding_aggregator, params)
+      req.send_request(options)
+    end
+
     # Returns a list of findings that match the specified criteria.
+    #
+    # If finding aggregation is enabled, then when you call `GetFindings`
+    # from the aggregation Region, the results include all of the matching
+    # findings from both the aggregation Region and the linked Regions.
     #
     # @option params [Types::AwsSecurityFindingFilters] :filters
     #   The finding attributes used to define a condition to filter the
@@ -8016,6 +8159,47 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # If finding aggregation is enabled, then `ListFindingAggregators`
+    # returns the ARN of the finding aggregator. You can run this operation
+    # from any Region.
+    #
+    # @option params [String] :next_token
+    #   The token returned with the previous set of results. Identifies the
+    #   next set of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. This operation currently only
+    #   returns a single result.
+    #
+    # @return [Types::ListFindingAggregatorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFindingAggregatorsResponse#finding_aggregators #finding_aggregators} => Array&lt;Types::FindingAggregator&gt;
+    #   * {Types::ListFindingAggregatorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_finding_aggregators({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.finding_aggregators #=> Array
+    #   resp.finding_aggregators[0].finding_aggregator_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListFindingAggregators AWS API Documentation
+    #
+    # @overload list_finding_aggregators(params = {})
+    # @param [Hash] params ({})
+    def list_finding_aggregators(params = {}, options = {})
+      req = build_request(:list_finding_aggregators, params)
+      req.send_request(options)
+    end
+
     # Lists all Security Hub membership invitations that were sent to the
     # current Amazon Web Services account.
     #
@@ -8289,6 +8473,84 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def update_action_target(params = {}, options = {})
       req = build_request(:update_action_target, params)
+      req.send_request(options)
+    end
+
+    # Updates the finding aggregation configuration. Used to update the
+    # Region linking mode and the list of included or excluded Regions. You
+    # cannot use `UpdateFindingAggregator` to change the aggregation Region.
+    #
+    # You must run `UpdateFindingAggregator` from the current aggregation
+    # Region.
+    #
+    # @option params [required, String] :finding_aggregator_arn
+    #   The ARN of the finding aggregator. To obtain the ARN, use
+    #   `ListFindingAggregators`.
+    #
+    # @option params [required, String] :region_linking_mode
+    #   Indicates whether to aggregate findings from all of the available
+    #   Regions in the current partition. Also determines whether to
+    #   automatically aggregate findings from new Regions as Security Hub
+    #   supports them and you opt into them.
+    #
+    #   The selected option also determines how to use the Regions provided in
+    #   the Regions list.
+    #
+    #   The options are as follows:
+    #
+    #   * `ALL_REGIONS` - Indicates to aggregate findings from all of the
+    #     Regions where Security Hub is enabled. When you choose this option,
+    #     Security Hub also automatically aggregates findings from new Regions
+    #     as Security Hub supports them and you opt into them.
+    #
+    #   * `ALL_REGIONS_EXCEPT_SPECIFIED` - Indicates to aggregate findings
+    #     from all of the Regions where Security Hub is enabled, except for
+    #     the Regions listed in the `Regions` parameter. When you choose this
+    #     option, Security Hub also automatically aggregates findings from new
+    #     Regions as Security Hub supports them and you opt into them.
+    #
+    #   * `SPECIFIED_REGIONS` - Indicates to aggregate findings only from the
+    #     Regions listed in the `Regions` parameter. Security Hub does not
+    #     automatically aggregate findings from new Regions.
+    #
+    # @option params [Array<String>] :regions
+    #   If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is
+    #   a comma-separated list of Regions that do not aggregate findings to
+    #   the aggregation Region.
+    #
+    #   If `RegionLinkingMode` is `SPECIFIED_REGIONS`, then this is a
+    #   comma-separated list of Regions that do aggregate findings to the
+    #   aggregation Region.
+    #
+    # @return [Types::UpdateFindingAggregatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFindingAggregatorResponse#finding_aggregator_arn #finding_aggregator_arn} => String
+    #   * {Types::UpdateFindingAggregatorResponse#finding_aggregation_region #finding_aggregation_region} => String
+    #   * {Types::UpdateFindingAggregatorResponse#region_linking_mode #region_linking_mode} => String
+    #   * {Types::UpdateFindingAggregatorResponse#regions #regions} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_finding_aggregator({
+    #     finding_aggregator_arn: "NonEmptyString", # required
+    #     region_linking_mode: "NonEmptyString", # required
+    #     regions: ["NonEmptyString"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.finding_aggregator_arn #=> String
+    #   resp.finding_aggregation_region #=> String
+    #   resp.region_linking_mode #=> String
+    #   resp.regions #=> Array
+    #   resp.regions[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateFindingAggregator AWS API Documentation
+    #
+    # @overload update_finding_aggregator(params = {})
+    # @param [Hash] params ({})
+    def update_finding_aggregator(params = {}, options = {})
+      req = build_request(:update_finding_aggregator, params)
       req.send_request(options)
     end
 
@@ -9700,7 +9962,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

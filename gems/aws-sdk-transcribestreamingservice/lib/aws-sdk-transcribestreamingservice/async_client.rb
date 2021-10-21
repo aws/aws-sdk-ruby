@@ -609,13 +609,11 @@ module Aws::TranscribeStreamingService
     #   specify entity types, you must have either `ContentIdentificationType`
     #   or `ContentRedactionType` enabled.
     #
-    #   `PIIEntityTypes` must be comma-separated; the available values are:
-    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_NUMBER`,
-    #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`, `ADDRESS`,
-    #   `NAME`, `PHONE`, `SSN`, and `ALL`.
-    #
     #   `PiiEntityTypes` is an optional parameter with a default value of
     #   `ALL`.
+    #
+    # @option params [String] :language_model_name
+    #   The name of the language model you want to use.
     #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -636,6 +634,7 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#content_identification_type #content_identification_type} => String
     #   * {Types::StartStreamTranscriptionResponse#content_redaction_type #content_redaction_type} => String
     #   * {Types::StartStreamTranscriptionResponse#pii_entity_types #pii_entity_types} => String
+    #   * {Types::StartStreamTranscriptionResponse#language_model_name #language_model_name} => String
     #
     # @example Bi-directional EventStream Operation Example
     #
@@ -748,6 +747,7 @@ module Aws::TranscribeStreamingService
     #     content_identification_type: "PII", # accepts PII
     #     content_redaction_type: "PII", # accepts PII
     #     pii_entity_types: "PiiEntityTypes",
+    #     language_model_name: "ModelName",
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -817,6 +817,7 @@ module Aws::TranscribeStreamingService
     #   resp.content_identification_type #=> String, one of "PII"
     #   resp.content_redaction_type #=> String, one of "PII"
     #   resp.pii_entity_types #=> String
+    #   resp.language_model_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
     #
@@ -861,7 +862,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

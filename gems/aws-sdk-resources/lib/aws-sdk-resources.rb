@@ -208,6 +208,7 @@ module Aws
   autoload :Organizations, 'aws-sdk-organizations'
   autoload :Outposts, 'aws-sdk-outposts'
   autoload :PI, 'aws-sdk-pi'
+  autoload :Panorama, 'aws-sdk-panorama'
   autoload :Personalize, 'aws-sdk-personalize'
   autoload :PersonalizeEvents, 'aws-sdk-personalizeevents'
   autoload :PersonalizeRuntime, 'aws-sdk-personalizeruntime'

@@ -472,6 +472,8 @@ module Aws::SecurityHub
     Country = Shapes::StructureShape.new(name: 'Country')
     CreateActionTargetRequest = Shapes::StructureShape.new(name: 'CreateActionTargetRequest')
     CreateActionTargetResponse = Shapes::StructureShape.new(name: 'CreateActionTargetResponse')
+    CreateFindingAggregatorRequest = Shapes::StructureShape.new(name: 'CreateFindingAggregatorRequest')
+    CreateFindingAggregatorResponse = Shapes::StructureShape.new(name: 'CreateFindingAggregatorResponse')
     CreateInsightRequest = Shapes::StructureShape.new(name: 'CreateInsightRequest')
     CreateInsightResponse = Shapes::StructureShape.new(name: 'CreateInsightResponse')
     CreateMembersRequest = Shapes::StructureShape.new(name: 'CreateMembersRequest')
@@ -491,6 +493,8 @@ module Aws::SecurityHub
     DeclineInvitationsResponse = Shapes::StructureShape.new(name: 'DeclineInvitationsResponse')
     DeleteActionTargetRequest = Shapes::StructureShape.new(name: 'DeleteActionTargetRequest')
     DeleteActionTargetResponse = Shapes::StructureShape.new(name: 'DeleteActionTargetResponse')
+    DeleteFindingAggregatorRequest = Shapes::StructureShape.new(name: 'DeleteFindingAggregatorRequest')
+    DeleteFindingAggregatorResponse = Shapes::StructureShape.new(name: 'DeleteFindingAggregatorResponse')
     DeleteInsightRequest = Shapes::StructureShape.new(name: 'DeleteInsightRequest')
     DeleteInsightResponse = Shapes::StructureShape.new(name: 'DeleteInsightResponse')
     DeleteInvitationsRequest = Shapes::StructureShape.new(name: 'DeleteInvitationsRequest')
@@ -530,6 +534,8 @@ module Aws::SecurityHub
     EnableSecurityHubRequest = Shapes::StructureShape.new(name: 'EnableSecurityHubRequest')
     EnableSecurityHubResponse = Shapes::StructureShape.new(name: 'EnableSecurityHubResponse')
     FieldMap = Shapes::MapShape.new(name: 'FieldMap')
+    FindingAggregator = Shapes::StructureShape.new(name: 'FindingAggregator')
+    FindingAggregatorList = Shapes::ListShape.new(name: 'FindingAggregatorList')
     FindingProviderFields = Shapes::StructureShape.new(name: 'FindingProviderFields')
     FindingProviderSeverity = Shapes::StructureShape.new(name: 'FindingProviderSeverity')
     GeoLocation = Shapes::StructureShape.new(name: 'GeoLocation')
@@ -537,6 +543,8 @@ module Aws::SecurityHub
     GetAdministratorAccountResponse = Shapes::StructureShape.new(name: 'GetAdministratorAccountResponse')
     GetEnabledStandardsRequest = Shapes::StructureShape.new(name: 'GetEnabledStandardsRequest')
     GetEnabledStandardsResponse = Shapes::StructureShape.new(name: 'GetEnabledStandardsResponse')
+    GetFindingAggregatorRequest = Shapes::StructureShape.new(name: 'GetFindingAggregatorRequest')
+    GetFindingAggregatorResponse = Shapes::StructureShape.new(name: 'GetFindingAggregatorResponse')
     GetFindingsRequest = Shapes::StructureShape.new(name: 'GetFindingsRequest')
     GetFindingsResponse = Shapes::StructureShape.new(name: 'GetFindingsResponse')
     GetInsightResultsRequest = Shapes::StructureShape.new(name: 'GetInsightResultsRequest')
@@ -578,6 +586,8 @@ module Aws::SecurityHub
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListEnabledProductsForImportRequest = Shapes::StructureShape.new(name: 'ListEnabledProductsForImportRequest')
     ListEnabledProductsForImportResponse = Shapes::StructureShape.new(name: 'ListEnabledProductsForImportResponse')
+    ListFindingAggregatorsRequest = Shapes::StructureShape.new(name: 'ListFindingAggregatorsRequest')
+    ListFindingAggregatorsResponse = Shapes::StructureShape.new(name: 'ListFindingAggregatorsResponse')
     ListInvitationsRequest = Shapes::StructureShape.new(name: 'ListInvitationsRequest')
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
@@ -694,6 +704,8 @@ module Aws::SecurityHub
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateActionTargetRequest = Shapes::StructureShape.new(name: 'UpdateActionTargetRequest')
     UpdateActionTargetResponse = Shapes::StructureShape.new(name: 'UpdateActionTargetResponse')
+    UpdateFindingAggregatorRequest = Shapes::StructureShape.new(name: 'UpdateFindingAggregatorRequest')
+    UpdateFindingAggregatorResponse = Shapes::StructureShape.new(name: 'UpdateFindingAggregatorResponse')
     UpdateFindingsRequest = Shapes::StructureShape.new(name: 'UpdateFindingsRequest')
     UpdateFindingsResponse = Shapes::StructureShape.new(name: 'UpdateFindingsResponse')
     UpdateInsightRequest = Shapes::StructureShape.new(name: 'UpdateInsightRequest')
@@ -3285,6 +3297,16 @@ module Aws::SecurityHub
     CreateActionTargetResponse.add_member(:action_target_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ActionTargetArn"))
     CreateActionTargetResponse.struct_class = Types::CreateActionTargetResponse
 
+    CreateFindingAggregatorRequest.add_member(:region_linking_mode, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "RegionLinkingMode"))
+    CreateFindingAggregatorRequest.add_member(:regions, Shapes::ShapeRef.new(shape: StringList, location_name: "Regions"))
+    CreateFindingAggregatorRequest.struct_class = Types::CreateFindingAggregatorRequest
+
+    CreateFindingAggregatorResponse.add_member(:finding_aggregator_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FindingAggregatorArn"))
+    CreateFindingAggregatorResponse.add_member(:finding_aggregation_region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FindingAggregationRegion"))
+    CreateFindingAggregatorResponse.add_member(:region_linking_mode, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RegionLinkingMode"))
+    CreateFindingAggregatorResponse.add_member(:regions, Shapes::ShapeRef.new(shape: StringList, location_name: "Regions"))
+    CreateFindingAggregatorResponse.struct_class = Types::CreateFindingAggregatorResponse
+
     CreateInsightRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Name"))
     CreateInsightRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AwsSecurityFindingFilters, required: true, location_name: "Filters"))
     CreateInsightRequest.add_member(:group_by_attribute, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "GroupByAttribute"))
@@ -3346,6 +3368,11 @@ module Aws::SecurityHub
 
     DeleteActionTargetResponse.add_member(:action_target_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ActionTargetArn"))
     DeleteActionTargetResponse.struct_class = Types::DeleteActionTargetResponse
+
+    DeleteFindingAggregatorRequest.add_member(:finding_aggregator_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "FindingAggregatorArn"))
+    DeleteFindingAggregatorRequest.struct_class = Types::DeleteFindingAggregatorRequest
+
+    DeleteFindingAggregatorResponse.struct_class = Types::DeleteFindingAggregatorResponse
 
     DeleteInsightRequest.add_member(:insight_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "InsightArn"))
     DeleteInsightRequest.struct_class = Types::DeleteInsightRequest
@@ -3466,6 +3493,11 @@ module Aws::SecurityHub
     FieldMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     FieldMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    FindingAggregator.add_member(:finding_aggregator_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FindingAggregatorArn"))
+    FindingAggregator.struct_class = Types::FindingAggregator
+
+    FindingAggregatorList.member = Shapes::ShapeRef.new(shape: FindingAggregator)
+
     FindingProviderFields.add_member(:confidence, Shapes::ShapeRef.new(shape: RatioScale, location_name: "Confidence"))
     FindingProviderFields.add_member(:criticality, Shapes::ShapeRef.new(shape: RatioScale, location_name: "Criticality"))
     FindingProviderFields.add_member(:related_findings, Shapes::ShapeRef.new(shape: RelatedFindingList, location_name: "RelatedFindings"))
@@ -3494,6 +3526,15 @@ module Aws::SecurityHub
     GetEnabledStandardsResponse.add_member(:standards_subscriptions, Shapes::ShapeRef.new(shape: StandardsSubscriptions, location_name: "StandardsSubscriptions"))
     GetEnabledStandardsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetEnabledStandardsResponse.struct_class = Types::GetEnabledStandardsResponse
+
+    GetFindingAggregatorRequest.add_member(:finding_aggregator_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "FindingAggregatorArn"))
+    GetFindingAggregatorRequest.struct_class = Types::GetFindingAggregatorRequest
+
+    GetFindingAggregatorResponse.add_member(:finding_aggregator_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FindingAggregatorArn"))
+    GetFindingAggregatorResponse.add_member(:finding_aggregation_region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FindingAggregationRegion"))
+    GetFindingAggregatorResponse.add_member(:region_linking_mode, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RegionLinkingMode"))
+    GetFindingAggregatorResponse.add_member(:regions, Shapes::ShapeRef.new(shape: StringList, location_name: "Regions"))
+    GetFindingAggregatorResponse.struct_class = Types::GetFindingAggregatorResponse
 
     GetFindingsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AwsSecurityFindingFilters, location_name: "Filters"))
     GetFindingsRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
@@ -3631,6 +3672,14 @@ module Aws::SecurityHub
     ListEnabledProductsForImportResponse.add_member(:product_subscriptions, Shapes::ShapeRef.new(shape: ProductSubscriptionArnList, location_name: "ProductSubscriptions"))
     ListEnabledProductsForImportResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEnabledProductsForImportResponse.struct_class = Types::ListEnabledProductsForImportResponse
+
+    ListFindingAggregatorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListFindingAggregatorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListFindingAggregatorsRequest.struct_class = Types::ListFindingAggregatorsRequest
+
+    ListFindingAggregatorsResponse.add_member(:finding_aggregators, Shapes::ShapeRef.new(shape: FindingAggregatorList, location_name: "FindingAggregators"))
+    ListFindingAggregatorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFindingAggregatorsResponse.struct_class = Types::ListFindingAggregatorsResponse
 
     ListInvitationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CrossAccountMaxResults, location: "querystring", location_name: "MaxResults"))
     ListInvitationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
@@ -4071,6 +4120,17 @@ module Aws::SecurityHub
 
     UpdateActionTargetResponse.struct_class = Types::UpdateActionTargetResponse
 
+    UpdateFindingAggregatorRequest.add_member(:finding_aggregator_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "FindingAggregatorArn"))
+    UpdateFindingAggregatorRequest.add_member(:region_linking_mode, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "RegionLinkingMode"))
+    UpdateFindingAggregatorRequest.add_member(:regions, Shapes::ShapeRef.new(shape: StringList, location_name: "Regions"))
+    UpdateFindingAggregatorRequest.struct_class = Types::UpdateFindingAggregatorRequest
+
+    UpdateFindingAggregatorResponse.add_member(:finding_aggregator_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FindingAggregatorArn"))
+    UpdateFindingAggregatorResponse.add_member(:finding_aggregation_region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FindingAggregationRegion"))
+    UpdateFindingAggregatorResponse.add_member(:region_linking_mode, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RegionLinkingMode"))
+    UpdateFindingAggregatorResponse.add_member(:regions, Shapes::ShapeRef.new(shape: StringList, location_name: "Regions"))
+    UpdateFindingAggregatorResponse.struct_class = Types::UpdateFindingAggregatorResponse
+
     UpdateFindingsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: AwsSecurityFindingFilters, required: true, location_name: "Filters"))
     UpdateFindingsRequest.add_member(:note, Shapes::ShapeRef.new(shape: NoteUpdate, location_name: "Note"))
     UpdateFindingsRequest.add_member(:record_state, Shapes::ShapeRef.new(shape: RecordState, location_name: "RecordState"))
@@ -4243,6 +4303,19 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
+      api.add_operation(:create_finding_aggregator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFindingAggregator"
+        o.http_method = "POST"
+        o.http_request_uri = "/findingAggregator/create"
+        o.input = Shapes::ShapeRef.new(shape: CreateFindingAggregatorRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFindingAggregatorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:create_insight, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateInsight"
         o.http_method = "POST"
@@ -4290,6 +4363,20 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_finding_aggregator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFindingAggregator"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/findingAggregator/delete/{FindingAggregatorArn+}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFindingAggregatorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFindingAggregatorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -4574,6 +4661,20 @@ module Aws::SecurityHub
         )
       end)
 
+      api.add_operation(:get_finding_aggregator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFindingAggregator"
+        o.http_method = "GET"
+        o.http_request_uri = "/findingAggregator/get/{FindingAggregatorArn+}"
+        o.input = Shapes::ShapeRef.new(shape: GetFindingAggregatorRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFindingAggregatorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_findings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetFindings"
         o.http_method = "POST"
@@ -4693,6 +4794,25 @@ module Aws::SecurityHub
         )
       end)
 
+      api.add_operation(:list_finding_aggregators, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFindingAggregators"
+        o.http_method = "GET"
+        o.http_request_uri = "/findingAggregator/list"
+        o.input = Shapes::ShapeRef.new(shape: ListFindingAggregatorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFindingAggregatorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_invitations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListInvitations"
         o.http_method = "GET"
@@ -4790,6 +4910,20 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_finding_aggregator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFindingAggregator"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/findingAggregator/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFindingAggregatorRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFindingAggregatorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

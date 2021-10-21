@@ -47,6 +47,7 @@ module Aws::TranscribeStreamingService
     MedicalTranscript = Shapes::StructureShape.new(name: 'MedicalTranscript')
     MedicalTranscriptEvent = Shapes::StructureShape.new(name: 'MedicalTranscriptEvent')
     MedicalTranscriptResultStream = Shapes::StructureShape.new(name: 'MedicalTranscriptResultStream')
+    ModelName = Shapes::StringShape.new(name: 'ModelName')
     NumberOfChannels = Shapes::IntegerShape.new(name: 'NumberOfChannels')
     PartialResultsStability = Shapes::StringShape.new(name: 'PartialResultsStability')
     PiiEntityTypes = Shapes::StringShape.new(name: 'PiiEntityTypes')
@@ -229,6 +230,7 @@ module Aws::TranscribeStreamingService
     StartStreamTranscriptionRequest.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: ContentIdentificationType, location: "header", location_name: "x-amzn-transcribe-content-identification-type"))
     StartStreamTranscriptionRequest.add_member(:content_redaction_type, Shapes::ShapeRef.new(shape: ContentRedactionType, location: "header", location_name: "x-amzn-transcribe-content-redaction-type"))
     StartStreamTranscriptionRequest.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: PiiEntityTypes, location: "header", location_name: "x-amzn-transcribe-pii-entity-types"))
+    StartStreamTranscriptionRequest.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location: "header", location_name: "x-amzn-transcribe-language-model-name"))
     StartStreamTranscriptionRequest.struct_class = Types::StartStreamTranscriptionRequest
     StartStreamTranscriptionRequest[:payload] = :audio_stream
     StartStreamTranscriptionRequest[:payload_member] = StartStreamTranscriptionRequest.member(:audio_stream)
@@ -250,6 +252,7 @@ module Aws::TranscribeStreamingService
     StartStreamTranscriptionResponse.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: ContentIdentificationType, location: "header", location_name: "x-amzn-transcribe-content-identification-type"))
     StartStreamTranscriptionResponse.add_member(:content_redaction_type, Shapes::ShapeRef.new(shape: ContentRedactionType, location: "header", location_name: "x-amzn-transcribe-content-redaction-type"))
     StartStreamTranscriptionResponse.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: PiiEntityTypes, location: "header", location_name: "x-amzn-transcribe-pii-entity-types"))
+    StartStreamTranscriptionResponse.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location: "header", location_name: "x-amzn-transcribe-language-model-name"))
     StartStreamTranscriptionResponse.struct_class = Types::StartStreamTranscriptionResponse
     StartStreamTranscriptionResponse[:payload] = :transcript_result_stream
     StartStreamTranscriptionResponse[:payload_member] = StartStreamTranscriptionResponse.member(:transcript_result_stream)

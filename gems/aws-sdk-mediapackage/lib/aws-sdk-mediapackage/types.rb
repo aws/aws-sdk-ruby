@@ -657,6 +657,7 @@ module Aws::MediaPackage
     #               url: "__string", # required
     #             },
     #           },
+    #           include_dvb_subtitles: false,
     #           include_iframe_only_stream: false,
     #           playlist_type: "NONE", # accepts NONE, EVENT, VOD
     #           playlist_window_seconds: 1,
@@ -1765,6 +1766,7 @@ module Aws::MediaPackage
     #             url: "__string", # required
     #           },
     #         },
+    #         include_dvb_subtitles: false,
     #         include_iframe_only_stream: false,
     #         playlist_type: "NONE", # accepts NONE, EVENT, VOD
     #         playlist_window_seconds: 1,
@@ -1815,6 +1817,11 @@ module Aws::MediaPackage
     #   An HTTP Live Streaming (HLS) encryption configuration.
     #   @return [Types::HlsEncryption]
     #
+    # @!attribute [rw] include_dvb_subtitles
+    #   When enabled, MediaPackage passes through digital video broadcasting
+    #   (DVB) subtitles into the output.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] include_iframe_only_stream
     #   When enabled, an I-Frame only stream will be included in the output.
     #   @return [Boolean]
@@ -1862,6 +1869,7 @@ module Aws::MediaPackage
       :ad_triggers,
       :ads_on_delivery_restrictions,
       :encryption,
+      :include_dvb_subtitles,
       :include_iframe_only_stream,
       :playlist_type,
       :playlist_window_seconds,
@@ -2986,6 +2994,7 @@ module Aws::MediaPackage
     #               url: "__string", # required
     #             },
     #           },
+    #           include_dvb_subtitles: false,
     #           include_iframe_only_stream: false,
     #           playlist_type: "NONE", # accepts NONE, EVENT, VOD
     #           playlist_window_seconds: 1,

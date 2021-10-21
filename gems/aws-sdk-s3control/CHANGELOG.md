@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Support FIPS endpoints for S3 Outposts using Bucket and Access Point ARNs.
 
+1.41.1 (2021-10-20)
+------------------
+
+* Issue - use the correct service with the `EndpointProvider` to determine `sigv4_region`.
+
 1.41.0 (2021-10-18)
 ------------------
 

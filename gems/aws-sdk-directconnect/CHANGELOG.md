@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2021-10-20)
+------------------
+
+* Feature - This release adds 4 new APIS, which needs to be public able
+
 1.47.0 (2021-10-18)
 ------------------
 

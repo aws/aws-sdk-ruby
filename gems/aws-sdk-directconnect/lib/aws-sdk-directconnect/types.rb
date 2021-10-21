@@ -33,8 +33,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] associated_gateway_owner_account
-    #   The ID of the account that owns the virtual private gateway or
-    #   transit gateway.
+    #   The ID of the Amazon Web Services account that owns the virtual
+    #   private gateway or transit gateway.
     #   @return [String]
     #
     # @!attribute [rw] override_allowed_prefixes_to_direct_connect_gateway
@@ -97,8 +97,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the account of the customer for whom the connection will
-    #   be provisioned.
+    #   The ID of the Amazon Web Services account of the customer for whom
+    #   the connection will be provisioned.
     #   @return [String]
     #
     # @!attribute [rw] interconnect_id
@@ -144,7 +144,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the account ID of the customer for the connection.
+    #   The ID of the Amazon Web Services account ID of the customer for the
+    #   connection.
     #   @return [String]
     #
     # @!attribute [rw] bandwidth
@@ -210,7 +211,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the account that owns the virtual private interface.
+    #   The ID of the Amazon Web Services account that owns the virtual
+    #   private interface.
     #   @return [String]
     #
     # @!attribute [rw] new_private_virtual_interface_allocation
@@ -261,7 +263,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the account that owns the public virtual interface.
+    #   The ID of the Amazon Web Services account that owns the public
+    #   virtual interface.
     #   @return [String]
     #
     # @!attribute [rw] new_public_virtual_interface_allocation
@@ -308,7 +311,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the account that owns the transit virtual interface.
+    #   The ID of the Amazon Web Services account that owns the transit
+    #   virtual interface.
     #   @return [String]
     #
     # @!attribute [rw] new_transit_virtual_interface_allocation
@@ -506,8 +510,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the account that owns the associated virtual private
-    #   gateway or transit gateway.
+    #   The ID of the Amazon Web Services account that owns the associated
+    #   virtual private gateway or transit gateway.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -663,6 +667,38 @@ module Aws::DirectConnect
     #
     class ConfirmConnectionResponse < Struct.new(
       :connection_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ConfirmCustomerAgreementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         agreement_name: "AgreementName",
+    #       }
+    #
+    # @!attribute [rw] agreement_name
+    #   The name of the customer agreement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmCustomerAgreementRequest AWS API Documentation
+    #
+    class ConfirmCustomerAgreementRequest < Struct.new(
+      :agreement_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the customer agreement when the connection was
+    #   created. This will be either `signed` or `unsigned`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmCustomerAgreementResponse AWS API Documentation
+    #
+    class ConfirmCustomerAgreementResponse < Struct.new(
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -877,7 +913,7 @@ module Aws::DirectConnect
     # Information about an Direct Connect connection.
     #
     # @!attribute [rw] owner_account
-    #   The ID of the account that owns the connection.
+    #   The ID of the Amazon Web Services account that owns the connection.
     #   @return [String]
     #
     # @!attribute [rw] connection_id
@@ -919,7 +955,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The Region where the connection is located.
+    #   The Amazon Web Services Region where the connection is located.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -1180,7 +1216,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] direct_connect_gateway_owner_account
-    #   The ID of the account that owns the Direct Connect gateway.
+    #   The ID of the Amazon Web Services account that owns the Direct
+    #   Connect gateway.
     #   @return [String]
     #
     # @!attribute [rw] gateway_id
@@ -1606,6 +1643,26 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # The name and status of a customer agreement.
+    #
+    # @!attribute [rw] agreement_name
+    #   The name of the agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the customer agreement. This will be either `signed`
+    #   or `unsigned`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CustomerAgreement AWS API Documentation
+    #
+    class CustomerAgreement < Struct.new(
+      :agreement_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteBGPPeerRequest
     #   data as a hash:
     #
@@ -1994,6 +2051,32 @@ module Aws::DirectConnect
     #
     class DescribeConnectionsRequest < Struct.new(
       :connection_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreements
+    #   The list of customer agreements.
+    #   @return [Array<Types::CustomerAgreement>]
+    #
+    # @!attribute [rw] nni_partner_type
+    #   The type of network-to-network interface (NNI) partner. The partner
+    #   type will be one of the following:
+    #
+    #   * V1: This partner can only allocate 50Mbps, 100Mbps, 200Mbps,
+    #     300Mbps, 400Mbps, or 500Mbps subgigabit connections.
+    #
+    #   * V2: This partner can only allocate 1GB, 2GB, 5GB, or 10GB hosted
+    #     connections.
+    #
+    #   * nonPartner: The customer is not a partner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeCustomerMetadataResponse AWS API Documentation
+    #
+    class DescribeCustomerMetadataResponse < Struct.new(
+      :agreements,
+      :nni_partner_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2387,6 +2470,62 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # Provides the details about a virtual interface's router.
+    #
+    # @note When making an API call, you may pass DescribeRouterConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         virtual_interface_id: "VirtualInterfaceId", # required
+    #         router_type_identifier: "RouterTypeIdentifier",
+    #       }
+    #
+    # @!attribute [rw] virtual_interface_id
+    #   The ID of the virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] router_type_identifier
+    #   Identifies the router by a combination of vendor, platform, and
+    #   software version. For example,
+    #   `CiscoSystemsInc-2900SeriesRouters-IOS124`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeRouterConfigurationRequest AWS API Documentation
+    #
+    class DescribeRouterConfigurationRequest < Struct.new(
+      :virtual_interface_id,
+      :router_type_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] customer_router_config
+    #   The customer router configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] router
+    #   The details about the router.
+    #   @return [Types::RouterType]
+    #
+    # @!attribute [rw] virtual_interface_id
+    #   The ID assigned to the virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_interface_name
+    #   The name of the virtual interface assigned by the customer network.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeRouterConfigurationResponse AWS API Documentation
+    #
+    class DescribeRouterConfigurationResponse < Struct.new(
+      :customer_router_config,
+      :router,
+      :virtual_interface_id,
+      :virtual_interface_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeTagsRequest
     #   data as a hash:
     #
@@ -2474,7 +2613,8 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the account that owns the Direct Connect gateway.
+    #   The ID of the Amazon Web Services account that owns the Direct
+    #   Connect gateway.
     #   @return [String]
     #
     # @!attribute [rw] direct_connect_gateway_state
@@ -2518,7 +2658,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] direct_connect_gateway_owner_account
-    #   The ID of the account that owns the associated gateway.
+    #   The ID of the Amazon Web Services account that owns the associated
+    #   gateway.
     #   @return [String]
     #
     # @!attribute [rw] association_state
@@ -2562,11 +2703,13 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] virtual_gateway_region
-    #   The Region where the virtual private gateway is located.
+    #   The Amazon Web Services Region where the virtual private gateway is
+    #   located.
     #   @return [String]
     #
     # @!attribute [rw] virtual_gateway_owner_account
-    #   The ID of the account that owns the virtual private gateway.
+    #   The ID of the Amazon Web Services account that owns the virtual
+    #   private gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAssociation AWS API Documentation
@@ -2598,7 +2741,8 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] direct_connect_gateway_owner_account
-    #   The ID of the account that owns the Direct Connect gateway.
+    #   The ID of the Amazon Web Services account that owns the Direct
+    #   Connect gateway.
     #   @return [String]
     #
     # @!attribute [rw] proposal_state
@@ -2654,11 +2798,13 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] virtual_interface_region
-    #   The Region where the virtual interface is located.
+    #   The Amazon Web Services Region where the virtual interface is
+    #   located.
     #   @return [String]
     #
     # @!attribute [rw] virtual_interface_owner_account
-    #   The ID of the account that owns the virtual interface.
+    #   The ID of the Amazon Web Services account that owns the virtual
+    #   interface.
     #   @return [String]
     #
     # @!attribute [rw] attachment_state
@@ -2830,7 +2976,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The Region where the connection is located.
+    #   The Amazon Web Services Region where the connection is located.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -2932,7 +3078,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] owner_account
-    #   The ID of the account that owns the LAG.
+    #   The ID of the Amazon Web Services account that owns the LAG.
     #   @return [String]
     #
     # @!attribute [rw] lag_name
@@ -2965,7 +3111,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The Region where the connection is located.
+    #   The Amazon Web Services Region where the connection is located.
     #   @return [String]
     #
     # @!attribute [rw] minimum_links
@@ -3173,7 +3319,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The Region for the location.
+    #   The Amazon Web Services Region for the location.
     #   @return [String]
     #
     # @!attribute [rw] available_port_speeds
@@ -3869,6 +4015,48 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # Information about the virtual router.
+    #
+    # @!attribute [rw] vendor
+    #   The vendor for the virtual interface's router.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The virtual interface router platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] software
+    #   The router software.
+    #   @return [String]
+    #
+    # @!attribute [rw] xslt_template_name
+    #   The template for the virtual interface's router.
+    #   @return [String]
+    #
+    # @!attribute [rw] xslt_template_name_for_mac_sec
+    #   The MAC Security (MACsec) template for the virtual interface's
+    #   router.
+    #   @return [String]
+    #
+    # @!attribute [rw] router_type_identifier
+    #   Identifies the router by a combination of vendor, platform, and
+    #   software version. For example,
+    #   `CiscoSystemsInc-2900SeriesRouters-IOS124`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/RouterType AWS API Documentation
+    #
+    class RouterType < Struct.new(
+      :vendor,
+      :platform,
+      :software,
+      :xslt_template_name,
+      :xslt_template_name_for_mac_sec,
+      :router_type_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartBgpFailoverTestRequest
     #   data as a hash:
     #
@@ -4133,6 +4321,45 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateDirectConnectGatewayRequest
+    #   data as a hash:
+    #
+    #       {
+    #         direct_connect_gateway_id: "DirectConnectGatewayId", # required
+    #         new_direct_connect_gateway_name: "DirectConnectGatewayName", # required
+    #       }
+    #
+    # @!attribute [rw] direct_connect_gateway_id
+    #   The ID of the Direct Connect gateway to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_direct_connect_gateway_name
+    #   The new name for the Direct Connect gateway.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateDirectConnectGatewayRequest AWS API Documentation
+    #
+    class UpdateDirectConnectGatewayRequest < Struct.new(
+      :direct_connect_gateway_id,
+      :new_direct_connect_gateway_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] direct_connect_gateway
+    #   Information about a Direct Connect gateway, which enables you to
+    #   connect virtual interfaces and virtual private gateway or transit
+    #   gateways.
+    #   @return [Types::DirectConnectGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateDirectConnectGatewayResponse AWS API Documentation
+    #
+    class UpdateDirectConnectGatewayResponse < Struct.new(
+      :direct_connect_gateway)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateLagRequest
     #   data as a hash:
     #
@@ -4247,7 +4474,8 @@ module Aws::DirectConnect
     # Information about a virtual interface.
     #
     # @!attribute [rw] owner_account
-    #   The ID of the account that owns the virtual interface.
+    #   The ID of the Amazon Web Services account that owns the virtual
+    #   interface.
     #   @return [String]
     #
     # @!attribute [rw] virtual_interface_id
@@ -4375,7 +4603,8 @@ module Aws::DirectConnect
     #   @return [Array<Types::BGPPeer>]
     #
     # @!attribute [rw] region
-    #   The Region where the virtual interface is located.
+    #   The Amazon Web Services Region where the virtual interface is
+    #   located.
     #   @return [String]
     #
     # @!attribute [rw] aws_device_v2

@@ -203,6 +203,8 @@ module Aws::Appflow
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3ConnectorOperator = Shapes::StringShape.new(name: 'S3ConnectorOperator')
     S3DestinationProperties = Shapes::StructureShape.new(name: 'S3DestinationProperties')
+    S3InputFileType = Shapes::StringShape.new(name: 'S3InputFileType')
+    S3InputFormatConfig = Shapes::StructureShape.new(name: 'S3InputFormatConfig')
     S3Metadata = Shapes::StructureShape.new(name: 'S3Metadata')
     S3OutputFormatConfig = Shapes::StructureShape.new(name: 'S3OutputFormatConfig')
     S3SourceProperties = Shapes::StructureShape.new(name: 'S3SourceProperties')
@@ -817,6 +819,9 @@ module Aws::Appflow
     S3DestinationProperties.add_member(:s3_output_format_config, Shapes::ShapeRef.new(shape: S3OutputFormatConfig, location_name: "s3OutputFormatConfig"))
     S3DestinationProperties.struct_class = Types::S3DestinationProperties
 
+    S3InputFormatConfig.add_member(:s3_input_file_type, Shapes::ShapeRef.new(shape: S3InputFileType, location_name: "s3InputFileType"))
+    S3InputFormatConfig.struct_class = Types::S3InputFormatConfig
+
     S3Metadata.struct_class = Types::S3Metadata
 
     S3OutputFormatConfig.add_member(:file_type, Shapes::ShapeRef.new(shape: FileType, location_name: "fileType"))
@@ -826,6 +831,7 @@ module Aws::Appflow
 
     S3SourceProperties.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
     S3SourceProperties.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: BucketPrefix, location_name: "bucketPrefix"))
+    S3SourceProperties.add_member(:s3_input_format_config, Shapes::ShapeRef.new(shape: S3InputFormatConfig, location_name: "s3InputFormatConfig"))
     S3SourceProperties.struct_class = Types::S3SourceProperties
 
     SAPODataConnectorProfileCredentials.add_member(:basic_auth_credentials, Shapes::ShapeRef.new(shape: BasicAuthCredentials, location_name: "basicAuthCredentials"))

@@ -1588,8 +1588,10 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings related to burn-in captions. Set up burn-in captions in the
-    # same output as your video. For more information, see
+    # Burn-in is a captions delivery method, rather than a captions format.
+    # Burn-in writes the captions directly on your video frames, replacing
+    # pixels of video content with the captions. Set up burn-in captions in
+    # the same output as your video. For more information, see
     # https://docs.aws.amazon.com/mediaconvert/latest/ug/burn-in-output-captions.html.
     # When you work directly in your JSON job specification, include this
     # object and any required children when you set destinationType to
@@ -1623,174 +1625,175 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] alignment
-    #   If no explicit x\_position or y\_position is provided, setting
-    #   alignment to centered will place the captions at the bottom center
-    #   of the output. Similarly, setting a left alignment will align
-    #   captions to the bottom left of the output. If x and y positions are
-    #   given in conjunction with the alignment parameter, the font will be
-    #   justified (either left or centered) relative to those coordinates.
-    #   This option is not valid for source captions that are STL,
-    #   608/embedded or teletext. These source settings are already
-    #   pre-defined by the caption stream. All burn-in and DVB-Sub font
-    #   settings must match.
+    #   Specify the alignment of your captions. If no explicit x\_position
+    #   is provided, setting alignment to centered will placethe captions at
+    #   the bottom center of the output. Similarly, setting a left alignment
+    #   willalign captions to the bottom left of the output. If x and y
+    #   positions are given in conjunction with the alignment parameter, the
+    #   font will be justified (either left or centered) relative to those
+    #   coordinates.
     #   @return [String]
     #
     # @!attribute [rw] apply_font_color
-    #   Ignore this setting unless your input captions are STL, any type of
-    #   608, teletext, or TTML, and your output captions are burned in.
-    #   Specify how the service applies the color specified in the setting
-    #   Font color (BurninSubtitleFontColor). By default, this color is
-    #   white. When you choose WHITE\_TEXT\_ONLY, the service uses the
-    #   specified font color only for text that is white in the input. When
-    #   you choose ALL\_TEXT, the service uses the specified font color for
-    #   all output captions text. If you leave both settings at their
-    #   default value, your output font color is the same as your input font
-    #   color.
+    #   Ignore this setting unless Style passthrough (StylePassthrough) is
+    #   set to Enabled and Font color (FontColor) set to Black, Yellow, Red,
+    #   Green, Blue, or Hex. Use Apply font color (ApplyFontColor) for
+    #   additional font color controls. When you choose White text only
+    #   (WHITE\_TEXT\_ONLY), or leave blank, your font color setting only
+    #   applies to white text in your input captions. For example, if your
+    #   font color setting is Yellow, and your input captions have red and
+    #   white text, your output captions will have red and yellow text. When
+    #   you choose ALL\_TEXT, your font color setting applies to all of your
+    #   output captions text.
     #   @return [String]
     #
     # @!attribute [rw] background_color
-    #   Specifies the color of the rectangle behind the captions. All
-    #   burn-in and DVB-Sub font settings must match.
+    #   Specify the color of the rectangle behind the captions. Leave
+    #   background color (BackgroundColor) blank and set Style passthrough
+    #   (StylePassthrough) to enabled to use the background color data from
+    #   your input captions, if present. Within your job settings, all of
+    #   your DVB-Sub settings must be identical.
     #   @return [String]
     #
     # @!attribute [rw] background_opacity
-    #   Specifies the opacity of the background rectangle. 255 is opaque; 0
-    #   is transparent. Leaving this parameter blank is equivalent to
-    #   setting it to 0 (transparent). All burn-in and DVB-Sub font settings
-    #   must match.
+    #   Specify the opacity of the background rectangle. Enter a value from
+    #   0 to 255, where 0 is transparent and 255 is opaque. If Style
+    #   passthrough (StylePassthrough) is set to enabled, leave blank to
+    #   pass through the background style information in your input captions
+    #   to your output captions. If Style passthrough is set to disabled,
+    #   leave blank to use a value of 0 and remove all backgrounds from your
+    #   output captions.
     #   @return [Integer]
     #
     # @!attribute [rw] fallback_font
     #   Specify the font that you want the service to use for your burn in
     #   captions when your input captions specify a font that MediaConvert
-    #   doesn't support. When you keep the default value, Best match
-    #   (BEST\_MATCH), MediaConvert uses a supported font that most closely
-    #   matches the font that your input captions specify. When there are
-    #   multiple unsupported fonts in your input captions, MediaConvert
-    #   matches each font with the supported font that matches best. When
-    #   you explicitly choose a replacement font, MediaConvert uses that
-    #   font to replace all unsupported fonts from your input.
+    #   doesn't support. When you set Fallback font (FallbackFont) to best
+    #   match (BEST\_MATCH), or leave blank, MediaConvert uses a supported
+    #   font that most closely matches the font that your input captions
+    #   specify. When there are multiple unsupported fonts in your input
+    #   captions, MediaConvert matches each font with the supported font
+    #   that matches best. When you explicitly choose a replacement font,
+    #   MediaConvert uses that font to replace all unsupported fonts from
+    #   your input.
     #   @return [String]
     #
     # @!attribute [rw] font_color
-    #   Specifies the color of the burned-in captions. This option is not
-    #   valid for source captions that are STL, 608/embedded or teletext.
-    #   These source settings are already pre-defined by the caption stream.
-    #   All burn-in and DVB-Sub font settings must match.
+    #   Specify the color of the burned-in captions text. Leave Font color
+    #   (FontColor) blank and set Style passthrough (StylePassthrough) to
+    #   enabled to use the font color data from your input captions, if
+    #   present.
     #   @return [String]
     #
     # @!attribute [rw] font_opacity
-    #   Specifies the opacity of the burned-in captions. 255 is opaque; 0 is
-    #   transparent. All burn-in and DVB-Sub font settings must match.
+    #   Specify the opacity of the burned-in captions. 255 is opaque; 0 is
+    #   transparent.
     #   @return [Integer]
     #
     # @!attribute [rw] font_resolution
-    #   Font resolution in DPI (dots per inch); default is 96 dpi. All
-    #   burn-in and DVB-Sub font settings must match.
+    #   Specify the Font resolution (FontResolution) in DPI (dots per inch).
     #   @return [Integer]
     #
     # @!attribute [rw] font_script
-    #   Provide the font script, using an ISO 15924 script code, if the
-    #   LanguageCode is not sufficient for determining the script type.
-    #   Where LanguageCode or CustomLanguageCode is sufficient, use
-    #   "AUTOMATIC" or leave unset. This is used to help determine the
-    #   appropriate font for rendering burn-in captions.
+    #   Set Font script (FontScript) to Automatically determined
+    #   (AUTOMATIC), or leave blank, to automatically determine the font
+    #   script in your input captions. Otherwise, set to Simplified Chinese
+    #   (HANS) or Traditional Chinese (HANT) if your input font script uses
+    #   Simplified or Traditional Chinese.
     #   @return [String]
     #
     # @!attribute [rw] font_size
-    #   A positive integer indicates the exact font size in points. Set to 0
-    #   for automatic font size selection. All burn-in and DVB-Sub font
-    #   settings must match.
+    #   Specify the Font size (FontSize) in pixels. Must be a positive
+    #   integer. Set to 0, or leave blank, for automatic font size.
     #   @return [Integer]
     #
     # @!attribute [rw] hex_font_color
-    #   Ignore this setting unless your BurninSubtitleFontColor setting is
-    #   HEX. Format is six or eight hexidecimal digits, representing the
-    #   red, green, and blue components, with the two extra digits used for
-    #   an optional alpha value. For example a value of 1122AABB is a red
-    #   value of 0x11, a green value of 0x22, a blue value of 0xAA, and an
-    #   alpha value of 0xBB.
+    #   Ignore this setting unless your Font color is set to Hex. Enter
+    #   either six or eight hexidecimal digits, representing red, green, and
+    #   blue, with two optional extra digits for alpha. For example a value
+    #   of 1122AABB is a red value of 0x11, a green value of 0x22, a blue
+    #   value of 0xAA, and an alpha value of 0xBB.
     #   @return [String]
     #
     # @!attribute [rw] outline_color
-    #   Specifies font outline color. This option is not valid for source
-    #   captions that are either 608/embedded or teletext. These source
-    #   settings are already pre-defined by the caption stream. All burn-in
-    #   and DVB-Sub font settings must match.
+    #   Specify font outline color. Leave Outline color (OutlineColor) blank
+    #   and set Style passthrough (StylePassthrough) to enabled to use the
+    #   font outline color data from your input captions, if present.
     #   @return [String]
     #
     # @!attribute [rw] outline_size
-    #   Specifies font outline size in pixels. This option is not valid for
-    #   source captions that are either 608/embedded or teletext. These
-    #   source settings are already pre-defined by the caption stream. All
-    #   burn-in and DVB-Sub font settings must match.
+    #   Specify the Outline size (OutlineSize) of the caption text, in
+    #   pixels. Leave Outline size blank and set Style passthrough
+    #   (StylePassthrough) to enabled to use the outline size data from your
+    #   input captions, if present.
     #   @return [Integer]
     #
     # @!attribute [rw] shadow_color
-    #   Specifies the color of the shadow cast by the captions. All burn-in
-    #   and DVB-Sub font settings must match.
+    #   Specify the color of the shadow cast by the captions. Leave Shadow
+    #   color (ShadowColor) blank and set Style passthrough
+    #   (StylePassthrough) to enabled to use the shadow color data from your
+    #   input captions, if present.
     #   @return [String]
     #
     # @!attribute [rw] shadow_opacity
-    #   Specifies the opacity of the shadow. 255 is opaque; 0 is
-    #   transparent. Leaving this parameter blank is equivalent to setting
-    #   it to 0 (transparent). All burn-in and DVB-Sub font settings must
-    #   match.
+    #   Specify the opacity of the shadow. Enter a value from 0 to 255,
+    #   where 0 is transparent and 255 is opaque. If Style passthrough
+    #   (StylePassthrough) is set to Enabled, leave Shadow opacity
+    #   (ShadowOpacity) blank to pass through the shadow style information
+    #   in your input captions to your output captions. If Style passthrough
+    #   is set to disabled, leave blank to use a value of 0 and remove all
+    #   shadows from your output captions.
     #   @return [Integer]
     #
     # @!attribute [rw] shadow_x_offset
-    #   Specifies the horizontal offset of the shadow relative to the
+    #   Specify the horizontal offset of the shadow, relative to the
     #   captions in pixels. A value of -2 would result in a shadow offset 2
-    #   pixels to the left. All burn-in and DVB-Sub font settings must
-    #   match.
+    #   pixels to the left.
     #   @return [Integer]
     #
     # @!attribute [rw] shadow_y_offset
-    #   Specifies the vertical offset of the shadow relative to the captions
+    #   Specify the vertical offset of the shadow relative to the captions
     #   in pixels. A value of -2 would result in a shadow offset 2 pixels
-    #   above the text. All burn-in and DVB-Sub font settings must match.
+    #   above the text. Leave Shadow y-offset (ShadowYOffset) blank and set
+    #   Style passthrough (StylePassthrough) to enabled to use the shadow
+    #   y-offset data from your input captions, if present.
     #   @return [Integer]
     #
     # @!attribute [rw] style_passthrough
-    #   Ignore this setting unless your output captions are burned in.
-    #   Choose which set of style and position values the service applies to
-    #   your output captions. When you choose ENABLED, the service uses the
-    #   input style and position information from your input. When you
-    #   choose DISABLED, the service uses any style values that you specify
-    #   in your output settings. If you don't specify values, the service
-    #   uses default style and position values. When you choose DISABLED,
-    #   the service ignores all style and position values from your input.
+    #   Set Style passthrough (StylePassthrough) to ENABLED to use the
+    #   available style, color, and position information from your input
+    #   captions. MediaConvert uses default settings for any missing style
+    #   and position information in your input captions. Set Style
+    #   passthrough to DISABLED, or leave blank, to ignore the style and
+    #   position information from your input captions and use default
+    #   settings: white text with black outlining, bottom-center
+    #   positioning, and automatic sizing. Whether you set Style passthrough
+    #   to enabled or not, you can also choose to manually override any of
+    #   the individual style and position settings.
     #   @return [String]
     #
     # @!attribute [rw] teletext_spacing
-    #   Only applies to jobs with input captions in Teletext or STL formats.
-    #   Specify whether the spacing between letters in your captions is set
-    #   by the captions grid or varies depending on letter width. Choose
-    #   fixed grid to conform to the spacing specified in the captions file
-    #   more accurately. Choose proportional to make the text easier to read
-    #   if the captions are closed caption.
+    #   Specify whether the text spacing (TeletextSpacing) in your captions
+    #   is set by the captions grid, or varies depending on letter width.
+    #   Choose fixed grid (FIXED\_GRID) to conform to the spacing specified
+    #   in the captions file more accurately. Choose proportional
+    #   (PROPORTIONAL) to make the text easier to read for closed captions.
     #   @return [String]
     #
     # @!attribute [rw] x_position
-    #   Specifies the horizontal position of the caption relative to the
-    #   left side of the output in pixels. A value of 10 would result in the
-    #   captions starting 10 pixels from the left of the output. If no
-    #   explicit x\_position is provided, the horizontal caption position
-    #   will be determined by the alignment parameter. This option is not
-    #   valid for source captions that are STL, 608/embedded or teletext.
-    #   These source settings are already pre-defined by the caption stream.
-    #   All burn-in and DVB-Sub font settings must match.
+    #   Specify the horizontal position (XPosition) of the captions,
+    #   relative to the left side of the output in pixels. A value of 10
+    #   would result in the captions starting 10 pixels from the left of the
+    #   output. If no explicit x\_position is provided, the horizontal
+    #   caption position will be determined by the alignment parameter.
     #   @return [Integer]
     #
     # @!attribute [rw] y_position
-    #   Specifies the vertical position of the caption relative to the top
-    #   of the output in pixels. A value of 10 would result in the captions
-    #   starting 10 pixels from the top of the output. If no explicit
-    #   y\_position is provided, the caption will be positioned towards the
-    #   bottom of the output. This option is not valid for source captions
-    #   that are STL, 608/embedded or teletext. These source settings are
-    #   already pre-defined by the caption stream. All burn-in and DVB-Sub
-    #   font settings must match.
+    #   Specify the vertical position (YPosition) of the captions, relative
+    #   to the top of the output in pixels. A value of 10 would result in
+    #   the captions starting 10 pixels from the top of the output. If no
+    #   explicit y\_position is provided, the caption will be positioned
+    #   towards the bottom of the output.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/BurninDestinationSettings AWS API Documentation
@@ -2225,8 +2228,10 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] burnin_destination_settings
-    #   Settings related to burn-in captions. Set up burn-in captions in the
-    #   same output as your video. For more information, see
+    #   Burn-in is a captions delivery method, rather than a captions
+    #   format. Burn-in writes the captions directly on your video frames,
+    #   replacing pixels of video content with the captions. Set up burn-in
+    #   captions in the same output as your video. For more information, see
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/burn-in-output-captions.html.
     #   When you work directly in your JSON job specification, include this
     #   object and any required children when you set destinationType to
@@ -2288,7 +2293,12 @@ module Aws::MediaConvert
     #   @return [Types::SccDestinationSettings]
     #
     # @!attribute [rw] srt_destination_settings
-    #   SRT Destination Settings
+    #   Settings related to SRT captions. SRT is a sidecar format that holds
+    #   captions in a file that is separate from the video container. Set up
+    #   sidecar captions in the same output group, but different output from
+    #   your video. When you work directly in your JSON job specification,
+    #   include this object and any required children when you set
+    #   destinationType to SRT.
     #   @return [Types::SrtDestinationSettings]
     #
     # @!attribute [rw] teletext_destination_settings
@@ -2312,7 +2322,14 @@ module Aws::MediaConvert
     #   @return [Types::TtmlDestinationSettings]
     #
     # @!attribute [rw] webvtt_destination_settings
-    #   WEBVTT Destination Settings
+    #   Settings related to WebVTT captions. WebVTT is a sidecar format that
+    #   holds captions in a file that is separate from the video container.
+    #   Set up sidecar captions in the same output group, but different
+    #   output from your video. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
+    #   When you work directly in your JSON job specification, include this
+    #   object and any required children when you set destinationType to
+    #   WebVTT.
     #   @return [Types::WebvttDestinationSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionDestinationSettings AWS API Documentation
@@ -2365,6 +2382,7 @@ module Aws::MediaConvert
     #             },
     #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #             time_delta: 1,
+    #             time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #           },
     #           source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #           teletext_source_settings: {
@@ -2422,9 +2440,9 @@ module Aws::MediaConvert
     # Ignore this setting unless your input captions format is SCC. To have
     # the service compensate for differing frame rates between your input
     # captions and input video, specify the frame rate of the captions file.
-    # Specify this value as a fraction, using the settings Framerate
-    # numerator (framerateNumerator) and Framerate denominator
-    # (framerateDenominator). For example, you might specify 24 / 1 for 24
+    # Specify this value as a fraction. When you work directly in your JSON
+    # job specification, use the settings framerateNumerator and
+    # framerateDenominator. For example, you might specify 24 / 1 for 24
     # fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001
     # for 29.97 fps.
     #
@@ -2490,6 +2508,7 @@ module Aws::MediaConvert
     #           },
     #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #           time_delta: 1,
+    #           time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #         },
     #         source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #         teletext_source_settings: {
@@ -3648,6 +3667,7 @@ module Aws::MediaConvert
     #                       },
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                       time_delta: 1,
+    #                       time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                     teletext_source_settings: {
@@ -5042,6 +5062,7 @@ module Aws::MediaConvert
     #                       },
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                       time_delta: 1,
+    #                       time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                     teletext_source_settings: {
@@ -8026,40 +8047,45 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] alignment
-    #   If no explicit x\_position or y\_position is provided, setting
-    #   alignment to centered will place the captions at the bottom center
-    #   of the output. Similarly, setting a left alignment will align
-    #   captions to the bottom left of the output. If x and y positions are
-    #   given in conjunction with the alignment parameter, the font will be
-    #   justified (either left or centered) relative to those coordinates.
-    #   This option is not valid for source captions that are STL,
-    #   608/embedded or teletext. These source settings are already
-    #   pre-defined by the caption stream. All burn-in and DVB-Sub font
-    #   settings must match.
+    #   Specify the alignment of your captions. If no explicit x\_position
+    #   is provided, setting alignment to centered will placethe captions at
+    #   the bottom center of the output. Similarly, setting a left alignment
+    #   willalign captions to the bottom left of the output. If x and y
+    #   positions are given in conjunction with the alignment parameter, the
+    #   font will be justified (either left or centered) relative to those
+    #   coordinates. Within your job settings, all of your DVB-Sub settings
+    #   must be identical.
     #   @return [String]
     #
     # @!attribute [rw] apply_font_color
-    #   Ignore this setting unless your input captions are STL, any type of
-    #   608, teletext, or TTML, and your output captions are DVB-SUB.
-    #   Specify how the service applies the color specified in the setting
-    #   Font color (DvbSubtitleFontColor). By default, this color is white.
-    #   When you choose WHITE\_TEXT\_ONLY, the service uses the specified
-    #   font color only for text that is white in the input. When you choose
-    #   ALL\_TEXT, the service uses the specified font color for all output
-    #   captions text. If you leave both settings at their default value,
-    #   your output font color is the same as your input font color.
+    #   Ignore this setting unless Style Passthrough (StylePassthrough) is
+    #   set to Enabled and Font color (FontColor) set to Black, Yellow, Red,
+    #   Green, Blue, or Hex. Use Apply font color (ApplyFontColor) for
+    #   additional font color controls. When you choose White text only
+    #   (WHITE\_TEXT\_ONLY), or leave blank, your font color setting only
+    #   applies to white text in your input captions. For example, if your
+    #   font color setting is Yellow, and your input captions have red and
+    #   white text, your output captions will have red and yellow text. When
+    #   you choose ALL\_TEXT, your font color setting applies to all of your
+    #   output captions text.
     #   @return [String]
     #
     # @!attribute [rw] background_color
-    #   Specifies the color of the rectangle behind the captions. All
-    #   burn-in and DVB-Sub font settings must match.
+    #   Specify the color of the rectangle behind the captions. Leave
+    #   background color (BackgroundColor) blank and set Style passthrough
+    #   (StylePassthrough) to enabled to use the background color data from
+    #   your input captions, if present.
     #   @return [String]
     #
     # @!attribute [rw] background_opacity
-    #   Specifies the opacity of the background rectangle. 255 is opaque; 0
-    #   is transparent. Leaving this parameter blank is equivalent to
-    #   setting it to 0 (transparent). All burn-in and DVB-Sub font settings
-    #   must match.
+    #   Specify the opacity of the background rectangle. Enter a value from
+    #   0 to 255, where 0 is transparent and 255 is opaque. If Style
+    #   passthrough (StylePassthrough) is set to enabled, leave blank to
+    #   pass through the background style information in your input captions
+    #   to your output captions. If Style passthrough is set to disabled,
+    #   leave blank to use a value of 0 and remove all backgrounds from your
+    #   output captions. Within your job settings, all of your DVB-Sub
+    #   settings must be identical.
     #   @return [Integer]
     #
     # @!attribute [rw] dds_handling
@@ -8112,44 +8138,48 @@ module Aws::MediaConvert
     # @!attribute [rw] fallback_font
     #   Specify the font that you want the service to use for your burn in
     #   captions when your input captions specify a font that MediaConvert
-    #   doesn't support. When you keep the default value, Best match
-    #   (BEST\_MATCH), MediaConvert uses a supported font that most closely
-    #   matches the font that your input captions specify. When there are
-    #   multiple unsupported fonts in your input captions, MediaConvert
-    #   matches each font with the supported font that matches best. When
-    #   you explicitly choose a replacement font, MediaConvert uses that
-    #   font to replace all unsupported fonts from your input.
+    #   doesn't support. When you set Fallback font (FallbackFont) to best
+    #   match (BEST\_MATCH), or leave blank, MediaConvert uses a supported
+    #   font that most closely matches the font that your input captions
+    #   specify. When there are multiple unsupported fonts in your input
+    #   captions, MediaConvert matches each font with the supported font
+    #   that matches best. When you explicitly choose a replacement font,
+    #   MediaConvert uses that font to replace all unsupported fonts from
+    #   your input.
     #   @return [String]
     #
     # @!attribute [rw] font_color
-    #   Specifies the color of the DVB-SUB captions. This option is not
-    #   valid for source captions that are STL, 608/embedded or teletext.
-    #   These source settings are already pre-defined by the caption stream.
-    #   All burn-in and DVB-Sub font settings must match.
+    #   Specify the color of the captions text. Leave Font color (FontColor)
+    #   blank and set Style passthrough (StylePassthrough) to enabled to use
+    #   the font color data from your input captions, if present. Within
+    #   your job settings, all of your DVB-Sub settings must be identical.
     #   @return [String]
     #
     # @!attribute [rw] font_opacity
-    #   Specifies the opacity of the burned-in captions. 255 is opaque; 0 is
-    #   transparent. All burn-in and DVB-Sub font settings must match.
+    #   Specify the opacity of the burned-in captions. 255 is opaque; 0 is
+    #   transparent. Within your job settings, all of your DVB-Sub settings
+    #   must be identical.
     #   @return [Integer]
     #
     # @!attribute [rw] font_resolution
-    #   Font resolution in DPI (dots per inch); default is 96 dpi. All
-    #   burn-in and DVB-Sub font settings must match.
+    #   Specify the Font resolution (FontResolution) in DPI (dots per inch).
+    #   Within your job settings, all of your DVB-Sub settings must be
+    #   identical.
     #   @return [Integer]
     #
     # @!attribute [rw] font_script
-    #   Provide the font script, using an ISO 15924 script code, if the
-    #   LanguageCode is not sufficient for determining the script type.
-    #   Where LanguageCode or CustomLanguageCode is sufficient, use
-    #   "AUTOMATIC" or leave unset. This is used to help determine the
-    #   appropriate font for rendering DVB-Sub captions.
+    #   Set Font script (FontScript) to Automatically determined
+    #   (AUTOMATIC), or leave blank, to automatically determine the font
+    #   script in your input captions. Otherwise, set to Simplified Chinese
+    #   (HANS) or Traditional Chinese (HANT) if your input font script uses
+    #   Simplified or Traditional Chinese. Within your job settings, all of
+    #   your DVB-Sub settings must be identical.
     #   @return [String]
     #
     # @!attribute [rw] font_size
-    #   A positive integer indicates the exact font size in points. Set to 0
-    #   for automatic font size selection. All burn-in and DVB-Sub font
-    #   settings must match.
+    #   Specify the Font size (FontSize) in pixels. Must be a positive
+    #   integer. Set to 0, or leave blank, for automatic font size. Within
+    #   your job settings, all of your DVB-Sub settings must be identical.
     #   @return [Integer]
     #
     # @!attribute [rw] height
@@ -8160,61 +8190,74 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] hex_font_color
-    #   Ignore this setting unless your DvbSubtitleFontColor setting is HEX.
-    #   Format is six or eight hexidecimal digits, representing the red,
-    #   green, and blue components, with the two extra digits used for an
-    #   optional alpha value. For example a value of 1122AABB is a red value
-    #   of 0x11, a green value of 0x22, a blue value of 0xAA, and an alpha
-    #   value of 0xBB.
+    #   Ignore this setting unless your Font color is set to Hex. Enter
+    #   either six or eight hexidecimal digits, representing red, green, and
+    #   blue, with two optional extra digits for alpha. For example a value
+    #   of 1122AABB is a red value of 0x11, a green value of 0x22, a blue
+    #   value of 0xAA, and an alpha value of 0xBB.
     #   @return [String]
     #
     # @!attribute [rw] outline_color
-    #   Specifies font outline color. This option is not valid for source
-    #   captions that are either 608/embedded or teletext. These source
-    #   settings are already pre-defined by the caption stream. All burn-in
-    #   and DVB-Sub font settings must match.
+    #   Specify font outline color. Leave Outline color (OutlineColor) blank
+    #   and set Style passthrough (StylePassthrough) to enabled to use the
+    #   font outline color data from your input captions, if present. Within
+    #   your job settings, all of your DVB-Sub settings must be identical.
     #   @return [String]
     #
     # @!attribute [rw] outline_size
-    #   Specifies font outline size in pixels. This option is not valid for
-    #   source captions that are either 608/embedded or teletext. These
-    #   source settings are already pre-defined by the caption stream. All
-    #   burn-in and DVB-Sub font settings must match.
+    #   Specify the Outline size (OutlineSize) of the caption text, in
+    #   pixels. Leave Outline size blank and set Style passthrough
+    #   (StylePassthrough) to enabled to use the outline size data from your
+    #   input captions, if present. Within your job settings, all of your
+    #   DVB-Sub settings must be identical.
     #   @return [Integer]
     #
     # @!attribute [rw] shadow_color
-    #   Specifies the color of the shadow cast by the captions. All burn-in
-    #   and DVB-Sub font settings must match.
+    #   Specify the color of the shadow cast by the captions. Leave Shadow
+    #   color (ShadowColor) blank and set Style passthrough
+    #   (StylePassthrough) to enabled to use the shadow color data from your
+    #   input captions, if present. Within your job settings, all of your
+    #   DVB-Sub settings must be identical.
     #   @return [String]
     #
     # @!attribute [rw] shadow_opacity
-    #   Specifies the opacity of the shadow. 255 is opaque; 0 is
-    #   transparent. Leaving this parameter blank is equivalent to setting
-    #   it to 0 (transparent). All burn-in and DVB-Sub font settings must
-    #   match.
+    #   Specify the opacity of the shadow. Enter a value from 0 to 255,
+    #   where 0 is transparent and 255 is opaque. If Style passthrough
+    #   (StylePassthrough) is set to Enabled, leave Shadow opacity
+    #   (ShadowOpacity) blank to pass through the shadow style information
+    #   in your input captions to your output captions. If Style passthrough
+    #   is set to disabled, leave blank to use a value of 0 and remove all
+    #   shadows from your output captions. Within your job settings, all of
+    #   your DVB-Sub settings must be identical.
     #   @return [Integer]
     #
     # @!attribute [rw] shadow_x_offset
-    #   Specifies the horizontal offset of the shadow relative to the
+    #   Specify the horizontal offset of the shadow, relative to the
     #   captions in pixels. A value of -2 would result in a shadow offset 2
-    #   pixels to the left. All burn-in and DVB-Sub font settings must
-    #   match.
+    #   pixels to the left. Within your job settings, all of your DVB-Sub
+    #   settings must be identical.
     #   @return [Integer]
     #
     # @!attribute [rw] shadow_y_offset
-    #   Specifies the vertical offset of the shadow relative to the captions
+    #   Specify the vertical offset of the shadow relative to the captions
     #   in pixels. A value of -2 would result in a shadow offset 2 pixels
-    #   above the text. All burn-in and DVB-Sub font settings must match.
+    #   above the text. Leave Shadow y-offset (ShadowYOffset) blank and set
+    #   Style passthrough (StylePassthrough) to enabled to use the shadow
+    #   y-offset data from your input captions, if present. Within your job
+    #   settings, all of your DVB-Sub settings must be identical.
     #   @return [Integer]
     #
     # @!attribute [rw] style_passthrough
-    #   Choose which set of style and position values the service applies to
-    #   your output captions. When you choose ENABLED, the service uses the
-    #   input style and position information from your input. When you
-    #   choose DISABLED, the service uses any style values that you specify
-    #   in your output settings. If you don't specify values, the service
-    #   uses default style and position values. When you choose DISABLED,
-    #   the service ignores all style and position values from your input.
+    #   Set Style passthrough (StylePassthrough) to ENABLED to use the
+    #   available style, color, and position information from your input
+    #   captions. MediaConvert uses default settings for any missing style
+    #   and position information in your input captions. Set Style
+    #   passthrough to DISABLED, or leave blank, to ignore the style and
+    #   position information from your input captions and use default
+    #   settings: white text with black outlining, bottom-center
+    #   positioning, and automatic sizing. Whether you set Style passthrough
+    #   to enabled or not, you can also choose to manually override any of
+    #   the individual style and position settings.
     #   @return [String]
     #
     # @!attribute [rw] subtitling_type
@@ -8225,12 +8268,13 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] teletext_spacing
-    #   Only applies to jobs with input captions in Teletext or STL formats.
-    #   Specify whether the spacing between letters in your captions is set
-    #   by the captions grid or varies depending on letter width. Choose
-    #   fixed grid to conform to the spacing specified in the captions file
-    #   more accurately. Choose proportional to make the text easier to read
-    #   if the captions are closed caption.
+    #   Specify whether the Text spacing (TextSpacing) in your captions is
+    #   set by the captions grid, or varies depending on letter width.
+    #   Choose fixed grid (FIXED\_GRID) to conform to the spacing specified
+    #   in the captions file more accurately. Choose proportional
+    #   (PROPORTIONAL) to make the text easier to read for closed captions.
+    #   Within your job settings, all of your DVB-Sub settings must be
+    #   identical.
     #   @return [String]
     #
     # @!attribute [rw] width
@@ -8241,25 +8285,22 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] x_position
-    #   Specifies the horizontal position of the caption relative to the
-    #   left side of the output in pixels. A value of 10 would result in the
-    #   captions starting 10 pixels from the left of the output. If no
-    #   explicit x\_position is provided, the horizontal caption position
-    #   will be determined by the alignment parameter. This option is not
-    #   valid for source captions that are STL, 608/embedded or teletext.
-    #   These source settings are already pre-defined by the caption stream.
-    #   All burn-in and DVB-Sub font settings must match.
+    #   Specify the horizontal position (XPosition) of the captions,
+    #   relative to the left side of the outputin pixels. A value of 10
+    #   would result in the captions starting 10 pixels from the left ofthe
+    #   output. If no explicit x\_position is provided, the horizontal
+    #   caption position will bedetermined by the alignment parameter.
+    #   Within your job settings, all of your DVB-Sub settings must be
+    #   identical.
     #   @return [Integer]
     #
     # @!attribute [rw] y_position
-    #   Specifies the vertical position of the caption relative to the top
-    #   of the output in pixels. A value of 10 would result in the captions
-    #   starting 10 pixels from the top of the output. If no explicit
-    #   y\_position is provided, the caption will be positioned towards the
-    #   bottom of the output. This option is not valid for source captions
-    #   that are STL, 608/embedded or teletext. These source settings are
-    #   already pre-defined by the caption stream. All burn-in and DVB-Sub
-    #   font settings must match.
+    #   Specify the vertical position (YPosition) of the captions, relative
+    #   to the top of the output in pixels. A value of 10 would result in
+    #   the captions starting 10 pixels from the top of the output. If no
+    #   explicit y\_position is provided, the caption will be positioned
+    #   towards the bottom of the output. Within your job settings, all of
+    #   your DVB-Sub settings must be identical.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DvbSubDestinationSettings AWS API Documentation
@@ -9120,6 +9161,7 @@ module Aws::MediaConvert
     #         },
     #         source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #         time_delta: 1,
+    #         time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #       }
     #
     # @!attribute [rw] convert_608_to_708
@@ -9134,11 +9176,11 @@ module Aws::MediaConvert
     #   Ignore this setting unless your input captions format is SCC. To
     #   have the service compensate for differing frame rates between your
     #   input captions and input video, specify the frame rate of the
-    #   captions file. Specify this value as a fraction, using the settings
-    #   Framerate numerator (framerateNumerator) and Framerate denominator
-    #   (framerateDenominator). For example, you might specify 24 / 1 for 24
-    #   fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001
-    #   for 29.97 fps.
+    #   captions file. Specify this value as a fraction. When you work
+    #   directly in your JSON job specification, use the settings
+    #   framerateNumerator and framerateDenominator. For example, you might
+    #   specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for
+    #   23.976 fps, or 30000 / 1001 for 29.97 fps.
     #   @return [Types::CaptionSourceFramerate]
     #
     # @!attribute [rw] source_file
@@ -9148,9 +9190,30 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] time_delta
-    #   Specifies a time delta in seconds to offset the captions from the
-    #   source file.
+    #   Optional. Use this setting when you need to adjust the sync between
+    #   your sidecar captions and your video. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/time-delta-use-cases.html.
+    #   Enter a positive or negative number to modify the times in the
+    #   captions file. For example, type 15 to add 15 seconds to all the
+    #   times in the captions file. Type -5 to subtract 5 seconds from the
+    #   times in the captions file. You can optionally specify your time
+    #   delta in milliseconds instead of seconds. When you do so, set the
+    #   related setting, Time delta units (TimeDeltaUnits) to Milliseconds
+    #   (MILLISECONDS). Note that, when you specify a time delta for
+    #   timecode-based caption sources, such as SCC and STL, and your time
+    #   delta isn't a multiple of the input frame rate, MediaConvert snaps
+    #   the captions to the nearest frame. For example, when your input
+    #   video frame rate is 25 fps and you specify 1010ms for time delta,
+    #   MediaConvert delays your captions by 1000 ms.
     #   @return [Integer]
+    #
+    # @!attribute [rw] time_delta_units
+    #   When you use the setting Time delta (TimeDelta) to adjust the sync
+    #   between your sidecar captions and your video, use this setting to
+    #   specify the units for the delta that you specify. When you don't
+    #   specify a value for Time delta units (TimeDeltaUnits), MediaConvert
+    #   uses seconds by default.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FileSourceSettings AWS API Documentation
     #
@@ -9158,7 +9221,8 @@ module Aws::MediaConvert
       :convert_608_to_708,
       :framerate,
       :source_file,
-      :time_delta)
+      :time_delta,
+      :time_delta_units)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11553,6 +11617,7 @@ module Aws::MediaConvert
     #                 },
     #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                 time_delta: 1,
+    #                 time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #               },
     #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #               teletext_source_settings: {
@@ -12009,6 +12074,7 @@ module Aws::MediaConvert
     #                 },
     #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                 time_delta: 1,
+    #                 time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #               },
     #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #               teletext_source_settings: {
@@ -12667,6 +12733,7 @@ module Aws::MediaConvert
     #                     },
     #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                     time_delta: 1,
+    #                     time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #                   },
     #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                   teletext_source_settings: {
@@ -14111,6 +14178,7 @@ module Aws::MediaConvert
     #                     },
     #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                     time_delta: 1,
+    #                     time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #                   },
     #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                   teletext_source_settings: {
@@ -21987,7 +22055,12 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # SRT Destination Settings
+    # Settings related to SRT captions. SRT is a sidecar format that holds
+    # captions in a file that is separate from the video container. Set up
+    # sidecar captions in the same output group, but different output from
+    # your video. When you work directly in your JSON job specification,
+    # include this object and any required children when you set
+    # destinationType to SRT.
     #
     # @note When making an API call, you may pass SrtDestinationSettings
     #   data as a hash:
@@ -21997,9 +22070,12 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] style_passthrough
-    #   Choose Enabled (ENABLED) to have MediaConvert use the font style,
-    #   color, and position information from the captions source in the
-    #   input. Keep the default value, Disabled (DISABLED), for simplified
+    #   Set Style passthrough (StylePassthrough) to ENABLED to use the
+    #   available style, color, and position information from your input
+    #   captions. MediaConvert uses default settings for any missing style
+    #   and position information in your input captions. Set Style
+    #   passthrough to DISABLED, or leave blank, to ignore the style and
+    #   position information from your input captions and use simplified
     #   output captions.
     #   @return [String]
     #
@@ -22540,6 +22616,7 @@ module Aws::MediaConvert
     #                       },
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT",
     #                       time_delta: 1,
+    #                       time_delta_units: "SECONDS", # accepts SECONDS, MILLISECONDS
     #                     },
     #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, SMPTE_TT, TELETEXT, NULL_SOURCE, IMSC, WEBVTT
     #                     teletext_source_settings: {
@@ -25941,18 +26018,16 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] sample_range
-    #   Use this setting when your input video codec is AVC-Intra. Ignore
-    #   this setting for all other inputs. If the sample range metadata in
-    #   your input video is accurate, or if you don't know about sample
-    #   range, keep the default value, Follow (FOLLOW), for this setting.
-    #   When you do, the service automatically detects your input sample
-    #   range. If your input video has metadata indicating the wrong sample
-    #   range, specify the accurate sample range here. When you do,
-    #   MediaConvert ignores any sample range information in the input
-    #   metadata. Regardless of whether MediaConvert uses the input sample
-    #   range or the sample range that you specify, MediaConvert uses the
-    #   sample range for transcoding and also writes it to the output
-    #   metadata.
+    #   If the sample range metadata in your input video is accurate, or if
+    #   you don't know about sample range, keep the default value, Follow
+    #   (FOLLOW), for this setting. When you do, the service automatically
+    #   detects your input sample range. If your input video has metadata
+    #   indicating the wrong sample range, specify the accurate sample range
+    #   here. When you do, MediaConvert ignores any sample range information
+    #   in the input metadata. Regardless of whether MediaConvert uses the
+    #   input sample range or the sample range that you specify,
+    #   MediaConvert uses the sample range for transcoding and also writes
+    #   it to the output metadata.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoSelector AWS API Documentation
@@ -26360,7 +26435,14 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # WEBVTT Destination Settings
+    # Settings related to WebVTT captions. WebVTT is a sidecar format that
+    # holds captions in a file that is separate from the video container.
+    # Set up sidecar captions in the same output group, but different output
+    # from your video. For more information, see
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
+    # When you work directly in your JSON job specification, include this
+    # object and any required children when you set destinationType to
+    # WebVTT.
     #
     # @note When making an API call, you may pass WebvttDestinationSettings
     #   data as a hash:
@@ -26370,9 +26452,12 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] style_passthrough
-    #   Choose Enabled (ENABLED) to have MediaConvert use the font style,
-    #   color, and position information from the captions source in the
-    #   input. Keep the default value, Disabled (DISABLED), for simplified
+    #   Set Style passthrough (StylePassthrough) to ENABLED to use the
+    #   available style, color, and position information from your input
+    #   captions. MediaConvert uses default settings for any missing style
+    #   and position information in your input captions. Set Style
+    #   passthrough to DISABLED, or leave blank, to ignore the style and
+    #   position information from your input captions and use simplified
     #   output captions.
     #   @return [String]
     #
