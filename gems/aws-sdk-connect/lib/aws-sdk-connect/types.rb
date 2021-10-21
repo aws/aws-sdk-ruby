@@ -3478,11 +3478,11 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The start time that your contact center is open.
+    #   The start time that your contact center opens.
     #   @return [Types::HoursOfOperationTimeSlice]
     #
     # @!attribute [rw] end_time
-    #   The end time that your contact center is closes.
+    #   The end time that your contact center closes.
     #   @return [Types::HoursOfOperationTimeSlice]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperationConfig AWS API Documentation
@@ -4580,7 +4580,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. If no value is
+    #   specified, the default is 10.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListLexBotsRequest AWS API Documentation
