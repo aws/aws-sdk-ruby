@@ -2708,6 +2708,7 @@ module Aws::Chime
     VoiceConnector.add_member(:require_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequireEncryption"))
     VoiceConnector.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
     VoiceConnector.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    VoiceConnector.add_member(:voice_connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VoiceConnectorArn"))
     VoiceConnector.struct_class = Types::VoiceConnector
 
     VoiceConnectorGroup.add_member(:voice_connector_group_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VoiceConnectorGroupId"))
@@ -2715,6 +2716,7 @@ module Aws::Chime
     VoiceConnectorGroup.add_member(:voice_connector_items, Shapes::ShapeRef.new(shape: VoiceConnectorItemList, location_name: "VoiceConnectorItems"))
     VoiceConnectorGroup.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
     VoiceConnectorGroup.add_member(:updated_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "UpdatedTimestamp"))
+    VoiceConnectorGroup.add_member(:voice_connector_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VoiceConnectorGroupArn"))
     VoiceConnectorGroup.struct_class = Types::VoiceConnectorGroup
 
     VoiceConnectorGroupList.member = Shapes::ShapeRef.new(shape: VoiceConnectorGroup)

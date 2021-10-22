@@ -7047,6 +7047,9 @@ module Aws::QuickSight
     #           quick_sight_console: {
     #             initial_path: "EntryPath",
     #           },
+    #           q_search_bar: {
+    #             initial_topic_id: "RestrictiveResourceId",
+    #           },
     #         },
     #       }
     #
@@ -7066,8 +7069,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] experience_configuration
     #   The experience you are embedding. For registered users, you can
-    #   embed Amazon QuickSight dashboards or the entire Amazon QuickSight
-    #   console.
+    #   embed Amazon QuickSight dashboards, the entire Amazon QuickSight
+    #   console, or the Amazon QuickSight Q search bar.
     #   @return [Types::RegisteredUserEmbeddingExperienceConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForRegisteredUserRequest AWS API Documentation
@@ -7082,7 +7085,8 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] embed_url
-    #   The embed URL for the Amazon QuickSight dashboard or console.
+    #   The embed URL for the Amazon QuickSight dashboard, console, or Q
+    #   search bar.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -10227,6 +10231,9 @@ module Aws::QuickSight
     #         quick_sight_console: {
     #           initial_path: "EntryPath",
     #         },
+    #         q_search_bar: {
+    #           initial_topic_id: "RestrictiveResourceId",
+    #         },
     #       }
     #
     # @!attribute [rw] dashboard
@@ -10268,11 +10275,52 @@ module Aws::QuickSight
     #   [3]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
     #   @return [Types::RegisteredUserQuickSightConsoleEmbeddingConfiguration]
     #
+    # @!attribute [rw] q_search_bar
+    #   The configuration details for embedding the Q search bar.
+    #
+    #   For more information about embedding the Q search bar, see
+    #   [Embedding Overview][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html
+    #   @return [Types::RegisteredUserQSearchBarEmbeddingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserEmbeddingExperienceConfiguration AWS API Documentation
     #
     class RegisteredUserEmbeddingExperienceConfiguration < Struct.new(
       :dashboard,
-      :quick_sight_console)
+      :quick_sight_console,
+      :q_search_bar)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the Q search bar embedding experience.
+    #
+    # @note When making an API call, you may pass RegisteredUserQSearchBarEmbeddingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         initial_topic_id: "RestrictiveResourceId",
+    #       }
+    #
+    # @!attribute [rw] initial_topic_id
+    #   The ID of the Q topic that you want to make the starting topic in
+    #   the Q search bar. You can find a topic ID by navigating to the
+    #   Topics pane in the Amazon QuickSight application and opening a
+    #   topic. The ID is in the URL for the topic that you open.
+    #
+    #   If you don't specify an initial topic, a list of all shared topics
+    #   is shown in the Q bar for your readers. When you select an initial
+    #   topic, you can specify whether or not readers are allowed to select
+    #   other topics from the available ones in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RegisteredUserQSearchBarEmbeddingConfiguration AWS API Documentation
+    #
+    class RegisteredUserQSearchBarEmbeddingConfiguration < Struct.new(
+      :initial_topic_id)
       SENSITIVE = []
       include Aws::Structure
     end

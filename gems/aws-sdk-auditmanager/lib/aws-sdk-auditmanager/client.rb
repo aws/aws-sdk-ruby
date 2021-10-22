@@ -595,8 +595,8 @@ module Aws::AuditManager
     #   that is being created.
     #
     # @option params [required, Types::Scope] :scope
-    #   The wrapper that contains the accounts and services in scope for the
-    #   assessment.
+    #   The wrapper that contains the Amazon Web Services accounts and
+    #   services in scope for the assessment.
     #
     # @option params [required, Array<Types::Role>] :roles
     #   The list of roles for the specified assessment.
@@ -1079,8 +1079,8 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Removes the specified member account as a delegated administrator for
-    # Audit Manager.
+    # Removes the specified member Amazon Web Services account as a
+    # delegated administrator for Audit Manager.
     #
     # When you remove a delegated administrator from your Audit Manager
     # settings, or when you deregister a delegated administrator from
@@ -1868,7 +1868,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Returns the settings for the specified account.
+    # Returns the settings for the specified Amazon Web Services account.
     #
     # @option params [required, String] :attribute
     #   The list of `SettingAttribute` enum values.
@@ -2223,7 +2223,7 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Enables Audit Manager for the specified account.
+    # Enables Audit Manager for the specified Amazon Web Services account.
     #
     # @option params [String] :kms_key
     #   The KMS key details.
@@ -2255,8 +2255,8 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Enables an account within the organization as the delegated
-    # administrator for Audit Manager.
+    # Enables an Amazon Web Services account within the organization as the
+    # delegated administrator for Audit Manager.
     #
     # @option params [required, String] :admin_account_id
     #   The identifier for the specified delegated administrator account.
@@ -3018,7 +3018,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

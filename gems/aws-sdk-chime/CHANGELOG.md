@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-10-22)
+------------------
+
+* Feature - Chime VoiceConnector and VoiceConnectorGroup APIs will now return an ARN.
+
 1.59.0 (2021-10-18)
 ------------------
 

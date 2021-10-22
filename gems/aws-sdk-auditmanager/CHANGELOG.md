@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2021-10-22)
+------------------
+
+* Feature - This release introduces character restrictions for ControlSet names. We updated regex patterns for the following attributes: ControlSet, CreateAssessmentFrameworkControlSet, and UpdateAssessmentFrameworkControlSet.
+
 1.12.0 (2021-10-18)
 ------------------
 

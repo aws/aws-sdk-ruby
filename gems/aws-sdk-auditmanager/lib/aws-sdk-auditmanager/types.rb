@@ -10,8 +10,8 @@
 module Aws::AuditManager
   module Types
 
-    # The wrapper of account details, such as account ID, email address, and
-    # so on.
+    # The wrapper of Amazon Web Services account details, such as account
+    # ID, email address, and so on.
     #
     # @note When making an API call, you may pass AWSAccount
     #   data as a hash:
@@ -23,15 +23,16 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier for the specified account.
+    #   The identifier for the specified Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   The email address associated with the specified account.
+    #   The email address associated with the specified Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the specified account.
+    #   The name of the specified Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AWSAccount AWS API Documentation
@@ -88,7 +89,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] aws_account
-    #   The account associated with the assessment.
+    #   The Amazon Web Services account associated with the assessment.
     #   @return [Types::AWSAccount]
     #
     # @!attribute [rw] metadata
@@ -454,7 +455,8 @@ module Aws::AuditManager
     #   @return [Types::AssessmentReportsDestination]
     #
     # @!attribute [rw] scope
-    #   The wrapper of accounts and services in scope for the assessment.
+    #   The wrapper of Amazon Web Services accounts and services in scope
+    #   for the assessment.
     #   @return [Types::Scope]
     #
     # @!attribute [rw] roles
@@ -559,7 +561,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The identifier for the specified account.
+    #   The identifier for the specified Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] assessment_id
@@ -1554,8 +1556,8 @@ module Aws::AuditManager
     #   @return [Types::AssessmentReportsDestination]
     #
     # @!attribute [rw] scope
-    #   The wrapper that contains the accounts and services in scope for the
-    #   assessment.
+    #   The wrapper that contains the Amazon Web Services accounts and
+    #   services in scope for the assessment.
     #   @return [Types::Scope]
     #
     # @!attribute [rw] roles
@@ -2092,7 +2094,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] evidence_aws_account_id
-    #   The identifier for the specified account.
+    #   The identifier for the specified Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] time
@@ -2134,12 +2136,12 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] aws_organization
-    #   The account from which the evidence is collected, and its
-    #   organization path.
+    #   The Amazon Web Services account from which the evidence is
+    #   collected, and its organization path.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The identifier for the specified account.
+    #   The identifier for the specified Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
@@ -2296,7 +2298,7 @@ module Aws::AuditManager
     class GetAccountStatusRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] status
-    #   The status of the specified account.
+    #   The status of the specified Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAccountStatusResponse AWS API Documentation
@@ -3439,8 +3441,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The wrapper that contains the accounts and services in scope for the
-    # assessment.
+    # The wrapper that contains the Amazon Web Services accounts and
+    # services in scope for the assessment.
     #
     # @note When making an API call, you may pass Scope
     #   data as a hash:
@@ -3461,7 +3463,8 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] aws_accounts
-    #   The accounts included in the scope of the assessment.
+    #   The Amazon Web Services accounts included in the scope of the
+    #   assessment.
     #   @return [Array<Types::AWSAccount>]
     #
     # @!attribute [rw] aws_services
