@@ -33,9 +33,9 @@ module Aws
       end
 
       describe '#signed_url' do
-        it 'raises error if url is invaild' do
+        it 'raises error if url is invalid' do
           expect {
-            signer.signed_url('what_ever_ilegal/url')
+            signer.signed_url('what_ever_illegal/url')
           }.to raise_error(ArgumentError)
         end
         it 'can generate signed urls with custom policy' do

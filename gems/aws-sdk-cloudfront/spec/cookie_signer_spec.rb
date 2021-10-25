@@ -17,9 +17,9 @@ module Aws
       let(:expires) { 1357034400 } # January 1, 2013 10:00 am UTC (Unix timestamp)
 
       describe '#signed_cookie' do
-        it 'raises error if url is invaild' do
+        it 'raises error if url is invalid' do
           expect {
-            signer.signed_cookie("what_ever_ilegal/url")
+            signer.signed_cookie("what_ever_illegal/url")
           }.to raise_error(ArgumentError)
         end
 
