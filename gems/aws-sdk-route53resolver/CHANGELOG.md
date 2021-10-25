@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2021-10-25)
+------------------
+
+* Feature - New API for ResolverConfig, which allows autodefined rules for reverse DNS resolution to be disabled for a VPC
+
 1.31.0 (2021-10-18)
 ------------------
 

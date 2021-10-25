@@ -37,6 +37,8 @@ module Aws::AuditManager
     AssessmentFramework = Shapes::StructureShape.new(name: 'AssessmentFramework')
     AssessmentFrameworkDescription = Shapes::StringShape.new(name: 'AssessmentFrameworkDescription')
     AssessmentFrameworkMetadata = Shapes::StructureShape.new(name: 'AssessmentFrameworkMetadata')
+    AssessmentFrameworkShareRequest = Shapes::StructureShape.new(name: 'AssessmentFrameworkShareRequest')
+    AssessmentFrameworkShareRequestList = Shapes::ListShape.new(name: 'AssessmentFrameworkShareRequestList')
     AssessmentMetadata = Shapes::StructureShape.new(name: 'AssessmentMetadata')
     AssessmentMetadataItem = Shapes::StructureShape.new(name: 'AssessmentMetadataItem')
     AssessmentName = Shapes::StringShape.new(name: 'AssessmentName')
@@ -122,6 +124,8 @@ module Aws::AuditManager
     Delegations = Shapes::ListShape.new(name: 'Delegations')
     DeleteAssessmentFrameworkRequest = Shapes::StructureShape.new(name: 'DeleteAssessmentFrameworkRequest')
     DeleteAssessmentFrameworkResponse = Shapes::StructureShape.new(name: 'DeleteAssessmentFrameworkResponse')
+    DeleteAssessmentFrameworkShareRequest = Shapes::StructureShape.new(name: 'DeleteAssessmentFrameworkShareRequest')
+    DeleteAssessmentFrameworkShareResponse = Shapes::StructureShape.new(name: 'DeleteAssessmentFrameworkShareResponse')
     DeleteAssessmentReportRequest = Shapes::StructureShape.new(name: 'DeleteAssessmentReportRequest')
     DeleteAssessmentReportResponse = Shapes::StructureShape.new(name: 'DeleteAssessmentReportResponse')
     DeleteAssessmentRequest = Shapes::StructureShape.new(name: 'DeleteAssessmentRequest')
@@ -192,6 +196,8 @@ module Aws::AuditManager
     Keywords = Shapes::ListShape.new(name: 'Keywords')
     KmsKey = Shapes::StringShape.new(name: 'KmsKey')
     LastUpdatedBy = Shapes::StringShape.new(name: 'LastUpdatedBy')
+    ListAssessmentFrameworkShareRequestsRequest = Shapes::StructureShape.new(name: 'ListAssessmentFrameworkShareRequestsRequest')
+    ListAssessmentFrameworkShareRequestsResponse = Shapes::StructureShape.new(name: 'ListAssessmentFrameworkShareRequestsResponse')
     ListAssessmentFrameworksRequest = Shapes::StructureShape.new(name: 'ListAssessmentFrameworksRequest')
     ListAssessmentFrameworksResponse = Shapes::StructureShape.new(name: 'ListAssessmentFrameworksResponse')
     ListAssessmentMetadata = Shapes::ListShape.new(name: 'ListAssessmentMetadata')
@@ -213,7 +219,9 @@ module Aws::AuditManager
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     Notification = Shapes::StructureShape.new(name: 'Notification')
     Notifications = Shapes::ListShape.new(name: 'Notifications')
+    NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     ObjectTypeEnum = Shapes::StringShape.new(name: 'ObjectTypeEnum')
+    Region = Shapes::StringShape.new(name: 'Region')
     RegisterAccountRequest = Shapes::StructureShape.new(name: 'RegisterAccountRequest')
     RegisterAccountResponse = Shapes::StructureShape.new(name: 'RegisterAccountResponse')
     RegisterOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'RegisterOrganizationAdminAccountRequest')
@@ -231,6 +239,10 @@ module Aws::AuditManager
     ServiceMetadataList = Shapes::ListShape.new(name: 'ServiceMetadataList')
     SettingAttribute = Shapes::StringShape.new(name: 'SettingAttribute')
     Settings = Shapes::StructureShape.new(name: 'Settings')
+    ShareRequestAction = Shapes::StringShape.new(name: 'ShareRequestAction')
+    ShareRequestComment = Shapes::StringShape.new(name: 'ShareRequestComment')
+    ShareRequestStatus = Shapes::StringShape.new(name: 'ShareRequestStatus')
+    ShareRequestType = Shapes::StringShape.new(name: 'ShareRequestType')
     SnsArn = Shapes::StringShape.new(name: 'SnsArn')
     SourceDescription = Shapes::StringShape.new(name: 'SourceDescription')
     SourceFrequency = Shapes::StringShape.new(name: 'SourceFrequency')
@@ -238,6 +250,8 @@ module Aws::AuditManager
     SourceName = Shapes::StringShape.new(name: 'SourceName')
     SourceSetUpOption = Shapes::StringShape.new(name: 'SourceSetUpOption')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    StartAssessmentFrameworkShareRequest = Shapes::StructureShape.new(name: 'StartAssessmentFrameworkShareRequest')
+    StartAssessmentFrameworkShareResponse = Shapes::StructureShape.new(name: 'StartAssessmentFrameworkShareResponse')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -262,6 +276,8 @@ module Aws::AuditManager
     UpdateAssessmentFrameworkControlSets = Shapes::ListShape.new(name: 'UpdateAssessmentFrameworkControlSets')
     UpdateAssessmentFrameworkRequest = Shapes::StructureShape.new(name: 'UpdateAssessmentFrameworkRequest')
     UpdateAssessmentFrameworkResponse = Shapes::StructureShape.new(name: 'UpdateAssessmentFrameworkResponse')
+    UpdateAssessmentFrameworkShareRequest = Shapes::StructureShape.new(name: 'UpdateAssessmentFrameworkShareRequest')
+    UpdateAssessmentFrameworkShareResponse = Shapes::StructureShape.new(name: 'UpdateAssessmentFrameworkShareResponse')
     UpdateAssessmentRequest = Shapes::StructureShape.new(name: 'UpdateAssessmentRequest')
     UpdateAssessmentResponse = Shapes::StructureShape.new(name: 'UpdateAssessmentResponse')
     UpdateAssessmentStatusRequest = Shapes::StructureShape.new(name: 'UpdateAssessmentStatusRequest')
@@ -368,6 +384,25 @@ module Aws::AuditManager
     AssessmentFrameworkMetadata.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     AssessmentFrameworkMetadata.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
     AssessmentFrameworkMetadata.struct_class = Types::AssessmentFrameworkMetadata
+
+    AssessmentFrameworkShareRequest.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
+    AssessmentFrameworkShareRequest.add_member(:framework_id, Shapes::ShapeRef.new(shape: UUID, location_name: "frameworkId"))
+    AssessmentFrameworkShareRequest.add_member(:framework_name, Shapes::ShapeRef.new(shape: FrameworkName, location_name: "frameworkName"))
+    AssessmentFrameworkShareRequest.add_member(:framework_description, Shapes::ShapeRef.new(shape: FrameworkDescription, location_name: "frameworkDescription"))
+    AssessmentFrameworkShareRequest.add_member(:status, Shapes::ShapeRef.new(shape: ShareRequestStatus, location_name: "status"))
+    AssessmentFrameworkShareRequest.add_member(:source_account, Shapes::ShapeRef.new(shape: AccountId, location_name: "sourceAccount"))
+    AssessmentFrameworkShareRequest.add_member(:destination_account, Shapes::ShapeRef.new(shape: AccountId, location_name: "destinationAccount"))
+    AssessmentFrameworkShareRequest.add_member(:destination_region, Shapes::ShapeRef.new(shape: Region, location_name: "destinationRegion"))
+    AssessmentFrameworkShareRequest.add_member(:expiration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expirationTime"))
+    AssessmentFrameworkShareRequest.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
+    AssessmentFrameworkShareRequest.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdated"))
+    AssessmentFrameworkShareRequest.add_member(:comment, Shapes::ShapeRef.new(shape: ShareRequestComment, location_name: "comment"))
+    AssessmentFrameworkShareRequest.add_member(:standard_controls_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "standardControlsCount"))
+    AssessmentFrameworkShareRequest.add_member(:custom_controls_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "customControlsCount"))
+    AssessmentFrameworkShareRequest.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, location_name: "complianceType"))
+    AssessmentFrameworkShareRequest.struct_class = Types::AssessmentFrameworkShareRequest
+
+    AssessmentFrameworkShareRequestList.member = Shapes::ShapeRef.new(shape: AssessmentFrameworkShareRequest)
 
     AssessmentMetadata.add_member(:name, Shapes::ShapeRef.new(shape: AssessmentName, location_name: "name"))
     AssessmentMetadata.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
@@ -664,6 +699,12 @@ module Aws::AuditManager
 
     DeleteAssessmentFrameworkResponse.struct_class = Types::DeleteAssessmentFrameworkResponse
 
+    DeleteAssessmentFrameworkShareRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "requestId"))
+    DeleteAssessmentFrameworkShareRequest.add_member(:request_type, Shapes::ShapeRef.new(shape: ShareRequestType, required: true, location: "querystring", location_name: "requestType"))
+    DeleteAssessmentFrameworkShareRequest.struct_class = Types::DeleteAssessmentFrameworkShareRequest
+
+    DeleteAssessmentFrameworkShareResponse.struct_class = Types::DeleteAssessmentFrameworkShareResponse
+
     DeleteAssessmentReportRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "assessmentId"))
     DeleteAssessmentReportRequest.add_member(:assessment_report_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "assessmentReportId"))
     DeleteAssessmentReportRequest.struct_class = Types::DeleteAssessmentReportRequest
@@ -866,6 +907,15 @@ module Aws::AuditManager
 
     Keywords.member = Shapes::ShapeRef.new(shape: KeywordValue)
 
+    ListAssessmentFrameworkShareRequestsRequest.add_member(:request_type, Shapes::ShapeRef.new(shape: ShareRequestType, required: true, location: "querystring", location_name: "requestType"))
+    ListAssessmentFrameworkShareRequestsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
+    ListAssessmentFrameworkShareRequestsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAssessmentFrameworkShareRequestsRequest.struct_class = Types::ListAssessmentFrameworkShareRequestsRequest
+
+    ListAssessmentFrameworkShareRequestsResponse.add_member(:assessment_framework_share_requests, Shapes::ShapeRef.new(shape: AssessmentFrameworkShareRequestList, location_name: "assessmentFrameworkShareRequests"))
+    ListAssessmentFrameworkShareRequestsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
+    ListAssessmentFrameworkShareRequestsResponse.struct_class = Types::ListAssessmentFrameworkShareRequestsResponse
+
     ListAssessmentFrameworksRequest.add_member(:framework_type, Shapes::ShapeRef.new(shape: FrameworkType, required: true, location: "querystring", location_name: "frameworkType"))
     ListAssessmentFrameworksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
     ListAssessmentFrameworksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -996,6 +1046,15 @@ module Aws::AuditManager
     SourceKeyword.add_member(:keyword_value, Shapes::ShapeRef.new(shape: KeywordValue, location_name: "keywordValue"))
     SourceKeyword.struct_class = Types::SourceKeyword
 
+    StartAssessmentFrameworkShareRequest.add_member(:framework_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "frameworkId"))
+    StartAssessmentFrameworkShareRequest.add_member(:destination_account, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "destinationAccount"))
+    StartAssessmentFrameworkShareRequest.add_member(:destination_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "destinationRegion"))
+    StartAssessmentFrameworkShareRequest.add_member(:comment, Shapes::ShapeRef.new(shape: ShareRequestComment, location_name: "comment"))
+    StartAssessmentFrameworkShareRequest.struct_class = Types::StartAssessmentFrameworkShareRequest
+
+    StartAssessmentFrameworkShareResponse.add_member(:assessment_framework_share_request, Shapes::ShapeRef.new(shape: AssessmentFrameworkShareRequest, location_name: "assessmentFrameworkShareRequest"))
+    StartAssessmentFrameworkShareResponse.struct_class = Types::StartAssessmentFrameworkShareResponse
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -1052,6 +1111,14 @@ module Aws::AuditManager
 
     UpdateAssessmentFrameworkResponse.add_member(:framework, Shapes::ShapeRef.new(shape: Framework, location_name: "framework"))
     UpdateAssessmentFrameworkResponse.struct_class = Types::UpdateAssessmentFrameworkResponse
+
+    UpdateAssessmentFrameworkShareRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "requestId"))
+    UpdateAssessmentFrameworkShareRequest.add_member(:request_type, Shapes::ShapeRef.new(shape: ShareRequestType, required: true, location_name: "requestType"))
+    UpdateAssessmentFrameworkShareRequest.add_member(:action, Shapes::ShapeRef.new(shape: ShareRequestAction, required: true, location_name: "action"))
+    UpdateAssessmentFrameworkShareRequest.struct_class = Types::UpdateAssessmentFrameworkShareRequest
+
+    UpdateAssessmentFrameworkShareResponse.add_member(:assessment_framework_share_request, Shapes::ShapeRef.new(shape: AssessmentFrameworkShareRequest, location_name: "assessmentFrameworkShareRequest"))
+    UpdateAssessmentFrameworkShareResponse.struct_class = Types::UpdateAssessmentFrameworkShareResponse
 
     UpdateAssessmentRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "assessmentId"))
     UpdateAssessmentRequest.add_member(:assessment_name, Shapes::ShapeRef.new(shape: AssessmentName, location_name: "assessmentName"))
@@ -1271,6 +1338,18 @@ module Aws::AuditManager
         o.http_request_uri = "/assessmentFrameworks/{frameworkId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteAssessmentFrameworkRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAssessmentFrameworkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_assessment_framework_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAssessmentFrameworkShare"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/assessmentFrameworkShareRequests/{requestId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAssessmentFrameworkShareRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAssessmentFrameworkShareResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1540,6 +1619,23 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:list_assessment_framework_share_requests, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssessmentFrameworkShareRequests"
+        o.http_method = "GET"
+        o.http_request_uri = "/assessmentFrameworkShareRequests"
+        o.input = Shapes::ShapeRef.new(shape: ListAssessmentFrameworkShareRequestsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAssessmentFrameworkShareRequestsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_assessment_frameworks, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAssessmentFrameworks"
         o.http_method = "GET"
@@ -1677,6 +1773,18 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:start_assessment_framework_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAssessmentFrameworkShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/assessmentFrameworks/{frameworkId}/shareRequests"
+        o.input = Shapes::ShapeRef.new(shape: StartAssessmentFrameworkShareRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAssessmentFrameworkShareResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -1741,6 +1849,18 @@ module Aws::AuditManager
         o.http_request_uri = "/assessmentFrameworks/{frameworkId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateAssessmentFrameworkRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAssessmentFrameworkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_assessment_framework_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAssessmentFrameworkShare"
+        o.http_method = "PUT"
+        o.http_request_uri = "/assessmentFrameworkShareRequests/{requestId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAssessmentFrameworkShareRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAssessmentFrameworkShareResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

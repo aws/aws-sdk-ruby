@@ -59777,6 +59777,18 @@ module Aws::EC2
     #   The ID of the transit gateway associated with the VPN connection.
     #   @return [String]
     #
+    # @!attribute [rw] core_network_arn
+    #   The ARN of the core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_attachment_arn
+    #   The ARN of the core network attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_association_state
+    #   The current state of the gateway association.
+    #   @return [String]
+    #
     # @!attribute [rw] options
     #   The VPN connection options.
     #   @return [Types::VpnConnectionOptions]
@@ -59804,6 +59816,9 @@ module Aws::EC2
       :vpn_connection_id,
       :vpn_gateway_id,
       :transit_gateway_id,
+      :core_network_arn,
+      :core_network_attachment_arn,
+      :gateway_association_state,
       :options,
       :routes,
       :tags,

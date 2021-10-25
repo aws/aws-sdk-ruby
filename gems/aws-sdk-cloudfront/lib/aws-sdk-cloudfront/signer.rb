@@ -68,7 +68,7 @@ module Aws
             resource_content
           end
         else
-          msg = "Invaild URI scheme:#{scheme}.Scheme must be one of: http, https or rtmp."
+          msg = "Invalid URI scheme:#{scheme}.Scheme must be one of: http, https or rtmp."
           raise ArgumentError, msg
         end
       end

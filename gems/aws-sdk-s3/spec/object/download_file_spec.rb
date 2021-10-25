@@ -155,7 +155,7 @@ module Aws
           small_obj.download_file(path, version_id: version_id)
         end
 
-        it 'raises an error if an invaild mode is specified' do
+        it 'raises an error if an invalid mode is specified' do
           expect { large_obj.download_file(path, mode: 'invalid_mode') }
             .to raise_error(
               ArgumentError,

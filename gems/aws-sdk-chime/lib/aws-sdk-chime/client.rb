@@ -2224,6 +2224,7 @@ module Aws::Chime
     #   resp.voice_connector.require_encryption #=> Boolean
     #   resp.voice_connector.created_timestamp #=> Time
     #   resp.voice_connector.updated_timestamp #=> Time
+    #   resp.voice_connector.voice_connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateVoiceConnector AWS API Documentation
     #
@@ -2274,6 +2275,7 @@ module Aws::Chime
     #   resp.voice_connector_group.voice_connector_items[0].priority #=> Integer
     #   resp.voice_connector_group.created_timestamp #=> Time
     #   resp.voice_connector_group.updated_timestamp #=> Time
+    #   resp.voice_connector_group.voice_connector_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateVoiceConnectorGroup AWS API Documentation
     #
@@ -4457,6 +4459,7 @@ module Aws::Chime
     #   resp.voice_connector.require_encryption #=> Boolean
     #   resp.voice_connector.created_timestamp #=> Time
     #   resp.voice_connector.updated_timestamp #=> Time
+    #   resp.voice_connector.voice_connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnector AWS API Documentation
     #
@@ -4524,6 +4527,7 @@ module Aws::Chime
     #   resp.voice_connector_group.voice_connector_items[0].priority #=> Integer
     #   resp.voice_connector_group.created_timestamp #=> Time
     #   resp.voice_connector_group.updated_timestamp #=> Time
+    #   resp.voice_connector_group.voice_connector_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorGroup AWS API Documentation
     #
@@ -6226,6 +6230,7 @@ module Aws::Chime
     #   resp.voice_connector_groups[0].voice_connector_items[0].priority #=> Integer
     #   resp.voice_connector_groups[0].created_timestamp #=> Time
     #   resp.voice_connector_groups[0].updated_timestamp #=> Time
+    #   resp.voice_connector_groups[0].voice_connector_group_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectorGroups AWS API Documentation
@@ -6300,6 +6305,7 @@ module Aws::Chime
     #   resp.voice_connectors[0].require_encryption #=> Boolean
     #   resp.voice_connectors[0].created_timestamp #=> Time
     #   resp.voice_connectors[0].updated_timestamp #=> Time
+    #   resp.voice_connectors[0].voice_connector_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListVoiceConnectors AWS API Documentation
@@ -8392,6 +8398,7 @@ module Aws::Chime
     #   resp.voice_connector.require_encryption #=> Boolean
     #   resp.voice_connector.created_timestamp #=> Time
     #   resp.voice_connector.updated_timestamp #=> Time
+    #   resp.voice_connector.voice_connector_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateVoiceConnector AWS API Documentation
     #
@@ -8440,6 +8447,7 @@ module Aws::Chime
     #   resp.voice_connector_group.voice_connector_items[0].priority #=> Integer
     #   resp.voice_connector_group.created_timestamp #=> Time
     #   resp.voice_connector_group.updated_timestamp #=> Time
+    #   resp.voice_connector_group.voice_connector_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateVoiceConnectorGroup AWS API Documentation
     #
@@ -8463,7 +8471,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

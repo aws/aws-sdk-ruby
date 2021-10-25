@@ -767,9 +767,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Creates hours of operation.
     #
     # @option params [required, String] :instance_id
@@ -1352,9 +1349,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Deletes an hours of operation.
     #
     # @option params [required, String] :instance_id
@@ -1654,9 +1648,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Describes the hours of operation.
     #
     # @option params [required, String] :instance_id
@@ -3519,7 +3510,8 @@ module Aws::Connect
     #   results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return per page.
+    #   The maximum number of results to return per page. If no value is
+    #   specified, the default is 10.
     #
     # @return [Types::ListLexBotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5010,9 +5002,6 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
-    # change.
-    #
     # Updates the hours of operation.
     #
     # @option params [required, String] :instance_id
@@ -5849,7 +5838,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

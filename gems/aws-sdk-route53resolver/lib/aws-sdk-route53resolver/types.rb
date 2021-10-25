@@ -2015,6 +2015,40 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetResolverConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   Resource ID of the Amazon VPC that you want to get information
+    #   about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverConfigRequest AWS API Documentation
+    #
+    class GetResolverConfigRequest < Struct.new(
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resolver_config
+    #   Information about the behavior configuration of Route 53 Resolver
+    #   behavior for the VPC you specified in the `GetResolverConfig`
+    #   request.
+    #   @return [Types::ResolverConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverConfigResponse AWS API Documentation
+    #
+    class GetResolverConfigResponse < Struct.new(
+      :resolver_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetResolverDnssecConfigRequest
     #   data as a hash:
     #
@@ -3011,6 +3045,69 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListResolverConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of Resolver configurations that you want to
+    #   return in the response to a `ListResolverConfigs` request. If you
+    #   don't specify a value for `MaxResults`, up to 100 Resolver
+    #   configurations are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) If the current Amazon Web Services account has more than
+    #   `MaxResults` Resolver configurations, use `NextToken` to get the
+    #   second and subsequent pages of results.
+    #
+    #   For the first `ListResolverConfigs` request, omit this value.
+    #
+    #   For the second and subsequent requests, get the value of `NextToken`
+    #   from the previous response and specify that value for `NextToken` in
+    #   the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverConfigsRequest AWS API Documentation
+    #
+    class ListResolverConfigsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If a response includes the last of the Resolver configurations that
+    #   are associated with the current Amazon Web Services account,
+    #   `NextToken` doesn't appear in the response.
+    #
+    #   If a response doesn't include the last of the configurations, you
+    #   can get more configurations by submitting another
+    #   `ListResolverConfigs` request. Get the value of `NextToken` that
+    #   Amazon Route 53 returned in the previous response and include it in
+    #   `NextToken` in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolver_configs
+    #   An array that contains one `ResolverConfigs` element for each
+    #   Resolver configuration that is associated with the current Amazon
+    #   Web Services account.
+    #   @return [Array<Types::ResolverConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverConfigsResponse AWS API Documentation
+    #
+    class ListResolverConfigsResponse < Struct.new(
+      :next_token,
+      :resolver_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListResolverDnssecConfigsRequest
     #   data as a hash:
     #
@@ -3938,6 +4035,54 @@ module Aws::Route53Resolver
     #
     class PutResolverRulePolicyResponse < Struct.new(
       :return_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about a Resolver
+    # configuration for a VPC.
+    #
+    # @!attribute [rw] id
+    #   ID for the Resolver configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the Amazon Virtual Private Cloud VPC that you're
+    #   configuring Resolver for.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The owner account ID of the Amazon Virtual Private Cloud VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] autodefined_reverse
+    #   The status of whether or not the Resolver will create autodefined
+    #   rules for reverse DNS lookups. This is enabled by default. The
+    #   status can be one of following:
+    #
+    #   Status of the rules generated by VPCs based on CIDR/Region for
+    #   reverse DNS resolution. The status can be one of following:
+    #
+    #   * **ENABLING:** Autodefined rules for reverse DNS lookups are being
+    #     enabled but are not complete.
+    #
+    #   * **ENABLED:** Autodefined rules for reverse DNS lookups are
+    #     enabled.
+    #
+    #   * **DISABLING:** Autodefined rules for reverse DNS lookups are being
+    #     disabled but are not complete.
+    #
+    #   * **DISABLED:** Autodefined rules for reverse DNS lookups are
+    #     disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverConfig AWS API Documentation
+    #
+    class ResolverConfig < Struct.new(
+      :id,
+      :resource_id,
+      :owner_id,
+      :autodefined_reverse)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5110,6 +5255,58 @@ module Aws::Route53Resolver
     #
     class UpdateFirewallRuleResponse < Struct.new(
       :firewall_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateResolverConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceId", # required
+    #         autodefined_reverse_flag: "ENABLE", # required, accepts ENABLE, DISABLE
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   Resource ID of the Amazon VPC that you want to update the Resolver
+    #   configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] autodefined_reverse_flag
+    #   Indicates whether or not the Resolver will create autodefined rules
+    #   for reverse DNS lookups. This is enabled by default. Disabling this
+    #   option will also affect EC2-Classic instances using ClassicLink. For
+    #   more information, see [ClassicLink][1] in the *Amazon EC2 guide*.
+    #
+    #   <note markdown="1"> It can take some time for the status change to be completed.
+    #
+    #    </note>
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverConfigRequest AWS API Documentation
+    #
+    class UpdateResolverConfigRequest < Struct.new(
+      :resource_id,
+      :autodefined_reverse_flag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resolver_config
+    #   An array that contains settings for the specified Resolver
+    #   configuration.
+    #   @return [Types::ResolverConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverConfigResponse AWS API Documentation
+    #
+    class UpdateResolverConfigResponse < Struct.new(
+      :resolver_config)
       SENSITIVE = []
       include Aws::Structure
     end

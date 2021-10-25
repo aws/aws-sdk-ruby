@@ -11037,6 +11037,10 @@ module Aws::Chime
     #   format.
     #   @return [Time]
     #
+    # @!attribute [rw] voice_connector_arn
+    #   The ARN of the specified Amazon Chime Voice Connector.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/VoiceConnector AWS API Documentation
     #
     class VoiceConnector < Struct.new(
@@ -11046,7 +11050,8 @@ module Aws::Chime
       :outbound_host_name,
       :require_encryption,
       :created_timestamp,
-      :updated_timestamp)
+      :updated_timestamp,
+      :voice_connector_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11079,6 +11084,10 @@ module Aws::Chime
     #   8601 format.
     #   @return [Time]
     #
+    # @!attribute [rw] voice_connector_group_arn
+    #   The ARN of the specified Amazon Chime Voice Connector group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/VoiceConnectorGroup AWS API Documentation
     #
     class VoiceConnectorGroup < Struct.new(
@@ -11086,7 +11095,8 @@ module Aws::Chime
       :name,
       :voice_connector_items,
       :created_timestamp,
-      :updated_timestamp)
+      :updated_timestamp,
+      :voice_connector_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end

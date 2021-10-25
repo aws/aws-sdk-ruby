@@ -124,12 +124,24 @@ module Aws::RDS
       data[:supported_engine_modes]
     end
 
-    # A list of features supported by the DB engine. Supported feature names
-    # include the following.
+    # A list of features supported by the DB engine.
     #
-    # * s3Import
+    # The supported features vary by DB engine and DB engine version.
     #
-    # ^
+    # To determine the supported features for a specific DB engine and DB
+    # engine version using the CLI, use the following command:
+    #
+    # `aws rds describe-db-engine-versions --engine <engine_name>
+    # --engine-version <engine_version>`
+    #
+    # For example, to determine the supported features for RDS for
+    # PostgreSQL version 13.3 using the CLI, use the following command:
+    #
+    # `aws rds describe-db-engine-versions --engine postgres
+    # --engine-version 13.3`
+    #
+    # The supported features are listed under `SupportedFeatureNames` in the
+    # output.
     # @return [Array<String>]
     def supported_feature_names
       data[:supported_feature_names]
@@ -154,6 +166,56 @@ module Aws::RDS
     # @return [Boolean]
     def supports_global_databases
       data[:supports_global_databases]
+    end
+
+    # The major engine version of the CEV.
+    # @return [String]
+    def major_engine_version
+      data[:major_engine_version]
+    end
+
+    # The name of the Amazon S3 bucket that contains your database
+    # installation files.
+    # @return [String]
+    def database_installation_files_s3_bucket_name
+      data[:database_installation_files_s3_bucket_name]
+    end
+
+    # The Amazon S3 directory that contains the database installation files.
+    # If not specified, then no prefix is assumed.
+    # @return [String]
+    def database_installation_files_s3_prefix
+      data[:database_installation_files_s3_prefix]
+    end
+
+    # The ARN of the custom engine version.
+    # @return [String]
+    def db_engine_version_arn
+      data[:db_engine_version_arn]
+    end
+
+    # The Amazon Web Services KMS key identifier for an encrypted CEV. This
+    # parameter is required for RDS Custom, but optional for Amazon RDS.
+    # @return [String]
+    def kms_key_id
+      data[:kms_key_id]
+    end
+
+    # The creation time of the DB engine version.
+    # @return [Time]
+    def create_time
+      data[:create_time]
+    end
+
+    # A list of tags. For more information, see [Tagging Amazon RDS
+    # Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # @return [Array<Types::Tag>]
+    def tag_list
+      data[:tag_list]
     end
 
     # @!endgroup

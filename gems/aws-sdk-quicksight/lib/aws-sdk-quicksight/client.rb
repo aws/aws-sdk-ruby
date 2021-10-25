@@ -4471,7 +4471,8 @@ module Aws::QuickSight
     #
     # @option params [required, Types::RegisteredUserEmbeddingExperienceConfiguration] :experience_configuration
     #   The experience you are embedding. For registered users, you can embed
-    #   Amazon QuickSight dashboards or the entire Amazon QuickSight console.
+    #   Amazon QuickSight dashboards, the entire Amazon QuickSight console, or
+    #   the Amazon QuickSight Q search bar.
     #
     # @return [Types::GenerateEmbedUrlForRegisteredUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4491,6 +4492,9 @@ module Aws::QuickSight
     #       },
     #       quick_sight_console: {
     #         initial_path: "EntryPath",
+    #       },
+    #       q_search_bar: {
+    #         initial_topic_id: "RestrictiveResourceId",
     #       },
     #     },
     #   })
@@ -8550,7 +8554,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
