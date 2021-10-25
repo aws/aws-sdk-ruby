@@ -292,6 +292,10 @@ module Aws::RDS
     #   If this parameter is enabled and the requested engine supports the
     #   `CharacterSetName` parameter for `CreateDBInstance`, the response
     #   includes a list of supported character sets for each engine version.
+    #
+    #   For RDS Custom, the default is not to list supported character sets.
+    #   If you set `ListSupportedCharacterSets` to `true`, RDS Custom returns
+    #   no results.
     # @option options [Boolean] :list_supported_timezones
     #   A value that indicates whether to list the supported time zones for
     #   each engine version.
@@ -299,6 +303,10 @@ module Aws::RDS
     #   If this parameter is enabled and the requested engine supports the
     #   `TimeZone` parameter for `CreateDBInstance`, the response includes a
     #   list of supported time zones for each engine version.
+    #
+    #   For RDS Custom, the default is not to list supported time zones. If
+    #   you set `ListSupportedTimezones` to `true`, RDS Custom returns no
+    #   results.
     # @option options [Boolean] :include_all
     #   A value that indicates whether to include engine versions that aren't
     #   available in the list. The default is to list only available engine

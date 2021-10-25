@@ -10,8 +10,8 @@
 module Aws::AuditManager
   module Types
 
-    # The wrapper of Amazon Web Services account details, such as account
-    # ID, email address, and so on.
+    # The wrapper of Amazon Web Services account details, such as account ID
+    # or email address.
     #
     # @note When making an API call, you may pass AWSAccount
     #   data as a hash:
@@ -23,16 +23,16 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier for the specified Amazon Web Services account.
+    #   The identifier for the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   The email address associated with the specified Amazon Web Services
+    #   The email address that's associated with the Amazon Web Services
     #   account.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the specified Amazon Web Services account.
+    #   The name of the Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AWSAccount AWS API Documentation
@@ -45,7 +45,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # An Amazon Web Service such as Amazon S3, CloudTrail, and so on.
+    # An Amazon Web Service such as Amazon S3 or CloudTrail.
     #
     # @note When making an API call, you may pass AWSService
     #   data as a hash:
@@ -66,7 +66,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # Your account is not registered with Audit Manager. Check the delegated
+    # Your account isn't registered with Audit Manager. Check the delegated
     # administrator setup on the Audit Manager settings page, and try again.
     #
     # @!attribute [rw] message
@@ -89,19 +89,20 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] aws_account
-    #   The Amazon Web Services account associated with the assessment.
+    #   The Amazon Web Services account that's associated with the
+    #   assessment.
     #   @return [Types::AWSAccount]
     #
     # @!attribute [rw] metadata
-    #   The metadata for the specified assessment.
+    #   The metadata for the assessment.
     #   @return [Types::AssessmentMetadata]
     #
     # @!attribute [rw] framework
-    #   The framework from which the assessment was created.
+    #   The framework that the assessment was created from.
     #   @return [Types::AssessmentFramework]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the assessment.
+    #   The tags that are associated with the assessment.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Assessment AWS API Documentation
@@ -116,39 +117,39 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The control entity that represents a standard or custom control used
-    # in an Audit Manager assessment.
+    # The control entity that represents a standard control or a custom
+    # control in an Audit Manager assessment.
     #
     # @!attribute [rw] id
-    #   The identifier for the specified control.
+    #   The identifier for the control.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the specified control.
+    #   The name of the control.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the specified control.
+    #   The description of the control.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the specified control.
+    #   The status of the control.
     #   @return [String]
     #
     # @!attribute [rw] response
-    #   The response of the specified control.
+    #   The response of the control.
     #   @return [String]
     #
     # @!attribute [rw] comments
-    #   The list of comments attached to the specified control.
+    #   The list of comments that's attached to the control.
     #   @return [Array<Types::ControlComment>]
     #
     # @!attribute [rw] evidence_sources
-    #   The list of data sources for the specified evidence.
+    #   The list of data sources for the evidence.
     #   @return [Array<String>]
     #
     # @!attribute [rw] evidence_count
-    #   The amount of evidence generated for the control.
+    #   The amount of evidence that's generated for the control.
     #   @return [Integer]
     #
     # @!attribute [rw] assessment_report_evidence_count
@@ -187,25 +188,25 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] roles
-    #   The roles associated with the control set.
+    #   The roles that are associated with the control set.
     #   @return [Array<Types::Role>]
     #
     # @!attribute [rw] controls
-    #   The list of controls contained with the control set.
+    #   The list of controls that's contained with the control set.
     #   @return [Array<Types::AssessmentControl>]
     #
     # @!attribute [rw] delegations
-    #   The delegations associated with the control set.
+    #   The delegations that are associated with the control set.
     #   @return [Array<Types::Delegation>]
     #
     # @!attribute [rw] system_evidence_count
-    #   The total number of evidence objects retrieved automatically for the
-    #   control set.
+    #   The total number of evidence objects that are retrieved
+    #   automatically for the control set.
     #   @return [Integer]
     #
     # @!attribute [rw] manual_evidence_count
-    #   The total number of evidence objects uploaded manually to the
-    #   control set.
+    #   The total number of evidence objects that are uploaded manually to
+    #   the control set.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AssessmentControlSet AWS API Documentation
@@ -223,10 +224,10 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The folder in which Audit Manager stores evidence for an assessment.
+    # The folder where Audit Manager stores evidence for an assessment.
     #
     # @!attribute [rw] name
-    #   The name of the specified evidence folder.
+    #   The name of the evidence folder.
     #   @return [String]
     #
     # @!attribute [rw] date
@@ -234,7 +235,7 @@ module Aws::AuditManager
     #   @return [Time]
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
@@ -242,15 +243,15 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] control_id
-    #   The unique identifier for the specified control.
+    #   The unique identifier for the control.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier for the folder in which evidence is stored.
+    #   The identifier for the folder that the evidence is stored in.
     #   @return [String]
     #
     # @!attribute [rw] data_source
-    #   The Amazon Web Service from which the evidence was collected.
+    #   The Amazon Web Service that the evidence was collected from.
     #   @return [String]
     #
     # @!attribute [rw] author
@@ -262,7 +263,8 @@ module Aws::AuditManager
     #   @return [Integer]
     #
     # @!attribute [rw] assessment_report_selection_count
-    #   The total count of evidence included in the assessment report.
+    #   The total count of evidence that's included in the assessment
+    #   report.
     #   @return [Integer]
     #
     # @!attribute [rw] control_name
@@ -270,7 +272,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] evidence_resources_included_count
-    #   The amount of evidence included in the evidence folder.
+    #   The amount of evidence that's included in the evidence folder.
     #   @return [Integer]
     #
     # @!attribute [rw] evidence_by_type_configuration_data_count
@@ -301,8 +303,8 @@ module Aws::AuditManager
     #   @return [Integer]
     #
     # @!attribute [rw] evidence_aws_service_source_count
-    #   The total number of Amazon Web Services resources assessed to
-    #   generate the evidence.
+    #   The total number of Amazon Web Services resources that were assessed
+    #   to generate the evidence.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AssessmentEvidenceFolder AWS API Documentation
@@ -338,16 +340,15 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the specified framework.
+    #   The Amazon Resource Name (ARN) of the framework.
     #   @return [String]
     #
     # @!attribute [rw] metadata
-    #   The metadata of a framework, such as the name, ID, description, and
-    #   so on.
+    #   The metadata of a framework, such as the name, ID, or description.
     #   @return [Types::FrameworkMetadata]
     #
     # @!attribute [rw] control_sets
-    #   The control sets associated with the framework.
+    #   The control sets that are associated with the framework.
     #   @return [Array<Types::AssessmentControlSet>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AssessmentFramework AWS API Documentation
@@ -361,30 +362,32 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The metadata associated with a standard or custom framework.
+    # The metadata that's associated with a standard framework or a custom
+    # framework.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the framework.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identified for the specified framework.
+    #   The unique identifier for the framework.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The framework type, such as standard or custom.
+    #   The framework type, such as a standard framework or a custom
+    #   framework.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the specified framework.
+    #   The name of the framework.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the specified framework.
+    #   The description of the framework.
     #   @return [String]
     #
     # @!attribute [rw] logo
-    #   The logo associated with the framework.
+    #   The logo that's associated with the framework.
     #   @return [String]
     #
     # @!attribute [rw] compliance_type
@@ -393,11 +396,11 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] controls_count
-    #   The number of controls associated with the specified framework.
+    #   The number of controls that are associated with the framework.
     #   @return [Integer]
     #
     # @!attribute [rw] control_sets_count
-    #   The number of control sets associated with the specified framework.
+    #   The number of control sets that are associated with the framework.
     #   @return [Integer]
     #
     # @!attribute [rw] created_at
@@ -426,7 +429,94 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The metadata associated with the specified assessment.
+    # Represents a share request for a custom framework in Audit Manager.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the share request.
+    #   @return [String]
+    #
+    # @!attribute [rw] framework_id
+    #   The unique identifier for the shared custom framework.
+    #   @return [String]
+    #
+    # @!attribute [rw] framework_name
+    #   The name of the custom framework that the share request is for.
+    #   @return [String]
+    #
+    # @!attribute [rw] framework_description
+    #   The description of the shared custom framework.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the share request.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account
+    #   The Amazon Web Services account of the sender.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_account
+    #   The Amazon Web Services account of the recipient.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_region
+    #   The Amazon Web Services Region of the recipient.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   The time when the share request expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the share request was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated
+    #   Specifies when the share request was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] comment
+    #   An optional comment from the sender about the share request.
+    #   @return [String]
+    #
+    # @!attribute [rw] standard_controls_count
+    #   The number of standard controls that are part of the shared custom
+    #   framework.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] custom_controls_count
+    #   The number of custom controls that are part of the shared custom
+    #   framework.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliance_type
+    #   The compliance type that the shared custom framework supports, such
+    #   as CIS or HIPAA.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AssessmentFrameworkShareRequest AWS API Documentation
+    #
+    class AssessmentFrameworkShareRequest < Struct.new(
+      :id,
+      :framework_id,
+      :framework_name,
+      :framework_description,
+      :status,
+      :source_account,
+      :destination_account,
+      :destination_region,
+      :expiration_time,
+      :creation_time,
+      :last_updated,
+      :comment,
+      :standard_controls_count,
+      :custom_controls_count,
+      :compliance_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata that's associated with the specified assessment.
     #
     # @!attribute [rw] name
     #   The name of the assessment.
@@ -441,8 +531,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] compliance_type
-    #   The name of a compliance standard related to the assessment, such as
-    #   PCI-DSS.
+    #   The name of the compliance standard that's related to the
+    #   assessment, such as PCI-DSS.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -450,21 +540,21 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] assessment_reports_destination
-    #   The destination in which evidence reports are stored for the
-    #   specified assessment.
+    #   The destination that evidence reports are stored in for the
+    #   assessment.
     #   @return [Types::AssessmentReportsDestination]
     #
     # @!attribute [rw] scope
-    #   The wrapper of Amazon Web Services accounts and services in scope
-    #   for the assessment.
+    #   The wrapper of Amazon Web Services accounts and services that are in
+    #   scope for the assessment.
     #   @return [Types::Scope]
     #
     # @!attribute [rw] roles
-    #   The roles associated with the assessment.
+    #   The roles that are associated with the assessment.
     #   @return [Array<Types::Role>]
     #
     # @!attribute [rw] delegations
-    #   The delegations associated with the assessment.
+    #   The delegations that are associated with the assessment.
     #   @return [Array<Types::Delegation>]
     #
     # @!attribute [rw] creation_time
@@ -493,7 +583,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A metadata object associated with an assessment in Audit Manager.
+    # A metadata object that's associated with an assessment in Audit
+    # Manager.
     #
     # @!attribute [rw] name
     #   The name of the assessment.
@@ -504,8 +595,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] compliance_type
-    #   The name of the compliance standard related to the assessment, such
-    #   as PCI-DSS.
+    #   The name of the compliance standard that's related to the
+    #   assessment, such as PCI-DSS.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -513,11 +604,11 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] roles
-    #   The roles associated with the assessment.
+    #   The roles that are associated with the assessment.
     #   @return [Array<Types::Role>]
     #
     # @!attribute [rw] delegations
-    #   The delegations associated with the assessment.
+    #   The delegations that are associated with the assessment.
     #   @return [Array<Types::Delegation>]
     #
     # @!attribute [rw] creation_time
@@ -543,17 +634,18 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A finalized document generated from an Audit Manager assessment. These
-    # reports summarize the relevant evidence collected for your audit, and
-    # link to the relevant evidence folders which are named and organized
-    # according to the controls specified in your assessment.
+    # A finalized document that's generated from an Audit Manager
+    # assessment. These reports summarize the relevant evidence that was
+    # collected for your audit, and link to the relevant evidence folders.
+    # These evidence folders are named and organized according to the
+    # controls that are specified in your assessment.
     #
     # @!attribute [rw] id
-    #   The unique identifier for the specified assessment report.
+    #   The unique identifier for the assessment report.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name given to the assessment report.
+    #   The name that's given to the assessment report.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -608,11 +700,11 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code returned by the `AssessmentReportEvidence` API.
+    #   The error code that the `AssessmentReportEvidence` API returned.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message returned by the `AssessmentReportEvidence` API.
+    #   The error message that the `AssessmentReportEvidence` API returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AssessmentReportEvidenceError AWS API Documentation
@@ -625,7 +717,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The metadata objects associated with the specified assessment report.
+    # The metadata objects that are associated with the specified assessment
+    # report.
     #
     # @!attribute [rw] id
     #   The unique identifier for the assessment report.
@@ -636,7 +729,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the specified assessment report.
+    #   The description of the assessment report.
     #   @return [String]
     #
     # @!attribute [rw] assessment_id
@@ -674,7 +767,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The location in which Audit Manager saves assessment reports for the
+    # The location where Audit Manager saves assessment reports for the
     # given assessment.
     #
     # @note When making an API call, you may pass AssessmentReportsDestination
@@ -711,11 +804,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
-    #   The identifier for the folder in which evidence is stored.
+    #   The identifier for the folder that the evidence is stored in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/AssociateAssessmentReportEvidenceFolderRequest AWS API Documentation
@@ -741,11 +834,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The unique identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
-    #   The identifier for the folder in which the evidence is stored.
+    #   The identifier for the folder that the evidence is stored in.
     #   @return [String]
     #
     # @!attribute [rw] evidence_ids
@@ -763,12 +856,12 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] evidence_ids
-    #   The identifier for the evidence.
+    #   The list of evidence identifiers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] errors
-    #   A list of errors returned by the
-    #   `BatchAssociateAssessmentReportEvidence` API.
+    #   A list of errors that the `BatchAssociateAssessmentReportEvidence`
+    #   API returned.
     #   @return [Array<Types::AssessmentReportEvidenceError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/BatchAssociateAssessmentReportEvidenceResponse AWS API Documentation
@@ -789,13 +882,13 @@ module Aws::AuditManager
     #   @return [Types::CreateDelegationRequest]
     #
     # @!attribute [rw] error_code
-    #   The error code returned by the `BatchCreateDelegationByAssessment`
-    #   API.
+    #   The error code that the `BatchCreateDelegationByAssessment` API
+    #   returned.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message returned by the
-    #   `BatchCreateDelegationByAssessment` API.
+    #   The error message that the `BatchCreateDelegationByAssessment` API
+    #   returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/BatchCreateDelegationByAssessmentError AWS API Documentation
@@ -828,7 +921,7 @@ module Aws::AuditManager
     #   @return [Array<Types::CreateDelegationRequest>]
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/BatchCreateDelegationByAssessmentRequest AWS API Documentation
@@ -841,12 +934,12 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] delegations
-    #   The delegations associated with the assessment.
+    #   The delegations that are associated with the assessment.
     #   @return [Array<Types::Delegation>]
     #
     # @!attribute [rw] errors
-    #   A list of errors returned by the `BatchCreateDelegationByAssessment`
-    #   API.
+    #   A list of errors that the `BatchCreateDelegationByAssessment` API
+    #   returned.
     #   @return [Array<Types::BatchCreateDelegationByAssessmentError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/BatchCreateDelegationByAssessmentResponse AWS API Documentation
@@ -863,17 +956,17 @@ module Aws::AuditManager
     # message.
     #
     # @!attribute [rw] delegation_id
-    #   The identifier for the specified delegation.
+    #   The identifier for the delegation.
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code returned by the `BatchDeleteDelegationByAssessment`
-    #   API.
+    #   The error code that the `BatchDeleteDelegationByAssessment` API
+    #   returned.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message returned by the
-    #   `BatchDeleteDelegationByAssessment` API.
+    #   The error message that the `BatchDeleteDelegationByAssessment` API
+    #   returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/BatchDeleteDelegationByAssessmentError AWS API Documentation
@@ -895,11 +988,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] delegation_ids
-    #   The identifiers for the specified delegations.
+    #   The identifiers for the delegations.
     #   @return [Array<String>]
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/BatchDeleteDelegationByAssessmentRequest AWS API Documentation
@@ -912,8 +1005,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] errors
-    #   A list of errors returned by the `BatchDeleteDelegationByAssessment`
-    #   API.
+    #   A list of errors that the `BatchDeleteDelegationByAssessment` API
+    #   returned.
     #   @return [Array<Types::BatchDeleteDelegationByAssessmentError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/BatchDeleteDelegationByAssessmentResponse AWS API Documentation
@@ -934,11 +1027,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
-    #   The identifier for the folder in which evidence is stored.
+    #   The identifier for the folder that the evidence is stored in.
     #   @return [String]
     #
     # @!attribute [rw] evidence_ids
@@ -960,8 +1053,8 @@ module Aws::AuditManager
     #   @return [Array<String>]
     #
     # @!attribute [rw] errors
-    #   A list of errors returned by the
-    #   `BatchDisassociateAssessmentReportEvidence` API.
+    #   A list of errors that the
+    #   `BatchDisassociateAssessmentReportEvidence` API returned.
     #   @return [Array<Types::AssessmentReportEvidenceError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/BatchDisassociateAssessmentReportEvidenceResponse AWS API Documentation
@@ -978,18 +1071,18 @@ module Aws::AuditManager
     # message.
     #
     # @!attribute [rw] manual_evidence
-    #   Manual evidence that cannot be collected automatically by Audit
+    #   Manual evidence that can't be collected automatically by Audit
     #   Manager.
     #   @return [Types::ManualEvidence]
     #
     # @!attribute [rw] error_code
-    #   The error code returned by the
-    #   `BatchImportEvidenceToAssessmentControl` API.
+    #   The error code that the `BatchImportEvidenceToAssessmentControl` API
+    #   returned.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message returned by the
-    #   `BatchImportEvidenceToAssessmentControl` API.
+    #   The error message that the `BatchImportEvidenceToAssessmentControl`
+    #   API returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/BatchImportEvidenceToAssessmentControlError AWS API Documentation
@@ -1017,15 +1110,15 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the specified control set.
+    #   The identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] control_id
-    #   The identifier for the specified control.
+    #   The identifier for the control.
     #   @return [String]
     #
     # @!attribute [rw] manual_evidence
@@ -1044,8 +1137,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] errors
-    #   A list of errors returned by the
-    #   `BatchImportEvidenceToAssessmentControl` API.
+    #   A list of errors that the `BatchImportEvidenceToAssessmentControl`
+    #   API returned.
     #   @return [Array<Types::BatchImportEvidenceToAssessmentControlError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/BatchImportEvidenceToAssessmentControlResponse AWS API Documentation
@@ -1056,24 +1149,27 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The record of a change within Audit Manager, such as a modified
-    # assessment, a delegated control set, and so on.
+    # The record of a change within Audit Manager. For example, this could
+    # be the status change of an assessment or the delegation of a control
+    # set.
     #
     # @!attribute [rw] object_type
-    #   The changelog object type, such as an assessment, control, or
+    #   The object that was changed, such as an assessment, control, or
     #   control set.
     #   @return [String]
     #
     # @!attribute [rw] object_name
-    #   The name of the changelog object.
+    #   The name of the object that changed. This could be the name of an
+    #   assessment, control, or control set.
     #   @return [String]
     #
     # @!attribute [rw] action
-    #   The action performed.
+    #   The action that was performed.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The time of creation for the changelog object.
+    #   The time when the action was performed and the changelog record was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -1095,7 +1191,7 @@ module Aws::AuditManager
     # A control in Audit Manager.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the specified control.
+    #   The Amazon Resource Name (ARN) of the control.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1103,19 +1199,20 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of control, such as custom or standard.
+    #   The type of control, such as a custom control or a standard control.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the specified control.
+    #   The name of the control.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the specified control.
+    #   The description of the control.
     #   @return [String]
     #
     # @!attribute [rw] testing_information
-    #   The steps to follow to determine if the control has been satisfied.
+    #   The steps that you should follow to determine if the control has
+    #   been satisfied.
     #   @return [String]
     #
     # @!attribute [rw] action_plan_title
@@ -1123,17 +1220,17 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] action_plan_instructions
-    #   The recommended actions to carry out if the control is not
+    #   The recommended actions to carry out if the control isn't
     #   fulfilled.
     #   @return [String]
     #
     # @!attribute [rw] control_sources
-    #   The data source that determines from where Audit Manager collects
-    #   evidence for the control.
+    #   The data source that determines where Audit Manager collects
+    #   evidence from for the control.
     #   @return [String]
     #
     # @!attribute [rw] control_mapping_sources
-    #   The data mapping sources for the specified control.
+    #   The data mapping sources for the control.
     #   @return [Array<Types::ControlMappingSource>]
     #
     # @!attribute [rw] created_at
@@ -1178,8 +1275,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A comment posted by a user on a control. This includes the author's
-    # name, the comment text, and a timestamp.
+    # A comment that's posted by a user on a control. This includes the
+    # author's name, the comment text, and a timestamp.
     #
     # @!attribute [rw] author_name
     #   The name of the user who authored the comment.
@@ -1203,8 +1300,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The data source that determines from where Audit Manager collects
-    # evidence for the control.
+    # The data source that determines where Audit Manager collects evidence
+    # from for the control.
     #
     # @note When making an API call, you may pass ControlMappingSource
     #   data as a hash:
@@ -1224,20 +1321,20 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] source_id
-    #   The unique identifier for the specified source.
+    #   The unique identifier for the source.
     #   @return [String]
     #
     # @!attribute [rw] source_name
-    #   The name of the specified source.
+    #   The name of the source.
     #   @return [String]
     #
     # @!attribute [rw] source_description
-    #   The description of the specified source.
+    #   The description of the source.
     #   @return [String]
     #
     # @!attribute [rw] source_set_up_option
-    #   The setup option for the data source, which reflects if the evidence
-    #   collection is automated or manual.
+    #   The setup option for the data source. This option reflects if the
+    #   evidence collection is automated or manual.
     #   @return [String]
     #
     # @!attribute [rw] source_type
@@ -1251,12 +1348,11 @@ module Aws::AuditManager
     #   @return [Types::SourceKeyword]
     #
     # @!attribute [rw] source_frequency
-    #   The frequency of evidence collection for the specified control
-    #   mapping source.
+    #   The frequency of evidence collection for the control mapping source.
     #   @return [String]
     #
     # @!attribute [rw] troubleshooting_text
-    #   The instructions for troubleshooting the specified control.
+    #   The instructions for troubleshooting the control.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ControlMappingSource AWS API Documentation
@@ -1274,23 +1370,24 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The metadata associated with the specified standard or custom control.
+    # The metadata that's associated with the standard control or custom
+    # control.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the specified control.
+    #   The Amazon Resource Name (ARN) of the control.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for the specified control.
+    #   The unique identifier for the control.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the specified control.
+    #   The name of the control.
     #   @return [String]
     #
     # @!attribute [rw] control_sources
-    #   The data source that determines from where Audit Manager collects
-    #   evidence for the control.
+    #   The data source that determines where Audit Manager collects
+    #   evidence from for the control.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1339,8 +1436,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # Control entity attributes that uniquely identify an existing control
-    # to be added to a framework in Audit Manager.
+    # The control entity attributes that uniquely identify an existing
+    # control to be added to a framework in Audit Manager.
     #
     # @note When making an API call, you may pass CreateAssessmentFrameworkControl
     #   data as a hash:
@@ -1362,7 +1459,7 @@ module Aws::AuditManager
     end
 
     # A `controlSet` entity that represents a collection of controls in
-    # Audit Manager. This does not contain the control set ID.
+    # Audit Manager. This doesn't contain the control set ID.
     #
     # @note When making an API call, you may pass CreateAssessmentFrameworkControlSet
     #   data as a hash:
@@ -1377,11 +1474,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the specified control set.
+    #   The name of the control set.
     #   @return [String]
     #
     # @!attribute [rw] controls
-    #   The list of controls within the control set. This does not contain
+    #   The list of controls within the control set. This doesn't contain
     #   the control set ID.
     #   @return [Array<Types::CreateAssessmentFrameworkControl>]
     #
@@ -1430,11 +1527,11 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] control_sets
-    #   The control sets to be associated with the framework.
+    #   The control sets that are associated with the framework.
     #   @return [Array<Types::CreateAssessmentFrameworkControlSet>]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the framework.
+    #   The tags that are associated with the framework.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateAssessmentFrameworkRequest AWS API Documentation
@@ -1450,8 +1547,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] framework
-    #   The name of the new framework returned by the
-    #   `CreateAssessmentFramework` API.
+    #   The name of the new framework that the `CreateAssessmentFramework`
+    #   API returned.
     #   @return [Types::Framework]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateAssessmentFrameworkResponse AWS API Documentation
@@ -1480,7 +1577,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateAssessmentReportRequest AWS API Documentation
@@ -1494,8 +1591,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] assessment_report
-    #   The new assessment report returned by the `CreateAssessmentReport`
-    #   API.
+    #   The new assessment report that the `CreateAssessmentReport` API
+    #   returned.
     #   @return [Types::AssessmentReport]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateAssessmentReportResponse AWS API Documentation
@@ -1551,25 +1648,26 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] assessment_reports_destination
-    #   The assessment report storage destination for the specified
-    #   assessment that is being created.
+    #   The assessment report storage destination for the assessment that's
+    #   being created.
     #   @return [Types::AssessmentReportsDestination]
     #
     # @!attribute [rw] scope
     #   The wrapper that contains the Amazon Web Services accounts and
-    #   services in scope for the assessment.
+    #   services that are in scope for the assessment.
     #   @return [Types::Scope]
     #
     # @!attribute [rw] roles
-    #   The list of roles for the specified assessment.
+    #   The list of roles for the assessment.
     #   @return [Array<Types::Role>]
     #
     # @!attribute [rw] framework_id
-    #   The identifier for the specified framework.
+    #   The identifier for the framework that the assessment will be created
+    #   from.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the assessment.
+    #   The tags that are associated with the assessment.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateAssessmentRequest AWS API Documentation
@@ -1600,8 +1698,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # Control mapping fields that represent the source for evidence
-    # collection, along with related parameters and metadata. This does not
+    # The control mapping fields that represent the source for evidence
+    # collection, along with related parameters and metadata. This doesn't
     # contain `mappingID`.
     #
     # @note When making an API call, you may pass CreateControlMappingSource
@@ -1625,8 +1723,8 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] source_description
-    #   The description of the data source that determines from where Audit
-    #   Manager collects evidence for the control.
+    #   The description of the data source that determines where Audit
+    #   Manager collects evidence from for the control.
     #   @return [String]
     #
     # @!attribute [rw] source_set_up_option
@@ -1645,12 +1743,11 @@ module Aws::AuditManager
     #   @return [Types::SourceKeyword]
     #
     # @!attribute [rw] source_frequency
-    #   The frequency of evidence collection for the specified control
-    #   mapping source.
+    #   The frequency of evidence collection for the control mapping source.
     #   @return [String]
     #
     # @!attribute [rw] troubleshooting_text
-    #   The instructions for troubleshooting the specified control.
+    #   The instructions for troubleshooting the control.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateControlMappingSource AWS API Documentation
@@ -1704,7 +1801,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] testing_information
-    #   The steps to follow to determine if the control has been satisfied.
+    #   The steps to follow to determine if the control is satisfied.
     #   @return [String]
     #
     # @!attribute [rw] action_plan_title
@@ -1712,16 +1809,16 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] action_plan_instructions
-    #   The recommended actions to carry out if the control is not
+    #   The recommended actions to carry out if the control isn't
     #   fulfilled.
     #   @return [String]
     #
     # @!attribute [rw] control_mapping_sources
-    #   The data mapping sources for the specified control.
+    #   The data mapping sources for the control.
     #   @return [Array<Types::CreateControlMappingSource>]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the control.
+    #   The tags that are associated with the control.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateControlRequest AWS API Documentation
@@ -1739,7 +1836,7 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] control
-    #   The new control returned by the `CreateControl` API.
+    #   The new control that the `CreateControl` API returned.
     #   @return [Types::Control]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/CreateControlResponse AWS API Documentation
@@ -1750,7 +1847,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A collection of attributes used to create a delegation for an
+    # A collection of attributes that's used to create a delegation for an
     # assessment in Audit Manager.
     #
     # @note When making an API call, you may pass CreateDelegationRequest
@@ -1764,7 +1861,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] comment
-    #   A comment related to the delegation request.
+    #   A comment that's related to the delegation request.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
@@ -1806,11 +1903,12 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] assessment_name
-    #   The name of the associated assessment.
+    #   The name of the assessment that's associated with the delegation.
     #   @return [String]
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the associated assessment.
+    #   The identifier for the assessment that's associated with the
+    #   delegation.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1843,11 +1941,12 @@ module Aws::AuditManager
     #   @return [Time]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the associated control set.
+    #   The identifier for the control set that's associated with the
+    #   delegation.
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   The comment related to the delegation.
+    #   The comment that's related to the delegation.
     #   @return [String]
     #
     # @!attribute [rw] created_by
@@ -1872,7 +1971,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The metadata associated with the specified delegation.
+    # The metadata that's associated with the delegation.
     #
     # @!attribute [rw] id
     #   The unique identifier for the delegation.
@@ -1883,11 +1982,11 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] assessment_id
-    #   The unique identifier for the specified assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the delgation.
+    #   The current status of the delegation.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1899,7 +1998,7 @@ module Aws::AuditManager
     #   @return [Time]
     #
     # @!attribute [rw] control_set_name
-    #   Specifies the name of the control set delegated for review.
+    #   Specifies the name of the control set that was delegated for review.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DelegationMetadata AWS API Documentation
@@ -1924,7 +2023,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] framework_id
-    #   The identifier for the specified framework.
+    #   The identifier for the framework.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DeleteAssessmentFrameworkRequest AWS API Documentation
@@ -1939,6 +2038,36 @@ module Aws::AuditManager
     #
     class DeleteAssessmentFrameworkResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteAssessmentFrameworkShareRequest
+    #   data as a hash:
+    #
+    #       {
+    #         request_id: "UUID", # required
+    #         request_type: "SENT", # required, accepts SENT, RECEIVED
+    #       }
+    #
+    # @!attribute [rw] request_id
+    #   The unique identifier for the share request to be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_type
+    #   Specifies whether the share request is a sent request or a received
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DeleteAssessmentFrameworkShareRequest AWS API Documentation
+    #
+    class DeleteAssessmentFrameworkShareRequest < Struct.new(
+      :request_id,
+      :request_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DeleteAssessmentFrameworkShareResponse AWS API Documentation
+    #
+    class DeleteAssessmentFrameworkShareResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteAssessmentReportRequest
     #   data as a hash:
     #
@@ -1948,7 +2077,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] assessment_report_id
@@ -1976,7 +2105,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DeleteAssessmentRequest AWS API Documentation
@@ -1999,7 +2128,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] control_id
-    #   The identifier for the specified control.
+    #   The identifier for the control.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DeleteControlRequest AWS API Documentation
@@ -2040,7 +2169,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] admin_account_id
-    #   The identifier for the specified administrator account.
+    #   The identifier for the administrator account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DeregisterOrganizationAdminAccountRequest AWS API Documentation
@@ -2064,7 +2193,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
@@ -2090,11 +2219,11 @@ module Aws::AuditManager
     # configuration snapshot.
     #
     # @!attribute [rw] data_source
-    #   The data source from which the specified evidence was collected.
+    #   The data source where the evidence was collected from.
     #   @return [String]
     #
     # @!attribute [rw] evidence_aws_account_id
-    #   The identifier for the specified Amazon Web Services account.
+    #   The identifier for the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] time
@@ -2102,11 +2231,11 @@ module Aws::AuditManager
     #   @return [Time]
     #
     # @!attribute [rw] event_source
-    #   The Amazon Web Service from which the evidence is collected.
+    #   The Amazon Web Service that the evidence is collected from.
     #   @return [String]
     #
     # @!attribute [rw] event_name
-    #   The name of the specified evidence event.
+    #   The name of the evidence event.
     #   @return [String]
     #
     # @!attribute [rw] evidence_by_type
@@ -2114,18 +2243,18 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] resources_included
-    #   The list of resources assessed to generate the evidence.
+    #   The list of resources that are assessed to generate the evidence.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] attributes
-    #   The names and values used by the evidence event, including an
-    #   attribute name (such as `allowUsersToChangePassword`) and value
-    #   (such as `true` or `false`).
+    #   The names and values that are used by the evidence event. This
+    #   includes an attribute name (such as `allowUsersToChangePassword`)
+    #   and value (such as `true` or `false`).
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] iam_id
-    #   The unique identifier for the IAM user or role associated with the
-    #   evidence.
+    #   The unique identifier for the IAM user or role that's associated
+    #   with the evidence.
     #   @return [String]
     #
     # @!attribute [rw] compliance_check
@@ -2136,16 +2265,16 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] aws_organization
-    #   The Amazon Web Services account from which the evidence is
-    #   collected, and its organization path.
+    #   The Amazon Web Services account that the evidence is collected from,
+    #   and its organization path.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The identifier for the specified Amazon Web Services account.
+    #   The identifier for the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
-    #   The identifier for the folder in which the evidence is stored.
+    #   The identifier for the folder that the evidence is stored in.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -2178,23 +2307,24 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The file used to structure and automate Audit Manager assessments for
-    # a given compliance standard.
+    # The file that's used to structure and automate Audit Manager
+    # assessments for a given compliance standard.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the specified framework.
+    #   The Amazon Resource Name (ARN) of the framework.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for the specified framework.
+    #   The unique identifier for the framework.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the specified framework.
+    #   The name of the framework.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The framework type, such as custom or standard.
+    #   The framework type, such as a custom framework or a standard
+    #   framework.
     #   @return [String]
     #
     # @!attribute [rw] compliance_type
@@ -2203,20 +2333,20 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the specified framework.
+    #   The description of the framework.
     #   @return [String]
     #
     # @!attribute [rw] logo
-    #   The logo associated with the framework.
+    #   The logo that's associated with the framework.
     #   @return [String]
     #
     # @!attribute [rw] control_sources
-    #   The sources from which Audit Manager collects evidence for the
+    #   The sources that Audit Manager collects evidence from for the
     #   control.
     #   @return [String]
     #
     # @!attribute [rw] control_sets
-    #   The control sets associated with the framework.
+    #   The control sets that are associated with the framework.
     #   @return [Array<Types::ControlSet>]
     #
     # @!attribute [rw] created_at
@@ -2236,7 +2366,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the framework.
+    #   The tags that are associated with the framework.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Framework AWS API Documentation
@@ -2260,8 +2390,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The metadata of a framework, such as the name, ID, description, and so
-    # on.
+    # The metadata of a framework, such as the name, ID, or description.
     #
     # @!attribute [rw] name
     #   The name of the framework.
@@ -2272,12 +2401,12 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] logo
-    #   The logo associated with the framework.
+    #   The logo that's associated with the framework.
     #   @return [String]
     #
     # @!attribute [rw] compliance_type
-    #   The compliance standard associated with the framework, such as
-    #   PCI-DSS or HIPAA.
+    #   The compliance standard that's associated with the framework. For
+    #   example, this could be PCI DSS or HIPAA.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/FrameworkMetadata AWS API Documentation
@@ -2298,7 +2427,7 @@ module Aws::AuditManager
     class GetAccountStatusRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] status
-    #   The status of the specified Amazon Web Services account.
+    #   The status of the Amazon Web Services account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAccountStatusResponse AWS API Documentation
@@ -2317,7 +2446,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] framework_id
-    #   The identifier for the specified framework.
+    #   The identifier for the framework.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessmentFrameworkRequest AWS API Documentation
@@ -2329,7 +2458,7 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] framework
-    #   The framework returned by the `GetAssessmentFramework` API.
+    #   The framework that the `GetAssessmentFramework` API returned.
     #   @return [Types::Framework]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessmentFrameworkResponse AWS API Documentation
@@ -2353,7 +2482,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessmentReportUrlRequest AWS API Documentation
@@ -2366,8 +2495,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] pre_signed_url
-    #   A uniform resource locator, used as a unique identifier to locate a
-    #   resource on the internet.
+    #   Short for uniform resource locator. A URL is used as a unique
+    #   identifier to locate a resource on the internet.
     #   @return [Types::URL]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessmentReportUrlResponse AWS API Documentation
@@ -2386,7 +2515,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessmentRequest AWS API Documentation
@@ -2405,8 +2534,8 @@ module Aws::AuditManager
     #
     # @!attribute [rw] user_role
     #   The wrapper that contains the Audit Manager role information of the
-    #   current user, such as the role type and IAM Amazon Resource Name
-    #   (ARN).
+    #   current user. This includes the role type and IAM Amazon Resource
+    #   Name (ARN).
     #   @return [Types::Role]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessmentResponse AWS API Documentation
@@ -2430,23 +2559,23 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the specified control set.
+    #   The identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] control_id
-    #   The identifier for the specified control.
+    #   The identifier for the control.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Represents the maximum number of results per page, or per API
+    #   Represents the maximum number of results on a page or for an API
     #   request call.
     #   @return [Integer]
     #
@@ -2467,7 +2596,7 @@ module Aws::AuditManager
     #   @return [Array<Types::ChangeLog>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetChangeLogsResponse AWS API Documentation
@@ -2487,7 +2616,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] control_id
-    #   The identifier for the specified control.
+    #   The identifier for the control.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetControlRequest AWS API Documentation
@@ -2499,7 +2628,7 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] control
-    #   The name of the control returned by the `GetControl` API.
+    #   The name of the control that the `GetControl` API returned.
     #   @return [Types::Control]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetControlResponse AWS API Documentation
@@ -2519,11 +2648,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Represents the maximum number of results per page, or per API
+    #   Represents the maximum number of results on a page or for an API
     #   request call.
     #   @return [Integer]
     #
@@ -2537,11 +2666,11 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] delegations
-    #   The list of delegations returned by the `GetDelegations` API.
+    #   The list of delegations that the `GetDelegations` API returned.
     #   @return [Array<Types::DelegationMetadata>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetDelegationsResponse AWS API Documentation
@@ -2565,7 +2694,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
@@ -2573,16 +2702,15 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
-    #   The unique identifier for the folder in which the evidence is
-    #   stored.
+    #   The unique identifier for the folder that the evidence is stored in.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Represents the maximum number of results per page, or per API
+    #   Represents the maximum number of results on a page or for an API
     #   request call.
     #   @return [Integer]
     #
@@ -2599,12 +2727,12 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] evidence
-    #   The list of evidence returned by the `GetEvidenceByEvidenceFolder`
-    #   API.
+    #   The list of evidence that the `GetEvidenceByEvidenceFolder` API
+    #   returned.
     #   @return [Array<Types::Evidence>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetEvidenceByEvidenceFolderResponse AWS API Documentation
@@ -2626,15 +2754,15 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the specified control set.
+    #   The identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
-    #   The identifier for the folder in which the evidence is stored.
+    #   The identifier for the folder that the evidence is stored in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetEvidenceFolderRequest AWS API Documentation
@@ -2648,7 +2776,7 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] evidence_folder
-    #   The folder in which evidence is stored.
+    #   The folder that the evidence is stored in.
     #   @return [Types::AssessmentEvidenceFolder]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetEvidenceFolderResponse AWS API Documentation
@@ -2671,23 +2799,23 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the specified control set.
+    #   The identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] control_id
-    #   The identifier for the specified control.
+    #   The identifier for the control.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Represents the maximum number of results per page, or per API
+    #   Represents the maximum number of results on a page or for an API
     #   request call.
     #   @return [Integer]
     #
@@ -2704,12 +2832,12 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] evidence_folders
-    #   The list of evidence folders returned by the
-    #   `GetEvidenceFoldersByAssessmentControl` API.
+    #   The list of evidence folders that the
+    #   `GetEvidenceFoldersByAssessmentControl` API returned.
     #   @return [Array<Types::AssessmentEvidenceFolder>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetEvidenceFoldersByAssessmentControlResponse AWS API Documentation
@@ -2731,15 +2859,15 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Represents the maximum number of results per page, or per API
+    #   Represents the maximum number of results on a page or for an API
     #   request call.
     #   @return [Integer]
     #
@@ -2754,12 +2882,12 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] evidence_folders
-    #   The list of evidence folders returned by the
-    #   `GetEvidenceFoldersByAssessment` API.
+    #   The list of evidence folders that the
+    #   `GetEvidenceFoldersByAssessment` API returned.
     #   @return [Array<Types::AssessmentEvidenceFolder>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetEvidenceFoldersByAssessmentResponse AWS API Documentation
@@ -2782,15 +2910,15 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the specified control set.
+    #   The identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
-    #   The identifier for the folder in which the evidence is stored.
+    #   The identifier for the folder that the evidence is stored in.
     #   @return [String]
     #
     # @!attribute [rw] evidence_id
@@ -2809,7 +2937,7 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] evidence
-    #   The evidence returned by the `GetEvidenceResponse` API.
+    #   The evidence that the `GetEvidenceResponse` API returned.
     #   @return [Types::Evidence]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetEvidenceResponse AWS API Documentation
@@ -2827,11 +2955,11 @@ module Aws::AuditManager
     class GetOrganizationAdminAccountRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] admin_account_id
-    #   The identifier for the specified administrator account.
+    #   The identifier for the administrator account.
     #   @return [String]
     #
     # @!attribute [rw] organization_id
-    #   The identifier for the specified organization.
+    #   The identifier for the organization.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetOrganizationAdminAccountResponse AWS API Documentation
@@ -2850,7 +2978,7 @@ module Aws::AuditManager
     class GetServicesInScopeRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] service_metadata
-    #   The metadata associated with the Amazon Web Service.
+    #   The metadata that's associated with the Amazon Web Service.
     #   @return [Array<Types::ServiceMetadata>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetServicesInScopeResponse AWS API Documentation
@@ -2906,6 +3034,57 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAssessmentFrameworkShareRequestsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         request_type: "SENT", # required, accepts SENT, RECEIVED
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] request_type
+    #   Specifies whether the share request is a sent request or a received
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Represents the maximum number of results on a page or for an API
+    #   request call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListAssessmentFrameworkShareRequestsRequest AWS API Documentation
+    #
+    class ListAssessmentFrameworkShareRequestsRequest < Struct.new(
+      :request_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment_framework_share_requests
+    #   The list of share requests that the
+    #   `ListAssessmentFrameworkShareRequests` API returned.
+    #   @return [Array<Types::AssessmentFrameworkShareRequest>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListAssessmentFrameworkShareRequestsResponse AWS API Documentation
+    #
+    class ListAssessmentFrameworkShareRequestsResponse < Struct.new(
+      :assessment_framework_share_requests,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAssessmentFrameworksRequest
     #   data as a hash:
     #
@@ -2916,15 +3095,16 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] framework_type
-    #   The type of framework, such as standard or custom.
+    #   The type of framework, such as a standard framework or a custom
+    #   framework.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Represents the maximum number of results per page, or per API
+    #   Represents the maximum number of results on a page or for an API
     #   request call.
     #   @return [Integer]
     #
@@ -2939,11 +3119,11 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] framework_metadata_list
-    #   The list of metadata objects for the specified framework.
+    #   The list of metadata objects for the framework.
     #   @return [Array<Types::AssessmentFrameworkMetadata>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListAssessmentFrameworksResponse AWS API Documentation
@@ -2964,11 +3144,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Represents the maximum number of results per page, or per API
+    #   Represents the maximum number of results on a page or for an API
     #   request call.
     #   @return [Integer]
     #
@@ -2982,12 +3162,12 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] assessment_reports
-    #   The list of assessment reports returned by the
-    #   `ListAssessmentReports` API.
+    #   The list of assessment reports that the `ListAssessmentReports` API
+    #   returned.
     #   @return [Array<Types::AssessmentReportMetadata>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListAssessmentReportsResponse AWS API Documentation
@@ -3008,11 +3188,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Represents the maximum number of results per page, or per API
+    #   Represents the maximum number of results on a page or for an API
     #   request call.
     #   @return [Integer]
     #
@@ -3026,11 +3206,11 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] assessment_metadata
-    #   The metadata associated with the assessment.
+    #   The metadata that's associated with the assessment.
     #   @return [Array<Types::AssessmentMetadataItem>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListAssessmentsResponse AWS API Documentation
@@ -3052,15 +3232,15 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] control_type
-    #   The type of control, such as standard or custom.
+    #   The type of control, such as a standard control or a custom control.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Represents the maximum number of results per page, or per API
+    #   Represents the maximum number of results on a page or for an API
     #   request call.
     #   @return [Integer]
     #
@@ -3075,12 +3255,12 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] control_metadata_list
-    #   The list of control metadata objects returned by the `ListControls`
-    #   API.
+    #   The list of control metadata objects that the `ListControls` API
+    #   returned.
     #   @return [Array<Types::ControlMetadata>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListControlsResponse AWS API Documentation
@@ -3102,15 +3282,15 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] source
-    #   The control mapping data source to which the keywords apply.
+    #   The control mapping data source that the keywords apply to.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Represents the maximum number of results per page, or per API
+    #   Represents the maximum number of results on a page or for an API
     #   request call.
     #   @return [Integer]
     #
@@ -3125,11 +3305,11 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] keywords
-    #   The list of keywords for the specified event mapping source.
+    #   The list of keywords for the event mapping source.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListKeywordsForDataSourceResponse AWS API Documentation
@@ -3150,11 +3330,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Represents the maximum number of results per page, or per API
+    #   Represents the maximum number of results on a page or for an API
     #   request call.
     #   @return [Integer]
     #
@@ -3172,7 +3352,7 @@ module Aws::AuditManager
     #   @return [Array<Types::Notification>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token used to fetch the next set of results.
+    #   The pagination token that's used to fetch the next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListNotificationsResponse AWS API Documentation
@@ -3192,7 +3372,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the specified resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListTagsForResourceRequest AWS API Documentation
@@ -3204,7 +3384,7 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] tags
-    #   The list of tags returned by the `ListTagsForResource` API.
+    #   The list of tags that the `ListTagsForResource` API returned.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListTagsForResourceResponse AWS API Documentation
@@ -3215,7 +3395,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # Evidence that is uploaded to Audit Manager manually.
+    # Evidence that's uploaded to Audit Manager manually.
     #
     # @note When making an API call, you may pass ManualEvidence
     #   data as a hash:
@@ -3236,8 +3416,8 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The notification used to inform a user of an update in Audit Manager.
-    # For example, this includes the notification that is sent when a
+    # The notification that informs a user of an update in Audit Manager.
+    # For example, this includes the notification that's sent when a
     # control set is delegated for review.
     #
     # @!attribute [rw] id
@@ -3245,7 +3425,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] assessment_name
@@ -3253,7 +3433,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the specified control set.
+    #   The identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] control_set_name
@@ -3333,7 +3513,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] admin_account_id
-    #   The identifier for the specified delegated administrator account.
+    #   The identifier for the delegated administrator account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/RegisterOrganizationAdminAccountRequest AWS API Documentation
@@ -3345,11 +3525,11 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] admin_account_id
-    #   The identifier for the specified delegated administrator account.
+    #   The identifier for the delegated administrator account.
     #   @return [String]
     #
     # @!attribute [rw] organization_id
-    #   The identifier for the specified organization.
+    #   The identifier for the organization.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/RegisterOrganizationAdminAccountResponse AWS API Documentation
@@ -3361,14 +3541,14 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # A system asset that is evaluated in an Audit Manager assessment.
+    # A system asset that's evaluated in an Audit Manager assessment.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) for the specified resource.
+    #   The Amazon Resource Name (ARN) for the resource.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the specified resource.
+    #   The value of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Resource AWS API Documentation
@@ -3380,17 +3560,17 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The resource specified in the request cannot be found.
+    # The resource that's specified in the request can't be found.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The unique identifier for the specified resource.
+    #   The unique identifier for the resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource affected by the error.
+    #   The type of resource that's affected by the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ResourceNotFoundException AWS API Documentation
@@ -3404,7 +3584,7 @@ module Aws::AuditManager
     end
 
     # The wrapper that contains the Audit Manager role information of the
-    # current user, such as the role type and IAM Amazon Resource Name
+    # current user. This includes the role type and IAM Amazon Resource Name
     # (ARN).
     #
     # @note When making an API call, you may pass Role
@@ -3442,7 +3622,7 @@ module Aws::AuditManager
     end
 
     # The wrapper that contains the Amazon Web Services accounts and
-    # services in scope for the assessment.
+    # services that are in scope for the assessment.
     #
     # @note When making an API call, you may pass Scope
     #   data as a hash:
@@ -3463,13 +3643,13 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] aws_accounts
-    #   The Amazon Web Services accounts included in the scope of the
-    #   assessment.
+    #   The Amazon Web Services accounts that are included in the scope of
+    #   the assessment.
     #   @return [Array<Types::AWSAccount>]
     #
     # @!attribute [rw] aws_services
-    #   The Amazon Web Services services included in the scope of the
-    #   assessment.
+    #   The Amazon Web Services services that are included in the scope of
+    #   the assessment.
     #   @return [Array<Types::AWSService>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Scope AWS API Documentation
@@ -3481,7 +3661,7 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
-    # The metadata associated with the specified Amazon Web Service.
+    # The metadata that's associated with the Amazon Web Service.
     #
     # @!attribute [rw] name
     #   The name of the Amazon Web Service.
@@ -3492,12 +3672,12 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the specified Amazon Web Service.
+    #   The description of the Amazon Web Service.
     #   @return [String]
     #
     # @!attribute [rw] category
-    #   The category in which the Amazon Web Service belongs, such as
-    #   compute, storage, database, and so on.
+    #   The category that the Amazon Web Service belongs to, such as
+    #   compute, storage, or database.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ServiceMetadata AWS API Documentation
@@ -3558,13 +3738,13 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] keyword_input_type
-    #   The method of input for the specified keyword.
+    #   The method of input for the keyword.
     #   @return [String]
     #
     # @!attribute [rw] keyword_value
-    #   The value of the keyword used to search CloudTrail logs, Config
-    #   rules, Security Hub checks, and Amazon Web Services API names when
-    #   mapping a control data source.
+    #   The value of the keyword that's used to search CloudTrail logs,
+    #   Config rules, Security Hub checks, and Amazon Web Services API names
+    #   when mapping a control data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/SourceKeyword AWS API Documentation
@@ -3572,6 +3752,56 @@ module Aws::AuditManager
     class SourceKeyword < Struct.new(
       :keyword_input_type,
       :keyword_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartAssessmentFrameworkShareRequest
+    #   data as a hash:
+    #
+    #       {
+    #         framework_id: "UUID", # required
+    #         destination_account: "AccountId", # required
+    #         destination_region: "Region", # required
+    #         comment: "ShareRequestComment",
+    #       }
+    #
+    # @!attribute [rw] framework_id
+    #   The unique identifier for the custom framework to be shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_account
+    #   The Amazon Web Services account of the recipient.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_region
+    #   The Amazon Web Services Region of the recipient.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   An optional comment from the sender about the share request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/StartAssessmentFrameworkShareRequest AWS API Documentation
+    #
+    class StartAssessmentFrameworkShareRequest < Struct.new(
+      :framework_id,
+      :destination_account,
+      :destination_region,
+      :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment_framework_share_request
+    #   The share request that's created by the
+    #   `StartAssessmentFrameworkShare` API.
+    #   @return [Types::AssessmentFrameworkShareRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/StartAssessmentFrameworkShareResponse AWS API Documentation
+    #
+    class StartAssessmentFrameworkShareResponse < Struct.new(
+      :assessment_framework_share_request)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3587,11 +3817,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the specified resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to be associated with the resource.
+    #   The tags that are associated with the resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/TagResourceRequest AWS API Documentation
@@ -3607,11 +3837,11 @@ module Aws::AuditManager
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # A uniform resource locator, used as a unique identifier to locate a
-    # resource on the internet.
+    # Short for uniform resource locator. A URL is used as a unique
+    # identifier to locate a resource on the internet.
     #
     # @!attribute [rw] hyperlink_name
-    #   The name or word used as a hyperlink to the URL.
+    #   The name or word that's used as a hyperlink to the URL.
     #   @return [String]
     #
     # @!attribute [rw] link
@@ -3668,23 +3898,23 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the specified control set.
+    #   The identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] control_id
-    #   The identifier for the specified control.
+    #   The identifier for the control.
     #   @return [String]
     #
     # @!attribute [rw] control_status
-    #   The status of the specified control.
+    #   The status of the control.
     #   @return [String]
     #
     # @!attribute [rw] comment_body
-    #   The comment body text for the specified control.
+    #   The comment body text for the control.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentControlRequest AWS API Documentation
@@ -3700,8 +3930,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] control
-    #   The name of the updated control set returned by the
-    #   `UpdateAssessmentControl` API.
+    #   The name of the updated control set that the
+    #   `UpdateAssessmentControl` API returned.
     #   @return [Types::AssessmentControl]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentControlResponse AWS API Documentation
@@ -3723,19 +3953,19 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the specified control set.
+    #   The identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the control set that is being updated.
+    #   The status of the control set that's being updated.
     #   @return [String]
     #
     # @!attribute [rw] comment
-    #   The comment related to the status update.
+    #   The comment that's related to the status update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentControlSetStatusRequest AWS API Documentation
@@ -3750,8 +3980,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] control_set
-    #   The name of the updated control set returned by the
-    #   `UpdateAssessmentControlSetStatus` API.
+    #   The name of the updated control set that the
+    #   `UpdateAssessmentControlSetStatus` API returned.
     #   @return [Types::AssessmentControlSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentControlSetStatusResponse AWS API Documentation
@@ -3763,7 +3993,7 @@ module Aws::AuditManager
     end
 
     # A `controlSet` entity that represents a collection of controls in
-    # Audit Manager. This does not contain the control set ID.
+    # Audit Manager. This doesn't contain the control set ID.
     #
     # @note When making an API call, you may pass UpdateAssessmentFrameworkControlSet
     #   data as a hash:
@@ -3787,7 +4017,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] controls
-    #   The list of controls contained within the control set.
+    #   The list of controls that are contained within the control set.
     #   @return [Array<Types::CreateAssessmentFrameworkControl>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentFrameworkControlSet AWS API Documentation
@@ -3822,7 +4052,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] framework_id
-    #   The identifier for the specified framework.
+    #   The identifier for the framework.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3830,7 +4060,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the framework that is to be updated.
+    #   The description of the updated framework.
     #   @return [String]
     #
     # @!attribute [rw] compliance_type
@@ -3839,7 +4069,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] control_sets
-    #   The control sets associated with the framework.
+    #   The control sets that are associated with the framework.
     #   @return [Array<Types::UpdateAssessmentFrameworkControlSet>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentFrameworkRequest AWS API Documentation
@@ -3855,13 +4085,58 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] framework
-    #   The name of the specified framework.
+    #   The name of the framework.
     #   @return [Types::Framework]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentFrameworkResponse AWS API Documentation
     #
     class UpdateAssessmentFrameworkResponse < Struct.new(
       :framework)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateAssessmentFrameworkShareRequest
+    #   data as a hash:
+    #
+    #       {
+    #         request_id: "UUID", # required
+    #         request_type: "SENT", # required, accepts SENT, RECEIVED
+    #         action: "ACCEPT", # required, accepts ACCEPT, DECLINE, REVOKE
+    #       }
+    #
+    # @!attribute [rw] request_id
+    #   The unique identifier for the share request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_type
+    #   Specifies whether the share request is a sent request or a received
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   Specifies the update action for the share request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentFrameworkShareRequest AWS API Documentation
+    #
+    class UpdateAssessmentFrameworkShareRequest < Struct.new(
+      :request_id,
+      :request_type,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assessment_framework_share_request
+    #   The updated share request that's returned by the
+    #   `UpdateAssessmentFrameworkShare` operation.
+    #   @return [Types::AssessmentFrameworkShareRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentFrameworkShareResponse AWS API Documentation
+    #
+    class UpdateAssessmentFrameworkShareResponse < Struct.new(
+      :assessment_framework_share_request)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3900,28 +4175,28 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] assessment_name
-    #   The name of the specified assessment to be updated.
+    #   The name of the assessment to be updated.
     #   @return [String]
     #
     # @!attribute [rw] assessment_description
-    #   The description of the specified assessment.
+    #   The description of the assessment.
     #   @return [String]
     #
     # @!attribute [rw] scope
-    #   The scope of the specified assessment.
+    #   The scope of the assessment.
     #   @return [Types::Scope]
     #
     # @!attribute [rw] assessment_reports_destination
-    #   The assessment report storage destination for the specified
-    #   assessment that is being updated.
+    #   The assessment report storage destination for the assessment that's
+    #   being updated.
     #   @return [Types::AssessmentReportsDestination]
     #
     # @!attribute [rw] roles
-    #   The list of roles for the specified assessment.
+    #   The list of roles for the assessment.
     #   @return [Array<Types::Role>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentRequest AWS API Documentation
@@ -3938,8 +4213,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] assessment
-    #   The response object (name of the updated assessment) for the
-    #   `UpdateAssessmentRequest` API.
+    #   The response object for the `UpdateAssessmentRequest` API. This is
+    #   the name of the updated assessment.
     #   @return [Types::Assessment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentResponse AWS API Documentation
@@ -3959,11 +4234,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the specified assessment.
+    #   The identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the specified assessment.
+    #   The current status of the assessment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentStatusRequest AWS API Documentation
@@ -3976,8 +4251,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] assessment
-    #   The name of the updated assessment returned by the
-    #   `UpdateAssessmentStatus` API.
+    #   The name of the updated assessment that the `UpdateAssessmentStatus`
+    #   API returned.
     #   @return [Types::Assessment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateAssessmentStatusResponse AWS API Documentation
@@ -4016,11 +4291,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] control_id
-    #   The identifier for the specified control.
+    #   The identifier for the control.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the control to be updated.
+    #   The name of the updated control.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4028,8 +4303,7 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] testing_information
-    #   The steps that to follow to determine if the control has been
-    #   satisfied.
+    #   The steps that you should follow to determine if the control is met.
     #   @return [String]
     #
     # @!attribute [rw] action_plan_title
@@ -4037,12 +4311,12 @@ module Aws::AuditManager
     #   @return [String]
     #
     # @!attribute [rw] action_plan_instructions
-    #   The recommended actions to carry out if the control is not
+    #   The recommended actions to carry out if the control isn't
     #   fulfilled.
     #   @return [String]
     #
     # @!attribute [rw] control_mapping_sources
-    #   The data mapping sources for the specified control.
+    #   The data mapping sources for the control.
     #   @return [Array<Types::ControlMappingSource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateControlRequest AWS API Documentation
@@ -4060,8 +4334,8 @@ module Aws::AuditManager
     end
 
     # @!attribute [rw] control
-    #   The name of the updated control set returned by the `UpdateControl`
-    #   API.
+    #   The name of the updated control set that the `UpdateControl` API
+    #   returned.
     #   @return [Types::Control]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/UpdateControlResponse AWS API Documentation
@@ -4091,8 +4365,8 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] sns_topic
-    #   The Amazon Simple Notification Service (Amazon SNS) topic to which
-    #   Audit Manager sends notifications.
+    #   The Amazon Simple Notification Service (Amazon SNS) topic that Audit
+    #   Manager sends notifications to.
     #   @return [String]
     #
     # @!attribute [rw] default_assessment_reports_destination
@@ -4138,8 +4412,8 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] s3_relative_path
-    #   The relative path of the specified Amazon S3 bucket in which the
-    #   assessment report is stored.
+    #   The relative path of the Amazon S3 bucket that the assessment report
+    #   is stored in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ValidateAssessmentReportIntegrityRequest AWS API Documentation
@@ -4155,8 +4429,8 @@ module Aws::AuditManager
     #   @return [Boolean]
     #
     # @!attribute [rw] signature_algorithm
-    #   The signature algorithm used to code sign the assessment report
-    #   file.
+    #   The signature algorithm that's used to code sign the assessment
+    #   report file.
     #   @return [String]
     #
     # @!attribute [rw] signature_date_time
@@ -4209,7 +4483,7 @@ module Aws::AuditManager
     end
 
     # Indicates that the request has invalid or missing parameters for the
-    # specified field.
+    # field.
     #
     # @!attribute [rw] name
     #   The name of the validation error.

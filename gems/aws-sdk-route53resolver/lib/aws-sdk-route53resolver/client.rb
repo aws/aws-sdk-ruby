@@ -1802,6 +1802,38 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Retrieves the behavior configuration of Route 53 Resolver behavior for
+    # a single VPC from Amazon Virtual Private Cloud.
+    #
+    # @option params [required, String] :resource_id
+    #   Resource ID of the Amazon VPC that you want to get information about.
+    #
+    # @return [Types::GetResolverConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResolverConfigResponse#resolver_config #resolver_config} => Types::ResolverConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resolver_config({
+    #     resource_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resolver_config.id #=> String
+    #   resp.resolver_config.resource_id #=> String
+    #   resp.resolver_config.owner_id #=> String
+    #   resp.resolver_config.autodefined_reverse #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverConfig AWS API Documentation
+    #
+    # @overload get_resolver_config(params = {})
+    # @param [Hash] params ({})
+    def get_resolver_config(params = {}, options = {})
+      req = build_request(:get_resolver_config, params)
+      req.send_request(options)
+    end
+
     # Gets DNSSEC validation information for a specified resource.
     #
     # @option params [required, String] :resource_id
@@ -2576,6 +2608,59 @@ module Aws::Route53Resolver
     # @param [Hash] params ({})
     def list_firewall_rules(params = {}, options = {})
       req = build_request(:list_firewall_rules, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the Resolver configurations that you have defined. Route 53
+    # Resolver uses the configurations to manage DNS resolution behavior for
+    # your VPCs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of Resolver configurations that you want to return
+    #   in the response to a `ListResolverConfigs` request. If you don't
+    #   specify a value for `MaxResults`, up to 100 Resolver configurations
+    #   are returned.
+    #
+    # @option params [String] :next_token
+    #   (Optional) If the current Amazon Web Services account has more than
+    #   `MaxResults` Resolver configurations, use `NextToken` to get the
+    #   second and subsequent pages of results.
+    #
+    #   For the first `ListResolverConfigs` request, omit this value.
+    #
+    #   For the second and subsequent requests, get the value of `NextToken`
+    #   from the previous response and specify that value for `NextToken` in
+    #   the request.
+    #
+    # @return [Types::ListResolverConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResolverConfigsResponse#next_token #next_token} => String
+    #   * {Types::ListResolverConfigsResponse#resolver_configs #resolver_configs} => Array&lt;Types::ResolverConfig&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resolver_configs({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.resolver_configs #=> Array
+    #   resp.resolver_configs[0].id #=> String
+    #   resp.resolver_configs[0].resource_id #=> String
+    #   resp.resolver_configs[0].owner_id #=> String
+    #   resp.resolver_configs[0].autodefined_reverse #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverConfigs AWS API Documentation
+    #
+    # @overload list_resolver_configs(params = {})
+    # @param [Hash] params ({})
+    def list_resolver_configs(params = {}, options = {})
+      req = build_request(:list_resolver_configs, params)
       req.send_request(options)
     end
 
@@ -3785,6 +3870,56 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
+    # Updates the behavior configuration of Route 53 Resolver behavior for a
+    # single VPC from Amazon Virtual Private Cloud.
+    #
+    # @option params [required, String] :resource_id
+    #   Resource ID of the Amazon VPC that you want to update the Resolver
+    #   configuration for.
+    #
+    # @option params [required, String] :autodefined_reverse_flag
+    #   Indicates whether or not the Resolver will create autodefined rules
+    #   for reverse DNS lookups. This is enabled by default. Disabling this
+    #   option will also affect EC2-Classic instances using ClassicLink. For
+    #   more information, see [ClassicLink][1] in the *Amazon EC2 guide*.
+    #
+    #   <note markdown="1"> It can take some time for the status change to be completed.
+    #
+    #    </note>
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+    #
+    # @return [Types::UpdateResolverConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResolverConfigResponse#resolver_config #resolver_config} => Types::ResolverConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resolver_config({
+    #     resource_id: "ResourceId", # required
+    #     autodefined_reverse_flag: "ENABLE", # required, accepts ENABLE, DISABLE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resolver_config.id #=> String
+    #   resp.resolver_config.resource_id #=> String
+    #   resp.resolver_config.owner_id #=> String
+    #   resp.resolver_config.autodefined_reverse #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverConfig AWS API Documentation
+    #
+    # @overload update_resolver_config(params = {})
+    # @param [Hash] params ({})
+    def update_resolver_config(params = {}, options = {})
+      req = build_request(:update_resolver_config, params)
+      req.send_request(options)
+    end
+
     # Updates an existing DNSSEC validation configuration. If there is no
     # existing DNSSEC validation configuration, one is created.
     #
@@ -3939,7 +4074,7 @@ module Aws::Route53Resolver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2021-10-25)
+------------------
+
+* Feature - This release introduces a new feature for Audit Manager: Custom framework sharing. You can now share your custom frameworks with another AWS account, or replicate them into another AWS Region under your own account.
+
 1.13.0 (2021-10-22)
 ------------------
 

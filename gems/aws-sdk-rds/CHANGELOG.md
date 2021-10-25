@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2021-10-25)
+------------------
+
+* Feature - This release adds support for Amazon RDS Custom, which is a new RDS management type that gives you full access to your database and operating system. For more information, see https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-custom.html
+
 1.128.0 (2021-10-18)
 ------------------
 

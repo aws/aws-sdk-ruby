@@ -34,6 +34,7 @@ module Aws::RDS
     AuthorizationQuotaExceededFault = Shapes::StructureShape.new(name: 'AuthorizationQuotaExceededFault')
     AuthorizeDBSecurityGroupIngressMessage = Shapes::StructureShape.new(name: 'AuthorizeDBSecurityGroupIngressMessage')
     AuthorizeDBSecurityGroupIngressResult = Shapes::StructureShape.new(name: 'AuthorizeDBSecurityGroupIngressResult')
+    AutomationMode = Shapes::StringShape.new(name: 'AutomationMode')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
@@ -44,6 +45,7 @@ module Aws::RDS
     BackupPolicyNotFoundFault = Shapes::StructureShape.new(name: 'BackupPolicyNotFoundFault')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
+    BucketName = Shapes::StringShape.new(name: 'BucketName')
     CancelExportTaskMessage = Shapes::StructureShape.new(name: 'CancelExportTaskMessage')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     CertificateList = Shapes::ListShape.new(name: 'CertificateList')
@@ -66,6 +68,7 @@ module Aws::RDS
     CopyOptionGroupResult = Shapes::StructureShape.new(name: 'CopyOptionGroupResult')
     CreateCustomAvailabilityZoneMessage = Shapes::StructureShape.new(name: 'CreateCustomAvailabilityZoneMessage')
     CreateCustomAvailabilityZoneResult = Shapes::StructureShape.new(name: 'CreateCustomAvailabilityZoneResult')
+    CreateCustomDBEngineVersionMessage = Shapes::StructureShape.new(name: 'CreateCustomDBEngineVersionMessage')
     CreateDBClusterEndpointMessage = Shapes::StructureShape.new(name: 'CreateDBClusterEndpointMessage')
     CreateDBClusterMessage = Shapes::StructureShape.new(name: 'CreateDBClusterMessage')
     CreateDBClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'CreateDBClusterParameterGroupMessage')
@@ -101,6 +104,13 @@ module Aws::RDS
     CustomAvailabilityZoneMessage = Shapes::StructureShape.new(name: 'CustomAvailabilityZoneMessage')
     CustomAvailabilityZoneNotFoundFault = Shapes::StructureShape.new(name: 'CustomAvailabilityZoneNotFoundFault')
     CustomAvailabilityZoneQuotaExceededFault = Shapes::StructureShape.new(name: 'CustomAvailabilityZoneQuotaExceededFault')
+    CustomDBEngineVersionAlreadyExistsFault = Shapes::StructureShape.new(name: 'CustomDBEngineVersionAlreadyExistsFault')
+    CustomDBEngineVersionManifest = Shapes::StringShape.new(name: 'CustomDBEngineVersionManifest')
+    CustomDBEngineVersionNotFoundFault = Shapes::StructureShape.new(name: 'CustomDBEngineVersionNotFoundFault')
+    CustomDBEngineVersionQuotaExceededFault = Shapes::StructureShape.new(name: 'CustomDBEngineVersionQuotaExceededFault')
+    CustomEngineName = Shapes::StringShape.new(name: 'CustomEngineName')
+    CustomEngineVersion = Shapes::StringShape.new(name: 'CustomEngineVersion')
+    CustomEngineVersionStatus = Shapes::StringShape.new(name: 'CustomEngineVersionStatus')
     DBCluster = Shapes::StructureShape.new(name: 'DBCluster')
     DBClusterAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBClusterAlreadyExistsFault')
     DBClusterBacktrack = Shapes::StructureShape.new(name: 'DBClusterBacktrack')
@@ -225,6 +235,7 @@ module Aws::RDS
     DBUpgradeDependencyFailureFault = Shapes::StructureShape.new(name: 'DBUpgradeDependencyFailureFault')
     DeleteCustomAvailabilityZoneMessage = Shapes::StructureShape.new(name: 'DeleteCustomAvailabilityZoneMessage')
     DeleteCustomAvailabilityZoneResult = Shapes::StructureShape.new(name: 'DeleteCustomAvailabilityZoneResult')
+    DeleteCustomDBEngineVersionMessage = Shapes::StructureShape.new(name: 'DeleteCustomDBEngineVersionMessage')
     DeleteDBClusterEndpointMessage = Shapes::StructureShape.new(name: 'DeleteDBClusterEndpointMessage')
     DeleteDBClusterMessage = Shapes::StructureShape.new(name: 'DeleteDBClusterMessage')
     DeleteDBClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'DeleteDBClusterParameterGroupMessage')
@@ -304,6 +315,7 @@ module Aws::RDS
     DescribeSourceRegionsMessage = Shapes::StructureShape.new(name: 'DescribeSourceRegionsMessage')
     DescribeValidDBInstanceModificationsMessage = Shapes::StructureShape.new(name: 'DescribeValidDBInstanceModificationsMessage')
     DescribeValidDBInstanceModificationsResult = Shapes::StructureShape.new(name: 'DescribeValidDBInstanceModificationsResult')
+    Description = Shapes::StringShape.new(name: 'Description')
     DomainMembership = Shapes::StructureShape.new(name: 'DomainMembership')
     DomainMembershipList = Shapes::ListShape.new(name: 'DomainMembershipList')
     DomainNotFoundFault = Shapes::StructureShape.new(name: 'DomainNotFoundFault')
@@ -373,6 +385,7 @@ module Aws::RDS
     InsufficientStorageClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientStorageClusterCapacityFault')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
+    InvalidCustomDBEngineVersionStateFault = Shapes::StructureShape.new(name: 'InvalidCustomDBEngineVersionStateFault')
     InvalidDBClusterCapacityFault = Shapes::StructureShape.new(name: 'InvalidDBClusterCapacityFault')
     InvalidDBClusterEndpointStateFault = Shapes::StructureShape.new(name: 'InvalidDBClusterEndpointStateFault')
     InvalidDBClusterSnapshotStateFault = Shapes::StructureShape.new(name: 'InvalidDBClusterSnapshotStateFault')
@@ -399,6 +412,7 @@ module Aws::RDS
     InvalidVPCNetworkStateFault = Shapes::StructureShape.new(name: 'InvalidVPCNetworkStateFault')
     KMSKeyNotAccessibleFault = Shapes::StructureShape.new(name: 'KMSKeyNotAccessibleFault')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
+    KmsKeyIdOrArn = Shapes::StringShape.new(name: 'KmsKeyIdOrArn')
     ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
     LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -409,6 +423,7 @@ module Aws::RDS
     ModifyCertificatesMessage = Shapes::StructureShape.new(name: 'ModifyCertificatesMessage')
     ModifyCertificatesResult = Shapes::StructureShape.new(name: 'ModifyCertificatesResult')
     ModifyCurrentDBClusterCapacityMessage = Shapes::StructureShape.new(name: 'ModifyCurrentDBClusterCapacityMessage')
+    ModifyCustomDBEngineVersionMessage = Shapes::StructureShape.new(name: 'ModifyCustomDBEngineVersionMessage')
     ModifyDBClusterEndpointMessage = Shapes::StructureShape.new(name: 'ModifyDBClusterEndpointMessage')
     ModifyDBClusterMessage = Shapes::StructureShape.new(name: 'ModifyDBClusterMessage')
     ModifyDBClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'ModifyDBClusterParameterGroupMessage')
@@ -565,6 +580,7 @@ module Aws::RDS
     StorageQuotaExceededFault = Shapes::StructureShape.new(name: 'StorageQuotaExceededFault')
     StorageTypeNotSupportedFault = Shapes::StructureShape.new(name: 'StorageTypeNotSupportedFault')
     String = Shapes::StringShape.new(name: 'String')
+    String255 = Shapes::StringShape.new(name: 'String255')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StringSensitive = Shapes::StringShape.new(name: 'StringSensitive')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
@@ -796,6 +812,16 @@ module Aws::RDS
     CreateCustomAvailabilityZoneResult.add_member(:custom_availability_zone, Shapes::ShapeRef.new(shape: CustomAvailabilityZone, location_name: "CustomAvailabilityZone"))
     CreateCustomAvailabilityZoneResult.struct_class = Types::CreateCustomAvailabilityZoneResult
 
+    CreateCustomDBEngineVersionMessage.add_member(:engine, Shapes::ShapeRef.new(shape: CustomEngineName, required: true, location_name: "Engine"))
+    CreateCustomDBEngineVersionMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: CustomEngineVersion, required: true, location_name: "EngineVersion"))
+    CreateCustomDBEngineVersionMessage.add_member(:database_installation_files_s3_bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "DatabaseInstallationFilesS3BucketName"))
+    CreateCustomDBEngineVersionMessage.add_member(:database_installation_files_s3_prefix, Shapes::ShapeRef.new(shape: String255, location_name: "DatabaseInstallationFilesS3Prefix"))
+    CreateCustomDBEngineVersionMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyIdOrArn, required: true, location_name: "KMSKeyId"))
+    CreateCustomDBEngineVersionMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateCustomDBEngineVersionMessage.add_member(:manifest, Shapes::ShapeRef.new(shape: CustomDBEngineVersionManifest, required: true, location_name: "Manifest"))
+    CreateCustomDBEngineVersionMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateCustomDBEngineVersionMessage.struct_class = Types::CreateCustomDBEngineVersionMessage
+
     CreateDBClusterEndpointMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     CreateDBClusterEndpointMessage.add_member(:db_cluster_endpoint_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterEndpointIdentifier"))
     CreateDBClusterEndpointMessage.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointType"))
@@ -908,6 +934,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     CreateDBInstanceMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     CreateDBInstanceMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
+    CreateDBInstanceMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -942,6 +969,7 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
     CreateDBInstanceReadReplicaMessage.add_member(:replica_mode, Shapes::ShapeRef.new(shape: ReplicaMode, location_name: "ReplicaMode"))
     CreateDBInstanceReadReplicaMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
+    CreateDBInstanceReadReplicaMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBInstanceReadReplicaMessage.struct_class = Types::CreateDBInstanceReadReplicaMessage
 
@@ -1062,6 +1090,12 @@ module Aws::RDS
     CustomAvailabilityZoneNotFoundFault.struct_class = Types::CustomAvailabilityZoneNotFoundFault
 
     CustomAvailabilityZoneQuotaExceededFault.struct_class = Types::CustomAvailabilityZoneQuotaExceededFault
+
+    CustomDBEngineVersionAlreadyExistsFault.struct_class = Types::CustomDBEngineVersionAlreadyExistsFault
+
+    CustomDBEngineVersionNotFoundFault.struct_class = Types::CustomDBEngineVersionNotFoundFault
+
+    CustomDBEngineVersionQuotaExceededFault.struct_class = Types::CustomDBEngineVersionQuotaExceededFault
 
     DBCluster.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
     DBCluster.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
@@ -1291,6 +1325,13 @@ module Aws::RDS
     DBEngineVersion.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     DBEngineVersion.add_member(:supports_parallel_query, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsParallelQuery"))
     DBEngineVersion.add_member(:supports_global_databases, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsGlobalDatabases"))
+    DBEngineVersion.add_member(:major_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MajorEngineVersion"))
+    DBEngineVersion.add_member(:database_installation_files_s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseInstallationFilesS3BucketName"))
+    DBEngineVersion.add_member(:database_installation_files_s3_prefix, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseInstallationFilesS3Prefix"))
+    DBEngineVersion.add_member(:db_engine_version_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBEngineVersionArn"))
+    DBEngineVersion.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KMSKeyId"))
+    DBEngineVersion.add_member(:create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreateTime"))
+    DBEngineVersion.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     DBEngineVersion.struct_class = Types::DBEngineVersion
 
     DBEngineVersionList.member = Shapes::ShapeRef.new(shape: DBEngineVersion, location_name: "DBEngineVersion")
@@ -1369,6 +1410,9 @@ module Aws::RDS
     DBInstance.add_member(:activity_stream_kinesis_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "ActivityStreamKinesisStreamName"))
     DBInstance.add_member(:activity_stream_mode, Shapes::ShapeRef.new(shape: ActivityStreamMode, location_name: "ActivityStreamMode"))
     DBInstance.add_member(:activity_stream_engine_native_audit_fields_included, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ActivityStreamEngineNativeAuditFieldsIncluded"))
+    DBInstance.add_member(:automation_mode, Shapes::ShapeRef.new(shape: AutomationMode, location_name: "AutomationMode"))
+    DBInstance.add_member(:resume_full_automation_mode_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ResumeFullAutomationModeTime"))
+    DBInstance.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -1666,6 +1710,10 @@ module Aws::RDS
 
     DeleteCustomAvailabilityZoneResult.add_member(:custom_availability_zone, Shapes::ShapeRef.new(shape: CustomAvailabilityZone, location_name: "CustomAvailabilityZone"))
     DeleteCustomAvailabilityZoneResult.struct_class = Types::DeleteCustomAvailabilityZoneResult
+
+    DeleteCustomDBEngineVersionMessage.add_member(:engine, Shapes::ShapeRef.new(shape: CustomEngineName, required: true, location_name: "Engine"))
+    DeleteCustomDBEngineVersionMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: CustomEngineVersion, required: true, location_name: "EngineVersion"))
+    DeleteCustomDBEngineVersionMessage.struct_class = Types::DeleteCustomDBEngineVersionMessage
 
     DeleteDBClusterEndpointMessage.add_member(:db_cluster_endpoint_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterEndpointIdentifier"))
     DeleteDBClusterEndpointMessage.struct_class = Types::DeleteDBClusterEndpointMessage
@@ -2308,6 +2356,8 @@ module Aws::RDS
 
     InsufficientStorageClusterCapacityFault.struct_class = Types::InsufficientStorageClusterCapacityFault
 
+    InvalidCustomDBEngineVersionStateFault.struct_class = Types::InvalidCustomDBEngineVersionStateFault
+
     InvalidDBClusterCapacityFault.struct_class = Types::InvalidDBClusterCapacityFault
 
     InvalidDBClusterEndpointStateFault.struct_class = Types::InvalidDBClusterEndpointStateFault
@@ -2384,6 +2434,12 @@ module Aws::RDS
     ModifyCurrentDBClusterCapacityMessage.add_member(:seconds_before_timeout, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SecondsBeforeTimeout"))
     ModifyCurrentDBClusterCapacityMessage.add_member(:timeout_action, Shapes::ShapeRef.new(shape: String, location_name: "TimeoutAction"))
     ModifyCurrentDBClusterCapacityMessage.struct_class = Types::ModifyCurrentDBClusterCapacityMessage
+
+    ModifyCustomDBEngineVersionMessage.add_member(:engine, Shapes::ShapeRef.new(shape: CustomEngineName, required: true, location_name: "Engine"))
+    ModifyCustomDBEngineVersionMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: CustomEngineVersion, required: true, location_name: "EngineVersion"))
+    ModifyCustomDBEngineVersionMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    ModifyCustomDBEngineVersionMessage.add_member(:status, Shapes::ShapeRef.new(shape: CustomEngineVersionStatus, location_name: "Status"))
+    ModifyCustomDBEngineVersionMessage.struct_class = Types::ModifyCustomDBEngineVersionMessage
 
     ModifyDBClusterEndpointMessage.add_member(:db_cluster_endpoint_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterEndpointIdentifier"))
     ModifyDBClusterEndpointMessage.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: String, location_name: "EndpointType"))
@@ -2478,6 +2534,8 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:replica_mode, Shapes::ShapeRef.new(shape: ReplicaMode, location_name: "ReplicaMode"))
     ModifyDBInstanceMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     ModifyDBInstanceMessage.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointArn, location_name: "AwsBackupRecoveryPointArn"))
+    ModifyDBInstanceMessage.add_member(:automation_mode, Shapes::ShapeRef.new(shape: AutomationMode, location_name: "AutomationMode"))
+    ModifyDBInstanceMessage.add_member(:resume_full_automation_mode_minutes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ResumeFullAutomationModeMinutes"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -2775,6 +2833,8 @@ module Aws::RDS
     PendingModifiedValues.add_member(:pending_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: PendingCloudwatchLogsExports, location_name: "PendingCloudwatchLogsExports"))
     PendingModifiedValues.add_member(:processor_features, Shapes::ShapeRef.new(shape: ProcessorFeatureList, location_name: "ProcessorFeatures"))
     PendingModifiedValues.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IAMDatabaseAuthenticationEnabled"))
+    PendingModifiedValues.add_member(:automation_mode, Shapes::ShapeRef.new(shape: AutomationMode, location_name: "AutomationMode"))
+    PendingModifiedValues.add_member(:resume_full_automation_mode_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ResumeFullAutomationModeTime"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PointInTimeRestoreNotEnabledFault.struct_class = Types::PointInTimeRestoreNotEnabledFault
@@ -3059,6 +3119,7 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:db_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupName"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     RestoreDBInstanceFromDBSnapshotMessage.struct_class = Types::RestoreDBInstanceFromDBSnapshotMessage
 
     RestoreDBInstanceFromDBSnapshotResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3147,6 +3208,7 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:source_db_instance_automated_backups_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceDBInstanceAutomatedBackupsArn"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     RestoreDBInstanceToPointInTimeMessage.struct_class = Types::RestoreDBInstanceToPointInTimeMessage
 
     RestoreDBInstanceToPointInTimeResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3570,6 +3632,17 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
       end)
 
+      api.add_operation(:create_custom_db_engine_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomDBEngineVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomDBEngineVersionMessage)
+        o.output = Shapes::ShapeRef.new(shape: DBEngineVersion)
+        o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+      end)
+
       api.add_operation(:create_db_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDBCluster"
         o.http_method = "POST"
@@ -3802,6 +3875,16 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: DeleteCustomAvailabilityZoneResult)
         o.errors << Shapes::ShapeRef.new(shape: CustomAvailabilityZoneNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+      end)
+
+      api.add_operation(:delete_custom_db_engine_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomDBEngineVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomDBEngineVersionMessage)
+        o.output = Shapes::ShapeRef.new(shape: DBEngineVersion)
+        o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCustomDBEngineVersionStateFault)
       end)
 
       api.add_operation(:delete_db_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -4628,6 +4711,16 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterCapacityFault)
+      end)
+
+      api.add_operation(:modify_custom_db_engine_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyCustomDBEngineVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyCustomDBEngineVersionMessage)
+        o.output = Shapes::ShapeRef.new(shape: DBEngineVersion)
+        o.errors << Shapes::ShapeRef.new(shape: CustomDBEngineVersionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCustomDBEngineVersionStateFault)
       end)
 
       api.add_operation(:modify_db_cluster, Seahorse::Model::Operation.new.tap do |o|

@@ -35,6 +35,9 @@ module Aws::RDS
   # * {CustomAvailabilityZoneAlreadyExistsFault}
   # * {CustomAvailabilityZoneNotFoundFault}
   # * {CustomAvailabilityZoneQuotaExceededFault}
+  # * {CustomDBEngineVersionAlreadyExistsFault}
+  # * {CustomDBEngineVersionNotFoundFault}
+  # * {CustomDBEngineVersionQuotaExceededFault}
   # * {DBClusterAlreadyExistsFault}
   # * {DBClusterBacktrackNotFoundFault}
   # * {DBClusterEndpointAlreadyExistsFault}
@@ -97,6 +100,7 @@ module Aws::RDS
   # * {InsufficientDBClusterCapacityFault}
   # * {InsufficientDBInstanceCapacityFault}
   # * {InsufficientStorageClusterCapacityFault}
+  # * {InvalidCustomDBEngineVersionStateFault}
   # * {InvalidDBClusterCapacityFault}
   # * {InvalidDBClusterEndpointStateFault}
   # * {InvalidDBClusterSnapshotStateFault}
@@ -226,6 +230,36 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::CustomAvailabilityZoneQuotaExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class CustomDBEngineVersionAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::CustomDBEngineVersionAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class CustomDBEngineVersionNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::CustomDBEngineVersionNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class CustomDBEngineVersionQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::CustomDBEngineVersionQuotaExceededFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -846,6 +880,16 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::InsufficientStorageClusterCapacityFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidCustomDBEngineVersionStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDS::Types::InvalidCustomDBEngineVersionStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
