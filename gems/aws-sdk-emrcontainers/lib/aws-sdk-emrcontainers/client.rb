@@ -382,8 +382,9 @@ module Aws::EMRContainers
     # @option params [required, String] :execution_role_arn
     #   The ARN of the execution role.
     #
-    # @option params [required, String] :certificate_arn
-    #   The certificate ARN of the managed endpoint.
+    # @option params [String] :certificate_arn
+    #   The certificate ARN provided by users for the managed endpoint. This
+    #   fiedd is under deprecation and will be removed in future releases.
     #
     # @option params [Types::ConfigurationOverrides] :configuration_overrides
     #   The configuration settings that will be used to override existing
@@ -413,7 +414,7 @@ module Aws::EMRContainers
     #     type: "EndpointType", # required
     #     release_label: "ReleaseLabel", # required
     #     execution_role_arn: "IAMRoleArn", # required
-    #     certificate_arn: "ACMCertArn", # required
+    #     certificate_arn: "ACMCertArn",
     #     configuration_overrides: {
     #       application_configuration: [
     #         {
@@ -683,6 +684,8 @@ module Aws::EMRContainers
     #   resp.endpoint.release_label #=> String
     #   resp.endpoint.execution_role_arn #=> String
     #   resp.endpoint.certificate_arn #=> String
+    #   resp.endpoint.certificate_authority.certificate_arn #=> String
+    #   resp.endpoint.certificate_authority.certificate_data #=> String
     #   resp.endpoint.configuration_overrides.application_configuration #=> Array
     #   resp.endpoint.configuration_overrides.application_configuration[0].classification #=> String
     #   resp.endpoint.configuration_overrides.application_configuration[0].properties #=> Hash
@@ -896,6 +899,8 @@ module Aws::EMRContainers
     #   resp.endpoints[0].release_label #=> String
     #   resp.endpoints[0].execution_role_arn #=> String
     #   resp.endpoints[0].certificate_arn #=> String
+    #   resp.endpoints[0].certificate_authority.certificate_arn #=> String
+    #   resp.endpoints[0].certificate_authority.certificate_data #=> String
     #   resp.endpoints[0].configuration_overrides.application_configuration #=> Array
     #   resp.endpoints[0].configuration_overrides.application_configuration[0].classification #=> String
     #   resp.endpoints[0].configuration_overrides.application_configuration[0].properties #=> Hash
@@ -1200,7 +1205,7 @@ module Aws::EMRContainers
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

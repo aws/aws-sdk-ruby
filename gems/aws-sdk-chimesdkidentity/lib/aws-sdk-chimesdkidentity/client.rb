@@ -551,6 +551,32 @@ module Aws::ChimeSDKIdentity
       req.send_request(options)
     end
 
+    # Deregisters an `AppInstanceUserEndpoint`.
+    #
+    # @option params [required, String] :app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #
+    # @option params [required, String] :endpoint_id
+    #   The unique identifier of the `AppInstanceUserEndpoint`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_app_instance_user_endpoint({
+    #     app_instance_user_arn: "SensitiveChimeArn", # required
+    #     endpoint_id: "SensitiveString64", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/DeregisterAppInstanceUserEndpoint AWS API Documentation
+    #
+    # @overload deregister_app_instance_user_endpoint(params = {})
+    # @param [Hash] params ({})
+    def deregister_app_instance_user_endpoint(params = {}, options = {})
+      req = build_request(:deregister_app_instance_user_endpoint, params)
+      req.send_request(options)
+    end
+
     # Returns the full details of an `AppInstance`.
     #
     # @option params [required, String] :app_instance_arn
@@ -650,6 +676,49 @@ module Aws::ChimeSDKIdentity
       req.send_request(options)
     end
 
+    # Returns the full details of an `AppInstanceUserEndpoint`.
+    #
+    # @option params [required, String] :app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #
+    # @option params [required, String] :endpoint_id
+    #   The unique identifier of the `AppInstanceUserEndpoint`.
+    #
+    # @return [Types::DescribeAppInstanceUserEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppInstanceUserEndpointResponse#app_instance_user_endpoint #app_instance_user_endpoint} => Types::AppInstanceUserEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_instance_user_endpoint({
+    #     app_instance_user_arn: "SensitiveString1600", # required
+    #     endpoint_id: "SensitiveString64", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_user_endpoint.app_instance_user_arn #=> String
+    #   resp.app_instance_user_endpoint.endpoint_id #=> String
+    #   resp.app_instance_user_endpoint.name #=> String
+    #   resp.app_instance_user_endpoint.type #=> String, one of "APNS", "APNS_SANDBOX", "GCM"
+    #   resp.app_instance_user_endpoint.resource_arn #=> String
+    #   resp.app_instance_user_endpoint.endpoint_attributes.device_token #=> String
+    #   resp.app_instance_user_endpoint.endpoint_attributes.voip_device_token #=> String
+    #   resp.app_instance_user_endpoint.created_timestamp #=> Time
+    #   resp.app_instance_user_endpoint.last_updated_timestamp #=> Time
+    #   resp.app_instance_user_endpoint.allow_messages #=> String, one of "ALL", "NONE"
+    #   resp.app_instance_user_endpoint.endpoint_state.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.app_instance_user_endpoint.endpoint_state.status_reason #=> String, one of "INVALID_DEVICE_TOKEN", "INVALID_PINPOINT_ARN"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/DescribeAppInstanceUserEndpoint AWS API Documentation
+    #
+    # @overload describe_app_instance_user_endpoint(params = {})
+    # @param [Hash] params ({})
+    def describe_app_instance_user_endpoint(params = {}, options = {})
+      req = build_request(:describe_app_instance_user_endpoint, params)
+      req.send_request(options)
+    end
+
     # Gets the retention settings for an `AppInstance`.
     #
     # @option params [required, String] :app_instance_arn
@@ -722,6 +791,55 @@ module Aws::ChimeSDKIdentity
     # @param [Hash] params ({})
     def list_app_instance_admins(params = {}, options = {})
       req = build_request(:list_app_instance_admins, params)
+      req.send_request(options)
+    end
+
+    # Lists all the `AppInstanceUserEndpoints` created under a single
+    # `AppInstanceUser`.
+    #
+    # @option params [required, String] :app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of endpoints that you want to return.
+    #
+    # @option params [String] :next_token
+    #   The token passed by previous API calls until all requested endpoints
+    #   are returned.
+    #
+    # @return [Types::ListAppInstanceUserEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAppInstanceUserEndpointsResponse#app_instance_user_endpoints #app_instance_user_endpoints} => Array&lt;Types::AppInstanceUserEndpointSummary&gt;
+    #   * {Types::ListAppInstanceUserEndpointsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_app_instance_user_endpoints({
+    #     app_instance_user_arn: "SensitiveChimeArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_user_endpoints #=> Array
+    #   resp.app_instance_user_endpoints[0].app_instance_user_arn #=> String
+    #   resp.app_instance_user_endpoints[0].endpoint_id #=> String
+    #   resp.app_instance_user_endpoints[0].name #=> String
+    #   resp.app_instance_user_endpoints[0].type #=> String, one of "APNS", "APNS_SANDBOX", "GCM"
+    #   resp.app_instance_user_endpoints[0].allow_messages #=> String, one of "ALL", "NONE"
+    #   resp.app_instance_user_endpoints[0].endpoint_state.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.app_instance_user_endpoints[0].endpoint_state.status_reason #=> String, one of "INVALID_DEVICE_TOKEN", "INVALID_PINPOINT_ARN"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/ListAppInstanceUserEndpoints AWS API Documentation
+    #
+    # @overload list_app_instance_user_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_app_instance_user_endpoints(params = {}, options = {})
+      req = build_request(:list_app_instance_user_endpoints, params)
       req.send_request(options)
     end
 
@@ -812,6 +930,36 @@ module Aws::ChimeSDKIdentity
       req.send_request(options)
     end
 
+    # Lists the tags applied to an Amazon Chime SDK identity resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Sets the amount of time in days that a given `AppInstance` retains
     # data.
     #
@@ -848,6 +996,139 @@ module Aws::ChimeSDKIdentity
     # @param [Hash] params ({})
     def put_app_instance_retention_settings(params = {}, options = {})
       req = build_request(:put_app_instance_retention_settings, params)
+      req.send_request(options)
+    end
+
+    # Registers an endpoint under an Amazon Chime `AppInstanceUser`. The
+    # endpoint receives messages for a user. For push notifications, the
+    # endpoint is a mobile device used to receive mobile push notifications
+    # for a user.
+    #
+    # @option params [required, String] :app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #
+    # @option params [String] :name
+    #   The name of the `AppInstanceUserEndpoint`.
+    #
+    # @option params [required, String] :type
+    #   The type of the `AppInstanceUserEndpoint`. Supported types:
+    #
+    #   * `APNS`\: The mobile notification service for an Apple device.
+    #
+    #   * `APNS_SANDBOX`\: The sandbox environment of the mobile notification
+    #     service for an Apple device.
+    #
+    #   * `GCM`\: The mobile notification service for an Android device.
+    #
+    #   Populate the `ResourceArn` value of each type as `PinpointAppArn`.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource to which the endpoint belongs.
+    #
+    # @option params [required, Types::EndpointAttributes] :endpoint_attributes
+    #   The attributes of an `Endpoint`.
+    #
+    # @option params [required, String] :client_request_token
+    #   The idempotency token for each client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :allow_messages
+    #   Boolean that controls whether the AppInstanceUserEndpoint is opted in
+    #   to receive messages. `ALL` indicates the endpoint receives all
+    #   messages. `NONE` indicates the endpoint receives no messages.
+    #
+    # @return [Types::RegisterAppInstanceUserEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterAppInstanceUserEndpointResponse#app_instance_user_arn #app_instance_user_arn} => String
+    #   * {Types::RegisterAppInstanceUserEndpointResponse#endpoint_id #endpoint_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_app_instance_user_endpoint({
+    #     app_instance_user_arn: "SensitiveChimeArn", # required
+    #     name: "SensitiveString1600",
+    #     type: "APNS", # required, accepts APNS, APNS_SANDBOX, GCM
+    #     resource_arn: "SensitiveChimeArn", # required
+    #     endpoint_attributes: { # required
+    #       device_token: "NonEmptySensitiveString1600", # required
+    #       voip_device_token: "NonEmptySensitiveString1600",
+    #     },
+    #     client_request_token: "ClientRequestToken", # required
+    #     allow_messages: "ALL", # accepts ALL, NONE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_user_arn #=> String
+    #   resp.endpoint_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/RegisterAppInstanceUserEndpoint AWS API Documentation
+    #
+    # @overload register_app_instance_user_endpoint(params = {})
+    # @param [Hash] params ({})
+    def register_app_instance_user_endpoint(params = {}, options = {})
+      req = build_request(:register_app_instance_user_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Applies the specified tags to the specified Amazon Chime SDK identity
+    # resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The resource ARN.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tag key-value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ChimeArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from the specified Amazon Chime SDK
+    # identity resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The resource ARN.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ChimeArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -924,6 +1205,51 @@ module Aws::ChimeSDKIdentity
       req.send_request(options)
     end
 
+    # Updates the details of an `AppInstanceUserEndpoint`. You can update
+    # the name and `AllowMessage` values.
+    #
+    # @option params [required, String] :app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #
+    # @option params [required, String] :endpoint_id
+    #   The unique identifier of the `AppInstanceUserEndpoint`.
+    #
+    # @option params [String] :name
+    #   The name of the `AppInstanceUserEndpoint`.
+    #
+    # @option params [String] :allow_messages
+    #   Boolean that controls whether the `AppInstanceUserEndpoint` is opted
+    #   in to receive messages. `ALL` indicates the endpoint will receive all
+    #   messages. `NONE` indicates the endpoint will receive no messages.
+    #
+    # @return [Types::UpdateAppInstanceUserEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAppInstanceUserEndpointResponse#app_instance_user_arn #app_instance_user_arn} => String
+    #   * {Types::UpdateAppInstanceUserEndpointResponse#endpoint_id #endpoint_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_app_instance_user_endpoint({
+    #     app_instance_user_arn: "SensitiveChimeArn", # required
+    #     endpoint_id: "SensitiveString64", # required
+    #     name: "SensitiveString1600",
+    #     allow_messages: "ALL", # accepts ALL, NONE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_instance_user_arn #=> String
+    #   resp.endpoint_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/UpdateAppInstanceUserEndpoint AWS API Documentation
+    #
+    # @overload update_app_instance_user_endpoint(params = {})
+    # @param [Hash] params ({})
+    def update_app_instance_user_endpoint(params = {}, options = {})
+      req = build_request(:update_app_instance_user_endpoint, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -937,7 +1263,7 @@ module Aws::ChimeSDKIdentity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkidentity'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

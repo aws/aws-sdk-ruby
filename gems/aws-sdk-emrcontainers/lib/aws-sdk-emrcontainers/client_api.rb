@@ -14,8 +14,10 @@ module Aws::EMRContainers
     include Seahorse::Model
 
     ACMCertArn = Shapes::StringShape.new(name: 'ACMCertArn')
+    Base64Encoded = Shapes::StringShape.new(name: 'Base64Encoded')
     CancelJobRunRequest = Shapes::StructureShape.new(name: 'CancelJobRunRequest')
     CancelJobRunResponse = Shapes::StructureShape.new(name: 'CancelJobRunResponse')
+    Certificate = Shapes::StructureShape.new(name: 'Certificate')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudWatchMonitoringConfiguration = Shapes::StructureShape.new(name: 'CloudWatchMonitoringConfiguration')
     ClusterId = Shapes::StringShape.new(name: 'ClusterId')
@@ -113,6 +115,10 @@ module Aws::EMRContainers
     CancelJobRunResponse.add_member(:virtual_cluster_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "virtualClusterId"))
     CancelJobRunResponse.struct_class = Types::CancelJobRunResponse
 
+    Certificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ACMCertArn, location_name: "certificateArn"))
+    Certificate.add_member(:certificate_data, Shapes::ShapeRef.new(shape: Base64Encoded, location_name: "certificateData"))
+    Certificate.struct_class = Types::Certificate
+
     CloudWatchMonitoringConfiguration.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     CloudWatchMonitoringConfiguration.add_member(:log_stream_name_prefix, Shapes::ShapeRef.new(shape: String256, location_name: "logStreamNamePrefix"))
     CloudWatchMonitoringConfiguration.struct_class = Types::CloudWatchMonitoringConfiguration
@@ -144,7 +150,7 @@ module Aws::EMRContainers
     CreateManagedEndpointRequest.add_member(:type, Shapes::ShapeRef.new(shape: EndpointType, required: true, location_name: "type"))
     CreateManagedEndpointRequest.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, required: true, location_name: "releaseLabel"))
     CreateManagedEndpointRequest.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "executionRoleArn"))
-    CreateManagedEndpointRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ACMCertArn, required: true, location_name: "certificateArn"))
+    CreateManagedEndpointRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ACMCertArn, deprecated: true, location_name: "certificateArn", metadata: {"deprecatedMessage"=>"Customer provided certificate-arn is deprecated and would be removed in future."}))
     CreateManagedEndpointRequest.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
     CreateManagedEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateManagedEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -212,7 +218,8 @@ module Aws::EMRContainers
     Endpoint.add_member(:state, Shapes::ShapeRef.new(shape: EndpointState, location_name: "state"))
     Endpoint.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
     Endpoint.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "executionRoleArn"))
-    Endpoint.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ACMCertArn, location_name: "certificateArn"))
+    Endpoint.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: ACMCertArn, deprecated: true, location_name: "certificateArn", metadata: {"deprecatedMessage"=>"Customer provided certificate-arn is deprecated and would be removed in future."}))
+    Endpoint.add_member(:certificate_authority, Shapes::ShapeRef.new(shape: Certificate, location_name: "certificateAuthority"))
     Endpoint.add_member(:configuration_overrides, Shapes::ShapeRef.new(shape: ConfigurationOverrides, location_name: "configurationOverrides"))
     Endpoint.add_member(:server_url, Shapes::ShapeRef.new(shape: UriString, location_name: "serverUrl"))
     Endpoint.add_member(:created_at, Shapes::ShapeRef.new(shape: Date, location_name: "createdAt"))

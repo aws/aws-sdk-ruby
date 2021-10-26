@@ -165,6 +165,129 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
+    # An endpoint under an Amazon Chime `AppInstanceUser` that receives
+    # messages for a user. For push notifications, the endpoint is a mobile
+    # device used to receive mobile push notifications for a user.
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The unique identifier of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource to which the endpoint belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_attributes
+    #   The attributes of an `Endpoint`.
+    #   @return [Types::EndpointAttributes]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time at which an `AppInstanceUserEndpoint` was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The time at which an `AppInstanceUserEndpoint` was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] allow_messages
+    #   Boolean that controls whether the `AppInstanceUserEndpoint` is opted
+    #   in to receive messages. `ALL` indicates the endpoint will receive
+    #   all messages. `NONE` indicates the endpoint will receive no
+    #   messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_state
+    #   A read-only field that represents the state of an
+    #   `AppInstanceUserEndpoint`. Supported values:
+    #
+    #   * `ACTIVE`\: The `AppInstanceUserEndpoint` is active and able to
+    #     receive messages. When `ACTIVE`, the `EndpointStatusReason`
+    #     remains empty.
+    #
+    #   * `INACTIVE`\: The `AppInstanceUserEndpoint` is inactive and can't
+    #     receive message. When `INACTIVE`, the corresponding reason will be
+    #     conveyed through `EndpointStatusReason`.
+    #
+    #   * `INVALID_DEVICE_TOKEN` indicates that an `AppInstanceUserEndpoint`
+    #     is `INACTIVE` due to invalid device token
+    #
+    #   * `INVALID_PINPOINT_ARN` indicates that an `AppInstanceUserEndpoint`
+    #     is `INACTIVE` due to an invalid pinpoint ARN that was input
+    #     through the `ResourceArn` field.
+    #   @return [Types::EndpointState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/AppInstanceUserEndpoint AWS API Documentation
+    #
+    class AppInstanceUserEndpoint < Struct.new(
+      :app_instance_user_arn,
+      :endpoint_id,
+      :name,
+      :type,
+      :resource_arn,
+      :endpoint_attributes,
+      :created_timestamp,
+      :last_updated_timestamp,
+      :allow_messages,
+      :endpoint_state)
+      SENSITIVE = [:app_instance_user_arn, :endpoint_id, :name, :resource_arn]
+      include Aws::Structure
+    end
+
+    # Summary of the details of an `AppInstanceUserEndpoint`.
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The unique identifier of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_messages
+    #   BBoolean that controls whether the `AppInstanceUserEndpoint` is
+    #   opted in to receive messages. `ALL` indicates the endpoint will
+    #   receive all messages. `NONE` indicates the endpoint will receive no
+    #   messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_state
+    #   A read-only field that represent the state of an
+    #   `AppInstanceUserEndpoint`.
+    #   @return [Types::EndpointState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/AppInstanceUserEndpointSummary AWS API Documentation
+    #
+    class AppInstanceUserEndpointSummary < Struct.new(
+      :app_instance_user_arn,
+      :endpoint_id,
+      :name,
+      :type,
+      :allow_messages,
+      :endpoint_state)
+      SENSITIVE = [:app_instance_user_arn, :endpoint_id, :name]
+      include Aws::Structure
+    end
+
     # Summary of the details of an `AppInstanceUser`.
     #
     # @!attribute [rw] app_instance_user_arn
@@ -476,6 +599,31 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeregisterAppInstanceUserEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_user_arn: "SensitiveChimeArn", # required
+    #         endpoint_id: "SensitiveString64", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The unique identifier of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/DeregisterAppInstanceUserEndpointRequest AWS API Documentation
+    #
+    class DeregisterAppInstanceUserEndpointRequest < Struct.new(
+      :app_instance_user_arn,
+      :endpoint_id)
+      SENSITIVE = [:app_instance_user_arn, :endpoint_id]
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeAppInstanceAdminRequest
     #   data as a hash:
     #
@@ -547,6 +695,46 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeAppInstanceUserEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_user_arn: "SensitiveString1600", # required
+    #         endpoint_id: "SensitiveString64", # required
+    #       }
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The unique identifier of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/DescribeAppInstanceUserEndpointRequest AWS API Documentation
+    #
+    class DescribeAppInstanceUserEndpointRequest < Struct.new(
+      :app_instance_user_arn,
+      :endpoint_id)
+      SENSITIVE = [:app_instance_user_arn, :endpoint_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_user_endpoint
+    #   The full details of an `AppInstanceUserEndpoint`\: the
+    #   `AppInstanceUserArn`, ID, name, type, resource ARN, attributes,
+    #   allow messages, state, and created and last updated timestamps. All
+    #   timestamps use epoch milliseconds.
+    #   @return [Types::AppInstanceUserEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/DescribeAppInstanceUserEndpointResponse AWS API Documentation
+    #
+    class DescribeAppInstanceUserEndpointResponse < Struct.new(
+      :app_instance_user_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeAppInstanceUserRequest
     #   data as a hash:
     #
@@ -574,6 +762,69 @@ module Aws::ChimeSDKIdentity
     #
     class DescribeAppInstanceUserResponse < Struct.new(
       :app_instance_user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The attributes of an `Endpoint`.
+    #
+    # @note When making an API call, you may pass EndpointAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         device_token: "NonEmptySensitiveString1600", # required
+    #         voip_device_token: "NonEmptySensitiveString1600",
+    #       }
+    #
+    # @!attribute [rw] device_token
+    #   The device token for the GCM, APNS, and APNS\_SANDBOX endpoint
+    #   types.
+    #   @return [String]
+    #
+    # @!attribute [rw] voip_device_token
+    #   The VOIP device token for the APNS and APNS\_SANDBOX endpoint types.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/EndpointAttributes AWS API Documentation
+    #
+    class EndpointAttributes < Struct.new(
+      :device_token,
+      :voip_device_token)
+      SENSITIVE = [:device_token, :voip_device_token]
+      include Aws::Structure
+    end
+
+    # A read-only field that represents the state of an
+    # `AppInstanceUserEndpoint`. Supported values:
+    #
+    # * `ACTIVE`\: The `AppInstanceUserEndpoint` is active and able to
+    #   receive messages. When `ACTIVE`, the `EndpointStatusReason` remains
+    #   empty.
+    #
+    # * `INACTIVE`\: The `AppInstanceUserEndpoint` is inactive and can't
+    #   receive message. When INACTIVE, the corresponding reason will be
+    #   conveyed through EndpointStatusReason.
+    #
+    # * `INVALID_DEVICE_TOKEN` indicates that an `AppInstanceUserEndpoint`
+    #   is `INACTIVE` due to invalid device token
+    #
+    # * `INVALID_PINPOINT_ARN` indicates that an `AppInstanceUserEndpoint`
+    #   is `INACTIVE` due to an invalid pinpoint ARN that was input through
+    #   the `ResourceArn` field.
+    #
+    # @!attribute [rw] status
+    #   Enum that indicates the Status of an `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the `EndpointStatus`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/EndpointState AWS API Documentation
+    #
+    class EndpointState < Struct.new(
+      :status,
+      :status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -706,6 +957,56 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAppInstanceUserEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_user_arn: "SensitiveChimeArn", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of endpoints that you want to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested endpoints
+    #   are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/ListAppInstanceUserEndpointsRequest AWS API Documentation
+    #
+    class ListAppInstanceUserEndpointsRequest < Struct.new(
+      :app_instance_user_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = [:app_instance_user_arn, :next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_user_endpoints
+    #   The information for each requested `AppInstanceUserEndpoint`.
+    #   @return [Array<Types::AppInstanceUserEndpointSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token passed by previous API calls until all requested endpoints
+    #   are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/ListAppInstanceUserEndpointsResponse AWS API Documentation
+    #
+    class ListAppInstanceUserEndpointsResponse < Struct.new(
+      :app_instance_user_endpoints,
+      :next_token)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAppInstanceUsersRequest
     #   data as a hash:
     #
@@ -805,6 +1106,37 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tag key-value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutAppInstanceRetentionSettingsRequest
     #   data as a hash:
     #
@@ -848,6 +1180,95 @@ module Aws::ChimeSDKIdentity
       :app_instance_retention_settings,
       :initiate_deletion_timestamp)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegisterAppInstanceUserEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_user_arn: "SensitiveChimeArn", # required
+    #         name: "SensitiveString1600",
+    #         type: "APNS", # required, accepts APNS, APNS_SANDBOX, GCM
+    #         resource_arn: "SensitiveChimeArn", # required
+    #         endpoint_attributes: { # required
+    #           device_token: "NonEmptySensitiveString1600", # required
+    #           voip_device_token: "NonEmptySensitiveString1600",
+    #         },
+    #         client_request_token: "ClientRequestToken", # required
+    #         allow_messages: "ALL", # accepts ALL, NONE
+    #       }
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the `AppInstanceUserEndpoint`. Supported types:
+    #
+    #   * `APNS`\: The mobile notification service for an Apple device.
+    #
+    #   * `APNS_SANDBOX`\: The sandbox environment of the mobile
+    #     notification service for an Apple device.
+    #
+    #   * `GCM`\: The mobile notification service for an Android device.
+    #
+    #   Populate the `ResourceArn` value of each type as `PinpointAppArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource to which the endpoint belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_attributes
+    #   The attributes of an `Endpoint`.
+    #   @return [Types::EndpointAttributes]
+    #
+    # @!attribute [rw] client_request_token
+    #   The idempotency token for each client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_messages
+    #   Boolean that controls whether the AppInstanceUserEndpoint is opted
+    #   in to receive messages. `ALL` indicates the endpoint receives all
+    #   messages. `NONE` indicates the endpoint receives no messages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/RegisterAppInstanceUserEndpointRequest AWS API Documentation
+    #
+    class RegisterAppInstanceUserEndpointRequest < Struct.new(
+      :app_instance_user_arn,
+      :name,
+      :type,
+      :resource_arn,
+      :endpoint_attributes,
+      :client_request_token,
+      :allow_messages)
+      SENSITIVE = [:app_instance_user_arn, :name, :resource_arn, :client_request_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The unique identifier of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/RegisterAppInstanceUserEndpointResponse AWS API Documentation
+    #
+    class RegisterAppInstanceUserEndpointResponse < Struct.new(
+      :app_instance_user_arn,
+      :endpoint_id)
+      SENSITIVE = [:app_instance_user_arn, :endpoint_id]
       include Aws::Structure
     end
 
@@ -902,7 +1323,7 @@ module Aws::ChimeSDKIdentity
       include Aws::Structure
     end
 
-    # Describes a tag applied to a resource.
+    # A tag object containing a key-value pair.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -913,11 +1334,11 @@ module Aws::ChimeSDKIdentity
     #       }
     #
     # @!attribute [rw] key
-    #   The key of the tag.
+    #   The key in a tag.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the tag.
+    #   The value in a tag.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/Tag AWS API Documentation
@@ -926,6 +1347,36 @@ module Aws::ChimeSDKIdentity
       :key,
       :value)
       SENSITIVE = [:key, :value]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ChimeArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag key-value pairs.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -959,6 +1410,31 @@ module Aws::ChimeSDKIdentity
     class UnauthorizedClientException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ChimeArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1003,6 +1479,63 @@ module Aws::ChimeSDKIdentity
     class UpdateAppInstanceResponse < Struct.new(
       :app_instance_arn)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateAppInstanceUserEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_instance_user_arn: "SensitiveChimeArn", # required
+    #         endpoint_id: "SensitiveString64", # required
+    #         name: "SensitiveString1600",
+    #         allow_messages: "ALL", # accepts ALL, NONE
+    #       }
+    #
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The unique identifier of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_messages
+    #   Boolean that controls whether the `AppInstanceUserEndpoint` is opted
+    #   in to receive messages. `ALL` indicates the endpoint will receive
+    #   all messages. `NONE` indicates the endpoint will receive no
+    #   messages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/UpdateAppInstanceUserEndpointRequest AWS API Documentation
+    #
+    class UpdateAppInstanceUserEndpointRequest < Struct.new(
+      :app_instance_user_arn,
+      :endpoint_id,
+      :name,
+      :allow_messages)
+      SENSITIVE = [:app_instance_user_arn, :endpoint_id, :name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_instance_user_arn
+    #   The ARN of the `AppInstanceUser`.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   The unique identifier of the `AppInstanceUserEndpoint`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-identity-2021-04-20/UpdateAppInstanceUserEndpointResponse AWS API Documentation
+    #
+    class UpdateAppInstanceUserEndpointResponse < Struct.new(
+      :app_instance_user_arn,
+      :endpoint_id)
+      SENSITIVE = [:app_instance_user_arn, :endpoint_id]
       include Aws::Structure
     end
 

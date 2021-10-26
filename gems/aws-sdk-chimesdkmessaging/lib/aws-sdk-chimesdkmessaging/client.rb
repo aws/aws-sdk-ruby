@@ -379,7 +379,8 @@ module Aws::ChimeSDKMessaging
     #   not returned. This is only supported by moderators.
     #
     # @option params [required, Array<String>] :member_arns
-    #   The ARNs of the members you want to add to the channel.
+    #   The `AppInstanceUserArn`s of the members you want to add to the
+    #   channel.
     #
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
@@ -577,7 +578,7 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the ban request.
     #
     # @option params [required, String] :member_arn
-    #   The ARN of the member being banned.
+    #   The `AppInstanceUserArn` of the member being banned.
     #
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
@@ -693,8 +694,8 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
-    # Adds a user to a channel. The `InvitedBy` response field is derived
-    # from the request header. A channel member can:
+    # Adds a user to a channel. The `InvitedBy` field in `ChannelMembership`
+    # is derived from the request header. A channel member can:
     #
     # * List messages
     #
@@ -723,7 +724,7 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel to which you're adding users.
     #
     # @option params [required, String] :member_arn
-    #   The ARN of the member you want to add to the channel.
+    #   The `AppInstanceUserArn` of the member you want to add to the channel.
     #
     # @option params [required, String] :type
     #   The membership type of a user, `DEFAULT` or `HIDDEN`. Default members
@@ -786,7 +787,7 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel.
     #
     # @option params [required, String] :channel_moderator_arn
-    #   The ARN of the moderator.
+    #   The `AppInstanceUserArn` of the moderator.
     #
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
@@ -931,7 +932,8 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel from which you want to remove the user.
     #
     # @option params [required, String] :member_arn
-    #   The ARN of the member that you're removing from the channel.
+    #   The `AppInstanceUserArn` of the member that you're removing from the
+    #   channel.
     #
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
@@ -1005,7 +1007,7 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel.
     #
     # @option params [required, String] :channel_moderator_arn
-    #   The ARN of the moderator being deleted.
+    #   The `AppInstanceUserArn` of the moderator being deleted.
     #
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
@@ -1090,7 +1092,7 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel from which the user is banned.
     #
     # @option params [required, String] :member_arn
-    #   The ARN of the member being banned.
+    #   The `AppInstanceUserArn` of the member being banned.
     #
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
@@ -1175,7 +1177,7 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel.
     #
     # @option params [required, String] :member_arn
-    #   The ARN of the member.
+    #   The `AppInstanceUserArn` of the member.
     #
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
@@ -1322,7 +1324,7 @@ module Aws::ChimeSDKMessaging
     #   The ARN of the channel.
     #
     # @option params [required, String] :channel_moderator_arn
-    #   The ARN of the channel moderator.
+    #   The `AppInstanceUserArn` of the channel moderator.
     #
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
@@ -1396,6 +1398,54 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
+    # Gets the membership preferences of an `AppInstanceUser` for the
+    # specified channel. The `AppInstanceUser` must be a member of the
+    # channel. Only the `AppInstanceUser` who owns the membership can
+    # retrieve preferences. Users in the `AppInstanceAdmin` and channel
+    # moderator roles can't retrieve preferences for other users. Banned
+    # users can't retrieve membership preferences for the channel from
+    # which they are banned.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :member_arn
+    #   The `AppInstanceUserArn` of the member retrieving the preferences.
+    #
+    # @option params [required, String] :chime_bearer
+    #   The `AppInstanceUserARN` of the user making the API call.
+    #
+    # @return [Types::GetChannelMembershipPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChannelMembershipPreferencesResponse#channel_arn #channel_arn} => String
+    #   * {Types::GetChannelMembershipPreferencesResponse#member #member} => Types::Identity
+    #   * {Types::GetChannelMembershipPreferencesResponse#preferences #preferences} => Types::ChannelMembershipPreferences
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_channel_membership_preferences({
+    #     channel_arn: "ChimeArn", # required
+    #     member_arn: "ChimeArn", # required
+    #     chime_bearer: "ChimeArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.member.arn #=> String
+    #   resp.member.name #=> String
+    #   resp.preferences.push_notifications.allow_notifications #=> String, one of "ALL", "NONE", "FILTERED"
+    #   resp.preferences.push_notifications.filter_rule #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMembershipPreferences AWS API Documentation
+    #
+    # @overload get_channel_membership_preferences(params = {})
+    # @param [Hash] params ({})
+    def get_channel_membership_preferences(params = {}, options = {})
+      req = build_request(:get_channel_membership_preferences, params)
+      req.send_request(options)
+    end
+
     # Gets the full details of a channel message.
     #
     # <note markdown="1"> The x-amz-chime-bearer request header is mandatory. Use the
@@ -1441,6 +1491,9 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_message.persistence #=> String, one of "PERSISTENT", "NON_PERSISTENT"
     #   resp.channel_message.status.value #=> String, one of "SENT", "PENDING", "FAILED", "DENIED"
     #   resp.channel_message.status.detail #=> String
+    #   resp.channel_message.message_attributes #=> Hash
+    #   resp.channel_message.message_attributes["MessageAttributeName"].string_values #=> Array
+    #   resp.channel_message.message_attributes["MessageAttributeName"].string_values[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMessage AWS API Documentation
     #
@@ -1653,6 +1706,13 @@ module Aws::ChimeSDKMessaging
     #
     #  </note>
     #
+    # If you want to list the channels to which a specific app instance user
+    # belongs, see the [ListChannelMembershipsForAppInstanceUser][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html
+    #
     # @option params [required, String] :channel_arn
     #   The maximum number of channel memberships that you want returned.
     #
@@ -1843,6 +1903,9 @@ module Aws::ChimeSDKMessaging
     #   resp.channel_messages[0].redacted #=> Boolean
     #   resp.channel_messages[0].status.value #=> String, one of "SENT", "PENDING", "FAILED", "DENIED"
     #   resp.channel_messages[0].status.detail #=> String
+    #   resp.channel_messages[0].message_attributes #=> Hash
+    #   resp.channel_messages[0].message_attributes["MessageAttributeName"].string_values #=> Array
+    #   resp.channel_messages[0].message_attributes["MessageAttributeName"].string_values[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ListChannelMessages AWS API Documentation
     #
@@ -2115,6 +2178,62 @@ module Aws::ChimeSDKMessaging
       req.send_request(options)
     end
 
+    # Sets the membership preferences of an `AppInstanceUser` for the
+    # specified channel. The `AppInstanceUser` must be a member of the
+    # channel. Only the `AppInstanceUser` who owns the membership can set
+    # preferences. Users in the `AppInstanceAdmin` and channel moderator
+    # roles can't set preferences for other users. Banned users can't set
+    # membership preferences for the channel from which they are banned.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the channel.
+    #
+    # @option params [required, String] :member_arn
+    #   The `AppInstanceUserArn` of the member setting the preferences.
+    #
+    # @option params [required, String] :chime_bearer
+    #   The `AppInstanceUserARN` of the user making the API call.
+    #
+    # @option params [required, Types::ChannelMembershipPreferences] :preferences
+    #   The channel membership preferences of an `AppInstanceUser` .
+    #
+    # @return [Types::PutChannelMembershipPreferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutChannelMembershipPreferencesResponse#channel_arn #channel_arn} => String
+    #   * {Types::PutChannelMembershipPreferencesResponse#member #member} => Types::Identity
+    #   * {Types::PutChannelMembershipPreferencesResponse#preferences #preferences} => Types::ChannelMembershipPreferences
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_channel_membership_preferences({
+    #     channel_arn: "ChimeArn", # required
+    #     member_arn: "ChimeArn", # required
+    #     chime_bearer: "ChimeArn", # required
+    #     preferences: { # required
+    #       push_notifications: {
+    #         allow_notifications: "ALL", # required, accepts ALL, NONE, FILTERED
+    #         filter_rule: "FilterRule",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #   resp.member.arn #=> String
+    #   resp.member.name #=> String
+    #   resp.preferences.push_notifications.allow_notifications #=> String, one of "ALL", "NONE", "FILTERED"
+    #   resp.preferences.push_notifications.filter_rule #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/PutChannelMembershipPreferences AWS API Documentation
+    #
+    # @overload put_channel_membership_preferences(params = {})
+    # @param [Hash] params ({})
+    def put_channel_membership_preferences(params = {}, options = {})
+      req = build_request(:put_channel_membership_preferences, params)
+      req.send_request(options)
+    end
+
     # Redacts message content, but not metadata. The message exists in the
     # back end, but the action returns null content, and the state shows as
     # redacted.
@@ -2199,6 +2318,13 @@ module Aws::ChimeSDKMessaging
     # @option params [required, String] :chime_bearer
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #
+    # @option params [Types::PushNotificationConfiguration] :push_notification
+    #   The push notification configuration of the message.
+    #
+    # @option params [Hash<String,Types::MessageAttributeValue>] :message_attributes
+    #   The attributes for the message, used for message filtering along with
+    #   a `FilterRule` defined in the `PushNotificationPreferences`.
+    #
     # @return [Types::SendChannelMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SendChannelMessageResponse#channel_arn #channel_arn} => String
@@ -2215,6 +2341,16 @@ module Aws::ChimeSDKMessaging
     #     metadata: "Metadata",
     #     client_request_token: "ClientRequestToken", # required
     #     chime_bearer: "ChimeArn", # required
+    #     push_notification: {
+    #       title: "PushNotificationTitle", # required
+    #       body: "PushNotificationBody", # required
+    #       type: "DEFAULT", # required, accepts DEFAULT, VOIP
+    #     },
+    #     message_attributes: {
+    #       "MessageAttributeName" => {
+    #         string_values: ["MessageAttributeStringValue"],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2498,7 +2634,7 @@ module Aws::ChimeSDKMessaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
