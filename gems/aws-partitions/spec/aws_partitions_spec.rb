@@ -302,7 +302,7 @@ module Aws
       end
 
       describe '.signing_region' do
-        it 'gets the signing service for a given region and service' do
+        it 'gets the signing region for a given region and service' do
           expect(
             Partitions::EndpointProvider.signing_region(
               'us-peccy-1',
