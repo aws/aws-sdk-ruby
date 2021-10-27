@@ -61,7 +61,7 @@ module Aws
         it 'uses the endpoint provider for global endpoints' do
           expect(Aws::Partitions::EndpointProvider)
             .to receive(:signing_region)
-                  .with('other-region', 'svc-name')
+                  .with('other-region', 'svc-name', nil)
                   .and_return('us-east-1')
 
           client = Sigv4Client.new(options.merge(
@@ -101,7 +101,7 @@ module Aws
           })
           expect(Aws::Partitions::EndpointProvider)
             .to receive(:signing_region)
-            .with('fips-us-east-1', 'api.service')
+            .with('fips-us-east-1', 'api.service', nil)
             .and_return('us-east-1')
 
           client = svc::Client.new(options.merge(
