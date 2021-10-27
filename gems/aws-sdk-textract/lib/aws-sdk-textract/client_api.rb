@@ -50,6 +50,8 @@ module Aws::Textract
     GetDocumentAnalysisResponse = Shapes::StructureShape.new(name: 'GetDocumentAnalysisResponse')
     GetDocumentTextDetectionRequest = Shapes::StructureShape.new(name: 'GetDocumentTextDetectionRequest')
     GetDocumentTextDetectionResponse = Shapes::StructureShape.new(name: 'GetDocumentTextDetectionResponse')
+    GetExpenseAnalysisRequest = Shapes::StructureShape.new(name: 'GetExpenseAnalysisRequest')
+    GetExpenseAnalysisResponse = Shapes::StructureShape.new(name: 'GetExpenseAnalysisResponse')
     HumanLoopActivationConditionsEvaluationResults = Shapes::StringShape.new(name: 'HumanLoopActivationConditionsEvaluationResults')
     HumanLoopActivationOutput = Shapes::StructureShape.new(name: 'HumanLoopActivationOutput')
     HumanLoopActivationReason = Shapes::StringShape.new(name: 'HumanLoopActivationReason')
@@ -100,6 +102,8 @@ module Aws::Textract
     StartDocumentAnalysisResponse = Shapes::StructureShape.new(name: 'StartDocumentAnalysisResponse')
     StartDocumentTextDetectionRequest = Shapes::StructureShape.new(name: 'StartDocumentTextDetectionRequest')
     StartDocumentTextDetectionResponse = Shapes::StructureShape.new(name: 'StartDocumentTextDetectionResponse')
+    StartExpenseAnalysisRequest = Shapes::StructureShape.new(name: 'StartExpenseAnalysisRequest')
+    StartExpenseAnalysisResponse = Shapes::StructureShape.new(name: 'StartExpenseAnalysisResponse')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
     TextType = Shapes::StringShape.new(name: 'TextType')
@@ -237,6 +241,20 @@ module Aws::Textract
     GetDocumentTextDetectionResponse.add_member(:detect_document_text_model_version, Shapes::ShapeRef.new(shape: String, location_name: "DetectDocumentTextModelVersion"))
     GetDocumentTextDetectionResponse.struct_class = Types::GetDocumentTextDetectionResponse
 
+    GetExpenseAnalysisRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    GetExpenseAnalysisRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetExpenseAnalysisRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetExpenseAnalysisRequest.struct_class = Types::GetExpenseAnalysisRequest
+
+    GetExpenseAnalysisResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
+    GetExpenseAnalysisResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    GetExpenseAnalysisResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetExpenseAnalysisResponse.add_member(:expense_documents, Shapes::ShapeRef.new(shape: ExpenseDocumentList, location_name: "ExpenseDocuments"))
+    GetExpenseAnalysisResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
+    GetExpenseAnalysisResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    GetExpenseAnalysisResponse.add_member(:analyze_expense_model_version, Shapes::ShapeRef.new(shape: String, location_name: "AnalyzeExpenseModelVersion"))
+    GetExpenseAnalysisResponse.struct_class = Types::GetExpenseAnalysisResponse
+
     HumanLoopActivationOutput.add_member(:human_loop_arn, Shapes::ShapeRef.new(shape: HumanLoopArn, location_name: "HumanLoopArn"))
     HumanLoopActivationOutput.add_member(:human_loop_activation_reasons, Shapes::ShapeRef.new(shape: HumanLoopActivationReasons, location_name: "HumanLoopActivationReasons"))
     HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsEvaluationResults, location_name: "HumanLoopActivationConditionsEvaluationResults", metadata: {"jsonvalue"=>true}))
@@ -335,6 +353,17 @@ module Aws::Textract
 
     StartDocumentTextDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartDocumentTextDetectionResponse.struct_class = Types::StartDocumentTextDetectionResponse
+
+    StartExpenseAnalysisRequest.add_member(:document_location, Shapes::ShapeRef.new(shape: DocumentLocation, required: true, location_name: "DocumentLocation"))
+    StartExpenseAnalysisRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
+    StartExpenseAnalysisRequest.add_member(:job_tag, Shapes::ShapeRef.new(shape: JobTag, location_name: "JobTag"))
+    StartExpenseAnalysisRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
+    StartExpenseAnalysisRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "OutputConfig"))
+    StartExpenseAnalysisRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
+    StartExpenseAnalysisRequest.struct_class = Types::StartExpenseAnalysisRequest
+
+    StartExpenseAnalysisResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartExpenseAnalysisResponse.struct_class = Types::StartExpenseAnalysisResponse
 
     ThrottlingException.struct_class = Types::ThrottlingException
 
@@ -448,6 +477,22 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
       end)
 
+      api.add_operation(:get_expense_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExpenseAnalysis"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetExpenseAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetExpenseAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidJobIdException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
+      end)
+
       api.add_operation(:start_document_analysis, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartDocumentAnalysis"
         o.http_method = "POST"
@@ -474,6 +519,26 @@ module Aws::Textract
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartDocumentTextDetectionRequest)
         o.output = Shapes::ShapeRef.new(shape: StartDocumentTextDetectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: DocumentTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: BadDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:start_expense_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartExpenseAnalysis"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartExpenseAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartExpenseAnalysisResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSKeyException)

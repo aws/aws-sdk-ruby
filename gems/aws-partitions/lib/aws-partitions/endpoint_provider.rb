@@ -47,17 +47,48 @@ module Aws
         'https://' + endpoint_for(region, service, sts_endpoint, variants)
       end
 
-      # @param [String] region The region for signing.
-      # @param [String] service The service to sign with.
       # @api private Use the static class methods instead.
-      def signing_region(region, service)
-        get_partition(region)
-          .fetch('services', {})
-          .fetch(service, {})
-          .fetch('endpoints', {})
-          .fetch(region, {})
-          .fetch('credentialScope', {})
+      def signing_region(region, service, sts_regional_endpoints)
+        credential_scope(region, service, sts_regional_endpoints)
           .fetch('region', region)
+      end
+
+      # @api private Use the static class methods instead.
+      def signing_service(region, service)
+        # don't default to the service name
+        # signers should prefer the api metadata's signingName
+        # if no service is set in the credentialScope
+        credential_scope(region, service, 'regional')
+          .fetch('service', nil)
+      end
+
+      # @api private Use the static class methods instead.
+      def credential_scope(region, service, sts_regional_endpoints)
+        partition = get_partition(region)
+        service_cfg = partition.fetch('services', {})
+                               .fetch(service, {})
+        endpoints = service_cfg.fetch('endpoints', {})
+
+        # Check for sts legacy behavior
+        sts_legacy = service == 'sts' &&
+          sts_regional_endpoints == 'legacy' &&
+          STS_LEGACY_REGIONS.include?(region)
+
+        is_global = !endpoints.key?(region) &&
+          service_cfg['isRegionalized'] == false
+
+        # Check for global endpoint.
+        if sts_legacy || is_global
+          region = service_cfg.fetch('partitionEndpoint', region)
+        end
+
+        default_credential_scope = service_cfg
+                                     .fetch('defaults', {})
+                                     .fetch('credentialScope', {})
+
+        endpoints
+          .fetch(region, {})
+          .fetch('credentialScope', default_credential_scope)
       end
 
       # @param [String] region The region used to fetch the partition.
@@ -231,8 +262,12 @@ module Aws
           default_provider.resolve(region, service, sts_endpoint, variants)
         end
 
-        def signing_region(region, service)
-          default_provider.signing_region(region, service)
+        def signing_region(region, service, sts_regional_endpoints = 'regional')
+          default_provider.signing_region(region, service, sts_regional_endpoints)
+        end
+
+        def signing_service(region, service)
+          default_provider.signing_service(region, service)
         end
 
         def dns_suffix_for(region, service = nil, variants = {})

@@ -3,7 +3,12 @@ Unreleased Changes
 
 * Feature - Support modeled dualstack and fips endpoints in `Aws::Partitions::EndpointProvider`.
 
-* Feature - Support `#fips_regions` and `#dualstack_regions` in `Aws::Partitions::Service`.
+* Issue - Add `signing_service` method and resolve `credentialScope` correctly for global services/service defaults.
+
+1.520.0 (2021-10-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
 
 1.519.0 (2021-10-25)
 ------------------

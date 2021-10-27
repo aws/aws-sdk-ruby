@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2021-10-26)
+------------------
+
+* Feature - The Amazon Chime SDK now supports push notifications through Amazon Pinpoint
+
 1.3.0 (2021-10-18)
 ------------------
 

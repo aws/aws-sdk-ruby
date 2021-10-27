@@ -110,7 +110,8 @@ module Aws::ChimeSDKMessaging
     # A list of failed member ARNs, error codes, and error messages.
     #
     # @!attribute [rw] member_arn
-    #   The ARN of the member that the service couldn't add.
+    #   The `AppInstanceUserArn` of the member that the service couldn't
+    #   add.
     #   @return [String]
     #
     # @!attribute [rw] error_code
@@ -154,7 +155,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] member_arns
-    #   The ARNs of the members you want to add to the channel.
+    #   The `AppInstanceUserArn`s of the members you want to add to the
+    #   channel.
     #   @return [Array<String>]
     #
     # @!attribute [rw] chime_bearer
@@ -506,6 +508,30 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # The channel membership preferences for an `AppInstanceUser`.
+    #
+    # @note When making an API call, you may pass ChannelMembershipPreferences
+    #   data as a hash:
+    #
+    #       {
+    #         push_notifications: {
+    #           allow_notifications: "ALL", # required, accepts ALL, NONE, FILTERED
+    #           filter_rule: "FilterRule",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] push_notifications
+    #   The push notification configuration of a message.
+    #   @return [Types::PushNotificationPreferences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMembershipPreferences AWS API Documentation
+    #
+    class ChannelMembershipPreferences < Struct.new(
+      :push_notifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary of the details of a `ChannelMembership`.
     #
     # @!attribute [rw] member
@@ -570,6 +596,11 @@ module Aws::ChimeSDKMessaging
     #   The status of the channel message.
     #   @return [Types::ChannelMessageStatusStructure]
     #
+    # @!attribute [rw] message_attributes
+    #   The attributes for the message, used for message filtering along
+    #   with a `FilterRule` defined in the `PushNotificationPreferences`.
+    #   @return [Hash<String,Types::MessageAttributeValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessage AWS API Documentation
     #
     class ChannelMessage < Struct.new(
@@ -584,7 +615,8 @@ module Aws::ChimeSDKMessaging
       :sender,
       :redacted,
       :persistence,
-      :status)
+      :status,
+      :message_attributes)
       SENSITIVE = [:content, :metadata]
       include Aws::Structure
     end
@@ -685,6 +717,10 @@ module Aws::ChimeSDKMessaging
     #   channel flow, the value determines the processing stage.
     #   @return [Types::ChannelMessageStatusStructure]
     #
+    # @!attribute [rw] message_attributes
+    #   The message attribues listed in a the summary of a channel message.
+    #   @return [Hash<String,Types::MessageAttributeValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessageSummary AWS API Documentation
     #
     class ChannelMessageSummary < Struct.new(
@@ -697,7 +733,8 @@ module Aws::ChimeSDKMessaging
       :last_edited_timestamp,
       :sender,
       :redacted,
-      :status)
+      :status,
+      :message_attributes)
       SENSITIVE = [:content, :metadata]
       include Aws::Structure
     end
@@ -830,7 +867,7 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] member_arn
-    #   The ARN of the member being banned.
+    #   The `AppInstanceUserArn` of the member being banned.
     #   @return [String]
     #
     # @!attribute [rw] chime_bearer
@@ -952,7 +989,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] member_arn
-    #   The ARN of the member you want to add to the channel.
+    #   The `AppInstanceUserArn` of the member you want to add to the
+    #   channel.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1009,7 +1047,7 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] channel_moderator_arn
-    #   The ARN of the moderator.
+    #   The `AppInstanceUserArn` of the moderator.
     #   @return [String]
     #
     # @!attribute [rw] chime_bearer
@@ -1193,7 +1231,8 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] member_arn
-    #   The ARN of the member that you're removing from the channel.
+    #   The `AppInstanceUserArn` of the member that you're removing from
+    #   the channel.
     #   @return [String]
     #
     # @!attribute [rw] chime_bearer
@@ -1255,7 +1294,7 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] channel_moderator_arn
-    #   The ARN of the moderator being deleted.
+    #   The `AppInstanceUserArn` of the moderator being deleted.
     #   @return [String]
     #
     # @!attribute [rw] chime_bearer
@@ -1311,7 +1350,7 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] member_arn
-    #   The ARN of the member being banned.
+    #   The `AppInstanceUserArn` of the member being banned.
     #   @return [String]
     #
     # @!attribute [rw] chime_bearer
@@ -1428,7 +1467,7 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] member_arn
-    #   The ARN of the member.
+    #   The `AppInstanceUserArn` of the member.
     #   @return [String]
     #
     # @!attribute [rw] chime_bearer
@@ -1514,7 +1553,7 @@ module Aws::ChimeSDKMessaging
     #   @return [String]
     #
     # @!attribute [rw] channel_moderator_arn
-    #   The ARN of the channel moderator.
+    #   The `AppInstanceUserArn` of the channel moderator.
     #   @return [String]
     #
     # @!attribute [rw] chime_bearer
@@ -1624,6 +1663,59 @@ module Aws::ChimeSDKMessaging
     class ForbiddenException < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetChannelMembershipPreferencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         member_arn: "ChimeArn", # required
+    #         chime_bearer: "ChimeArn", # required
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arn
+    #   The `AppInstanceUserArn` of the member retrieving the preferences.
+    #   @return [String]
+    #
+    # @!attribute [rw] chime_bearer
+    #   The `AppInstanceUserARN` of the user making the API call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMembershipPreferencesRequest AWS API Documentation
+    #
+    class GetChannelMembershipPreferencesRequest < Struct.new(
+      :channel_arn,
+      :member_arn,
+      :chime_bearer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] member
+    #   The details of a user.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] preferences
+    #   The channel membership preferences for an `AppInstanceUser` .
+    #   @return [Types::ChannelMembershipPreferences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/GetChannelMembershipPreferencesResponse AWS API Documentation
+    #
+    class GetChannelMembershipPreferencesResponse < Struct.new(
+      :channel_arn,
+      :member,
+      :preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2359,6 +2451,27 @@ module Aws::ChimeSDKMessaging
       include Aws::Structure
     end
 
+    # A list of message attribute values.
+    #
+    # @note When making an API call, you may pass MessageAttributeValue
+    #   data as a hash:
+    #
+    #       {
+    #         string_values: ["MessageAttributeStringValue"],
+    #       }
+    #
+    # @!attribute [rw] string_values
+    #   The strings in a message attribute value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/MessageAttributeValue AWS API Documentation
+    #
+    class MessageAttributeValue < Struct.new(
+      :string_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The websocket endpoint used to connect to Amazon Chime SDK messaging.
     #
     # @!attribute [rw] url
@@ -2424,11 +2537,14 @@ module Aws::ChimeSDKMessaging
     #   @return [Integer]
     #
     # @!attribute [rw] fallback_action
-    #   Determines whether to continue or stop processing if communication
-    #   with processor fails. If the last processor in a channel flow
-    #   sequence has a fallback action of CONTINUE, and communication with
-    #   the processor fails, the message is considered processed and sent to
-    #   the recipients in the channel.
+    #   Determines whether to continue with message processing or stop it in
+    #   cases where communication with a processor fails. If a processor has
+    #   a fallback action of `ABORT` and communication with it fails, the
+    #   processor sets the message status to `FAILED` and does not send the
+    #   message to any recipients. Note that if the last processor in the
+    #   channel flow sequence has a fallback action of `CONTINUE` and
+    #   communication with the processor fails, then the message is
+    #   considered processed and sent to recipients of the channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/Processor AWS API Documentation
@@ -2462,6 +2578,136 @@ module Aws::ChimeSDKMessaging
     #
     class ProcessorConfiguration < Struct.new(
       :lambda)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The push notification configuration of the message.
+    #
+    # @note When making an API call, you may pass PushNotificationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         title: "PushNotificationTitle", # required
+    #         body: "PushNotificationBody", # required
+    #         type: "DEFAULT", # required, accepts DEFAULT, VOIP
+    #       }
+    #
+    # @!attribute [rw] title
+    #   The title of the push notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The body of the push notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Enum value that indicates the type of the push notification for a
+    #   message. `DEFAULT`\: Normal mobile push notification. `VOIP`\: VOIP
+    #   mobile push notification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/PushNotificationConfiguration AWS API Documentation
+    #
+    class PushNotificationConfiguration < Struct.new(
+      :title,
+      :body,
+      :type)
+      SENSITIVE = [:title, :body]
+      include Aws::Structure
+    end
+
+    # The channel membership preferences for push notification.
+    #
+    # @note When making an API call, you may pass PushNotificationPreferences
+    #   data as a hash:
+    #
+    #       {
+    #         allow_notifications: "ALL", # required, accepts ALL, NONE, FILTERED
+    #         filter_rule: "FilterRule",
+    #       }
+    #
+    # @!attribute [rw] allow_notifications
+    #   Enum value that indicates which push notifications to send to the
+    #   requested member of a channel. `ALL` sends all push notifications,
+    #   `NONE` sends no push notifications, `FILTERED` sends only filtered
+    #   push notifications.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_rule
+    #   The simple JSON object used to send a subset of a push notification
+    #   to the requsted member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/PushNotificationPreferences AWS API Documentation
+    #
+    class PushNotificationPreferences < Struct.new(
+      :allow_notifications,
+      :filter_rule)
+      SENSITIVE = [:filter_rule]
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutChannelMembershipPreferencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChimeArn", # required
+    #         member_arn: "ChimeArn", # required
+    #         chime_bearer: "ChimeArn", # required
+    #         preferences: { # required
+    #           push_notifications: {
+    #             allow_notifications: "ALL", # required, accepts ALL, NONE, FILTERED
+    #             filter_rule: "FilterRule",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_arn
+    #   The `AppInstanceUserArn` of the member setting the preferences.
+    #   @return [String]
+    #
+    # @!attribute [rw] chime_bearer
+    #   The `AppInstanceUserARN` of the user making the API call.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferences
+    #   The channel membership preferences of an `AppInstanceUser` .
+    #   @return [Types::ChannelMembershipPreferences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/PutChannelMembershipPreferencesRequest AWS API Documentation
+    #
+    class PutChannelMembershipPreferencesRequest < Struct.new(
+      :channel_arn,
+      :member_arn,
+      :chime_bearer,
+      :preferences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] member
+    #   The details of a user.
+    #   @return [Types::Identity]
+    #
+    # @!attribute [rw] preferences
+    #   The ARN and metadata of the member being added.
+    #   @return [Types::ChannelMembershipPreferences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/PutChannelMembershipPreferencesResponse AWS API Documentation
+    #
+    class PutChannelMembershipPreferencesResponse < Struct.new(
+      :channel_arn,
+      :member,
+      :preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2544,6 +2790,16 @@ module Aws::ChimeSDKMessaging
     #         metadata: "Metadata",
     #         client_request_token: "ClientRequestToken", # required
     #         chime_bearer: "ChimeArn", # required
+    #         push_notification: {
+    #           title: "PushNotificationTitle", # required
+    #           body: "PushNotificationBody", # required
+    #           type: "DEFAULT", # required, accepts DEFAULT, VOIP
+    #         },
+    #         message_attributes: {
+    #           "MessageAttributeName" => {
+    #             string_values: ["MessageAttributeStringValue"],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] channel_arn
@@ -2578,6 +2834,15 @@ module Aws::ChimeSDKMessaging
     #   The `AppInstanceUserArn` of the user that makes the API call.
     #   @return [String]
     #
+    # @!attribute [rw] push_notification
+    #   The push notification configuration of the message.
+    #   @return [Types::PushNotificationConfiguration]
+    #
+    # @!attribute [rw] message_attributes
+    #   The attributes for the message, used for message filtering along
+    #   with a `FilterRule` defined in the `PushNotificationPreferences`.
+    #   @return [Hash<String,Types::MessageAttributeValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/SendChannelMessageRequest AWS API Documentation
     #
     class SendChannelMessageRequest < Struct.new(
@@ -2587,7 +2852,9 @@ module Aws::ChimeSDKMessaging
       :persistence,
       :metadata,
       :client_request_token,
-      :chime_bearer)
+      :chime_bearer,
+      :push_notification,
+      :message_attributes)
       SENSITIVE = [:content, :metadata, :client_request_token]
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.273.0 (2021-10-27)
+------------------
+
+* Feature - This release adds: attribute-based instance type selection for EC2 Fleet, Spot Fleet, a feature that lets customers express instance requirements as attributes like vCPU, memory, and storage; and Spot placement score, a feature that helps customers identify an optimal location to run Spot workloads.
+
 1.272.0 (2021-10-25)
 ------------------
 
