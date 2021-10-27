@@ -514,6 +514,61 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # This action batch describes a list of versioned model packages
+    #
+    # @option params [required, Array<String>] :model_package_arn_list
+    #   The list of Amazon Resource Name (ARN) of the model package groups.
+    #
+    # @return [Types::BatchDescribeModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDescribeModelPackageOutput#model_package_summaries #model_package_summaries} => Hash&lt;String,Types::BatchDescribeModelPackageSummary&gt;
+    #   * {Types::BatchDescribeModelPackageOutput#batch_describe_model_package_error_map #batch_describe_model_package_error_map} => Hash&lt;String,Types::BatchDescribeModelPackageError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_describe_model_package({
+    #     model_package_arn_list: ["ModelPackageArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_package_summaries #=> Hash
+    #   resp.model_package_summaries["ModelPackageArn"].model_package_group_name #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].model_package_version #=> Integer
+    #   resp.model_package_summaries["ModelPackageArn"].model_package_arn #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].model_package_description #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].creation_time #=> Time
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers #=> Array
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].container_hostname #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].image #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].image_digest #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_url #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].product_id #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].environment #=> Hash
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].environment["EnvironmentKey"] #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_transform_instance_types #=> Array
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_realtime_inference_instance_types #=> Array
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_realtime_inference_instance_types[0] #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge"
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_content_types #=> Array
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_content_types[0] #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_response_mime_types #=> Array
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_response_mime_types[0] #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].model_package_status #=> String, one of "Pending", "InProgress", "Completed", "Failed", "Deleting"
+    #   resp.model_package_summaries["ModelPackageArn"].model_approval_status #=> String, one of "Approved", "Rejected", "PendingManualApproval"
+    #   resp.batch_describe_model_package_error_map #=> Hash
+    #   resp.batch_describe_model_package_error_map["ModelPackageArn"].error_code #=> String
+    #   resp.batch_describe_model_package_error_map["ModelPackageArn"].error_response #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDescribeModelPackage AWS API Documentation
+    #
+    # @overload batch_describe_model_package(params = {})
+    # @param [Hash] params ({})
+    def batch_describe_model_package(params = {}, options = {})
+      req = build_request(:batch_describe_model_package, params)
+      req.send_request(options)
+    end
+
     # Creates an *action*. An action is a lineage tracking entity that
     # represents an action or activity. For example, a model deployment or
     # an HPO job. Generally, an action involves at least one input or output
@@ -3848,7 +3903,8 @@ module Aws::SageMaker
     #   applicable to versioned models.
     #
     # @option params [String] :model_package_group_name
-    #   The name of the model group that this model version belongs to.
+    #   The name or Amazon Resource Name (ARN) of the model package group that
+    #   this model version belongs to.
     #
     #   This parameter is required for versioned models, and does not apply to
     #   unversioned models.
@@ -3914,6 +3970,9 @@ module Aws::SageMaker
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Hash<String,String>] :customer_metadata_properties
+    #   The metadata properties associated with the model package versions.
+    #
     # @return [Types::CreateModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateModelPackageOutput#model_package_arn #model_package_arn} => String
@@ -3922,7 +3981,7 @@ module Aws::SageMaker
     #
     #   resp = client.create_model_package({
     #     model_package_name: "EntityName",
-    #     model_package_group_name: "EntityName",
+    #     model_package_group_name: "ArnOrName",
     #     model_package_description: "EntityDescription",
     #     inference_specification: {
     #       containers: [ # required
@@ -4043,6 +4102,9 @@ module Aws::SageMaker
     #       },
     #     },
     #     client_token: "ClientToken",
+    #     customer_metadata_properties: {
+    #       "CustomerMetadataKey" => "CustomerMetadataValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -9348,11 +9410,11 @@ module Aws::SageMaker
     end
 
     # Returns a description of the specified model package, which is used to
-    # create Amazon SageMaker models or list them on Amazon Web Services
+    # create SageMaker models or list them on Amazon Web Services
     # Marketplace.
     #
-    # To create models in Amazon SageMaker, buyers can subscribe to model
-    # packages listed on Amazon Web Services Marketplace.
+    # To create models in SageMaker, buyers can subscribe to model packages
+    # listed on Amazon Web Services Marketplace.
     #
     # @option params [required, String] :model_package_name
     #   The name or Amazon Resource Name (ARN) of the model package to
@@ -9382,6 +9444,7 @@ module Aws::SageMaker
     #   * {Types::DescribeModelPackageOutput#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeModelPackageOutput#last_modified_by #last_modified_by} => Types::UserContext
     #   * {Types::DescribeModelPackageOutput#approval_description #approval_description} => String
+    #   * {Types::DescribeModelPackageOutput#customer_metadata_properties #customer_metadata_properties} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -9477,6 +9540,8 @@ module Aws::SageMaker
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
     #   resp.approval_description #=> String
+    #   resp.customer_metadata_properties #=> Hash
+    #   resp.customer_metadata_properties["CustomerMetadataKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackage AWS API Documentation
     #
@@ -10107,6 +10172,8 @@ module Aws::SageMaker
     #   * {Types::DescribeProjectOutput#project_status #project_status} => String
     #   * {Types::DescribeProjectOutput#created_by #created_by} => Types::UserContext
     #   * {Types::DescribeProjectOutput#creation_time #creation_time} => Time
+    #   * {Types::DescribeProjectOutput#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeProjectOutput#last_modified_by #last_modified_by} => Types::UserContext
     #
     # @example Request syntax with placeholder values
     #
@@ -10128,11 +10195,15 @@ module Aws::SageMaker
     #   resp.service_catalog_provisioning_details.provisioning_parameters[0].value #=> String
     #   resp.service_catalog_provisioned_product_details.provisioned_product_id #=> String
     #   resp.service_catalog_provisioned_product_details.provisioned_product_status_message #=> String
-    #   resp.project_status #=> String, one of "Pending", "CreateInProgress", "CreateCompleted", "CreateFailed", "DeleteInProgress", "DeleteFailed", "DeleteCompleted"
+    #   resp.project_status #=> String, one of "Pending", "CreateInProgress", "CreateCompleted", "CreateFailed", "DeleteInProgress", "DeleteFailed", "DeleteCompleted", "UpdateInProgress", "UpdateCompleted", "UpdateFailed"
     #   resp.created_by.user_profile_arn #=> String
     #   resp.created_by.user_profile_name #=> String
     #   resp.created_by.domain_id #=> String
     #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_by.user_profile_arn #=> String
+    #   resp.last_modified_by.user_profile_name #=> String
+    #   resp.last_modified_by.domain_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeProject AWS API Documentation
     #
@@ -14260,7 +14331,7 @@ module Aws::SageMaker
     #   resp.project_summary_list[0].project_arn #=> String
     #   resp.project_summary_list[0].project_id #=> String
     #   resp.project_summary_list[0].creation_time #=> Time
-    #   resp.project_summary_list[0].project_status #=> String, one of "Pending", "CreateInProgress", "CreateCompleted", "CreateFailed", "DeleteInProgress", "DeleteFailed", "DeleteCompleted"
+    #   resp.project_summary_list[0].project_status #=> String, one of "Pending", "CreateInProgress", "CreateCompleted", "CreateFailed", "DeleteInProgress", "DeleteFailed", "DeleteCompleted", "UpdateInProgress", "UpdateCompleted", "UpdateFailed"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListProjects AWS API Documentation
@@ -15928,6 +15999,8 @@ module Aws::SageMaker
     #   resp.results[0].model_package.tags #=> Array
     #   resp.results[0].model_package.tags[0].key #=> String
     #   resp.results[0].model_package.tags[0].value #=> String
+    #   resp.results[0].model_package.customer_metadata_properties #=> Hash
+    #   resp.results[0].model_package.customer_metadata_properties["CustomerMetadataKey"] #=> String
     #   resp.results[0].model_package_group.model_package_group_name #=> String
     #   resp.results[0].model_package_group.model_package_group_arn #=> String
     #   resp.results[0].model_package_group.model_package_group_description #=> String
@@ -16014,7 +16087,7 @@ module Aws::SageMaker
     #   resp.results[0].project.service_catalog_provisioning_details.provisioning_parameters[0].value #=> String
     #   resp.results[0].project.service_catalog_provisioned_product_details.provisioned_product_id #=> String
     #   resp.results[0].project.service_catalog_provisioned_product_details.provisioned_product_status_message #=> String
-    #   resp.results[0].project.project_status #=> String, one of "Pending", "CreateInProgress", "CreateCompleted", "CreateFailed", "DeleteInProgress", "DeleteFailed", "DeleteCompleted"
+    #   resp.results[0].project.project_status #=> String, one of "Pending", "CreateInProgress", "CreateCompleted", "CreateFailed", "DeleteInProgress", "DeleteFailed", "DeleteCompleted", "UpdateInProgress", "UpdateCompleted", "UpdateFailed"
     #   resp.results[0].project.created_by.user_profile_arn #=> String
     #   resp.results[0].project.created_by.user_profile_name #=> String
     #   resp.results[0].project.created_by.domain_id #=> String
@@ -16022,6 +16095,10 @@ module Aws::SageMaker
     #   resp.results[0].project.tags #=> Array
     #   resp.results[0].project.tags[0].key #=> String
     #   resp.results[0].project.tags[0].value #=> String
+    #   resp.results[0].project.last_modified_time #=> Time
+    #   resp.results[0].project.last_modified_by.user_profile_arn #=> String
+    #   resp.results[0].project.last_modified_by.user_profile_name #=> String
+    #   resp.results[0].project.last_modified_by.domain_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Search AWS API Documentation
@@ -17160,13 +17237,20 @@ module Aws::SageMaker
     # Updates a versioned model.
     #
     # @option params [required, String] :model_package_arn
-    #   The Amazon Resource Name (ARN) of the model.
+    #   The Amazon Resource Name (ARN) of the model package.
     #
-    # @option params [required, String] :model_approval_status
+    # @option params [String] :model_approval_status
     #   The approval status of the model.
     #
     # @option params [String] :approval_description
     #   A description for the approval status of the model.
+    #
+    # @option params [Hash<String,String>] :customer_metadata_properties
+    #   The metadata properties associated with the model package versions.
+    #
+    # @option params [Array<String>] :customer_metadata_properties_to_remove
+    #   The metadata properties associated with the model package versions to
+    #   remove.
     #
     # @return [Types::UpdateModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -17176,8 +17260,12 @@ module Aws::SageMaker
     #
     #   resp = client.update_model_package({
     #     model_package_arn: "ModelPackageArn", # required
-    #     model_approval_status: "Approved", # required, accepts Approved, Rejected, PendingManualApproval
+    #     model_approval_status: "Approved", # accepts Approved, Rejected, PendingManualApproval
     #     approval_description: "ApprovalDescription",
+    #     customer_metadata_properties: {
+    #       "CustomerMetadataKey" => "CustomerMetadataValue",
+    #     },
+    #     customer_metadata_properties_to_remove: ["CustomerMetadataKey"],
     #   })
     #
     # @example Response structure
@@ -17568,6 +17656,82 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_pipeline_execution(params = {}, options = {})
       req = build_request(:update_pipeline_execution, params)
+      req.send_request(options)
+    end
+
+    # Updates a machine learning (ML) project that is created from a
+    # template that sets up an ML pipeline from training to deploying an
+    # approved model.
+    #
+    # <note markdown="1"> You must not update a project that is in use. If you update the
+    # `ServiceCatalogProvisioningUpdateDetails` of a project that is active
+    # or being created, or updated, you may lose resources already created
+    # by the project.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project.
+    #
+    # @option params [String] :project_description
+    #   The description for the project.
+    #
+    # @option params [Types::ServiceCatalogProvisioningUpdateDetails] :service_catalog_provisioning_update_details
+    #   The product ID and provisioning artifact ID to provision a service
+    #   catalog. The provisioning artifact ID will default to the latest
+    #   provisioning artifact ID of the product, if you don't provide the
+    #   provisioning artifact ID. For more information, see [What is AWS
+    #   Service Catalog][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of key-value pairs. You can use tags to categorize your AWS
+    #   resources in different ways, for example, by purpose, owner, or
+    #   environment. For more information, see [Tagging AWS Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::UpdateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProjectOutput#project_arn #project_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_project({
+    #     project_name: "ProjectEntityName", # required
+    #     project_description: "EntityDescription",
+    #     service_catalog_provisioning_update_details: {
+    #       provisioning_artifact_id: "ServiceCatalogEntityId",
+    #       provisioning_parameters: [
+    #         {
+    #           key: "ProvisioningParameterKey",
+    #           value: "ProvisioningParameterValue",
+    #         },
+    #       ],
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateProject AWS API Documentation
+    #
+    # @overload update_project(params = {})
+    # @param [Hash] params ({})
+    def update_project(params = {}, options = {})
+      req = build_request(:update_project, params)
       req.send_request(options)
     end
 
@@ -18041,7 +18205,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

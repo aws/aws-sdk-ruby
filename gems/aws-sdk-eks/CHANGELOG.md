@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2021-10-27)
+------------------
+
+* Feature - EKS managed node groups now support BOTTLEROCKET_x86_64 and BOTTLEROCKET_ARM_64 AMI types.
+
 1.64.0 (2021-10-18)
 ------------------
 

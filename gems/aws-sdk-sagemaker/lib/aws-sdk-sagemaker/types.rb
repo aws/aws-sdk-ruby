@@ -2426,6 +2426,110 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The error code and error description associated with the resource.
+    #
+    # @!attribute [rw] error_code
+    #   @return [String]
+    #
+    # @!attribute [rw] error_response
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDescribeModelPackageError AWS API Documentation
+    #
+    class BatchDescribeModelPackageError < Struct.new(
+      :error_code,
+      :error_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDescribeModelPackageInput
+    #   data as a hash:
+    #
+    #       {
+    #         model_package_arn_list: ["ModelPackageArn"], # required
+    #       }
+    #
+    # @!attribute [rw] model_package_arn_list
+    #   The list of Amazon Resource Name (ARN) of the model package groups.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDescribeModelPackageInput AWS API Documentation
+    #
+    class BatchDescribeModelPackageInput < Struct.new(
+      :model_package_arn_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_package_summaries
+    #   The summaries for the model package versions
+    #   @return [Hash<String,Types::BatchDescribeModelPackageSummary>]
+    #
+    # @!attribute [rw] batch_describe_model_package_error_map
+    #   A map of the resource and BatchDescribeModelPackageError objects
+    #   reporting the error associated with describing the model package.
+    #   @return [Hash<String,Types::BatchDescribeModelPackageError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDescribeModelPackageOutput AWS API Documentation
+    #
+    class BatchDescribeModelPackageOutput < Struct.new(
+      :model_package_summaries,
+      :batch_describe_model_package_error_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about the model package.
+    #
+    # @!attribute [rw] model_package_group_name
+    #   The group name for the model package
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_version
+    #   The version number of a versioned model.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_package_arn
+    #   The Amazon Resource Name (ARN) of the model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_description
+    #   The description of the model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the mortgage package summary.
+    #   @return [Time]
+    #
+    # @!attribute [rw] inference_specification
+    #   Defines how to perform inference generation after a training job is
+    #   run.
+    #   @return [Types::InferenceSpecification]
+    #
+    # @!attribute [rw] model_package_status
+    #   The status of the mortgage package.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_approval_status
+    #   The approval status of the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BatchDescribeModelPackageSummary AWS API Documentation
+    #
+    class BatchDescribeModelPackageSummary < Struct.new(
+      :model_package_group_name,
+      :model_package_version,
+      :model_package_arn,
+      :model_package_description,
+      :creation_time,
+      :inference_specification,
+      :model_package_status,
+      :model_approval_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains bias metrics for a model.
     #
     # @note When making an API call, you may pass Bias
@@ -6772,7 +6876,7 @@ module Aws::SageMaker
     #
     #       {
     #         model_package_name: "EntityName",
-    #         model_package_group_name: "EntityName",
+    #         model_package_group_name: "ArnOrName",
     #         model_package_description: "EntityDescription",
     #         inference_specification: {
     #           containers: [ # required
@@ -6893,6 +6997,9 @@ module Aws::SageMaker
     #           },
     #         },
     #         client_token: "ClientToken",
+    #         customer_metadata_properties: {
+    #           "CustomerMetadataKey" => "CustomerMetadataValue",
+    #         },
     #       }
     #
     # @!attribute [rw] model_package_name
@@ -6904,7 +7011,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] model_package_group_name
-    #   The name of the model group that this model version belongs to.
+    #   The name or Amazon Resource Name (ARN) of the model package group
+    #   that this model version belongs to.
     #
     #   This parameter is required for versioned models, and does not apply
     #   to unversioned models.
@@ -6983,6 +7091,10 @@ module Aws::SageMaker
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] customer_metadata_properties
+    #   The metadata properties associated with the model package versions.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput AWS API Documentation
     #
     class CreateModelPackageInput < Struct.new(
@@ -6997,7 +7109,8 @@ module Aws::SageMaker
       :model_approval_status,
       :metadata_properties,
       :model_metrics,
-      :client_token)
+      :client_token,
+      :customer_metadata_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13535,8 +13648,8 @@ module Aws::SageMaker
     #   @return [Types::SourceAlgorithmSpecification]
     #
     # @!attribute [rw] validation_specification
-    #   Configurations for one or more transform jobs that Amazon SageMaker
-    #   runs to test the model package.
+    #   Configurations for one or more transform jobs that SageMaker runs to
+    #   test the model package.
     #   @return [Types::ModelPackageValidationSpecification]
     #
     # @!attribute [rw] model_package_status
@@ -13583,6 +13696,10 @@ module Aws::SageMaker
     #   A description provided for the model approval.
     #   @return [String]
     #
+    # @!attribute [rw] customer_metadata_properties
+    #   The metadata properties associated with the model package versions.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput AWS API Documentation
     #
     class DescribeModelPackageOutput < Struct.new(
@@ -13604,7 +13721,8 @@ module Aws::SageMaker
       :model_metrics,
       :last_modified_time,
       :last_modified_by,
-      :approval_description)
+      :approval_description,
+      :customer_metadata_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14449,6 +14567,15 @@ module Aws::SageMaker
     #   The time when the project was created.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when project was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, or project.
+    #   @return [Types::UserContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeProjectOutput AWS API Documentation
     #
     class DescribeProjectOutput < Struct.new(
@@ -14460,7 +14587,9 @@ module Aws::SageMaker
       :service_catalog_provisioned_product_details,
       :project_status,
       :created_by,
-      :creation_time)
+      :creation_time,
+      :last_modified_time,
+      :last_modified_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25919,6 +26048,10 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] customer_metadata_properties
+    #   The metadata properties for the model package.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackage AWS API Documentation
     #
     class ModelPackage < Struct.new(
@@ -25941,7 +26074,8 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       :approval_description,
-      :tags)
+      :tags,
+      :customer_metadata_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30143,6 +30277,15 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp container for when the project was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, or project.
+    #   @return [Types::UserContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -30155,7 +30298,9 @@ module Aws::SageMaker
       :project_status,
       :created_by,
       :creation_time,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31960,6 +32105,45 @@ module Aws::SageMaker
       :product_id,
       :provisioning_artifact_id,
       :path_id,
+      :provisioning_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details that you specify to provision a service catalog product. For
+    # information about service catalog, see [What is AWS Service
+    # Catalog][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
+    #
+    # @note When making an API call, you may pass ServiceCatalogProvisioningUpdateDetails
+    #   data as a hash:
+    #
+    #       {
+    #         provisioning_artifact_id: "ServiceCatalogEntityId",
+    #         provisioning_parameters: [
+    #           {
+    #             key: "ProvisioningParameterKey",
+    #             value: "ProvisioningParameterValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The ID of the provisioning artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_parameters
+    #   A list of key value pairs that you specify when you provision a
+    #   product.
+    #   @return [Array<Types::ProvisioningParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ServiceCatalogProvisioningUpdateDetails AWS API Documentation
+    #
+    class ServiceCatalogProvisioningUpdateDetails < Struct.new(
+      :provisioning_artifact_id,
       :provisioning_parameters)
       SENSITIVE = []
       include Aws::Structure
@@ -35641,12 +35825,16 @@ module Aws::SageMaker
     #
     #       {
     #         model_package_arn: "ModelPackageArn", # required
-    #         model_approval_status: "Approved", # required, accepts Approved, Rejected, PendingManualApproval
+    #         model_approval_status: "Approved", # accepts Approved, Rejected, PendingManualApproval
     #         approval_description: "ApprovalDescription",
+    #         customer_metadata_properties: {
+    #           "CustomerMetadataKey" => "CustomerMetadataValue",
+    #         },
+    #         customer_metadata_properties_to_remove: ["CustomerMetadataKey"],
     #       }
     #
     # @!attribute [rw] model_package_arn
-    #   The Amazon Resource Name (ARN) of the model.
+    #   The Amazon Resource Name (ARN) of the model package.
     #   @return [String]
     #
     # @!attribute [rw] model_approval_status
@@ -35657,12 +35845,23 @@ module Aws::SageMaker
     #   A description for the approval status of the model.
     #   @return [String]
     #
+    # @!attribute [rw] customer_metadata_properties
+    #   The metadata properties associated with the model package versions.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] customer_metadata_properties_to_remove
+    #   The metadata properties associated with the model package versions
+    #   to remove.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateModelPackageInput AWS API Documentation
     #
     class UpdateModelPackageInput < Struct.new(
       :model_package_arn,
       :model_approval_status,
-      :approval_description)
+      :approval_description,
+      :customer_metadata_properties,
+      :customer_metadata_properties_to_remove)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36103,6 +36302,82 @@ module Aws::SageMaker
     #
     class UpdatePipelineResponse < Struct.new(
       :pipeline_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateProjectInput
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectEntityName", # required
+    #         project_description: "EntityDescription",
+    #         service_catalog_provisioning_update_details: {
+    #           provisioning_artifact_id: "ServiceCatalogEntityId",
+    #           provisioning_parameters: [
+    #             {
+    #               key: "ProvisioningParameterKey",
+    #               value: "ProvisioningParameterValue",
+    #             },
+    #           ],
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_description
+    #   The description for the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_catalog_provisioning_update_details
+    #   The product ID and provisioning artifact ID to provision a service
+    #   catalog. The provisioning artifact ID will default to the latest
+    #   provisioning artifact ID of the product, if you don't provide the
+    #   provisioning artifact ID. For more information, see [What is AWS
+    #   Service Catalog][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
+    #   @return [Types::ServiceCatalogProvisioningUpdateDetails]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs. You can use tags to categorize your AWS
+    #   resources in different ways, for example, by purpose, owner, or
+    #   environment. For more information, see [Tagging AWS Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateProjectInput AWS API Documentation
+    #
+    class UpdateProjectInput < Struct.new(
+      :project_name,
+      :project_description,
+      :service_catalog_provisioning_update_details,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateProjectOutput AWS API Documentation
+    #
+    class UpdateProjectOutput < Struct.new(
+      :project_arn)
       SENSITIVE = []
       include Aws::Structure
     end

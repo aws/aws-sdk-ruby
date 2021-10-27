@@ -10,6 +10,126 @@
 module Aws::EC2
   module Types
 
+    # The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon
+    # Web Services Inferentia chips) on an instance.
+    #
+    # @note When making an API call, you may pass AcceleratorCount
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum number of accelerators. If this parameter is not
+    #   specified, there is no minimum limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of accelerators. If this parameter is not
+    #   specified, there is no maximum limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceleratorCount AWS API Documentation
+    #
+    class AcceleratorCount < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon
+    # Web Services Inferentia chips) on an instance. To exclude
+    # accelerator-enabled instance types, set `Max` to `0`.
+    #
+    # @note When making an API call, you may pass AcceleratorCountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum number of accelerators. To specify no minimum limit,
+    #   omit this parameter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of accelerators. To specify no maximum limit,
+    #   omit this parameter. To exclude accelerator-enabled instance types,
+    #   set `Max` to `0`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceleratorCountRequest AWS API Documentation
+    #
+    class AcceleratorCountRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of total accelerator memory, in MiB.
+    #
+    # @note When making an API call, you may pass AcceleratorTotalMemoryMiB
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of accelerator memory, in MiB. If this parameter
+    #   is not specified, there is no minimum limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of accelerator memory, in MiB. If this parameter
+    #   is not specified, there is no maximum limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceleratorTotalMemoryMiB AWS API Documentation
+    #
+    class AcceleratorTotalMemoryMiB < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of total accelerator memory, in MiB.
+    #
+    # @note When making an API call, you may pass AcceleratorTotalMemoryMiBRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of accelerator memory, in MiB. To specify no
+    #   minimum limit, omit this parameter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of accelerator memory, in MiB. To specify no
+    #   maximum limit, omit this parameter.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceleratorTotalMemoryMiBRequest AWS API Documentation
+    #
+    class AcceleratorTotalMemoryMiBRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for accepting the quote.
     #
     # @note When making an API call, you may pass AcceptReservedInstancesExchangeQuoteRequest
@@ -3032,6 +3152,76 @@ module Aws::EC2
     class AvailableCapacity < Struct.new(
       :available_instance_capacity,
       :available_v_cpus)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For
+    # more information, see [Amazon EBS–optimized instances][1] in the
+    # *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
+    #
+    # @note When making an API call, you may pass BaselineEbsBandwidthMbps
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum baseline bandwidth, in Mbps. If this parameter is not
+    #   specified, there is no minimum limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum baseline bandwidth, in Mbps. If this parameter is not
+    #   specified, there is no maximum limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BaselineEbsBandwidthMbps AWS API Documentation
+    #
+    class BaselineEbsBandwidthMbps < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For
+    # more information, see [Amazon EBS–optimized instances][1] in the
+    # *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
+    #
+    # @note When making an API call, you may pass BaselineEbsBandwidthMbpsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum baseline bandwidth, in Mbps. To specify no minimum
+    #   limit, omit this parameter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum baseline bandwidth, in Mbps. To specify no maximum
+    #   limit, omit this parameter.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BaselineEbsBandwidthMbpsRequest AWS API Documentation
+    #
+    class BaselineEbsBandwidthMbpsRequest < Struct.new(
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7085,6 +7275,53 @@ module Aws::EC2
     #                   spread_domain: "String",
     #                   host_resource_group_arn: "String",
     #                 },
+    #                 instance_requirements: {
+    #                   v_cpu_count: { # required
+    #                     min: 1, # required
+    #                     max: 1,
+    #                   },
+    #                   memory_mi_b: { # required
+    #                     min: 1, # required
+    #                     max: 1,
+    #                   },
+    #                   cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                   memory_gi_b_per_v_cpu: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   excluded_instance_types: ["ExcludedInstanceType"],
+    #                   instance_generations: ["current"], # accepts current, previous
+    #                   spot_max_price_percentage_over_lowest_price: 1,
+    #                   on_demand_max_price_percentage_over_lowest_price: 1,
+    #                   bare_metal: "included", # accepts included, required, excluded
+    #                   burstable_performance: "included", # accepts included, required, excluded
+    #                   require_hibernate_support: false,
+    #                   network_interface_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   local_storage: "included", # accepts included, required, excluded
+    #                   local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                   total_local_storage_gb: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   baseline_ebs_bandwidth_mbps: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                   accelerator_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                   accelerator_total_memory_mi_b: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -7094,6 +7331,7 @@ module Aws::EC2
     #           on_demand_target_capacity: 1,
     #           spot_target_capacity: 1,
     #           default_target_capacity_type: "spot", # accepts spot, on-demand
+    #           target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
     #         },
     #         terminate_instances_with_expiration: false,
     #         type: "request", # accepts request, maintain, instant
@@ -8134,6 +8372,53 @@ module Aws::EC2
     #           enclave_options: {
     #             enabled: false,
     #           },
+    #           instance_requirements: {
+    #             v_cpu_count: { # required
+    #               min: 1, # required
+    #               max: 1,
+    #             },
+    #             memory_mi_b: { # required
+    #               min: 1, # required
+    #               max: 1,
+    #             },
+    #             cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #             memory_gi_b_per_v_cpu: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             excluded_instance_types: ["ExcludedInstanceType"],
+    #             instance_generations: ["current"], # accepts current, previous
+    #             spot_max_price_percentage_over_lowest_price: 1,
+    #             on_demand_max_price_percentage_over_lowest_price: 1,
+    #             bare_metal: "included", # accepts included, required, excluded
+    #             burstable_performance: "included", # accepts included, required, excluded
+    #             require_hibernate_support: false,
+    #             network_interface_count: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             local_storage: "included", # accepts included, required, excluded
+    #             local_storage_types: ["hdd"], # accepts hdd, ssd
+    #             total_local_storage_gb: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             baseline_ebs_bandwidth_mbps: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #             accelerator_count: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #             accelerator_total_memory_mi_b: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #           },
     #         },
     #         tag_specifications: [
     #           {
@@ -8373,6 +8658,53 @@ module Aws::EC2
     #           },
     #           enclave_options: {
     #             enabled: false,
+    #           },
+    #           instance_requirements: {
+    #             v_cpu_count: { # required
+    #               min: 1, # required
+    #               max: 1,
+    #             },
+    #             memory_mi_b: { # required
+    #               min: 1, # required
+    #               max: 1,
+    #             },
+    #             cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #             memory_gi_b_per_v_cpu: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             excluded_instance_types: ["ExcludedInstanceType"],
+    #             instance_generations: ["current"], # accepts current, previous
+    #             spot_max_price_percentage_over_lowest_price: 1,
+    #             on_demand_max_price_percentage_over_lowest_price: 1,
+    #             bare_metal: "included", # accepts included, required, excluded
+    #             burstable_performance: "included", # accepts included, required, excluded
+    #             require_hibernate_support: false,
+    #             network_interface_count: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             local_storage: "included", # accepts included, required, excluded
+    #             local_storage_types: ["hdd"], # accepts hdd, ssd
+    #             total_local_storage_gb: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             baseline_ebs_bandwidth_mbps: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #             accelerator_count: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #             accelerator_total_memory_mi_b: {
+    #               min: 1,
+    #               max: 1,
+    #             },
     #           },
     #         },
     #       }
@@ -19499,7 +19831,10 @@ module Aws::EC2
     #     index for the instance in the launch group (for example, 0, 1, 2,
     #     and so on).
     #
-    #   * `launch-time` - The time when the instance was launched.
+    #   * `launch-time` - The time when the instance was launched, in the
+    #     ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ),
+    #     for example, `2021-09-29T11:04:43.305Z`. You can use a wildcard
+    #     (`*`), for example, `2021-09-29T*`, which matches an entire day.
     #
     #   * `metadata-options.http-tokens` - The metadata request
     #     authorization state (`optional` \| `required`)
@@ -30790,6 +31125,53 @@ module Aws::EC2
     #               spread_domain: "String",
     #               host_resource_group_arn: "String",
     #             },
+    #             instance_requirements: {
+    #               v_cpu_count: { # required
+    #                 min: 1, # required
+    #                 max: 1,
+    #               },
+    #               memory_mi_b: { # required
+    #                 min: 1, # required
+    #                 max: 1,
+    #               },
+    #               cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #               memory_gi_b_per_v_cpu: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               excluded_instance_types: ["ExcludedInstanceType"],
+    #               instance_generations: ["current"], # accepts current, previous
+    #               spot_max_price_percentage_over_lowest_price: 1,
+    #               on_demand_max_price_percentage_over_lowest_price: 1,
+    #               bare_metal: "included", # accepts included, required, excluded
+    #               burstable_performance: "included", # accepts included, required, excluded
+    #               require_hibernate_support: false,
+    #               network_interface_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               local_storage: "included", # accepts included, required, excluded
+    #               local_storage_types: ["hdd"], # accepts hdd, ssd
+    #               total_local_storage_gb: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               baseline_ebs_bandwidth_mbps: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #               accelerator_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_total_memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -30820,6 +31202,11 @@ module Aws::EC2
     #
     # @!attribute [rw] instance_type
     #   The instance type.
+    #
+    #   <note markdown="1"> If you specify `InstanceTypes`, you can't specify
+    #   `InstanceRequirements`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_price
@@ -30862,6 +31249,17 @@ module Aws::EC2
     #   The location where the instance launched, if applicable.
     #   @return [Types::PlacementResponse]
     #
+    # @!attribute [rw] instance_requirements
+    #   The attributes for the instance types. When you specify instance
+    #   attributes, Amazon EC2 will identify instance types with those
+    #   attributes.
+    #
+    #   <note markdown="1"> If you specify `InstanceRequirements`, you can't specify
+    #   `InstanceTypes`.
+    #
+    #    </note>
+    #   @return [Types::InstanceRequirements]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverrides AWS API Documentation
     #
     class FleetLaunchTemplateOverrides < Struct.new(
@@ -30871,7 +31269,8 @@ module Aws::EC2
       :availability_zone,
       :weighted_capacity,
       :priority,
-      :placement)
+      :placement,
+      :instance_requirements)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30898,10 +31297,62 @@ module Aws::EC2
     #           spread_domain: "String",
     #           host_resource_group_arn: "String",
     #         },
+    #         instance_requirements: {
+    #           v_cpu_count: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           memory_mi_b: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #           memory_gi_b_per_v_cpu: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           excluded_instance_types: ["ExcludedInstanceType"],
+    #           instance_generations: ["current"], # accepts current, previous
+    #           spot_max_price_percentage_over_lowest_price: 1,
+    #           on_demand_max_price_percentage_over_lowest_price: 1,
+    #           bare_metal: "included", # accepts included, required, excluded
+    #           burstable_performance: "included", # accepts included, required, excluded
+    #           require_hibernate_support: false,
+    #           network_interface_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           local_storage: "included", # accepts included, required, excluded
+    #           local_storage_types: ["hdd"], # accepts hdd, ssd
+    #           total_local_storage_gb: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           baseline_ebs_bandwidth_mbps: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #           accelerator_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_total_memory_mi_b: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] instance_type
     #   The instance type.
+    #
+    #   <note markdown="1"> If you specify `InstanceTypes`, you can't specify
+    #   `InstanceRequirements`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_price
@@ -30947,6 +31398,17 @@ module Aws::EC2
     #   The location where the instance launched, if applicable.
     #   @return [Types::Placement]
     #
+    # @!attribute [rw] instance_requirements
+    #   The attributes for the instance types. When you specify instance
+    #   attributes, Amazon EC2 will identify instance types with those
+    #   attributes.
+    #
+    #   <note markdown="1"> If you specify `InstanceRequirements`, you can't specify
+    #   `InstanceTypes`.
+    #
+    #    </note>
+    #   @return [Types::InstanceRequirementsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverridesRequest AWS API Documentation
     #
     class FleetLaunchTemplateOverridesRequest < Struct.new(
@@ -30956,7 +31418,8 @@ module Aws::EC2
       :availability_zone,
       :weighted_capacity,
       :priority,
-      :placement)
+      :placement,
+      :instance_requirements)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32192,6 +32655,124 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetInstanceTypesFromInstanceRequirementsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         architecture_types: ["i386"], # required, accepts i386, x86_64, arm64, x86_64_mac
+    #         virtualization_types: ["hvm"], # required, accepts hvm, paravirtual
+    #         instance_requirements: { # required
+    #           v_cpu_count: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           memory_mi_b: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #           memory_gi_b_per_v_cpu: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           excluded_instance_types: ["ExcludedInstanceType"],
+    #           instance_generations: ["current"], # accepts current, previous
+    #           spot_max_price_percentage_over_lowest_price: 1,
+    #           on_demand_max_price_percentage_over_lowest_price: 1,
+    #           bare_metal: "included", # accepts included, required, excluded
+    #           burstable_performance: "included", # accepts included, required, excluded
+    #           require_hibernate_support: false,
+    #           network_interface_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           local_storage: "included", # accepts included, required, excluded
+    #           local_storage_types: ["hdd"], # accepts hdd, ssd
+    #           total_local_storage_gb: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           baseline_ebs_bandwidth_mbps: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #           accelerator_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_total_memory_mi_b: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #         },
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] architecture_types
+    #   The processor architecture type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] virtualization_types
+    #   The virtualization type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_requirements
+    #   The attributes required for the instance types.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and  1000. The default value is 1000. To retrieve
+    #   the remaining results, make another call with  the returned
+    #   `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTypesFromInstanceRequirementsRequest AWS API Documentation
+    #
+    class GetInstanceTypesFromInstanceRequirementsRequest < Struct.new(
+      :dry_run,
+      :architecture_types,
+      :virtualization_types,
+      :instance_requirements,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_types
+    #   The instance types with the specified instance attributes.
+    #   @return [Array<Types::InstanceTypeInfoFromInstanceRequirements>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTypesFromInstanceRequirementsResult AWS API Documentation
+    #
+    class GetInstanceTypesFromInstanceRequirementsResult < Struct.new(
+      :instance_types,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetLaunchTemplateDataRequest
     #   data as a hash:
     #
@@ -32539,6 +33120,189 @@ module Aws::EC2
     #
     class GetSerialConsoleAccessStatusResult < Struct.new(
       :serial_console_access_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSpotPlacementScoresRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_types: ["String"],
+    #         target_capacity: 1, # required
+    #         target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
+    #         single_availability_zone: false,
+    #         region_names: ["String"],
+    #         instance_requirements_with_metadata: {
+    #           architecture_types: ["i386"], # accepts i386, x86_64, arm64, x86_64_mac
+    #           virtualization_types: ["hvm"], # accepts hvm, paravirtual
+    #           instance_requirements: {
+    #             v_cpu_count: { # required
+    #               min: 1, # required
+    #               max: 1,
+    #             },
+    #             memory_mi_b: { # required
+    #               min: 1, # required
+    #               max: 1,
+    #             },
+    #             cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #             memory_gi_b_per_v_cpu: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             excluded_instance_types: ["ExcludedInstanceType"],
+    #             instance_generations: ["current"], # accepts current, previous
+    #             spot_max_price_percentage_over_lowest_price: 1,
+    #             on_demand_max_price_percentage_over_lowest_price: 1,
+    #             bare_metal: "included", # accepts included, required, excluded
+    #             burstable_performance: "included", # accepts included, required, excluded
+    #             require_hibernate_support: false,
+    #             network_interface_count: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             local_storage: "included", # accepts included, required, excluded
+    #             local_storage_types: ["hdd"], # accepts hdd, ssd
+    #             total_local_storage_gb: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             baseline_ebs_bandwidth_mbps: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #             accelerator_count: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #             accelerator_total_memory_mi_b: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #           },
+    #         },
+    #         dry_run: false,
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] instance_types
+    #   The instance types. We recommend that you specify at least three
+    #   instance types. If you specify one or two instance types, or specify
+    #   variations of a single instance type (for example, an `m3.xlarge`
+    #   with and without instance storage), the returned placement score
+    #   will always be low.
+    #
+    #   If you specify `InstanceTypes`, you can't specify
+    #   `InstanceRequirementsWithMetadata`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_capacity
+    #   The target capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_capacity_unit_type
+    #   The unit for the target capacity.
+    #
+    #   Default: `units` (translates to number of instances)
+    #   @return [String]
+    #
+    # @!attribute [rw] single_availability_zone
+    #   Specify `true` so that the response returns a list of scored
+    #   Availability Zones. Otherwise, the response returns a list of scored
+    #   Regions.
+    #
+    #   A list of scored Availability Zones is useful if you want to launch
+    #   all of your Spot capacity into a single Availability Zone.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] region_names
+    #   The Regions used to narrow down the list of Regions to be scored.
+    #   Enter the Region code, for example, `us-east-1`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_requirements_with_metadata
+    #   The attributes for the instance types. When you specify instance
+    #   attributes, Amazon EC2 will identify instance types with those
+    #   attributes.
+    #
+    #   If you specify `InstanceRequirementsWithMetadata`, you can't
+    #   specify `InstanceTypes`.
+    #   @return [Types::InstanceRequirementsWithMetadataRequest]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and  1000. The default value is 1000. To retrieve
+    #   the remaining results, make another call with  the returned
+    #   `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSpotPlacementScoresRequest AWS API Documentation
+    #
+    class GetSpotPlacementScoresRequest < Struct.new(
+      :instance_types,
+      :target_capacity,
+      :target_capacity_unit_type,
+      :single_availability_zone,
+      :region_names,
+      :instance_requirements_with_metadata,
+      :dry_run,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] spot_placement_scores
+    #   The Spot placement score for the top 10 Regions or Availability
+    #   Zones, scored on a scale from 1 to 10. Each score  reflects how
+    #   likely it is that each Region or Availability Zone will succeed at
+    #   fulfilling the specified target capacity  *at the time of the Spot
+    #   placement score request*. A score of `10` means that your Spot
+    #   capacity request is highly likely to succeed in that Region or
+    #   Availability Zone.
+    #
+    #   If you request a Spot placement score for Regions, a high score
+    #   assumes that your fleet request will be configured to use all
+    #   Availability Zones and the `capacity-optimized` allocation strategy.
+    #   If you request a Spot placement score for Availability Zones, a high
+    #   score assumes that your fleet request will be configured to use a
+    #   single Availability Zone and the `capacity-optimized` allocation
+    #   strategy.
+    #
+    #   Different  Regions or Availability Zones might return the same
+    #   score.
+    #
+    #   <note markdown="1"> The Spot placement score serves as a recommendation only. No score
+    #   guarantees that your Spot request will be fully or partially
+    #   fulfilled.
+    #
+    #    </note>
+    #   @return [Array<Types::SpotPlacementScore>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSpotPlacementScoresResult AWS API Documentation
+    #
+    class GetSpotPlacementScoresResult < Struct.new(
+      :spot_placement_scores,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36857,6 +37621,868 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The attributes for the instance types. When you specify instance
+    # attributes, Amazon EC2 will identify instance types with these
+    # attributes.
+    #
+    # When you specify multiple parameters, you get instance types that
+    # satisfy all of the specified parameters. If you specify multiple
+    # values for a parameter, you get instance types that satisfy any of the
+    # specified values.
+    #
+    # <note markdown="1"> You must specify `VCpuCount` and `MemoryMiB`. All other parameters are
+    # optional. Any unspecified optional parameter is set to its default.
+    #
+    #  </note>
+    #
+    # For more information, see [Attribute-based instance type selection for
+    # EC2 Fleet][1], [Attribute-based instance type selection for Spot
+    # Fleet][2], and [Spot placement score][3] in the *Amazon EC2 User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
+    #
+    # @note When making an API call, you may pass InstanceRequirements
+    #   data as a hash:
+    #
+    #       {
+    #         v_cpu_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         memory_mi_b: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #         memory_gi_b_per_v_cpu: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         excluded_instance_types: ["ExcludedInstanceType"],
+    #         instance_generations: ["current"], # accepts current, previous
+    #         spot_max_price_percentage_over_lowest_price: 1,
+    #         on_demand_max_price_percentage_over_lowest_price: 1,
+    #         bare_metal: "included", # accepts included, required, excluded
+    #         burstable_performance: "included", # accepts included, required, excluded
+    #         require_hibernate_support: false,
+    #         network_interface_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         local_storage: "included", # accepts included, required, excluded
+    #         local_storage_types: ["hdd"], # accepts hdd, ssd
+    #         total_local_storage_gb: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         baseline_ebs_bandwidth_mbps: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #         accelerator_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #         accelerator_total_memory_mi_b: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] v_cpu_count
+    #   The minimum and maximum number of vCPUs.
+    #   @return [Types::VCpuCountRange]
+    #
+    # @!attribute [rw] memory_mi_b
+    #   The minimum and maximum amount of memory, in MiB.
+    #   @return [Types::MemoryMiB]
+    #
+    # @!attribute [rw] cpu_manufacturers
+    #   The CPU manufacturers to include.
+    #
+    #   * For instance types with Intel CPUs, specify `intel`.
+    #
+    #   * For instance types with AMD CPUs, specify `amd`.
+    #
+    #   * For instance types with Amazon Web Services CPUs, specify
+    #     `amazon-web-services`.
+    #
+    #   <note markdown="1"> Don't confuse the CPU manufacturer with the CPU architecture.
+    #   Instances will be launched with a compatible CPU architecture based
+    #   on the Amazon Machine Image (AMI) that you specify in your launch
+    #   template.
+    #
+    #    </note>
+    #
+    #   Default: Any manufacturer
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] memory_gi_b_per_v_cpu
+    #   The minimum and maximum amount of memory per vCPU, in GiB.
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::MemoryGiBPerVCpu]
+    #
+    # @!attribute [rw] excluded_instance_types
+    #   The instance types to exclude. You can use strings with one or more
+    #   wild cards, represented by an asterisk (`*`), to exclude an instance
+    #   type, size, or generation. The following are examples: `m5.8xlarge`,
+    #   `c5*.*`, `m5a.*`, `r*`, `*3*`.
+    #
+    #   For example, if you specify `c5*.*`, Amazon EC2 will exclude the
+    #   entire C5 instance family (all C5a and C5n instance types). If you
+    #   specify `c5a.*`, Amazon EC2 excludes all the C5a instance types, but
+    #   does not exclude the C5n instance types.
+    #
+    #   Default: No excluded instance types
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_generations
+    #   Indicates whether current or previous generation instance types are
+    #   included. The current generation instance types are recommended for
+    #   use. Current generation instance types are typically the latest two
+    #   to three generations in each instance family. For more information,
+    #   see [Instance types][1] in the *Amazon EC2 User Guide*.
+    #
+    #   For current generation instance types, specify `current`.
+    #
+    #   For previous generation instance types, specify `previous`.
+    #
+    #   Default: Current and previous generation instance types
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] spot_max_price_percentage_over_lowest_price
+    #   The price protection threshold for Spot Instances. This is the
+    #   maximum you’ll pay for a Spot Instance, expressed as a percentage
+    #   above the cheapest M, C, or R instance type with your specified
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it excludes instance types priced above your threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   To turn off price protection, specify a high value, such as
+    #   `999999`.
+    #
+    #   This parameter is not supported for [GetSpotPlacementScores][1] and
+    #   [GetInstanceTypesFromInstanceRequirements][2].
+    #
+    #   Default: `100`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
+    #   The price protection threshold for On-Demand Instances. This is the
+    #   maximum you’ll pay for an On-Demand Instance, expressed as a
+    #   percentage above the cheapest M, C, or R instance type with your
+    #   specified attributes. When Amazon EC2 selects instance types with
+    #   your attributes, it excludes instance types priced above your
+    #   threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   To turn off price protection, specify a high value, such as
+    #   `999999`.
+    #
+    #   This parameter is not supported for [GetSpotPlacementScores][1] and
+    #   [GetInstanceTypesFromInstanceRequirements][2].
+    #
+    #   Default: `20`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bare_metal
+    #   Indicates whether bare metal instance types must be included,
+    #   excluded, or required.
+    #
+    #   * To include bare metal instance types, specify `included`.
+    #
+    #   * To require only bare metal instance types, specify `required`.
+    #
+    #   * To exclude bare metal instance types, specify `excluded`.
+    #
+    #   Default: `excluded`
+    #   @return [String]
+    #
+    # @!attribute [rw] burstable_performance
+    #   Indicates whether burstable performance T instance types are
+    #   included, excluded, or required. For more information, see
+    #   [Burstable performance instances][1].
+    #
+    #   * To include burstable performance instance types, specify
+    #     `included`.
+    #
+    #   * To require only burstable performance instance types, specify
+    #     `required`.
+    #
+    #   * To exclude burstable performance instance types, specify
+    #     `excluded`.
+    #
+    #   Default: `excluded`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
+    #   @return [String]
+    #
+    # @!attribute [rw] require_hibernate_support
+    #   Indicates whether instance types must support hibernation for
+    #   On-Demand Instances.
+    #
+    #   This parameter is not supported for [GetSpotPlacementScores][1].
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_interface_count
+    #   The minimum and maximum number of network interfaces.
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::NetworkInterfaceCount]
+    #
+    # @!attribute [rw] local_storage
+    #   Indicates whether instance types with instance store volumes are
+    #   included, excluded, or required. For more information, [Amazon EC2
+    #   instance store][1] in the *Amazon EC2 User Guide*.
+    #
+    #   * To include instance types with instance store volumes, specify
+    #     `included`.
+    #
+    #   * To require only instance types with instance store volumes,
+    #     specify `required`.
+    #
+    #   * To exclude instance types with instance store volumes, specify
+    #     `excluded`.
+    #
+    #   Default: `included`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
+    #   @return [String]
+    #
+    # @!attribute [rw] local_storage_types
+    #   The type of local storage that is required.
+    #
+    #   * For instance types with hard disk drive (HDD) storage, specify
+    #     `hdd`.
+    #
+    #   * For instance types with solid state drive (SDD) storage, specify
+    #     `sdd`.
+    #
+    #   Default: `hdd` and `sdd`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] total_local_storage_gb
+    #   The minimum and maximum amount of total local storage, in GB.
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::TotalLocalStorageGB]
+    #
+    # @!attribute [rw] baseline_ebs_bandwidth_mbps
+    #   The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps.
+    #   For more information, see [Amazon EBS–optimized instances][1] in the
+    #   *Amazon EC2 User Guide*.
+    #
+    #   Default: No minimum or maximum limits
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
+    #   @return [Types::BaselineEbsBandwidthMbps]
+    #
+    # @!attribute [rw] accelerator_types
+    #   The accelerator types that must be on the instance type.
+    #
+    #   * For instance types with GPU accelerators, specify `gpu`.
+    #
+    #   * For instance types with FPGA accelerators, specify `fpga`.
+    #
+    #   * For instance types with inference accelerators, specify
+    #     `inference`.
+    #
+    #   Default: Any accelerator type
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_count
+    #   The minimum and maximum number of accelerators (GPUs, FPGAs, or
+    #   Amazon Web Services Inferentia chips) on an instance.
+    #
+    #   To exclude accelerator-enabled instance types, set `Max` to `0`.
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::AcceleratorCount]
+    #
+    # @!attribute [rw] accelerator_manufacturers
+    #   Indicates whether instance types must have accelerators by specific
+    #   manufacturers.
+    #
+    #   * For instance types with NVIDIA devices, specify `nvidia`.
+    #
+    #   * For instance types with AMD devices, specify `amd`.
+    #
+    #   * For instance types with Amazon Web Services devices, specify
+    #     `amazon-web-services`.
+    #
+    #   * For instance types with Xilinx devices, specify `xilinx`.
+    #
+    #   Default: Any manufacturer
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_names
+    #   The accelerators that must be on the instance type.
+    #
+    #   * For instance types with NVIDIA A100 GPUs, specify `a100`.
+    #
+    #   * For instance types with NVIDIA V100 GPUs, specify `v100`.
+    #
+    #   * For instance types with NVIDIA K80 GPUs, specify `k80`.
+    #
+    #   * For instance types with NVIDIA T4 GPUs, specify `t4`.
+    #
+    #   * For instance types with NVIDIA M60 GPUs, specify `m60`.
+    #
+    #   * For instance types with AMD Radeon Pro V520 GPUs, specify
+    #     `radeon-pro-v520`.
+    #
+    #   * For instance types with Xilinx VU9P FPGAs, specify `vu9p`.
+    #
+    #   Default: Any accelerator
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_total_memory_mi_b
+    #   The minimum and maximum amount of total accelerator memory, in MiB.
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::AcceleratorTotalMemoryMiB]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceRequirements AWS API Documentation
+    #
+    class InstanceRequirements < Struct.new(
+      :v_cpu_count,
+      :memory_mi_b,
+      :cpu_manufacturers,
+      :memory_gi_b_per_v_cpu,
+      :excluded_instance_types,
+      :instance_generations,
+      :spot_max_price_percentage_over_lowest_price,
+      :on_demand_max_price_percentage_over_lowest_price,
+      :bare_metal,
+      :burstable_performance,
+      :require_hibernate_support,
+      :network_interface_count,
+      :local_storage,
+      :local_storage_types,
+      :total_local_storage_gb,
+      :baseline_ebs_bandwidth_mbps,
+      :accelerator_types,
+      :accelerator_count,
+      :accelerator_manufacturers,
+      :accelerator_names,
+      :accelerator_total_memory_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The attributes for the instance types. When you specify instance
+    # attributes, Amazon EC2 will identify instance types with these
+    # attributes.
+    #
+    # When you specify multiple parameters, you get instance types that
+    # satisfy all of the specified parameters. If you specify multiple
+    # values for a parameter, you get instance types that satisfy any of the
+    # specified values.
+    #
+    # <note markdown="1"> You must specify `VCpuCount` and `MemoryMiB`. All other parameters are
+    # optional. Any unspecified optional parameter is set to its default.
+    #
+    #  </note>
+    #
+    # For more information, see [Attribute-based instance type selection for
+    # EC2 Fleet][1], [Attribute-based instance type selection for Spot
+    # Fleet][2], and [Spot placement score][3] in the *Amazon EC2 User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
+    #
+    # @note When making an API call, you may pass InstanceRequirementsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         v_cpu_count: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         memory_mi_b: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #         memory_gi_b_per_v_cpu: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         excluded_instance_types: ["ExcludedInstanceType"],
+    #         instance_generations: ["current"], # accepts current, previous
+    #         spot_max_price_percentage_over_lowest_price: 1,
+    #         on_demand_max_price_percentage_over_lowest_price: 1,
+    #         bare_metal: "included", # accepts included, required, excluded
+    #         burstable_performance: "included", # accepts included, required, excluded
+    #         require_hibernate_support: false,
+    #         network_interface_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         local_storage: "included", # accepts included, required, excluded
+    #         local_storage_types: ["hdd"], # accepts hdd, ssd
+    #         total_local_storage_gb: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         baseline_ebs_bandwidth_mbps: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #         accelerator_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #         accelerator_total_memory_mi_b: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] v_cpu_count
+    #   The minimum and maximum number of vCPUs.
+    #   @return [Types::VCpuCountRangeRequest]
+    #
+    # @!attribute [rw] memory_mi_b
+    #   The minimum and maximum amount of memory, in MiB.
+    #   @return [Types::MemoryMiBRequest]
+    #
+    # @!attribute [rw] cpu_manufacturers
+    #   The CPU manufacturers to include.
+    #
+    #   * For instance types with Intel CPUs, specify `intel`.
+    #
+    #   * For instance types with AMD CPUs, specify `amd`.
+    #
+    #   * For instance types with Amazon Web Services CPUs, specify
+    #     `amazon-web-services`.
+    #
+    #   <note markdown="1"> Don't confuse the CPU manufacturer with the CPU architecture.
+    #   Instances will be launched with a compatible CPU architecture based
+    #   on the Amazon Machine Image (AMI) that you specify in your launch
+    #   template.
+    #
+    #    </note>
+    #
+    #   Default: Any manufacturer
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] memory_gi_b_per_v_cpu
+    #   The minimum and maximum amount of memory per vCPU, in GiB.
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::MemoryGiBPerVCpuRequest]
+    #
+    # @!attribute [rw] excluded_instance_types
+    #   The instance types to exclude. You can use strings with one or more
+    #   wild cards, represented by an asterisk (`*`), to exclude an instance
+    #   family, type, size, or generation. The following are examples:
+    #   `m5.8xlarge`, `c5*.*`, `m5a.*`, `r*`, `*3*`.
+    #
+    #   For example, if you specify `c5*.*`, Amazon EC2 will exclude the
+    #   entire C5 instance family (all C5a and C5n instance types). If you
+    #   specify `c5a.*`, Amazon EC2 excludes all the C5a instance types, but
+    #   does not exclude the C5n instance types.
+    #
+    #   Default: No excluded instance types
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_generations
+    #   Indicates whether current or previous generation instance types are
+    #   included. The current generation instance types are recommended for
+    #   use. Current generation instance types are typically the latest two
+    #   to three generations in each instance family. For more information,
+    #   see [Instance types][1] in the *Amazon EC2 User Guide*.
+    #
+    #   For current generation instance types, specify `current`.
+    #
+    #   For previous generation instance types, specify `previous`.
+    #
+    #   Default: Current and previous generation instance types
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] spot_max_price_percentage_over_lowest_price
+    #   The price protection threshold for Spot Instance. This is the
+    #   maximum you’ll pay for an Spot Instance, expressed as a percentage
+    #   above the cheapest M, C, or R instance type with your specified
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it excludes instance types priced above your threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   To turn off price protection, specify a high value, such as
+    #   `999999`.
+    #
+    #   This parameter is not supported for [GetSpotPlacementScores][1] and
+    #   [GetInstanceTypesFromInstanceRequirements][2].
+    #
+    #   Default: `100`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
+    #   The price protection threshold for On-Demand Instances. This is the
+    #   maximum you’ll pay for an On-Demand Instance, expressed as a
+    #   percentage above the cheapest M, C, or R instance type with your
+    #   specified attributes. When Amazon EC2 selects instance types with
+    #   your attributes, it excludes instance types priced above your
+    #   threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   To turn off price protection, specify a high value, such as
+    #   `999999`.
+    #
+    #   This parameter is not supported for [GetSpotPlacementScores][1] and
+    #   [GetInstanceTypesFromInstanceRequirements][2].
+    #
+    #   Default: `20`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bare_metal
+    #   Indicates whether bare metal instance types must be included,
+    #   excluded, or required.
+    #
+    #   * To include bare metal instance types, specify `included`.
+    #
+    #   * To require only bare metal instance types, specify `required`.
+    #
+    #   * To exclude bare metal instance types, specify `excluded`.
+    #
+    #   Default: `excluded`
+    #   @return [String]
+    #
+    # @!attribute [rw] burstable_performance
+    #   Indicates whether burstable performance T instance types are
+    #   included, excluded, or required. For more information, see
+    #   [Burstable performance instances][1].
+    #
+    #   * To include burstable performance instance types, specify
+    #     `included`.
+    #
+    #   * To require only burstable performance instance types, specify
+    #     `required`.
+    #
+    #   * To exclude burstable performance instance types, specify
+    #     `excluded`.
+    #
+    #   Default: `excluded`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
+    #   @return [String]
+    #
+    # @!attribute [rw] require_hibernate_support
+    #   Indicates whether instance types must support hibernation for
+    #   On-Demand Instances.
+    #
+    #   This parameter is not supported for [GetSpotPlacementScores][1].
+    #
+    #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_interface_count
+    #   The minimum and maximum number of network interfaces.
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::NetworkInterfaceCountRequest]
+    #
+    # @!attribute [rw] local_storage
+    #   Indicates whether instance types with instance store volumes are
+    #   included, excluded, or required. For more information, [Amazon EC2
+    #   instance store][1] in the *Amazon EC2 User Guide*.
+    #
+    #   * To include instance types with instance store volumes, specify
+    #     `included`.
+    #
+    #   * To require only instance types with instance store volumes,
+    #     specify `required`.
+    #
+    #   * To exclude instance types with instance store volumes, specify
+    #     `excluded`.
+    #
+    #   Default: `included`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
+    #   @return [String]
+    #
+    # @!attribute [rw] local_storage_types
+    #   The type of local storage that is required.
+    #
+    #   * For instance types with hard disk drive (HDD) storage, specify
+    #     `hdd`.
+    #
+    #   * For instance types with solid state drive (SDD) storage, specify
+    #     `sdd`.
+    #
+    #   Default: `hdd` and `sdd`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] total_local_storage_gb
+    #   The minimum and maximum amount of total local storage, in GB.
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::TotalLocalStorageGBRequest]
+    #
+    # @!attribute [rw] baseline_ebs_bandwidth_mbps
+    #   The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps.
+    #   For more information, see [Amazon EBS–optimized instances][1] in the
+    #   *Amazon EC2 User Guide*.
+    #
+    #   Default: No minimum or maximum limits
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
+    #   @return [Types::BaselineEbsBandwidthMbpsRequest]
+    #
+    # @!attribute [rw] accelerator_types
+    #   The accelerator types that must be on the instance type.
+    #
+    #   * To include instance types with GPU hardware, specify `gpu`.
+    #
+    #   * To include instance types with FPGA hardware, specify `fpga`.
+    #
+    #   * To include instance types with inference hardware, specify
+    #     `inference`.
+    #
+    #   Default: Any accelerator type
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_count
+    #   The minimum and maximum number of accelerators (GPUs, FPGAs, or
+    #   Amazon Web Services Inferentia chips) on an instance.
+    #
+    #   To exclude accelerator-enabled instance types, set `Max` to `0`.
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::AcceleratorCountRequest]
+    #
+    # @!attribute [rw] accelerator_manufacturers
+    #   Indicates whether instance types must have accelerators by specific
+    #   manufacturers.
+    #
+    #   * For instance types with NVIDIA devices, specify `nvidia`.
+    #
+    #   * For instance types with AMD devices, specify `amd`.
+    #
+    #   * For instance types with Amazon Web Services devices, specify
+    #     `amazon-web-services`.
+    #
+    #   * For instance types with Xilinx devices, specify `xilinx`.
+    #
+    #   Default: Any manufacturer
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_names
+    #   The accelerators that must be on the instance type.
+    #
+    #   * For instance types with NVIDIA A100 GPUs, specify `a100`.
+    #
+    #   * For instance types with NVIDIA V100 GPUs, specify `v100`.
+    #
+    #   * For instance types with NVIDIA K80 GPUs, specify `k80`.
+    #
+    #   * For instance types with NVIDIA T4 GPUs, specify `t4`.
+    #
+    #   * For instance types with NVIDIA M60 GPUs, specify `m60`.
+    #
+    #   * For instance types with AMD Radeon Pro V520 GPUs, specify
+    #     `radeon-pro-v520`.
+    #
+    #   * For instance types with Xilinx VU9P FPGAs, specify ` vu9p`.
+    #
+    #   Default: Any accelerator
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_total_memory_mi_b
+    #   The minimum and maximum amount of total accelerator memory, in MiB.
+    #
+    #   Default: No minimum or maximum limits
+    #   @return [Types::AcceleratorTotalMemoryMiBRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceRequirementsRequest AWS API Documentation
+    #
+    class InstanceRequirementsRequest < Struct.new(
+      :v_cpu_count,
+      :memory_mi_b,
+      :cpu_manufacturers,
+      :memory_gi_b_per_v_cpu,
+      :excluded_instance_types,
+      :instance_generations,
+      :spot_max_price_percentage_over_lowest_price,
+      :on_demand_max_price_percentage_over_lowest_price,
+      :bare_metal,
+      :burstable_performance,
+      :require_hibernate_support,
+      :network_interface_count,
+      :local_storage,
+      :local_storage_types,
+      :total_local_storage_gb,
+      :baseline_ebs_bandwidth_mbps,
+      :accelerator_types,
+      :accelerator_count,
+      :accelerator_manufacturers,
+      :accelerator_names,
+      :accelerator_total_memory_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The architecture type, virtualization type, and other attributes for
+    # the instance types. When you specify instance attributes, Amazon EC2
+    # will identify instance types with those attributes.
+    #
+    # If you specify `InstanceRequirementsWithMetadataRequest`, you can't
+    # specify `InstanceTypes`.
+    #
+    # @note When making an API call, you may pass InstanceRequirementsWithMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         architecture_types: ["i386"], # accepts i386, x86_64, arm64, x86_64_mac
+    #         virtualization_types: ["hvm"], # accepts hvm, paravirtual
+    #         instance_requirements: {
+    #           v_cpu_count: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           memory_mi_b: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #           memory_gi_b_per_v_cpu: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           excluded_instance_types: ["ExcludedInstanceType"],
+    #           instance_generations: ["current"], # accepts current, previous
+    #           spot_max_price_percentage_over_lowest_price: 1,
+    #           on_demand_max_price_percentage_over_lowest_price: 1,
+    #           bare_metal: "included", # accepts included, required, excluded
+    #           burstable_performance: "included", # accepts included, required, excluded
+    #           require_hibernate_support: false,
+    #           network_interface_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           local_storage: "included", # accepts included, required, excluded
+    #           local_storage_types: ["hdd"], # accepts hdd, ssd
+    #           total_local_storage_gb: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           baseline_ebs_bandwidth_mbps: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #           accelerator_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_total_memory_mi_b: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] architecture_types
+    #   The architecture type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] virtualization_types
+    #   The virtualization type.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_requirements
+    #   The attributes for the instance types. When you specify instance
+    #   attributes, Amazon EC2 will identify instance types with those
+    #   attributes.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceRequirementsWithMetadataRequest AWS API Documentation
+    #
+    class InstanceRequirementsWithMetadataRequest < Struct.new(
+      :architecture_types,
+      :virtualization_types,
+      :instance_requirements)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The instance details to specify which volumes should be snapshotted.
     #
     # @note When making an API call, you may pass InstanceSpecification
@@ -37277,6 +38903,20 @@ module Aws::EC2
       :dedicated_hosts_supported,
       :auto_recovery_supported,
       :supported_boot_modes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The list of instance types with the specified instance attributes.
+    #
+    # @!attribute [rw] instance_type
+    #   The matching instance type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeInfoFromInstanceRequirements AWS API Documentation
+    #
+    class InstanceTypeInfoFromInstanceRequirements < Struct.new(
+      :instance_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38270,6 +39910,53 @@ module Aws::EC2
     #             availability_zone: "String",
     #             weighted_capacity: 1.0,
     #             priority: 1.0,
+    #             instance_requirements: {
+    #               v_cpu_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #               memory_gi_b_per_v_cpu: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               excluded_instance_types: ["ExcludedInstanceType"],
+    #               instance_generations: ["current"], # accepts current, previous
+    #               spot_max_price_percentage_over_lowest_price: 1,
+    #               on_demand_max_price_percentage_over_lowest_price: 1,
+    #               bare_metal: "included", # accepts included, required, excluded
+    #               burstable_performance: "included", # accepts included, required, excluded
+    #               require_hibernate_support: false,
+    #               network_interface_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               local_storage: "included", # accepts included, required, excluded
+    #               local_storage_types: ["hdd"], # accepts hdd, ssd
+    #               total_local_storage_gb: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               baseline_ebs_bandwidth_mbps: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #               accelerator_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_total_memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -39243,6 +40930,53 @@ module Aws::EC2
     #         availability_zone: "String",
     #         weighted_capacity: 1.0,
     #         priority: 1.0,
+    #         instance_requirements: {
+    #           v_cpu_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           memory_mi_b: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #           memory_gi_b_per_v_cpu: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           excluded_instance_types: ["ExcludedInstanceType"],
+    #           instance_generations: ["current"], # accepts current, previous
+    #           spot_max_price_percentage_over_lowest_price: 1,
+    #           on_demand_max_price_percentage_over_lowest_price: 1,
+    #           bare_metal: "included", # accepts included, required, excluded
+    #           burstable_performance: "included", # accepts included, required, excluded
+    #           require_hibernate_support: false,
+    #           network_interface_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           local_storage: "included", # accepts included, required, excluded
+    #           local_storage_types: ["hdd"], # accepts hdd, ssd
+    #           total_local_storage_gb: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           baseline_ebs_bandwidth_mbps: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #           accelerator_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_total_memory_mi_b: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] instance_type
@@ -39285,6 +41019,19 @@ module Aws::EC2
     #   priority for different launch template overrides.
     #   @return [Float]
     #
+    # @!attribute [rw] instance_requirements
+    #   The instance requirements. When you specify instance requirements,
+    #   Amazon EC2 will identify instance types with the provided
+    #   requirements, and then use your On-Demand and Spot allocation
+    #   strategies to launch instances from these instance types, in the
+    #   same way as when you specify a list of instance types.
+    #
+    #   <note markdown="1"> If you specify `InstanceRequirements`, you can't specify
+    #   `InstanceTypes`.
+    #
+    #    </note>
+    #   @return [Types::InstanceRequirements]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateOverrides AWS API Documentation
     #
     class LaunchTemplateOverrides < Struct.new(
@@ -39293,7 +41040,8 @@ module Aws::EC2
       :subnet_id,
       :availability_zone,
       :weighted_capacity,
-      :priority)
+      :priority,
+      :instance_requirements)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40228,6 +41976,64 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The minimum and maximum amount of memory per vCPU, in GiB.
+    #
+    # @note When making an API call, you may pass MemoryGiBPerVCpu
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of memory per vCPU, in GiB. If this parameter is
+    #   not specified, there is no minimum limit.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of memory per vCPU, in GiB. If this parameter is
+    #   not specified, there is no maximum limit.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MemoryGiBPerVCpu AWS API Documentation
+    #
+    class MemoryGiBPerVCpu < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of memory per vCPU, in GiB.
+    #
+    # @note When making an API call, you may pass MemoryGiBPerVCpuRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of memory per vCPU, in GiB. To specify no minimum
+    #   limit, omit this parameter.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of memory per vCPU, in GiB. To specify no maximum
+    #   limit, omit this parameter.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MemoryGiBPerVCpuRequest AWS API Documentation
+    #
+    class MemoryGiBPerVCpuRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the memory for the instance type.
     #
     # @!attribute [rw] size_in_mi_b
@@ -40238,6 +42044,64 @@ module Aws::EC2
     #
     class MemoryInfo < Struct.new(
       :size_in_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of memory, in MiB.
+    #
+    # @note When making an API call, you may pass MemoryMiB
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of memory, in MiB. If this parameter is not
+    #   specified, there is no minimum limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of memory, in MiB. If this parameter is not
+    #   specified, there is no maximum limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MemoryMiB AWS API Documentation
+    #
+    class MemoryMiB < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of memory, in MiB.
+    #
+    # @note When making an API call, you may pass MemoryMiBRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1, # required
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of memory, in MiB. To specify no minimum limit,
+    #   specify `0`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of memory, in MiB. To specify no maximum limit,
+    #   omit this parameter.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MemoryMiBRequest AWS API Documentation
+    #
+    class MemoryMiBRequest < Struct.new(
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40438,6 +42302,7 @@ module Aws::EC2
     #         end_date_type: "unlimited", # accepts unlimited, limited
     #         accept: false,
     #         dry_run: false,
+    #         additional_info: "String",
     #       }
     #
     # @!attribute [rw] capacity_reservation_id
@@ -40491,6 +42356,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] additional_info
+    #   Reserved for future use.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyCapacityReservationRequest AWS API Documentation
     #
     class ModifyCapacityReservationRequest < Struct.new(
@@ -40499,7 +42368,8 @@ module Aws::EC2
       :end_date,
       :end_date_type,
       :accept,
-      :dry_run)
+      :dry_run,
+      :additional_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40798,6 +42668,53 @@ module Aws::EC2
     #                   spread_domain: "String",
     #                   host_resource_group_arn: "String",
     #                 },
+    #                 instance_requirements: {
+    #                   v_cpu_count: { # required
+    #                     min: 1, # required
+    #                     max: 1,
+    #                   },
+    #                   memory_mi_b: { # required
+    #                     min: 1, # required
+    #                     max: 1,
+    #                   },
+    #                   cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                   memory_gi_b_per_v_cpu: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   excluded_instance_types: ["ExcludedInstanceType"],
+    #                   instance_generations: ["current"], # accepts current, previous
+    #                   spot_max_price_percentage_over_lowest_price: 1,
+    #                   on_demand_max_price_percentage_over_lowest_price: 1,
+    #                   bare_metal: "included", # accepts included, required, excluded
+    #                   burstable_performance: "included", # accepts included, required, excluded
+    #                   require_hibernate_support: false,
+    #                   network_interface_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   local_storage: "included", # accepts included, required, excluded
+    #                   local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                   total_local_storage_gb: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   baseline_ebs_bandwidth_mbps: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                   accelerator_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                   accelerator_total_memory_mi_b: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -40808,6 +42725,7 @@ module Aws::EC2
     #           on_demand_target_capacity: 1,
     #           spot_target_capacity: 1,
     #           default_target_capacity_type: "spot", # accepts spot, on-demand
+    #           target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
     #         },
     #         context: "String",
     #       }
@@ -42304,6 +44222,53 @@ module Aws::EC2
     #                 availability_zone: "String",
     #                 weighted_capacity: 1.0,
     #                 priority: 1.0,
+    #                 instance_requirements: {
+    #                   v_cpu_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   memory_mi_b: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                   memory_gi_b_per_v_cpu: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   excluded_instance_types: ["ExcludedInstanceType"],
+    #                   instance_generations: ["current"], # accepts current, previous
+    #                   spot_max_price_percentage_over_lowest_price: 1,
+    #                   on_demand_max_price_percentage_over_lowest_price: 1,
+    #                   bare_metal: "included", # accepts included, required, excluded
+    #                   burstable_performance: "included", # accepts included, required, excluded
+    #                   require_hibernate_support: false,
+    #                   network_interface_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   local_storage: "included", # accepts included, required, excluded
+    #                   local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                   total_local_storage_gb: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   baseline_ebs_bandwidth_mbps: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                   accelerator_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                   accelerator_total_memory_mi_b: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -45022,6 +46987,64 @@ module Aws::EC2
     class NetworkInterfaceAttachmentChanges < Struct.new(
       :attachment_id,
       :delete_on_termination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum number of network interfaces.
+    #
+    # @note When making an API call, you may pass NetworkInterfaceCount
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum number of network interfaces. If this parameter is not
+    #   specified, there is no minimum limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of network interfaces. If this parameter is not
+    #   specified, there is no maximum limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceCount AWS API Documentation
+    #
+    class NetworkInterfaceCount < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum number of network interfaces.
+    #
+    # @note When making an API call, you may pass NetworkInterfaceCountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum number of network interfaces. To specify no minimum
+    #   limit, omit this parameter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of network interfaces. To specify no maximum
+    #   limit, omit this parameter.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceCountRequest AWS API Documentation
+    #
+    class NetworkInterfaceCountRequest < Struct.new(
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48369,6 +50392,53 @@ module Aws::EC2
     #         enclave_options: {
     #           enabled: false,
     #         },
+    #         instance_requirements: {
+    #           v_cpu_count: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           memory_mi_b: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #           memory_gi_b_per_v_cpu: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           excluded_instance_types: ["ExcludedInstanceType"],
+    #           instance_generations: ["current"], # accepts current, previous
+    #           spot_max_price_percentage_over_lowest_price: 1,
+    #           on_demand_max_price_percentage_over_lowest_price: 1,
+    #           bare_metal: "included", # accepts included, required, excluded
+    #           burstable_performance: "included", # accepts included, required, excluded
+    #           require_hibernate_support: false,
+    #           network_interface_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           local_storage: "included", # accepts included, required, excluded
+    #           local_storage_types: ["hdd"], # accepts hdd, ssd
+    #           total_local_storage_gb: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           baseline_ebs_bandwidth_mbps: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #           accelerator_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_total_memory_mi_b: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] kernel_id
@@ -48413,6 +50483,9 @@ module Aws::EC2
     # @!attribute [rw] instance_type
     #   The instance type. For more information, see [Instance Types][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   If you specify `InstanceTypes`, you can't specify
+    #   `InstanceRequirements`.
     #
     #
     #
@@ -48597,6 +50670,15 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
     #   @return [Types::LaunchTemplateEnclaveOptionsRequest]
     #
+    # @!attribute [rw] instance_requirements
+    #   The attributes for the instance types. When you specify instance
+    #   attributes, Amazon EC2 will identify instance types with these
+    #   attributes.
+    #
+    #   If you specify `InstanceRequirements`, you can't specify
+    #   `InstanceTypes`.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
     class RequestLaunchTemplateData < Struct.new(
@@ -48626,7 +50708,8 @@ module Aws::EC2
       :license_specifications,
       :hibernation_options,
       :metadata_options,
-      :enclave_options)
+      :enclave_options,
+      :instance_requirements)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48751,6 +50834,53 @@ module Aws::EC2
     #                   ],
     #                 },
     #               ],
+    #               instance_requirements: {
+    #                 v_cpu_count: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 memory_mi_b: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                 memory_gi_b_per_v_cpu: {
+    #                   min: 1.0,
+    #                   max: 1.0,
+    #                 },
+    #                 excluded_instance_types: ["ExcludedInstanceType"],
+    #                 instance_generations: ["current"], # accepts current, previous
+    #                 spot_max_price_percentage_over_lowest_price: 1,
+    #                 on_demand_max_price_percentage_over_lowest_price: 1,
+    #                 bare_metal: "included", # accepts included, required, excluded
+    #                 burstable_performance: "included", # accepts included, required, excluded
+    #                 require_hibernate_support: false,
+    #                 network_interface_count: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 local_storage: "included", # accepts included, required, excluded
+    #                 local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                 total_local_storage_gb: {
+    #                   min: 1.0,
+    #                   max: 1.0,
+    #                 },
+    #                 baseline_ebs_bandwidth_mbps: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                 accelerator_count: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                 accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                 accelerator_total_memory_mi_b: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #               },
     #             },
     #           ],
     #           launch_template_configs: [
@@ -48768,6 +50898,53 @@ module Aws::EC2
     #                   availability_zone: "String",
     #                   weighted_capacity: 1.0,
     #                   priority: 1.0,
+    #                   instance_requirements: {
+    #                     v_cpu_count: {
+    #                       min: 1,
+    #                       max: 1,
+    #                     },
+    #                     memory_mi_b: {
+    #                       min: 1,
+    #                       max: 1,
+    #                     },
+    #                     cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                     memory_gi_b_per_v_cpu: {
+    #                       min: 1.0,
+    #                       max: 1.0,
+    #                     },
+    #                     excluded_instance_types: ["ExcludedInstanceType"],
+    #                     instance_generations: ["current"], # accepts current, previous
+    #                     spot_max_price_percentage_over_lowest_price: 1,
+    #                     on_demand_max_price_percentage_over_lowest_price: 1,
+    #                     bare_metal: "included", # accepts included, required, excluded
+    #                     burstable_performance: "included", # accepts included, required, excluded
+    #                     require_hibernate_support: false,
+    #                     network_interface_count: {
+    #                       min: 1,
+    #                       max: 1,
+    #                     },
+    #                     local_storage: "included", # accepts included, required, excluded
+    #                     local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                     total_local_storage_gb: {
+    #                       min: 1.0,
+    #                       max: 1.0,
+    #                     },
+    #                     baseline_ebs_bandwidth_mbps: {
+    #                       min: 1,
+    #                       max: 1,
+    #                     },
+    #                     accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                     accelerator_count: {
+    #                       min: 1,
+    #                       max: 1,
+    #                     },
+    #                     accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                     accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                     accelerator_total_memory_mi_b: {
+    #                       min: 1,
+    #                       max: 1,
+    #                     },
+    #                   },
     #                 },
     #               ],
     #             },
@@ -48801,6 +50978,7 @@ module Aws::EC2
     #           },
     #           instance_pools_to_use_count: 1,
     #           context: "String",
+    #           target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
     #           tag_specifications: [
     #             {
     #               resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-endpoint, vpc-endpoint-service, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -50345,6 +52523,15 @@ module Aws::EC2
     #   Nitro Enclaves.
     #   @return [Types::LaunchTemplateEnclaveOptions]
     #
+    # @!attribute [rw] instance_requirements
+    #   The attributes for the instance types. When you specify instance
+    #   attributes, Amazon EC2 will identify instance types with these
+    #   attributes.
+    #
+    #   If you specify `InstanceRequirements`, you can't specify
+    #   `InstanceTypes`.
+    #   @return [Types::InstanceRequirements]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
     class ResponseLaunchTemplateData < Struct.new(
@@ -50374,7 +52561,8 @@ module Aws::EC2
       :license_specifications,
       :hibernation_options,
       :metadata_options,
-      :enclave_options)
+      :enclave_options,
+      :instance_requirements)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54052,6 +56240,53 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         instance_requirements: {
+    #           v_cpu_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           memory_mi_b: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #           memory_gi_b_per_v_cpu: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           excluded_instance_types: ["ExcludedInstanceType"],
+    #           instance_generations: ["current"], # accepts current, previous
+    #           spot_max_price_percentage_over_lowest_price: 1,
+    #           on_demand_max_price_percentage_over_lowest_price: 1,
+    #           bare_metal: "included", # accepts included, required, excluded
+    #           burstable_performance: "included", # accepts included, required, excluded
+    #           require_hibernate_support: false,
+    #           network_interface_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           local_storage: "included", # accepts included, required, excluded
+    #           local_storage_types: ["hdd"], # accepts hdd, ssd
+    #           total_local_storage_gb: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           baseline_ebs_bandwidth_mbps: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #           accelerator_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_total_memory_mi_b: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] security_groups
@@ -54168,6 +56403,17 @@ module Aws::EC2
     #   The tags to apply during creation.
     #   @return [Array<Types::SpotFleetTagSpecification>]
     #
+    # @!attribute [rw] instance_requirements
+    #   The attributes for the instance types. When you specify instance
+    #   attributes, Amazon EC2 will identify instance types with those
+    #   attributes.
+    #
+    #   <note markdown="1"> If you specify `InstanceRequirements`, you can't specify
+    #   `InstanceTypes`.
+    #
+    #    </note>
+    #   @return [Types::InstanceRequirements]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetLaunchSpecification AWS API Documentation
     #
     class SpotFleetLaunchSpecification < Struct.new(
@@ -54188,7 +56434,8 @@ module Aws::EC2
       :subnet_id,
       :user_data,
       :weighted_capacity,
-      :tag_specifications)
+      :tag_specifications,
+      :instance_requirements)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54378,6 +56625,53 @@ module Aws::EC2
     #                 ],
     #               },
     #             ],
+    #             instance_requirements: {
+    #               v_cpu_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #               memory_gi_b_per_v_cpu: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               excluded_instance_types: ["ExcludedInstanceType"],
+    #               instance_generations: ["current"], # accepts current, previous
+    #               spot_max_price_percentage_over_lowest_price: 1,
+    #               on_demand_max_price_percentage_over_lowest_price: 1,
+    #               bare_metal: "included", # accepts included, required, excluded
+    #               burstable_performance: "included", # accepts included, required, excluded
+    #               require_hibernate_support: false,
+    #               network_interface_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               local_storage: "included", # accepts included, required, excluded
+    #               local_storage_types: ["hdd"], # accepts hdd, ssd
+    #               total_local_storage_gb: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               baseline_ebs_bandwidth_mbps: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #               accelerator_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_total_memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #         launch_template_configs: [
@@ -54395,6 +56689,53 @@ module Aws::EC2
     #                 availability_zone: "String",
     #                 weighted_capacity: 1.0,
     #                 priority: 1.0,
+    #                 instance_requirements: {
+    #                   v_cpu_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   memory_mi_b: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                   memory_gi_b_per_v_cpu: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   excluded_instance_types: ["ExcludedInstanceType"],
+    #                   instance_generations: ["current"], # accepts current, previous
+    #                   spot_max_price_percentage_over_lowest_price: 1,
+    #                   on_demand_max_price_percentage_over_lowest_price: 1,
+    #                   bare_metal: "included", # accepts included, required, excluded
+    #                   burstable_performance: "included", # accepts included, required, excluded
+    #                   require_hibernate_support: false,
+    #                   network_interface_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   local_storage: "included", # accepts included, required, excluded
+    #                   local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                   total_local_storage_gb: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   baseline_ebs_bandwidth_mbps: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                   accelerator_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                   accelerator_total_memory_mi_b: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -54428,6 +56769,7 @@ module Aws::EC2
     #         },
     #         instance_pools_to_use_count: 1,
     #         context: "String",
+    #         target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
     #         tag_specifications: [
     #           {
     #             resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-endpoint, vpc-endpoint-service, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -54657,6 +56999,12 @@ module Aws::EC2
     #   Reserved.
     #   @return [String]
     #
+    # @!attribute [rw] target_capacity_unit_type
+    #   The unit for the target capacity.
+    #
+    #   Default: `units` (translates to number of instances)
+    #   @return [String]
+    #
     # @!attribute [rw] tag_specifications
     #   The key-value pair for tagging the Spot Fleet request on creation.
     #   The value for `ResourceType` must be `spot-fleet-request`, otherwise
@@ -54700,6 +57048,7 @@ module Aws::EC2
       :load_balancers_config,
       :instance_pools_to_use_count,
       :context,
+      :target_capacity_unit_type,
       :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
@@ -55249,6 +57598,36 @@ module Aws::EC2
       :availability_zone,
       :group_name,
       :tenancy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Spot placement score for this Region or Availability Zone. The
+    # score is calculated based on the assumption that the
+    # `capacity-optimized` allocation strategy is used and that all of the
+    # Availability Zones in the Region can be used.
+    #
+    # @!attribute [rw] region
+    #   The Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The placement score, on a scale from `1` to `10`. A score of `10`
+    #   indicates that your Spot request is highly likely to succeed in this
+    #   Region or Availability Zone. A score of `1` indicates that your Spot
+    #   request is not likely to succeed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotPlacementScore AWS API Documentation
+    #
+    class SpotPlacementScore < Struct.new(
+      :region,
+      :availability_zone_id,
+      :score)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -56145,13 +58524,20 @@ module Aws::EC2
     #   `On-Demand`.
     #   @return [String]
     #
+    # @!attribute [rw] target_capacity_unit_type
+    #   The unit for the target capacity.
+    #
+    #   Default: `units` (translates to number of instances)
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecification AWS API Documentation
     #
     class TargetCapacitySpecification < Struct.new(
       :total_target_capacity,
       :on_demand_target_capacity,
       :spot_target_capacity,
-      :default_target_capacity_type)
+      :default_target_capacity_type,
+      :target_capacity_unit_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -56186,6 +58572,7 @@ module Aws::EC2
     #         on_demand_target_capacity: 1,
     #         spot_target_capacity: 1,
     #         default_target_capacity_type: "spot", # accepts spot, on-demand
+    #         target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
     #       }
     #
     # @!attribute [rw] total_target_capacity
@@ -56206,13 +58593,20 @@ module Aws::EC2
     #   `On-Demand`.
     #   @return [String]
     #
+    # @!attribute [rw] target_capacity_unit_type
+    #   The unit for the target capacity.
+    #
+    #   Default: `units` (translates to number of instances)
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecificationRequest AWS API Documentation
     #
     class TargetCapacitySpecificationRequest < Struct.new(
       :total_target_capacity,
       :on_demand_target_capacity,
       :spot_target_capacity,
-      :default_target_capacity_type)
+      :default_target_capacity_type,
+      :target_capacity_unit_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -56505,6 +58899,64 @@ module Aws::EC2
     #
     class TerminateInstancesResult < Struct.new(
       :terminating_instances)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of total local storage, in GB.
+    #
+    # @note When making an API call, you may pass TotalLocalStorageGB
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of total local storage, in GB. If this parameter
+    #   is not specified, there is no minimum limit.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of total local storage, in GB. If this parameter
+    #   is not specified, there is no maximum limit.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TotalLocalStorageGB AWS API Documentation
+    #
+    class TotalLocalStorageGB < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum amount of total local storage, in GB.
+    #
+    # @note When making an API call, you may pass TotalLocalStorageGBRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum amount of total local storage, in GB. To specify no
+    #   minimum limit, omit this parameter.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The maximum amount of total local storage, in GB. To specify no
+    #   maximum limit, omit this parameter.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TotalLocalStorageGBRequest AWS API Documentation
+    #
+    class TotalLocalStorageGBRequest < Struct.new(
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -58721,6 +61173,64 @@ module Aws::EC2
       :user_id,
       :vpc_id,
       :vpc_peering_connection_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum number of vCPUs.
+    #
+    # @note When making an API call, you may pass VCpuCountRange
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum number of vCPUs. If the value is `0`, there is no
+    #   minimum limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of vCPUs. If this parameter is not specified,
+    #   there is no maximum limit.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VCpuCountRange AWS API Documentation
+    #
+    class VCpuCountRange < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The minimum and maximum number of vCPUs.
+    #
+    # @note When making an API call, you may pass VCpuCountRangeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1, # required
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum number of vCPUs. To specify no minimum limit, specify
+    #   `0`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of vCPUs. To specify no maximum limit, omit this
+    #   parameter.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VCpuCountRangeRequest AWS API Documentation
+    #
+    class VCpuCountRangeRequest < Struct.new(
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end
