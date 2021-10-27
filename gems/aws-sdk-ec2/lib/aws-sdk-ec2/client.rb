@@ -5450,6 +5450,53 @@ module Aws::EC2
     #               spread_domain: "String",
     #               host_resource_group_arn: "String",
     #             },
+    #             instance_requirements: {
+    #               v_cpu_count: { # required
+    #                 min: 1, # required
+    #                 max: 1,
+    #               },
+    #               memory_mi_b: { # required
+    #                 min: 1, # required
+    #                 max: 1,
+    #               },
+    #               cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #               memory_gi_b_per_v_cpu: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               excluded_instance_types: ["ExcludedInstanceType"],
+    #               instance_generations: ["current"], # accepts current, previous
+    #               spot_max_price_percentage_over_lowest_price: 1,
+    #               on_demand_max_price_percentage_over_lowest_price: 1,
+    #               bare_metal: "included", # accepts included, required, excluded
+    #               burstable_performance: "included", # accepts included, required, excluded
+    #               require_hibernate_support: false,
+    #               network_interface_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               local_storage: "included", # accepts included, required, excluded
+    #               local_storage_types: ["hdd"], # accepts hdd, ssd
+    #               total_local_storage_gb: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               baseline_ebs_bandwidth_mbps: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #               accelerator_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_total_memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #       },
@@ -5459,6 +5506,7 @@ module Aws::EC2
     #       on_demand_target_capacity: 1,
     #       spot_target_capacity: 1,
     #       default_target_capacity_type: "spot", # accepts spot, on-demand
+    #       target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
     #     },
     #     terminate_instances_with_expiration: false,
     #     type: "request", # accepts request, maintain, instant
@@ -5493,6 +5541,42 @@ module Aws::EC2
     #   resp.errors[0].launch_template_and_overrides.overrides.weighted_capacity #=> Float
     #   resp.errors[0].launch_template_and_overrides.overrides.priority #=> Float
     #   resp.errors[0].launch_template_and_overrides.overrides.placement.group_name #=> String
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.cpu_manufacturers #=> Array
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.excluded_instance_types #=> Array
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.instance_generations #=> Array
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.network_interface_count.min #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.network_interface_count.max #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.local_storage_types #=> Array
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_types #=> Array
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.errors[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
@@ -5507,6 +5591,42 @@ module Aws::EC2
     #   resp.instances[0].launch_template_and_overrides.overrides.weighted_capacity #=> Float
     #   resp.instances[0].launch_template_and_overrides.overrides.priority #=> Float
     #   resp.instances[0].launch_template_and_overrides.overrides.placement.group_name #=> String
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.cpu_manufacturers #=> Array
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.excluded_instance_types #=> Array
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.instance_generations #=> Array
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.network_interface_count.min #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.network_interface_count.max #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.local_storage_types #=> Array
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_types #=> Array
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.instances[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.instances[0].instance_ids #=> Array
     #   resp.instances[0].instance_ids[0] #=> String
@@ -6600,6 +6720,53 @@ module Aws::EC2
     #       enclave_options: {
     #         enabled: false,
     #       },
+    #       instance_requirements: {
+    #         v_cpu_count: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         memory_mi_b: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #         memory_gi_b_per_v_cpu: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         excluded_instance_types: ["ExcludedInstanceType"],
+    #         instance_generations: ["current"], # accepts current, previous
+    #         spot_max_price_percentage_over_lowest_price: 1,
+    #         on_demand_max_price_percentage_over_lowest_price: 1,
+    #         bare_metal: "included", # accepts included, required, excluded
+    #         burstable_performance: "included", # accepts included, required, excluded
+    #         require_hibernate_support: false,
+    #         network_interface_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         local_storage: "included", # accepts included, required, excluded
+    #         local_storage_types: ["hdd"], # accepts hdd, ssd
+    #         total_local_storage_gb: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         baseline_ebs_bandwidth_mbps: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #         accelerator_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #         accelerator_total_memory_mi_b: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #       },
     #     },
     #     tag_specifications: [
     #       {
@@ -6899,6 +7066,53 @@ module Aws::EC2
     #       enclave_options: {
     #         enabled: false,
     #       },
+    #       instance_requirements: {
+    #         v_cpu_count: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         memory_mi_b: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #         memory_gi_b_per_v_cpu: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         excluded_instance_types: ["ExcludedInstanceType"],
+    #         instance_generations: ["current"], # accepts current, previous
+    #         spot_max_price_percentage_over_lowest_price: 1,
+    #         on_demand_max_price_percentage_over_lowest_price: 1,
+    #         bare_metal: "included", # accepts included, required, excluded
+    #         burstable_performance: "included", # accepts included, required, excluded
+    #         require_hibernate_support: false,
+    #         network_interface_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         local_storage: "included", # accepts included, required, excluded
+    #         local_storage_types: ["hdd"], # accepts hdd, ssd
+    #         total_local_storage_gb: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         baseline_ebs_bandwidth_mbps: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #         accelerator_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #         accelerator_total_memory_mi_b: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -7004,6 +7218,42 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.launch_template_version.launch_template_data.metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.launch_template_version.launch_template_data.enclave_options.enabled #=> Boolean
+    #   resp.launch_template_version.launch_template_data.instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.cpu_manufacturers #=> Array
+    #   resp.launch_template_version.launch_template_data.instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.launch_template_version.launch_template_data.instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.launch_template_version.launch_template_data.instance_requirements.excluded_instance_types #=> Array
+    #   resp.launch_template_version.launch_template_data.instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.launch_template_version.launch_template_data.instance_requirements.instance_generations #=> Array
+    #   resp.launch_template_version.launch_template_data.instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.launch_template_version.launch_template_data.instance_requirements.network_interface_count.min #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.network_interface_count.max #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.local_storage_types #=> Array
+    #   resp.launch_template_version.launch_template_data.instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.launch_template_version.launch_template_data.instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.launch_template_version.launch_template_data.instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_types #=> Array
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_count.min #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_count.max #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names #=> Array
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.warning.errors #=> Array
     #   resp.warning.errors[0].code #=> String
     #   resp.warning.errors[0].message #=> String
@@ -17417,10 +17667,47 @@ module Aws::EC2
     #   resp.fleets[0].launch_template_configs[0].overrides[0].weighted_capacity #=> Float
     #   resp.fleets[0].launch_template_configs[0].overrides[0].priority #=> Float
     #   resp.fleets[0].launch_template_configs[0].overrides[0].placement.group_name #=> String
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.cpu_manufacturers #=> Array
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.excluded_instance_types #=> Array
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.instance_generations #=> Array
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.network_interface_count.min #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.network_interface_count.max #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.local_storage_types #=> Array
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_types #=> Array
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.min #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.max #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names #=> Array
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].target_capacity_specification.total_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.on_demand_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.spot_target_capacity #=> Integer
     #   resp.fleets[0].target_capacity_specification.default_target_capacity_type #=> String, one of "spot", "on-demand"
+    #   resp.fleets[0].target_capacity_specification.target_capacity_unit_type #=> String, one of "vcpu", "memory-mib", "units"
     #   resp.fleets[0].terminate_instances_with_expiration #=> Boolean
     #   resp.fleets[0].type #=> String, one of "request", "maintain", "instant"
     #   resp.fleets[0].valid_from #=> Time
@@ -17454,6 +17741,42 @@ module Aws::EC2
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.weighted_capacity #=> Float
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.priority #=> Float
     #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.placement.group_name #=> String
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.cpu_manufacturers #=> Array
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.excluded_instance_types #=> Array
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.instance_generations #=> Array
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.network_interface_count.min #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.network_interface_count.max #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.local_storage_types #=> Array
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_types #=> Array
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.fleets[0].errors[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].errors[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.fleets[0].errors[0].error_code #=> String
     #   resp.fleets[0].errors[0].error_message #=> String
@@ -17468,6 +17791,42 @@ module Aws::EC2
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.weighted_capacity #=> Float
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.priority #=> Float
     #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.placement.group_name #=> String
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.cpu_manufacturers #=> Array
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.excluded_instance_types #=> Array
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.instance_generations #=> Array
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.network_interface_count.min #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.network_interface_count.max #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.local_storage_types #=> Array
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_types #=> Array
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.min #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_count.max #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names #=> Array
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.fleets[0].instances[0].launch_template_and_overrides.overrides.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.fleets[0].instances[0].lifecycle #=> String, one of "spot", "on-demand"
     #   resp.fleets[0].instances[0].instance_ids #=> Array
     #   resp.fleets[0].instances[0].instance_ids[0] #=> String
@@ -19896,7 +20255,10 @@ module Aws::EC2
     #     index for the instance in the launch group (for example, 0, 1, 2,
     #     and so on).
     #
-    #   * `launch-time` - The time when the instance was launched.
+    #   * `launch-time` - The time when the instance was launched, in the ISO
+    #     8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+    #     example, `2021-09-29T11:04:43.305Z`. You can use a wildcard (`*`),
+    #     for example, `2021-09-29T*`, which matches an entire day.
     #
     #   * `metadata-options.http-tokens` - The metadata request authorization
     #     state (`optional` \| `required`)
@@ -20918,6 +21280,42 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.launch_template_versions[0].launch_template_data.enclave_options.enabled #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.cpu_manufacturers #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.excluded_instance_types #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.instance_generations #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.network_interface_count.min #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.network_interface_count.max #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.local_storage_types #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_types #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_count.min #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_count.max #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -25651,6 +26049,42 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags[0].key #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags[0].value #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.cpu_manufacturers #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.excluded_instance_types #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.instance_generations #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.network_interface_count.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.network_interface_count.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.local_storage_types #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_types #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_count.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_count.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_name #=> String
@@ -25662,6 +26096,42 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].availability_zone #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].weighted_capacity #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].priority #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.cpu_manufacturers #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.excluded_instance_types #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.instance_generations #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.network_interface_count.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.network_interface_count.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.local_storage_types #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_types #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_count.max #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.target_capacity #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_target_capacity #=> Integer
@@ -25679,6 +26149,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.target_groups_config.target_groups[0].arn #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.instance_pools_to_use_count #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.context #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.target_capacity_unit_type #=> String, one of "vcpu", "memory-mib", "units"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications[0].resource_type #=> String, one of "capacity-reservation", "client-vpn-endpoint", "customer-gateway", "carrier-gateway", "dedicated-host", "dhcp-options", "egress-only-internet-gateway", "elastic-ip", "elastic-gpu", "export-image-task", "export-instance-task", "fleet", "fpga-image", "host-reservation", "image", "import-image-task", "import-snapshot-task", "instance", "instance-event-window", "internet-gateway", "ipv4pool-ec2", "ipv6pool-ec2", "key-pair", "launch-template", "local-gateway", "local-gateway-route-table", "local-gateway-virtual-interface", "local-gateway-virtual-interface-group", "local-gateway-route-table-vpc-association", "local-gateway-route-table-virtual-interface-group-association", "natgateway", "network-acl", "network-interface", "network-insights-analysis", "network-insights-path", "placement-group", "prefix-list", "replace-root-volume-task", "reserved-instances", "route-table", "security-group", "security-group-rule", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-connect-peer", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-endpoint", "vpc-endpoint-service", "vpc-peering-connection", "vpn-connection", "vpn-gateway", "vpc-flow-log"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications[0].tags #=> Array
@@ -32278,6 +32749,135 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Returns a list of instance types with the specified instance
+    # attributes. You can use the response to preview the instance types
+    # without launching instances. Note that the response does not consider
+    # capacity.
+    #
+    # When you specify multiple parameters, you get instance types that
+    # satisfy all of the specified parameters. If you specify multiple
+    # values for a parameter, you get instance types that satisfy any of the
+    # specified values.
+    #
+    # For more information, see [Preview instance types with specified
+    # attributes][1], [Attribute-based instance type selection for EC2
+    # Fleet][2], [Attribute-based instance type selection for Spot
+    # Fleet][3], and [Spot placement score][4] in the *Amazon EC2 User
+    # Guide*, and [Creating an Auto Scaling group using attribute-based
+    # instance type selection][5] in the *Amazon EC2 Auto Scaling User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html#spotfleet-get-instance-types-from-instance-requirements
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
+    # [5]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, Array<String>] :architecture_types
+    #   The processor architecture type.
+    #
+    # @option params [required, Array<String>] :virtualization_types
+    #   The virtualization type.
+    #
+    # @option params [required, Types::InstanceRequirementsRequest] :instance_requirements
+    #   The attributes required for the instance types.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and  1000. The default value is 1000. To retrieve the
+    #   remaining results, make another call with  the returned `NextToken`
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @return [Types::GetInstanceTypesFromInstanceRequirementsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInstanceTypesFromInstanceRequirementsResult#instance_types #instance_types} => Array&lt;Types::InstanceTypeInfoFromInstanceRequirements&gt;
+    #   * {Types::GetInstanceTypesFromInstanceRequirementsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_instance_types_from_instance_requirements({
+    #     dry_run: false,
+    #     architecture_types: ["i386"], # required, accepts i386, x86_64, arm64, x86_64_mac
+    #     virtualization_types: ["hvm"], # required, accepts hvm, paravirtual
+    #     instance_requirements: { # required
+    #       v_cpu_count: { # required
+    #         min: 1, # required
+    #         max: 1,
+    #       },
+    #       memory_mi_b: { # required
+    #         min: 1, # required
+    #         max: 1,
+    #       },
+    #       cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #       memory_gi_b_per_v_cpu: {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       },
+    #       excluded_instance_types: ["ExcludedInstanceType"],
+    #       instance_generations: ["current"], # accepts current, previous
+    #       spot_max_price_percentage_over_lowest_price: 1,
+    #       on_demand_max_price_percentage_over_lowest_price: 1,
+    #       bare_metal: "included", # accepts included, required, excluded
+    #       burstable_performance: "included", # accepts included, required, excluded
+    #       require_hibernate_support: false,
+    #       network_interface_count: {
+    #         min: 1,
+    #         max: 1,
+    #       },
+    #       local_storage: "included", # accepts included, required, excluded
+    #       local_storage_types: ["hdd"], # accepts hdd, ssd
+    #       total_local_storage_gb: {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       },
+    #       baseline_ebs_bandwidth_mbps: {
+    #         min: 1,
+    #         max: 1,
+    #       },
+    #       accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #       accelerator_count: {
+    #         min: 1,
+    #         max: 1,
+    #       },
+    #       accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #       accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #       accelerator_total_memory_mi_b: {
+    #         min: 1,
+    #         max: 1,
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_types #=> Array
+    #   resp.instance_types[0].instance_type #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTypesFromInstanceRequirements AWS API Documentation
+    #
+    # @overload get_instance_types_from_instance_requirements(params = {})
+    # @param [Hash] params ({})
+    def get_instance_types_from_instance_requirements(params = {}, options = {})
+      req = build_request(:get_instance_types_from_instance_requirements, params)
+      req.send_request(options)
+    end
+
     # Retrieves the configuration data of the specified instance. You can
     # use this data to create a launch template.
     #
@@ -32465,6 +33065,42 @@ module Aws::EC2
     #   resp.launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.launch_template_data.metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
     #   resp.launch_template_data.enclave_options.enabled #=> Boolean
+    #   resp.launch_template_data.instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.launch_template_data.instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.launch_template_data.instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.launch_template_data.instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.launch_template_data.instance_requirements.cpu_manufacturers #=> Array
+    #   resp.launch_template_data.instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services"
+    #   resp.launch_template_data.instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.launch_template_data.instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.launch_template_data.instance_requirements.excluded_instance_types #=> Array
+    #   resp.launch_template_data.instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.launch_template_data.instance_requirements.instance_generations #=> Array
+    #   resp.launch_template_data.instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.launch_template_data.instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.launch_template_data.instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.launch_template_data.instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.launch_template_data.instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.launch_template_data.instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.launch_template_data.instance_requirements.network_interface_count.min #=> Integer
+    #   resp.launch_template_data.instance_requirements.network_interface_count.max #=> Integer
+    #   resp.launch_template_data.instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.launch_template_data.instance_requirements.local_storage_types #=> Array
+    #   resp.launch_template_data.instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.launch_template_data.instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.launch_template_data.instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.launch_template_data.instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.launch_template_data.instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.launch_template_data.instance_requirements.accelerator_types #=> Array
+    #   resp.launch_template_data.instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference"
+    #   resp.launch_template_data.instance_requirements.accelerator_count.min #=> Integer
+    #   resp.launch_template_data.instance_requirements.accelerator_count.max #=> Integer
+    #   resp.launch_template_data.instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.launch_template_data.instance_requirements.accelerator_manufacturers[0] #=> String, one of "nvidia", "amd", "amazon-web-services", "xilinx"
+    #   resp.launch_template_data.instance_requirements.accelerator_names #=> Array
+    #   resp.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
+    #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -32766,6 +33402,162 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_serial_console_access_status(params = {}, options = {})
       req = build_request(:get_serial_console_access_status, params)
+      req.send_request(options)
+    end
+
+    # Calculates the Spot placement score for a Region or Availability Zone
+    # based on the specified target capacity and compute requirements.
+    #
+    # You can specify your compute requirements either by using
+    # `InstanceRequirementsWithMetadata` and letting Amazon EC2 choose the
+    # optimal instance types to fulfill your Spot request, or you can
+    # specify the instance types by using `InstanceTypes`.
+    #
+    # For more information, see [Spot placement score][1] in the Amazon EC2
+    # User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
+    #
+    # @option params [Array<String>] :instance_types
+    #   The instance types. We recommend that you specify at least three
+    #   instance types. If you specify one or two instance types, or specify
+    #   variations of a single instance type (for example, an `m3.xlarge` with
+    #   and without instance storage), the returned placement score will
+    #   always be low.
+    #
+    #   If you specify `InstanceTypes`, you can't specify
+    #   `InstanceRequirementsWithMetadata`.
+    #
+    # @option params [required, Integer] :target_capacity
+    #   The target capacity.
+    #
+    # @option params [String] :target_capacity_unit_type
+    #   The unit for the target capacity.
+    #
+    #   Default: `units` (translates to number of instances)
+    #
+    # @option params [Boolean] :single_availability_zone
+    #   Specify `true` so that the response returns a list of scored
+    #   Availability Zones. Otherwise, the response returns a list of scored
+    #   Regions.
+    #
+    #   A list of scored Availability Zones is useful if you want to launch
+    #   all of your Spot capacity into a single Availability Zone.
+    #
+    # @option params [Array<String>] :region_names
+    #   The Regions used to narrow down the list of Regions to be scored.
+    #   Enter the Region code, for example, `us-east-1`.
+    #
+    # @option params [Types::InstanceRequirementsWithMetadataRequest] :instance_requirements_with_metadata
+    #   The attributes for the instance types. When you specify instance
+    #   attributes, Amazon EC2 will identify instance types with those
+    #   attributes.
+    #
+    #   If you specify `InstanceRequirementsWithMetadata`, you can't specify
+    #   `InstanceTypes`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and  1000. The default value is 1000. To retrieve the
+    #   remaining results, make another call with  the returned `NextToken`
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @return [Types::GetSpotPlacementScoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSpotPlacementScoresResult#spot_placement_scores #spot_placement_scores} => Array&lt;Types::SpotPlacementScore&gt;
+    #   * {Types::GetSpotPlacementScoresResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_spot_placement_scores({
+    #     instance_types: ["String"],
+    #     target_capacity: 1, # required
+    #     target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
+    #     single_availability_zone: false,
+    #     region_names: ["String"],
+    #     instance_requirements_with_metadata: {
+    #       architecture_types: ["i386"], # accepts i386, x86_64, arm64, x86_64_mac
+    #       virtualization_types: ["hvm"], # accepts hvm, paravirtual
+    #       instance_requirements: {
+    #         v_cpu_count: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         memory_mi_b: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #         memory_gi_b_per_v_cpu: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         excluded_instance_types: ["ExcludedInstanceType"],
+    #         instance_generations: ["current"], # accepts current, previous
+    #         spot_max_price_percentage_over_lowest_price: 1,
+    #         on_demand_max_price_percentage_over_lowest_price: 1,
+    #         bare_metal: "included", # accepts included, required, excluded
+    #         burstable_performance: "included", # accepts included, required, excluded
+    #         require_hibernate_support: false,
+    #         network_interface_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         local_storage: "included", # accepts included, required, excluded
+    #         local_storage_types: ["hdd"], # accepts hdd, ssd
+    #         total_local_storage_gb: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         baseline_ebs_bandwidth_mbps: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #         accelerator_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #         accelerator_total_memory_mi_b: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #       },
+    #     },
+    #     dry_run: false,
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.spot_placement_scores #=> Array
+    #   resp.spot_placement_scores[0].region #=> String
+    #   resp.spot_placement_scores[0].availability_zone_id #=> String
+    #   resp.spot_placement_scores[0].score #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSpotPlacementScores AWS API Documentation
+    #
+    # @overload get_spot_placement_scores(params = {})
+    # @param [Hash] params ({})
+    def get_spot_placement_scores(params = {}, options = {})
+      req = build_request(:get_spot_placement_scores, params)
       req.send_request(options)
     end
 
@@ -34261,6 +35053,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [String] :additional_info
+    #   Reserved for future use.
+    #
     # @return [Types::ModifyCapacityReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyCapacityReservationResult#return #return} => Boolean
@@ -34274,6 +35069,7 @@ module Aws::EC2
     #     end_date_type: "unlimited", # accepts unlimited, limited
     #     accept: false,
     #     dry_run: false,
+    #     additional_info: "String",
     #   })
     #
     # @example Response structure
@@ -34712,6 +35508,53 @@ module Aws::EC2
     #               spread_domain: "String",
     #               host_resource_group_arn: "String",
     #             },
+    #             instance_requirements: {
+    #               v_cpu_count: { # required
+    #                 min: 1, # required
+    #                 max: 1,
+    #               },
+    #               memory_mi_b: { # required
+    #                 min: 1, # required
+    #                 max: 1,
+    #               },
+    #               cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #               memory_gi_b_per_v_cpu: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               excluded_instance_types: ["ExcludedInstanceType"],
+    #               instance_generations: ["current"], # accepts current, previous
+    #               spot_max_price_percentage_over_lowest_price: 1,
+    #               on_demand_max_price_percentage_over_lowest_price: 1,
+    #               bare_metal: "included", # accepts included, required, excluded
+    #               burstable_performance: "included", # accepts included, required, excluded
+    #               require_hibernate_support: false,
+    #               network_interface_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               local_storage: "included", # accepts included, required, excluded
+    #               local_storage_types: ["hdd"], # accepts hdd, ssd
+    #               total_local_storage_gb: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               baseline_ebs_bandwidth_mbps: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #               accelerator_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_total_memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #       },
@@ -34722,6 +35565,7 @@ module Aws::EC2
     #       on_demand_target_capacity: 1,
     #       spot_target_capacity: 1,
     #       default_target_capacity_type: "spot", # accepts spot, on-demand
+    #       target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
     #     },
     #     context: "String",
     #   })
@@ -36493,6 +37337,53 @@ module Aws::EC2
     #             availability_zone: "String",
     #             weighted_capacity: 1.0,
     #             priority: 1.0,
+    #             instance_requirements: {
+    #               v_cpu_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #               memory_gi_b_per_v_cpu: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               excluded_instance_types: ["ExcludedInstanceType"],
+    #               instance_generations: ["current"], # accepts current, previous
+    #               spot_max_price_percentage_over_lowest_price: 1,
+    #               on_demand_max_price_percentage_over_lowest_price: 1,
+    #               bare_metal: "included", # accepts included, required, excluded
+    #               burstable_performance: "included", # accepts included, required, excluded
+    #               require_hibernate_support: false,
+    #               network_interface_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               local_storage: "included", # accepts included, required, excluded
+    #               local_storage_types: ["hdd"], # accepts hdd, ssd
+    #               total_local_storage_gb: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               baseline_ebs_bandwidth_mbps: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #               accelerator_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_total_memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #       },
@@ -40437,6 +41328,53 @@ module Aws::EC2
     #               ],
     #             },
     #           ],
+    #           instance_requirements: {
+    #             v_cpu_count: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             memory_mi_b: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #             memory_gi_b_per_v_cpu: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             excluded_instance_types: ["ExcludedInstanceType"],
+    #             instance_generations: ["current"], # accepts current, previous
+    #             spot_max_price_percentage_over_lowest_price: 1,
+    #             on_demand_max_price_percentage_over_lowest_price: 1,
+    #             bare_metal: "included", # accepts included, required, excluded
+    #             burstable_performance: "included", # accepts included, required, excluded
+    #             require_hibernate_support: false,
+    #             network_interface_count: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             local_storage: "included", # accepts included, required, excluded
+    #             local_storage_types: ["hdd"], # accepts hdd, ssd
+    #             total_local_storage_gb: {
+    #               min: 1.0,
+    #               max: 1.0,
+    #             },
+    #             baseline_ebs_bandwidth_mbps: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #             accelerator_count: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #             accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #             accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #             accelerator_total_memory_mi_b: {
+    #               min: 1,
+    #               max: 1,
+    #             },
+    #           },
     #         },
     #       ],
     #       launch_template_configs: [
@@ -40454,6 +41392,53 @@ module Aws::EC2
     #               availability_zone: "String",
     #               weighted_capacity: 1.0,
     #               priority: 1.0,
+    #               instance_requirements: {
+    #                 v_cpu_count: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 memory_mi_b: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                 memory_gi_b_per_v_cpu: {
+    #                   min: 1.0,
+    #                   max: 1.0,
+    #                 },
+    #                 excluded_instance_types: ["ExcludedInstanceType"],
+    #                 instance_generations: ["current"], # accepts current, previous
+    #                 spot_max_price_percentage_over_lowest_price: 1,
+    #                 on_demand_max_price_percentage_over_lowest_price: 1,
+    #                 bare_metal: "included", # accepts included, required, excluded
+    #                 burstable_performance: "included", # accepts included, required, excluded
+    #                 require_hibernate_support: false,
+    #                 network_interface_count: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 local_storage: "included", # accepts included, required, excluded
+    #                 local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                 total_local_storage_gb: {
+    #                   min: 1.0,
+    #                   max: 1.0,
+    #                 },
+    #                 baseline_ebs_bandwidth_mbps: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                 accelerator_count: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                 accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                 accelerator_total_memory_mi_b: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #               },
     #             },
     #           ],
     #         },
@@ -40487,6 +41472,7 @@ module Aws::EC2
     #       },
     #       instance_pools_to_use_count: 1,
     #       context: "String",
+    #       target_capacity_unit_type: "vcpu", # accepts vcpu, memory-mib, units
     #       tag_specifications: [
     #         {
     #           resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-endpoint, vpc-endpoint-service, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -44193,7 +45179,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.272.0'
+      context[:gem_version] = '1.273.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

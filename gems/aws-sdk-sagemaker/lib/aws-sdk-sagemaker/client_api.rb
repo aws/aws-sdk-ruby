@@ -125,6 +125,11 @@ module Aws::SageMaker
     AutoMLSortOrder = Shapes::StringShape.new(name: 'AutoMLSortOrder')
     AutoRollbackConfig = Shapes::StructureShape.new(name: 'AutoRollbackConfig')
     AwsManagedHumanLoopRequestSource = Shapes::StringShape.new(name: 'AwsManagedHumanLoopRequestSource')
+    BatchDescribeModelPackageError = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageError')
+    BatchDescribeModelPackageErrorMap = Shapes::MapShape.new(name: 'BatchDescribeModelPackageErrorMap')
+    BatchDescribeModelPackageInput = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageInput')
+    BatchDescribeModelPackageOutput = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageOutput')
+    BatchDescribeModelPackageSummary = Shapes::StructureShape.new(name: 'BatchDescribeModelPackageSummary')
     BatchStrategy = Shapes::StringShape.new(name: 'BatchStrategy')
     Bias = Shapes::StructureShape.new(name: 'Bias')
     BillableTimeInSeconds = Shapes::IntegerShape.new(name: 'BillableTimeInSeconds')
@@ -312,6 +317,10 @@ module Aws::SageMaker
     CsvContentTypes = Shapes::ListShape.new(name: 'CsvContentTypes')
     CustomImage = Shapes::StructureShape.new(name: 'CustomImage')
     CustomImages = Shapes::ListShape.new(name: 'CustomImages')
+    CustomerMetadataKey = Shapes::StringShape.new(name: 'CustomerMetadataKey')
+    CustomerMetadataKeyList = Shapes::ListShape.new(name: 'CustomerMetadataKeyList')
+    CustomerMetadataMap = Shapes::MapShape.new(name: 'CustomerMetadataMap')
+    CustomerMetadataValue = Shapes::StringShape.new(name: 'CustomerMetadataValue')
     DataCaptureConfig = Shapes::StructureShape.new(name: 'DataCaptureConfig')
     DataCaptureConfigSummary = Shapes::StructureShape.new(name: 'DataCaptureConfigSummary')
     DataCatalogConfig = Shapes::StructureShape.new(name: 'DataCatalogConfig')
@@ -922,6 +931,7 @@ module Aws::SageMaker
     ModelNameContains = Shapes::StringShape.new(name: 'ModelNameContains')
     ModelPackage = Shapes::StructureShape.new(name: 'ModelPackage')
     ModelPackageArn = Shapes::StringShape.new(name: 'ModelPackageArn')
+    ModelPackageArnList = Shapes::ListShape.new(name: 'ModelPackageArnList')
     ModelPackageContainerDefinition = Shapes::StructureShape.new(name: 'ModelPackageContainerDefinition')
     ModelPackageContainerDefinitionList = Shapes::ListShape.new(name: 'ModelPackageContainerDefinitionList')
     ModelPackageGroup = Shapes::StructureShape.new(name: 'ModelPackageGroup')
@@ -935,6 +945,7 @@ module Aws::SageMaker
     ModelPackageStatusDetails = Shapes::StructureShape.new(name: 'ModelPackageStatusDetails')
     ModelPackageStatusItem = Shapes::StructureShape.new(name: 'ModelPackageStatusItem')
     ModelPackageStatusItemList = Shapes::ListShape.new(name: 'ModelPackageStatusItemList')
+    ModelPackageSummaries = Shapes::MapShape.new(name: 'ModelPackageSummaries')
     ModelPackageSummary = Shapes::StructureShape.new(name: 'ModelPackageSummary')
     ModelPackageSummaryList = Shapes::ListShape.new(name: 'ModelPackageSummaryList')
     ModelPackageType = Shapes::StringShape.new(name: 'ModelPackageType')
@@ -1232,6 +1243,7 @@ module Aws::SageMaker
     ServiceCatalogEntityId = Shapes::StringShape.new(name: 'ServiceCatalogEntityId')
     ServiceCatalogProvisionedProductDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisionedProductDetails')
     ServiceCatalogProvisioningDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisioningDetails')
+    ServiceCatalogProvisioningUpdateDetails = Shapes::StructureShape.new(name: 'ServiceCatalogProvisioningUpdateDetails')
     SessionExpirationDurationInSeconds = Shapes::IntegerShape.new(name: 'SessionExpirationDurationInSeconds')
     SharingSettings = Shapes::StructureShape.new(name: 'SharingSettings')
     ShuffleConfig = Shapes::StructureShape.new(name: 'ShuffleConfig')
@@ -1435,6 +1447,8 @@ module Aws::SageMaker
     UpdatePipelineExecutionResponse = Shapes::StructureShape.new(name: 'UpdatePipelineExecutionResponse')
     UpdatePipelineRequest = Shapes::StructureShape.new(name: 'UpdatePipelineRequest')
     UpdatePipelineResponse = Shapes::StructureShape.new(name: 'UpdatePipelineResponse')
+    UpdateProjectInput = Shapes::StructureShape.new(name: 'UpdateProjectInput')
+    UpdateProjectOutput = Shapes::StructureShape.new(name: 'UpdateProjectOutput')
     UpdateTrainingJobRequest = Shapes::StructureShape.new(name: 'UpdateTrainingJobRequest')
     UpdateTrainingJobResponse = Shapes::StructureShape.new(name: 'UpdateTrainingJobResponse')
     UpdateTrialComponentRequest = Shapes::StructureShape.new(name: 'UpdateTrialComponentRequest')
@@ -1741,6 +1755,30 @@ module Aws::SageMaker
 
     AutoRollbackConfig.add_member(:alarms, Shapes::ShapeRef.new(shape: AlarmList, location_name: "Alarms"))
     AutoRollbackConfig.struct_class = Types::AutoRollbackConfig
+
+    BatchDescribeModelPackageError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorCode"))
+    BatchDescribeModelPackageError.add_member(:error_response, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ErrorResponse"))
+    BatchDescribeModelPackageError.struct_class = Types::BatchDescribeModelPackageError
+
+    BatchDescribeModelPackageErrorMap.key = Shapes::ShapeRef.new(shape: ModelPackageArn)
+    BatchDescribeModelPackageErrorMap.value = Shapes::ShapeRef.new(shape: BatchDescribeModelPackageError)
+
+    BatchDescribeModelPackageInput.add_member(:model_package_arn_list, Shapes::ShapeRef.new(shape: ModelPackageArnList, required: true, location_name: "ModelPackageArnList"))
+    BatchDescribeModelPackageInput.struct_class = Types::BatchDescribeModelPackageInput
+
+    BatchDescribeModelPackageOutput.add_member(:model_package_summaries, Shapes::ShapeRef.new(shape: ModelPackageSummaries, location_name: "ModelPackageSummaries"))
+    BatchDescribeModelPackageOutput.add_member(:batch_describe_model_package_error_map, Shapes::ShapeRef.new(shape: BatchDescribeModelPackageErrorMap, location_name: "BatchDescribeModelPackageErrorMap"))
+    BatchDescribeModelPackageOutput.struct_class = Types::BatchDescribeModelPackageOutput
+
+    BatchDescribeModelPackageSummary.add_member(:model_package_group_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelPackageGroupName"))
+    BatchDescribeModelPackageSummary.add_member(:model_package_version, Shapes::ShapeRef.new(shape: ModelPackageVersion, location_name: "ModelPackageVersion"))
+    BatchDescribeModelPackageSummary.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
+    BatchDescribeModelPackageSummary.add_member(:model_package_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ModelPackageDescription"))
+    BatchDescribeModelPackageSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
+    BatchDescribeModelPackageSummary.add_member(:inference_specification, Shapes::ShapeRef.new(shape: InferenceSpecification, required: true, location_name: "InferenceSpecification"))
+    BatchDescribeModelPackageSummary.add_member(:model_package_status, Shapes::ShapeRef.new(shape: ModelPackageStatus, required: true, location_name: "ModelPackageStatus"))
+    BatchDescribeModelPackageSummary.add_member(:model_approval_status, Shapes::ShapeRef.new(shape: ModelApprovalStatus, location_name: "ModelApprovalStatus"))
+    BatchDescribeModelPackageSummary.struct_class = Types::BatchDescribeModelPackageSummary
 
     Bias.add_member(:report, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "Report"))
     Bias.struct_class = Types::Bias
@@ -2218,7 +2256,7 @@ module Aws::SageMaker
     CreateModelPackageGroupOutput.struct_class = Types::CreateModelPackageGroupOutput
 
     CreateModelPackageInput.add_member(:model_package_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "ModelPackageName"))
-    CreateModelPackageInput.add_member(:model_package_group_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "ModelPackageGroupName"))
+    CreateModelPackageInput.add_member(:model_package_group_name, Shapes::ShapeRef.new(shape: ArnOrName, location_name: "ModelPackageGroupName"))
     CreateModelPackageInput.add_member(:model_package_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ModelPackageDescription"))
     CreateModelPackageInput.add_member(:inference_specification, Shapes::ShapeRef.new(shape: InferenceSpecification, location_name: "InferenceSpecification"))
     CreateModelPackageInput.add_member(:validation_specification, Shapes::ShapeRef.new(shape: ModelPackageValidationSpecification, location_name: "ValidationSpecification"))
@@ -2229,6 +2267,7 @@ module Aws::SageMaker
     CreateModelPackageInput.add_member(:metadata_properties, Shapes::ShapeRef.new(shape: MetadataProperties, location_name: "MetadataProperties"))
     CreateModelPackageInput.add_member(:model_metrics, Shapes::ShapeRef.new(shape: ModelMetrics, location_name: "ModelMetrics"))
     CreateModelPackageInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateModelPackageInput.add_member(:customer_metadata_properties, Shapes::ShapeRef.new(shape: CustomerMetadataMap, location_name: "CustomerMetadataProperties"))
     CreateModelPackageInput.struct_class = Types::CreateModelPackageInput
 
     CreateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -2458,6 +2497,11 @@ module Aws::SageMaker
     CustomImage.struct_class = Types::CustomImage
 
     CustomImages.member = Shapes::ShapeRef.new(shape: CustomImage)
+
+    CustomerMetadataKeyList.member = Shapes::ShapeRef.new(shape: CustomerMetadataKey)
+
+    CustomerMetadataMap.key = Shapes::ShapeRef.new(shape: CustomerMetadataKey)
+    CustomerMetadataMap.value = Shapes::ShapeRef.new(shape: CustomerMetadataValue)
 
     DataCaptureConfig.add_member(:enable_capture, Shapes::ShapeRef.new(shape: EnableCapture, location_name: "EnableCapture"))
     DataCaptureConfig.add_member(:initial_sampling_percentage, Shapes::ShapeRef.new(shape: SamplingPercentage, required: true, location_name: "InitialSamplingPercentage"))
@@ -3191,6 +3235,7 @@ module Aws::SageMaker
     DescribeModelPackageOutput.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeModelPackageOutput.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
     DescribeModelPackageOutput.add_member(:approval_description, Shapes::ShapeRef.new(shape: ApprovalDescription, location_name: "ApprovalDescription"))
+    DescribeModelPackageOutput.add_member(:customer_metadata_properties, Shapes::ShapeRef.new(shape: CustomerMetadataMap, location_name: "CustomerMetadataProperties"))
     DescribeModelPackageOutput.struct_class = Types::DescribeModelPackageOutput
 
     DescribeModelQualityJobDefinitionRequest.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: MonitoringJobDefinitionName, required: true, location_name: "JobDefinitionName"))
@@ -3339,6 +3384,8 @@ module Aws::SageMaker
     DescribeProjectOutput.add_member(:project_status, Shapes::ShapeRef.new(shape: ProjectStatus, required: true, location_name: "ProjectStatus"))
     DescribeProjectOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
     DescribeProjectOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    DescribeProjectOutput.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeProjectOutput.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
     DescribeProjectOutput.struct_class = Types::DescribeProjectOutput
 
     DescribeStudioLifecycleConfigRequest.add_member(:studio_lifecycle_config_name, Shapes::ShapeRef.new(shape: StudioLifecycleConfigName, required: true, location_name: "StudioLifecycleConfigName"))
@@ -4964,7 +5011,10 @@ module Aws::SageMaker
     ModelPackage.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
     ModelPackage.add_member(:approval_description, Shapes::ShapeRef.new(shape: ApprovalDescription, location_name: "ApprovalDescription"))
     ModelPackage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ModelPackage.add_member(:customer_metadata_properties, Shapes::ShapeRef.new(shape: CustomerMetadataMap, location_name: "CustomerMetadataProperties"))
     ModelPackage.struct_class = Types::ModelPackage
+
+    ModelPackageArnList.member = Shapes::ShapeRef.new(shape: ModelPackageArn)
 
     ModelPackageContainerDefinition.add_member(:container_hostname, Shapes::ShapeRef.new(shape: ContainerHostname, location_name: "ContainerHostname"))
     ModelPackageContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "Image"))
@@ -5004,6 +5054,9 @@ module Aws::SageMaker
     ModelPackageStatusItem.struct_class = Types::ModelPackageStatusItem
 
     ModelPackageStatusItemList.member = Shapes::ShapeRef.new(shape: ModelPackageStatusItem)
+
+    ModelPackageSummaries.key = Shapes::ShapeRef.new(shape: ModelPackageArn)
+    ModelPackageSummaries.value = Shapes::ShapeRef.new(shape: BatchDescribeModelPackageSummary)
 
     ModelPackageSummary.add_member(:model_package_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelPackageName"))
     ModelPackageSummary.add_member(:model_package_group_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "ModelPackageGroupName"))
@@ -5565,6 +5618,8 @@ module Aws::SageMaker
     Project.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
     Project.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     Project.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Project.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    Project.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
     Project.struct_class = Types::Project
 
     ProjectSummary.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectEntityName, required: true, location_name: "ProjectName"))
@@ -5776,6 +5831,10 @@ module Aws::SageMaker
     ServiceCatalogProvisioningDetails.add_member(:path_id, Shapes::ShapeRef.new(shape: ServiceCatalogEntityId, location_name: "PathId"))
     ServiceCatalogProvisioningDetails.add_member(:provisioning_parameters, Shapes::ShapeRef.new(shape: ProvisioningParameters, location_name: "ProvisioningParameters"))
     ServiceCatalogProvisioningDetails.struct_class = Types::ServiceCatalogProvisioningDetails
+
+    ServiceCatalogProvisioningUpdateDetails.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: ServiceCatalogEntityId, location_name: "ProvisioningArtifactId"))
+    ServiceCatalogProvisioningUpdateDetails.add_member(:provisioning_parameters, Shapes::ShapeRef.new(shape: ProvisioningParameters, location_name: "ProvisioningParameters"))
+    ServiceCatalogProvisioningUpdateDetails.struct_class = Types::ServiceCatalogProvisioningUpdateDetails
 
     SharingSettings.add_member(:notebook_output_option, Shapes::ShapeRef.new(shape: NotebookOutputOption, location_name: "NotebookOutputOption"))
     SharingSettings.add_member(:s3_output_path, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3OutputPath"))
@@ -6293,8 +6352,10 @@ module Aws::SageMaker
     UpdateImageResponse.struct_class = Types::UpdateImageResponse
 
     UpdateModelPackageInput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
-    UpdateModelPackageInput.add_member(:model_approval_status, Shapes::ShapeRef.new(shape: ModelApprovalStatus, required: true, location_name: "ModelApprovalStatus"))
+    UpdateModelPackageInput.add_member(:model_approval_status, Shapes::ShapeRef.new(shape: ModelApprovalStatus, location_name: "ModelApprovalStatus"))
     UpdateModelPackageInput.add_member(:approval_description, Shapes::ShapeRef.new(shape: ApprovalDescription, location_name: "ApprovalDescription"))
+    UpdateModelPackageInput.add_member(:customer_metadata_properties, Shapes::ShapeRef.new(shape: CustomerMetadataMap, location_name: "CustomerMetadataProperties"))
+    UpdateModelPackageInput.add_member(:customer_metadata_properties_to_remove, Shapes::ShapeRef.new(shape: CustomerMetadataKeyList, location_name: "CustomerMetadataPropertiesToRemove"))
     UpdateModelPackageInput.struct_class = Types::UpdateModelPackageInput
 
     UpdateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -6348,6 +6409,15 @@ module Aws::SageMaker
 
     UpdatePipelineResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
     UpdatePipelineResponse.struct_class = Types::UpdatePipelineResponse
+
+    UpdateProjectInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectEntityName, required: true, location_name: "ProjectName"))
+    UpdateProjectInput.add_member(:project_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ProjectDescription"))
+    UpdateProjectInput.add_member(:service_catalog_provisioning_update_details, Shapes::ShapeRef.new(shape: ServiceCatalogProvisioningUpdateDetails, location_name: "ServiceCatalogProvisioningUpdateDetails"))
+    UpdateProjectInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    UpdateProjectInput.struct_class = Types::UpdateProjectInput
+
+    UpdateProjectOutput.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    UpdateProjectOutput.struct_class = Types::UpdateProjectOutput
 
     UpdateTrainingJobRequest.add_member(:training_job_name, Shapes::ShapeRef.new(shape: TrainingJobName, required: true, location_name: "TrainingJobName"))
     UpdateTrainingJobRequest.add_member(:profiler_config, Shapes::ShapeRef.new(shape: ProfilerConfigForUpdate, location_name: "ProfilerConfig"))
@@ -6510,6 +6580,14 @@ module Aws::SageMaker
         o.output = Shapes::ShapeRef.new(shape: AssociateTrialComponentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:batch_describe_model_package, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDescribeModelPackage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchDescribeModelPackageInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchDescribeModelPackageOutput)
       end)
 
       api.add_operation(:create_action, Seahorse::Model::Operation.new.tap do |o|
@@ -8887,6 +8965,14 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: UpdatePipelineExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdatePipelineExecutionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:update_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateProjectInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateProjectOutput)
       end)
 
       api.add_operation(:update_training_job, Seahorse::Model::Operation.new.tap do |o|

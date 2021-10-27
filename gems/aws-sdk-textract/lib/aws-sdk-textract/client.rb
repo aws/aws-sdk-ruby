@@ -922,14 +922,148 @@ module Aws::Textract
       req.send_request(options)
     end
 
+    # Gets the results for an Amazon Textract asynchronous operation that
+    # analyzes invoices and receipts. Amazon Textract finds contact
+    # information, items purchased, and vendor name, from input invoices and
+    # receipts.
+    #
+    # You start asynchronous invoice/receipt analysis by calling
+    # StartExpenseAnalysis, which returns a job identifier (`JobId`). Upon
+    # completion of the invoice/receipt analysis, Amazon Textract publishes
+    # the completion status to the Amazon Simple Notification Service
+    # (Amazon SNS) topic. This topic must be registered in the initial call
+    # to `StartExpenseAnalysis`. To get the results of the invoice/receipt
+    # analysis operation, first ensure that the status value published to
+    # the Amazon SNS topic is `SUCCEEDED`. If so, call `GetExpenseAnalysis`,
+    # and pass the job identifier (`JobId`) from the initial call to
+    # `StartExpenseAnalysis`.
+    #
+    # Use the MaxResults parameter to limit the number of blocks that are
+    # returned. If there are more results than specified in `MaxResults`,
+    # the value of `NextToken` in the operation response contains a
+    # pagination token for getting the next set of results. To get the next
+    # page of results, call `GetExpenseAnalysis`, and populate the
+    # `NextToken` request parameter with the token value that's returned
+    # from the previous call to `GetExpenseAnalysis`.
+    #
+    # For more information, see [Analyzing Invoices and Receipts][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/invoices-receipts.html
+    #
+    # @option params [required, String] :job_id
+    #   A unique identifier for the text detection job. The `JobId` is
+    #   returned from `StartExpenseAnalysis`. A `JobId` value is only valid
+    #   for 7 days.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 20. If you specify a value greater
+    #   than 20, a maximum of 20 results is returned. The default value is 20.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there are more blocks
+    #   to retrieve), Amazon Textract returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of blocks.
+    #
+    # @return [Types::GetExpenseAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExpenseAnalysisResponse#document_metadata #document_metadata} => Types::DocumentMetadata
+    #   * {Types::GetExpenseAnalysisResponse#job_status #job_status} => String
+    #   * {Types::GetExpenseAnalysisResponse#next_token #next_token} => String
+    #   * {Types::GetExpenseAnalysisResponse#expense_documents #expense_documents} => Array&lt;Types::ExpenseDocument&gt;
+    #   * {Types::GetExpenseAnalysisResponse#warnings #warnings} => Array&lt;Types::Warning&gt;
+    #   * {Types::GetExpenseAnalysisResponse#status_message #status_message} => String
+    #   * {Types::GetExpenseAnalysisResponse#analyze_expense_model_version #analyze_expense_model_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_expense_analysis({
+    #     job_id: "JobId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.document_metadata.pages #=> Integer
+    #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "PARTIAL_SUCCESS"
+    #   resp.next_token #=> String
+    #   resp.expense_documents #=> Array
+    #   resp.expense_documents[0].expense_index #=> Integer
+    #   resp.expense_documents[0].summary_fields #=> Array
+    #   resp.expense_documents[0].summary_fields[0].type.text #=> String
+    #   resp.expense_documents[0].summary_fields[0].type.confidence #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.text #=> String
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.bounding_box.width #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.bounding_box.height #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.bounding_box.left #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.bounding_box.top #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.polygon #=> Array
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.polygon[0].x #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.geometry.polygon[0].y #=> Float
+    #   resp.expense_documents[0].summary_fields[0].label_detection.confidence #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.text #=> String
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.bounding_box.width #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.bounding_box.height #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.bounding_box.left #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.bounding_box.top #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.polygon #=> Array
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.polygon[0].x #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.geometry.polygon[0].y #=> Float
+    #   resp.expense_documents[0].summary_fields[0].value_detection.confidence #=> Float
+    #   resp.expense_documents[0].summary_fields[0].page_number #=> Integer
+    #   resp.expense_documents[0].line_item_groups #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_item_group_index #=> Integer
+    #   resp.expense_documents[0].line_item_groups[0].line_items #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].type.text #=> String
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].type.confidence #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.text #=> String
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.bounding_box.width #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.bounding_box.height #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.bounding_box.left #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.bounding_box.top #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.polygon #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.polygon[0].x #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.geometry.polygon[0].y #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].label_detection.confidence #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.text #=> String
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.bounding_box.width #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.bounding_box.height #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.bounding_box.left #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.bounding_box.top #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.polygon #=> Array
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.polygon[0].x #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.geometry.polygon[0].y #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].value_detection.confidence #=> Float
+    #   resp.expense_documents[0].line_item_groups[0].line_items[0].line_item_expense_fields[0].page_number #=> Integer
+    #   resp.warnings #=> Array
+    #   resp.warnings[0].error_code #=> String
+    #   resp.warnings[0].pages #=> Array
+    #   resp.warnings[0].pages[0] #=> Integer
+    #   resp.status_message #=> String
+    #   resp.analyze_expense_model_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetExpenseAnalysis AWS API Documentation
+    #
+    # @overload get_expense_analysis(params = {})
+    # @param [Hash] params ({})
+    def get_expense_analysis(params = {}, options = {})
+      req = build_request(:get_expense_analysis, params)
+      req.send_request(options)
+    end
+
     # Starts the asynchronous analysis of an input document for
     # relationships between detected items such as key-value pairs, tables,
     # and selection elements.
     #
     # `StartDocumentAnalysis` can analyze text in documents that are in
-    # JPEG, PNG, and PDF format. The documents are stored in an Amazon S3
-    # bucket. Use DocumentLocation to specify the bucket name and file name
-    # of the document.
+    # JPEG, PNG, TIFF, and PDF format. The documents are stored in an Amazon
+    # S3 bucket. Use DocumentLocation to specify the bucket name and file
+    # name of the document.
     #
     # `StartDocumentAnalysis` returns a job identifier (`JobId`) that you
     # use to get the results of the operation. When text analysis is
@@ -1037,9 +1171,9 @@ module Aws::Textract
     # text.
     #
     # `StartDocumentTextDetection` can analyze text in documents that are in
-    # JPEG, PNG, and PDF format. The documents are stored in an Amazon S3
-    # bucket. Use DocumentLocation to specify the bucket name and file name
-    # of the document.
+    # JPEG, PNG, TIFF, and PDF format. The documents are stored in an Amazon
+    # S3 bucket. Use DocumentLocation to specify the bucket name and file
+    # name of the document.
     #
     # `StartTextDetection` returns a job identifier (`JobId`) that you use
     # to get the results of the operation. When text detection is finished,
@@ -1134,6 +1268,108 @@ module Aws::Textract
       req.send_request(options)
     end
 
+    # Starts the asynchronous analysis of invoices or receipts for data like
+    # contact information, items purchased, and vendor names.
+    #
+    # `StartExpenseAnalysis` can analyze text in documents that are in JPEG,
+    # PNG, and PDF format. The documents must be stored in an Amazon S3
+    # bucket. Use the DocumentLocation parameter to specify the name of your
+    # S3 bucket and the name of the document in that bucket.
+    #
+    # `StartExpenseAnalysis` returns a job identifier (`JobId`) that you
+    # will provide to `GetExpenseAnalysis` to retrieve the results of the
+    # operation. When the analysis of the input invoices/receipts is
+    # finished, Amazon Textract publishes a completion status to the Amazon
+    # Simple Notification Service (Amazon SNS) topic that you provide to the
+    # `NotificationChannel`. To obtain the results of the invoice and
+    # receipt analysis operation, ensure that the status value published to
+    # the Amazon SNS topic is `SUCCEEDED`. If so, call GetExpenseAnalysis,
+    # and pass the job identifier (`JobId`) that was returned by your call
+    # to `StartExpenseAnalysis`.
+    #
+    # For more information, see [Analyzing Invoices and Receipts][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/textract/latest/dg/invoice-receipts.html
+    #
+    # @option params [required, Types::DocumentLocation] :document_location
+    #   The location of the document to be processed.
+    #
+    # @option params [String] :client_request_token
+    #   The idempotent token that's used to identify the start request. If
+    #   you use the same token with multiple `StartDocumentTextDetection`
+    #   requests, the same `JobId` is returned. Use `ClientRequestToken` to
+    #   prevent the same job from being accidentally started more than once.
+    #   For more information, see [Calling Amazon Textract Asynchronous
+    #   Operations][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/textract/latest/dg/api-async.html
+    #
+    # @option params [String] :job_tag
+    #   An identifier you specify that's included in the completion
+    #   notification published to the Amazon SNS topic. For example, you can
+    #   use `JobTag` to identify the type of document that the completion
+    #   notification corresponds to (such as a tax form or a receipt).
+    #
+    # @option params [Types::NotificationChannel] :notification_channel
+    #   The Amazon SNS topic ARN that you want Amazon Textract to publish the
+    #   completion status of the operation to.
+    #
+    # @option params [Types::OutputConfig] :output_config
+    #   Sets if the output will go to a customer defined bucket. By default,
+    #   Amazon Textract will save the results internally to be accessed by the
+    #   `GetExpenseAnalysis` operation.
+    #
+    # @option params [String] :kms_key_id
+    #   The KMS key used to encrypt the inference results. This can be in
+    #   either Key ID or Key Alias format. When a KMS key is provided, the KMS
+    #   key will be used for server-side encryption of the objects in the
+    #   customer bucket. When this parameter is not enabled, the result will
+    #   be encrypted server side,using SSE-S3.
+    #
+    # @return [Types::StartExpenseAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartExpenseAnalysisResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_expense_analysis({
+    #     document_location: { # required
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     job_tag: "JobTag",
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     output_config: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_prefix: "S3ObjectName",
+    #     },
+    #     kms_key_id: "KMSKeyId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartExpenseAnalysis AWS API Documentation
+    #
+    # @overload start_expense_analysis(params = {})
+    # @param [Hash] params ({})
+    def start_expense_analysis(params = {}, options = {})
+      req = build_request(:start_expense_analysis, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1147,7 +1383,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

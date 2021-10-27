@@ -218,6 +218,25 @@ module Aws::AutoScaling
       data[:context]
     end
 
+    # The unit of measurement for the value specified for desired capacity.
+    # Amazon EC2 Auto Scaling supports `DesiredCapacityType` for
+    # attribute-based instance type selection only. For more information,
+    # see [Creating an Auto Scaling group using attribute-based instance
+    # type selection][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    # By default, Amazon EC2 Auto Scaling specifies `units`, which
+    # translates into number of instances.
+    #
+    # Valid values: `units` \| `vcpu` \| `memory-mib`
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    # @return [String]
+    def desired_capacity_type
+      data[:desired_capacity_type]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1011,6 +1030,53 @@ module Aws::AutoScaling
     #               launch_template_name: "LaunchTemplateName",
     #               version: "XmlStringMaxLen255",
     #             },
+    #             instance_requirements: {
+    #               v_cpu_count: { # required
+    #                 min: 1, # required
+    #                 max: 1,
+    #               },
+    #               memory_mi_b: { # required
+    #                 min: 1, # required
+    #                 max: 1,
+    #               },
+    #               cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #               memory_gi_b_per_v_cpu: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               excluded_instance_types: ["ExcludedInstance"],
+    #               instance_generations: ["current"], # accepts current, previous
+    #               spot_max_price_percentage_over_lowest_price: 1,
+    #               on_demand_max_price_percentage_over_lowest_price: 1,
+    #               bare_metal: "included", # accepts included, excluded, required
+    #               burstable_performance: "included", # accepts included, excluded, required
+    #               require_hibernate_support: false,
+    #               network_interface_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               local_storage: "included", # accepts included, excluded, required
+    #               local_storage_types: ["hdd"], # accepts hdd, ssd
+    #               total_local_storage_gb: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               baseline_ebs_bandwidth_mbps: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #               accelerator_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_total_memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #       },
@@ -1038,6 +1104,7 @@ module Aws::AutoScaling
     #     max_instance_lifetime: 1,
     #     capacity_rebalance: false,
     #     context: "Context",
+    #     desired_capacity_type: "XmlStringMaxLen255",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
@@ -1049,11 +1116,9 @@ module Aws::AutoScaling
     #   specify `LaunchTemplate` in your update request, you can't specify
     #   `LaunchConfigurationName` or `MixedInstancesPolicy`.
     # @option options [Types::MixedInstancesPolicy] :mixed_instances_policy
-    #   An embedded object that specifies a mixed instances policy. When you
-    #   make changes to an existing policy, all optional properties are left
-    #   unchanged if not specified. For more information, see [Auto Scaling
-    #   groups with multiple instance types and purchase options][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   An embedded object that specifies a mixed instances policy. For more
+    #   information, see [Auto Scaling groups with multiple instance types and
+    #   purchase options][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -1173,6 +1238,21 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
     # @option options [String] :context
     #   Reserved.
+    # @option options [String] :desired_capacity_type
+    #   The unit of measurement for the value specified for desired capacity.
+    #   Amazon EC2 Auto Scaling supports `DesiredCapacityType` for
+    #   attribute-based instance type selection only. For more information,
+    #   see [Creating an Auto Scaling group using attribute-based instance
+    #   type selection][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   By default, Amazon EC2 Auto Scaling specifies `units`, which
+    #   translates into number of instances.
+    #
+    #   Valid values: `units` \| `vcpu` \| `memory-mib`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)

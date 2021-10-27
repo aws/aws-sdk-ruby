@@ -10,6 +10,63 @@
 module Aws::AutoScaling
   module Types
 
+    # Specifies the minimum and maximum for the `AcceleratorCount` object
+    # when you specify InstanceRequirements for an Auto Scaling group.
+    #
+    # @note When making an API call, you may pass AcceleratorCountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AcceleratorCountRequest AWS API Documentation
+    #
+    class AcceleratorCountRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the minimum and maximum for the `AcceleratorTotalMemoryMiB`
+    # object when you specify InstanceRequirements for an Auto Scaling
+    # group.
+    #
+    # @note When making an API call, you may pass AcceleratorTotalMemoryMiBRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The memory minimum in MiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The memory maximum in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AcceleratorTotalMemoryMiBRequest AWS API Documentation
+    #
+    class AcceleratorTotalMemoryMiBRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request failed because an active instance refresh for the
     # specified Auto Scaling group was not found.
     #
@@ -411,6 +468,23 @@ module Aws::AutoScaling
     #   Reserved.
     #   @return [String]
     #
+    # @!attribute [rw] desired_capacity_type
+    #   The unit of measurement for the value specified for desired
+    #   capacity. Amazon EC2 Auto Scaling supports `DesiredCapacityType` for
+    #   attribute-based instance type selection only. For more information,
+    #   see [Creating an Auto Scaling group using attribute-based instance
+    #   type selection][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   By default, Amazon EC2 Auto Scaling specifies `units`, which
+    #   translates into number of instances.
+    #
+    #   Valid values: `units` \| `vcpu` \| `memory-mib`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
@@ -444,7 +518,8 @@ module Aws::AutoScaling
       :capacity_rebalance,
       :warm_pool_configuration,
       :warm_pool_size,
-      :context)
+      :context,
+      :desired_capacity_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -618,6 +693,35 @@ module Aws::AutoScaling
     class AutoScalingInstancesType < Struct.new(
       :auto_scaling_instances,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the minimum and maximum for the `BaselineEbsBandwidthMbps`
+    # object when you specify InstanceRequirements for an Auto Scaling
+    # group.
+    #
+    # @note When making an API call, you may pass BaselineEbsBandwidthMbpsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum value in Mbps.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum value in Mbps.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/BaselineEbsBandwidthMbpsRequest AWS API Documentation
+    #
+    class BaselineEbsBandwidthMbpsRequest < Struct.new(
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -906,6 +1010,53 @@ module Aws::AutoScaling
     #                   launch_template_name: "LaunchTemplateName",
     #                   version: "XmlStringMaxLen255",
     #                 },
+    #                 instance_requirements: {
+    #                   v_cpu_count: { # required
+    #                     min: 1, # required
+    #                     max: 1,
+    #                   },
+    #                   memory_mi_b: { # required
+    #                     min: 1, # required
+    #                     max: 1,
+    #                   },
+    #                   cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                   memory_gi_b_per_v_cpu: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   excluded_instance_types: ["ExcludedInstance"],
+    #                   instance_generations: ["current"], # accepts current, previous
+    #                   spot_max_price_percentage_over_lowest_price: 1,
+    #                   on_demand_max_price_percentage_over_lowest_price: 1,
+    #                   bare_metal: "included", # accepts included, excluded, required
+    #                   burstable_performance: "included", # accepts included, excluded, required
+    #                   require_hibernate_support: false,
+    #                   network_interface_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   local_storage: "included", # accepts included, excluded, required
+    #                   local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                   total_local_storage_gb: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   baseline_ebs_bandwidth_mbps: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                   accelerator_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                   accelerator_total_memory_mi_b: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -956,6 +1107,7 @@ module Aws::AutoScaling
     #         service_linked_role_arn: "ResourceName",
     #         max_instance_lifetime: 1,
     #         context: "Context",
+    #         desired_capacity_type: "XmlStringMaxLen255",
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -992,20 +1144,11 @@ module Aws::AutoScaling
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] mixed_instances_policy
-    #   An embedded object that specifies a mixed instances policy. The
-    #   required properties must be specified. If optional properties are
-    #   unspecified, their default values are used.
+    #   An embedded object that specifies a mixed instances policy.
     #
-    #   The policy includes properties that not only define the distribution
-    #   of On-Demand Instances and Spot Instances, the maximum price to pay
-    #   for Spot Instances, and how the Auto Scaling group allocates
-    #   instance types to fulfill On-Demand and Spot capacities, but also
-    #   the properties that specify the instance configuration
-    #   information—the launch template and instance types. The policy can
-    #   also include a weight for each instance type and different launch
-    #   templates for individual instance types. For more information, see
-    #   [Auto Scaling groups with multiple instance types and purchase
-    #   options][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   For more information, see [Auto Scaling groups with multiple
+    #   instance types and purchase options][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
@@ -1240,6 +1383,23 @@ module Aws::AutoScaling
     #   Reserved.
     #   @return [String]
     #
+    # @!attribute [rw] desired_capacity_type
+    #   The unit of measurement for the value specified for desired
+    #   capacity. Amazon EC2 Auto Scaling supports `DesiredCapacityType` for
+    #   attribute-based instance type selection only. For more information,
+    #   see [Creating an Auto Scaling group using attribute-based instance
+    #   type selection][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   By default, Amazon EC2 Auto Scaling specifies `units`, which
+    #   translates into number of instances.
+    #
+    #   Valid values: `units` \| `vcpu` \| `memory-mib`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
     #
     class CreateAutoScalingGroupType < Struct.new(
@@ -1266,7 +1426,8 @@ module Aws::AutoScaling
       :tags,
       :service_linked_role_arn,
       :max_instance_lifetime,
-      :context)
+      :context,
+      :desired_capacity_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2584,6 +2745,53 @@ module Aws::AutoScaling
     #                   launch_template_name: "LaunchTemplateName",
     #                   version: "XmlStringMaxLen255",
     #                 },
+    #                 instance_requirements: {
+    #                   v_cpu_count: { # required
+    #                     min: 1, # required
+    #                     max: 1,
+    #                   },
+    #                   memory_mi_b: { # required
+    #                     min: 1, # required
+    #                     max: 1,
+    #                   },
+    #                   cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                   memory_gi_b_per_v_cpu: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   excluded_instance_types: ["ExcludedInstance"],
+    #                   instance_generations: ["current"], # accepts current, previous
+    #                   spot_max_price_percentage_over_lowest_price: 1,
+    #                   on_demand_max_price_percentage_over_lowest_price: 1,
+    #                   bare_metal: "included", # accepts included, excluded, required
+    #                   burstable_performance: "included", # accepts included, excluded, required
+    #                   require_hibernate_support: false,
+    #                   network_interface_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   local_storage: "included", # accepts included, excluded, required
+    #                   local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                   total_local_storage_gb: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   baseline_ebs_bandwidth_mbps: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                   accelerator_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                   accelerator_total_memory_mi_b: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -2611,9 +2819,9 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] mixed_instances_policy
     #   Describes a mixed instances policy. A mixed instances policy
-    #   contains the instance types Amazon EC2 Auto Scaling can launch, and
-    #   other information Amazon EC2 Auto Scaling can use to launch
-    #   instances to help you optimize your costs. For more information, see
+    #   contains the instance types that Amazon EC2 Auto Scaling can launch
+    #   and other information that Amazon EC2 Auto Scaling can use to launch
+    #   instances and help optimize your costs. For more information, see
     #   [Auto Scaling groups with multiple instance types and purchase
     #   options][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
@@ -3245,9 +3453,9 @@ module Aws::AutoScaling
     # Describes a filter that is used to return a more specific list of
     # results from a describe operation.
     #
-    # If you specify multiple filters, the filters are joined with an `AND`,
-    # and the request returns only results that match all of the specified
-    # filters.
+    # If you specify multiple filters, the filters are automatically
+    # logically joined with an `AND`, and the request returns only the
+    # results that match all of the specified filters.
     #
     # For more information, see [Tagging Auto Scaling groups and
     # instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
@@ -3267,56 +3475,55 @@ module Aws::AutoScaling
     # @!attribute [rw] name
     #   The name of the filter.
     #
-    #   The valid values for `Name` depend on the API operation that you are
-    #   including the filter in, DescribeAutoScalingGroups or DescribeTags.
+    #   The valid values for `Name` depend on which API operation you're
+    #   using with the filter (DescribeAutoScalingGroups or DescribeTags).
     #
     #   **DescribeAutoScalingGroups**
     #
     #   Valid values for `Name` include the following:
     #
-    #   * `tag-key` - Accepts tag keys. The results will only include
-    #     information about the Auto Scaling groups associated with these
-    #     tag keys.
+    #   * `tag-key` - Accepts tag keys. The results only include information
+    #     about the Auto Scaling groups associated with these tag keys.
     #
-    #   * `tag-value` - Accepts tag values. The results will only include
+    #   * `tag-value` - Accepts tag values. The results only include
     #     information about the Auto Scaling groups associated with these
     #     tag values.
     #
     #   * `tag:<key>` - Accepts the key/value combination of the tag. Use
     #     the tag key in the filter name and the tag value as the filter
-    #     value. The results will only include information about the Auto
-    #     Scaling groups associated with the specified key/value
-    #     combination.
+    #     value. The results only include information about the Auto Scaling
+    #     groups associated with the specified key/value combination.
     #
     #   **DescribeTags**
     #
     #   Valid values for `Name` include the following:
     #
     #   * `auto-scaling-group` - Accepts the names of Auto Scaling groups.
-    #     The results will only include information about the tags
-    #     associated with these Auto Scaling groups.
+    #     The results only include information about the tags associated
+    #     with these Auto Scaling groups.
     #
-    #   * `key` - Accepts tag keys. The results will only include
-    #     information about the tags associated with these tag keys.
+    #   * `key` - Accepts tag keys. The results only include information
+    #     about the tags associated with these tag keys.
     #
-    #   * `value` - Accepts tag values. The results will only include
-    #     information about the tags associated with these tag values.
+    #   * `value` - Accepts tag values. The results only include information
+    #     about the tags associated with these tag values.
     #
-    #   * `propagate-at-launch` - Accepts a boolean value, which specifies
-    #     whether tags propagate to instances at launch. The results will
-    #     only include information about the tags associated with the
-    #     specified boolean value.
+    #   * `propagate-at-launch` - Accepts a Boolean value, which specifies
+    #     whether tags propagate to instances at launch. The results only
+    #     include information about the tags associated with the specified
+    #     Boolean value.
     #   @return [String]
     #
     # @!attribute [rw] values
     #   One or more filter values. Filter values are case-sensitive.
     #
-    #   If you specify multiple values for a filter, the values are joined
-    #   with an `OR`, and the request returns all results that match any of
-    #   the specified values. For example, specify "tag:environment" for
-    #   the filter name and "production,development" for the filter values
-    #   to find Auto Scaling groups with the tag "environment=production"
-    #   or "environment=development".
+    #   If you specify multiple values for a filter, the values are
+    #   automatically logically joined with an `OR`, and the request returns
+    #   all results that match any of the specified values. For example,
+    #   specify "tag:environment" for the filter name and
+    #   "production,development" for the filter values to find Auto
+    #   Scaling groups with the tag "environment=production" or
+    #   "environment=development".
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Filter AWS API Documentation
@@ -3726,23 +3933,343 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes an instances distribution for an Auto Scaling group with a
-    # MixedInstancesPolicy.
+    # When you specify multiple parameters, you get instance types that
+    # satisfy all of the specified parameters. If you specify multiple
+    # values for a parameter, you get instance types that satisfy any of the
+    # specified values.
     #
-    # The instances distribution specifies the distribution of On-Demand
-    # Instances and Spot Instances, the maximum price to pay for Spot
-    # Instances, and how the Auto Scaling group allocates instance types to
-    # fulfill On-Demand and Spot capacities.
+    # Represents requirements for the types of instances that can be
+    # launched. You must specify `VCpuCount` and `MemoryMiB`, but all other
+    # parameters are optional. For more information, see [Creating an Auto
+    # Scaling group using attribute-based instance type selection][1] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
     #
-    # When you modify `SpotAllocationStrategy`, `SpotInstancePools`, or
-    # `SpotMaxPrice` in the UpdateAutoScalingGroup API call, this update
-    # action does not deploy any changes across the running Amazon EC2
-    # instances in the group. Your existing Spot Instances continue to run
-    # as long as the maximum price for those instances is higher than the
-    # current Spot price. When scale out occurs, Amazon EC2 Auto Scaling
-    # launches instances based on the new settings. When scale in occurs,
-    # Amazon EC2 Auto Scaling terminates instances according to the group's
-    # termination policies.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    #
+    # @note When making an API call, you may pass InstanceRequirements
+    #   data as a hash:
+    #
+    #       {
+    #         v_cpu_count: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         memory_mi_b: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #         memory_gi_b_per_v_cpu: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         excluded_instance_types: ["ExcludedInstance"],
+    #         instance_generations: ["current"], # accepts current, previous
+    #         spot_max_price_percentage_over_lowest_price: 1,
+    #         on_demand_max_price_percentage_over_lowest_price: 1,
+    #         bare_metal: "included", # accepts included, excluded, required
+    #         burstable_performance: "included", # accepts included, excluded, required
+    #         require_hibernate_support: false,
+    #         network_interface_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         local_storage: "included", # accepts included, excluded, required
+    #         local_storage_types: ["hdd"], # accepts hdd, ssd
+    #         total_local_storage_gb: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         baseline_ebs_bandwidth_mbps: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #         accelerator_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #         accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #         accelerator_total_memory_mi_b: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] v_cpu_count
+    #   The minimum and maximum number of vCPUs for an instance type.
+    #   @return [Types::VCpuCountRequest]
+    #
+    # @!attribute [rw] memory_mi_b
+    #   The minimum and maximum instance memory size for an instance type,
+    #   in MiB.
+    #   @return [Types::MemoryMiBRequest]
+    #
+    # @!attribute [rw] cpu_manufacturers
+    #   Lists which specific CPU manufacturers to include.
+    #
+    #   * For instance types with Intel CPUs, specify `intel`.
+    #
+    #   * For instance types with AMD CPUs, specify `amd`.
+    #
+    #   * For instance types with Amazon Web Services CPUs, specify
+    #     `amazon-web-services`.
+    #
+    #   <note markdown="1"> Don't confuse the CPU hardware manufacturer with the CPU hardware
+    #   architecture. Instances will be launched with a compatible CPU
+    #   architecture based on the Amazon Machine Image (AMI) that you
+    #   specify in your launch template.
+    #
+    #    </note>
+    #
+    #   Default: Any manufacturer
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] memory_gi_b_per_v_cpu
+    #   The minimum and maximum amount of memory per vCPU for an instance
+    #   type, in GiB.
+    #
+    #   Default: No minimum or maximum
+    #   @return [Types::MemoryGiBPerVCpuRequest]
+    #
+    # @!attribute [rw] excluded_instance_types
+    #   Lists which instance types to exclude. You can use strings with one
+    #   or more wild cards, represented by an asterisk (`*`). The following
+    #   are examples: `c5*`, `m5a.*`, `r*`, `*3*`.
+    #
+    #   For example, if you specify `c5*`, you are excluding the entire C5
+    #   instance family, which includes all C5a and C5n instance types. If
+    #   you specify `m5a.*`, you are excluding all the M5a instance types,
+    #   but not the M5n instance types.
+    #
+    #   Default: No excluded instance types
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_generations
+    #   Indicates whether current or previous generation instance types are
+    #   included.
+    #
+    #   * For current generation instance types, specify `current`. The
+    #     current generation includes EC2 instance types currently
+    #     recommended for use. This typically includes the latest two to
+    #     three generations in each instance family. For more information,
+    #     see [Instance types][1] in the *Amazon EC2 User Guide for Linux
+    #     Instances*.
+    #
+    #   * For previous generation instance types, specify `previous`.
+    #
+    #   Default: Any current or previous generation
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] spot_max_price_percentage_over_lowest_price
+    #   The price protection threshold for Spot Instances. This is the
+    #   maximum you’ll pay for a Spot Instance, expressed as a percentage
+    #   higher than the cheapest M, C, or R instance type with your
+    #   specified attributes. When Amazon EC2 Auto Scaling selects instance
+    #   types with your attributes, we will exclude instance types whose
+    #   price is higher than your threshold. The parameter accepts an
+    #   integer, which Amazon EC2 Auto Scaling interprets as a percentage.
+    #   To turn off price protection, specify a high value, such as
+    #   `999999`.
+    #
+    #   Default: `100`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
+    #   The price protection threshold for On-Demand Instances. This is the
+    #   maximum you’ll pay for an On-Demand Instance, expressed as a
+    #   percentage higher than the cheapest M, C, or R instance type with
+    #   your specified attributes. When Amazon EC2 Auto Scaling selects
+    #   instance types with your attributes, we will exclude instance types
+    #   whose price is higher than your threshold. The parameter accepts an
+    #   integer, which Amazon EC2 Auto Scaling interprets as a percentage.
+    #   To turn off price protection, specify a high value, such as
+    #   `999999`.
+    #
+    #   Default: `20`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bare_metal
+    #   Indicates whether bare metal instance types are included, excluded,
+    #   or required.
+    #
+    #   Default: `excluded`
+    #   @return [String]
+    #
+    # @!attribute [rw] burstable_performance
+    #   Indicates whether burstable performance instance types are included,
+    #   excluded, or required. For more information, see [Burstable
+    #   performance instances][1] in the *Amazon EC2 User Guide for Linux
+    #   Instances*.
+    #
+    #   Default: `excluded`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
+    #   @return [String]
+    #
+    # @!attribute [rw] require_hibernate_support
+    #   Indicates whether instance types must provide On-Demand Instance
+    #   hibernation support.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_interface_count
+    #   The minimum and maximum number of network interfaces for an instance
+    #   type.
+    #
+    #   Default: No minimum or maximum
+    #   @return [Types::NetworkInterfaceCountRequest]
+    #
+    # @!attribute [rw] local_storage
+    #   Indicates whether instance types with instance store volumes are
+    #   included, excluded, or required. For more information, see [Amazon
+    #   EC2 instance store][1] in the *Amazon EC2 User Guide for Linux
+    #   Instances*.
+    #
+    #   Default: `included`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
+    #   @return [String]
+    #
+    # @!attribute [rw] local_storage_types
+    #   Indicates the type of local storage that is required.
+    #
+    #   * For instance types with hard disk drive (HDD) storage, specify
+    #     `hdd`.
+    #
+    #   * For instance types with solid state drive (SSD) storage, specify
+    #     `sdd`.
+    #
+    #   Default: Any local storage type
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] total_local_storage_gb
+    #   The minimum and maximum total local storage size for an instance
+    #   type, in GB.
+    #
+    #   Default: No minimum or maximum
+    #   @return [Types::TotalLocalStorageGBRequest]
+    #
+    # @!attribute [rw] baseline_ebs_bandwidth_mbps
+    #   The minimum and maximum baseline bandwidth performance for an
+    #   instance type, in Mbps. For more information, see [Amazon
+    #   EBS–optimized instances][1] in the *Amazon EC2 User Guide for Linux
+    #   Instances*.
+    #
+    #   Default: No minimum or maximum
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
+    #   @return [Types::BaselineEbsBandwidthMbpsRequest]
+    #
+    # @!attribute [rw] accelerator_types
+    #   Lists the accelerator types that must be on an instance type.
+    #
+    #   * For instance types with GPU accelerators, specify `gpu`.
+    #
+    #   * For instance types with FPGA accelerators, specify `fpga`.
+    #
+    #   * For instance types with inference accelerators, specify
+    #     `inference`.
+    #
+    #   Default: Any accelerator type
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_count
+    #   The minimum and maximum number of accelerators (GPUs, FPGAs, or
+    #   Amazon Web Services Inferentia chips) for an instance type.
+    #
+    #   To exclude accelerator-enabled instance types, set `Max` to `0`.
+    #
+    #   Default: No minimum or maximum
+    #   @return [Types::AcceleratorCountRequest]
+    #
+    # @!attribute [rw] accelerator_manufacturers
+    #   Indicates whether instance types must have accelerators by specific
+    #   manufacturers.
+    #
+    #   * For instance types with NVIDIA devices, specify `nvidia`.
+    #
+    #   * For instance types with AMD devices, specify `amd`.
+    #
+    #   * For instance types with Amazon Web Services devices, specify
+    #     `amazon-web-services`.
+    #
+    #   * For instance types with Xilinx devices, specify `xilinx`.
+    #
+    #   Default: Any manufacturer
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_names
+    #   Lists the accelerators that must be on an instance type.
+    #
+    #   * For instance types with NVIDIA A100 GPUs, specify `a100`.
+    #
+    #   * For instance types with NVIDIA V100 GPUs, specify `v100`.
+    #
+    #   * For instance types with NVIDIA K80 GPUs, specify `k80`.
+    #
+    #   * For instance types with NVIDIA T4 GPUs, specify `t4`.
+    #
+    #   * For instance types with NVIDIA M60 GPUs, specify `m60`.
+    #
+    #   * For instance types with AMD Radeon Pro V520 GPUs, specify
+    #     `radeon-pro-v520`.
+    #
+    #   * For instance types with Xilinx VU9P FPGAs, specify `vu9p`.
+    #
+    #   Default: Any accelerator
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] accelerator_total_memory_mi_b
+    #   The minimum and maximum total memory size for the accelerators on an
+    #   instance type, in MiB.
+    #
+    #   Default: No minimum or maximum
+    #   @return [Types::AcceleratorTotalMemoryMiBRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceRequirements AWS API Documentation
+    #
+    class InstanceRequirements < Struct.new(
+      :v_cpu_count,
+      :memory_mi_b,
+      :cpu_manufacturers,
+      :memory_gi_b_per_v_cpu,
+      :excluded_instance_types,
+      :instance_generations,
+      :spot_max_price_percentage_over_lowest_price,
+      :on_demand_max_price_percentage_over_lowest_price,
+      :bare_metal,
+      :burstable_performance,
+      :require_hibernate_support,
+      :network_interface_count,
+      :local_storage,
+      :local_storage_types,
+      :total_local_storage_gb,
+      :baseline_ebs_bandwidth_mbps,
+      :accelerator_types,
+      :accelerator_count,
+      :accelerator_manufacturers,
+      :accelerator_names,
+      :accelerator_total_memory_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an instances distribution for an Auto Scaling group.
     #
     # @note When making an API call, you may pass InstancesDistribution
     #   data as a hash:
@@ -3757,32 +4284,46 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] on_demand_allocation_strategy
-    #   Indicates how to allocate instance types to fulfill On-Demand
-    #   capacity. The only valid value is `prioritized`, which is also the
-    #   default value. This strategy uses the order of instance types in the
-    #   `LaunchTemplateOverrides` to define the launch priority of each
-    #   instance type. The first instance type in the array is prioritized
-    #   higher than the last. If all your On-Demand capacity cannot be
-    #   fulfilled using your highest priority instance, then the Auto
-    #   Scaling groups launches the remaining capacity using the second
-    #   priority instance type, and so on.
+    #   The order of the launch template overrides to use in fulfilling
+    #   On-Demand capacity.
+    #
+    #   If you specify `lowest-price`, Amazon EC2 Auto Scaling uses price to
+    #   determine the order, launching the lowest price first.
+    #
+    #   If you specify `prioritized`, Amazon EC2 Auto Scaling uses the
+    #   priority that you assigned to each launch template override,
+    #   launching the highest priority first. If all your On-Demand capacity
+    #   cannot be fulfilled using your highest priority instance, then
+    #   Amazon EC2 Auto Scaling launches the remaining capacity using the
+    #   second priority instance type, and so on.
+    #
+    #   Default: `lowest-price` for Auto Scaling groups that specify
+    #   InstanceRequirements in the overrides and `prioritized` for Auto
+    #   Scaling groups that don't.
     #   @return [String]
     #
     # @!attribute [rw] on_demand_base_capacity
     #   The minimum amount of the Auto Scaling group's capacity that must
-    #   be fulfilled by On-Demand Instances. This base portion is
-    #   provisioned first as your group scales. Defaults to 0 if not
-    #   specified. If you specify weights for the instance types in the
-    #   overrides, set the value of `OnDemandBaseCapacity` in terms of the
-    #   number of capacity units, and not the number of instances.
+    #   be fulfilled by On-Demand Instances. This base portion is launched
+    #   first as your group scales.
+    #
+    #   If you specify weights for the instance types in the overrides, the
+    #   base capacity is measured in the same unit of measurement as the
+    #   instance types. If you specify InstanceRequirements in the
+    #   overrides, the base capacity is measured in the same unit of
+    #   measurement as your group's desired capacity.
+    #
+    #   Default: `0`
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_percentage_above_base_capacity
     #   Controls the percentages of On-Demand Instances and Spot Instances
     #   for your additional capacity beyond `OnDemandBaseCapacity`.
     #   Expressed as a number (for example, 20 specifies 20% On-Demand
-    #   Instances, 80% Spot Instances). Defaults to 100 if not specified. If
-    #   set to 100, only On-Demand Instances are provisioned.
+    #   Instances, 80% Spot Instances). If set to 100, only On-Demand
+    #   Instances are used.
+    #
+    #   Default: `100`
     #   @return [Integer]
     #
     # @!attribute [rw] spot_allocation_strategy
@@ -3791,7 +4332,7 @@ module Aws::AutoScaling
     #   If the allocation strategy is `lowest-price`, the Auto Scaling group
     #   launches instances using the Spot pools with the lowest price, and
     #   evenly allocates your instances across the number of Spot pools that
-    #   you specify. Defaults to `lowest-price` if not specified.
+    #   you specify.
     #
     #   If the allocation strategy is `capacity-optimized` (recommended),
     #   the Auto Scaling group launches instances using Spot pools that are
@@ -3801,22 +4342,25 @@ module Aws::AutoScaling
     #   from highest to lowest priority (from first to last in the list).
     #   Amazon EC2 Auto Scaling honors the instance type priorities on a
     #   best-effort basis but optimizes for capacity first.
+    #
+    #   Default: `lowest-price`
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_pools
     #   The number of Spot Instance pools across which to allocate your Spot
     #   Instances. The Spot pools are determined from the different instance
     #   types in the overrides. Valid only when the Spot allocation strategy
-    #   is `lowest-price`. Value must be in the range of 1 to 20. Defaults
-    #   to 2 if not specified.
+    #   is `lowest-price`. Value must be in the range of 1–20.
+    #
+    #   Default: `2`
     #   @return [Integer]
     #
     # @!attribute [rw] spot_max_price
     #   The maximum price per unit hour that you are willing to pay for a
-    #   Spot Instance. If you leave the value at its default (empty), Amazon
-    #   EC2 Auto Scaling uses the On-Demand price as the maximum Spot price.
-    #   To remove a value that you previously set, include the property but
-    #   specify an empty string ("") for the value.
+    #   Spot Instance. If you keep the value at its default (unspecified),
+    #   Amazon EC2 Auto Scaling uses the On-Demand price as the maximum Spot
+    #   price. To remove a value that you previously set, include the
+    #   property but specify an empty string ("") for the value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstancesDistribution AWS API Documentation
@@ -4145,16 +4689,8 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes a launch template and overrides.
-    #
-    # You specify these properties as part of a mixed instances policy.
-    #
-    # When you update the launch template or overrides in the
-    # UpdateAutoScalingGroup API call, existing Amazon EC2 instances
-    # continue to run. When scale out occurs, Amazon EC2 Auto Scaling
-    # launches instances to match the new settings. When scale in occurs,
-    # Amazon EC2 Auto Scaling terminates instances according to the group's
-    # termination policies.
+    # Describes a launch template and overrides. You specify these
+    # properties as part of a mixed instances policy.
     #
     # @note When making an API call, you may pass LaunchTemplate
     #   data as a hash:
@@ -4174,6 +4710,53 @@ module Aws::AutoScaling
     #               launch_template_name: "LaunchTemplateName",
     #               version: "XmlStringMaxLen255",
     #             },
+    #             instance_requirements: {
+    #               v_cpu_count: { # required
+    #                 min: 1, # required
+    #                 max: 1,
+    #               },
+    #               memory_mi_b: { # required
+    #                 min: 1, # required
+    #                 max: 1,
+    #               },
+    #               cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #               memory_gi_b_per_v_cpu: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               excluded_instance_types: ["ExcludedInstance"],
+    #               instance_generations: ["current"], # accepts current, previous
+    #               spot_max_price_percentage_over_lowest_price: 1,
+    #               on_demand_max_price_percentage_over_lowest_price: 1,
+    #               bare_metal: "included", # accepts included, excluded, required
+    #               burstable_performance: "included", # accepts included, excluded, required
+    #               require_hibernate_support: false,
+    #               network_interface_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               local_storage: "included", # accepts included, excluded, required
+    #               local_storage_types: ["hdd"], # accepts hdd, ssd
+    #               total_local_storage_gb: {
+    #                 min: 1.0,
+    #                 max: 1.0,
+    #               },
+    #               baseline_ebs_bandwidth_mbps: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #               accelerator_count: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #               accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #               accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #               accelerator_total_memory_mi_b: {
+    #                 min: 1,
+    #                 max: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -4185,8 +4768,11 @@ module Aws::AutoScaling
     # @!attribute [rw] overrides
     #   Any properties that you specify override the same properties in the
     #   launch template. If not provided, Amazon EC2 Auto Scaling uses the
-    #   instance type specified in the launch template when it launches an
-    #   instance.
+    #   instance type or instance type requirements specified in the launch
+    #   template when it launches an instance.
+    #
+    #   The overrides can include either one or more instance types or a set
+    #   of instance requirements, but not both.
     #   @return [Array<Types::LaunchTemplateOverrides>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplate AWS API Documentation
@@ -4198,12 +4784,9 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes an override for a launch template. The maximum number of
-    # instance types that can be associated with an Auto Scaling group is
-    # 40. The maximum number of distinct launch templates you can define for
-    # an Auto Scaling group is 20. For more information about configuring
-    # overrides, see [Configuring overrides][1] in the *Amazon EC2 Auto
-    # Scaling User Guide*.
+    # Describes an override for a launch template. For more information, see
+    # [Configuring overrides][1] in the *Amazon EC2 Auto Scaling User
+    # Guide*.
     #
     #
     #
@@ -4220,6 +4803,53 @@ module Aws::AutoScaling
     #           launch_template_name: "LaunchTemplateName",
     #           version: "XmlStringMaxLen255",
     #         },
+    #         instance_requirements: {
+    #           v_cpu_count: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           memory_mi_b: { # required
+    #             min: 1, # required
+    #             max: 1,
+    #           },
+    #           cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #           memory_gi_b_per_v_cpu: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           excluded_instance_types: ["ExcludedInstance"],
+    #           instance_generations: ["current"], # accepts current, previous
+    #           spot_max_price_percentage_over_lowest_price: 1,
+    #           on_demand_max_price_percentage_over_lowest_price: 1,
+    #           bare_metal: "included", # accepts included, excluded, required
+    #           burstable_performance: "included", # accepts included, excluded, required
+    #           require_hibernate_support: false,
+    #           network_interface_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           local_storage: "included", # accepts included, excluded, required
+    #           local_storage_types: ["hdd"], # accepts hdd, ssd
+    #           total_local_storage_gb: {
+    #             min: 1.0,
+    #             max: 1.0,
+    #           },
+    #           baseline_ebs_bandwidth_mbps: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #           accelerator_count: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #           accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #           accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #           accelerator_total_memory_mi_b: {
+    #             min: 1,
+    #             max: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] instance_type
@@ -4234,19 +4864,19 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity
-    #   The number of capacity units provided by the specified instance type
-    #   in terms of virtual CPUs, memory, storage, throughput, or other
-    #   relative performance characteristic. When a Spot or On-Demand
-    #   Instance is provisioned, the capacity units count toward the desired
-    #   capacity. Amazon EC2 Auto Scaling provisions instances until the
-    #   desired capacity is totally fulfilled, even if this results in an
-    #   overage. For example, if there are 2 units remaining to fulfill
-    #   capacity, and Amazon EC2 Auto Scaling can only provision an instance
-    #   with a `WeightedCapacity` of 5 units, the instance is provisioned,
-    #   and the desired capacity is exceeded by 3 units. For more
-    #   information, see [Instance weighting for Amazon EC2 Auto Scaling][1]
-    #   in the *Amazon EC2 Auto Scaling User Guide*. Value must be in the
-    #   range of 1 to 999.
+    #   The number of capacity units provided by the instance type specified
+    #   in `InstanceType` in terms of virtual CPUs, memory, storage,
+    #   throughput, or other relative performance characteristic. When a
+    #   Spot or On-Demand Instance is launched, the capacity units count
+    #   toward the desired capacity. Amazon EC2 Auto Scaling launches
+    #   instances until the desired capacity is totally fulfilled, even if
+    #   this results in an overage. For example, if there are two units
+    #   remaining to fulfill capacity, and Amazon EC2 Auto Scaling can only
+    #   launch an instance with a `WeightedCapacity` of five units, the
+    #   instance is launched, and the desired capacity is exceeded by three
+    #   units. For more information, see [Instance weighting for Amazon EC2
+    #   Auto Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*. Value
+    #   must be in the range of 1–999.
     #
     #
     #
@@ -4255,24 +4885,33 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] launch_template_specification
     #   Provides the launch template to be used when launching the instance
-    #   type. For example, some instance types might require a launch
-    #   template with a different AMI. If not provided, Amazon EC2 Auto
-    #   Scaling uses the launch template that's defined for your mixed
-    #   instances policy. For more information, see [Specifying a different
-    #   launch template for an instance type][1] in the *Amazon EC2 Auto
-    #   Scaling User Guide*.
+    #   type specified in `InstanceType`. For example, some instance types
+    #   might require a launch template with a different AMI. If not
+    #   provided, Amazon EC2 Auto Scaling uses the launch template that's
+    #   defined for your mixed instances policy. For more information, see
+    #   [Specifying a different launch template for an instance type][1] in
+    #   the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-template-overrides.html
     #   @return [Types::LaunchTemplateSpecification]
     #
+    # @!attribute [rw] instance_requirements
+    #   The instance requirements. When you specify instance requirements,
+    #   Amazon EC2 Auto Scaling finds instance types that satisfy your
+    #   requirements, and then uses your On-Demand and Spot allocation
+    #   strategies to launch instances from these instance types, in the
+    #   same way as when you specify a list of specific instance types.
+    #   @return [Types::InstanceRequirements]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplateOverrides AWS API Documentation
     #
     class LaunchTemplateOverrides < Struct.new(
       :instance_type,
       :weighted_capacity,
-      :launch_template_specification)
+      :launch_template_specification,
+      :instance_requirements)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4655,6 +5294,62 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Specifies the minimum and maximum for the `MemoryGiBPerVCpu` object
+    # when you specify InstanceRequirements for an Auto Scaling group.
+    #
+    # @note When making an API call, you may pass MemoryGiBPerVCpuRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The memory minimum in GiB.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The memory maximum in GiB.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MemoryGiBPerVCpuRequest AWS API Documentation
+    #
+    class MemoryGiBPerVCpuRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the minimum and maximum for the `MemoryMiB` object when you
+    # specify InstanceRequirements for an Auto Scaling group.
+    #
+    # @note When making an API call, you may pass MemoryMiBRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1, # required
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The memory minimum in MiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The memory maximum in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MemoryMiBRequest AWS API Documentation
+    #
+    class MemoryMiBRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a metric.
     #
     # @!attribute [rw] metric
@@ -4751,9 +5446,9 @@ module Aws::AutoScaling
     end
 
     # Describes a mixed instances policy. A mixed instances policy contains
-    # the instance types Amazon EC2 Auto Scaling can launch, and other
-    # information Amazon EC2 Auto Scaling can use to launch instances to
-    # help you optimize your costs. For more information, see [Auto Scaling
+    # the instance types that Amazon EC2 Auto Scaling can launch and other
+    # information that Amazon EC2 Auto Scaling can use to launch instances
+    # and help optimize your costs. For more information, see [Auto Scaling
     # groups with multiple instance types and purchase options][1] in the
     # *Amazon EC2 Auto Scaling User Guide*.
     #
@@ -4780,6 +5475,53 @@ module Aws::AutoScaling
     #                 launch_template_name: "LaunchTemplateName",
     #                 version: "XmlStringMaxLen255",
     #               },
+    #               instance_requirements: {
+    #                 v_cpu_count: { # required
+    #                   min: 1, # required
+    #                   max: 1,
+    #                 },
+    #                 memory_mi_b: { # required
+    #                   min: 1, # required
+    #                   max: 1,
+    #                 },
+    #                 cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                 memory_gi_b_per_v_cpu: {
+    #                   min: 1.0,
+    #                   max: 1.0,
+    #                 },
+    #                 excluded_instance_types: ["ExcludedInstance"],
+    #                 instance_generations: ["current"], # accepts current, previous
+    #                 spot_max_price_percentage_over_lowest_price: 1,
+    #                 on_demand_max_price_percentage_over_lowest_price: 1,
+    #                 bare_metal: "included", # accepts included, excluded, required
+    #                 burstable_performance: "included", # accepts included, excluded, required
+    #                 require_hibernate_support: false,
+    #                 network_interface_count: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 local_storage: "included", # accepts included, excluded, required
+    #                 local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                 total_local_storage_gb: {
+    #                   min: 1.0,
+    #                   max: 1.0,
+    #                 },
+    #                 baseline_ebs_bandwidth_mbps: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                 accelerator_count: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #                 accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                 accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                 accelerator_total_memory_mi_b: {
+    #                   min: 1,
+    #                   max: 1,
+    #                 },
+    #               },
     #             },
     #           ],
     #         },
@@ -4795,14 +5537,13 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] launch_template
     #   Specifies the launch template to use and the instance types
-    #   (overrides) that are used to provision EC2 instances to fulfill
+    #   (overrides) that are used to launch EC2 instances to fulfill
     #   On-Demand and Spot capacities. Required when creating a mixed
     #   instances policy.
     #   @return [Types::LaunchTemplate]
     #
     # @!attribute [rw] instances_distribution
-    #   Specifies the instances distribution. If not provided, the value for
-    #   each property in `InstancesDistribution` uses a default value.
+    #   Specifies the instances distribution.
     #   @return [Types::InstancesDistribution]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MixedInstancesPolicy AWS API Documentation
@@ -4810,6 +5551,35 @@ module Aws::AutoScaling
     class MixedInstancesPolicy < Struct.new(
       :launch_template,
       :instances_distribution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the minimum and maximum for the `NetworkInterfaceCount`
+    # object when you specify InstanceRequirements for an Auto Scaling
+    # group.
+    #
+    # @note When making an API call, you may pass NetworkInterfaceCountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1,
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum number of network interfaces.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of network interfaces.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/NetworkInterfaceCountRequest AWS API Documentation
+    #
+    class NetworkInterfaceCountRequest < Struct.new(
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6629,6 +7399,53 @@ module Aws::AutoScaling
     #                     launch_template_name: "LaunchTemplateName",
     #                     version: "XmlStringMaxLen255",
     #                   },
+    #                   instance_requirements: {
+    #                     v_cpu_count: { # required
+    #                       min: 1, # required
+    #                       max: 1,
+    #                     },
+    #                     memory_mi_b: { # required
+    #                       min: 1, # required
+    #                       max: 1,
+    #                     },
+    #                     cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                     memory_gi_b_per_v_cpu: {
+    #                       min: 1.0,
+    #                       max: 1.0,
+    #                     },
+    #                     excluded_instance_types: ["ExcludedInstance"],
+    #                     instance_generations: ["current"], # accepts current, previous
+    #                     spot_max_price_percentage_over_lowest_price: 1,
+    #                     on_demand_max_price_percentage_over_lowest_price: 1,
+    #                     bare_metal: "included", # accepts included, excluded, required
+    #                     burstable_performance: "included", # accepts included, excluded, required
+    #                     require_hibernate_support: false,
+    #                     network_interface_count: {
+    #                       min: 1,
+    #                       max: 1,
+    #                     },
+    #                     local_storage: "included", # accepts included, excluded, required
+    #                     local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                     total_local_storage_gb: {
+    #                       min: 1.0,
+    #                       max: 1.0,
+    #                     },
+    #                     baseline_ebs_bandwidth_mbps: {
+    #                       min: 1,
+    #                       max: 1,
+    #                     },
+    #                     accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                     accelerator_count: {
+    #                       min: 1,
+    #                       max: 1,
+    #                     },
+    #                     accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                     accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                     accelerator_total_memory_mi_b: {
+    #                       min: 1,
+    #                       max: 1,
+    #                     },
+    #                   },
     #                 },
     #               ],
     #             },
@@ -6999,6 +7816,34 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Specifies the minimum and maximum for the `TotalLocalStorageGB` object
+    # when you specify InstanceRequirements for an Auto Scaling group.
+    #
+    # @note When making an API call, you may pass TotalLocalStorageGBRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The storage minimum in GB.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The storage maximum in GB.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TotalLocalStorageGBRequest AWS API Documentation
+    #
+    class TotalLocalStorageGBRequest < Struct.new(
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateAutoScalingGroupType
     #   data as a hash:
     #
@@ -7025,6 +7870,53 @@ module Aws::AutoScaling
     #                   launch_template_id: "XmlStringMaxLen255",
     #                   launch_template_name: "LaunchTemplateName",
     #                   version: "XmlStringMaxLen255",
+    #                 },
+    #                 instance_requirements: {
+    #                   v_cpu_count: { # required
+    #                     min: 1, # required
+    #                     max: 1,
+    #                   },
+    #                   memory_mi_b: { # required
+    #                     min: 1, # required
+    #                     max: 1,
+    #                   },
+    #                   cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services
+    #                   memory_gi_b_per_v_cpu: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   excluded_instance_types: ["ExcludedInstance"],
+    #                   instance_generations: ["current"], # accepts current, previous
+    #                   spot_max_price_percentage_over_lowest_price: 1,
+    #                   on_demand_max_price_percentage_over_lowest_price: 1,
+    #                   bare_metal: "included", # accepts included, excluded, required
+    #                   burstable_performance: "included", # accepts included, excluded, required
+    #                   require_hibernate_support: false,
+    #                   network_interface_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   local_storage: "included", # accepts included, excluded, required
+    #                   local_storage_types: ["hdd"], # accepts hdd, ssd
+    #                   total_local_storage_gb: {
+    #                     min: 1.0,
+    #                     max: 1.0,
+    #                   },
+    #                   baseline_ebs_bandwidth_mbps: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_types: ["gpu"], # accepts gpu, fpga, inference
+    #                   accelerator_count: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
+    #                   accelerator_manufacturers: ["nvidia"], # accepts nvidia, amd, amazon-web-services, xilinx
+    #                   accelerator_names: ["a100"], # accepts a100, v100, k80, t4, m60, radeon-pro-v520, vu9p
+    #                   accelerator_total_memory_mi_b: {
+    #                     min: 1,
+    #                     max: 1,
+    #                   },
     #                 },
     #               },
     #             ],
@@ -7053,6 +7945,7 @@ module Aws::AutoScaling
     #         max_instance_lifetime: 1,
     #         capacity_rebalance: false,
     #         context: "Context",
+    #         desired_capacity_type: "XmlStringMaxLen255",
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -7072,11 +7965,10 @@ module Aws::AutoScaling
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] mixed_instances_policy
-    #   An embedded object that specifies a mixed instances policy. When you
-    #   make changes to an existing policy, all optional properties are left
-    #   unchanged if not specified. For more information, see [Auto Scaling
-    #   groups with multiple instance types and purchase options][1] in the
-    #   *Amazon EC2 Auto Scaling User Guide*.
+    #   An embedded object that specifies a mixed instances policy. For more
+    #   information, see [Auto Scaling groups with multiple instance types
+    #   and purchase options][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
     #
     #
     #
@@ -7228,6 +8120,23 @@ module Aws::AutoScaling
     #   Reserved.
     #   @return [String]
     #
+    # @!attribute [rw] desired_capacity_type
+    #   The unit of measurement for the value specified for desired
+    #   capacity. Amazon EC2 Auto Scaling supports `DesiredCapacityType` for
+    #   attribute-based instance type selection only. For more information,
+    #   see [Creating an Auto Scaling group using attribute-based instance
+    #   type selection][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   By default, Amazon EC2 Auto Scaling specifies `units`, which
+    #   translates into number of instances.
+    #
+    #   Valid values: `units` \| `vcpu` \| `memory-mib`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation
     #
     class UpdateAutoScalingGroupType < Struct.new(
@@ -7249,7 +8158,36 @@ module Aws::AutoScaling
       :service_linked_role_arn,
       :max_instance_lifetime,
       :capacity_rebalance,
-      :context)
+      :context,
+      :desired_capacity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the minimum and maximum for the `VCpuCount` object when you
+    # specify InstanceRequirements for an Auto Scaling group.
+    #
+    # @note When making an API call, you may pass VCpuCountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         min: 1, # required
+    #         max: 1,
+    #       }
+    #
+    # @!attribute [rw] min
+    #   The minimum number of vCPUs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of vCPUs.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/VCpuCountRequest AWS API Documentation
+    #
+    class VCpuCountRequest < Struct.new(
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end

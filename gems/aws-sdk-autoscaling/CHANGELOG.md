@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2021-10-27)
+------------------
+
+* Feature - This release adds support for attribute-based instance type selection, a new EC2 Auto Scaling feature that lets customers express their instance requirements as a set of attributes, such as vCPU, memory, and storage.
+
 1.70.0 (2021-10-18)
 ------------------
 

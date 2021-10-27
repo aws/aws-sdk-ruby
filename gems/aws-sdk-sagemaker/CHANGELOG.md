@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2021-10-27)
+------------------
+
+* Feature - This release allows customers to describe one or more versioned model packages through BatchDescribeModelPackage, update project via UpdateProject, modify and read customer metadata properties using Create, Update and Describe ModelPackage and enables cross account registration of model packages.
+
 1.104.0 (2021-10-18)
 ------------------
 

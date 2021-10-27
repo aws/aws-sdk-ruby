@@ -322,11 +322,12 @@ module Aws::Textract
     # @!attribute [rw] page
     #   The page on which a block was detected. `Page` is returned by
     #   asynchronous operations. Page values greater than 1 are only
-    #   returned for multipage documents that are in PDF format. A scanned
-    #   image (JPEG/PNG), even if it contains multiple document pages, is
-    #   considered to be a single-page document. The value of `Page` is
-    #   always 1. Synchronous operations don't return `Page` because every
-    #   input document is considered to be a single-page document.
+    #   returned for multipage documents that are in PDF or TIFF format. A
+    #   scanned image (JPEG/PNG), even if it contains multiple document
+    #   pages, is considered to be a single-page document. The value of
+    #   `Page` is always 1. Synchronous operations don't return `Page`
+    #   because every input document is considered to be a single-page
+    #   document.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Block AWS API Documentation
@@ -864,6 +865,93 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetExpenseAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   A unique identifier for the text detection job. The `JobId` is
+    #   returned from `StartExpenseAnalysis`. A `JobId` value is only valid
+    #   for 7 days.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 20. If you specify a value greater
+    #   than 20, a maximum of 20 results is returned. The default value is
+    #   20.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there are more
+    #   blocks to retrieve), Amazon Textract returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of blocks.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetExpenseAnalysisRequest AWS API Documentation
+    #
+    class GetExpenseAnalysisRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_metadata
+    #   Information about a document that Amazon Textract processed.
+    #   `DocumentMetadata` is returned in every page of paginated responses
+    #   from an Amazon Textract operation.
+    #   @return [Types::DocumentMetadata]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the text detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Textract returns this token.
+    #   You can use this token in the subsequent request to retrieve the
+    #   next set of text-detection results.
+    #   @return [String]
+    #
+    # @!attribute [rw] expense_documents
+    #   The expenses detected by Amazon Textract.
+    #   @return [Array<Types::ExpenseDocument>]
+    #
+    # @!attribute [rw] warnings
+    #   A list of warnings that occurred during the text-detection operation
+    #   for the document.
+    #   @return [Array<Types::Warning>]
+    #
+    # @!attribute [rw] status_message
+    #   Returns if the detection job could not be completed. Contains
+    #   explanation for what error occured.
+    #   @return [String]
+    #
+    # @!attribute [rw] analyze_expense_model_version
+    #   The current model version of AnalyzeExpense.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetExpenseAnalysisResponse AWS API Documentation
+    #
+    class GetExpenseAnalysisResponse < Struct.new(
+      :document_metadata,
+      :job_status,
+      :next_token,
+      :expense_documents,
+      :warnings,
+      :status_message,
+      :analyze_expense_model_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Shows the results of the human in the loop evaluation. If there is no
     # HumanLoopArn, the input did not trigger human review.
     #
@@ -1253,7 +1341,7 @@ module Aws::Textract
     # @!attribute [rw] name
     #   The file name of the input document. Synchronous operations can use
     #   image files that are in JPEG or PNG format. Asynchronous operations
-    #   also support PDF format files.
+    #   also support PDF and TIFF format files.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1467,6 +1555,100 @@ module Aws::Textract
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentTextDetectionResponse AWS API Documentation
     #
     class StartDocumentTextDetectionResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartExpenseAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_location: { # required
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         job_tag: "JobTag",
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         output_config: {
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_prefix: "S3ObjectName",
+    #         },
+    #         kms_key_id: "KMSKeyId",
+    #       }
+    #
+    # @!attribute [rw] document_location
+    #   The location of the document to be processed.
+    #   @return [Types::DocumentLocation]
+    #
+    # @!attribute [rw] client_request_token
+    #   The idempotent token that's used to identify the start request. If
+    #   you use the same token with multiple `StartDocumentTextDetection`
+    #   requests, the same `JobId` is returned. Use `ClientRequestToken` to
+    #   prevent the same job from being accidentally started more than once.
+    #   For more information, see [Calling Amazon Textract Asynchronous
+    #   Operations][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/textract/latest/dg/api-async.html
+    #   @return [String]
+    #
+    # @!attribute [rw] job_tag
+    #   An identifier you specify that's included in the completion
+    #   notification published to the Amazon SNS topic. For example, you can
+    #   use `JobTag` to identify the type of document that the completion
+    #   notification corresponds to (such as a tax form or a receipt).
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_channel
+    #   The Amazon SNS topic ARN that you want Amazon Textract to publish
+    #   the completion status of the operation to.
+    #   @return [Types::NotificationChannel]
+    #
+    # @!attribute [rw] output_config
+    #   Sets if the output will go to a customer defined bucket. By default,
+    #   Amazon Textract will save the results internally to be accessed by
+    #   the `GetExpenseAnalysis` operation.
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key used to encrypt the inference results. This can be in
+    #   either Key ID or Key Alias format. When a KMS key is provided, the
+    #   KMS key will be used for server-side encryption of the objects in
+    #   the customer bucket. When this parameter is not enabled, the result
+    #   will be encrypted server side,using SSE-S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartExpenseAnalysisRequest AWS API Documentation
+    #
+    class StartExpenseAnalysisRequest < Struct.new(
+      :document_location,
+      :client_request_token,
+      :job_tag,
+      :notification_channel,
+      :output_config,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   A unique identifier for the text detection job. The `JobId` is
+    #   returned from `StartExpenseAnalysis`. A `JobId` value is only valid
+    #   for 7 days.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartExpenseAnalysisResponse AWS API Documentation
+    #
+    class StartExpenseAnalysisResponse < Struct.new(
       :job_id)
       SENSITIVE = []
       include Aws::Structure
