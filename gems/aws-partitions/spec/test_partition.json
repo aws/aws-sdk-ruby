@@ -9,7 +9,7 @@
       "dnsSuffix" : "amazonaws.com",
       "partition" : "test",
       "partitionName" : "AWS SDK For Ruby Test Partition",
-      "regionRegex" : "^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$",
+      "regionRegex" : "^(us|eu|ap|sa|ca|me|peccy)\\-\\w+\\-\\d+$",
       "regions" : {
         "us-peccy-1" : {
           "description" : "US West (Seattle)"

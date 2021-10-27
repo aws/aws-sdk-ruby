@@ -310,6 +310,15 @@ module Aws
             )
           ).to eq('us-peccy-1')
         end
+
+        it 'gets the signing region from the credential scope for a global service' do
+          expect(
+            Partitions::EndpointProvider.signing_region(
+              'peccy-west-1',
+              'global-peccy-service'
+            )
+          ).to eq('us-peccy-1')
+        end
       end
 
       describe '.dns_suffix_for' do

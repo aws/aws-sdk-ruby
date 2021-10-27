@@ -58,7 +58,12 @@ module Aws
 
       describe 'sigv4 signing region' do
 
-        it 'defaults to us-east-1 for global endpoints' do
+        it 'uses the endpoint provider for global endpoints' do
+          expect(Aws::Partitions::EndpointProvider)
+            .to receive(:signing_region)
+                  .with('other-region', 'svc-name')
+                  .and_return('us-east-1')
+
           client = Sigv4Client.new(options.merge(
             region: 'other-region',
             endpoint: 'https://svc-name.amazonaws.com'

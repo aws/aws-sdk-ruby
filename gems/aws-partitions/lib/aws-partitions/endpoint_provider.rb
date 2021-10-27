@@ -45,10 +45,18 @@ module Aws
 
       # @api private Use the static class methods instead.
       def signing_region(region, service)
-        get_partition(region)
-          .fetch('services', {})
-          .fetch(service, {})
-          .fetch('endpoints', {})
+        partition = get_partition(region)
+        service_cfg = partition.fetch('services', {})
+                               .fetch(service, {})
+        endpoints = service_cfg.fetch('endpoints', {})
+
+        is_global = !endpoints.key?(region) &&
+          service_cfg['isRegionalized'] == false
+
+        # Check for global endpoint.
+        region = service_cfg.fetch('partitionEndpoint', region) if is_global
+
+        endpoints
           .fetch(region, {})
           .fetch('credentialScope', {})
           .fetch('region', region)
