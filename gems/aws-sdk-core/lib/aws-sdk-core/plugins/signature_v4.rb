@@ -17,8 +17,11 @@ module Aws
 
       option(:sigv4_region) do |cfg|
         if cfg.region
+          if cfg.respond_to?(:sts_regional_endpoints)
+            sts_regional = cfg.sts_regional_endpoints
+          end
           Aws::Partitions::EndpointProvider.signing_region(
-            cfg.region, cfg.api.metadata['endpointPrefix']
+            cfg.region, cfg.api.metadata['endpointPrefix'], sts_regional
           )
         end
       end

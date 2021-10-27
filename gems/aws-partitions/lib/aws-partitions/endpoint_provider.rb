@@ -44,17 +44,38 @@ module Aws
       end
 
       # @api private Use the static class methods instead.
-      def signing_region(region, service)
+      def signing_region(region, service, sts_regional_endpoints)
+        # The signing region is most
+        # commonly the configured region. There are a few
+        # notable exceptions:
+        #
+        # * Some services have a global endpoint to the entire
+        #   partition (isRegionalized=false).  For these services
+        #   use the partitionEndpoint's credentialScope to get
+        #   the correct signing region.
+        #
+        # * Some endpoints (eg legacy fips pseudo-regions) have
+        #   a credential scope that defines a different
+        #   signing region which we use.
+        #
+        # If no credentialScope is found, use the provided region
         partition = get_partition(region)
         service_cfg = partition.fetch('services', {})
                                .fetch(service, {})
         endpoints = service_cfg.fetch('endpoints', {})
 
+        # Check for sts legacy behavior
+        sts_legacy = service == 'sts' &&
+          sts_regional_endpoints == 'legacy' &&
+          STS_LEGACY_REGIONS.include?(region)
+
         is_global = !endpoints.key?(region) &&
           service_cfg['isRegionalized'] == false
 
         # Check for global endpoint.
-        region = service_cfg.fetch('partitionEndpoint', region) if is_global
+        if sts_legacy || is_global
+          region = service_cfg.fetch('partitionEndpoint', region)
+        end
 
         endpoints
           .fetch(region, {})
@@ -140,8 +161,8 @@ module Aws
           default_provider.resolve(region, service, sts_regional_endpoints)
         end
 
-        def signing_region(region, service)
-          default_provider.signing_region(region, service)
+        def signing_region(region, service, sts_regional_endpoints = 'regional')
+          default_provider.signing_region(region, service, sts_regional_endpoints)
         end
 
         def dns_suffix_for(region)

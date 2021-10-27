@@ -41,7 +41,10 @@
         },
         "crazy-peccy-service" : {
           "defaults" : {
-            "hostname" : "{region}.crazy-peccy-service.amazonaws.com"
+            "hostname" : "{region}.crazy-peccy-service.amazonaws.com",
+            "credentialScope": {
+              "region": ""
+            }
           },
           "endpoints" : {
             "us-peccy-1" : { }
