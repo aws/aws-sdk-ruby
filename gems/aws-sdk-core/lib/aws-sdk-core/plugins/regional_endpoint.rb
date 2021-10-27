@@ -61,6 +61,13 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
             raise Errors::InvalidRegionError
           end
 
+          region = cfg.region
+          new_region = region.gsub('fips-', '').gsub('-fips', '')
+          if region != new_region
+            cfg.override_config(:use_fips_endpoint, true)
+            cfg.override_config(:region, new_region)
+          end
+
           Aws::Partitions::EndpointProvider.resolve(
             cfg.region,
             endpoint_prefix,
@@ -76,14 +83,6 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
       def after_initialize(client)
         if client.config.region.nil? || client.config.region == ''
           raise Errors::MissingRegionError
-        end
-
-        # shimmed support for use_fips_endpoint - extract fips from region
-        region = client.config.region
-        new_region = region.gsub('fips-', '').gsub('-fips', '')
-        if region != new_region
-          client.config.use_fips_endpoint = true
-          client.config.region = new_region
         end
       end
 

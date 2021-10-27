@@ -195,6 +195,10 @@ module Seahorse
           @members.include?(method_name) or super
         end
 
+        def override_config(k, v)
+          @struct[k] = v
+        end
+
         private
 
         def value_at(opt_name)
