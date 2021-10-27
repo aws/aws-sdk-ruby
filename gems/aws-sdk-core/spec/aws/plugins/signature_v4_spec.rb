@@ -35,6 +35,19 @@ module Aws
           expect(client.config.sigv4_name).to eq('name')
         end
 
+        it 'uses the endpoint provider for service name' do
+          expect(Aws::Partitions::EndpointProvider)
+            .to receive(:signing_service)
+                  .with('other-region', 'svc-name', nil)
+                  .and_return('override-service')
+
+          client = Sigv4Client.new(options.merge(
+            region: 'other-region',
+            endpoint: 'https://svc-name.amazonaws.com'
+          ))
+          expect(client.config.sigv4_name).to eq('override-service')
+        end
+
         it 'defaults the sigv4 name to the endpoint prefix' do
           svc = ApiHelper.sample_service(metadata: {
             'signatureVersion' => 'v4',

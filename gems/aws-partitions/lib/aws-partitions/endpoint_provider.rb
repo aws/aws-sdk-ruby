@@ -45,20 +45,22 @@ module Aws
 
       # @api private Use the static class methods instead.
       def signing_region(region, service, sts_regional_endpoints)
-        # The signing region is most
-        # commonly the configured region. There are a few
-        # notable exceptions:
-        #
-        # * Some services have a global endpoint to the entire
-        #   partition (isRegionalized=false).  For these services
-        #   use the partitionEndpoint's credentialScope to get
-        #   the correct signing region.
-        #
-        # * Some endpoints (eg legacy fips pseudo-regions) have
-        #   a credential scope that defines a different
-        #   signing region which we use.
-        #
-        # If no credentialScope is found, use the provided region
+        credential_scope(region, service, sts_regional_endpoints)
+          .fetch('region', region)
+      end
+
+      # @api private Use the static class methods instead.
+      def signing_service(region, service, sts_regional_endpoints)
+        # don't default to the service name
+        # signers should prefer the api metadata's signingName
+        # if no service is set in the credentialScope
+        # if no service is set in the credentialScope
+        credential_scope(region, service, sts_regional_endpoints)
+          .fetch('service', nil)
+      end
+
+      # @api private Use the static class methods instead.
+      def credential_scope(region, service, sts_regional_endpoints)
         partition = get_partition(region)
         service_cfg = partition.fetch('services', {})
                                .fetch(service, {})
@@ -84,7 +86,6 @@ module Aws
         endpoints
           .fetch(region, {})
           .fetch('credentialScope', default_credential_scope)
-          .fetch('region', region)
       end
 
       # @api private Use the static class methods instead.
@@ -167,6 +168,10 @@ module Aws
 
         def signing_region(region, service, sts_regional_endpoints = 'regional')
           default_provider.signing_region(region, service, sts_regional_endpoints)
+        end
+
+        def signing_service(region, service, sts_regional_endpoints = 'regional')
+          default_provider.signing_service(region, service, sts_regional_endpoints)
         end
 
         def dns_suffix_for(region)

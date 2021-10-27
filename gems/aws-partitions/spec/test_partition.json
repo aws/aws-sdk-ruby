@@ -20,7 +20,8 @@
           "endpoints" : {
             "peccy-global" : {
               "credentialScope" : {
-                "region" : "us-peccy-1"
+                "region" : "us-peccy-1",
+                "service": "global-peccy-signing-name"
               },
               "hostname" : "global-peccy-service.amazonaws.com"
             },
@@ -36,14 +37,20 @@
         },
         "peccy-service" : {
           "endpoints" : {
-            "us-peccy-1" : { }
+            "us-peccy-1" : {
+              "credentialScope": {
+                "region": "peccy-west-1",
+                "service": "peccy-signing-name"
+              }
+            }
           }
         },
         "crazy-peccy-service" : {
           "defaults" : {
             "hostname" : "{region}.crazy-peccy-service.amazonaws.com",
             "credentialScope": {
-              "region": "peccy-west-1"
+              "region": "peccy-west-1",
+              "service": "crazy-peccy-signing-service"
             }
           },
           "endpoints" : {
