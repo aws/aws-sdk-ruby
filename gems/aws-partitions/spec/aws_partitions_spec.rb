@@ -319,6 +319,15 @@ module Aws
             )
           ).to eq('us-peccy-1')
         end
+
+        it 'falls back to a service default credentialScope' do
+          expect(
+            Partitions::EndpointProvider.signing_region(
+              'us-peccy-1',
+              'crazy-peccy-service'
+            )
+          ).to eq('peccy-west-1')
+        end
       end
 
       describe '.dns_suffix_for' do

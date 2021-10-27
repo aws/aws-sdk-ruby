@@ -77,9 +77,13 @@ module Aws
           region = service_cfg.fetch('partitionEndpoint', region)
         end
 
+        default_credential_scope = service_cfg
+                                     .fetch('defaults', {})
+                                     .fetch('credentialScope', {})
+
         endpoints
           .fetch(region, {})
-          .fetch('credentialScope', {})
+          .fetch('credentialScope', default_credential_scope)
           .fetch('region', region)
       end
 
