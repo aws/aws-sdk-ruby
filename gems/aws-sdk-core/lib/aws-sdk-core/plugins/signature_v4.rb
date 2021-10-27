@@ -12,15 +12,9 @@ module Aws
       end
 
       option(:sigv4_name) do |cfg|
-        signingName = if cfg.region
-          if cfg.respond_to?(:sts_regional_endpoints)
-            sts_regional = cfg.sts_regional_endpoints
-          end
-          Aws::Partitions::EndpointProvider.signing_service(
-            cfg.region, cfg.api.metadata['endpointPrefix'], sts_regional
-          )
-        end
-        signingName || cfg.api.metadata['signingName'] || cfg.api.metadata['endpointPrefix']
+        Aws::Partitions::EndpointProvider.signing_service(
+          cfg.region, cfg.api.metadata['endpointPrefix']
+        ) || cfg.api.metadata['signingName'] || cfg.api.metadata['endpointPrefix']
       end
 
       option(:sigv4_region) do |cfg|

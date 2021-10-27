@@ -50,12 +50,11 @@ module Aws
       end
 
       # @api private Use the static class methods instead.
-      def signing_service(region, service, sts_regional_endpoints)
+      def signing_service(region, service)
         # don't default to the service name
         # signers should prefer the api metadata's signingName
         # if no service is set in the credentialScope
-        # if no service is set in the credentialScope
-        credential_scope(region, service, sts_regional_endpoints)
+        credential_scope(region, service, 'regional')
           .fetch('service', nil)
       end
 
@@ -170,8 +169,8 @@ module Aws
           default_provider.signing_region(region, service, sts_regional_endpoints)
         end
 
-        def signing_service(region, service, sts_regional_endpoints = 'regional')
-          default_provider.signing_service(region, service, sts_regional_endpoints)
+        def signing_service(region, service)
+          default_provider.signing_service(region, service)
         end
 
         def dns_suffix_for(region)

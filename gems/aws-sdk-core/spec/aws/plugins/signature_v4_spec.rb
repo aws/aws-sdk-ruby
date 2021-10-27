@@ -38,7 +38,7 @@ module Aws
         it 'uses the endpoint provider for service name' do
           expect(Aws::Partitions::EndpointProvider)
             .to receive(:signing_service)
-                  .with('other-region', 'svc-name', nil)
+                  .with('other-region', 'svc-name')
                   .and_return('override-service')
 
           client = Sigv4Client.new(options.merge(
