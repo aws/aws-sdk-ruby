@@ -69,62 +69,111 @@ module Aws
       # @option variants [Boolean] :fips When true, resolve a FIPS endpoint.
       # @api private Use the static class methods instead.
       def dns_suffix_for(region, service, variants)
-        partition = get_partition(region)
-        partition_variants = partition.fetch('defaults', {})
-                                      .fetch('variants', [])
-        service_variants = partition.fetch('services', {})
-                                    .fetch(service, {})
-                                    .fetch('defaults', {})
-                                    .fetch('variants', [])
-        service_variant = get_variant(service_variants, variants)
-        unless service_variant['dnsSuffix']
-          partition_variant = get_variant(partition_variants, variants)
+        if configured_variants?(variants)
+          resolved_variants = resolve_variants(region, service)
+          get_variant(resolved_variants, variants)['dnsSuffix']
+        else
+          get_partition(region)['dnsSuffix']
         end
-
-        service_variant['dnsSuffix'] ||
-          partition_variant['dnsSuffix'] ||
-          partition['dnsSuffix']
       end
 
       private
 
-      def endpoint_for(region, service, sts_endpoint, variants)
-        # partition default endpoint
+      def configured_variants?(variants)
+        variants[:fips] == true || variants[:dualstack] == true
+      end
+
+      def resolve_variants(region, service)
         partition = get_partition(region)
-        partition_variant = get_variant(
-          partition.fetch('defaults', {}).fetch('variants', []), variants
-        )
-        if variants[:dualstack] == true && partition_variant.empty?
+        partition_variants = partition.fetch('defaults', {})
+                                      .fetch('variants', [])
+
+        service_variants = partition.fetch('services', {})
+                                    .fetch(service, {})
+                                    .fetch('defaults', {})
+                                    .fetch('variants', [])
+
+        service_cfg = partition.fetch('services', {})
+                               .fetch(service, {})
+        endpoints = service_cfg.fetch('endpoints', {})
+
+        is_global = !endpoints.key?(region) &&
+                    service_cfg['isRegionalized'] == false
+
+        # Check for global endpoint.
+        region = service_cfg.fetch('partitionEndpoint', region) if is_global
+
+        endpoint_variants = endpoints.fetch(region, {})
+                                     .fetch('variants', [])
+
+        variants = []
+
+        partition_variants.each do |variant|
+          matching_svc_variant = service_variants.find do |svc_variant|
+            Set.new(variant['tags']) == Set.new(svc_variant['tags'])
+          end || {}
+
+          matching_ep_variant = endpoint_variants.find do |ep_variant|
+            Set.new(variant['tags']) == Set.new(ep_variant['tags'])
+          end || {}
+
+          variants << variant.merge(matching_svc_variant)
+                             .merge(matching_ep_variant)
+        end
+
+        variants
+      end
+
+      def get_variant(modeled_variants, config_variants)
+        tags = Set.new
+        tags << 'dualstack' if config_variants[:dualstack] == true
+        tags << 'fips' if config_variants[:fips] == true
+        modeled_variants.each do |modeled_variant|
+          if tags == Set.new(modeled_variant['tags'])
+            return modeled_variant
+          end
+        end
+        {}
+      end
+
+      def validate_variants!(config_variants, resolved_variants)
+        if config_variants[:dualstack] == true && resolved_variants.empty?
           raise ArgumentError,
                 'Dualstack is not supported for this region and partition'
         end
-        if variants[:fips] == true && partition_variant.empty?
+        if config_variants[:fips] == true && resolved_variants.empty?
           raise ArgumentError,
                 'FIPS is not supported for this region and partition'
         end
-        default_endpoint = if partition_variant.empty?
-          partition['defaults']['hostname']
-        else
-          partition_variant['hostname']
-        end
+      end
 
-        # service default endpoint
-        service_cfg = partition.fetch('services', {}).fetch(service, {})
-        service_variant = get_variant(
-          service_cfg.fetch('defaults', {}).fetch('variants', []), variants
-        )
-        default_endpoint = if service_variant.empty?
-          service_cfg.fetch('defaults', {}).fetch('hostname', default_endpoint)
+      def endpoint_for(region, service, sts_endpoints, variants)
+        if configured_variants?(variants)
+          resolved_variants = resolve_variants(region, service)
+          validate_variants!(variants, resolved_variants)
+          variant = get_variant(resolved_variants, variants)
+          variant['hostname'].sub('{region}', region)
+                             .sub('{service}', service)
+                             .sub('{dnsSuffix}', variant['dnsSuffix'])
         else
-          service_variant['hostname']
+          _endpoint_for(region, service, sts_endpoints)
         end
+      end
+
+      def _endpoint_for(region, service, sts_regional_endpoints)
+        partition = get_partition(region)
+        service_cfg = partition.fetch('services', {}).fetch(service, {})
 
         # Find the default endpoint
+        default_endpoint = service_cfg
+                   .fetch('defaults', {})
+                   .fetch('hostname', partition['defaults']['hostname'])
+
         endpoints = service_cfg.fetch('endpoints', {})
 
         # Check for sts legacy behavior
         sts_legacy = service == 'sts' &&
-                     sts_endpoint == 'legacy' &&
+                     sts_regional_endpoints == 'legacy' &&
                      STS_LEGACY_REGIONS.include?(region)
 
         is_global = !endpoints.key?(region) &&
@@ -135,28 +184,15 @@ module Aws
           region = service_cfg.fetch('partitionEndpoint', region)
         end
 
-        region_variant = get_variant(
-          endpoints.fetch(region, {}).fetch('variants', []), variants
-        )
-        default_endpoint = if region_variant.empty?
-          endpoints.fetch(region, {}).fetch('hostname', default_endpoint)
-        else
-          region_variant.fetch('hostname', default_endpoint)
-        end
+        # Check for service/region level endpoint.
+        endpoint = endpoints
+                   .fetch(region, {})
+                   .fetch('hostname', default_endpoint)
 
         # Replace placeholders from the endpoints
-        default_endpoint.sub('{region}', region)
+        endpoint.sub('{region}', region)
                 .sub('{service}', service)
-                .sub('{dnsSuffix}', dns_suffix_for(region, service, variants))
-      end
-
-      def check_dualstack_support(partition, service_cfg)
-        if !service_cfg.key?('dualstackEndpoints') &&
-          !service_cfg.key?('dualstackDefaults') &&
-          !partition.key?('dualstackDefaults')
-          raise ArgumentError,
-                'Dualstack is not supported for this region and partition'
-        end
+                .sub('{dnsSuffix}', partition['dnsSuffix'])
       end
 
       def get_partition(region_or_partition)
@@ -188,18 +224,6 @@ module Aws
       def default_partition
         @rules['partitions'].find { |p| p['partition'] == 'aws' } ||
           @rules['partitions'].first
-      end
-
-      def get_variant(modeled_variants, config_variants)
-        tags = Set.new
-        tags << 'dualstack' if config_variants[:dualstack] == true
-        tags << 'fips' if config_variants[:fips] == true
-        modeled_variants.each do |modeled_variant|
-          if tags == Set.new(modeled_variant['tags'])
-            return modeled_variant
-          end
-        end
-        {}
       end
 
       class << self
