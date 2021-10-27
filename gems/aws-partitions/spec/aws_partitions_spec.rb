@@ -305,10 +305,57 @@ module Aws
         it 'gets the signing region for a given region and service' do
           expect(
             Partitions::EndpointProvider.signing_region(
-              'peccy-global',
+              'us-peccy-1',
+              'peccy-service'
+            )
+          ).to eq('peccy-west-1')
+        end
+
+        it 'gets the signing region from the global partition for a global service' do
+          expect(
+            Partitions::EndpointProvider.signing_region(
+              'peccy-west-1',
               'global-peccy-service'
             )
           ).to eq('us-peccy-1')
+        end
+
+        it 'falls back to a service default credentialScope' do
+          expect(
+            Partitions::EndpointProvider.signing_region(
+              'us-peccy-1',
+              'crazy-peccy-service'
+            )
+          ).to eq('peccy-west-1')
+        end
+      end
+
+      describe '.signing_service' do
+        it 'gets the signing service for a given region and service' do
+          expect(
+            Partitions::EndpointProvider.signing_service(
+              'us-peccy-1',
+              'peccy-service'
+            )
+          ).to eq('peccy-signing-name')
+        end
+
+        it 'gets the signing service from the global partition for a global service' do
+          expect(
+            Partitions::EndpointProvider.signing_service(
+              'peccy-west-1',
+              'global-peccy-service'
+            )
+          ).to eq('global-peccy-signing-name')
+        end
+
+        it 'falls back to a service default credentialScope' do
+          expect(
+            Partitions::EndpointProvider.signing_service(
+              'us-peccy-1',
+              'crazy-peccy-service'
+            )
+          ).to eq('crazy-peccy-signing-service')
         end
       end
 

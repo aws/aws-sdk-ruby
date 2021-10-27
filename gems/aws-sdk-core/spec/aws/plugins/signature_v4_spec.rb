@@ -35,6 +35,19 @@ module Aws
           expect(client.config.sigv4_name).to eq('name')
         end
 
+        it 'uses the endpoint provider for service name' do
+          expect(Aws::Partitions::EndpointProvider)
+            .to receive(:signing_service)
+                  .with('other-region', 'svc-name')
+                  .and_return('override-service')
+
+          client = Sigv4Client.new(options.merge(
+            region: 'other-region',
+            endpoint: 'https://svc-name.amazonaws.com'
+          ))
+          expect(client.config.sigv4_name).to eq('override-service')
+        end
+
         it 'defaults the sigv4 name to the endpoint prefix' do
           svc = ApiHelper.sample_service(metadata: {
             'signatureVersion' => 'v4',
@@ -58,7 +71,12 @@ module Aws
 
       describe 'sigv4 signing region' do
 
-        it 'defaults to us-east-1 for global endpoints' do
+        it 'uses the endpoint provider for global endpoints' do
+          expect(Aws::Partitions::EndpointProvider)
+            .to receive(:signing_region)
+                  .with('other-region', 'svc-name', nil)
+                  .and_return('us-east-1')
+
           client = Sigv4Client.new(options.merge(
             region: 'other-region',
             endpoint: 'https://svc-name.amazonaws.com'
@@ -96,7 +114,7 @@ module Aws
           })
           expect(Aws::Partitions::EndpointProvider)
             .to receive(:signing_region)
-            .with('fips-us-east-1', 'api.service')
+            .with('fips-us-east-1', 'api.service', nil)
             .and_return('us-east-1')
 
           client = svc::Client.new(options.merge(

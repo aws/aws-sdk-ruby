@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - use the `EndpointProvider` to lookup signing region and name.
+
 3.121.3 (2021-10-20)
 ------------------
 

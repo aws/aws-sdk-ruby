@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add `signing_service` method and resolve `credentialScope` correctly for global services/service defaults.
+
 1.520.0 (2021-10-27)
 ------------------
 
