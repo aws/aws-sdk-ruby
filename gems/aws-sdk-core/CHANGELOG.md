@@ -5,6 +5,13 @@ Unreleased Changes
 
 * Feature - Support modeled fips endpoints. It can be configured with shared configuration (`use_fips_endpoint`), an ENV variable (`AWS_USE_FIPS_ENDPOINT`), and a constructor option (`:use_fips_endpoint`). Requests made to services without a fips endpoint will fail.
 
+* Issue - bump minimum version of `aws-partitions` (#2603).
+
+3.121.4 (2021-10-28)
+------------------
+
+* Issue - This version has been yanked. (#2603).
+
 * Issue - use the `EndpointProvider` to lookup signing region and name.
 
 3.121.3 (2021-10-20)

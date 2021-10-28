@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2021-10-28)
+------------------
+
+* Feature - This release adds support for RStudio on SageMaker.
+
 1.105.0 (2021-10-27)
 ------------------
 

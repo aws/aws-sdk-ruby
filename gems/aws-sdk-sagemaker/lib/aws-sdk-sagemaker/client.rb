@@ -934,7 +934,7 @@ module Aws::SageMaker
     #   resp = client.create_app({
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName", # required
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
     #     app_name: "AppName", # required
     #     tags: [
     #       {
@@ -1812,6 +1812,16 @@ module Aws::SageMaker
     #   attached to the domain with an Amazon Web Services managed key by
     #   default. For more control, specify a customer managed key.
     #
+    # @option params [String] :app_security_group_management
+    #   The entity that creates and manages the required security groups for
+    #   inter-app communication in `VPCOnly` mode. Required when
+    #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
+    #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
+    #   is provided.
+    #
+    # @option params [Types::DomainSettings] :domain_settings
+    #   A collection of `Domain` settings.
+    #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainResponse#domain_arn #domain_arn} => String
@@ -1863,6 +1873,12 @@ module Aws::SageMaker
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #       },
+    #       r_studio_server_pro_app_settings: {
+    #         access_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
+    #       },
+    #       r_session_app_settings: {
+    #       },
     #     },
     #     subnet_ids: ["SubnetId"], # required
     #     vpc_id: "VpcId", # required
@@ -1875,6 +1891,21 @@ module Aws::SageMaker
     #     app_network_access_type: "PublicInternetOnly", # accepts PublicInternetOnly, VpcOnly
     #     home_efs_file_system_kms_key_id: "KmsKeyId",
     #     kms_key_id: "KmsKeyId",
+    #     app_security_group_management: "Service", # accepts Service, Customer
+    #     domain_settings: {
+    #       security_group_ids: ["SecurityGroupId"],
+    #       r_studio_server_pro_domain_settings: {
+    #         domain_execution_role_arn: "RoleArn", # required
+    #         r_studio_connect_url: "String",
+    #         r_studio_package_manager_url: "String",
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -6129,6 +6160,12 @@ module Aws::SageMaker
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #       },
+    #       r_studio_server_pro_app_settings: {
+    #         access_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
+    #       },
+    #       r_session_app_settings: {
+    #       },
     #     },
     #   })
     #
@@ -6426,7 +6463,7 @@ module Aws::SageMaker
     #   resp = client.delete_app({
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName", # required
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
     #     app_name: "AppName", # required
     #   })
     #
@@ -7671,14 +7708,14 @@ module Aws::SageMaker
     #   resp = client.describe_app({
     #     domain_id: "DomainId", # required
     #     user_profile_name: "UserProfileName", # required
-    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard
+    #     app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
     #     app_name: "AppName", # required
     #   })
     #
     # @example Response structure
     #
     #   resp.app_arn #=> String
-    #   resp.app_type #=> String, one of "JupyterServer", "KernelGateway", "TensorBoard"
+    #   resp.app_type #=> String, one of "JupyterServer", "KernelGateway", "TensorBoard", "RStudioServerPro", "RSessionGateway"
     #   resp.app_name #=> String
     #   resp.domain_id #=> String
     #   resp.user_profile_name #=> String
@@ -8282,6 +8319,9 @@ module Aws::SageMaker
     #   * {Types::DescribeDomainResponse#url #url} => String
     #   * {Types::DescribeDomainResponse#vpc_id #vpc_id} => String
     #   * {Types::DescribeDomainResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::DescribeDomainResponse#domain_settings #domain_settings} => Types::DomainSettings
+    #   * {Types::DescribeDomainResponse#app_security_group_management #app_security_group_management} => String
+    #   * {Types::DescribeDomainResponse#security_group_id_for_domain_boundary #security_group_id_for_domain_boundary} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -8327,6 +8367,8 @@ module Aws::SageMaker
     #   resp.default_user_settings.tensor_board_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.default_user_settings.tensor_board_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
     #   resp.default_user_settings.tensor_board_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.default_user_settings.r_studio_server_pro_app_settings.access_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.default_user_settings.r_studio_server_pro_app_settings.user_group #=> String, one of "R_STUDIO_ADMIN", "R_STUDIO_USER"
     #   resp.app_network_access_type #=> String, one of "PublicInternetOnly", "VpcOnly"
     #   resp.home_efs_file_system_kms_key_id #=> String
     #   resp.subnet_ids #=> Array
@@ -8334,6 +8376,17 @@ module Aws::SageMaker
     #   resp.url #=> String
     #   resp.vpc_id #=> String
     #   resp.kms_key_id #=> String
+    #   resp.domain_settings.security_group_ids #=> Array
+    #   resp.domain_settings.security_group_ids[0] #=> String
+    #   resp.domain_settings.r_studio_server_pro_domain_settings.domain_execution_role_arn #=> String
+    #   resp.domain_settings.r_studio_server_pro_domain_settings.r_studio_connect_url #=> String
+    #   resp.domain_settings.r_studio_server_pro_domain_settings.r_studio_package_manager_url #=> String
+    #   resp.domain_settings.r_studio_server_pro_domain_settings.default_resource_spec.sage_maker_image_arn #=> String
+    #   resp.domain_settings.r_studio_server_pro_domain_settings.default_resource_spec.sage_maker_image_version_arn #=> String
+    #   resp.domain_settings.r_studio_server_pro_domain_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
+    #   resp.domain_settings.r_studio_server_pro_domain_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.app_security_group_management #=> String, one of "Service", "Customer"
+    #   resp.security_group_id_for_domain_boundary #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomain AWS API Documentation
     #
@@ -10772,6 +10825,8 @@ module Aws::SageMaker
     #   resp.user_settings.tensor_board_app_settings.default_resource_spec.sage_maker_image_version_arn #=> String
     #   resp.user_settings.tensor_board_app_settings.default_resource_spec.instance_type #=> String, one of "system", "ml.t3.micro", "ml.t3.small", "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.8xlarge", "ml.m5.12xlarge", "ml.m5.16xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.8xlarge", "ml.m5d.12xlarge", "ml.m5d.16xlarge", "ml.m5d.24xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.12xlarge", "ml.c5.18xlarge", "ml.c5.24xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
     #   resp.user_settings.tensor_board_app_settings.default_resource_spec.lifecycle_config_arn #=> String
+    #   resp.user_settings.r_studio_server_pro_app_settings.access_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.user_settings.r_studio_server_pro_app_settings.user_group #=> String, one of "R_STUDIO_ADMIN", "R_STUDIO_USER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeUserProfile AWS API Documentation
     #
@@ -11372,7 +11427,7 @@ module Aws::SageMaker
     #   resp.apps #=> Array
     #   resp.apps[0].domain_id #=> String
     #   resp.apps[0].user_profile_name #=> String
-    #   resp.apps[0].app_type #=> String, one of "JupyterServer", "KernelGateway", "TensorBoard"
+    #   resp.apps[0].app_type #=> String, one of "JupyterServer", "KernelGateway", "TensorBoard", "RStudioServerPro", "RSessionGateway"
     #   resp.apps[0].app_name #=> String
     #   resp.apps[0].status #=> String, one of "Deleted", "Deleting", "Failed", "InService", "Pending"
     #   resp.apps[0].creation_time #=> Time
@@ -16937,6 +16992,9 @@ module Aws::SageMaker
     # @option params [Types::UserSettings] :default_user_settings
     #   A collection of settings.
     #
+    # @option params [Types::DomainSettingsForUpdate] :domain_settings_for_update
+    #   A collection of `DomainSettings` configuration values to update.
+    #
     # @return [Types::UpdateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainResponse#domain_arn #domain_arn} => String
@@ -16979,6 +17037,23 @@ module Aws::SageMaker
     #         lifecycle_config_arns: ["StudioLifecycleConfigArn"],
     #       },
     #       tensor_board_app_settings: {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #       },
+    #       r_studio_server_pro_app_settings: {
+    #         access_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
+    #       },
+    #       r_session_app_settings: {
+    #       },
+    #     },
+    #     domain_settings_for_update: {
+    #       r_studio_server_pro_domain_settings_for_update: {
+    #         domain_execution_role_arn: "RoleArn", # required
     #         default_resource_spec: {
     #           sage_maker_image_arn: "ImageArn",
     #           sage_maker_image_version_arn: "ImageVersionArn",
@@ -17680,17 +17755,18 @@ module Aws::SageMaker
     #   The product ID and provisioning artifact ID to provision a service
     #   catalog. The provisioning artifact ID will default to the latest
     #   provisioning artifact ID of the product, if you don't provide the
-    #   provisioning artifact ID. For more information, see [What is AWS
-    #   Service Catalog][1].
+    #   provisioning artifact ID. For more information, see [What is Amazon
+    #   Web Services Service Catalog][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -17979,6 +18055,12 @@ module Aws::SageMaker
     #           lifecycle_config_arn: "StudioLifecycleConfigArn",
     #         },
     #       },
+    #       r_studio_server_pro_app_settings: {
+    #         access_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
+    #       },
+    #       r_session_app_settings: {
+    #       },
     #     },
     #   })
     #
@@ -18205,7 +18287,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

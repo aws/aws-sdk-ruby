@@ -3960,7 +3960,7 @@ module Aws::SageMaker
     #       {
     #         domain_id: "DomainId", # required
     #         user_profile_name: "UserProfileName", # required
-    #         app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard
+    #         app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
     #         app_name: "AppName", # required
     #         tags: [
     #           {
@@ -4800,6 +4800,12 @@ module Aws::SageMaker
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
+    #           r_studio_server_pro_app_settings: {
+    #             access_status: "ENABLED", # accepts ENABLED, DISABLED
+    #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
+    #           },
+    #           r_session_app_settings: {
+    #           },
     #         },
     #         subnet_ids: ["SubnetId"], # required
     #         vpc_id: "VpcId", # required
@@ -4812,6 +4818,21 @@ module Aws::SageMaker
     #         app_network_access_type: "PublicInternetOnly", # accepts PublicInternetOnly, VpcOnly
     #         home_efs_file_system_kms_key_id: "KmsKeyId",
     #         kms_key_id: "KmsKeyId",
+    #         app_security_group_management: "Service", # accepts Service, Customer
+    #         domain_settings: {
+    #           security_group_ids: ["SecurityGroupId"],
+    #           r_studio_server_pro_domain_settings: {
+    #             domain_execution_role_arn: "RoleArn", # required
+    #             r_studio_connect_url: "String",
+    #             r_studio_package_manager_url: "String",
+    #             default_resource_spec: {
+    #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -4872,6 +4893,18 @@ module Aws::SageMaker
     #   default. For more control, specify a customer managed key.
     #   @return [String]
     #
+    # @!attribute [rw] app_security_group_management
+    #   The entity that creates and manages the required security groups for
+    #   inter-app communication in `VPCOnly` mode. Required when
+    #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
+    #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
+    #   is provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_settings
+    #   A collection of `Domain` settings.
+    #   @return [Types::DomainSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
     #
     class CreateDomainRequest < Struct.new(
@@ -4883,7 +4916,9 @@ module Aws::SageMaker
       :tags,
       :app_network_access_type,
       :home_efs_file_system_kms_key_id,
-      :kms_key_id)
+      :kms_key_id,
+      :app_security_group_management,
+      :domain_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9050,6 +9085,12 @@ module Aws::SageMaker
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
+    #           r_studio_server_pro_app_settings: {
+    #             access_status: "ENABLED", # accepts ENABLED, DISABLED
+    #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
+    #           },
+    #           r_session_app_settings: {
+    #           },
     #         },
     #       }
     #
@@ -10053,7 +10094,7 @@ module Aws::SageMaker
     #       {
     #         domain_id: "DomainId", # required
     #         user_profile_name: "UserProfileName", # required
-    #         app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard
+    #         app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
     #         app_name: "AppName", # required
     #       }
     #
@@ -11259,7 +11300,7 @@ module Aws::SageMaker
     #       {
     #         domain_id: "DomainId", # required
     #         user_profile_name: "UserProfileName", # required
-    #         app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard
+    #         app_type: "JupyterServer", # required, accepts JupyterServer, KernelGateway, TensorBoard, RStudioServerPro, RSessionGateway
     #         app_name: "AppName", # required
     #       }
     #
@@ -12185,6 +12226,23 @@ module Aws::SageMaker
     #   EFS volume attached to the domain.
     #   @return [String]
     #
+    # @!attribute [rw] domain_settings
+    #   A collection of `Domain` settings.
+    #   @return [Types::DomainSettings]
+    #
+    # @!attribute [rw] app_security_group_management
+    #   The entity that creates and manages the required security groups for
+    #   inter-app communication in `VPCOnly` mode. Required when
+    #   `CreateDomain.AppNetworkAccessType` is `VPCOnly` and
+    #   `DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn`
+    #   is provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_id_for_domain_boundary
+    #   The ID of the security group that authorizes traffic between the
+    #   `RSessionGateway` apps and the `RStudioServerPro` app.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDomainResponse AWS API Documentation
     #
     class DescribeDomainResponse < Struct.new(
@@ -12204,7 +12262,10 @@ module Aws::SageMaker
       :subnet_ids,
       :url,
       :vpc_id,
-      :kms_key_id)
+      :kms_key_id,
+      :domain_settings,
+      :app_security_group_management,
+      :security_group_id_for_domain_boundary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15844,6 +15905,77 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of settings that apply to the `SageMaker Domain`. These
+    # settings are specified through the `CreateDomain` API call.
+    #
+    # @note When making an API call, you may pass DomainSettings
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["SecurityGroupId"],
+    #         r_studio_server_pro_domain_settings: {
+    #           domain_execution_role_arn: "RoleArn", # required
+    #           r_studio_connect_url: "String",
+    #           r_studio_package_manager_url: "String",
+    #           default_resource_spec: {
+    #             sage_maker_image_arn: "ImageArn",
+    #             sage_maker_image_version_arn: "ImageVersionArn",
+    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   The security groups for the Amazon Virtual Private Cloud that the
+    #   `Domain` uses for communication between Domain-level apps and user
+    #   apps.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] r_studio_server_pro_domain_settings
+    #   A collection of settings that configure the `RStudioServerPro`
+    #   Domain-level app.
+    #   @return [Types::RStudioServerProDomainSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettings AWS API Documentation
+    #
+    class DomainSettings < Struct.new(
+      :security_group_ids,
+      :r_studio_server_pro_domain_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of `Domain` configuration settings to update.
+    #
+    # @note When making an API call, you may pass DomainSettingsForUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         r_studio_server_pro_domain_settings_for_update: {
+    #           domain_execution_role_arn: "RoleArn", # required
+    #           default_resource_spec: {
+    #             sage_maker_image_arn: "ImageArn",
+    #             sage_maker_image_version_arn: "ImageVersionArn",
+    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] r_studio_server_pro_domain_settings_for_update
+    #   A collection of `RStudioServerPro` Domain-level app settings to
+    #   update.
+    #   @return [Types::RStudioServerProDomainSettingsForUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DomainSettingsForUpdate AWS API Documentation
+    #
+    class DomainSettingsForUpdate < Struct.new(
+      :r_studio_server_pro_domain_settings_for_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30682,6 +30814,129 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A collection of settings that apply to an `RSessionGateway` app.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RSessionAppSettings AWS API Documentation
+    #
+    class RSessionAppSettings < Aws::EmptyStructure; end
+
+    # A collection of settings that configure user interaction with the
+    # `RStudioServerPro` app. `RStudioServerProAppSettings` cannot be
+    # updated. The `RStudioServerPro` app must be deleted and a new one
+    # created to make any changes.
+    #
+    # @note When making an API call, you may pass RStudioServerProAppSettings
+    #   data as a hash:
+    #
+    #       {
+    #         access_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
+    #       }
+    #
+    # @!attribute [rw] access_status
+    #   Indicates whether the current user has access to the
+    #   `RStudioServerPro` app.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_group
+    #   The level of permissions that the user has within the
+    #   `RStudioServerPro` app. This value defaults to `User`. The
+    #   `Admin` value allows the user access to the RStudio Administrative
+    #   Dashboard.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RStudioServerProAppSettings AWS API Documentation
+    #
+    class RStudioServerProAppSettings < Struct.new(
+      :access_status,
+      :user_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of settings that configure the `RStudioServerPro`
+    # Domain-level app.
+    #
+    # @note When making an API call, you may pass RStudioServerProDomainSettings
+    #   data as a hash:
+    #
+    #       {
+    #         domain_execution_role_arn: "RoleArn", # required
+    #         r_studio_connect_url: "String",
+    #         r_studio_package_manager_url: "String",
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain_execution_role_arn
+    #   The ARN of the execution role for the `RStudioServerPro`
+    #   Domain-level app.
+    #   @return [String]
+    #
+    # @!attribute [rw] r_studio_connect_url
+    #   A URL pointing to an RStudio Connect server.
+    #   @return [String]
+    #
+    # @!attribute [rw] r_studio_package_manager_url
+    #   A URL pointing to an RStudio Package Manager server.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_resource_spec
+    #   Specifies the ARN's of a SageMaker image and SageMaker image
+    #   version, and the instance type that the version runs on.
+    #   @return [Types::ResourceSpec]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RStudioServerProDomainSettings AWS API Documentation
+    #
+    class RStudioServerProDomainSettings < Struct.new(
+      :domain_execution_role_arn,
+      :r_studio_connect_url,
+      :r_studio_package_manager_url,
+      :default_resource_spec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of settings that update the current configuration for the
+    # `RStudioServerPro` Domain-level app.
+    #
+    # @note When making an API call, you may pass RStudioServerProDomainSettingsForUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         domain_execution_role_arn: "RoleArn", # required
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain_execution_role_arn
+    #   The execution role for the `RStudioServerPro` Domain-level app.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_resource_spec
+    #   Specifies the ARN's of a SageMaker image and SageMaker image
+    #   version, and the instance type that the version runs on.
+    #   @return [Types::ResourceSpec]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RStudioServerProDomainSettingsForUpdate AWS API Documentation
+    #
+    class RStudioServerProDomainSettingsForUpdate < Struct.new(
+      :domain_execution_role_arn,
+      :default_resource_spec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for Redshift Dataset Definition input.
     #
     # @note When making an API call, you may pass RedshiftDatasetDefinition
@@ -32111,8 +32366,8 @@ module Aws::SageMaker
     end
 
     # Details that you specify to provision a service catalog product. For
-    # information about service catalog, see [What is AWS Service
-    # Catalog][1].
+    # information about service catalog, see [What is Amazon Web Services
+    # Service Catalog][1].
     #
     #
     #
@@ -35548,6 +35803,23 @@ module Aws::SageMaker
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
     #           },
+    #           r_studio_server_pro_app_settings: {
+    #             access_status: "ENABLED", # accepts ENABLED, DISABLED
+    #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
+    #           },
+    #           r_session_app_settings: {
+    #           },
+    #         },
+    #         domain_settings_for_update: {
+    #           r_studio_server_pro_domain_settings_for_update: {
+    #             domain_execution_role_arn: "RoleArn", # required
+    #             default_resource_spec: {
+    #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -35559,11 +35831,16 @@ module Aws::SageMaker
     #   A collection of settings.
     #   @return [Types::UserSettings]
     #
+    # @!attribute [rw] domain_settings_for_update
+    #   A collection of `DomainSettings` configuration values to update.
+    #   @return [Types::DomainSettingsForUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateDomainRequest AWS API Documentation
     #
     class UpdateDomainRequest < Struct.new(
       :domain_id,
-      :default_user_settings)
+      :default_user_settings,
+      :domain_settings_for_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -36341,8 +36618,8 @@ module Aws::SageMaker
     #   The product ID and provisioning artifact ID to provision a service
     #   catalog. The provisioning artifact ID will default to the latest
     #   provisioning artifact ID of the product, if you don't provide the
-    #   provisioning artifact ID. For more information, see [What is AWS
-    #   Service Catalog][1].
+    #   provisioning artifact ID. For more information, see [What is Amazon
+    #   Web Services Service Catalog][1].
     #
     #
     #
@@ -36350,9 +36627,10 @@ module Aws::SageMaker
     #   @return [Types::ServiceCatalogProvisioningUpdateDetails]
     #
     # @!attribute [rw] tags
-    #   An array of key-value pairs. You can use tags to categorize your AWS
-    #   resources in different ways, for example, by purpose, owner, or
-    #   environment. For more information, see [Tagging AWS Resources][1].
+    #   An array of key-value pairs. You can use tags to categorize your
+    #   Amazon Web Services resources in different ways, for example, by
+    #   purpose, owner, or environment. For more information, see [Tagging
+    #   Amazon Web Services Resources][1].
     #
     #
     #
@@ -36645,6 +36923,12 @@ module Aws::SageMaker
     #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
     #               lifecycle_config_arn: "StudioLifecycleConfigArn",
     #             },
+    #           },
+    #           r_studio_server_pro_app_settings: {
+    #             access_status: "ENABLED", # accepts ENABLED, DISABLED
+    #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
+    #           },
+    #           r_session_app_settings: {
     #           },
     #         },
     #       }
@@ -36958,6 +37242,12 @@ module Aws::SageMaker
     #             lifecycle_config_arn: "StudioLifecycleConfigArn",
     #           },
     #         },
+    #         r_studio_server_pro_app_settings: {
+    #           access_status: "ENABLED", # accepts ENABLED, DISABLED
+    #           user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
+    #         },
+    #         r_session_app_settings: {
+    #         },
     #       }
     #
     # @!attribute [rw] execution_role
@@ -36995,6 +37285,15 @@ module Aws::SageMaker
     #   The TensorBoard app settings.
     #   @return [Types::TensorBoardAppSettings]
     #
+    # @!attribute [rw] r_studio_server_pro_app_settings
+    #   A collection of settings that configure user interaction with the
+    #   `RStudioServerPro` app.
+    #   @return [Types::RStudioServerProAppSettings]
+    #
+    # @!attribute [rw] r_session_app_settings
+    #   A collection of settings that configure the `RSessionGateway` app.
+    #   @return [Types::RSessionAppSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UserSettings AWS API Documentation
     #
     class UserSettings < Struct.new(
@@ -37003,7 +37302,9 @@ module Aws::SageMaker
       :sharing_settings,
       :jupyter_server_app_settings,
       :kernel_gateway_app_settings,
-      :tensor_board_app_settings)
+      :tensor_board_app_settings,
+      :r_studio_server_pro_app_settings,
+      :r_session_app_settings)
       SENSITIVE = []
       include Aws::Structure
     end

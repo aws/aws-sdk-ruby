@@ -1311,6 +1311,7 @@ module Aws::ECS
     #   resp.service.capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
+    #   resp.service.platform_family #=> String
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
     #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
@@ -1336,6 +1337,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.task_sets[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.task_sets[0].platform_version #=> String
+    #   resp.service.task_sets[0].platform_family #=> String
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -1374,6 +1376,7 @@ module Aws::ECS
     #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.deployments[0].platform_version #=> String
+    #   resp.service.deployments[0].platform_family #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -1623,6 +1626,7 @@ module Aws::ECS
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
     #   resp.task_set.capacity_provider_strategy[0].base #=> Integer
     #   resp.task_set.platform_version #=> String
+    #   resp.task_set.platform_family #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -2030,6 +2034,7 @@ module Aws::ECS
     #   resp.service.capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
+    #   resp.service.platform_family #=> String
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
     #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
@@ -2055,6 +2060,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.task_sets[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.task_sets[0].platform_version #=> String
+    #   resp.service.task_sets[0].platform_family #=> String
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -2093,6 +2099,7 @@ module Aws::ECS
     #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.deployments[0].platform_version #=> String
+    #   resp.service.deployments[0].platform_family #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -2196,6 +2203,7 @@ module Aws::ECS
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
     #   resp.task_set.capacity_provider_strategy[0].base #=> Integer
     #   resp.task_set.platform_version #=> String
+    #   resp.task_set.platform_family #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -2536,6 +2544,8 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #   resp.task_definition.compatibilities #=> Array
     #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definition.runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
+    #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
     #   resp.task_definition.requires_compatibilities #=> Array
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.cpu #=> String
@@ -3059,6 +3069,7 @@ module Aws::ECS
     #   resp.services[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.services[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.services[0].platform_version #=> String
+    #   resp.services[0].platform_family #=> String
     #   resp.services[0].task_definition #=> String
     #   resp.services[0].deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
     #   resp.services[0].deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
@@ -3084,6 +3095,7 @@ module Aws::ECS
     #   resp.services[0].task_sets[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.services[0].task_sets[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.services[0].task_sets[0].platform_version #=> String
+    #   resp.services[0].task_sets[0].platform_family #=> String
     #   resp.services[0].task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.services[0].task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.services[0].task_sets[0].network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -3122,6 +3134,7 @@ module Aws::ECS
     #   resp.services[0].deployments[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.services[0].deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.services[0].deployments[0].platform_version #=> String
+    #   resp.services[0].deployments[0].platform_family #=> String
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -3411,6 +3424,8 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #   resp.task_definition.compatibilities #=> Array
     #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definition.runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
+    #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
     #   resp.task_definition.requires_compatibilities #=> Array
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.cpu #=> String
@@ -3503,6 +3518,7 @@ module Aws::ECS
     #   resp.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.task_sets[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.task_sets[0].platform_version #=> String
+    #   resp.task_sets[0].platform_family #=> String
     #   resp.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.task_sets[0].network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -3708,6 +3724,7 @@ module Aws::ECS
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].platform_version #=> String
+    #   resp.tasks[0].platform_family #=> String
     #   resp.tasks[0].pull_started_at #=> Time
     #   resp.tasks[0].pull_stopped_at #=> Time
     #   resp.tasks[0].started_at #=> Time
@@ -5642,14 +5659,25 @@ module Aws::ECS
     #   more information, see [Fargate task storage][1] in the *Amazon ECS
     #   User Guide for Fargate*.
     #
-    #   <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using
-    #   platform version `1.4.0` or later.
+    #   <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using the
+    #   following platform versions:
+    #
+    #    * Linux platform version `1.4.0` or later.
+    #
+    #   * Windows platform version `1.0.0` or later.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
+    #
+    # @option params [Types::RuntimePlatform] :runtime_platform
+    #   The operating system that your tasks definitions run on. A platform
+    #   family is specified only for tasks using the Fargate launch type.
+    #
+    #   When you specify a task definition in a service, this value must match
+    #   the `runtimePlatform` value of the service.
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5943,6 +5971,10 @@ module Aws::ECS
     #     ephemeral_storage: {
     #       size_in_gi_b: 1, # required
     #     },
+    #     runtime_platform: {
+    #       cpu_architecture: "X86_64", # accepts X86_64, ARM64
+    #       operating_system_family: "WINDOWS_SERVER_2019_FULL", # accepts WINDOWS_SERVER_2019_FULL, WINDOWS_SERVER_2019_CORE, WINDOWS_SERVER_2016_FULL, WINDOWS_SERVER_2004_CORE, WINDOWS_SERVER_2022_CORE, WINDOWS_SERVER_2022_FULL, WINDOWS_SERVER_20H2_CORE, LINUX
+    #     },
     #   })
     #
     # @example Response structure
@@ -6085,6 +6117,8 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #   resp.task_definition.compatibilities #=> Array
     #   resp.task_definition.compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
+    #   resp.task_definition.runtime_platform.cpu_architecture #=> String, one of "X86_64", "ARM64"
+    #   resp.task_definition.runtime_platform.operating_system_family #=> String, one of "WINDOWS_SERVER_2019_FULL", "WINDOWS_SERVER_2019_CORE", "WINDOWS_SERVER_2016_FULL", "WINDOWS_SERVER_2004_CORE", "WINDOWS_SERVER_2022_CORE", "WINDOWS_SERVER_2022_FULL", "WINDOWS_SERVER_20H2_CORE", "LINUX"
     #   resp.task_definition.requires_compatibilities #=> Array
     #   resp.task_definition.requires_compatibilities[0] #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.task_definition.cpu #=> String
@@ -6561,6 +6595,7 @@ module Aws::ECS
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].platform_version #=> String
+    #   resp.tasks[0].platform_family #=> String
     #   resp.tasks[0].pull_started_at #=> Time
     #   resp.tasks[0].pull_stopped_at #=> Time
     #   resp.tasks[0].started_at #=> Time
@@ -6868,6 +6903,7 @@ module Aws::ECS
     #   resp.tasks[0].overrides.task_role_arn #=> String
     #   resp.tasks[0].overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].platform_version #=> String
+    #   resp.tasks[0].platform_family #=> String
     #   resp.tasks[0].pull_started_at #=> Time
     #   resp.tasks[0].pull_stopped_at #=> Time
     #   resp.tasks[0].started_at #=> Time
@@ -7033,6 +7069,7 @@ module Aws::ECS
     #   resp.task.overrides.task_role_arn #=> String
     #   resp.task.overrides.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task.platform_version #=> String
+    #   resp.task.platform_family #=> String
     #   resp.task.pull_started_at #=> Time
     #   resp.task.pull_stopped_at #=> Time
     #   resp.task.started_at #=> Time
@@ -8205,6 +8242,7 @@ module Aws::ECS
     #   resp.service.capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
+    #   resp.service.platform_family #=> String
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
     #   resp.service.deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
@@ -8230,6 +8268,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
     #   resp.service.task_sets[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.task_sets[0].platform_version #=> String
+    #   resp.service.task_sets[0].platform_family #=> String
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -8268,6 +8307,7 @@ module Aws::ECS
     #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
     #   resp.service.deployments[0].platform_version #=> String
+    #   resp.service.deployments[0].platform_family #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -8368,6 +8408,7 @@ module Aws::ECS
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
     #   resp.task_set.capacity_provider_strategy[0].base #=> Integer
     #   resp.task_set.platform_version #=> String
+    #   resp.task_set.platform_family #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -8462,6 +8503,7 @@ module Aws::ECS
     #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
     #   resp.task_set.capacity_provider_strategy[0].base #=> Integer
     #   resp.task_set.platform_version #=> String
+    #   resp.task_set.platform_family #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.security_groups #=> Array
@@ -8507,7 +8549,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
