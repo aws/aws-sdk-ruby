@@ -127,7 +127,7 @@ module Aws
       end
 
       def get_variant(modeled_variants, config_variants)
-        tags = Set.new(config_variants.filter { |_k,v| v }.map { |k,_v| k.to_s })
+        tags = Set.new(config_variants.select { |_k,v| v }.map { |k,_v| k.to_s })
         modeled_variants.each do |modeled_variant|
           if tags == Set.new(modeled_variant['tags'])
             return modeled_variant
@@ -138,7 +138,7 @@ module Aws
 
       def validate_variants!(config_variants, resolved_variants)
         if resolved_variants.empty?
-          enabled_variants = config_variants.filter { |_k, v| v}.map { |k, _v| k.to_s }.join(', ')
+          enabled_variants = config_variants.select { |_k, v| v}.map { |k, _v| k.to_s }.join(', ')
             raise ArgumentError,
                 "#{enabled_variants} not supported for this region and partition."
         end
