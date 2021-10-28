@@ -49,7 +49,7 @@ module Aws
 
       # @api private Use the static class methods instead.
       def signing_region(region, service, sts_regional_endpoints)
-        credential_scope(region, service, sts_regional_endpoints)
+        credential_scope(region, service, build_is_global_fn(sts_regional_endpoints))
           .fetch('region', region)
       end
 
@@ -58,37 +58,8 @@ module Aws
         # don't default to the service name
         # signers should prefer the api metadata's signingName
         # if no service is set in the credentialScope
-        credential_scope(region, service, 'regional')
+        credential_scope(region, service, build_is_global_fn('regional'))
           .fetch('service', nil)
-      end
-
-      # @api private Use the static class methods instead.
-      def credential_scope(region, service, sts_regional_endpoints)
-        partition = get_partition(region)
-        service_cfg = partition.fetch('services', {})
-                               .fetch(service, {})
-        endpoints = service_cfg.fetch('endpoints', {})
-
-        # Check for sts legacy behavior
-        sts_legacy = service == 'sts' &&
-          sts_regional_endpoints == 'legacy' &&
-          STS_LEGACY_REGIONS.include?(region)
-
-        is_global = !endpoints.key?(region) &&
-          service_cfg['isRegionalized'] == false
-
-        # Check for global endpoint.
-        if sts_legacy || is_global
-          region = service_cfg.fetch('partitionEndpoint', region)
-        end
-
-        default_credential_scope = service_cfg
-                                     .fetch('defaults', {})
-                                     .fetch('credentialScope', {})
-
-        endpoints
-          .fetch(region, {})
-          .fetch('credentialScope', default_credential_scope)
       end
 
       # @param [String] region The region used to fetch the partition.
@@ -224,6 +195,42 @@ module Aws
         endpoint.sub('{region}', region)
                 .sub('{service}', service)
                 .sub('{dnsSuffix}', partition['dnsSuffix'])
+      end
+
+      # returns a callable that takes a region
+      # and returns true if the service is global
+      def build_is_global_fn(sts_regional_endpoints)
+        lambda do |service, region, endpoints, service_cfg|
+          # Check for sts legacy behavior
+          sts_legacy = service == 'sts' &&
+            sts_regional_endpoints == 'legacy' &&
+            STS_LEGACY_REGIONS.include?(region)
+
+          is_global = !endpoints.key?(region) &&
+            service_cfg['isRegionalized'] == false
+
+          sts_legacy || is_global
+        end
+      end
+
+      def credential_scope(region, service, is_global_fn)
+        partition = get_partition(region)
+        service_cfg = partition.fetch('services', {})
+                               .fetch(service, {})
+        endpoints = service_cfg.fetch('endpoints', {})
+
+        # Check for global endpoint.
+        if is_global_fn.call(service, region, endpoints, service_cfg)
+          region = service_cfg.fetch('partitionEndpoint', region)
+        end
+
+        default_credential_scope = service_cfg
+                                     .fetch('defaults', {})
+                                     .fetch('credentialScope', {})
+
+        endpoints
+          .fetch(region, {})
+          .fetch('credentialScope', default_credential_scope)
       end
 
       def get_partition(region_or_partition)
