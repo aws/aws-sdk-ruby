@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.274.0 (2021-10-28)
+------------------
+
+* Feature - Added new read-only DenyAllIGWTraffic network interface attribute. Added support for DL1 24xlarge instances powered by Habana Gaudi Accelerators for deep learning model training workloads
+
 1.273.0 (2021-10-27)
 ------------------
 

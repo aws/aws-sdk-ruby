@@ -3,6 +3,9 @@ Unreleased Changes
 
 * Feature - Support modeled dualstack and fips endpoints in `Aws::Partitions::EndpointProvider`.
 
+1.520.1 (2021-10-28)
+------------------
+
 * Issue - Add `signing_service` method and resolve `credentialScope` correctly for global services/service defaults.
 
 1.520.0 (2021-10-27)

@@ -140,6 +140,7 @@ module Aws::ConnectParticipant
     #       {
     #         type: ["WEBSOCKET"], # required, accepts WEBSOCKET, CONNECTION_CREDENTIALS
     #         participant_token: "ParticipantToken", # required
+    #         connect_participant: false,
     #       }
     #
     # @!attribute [rw] type
@@ -149,7 +150,7 @@ module Aws::ConnectParticipant
     # @!attribute [rw] participant_token
     #   This is a header parameter.
     #
-    #   The Participant Token as obtained from [StartChatContact][1] API
+    #   The ParticipantToken as obtained from [StartChatContact][1] API
     #   response.
     #
     #
@@ -157,11 +158,17 @@ module Aws::ConnectParticipant
     #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html
     #   @return [String]
     #
+    # @!attribute [rw] connect_participant
+    #   Amazon Connect Participant is used to mark the participant as
+    #   connected for message streaming.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/CreateParticipantConnectionRequest AWS API Documentation
     #
     class CreateParticipantConnectionRequest < Struct.new(
       :type,
-      :participant_token)
+      :participant_token,
+      :connect_participant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -245,8 +252,12 @@ module Aws::ConnectParticipant
     end
 
     # @!attribute [rw] url
-    #   The pre-signed URL using which file would be downloaded from Amazon
-    #   S3 by the API caller.
+    #   This is the pre-signed URL that can be used for uploading the file
+    #   to Amazon S3 when used in response to [StartAttachmentUpload][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html
     #   @return [String]
     #
     # @!attribute [rw] url_expiry
@@ -689,8 +700,12 @@ module Aws::ConnectParticipant
     # Fields to be used while uploading the attachment.
     #
     # @!attribute [rw] url
-    #   The pre-signed URL using which file would be downloaded from Amazon
-    #   S3 by the API caller.
+    #   This is the pre-signed URL that can be used for uploading the file
+    #   to Amazon S3 when used in response to [StartAttachmentUpload][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html
     #   @return [String]
     #
     # @!attribute [rw] url_expiry

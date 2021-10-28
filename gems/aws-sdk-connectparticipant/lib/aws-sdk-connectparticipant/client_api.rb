@@ -21,6 +21,7 @@ module Aws::ConnectParticipant
     AttachmentName = Shapes::StringShape.new(name: 'AttachmentName')
     AttachmentSizeInBytes = Shapes::IntegerShape.new(name: 'AttachmentSizeInBytes')
     Attachments = Shapes::ListShape.new(name: 'Attachments')
+    Bool = Shapes::BooleanShape.new(name: 'Bool')
     ChatContent = Shapes::StringShape.new(name: 'ChatContent')
     ChatContentType = Shapes::StringShape.new(name: 'ChatContentType')
     ChatItemId = Shapes::StringShape.new(name: 'ChatItemId')
@@ -109,6 +110,7 @@ module Aws::ConnectParticipant
 
     CreateParticipantConnectionRequest.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionTypeList, required: true, location_name: "Type"))
     CreateParticipantConnectionRequest.add_member(:participant_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
+    CreateParticipantConnectionRequest.add_member(:connect_participant, Shapes::ShapeRef.new(shape: Bool, location_name: "ConnectParticipant"))
     CreateParticipantConnectionRequest.struct_class = Types::CreateParticipantConnectionRequest
 
     CreateParticipantConnectionResponse.add_member(:websocket, Shapes::ShapeRef.new(shape: Websocket, location_name: "Websocket"))

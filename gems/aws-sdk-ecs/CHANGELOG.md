@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2021-10-28)
+------------------
+
+* Feature - Amazon ECS now supports running Fargate tasks on Windows Operating Systems Families which includes Windows Server 2019 Core and Windows Server 2019 Full.
+
 1.87.0 (2021-10-18)
 ------------------
 

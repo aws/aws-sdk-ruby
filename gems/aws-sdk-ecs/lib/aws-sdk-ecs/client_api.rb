@@ -31,6 +31,7 @@ module Aws::ECS
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
+    CPUArchitecture = Shapes::StringShape.new(name: 'CPUArchitecture')
     CapacityProvider = Shapes::StructureShape.new(name: 'CapacityProvider')
     CapacityProviderField = Shapes::StringShape.new(name: 'CapacityProviderField')
     CapacityProviderFieldList = Shapes::ListShape.new(name: 'CapacityProviderFieldList')
@@ -212,6 +213,7 @@ module Aws::ECS
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     NetworkMode = Shapes::StringShape.new(name: 'NetworkMode')
     NoUpdateAvailableException = Shapes::StructureShape.new(name: 'NoUpdateAvailableException')
+    OSFamily = Shapes::StringShape.new(name: 'OSFamily')
     PidMode = Shapes::StringShape.new(name: 'PidMode')
     PlacementConstraint = Shapes::StructureShape.new(name: 'PlacementConstraint')
     PlacementConstraintType = Shapes::StringShape.new(name: 'PlacementConstraintType')
@@ -253,6 +255,7 @@ module Aws::ECS
     Resources = Shapes::ListShape.new(name: 'Resources')
     RunTaskRequest = Shapes::StructureShape.new(name: 'RunTaskRequest')
     RunTaskResponse = Shapes::StructureShape.new(name: 'RunTaskResponse')
+    RuntimePlatform = Shapes::StructureShape.new(name: 'RuntimePlatform')
     Scale = Shapes::StructureShape.new(name: 'Scale')
     ScaleUnit = Shapes::StringShape.new(name: 'ScaleUnit')
     SchedulingStrategy = Shapes::StringShape.new(name: 'SchedulingStrategy')
@@ -697,6 +700,7 @@ module Aws::ECS
     Deployment.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     Deployment.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
     Deployment.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
+    Deployment.add_member(:platform_family, Shapes::ShapeRef.new(shape: String, location_name: "platformFamily"))
     Deployment.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     Deployment.add_member(:rollout_state, Shapes::ShapeRef.new(shape: DeploymentRolloutState, location_name: "rolloutState"))
     Deployment.add_member(:rollout_state_reason, Shapes::ShapeRef.new(shape: String, location_name: "rolloutStateReason"))
@@ -1204,6 +1208,7 @@ module Aws::ECS
     RegisterTaskDefinitionRequest.add_member(:proxy_configuration, Shapes::ShapeRef.new(shape: ProxyConfiguration, location_name: "proxyConfiguration"))
     RegisterTaskDefinitionRequest.add_member(:inference_accelerators, Shapes::ShapeRef.new(shape: InferenceAccelerators, location_name: "inferenceAccelerators"))
     RegisterTaskDefinitionRequest.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
+    RegisterTaskDefinitionRequest.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
     RegisterTaskDefinitionRequest.struct_class = Types::RegisterTaskDefinitionRequest
 
     RegisterTaskDefinitionResponse.add_member(:task_definition, Shapes::ShapeRef.new(shape: TaskDefinition, location_name: "taskDefinition"))
@@ -1258,6 +1263,10 @@ module Aws::ECS
     RunTaskResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
     RunTaskResponse.struct_class = Types::RunTaskResponse
 
+    RuntimePlatform.add_member(:cpu_architecture, Shapes::ShapeRef.new(shape: CPUArchitecture, location_name: "cpuArchitecture"))
+    RuntimePlatform.add_member(:operating_system_family, Shapes::ShapeRef.new(shape: OSFamily, location_name: "operatingSystemFamily"))
+    RuntimePlatform.struct_class = Types::RuntimePlatform
+
     Scale.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "value"))
     Scale.add_member(:unit, Shapes::ShapeRef.new(shape: ScaleUnit, location_name: "unit"))
     Scale.struct_class = Types::Scale
@@ -1283,6 +1292,7 @@ module Aws::ECS
     Service.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
     Service.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     Service.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
+    Service.add_member(:platform_family, Shapes::ShapeRef.new(shape: String, location_name: "platformFamily"))
     Service.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinition"))
     Service.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
     Service.add_member(:task_sets, Shapes::ShapeRef.new(shape: TaskSets, location_name: "taskSets"))
@@ -1452,6 +1462,7 @@ module Aws::ECS
     Task.add_member(:memory, Shapes::ShapeRef.new(shape: String, location_name: "memory"))
     Task.add_member(:overrides, Shapes::ShapeRef.new(shape: TaskOverride, location_name: "overrides"))
     Task.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
+    Task.add_member(:platform_family, Shapes::ShapeRef.new(shape: String, location_name: "platformFamily"))
     Task.add_member(:pull_started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "pullStartedAt"))
     Task.add_member(:pull_stopped_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "pullStoppedAt"))
     Task.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))
@@ -1479,6 +1490,7 @@ module Aws::ECS
     TaskDefinition.add_member(:requires_attributes, Shapes::ShapeRef.new(shape: RequiresAttributes, location_name: "requiresAttributes"))
     TaskDefinition.add_member(:placement_constraints, Shapes::ShapeRef.new(shape: TaskDefinitionPlacementConstraints, location_name: "placementConstraints"))
     TaskDefinition.add_member(:compatibilities, Shapes::ShapeRef.new(shape: CompatibilityList, location_name: "compatibilities"))
+    TaskDefinition.add_member(:runtime_platform, Shapes::ShapeRef.new(shape: RuntimePlatform, location_name: "runtimePlatform"))
     TaskDefinition.add_member(:requires_compatibilities, Shapes::ShapeRef.new(shape: CompatibilityList, location_name: "requiresCompatibilities"))
     TaskDefinition.add_member(:cpu, Shapes::ShapeRef.new(shape: String, location_name: "cpu"))
     TaskDefinition.add_member(:memory, Shapes::ShapeRef.new(shape: String, location_name: "memory"))
@@ -1527,6 +1539,7 @@ module Aws::ECS
     TaskSet.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
     TaskSet.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     TaskSet.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
+    TaskSet.add_member(:platform_family, Shapes::ShapeRef.new(shape: String, location_name: "platformFamily"))
     TaskSet.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     TaskSet.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
     TaskSet.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))

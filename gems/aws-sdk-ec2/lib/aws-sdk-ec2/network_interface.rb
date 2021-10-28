@@ -164,6 +164,17 @@ module Aws::EC2
       data[:vpc_id]
     end
 
+    # Indicates whether a network interface with an IPv6 address is
+    # unreachable from the public internet. If the value is `true`, inbound
+    # traffic from the internet is dropped and you cannot assign an elastic
+    # IP address to the network interface. The network interface is
+    # reachable from peered VPCs and resources connected through a transit
+    # gateway, including on-premises networks.
+    # @return [Boolean]
+    def deny_all_igw_traffic
+      data[:deny_all_igw_traffic]
+    end
+
     # @!endgroup
 
     # @return [Client]
