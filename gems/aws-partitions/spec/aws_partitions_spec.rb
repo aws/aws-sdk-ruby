@@ -402,6 +402,8 @@ module Aws
       describe '.resolve' do
         test_cases.each_with_index do |test_case, index|
           it "passes variant test case \##{index + 1}" do
+            allow_any_instance_of(Partitions::EndpointProvider).to receive(:warn)
+
             expect(
               Partitions::EndpointProvider.resolve(
                 test_case['Region'],
@@ -411,6 +413,18 @@ module Aws
               )
             ).to eq("https://#{test_case['Endpoint']}")
           end
+        end
+
+        it 'warns when the endpoint is deprecated' do
+          expect_any_instance_of(Partitions::EndpointProvider).to receive(:warn)
+          expect(
+            Partitions::EndpointProvider.resolve(
+              'af-south-1',
+              'multi-variant-service',
+              'regional',
+              { dualstack: false, fips: false }
+            )
+          ).to eq('https://multi-variant-service.af-south-1.amazonaws.com')
         end
 
         # error cases

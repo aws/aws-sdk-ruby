@@ -96,6 +96,19 @@ module Aws
           expect(client.config.endpoint.to_s)
             .to eq("https://#{prefix}.REGION.amazonaws.com")
         end
+
+        context 'legacy fips pseudo-region' do
+          let(:region) { 'fips-us-west-1' }
+
+          it 'strips the fips and sets use_fips_endpoint and warns' do
+            expect(RegionalEndpoint).to receive(:warn)
+
+            config = client_class.new(region: region).config
+
+            expect(config.region).to eq('us-west-1')
+            expect(config.use_fips_endpoint).to be(true)
+          end
+        end
       end
 
       describe 'use dualstack endpoint option' do

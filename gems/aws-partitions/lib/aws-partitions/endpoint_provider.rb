@@ -35,7 +35,7 @@ module Aws
       # @param [String] region The region for the client.
       # @param [String] service The endpoint prefix for the service, e.g.
       #   "monitoring" for cloudwatch.
-      # @param [String] sts_endpoint [STS only] Whether to use
+      # @param [String] sts_regional_endpoints [STS only] Whether to use
       #   `legacy` (global endpoint for legacy regions) or `regional` mode for
       #   using regional endpoint for supported regions except 'aws-global'
       # @param [Hash] variants Endpoint variants such as 'fips' or 'dualstack'
@@ -43,8 +43,8 @@ module Aws
       #   endpoint.
       # @option variants [Boolean] :fips When true, resolve a FIPS endpoint.
       # @api private Use the static class methods instead.
-      def resolve(region, service, sts_endpoint, variants)
-        'https://' + endpoint_for(region, service, sts_endpoint, variants)
+      def resolve(region, service, sts_regional_endpoints, variants)
+        'https://' + endpoint_for(region, service, build_is_global_fn(sts_regional_endpoints), variants)
       end
 
       # @api private Use the static class methods instead.
@@ -82,7 +82,7 @@ module Aws
       private
 
       def configured_variants?(variants)
-        variants[:fips] == true || variants[:dualstack] == true
+        variants.values.any?
       end
 
       def resolve_variants(region, service)
@@ -127,9 +127,7 @@ module Aws
       end
 
       def get_variant(modeled_variants, config_variants)
-        tags = Set.new
-        tags << 'dualstack' if config_variants[:dualstack] == true
-        tags << 'fips' if config_variants[:fips] == true
+        tags = Set.new(config_variants.filter { |_k,v| v }.map { |k,_v| k.to_s })
         modeled_variants.each do |modeled_variant|
           if tags == Set.new(modeled_variant['tags'])
             return modeled_variant
@@ -139,30 +137,31 @@ module Aws
       end
 
       def validate_variants!(config_variants, resolved_variants)
-        if config_variants[:dualstack] == true && resolved_variants.empty?
-          raise ArgumentError,
-                'Dualstack is not supported for this region and partition'
-        end
-        if config_variants[:fips] == true && resolved_variants.empty?
-          raise ArgumentError,
-                'FIPS is not supported for this region and partition'
+        if resolved_variants.empty?
+          enabled_variants = config_variants.filter { |_k, v| v}.map { |k, _v| k.to_s }.join(', ')
+            raise ArgumentError,
+                "#{enabled_variants} not supported for this region and partition."
         end
       end
 
-      def endpoint_for(region, service, sts_endpoints, variants)
+      def endpoint_for(region, service, is_global_fn, variants)
         if configured_variants?(variants)
-          resolved_variants = resolve_variants(region, service)
-          validate_variants!(variants, resolved_variants)
-          variant = get_variant(resolved_variants, variants)
-          variant['hostname'].sub('{region}', region)
-                             .sub('{service}', service)
-                             .sub('{dnsSuffix}', variant['dnsSuffix'])
+          endpoint_with_variants_for(region, service, variants)
         else
-          _endpoint_for(region, service, sts_endpoints)
+          endpoint_no_variants_for(region, service, is_global_fn)
         end
       end
 
-      def _endpoint_for(region, service, sts_regional_endpoints)
+      def endpoint_with_variants_for(region, service, variants)
+        resolved_variants = resolve_variants(region, service)
+        validate_variants!(variants, resolved_variants)
+        variant = get_variant(resolved_variants, variants)
+        variant['hostname'].sub('{region}', region)
+                           .sub('{service}', service)
+                           .sub('{dnsSuffix}', variant['dnsSuffix'])
+      end
+
+      def endpoint_no_variants_for(region, service, is_global_fn)
         partition = get_partition(region)
         service_cfg = partition.fetch('services', {}).fetch(service, {})
 
@@ -173,23 +172,20 @@ module Aws
 
         endpoints = service_cfg.fetch('endpoints', {})
 
-        # Check for sts legacy behavior
-        sts_legacy = service == 'sts' &&
-                     sts_regional_endpoints == 'legacy' &&
-                     STS_LEGACY_REGIONS.include?(region)
-
-        is_global = !endpoints.key?(region) &&
-                    service_cfg['isRegionalized'] == false
-
         # Check for global endpoint.
-        if sts_legacy || is_global
+        if is_global_fn.call(service, region, endpoints, service_cfg)
           region = service_cfg.fetch('partitionEndpoint', region)
         end
 
         # Check for service/region level endpoint.
-        endpoint = endpoints
+        region_cfg = endpoints
                    .fetch(region, {})
+        endpoint = region_cfg
                    .fetch('hostname', default_endpoint)
+
+        if region_cfg['deprecated']
+          warn("The endpoint for #{region}/#{service} is deprecated.")
+        end
 
         # Replace placeholders from the endpoints
         endpoint.sub('{region}', region)
@@ -199,7 +195,7 @@ module Aws
 
       # returns a callable that takes a region
       # and returns true if the service is global
-      def build_is_global_fn(sts_regional_endpoints)
+      def build_is_global_fn(sts_regional_endpoints='regional')
         lambda do |service, region, endpoints, service_cfg|
           # Check for sts legacy behavior
           sts_legacy = service == 'sts' &&

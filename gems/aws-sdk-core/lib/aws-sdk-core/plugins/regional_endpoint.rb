@@ -64,6 +64,7 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           region = cfg.region
           new_region = region.gsub('fips-', '').gsub('-fips', '')
           if region != new_region
+            warn("Transforming the legacy #{region} to #{new_region} and setting use_fips_endpoint to true.")
             cfg.override_config(:use_fips_endpoint, true)
             cfg.override_config(:region, new_region)
           end

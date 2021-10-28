@@ -199,7 +199,9 @@
             ]
           },
           "endpoints" : {
-            "af-south-1" : { },
+            "af-south-1" : {
+              "deprecated" : true
+            },
             "us-west-2" : {
               "variants" : [
                 {
