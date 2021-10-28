@@ -354,7 +354,7 @@ module Aws
             Partitions::EndpointProvider.signing_service(
               'us-peccy-1',
               'crazy-peccy-service'
-            )rtitions VE
+            )
           ).to eq('crazy-peccy-signing-service')
         end
       end
