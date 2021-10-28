@@ -228,8 +228,23 @@
       },
       "services": {
         "some-service": {
+          "defaults" : {
+            "variants": [
+              {
+                "hostname": "foo.{service}.{region}.{dnsSuffix}",
+                "dnsSuffix": "service-dns.gov",
+                "tags": [
+                  "foo"
+                ]
+              }
+            ]
+          },
           "endpoints" : {
-            "us-iso-east-1": {}
+            "us-iso-east-1": {},
+            "fips-us-iso-east-1": {
+              "hostname": "some-service-fips.us-iso-east-1.cs2.iso.gov",
+              "deprecated": true
+            }
           }
         }
       }

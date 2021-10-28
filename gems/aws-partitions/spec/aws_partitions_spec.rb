@@ -378,7 +378,7 @@ module Aws
     end
 
     # variants endpoints testing
-    describe Partitions::EndpointProvider do
+    describe 'Partitions::EndpointProvider' do
       let(:fips_partition_json) do
         path = File.expand_path('../variant_test_partition.json', __FILE__)
         JSON.load(File.read(path))
@@ -411,6 +411,28 @@ module Aws
               )
             ).to eq("https://#{test_case['Endpoint']}")
           end
+        end
+
+        it 'supports generic variants' do
+          expect(
+            Partitions::EndpointProvider.resolve(
+              'us-iso-east-1',
+              'some-service',
+              'regional',
+              { dualstack: false, foo: true }
+            )
+          ).to eq("https://foo.some-service.us-iso-east-1.service-dns.gov")
+        end
+
+        it 'warns when using a deprecated endpoint' do
+          expect_any_instance_of(Partitions::EndpointProvider).to receive(:warn)
+          expect(
+            Partitions::EndpointProvider.resolve(
+              'fips-us-iso-east-1',
+              'some-service',
+              'regional'
+            )
+          ).to eq("https://some-service-fips.us-iso-east-1.cs2.iso.gov")
         end
 
         # error cases
