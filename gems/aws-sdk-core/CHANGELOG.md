@@ -6,6 +6,8 @@ Unreleased Changes
 3.121.4 (2021-10-28)
 ------------------
 
+* Issue - This version has been yanked. (#2603).
+
 * Issue - use the `EndpointProvider` to lookup signing region and name.
 
 3.121.3 (2021-10-20)
