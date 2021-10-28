@@ -3,6 +3,9 @@ require_relative '../spec_helper'
 module Aws
   module S3
     describe Client do
+      # squash legacy fips shim transform warnings
+      before { allow(Aws::Plugins::RegionalEndpoint).to receive(:warn) }
+
       describe 's3_use_arn_region' do
         it 'is configured to use the arn region by default' do
           client = Aws::S3::Client.new(
