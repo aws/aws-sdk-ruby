@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2021-10-28)
+------------------
+
+* Feature - Added support for Arm-based AWS Graviton2 instances, such as M6g, C6g, and R6g.
+
 1.48.0 (2021-10-18)
 ------------------
 

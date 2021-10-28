@@ -229,6 +229,7 @@ module Aws::SSMIncidents
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     ConflictException.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: String, location_name: "resourceIdentifier"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    ConflictException.add_member(:retry_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "retryAfter"))
     ConflictException.struct_class = Types::ConflictException
 
     CreateReplicationSetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))

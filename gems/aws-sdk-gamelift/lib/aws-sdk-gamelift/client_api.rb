@@ -253,6 +253,8 @@ module Aws::GameLift
     IpProtocol = Shapes::StringShape.new(name: 'IpProtocol')
     LargeGameSessionData = Shapes::StringShape.new(name: 'LargeGameSessionData')
     LatencyMap = Shapes::MapShape.new(name: 'LatencyMap')
+    LaunchParametersStringModel = Shapes::StringShape.new(name: 'LaunchParametersStringModel')
+    LaunchPathStringModel = Shapes::StringShape.new(name: 'LaunchPathStringModel')
     LaunchTemplateId = Shapes::StringShape.new(name: 'LaunchTemplateId')
     LaunchTemplateName = Shapes::StringShape.new(name: 'LaunchTemplateName')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
@@ -525,8 +527,8 @@ module Aws::GameLift
     CreateFleetInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
     CreateFleetInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildIdOrArn, location_name: "BuildId"))
     CreateFleetInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptIdOrArn, location_name: "ScriptId"))
-    CreateFleetInput.add_member(:server_launch_path, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchPath"))
-    CreateFleetInput.add_member(:server_launch_parameters, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchParameters"))
+    CreateFleetInput.add_member(:server_launch_path, Shapes::ShapeRef.new(shape: LaunchPathStringModel, location_name: "ServerLaunchPath"))
+    CreateFleetInput.add_member(:server_launch_parameters, Shapes::ShapeRef.new(shape: LaunchParametersStringModel, location_name: "ServerLaunchParameters"))
     CreateFleetInput.add_member(:log_paths, Shapes::ShapeRef.new(shape: StringList, location_name: "LogPaths"))
     CreateFleetInput.add_member(:ec2_instance_type, Shapes::ShapeRef.new(shape: EC2InstanceType, required: true, location_name: "EC2InstanceType"))
     CreateFleetInput.add_member(:ec2_inbound_permissions, Shapes::ShapeRef.new(shape: IpPermissionsList, location_name: "EC2InboundPermissions"))
@@ -1023,8 +1025,8 @@ module Aws::GameLift
     FleetAttributes.add_member(:build_arn, Shapes::ShapeRef.new(shape: BuildArn, location_name: "BuildArn"))
     FleetAttributes.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, location_name: "ScriptId"))
     FleetAttributes.add_member(:script_arn, Shapes::ShapeRef.new(shape: ScriptArn, location_name: "ScriptArn"))
-    FleetAttributes.add_member(:server_launch_path, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchPath"))
-    FleetAttributes.add_member(:server_launch_parameters, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchParameters"))
+    FleetAttributes.add_member(:server_launch_path, Shapes::ShapeRef.new(shape: LaunchPathStringModel, location_name: "ServerLaunchPath"))
+    FleetAttributes.add_member(:server_launch_parameters, Shapes::ShapeRef.new(shape: LaunchParametersStringModel, location_name: "ServerLaunchParameters"))
     FleetAttributes.add_member(:log_paths, Shapes::ShapeRef.new(shape: StringList, location_name: "LogPaths"))
     FleetAttributes.add_member(:new_game_session_protection_policy, Shapes::ShapeRef.new(shape: ProtectionPolicy, location_name: "NewGameSessionProtectionPolicy"))
     FleetAttributes.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
@@ -1586,8 +1588,8 @@ module Aws::GameLift
     SearchGameSessionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     SearchGameSessionsOutput.struct_class = Types::SearchGameSessionsOutput
 
-    ServerProcess.add_member(:launch_path, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "LaunchPath"))
-    ServerProcess.add_member(:parameters, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Parameters"))
+    ServerProcess.add_member(:launch_path, Shapes::ShapeRef.new(shape: LaunchPathStringModel, required: true, location_name: "LaunchPath"))
+    ServerProcess.add_member(:parameters, Shapes::ShapeRef.new(shape: LaunchParametersStringModel, location_name: "Parameters"))
     ServerProcess.add_member(:concurrent_executions, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "ConcurrentExecutions"))
     ServerProcess.struct_class = Types::ServerProcess
 
@@ -1945,6 +1947,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:create_fleet_locations, Seahorse::Model::Operation.new.tap do |o|
@@ -1958,6 +1961,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:create_game_server_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1989,6 +1993,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: FleetCapacityExceededException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:create_game_session_queue, Seahorse::Model::Operation.new.tap do |o|
@@ -2148,6 +2153,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:delete_game_server_group, Seahorse::Model::Operation.new.tap do |o|
@@ -2295,6 +2301,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:describe_fleet_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -2361,6 +2368,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2379,6 +2387,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:describe_fleet_location_utilization, Seahorse::Model::Operation.new.tap do |o|
@@ -2391,6 +2400,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:describe_fleet_port_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -2476,6 +2486,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2525,6 +2536,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2543,6 +2555,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2637,6 +2650,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2892,6 +2906,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2910,6 +2925,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:start_game_session_placement, Seahorse::Model::Operation.new.tap do |o|
@@ -2958,6 +2974,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:stop_game_session_placement, Seahorse::Model::Operation.new.tap do |o|
@@ -3072,6 +3089,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:update_fleet_port_settings, Seahorse::Model::Operation.new.tap do |o|

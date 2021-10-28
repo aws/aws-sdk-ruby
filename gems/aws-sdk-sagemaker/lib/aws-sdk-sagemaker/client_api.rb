@@ -56,6 +56,7 @@ module Aws::SageMaker
     AppManaged = Shapes::BooleanShape.new(name: 'AppManaged')
     AppName = Shapes::StringShape.new(name: 'AppName')
     AppNetworkAccessType = Shapes::StringShape.new(name: 'AppNetworkAccessType')
+    AppSecurityGroupManagement = Shapes::StringShape.new(name: 'AppSecurityGroupManagement')
     AppSortKey = Shapes::StringShape.new(name: 'AppSortKey')
     AppSpecification = Shapes::StructureShape.new(name: 'AppSpecification')
     AppStatus = Shapes::StringShape.new(name: 'AppStatus')
@@ -528,6 +529,9 @@ module Aws::SageMaker
     DomainId = Shapes::StringShape.new(name: 'DomainId')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
+    DomainSecurityGroupIds = Shapes::ListShape.new(name: 'DomainSecurityGroupIds')
+    DomainSettings = Shapes::StructureShape.new(name: 'DomainSettings')
+    DomainSettingsForUpdate = Shapes::StructureShape.new(name: 'DomainSettingsForUpdate')
     DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
     DoubleParameterValue = Shapes::FloatShape.new(name: 'DoubleParameterValue')
     EdgeModel = Shapes::StructureShape.new(name: 'EdgeModel')
@@ -1170,6 +1174,12 @@ module Aws::SageMaker
     PublicWorkforceTaskPrice = Shapes::StructureShape.new(name: 'PublicWorkforceTaskPrice')
     PutModelPackageGroupPolicyInput = Shapes::StructureShape.new(name: 'PutModelPackageGroupPolicyInput')
     PutModelPackageGroupPolicyOutput = Shapes::StructureShape.new(name: 'PutModelPackageGroupPolicyOutput')
+    RSessionAppSettings = Shapes::StructureShape.new(name: 'RSessionAppSettings')
+    RStudioServerProAccessStatus = Shapes::StringShape.new(name: 'RStudioServerProAccessStatus')
+    RStudioServerProAppSettings = Shapes::StructureShape.new(name: 'RStudioServerProAppSettings')
+    RStudioServerProDomainSettings = Shapes::StructureShape.new(name: 'RStudioServerProDomainSettings')
+    RStudioServerProDomainSettingsForUpdate = Shapes::StructureShape.new(name: 'RStudioServerProDomainSettingsForUpdate')
+    RStudioServerProUserGroup = Shapes::StringShape.new(name: 'RStudioServerProUserGroup')
     RealtimeInferenceInstanceTypes = Shapes::ListShape.new(name: 'RealtimeInferenceInstanceTypes')
     RecordWrapper = Shapes::StringShape.new(name: 'RecordWrapper')
     RedshiftClusterId = Shapes::StringShape.new(name: 'RedshiftClusterId')
@@ -2082,6 +2092,8 @@ module Aws::SageMaker
     CreateDomainRequest.add_member(:app_network_access_type, Shapes::ShapeRef.new(shape: AppNetworkAccessType, location_name: "AppNetworkAccessType"))
     CreateDomainRequest.add_member(:home_efs_file_system_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, deprecated: true, location_name: "HomeEfsFileSystemKmsKeyId", metadata: {"deprecatedMessage"=>"This property is deprecated, use KmsKeyId instead."}))
     CreateDomainRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    CreateDomainRequest.add_member(:app_security_group_management, Shapes::ShapeRef.new(shape: AppSecurityGroupManagement, location_name: "AppSecurityGroupManagement"))
+    CreateDomainRequest.add_member(:domain_settings, Shapes::ShapeRef.new(shape: DomainSettings, location_name: "DomainSettings"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
     CreateDomainResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
@@ -2975,6 +2987,9 @@ module Aws::SageMaker
     DescribeDomainResponse.add_member(:url, Shapes::ShapeRef.new(shape: String1024, location_name: "Url"))
     DescribeDomainResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     DescribeDomainResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    DescribeDomainResponse.add_member(:domain_settings, Shapes::ShapeRef.new(shape: DomainSettings, location_name: "DomainSettings"))
+    DescribeDomainResponse.add_member(:app_security_group_management, Shapes::ShapeRef.new(shape: AppSecurityGroupManagement, location_name: "AppSecurityGroupManagement"))
+    DescribeDomainResponse.add_member(:security_group_id_for_domain_boundary, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "SecurityGroupIdForDomainBoundary"))
     DescribeDomainResponse.struct_class = Types::DescribeDomainResponse
 
     DescribeEdgePackagingJobRequest.add_member(:edge_packaging_job_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "EdgePackagingJobName"))
@@ -3602,6 +3617,15 @@ module Aws::SageMaker
     DomainDetails.struct_class = Types::DomainDetails
 
     DomainList.member = Shapes::ShapeRef.new(shape: DomainDetails)
+
+    DomainSecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
+    DomainSettings.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: DomainSecurityGroupIds, location_name: "SecurityGroupIds"))
+    DomainSettings.add_member(:r_studio_server_pro_domain_settings, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettings, location_name: "RStudioServerProDomainSettings"))
+    DomainSettings.struct_class = Types::DomainSettings
+
+    DomainSettingsForUpdate.add_member(:r_studio_server_pro_domain_settings_for_update, Shapes::ShapeRef.new(shape: RStudioServerProDomainSettingsForUpdate, location_name: "RStudioServerProDomainSettingsForUpdate"))
+    DomainSettingsForUpdate.struct_class = Types::DomainSettingsForUpdate
 
     EdgeModel.add_member(:model_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelName"))
     EdgeModel.add_member(:model_version, Shapes::ShapeRef.new(shape: EdgeVersion, required: true, location_name: "ModelVersion"))
@@ -5656,6 +5680,22 @@ module Aws::SageMaker
     PutModelPackageGroupPolicyOutput.add_member(:model_package_group_arn, Shapes::ShapeRef.new(shape: ModelPackageGroupArn, required: true, location_name: "ModelPackageGroupArn"))
     PutModelPackageGroupPolicyOutput.struct_class = Types::PutModelPackageGroupPolicyOutput
 
+    RSessionAppSettings.struct_class = Types::RSessionAppSettings
+
+    RStudioServerProAppSettings.add_member(:access_status, Shapes::ShapeRef.new(shape: RStudioServerProAccessStatus, location_name: "AccessStatus"))
+    RStudioServerProAppSettings.add_member(:user_group, Shapes::ShapeRef.new(shape: RStudioServerProUserGroup, location_name: "UserGroup"))
+    RStudioServerProAppSettings.struct_class = Types::RStudioServerProAppSettings
+
+    RStudioServerProDomainSettings.add_member(:domain_execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "DomainExecutionRoleArn"))
+    RStudioServerProDomainSettings.add_member(:r_studio_connect_url, Shapes::ShapeRef.new(shape: String, location_name: "RStudioConnectUrl"))
+    RStudioServerProDomainSettings.add_member(:r_studio_package_manager_url, Shapes::ShapeRef.new(shape: String, location_name: "RStudioPackageManagerUrl"))
+    RStudioServerProDomainSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    RStudioServerProDomainSettings.struct_class = Types::RStudioServerProDomainSettings
+
+    RStudioServerProDomainSettingsForUpdate.add_member(:domain_execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "DomainExecutionRoleArn"))
+    RStudioServerProDomainSettingsForUpdate.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    RStudioServerProDomainSettingsForUpdate.struct_class = Types::RStudioServerProDomainSettingsForUpdate
+
     RealtimeInferenceInstanceTypes.member = Shapes::ShapeRef.new(shape: ProductionVariantInstanceType)
 
     RedshiftDatasetDefinition.add_member(:cluster_id, Shapes::ShapeRef.new(shape: RedshiftClusterId, required: true, location_name: "ClusterId"))
@@ -6311,6 +6351,7 @@ module Aws::SageMaker
 
     UpdateDomainRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
     UpdateDomainRequest.add_member(:default_user_settings, Shapes::ShapeRef.new(shape: UserSettings, location_name: "DefaultUserSettings"))
+    UpdateDomainRequest.add_member(:domain_settings_for_update, Shapes::ShapeRef.new(shape: DomainSettingsForUpdate, location_name: "DomainSettingsForUpdate"))
     UpdateDomainRequest.struct_class = Types::UpdateDomainRequest
 
     UpdateDomainResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
@@ -6495,6 +6536,8 @@ module Aws::SageMaker
     UserSettings.add_member(:jupyter_server_app_settings, Shapes::ShapeRef.new(shape: JupyterServerAppSettings, location_name: "JupyterServerAppSettings"))
     UserSettings.add_member(:kernel_gateway_app_settings, Shapes::ShapeRef.new(shape: KernelGatewayAppSettings, location_name: "KernelGatewayAppSettings"))
     UserSettings.add_member(:tensor_board_app_settings, Shapes::ShapeRef.new(shape: TensorBoardAppSettings, location_name: "TensorBoardAppSettings"))
+    UserSettings.add_member(:r_studio_server_pro_app_settings, Shapes::ShapeRef.new(shape: RStudioServerProAppSettings, location_name: "RStudioServerProAppSettings"))
+    UserSettings.add_member(:r_session_app_settings, Shapes::ShapeRef.new(shape: RSessionAppSettings, location_name: "RSessionAppSettings"))
     UserSettings.struct_class = Types::UserSettings
 
     VariantProperty.add_member(:variant_property_type, Shapes::ShapeRef.new(shape: VariantPropertyType, required: true, location_name: "VariantPropertyType"))

@@ -330,6 +330,13 @@ module Aws::ConnectParticipant
     # Allows you to confirm that the attachment has been uploaded using the
     # pre-signed URL provided in StartAttachmentUpload API.
     #
+    # The Amazon Connect Participant Service APIs do not use [Signature
+    # Version 4 authentication][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #
     # @option params [required, Array<String>] :attachment_ids
     #   A list of unique identifiers for the attachments.
     #
@@ -382,14 +389,28 @@ module Aws::ConnectParticipant
     # ConnectionExpiry parameter, clients need to call this API again to
     # obtain a new websocket URL and perform the same steps as before.
     #
+    # **Message streaming support**\: This API can also be used together
+    # with the [StartContactStreaming][1] API to create a participant
+    # connection for chat contacts that are not using a websocket. For more
+    # information about message streaming, [Enable real-time chat message
+    # streaming][2] in the *Amazon Connect Administrator Guide*.
+    #
+    # **Feature specifications**\: For information about feature
+    # specifications, such as the allowed number of open websocket
+    # connections per participant, see [Feature specifications][3] in the
+    # *Amazon Connect Administrator Guide*.
+    #
     # <note markdown="1"> The Amazon Connect Participant Service APIs do not use [Signature
-    # Version 4 authentication][1].
+    # Version 4 authentication][4].
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [required, Array<String>] :type
     #   Type of connection information required.
@@ -397,12 +418,16 @@ module Aws::ConnectParticipant
     # @option params [required, String] :participant_token
     #   This is a header parameter.
     #
-    #   The Participant Token as obtained from [StartChatContact][1] API
+    #   The ParticipantToken as obtained from [StartChatContact][1] API
     #   response.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html
+    #
+    # @option params [Boolean] :connect_participant
+    #   Amazon Connect Participant is used to mark the participant as
+    #   connected for message streaming.
     #
     # @return [Types::CreateParticipantConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -414,6 +439,7 @@ module Aws::ConnectParticipant
     #   resp = client.create_participant_connection({
     #     type: ["WEBSOCKET"], # required, accepts WEBSOCKET, CONNECTION_CREDENTIALS
     #     participant_token: "ParticipantToken", # required
+    #     connect_participant: false,
     #   })
     #
     # @example Response structure
@@ -473,6 +499,13 @@ module Aws::ConnectParticipant
 
     # Provides a pre-signed URL for download of a completed attachment. This
     # is an asynchronous API for use with active contacts.
+    #
+    # The Amazon Connect Participant Service APIs do not use [Signature
+    # Version 4 authentication][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [required, String] :attachment_id
     #   A unique identifier for the attachment.
@@ -576,7 +609,7 @@ module Aws::ConnectParticipant
     #   resp.transcript[0].content #=> String
     #   resp.transcript[0].content_type #=> String
     #   resp.transcript[0].id #=> String
-    #   resp.transcript[0].type #=> String, one of "TYPING", "PARTICIPANT_JOINED", "PARTICIPANT_LEFT", "CHAT_ENDED", "TRANSFER_SUCCEEDED", "TRANSFER_FAILED", "MESSAGE", "EVENT", "ATTACHMENT", "CONNECTION_ACK"
+    #   resp.transcript[0].type #=> String, one of "TYPING", "PARTICIPANT_JOINED", "PARTICIPANT_LEFT", "CHAT_ENDED", "TRANSFER_SUCCEEDED", "TRANSFER_FAILED", "MESSAGE", "EVENT", "ATTACHMENT", "CONNECTION_ACK", "PARTICIPANT_ACTIVE", "PARTICIPANT_INACTIVE", "PARTICIPANT_ENGAGED", "PARTICIPANT_DISENGAGED"
     #   resp.transcript[0].participant_id #=> String
     #   resp.transcript[0].display_name #=> String
     #   resp.transcript[0].participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM"
@@ -659,10 +692,8 @@ module Aws::ConnectParticipant
     # Sends a message. Note that ConnectionToken is used for invoking this
     # API instead of ParticipantToken.
     #
-    # <note markdown="1"> The Amazon Connect Participant Service APIs do not use [Signature
+    # The Amazon Connect Participant Service APIs do not use [Signature
     # Version 4 authentication][1].
-    #
-    #  </note>
     #
     #
     #
@@ -714,6 +745,13 @@ module Aws::ConnectParticipant
 
     # Provides a pre-signed Amazon S3 URL in response for uploading the file
     # directly to S3.
+    #
+    # The Amazon Connect Participant Service APIs do not use [Signature
+    # Version 4 authentication][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [required, String] :content_type
     #   Describes the MIME file type of the attachment. For a list of
@@ -785,7 +823,7 @@ module Aws::ConnectParticipant
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectparticipant'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2021-10-28)
+------------------
+
+* Feature - Updating documentation, adding new field to ConflictException to indicate earliest retry timestamp for some operations, increase maximum length of nextToken fields
+
 1.5.0 (2021-10-18)
 ------------------
 

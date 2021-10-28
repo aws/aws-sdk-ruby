@@ -1468,7 +1468,11 @@ module Aws::ECS
     #   Developer Guide*.
     #
     #   For tasks using the Fargate launch type, the task or service
-    #   requires platform version `1.3.0` or later.
+    #   requires the followiwng platforms:
+    #
+    #   * Linux platform version `1.3.0` or later.
+    #
+    #   * Windows platform version `1.0.0` or later.
     #
     #
     #
@@ -1492,8 +1496,12 @@ module Aws::ECS
     #
     #    </note>
     #
-    #   For tasks using the Fargate launch type, this parameter requires
-    #   that the task or service uses platform version 1.3.0 or later.
+    #   For tasks using the Fargate launch type, the task or service
+    #   requires the followiwng platforms:
+    #
+    #   * Linux platform version `1.3.0` or later.
+    #
+    #   * Windows platform version `1.0.0` or later.
     #
     #   For tasks using the EC2 launch type, your container instances
     #   require at least version `1.26.0` of the container agent to enable a
@@ -1520,9 +1528,14 @@ module Aws::ECS
     #   forcefully killed if it doesn't exit normally on its own.
     #
     #   For tasks using the Fargate launch type, the task or service
-    #   requires platform version 1.3.0 or later. The max stop timeout value
-    #   is 120 seconds and if the parameter is not specified, the default
-    #   value of 30 seconds is used.
+    #   requires the followiwng platforms:
+    #
+    #   * Linux platform version `1.3.0` or later.
+    #
+    #   * Windows platform version `1.0.0` or later.
+    #
+    #   The max stop timeout value is 120 seconds and if the parameter is
+    #   not specified, the default value of 30 seconds is used.
     #
     #   For tasks using the EC2 launch type, if the `stopTimeout` parameter
     #   is not specified, the value set for the Amazon ECS container agent
@@ -1995,8 +2008,12 @@ module Aws::ECS
     # see [Amazon ECS-optimized Linux AMI][2] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
-    # <note markdown="1"> For tasks using the Fargate launch type, this parameter requires that
-    # the task or service uses platform version 1.3.0 or later.
+    # <note markdown="1"> For tasks using the Fargate launch type, the task or service requires
+    # the followiwng platforms:
+    #
+    #  * Linux platform version `1.3.0` or later.
+    #
+    # * Windows platform version `1.0.0` or later.
     #
     #  </note>
     #
@@ -3690,6 +3707,15 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
+    # @!attribute [rw] platform_family
+    #   The operating system that your tasks in the service, or tasks are
+    #   running on. A platform family is specified only for tasks using the
+    #   Fargate launch type.
+    #
+    #   All tasks that run as part of this service must use the same
+    #   `platformFamily` value as the service, for example, ` LINUX.`.
+    #   @return [String]
+    #
     # @!attribute [rw] network_configuration
     #   The VPC subnet and security group configuration for tasks that
     #   receive their own elastic network interface by using the `awsvpc`
@@ -3731,6 +3757,7 @@ module Aws::ECS
       :capacity_provider_strategy,
       :launch_type,
       :platform_version,
+      :platform_family,
       :network_configuration,
       :rollout_state,
       :rollout_state_reason)
@@ -4789,8 +4816,12 @@ module Aws::ECS
     # variables][2] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
-    # This field is only valid for containers in Fargate tasks that use
-    # platform version `1.4.0` or later.
+    # This parameter is only supported for tasks hosted on Fargate using the
+    # following platform versions:
+    #
+    # * Linux platform version `1.4.0` or later.
+    #
+    # * Windows platform version `1.0.0` or later.
     #
     #
     #
@@ -4829,8 +4860,12 @@ module Aws::ECS
     # more information, see [Fargate task storage][1] in the *Amazon ECS
     # User Guide for Fargate*.
     #
-    # <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using
-    # platform version `1.4.0` or later.
+    # <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using the
+    # following platform versions:
+    #
+    #  * Linux platform version `1.4.0` or later.
+    #
+    # * Windows platform version `1.0.0` or later.
     #
     #  </note>
     #
@@ -4950,8 +4985,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] s3_encryption_enabled
-    #   Whether or not to enable encryption on the CloudWatch logs. If not
-    #   specified, encryption will be disabled.
+    #   Whether or not to use encryption on the S3 logs. If not specified,
+    #   encryption is not used.
     #   @return [Boolean]
     #
     # @!attribute [rw] s3_key_prefix
@@ -7996,6 +8031,10 @@ module Aws::ECS
     #         ephemeral_storage: {
     #           size_in_gi_b: 1, # required
     #         },
+    #         runtime_platform: {
+    #           cpu_architecture: "X86_64", # accepts X86_64, ARM64
+    #           operating_system_family: "WINDOWS_SERVER_2019_FULL", # accepts WINDOWS_SERVER_2019_FULL, WINDOWS_SERVER_2019_CORE, WINDOWS_SERVER_2016_FULL, WINDOWS_SERVER_2004_CORE, WINDOWS_SERVER_2022_CORE, WINDOWS_SERVER_2022_FULL, WINDOWS_SERVER_20H2_CORE, LINUX
+    #         },
     #       }
     #
     # @!attribute [rw] family
@@ -8302,7 +8341,11 @@ module Aws::ECS
     #   ECS User Guide for Fargate*.
     #
     #   <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using
-    #   platform version `1.4.0` or later.
+    #   the following platform versions:
+    #
+    #    * Linux platform version `1.4.0` or later.
+    #
+    #   * Windows platform version `1.0.0` or later.
     #
     #    </note>
     #
@@ -8310,6 +8353,14 @@ module Aws::ECS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
     #   @return [Types::EphemeralStorage]
+    #
+    # @!attribute [rw] runtime_platform
+    #   The operating system that your tasks definitions run on. A platform
+    #   family is specified only for tasks using the Fargate launch type.
+    #
+    #   When you specify a task definition in a service, this value must
+    #   match the `runtimePlatform` value of the service.
+    #   @return [Types::RuntimePlatform]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
     #
@@ -8329,7 +8380,8 @@ module Aws::ECS
       :ipc_mode,
       :proxy_configuration,
       :inference_accelerators,
-      :ephemeral_storage)
+      :ephemeral_storage,
+      :runtime_platform)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8834,6 +8886,33 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # Information about the platform for the Amazon ECS service or task.
+    #
+    # @note When making an API call, you may pass RuntimePlatform
+    #   data as a hash:
+    #
+    #       {
+    #         cpu_architecture: "X86_64", # accepts X86_64, ARM64
+    #         operating_system_family: "WINDOWS_SERVER_2019_FULL", # accepts WINDOWS_SERVER_2019_FULL, WINDOWS_SERVER_2019_CORE, WINDOWS_SERVER_2016_FULL, WINDOWS_SERVER_2004_CORE, WINDOWS_SERVER_2022_CORE, WINDOWS_SERVER_2022_FULL, WINDOWS_SERVER_20H2_CORE, LINUX
+    #       }
+    #
+    # @!attribute [rw] cpu_architecture
+    #   The CPU architecture.
+    #   @return [String]
+    #
+    # @!attribute [rw] operating_system_family
+    #   The operating system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RuntimePlatform AWS API Documentation
+    #
+    class RuntimePlatform < Struct.new(
+      :cpu_architecture,
+      :operating_system_family)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A floating-point percentage of the desired number of tasks to place
     # and keep running in the task set.
     #
@@ -9010,6 +9089,15 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
+    # @!attribute [rw] platform_family
+    #   The operating system that your tasks in the service are running on.
+    #   A platform family is specified only for tasks using the Fargate
+    #   launch type.
+    #
+    #   All tasks that run as part of this service must use the same
+    #   `platformFamily` value as the service, for example, `LINUX`.
+    #   @return [String]
+    #
     # @!attribute [rw] task_definition
     #   The task definition to use for tasks in the service. This value is
     #   specified when the service is created with CreateService, and it can
@@ -9176,6 +9264,7 @@ module Aws::ECS
       :launch_type,
       :capacity_provider_strategy,
       :platform_version,
+      :platform_family,
       :task_definition,
       :deployment_configuration,
       :task_sets,
@@ -10240,6 +10329,14 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
+    # @!attribute [rw] platform_family
+    #   The operating system that your tasks are running on. A platform
+    #   family is specified only for tasks using the Fargate launch type.
+    #
+    #   All tasks that run as part of this service must use the same
+    #   `platformFamily` value as the service, for example, `LINUX.`.
+    #   @return [String]
+    #
     # @!attribute [rw] pull_started_at
     #   The Unix timestamp for when the container image pull began.
     #   @return [Time]
@@ -10356,6 +10453,7 @@ module Aws::ECS
       :memory,
       :overrides,
       :platform_version,
+      :platform_family,
       :pull_started_at,
       :pull_stopped_at,
       :started_at,
@@ -10550,6 +10648,15 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] runtime_platform
+    #   The operating system that your task definitions are running on. A
+    #   platform family is specified only for tasks using the Fargate launch
+    #   type.
+    #
+    #   When you specify a task in a service, this value must match the
+    #   `runtimePlatform` value of the service.
+    #   @return [Types::RuntimePlatform]
+    #
     # @!attribute [rw] requires_compatibilities
     #   The task launch types the task definition was validated against. To
     #   determine which task launch types the task definition is validated
@@ -10734,6 +10841,7 @@ module Aws::ECS
       :requires_attributes,
       :placement_constraints,
       :compatibilities,
+      :runtime_platform,
       :requires_compatibilities,
       :cpu,
       :memory,
@@ -10884,7 +10992,11 @@ module Aws::ECS
     #   The ephemeral storage setting override for the task.
     #
     #   <note markdown="1"> This parameter is only supported for tasks hosted on Fargate using
-    #   platform version `1.4.0` or later.
+    #   the following platform versions:
+    #
+    #    * Linux platform version `1.4.0` or later.
+    #
+    #   * Windows platform version `1.0.0` or later.
     #
     #    </note>
     #   @return [Types::EphemeralStorage]
@@ -11021,6 +11133,14 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
+    # @!attribute [rw] platform_family
+    #   The operating system that your tasks in the set are running on. A
+    #   platform family is specified only for tasks using the Fargate launch
+    #   type.
+    #
+    #   All tasks in the set must have the same value.
+    #   @return [String]
+    #
     # @!attribute [rw] network_configuration
     #   The network configuration for the task set.
     #   @return [Types::NetworkConfiguration]
@@ -11117,6 +11237,7 @@ module Aws::ECS
       :launch_type,
       :capacity_provider_strategy,
       :platform_version,
+      :platform_family,
       :network_configuration,
       :load_balancers,
       :service_registries,

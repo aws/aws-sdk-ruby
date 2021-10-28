@@ -79,6 +79,11 @@ module Aws::SSMIncidents
       def resource_type
         @data[:resource_type]
       end
+
+      # @return [String]
+      def retry_after
+        @data[:retry_after]
+      end
     end
 
     class InternalServerException < ServiceError
