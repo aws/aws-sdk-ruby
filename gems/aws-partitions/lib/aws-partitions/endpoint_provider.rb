@@ -90,7 +90,7 @@ module Aws
       end
 
       def resolve_variant(region, service, config_variants)
-        tags = Set.new(config_variants.filter { |_k,v| v == true }.map { |k,_v| k.to_s })
+        tags = Set.new(config_variants.select { |_k,v| v == true }.map { |k,_v| k.to_s })
         is_global_fn = build_is_global_fn # ignore legacy STS config for variants
 
         partition_cfg = get_partition(region)
