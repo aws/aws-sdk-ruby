@@ -72,8 +72,7 @@ module Aws
       # @api private Use the static class methods instead.
       def dns_suffix_for(region, service, variants)
         if configured_variants?(variants)
-          resolved_variants = resolve_variants(region, service)
-          get_variant(resolved_variants, variants)['dnsSuffix']
+          resolve_variant(region, service, variants)['dnsSuffix']
         else
           get_partition(region)['dnsSuffix']
         end
@@ -85,59 +84,35 @@ module Aws
         variants.values.any?
       end
 
-      def resolve_variants(region, service)
-        partition = get_partition(region)
-        partition_variants = partition.fetch('defaults', {})
-                                      .fetch('variants', [])
-
-        service_variants = partition.fetch('services', {})
-                                    .fetch(service, {})
-                                    .fetch('defaults', {})
-                                    .fetch('variants', [])
-
-        service_cfg = partition.fetch('services', {})
-                               .fetch(service, {})
-        endpoints = service_cfg.fetch('endpoints', {})
-
-        is_global = !endpoints.key?(region) &&
-                    service_cfg['isRegionalized'] == false
-
-        # Check for global endpoint.
-        region = service_cfg.fetch('partitionEndpoint', region) if is_global
-
-        endpoint_variants = endpoints.fetch(region, {})
-                                     .fetch('variants', [])
-
-        variants = []
-
-        partition_variants.each do |variant|
-          matching_svc_variant = service_variants.find do |svc_variant|
-            Set.new(variant['tags']) == Set.new(svc_variant['tags'])
-          end || {}
-
-          matching_ep_variant = endpoint_variants.find do |ep_variant|
-            Set.new(variant['tags']) == Set.new(ep_variant['tags'])
-          end || {}
-
-          variants << variant.merge(matching_svc_variant)
-                             .merge(matching_ep_variant)
-        end
-
-        variants
+      def fetch_variant(cfg, tags)
+        variants = cfg.fetch('variants', [])
+        variants.find { |v| tags == Set.new(v['tags']) } || {}
       end
 
-      def get_variant(modeled_variants, config_variants)
-        tags = Set.new(config_variants.select { |_k,v| v }.map { |k,_v| k.to_s })
-        modeled_variants.each do |modeled_variant|
-          if tags == Set.new(modeled_variant['tags'])
-            return modeled_variant
-          end
+      def resolve_variant(region, service, config_variants)
+        tags = Set.new(config_variants.filter { |_k,v| v == true }.map { |k,_v| k.to_s })
+        is_global_fn = build_is_global_fn # ignore legacy STS config for variants
+
+        partition_cfg = get_partition(region)
+        service_cfg = partition_cfg.fetch('services', {})
+                                   .fetch(service, {})
+
+        endpoints_cfg = service_cfg.fetch('endpoints', {})
+
+        if is_global_fn.call(service, region, endpoints_cfg, service_cfg)
+          region = service_cfg.fetch('partitionEndpoint', region)
         end
-        {}
+
+        partition_defaults = fetch_variant(partition_cfg.fetch('defaults', {}), tags)
+        service_defaults = fetch_variant(service_cfg.fetch('defaults', {}), tags)
+        endpoint_cfg = fetch_variant(endpoints_cfg.fetch(region, {}), tags)
+
+        # merge upwards, preferring values from endpoint > service > partition
+        partition_defaults.merge(service_defaults.merge(endpoint_cfg))
       end
 
-      def validate_variants!(config_variants, resolved_variants)
-        if resolved_variants.empty?
+      def validate_variant!(config_variants, resolved_variant)
+        unless resolved_variant['hostname'] && resolved_variant['dnsSuffix']
           enabled_variants = config_variants.select { |_k, v| v}.map { |k, _v| k.to_s }.join(', ')
             raise ArgumentError,
                 "#{enabled_variants} not supported for this region and partition."
@@ -153,9 +128,8 @@ module Aws
       end
 
       def endpoint_with_variants_for(region, service, variants)
-        resolved_variants = resolve_variants(region, service)
-        validate_variants!(variants, resolved_variants)
-        variant = get_variant(resolved_variants, variants)
+        variant = resolve_variant(region, service, variants)
+        validate_variant!(variants, variant)
         variant['hostname'].sub('{region}', region)
                            .sub('{service}', service)
                            .sub('{dnsSuffix}', variant['dnsSuffix'])
