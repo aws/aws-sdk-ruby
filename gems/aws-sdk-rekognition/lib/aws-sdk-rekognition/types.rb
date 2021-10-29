@@ -293,13 +293,18 @@ module Aws::Rekognition
     #   Face details for the recognized celebrity.
     #   @return [Types::FaceDetail]
     #
+    # @!attribute [rw] known_gender
+    #   Retrieves the known gender for the celebrity.
+    #   @return [Types::KnownGender]
+    #
     class CelebrityDetail < Struct.new(
       :urls,
       :name,
       :id,
       :confidence,
       :bounding_box,
-      :face)
+      :face,
+      :known_gender)
       SENSITIVE = []
       include Aws::Structure
     end

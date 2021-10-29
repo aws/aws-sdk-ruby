@@ -20,6 +20,8 @@ module Aws::ApplicationInsights
     ApplicationComponentList = Shapes::ListShape.new(name: 'ApplicationComponentList')
     ApplicationInfo = Shapes::StructureShape.new(name: 'ApplicationInfo')
     ApplicationInfoList = Shapes::ListShape.new(name: 'ApplicationInfoList')
+    AutoConfigEnabled = Shapes::BooleanShape.new(name: 'AutoConfigEnabled')
+    AutoCreate = Shapes::BooleanShape.new(name: 'AutoCreate')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     CWEMonitorEnabled = Shapes::BooleanShape.new(name: 'CWEMonitorEnabled')
     CloudWatchEventDetailType = Shapes::StringShape.new(name: 'CloudWatchEventDetailType')
@@ -70,6 +72,7 @@ module Aws::ApplicationInsights
     DescribeProblemRequest = Shapes::StructureShape.new(name: 'DescribeProblemRequest')
     DescribeProblemResponse = Shapes::StructureShape.new(name: 'DescribeProblemResponse')
     DetectedWorkload = Shapes::MapShape.new(name: 'DetectedWorkload')
+    DiscoveryType = Shapes::StringShape.new(name: 'DiscoveryType')
     EbsCause = Shapes::StringShape.new(name: 'EbsCause')
     EbsEvent = Shapes::StringShape.new(name: 'EbsEvent')
     EbsRequestId = Shapes::StringShape.new(name: 'EbsRequestId')
@@ -88,6 +91,7 @@ module Aws::ApplicationInsights
     HealthService = Shapes::StringShape.new(name: 'HealthService')
     Insights = Shapes::StringShape.new(name: 'Insights')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    LastRecurrenceTime = Shapes::TimestampShape.new(name: 'LastRecurrenceTime')
     LifeCycle = Shapes::StringShape.new(name: 'LifeCycle')
     LineTime = Shapes::TimestampShape.new(name: 'LineTime')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
@@ -132,6 +136,7 @@ module Aws::ApplicationInsights
     ProblemList = Shapes::ListShape.new(name: 'ProblemList')
     RdsEventCategories = Shapes::StringShape.new(name: 'RdsEventCategories')
     RdsEventMessage = Shapes::StringShape.new(name: 'RdsEventMessage')
+    RecurringCount = Shapes::IntegerShape.new(name: 'RecurringCount')
     RelatedObservations = Shapes::StructureShape.new(name: 'RelatedObservations')
     Remarks = Shapes::StringShape.new(name: 'Remarks')
     RemoveSNSTopic = Shapes::BooleanShape.new(name: 'RemoveSNSTopic')
@@ -204,6 +209,8 @@ module Aws::ApplicationInsights
     ApplicationInfo.add_member(:ops_center_enabled, Shapes::ShapeRef.new(shape: OpsCenterEnabled, location_name: "OpsCenterEnabled"))
     ApplicationInfo.add_member(:cwe_monitor_enabled, Shapes::ShapeRef.new(shape: CWEMonitorEnabled, location_name: "CWEMonitorEnabled"))
     ApplicationInfo.add_member(:remarks, Shapes::ShapeRef.new(shape: Remarks, location_name: "Remarks"))
+    ApplicationInfo.add_member(:auto_config_enabled, Shapes::ShapeRef.new(shape: AutoConfigEnabled, location_name: "AutoConfigEnabled"))
+    ApplicationInfo.add_member(:discovery_type, Shapes::ShapeRef.new(shape: DiscoveryType, location_name: "DiscoveryType"))
     ApplicationInfo.struct_class = Types::ApplicationInfo
 
     ApplicationInfoList.member = Shapes::ShapeRef.new(shape: ApplicationInfo)
@@ -221,11 +228,13 @@ module Aws::ApplicationInsights
 
     ConfigurationEventList.member = Shapes::ShapeRef.new(shape: ConfigurationEvent)
 
-    CreateApplicationRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
+    CreateApplicationRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
     CreateApplicationRequest.add_member(:ops_center_enabled, Shapes::ShapeRef.new(shape: OpsCenterEnabled, location_name: "OpsCenterEnabled"))
     CreateApplicationRequest.add_member(:cwe_monitor_enabled, Shapes::ShapeRef.new(shape: CWEMonitorEnabled, location_name: "CWEMonitorEnabled"))
     CreateApplicationRequest.add_member(:ops_item_sns_topic_arn, Shapes::ShapeRef.new(shape: OpsItemSNSTopicArn, location_name: "OpsItemSNSTopicArn"))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateApplicationRequest.add_member(:auto_config_enabled, Shapes::ShapeRef.new(shape: AutoConfigEnabled, location_name: "AutoConfigEnabled"))
+    CreateApplicationRequest.add_member(:auto_create, Shapes::ShapeRef.new(shape: AutoCreate, location_name: "AutoCreate"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_info, Shapes::ShapeRef.new(shape: ApplicationInfo, location_name: "ApplicationInfo"))
@@ -389,10 +398,12 @@ module Aws::ApplicationInsights
     ListProblemsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: EndTime, location_name: "EndTime"))
     ListProblemsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxEntities, location_name: "MaxResults"))
     ListProblemsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListProblemsRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: ComponentName, location_name: "ComponentName"))
     ListProblemsRequest.struct_class = Types::ListProblemsRequest
 
     ListProblemsResponse.add_member(:problem_list, Shapes::ShapeRef.new(shape: ProblemList, location_name: "ProblemList"))
     ListProblemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListProblemsResponse.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
     ListProblemsResponse.struct_class = Types::ListProblemsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
@@ -470,6 +481,8 @@ module Aws::ApplicationInsights
     Problem.add_member(:severity_level, Shapes::ShapeRef.new(shape: SeverityLevel, location_name: "SeverityLevel"))
     Problem.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
     Problem.add_member(:feedback, Shapes::ShapeRef.new(shape: Feedback, location_name: "Feedback"))
+    Problem.add_member(:recurring_count, Shapes::ShapeRef.new(shape: RecurringCount, location_name: "RecurringCount"))
+    Problem.add_member(:last_recurrence_time, Shapes::ShapeRef.new(shape: LastRecurrenceTime, location_name: "LastRecurrenceTime"))
     Problem.struct_class = Types::Problem
 
     ProblemList.member = Shapes::ShapeRef.new(shape: Problem)
@@ -517,6 +530,7 @@ module Aws::ApplicationInsights
     UpdateApplicationRequest.add_member(:cwe_monitor_enabled, Shapes::ShapeRef.new(shape: CWEMonitorEnabled, location_name: "CWEMonitorEnabled"))
     UpdateApplicationRequest.add_member(:ops_item_sns_topic_arn, Shapes::ShapeRef.new(shape: OpsItemSNSTopicArn, location_name: "OpsItemSNSTopicArn"))
     UpdateApplicationRequest.add_member(:remove_sns_topic, Shapes::ShapeRef.new(shape: RemoveSNSTopic, location_name: "RemoveSNSTopic"))
+    UpdateApplicationRequest.add_member(:auto_config_enabled, Shapes::ShapeRef.new(shape: AutoConfigEnabled, location_name: "AutoConfigEnabled"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.add_member(:application_info, Shapes::ShapeRef.new(shape: ApplicationInfo, location_name: "ApplicationInfo"))
@@ -527,6 +541,7 @@ module Aws::ApplicationInsights
     UpdateComponentConfigurationRequest.add_member(:monitor, Shapes::ShapeRef.new(shape: Monitor, location_name: "Monitor"))
     UpdateComponentConfigurationRequest.add_member(:tier, Shapes::ShapeRef.new(shape: Tier, location_name: "Tier"))
     UpdateComponentConfigurationRequest.add_member(:component_configuration, Shapes::ShapeRef.new(shape: ComponentConfiguration, location_name: "ComponentConfiguration"))
+    UpdateComponentConfigurationRequest.add_member(:auto_config_enabled, Shapes::ShapeRef.new(shape: AutoConfigEnabled, location_name: "AutoConfigEnabled"))
     UpdateComponentConfigurationRequest.struct_class = Types::UpdateComponentConfigurationRequest
 
     UpdateComponentConfigurationResponse.struct_class = Types::UpdateComponentConfigurationResponse

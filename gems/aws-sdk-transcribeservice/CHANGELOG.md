@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2021-10-29)
+------------------
+
+* Feature - Transcribe and Transcribe Call Analytics now support automatic language identification along with custom vocabulary, vocabulary filter, custom language model and PII redaction.
+
 1.64.0 (2021-10-18)
 ------------------
 

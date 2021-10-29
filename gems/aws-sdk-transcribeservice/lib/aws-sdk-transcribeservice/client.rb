@@ -1167,6 +1167,10 @@ module Aws::TranscribeService
     #   resp.call_analytics_job.settings.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #   resp.call_analytics_job.settings.language_options #=> Array
     #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job.settings.language_id_settings #=> Hash
+    #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_name #=> String
+    #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
+    #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].language_model_name #=> String
     #   resp.call_analytics_job.channel_definitions #=> Array
     #   resp.call_analytics_job.channel_definitions[0].channel_id #=> Integer
     #   resp.call_analytics_job.channel_definitions[0].participant_role #=> String, one of "AGENT", "CUSTOMER"
@@ -1333,6 +1337,10 @@ module Aws::TranscribeService
     #   resp.transcription_job.subtitles.formats[0] #=> String, one of "vtt", "srt"
     #   resp.transcription_job.subtitles.subtitle_file_uris #=> Array
     #   resp.transcription_job.subtitles.subtitle_file_uris[0] #=> String
+    #   resp.transcription_job.language_id_settings #=> Hash
+    #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_name #=> String
+    #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
+    #   resp.transcription_job.language_id_settings["LanguageCode"].language_model_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -1770,6 +1778,13 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :resource_arn
     #   Lists all tags associated with a given Amazon Resource Name (ARN).
+    #   ARNs have the format
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`
+    #   (for example,
+    #   `arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name`).
+    #   Valid values for `resource-type` are: `transcription-job`,
+    #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
+    #   `vocabulary-filter`, and `language-model`.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2094,6 +2109,13 @@ module Aws::TranscribeService
     #         redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #       },
     #       language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #       language_id_settings: {
+    #         "af-ZA" => {
+    #           vocabulary_name: "VocabularyName",
+    #           vocabulary_filter_name: "VocabularyFilterName",
+    #           language_model_name: "ModelName",
+    #         },
+    #       },
     #     },
     #     channel_definitions: [
     #       {
@@ -2128,6 +2150,10 @@ module Aws::TranscribeService
     #   resp.call_analytics_job.settings.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #   resp.call_analytics_job.settings.language_options #=> Array
     #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "id-ID", "it-IT", "ja-JP", "ko-KR", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ"
+    #   resp.call_analytics_job.settings.language_id_settings #=> Hash
+    #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_name #=> String
+    #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
+    #   resp.call_analytics_job.settings.language_id_settings["LanguageCode"].language_model_name #=> String
     #   resp.call_analytics_job.channel_definitions #=> Array
     #   resp.call_analytics_job.channel_definitions[0].channel_id #=> Integer
     #   resp.call_analytics_job.channel_definitions[0].participant_role #=> String, one of "AGENT", "CUSTOMER"
@@ -2232,8 +2258,8 @@ module Aws::TranscribeService
     #   current account or another account:
     #
     #   * Amazon Resource Name (ARN) of a KMS key in the current account or
-    #     another account: "arn:aws:kms:region:account
-    #     ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+    #     another account:
+    #     "arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
     #
     #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
     #     ID:alias/ExampleAlias"
@@ -2447,8 +2473,8 @@ module Aws::TranscribeService
     #     "arn:aws:kms:region:account
     #     ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
     #
-    #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
-    #     ID:alias/ExampleAlias"
+    #   * ARN of a KMS Key Alias:
+    #     "arn:aws:kms:region:account-ID:alias/ExampleAlias"
     #
     #   If you don't specify an encryption key, the output of the
     #   transcription job is encrypted with the default Amazon S3 key
@@ -2497,6 +2523,11 @@ module Aws::TranscribeService
     #
     # @option params [Array<Types::Tag>] :tags
     #   Add tags to an Amazon Transcribe transcription job.
+    #
+    # @option params [Hash<String,Types::LanguageIdSettings>] :language_id_settings
+    #   The language identification settings associated with your
+    #   transcription job. These settings include `VocabularyName`,
+    #   `VocabularyFilterName`, and `LanguageModelName`.
     #
     # @return [Types::StartTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2551,6 +2582,13 @@ module Aws::TranscribeService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     language_id_settings: {
+    #       "af-ZA" => {
+    #         vocabulary_name: "VocabularyName",
+    #         vocabulary_filter_name: "VocabularyFilterName",
+    #         language_model_name: "ModelName",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2592,6 +2630,10 @@ module Aws::TranscribeService
     #   resp.transcription_job.subtitles.formats[0] #=> String, one of "vtt", "srt"
     #   resp.transcription_job.subtitles.subtitle_file_uris #=> Array
     #   resp.transcription_job.subtitles.subtitle_file_uris[0] #=> String
+    #   resp.transcription_job.language_id_settings #=> Hash
+    #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_name #=> String
+    #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
+    #   resp.transcription_job.language_id_settings["LanguageCode"].language_model_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -2602,11 +2644,17 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
-    # Tags a Amazon Transcribe resource with the given list of tags.
+    # Tags an Amazon Transcribe resource with the given list of tags.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
-    #   want to tag.
+    #   want to tag. ARNs have the format
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`
+    #   (for example,
+    #   `arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name`).
+    #   Valid values for `resource-type` are: `transcription-job`,
+    #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
+    #   `vocabulary-filter`, and `language-model`.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags you are assigning to a given Amazon Transcribe resource.
@@ -2638,7 +2686,13 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
-    #   want to remove tags from.
+    #   want to remove tags from. ARNs have the format
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`
+    #   (for example,
+    #   `arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name`).
+    #   Valid values for `resource-type` are: `transcription-job`,
+    #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
+    #   `vocabulary-filter`, and `language-model`.
     #
     # @option params [required, Array<String>] :tag_keys
     #   A list of tag keys you want to remove from a specified Amazon
@@ -3034,7 +3088,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

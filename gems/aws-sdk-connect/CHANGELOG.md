@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2021-10-29)
+------------------
+
+* Feature - Amazon Connect Chat now supports real-time message streaming.
+
 1.53.0 (2021-10-21)
 ------------------
 

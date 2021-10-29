@@ -443,8 +443,8 @@ module Aws::Connect
     #   data as a hash:
     #
     #       {
-    #         content_type: "ChatContentType", # required
-    #         content: "ChatContent", # required
+    #         content_type: "ChatContentType",
+    #         content: "ChatContent",
     #       }
     #
     # @!attribute [rw] content_type
@@ -460,6 +460,30 @@ module Aws::Connect
     class ChatMessage < Struct.new(
       :content_type,
       :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The streaming configuration, such as the Amazon SNS streaming
+    # endpoint.
+    #
+    # @note When making an API call, you may pass ChatStreamingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         streaming_endpoint_arn: "ChatStreamingEndpointARN", # required
+    #       }
+    #
+    # @!attribute [rw] streaming_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the standard Amazon SNS topic. The
+    #   Amazon Resource Name (ARN) of the streaming endpoint that is used to
+    #   publish real-time message streaming for chat conversations.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ChatStreamingConfiguration AWS API Documentation
+    #
+    class ChatStreamingConfiguration < Struct.new(
+      :streaming_endpoint_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1408,7 +1432,7 @@ module Aws::Connect
       :hierarchy_group_id,
       :instance_id,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -1474,7 +1498,7 @@ module Aws::Connect
     #
     #       {
     #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
-    #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
+    #         unit: "SECONDS", # accepts SECONDS, MILLISECONDS, COUNT, PERCENT
     #       }
     #
     # @!attribute [rw] name
@@ -2188,11 +2212,21 @@ module Aws::Connect
     #   The channel used for grouping and filters.
     #   @return [String]
     #
+    # @!attribute [rw] routing_profile
+    #   The routing profile.
+    #   @return [Types::RoutingProfileReference]
+    #
+    # @!attribute [rw] instance_reference
+    #   The instance reference.
+    #   @return [Types::InstanceReference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Dimensions AWS API Documentation
     #
     class Dimensions < Struct.new(
       :queue,
-      :channel)
+      :channel,
+      :routing_profile,
+      :instance_reference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2500,12 +2534,17 @@ module Aws::Connect
     #
     #       {
     #         queues: ["QueueId"],
+    #         routing_profiles: ["RoutingProfileId"],
     #         channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #       }
     #
     # @!attribute [rw] queues
     #   The queues to use to filter the metrics. You can specify up to 100
     #   queues per request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] routing_profiles
+    #   The filters used to sort routing profiles.
     #   @return [Array<String>]
     #
     # @!attribute [rw] channels
@@ -2516,6 +2555,7 @@ module Aws::Connect
     #
     class Filters < Struct.new(
       :queues,
+      :routing_profiles,
       :channels)
       SENSITIVE = []
       include Aws::Structure
@@ -2565,13 +2605,14 @@ module Aws::Connect
     #         instance_id: "InstanceId", # required
     #         filters: { # required
     #           queues: ["QueueId"],
+    #           routing_profiles: ["RoutingProfileId"],
     #           channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #         },
-    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
+    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, INSTANCE
     #         current_metrics: [ # required
     #           {
     #             name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
-    #             unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
+    #             unit: "SECONDS", # accepts SECONDS, MILLISECONDS, COUNT, PERCENT
     #           },
     #         ],
     #         next_token: "NextToken",
@@ -2811,18 +2852,19 @@ module Aws::Connect
     #         end_time: Time.now, # required
     #         filters: { # required
     #           queues: ["QueueId"],
+    #           routing_profiles: ["RoutingProfileId"],
     #           channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #         },
-    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
+    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, INSTANCE
     #         historical_metrics: [ # required
     #           {
-    #             name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
+    #             name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_TRANSFERRED_IN_BY_AGENT, CONTACTS_TRANSFERRED_OUT_BY_AGENT, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
     #             threshold: {
     #               comparison: "LT", # accepts LT
     #               threshold_value: 1.0,
     #             },
     #             statistic: "SUM", # accepts SUM, MAX, AVG
-    #             unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
+    #             unit: "SECONDS", # accepts SECONDS, MILLISECONDS, COUNT, PERCENT
     #           },
     #         ],
     #         next_token: "NextToken",
@@ -3338,13 +3380,13 @@ module Aws::Connect
     #   data as a hash:
     #
     #       {
-    #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
+    #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_TRANSFERRED_IN_BY_AGENT, CONTACTS_TRANSFERRED_OUT_BY_AGENT, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
     #         threshold: {
     #           comparison: "LT", # accepts LT
     #           threshold_value: 1.0,
     #         },
     #         statistic: "SUM", # accepts SUM, MAX, AVG
-    #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
+    #         unit: "SECONDS", # accepts SECONDS, MILLISECONDS, COUNT, PERCENT
     #       }
     #
     # @!attribute [rw] name
@@ -3604,6 +3646,25 @@ module Aws::Connect
       :inbound_calls_enabled,
       :outbound_calls_enabled)
       SENSITIVE = [:instance_alias]
+      include Aws::Structure
+    end
+
+    # The instance reference.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the instance reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance reference.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InstanceReference AWS API Documentation
+    #
+    class InstanceReference < Struct.new(
+      :id,
+      :arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5607,11 +5668,16 @@ module Aws::Connect
     #   The Amazon Resource Name (ARN) of the queue.
     #   @return [String]
     #
+    # @!attribute [rw] queue_type
+    #   The type of queue.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueReference AWS API Documentation
     #
     class QueueReference < Struct.new(
       :id,
-      :arn)
+      :arn,
+      :queue_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5777,7 +5843,7 @@ module Aws::Connect
     #
     #       {
     #         value: "ReferenceValue", # required
-    #         type: "URL", # required, accepts URL
+    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #       }
     #
     # @!attribute [rw] value
@@ -6064,6 +6130,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The routing profile reference.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the routing profile reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the routing profile reference.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileReference AWS API Documentation
+    #
+    class RoutingProfileReference < Struct.new(
+      :id,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a routing profile.
     #
     # @!attribute [rw] id
@@ -6200,8 +6285,8 @@ module Aws::Connect
     #           display_name: "DisplayName", # required
     #         },
     #         initial_message: {
-    #           content_type: "ChatContentType", # required
-    #           content: "ChatContent", # required
+    #           content_type: "ChatContentType",
+    #           content: "ChatContent",
     #         },
     #         client_token: "ClientToken",
     #       }
@@ -6334,6 +6419,64 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactRecordingResponse AWS API Documentation
     #
     class StartContactRecordingResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StartContactStreamingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #         chat_streaming_configuration: { # required
+    #           streaming_endpoint_arn: "ChatStreamingEndpointARN", # required
+    #         },
+    #         client_token: "ClientToken", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact. This is the identifier of the contact
+    #   associated with the first interaction with the contact center.
+    #   @return [String]
+    #
+    # @!attribute [rw] chat_streaming_configuration
+    #   The streaming configuration, such as the Amazon SNS streaming
+    #   endpoint.
+    #   @return [Types::ChatStreamingConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactStreamingRequest AWS API Documentation
+    #
+    class StartContactStreamingRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :chat_streaming_configuration,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] streaming_id
+    #   The identifier of the streaming configuration enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactStreamingResponse AWS API Documentation
+    #
+    class StartContactStreamingResponse < Struct.new(
+      :streaming_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass StartOutboundVoiceContactRequest
     #   data as a hash:
@@ -6469,7 +6612,7 @@ module Aws::Connect
     #         references: {
     #           "ReferenceKey" => {
     #             value: "ReferenceValue", # required
-    #             type: "URL", # required, accepts URL
+    #             type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #           },
     #         },
     #         description: "Description",
@@ -6622,6 +6765,44 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactResponse AWS API Documentation
     #
     class StopContactResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StopContactStreamingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #         streaming_id: "StreamingId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact. This is the identifier of the contact
+    #   that is associated with the first interaction with the contact
+    #   center.
+    #   @return [String]
+    #
+    # @!attribute [rw] streaming_id
+    #   The identifier of the streaming configuration enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactStreamingRequest AWS API Documentation
+    #
+    class StopContactStreamingRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :streaming_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactStreamingResponse AWS API Documentation
+    #
+    class StopContactStreamingResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass SuspendContactRecordingRequest
     #   data as a hash:

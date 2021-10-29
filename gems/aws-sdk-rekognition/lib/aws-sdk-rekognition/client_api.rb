@@ -407,6 +407,7 @@ module Aws::Rekognition
     CelebrityDetail.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     CelebrityDetail.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
     CelebrityDetail.add_member(:face, Shapes::ShapeRef.new(shape: FaceDetail, location_name: "Face"))
+    CelebrityDetail.add_member(:known_gender, Shapes::ShapeRef.new(shape: KnownGender, location_name: "KnownGender"))
     CelebrityDetail.struct_class = Types::CelebrityDetail
 
     CelebrityList.member = Shapes::ShapeRef.new(shape: Celebrity)

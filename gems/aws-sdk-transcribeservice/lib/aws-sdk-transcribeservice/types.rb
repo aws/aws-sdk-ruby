@@ -188,8 +188,9 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Number (ARN) that you use to get access to the
-    #   analytics job.
+    #   The Amazon Resource Number (ARN) that you use to access the
+    #   analytics job. ARNs have the format
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`.
     #   @return [String]
     #
     # @!attribute [rw] identified_language_score
@@ -247,6 +248,13 @@ module Aws::TranscribeService
     #           redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #         },
     #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #         language_id_settings: {
+    #           "af-ZA" => {
+    #             vocabulary_name: "VocabularyName",
+    #             vocabulary_filter_name: "VocabularyFilterName",
+    #             language_model_name: "ModelName",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -296,6 +304,12 @@ module Aws::TranscribeService
     #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] language_id_settings
+    #   The language identification settings associated with your call
+    #   analytics job. These settings include `VocabularyName`,
+    #   `VocabularyFilterName`, and `LanguageModelName`.
+    #   @return [Hash<String,Types::LanguageIdSettings>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CallAnalyticsJobSettings AWS API Documentation
     #
     class CallAnalyticsJobSettings < Struct.new(
@@ -304,7 +318,8 @@ module Aws::TranscribeService
       :vocabulary_filter_method,
       :language_model_name,
       :content_redaction,
-      :language_options)
+      :language_options,
+      :language_id_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1503,7 +1518,9 @@ module Aws::TranscribeService
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) that uniquely identifies the
     #   permissions you've given Amazon Transcribe to access your Amazon S3
-    #   buckets containing your media files or text data.
+    #   buckets containing your media files or text data. ARNs have the
+    #   format
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/InputDataConfig AWS API Documentation
@@ -1623,11 +1640,13 @@ module Aws::TranscribeService
     #   @return [Boolean]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) of a role that has access to the S3
-    #   bucket that contains the input files. Amazon Transcribe assumes this
-    #   role to read queued media files. If you have specified an output S3
-    #   bucket for the transcription results, this role should have access
-    #   to the output bucket as well.
+    #   The Amazon Resource Name (ARN), in the form
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`,
+    #   of a role that has access to the S3 bucket that contains the input
+    #   files. Amazon Transcribe assumes this role to read queued media
+    #   files. If you have specified an output S3 bucket for the
+    #   transcription results, this role should have access to the output
+    #   bucket as well.
     #
     #   If you specify the `AllowDeferredExecution` field, you must specify
     #   the `DataAccessRoleArn` field.
@@ -1638,6 +1657,49 @@ module Aws::TranscribeService
     class JobExecutionSettings < Struct.new(
       :allow_deferred_execution,
       :data_access_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Language-specific settings that can be specified when language
+    # identification is enabled.
+    #
+    # @note When making an API call, you may pass LanguageIdSettings
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_name: "VocabularyName",
+    #         vocabulary_filter_name: "VocabularyFilterName",
+    #         language_model_name: "ModelName",
+    #       }
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary you want to use when processing your
+    #   transcription job. The vocabulary you specify must have the same
+    #   language code as the transcription job; if the languages don't
+    #   match, the vocabulary won't be applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter you want to use when transcribing
+    #   your audio. The filter you specify must have the same language code
+    #   as the transcription job; if the languages don't match, the
+    #   vocabulary filter won't be applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_model_name
+    #   The name of the language model you want to use when transcribing
+    #   your audio. The model you specify must have the same language code
+    #   as the transcription job; if the languages don't match, the
+    #   language model won't be applied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/LanguageIdSettings AWS API Documentation
+    #
+    class LanguageIdSettings < Struct.new(
+      :vocabulary_name,
+      :vocabulary_filter_name,
+      :language_model_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2067,6 +2129,13 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] resource_arn
     #   Lists all tags associated with a given Amazon Resource Name (ARN).
+    #   ARNs have the format
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`
+    #   (for example,
+    #   `arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name`).
+    #   Valid values for `resource-type` are: `transcription-job`,
+    #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
+    #   `vocabulary-filter`, and `language-model`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTagsForResourceRequest AWS API Documentation
@@ -3076,6 +3145,13 @@ module Aws::TranscribeService
     #             redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
     #           },
     #           language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
+    #           language_id_settings: {
+    #             "af-ZA" => {
+    #               vocabulary_name: "VocabularyName",
+    #               vocabulary_filter_name: "VocabularyFilterName",
+    #               language_model_name: "ModelName",
+    #             },
+    #           },
     #         },
     #         channel_definitions: [
     #           {
@@ -3342,8 +3418,8 @@ module Aws::TranscribeService
     #   current account or another account:
     #
     #   * Amazon Resource Name (ARN) of a KMS key in the current account or
-    #     another account: "arn:aws:kms:region:account
-    #     ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+    #     another account:
+    #     "arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
     #
     #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
     #     ID:alias/ExampleAlias"
@@ -3471,6 +3547,13 @@ module Aws::TranscribeService
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         language_id_settings: {
+    #           "af-ZA" => {
+    #             vocabulary_name: "VocabularyName",
+    #             vocabulary_filter_name: "VocabularyFilterName",
+    #             language_model_name: "ModelName",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] transcription_job_name
@@ -3583,8 +3666,8 @@ module Aws::TranscribeService
     #     "arn:aws:kms:region:account
     #     ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
     #
-    #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
-    #     ID:alias/ExampleAlias"
+    #   * ARN of a KMS Key Alias:
+    #     "arn:aws:kms:region:account-ID:alias/ExampleAlias"
     #
     #   If you don't specify an encryption key, the output of the
     #   transcription job is encrypted with the default Amazon S3 key
@@ -3648,6 +3731,12 @@ module Aws::TranscribeService
     #   Add tags to an Amazon Transcribe transcription job.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] language_id_settings
+    #   The language identification settings associated with your
+    #   transcription job. These settings include `VocabularyName`,
+    #   `VocabularyFilterName`, and `LanguageModelName`.
+    #   @return [Hash<String,Types::LanguageIdSettings>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJobRequest AWS API Documentation
     #
     class StartTranscriptionJobRequest < Struct.new(
@@ -3667,7 +3756,8 @@ module Aws::TranscribeService
       :identify_language,
       :language_options,
       :subtitles,
-      :tags)
+      :tags,
+      :language_id_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3775,7 +3865,13 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
-    #   want to tag.
+    #   want to tag. ARNs have the format
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`
+    #   (for example,
+    #   `arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name`).
+    #   Valid values for `resource-type` are: `transcription-job`,
+    #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
+    #   `vocabulary-filter`, and `language-model`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -4030,6 +4126,13 @@ module Aws::TranscribeService
     #   Generate subtitles for your batch transcription job.
     #   @return [Types::SubtitlesOutput]
     #
+    # @!attribute [rw] language_id_settings
+    #   Language-specific settings that can be specified when language
+    #   identification is enabled for your transcription job. These settings
+    #   include `VocabularyName`, `VocabularyFilterName`, and
+    #   `LanguageModelName`LanguageModelName.
+    #   @return [Hash<String,Types::LanguageIdSettings>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob AWS API Documentation
     #
     class TranscriptionJob < Struct.new(
@@ -4052,7 +4155,8 @@ module Aws::TranscribeService
       :language_options,
       :identified_language_score,
       :tags,
-      :subtitles)
+      :subtitles,
+      :language_id_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4152,7 +4256,13 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
-    #   want to remove tags from.
+    #   want to remove tags from. ARNs have the format
+    #   `arn:partition:service:region:account-id:resource-type/resource-id`
+    #   (for example,
+    #   `arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name`).
+    #   Valid values for `resource-type` are: `transcription-job`,
+    #   `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
+    #   `vocabulary-filter`, and `language-model`.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
