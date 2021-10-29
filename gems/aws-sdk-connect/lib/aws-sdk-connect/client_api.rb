@@ -56,6 +56,8 @@ module Aws::Connect
     ChatContent = Shapes::StringShape.new(name: 'ChatContent')
     ChatContentType = Shapes::StringShape.new(name: 'ChatContentType')
     ChatMessage = Shapes::StructureShape.new(name: 'ChatMessage')
+    ChatStreamingConfiguration = Shapes::StructureShape.new(name: 'ChatStreamingConfiguration')
+    ChatStreamingEndpointARN = Shapes::StringShape.new(name: 'ChatStreamingEndpointARN')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CommonNameLength127 = Shapes::StringShape.new(name: 'CommonNameLength127')
     Comparison = Shapes::StringShape.new(name: 'Comparison')
@@ -204,6 +206,7 @@ module Aws::Connect
     InstanceAttributeType = Shapes::StringShape.new(name: 'InstanceAttributeType')
     InstanceAttributeValue = Shapes::StringShape.new(name: 'InstanceAttributeValue')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
+    InstanceReference = Shapes::StructureShape.new(name: 'InstanceReference')
     InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
     InstanceStatusReason = Shapes::StructureShape.new(name: 'InstanceStatusReason')
     InstanceStorageConfig = Shapes::StructureShape.new(name: 'InstanceStorageConfig')
@@ -364,8 +367,10 @@ module Aws::Connect
     RoutingProfileQueueConfigSummaryList = Shapes::ListShape.new(name: 'RoutingProfileQueueConfigSummaryList')
     RoutingProfileQueueReference = Shapes::StructureShape.new(name: 'RoutingProfileQueueReference')
     RoutingProfileQueueReferenceList = Shapes::ListShape.new(name: 'RoutingProfileQueueReferenceList')
+    RoutingProfileReference = Shapes::StructureShape.new(name: 'RoutingProfileReference')
     RoutingProfileSummary = Shapes::StructureShape.new(name: 'RoutingProfileSummary')
     RoutingProfileSummaryList = Shapes::ListShape.new(name: 'RoutingProfileSummaryList')
+    RoutingProfiles = Shapes::ListShape.new(name: 'RoutingProfiles')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
     SecurityKey = Shapes::StructureShape.new(name: 'SecurityKey')
     SecurityKeysList = Shapes::ListShape.new(name: 'SecurityKeysList')
@@ -382,6 +387,8 @@ module Aws::Connect
     StartChatContactResponse = Shapes::StructureShape.new(name: 'StartChatContactResponse')
     StartContactRecordingRequest = Shapes::StructureShape.new(name: 'StartContactRecordingRequest')
     StartContactRecordingResponse = Shapes::StructureShape.new(name: 'StartContactRecordingResponse')
+    StartContactStreamingRequest = Shapes::StructureShape.new(name: 'StartContactStreamingRequest')
+    StartContactStreamingResponse = Shapes::StructureShape.new(name: 'StartContactStreamingResponse')
     StartOutboundVoiceContactRequest = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactRequest')
     StartOutboundVoiceContactResponse = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactResponse')
     StartTaskContactRequest = Shapes::StructureShape.new(name: 'StartTaskContactRequest')
@@ -391,7 +398,10 @@ module Aws::Connect
     StopContactRecordingResponse = Shapes::StructureShape.new(name: 'StopContactRecordingResponse')
     StopContactRequest = Shapes::StructureShape.new(name: 'StopContactRequest')
     StopContactResponse = Shapes::StructureShape.new(name: 'StopContactResponse')
+    StopContactStreamingRequest = Shapes::StructureShape.new(name: 'StopContactStreamingRequest')
+    StopContactStreamingResponse = Shapes::StructureShape.new(name: 'StopContactStreamingResponse')
     StorageType = Shapes::StringShape.new(name: 'StorageType')
+    StreamingId = Shapes::StringShape.new(name: 'StreamingId')
     String = Shapes::StringShape.new(name: 'String')
     SuspendContactRecordingRequest = Shapes::StructureShape.new(name: 'SuspendContactRecordingRequest')
     SuspendContactRecordingResponse = Shapes::StructureShape.new(name: 'SuspendContactRecordingResponse')
@@ -532,9 +542,12 @@ module Aws::Connect
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
 
-    ChatMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, required: true, location_name: "ContentType"))
-    ChatMessage.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, required: true, location_name: "Content"))
+    ChatMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, location_name: "ContentType"))
+    ChatMessage.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, location_name: "Content"))
     ChatMessage.struct_class = Types::ChatMessage
+
+    ChatStreamingConfiguration.add_member(:streaming_endpoint_arn, Shapes::ShapeRef.new(shape: ChatStreamingEndpointARN, required: true, location_name: "StreamingEndpointArn"))
+    ChatStreamingConfiguration.struct_class = Types::ChatStreamingConfiguration
 
     ContactFlow.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     ContactFlow.add_member(:id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "Id"))
@@ -838,6 +851,8 @@ module Aws::Connect
 
     Dimensions.add_member(:queue, Shapes::ShapeRef.new(shape: QueueReference, location_name: "Queue"))
     Dimensions.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "Channel"))
+    Dimensions.add_member(:routing_profile, Shapes::ShapeRef.new(shape: RoutingProfileReference, location_name: "RoutingProfile"))
+    Dimensions.add_member(:instance_reference, Shapes::ShapeRef.new(shape: InstanceReference, location_name: "InstanceReference"))
     Dimensions.struct_class = Types::Dimensions
 
     DisassociateApprovedOriginRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -885,6 +900,7 @@ module Aws::Connect
     EncryptionConfig.struct_class = Types::EncryptionConfig
 
     Filters.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
+    Filters.add_member(:routing_profiles, Shapes::ShapeRef.new(shape: RoutingProfiles, location_name: "RoutingProfiles"))
     Filters.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
     Filters.struct_class = Types::Filters
 
@@ -1033,6 +1049,10 @@ module Aws::Connect
     Instance.add_member(:inbound_calls_enabled, Shapes::ShapeRef.new(shape: InboundCallsEnabled, location_name: "InboundCallsEnabled"))
     Instance.add_member(:outbound_calls_enabled, Shapes::ShapeRef.new(shape: OutboundCallsEnabled, location_name: "OutboundCallsEnabled"))
     Instance.struct_class = Types::Instance
+
+    InstanceReference.add_member(:id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "Id"))
+    InstanceReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    InstanceReference.struct_class = Types::InstanceReference
 
     InstanceStatusReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InstanceStatusReason.struct_class = Types::InstanceStatusReason
@@ -1401,6 +1421,7 @@ module Aws::Connect
 
     QueueReference.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
     QueueReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    QueueReference.add_member(:queue_type, Shapes::ShapeRef.new(shape: QueueType, location_name: "QueueType"))
     QueueReference.struct_class = Types::QueueReference
 
     QueueSummary.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
@@ -1496,12 +1517,18 @@ module Aws::Connect
 
     RoutingProfileQueueReferenceList.member = Shapes::ShapeRef.new(shape: RoutingProfileQueueReference)
 
+    RoutingProfileReference.add_member(:id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "Id"))
+    RoutingProfileReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    RoutingProfileReference.struct_class = Types::RoutingProfileReference
+
     RoutingProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "Id"))
     RoutingProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     RoutingProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: RoutingProfileName, location_name: "Name"))
     RoutingProfileSummary.struct_class = Types::RoutingProfileSummary
 
     RoutingProfileSummaryList.member = Shapes::ShapeRef.new(shape: RoutingProfileSummary)
+
+    RoutingProfiles.member = Shapes::ShapeRef.new(shape: RoutingProfileId)
 
     S3Config.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "BucketName"))
     S3Config.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: Prefix, required: true, location_name: "BucketPrefix"))
@@ -1548,6 +1575,15 @@ module Aws::Connect
 
     StartContactRecordingResponse.struct_class = Types::StartContactRecordingResponse
 
+    StartContactStreamingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    StartContactStreamingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    StartContactStreamingRequest.add_member(:chat_streaming_configuration, Shapes::ShapeRef.new(shape: ChatStreamingConfiguration, required: true, location_name: "ChatStreamingConfiguration"))
+    StartContactStreamingRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartContactStreamingRequest.struct_class = Types::StartContactStreamingRequest
+
+    StartContactStreamingResponse.add_member(:streaming_id, Shapes::ShapeRef.new(shape: StreamingId, required: true, location_name: "StreamingId"))
+    StartContactStreamingResponse.struct_class = Types::StartContactStreamingResponse
+
     StartOutboundVoiceContactRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
     StartOutboundVoiceContactRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
     StartOutboundVoiceContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -1588,6 +1624,13 @@ module Aws::Connect
     StopContactRequest.struct_class = Types::StopContactRequest
 
     StopContactResponse.struct_class = Types::StopContactResponse
+
+    StopContactStreamingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    StopContactStreamingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    StopContactStreamingRequest.add_member(:streaming_id, Shapes::ShapeRef.new(shape: StreamingId, required: true, location_name: "StreamingId"))
+    StopContactStreamingRequest.struct_class = Types::StopContactStreamingRequest
+
+    StopContactStreamingResponse.struct_class = Types::StopContactStreamingResponse
 
     SuspendContactRecordingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SuspendContactRecordingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
@@ -2985,6 +3028,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:start_contact_streaming, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartContactStreaming"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/start-streaming"
+        o.input = Shapes::ShapeRef.new(shape: StartContactStreamingRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartContactStreamingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:start_outbound_voice_contact, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartOutboundVoiceContact"
         o.http_method = "PUT"
@@ -3034,6 +3090,18 @@ module Aws::Connect
         o.input = Shapes::ShapeRef.new(shape: StopContactRecordingRequest)
         o.output = Shapes::ShapeRef.new(shape: StopContactRecordingResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:stop_contact_streaming, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopContactStreaming"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/stop-streaming"
+        o.input = Shapes::ShapeRef.new(shape: StopContactStreamingRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopContactStreamingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)

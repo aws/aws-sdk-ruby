@@ -79,6 +79,8 @@ module Aws::TranscribeService
     KMSEncryptionContextMap = Shapes::MapShape.new(name: 'KMSEncryptionContextMap')
     KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
+    LanguageIdSettings = Shapes::StructureShape.new(name: 'LanguageIdSettings')
+    LanguageIdSettingsMap = Shapes::MapShape.new(name: 'LanguageIdSettingsMap')
     LanguageModel = Shapes::StructureShape.new(name: 'LanguageModel')
     LanguageOptions = Shapes::ListShape.new(name: 'LanguageOptions')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -222,6 +224,7 @@ module Aws::TranscribeService
     CallAnalyticsJobSettings.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "LanguageModelName"))
     CallAnalyticsJobSettings.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
     CallAnalyticsJobSettings.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location_name: "LanguageOptions"))
+    CallAnalyticsJobSettings.add_member(:language_id_settings, Shapes::ShapeRef.new(shape: LanguageIdSettingsMap, location_name: "LanguageIdSettings"))
     CallAnalyticsJobSettings.struct_class = Types::CallAnalyticsJobSettings
 
     CallAnalyticsJobSummaries.member = Shapes::ShapeRef.new(shape: CallAnalyticsJobSummary)
@@ -426,6 +429,14 @@ module Aws::TranscribeService
 
     KMSEncryptionContextMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     KMSEncryptionContextMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    LanguageIdSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
+    LanguageIdSettings.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
+    LanguageIdSettings.add_member(:language_model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "LanguageModelName"))
+    LanguageIdSettings.struct_class = Types::LanguageIdSettings
+
+    LanguageIdSettingsMap.key = Shapes::ShapeRef.new(shape: LanguageCode)
+    LanguageIdSettingsMap.value = Shapes::ShapeRef.new(shape: LanguageIdSettings)
 
     LanguageModel.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
     LanguageModel.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreateTime"))
@@ -683,6 +694,7 @@ module Aws::TranscribeService
     StartTranscriptionJobRequest.add_member(:language_options, Shapes::ShapeRef.new(shape: LanguageOptions, location_name: "LanguageOptions"))
     StartTranscriptionJobRequest.add_member(:subtitles, Shapes::ShapeRef.new(shape: Subtitles, location_name: "Subtitles"))
     StartTranscriptionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartTranscriptionJobRequest.add_member(:language_id_settings, Shapes::ShapeRef.new(shape: LanguageIdSettingsMap, location_name: "LanguageIdSettings"))
     StartTranscriptionJobRequest.struct_class = Types::StartTranscriptionJobRequest
 
     StartTranscriptionJobResponse.add_member(:transcription_job, Shapes::ShapeRef.new(shape: TranscriptionJob, location_name: "TranscriptionJob"))
@@ -747,6 +759,7 @@ module Aws::TranscribeService
     TranscriptionJob.add_member(:identified_language_score, Shapes::ShapeRef.new(shape: IdentifiedLanguageScore, location_name: "IdentifiedLanguageScore"))
     TranscriptionJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     TranscriptionJob.add_member(:subtitles, Shapes::ShapeRef.new(shape: SubtitlesOutput, location_name: "Subtitles"))
+    TranscriptionJob.add_member(:language_id_settings, Shapes::ShapeRef.new(shape: LanguageIdSettingsMap, location_name: "LanguageIdSettings"))
     TranscriptionJob.struct_class = Types::TranscriptionJob
 
     TranscriptionJobSummaries.member = Shapes::ShapeRef.new(shape: TranscriptionJobSummary)

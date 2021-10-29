@@ -18734,6 +18734,19 @@ module Aws::EC2
     #   Scopes the images by users with explicit launch permissions. Specify
     #   an Amazon Web Services account ID, `self` (the sender of the
     #   request), or `all` (public AMIs).
+    #
+    #   * If you specify an Amazon Web Services account ID that is not your
+    #     own, only AMIs shared with that specific Amazon Web Services
+    #     account ID are returned. However, AMIs that are shared with the
+    #     account’s organization or organizational unit (OU) are not
+    #     returned.
+    #
+    #   * If you specify `self` or your own Amazon Web Services account ID,
+    #     AMIs shared with your account are returned. In addition, AMIs that
+    #     are shared with the organization or OU of which you are member are
+    #     also returned.
+    #
+    #   * If you specify `all`, all public AMIs are returned.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
@@ -37737,10 +37750,10 @@ module Aws::EC2
     #   type, size, or generation. The following are examples: `m5.8xlarge`,
     #   `c5*.*`, `m5a.*`, `r*`, `*3*`.
     #
-    #   For example, if you specify `c5*.*`, Amazon EC2 will exclude the
-    #   entire C5 instance family (all C5a and C5n instance types). If you
-    #   specify `c5a.*`, Amazon EC2 excludes all the C5a instance types, but
-    #   does not exclude the C5n instance types.
+    #   For example, if you specify `c5*`,Amazon EC2 will exclude the entire
+    #   C5 instance family, which includes all C5a and C5n instance types.
+    #   If you specify `m5a.*`, Amazon EC2 will exclude all the M5a instance
+    #   types, but not the M5n instance types.
     #
     #   Default: No excluded instance types
     #   @return [Array<String>]
@@ -38125,10 +38138,10 @@ module Aws::EC2
     #   family, type, size, or generation. The following are examples:
     #   `m5.8xlarge`, `c5*.*`, `m5a.*`, `r*`, `*3*`.
     #
-    #   For example, if you specify `c5*.*`, Amazon EC2 will exclude the
-    #   entire C5 instance family (all C5a and C5n instance types). If you
-    #   specify `c5a.*`, Amazon EC2 excludes all the C5a instance types, but
-    #   does not exclude the C5n instance types.
+    #   For example, if you specify `c5*`,Amazon EC2 will exclude the entire
+    #   C5 instance family, which includes all C5a and C5n instance types.
+    #   If you specify `m5a.*`, Amazon EC2 will exclude all the M5a instance
+    #   types, but not the M5n instance types.
     #
     #   Default: No excluded instance types
     #   @return [Array<String>]
@@ -39511,6 +39524,8 @@ module Aws::EC2
     #       {
     #         group: "all", # accepts all
     #         user_id: "String",
+    #         organization_arn: "String",
+    #         organizational_unit_arn: "String",
     #       }
     #
     # @!attribute [rw] group
@@ -39524,11 +39539,21 @@ module Aws::EC2
     #   request.
     #   @return [String]
     #
+    # @!attribute [rw] organization_arn
+    #   The Amazon Resource Name (ARN) of an organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_arn
+    #   The Amazon Resource Name (ARN) of an organizational unit (OU).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchPermission AWS API Documentation
     #
     class LaunchPermission < Struct.new(
       :group,
-      :user_id)
+      :user_id,
+      :organization_arn,
+      :organizational_unit_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39543,12 +39568,16 @@ module Aws::EC2
     #           {
     #             group: "all", # accepts all
     #             user_id: "String",
+    #             organization_arn: "String",
+    #             organizational_unit_arn: "String",
     #           },
     #         ],
     #         remove: [
     #           {
     #             group: "all", # accepts all
     #             user_id: "String",
+    #             organization_arn: "String",
+    #             organizational_unit_arn: "String",
     #           },
     #         ],
     #       }
@@ -43068,12 +43097,16 @@ module Aws::EC2
     #             {
     #               group: "all", # accepts all
     #               user_id: "String",
+    #               organization_arn: "String",
+    #               organizational_unit_arn: "String",
     #             },
     #           ],
     #           remove: [
     #             {
     #               group: "all", # accepts all
     #               user_id: "String",
+    #               organization_arn: "String",
+    #               organizational_unit_arn: "String",
     #             },
     #           ],
     #         },
@@ -43083,11 +43116,14 @@ module Aws::EC2
     #         user_ids: ["String"],
     #         value: "String",
     #         dry_run: false,
+    #         organization_arns: ["String"],
+    #         organizational_unit_arns: ["String"],
     #       }
     #
     # @!attribute [rw] attribute
-    #   The name of the attribute to modify. The valid values are
-    #   `description` and `launchPermission`.
+    #   The name of the attribute to modify.
+    #
+    #   Valid values: `description` \| `launchPermission`
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -43133,6 +43169,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] organization_arns
+    #   The Amazon Resource Name (ARN) of an organization. This parameter
+    #   can be used only when the `Attribute` parameter is
+    #   `launchPermission`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organizational_unit_arns
+    #   The Amazon Resource Name (ARN) of an organizational unit (OU). This
+    #   parameter can be used only when the `Attribute` parameter is
+    #   `launchPermission`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttributeRequest AWS API Documentation
     #
     class ModifyImageAttributeRequest < Struct.new(
@@ -43145,7 +43193,9 @@ module Aws::EC2
       :user_groups,
       :user_ids,
       :value,
-      :dry_run)
+      :dry_run,
+      :organization_arns,
+      :organizational_unit_arns)
       SENSITIVE = []
       include Aws::Structure
     end

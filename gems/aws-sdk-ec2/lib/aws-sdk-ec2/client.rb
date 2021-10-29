@@ -18717,6 +18717,8 @@ module Aws::EC2
     #   resp.launch_permissions #=> Array
     #   resp.launch_permissions[0].group #=> String, one of "all"
     #   resp.launch_permissions[0].user_id #=> String
+    #   resp.launch_permissions[0].organization_arn #=> String
+    #   resp.launch_permissions[0].organizational_unit_arn #=> String
     #   resp.product_codes #=> Array
     #   resp.product_codes[0].product_code_id #=> String
     #   resp.product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
@@ -18752,6 +18754,18 @@ module Aws::EC2
     #   Scopes the images by users with explicit launch permissions. Specify
     #   an Amazon Web Services account ID, `self` (the sender of the request),
     #   or `all` (public AMIs).
+    #
+    #   * If you specify an Amazon Web Services account ID that is not your
+    #     own, only AMIs shared with that specific Amazon Web Services account
+    #     ID are returned. However, AMIs that are shared with the account’s
+    #     organization or organizational unit (OU) are not returned.
+    #
+    #   * If you specify `self` or your own Amazon Web Services account ID,
+    #     AMIs shared with your account are returned. In addition, AMIs that
+    #     are shared with the organization or OU of which you are member are
+    #     also returned.
+    #
+    #   * If you specify `all`, all public AMIs are returned.
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -35919,8 +35933,9 @@ module Aws::EC2
     # the instance.
     #
     # @option params [String] :attribute
-    #   The name of the attribute to modify. The valid values are
-    #   `description` and `launchPermission`.
+    #   The name of the attribute to modify.
+    #
+    #   Valid values: `description` \| `launchPermission`
     #
     # @option params [Types::AttributeValue] :description
     #   A new description for the AMI.
@@ -35955,6 +35970,15 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :organization_arns
+    #   The Amazon Resource Name (ARN) of an organization. This parameter can
+    #   be used only when the `Attribute` parameter is `launchPermission`.
+    #
+    # @option params [Array<String>] :organizational_unit_arns
+    #   The Amazon Resource Name (ARN) of an organizational unit (OU). This
+    #   parameter can be used only when the `Attribute` parameter is
+    #   `launchPermission`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -36008,12 +36032,16 @@ module Aws::EC2
     #         {
     #           group: "all", # accepts all
     #           user_id: "String",
+    #           organization_arn: "String",
+    #           organizational_unit_arn: "String",
     #         },
     #       ],
     #       remove: [
     #         {
     #           group: "all", # accepts all
     #           user_id: "String",
+    #           organization_arn: "String",
+    #           organizational_unit_arn: "String",
     #         },
     #       ],
     #     },
@@ -36023,6 +36051,8 @@ module Aws::EC2
     #     user_ids: ["String"],
     #     value: "String",
     #     dry_run: false,
+    #     organization_arns: ["String"],
+    #     organizational_unit_arns: ["String"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttribute AWS API Documentation
@@ -45181,7 +45211,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.274.0'
+      context[:gem_version] = '1.275.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

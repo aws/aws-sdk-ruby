@@ -2165,12 +2165,14 @@ module Aws::Rekognition
     #
     # Celebrity recognition in a video is an asynchronous operation.
     # Analysis is started by a call to StartCelebrityRecognition which
-    # returns a job identifier (`JobId`). When the celebrity recognition
-    # operation finishes, Amazon Rekognition Video publishes a completion
-    # status to the Amazon Simple Notification Service topic registered in
-    # the initial call to `StartCelebrityRecognition`. To get the results of
-    # the celebrity recognition analysis, first check that the status value
-    # published to the Amazon SNS topic is `SUCCEEDED`. If so, call
+    # returns a job identifier (`JobId`).
+    #
+    # When the celebrity recognition operation finishes, Amazon Rekognition
+    # Video publishes a completion status to the Amazon Simple Notification
+    # Service topic registered in the initial call to
+    # `StartCelebrityRecognition`. To get the results of the celebrity
+    # recognition analysis, first check that the status value published to
+    # the Amazon SNS topic is `SUCCEEDED`. If so, call
     # `GetCelebrityDetection` and pass the job identifier (`JobId`) from the
     # initial call to `StartCelebrityDetection`.
     #
@@ -2181,10 +2183,13 @@ module Aws::Rekognition
     # they are detected in an array (`Celebrities`) of CelebrityRecognition
     # objects. Each `CelebrityRecognition` contains information about the
     # celebrity in a CelebrityDetail object and the time, `Timestamp`, the
-    # celebrity was detected.
+    # celebrity was detected. This CelebrityDetail object stores information
+    # about the detected celebrity's face attributes, a face bounding box,
+    # known gender, the celebrity's name, and a confidence estimate.
     #
     # <note markdown="1"> `GetCelebrityRecognition` only returns the default facial attributes
     # (`BoundingBox`, `Confidence`, `Landmarks`, `Pose`, and `Quality`). The
+    # `BoundingBox` field only applies to the detected face instance. The
     # other facial attributes listed in the `Face` object of the following
     # response syntax are not returned. For more information, see FaceDetail
     # in the Amazon Rekognition Developer Guide.
@@ -2308,6 +2313,7 @@ module Aws::Rekognition
     #   resp.celebrities[0].celebrity.face.quality.brightness #=> Float
     #   resp.celebrities[0].celebrity.face.quality.sharpness #=> Float
     #   resp.celebrities[0].celebrity.face.confidence #=> Float
+    #   resp.celebrities[0].celebrity.known_gender.type #=> String, one of "Male", "Female"
     #
     # @overload get_celebrity_recognition(params = {})
     # @param [Hash] params ({})
@@ -5249,7 +5255,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

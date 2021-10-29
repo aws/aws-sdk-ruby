@@ -1750,6 +1750,8 @@ module Aws::EC2
     OnDemandOptions = Shapes::StructureShape.new(name: 'OnDemandOptions')
     OnDemandOptionsRequest = Shapes::StructureShape.new(name: 'OnDemandOptionsRequest')
     OperationType = Shapes::StringShape.new(name: 'OperationType')
+    OrganizationArnStringList = Shapes::ListShape.new(name: 'OrganizationArnStringList')
+    OrganizationalUnitArnStringList = Shapes::ListShape.new(name: 'OrganizationalUnitArnStringList')
     OutpostArn = Shapes::StringShape.new(name: 'OutpostArn')
     OwnerStringList = Shapes::ListShape.new(name: 'OwnerStringList')
     PartitionLoadFrequency = Shapes::StringShape.new(name: 'PartitionLoadFrequency')
@@ -8173,6 +8175,8 @@ module Aws::EC2
 
     LaunchPermission.add_member(:group, Shapes::ShapeRef.new(shape: PermissionGroup, location_name: "group"))
     LaunchPermission.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "userId"))
+    LaunchPermission.add_member(:organization_arn, Shapes::ShapeRef.new(shape: String, location_name: "organizationArn"))
+    LaunchPermission.add_member(:organizational_unit_arn, Shapes::ShapeRef.new(shape: String, location_name: "organizationalUnitArn"))
     LaunchPermission.struct_class = Types::LaunchPermission
 
     LaunchPermissionList.member = Shapes::ShapeRef.new(shape: LaunchPermission, location_name: "item")
@@ -8746,6 +8750,8 @@ module Aws::EC2
     ModifyImageAttributeRequest.add_member(:user_ids, Shapes::ShapeRef.new(shape: UserIdStringList, location_name: "UserId"))
     ModifyImageAttributeRequest.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     ModifyImageAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    ModifyImageAttributeRequest.add_member(:organization_arns, Shapes::ShapeRef.new(shape: OrganizationArnStringList, location_name: "OrganizationArn"))
+    ModifyImageAttributeRequest.add_member(:organizational_unit_arns, Shapes::ShapeRef.new(shape: OrganizationalUnitArnStringList, location_name: "OrganizationalUnitArn"))
     ModifyImageAttributeRequest.struct_class = Types::ModifyImageAttributeRequest
 
     ModifyInstanceAttributeRequest.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "SourceDestCheck"))
@@ -9383,6 +9389,10 @@ module Aws::EC2
     OnDemandOptionsRequest.add_member(:min_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "MinTargetCapacity"))
     OnDemandOptionsRequest.add_member(:max_total_price, Shapes::ShapeRef.new(shape: String, location_name: "MaxTotalPrice"))
     OnDemandOptionsRequest.struct_class = Types::OnDemandOptionsRequest
+
+    OrganizationArnStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "OrganizationArn")
+
+    OrganizationalUnitArnStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "OrganizationalUnitArn")
 
     OwnerStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "Owner")
 

@@ -533,12 +533,16 @@ module Aws::EC2
     #         {
     #           group: "all", # accepts all
     #           user_id: "String",
+    #           organization_arn: "String",
+    #           organizational_unit_arn: "String",
     #         },
     #       ],
     #       remove: [
     #         {
     #           group: "all", # accepts all
     #           user_id: "String",
+    #           organization_arn: "String",
+    #           organizational_unit_arn: "String",
     #         },
     #       ],
     #     },
@@ -548,11 +552,14 @@ module Aws::EC2
     #     user_ids: ["String"],
     #     value: "String",
     #     dry_run: false,
+    #     organization_arns: ["String"],
+    #     organizational_unit_arns: ["String"],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :attribute
-    #   The name of the attribute to modify. The valid values are
-    #   `description` and `launchPermission`.
+    #   The name of the attribute to modify.
+    #
+    #   Valid values: `description` \| `launchPermission`
     # @option options [Types::AttributeValue] :description
     #   A new description for the AMI.
     # @option options [Types::LaunchPermissionModifications] :launch_permission
@@ -576,6 +583,13 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<String>] :organization_arns
+    #   The Amazon Resource Name (ARN) of an organization. This parameter can
+    #   be used only when the `Attribute` parameter is `launchPermission`.
+    # @option options [Array<String>] :organizational_unit_arns
+    #   The Amazon Resource Name (ARN) of an organizational unit (OU). This
+    #   parameter can be used only when the `Attribute` parameter is
+    #   `launchPermission`.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(image_id: @id)

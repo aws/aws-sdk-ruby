@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-10-29)
+------------------
+
+* Feature - This release added new attributes to Rekognition Video GetCelebrityRecognition API operations.
+
 1.57.0 (2021-10-18)
 ------------------
 

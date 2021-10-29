@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.275.0 (2021-10-29)
+------------------
+
+* Feature - Support added for AMI sharing with organizations and organizational units in ModifyImageAttribute API
+
 1.274.0 (2021-10-28)
 ------------------
 

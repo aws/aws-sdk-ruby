@@ -2588,13 +2588,14 @@ module Aws::Connect
     #     instance_id: "InstanceId", # required
     #     filters: { # required
     #       queues: ["QueueId"],
+    #       routing_profiles: ["RoutingProfileId"],
     #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, INSTANCE
     #     current_metrics: [ # required
     #       {
     #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
-    #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
+    #         unit: "SECONDS", # accepts SECONDS, MILLISECONDS, COUNT, PERCENT
     #       },
     #     ],
     #     next_token: "NextToken",
@@ -2607,10 +2608,15 @@ module Aws::Connect
     #   resp.metric_results #=> Array
     #   resp.metric_results[0].dimensions.queue.id #=> String
     #   resp.metric_results[0].dimensions.queue.arn #=> String
+    #   resp.metric_results[0].dimensions.queue.queue_type #=> String, one of "STANDARD", "AGENT"
     #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT", "TASK"
+    #   resp.metric_results[0].dimensions.routing_profile.id #=> String
+    #   resp.metric_results[0].dimensions.routing_profile.arn #=> String
+    #   resp.metric_results[0].dimensions.instance_reference.id #=> String
+    #   resp.metric_results[0].dimensions.instance_reference.arn #=> String
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED", "AGENTS_ON_CONTACT", "SLOTS_ACTIVE", "SLOTS_AVAILABLE"
-    #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "COUNT", "PERCENT"
+    #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "MILLISECONDS", "COUNT", "PERCENT"
     #   resp.metric_results[0].collections[0].value #=> Float
     #   resp.data_snapshot_time #=> Time
     #
@@ -2911,18 +2917,19 @@ module Aws::Connect
     #     end_time: Time.now, # required
     #     filters: { # required
     #       queues: ["QueueId"],
+    #       routing_profiles: ["RoutingProfileId"],
     #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, INSTANCE
     #     historical_metrics: [ # required
     #       {
-    #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
+    #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_TRANSFERRED_IN_BY_AGENT, CONTACTS_TRANSFERRED_OUT_BY_AGENT, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
     #         threshold: {
     #           comparison: "LT", # accepts LT
     #           threshold_value: 1.0,
     #         },
     #         statistic: "SUM", # accepts SUM, MAX, AVG
-    #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
+    #         unit: "SECONDS", # accepts SECONDS, MILLISECONDS, COUNT, PERCENT
     #       },
     #     ],
     #     next_token: "NextToken",
@@ -2935,13 +2942,18 @@ module Aws::Connect
     #   resp.metric_results #=> Array
     #   resp.metric_results[0].dimensions.queue.id #=> String
     #   resp.metric_results[0].dimensions.queue.arn #=> String
+    #   resp.metric_results[0].dimensions.queue.queue_type #=> String, one of "STANDARD", "AGENT"
     #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT", "TASK"
+    #   resp.metric_results[0].dimensions.routing_profile.id #=> String
+    #   resp.metric_results[0].dimensions.routing_profile.arn #=> String
+    #   resp.metric_results[0].dimensions.instance_reference.id #=> String
+    #   resp.metric_results[0].dimensions.instance_reference.arn #=> String
     #   resp.metric_results[0].collections #=> Array
-    #   resp.metric_results[0].collections[0].metric.name #=> String, one of "CONTACTS_QUEUED", "CONTACTS_HANDLED", "CONTACTS_ABANDONED", "CONTACTS_CONSULTED", "CONTACTS_AGENT_HUNG_UP_FIRST", "CONTACTS_HANDLED_INCOMING", "CONTACTS_HANDLED_OUTBOUND", "CONTACTS_HOLD_ABANDONS", "CONTACTS_TRANSFERRED_IN", "CONTACTS_TRANSFERRED_OUT", "CONTACTS_TRANSFERRED_IN_FROM_QUEUE", "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE", "CONTACTS_MISSED", "CALLBACK_CONTACTS_HANDLED", "API_CONTACTS_HANDLED", "OCCUPANCY", "HANDLE_TIME", "AFTER_CONTACT_WORK_TIME", "QUEUED_TIME", "ABANDON_TIME", "QUEUE_ANSWER_TIME", "HOLD_TIME", "INTERACTION_TIME", "INTERACTION_AND_HOLD_TIME", "SERVICE_LEVEL"
+    #   resp.metric_results[0].collections[0].metric.name #=> String, one of "CONTACTS_QUEUED", "CONTACTS_HANDLED", "CONTACTS_ABANDONED", "CONTACTS_CONSULTED", "CONTACTS_AGENT_HUNG_UP_FIRST", "CONTACTS_HANDLED_INCOMING", "CONTACTS_HANDLED_OUTBOUND", "CONTACTS_HOLD_ABANDONS", "CONTACTS_TRANSFERRED_IN", "CONTACTS_TRANSFERRED_OUT", "CONTACTS_TRANSFERRED_IN_FROM_QUEUE", "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE", "CONTACTS_TRANSFERRED_IN_BY_AGENT", "CONTACTS_TRANSFERRED_OUT_BY_AGENT", "CONTACTS_MISSED", "CALLBACK_CONTACTS_HANDLED", "API_CONTACTS_HANDLED", "OCCUPANCY", "HANDLE_TIME", "AFTER_CONTACT_WORK_TIME", "QUEUED_TIME", "ABANDON_TIME", "QUEUE_ANSWER_TIME", "HOLD_TIME", "INTERACTION_TIME", "INTERACTION_AND_HOLD_TIME", "SERVICE_LEVEL"
     #   resp.metric_results[0].collections[0].metric.threshold.comparison #=> String, one of "LT"
     #   resp.metric_results[0].collections[0].metric.threshold.threshold_value #=> Float
     #   resp.metric_results[0].collections[0].metric.statistic #=> String, one of "SUM", "MAX", "AVG"
-    #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "COUNT", "PERCENT"
+    #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "MILLISECONDS", "COUNT", "PERCENT"
     #   resp.metric_results[0].collections[0].value #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricData AWS API Documentation
@@ -4345,8 +4357,8 @@ module Aws::Connect
     #       display_name: "DisplayName", # required
     #     },
     #     initial_message: {
-    #       content_type: "ChatContentType", # required
-    #       content: "ChatContent", # required
+    #       content_type: "ChatContentType",
+    #       content: "ChatContent",
     #     },
     #     client_token: "ClientToken",
     #   })
@@ -4416,6 +4428,63 @@ module Aws::Connect
     # @param [Hash] params ({})
     def start_contact_recording(params = {}, options = {})
       req = build_request(:start_contact_recording, params)
+      req.send_request(options)
+    end
+
+    # Initiates real-time message streaming for a new chat contact.
+    #
+    # For more information about message streaming, see [Enable real-time
+    # chat message streaming][1] in the *Amazon Connect Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact. This is the identifier of the contact
+    #   associated with the first interaction with the contact center.
+    #
+    # @option params [required, Types::ChatStreamingConfiguration] :chat_streaming_configuration
+    #   The streaming configuration, such as the Amazon SNS streaming
+    #   endpoint.
+    #
+    # @option params [required, String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartContactStreamingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartContactStreamingResponse#streaming_id #streaming_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_contact_streaming({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     chat_streaming_configuration: { # required
+    #       streaming_endpoint_arn: "ChatStreamingEndpointARN", # required
+    #     },
+    #     client_token: "ClientToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.streaming_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartContactStreaming AWS API Documentation
+    #
+    # @overload start_contact_streaming(params = {})
+    # @param [Hash] params ({})
+    def start_contact_streaming(params = {}, options = {})
+      req = build_request(:start_contact_streaming, params)
       req.send_request(options)
     end
 
@@ -4608,7 +4677,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue", # required
-    #         type: "URL", # required, accepts URL
+    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #       },
     #     },
     #     description: "Description",
@@ -4692,6 +4761,43 @@ module Aws::Connect
     # @param [Hash] params ({})
     def stop_contact_recording(params = {}, options = {})
       req = build_request(:stop_contact_recording, params)
+      req.send_request(options)
+    end
+
+    # Ends message streaming on a specified contact. To restart message
+    # streaming on that contact, call the [StartContactStreaming][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact. This is the identifier of the contact
+    #   that is associated with the first interaction with the contact center.
+    #
+    # @option params [required, String] :streaming_id
+    #   The identifier of the streaming configuration enabled.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_contact_streaming({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     streaming_id: "StreamingId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContactStreaming AWS API Documentation
+    #
+    # @overload stop_contact_streaming(params = {})
+    # @param [Hash] params ({})
+    def stop_contact_streaming(params = {}, options = {})
+      req = build_request(:stop_contact_streaming, params)
       req.send_request(options)
     end
 
@@ -5838,7 +5944,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

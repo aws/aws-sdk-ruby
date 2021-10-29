@@ -106,6 +106,12 @@ module Aws::ApplicationInsights
     #   * “Configuring application, detected 1 Unconfigured Components”
     #   @return [String]
     #
+    # @!attribute [rw] auto_config_enabled
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] discovery_type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ApplicationInfo AWS API Documentation
     #
     class ApplicationInfo < Struct.new(
@@ -114,7 +120,9 @@ module Aws::ApplicationInsights
       :ops_item_sns_topic_arn,
       :ops_center_enabled,
       :cwe_monitor_enabled,
-      :remarks)
+      :remarks,
+      :auto_config_enabled,
+      :discovery_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -178,7 +186,7 @@ module Aws::ApplicationInsights
     #   data as a hash:
     #
     #       {
-    #         resource_group_name: "ResourceGroupName", # required
+    #         resource_group_name: "ResourceGroupName",
     #         ops_center_enabled: false,
     #         cwe_monitor_enabled: false,
     #         ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
@@ -188,6 +196,8 @@ module Aws::ApplicationInsights
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         auto_config_enabled: false,
+    #         auto_create: false,
     #       }
     #
     # @!attribute [rw] resource_group_name
@@ -217,6 +227,12 @@ module Aws::ApplicationInsights
     #   128 characters. The maximum length of a tag value is 256 characters.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] auto_config_enabled
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_create
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
@@ -224,7 +240,9 @@ module Aws::ApplicationInsights
       :ops_center_enabled,
       :cwe_monitor_enabled,
       :ops_item_sns_topic_arn,
-      :tags)
+      :tags,
+      :auto_config_enabled,
+      :auto_create)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -471,7 +489,7 @@ module Aws::ApplicationInsights
     #       {
     #         resource_group_name: "ResourceGroupName", # required
     #         component_name: "ComponentName", # required
-    #         tier: "CUSTOM", # required, accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE
+    #         tier: "CUSTOM", # required, accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE
     #       }
     #
     # @!attribute [rw] resource_group_name
@@ -1064,6 +1082,7 @@ module Aws::ApplicationInsights
     #         end_time: Time.now,
     #         max_results: 1,
     #         next_token: "PaginationToken",
+    #         component_name: "ComponentName",
     #       }
     #
     # @!attribute [rw] resource_group_name
@@ -1091,6 +1110,9 @@ module Aws::ApplicationInsights
     #   The token to request the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] component_name
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListProblemsRequest AWS API Documentation
     #
     class ListProblemsRequest < Struct.new(
@@ -1098,7 +1120,8 @@ module Aws::ApplicationInsights
       :start_time,
       :end_time,
       :max_results,
-      :next_token)
+      :next_token,
+      :component_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1112,11 +1135,15 @@ module Aws::ApplicationInsights
     #   `null` when there are no more results to return.
     #   @return [String]
     #
+    # @!attribute [rw] resource_group_name
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListProblemsResponse AWS API Documentation
     #
     class ListProblemsResponse < Struct.new(
       :problem_list,
-      :next_token)
+      :next_token,
+      :resource_group_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1491,6 +1518,12 @@ module Aws::ApplicationInsights
     #   Feedback provided by the user about the problem.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] recurring_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_recurrence_time
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/Problem AWS API Documentation
     #
     class Problem < Struct.new(
@@ -1503,7 +1536,9 @@ module Aws::ApplicationInsights
       :end_time,
       :severity_level,
       :resource_group_name,
-      :feedback)
+      :feedback,
+      :recurring_count,
+      :last_recurrence_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1717,6 +1752,7 @@ module Aws::ApplicationInsights
     #         cwe_monitor_enabled: false,
     #         ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
     #         remove_sns_topic: false,
+    #         auto_config_enabled: false,
     #       }
     #
     # @!attribute [rw] resource_group_name
@@ -1745,6 +1781,9 @@ module Aws::ApplicationInsights
     #   problems.
     #   @return [Boolean]
     #
+    # @!attribute [rw] auto_config_enabled
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateApplicationRequest AWS API Documentation
     #
     class UpdateApplicationRequest < Struct.new(
@@ -1752,7 +1791,8 @@ module Aws::ApplicationInsights
       :ops_center_enabled,
       :cwe_monitor_enabled,
       :ops_item_sns_topic_arn,
-      :remove_sns_topic)
+      :remove_sns_topic,
+      :auto_config_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1776,8 +1816,9 @@ module Aws::ApplicationInsights
     #         resource_group_name: "ResourceGroupName", # required
     #         component_name: "ComponentName", # required
     #         monitor: false,
-    #         tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE
+    #         tier: "CUSTOM", # accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE
     #         component_configuration: "ComponentConfiguration",
+    #         auto_config_enabled: false,
     #       }
     #
     # @!attribute [rw] resource_group_name
@@ -1813,6 +1854,9 @@ module Aws::ApplicationInsights
     #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html
     #   @return [String]
     #
+    # @!attribute [rw] auto_config_enabled
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateComponentConfigurationRequest AWS API Documentation
     #
     class UpdateComponentConfigurationRequest < Struct.new(
@@ -1820,7 +1864,8 @@ module Aws::ApplicationInsights
       :component_name,
       :monitor,
       :tier,
-      :component_configuration)
+      :component_configuration,
+      :auto_config_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

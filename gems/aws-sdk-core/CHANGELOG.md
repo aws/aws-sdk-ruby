@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.121.5 (2021-10-29)
+------------------
+
 * Issue - bump minimum version of `aws-partitions` (#2603).
 
 3.121.4 (2021-10-28)
