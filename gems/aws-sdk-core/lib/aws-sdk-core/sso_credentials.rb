@@ -100,7 +100,7 @@ module Aws
         raise ArgumentError, 'Cached SSO Token is expired.'
       end
       cached_token
-    rescue Aws::Json::ParseError, ArgumentError
+    rescue Errno::ENOENT, Aws::Json::ParseError, ArgumentError
       raise Errors::InvalidSSOCredentials, SSO_LOGIN_GUIDANCE
     end
 

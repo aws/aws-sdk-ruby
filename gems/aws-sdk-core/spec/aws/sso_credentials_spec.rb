@@ -87,6 +87,17 @@ module Aws
         end.to raise_error(ArgumentError, /Missing required keys/)
       end
 
+      it 'raises an InvalidSSOCredentials error when  token file is missing' do
+        start_url_sha1 = OpenSSL::Digest::SHA1.hexdigest(sso_start_url.encode('utf-8'))
+        allow(Dir).to receive(:home).and_return('HOME')
+        path = File.join(Dir.home, '.aws', 'sso', 'cache', "#{start_url_sha1}.json")
+
+        allow(File).to receive(:read).with(path).and_raise(Errno::ENOENT)
+
+        expect do
+          SSOCredentials.new(sso_opts)
+        end.to raise_error(Aws::Errors::InvalidSSOCredentials)
+      end
       it 'raises an InvalidSSOCredentials error when  token file is missing fields' do
         mock_token_file(sso_start_url, {'accessToken' =>  access_token})
 
