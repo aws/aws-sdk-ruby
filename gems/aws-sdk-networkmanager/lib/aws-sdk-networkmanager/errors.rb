@@ -124,6 +124,11 @@ module Aws::NetworkManager
       def resource_type
         @data[:resource_type]
       end
+
+      # @return [String]
+      def context
+        @data[:context]
+      end
     end
 
     class ServiceQuotaExceededException < ServiceError

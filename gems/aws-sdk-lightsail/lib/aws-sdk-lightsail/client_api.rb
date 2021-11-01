@@ -58,6 +58,8 @@ module Aws::Lightsail
     BlueprintList = Shapes::ListShape.new(name: 'BlueprintList')
     BlueprintType = Shapes::StringShape.new(name: 'BlueprintType')
     Bucket = Shapes::StructureShape.new(name: 'Bucket')
+    BucketAccessLogConfig = Shapes::StructureShape.new(name: 'BucketAccessLogConfig')
+    BucketAccessLogPrefix = Shapes::StringShape.new(name: 'BucketAccessLogPrefix')
     BucketBundle = Shapes::StructureShape.new(name: 'BucketBundle')
     BucketBundleList = Shapes::ListShape.new(name: 'BucketBundleList')
     BucketList = Shapes::ListShape.new(name: 'BucketList')
@@ -778,7 +780,13 @@ module Aws::Lightsail
     Bucket.add_member(:readonly_access_accounts, Shapes::ShapeRef.new(shape: PartnerIdList, location_name: "readonlyAccessAccounts"))
     Bucket.add_member(:resources_receiving_access, Shapes::ShapeRef.new(shape: AccessReceiverList, location_name: "resourcesReceivingAccess"))
     Bucket.add_member(:state, Shapes::ShapeRef.new(shape: BucketState, location_name: "state"))
+    Bucket.add_member(:access_log_config, Shapes::ShapeRef.new(shape: BucketAccessLogConfig, location_name: "accessLogConfig"))
     Bucket.struct_class = Types::Bucket
+
+    BucketAccessLogConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "enabled"))
+    BucketAccessLogConfig.add_member(:destination, Shapes::ShapeRef.new(shape: BucketName, location_name: "destination"))
+    BucketAccessLogConfig.add_member(:prefix, Shapes::ShapeRef.new(shape: BucketAccessLogPrefix, location_name: "prefix"))
+    BucketAccessLogConfig.struct_class = Types::BucketAccessLogConfig
 
     BucketBundle.add_member(:bundle_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "bundleId"))
     BucketBundle.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
@@ -2743,6 +2751,7 @@ module Aws::Lightsail
     UpdateBucketRequest.add_member(:access_rules, Shapes::ShapeRef.new(shape: AccessRules, location_name: "accessRules"))
     UpdateBucketRequest.add_member(:versioning, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "versioning"))
     UpdateBucketRequest.add_member(:readonly_access_accounts, Shapes::ShapeRef.new(shape: PartnerIdList, location_name: "readonlyAccessAccounts"))
+    UpdateBucketRequest.add_member(:access_log_config, Shapes::ShapeRef.new(shape: BucketAccessLogConfig, location_name: "accessLogConfig"))
     UpdateBucketRequest.struct_class = Types::UpdateBucketRequest
 
     UpdateBucketResult.add_member(:bucket, Shapes::ShapeRef.new(shape: Bucket, location_name: "bucket"))

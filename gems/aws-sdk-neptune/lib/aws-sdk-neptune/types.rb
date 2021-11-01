@@ -32,7 +32,8 @@ module Aws::Neptune
     # @!attribute [rw] feature_name
     #   The name of the feature for the Neptune DB cluster that the IAM role
     #   is to be associated with. For the list of supported feature names,
-    #   see DBEngineVersion.
+    #   see
+    #   [DBEngineVersion](neptune/latest/userguide/api-other-apis.html#DBEngineVersion).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/AddRoleToDBClusterMessage AWS API Documentation
@@ -2441,7 +2442,11 @@ module Aws::Neptune
     # @!attribute [rw] feature_name
     #   The name of the feature associated with the Amazon Identity and
     #   Access Management (IAM) role. For the list of supported feature
-    #   names, see DBEngineVersion.
+    #   names, see [DescribeDBEngineVersions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterRole AWS API Documentation
@@ -4168,7 +4173,7 @@ module Aws::Neptune
     #     automatically taken by Amazon Neptune for my Amazon account.
     #
     #   * `manual` - Return all DB cluster snapshots that have been taken by
-    #     my AWS account.
+    #     my Amazon account.
     #
     #   * `shared` - Return all manual DB cluster snapshots that have been
     #     shared to my Amazon account.
@@ -4214,8 +4219,8 @@ module Aws::Neptune
     #
     # @!attribute [rw] include_shared
     #   True to include shared manual DB cluster snapshots from other Amazon
-    #   accounts that this AWS account has been given permission to copy or
-    #   restore, and otherwise false. The default is `false`.
+    #   accounts that this Amazon account has been given permission to copy
+    #   or restore, and otherwise false. The default is `false`.
     #
     #   You can give an Amazon account permission to restore a manual DB
     #   cluster snapshot from another Amazon account by the
@@ -5865,6 +5870,8 @@ module Aws::Neptune
     #           disable_log_types: ["String"],
     #         },
     #         engine_version: "String",
+    #         allow_major_version_upgrade: false,
+    #         db_instance_parameter_group_name: "String",
     #         deletion_protection: false,
     #         copy_tags_to_snapshot: false,
     #       }
@@ -6011,6 +6018,37 @@ module Aws::Neptune
     #   [2]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
     #   @return [String]
     #
+    # @!attribute [rw] allow_major_version_upgrade
+    #   A value that indicates whether upgrades between different major
+    #   versions are allowed.
+    #
+    #   Constraints: You must set the allow-major-version-upgrade flag when
+    #   providing an `EngineVersion` parameter that uses a different major
+    #   version than the DB cluster's current version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] db_instance_parameter_group_name
+    #   The name of the DB parameter group to apply to all instances of the
+    #   DB cluster.
+    #
+    #   <note markdown="1"> When you apply a parameter group using
+    #   `DBInstanceParameterGroupName`, parameter changes aren't applied
+    #   during the next maintenance window but instead are applied
+    #   immediately.
+    #
+    #    </note>
+    #
+    #   Default: The existing name setting
+    #
+    #   Constraints:
+    #
+    #   * The DB parameter group must be in the same DB parameter group
+    #     family as the target DB cluster version.
+    #
+    #   * The `DBInstanceParameterGroupName` parameter is only valid in
+    #     combination with the `AllowMajorVersionUpgrade` parameter.
+    #   @return [String]
+    #
     # @!attribute [rw] deletion_protection
     #   A value that indicates whether the DB cluster has deletion
     #   protection enabled. The database can't be deleted when deletion
@@ -6039,6 +6077,8 @@ module Aws::Neptune
       :enable_iam_database_authentication,
       :cloudwatch_logs_export_configuration,
       :engine_version,
+      :allow_major_version_upgrade,
+      :db_instance_parameter_group_name,
       :deletion_protection,
       :copy_tags_to_snapshot)
       SENSITIVE = []
@@ -6129,7 +6169,7 @@ module Aws::Neptune
     #   account IDs, or `all` to make the manual DB cluster snapshot
     #   restorable by any Amazon account. Do not add the `all` value for any
     #   manual DB cluster snapshots that contain private information that
-    #   you don't want available to all AWS accounts.
+    #   you don't want available to all Amazon accounts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] values_to_remove
@@ -6237,8 +6277,8 @@ module Aws::Neptune
     #
     # @!attribute [rw] db_instance_class
     #   The new compute and memory capacity of the DB instance, for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all AWS
-    #   Regions.
+    #   `db.m4.large`. Not all DB instance classes are available in all
+    #   Amazon Regions.
     #
     #   If you modify the DB instance class, an outage occurs during the
     #   change. The change is applied during the next maintenance window,
@@ -7347,7 +7387,11 @@ module Aws::Neptune
     # @!attribute [rw] feature_name
     #   The name of the feature for the DB cluster that the IAM role is to
     #   be disassociated from. For the list of supported feature names, see
-    #   DBEngineVersion.
+    #   [DescribeDBEngineVersions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RemoveRoleFromDBClusterMessage AWS API Documentation
@@ -8175,18 +8219,18 @@ module Aws::Neptune
     # @!attribute [rw] key
     #   A key is the required name of the tag. The string value can be from
     #   1 to 128 Unicode characters in length and can't be prefixed with
-    #   "aws:" or "rds:". The string can only contain only the set of
-    #   Unicode letters, digits, white-space, '\_', '.', '/', '=',
-    #   '+', '-' (Java regex:
+    #   `aws:` or `rds:`. The string can only contain the set of Unicode
+    #   letters, digits, white-space, '\_', '.', '/', '=', '+',
+    #   '-' (Java regex:
     #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
     # @!attribute [rw] value
     #   A value is the optional value of the tag. The string value can be
     #   from 1 to 256 Unicode characters in length and can't be prefixed
-    #   with "aws:" or "rds:". The string can only contain only the set
-    #   of Unicode letters, digits, white-space, '\_', '.', '/',
-    #   '=', '+', '-' (Java regex:
+    #   with `aws:` or `rds:`. The string can only contain the set of
+    #   Unicode letters, digits, white-space, '\_', '.', '/', '=',
+    #   '+', '-' (Java regex:
     #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #

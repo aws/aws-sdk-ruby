@@ -1055,6 +1055,11 @@ module Aws::Lightsail
     #   An object that describes the state of the bucket.
     #   @return [Types::BucketState]
     #
+    # @!attribute [rw] access_log_config
+    #   An object that describes the access log configuration for the
+    #   bucket.
+    #   @return [Types::BucketAccessLogConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Bucket AWS API Documentation
     #
     class Bucket < Struct.new(
@@ -1072,7 +1077,70 @@ module Aws::Lightsail
       :able_to_update_bundle,
       :readonly_access_accounts,
       :resources_receiving_access,
-      :state)
+      :state,
+      :access_log_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the access log configuration for a bucket in the Amazon
+    # Lightsail object storage service.
+    #
+    # For more information about bucket access logs, see [Logging bucket
+    # requests using access logging in Amazon Lightsail][1] in the *Amazon
+    # Lightsail Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-bucket-access-logs
+    #
+    # @note When making an API call, you may pass BucketAccessLogConfig
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         destination: "BucketName",
+    #         prefix: "BucketAccessLogPrefix",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   A Boolean value that indicates whether bucket access logging is
+    #   enabled for the bucket.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] destination
+    #   The name of the bucket where the access is saved. The destination
+    #   can be a Lightsail bucket in the same account, and in the same AWS
+    #   Region as the source bucket.
+    #
+    #   <note markdown="1"> This parameter is required when enabling the access log for a
+    #   bucket, and should be omitted when disabling the access log.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The optional object prefix for the bucket access log.
+    #
+    #   The prefix is an optional addition to the object key that organizes
+    #   your access log files in the destination bucket. For example, if you
+    #   specify a `logs/` prefix, then each log object will begin with the
+    #   `logs/` prefix in its key (for example,
+    #   `logs/2021-11-01-21-32-16-E568B2907131C0C0`).
+    #
+    #   <note markdown="1"> This parameter can be optionally specified when enabling the access
+    #   log for a bucket, and should be omitted when disabling the access
+    #   log.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/BucketAccessLogConfig AWS API Documentation
+    #
+    class BucketAccessLogConfig < Struct.new(
+      :enabled,
+      :destination,
+      :prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1934,9 +2002,18 @@ module Aws::Lightsail
     #
     #   Container images sourced from your Lightsail container service, that
     #   are registered and stored on your service, start with a colon (`:`).
-    #   For example, `:container-service-1.mystaticwebsite.1`. Container
-    #   images sourced from a public registry like Docker Hub don't start
-    #   with a colon. For example, `nginx:latest` or `nginx`.
+    #   For example, if your container service name is
+    #   `container-service-1`, the container image label is `mystaticsite`,
+    #   and you want to use the third (`3`) version of the registered
+    #   container image, then you should specify
+    #   `:container-service-1.mystaticsite.3`. To use the latest version of
+    #   a container image, specify `latest` instead of a version number (for
+    #   example, `:container-service-1.mystaticsite.latest`). Lightsail will
+    #   automatically use the highest numbered version of the registered
+    #   container image.
+    #
+    #   Container images sourced from a public registry like Docker Hub
+    #   don't start with a colon. For example, `nginx:latest` or `nginx`.
     #   @return [String]
     #
     # @!attribute [rw] command
@@ -3191,8 +3268,8 @@ module Aws::Lightsail
     #   @return [Integer]
     #
     # @!attribute [rw] tags
-    #   The tag keys and optional values to add to the certificate during
-    #   create.
+    #   The tag keys and optional values to add to the container service
+    #   during create.
     #
     #   Use the `TagResource` action to tag a resource after it's created.
     #
@@ -14528,6 +14605,11 @@ module Aws::Lightsail
     #         },
     #         versioning: "NonEmptyString",
     #         readonly_access_accounts: ["NonEmptyString"],
+    #         access_log_config: {
+    #           enabled: false, # required
+    #           destination: "BucketName",
+    #           prefix: "BucketAccessLogPrefix",
+    #         },
     #       }
     #
     # @!attribute [rw] bucket_name
@@ -14558,13 +14640,19 @@ module Aws::Lightsail
     #   You can give a maximum of 10 AWS accounts access to a bucket.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] access_log_config
+    #   An object that describes the access log configuration for the
+    #   bucket.
+    #   @return [Types::BucketAccessLogConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateBucketRequest AWS API Documentation
     #
     class UpdateBucketRequest < Struct.new(
       :bucket_name,
       :access_rules,
       :versioning,
-      :readonly_access_accounts)
+      :readonly_access_accounts,
+      :access_log_config)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-11-01)
+------------------
+
+* Feature - This Amazon Rekognition Custom Labels release introduces the management of datasets with  projects
+
 1.58.0 (2021-10-29)
 ------------------
 

@@ -643,6 +643,61 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDatasetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_source: {
+    #           ground_truth_manifest: {
+    #             s3_object: {
+    #               bucket: "S3Bucket",
+    #               name: "S3ObjectName",
+    #               version: "S3ObjectVersion",
+    #             },
+    #           },
+    #           dataset_arn: "DatasetArn",
+    #         },
+    #         dataset_type: "TRAIN", # required, accepts TRAIN, TEST
+    #         project_arn: "ProjectArn", # required
+    #       }
+    #
+    # @!attribute [rw] dataset_source
+    #   The source files for the dataset. You can specify the ARN of an
+    #   existing dataset or specify the Amazon S3 bucket location of an
+    #   Amazon Sagemaker format manifest file. If you don't specify
+    #   `datasetSource`, an empty dataset is created. To add labeled images
+    #   to the dataset, You can use the console or call
+    #   UpdateDatasetEntries.
+    #   @return [Types::DatasetSource]
+    #
+    # @!attribute [rw] dataset_type
+    #   The type of the dataset. Specify `train` to create a training
+    #   dataset. Specify `test` to create a test dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_arn
+    #   The ARN of the Amazon Rekognition Custom Labels project to which you
+    #   want to asssign the dataset.
+    #   @return [String]
+    #
+    class CreateDatasetRequest < Struct.new(
+      :dataset_source,
+      :dataset_type,
+      :project_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_arn
+    #   The ARN of the created Amazon Rekognition Custom Labels dataset.
+    #   @return [String]
+    #
+    class CreateDatasetResponse < Struct.new(
+      :dataset_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateProjectRequest
     #   data as a hash:
     #
@@ -681,7 +736,7 @@ module Aws::Rekognition
     #           s3_bucket: "S3Bucket",
     #           s3_key_prefix: "S3KeyPrefix",
     #         },
-    #         training_data: { # required
+    #         training_data: {
     #           assets: [
     #             {
     #               ground_truth_manifest: {
@@ -694,7 +749,7 @@ module Aws::Rekognition
     #             },
     #           ],
     #         },
-    #         testing_data: { # required
+    #         testing_data: {
     #           assets: [
     #             {
     #               ground_truth_manifest: {
@@ -730,11 +785,15 @@ module Aws::Rekognition
     #   @return [Types::OutputConfig]
     #
     # @!attribute [rw] training_data
-    #   The dataset to use for training.
+    #   Specifies an external manifest that the services uses to train the
+    #   model. If you specify `TrainingData` you must also specify
+    #   `TestingData`. The project must not have any associated datasets.
     #   @return [Types::TrainingData]
     #
     # @!attribute [rw] testing_data
-    #   The dataset to use for testing.
+    #   Specifies an external manifest that the service uses to test the
+    #   model. If you specify `TestingData` you must also specify
+    #   `TrainingData`. The project must not have any associated datasets.
     #   @return [Types::TestingData]
     #
     # @!attribute [rw] tags
@@ -743,17 +802,16 @@ module Aws::Rekognition
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier for your AWS Key Management Service (AWS KMS)
-    #   customer master key (CMK). You can supply the Amazon Resource Name
-    #   (ARN) of your CMK, the ID of your CMK, an alias for your CMK, or an
-    #   alias ARN. The key is used to encrypt training and test images
-    #   copied into the service for model training. Your source images are
-    #   unaffected. The key is also used to encrypt training results and
-    #   manifest files written to the output Amazon S3 bucket
-    #   (`OutputConfig`).
+    #   The identifier for your AWS Key Management Service key (AWS KMS
+    #   key). You can supply the Amazon Resource Name (ARN) of your KMS key,
+    #   the ID of your KMS key, an alias for your KMS key, or an alias ARN.
+    #   The key is used to encrypt training and test images copied into the
+    #   service for model training. Your source images are unaffected. The
+    #   key is also used to encrypt training results and manifest files
+    #   written to the output Amazon S3 bucket (`OutputConfig`).
     #
-    #   If you choose to use your own CMK, you need the following
-    #   permissions on the CMK.
+    #   If you choose to use your own KMS key, you need the following
+    #   permissions on the KMS key.
     #
     #   * kms:CreateGrant
     #
@@ -900,6 +958,235 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Describes updates or additions to a dataset. A Single update or
+    # addition is an entry (JSON Line) that provides information about a
+    # single image. To update an existing entry, you match the `source-ref`
+    # field of the update entry with the `source-ref` filed of the entry
+    # that you want to update. If the `source-ref` field doesn't match an
+    # existing entry, the entry is added to dataset as a new entry.
+    #
+    # @note When making an API call, you may pass DatasetChanges
+    #   data as a hash:
+    #
+    #       {
+    #         ground_truth: "data", # required
+    #       }
+    #
+    # @!attribute [rw] ground_truth
+    #   A Base64-encoded binary data object containing one or JSON lines
+    #   that either update the dataset or are additions to the dataset. You
+    #   change a dataset by calling UpdateDatasetEntries. If you are using
+    #   an AWS SDK to call `UpdateDatasetEntries`, you don't need to encode
+    #   `Changes` as the SDK encodes the data for you.
+    #
+    #   For example JSON lines, see Image-Level labels in manifest files and
+    #   and Object localization in manifest files in the *Amazon Rekognition
+    #   Custom Labels Developer Guide*.
+    #   @return [String]
+    #
+    class DatasetChanges < Struct.new(
+      :ground_truth)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A description for a dataset. For more information, see
+    # DescribeDataset.
+    #
+    # The status fields `Status`, `StatusMessage`, and `StatusMessageCode`
+    # reflect the last operation on the dataset.
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The Unix timestamp for the time and date that the dataset was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The Unix timestamp for the date and time that the dataset was last
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message_code
+    #   The status message code for the dataset operation. If a service
+    #   error occurs, try the API call again later. If a client error
+    #   occurs, check the input parameters to the dataset API call that
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_stats
+    #   The status message code for the dataset.
+    #   @return [Types::DatasetStats]
+    #
+    class DatasetDescription < Struct.new(
+      :creation_timestamp,
+      :last_updated_timestamp,
+      :status,
+      :status_message,
+      :status_message_code,
+      :dataset_stats)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a dataset label. For more information, see
+    # ListDatasetLabels.
+    #
+    # @!attribute [rw] label_name
+    #   The name of the label.
+    #   @return [String]
+    #
+    # @!attribute [rw] label_stats
+    #   Statistics about the label.
+    #   @return [Types::DatasetLabelStats]
+    #
+    class DatasetLabelDescription < Struct.new(
+      :label_name,
+      :label_stats)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics about a label used in a dataset. For more information, see
+    # DatasetLabelDescription.
+    #
+    # @!attribute [rw] entry_count
+    #   The total number of images that use the label.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bounding_box_count
+    #   The total number of images that have the label assigned to a
+    #   bounding box.
+    #   @return [Integer]
+    #
+    class DatasetLabelStats < Struct.new(
+      :entry_count,
+      :bounding_box_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for an Amazon Rekognition Custom Labels dataset.
+    # For more information, see ProjectDescription.
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The Unix timestamp for the date and time that the dataset was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] dataset_type
+    #   The type of the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) for the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status for the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for the dataset.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message_code
+    #   The status message code for the dataset operation. If a service
+    #   error occurs, try the API call again later. If a client error
+    #   occurs, check the input parameters to the dataset API call that
+    #   failed.
+    #   @return [String]
+    #
+    class DatasetMetadata < Struct.new(
+      :creation_timestamp,
+      :dataset_type,
+      :dataset_arn,
+      :status,
+      :status_message,
+      :status_message_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source that Amazon Rekognition Custom Labels uses to create a
+    # dataset. To use an Amazon Sagemaker format manifest file, specify the
+    # S3 bucket location in the `GroundTruthManifest` field. The S3 bucket
+    # must be in your AWS account. To create a copy of an existing dataset,
+    # specify the Amazon Resource Name (ARN) of an existing dataset in
+    # `DatasetArn`.
+    #
+    # You need to specify a value for `DatasetArn` or `GroundTruthManifest`,
+    # but not both. if you supply both values, or if you don't specify any
+    # values, an InvalidParameterException exception occurs.
+    #
+    # For more information, see CreateDataset.
+    #
+    # @note When making an API call, you may pass DatasetSource
+    #   data as a hash:
+    #
+    #       {
+    #         ground_truth_manifest: {
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         dataset_arn: "DatasetArn",
+    #       }
+    #
+    # @!attribute [rw] ground_truth_manifest
+    #   The S3 bucket that contains an Amazon Sagemaker Ground Truth format
+    #   manifest file.
+    #   @return [Types::GroundTruthManifest]
+    #
+    # @!attribute [rw] dataset_arn
+    #   The ARN of an Amazon Rekognition Custom Labels dataset that you want
+    #   to copy.
+    #   @return [String]
+    #
+    class DatasetSource < Struct.new(
+      :ground_truth_manifest,
+      :dataset_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides statistics about a dataset. For more information, see
+    # DescribeDataset.
+    #
+    # @!attribute [rw] labeled_entries
+    #   The total number of images in the dataset that have labels.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_entries
+    #   The total number of images in the dataset.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_labels
+    #   The total number of labels declared in the dataset.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] error_entries
+    #   The total number of entries that contain at least one error.
+    #   @return [Integer]
+    #
+    class DatasetStats < Struct.new(
+      :labeled_entries,
+      :total_entries,
+      :total_labels,
+      :error_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteCollectionRequest
     #   data as a hash:
     #
@@ -926,6 +1213,26 @@ module Aws::Rekognition
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteDatasetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_arn: "DatasetArn", # required
+    #       }
+    #
+    # @!attribute [rw] dataset_arn
+    #   The ARN of the Amazon Rekognition Custom Labels dataset that you
+    #   want to delete.
+    #   @return [String]
+    #
+    class DeleteDatasetRequest < Struct.new(
+      :dataset_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteDatasetResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteFacesRequest
     #   data as a hash:
@@ -1084,6 +1391,34 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeDatasetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_arn: "DatasetArn", # required
+    #       }
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset that you want to
+    #   describe.
+    #   @return [String]
+    #
+    class DescribeDatasetRequest < Struct.new(
+      :dataset_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_description
+    #   The description for the dataset.
+    #   @return [Types::DatasetDescription]
+    #
+    class DescribeDatasetResponse < Struct.new(
+      :dataset_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeProjectVersionsRequest
     #   data as a hash:
     #
@@ -1157,6 +1492,7 @@ module Aws::Rekognition
     #       {
     #         next_token: "ExtendedPaginationToken",
     #         max_results: 1,
+    #         project_names: ["ProjectName"],
     #       }
     #
     # @!attribute [rw] next_token
@@ -1173,9 +1509,16 @@ module Aws::Rekognition
     #   100.
     #   @return [Integer]
     #
+    # @!attribute [rw] project_names
+    #   A list of the projects that you want Amazon Rekognition Custom
+    #   Labels to describe. If you don't specify a value, the response
+    #   includes descriptions for all the projects in your AWS account.
+    #   @return [Array<String>]
+    #
     class DescribeProjectsRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :project_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1808,6 +2151,51 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # A training dataset or a test dataset used in a dataset distribution
+    # operation. For more information, see DistributeDatasetEntries.
+    #
+    # @note When making an API call, you may pass DistributeDataset
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "DatasetArn", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the dataset that you want to use.
+    #   @return [String]
+    #
+    class DistributeDataset < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DistributeDatasetEntriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         datasets: [ # required
+    #           {
+    #             arn: "DatasetArn", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] datasets
+    #   The ARNS for the training dataset and test dataset that you want to
+    #   use. The datasets must belong to the same project. The test dataset
+    #   must be empty.
+    #   @return [Array<Types::DistributeDataset>]
+    #
+    class DistributeDatasetEntriesRequest < Struct.new(
+      :datasets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DistributeDatasetEntriesResponse < Aws::EmptyStructure; end
+
     # The emotions that appear to be expressed on the face, and the
     # confidence level in the determination. The API is only making a
     # determination of the physical appearance of a person's face. It is
@@ -2153,8 +2541,9 @@ module Aws::Rekognition
     #
     # @!attribute [rw] face_match_threshold
     #   Minimum face match confidence score that must be met to return a
-    #   result for a recognized face. Default is 80. 0 is the lowest
-    #   confidence. 100 is the highest confidence.
+    #   result for a recognized face. The default is 80. 0 is the lowest
+    #   confidence. 100 is the highest confidence. Values between 0 and 100
+    #   are accepted, and values lower than 80 are set to 80.
     #   @return [Float]
     #
     class FaceSearchSettings < Struct.new(
@@ -3549,6 +3938,148 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListDatasetEntriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_arn: "DatasetArn", # required
+    #         contains_labels: ["DatasetLabel"],
+    #         labeled: false,
+    #         source_ref_contains: "QueryString",
+    #         has_errors: false,
+    #         next_token: "ExtendedPaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) for the dataset that you want to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] contains_labels
+    #   Specifies a label filter for the response. The response includes an
+    #   entry only if one or more of the labels in `ContainsLabels` exist in
+    #   the entry.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] labeled
+    #   Specify `true` to get only the JSON Lines where the image is
+    #   labeled. Specify `false` to get only the JSON Lines where the image
+    #   isn't labeled. If you don't specify `Labeled`,
+    #   `ListDatasetEntries` returns JSON Lines for labeled and unlabeled
+    #   images.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] source_ref_contains
+    #   If specified, `ListDatasetEntries` only returns JSON Lines where the
+    #   value of `SourceRefContains` is part of the `source-ref` field. The
+    #   `source-ref` field contains the Amazon S3 location of the image. You
+    #   can use `SouceRefContains` for tasks such as getting the JSON Line
+    #   for a single image, or gettting JSON Lines for all images within a
+    #   specific folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] has_errors
+    #   Specifies an error filter for the response. Specify `True` to only
+    #   include entries that have errors.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #   @return [Integer]
+    #
+    class ListDatasetEntriesRequest < Struct.new(
+      :dataset_arn,
+      :contains_labels,
+      :labeled,
+      :source_ref_contains,
+      :has_errors,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_entries
+    #   A list of entries (images) in the dataset.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListDatasetEntriesResponse < Struct.new(
+      :dataset_entries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDatasetLabelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_arn: "DatasetArn", # required
+    #         next_token: "ExtendedPaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset that you want to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #   @return [Integer]
+    #
+    class ListDatasetLabelsRequest < Struct.new(
+      :dataset_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataset_label_descriptions
+    #   A list of the labels in the dataset.
+    #   @return [Array<Types::DatasetLabelDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListDatasetLabelsResponse < Struct.new(
+      :dataset_label_descriptions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListFacesRequest
     #   data as a hash:
     #
@@ -3944,7 +4475,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # A description of a Amazon Rekognition Custom Labels project.
+    # A description of an Amazon Rekognition Custom Labels project. For more
+    # information, see DescribeProjects.
     #
     # @!attribute [rw] project_arn
     #   The Amazon Resource Name (ARN) of the project.
@@ -3959,15 +4491,21 @@ module Aws::Rekognition
     #   The current status of the project.
     #   @return [String]
     #
+    # @!attribute [rw] datasets
+    #   Information about the training and test datasets in the project.
+    #   @return [Array<Types::DatasetMetadata>]
+    #
     class ProjectDescription < Struct.new(
       :project_arn,
       :creation_timestamp,
-      :status)
+      :status,
+      :datasets)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The description of a version of a model.
+    # A description of a version of an Amazon Rekognition Custom Labels
+    # model.
     #
     # @!attribute [rw] project_version_arn
     #   The Amazon Resource Name (ARN) of the model version.
@@ -3991,9 +4529,9 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] billable_training_time_in_seconds
-    #   The duration, in seconds, that the model version has been billed for
-    #   training. This value is only returned if the model version has been
-    #   successfully trained.
+    #   The duration, in seconds, that you were billed for a successful
+    #   training of the model version. This value is only returned if the
+    #   model version has been successfully trained.
     #   @return [Integer]
     #
     # @!attribute [rw] training_end_timestamp
@@ -4024,8 +4562,8 @@ module Aws::Rekognition
     #   @return [Types::GroundTruthManifest]
     #
     # @!attribute [rw] kms_key_id
-    #   The identifer for the AWS Key Management Service (AWS KMS) customer
-    #   master key that was used to encrypt the model during training.
+    #   The identifer for the AWS Key Management Service key (AWS KMS key)
+    #   that was used to encrypt the model during training.
     #   @return [String]
     #
     class ProjectVersionDescription < Struct.new(
@@ -5747,8 +6285,8 @@ module Aws::Rekognition
     end
 
     # The dataset used for testing. Optionally, if `AutoCreate` is set,
-    # Amazon Rekognition Custom Labels creates a testing dataset using an
-    # 80/20 split of the training dataset.
+    # Amazon Rekognition Custom Labels uses the training dataset to create a
+    # test dataset with a temporary split of the training dataset.
     #
     # @note When making an API call, you may pass TestingData
     #   data as a hash:
@@ -5773,8 +6311,10 @@ module Aws::Rekognition
     #   @return [Array<Types::Asset>]
     #
     # @!attribute [rw] auto_create
-    #   If specified, Amazon Rekognition Custom Labels creates a testing
-    #   dataset with an 80/20 split of the training dataset.
+    #   If specified, Amazon Rekognition Custom Labels temporarily splits
+    #   the training dataset (80%) to create a test dataset (20%) for the
+    #   training job. After training completes, the test dataset is not
+    #   stored and the training dataset reverts to its previous size.
     #   @return [Boolean]
     #
     class TestingData < Struct.new(
@@ -6006,12 +6546,40 @@ module Aws::Rekognition
 
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateDatasetEntriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_arn: "DatasetArn", # required
+    #         changes: { # required
+    #           ground_truth: "data", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset that you want to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] changes
+    #   The changes that you want to make to the dataset.
+    #   @return [Types::DatasetChanges]
+    #
+    class UpdateDatasetEntriesRequest < Struct.new(
+      :dataset_arn,
+      :changes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateDatasetEntriesResponse < Aws::EmptyStructure; end
+
     # Contains the Amazon S3 bucket location of the validation data for a
     # model training job.
     #
     # The validation data includes error information for individual JSON
-    # lines in the dataset. For more information, see Debugging a Failed
-    # Model Training in the Amazon Rekognition Custom Labels Developer
+    # Lines in the dataset. For more information, see *Debugging a Failed
+    # Model Training* in the Amazon Rekognition Custom Labels Developer
     # Guide.
     #
     # You get the `ValidationData` object for the training dataset

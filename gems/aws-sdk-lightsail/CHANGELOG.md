@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-11-01)
+------------------
+
+* Feature - This release adds support to enable access logging for buckets in the Lightsail object storage service.
+
 1.57.0 (2021-10-18)
 ------------------
 

@@ -22,10 +22,14 @@ module Aws::NetworkManager
     AssociateTransitGatewayConnectPeerRequest = Shapes::StructureShape.new(name: 'AssociateTransitGatewayConnectPeerRequest')
     AssociateTransitGatewayConnectPeerResponse = Shapes::StructureShape.new(name: 'AssociateTransitGatewayConnectPeerResponse')
     Bandwidth = Shapes::StructureShape.new(name: 'Bandwidth')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Connection = Shapes::StructureShape.new(name: 'Connection')
+    ConnectionHealth = Shapes::StructureShape.new(name: 'ConnectionHealth')
     ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
     ConnectionState = Shapes::StringShape.new(name: 'ConnectionState')
+    ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
+    ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     CreateConnectionRequest = Shapes::StructureShape.new(name: 'CreateConnectionRequest')
     CreateConnectionResponse = Shapes::StructureShape.new(name: 'CreateConnectionResponse')
     CreateDeviceRequest = Shapes::StructureShape.new(name: 'CreateDeviceRequest')
@@ -63,6 +67,13 @@ module Aws::NetworkManager
     DisassociateLinkResponse = Shapes::StructureShape.new(name: 'DisassociateLinkResponse')
     DisassociateTransitGatewayConnectPeerRequest = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayConnectPeerRequest')
     DisassociateTransitGatewayConnectPeerResponse = Shapes::StructureShape.new(name: 'DisassociateTransitGatewayConnectPeerResponse')
+    ExceptionContextKey = Shapes::StringShape.new(name: 'ExceptionContextKey')
+    ExceptionContextMap = Shapes::MapShape.new(name: 'ExceptionContextMap')
+    ExceptionContextValue = Shapes::StringShape.new(name: 'ExceptionContextValue')
+    FilterMap = Shapes::MapShape.new(name: 'FilterMap')
+    FilterName = Shapes::StringShape.new(name: 'FilterName')
+    FilterValue = Shapes::StringShape.new(name: 'FilterValue')
+    FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     GetConnectionsRequest = Shapes::StructureShape.new(name: 'GetConnectionsRequest')
     GetConnectionsResponse = Shapes::StructureShape.new(name: 'GetConnectionsResponse')
     GetCustomerGatewayAssociationsRequest = Shapes::StructureShape.new(name: 'GetCustomerGatewayAssociationsRequest')
@@ -73,6 +84,18 @@ module Aws::NetworkManager
     GetLinkAssociationsResponse = Shapes::StructureShape.new(name: 'GetLinkAssociationsResponse')
     GetLinksRequest = Shapes::StructureShape.new(name: 'GetLinksRequest')
     GetLinksResponse = Shapes::StructureShape.new(name: 'GetLinksResponse')
+    GetNetworkResourceCountsRequest = Shapes::StructureShape.new(name: 'GetNetworkResourceCountsRequest')
+    GetNetworkResourceCountsResponse = Shapes::StructureShape.new(name: 'GetNetworkResourceCountsResponse')
+    GetNetworkResourceRelationshipsRequest = Shapes::StructureShape.new(name: 'GetNetworkResourceRelationshipsRequest')
+    GetNetworkResourceRelationshipsResponse = Shapes::StructureShape.new(name: 'GetNetworkResourceRelationshipsResponse')
+    GetNetworkResourcesRequest = Shapes::StructureShape.new(name: 'GetNetworkResourcesRequest')
+    GetNetworkResourcesResponse = Shapes::StructureShape.new(name: 'GetNetworkResourcesResponse')
+    GetNetworkRoutesRequest = Shapes::StructureShape.new(name: 'GetNetworkRoutesRequest')
+    GetNetworkRoutesResponse = Shapes::StructureShape.new(name: 'GetNetworkRoutesResponse')
+    GetNetworkTelemetryRequest = Shapes::StructureShape.new(name: 'GetNetworkTelemetryRequest')
+    GetNetworkTelemetryResponse = Shapes::StructureShape.new(name: 'GetNetworkTelemetryResponse')
+    GetRouteAnalysisRequest = Shapes::StructureShape.new(name: 'GetRouteAnalysisRequest')
+    GetRouteAnalysisResponse = Shapes::StructureShape.new(name: 'GetRouteAnalysisResponse')
     GetSitesRequest = Shapes::StructureShape.new(name: 'GetSitesRequest')
     GetSitesResponse = Shapes::StructureShape.new(name: 'GetSitesResponse')
     GetTransitGatewayConnectPeerAssociationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayConnectPeerAssociationsRequest')
@@ -94,15 +117,52 @@ module Aws::NetworkManager
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Location = Shapes::StructureShape.new(name: 'Location')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    NetworkResource = Shapes::StructureShape.new(name: 'NetworkResource')
+    NetworkResourceCount = Shapes::StructureShape.new(name: 'NetworkResourceCount')
+    NetworkResourceCountList = Shapes::ListShape.new(name: 'NetworkResourceCountList')
+    NetworkResourceList = Shapes::ListShape.new(name: 'NetworkResourceList')
+    NetworkResourceMetadataKey = Shapes::StringShape.new(name: 'NetworkResourceMetadataKey')
+    NetworkResourceMetadataMap = Shapes::MapShape.new(name: 'NetworkResourceMetadataMap')
+    NetworkResourceMetadataValue = Shapes::StringShape.new(name: 'NetworkResourceMetadataValue')
+    NetworkResourceSummary = Shapes::StructureShape.new(name: 'NetworkResourceSummary')
+    NetworkRoute = Shapes::StructureShape.new(name: 'NetworkRoute')
+    NetworkRouteDestination = Shapes::StructureShape.new(name: 'NetworkRouteDestination')
+    NetworkRouteDestinationList = Shapes::ListShape.new(name: 'NetworkRouteDestinationList')
+    NetworkRouteList = Shapes::ListShape.new(name: 'NetworkRouteList')
+    NetworkTelemetry = Shapes::StructureShape.new(name: 'NetworkTelemetry')
+    NetworkTelemetryList = Shapes::ListShape.new(name: 'NetworkTelemetryList')
+    PathComponent = Shapes::StructureShape.new(name: 'PathComponent')
+    PathComponentList = Shapes::ListShape.new(name: 'PathComponentList')
+    ReasonContextKey = Shapes::StringShape.new(name: 'ReasonContextKey')
+    ReasonContextMap = Shapes::MapShape.new(name: 'ReasonContextMap')
+    ReasonContextValue = Shapes::StringShape.new(name: 'ReasonContextValue')
     RegisterTransitGatewayRequest = Shapes::StructureShape.new(name: 'RegisterTransitGatewayRequest')
     RegisterTransitGatewayResponse = Shapes::StructureShape.new(name: 'RegisterTransitGatewayResponse')
+    Relationship = Shapes::StructureShape.new(name: 'Relationship')
+    RelationshipList = Shapes::ListShape.new(name: 'RelationshipList')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
+    RouteAnalysis = Shapes::StructureShape.new(name: 'RouteAnalysis')
+    RouteAnalysisCompletion = Shapes::StructureShape.new(name: 'RouteAnalysisCompletion')
+    RouteAnalysisCompletionReasonCode = Shapes::StringShape.new(name: 'RouteAnalysisCompletionReasonCode')
+    RouteAnalysisCompletionResultCode = Shapes::StringShape.new(name: 'RouteAnalysisCompletionResultCode')
+    RouteAnalysisEndpointOptions = Shapes::StructureShape.new(name: 'RouteAnalysisEndpointOptions')
+    RouteAnalysisEndpointOptionsSpecification = Shapes::StructureShape.new(name: 'RouteAnalysisEndpointOptionsSpecification')
+    RouteAnalysisPath = Shapes::StructureShape.new(name: 'RouteAnalysisPath')
+    RouteAnalysisStatus = Shapes::StringShape.new(name: 'RouteAnalysisStatus')
+    RouteState = Shapes::StringShape.new(name: 'RouteState')
+    RouteStateList = Shapes::ListShape.new(name: 'RouteStateList')
+    RouteTableIdentifier = Shapes::StructureShape.new(name: 'RouteTableIdentifier')
+    RouteTableType = Shapes::StringShape.new(name: 'RouteTableType')
+    RouteType = Shapes::StringShape.new(name: 'RouteType')
+    RouteTypeList = Shapes::ListShape.new(name: 'RouteTypeList')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Site = Shapes::StructureShape.new(name: 'Site')
     SiteList = Shapes::ListShape.new(name: 'SiteList')
     SiteState = Shapes::StringShape.new(name: 'SiteState')
+    StartRouteAnalysisRequest = Shapes::StructureShape.new(name: 'StartRouteAnalysisRequest')
+    StartRouteAnalysisResponse = Shapes::StructureShape.new(name: 'StartRouteAnalysisResponse')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -130,6 +190,8 @@ module Aws::NetworkManager
     UpdateGlobalNetworkResponse = Shapes::StructureShape.new(name: 'UpdateGlobalNetworkResponse')
     UpdateLinkRequest = Shapes::StructureShape.new(name: 'UpdateLinkRequest')
     UpdateLinkResponse = Shapes::StructureShape.new(name: 'UpdateLinkResponse')
+    UpdateNetworkResourceMetadataRequest = Shapes::StructureShape.new(name: 'UpdateNetworkResourceMetadataRequest')
+    UpdateNetworkResourceMetadataResponse = Shapes::StructureShape.new(name: 'UpdateNetworkResourceMetadataResponse')
     UpdateSiteRequest = Shapes::StructureShape.new(name: 'UpdateSiteRequest')
     UpdateSiteResponse = Shapes::StructureShape.new(name: 'UpdateSiteResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -191,6 +253,11 @@ module Aws::NetworkManager
     Connection.add_member(:state, Shapes::ShapeRef.new(shape: ConnectionState, location_name: "State"))
     Connection.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Connection.struct_class = Types::Connection
+
+    ConnectionHealth.add_member(:type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "Type"))
+    ConnectionHealth.add_member(:status, Shapes::ShapeRef.new(shape: ConnectionStatus, location_name: "Status"))
+    ConnectionHealth.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "Timestamp"))
+    ConnectionHealth.struct_class = Types::ConnectionHealth
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
 
@@ -348,6 +415,14 @@ module Aws::NetworkManager
     DisassociateTransitGatewayConnectPeerResponse.add_member(:transit_gateway_connect_peer_association, Shapes::ShapeRef.new(shape: TransitGatewayConnectPeerAssociation, location_name: "TransitGatewayConnectPeerAssociation"))
     DisassociateTransitGatewayConnectPeerResponse.struct_class = Types::DisassociateTransitGatewayConnectPeerResponse
 
+    ExceptionContextMap.key = Shapes::ShapeRef.new(shape: ExceptionContextKey)
+    ExceptionContextMap.value = Shapes::ShapeRef.new(shape: ExceptionContextValue)
+
+    FilterMap.key = Shapes::ShapeRef.new(shape: FilterName)
+    FilterMap.value = Shapes::ShapeRef.new(shape: FilterValues)
+
+    FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
+
     GetConnectionsRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
     GetConnectionsRequest.add_member(:connection_ids, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "connectionIds"))
     GetConnectionsRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "deviceId"))
@@ -403,6 +478,83 @@ module Aws::NetworkManager
     GetLinksResponse.add_member(:links, Shapes::ShapeRef.new(shape: LinkList, location_name: "Links"))
     GetLinksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetLinksResponse.struct_class = Types::GetLinksResponse
+
+    GetNetworkResourceCountsRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    GetNetworkResourceCountsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "resourceType"))
+    GetNetworkResourceCountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetNetworkResourceCountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    GetNetworkResourceCountsRequest.struct_class = Types::GetNetworkResourceCountsRequest
+
+    GetNetworkResourceCountsResponse.add_member(:network_resource_counts, Shapes::ShapeRef.new(shape: NetworkResourceCountList, location_name: "NetworkResourceCounts"))
+    GetNetworkResourceCountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetNetworkResourceCountsResponse.struct_class = Types::GetNetworkResourceCountsResponse
+
+    GetNetworkResourceRelationshipsRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    GetNetworkResourceRelationshipsRequest.add_member(:registered_gateway_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "registeredGatewayArn"))
+    GetNetworkResourceRelationshipsRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "awsRegion"))
+    GetNetworkResourceRelationshipsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "accountId"))
+    GetNetworkResourceRelationshipsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "resourceType"))
+    GetNetworkResourceRelationshipsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "resourceArn"))
+    GetNetworkResourceRelationshipsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetNetworkResourceRelationshipsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    GetNetworkResourceRelationshipsRequest.struct_class = Types::GetNetworkResourceRelationshipsRequest
+
+    GetNetworkResourceRelationshipsResponse.add_member(:relationships, Shapes::ShapeRef.new(shape: RelationshipList, location_name: "Relationships"))
+    GetNetworkResourceRelationshipsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetNetworkResourceRelationshipsResponse.struct_class = Types::GetNetworkResourceRelationshipsResponse
+
+    GetNetworkResourcesRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    GetNetworkResourcesRequest.add_member(:registered_gateway_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "registeredGatewayArn"))
+    GetNetworkResourcesRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "awsRegion"))
+    GetNetworkResourcesRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "accountId"))
+    GetNetworkResourcesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "resourceType"))
+    GetNetworkResourcesRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "resourceArn"))
+    GetNetworkResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetNetworkResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    GetNetworkResourcesRequest.struct_class = Types::GetNetworkResourcesRequest
+
+    GetNetworkResourcesResponse.add_member(:network_resources, Shapes::ShapeRef.new(shape: NetworkResourceList, location_name: "NetworkResources"))
+    GetNetworkResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetNetworkResourcesResponse.struct_class = Types::GetNetworkResourcesResponse
+
+    GetNetworkRoutesRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    GetNetworkRoutesRequest.add_member(:route_table_identifier, Shapes::ShapeRef.new(shape: RouteTableIdentifier, required: true, location_name: "RouteTableIdentifier"))
+    GetNetworkRoutesRequest.add_member(:exact_cidr_matches, Shapes::ShapeRef.new(shape: StringList, location_name: "ExactCidrMatches"))
+    GetNetworkRoutesRequest.add_member(:longest_prefix_matches, Shapes::ShapeRef.new(shape: StringList, location_name: "LongestPrefixMatches"))
+    GetNetworkRoutesRequest.add_member(:subnet_of_matches, Shapes::ShapeRef.new(shape: StringList, location_name: "SubnetOfMatches"))
+    GetNetworkRoutesRequest.add_member(:supernet_of_matches, Shapes::ShapeRef.new(shape: StringList, location_name: "SupernetOfMatches"))
+    GetNetworkRoutesRequest.add_member(:prefix_list_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "PrefixListIds"))
+    GetNetworkRoutesRequest.add_member(:states, Shapes::ShapeRef.new(shape: RouteStateList, location_name: "States"))
+    GetNetworkRoutesRequest.add_member(:types, Shapes::ShapeRef.new(shape: RouteTypeList, location_name: "Types"))
+    GetNetworkRoutesRequest.add_member(:destination_filters, Shapes::ShapeRef.new(shape: FilterMap, location_name: "DestinationFilters"))
+    GetNetworkRoutesRequest.struct_class = Types::GetNetworkRoutesRequest
+
+    GetNetworkRoutesResponse.add_member(:route_table_arn, Shapes::ShapeRef.new(shape: String, location_name: "RouteTableArn"))
+    GetNetworkRoutesResponse.add_member(:route_table_type, Shapes::ShapeRef.new(shape: RouteTableType, location_name: "RouteTableType"))
+    GetNetworkRoutesResponse.add_member(:route_table_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "RouteTableTimestamp"))
+    GetNetworkRoutesResponse.add_member(:network_routes, Shapes::ShapeRef.new(shape: NetworkRouteList, location_name: "NetworkRoutes"))
+    GetNetworkRoutesResponse.struct_class = Types::GetNetworkRoutesResponse
+
+    GetNetworkTelemetryRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    GetNetworkTelemetryRequest.add_member(:registered_gateway_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "registeredGatewayArn"))
+    GetNetworkTelemetryRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "awsRegion"))
+    GetNetworkTelemetryRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "accountId"))
+    GetNetworkTelemetryRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "resourceType"))
+    GetNetworkTelemetryRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "resourceArn"))
+    GetNetworkTelemetryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    GetNetworkTelemetryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    GetNetworkTelemetryRequest.struct_class = Types::GetNetworkTelemetryRequest
+
+    GetNetworkTelemetryResponse.add_member(:network_telemetry, Shapes::ShapeRef.new(shape: NetworkTelemetryList, location_name: "NetworkTelemetry"))
+    GetNetworkTelemetryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetNetworkTelemetryResponse.struct_class = Types::GetNetworkTelemetryResponse
+
+    GetRouteAnalysisRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    GetRouteAnalysisRequest.add_member(:route_analysis_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "routeAnalysisId"))
+    GetRouteAnalysisRequest.struct_class = Types::GetRouteAnalysisRequest
+
+    GetRouteAnalysisResponse.add_member(:route_analysis, Shapes::ShapeRef.new(shape: RouteAnalysis, location_name: "RouteAnalysis"))
+    GetRouteAnalysisResponse.struct_class = Types::GetRouteAnalysisResponse
 
     GetSitesRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
     GetSitesRequest.add_member(:site_ids, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "siteIds"))
@@ -482,6 +634,75 @@ module Aws::NetworkManager
     Location.add_member(:longitude, Shapes::ShapeRef.new(shape: String, location_name: "Longitude"))
     Location.struct_class = Types::Location
 
+    NetworkResource.add_member(:registered_gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "RegisteredGatewayArn"))
+    NetworkResource.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location_name: "AwsRegion"))
+    NetworkResource.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "AccountId"))
+    NetworkResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    NetworkResource.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
+    NetworkResource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    NetworkResource.add_member(:definition, Shapes::ShapeRef.new(shape: String, location_name: "Definition"))
+    NetworkResource.add_member(:definition_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "DefinitionTimestamp"))
+    NetworkResource.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    NetworkResource.add_member(:metadata, Shapes::ShapeRef.new(shape: NetworkResourceMetadataMap, location_name: "Metadata"))
+    NetworkResource.struct_class = Types::NetworkResource
+
+    NetworkResourceCount.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    NetworkResourceCount.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "Count"))
+    NetworkResourceCount.struct_class = Types::NetworkResourceCount
+
+    NetworkResourceCountList.member = Shapes::ShapeRef.new(shape: NetworkResourceCount)
+
+    NetworkResourceList.member = Shapes::ShapeRef.new(shape: NetworkResource)
+
+    NetworkResourceMetadataMap.key = Shapes::ShapeRef.new(shape: NetworkResourceMetadataKey)
+    NetworkResourceMetadataMap.value = Shapes::ShapeRef.new(shape: NetworkResourceMetadataValue)
+
+    NetworkResourceSummary.add_member(:registered_gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "RegisteredGatewayArn"))
+    NetworkResourceSummary.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    NetworkResourceSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    NetworkResourceSummary.add_member(:definition, Shapes::ShapeRef.new(shape: String, location_name: "Definition"))
+    NetworkResourceSummary.add_member(:name_tag, Shapes::ShapeRef.new(shape: String, location_name: "NameTag"))
+    NetworkResourceSummary.add_member(:is_middlebox, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsMiddlebox"))
+    NetworkResourceSummary.struct_class = Types::NetworkResourceSummary
+
+    NetworkRoute.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "DestinationCidrBlock"))
+    NetworkRoute.add_member(:destinations, Shapes::ShapeRef.new(shape: NetworkRouteDestinationList, location_name: "Destinations"))
+    NetworkRoute.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: String, location_name: "PrefixListId"))
+    NetworkRoute.add_member(:state, Shapes::ShapeRef.new(shape: RouteState, location_name: "State"))
+    NetworkRoute.add_member(:type, Shapes::ShapeRef.new(shape: RouteType, location_name: "Type"))
+    NetworkRoute.struct_class = Types::NetworkRoute
+
+    NetworkRouteDestination.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "TransitGatewayAttachmentId"))
+    NetworkRouteDestination.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    NetworkRouteDestination.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
+    NetworkRouteDestination.struct_class = Types::NetworkRouteDestination
+
+    NetworkRouteDestinationList.member = Shapes::ShapeRef.new(shape: NetworkRouteDestination)
+
+    NetworkRouteList.member = Shapes::ShapeRef.new(shape: NetworkRoute)
+
+    NetworkTelemetry.add_member(:registered_gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "RegisteredGatewayArn"))
+    NetworkTelemetry.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location_name: "AwsRegion"))
+    NetworkTelemetry.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "AccountId"))
+    NetworkTelemetry.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    NetworkTelemetry.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
+    NetworkTelemetry.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    NetworkTelemetry.add_member(:address, Shapes::ShapeRef.new(shape: String, location_name: "Address"))
+    NetworkTelemetry.add_member(:health, Shapes::ShapeRef.new(shape: ConnectionHealth, location_name: "Health"))
+    NetworkTelemetry.struct_class = Types::NetworkTelemetry
+
+    NetworkTelemetryList.member = Shapes::ShapeRef.new(shape: NetworkTelemetry)
+
+    PathComponent.add_member(:sequence, Shapes::ShapeRef.new(shape: Integer, location_name: "Sequence"))
+    PathComponent.add_member(:resource, Shapes::ShapeRef.new(shape: NetworkResourceSummary, location_name: "Resource"))
+    PathComponent.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "DestinationCidrBlock"))
+    PathComponent.struct_class = Types::PathComponent
+
+    PathComponentList.member = Shapes::ShapeRef.new(shape: PathComponent)
+
+    ReasonContextMap.key = Shapes::ShapeRef.new(shape: ReasonContextKey)
+    ReasonContextMap.value = Shapes::ShapeRef.new(shape: ReasonContextValue)
+
     RegisterTransitGatewayRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
     RegisterTransitGatewayRequest.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TransitGatewayArn"))
     RegisterTransitGatewayRequest.struct_class = Types::RegisterTransitGatewayRequest
@@ -489,10 +710,55 @@ module Aws::NetworkManager
     RegisterTransitGatewayResponse.add_member(:transit_gateway_registration, Shapes::ShapeRef.new(shape: TransitGatewayRegistration, location_name: "TransitGatewayRegistration"))
     RegisterTransitGatewayResponse.struct_class = Types::RegisterTransitGatewayResponse
 
+    Relationship.add_member(:from, Shapes::ShapeRef.new(shape: String, location_name: "From"))
+    Relationship.add_member(:to, Shapes::ShapeRef.new(shape: String, location_name: "To"))
+    Relationship.struct_class = Types::Relationship
+
+    RelationshipList.member = Shapes::ShapeRef.new(shape: Relationship)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
+    ResourceNotFoundException.add_member(:context, Shapes::ShapeRef.new(shape: ExceptionContextMap, location_name: "Context"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RouteAnalysis.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalNetworkId"))
+    RouteAnalysis.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: String, location_name: "OwnerAccountId"))
+    RouteAnalysis.add_member(:route_analysis_id, Shapes::ShapeRef.new(shape: String, location_name: "RouteAnalysisId"))
+    RouteAnalysis.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTimestamp"))
+    RouteAnalysis.add_member(:status, Shapes::ShapeRef.new(shape: RouteAnalysisStatus, location_name: "Status"))
+    RouteAnalysis.add_member(:source, Shapes::ShapeRef.new(shape: RouteAnalysisEndpointOptions, location_name: "Source"))
+    RouteAnalysis.add_member(:destination, Shapes::ShapeRef.new(shape: RouteAnalysisEndpointOptions, location_name: "Destination"))
+    RouteAnalysis.add_member(:include_return_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeReturnPath"))
+    RouteAnalysis.add_member(:use_middleboxes, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseMiddleboxes"))
+    RouteAnalysis.add_member(:forward_path, Shapes::ShapeRef.new(shape: RouteAnalysisPath, location_name: "ForwardPath"))
+    RouteAnalysis.add_member(:return_path, Shapes::ShapeRef.new(shape: RouteAnalysisPath, location_name: "ReturnPath"))
+    RouteAnalysis.struct_class = Types::RouteAnalysis
+
+    RouteAnalysisCompletion.add_member(:result_code, Shapes::ShapeRef.new(shape: RouteAnalysisCompletionResultCode, location_name: "ResultCode"))
+    RouteAnalysisCompletion.add_member(:reason_code, Shapes::ShapeRef.new(shape: RouteAnalysisCompletionReasonCode, location_name: "ReasonCode"))
+    RouteAnalysisCompletion.add_member(:reason_context, Shapes::ShapeRef.new(shape: ReasonContextMap, location_name: "ReasonContext"))
+    RouteAnalysisCompletion.struct_class = Types::RouteAnalysisCompletion
+
+    RouteAnalysisEndpointOptions.add_member(:transit_gateway_attachment_arn, Shapes::ShapeRef.new(shape: String, location_name: "TransitGatewayAttachmentArn"))
+    RouteAnalysisEndpointOptions.add_member(:transit_gateway_arn, Shapes::ShapeRef.new(shape: String, location_name: "TransitGatewayArn"))
+    RouteAnalysisEndpointOptions.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, location_name: "IpAddress"))
+    RouteAnalysisEndpointOptions.struct_class = Types::RouteAnalysisEndpointOptions
+
+    RouteAnalysisEndpointOptionsSpecification.add_member(:transit_gateway_attachment_arn, Shapes::ShapeRef.new(shape: String, location_name: "TransitGatewayAttachmentArn"))
+    RouteAnalysisEndpointOptionsSpecification.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, location_name: "IpAddress"))
+    RouteAnalysisEndpointOptionsSpecification.struct_class = Types::RouteAnalysisEndpointOptionsSpecification
+
+    RouteAnalysisPath.add_member(:completion_status, Shapes::ShapeRef.new(shape: RouteAnalysisCompletion, location_name: "CompletionStatus"))
+    RouteAnalysisPath.add_member(:path, Shapes::ShapeRef.new(shape: PathComponentList, location_name: "Path"))
+    RouteAnalysisPath.struct_class = Types::RouteAnalysisPath
+
+    RouteStateList.member = Shapes::ShapeRef.new(shape: RouteState)
+
+    RouteTableIdentifier.add_member(:transit_gateway_route_table_arn, Shapes::ShapeRef.new(shape: String, location_name: "TransitGatewayRouteTableArn"))
+    RouteTableIdentifier.struct_class = Types::RouteTableIdentifier
+
+    RouteTypeList.member = Shapes::ShapeRef.new(shape: RouteType)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
@@ -512,6 +778,16 @@ module Aws::NetworkManager
     Site.struct_class = Types::Site
 
     SiteList.member = Shapes::ShapeRef.new(shape: Site)
+
+    StartRouteAnalysisRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    StartRouteAnalysisRequest.add_member(:source, Shapes::ShapeRef.new(shape: RouteAnalysisEndpointOptionsSpecification, required: true, location_name: "Source"))
+    StartRouteAnalysisRequest.add_member(:destination, Shapes::ShapeRef.new(shape: RouteAnalysisEndpointOptionsSpecification, required: true, location_name: "Destination"))
+    StartRouteAnalysisRequest.add_member(:include_return_path, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeReturnPath"))
+    StartRouteAnalysisRequest.add_member(:use_middleboxes, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseMiddleboxes"))
+    StartRouteAnalysisRequest.struct_class = Types::StartRouteAnalysisRequest
+
+    StartRouteAnalysisResponse.add_member(:route_analysis, Shapes::ShapeRef.new(shape: RouteAnalysis, location_name: "RouteAnalysis"))
+    StartRouteAnalysisResponse.struct_class = Types::StartRouteAnalysisResponse
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -601,6 +877,15 @@ module Aws::NetworkManager
 
     UpdateLinkResponse.add_member(:link, Shapes::ShapeRef.new(shape: Link, location_name: "Link"))
     UpdateLinkResponse.struct_class = Types::UpdateLinkResponse
+
+    UpdateNetworkResourceMetadataRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
+    UpdateNetworkResourceMetadataRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    UpdateNetworkResourceMetadataRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: NetworkResourceMetadataMap, required: true, location_name: "Metadata"))
+    UpdateNetworkResourceMetadataRequest.struct_class = Types::UpdateNetworkResourceMetadataRequest
+
+    UpdateNetworkResourceMetadataResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    UpdateNetworkResourceMetadataResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: NetworkResourceMetadataMap, location_name: "Metadata"))
+    UpdateNetworkResourceMetadataResponse.struct_class = Types::UpdateNetworkResourceMetadataResponse
 
     UpdateSiteRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "globalNetworkId"))
     UpdateSiteRequest.add_member(:site_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "siteId"))
@@ -1000,6 +1285,107 @@ module Aws::NetworkManager
         )
       end)
 
+      api.add_operation(:get_network_resource_counts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNetworkResourceCounts"
+        o.http_method = "GET"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/network-resource-count"
+        o.input = Shapes::ShapeRef.new(shape: GetNetworkResourceCountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetNetworkResourceCountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_network_resource_relationships, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNetworkResourceRelationships"
+        o.http_method = "GET"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/network-resource-relationships"
+        o.input = Shapes::ShapeRef.new(shape: GetNetworkResourceRelationshipsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetNetworkResourceRelationshipsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_network_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNetworkResources"
+        o.http_method = "GET"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/network-resources"
+        o.input = Shapes::ShapeRef.new(shape: GetNetworkResourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetNetworkResourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_network_routes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNetworkRoutes"
+        o.http_method = "POST"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/network-routes"
+        o.input = Shapes::ShapeRef.new(shape: GetNetworkRoutesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetNetworkRoutesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_network_telemetry, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNetworkTelemetry"
+        o.http_method = "GET"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/network-telemetry"
+        o.input = Shapes::ShapeRef.new(shape: GetNetworkTelemetryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetNetworkTelemetryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_route_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRouteAnalysis"
+        o.http_method = "GET"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/route-analyses/{routeAnalysisId}"
+        o.input = Shapes::ShapeRef.new(shape: GetRouteAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRouteAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_sites, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSites"
         o.http_method = "GET"
@@ -1077,6 +1463,20 @@ module Aws::NetworkManager
         o.http_request_uri = "/global-networks/{globalNetworkId}/transit-gateway-registrations"
         o.input = Shapes::ShapeRef.new(shape: RegisterTransitGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterTransitGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_route_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartRouteAnalysis"
+        o.http_method = "POST"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/route-analyses"
+        o.input = Shapes::ShapeRef.new(shape: StartRouteAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartRouteAnalysisResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1164,6 +1564,20 @@ module Aws::NetworkManager
         o.output = Shapes::ShapeRef.new(shape: UpdateLinkResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_network_resource_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNetworkResourceMetadata"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/global-networks/{globalNetworkId}/network-resources/{resourceArn}/metadata"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNetworkResourceMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNetworkResourceMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

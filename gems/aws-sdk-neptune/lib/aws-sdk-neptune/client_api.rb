@@ -1201,6 +1201,8 @@ module Aws::Neptune
     ModifyDBClusterMessage.add_member(:enable_iam_database_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableIAMDatabaseAuthentication"))
     ModifyDBClusterMessage.add_member(:cloudwatch_logs_export_configuration, Shapes::ShapeRef.new(shape: CloudwatchLogsExportConfiguration, location_name: "CloudwatchLogsExportConfiguration"))
     ModifyDBClusterMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
+    ModifyDBClusterMessage.add_member(:allow_major_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowMajorVersionUpgrade"))
+    ModifyDBClusterMessage.add_member(:db_instance_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceParameterGroupName"))
     ModifyDBClusterMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     ModifyDBClusterMessage.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
     ModifyDBClusterMessage.struct_class = Types::ModifyDBClusterMessage
