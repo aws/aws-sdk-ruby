@@ -96,26 +96,15 @@ module Aws
           expect(client.config.endpoint.to_s)
             .to eq("https://#{prefix}.REGION.amazonaws.com")
         end
-
-        context 'legacy fips pseudo-region' do
-          let(:region) { 'fips-us-west-1' }
-
-          it 'strips the fips and sets use_fips_endpoint and warns' do
-            expect(RegionalEndpoint).to receive(:warn)
-
-            config = client_class.new(region: region).config
-
-            expect(config.region).to eq('us-west-1')
-            expect(config.use_fips_endpoint).to be(true)
-          end
-        end
       end
 
       describe 'fips shim' do
         it 'does not modify us-west-2 with use_fips_endpoint' do
           expect(RegionalEndpoint).not_to receive(:warn)
 
-          config = client_class.new(region: 'us-west-1', use_fips_endpoint: true).config
+          config = client_class.new(
+            region: 'us-west-1', use_fips_endpoint: true
+          ).config
 
           expect(config.region).to eq('us-west-1')
           expect(config.use_fips_endpoint).to be(true)
@@ -124,7 +113,9 @@ module Aws
         it 'does not modify us-west-2 with use_fips_endpoint: false' do
           expect(RegionalEndpoint).not_to receive(:warn)
 
-          config = client_class.new(region: 'us-west-1', use_fips_endpoint: false).config
+          config = client_class.new(
+            region: 'us-west-1', use_fips_endpoint: false
+          ).config
 
           expect(config.region).to eq('us-west-1')
           expect(config.use_fips_endpoint).to be(false)
@@ -133,7 +124,9 @@ module Aws
         it 'modifies fips-us-west-2 with use_fips_endpoint' do
           expect(RegionalEndpoint).to receive(:warn)
 
-          config = client_class.new(region: 'fips-us-west-1', use_fips_endpoint: true).config
+          config = client_class.new(
+            region: 'fips-us-west-1', use_fips_endpoint: true
+          ).config
 
           expect(config.region).to eq('us-west-1')
           expect(config.use_fips_endpoint).to be(true)
@@ -142,16 +135,42 @@ module Aws
         it 'modifies fips-us-west-2 with use_fips_endpoint: false' do
           expect(RegionalEndpoint).to receive(:warn)
 
-          config = client_class.new(region: 'fips-us-west-1', use_fips_endpoint: false).config
+          config = client_class.new(
+            region: 'fips-us-west-1', use_fips_endpoint: false
+          ).config
 
           expect(config.region).to eq('us-west-1')
+          expect(config.use_fips_endpoint).to be(true)
+        end
+
+        it 'modifies rekognition-fips.us-west-2 with use_fips_endpoint' do
+          expect(RegionalEndpoint).to receive(:warn)
+
+          config = client_class.new(
+            region: 'rekognition-fips.us-west-2', use_fips_endpoint: true
+          ).config
+
+          expect(config.region).to eq('rekognition.us-west-2')
+          expect(config.use_fips_endpoint).to be(true)
+        end
+
+        it 'modifies rekognition-fips.us-west-2 with use_fips_endpoint: false' do
+          expect(RegionalEndpoint).to receive(:warn)
+
+          config = client_class.new(
+            region: 'rekognition-fips.us-west-2', use_fips_endpoint: false
+          ).config
+
+          expect(config.region).to eq('rekognition.us-west-2')
           expect(config.use_fips_endpoint).to be(true)
         end
 
         it 'modifies query-fips-us-west-2 with use_fips_endpoint' do
           expect(RegionalEndpoint).to receive(:warn)
 
-          config = client_class.new(region: 'query-fips-us-west-2', use_fips_endpoint: true).config
+          config = client_class.new(
+            region: 'query-fips-us-west-2', use_fips_endpoint: true
+          ).config
 
           expect(config.region).to eq('query-us-west-2')
           expect(config.use_fips_endpoint).to be(true)
@@ -160,7 +179,9 @@ module Aws
         it 'modifies query-fips-us-west-2 with use_fips_endpoint: false' do
           expect(RegionalEndpoint).to receive(:warn)
 
-          config = client_class.new(region: 'query-fips-us-west-2', use_fips_endpoint: false).config
+          config = client_class.new(
+            region: 'query-fips-us-west-2', use_fips_endpoint: false
+          ).config
 
           expect(config.region).to eq('query-us-west-2')
           expect(config.use_fips_endpoint).to be(true)

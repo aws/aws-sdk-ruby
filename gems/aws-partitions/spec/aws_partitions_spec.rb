@@ -204,21 +204,25 @@ module Aws
       it '#fips_regions returns a list of fips compatible regions' do
         fips_regions = partitions.partition('aws').service('S3').fips_regions
         expect(fips_regions).to include(
-                                  'us-east-1',
-                                  'us-east-2',
-                                  'us-west-1',
-                                  'us-west-2'
-                                )
+          'us-east-1',
+          'us-east-2',
+          'us-west-1',
+          'us-west-2',
+          'ca-central-1'
+        )
       end
 
       it '#dualstack_regions returns a list of dualstack compatible regions' do
-        dualstack_regions = partitions.partition('aws').service('S3').dualstack_regions
+        dualstack_regions = partitions.partition('aws').service('S3')
+                                      .dualstack_regions
         expect(dualstack_regions).to include(
-                                  'us-east-1',
-                                  'us-east-2',
-                                  'us-west-1',
-                                  'us-west-2'
-                                )      end
+          'us-east-1',
+          'us-east-2',
+          'us-west-1',
+          'us-west-2',
+          'ca-central-1'
+        )
+      end
     end
 
     describe 'symmetry' do
