@@ -143,28 +143,6 @@ module Aws
           expect(config.use_fips_endpoint).to be(true)
         end
 
-        it 'modifies rekognition-fips.us-west-2 with use_fips_endpoint' do
-          expect(RegionalEndpoint).to receive(:warn)
-
-          config = client_class.new(
-            region: 'rekognition-fips.us-west-2', use_fips_endpoint: true
-          ).config
-
-          expect(config.region).to eq('rekognition.us-west-2')
-          expect(config.use_fips_endpoint).to be(true)
-        end
-
-        it 'modifies rekognition-fips.us-west-2 with use_fips_endpoint: false' do
-          expect(RegionalEndpoint).to receive(:warn)
-
-          config = client_class.new(
-            region: 'rekognition-fips.us-west-2', use_fips_endpoint: false
-          ).config
-
-          expect(config.region).to eq('rekognition.us-west-2')
-          expect(config.use_fips_endpoint).to be(true)
-        end
-
         it 'modifies query-fips-us-west-2 with use_fips_endpoint' do
           expect(RegionalEndpoint).to receive(:warn)
 
