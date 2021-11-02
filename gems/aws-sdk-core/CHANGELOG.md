@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Improve `SSOCredentials` error handling when profile file does not exist (#2605)
+
 3.121.5 (2021-10-29)
 ------------------
 
