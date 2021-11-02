@@ -103,9 +103,12 @@ module Aws
           region = service_cfg.fetch('partitionEndpoint', region)
         end
 
+        region_cfg = endpoints_cfg.fetch(region, {})
+        warn_deprecation(service, region) if region_cfg['deprecated']
+
         partition_defaults = fetch_variant(partition_cfg.fetch('defaults', {}), tags)
         service_defaults = fetch_variant(service_cfg.fetch('defaults', {}), tags)
-        endpoint_cfg = fetch_variant(endpoints_cfg.fetch(region, {}), tags)
+        endpoint_cfg = fetch_variant(region_cfg, tags)
 
         # merge upwards, preferring values from endpoint > service > partition
         partition_defaults.merge(service_defaults.merge(endpoint_cfg))
@@ -157,14 +160,17 @@ module Aws
         endpoint = region_cfg
                    .fetch('hostname', default_endpoint)
 
-        if region_cfg['deprecated']
-          warn("The endpoint for #{region}/#{service} is deprecated.")
-        end
+        warn_deprecation(service, region) if region_cfg['deprecated']
 
         # Replace placeholders from the endpoints
         endpoint.sub('{region}', region)
                 .sub('{service}', service)
                 .sub('{dnsSuffix}', partition['dnsSuffix'])
+      end
+
+      def warn_deprecation(service, region)
+        warn("The endpoint for service: #{service}, region: #{region}"\
+             ' is deprecated.')
       end
 
       # returns a callable that takes a region
