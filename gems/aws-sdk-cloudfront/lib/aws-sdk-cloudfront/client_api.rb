@@ -13,6 +13,10 @@ module Aws::CloudFront
 
     include Seahorse::Model
 
+    AccessControlAllowHeadersList = Shapes::ListShape.new(name: 'AccessControlAllowHeadersList')
+    AccessControlAllowMethodsList = Shapes::ListShape.new(name: 'AccessControlAllowMethodsList')
+    AccessControlAllowOriginsList = Shapes::ListShape.new(name: 'AccessControlAllowOriginsList')
+    AccessControlExposeHeadersList = Shapes::ListShape.new(name: 'AccessControlExposeHeadersList')
     AccessDenied = Shapes::StructureShape.new(name: 'AccessDenied')
     ActiveTrustedKeyGroups = Shapes::StructureShape.new(name: 'ActiveTrustedKeyGroups')
     ActiveTrustedSigners = Shapes::StructureShape.new(name: 'ActiveTrustedSigners')
@@ -89,6 +93,8 @@ module Aws::CloudFront
     CreatePublicKeyResult = Shapes::StructureShape.new(name: 'CreatePublicKeyResult')
     CreateRealtimeLogConfigRequest = Shapes::StructureShape.new(name: 'CreateRealtimeLogConfigRequest')
     CreateRealtimeLogConfigResult = Shapes::StructureShape.new(name: 'CreateRealtimeLogConfigResult')
+    CreateResponseHeadersPolicyRequest = Shapes::StructureShape.new(name: 'CreateResponseHeadersPolicyRequest')
+    CreateResponseHeadersPolicyResult = Shapes::StructureShape.new(name: 'CreateResponseHeadersPolicyResult')
     CreateStreamingDistributionRequest = Shapes::StructureShape.new(name: 'CreateStreamingDistributionRequest')
     CreateStreamingDistributionResult = Shapes::StructureShape.new(name: 'CreateStreamingDistributionResult')
     CreateStreamingDistributionWithTagsRequest = Shapes::StructureShape.new(name: 'CreateStreamingDistributionWithTagsRequest')
@@ -111,6 +117,7 @@ module Aws::CloudFront
     DeleteOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'DeleteOriginRequestPolicyRequest')
     DeletePublicKeyRequest = Shapes::StructureShape.new(name: 'DeletePublicKeyRequest')
     DeleteRealtimeLogConfigRequest = Shapes::StructureShape.new(name: 'DeleteRealtimeLogConfigRequest')
+    DeleteResponseHeadersPolicyRequest = Shapes::StructureShape.new(name: 'DeleteResponseHeadersPolicyRequest')
     DeleteStreamingDistributionRequest = Shapes::StructureShape.new(name: 'DeleteStreamingDistributionRequest')
     DescribeFunctionRequest = Shapes::StructureShape.new(name: 'DescribeFunctionRequest')
     DescribeFunctionResult = Shapes::StructureShape.new(name: 'DescribeFunctionResult')
@@ -150,6 +157,7 @@ module Aws::CloudFront
     FieldPatterns = Shapes::StructureShape.new(name: 'FieldPatterns')
     Format = Shapes::StringShape.new(name: 'Format')
     ForwardedValues = Shapes::StructureShape.new(name: 'ForwardedValues')
+    FrameOptionsList = Shapes::StringShape.new(name: 'FrameOptionsList')
     FunctionARN = Shapes::StringShape.new(name: 'FunctionARN')
     FunctionAlreadyExists = Shapes::StructureShape.new(name: 'FunctionAlreadyExists')
     FunctionAssociation = Shapes::StructureShape.new(name: 'FunctionAssociation')
@@ -210,6 +218,10 @@ module Aws::CloudFront
     GetPublicKeyResult = Shapes::StructureShape.new(name: 'GetPublicKeyResult')
     GetRealtimeLogConfigRequest = Shapes::StructureShape.new(name: 'GetRealtimeLogConfigRequest')
     GetRealtimeLogConfigResult = Shapes::StructureShape.new(name: 'GetRealtimeLogConfigResult')
+    GetResponseHeadersPolicyConfigRequest = Shapes::StructureShape.new(name: 'GetResponseHeadersPolicyConfigRequest')
+    GetResponseHeadersPolicyConfigResult = Shapes::StructureShape.new(name: 'GetResponseHeadersPolicyConfigResult')
+    GetResponseHeadersPolicyRequest = Shapes::StructureShape.new(name: 'GetResponseHeadersPolicyRequest')
+    GetResponseHeadersPolicyResult = Shapes::StructureShape.new(name: 'GetResponseHeadersPolicyResult')
     GetStreamingDistributionConfigRequest = Shapes::StructureShape.new(name: 'GetStreamingDistributionConfigRequest')
     GetStreamingDistributionConfigResult = Shapes::StructureShape.new(name: 'GetStreamingDistributionConfigResult')
     GetStreamingDistributionRequest = Shapes::StructureShape.new(name: 'GetStreamingDistributionRequest')
@@ -281,6 +293,8 @@ module Aws::CloudFront
     ListDistributionsByOriginRequestPolicyIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByOriginRequestPolicyIdResult')
     ListDistributionsByRealtimeLogConfigRequest = Shapes::StructureShape.new(name: 'ListDistributionsByRealtimeLogConfigRequest')
     ListDistributionsByRealtimeLogConfigResult = Shapes::StructureShape.new(name: 'ListDistributionsByRealtimeLogConfigResult')
+    ListDistributionsByResponseHeadersPolicyIdRequest = Shapes::StructureShape.new(name: 'ListDistributionsByResponseHeadersPolicyIdRequest')
+    ListDistributionsByResponseHeadersPolicyIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByResponseHeadersPolicyIdResult')
     ListDistributionsByWebACLIdRequest = Shapes::StructureShape.new(name: 'ListDistributionsByWebACLIdRequest')
     ListDistributionsByWebACLIdResult = Shapes::StructureShape.new(name: 'ListDistributionsByWebACLIdResult')
     ListDistributionsRequest = Shapes::StructureShape.new(name: 'ListDistributionsRequest')
@@ -301,6 +315,8 @@ module Aws::CloudFront
     ListPublicKeysResult = Shapes::StructureShape.new(name: 'ListPublicKeysResult')
     ListRealtimeLogConfigsRequest = Shapes::StructureShape.new(name: 'ListRealtimeLogConfigsRequest')
     ListRealtimeLogConfigsResult = Shapes::StructureShape.new(name: 'ListRealtimeLogConfigsResult')
+    ListResponseHeadersPoliciesRequest = Shapes::StructureShape.new(name: 'ListResponseHeadersPoliciesRequest')
+    ListResponseHeadersPoliciesResult = Shapes::StructureShape.new(name: 'ListResponseHeadersPoliciesResult')
     ListStreamingDistributionsRequest = Shapes::StructureShape.new(name: 'ListStreamingDistributionsRequest')
     ListStreamingDistributionsResult = Shapes::StructureShape.new(name: 'ListStreamingDistributionsResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -324,6 +340,7 @@ module Aws::CloudFront
     NoSuchPublicKey = Shapes::StructureShape.new(name: 'NoSuchPublicKey')
     NoSuchRealtimeLogConfig = Shapes::StructureShape.new(name: 'NoSuchRealtimeLogConfig')
     NoSuchResource = Shapes::StructureShape.new(name: 'NoSuchResource')
+    NoSuchResponseHeadersPolicy = Shapes::StructureShape.new(name: 'NoSuchResponseHeadersPolicy')
     NoSuchStreamingDistribution = Shapes::StructureShape.new(name: 'NoSuchStreamingDistribution')
     Origin = Shapes::StructureShape.new(name: 'Origin')
     OriginCustomHeader = Shapes::StructureShape.new(name: 'OriginCustomHeader')
@@ -387,8 +404,33 @@ module Aws::CloudFront
     RealtimeLogConfigs = Shapes::StructureShape.new(name: 'RealtimeLogConfigs')
     RealtimeMetricsSubscriptionConfig = Shapes::StructureShape.new(name: 'RealtimeMetricsSubscriptionConfig')
     RealtimeMetricsSubscriptionStatus = Shapes::StringShape.new(name: 'RealtimeMetricsSubscriptionStatus')
+    ReferrerPolicyList = Shapes::StringShape.new(name: 'ReferrerPolicyList')
     ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceInUse = Shapes::StructureShape.new(name: 'ResourceInUse')
+    ResponseHeadersPolicy = Shapes::StructureShape.new(name: 'ResponseHeadersPolicy')
+    ResponseHeadersPolicyAccessControlAllowHeaders = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyAccessControlAllowHeaders')
+    ResponseHeadersPolicyAccessControlAllowMethods = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyAccessControlAllowMethods')
+    ResponseHeadersPolicyAccessControlAllowMethodsValues = Shapes::StringShape.new(name: 'ResponseHeadersPolicyAccessControlAllowMethodsValues')
+    ResponseHeadersPolicyAccessControlAllowOrigins = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyAccessControlAllowOrigins')
+    ResponseHeadersPolicyAccessControlExposeHeaders = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyAccessControlExposeHeaders')
+    ResponseHeadersPolicyAlreadyExists = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyAlreadyExists')
+    ResponseHeadersPolicyConfig = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyConfig')
+    ResponseHeadersPolicyContentSecurityPolicy = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyContentSecurityPolicy')
+    ResponseHeadersPolicyContentTypeOptions = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyContentTypeOptions')
+    ResponseHeadersPolicyCorsConfig = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyCorsConfig')
+    ResponseHeadersPolicyCustomHeader = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyCustomHeader')
+    ResponseHeadersPolicyCustomHeaderList = Shapes::ListShape.new(name: 'ResponseHeadersPolicyCustomHeaderList')
+    ResponseHeadersPolicyCustomHeadersConfig = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyCustomHeadersConfig')
+    ResponseHeadersPolicyFrameOptions = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyFrameOptions')
+    ResponseHeadersPolicyInUse = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyInUse')
+    ResponseHeadersPolicyList = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyList')
+    ResponseHeadersPolicyReferrerPolicy = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyReferrerPolicy')
+    ResponseHeadersPolicySecurityHeadersConfig = Shapes::StructureShape.new(name: 'ResponseHeadersPolicySecurityHeadersConfig')
+    ResponseHeadersPolicyStrictTransportSecurity = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyStrictTransportSecurity')
+    ResponseHeadersPolicySummary = Shapes::StructureShape.new(name: 'ResponseHeadersPolicySummary')
+    ResponseHeadersPolicySummaryList = Shapes::ListShape.new(name: 'ResponseHeadersPolicySummaryList')
+    ResponseHeadersPolicyType = Shapes::StringShape.new(name: 'ResponseHeadersPolicyType')
+    ResponseHeadersPolicyXSSProtection = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyXSSProtection')
     Restrictions = Shapes::StructureShape.new(name: 'Restrictions')
     S3Origin = Shapes::StructureShape.new(name: 'S3Origin')
     S3OriginConfig = Shapes::StructureShape.new(name: 'S3OriginConfig')
@@ -427,12 +469,14 @@ module Aws::CloudFront
     TooManyCookieNamesInWhiteList = Shapes::StructureShape.new(name: 'TooManyCookieNamesInWhiteList')
     TooManyCookiesInCachePolicy = Shapes::StructureShape.new(name: 'TooManyCookiesInCachePolicy')
     TooManyCookiesInOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyCookiesInOriginRequestPolicy')
+    TooManyCustomHeadersInResponseHeadersPolicy = Shapes::StructureShape.new(name: 'TooManyCustomHeadersInResponseHeadersPolicy')
     TooManyDistributionCNAMEs = Shapes::StructureShape.new(name: 'TooManyDistributionCNAMEs')
     TooManyDistributions = Shapes::StructureShape.new(name: 'TooManyDistributions')
     TooManyDistributionsAssociatedToCachePolicy = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToCachePolicy')
     TooManyDistributionsAssociatedToFieldLevelEncryptionConfig = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToFieldLevelEncryptionConfig')
     TooManyDistributionsAssociatedToKeyGroup = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToKeyGroup')
     TooManyDistributionsAssociatedToOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToOriginRequestPolicy')
+    TooManyDistributionsAssociatedToResponseHeadersPolicy = Shapes::StructureShape.new(name: 'TooManyDistributionsAssociatedToResponseHeadersPolicy')
     TooManyDistributionsWithFunctionAssociations = Shapes::StructureShape.new(name: 'TooManyDistributionsWithFunctionAssociations')
     TooManyDistributionsWithLambdaAssociations = Shapes::StructureShape.new(name: 'TooManyDistributionsWithLambdaAssociations')
     TooManyDistributionsWithSingleFunctionARN = Shapes::StructureShape.new(name: 'TooManyDistributionsWithSingleFunctionARN')
@@ -461,6 +505,7 @@ module Aws::CloudFront
     TooManyQueryStringsInCachePolicy = Shapes::StructureShape.new(name: 'TooManyQueryStringsInCachePolicy')
     TooManyQueryStringsInOriginRequestPolicy = Shapes::StructureShape.new(name: 'TooManyQueryStringsInOriginRequestPolicy')
     TooManyRealtimeLogConfigs = Shapes::StructureShape.new(name: 'TooManyRealtimeLogConfigs')
+    TooManyResponseHeadersPolicies = Shapes::StructureShape.new(name: 'TooManyResponseHeadersPolicies')
     TooManyStreamingDistributionCNAMEs = Shapes::StructureShape.new(name: 'TooManyStreamingDistributionCNAMEs')
     TooManyStreamingDistributions = Shapes::StructureShape.new(name: 'TooManyStreamingDistributions')
     TooManyTrustedSigners = Shapes::StructureShape.new(name: 'TooManyTrustedSigners')
@@ -491,6 +536,8 @@ module Aws::CloudFront
     UpdatePublicKeyResult = Shapes::StructureShape.new(name: 'UpdatePublicKeyResult')
     UpdateRealtimeLogConfigRequest = Shapes::StructureShape.new(name: 'UpdateRealtimeLogConfigRequest')
     UpdateRealtimeLogConfigResult = Shapes::StructureShape.new(name: 'UpdateRealtimeLogConfigResult')
+    UpdateResponseHeadersPolicyRequest = Shapes::StructureShape.new(name: 'UpdateResponseHeadersPolicyRequest')
+    UpdateResponseHeadersPolicyResult = Shapes::StructureShape.new(name: 'UpdateResponseHeadersPolicyResult')
     UpdateStreamingDistributionRequest = Shapes::StructureShape.new(name: 'UpdateStreamingDistributionRequest')
     UpdateStreamingDistributionResult = Shapes::StructureShape.new(name: 'UpdateStreamingDistributionResult')
     ViewerCertificate = Shapes::StructureShape.new(name: 'ViewerCertificate')
@@ -501,8 +548,17 @@ module Aws::CloudFront
     integer = Shapes::IntegerShape.new(name: 'integer')
     listConflictingAliasesMaxItemsInteger = Shapes::IntegerShape.new(name: 'listConflictingAliasesMaxItemsInteger')
     long = Shapes::IntegerShape.new(name: 'long')
+    sensitiveStringType = Shapes::StringShape.new(name: 'sensitiveStringType')
     string = Shapes::StringShape.new(name: 'string')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
+
+    AccessControlAllowHeadersList.member = Shapes::ShapeRef.new(shape: string, location_name: "Header")
+
+    AccessControlAllowMethodsList.member = Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAccessControlAllowMethodsValues, location_name: "Method")
+
+    AccessControlAllowOriginsList.member = Shapes::ShapeRef.new(shape: string, location_name: "Origin")
+
+    AccessControlExposeHeadersList.member = Shapes::ShapeRef.new(shape: string, location_name: "Header")
 
     AccessDenied.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     AccessDenied.struct_class = Types::AccessDenied
@@ -560,6 +616,7 @@ module Aws::CloudFront
     CacheBehavior.add_member(:realtime_log_config_arn, Shapes::ShapeRef.new(shape: string, location_name: "RealtimeLogConfigArn"))
     CacheBehavior.add_member(:cache_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "CachePolicyId"))
     CacheBehavior.add_member(:origin_request_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "OriginRequestPolicyId"))
+    CacheBehavior.add_member(:response_headers_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "ResponseHeadersPolicyId"))
     CacheBehavior.add_member(:forwarded_values, Shapes::ShapeRef.new(shape: ForwardedValues, deprecated: true, location_name: "ForwardedValues"))
     CacheBehavior.add_member(:min_ttl, Shapes::ShapeRef.new(shape: long, deprecated: true, location_name: "MinTTL"))
     CacheBehavior.add_member(:default_ttl, Shapes::ShapeRef.new(shape: long, deprecated: true, location_name: "DefaultTTL"))
@@ -842,6 +899,18 @@ module Aws::CloudFront
     CreateRealtimeLogConfigResult.add_member(:realtime_log_config, Shapes::ShapeRef.new(shape: RealtimeLogConfig, location_name: "RealtimeLogConfig"))
     CreateRealtimeLogConfigResult.struct_class = Types::CreateRealtimeLogConfigResult
 
+    CreateResponseHeadersPolicyRequest.add_member(:response_headers_policy_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyConfig, required: true, location_name: "ResponseHeadersPolicyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
+    CreateResponseHeadersPolicyRequest.struct_class = Types::CreateResponseHeadersPolicyRequest
+    CreateResponseHeadersPolicyRequest[:payload] = :response_headers_policy_config
+    CreateResponseHeadersPolicyRequest[:payload_member] = CreateResponseHeadersPolicyRequest.member(:response_headers_policy_config)
+
+    CreateResponseHeadersPolicyResult.add_member(:response_headers_policy, Shapes::ShapeRef.new(shape: ResponseHeadersPolicy, location_name: "ResponseHeadersPolicy"))
+    CreateResponseHeadersPolicyResult.add_member(:location, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "Location"))
+    CreateResponseHeadersPolicyResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    CreateResponseHeadersPolicyResult.struct_class = Types::CreateResponseHeadersPolicyResult
+    CreateResponseHeadersPolicyResult[:payload] = :response_headers_policy
+    CreateResponseHeadersPolicyResult[:payload_member] = CreateResponseHeadersPolicyResult.member(:response_headers_policy)
+
     CreateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateStreamingDistributionRequest.struct_class = Types::CreateStreamingDistributionRequest
     CreateStreamingDistributionRequest[:payload] = :streaming_distribution_config
@@ -903,6 +972,7 @@ module Aws::CloudFront
     DefaultCacheBehavior.add_member(:realtime_log_config_arn, Shapes::ShapeRef.new(shape: string, location_name: "RealtimeLogConfigArn"))
     DefaultCacheBehavior.add_member(:cache_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "CachePolicyId"))
     DefaultCacheBehavior.add_member(:origin_request_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "OriginRequestPolicyId"))
+    DefaultCacheBehavior.add_member(:response_headers_policy_id, Shapes::ShapeRef.new(shape: string, location_name: "ResponseHeadersPolicyId"))
     DefaultCacheBehavior.add_member(:forwarded_values, Shapes::ShapeRef.new(shape: ForwardedValues, deprecated: true, location_name: "ForwardedValues"))
     DefaultCacheBehavior.add_member(:min_ttl, Shapes::ShapeRef.new(shape: long, deprecated: true, location_name: "MinTTL"))
     DefaultCacheBehavior.add_member(:default_ttl, Shapes::ShapeRef.new(shape: long, deprecated: true, location_name: "DefaultTTL"))
@@ -953,6 +1023,10 @@ module Aws::CloudFront
     DeleteRealtimeLogConfigRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "Name"))
     DeleteRealtimeLogConfigRequest.add_member(:arn, Shapes::ShapeRef.new(shape: string, location_name: "ARN"))
     DeleteRealtimeLogConfigRequest.struct_class = Types::DeleteRealtimeLogConfigRequest
+
+    DeleteResponseHeadersPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    DeleteResponseHeadersPolicyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
+    DeleteResponseHeadersPolicyRequest.struct_class = Types::DeleteResponseHeadersPolicyRequest
 
     DeleteStreamingDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     DeleteStreamingDistributionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
@@ -1378,6 +1452,24 @@ module Aws::CloudFront
     GetRealtimeLogConfigResult.add_member(:realtime_log_config, Shapes::ShapeRef.new(shape: RealtimeLogConfig, location_name: "RealtimeLogConfig"))
     GetRealtimeLogConfigResult.struct_class = Types::GetRealtimeLogConfigResult
 
+    GetResponseHeadersPolicyConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    GetResponseHeadersPolicyConfigRequest.struct_class = Types::GetResponseHeadersPolicyConfigRequest
+
+    GetResponseHeadersPolicyConfigResult.add_member(:response_headers_policy_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyConfig, location_name: "ResponseHeadersPolicyConfig"))
+    GetResponseHeadersPolicyConfigResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    GetResponseHeadersPolicyConfigResult.struct_class = Types::GetResponseHeadersPolicyConfigResult
+    GetResponseHeadersPolicyConfigResult[:payload] = :response_headers_policy_config
+    GetResponseHeadersPolicyConfigResult[:payload_member] = GetResponseHeadersPolicyConfigResult.member(:response_headers_policy_config)
+
+    GetResponseHeadersPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    GetResponseHeadersPolicyRequest.struct_class = Types::GetResponseHeadersPolicyRequest
+
+    GetResponseHeadersPolicyResult.add_member(:response_headers_policy, Shapes::ShapeRef.new(shape: ResponseHeadersPolicy, location_name: "ResponseHeadersPolicy"))
+    GetResponseHeadersPolicyResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    GetResponseHeadersPolicyResult.struct_class = Types::GetResponseHeadersPolicyResult
+    GetResponseHeadersPolicyResult[:payload] = :response_headers_policy
+    GetResponseHeadersPolicyResult[:payload_member] = GetResponseHeadersPolicyResult.member(:response_headers_policy)
+
     GetStreamingDistributionConfigRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     GetStreamingDistributionConfigRequest.struct_class = Types::GetStreamingDistributionConfigRequest
 
@@ -1633,6 +1725,16 @@ module Aws::CloudFront
     ListDistributionsByRealtimeLogConfigResult[:payload] = :distribution_list
     ListDistributionsByRealtimeLogConfigResult[:payload_member] = ListDistributionsByRealtimeLogConfigResult.member(:distribution_list)
 
+    ListDistributionsByResponseHeadersPolicyIdRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
+    ListDistributionsByResponseHeadersPolicyIdRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListDistributionsByResponseHeadersPolicyIdRequest.add_member(:response_headers_policy_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "ResponseHeadersPolicyId"))
+    ListDistributionsByResponseHeadersPolicyIdRequest.struct_class = Types::ListDistributionsByResponseHeadersPolicyIdRequest
+
+    ListDistributionsByResponseHeadersPolicyIdResult.add_member(:distribution_id_list, Shapes::ShapeRef.new(shape: DistributionIdList, location_name: "DistributionIdList"))
+    ListDistributionsByResponseHeadersPolicyIdResult.struct_class = Types::ListDistributionsByResponseHeadersPolicyIdResult
+    ListDistributionsByResponseHeadersPolicyIdResult[:payload] = :distribution_id_list
+    ListDistributionsByResponseHeadersPolicyIdResult[:payload_member] = ListDistributionsByResponseHeadersPolicyIdResult.member(:distribution_id_list)
+
     ListDistributionsByWebACLIdRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
     ListDistributionsByWebACLIdRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
     ListDistributionsByWebACLIdRequest.add_member(:web_acl_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "WebACLId"))
@@ -1727,6 +1829,16 @@ module Aws::CloudFront
     ListRealtimeLogConfigsResult[:payload] = :realtime_log_configs
     ListRealtimeLogConfigsResult[:payload_member] = ListRealtimeLogConfigsResult.member(:realtime_log_configs)
 
+    ListResponseHeadersPoliciesRequest.add_member(:type, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyType, location: "querystring", location_name: "Type"))
+    ListResponseHeadersPoliciesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
+    ListResponseHeadersPoliciesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListResponseHeadersPoliciesRequest.struct_class = Types::ListResponseHeadersPoliciesRequest
+
+    ListResponseHeadersPoliciesResult.add_member(:response_headers_policy_list, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyList, location_name: "ResponseHeadersPolicyList"))
+    ListResponseHeadersPoliciesResult.struct_class = Types::ListResponseHeadersPoliciesResult
+    ListResponseHeadersPoliciesResult[:payload] = :response_headers_policy_list
+    ListResponseHeadersPoliciesResult[:payload_member] = ListResponseHeadersPoliciesResult.member(:response_headers_policy_list)
+
     ListStreamingDistributionsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
     ListStreamingDistributionsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
     ListStreamingDistributionsRequest.struct_class = Types::ListStreamingDistributionsRequest
@@ -1796,6 +1908,9 @@ module Aws::CloudFront
     NoSuchResource.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     NoSuchResource.struct_class = Types::NoSuchResource
 
+    NoSuchResponseHeadersPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    NoSuchResponseHeadersPolicy.struct_class = Types::NoSuchResponseHeadersPolicy
+
     NoSuchStreamingDistribution.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     NoSuchStreamingDistribution.struct_class = Types::NoSuchStreamingDistribution
 
@@ -1811,7 +1926,7 @@ module Aws::CloudFront
     Origin.struct_class = Types::Origin
 
     OriginCustomHeader.add_member(:header_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "HeaderName"))
-    OriginCustomHeader.add_member(:header_value, Shapes::ShapeRef.new(shape: string, required: true, location_name: "HeaderValue"))
+    OriginCustomHeader.add_member(:header_value, Shapes::ShapeRef.new(shape: sensitiveStringType, required: true, location_name: "HeaderValue"))
     OriginCustomHeader.struct_class = Types::OriginCustomHeader
 
     OriginCustomHeadersList.member = Shapes::ShapeRef.new(shape: OriginCustomHeader, location_name: "OriginCustomHeader")
@@ -2014,6 +2129,107 @@ module Aws::CloudFront
     ResourceInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     ResourceInUse.struct_class = Types::ResourceInUse
 
+    ResponseHeadersPolicy.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
+    ResponseHeadersPolicy.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
+    ResponseHeadersPolicy.add_member(:response_headers_policy_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyConfig, required: true, location_name: "ResponseHeadersPolicyConfig"))
+    ResponseHeadersPolicy.struct_class = Types::ResponseHeadersPolicy
+
+    ResponseHeadersPolicyAccessControlAllowHeaders.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    ResponseHeadersPolicyAccessControlAllowHeaders.add_member(:items, Shapes::ShapeRef.new(shape: AccessControlAllowHeadersList, required: true, location_name: "Items"))
+    ResponseHeadersPolicyAccessControlAllowHeaders.struct_class = Types::ResponseHeadersPolicyAccessControlAllowHeaders
+
+    ResponseHeadersPolicyAccessControlAllowMethods.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    ResponseHeadersPolicyAccessControlAllowMethods.add_member(:items, Shapes::ShapeRef.new(shape: AccessControlAllowMethodsList, required: true, location_name: "Items"))
+    ResponseHeadersPolicyAccessControlAllowMethods.struct_class = Types::ResponseHeadersPolicyAccessControlAllowMethods
+
+    ResponseHeadersPolicyAccessControlAllowOrigins.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    ResponseHeadersPolicyAccessControlAllowOrigins.add_member(:items, Shapes::ShapeRef.new(shape: AccessControlAllowOriginsList, required: true, location_name: "Items"))
+    ResponseHeadersPolicyAccessControlAllowOrigins.struct_class = Types::ResponseHeadersPolicyAccessControlAllowOrigins
+
+    ResponseHeadersPolicyAccessControlExposeHeaders.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    ResponseHeadersPolicyAccessControlExposeHeaders.add_member(:items, Shapes::ShapeRef.new(shape: AccessControlExposeHeadersList, location_name: "Items"))
+    ResponseHeadersPolicyAccessControlExposeHeaders.struct_class = Types::ResponseHeadersPolicyAccessControlExposeHeaders
+
+    ResponseHeadersPolicyAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    ResponseHeadersPolicyAlreadyExists.struct_class = Types::ResponseHeadersPolicyAlreadyExists
+
+    ResponseHeadersPolicyConfig.add_member(:comment, Shapes::ShapeRef.new(shape: string, location_name: "Comment"))
+    ResponseHeadersPolicyConfig.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Name"))
+    ResponseHeadersPolicyConfig.add_member(:cors_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyCorsConfig, location_name: "CorsConfig"))
+    ResponseHeadersPolicyConfig.add_member(:security_headers_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicySecurityHeadersConfig, location_name: "SecurityHeadersConfig"))
+    ResponseHeadersPolicyConfig.add_member(:custom_headers_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyCustomHeadersConfig, location_name: "CustomHeadersConfig"))
+    ResponseHeadersPolicyConfig.struct_class = Types::ResponseHeadersPolicyConfig
+
+    ResponseHeadersPolicyContentSecurityPolicy.add_member(:override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Override"))
+    ResponseHeadersPolicyContentSecurityPolicy.add_member(:content_security_policy, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ContentSecurityPolicy"))
+    ResponseHeadersPolicyContentSecurityPolicy.struct_class = Types::ResponseHeadersPolicyContentSecurityPolicy
+
+    ResponseHeadersPolicyContentTypeOptions.add_member(:override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Override"))
+    ResponseHeadersPolicyContentTypeOptions.struct_class = Types::ResponseHeadersPolicyContentTypeOptions
+
+    ResponseHeadersPolicyCorsConfig.add_member(:access_control_allow_origins, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAccessControlAllowOrigins, required: true, location_name: "AccessControlAllowOrigins"))
+    ResponseHeadersPolicyCorsConfig.add_member(:access_control_allow_headers, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAccessControlAllowHeaders, required: true, location_name: "AccessControlAllowHeaders"))
+    ResponseHeadersPolicyCorsConfig.add_member(:access_control_allow_methods, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAccessControlAllowMethods, required: true, location_name: "AccessControlAllowMethods"))
+    ResponseHeadersPolicyCorsConfig.add_member(:access_control_allow_credentials, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "AccessControlAllowCredentials"))
+    ResponseHeadersPolicyCorsConfig.add_member(:access_control_expose_headers, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAccessControlExposeHeaders, location_name: "AccessControlExposeHeaders"))
+    ResponseHeadersPolicyCorsConfig.add_member(:access_control_max_age_sec, Shapes::ShapeRef.new(shape: integer, location_name: "AccessControlMaxAgeSec"))
+    ResponseHeadersPolicyCorsConfig.add_member(:origin_override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "OriginOverride"))
+    ResponseHeadersPolicyCorsConfig.struct_class = Types::ResponseHeadersPolicyCorsConfig
+
+    ResponseHeadersPolicyCustomHeader.add_member(:header, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Header"))
+    ResponseHeadersPolicyCustomHeader.add_member(:value, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Value"))
+    ResponseHeadersPolicyCustomHeader.add_member(:override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Override"))
+    ResponseHeadersPolicyCustomHeader.struct_class = Types::ResponseHeadersPolicyCustomHeader
+
+    ResponseHeadersPolicyCustomHeaderList.member = Shapes::ShapeRef.new(shape: ResponseHeadersPolicyCustomHeader, location_name: "ResponseHeadersPolicyCustomHeader")
+
+    ResponseHeadersPolicyCustomHeadersConfig.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    ResponseHeadersPolicyCustomHeadersConfig.add_member(:items, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyCustomHeaderList, location_name: "Items"))
+    ResponseHeadersPolicyCustomHeadersConfig.struct_class = Types::ResponseHeadersPolicyCustomHeadersConfig
+
+    ResponseHeadersPolicyFrameOptions.add_member(:override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Override"))
+    ResponseHeadersPolicyFrameOptions.add_member(:frame_option, Shapes::ShapeRef.new(shape: FrameOptionsList, required: true, location_name: "FrameOption"))
+    ResponseHeadersPolicyFrameOptions.struct_class = Types::ResponseHeadersPolicyFrameOptions
+
+    ResponseHeadersPolicyInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    ResponseHeadersPolicyInUse.struct_class = Types::ResponseHeadersPolicyInUse
+
+    ResponseHeadersPolicyList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
+    ResponseHeadersPolicyList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
+    ResponseHeadersPolicyList.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    ResponseHeadersPolicyList.add_member(:items, Shapes::ShapeRef.new(shape: ResponseHeadersPolicySummaryList, location_name: "Items"))
+    ResponseHeadersPolicyList.struct_class = Types::ResponseHeadersPolicyList
+
+    ResponseHeadersPolicyReferrerPolicy.add_member(:override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Override"))
+    ResponseHeadersPolicyReferrerPolicy.add_member(:referrer_policy, Shapes::ShapeRef.new(shape: ReferrerPolicyList, required: true, location_name: "ReferrerPolicy"))
+    ResponseHeadersPolicyReferrerPolicy.struct_class = Types::ResponseHeadersPolicyReferrerPolicy
+
+    ResponseHeadersPolicySecurityHeadersConfig.add_member(:xss_protection, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyXSSProtection, location_name: "XSSProtection"))
+    ResponseHeadersPolicySecurityHeadersConfig.add_member(:frame_options, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyFrameOptions, location_name: "FrameOptions"))
+    ResponseHeadersPolicySecurityHeadersConfig.add_member(:referrer_policy, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyReferrerPolicy, location_name: "ReferrerPolicy"))
+    ResponseHeadersPolicySecurityHeadersConfig.add_member(:content_security_policy, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyContentSecurityPolicy, location_name: "ContentSecurityPolicy"))
+    ResponseHeadersPolicySecurityHeadersConfig.add_member(:content_type_options, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyContentTypeOptions, location_name: "ContentTypeOptions"))
+    ResponseHeadersPolicySecurityHeadersConfig.add_member(:strict_transport_security, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyStrictTransportSecurity, location_name: "StrictTransportSecurity"))
+    ResponseHeadersPolicySecurityHeadersConfig.struct_class = Types::ResponseHeadersPolicySecurityHeadersConfig
+
+    ResponseHeadersPolicyStrictTransportSecurity.add_member(:override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Override"))
+    ResponseHeadersPolicyStrictTransportSecurity.add_member(:include_subdomains, Shapes::ShapeRef.new(shape: boolean, location_name: "IncludeSubdomains"))
+    ResponseHeadersPolicyStrictTransportSecurity.add_member(:preload, Shapes::ShapeRef.new(shape: boolean, location_name: "Preload"))
+    ResponseHeadersPolicyStrictTransportSecurity.add_member(:access_control_max_age_sec, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "AccessControlMaxAgeSec"))
+    ResponseHeadersPolicyStrictTransportSecurity.struct_class = Types::ResponseHeadersPolicyStrictTransportSecurity
+
+    ResponseHeadersPolicySummary.add_member(:type, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyType, required: true, location_name: "Type"))
+    ResponseHeadersPolicySummary.add_member(:response_headers_policy, Shapes::ShapeRef.new(shape: ResponseHeadersPolicy, required: true, location_name: "ResponseHeadersPolicy"))
+    ResponseHeadersPolicySummary.struct_class = Types::ResponseHeadersPolicySummary
+
+    ResponseHeadersPolicySummaryList.member = Shapes::ShapeRef.new(shape: ResponseHeadersPolicySummary, location_name: "ResponseHeadersPolicySummary")
+
+    ResponseHeadersPolicyXSSProtection.add_member(:override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Override"))
+    ResponseHeadersPolicyXSSProtection.add_member(:protection, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Protection"))
+    ResponseHeadersPolicyXSSProtection.add_member(:mode_block, Shapes::ShapeRef.new(shape: boolean, location_name: "ModeBlock"))
+    ResponseHeadersPolicyXSSProtection.add_member(:report_uri, Shapes::ShapeRef.new(shape: string, location_name: "ReportUri"))
+    ResponseHeadersPolicyXSSProtection.struct_class = Types::ResponseHeadersPolicyXSSProtection
+
     Restrictions.add_member(:geo_restriction, Shapes::ShapeRef.new(shape: GeoRestriction, required: true, location_name: "GeoRestriction"))
     Restrictions.struct_class = Types::Restrictions
 
@@ -2132,8 +2348,8 @@ module Aws::CloudFront
     TestResult.add_member(:function_summary, Shapes::ShapeRef.new(shape: FunctionSummary, location_name: "FunctionSummary"))
     TestResult.add_member(:compute_utilization, Shapes::ShapeRef.new(shape: string, location_name: "ComputeUtilization"))
     TestResult.add_member(:function_execution_logs, Shapes::ShapeRef.new(shape: FunctionExecutionLogList, location_name: "FunctionExecutionLogs"))
-    TestResult.add_member(:function_error_message, Shapes::ShapeRef.new(shape: string, location_name: "FunctionErrorMessage"))
-    TestResult.add_member(:function_output, Shapes::ShapeRef.new(shape: string, location_name: "FunctionOutput"))
+    TestResult.add_member(:function_error_message, Shapes::ShapeRef.new(shape: sensitiveStringType, location_name: "FunctionErrorMessage"))
+    TestResult.add_member(:function_output, Shapes::ShapeRef.new(shape: sensitiveStringType, location_name: "FunctionOutput"))
     TestResult.struct_class = Types::TestResult
 
     TooManyCacheBehaviors.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
@@ -2157,6 +2373,9 @@ module Aws::CloudFront
     TooManyCookiesInOriginRequestPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyCookiesInOriginRequestPolicy.struct_class = Types::TooManyCookiesInOriginRequestPolicy
 
+    TooManyCustomHeadersInResponseHeadersPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyCustomHeadersInResponseHeadersPolicy.struct_class = Types::TooManyCustomHeadersInResponseHeadersPolicy
+
     TooManyDistributionCNAMEs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyDistributionCNAMEs.struct_class = Types::TooManyDistributionCNAMEs
 
@@ -2174,6 +2393,9 @@ module Aws::CloudFront
 
     TooManyDistributionsAssociatedToOriginRequestPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyDistributionsAssociatedToOriginRequestPolicy.struct_class = Types::TooManyDistributionsAssociatedToOriginRequestPolicy
+
+    TooManyDistributionsAssociatedToResponseHeadersPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyDistributionsAssociatedToResponseHeadersPolicy.struct_class = Types::TooManyDistributionsAssociatedToResponseHeadersPolicy
 
     TooManyDistributionsWithFunctionAssociations.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyDistributionsWithFunctionAssociations.struct_class = Types::TooManyDistributionsWithFunctionAssociations
@@ -2258,6 +2480,9 @@ module Aws::CloudFront
 
     TooManyRealtimeLogConfigs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyRealtimeLogConfigs.struct_class = Types::TooManyRealtimeLogConfigs
+
+    TooManyResponseHeadersPolicies.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooManyResponseHeadersPolicies.struct_class = Types::TooManyResponseHeadersPolicies
 
     TooManyStreamingDistributionCNAMEs.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyStreamingDistributionCNAMEs.struct_class = Types::TooManyStreamingDistributionCNAMEs
@@ -2421,6 +2646,19 @@ module Aws::CloudFront
     UpdateRealtimeLogConfigResult.add_member(:realtime_log_config, Shapes::ShapeRef.new(shape: RealtimeLogConfig, location_name: "RealtimeLogConfig"))
     UpdateRealtimeLogConfigResult.struct_class = Types::UpdateRealtimeLogConfigResult
 
+    UpdateResponseHeadersPolicyRequest.add_member(:response_headers_policy_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyConfig, required: true, location_name: "ResponseHeadersPolicyConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
+    UpdateResponseHeadersPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
+    UpdateResponseHeadersPolicyRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
+    UpdateResponseHeadersPolicyRequest.struct_class = Types::UpdateResponseHeadersPolicyRequest
+    UpdateResponseHeadersPolicyRequest[:payload] = :response_headers_policy_config
+    UpdateResponseHeadersPolicyRequest[:payload_member] = UpdateResponseHeadersPolicyRequest.member(:response_headers_policy_config)
+
+    UpdateResponseHeadersPolicyResult.add_member(:response_headers_policy, Shapes::ShapeRef.new(shape: ResponseHeadersPolicy, location_name: "ResponseHeadersPolicy"))
+    UpdateResponseHeadersPolicyResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    UpdateResponseHeadersPolicyResult.struct_class = Types::UpdateResponseHeadersPolicyResult
+    UpdateResponseHeadersPolicyResult[:payload] = :response_headers_policy
+    UpdateResponseHeadersPolicyResult[:payload_member] = UpdateResponseHeadersPolicyResult.member(:response_headers_policy)
+
     UpdateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     UpdateStreamingDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     UpdateStreamingDistributionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
@@ -2559,6 +2797,8 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
@@ -2625,6 +2865,8 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
@@ -2764,6 +3006,20 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyRealtimeLogConfigs)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+      end)
+
+      api.add_operation(:create_response_headers_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateResponseHeadersPolicy2020_05_31"
+        o.http_method = "POST"
+        o.http_request_uri = "/2020-05-31/response-headers-policy"
+        o.input = Shapes::ShapeRef.new(shape: CreateResponseHeadersPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateResponseHeadersPolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyResponseHeadersPolicies)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCustomHeadersInResponseHeadersPolicy)
       end)
 
       api.add_operation(:create_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -2951,6 +3207,20 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: RealtimeLogConfigInUse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+      end)
+
+      api.add_operation(:delete_response_headers_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResponseHeadersPolicy2020_05_31"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2020-05-31/response-headers-policy/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResponseHeadersPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalDelete)
+        o.errors << Shapes::ShapeRef.new(shape: ResponseHeadersPolicyInUse)
       end)
 
       api.add_operation(:delete_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -3182,6 +3452,26 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
       end)
 
+      api.add_operation(:get_response_headers_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResponseHeadersPolicy2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/response-headers-policy/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: GetResponseHeadersPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResponseHeadersPolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+      end)
+
+      api.add_operation(:get_response_headers_policy_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResponseHeadersPolicyConfig2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/response-headers-policy/{Id}/config"
+        o.input = Shapes::ShapeRef.new(shape: GetResponseHeadersPolicyConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResponseHeadersPolicyConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+      end)
+
       api.add_operation(:get_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetStreamingDistribution2020_05_31"
         o.http_method = "GET"
@@ -3301,6 +3591,17 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
+      api.add_operation(:list_distributions_by_response_headers_policy_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDistributionsByResponseHeadersPolicyId2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/distributionsByResponseHeadersPolicyId/{ResponseHeadersPolicyId}"
+        o.input = Shapes::ShapeRef.new(shape: ListDistributionsByResponseHeadersPolicyIdRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDistributionsByResponseHeadersPolicyIdResult)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+      end)
+
       api.add_operation(:list_distributions_by_web_acl_id, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDistributionsByWebACLId2020_05_31"
         o.http_method = "GET"
@@ -3395,6 +3696,17 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
+      end)
+
+      api.add_operation(:list_response_headers_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResponseHeadersPolicies2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/response-headers-policy"
+        o.input = Shapes::ShapeRef.new(shape: ListResponseHeadersPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResponseHeadersPoliciesResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
       api.add_operation(:list_streaming_distributions, Seahorse::Model::Operation.new.tap do |o|
@@ -3571,6 +3883,8 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchCachePolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToCachePolicy)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToResponseHeadersPolicy)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToOriginRequestPolicy)
         o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionsAssociatedToKeyGroup)
@@ -3700,6 +4014,23 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRealtimeLogConfig)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+      end)
+
+      api.add_operation(:update_response_headers_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateResponseHeadersPolicy2020_05_31"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2020-05-31/response-headers-policy/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateResponseHeadersPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateResponseHeadersPolicyResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalUpdate)
+        o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+        o.errors << Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyCustomHeadersInResponseHeadersPolicy)
       end)
 
       api.add_operation(:update_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|

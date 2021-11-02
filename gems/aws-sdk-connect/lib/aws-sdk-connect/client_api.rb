@@ -206,7 +206,6 @@ module Aws::Connect
     InstanceAttributeType = Shapes::StringShape.new(name: 'InstanceAttributeType')
     InstanceAttributeValue = Shapes::StringShape.new(name: 'InstanceAttributeValue')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
-    InstanceReference = Shapes::StructureShape.new(name: 'InstanceReference')
     InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
     InstanceStatusReason = Shapes::StructureShape.new(name: 'InstanceStatusReason')
     InstanceStorageConfig = Shapes::StructureShape.new(name: 'InstanceStorageConfig')
@@ -367,10 +366,8 @@ module Aws::Connect
     RoutingProfileQueueConfigSummaryList = Shapes::ListShape.new(name: 'RoutingProfileQueueConfigSummaryList')
     RoutingProfileQueueReference = Shapes::StructureShape.new(name: 'RoutingProfileQueueReference')
     RoutingProfileQueueReferenceList = Shapes::ListShape.new(name: 'RoutingProfileQueueReferenceList')
-    RoutingProfileReference = Shapes::StructureShape.new(name: 'RoutingProfileReference')
     RoutingProfileSummary = Shapes::StructureShape.new(name: 'RoutingProfileSummary')
     RoutingProfileSummaryList = Shapes::ListShape.new(name: 'RoutingProfileSummaryList')
-    RoutingProfiles = Shapes::ListShape.new(name: 'RoutingProfiles')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
     SecurityKey = Shapes::StructureShape.new(name: 'SecurityKey')
     SecurityKeysList = Shapes::ListShape.new(name: 'SecurityKeysList')
@@ -542,8 +539,8 @@ module Aws::Connect
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
 
-    ChatMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, location_name: "ContentType"))
-    ChatMessage.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, location_name: "Content"))
+    ChatMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, required: true, location_name: "ContentType"))
+    ChatMessage.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, required: true, location_name: "Content"))
     ChatMessage.struct_class = Types::ChatMessage
 
     ChatStreamingConfiguration.add_member(:streaming_endpoint_arn, Shapes::ShapeRef.new(shape: ChatStreamingEndpointARN, required: true, location_name: "StreamingEndpointArn"))
@@ -851,8 +848,6 @@ module Aws::Connect
 
     Dimensions.add_member(:queue, Shapes::ShapeRef.new(shape: QueueReference, location_name: "Queue"))
     Dimensions.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "Channel"))
-    Dimensions.add_member(:routing_profile, Shapes::ShapeRef.new(shape: RoutingProfileReference, location_name: "RoutingProfile"))
-    Dimensions.add_member(:instance_reference, Shapes::ShapeRef.new(shape: InstanceReference, location_name: "InstanceReference"))
     Dimensions.struct_class = Types::Dimensions
 
     DisassociateApprovedOriginRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -900,7 +895,6 @@ module Aws::Connect
     EncryptionConfig.struct_class = Types::EncryptionConfig
 
     Filters.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
-    Filters.add_member(:routing_profiles, Shapes::ShapeRef.new(shape: RoutingProfiles, location_name: "RoutingProfiles"))
     Filters.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
     Filters.struct_class = Types::Filters
 
@@ -1049,10 +1043,6 @@ module Aws::Connect
     Instance.add_member(:inbound_calls_enabled, Shapes::ShapeRef.new(shape: InboundCallsEnabled, location_name: "InboundCallsEnabled"))
     Instance.add_member(:outbound_calls_enabled, Shapes::ShapeRef.new(shape: OutboundCallsEnabled, location_name: "OutboundCallsEnabled"))
     Instance.struct_class = Types::Instance
-
-    InstanceReference.add_member(:id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "Id"))
-    InstanceReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
-    InstanceReference.struct_class = Types::InstanceReference
 
     InstanceStatusReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InstanceStatusReason.struct_class = Types::InstanceStatusReason
@@ -1421,7 +1411,6 @@ module Aws::Connect
 
     QueueReference.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
     QueueReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
-    QueueReference.add_member(:queue_type, Shapes::ShapeRef.new(shape: QueueType, location_name: "QueueType"))
     QueueReference.struct_class = Types::QueueReference
 
     QueueSummary.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
@@ -1517,18 +1506,12 @@ module Aws::Connect
 
     RoutingProfileQueueReferenceList.member = Shapes::ShapeRef.new(shape: RoutingProfileQueueReference)
 
-    RoutingProfileReference.add_member(:id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "Id"))
-    RoutingProfileReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
-    RoutingProfileReference.struct_class = Types::RoutingProfileReference
-
     RoutingProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "Id"))
     RoutingProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     RoutingProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: RoutingProfileName, location_name: "Name"))
     RoutingProfileSummary.struct_class = Types::RoutingProfileSummary
 
     RoutingProfileSummaryList.member = Shapes::ShapeRef.new(shape: RoutingProfileSummary)
-
-    RoutingProfiles.member = Shapes::ShapeRef.new(shape: RoutingProfileId)
 
     S3Config.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "BucketName"))
     S3Config.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: Prefix, required: true, location_name: "BucketPrefix"))

@@ -443,8 +443,8 @@ module Aws::Connect
     #   data as a hash:
     #
     #       {
-    #         content_type: "ChatContentType",
-    #         content: "ChatContent",
+    #         content_type: "ChatContentType", # required
+    #         content: "ChatContent", # required
     #       }
     #
     # @!attribute [rw] content_type
@@ -1432,7 +1432,7 @@ module Aws::Connect
       :hierarchy_group_id,
       :instance_id,
       :tags)
-      SENSITIVE = [:password]
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1498,7 +1498,7 @@ module Aws::Connect
     #
     #       {
     #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
-    #         unit: "SECONDS", # accepts SECONDS, MILLISECONDS, COUNT, PERCENT
+    #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
     #       }
     #
     # @!attribute [rw] name
@@ -2212,21 +2212,11 @@ module Aws::Connect
     #   The channel used for grouping and filters.
     #   @return [String]
     #
-    # @!attribute [rw] routing_profile
-    #   The routing profile.
-    #   @return [Types::RoutingProfileReference]
-    #
-    # @!attribute [rw] instance_reference
-    #   The instance reference.
-    #   @return [Types::InstanceReference]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Dimensions AWS API Documentation
     #
     class Dimensions < Struct.new(
       :queue,
-      :channel,
-      :routing_profile,
-      :instance_reference)
+      :channel)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2534,17 +2524,12 @@ module Aws::Connect
     #
     #       {
     #         queues: ["QueueId"],
-    #         routing_profiles: ["RoutingProfileId"],
     #         channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #       }
     #
     # @!attribute [rw] queues
     #   The queues to use to filter the metrics. You can specify up to 100
     #   queues per request.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] routing_profiles
-    #   The filters used to sort routing profiles.
     #   @return [Array<String>]
     #
     # @!attribute [rw] channels
@@ -2555,7 +2540,6 @@ module Aws::Connect
     #
     class Filters < Struct.new(
       :queues,
-      :routing_profiles,
       :channels)
       SENSITIVE = []
       include Aws::Structure
@@ -2605,14 +2589,13 @@ module Aws::Connect
     #         instance_id: "InstanceId", # required
     #         filters: { # required
     #           queues: ["QueueId"],
-    #           routing_profiles: ["RoutingProfileId"],
     #           channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #         },
-    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, INSTANCE
+    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #         current_metrics: [ # required
     #           {
     #             name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
-    #             unit: "SECONDS", # accepts SECONDS, MILLISECONDS, COUNT, PERCENT
+    #             unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
     #           },
     #         ],
     #         next_token: "NextToken",
@@ -2852,19 +2835,18 @@ module Aws::Connect
     #         end_time: Time.now, # required
     #         filters: { # required
     #           queues: ["QueueId"],
-    #           routing_profiles: ["RoutingProfileId"],
     #           channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #         },
-    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, INSTANCE
+    #         groupings: ["QUEUE"], # accepts QUEUE, CHANNEL
     #         historical_metrics: [ # required
     #           {
-    #             name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_TRANSFERRED_IN_BY_AGENT, CONTACTS_TRANSFERRED_OUT_BY_AGENT, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
+    #             name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
     #             threshold: {
     #               comparison: "LT", # accepts LT
     #               threshold_value: 1.0,
     #             },
     #             statistic: "SUM", # accepts SUM, MAX, AVG
-    #             unit: "SECONDS", # accepts SECONDS, MILLISECONDS, COUNT, PERCENT
+    #             unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
     #           },
     #         ],
     #         next_token: "NextToken",
@@ -3380,13 +3362,13 @@ module Aws::Connect
     #   data as a hash:
     #
     #       {
-    #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_TRANSFERRED_IN_BY_AGENT, CONTACTS_TRANSFERRED_OUT_BY_AGENT, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
+    #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
     #         threshold: {
     #           comparison: "LT", # accepts LT
     #           threshold_value: 1.0,
     #         },
     #         statistic: "SUM", # accepts SUM, MAX, AVG
-    #         unit: "SECONDS", # accepts SECONDS, MILLISECONDS, COUNT, PERCENT
+    #         unit: "SECONDS", # accepts SECONDS, COUNT, PERCENT
     #       }
     #
     # @!attribute [rw] name
@@ -3646,25 +3628,6 @@ module Aws::Connect
       :inbound_calls_enabled,
       :outbound_calls_enabled)
       SENSITIVE = [:instance_alias]
-      include Aws::Structure
-    end
-
-    # The instance reference.
-    #
-    # @!attribute [rw] id
-    #   The identifier of the instance reference.
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the instance reference.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InstanceReference AWS API Documentation
-    #
-    class InstanceReference < Struct.new(
-      :id,
-      :arn)
-      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5668,16 +5631,11 @@ module Aws::Connect
     #   The Amazon Resource Name (ARN) of the queue.
     #   @return [String]
     #
-    # @!attribute [rw] queue_type
-    #   The type of queue.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueReference AWS API Documentation
     #
     class QueueReference < Struct.new(
       :id,
-      :arn,
-      :queue_type)
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5843,7 +5801,7 @@ module Aws::Connect
     #
     #       {
     #         value: "ReferenceValue", # required
-    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
+    #         type: "URL", # required, accepts URL
     #       }
     #
     # @!attribute [rw] value
@@ -6130,25 +6088,6 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The routing profile reference.
-    #
-    # @!attribute [rw] id
-    #   The identifier of the routing profile reference.
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the routing profile reference.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileReference AWS API Documentation
-    #
-    class RoutingProfileReference < Struct.new(
-      :id,
-      :arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Contains summary information about a routing profile.
     #
     # @!attribute [rw] id
@@ -6285,8 +6224,8 @@ module Aws::Connect
     #           display_name: "DisplayName", # required
     #         },
     #         initial_message: {
-    #           content_type: "ChatContentType",
-    #           content: "ChatContent",
+    #           content_type: "ChatContentType", # required
+    #           content: "ChatContent", # required
     #         },
     #         client_token: "ClientToken",
     #       }
@@ -6612,7 +6551,7 @@ module Aws::Connect
     #         references: {
     #           "ReferenceKey" => {
     #             value: "ReferenceValue", # required
-    #             type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
+    #             type: "URL", # required, accepts URL
     #           },
     #         },
     #         description: "Description",

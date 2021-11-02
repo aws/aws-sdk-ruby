@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-11-02)
+------------------
+
+* Feature - Amazon Nimble Studio adds support for users to stop and start streaming sessions.
+
 1.6.0 (2021-10-18)
 ------------------
 
