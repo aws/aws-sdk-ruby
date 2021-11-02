@@ -5,6 +5,11 @@ Unreleased Changes
 
 * Feature - Support modeled fips endpoints. It can be configured with shared configuration (`use_fips_endpoint`), an ENV variable (`AWS_USE_FIPS_ENDPOINT`), and a constructor option (`:use_fips_endpoint`). Requests made to services without a fips endpoint will fail.
 
+3.121.6 (2021-11-02)
+------------------
+
+* Issue - Improve `SSOCredentials` error handling when profile file does not exist (#2605)
+
 3.121.5 (2021-10-29)
 ------------------
 

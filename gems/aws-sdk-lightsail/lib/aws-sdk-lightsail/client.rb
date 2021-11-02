@@ -968,6 +968,9 @@ module Aws::Lightsail
     #   resp.bucket.resources_receiving_access[0].resource_type #=> String
     #   resp.bucket.state.code #=> String
     #   resp.bucket.state.message #=> String
+    #   resp.bucket.access_log_config.enabled #=> Boolean
+    #   resp.bucket.access_log_config.destination #=> String
+    #   resp.bucket.access_log_config.prefix #=> String
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
@@ -1397,8 +1400,8 @@ module Aws::Lightsail
     #   number of nodes) of the service.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tag keys and optional values to add to the certificate during
-    #   create.
+    #   The tag keys and optional values to add to the container service
+    #   during create.
     #
     #   Use the `TagResource` action to tag a resource after it's created.
     #
@@ -5590,6 +5593,9 @@ module Aws::Lightsail
     #   resp.buckets[0].resources_receiving_access[0].resource_type #=> String
     #   resp.buckets[0].state.code #=> String
     #   resp.buckets[0].state.message #=> String
+    #   resp.buckets[0].access_log_config.enabled #=> Boolean
+    #   resp.buckets[0].access_log_config.destination #=> String
+    #   resp.buckets[0].access_log_config.prefix #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBuckets AWS API Documentation
@@ -10622,6 +10628,9 @@ module Aws::Lightsail
     #
     #   You can give a maximum of 10 AWS accounts access to a bucket.
     #
+    # @option params [Types::BucketAccessLogConfig] :access_log_config
+    #   An object that describes the access log configuration for the bucket.
+    #
     # @return [Types::UpdateBucketResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBucketResult#bucket #bucket} => Types::Bucket
@@ -10637,6 +10646,11 @@ module Aws::Lightsail
     #     },
     #     versioning: "NonEmptyString",
     #     readonly_access_accounts: ["NonEmptyString"],
+    #     access_log_config: {
+    #       enabled: false, # required
+    #       destination: "BucketName",
+    #       prefix: "BucketAccessLogPrefix",
+    #     },
     #   })
     #
     # @example Response structure
@@ -10664,6 +10678,9 @@ module Aws::Lightsail
     #   resp.bucket.resources_receiving_access[0].resource_type #=> String
     #   resp.bucket.state.code #=> String
     #   resp.bucket.state.message #=> String
+    #   resp.bucket.access_log_config.enabled #=> Boolean
+    #   resp.bucket.access_log_config.destination #=> String
+    #   resp.bucket.access_log_config.prefix #=> String
     #   resp.operations #=> Array
     #   resp.operations[0].id #=> String
     #   resp.operations[0].resource_name #=> String
@@ -11425,7 +11442,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-11-01)
+------------------
+
+* Feature - Adds support for major version upgrades to ModifyDbCluster API
+
 1.39.0 (2021-10-18)
 ------------------
 

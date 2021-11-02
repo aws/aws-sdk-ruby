@@ -652,9 +652,84 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Creates a new Amazon Rekognition Custom Labels dataset. You can create
+    # a dataset by using an Amazon Sagemaker format manifest file or by
+    # copying an existing Amazon Rekognition Custom Labels dataset.
+    #
+    # To create a training dataset for a project, specify `train` for the
+    # value of `DatasetType`. To create the test dataset for a project,
+    # specify `test` for the value of `DatasetType`.
+    #
+    # The response from `CreateDataset` is the Amazon Resource Name (ARN)
+    # for the dataset. Creating a dataset takes a while to complete. Use
+    # DescribeDataset to check the current status. The dataset created
+    # successfully if the value of `Status` is `CREATE_COMPLETE`.
+    #
+    # To check if any non-terminal errors occurred, call ListDatasetEntries
+    # and check for the presence of `errors` lists in the JSON Lines.
+    #
+    # Dataset creation fails if a terminal error occurs (`Status` =
+    # `CREATE_FAILED`). Currently, you can't access the terminal error
+    # information.
+    #
+    # For more information, see Creating dataset in the *Amazon Rekognition
+    # Custom Labels Developer Guide*.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:CreateDataset` action. If you want to copy an existing
+    # dataset, you also require permission to perform the
+    # `rekognition:ListDatasetEntries` action.
+    #
+    # @option params [Types::DatasetSource] :dataset_source
+    #   The source files for the dataset. You can specify the ARN of an
+    #   existing dataset or specify the Amazon S3 bucket location of an Amazon
+    #   Sagemaker format manifest file. If you don't specify `datasetSource`,
+    #   an empty dataset is created. To add labeled images to the dataset, You
+    #   can use the console or call UpdateDatasetEntries.
+    #
+    # @option params [required, String] :dataset_type
+    #   The type of the dataset. Specify `train` to create a training dataset.
+    #   Specify `test` to create a test dataset.
+    #
+    # @option params [required, String] :project_arn
+    #   The ARN of the Amazon Rekognition Custom Labels project to which you
+    #   want to asssign the dataset.
+    #
+    # @return [Types::CreateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDatasetResponse#dataset_arn #dataset_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_dataset({
+    #     dataset_source: {
+    #       ground_truth_manifest: {
+    #         s3_object: {
+    #           bucket: "S3Bucket",
+    #           name: "S3ObjectName",
+    #           version: "S3ObjectVersion",
+    #         },
+    #       },
+    #       dataset_arn: "DatasetArn",
+    #     },
+    #     dataset_type: "TRAIN", # required, accepts TRAIN, TEST
+    #     project_arn: "ProjectArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_arn #=> String
+    #
+    # @overload create_dataset(params = {})
+    # @param [Hash] params ({})
+    def create_dataset(params = {}, options = {})
+      req = build_request(:create_dataset, params)
+      req.send_request(options)
+    end
+
     # Creates a new Amazon Rekognition Custom Labels project. A project is a
-    # logical grouping of resources (images, Labels, models) and operations
-    # (training, evaluation and detection).
+    # group of resources (datasets, model versions) that you use to create
+    # and manage Amazon Rekognition Custom Labels models.
     #
     # This operation requires permissions to perform the
     # `rekognition:CreateProject` action.
@@ -684,16 +759,40 @@ module Aws::Rekognition
     end
 
     # Creates a new version of a model and begins training. Models are
-    # managed as part of an Amazon Rekognition Custom Labels project. You
-    # can specify one training dataset and one testing dataset. The response
-    # from `CreateProjectVersion` is an Amazon Resource Name (ARN) for the
-    # version of the model.
+    # managed as part of an Amazon Rekognition Custom Labels project. The
+    # response from `CreateProjectVersion` is an Amazon Resource Name (ARN)
+    # for the version of the model.
+    #
+    # Training uses the training and test datasets associated with the
+    # project. For more information, see Creating training and test dataset
+    # in the *Amazon Rekognition Custom Labels Developer Guide*.
+    #
+    # <note markdown="1"> You can train a modelin a project that doesn't have associated
+    # datasets by specifying manifest files in the `TrainingData` and
+    # `TestingData` fields.
+    #
+    #  If you open the console after training a model with manifest files,
+    # Amazon Rekognition Custom Labels creates the datasets for you using
+    # the most recent manifest files. You can no longer train a model
+    # version for the project by specifying manifest files.
+    #
+    #  Instead of training with a project without associated datasets, we
+    # recommend that you use the manifest files to create training and test
+    # datasets for the project.
+    #
+    #  </note>
     #
     # Training takes a while to complete. You can get the current status by
-    # calling DescribeProjectVersions.
+    # calling DescribeProjectVersions. Training completed successfully if
+    # the value of the `Status` field is `TRAINING_COMPLETED`.
+    #
+    # If training fails, see Debugging a failed model training in the
+    # *Amazon Rekognition Custom Labels* developer guide.
     #
     # Once training has successfully completed, call DescribeProjectVersions
-    # to get the training results and evaluate the model.
+    # to get the training results and evaluate the model. For more
+    # information, see Improving a trained Amazon Rekognition Custom Labels
+    # model in the *Amazon Rekognition Custom Labels* developers guide.
     #
     # After evaluating the model, you start the model by calling
     # StartProjectVersion.
@@ -713,26 +812,30 @@ module Aws::Rekognition
     #   bucket can be in any AWS account as long as the caller has
     #   `s3:PutObject` permissions on the S3 bucket.
     #
-    # @option params [required, Types::TrainingData] :training_data
-    #   The dataset to use for training.
+    # @option params [Types::TrainingData] :training_data
+    #   Specifies an external manifest that the services uses to train the
+    #   model. If you specify `TrainingData` you must also specify
+    #   `TestingData`. The project must not have any associated datasets.
     #
-    # @option params [required, Types::TestingData] :testing_data
-    #   The dataset to use for testing.
+    # @option params [Types::TestingData] :testing_data
+    #   Specifies an external manifest that the service uses to test the
+    #   model. If you specify `TestingData` you must also specify
+    #   `TrainingData`. The project must not have any associated datasets.
     #
     # @option params [Hash<String,String>] :tags
     #   A set of tags (key-value pairs) that you want to attach to the model.
     #
     # @option params [String] :kms_key_id
-    #   The identifier for your AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK). You can supply the Amazon Resource Name (ARN) of
-    #   your CMK, the ID of your CMK, an alias for your CMK, or an alias ARN.
-    #   The key is used to encrypt training and test images copied into the
-    #   service for model training. Your source images are unaffected. The key
-    #   is also used to encrypt training results and manifest files written to
-    #   the output Amazon S3 bucket (`OutputConfig`).
+    #   The identifier for your AWS Key Management Service key (AWS KMS key).
+    #   You can supply the Amazon Resource Name (ARN) of your KMS key, the ID
+    #   of your KMS key, an alias for your KMS key, or an alias ARN. The key
+    #   is used to encrypt training and test images copied into the service
+    #   for model training. Your source images are unaffected. The key is also
+    #   used to encrypt training results and manifest files written to the
+    #   output Amazon S3 bucket (`OutputConfig`).
     #
-    #   If you choose to use your own CMK, you need the following permissions
-    #   on the CMK.
+    #   If you choose to use your own KMS key, you need the following
+    #   permissions on the KMS key.
     #
     #   * kms:CreateGrant
     #
@@ -758,7 +861,7 @@ module Aws::Rekognition
     #       s3_bucket: "S3Bucket",
     #       s3_key_prefix: "S3KeyPrefix",
     #     },
-    #     training_data: { # required
+    #     training_data: {
     #       assets: [
     #         {
     #           ground_truth_manifest: {
@@ -771,7 +874,7 @@ module Aws::Rekognition
     #         },
     #       ],
     #     },
-    #     testing_data: { # required
+    #     testing_data: {
     #       assets: [
     #         {
     #           ground_truth_manifest: {
@@ -940,6 +1043,38 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Deletes an existing Amazon Rekognition Custom Labels dataset. Deleting
+    # a dataset might take while. Use DescribeDataset to check the current
+    # status. The dataset is still deleting if the value of `Status` is
+    # `DELETE_IN_PROGRESS`. If you try to access the dataset after it is
+    # deleted, you get a `ResourceNotFoundException` exception.
+    #
+    # You can't delete a dataset while it is creating (`Status` =
+    # `CREATE_IN_PROGRESS`) or if the dataset is updating (`Status` =
+    # `UPDATE_IN_PROGRESS`).
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DeleteDataset` action.
+    #
+    # @option params [required, String] :dataset_arn
+    #   The ARN of the Amazon Rekognition Custom Labels dataset that you want
+    #   to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_dataset({
+    #     dataset_arn: "DatasetArn", # required
+    #   })
+    #
+    # @overload delete_dataset(params = {})
+    # @param [Hash] params ({})
+    def delete_dataset(params = {}, options = {})
+      req = build_request(:delete_dataset, params)
+      req.send_request(options)
+    end
+
     # Deletes faces from a collection. You specify a collection ID and an
     # array of face IDs to remove from the collection.
     #
@@ -997,6 +1132,10 @@ module Aws::Rekognition
     # Deletes an Amazon Rekognition Custom Labels project. To delete a
     # project you must first delete all models associated with the project.
     # To delete a model, see DeleteProjectVersion.
+    #
+    # `DeleteProject` is an asynchronous operation. To check if the project
+    # is deleted, call DescribeProjects. The project is deleted when the
+    # project no longer appears in the response.
     #
     # This operation requires permissions to perform the
     # `rekognition:DeleteProject` action.
@@ -1122,10 +1261,50 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Lists and describes the models in an Amazon Rekognition Custom Labels
-    # project. You can specify up to 10 model versions in
+    # Describes an Amazon Rekognition Custom Labels dataset. You can get
+    # information such as the current status of a dataset and statistics
+    # about the images and labels in a dataset.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DescribeDataset` action.
+    #
+    # @option params [required, String] :dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset that you want to
+    #   describe.
+    #
+    # @return [Types::DescribeDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDatasetResponse#dataset_description #dataset_description} => Types::DatasetDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_dataset({
+    #     dataset_arn: "DatasetArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_description.creation_timestamp #=> Time
+    #   resp.dataset_description.last_updated_timestamp #=> Time
+    #   resp.dataset_description.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.dataset_description.status_message #=> String
+    #   resp.dataset_description.status_message_code #=> String, one of "SUCCESS", "SERVICE_ERROR", "CLIENT_ERROR"
+    #   resp.dataset_description.dataset_stats.labeled_entries #=> Integer
+    #   resp.dataset_description.dataset_stats.total_entries #=> Integer
+    #   resp.dataset_description.dataset_stats.total_labels #=> Integer
+    #   resp.dataset_description.dataset_stats.error_entries #=> Integer
+    #
+    # @overload describe_dataset(params = {})
+    # @param [Hash] params ({})
+    def describe_dataset(params = {}, options = {})
+      req = build_request(:describe_dataset, params)
+      req.send_request(options)
+    end
+
+    # Lists and describes the versions of a model in an Amazon Rekognition
+    # Custom Labels project. You can specify up to 10 model versions in
     # `ProjectVersionArns`. If you don't specify a value, descriptions for
-    # all models are returned.
+    # all model versions in the project are returned.
     #
     # This operation requires permissions to perform the
     # `rekognition:DescribeProjectVersions` action.
@@ -1232,8 +1411,7 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Lists and gets information about your Amazon Rekognition Custom Labels
-    # projects.
+    # Gets information about your Amazon Rekognition Custom Labels projects.
     #
     # This operation requires permissions to perform the
     # `rekognition:DescribeProjects` action.
@@ -1250,6 +1428,11 @@ module Aws::Rekognition
     #   than 100, a ValidationException error occurs. The default value is
     #   100.
     #
+    # @option params [Array<String>] :project_names
+    #   A list of the projects that you want Amazon Rekognition Custom Labels
+    #   to describe. If you don't specify a value, the response includes
+    #   descriptions for all the projects in your AWS account.
+    #
     # @return [Types::DescribeProjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProjectsResponse#project_descriptions #project_descriptions} => Array&lt;Types::ProjectDescription&gt;
@@ -1262,6 +1445,7 @@ module Aws::Rekognition
     #   resp = client.describe_projects({
     #     next_token: "ExtendedPaginationToken",
     #     max_results: 1,
+    #     project_names: ["ProjectName"],
     #   })
     #
     # @example Response structure
@@ -1270,6 +1454,13 @@ module Aws::Rekognition
     #   resp.project_descriptions[0].project_arn #=> String
     #   resp.project_descriptions[0].creation_timestamp #=> Time
     #   resp.project_descriptions[0].status #=> String, one of "CREATING", "CREATED", "DELETING"
+    #   resp.project_descriptions[0].datasets #=> Array
+    #   resp.project_descriptions[0].datasets[0].creation_timestamp #=> Time
+    #   resp.project_descriptions[0].datasets[0].dataset_type #=> String, one of "TRAIN", "TEST"
+    #   resp.project_descriptions[0].datasets[0].dataset_arn #=> String
+    #   resp.project_descriptions[0].datasets[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.project_descriptions[0].datasets[0].status_message #=> String
+    #   resp.project_descriptions[0].datasets[0].status_message_code #=> String, one of "SUCCESS", "SERVICE_ERROR", "CLIENT_ERROR"
     #   resp.next_token #=> String
     #
     # @overload describe_projects(params = {})
@@ -2115,6 +2306,50 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def detect_text(params = {}, options = {})
       req = build_request(:detect_text, params)
+      req.send_request(options)
+    end
+
+    # Distributes the entries (images) in a training dataset across the
+    # training dataset and the test dataset for a project.
+    # `DistributeDatasetEntries` moves 20% of the training dataset images to
+    # the test dataset. An entry is a JSON Line that describes an image.
+    #
+    # You supply the Amazon Resource Names (ARN) of a project's training
+    # dataset and test dataset. The training dataset must contain the images
+    # that you want to split. The test dataset must be empty. The datasets
+    # must belong to the same project. To create training and test datasets
+    # for a project, call CreateDataset.
+    #
+    # Distributing a dataset takes a while to complete. To check the status
+    # call `DescribeDataset`. The operation is complete when the `Status`
+    # field for the training dataset and the test dataset is
+    # `UPDATE_COMPLETE`. If the dataset split fails, the value of `Status`
+    # is `UPDATE_FAILED`.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DistributeDatasetEntries` action.
+    #
+    # @option params [required, Array<Types::DistributeDataset>] :datasets
+    #   The ARNS for the training dataset and test dataset that you want to
+    #   use. The datasets must belong to the same project. The test dataset
+    #   must be empty.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.distribute_dataset_entries({
+    #     datasets: [ # required
+    #       {
+    #         arn: "DatasetArn", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @overload distribute_dataset_entries(params = {})
+    # @param [Hash] params ({})
+    def distribute_dataset_entries(params = {}, options = {})
+      req = build_request(:distribute_dataset_entries, params)
       req.send_request(options)
     end
 
@@ -3657,6 +3892,155 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Lists the entries (images) within a dataset. An entry is a JSON Line
+    # that contains the information for a single image, including the image
+    # location, assigned labels, and object location bounding boxes. For
+    # more information, see [Creating a manifest file][1].
+    #
+    # JSON Lines in the response include information about non-terminal
+    # errors found in the dataset. Non terminal errors are reported in
+    # `errors` lists within each JSON Line. The same information is reported
+    # in the training and testing validation result manifests that Amazon
+    # Rekognition Custom Labels creates during model training.
+    #
+    # You can filter the response in variety of ways, such as choosing which
+    # labels to return and returning JSON Lines created after a specific
+    # date.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:ListDatasetEntries` action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html
+    #
+    # @option params [required, String] :dataset_arn
+    #   The Amazon Resource Name (ARN) for the dataset that you want to use.
+    #
+    # @option params [Array<String>] :contains_labels
+    #   Specifies a label filter for the response. The response includes an
+    #   entry only if one or more of the labels in `ContainsLabels` exist in
+    #   the entry.
+    #
+    # @option params [Boolean] :labeled
+    #   Specify `true` to get only the JSON Lines where the image is labeled.
+    #   Specify `false` to get only the JSON Lines where the image isn't
+    #   labeled. If you don't specify `Labeled`, `ListDatasetEntries` returns
+    #   JSON Lines for labeled and unlabeled images.
+    #
+    # @option params [String] :source_ref_contains
+    #   If specified, `ListDatasetEntries` only returns JSON Lines where the
+    #   value of `SourceRefContains` is part of the `source-ref` field. The
+    #   `source-ref` field contains the Amazon S3 location of the image. You
+    #   can use `SouceRefContains` for tasks such as getting the JSON Line for
+    #   a single image, or gettting JSON Lines for all images within a
+    #   specific folder.
+    #
+    # @option params [Boolean] :has_errors
+    #   Specifies an error filter for the response. Specify `True` to only
+    #   include entries that have errors.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more results
+    #   to retrieve), Amazon Rekognition Custom Labels returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #
+    # @return [Types::ListDatasetEntriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatasetEntriesResponse#dataset_entries #dataset_entries} => Array&lt;String&gt;
+    #   * {Types::ListDatasetEntriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dataset_entries({
+    #     dataset_arn: "DatasetArn", # required
+    #     contains_labels: ["DatasetLabel"],
+    #     labeled: false,
+    #     source_ref_contains: "QueryString",
+    #     has_errors: false,
+    #     next_token: "ExtendedPaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_entries #=> Array
+    #   resp.dataset_entries[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_dataset_entries(params = {})
+    # @param [Hash] params ({})
+    def list_dataset_entries(params = {}, options = {})
+      req = build_request(:list_dataset_entries, params)
+      req.send_request(options)
+    end
+
+    # Lists the labels in a dataset. Amazon Rekognition Custom Labels uses
+    # labels to describe images. For more information, see [Labeling
+    # images][1].
+    #
+    # Lists the labels in a dataset. Amazon Rekognition Custom Labels uses
+    # labels to describe images. For more information, see Labeling images
+    # in the *Amazon Rekognition Custom Labels Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html
+    #
+    # @option params [required, String] :dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset that you want to use.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more results
+    #   to retrieve), Amazon Rekognition Custom Labels returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #
+    # @return [Types::ListDatasetLabelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatasetLabelsResponse#dataset_label_descriptions #dataset_label_descriptions} => Array&lt;Types::DatasetLabelDescription&gt;
+    #   * {Types::ListDatasetLabelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dataset_labels({
+    #     dataset_arn: "DatasetArn", # required
+    #     next_token: "ExtendedPaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_label_descriptions #=> Array
+    #   resp.dataset_label_descriptions[0].label_name #=> String
+    #   resp.dataset_label_descriptions[0].label_stats.entry_count #=> Integer
+    #   resp.dataset_label_descriptions[0].label_stats.bounding_box_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @overload list_dataset_labels(params = {})
+    # @param [Hash] params ({})
+    def list_dataset_labels(params = {}, options = {})
+      req = build_request(:list_dataset_labels, params)
+      req.send_request(options)
+    end
+
     # Returns metadata for faces in the specified collection. This metadata
     # includes information such as the bounding box coordinates, the
     # confidence (that the bounding box contains a face), and face ID. For
@@ -3930,7 +4314,7 @@ module Aws::Rekognition
     # Rekognition Developer Guide.
     #
     # `RecognizeCelebrities` returns the 64 largest faces in the image. It
-    # lists recognized celebrities in the `CelebrityFaces` array and
+    # lists the recognized celebrities in the `CelebrityFaces` array and any
     # unrecognized faces in the `UnrecognizedFaces` array.
     # `RecognizeCelebrities` doesn't return celebrities whose faces aren't
     # among the largest 64 faces in the image.
@@ -5242,6 +5626,61 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Adds or updates one or more entries (images) in a dataset. An entry is
+    # a JSON Line which contains the information for a single image,
+    # including the image location, assigned labels, and object location
+    # bounding boxes. For more information, see Image-Level labels in
+    # manifest files and Object localization in manifest files in the
+    # *Amazon Rekognition Custom Labels Developer Guide*.
+    #
+    # If the `source-ref` field in the JSON line references an existing
+    # image, the existing image in the dataset is updated. If `source-ref`
+    # field doesn't reference an existing image, the image is added as a
+    # new image to the dataset.
+    #
+    # You specify the changes that you want to make in the `Changes` input
+    # parameter. There isn't a limit to the number JSON Lines that you can
+    # change, but the size of `Changes` must be less than 5MB.
+    #
+    # `UpdateDatasetEntries` returns immediatly, but the dataset update
+    # might take a while to complete. Use DescribeDataset to check the
+    # current status. The dataset updated successfully if the value of
+    # `Status` is `UPDATE_COMPLETE`.
+    #
+    # To check if any non-terminal errors occured, call ListDatasetEntries
+    # and check for the presence of `errors` lists in the JSON Lines.
+    #
+    # Dataset update fails if a terminal error occurs (`Status` =
+    # `UPDATE_FAILED`). Currently, you can't access the terminal error
+    # information from the Amazon Rekognition Custom Labels SDK.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:UpdateDatasetEntries` action.
+    #
+    # @option params [required, String] :dataset_arn
+    #   The Amazon Resource Name (ARN) of the dataset that you want to update.
+    #
+    # @option params [required, Types::DatasetChanges] :changes
+    #   The changes that you want to make to the dataset.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_dataset_entries({
+    #     dataset_arn: "DatasetArn", # required
+    #     changes: { # required
+    #       ground_truth: "data", # required
+    #     },
+    #   })
+    #
+    # @overload update_dataset_entries(params = {})
+    # @param [Hash] params ({})
+    def update_dataset_entries(params = {}, options = {})
+      req = build_request(:update_dataset_entries, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5255,7 +5694,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

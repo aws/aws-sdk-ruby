@@ -329,7 +329,7 @@ module Aws::Neptune
 
     # @!group API Operations
 
-    # Associates an Identity and Access Management (IAM) role from an
+    # Associates an Identity and Access Management (IAM) role with an
     # Neptune DB cluster.
     #
     # @option params [required, String] :db_cluster_identifier
@@ -343,7 +343,7 @@ module Aws::Neptune
     # @option params [String] :feature_name
     #   The name of the feature for the Neptune DB cluster that the IAM role
     #   is to be associated with. For the list of supported feature names, see
-    #   DBEngineVersion.
+    #   [DBEngineVersion](neptune/latest/userguide/api-other-apis.html#DBEngineVersion).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2971,7 +2971,7 @@ module Aws::Neptune
     #     automatically taken by Amazon Neptune for my Amazon account.
     #
     #   * `manual` - Return all DB cluster snapshots that have been taken by
-    #     my AWS account.
+    #     my Amazon account.
     #
     #   * `shared` - Return all manual DB cluster snapshots that have been
     #     shared to my Amazon account.
@@ -3012,7 +3012,7 @@ module Aws::Neptune
     #
     # @option params [Boolean] :include_shared
     #   True to include shared manual DB cluster snapshots from other Amazon
-    #   accounts that this AWS account has been given permission to copy or
+    #   accounts that this Amazon account has been given permission to copy or
     #   restore, and otherwise false. The default is `false`.
     #
     #   You can give an Amazon account permission to restore a manual DB
@@ -4654,6 +4654,34 @@ module Aws::Neptune
     #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html
     #   [2]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
     #
+    # @option params [Boolean] :allow_major_version_upgrade
+    #   A value that indicates whether upgrades between different major
+    #   versions are allowed.
+    #
+    #   Constraints: You must set the allow-major-version-upgrade flag when
+    #   providing an `EngineVersion` parameter that uses a different major
+    #   version than the DB cluster's current version.
+    #
+    # @option params [String] :db_instance_parameter_group_name
+    #   The name of the DB parameter group to apply to all instances of the DB
+    #   cluster.
+    #
+    #   <note markdown="1"> When you apply a parameter group using `DBInstanceParameterGroupName`,
+    #   parameter changes aren't applied during the next maintenance window
+    #   but instead are applied immediately.
+    #
+    #    </note>
+    #
+    #   Default: The existing name setting
+    #
+    #   Constraints:
+    #
+    #   * The DB parameter group must be in the same DB parameter group family
+    #     as the target DB cluster version.
+    #
+    #   * The `DBInstanceParameterGroupName` parameter is only valid in
+    #     combination with the `AllowMajorVersionUpgrade` parameter.
+    #
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the DB cluster has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
@@ -4687,6 +4715,8 @@ module Aws::Neptune
     #       disable_log_types: ["String"],
     #     },
     #     engine_version: "String",
+    #     allow_major_version_upgrade: false,
+    #     db_instance_parameter_group_name: "String",
     #     deletion_protection: false,
     #     copy_tags_to_snapshot: false,
     #   })
@@ -4927,7 +4957,7 @@ module Aws::Neptune
     #   IDs, or `all` to make the manual DB cluster snapshot restorable by any
     #   Amazon account. Do not add the `all` value for any manual DB cluster
     #   snapshots that contain private information that you don't want
-    #   available to all AWS accounts.
+    #   available to all Amazon accounts.
     #
     # @option params [Array<String>] :values_to_remove
     #   A list of DB cluster snapshot attributes to remove from the attribute
@@ -4992,7 +5022,7 @@ module Aws::Neptune
     #
     # @option params [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance, for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all AWS
+    #   `db.m4.large`. Not all DB instance classes are available in all Amazon
     #   Regions.
     #
     #   If you modify the DB instance class, an outage occurs during the
@@ -5875,7 +5905,11 @@ module Aws::Neptune
     # @option params [String] :feature_name
     #   The name of the feature for the DB cluster that the IAM role is to be
     #   disassociated from. For the list of supported feature names, see
-    #   DBEngineVersion.
+    #   [DescribeDBEngineVersions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6587,7 +6621,7 @@ module Aws::Neptune
       req.send_request(options)
     end
 
-    # Starts an Amazon Neptune DB cluster that was stopped using the AWS
+    # Starts an Amazon Neptune DB cluster that was stopped using the Amazon
     # console, the Amazon CLI stop-db-cluster command, or the StopDBCluster
     # API.
     #
@@ -6771,7 +6805,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

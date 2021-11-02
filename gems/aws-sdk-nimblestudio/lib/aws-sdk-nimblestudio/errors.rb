@@ -114,6 +114,10 @@ module Aws::NimbleStudio
       def message
         @message || @data[:message]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class ResourceNotFoundException < ServiceError
@@ -188,6 +192,10 @@ module Aws::NimbleStudio
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

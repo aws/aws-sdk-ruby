@@ -3,6 +3,16 @@ Unreleased Changes
 
 * Feature - Support modeled dualstack and fips endpoints in `Aws::Partitions::EndpointProvider`.
 
+1.523.0 (2021-11-02)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.522.0 (2021-11-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.521.0 (2021-10-29)
 ------------------
 

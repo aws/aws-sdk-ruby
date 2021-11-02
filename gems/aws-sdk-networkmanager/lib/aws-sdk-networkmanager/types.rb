@@ -10,7 +10,7 @@
 module Aws::NetworkManager
   module Types
 
-    # Specifies a location in AWS.
+    # Specifies a location in Amazon Web Services.
     #
     # @note When making an API call, you may pass AWSLocation
     #   data as a hash:
@@ -21,13 +21,13 @@ module Aws::NetworkManager
     #       }
     #
     # @!attribute [rw] zone
-    #   The Zone the device is located in. This can be the ID of an
+    #   The Zone that the device is located in. Specify the ID of an
     #   Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
     #   @return [String]
     #
     # @!attribute [rw] subnet_arn
-    #   The Amazon Resource Name (ARN) of the subnet the device is located
-    #   in.
+    #   The Amazon Resource Name (ARN) of the subnet that the device is
+    #   located in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AWSLocation AWS API Documentation
@@ -63,12 +63,7 @@ module Aws::NetworkManager
     #       }
     #
     # @!attribute [rw] customer_gateway_arn
-    #   The Amazon Resource Name (ARN) of the customer gateway. For more
-    #   information, see [Resources Defined by Amazon EC2][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies
+    #   The Amazon Resource Name (ARN) of the customer gateway.
     #   @return [String]
     #
     # @!attribute [rw] global_network_id
@@ -313,6 +308,30 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes connection health.
+    #
+    # @!attribute [rw] type
+    #   The connection type.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The connection status.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The time the status was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectionHealth AWS API Documentation
+    #
+    class ConnectionHealth < Struct.new(
+      :type,
+      :status,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateConnectionRequest
     #   data as a hash:
     #
@@ -420,13 +439,14 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] aws_location
-    #   The AWS location of the device.
+    #   The Amazon Web Services location of the device, if applicable. For
+    #   an on-premises device, you can omit this parameter.
     #   @return [Types::AWSLocation]
     #
     # @!attribute [rw] description
     #   A description of the device.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -436,19 +456,19 @@ module Aws::NetworkManager
     # @!attribute [rw] vendor
     #   The vendor of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] model
     #   The model of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] serial_number
     #   The serial number of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -508,7 +528,7 @@ module Aws::NetworkManager
     # @!attribute [rw] description
     #   A description of the global network.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -564,15 +584,14 @@ module Aws::NetworkManager
     # @!attribute [rw] description
     #   A description of the link.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of the link.
     #
-    #   Constraints: Cannot include the following characters: \| \\ ^
-    #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters. Cannot include the
+    #   following characters: \| \\ ^
     #   @return [String]
     #
     # @!attribute [rw] bandwidth
@@ -582,9 +601,8 @@ module Aws::NetworkManager
     # @!attribute [rw] provider
     #   The provider of the link.
     #
-    #   Constraints: Cannot include the following characters: \| \\ ^
-    #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters. Cannot include the
+    #   following characters: \| \\ ^
     #   @return [String]
     #
     # @!attribute [rw] site_id
@@ -647,7 +665,7 @@ module Aws::NetworkManager
     # @!attribute [rw] description
     #   A description of your site.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -1003,7 +1021,7 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] aws_location
-    #   The AWS location of the device.
+    #   The Amazon Web Services location of the device.
     #   @return [Types::AWSLocation]
     #
     # @!attribute [rw] description
@@ -1080,12 +1098,7 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] customer_gateway_arn
-    #   The Amazon Resource Name (ARN) of the customer gateway. For more
-    #   information, see [Resources Defined by Amazon EC2][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies
+    #   The Amazon Resource Name (ARN) of the customer gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateCustomerGatewayRequest AWS API Documentation
@@ -1264,13 +1277,8 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] customer_gateway_arns
-    #   One or more customer gateway Amazon Resource Names (ARNs). For more
-    #   information, see [Resources Defined by Amazon EC2][1]. The maximum
-    #   is 10.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies
+    #   One or more customer gateway Amazon Resource Names (ARNs). The
+    #   maximum is 10.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -1497,6 +1505,585 @@ module Aws::NetworkManager
     class GetLinksResponse < Struct.new(
       :links,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetNetworkResourceCountsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         resource_type: "String",
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #
+    #   The following are the supported resource types for Direct Connect:
+    #
+    #   * `dxcon`
+    #
+    #   * `dx-gateway`
+    #
+    #   * `dx-vif`
+    #
+    #   The following are the supported resource types for Network Manager:
+    #
+    #   * `connection`
+    #
+    #   * `device`
+    #
+    #   * `link`
+    #
+    #   * `site`
+    #
+    #   The following are the supported resource types for Amazon VPC:
+    #
+    #   * `customer-gateway`
+    #
+    #   * `transit-gateway`
+    #
+    #   * `transit-gateway-attachment`
+    #
+    #   * `transit-gateway-connect-peer`
+    #
+    #   * `transit-gateway-route-table`
+    #
+    #   * `vpn-connection`
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkResourceCountsRequest AWS API Documentation
+    #
+    class GetNetworkResourceCountsRequest < Struct.new(
+      :global_network_id,
+      :resource_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_resource_counts
+    #   The count of resources.
+    #   @return [Array<Types::NetworkResourceCount>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkResourceCountsResponse AWS API Documentation
+    #
+    class GetNetworkResourceCountsResponse < Struct.new(
+      :network_resource_counts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetNetworkResourceRelationshipsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         registered_gateway_arn: "String",
+    #         aws_region: "String",
+    #         account_id: "String",
+    #         resource_type: "String",
+    #         resource_arn: "String",
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] registered_gateway_arn
+    #   The ARN of the registered gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #
+    #   The following are the supported resource types for Direct Connect:
+    #
+    #   * `dxcon`
+    #
+    #   * `dx-gateway`
+    #
+    #   * `dx-vif`
+    #
+    #   The following are the supported resource types for Network Manager:
+    #
+    #   * `connection`
+    #
+    #   * `device`
+    #
+    #   * `link`
+    #
+    #   * `site`
+    #
+    #   The following are the supported resource types for Amazon VPC:
+    #
+    #   * `customer-gateway`
+    #
+    #   * `transit-gateway`
+    #
+    #   * `transit-gateway-attachment`
+    #
+    #   * `transit-gateway-connect-peer`
+    #
+    #   * `transit-gateway-route-table`
+    #
+    #   * `vpn-connection`
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkResourceRelationshipsRequest AWS API Documentation
+    #
+    class GetNetworkResourceRelationshipsRequest < Struct.new(
+      :global_network_id,
+      :registered_gateway_arn,
+      :aws_region,
+      :account_id,
+      :resource_type,
+      :resource_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] relationships
+    #   The resource relationships.
+    #   @return [Array<Types::Relationship>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkResourceRelationshipsResponse AWS API Documentation
+    #
+    class GetNetworkResourceRelationshipsResponse < Struct.new(
+      :relationships,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetNetworkResourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         registered_gateway_arn: "String",
+    #         aws_region: "String",
+    #         account_id: "String",
+    #         resource_type: "String",
+    #         resource_arn: "String",
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] registered_gateway_arn
+    #   The ARN of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #
+    #   The following are the supported resource types for Direct Connect:
+    #
+    #   * `dxcon` - The definition model is [Connection][1].
+    #
+    #   * `dx-gateway` - The definition model is [DirectConnectGateway][2].
+    #
+    #   * `dx-vif` - The definition model is [VirtualInterface][3].
+    #
+    #   The following are the supported resource types for Network Manager:
+    #
+    #   * `connection` - The definition model is [Connection][4].
+    #
+    #   * `device` - The definition model is [Device][5].
+    #
+    #   * `link` - The definition model is [Link][6].
+    #
+    #   * `site` - The definition model is [Site][7].
+    #
+    #   The following are the supported resource types for Amazon VPC:
+    #
+    #   * `customer-gateway` - The definition model is [CustomerGateway][8].
+    #
+    #   * `transit-gateway` - The definition model is [TransitGateway][9].
+    #
+    #   * `transit-gateway-attachment` - The definition model is
+    #     [TransitGatewayAttachment][10].
+    #
+    #   * `transit-gateway-connect-peer` - The definition model is
+    #     [TransitGatewayConnectPeer][11].
+    #
+    #   * `transit-gateway-route-table` - The definition model is
+    #     [TransitGatewayRouteTable][12].
+    #
+    #   * `vpn-connection` - The definition model is [VpnConnection][13].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_Connection.html
+    #   [2]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DirectConnectGateway.html
+    #   [3]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_VirtualInterface.html
+    #   [4]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Connection.html
+    #   [5]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Device.html
+    #   [6]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Link.html
+    #   [7]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Site.html
+    #   [8]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CustomerGateway.html
+    #   [9]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGateway.html
+    #   [10]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayAttachment.html
+    #   [11]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayConnectPeer.html
+    #   [12]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayRouteTable.html
+    #   [13]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpnConnection.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkResourcesRequest AWS API Documentation
+    #
+    class GetNetworkResourcesRequest < Struct.new(
+      :global_network_id,
+      :registered_gateway_arn,
+      :aws_region,
+      :account_id,
+      :resource_type,
+      :resource_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_resources
+    #   The network resources.
+    #   @return [Array<Types::NetworkResource>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkResourcesResponse AWS API Documentation
+    #
+    class GetNetworkResourcesResponse < Struct.new(
+      :network_resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetNetworkRoutesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         route_table_identifier: { # required
+    #           transit_gateway_route_table_arn: "String",
+    #         },
+    #         exact_cidr_matches: ["String"],
+    #         longest_prefix_matches: ["String"],
+    #         subnet_of_matches: ["String"],
+    #         supernet_of_matches: ["String"],
+    #         prefix_list_ids: ["String"],
+    #         states: ["ACTIVE"], # accepts ACTIVE, BLACKHOLE
+    #         types: ["PROPAGATED"], # accepts PROPAGATED, STATIC
+    #         destination_filters: {
+    #           "FilterName" => ["FilterValue"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_table_identifier
+    #   The ID of the route table.
+    #   @return [Types::RouteTableIdentifier]
+    #
+    # @!attribute [rw] exact_cidr_matches
+    #   An exact CIDR block.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] longest_prefix_matches
+    #   The most specific route that matches the traffic (longest prefix
+    #   match).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_of_matches
+    #   The routes with a subnet that match the specified CIDR filter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supernet_of_matches
+    #   The routes with a CIDR that encompasses the CIDR filter. Example: If
+    #   you specify 10.0.1.0/30, then the result returns 10.0.1.0/29.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] prefix_list_ids
+    #   The IDs of the prefix lists.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] states
+    #   The route states.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] types
+    #   The route types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destination_filters
+    #   Filter by route table destination. Possible Values:
+    #   TRANSIT\_GATEWAY\_ATTACHMENT\_ID, RESOURCE\_ID, or RESOURCE\_TYPE.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkRoutesRequest AWS API Documentation
+    #
+    class GetNetworkRoutesRequest < Struct.new(
+      :global_network_id,
+      :route_table_identifier,
+      :exact_cidr_matches,
+      :longest_prefix_matches,
+      :subnet_of_matches,
+      :supernet_of_matches,
+      :prefix_list_ids,
+      :states,
+      :types,
+      :destination_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] route_table_arn
+    #   The ARN of the route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_table_type
+    #   The route table type.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_table_timestamp
+    #   The route table creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] network_routes
+    #   The network routes.
+    #   @return [Array<Types::NetworkRoute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkRoutesResponse AWS API Documentation
+    #
+    class GetNetworkRoutesResponse < Struct.new(
+      :route_table_arn,
+      :route_table_type,
+      :route_table_timestamp,
+      :network_routes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetNetworkTelemetryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         registered_gateway_arn: "String",
+    #         aws_region: "String",
+    #         account_id: "String",
+    #         resource_type: "String",
+    #         resource_arn: "String",
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] registered_gateway_arn
+    #   The ARN of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #
+    #   The following are the supported resource types for Direct Connect:
+    #
+    #   * `dxcon`
+    #
+    #   * `dx-gateway`
+    #
+    #   * `dx-vif`
+    #
+    #   The following are the supported resource types for Network Manager:
+    #
+    #   * `connection`
+    #
+    #   * `device`
+    #
+    #   * `link`
+    #
+    #   * `site`
+    #
+    #   The following are the supported resource types for Amazon VPC:
+    #
+    #   * `customer-gateway`
+    #
+    #   * `transit-gateway`
+    #
+    #   * `transit-gateway-attachment`
+    #
+    #   * `transit-gateway-connect-peer`
+    #
+    #   * `transit-gateway-route-table`
+    #
+    #   * `vpn-connection`
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkTelemetryRequest AWS API Documentation
+    #
+    class GetNetworkTelemetryRequest < Struct.new(
+      :global_network_id,
+      :registered_gateway_arn,
+      :aws_region,
+      :account_id,
+      :resource_type,
+      :resource_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_telemetry
+    #   The network telemetry.
+    #   @return [Array<Types::NetworkTelemetry>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkTelemetryResponse AWS API Documentation
+    #
+    class GetNetworkTelemetryResponse < Struct.new(
+      :network_telemetry,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRouteAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         route_analysis_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_analysis_id
+    #   The ID of the route analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetRouteAnalysisRequest AWS API Documentation
+    #
+    class GetRouteAnalysisRequest < Struct.new(
+      :global_network_id,
+      :route_analysis_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] route_analysis
+    #   The route analysis.
+    #   @return [Types::RouteAnalysis]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetRouteAnalysisResponse AWS API Documentation
+    #
+    class GetRouteAnalysisResponse < Struct.new(
+      :route_analysis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1879,6 +2466,290 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes a network resource.
+    #
+    # @!attribute [rw] registered_gateway_arn
+    #   The ARN of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #
+    #   The following are the supported resource types for Direct Connect:
+    #
+    #   * `dxcon`
+    #
+    #   * `dx-gateway`
+    #
+    #   * `dx-vif`
+    #
+    #   The following are the supported resource types for Network Manager:
+    #
+    #   * `connection`
+    #
+    #   * `device`
+    #
+    #   * `link`
+    #
+    #   * `site`
+    #
+    #   The following are the supported resource types for Amazon VPC:
+    #
+    #   * `customer-gateway`
+    #
+    #   * `transit-gateway`
+    #
+    #   * `transit-gateway-attachment`
+    #
+    #   * `transit-gateway-connect-peer`
+    #
+    #   * `transit-gateway-route-table`
+    #
+    #   * `vpn-connection`
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   Information about the resource, in JSON format. Network Manager gets
+    #   this information by describing the resource using its Describe API
+    #   call.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition_timestamp
+    #   The time that the resource definition was retrieved.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] metadata
+    #   The resource metadata.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/NetworkResource AWS API Documentation
+    #
+    class NetworkResource < Struct.new(
+      :registered_gateway_arn,
+      :aws_region,
+      :account_id,
+      :resource_type,
+      :resource_id,
+      :resource_arn,
+      :definition,
+      :definition_timestamp,
+      :tags,
+      :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a resource count.
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The resource count.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/NetworkResourceCount AWS API Documentation
+    #
+    class NetworkResourceCount < Struct.new(
+      :resource_type,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a network resource.
+    #
+    # @!attribute [rw] registered_gateway_arn
+    #   The ARN of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   Information about the resource, in JSON format. Network Manager gets
+    #   this information by describing the resource using its Describe API
+    #   call.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_tag
+    #   The value for the Name tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_middlebox
+    #   Indicates whether this is a middlebox appliance.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/NetworkResourceSummary AWS API Documentation
+    #
+    class NetworkResourceSummary < Struct.new(
+      :registered_gateway_arn,
+      :resource_arn,
+      :resource_type,
+      :definition,
+      :name_tag,
+      :is_middlebox)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a network route.
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   A unique identifier for the route, such as a CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   The destinations.
+    #   @return [Array<Types::NetworkRouteDestination>]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The route state. The possible values are `active` and `blackhole`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The route type. The possible values are `propagated` and `static`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/NetworkRoute AWS API Documentation
+    #
+    class NetworkRoute < Struct.new(
+      :destination_cidr_block,
+      :destinations,
+      :prefix_list_id,
+      :state,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the destination of a network route.
+    #
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/NetworkRouteDestination AWS API Documentation
+    #
+    class NetworkRouteDestination < Struct.new(
+      :transit_gateway_attachment_id,
+      :resource_type,
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the telemetry information for a resource.
+    #
+    # @!attribute [rw] registered_gateway_arn
+    #   The ARN of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   The address.
+    #   @return [String]
+    #
+    # @!attribute [rw] health
+    #   The connection health.
+    #   @return [Types::ConnectionHealth]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/NetworkTelemetry AWS API Documentation
+    #
+    class NetworkTelemetry < Struct.new(
+      :registered_gateway_arn,
+      :aws_region,
+      :account_id,
+      :resource_type,
+      :resource_id,
+      :resource_arn,
+      :address,
+      :health)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a path component.
+    #
+    # @!attribute [rw] sequence
+    #   The sequence number in the path. The destination is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource
+    #   The resource.
+    #   @return [Types::NetworkResourceSummary]
+    #
+    # @!attribute [rw] destination_cidr_block
+    #   The destination CIDR block in the route table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PathComponent AWS API Documentation
+    #
+    class PathComponent < Struct.new(
+      :sequence,
+      :resource,
+      :destination_cidr_block)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RegisterTransitGatewayRequest
     #   data as a hash:
     #
@@ -1892,12 +2763,7 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] transit_gateway_arn
-    #   The Amazon Resource Name (ARN) of the transit gateway. For more
-    #   information, see [Resources Defined by Amazon EC2][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies
+    #   The Amazon Resource Name (ARN) of the transit gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RegisterTransitGatewayRequest AWS API Documentation
@@ -1921,6 +2787,25 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes a resource relationship.
+    #
+    # @!attribute [rw] from
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] to
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/Relationship AWS API Documentation
+    #
+    class Relationship < Struct.new(
+      :from,
+      :to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource could not be found.
     #
     # @!attribute [rw] message
@@ -1934,12 +2819,225 @@ module Aws::NetworkManager
     #   The resource type.
     #   @return [String]
     #
+    # @!attribute [rw] context
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
       :message,
       :resource_id,
-      :resource_type)
+      :resource_type,
+      :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a route analysis.
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   The ID of the AWS account that created the route analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_analysis_id
+    #   The ID of the route analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timestamp
+    #   The time that the analysis started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the route analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source.
+    #   @return [Types::RouteAnalysisEndpointOptions]
+    #
+    # @!attribute [rw] destination
+    #   The destination.
+    #   @return [Types::RouteAnalysisEndpointOptions]
+    #
+    # @!attribute [rw] include_return_path
+    #   Indicates whether to analyze the return path. The return path is not
+    #   analyzed if the forward path analysis does not succeed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] use_middleboxes
+    #   Indicates whether to include the location of middlebox appliances in
+    #   the route analysis.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] forward_path
+    #   The forward path.
+    #   @return [Types::RouteAnalysisPath]
+    #
+    # @!attribute [rw] return_path
+    #   The return path.
+    #   @return [Types::RouteAnalysisPath]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RouteAnalysis AWS API Documentation
+    #
+    class RouteAnalysis < Struct.new(
+      :global_network_id,
+      :owner_account_id,
+      :route_analysis_id,
+      :start_timestamp,
+      :status,
+      :source,
+      :destination,
+      :include_return_path,
+      :use_middleboxes,
+      :forward_path,
+      :return_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the status of an analysis at completion.
+    #
+    # @!attribute [rw] result_code
+    #   The result of the analysis. If the status is `NOT_CONNECTED`, check
+    #   the reason code.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   The reason code. Available only if a connection is not found.
+    #
+    #   * `BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND` - Found a black hole route
+    #     with the destination CIDR block.
+    #
+    #   * `CYCLIC_PATH_DETECTED` - Found the same resource multiple times
+    #     while traversing the path.
+    #
+    #   * `INACTIVE_ROUTE_FOR_DESTINATION_FOUND` - Found an inactive route
+    #     with the destination CIDR block.
+    #
+    #   * `MAX_HOPS_EXCEEDED` - Analysis exceeded 64 hops without finding
+    #     the destination.
+    #
+    #   * `ROUTE_NOT_FOUND` - Cannot find a route table with the destination
+    #     CIDR block.
+    #
+    #   * `TGW_ATTACH_ARN_NO_MATCH` - Found an attachment, but not with the
+    #     correct destination ARN.
+    #
+    #   * `TGW_ATTACH_NOT_FOUND` - Cannot find an attachment.
+    #
+    #   * `TGW_ATTACH_NOT_IN_TGW` - Found an attachment, but not to the
+    #     correct transit gateway.
+    #
+    #   * `TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND` - The state of the route
+    #     table association is not associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_context
+    #   Additional information about the path. Available only if a
+    #   connection is not found.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RouteAnalysisCompletion AWS API Documentation
+    #
+    class RouteAnalysisCompletion < Struct.new(
+      :result_code,
+      :reason_code,
+      :reason_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a source or a destination.
+    #
+    # @!attribute [rw] transit_gateway_attachment_arn
+    #   The ARN of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_arn
+    #   The ARN of the transit gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The IP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RouteAnalysisEndpointOptions AWS API Documentation
+    #
+    class RouteAnalysisEndpointOptions < Struct.new(
+      :transit_gateway_attachment_arn,
+      :transit_gateway_arn,
+      :ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a source or a destination.
+    #
+    # @note When making an API call, you may pass RouteAnalysisEndpointOptionsSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_attachment_arn: "String",
+    #         ip_address: "String",
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_attachment_arn
+    #   The ARN of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The IP address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RouteAnalysisEndpointOptionsSpecification AWS API Documentation
+    #
+    class RouteAnalysisEndpointOptionsSpecification < Struct.new(
+      :transit_gateway_attachment_arn,
+      :ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a route analysis path.
+    #
+    # @!attribute [rw] completion_status
+    #   The status of the analysis at completion.
+    #   @return [Types::RouteAnalysisCompletion]
+    #
+    # @!attribute [rw] path
+    #   The route analysis path.
+    #   @return [Array<Types::PathComponent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RouteAnalysisPath AWS API Documentation
+    #
+    class RouteAnalysisPath < Struct.new(
+      :completion_status,
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a route table.
+    #
+    # @note When making an API call, you may pass RouteTableIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         transit_gateway_route_table_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] transit_gateway_route_table_arn
+    #   The ARN of the transit gateway route table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RouteTableIdentifier AWS API Documentation
+    #
+    class RouteTableIdentifier < Struct.new(
+      :transit_gateway_route_table_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2027,6 +3125,69 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartRouteAnalysisRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         source: { # required
+    #           transit_gateway_attachment_arn: "String",
+    #           ip_address: "String",
+    #         },
+    #         destination: { # required
+    #           transit_gateway_attachment_arn: "String",
+    #           ip_address: "String",
+    #         },
+    #         include_return_path: false,
+    #         use_middleboxes: false,
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source from which traffic originates.
+    #   @return [Types::RouteAnalysisEndpointOptionsSpecification]
+    #
+    # @!attribute [rw] destination
+    #   The destination.
+    #   @return [Types::RouteAnalysisEndpointOptionsSpecification]
+    #
+    # @!attribute [rw] include_return_path
+    #   Indicates whether to analyze the return path. The default is
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] use_middleboxes
+    #   Indicates whether to include the location of middlebox appliances in
+    #   the route analysis. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/StartRouteAnalysisRequest AWS API Documentation
+    #
+    class StartRouteAnalysisRequest < Struct.new(
+      :global_network_id,
+      :source,
+      :destination,
+      :include_return_path,
+      :use_middleboxes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] route_analysis
+    #   The route analysis.
+    #   @return [Types::RouteAnalysis]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/StartRouteAnalysisResponse AWS API Documentation
+    #
+    class StartRouteAnalysisResponse < Struct.new(
+      :route_analysis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a tag.
     #
     # @note When making an API call, you may pass Tag
@@ -2040,13 +3201,13 @@ module Aws::NetworkManager
     # @!attribute [rw] key
     #   The tag key.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] value
     #   The tag value.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/Tag AWS API Documentation
@@ -2305,13 +3466,14 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] aws_location
-    #   The AWS location of the device.
+    #   The Amazon Web Services location of the device, if applicable. For
+    #   an on-premises device, you can omit this parameter.
     #   @return [Types::AWSLocation]
     #
     # @!attribute [rw] description
     #   A description of the device.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2321,19 +3483,19 @@ module Aws::NetworkManager
     # @!attribute [rw] vendor
     #   The vendor of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] model
     #   The model of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] serial_number
     #   The serial number of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -2388,7 +3550,7 @@ module Aws::NetworkManager
     # @!attribute [rw] description
     #   A description of the global network.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateGlobalNetworkRequest AWS API Documentation
@@ -2438,13 +3600,13 @@ module Aws::NetworkManager
     # @!attribute [rw] description
     #   A description of the link.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of the link.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] bandwidth
@@ -2454,7 +3616,7 @@ module Aws::NetworkManager
     # @!attribute [rw] provider
     #   The provider of the link.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateLinkRequest AWS API Documentation
@@ -2478,6 +3640,56 @@ module Aws::NetworkManager
     #
     class UpdateLinkResponse < Struct.new(
       :link)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateNetworkResourceMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "String", # required
+    #         resource_arn: "String", # required
+    #         metadata: { # required
+    #           "NetworkResourceMetadataKey" => "NetworkResourceMetadataValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The resource metadata.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateNetworkResourceMetadataRequest AWS API Documentation
+    #
+    class UpdateNetworkResourceMetadataRequest < Struct.new(
+      :global_network_id,
+      :resource_arn,
+      :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The updated resource metadata.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateNetworkResourceMetadataResponse AWS API Documentation
+    #
+    class UpdateNetworkResourceMetadataResponse < Struct.new(
+      :resource_arn,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2507,7 +3719,7 @@ module Aws::NetworkManager
     # @!attribute [rw] description
     #   A description of your site.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #   @return [String]
     #
     # @!attribute [rw] location

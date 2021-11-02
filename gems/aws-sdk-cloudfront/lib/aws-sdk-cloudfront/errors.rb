@@ -87,6 +87,7 @@ module Aws::CloudFront
   # * {NoSuchPublicKey}
   # * {NoSuchRealtimeLogConfig}
   # * {NoSuchResource}
+  # * {NoSuchResponseHeadersPolicy}
   # * {NoSuchStreamingDistribution}
   # * {OriginRequestPolicyAlreadyExists}
   # * {OriginRequestPolicyInUse}
@@ -98,6 +99,8 @@ module Aws::CloudFront
   # * {RealtimeLogConfigInUse}
   # * {RealtimeLogConfigOwnerMismatch}
   # * {ResourceInUse}
+  # * {ResponseHeadersPolicyAlreadyExists}
+  # * {ResponseHeadersPolicyInUse}
   # * {StreamingDistributionAlreadyExists}
   # * {StreamingDistributionNotDisabled}
   # * {TestFunctionFailed}
@@ -108,12 +111,14 @@ module Aws::CloudFront
   # * {TooManyCookieNamesInWhiteList}
   # * {TooManyCookiesInCachePolicy}
   # * {TooManyCookiesInOriginRequestPolicy}
+  # * {TooManyCustomHeadersInResponseHeadersPolicy}
   # * {TooManyDistributionCNAMEs}
   # * {TooManyDistributions}
   # * {TooManyDistributionsAssociatedToCachePolicy}
   # * {TooManyDistributionsAssociatedToFieldLevelEncryptionConfig}
   # * {TooManyDistributionsAssociatedToKeyGroup}
   # * {TooManyDistributionsAssociatedToOriginRequestPolicy}
+  # * {TooManyDistributionsAssociatedToResponseHeadersPolicy}
   # * {TooManyDistributionsWithFunctionAssociations}
   # * {TooManyDistributionsWithLambdaAssociations}
   # * {TooManyDistributionsWithSingleFunctionARN}
@@ -142,6 +147,7 @@ module Aws::CloudFront
   # * {TooManyQueryStringsInCachePolicy}
   # * {TooManyQueryStringsInOriginRequestPolicy}
   # * {TooManyRealtimeLogConfigs}
+  # * {TooManyResponseHeadersPolicies}
   # * {TooManyStreamingDistributionCNAMEs}
   # * {TooManyStreamingDistributions}
   # * {TooManyTrustedSigners}
@@ -1055,6 +1061,21 @@ module Aws::CloudFront
       end
     end
 
+    class NoSuchResponseHeadersPolicy < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::NoSuchResponseHeadersPolicy] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class NoSuchStreamingDistribution < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1220,6 +1241,36 @@ module Aws::CloudFront
       end
     end
 
+    class ResponseHeadersPolicyAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::ResponseHeadersPolicyAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResponseHeadersPolicyInUse < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::ResponseHeadersPolicyInUse] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class StreamingDistributionAlreadyExists < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1370,6 +1421,21 @@ module Aws::CloudFront
       end
     end
 
+    class TooManyCustomHeadersInResponseHeadersPolicy < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyCustomHeadersInResponseHeadersPolicy] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class TooManyDistributionCNAMEs < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1450,6 +1516,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TooManyDistributionsAssociatedToOriginRequestPolicy] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyDistributionsAssociatedToResponseHeadersPolicy < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyDistributionsAssociatedToResponseHeadersPolicy] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -1870,6 +1951,21 @@ module Aws::CloudFront
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CloudFront::Types::TooManyRealtimeLogConfigs] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyResponseHeadersPolicies < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudFront::Types::TooManyResponseHeadersPolicies] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

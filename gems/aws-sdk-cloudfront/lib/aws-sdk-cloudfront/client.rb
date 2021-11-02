@@ -578,7 +578,7 @@ module Aws::CloudFront
     #               items: [
     #                 {
     #                   header_name: "string", # required
-    #                   header_value: "string", # required
+    #                   header_value: "sensitiveStringType", # required
     #                 },
     #               ],
     #             },
@@ -673,6 +673,7 @@ module Aws::CloudFront
     #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
     #         origin_request_policy_id: "string",
+    #         response_headers_policy_id: "string",
     #         forwarded_values: {
     #           query_string: false, # required
     #           cookies: { # required
@@ -745,6 +746,7 @@ module Aws::CloudFront
     #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
     #             origin_request_policy_id: "string",
+    #             response_headers_policy_id: "string",
     #             forwarded_values: {
     #               query_string: false, # required
     #               cookies: { # required
@@ -900,6 +902,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.response_headers_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -948,6 +951,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].response_headers_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -1038,7 +1042,7 @@ module Aws::CloudFront
     #                 items: [
     #                   {
     #                     header_name: "string", # required
-    #                     header_value: "string", # required
+    #                     header_value: "sensitiveStringType", # required
     #                   },
     #                 ],
     #               },
@@ -1133,6 +1137,7 @@ module Aws::CloudFront
     #           realtime_log_config_arn: "string",
     #           cache_policy_id: "string",
     #           origin_request_policy_id: "string",
+    #           response_headers_policy_id: "string",
     #           forwarded_values: {
     #             query_string: false, # required
     #             cookies: { # required
@@ -1205,6 +1210,7 @@ module Aws::CloudFront
     #               realtime_log_config_arn: "string",
     #               cache_policy_id: "string",
     #               origin_request_policy_id: "string",
+    #               response_headers_policy_id: "string",
     #               forwarded_values: {
     #                 query_string: false, # required
     #                 cookies: { # required
@@ -1369,6 +1375,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.response_headers_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -1417,6 +1424,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].response_headers_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -2051,6 +2059,151 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Creates a response headers policy.
+    #
+    # A response headers policy contains information about a set of HTTP
+    # response headers and their values. To create a response headers
+    # policy, you provide some metadata about the policy, and a set of
+    # configurations that specify the response headers.
+    #
+    # After you create a response headers policy, you can use its ID to
+    # attach it to one or more cache behaviors in a CloudFront distribution.
+    # When it’s attached to a cache behavior, CloudFront adds the headers in
+    # the policy to HTTP responses that it sends for requests that match the
+    # cache behavior.
+    #
+    # @option params [required, Types::ResponseHeadersPolicyConfig] :response_headers_policy_config
+    #   Contains metadata about the response headers policy, and a set of
+    #   configurations that specify the response headers.
+    #
+    # @return [Types::CreateResponseHeadersPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateResponseHeadersPolicyResult#response_headers_policy #response_headers_policy} => Types::ResponseHeadersPolicy
+    #   * {Types::CreateResponseHeadersPolicyResult#location #location} => String
+    #   * {Types::CreateResponseHeadersPolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_response_headers_policy({
+    #     response_headers_policy_config: { # required
+    #       comment: "string",
+    #       name: "string", # required
+    #       cors_config: {
+    #         access_control_allow_origins: { # required
+    #           quantity: 1, # required
+    #           items: ["string"], # required
+    #         },
+    #         access_control_allow_headers: { # required
+    #           quantity: 1, # required
+    #           items: ["string"], # required
+    #         },
+    #         access_control_allow_methods: { # required
+    #           quantity: 1, # required
+    #           items: ["GET"], # required, accepts GET, POST, OPTIONS, PUT, DELETE, PATCH, HEAD, ALL
+    #         },
+    #         access_control_allow_credentials: false, # required
+    #         access_control_expose_headers: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         access_control_max_age_sec: 1,
+    #         origin_override: false, # required
+    #       },
+    #       security_headers_config: {
+    #         xss_protection: {
+    #           override: false, # required
+    #           protection: false, # required
+    #           mode_block: false,
+    #           report_uri: "string",
+    #         },
+    #         frame_options: {
+    #           override: false, # required
+    #           frame_option: "DENY", # required, accepts DENY, SAMEORIGIN
+    #         },
+    #         referrer_policy: {
+    #           override: false, # required
+    #           referrer_policy: "no-referrer", # required, accepts no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    #         },
+    #         content_security_policy: {
+    #           override: false, # required
+    #           content_security_policy: "string", # required
+    #         },
+    #         content_type_options: {
+    #           override: false, # required
+    #         },
+    #         strict_transport_security: {
+    #           override: false, # required
+    #           include_subdomains: false,
+    #           preload: false,
+    #           access_control_max_age_sec: 1, # required
+    #         },
+    #       },
+    #       custom_headers_config: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             header: "string", # required
+    #             value: "string", # required
+    #             override: false, # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.response_headers_policy.id #=> String
+    #   resp.response_headers_policy.last_modified_time #=> Time
+    #   resp.response_headers_policy.response_headers_policy_config.comment #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.name #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.items[0] #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.items[0] #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.items[0] #=> String, one of "GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH", "HEAD", "ALL"
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_credentials #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.items[0] #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.origin_override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.protection #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.mode_block #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.report_uri #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.frame_options.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.frame_options.frame_option #=> String, one of "DENY", "SAMEORIGIN"
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.referrer_policy.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.referrer_policy.referrer_policy #=> String, one of "no-referrer", "no-referrer-when-downgrade", "origin", "origin-when-cross-origin", "same-origin", "strict-origin", "strict-origin-when-cross-origin", "unsafe-url"
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.content_security_policy.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.content_security_policy.content_security_policy #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.content_type_options.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.include_subdomains #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.preload #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.location #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateResponseHeadersPolicy AWS API Documentation
+    #
+    # @overload create_response_headers_policy(params = {})
+    # @param [Hash] params ({})
+    def create_response_headers_policy(params = {}, options = {})
+      req = build_request(:create_response_headers_policy, params)
+      req.send_request(options)
+    end
+
     # This API is deprecated. Amazon CloudFront is deprecating real-time
     # messaging protocol (RTMP) distributions on December 31, 2020. For more
     # information, [read the announcement][1] on the Amazon CloudFront
@@ -2583,6 +2736,47 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Deletes a response headers policy.
+    #
+    # You cannot delete a response headers policy if it’s attached to a
+    # cache behavior. First update your distributions to remove the response
+    # headers policy from all cache behaviors, then delete the response
+    # headers policy.
+    #
+    # To delete a response headers policy, you must provide the policy’s
+    # identifier and version. To get these values, you can use
+    # `ListResponseHeadersPolicies` or `GetResponseHeadersPolicy`.
+    #
+    # @option params [required, String] :id
+    #   The identifier for the response headers policy that you are deleting.
+    #
+    #   To get the identifier, you can use `ListResponseHeadersPolicies`.
+    #
+    # @option params [String] :if_match
+    #   The version of the response headers policy that you are deleting.
+    #
+    #   The version is the response headers policy’s `ETag` value, which you
+    #   can get using `ListResponseHeadersPolicies`,
+    #   `GetResponseHeadersPolicy`, or `GetResponseHeadersPolicyConfig`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_response_headers_policy({
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteResponseHeadersPolicy AWS API Documentation
+    #
+    # @overload delete_response_headers_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_response_headers_policy(params = {}, options = {})
+      req = build_request(:delete_response_headers_policy, params)
+      req.send_request(options)
+    end
+
     # Delete a streaming distribution. To delete an RTMP distribution using
     # the CloudFront API, perform the following steps.
     #
@@ -2993,6 +3187,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.response_headers_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -3041,6 +3236,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].response_headers_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -3187,6 +3383,7 @@ module Aws::CloudFront
     #   resp.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution_config.default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution_config.default_cache_behavior.response_headers_policy_id #=> String
     #   resp.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -3235,6 +3432,7 @@ module Aws::CloudFront
     #   resp.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution_config.cache_behaviors.items[0].response_headers_policy_id #=> String
     #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -3884,6 +4082,167 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Gets a response headers policy, including metadata (the policy’s
+    # identifier and the date and time when the policy was last modified).
+    #
+    # To get a response headers policy, you must provide the policy’s
+    # identifier. If the response headers policy is attached to a
+    # distribution’s cache behavior, you can get the policy’s identifier
+    # using `ListDistributions` or `GetDistribution`. If the response
+    # headers policy is not attached to a cache behavior, you can get the
+    # identifier using `ListResponseHeadersPolicies`.
+    #
+    # @option params [required, String] :id
+    #   The identifier for the response headers policy.
+    #
+    #   If the response headers policy is attached to a distribution’s cache
+    #   behavior, you can get the policy’s identifier using
+    #   `ListDistributions` or `GetDistribution`. If the response headers
+    #   policy is not attached to a cache behavior, you can get the identifier
+    #   using `ListResponseHeadersPolicies`.
+    #
+    # @return [Types::GetResponseHeadersPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResponseHeadersPolicyResult#response_headers_policy #response_headers_policy} => Types::ResponseHeadersPolicy
+    #   * {Types::GetResponseHeadersPolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_response_headers_policy({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.response_headers_policy.id #=> String
+    #   resp.response_headers_policy.last_modified_time #=> Time
+    #   resp.response_headers_policy.response_headers_policy_config.comment #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.name #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.items[0] #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.items[0] #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.items[0] #=> String, one of "GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH", "HEAD", "ALL"
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_credentials #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.items[0] #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.origin_override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.protection #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.mode_block #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.report_uri #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.frame_options.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.frame_options.frame_option #=> String, one of "DENY", "SAMEORIGIN"
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.referrer_policy.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.referrer_policy.referrer_policy #=> String, one of "no-referrer", "no-referrer-when-downgrade", "origin", "origin-when-cross-origin", "same-origin", "strict-origin", "strict-origin-when-cross-origin", "unsafe-url"
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.content_security_policy.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.content_security_policy.content_security_policy #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.content_type_options.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.include_subdomains #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.preload #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetResponseHeadersPolicy AWS API Documentation
+    #
+    # @overload get_response_headers_policy(params = {})
+    # @param [Hash] params ({})
+    def get_response_headers_policy(params = {}, options = {})
+      req = build_request(:get_response_headers_policy, params)
+      req.send_request(options)
+    end
+
+    # Gets a response headers policy configuration.
+    #
+    # To get a response headers policy configuration, you must provide the
+    # policy’s identifier. If the response headers policy is attached to a
+    # distribution’s cache behavior, you can get the policy’s identifier
+    # using `ListDistributions` or `GetDistribution`. If the response
+    # headers policy is not attached to a cache behavior, you can get the
+    # identifier using `ListResponseHeadersPolicies`.
+    #
+    # @option params [required, String] :id
+    #   The identifier for the response headers policy.
+    #
+    #   If the response headers policy is attached to a distribution’s cache
+    #   behavior, you can get the policy’s identifier using
+    #   `ListDistributions` or `GetDistribution`. If the response headers
+    #   policy is not attached to a cache behavior, you can get the identifier
+    #   using `ListResponseHeadersPolicies`.
+    #
+    # @return [Types::GetResponseHeadersPolicyConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResponseHeadersPolicyConfigResult#response_headers_policy_config #response_headers_policy_config} => Types::ResponseHeadersPolicyConfig
+    #   * {Types::GetResponseHeadersPolicyConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_response_headers_policy_config({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.response_headers_policy_config.comment #=> String
+    #   resp.response_headers_policy_config.name #=> String
+    #   resp.response_headers_policy_config.cors_config.access_control_allow_origins.quantity #=> Integer
+    #   resp.response_headers_policy_config.cors_config.access_control_allow_origins.items #=> Array
+    #   resp.response_headers_policy_config.cors_config.access_control_allow_origins.items[0] #=> String
+    #   resp.response_headers_policy_config.cors_config.access_control_allow_headers.quantity #=> Integer
+    #   resp.response_headers_policy_config.cors_config.access_control_allow_headers.items #=> Array
+    #   resp.response_headers_policy_config.cors_config.access_control_allow_headers.items[0] #=> String
+    #   resp.response_headers_policy_config.cors_config.access_control_allow_methods.quantity #=> Integer
+    #   resp.response_headers_policy_config.cors_config.access_control_allow_methods.items #=> Array
+    #   resp.response_headers_policy_config.cors_config.access_control_allow_methods.items[0] #=> String, one of "GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH", "HEAD", "ALL"
+    #   resp.response_headers_policy_config.cors_config.access_control_allow_credentials #=> Boolean
+    #   resp.response_headers_policy_config.cors_config.access_control_expose_headers.quantity #=> Integer
+    #   resp.response_headers_policy_config.cors_config.access_control_expose_headers.items #=> Array
+    #   resp.response_headers_policy_config.cors_config.access_control_expose_headers.items[0] #=> String
+    #   resp.response_headers_policy_config.cors_config.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy_config.cors_config.origin_override #=> Boolean
+    #   resp.response_headers_policy_config.security_headers_config.xss_protection.override #=> Boolean
+    #   resp.response_headers_policy_config.security_headers_config.xss_protection.protection #=> Boolean
+    #   resp.response_headers_policy_config.security_headers_config.xss_protection.mode_block #=> Boolean
+    #   resp.response_headers_policy_config.security_headers_config.xss_protection.report_uri #=> String
+    #   resp.response_headers_policy_config.security_headers_config.frame_options.override #=> Boolean
+    #   resp.response_headers_policy_config.security_headers_config.frame_options.frame_option #=> String, one of "DENY", "SAMEORIGIN"
+    #   resp.response_headers_policy_config.security_headers_config.referrer_policy.override #=> Boolean
+    #   resp.response_headers_policy_config.security_headers_config.referrer_policy.referrer_policy #=> String, one of "no-referrer", "no-referrer-when-downgrade", "origin", "origin-when-cross-origin", "same-origin", "strict-origin", "strict-origin-when-cross-origin", "unsafe-url"
+    #   resp.response_headers_policy_config.security_headers_config.content_security_policy.override #=> Boolean
+    #   resp.response_headers_policy_config.security_headers_config.content_security_policy.content_security_policy #=> String
+    #   resp.response_headers_policy_config.security_headers_config.content_type_options.override #=> Boolean
+    #   resp.response_headers_policy_config.security_headers_config.strict_transport_security.override #=> Boolean
+    #   resp.response_headers_policy_config.security_headers_config.strict_transport_security.include_subdomains #=> Boolean
+    #   resp.response_headers_policy_config.security_headers_config.strict_transport_security.preload #=> Boolean
+    #   resp.response_headers_policy_config.security_headers_config.strict_transport_security.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy_config.custom_headers_config.quantity #=> Integer
+    #   resp.response_headers_policy_config.custom_headers_config.items #=> Array
+    #   resp.response_headers_policy_config.custom_headers_config.items[0].header #=> String
+    #   resp.response_headers_policy_config.custom_headers_config.items[0].value #=> String
+    #   resp.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetResponseHeadersPolicyConfig AWS API Documentation
+    #
+    # @overload get_response_headers_policy_config(params = {})
+    # @param [Hash] params ({})
+    def get_response_headers_policy_config(params = {}, options = {})
+      req = build_request(:get_response_headers_policy_config, params)
+      req.send_request(options)
+    end
+
     # Gets information about a specified RTMP distribution, including the
     # distribution configuration.
     #
@@ -3996,7 +4355,7 @@ module Aws::CloudFront
     #
     # You can optionally apply a filter to return only the managed policies
     # created by Amazon Web Services, or only the custom policies created in
-    # your account.
+    # your Amazon Web Services account.
     #
     # You can optionally specify the maximum number of items to receive in
     # the response. If the total number of items in the list exceeds the
@@ -4012,7 +4371,8 @@ module Aws::CloudFront
     #   * `managed` – Returns only the managed policies created by Amazon Web
     #     Services.
     #
-    #   * `custom` – Returns only the custom policies created in your account.
+    #   * `custom` – Returns only the custom policies created in your Amazon
+    #     Web Services account.
     #
     # @option params [String] :marker
     #   Use this field when paginating results to indicate where to begin in
@@ -4310,6 +4670,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.response_headers_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -4358,6 +4719,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].response_headers_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -4697,6 +5059,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.response_headers_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -4745,6 +5108,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].response_headers_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -4792,6 +5156,62 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_distributions_by_realtime_log_config(params = {}, options = {})
       req = build_request(:list_distributions_by_realtime_log_config, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of distribution IDs for distributions that have a cache
+    # behavior that’s associated with the specified response headers policy.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of distribution IDs. The response includes distribution IDs
+    #   in the list that occur after the marker. To get the next page of the
+    #   list, set this field’s value to the value of `NextMarker` from the
+    #   current page’s response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of distribution IDs that you want to get in the
+    #   response.
+    #
+    # @option params [required, String] :response_headers_policy_id
+    #   The ID of the response headers policy whose associated distribution
+    #   IDs you want to list.
+    #
+    # @return [Types::ListDistributionsByResponseHeadersPolicyIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDistributionsByResponseHeadersPolicyIdResult#distribution_id_list #distribution_id_list} => Types::DistributionIdList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_distributions_by_response_headers_policy_id({
+    #     marker: "string",
+    #     max_items: 1,
+    #     response_headers_policy_id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.distribution_id_list.marker #=> String
+    #   resp.distribution_id_list.next_marker #=> String
+    #   resp.distribution_id_list.max_items #=> Integer
+    #   resp.distribution_id_list.is_truncated #=> Boolean
+    #   resp.distribution_id_list.quantity #=> Integer
+    #   resp.distribution_id_list.items #=> Array
+    #   resp.distribution_id_list.items[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByResponseHeadersPolicyId AWS API Documentation
+    #
+    # @overload list_distributions_by_response_headers_policy_id(params = {})
+    # @param [Hash] params ({})
+    def list_distributions_by_response_headers_policy_id(params = {}, options = {})
+      req = build_request(:list_distributions_by_response_headers_policy_id, params)
       req.send_request(options)
     end
 
@@ -4905,6 +5325,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution_list.items[0].default_cache_behavior.response_headers_policy_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -4953,6 +5374,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].response_headers_policy_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -5111,7 +5533,8 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Gets a list of all CloudFront functions in your account.
+    # Gets a list of all CloudFront functions in your Amazon Web Services
+    # account.
     #
     # You can optionally apply a filter to return only the functions that
     # are in the specified stage, either `DEVELOPMENT` or `LIVE`.
@@ -5283,7 +5706,7 @@ module Aws::CloudFront
     #
     # You can optionally apply a filter to return only the managed policies
     # created by Amazon Web Services, or only the custom policies created in
-    # your account.
+    # your Amazon Web Services account.
     #
     # You can optionally specify the maximum number of items to receive in
     # the response. If the total number of items in the list exceeds the
@@ -5299,7 +5722,8 @@ module Aws::CloudFront
     #   * `managed` – Returns only the managed policies created by Amazon Web
     #     Services.
     #
-    #   * `custom` – Returns only the custom policies created in your account.
+    #   * `custom` – Returns only the custom policies created in your Amazon
+    #     Web Services account.
     #
     # @option params [String] :marker
     #   Use this field when paginating results to indicate where to begin in
@@ -5456,6 +5880,108 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_realtime_log_configs(params = {}, options = {})
       req = build_request(:list_realtime_log_configs, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of response headers policies.
+    #
+    # You can optionally apply a filter to get only the managed policies
+    # created by Amazon Web Services, or only the custom policies created in
+    # your Amazon Web Services account.
+    #
+    # You can optionally specify the maximum number of items to receive in
+    # the response. If the total number of items in the list exceeds the
+    # maximum that you specify, or the default maximum, the response is
+    # paginated. To get the next page of items, send a subsequent request
+    # that specifies the `NextMarker` value from the current response as the
+    # `Marker` value in the subsequent request.
+    #
+    # @option params [String] :type
+    #   A filter to get only the specified kind of response headers policies.
+    #   Valid values are:
+    #
+    #   * `managed` – Gets only the managed policies created by Amazon Web
+    #     Services.
+    #
+    #   * `custom` – Gets only the custom policies created in your Amazon Web
+    #     Services account.
+    #
+    # @option params [String] :marker
+    #   Use this field when paginating results to indicate where to begin in
+    #   your list of response headers policies. The response includes response
+    #   headers policies in the list that occur after the marker. To get the
+    #   next page of the list, set this field’s value to the value of
+    #   `NextMarker` from the current page’s response.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of response headers policies that you want to get
+    #   in the response.
+    #
+    # @return [Types::ListResponseHeadersPoliciesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResponseHeadersPoliciesResult#response_headers_policy_list #response_headers_policy_list} => Types::ResponseHeadersPolicyList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_response_headers_policies({
+    #     type: "managed", # accepts managed, custom
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.response_headers_policy_list.next_marker #=> String
+    #   resp.response_headers_policy_list.max_items #=> Integer
+    #   resp.response_headers_policy_list.quantity #=> Integer
+    #   resp.response_headers_policy_list.items #=> Array
+    #   resp.response_headers_policy_list.items[0].type #=> String, one of "managed", "custom"
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.id #=> String
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.last_modified_time #=> Time
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.comment #=> String
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.name #=> String
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.quantity #=> Integer
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.items #=> Array
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.items[0] #=> String
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.quantity #=> Integer
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.items #=> Array
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.items[0] #=> String
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.quantity #=> Integer
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.items #=> Array
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.items[0] #=> String, one of "GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH", "HEAD", "ALL"
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_credentials #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.quantity #=> Integer
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.items #=> Array
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.items[0] #=> String
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.cors_config.origin_override #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.override #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.protection #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.mode_block #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.report_uri #=> String
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.frame_options.override #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.frame_options.frame_option #=> String, one of "DENY", "SAMEORIGIN"
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.referrer_policy.override #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.referrer_policy.referrer_policy #=> String, one of "no-referrer", "no-referrer-when-downgrade", "origin", "origin-when-cross-origin", "same-origin", "strict-origin", "strict-origin-when-cross-origin", "unsafe-url"
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.content_security_policy.override #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.content_security_policy.content_security_policy #=> String
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.content_type_options.override #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.override #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.include_subdomains #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.preload #=> Boolean
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.quantity #=> Integer
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items #=> Array
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
+    #   resp.response_headers_policy_list.items[0].response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListResponseHeadersPolicies AWS API Documentation
+    #
+    # @overload list_response_headers_policies(params = {})
+    # @param [Hash] params ({})
+    def list_response_headers_policies(params = {}, options = {})
+      req = build_request(:list_response_headers_policies, params)
       req.send_request(options)
     end
 
@@ -6000,7 +6526,7 @@ module Aws::CloudFront
     #               items: [
     #                 {
     #                   header_name: "string", # required
-    #                   header_value: "string", # required
+    #                   header_value: "sensitiveStringType", # required
     #                 },
     #               ],
     #             },
@@ -6095,6 +6621,7 @@ module Aws::CloudFront
     #         realtime_log_config_arn: "string",
     #         cache_policy_id: "string",
     #         origin_request_policy_id: "string",
+    #         response_headers_policy_id: "string",
     #         forwarded_values: {
     #           query_string: false, # required
     #           cookies: { # required
@@ -6167,6 +6694,7 @@ module Aws::CloudFront
     #             realtime_log_config_arn: "string",
     #             cache_policy_id: "string",
     #             origin_request_policy_id: "string",
+    #             response_headers_policy_id: "string",
     #             forwarded_values: {
     #               query_string: false, # required
     #               cookies: { # required
@@ -6324,6 +6852,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.cache_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.default_cache_behavior.response_headers_policy_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -6372,6 +6901,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].realtime_log_config_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].cache_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].origin_request_policy_id #=> String
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].response_headers_policy_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
     #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
@@ -6937,6 +7467,162 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Updates a response headers policy.
+    #
+    # When you update a response headers policy, the entire policy is
+    # replaced. You cannot update some policy fields independent of others.
+    # To update a response headers policy configuration:
+    #
+    # 1.  Use `GetResponseHeadersPolicyConfig` to get the current policy’s
+    #     configuration.
+    #
+    # 2.  Modify the fields in the response headers policy configuration
+    #     that you want to update.
+    #
+    # 3.  Call `UpdateResponseHeadersPolicy`, providing the entire response
+    #     headers policy configuration, including the fields that you
+    #     modified and those that you didn’t.
+    #
+    # @option params [required, Types::ResponseHeadersPolicyConfig] :response_headers_policy_config
+    #   A response headers policy configuration.
+    #
+    # @option params [required, String] :id
+    #   The identifier for the response headers policy that you are updating.
+    #
+    # @option params [String] :if_match
+    #   The version of the response headers policy that you are updating.
+    #
+    #   The version is returned in the cache policy’s `ETag` field in the
+    #   response to `GetResponseHeadersPolicyConfig`.
+    #
+    # @return [Types::UpdateResponseHeadersPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResponseHeadersPolicyResult#response_headers_policy #response_headers_policy} => Types::ResponseHeadersPolicy
+    #   * {Types::UpdateResponseHeadersPolicyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_response_headers_policy({
+    #     response_headers_policy_config: { # required
+    #       comment: "string",
+    #       name: "string", # required
+    #       cors_config: {
+    #         access_control_allow_origins: { # required
+    #           quantity: 1, # required
+    #           items: ["string"], # required
+    #         },
+    #         access_control_allow_headers: { # required
+    #           quantity: 1, # required
+    #           items: ["string"], # required
+    #         },
+    #         access_control_allow_methods: { # required
+    #           quantity: 1, # required
+    #           items: ["GET"], # required, accepts GET, POST, OPTIONS, PUT, DELETE, PATCH, HEAD, ALL
+    #         },
+    #         access_control_allow_credentials: false, # required
+    #         access_control_expose_headers: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         access_control_max_age_sec: 1,
+    #         origin_override: false, # required
+    #       },
+    #       security_headers_config: {
+    #         xss_protection: {
+    #           override: false, # required
+    #           protection: false, # required
+    #           mode_block: false,
+    #           report_uri: "string",
+    #         },
+    #         frame_options: {
+    #           override: false, # required
+    #           frame_option: "DENY", # required, accepts DENY, SAMEORIGIN
+    #         },
+    #         referrer_policy: {
+    #           override: false, # required
+    #           referrer_policy: "no-referrer", # required, accepts no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    #         },
+    #         content_security_policy: {
+    #           override: false, # required
+    #           content_security_policy: "string", # required
+    #         },
+    #         content_type_options: {
+    #           override: false, # required
+    #         },
+    #         strict_transport_security: {
+    #           override: false, # required
+    #           include_subdomains: false,
+    #           preload: false,
+    #           access_control_max_age_sec: 1, # required
+    #         },
+    #       },
+    #       custom_headers_config: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             header: "string", # required
+    #             value: "string", # required
+    #             override: false, # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.response_headers_policy.id #=> String
+    #   resp.response_headers_policy.last_modified_time #=> Time
+    #   resp.response_headers_policy.response_headers_policy_config.comment #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.name #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_origins.items[0] #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_headers.items[0] #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_methods.items[0] #=> String, one of "GET", "POST", "OPTIONS", "PUT", "DELETE", "PATCH", "HEAD", "ALL"
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_allow_credentials #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_expose_headers.items[0] #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.cors_config.origin_override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.protection #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.mode_block #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.xss_protection.report_uri #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.frame_options.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.frame_options.frame_option #=> String, one of "DENY", "SAMEORIGIN"
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.referrer_policy.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.referrer_policy.referrer_policy #=> String, one of "no-referrer", "no-referrer-when-downgrade", "origin", "origin-when-cross-origin", "same-origin", "strict-origin", "strict-origin-when-cross-origin", "unsafe-url"
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.content_security_policy.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.content_security_policy.content_security_policy #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.content_type_options.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.override #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.include_subdomains #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.preload #=> Boolean
+    #   resp.response_headers_policy.response_headers_policy_config.security_headers_config.strict_transport_security.access_control_max_age_sec #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.quantity #=> Integer
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items #=> Array
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].header #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].value #=> String
+    #   resp.response_headers_policy.response_headers_policy_config.custom_headers_config.items[0].override #=> Boolean
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateResponseHeadersPolicy AWS API Documentation
+    #
+    # @overload update_response_headers_policy(params = {})
+    # @param [Hash] params ({})
+    def update_response_headers_policy(params = {}, options = {})
+      req = build_request(:update_response_headers_policy, params)
+      req.send_request(options)
+    end
+
     # Update a streaming distribution.
     #
     # @option params [required, Types::StreamingDistributionConfig] :streaming_distribution_config
@@ -7040,7 +7726,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

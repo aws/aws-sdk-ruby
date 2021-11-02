@@ -348,12 +348,7 @@ module Aws::NetworkManager
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html
     #
     # @option params [required, String] :customer_gateway_arn
-    #   The Amazon Resource Name (ARN) of the customer gateway. For more
-    #   information, see [Resources Defined by Amazon EC2][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies
+    #   The Amazon Resource Name (ARN) of the customer gateway.
     #
     # @option params [required, String] :global_network_id
     #   The ID of the global network.
@@ -570,12 +565,13 @@ module Aws::NetworkManager
     #   The ID of the global network.
     #
     # @option params [Types::AWSLocation] :aws_location
-    #   The AWS location of the device.
+    #   The Amazon Web Services location of the device, if applicable. For an
+    #   on-premises device, you can omit this parameter.
     #
     # @option params [String] :description
     #   A description of the device.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #
     # @option params [String] :type
     #   The type of the device.
@@ -583,17 +579,17 @@ module Aws::NetworkManager
     # @option params [String] :vendor
     #   The vendor of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #
     # @option params [String] :model
     #   The model of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #
     # @option params [String] :serial_number
     #   The serial number of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #
     # @option params [Types::Location] :location
     #   The location of the device.
@@ -671,7 +667,7 @@ module Aws::NetworkManager
     # @option params [String] :description
     #   A description of the global network.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to apply to the resource during creation.
@@ -720,14 +716,13 @@ module Aws::NetworkManager
     # @option params [String] :description
     #   A description of the link.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #
     # @option params [String] :type
     #   The type of the link.
     #
-    #   Constraints: Cannot include the following characters: \| \\ ^
-    #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters. Cannot include the
+    #   following characters: \| \\ ^
     #
     # @option params [required, Types::Bandwidth] :bandwidth
     #   The upload speed and download speed in Mbps.
@@ -735,9 +730,8 @@ module Aws::NetworkManager
     # @option params [String] :provider
     #   The provider of the link.
     #
-    #   Constraints: Cannot include the following characters: \| \\ ^
-    #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters. Cannot include the
+    #   following characters: \| \\ ^
     #
     # @option params [required, String] :site_id
     #   The ID of the site.
@@ -803,7 +797,7 @@ module Aws::NetworkManager
     # @option params [String] :description
     #   A description of your site.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #
     # @option params [Types::Location] :location
     #   The site location. This information is used for visualization in the
@@ -1182,12 +1176,7 @@ module Aws::NetworkManager
     #   The ID of the global network.
     #
     # @option params [required, String] :customer_gateway_arn
-    #   The Amazon Resource Name (ARN) of the customer gateway. For more
-    #   information, see [Resources Defined by Amazon EC2][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies
+    #   The Amazon Resource Name (ARN) of the customer gateway.
     #
     # @return [Types::DisassociateCustomerGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1362,13 +1351,8 @@ module Aws::NetworkManager
     #   The ID of the global network.
     #
     # @option params [Array<String>] :customer_gateway_arns
-    #   One or more customer gateway Amazon Resource Names (ARNs). For more
-    #   information, see [Resources Defined by Amazon EC2][1]. The maximum is
-    #   10.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies
+    #   One or more customer gateway Amazon Resource Names (ARNs). The maximum
+    #   is 10.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -1607,6 +1591,565 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Gets the count of network resources, by resource type, for the
+    # specified global network.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [String] :resource_type
+    #   The resource type.
+    #
+    #   The following are the supported resource types for Direct Connect:
+    #
+    #   * `dxcon`
+    #
+    #   * `dx-gateway`
+    #
+    #   * `dx-vif`
+    #
+    #   The following are the supported resource types for Network Manager:
+    #
+    #   * `connection`
+    #
+    #   * `device`
+    #
+    #   * `link`
+    #
+    #   * `site`
+    #
+    #   The following are the supported resource types for Amazon VPC:
+    #
+    #   * `customer-gateway`
+    #
+    #   * `transit-gateway`
+    #
+    #   * `transit-gateway-attachment`
+    #
+    #   * `transit-gateway-connect-peer`
+    #
+    #   * `transit-gateway-route-table`
+    #
+    #   * `vpn-connection`
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::GetNetworkResourceCountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNetworkResourceCountsResponse#network_resource_counts #network_resource_counts} => Array&lt;Types::NetworkResourceCount&gt;
+    #   * {Types::GetNetworkResourceCountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_network_resource_counts({
+    #     global_network_id: "String", # required
+    #     resource_type: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_resource_counts #=> Array
+    #   resp.network_resource_counts[0].resource_type #=> String
+    #   resp.network_resource_counts[0].count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkResourceCounts AWS API Documentation
+    #
+    # @overload get_network_resource_counts(params = {})
+    # @param [Hash] params ({})
+    def get_network_resource_counts(params = {}, options = {})
+      req = build_request(:get_network_resource_counts, params)
+      req.send_request(options)
+    end
+
+    # Gets the network resource relationships for the specified global
+    # network.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [String] :registered_gateway_arn
+    #   The ARN of the registered gateway.
+    #
+    # @option params [String] :aws_region
+    #   The Amazon Web Services Region.
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [String] :resource_type
+    #   The resource type.
+    #
+    #   The following are the supported resource types for Direct Connect:
+    #
+    #   * `dxcon`
+    #
+    #   * `dx-gateway`
+    #
+    #   * `dx-vif`
+    #
+    #   The following are the supported resource types for Network Manager:
+    #
+    #   * `connection`
+    #
+    #   * `device`
+    #
+    #   * `link`
+    #
+    #   * `site`
+    #
+    #   The following are the supported resource types for Amazon VPC:
+    #
+    #   * `customer-gateway`
+    #
+    #   * `transit-gateway`
+    #
+    #   * `transit-gateway-attachment`
+    #
+    #   * `transit-gateway-connect-peer`
+    #
+    #   * `transit-gateway-route-table`
+    #
+    #   * `vpn-connection`
+    #
+    # @option params [String] :resource_arn
+    #   The ARN of the gateway.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::GetNetworkResourceRelationshipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNetworkResourceRelationshipsResponse#relationships #relationships} => Array&lt;Types::Relationship&gt;
+    #   * {Types::GetNetworkResourceRelationshipsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_network_resource_relationships({
+    #     global_network_id: "String", # required
+    #     registered_gateway_arn: "String",
+    #     aws_region: "String",
+    #     account_id: "String",
+    #     resource_type: "String",
+    #     resource_arn: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.relationships #=> Array
+    #   resp.relationships[0].from #=> String
+    #   resp.relationships[0].to #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkResourceRelationships AWS API Documentation
+    #
+    # @overload get_network_resource_relationships(params = {})
+    # @param [Hash] params ({})
+    def get_network_resource_relationships(params = {}, options = {})
+      req = build_request(:get_network_resource_relationships, params)
+      req.send_request(options)
+    end
+
+    # Describes the network resources for the specified global network.
+    #
+    # The results include information from the corresponding Describe call
+    # for the resource, minus any sensitive information such as pre-shared
+    # keys.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [String] :registered_gateway_arn
+    #   The ARN of the gateway.
+    #
+    # @option params [String] :aws_region
+    #   The Amazon Web Services Region.
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [String] :resource_type
+    #   The resource type.
+    #
+    #   The following are the supported resource types for Direct Connect:
+    #
+    #   * `dxcon` - The definition model is [Connection][1].
+    #
+    #   * `dx-gateway` - The definition model is [DirectConnectGateway][2].
+    #
+    #   * `dx-vif` - The definition model is [VirtualInterface][3].
+    #
+    #   The following are the supported resource types for Network Manager:
+    #
+    #   * `connection` - The definition model is [Connection][4].
+    #
+    #   * `device` - The definition model is [Device][5].
+    #
+    #   * `link` - The definition model is [Link][6].
+    #
+    #   * `site` - The definition model is [Site][7].
+    #
+    #   The following are the supported resource types for Amazon VPC:
+    #
+    #   * `customer-gateway` - The definition model is [CustomerGateway][8].
+    #
+    #   * `transit-gateway` - The definition model is [TransitGateway][9].
+    #
+    #   * `transit-gateway-attachment` - The definition model is
+    #     [TransitGatewayAttachment][10].
+    #
+    #   * `transit-gateway-connect-peer` - The definition model is
+    #     [TransitGatewayConnectPeer][11].
+    #
+    #   * `transit-gateway-route-table` - The definition model is
+    #     [TransitGatewayRouteTable][12].
+    #
+    #   * `vpn-connection` - The definition model is [VpnConnection][13].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_Connection.html
+    #   [2]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DirectConnectGateway.html
+    #   [3]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_VirtualInterface.html
+    #   [4]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Connection.html
+    #   [5]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Device.html
+    #   [6]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Link.html
+    #   [7]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Site.html
+    #   [8]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CustomerGateway.html
+    #   [9]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGateway.html
+    #   [10]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayAttachment.html
+    #   [11]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayConnectPeer.html
+    #   [12]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayRouteTable.html
+    #   [13]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpnConnection.html
+    #
+    # @option params [String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::GetNetworkResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNetworkResourcesResponse#network_resources #network_resources} => Array&lt;Types::NetworkResource&gt;
+    #   * {Types::GetNetworkResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_network_resources({
+    #     global_network_id: "String", # required
+    #     registered_gateway_arn: "String",
+    #     aws_region: "String",
+    #     account_id: "String",
+    #     resource_type: "String",
+    #     resource_arn: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_resources #=> Array
+    #   resp.network_resources[0].registered_gateway_arn #=> String
+    #   resp.network_resources[0].aws_region #=> String
+    #   resp.network_resources[0].account_id #=> String
+    #   resp.network_resources[0].resource_type #=> String
+    #   resp.network_resources[0].resource_id #=> String
+    #   resp.network_resources[0].resource_arn #=> String
+    #   resp.network_resources[0].definition #=> String
+    #   resp.network_resources[0].definition_timestamp #=> Time
+    #   resp.network_resources[0].tags #=> Array
+    #   resp.network_resources[0].tags[0].key #=> String
+    #   resp.network_resources[0].tags[0].value #=> String
+    #   resp.network_resources[0].metadata #=> Hash
+    #   resp.network_resources[0].metadata["NetworkResourceMetadataKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkResources AWS API Documentation
+    #
+    # @overload get_network_resources(params = {})
+    # @param [Hash] params ({})
+    def get_network_resources(params = {}, options = {})
+      req = build_request(:get_network_resources, params)
+      req.send_request(options)
+    end
+
+    # Gets the network routes of the specified global network.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [required, Types::RouteTableIdentifier] :route_table_identifier
+    #   The ID of the route table.
+    #
+    # @option params [Array<String>] :exact_cidr_matches
+    #   An exact CIDR block.
+    #
+    # @option params [Array<String>] :longest_prefix_matches
+    #   The most specific route that matches the traffic (longest prefix
+    #   match).
+    #
+    # @option params [Array<String>] :subnet_of_matches
+    #   The routes with a subnet that match the specified CIDR filter.
+    #
+    # @option params [Array<String>] :supernet_of_matches
+    #   The routes with a CIDR that encompasses the CIDR filter. Example: If
+    #   you specify 10.0.1.0/30, then the result returns 10.0.1.0/29.
+    #
+    # @option params [Array<String>] :prefix_list_ids
+    #   The IDs of the prefix lists.
+    #
+    # @option params [Array<String>] :states
+    #   The route states.
+    #
+    # @option params [Array<String>] :types
+    #   The route types.
+    #
+    # @option params [Hash<String,Array>] :destination_filters
+    #   Filter by route table destination. Possible Values:
+    #   TRANSIT\_GATEWAY\_ATTACHMENT\_ID, RESOURCE\_ID, or RESOURCE\_TYPE.
+    #
+    # @return [Types::GetNetworkRoutesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNetworkRoutesResponse#route_table_arn #route_table_arn} => String
+    #   * {Types::GetNetworkRoutesResponse#route_table_type #route_table_type} => String
+    #   * {Types::GetNetworkRoutesResponse#route_table_timestamp #route_table_timestamp} => Time
+    #   * {Types::GetNetworkRoutesResponse#network_routes #network_routes} => Array&lt;Types::NetworkRoute&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_network_routes({
+    #     global_network_id: "String", # required
+    #     route_table_identifier: { # required
+    #       transit_gateway_route_table_arn: "String",
+    #     },
+    #     exact_cidr_matches: ["String"],
+    #     longest_prefix_matches: ["String"],
+    #     subnet_of_matches: ["String"],
+    #     supernet_of_matches: ["String"],
+    #     prefix_list_ids: ["String"],
+    #     states: ["ACTIVE"], # accepts ACTIVE, BLACKHOLE
+    #     types: ["PROPAGATED"], # accepts PROPAGATED, STATIC
+    #     destination_filters: {
+    #       "FilterName" => ["FilterValue"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.route_table_arn #=> String
+    #   resp.route_table_type #=> String, one of "TRANSIT_GATEWAY_ROUTE_TABLE"
+    #   resp.route_table_timestamp #=> Time
+    #   resp.network_routes #=> Array
+    #   resp.network_routes[0].destination_cidr_block #=> String
+    #   resp.network_routes[0].destinations #=> Array
+    #   resp.network_routes[0].destinations[0].transit_gateway_attachment_id #=> String
+    #   resp.network_routes[0].destinations[0].resource_type #=> String
+    #   resp.network_routes[0].destinations[0].resource_id #=> String
+    #   resp.network_routes[0].prefix_list_id #=> String
+    #   resp.network_routes[0].state #=> String, one of "ACTIVE", "BLACKHOLE"
+    #   resp.network_routes[0].type #=> String, one of "PROPAGATED", "STATIC"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkRoutes AWS API Documentation
+    #
+    # @overload get_network_routes(params = {})
+    # @param [Hash] params ({})
+    def get_network_routes(params = {}, options = {})
+      req = build_request(:get_network_routes, params)
+      req.send_request(options)
+    end
+
+    # Gets the network telemetry of the specified global network.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [String] :registered_gateway_arn
+    #   The ARN of the gateway.
+    #
+    # @option params [String] :aws_region
+    #   The Amazon Web Services Region.
+    #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account ID.
+    #
+    # @option params [String] :resource_type
+    #   The resource type.
+    #
+    #   The following are the supported resource types for Direct Connect:
+    #
+    #   * `dxcon`
+    #
+    #   * `dx-gateway`
+    #
+    #   * `dx-vif`
+    #
+    #   The following are the supported resource types for Network Manager:
+    #
+    #   * `connection`
+    #
+    #   * `device`
+    #
+    #   * `link`
+    #
+    #   * `site`
+    #
+    #   The following are the supported resource types for Amazon VPC:
+    #
+    #   * `customer-gateway`
+    #
+    #   * `transit-gateway`
+    #
+    #   * `transit-gateway-attachment`
+    #
+    #   * `transit-gateway-connect-peer`
+    #
+    #   * `transit-gateway-route-table`
+    #
+    #   * `vpn-connection`
+    #
+    # @option params [String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::GetNetworkTelemetryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNetworkTelemetryResponse#network_telemetry #network_telemetry} => Array&lt;Types::NetworkTelemetry&gt;
+    #   * {Types::GetNetworkTelemetryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_network_telemetry({
+    #     global_network_id: "String", # required
+    #     registered_gateway_arn: "String",
+    #     aws_region: "String",
+    #     account_id: "String",
+    #     resource_type: "String",
+    #     resource_arn: "String",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_telemetry #=> Array
+    #   resp.network_telemetry[0].registered_gateway_arn #=> String
+    #   resp.network_telemetry[0].aws_region #=> String
+    #   resp.network_telemetry[0].account_id #=> String
+    #   resp.network_telemetry[0].resource_type #=> String
+    #   resp.network_telemetry[0].resource_id #=> String
+    #   resp.network_telemetry[0].resource_arn #=> String
+    #   resp.network_telemetry[0].address #=> String
+    #   resp.network_telemetry[0].health.type #=> String, one of "BGP", "IPSEC"
+    #   resp.network_telemetry[0].health.status #=> String, one of "UP", "DOWN"
+    #   resp.network_telemetry[0].health.timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkTelemetry AWS API Documentation
+    #
+    # @overload get_network_telemetry(params = {})
+    # @param [Hash] params ({})
+    def get_network_telemetry(params = {}, options = {})
+      req = build_request(:get_network_telemetry, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the specified route analysis.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [required, String] :route_analysis_id
+    #   The ID of the route analysis.
+    #
+    # @return [Types::GetRouteAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRouteAnalysisResponse#route_analysis #route_analysis} => Types::RouteAnalysis
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_route_analysis({
+    #     global_network_id: "String", # required
+    #     route_analysis_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.route_analysis.global_network_id #=> String
+    #   resp.route_analysis.owner_account_id #=> String
+    #   resp.route_analysis.route_analysis_id #=> String
+    #   resp.route_analysis.start_timestamp #=> Time
+    #   resp.route_analysis.status #=> String, one of "RUNNING", "COMPLETED", "FAILED"
+    #   resp.route_analysis.source.transit_gateway_attachment_arn #=> String
+    #   resp.route_analysis.source.transit_gateway_arn #=> String
+    #   resp.route_analysis.source.ip_address #=> String
+    #   resp.route_analysis.destination.transit_gateway_attachment_arn #=> String
+    #   resp.route_analysis.destination.transit_gateway_arn #=> String
+    #   resp.route_analysis.destination.ip_address #=> String
+    #   resp.route_analysis.include_return_path #=> Boolean
+    #   resp.route_analysis.use_middleboxes #=> Boolean
+    #   resp.route_analysis.forward_path.completion_status.result_code #=> String, one of "CONNECTED", "NOT_CONNECTED"
+    #   resp.route_analysis.forward_path.completion_status.reason_code #=> String, one of "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND", "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY", "CYCLIC_PATH_DETECTED", "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND", "ROUTE_NOT_FOUND", "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND", "INACTIVE_ROUTE_FOR_DESTINATION_FOUND", "TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH", "MAX_HOPS_EXCEEDED", "POSSIBLE_MIDDLEBOX", "NO_DESTINATION_ARN_PROVIDED"
+    #   resp.route_analysis.forward_path.completion_status.reason_context #=> Hash
+    #   resp.route_analysis.forward_path.completion_status.reason_context["ReasonContextKey"] #=> String
+    #   resp.route_analysis.forward_path.path #=> Array
+    #   resp.route_analysis.forward_path.path[0].sequence #=> Integer
+    #   resp.route_analysis.forward_path.path[0].resource.registered_gateway_arn #=> String
+    #   resp.route_analysis.forward_path.path[0].resource.resource_arn #=> String
+    #   resp.route_analysis.forward_path.path[0].resource.resource_type #=> String
+    #   resp.route_analysis.forward_path.path[0].resource.definition #=> String
+    #   resp.route_analysis.forward_path.path[0].resource.name_tag #=> String
+    #   resp.route_analysis.forward_path.path[0].resource.is_middlebox #=> Boolean
+    #   resp.route_analysis.forward_path.path[0].destination_cidr_block #=> String
+    #   resp.route_analysis.return_path.completion_status.result_code #=> String, one of "CONNECTED", "NOT_CONNECTED"
+    #   resp.route_analysis.return_path.completion_status.reason_code #=> String, one of "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND", "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY", "CYCLIC_PATH_DETECTED", "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND", "ROUTE_NOT_FOUND", "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND", "INACTIVE_ROUTE_FOR_DESTINATION_FOUND", "TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH", "MAX_HOPS_EXCEEDED", "POSSIBLE_MIDDLEBOX", "NO_DESTINATION_ARN_PROVIDED"
+    #   resp.route_analysis.return_path.completion_status.reason_context #=> Hash
+    #   resp.route_analysis.return_path.completion_status.reason_context["ReasonContextKey"] #=> String
+    #   resp.route_analysis.return_path.path #=> Array
+    #   resp.route_analysis.return_path.path[0].sequence #=> Integer
+    #   resp.route_analysis.return_path.path[0].resource.registered_gateway_arn #=> String
+    #   resp.route_analysis.return_path.path[0].resource.resource_arn #=> String
+    #   resp.route_analysis.return_path.path[0].resource.resource_type #=> String
+    #   resp.route_analysis.return_path.path[0].resource.definition #=> String
+    #   resp.route_analysis.return_path.path[0].resource.name_tag #=> String
+    #   resp.route_analysis.return_path.path[0].resource.is_middlebox #=> Boolean
+    #   resp.route_analysis.return_path.path[0].destination_cidr_block #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetRouteAnalysis AWS API Documentation
+    #
+    # @overload get_route_analysis(params = {})
+    # @param [Hash] params ({})
+    def get_route_analysis(params = {}, options = {})
+      req = build_request(:get_route_analysis, params)
+      req.send_request(options)
+    end
+
     # Gets information about one or more of your sites in a global network.
     #
     # @option params [required, String] :global_network_id
@@ -1794,20 +2337,15 @@ module Aws::NetworkManager
     end
 
     # Registers a transit gateway in your global network. The transit
-    # gateway can be in any AWS Region, but it must be owned by the same AWS
-    # account that owns the global network. You cannot register a transit
-    # gateway in more than one global network.
+    # gateway can be in any Amazon Web Services Region, but it must be owned
+    # by the same Amazon Web Services account that owns the global network.
+    # You cannot register a transit gateway in more than one global network.
     #
     # @option params [required, String] :global_network_id
     #   The ID of the global network.
     #
     # @option params [required, String] :transit_gateway_arn
-    #   The Amazon Resource Name (ARN) of the transit gateway. For more
-    #   information, see [Resources Defined by Amazon EC2][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies
+    #   The Amazon Resource Name (ARN) of the transit gateway.
     #
     # @return [Types::RegisterTransitGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1833,6 +2371,100 @@ module Aws::NetworkManager
     # @param [Hash] params ({})
     def register_transit_gateway(params = {}, options = {})
       req = build_request(:register_transit_gateway, params)
+      req.send_request(options)
+    end
+
+    # Starts analyzing the routing path between the specified source and
+    # destination. For more information, see [Route Analyzer][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/tgw/route-analyzer.html
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [required, Types::RouteAnalysisEndpointOptionsSpecification] :source
+    #   The source from which traffic originates.
+    #
+    # @option params [required, Types::RouteAnalysisEndpointOptionsSpecification] :destination
+    #   The destination.
+    #
+    # @option params [Boolean] :include_return_path
+    #   Indicates whether to analyze the return path. The default is `false`.
+    #
+    # @option params [Boolean] :use_middleboxes
+    #   Indicates whether to include the location of middlebox appliances in
+    #   the route analysis. The default is `false`.
+    #
+    # @return [Types::StartRouteAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartRouteAnalysisResponse#route_analysis #route_analysis} => Types::RouteAnalysis
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_route_analysis({
+    #     global_network_id: "String", # required
+    #     source: { # required
+    #       transit_gateway_attachment_arn: "String",
+    #       ip_address: "String",
+    #     },
+    #     destination: { # required
+    #       transit_gateway_attachment_arn: "String",
+    #       ip_address: "String",
+    #     },
+    #     include_return_path: false,
+    #     use_middleboxes: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.route_analysis.global_network_id #=> String
+    #   resp.route_analysis.owner_account_id #=> String
+    #   resp.route_analysis.route_analysis_id #=> String
+    #   resp.route_analysis.start_timestamp #=> Time
+    #   resp.route_analysis.status #=> String, one of "RUNNING", "COMPLETED", "FAILED"
+    #   resp.route_analysis.source.transit_gateway_attachment_arn #=> String
+    #   resp.route_analysis.source.transit_gateway_arn #=> String
+    #   resp.route_analysis.source.ip_address #=> String
+    #   resp.route_analysis.destination.transit_gateway_attachment_arn #=> String
+    #   resp.route_analysis.destination.transit_gateway_arn #=> String
+    #   resp.route_analysis.destination.ip_address #=> String
+    #   resp.route_analysis.include_return_path #=> Boolean
+    #   resp.route_analysis.use_middleboxes #=> Boolean
+    #   resp.route_analysis.forward_path.completion_status.result_code #=> String, one of "CONNECTED", "NOT_CONNECTED"
+    #   resp.route_analysis.forward_path.completion_status.reason_code #=> String, one of "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND", "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY", "CYCLIC_PATH_DETECTED", "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND", "ROUTE_NOT_FOUND", "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND", "INACTIVE_ROUTE_FOR_DESTINATION_FOUND", "TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH", "MAX_HOPS_EXCEEDED", "POSSIBLE_MIDDLEBOX", "NO_DESTINATION_ARN_PROVIDED"
+    #   resp.route_analysis.forward_path.completion_status.reason_context #=> Hash
+    #   resp.route_analysis.forward_path.completion_status.reason_context["ReasonContextKey"] #=> String
+    #   resp.route_analysis.forward_path.path #=> Array
+    #   resp.route_analysis.forward_path.path[0].sequence #=> Integer
+    #   resp.route_analysis.forward_path.path[0].resource.registered_gateway_arn #=> String
+    #   resp.route_analysis.forward_path.path[0].resource.resource_arn #=> String
+    #   resp.route_analysis.forward_path.path[0].resource.resource_type #=> String
+    #   resp.route_analysis.forward_path.path[0].resource.definition #=> String
+    #   resp.route_analysis.forward_path.path[0].resource.name_tag #=> String
+    #   resp.route_analysis.forward_path.path[0].resource.is_middlebox #=> Boolean
+    #   resp.route_analysis.forward_path.path[0].destination_cidr_block #=> String
+    #   resp.route_analysis.return_path.completion_status.result_code #=> String, one of "CONNECTED", "NOT_CONNECTED"
+    #   resp.route_analysis.return_path.completion_status.reason_code #=> String, one of "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND", "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY", "CYCLIC_PATH_DETECTED", "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND", "ROUTE_NOT_FOUND", "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND", "INACTIVE_ROUTE_FOR_DESTINATION_FOUND", "TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH", "MAX_HOPS_EXCEEDED", "POSSIBLE_MIDDLEBOX", "NO_DESTINATION_ARN_PROVIDED"
+    #   resp.route_analysis.return_path.completion_status.reason_context #=> Hash
+    #   resp.route_analysis.return_path.completion_status.reason_context["ReasonContextKey"] #=> String
+    #   resp.route_analysis.return_path.path #=> Array
+    #   resp.route_analysis.return_path.path[0].sequence #=> Integer
+    #   resp.route_analysis.return_path.path[0].resource.registered_gateway_arn #=> String
+    #   resp.route_analysis.return_path.path[0].resource.resource_arn #=> String
+    #   resp.route_analysis.return_path.path[0].resource.resource_type #=> String
+    #   resp.route_analysis.return_path.path[0].resource.definition #=> String
+    #   resp.route_analysis.return_path.path[0].resource.name_tag #=> String
+    #   resp.route_analysis.return_path.path[0].resource.is_middlebox #=> Boolean
+    #   resp.route_analysis.return_path.path[0].destination_cidr_block #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/StartRouteAnalysis AWS API Documentation
+    #
+    # @overload start_route_analysis(params = {})
+    # @param [Hash] params ({})
+    def start_route_analysis(params = {}, options = {})
+      req = build_request(:start_route_analysis, params)
       req.send_request(options)
     end
 
@@ -1962,12 +2594,13 @@ module Aws::NetworkManager
     #   The ID of the device.
     #
     # @option params [Types::AWSLocation] :aws_location
-    #   The AWS location of the device.
+    #   The Amazon Web Services location of the device, if applicable. For an
+    #   on-premises device, you can omit this parameter.
     #
     # @option params [String] :description
     #   A description of the device.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #
     # @option params [String] :type
     #   The type of the device.
@@ -1975,17 +2608,17 @@ module Aws::NetworkManager
     # @option params [String] :vendor
     #   The vendor of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #
     # @option params [String] :model
     #   The model of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #
     # @option params [String] :serial_number
     #   The serial number of the device.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #
     # @option params [Types::Location] :location
     #   Describes a location.
@@ -2059,7 +2692,7 @@ module Aws::NetworkManager
     # @option params [String] :description
     #   A description of the global network.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #
     # @return [Types::UpdateGlobalNetworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2104,12 +2737,12 @@ module Aws::NetworkManager
     # @option params [String] :description
     #   A description of the link.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #
     # @option params [String] :type
     #   The type of the link.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #
     # @option params [Types::Bandwidth] :bandwidth
     #   The upload and download speed in Mbps.
@@ -2117,7 +2750,7 @@ module Aws::NetworkManager
     # @option params [String] :provider
     #   The provider of the link.
     #
-    #   Length Constraints: Maximum length of 128 characters.
+    #   Constraints: Maximum length of 128 characters.
     #
     # @return [Types::UpdateLinkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2163,6 +2796,47 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Updates the resource metadata for the specified global network.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @option params [required, Hash<String,String>] :metadata
+    #   The resource metadata.
+    #
+    # @return [Types::UpdateNetworkResourceMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateNetworkResourceMetadataResponse#resource_arn #resource_arn} => String
+    #   * {Types::UpdateNetworkResourceMetadataResponse#metadata #metadata} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_network_resource_metadata({
+    #     global_network_id: "String", # required
+    #     resource_arn: "String", # required
+    #     metadata: { # required
+    #       "NetworkResourceMetadataKey" => "NetworkResourceMetadataValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #   resp.metadata #=> Hash
+    #   resp.metadata["NetworkResourceMetadataKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateNetworkResourceMetadata AWS API Documentation
+    #
+    # @overload update_network_resource_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_network_resource_metadata(params = {}, options = {})
+      req = build_request(:update_network_resource_metadata, params)
+      req.send_request(options)
+    end
+
     # Updates the information for an existing site. To remove information
     # for any of the parameters, specify an empty string.
     #
@@ -2175,7 +2849,7 @@ module Aws::NetworkManager
     # @option params [String] :description
     #   A description of your site.
     #
-    #   Length Constraints: Maximum length of 256 characters.
+    #   Constraints: Maximum length of 256 characters.
     #
     # @option params [Types::Location] :location
     #   The site location:
@@ -2240,7 +2914,7 @@ module Aws::NetworkManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

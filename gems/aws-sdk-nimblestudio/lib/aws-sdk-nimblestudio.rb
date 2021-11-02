@@ -15,6 +15,7 @@ require_relative 'aws-sdk-nimblestudio/types'
 require_relative 'aws-sdk-nimblestudio/client_api'
 require_relative 'aws-sdk-nimblestudio/client'
 require_relative 'aws-sdk-nimblestudio/errors'
+require_relative 'aws-sdk-nimblestudio/waiters'
 require_relative 'aws-sdk-nimblestudio/resource'
 require_relative 'aws-sdk-nimblestudio/customizations'
 
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-nimblestudio/customizations'
 # @!group service
 module Aws::NimbleStudio
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end

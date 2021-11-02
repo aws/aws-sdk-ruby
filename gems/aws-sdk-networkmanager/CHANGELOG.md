@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2021-11-01)
+------------------
+
+* Feature - This release adds API support to aggregate resources, routes, and telemetry data across a Global Network.
+
 1.15.0 (2021-10-18)
 ------------------
 
