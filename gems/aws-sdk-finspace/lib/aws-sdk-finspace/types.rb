@@ -37,6 +37,12 @@ module Aws::Finspace
     #             "FederationAttributeKey" => "url",
     #           },
     #         },
+    #         superuser_parameters: {
+    #           email_address: "EmailId", # required
+    #           first_name: "NameString", # required
+    #           last_name: "NameString", # required
+    #         },
+    #         data_bundles: ["DataBundleArn"],
     #       }
     #
     # @!attribute [rw] name
@@ -69,6 +75,23 @@ module Aws::Finspace
     #   Configuration information when authentication mode is FEDERATED.
     #   @return [Types::FederationParameters]
     #
+    # @!attribute [rw] superuser_parameters
+    #   Configuration information for the superuser.
+    #   @return [Types::SuperuserParameters]
+    #
+    # @!attribute [rw] data_bundles
+    #   The list of Amazon Resource Names (ARN) of the data bundles to
+    #   install. Currently supported data bundle ARNs:
+    #
+    #   * `arn:aws:finspace:$\{Region\}::data-bundle/capital-markets-sample`
+    #     - Contains sample Capital Markets datasets, categories and
+    #     controlled vocabularies.
+    #
+    #   * `arn:aws:finspace:$\{Region\}::data-bundle/taq` (default) -
+    #     Contains trades and quotes data in addition to sample Capital
+    #     Markets data.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateEnvironmentRequest AWS API Documentation
     #
     class CreateEnvironmentRequest < Struct.new(
@@ -77,7 +100,9 @@ module Aws::Finspace
       :kms_key_id,
       :tags,
       :federation_mode,
-      :federation_parameters)
+      :federation_parameters,
+      :superuser_parameters,
+      :data_bundles)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -437,6 +462,39 @@ module Aws::Finspace
     class ServiceQuotaExceededException < Struct.new(
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information for the superuser.
+    #
+    # @note When making an API call, you may pass SuperuserParameters
+    #   data as a hash:
+    #
+    #       {
+    #         email_address: "EmailId", # required
+    #         first_name: "NameString", # required
+    #         last_name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] email_address
+    #   The email address of the superuser.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the superuser.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the superuser.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/SuperuserParameters AWS API Documentation
+    #
+    class SuperuserParameters < Struct.new(
+      :email_address,
+      :first_name,
+      :last_name)
+      SENSITIVE = [:email_address]
       include Aws::Structure
     end
 

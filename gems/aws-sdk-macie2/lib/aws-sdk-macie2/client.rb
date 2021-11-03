@@ -594,6 +594,22 @@ module Aws::Macie2
     #
     # @option params [String] :regex
     #
+    # @option params [Array<Types::SeverityLevel>] :severity_levels
+    #   The severity to assign to findings that the custom data identifier
+    #   produces, based on the number of occurrences of text that matches the
+    #   custom data identifier's detection criteria. You can specify as many
+    #   as three SeverityLevel objects in this array, one for each severity:
+    #   LOW, MEDIUM, or HIGH. If you specify more than one, the occurrences
+    #   thresholds must be in ascending order by severity, moving from LOW to
+    #   HIGH. For example, 1 for LOW, 50 for MEDIUM, and 100 for HIGH. If an
+    #   S3 object contains fewer occurrences than the lowest specified
+    #   threshold, Amazon Macie doesn't create a finding.
+    #
+    #   If you don't specify any values for this array, Macie creates
+    #   findings for S3 objects that contain at least one occurrence of text
+    #   that matches the detection criteria, and Macie automatically assigns
+    #   the MEDIUM severity to those findings.
+    #
     # @option params [Hash<String,String>] :tags
     #   A string-to-string map of key-value pairs that specifies the tags
     #   (keys and values) for a classification job, custom data identifier,
@@ -613,6 +629,12 @@ module Aws::Macie2
     #     maximum_match_distance: 1,
     #     name: "__string",
     #     regex: "__string",
+    #     severity_levels: [
+    #       {
+    #         occurrences_threshold: 1, # required
+    #         severity: "LOW", # required, accepts LOW, MEDIUM, HIGH
+    #       },
+    #     ],
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -1459,6 +1481,7 @@ module Aws::Macie2
     #   * {Types::GetCustomDataIdentifierResponse#maximum_match_distance #maximum_match_distance} => Integer
     #   * {Types::GetCustomDataIdentifierResponse#name #name} => String
     #   * {Types::GetCustomDataIdentifierResponse#regex #regex} => String
+    #   * {Types::GetCustomDataIdentifierResponse#severity_levels #severity_levels} => Array&lt;Types::SeverityLevel&gt;
     #   * {Types::GetCustomDataIdentifierResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1481,6 +1504,9 @@ module Aws::Macie2
     #   resp.maximum_match_distance #=> Integer
     #   resp.name #=> String
     #   resp.regex #=> String
+    #   resp.severity_levels #=> Array
+    #   resp.severity_levels[0].occurrences_threshold #=> Integer
+    #   resp.severity_levels[0].severity #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
@@ -2880,8 +2906,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Enables an Amazon Macie administrator to suspend or re-enable a member
-    # account.
+    # Enables an Amazon Macie administrator to suspend or re-enable Macie
+    # for a member account.
     #
     # @option params [required, String] :id
     #
@@ -2941,7 +2967,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

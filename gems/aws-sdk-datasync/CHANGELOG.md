@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-11-03)
+------------------
+
+* Feature - AWS DataSync now supports Hadoop Distributed File System (HDFS) Locations
+
 1.37.0 (2021-10-18)
 ------------------
 

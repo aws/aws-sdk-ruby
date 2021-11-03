@@ -17,9 +17,12 @@ module Aws::Finspace
     AttributeMap = Shapes::MapShape.new(name: 'AttributeMap')
     CreateEnvironmentRequest = Shapes::StructureShape.new(name: 'CreateEnvironmentRequest')
     CreateEnvironmentResponse = Shapes::StructureShape.new(name: 'CreateEnvironmentResponse')
+    DataBundleArn = Shapes::StringShape.new(name: 'DataBundleArn')
+    DataBundleArns = Shapes::ListShape.new(name: 'DataBundleArns')
     DeleteEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteEnvironmentRequest')
     DeleteEnvironmentResponse = Shapes::StructureShape.new(name: 'DeleteEnvironmentResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    EmailId = Shapes::StringShape.new(name: 'EmailId')
     Environment = Shapes::StructureShape.new(name: 'Environment')
     EnvironmentArn = Shapes::StringShape.new(name: 'EnvironmentArn')
     EnvironmentList = Shapes::ListShape.new(name: 'EnvironmentList')
@@ -40,12 +43,14 @@ module Aws::Finspace
     ListEnvironmentsResponse = Shapes::StructureShape.new(name: 'ListEnvironmentsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    NameString = Shapes::StringShape.new(name: 'NameString')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResultLimit = Shapes::IntegerShape.new(name: 'ResultLimit')
     SamlMetadataDocument = Shapes::StringShape.new(name: 'SamlMetadataDocument')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SmsDomainUrl = Shapes::StringShape.new(name: 'SmsDomainUrl')
+    SuperuserParameters = Shapes::StructureShape.new(name: 'SuperuserParameters')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -73,12 +78,16 @@ module Aws::Finspace
     CreateEnvironmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateEnvironmentRequest.add_member(:federation_mode, Shapes::ShapeRef.new(shape: FederationMode, location_name: "federationMode"))
     CreateEnvironmentRequest.add_member(:federation_parameters, Shapes::ShapeRef.new(shape: FederationParameters, location_name: "federationParameters"))
+    CreateEnvironmentRequest.add_member(:superuser_parameters, Shapes::ShapeRef.new(shape: SuperuserParameters, location_name: "superuserParameters"))
+    CreateEnvironmentRequest.add_member(:data_bundles, Shapes::ShapeRef.new(shape: DataBundleArns, location_name: "dataBundles"))
     CreateEnvironmentRequest.struct_class = Types::CreateEnvironmentRequest
 
     CreateEnvironmentResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, location_name: "environmentId"))
     CreateEnvironmentResponse.add_member(:environment_arn, Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "environmentArn"))
     CreateEnvironmentResponse.add_member(:environment_url, Shapes::ShapeRef.new(shape: url, location_name: "environmentUrl"))
     CreateEnvironmentResponse.struct_class = Types::CreateEnvironmentResponse
+
+    DataBundleArns.member = Shapes::ShapeRef.new(shape: DataBundleArn)
 
     DeleteEnvironmentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
     DeleteEnvironmentRequest.struct_class = Types::DeleteEnvironmentRequest
@@ -143,6 +152,11 @@ module Aws::Finspace
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SuperuserParameters.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailId, required: true, location_name: "emailAddress"))
+    SuperuserParameters.add_member(:first_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "firstName"))
+    SuperuserParameters.add_member(:last_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "lastName"))
+    SuperuserParameters.struct_class = Types::SuperuserParameters
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 

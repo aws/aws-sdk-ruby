@@ -355,6 +355,20 @@ module Aws::Finspace
     # @option params [Types::FederationParameters] :federation_parameters
     #   Configuration information when authentication mode is FEDERATED.
     #
+    # @option params [Types::SuperuserParameters] :superuser_parameters
+    #   Configuration information for the superuser.
+    #
+    # @option params [Array<String>] :data_bundles
+    #   The list of Amazon Resource Names (ARN) of the data bundles to
+    #   install. Currently supported data bundle ARNs:
+    #
+    #   * `arn:aws:finspace:$\{Region\}::data-bundle/capital-markets-sample` -
+    #     Contains sample Capital Markets datasets, categories and controlled
+    #     vocabularies.
+    #
+    #   * `arn:aws:finspace:$\{Region\}::data-bundle/taq` (default) - Contains
+    #     trades and quotes data in addition to sample Capital Markets data.
+    #
     # @return [Types::CreateEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEnvironmentResponse#environment_id #environment_id} => String
@@ -381,6 +395,12 @@ module Aws::Finspace
     #         "FederationAttributeKey" => "url",
     #       },
     #     },
+    #     superuser_parameters: {
+    #       email_address: "EmailId", # required
+    #       first_name: "NameString", # required
+    #       last_name: "NameString", # required
+    #     },
+    #     data_bundles: ["DataBundleArn"],
     #   })
     #
     # @example Response structure
@@ -693,7 +713,7 @@ module Aws::Finspace
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspace'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

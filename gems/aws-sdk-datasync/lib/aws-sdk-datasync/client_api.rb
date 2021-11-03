@@ -29,6 +29,8 @@ module Aws::DataSync
     CreateLocationEfsResponse = Shapes::StructureShape.new(name: 'CreateLocationEfsResponse')
     CreateLocationFsxWindowsRequest = Shapes::StructureShape.new(name: 'CreateLocationFsxWindowsRequest')
     CreateLocationFsxWindowsResponse = Shapes::StructureShape.new(name: 'CreateLocationFsxWindowsResponse')
+    CreateLocationHdfsRequest = Shapes::StructureShape.new(name: 'CreateLocationHdfsRequest')
+    CreateLocationHdfsResponse = Shapes::StructureShape.new(name: 'CreateLocationHdfsResponse')
     CreateLocationNfsRequest = Shapes::StructureShape.new(name: 'CreateLocationNfsRequest')
     CreateLocationNfsResponse = Shapes::StructureShape.new(name: 'CreateLocationNfsResponse')
     CreateLocationObjectStorageRequest = Shapes::StructureShape.new(name: 'CreateLocationObjectStorageRequest')
@@ -51,6 +53,8 @@ module Aws::DataSync
     DescribeLocationEfsResponse = Shapes::StructureShape.new(name: 'DescribeLocationEfsResponse')
     DescribeLocationFsxWindowsRequest = Shapes::StructureShape.new(name: 'DescribeLocationFsxWindowsRequest')
     DescribeLocationFsxWindowsResponse = Shapes::StructureShape.new(name: 'DescribeLocationFsxWindowsResponse')
+    DescribeLocationHdfsRequest = Shapes::StructureShape.new(name: 'DescribeLocationHdfsRequest')
+    DescribeLocationHdfsResponse = Shapes::StructureShape.new(name: 'DescribeLocationHdfsResponse')
     DescribeLocationNfsRequest = Shapes::StructureShape.new(name: 'DescribeLocationNfsRequest')
     DescribeLocationNfsResponse = Shapes::StructureShape.new(name: 'DescribeLocationNfsResponse')
     DescribeLocationObjectStorageRequest = Shapes::StructureShape.new(name: 'DescribeLocationObjectStorageRequest')
@@ -82,10 +86,25 @@ module Aws::DataSync
     FsxFilesystemArn = Shapes::StringShape.new(name: 'FsxFilesystemArn')
     FsxWindowsSubdirectory = Shapes::StringShape.new(name: 'FsxWindowsSubdirectory')
     Gid = Shapes::StringShape.new(name: 'Gid')
+    HdfsAuthenticationType = Shapes::StringShape.new(name: 'HdfsAuthenticationType')
+    HdfsBlockSize = Shapes::IntegerShape.new(name: 'HdfsBlockSize')
+    HdfsDataTransferProtection = Shapes::StringShape.new(name: 'HdfsDataTransferProtection')
+    HdfsNameNode = Shapes::StructureShape.new(name: 'HdfsNameNode')
+    HdfsNameNodeList = Shapes::ListShape.new(name: 'HdfsNameNodeList')
+    HdfsReplicationFactor = Shapes::IntegerShape.new(name: 'HdfsReplicationFactor')
+    HdfsRpcProtection = Shapes::StringShape.new(name: 'HdfsRpcProtection')
+    HdfsServerHostname = Shapes::StringShape.new(name: 'HdfsServerHostname')
+    HdfsServerPort = Shapes::IntegerShape.new(name: 'HdfsServerPort')
+    HdfsSubdirectory = Shapes::StringShape.new(name: 'HdfsSubdirectory')
+    HdfsUser = Shapes::StringShape.new(name: 'HdfsUser')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     InputTagList = Shapes::ListShape.new(name: 'InputTagList')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    KerberosKeytabFile = Shapes::BlobShape.new(name: 'KerberosKeytabFile')
+    KerberosKrb5ConfFile = Shapes::BlobShape.new(name: 'KerberosKrb5ConfFile')
+    KerberosPrincipal = Shapes::StringShape.new(name: 'KerberosPrincipal')
+    KmsKeyProviderUri = Shapes::StringShape.new(name: 'KmsKeyProviderUri')
     ListAgentsRequest = Shapes::StructureShape.new(name: 'ListAgentsRequest')
     ListAgentsResponse = Shapes::StructureShape.new(name: 'ListAgentsResponse')
     ListLocationsRequest = Shapes::StructureShape.new(name: 'ListLocationsRequest')
@@ -129,6 +148,7 @@ module Aws::DataSync
     PreserveDeletedFiles = Shapes::StringShape.new(name: 'PreserveDeletedFiles')
     PreserveDevices = Shapes::StringShape.new(name: 'PreserveDevices')
     PrivateLinkConfig = Shapes::StructureShape.new(name: 'PrivateLinkConfig')
+    QopConfiguration = Shapes::StructureShape.new(name: 'QopConfiguration')
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
     S3StorageClass = Shapes::StringShape.new(name: 'S3StorageClass')
@@ -173,6 +193,8 @@ module Aws::DataSync
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAgentRequest = Shapes::StructureShape.new(name: 'UpdateAgentRequest')
     UpdateAgentResponse = Shapes::StructureShape.new(name: 'UpdateAgentResponse')
+    UpdateLocationHdfsRequest = Shapes::StructureShape.new(name: 'UpdateLocationHdfsRequest')
+    UpdateLocationHdfsResponse = Shapes::StructureShape.new(name: 'UpdateLocationHdfsResponse')
     UpdateLocationNfsRequest = Shapes::StructureShape.new(name: 'UpdateLocationNfsRequest')
     UpdateLocationNfsResponse = Shapes::StructureShape.new(name: 'UpdateLocationNfsResponse')
     UpdateLocationObjectStorageRequest = Shapes::StructureShape.new(name: 'UpdateLocationObjectStorageRequest')
@@ -233,6 +255,24 @@ module Aws::DataSync
 
     CreateLocationFsxWindowsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     CreateLocationFsxWindowsResponse.struct_class = Types::CreateLocationFsxWindowsResponse
+
+    CreateLocationHdfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: HdfsSubdirectory, location_name: "Subdirectory"))
+    CreateLocationHdfsRequest.add_member(:name_nodes, Shapes::ShapeRef.new(shape: HdfsNameNodeList, required: true, location_name: "NameNodes"))
+    CreateLocationHdfsRequest.add_member(:block_size, Shapes::ShapeRef.new(shape: HdfsBlockSize, location_name: "BlockSize"))
+    CreateLocationHdfsRequest.add_member(:replication_factor, Shapes::ShapeRef.new(shape: HdfsReplicationFactor, location_name: "ReplicationFactor"))
+    CreateLocationHdfsRequest.add_member(:kms_key_provider_uri, Shapes::ShapeRef.new(shape: KmsKeyProviderUri, location_name: "KmsKeyProviderUri"))
+    CreateLocationHdfsRequest.add_member(:qop_configuration, Shapes::ShapeRef.new(shape: QopConfiguration, location_name: "QopConfiguration"))
+    CreateLocationHdfsRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: HdfsAuthenticationType, required: true, location_name: "AuthenticationType"))
+    CreateLocationHdfsRequest.add_member(:simple_user, Shapes::ShapeRef.new(shape: HdfsUser, location_name: "SimpleUser"))
+    CreateLocationHdfsRequest.add_member(:kerberos_principal, Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    CreateLocationHdfsRequest.add_member(:kerberos_keytab, Shapes::ShapeRef.new(shape: KerberosKeytabFile, location_name: "KerberosKeytab"))
+    CreateLocationHdfsRequest.add_member(:kerberos_krb_5_conf, Shapes::ShapeRef.new(shape: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
+    CreateLocationHdfsRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
+    CreateLocationHdfsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationHdfsRequest.struct_class = Types::CreateLocationHdfsRequest
+
+    CreateLocationHdfsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationHdfsResponse.struct_class = Types::CreateLocationHdfsResponse
 
     CreateLocationNfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: NfsSubdirectory, required: true, location_name: "Subdirectory"))
     CreateLocationNfsRequest.add_member(:server_hostname, Shapes::ShapeRef.new(shape: ServerHostname, required: true, location_name: "ServerHostname"))
@@ -343,6 +383,23 @@ module Aws::DataSync
     DescribeLocationFsxWindowsResponse.add_member(:domain, Shapes::ShapeRef.new(shape: SmbDomain, location_name: "Domain"))
     DescribeLocationFsxWindowsResponse.struct_class = Types::DescribeLocationFsxWindowsResponse
 
+    DescribeLocationHdfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
+    DescribeLocationHdfsRequest.struct_class = Types::DescribeLocationHdfsRequest
+
+    DescribeLocationHdfsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    DescribeLocationHdfsResponse.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
+    DescribeLocationHdfsResponse.add_member(:name_nodes, Shapes::ShapeRef.new(shape: HdfsNameNodeList, location_name: "NameNodes"))
+    DescribeLocationHdfsResponse.add_member(:block_size, Shapes::ShapeRef.new(shape: HdfsBlockSize, location_name: "BlockSize"))
+    DescribeLocationHdfsResponse.add_member(:replication_factor, Shapes::ShapeRef.new(shape: HdfsReplicationFactor, location_name: "ReplicationFactor"))
+    DescribeLocationHdfsResponse.add_member(:kms_key_provider_uri, Shapes::ShapeRef.new(shape: KmsKeyProviderUri, location_name: "KmsKeyProviderUri"))
+    DescribeLocationHdfsResponse.add_member(:qop_configuration, Shapes::ShapeRef.new(shape: QopConfiguration, location_name: "QopConfiguration"))
+    DescribeLocationHdfsResponse.add_member(:authentication_type, Shapes::ShapeRef.new(shape: HdfsAuthenticationType, location_name: "AuthenticationType"))
+    DescribeLocationHdfsResponse.add_member(:simple_user, Shapes::ShapeRef.new(shape: HdfsUser, location_name: "SimpleUser"))
+    DescribeLocationHdfsResponse.add_member(:kerberos_principal, Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    DescribeLocationHdfsResponse.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    DescribeLocationHdfsResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationHdfsResponse.struct_class = Types::DescribeLocationHdfsResponse
+
     DescribeLocationNfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
     DescribeLocationNfsRequest.struct_class = Types::DescribeLocationNfsRequest
 
@@ -441,6 +498,12 @@ module Aws::DataSync
     FilterRule.struct_class = Types::FilterRule
 
     FilterValues.member = Shapes::ShapeRef.new(shape: FilterAttributeValue)
+
+    HdfsNameNode.add_member(:hostname, Shapes::ShapeRef.new(shape: HdfsServerHostname, required: true, location_name: "Hostname"))
+    HdfsNameNode.add_member(:port, Shapes::ShapeRef.new(shape: HdfsServerPort, required: true, location_name: "Port"))
+    HdfsNameNode.struct_class = Types::HdfsNameNode
+
+    HdfsNameNodeList.member = Shapes::ShapeRef.new(shape: HdfsNameNode)
 
     InputTagList.member = Shapes::ShapeRef.new(shape: TagListEntry)
 
@@ -543,6 +606,10 @@ module Aws::DataSync
     PrivateLinkConfig.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: PLSecurityGroupArnList, location_name: "SecurityGroupArns"))
     PrivateLinkConfig.struct_class = Types::PrivateLinkConfig
 
+    QopConfiguration.add_member(:rpc_protection, Shapes::ShapeRef.new(shape: HdfsRpcProtection, location_name: "RpcProtection"))
+    QopConfiguration.add_member(:data_transfer_protection, Shapes::ShapeRef.new(shape: HdfsDataTransferProtection, location_name: "DataTransferProtection"))
+    QopConfiguration.struct_class = Types::QopConfiguration
+
     S3Config.add_member(:bucket_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "BucketAccessRoleArn"))
     S3Config.struct_class = Types::S3Config
 
@@ -617,6 +684,23 @@ module Aws::DataSync
     UpdateAgentRequest.struct_class = Types::UpdateAgentRequest
 
     UpdateAgentResponse.struct_class = Types::UpdateAgentResponse
+
+    UpdateLocationHdfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
+    UpdateLocationHdfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: HdfsSubdirectory, location_name: "Subdirectory"))
+    UpdateLocationHdfsRequest.add_member(:name_nodes, Shapes::ShapeRef.new(shape: HdfsNameNodeList, location_name: "NameNodes"))
+    UpdateLocationHdfsRequest.add_member(:block_size, Shapes::ShapeRef.new(shape: HdfsBlockSize, location_name: "BlockSize"))
+    UpdateLocationHdfsRequest.add_member(:replication_factor, Shapes::ShapeRef.new(shape: HdfsReplicationFactor, location_name: "ReplicationFactor"))
+    UpdateLocationHdfsRequest.add_member(:kms_key_provider_uri, Shapes::ShapeRef.new(shape: KmsKeyProviderUri, location_name: "KmsKeyProviderUri"))
+    UpdateLocationHdfsRequest.add_member(:qop_configuration, Shapes::ShapeRef.new(shape: QopConfiguration, location_name: "QopConfiguration"))
+    UpdateLocationHdfsRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: HdfsAuthenticationType, location_name: "AuthenticationType"))
+    UpdateLocationHdfsRequest.add_member(:simple_user, Shapes::ShapeRef.new(shape: HdfsUser, location_name: "SimpleUser"))
+    UpdateLocationHdfsRequest.add_member(:kerberos_principal, Shapes::ShapeRef.new(shape: KerberosPrincipal, location_name: "KerberosPrincipal"))
+    UpdateLocationHdfsRequest.add_member(:kerberos_keytab, Shapes::ShapeRef.new(shape: KerberosKeytabFile, location_name: "KerberosKeytab"))
+    UpdateLocationHdfsRequest.add_member(:kerberos_krb_5_conf, Shapes::ShapeRef.new(shape: KerberosKrb5ConfFile, location_name: "KerberosKrb5Conf"))
+    UpdateLocationHdfsRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
+    UpdateLocationHdfsRequest.struct_class = Types::UpdateLocationHdfsRequest
+
+    UpdateLocationHdfsResponse.struct_class = Types::UpdateLocationHdfsResponse
 
     UpdateLocationNfsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
     UpdateLocationNfsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: NfsSubdirectory, location_name: "Subdirectory"))
@@ -721,6 +805,16 @@ module Aws::DataSync
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateLocationFsxWindowsRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateLocationFsxWindowsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:create_location_hdfs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLocationHdfs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLocationHdfsRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLocationHdfsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
@@ -831,6 +925,16 @@ module Aws::DataSync
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocationFsxWindowsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocationFsxWindowsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:describe_location_hdfs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLocationHdfs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLocationHdfsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLocationHdfsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
@@ -1011,6 +1115,16 @@ module Aws::DataSync
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAgentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:update_location_hdfs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLocationHdfs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLocationHdfsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLocationHdfsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)

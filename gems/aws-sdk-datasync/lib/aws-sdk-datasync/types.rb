@@ -363,6 +363,169 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLocationHdfsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         subdirectory: "HdfsSubdirectory",
+    #         name_nodes: [ # required
+    #           {
+    #             hostname: "HdfsServerHostname", # required
+    #             port: 1, # required
+    #           },
+    #         ],
+    #         block_size: 1,
+    #         replication_factor: 1,
+    #         kms_key_provider_uri: "KmsKeyProviderUri",
+    #         qop_configuration: {
+    #           rpc_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
+    #           data_transfer_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
+    #         },
+    #         authentication_type: "SIMPLE", # required, accepts SIMPLE, KERBEROS
+    #         simple_user: "HdfsUser",
+    #         kerberos_principal: "KerberosPrincipal",
+    #         kerberos_keytab: "data",
+    #         kerberos_krb_5_conf: "data",
+    #         agent_arns: ["AgentArn"], # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] subdirectory
+    #   A subdirectory in the HDFS cluster. This subdirectory is used to
+    #   read data from or write data to the HDFS cluster. If the
+    #   subdirectory isn't specified, it will default to `/`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_nodes
+    #   The NameNode that manages the HDFS namespace. The NameNode performs
+    #   operations such as opening, closing, and renaming files and
+    #   directories. The NameNode contains the information to map blocks of
+    #   data to the DataNodes. You can use only one NameNode.
+    #   @return [Array<Types::HdfsNameNode>]
+    #
+    # @!attribute [rw] block_size
+    #   The size of data blocks to write into the HDFS cluster. The block
+    #   size must be a multiple of 512 bytes. The default block size is 128
+    #   mebibytes (MiB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replication_factor
+    #   The number of DataNodes to replicate the data to when writing to the
+    #   HDFS cluster. By default, data is replicated to three DataNodes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_provider_uri
+    #   The URI of the HDFS cluster's Key Management Server (KMS).
+    #   @return [String]
+    #
+    # @!attribute [rw] qop_configuration
+    #   The Quality of Protection (QOP) configuration specifies the Remote
+    #   Procedure Call (RPC) and data transfer protection settings
+    #   configured on the Hadoop Distributed File System (HDFS) cluster. If
+    #   `QopConfiguration` isn't specified, `RpcProtection` and
+    #   `DataTransferProtection` default to `PRIVACY`. If you set
+    #   `RpcProtection` or `DataTransferProtection`, the other parameter
+    #   assumes the same value.
+    #   @return [Types::QopConfiguration]
+    #
+    # @!attribute [rw] authentication_type
+    #   The type of authentication used to determine the identity of the
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] simple_user
+    #   The user name used to identify the client on the host operating
+    #   system.
+    #
+    #   <note markdown="1"> If `SIMPLE` is specified for `AuthenticationType`, this parameter is
+    #   required.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] kerberos_principal
+    #   The Kerberos principal with access to the files and folders on the
+    #   HDFS cluster.
+    #
+    #   <note markdown="1"> If `KERBEROS` is specified for `AuthenticationType`, this parameter
+    #   is required.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] kerberos_keytab
+    #   The Kerberos key table (keytab) that contains mappings between the
+    #   defined Kerberos principal and the encrypted keys. You can load the
+    #   keytab from a file by providing the file's address. If you're
+    #   using the CLI, it performs base64 encoding for you. Otherwise,
+    #   provide the base64-encoded text.
+    #
+    #   <note markdown="1"> If `KERBEROS` is specified for `AuthenticationType`, this parameter
+    #   is required.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] kerberos_krb_5_conf
+    #   The `krb5.conf` file that contains the Kerberos configuration
+    #   information. You can load the `krb5.conf` file by providing the
+    #   file's address. If you're using the CLI, it performs the base64
+    #   encoding for you. Otherwise, provide the base64-encoded text.
+    #
+    #   <note markdown="1"> If `KERBEROS` is specified for `AuthenticationType`, this parameter
+    #   is required.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_arns
+    #   The Amazon Resource Names (ARNs) of the agents that are used to
+    #   connect to the HDFS cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pair that represents the tag that you want to add to
+    #   the location. The value can be an empty string. We recommend using
+    #   tags to name your resources.
+    #   @return [Array<Types::TagListEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationHdfsRequest AWS API Documentation
+    #
+    class CreateLocationHdfsRequest < Struct.new(
+      :subdirectory,
+      :name_nodes,
+      :block_size,
+      :replication_factor,
+      :kms_key_provider_uri,
+      :qop_configuration,
+      :authentication_type,
+      :simple_user,
+      :kerberos_principal,
+      :kerberos_keytab,
+      :kerberos_krb_5_conf,
+      :agent_arns,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location_arn
+    #   The ARN of the source HDFS cluster location that's created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationHdfsResponse AWS API Documentation
+    #
+    class CreateLocationHdfsResponse < Struct.new(
+      :location_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # CreateLocationNfsRequest
     #
     # @note When making an API call, you may pass CreateLocationNfsRequest
@@ -930,9 +1093,9 @@ module Aws::DataSync
     #
     # @!attribute [rw] includes
     #   A list of filter rules that determines which files to include when
-    #   running a task. The pattern should contain a single filter string
-    #   that consists of the patterns to include. The patterns are delimited
-    #   by "\|" (that is, a pipe). For example: `"/folder1|/folder2`"
+    #   running a task. The pattern contains a single filter string that
+    #   consists of the patterns to include. The patterns are delimited by
+    #   "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
     #   @return [Array<Types::FilterRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateTaskRequest AWS API Documentation
@@ -1229,6 +1392,101 @@ module Aws::DataSync
       :creation_time,
       :user,
       :domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLocationHdfsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         location_arn: "LocationArn", # required
+    #       }
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the HDFS cluster location to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationHdfsRequest AWS API Documentation
+    #
+    class DescribeLocationHdfsRequest < Struct.new(
+      :location_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location_arn
+    #   The ARN of the HDFS cluster location.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_uri
+    #   The URI of the HDFS cluster location.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_nodes
+    #   The NameNode that manage the HDFS namespace.
+    #   @return [Array<Types::HdfsNameNode>]
+    #
+    # @!attribute [rw] block_size
+    #   The size of the data blocks to write into the HDFS cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replication_factor
+    #   The number of DataNodes to replicate the data to when writing to the
+    #   HDFS cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_provider_uri
+    #   The URI of the HDFS cluster's Key Management Server (KMS).
+    #   @return [String]
+    #
+    # @!attribute [rw] qop_configuration
+    #   The Quality of Protection (QOP) configuration specifies the Remote
+    #   Procedure Call (RPC) and data transfer protection settings
+    #   configured on the Hadoop Distributed File System (HDFS) cluster.
+    #   @return [Types::QopConfiguration]
+    #
+    # @!attribute [rw] authentication_type
+    #   The type of authentication used to determine the identity of the
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] simple_user
+    #   The user name used to identify the client on the host operating
+    #   system. This parameter is used if the `AuthenticationType` is
+    #   defined as `SIMPLE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kerberos_principal
+    #   The Kerberos principal with access to the files and folders on the
+    #   HDFS cluster. This parameter is used if the `AuthenticationType` is
+    #   defined as `KERBEROS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_arns
+    #   The ARNs of the agents that are used to connect to the HDFS cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the HDFS location was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationHdfsResponse AWS API Documentation
+    #
+    class DescribeLocationHdfsResponse < Struct.new(
+      :location_arn,
+      :location_uri,
+      :name_nodes,
+      :block_size,
+      :replication_factor,
+      :kms_key_provider_uri,
+      :qop_configuration,
+      :authentication_type,
+      :simple_user,
+      :kerberos_principal,
+      :agent_arns,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1719,13 +1977,13 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] source_network_interface_arns
-    #   The Amazon Resource Name (ARN) of the source ENIs (Elastic Network
-    #   Interface) that was created for your subnet.
+    #   The Amazon Resource Names (ARNs) of the source elastic network
+    #   interfaces (ENIs) that were created for your subnet.
     #   @return [Array<String>]
     #
     # @!attribute [rw] destination_network_interface_arns
-    #   The Amazon Resource Name (ARN) of the destination ENIs (Elastic
-    #   Network Interface) that was created for your subnet.
+    #   The Amazon Resource Names (ARNs) of the destination elastic network
+    #   interfaces (ENIs) that were created for your subnet.
     #   @return [Array<String>]
     #
     # @!attribute [rw] options
@@ -1748,7 +2006,7 @@ module Aws::DataSync
     #   A list of filter rules that determines which files to exclude from a
     #   task. The list should contain a single filter string that consists
     #   of the patterns to exclude. The patterns are delimited by "\|"
-    #   (that is, a pipe), for example: `"/folder1|/folder2"`
+    #   (that is, a pipe), for example, `"/folder1|/folder2"`.
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] schedule
@@ -1773,9 +2031,9 @@ module Aws::DataSync
     #
     # @!attribute [rw] includes
     #   A list of filter rules that determines which files to include when
-    #   running a task. The pattern should contain a single filter string
-    #   that consists of the patterns to include. The patterns are delimited
-    #   by "\|" (that is, a pipe). For example: `"/folder1|/folder2`"
+    #   running a task. The pattern contains a single filter string that
+    #   consists of the patterns to include. The patterns are delimited by
+    #   "\|" (that is, a pipe), for example, `"/folder1|/folder2`".
     #   @return [Array<Types::FilterRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeTaskResponse AWS API Documentation
@@ -1861,6 +2119,40 @@ module Aws::DataSync
     class FilterRule < Struct.new(
       :filter_type,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The NameNode of the Hadoop Distributed File System (HDFS). The
+    # NameNode manages the file system's namespace. The NameNode performs
+    # operations such as opening, closing, and renaming files and
+    # directories. The NameNode contains the information to map blocks of
+    # data to the DataNodes.
+    #
+    # @note When making an API call, you may pass HdfsNameNode
+    #   data as a hash:
+    #
+    #       {
+    #         hostname: "HdfsServerHostname", # required
+    #         port: 1, # required
+    #       }
+    #
+    # @!attribute [rw] hostname
+    #   The hostname of the NameNode in the HDFS cluster. This value is the
+    #   IP address or Domain Name Service (DNS) name of the NameNode. An
+    #   agent that's installed on-premises uses this hostname to
+    #   communicate with the NameNode in the network.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port that the NameNode uses to listen to client requests.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/HdfsNameNode AWS API Documentation
+    #
+    class HdfsNameNode < Struct.new(
+      :hostname,
+      :port)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2304,7 +2596,7 @@ module Aws::DataSync
     #
     #   * <b> <a href="https://tools.ietf.org/html/rfc3530">NFSv4.0</a> </b>
     #     - stateful, firewall-friendly protocol version that supports
-    #     delegations and pseudo filesystems.
+    #     delegations and pseudo file systems.
     #
     #   * <b> <a href="https://tools.ietf.org/html/rfc5661">NFSv4.1</a> </b>
     #     - stateful protocol version that supports sessions, directory
@@ -2725,6 +3017,39 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # The Quality of Protection (QOP) configuration specifies the Remote
+    # Procedure Call (RPC) and data transfer privacy settings configured on
+    # the Hadoop Distributed File System (HDFS) cluster.
+    #
+    # @note When making an API call, you may pass QopConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         rpc_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
+    #         data_transfer_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
+    #       }
+    #
+    # @!attribute [rw] rpc_protection
+    #   The RPC protection setting configured on the HDFS cluster. This
+    #   setting corresponds to your `hadoop.rpc.protection` setting in your
+    #   `core-site.xml` file on your Hadoop cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_transfer_protection
+    #   The data transfer protection setting configured on the HDFS cluster.
+    #   This setting corresponds to your `dfs.data.transfer.protection`
+    #   setting in the `hdfs-site.xml` file on your Hadoop cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/QopConfiguration AWS API Documentation
+    #
+    class QopConfiguration < Struct.new(
+      :rpc_protection,
+      :data_transfer_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon Resource Name (ARN) of the Identity and Access Management
     # (IAM) role that is used to access an Amazon S3 bucket.
     #
@@ -2843,14 +3168,14 @@ module Aws::DataSync
     #   A list of filter rules that determines which files to include when
     #   running a task. The pattern should contain a single filter string
     #   that consists of the patterns to include. The patterns are delimited
-    #   by "\|" (that is, a pipe). For example: `"/folder1|/folder2"`
+    #   by "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] excludes
     #   A list of filter rules that determines which files to exclude from a
-    #   task. The list should contain a single filter string that consists
-    #   of the patterns to exclude. The patterns are delimited by "\|"
-    #   (that is, a pipe), for example, `"/folder1|/folder2"`.
+    #   task. The list contains a single filter string that consists of the
+    #   patterns to exclude. The patterns are delimited by "\|" (that is,
+    #   a pipe), for example, `"/folder1|/folder2"`.
     #   @return [Array<Types::FilterRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/StartTaskExecutionRequest AWS API Documentation
@@ -2879,9 +3204,9 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # Represents a single entry in a list of AWS resource tags.
-    # `TagListEntry` returns an array that contains a list of tasks when the
-    # [ListTagsForResource][1] operation is called.
+    # Represents a single entry in a list of Amazon Web Services resource
+    # tags. `TagListEntry` returns an array that contains a list of tasks
+    # when the [ListTagsForResource][1] operation is called.
     #
     #
     #
@@ -3203,6 +3528,126 @@ module Aws::DataSync
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateAgentResponse AWS API Documentation
     #
     class UpdateAgentResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateLocationHdfsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         location_arn: "LocationArn", # required
+    #         subdirectory: "HdfsSubdirectory",
+    #         name_nodes: [
+    #           {
+    #             hostname: "HdfsServerHostname", # required
+    #             port: 1, # required
+    #           },
+    #         ],
+    #         block_size: 1,
+    #         replication_factor: 1,
+    #         kms_key_provider_uri: "KmsKeyProviderUri",
+    #         qop_configuration: {
+    #           rpc_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
+    #           data_transfer_protection: "DISABLED", # accepts DISABLED, AUTHENTICATION, INTEGRITY, PRIVACY
+    #         },
+    #         authentication_type: "SIMPLE", # accepts SIMPLE, KERBEROS
+    #         simple_user: "HdfsUser",
+    #         kerberos_principal: "KerberosPrincipal",
+    #         kerberos_keytab: "data",
+    #         kerberos_krb_5_conf: "data",
+    #         agent_arns: ["AgentArn"],
+    #       }
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the source HDFS cluster location.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdirectory
+    #   A subdirectory in the HDFS cluster. This subdirectory is used to
+    #   read data from or write data to the HDFS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_nodes
+    #   The NameNode that manages the HDFS namespace. The NameNode performs
+    #   operations such as opening, closing, and renaming files and
+    #   directories. The NameNode contains the information to map blocks of
+    #   data to the DataNodes. You can use only one NameNode.
+    #   @return [Array<Types::HdfsNameNode>]
+    #
+    # @!attribute [rw] block_size
+    #   The size of the data blocks to write into the HDFS cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replication_factor
+    #   The number of DataNodes to replicate the data to when writing to the
+    #   HDFS cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_provider_uri
+    #   The URI of the HDFS cluster's Key Management Server (KMS).
+    #   @return [String]
+    #
+    # @!attribute [rw] qop_configuration
+    #   The Quality of Protection (QOP) configuration specifies the Remote
+    #   Procedure Call (RPC) and data transfer privacy settings configured
+    #   on the Hadoop Distributed File System (HDFS) cluster.
+    #   @return [Types::QopConfiguration]
+    #
+    # @!attribute [rw] authentication_type
+    #   The type of authentication used to determine the identity of the
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] simple_user
+    #   The user name used to identify the client on the host operating
+    #   system.
+    #   @return [String]
+    #
+    # @!attribute [rw] kerberos_principal
+    #   The Kerberos principal with access to the files and folders on the
+    #   HDFS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] kerberos_keytab
+    #   The Kerberos key table (keytab) that contains mappings between the
+    #   defined Kerberos principal and the encrypted keys. You can load the
+    #   keytab from a file by providing the file's address. If you use the
+    #   AWS CLI, it performs base64 encoding for you. Otherwise, provide the
+    #   base64-encoded text.
+    #   @return [String]
+    #
+    # @!attribute [rw] kerberos_krb_5_conf
+    #   The `krb5.conf` file that contains the Kerberos configuration
+    #   information. You can load the `krb5.conf` file by providing the
+    #   file's address. If you're using the AWS CLI, it performs the
+    #   base64 encoding for you. Otherwise, provide the base64-encoded text.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_arns
+    #   The ARNs of the agents that are used to connect to the HDFS cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationHdfsRequest AWS API Documentation
+    #
+    class UpdateLocationHdfsRequest < Struct.new(
+      :location_arn,
+      :subdirectory,
+      :name_nodes,
+      :block_size,
+      :replication_factor,
+      :kms_key_provider_uri,
+      :qop_configuration,
+      :authentication_type,
+      :simple_user,
+      :kerberos_principal,
+      :kerberos_keytab,
+      :kerberos_krb_5_conf,
+      :agent_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateLocationHdfsResponse AWS API Documentation
+    #
+    class UpdateLocationHdfsResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateLocationNfsRequest
     #   data as a hash:
@@ -3571,7 +4016,7 @@ module Aws::DataSync
     #   A list of filter rules that determines which files to exclude from a
     #   task. The list should contain a single filter string that consists
     #   of the patterns to exclude. The patterns are delimited by "\|"
-    #   (that is, a pipe), for example: `"/folder1|/folder2"`
+    #   (that is, a pipe), for example, `"/folder1|/folder2"`.
     #   @return [Array<Types::FilterRule>]
     #
     # @!attribute [rw] schedule
@@ -3592,15 +4037,15 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_log_group_arn
-    #   The Amazon Resource Name (ARN) of the resource name of the
-    #   CloudWatch LogGroup.
+    #   The Amazon Resource Name (ARN) of the resource name of the Amazon
+    #   CloudWatch log group.
     #   @return [String]
     #
     # @!attribute [rw] includes
     #   A list of filter rules that determines which files to include when
-    #   running a task. The pattern should contain a single filter string
-    #   that consists of the patterns to include. The patterns are delimited
-    #   by "\|" (that is, a pipe). For example: `"/folder1|/folder2`"
+    #   running a task. The pattern contains a single filter string that
+    #   consists of the patterns to include. The patterns are delimited by
+    #   "\|" (that is, a pipe), for example, `"/folder1|/folder2"`.
     #   @return [Array<Types::FilterRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/UpdateTaskRequest AWS API Documentation
