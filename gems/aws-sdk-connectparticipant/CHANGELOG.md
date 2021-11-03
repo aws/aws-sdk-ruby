@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-11-03)
+------------------
+
+* Feature - This release adds a new boolean attribute - Connect Participant - to the CreateParticipantConnection API, which can be used to mark the participant as connected.
+
 1.16.0 (2021-10-28)
 ------------------
 

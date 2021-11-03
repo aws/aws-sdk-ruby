@@ -548,10 +548,11 @@ module Aws::Macie2
     # Provides statistical data and other information about an S3 bucket
     # that Amazon Macie monitors and analyzes for your account. If an error
     # occurs when Macie attempts to retrieve and process information about
-    # the bucket or the bucket's objects, the value for most of these
-    # properties is null. Exceptions are accountId, bucketArn,
-    # bucketCreatedAt, bucketName, lastUpdated, and region. To identify the
-    # cause of the error, refer to the errorCode and errorMessage values.
+    # the bucket or the bucket's objects, the value for the versioning
+    # property is false and the value for most other properties is null.
+    # Exceptions are accountId, bucketArn, bucketCreatedAt, bucketName,
+    # lastUpdated, and region. To identify the cause of the error, refer to
+    # the errorCode and errorMessage values.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -1179,7 +1180,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies the criteria and other settings for a custom data
+    # Specifies the detection criteria and other settings for a custom data
     # identifier. You can't change a custom data identifier after you
     # create it. This helps ensure that you have an immutable history of
     # sensitive data findings and discovery results for data privacy and
@@ -1196,6 +1197,12 @@ module Aws::Macie2
     #         maximum_match_distance: 1,
     #         name: "__string",
     #         regex: "__string",
+    #         severity_levels: [
+    #           {
+    #             occurrences_threshold: 1, # required
+    #             severity: "LOW", # required, accepts LOW, MEDIUM, HIGH
+    #           },
+    #         ],
     #         tags: {
     #           "__string" => "__string",
     #         },
@@ -1224,6 +1231,23 @@ module Aws::Macie2
     # @!attribute [rw] regex
     #   @return [String]
     #
+    # @!attribute [rw] severity_levels
+    #   The severity to assign to findings that the custom data identifier
+    #   produces, based on the number of occurrences of text that matches
+    #   the custom data identifier's detection criteria. You can specify as
+    #   many as three SeverityLevel objects in this array, one for each
+    #   severity: LOW, MEDIUM, or HIGH. If you specify more than one, the
+    #   occurrences thresholds must be in ascending order by severity,
+    #   moving from LOW to HIGH. For example, 1 for LOW, 50 for MEDIUM, and
+    #   100 for HIGH. If an S3 object contains fewer occurrences than the
+    #   lowest specified threshold, Amazon Macie doesn't create a finding.
+    #
+    #   If you don't specify any values for this array, Macie creates
+    #   findings for S3 objects that contain at least one occurrence of text
+    #   that matches the detection criteria, and Macie automatically assigns
+    #   the MEDIUM severity to those findings.
+    #   @return [Array<Types::SeverityLevel>]
+    #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
     #   (keys and values) for a classification job, custom data identifier,
@@ -1240,6 +1264,7 @@ module Aws::Macie2
       :maximum_match_distance,
       :name,
       :regex,
+      :severity_levels,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1445,8 +1470,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies the types of findings to include in a set of sample findings
-    # that Amazon Macie creates.
+    # Specifies the types of sample findings to create.
     #
     # @note When making an API call, you may pass CreateSampleFindingsRequest
     #   data as a hash:
@@ -2741,8 +2765,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about the criteria and other settings for a
-    # custom data identifier.
+    # Provides information about the detection criteria and other settings
+    # for a custom data identifier.
     #
     # @!attribute [rw] arn
     #   @return [String]
@@ -2774,6 +2798,23 @@ module Aws::Macie2
     # @!attribute [rw] regex
     #   @return [String]
     #
+    # @!attribute [rw] severity_levels
+    #   The severity to assign to findings that the custom data identifier
+    #   produces, based on the number of occurrences of text that matches
+    #   the custom data identifier's detection criteria. You can specify as
+    #   many as three SeverityLevel objects in this array, one for each
+    #   severity: LOW, MEDIUM, or HIGH. If you specify more than one, the
+    #   occurrences thresholds must be in ascending order by severity,
+    #   moving from LOW to HIGH. For example, 1 for LOW, 50 for MEDIUM, and
+    #   100 for HIGH. If an S3 object contains fewer occurrences than the
+    #   lowest specified threshold, Amazon Macie doesn't create a finding.
+    #
+    #   If you don't specify any values for this array, Macie creates
+    #   findings for S3 objects that contain at least one occurrence of text
+    #   that matches the detection criteria, and Macie automatically assigns
+    #   the MEDIUM severity to those findings.
+    #   @return [Array<Types::SeverityLevel>]
+    #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that specifies the tags
     #   (keys and values) for a classification job, custom data identifier,
@@ -2793,6 +2834,7 @@ module Aws::Macie2
       :maximum_match_distance,
       :name,
       :regex,
+      :severity_levels,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -5889,6 +5931,36 @@ module Aws::Macie2
       include Aws::Structure
     end
 
+    # Specifies a severity level for findings that a custom data identifier
+    # produces. A severity level determines which severity is assigned to
+    # the findings, based on the number of occurrences of text that matches
+    # the custom data identifier's detection criteria.
+    #
+    # @note When making an API call, you may pass SeverityLevel
+    #   data as a hash:
+    #
+    #       {
+    #         occurrences_threshold: 1, # required
+    #         severity: "LOW", # required, accepts LOW, MEDIUM, HIGH
+    #       }
+    #
+    # @!attribute [rw] occurrences_threshold
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity
+    #   The severity of a finding, ranging from LOW, for least severe, to
+    #   HIGH, for most severe. Valid values are:
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/SeverityLevel AWS API Documentation
+    #
+    class SeverityLevel < Struct.new(
+      :occurrences_threshold,
+      :severity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a property-based condition that determines whether an S3
     # bucket is included or excluded from a classification job.
     #
@@ -6457,7 +6529,7 @@ module Aws::Macie2
     #
     class UpdateMacieSessionResponse < Aws::EmptyStructure; end
 
-    # Suspends (pauses) or re-enables an Amazon Macie member account.
+    # Suspends (pauses) or re-enables Amazon Macie for a member account.
     #
     # @note When making an API call, you may pass UpdateMemberSessionRequest
     #   data as a hash:

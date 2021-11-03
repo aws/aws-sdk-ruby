@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2021-11-03)
+------------------
+
+* Feature - Adds superuser and data-bundle parameters to CreateEnvironment API
+
 1.5.0 (2021-09-01)
 ------------------
 

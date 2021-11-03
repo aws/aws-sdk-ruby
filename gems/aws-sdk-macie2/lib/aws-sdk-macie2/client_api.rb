@@ -73,6 +73,7 @@ module Aws::Macie2
     CustomDetection = Shapes::StructureShape.new(name: 'CustomDetection')
     CustomDetections = Shapes::ListShape.new(name: 'CustomDetections')
     DailySchedule = Shapes::StructureShape.new(name: 'DailySchedule')
+    DataIdentifierSeverity = Shapes::StringShape.new(name: 'DataIdentifierSeverity')
     DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
     DeclineInvitationsRequest = Shapes::StructureShape.new(name: 'DeclineInvitationsRequest')
     DeclineInvitationsResponse = Shapes::StructureShape.new(name: 'DeclineInvitationsResponse')
@@ -259,6 +260,8 @@ module Aws::Macie2
     SessionIssuer = Shapes::StructureShape.new(name: 'SessionIssuer')
     Severity = Shapes::StructureShape.new(name: 'Severity')
     SeverityDescription = Shapes::StringShape.new(name: 'SeverityDescription')
+    SeverityLevel = Shapes::StructureShape.new(name: 'SeverityLevel')
+    SeverityLevelList = Shapes::ListShape.new(name: 'SeverityLevelList')
     SharedAccess = Shapes::StringShape.new(name: 'SharedAccess')
     SimpleCriterionForJob = Shapes::StructureShape.new(name: 'SimpleCriterionForJob')
     SimpleCriterionKeyForJob = Shapes::StringShape.new(name: 'SimpleCriterionKeyForJob')
@@ -553,6 +556,7 @@ module Aws::Macie2
     CreateCustomDataIdentifierRequest.add_member(:maximum_match_distance, Shapes::ShapeRef.new(shape: __integer, location_name: "maximumMatchDistance"))
     CreateCustomDataIdentifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateCustomDataIdentifierRequest.add_member(:regex, Shapes::ShapeRef.new(shape: __string, location_name: "regex"))
+    CreateCustomDataIdentifierRequest.add_member(:severity_levels, Shapes::ShapeRef.new(shape: SeverityLevelList, location_name: "severityLevels"))
     CreateCustomDataIdentifierRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateCustomDataIdentifierRequest.struct_class = Types::CreateCustomDataIdentifierRequest
 
@@ -838,6 +842,7 @@ module Aws::Macie2
     GetCustomDataIdentifierResponse.add_member(:maximum_match_distance, Shapes::ShapeRef.new(shape: __integer, location_name: "maximumMatchDistance"))
     GetCustomDataIdentifierResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     GetCustomDataIdentifierResponse.add_member(:regex, Shapes::ShapeRef.new(shape: __string, location_name: "regex"))
+    GetCustomDataIdentifierResponse.add_member(:severity_levels, Shapes::ShapeRef.new(shape: SeverityLevelList, location_name: "severityLevels"))
     GetCustomDataIdentifierResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetCustomDataIdentifierResponse.struct_class = Types::GetCustomDataIdentifierResponse
 
@@ -1327,6 +1332,12 @@ module Aws::Macie2
     Severity.add_member(:description, Shapes::ShapeRef.new(shape: SeverityDescription, location_name: "description"))
     Severity.add_member(:score, Shapes::ShapeRef.new(shape: __long, location_name: "score"))
     Severity.struct_class = Types::Severity
+
+    SeverityLevel.add_member(:occurrences_threshold, Shapes::ShapeRef.new(shape: __long, required: true, location_name: "occurrencesThreshold"))
+    SeverityLevel.add_member(:severity, Shapes::ShapeRef.new(shape: DataIdentifierSeverity, required: true, location_name: "severity"))
+    SeverityLevel.struct_class = Types::SeverityLevel
+
+    SeverityLevelList.member = Shapes::ShapeRef.new(shape: SeverityLevel)
 
     SimpleCriterionForJob.add_member(:comparator, Shapes::ShapeRef.new(shape: JobComparator, location_name: "comparator"))
     SimpleCriterionForJob.add_member(:key, Shapes::ShapeRef.new(shape: SimpleCriterionKeyForJob, location_name: "key"))
