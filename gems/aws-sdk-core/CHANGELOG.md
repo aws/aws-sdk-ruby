@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Allow `Aws::STS::Presigner` to generate presigned STS URLs for the legacy global endpoint if the `Client` is configured to do so.
+
 3.121.6 (2021-11-02)
 ------------------
 

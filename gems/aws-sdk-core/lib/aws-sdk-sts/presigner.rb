@@ -52,14 +52,9 @@ module Aws
           credentials_provider: req.context.config.credentials
         )
 
-        url = Aws::Partitions::EndpointProvider.resolve(
-          req.context.config.region, 'sts', 'regional'
-        )
-        url += "/?#{param_list}"
-
         signer.presign_url(
           http_method: 'GET',
-          url: url,
+          url: req.context.config.endpoint.to_s + "/?#{param_list}",
           body: '',
           headers: options[:headers]
         ).to_s
