@@ -739,6 +739,40 @@
           },
           "body": ""
         }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Str": "string",
+          "Integer": 1,
+          "TrueBool": true,
+          "FalseBool": false,
+          "Float": 1.5,
+          "Double": 1.5,
+          "Long": 100,
+          "Char": "a",
+          "Timestamp": 1422172800
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {
+            "x-str": "string",
+            "x-int": "1",
+            "x-true-bool": "true",
+            "x-false-bool": "false",
+            "x-float": "1.5",
+            "x-double": "1.5",
+            "x-long": "100",
+            "x-char": "a",
+            "x-timestamp": "Sun, 25 Jan 2015 08:00:00.000 GMT"
+          },
+          "body": ""
+        }
       }
     ]
   },
