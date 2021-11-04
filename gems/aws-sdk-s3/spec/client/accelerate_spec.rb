@@ -65,6 +65,26 @@ module Aws
           )
         end
 
+        it 'raises when accelerate and endpoint are configured' do
+          expect do
+            Client.new(
+              options.merge(
+                use_accelerate_endpoint: true, endpoint: 'https://amazon.com'
+              )
+            ).put_object(bucket: 'bucket-name', key: 'key')
+          end.to raise_error(ArgumentError, /:endpoint/)
+        end
+
+        it 'raises when accelerate and use_fips_endpoint are configured' do
+          expect do
+            Client.new(
+              options.merge(
+                use_accelerate_endpoint: true, use_fips_endpoint: true
+              )
+            ).put_object(bucket: 'bucket-name', key: 'key')
+          end.to raise_error(ArgumentError, /:use_fips_endpoint/)
+        end
+
         it 'does not apply to #create_bucket' do
           resp = accelerated_client.create_bucket(bucket: 'bucket-name')
           expect(resp.context.http_request.endpoint.to_s).to eq(
