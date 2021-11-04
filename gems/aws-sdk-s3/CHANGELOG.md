@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Raise error when `use_fips_endpoint` is used with `use_accelerate_endpoint`.
+
 1.105.0 (2021-11-04)
 ------------------
 

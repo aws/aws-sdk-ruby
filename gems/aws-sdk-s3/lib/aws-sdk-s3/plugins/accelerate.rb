@@ -46,6 +46,12 @@ each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/
               raise ArgumentError,
                     'Cannot use both :use_accelerate_endpoint and :endpoint'
             end
+            # Raise if :use_fips_endpoint and accelerate are both provided
+            if accelerate && context.config.use_fips_endpoint
+              raise ArgumentError,
+                    'Cannot use both :use_accelerate_endpoint and '\
+                    ':use_fips_endpoint'
+            end
             context[:use_accelerate_endpoint] = accelerate
             @handler.call(context)
           end
