@@ -739,6 +739,60 @@
           },
           "body": ""
         }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Timestamp": 1422172800
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {
+            "x-timestamp": "Sun, 25 Jan 2015 08:00:00.000 GMT"
+          },
+          "body": ""
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Timestamp": 1422172800
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {
+            "x-timestamp": "1422172800"
+          },
+          "body": ""
+        }
+      },
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Timestamp": 1422172800
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {
+            "x-timestamp": "1422172800.0"
+          },
+          "body": ""
+        }
       }
     ]
   },

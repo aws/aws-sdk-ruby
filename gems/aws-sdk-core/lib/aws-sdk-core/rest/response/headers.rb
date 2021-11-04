@@ -41,7 +41,7 @@ module Aws
           when FloatShape then value.to_f
           when BooleanShape then value == 'true'
           when TimestampShape
-            if value =~ /\d+(\.\d*)/
+            if value =~ /^\d+(\.\d*)/
               Time.at(value.to_f)
             elsif value =~ /^\d+$/
               Time.at(value.to_i)
