@@ -2965,6 +2965,7 @@ module Aws::SageMaker
     DescribeDeviceResponse.add_member(:models, Shapes::ShapeRef.new(shape: EdgeModels, location_name: "Models"))
     DescribeDeviceResponse.add_member(:max_models, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxModels"))
     DescribeDeviceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDeviceResponse.add_member(:agent_version, Shapes::ShapeRef.new(shape: EdgeVersion, location_name: "AgentVersion"))
     DescribeDeviceResponse.struct_class = Types::DescribeDeviceResponse
 
     DescribeDomainRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
@@ -3591,6 +3592,7 @@ module Aws::SageMaker
     DeviceSummary.add_member(:registration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RegistrationTime"))
     DeviceSummary.add_member(:latest_heartbeat, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LatestHeartbeat"))
     DeviceSummary.add_member(:models, Shapes::ShapeRef.new(shape: EdgeModelSummaries, location_name: "Models"))
+    DeviceSummary.add_member(:agent_version, Shapes::ShapeRef.new(shape: EdgeVersion, location_name: "AgentVersion"))
     DeviceSummary.struct_class = Types::DeviceSummary
 
     Devices.member = Shapes::ShapeRef.new(shape: Device)

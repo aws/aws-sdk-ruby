@@ -48,6 +48,6 @@ require_relative 'aws-sdk-s3outposts/customizations'
 # @!group service
 module Aws::S3Outposts
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end

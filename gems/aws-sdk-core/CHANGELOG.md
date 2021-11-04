@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.122.0 (2021-11-04)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Issue - Fix parsing of ISO8601 timestamps with millisecond precision in headers.
 
 * Feature - Support modeled dualstack endpoints. It can be configured with shared configuration (`use_dualstack_endpoint`), an ENV variable (`AWS_USE_DUALSTACK_ENDPOINT`), and a constructor option (`:use_dualstack_endpoint`). Requests made to services without a dualstack endpoint will fail.

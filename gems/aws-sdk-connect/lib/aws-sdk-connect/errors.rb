@@ -27,6 +27,7 @@ module Aws::Connect
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessDeniedException}
   # * {ContactFlowNotPublishedException}
   # * {ContactNotFoundException}
   # * {DestinationNotAllowedException}
@@ -49,6 +50,21 @@ module Aws::Connect
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class ContactFlowNotPublishedException < ServiceError
 

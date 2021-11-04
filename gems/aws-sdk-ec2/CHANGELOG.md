@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.276.0 (2021-11-04)
+------------------
+
+* Feature - This release adds a new instance replacement strategy for EC2 Fleet, Spot Fleet. Now you can select an action to perform when your instance gets a rebalance notification. EC2 Fleet, Spot Fleet can launch a replacement then terminate the instance that received notification after a termination delay
+
 1.275.0 (2021-10-29)
 ------------------
 

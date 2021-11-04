@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Feature - Support FIPS endpoints for S3 Outposts using Bucket and Access Point ARNs.
 
 1.41.1 (2021-10-20)

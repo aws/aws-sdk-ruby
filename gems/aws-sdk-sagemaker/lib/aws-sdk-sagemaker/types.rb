@@ -12111,6 +12111,10 @@ module Aws::SageMaker
     #   to need tokening.
     #   @return [String]
     #
+    # @!attribute [rw] agent_version
+    #   Edge Manager agent version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDeviceResponse AWS API Documentation
     #
     class DescribeDeviceResponse < Struct.new(
@@ -12123,7 +12127,8 @@ module Aws::SageMaker
       :latest_heartbeat,
       :models,
       :max_models,
-      :next_token)
+      :next_token,
+      :agent_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15798,6 +15803,10 @@ module Aws::SageMaker
     #   Models on the device.
     #   @return [Array<Types::EdgeModelSummary>]
     #
+    # @!attribute [rw] agent_version
+    #   Edge Manager agent version.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeviceSummary AWS API Documentation
     #
     class DeviceSummary < Struct.new(
@@ -15808,7 +15817,8 @@ module Aws::SageMaker
       :iot_thing_name,
       :registration_time,
       :latest_heartbeat,
-      :models)
+      :models,
+      :agent_version)
       SENSITIVE = []
       include Aws::Structure
     end

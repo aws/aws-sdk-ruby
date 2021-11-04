@@ -138,6 +138,81 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateMulticastGroupWithFuotaTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "FuotaTaskId", # required
+    #         multicast_group_id: "MulticastGroupId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] multicast_group_id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    class AssociateMulticastGroupWithFuotaTaskRequest < Struct.new(
+      :id,
+      :multicast_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class AssociateMulticastGroupWithFuotaTaskResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AssociateWirelessDeviceWithFuotaTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "FuotaTaskId", # required
+    #         wireless_device_id: "WirelessDeviceId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] wireless_device_id
+    #   The ID of the wireless device.
+    #   @return [String]
+    #
+    class AssociateWirelessDeviceWithFuotaTaskRequest < Struct.new(
+      :id,
+      :wireless_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class AssociateWirelessDeviceWithFuotaTaskResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AssociateWirelessDeviceWithMulticastGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MulticastGroupId", # required
+    #         wireless_device_id: "WirelessDeviceId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] wireless_device_id
+    #   The ID of the wireless device.
+    #   @return [String]
+    #
+    class AssociateWirelessDeviceWithMulticastGroupRequest < Struct.new(
+      :id,
+      :wireless_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class AssociateWirelessDeviceWithMulticastGroupResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AssociateWirelessDeviceWithThingRequest
     #   data as a hash:
     #
@@ -220,6 +295,25 @@ module Aws::IoTWireless
     end
 
     class AssociateWirelessGatewayWithThingResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass CancelMulticastGroupSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MulticastGroupId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    class CancelMulticastGroupSessionRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class CancelMulticastGroupSessionResponse < Aws::EmptyStructure; end
 
     # List of sidewalk certificates.
     #
@@ -422,6 +516,160 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateFuotaTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "FuotaTaskName",
+    #         description: "Description",
+    #         client_request_token: "ClientRequestToken",
+    #         lo_ra_wan: {
+    #           rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #         },
+    #         firmware_update_image: "FirmwareUpdateImage", # required
+    #         firmware_update_role: "FirmwareUpdateRole", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the new resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Each resource must have a unique client request token. If you try to
+    #   create a new resource with the same token as a resource that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   The LoRaWAN information used with a FUOTA task.
+    #   @return [Types::LoRaWANFuotaTask]
+    #
+    # @!attribute [rw] firmware_update_image
+    #   The S3 URI points to a firmware update image that is to be used with
+    #   a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] firmware_update_role
+    #   The firmware update role that is to be used with a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #   @return [Array<Types::Tag>]
+    #
+    class CreateFuotaTaskRequest < Struct.new(
+      :name,
+      :description,
+      :client_request_token,
+      :lo_ra_wan,
+      :firmware_update_image,
+      :firmware_update_role,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The arn of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    class CreateFuotaTaskResponse < Struct.new(
+      :arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateMulticastGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MulticastGroupName",
+    #         description: "Description",
+    #         client_request_token: "ClientRequestToken",
+    #         lo_ra_wan: { # required
+    #           rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #           dl_class: "ClassB", # accepts ClassB, ClassC
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   Each resource must have a unique client request token. If you try to
+    #   create a new resource with the same token as a resource that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   The LoRaWAN information that is to be used with the multicast group.
+    #   @return [Types::LoRaWANMulticast]
+    #
+    # @!attribute [rw] tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #   @return [Array<Types::Tag>]
+    #
+    class CreateMulticastGroupRequest < Struct.new(
+      :name,
+      :description,
+      :client_request_token,
+      :lo_ra_wan,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The arn of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    class CreateMulticastGroupResponse < Struct.new(
+      :arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateServiceProfileRequest
     #   data as a hash:
     #
@@ -508,6 +756,7 @@ module Aws::IoTWireless
     #           otaa_v1_0_x: {
     #             app_key: "AppKey",
     #             app_eui: "AppEui",
+    #             gen_app_key: "GenAppKey",
     #           },
     #           abp_v1_1: {
     #             dev_addr: "DevAddr",
@@ -524,6 +773,11 @@ module Aws::IoTWireless
     #               nwk_s_key: "NwkSKey",
     #               app_s_key: "AppSKey",
     #             },
+    #           },
+    #           f_ports: {
+    #             fuota: 1,
+    #             multicast: 1,
+    #             clock_sync: 1,
     #           },
     #         },
     #         tags: [
@@ -837,6 +1091,44 @@ module Aws::IoTWireless
 
     class DeleteDeviceProfileResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteFuotaTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "FuotaTaskId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    class DeleteFuotaTaskRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteFuotaTaskResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteMulticastGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MulticastGroupId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    class DeleteMulticastGroupRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteMulticastGroupResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteServiceProfileRequest
     #   data as a hash:
     #
@@ -991,6 +1283,29 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Device registration state event configuration object for enabling and
+    # disabling relevant topics.
+    #
+    # @note When making an API call, you may pass DeviceRegistrationStateEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         sidewalk: {
+    #           amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sidewalk
+    #   Device registration state event configuration object for enabling or
+    #   disabling Sidewalk related event topics.
+    #   @return [Types::SidewalkEventNotificationConfigurations]
+    #
+    class DeviceRegistrationStateEventConfiguration < Struct.new(
+      :sidewalk)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateAwsAccountFromPartnerAccountRequest
     #   data as a hash:
     #
@@ -1015,6 +1330,81 @@ module Aws::IoTWireless
     end
 
     class DisassociateAwsAccountFromPartnerAccountResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DisassociateMulticastGroupFromFuotaTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "FuotaTaskId", # required
+    #         multicast_group_id: "MulticastGroupId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] multicast_group_id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    class DisassociateMulticastGroupFromFuotaTaskRequest < Struct.new(
+      :id,
+      :multicast_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DisassociateMulticastGroupFromFuotaTaskResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DisassociateWirelessDeviceFromFuotaTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "FuotaTaskId", # required
+    #         wireless_device_id: "WirelessDeviceId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] wireless_device_id
+    #   The ID of the wireless device.
+    #   @return [String]
+    #
+    class DisassociateWirelessDeviceFromFuotaTaskRequest < Struct.new(
+      :id,
+      :wireless_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DisassociateWirelessDeviceFromFuotaTaskResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DisassociateWirelessDeviceFromMulticastGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MulticastGroupId", # required
+    #         wireless_device_id: "WirelessDeviceId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] wireless_device_id
+    #   The ID of the wireless device.
+    #   @return [String]
+    #
+    class DisassociateWirelessDeviceFromMulticastGroupRequest < Struct.new(
+      :id,
+      :wireless_device_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DisassociateWirelessDeviceFromMulticastGroupResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DisassociateWirelessDeviceFromThingRequest
     #   data as a hash:
@@ -1072,6 +1462,60 @@ module Aws::IoTWireless
     end
 
     class DisassociateWirelessGatewayFromThingResponse < Aws::EmptyStructure; end
+
+    # List of FPort assigned for different LoRaWAN application packages to
+    # use
+    #
+    # @note When making an API call, you may pass FPorts
+    #   data as a hash:
+    #
+    #       {
+    #         fuota: 1,
+    #         multicast: 1,
+    #         clock_sync: 1,
+    #       }
+    #
+    # @!attribute [rw] fuota
+    #   The Fport value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] multicast
+    #   The Fport value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] clock_sync
+    #   The Fport value.
+    #   @return [Integer]
+    #
+    class FPorts < Struct.new(
+      :fuota,
+      :multicast,
+      :clock_sync)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A FUOTA task.
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The arn of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a FUOTA task.
+    #   @return [String]
+    #
+    class FuotaTask < Struct.new(
+      :id,
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass GetDestinationRequest
     #   data as a hash:
@@ -1167,6 +1611,74 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetFuotaTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "FuotaTaskId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    class GetFuotaTaskRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The arn of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the new resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   The LoRaWAN information returned from getting a FUOTA task.
+    #   @return [Types::LoRaWANFuotaTaskGetInfo]
+    #
+    # @!attribute [rw] firmware_update_image
+    #   The S3 URI points to a firmware update image that is to be used with
+    #   a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] firmware_update_role
+    #   The firmware update role that is to be used with a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Created at timestamp for the resource.
+    #   @return [Time]
+    #
+    class GetFuotaTaskResponse < Struct.new(
+      :arn,
+      :id,
+      :status,
+      :name,
+      :description,
+      :lo_ra_wan,
+      :firmware_update_image,
+      :firmware_update_role,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     class GetLogLevelsByResourceTypesRequest < Aws::EmptyStructure; end
@@ -1187,6 +1699,91 @@ module Aws::IoTWireless
       :default_log_level,
       :wireless_gateway_log_options,
       :wireless_device_log_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMulticastGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MulticastGroupId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    class GetMulticastGroupRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The arn of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the new resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   The LoRaWAN information that is to be returned from getting
+    #   multicast group information.
+    #   @return [Types::LoRaWANMulticastGet]
+    #
+    # @!attribute [rw] created_at
+    #   Created at timestamp for the resource.
+    #   @return [Time]
+    #
+    class GetMulticastGroupResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :description,
+      :status,
+      :lo_ra_wan,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMulticastGroupSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MulticastGroupId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    class GetMulticastGroupSessionRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lo_ra_wan
+    #   The LoRaWAN information used with the multicast session.
+    #   @return [Types::LoRaWANMulticastSession]
+    #
+    class GetMulticastGroupSessionResponse < Struct.new(
+      :lo_ra_wan)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1225,6 +1822,52 @@ module Aws::IoTWireless
     class GetPartnerAccountResponse < Struct.new(
       :sidewalk,
       :account_linked)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetResourceEventConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identifier: "Identifier", # required
+    #         identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId
+    #         partner_type: "Sidewalk", # accepts Sidewalk
+    #       }
+    #
+    # @!attribute [rw] identifier
+    #   Resource identifier to opt in for event messaging.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier_type
+    #   Identifier type of the particular resource identifier for event
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_type
+    #   Partner type of the resource if the identifier type is
+    #   PartnerAccountId.
+    #   @return [String]
+    #
+    class GetResourceEventConfigurationRequest < Struct.new(
+      :identifier,
+      :identifier_type,
+      :partner_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] device_registration_state
+    #   Event configuration for the device registration state event
+    #   @return [Types::DeviceRegistrationStateEventConfiguration]
+    #
+    # @!attribute [rw] proximity
+    #   Event configuration for the Proximity event
+    #   @return [Types::ProximityEventConfiguration]
+    #
+    class GetResourceEventConfigurationResponse < Struct.new(
+      :device_registration_state,
+      :proximity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1812,6 +2455,138 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListFuotaTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    class ListFuotaTasksRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fuota_task_list
+    #   Lists the FUOTA tasks registered to your AWS account.
+    #   @return [Array<Types::FuotaTask>]
+    #
+    class ListFuotaTasksResponse < Struct.new(
+      :next_token,
+      :fuota_task_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMulticastGroupsByFuotaTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "FuotaTaskId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    class ListMulticastGroupsByFuotaTaskRequest < Struct.new(
+      :id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] multicast_group_list
+    #   List of multicast groups associated with a FUOTA task.
+    #   @return [Array<Types::MulticastGroupByFuotaTask>]
+    #
+    class ListMulticastGroupsByFuotaTaskResponse < Struct.new(
+      :next_token,
+      :multicast_group_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMulticastGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    class ListMulticastGroupsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] multicast_group_list
+    #   List of multicast groups.
+    #   @return [Array<Types::MulticastGroup>]
+    #
+    class ListMulticastGroupsResponse < Struct.new(
+      :next_token,
+      :multicast_group_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPartnerAccountsRequest
     #   data as a hash:
     #
@@ -1932,6 +2707,8 @@ module Aws::IoTWireless
     #         device_profile_id: "DeviceProfileId",
     #         service_profile_id: "ServiceProfileId",
     #         wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
+    #         fuota_task_id: "FuotaTaskId",
+    #         multicast_group_id: "MulticastGroupId",
     #       }
     #
     # @!attribute [rw] max_results
@@ -1964,13 +2741,23 @@ module Aws::IoTWireless
     #   device type.
     #   @return [String]
     #
+    # @!attribute [rw] fuota_task_id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] multicast_group_id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
     class ListWirelessDevicesRequest < Struct.new(
       :max_results,
       :next_token,
       :destination_name,
       :device_profile_id,
       :service_profile_id,
-      :wireless_device_type)
+      :wireless_device_type,
+      :fuota_task_id,
+      :multicast_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2097,6 +2884,7 @@ module Aws::IoTWireless
     #         otaa_v1_0_x: {
     #           app_key: "AppKey",
     #           app_eui: "AppEui",
+    #           gen_app_key: "GenAppKey",
     #         },
     #         abp_v1_1: {
     #           dev_addr: "DevAddr",
@@ -2113,6 +2901,11 @@ module Aws::IoTWireless
     #             nwk_s_key: "NwkSKey",
     #             app_s_key: "AppSKey",
     #           },
+    #         },
+    #         f_ports: {
+    #           fuota: 1,
+    #           multicast: 1,
+    #           clock_sync: 1,
     #         },
     #       }
     #
@@ -2144,6 +2937,11 @@ module Aws::IoTWireless
     #   LoRaWAN object for create APIs
     #   @return [Types::AbpV1_0_x]
     #
+    # @!attribute [rw] f_ports
+    #   List of FPort assigned for different LoRaWAN application packages to
+    #   use
+    #   @return [Types::FPorts]
+    #
     class LoRaWANDevice < Struct.new(
       :dev_eui,
       :device_profile_id,
@@ -2151,7 +2949,8 @@ module Aws::IoTWireless
       :otaa_v1_1,
       :otaa_v1_0_x,
       :abp_v1_1,
-      :abp_v1_0_x)
+      :abp_v1_0_x,
+      :f_ports)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2317,6 +3116,42 @@ module Aws::IoTWireless
       :rf_region,
       :supports_join,
       :supports_32_bit_f_cnt)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The LoRaWAN information used with a FUOTA task.
+    #
+    # @note When making an API call, you may pass LoRaWANFuotaTask
+    #   data as a hash:
+    #
+    #       {
+    #         rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #       }
+    #
+    # @!attribute [rw] rf_region
+    #   Supported RfRegions
+    #   @return [String]
+    #
+    class LoRaWANFuotaTask < Struct.new(
+      :rf_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The LoRaWAN information returned from getting a FUOTA task.
+    #
+    # @!attribute [rw] rf_region
+    #   The frequency band (RFRegion) value.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   Start time of a FUOTA task.
+    #   @return [Time]
+    #
+    class LoRaWANFuotaTaskGetInfo < Struct.new(
+      :rf_region,
+      :start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2550,6 +3385,116 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # The LoRaWAN information that is to be used with the multicast group.
+    #
+    # @note When making an API call, you may pass LoRaWANMulticast
+    #   data as a hash:
+    #
+    #       {
+    #         rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #         dl_class: "ClassB", # accepts ClassB, ClassC
+    #       }
+    #
+    # @!attribute [rw] rf_region
+    #   Supported RfRegions
+    #   @return [String]
+    #
+    # @!attribute [rw] dl_class
+    #   DlClass for LoRaWAM, valid values are ClassB and ClassC.
+    #   @return [String]
+    #
+    class LoRaWANMulticast < Struct.new(
+      :rf_region,
+      :dl_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The LoRaWAN information that is to be returned from getting multicast
+    # group information.
+    #
+    # @!attribute [rw] rf_region
+    #   Supported RfRegions
+    #   @return [String]
+    #
+    # @!attribute [rw] dl_class
+    #   DlClass for LoRaWAM, valid values are ClassB and ClassC.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_devices_requested
+    #   Number of devices that are requested to be associated with the
+    #   multicast group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_devices_in_group
+    #   Number of devices that are associated to the multicast group.
+    #   @return [Integer]
+    #
+    class LoRaWANMulticastGet < Struct.new(
+      :rf_region,
+      :dl_class,
+      :number_of_devices_requested,
+      :number_of_devices_in_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata information of the LoRaWAN multicast group.
+    #
+    # @note When making an API call, you may pass LoRaWANMulticastMetadata
+    #   data as a hash:
+    #
+    #       {
+    #         f_port: 1,
+    #       }
+    #
+    # @!attribute [rw] f_port
+    #   The Fport value.
+    #   @return [Integer]
+    #
+    class LoRaWANMulticastMetadata < Struct.new(
+      :f_port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The LoRaWAN information used with the multicast session.
+    #
+    # @note When making an API call, you may pass LoRaWANMulticastSession
+    #   data as a hash:
+    #
+    #       {
+    #         dl_dr: 1,
+    #         dl_freq: 1,
+    #         session_start_time: Time.now,
+    #         session_timeout: 1,
+    #       }
+    #
+    # @!attribute [rw] dl_dr
+    #   Downlink data rate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dl_freq
+    #   Downlink frequency.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_start_time
+    #   Timestamp of when the multicast group session is to start.
+    #   @return [Time]
+    #
+    # @!attribute [rw] session_timeout
+    #   How long before a multicast group session is to timeout.
+    #   @return [Integer]
+    #
+    class LoRaWANMulticastSession < Struct.new(
+      :dl_dr,
+      :dl_freq,
+      :session_start_time,
+      :session_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # LoRaWAN router info.
     #
     # @note When making an API call, you may pass LoRaWANSendDataToDevice
@@ -2584,6 +3529,25 @@ module Aws::IoTWireless
     #
     class LoRaWANServiceProfile < Struct.new(
       :add_gw_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The LoRaWAN information used to start a FUOTA task.
+    #
+    # @note When making an API call, you may pass LoRaWANStartFuotaTask
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   Start time of a FUOTA task.
+    #   @return [Time]
+    #
+    class LoRaWANStartFuotaTask < Struct.new(
+      :start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2675,6 +3639,61 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # A multicast group.
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The arn of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the multicast group.
+    #   @return [String]
+    #
+    class MulticastGroup < Struct.new(
+      :id,
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A multicast group that is associated with a FUOTA task.
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    class MulticastGroupByFuotaTask < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Wireless metadata that is to be sent to multicast group.
+    #
+    # @note When making an API call, you may pass MulticastWirelessMetadata
+    #   data as a hash:
+    #
+    #       {
+    #         lo_ra_wan: {
+    #           f_port: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   The metadata information of the LoRaWAN multicast group.
+    #   @return [Types::LoRaWANMulticastMetadata]
+    #
+    class MulticastWirelessMetadata < Struct.new(
+      :lo_ra_wan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # OTAA device object for v1.0.x
     #
     # @note When making an API call, you may pass OtaaV1_0_x
@@ -2683,6 +3702,7 @@ module Aws::IoTWireless
     #       {
     #         app_key: "AppKey",
     #         app_eui: "AppEui",
+    #         gen_app_key: "GenAppKey",
     #       }
     #
     # @!attribute [rw] app_key
@@ -2693,9 +3713,14 @@ module Aws::IoTWireless
     #   The AppEUI value.
     #   @return [String]
     #
+    # @!attribute [rw] gen_app_key
+    #   The GenAppKey value.
+    #   @return [String]
+    #
     class OtaaV1_0_x < Struct.new(
       :app_key,
-      :app_eui)
+      :app_eui,
+      :gen_app_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2727,6 +3752,29 @@ module Aws::IoTWireless
       :app_key,
       :nwk_key,
       :join_eui)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Proximity event configuration object for enabling and disabling
+    # relevant topics.
+    #
+    # @note When making an API call, you may pass ProximityEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         sidewalk: {
+    #           amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sidewalk
+    #   Proximity event configuration object for enabling or disabling
+    #   Sidewalk related event topics.
+    #   @return [Types::SidewalkEventNotificationConfigurations]
+    #
+    class ProximityEventConfiguration < Struct.new(
+      :sidewalk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2816,6 +3864,49 @@ module Aws::IoTWireless
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SendDataToMulticastGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MulticastGroupId", # required
+    #         payload_data: "PayloadData", # required
+    #         wireless_metadata: { # required
+    #           lo_ra_wan: {
+    #             f_port: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_data
+    #   The binary to be sent to the end device, encoded in base64.
+    #   @return [String]
+    #
+    # @!attribute [rw] wireless_metadata
+    #   Wireless metadata that is to be sent to multicast group.
+    #   @return [Types::MulticastWirelessMetadata]
+    #
+    class SendDataToMulticastGroupRequest < Struct.new(
+      :id,
+      :payload_data,
+      :wireless_metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_id
+    #   ID of a multicast group message.
+    #   @return [String]
+    #
+    class SendDataToMulticastGroupResponse < Struct.new(
+      :message_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3060,6 +4151,26 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # SidewalkEventNotificationConfigurations object Event configuration
+    # object for Sidewalk related event topics.
+    #
+    # @note When making an API call, you may pass SidewalkEventNotificationConfigurations
+    #   data as a hash:
+    #
+    #       {
+    #         amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] amazon_id_event_topic
+    #   Enum to denote whether amazon id event topic is enabled or disabled.
+    #   @return [String]
+    #
+    class SidewalkEventNotificationConfigurations < Struct.new(
+      :amazon_id_event_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Sidewalk object used by list functions.
     #
     # @!attribute [rw] amazon_id
@@ -3131,6 +4242,139 @@ module Aws::IoTWireless
       SENSITIVE = [:app_server_private_key]
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass StartBulkAssociateWirelessDeviceWithMulticastGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MulticastGroupId", # required
+    #         query_string: "QueryString",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   Query string used to search for wireless devices as part of the bulk
+    #   associate and disassociate process.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #   @return [Array<Types::Tag>]
+    #
+    class StartBulkAssociateWirelessDeviceWithMulticastGroupRequest < Struct.new(
+      :id,
+      :query_string,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class StartBulkAssociateWirelessDeviceWithMulticastGroupResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MulticastGroupId", # required
+    #         query_string: "QueryString",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   Query string used to search for wireless devices as part of the bulk
+    #   associate and disassociate process.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #   @return [Array<Types::Tag>]
+    #
+    class StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest < Struct.new(
+      :id,
+      :query_string,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StartFuotaTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "FuotaTaskId", # required
+    #         lo_ra_wan: {
+    #           start_time: Time.now,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   The LoRaWAN information used to start a FUOTA task.
+    #   @return [Types::LoRaWANStartFuotaTask]
+    #
+    class StartFuotaTaskRequest < Struct.new(
+      :id,
+      :lo_ra_wan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class StartFuotaTaskResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StartMulticastGroupSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MulticastGroupId", # required
+    #         lo_ra_wan: { # required
+    #           dl_dr: 1,
+    #           dl_freq: 1,
+    #           session_start_time: Time.now,
+    #           session_timeout: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   The LoRaWAN information used with the multicast session.
+    #   @return [Types::LoRaWANMulticastSession]
+    #
+    class StartMulticastGroupSessionRequest < Struct.new(
+      :id,
+      :lo_ra_wan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class StartMulticastGroupSessionResponse < Aws::EmptyStructure; end
 
     # A simple label consisting of a customer-defined key-value pair
     #
@@ -3311,6 +4555,58 @@ module Aws::IoTWireless
 
     class UpdateDestinationResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateFuotaTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "FuotaTaskId", # required
+    #         name: "FuotaTaskName",
+    #         description: "Description",
+    #         lo_ra_wan: {
+    #           rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #         },
+    #         firmware_update_image: "FirmwareUpdateImage",
+    #         firmware_update_role: "FirmwareUpdateRole",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the new resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   The LoRaWAN information used with a FUOTA task.
+    #   @return [Types::LoRaWANFuotaTask]
+    #
+    # @!attribute [rw] firmware_update_image
+    #   The S3 URI points to a firmware update image that is to be used with
+    #   a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] firmware_update_role
+    #   The firmware update role that is to be used with a FUOTA task.
+    #   @return [String]
+    #
+    class UpdateFuotaTaskRequest < Struct.new(
+      :id,
+      :name,
+      :description,
+      :lo_ra_wan,
+      :firmware_update_image,
+      :firmware_update_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateFuotaTaskResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateLogLevelsByResourceTypesRequest
     #   data as a hash:
     #
@@ -3364,6 +4660,46 @@ module Aws::IoTWireless
 
     class UpdateLogLevelsByResourceTypesResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateMulticastGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MulticastGroupId", # required
+    #         name: "MulticastGroupName",
+    #         description: "Description",
+    #         lo_ra_wan: {
+    #           rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #           dl_class: "ClassB", # accepts ClassB, ClassC
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the new resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   The LoRaWAN information that is to be used with the multicast group.
+    #   @return [Types::LoRaWANMulticast]
+    #
+    class UpdateMulticastGroupRequest < Struct.new(
+      :id,
+      :name,
+      :description,
+      :lo_ra_wan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateMulticastGroupResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdatePartnerAccountRequest
     #   data as a hash:
     #
@@ -3396,6 +4732,59 @@ module Aws::IoTWireless
     end
 
     class UpdatePartnerAccountResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateResourceEventConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         identifier: "Identifier", # required
+    #         identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId
+    #         partner_type: "Sidewalk", # accepts Sidewalk
+    #         device_registration_state: {
+    #           sidewalk: {
+    #             amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #           },
+    #         },
+    #         proximity: {
+    #           sidewalk: {
+    #             amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] identifier
+    #   Resource identifier to opt in for event messaging.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier_type
+    #   Identifier type of the particular resource identifier for event
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_type
+    #   Partner type of the resource if the identifier type is
+    #   PartnerAccountId
+    #   @return [String]
+    #
+    # @!attribute [rw] device_registration_state
+    #   Event configuration for the device registration state event
+    #   @return [Types::DeviceRegistrationStateEventConfiguration]
+    #
+    # @!attribute [rw] proximity
+    #   Event configuration for the Proximity event
+    #   @return [Types::ProximityEventConfiguration]
+    #
+    class UpdateResourceEventConfigurationRequest < Struct.new(
+      :identifier,
+      :identifier_type,
+      :partner_type,
+      :device_registration_state,
+      :proximity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateResourceEventConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateWirelessDeviceRequest
     #   data as a hash:
@@ -3669,6 +5058,18 @@ module Aws::IoTWireless
     #   The Sidewalk account credentials.
     #   @return [Types::SidewalkListDevice]
     #
+    # @!attribute [rw] fuota_device_status
+    #   The status of a wireless device in a FUOTA task.
+    #   @return [String]
+    #
+    # @!attribute [rw] multicast_device_status
+    #   The status of the wireless device in the multicast group.
+    #   @return [String]
+    #
+    # @!attribute [rw] mc_group_id
+    #   Id of the multicast group.
+    #   @return [Integer]
+    #
     class WirelessDeviceStatistics < Struct.new(
       :arn,
       :id,
@@ -3677,7 +5078,10 @@ module Aws::IoTWireless
       :destination_name,
       :last_uplink_received_at,
       :lo_ra_wan,
-      :sidewalk)
+      :sidewalk,
+      :fuota_device_status,
+      :multicast_device_status,
+      :mc_group_id)
       SENSITIVE = []
       include Aws::Structure
     end

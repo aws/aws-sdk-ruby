@@ -279,6 +279,15 @@ module Aws::EC2
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Boolean] :use_dualstack_endpoint
+    #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
+    #     will be used if available.
+    #
+    #   @option options [Boolean] :use_fips_endpoint
+    #     When set to `true`, fips compatible endpoints will be used if available.
+    #     When a `fips` region is used, the region is normalized and this config
+    #     is set to `true`.
+    #
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
@@ -5404,7 +5413,8 @@ module Aws::EC2
     #       allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized, capacity-optimized-prioritized
     #       maintenance_strategies: {
     #         capacity_rebalance: {
-    #           replacement_strategy: "launch", # accepts launch
+    #           replacement_strategy: "launch", # accepts launch, launch-before-terminate
+    #           termination_delay: 1,
     #         },
     #       },
     #       instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
@@ -17715,7 +17725,8 @@ module Aws::EC2
     #   resp.fleets[0].valid_until #=> Time
     #   resp.fleets[0].replace_unhealthy_instances #=> Boolean
     #   resp.fleets[0].spot_options.allocation_strategy #=> String, one of "lowest-price", "diversified", "capacity-optimized", "capacity-optimized-prioritized"
-    #   resp.fleets[0].spot_options.maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch"
+    #   resp.fleets[0].spot_options.maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch", "launch-before-terminate"
+    #   resp.fleets[0].spot_options.maintenance_strategies.capacity_rebalance.termination_delay #=> Integer
     #   resp.fleets[0].spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #   resp.fleets[0].spot_options.instance_pools_to_use_count #=> Integer
     #   resp.fleets[0].spot_options.single_instance_type #=> Boolean
@@ -25994,7 +26005,8 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].create_time #=> Time
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.allocation_strategy #=> String, one of "lowestPrice", "diversified", "capacityOptimized", "capacityOptimizedPrioritized"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_allocation_strategy #=> String, one of "lowestPrice", "prioritized"
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_maintenance_strategies.capacity_rebalance.replacement_strategy #=> String, one of "launch", "launch-before-terminate"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_maintenance_strategies.capacity_rebalance.termination_delay #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.client_token #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.excess_capacity_termination_policy #=> String, one of "noTermination", "default"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.fulfilled_capacity #=> Float
@@ -41252,7 +41264,8 @@ module Aws::EC2
     #       on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #       spot_maintenance_strategies: {
     #         capacity_rebalance: {
-    #           replacement_strategy: "launch", # accepts launch
+    #           replacement_strategy: "launch", # accepts launch, launch-before-terminate
+    #           termination_delay: 1,
     #         },
     #       },
     #       client_token: "String",
@@ -45211,7 +45224,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.275.0'
+      context[:gem_version] = '1.276.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

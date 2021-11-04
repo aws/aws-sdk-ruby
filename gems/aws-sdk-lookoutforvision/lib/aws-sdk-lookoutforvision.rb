@@ -48,6 +48,6 @@ require_relative 'aws-sdk-lookoutforvision/customizations'
 # @!group service
 module Aws::LookoutforVision
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end

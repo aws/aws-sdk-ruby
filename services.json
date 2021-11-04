@@ -102,6 +102,9 @@
   "ChimeSDKIdentity": {
     "models": "chime-sdk-identity/2021-04-20"
   },
+  "ChimeSDKMeetings": {
+    "models": "chime-sdk-meetings/2021-07-15"
+  },
   "ChimeSDKMessaging": {
     "models": "chime-sdk-messaging/2021-05-15"
   },

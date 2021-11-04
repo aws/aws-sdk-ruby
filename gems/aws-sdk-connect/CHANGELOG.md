@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2021-11-04)
+------------------
+
+* Feature - This release adds CRUD operation support for Security profile resource in Amazon Connect
+
 1.55.0 (2021-11-02)
 ------------------
 

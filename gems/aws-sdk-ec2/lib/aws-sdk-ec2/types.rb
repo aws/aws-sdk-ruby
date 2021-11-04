@@ -7229,7 +7229,8 @@ module Aws::EC2
     #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized, capacity-optimized-prioritized
     #           maintenance_strategies: {
     #             capacity_rebalance: {
-    #               replacement_strategy: "launch", # accepts launch
+    #               replacement_strategy: "launch", # accepts launch, launch-before-terminate
+    #               termination_delay: 1,
     #             },
     #           },
     #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
@@ -31540,31 +31541,42 @@ module Aws::EC2
     # Instance is at an elevated risk of being interrupted.
     #
     # @!attribute [rw] replacement_strategy
-    #   To allow EC2 Fleet to launch a replacement Spot Instance when an
-    #   instance rebalance notification is emitted for an existing Spot
-    #   Instance in the fleet, specify `launch`. Only available for fleets
-    #   of type `maintain`.
+    #   The replacement strategy to use. Only available for fleets of type
+    #   `maintain`.
     #
-    #   <note markdown="1"> When a replacement instance is launched, the instance marked for
-    #   rebalance is not automatically terminated. You can terminate it, or
-    #   you can leave it running. You are charged for both instances while
-    #   they are running.
+    #   `launch` - EC2 Fleet launches a new replacement Spot Instance when a
+    #   rebalance notification is emitted for an existing Spot Instance in
+    #   the fleet. EC2 Fleet does not terminate the instances that receive a
+    #   rebalance notification. You can terminate the old instances, or you
+    #   can leave them running. You are charged for all instances while they
+    #   are running.
     #
-    #    </note>
+    #   `launch-before-terminate` - EC2 Fleet launches a new replacement
+    #   Spot Instance when a rebalance notification is emitted for an
+    #   existing Spot Instance in the fleet, and then, after a delay that
+    #   you specify (in `TerminationDelay`), terminates the instances that
+    #   received a rebalance notification.
     #   @return [String]
+    #
+    # @!attribute [rw] termination_delay
+    #   The amount of time (in seconds) that Amazon EC2 waits before
+    #   terminating the old Spot Instance after launching a new replacement
+    #   Spot Instance.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotCapacityRebalance AWS API Documentation
     #
     class FleetSpotCapacityRebalance < Struct.new(
-      :replacement_strategy)
+      :replacement_strategy,
+      :termination_delay)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The Spot Instance replacement strategy to use when Amazon EC2 emits a
-    # signal that your Spot Instance is at an elevated risk of being
-    # interrupted. For more information, see [Capacity rebalancing][1] in
-    # the *Amazon EC2 User Guide*.
+    # rebalance notification signal that your Spot Instance is at an
+    # elevated risk of being interrupted. For more information, see
+    # [Capacity rebalancing][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -31574,30 +31586,39 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         replacement_strategy: "launch", # accepts launch
+    #         replacement_strategy: "launch", # accepts launch, launch-before-terminate
+    #         termination_delay: 1,
     #       }
     #
     # @!attribute [rw] replacement_strategy
     #   The replacement strategy to use. Only available for fleets of type
     #   `maintain`.
     #
-    #   To allow EC2 Fleet to launch a replacement Spot Instance when an
-    #   instance rebalance notification is emitted for an existing Spot
-    #   Instance in the fleet, specify `launch`. You must specify a value,
-    #   otherwise you get an error.
+    #   `launch` - EC2 Fleet launches a replacement Spot Instance when a
+    #   rebalance notification is emitted for an existing Spot Instance in
+    #   the fleet. EC2 Fleet does not terminate the instances that receive a
+    #   rebalance notification. You can terminate the old instances, or you
+    #   can leave them running. You are charged for all instances while they
+    #   are running.
     #
-    #   <note markdown="1"> When a replacement instance is launched, the instance marked for
-    #   rebalance is not automatically terminated. You can terminate it, or
-    #   you can leave it running. You are charged for all instances while
-    #   they are running.
-    #
-    #    </note>
+    #   `launch-before-terminate` - EC2 Fleet launches a replacement Spot
+    #   Instance when a rebalance notification is emitted for an existing
+    #   Spot Instance in the fleet, and then, after a delay that you specify
+    #   (in `TerminationDelay`), terminates the instances that received a
+    #   rebalance notification.
     #   @return [String]
+    #
+    # @!attribute [rw] termination_delay
+    #   The amount of time (in seconds) that Amazon EC2 waits before
+    #   terminating the old Spot Instance after launching a new replacement
+    #   Spot Instance.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotCapacityRebalanceRequest AWS API Documentation
     #
     class FleetSpotCapacityRebalanceRequest < Struct.new(
-      :replacement_strategy)
+      :replacement_strategy,
+      :termination_delay)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31626,7 +31647,8 @@ module Aws::EC2
     #
     #       {
     #         capacity_rebalance: {
-    #           replacement_strategy: "launch", # accepts launch
+    #           replacement_strategy: "launch", # accepts launch, launch-before-terminate
+    #           termination_delay: 1,
     #         },
     #       }
     #
@@ -50786,7 +50808,8 @@ module Aws::EC2
     #           on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #           spot_maintenance_strategies: {
     #             capacity_rebalance: {
-    #               replacement_strategy: "launch", # accepts launch
+    #               replacement_strategy: "launch", # accepts launch, launch-before-terminate
+    #               termination_delay: 1,
     #             },
     #           },
     #           client_token: "String",
@@ -56126,29 +56149,39 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         replacement_strategy: "launch", # accepts launch
+    #         replacement_strategy: "launch", # accepts launch, launch-before-terminate
+    #         termination_delay: 1,
     #       }
     #
     # @!attribute [rw] replacement_strategy
     #   The replacement strategy to use. Only available for fleets of type
-    #   `maintain`. You must specify a value, otherwise you get an error.
+    #   `maintain`.
     #
-    #   To allow Spot Fleet to launch a replacement Spot Instance when an
-    #   instance rebalance notification is emitted for a Spot Instance in
-    #   the fleet, specify `launch`.
-    #
-    #   <note markdown="1"> When a replacement instance is launched, the instance marked for
-    #   rebalance is not automatically terminated. You can terminate it, or
-    #   you can leave it running. You are charged for all instances while
+    #   `launch` - Spot Fleet launches a new replacement Spot Instance when
+    #   a rebalance notification is emitted for an existing Spot Instance in
+    #   the fleet. Spot Fleet does not terminate the instances that receive
+    #   a rebalance notification. You can terminate the old instances, or
+    #   you can leave them running. You are charged for all instances while
     #   they are running.
     #
-    #    </note>
+    #   `launch-before-terminate` - Spot Fleet launches a new replacement
+    #   Spot Instance when a rebalance notification is emitted for an
+    #   existing Spot Instance in the fleet, and then, after a delay that
+    #   you specify (in `TerminationDelay`), terminates the instances that
+    #   received a rebalance notification.
     #   @return [String]
+    #
+    # @!attribute [rw] termination_delay
+    #   The amount of time (in seconds) that Amazon EC2 waits before
+    #   terminating the old Spot Instance after launching a new replacement
+    #   Spot Instance.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotCapacityRebalance AWS API Documentation
     #
     class SpotCapacityRebalance < Struct.new(
-      :replacement_strategy)
+      :replacement_strategy,
+      :termination_delay)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -56577,7 +56610,8 @@ module Aws::EC2
     #         on_demand_allocation_strategy: "lowestPrice", # accepts lowestPrice, prioritized
     #         spot_maintenance_strategies: {
     #           capacity_rebalance: {
-    #             replacement_strategy: "launch", # accepts launch
+    #             replacement_strategy: "launch", # accepts launch, launch-before-terminate
+    #             termination_delay: 1,
     #           },
     #         },
     #         client_token: "String",
@@ -57339,7 +57373,8 @@ module Aws::EC2
     #
     #       {
     #         capacity_rebalance: {
-    #           replacement_strategy: "launch", # accepts launch
+    #           replacement_strategy: "launch", # accepts launch, launch-before-terminate
+    #           termination_delay: 1,
     #         },
     #       }
     #
@@ -57522,7 +57557,8 @@ module Aws::EC2
     #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified, capacity-optimized, capacity-optimized-prioritized
     #         maintenance_strategies: {
     #           capacity_rebalance: {
-    #             replacement_strategy: "launch", # accepts launch
+    #             replacement_strategy: "launch", # accepts launch, launch-before-terminate
+    #             termination_delay: 1,
     #           },
     #         },
     #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate

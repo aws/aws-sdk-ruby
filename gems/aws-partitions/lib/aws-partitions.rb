@@ -257,6 +257,7 @@ module Aws
             'Budgets' => 'budgets',
             'Chime' => 'chime',
             'ChimeSDKIdentity' => 'identity-chime',
+            'ChimeSDKMeetings' => 'meetings-chime',
             'ChimeSDKMessaging' => 'messaging-chime',
             'Cloud9' => 'cloud9',
             'CloudControlApi' => 'cloudcontrolapi',

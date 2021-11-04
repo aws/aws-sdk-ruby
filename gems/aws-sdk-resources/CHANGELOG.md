@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.117.0 (2021-11-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-chimesdkmeetings` gem.
+
 3.116.0 (2021-10-20)
 ------------------
 

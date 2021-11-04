@@ -6843,9 +6843,11 @@ module Aws::EC2
     FleetSet.member = Shapes::ShapeRef.new(shape: FleetData, location_name: "item")
 
     FleetSpotCapacityRebalance.add_member(:replacement_strategy, Shapes::ShapeRef.new(shape: FleetReplacementStrategy, location_name: "replacementStrategy"))
+    FleetSpotCapacityRebalance.add_member(:termination_delay, Shapes::ShapeRef.new(shape: Integer, location_name: "terminationDelay"))
     FleetSpotCapacityRebalance.struct_class = Types::FleetSpotCapacityRebalance
 
     FleetSpotCapacityRebalanceRequest.add_member(:replacement_strategy, Shapes::ShapeRef.new(shape: FleetReplacementStrategy, location_name: "ReplacementStrategy"))
+    FleetSpotCapacityRebalanceRequest.add_member(:termination_delay, Shapes::ShapeRef.new(shape: Integer, location_name: "TerminationDelay"))
     FleetSpotCapacityRebalanceRequest.struct_class = Types::FleetSpotCapacityRebalanceRequest
 
     FleetSpotMaintenanceStrategies.add_member(:capacity_rebalance, Shapes::ShapeRef.new(shape: FleetSpotCapacityRebalance, location_name: "capacityRebalance"))
@@ -10770,6 +10772,7 @@ module Aws::EC2
     SnapshotTaskDetail.struct_class = Types::SnapshotTaskDetail
 
     SpotCapacityRebalance.add_member(:replacement_strategy, Shapes::ShapeRef.new(shape: ReplacementStrategy, location_name: "replacementStrategy"))
+    SpotCapacityRebalance.add_member(:termination_delay, Shapes::ShapeRef.new(shape: Integer, location_name: "terminationDelay"))
     SpotCapacityRebalance.struct_class = Types::SpotCapacityRebalance
 
     SpotDatafeedSubscription.add_member(:bucket, Shapes::ShapeRef.new(shape: String, location_name: "bucket"))

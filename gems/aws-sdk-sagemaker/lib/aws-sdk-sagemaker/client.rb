@@ -285,6 +285,15 @@ module Aws::SageMaker
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Boolean] :use_dualstack_endpoint
+    #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
+    #     will be used if available.
+    #
+    #   @option options [Boolean] :use_fips_endpoint
+    #     When set to `true`, fips compatible endpoints will be used if available.
+    #     When a `fips` region is used, the region is normalized and this config
+    #     is set to `true`.
+    #
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
@@ -8215,6 +8224,7 @@ module Aws::SageMaker
     #   * {Types::DescribeDeviceResponse#models #models} => Array&lt;Types::EdgeModel&gt;
     #   * {Types::DescribeDeviceResponse#max_models #max_models} => Integer
     #   * {Types::DescribeDeviceResponse#next_token #next_token} => String
+    #   * {Types::DescribeDeviceResponse#agent_version #agent_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -8240,6 +8250,7 @@ module Aws::SageMaker
     #   resp.models[0].latest_inference #=> Time
     #   resp.max_models #=> Integer
     #   resp.next_token #=> String
+    #   resp.agent_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeDevice AWS API Documentation
     #
@@ -12205,6 +12216,7 @@ module Aws::SageMaker
     #   resp.device_summaries[0].models #=> Array
     #   resp.device_summaries[0].models[0].model_name #=> String
     #   resp.device_summaries[0].models[0].model_version #=> String
+    #   resp.device_summaries[0].agent_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListDevices AWS API Documentation
@@ -18287,7 +18299,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

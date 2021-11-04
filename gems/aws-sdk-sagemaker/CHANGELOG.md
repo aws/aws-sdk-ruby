@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2021-11-04)
+------------------
+
+* Feature - ListDevices and DescribeDevice now show Edge Manager agent version.
+
 1.106.0 (2021-10-28)
 ------------------
 

@@ -275,6 +275,15 @@ module Aws::IoTWireless
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Boolean] :use_dualstack_endpoint
+    #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
+    #     will be used if available.
+    #
+    #   @option options [Boolean] :use_fips_endpoint
+    #     When set to `true`, fips compatible endpoints will be used if available.
+    #     When a `fips` region is used, the region is normalized and this config
+    #     is set to `true`.
+    #
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
@@ -379,6 +388,78 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Associate a multicast group with a FUOTA task.
+    #
+    # @option params [required, String] :id
+    #   The ID of a FUOTA task.
+    #
+    # @option params [required, String] :multicast_group_id
+    #   The ID of the multicast group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_multicast_group_with_fuota_task({
+    #     id: "FuotaTaskId", # required
+    #     multicast_group_id: "MulticastGroupId", # required
+    #   })
+    #
+    # @overload associate_multicast_group_with_fuota_task(params = {})
+    # @param [Hash] params ({})
+    def associate_multicast_group_with_fuota_task(params = {}, options = {})
+      req = build_request(:associate_multicast_group_with_fuota_task, params)
+      req.send_request(options)
+    end
+
+    # Associate a wireless device with a FUOTA task.
+    #
+    # @option params [required, String] :id
+    #   The ID of a FUOTA task.
+    #
+    # @option params [required, String] :wireless_device_id
+    #   The ID of the wireless device.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_wireless_device_with_fuota_task({
+    #     id: "FuotaTaskId", # required
+    #     wireless_device_id: "WirelessDeviceId", # required
+    #   })
+    #
+    # @overload associate_wireless_device_with_fuota_task(params = {})
+    # @param [Hash] params ({})
+    def associate_wireless_device_with_fuota_task(params = {}, options = {})
+      req = build_request(:associate_wireless_device_with_fuota_task, params)
+      req.send_request(options)
+    end
+
+    # Associates a wireless device with a multicast group.
+    #
+    # @option params [required, String] :id
+    #   The ID of the multicast group.
+    #
+    # @option params [required, String] :wireless_device_id
+    #   The ID of the wireless device.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_wireless_device_with_multicast_group({
+    #     id: "MulticastGroupId", # required
+    #     wireless_device_id: "WirelessDeviceId", # required
+    #   })
+    #
+    # @overload associate_wireless_device_with_multicast_group(params = {})
+    # @param [Hash] params ({})
+    def associate_wireless_device_with_multicast_group(params = {}, options = {})
+      req = build_request(:associate_wireless_device_with_multicast_group, params)
+      req.send_request(options)
+    end
+
     # Associates a wireless device with a thing.
     #
     # @option params [required, String] :id
@@ -454,6 +535,26 @@ module Aws::IoTWireless
     # @param [Hash] params ({})
     def associate_wireless_gateway_with_thing(params = {}, options = {})
       req = build_request(:associate_wireless_gateway_with_thing, params)
+      req.send_request(options)
+    end
+
+    # Cancels an existing multicast group session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the multicast group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_multicast_group_session({
+    #     id: "MulticastGroupId", # required
+    #   })
+    #
+    # @overload cancel_multicast_group_session(params = {})
+    # @param [Hash] params ({})
+    def cancel_multicast_group_session(params = {}, options = {})
+      req = build_request(:cancel_multicast_group_session, params)
       req.send_request(options)
     end
 
@@ -594,6 +695,132 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Creates a FUOTA task.
+    #
+    # @option params [String] :name
+    #   The name of a FUOTA task.
+    #
+    # @option params [String] :description
+    #   The description of the new resource.
+    #
+    # @option params [String] :client_request_token
+    #   Each resource must have a unique client request token. If you try to
+    #   create a new resource with the same token as a resource that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::LoRaWANFuotaTask] :lo_ra_wan
+    #   The LoRaWAN information used with a FUOTA task.
+    #
+    # @option params [required, String] :firmware_update_image
+    #   The S3 URI points to a firmware update image that is to be used with a
+    #   FUOTA task.
+    #
+    # @option params [required, String] :firmware_update_role
+    #   The firmware update role that is to be used with a FUOTA task.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #
+    # @return [Types::CreateFuotaTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFuotaTaskResponse#arn #arn} => String
+    #   * {Types::CreateFuotaTaskResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_fuota_task({
+    #     name: "FuotaTaskName",
+    #     description: "Description",
+    #     client_request_token: "ClientRequestToken",
+    #     lo_ra_wan: {
+    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #     },
+    #     firmware_update_image: "FirmwareUpdateImage", # required
+    #     firmware_update_role: "FirmwareUpdateRole", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #
+    # @overload create_fuota_task(params = {})
+    # @param [Hash] params ({})
+    def create_fuota_task(params = {}, options = {})
+      req = build_request(:create_fuota_task, params)
+      req.send_request(options)
+    end
+
+    # Creates a multicast group.
+    #
+    # @option params [String] :name
+    #   The name of the multicast group.
+    #
+    # @option params [String] :description
+    #   The description of the multicast group.
+    #
+    # @option params [String] :client_request_token
+    #   Each resource must have a unique client request token. If you try to
+    #   create a new resource with the same token as a resource that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::LoRaWANMulticast] :lo_ra_wan
+    #   The LoRaWAN information that is to be used with the multicast group.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #
+    # @return [Types::CreateMulticastGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMulticastGroupResponse#arn #arn} => String
+    #   * {Types::CreateMulticastGroupResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_multicast_group({
+    #     name: "MulticastGroupName",
+    #     description: "Description",
+    #     client_request_token: "ClientRequestToken",
+    #     lo_ra_wan: { # required
+    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #       dl_class: "ClassB", # accepts ClassB, ClassC
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #
+    # @overload create_multicast_group(params = {})
+    # @param [Hash] params ({})
+    def create_multicast_group(params = {}, options = {})
+      req = build_request(:create_multicast_group, params)
+      req.send_request(options)
+    end
+
     # Creates a new service profile.
     #
     # @option params [String] :name
@@ -704,6 +931,7 @@ module Aws::IoTWireless
     #       otaa_v1_0_x: {
     #         app_key: "AppKey",
     #         app_eui: "AppEui",
+    #         gen_app_key: "GenAppKey",
     #       },
     #       abp_v1_1: {
     #         dev_addr: "DevAddr",
@@ -720,6 +948,11 @@ module Aws::IoTWireless
     #           nwk_s_key: "NwkSKey",
     #           app_s_key: "AppSKey",
     #         },
+    #       },
+    #       f_ports: {
+    #         fuota: 1,
+    #         multicast: 1,
+    #         clock_sync: 1,
     #       },
     #     },
     #     tags: [
@@ -954,6 +1187,46 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Deletes a FUOTA task.
+    #
+    # @option params [required, String] :id
+    #   The ID of a FUOTA task.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_fuota_task({
+    #     id: "FuotaTaskId", # required
+    #   })
+    #
+    # @overload delete_fuota_task(params = {})
+    # @param [Hash] params ({})
+    def delete_fuota_task(params = {}, options = {})
+      req = build_request(:delete_fuota_task, params)
+      req.send_request(options)
+    end
+
+    # Deletes a multicast group if it is not in use by a fuota task.
+    #
+    # @option params [required, String] :id
+    #   The ID of the multicast group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_multicast_group({
+    #     id: "MulticastGroupId", # required
+    #   })
+    #
+    # @overload delete_multicast_group(params = {})
+    # @param [Hash] params ({})
+    def delete_multicast_group(params = {}, options = {})
+      req = build_request(:delete_multicast_group, params)
+      req.send_request(options)
+    end
+
     # Deletes a service profile.
     #
     # @option params [required, String] :id
@@ -1078,6 +1351,78 @@ module Aws::IoTWireless
     # @param [Hash] params ({})
     def disassociate_aws_account_from_partner_account(params = {}, options = {})
       req = build_request(:disassociate_aws_account_from_partner_account, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a multicast group from a fuota task.
+    #
+    # @option params [required, String] :id
+    #   The ID of a FUOTA task.
+    #
+    # @option params [required, String] :multicast_group_id
+    #   The ID of the multicast group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_multicast_group_from_fuota_task({
+    #     id: "FuotaTaskId", # required
+    #     multicast_group_id: "MulticastGroupId", # required
+    #   })
+    #
+    # @overload disassociate_multicast_group_from_fuota_task(params = {})
+    # @param [Hash] params ({})
+    def disassociate_multicast_group_from_fuota_task(params = {}, options = {})
+      req = build_request(:disassociate_multicast_group_from_fuota_task, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a wireless device from a FUOTA task.
+    #
+    # @option params [required, String] :id
+    #   The ID of a FUOTA task.
+    #
+    # @option params [required, String] :wireless_device_id
+    #   The ID of the wireless device.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_wireless_device_from_fuota_task({
+    #     id: "FuotaTaskId", # required
+    #     wireless_device_id: "WirelessDeviceId", # required
+    #   })
+    #
+    # @overload disassociate_wireless_device_from_fuota_task(params = {})
+    # @param [Hash] params ({})
+    def disassociate_wireless_device_from_fuota_task(params = {}, options = {})
+      req = build_request(:disassociate_wireless_device_from_fuota_task, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a wireless device from a multicast group.
+    #
+    # @option params [required, String] :id
+    #   The ID of the multicast group.
+    #
+    # @option params [required, String] :wireless_device_id
+    #   The ID of the wireless device.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_wireless_device_from_multicast_group({
+    #     id: "MulticastGroupId", # required
+    #     wireless_device_id: "WirelessDeviceId", # required
+    #   })
+    #
+    # @overload disassociate_wireless_device_from_multicast_group(params = {})
+    # @param [Hash] params ({})
+    def disassociate_wireless_device_from_multicast_group(params = {}, options = {})
+      req = build_request(:disassociate_wireless_device_from_multicast_group, params)
       req.send_request(options)
     end
 
@@ -1229,6 +1574,49 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Gets information about a FUOTA task.
+    #
+    # @option params [required, String] :id
+    #   The ID of a FUOTA task.
+    #
+    # @return [Types::GetFuotaTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFuotaTaskResponse#arn #arn} => String
+    #   * {Types::GetFuotaTaskResponse#id #id} => String
+    #   * {Types::GetFuotaTaskResponse#status #status} => String
+    #   * {Types::GetFuotaTaskResponse#name #name} => String
+    #   * {Types::GetFuotaTaskResponse#description #description} => String
+    #   * {Types::GetFuotaTaskResponse#lo_ra_wan #lo_ra_wan} => Types::LoRaWANFuotaTaskGetInfo
+    #   * {Types::GetFuotaTaskResponse#firmware_update_image #firmware_update_image} => String
+    #   * {Types::GetFuotaTaskResponse#firmware_update_role #firmware_update_role} => String
+    #   * {Types::GetFuotaTaskResponse#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_fuota_task({
+    #     id: "FuotaTaskId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.status #=> String, one of "Pending", "FuotaSession_Waiting", "In_FuotaSession", "FuotaDone", "Delete_Waiting"
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.lo_ra_wan.rf_region #=> String
+    #   resp.lo_ra_wan.start_time #=> Time
+    #   resp.firmware_update_image #=> String
+    #   resp.firmware_update_role #=> String
+    #   resp.created_at #=> Time
+    #
+    # @overload get_fuota_task(params = {})
+    # @param [Hash] params ({})
+    def get_fuota_task(params = {}, options = {})
+      req = build_request(:get_fuota_task, params)
+      req.send_request(options)
+    end
+
     # Returns current default log levels or log levels by resource types.
     # Based on resource types, log levels can be for wireless device log
     # options or wireless gateway log options.
@@ -1259,6 +1647,76 @@ module Aws::IoTWireless
     # @param [Hash] params ({})
     def get_log_levels_by_resource_types(params = {}, options = {})
       req = build_request(:get_log_levels_by_resource_types, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a multicast group.
+    #
+    # @option params [required, String] :id
+    #   The ID of the multicast group.
+    #
+    # @return [Types::GetMulticastGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMulticastGroupResponse#arn #arn} => String
+    #   * {Types::GetMulticastGroupResponse#id #id} => String
+    #   * {Types::GetMulticastGroupResponse#name #name} => String
+    #   * {Types::GetMulticastGroupResponse#description #description} => String
+    #   * {Types::GetMulticastGroupResponse#status #status} => String
+    #   * {Types::GetMulticastGroupResponse#lo_ra_wan #lo_ra_wan} => Types::LoRaWANMulticastGet
+    #   * {Types::GetMulticastGroupResponse#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_multicast_group({
+    #     id: "MulticastGroupId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.status #=> String
+    #   resp.lo_ra_wan.rf_region #=> String, one of "EU868", "US915", "AU915", "AS923-1"
+    #   resp.lo_ra_wan.dl_class #=> String, one of "ClassB", "ClassC"
+    #   resp.lo_ra_wan.number_of_devices_requested #=> Integer
+    #   resp.lo_ra_wan.number_of_devices_in_group #=> Integer
+    #   resp.created_at #=> Time
+    #
+    # @overload get_multicast_group(params = {})
+    # @param [Hash] params ({})
+    def get_multicast_group(params = {}, options = {})
+      req = build_request(:get_multicast_group, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a multicast group session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the multicast group.
+    #
+    # @return [Types::GetMulticastGroupSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMulticastGroupSessionResponse#lo_ra_wan #lo_ra_wan} => Types::LoRaWANMulticastSession
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_multicast_group_session({
+    #     id: "MulticastGroupId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lo_ra_wan.dl_dr #=> Integer
+    #   resp.lo_ra_wan.dl_freq #=> Integer
+    #   resp.lo_ra_wan.session_start_time #=> Time
+    #   resp.lo_ra_wan.session_timeout #=> Integer
+    #
+    # @overload get_multicast_group_session(params = {})
+    # @param [Hash] params ({})
+    def get_multicast_group_session(params = {}, options = {})
+      req = build_request(:get_multicast_group_session, params)
       req.send_request(options)
     end
 
@@ -1294,6 +1752,44 @@ module Aws::IoTWireless
     # @param [Hash] params ({})
     def get_partner_account(params = {}, options = {})
       req = build_request(:get_partner_account, params)
+      req.send_request(options)
+    end
+
+    # Get the event configuration for a particular resource identifier.
+    #
+    # @option params [required, String] :identifier
+    #   Resource identifier to opt in for event messaging.
+    #
+    # @option params [required, String] :identifier_type
+    #   Identifier type of the particular resource identifier for event
+    #   configuration.
+    #
+    # @option params [String] :partner_type
+    #   Partner type of the resource if the identifier type is
+    #   PartnerAccountId.
+    #
+    # @return [Types::GetResourceEventConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourceEventConfigurationResponse#device_registration_state #device_registration_state} => Types::DeviceRegistrationStateEventConfiguration
+    #   * {Types::GetResourceEventConfigurationResponse#proximity #proximity} => Types::ProximityEventConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_event_configuration({
+    #     identifier: "Identifier", # required
+    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId
+    #     partner_type: "Sidewalk", # accepts Sidewalk
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_registration_state.sidewalk.amazon_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #   resp.proximity.sidewalk.amazon_id_event_topic #=> String, one of "Enabled", "Disabled"
+    #
+    # @overload get_resource_event_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_resource_event_configuration(params = {}, options = {})
+      req = build_request(:get_resource_event_configuration, params)
       req.send_request(options)
     end
 
@@ -1461,6 +1957,7 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.otaa_v1_1.join_eui #=> String
     #   resp.lo_ra_wan.otaa_v1_0_x.app_key #=> String
     #   resp.lo_ra_wan.otaa_v1_0_x.app_eui #=> String
+    #   resp.lo_ra_wan.otaa_v1_0_x.gen_app_key #=> String
     #   resp.lo_ra_wan.abp_v1_1.dev_addr #=> String
     #   resp.lo_ra_wan.abp_v1_1.session_keys.f_nwk_s_int_key #=> String
     #   resp.lo_ra_wan.abp_v1_1.session_keys.s_nwk_s_int_key #=> String
@@ -1469,6 +1966,9 @@ module Aws::IoTWireless
     #   resp.lo_ra_wan.abp_v1_0_x.dev_addr #=> String
     #   resp.lo_ra_wan.abp_v1_0_x.session_keys.nwk_s_key #=> String
     #   resp.lo_ra_wan.abp_v1_0_x.session_keys.app_s_key #=> String
+    #   resp.lo_ra_wan.f_ports.fuota #=> Integer
+    #   resp.lo_ra_wan.f_ports.multicast #=> Integer
+    #   resp.lo_ra_wan.f_ports.clock_sync #=> Integer
     #   resp.sidewalk.amazon_id #=> String
     #   resp.sidewalk.sidewalk_id #=> String
     #   resp.sidewalk.sidewalk_manufacturing_sn #=> String
@@ -1820,6 +2320,125 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Lists the FUOTA tasks registered to your AWS account.
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @return [Types::ListFuotaTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFuotaTasksResponse#next_token #next_token} => String
+    #   * {Types::ListFuotaTasksResponse#fuota_task_list #fuota_task_list} => Array&lt;Types::FuotaTask&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_fuota_tasks({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.fuota_task_list #=> Array
+    #   resp.fuota_task_list[0].id #=> String
+    #   resp.fuota_task_list[0].arn #=> String
+    #   resp.fuota_task_list[0].name #=> String
+    #
+    # @overload list_fuota_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_fuota_tasks(params = {}, options = {})
+      req = build_request(:list_fuota_tasks, params)
+      req.send_request(options)
+    end
+
+    # Lists the multicast groups registered to your AWS account.
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @return [Types::ListMulticastGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMulticastGroupsResponse#next_token #next_token} => String
+    #   * {Types::ListMulticastGroupsResponse#multicast_group_list #multicast_group_list} => Array&lt;Types::MulticastGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_multicast_groups({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.multicast_group_list #=> Array
+    #   resp.multicast_group_list[0].id #=> String
+    #   resp.multicast_group_list[0].arn #=> String
+    #   resp.multicast_group_list[0].name #=> String
+    #
+    # @overload list_multicast_groups(params = {})
+    # @param [Hash] params ({})
+    def list_multicast_groups(params = {}, options = {})
+      req = build_request(:list_multicast_groups, params)
+      req.send_request(options)
+    end
+
+    # List all multicast groups associated with a fuota task.
+    #
+    # @option params [required, String] :id
+    #   The ID of a FUOTA task.
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @return [Types::ListMulticastGroupsByFuotaTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMulticastGroupsByFuotaTaskResponse#next_token #next_token} => String
+    #   * {Types::ListMulticastGroupsByFuotaTaskResponse#multicast_group_list #multicast_group_list} => Array&lt;Types::MulticastGroupByFuotaTask&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_multicast_groups_by_fuota_task({
+    #     id: "FuotaTaskId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.multicast_group_list #=> Array
+    #   resp.multicast_group_list[0].id #=> String
+    #
+    # @overload list_multicast_groups_by_fuota_task(params = {})
+    # @param [Hash] params ({})
+    def list_multicast_groups_by_fuota_task(params = {}, options = {})
+      req = build_request(:list_multicast_groups_by_fuota_task, params)
+      req.send_request(options)
+    end
+
     # Lists the partner accounts associated with your AWS account.
     #
     # @option params [String] :next_token
@@ -1949,6 +2568,12 @@ module Aws::IoTWireless
     #   A filter to list only the wireless devices that use this wireless
     #   device type.
     #
+    # @option params [String] :fuota_task_id
+    #   The ID of a FUOTA task.
+    #
+    # @option params [String] :multicast_group_id
+    #   The ID of the multicast group.
+    #
     # @return [Types::ListWirelessDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListWirelessDevicesResponse#next_token #next_token} => String
@@ -1965,6 +2590,8 @@ module Aws::IoTWireless
     #     device_profile_id: "DeviceProfileId",
     #     service_profile_id: "ServiceProfileId",
     #     wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
+    #     fuota_task_id: "FuotaTaskId",
+    #     multicast_group_id: "MulticastGroupId",
     #   })
     #
     # @example Response structure
@@ -1984,6 +2611,9 @@ module Aws::IoTWireless
     #   resp.wireless_device_list[0].sidewalk.device_certificates #=> Array
     #   resp.wireless_device_list[0].sidewalk.device_certificates[0].signing_alg #=> String, one of "Ed25519", "P256r1"
     #   resp.wireless_device_list[0].sidewalk.device_certificates[0].value #=> String
+    #   resp.wireless_device_list[0].fuota_device_status #=> String, one of "Initial", "Package_Not_Supported", "FragAlgo_unsupported", "Not_enough_memory", "FragIndex_unsupported", "Wrong_descriptor", "SessionCnt_replay", "MissingFrag", "MemoryError", "MICError", "Successful"
+    #   resp.wireless_device_list[0].multicast_device_status #=> String
+    #   resp.wireless_device_list[0].mc_group_id #=> Integer
     #
     # @overload list_wireless_devices(params = {})
     # @param [Hash] params ({})
@@ -2164,6 +2794,44 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Sends the specified data to a multicast group.
+    #
+    # @option params [required, String] :id
+    #   The ID of the multicast group.
+    #
+    # @option params [required, String] :payload_data
+    #   The binary to be sent to the end device, encoded in base64.
+    #
+    # @option params [required, Types::MulticastWirelessMetadata] :wireless_metadata
+    #   Wireless metadata that is to be sent to multicast group.
+    #
+    # @return [Types::SendDataToMulticastGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendDataToMulticastGroupResponse#message_id #message_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_data_to_multicast_group({
+    #     id: "MulticastGroupId", # required
+    #     payload_data: "PayloadData", # required
+    #     wireless_metadata: { # required
+    #       lo_ra_wan: {
+    #         f_port: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_id #=> String
+    #
+    # @overload send_data_to_multicast_group(params = {})
+    # @param [Hash] params ({})
+    def send_data_to_multicast_group(params = {}, options = {})
+      req = build_request(:send_data_to_multicast_group, params)
+      req.send_request(options)
+    end
+
     # Sends a decrypted application data frame to a device.
     #
     # @option params [required, String] :id
@@ -2208,6 +2876,133 @@ module Aws::IoTWireless
     # @param [Hash] params ({})
     def send_data_to_wireless_device(params = {}, options = {})
       req = build_request(:send_data_to_wireless_device, params)
+      req.send_request(options)
+    end
+
+    # Starts a bulk association of all qualifying wireless devices with a
+    # multicast group.
+    #
+    # @option params [required, String] :id
+    #   The ID of the multicast group.
+    #
+    # @option params [String] :query_string
+    #   Query string used to search for wireless devices as part of the bulk
+    #   associate and disassociate process.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_bulk_associate_wireless_device_with_multicast_group({
+    #     id: "MulticastGroupId", # required
+    #     query_string: "QueryString",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @overload start_bulk_associate_wireless_device_with_multicast_group(params = {})
+    # @param [Hash] params ({})
+    def start_bulk_associate_wireless_device_with_multicast_group(params = {}, options = {})
+      req = build_request(:start_bulk_associate_wireless_device_with_multicast_group, params)
+      req.send_request(options)
+    end
+
+    # Starts a bulk disassociatin of all qualifying wireless devices from a
+    # multicast group.
+    #
+    # @option params [required, String] :id
+    #   The ID of the multicast group.
+    #
+    # @option params [String] :query_string
+    #   Query string used to search for wireless devices as part of the bulk
+    #   associate and disassociate process.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_bulk_disassociate_wireless_device_from_multicast_group({
+    #     id: "MulticastGroupId", # required
+    #     query_string: "QueryString",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @overload start_bulk_disassociate_wireless_device_from_multicast_group(params = {})
+    # @param [Hash] params ({})
+    def start_bulk_disassociate_wireless_device_from_multicast_group(params = {}, options = {})
+      req = build_request(:start_bulk_disassociate_wireless_device_from_multicast_group, params)
+      req.send_request(options)
+    end
+
+    # Starts a FUOTA task.
+    #
+    # @option params [required, String] :id
+    #   The ID of a FUOTA task.
+    #
+    # @option params [Types::LoRaWANStartFuotaTask] :lo_ra_wan
+    #   The LoRaWAN information used to start a FUOTA task.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_fuota_task({
+    #     id: "FuotaTaskId", # required
+    #     lo_ra_wan: {
+    #       start_time: Time.now,
+    #     },
+    #   })
+    #
+    # @overload start_fuota_task(params = {})
+    # @param [Hash] params ({})
+    def start_fuota_task(params = {}, options = {})
+      req = build_request(:start_fuota_task, params)
+      req.send_request(options)
+    end
+
+    # Starts a multicast group session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the multicast group.
+    #
+    # @option params [required, Types::LoRaWANMulticastSession] :lo_ra_wan
+    #   The LoRaWAN information used with the multicast session.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_multicast_group_session({
+    #     id: "MulticastGroupId", # required
+    #     lo_ra_wan: { # required
+    #       dl_dr: 1,
+    #       dl_freq: 1,
+    #       session_start_time: Time.now,
+    #       session_timeout: 1,
+    #     },
+    #   })
+    #
+    # @overload start_multicast_group_session(params = {})
+    # @param [Hash] params ({})
+    def start_multicast_group_session(params = {}, options = {})
+      req = build_request(:start_multicast_group_session, params)
       req.send_request(options)
     end
 
@@ -2328,6 +3123,49 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Updates properties of a FUOTA task.
+    #
+    # @option params [required, String] :id
+    #   The ID of a FUOTA task.
+    #
+    # @option params [String] :name
+    #   The name of a FUOTA task.
+    #
+    # @option params [String] :description
+    #   The description of the new resource.
+    #
+    # @option params [Types::LoRaWANFuotaTask] :lo_ra_wan
+    #   The LoRaWAN information used with a FUOTA task.
+    #
+    # @option params [String] :firmware_update_image
+    #   The S3 URI points to a firmware update image that is to be used with a
+    #   FUOTA task.
+    #
+    # @option params [String] :firmware_update_role
+    #   The firmware update role that is to be used with a FUOTA task.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_fuota_task({
+    #     id: "FuotaTaskId", # required
+    #     name: "FuotaTaskName",
+    #     description: "Description",
+    #     lo_ra_wan: {
+    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #     },
+    #     firmware_update_image: "FirmwareUpdateImage",
+    #     firmware_update_role: "FirmwareUpdateRole",
+    #   })
+    #
+    # @overload update_fuota_task(params = {})
+    # @param [Hash] params ({})
+    def update_fuota_task(params = {}, options = {})
+      req = build_request(:update_fuota_task, params)
+      req.send_request(options)
+    end
+
     # Set default log level, or log levels by resource types. This can be
     # for wireless device log options or wireless gateways log options and
     # is used to control the log messages that'll be displayed in
@@ -2381,6 +3219,41 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Updates properties of a multicast group session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the multicast group.
+    #
+    # @option params [String] :name
+    #   The name of the multicast group.
+    #
+    # @option params [String] :description
+    #   The description of the new resource.
+    #
+    # @option params [Types::LoRaWANMulticast] :lo_ra_wan
+    #   The LoRaWAN information that is to be used with the multicast group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_multicast_group({
+    #     id: "MulticastGroupId", # required
+    #     name: "MulticastGroupName",
+    #     description: "Description",
+    #     lo_ra_wan: {
+    #       rf_region: "EU868", # accepts EU868, US915, AU915, AS923-1
+    #       dl_class: "ClassB", # accepts ClassB, ClassC
+    #     },
+    #   })
+    #
+    # @overload update_multicast_group(params = {})
+    # @param [Hash] params ({})
+    def update_multicast_group(params = {}, options = {})
+      req = build_request(:update_multicast_group, params)
+      req.send_request(options)
+    end
+
     # Updates properties of a partner account.
     #
     # @option params [required, Types::SidewalkUpdateAccount] :sidewalk
@@ -2408,6 +3281,52 @@ module Aws::IoTWireless
     # @param [Hash] params ({})
     def update_partner_account(params = {}, options = {})
       req = build_request(:update_partner_account, params)
+      req.send_request(options)
+    end
+
+    # Update the event configuration for a particular resource identifier.
+    #
+    # @option params [required, String] :identifier
+    #   Resource identifier to opt in for event messaging.
+    #
+    # @option params [required, String] :identifier_type
+    #   Identifier type of the particular resource identifier for event
+    #   configuration.
+    #
+    # @option params [String] :partner_type
+    #   Partner type of the resource if the identifier type is
+    #   PartnerAccountId
+    #
+    # @option params [Types::DeviceRegistrationStateEventConfiguration] :device_registration_state
+    #   Event configuration for the device registration state event
+    #
+    # @option params [Types::ProximityEventConfiguration] :proximity
+    #   Event configuration for the Proximity event
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_event_configuration({
+    #     identifier: "Identifier", # required
+    #     identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId
+    #     partner_type: "Sidewalk", # accepts Sidewalk
+    #     device_registration_state: {
+    #       sidewalk: {
+    #         amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       },
+    #     },
+    #     proximity: {
+    #       sidewalk: {
+    #         amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       },
+    #     },
+    #   })
+    #
+    # @overload update_resource_event_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_resource_event_configuration(params = {}, options = {})
+      req = build_request(:update_resource_event_configuration, params)
       req.send_request(options)
     end
 
@@ -2502,7 +3421,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

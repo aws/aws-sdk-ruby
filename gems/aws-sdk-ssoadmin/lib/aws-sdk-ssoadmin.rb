@@ -48,6 +48,6 @@ require_relative 'aws-sdk-ssoadmin/customizations'
 # @!group service
 module Aws::SSOAdmin
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end

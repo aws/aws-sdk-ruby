@@ -275,6 +275,15 @@ module Aws::Connect
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
+    #   @option options [Boolean] :use_dualstack_endpoint
+    #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
+    #     will be used if available.
+    #
+    #   @option options [Boolean] :use_fips_endpoint
+    #     When set to `true`, fips compatible endpoints will be used if available.
+    #     When a `fips` region is used, the region is normalized and this config
+    #     is set to `true`.
+    #
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.
@@ -668,7 +677,7 @@ module Aws::Connect
     #   The display order of the status.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateAgentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -787,7 +796,7 @@ module Aws::Connect
     #   and end time.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateHoursOfOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -896,7 +905,8 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Creates an AWS resource association with an Amazon Connect instance.
+    # Creates an Amazon Web Services resource association with an Amazon
+    # Connect instance.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -921,7 +931,7 @@ module Aws::Connect
     #   integration type.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateIntegrationAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -985,7 +995,7 @@ module Aws::Connect
     #   The quick connects available to agents who are working the queue.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1041,7 +1051,7 @@ module Aws::Connect
     #   Configuration settings for the quick connect.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateQuickConnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1161,6 +1171,58 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Creates a security profile.
+    #
+    # @option params [required, String] :security_profile_name
+    #   The name of the security profile.
+    #
+    # @option params [String] :description
+    #   The description of the security profile.
+    #
+    # @option params [Array<String>] :permissions
+    #   Permissions assigned to the security profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSecurityProfileResponse#security_profile_id #security_profile_id} => String
+    #   * {Types::CreateSecurityProfileResponse#security_profile_arn #security_profile_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_security_profile({
+    #     security_profile_name: "SecurityProfileName", # required
+    #     description: "SecurityProfileDescription",
+    #     permissions: ["SecurityProfilePermission"],
+    #     instance_id: "InstanceId", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_profile_id #=> String
+    #   resp.security_profile_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateSecurityProfile AWS API Documentation
+    #
+    # @overload create_security_profile(params = {})
+    # @param [Hash] params ({})
+    def create_security_profile(params = {}, options = {})
+      req = build_request(:create_security_profile, params)
+      req.send_request(options)
+    end
+
     # Creates a use case for an integration association.
     #
     # @option params [required, String] :instance_id
@@ -1175,7 +1237,7 @@ module Aws::Connect
     #   integration association can have only one of each use case type.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateUseCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1409,8 +1471,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Deletes an AWS resource association from an Amazon Connect instance.
-    # The association must not have any use cases associated with it.
+    # Deletes an Amazon Web Services resource association from an Amazon
+    # Connect instance. The association must not have any use cases
+    # associated with it.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -1461,6 +1524,36 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_quick_connect(params = {}, options = {})
       req = build_request(:delete_quick_connect, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Deletes a security profile.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :security_profile_id
+    #   The identifier for the security profle.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_security_profile({
+    #     instance_id: "InstanceId", # required
+    #     security_profile_id: "SecurityProfileId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteSecurityProfile AWS API Documentation
+    #
+    # @overload delete_security_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_security_profile(params = {}, options = {})
+      req = build_request(:delete_security_profile, params)
       req.send_request(options)
     end
 
@@ -1962,6 +2055,48 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_routing_profile(params = {}, options = {})
       req = build_request(:describe_routing_profile, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Gets basic information about the security profle.
+    #
+    # @option params [required, String] :security_profile_id
+    #   The identifier for the security profle.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @return [Types::DescribeSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSecurityProfileResponse#security_profile #security_profile} => Types::SecurityProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_security_profile({
+    #     security_profile_id: "SecurityProfileId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_profile.id #=> String
+    #   resp.security_profile.organization_resource_id #=> String
+    #   resp.security_profile.arn #=> String
+    #   resp.security_profile.security_profile_name #=> String
+    #   resp.security_profile.description #=> String
+    #   resp.security_profile.tags #=> Hash
+    #   resp.security_profile.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeSecurityProfile AWS API Documentation
+    #
+    # @overload describe_security_profile(params = {})
+    # @param [Hash] params ({})
+    def describe_security_profile(params = {}, options = {})
+      req = build_request(:describe_security_profile, params)
       req.send_request(options)
     end
 
@@ -3391,14 +3526,15 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Provides summary information about the AWS resource associations for
-    # the specified Amazon Connect instance.
+    # Provides summary information about the Amazon Web Services resource
+    # associations for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
     # @option params [String] :integration_type
+    #   The type of integration.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -3987,6 +4123,60 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Lists the permissions granted to a security profile.
+    #
+    # @option params [required, String] :security_profile_id
+    #   The identifier for the security profle.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListSecurityProfilePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityProfilePermissionsResponse#permissions #permissions} => Array&lt;String&gt;
+    #   * {Types::ListSecurityProfilePermissionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_profile_permissions({
+    #     security_profile_id: "SecurityProfileId", # required
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permissions #=> Array
+    #   resp.permissions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilePermissions AWS API Documentation
+    #
+    # @overload list_security_profile_permissions(params = {})
+    # @param [Hash] params ({})
+    def list_security_profile_permissions(params = {}, options = {})
+      req = build_request(:list_security_profile_permissions, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Provides summary information about the security profiles for the
     # specified Amazon Connect instance.
     #
@@ -5164,7 +5354,8 @@ module Aws::Connect
     #   The type of attribute.
     #
     #   <note markdown="1"> Only allowlisted customers can consume USE\_CUSTOM\_TTS\_VOICES. To
-    #   access this feature, contact AWS Support for allowlisting.
+    #   access this feature, contact Amazon Web Services Support for
+    #   allowlisting.
     #
     #    </note>
     #
@@ -5668,6 +5859,44 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates a security profile.
+    #
+    # @option params [String] :description
+    #   The description of the security profile.
+    #
+    # @option params [Array<String>] :permissions
+    #   The permissions granted to a security profile.
+    #
+    # @option params [required, String] :security_profile_id
+    #   The identifier for the security profle.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_security_profile({
+    #     description: "SecurityProfileDescription",
+    #     permissions: ["SecurityProfilePermission"],
+    #     security_profile_id: "SecurityProfileId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfile AWS API Documentation
+    #
+    # @overload update_security_profile(params = {})
+    # @param [Hash] params ({})
+    def update_security_profile(params = {}, options = {})
+      req = build_request(:update_security_profile, params)
+      req.send_request(options)
+    end
+
     # Assigns the specified hierarchy group to the specified user.
     #
     # @option params [String] :hierarchy_group_id
@@ -5932,7 +6161,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

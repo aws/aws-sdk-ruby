@@ -10,6 +10,19 @@
 module Aws::Connect
   module Types
 
+    # You do not have sufficient access to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about an agent status.
     #
     # @!attribute [rw] agent_status_arn
@@ -41,7 +54,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatus AWS API Documentation
@@ -637,7 +651,8 @@ module Aws::Connect
     #   @return [Integer]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAgentStatusRequest AWS API Documentation
@@ -793,7 +808,8 @@ module Aws::Connect
     #   @return [Array<Types::HoursOfOperationConfig>]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateHoursOfOperationRequest AWS API Documentation
@@ -936,7 +952,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateIntegrationAssociationRequest AWS API Documentation
@@ -1021,7 +1038,8 @@ module Aws::Connect
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQueueRequest AWS API Documentation
@@ -1100,7 +1118,8 @@ module Aws::Connect
     #   @return [Types::QuickConnectConfig]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQuickConnectRequest AWS API Documentation
@@ -1225,6 +1244,70 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateSecurityProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_profile_name: "SecurityProfileName", # required
+    #         description: "SecurityProfileDescription",
+    #         permissions: ["SecurityProfilePermission"],
+    #         instance_id: "InstanceId", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   Permissions assigned to the security profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateSecurityProfileRequest AWS API Documentation
+    #
+    class CreateSecurityProfileRequest < Struct.new(
+      :security_profile_name,
+      :description,
+      :permissions,
+      :instance_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile_id
+    #   The identifier for the security profle.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_arn
+    #   The Amazon Resource Name (ARN) for the security profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateSecurityProfileResponse AWS API Documentation
+    #
+    class CreateSecurityProfileResponse < Struct.new(
+      :security_profile_id,
+      :security_profile_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateUseCaseRequest
     #   data as a hash:
     #
@@ -1253,7 +1336,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUseCaseRequest AWS API Documentation
@@ -1650,6 +1734,32 @@ module Aws::Connect
     class DeleteQuickConnectRequest < Struct.new(
       :instance_id,
       :quick_connect_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteSecurityProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         security_profile_id: "SecurityProfileId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_id
+    #   The identifier for the security profle.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteSecurityProfileRequest AWS API Documentation
+    #
+    class DeleteSecurityProfileRequest < Struct.new(
+      :instance_id,
+      :security_profile_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2076,6 +2186,44 @@ module Aws::Connect
     #
     class DescribeRoutingProfileResponse < Struct.new(
       :routing_profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeSecurityProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_profile_id: "SecurityProfileId", # required
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] security_profile_id
+    #   The identifier for the security profle.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeSecurityProfileRequest AWS API Documentation
+    #
+    class DescribeSecurityProfileRequest < Struct.new(
+      :security_profile_id,
+      :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile
+    #   The security profile.
+    #   @return [Types::SecurityProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeSecurityProfileResponse AWS API Documentation
+    #
+    class DescribeSecurityProfileResponse < Struct.new(
+      :security_profile)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3463,7 +3611,8 @@ module Aws::Connect
     #   @return [Array<Types::HoursOfOperationConfig>]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperation AWS API Documentation
@@ -4490,6 +4639,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] integration_type
+    #   The type of integration.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4566,7 +4716,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] lambda_functions
-    #   The Lambdafunction ARNs associated with the specified instance.
+    #   The Lambda function ARNs associated with the specified instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -5091,6 +5241,64 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListSecurityProfilePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         security_profile_id: "SecurityProfileId", # required
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] security_profile_id
+    #   The identifier for the security profle.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilePermissionsRequest AWS API Documentation
+    #
+    class ListSecurityProfilePermissionsRequest < Struct.new(
+      :security_profile_id,
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permissions
+    #   The permissions granted to the security profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilePermissionsResponse AWS API Documentation
+    #
+    class ListSecurityProfilePermissionsResponse < Struct.new(
+      :permissions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSecurityProfilesRequest
     #   data as a hash:
     #
@@ -5573,7 +5781,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Queue AWS API Documentation
@@ -5692,7 +5901,8 @@ module Aws::Connect
     #   @return [Types::QuickConnectConfig]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnect AWS API Documentation
@@ -6170,6 +6380,46 @@ module Aws::Connect
       :association_id,
       :key,
       :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a security profile.
+    #
+    # @!attribute [rw] id
+    #   The identifier for the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_resource_id
+    #   The organization resource identifier for the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the secruity profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_name
+    #   The name for the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfile AWS API Documentation
+    #
+    class SecurityProfile < Struct.new(
+      :id,
+      :organization_resource_id,
+      :arn,
+      :security_profile_name,
+      :description,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7128,7 +7378,8 @@ module Aws::Connect
     #   The type of attribute.
     #
     #   <note markdown="1"> Only allowlisted customers can consume USE\_CUSTOM\_TTS\_VOICES. To
-    #   access this feature, contact AWS Support for allowlisting.
+    #   access this feature, contact Amazon Web Services Support for
+    #   allowlisting.
     #
     #    </note>
     #   @return [String]
@@ -7614,6 +7865,44 @@ module Aws::Connect
       :instance_id,
       :routing_profile_id,
       :queue_configs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateSecurityProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         description: "SecurityProfileDescription",
+    #         permissions: ["SecurityProfilePermission"],
+    #         security_profile_id: "SecurityProfileId", # required
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] description
+    #   The description of the security profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The permissions granted to a security profile.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_profile_id
+    #   The identifier for the security profle.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfileRequest AWS API Documentation
+    #
+    class UpdateSecurityProfileRequest < Struct.new(
+      :description,
+      :permissions,
+      :security_profile_id,
+      :instance_id)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.525.0 (2021-11-04)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ChimeSDKMeetings`.
+
 * Feature - Support modeled dualstack and fips endpoints in `Aws::Partitions::EndpointProvider`.
 
 1.524.0 (2021-11-03)

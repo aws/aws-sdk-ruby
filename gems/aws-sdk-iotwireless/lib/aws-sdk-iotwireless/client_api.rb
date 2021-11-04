@@ -26,6 +26,12 @@ module Aws::IoTWireless
     AppServerPrivateKey = Shapes::StringShape.new(name: 'AppServerPrivateKey')
     AssociateAwsAccountWithPartnerAccountRequest = Shapes::StructureShape.new(name: 'AssociateAwsAccountWithPartnerAccountRequest')
     AssociateAwsAccountWithPartnerAccountResponse = Shapes::StructureShape.new(name: 'AssociateAwsAccountWithPartnerAccountResponse')
+    AssociateMulticastGroupWithFuotaTaskRequest = Shapes::StructureShape.new(name: 'AssociateMulticastGroupWithFuotaTaskRequest')
+    AssociateMulticastGroupWithFuotaTaskResponse = Shapes::StructureShape.new(name: 'AssociateMulticastGroupWithFuotaTaskResponse')
+    AssociateWirelessDeviceWithFuotaTaskRequest = Shapes::StructureShape.new(name: 'AssociateWirelessDeviceWithFuotaTaskRequest')
+    AssociateWirelessDeviceWithFuotaTaskResponse = Shapes::StructureShape.new(name: 'AssociateWirelessDeviceWithFuotaTaskResponse')
+    AssociateWirelessDeviceWithMulticastGroupRequest = Shapes::StructureShape.new(name: 'AssociateWirelessDeviceWithMulticastGroupRequest')
+    AssociateWirelessDeviceWithMulticastGroupResponse = Shapes::StructureShape.new(name: 'AssociateWirelessDeviceWithMulticastGroupResponse')
     AssociateWirelessDeviceWithThingRequest = Shapes::StructureShape.new(name: 'AssociateWirelessDeviceWithThingRequest')
     AssociateWirelessDeviceWithThingResponse = Shapes::StructureShape.new(name: 'AssociateWirelessDeviceWithThingResponse')
     AssociateWirelessGatewayWithCertificateRequest = Shapes::StructureShape.new(name: 'AssociateWirelessGatewayWithCertificateRequest')
@@ -34,6 +40,8 @@ module Aws::IoTWireless
     AssociateWirelessGatewayWithThingResponse = Shapes::StructureShape.new(name: 'AssociateWirelessGatewayWithThingResponse')
     AutoCreateTasks = Shapes::BooleanShape.new(name: 'AutoCreateTasks')
     BatteryLevel = Shapes::StringShape.new(name: 'BatteryLevel')
+    CancelMulticastGroupSessionRequest = Shapes::StructureShape.new(name: 'CancelMulticastGroupSessionRequest')
+    CancelMulticastGroupSessionResponse = Shapes::StructureShape.new(name: 'CancelMulticastGroupSessionResponse')
     CertificateList = Shapes::StructureShape.new(name: 'CertificateList')
     CertificatePEM = Shapes::StringShape.new(name: 'CertificatePEM')
     CertificateValue = Shapes::StringShape.new(name: 'CertificateValue')
@@ -48,6 +56,10 @@ module Aws::IoTWireless
     CreateDestinationResponse = Shapes::StructureShape.new(name: 'CreateDestinationResponse')
     CreateDeviceProfileRequest = Shapes::StructureShape.new(name: 'CreateDeviceProfileRequest')
     CreateDeviceProfileResponse = Shapes::StructureShape.new(name: 'CreateDeviceProfileResponse')
+    CreateFuotaTaskRequest = Shapes::StructureShape.new(name: 'CreateFuotaTaskRequest')
+    CreateFuotaTaskResponse = Shapes::StructureShape.new(name: 'CreateFuotaTaskResponse')
+    CreateMulticastGroupRequest = Shapes::StructureShape.new(name: 'CreateMulticastGroupRequest')
+    CreateMulticastGroupResponse = Shapes::StructureShape.new(name: 'CreateMulticastGroupResponse')
     CreateServiceProfileRequest = Shapes::StructureShape.new(name: 'CreateServiceProfileRequest')
     CreateServiceProfileResponse = Shapes::StructureShape.new(name: 'CreateServiceProfileResponse')
     CreateWirelessDeviceRequest = Shapes::StructureShape.new(name: 'CreateWirelessDeviceRequest')
@@ -58,10 +70,15 @@ module Aws::IoTWireless
     CreateWirelessGatewayTaskDefinitionResponse = Shapes::StructureShape.new(name: 'CreateWirelessGatewayTaskDefinitionResponse')
     CreateWirelessGatewayTaskRequest = Shapes::StructureShape.new(name: 'CreateWirelessGatewayTaskRequest')
     CreateWirelessGatewayTaskResponse = Shapes::StructureShape.new(name: 'CreateWirelessGatewayTaskResponse')
+    CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
     DeleteDestinationRequest = Shapes::StructureShape.new(name: 'DeleteDestinationRequest')
     DeleteDestinationResponse = Shapes::StructureShape.new(name: 'DeleteDestinationResponse')
     DeleteDeviceProfileRequest = Shapes::StructureShape.new(name: 'DeleteDeviceProfileRequest')
     DeleteDeviceProfileResponse = Shapes::StructureShape.new(name: 'DeleteDeviceProfileResponse')
+    DeleteFuotaTaskRequest = Shapes::StructureShape.new(name: 'DeleteFuotaTaskRequest')
+    DeleteFuotaTaskResponse = Shapes::StructureShape.new(name: 'DeleteFuotaTaskResponse')
+    DeleteMulticastGroupRequest = Shapes::StructureShape.new(name: 'DeleteMulticastGroupRequest')
+    DeleteMulticastGroupResponse = Shapes::StructureShape.new(name: 'DeleteMulticastGroupResponse')
     DeleteServiceProfileRequest = Shapes::StructureShape.new(name: 'DeleteServiceProfileRequest')
     DeleteServiceProfileResponse = Shapes::StructureShape.new(name: 'DeleteServiceProfileResponse')
     DeleteWirelessDeviceRequest = Shapes::StructureShape.new(name: 'DeleteWirelessDeviceRequest')
@@ -86,9 +103,16 @@ module Aws::IoTWireless
     DeviceProfileId = Shapes::StringShape.new(name: 'DeviceProfileId')
     DeviceProfileList = Shapes::ListShape.new(name: 'DeviceProfileList')
     DeviceProfileName = Shapes::StringShape.new(name: 'DeviceProfileName')
+    DeviceRegistrationStateEventConfiguration = Shapes::StructureShape.new(name: 'DeviceRegistrationStateEventConfiguration')
     DeviceState = Shapes::StringShape.new(name: 'DeviceState')
     DisassociateAwsAccountFromPartnerAccountRequest = Shapes::StructureShape.new(name: 'DisassociateAwsAccountFromPartnerAccountRequest')
     DisassociateAwsAccountFromPartnerAccountResponse = Shapes::StructureShape.new(name: 'DisassociateAwsAccountFromPartnerAccountResponse')
+    DisassociateMulticastGroupFromFuotaTaskRequest = Shapes::StructureShape.new(name: 'DisassociateMulticastGroupFromFuotaTaskRequest')
+    DisassociateMulticastGroupFromFuotaTaskResponse = Shapes::StructureShape.new(name: 'DisassociateMulticastGroupFromFuotaTaskResponse')
+    DisassociateWirelessDeviceFromFuotaTaskRequest = Shapes::StructureShape.new(name: 'DisassociateWirelessDeviceFromFuotaTaskRequest')
+    DisassociateWirelessDeviceFromFuotaTaskResponse = Shapes::StructureShape.new(name: 'DisassociateWirelessDeviceFromFuotaTaskResponse')
+    DisassociateWirelessDeviceFromMulticastGroupRequest = Shapes::StructureShape.new(name: 'DisassociateWirelessDeviceFromMulticastGroupRequest')
+    DisassociateWirelessDeviceFromMulticastGroupResponse = Shapes::StructureShape.new(name: 'DisassociateWirelessDeviceFromMulticastGroupResponse')
     DisassociateWirelessDeviceFromThingRequest = Shapes::StructureShape.new(name: 'DisassociateWirelessDeviceFromThingRequest')
     DisassociateWirelessDeviceFromThingResponse = Shapes::StructureShape.new(name: 'DisassociateWirelessDeviceFromThingResponse')
     DisassociateWirelessGatewayFromCertificateRequest = Shapes::StructureShape.new(name: 'DisassociateWirelessGatewayFromCertificateRequest')
@@ -96,6 +120,9 @@ module Aws::IoTWireless
     DisassociateWirelessGatewayFromThingRequest = Shapes::StructureShape.new(name: 'DisassociateWirelessGatewayFromThingRequest')
     DisassociateWirelessGatewayFromThingResponse = Shapes::StructureShape.new(name: 'DisassociateWirelessGatewayFromThingResponse')
     DlBucketSize = Shapes::IntegerShape.new(name: 'DlBucketSize')
+    DlClass = Shapes::StringShape.new(name: 'DlClass')
+    DlDr = Shapes::IntegerShape.new(name: 'DlDr')
+    DlFreq = Shapes::IntegerShape.new(name: 'DlFreq')
     DlRate = Shapes::IntegerShape.new(name: 'DlRate')
     DlRatePolicy = Shapes::StringShape.new(name: 'DlRatePolicy')
     Double = Shapes::FloatShape.new(name: 'Double')
@@ -103,21 +130,42 @@ module Aws::IoTWireless
     DrMin = Shapes::IntegerShape.new(name: 'DrMin')
     EndPoint = Shapes::StringShape.new(name: 'EndPoint')
     Event = Shapes::StringShape.new(name: 'Event')
+    EventNotificationPartnerType = Shapes::StringShape.new(name: 'EventNotificationPartnerType')
+    EventNotificationTopicStatus = Shapes::StringShape.new(name: 'EventNotificationTopicStatus')
     Expression = Shapes::StringShape.new(name: 'Expression')
     ExpressionType = Shapes::StringShape.new(name: 'ExpressionType')
     FNwkSIntKey = Shapes::StringShape.new(name: 'FNwkSIntKey')
     FPort = Shapes::IntegerShape.new(name: 'FPort')
+    FPorts = Shapes::StructureShape.new(name: 'FPorts')
     FactoryPresetFreqsList = Shapes::ListShape.new(name: 'FactoryPresetFreqsList')
     Fingerprint = Shapes::StringShape.new(name: 'Fingerprint')
+    FirmwareUpdateImage = Shapes::StringShape.new(name: 'FirmwareUpdateImage')
+    FirmwareUpdateRole = Shapes::StringShape.new(name: 'FirmwareUpdateRole')
+    FuotaDeviceStatus = Shapes::StringShape.new(name: 'FuotaDeviceStatus')
+    FuotaTask = Shapes::StructureShape.new(name: 'FuotaTask')
+    FuotaTaskArn = Shapes::StringShape.new(name: 'FuotaTaskArn')
+    FuotaTaskId = Shapes::StringShape.new(name: 'FuotaTaskId')
+    FuotaTaskList = Shapes::ListShape.new(name: 'FuotaTaskList')
+    FuotaTaskName = Shapes::StringShape.new(name: 'FuotaTaskName')
+    FuotaTaskStatus = Shapes::StringShape.new(name: 'FuotaTaskStatus')
     GatewayEui = Shapes::StringShape.new(name: 'GatewayEui')
+    GenAppKey = Shapes::StringShape.new(name: 'GenAppKey')
     GetDestinationRequest = Shapes::StructureShape.new(name: 'GetDestinationRequest')
     GetDestinationResponse = Shapes::StructureShape.new(name: 'GetDestinationResponse')
     GetDeviceProfileRequest = Shapes::StructureShape.new(name: 'GetDeviceProfileRequest')
     GetDeviceProfileResponse = Shapes::StructureShape.new(name: 'GetDeviceProfileResponse')
+    GetFuotaTaskRequest = Shapes::StructureShape.new(name: 'GetFuotaTaskRequest')
+    GetFuotaTaskResponse = Shapes::StructureShape.new(name: 'GetFuotaTaskResponse')
     GetLogLevelsByResourceTypesRequest = Shapes::StructureShape.new(name: 'GetLogLevelsByResourceTypesRequest')
     GetLogLevelsByResourceTypesResponse = Shapes::StructureShape.new(name: 'GetLogLevelsByResourceTypesResponse')
+    GetMulticastGroupRequest = Shapes::StructureShape.new(name: 'GetMulticastGroupRequest')
+    GetMulticastGroupResponse = Shapes::StructureShape.new(name: 'GetMulticastGroupResponse')
+    GetMulticastGroupSessionRequest = Shapes::StructureShape.new(name: 'GetMulticastGroupSessionRequest')
+    GetMulticastGroupSessionResponse = Shapes::StructureShape.new(name: 'GetMulticastGroupSessionResponse')
     GetPartnerAccountRequest = Shapes::StructureShape.new(name: 'GetPartnerAccountRequest')
     GetPartnerAccountResponse = Shapes::StructureShape.new(name: 'GetPartnerAccountResponse')
+    GetResourceEventConfigurationRequest = Shapes::StructureShape.new(name: 'GetResourceEventConfigurationRequest')
+    GetResourceEventConfigurationResponse = Shapes::StructureShape.new(name: 'GetResourceEventConfigurationResponse')
     GetResourceLogLevelRequest = Shapes::StructureShape.new(name: 'GetResourceLogLevelRequest')
     GetResourceLogLevelResponse = Shapes::StructureShape.new(name: 'GetResourceLogLevelResponse')
     GetServiceEndpointRequest = Shapes::StructureShape.new(name: 'GetServiceEndpointRequest')
@@ -143,6 +191,7 @@ module Aws::IoTWireless
     HrAllowed = Shapes::BooleanShape.new(name: 'HrAllowed')
     ISODateTimeString = Shapes::StringShape.new(name: 'ISODateTimeString')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
+    IdentifierType = Shapes::StringShape.new(name: 'IdentifierType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IotCertificateId = Shapes::StringShape.new(name: 'IotCertificateId')
@@ -153,6 +202,12 @@ module Aws::IoTWireless
     ListDestinationsResponse = Shapes::StructureShape.new(name: 'ListDestinationsResponse')
     ListDeviceProfilesRequest = Shapes::StructureShape.new(name: 'ListDeviceProfilesRequest')
     ListDeviceProfilesResponse = Shapes::StructureShape.new(name: 'ListDeviceProfilesResponse')
+    ListFuotaTasksRequest = Shapes::StructureShape.new(name: 'ListFuotaTasksRequest')
+    ListFuotaTasksResponse = Shapes::StructureShape.new(name: 'ListFuotaTasksResponse')
+    ListMulticastGroupsByFuotaTaskRequest = Shapes::StructureShape.new(name: 'ListMulticastGroupsByFuotaTaskRequest')
+    ListMulticastGroupsByFuotaTaskResponse = Shapes::StructureShape.new(name: 'ListMulticastGroupsByFuotaTaskResponse')
+    ListMulticastGroupsRequest = Shapes::StructureShape.new(name: 'ListMulticastGroupsRequest')
+    ListMulticastGroupsResponse = Shapes::StructureShape.new(name: 'ListMulticastGroupsResponse')
     ListPartnerAccountsRequest = Shapes::StructureShape.new(name: 'ListPartnerAccountsRequest')
     ListPartnerAccountsResponse = Shapes::StructureShape.new(name: 'ListPartnerAccountsResponse')
     ListServiceProfilesRequest = Shapes::StructureShape.new(name: 'ListServiceProfilesRequest')
@@ -168,6 +223,8 @@ module Aws::IoTWireless
     LoRaWANDevice = Shapes::StructureShape.new(name: 'LoRaWANDevice')
     LoRaWANDeviceMetadata = Shapes::StructureShape.new(name: 'LoRaWANDeviceMetadata')
     LoRaWANDeviceProfile = Shapes::StructureShape.new(name: 'LoRaWANDeviceProfile')
+    LoRaWANFuotaTask = Shapes::StructureShape.new(name: 'LoRaWANFuotaTask')
+    LoRaWANFuotaTaskGetInfo = Shapes::StructureShape.new(name: 'LoRaWANFuotaTaskGetInfo')
     LoRaWANGateway = Shapes::StructureShape.new(name: 'LoRaWANGateway')
     LoRaWANGatewayCurrentVersion = Shapes::StructureShape.new(name: 'LoRaWANGatewayCurrentVersion')
     LoRaWANGatewayMetadata = Shapes::StructureShape.new(name: 'LoRaWANGatewayMetadata')
@@ -175,8 +232,13 @@ module Aws::IoTWireless
     LoRaWANGatewayVersion = Shapes::StructureShape.new(name: 'LoRaWANGatewayVersion')
     LoRaWANGetServiceProfileInfo = Shapes::StructureShape.new(name: 'LoRaWANGetServiceProfileInfo')
     LoRaWANListDevice = Shapes::StructureShape.new(name: 'LoRaWANListDevice')
+    LoRaWANMulticast = Shapes::StructureShape.new(name: 'LoRaWANMulticast')
+    LoRaWANMulticastGet = Shapes::StructureShape.new(name: 'LoRaWANMulticastGet')
+    LoRaWANMulticastMetadata = Shapes::StructureShape.new(name: 'LoRaWANMulticastMetadata')
+    LoRaWANMulticastSession = Shapes::StructureShape.new(name: 'LoRaWANMulticastSession')
     LoRaWANSendDataToDevice = Shapes::StructureShape.new(name: 'LoRaWANSendDataToDevice')
     LoRaWANServiceProfile = Shapes::StructureShape.new(name: 'LoRaWANServiceProfile')
+    LoRaWANStartFuotaTask = Shapes::StructureShape.new(name: 'LoRaWANStartFuotaTask')
     LoRaWANUpdateDevice = Shapes::StructureShape.new(name: 'LoRaWANUpdateDevice')
     LoRaWANUpdateGatewayTaskCreate = Shapes::StructureShape.new(name: 'LoRaWANUpdateGatewayTaskCreate')
     LoRaWANUpdateGatewayTaskEntry = Shapes::StructureShape.new(name: 'LoRaWANUpdateGatewayTaskEntry')
@@ -185,14 +247,28 @@ module Aws::IoTWireless
     MaxDutyCycle = Shapes::IntegerShape.new(name: 'MaxDutyCycle')
     MaxEirp = Shapes::IntegerShape.new(name: 'MaxEirp')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    McGroupId = Shapes::IntegerShape.new(name: 'McGroupId')
     Message = Shapes::StringShape.new(name: 'Message')
     MessageId = Shapes::StringShape.new(name: 'MessageId')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     MinGwDiversity = Shapes::IntegerShape.new(name: 'MinGwDiversity')
     Model = Shapes::StringShape.new(name: 'Model')
+    MulticastDeviceStatus = Shapes::StringShape.new(name: 'MulticastDeviceStatus')
+    MulticastGroup = Shapes::StructureShape.new(name: 'MulticastGroup')
+    MulticastGroupArn = Shapes::StringShape.new(name: 'MulticastGroupArn')
+    MulticastGroupByFuotaTask = Shapes::StructureShape.new(name: 'MulticastGroupByFuotaTask')
+    MulticastGroupId = Shapes::StringShape.new(name: 'MulticastGroupId')
+    MulticastGroupList = Shapes::ListShape.new(name: 'MulticastGroupList')
+    MulticastGroupListByFuotaTask = Shapes::ListShape.new(name: 'MulticastGroupListByFuotaTask')
+    MulticastGroupMessageId = Shapes::StringShape.new(name: 'MulticastGroupMessageId')
+    MulticastGroupName = Shapes::StringShape.new(name: 'MulticastGroupName')
+    MulticastGroupStatus = Shapes::StringShape.new(name: 'MulticastGroupStatus')
+    MulticastWirelessMetadata = Shapes::StructureShape.new(name: 'MulticastWirelessMetadata')
     NetId = Shapes::StringShape.new(name: 'NetId')
     NetIdFilters = Shapes::ListShape.new(name: 'NetIdFilters')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NumberOfDevicesInGroup = Shapes::IntegerShape.new(name: 'NumberOfDevicesInGroup')
+    NumberOfDevicesRequested = Shapes::IntegerShape.new(name: 'NumberOfDevicesRequested')
     NwkGeoLoc = Shapes::BooleanShape.new(name: 'NwkGeoLoc')
     NwkKey = Shapes::StringShape.new(name: 'NwkKey')
     NwkSEncKey = Shapes::StringShape.new(name: 'NwkSEncKey')
@@ -209,8 +285,10 @@ module Aws::IoTWireless
     PingSlotPeriod = Shapes::IntegerShape.new(name: 'PingSlotPeriod')
     PrAllowed = Shapes::BooleanShape.new(name: 'PrAllowed')
     PresetFreq = Shapes::IntegerShape.new(name: 'PresetFreq')
+    ProximityEventConfiguration = Shapes::StructureShape.new(name: 'ProximityEventConfiguration')
     PutResourceLogLevelRequest = Shapes::StructureShape.new(name: 'PutResourceLogLevelRequest')
     PutResourceLogLevelResponse = Shapes::StructureShape.new(name: 'PutResourceLogLevelResponse')
+    QueryString = Shapes::StringShape.new(name: 'QueryString')
     RaAllowed = Shapes::BooleanShape.new(name: 'RaAllowed')
     RegParamsRevision = Shapes::StringShape.new(name: 'RegParamsRevision')
     ReportDevStatusBattery = Shapes::BooleanShape.new(name: 'ReportDevStatusBattery')
@@ -231,6 +309,8 @@ module Aws::IoTWireless
     RxDrOffset1 = Shapes::IntegerShape.new(name: 'RxDrOffset1')
     RxFreq2 = Shapes::IntegerShape.new(name: 'RxFreq2')
     SNwkSIntKey = Shapes::StringShape.new(name: 'SNwkSIntKey')
+    SendDataToMulticastGroupRequest = Shapes::StructureShape.new(name: 'SendDataToMulticastGroupRequest')
+    SendDataToMulticastGroupResponse = Shapes::StructureShape.new(name: 'SendDataToMulticastGroupResponse')
     SendDataToWirelessDeviceRequest = Shapes::StructureShape.new(name: 'SendDataToWirelessDeviceRequest')
     SendDataToWirelessDeviceResponse = Shapes::StructureShape.new(name: 'SendDataToWirelessDeviceResponse')
     Seq = Shapes::IntegerShape.new(name: 'Seq')
@@ -241,20 +321,33 @@ module Aws::IoTWireless
     ServiceProfileName = Shapes::StringShape.new(name: 'ServiceProfileName')
     SessionKeysAbpV1_0_x = Shapes::StructureShape.new(name: 'SessionKeysAbpV1_0_x')
     SessionKeysAbpV1_1 = Shapes::StructureShape.new(name: 'SessionKeysAbpV1_1')
+    SessionStartTimeTimestamp = Shapes::TimestampShape.new(name: 'SessionStartTimeTimestamp', timestampFormat: "iso8601")
+    SessionTimeout = Shapes::IntegerShape.new(name: 'SessionTimeout')
     SidewalkAccountInfo = Shapes::StructureShape.new(name: 'SidewalkAccountInfo')
     SidewalkAccountInfoWithFingerprint = Shapes::StructureShape.new(name: 'SidewalkAccountInfoWithFingerprint')
     SidewalkAccountList = Shapes::ListShape.new(name: 'SidewalkAccountList')
     SidewalkDevice = Shapes::StructureShape.new(name: 'SidewalkDevice')
     SidewalkDeviceMetadata = Shapes::StructureShape.new(name: 'SidewalkDeviceMetadata')
+    SidewalkEventNotificationConfigurations = Shapes::StructureShape.new(name: 'SidewalkEventNotificationConfigurations')
     SidewalkId = Shapes::StringShape.new(name: 'SidewalkId')
     SidewalkListDevice = Shapes::StructureShape.new(name: 'SidewalkListDevice')
     SidewalkManufacturingSn = Shapes::StringShape.new(name: 'SidewalkManufacturingSn')
     SidewalkSendDataToDevice = Shapes::StructureShape.new(name: 'SidewalkSendDataToDevice')
     SidewalkUpdateAccount = Shapes::StructureShape.new(name: 'SidewalkUpdateAccount')
     SigningAlg = Shapes::StringShape.new(name: 'SigningAlg')
+    StartBulkAssociateWirelessDeviceWithMulticastGroupRequest = Shapes::StructureShape.new(name: 'StartBulkAssociateWirelessDeviceWithMulticastGroupRequest')
+    StartBulkAssociateWirelessDeviceWithMulticastGroupResponse = Shapes::StructureShape.new(name: 'StartBulkAssociateWirelessDeviceWithMulticastGroupResponse')
+    StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest = Shapes::StructureShape.new(name: 'StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest')
+    StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse = Shapes::StructureShape.new(name: 'StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse')
+    StartFuotaTaskRequest = Shapes::StructureShape.new(name: 'StartFuotaTaskRequest')
+    StartFuotaTaskResponse = Shapes::StructureShape.new(name: 'StartFuotaTaskResponse')
+    StartMulticastGroupSessionRequest = Shapes::StructureShape.new(name: 'StartMulticastGroupSessionRequest')
+    StartMulticastGroupSessionResponse = Shapes::StructureShape.new(name: 'StartMulticastGroupSessionResponse')
+    StartTime = Shapes::TimestampShape.new(name: 'StartTime', timestampFormat: "iso8601")
     Station = Shapes::StringShape.new(name: 'Station')
     SubBand = Shapes::IntegerShape.new(name: 'SubBand')
     SubBands = Shapes::ListShape.new(name: 'SubBands')
+    SupportedRfRegion = Shapes::StringShape.new(name: 'SupportedRfRegion')
     Supports32BitFCnt = Shapes::BooleanShape.new(name: 'Supports32BitFCnt')
     SupportsClassB = Shapes::BooleanShape.new(name: 'SupportsClassB')
     SupportsClassC = Shapes::BooleanShape.new(name: 'SupportsClassC')
@@ -282,10 +375,16 @@ module Aws::IoTWireless
     UpdateDataSource = Shapes::StringShape.new(name: 'UpdateDataSource')
     UpdateDestinationRequest = Shapes::StructureShape.new(name: 'UpdateDestinationRequest')
     UpdateDestinationResponse = Shapes::StructureShape.new(name: 'UpdateDestinationResponse')
+    UpdateFuotaTaskRequest = Shapes::StructureShape.new(name: 'UpdateFuotaTaskRequest')
+    UpdateFuotaTaskResponse = Shapes::StructureShape.new(name: 'UpdateFuotaTaskResponse')
     UpdateLogLevelsByResourceTypesRequest = Shapes::StructureShape.new(name: 'UpdateLogLevelsByResourceTypesRequest')
     UpdateLogLevelsByResourceTypesResponse = Shapes::StructureShape.new(name: 'UpdateLogLevelsByResourceTypesResponse')
+    UpdateMulticastGroupRequest = Shapes::StructureShape.new(name: 'UpdateMulticastGroupRequest')
+    UpdateMulticastGroupResponse = Shapes::StructureShape.new(name: 'UpdateMulticastGroupResponse')
     UpdatePartnerAccountRequest = Shapes::StructureShape.new(name: 'UpdatePartnerAccountRequest')
     UpdatePartnerAccountResponse = Shapes::StructureShape.new(name: 'UpdatePartnerAccountResponse')
+    UpdateResourceEventConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateResourceEventConfigurationRequest')
+    UpdateResourceEventConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateResourceEventConfigurationResponse')
     UpdateSignature = Shapes::StringShape.new(name: 'UpdateSignature')
     UpdateWirelessDeviceRequest = Shapes::StructureShape.new(name: 'UpdateWirelessDeviceRequest')
     UpdateWirelessDeviceResponse = Shapes::StructureShape.new(name: 'UpdateWirelessDeviceResponse')
@@ -347,6 +446,24 @@ module Aws::IoTWireless
     AssociateAwsAccountWithPartnerAccountResponse.add_member(:arn, Shapes::ShapeRef.new(shape: PartnerAccountArn, location_name: "Arn"))
     AssociateAwsAccountWithPartnerAccountResponse.struct_class = Types::AssociateAwsAccountWithPartnerAccountResponse
 
+    AssociateMulticastGroupWithFuotaTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, required: true, location: "uri", location_name: "Id"))
+    AssociateMulticastGroupWithFuotaTaskRequest.add_member(:multicast_group_id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location_name: "MulticastGroupId"))
+    AssociateMulticastGroupWithFuotaTaskRequest.struct_class = Types::AssociateMulticastGroupWithFuotaTaskRequest
+
+    AssociateMulticastGroupWithFuotaTaskResponse.struct_class = Types::AssociateMulticastGroupWithFuotaTaskResponse
+
+    AssociateWirelessDeviceWithFuotaTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, required: true, location: "uri", location_name: "Id"))
+    AssociateWirelessDeviceWithFuotaTaskRequest.add_member(:wireless_device_id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location_name: "WirelessDeviceId"))
+    AssociateWirelessDeviceWithFuotaTaskRequest.struct_class = Types::AssociateWirelessDeviceWithFuotaTaskRequest
+
+    AssociateWirelessDeviceWithFuotaTaskResponse.struct_class = Types::AssociateWirelessDeviceWithFuotaTaskResponse
+
+    AssociateWirelessDeviceWithMulticastGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
+    AssociateWirelessDeviceWithMulticastGroupRequest.add_member(:wireless_device_id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location_name: "WirelessDeviceId"))
+    AssociateWirelessDeviceWithMulticastGroupRequest.struct_class = Types::AssociateWirelessDeviceWithMulticastGroupRequest
+
+    AssociateWirelessDeviceWithMulticastGroupResponse.struct_class = Types::AssociateWirelessDeviceWithMulticastGroupResponse
+
     AssociateWirelessDeviceWithThingRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "Id"))
     AssociateWirelessDeviceWithThingRequest.add_member(:thing_arn, Shapes::ShapeRef.new(shape: ThingArn, required: true, location_name: "ThingArn"))
     AssociateWirelessDeviceWithThingRequest.struct_class = Types::AssociateWirelessDeviceWithThingRequest
@@ -365,6 +482,11 @@ module Aws::IoTWireless
     AssociateWirelessGatewayWithThingRequest.struct_class = Types::AssociateWirelessGatewayWithThingRequest
 
     AssociateWirelessGatewayWithThingResponse.struct_class = Types::AssociateWirelessGatewayWithThingResponse
+
+    CancelMulticastGroupSessionRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
+    CancelMulticastGroupSessionRequest.struct_class = Types::CancelMulticastGroupSessionRequest
+
+    CancelMulticastGroupSessionResponse.struct_class = Types::CancelMulticastGroupSessionResponse
 
     CertificateList.add_member(:signing_alg, Shapes::ShapeRef.new(shape: SigningAlg, required: true, location_name: "SigningAlg"))
     CertificateList.add_member(:value, Shapes::ShapeRef.new(shape: CertificateValue, required: true, location_name: "Value"))
@@ -397,6 +519,30 @@ module Aws::IoTWireless
     CreateDeviceProfileResponse.add_member(:arn, Shapes::ShapeRef.new(shape: DeviceProfileArn, location_name: "Arn"))
     CreateDeviceProfileResponse.add_member(:id, Shapes::ShapeRef.new(shape: DeviceProfileId, location_name: "Id"))
     CreateDeviceProfileResponse.struct_class = Types::CreateDeviceProfileResponse
+
+    CreateFuotaTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: FuotaTaskName, location_name: "Name"))
+    CreateFuotaTaskRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateFuotaTaskRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateFuotaTaskRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANFuotaTask, location_name: "LoRaWAN"))
+    CreateFuotaTaskRequest.add_member(:firmware_update_image, Shapes::ShapeRef.new(shape: FirmwareUpdateImage, required: true, location_name: "FirmwareUpdateImage"))
+    CreateFuotaTaskRequest.add_member(:firmware_update_role, Shapes::ShapeRef.new(shape: FirmwareUpdateRole, required: true, location_name: "FirmwareUpdateRole"))
+    CreateFuotaTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateFuotaTaskRequest.struct_class = Types::CreateFuotaTaskRequest
+
+    CreateFuotaTaskResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FuotaTaskArn, location_name: "Arn"))
+    CreateFuotaTaskResponse.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, location_name: "Id"))
+    CreateFuotaTaskResponse.struct_class = Types::CreateFuotaTaskResponse
+
+    CreateMulticastGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: MulticastGroupName, location_name: "Name"))
+    CreateMulticastGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateMulticastGroupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMulticastGroupRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANMulticast, required: true, location_name: "LoRaWAN"))
+    CreateMulticastGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateMulticastGroupRequest.struct_class = Types::CreateMulticastGroupRequest
+
+    CreateMulticastGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: MulticastGroupArn, location_name: "Arn"))
+    CreateMulticastGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, location_name: "Id"))
+    CreateMulticastGroupResponse.struct_class = Types::CreateMulticastGroupResponse
 
     CreateServiceProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: ServiceProfileName, location_name: "Name"))
     CreateServiceProfileRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANServiceProfile, location_name: "LoRaWAN"))
@@ -461,6 +607,16 @@ module Aws::IoTWireless
 
     DeleteDeviceProfileResponse.struct_class = Types::DeleteDeviceProfileResponse
 
+    DeleteFuotaTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, required: true, location: "uri", location_name: "Id"))
+    DeleteFuotaTaskRequest.struct_class = Types::DeleteFuotaTaskRequest
+
+    DeleteFuotaTaskResponse.struct_class = Types::DeleteFuotaTaskResponse
+
+    DeleteMulticastGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
+    DeleteMulticastGroupRequest.struct_class = Types::DeleteMulticastGroupRequest
+
+    DeleteMulticastGroupResponse.struct_class = Types::DeleteMulticastGroupResponse
+
     DeleteServiceProfileRequest.add_member(:id, Shapes::ShapeRef.new(shape: ServiceProfileId, required: true, location: "uri", location_name: "Id"))
     DeleteServiceProfileRequest.struct_class = Types::DeleteServiceProfileRequest
 
@@ -505,11 +661,32 @@ module Aws::IoTWireless
 
     DeviceProfileList.member = Shapes::ShapeRef.new(shape: DeviceProfile)
 
+    DeviceRegistrationStateEventConfiguration.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkEventNotificationConfigurations, location_name: "Sidewalk"))
+    DeviceRegistrationStateEventConfiguration.struct_class = Types::DeviceRegistrationStateEventConfiguration
+
     DisassociateAwsAccountFromPartnerAccountRequest.add_member(:partner_account_id, Shapes::ShapeRef.new(shape: PartnerAccountId, required: true, location: "uri", location_name: "PartnerAccountId"))
     DisassociateAwsAccountFromPartnerAccountRequest.add_member(:partner_type, Shapes::ShapeRef.new(shape: PartnerType, required: true, location: "querystring", location_name: "partnerType"))
     DisassociateAwsAccountFromPartnerAccountRequest.struct_class = Types::DisassociateAwsAccountFromPartnerAccountRequest
 
     DisassociateAwsAccountFromPartnerAccountResponse.struct_class = Types::DisassociateAwsAccountFromPartnerAccountResponse
+
+    DisassociateMulticastGroupFromFuotaTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, required: true, location: "uri", location_name: "Id"))
+    DisassociateMulticastGroupFromFuotaTaskRequest.add_member(:multicast_group_id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "MulticastGroupId"))
+    DisassociateMulticastGroupFromFuotaTaskRequest.struct_class = Types::DisassociateMulticastGroupFromFuotaTaskRequest
+
+    DisassociateMulticastGroupFromFuotaTaskResponse.struct_class = Types::DisassociateMulticastGroupFromFuotaTaskResponse
+
+    DisassociateWirelessDeviceFromFuotaTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, required: true, location: "uri", location_name: "Id"))
+    DisassociateWirelessDeviceFromFuotaTaskRequest.add_member(:wireless_device_id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "WirelessDeviceId"))
+    DisassociateWirelessDeviceFromFuotaTaskRequest.struct_class = Types::DisassociateWirelessDeviceFromFuotaTaskRequest
+
+    DisassociateWirelessDeviceFromFuotaTaskResponse.struct_class = Types::DisassociateWirelessDeviceFromFuotaTaskResponse
+
+    DisassociateWirelessDeviceFromMulticastGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
+    DisassociateWirelessDeviceFromMulticastGroupRequest.add_member(:wireless_device_id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "WirelessDeviceId"))
+    DisassociateWirelessDeviceFromMulticastGroupRequest.struct_class = Types::DisassociateWirelessDeviceFromMulticastGroupRequest
+
+    DisassociateWirelessDeviceFromMulticastGroupResponse.struct_class = Types::DisassociateWirelessDeviceFromMulticastGroupResponse
 
     DisassociateWirelessDeviceFromThingRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "Id"))
     DisassociateWirelessDeviceFromThingRequest.struct_class = Types::DisassociateWirelessDeviceFromThingRequest
@@ -526,7 +703,19 @@ module Aws::IoTWireless
 
     DisassociateWirelessGatewayFromThingResponse.struct_class = Types::DisassociateWirelessGatewayFromThingResponse
 
+    FPorts.add_member(:fuota, Shapes::ShapeRef.new(shape: FPort, location_name: "Fuota"))
+    FPorts.add_member(:multicast, Shapes::ShapeRef.new(shape: FPort, location_name: "Multicast"))
+    FPorts.add_member(:clock_sync, Shapes::ShapeRef.new(shape: FPort, location_name: "ClockSync"))
+    FPorts.struct_class = Types::FPorts
+
     FactoryPresetFreqsList.member = Shapes::ShapeRef.new(shape: PresetFreq)
+
+    FuotaTask.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, location_name: "Id"))
+    FuotaTask.add_member(:arn, Shapes::ShapeRef.new(shape: FuotaTaskArn, location_name: "Arn"))
+    FuotaTask.add_member(:name, Shapes::ShapeRef.new(shape: FuotaTaskName, location_name: "Name"))
+    FuotaTask.struct_class = Types::FuotaTask
+
+    FuotaTaskList.member = Shapes::ShapeRef.new(shape: FuotaTask)
 
     GetDestinationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location: "uri", location_name: "Name"))
     GetDestinationRequest.struct_class = Types::GetDestinationRequest
@@ -548,12 +737,44 @@ module Aws::IoTWireless
     GetDeviceProfileResponse.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANDeviceProfile, location_name: "LoRaWAN"))
     GetDeviceProfileResponse.struct_class = Types::GetDeviceProfileResponse
 
+    GetFuotaTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, required: true, location: "uri", location_name: "Id"))
+    GetFuotaTaskRequest.struct_class = Types::GetFuotaTaskRequest
+
+    GetFuotaTaskResponse.add_member(:arn, Shapes::ShapeRef.new(shape: FuotaTaskArn, location_name: "Arn"))
+    GetFuotaTaskResponse.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, location_name: "Id"))
+    GetFuotaTaskResponse.add_member(:status, Shapes::ShapeRef.new(shape: FuotaTaskStatus, location_name: "Status"))
+    GetFuotaTaskResponse.add_member(:name, Shapes::ShapeRef.new(shape: FuotaTaskName, location_name: "Name"))
+    GetFuotaTaskResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    GetFuotaTaskResponse.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANFuotaTaskGetInfo, location_name: "LoRaWAN"))
+    GetFuotaTaskResponse.add_member(:firmware_update_image, Shapes::ShapeRef.new(shape: FirmwareUpdateImage, location_name: "FirmwareUpdateImage"))
+    GetFuotaTaskResponse.add_member(:firmware_update_role, Shapes::ShapeRef.new(shape: FirmwareUpdateRole, location_name: "FirmwareUpdateRole"))
+    GetFuotaTaskResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
+    GetFuotaTaskResponse.struct_class = Types::GetFuotaTaskResponse
+
     GetLogLevelsByResourceTypesRequest.struct_class = Types::GetLogLevelsByResourceTypesRequest
 
     GetLogLevelsByResourceTypesResponse.add_member(:default_log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "DefaultLogLevel"))
     GetLogLevelsByResourceTypesResponse.add_member(:wireless_gateway_log_options, Shapes::ShapeRef.new(shape: WirelessGatewayLogOptionList, location_name: "WirelessGatewayLogOptions"))
     GetLogLevelsByResourceTypesResponse.add_member(:wireless_device_log_options, Shapes::ShapeRef.new(shape: WirelessDeviceLogOptionList, location_name: "WirelessDeviceLogOptions"))
     GetLogLevelsByResourceTypesResponse.struct_class = Types::GetLogLevelsByResourceTypesResponse
+
+    GetMulticastGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
+    GetMulticastGroupRequest.struct_class = Types::GetMulticastGroupRequest
+
+    GetMulticastGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: MulticastGroupArn, location_name: "Arn"))
+    GetMulticastGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, location_name: "Id"))
+    GetMulticastGroupResponse.add_member(:name, Shapes::ShapeRef.new(shape: MulticastGroupName, location_name: "Name"))
+    GetMulticastGroupResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    GetMulticastGroupResponse.add_member(:status, Shapes::ShapeRef.new(shape: MulticastGroupStatus, location_name: "Status"))
+    GetMulticastGroupResponse.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANMulticastGet, location_name: "LoRaWAN"))
+    GetMulticastGroupResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
+    GetMulticastGroupResponse.struct_class = Types::GetMulticastGroupResponse
+
+    GetMulticastGroupSessionRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
+    GetMulticastGroupSessionRequest.struct_class = Types::GetMulticastGroupSessionRequest
+
+    GetMulticastGroupSessionResponse.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANMulticastSession, location_name: "LoRaWAN"))
+    GetMulticastGroupSessionResponse.struct_class = Types::GetMulticastGroupSessionResponse
 
     GetPartnerAccountRequest.add_member(:partner_account_id, Shapes::ShapeRef.new(shape: PartnerAccountId, required: true, location: "uri", location_name: "PartnerAccountId"))
     GetPartnerAccountRequest.add_member(:partner_type, Shapes::ShapeRef.new(shape: PartnerType, required: true, location: "querystring", location_name: "partnerType"))
@@ -562,6 +783,15 @@ module Aws::IoTWireless
     GetPartnerAccountResponse.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkAccountInfoWithFingerprint, location_name: "Sidewalk"))
     GetPartnerAccountResponse.add_member(:account_linked, Shapes::ShapeRef.new(shape: AccountLinked, location_name: "AccountLinked"))
     GetPartnerAccountResponse.struct_class = Types::GetPartnerAccountResponse
+
+    GetResourceEventConfigurationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
+    GetResourceEventConfigurationRequest.add_member(:identifier_type, Shapes::ShapeRef.new(shape: IdentifierType, required: true, location: "querystring", location_name: "identifierType"))
+    GetResourceEventConfigurationRequest.add_member(:partner_type, Shapes::ShapeRef.new(shape: EventNotificationPartnerType, location: "querystring", location_name: "partnerType"))
+    GetResourceEventConfigurationRequest.struct_class = Types::GetResourceEventConfigurationRequest
+
+    GetResourceEventConfigurationResponse.add_member(:device_registration_state, Shapes::ShapeRef.new(shape: DeviceRegistrationStateEventConfiguration, location_name: "DeviceRegistrationState"))
+    GetResourceEventConfigurationResponse.add_member(:proximity, Shapes::ShapeRef.new(shape: ProximityEventConfiguration, location_name: "Proximity"))
+    GetResourceEventConfigurationResponse.struct_class = Types::GetResourceEventConfigurationResponse
 
     GetResourceLogLevelRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location: "uri", location_name: "ResourceIdentifier"))
     GetResourceLogLevelRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location: "querystring", location_name: "resourceType"))
@@ -688,6 +918,31 @@ module Aws::IoTWireless
     ListDeviceProfilesResponse.add_member(:device_profile_list, Shapes::ShapeRef.new(shape: DeviceProfileList, location_name: "DeviceProfileList"))
     ListDeviceProfilesResponse.struct_class = Types::ListDeviceProfilesResponse
 
+    ListFuotaTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListFuotaTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListFuotaTasksRequest.struct_class = Types::ListFuotaTasksRequest
+
+    ListFuotaTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFuotaTasksResponse.add_member(:fuota_task_list, Shapes::ShapeRef.new(shape: FuotaTaskList, location_name: "FuotaTaskList"))
+    ListFuotaTasksResponse.struct_class = Types::ListFuotaTasksResponse
+
+    ListMulticastGroupsByFuotaTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, required: true, location: "uri", location_name: "Id"))
+    ListMulticastGroupsByFuotaTaskRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListMulticastGroupsByFuotaTaskRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListMulticastGroupsByFuotaTaskRequest.struct_class = Types::ListMulticastGroupsByFuotaTaskRequest
+
+    ListMulticastGroupsByFuotaTaskResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMulticastGroupsByFuotaTaskResponse.add_member(:multicast_group_list, Shapes::ShapeRef.new(shape: MulticastGroupListByFuotaTask, location_name: "MulticastGroupList"))
+    ListMulticastGroupsByFuotaTaskResponse.struct_class = Types::ListMulticastGroupsByFuotaTaskResponse
+
+    ListMulticastGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListMulticastGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListMulticastGroupsRequest.struct_class = Types::ListMulticastGroupsRequest
+
+    ListMulticastGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMulticastGroupsResponse.add_member(:multicast_group_list, Shapes::ShapeRef.new(shape: MulticastGroupList, location_name: "MulticastGroupList"))
+    ListMulticastGroupsResponse.struct_class = Types::ListMulticastGroupsResponse
+
     ListPartnerAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListPartnerAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListPartnerAccountsRequest.struct_class = Types::ListPartnerAccountsRequest
@@ -716,6 +971,8 @@ module Aws::IoTWireless
     ListWirelessDevicesRequest.add_member(:device_profile_id, Shapes::ShapeRef.new(shape: DeviceProfileId, location: "querystring", location_name: "deviceProfileId"))
     ListWirelessDevicesRequest.add_member(:service_profile_id, Shapes::ShapeRef.new(shape: ServiceProfileId, location: "querystring", location_name: "serviceProfileId"))
     ListWirelessDevicesRequest.add_member(:wireless_device_type, Shapes::ShapeRef.new(shape: WirelessDeviceType, location: "querystring", location_name: "wirelessDeviceType"))
+    ListWirelessDevicesRequest.add_member(:fuota_task_id, Shapes::ShapeRef.new(shape: FuotaTaskId, location: "querystring", location_name: "fuotaTaskId"))
+    ListWirelessDevicesRequest.add_member(:multicast_group_id, Shapes::ShapeRef.new(shape: MulticastGroupId, location: "querystring", location_name: "multicastGroupId"))
     ListWirelessDevicesRequest.struct_class = Types::ListWirelessDevicesRequest
 
     ListWirelessDevicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -746,6 +1003,7 @@ module Aws::IoTWireless
     LoRaWANDevice.add_member(:otaa_v1_0_x, Shapes::ShapeRef.new(shape: OtaaV1_0_x, location_name: "OtaaV1_0_x"))
     LoRaWANDevice.add_member(:abp_v1_1, Shapes::ShapeRef.new(shape: AbpV1_1, location_name: "AbpV1_1"))
     LoRaWANDevice.add_member(:abp_v1_0_x, Shapes::ShapeRef.new(shape: AbpV1_0_x, location_name: "AbpV1_0_x"))
+    LoRaWANDevice.add_member(:f_ports, Shapes::ShapeRef.new(shape: FPorts, location_name: "FPorts"))
     LoRaWANDevice.struct_class = Types::LoRaWANDevice
 
     LoRaWANDeviceMetadata.add_member(:dev_eui, Shapes::ShapeRef.new(shape: DevEui, location_name: "DevEui"))
@@ -776,6 +1034,13 @@ module Aws::IoTWireless
     LoRaWANDeviceProfile.add_member(:supports_join, Shapes::ShapeRef.new(shape: SupportsJoin, location_name: "SupportsJoin"))
     LoRaWANDeviceProfile.add_member(:supports_32_bit_f_cnt, Shapes::ShapeRef.new(shape: Supports32BitFCnt, location_name: "Supports32BitFCnt"))
     LoRaWANDeviceProfile.struct_class = Types::LoRaWANDeviceProfile
+
+    LoRaWANFuotaTask.add_member(:rf_region, Shapes::ShapeRef.new(shape: SupportedRfRegion, location_name: "RfRegion"))
+    LoRaWANFuotaTask.struct_class = Types::LoRaWANFuotaTask
+
+    LoRaWANFuotaTaskGetInfo.add_member(:rf_region, Shapes::ShapeRef.new(shape: RfRegion, location_name: "RfRegion"))
+    LoRaWANFuotaTaskGetInfo.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "StartTime"))
+    LoRaWANFuotaTaskGetInfo.struct_class = Types::LoRaWANFuotaTaskGetInfo
 
     LoRaWANGateway.add_member(:gateway_eui, Shapes::ShapeRef.new(shape: GatewayEui, location_name: "GatewayEui"))
     LoRaWANGateway.add_member(:rf_region, Shapes::ShapeRef.new(shape: RfRegion, location_name: "RfRegion"))
@@ -823,11 +1088,33 @@ module Aws::IoTWireless
     LoRaWANListDevice.add_member(:dev_eui, Shapes::ShapeRef.new(shape: DevEui, location_name: "DevEui"))
     LoRaWANListDevice.struct_class = Types::LoRaWANListDevice
 
+    LoRaWANMulticast.add_member(:rf_region, Shapes::ShapeRef.new(shape: SupportedRfRegion, location_name: "RfRegion"))
+    LoRaWANMulticast.add_member(:dl_class, Shapes::ShapeRef.new(shape: DlClass, location_name: "DlClass"))
+    LoRaWANMulticast.struct_class = Types::LoRaWANMulticast
+
+    LoRaWANMulticastGet.add_member(:rf_region, Shapes::ShapeRef.new(shape: SupportedRfRegion, location_name: "RfRegion"))
+    LoRaWANMulticastGet.add_member(:dl_class, Shapes::ShapeRef.new(shape: DlClass, location_name: "DlClass"))
+    LoRaWANMulticastGet.add_member(:number_of_devices_requested, Shapes::ShapeRef.new(shape: NumberOfDevicesRequested, location_name: "NumberOfDevicesRequested"))
+    LoRaWANMulticastGet.add_member(:number_of_devices_in_group, Shapes::ShapeRef.new(shape: NumberOfDevicesInGroup, location_name: "NumberOfDevicesInGroup"))
+    LoRaWANMulticastGet.struct_class = Types::LoRaWANMulticastGet
+
+    LoRaWANMulticastMetadata.add_member(:f_port, Shapes::ShapeRef.new(shape: FPort, location_name: "FPort"))
+    LoRaWANMulticastMetadata.struct_class = Types::LoRaWANMulticastMetadata
+
+    LoRaWANMulticastSession.add_member(:dl_dr, Shapes::ShapeRef.new(shape: DlDr, location_name: "DlDr"))
+    LoRaWANMulticastSession.add_member(:dl_freq, Shapes::ShapeRef.new(shape: DlFreq, location_name: "DlFreq"))
+    LoRaWANMulticastSession.add_member(:session_start_time, Shapes::ShapeRef.new(shape: SessionStartTimeTimestamp, location_name: "SessionStartTime"))
+    LoRaWANMulticastSession.add_member(:session_timeout, Shapes::ShapeRef.new(shape: SessionTimeout, location_name: "SessionTimeout"))
+    LoRaWANMulticastSession.struct_class = Types::LoRaWANMulticastSession
+
     LoRaWANSendDataToDevice.add_member(:f_port, Shapes::ShapeRef.new(shape: FPort, location_name: "FPort"))
     LoRaWANSendDataToDevice.struct_class = Types::LoRaWANSendDataToDevice
 
     LoRaWANServiceProfile.add_member(:add_gw_metadata, Shapes::ShapeRef.new(shape: AddGwMetadata, location_name: "AddGwMetadata"))
     LoRaWANServiceProfile.struct_class = Types::LoRaWANServiceProfile
+
+    LoRaWANStartFuotaTask.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "StartTime"))
+    LoRaWANStartFuotaTask.struct_class = Types::LoRaWANStartFuotaTask
 
     LoRaWANUpdateDevice.add_member(:device_profile_id, Shapes::ShapeRef.new(shape: DeviceProfileId, location_name: "DeviceProfileId"))
     LoRaWANUpdateDevice.add_member(:service_profile_id, Shapes::ShapeRef.new(shape: ServiceProfileId, location_name: "ServiceProfileId"))
@@ -843,16 +1130,35 @@ module Aws::IoTWireless
     LoRaWANUpdateGatewayTaskEntry.add_member(:update_version, Shapes::ShapeRef.new(shape: LoRaWANGatewayVersion, location_name: "UpdateVersion"))
     LoRaWANUpdateGatewayTaskEntry.struct_class = Types::LoRaWANUpdateGatewayTaskEntry
 
+    MulticastGroup.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, location_name: "Id"))
+    MulticastGroup.add_member(:arn, Shapes::ShapeRef.new(shape: MulticastGroupArn, location_name: "Arn"))
+    MulticastGroup.add_member(:name, Shapes::ShapeRef.new(shape: MulticastGroupName, location_name: "Name"))
+    MulticastGroup.struct_class = Types::MulticastGroup
+
+    MulticastGroupByFuotaTask.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, location_name: "Id"))
+    MulticastGroupByFuotaTask.struct_class = Types::MulticastGroupByFuotaTask
+
+    MulticastGroupList.member = Shapes::ShapeRef.new(shape: MulticastGroup)
+
+    MulticastGroupListByFuotaTask.member = Shapes::ShapeRef.new(shape: MulticastGroupByFuotaTask)
+
+    MulticastWirelessMetadata.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANMulticastMetadata, location_name: "LoRaWAN"))
+    MulticastWirelessMetadata.struct_class = Types::MulticastWirelessMetadata
+
     NetIdFilters.member = Shapes::ShapeRef.new(shape: NetId)
 
     OtaaV1_0_x.add_member(:app_key, Shapes::ShapeRef.new(shape: AppKey, location_name: "AppKey"))
     OtaaV1_0_x.add_member(:app_eui, Shapes::ShapeRef.new(shape: AppEui, location_name: "AppEui"))
+    OtaaV1_0_x.add_member(:gen_app_key, Shapes::ShapeRef.new(shape: GenAppKey, location_name: "GenAppKey"))
     OtaaV1_0_x.struct_class = Types::OtaaV1_0_x
 
     OtaaV1_1.add_member(:app_key, Shapes::ShapeRef.new(shape: AppKey, location_name: "AppKey"))
     OtaaV1_1.add_member(:nwk_key, Shapes::ShapeRef.new(shape: NwkKey, location_name: "NwkKey"))
     OtaaV1_1.add_member(:join_eui, Shapes::ShapeRef.new(shape: JoinEui, location_name: "JoinEui"))
     OtaaV1_1.struct_class = Types::OtaaV1_1
+
+    ProximityEventConfiguration.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkEventNotificationConfigurations, location_name: "Sidewalk"))
+    ProximityEventConfiguration.struct_class = Types::ProximityEventConfiguration
 
     PutResourceLogLevelRequest.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, required: true, location: "uri", location_name: "ResourceIdentifier"))
     PutResourceLogLevelRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location: "querystring", location_name: "resourceType"))
@@ -875,6 +1181,14 @@ module Aws::IoTWireless
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    SendDataToMulticastGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
+    SendDataToMulticastGroupRequest.add_member(:payload_data, Shapes::ShapeRef.new(shape: PayloadData, required: true, location_name: "PayloadData"))
+    SendDataToMulticastGroupRequest.add_member(:wireless_metadata, Shapes::ShapeRef.new(shape: MulticastWirelessMetadata, required: true, location_name: "WirelessMetadata"))
+    SendDataToMulticastGroupRequest.struct_class = Types::SendDataToMulticastGroupRequest
+
+    SendDataToMulticastGroupResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: MulticastGroupMessageId, location_name: "MessageId"))
+    SendDataToMulticastGroupResponse.struct_class = Types::SendDataToMulticastGroupResponse
 
     SendDataToWirelessDeviceRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "Id"))
     SendDataToWirelessDeviceRequest.add_member(:transmit_mode, Shapes::ShapeRef.new(shape: TransmitMode, required: true, location_name: "TransmitMode"))
@@ -925,6 +1239,9 @@ module Aws::IoTWireless
     SidewalkDeviceMetadata.add_member(:device_state, Shapes::ShapeRef.new(shape: DeviceState, location_name: "DeviceState"))
     SidewalkDeviceMetadata.struct_class = Types::SidewalkDeviceMetadata
 
+    SidewalkEventNotificationConfigurations.add_member(:amazon_id_event_topic, Shapes::ShapeRef.new(shape: EventNotificationTopicStatus, location_name: "AmazonIdEventTopic"))
+    SidewalkEventNotificationConfigurations.struct_class = Types::SidewalkEventNotificationConfigurations
+
     SidewalkListDevice.add_member(:amazon_id, Shapes::ShapeRef.new(shape: AmazonId, location_name: "AmazonId"))
     SidewalkListDevice.add_member(:sidewalk_id, Shapes::ShapeRef.new(shape: SidewalkId, location_name: "SidewalkId"))
     SidewalkListDevice.add_member(:sidewalk_manufacturing_sn, Shapes::ShapeRef.new(shape: SidewalkManufacturingSn, location_name: "SidewalkManufacturingSn"))
@@ -937,6 +1254,32 @@ module Aws::IoTWireless
 
     SidewalkUpdateAccount.add_member(:app_server_private_key, Shapes::ShapeRef.new(shape: AppServerPrivateKey, location_name: "AppServerPrivateKey"))
     SidewalkUpdateAccount.struct_class = Types::SidewalkUpdateAccount
+
+    StartBulkAssociateWirelessDeviceWithMulticastGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
+    StartBulkAssociateWirelessDeviceWithMulticastGroupRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, location_name: "QueryString"))
+    StartBulkAssociateWirelessDeviceWithMulticastGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartBulkAssociateWirelessDeviceWithMulticastGroupRequest.struct_class = Types::StartBulkAssociateWirelessDeviceWithMulticastGroupRequest
+
+    StartBulkAssociateWirelessDeviceWithMulticastGroupResponse.struct_class = Types::StartBulkAssociateWirelessDeviceWithMulticastGroupResponse
+
+    StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
+    StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, location_name: "QueryString"))
+    StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest.struct_class = Types::StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest
+
+    StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse.struct_class = Types::StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse
+
+    StartFuotaTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, required: true, location: "uri", location_name: "Id"))
+    StartFuotaTaskRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANStartFuotaTask, location_name: "LoRaWAN"))
+    StartFuotaTaskRequest.struct_class = Types::StartFuotaTaskRequest
+
+    StartFuotaTaskResponse.struct_class = Types::StartFuotaTaskResponse
+
+    StartMulticastGroupSessionRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
+    StartMulticastGroupSessionRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANMulticastSession, required: true, location_name: "LoRaWAN"))
+    StartMulticastGroupSessionRequest.struct_class = Types::StartMulticastGroupSessionRequest
+
+    StartMulticastGroupSessionResponse.struct_class = Types::StartMulticastGroupSessionResponse
 
     SubBands.member = Shapes::ShapeRef.new(shape: SubBand)
 
@@ -982,6 +1325,16 @@ module Aws::IoTWireless
 
     UpdateDestinationResponse.struct_class = Types::UpdateDestinationResponse
 
+    UpdateFuotaTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: FuotaTaskId, required: true, location: "uri", location_name: "Id"))
+    UpdateFuotaTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: FuotaTaskName, location_name: "Name"))
+    UpdateFuotaTaskRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateFuotaTaskRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANFuotaTask, location_name: "LoRaWAN"))
+    UpdateFuotaTaskRequest.add_member(:firmware_update_image, Shapes::ShapeRef.new(shape: FirmwareUpdateImage, location_name: "FirmwareUpdateImage"))
+    UpdateFuotaTaskRequest.add_member(:firmware_update_role, Shapes::ShapeRef.new(shape: FirmwareUpdateRole, location_name: "FirmwareUpdateRole"))
+    UpdateFuotaTaskRequest.struct_class = Types::UpdateFuotaTaskRequest
+
+    UpdateFuotaTaskResponse.struct_class = Types::UpdateFuotaTaskResponse
+
     UpdateLogLevelsByResourceTypesRequest.add_member(:default_log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "DefaultLogLevel"))
     UpdateLogLevelsByResourceTypesRequest.add_member(:wireless_device_log_options, Shapes::ShapeRef.new(shape: WirelessDeviceLogOptionList, location_name: "WirelessDeviceLogOptions"))
     UpdateLogLevelsByResourceTypesRequest.add_member(:wireless_gateway_log_options, Shapes::ShapeRef.new(shape: WirelessGatewayLogOptionList, location_name: "WirelessGatewayLogOptions"))
@@ -989,12 +1342,29 @@ module Aws::IoTWireless
 
     UpdateLogLevelsByResourceTypesResponse.struct_class = Types::UpdateLogLevelsByResourceTypesResponse
 
+    UpdateMulticastGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: MulticastGroupId, required: true, location: "uri", location_name: "Id"))
+    UpdateMulticastGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: MulticastGroupName, location_name: "Name"))
+    UpdateMulticastGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateMulticastGroupRequest.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANMulticast, location_name: "LoRaWAN"))
+    UpdateMulticastGroupRequest.struct_class = Types::UpdateMulticastGroupRequest
+
+    UpdateMulticastGroupResponse.struct_class = Types::UpdateMulticastGroupResponse
+
     UpdatePartnerAccountRequest.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkUpdateAccount, required: true, location_name: "Sidewalk"))
     UpdatePartnerAccountRequest.add_member(:partner_account_id, Shapes::ShapeRef.new(shape: PartnerAccountId, required: true, location: "uri", location_name: "PartnerAccountId"))
     UpdatePartnerAccountRequest.add_member(:partner_type, Shapes::ShapeRef.new(shape: PartnerType, required: true, location: "querystring", location_name: "partnerType"))
     UpdatePartnerAccountRequest.struct_class = Types::UpdatePartnerAccountRequest
 
     UpdatePartnerAccountResponse.struct_class = Types::UpdatePartnerAccountResponse
+
+    UpdateResourceEventConfigurationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
+    UpdateResourceEventConfigurationRequest.add_member(:identifier_type, Shapes::ShapeRef.new(shape: IdentifierType, required: true, location: "querystring", location_name: "identifierType"))
+    UpdateResourceEventConfigurationRequest.add_member(:partner_type, Shapes::ShapeRef.new(shape: EventNotificationPartnerType, location: "querystring", location_name: "partnerType"))
+    UpdateResourceEventConfigurationRequest.add_member(:device_registration_state, Shapes::ShapeRef.new(shape: DeviceRegistrationStateEventConfiguration, location_name: "DeviceRegistrationState"))
+    UpdateResourceEventConfigurationRequest.add_member(:proximity, Shapes::ShapeRef.new(shape: ProximityEventConfiguration, location_name: "Proximity"))
+    UpdateResourceEventConfigurationRequest.struct_class = Types::UpdateResourceEventConfigurationRequest
+
+    UpdateResourceEventConfigurationResponse.struct_class = Types::UpdateResourceEventConfigurationResponse
 
     UpdateWirelessDeviceRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "Id"))
     UpdateWirelessDeviceRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, location_name: "DestinationName"))
@@ -1048,6 +1418,9 @@ module Aws::IoTWireless
     WirelessDeviceStatistics.add_member(:last_uplink_received_at, Shapes::ShapeRef.new(shape: ISODateTimeString, location_name: "LastUplinkReceivedAt"))
     WirelessDeviceStatistics.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANListDevice, location_name: "LoRaWAN"))
     WirelessDeviceStatistics.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkListDevice, location_name: "Sidewalk"))
+    WirelessDeviceStatistics.add_member(:fuota_device_status, Shapes::ShapeRef.new(shape: FuotaDeviceStatus, location_name: "FuotaDeviceStatus"))
+    WirelessDeviceStatistics.add_member(:multicast_device_status, Shapes::ShapeRef.new(shape: MulticastDeviceStatus, location_name: "MulticastDeviceStatus"))
+    WirelessDeviceStatistics.add_member(:mc_group_id, Shapes::ShapeRef.new(shape: McGroupId, location_name: "McGroupId"))
     WirelessDeviceStatistics.struct_class = Types::WirelessDeviceStatistics
 
     WirelessDeviceStatisticsList.member = Shapes::ShapeRef.new(shape: WirelessDeviceStatistics)
@@ -1112,6 +1485,48 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:associate_multicast_group_with_fuota_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateMulticastGroupWithFuotaTask"
+        o.http_method = "PUT"
+        o.http_request_uri = "/fuota-tasks/{Id}/multicast-group"
+        o.input = Shapes::ShapeRef.new(shape: AssociateMulticastGroupWithFuotaTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateMulticastGroupWithFuotaTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:associate_wireless_device_with_fuota_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateWirelessDeviceWithFuotaTask"
+        o.http_method = "PUT"
+        o.http_request_uri = "/fuota-tasks/{Id}/wireless-device"
+        o.input = Shapes::ShapeRef.new(shape: AssociateWirelessDeviceWithFuotaTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateWirelessDeviceWithFuotaTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:associate_wireless_device_with_multicast_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateWirelessDeviceWithMulticastGroup"
+        o.http_method = "PUT"
+        o.http_request_uri = "/multicast-groups/{Id}/wireless-device"
+        o.input = Shapes::ShapeRef.new(shape: AssociateWirelessDeviceWithMulticastGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateWirelessDeviceWithMulticastGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:associate_wireless_device_with_thing, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateWirelessDeviceWithThing"
         o.http_method = "PUT"
@@ -1154,6 +1569,20 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:cancel_multicast_group_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelMulticastGroupSession"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/multicast-groups/{Id}/session"
+        o.input = Shapes::ShapeRef.new(shape: CancelMulticastGroupSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelMulticastGroupSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_destination, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDestination"
         o.http_method = "POST"
@@ -1175,6 +1604,34 @@ module Aws::IoTWireless
         o.input = Shapes::ShapeRef.new(shape: CreateDeviceProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDeviceProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_fuota_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFuotaTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/fuota-tasks"
+        o.input = Shapes::ShapeRef.new(shape: CreateFuotaTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFuotaTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_multicast_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMulticastGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/multicast-groups"
+        o.input = Shapes::ShapeRef.new(shape: CreateMulticastGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMulticastGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1277,6 +1734,33 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_fuota_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFuotaTask"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/fuota-tasks/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFuotaTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFuotaTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_multicast_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMulticastGroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/multicast-groups/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMulticastGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMulticastGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_service_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteServiceProfile"
         o.http_method = "DELETE"
@@ -1355,6 +1839,46 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:disassociate_multicast_group_from_fuota_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateMulticastGroupFromFuotaTask"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/fuota-tasks/{Id}/multicast-groups/{MulticastGroupId}"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateMulticastGroupFromFuotaTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateMulticastGroupFromFuotaTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:disassociate_wireless_device_from_fuota_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateWirelessDeviceFromFuotaTask"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/fuota-tasks/{Id}/wireless-devices/{WirelessDeviceId}"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateWirelessDeviceFromFuotaTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateWirelessDeviceFromFuotaTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:disassociate_wireless_device_from_multicast_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateWirelessDeviceFromMulticastGroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/multicast-groups/{Id}/wireless-devices/{WirelessDeviceId}"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateWirelessDeviceFromMulticastGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateWirelessDeviceFromMulticastGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:disassociate_wireless_device_from_thing, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateWirelessDeviceFromThing"
         o.http_method = "DELETE"
@@ -1422,6 +1946,19 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_fuota_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFuotaTask"
+        o.http_method = "GET"
+        o.http_request_uri = "/fuota-tasks/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: GetFuotaTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFuotaTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_log_levels_by_resource_types, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetLogLevelsByResourceTypes"
         o.http_method = "GET"
@@ -1435,6 +1972,32 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_multicast_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMulticastGroup"
+        o.http_method = "GET"
+        o.http_request_uri = "/multicast-groups/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: GetMulticastGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMulticastGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_multicast_group_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMulticastGroupSession"
+        o.http_method = "GET"
+        o.http_request_uri = "/multicast-groups/{Id}/session"
+        o.input = Shapes::ShapeRef.new(shape: GetMulticastGroupSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMulticastGroupSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_partner_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPartnerAccount"
         o.http_method = "GET"
@@ -1445,6 +2008,19 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_resource_event_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourceEventConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/event-configurations/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetResourceEventConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourceEventConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_resource_log_level, Seahorse::Model::Operation.new.tap do |o|
@@ -1625,6 +2201,61 @@ module Aws::IoTWireless
         )
       end)
 
+      api.add_operation(:list_fuota_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFuotaTasks"
+        o.http_method = "GET"
+        o.http_request_uri = "/fuota-tasks"
+        o.input = Shapes::ShapeRef.new(shape: ListFuotaTasksRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFuotaTasksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_multicast_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMulticastGroups"
+        o.http_method = "GET"
+        o.http_request_uri = "/multicast-groups"
+        o.input = Shapes::ShapeRef.new(shape: ListMulticastGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMulticastGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_multicast_groups_by_fuota_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMulticastGroupsByFuotaTask"
+        o.http_method = "GET"
+        o.http_request_uri = "/fuota-tasks/{Id}/multicast-groups"
+        o.input = Shapes::ShapeRef.new(shape: ListMulticastGroupsByFuotaTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMulticastGroupsByFuotaTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_partner_accounts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPartnerAccounts"
         o.http_method = "GET"
@@ -1755,6 +2386,20 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:send_data_to_multicast_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendDataToMulticastGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/multicast-groups/{Id}/data"
+        o.input = Shapes::ShapeRef.new(shape: SendDataToMulticastGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendDataToMulticastGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:send_data_to_wireless_device, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SendDataToWirelessDevice"
         o.http_method = "POST"
@@ -1765,6 +2410,60 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_bulk_associate_wireless_device_with_multicast_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartBulkAssociateWirelessDeviceWithMulticastGroup"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/multicast-groups/{Id}/bulk"
+        o.input = Shapes::ShapeRef.new(shape: StartBulkAssociateWirelessDeviceWithMulticastGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartBulkAssociateWirelessDeviceWithMulticastGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_bulk_disassociate_wireless_device_from_multicast_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartBulkDisassociateWirelessDeviceFromMulticastGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/multicast-groups/{Id}/bulk"
+        o.input = Shapes::ShapeRef.new(shape: StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_fuota_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartFuotaTask"
+        o.http_method = "PUT"
+        o.http_request_uri = "/fuota-tasks/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: StartFuotaTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartFuotaTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_multicast_group_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMulticastGroupSession"
+        o.http_method = "PUT"
+        o.http_request_uri = "/multicast-groups/{Id}/session"
+        o.input = Shapes::ShapeRef.new(shape: StartMulticastGroupSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMulticastGroupSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1819,6 +2518,20 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:update_fuota_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFuotaTask"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/fuota-tasks/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFuotaTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFuotaTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:update_log_levels_by_resource_types, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateLogLevelsByResourceTypes"
         o.http_method = "POST"
@@ -1833,6 +2546,20 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:update_multicast_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMulticastGroup"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/multicast-groups/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMulticastGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMulticastGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:update_partner_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdatePartnerAccount"
         o.http_method = "PATCH"
@@ -1843,6 +2570,20 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_resource_event_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateResourceEventConfiguration"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/event-configurations/{Identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateResourceEventConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateResourceEventConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:update_wireless_device, Seahorse::Model::Operation.new.tap do |o|

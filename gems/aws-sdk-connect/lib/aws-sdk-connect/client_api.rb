@@ -14,6 +14,7 @@ module Aws::Connect
     include Seahorse::Model
 
     ARN = Shapes::StringShape.new(name: 'ARN')
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AfterContactWorkTimeLimit = Shapes::IntegerShape.new(name: 'AfterContactWorkTimeLimit')
     AgentFirstName = Shapes::StringShape.new(name: 'AgentFirstName')
     AgentLastName = Shapes::StringShape.new(name: 'AgentLastName')
@@ -91,6 +92,8 @@ module Aws::Connect
     CreateQuickConnectResponse = Shapes::StructureShape.new(name: 'CreateQuickConnectResponse')
     CreateRoutingProfileRequest = Shapes::StructureShape.new(name: 'CreateRoutingProfileRequest')
     CreateRoutingProfileResponse = Shapes::StructureShape.new(name: 'CreateRoutingProfileResponse')
+    CreateSecurityProfileRequest = Shapes::StructureShape.new(name: 'CreateSecurityProfileRequest')
+    CreateSecurityProfileResponse = Shapes::StructureShape.new(name: 'CreateSecurityProfileResponse')
     CreateUseCaseRequest = Shapes::StructureShape.new(name: 'CreateUseCaseRequest')
     CreateUseCaseResponse = Shapes::StructureShape.new(name: 'CreateUseCaseResponse')
     CreateUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'CreateUserHierarchyGroupRequest')
@@ -110,6 +113,7 @@ module Aws::Connect
     DeleteInstanceRequest = Shapes::StructureShape.new(name: 'DeleteInstanceRequest')
     DeleteIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationAssociationRequest')
     DeleteQuickConnectRequest = Shapes::StructureShape.new(name: 'DeleteQuickConnectRequest')
+    DeleteSecurityProfileRequest = Shapes::StructureShape.new(name: 'DeleteSecurityProfileRequest')
     DeleteUseCaseRequest = Shapes::StructureShape.new(name: 'DeleteUseCaseRequest')
     DeleteUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'DeleteUserHierarchyGroupRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
@@ -131,6 +135,8 @@ module Aws::Connect
     DescribeQuickConnectResponse = Shapes::StructureShape.new(name: 'DescribeQuickConnectResponse')
     DescribeRoutingProfileRequest = Shapes::StructureShape.new(name: 'DescribeRoutingProfileRequest')
     DescribeRoutingProfileResponse = Shapes::StructureShape.new(name: 'DescribeRoutingProfileResponse')
+    DescribeSecurityProfileRequest = Shapes::StructureShape.new(name: 'DescribeSecurityProfileRequest')
+    DescribeSecurityProfileResponse = Shapes::StructureShape.new(name: 'DescribeSecurityProfileResponse')
     DescribeUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'DescribeUserHierarchyGroupRequest')
     DescribeUserHierarchyGroupResponse = Shapes::StructureShape.new(name: 'DescribeUserHierarchyGroupResponse')
     DescribeUserHierarchyStructureRequest = Shapes::StructureShape.new(name: 'DescribeUserHierarchyStructureRequest')
@@ -271,6 +277,8 @@ module Aws::Connect
     ListRoutingProfilesResponse = Shapes::StructureShape.new(name: 'ListRoutingProfilesResponse')
     ListSecurityKeysRequest = Shapes::StructureShape.new(name: 'ListSecurityKeysRequest')
     ListSecurityKeysResponse = Shapes::StructureShape.new(name: 'ListSecurityKeysResponse')
+    ListSecurityProfilePermissionsRequest = Shapes::StructureShape.new(name: 'ListSecurityProfilePermissionsRequest')
+    ListSecurityProfilePermissionsResponse = Shapes::StructureShape.new(name: 'ListSecurityProfilePermissionsResponse')
     ListSecurityProfilesRequest = Shapes::StructureShape.new(name: 'ListSecurityProfilesRequest')
     ListSecurityProfilesResponse = Shapes::StructureShape.new(name: 'ListSecurityProfilesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -304,6 +312,7 @@ module Aws::Connect
     ParticipantId = Shapes::StringShape.new(name: 'ParticipantId')
     ParticipantToken = Shapes::StringShape.new(name: 'ParticipantToken')
     Password = Shapes::StringShape.new(name: 'Password')
+    PermissionsList = Shapes::ListShape.new(name: 'PermissionsList')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
     PhoneNumberCountryCode = Shapes::StringShape.new(name: 'PhoneNumberCountryCode')
     PhoneNumberCountryCodes = Shapes::ListShape.new(name: 'PhoneNumberCountryCodes')
@@ -371,9 +380,12 @@ module Aws::Connect
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
     SecurityKey = Shapes::StructureShape.new(name: 'SecurityKey')
     SecurityKeysList = Shapes::ListShape.new(name: 'SecurityKeysList')
+    SecurityProfile = Shapes::StructureShape.new(name: 'SecurityProfile')
+    SecurityProfileDescription = Shapes::StringShape.new(name: 'SecurityProfileDescription')
     SecurityProfileId = Shapes::StringShape.new(name: 'SecurityProfileId')
     SecurityProfileIds = Shapes::ListShape.new(name: 'SecurityProfileIds')
     SecurityProfileName = Shapes::StringShape.new(name: 'SecurityProfileName')
+    SecurityProfilePermission = Shapes::StringShape.new(name: 'SecurityProfilePermission')
     SecurityProfileSummary = Shapes::StructureShape.new(name: 'SecurityProfileSummary')
     SecurityProfileSummaryList = Shapes::ListShape.new(name: 'SecurityProfileSummaryList')
     SecurityToken = Shapes::StringShape.new(name: 'SecurityToken')
@@ -438,6 +450,7 @@ module Aws::Connect
     UpdateRoutingProfileDefaultOutboundQueueRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileDefaultOutboundQueueRequest')
     UpdateRoutingProfileNameRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileNameRequest')
     UpdateRoutingProfileQueuesRequest = Shapes::StructureShape.new(name: 'UpdateRoutingProfileQueuesRequest')
+    UpdateSecurityProfileRequest = Shapes::StructureShape.new(name: 'UpdateSecurityProfileRequest')
     UpdateUserHierarchyGroupNameRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyGroupNameRequest')
     UpdateUserHierarchyRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyRequest')
     UpdateUserHierarchyStructureRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyStructureRequest')
@@ -461,6 +474,9 @@ module Aws::Connect
     VoiceRecordingConfiguration = Shapes::StructureShape.new(name: 'VoiceRecordingConfiguration')
     VoiceRecordingTrack = Shapes::StringShape.new(name: 'VoiceRecordingTrack')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AgentStatus.add_member(:agent_status_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "AgentStatusARN"))
     AgentStatus.add_member(:agent_status_id, Shapes::ShapeRef.new(shape: AgentStatusId, location_name: "AgentStatusId"))
@@ -673,6 +689,17 @@ module Aws::Connect
     CreateRoutingProfileResponse.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "RoutingProfileId"))
     CreateRoutingProfileResponse.struct_class = Types::CreateRoutingProfileResponse
 
+    CreateSecurityProfileRequest.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, required: true, location_name: "SecurityProfileName"))
+    CreateSecurityProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "Description"))
+    CreateSecurityProfileRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionsList, location_name: "Permissions"))
+    CreateSecurityProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreateSecurityProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateSecurityProfileRequest.struct_class = Types::CreateSecurityProfileRequest
+
+    CreateSecurityProfileResponse.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, location_name: "SecurityProfileId"))
+    CreateSecurityProfileResponse.add_member(:security_profile_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SecurityProfileArn"))
+    CreateSecurityProfileResponse.struct_class = Types::CreateSecurityProfileResponse
+
     CreateUseCaseRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateUseCaseRequest.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, required: true, location: "uri", location_name: "IntegrationAssociationId"))
     CreateUseCaseRequest.add_member(:use_case_type, Shapes::ShapeRef.new(shape: UseCaseType, required: true, location_name: "UseCaseType"))
@@ -746,6 +773,10 @@ module Aws::Connect
     DeleteQuickConnectRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteQuickConnectRequest.add_member(:quick_connect_id, Shapes::ShapeRef.new(shape: QuickConnectId, required: true, location: "uri", location_name: "QuickConnectId"))
     DeleteQuickConnectRequest.struct_class = Types::DeleteQuickConnectRequest
+
+    DeleteSecurityProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteSecurityProfileRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
+    DeleteSecurityProfileRequest.struct_class = Types::DeleteSecurityProfileRequest
 
     DeleteUseCaseRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteUseCaseRequest.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, required: true, location: "uri", location_name: "IntegrationAssociationId"))
@@ -822,6 +853,13 @@ module Aws::Connect
 
     DescribeRoutingProfileResponse.add_member(:routing_profile, Shapes::ShapeRef.new(shape: RoutingProfile, location_name: "RoutingProfile"))
     DescribeRoutingProfileResponse.struct_class = Types::DescribeRoutingProfileResponse
+
+    DescribeSecurityProfileRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
+    DescribeSecurityProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DescribeSecurityProfileRequest.struct_class = Types::DescribeSecurityProfileRequest
+
+    DescribeSecurityProfileResponse.add_member(:security_profile, Shapes::ShapeRef.new(shape: SecurityProfile, location_name: "SecurityProfile"))
+    DescribeSecurityProfileResponse.struct_class = Types::DescribeSecurityProfileResponse
 
     DescribeUserHierarchyGroupRequest.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, required: true, location: "uri", location_name: "HierarchyGroupId"))
     DescribeUserHierarchyGroupRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -1304,6 +1342,16 @@ module Aws::Connect
     ListSecurityKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListSecurityKeysResponse.struct_class = Types::ListSecurityKeysResponse
 
+    ListSecurityProfilePermissionsRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
+    ListSecurityProfilePermissionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListSecurityProfilePermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListSecurityProfilePermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListSecurityProfilePermissionsRequest.struct_class = Types::ListSecurityProfilePermissionsRequest
+
+    ListSecurityProfilePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionsList, location_name: "Permissions"))
+    ListSecurityProfilePermissionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSecurityProfilePermissionsResponse.struct_class = Types::ListSecurityProfilePermissionsResponse
+
     ListSecurityProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListSecurityProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListSecurityProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
@@ -1365,6 +1413,8 @@ module Aws::Connect
 
     ParticipantDetails.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "DisplayName"))
     ParticipantDetails.struct_class = Types::ParticipantDetails
+
+    PermissionsList.member = Shapes::ShapeRef.new(shape: SecurityProfilePermission)
 
     PhoneNumberCountryCodes.member = Shapes::ShapeRef.new(shape: PhoneNumberCountryCode)
 
@@ -1524,6 +1574,14 @@ module Aws::Connect
     SecurityKey.struct_class = Types::SecurityKey
 
     SecurityKeysList.member = Shapes::ShapeRef.new(shape: SecurityKey)
+
+    SecurityProfile.add_member(:id, Shapes::ShapeRef.new(shape: SecurityProfileId, location_name: "Id"))
+    SecurityProfile.add_member(:organization_resource_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "OrganizationResourceId"))
+    SecurityProfile.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    SecurityProfile.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "SecurityProfileName"))
+    SecurityProfile.add_member(:description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "Description"))
+    SecurityProfile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    SecurityProfile.struct_class = Types::SecurityProfile
 
     SecurityProfileIds.member = Shapes::ShapeRef.new(shape: SecurityProfileId)
 
@@ -1745,6 +1803,12 @@ module Aws::Connect
     UpdateRoutingProfileQueuesRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
     UpdateRoutingProfileQueuesRequest.add_member(:queue_configs, Shapes::ShapeRef.new(shape: RoutingProfileQueueConfigList, required: true, location_name: "QueueConfigs"))
     UpdateRoutingProfileQueuesRequest.struct_class = Types::UpdateRoutingProfileQueuesRequest
+
+    UpdateSecurityProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "Description"))
+    UpdateSecurityProfileRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionsList, location_name: "Permissions"))
+    UpdateSecurityProfileRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
+    UpdateSecurityProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateSecurityProfileRequest.struct_class = Types::UpdateSecurityProfileRequest
 
     UpdateUserHierarchyGroupNameRequest.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyGroupName, required: true, location_name: "Name"))
     UpdateUserHierarchyGroupNameRequest.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, required: true, location: "uri", location_name: "HierarchyGroupId"))
@@ -2079,6 +2143,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:create_security_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSecurityProfile"
+        o.http_method = "PUT"
+        o.http_request_uri = "/security-profiles/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateSecurityProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSecurityProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:create_use_case, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateUseCase"
         o.http_method = "PUT"
@@ -2169,6 +2248,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:delete_security_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSecurityProfile"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/security-profiles/{InstanceId}/{SecurityProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSecurityProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:delete_use_case, Seahorse::Model::Operation.new.tap do |o|
@@ -2319,6 +2413,19 @@ module Aws::Connect
         o.http_request_uri = "/routing-profiles/{InstanceId}/{RoutingProfileId}"
         o.input = Shapes::ShapeRef.new(shape: DescribeRoutingProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeRoutingProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:describe_security_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSecurityProfile"
+        o.http_method = "GET"
+        o.http_request_uri = "/security-profiles/{InstanceId}/{SecurityProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSecurityProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSecurityProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2887,6 +2994,25 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:list_security_profile_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSecurityProfilePermissions"
+        o.http_method = "GET"
+        o.http_request_uri = "/security-profiles-permissions/{InstanceId}/{SecurityProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: ListSecurityProfilePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSecurityProfilePermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_security_profiles, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSecurityProfiles"
         o.http_method = "GET"
@@ -3358,6 +3484,19 @@ module Aws::Connect
         o.http_method = "POST"
         o.http_request_uri = "/routing-profiles/{InstanceId}/{RoutingProfileId}/queues"
         o.input = Shapes::ShapeRef.new(shape: UpdateRoutingProfileQueuesRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_security_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSecurityProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/security-profiles/{InstanceId}/{SecurityProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSecurityProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
