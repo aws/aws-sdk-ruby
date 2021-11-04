@@ -124,6 +124,28 @@ module Aws
       end
     end
 
+    context 'use fips endpoint selection' do
+      it 'can resolve use_fips_endpoint from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'use_fips_endpoint'
+        )
+        expect(config.use_fips_endpoint).to eq('true')
+      end
+    end
+
+    context 'use dualstack endpoint selection' do
+      it 'can resolve use_dualstack_endpoint from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'use_dualstack_endpoint'
+        )
+        expect(config.use_dualstack_endpoint).to eq('true')
+      end
+    end
+
     context 'ca_bundle selection' do
       it 'can resolve ca_bundle from config file' do
         config = SharedConfig.new(

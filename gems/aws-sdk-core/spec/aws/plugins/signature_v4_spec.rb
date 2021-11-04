@@ -112,9 +112,10 @@ module Aws
             'signingName' => 'signing-name',
             'endpointPrefix' => 'api.service',
           })
+          allow(Aws::Plugins::RegionalEndpoint).to receive(:warn)
           expect(Aws::Partitions::EndpointProvider)
             .to receive(:signing_region)
-            .with('fips-us-east-1', 'api.service', nil)
+            .with('us-east-1', 'api.service', nil)
             .and_return('us-east-1')
 
           client = svc::Client.new(options.merge(

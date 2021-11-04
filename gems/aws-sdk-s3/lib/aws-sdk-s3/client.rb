@@ -359,10 +359,6 @@ module Aws::S3
     #     for all object operations. You must first enable accelerate for
     #     each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
     #
-    #   @option options [Boolean] :use_dualstack_endpoint (false)
-    #     When set to `true`, IPv6-compatible bucket endpoints will be used
-    #     for all operations.
-    #
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.

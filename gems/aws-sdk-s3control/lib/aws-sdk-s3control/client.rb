@@ -287,10 +287,6 @@ module Aws::S3Control
     #     ** Please note ** When response stubbing is enabled, no HTTP
     #     requests are made, and retries are disabled.
     #
-    #   @option options [Boolean] :use_dualstack_endpoint (false)
-    #     When set to `true`, IPv6-compatible bucket endpoints will be used
-    #     for all operations.
-    #
     #   @option options [Boolean] :validate_params (true)
     #     When `true`, request parameters are validated before
     #     sending the request.

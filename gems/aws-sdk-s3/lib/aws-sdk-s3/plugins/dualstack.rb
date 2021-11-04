@@ -5,18 +5,9 @@ module Aws
     module Plugins
       # @api private
       class Dualstack < Seahorse::Client::Plugin
-
-        option(:use_dualstack_endpoint,
-          default: false,
-          doc_type: 'Boolean',
-          docstring: <<-DOCS)
-When set to `true`, IPv6-compatible bucket endpoints will be used
-for all operations.
-          DOCS
-
         def add_handlers(handlers, config)
           handlers.add(OptionHandler, step: :initialize)
-          handlers.add(DualstackHandler, step: :build, priority: 11)
+          handlers.add(DualstackHandler, step: :build, priority: 49)
         end
 
         # @api private
@@ -40,38 +31,41 @@ for all operations.
         # @api private
         class DualstackHandler < Seahorse::Client::Handler
           def call(context)
-            if context.config.regional_endpoint && use_dualstack_endpoint?(context)
+            # only rewrite the endpoint if it's not a custom endpoint
+            # accelerate/ARN already handle dualstack cases, so ignore these
+            # check to see if dualstack is on but configured off via operation
+            if context.config.regional_endpoint &&
+               use_dualstack_endpoint?(context)
               apply_dualstack_endpoint(context)
             end
             @handler.call(context)
           end
 
           private
+
           def apply_dualstack_endpoint(context)
-            bucket_name = context.params[:bucket]
-            region = context.config.region
-            dns_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(region)
-
-            if use_bucket_dns?(bucket_name, context)
-              host = "#{bucket_name}.s3.dualstack.#{region}.#{dns_suffix}"
-            else
-              host = "s3.dualstack.#{region}.#{dns_suffix}"
-            end
+            new_endpoint = Aws::Partitions::EndpointProvider.resolve(
+              context.config.region,
+              's3',
+              'regional',
+              {
+                dualstack: context[:use_dualstack_endpoint],
+                fips: context.config.use_fips_endpoint
+              }
+            )
             endpoint = URI.parse(context.http_request.endpoint.to_s)
-            endpoint.scheme = context.http_request.endpoint.scheme
-            endpoint.port = context.http_request.endpoint.port
-            endpoint.host = host
-            context.http_request.endpoint = endpoint.to_s
-          end
-
-          def use_bucket_dns?(bucket_name, context)
-            ssl = context.http_request.endpoint.scheme == "https"
-            bucket_name && BucketDns.dns_compatible?(bucket_name, ssl) &&
-              !context.config.force_path_style
+            endpoint.host = URI.parse(new_endpoint).host
+            context.http_request.endpoint = endpoint
           end
 
           def use_dualstack_endpoint?(context)
-            context[:use_dualstack_endpoint] && !context[:use_accelerate_endpoint]
+            # case when dualstack is turned off via operation
+            (context[:use_dualstack_endpoint] ||
+              context.config.use_dualstack_endpoint) &&
+              # accelerate plugin already applies dualstack
+              !context[:use_accelerate_endpoint] &&
+              # arns handle dualstack
+              !context.metadata[:s3_arn]
           end
         end
 

@@ -54,8 +54,9 @@ module Aws
               # outpost operations should go to the outposts endpoint only if
               # it's not a custom endpoint. the ARN class changes this for ARNs
               if context.config.regional_endpoint
+                fips = context.config.use_fips_endpoint
                 context.http_request.endpoint.host =
-                  "s3-outposts.#{context.config.region}.amazonaws.com"
+                  "s3-outposts#{'-fips' if fips}.#{context.config.region}.amazonaws.com"
               end
               S3ControlSigner.build_v4_signer(
                 service: 's3-outposts',

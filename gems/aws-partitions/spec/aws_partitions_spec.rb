@@ -200,6 +200,29 @@ module Aws
         expect(svc.regions).to include('us-west-1')
         expect(svc.regions).to include('us-west-2')
       end
+
+      it '#fips_regions returns a list of fips compatible regions' do
+        fips_regions = partitions.partition('aws').service('S3').fips_regions
+        expect(fips_regions).to include(
+          'us-east-1',
+          'us-east-2',
+          'us-west-1',
+          'us-west-2',
+          'ca-central-1'
+        )
+      end
+
+      it '#dualstack_regions returns a list of dualstack compatible regions' do
+        dualstack_regions = partitions.partition('aws').service('S3')
+                                      .dualstack_regions
+        expect(dualstack_regions).to include(
+          'us-east-1',
+          'us-east-2',
+          'us-west-1',
+          'us-west-2',
+          'ca-central-1'
+        )
+      end
     end
 
     describe 'symmetry' do
@@ -222,6 +245,7 @@ module Aws
       end
     end
 
+    # normal endpoint testing
     describe Partitions::EndpointProvider do
       let(:partition_json) do
         path = File.expand_path('../test_partition.json', __FILE__)
@@ -367,5 +391,81 @@ module Aws
         end
       end
     end
+
+    # variants endpoints testing
+    describe Partitions::EndpointProvider do
+      let(:fips_partition_json) do
+        path = File.expand_path('../variant_test_partition.json', __FILE__)
+        JSON.load(File.read(path))
+      end
+
+      before do
+        Partitions.clear
+        Partitions.add(fips_partition_json)
+      end
+
+      after do
+        path = File.expand_path('../../partitions.json', __FILE__)
+        original_json = JSON.load(File.read(path))
+        Partitions.clear
+        Partitions.add(original_json)
+      end
+
+      path = File.expand_path('../variant_test_cases.json', __FILE__)
+      test_cases = JSON.load(File.read(path))
+
+      describe '.resolve' do
+        test_cases.each_with_index do |test_case, index|
+          it "passes variant test case \##{index + 1}" do
+            allow_any_instance_of(Partitions::EndpointProvider).to receive(:warn)
+
+            expect(
+              Partitions::EndpointProvider.resolve(
+                test_case['Region'],
+                test_case['Service'],
+                'regional',
+                { dualstack: test_case['DualStack'], fips: test_case['FIPS'] }
+              )
+            ).to eq("https://#{test_case['Endpoint']}")
+          end
+        end
+
+        it 'warns when the endpoint is deprecated' do
+          expect_any_instance_of(Partitions::EndpointProvider).to receive(:warn)
+          expect(
+            Partitions::EndpointProvider.resolve(
+              'af-south-1',
+              'multi-variant-service',
+              'regional',
+              { dualstack: false, fips: false }
+            )
+          ).to eq('https://multi-variant-service.af-south-1.amazonaws.com')
+        end
+
+        # error cases
+        it 'raises when fips is not supported for the partition' do
+          expect do
+            Partitions::EndpointProvider.resolve(
+              'us-iso-east-1',
+              'some-service',
+              'regional',
+              { dualstack: false, fips: true }
+            )
+          end.to raise_error(ArgumentError)
+        end
+
+        it 'raises when dualstack is not supported for the partition' do
+          expect do
+            Partitions::EndpointProvider.resolve(
+              'us-iso-east-1',
+              'some-service',
+              'regional',
+              { dualstack: true, fips: false }
+            )
+          end.to raise_error(ArgumentError)
+        end
+      end
+    end
+
   end
 end

@@ -65,6 +65,8 @@ module Aws
         end
 
         it 'has no effect on fips endpoint' do
+          allow(Aws::Plugins::RegionalEndpoint).to receive(:warn)
+
           client = Client.new(
             stub_responses: true,
             sts_regional_endpoints: 'legacy',

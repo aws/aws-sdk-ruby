@@ -77,17 +77,10 @@ result in cross region requests.
               if arn
                 validate_config!(context, arn)
 
-                fips = false
-                if resolved_region.include?('fips')
-                  fips = true
-                  resolved_region = resolved_region.gsub('fips-', '')
-                                                   .gsub('-fips', '')
-                end
-
                 context.metadata[:s3_arn] = {
                   arn: arn,
                   resolved_region: resolved_region,
-                  fips: fips,
+                  fips: context.config.use_fips_endpoint,
                   dualstack: extract_dualstack_config!(context)
                 }
               end
@@ -126,7 +119,8 @@ result in cross region requests.
 
             if !arn.support_dualstack? && context[:use_dualstack_endpoint]
               raise ArgumentError,
-                    'Cannot provide an Outpost Access Point or Multi-region Access Point ARN'\
+                    'Cannot provide an Outpost Access Point, Object Lambda, '\
+                    'or Multi-region Access Point ARN'\
                     ' when `:use_dualstack_endpoint` is set to true.'
             end
 
@@ -134,6 +128,12 @@ result in cross region requests.
               raise ArgumentError,
                     'Cannot provide a Multi-region Access Point ARN with '\
                     '`:s3_disable_multiregion_access_points` set to true'
+            end
+
+            if context.config.use_fips_endpoint && !arn.support_fips?
+              raise ArgumentError,
+                    'FIPS client regions are not supported for this type '\
+                    'of ARN.'
             end
           end
         end
@@ -146,7 +146,7 @@ result in cross region requests.
               s3_arn = resolve_arn_type!(arn)
               s3_arn.validate_arn!
               validate_region_config!(s3_arn, region, use_arn_region)
-              region = s3_arn.region if use_arn_region && !region.include?('fips')
+              region = s3_arn.region if use_arn_region
               [region, s3_arn]
             else
               [region]
@@ -231,19 +231,6 @@ result in cross region requests.
                 raise Aws::Errors::InvalidARNPartitionError
               end
             else
-              if region.include?('fips')
-                # If ARN type doesn't support FIPS but the client region is FIPS
-                unless arn.support_fips?
-                  raise ArgumentError,
-                        'FIPS client regions are not supported for this type '\
-                        'of ARN.'
-                end
-
-                fips = true
-                # Normalize the region so we can compare partition and regions
-                region = region.gsub('fips-', '').gsub('-fips', '')
-              end
-
               # use_arn_region does not apply to MRAP (global) arns
               unless arn.region.empty?
                 # Raise if the ARN and client regions are in different partitions
@@ -254,7 +241,7 @@ result in cross region requests.
 
                 # Raise if regions mismatch
                 # Either when it's a fips client or not using the ARN region
-                if (!use_arn_region || fips) && region != arn.region
+                if !use_arn_region && region != arn.region
                   raise Aws::Errors::InvalidARNRegionError
                 end
               end

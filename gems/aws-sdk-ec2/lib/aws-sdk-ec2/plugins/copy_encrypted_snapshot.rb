@@ -40,7 +40,13 @@ module Aws
               region: params[:source_region],
               credentials_provider: context.config.credentials
             )
-            url = Aws::Partitions::EndpointProvider.resolve(signer.region, 'ec2')
+            url = Aws::Partitions::EndpointProvider.resolve(
+              signer.region, 'ec2', 'regional',
+              {
+                dualstack: context.config.use_dualstack_endpoint,
+                fips: context.config.use_fips_endpoint
+              }
+            )
             url += "?#{param_list.to_s}"
 
             signer.presign_url(

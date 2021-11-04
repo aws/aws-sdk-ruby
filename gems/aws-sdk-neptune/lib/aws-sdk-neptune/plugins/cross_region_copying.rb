@@ -42,7 +42,11 @@ module Aws
               credentials_provider: context.config.credentials
             )
             url = Aws::Partitions::EndpointProvider.resolve(
-              signer.region, 'rds'
+              signer.region, 'rds', 'regional',
+              {
+                dualstack: context.config.use_dualstack_endpoint,
+                fips: context.config.use_fips_endpoint
+              }
             )
             url += "?#{param_list}"
             signer.presign_url(

@@ -22,7 +22,9 @@ module Aws
           # S3 removes core's signature_v4 plugin that checks for this
           raise Aws::Errors::MissingRegionError if cfg.region.nil?
 
-          Aws::Partitions::EndpointProvider.signing_region(cfg.region, 's3')
+          Aws::Partitions::EndpointProvider.signing_region(
+            cfg.region, 's3'
+          )
         end
 
         def add_handlers(handlers, cfg)
@@ -162,7 +164,12 @@ module Aws
 
           def custom_endpoint?(resp)
             resolved_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(
-              resp.context.config.region
+              resp.context.config.region,
+              's3',
+              {
+                dualstack: resp.context[:use_dualstack_endpoint],
+                fips: resp.context.config.use_fips_endpoint
+              }
             )
             !resp.context.http_request.endpoint.hostname.include?(resolved_suffix)
           end
@@ -234,12 +241,20 @@ module Aws
           # Otherwise it will retry with the ARN as the bucket name.
           def new_hostname(context, region)
             uri = URI.parse(
-              Aws::Partitions::EndpointProvider.resolve(region, 's3')
+              Aws::Partitions::EndpointProvider.resolve(
+                region, 's3', 'regional',
+                {
+                  dualstack: context[:use_dualstack_endpoint],
+                  fips: context.config.use_fips_endpoint
+                }
+              )
             )
 
             if (arn = context.metadata[:s3_arn])
               # Retry with the response region and not the ARN resolved one
-              ARN.resolve_url!(uri, arn[:arn], region).host
+              ARN.resolve_url!(
+                uri, arn[:arn], region, arn[:fips], arn[:dualstack]
+              ).host
             else
               "#{context.params[:bucket]}.#{uri.host}"
             end

@@ -163,6 +163,8 @@ module Aws
       :ca_bundle,
       :credential_process,
       :endpoint_discovery_enabled,
+      :use_dualstack_endpoint,
+      :use_fips_endpoint,
       :ec2_metadata_service_endpoint,
       :ec2_metadata_service_endpoint_mode,
       :max_attempts,

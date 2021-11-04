@@ -53,7 +53,13 @@ module Aws
         )
 
         url = Aws::Partitions::EndpointProvider.resolve(
-          req.context.config.region, 'sts', 'regional'
+          req.context.config.region,
+          'sts',
+          req.context.config.sts_regional_endpoints,
+          {
+            dualstack: req.context.config.use_dualstack_endpoint,
+            fips: req.context.config.use_fips_endpoint
+          }
         )
         url += "/?#{param_list}"
 
