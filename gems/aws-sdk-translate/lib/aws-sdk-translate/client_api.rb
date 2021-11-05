@@ -229,6 +229,7 @@ module Aws::Translate
     ListTextTranslationJobsResponse.struct_class = Types::ListTextTranslationJobsResponse
 
     OutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    OutputDataConfig.add_member(:encryption_key, Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "EncryptionKey"))
     OutputDataConfig.struct_class = Types::OutputDataConfig
 
     ParallelDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
@@ -545,6 +546,7 @@ module Aws::Translate
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguagePairException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

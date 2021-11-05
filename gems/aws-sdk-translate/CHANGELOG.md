@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-11-05)
+------------------
+
+* Feature - This release enable customers to use their own KMS keys to encrypt output files when they submit a batch transform job.
+
 1.36.0 (2021-11-04)
 ------------------
 

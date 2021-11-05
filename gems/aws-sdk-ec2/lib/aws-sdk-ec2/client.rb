@@ -20645,6 +20645,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_time #=> Time
     #   resp.reservations[0].instances[0].network_interfaces #=> Array
     #   resp.reservations[0].instances[0].network_interfaces[0].association.carrier_ip #=> String
+    #   resp.reservations[0].instances[0].network_interfaces[0].association.customer_owned_ip #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].association.ip_owner_id #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].association.public_dns_name #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].association.public_ip #=> String
@@ -20667,6 +20668,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_address #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses #=> Array
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.carrier_ip #=> String
+    #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.customer_owned_ip #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.ip_owner_id #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.public_dns_name #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.public_ip #=> String
@@ -43424,6 +43426,7 @@ module Aws::EC2
     #   resp.instances[0].elastic_inference_accelerator_associations[0].elastic_inference_accelerator_association_time #=> Time
     #   resp.instances[0].network_interfaces #=> Array
     #   resp.instances[0].network_interfaces[0].association.carrier_ip #=> String
+    #   resp.instances[0].network_interfaces[0].association.customer_owned_ip #=> String
     #   resp.instances[0].network_interfaces[0].association.ip_owner_id #=> String
     #   resp.instances[0].network_interfaces[0].association.public_dns_name #=> String
     #   resp.instances[0].network_interfaces[0].association.public_ip #=> String
@@ -43446,6 +43449,7 @@ module Aws::EC2
     #   resp.instances[0].network_interfaces[0].private_ip_address #=> String
     #   resp.instances[0].network_interfaces[0].private_ip_addresses #=> Array
     #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.carrier_ip #=> String
+    #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.customer_owned_ip #=> String
     #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.ip_owner_id #=> String
     #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.public_dns_name #=> String
     #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.public_ip #=> String
@@ -45224,7 +45228,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.276.0'
+      context[:gem_version] = '1.277.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -37332,6 +37332,10 @@ module Aws::EC2
     #   The carrier IP address associated with the network interface.
     #   @return [String]
     #
+    # @!attribute [rw] customer_owned_ip
+    #   The customer-owned IP address associated with the network interface.
+    #   @return [String]
+    #
     # @!attribute [rw] ip_owner_id
     #   The ID of the owner of the Elastic IP address.
     #   @return [String]
@@ -37349,6 +37353,7 @@ module Aws::EC2
     #
     class InstanceNetworkInterfaceAssociation < Struct.new(
       :carrier_ip,
+      :customer_owned_ip,
       :ip_owner_id,
       :public_dns_name,
       :public_ip)

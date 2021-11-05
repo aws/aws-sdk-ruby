@@ -347,10 +347,10 @@ module Aws::Translate
     # @!group API Operations
 
     # Creates a parallel data resource in Amazon Translate by importing an
-    # input file from Amazon S3. Parallel data files contain examples of
-    # source phrases and their translations from your translation memory. By
-    # adding parallel data, you can influence the style, tone, and word
-    # choice in your translation output.
+    # input file from Amazon S3. Parallel data files contain examples that
+    # show how you want segments of text to be translated. By adding
+    # parallel data, you can influence the style, tone, and word choice in
+    # your translation output.
     #
     # @option params [required, String] :name
     #   A custom name for the parallel data resource in Amazon Translate. You
@@ -460,7 +460,7 @@ module Aws::Translate
       req.send_request(options)
     end
 
-    # Gets the properties associated with an asycnhronous batch translation
+    # Gets the properties associated with an asynchronous batch translation
     # job including name, ID, status, source and target languages,
     # input/output S3 buckets, and so on.
     #
@@ -500,6 +500,8 @@ module Aws::Translate
     #   resp.text_translation_job_properties.input_data_config.s3_uri #=> String
     #   resp.text_translation_job_properties.input_data_config.content_type #=> String
     #   resp.text_translation_job_properties.output_data_config.s3_uri #=> String
+    #   resp.text_translation_job_properties.output_data_config.encryption_key.type #=> String, one of "KMS"
+    #   resp.text_translation_job_properties.output_data_config.encryption_key.id #=> String
     #   resp.text_translation_job_properties.data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DescribeTextTranslationJob AWS API Documentation
@@ -851,6 +853,8 @@ module Aws::Translate
     #   resp.text_translation_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.text_translation_job_properties_list[0].input_data_config.content_type #=> String
     #   resp.text_translation_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.text_translation_job_properties_list[0].output_data_config.encryption_key.type #=> String, one of "KMS"
+    #   resp.text_translation_job_properties_list[0].output_data_config.encryption_key.id #=> String
     #   resp.text_translation_job_properties_list[0].data_access_role_arn #=> String
     #   resp.next_token #=> String
     #
@@ -890,7 +894,7 @@ module Aws::Translate
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of an AWS Identity Access and
     #   Management (IAM) role that grants Amazon Translate read access to your
-    #   input data. For more nformation, see identity-and-access-management.
+    #   input data. For more information, see identity-and-access-management.
     #
     # @option params [required, String] :source_language_code
     #   The language code of the input language. For a list of language codes,
@@ -903,13 +907,39 @@ module Aws::Translate
     #   The language code of the output language.
     #
     # @option params [Array<String>] :terminology_names
-    #   The name of the terminology to use in the batch translation job. For a
-    #   list of available terminologies, use the ListTerminologies operation.
+    #   The name of a custom terminology resource to add to the translation
+    #   job. This resource lists examples source terms and the desired
+    #   translation for each term.
+    #
+    #   This parameter accepts only one custom terminology resource.
+    #
+    #   For a list of available custom terminology resources, use the
+    #   ListTerminologies operation.
+    #
+    #   For more information, see how-custom-terminology.
     #
     # @option params [Array<String>] :parallel_data_names
-    #   The names of the parallel data resources to use in the batch
-    #   translation job. For a list of available parallel data resources, use
-    #   the ListParallelData operation.
+    #   The name of a parallel data resource to add to the translation job.
+    #   This resource consists of examples that show how you want segments of
+    #   text to be translated. When you add parallel data to a translation
+    #   job, you create an *Active Custom Translation* job.
+    #
+    #   This parameter accepts only one parallel data resource.
+    #
+    #   <note markdown="1"> Active Custom Translation jobs are priced at a higher rate than other
+    #   jobs that don't use parallel data. For more information, see [Amazon
+    #   Translate pricing][1].
+    #
+    #    </note>
+    #
+    #   For a list of available parallel data resources, use the
+    #   ListParallelData operation.
+    #
+    #   For more information, see customizing-translations-parallel-data.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/translate/pricing/
     #
     # @option params [required, String] :client_token
     #   A unique identifier for the request. This token is auto-generated when
@@ -933,6 +963,10 @@ module Aws::Translate
     #     },
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       encryption_key: {
+    #         type: "KMS", # required, accepts KMS
+    #         id: "EncryptionKeyID", # required
+    #       },
     #     },
     #     data_access_role_arn: "IamRoleArn", # required
     #     source_language_code: "LanguageCodeString", # required
@@ -1132,7 +1166,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

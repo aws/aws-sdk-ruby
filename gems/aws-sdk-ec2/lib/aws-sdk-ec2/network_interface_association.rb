@@ -40,6 +40,12 @@ module Aws::EC2
       data[:carrier_ip]
     end
 
+    # The customer-owned IP address associated with the network interface.
+    # @return [String]
+    def customer_owned_ip
+      data[:customer_owned_ip]
+    end
+
     # The ID of the owner of the Elastic IP address.
     # @return [String]
     def ip_owner_id

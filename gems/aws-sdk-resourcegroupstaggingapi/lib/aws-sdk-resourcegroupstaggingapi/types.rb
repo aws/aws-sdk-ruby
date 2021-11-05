@@ -60,19 +60,19 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # * You must meet the prerequisites for using tag policies. For
     #   information, see [Prerequisites and Permissions for Using Tag
-    #   Policies][1] in the *AWS Organizations User Guide.*
+    #   Policies][1] in the *Organizations User Guide.*
     #
     # * You must enable the tag policies service principal
-    #   (`tagpolicies.tag.amazonaws.com`) to integrate with AWS
-    #   Organizations For information, see [EnableAWSServiceAccess][2].
+    #   (`tagpolicies.tag.amazonaws.com`) to integrate with Organizations
+    #   For information, see [EnableAWSServiceAccess][2].
     #
     # * You must have a tag policy attached to the organization root, an OU,
     #   or an account.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html
-    # [2]: http://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAWSServiceAccess.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html
+    # [2]: https://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAWSServiceAccess.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -130,34 +130,34 @@ module Aws::ResourceGroupsTaggingAPI
     # Information about the errors that are returned for each failed
     # resource. This information can include `InternalServiceException` and
     # `InvalidParameterException` errors. It can also include any valid
-    # error code returned by the AWS service that hosts the resource that
-    # the ARN key represents.
+    # error code returned by the Amazon Web Services service that hosts the
+    # resource that the ARN key represents.
     #
     # The following are common error codes that you might receive from other
-    # AWS services:
+    # Amazon Web Services services:
     #
     # * **InternalServiceException** – This can mean that the Resource
-    #   Groups Tagging API didn't receive a response from another AWS
-    #   service. It can also mean the the resource type in the request is
-    #   not supported by the Resource Groups Tagging API. In these cases,
-    #   it's safe to retry the request and then call [GetResources][1] to
-    #   verify the changes.
+    #   Groups Tagging API didn't receive a response from another Amazon
+    #   Web Services service. It can also mean that the resource type in the
+    #   request is not supported by the Resource Groups Tagging API. In
+    #   these cases, it's safe to retry the request and then call
+    #   [GetResources][1] to verify the changes.
     #
     # * **AccessDeniedException** – This can mean that you need permission
-    #   to calling tagging operations in the AWS service that contains the
-    #   resource. For example, to use the Resource Groups Tagging API to tag
-    #   a CloudWatch alarm resource, you need permission to call [
-    #   `TagResources` ][2] *and* [ `TagResource` ][3] in the CloudWatch
-    #   API.
+    #   to call the tagging operations in the Amazon Web Services service
+    #   that contains the resource. For example, to use the Resource Groups
+    #   Tagging API to tag a Amazon CloudWatch alarm resource, you need
+    #   permission to call both [ `TagResources` ][2] *and* [ `TagResource`
+    #   ][3] in the CloudWatch API.
     #
-    # For more information on errors that are generated from other AWS
-    # services, see the documentation for that service.
+    # For more information on errors that are generated from other Amazon
+    # Web Services services, see the documentation for that service.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html
-    # [2]: http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html
-    # [3]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
+    # [1]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html
+    # [2]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
     #
     # @!attribute [rw] status_code
     #   The HTTP status code of the common error.
@@ -166,8 +166,8 @@ module Aws::ResourceGroupsTaggingAPI
     # @!attribute [rw] error_code
     #   The code of the common error. Valid values include
     #   `InternalServiceException`, `InvalidParameterException`, and any
-    #   valid error code returned by the AWS service that hosts the resource
-    #   that you want to tag.
+    #   valid error code returned by the Amazon Web Services service that
+    #   hosts the resource that you want to tag.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -205,9 +205,9 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [Array<String>]
     #
     # @!attribute [rw] region_filters
-    #   Specifies a list of AWS Regions to limit the output by. If you use
-    #   this parameter, the count of returned noncompliant resources
-    #   includes only resources in the specified Regions.
+    #   Specifies a list of Amazon Web Services Regions to limit the output
+    #   to. If you use this parameter, the count of returned noncompliant
+    #   resources includes only resources in the specified Regions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_type_filters
@@ -220,15 +220,17 @@ module Aws::ResourceGroupsTaggingAPI
     #
     #   The string for each service name and resource type is the same as
     #   that embedded in a resource's Amazon Resource Name (ARN). Consult
-    #   the *AWS General Reference* for the following:
+    #   the <i> <a
+    #   href="https://docs.aws.amazon.com/general/latest/gr/">Amazon Web
+    #   Services General Reference</a> </i> for the following:
     #
-    #   * For a list of service name strings, see [AWS Service
-    #     Namespaces][1].
+    #   * For a list of service name strings, see [Amazon Web Services
+    #     Service Namespaces][1].
     #
     #   * For resource type strings, see [Example ARNs][2].
     #
     #   * For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #     and AWS Service Namespaces][3].
+    #     and Amazon Web Services Service Namespaces][3].
     #
     #   You can specify multiple resource types by using a comma separated
     #   array. The array can include up to 100 items. Note that the length
@@ -329,10 +331,10 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # @!attribute [rw] tag_filters
     #   Specifies a list of TagFilters (keys and values) to restrict the
-    #   output to only those resources that have the specified tag and, if
-    #   included, the specified value. Each `TagFilter` must contain a key
-    #   with values optional. A request can include up to 50 keys, and each
-    #   key can include up to 20 values.
+    #   output to only those resources that have tags with the specified
+    #   keys and, if included, the specified values. Each `TagFilter` must
+    #   contain a key with values optional. A request can include up to 50
+    #   keys, and each key can include up to 20 values.
     #
     #   Note the following when deciding how to use TagFilters:
     #
@@ -345,11 +347,11 @@ module Aws::ResourceGroupsTaggingAPI
     #     response returns only those resources that satisfy all filters.
     #
     #   * If you specify a filter that contains more than one value for a
-    #     key, the response returns resources that match any of the
+    #     key, the response returns resources that match *any* of the
     #     specified values for that key.
     #
-    #   * If you don't specify any values for a key, the response returns
-    #     resources that are tagged with that key and any or no value.
+    #   * If you don't specify a value for a key, the response returns all
+    #     resources that are tagged with that key, with any or no value.
     #
     #     For example, for the following filters: `filter1=
     #     \{keyA,\{value1\}\}`, `filter2=\{keyB,\{value2,value3,value4\}\}`,
@@ -378,7 +380,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [Integer]
     #
     # @!attribute [rw] tags_per_page
-    #   AWS recommends using `ResourcesPerPage` instead of this parameter.
+    #   Amazon Web Services recommends using `ResourcesPerPage` instead of
+    #   this parameter.
     #
     #   A limit that restricts the number of tags (key and value pairs)
     #   returned by `GetResources` in paginated output. A resource with no
@@ -408,19 +411,21 @@ module Aws::ResourceGroupsTaggingAPI
     #   of `ec2:instance` returns only EC2 instances.
     #
     #   The string for each service name and resource type is the same as
-    #   that embedded in a resource's Amazon Resource Name (ARN). Consult
-    #   the *AWS General Reference* for the following:
-    #
-    #   For more information about ARNs, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1].
+    #   that embedded in a resource's Amazon Resource Name (ARN). For the
+    #   list of services whose resources you can use in this parameter, see
+    #   [Services that support the Resource Groups Tagging API][1].
     #
     #   You can specify multiple resource types by using an array. The array
     #   can include up to 100 items. Note that the length constraint
-    #   requirement applies to each resource type filter.
+    #   requirement applies to each resource type filter. For example, the
+    #   following string would limit the response to only Amazon EC2
+    #   instances, Amazon S3 buckets, or any Audit Manager resource:
+    #
+    #   `ec2:instance,s3:bucket,auditmanager`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] include_compliance_details
@@ -450,12 +455,13 @@ module Aws::ResourceGroupsTaggingAPI
     #   response.
     #
     #   An ARN (Amazon Resource Name) uniquely identifies a resource. For
-    #   more information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1] in the *AWS General Reference*.
+    #   more information, see [Amazon Resource Names (ARNs) and Amazon Web
+    #   Services Service Namespaces][1] in the *Amazon Web Services General
+    #   Reference*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetResourcesInput AWS API Documentation
@@ -482,7 +488,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # @!attribute [rw] resource_tag_mapping_list
     #   A list of resource ARNs and the tags (keys and values) associated
-    #   with those ARNs.
+    #   with each.
     #   @return [Array<Types::ResourceTagMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetResourcesOutput AWS API Documentation
@@ -523,7 +529,7 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   A list of all tag keys in the AWS account.
+    #   A list of all tag keys in the Amazon Web Services account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagKeysOutput AWS API Documentation
@@ -551,8 +557,8 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # @!attribute [rw] key
     #   Specifies the tag key for which you want to list all existing values
-    #   that are currently used in the specified AWS Region for the calling
-    #   AWS account.
+    #   that are currently used in the specified Amazon Web Services Region
+    #   for the calling account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagValuesInput AWS API Documentation
@@ -573,7 +579,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # @!attribute [rw] tag_values
     #   A list of all tag values for the specified key currently used in the
-    #   specified AWS Region for the calling AWS account.
+    #   specified Amazon Web Services Region for the calling account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagValuesOutput AWS API Documentation
@@ -611,11 +617,11 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # * You can't access the Amazon S3 bucket for report storage. For more
     #   information, see [Additional Requirements for Organization-wide Tag
-    #   Compliance Reports][1] in the *AWS Organizations User Guide.*
+    #   Compliance Reports][1] in the *Organizations User Guide.*
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html#bucket-policies-org-report
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html#bucket-policies-org-report
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -650,7 +656,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags that have been applied to one or more AWS resources.
+    #   The tags that have been applied to one or more Amazon Web Services
+    #   resources.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] compliance_details
@@ -707,12 +714,12 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # @!attribute [rw] target_id
     #   The account identifier or the root identifier of the organization.
-    #   If you don't know the root ID, you can call the AWS Organizations
+    #   If you don't know the root ID, you can call the Organizations
     #   [ListRoots][1] API.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html
     #   @return [String]
     #
     # @!attribute [rw] target_id_type
@@ -720,11 +727,11 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region that the summary applies to.
+    #   The Amazon Web Services Region that the summary applies to.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The AWS resource type.
+    #   The Amazon Web Services resource type.
     #   @return [String]
     #
     # @!attribute [rw] non_compliant_resources
@@ -744,14 +751,15 @@ module Aws::ResourceGroupsTaggingAPI
       include Aws::Structure
     end
 
-    # The metadata that you apply to AWS resources to help you categorize
-    # and organize them. Each tag consists of a key and a value, both of
-    # which you define. For more information, see [Tagging AWS Resources][1]
-    # in the *AWS General Reference*.
+    # The metadata that you apply to Amazon Web Services resources to help
+    # you categorize and organize them. Each tag consists of a key and a
+    # value, both of which you define. For more information, see [Tagging
+    # Amazon Web Services Resources][1] in the *Amazon Web Services General
+    # Reference*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @!attribute [rw] key
     #   One part of a key-value pair that makes up a tag. A key is a general
@@ -819,12 +827,13 @@ module Aws::ResourceGroupsTaggingAPI
     #   tags to.
     #
     #   An ARN (Amazon Resource Name) uniquely identifies a resource. For
-    #   more information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1] in the *AWS General Reference*.
+    #   more information, see [Amazon Resource Names (ARNs) and Amazon Web
+    #   Services Service Namespaces][1] in the *Amazon Web Services General
+    #   Reference*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -883,12 +892,13 @@ module Aws::ResourceGroupsTaggingAPI
     #   tags from.
     #
     #   An ARN (Amazon Resource Name) uniquely identifies a resource. For
-    #   more information, see [Amazon Resource Names (ARNs) and AWS Service
-    #   Namespaces][1] in the *AWS General Reference*.
+    #   more information, see [Amazon Resource Names (ARNs) and Amazon Web
+    #   Services Service Namespaces][1] in the *Amazon Web Services General
+    #   Reference*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] tag_keys

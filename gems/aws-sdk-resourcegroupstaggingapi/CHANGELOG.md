@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-11-05)
+------------------
+
+* Feature - Documentation updates and improvements.
+
 1.42.0 (2021-11-04)
 ------------------
 

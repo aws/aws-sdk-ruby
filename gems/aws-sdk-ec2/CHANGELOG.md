@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.277.0 (2021-11-05)
+------------------
+
+* Feature - DescribeInstances now returns customer-owned IP addresses for instances running on an AWS Outpost.
+
 1.276.0 (2021-11-04)
 ------------------
 

@@ -7844,6 +7844,7 @@ module Aws::EC2
     InstanceNetworkInterface.struct_class = Types::InstanceNetworkInterface
 
     InstanceNetworkInterfaceAssociation.add_member(:carrier_ip, Shapes::ShapeRef.new(shape: String, location_name: "carrierIp"))
+    InstanceNetworkInterfaceAssociation.add_member(:customer_owned_ip, Shapes::ShapeRef.new(shape: String, location_name: "customerOwnedIp"))
     InstanceNetworkInterfaceAssociation.add_member(:ip_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ipOwnerId"))
     InstanceNetworkInterfaceAssociation.add_member(:public_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "publicDnsName"))
     InstanceNetworkInterfaceAssociation.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
