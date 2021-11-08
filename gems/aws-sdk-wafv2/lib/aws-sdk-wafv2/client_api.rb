@@ -28,6 +28,9 @@ module Aws::WAFV2
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ByteMatchStatement = Shapes::StructureShape.new(name: 'ByteMatchStatement')
     CapacityUnit = Shapes::IntegerShape.new(name: 'CapacityUnit')
+    CaptchaAction = Shapes::StructureShape.new(name: 'CaptchaAction')
+    CaptchaConfig = Shapes::StructureShape.new(name: 'CaptchaConfig')
+    CaptchaResponse = Shapes::StructureShape.new(name: 'CaptchaResponse')
     CheckCapacityRequest = Shapes::StructureShape.new(name: 'CheckCapacityRequest')
     CheckCapacityResponse = Shapes::StructureShape.new(name: 'CheckCapacityResponse')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
@@ -80,6 +83,7 @@ module Aws::WAFV2
     ErrorReason = Shapes::StringShape.new(name: 'ErrorReason')
     ExcludedRule = Shapes::StructureShape.new(name: 'ExcludedRule')
     ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
+    FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FallbackBehavior = Shapes::StringShape.new(name: 'FallbackBehavior')
     FieldToMatch = Shapes::StructureShape.new(name: 'FieldToMatch')
     FieldToMatchData = Shapes::StringShape.new(name: 'FieldToMatchData')
@@ -130,6 +134,7 @@ module Aws::WAFV2
     IPSetSummaries = Shapes::ListShape.new(name: 'IPSetSummaries')
     IPSetSummary = Shapes::StructureShape.new(name: 'IPSetSummary')
     IPString = Shapes::StringShape.new(name: 'IPString')
+    ImmunityTimeProperty = Shapes::StructureShape.new(name: 'ImmunityTimeProperty')
     JsonBody = Shapes::StructureShape.new(name: 'JsonBody')
     JsonMatchPattern = Shapes::StructureShape.new(name: 'JsonMatchPattern')
     JsonMatchScope = Shapes::StringShape.new(name: 'JsonMatchScope')
@@ -216,6 +221,7 @@ module Aws::WAFV2
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArns = Shapes::ListShape.new(name: 'ResourceArns')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResponseCode = Shapes::IntegerShape.new(name: 'ResponseCode')
     ResponseContent = Shapes::StringShape.new(name: 'ResponseContent')
     ResponseContentType = Shapes::StringShape.new(name: 'ResponseContentType')
     ResponseStatusCode = Shapes::IntegerShape.new(name: 'ResponseStatusCode')
@@ -238,6 +244,7 @@ module Aws::WAFV2
     SingleQueryArgument = Shapes::StructureShape.new(name: 'SingleQueryArgument')
     Size = Shapes::IntegerShape.new(name: 'Size')
     SizeConstraintStatement = Shapes::StructureShape.new(name: 'SizeConstraintStatement')
+    SolveTimestamp = Shapes::IntegerShape.new(name: 'SolveTimestamp')
     SqliMatchStatement = Shapes::StructureShape.new(name: 'SqliMatchStatement')
     Statement = Shapes::StructureShape.new(name: 'Statement')
     Statements = Shapes::ListShape.new(name: 'Statements')
@@ -255,6 +262,7 @@ module Aws::WAFV2
     TextTransformations = Shapes::ListShape.new(name: 'TextTransformations')
     TimeWindow = Shapes::StructureShape.new(name: 'TimeWindow')
     TimeWindowDay = Shapes::IntegerShape.new(name: 'TimeWindowDay')
+    TimeWindowSecond = Shapes::IntegerShape.new(name: 'TimeWindowSecond')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     URIString = Shapes::StringShape.new(name: 'URIString')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -326,6 +334,17 @@ module Aws::WAFV2
     ByteMatchStatement.add_member(:positional_constraint, Shapes::ShapeRef.new(shape: PositionalConstraint, required: true, location_name: "PositionalConstraint"))
     ByteMatchStatement.struct_class = Types::ByteMatchStatement
 
+    CaptchaAction.add_member(:custom_request_handling, Shapes::ShapeRef.new(shape: CustomRequestHandling, location_name: "CustomRequestHandling"))
+    CaptchaAction.struct_class = Types::CaptchaAction
+
+    CaptchaConfig.add_member(:immunity_time_property, Shapes::ShapeRef.new(shape: ImmunityTimeProperty, location_name: "ImmunityTimeProperty"))
+    CaptchaConfig.struct_class = Types::CaptchaConfig
+
+    CaptchaResponse.add_member(:response_code, Shapes::ShapeRef.new(shape: ResponseCode, location_name: "ResponseCode"))
+    CaptchaResponse.add_member(:solve_timestamp, Shapes::ShapeRef.new(shape: SolveTimestamp, location_name: "SolveTimestamp"))
+    CaptchaResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    CaptchaResponse.struct_class = Types::CaptchaResponse
+
     CheckCapacityRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     CheckCapacityRequest.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, required: true, location_name: "Rules"))
     CheckCapacityRequest.struct_class = Types::CheckCapacityRequest
@@ -386,6 +405,7 @@ module Aws::WAFV2
     CreateWebACLRequest.add_member(:visibility_config, Shapes::ShapeRef.new(shape: VisibilityConfig, required: true, location_name: "VisibilityConfig"))
     CreateWebACLRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateWebACLRequest.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
+    CreateWebACLRequest.add_member(:captcha_config, Shapes::ShapeRef.new(shape: CaptchaConfig, location_name: "CaptchaConfig"))
     CreateWebACLRequest.struct_class = Types::CreateWebACLRequest
 
     CreateWebACLResponse.add_member(:summary, Shapes::ShapeRef.new(shape: WebACLSummary, location_name: "Summary"))
@@ -657,6 +677,9 @@ module Aws::WAFV2
     IPSetSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ARN"))
     IPSetSummary.struct_class = Types::IPSetSummary
 
+    ImmunityTimeProperty.add_member(:immunity_time, Shapes::ShapeRef.new(shape: TimeWindowSecond, required: true, location_name: "ImmunityTime"))
+    ImmunityTimeProperty.struct_class = Types::ImmunityTimeProperty
+
     JsonBody.add_member(:match_pattern, Shapes::ShapeRef.new(shape: JsonMatchPattern, required: true, location_name: "MatchPattern"))
     JsonBody.add_member(:match_scope, Shapes::ShapeRef.new(shape: JsonMatchScope, required: true, location_name: "MatchScope"))
     JsonBody.add_member(:invalid_fallback_behavior, Shapes::ShapeRef.new(shape: BodyParsingFallbackBehavior, location_name: "InvalidFallbackBehavior"))
@@ -714,7 +737,7 @@ module Aws::WAFV2
     ListIPSetsResponse.add_member(:ip_sets, Shapes::ShapeRef.new(shape: IPSetSummaries, location_name: "IPSets"))
     ListIPSetsResponse.struct_class = Types::ListIPSetsResponse
 
-    ListLoggingConfigurationsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
+    ListLoggingConfigurationsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     ListLoggingConfigurationsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListLoggingConfigurationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
     ListLoggingConfigurationsRequest.struct_class = Types::ListLoggingConfigurationsRequest
@@ -931,11 +954,13 @@ module Aws::WAFV2
     Rule.add_member(:override_action, Shapes::ShapeRef.new(shape: OverrideAction, location_name: "OverrideAction"))
     Rule.add_member(:rule_labels, Shapes::ShapeRef.new(shape: Labels, location_name: "RuleLabels"))
     Rule.add_member(:visibility_config, Shapes::ShapeRef.new(shape: VisibilityConfig, required: true, location_name: "VisibilityConfig"))
+    Rule.add_member(:captcha_config, Shapes::ShapeRef.new(shape: CaptchaConfig, location_name: "CaptchaConfig"))
     Rule.struct_class = Types::Rule
 
     RuleAction.add_member(:block, Shapes::ShapeRef.new(shape: BlockAction, location_name: "Block"))
     RuleAction.add_member(:allow, Shapes::ShapeRef.new(shape: AllowAction, location_name: "Allow"))
     RuleAction.add_member(:count, Shapes::ShapeRef.new(shape: CountAction, location_name: "Count"))
+    RuleAction.add_member(:captcha, Shapes::ShapeRef.new(shape: CaptchaAction, location_name: "Captcha"))
     RuleAction.struct_class = Types::RuleAction
 
     RuleGroup.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
@@ -980,6 +1005,7 @@ module Aws::WAFV2
     SampledHTTPRequest.add_member(:request_headers_inserted, Shapes::ShapeRef.new(shape: HTTPHeaders, location_name: "RequestHeadersInserted"))
     SampledHTTPRequest.add_member(:response_code_sent, Shapes::ShapeRef.new(shape: ResponseStatusCode, location_name: "ResponseCodeSent"))
     SampledHTTPRequest.add_member(:labels, Shapes::ShapeRef.new(shape: Labels, location_name: "Labels"))
+    SampledHTTPRequest.add_member(:captcha_response, Shapes::ShapeRef.new(shape: CaptchaResponse, location_name: "CaptchaResponse"))
     SampledHTTPRequest.struct_class = Types::SampledHTTPRequest
 
     SampledHTTPRequests.member = Shapes::ShapeRef.new(shape: SampledHTTPRequest)
@@ -1110,6 +1136,7 @@ module Aws::WAFV2
     UpdateWebACLRequest.add_member(:visibility_config, Shapes::ShapeRef.new(shape: VisibilityConfig, required: true, location_name: "VisibilityConfig"))
     UpdateWebACLRequest.add_member(:lock_token, Shapes::ShapeRef.new(shape: LockToken, required: true, location_name: "LockToken"))
     UpdateWebACLRequest.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
+    UpdateWebACLRequest.add_member(:captcha_config, Shapes::ShapeRef.new(shape: CaptchaConfig, location_name: "CaptchaConfig"))
     UpdateWebACLRequest.struct_class = Types::UpdateWebACLRequest
 
     UpdateWebACLResponse.add_member(:next_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextLockToken"))
@@ -1193,6 +1220,7 @@ module Aws::WAFV2
     WebACL.add_member(:managed_by_firewall_manager, Shapes::ShapeRef.new(shape: Boolean, location_name: "ManagedByFirewallManager"))
     WebACL.add_member(:label_namespace, Shapes::ShapeRef.new(shape: LabelName, location_name: "LabelNamespace"))
     WebACL.add_member(:custom_response_bodies, Shapes::ShapeRef.new(shape: CustomResponseBodies, location_name: "CustomResponseBodies"))
+    WebACL.add_member(:captcha_config, Shapes::ShapeRef.new(shape: CaptchaConfig, location_name: "CaptchaConfig"))
     WebACL.struct_class = Types::WebACL
 
     WebACLSummaries.member = Shapes::ShapeRef.new(shape: WebACLSummary)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.278.0 (2021-11-08)
+------------------
+
+* Feature - This release adds internal validation on the GatewayAssociationState field
+
 1.277.0 (2021-11-05)
 ------------------
 

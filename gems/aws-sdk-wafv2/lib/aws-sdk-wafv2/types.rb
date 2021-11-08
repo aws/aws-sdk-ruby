@@ -16,7 +16,7 @@ module Aws::WAFV2
     #   data as a hash:
     #
     #       {
-    #         action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #         action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
     #       }
     #
     # @!attribute [rw] action
@@ -660,6 +660,125 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Specifies that WAF should run a `CAPTCHA` check against the request:
+    #
+    # * If the request includes a valid, unexpired `CAPTCHA` token, WAF
+    #   allows the web request inspection to proceed to the next rule,
+    #   similar to a `CountAction`.
+    #
+    # * If the request doesn't include a valid, unexpired `CAPTCHA` token,
+    #   WAF discontinues the web ACL evaluation of the request and blocks it
+    #   from going to its intended destination.
+    #
+    #   WAF generates a response that it sends back to the client, which
+    #   includes the following:
+    #
+    #   * The header `x-amzn-waf-action` with a value of `captcha`.
+    #
+    #   * The HTTP status code `405 Method Not Allowed`.
+    #
+    #   * If the request contains an `Accept` header with a value of
+    #     `text/html`, the response includes a `CAPTCHA` challenge.
+    #
+    # You can configure the expiration time in the `CaptchaConfig`
+    # `ImmunityTimeProperty` setting at the rule and web ACL level. The rule
+    # setting overrides the web ACL setting.
+    #
+    # This action option is available for rules. It isn't available for web
+    # ACL default actions.
+    #
+    # This is used in the context of other settings, for example to specify
+    # values for RuleAction and web ACL DefaultAction.
+    #
+    # @note When making an API call, you may pass CaptchaAction
+    #   data as a hash:
+    #
+    #       {
+    #         custom_request_handling: {
+    #           insert_headers: [ # required
+    #             {
+    #               name: "CustomHTTPHeaderName", # required
+    #               value: "CustomHTTPHeaderValue", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] custom_request_handling
+    #   Defines custom handling for the web request.
+    #
+    #   For information about customizing web requests and responses, see
+    #   [Customizing web requests and responses in WAF][1] in the [WAF
+    #   Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
+    #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Types::CustomRequestHandling]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CaptchaAction AWS API Documentation
+    #
+    class CaptchaAction < Struct.new(
+      :custom_request_handling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how WAF should handle `CAPTCHA` evaluations. This is
+    # available at the web ACL level and in each rule.
+    #
+    # @note When making an API call, you may pass CaptchaConfig
+    #   data as a hash:
+    #
+    #       {
+    #         immunity_time_property: {
+    #           immunity_time: 1, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] immunity_time_property
+    #   Determines how long a `CAPTCHA` token remains valid after the client
+    #   successfully solves a `CAPTCHA` puzzle.
+    #   @return [Types::ImmunityTimeProperty]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CaptchaConfig AWS API Documentation
+    #
+    class CaptchaConfig < Struct.new(
+      :immunity_time_property)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result from the inspection of the web request for a valid
+    # `CAPTCHA` token.
+    #
+    # @!attribute [rw] response_code
+    #   The HTTP response code indicating the status of the `CAPTCHA` token
+    #   in the web request. If the token is missing, invalid, or expired,
+    #   this code is `405 Method Not Allowed`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] solve_timestamp
+    #   The time that the `CAPTCHA` puzzle was solved for the supplied
+    #   token.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for failure, populated when the evaluation of the token
+    #   fails.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CaptchaResponse AWS API Documentation
+    #
+    class CaptchaResponse < Struct.new(
+      :response_code,
+      :solve_timestamp,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CheckCapacityRequest
     #   data as a hash:
     #
@@ -990,6 +1109,16 @@ module Aws::WAFV2
     #                   ],
     #                 },
     #               },
+    #               captcha: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #             },
     #             override_action: {
     #               count: {
@@ -1014,6 +1143,11 @@ module Aws::WAFV2
     #               sampled_requests_enabled: false, # required
     #               cloud_watch_metrics_enabled: false, # required
     #               metric_name: "MetricName", # required
+    #             },
+    #             captcha_config: {
+    #               immunity_time_property: {
+    #                 immunity_time: 1, # required
+    #               },
     #             },
     #           },
     #         ],
@@ -1067,7 +1201,7 @@ module Aws::WAFV2
     #
     #       {
     #         action_condition: {
-    #           action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #           action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
     #         },
     #         label_name_condition: {
     #           label_name: "LabelName", # required
@@ -1656,6 +1790,16 @@ module Aws::WAFV2
     #                   ],
     #                 },
     #               },
+    #               captcha: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #             },
     #             override_action: {
     #               count: {
@@ -1680,6 +1824,11 @@ module Aws::WAFV2
     #               sampled_requests_enabled: false, # required
     #               cloud_watch_metrics_enabled: false, # required
     #               metric_name: "MetricName", # required
+    #             },
+    #             captcha_config: {
+    #               immunity_time_property: {
+    #                 immunity_time: 1, # required
+    #               },
     #             },
     #           },
     #         ],
@@ -2168,6 +2317,16 @@ module Aws::WAFV2
     #                   ],
     #                 },
     #               },
+    #               captcha: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #             },
     #             override_action: {
     #               count: {
@@ -2193,6 +2352,11 @@ module Aws::WAFV2
     #               cloud_watch_metrics_enabled: false, # required
     #               metric_name: "MetricName", # required
     #             },
+    #             captcha_config: {
+    #               immunity_time_property: {
+    #                 immunity_time: 1, # required
+    #               },
+    #             },
     #           },
     #         ],
     #         visibility_config: { # required
@@ -2210,6 +2374,11 @@ module Aws::WAFV2
     #           "EntityName" => {
     #             content_type: "TEXT_PLAIN", # required, accepts TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON
     #             content: "ResponseContent", # required
+    #           },
+    #         },
+    #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
     #           },
     #         },
     #       }
@@ -2280,6 +2449,12 @@ module Aws::WAFV2
     #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
     #   @return [Hash<String,Types::CustomResponseBody>]
     #
+    # @!attribute [rw] captcha_config
+    #   Specifies how WAF should handle `CAPTCHA` evaluations for rules that
+    #   don't have their own `CaptchaConfig` settings. If you don't
+    #   specify this, WAF uses its default settings for `CaptchaConfig`.
+    #   @return [Types::CaptchaConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateWebACLRequest AWS API Documentation
     #
     class CreateWebACLRequest < Struct.new(
@@ -2290,7 +2465,8 @@ module Aws::WAFV2
       :rules,
       :visibility_config,
       :tags,
-      :custom_response_bodies)
+      :custom_response_bodies,
+      :captcha_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3073,10 +3249,11 @@ module Aws::WAFV2
     #
     class DisassociateWebACLResponse < Aws::EmptyStructure; end
 
-    # Specifies a single rule to exclude from the rule group. Excluding a
-    # rule overrides its action setting for the rule group in the web ACL,
-    # setting it to `COUNT`. This effectively excludes the rule from acting
-    # on web requests.
+    # Specifies a single rule in a rule group whose action you want to
+    # override to `Count`. When you exclude a rule, WAF evaluates it exactly
+    # as it would if the rule action setting were `Count`. This is a useful
+    # option for testing the rules in a rule group without modifying how
+    # they handle your web traffic.
     #
     # @note When making an API call, you may pass ExcludedRule
     #   data as a hash:
@@ -3086,7 +3263,7 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the rule to exclude.
+    #   The name of the rule whose action you want to override to `Count`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ExcludedRule AWS API Documentation
@@ -3241,7 +3418,7 @@ module Aws::WAFV2
     #         conditions: [ # required
     #           {
     #             action_condition: {
-    #               action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #               action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
     #             },
     #             label_name_condition: {
     #               label_name: "LabelName", # required
@@ -3297,22 +3474,21 @@ module Aws::WAFV2
     #   @return [Types::FirewallManagerStatement]
     #
     # @!attribute [rw] override_action
-    #   The override action to apply to the rules in a rule group. Used only
-    #   for rule statements that reference a rule group, like
-    #   `RuleGroupReferenceStatement` and `ManagedRuleGroupStatement`.
+    #   The action to use in the place of the action that results from the
+    #   rule group evaluation. Set the override action to none to leave the
+    #   result of the rule group alone. Set it to count to override the
+    #   result to count only.
     #
-    #   Set the override action to none to leave the rule actions in effect.
-    #   Set it to count to only count matches, regardless of the rule action
-    #   settings.
+    #   You can only use this for rule statements that reference a rule
+    #   group, like `RuleGroupReferenceStatement` and
+    #   `ManagedRuleGroupStatement`.
     #
-    #   In a Rule, you must specify either this `OverrideAction` setting or
-    #   the rule `Action` setting, but not both:
+    #   <note markdown="1"> This option is usually set to none. It does not affect how the rules
+    #   in the rule group are evaluated. If you want the rules in the rule
+    #   group to only count matches, do not use this and instead exclude
+    #   those rules in your rule group reference statement settings.
     #
-    #   * If the rule statement references a rule group, use this override
-    #     action setting and not the action setting.
-    #
-    #   * If the rule statement does not reference a rule group, use the
-    #     rule action setting and not this rule override action setting.
+    #    </note>
     #   @return [Types::OverrideAction]
     #
     # @!attribute [rw] visibility_config
@@ -4443,6 +4619,29 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Determines how long a `CAPTCHA` token remains valid after the client
+    # successfully solves a `CAPTCHA` puzzle.
+    #
+    # @note When making an API call, you may pass ImmunityTimeProperty
+    #   data as a hash:
+    #
+    #       {
+    #         immunity_time: 1, # required
+    #       }
+    #
+    # @!attribute [rw] immunity_time
+    #   The amount of time, in seconds, that a `CAPTCHA` token is valid. The
+    #   default setting is 300.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ImmunityTimeProperty AWS API Documentation
+    #
+    class ImmunityTimeProperty < Struct.new(
+      :immunity_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The body of a web request, inspected as JSON. The body immediately
     # follows the request headers. This is used in the FieldToMatch
     # specification.
@@ -4923,7 +5122,7 @@ module Aws::WAFV2
     #   data as a hash:
     #
     #       {
-    #         scope: "CLOUDFRONT", # accepts CLOUDFRONT, REGIONAL
+    #         scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
     #         next_marker: "NextMarker",
     #         limit: 1,
     #       }
@@ -5414,7 +5613,7 @@ module Aws::WAFV2
     #               conditions: [ # required
     #                 {
     #                   action_condition: {
-    #                     action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #                     action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
     #                   },
     #                   label_name_condition: {
     #                     label_name: "LabelName", # required
@@ -5490,7 +5689,7 @@ module Aws::WAFV2
     #             conditions: [ # required
     #               {
     #                 action_condition: {
-    #                   action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #                   action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
     #                 },
     #                 label_name_condition: {
     #                   label_name: "LabelName", # required
@@ -5850,9 +6049,11 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] excluded_rules
-    #   The rules whose actions are set to `COUNT` by the web ACL,
-    #   regardless of the action that is set on the rule. This effectively
-    #   excludes the rule from acting on web requests.
+    #   The rules in the referenced rule group whose actions are set to
+    #   `Count`. When you exclude a rule, WAF evaluates it exactly as it
+    #   would if the rule action setting were `Count`. This is a useful
+    #   option for testing the rules in a rule group without modifying how
+    #   they handle your web traffic.
     #   @return [Array<Types::ExcludedRule>]
     #
     # @!attribute [rw] scope_down_statement
@@ -6174,9 +6375,9 @@ module Aws::WAFV2
     #
     class Method < Aws::EmptyStructure; end
 
-    # Specifies that WAF should do nothing. This is generally used to try
-    # out a rule without performing any actions. You set the
-    # `OverrideAction` on the Rule.
+    # Specifies that WAF should do nothing. This is used for the
+    # `OverrideAction` setting on a Rule when the rule uses a rule group
+    # reference statement.
     #
     # This is used in the context of other settings, for example to specify
     # values for RuleAction and web ACL DefaultAction.
@@ -6807,22 +7008,20 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # The override action to apply to the rules in a rule group. Used only
-    # for rule statements that reference a rule group, like
-    # `RuleGroupReferenceStatement` and `ManagedRuleGroupStatement`.
+    # The action to use in the place of the action that results from the
+    # rule group evaluation. Set the override action to none to leave the
+    # result of the rule group alone. Set it to count to override the result
+    # to count only.
     #
-    # Set the override action to none to leave the rule actions in effect.
-    # Set it to count to only count matches, regardless of the rule action
-    # settings.
+    # You can only use this for rule statements that reference a rule group,
+    # like `RuleGroupReferenceStatement` and `ManagedRuleGroupStatement`.
     #
-    # In a Rule, you must specify either this `OverrideAction` setting or
-    # the rule `Action` setting, but not both:
+    # <note markdown="1"> This option is usually set to none. It does not affect how the rules
+    # in the rule group are evaluated. If you want the rules in the rule
+    # group to only count matches, do not use this and instead exclude those
+    # rules in your rule group reference statement settings.
     #
-    # * If the rule statement references a rule group, use this override
-    #   action setting and not the action setting.
-    #
-    # * If the rule statement does not reference a rule group, use the rule
-    #   action setting and not this rule override action setting.
+    #  </note>
     #
     # @note When making an API call, you may pass OverrideAction
     #   data as a hash:
@@ -6843,11 +7042,19 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] count
-    #   Override the rule action setting to count.
+    #   Override the rule group evaluation result to count only.
+    #
+    #   <note markdown="1"> This option is usually set to none. It does not affect how the rules
+    #   in the rule group are evaluated. If you want the rules in the rule
+    #   group to only count matches, do not use this and instead exclude
+    #   those rules in your rule group reference statement settings.
+    #
+    #    </note>
     #   @return [Types::CountAction]
     #
     # @!attribute [rw] none
-    #   Don't override the rule action setting.
+    #   Don't override the rule group evaluation result. This is the most
+    #   common setting.
     #   @return [Types::NoneAction]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/OverrideAction AWS API Documentation
@@ -6904,7 +7111,7 @@ module Aws::WAFV2
     #                 conditions: [ # required
     #                   {
     #                     action_condition: {
-    #                       action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #                       action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
     #                     },
     #                     label_name_condition: {
     #                       label_name: "LabelName", # required
@@ -8116,6 +8323,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           captcha: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -8140,6 +8357,11 @@ module Aws::WAFV2
     #           sampled_requests_enabled: false, # required
     #           cloud_watch_metrics_enabled: false, # required
     #           metric_name: "MetricName", # required
+    #         },
+    #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
     #         },
     #       }
     #
@@ -8181,22 +8403,21 @@ module Aws::WAFV2
     #   @return [Types::RuleAction]
     #
     # @!attribute [rw] override_action
-    #   The override action to apply to the rules in a rule group. Used only
-    #   for rule statements that reference a rule group, like
-    #   `RuleGroupReferenceStatement` and `ManagedRuleGroupStatement`.
+    #   The action to use in the place of the action that results from the
+    #   rule group evaluation. Set the override action to none to leave the
+    #   result of the rule group alone. Set it to count to override the
+    #   result to count only.
     #
-    #   Set the override action to none to leave the rule actions in effect.
-    #   Set it to count to only count matches, regardless of the rule action
-    #   settings.
+    #   You can only use this for rule statements that reference a rule
+    #   group, like `RuleGroupReferenceStatement` and
+    #   `ManagedRuleGroupStatement`.
     #
-    #   In a Rule, you must specify either this `OverrideAction` setting or
-    #   the rule `Action` setting, but not both:
+    #   <note markdown="1"> This option is usually set to none. It does not affect how the rules
+    #   in the rule group are evaluated. If you want the rules in the rule
+    #   group to only count matches, do not use this and instead exclude
+    #   those rules in your rule group reference statement settings.
     #
-    #   * If the rule statement references a rule group, use this override
-    #     action setting and not the action setting.
-    #
-    #   * If the rule statement does not reference a rule group, use the
-    #     rule action setting and not this rule override action setting.
+    #    </note>
     #   @return [Types::OverrideAction]
     #
     # @!attribute [rw] rule_labels
@@ -8230,6 +8451,12 @@ module Aws::WAFV2
     #   collection.
     #   @return [Types::VisibilityConfig]
     #
+    # @!attribute [rw] captcha_config
+    #   Specifies how WAF should handle `CAPTCHA` evaluations. If you don't
+    #   specify this, WAF uses the `CAPTCHA` configuration that's defined
+    #   for the web ACL.
+    #   @return [Types::CaptchaConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/Rule AWS API Documentation
     #
     class Rule < Struct.new(
@@ -8239,7 +8466,8 @@ module Aws::WAFV2
       :action,
       :override_action,
       :rule_labels,
-      :visibility_config)
+      :visibility_config,
+      :captcha_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8284,6 +8512,16 @@ module Aws::WAFV2
     #             ],
     #           },
     #         },
+    #         captcha: {
+    #           custom_request_handling: {
+    #             insert_headers: [ # required
+    #               {
+    #                 name: "CustomHTTPHeaderName", # required
+    #                 value: "CustomHTTPHeaderValue", # required
+    #               },
+    #             ],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] block
@@ -8298,12 +8536,17 @@ module Aws::WAFV2
     #   Instructs WAF to count the web request and allow it.
     #   @return [Types::CountAction]
     #
+    # @!attribute [rw] captcha
+    #   Instructs WAF to run a `CAPTCHA` check against the web request.
+    #   @return [Types::CaptchaAction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RuleAction AWS API Documentation
     #
     class RuleAction < Struct.new(
       :block,
       :allow,
-      :count)
+      :count,
+      :captcha)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8457,8 +8700,11 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] excluded_rules
-    #   The names of rules that are in the referenced rule group, but that
-    #   you want WAF to exclude from processing for this rule statement.
+    #   The rules in the referenced rule group whose actions are set to
+    #   `Count`. When you exclude a rule, WAF evaluates it exactly as it
+    #   would if the rule action setting were `Count`. This is a useful
+    #   option for testing the rules in a rule group without modifying how
+    #   they handle your web traffic.
     #   @return [Array<Types::ExcludedRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RuleGroupReferenceStatement AWS API Documentation
@@ -8567,8 +8813,8 @@ module Aws::WAFV2
     #   @return [Time]
     #
     # @!attribute [rw] action
-    #   The action for the `Rule` that the request matched: `ALLOW`,
-    #   `BLOCK`, or `COUNT`.
+    #   The action for the `Rule` that the request matched: `Allow`,
+    #   `Block`, or `Count`.
     #   @return [String]
     #
     # @!attribute [rw] rule_name_within_rule_group
@@ -8599,6 +8845,10 @@ module Aws::WAFV2
     #   or `awswaf:managed:aws:managed-rule-set:header:encoding:utf8`.
     #   @return [Array<Types::Label>]
     #
+    # @!attribute [rw] captcha_response
+    #   The `CAPTCHA` response for the request.
+    #   @return [Types::CaptchaResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SampledHTTPRequest AWS API Documentation
     #
     class SampledHTTPRequest < Struct.new(
@@ -8609,7 +8859,8 @@ module Aws::WAFV2
       :rule_name_within_rule_group,
       :request_headers_inserted,
       :response_code_sent,
-      :labels)
+      :labels,
+      :captcha_response)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11711,6 +11962,16 @@ module Aws::WAFV2
     #                   ],
     #                 },
     #               },
+    #               captcha: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #             },
     #             override_action: {
     #               count: {
@@ -11735,6 +11996,11 @@ module Aws::WAFV2
     #               sampled_requests_enabled: false, # required
     #               cloud_watch_metrics_enabled: false, # required
     #               metric_name: "MetricName", # required
+    #             },
+    #             captcha_config: {
+    #               immunity_time_property: {
+    #                 immunity_time: 1, # required
+    #               },
     #             },
     #           },
     #         ],
@@ -12213,6 +12479,16 @@ module Aws::WAFV2
     #                   ],
     #                 },
     #               },
+    #               captcha: {
+    #                 custom_request_handling: {
+    #                   insert_headers: [ # required
+    #                     {
+    #                       name: "CustomHTTPHeaderName", # required
+    #                       value: "CustomHTTPHeaderValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
     #             },
     #             override_action: {
     #               count: {
@@ -12238,6 +12514,11 @@ module Aws::WAFV2
     #               cloud_watch_metrics_enabled: false, # required
     #               metric_name: "MetricName", # required
     #             },
+    #             captcha_config: {
+    #               immunity_time_property: {
+    #                 immunity_time: 1, # required
+    #               },
+    #             },
     #           },
     #         ],
     #         visibility_config: { # required
@@ -12250,6 +12531,11 @@ module Aws::WAFV2
     #           "EntityName" => {
     #             content_type: "TEXT_PLAIN", # required, accepts TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON
     #             content: "ResponseContent", # required
+    #           },
+    #         },
+    #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
     #           },
     #         },
     #       }
@@ -12334,6 +12620,12 @@ module Aws::WAFV2
     #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
     #   @return [Hash<String,Types::CustomResponseBody>]
     #
+    # @!attribute [rw] captcha_config
+    #   Specifies how WAF should handle `CAPTCHA` evaluations for rules that
+    #   don't have their own `CaptchaConfig` settings. If you don't
+    #   specify this, WAF uses its default settings for `CaptchaConfig`.
+    #   @return [Types::CaptchaConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UpdateWebACLRequest AWS API Documentation
     #
     class UpdateWebACLRequest < Struct.new(
@@ -12345,7 +12637,8 @@ module Aws::WAFV2
       :rules,
       :visibility_config,
       :lock_token,
-      :custom_response_bodies)
+      :custom_response_bodies,
+      :captcha_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12885,6 +13178,12 @@ module Aws::WAFV2
     #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
     #   @return [Hash<String,Types::CustomResponseBody>]
     #
+    # @!attribute [rw] captcha_config
+    #   Specifies how WAF should handle `CAPTCHA` evaluations for rules that
+    #   don't have their own `CaptchaConfig` settings. If you don't
+    #   specify this, WAF uses its default settings for `CaptchaConfig`.
+    #   @return [Types::CaptchaConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -12900,7 +13199,8 @@ module Aws::WAFV2
       :post_process_firewall_manager_rule_groups,
       :managed_by_firewall_manager,
       :label_namespace,
-      :custom_response_bodies)
+      :custom_response_bodies,
+      :captcha_config)
       SENSITIVE = []
       include Aws::Structure
     end

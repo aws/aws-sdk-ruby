@@ -70,7 +70,7 @@ module Aws::ChimeSDKMeetings
     #   data as a hash:
     #
     #       {
-    #         meeting_id: "String", # required
+    #         meeting_id: "GuidString", # required
     #         attendees: [ # required
     #           {
     #             external_user_id: "ExternalUserId", # required
@@ -146,7 +146,7 @@ module Aws::ChimeSDKMeetings
     #   data as a hash:
     #
     #       {
-    #         meeting_id: "String", # required
+    #         meeting_id: "GuidString", # required
     #         external_user_id: "ExternalUserId", # required
     #       }
     #
@@ -208,7 +208,7 @@ module Aws::ChimeSDKMeetings
     #
     #       {
     #         client_request_token: "ClientRequestToken", # required
-    #         media_region: "String", # required
+    #         media_region: "MediaRegion", # required
     #         meeting_host_id: "ExternalUserId",
     #         external_meeting_id: "ExternalMeetingId", # required
     #         notifications_configuration: {
@@ -227,7 +227,7 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     #
     # @!attribute [rw] media_region
-    #   The Region in which to create the meeting. Default: `us-east-1`.
+    #   The Region in which to create the meeting.
     #
     #   Available values: `af-south-1` , `ap-northeast-1` , `ap-northeast-2`
     #   , `ap-south-1` , `ap-southeast-1` , `ap-southeast-2` ,
@@ -279,7 +279,7 @@ module Aws::ChimeSDKMeetings
     #
     #       {
     #         client_request_token: "ClientRequestToken", # required
-    #         media_region: "String", # required
+    #         media_region: "MediaRegion", # required
     #         meeting_host_id: "ExternalUserId",
     #         external_meeting_id: "ExternalMeetingId", # required
     #         notifications_configuration: {
@@ -303,7 +303,7 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     #
     # @!attribute [rw] media_region
-    #   The Region in which to create the meeting. Default: `us-east-1`.
+    #   The Region in which to create the meeting.
     #   @return [String]
     #
     # @!attribute [rw] meeting_host_id
@@ -365,8 +365,8 @@ module Aws::ChimeSDKMeetings
     #   data as a hash:
     #
     #       {
-    #         meeting_id: "String", # required
-    #         attendee_id: "String", # required
+    #         meeting_id: "GuidString", # required
+    #         attendee_id: "GuidString", # required
     #       }
     #
     # @!attribute [rw] meeting_id
@@ -390,7 +390,7 @@ module Aws::ChimeSDKMeetings
     #   data as a hash:
     #
     #       {
-    #         meeting_id: "String", # required
+    #         meeting_id: "GuidString", # required
     #       }
     #
     # @!attribute [rw] meeting_id
@@ -525,8 +525,8 @@ module Aws::ChimeSDKMeetings
     #   data as a hash:
     #
     #       {
-    #         meeting_id: "String", # required
-    #         attendee_id: "String", # required
+    #         meeting_id: "GuidString", # required
+    #         attendee_id: "GuidString", # required
     #       }
     #
     # @!attribute [rw] meeting_id
@@ -562,7 +562,7 @@ module Aws::ChimeSDKMeetings
     #   data as a hash:
     #
     #       {
-    #         meeting_id: "String", # required
+    #         meeting_id: "GuidString", # required
     #       }
     #
     # @!attribute [rw] meeting_id
@@ -616,7 +616,7 @@ module Aws::ChimeSDKMeetings
     #   data as a hash:
     #
     #       {
-    #         meeting_id: "String", # required
+    #         meeting_id: "GuidString", # required
     #         next_token: "String",
     #         max_results: 1,
     #       }
@@ -839,7 +839,7 @@ module Aws::ChimeSDKMeetings
     #   data as a hash:
     #
     #       {
-    #         meeting_id: "String", # required
+    #         meeting_id: "GuidString", # required
     #         transcription_configuration: { # required
     #           engine_transcribe_settings: {
     #             language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
@@ -881,7 +881,7 @@ module Aws::ChimeSDKMeetings
     #   data as a hash:
     #
     #       {
-    #         meeting_id: "String", # required
+    #         meeting_id: "GuidString", # required
     #       }
     #
     # @!attribute [rw] meeting_id

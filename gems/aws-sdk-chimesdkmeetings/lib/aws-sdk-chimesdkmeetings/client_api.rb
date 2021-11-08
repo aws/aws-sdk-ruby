@@ -48,6 +48,7 @@ module Aws::ChimeSDKMeetings
     ListAttendeesRequest = Shapes::StructureShape.new(name: 'ListAttendeesRequest')
     ListAttendeesResponse = Shapes::StructureShape.new(name: 'ListAttendeesResponse')
     MediaPlacement = Shapes::StructureShape.new(name: 'MediaPlacement')
+    MediaRegion = Shapes::StringShape.new(name: 'MediaRegion')
     Meeting = Shapes::StructureShape.new(name: 'Meeting')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NotificationsConfiguration = Shapes::StructureShape.new(name: 'NotificationsConfiguration')
@@ -69,7 +70,7 @@ module Aws::ChimeSDKMeetings
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
 
     Attendee.add_member(:external_user_id, Shapes::ShapeRef.new(shape: ExternalUserId, location_name: "ExternalUserId"))
-    Attendee.add_member(:attendee_id, Shapes::ShapeRef.new(shape: String, location_name: "AttendeeId"))
+    Attendee.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "AttendeeId"))
     Attendee.add_member(:join_token, Shapes::ShapeRef.new(shape: JoinTokenString, location_name: "JoinToken"))
     Attendee.struct_class = Types::Attendee
 
@@ -82,7 +83,7 @@ module Aws::ChimeSDKMeetings
 
     BatchCreateAttendeeErrorList.member = Shapes::ShapeRef.new(shape: CreateAttendeeError)
 
-    BatchCreateAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "MeetingId"))
+    BatchCreateAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     BatchCreateAttendeeRequest.add_member(:attendees, Shapes::ShapeRef.new(shape: CreateAttendeeRequestItemList, required: true, location_name: "Attendees"))
     BatchCreateAttendeeRequest.struct_class = Types::BatchCreateAttendeeRequest
 
@@ -95,7 +96,7 @@ module Aws::ChimeSDKMeetings
     CreateAttendeeError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
     CreateAttendeeError.struct_class = Types::CreateAttendeeError
 
-    CreateAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "MeetingId"))
+    CreateAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     CreateAttendeeRequest.add_member(:external_user_id, Shapes::ShapeRef.new(shape: ExternalUserId, required: true, location_name: "ExternalUserId"))
     CreateAttendeeRequest.struct_class = Types::CreateAttendeeRequest
 
@@ -108,7 +109,7 @@ module Aws::ChimeSDKMeetings
     CreateAttendeeResponse.struct_class = Types::CreateAttendeeResponse
 
     CreateMeetingRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
-    CreateMeetingRequest.add_member(:media_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MediaRegion"))
+    CreateMeetingRequest.add_member(:media_region, Shapes::ShapeRef.new(shape: MediaRegion, required: true, location_name: "MediaRegion"))
     CreateMeetingRequest.add_member(:meeting_host_id, Shapes::ShapeRef.new(shape: ExternalUserId, location_name: "MeetingHostId"))
     CreateMeetingRequest.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingId, required: true, location_name: "ExternalMeetingId"))
     CreateMeetingRequest.add_member(:notifications_configuration, Shapes::ShapeRef.new(shape: NotificationsConfiguration, location_name: "NotificationsConfiguration"))
@@ -118,7 +119,7 @@ module Aws::ChimeSDKMeetings
     CreateMeetingResponse.struct_class = Types::CreateMeetingResponse
 
     CreateMeetingWithAttendeesRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
-    CreateMeetingWithAttendeesRequest.add_member(:media_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MediaRegion"))
+    CreateMeetingWithAttendeesRequest.add_member(:media_region, Shapes::ShapeRef.new(shape: MediaRegion, required: true, location_name: "MediaRegion"))
     CreateMeetingWithAttendeesRequest.add_member(:meeting_host_id, Shapes::ShapeRef.new(shape: ExternalUserId, location_name: "MeetingHostId"))
     CreateMeetingWithAttendeesRequest.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingId, required: true, location_name: "ExternalMeetingId"))
     CreateMeetingWithAttendeesRequest.add_member(:notifications_configuration, Shapes::ShapeRef.new(shape: NotificationsConfiguration, location_name: "NotificationsConfiguration"))
@@ -132,11 +133,11 @@ module Aws::ChimeSDKMeetings
     CreateMeetingWithAttendeesResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchCreateAttendeeErrorList, location_name: "Errors"))
     CreateMeetingWithAttendeesResponse.struct_class = Types::CreateMeetingWithAttendeesResponse
 
-    DeleteAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "MeetingId"))
-    DeleteAttendeeRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "AttendeeId"))
+    DeleteAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
+    DeleteAttendeeRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "AttendeeId"))
     DeleteAttendeeRequest.struct_class = Types::DeleteAttendeeRequest
 
-    DeleteMeetingRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "MeetingId"))
+    DeleteMeetingRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     DeleteMeetingRequest.struct_class = Types::DeleteMeetingRequest
 
     EngineTranscribeMedicalSettings.add_member(:language_code, Shapes::ShapeRef.new(shape: TranscribeMedicalLanguageCode, required: true, location_name: "LanguageCode"))
@@ -158,14 +159,14 @@ module Aws::ChimeSDKMeetings
     ForbiddenException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
-    GetAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "MeetingId"))
-    GetAttendeeRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "AttendeeId"))
+    GetAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
+    GetAttendeeRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "AttendeeId"))
     GetAttendeeRequest.struct_class = Types::GetAttendeeRequest
 
     GetAttendeeResponse.add_member(:attendee, Shapes::ShapeRef.new(shape: Attendee, location_name: "Attendee"))
     GetAttendeeResponse.struct_class = Types::GetAttendeeResponse
 
-    GetMeetingRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "MeetingId"))
+    GetMeetingRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     GetMeetingRequest.struct_class = Types::GetMeetingRequest
 
     GetMeetingResponse.add_member(:meeting, Shapes::ShapeRef.new(shape: Meeting, location_name: "Meeting"))
@@ -176,7 +177,7 @@ module Aws::ChimeSDKMeetings
     LimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
-    ListAttendeesRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "MeetingId"))
+    ListAttendeesRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     ListAttendeesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListAttendeesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
     ListAttendeesRequest.struct_class = Types::ListAttendeesRequest
@@ -198,7 +199,7 @@ module Aws::ChimeSDKMeetings
     Meeting.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MeetingId"))
     Meeting.add_member(:meeting_host_id, Shapes::ShapeRef.new(shape: ExternalUserId, location_name: "MeetingHostId"))
     Meeting.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingId, location_name: "ExternalMeetingId"))
-    Meeting.add_member(:media_region, Shapes::ShapeRef.new(shape: String, location_name: "MediaRegion"))
+    Meeting.add_member(:media_region, Shapes::ShapeRef.new(shape: MediaRegion, location_name: "MediaRegion"))
     Meeting.add_member(:media_placement, Shapes::ShapeRef.new(shape: MediaPlacement, location_name: "MediaPlacement"))
     Meeting.struct_class = Types::Meeting
 
@@ -218,11 +219,11 @@ module Aws::ChimeSDKMeetings
     ServiceUnavailableException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
-    StartMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "MeetingId"))
+    StartMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     StartMeetingTranscriptionRequest.add_member(:transcription_configuration, Shapes::ShapeRef.new(shape: TranscriptionConfiguration, required: true, location_name: "TranscriptionConfiguration"))
     StartMeetingTranscriptionRequest.struct_class = Types::StartMeetingTranscriptionRequest
 
-    StopMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "MeetingId"))
+    StopMeetingTranscriptionRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "MeetingId"))
     StopMeetingTranscriptionRequest.struct_class = Types::StopMeetingTranscriptionRequest
 
     TranscriptionConfiguration.add_member(:engine_transcribe_settings, Shapes::ShapeRef.new(shape: EngineTranscribeSettings, location_name: "EngineTranscribeSettings"))

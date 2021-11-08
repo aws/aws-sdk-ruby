@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2021-11-08)
+------------------
+
+* Feature - SageMaker CreateEndpoint and UpdateEndpoint APIs now support additional deployment configuration to manage traffic shifting options and automatic rollback monitoring. DescribeEndpoint now shows new in-progress deployment details with stage status.
+
 1.107.0 (2021-11-04)
 ------------------
 

@@ -222,7 +222,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # This API is not supported.
+    # An Amazon CloudWatch alarm configured to monitor metrics on an
+    # endpoint.
     #
     # @note When making an API call, you may pass Alarm
     #   data as a hash:
@@ -232,6 +233,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] alarm_name
+    #   The name of a CloudWatch alarm in your account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Alarm AWS API Documentation
@@ -2402,7 +2404,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Currently, the `AutoRollbackConfig` API is not supported.
+    # Automatic rollback configuration for handling endpoint deployment
+    # failures and recovery.
     #
     # @note When making an API call, you may pass AutoRollbackConfig
     #   data as a hash:
@@ -2416,6 +2419,9 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] alarms
+    #   List of CloudWatch alarms in your account that are configured to
+    #   monitor metrics on an endpoint. If any alarms are tripped during a
+    #   deployment, SageMaker rolls back the deployment.
     #   @return [Array<Types::Alarm>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoRollbackConfig AWS API Documentation
@@ -2555,16 +2561,26 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Currently, the `BlueGreenUpdatePolicy` API is not supported.
+    # Update policy for a blue/green deployment. If this update policy is
+    # specified, SageMaker creates a new fleet during the deployment while
+    # maintaining the old fleet. SageMaker flips traffic to the new fleet
+    # according to the specified traffic routing configuration. Only one
+    # update policy should be used in the deployment configuration. If no
+    # update policy is specified, SageMaker uses a blue/green deployment
+    # strategy with all at once traffic shifting by default.
     #
     # @note When making an API call, you may pass BlueGreenUpdatePolicy
     #   data as a hash:
     #
     #       {
     #         traffic_routing_configuration: { # required
-    #           type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY
+    #           type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
     #           wait_interval_in_seconds: 1, # required
     #           canary_size: {
+    #             type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #             value: 1, # required
+    #           },
+    #           linear_step_size: {
     #             type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
     #             value: 1, # required
     #           },
@@ -2574,12 +2590,20 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] traffic_routing_configuration
+    #   Defines the traffic routing strategy to shift traffic from the old
+    #   fleet to the new fleet during an endpoint deployment.
     #   @return [Types::TrafficRoutingConfig]
     #
     # @!attribute [rw] termination_wait_in_seconds
+    #   Additional waiting time in seconds after the completion of an
+    #   endpoint deployment before terminating the old endpoint fleet.
+    #   Default is 0.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_execution_timeout_in_seconds
+    #   Maximum execution timeout for the deployment. Note that the timeout
+    #   value should be larger than the total waiting time specified in
+    #   `TerminationWaitInSeconds` and `WaitIntervalInSeconds`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/BlueGreenUpdatePolicy AWS API Documentation
@@ -2666,7 +2690,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Currently, the `CapacitySize` API is not supported.
+    # Specifies the endpoint capacity to activate for production.
     #
     # @note When making an API call, you may pass CapacitySize
     #   data as a hash:
@@ -2677,10 +2701,18 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] type
-    #   This API is not supported.
+    #   Specifies the endpoint capacity type.
+    #
+    #   * `INSTANCE_COUNT`\: The endpoint activates based on the number of
+    #     instances.
+    #
+    #   * `CAPACITY_PERCENT`\: The endpoint activates based on the specified
+    #     percentage of capacity.
     #   @return [String]
     #
     # @!attribute [rw] value
+    #   Defines the capacity size, either as a number of instances or a
+    #   capacity percentage.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CapacitySize AWS API Documentation
@@ -5185,6 +5217,31 @@ module Aws::SageMaker
     #       {
     #         endpoint_name: "EndpointName", # required
     #         endpoint_config_name: "EndpointConfigName", # required
+    #         deployment_config: {
+    #           blue_green_update_policy: { # required
+    #             traffic_routing_configuration: { # required
+    #               type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
+    #               wait_interval_in_seconds: 1, # required
+    #               canary_size: {
+    #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #                 value: 1, # required
+    #               },
+    #               linear_step_size: {
+    #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #                 value: 1, # required
+    #               },
+    #             },
+    #             termination_wait_in_seconds: 1,
+    #             maximum_execution_timeout_in_seconds: 1,
+    #           },
+    #           auto_rollback_configuration: {
+    #             alarms: [
+    #               {
+    #                 alarm_name: "AlarmName",
+    #               },
+    #             ],
+    #           },
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -5205,6 +5262,11 @@ module Aws::SageMaker
     #   CreateEndpointConfig.
     #   @return [String]
     #
+    # @!attribute [rw] deployment_config
+    #   The deployment configuration for an endpoint, which contains the
+    #   desired deployment strategy and rollback configurations.
+    #   @return [Types::DeploymentConfig]
+    #
     # @!attribute [rw] tags
     #   An array of key-value pairs. You can use tags to categorize your
     #   Amazon Web Services resources in different ways, for example, by
@@ -5221,6 +5283,7 @@ module Aws::SageMaker
     class CreateEndpointInput < Struct.new(
       :endpoint_name,
       :endpoint_config_name,
+      :deployment_config,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -11004,7 +11067,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Currently, the `DeploymentConfig` API is not supported.
+    # The deployment configuration for an endpoint, which contains the
+    # desired deployment strategy and rollback configurations.
     #
     # @note When making an API call, you may pass DeploymentConfig
     #   data as a hash:
@@ -11012,9 +11076,13 @@ module Aws::SageMaker
     #       {
     #         blue_green_update_policy: { # required
     #           traffic_routing_configuration: { # required
-    #             type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY
+    #             type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
     #             wait_interval_in_seconds: 1, # required
     #             canary_size: {
+    #               type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #               value: 1, # required
+    #             },
+    #             linear_step_size: {
     #               type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
     #               value: 1, # required
     #             },
@@ -11032,9 +11100,18 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] blue_green_update_policy
+    #   Update policy for a blue/green deployment. If this update policy is
+    #   specified, SageMaker creates a new fleet during the deployment while
+    #   maintaining the old fleet. SageMaker flips traffic to the new fleet
+    #   according to the specified traffic routing configuration. Only one
+    #   update policy should be used in the deployment configuration. If no
+    #   update policy is specified, SageMaker uses a blue/green deployment
+    #   strategy with all at once traffic shifting by default.
     #   @return [Types::BlueGreenUpdatePolicy]
     #
     # @!attribute [rw] auto_rollback_configuration
+    #   Automatic rollback configuration for handling endpoint deployment
+    #   failures and recovery.
     #   @return [Types::AutoRollbackConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeploymentConfig AWS API Documentation
@@ -12548,6 +12625,12 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
     #   @return [Types::AsyncInferenceConfig]
     #
+    # @!attribute [rw] pending_deployment_summary
+    #   Returns the summary of an in-progress deployment. This field is only
+    #   returned when the endpoint is creating or updating with a new
+    #   endpoint configuration.
+    #   @return [Types::PendingDeploymentSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointOutput AWS API Documentation
     #
     class DescribeEndpointOutput < Struct.new(
@@ -12561,7 +12644,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :last_deployment_config,
-      :async_inference_config)
+      :async_inference_config,
+      :pending_deployment_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18597,7 +18681,8 @@ module Aws::SageMaker
     #     (28,800 seconds).
     #
     #   * For [3D point cloud][4] and [video frame][5] labeling jobs, the
-    #     maximum is 7 days (604,800 seconds). If you want to change these
+    #     maximum is 30 days (2952,000 seconds) for non-AL mode. For most
+    #     users, the maximum is also 30 days. If you want to change these
     #     limits, contact Amazon Web Services Support.
     #
     #
@@ -18619,9 +18704,9 @@ module Aws::SageMaker
     #     seconds).
     #
     #   * If you choose a private or vendor workforce, the default value is
-    #     10 days (864,000 seconds). For most users, the maximum is also 10
-    #     days. If you want to change this limit, contact Amazon Web
-    #     Services Support.
+    #     30 days (2592,000 seconds) for non-AL mode. For most users, the
+    #     maximum is also 30 days. If you want to change this limit, contact
+    #     Amazon Web Services Support.
     #   @return [Integer]
     #
     # @!attribute [rw] max_concurrent_task_count
@@ -28949,6 +29034,102 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The summary of an in-progress deployment when an endpoint is creating
+    # or updating with a new endpoint configuration.
+    #
+    # @!attribute [rw] endpoint_config_name
+    #   The name of the endpoint configuration used in the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] production_variants
+    #   List of `PendingProductionVariantSummary` objects.
+    #   @return [Array<Types::PendingProductionVariantSummary>]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the deployment.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PendingDeploymentSummary AWS API Documentation
+    #
+    class PendingDeploymentSummary < Struct.new(
+      :endpoint_config_name,
+      :production_variants,
+      :start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The production variant summary for a deployment when an endpoint is
+    # creating or updating with the ` CreateEndpoint ` or ` UpdateEndpoint `
+    # operations. Describes the `VariantStatus `, weight and capacity for a
+    # production variant associated with an endpoint.
+    #
+    # @!attribute [rw] variant_name
+    #   The name of the variant.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployed_images
+    #   An array of `DeployedImage` objects that specify the Amazon EC2
+    #   Container Registry paths of the inference images deployed on
+    #   instances of this `ProductionVariant`.
+    #   @return [Array<Types::DeployedImage>]
+    #
+    # @!attribute [rw] current_weight
+    #   The weight associated with the variant.
+    #   @return [Float]
+    #
+    # @!attribute [rw] desired_weight
+    #   The requested weight for the variant in this deployment, as
+    #   specified in the endpoint configuration for the endpoint. The value
+    #   is taken from the request to the ` CreateEndpointConfig ` operation.
+    #   @return [Float]
+    #
+    # @!attribute [rw] current_instance_count
+    #   The number of instances associated with the variant.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] desired_instance_count
+    #   The number of instances requested in this deployment, as specified
+    #   in the endpoint configuration for the endpoint. The value is taken
+    #   from the request to the ` CreateEndpointConfig ` operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_type
+    #   The type of instances associated with the variant.
+    #   @return [String]
+    #
+    # @!attribute [rw] accelerator_type
+    #   The size of the Elastic Inference (EI) instance to use for the
+    #   production variant. EI instances provide on-demand GPU computing for
+    #   inference. For more information, see [Using Elastic Inference in
+    #   Amazon SageMaker][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+    #   @return [String]
+    #
+    # @!attribute [rw] variant_status
+    #   The endpoint variant status which describes the current deployment
+    #   stage status or operational status.
+    #   @return [Array<Types::ProductionVariantStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PendingProductionVariantSummary AWS API Documentation
+    #
+    class PendingProductionVariantSummary < Struct.new(
+      :variant_name,
+      :deployed_images,
+      :current_weight,
+      :desired_weight,
+      :current_instance_count,
+      :desired_instance_count,
+      :instance_type,
+      :accelerator_type,
+      :variant_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A SageMaker Model Building Pipeline instance.
     #
     # @!attribute [rw] pipeline_arn
@@ -30107,6 +30288,45 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Describes the status of the production variant.
+    #
+    # @!attribute [rw] status
+    #   The endpoint variant status which describes the current deployment
+    #   stage status or operational status.
+    #
+    #   * `Creating`\: Creating inference resources for the production
+    #     variant.
+    #
+    #   * `Deleting`\: Terminating inference resources for the production
+    #     variant.
+    #
+    #   * `Updating`\: Updating capacity for the production variant.
+    #
+    #   * `ActivatingTraffic`\: Turning on traffic for the production
+    #     variant.
+    #
+    #   * `Baking`\: Waiting period to monitor the CloudWatch alarms in the
+    #     automatic rollback configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A message that describes the status of the production variant.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the current status change.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantStatus AWS API Documentation
+    #
+    class ProductionVariantStatus < Struct.new(
+      :status,
+      :status_message,
+      :start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes weight and capacities for a production variant associated
     # with an endpoint. If you sent a request to the
     # `UpdateEndpointWeightsAndCapacities` API and the endpoint status is
@@ -30140,6 +30360,11 @@ module Aws::SageMaker
     #   `UpdateEndpointWeightsAndCapacities` request.
     #   @return [Integer]
     #
+    # @!attribute [rw] variant_status
+    #   The endpoint variant status which describes the current deployment
+    #   stage status or operational status.
+    #   @return [Array<Types::ProductionVariantStatus>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantSummary AWS API Documentation
     #
     class ProductionVariantSummary < Struct.new(
@@ -30148,7 +30373,8 @@ module Aws::SageMaker
       :current_weight,
       :desired_weight,
       :current_instance_count,
-      :desired_instance_count)
+      :desired_instance_count,
+      :variant_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33257,27 +33483,54 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Currently, the `TrafficRoutingConfig` API is not supported.
+    # Defines the traffic routing strategy during an endpoint deployment to
+    # shift traffic from the old fleet to the new fleet.
     #
     # @note When making an API call, you may pass TrafficRoutingConfig
     #   data as a hash:
     #
     #       {
-    #         type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY
+    #         type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
     #         wait_interval_in_seconds: 1, # required
     #         canary_size: {
+    #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #           value: 1, # required
+    #         },
+    #         linear_step_size: {
     #           type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
     #           value: 1, # required
     #         },
     #       }
     #
     # @!attribute [rw] type
+    #   Traffic routing strategy type.
+    #
+    #   * `ALL_AT_ONCE`\: Endpoint traffic shifts to the new fleet in a
+    #     single step.
+    #
+    #   * `CANARY`\: Endpoint traffic shifts to the new fleet in two steps.
+    #     The first step is the canary, which is a small portion of the
+    #     traffic. The second step is the remainder of the traffic.
+    #
+    #   * `LINEAR`\: Endpoint traffic shifts to the new fleet in n steps of
+    #     a configurable size.
     #   @return [String]
     #
     # @!attribute [rw] wait_interval_in_seconds
+    #   The waiting time (in seconds) between incremental steps to turn on
+    #   traffic on the new endpoint fleet.
     #   @return [Integer]
     #
     # @!attribute [rw] canary_size
+    #   Batch size for the first step to turn on traffic on the new endpoint
+    #   fleet. `Value` must be less than or equal to 50% of the variant's
+    #   total instance count.
+    #   @return [Types::CapacitySize]
+    #
+    # @!attribute [rw] linear_step_size
+    #   Batch size for each step to turn on traffic on the new endpoint
+    #   fleet. `Value` must be 10-50% of the variant's total instance
+    #   count.
     #   @return [Types::CapacitySize]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrafficRoutingConfig AWS API Documentation
@@ -33285,7 +33538,8 @@ module Aws::SageMaker
     class TrafficRoutingConfig < Struct.new(
       :type,
       :wait_interval_in_seconds,
-      :canary_size)
+      :canary_size,
+      :linear_step_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35882,9 +36136,13 @@ module Aws::SageMaker
     #         deployment_config: {
     #           blue_green_update_policy: { # required
     #             traffic_routing_configuration: { # required
-    #               type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY
+    #               type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
     #               wait_interval_in_seconds: 1, # required
     #               canary_size: {
+    #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #                 value: 1, # required
+    #               },
+    #               linear_step_size: {
     #                 type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
     #                 value: 1, # required
     #               },
@@ -35900,6 +36158,7 @@ module Aws::SageMaker
     #             ],
     #           },
     #         },
+    #         retain_deployment_config: false,
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -35934,8 +36193,14 @@ module Aws::SageMaker
     #   @return [Array<Types::VariantProperty>]
     #
     # @!attribute [rw] deployment_config
-    #   The deployment configuration for the endpoint to be updated.
+    #   The deployment configuration for an endpoint, which contains the
+    #   desired deployment strategy and rollback configurations.
     #   @return [Types::DeploymentConfig]
+    #
+    # @!attribute [rw] retain_deployment_config
+    #   Specifies whether to reuse the last deployment configuration. The
+    #   default value is false (the configuration is not reused).
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointInput AWS API Documentation
     #
@@ -35944,7 +36209,8 @@ module Aws::SageMaker
       :endpoint_config_name,
       :retain_all_variant_properties,
       :exclude_retained_variant_properties,
-      :deployment_config)
+      :deployment_config,
+      :retain_deployment_config)
       SENSITIVE = []
       include Aws::Structure
     end

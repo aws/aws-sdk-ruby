@@ -12070,7 +12070,7 @@ module Aws::EC2
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.core_network_arn #=> String
     #   resp.vpn_connection.core_network_attachment_arn #=> String
-    #   resp.vpn_connection.gateway_association_state #=> String
+    #   resp.vpn_connection.gateway_association_state #=> String, one of "associated", "not-associated", "associating", "disassociating"
     #   resp.vpn_connection.options.enable_acceleration #=> Boolean
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
     #   resp.vpn_connection.options.local_ipv_4_network_cidr #=> String
@@ -30038,7 +30038,7 @@ module Aws::EC2
     #   resp.vpn_connections[0].transit_gateway_id #=> String
     #   resp.vpn_connections[0].core_network_arn #=> String
     #   resp.vpn_connections[0].core_network_attachment_arn #=> String
-    #   resp.vpn_connections[0].gateway_association_state #=> String
+    #   resp.vpn_connections[0].gateway_association_state #=> String, one of "associated", "not-associated", "associating", "disassociating"
     #   resp.vpn_connections[0].options.enable_acceleration #=> Boolean
     #   resp.vpn_connections[0].options.static_routes_only #=> Boolean
     #   resp.vpn_connections[0].options.local_ipv_4_network_cidr #=> String
@@ -38798,7 +38798,7 @@ module Aws::EC2
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.core_network_arn #=> String
     #   resp.vpn_connection.core_network_attachment_arn #=> String
-    #   resp.vpn_connection.gateway_association_state #=> String
+    #   resp.vpn_connection.gateway_association_state #=> String, one of "associated", "not-associated", "associating", "disassociating"
     #   resp.vpn_connection.options.enable_acceleration #=> Boolean
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
     #   resp.vpn_connection.options.local_ipv_4_network_cidr #=> String
@@ -38922,7 +38922,7 @@ module Aws::EC2
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.core_network_arn #=> String
     #   resp.vpn_connection.core_network_attachment_arn #=> String
-    #   resp.vpn_connection.gateway_association_state #=> String
+    #   resp.vpn_connection.gateway_association_state #=> String, one of "associated", "not-associated", "associating", "disassociating"
     #   resp.vpn_connection.options.enable_acceleration #=> Boolean
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
     #   resp.vpn_connection.options.local_ipv_4_network_cidr #=> String
@@ -39019,7 +39019,7 @@ module Aws::EC2
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.core_network_arn #=> String
     #   resp.vpn_connection.core_network_attachment_arn #=> String
-    #   resp.vpn_connection.gateway_association_state #=> String
+    #   resp.vpn_connection.gateway_association_state #=> String, one of "associated", "not-associated", "associating", "disassociating"
     #   resp.vpn_connection.options.enable_acceleration #=> Boolean
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
     #   resp.vpn_connection.options.local_ipv_4_network_cidr #=> String
@@ -39176,7 +39176,7 @@ module Aws::EC2
     #   resp.vpn_connection.transit_gateway_id #=> String
     #   resp.vpn_connection.core_network_arn #=> String
     #   resp.vpn_connection.core_network_attachment_arn #=> String
-    #   resp.vpn_connection.gateway_association_state #=> String
+    #   resp.vpn_connection.gateway_association_state #=> String, one of "associated", "not-associated", "associating", "disassociating"
     #   resp.vpn_connection.options.enable_acceleration #=> Boolean
     #   resp.vpn_connection.options.static_routes_only #=> Boolean
     #   resp.vpn_connection.options.local_ipv_4_network_cidr #=> String
@@ -45228,7 +45228,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.277.0'
+      context[:gem_version] = '1.278.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-11-08)
+------------------
+
+* Feature - You can now configure rules to run a CAPTCHA check against web requests and, as needed, send a CAPTCHA challenge to the client.
+
 1.29.0 (2021-11-04)
 ------------------
 

@@ -762,6 +762,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           captcha: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -786,6 +796,11 @@ module Aws::WAFV2
     #           sampled_requests_enabled: false, # required
     #           cloud_watch_metrics_enabled: false, # required
     #           metric_name: "MetricName", # required
+    #         },
+    #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
     #         },
     #       },
     #     ],
@@ -1389,6 +1404,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           captcha: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -1413,6 +1438,11 @@ module Aws::WAFV2
     #           sampled_requests_enabled: false, # required
     #           cloud_watch_metrics_enabled: false, # required
     #           metric_name: "MetricName", # required
+    #         },
+    #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
     #         },
     #       },
     #     ],
@@ -1522,6 +1552,11 @@ module Aws::WAFV2
     #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
     #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #
+    # @option params [Types::CaptchaConfig] :captcha_config
+    #   Specifies how WAF should handle `CAPTCHA` evaluations for rules that
+    #   don't have their own `CaptchaConfig` settings. If you don't specify
+    #   this, WAF uses its default settings for `CaptchaConfig`.
     #
     # @return [Types::CreateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1882,6 +1917,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           captcha: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -1907,6 +1952,11 @@ module Aws::WAFV2
     #           cloud_watch_metrics_enabled: false, # required
     #           metric_name: "MetricName", # required
     #         },
+    #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
+    #         },
     #       },
     #     ],
     #     visibility_config: { # required
@@ -1924,6 +1974,11 @@ module Aws::WAFV2
     #       "EntityName" => {
     #         content_type: "TEXT_PLAIN", # required, accepts TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON
     #         content: "ResponseContent", # required
+    #       },
+    #     },
+    #     captcha_config: {
+    #       immunity_time_property: {
+    #         immunity_time: 1, # required
     #       },
     #     },
     #   })
@@ -2328,6 +2383,9 @@ module Aws::WAFV2
     #   resp.rules[0].action.count.custom_request_handling.insert_headers #=> Array
     #   resp.rules[0].action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.rules[0].action.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.rules[0].action.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.rules[0].action.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rules[0].action.captcha.custom_request_handling.insert_headers[0].value #=> String
     #   resp.label_namespace #=> String
     #   resp.available_labels #=> Array
     #   resp.available_labels[0].name #=> String
@@ -2480,7 +2538,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
     #   resp.logging_configuration.logging_filter.filters[0].requirement #=> String, one of "MEETS_ALL", "MEETS_ANY"
     #   resp.logging_configuration.logging_filter.filters[0].conditions #=> Array
-    #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT"
+    #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "EXCLUDED_AS_COUNT"
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configuration.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #
@@ -2897,6 +2955,9 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].action.count.custom_request_handling.insert_headers #=> Array
     #   resp.rule_group.rules[0].action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.rule_group.rules[0].action.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.rule_group.rules[0].action.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.rule_group.rules[0].action.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.rule_group.rules[0].action.captcha.custom_request_handling.insert_headers[0].value #=> String
     #   resp.rule_group.rules[0].override_action.count.custom_request_handling.insert_headers #=> Array
     #   resp.rule_group.rules[0].override_action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.rule_group.rules[0].override_action.count.custom_request_handling.insert_headers[0].value #=> String
@@ -2905,6 +2966,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].visibility_config.sampled_requests_enabled #=> Boolean
     #   resp.rule_group.rules[0].visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.rule_group.rules[0].visibility_config.metric_name #=> String
+    #   resp.rule_group.rules[0].captcha_config.immunity_time_property.immunity_time #=> Integer
     #   resp.rule_group.visibility_config.sampled_requests_enabled #=> Boolean
     #   resp.rule_group.visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.rule_group.visibility_config.metric_name #=> String
@@ -3018,6 +3080,9 @@ module Aws::WAFV2
     #   resp.sampled_requests[0].response_code_sent #=> Integer
     #   resp.sampled_requests[0].labels #=> Array
     #   resp.sampled_requests[0].labels[0].name #=> String
+    #   resp.sampled_requests[0].captcha_response.response_code #=> Integer
+    #   resp.sampled_requests[0].captcha_response.solve_timestamp #=> Integer
+    #   resp.sampled_requests[0].captcha_response.failure_reason #=> String, one of "TOKEN_MISSING", "TOKEN_EXPIRED"
     #   resp.population_size #=> Integer
     #   resp.time_window.start_time #=> Time
     #   resp.time_window.end_time #=> Time
@@ -3186,6 +3251,9 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].action.count.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.rules[0].action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.rules[0].action.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers[0].value #=> String
@@ -3194,6 +3262,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].visibility_config.sampled_requests_enabled #=> Boolean
     #   resp.web_acl.rules[0].visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.web_acl.rules[0].visibility_config.metric_name #=> String
+    #   resp.web_acl.rules[0].captcha_config.immunity_time_property.immunity_time #=> Integer
     #   resp.web_acl.visibility_config.sampled_requests_enabled #=> Boolean
     #   resp.web_acl.visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.web_acl.visibility_config.metric_name #=> String
@@ -3405,6 +3474,7 @@ module Aws::WAFV2
     #   resp.web_acl.custom_response_bodies #=> Hash
     #   resp.web_acl.custom_response_bodies["EntityName"].content_type #=> String, one of "TEXT_PLAIN", "TEXT_HTML", "APPLICATION_JSON"
     #   resp.web_acl.custom_response_bodies["EntityName"].content #=> String
+    #   resp.web_acl.captcha_config.immunity_time_property.immunity_time #=> Integer
     #   resp.lock_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACL AWS API Documentation
@@ -3548,6 +3618,9 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].action.count.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.rules[0].action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.rules[0].action.count.custom_request_handling.insert_headers[0].value #=> String
+    #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers #=> Array
+    #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers[0].name #=> String
+    #   resp.web_acl.rules[0].action.captcha.custom_request_handling.insert_headers[0].value #=> String
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers #=> Array
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers[0].name #=> String
     #   resp.web_acl.rules[0].override_action.count.custom_request_handling.insert_headers[0].value #=> String
@@ -3556,6 +3629,7 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].visibility_config.sampled_requests_enabled #=> Boolean
     #   resp.web_acl.rules[0].visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.web_acl.rules[0].visibility_config.metric_name #=> String
+    #   resp.web_acl.rules[0].captcha_config.immunity_time_property.immunity_time #=> Integer
     #   resp.web_acl.visibility_config.sampled_requests_enabled #=> Boolean
     #   resp.web_acl.visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.web_acl.visibility_config.metric_name #=> String
@@ -3767,6 +3841,7 @@ module Aws::WAFV2
     #   resp.web_acl.custom_response_bodies #=> Hash
     #   resp.web_acl.custom_response_bodies["EntityName"].content_type #=> String, one of "TEXT_PLAIN", "TEXT_HTML", "APPLICATION_JSON"
     #   resp.web_acl.custom_response_bodies["EntityName"].content #=> String
+    #   resp.web_acl.captcha_config.immunity_time_property.immunity_time #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACLForResource AWS API Documentation
     #
@@ -3972,7 +4047,7 @@ module Aws::WAFV2
 
     # Retrieves an array of your LoggingConfiguration objects.
     #
-    # @option params [String] :scope
+    # @option params [required, String] :scope
     #   Specifies whether this is for an Amazon CloudFront distribution or for
     #   a regional application. A regional application can be an Application
     #   Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync
@@ -4007,7 +4082,7 @@ module Aws::WAFV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_logging_configurations({
-    #     scope: "CLOUDFRONT", # accepts CLOUDFRONT, REGIONAL
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
     #     next_marker: "NextMarker",
     #     limit: 1,
     #   })
@@ -4030,7 +4105,7 @@ module Aws::WAFV2
     #   resp.logging_configurations[0].logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
     #   resp.logging_configurations[0].logging_filter.filters[0].requirement #=> String, one of "MEETS_ALL", "MEETS_ANY"
     #   resp.logging_configurations[0].logging_filter.filters[0].conditions #=> Array
-    #   resp.logging_configurations[0].logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT"
+    #   resp.logging_configurations[0].logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "EXCLUDED_AS_COUNT"
     #   resp.logging_configurations[0].logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configurations[0].logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #   resp.next_marker #=> String
@@ -4490,7 +4565,7 @@ module Aws::WAFV2
     #             conditions: [ # required
     #               {
     #                 action_condition: {
-    #                   action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT
+    #                   action: "ALLOW", # required, accepts ALLOW, BLOCK, COUNT, CAPTCHA, EXCLUDED_AS_COUNT
     #                 },
     #                 label_name_condition: {
     #                   label_name: "LabelName", # required
@@ -4521,7 +4596,7 @@ module Aws::WAFV2
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
     #   resp.logging_configuration.logging_filter.filters[0].requirement #=> String, one of "MEETS_ALL", "MEETS_ANY"
     #   resp.logging_configuration.logging_filter.filters[0].conditions #=> Array
-    #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT"
+    #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "EXCLUDED_AS_COUNT"
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configuration.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
     #
@@ -5469,6 +5544,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           captcha: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -5493,6 +5578,11 @@ module Aws::WAFV2
     #           sampled_requests_enabled: false, # required
     #           cloud_watch_metrics_enabled: false, # required
     #           metric_name: "MetricName", # required
+    #         },
+    #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
     #         },
     #       },
     #     ],
@@ -5613,6 +5703,11 @@ module Aws::WAFV2
     #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
     #   [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #   [3]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+    #
+    # @option params [Types::CaptchaConfig] :captcha_config
+    #   Specifies how WAF should handle `CAPTCHA` evaluations for rules that
+    #   don't have their own `CaptchaConfig` settings. If you don't specify
+    #   this, WAF uses its default settings for `CaptchaConfig`.
     #
     # @return [Types::UpdateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5974,6 +6069,16 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           captcha: {
+    #             custom_request_handling: {
+    #               insert_headers: [ # required
+    #                 {
+    #                   name: "CustomHTTPHeaderName", # required
+    #                   value: "CustomHTTPHeaderValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #         override_action: {
     #           count: {
@@ -5999,6 +6104,11 @@ module Aws::WAFV2
     #           cloud_watch_metrics_enabled: false, # required
     #           metric_name: "MetricName", # required
     #         },
+    #         captcha_config: {
+    #           immunity_time_property: {
+    #             immunity_time: 1, # required
+    #           },
+    #         },
     #       },
     #     ],
     #     visibility_config: { # required
@@ -6011,6 +6121,11 @@ module Aws::WAFV2
     #       "EntityName" => {
     #         content_type: "TEXT_PLAIN", # required, accepts TEXT_PLAIN, TEXT_HTML, APPLICATION_JSON
     #         content: "ResponseContent", # required
+    #       },
+    #     },
+    #     captcha_config: {
+    #       immunity_time_property: {
+    #         immunity_time: 1, # required
     #       },
     #     },
     #   })
@@ -6041,7 +6156,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

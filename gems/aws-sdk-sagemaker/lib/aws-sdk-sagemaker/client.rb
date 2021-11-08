@@ -2100,6 +2100,10 @@ module Aws::SageMaker
     #   The name of an endpoint configuration. For more information, see
     #   CreateEndpointConfig.
     #
+    # @option params [Types::DeploymentConfig] :deployment_config
+    #   The deployment configuration for an endpoint, which contains the
+    #   desired deployment strategy and rollback configurations.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs. You can use tags to categorize your
     #   Amazon Web Services resources in different ways, for example, by
@@ -2119,6 +2123,31 @@ module Aws::SageMaker
     #   resp = client.create_endpoint({
     #     endpoint_name: "EndpointName", # required
     #     endpoint_config_name: "EndpointConfigName", # required
+    #     deployment_config: {
+    #       blue_green_update_policy: { # required
+    #         traffic_routing_configuration: { # required
+    #           type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
+    #           wait_interval_in_seconds: 1, # required
+    #           canary_size: {
+    #             type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #             value: 1, # required
+    #           },
+    #           linear_step_size: {
+    #             type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #             value: 1, # required
+    #           },
+    #         },
+    #         termination_wait_in_seconds: 1,
+    #         maximum_execution_timeout_in_seconds: 1,
+    #       },
+    #       auto_rollback_configuration: {
+    #         alarms: [
+    #           {
+    #             alarm_name: "AlarmName",
+    #           },
+    #         ],
+    #       },
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -8488,6 +8517,7 @@ module Aws::SageMaker
     #   * {Types::DescribeEndpointOutput#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeEndpointOutput#last_deployment_config #last_deployment_config} => Types::DeploymentConfig
     #   * {Types::DescribeEndpointOutput#async_inference_config #async_inference_config} => Types::AsyncInferenceConfig
+    #   * {Types::DescribeEndpointOutput#pending_deployment_summary #pending_deployment_summary} => Types::PendingDeploymentSummary
     #
     # @example Request syntax with placeholder values
     #
@@ -8510,6 +8540,10 @@ module Aws::SageMaker
     #   resp.production_variants[0].desired_weight #=> Float
     #   resp.production_variants[0].current_instance_count #=> Integer
     #   resp.production_variants[0].desired_instance_count #=> Integer
+    #   resp.production_variants[0].variant_status #=> Array
+    #   resp.production_variants[0].variant_status[0].status #=> String, one of "Creating", "Updating", "Deleting", "ActivatingTraffic", "Baking"
+    #   resp.production_variants[0].variant_status[0].status_message #=> String
+    #   resp.production_variants[0].variant_status[0].start_time #=> Time
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.capture_status #=> String, one of "Started", "Stopped"
     #   resp.data_capture_config.current_sampling_percentage #=> Integer
@@ -8519,10 +8553,12 @@ module Aws::SageMaker
     #   resp.failure_reason #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
-    #   resp.last_deployment_config.blue_green_update_policy.traffic_routing_configuration.type #=> String, one of "ALL_AT_ONCE", "CANARY"
+    #   resp.last_deployment_config.blue_green_update_policy.traffic_routing_configuration.type #=> String, one of "ALL_AT_ONCE", "CANARY", "LINEAR"
     #   resp.last_deployment_config.blue_green_update_policy.traffic_routing_configuration.wait_interval_in_seconds #=> Integer
     #   resp.last_deployment_config.blue_green_update_policy.traffic_routing_configuration.canary_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENT"
     #   resp.last_deployment_config.blue_green_update_policy.traffic_routing_configuration.canary_size.value #=> Integer
+    #   resp.last_deployment_config.blue_green_update_policy.traffic_routing_configuration.linear_step_size.type #=> String, one of "INSTANCE_COUNT", "CAPACITY_PERCENT"
+    #   resp.last_deployment_config.blue_green_update_policy.traffic_routing_configuration.linear_step_size.value #=> Integer
     #   resp.last_deployment_config.blue_green_update_policy.termination_wait_in_seconds #=> Integer
     #   resp.last_deployment_config.blue_green_update_policy.maximum_execution_timeout_in_seconds #=> Integer
     #   resp.last_deployment_config.auto_rollback_configuration.alarms #=> Array
@@ -8532,6 +8568,24 @@ module Aws::SageMaker
     #   resp.async_inference_config.output_config.s3_output_path #=> String
     #   resp.async_inference_config.output_config.notification_config.success_topic #=> String
     #   resp.async_inference_config.output_config.notification_config.error_topic #=> String
+    #   resp.pending_deployment_summary.endpoint_config_name #=> String
+    #   resp.pending_deployment_summary.production_variants #=> Array
+    #   resp.pending_deployment_summary.production_variants[0].variant_name #=> String
+    #   resp.pending_deployment_summary.production_variants[0].deployed_images #=> Array
+    #   resp.pending_deployment_summary.production_variants[0].deployed_images[0].specified_image #=> String
+    #   resp.pending_deployment_summary.production_variants[0].deployed_images[0].resolved_image #=> String
+    #   resp.pending_deployment_summary.production_variants[0].deployed_images[0].resolution_time #=> Time
+    #   resp.pending_deployment_summary.production_variants[0].current_weight #=> Float
+    #   resp.pending_deployment_summary.production_variants[0].desired_weight #=> Float
+    #   resp.pending_deployment_summary.production_variants[0].current_instance_count #=> Integer
+    #   resp.pending_deployment_summary.production_variants[0].desired_instance_count #=> Integer
+    #   resp.pending_deployment_summary.production_variants[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge"
+    #   resp.pending_deployment_summary.production_variants[0].accelerator_type #=> String, one of "ml.eia1.medium", "ml.eia1.large", "ml.eia1.xlarge", "ml.eia2.medium", "ml.eia2.large", "ml.eia2.xlarge"
+    #   resp.pending_deployment_summary.production_variants[0].variant_status #=> Array
+    #   resp.pending_deployment_summary.production_variants[0].variant_status[0].status #=> String, one of "Creating", "Updating", "Deleting", "ActivatingTraffic", "Baking"
+    #   resp.pending_deployment_summary.production_variants[0].variant_status[0].status_message #=> String
+    #   resp.pending_deployment_summary.production_variants[0].variant_status[0].start_time #=> Time
+    #   resp.pending_deployment_summary.start_time #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -15900,6 +15954,10 @@ module Aws::SageMaker
     #   resp.results[0].endpoint.production_variants[0].desired_weight #=> Float
     #   resp.results[0].endpoint.production_variants[0].current_instance_count #=> Integer
     #   resp.results[0].endpoint.production_variants[0].desired_instance_count #=> Integer
+    #   resp.results[0].endpoint.production_variants[0].variant_status #=> Array
+    #   resp.results[0].endpoint.production_variants[0].variant_status[0].status #=> String, one of "Creating", "Updating", "Deleting", "ActivatingTraffic", "Baking"
+    #   resp.results[0].endpoint.production_variants[0].variant_status[0].status_message #=> String
+    #   resp.results[0].endpoint.production_variants[0].variant_status[0].start_time #=> Time
     #   resp.results[0].endpoint.data_capture_config.enable_capture #=> Boolean
     #   resp.results[0].endpoint.data_capture_config.capture_status #=> String, one of "Started", "Stopped"
     #   resp.results[0].endpoint.data_capture_config.current_sampling_percentage #=> Integer
@@ -17139,7 +17197,12 @@ module Aws::SageMaker
     #   `ExcludeAllVariantProperties`, no variant properties are overridden.
     #
     # @option params [Types::DeploymentConfig] :deployment_config
-    #   The deployment configuration for the endpoint to be updated.
+    #   The deployment configuration for an endpoint, which contains the
+    #   desired deployment strategy and rollback configurations.
+    #
+    # @option params [Boolean] :retain_deployment_config
+    #   Specifies whether to reuse the last deployment configuration. The
+    #   default value is false (the configuration is not reused).
     #
     # @return [Types::UpdateEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -17159,9 +17222,13 @@ module Aws::SageMaker
     #     deployment_config: {
     #       blue_green_update_policy: { # required
     #         traffic_routing_configuration: { # required
-    #           type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY
+    #           type: "ALL_AT_ONCE", # required, accepts ALL_AT_ONCE, CANARY, LINEAR
     #           wait_interval_in_seconds: 1, # required
     #           canary_size: {
+    #             type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
+    #             value: 1, # required
+    #           },
+    #           linear_step_size: {
     #             type: "INSTANCE_COUNT", # required, accepts INSTANCE_COUNT, CAPACITY_PERCENT
     #             value: 1, # required
     #           },
@@ -17177,6 +17244,7 @@ module Aws::SageMaker
     #         ],
     #       },
     #     },
+    #     retain_deployment_config: false,
     #   })
     #
     # @example Response structure
@@ -18299,7 +18367,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
