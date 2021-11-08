@@ -3502,6 +3502,11 @@
           "location":"uri",
           "locationName":"Bucket"
         },
+        "ContentLanguages": {
+          "shape": "LanguageList",
+          "location": "header",
+          "locationName": "x-amzn-content-language"
+        },
         "IfMatch":{
           "shape":"IfMatch",
           "location":"header",
@@ -3598,6 +3603,20 @@
           "locationName":"x-amz-expected-bucket-owner"
         }
       }
+    },
+    "LanguageList": {
+      "type":"list",
+      "member":{
+        "shape":"Language"
+      }
+    },
+    "Language": {
+      "type":"string",
+      "enum":[
+        "English",
+        "French",
+        "German"
+      ]
     },
     "GetObjectResponseStatusCode":{"type":"integer"},
     "GetObjectRetentionOutput":{

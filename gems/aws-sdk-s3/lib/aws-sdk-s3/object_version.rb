@@ -274,6 +274,7 @@ module Aws::S3
     # @example Request syntax with placeholder values
     #
     #   object_version.get({
+    #     content_languages: ["Language"],
     #     if_match: "IfMatch",
     #     if_modified_since: Time.now,
     #     if_none_match: "IfNoneMatch",
@@ -293,6 +294,7 @@ module Aws::S3
     #     expected_bucket_owner: "AccountId",
     #   })
     # @param [Hash] options ({})
+    # @option options [Array<String>] :content_languages
     # @option options [String] :if_match
     #   Return the object only if its entity tag (ETag) is the same as the one
     #   specified, otherwise return a 412 (precondition failed).

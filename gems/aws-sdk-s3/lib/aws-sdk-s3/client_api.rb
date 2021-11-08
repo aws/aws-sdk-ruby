@@ -295,6 +295,8 @@ module Aws::S3
     LambdaFunctionArn = Shapes::StringShape.new(name: 'LambdaFunctionArn')
     LambdaFunctionConfiguration = Shapes::StructureShape.new(name: 'LambdaFunctionConfiguration')
     LambdaFunctionConfigurationList = Shapes::ListShape.new(name: 'LambdaFunctionConfigurationList', flattened: true)
+    Language = Shapes::StringShape.new(name: 'Language')
+    LanguageList = Shapes::ListShape.new(name: 'LanguageList')
     LastModified = Shapes::TimestampShape.new(name: 'LastModified')
     LifecycleConfiguration = Shapes::StructureShape.new(name: 'LifecycleConfiguration')
     LifecycleExpiration = Shapes::StructureShape.new(name: 'LifecycleExpiration')
@@ -1255,6 +1257,7 @@ module Aws::S3
     GetObjectOutput[:payload_member] = GetObjectOutput.member(:body)
 
     GetObjectRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    GetObjectRequest.add_member(:content_languages, Shapes::ShapeRef.new(shape: LanguageList, location: "header", location_name: "x-amzn-content-language"))
     GetObjectRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: IfMatch, location: "header", location_name: "If-Match"))
     GetObjectRequest.add_member(:if_modified_since, Shapes::ShapeRef.new(shape: IfModifiedSince, location: "header", location_name: "If-Modified-Since"))
     GetObjectRequest.add_member(:if_none_match, Shapes::ShapeRef.new(shape: IfNoneMatch, location: "header", location_name: "If-None-Match"))
@@ -1469,6 +1472,8 @@ module Aws::S3
     LambdaFunctionConfiguration.struct_class = Types::LambdaFunctionConfiguration
 
     LambdaFunctionConfigurationList.member = Shapes::ShapeRef.new(shape: LambdaFunctionConfiguration)
+
+    LanguageList.member = Shapes::ShapeRef.new(shape: Language)
 
     LifecycleConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, required: true, location_name: "Rule"))
     LifecycleConfiguration.struct_class = Types::LifecycleConfiguration
