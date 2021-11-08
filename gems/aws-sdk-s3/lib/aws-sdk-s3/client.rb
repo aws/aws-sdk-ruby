@@ -5324,8 +5324,6 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #
-    # @option params [Array<String>] :content_languages
-    #
     # @option params [String] :if_match
     #   Return the object only if its entity tag (ETag) is the same as the one
     #   specified, otherwise return a 412 (precondition failed).
@@ -5534,7 +5532,6 @@ module Aws::S3
     #
     #   resp = client.get_object({
     #     bucket: "BucketName", # required
-    #     content_languages: ["Language"],
     #     if_match: "IfMatch",
     #     if_modified_since: Time.now,
     #     if_none_match: "IfNoneMatch",

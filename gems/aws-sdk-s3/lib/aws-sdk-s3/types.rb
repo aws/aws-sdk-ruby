@@ -5572,7 +5572,6 @@ module Aws::S3
     #
     #       {
     #         bucket: "BucketName", # required
-    #         content_languages: ["Language"],
     #         if_match: "IfMatch",
     #         if_modified_since: Time.now,
     #         if_none_match: "IfNoneMatch",
@@ -5623,9 +5622,6 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html
     #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     #   @return [String]
-    #
-    # @!attribute [rw] content_languages
-    #   @return [Array<String>]
     #
     # @!attribute [rw] if_match
     #   Return the object only if its entity tag (ETag) is the same as the
@@ -5742,7 +5738,6 @@ module Aws::S3
     #
     class GetObjectRequest < Struct.new(
       :bucket,
-      :content_languages,
       :if_match,
       :if_modified_since,
       :if_none_match,
