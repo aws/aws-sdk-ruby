@@ -854,6 +854,11 @@
           },
           "ListEnums": {
             "shape": "EnumList"
+          },
+          "HeaderListEnums": {
+            "shape": "EnumList",
+            "location": "header",
+            "locationName": "x-amz-enum-list"
           }
         }
       },
@@ -886,11 +891,12 @@
         "result": {
           "HeaderEnum": "baz",
           "FooEnum": "foo",
-          "ListEnums": ["foo", "bar"]
+          "ListEnums": ["foo", "bar"],
+          "HeaderListEnums": ["foo", "bar"]
         },
         "response": {
           "status_code": 200,
-          "headers": {"x-amz-enum": "baz"},
+          "headers": {"x-amz-enum": "baz", "x-amz-enum-list":  "foo,bar"},
           "body": "{\"FooEnum\": \"foo\", \"ListEnums\": [\"foo\", \"bar\"]}"
         }
       },

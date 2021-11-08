@@ -163,10 +163,7 @@
           "uri": "/path",
           "headers": {
             "x-amz-string": "singleValue",
-            "x-amz-string-list": [
-              "value1",
-              "value2"
-            ]
+            "x-amz-string-list": "value1,value2"
           }
         }
       }
