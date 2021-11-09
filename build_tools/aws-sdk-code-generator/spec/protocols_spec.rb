@@ -191,7 +191,7 @@ fixtures.each do |directory, files|
     describe 'input' do
       each_test_case(self, files['input']) do |group, suite, test_case, name|
 
-        group.it "marshalls response data correctly" do
+        group.it "marshals response data correctly" do
           client = client_for(suite, test_case, "Input_#{name}")
           ctx = nil
           client.handle(step: :send) do |context|

@@ -40,6 +40,8 @@ module Aws
           when IntegerShape then value.to_i
           when FloatShape then value.to_f
           when BooleanShape then value == 'true'
+          when ListShape then
+            value.split(",").map { |v| cast_value(ref.shape.member, v) }
           when TimestampShape
             if value =~ /^\d+(\.\d*)/
               Time.at(value.to_f)

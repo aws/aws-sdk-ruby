@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Correctly serialize/deserialize header lists.
+
 3.122.0 (2021-11-04)
 ------------------
 
