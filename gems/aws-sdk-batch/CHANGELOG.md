@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2021-11-09)
+------------------
+
+* Feature - Adds support for scheduling policy APIs.
+
 1.53.0 (2021-11-04)
 ------------------
 

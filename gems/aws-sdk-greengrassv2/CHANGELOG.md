@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2021-11-09)
+------------------
+
+* Feature - This release adds support for Greengrass core devices running Windows. You can now specify name of a Windows user to run a component.
+
 1.10.0 (2021-11-04)
 ------------------
 

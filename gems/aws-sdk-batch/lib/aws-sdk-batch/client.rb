@@ -468,6 +468,17 @@ module Aws::Batch
     #   environments in the `DISABLED` state don't scale out. However, they
     #   scale in to `minvCpus` value after instances become idle.
     #
+    # @option params [Integer] :unmanagedv_cpus
+    #   The maximum number of vCPUs for an unmanaged compute environment. This
+    #   parameter is only used for fair share scheduling to reserve vCPU
+    #   capacity for new share identifiers. If this parameter is not provided
+    #   for a fair share job queue, no vCPU capacity will be reserved.
+    #
+    #   <note markdown="1"> This parameter is only supported when the `type` parameter is set to
+    #   `UNMANAGED`/
+    #
+    #    </note>
+    #
     # @option params [Types::ComputeResource] :compute_resources
     #   Details about the compute resources managed by the compute
     #   environment. This parameter is required for managed compute
@@ -626,6 +637,7 @@ module Aws::Batch
     #     compute_environment_name: "String", # required
     #     type: "MANAGED", # required, accepts MANAGED, UNMANAGED
     #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     unmanagedv_cpus: 1,
     #     compute_resources: {
     #       type: "EC2", # required, accepts EC2, SPOT, FARGATE, FARGATE_SPOT
     #       allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
@@ -695,6 +707,17 @@ module Aws::Batch
     #   able to accept jobs. If the job queue state is `DISABLED`, new jobs
     #   can't be added to the queue, but jobs already in the queue can
     #   finish.
+    #
+    # @option params [String] :scheduling_policy_arn
+    #   Amazon Resource Name (ARN) of the fair share scheduling policy. If
+    #   this parameter is specified, the job queue will use a fair share
+    #   scheduling policy. If this parameter is not specified, the job queue
+    #   will use a first in, first out (FIFO) scheduling policy. Once a job
+    #   queue is created, the fair share scheduling policy can be replaced but
+    #   not removed. The format is
+    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
+    #   example,
+    #   `aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy`.
     #
     # @option params [required, Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
@@ -792,6 +815,7 @@ module Aws::Batch
     #   resp = client.create_job_queue({
     #     job_queue_name: "String", # required
     #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     scheduling_policy_arn: "String",
     #     priority: 1, # required
     #     compute_environment_order: [ # required
     #       {
@@ -815,6 +839,68 @@ module Aws::Batch
     # @param [Hash] params ({})
     def create_job_queue(params = {}, options = {})
       req = build_request(:create_job_queue, params)
+      req.send_request(options)
+    end
+
+    # Creates an Batch scheduling policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the scheduling policy. Up to 128 letters (uppercase and
+    #   lowercase), numbers, hyphens, and underscores are allowed.
+    #
+    # @option params [Types::FairsharePolicy] :fairshare_policy
+    #   The fair share policy of the scheduling policy.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you apply to the scheduling policy to help you
+    #   categorize and organize your resources. Each tag consists of a key and
+    #   an optional value. For more information, see [Tagging Amazon Web
+    #   Services Resources][1] in *Amazon Web Services General Reference*.
+    #
+    #   These tags can be updated or removed using the [TagResource][2] and
+    #   [UntagResource][3] API operations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html
+    #   [3]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html
+    #
+    # @return [Types::CreateSchedulingPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSchedulingPolicyResponse#name #name} => String
+    #   * {Types::CreateSchedulingPolicyResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_scheduling_policy({
+    #     name: "String", # required
+    #     fairshare_policy: {
+    #       share_decay_seconds: 1,
+    #       compute_reservation: 1,
+    #       share_distribution: [
+    #         {
+    #           share_identifier: "String", # required
+    #           weight_factor: 1.0,
+    #         },
+    #       ],
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateSchedulingPolicy AWS API Documentation
+    #
+    # @overload create_scheduling_policy(params = {})
+    # @param [Hash] params ({})
+    def create_scheduling_policy(params = {}, options = {})
+      req = build_request(:create_scheduling_policy, params)
       req.send_request(options)
     end
 
@@ -901,6 +987,30 @@ module Aws::Batch
     # @param [Hash] params ({})
     def delete_job_queue(params = {}, options = {})
       req = build_request(:delete_job_queue, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified scheduling policy.
+    #
+    # You can't delete a scheduling policy that is used in any job queues.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the scheduling policy to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_scheduling_policy({
+    #     arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteSchedulingPolicy AWS API Documentation
+    #
+    # @overload delete_scheduling_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_scheduling_policy(params = {}, options = {})
+      req = build_request(:delete_scheduling_policy, params)
       req.send_request(options)
     end
 
@@ -1045,6 +1155,7 @@ module Aws::Batch
     #   resp.compute_environments #=> Array
     #   resp.compute_environments[0].compute_environment_name #=> String
     #   resp.compute_environments[0].compute_environment_arn #=> String
+    #   resp.compute_environments[0].unmanagedv_cpus #=> Integer
     #   resp.compute_environments[0].ecs_cluster_arn #=> String
     #   resp.compute_environments[0].tags #=> Hash
     #   resp.compute_environments[0].tags["TagKey"] #=> String
@@ -1158,12 +1269,20 @@ module Aws::Batch
     #           environment: [
     #           ], 
     #           image: "busybox", 
-    #           memory: 128, 
     #           mount_points: [
+    #           ], 
+    #           resource_requirements: [
+    #             {
+    #               type: "MEMORY", 
+    #               value: "128", 
+    #             }, 
+    #             {
+    #               type: "VCPU", 
+    #               value: "1", 
+    #             }, 
     #           ], 
     #           ulimits: [
     #           ], 
-    #           vcpus: 1, 
     #           volumes: [
     #           ], 
     #         }, 
@@ -1193,6 +1312,7 @@ module Aws::Batch
     #   resp.job_definitions[0].revision #=> Integer
     #   resp.job_definitions[0].status #=> String
     #   resp.job_definitions[0].type #=> String
+    #   resp.job_definitions[0].scheduling_priority #=> Integer
     #   resp.job_definitions[0].parameters #=> Hash
     #   resp.job_definitions[0].parameters["String"] #=> String
     #   resp.job_definitions[0].retry_strategy.attempts #=> Integer
@@ -1421,6 +1541,7 @@ module Aws::Batch
     #   resp.job_queues[0].job_queue_name #=> String
     #   resp.job_queues[0].job_queue_arn #=> String
     #   resp.job_queues[0].state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_queues[0].scheduling_policy_arn #=> String
     #   resp.job_queues[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "DELETED", "VALID", "INVALID"
     #   resp.job_queues[0].status_reason #=> String
     #   resp.job_queues[0].priority #=> Integer
@@ -1513,6 +1634,8 @@ module Aws::Batch
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].job_queue #=> String
     #   resp.jobs[0].status #=> String, one of "SUBMITTED", "PENDING", "RUNNABLE", "STARTING", "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.jobs[0].share_identifier #=> String
+    #   resp.jobs[0].scheduling_priority #=> Integer
     #   resp.jobs[0].attempts #=> Array
     #   resp.jobs[0].attempts[0].container.container_instance_arn #=> String
     #   resp.jobs[0].attempts[0].container.task_arn #=> String
@@ -1692,6 +1815,44 @@ module Aws::Batch
     # @param [Hash] params ({})
     def describe_jobs(params = {}, options = {})
       req = build_request(:describe_jobs, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more of your scheduling policies.
+    #
+    # @option params [required, Array<String>] :arns
+    #   A list of up to 100 scheduling policy Amazon Resource Name (ARN)
+    #   entries.
+    #
+    # @return [Types::DescribeSchedulingPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSchedulingPoliciesResponse#scheduling_policies #scheduling_policies} => Array&lt;Types::SchedulingPolicyDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_scheduling_policies({
+    #     arns: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduling_policies #=> Array
+    #   resp.scheduling_policies[0].name #=> String
+    #   resp.scheduling_policies[0].arn #=> String
+    #   resp.scheduling_policies[0].fairshare_policy.share_decay_seconds #=> Integer
+    #   resp.scheduling_policies[0].fairshare_policy.compute_reservation #=> Integer
+    #   resp.scheduling_policies[0].fairshare_policy.share_distribution #=> Array
+    #   resp.scheduling_policies[0].fairshare_policy.share_distribution[0].share_identifier #=> String
+    #   resp.scheduling_policies[0].fairshare_policy.share_distribution[0].weight_factor #=> Float
+    #   resp.scheduling_policies[0].tags #=> Hash
+    #   resp.scheduling_policies[0].tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeSchedulingPolicies AWS API Documentation
+    #
+    # @overload describe_scheduling_policies(params = {})
+    # @param [Hash] params ({})
+    def describe_scheduling_policies(params = {}, options = {})
+      req = build_request(:describe_scheduling_policies, params)
       req.send_request(options)
     end
 
@@ -1891,16 +2052,72 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Returns a list of Batch scheduling policies.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned by `ListSchedulingPolicies` in
+    #   paginated output. When this parameter is used,
+    #   `ListSchedulingPolicies` only returns `maxResults` results in a single
+    #   page and a `nextToken` response element. The remaining results of the
+    #   initial request can be seen by sending another
+    #   `ListSchedulingPolicies` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If this parameter isn't used,
+    #   then `ListSchedulingPolicies` returns up to 100 results and a
+    #   `nextToken` value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListSchedulingPolicies` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value. This value is `null` when there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that's only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::ListSchedulingPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSchedulingPoliciesResponse#scheduling_policies #scheduling_policies} => Array&lt;Types::SchedulingPolicyListingDetail&gt;
+    #   * {Types::ListSchedulingPoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_scheduling_policies({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduling_policies #=> Array
+    #   resp.scheduling_policies[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListSchedulingPolicies AWS API Documentation
+    #
+    # @overload list_scheduling_policies(params = {})
+    # @param [Hash] params ({})
+    def list_scheduling_policies(params = {}, options = {})
+      req = build_request(:list_scheduling_policies, params)
+      req.send_request(options)
+    end
+
     # Lists the tags for an Batch resource. Batch resources that support
-    # tags are compute environments, jobs, job definitions, and job queues.
-    # ARNs for child jobs of array and multi-node parallel (MNP) jobs are
-    # not supported.
+    # tags are compute environments, jobs, job definitions, job queues, and
+    # scheduling policies. ARNs for child jobs of array and multi-node
+    # parallel (MNP) jobs are not supported.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource that tags
     #   are listed for. Batch resources that support tags are compute
-    #   environments, jobs, job definitions, and job queues. ARNs for child
-    #   jobs of array and multi-node parallel (MNP) jobs are not supported.
+    #   environments, jobs, job definitions, job queues, and scheduling
+    #   policies. ARNs for child jobs of array and multi-node parallel (MNP)
+    #   jobs are not supported.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1970,6 +2187,15 @@ module Aws::Batch
     #   definition. Parameters are specified as a key-value pair mapping.
     #   Parameters in a `SubmitJob` request override any corresponding
     #   parameter defaults from the job definition.
+    #
+    # @option params [Integer] :scheduling_priority
+    #   The scheduling priority for jobs that are submitted with this job
+    #   definition. This will only affect jobs in job queues with a fair share
+    #   policy. Jobs with a higher scheduling priority will be scheduled
+    #   before jobs with a lower scheduling priority.
+    #
+    #   The minimum supported value is 0 and the maximum supported value is
+    #   9999.
     #
     # @option params [Types::ContainerProperties] :container_properties
     #   An object with various properties specific to single-node
@@ -2061,8 +2287,16 @@ module Aws::Batch
     #         "10", 
     #       ], 
     #       image: "busybox", 
-    #       memory: 128, 
-    #       vcpus: 1, 
+    #       resource_requirements: [
+    #         {
+    #           type: "MEMORY", 
+    #           value: "128", 
+    #         }, 
+    #         {
+    #           type: "VCPU", 
+    #           value: "1", 
+    #         }, 
+    #       ], 
     #     }, 
     #     job_definition_name: "sleep10", 
     #   })
@@ -2086,8 +2320,16 @@ module Aws::Batch
     #         "30", 
     #       ], 
     #       image: "busybox", 
-    #       memory: 128, 
-    #       vcpus: 1, 
+    #       resource_requirements: [
+    #         {
+    #           type: "MEMORY", 
+    #           value: "128", 
+    #         }, 
+    #         {
+    #           type: "VCPU", 
+    #           value: "1", 
+    #         }, 
+    #       ], 
     #     }, 
     #     job_definition_name: "sleep30", 
     #     tags: {
@@ -2111,6 +2353,7 @@ module Aws::Batch
     #     parameters: {
     #       "String" => "String",
     #     },
+    #     scheduling_priority: 1,
     #     container_properties: {
     #       image: "String",
     #       vcpus: 1,
@@ -2359,11 +2602,16 @@ module Aws::Batch
     # Submits an Batch job from a job definition. Parameters that are
     # specified during SubmitJob override parameters defined in the job
     # definition. vCPU and memory requirements that are specified in the
-    # `ResourceRequirements` objects in the job definition are the
+    # `resourceRequirements` objects in the job definition are the
     # exception. They can't be overridden this way using the `memory` and
     # `vcpus` parameters. Rather, you must specify updates to job definition
     # parameters in a `ResourceRequirements` object that's included in the
     # `containerOverrides` parameter.
+    #
+    # <note markdown="1"> Job queues with a scheduling policy are limited to 500 active fair
+    # share identifiers at a time.
+    #
+    #  </note>
     #
     # Jobs that run on Fargate resources can't be guaranteed to run for
     # more than 14 days. This is because, after 14 days, Fargate resources
@@ -2377,6 +2625,19 @@ module Aws::Batch
     # @option params [required, String] :job_queue
     #   The job queue where the job is submitted. You can specify either the
     #   name or the Amazon Resource Name (ARN) of the queue.
+    #
+    # @option params [String] :share_identifier
+    #   The share identifier for the job.
+    #
+    # @option params [Integer] :scheduling_priority_override
+    #   The scheduling priority for the job. This will only affect jobs in job
+    #   queues with a fair share policy. Jobs with a higher scheduling
+    #   priority will be scheduled before jobs with a lower scheduling
+    #   priority. This will override any scheduling priority in the job
+    #   definition.
+    #
+    #   The minimum supported value is 0 and the maximum supported value is
+    #   9999.
     #
     # @option params [Types::ArrayProperties] :array_properties
     #   The array properties for the submitted job, such as the size of the
@@ -2496,6 +2757,8 @@ module Aws::Batch
     #   resp = client.submit_job({
     #     job_name: "String", # required
     #     job_queue: "String", # required
+    #     share_identifier: "String",
+    #     scheduling_priority_override: 1,
     #     array_properties: {
     #       size: 1,
     #     },
@@ -2593,14 +2856,14 @@ module Aws::Batch
     # request parameters, they aren't changed. When a resource is deleted,
     # the tags that are associated with that resource are deleted as well.
     # Batch resources that support tags are compute environments, jobs, job
-    # definitions, and job queues. ARNs for child jobs of array and
-    # multi-node parallel (MNP) jobs are not supported.
+    # definitions, job queues, and scheduling policies. ARNs for child jobs
+    # of array and multi-node parallel (MNP) jobs are not supported.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource that tags are added to.
     #   Batch resources that support tags are compute environments, jobs, job
-    #   definitions, and job queues. ARNs for child jobs of array and
-    #   multi-node parallel (MNP) jobs are not supported.
+    #   definitions, job queues, and scheduling policies. ARNs for child jobs
+    #   of array and multi-node parallel (MNP) jobs are not supported.
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags that you apply to the resource to help you categorize and
@@ -2698,8 +2961,9 @@ module Aws::Batch
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to delete
     #   tags. Batch resources that support tags are compute environments,
-    #   jobs, job definitions, and job queues. ARNs for child jobs of array
-    #   and multi-node parallel (MNP) jobs are not supported.
+    #   jobs, job definitions, job queues, and scheduling policies. ARNs for
+    #   child jobs of array and multi-node parallel (MNP) jobs are not
+    #   supported.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to be removed.
@@ -2760,6 +3024,14 @@ module Aws::Batch
     #   `RUNNING` state continue to progress normally. Managed compute
     #   environments in the `DISABLED` state don't scale out. However, they
     #   scale in to `minvCpus` value after instances become idle.
+    #
+    # @option params [Integer] :unmanagedv_cpus
+    #   The maximum number of vCPUs expected to be used for an unmanaged
+    #   compute environment. This parameter should not be specified for a
+    #   managed compute environment. This parameter is only used for fair
+    #   share scheduling to reserve vCPU capacity for new share identifiers.
+    #   If this parameter is not provided for a fair share job queue, no vCPU
+    #   capacity will be reserved.
     #
     # @option params [Types::ComputeResourceUpdate] :compute_resources
     #   Details of the compute resources managed by the compute environment.
@@ -2824,6 +3096,7 @@ module Aws::Batch
     #   resp = client.update_compute_environment({
     #     compute_environment: "String", # required
     #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     unmanagedv_cpus: 1,
     #     compute_resources: {
     #       minv_cpus: 1,
     #       maxv_cpus: 1,
@@ -2858,6 +3131,14 @@ module Aws::Batch
     #   state is `ENABLED`, it can accept jobs. If the job queue state is
     #   `DISABLED`, new jobs can't be added to the queue, but jobs already in
     #   the queue can finish.
+    #
+    # @option params [String] :scheduling_policy_arn
+    #   Amazon Resource Name (ARN) of the fair share scheduling policy. Once a
+    #   job queue is created, the fair share scheduling policy can be replaced
+    #   but not removed. The format is
+    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
+    #   example,
+    #   `aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy`.
     #
     # @option params [Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
@@ -2911,6 +3192,7 @@ module Aws::Batch
     #   resp = client.update_job_queue({
     #     job_queue: "String", # required
     #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     scheduling_policy_arn: "String",
     #     priority: 1,
     #     compute_environment_order: [
     #       {
@@ -2934,6 +3216,41 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Updates a scheduling policy.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the scheduling policy to update.
+    #
+    # @option params [Types::FairsharePolicy] :fairshare_policy
+    #   The fair share policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_scheduling_policy({
+    #     arn: "String", # required
+    #     fairshare_policy: {
+    #       share_decay_seconds: 1,
+    #       compute_reservation: 1,
+    #       share_distribution: [
+    #         {
+    #           share_identifier: "String", # required
+    #           weight_factor: 1.0,
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateSchedulingPolicy AWS API Documentation
+    #
+    # @overload update_scheduling_policy(params = {})
+    # @param [Hash] params ({})
+    def update_scheduling_policy(params = {}, options = {})
+      req = build_request(:update_scheduling_policy, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2947,7 +3264,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

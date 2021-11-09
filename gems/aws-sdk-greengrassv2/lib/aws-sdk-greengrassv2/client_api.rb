@@ -300,6 +300,7 @@ module Aws::GreengrassV2
 
     ComponentRunWith.add_member(:posix_user, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "posixUser"))
     ComponentRunWith.add_member(:system_resource_limits, Shapes::ShapeRef.new(shape: SystemResourceLimits, location_name: "systemResourceLimits"))
+    ComponentRunWith.add_member(:windows_user, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "windowsUser"))
     ComponentRunWith.struct_class = Types::ComponentRunWith
 
     ComponentVersionList.member = Shapes::ShapeRef.new(shape: ComponentVersionListItem)

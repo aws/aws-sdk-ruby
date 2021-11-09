@@ -222,6 +222,11 @@ module Aws::Batch
     #   The Amazon Resource Name (ARN) of the compute environment.
     #   @return [String]
     #
+    # @!attribute [rw] unmanagedv_cpus
+    #   The maximum number of VCPUs expected to be used for an unmanaged
+    #   compute environment.
+    #   @return [Integer]
+    #
     # @!attribute [rw] ecs_cluster_arn
     #   The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster
     #   used by the compute environment.
@@ -294,6 +299,7 @@ module Aws::Batch
     class ComputeEnvironmentDetail < Struct.new(
       :compute_environment_name,
       :compute_environment_arn,
+      :unmanagedv_cpus,
       :ecs_cluster_arn,
       :tags,
       :type,
@@ -606,7 +612,7 @@ module Aws::Batch
     #   is the tag value−for example, `\{ "Name": "Batch Instance -
     #   C4OnDemand" \}`. This is helpful for recognizing your Batch
     #   instances in the Amazon EC2 console. These tags can't be updated or
-    #   removed after the compute environment is created.Aany changes to
+    #   removed after the compute environment is created. Any changes to
     #   these tags require that you create a new compute environment and
     #   remove the old compute environment. These tags aren't seen when
     #   using the Batch `ListTagsForResource` API operation.
@@ -700,7 +706,9 @@ module Aws::Batch
     # @!attribute [rw] ec2_configuration
     #   Provides information used to select Amazon Machine Images (AMIs) for
     #   EC2 instances in the compute environment. If `Ec2Configuration`
-    #   isn't specified, the default is `ECS_AL1`.
+    #   isn't specified, the default is `ECS_AL2`.
+    #
+    #   One or two values can be provided.
     #
     #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
     #   resources, and shouldn't be specified.
@@ -829,7 +837,7 @@ module Aws::Batch
     #   The number of vCPUs reserved for the container. For jobs that run on
     #   EC2 resources, you can specify the vCPU requirement for the job
     #   using `resourceRequirements`, but you can't specify the vCPU
-    #   requirements in both the `vcpus` and `resourceRequirement` object.
+    #   requirements in both the `vcpus` and `resourceRequirements` object.
     #   This parameter maps to `CpuShares` in the [Create a container][1]
     #   section of the [Docker Remote API][2] and the `--cpu-shares` option
     #   to [docker run][3]. Each vCPU is equivalent to 1,024 CPU shares. You
@@ -852,7 +860,7 @@ module Aws::Batch
     #
     # @!attribute [rw] memory
     #   For jobs run on EC2 resources that didn't specify memory
-    #   requirements using `ResourceRequirement`, the number of MiB of
+    #   requirements using `resourceRequirements`, the number of MiB of
     #   memory reserved for the job. For other jobs, including all run on
     #   Fargate resources, see `resourceRequirements`.
     #   @return [Integer]
@@ -1125,48 +1133,41 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] vcpus
-    #   This parameter indicates the number of vCPUs reserved for the
-    #   container.It overrides the `vcpus` parameter that's set in the job
+    #   This parameter is deprecated, use `resourceRequirements` to override
+    #   the `vcpus` parameter that's set in the job definition. It's not
+    #   supported for jobs that run on Fargate resources. For jobs run on
+    #   EC2 resources, it overrides the `vcpus` parameter set in the job
     #   definition, but doesn't override any vCPU requirement specified in
-    #   the `resourceRequirement` structure in the job definition. To
+    #   the `resourceRequirements` structure in the job definition. To
     #   override vCPU requirements that are specified in the
-    #   `ResourceRequirement` structure in the job definition,
-    #   `ResourceRequirement` must be specified in the `SubmitJob` request,
-    #   with `type` set to `VCPU` and `value` set to the new value.
-    #
-    #   This parameter maps to `CpuShares` in the [Create a container][1]
-    #   section of the [Docker Remote API][2] and the `--cpu-shares` option
-    #   to [docker run][3]. Each vCPU is equivalent to 1,024 CPU shares. You
-    #   must specify at least one vCPU.
-    #
-    #   <note markdown="1"> This parameter is supported for jobs that run on EC2 resources, but
-    #   isn't supported for jobs that run on Fargate resources. For Fargate
-    #   resources, you can only use `resourceRequirement`. For EC2
-    #   resources, you can use either this parameter or
-    #   `resourceRequirement` but not both.
-    #
-    #    </note>
+    #   `resourceRequirements` structure in the job definition,
+    #   `resourceRequirements` must be specified in the `SubmitJob` request,
+    #   with `type` set to `VCPU` and `value` set to the new value. For more
+    #   information, see [Can't override job definition resource
+    #   requirements][1] in the *Batch User Guide*.
     #
     #
     #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
-    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements
     #   @return [Integer]
     #
     # @!attribute [rw] memory
-    #   This parameter indicates the amount of memory (in MiB) that's
-    #   reserved for the job. It overrides the `memory` parameter set in the
-    #   job definition, but doesn't override any memory requirement
-    #   specified in the `ResourceRequirement` structure in the job
-    #   definition. To override memory requirements that are specified in
-    #   the `ResourceRequirement` structure in the job definition,
-    #   `ResourceRequirement` must be specified in the `SubmitJob` request,
-    #   with `type` set to `MEMORY` and `value` set to the new value.
+    #   This parameter is deprecated, use `resourceRequirements` to override
+    #   the memory requirements specified in the job definition. It's not
+    #   supported for jobs that run on Fargate resources. For jobs run on
+    #   EC2 resources, it overrides the `memory` parameter set in the job
+    #   definition, but doesn't override any memory requirement specified
+    #   in the `resourceRequirements` structure in the job definition. To
+    #   override memory requirements that are specified in the
+    #   `resourceRequirements` structure in the job definition,
+    #   `resourceRequirements` must be specified in the `SubmitJob` request,
+    #   with `type` set to `MEMORY` and `value` set to the new value. For
+    #   more information, see [Can't override job definition resource
+    #   requirements][1] in the *Batch User Guide*.
     #
-    #   This parameter is supported for jobs that run on EC2 resources, but
-    #   isn't supported for jobs that run on Fargate resources. For these
-    #   resources, use `resourceRequirement` instead.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements
     #   @return [Integer]
     #
     # @!attribute [rw] command
@@ -1359,24 +1360,16 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] vcpus
-    #   The number of vCPUs reserved for the job. Each vCPU is equivalent to
-    #   1,024 CPU shares. This parameter maps to `CpuShares` in the [Create
-    #   a container][1] section of the [Docker Remote API][2] and the
-    #   `--cpu-shares` option to [docker run][3]. The number of vCPUs must
-    #   be specified but can be specified in several places. You must
-    #   specify it at least once for each node.
+    #   This parameter is deprecated, use `resourceRequirements` to specify
+    #   the vCPU requirements for the job definition. It's not supported
+    #   for jobs that run on Fargate resources. For jobs run on EC2
+    #   resources, it specifies the number of vCPUs reserved for the job.
     #
-    #   This parameter is supported on EC2 resources but isn't supported
-    #   for jobs that run on Fargate resources. For these resources, use
-    #   `resourceRequirement` instead. You can use this parameter or
-    #   `resourceRequirements` structure but not both.
-    #
-    #   <note markdown="1"> This parameter isn't applicable to jobs that are running on Fargate
-    #   resources and shouldn't be provided. For jobs that run on Fargate
-    #   resources, you must specify the vCPU requirement for the job using
-    #   `resourceRequirements`.
-    #
-    #    </note>
+    #   Each vCPU is equivalent to 1,024 CPU shares. This parameter maps to
+    #   `CpuShares` in the [Create a container][1] section of the [Docker
+    #   Remote API][2] and the `--cpu-shares` option to [docker run][3]. The
+    #   number of vCPUs must be specified but can be specified in several
+    #   places. You must specify it at least once for each node.
     #
     #
     #
@@ -1386,34 +1379,15 @@ module Aws::Batch
     #   @return [Integer]
     #
     # @!attribute [rw] memory
-    #   This parameter indicates the memory hard limit (in MiB) for a
+    #   This parameter is deprecated, use `resourceRequirements` to specify
+    #   the memory requirements for the job definition. It's not supported
+    #   for jobs that run on Fargate resources. For jobs run on EC2
+    #   resources, it specifies the memory hard limit (in MiB) for a
     #   container. If your container attempts to exceed the specified
     #   number, it's terminated. You must specify at least 4 MiB of memory
     #   for a job using this parameter. The memory hard limit can be
     #   specified in several places. It must be specified for each node at
     #   least once.
-    #
-    #   This parameter maps to `Memory` in the [Create a container][1]
-    #   section of the [Docker Remote API][2] and the `--memory` option to
-    #   [docker run][3].
-    #
-    #   This parameter is supported on EC2 resources but isn't supported on
-    #   Fargate resources. For Fargate resources, you should specify the
-    #   memory requirement using `resourceRequirement`. You can also do this
-    #   for EC2 resources.
-    #
-    #   <note markdown="1"> If you're trying to maximize your resource utilization by providing
-    #   your jobs as much memory as possible for a particular instance type,
-    #   see [Memory Management][4] in the *Batch User Guide*.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.docker.com/engine/api/v1.23/#create-a-container
-    #   [2]: https://docs.docker.com/engine/api/v1.23/
-    #   [3]: https://docs.docker.com/engine/reference/run/
-    #   [4]: https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html
     #   @return [Integer]
     #
     # @!attribute [rw] command
@@ -1693,6 +1667,7 @@ module Aws::Batch
     #         compute_environment_name: "String", # required
     #         type: "MANAGED", # required, accepts MANAGED, UNMANAGED
     #         state: "ENABLED", # accepts ENABLED, DISABLED
+    #         unmanagedv_cpus: 1,
     #         compute_resources: {
     #           type: "EC2", # required, accepts EC2, SPOT, FARGATE, FARGATE_SPOT
     #           allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
@@ -1761,6 +1736,19 @@ module Aws::Batch
     #   environments in the `DISABLED` state don't scale out. However, they
     #   scale in to `minvCpus` value after instances become idle.
     #   @return [String]
+    #
+    # @!attribute [rw] unmanagedv_cpus
+    #   The maximum number of vCPUs for an unmanaged compute environment.
+    #   This parameter is only used for fair share scheduling to reserve
+    #   vCPU capacity for new share identifiers. If this parameter is not
+    #   provided for a fair share job queue, no vCPU capacity will be
+    #   reserved.
+    #
+    #   <note markdown="1"> This parameter is only supported when the `type` parameter is set to
+    #   `UNMANAGED`/
+    #
+    #    </note>
+    #   @return [Integer]
     #
     # @!attribute [rw] compute_resources
     #   Details about the compute resources managed by the compute
@@ -1831,6 +1819,7 @@ module Aws::Batch
       :compute_environment_name,
       :type,
       :state,
+      :unmanagedv_cpus,
       :compute_resources,
       :service_role,
       :tags)
@@ -1864,6 +1853,7 @@ module Aws::Batch
     #       {
     #         job_queue_name: "String", # required
     #         state: "ENABLED", # accepts ENABLED, DISABLED
+    #         scheduling_policy_arn: "String",
     #         priority: 1, # required
     #         compute_environment_order: [ # required
     #           {
@@ -1886,6 +1876,18 @@ module Aws::Batch
     #   is able to accept jobs. If the job queue state is `DISABLED`, new
     #   jobs can't be added to the queue, but jobs already in the queue can
     #   finish.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduling_policy_arn
+    #   Amazon Resource Name (ARN) of the fair share scheduling policy. If
+    #   this parameter is specified, the job queue will use a fair share
+    #   scheduling policy. If this parameter is not specified, the job queue
+    #   will use a first in, first out (FIFO) scheduling policy. Once a job
+    #   queue is created, the fair share scheduling policy can be replaced
+    #   but not removed. The format is
+    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
+    #   example,
+    #   `aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy`.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -1934,6 +1936,7 @@ module Aws::Batch
     class CreateJobQueueRequest < Struct.new(
       :job_queue_name,
       :state,
+      :scheduling_policy_arn,
       :priority,
       :compute_environment_order,
       :tags)
@@ -1954,6 +1957,81 @@ module Aws::Batch
     class CreateJobQueueResponse < Struct.new(
       :job_queue_name,
       :job_queue_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateSchedulingPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         fairshare_policy: {
+    #           share_decay_seconds: 1,
+    #           compute_reservation: 1,
+    #           share_distribution: [
+    #             {
+    #               share_identifier: "String", # required
+    #               weight_factor: 1.0,
+    #             },
+    #           ],
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the scheduling policy. Up to 128 letters (uppercase and
+    #   lowercase), numbers, hyphens, and underscores are allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] fairshare_policy
+    #   The fair share policy of the scheduling policy.
+    #   @return [Types::FairsharePolicy]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you apply to the scheduling policy to help you
+    #   categorize and organize your resources. Each tag consists of a key
+    #   and an optional value. For more information, see [Tagging Amazon Web
+    #   Services Resources][1] in *Amazon Web Services General Reference*.
+    #
+    #   These tags can be updated or removed using the [TagResource][2] and
+    #   [UntagResource][3] API operations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html
+    #   [3]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateSchedulingPolicyRequest AWS API Documentation
+    #
+    class CreateSchedulingPolicyRequest < Struct.new(
+      :name,
+      :fairshare_policy,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the scheduling policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the scheduling policy. The format
+    #   is `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
+    #   example,
+    #   `aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateSchedulingPolicyResponse AWS API Documentation
+    #
+    class CreateSchedulingPolicyResponse < Struct.new(
+      :name,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2009,6 +2087,29 @@ module Aws::Batch
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueueResponse AWS API Documentation
     #
     class DeleteJobQueueResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteSchedulingPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the scheduling policy to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteSchedulingPolicyRequest AWS API Documentation
+    #
+    class DeleteSchedulingPolicyRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteSchedulingPolicyResponse AWS API Documentation
+    #
+    class DeleteSchedulingPolicyResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeregisterJobDefinitionRequest
     #   data as a hash:
@@ -2095,9 +2196,9 @@ module Aws::Batch
     # @!attribute [rw] next_token
     #   The `nextToken` value to include in a future
     #   `DescribeComputeEnvironments` request. When the results of a
-    #   `DescribeJobDefinitions` request exceed `maxResults`, this value can
-    #   be used to retrieve the next page of results. This value is `null`
-    #   when there are no more results to return.
+    #   `DescribeComputeEnvironments` request exceed `maxResults`, this
+    #   value can be used to retrieve the next page of results. This value
+    #   is `null` when there are no more results to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironmentsResponse AWS API Documentation
@@ -2304,6 +2405,38 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeSchedulingPoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arns: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] arns
+    #   A list of up to 100 scheduling policy Amazon Resource Name (ARN)
+    #   entries.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeSchedulingPoliciesRequest AWS API Documentation
+    #
+    class DescribeSchedulingPoliciesRequest < Struct.new(
+      :arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduling_policies
+    #   The list of scheduling policies.
+    #   @return [Array<Types::SchedulingPolicyDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeSchedulingPoliciesResponse AWS API Documentation
+    #
+    class DescribeSchedulingPoliciesResponse < Struct.new(
+      :scheduling_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing a container instance host device.
     #
     # <note markdown="1"> This object isn't applicable to jobs that are running on Fargate
@@ -2478,9 +2611,7 @@ module Aws::Batch
 
     # Provides information used to select Amazon Machine Images (AMIs) for
     # instances in the compute environment. If `Ec2Configuration` isn't
-    # specified, the default is currently `ECS_AL1` ([Amazon Linux][1]) for
-    # non-GPU, non AWSGraviton instances. Starting on March 31, 2021, this
-    # default will be changing to `ECS_AL2` ([Amazon Linux 2][2]).
+    # specified, the default is `ECS_AL2` ([Amazon Linux 2][1]).
     #
     # <note markdown="1"> This object isn't applicable to jobs that are running on Fargate
     # resources.
@@ -2489,8 +2620,7 @@ module Aws::Batch
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
     #
     # @note When making an API call, you may pass Ec2Configuration
     #   data as a hash:
@@ -2503,36 +2633,29 @@ module Aws::Batch
     # @!attribute [rw] image_type
     #   The image type to match with the instance type to select an AMI. If
     #   the `imageIdOverride` parameter isn't specified, then a recent
-    #   [Amazon ECS-optimized AMI][1] (`ECS_AL1`) is used. Starting on March
-    #   31, 2021, this default will be changing to `ECS_AL2` ([Amazon Linux
-    #   2][2]).
+    #   [Amazon ECS-optimized Amazon Linux 2 AMI][1] (`ECS_AL2`) is used.
     #
     #   ECS\_AL2
     #
-    #   : [Amazon Linux 2][2]− Default for all Amazon Web Services
-    #     Graviton-based instance families (for example, `C6g`, `M6g`,
-    #     `R6g`, and `T4g`) and can be used for all non-GPU instance types.
+    #   : [Amazon Linux 2][1]− Default for all non-GPU instance families.
     #
     #   ECS\_AL2\_NVIDIA
     #
-    #   : [Amazon Linux 2 (GPU)][3]−Default for all GPU instance families
+    #   : [Amazon Linux 2 (GPU)][2]−Default for all GPU instance families
     #     (for example `P4` and `G4`) and can be used for all non Amazon Web
     #     Services Graviton-based instance types.
     #
     #   ECS\_AL1
     #
-    #   : [Amazon Linux][4]−Default for all non-GPU, non Amazon Web Services
-    #     Graviton instance families. Amazon Linux is reaching the
-    #     end-of-life of standard support. For more information, see [Amazon
-    #     Linux AMI][5].
+    #   : [Amazon Linux][3]. Amazon Linux is reaching the end-of-life of
+    #     standard support. For more information, see [Amazon Linux AMI][4].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
-    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami
-    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami
-    #   [5]: http://aws.amazon.com/amazon-linux-ami/
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami
+    #   [4]: http://aws.amazon.com/amazon-linux-ami/
     #   @return [String]
     #
     # @!attribute [rw] image_id_override
@@ -2570,6 +2693,8 @@ module Aws::Batch
     #   (including spaces or tabs). It can optionally end with an asterisk
     #   (*) so that only the start of the string needs to be an exact
     #   match.
+    #
+    #   The string can be between 1 and 512 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] on_reason
@@ -2579,6 +2704,8 @@ module Aws::Batch
     #   (including spaces and tabs). It can optionally end with an asterisk
     #   (*) so that only the start of the string needs to be an exact
     #   match.
+    #
+    #   The string can be between 1 and 512 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] on_exit_code
@@ -2587,6 +2714,8 @@ module Aws::Batch
     #   characters in length. It can contain only numbers, and can
     #   optionally end with an asterisk (*) so that only the start of the
     #   string needs to be an exact match.
+    #
+    #   The string can be between 1 and 512 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -2602,6 +2731,69 @@ module Aws::Batch
       :on_reason,
       :on_exit_code,
       :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The fair share policy for a scheduling policy.
+    #
+    # @note When making an API call, you may pass FairsharePolicy
+    #   data as a hash:
+    #
+    #       {
+    #         share_decay_seconds: 1,
+    #         compute_reservation: 1,
+    #         share_distribution: [
+    #           {
+    #             share_identifier: "String", # required
+    #             weight_factor: 1.0,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] share_decay_seconds
+    #   The time period to use to calculate a fair share percentage for each
+    #   fair share identifier in use, in seconds. A value of zero (0)
+    #   indicates that only current usage should be measured; if there are
+    #   four evenly weighted fair share identifiers then each can only use
+    #   up to 25% of the available CPU resources, even if some of the fair
+    #   share identifiers have no currently running jobs. The decay allows
+    #   for more recently run jobs to have more weight than jobs that ran
+    #   earlier. The maximum supported value is 604800 (1 week).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compute_reservation
+    #   A value used to reserve some of the available maximum vCPU for fair
+    #   share identifiers that have not yet been used.
+    #
+    #   The reserved ratio is `(computeReservation/100)^ActiveFairShares `
+    #   where ` ActiveFairShares ` is the number of active fair share
+    #   identifiers.
+    #
+    #   For example, a `computeReservation` value of 50 indicates that Batch
+    #   should reserve 50% of the maximum available vCPU if there is only
+    #   one fair share identifier, 25% if there are two fair share
+    #   identifiers, and 12.5% if there are three fair share identifiers. A
+    #   `computeReservation` value of 25 indicates that Batch should reserve
+    #   25% of the maximum available vCPU if there is only one fair share
+    #   identifier, 6.25% if there are two fair share identifiers, and 1.56%
+    #   if there are three fair share identifiers.
+    #
+    #   The minimum value is 0 and the maximum value is 99.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] share_distribution
+    #   Array of `SharedIdentifier` objects that contain the weights for the
+    #   fair share identifiers for the fair share policy. Fair share
+    #   identifiers that are not included have a default weight of `1.0`.
+    #   @return [Array<Types::ShareAttributes>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/FairsharePolicy AWS API Documentation
+    #
+    class FairsharePolicy < Struct.new(
+      :share_decay_seconds,
+      :compute_reservation,
+      :share_distribution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2695,15 +2887,23 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of job definition. If the job is run on Fargate resources,
-    #   then `multinode` isn't supported. For more information about
-    #   multi-node parallel jobs, see [Creating a multi-node parallel job
-    #   definition][1] in the *Batch User Guide*.
+    #   The type of job definition, either `container` or `multinode`. If
+    #   the job is run on Fargate resources, then `multinode` isn't
+    #   supported. For more information about multi-node parallel jobs, see
+    #   [Creating a multi-node parallel job definition][1] in the *Batch
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html
     #   @return [String]
+    #
+    # @!attribute [rw] scheduling_priority
+    #   The scheduling priority of the job definition. This will only affect
+    #   jobs in job queues with a fair share policy. Jobs with a higher
+    #   scheduling priority will be scheduled before jobs with a lower
+    #   scheduling priority.
+    #   @return [Integer]
     #
     # @!attribute [rw] parameters
     #   Default parameters or parameter substitution placeholders that are
@@ -2771,6 +2971,7 @@ module Aws::Batch
       :revision,
       :status,
       :type,
+      :scheduling_priority,
       :parameters,
       :retry_strategy,
       :container_properties,
@@ -2842,6 +3043,17 @@ module Aws::Batch
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable
     #   @return [String]
+    #
+    # @!attribute [rw] share_identifier
+    #   The share identifier for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduling_priority
+    #   The scheduling policy of the job definition. This will only affect
+    #   jobs in job queues with a fair share policy. Jobs with a higher
+    #   scheduling priority will be scheduled before jobs with a lower
+    #   scheduling priority.
+    #   @return [Integer]
     #
     # @!attribute [rw] attempts
     #   A list of job attempts associated with this job.
@@ -2947,6 +3159,8 @@ module Aws::Batch
       :job_id,
       :job_queue,
       :status,
+      :share_identifier,
+      :scheduling_priority,
       :attempts,
       :status_reason,
       :created_at,
@@ -2983,6 +3197,13 @@ module Aws::Batch
     #   queue state is `ENABLED`, it's able to accept jobs. If the job
     #   queue state is `DISABLED`, new jobs can't be added to the queue,
     #   but jobs already in the queue can finish.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduling_policy_arn
+    #   Amazon Resource Name (ARN) of the scheduling policy. The format is
+    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
+    #   example,
+    #   `aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy`.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3027,6 +3248,7 @@ module Aws::Batch
       :job_queue_name,
       :job_queue_arn,
       :state,
+      :scheduling_policy_arn,
       :status,
       :status_reason,
       :priority,
@@ -3583,6 +3805,71 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListSchedulingPoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned by `ListSchedulingPolicies`
+    #   in paginated output. When this parameter is used,
+    #   `ListSchedulingPolicies` only returns `maxResults` results in a
+    #   single page and a `nextToken` response element. The remaining
+    #   results of the initial request can be seen by sending another
+    #   `ListSchedulingPolicies` request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If this parameter isn't
+    #   used, then `ListSchedulingPolicies` returns up to 100 results and a
+    #   `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListSchedulingPolicies` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value. This value is `null` when there are no more results to
+    #   return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that's only
+    #   used to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListSchedulingPoliciesRequest AWS API Documentation
+    #
+    class ListSchedulingPoliciesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scheduling_policies
+    #   A list of scheduling policies that match the request.
+    #   @return [Array<Types::SchedulingPolicyListingDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `ListSchedulingPolicies` request. When the results of a
+    #   `ListSchedulingPolicies` request exceed `maxResults`, this value can
+    #   be used to retrieve the next page of results. This value is `null`
+    #   when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListSchedulingPoliciesResponse AWS API Documentation
+    #
+    class ListSchedulingPoliciesResponse < Struct.new(
+      :scheduling_policies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -3593,8 +3880,9 @@ module Aws::Batch
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource that
     #   tags are listed for. Batch resources that support tags are compute
-    #   environments, jobs, job definitions, and job queues. ARNs for child
-    #   jobs of array and multi-node parallel (MNP) jobs are not supported.
+    #   environments, jobs, job definitions, job queues, and scheduling
+    #   policies. ARNs for child jobs of array and multi-node parallel (MNP)
+    #   jobs are not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListTagsForResourceRequest AWS API Documentation
@@ -4299,6 +4587,7 @@ module Aws::Batch
     #         parameters: {
     #           "String" => "String",
     #         },
+    #         scheduling_priority: 1,
     #         container_properties: {
     #           image: "String",
     #           vcpus: 1,
@@ -4557,6 +4846,16 @@ module Aws::Batch
     #   parameter defaults from the job definition.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] scheduling_priority
+    #   The scheduling priority for jobs that are submitted with this job
+    #   definition. This will only affect jobs in job queues with a fair
+    #   share policy. Jobs with a higher scheduling priority will be
+    #   scheduled before jobs with a lower scheduling priority.
+    #
+    #   The minimum supported value is 0 and the maximum supported value is
+    #   9999.
+    #   @return [Integer]
+    #
     # @!attribute [rw] container_properties
     #   An object with various properties specific to single-node
     #   container-based jobs. If the job definition's `type` parameter is
@@ -4641,6 +4940,7 @@ module Aws::Batch
       :job_definition_name,
       :type,
       :parameters,
+      :scheduling_priority,
       :container_properties,
       :node_properties,
       :retry_strategy,
@@ -4775,7 +5075,7 @@ module Aws::Batch
     #
     #     For jobs that are running on Fargate resources, then `value` must
     #     match one of the supported values and the `MEMORY` values must be
-    #     one of the values supported for that VCPU value. The supported
+    #     one of the values supported for that `VCPU` value. The supported
     #     values are 0.25, 0.5, 1, 2, and 4
     #
     #     value = 0.25
@@ -4867,6 +5167,60 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # An object representing a scheduling policy.
+    #
+    # @!attribute [rw] name
+    #   The name of the scheduling policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   Amazon Resource Name (ARN) of the scheduling policy. An example
+    #   would be
+    #   `arn:aws:batch:us-east-1:123456789012:scheduling-policy/HighPriority
+    #   `
+    #   @return [String]
+    #
+    # @!attribute [rw] fairshare_policy
+    #   The fair share policy for the scheduling policy.
+    #   @return [Types::FairsharePolicy]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you apply to the scheduling policy to help you
+    #   categorize and organize your resources. Each tag consists of a key
+    #   and an optional value. For more information, see [Tagging Amazon Web
+    #   Services Resources][1] in *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SchedulingPolicyDetail AWS API Documentation
+    #
+    class SchedulingPolicyDetail < Struct.new(
+      :name,
+      :arn,
+      :fairshare_policy,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object containing the details of a scheduling policy returned in a
+    # `ListSchedulingPolicy` action.
+    #
+    # @!attribute [rw] arn
+    #   Amazon Resource Name (ARN) of the scheduling policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SchedulingPolicyListingDetail AWS API Documentation
+    #
+    class SchedulingPolicyListingDetail < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing the secret to expose to your container. Secrets
     # can be exposed to a container in the following ways:
     #
@@ -4931,6 +5285,54 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Specifies the weights for the fair share identifiers for the fair
+    # share policy. Fair share identifiers that are not included have a
+    # default weight of `1.0`.
+    #
+    # @note When making an API call, you may pass ShareAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         share_identifier: "String", # required
+    #         weight_factor: 1.0,
+    #       }
+    #
+    # @!attribute [rw] share_identifier
+    #   A fair share identifier or fair share identifier prefix. If the
+    #   string ends with '*' then this entry specifies the weight factor
+    #   to use for fair share identifiers that begin with that prefix. The
+    #   list of fair share identifiers in a fair share policy cannot
+    #   overlap. For example you cannot have one that specifies a
+    #   `shareIdentifier` of `UserA*` and another that specifies a
+    #   `shareIdentifier` of `UserA-1`.
+    #
+    #   There can be no more than 500 fair share identifiers active in a job
+    #   queue.
+    #
+    #   The string is limited to 255 alphanumeric characters, optionally
+    #   followed by '*'.
+    #   @return [String]
+    #
+    # @!attribute [rw] weight_factor
+    #   The weight factor for the fair share identifier. The default value
+    #   is 1.0. A lower value has a higher priority for compute resources.
+    #   For example, jobs using a share identifier with a weight factor of
+    #   0.125 (1/8) will get 8 times the compute resources of jobs using a
+    #   share identifier with a weight factor of 1.
+    #
+    #   The smallest supported value is 0.0001 and the largest supported
+    #   value is 999.9999.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ShareAttributes AWS API Documentation
+    #
+    class ShareAttributes < Struct.new(
+      :share_identifier,
+      :weight_factor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the parameters for `SubmitJob`.
     #
     # @note When making an API call, you may pass SubmitJobRequest
@@ -4939,6 +5341,8 @@ module Aws::Batch
     #       {
     #         job_name: "String", # required
     #         job_queue: "String", # required
+    #         share_identifier: "String",
+    #         scheduling_priority_override: 1,
     #         array_properties: {
     #           size: 1,
     #         },
@@ -5026,6 +5430,21 @@ module Aws::Batch
     #   The job queue where the job is submitted. You can specify either the
     #   name or the Amazon Resource Name (ARN) of the queue.
     #   @return [String]
+    #
+    # @!attribute [rw] share_identifier
+    #   The share identifier for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduling_priority_override
+    #   The scheduling priority for the job. This will only affect jobs in
+    #   job queues with a fair share policy. Jobs with a higher scheduling
+    #   priority will be scheduled before jobs with a lower scheduling
+    #   priority. This will override any scheduling priority in the job
+    #   definition.
+    #
+    #   The minimum supported value is 0 and the maximum supported value is
+    #   9999.
+    #   @return [Integer]
     #
     # @!attribute [rw] array_properties
     #   The array properties for the submitted job, such as the size of the
@@ -5132,6 +5551,8 @@ module Aws::Batch
     class SubmitJobRequest < Struct.new(
       :job_name,
       :job_queue,
+      :share_identifier,
+      :scheduling_priority_override,
       :array_properties,
       :depends_on,
       :job_definition,
@@ -5181,8 +5602,9 @@ module Aws::Batch
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that tags are added
     #   to. Batch resources that support tags are compute environments,
-    #   jobs, job definitions, and job queues. ARNs for child jobs of array
-    #   and multi-node parallel (MNP) jobs are not supported.
+    #   jobs, job definitions, job queues, and scheduling policies. ARNs for
+    #   child jobs of array and multi-node parallel (MNP) jobs are not
+    #   supported.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5342,8 +5764,9 @@ module Aws::Batch
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to delete
     #   tags. Batch resources that support tags are compute environments,
-    #   jobs, job definitions, and job queues. ARNs for child jobs of array
-    #   and multi-node parallel (MNP) jobs are not supported.
+    #   jobs, job definitions, job queues, and scheduling policies. ARNs for
+    #   child jobs of array and multi-node parallel (MNP) jobs are not
+    #   supported.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -5371,6 +5794,7 @@ module Aws::Batch
     #       {
     #         compute_environment: "String", # required
     #         state: "ENABLED", # accepts ENABLED, DISABLED
+    #         unmanagedv_cpus: 1,
     #         compute_resources: {
     #           minv_cpus: 1,
     #           maxv_cpus: 1,
@@ -5403,6 +5827,15 @@ module Aws::Batch
     #   environments in the `DISABLED` state don't scale out. However, they
     #   scale in to `minvCpus` value after instances become idle.
     #   @return [String]
+    #
+    # @!attribute [rw] unmanagedv_cpus
+    #   The maximum number of vCPUs expected to be used for an unmanaged
+    #   compute environment. This parameter should not be specified for a
+    #   managed compute environment. This parameter is only used for fair
+    #   share scheduling to reserve vCPU capacity for new share identifiers.
+    #   If this parameter is not provided for a fair share job queue, no
+    #   vCPU capacity will be reserved.
+    #   @return [Integer]
     #
     # @!attribute [rw] compute_resources
     #   Details of the compute resources managed by the compute environment.
@@ -5448,6 +5881,7 @@ module Aws::Batch
     class UpdateComputeEnvironmentRequest < Struct.new(
       :compute_environment,
       :state,
+      :unmanagedv_cpus,
       :compute_resources,
       :service_role)
       SENSITIVE = []
@@ -5480,6 +5914,7 @@ module Aws::Batch
     #       {
     #         job_queue: "String", # required
     #         state: "ENABLED", # accepts ENABLED, DISABLED
+    #         scheduling_policy_arn: "String",
     #         priority: 1,
     #         compute_environment_order: [
     #           {
@@ -5498,6 +5933,15 @@ module Aws::Batch
     #   state is `ENABLED`, it can accept jobs. If the job queue state is
     #   `DISABLED`, new jobs can't be added to the queue, but jobs already
     #   in the queue can finish.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduling_policy_arn
+    #   Amazon Resource Name (ARN) of the fair share scheduling policy. Once
+    #   a job queue is created, the fair share scheduling policy can be
+    #   replaced but not removed. The format is
+    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
+    #   example,
+    #   `aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy`.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -5534,6 +5978,7 @@ module Aws::Batch
     class UpdateJobQueueRequest < Struct.new(
       :job_queue,
       :state,
+      :scheduling_policy_arn,
       :priority,
       :compute_environment_order)
       SENSITIVE = []
@@ -5556,6 +6001,44 @@ module Aws::Batch
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateSchedulingPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "String", # required
+    #         fairshare_policy: {
+    #           share_decay_seconds: 1,
+    #           compute_reservation: 1,
+    #           share_distribution: [
+    #             {
+    #               share_identifier: "String", # required
+    #               weight_factor: 1.0,
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the scheduling policy to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] fairshare_policy
+    #   The fair share policy.
+    #   @return [Types::FairsharePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateSchedulingPolicyRequest AWS API Documentation
+    #
+    class UpdateSchedulingPolicyRequest < Struct.new(
+      :arn,
+      :fairshare_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateSchedulingPolicyResponse AWS API Documentation
+    #
+    class UpdateSchedulingPolicyResponse < Aws::EmptyStructure; end
 
     # A data volume used in a job's container properties.
     #

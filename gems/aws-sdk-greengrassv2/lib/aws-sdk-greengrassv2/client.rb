@@ -511,6 +511,11 @@ module Aws::GreengrassV2
     #   To create a component from a Lambda function, specify
     #   `lambdaFunction` when you call this operation.
     #
+    #   <note markdown="1"> IoT Greengrass currently supports Lambda functions on only Linux
+    #   core devices.
+    #
+    #    </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html
@@ -739,6 +744,7 @@ module Aws::GreengrassV2
     #             memory: 1,
     #             cpus: 1.0,
     #           },
+    #           windows_user: "NonEmptyString",
     #         },
     #       },
     #     },
@@ -1096,6 +1102,7 @@ module Aws::GreengrassV2
     #   resp.components["NonEmptyString"].run_with.posix_user #=> String
     #   resp.components["NonEmptyString"].run_with.system_resource_limits.memory #=> Integer
     #   resp.components["NonEmptyString"].run_with.system_resource_limits.cpus #=> Float
+    #   resp.components["NonEmptyString"].run_with.windows_user #=> String
     #   resp.deployment_policies.failure_handling_policy #=> String, one of "ROLLBACK", "DO_NOTHING"
     #   resp.deployment_policies.component_update_policy.timeout_in_seconds #=> Integer
     #   resp.deployment_policies.component_update_policy.action #=> String, one of "NOTIFY_COMPONENTS", "SKIP_NOTIFY_COMPONENTS"
@@ -1678,7 +1685,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

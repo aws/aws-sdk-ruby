@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2021-11-09)
+------------------
+
+* Feature - Documentation updates for AWS Health.
+
 1.41.0 (2021-11-04)
 ------------------
 
