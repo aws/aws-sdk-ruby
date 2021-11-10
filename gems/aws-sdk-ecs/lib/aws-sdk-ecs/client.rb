@@ -350,24 +350,24 @@ module Aws::ECS
     # with an Amazon ECS cluster and are used in capacity provider
     # strategies to facilitate cluster auto scaling.
     #
-    # Only capacity providers using an Auto Scaling group can be created.
+    # Only capacity providers that use an Auto Scaling group can be created.
     # Amazon ECS tasks on Fargate use the `FARGATE` and `FARGATE_SPOT`
-    # capacity providers which are already created and available to all
-    # accounts in Regions supported by Fargate.
+    # capacity providers. These providers are available to all accounts in
+    # the Amazon Web Services Regions that Fargate supports.
     #
     # @option params [required, String] :name
-    #   The name of the capacity provider. Up to 255 characters are allowed,
-    #   including letters (upper and lowercase), numbers, underscores, and
-    #   hyphens. The name cannot be prefixed with "`aws`", "`ecs`", or
-    #   "`fargate`".
+    #   The name of the capacity provider. Up to 255 characters are allowed.
+    #   They include letters (both upper and lowercase letters), numbers,
+    #   underscores (\_), and hyphens (-). The name can't be prefixed with
+    #   "`aws`", "`ecs`", or "`fargate`".
     #
     # @option params [required, Types::AutoScalingGroupProvider] :auto_scaling_group_provider
     #   The details of the Auto Scaling group for the capacity provider.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The metadata that you apply to the capacity provider to help you
-    #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define.
+    #   The metadata that you apply to the capacity provider to categorize and
+    #   organize them more conveniently. Each tag consists of a key and an
+    #   optional value. You define both of them.
     #
     #   The following basic restrictions apply to tags:
     #
@@ -454,10 +454,10 @@ module Aws::ECS
     # `CreateCluster` action.
     #
     # <note markdown="1"> When you call the CreateCluster API operation, Amazon ECS attempts to
-    # create the Amazon ECS service-linked role for your account so that
-    # required resources in other Amazon Web Services services can be
-    # managed on your behalf. However, if the IAM user that makes the call
-    # does not have permissions to create the service-linked role, it is not
+    # create the Amazon ECS service-linked role for your account. This is so
+    # that it can manage required resources in other Amazon Web Services
+    # services on your behalf. However, if the IAM user that makes the call
+    # doesn't have permissions to create the service-linked role, it isn't
     # created. For more information, see [Using Service-Linked Roles for
     # Amazon ECS][1] in the *Amazon Elastic Container Service Developer
     # Guide*.
@@ -469,15 +469,15 @@ module Aws::ECS
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [String] :cluster_name
-    #   The name of your cluster. If you do not specify a name for your
-    #   cluster, you create a cluster named `default`. Up to 255 letters
-    #   (uppercase and lowercase), numbers, underscores, and hyphens are
-    #   allowed.
+    #   The name of your cluster. If you don't specify a name for your
+    #   cluster, you create a cluster that's named `default`. Up to 255
+    #   letters (uppercase and lowercase), numbers, underscores, and hyphens
+    #   are allowed.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the cluster to help you categorize and
-    #   organize them. Each tag consists of a key and an optional value, both
-    #   of which you define.
+    #   organize them. Each tag consists of a key and an optional value. You
+    #   define both.
     #
     #   The following basic restrictions apply to tags:
     #
@@ -507,7 +507,7 @@ module Aws::ECS
     # @option params [Array<Types::ClusterSetting>] :settings
     #   The setting to use when creating a cluster. This parameter is used to
     #   enable CloudWatch Container Insights for a cluster. If this value is
-    #   specified, it will override the `containerInsights` value set with
+    #   specified, it overrides the `containerInsights` value set with
     #   PutAccountSetting or PutAccountSettingDefault.
     #
     # @option params [Types::ClusterConfiguration] :configuration
@@ -521,9 +521,9 @@ module Aws::ECS
     #   the CreateService or RunTask actions.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group, the
-    #   capacity provider must already be created and not already associated
-    #   with another cluster. New Auto Scaling group capacity providers can be
-    #   created with the CreateCapacityProvider API operation.
+    #   capacity provider must be created but not associated with another
+    #   cluster. New Auto Scaling group capacity providers can be created with
+    #   the CreateCapacityProvider API operation.
     #
     #   To use a Fargate capacity provider, specify either the `FARGATE` or
     #   `FARGATE_SPOT` capacity providers. The Fargate capacity providers are
@@ -536,13 +536,13 @@ module Aws::ECS
     #
     # @option params [Array<Types::CapacityProviderStrategyItem>] :default_capacity_provider_strategy
     #   The capacity provider strategy to set as the default for the cluster.
-    #   When a default capacity provider strategy is set for a cluster, when
-    #   calling the RunTask or CreateService APIs with no capacity provider
+    #   After a default capacity provider strategy is set for a cluster, when
+    #   you call the RunTask or CreateService APIs with no capacity provider
     #   strategy or launch type specified, the default capacity provider
     #   strategy for the cluster is used.
     #
-    #   If a default capacity provider strategy is not defined for a cluster
-    #   during creation, it can be defined later with the
+    #   If a default capacity provider strategy isn't defined for a cluster
+    #   when it was created, it can be defined later with the
     #   PutClusterCapacityProviders API operation.
     #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -659,7 +659,7 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Runs and maintains a desired number of tasks from a specified task
+    # Runs and maintains your desired number of tasks from a specified task
     # definition. If the number of tasks running in a service drops below
     # the `desiredCount`, Amazon ECS runs another copy of the task in the
     # specified cluster. To update an existing service, see the
@@ -672,26 +672,27 @@ module Aws::ECS
     # Balancing][1] in the *Amazon Elastic Container Service Developer
     # Guide*.
     #
-    # Tasks for services that *do not* use a load balancer are considered
+    # Tasks for services that don't use a load balancer are considered
     # healthy if they're in the `RUNNING` state. Tasks for services that
-    # *do* use a load balancer are considered healthy if they're in the
+    # use a load balancer are considered healthy if they're in the
     # `RUNNING` state and the container instance that they're hosted on is
     # reported as healthy by the load balancer.
     #
     # There are two service scheduler strategies available:
     #
-    # * `REPLICA` - The replica scheduling strategy places and maintains the
-    #   desired number of tasks across your cluster. By default, the service
-    #   scheduler spreads tasks across Availability Zones. You can use task
-    #   placement strategies and constraints to customize task placement
-    #   decisions. For more information, see [Service Scheduler Concepts][2]
-    #   in the *Amazon Elastic Container Service Developer Guide*.
+    # * `REPLICA` - The replica scheduling strategy places and maintains
+    #   your desired number of tasks across your cluster. By default, the
+    #   service scheduler spreads tasks across Availability Zones. You can
+    #   use task placement strategies and constraints to customize task
+    #   placement decisions. For more information, see [Service Scheduler
+    #   Concepts][2] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
     #
     # * `DAEMON` - The daemon scheduling strategy deploys exactly one task
     #   on each active container instance that meets all of the task
     #   placement constraints that you specify in your cluster. The service
     #   scheduler also evaluates the task placement constraints for running
-    #   tasks and will stop tasks that do not meet the placement
+    #   tasks. It also stops tasks that don't meet the placement
     #   constraints. When using this strategy, you don't need to specify a
     #   desired number of tasks, a task placement strategy, or use Service
     #   Auto Scaling policies. For more information, see [Service Scheduler
@@ -699,51 +700,53 @@ module Aws::ECS
     #   Guide*.
     #
     # You can optionally specify a deployment configuration for your
-    # service. The deployment is triggered by changing properties, such as
-    # the task definition or the desired count of a service, with an
-    # UpdateService operation. The default value for a replica service for
+    # service. The deployment is initiated by changing properties. For
+    # example, the deployment might be initiated by the task definition or
+    # by your desired count of a service. This is done with an UpdateService
+    # operation. The default value for a replica service for
     # `minimumHealthyPercent` is 100%. The default value for a daemon
     # service for `minimumHealthyPercent` is 0%.
     #
-    # If a service is using the `ECS` deployment controller, the minimum
-    # healthy percent represents a lower limit on the number of tasks in a
-    # service that must remain in the `RUNNING` state during a deployment,
-    # as a percentage of the desired number of tasks (rounded up to the
-    # nearest integer), and while any container instances are in the
-    # `DRAINING` state if the service contains tasks using the EC2 launch
-    # type. This parameter enables you to deploy without using additional
-    # cluster capacity. For example, if your service has a desired number of
-    # four tasks and a minimum healthy percent of 50%, the scheduler might
-    # stop two existing tasks to free up cluster capacity before starting
-    # two new tasks. Tasks for services that *do not* use a load balancer
-    # are considered healthy if they're in the `RUNNING` state. Tasks for
-    # services that *do* use a load balancer are considered healthy if
-    # they're in the `RUNNING` state and they're reported as healthy by
-    # the load balancer. The default value for minimum healthy percent is
-    # 100%.
+    # If a service uses the `ECS` deployment controller, the minimum healthy
+    # percent represents a lower limit on the number of tasks in a service
+    # that must remain in the `RUNNING` state during a deployment.
+    # Specifically, it represents it as a percentage of your desired number
+    # of tasks (rounded up to the nearest integer). This happens when any of
+    # your container instances are in the `DRAINING` state if the service
+    # contains tasks using the EC2 launch type. Using this parameter, you
+    # can deploy without using additional cluster capacity. For example, if
+    # you set your service to have desired number of four tasks and a
+    # minimum healthy percent of 50%, the scheduler might stop two existing
+    # tasks to free up cluster capacity before starting two new tasks. If
+    # they're in the `RUNNING` state, tasks for services that don't use a
+    # load balancer are considered healthy . If they're in the `RUNNING`
+    # state and reported as healthy by the load balancer, tasks for services
+    # that *do* use a load balancer are considered healthy . The default
+    # value for minimum healthy percent is 100%.
     #
-    # If a service is using the `ECS` deployment controller, the **maximum
+    # If a service uses the `ECS` deployment controller, the **maximum
     # percent** parameter represents an upper limit on the number of tasks
     # in a service that are allowed in the `RUNNING` or `PENDING` state
-    # during a deployment, as a percentage of the desired number of tasks
-    # (rounded down to the nearest integer), and while any container
-    # instances are in the `DRAINING` state if the service contains tasks
-    # using the EC2 launch type. This parameter enables you to define the
-    # deployment batch size. For example, if your service has a desired
-    # number of four tasks and a maximum percent value of 200%, the
-    # scheduler may start four new tasks before stopping the four older
-    # tasks (provided that the cluster resources required to do this are
-    # available). The default value for maximum percent is 200%.
+    # during a deployment. Specifically, it represents it as a percentage of
+    # the desired number of tasks (rounded down to the nearest integer).
+    # This happens when any of your container instances are in the
+    # `DRAINING` state if the service contains tasks using the EC2 launch
+    # type. Using this parameter, you can define the deployment batch size.
+    # For example, if your service has a desired number of four tasks and a
+    # maximum percent value of 200%, the scheduler may start four new tasks
+    # before stopping the four older tasks (provided that the cluster
+    # resources required to do this are available). The default value for
+    # maximum percent is 200%.
     #
-    # If a service is using either the `CODE_DEPLOY` or `EXTERNAL`
-    # deployment controller types and tasks that use the EC2 launch type,
-    # the **minimum healthy percent** and **maximum percent** values are
-    # used only to define the lower and upper limit on the number of the
-    # tasks in the service that remain in the `RUNNING` state while the
+    # If a service uses either the `CODE_DEPLOY` or `EXTERNAL` deployment
+    # controller types and tasks that use the EC2 launch type, the **minimum
+    # healthy percent** and **maximum percent** values are used only to
+    # define the lower and upper limit on the number of the tasks in the
+    # service that remain in the `RUNNING` state. This is while the
     # container instances are in the `DRAINING` state. If the tasks in the
     # service use the Fargate launch type, the minimum healthy percent and
-    # maximum percent values aren't used, although they're currently
-    # visible when describing your service.
+    # maximum percent values aren't used. This is the case even if they're
+    # currently visible when describing your service.
     #
     # When creating a service that uses the `EXTERNAL` deployment
     # controller, you can specify only parameters that aren't controlled at
@@ -756,13 +759,13 @@ module Aws::ECS
     # placement in your cluster using the following logic:
     #
     # * Determine which of the container instances in your cluster can
-    #   support your service's task definition (for example, they have the
-    #   required CPU, memory, ports, and container instance attributes).
+    #   support the task definition of your service. For example, they have
+    #   the required CPU, memory, ports, and container instance attributes.
     #
     # * By default, the service scheduler attempts to balance tasks across
-    #   Availability Zones in this manner (although you can choose a
-    #   different placement strategy) with the `placementStrategy`
-    #   parameter):
+    #   Availability Zones in this manner. This is the case even if you can
+    #   choose a different placement strategy with the `placementStrategy`
+    #   parameter.
     #
     #   * Sort the valid container instances, giving priority to instances
     #     that have the fewest number of running tasks for this service in
@@ -772,7 +775,7 @@ module Aws::ECS
     #     for placement.
     #
     #   * Place the new service task on a valid container instance in an
-    #     optimal Availability Zone (based on the previous steps), favoring
+    #     optimal Availability Zone based on the previous steps, favoring
     #     container instances with the fewest number of running tasks for
     #     this service.
     #
@@ -783,9 +786,9 @@ module Aws::ECS
     # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
     #
     # @option params [String] :cluster
-    #   The short name or full Amazon Resource Name (ARN) of the cluster on
-    #   which to run your service. If you do not specify a cluster, the
-    #   default cluster is assumed.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   you run your service on. If you do not specify a cluster, the default
+    #   cluster is assumed.
     #
     # @option params [required, String] :service_name
     #   The name of your service. Up to 255 letters (uppercase and lowercase),
@@ -795,10 +798,10 @@ module Aws::ECS
     #
     # @option params [String] :task_definition
     #   The `family` and `revision` (`family:revision`) or full ARN of the
-    #   task definition to run in your service. If a `revision` is not
+    #   task definition to run in your service. If a `revision` isn't
     #   specified, the latest `ACTIVE` revision is used.
     #
-    #   A task definition must be specified if the service is using either the
+    #   A task definition must be specified if the service uses either the
     #   `ECS` or `CODE_DEPLOY` deployment controllers.
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
@@ -806,54 +809,56 @@ module Aws::ECS
     #   your service. For more information, see [Service Load Balancing][1] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
-    #   If the service is using the rolling update (`ECS`) deployment
-    #   controller and using either an Application Load Balancer or Network
-    #   Load Balancer, you must specify one or more target group ARNs to
-    #   attach to the service. The service-linked role is required for
-    #   services that make use of multiple target groups. For more
-    #   information, see [Using service-linked roles for Amazon ECS][2] in the
-    #   *Amazon Elastic Container Service Developer Guide*.
+    #   If the service uses the rolling update (`ECS`) deployment controller
+    #   and using either an Application Load Balancer or Network Load
+    #   Balancer, you must specify one or more target group ARNs to attach to
+    #   the service. The service-linked role is required for services that use
+    #   multiple target groups. For more information, see [Using
+    #   service-linked roles for Amazon ECS][2] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
     #
-    #   If the service is using the `CODE_DEPLOY` deployment controller, the
+    #   If the service uses the `CODE_DEPLOY` deployment controller, the
     #   service is required to use either an Application Load Balancer or
     #   Network Load Balancer. When creating an CodeDeploy deployment group,
     #   you specify two target groups (referred to as a `targetGroupPair`).
     #   During a deployment, CodeDeploy determines which task set in your
-    #   service has the status `PRIMARY` and associates one target group with
-    #   it, and then associates the other target group with the replacement
-    #   task set. The load balancer can also have up to two listeners: a
-    #   required listener for production traffic and an optional listener that
-    #   allows you perform validation tests with Lambda functions before
-    #   routing production traffic to it.
+    #   service has the status `PRIMARY`, and it associates one target group
+    #   with it. Then, it also associates the other target group with the
+    #   replacement task set. The load balancer can also have up to two
+    #   listeners: a required listener for production traffic and an optional
+    #   listener that you can use to perform validation tests with Lambda
+    #   functions before routing production traffic to it.
     #
     #   After you create a service using the `ECS` deployment controller, the
     #   load balancer name or target group ARN, container name, and container
-    #   port specified in the service definition are immutable. If you are
-    #   using the `CODE_DEPLOY` deployment controller, these values can be
+    #   port that's specified in the service definition are immutable. If you
+    #   use the `CODE_DEPLOY` deployment controller, these values can be
     #   changed when updating the service.
     #
     #   For Application Load Balancers and Network Load Balancers, this object
-    #   must contain the load balancer target group ARN, the container name
-    #   (as it appears in a container definition), and the container port to
-    #   access from the load balancer. The load balancer name parameter must
-    #   be omitted. When a task from this service is placed on a container
-    #   instance, the container instance and port combination is registered as
-    #   a target in the target group specified here.
+    #   must contain the load balancer target group ARN, the container name,
+    #   and the container port to access from the load balancer. The container
+    #   name must be as it appears in a container definition. The load
+    #   balancer name parameter must be omitted. When a task from this service
+    #   is placed on a container instance, the container instance and port
+    #   combination is registered as a target in the target group that's
+    #   specified here.
     #
     #   For Classic Load Balancers, this object must contain the load balancer
-    #   name, the container name (as it appears in a container definition),
-    #   and the container port to access from the load balancer. The target
-    #   group ARN parameter must be omitted. When a task from this service is
-    #   placed on a container instance, the container instance is registered
-    #   with the load balancer specified here.
+    #   name, the container name , and the container port to access from the
+    #   load balancer. The container name must be as it appears in a container
+    #   definition. The target group ARN parameter must be omitted. When a
+    #   task from this service is placed on a container instance, the
+    #   container instance is registered with the load balancer that's
+    #   specified here.
     #
     #   Services with tasks that use the `awsvpc` network mode (for example,
     #   those with the Fargate launch type) only support Application Load
-    #   Balancers and Network Load Balancers. Classic Load Balancers are not
+    #   Balancers and Network Load Balancers. Classic Load Balancers aren't
     #   supported. Also, when you create any target groups for these services,
-    #   you must choose `ip` as the target type, not `instance`, because tasks
-    #   that use the `awsvpc` network mode are associated with an elastic
-    #   network interface, not an Amazon EC2 instance.
+    #   you must choose `ip` as the target type, not `instance`. This is
+    #   because tasks that use the `awsvpc` network mode are associated with
+    #   an elastic network interface, not an Amazon EC2 instance.
     #
     #
     #
@@ -865,7 +870,7 @@ module Aws::ECS
     #   service. For more information, see [Service discovery][1].
     #
     #   <note markdown="1"> Each service may be associated with one service registry. Multiple
-    #   service registries per service isn't supported.
+    #   service registries for each service isn't supported.
     #
     #    </note>
     #
@@ -877,16 +882,17 @@ module Aws::ECS
     #   The number of instantiations of the specified task definition to place
     #   and keep running on your cluster.
     #
-    #   This is required if `schedulingStrategy` is `REPLICA` or is not
-    #   specified. If `schedulingStrategy` is `DAEMON` then this is not
+    #   This is required if `schedulingStrategy` is `REPLICA` or isn't
+    #   specified. If `schedulingStrategy` is `DAEMON` then this isn't
     #   required.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. Up to 32 ASCII characters are allowed.
+    #   An identifier that you provide to ensure the idempotency of the
+    #   request. It must be unique and is case sensitive. Up to 32 ASCII
+    #   characters are allowed.
     #
     # @option params [String] :launch_type
-    #   The infrastructure on which to run your service. For more information,
+    #   The infrastructure that you run your service on. For more information,
     #   see [Amazon ECS launch types][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
@@ -902,7 +908,7 @@ module Aws::ECS
     #   The `EC2` launch type runs your tasks on Amazon EC2 instances
     #   registered to your cluster.
     #
-    #   The `EXTERNAL` launch type runs your tasks on your on-premise server
+    #   The `EXTERNAL` launch type runs your tasks on your on-premises server
     #   or virtual machine (VM) capacity registered to your cluster.
     #
     #   A service can use either a launch type or a capacity provider
@@ -928,9 +934,9 @@ module Aws::ECS
     # @option params [String] :platform_version
     #   The platform version that your tasks in the service are running on. A
     #   platform version is specified only for tasks using the Fargate launch
-    #   type. If one isn't specified, the `LATEST` platform version is used
-    #   by default. For more information, see [Fargate platform versions][1]
-    #   in the *Amazon Elastic Container Service Developer Guide*.
+    #   type. If one isn't specified, the `LATEST` platform version is used.
+    #   For more information, see [Fargate platform versions][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
@@ -940,19 +946,19 @@ module Aws::ECS
     #   The name or full Amazon Resource Name (ARN) of the IAM role that
     #   allows Amazon ECS to make calls to your load balancer on your behalf.
     #   This parameter is only permitted if you are using a load balancer with
-    #   your service and your task definition does not use the `awsvpc`
+    #   your service and your task definition doesn't use the `awsvpc`
     #   network mode. If you specify the `role` parameter, you must also
     #   specify a load balancer object with the `loadBalancers` parameter.
     #
     #   If your account has already created the Amazon ECS service-linked
-    #   role, that role is used by default for your service unless you specify
-    #   a role here. The service-linked role is required if your task
-    #   definition uses the `awsvpc` network mode or if the service is
-    #   configured to use service discovery, an external deployment
-    #   controller, multiple target groups, or Elastic Inference accelerators
-    #   in which case you should not specify a role here. For more
-    #   information, see [Using service-linked roles for Amazon ECS][1] in the
-    #   *Amazon Elastic Container Service Developer Guide*.
+    #   role, that role is used for your service unless you specify a role
+    #   here. The service-linked role is required if your task definition uses
+    #   the `awsvpc` network mode or if the service is configured to use
+    #   service discovery, an external deployment controller, multiple target
+    #   groups, or Elastic Inference accelerators in which case you don't
+    #   specify a role here. For more information, see [Using service-linked
+    #   roles for Amazon ECS][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
     #
     #   If your specified role has a path other than `/`, then you must either
     #   specify the full role ARN (this is recommended) or prefix the role
@@ -972,18 +978,18 @@ module Aws::ECS
     #
     # @option params [Array<Types::PlacementConstraint>] :placement_constraints
     #   An array of placement constraint objects to use for tasks in your
-    #   service. You can specify a maximum of 10 constraints per task (this
-    #   limit includes constraints in the task definition and those specified
-    #   at runtime).
+    #   service. You can specify a maximum of 10 constraints for each task.
+    #   This limit includes constraints in the task definition and those
+    #   specified at runtime.
     #
     # @option params [Array<Types::PlacementStrategy>] :placement_strategy
     #   The placement strategy objects to use for tasks in your service. You
-    #   can specify a maximum of 5 strategy rules per service.
+    #   can specify a maximum of 5 strategy rules for each service.
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the service. This parameter is required
     #   for task definitions that use the `awsvpc` network mode to receive
-    #   their own elastic network interface, and it is not supported for other
+    #   their own elastic network interface, and it isn't supported for other
     #   network modes. For more information, see [Task networking][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
@@ -993,18 +999,18 @@ module Aws::ECS
     #
     # @option params [Integer] :health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service scheduler
-    #   should ignore unhealthy Elastic Load Balancing target health checks
-    #   after a task has first started. This is only used when your service is
+    #   ignores unhealthy Elastic Load Balancing target health checks after a
+    #   task has first started. This is only used when your service is
     #   configured to use a load balancer. If your service has a load balancer
     #   defined and you don't specify a health check grace period value, the
     #   default value of `0` is used.
     #
     #   If your service's tasks take a while to start and respond to Elastic
     #   Load Balancing health checks, you can specify a health check grace
-    #   period of up to 2,147,483,647 seconds. During that time, the Amazon
-    #   ECS service scheduler ignores health check status. This grace period
-    #   can prevent the service scheduler from marking tasks as unhealthy and
-    #   stopping them before they have time to come up.
+    #   period of up to 2,147,483,647 seconds (about 69 years). During that
+    #   time, the Amazon ECS service scheduler ignores health check status.
+    #   This grace period can prevent the service scheduler from marking tasks
+    #   as unhealthy and stopping them before they have time to come up.
     #
     # @option params [String] :scheduling_strategy
     #   The scheduling strategy to use for the service. For more information,
@@ -1016,14 +1022,14 @@ module Aws::ECS
     #     desired number of tasks across your cluster. By default, the service
     #     scheduler spreads tasks across Availability Zones. You can use task
     #     placement strategies and constraints to customize task placement
-    #     decisions. This scheduler strategy is required if the service is
-    #     using the `CODE_DEPLOY` or `EXTERNAL` deployment controller types.
+    #     decisions. This scheduler strategy is required if the service uses
+    #     the `CODE_DEPLOY` or `EXTERNAL` deployment controller types.
     #
     #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task on
     #     each active container instance that meets all of the task placement
     #     constraints that you specify in your cluster. The service scheduler
     #     also evaluates the task placement constraints for running tasks and
-    #     will stop tasks that do not meet the placement constraints. When
+    #     will stop tasks that don't meet the placement constraints. When
     #     you're using this strategy, you don't need to specify a desired
     #     number of tasks, a task placement strategy, or use Service Auto
     #     Scaling policies.
@@ -1086,15 +1092,15 @@ module Aws::ECS
     # @option params [String] :propagate_tags
     #   Specifies whether to propagate the tags from the task definition or
     #   the service to the tasks in the service. If no value is specified, the
-    #   tags are not propagated. Tags can only be propagated to the tasks
+    #   tags aren't propagated. Tags can only be propagated to the tasks
     #   within the service during service creation. To add tags to a task
     #   after service creation or task creation, use the TagResource API
     #   action.
     #
     # @option params [Boolean] :enable_execute_command
-    #   Whether or not the execute command functionality is enabled for the
-    #   service. If `true`, this enables execute command functionality on all
-    #   containers in the service tasks.
+    #   Determines whether the execute command functionality is enabled for
+    #   the service. If `true`, this enables execute command functionality on
+    #   all containers in the service tasks.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1474,7 +1480,7 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
     #
     # @option params [String] :launch_type
-    #   The launch type that new tasks in the task set will use. For more
+    #   The launch type that new tasks in the task set uses. For more
     #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
@@ -1514,24 +1520,23 @@ module Aws::ECS
     #   is created.
     #
     # @option params [String] :platform_version
-    #   The platform version that the tasks in the task set should use. A
-    #   platform version is specified only for tasks using the Fargate launch
-    #   type. If one isn't specified, the `LATEST` platform version is used
-    #   by default.
+    #   The platform version that the tasks in the task set uses. A platform
+    #   version is specified only for tasks using the Fargate launch type. If
+    #   one isn't specified, the `LATEST` platform version is used.
     #
     # @option params [Types::Scale] :scale
     #   A floating-point percentage of the desired number of tasks to place
     #   and keep running in the task set.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. Up to 32 ASCII characters are allowed.
+    #   The identifier that you provide to ensure the idempotency of the
+    #   request. It's case sensitive and must be unique. It can be up to 32
+    #   ASCII characters are allowed.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task set to help you categorize and
-    #   organize them. Each tag consists of a key and an optional value, both
-    #   of which you define. When a service is deleted, the tags are deleted
-    #   as well.
+    #   organize them. Each tag consists of a key and an optional value. You
+    #   define both. When a service is deleted, the tags are deleted.
     #
     #   The following basic restrictions apply to tags:
     #
@@ -1672,7 +1677,7 @@ module Aws::ECS
     # root user for an account.
     #
     # @option params [required, String] :name
-    #   The resource name for which to disable the account setting. If
+    #   The resource name to disable the account setting for. If
     #   `serviceLongArnFormat` is specified, the ARN for your Amazon ECS
     #   services is affected. If `taskLongArnFormat` is specified, the ARN and
     #   resource ID for your Amazon ECS tasks is affected. If
@@ -1682,12 +1687,12 @@ module Aws::ECS
     #   container instances is affected.
     #
     # @option params [String] :principal_arn
-    #   The ARN of the principal, which can be an IAM user, IAM role, or the
-    #   root user. If you specify the root user, it disables the account
-    #   setting for all IAM users, IAM roles, and the root user of the account
-    #   unless an IAM user or role explicitly overrides these settings. If
-    #   this field is omitted, the setting is changed only for the
-    #   authenticated user.
+    #   The Amazon Resource Name (ARN) of the principal. It can be an IAM
+    #   user, IAM role, or the root user. If you specify the root user, it
+    #   disables the account setting for all IAM users, IAM roles, and the
+    #   root user of the account unless an IAM user or role explicitly
+    #   overrides these settings. If this field is omitted, the setting is
+    #   changed only for the authenticated user.
     #
     # @return [Types::DeleteAccountSettingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1761,9 +1766,10 @@ module Aws::ECS
     #
     # @option params [required, Array<Types::Attribute>] :attributes
     #   The attributes to delete from your resource. You can specify up to 10
-    #   attributes per request. For custom attributes, specify the attribute
-    #   name and target ID, but do not specify the value. If you specify the
-    #   target ID using the short form, you must also specify the target type.
+    #   attributes for each request. For custom attributes, specify the
+    #   attribute name and target ID, but don't specify the value. If you
+    #   specify the target ID using the short form, you must also specify the
+    #   target type.
     #
     # @return [Types::DeleteAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1803,7 +1809,7 @@ module Aws::ECS
     # Deletes the specified capacity provider.
     #
     # <note markdown="1"> The `FARGATE` and `FARGATE_SPOT` capacity providers are reserved and
-    # cannot be deleted. You can disassociate them from a cluster using
+    # can't be deleted. You can disassociate them from a cluster using
     # either the PutClusterCapacityProviders API or by deleting the cluster.
     #
     #  </note>
@@ -1815,7 +1821,7 @@ module Aws::ECS
     # `forceNewDeployment` option can be used to ensure that any tasks using
     # the Amazon EC2 instance capacity provided by the capacity provider are
     # transitioned to use the capacity from the remaining capacity
-    # providers. Only capacity providers that are not associated with a
+    # providers. Only capacity providers that aren't associated with a
     # cluster can be deleted. To remove a capacity provider from a cluster,
     # you can either use PutClusterCapacityProviders or delete the cluster.
     #
@@ -1860,11 +1866,11 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Deletes the specified cluster. The cluster will transition to the
-    # `INACTIVE` state. Clusters with an `INACTIVE` status may remain
+    # Deletes the specified cluster. The cluster transitions to the
+    # `INACTIVE` state. Clusters with an `INACTIVE` status might remain
     # discoverable in your account for a period of time. However, this
-    # behavior is subject to change in the future, so you should not rely on
-    # `INACTIVE` clusters persisting.
+    # behavior is subject to change in the future. We don't recommend that
+    # you rely on `INACTIVE` clusters persisting.
     #
     # You must deregister all container instances from this cluster before
     # you may delete it. You can list the container instances in a cluster
@@ -1958,7 +1964,7 @@ module Aws::ECS
 
     # Deletes a specified service within a cluster. You can delete a service
     # if you have no running tasks in it and the desired task count is zero.
-    # If the service is actively maintaining tasks, you cannot delete it,
+    # If the service is actively maintaining tasks, you can't delete it,
     # and you must update the service to a desired task count of zero. For
     # more information, see UpdateService.
     #
@@ -1988,9 +1994,9 @@ module Aws::ECS
     #   The name of the service to delete.
     #
     # @option params [Boolean] :force
-    #   If `true`, allows you to delete a service even if it has not been
-    #   scaled down to zero tasks. It is only necessary to use this if the
-    #   service is using the `REPLICA` scheduling strategy.
+    #   If `true`, allows you to delete a service even if it wasn't scaled
+    #   down to zero tasks. It's only necessary to use this if the service
+    #   uses the `REPLICA` scheduling strategy.
     #
     # @return [Types::DeleteServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2164,7 +2170,7 @@ module Aws::ECS
     #
     # @option params [required, String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
-    #   hosts the service that the task set exists in to delete.
+    #   hosts the service that the task set found in to delete.
     #
     # @option params [required, String] :service
     #   The short name or full Amazon Resource Name (ARN) of the service that
@@ -2175,8 +2181,8 @@ module Aws::ECS
     #   delete.
     #
     # @option params [Boolean] :force
-    #   If `true`, this allows you to delete a task set even if it hasn't
-    #   been scaled down to zero.
+    #   If `true`, you can delete a task set even if it hasn't been scaled
+    #   down to zero.
     #
     # @return [Types::DeleteTaskSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2249,18 +2255,18 @@ module Aws::ECS
     # cluster. This instance is no longer available to run tasks.
     #
     # If you intend to use the container instance for some other purpose
-    # after deregistration, you should stop all of the tasks running on the
-    # container instance before deregistration. That prevents any orphaned
-    # tasks from consuming resources.
+    # after deregistration, we recommend that you stop all of the tasks
+    # running on the container instance before deregistration. That prevents
+    # any orphaned tasks from consuming resources.
     #
     # Deregistering a container instance removes the instance from a
-    # cluster, but it does not terminate the EC2 instance. If you are
+    # cluster, but it doesn't terminate the EC2 instance. If you are
     # finished using the instance, be sure to terminate it in the Amazon EC2
     # console to stop billing.
     #
     # <note markdown="1"> If you terminate a running container instance, Amazon ECS
     # automatically deregisters the instance from your cluster (stopped
-    # container instances or instances with disconnected agents are not
+    # container instances or instances with disconnected agents aren't
     # automatically deregistered when terminated).
     #
     #  </note>
@@ -2279,10 +2285,10 @@ module Aws::ECS
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
     #
     # @option params [Boolean] :force
-    #   Forces the deregistration of the container instance. If you have tasks
+    #   Forces the container instance to be deregistered. If you have tasks
     #   running on the container instance when you deregister it with the
     #   `force` option, these tasks remain running until you terminate the
-    #   instance or the tasks stop through some other means, but they are
+    #   instance or the tasks stop through some other means, but they're
     #   orphaned (no longer monitored or accounted for by Amazon ECS). If an
     #   orphaned task on your container instance is part of an Amazon ECS
     #   service, then the service scheduler starts another copy of that task,
@@ -2368,6 +2374,12 @@ module Aws::ECS
     #   resp.container_instance.tags #=> Array
     #   resp.container_instance.tags[0].key #=> String
     #   resp.container_instance.tags[0].value #=> String
+    #   resp.container_instance.health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
+    #   resp.container_instance.health_status.details #=> Array
+    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME"
+    #   resp.container_instance.health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
+    #   resp.container_instance.health_status.details[0].last_updated #=> Time
+    #   resp.container_instance.health_status.details[0].last_status_change #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance AWS API Documentation
     #
@@ -2385,16 +2397,17 @@ module Aws::ECS
     # an `INACTIVE` task definition can still scale up or down by modifying
     # the service's desired count.
     #
-    # You cannot use an `INACTIVE` task definition to run new tasks or
-    # create new services, and you cannot update an existing service to
+    # You can't use an `INACTIVE` task definition to run new tasks or
+    # create new services, and you can't update an existing service to
     # reference an `INACTIVE` task definition. However, there may be up to a
     # 10-minute window following deregistration where these restrictions
     # have not yet taken effect.
     #
     # <note markdown="1"> At this time, `INACTIVE` task definitions remain discoverable in your
     # account indefinitely. However, this behavior is subject to change in
-    # the future, so you should not rely on `INACTIVE` task definitions
-    # persisting beyond the lifecycle of any associated tasks and services.
+    # the future. We don't recommend that you rely on `INACTIVE` task
+    # definitions persisting beyond the lifecycle of any associated tasks
+    # and services.
     #
     #  </note>
     #
@@ -2593,7 +2606,7 @@ module Aws::ECS
     # @option params [Array<String>] :include
     #   Specifies whether or not you want to see the resource tags for the
     #   capacity provider. If `TAGS` is specified, the tags are included in
-    #   the response. If this field is omitted, tags are not included in the
+    #   the response. If this field is omitted, tags aren't included in the
     #   response.
     #
     # @option params [Integer] :max_results
@@ -2676,8 +2689,9 @@ module Aws::ECS
     #   assumed.
     #
     # @option params [Array<String>] :include
-    #   Whether to include additional information about the clusters in the
-    #   response. If this field is omitted, this information isn't included.
+    #   Determines whether to include additional information about the
+    #   clusters in the response. If this field is omitted, this information
+    #   isn't included.
     #
     #   If `ATTACHMENTS` is specified, the attachments for the container
     #   instances or tasks within the cluster are included.
@@ -2800,7 +2814,9 @@ module Aws::ECS
     # @option params [Array<String>] :include
     #   Specifies whether you want to see the resource tags for the container
     #   instance. If `TAGS` is specified, the tags are included in the
-    #   response. If this field is omitted, tags are not included in the
+    #   response. If `CONTAINER_INSTANCE_HEALTH` is specified, the container
+    #   instance health is included in the response. If this field is omitted,
+    #   tags and container instance health status aren't included in the
     #   response.
     #
     # @return [Types::DescribeContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2901,7 +2917,7 @@ module Aws::ECS
     #   resp = client.describe_container_instances({
     #     cluster: "String",
     #     container_instances: ["String"], # required
-    #     include: ["TAGS"], # accepts TAGS
+    #     include: ["TAGS"], # accepts TAGS, CONTAINER_INSTANCE_HEALTH
     #   })
     #
     # @example Response structure
@@ -2952,6 +2968,12 @@ module Aws::ECS
     #   resp.container_instances[0].tags #=> Array
     #   resp.container_instances[0].tags[0].key #=> String
     #   resp.container_instances[0].tags[0].value #=> String
+    #   resp.container_instances[0].health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
+    #   resp.container_instances[0].health_status.details #=> Array
+    #   resp.container_instances[0].health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME"
+    #   resp.container_instances[0].health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
+    #   resp.container_instances[0].health_status.details[0].last_updated #=> Time
+    #   resp.container_instances[0].health_status.details[0].last_status_change #=> Time
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -2980,9 +3002,9 @@ module Aws::ECS
     #   describe in a single operation.
     #
     # @option params [Array<String>] :include
-    #   Specifies whether you want to see the resource tags for the service.
+    #   Determines whether you want to see the resource tags for the service.
     #   If `TAGS` is specified, the tags are included in the response. If this
-    #   field is omitted, tags are not included in the response.
+    #   field is omitted, tags aren't included in the response.
     #
     # @return [Types::DescribeServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3214,9 +3236,9 @@ module Aws::ECS
     #   Amazon Resource Name (ARN) of the task definition to describe.
     #
     # @option params [Array<String>] :include
-    #   Specifies whether to see the resource tags for the task definition. If
-    #   `TAGS` is specified, the tags are included in the response. If this
-    #   field is omitted, tags are not included in the response.
+    #   Determines whether to see the resource tags for the task definition.
+    #   If `TAGS` is specified, the tags are included in the response. If this
+    #   field is omitted, tags aren't included in the response.
     #
     # @return [Types::DescribeTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3489,7 +3511,7 @@ module Aws::ECS
     # @option params [Array<String>] :include
     #   Specifies whether to see the resource tags for the task set. If `TAGS`
     #   is specified, the tags are included in the response. If this field is
-    #   omitted, tags are not included in the response.
+    #   omitted, tags aren't included in the response.
     #
     # @return [Types::DescribeTaskSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3579,7 +3601,7 @@ module Aws::ECS
     # @option params [Array<String>] :include
     #   Specifies whether you want to see the resource tags for the task. If
     #   `TAGS` is specified, the tags are included in the response. If this
-    #   field is omitted, tags are not included in the response.
+    #   field is omitted, tags aren't included in the response.
     #
     # @return [Types::DescribeTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3785,8 +3807,8 @@ module Aws::ECS
     #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID`.
     #
     # @option params [String] :cluster
-    #   The short name or full Amazon Resource Name (ARN) of the cluster to
-    #   which the container instance belongs.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   the container instance belongs to.
     #
     # @return [Types::DiscoverPollEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3880,8 +3902,8 @@ module Aws::ECS
     #   The name of the account setting you want to list the settings for.
     #
     # @option params [String] :value
-    #   The value of the account settings with which to filter results. You
-    #   must also specify an account setting name to use this parameter.
+    #   The value of the account settings to filter results with. You must
+    #   also specify an account setting name to use this parameter.
     #
     # @option params [String] :principal_arn
     #   The ARN of the principal, which can be an IAM user, IAM role, or the
@@ -3894,16 +3916,16 @@ module Aws::ECS
     #    </note>
     #
     # @option params [Boolean] :effective_settings
-    #   Specifies whether to return the effective settings. If `true`, the
+    #   Determines whether to return the effective settings. If `true`, the
     #   account settings for the root user or the default setting for the
     #   `principalArn` are returned. If `false`, the account settings for the
-    #   `principalArn` are returned if they are set. Otherwise, no account
+    #   `principalArn` are returned if they're set. Otherwise, no account
     #   settings are returned.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a `ListAccountSettings` request
     #   indicating that more results are available to fulfill the request and
-    #   further calls will be needed. If `maxResults` was provided, it is
+    #   further calls will be needed. If `maxResults` was provided, it's
     #   possible the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
@@ -3919,7 +3941,7 @@ module Aws::ECS
     #   single page along with a `nextToken` response element. The remaining
     #   results of the initial request can be seen by sending another
     #   `ListAccountSettings` request with the returned `nextToken` value.
-    #   This value can be between 1 and 10. If this parameter is not used,
+    #   This value can be between 1 and 10. If this parameter isn't used,
     #   then `ListAccountSettings` returns up to 10 results and a `nextToken`
     #   value if applicable.
     #
@@ -4023,9 +4045,9 @@ module Aws::ECS
     # `ListAttributes` returns a list of attribute objects, one for each
     # attribute on each resource. You can filter the list of results to a
     # single attribute name to only return results that have that name. You
-    # can also filter the results by attribute name and value, for example,
-    # to see which container instances in a cluster are running a Linux AMI
-    # (`ecs.os-type=linux`).
+    # can also filter the results by attribute name and value. You can do
+    # this, for example, to see which container instances in a cluster are
+    # running a Linux AMI (`ecs.os-type=linux`).
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
@@ -4033,20 +4055,20 @@ module Aws::ECS
     #   is assumed.
     #
     # @option params [required, String] :target_type
-    #   The type of the target with which to list attributes.
+    #   The type of the target to list attributes with.
     #
     # @option params [String] :attribute_name
-    #   The name of the attribute with which to filter the results.
+    #   The name of the attribute to filter the results with.
     #
     # @option params [String] :attribute_value
-    #   The value of the attribute with which to filter results. You must also
+    #   The value of the attribute to filter results with. You must also
     #   specify an attribute name to use this parameter.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a `ListAttributes` request
     #   indicating that more results are available to fulfill the request and
-    #   further calls will be needed. If `maxResults` was provided, it is
-    #   possible the number of results to be fewer than `maxResults`.
+    #   further calls are needed. If `maxResults` was provided, it's possible
+    #   the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -4055,14 +4077,14 @@ module Aws::ECS
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of cluster results returned by `ListAttributes` in
-    #   paginated output. When this parameter is used, `ListAttributes` only
-    #   returns `maxResults` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListAttributes` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListAttributes` returns up to 100 results
-    #   and a `nextToken` value if applicable.
+    #   The maximum number of cluster results that `ListAttributes` returned
+    #   in paginated output. When this parameter is used, `ListAttributes`
+    #   only returns `maxResults` results in a single page along with a
+    #   `nextToken` response element. The remaining results of the initial
+    #   request can be seen by sending another `ListAttributes` request with
+    #   the returned `nextToken` value. This value can be between 1 and 100.
+    #   If this parameter isn't used, then `ListAttributes` returns up to 100
+    #   results and a `nextToken` value if applicable.
     #
     # @return [Types::ListAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4105,8 +4127,8 @@ module Aws::ECS
     # @option params [String] :next_token
     #   The `nextToken` value returned from a `ListClusters` request
     #   indicating that more results are available to fulfill the request and
-    #   further calls will be needed. If `maxResults` was provided, it is
-    #   possible the number of results to be fewer than `maxResults`.
+    #   further calls are needed. If `maxResults` was provided, it's possible
+    #   the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -4115,13 +4137,13 @@ module Aws::ECS
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of cluster results returned by `ListClusters` in
+    #   The maximum number of cluster results that `ListClusters` returned in
     #   paginated output. When this parameter is used, `ListClusters` only
     #   returns `maxResults` results in a single page along with a `nextToken`
     #   response element. The remaining results of the initial request can be
     #   seen by sending another `ListClusters` request with the returned
     #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListClusters` returns up to 100 results
+    #   parameter isn't used, then `ListClusters` returns up to 100 results
     #   and a `nextToken` value if applicable.
     #
     # @return [Types::ListClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4197,8 +4219,8 @@ module Aws::ECS
     # @option params [String] :next_token
     #   The `nextToken` value returned from a `ListContainerInstances` request
     #   indicating that more results are available to fulfill the request and
-    #   further calls will be needed. If `maxResults` was provided, it is
-    #   possible the number of results to be fewer than `maxResults`.
+    #   further calls are needed. If `maxResults` was provided, it's possible
+    #   the number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -4207,21 +4229,21 @@ module Aws::ECS
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of container instance results returned by
-    #   `ListContainerInstances` in paginated output. When this parameter is
-    #   used, `ListContainerInstances` only returns `maxResults` results in a
-    #   single page along with a `nextToken` response element. The remaining
-    #   results of the initial request can be seen by sending another
-    #   `ListContainerInstances` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
-    #   then `ListContainerInstances` returns up to 100 results and a
+    #   The maximum number of container instance results that
+    #   `ListContainerInstances` returned in paginated output. When this
+    #   parameter is used, `ListContainerInstances` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListContainerInstances` request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If this parameter isn't
+    #   used, then `ListContainerInstances` returns up to 100 results and a
     #   `nextToken` value if applicable.
     #
     # @option params [String] :status
     #   Filters the container instances by status. For example, if you specify
     #   the `DRAINING` status, the results include only container instances
     #   that have been set to `DRAINING` using UpdateContainerInstancesState.
-    #   If you do not specify this parameter, the default is to include
+    #   If you don't specify this parameter, the default is to include
     #   container instances set to all states other than `INACTIVE`.
     #
     # @return [Types::ListContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4294,13 +4316,13 @@ module Aws::ECS
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of service results returned by `ListServices` in
+    #   The maximum number of service results that `ListServices` returned in
     #   paginated output. When this parameter is used, `ListServices` only
     #   returns `maxResults` results in a single page along with a `nextToken`
     #   response element. The remaining results of the initial request can be
     #   seen by sending another `ListServices` request with the returned
     #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListServices` returns up to 10 results
+    #   parameter isn't used, then `ListServices` returns up to 10 results
     #   and a `nextToken` value if applicable.
     #
     # @option params [String] :launch_type
@@ -4360,9 +4382,9 @@ module Aws::ECS
     # List the tags for an Amazon ECS resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) that identifies the resource for which
-    #   to list the tags. Currently, the supported resources are Amazon ECS
-    #   tasks, services, task definitions, clusters, and container instances.
+    #   The Amazon Resource Name (ARN) that identifies the resource to list
+    #   the tags for. Currently, the supported resources are Amazon ECS tasks,
+    #   services, task definitions, clusters, and container instances.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4409,27 +4431,27 @@ module Aws::ECS
     end
 
     # Returns a list of task definition families that are registered to your
-    # account (which may include task definition families that no longer
-    # have any `ACTIVE` task definition revisions).
+    # account. This list includes task definition families that no longer
+    # have any `ACTIVE` task definition revisions.
     #
-    # You can filter out task definition families that do not contain any
+    # You can filter out task definition families that don't contain any
     # `ACTIVE` task definition revisions by setting the `status` parameter
     # to `ACTIVE`. You can also filter the results with the `familyPrefix`
     # parameter.
     #
     # @option params [String] :family_prefix
-    #   The `familyPrefix` is a string that is used to filter the results of
+    #   The `familyPrefix` is a string that's used to filter the results of
     #   `ListTaskDefinitionFamilies`. If you specify a `familyPrefix`, only
     #   task definition family names that begin with the `familyPrefix` string
     #   are returned.
     #
     # @option params [String] :status
-    #   The task definition family status with which to filter the
-    #   `ListTaskDefinitionFamilies` results. By default, both `ACTIVE` and
-    #   `INACTIVE` task definition families are listed. If this parameter is
-    #   set to `ACTIVE`, only task definition families that have an `ACTIVE`
-    #   task definition revision are returned. If this parameter is set to
-    #   `INACTIVE`, only task definition families that do not have any
+    #   The task definition family status to filter the
+    #   `ListTaskDefinitionFamilies` results with. By default, both `ACTIVE`
+    #   and `INACTIVE` task definition families are listed. If this parameter
+    #   is set to `ACTIVE`, only task definition families that have an
+    #   `ACTIVE` task definition revision are returned. If this parameter is
+    #   set to `INACTIVE`, only task definition families that do not have any
     #   `ACTIVE` task definition revisions are returned. If you paginate the
     #   resulting output, be sure to keep the `status` value constant in each
     #   subsequent request.
@@ -4448,15 +4470,15 @@ module Aws::ECS
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of task definition family results returned by
-    #   `ListTaskDefinitionFamilies` in paginated output. When this parameter
-    #   is used, `ListTaskDefinitions` only returns `maxResults` results in a
-    #   single page along with a `nextToken` response element. The remaining
-    #   results of the initial request can be seen by sending another
-    #   `ListTaskDefinitionFamilies` request with the returned `nextToken`
-    #   value. This value can be between 1 and 100. If this parameter is not
-    #   used, then `ListTaskDefinitionFamilies` returns up to 100 results and
-    #   a `nextToken` value if applicable.
+    #   The maximum number of task definition family results that
+    #   `ListTaskDefinitionFamilies` returned in paginated output. When this
+    #   parameter is used, `ListTaskDefinitions` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListTaskDefinitionFamilies` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   parameter isn't used, then `ListTaskDefinitionFamilies` returns up to
+    #   100 results and a `nextToken` value if applicable.
     #
     # @return [Types::ListTaskDefinitionFamiliesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4528,27 +4550,26 @@ module Aws::ECS
     # `familyPrefix` parameter or by status with the `status` parameter.
     #
     # @option params [String] :family_prefix
-    #   The full family name with which to filter the `ListTaskDefinitions`
-    #   results. Specifying a `familyPrefix` limits the listed task
-    #   definitions to task definition revisions that belong to that family.
+    #   The full family name to filter the `ListTaskDefinitions` results with.
+    #   Specifying a `familyPrefix` limits the listed task definitions to task
+    #   definition revisions that belong to that family.
     #
     # @option params [String] :status
-    #   The task definition status with which to filter the
-    #   `ListTaskDefinitions` results. By default, only `ACTIVE` task
-    #   definitions are listed. By setting this parameter to `INACTIVE`, you
-    #   can view task definitions that are `INACTIVE` as long as an active
-    #   task or service still references them. If you paginate the resulting
-    #   output, be sure to keep the `status` value constant in each subsequent
-    #   request.
+    #   The task definition status to filter the `ListTaskDefinitions` results
+    #   with. By default, only `ACTIVE` task definitions are listed. By
+    #   setting this parameter to `INACTIVE`, you can view task definitions
+    #   that are `INACTIVE` as long as an active task or service still
+    #   references them. If you paginate the resulting output, be sure to keep
+    #   the `status` value constant in each subsequent request.
     #
     # @option params [String] :sort
-    #   The order in which to sort the results. Valid values are `ASC` and
-    #   `DESC`. By default (`ASC`), task definitions are listed
-    #   lexicographically by family name and in ascending numerical order by
-    #   revision so that the newest task definitions in a family are listed
-    #   last. Setting this parameter to `DESC` reverses the sort order on
-    #   family name and revision so that the newest task definitions in a
-    #   family are listed first.
+    #   The order to sort the results in. Valid values are `ASC` and `DESC`.
+    #   By default, (`ASC`) task definitions are listed lexicographically by
+    #   family name and in ascending numerical order by revision so that the
+    #   newest task definitions in a family are listed last. Setting this
+    #   parameter to `DESC` reverses the sort order on family name and
+    #   revision. This is so that the newest task definitions in a family are
+    #   listed first.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a `ListTaskDefinitions` request
@@ -4563,15 +4584,15 @@ module Aws::ECS
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of task definition results returned by
-    #   `ListTaskDefinitions` in paginated output. When this parameter is
-    #   used, `ListTaskDefinitions` only returns `maxResults` results in a
-    #   single page along with a `nextToken` response element. The remaining
-    #   results of the initial request can be seen by sending another
-    #   `ListTaskDefinitions` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
-    #   then `ListTaskDefinitions` returns up to 100 results and a `nextToken`
-    #   value if applicable.
+    #   The maximum number of task definition results that
+    #   `ListTaskDefinitions` returned in paginated output. When this
+    #   parameter is used, `ListTaskDefinitions` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListTaskDefinitions` request with the returned `nextToken`
+    #   value. This value can be between 1 and 100. If this parameter isn't
+    #   used, then `ListTaskDefinitions` returns up to 100 results and a
+    #   `nextToken` value if applicable.
     #
     # @return [Types::ListTaskDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4670,7 +4691,7 @@ module Aws::ECS
     # @option params [String] :next_token
     #   The `nextToken` value returned from a `ListTasks` request indicating
     #   that more results are available to fulfill the request and further
-    #   calls will be needed. If `maxResults` was provided, it is possible the
+    #   calls will be needed. If `maxResults` was provided, it's possible the
     #   number of results to be fewer than `maxResults`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
@@ -4680,19 +4701,19 @@ module Aws::ECS
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of task results returned by `ListTasks` in
+    #   The maximum number of task results that `ListTasks` returned in
     #   paginated output. When this parameter is used, `ListTasks` only
     #   returns `maxResults` results in a single page along with a `nextToken`
     #   response element. The remaining results of the initial request can be
     #   seen by sending another `ListTasks` request with the returned
     #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListTasks` returns up to 100 results and
+    #   parameter isn't used, then `ListTasks` returns up to 100 results and
     #   a `nextToken` value if applicable.
     #
     # @option params [String] :started_by
-    #   The `startedBy` value with which to filter the task results.
-    #   Specifying a `startedBy` value limits the results to tasks that were
-    #   started with that value.
+    #   The `startedBy` value to filter the task results with. Specifying a
+    #   `startedBy` value limits the results to tasks that were started with
+    #   that value.
     #
     # @option params [String] :service_name
     #   The name of the service to use when filtering the `ListTasks` results.
@@ -4703,12 +4724,12 @@ module Aws::ECS
     #   The task desired status to use when filtering the `ListTasks` results.
     #   Specifying a `desiredStatus` of `STOPPED` limits the results to tasks
     #   that Amazon ECS has set the desired status to `STOPPED`. This can be
-    #   useful for debugging tasks that are not starting properly or have died
+    #   useful for debugging tasks that aren't starting properly or have died
     #   or finished. The default status filter is `RUNNING`, which shows tasks
     #   that Amazon ECS has set the desired status to `RUNNING`.
     #
     #   <note markdown="1"> Although you can filter results based on a desired status of
-    #   `PENDING`, this does not return any results. Amazon ECS never sets the
+    #   `PENDING`, this doesn't return any results. Amazon ECS never sets the
     #   desired status of a task to that value (only a task's `lastStatus`
     #   may have a value of `PENDING`).
     #
@@ -4791,9 +4812,9 @@ module Aws::ECS
     # basis.
     #
     # If you change the account setting for the root user, the default
-    # settings for all of the IAM users and roles for which no individual
-    # account setting has been specified are reset. For more information,
-    # see [Account Settings][1] in the *Amazon Elastic Container Service
+    # settings for all of the IAM users and roles that no individual account
+    # setting was specified are reset for. For more information, see
+    # [Account Settings][1] in the *Amazon Elastic Container Service
     # Developer Guide*.
     #
     # When `serviceLongArnFormat`, `taskLongArnFormat`, or
@@ -4801,10 +4822,10 @@ module Aws::ECS
     # Name (ARN) and resource ID format of the resource type for a specified
     # IAM user, IAM role, or the root user for an account is affected. The
     # opt-in and opt-out account setting must be set for each Amazon ECS
-    # resource separately. The ARN and resource ID format of a resource will
-    # be defined by the opt-in status of the IAM user or role that created
-    # the resource. You must enable this setting to use Amazon ECS features
-    # such as resource tagging.
+    # resource separately. The ARN and resource ID format of a resource is
+    # defined by the opt-in status of the IAM user or role that created the
+    # resource. You must enable this setting to use Amazon ECS features such
+    # as resource tagging.
     #
     # When `awsvpcTrunking` is specified, the elastic network interface
     # (ENI) limit for any new container instances that support the feature
@@ -4994,7 +5015,7 @@ module Aws::ECS
     end
 
     # Create or update an attribute on an Amazon ECS resource. If the
-    # attribute does not exist, it is created. If the attribute exists, its
+    # attribute doesn't exist, it's created. If the attribute exists, its
     # value is replaced with the specified value. To delete an attribute,
     # use DeleteAttributes. For more information, see [Attributes][1] in the
     # *Amazon Elastic Container Service Developer Guide*.
@@ -5010,8 +5031,8 @@ module Aws::ECS
     #
     # @option params [required, Array<Types::Attribute>] :attributes
     #   The attributes to apply to your resource. You can specify up to 10
-    #   custom attributes per resource. You can specify up to 10 attributes in
-    #   a single call.
+    #   custom attributes for each resource. You can specify up to 10
+    #   attributes in a single call.
     #
     # @return [Types::PutAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5055,21 +5076,21 @@ module Aws::ECS
     # capacity provider strategy for the cluster. If the specified cluster
     # has existing capacity providers associated with it, you must specify
     # all existing capacity providers in addition to any new ones you want
-    # to add. Any existing capacity providers associated with a cluster that
-    # are omitted from a PutClusterCapacityProviders API call will be
-    # disassociated with the cluster. You can only disassociate an existing
-    # capacity provider from a cluster if it's not being used by any
-    # existing tasks.
+    # to add. Any existing capacity providers that are associated with a
+    # cluster that are omitted from a PutClusterCapacityProviders API call
+    # will be disassociated with the cluster. You can only disassociate an
+    # existing capacity provider from a cluster if it's not being used by
+    # any existing tasks.
     #
     # When creating a service or running a task on a cluster, if no capacity
     # provider or launch type is specified, then the cluster's default
-    # capacity provider strategy is used. It is recommended to define a
-    # default capacity provider strategy for your cluster, however you may
+    # capacity provider strategy is used. We recommend that you define a
+    # default capacity provider strategy for your cluster. However, you must
     # specify an empty array (`[]`) to bypass defining a default strategy.
     #
     # @option params [required, String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
-    #   modify the capacity provider settings for. If you do not specify a
+    #   modify the capacity provider settings for. If you don't specify a
     #   cluster, the default cluster is assumed.
     #
     # @option params [required, Array<String>] :capacity_providers
@@ -5184,8 +5205,8 @@ module Aws::ECS
     # becomes available to place containers on.
     #
     # @option params [String] :cluster
-    #   The short name or full Amazon Resource Name (ARN) of the cluster with
-    #   which to register your container instance. If you do not specify a
+    #   The short name or full Amazon Resource Name (ARN) of the cluster to
+    #   register your container instance with. If you do not specify a
     #   cluster, the default cluster is assumed.
     #
     # @option params [String] :instance_identity_document
@@ -5205,7 +5226,7 @@ module Aws::ECS
     #
     # @option params [Types::VersionInfo] :version_info
     #   The version information for the Amazon ECS container agent and Docker
-    #   daemon running on the container instance.
+    #   daemon that runs on the container instance.
     #
     # @option params [String] :container_instance_arn
     #   The ARN of the container instance (if it was previously registered).
@@ -5221,7 +5242,7 @@ module Aws::ECS
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the container instance to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define.
+    #   optional value. You define both.
     #
     #   The following basic restrictions apply to tags:
     #
@@ -5343,6 +5364,12 @@ module Aws::ECS
     #   resp.container_instance.tags #=> Array
     #   resp.container_instance.tags[0].key #=> String
     #   resp.container_instance.tags[0].value #=> String
+    #   resp.container_instance.health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
+    #   resp.container_instance.health_status.details #=> Array
+    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME"
+    #   resp.container_instance.health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
+    #   resp.container_instance.health_status.details[0].last_updated #=> Time
+    #   resp.container_instance.health_status.details[0].last_status_change #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance AWS API Documentation
     #
@@ -5364,9 +5391,9 @@ module Aws::ECS
     # parameter. When you specify an IAM role for a task, its containers can
     # then use the latest versions of the CLI or SDKs to make API requests
     # to the Amazon Web Services services that are specified in the IAM
-    # policy associated with the role. For more information, see [IAM Roles
-    # for Tasks][2] in the *Amazon Elastic Container Service Developer
-    # Guide*.
+    # policy that's associated with the role. For more information, see
+    # [IAM Roles for Tasks][2] in the *Amazon Elastic Container Service
+    # Developer Guide*.
     #
     # You can specify a Docker networking mode for the containers in your
     # task definition with the `networkMode` parameter. The available
@@ -5386,7 +5413,7 @@ module Aws::ECS
     # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @option params [required, String] :family
-    #   You must specify a `family` for a task definition, which allows you to
+    #   You must specify a `family` for a task definition. You can use it
     #   track multiple versions of the same task definition. The `family` is
     #   used as a name for your task definition. Up to 255 letters (uppercase
     #   and lowercase), numbers, underscores, and hyphens are allowed.
@@ -5464,23 +5491,23 @@ module Aws::ECS
     #
     # @option params [Array<Types::Volume>] :volumes
     #   A list of volume definitions in JSON format that containers in your
-    #   task may use.
+    #   task might use.
     #
     # @option params [Array<Types::TaskDefinitionPlacementConstraint>] :placement_constraints
     #   An array of placement constraint objects to use for the task. You can
-    #   specify a maximum of 10 constraints per task (this limit includes
-    #   constraints in the task definition and those specified at runtime).
+    #   specify a maximum of 10 constraints for each task. This limit includes
+    #   constraints in the task definition and those specified at runtime.
     #
     # @option params [Array<String>] :requires_compatibilities
-    #   The task launch type that Amazon ECS should validate the task
-    #   definition against. A client exception is returned if the task
-    #   definition doesn't validate against the compatibilities specified. If
-    #   no value is specified, the parameter is omitted from the response.
+    #   The task launch type that Amazon ECS validates the task definition
+    #   against. A client exception is returned if the task definition
+    #   doesn't validate against the compatibilities specified. If no value
+    #   is specified, the parameter is omitted from the response.
     #
     # @option params [String] :cpu
     #   The number of CPU units used by the task. It can be expressed as an
-    #   integer using CPU units, for example `1024`, or as a string using
-    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition. String
+    #   integer using CPU units (for example, `1024`) or as a string using
+    #   vCPUs (for example, `1 vCPU` or `1 vcpu`) in a task definition. String
     #   values are converted to an integer indicating the CPU units when the
     #   task definition is registered.
     #
@@ -5490,13 +5517,16 @@ module Aws::ECS
     #
     #    </note>
     #
-    #   If you are using the EC2 launch type, this field is optional.
+    #   If you're using the EC2 launch type, this field is optional.
     #   Supported values are between `128` CPU units (`0.125` vCPUs) and
     #   `10240` CPU units (`10` vCPUs).
     #
-    #   If you are using the Fargate launch type, this field is required and
+    #   If you're using the Fargate launch type, this field is required and
     #   you must use one of the following values, which determines your range
     #   of supported values for the `memory` parameter:
+    #
+    #   The CPU units cannot be less than 1 vCPU when you use Windows
+    #   containers on Fargate.
     #
     #   * 256 (.25 vCPU) - Available `memory` values: 512 (0.5 GB), 1024 (1
     #     GB), 2048 (2 GB)
@@ -5515,8 +5545,8 @@ module Aws::ECS
     #
     # @option params [String] :memory
     #   The amount of memory (in MiB) used by the task. It can be expressed as
-    #   an integer using MiB, for example `1024`, or as a string using GB, for
-    #   example `1GB` or `1 GB`, in a task definition. String values are
+    #   an integer using MiB (for example ,`1024`) or as a string using GB
+    #   (for example, `1GB` or `1 GB`) in a task definition. String values are
     #   converted to an integer indicating the MiB when the task definition is
     #   registered.
     #
@@ -5529,8 +5559,11 @@ module Aws::ECS
     #   If using the EC2 launch type, this field is optional.
     #
     #   If using the Fargate launch type, this field is required and you must
-    #   use one of the following values, which determines your range of
-    #   supported values for the `cpu` parameter:
+    #   use one of the following values. This determines your range of
+    #   supported values for the `cpu` parameter.
+    #
+    #   The CPU units cannot be less than 1 vCPU when you use Windows
+    #   containers on Fargate.
     #
     #   * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values: 256
     #     (.25 vCPU)
@@ -5550,7 +5583,7 @@ module Aws::ECS
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task definition to help you
     #   categorize and organize them. Each tag consists of a key and an
-    #   optional value, both of which you define.
+    #   optional value. You define both of them.
     #
     #   The following basic restrictions apply to tags:
     #
@@ -6169,12 +6202,12 @@ module Aws::ECS
     # Alternatively, you can use StartTask to use your own scheduler or
     # place tasks manually on specific container instances.
     #
-    # The Amazon ECS API follows an eventual consistency model, due to the
-    # distributed nature of the system supporting the API. This means that
-    # the result of an API command you run that affects your Amazon ECS
-    # resources might not be immediately visible to all subsequent commands
-    # you run. Keep this in mind when you carry out an API command that
-    # immediately follows a previous API command.
+    # The Amazon ECS API follows an eventual consistency model. This is
+    # because the distributed nature of the system supporting the API. This
+    # means that the result of an API command you run that affects your
+    # Amazon ECS resources might not be immediately visible to all
+    # subsequent commands you run. Keep this in mind when you carry out an
+    # API command that immediately follows a previous API command.
     #
     # To manage eventual consistency, you can do the following:
     #
@@ -6210,13 +6243,13 @@ module Aws::ECS
     #   providers.
     #
     # @option params [String] :cluster
-    #   The short name or full Amazon Resource Name (ARN) of the cluster on
-    #   which to run your task. If you do not specify a cluster, the default
-    #   cluster is assumed.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster to
+    #   run your task on. If you do not specify a cluster, the default cluster
+    #   is assumed.
     #
     # @option params [Integer] :count
     #   The number of instantiations of the specified task to place on your
-    #   cluster. You can specify up to 10 tasks per call.
+    #   cluster. You can specify up to 10 tasks for each call.
     #
     # @option params [Boolean] :enable_ecs_managed_tags
     #   Specifies whether to enable Amazon ECS managed tags for the task. For
@@ -6228,7 +6261,7 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [Boolean] :enable_execute_command
-    #   Whether or not to enable the execute command functionality for the
+    #   Determines whether to enable the execute command functionality for the
     #   containers in this task. If `true`, this enables execute command
     #   functionality on all containers in the task.
     #
@@ -6238,7 +6271,7 @@ module Aws::ECS
     #   `family:my-family-name`).
     #
     # @option params [String] :launch_type
-    #   The infrastructure on which to run your standalone task. For more
+    #   The infrastructure to run your standalone task on. For more
     #   information, see [Amazon ECS launch types][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
@@ -6254,7 +6287,7 @@ module Aws::ECS
     #   The `EC2` launch type runs your tasks on Amazon EC2 instances
     #   registered to your cluster.
     #
-    #   The `EXTERNAL` launch type runs your tasks on your on-premise server
+    #   The `EXTERNAL` launch type runs your tasks on your on-premises server
     #   or virtual machine (VM) capacity registered to your cluster.
     #
     #   A task can use either a launch type or a capacity provider strategy.
@@ -6272,7 +6305,7 @@ module Aws::ECS
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the task. This parameter is required for
     #   task definitions that use the `awsvpc` network mode to receive their
-    #   own elastic network interface, and it is not supported for other
+    #   own elastic network interface, and it isn't supported for other
     #   network modes. For more information, see [Task networking][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
@@ -6284,7 +6317,7 @@ module Aws::ECS
     #   A list of container overrides in JSON format that specify the name of
     #   a container in the specified task definition and the overrides it
     #   should receive. You can override the default command for a container
-    #   (that is specified in the task definition or Docker image) with a
+    #   (that's specified in the task definition or Docker image) with a
     #   `command` override. You can also override existing environment
     #   variables (that are specified in the task definition or Docker image)
     #   on a container or add new environment variables to it with an
@@ -6295,19 +6328,19 @@ module Aws::ECS
     #
     # @option params [Array<Types::PlacementConstraint>] :placement_constraints
     #   An array of placement constraint objects to use for the task. You can
-    #   specify up to 10 constraints per task (including constraints in the
-    #   task definition and those specified at runtime).
+    #   specify up to 10 constraints for each task (including constraints in
+    #   the task definition and those specified at runtime).
     #
     # @option params [Array<Types::PlacementStrategy>] :placement_strategy
     #   The placement strategy objects to use for the task. You can specify a
-    #   maximum of 5 strategy rules per task.
+    #   maximum of 5 strategy rules for each task.
     #
     # @option params [String] :platform_version
-    #   The platform version the task should use. A platform version is only
-    #   specified for tasks hosted on Fargate. If one is not specified, the
-    #   `LATEST` platform version is used by default. For more information,
-    #   see [Fargate platform versions][1] in the *Amazon Elastic Container
-    #   Service Developer Guide*.
+    #   The platform version the task uses. A platform version is only
+    #   specified for tasks hosted on Fargate. If one isn't specified, the
+    #   `LATEST` platform version is used. For more information, see [Fargate
+    #   platform versions][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
     #
     #
     #
@@ -6315,7 +6348,7 @@ module Aws::ECS
     #
     # @option params [String] :propagate_tags
     #   Specifies whether to propagate the tags from the task definition to
-    #   the task. If no value is specified, the tags are not propagated. Tags
+    #   the task. If no value is specified, the tags aren't propagated. Tags
     #   can only be propagated to the task during task creation. To add tags
     #   to a task after task creation, use the TagResource API action.
     #
@@ -6335,7 +6368,7 @@ module Aws::ECS
     #   `startedBy` parameter. You can then identify which tasks belong to
     #   that job by filtering the results of a ListTasks call with the
     #   `startedBy` value. Up to 36 letters (uppercase and lowercase),
-    #   numbers, hyphens, and underscores are allowed.
+    #   numbers, hyphens (-), and underscores (\_) are allowed.
     #
     #   If a task is started by an Amazon ECS service, then the `startedBy`
     #   parameter contains the deployment ID of the service that starts it.
@@ -6372,10 +6405,10 @@ module Aws::ECS
     #
     # @option params [required, String] :task_definition
     #   The `family` and `revision` (`family:revision`) or full ARN of the
-    #   task definition to run. If a `revision` is not specified, the latest
+    #   task definition to run. If a `revision` isn't specified, the latest
     #   `ACTIVE` revision is used.
     #
-    #   The full ARN value must match the value that you specified ias the
+    #   The full ARN value must match the value that you specified as the
     #   `Resource` of the IAM principal's permissions policy. For example, if
     #   the `Resource` is
     #   arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*,
@@ -6646,14 +6679,14 @@ module Aws::ECS
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
     #
     # @option params [String] :cluster
-    #   The short name or full Amazon Resource Name (ARN) of the cluster on
-    #   which to start your task. If you do not specify a cluster, the default
+    #   The short name or full Amazon Resource Name (ARN) of the cluster where
+    #   to start your task. If you do not specify a cluster, the default
     #   cluster is assumed.
     #
     # @option params [required, Array<String>] :container_instances
     #   The container instance IDs or full ARN entries for the container
-    #   instances on which you would like to place your task. You can specify
-    #   up to 10 container instances.
+    #   instances where you would like to place your task. You can specify up
+    #   to 10 container instances.
     #
     # @option params [Boolean] :enable_ecs_managed_tags
     #   Specifies whether to enable Amazon ECS managed tags for the task. For
@@ -6682,8 +6715,8 @@ module Aws::ECS
     # @option params [Types::TaskOverride] :overrides
     #   A list of container overrides in JSON format that specify the name of
     #   a container in the specified task definition and the overrides it
-    #   should receive. You can override the default command for a container
-    #   (that is specified in the task definition or Docker image) with a
+    #   receives. You can override the default command for a container
+    #   (that's specified in the task definition or Docker image) with a
     #   `command` override. You can also override existing environment
     #   variables (that are specified in the task definition or Docker image)
     #   on a container or add new environment variables to it with an
@@ -6696,7 +6729,7 @@ module Aws::ECS
     #
     # @option params [String] :propagate_tags
     #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the task. If no value is specified, the tags are not
+    #   the service to the task. If no value is specified, the tags aren't
     #   propagated.
     #
     # @option params [String] :reference_id
@@ -6709,9 +6742,9 @@ module Aws::ECS
     #   `startedBy` parameter. You can then identify which tasks belong to
     #   that job by filtering the results of a ListTasks call with the
     #   `startedBy` value. Up to 36 letters (uppercase and lowercase),
-    #   numbers, hyphens, and underscores are allowed.
+    #   numbers, hyphens (-), and underscores (\_) are allowed.
     #
-    #   If a task is started by an Amazon ECS service, then the `startedBy`
+    #   If a task is started by an Amazon ECS service, the `startedBy`
     #   parameter contains the deployment ID of the service that starts it.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -6746,7 +6779,7 @@ module Aws::ECS
     #
     # @option params [required, String] :task_definition
     #   The `family` and `revision` (`family:revision`) or full ARN of the
-    #   task definition to start. If a `revision` is not specified, the latest
+    #   task definition to start. If a `revision` isn't specified, the latest
     #   `ACTIVE` revision is used.
     #
     # @return [Types::StartTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -6973,7 +7006,7 @@ module Aws::ECS
     #
     # @option params [String] :reason
     #   An optional message specified when a task is stopped. For example, if
-    #   you are using a custom scheduler, you can use this parameter to
+    #   you're using a custom scheduler, you can use this parameter to
     #   specify the reason for stopping the task here, and the message appears
     #   in subsequent DescribeTasks API operations on this task. Up to 255
     #   characters are allowed in this message.
@@ -7171,7 +7204,7 @@ module Aws::ECS
     #   The status of the state change request.
     #
     # @option params [Integer] :exit_code
-    #   The exit code returned for the state change request.
+    #   The exit code that's returned for the state change request.
     #
     # @option params [String] :reason
     #   The reason for the state change request.
@@ -7237,22 +7270,23 @@ module Aws::ECS
     #   The reason for the state change request.
     #
     # @option params [Array<Types::ContainerStateChange>] :containers
-    #   Any containers associated with the state change request.
+    #   Any containers that's associated with the state change request.
     #
     # @option params [Array<Types::AttachmentStateChange>] :attachments
     #   Any attachments associated with the state change request.
     #
     # @option params [Array<Types::ManagedAgentStateChange>] :managed_agents
-    #   The details for the managed agent associated with the task.
+    #   The details for the managed agent that's associated with the task.
     #
     # @option params [Time,DateTime,Date,Integer,String] :pull_started_at
-    #   The Unix timestamp for when the container image pull began.
+    #   The Unix timestamp for the time when the container image pull started.
     #
     # @option params [Time,DateTime,Date,Integer,String] :pull_stopped_at
-    #   The Unix timestamp for when the container image pull completed.
+    #   The Unix timestamp for the time when the container image pull
+    #   completed.
     #
     # @option params [Time,DateTime,Date,Integer,String] :execution_stopped_at
-    #   The Unix timestamp for when the task execution stopped.
+    #   The Unix timestamp for the time when the task execution stopped.
     #
     # @return [Types::SubmitTaskStateChangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7316,12 +7350,12 @@ module Aws::ECS
     end
 
     # Associates the specified tags to a resource with the specified
-    # `resourceArn`. If existing tags on a resource are not specified in the
-    # request parameters, they are not changed. When a resource is deleted,
-    # the tags associated with that resource are deleted as well.
+    # `resourceArn`. If existing tags on a resource aren't specified in the
+    # request parameters, they aren't changed. When a resource is deleted,
+    # the tags that are associated with that resource are deleted as well.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   The Amazon Resource Name (ARN) of the resource to add tags to.
     #   Currently, the supported resources are Amazon ECS capacity providers,
     #   tasks, services, task definitions, clusters, and container instances.
     #
@@ -7398,10 +7432,9 @@ module Aws::ECS
     # Deletes specified tags from a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource from which to delete
-    #   tags. Currently, the supported resources are Amazon ECS capacity
-    #   providers, tasks, services, task definitions, clusters, and container
-    #   instances.
+    #   The Amazon Resource Name (ARN) of the resource to delete tags from.
+    #   Currently, the supported resources are Amazon ECS capacity providers,
+    #   tasks, services, task definitions, clusters, and container instances.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to be removed.
@@ -7446,7 +7479,7 @@ module Aws::ECS
     #   The name of the capacity provider to update.
     #
     # @option params [required, Types::AutoScalingGroupProviderUpdate] :auto_scaling_group_provider
-    #   An object representing the parameters to update for the Auto Scaling
+    #   An object that represent the parameters to update for the Auto Scaling
     #   group capacity provider.
     #
     # @return [Types::UpdateCapacityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -7593,7 +7626,7 @@ module Aws::ECS
     # @option params [required, Array<Types::ClusterSetting>] :settings
     #   The setting to use by default for a cluster. This parameter is used to
     #   enable CloudWatch Container Insights for a cluster. If this value is
-    #   specified, it will override the `containerInsights` value set with
+    #   specified, it overrides the `containerInsights` value set with
     #   PutAccountSetting or PutAccountSettingDefault.
     #
     # @return [Types::UpdateClusterSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -7662,7 +7695,7 @@ module Aws::ECS
     end
 
     # Updates the Amazon ECS container agent on a specified container
-    # instance. Updating the Amazon ECS container agent does not interrupt
+    # instance. Updating the Amazon ECS container agent doesn't interrupt
     # running tasks or services on the container instance. The process for
     # updating the agent differs depending on whether your container
     # instance was launched with the Amazon ECS-optimized AMI or another
@@ -7670,10 +7703,10 @@ module Aws::ECS
     #
     # <note markdown="1"> The `UpdateContainerAgent` API isn't supported for container
     # instances using the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI.
-    # To update the container agent, you can update the `ecs-init` package
-    # which will update the agent. For more information, see [Updating the
-    # Amazon ECS container agent][1] in the *Amazon Elastic Container
-    # Service Developer Guide*.
+    # To update the container agent, you can update the `ecs-init` package.
+    # This updates the agent. For more information, see [Updating the Amazon
+    # ECS container agent][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
     #
     #  </note>
     #
@@ -7695,7 +7728,7 @@ module Aws::ECS
     #
     # @option params [required, String] :container_instance
     #   The container instance ID or full ARN entries for the container
-    #   instance on which you would like to update the Amazon ECS container
+    #   instance where you would like to update the Amazon ECS container
     #   agent.
     #
     # @return [Types::UpdateContainerAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -7756,6 +7789,12 @@ module Aws::ECS
     #   resp.container_instance.tags #=> Array
     #   resp.container_instance.tags[0].key #=> String
     #   resp.container_instance.tags[0].value #=> String
+    #   resp.container_instance.health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
+    #   resp.container_instance.health_status.details #=> Array
+    #   resp.container_instance.health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME"
+    #   resp.container_instance.health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
+    #   resp.container_instance.health_status.details[0].last_updated #=> Time
+    #   resp.container_instance.health_status.details[0].last_status_change #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent AWS API Documentation
     #
@@ -7773,7 +7812,7 @@ module Aws::ECS
     # remove an instance from a cluster, for example to perform system
     # updates, update the Docker daemon, or scale down the cluster size.
     #
-    # A container instance cannot be changed to `DRAINING` until it has
+    # A container instance can't be changed to `DRAINING` until it has
     # reached an `ACTIVE` status. If the instance is in any other status, an
     # error will be received.
     #
@@ -7797,22 +7836,23 @@ module Aws::ECS
     #   minimum is 100%, the service scheduler can't remove existing tasks
     #   until the replacement tasks are considered healthy. Tasks for
     #   services that do not use a load balancer are considered healthy if
-    #   they are in the `RUNNING` state. Tasks for services that use a load
-    #   balancer are considered healthy if they are in the `RUNNING` state
-    #   and the container instance they are hosted on is reported as healthy
+    #   they're in the `RUNNING` state. Tasks for services that use a load
+    #   balancer are considered healthy if they're in the `RUNNING` state
+    #   and the container instance they're hosted on is reported as healthy
     #   by the load balancer.
     #
     # * The `maximumPercent` parameter represents an upper limit on the
-    #   number of running tasks during task replacement, which enables you
-    #   to define the replacement batch size. For example, if `desiredCount`
-    #   is four tasks, a maximum of 200% starts four new tasks before
-    #   stopping the four tasks to be drained, provided that the cluster
-    #   resources required to do this are available. If the maximum is 100%,
-    #   then replacement tasks can't start until the draining tasks have
+    #   number of running tasks during task replacement. You can use this to
+    #   define the replacement batch size. For example, if `desiredCount` is
+    #   four tasks, a maximum of 200% starts four new tasks before stopping
+    #   the four tasks to be drained, provided that the cluster resources
+    #   required to do this are available. If the maximum is 100%, then
+    #   replacement tasks can't start until the draining tasks have
     #   stopped.
     #
-    # Any `PENDING` or `RUNNING` tasks that do not belong to a service are
-    # not affected. You must wait for them to finish or stop them manually.
+    # Any `PENDING` or `RUNNING` tasks that do not belong to a service
+    # aren't affected. You must wait for them to finish or stop them
+    # manually.
     #
     # A container instance has completed draining when it has no more
     # `RUNNING` tasks. You can verify this using ListTasks.
@@ -7830,13 +7870,13 @@ module Aws::ECS
     #   A list of container instance IDs or full ARN entries.
     #
     # @option params [required, String] :status
-    #   The container instance state with which to update the container
-    #   instance. The only valid values for this action are `ACTIVE` and
-    #   `DRAINING`. A container instance can only be updated to `DRAINING`
-    #   status once it has reached an `ACTIVE` state. If a container instance
-    #   is in `REGISTERING`, `DEREGISTERING`, or `REGISTRATION_FAILED` state
-    #   you can describe the container instance but will be unable to update
-    #   the container instance state.
+    #   The container instance state to update the container instance with.
+    #   The only valid values for this action are `ACTIVE` and `DRAINING`. A
+    #   container instance can only be updated to `DRAINING` status once it
+    #   has reached an `ACTIVE` state. If a container instance is in
+    #   `REGISTERING`, `DEREGISTERING`, or `REGISTRATION_FAILED` state you can
+    #   describe the container instance but can't update the container
+    #   instance state.
     #
     # @return [Types::UpdateContainerInstancesStateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7899,6 +7939,12 @@ module Aws::ECS
     #   resp.container_instances[0].tags #=> Array
     #   resp.container_instances[0].tags[0].key #=> String
     #   resp.container_instances[0].tags[0].value #=> String
+    #   resp.container_instances[0].health_status.overall_status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
+    #   resp.container_instances[0].health_status.details #=> Array
+    #   resp.container_instances[0].health_status.details[0].type #=> String, one of "CONTAINER_RUNTIME"
+    #   resp.container_instances[0].health_status.details[0].status #=> String, one of "OK", "IMPAIRED", "INSUFFICIENT_DATA", "INITIALIZING"
+    #   resp.container_instances[0].health_status.details[0].last_updated #=> Time
+    #   resp.container_instances[0].health_status.details[0].last_status_change #=> Time
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -7931,15 +7977,15 @@ module Aws::ECS
     # placement constraints and strategies, and health check grace period
     # can be updated using this API. If the network configuration, platform
     # version, or task definition need to be updated, a new CodeDeploy
-    # deployment should be created. For more information, see
-    # [CreateDeployment][2] in the *CodeDeploy API Reference*.
+    # deployment is created. For more information, see [CreateDeployment][2]
+    # in the *CodeDeploy API Reference*.
     #
     # For services using an external deployment controller, you can update
     # only the desired count, task placement constraints and strategies, and
     # health check grace period using this API. If the launch type, load
     # balancer, network configuration, platform version, or task definition
-    # need to be updated, you should create a new task set. For more
-    # information, see CreateTaskSet.
+    # need to be updated, create a new task set. For more information, see
+    # CreateTaskSet.
     #
     # You can add to or subtract from the number of instantiations of a task
     # definition in a service by specifying the cluster that the service is
@@ -7953,7 +7999,7 @@ module Aws::ECS
     #
     # <note markdown="1"> If your updated Docker image uses the same tag as what is in the
     # existing task definition for your service (for example,
-    # `my_image:latest`), you do not need to create a new revision of your
+    # `my_image:latest`), you don't need to create a new revision of your
     # task definition. You can update the service using the
     # `forceNewDeployment` option. The new tasks launched by the deployment
     # pull the current image/tag combination from your repository when they
@@ -7971,14 +8017,14 @@ module Aws::ECS
     #   `desiredCount` temporarily during a deployment. For example, if
     #   `desiredCount` is four tasks, a minimum of 50% allows the scheduler
     #   to stop two existing tasks before starting two new tasks. Tasks for
-    #   services that do not use a load balancer are considered healthy if
-    #   they are in the `RUNNING` state. Tasks for services that use a load
-    #   balancer are considered healthy if they are in the `RUNNING` state
-    #   and the container instance they are hosted on is reported as healthy
+    #   services that don't use a load balancer are considered healthy if
+    #   they're in the `RUNNING` state. Tasks for services that use a load
+    #   balancer are considered healthy if they're in the `RUNNING` state
+    #   and the container instance they're hosted on is reported as healthy
     #   by the load balancer.
     #
     # * The `maximumPercent` parameter represents an upper limit on the
-    #   number of running tasks during a deployment, which enables you to
+    #   number of running tasks during a deployment. You can use it to
     #   define the deployment batch size. For example, if `desiredCount` is
     #   four tasks, a maximum of 200% starts four new tasks before stopping
     #   the four older tasks (provided that the cluster resources required
@@ -7986,21 +8032,21 @@ module Aws::ECS
     #
     # When UpdateService stops a task during a deployment, the equivalent of
     # `docker stop` is issued to the containers running in the task. This
-    # results in a `SIGTERM` and a 30-second timeout, after which `SIGKILL`
+    # results in a `SIGTERM` and a 30-second timeout. After this, `SIGKILL`
     # is sent and the containers are forcibly stopped. If the container
     # handles the `SIGTERM` gracefully and exits within 30 seconds from
     # receiving it, no `SIGKILL` is sent.
     #
     # When the service scheduler launches new tasks, it determines task
-    # placement in your cluster with the following logic:
+    # placement in your cluster with the following logic.
     #
     # * Determine which of the container instances in your cluster can
-    #   support your service's task definition (for example, they have the
-    #   required CPU, memory, ports, and container instance attributes).
+    #   support your service's task definition. For example, they have the
+    #   required CPU, memory, ports, and container instance attributes.
     #
     # * By default, the service scheduler attempts to balance tasks across
-    #   Availability Zones in this manner (although you can choose a
-    #   different placement strategy):
+    #   Availability Zones in this manner even though you can choose a
+    #   different placement strategy.
     #
     #   * Sort the valid container instances by the fewest number of running
     #     tasks for this service in the same Availability Zone as the
@@ -8034,8 +8080,8 @@ module Aws::ECS
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
-    #   your service is running on. If you do not specify a cluster, the
-    #   default cluster is assumed.
+    #   your service runs on. If you do not specify a cluster, the default
+    #   cluster is assumed.
     #
     # @option params [required, String] :service
     #   The name of the service to update.
@@ -8055,11 +8101,11 @@ module Aws::ECS
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
     #   The capacity provider strategy to update the service to use.
     #
-    #   If the service is using the default capacity provider strategy for the
+    #   if the service uses the default capacity provider strategy for the
     #   cluster, the service can be updated to use one or more capacity
     #   providers as opposed to the default capacity provider strategy.
-    #   However, when a service is using a capacity provider strategy that is
-    #   not the default capacity provider strategy, the service cannot be
+    #   However, when a service is using a capacity provider strategy that's
+    #   not the default capacity provider strategy, the service can't be
     #   updated to use the cluster's default capacity provider strategy.
     #
     #   A capacity provider strategy consists of one or more capacity
@@ -8096,9 +8142,9 @@ module Aws::ECS
     #   override any existing placement constraints defined for the service.
     #   To remove all existing placement constraints, specify an empty array.
     #
-    #   You can specify a maximum of 10 constraints per task (this limit
+    #   You can specify a maximum of 10 constraints for each task. This limit
     #   includes constraints in the task definition and those specified at
-    #   runtime).
+    #   runtime.
     #
     # @option params [Array<Types::PlacementStrategy>] :placement_strategy
     #   The task placement strategy objects to update the service to use. If
@@ -8107,32 +8153,31 @@ module Aws::ECS
     #   the existing placement strategy defined for the service. To remove an
     #   existing placement strategy, specify an empty object.
     #
-    #   You can specify a maximum of five strategy rules per service.
+    #   You can specify a maximum of five strategy rules for each service.
     #
     # @option params [String] :platform_version
-    #   The platform version on which your tasks in the service are running. A
-    #   platform version is only specified for tasks using the Fargate launch
-    #   type. If a platform version is not specified, the `LATEST` platform
-    #   version is used by default. For more information, see [Fargate
-    #   Platform Versions][1] in the *Amazon Elastic Container Service
-    #   Developer Guide*.
+    #   The platform version that your tasks in the service run on. A platform
+    #   version is only specified for tasks using the Fargate launch type. If
+    #   a platform version is not specified, the `LATEST` platform version is
+    #   used. For more information, see [Fargate Platform Versions][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [Boolean] :force_new_deployment
-    #   Whether to force a new deployment of the service. Deployments are not
-    #   forced by default. You can use this option to trigger a new deployment
-    #   with no service definition changes. For example, you can update a
-    #   service's tasks to use a newer Docker image with the same image/tag
-    #   combination (`my_image:latest`) or to roll Fargate tasks onto a newer
-    #   platform version.
+    #   Determines whether to force a new deployment of the service. By
+    #   default, deployments aren't forced. You can use this option to start
+    #   a new deployment with no service definition changes. For example, you
+    #   can update a service's tasks to use a newer Docker image with the
+    #   same image/tag combination (`my_image:latest`) or to roll Fargate
+    #   tasks onto a newer platform version.
     #
     # @option params [Integer] :health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service scheduler
-    #   should ignore unhealthy Elastic Load Balancing target health checks
-    #   after a task has first started. This is only valid if your service is
+    #   ignores unhealthy Elastic Load Balancing target health checks after a
+    #   task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
     #   you can specify a health check grace period of up to 2,147,483,647
@@ -8461,11 +8506,11 @@ module Aws::ECS
     #
     # @option params [required, String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
-    #   hosts the service that the task set exists in.
+    #   hosts the service that the task set is found in.
     #
     # @option params [required, String] :service
     #   The short name or full Amazon Resource Name (ARN) of the service that
-    #   the task set exists in.
+    #   the task set is found in.
     #
     # @option params [required, String] :task_set
     #   The short name or full Amazon Resource Name (ARN) of the task set to
@@ -8558,7 +8603,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

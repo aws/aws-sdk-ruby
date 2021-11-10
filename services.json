@@ -727,6 +727,9 @@
   "Rekognition": {
     "models": "rekognition/2016-06-27"
   },
+  "ResilienceHub": {
+    "models": "resiliencehub/2020-04-30"
+  },
   "ResourceGroups": {
     "models": "resource-groups/2017-11-27"
   },

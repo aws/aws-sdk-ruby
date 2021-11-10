@@ -496,6 +496,33 @@ module Aws::Backup
     #           condition_value: "ConditionValue", # required
     #         },
     #       ],
+    #       not_resources: ["ARN"],
+    #       conditions: {
+    #         string_equals: [
+    #           {
+    #             condition_key: "ConditionKey",
+    #             condition_value: "ConditionValue",
+    #           },
+    #         ],
+    #         string_not_equals: [
+    #           {
+    #             condition_key: "ConditionKey",
+    #             condition_value: "ConditionValue",
+    #           },
+    #         ],
+    #         string_like: [
+    #           {
+    #             condition_key: "ConditionKey",
+    #             condition_value: "ConditionValue",
+    #           },
+    #         ],
+    #         string_not_like: [
+    #           {
+    #             condition_key: "ConditionKey",
+    #             condition_value: "ConditionValue",
+    #           },
+    #         ],
+    #       },
     #     },
     #     creator_request_id: "string",
     #   })
@@ -1777,6 +1804,20 @@ module Aws::Backup
     #   resp.backup_selection.list_of_tags[0].condition_type #=> String, one of "STRINGEQUALS"
     #   resp.backup_selection.list_of_tags[0].condition_key #=> String
     #   resp.backup_selection.list_of_tags[0].condition_value #=> String
+    #   resp.backup_selection.not_resources #=> Array
+    #   resp.backup_selection.not_resources[0] #=> String
+    #   resp.backup_selection.conditions.string_equals #=> Array
+    #   resp.backup_selection.conditions.string_equals[0].condition_key #=> String
+    #   resp.backup_selection.conditions.string_equals[0].condition_value #=> String
+    #   resp.backup_selection.conditions.string_not_equals #=> Array
+    #   resp.backup_selection.conditions.string_not_equals[0].condition_key #=> String
+    #   resp.backup_selection.conditions.string_not_equals[0].condition_value #=> String
+    #   resp.backup_selection.conditions.string_like #=> Array
+    #   resp.backup_selection.conditions.string_like[0].condition_key #=> String
+    #   resp.backup_selection.conditions.string_like[0].condition_value #=> String
+    #   resp.backup_selection.conditions.string_not_like #=> Array
+    #   resp.backup_selection.conditions.string_not_like[0].condition_key #=> String
+    #   resp.backup_selection.conditions.string_not_like[0].condition_value #=> String
     #   resp.selection_id #=> String
     #   resp.backup_plan_id #=> String
     #   resp.creation_date #=> Time
@@ -3866,7 +3907,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

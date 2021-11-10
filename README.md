@@ -387,6 +387,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Price List Service                                | Aws::Pricing                         | aws-sdk-pricing                         | 2017-10-15  |
 | AWS Proton                                            | Aws::Proton                          | aws-sdk-proton                          | 2020-07-20  |
 | AWS RDS DataService                                   | Aws::RDSDataService                  | aws-sdk-rdsdataservice                  | 2018-08-01  |
+| AWS Resilience Hub                                    | Aws::ResilienceHub                   | aws-sdk-resiliencehub                   | 2020-04-30  |
 | AWS Resource Access Manager                           | Aws::RAM                             | aws-sdk-ram                             | 2018-01-04  |
 | AWS Resource Groups                                   | Aws::ResourceGroups                  | aws-sdk-resourcegroups                  | 2017-11-27  |
 | AWS Resource Groups Tagging API                       | Aws::ResourceGroupsTaggingAPI        | aws-sdk-resourcegroupstaggingapi        | 2017-01-26  |

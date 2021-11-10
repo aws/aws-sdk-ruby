@@ -67,6 +67,7 @@ module Aws::ECS
     ContainerInstance = Shapes::StructureShape.new(name: 'ContainerInstance')
     ContainerInstanceField = Shapes::StringShape.new(name: 'ContainerInstanceField')
     ContainerInstanceFieldList = Shapes::ListShape.new(name: 'ContainerInstanceFieldList')
+    ContainerInstanceHealthStatus = Shapes::StructureShape.new(name: 'ContainerInstanceHealthStatus')
     ContainerInstanceStatus = Shapes::StringShape.new(name: 'ContainerInstanceStatus')
     ContainerInstances = Shapes::ListShape.new(name: 'ContainerInstances')
     ContainerOverride = Shapes::StructureShape.new(name: 'ContainerOverride')
@@ -160,6 +161,10 @@ module Aws::ECS
     InferenceAcceleratorOverride = Shapes::StructureShape.new(name: 'InferenceAcceleratorOverride')
     InferenceAcceleratorOverrides = Shapes::ListShape.new(name: 'InferenceAcceleratorOverrides')
     InferenceAccelerators = Shapes::ListShape.new(name: 'InferenceAccelerators')
+    InstanceHealthCheckResult = Shapes::StructureShape.new(name: 'InstanceHealthCheckResult')
+    InstanceHealthCheckResultList = Shapes::ListShape.new(name: 'InstanceHealthCheckResultList')
+    InstanceHealthCheckState = Shapes::StringShape.new(name: 'InstanceHealthCheckState')
+    InstanceHealthCheckType = Shapes::StringShape.new(name: 'InstanceHealthCheckType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     IpcMode = Shapes::StringShape.new(name: 'IpcMode')
@@ -550,9 +555,14 @@ module Aws::ECS
     ContainerInstance.add_member(:registered_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "registeredAt"))
     ContainerInstance.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
     ContainerInstance.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ContainerInstance.add_member(:health_status, Shapes::ShapeRef.new(shape: ContainerInstanceHealthStatus, location_name: "healthStatus"))
     ContainerInstance.struct_class = Types::ContainerInstance
 
     ContainerInstanceFieldList.member = Shapes::ShapeRef.new(shape: ContainerInstanceField)
+
+    ContainerInstanceHealthStatus.add_member(:overall_status, Shapes::ShapeRef.new(shape: InstanceHealthCheckState, location_name: "overallStatus"))
+    ContainerInstanceHealthStatus.add_member(:details, Shapes::ShapeRef.new(shape: InstanceHealthCheckResultList, location_name: "details"))
+    ContainerInstanceHealthStatus.struct_class = Types::ContainerInstanceHealthStatus
 
     ContainerInstances.member = Shapes::ShapeRef.new(shape: ContainerInstance)
 
@@ -926,6 +936,14 @@ module Aws::ECS
     InferenceAcceleratorOverrides.member = Shapes::ShapeRef.new(shape: InferenceAcceleratorOverride)
 
     InferenceAccelerators.member = Shapes::ShapeRef.new(shape: InferenceAccelerator)
+
+    InstanceHealthCheckResult.add_member(:type, Shapes::ShapeRef.new(shape: InstanceHealthCheckType, location_name: "type"))
+    InstanceHealthCheckResult.add_member(:status, Shapes::ShapeRef.new(shape: InstanceHealthCheckState, location_name: "status"))
+    InstanceHealthCheckResult.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdated"))
+    InstanceHealthCheckResult.add_member(:last_status_change, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastStatusChange"))
+    InstanceHealthCheckResult.struct_class = Types::InstanceHealthCheckResult
+
+    InstanceHealthCheckResultList.member = Shapes::ShapeRef.new(shape: InstanceHealthCheckResult)
 
     InvalidParameterException.struct_class = Types::InvalidParameterException
 

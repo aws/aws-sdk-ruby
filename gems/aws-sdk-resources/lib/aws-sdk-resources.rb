@@ -229,6 +229,7 @@ module Aws
   autoload :Redshift, 'aws-sdk-redshift'
   autoload :RedshiftDataAPIService, 'aws-sdk-redshiftdataapiservice'
   autoload :Rekognition, 'aws-sdk-rekognition'
+  autoload :ResilienceHub, 'aws-sdk-resiliencehub'
   autoload :ResourceGroups, 'aws-sdk-resourcegroups'
   autoload :ResourceGroupsTaggingAPI, 'aws-sdk-resourcegroupstaggingapi'
   autoload :RoboMaker, 'aws-sdk-robomaker'

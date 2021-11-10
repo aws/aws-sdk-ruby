@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2021-11-10)
+------------------
+
+* Feature - This release adds support for container instance health.
+
 1.89.0 (2021-11-04)
 ------------------
 

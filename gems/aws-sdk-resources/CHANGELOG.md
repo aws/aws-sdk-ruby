@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.118.0 (2021-11-10)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-resiliencehub` gem.
+
 3.117.0 (2021-11-04)
 ------------------
 

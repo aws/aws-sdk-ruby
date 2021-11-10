@@ -653,6 +653,33 @@ module Aws::Backup
     #             condition_value: "ConditionValue", # required
     #           },
     #         ],
+    #         not_resources: ["ARN"],
+    #         conditions: {
+    #           string_equals: [
+    #             {
+    #               condition_key: "ConditionKey",
+    #               condition_value: "ConditionValue",
+    #             },
+    #           ],
+    #           string_not_equals: [
+    #             {
+    #               condition_key: "ConditionKey",
+    #               condition_value: "ConditionValue",
+    #             },
+    #           ],
+    #           string_like: [
+    #             {
+    #               condition_key: "ConditionKey",
+    #               condition_value: "ConditionValue",
+    #             },
+    #           ],
+    #           string_not_like: [
+    #             {
+    #               condition_key: "ConditionKey",
+    #               condition_value: "ConditionValue",
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] selection_name
@@ -677,13 +704,21 @@ module Aws::Backup
     #   plan to every resource with at least one matching tag.
     #   @return [Array<Types::Condition>]
     #
+    # @!attribute [rw] not_resources
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] conditions
+    #   @return [Types::Conditions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupSelection AWS API Documentation
     #
     class BackupSelection < Struct.new(
       :selection_name,
       :iam_role_arn,
       :resources,
-      :list_of_tags)
+      :list_of_tags,
+      :not_resources,
+      :conditions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -910,6 +945,82 @@ module Aws::Backup
       :condition_type,
       :condition_key,
       :condition_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ConditionParameter
+    #   data as a hash:
+    #
+    #       {
+    #         condition_key: "ConditionKey",
+    #         condition_value: "ConditionValue",
+    #       }
+    #
+    # @!attribute [rw] condition_key
+    #   @return [String]
+    #
+    # @!attribute [rw] condition_value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ConditionParameter AWS API Documentation
+    #
+    class ConditionParameter < Struct.new(
+      :condition_key,
+      :condition_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass Conditions
+    #   data as a hash:
+    #
+    #       {
+    #         string_equals: [
+    #           {
+    #             condition_key: "ConditionKey",
+    #             condition_value: "ConditionValue",
+    #           },
+    #         ],
+    #         string_not_equals: [
+    #           {
+    #             condition_key: "ConditionKey",
+    #             condition_value: "ConditionValue",
+    #           },
+    #         ],
+    #         string_like: [
+    #           {
+    #             condition_key: "ConditionKey",
+    #             condition_value: "ConditionValue",
+    #           },
+    #         ],
+    #         string_not_like: [
+    #           {
+    #             condition_key: "ConditionKey",
+    #             condition_value: "ConditionValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] string_equals
+    #   @return [Array<Types::ConditionParameter>]
+    #
+    # @!attribute [rw] string_not_equals
+    #   @return [Array<Types::ConditionParameter>]
+    #
+    # @!attribute [rw] string_like
+    #   @return [Array<Types::ConditionParameter>]
+    #
+    # @!attribute [rw] string_not_like
+    #   @return [Array<Types::ConditionParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/Conditions AWS API Documentation
+    #
+    class Conditions < Struct.new(
+      :string_equals,
+      :string_not_equals,
+      :string_like,
+      :string_not_like)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1298,6 +1409,33 @@ module Aws::Backup
     #               condition_value: "ConditionValue", # required
     #             },
     #           ],
+    #           not_resources: ["ARN"],
+    #           conditions: {
+    #             string_equals: [
+    #               {
+    #                 condition_key: "ConditionKey",
+    #                 condition_value: "ConditionValue",
+    #               },
+    #             ],
+    #             string_not_equals: [
+    #               {
+    #                 condition_key: "ConditionKey",
+    #                 condition_value: "ConditionValue",
+    #               },
+    #             ],
+    #             string_like: [
+    #               {
+    #                 condition_key: "ConditionKey",
+    #                 condition_value: "ConditionValue",
+    #               },
+    #             ],
+    #             string_not_like: [
+    #               {
+    #                 condition_key: "ConditionKey",
+    #                 condition_value: "ConditionValue",
+    #               },
+    #             ],
+    #           },
     #         },
     #         creator_request_id: "string",
     #       }

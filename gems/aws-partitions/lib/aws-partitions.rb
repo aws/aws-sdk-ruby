@@ -446,6 +446,7 @@ module Aws
             'Redshift' => 'redshift',
             'RedshiftDataAPIService' => 'redshift-data',
             'Rekognition' => 'rekognition',
+            'ResilienceHub' => 'resiliencehub',
             'ResourceGroups' => 'resource-groups',
             'ResourceGroupsTaggingAPI' => 'tagging',
             'RoboMaker' => 'robomaker',

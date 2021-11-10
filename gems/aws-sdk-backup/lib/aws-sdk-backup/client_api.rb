@@ -51,8 +51,11 @@ module Aws::Backup
     ComplianceResourceIdList = Shapes::ListShape.new(name: 'ComplianceResourceIdList')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionKey = Shapes::StringShape.new(name: 'ConditionKey')
+    ConditionParameter = Shapes::StructureShape.new(name: 'ConditionParameter')
+    ConditionParameters = Shapes::ListShape.new(name: 'ConditionParameters')
     ConditionType = Shapes::StringShape.new(name: 'ConditionType')
     ConditionValue = Shapes::StringShape.new(name: 'ConditionValue')
+    Conditions = Shapes::StructureShape.new(name: 'Conditions')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ControlInputParameter = Shapes::StructureShape.new(name: 'ControlInputParameter')
     ControlInputParameters = Shapes::ListShape.new(name: 'ControlInputParameters')
@@ -353,6 +356,8 @@ module Aws::Backup
     BackupSelection.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "IamRoleArn"))
     BackupSelection.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceArns, location_name: "Resources"))
     BackupSelection.add_member(:list_of_tags, Shapes::ShapeRef.new(shape: ListOfTags, location_name: "ListOfTags"))
+    BackupSelection.add_member(:not_resources, Shapes::ShapeRef.new(shape: ResourceArns, location_name: "NotResources"))
+    BackupSelection.add_member(:conditions, Shapes::ShapeRef.new(shape: Conditions, location_name: "Conditions"))
     BackupSelection.struct_class = Types::BackupSelection
 
     BackupSelectionsList.member = Shapes::ShapeRef.new(shape: BackupSelectionsListMember)
@@ -391,6 +396,18 @@ module Aws::Backup
     Condition.add_member(:condition_key, Shapes::ShapeRef.new(shape: ConditionKey, required: true, location_name: "ConditionKey"))
     Condition.add_member(:condition_value, Shapes::ShapeRef.new(shape: ConditionValue, required: true, location_name: "ConditionValue"))
     Condition.struct_class = Types::Condition
+
+    ConditionParameter.add_member(:condition_key, Shapes::ShapeRef.new(shape: ConditionKey, location_name: "ConditionKey"))
+    ConditionParameter.add_member(:condition_value, Shapes::ShapeRef.new(shape: ConditionValue, location_name: "ConditionValue"))
+    ConditionParameter.struct_class = Types::ConditionParameter
+
+    ConditionParameters.member = Shapes::ShapeRef.new(shape: ConditionParameter)
+
+    Conditions.add_member(:string_equals, Shapes::ShapeRef.new(shape: ConditionParameters, location_name: "StringEquals"))
+    Conditions.add_member(:string_not_equals, Shapes::ShapeRef.new(shape: ConditionParameters, location_name: "StringNotEquals"))
+    Conditions.add_member(:string_like, Shapes::ShapeRef.new(shape: ConditionParameters, location_name: "StringLike"))
+    Conditions.add_member(:string_not_like, Shapes::ShapeRef.new(shape: ConditionParameters, location_name: "StringNotLike"))
+    Conditions.struct_class = Types::Conditions
 
     ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "Code"))
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
