@@ -365,8 +365,13 @@ module Aws::DynamoDB
 
     # @!group API Operations
 
-    # This operation allows you to perform batch reads and writes on data
+    # This operation allows you to perform batch reads or writes on data
     # stored in DynamoDB, using PartiQL.
+    #
+    # <note markdown="1"> The entire batch must consist of either read statements or write
+    # statements, you cannot mix both in one batch.
+    #
+    #  </note>
     #
     # @option params [required, Array<Types::BatchStatementRequest>] :statements
     #   The list of PartiQL statements representing the batch to run.
@@ -1109,9 +1114,9 @@ module Aws::DynamoDB
     end
 
     # The `CreateTable` operation adds a new table to your account. In an
-    # AWS account, table names must be unique within each Region. That is,
-    # you can have two tables with same name if you create the tables in
-    # different Regions.
+    # Amazon Web Services account, table names must be unique within each
+    # Region. That is, you can have two tables with same name if you create
+    # the tables in different Regions.
     #
     # `CreateTable` is an asynchronous operation. Upon receiving a
     # `CreateTable` request, DynamoDB immediately returns a response with a
@@ -2465,25 +2470,26 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # Returns the current provisioned-capacity quotas for your AWS account
-    # in a Region, both for the Region as a whole and for any one DynamoDB
-    # table that you create there.
+    # Returns the current provisioned-capacity quotas for your Amazon Web
+    # Services account in a Region, both for the Region as a whole and for
+    # any one DynamoDB table that you create there.
     #
-    # When you establish an AWS account, the account has initial quotas on
-    # the maximum read capacity units and write capacity units that you can
-    # provision across all of your DynamoDB tables in a given Region. Also,
-    # there are per-table quotas that apply when you create a table there.
-    # For more information, see [Service, Account, and Table Quotas][1] page
-    # in the *Amazon DynamoDB Developer Guide*.
+    # When you establish an Amazon Web Services account, the account has
+    # initial quotas on the maximum read capacity units and write capacity
+    # units that you can provision across all of your DynamoDB tables in a
+    # given Region. Also, there are per-table quotas that apply when you
+    # create a table there. For more information, see [Service, Account, and
+    # Table Quotas][1] page in the *Amazon DynamoDB Developer Guide*.
     #
-    # Although you can increase these quotas by filing a case at [AWS
-    # Support Center][2], obtaining the increase is not instantaneous. The
-    # `DescribeLimits` action lets you write code to compare the capacity
-    # you are currently using to those quotas imposed by your account so
-    # that you have enough time to apply for an increase before you hit a
-    # quota.
+    # Although you can increase these quotas by filing a case at [Amazon Web
+    # Services Support Center][2], obtaining the increase is not
+    # instantaneous. The `DescribeLimits` action lets you write code to
+    # compare the capacity you are currently using to those quotas imposed
+    # by your account so that you have enough time to apply for an increase
+    # before you hit a quota.
     #
-    # For example, you could use one of the AWS SDKs to do the following:
+    # For example, you could use one of the Amazon Web Services SDKs to do
+    # the following:
     #
     # 1.  Call `DescribeLimits` for a particular Region to obtain your
     #     current account quotas on provisioned capacity there.
@@ -2982,6 +2988,18 @@ module Aws::DynamoDB
     # This operation allows you to perform transactional reads or writes on
     # data stored in DynamoDB, using PartiQL.
     #
+    # <note markdown="1"> The entire transaction must consist of either read statements or write
+    # statements, you cannot mix both in one transaction. The EXISTS
+    # function is an exception and can be used to check the condition of
+    # specific attributes of the item in a similar manner to
+    # `ConditionCheck` in the [TransactWriteItems][1] API.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html#transaction-apis-txwriteitems
+    #
     # @option params [required, Array<Types::ParameterizedStatement>] :transact_statements
     #   The list of PartiQL statements representing the transaction to run.
     #
@@ -3056,8 +3074,8 @@ module Aws::DynamoDB
     #   The name of the Amazon S3 bucket to export the snapshot to.
     #
     # @option params [String] :s3_bucket_owner
-    #   The ID of the AWS account that owns the bucket the export will be
-    #   stored in.
+    #   The ID of the Amazon Web Services account that owns the bucket the
+    #   export will be stored in.
     #
     # @option params [String] :s3_prefix
     #   The Amazon S3 bucket prefix to use as the file name and path of the
@@ -3069,10 +3087,10 @@ module Aws::DynamoDB
     #
     #   * `AES256` - server-side encryption with Amazon S3 managed keys
     #
-    #   * `KMS` - server-side encryption with AWS KMS managed keys
+    #   * `KMS` - server-side encryption with KMS managed keys
     #
     # @option params [String] :s3_sse_kms_key_id
-    #   The ID of the AWS KMS managed key used to encrypt the S3 bucket where
+    #   The ID of the KMS managed key used to encrypt the S3 bucket where
     #   export data will be stored (if applicable).
     #
     # @option params [String] :export_format
@@ -3323,10 +3341,11 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # List backups associated with an AWS account. To list backups for a
-    # given table, specify `TableName`. `ListBackups` returns a paginated
-    # list of results with at most 1 MB worth of items in a page. You can
-    # also specify a maximum number of entries to be returned in a page.
+    # List backups associated with an Amazon Web Services account. To list
+    # backups for a given table, specify `TableName`. `ListBackups` returns
+    # a paginated list of results with at most 1 MB worth of items in a
+    # page. You can also specify a maximum number of entries to be returned
+    # in a page.
     #
     # In the request, start time is inclusive, but end time is exclusive.
     # Note that these boundaries are for the time at which the original
@@ -3669,26 +3688,26 @@ module Aws::DynamoDB
     #
     # This topic provides general information about the `PutItem` API.
     #
-    #  For information on how to call the `PutItem` API using the AWS SDK in
-    # specific languages, see the following:
+    #  For information on how to call the `PutItem` API using the Amazon Web
+    # Services SDK in specific languages, see the following:
     #
-    #  * [ PutItem in the AWS Command Line Interface][1]
+    #  * [ PutItem in the Command Line Interface][1]
     #
-    # * [ PutItem in the AWS SDK for .NET][2]
+    # * [ PutItem in the SDK for .NET][2]
     #
-    # * [ PutItem in the AWS SDK for C++][3]
+    # * [ PutItem in the SDK for C++][3]
     #
-    # * [ PutItem in the AWS SDK for Go][4]
+    # * [ PutItem in the SDK for Go][4]
     #
-    # * [ PutItem in the AWS SDK for Java][5]
+    # * [ PutItem in the SDK for Java][5]
     #
-    # * [ PutItem in the AWS SDK for JavaScript][6]
+    # * [ PutItem in the SDK for JavaScript][6]
     #
-    # * [ PutItem in the AWS SDK for PHP V3][7]
+    # * [ PutItem in the SDK for PHP V3][7]
     #
-    # * [ PutItem in the AWS SDK for Python][8]
+    # * [ PutItem in the SDK for Python (Boto)][8]
     #
-    # * [ PutItem in the AWS SDK for Ruby V2][9]
+    # * [ PutItem in the SDK for Ruby V2][9]
     #
     # When you add an item, the primary key attributes are the only required
     # attributes. Attribute values cannot be null.
@@ -3776,6 +3795,8 @@ module Aws::DynamoDB
     #
     #   * `ALL_OLD` - If `PutItem` overwrote an attribute name-value pair,
     #     then the content of the old item is returned.
+    #
+    #   The values returned are strongly consistent.
     #
     #   <note markdown="1"> The `ReturnValues` parameter is used by several DynamoDB operations;
     #   however, `PutItem` does not recognize any values other than `NONE` or
@@ -4004,9 +4025,10 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # The `Query` operation finds items based on primary key values. You can
-    # query any table or secondary index that has a composite primary key (a
-    # partition key and a sort key).
+    # You must provide the name of the partition key attribute and a single
+    # value for that attribute. `Query` returns all items with that
+    # partition key value. Optionally, you can provide a sort key attribute
+    # and use a comparison operator to refine the search results.
     #
     # Use the `KeyConditionExpression` parameter to provide a specific value
     # for the partition key. The `Query` operation will return all of the
@@ -5440,8 +5462,8 @@ module Aws::DynamoDB
     # contain up to 25 `TransactGetItem` objects, each of which contains a
     # `Get` structure that specifies an item to retrieve from a table in the
     # account and Region. A call to `TransactGetItems` cannot retrieve items
-    # from tables in more than one AWS account or Region. The aggregate size
-    # of the items in the transaction cannot exceed 4 MB.
+    # from tables in more than one Amazon Web Services account or Region.
+    # The aggregate size of the items in the transaction cannot exceed 4 MB.
     #
     # DynamoDB rejects the entire `TransactGetItems` request if any of the
     # following is true:
@@ -5524,10 +5546,10 @@ module Aws::DynamoDB
 
     # `TransactWriteItems` is a synchronous write operation that groups up
     # to 25 action requests. These actions can target items in different
-    # tables, but not in different AWS accounts or Regions, and no two
-    # actions can target the same item. For example, you cannot both
-    # `ConditionCheck` and `Update` the same item. The aggregate size of the
-    # items in the transaction cannot exceed 4 MB.
+    # tables, but not in different Amazon Web Services accounts or Regions,
+    # and no two actions can target the same item. For example, you cannot
+    # both `ConditionCheck` and `Update` the same item. The aggregate size
+    # of the items in the transaction cannot exceed 4 MB.
     #
     # The actions are completed atomically so that either all of them
     # succeed, or all of them fail. They are defined by the following
@@ -5584,8 +5606,8 @@ module Aws::DynamoDB
     #   An ordered array of up to 25 `TransactWriteItem` objects, each of
     #   which contains a `ConditionCheck`, `Put`, `Update`, or `Delete`
     #   object. These can operate on items in different tables, but the tables
-    #   must reside in the same AWS account and Region, and no two of them can
-    #   operate on the same item.
+    #   must reside in the same Amazon Web Services account and Region, and no
+    #   two of them can operate on the same item.
     #
     # @option params [String] :return_consumed_capacity
     #   Determines the level of detail about provisioned throughput
@@ -5831,7 +5853,13 @@ module Aws::DynamoDB
     end
 
     # Updates the status for contributor insights for a specific table or
-    # index.
+    # index. CloudWatch Contributor Insights for DynamoDB graphs display the
+    # partition key and (if applicable) sort key of frequently accessed
+    # items and frequently throttled items in plaintext. If you require the
+    # use of AWS Key Management Service (KMS) to encrypt this table’s
+    # partition key and sort key data with an AWS managed key or customer
+    # managed key, you should not enable CloudWatch Contributor Insights for
+    # DynamoDB for this table.
     #
     # @option params [required, String] :table_name
     #   The name of the table.
@@ -7130,7 +7158,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

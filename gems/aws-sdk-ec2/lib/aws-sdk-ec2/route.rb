@@ -137,6 +137,11 @@ module Aws::EC2
       data[:vpc_peering_connection_id]
     end
 
+    # @return [String]
+    def core_network_arn
+      data[:core_network_arn]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -311,6 +316,7 @@ module Aws::EC2
     #     carrier_gateway_id: "CarrierGatewayId",
     #     network_interface_id: "NetworkInterfaceId",
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
+    #     core_network_arn: "CoreNetworkArn",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :destination_ipv_6_cidr_block
@@ -348,6 +354,7 @@ module Aws::EC2
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id
     #   The ID of a VPC peering connection.
+    # @option options [String] :core_network_arn
     # @return [EmptyStructure]
     def replace(options = {})
       options = options.merge(

@@ -319,6 +319,7 @@ module Aws::EC2
     CopyTagsFromSource = Shapes::StringShape.new(name: 'CopyTagsFromSource')
     CoreCount = Shapes::IntegerShape.new(name: 'CoreCount')
     CoreCountList = Shapes::ListShape.new(name: 'CoreCountList')
+    CoreNetworkArn = Shapes::StringShape.new(name: 'CoreNetworkArn')
     CpuManufacturer = Shapes::StringShape.new(name: 'CpuManufacturer')
     CpuManufacturerSet = Shapes::ListShape.new(name: 'CpuManufacturerSet')
     CpuOptions = Shapes::StructureShape.new(name: 'CpuOptions')
@@ -3933,6 +3934,7 @@ module Aws::EC2
     CreateRouteRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "networkInterfaceId"))
     CreateRouteRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: RouteTableId, required: true, location_name: "routeTableId"))
     CreateRouteRequest.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: VpcPeeringConnectionId, location_name: "vpcPeeringConnectionId"))
+    CreateRouteRequest.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: CoreNetworkArn, location_name: "CoreNetworkArn"))
     CreateRouteRequest.struct_class = Types::CreateRouteRequest
 
     CreateRouteResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -9928,6 +9930,7 @@ module Aws::EC2
     ReplaceRouteRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "networkInterfaceId"))
     ReplaceRouteRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: RouteTableId, required: true, location_name: "routeTableId"))
     ReplaceRouteRequest.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: VpcPeeringConnectionId, location_name: "vpcPeeringConnectionId"))
+    ReplaceRouteRequest.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: CoreNetworkArn, location_name: "CoreNetworkArn"))
     ReplaceRouteRequest.struct_class = Types::ReplaceRouteRequest
 
     ReplaceRouteTableAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: RouteTableAssociationId, required: true, location_name: "associationId"))
@@ -10335,6 +10338,7 @@ module Aws::EC2
     Route.add_member(:origin, Shapes::ShapeRef.new(shape: RouteOrigin, location_name: "origin"))
     Route.add_member(:state, Shapes::ShapeRef.new(shape: RouteState, location_name: "state"))
     Route.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcPeeringConnectionId"))
+    Route.add_member(:core_network_arn, Shapes::ShapeRef.new(shape: CoreNetworkArn, location_name: "coreNetworkArn"))
     Route.struct_class = Types::Route
 
     RouteList.member = Shapes::ShapeRef.new(shape: Route, location_name: "item")

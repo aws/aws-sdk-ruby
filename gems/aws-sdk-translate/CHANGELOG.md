@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-11-11)
+------------------
+
+* Feature - This release enables customers to import Multi-Directional Custom Terminology and use Multi-Directional Custom Terminology in both real-time translation and asynchronous batch translation.
+
 1.37.0 (2021-11-05)
 ------------------
 

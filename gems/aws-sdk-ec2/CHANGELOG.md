@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.279.0 (2021-11-11)
+------------------
+
+* Feature - This release provides an additional route target for the VPC route table.
+
 1.278.0 (2021-11-08)
 ------------------
 

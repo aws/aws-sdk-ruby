@@ -92,11 +92,11 @@ module Aws::DynamoDB
     #
     # * `ACTIVE` - The table is ready for use.
     #
-    # * `INACCESSIBLE_ENCRYPTION_CREDENTIALS` - The AWS KMS key used to
-    #   encrypt the table in inaccessible. Table operations may fail due to
-    #   failure to use the AWS KMS key. DynamoDB will initiate the table
-    #   archival process when a table's AWS KMS key remains inaccessible
-    #   for more than seven days.
+    # * `INACCESSIBLE_ENCRYPTION_CREDENTIALS` - The KMS key used to encrypt
+    #   the table in inaccessible. Table operations may fail due to failure
+    #   to use the KMS key. DynamoDB will initiate the table archival
+    #   process when a table's KMS key remains inaccessible for more than
+    #   seven days.
     #
     # * `ARCHIVING` - The table is being archived. Operations are not
     #   allowed until archival is complete.
@@ -303,7 +303,7 @@ module Aws::DynamoDB
     # have the same timestamp. However, the combination of the following
     # three elements is guaranteed to be unique:
     #
-    # * AWS customer ID
+    # * Amazon Web Services customer ID
     #
     # * Table name
     #
@@ -321,7 +321,7 @@ module Aws::DynamoDB
     end
 
     # Represents the version of [global tables][1] in use, if the table is
-    # replicated across AWS Regions.
+    # replicated across Amazon Web Services Regions.
     #
     #
     #
@@ -888,6 +888,8 @@ module Aws::DynamoDB
     #
     #   * `ALL_OLD` - If `PutItem` overwrote an attribute name-value pair,
     #     then the content of the old item is returned.
+    #
+    #   The values returned are strongly consistent.
     #
     #   <note markdown="1"> The `ReturnValues` parameter is used by several DynamoDB operations;
     #   however, `PutItem` does not recognize any values other than `NONE` or

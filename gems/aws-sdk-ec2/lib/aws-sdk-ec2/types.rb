@@ -9954,6 +9954,7 @@ module Aws::EC2
     #         network_interface_id: "NetworkInterfaceId",
     #         route_table_id: "RouteTableId", # required
     #         vpc_peering_connection_id: "VpcPeeringConnectionId",
+    #         core_network_arn: "CoreNetworkArn",
     #       }
     #
     # @!attribute [rw] destination_cidr_block
@@ -10030,6 +10031,9 @@ module Aws::EC2
     #   The ID of a VPC peering connection.
     #   @return [String]
     #
+    # @!attribute [rw] core_network_arn
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteRequest AWS API Documentation
     #
     class CreateRouteRequest < Struct.new(
@@ -10047,7 +10051,8 @@ module Aws::EC2
       :carrier_gateway_id,
       :network_interface_id,
       :route_table_id,
-      :vpc_peering_connection_id)
+      :vpc_peering_connection_id,
+      :core_network_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48441,7 +48446,7 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] multi_region
-    #   <para>Reserved.</para>
+    #   Reserved.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidrRequest AWS API Documentation
@@ -50034,6 +50039,7 @@ module Aws::EC2
     #         network_interface_id: "NetworkInterfaceId",
     #         route_table_id: "RouteTableId", # required
     #         vpc_peering_connection_id: "VpcPeeringConnectionId",
+    #         core_network_arn: "CoreNetworkArn",
     #       }
     #
     # @!attribute [rw] destination_cidr_block
@@ -50109,6 +50115,9 @@ module Aws::EC2
     #   The ID of a VPC peering connection.
     #   @return [String]
     #
+    # @!attribute [rw] core_network_arn
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteRequest AWS API Documentation
     #
     class ReplaceRouteRequest < Struct.new(
@@ -50127,7 +50136,8 @@ module Aws::EC2
       :carrier_gateway_id,
       :network_interface_id,
       :route_table_id,
-      :vpc_peering_connection_id)
+      :vpc_peering_connection_id,
+      :core_network_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -53183,6 +53193,9 @@ module Aws::EC2
     #   The ID of a VPC peering connection.
     #   @return [String]
     #
+    # @!attribute [rw] core_network_arn
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Route AWS API Documentation
     #
     class Route < Struct.new(
@@ -53200,7 +53213,8 @@ module Aws::EC2
       :network_interface_id,
       :origin,
       :state,
-      :vpc_peering_connection_id)
+      :vpc_peering_connection_id,
+      :core_network_arn)
       SENSITIVE = []
       include Aws::Structure
     end

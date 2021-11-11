@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2021-11-11)
+------------------
+
+* Feature - Updated Help section for "dynamodb update-contributor-insights" API
+
 1.65.0 (2021-11-04)
 ------------------
 

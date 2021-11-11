@@ -358,7 +358,7 @@ module Aws::Translate
     #
     #       {
     #         name: "ResourceName", # required
-    #         terminology_data_format: "CSV", # required, accepts CSV, TMX
+    #         terminology_data_format: "CSV", # accepts CSV, TMX, TSV
     #       }
     #
     # @!attribute [rw] name
@@ -366,8 +366,16 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] terminology_data_format
-    #   The data format of the custom terminology being retrieved, either
-    #   CSV or TMX.
+    #   The data format of the custom terminology being retrieved.
+    #
+    #   If you don't specify this parameter, Amazon Translate returns a
+    #   file that has the same format as the file that was imported to
+    #   create the terminology.
+    #
+    #   If you specify this parameter when you retrieve a multi-directional
+    #   terminology resource, you must specify the same format as that of
+    #   the input file that was imported to create it. Otherwise, Amazon
+    #   Translate throws an error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetTerminologyRequest AWS API Documentation
@@ -389,11 +397,20 @@ module Aws::Translate
     #   minute expiration.
     #   @return [Types::TerminologyDataLocation]
     #
+    # @!attribute [rw] auxiliary_data_location
+    #   The Amazon S3 location of a file that provides any errors or
+    #   warnings that were produced by your input file. This file was
+    #   created when Amazon Translate attempted to create a terminology
+    #   resource. The location is returned as a presigned URL to that has a
+    #   30 minute expiration.
+    #   @return [Types::TerminologyDataLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetTerminologyResponse AWS API Documentation
     #
     class GetTerminologyResponse < Struct.new(
       :terminology_properties,
-      :terminology_data_location)
+      :terminology_data_location,
+      :auxiliary_data_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -407,7 +424,8 @@ module Aws::Translate
     #         description: "Description",
     #         terminology_data: { # required
     #           file: "data", # required
-    #           format: "CSV", # required, accepts CSV, TMX
+    #           format: "CSV", # required, accepts CSV, TMX, TSV
+    #           directionality: "UNI", # accepts UNI, MULTI
     #         },
     #         encryption_key: {
     #           type: "KMS", # required, accepts KMS
@@ -454,10 +472,19 @@ module Aws::Translate
     #   The properties of the custom terminology being imported.
     #   @return [Types::TerminologyProperties]
     #
+    # @!attribute [rw] auxiliary_data_location
+    #   The Amazon S3 location of a file that provides any errors or
+    #   warnings that were produced by your input file. This file was
+    #   created when Amazon Translate attempted to create a terminology
+    #   resource. The location is returned as a presigned URL to that has a
+    #   30 minute expiration.
+    #   @return [Types::TerminologyDataLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ImportTerminologyResponse AWS API Documentation
     #
     class ImportTerminologyResponse < Struct.new(
-      :terminology_properties)
+      :terminology_properties,
+      :auxiliary_data_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1222,7 +1249,8 @@ module Aws::Translate
     #
     #       {
     #         file: "data", # required
-    #         format: "CSV", # required, accepts CSV, TMX
+    #         format: "CSV", # required, accepts CSV, TMX, TSV
+    #         directionality: "UNI", # accepts UNI, MULTI
     #       }
     #
     # @!attribute [rw] file
@@ -1233,14 +1261,40 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The data format of the custom terminology. Either CSV or TMX.
+    #   The data format of the custom terminology.
+    #   @return [String]
+    #
+    # @!attribute [rw] directionality
+    #   The directionality of your terminology resource indicates whether it
+    #   has one source language (uni-directional) or multiple
+    #   (multi-directional).
+    #
+    #   UNI
+    #
+    #   : The terminology resource has one source language (for example, the
+    #     first column in a CSV file), and all of its other languages are
+    #     target languages.
+    #
+    #   MULTI
+    #
+    #   : Any language in the terminology resource can be the source
+    #     language or a target language. A single multi-directional
+    #     terminology resource can be used for jobs that translate different
+    #     language pairs. For example, if the terminology contains terms in
+    #     English and Spanish, then it can be used for jobs that translate
+    #     English to Spanish and jobs that translate Spanish to English.
+    #
+    #   When you create a custom terminology resource without specifying the
+    #   directionality, it behaves as uni-directional terminology, although
+    #   this parameter will have a null value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TerminologyData AWS API Documentation
     #
     class TerminologyData < Struct.new(
       :file,
-      :format)
+      :format,
+      :directionality)
       SENSITIVE = [:file]
       include Aws::Structure
     end
@@ -1285,8 +1339,8 @@ module Aws::Translate
     #
     # @!attribute [rw] target_language_codes
     #   The language codes for the target languages available with the
-    #   custom terminology file. All possible target languages are returned
-    #   in array.
+    #   custom terminology resource. All possible target languages are
+    #   returned in array.
     #   @return [Array<String>]
     #
     # @!attribute [rw] encryption_key
@@ -1311,6 +1365,37 @@ module Aws::Translate
     #   the timestamp.
     #   @return [Time]
     #
+    # @!attribute [rw] directionality
+    #   The directionality of your terminology resource indicates whether it
+    #   has one source language (uni-directional) or multiple
+    #   (multi-directional).
+    #
+    #   UNI
+    #
+    #   : The terminology resource has one source language (the first column
+    #     in a CSV file), and all of its other languages are target
+    #     languages.
+    #
+    #   MULTI
+    #
+    #   : Any language in the terminology resource can be the source
+    #     language.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Additional information from Amazon Translate about the terminology
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] skipped_term_count
+    #   The number of terms in the input file that Amazon Translate skipped
+    #   when you created or updated the terminology resource.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] format
+    #   The format of the custom terminology input file.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TerminologyProperties AWS API Documentation
     #
     class TerminologyProperties < Struct.new(
@@ -1323,7 +1408,11 @@ module Aws::Translate
       :size_bytes,
       :term_count,
       :created_at,
-      :last_updated_at)
+      :last_updated_at,
+      :directionality,
+      :message,
+      :skipped_term_count,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end

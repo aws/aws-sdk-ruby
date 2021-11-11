@@ -237,6 +237,7 @@ module Aws::EC2
     #     carrier_gateway_id: "CarrierGatewayId",
     #     network_interface_id: "NetworkInterfaceId",
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
+    #     core_network_arn: "CoreNetworkArn",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :destination_cidr_block
@@ -281,6 +282,7 @@ module Aws::EC2
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id
     #   The ID of a VPC peering connection.
+    # @option options [String] :core_network_arn
     # @return [Route]
     def create_route(options = {})
       options = options.merge(route_table_id: @id)

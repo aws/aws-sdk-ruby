@@ -574,20 +574,29 @@ module Aws::Translate
     # @option params [required, String] :name
     #   The name of the custom terminology being retrieved.
     #
-    # @option params [required, String] :terminology_data_format
-    #   The data format of the custom terminology being retrieved, either CSV
-    #   or TMX.
+    # @option params [String] :terminology_data_format
+    #   The data format of the custom terminology being retrieved.
+    #
+    #   If you don't specify this parameter, Amazon Translate returns a file
+    #   that has the same format as the file that was imported to create the
+    #   terminology.
+    #
+    #   If you specify this parameter when you retrieve a multi-directional
+    #   terminology resource, you must specify the same format as that of the
+    #   input file that was imported to create it. Otherwise, Amazon Translate
+    #   throws an error.
     #
     # @return [Types::GetTerminologyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTerminologyResponse#terminology_properties #terminology_properties} => Types::TerminologyProperties
     #   * {Types::GetTerminologyResponse#terminology_data_location #terminology_data_location} => Types::TerminologyDataLocation
+    #   * {Types::GetTerminologyResponse#auxiliary_data_location #auxiliary_data_location} => Types::TerminologyDataLocation
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_terminology({
     #     name: "ResourceName", # required
-    #     terminology_data_format: "CSV", # required, accepts CSV, TMX
+    #     terminology_data_format: "CSV", # accepts CSV, TMX, TSV
     #   })
     #
     # @example Response structure
@@ -604,8 +613,14 @@ module Aws::Translate
     #   resp.terminology_properties.term_count #=> Integer
     #   resp.terminology_properties.created_at #=> Time
     #   resp.terminology_properties.last_updated_at #=> Time
+    #   resp.terminology_properties.directionality #=> String, one of "UNI", "MULTI"
+    #   resp.terminology_properties.message #=> String
+    #   resp.terminology_properties.skipped_term_count #=> Integer
+    #   resp.terminology_properties.format #=> String, one of "CSV", "TMX", "TSV"
     #   resp.terminology_data_location.repository_type #=> String
     #   resp.terminology_data_location.location #=> String
+    #   resp.auxiliary_data_location.repository_type #=> String
+    #   resp.auxiliary_data_location.location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetTerminology AWS API Documentation
     #
@@ -649,6 +664,7 @@ module Aws::Translate
     # @return [Types::ImportTerminologyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportTerminologyResponse#terminology_properties #terminology_properties} => Types::TerminologyProperties
+    #   * {Types::ImportTerminologyResponse#auxiliary_data_location #auxiliary_data_location} => Types::TerminologyDataLocation
     #
     # @example Request syntax with placeholder values
     #
@@ -658,7 +674,8 @@ module Aws::Translate
     #     description: "Description",
     #     terminology_data: { # required
     #       file: "data", # required
-    #       format: "CSV", # required, accepts CSV, TMX
+    #       format: "CSV", # required, accepts CSV, TMX, TSV
+    #       directionality: "UNI", # accepts UNI, MULTI
     #     },
     #     encryption_key: {
     #       type: "KMS", # required, accepts KMS
@@ -680,6 +697,12 @@ module Aws::Translate
     #   resp.terminology_properties.term_count #=> Integer
     #   resp.terminology_properties.created_at #=> Time
     #   resp.terminology_properties.last_updated_at #=> Time
+    #   resp.terminology_properties.directionality #=> String, one of "UNI", "MULTI"
+    #   resp.terminology_properties.message #=> String
+    #   resp.terminology_properties.skipped_term_count #=> Integer
+    #   resp.terminology_properties.format #=> String, one of "CSV", "TMX", "TSV"
+    #   resp.auxiliary_data_location.repository_type #=> String
+    #   resp.auxiliary_data_location.location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ImportTerminology AWS API Documentation
     #
@@ -786,6 +809,10 @@ module Aws::Translate
     #   resp.terminology_properties_list[0].term_count #=> Integer
     #   resp.terminology_properties_list[0].created_at #=> Time
     #   resp.terminology_properties_list[0].last_updated_at #=> Time
+    #   resp.terminology_properties_list[0].directionality #=> String, one of "UNI", "MULTI"
+    #   resp.terminology_properties_list[0].message #=> String
+    #   resp.terminology_properties_list[0].skipped_term_count #=> Integer
+    #   resp.terminology_properties_list[0].format #=> String, one of "CSV", "TMX", "TSV"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTerminologies AWS API Documentation
@@ -1166,7 +1193,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

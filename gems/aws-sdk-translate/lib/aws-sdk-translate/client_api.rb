@@ -29,6 +29,7 @@ module Aws::Translate
     DescribeTextTranslationJobResponse = Shapes::StructureShape.new(name: 'DescribeTextTranslationJobResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     DetectedLanguageLowConfidenceException = Shapes::StructureShape.new(name: 'DetectedLanguageLowConfidenceException')
+    Directionality = Shapes::StringShape.new(name: 'Directionality')
     EncryptionKey = Shapes::StructureShape.new(name: 'EncryptionKey')
     EncryptionKeyID = Shapes::StringShape.new(name: 'EncryptionKeyID')
     EncryptionKeyType = Shapes::StringShape.new(name: 'EncryptionKeyType')
@@ -160,11 +161,12 @@ module Aws::Translate
     GetParallelDataResponse.struct_class = Types::GetParallelDataResponse
 
     GetTerminologyRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
-    GetTerminologyRequest.add_member(:terminology_data_format, Shapes::ShapeRef.new(shape: TerminologyDataFormat, required: true, location_name: "TerminologyDataFormat"))
+    GetTerminologyRequest.add_member(:terminology_data_format, Shapes::ShapeRef.new(shape: TerminologyDataFormat, location_name: "TerminologyDataFormat"))
     GetTerminologyRequest.struct_class = Types::GetTerminologyRequest
 
     GetTerminologyResponse.add_member(:terminology_properties, Shapes::ShapeRef.new(shape: TerminologyProperties, location_name: "TerminologyProperties"))
     GetTerminologyResponse.add_member(:terminology_data_location, Shapes::ShapeRef.new(shape: TerminologyDataLocation, location_name: "TerminologyDataLocation"))
+    GetTerminologyResponse.add_member(:auxiliary_data_location, Shapes::ShapeRef.new(shape: TerminologyDataLocation, location_name: "AuxiliaryDataLocation"))
     GetTerminologyResponse.struct_class = Types::GetTerminologyResponse
 
     ImportTerminologyRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
@@ -175,6 +177,7 @@ module Aws::Translate
     ImportTerminologyRequest.struct_class = Types::ImportTerminologyRequest
 
     ImportTerminologyResponse.add_member(:terminology_properties, Shapes::ShapeRef.new(shape: TerminologyProperties, location_name: "TerminologyProperties"))
+    ImportTerminologyResponse.add_member(:auxiliary_data_location, Shapes::ShapeRef.new(shape: TerminologyDataLocation, location_name: "AuxiliaryDataLocation"))
     ImportTerminologyResponse.struct_class = Types::ImportTerminologyResponse
 
     InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
@@ -301,6 +304,7 @@ module Aws::Translate
 
     TerminologyData.add_member(:file, Shapes::ShapeRef.new(shape: TerminologyFile, required: true, location_name: "File"))
     TerminologyData.add_member(:format, Shapes::ShapeRef.new(shape: TerminologyDataFormat, required: true, location_name: "Format"))
+    TerminologyData.add_member(:directionality, Shapes::ShapeRef.new(shape: Directionality, location_name: "Directionality"))
     TerminologyData.struct_class = Types::TerminologyData
 
     TerminologyDataLocation.add_member(:repository_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RepositoryType"))
@@ -317,6 +321,10 @@ module Aws::Translate
     TerminologyProperties.add_member(:term_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TermCount"))
     TerminologyProperties.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     TerminologyProperties.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedAt"))
+    TerminologyProperties.add_member(:directionality, Shapes::ShapeRef.new(shape: Directionality, location_name: "Directionality"))
+    TerminologyProperties.add_member(:message, Shapes::ShapeRef.new(shape: UnboundedLengthString, location_name: "Message"))
+    TerminologyProperties.add_member(:skipped_term_count, Shapes::ShapeRef.new(shape: Integer, location_name: "SkippedTermCount"))
+    TerminologyProperties.add_member(:format, Shapes::ShapeRef.new(shape: TerminologyDataFormat, location_name: "Format"))
     TerminologyProperties.struct_class = Types::TerminologyProperties
 
     TerminologyPropertiesList.member = Shapes::ShapeRef.new(shape: TerminologyProperties)

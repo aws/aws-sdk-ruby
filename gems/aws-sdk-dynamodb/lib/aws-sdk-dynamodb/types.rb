@@ -22,7 +22,7 @@ module Aws::DynamoDB
     #   value is:
     #
     #   * `INACCESSIBLE_ENCRYPTION_CREDENTIALS` - The table was archived due
-    #     to the table's AWS KMS key being inaccessible for more than seven
+    #     to the table's KMS key being inaccessible for more than seven
     #     days. An On-Demand backup was created at the archival time.
     #
     #   ^
@@ -625,7 +625,7 @@ module Aws::DynamoDB
     #     you to restore the deleted table to the state it was in just
     #     before the point of deletion.
     #
-    #   * `AWS_BACKUP` - On-demand backup created by you from AWS Backup
+    #   * `AWS_BACKUP` - On-demand backup created by you from Backup
     #     service.
     #   @return [String]
     #
@@ -731,7 +731,7 @@ module Aws::DynamoDB
     #     you to restore the deleted table to the state it was in just
     #     before the point of deletion.
     #
-    #   * `AWS_BACKUP` - On-demand backup created by you from AWS Backup
+    #   * `AWS_BACKUP` - On-demand backup created by you from Backup
     #     service.
     #   @return [String]
     #
@@ -1942,11 +1942,11 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
-    #   The AWS KMS customer master key (CMK) that should be used for AWS
-    #   KMS encryption in the new replica. To specify a CMK, use its key ID,
-    #   Amazon Resource Name (ARN), alias name, or alias ARN. Note that you
-    #   should only provide this parameter if the key is different from the
-    #   default DynamoDB KMS master key alias/aws/dynamodb.
+    #   The KMS key that should be used for KMS encryption in the new
+    #   replica. To specify a key, use its key ID, Amazon Resource Name
+    #   (ARN), alias name, or alias ARN. Note that you should only provide
+    #   this parameter if the key is different from the default DynamoDB KMS
+    #   key `alias/aws/dynamodb`.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_override
@@ -2895,11 +2895,11 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] contributor_insights_rule_list
-    #   List of names of the associated Alpine rules.
+    #   List of names of the associated contributor insights rules.
     #   @return [Array<String>]
     #
     # @!attribute [rw] contributor_insights_status
-    #   Current Status contributor insights.
+    #   Current status of contributor insights.
     #   @return [String]
     #
     # @!attribute [rw] last_update_date_time
@@ -2907,7 +2907,7 @@ module Aws::DynamoDB
     #   @return [Time]
     #
     # @!attribute [rw] failure_exception
-    #   Returns information about the last failure that encountered.
+    #   Returns information about the last failure that was encountered.
     #
     #   The most common exceptions for a FAILED status are:
     #
@@ -3307,7 +3307,7 @@ module Aws::DynamoDB
 
     # @!attribute [rw] items
     #   If a read operation was used, this property will contain the result
-    #   of the reade operation; a map of attribute names and their values.
+    #   of the read operation; a map of attribute names and their values.
     #   For the write operations this value will be empty.
     #   @return [Array<Hash<String,Types::AttributeValue>>]
     #
@@ -3711,8 +3711,8 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_owner
-    #   The ID of the AWS account that owns the bucket containing the
-    #   export.
+    #   The ID of the Amazon Web Services account that owns the bucket
+    #   containing the export.
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
@@ -3726,12 +3726,12 @@ module Aws::DynamoDB
     #
     #   * `AES256` - server-side encryption with Amazon S3 managed keys
     #
-    #   * `KMS` - server-side encryption with AWS KMS managed keys
+    #   * `KMS` - server-side encryption with KMS managed keys
     #   @return [String]
     #
     # @!attribute [rw] s3_sse_kms_key_id
-    #   The ID of the AWS KMS managed key used to encrypt the S3 bucket
-    #   where export data is stored (if applicable).
+    #   The ID of the KMS managed key used to encrypt the S3 bucket where
+    #   export data is stored (if applicable).
     #   @return [String]
     #
     # @!attribute [rw] failure_code
@@ -3862,8 +3862,8 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] s3_bucket_owner
-    #   The ID of the AWS account that owns the bucket the export will be
-    #   stored in.
+    #   The ID of the Amazon Web Services account that owns the bucket the
+    #   export will be stored in.
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
@@ -3877,12 +3877,12 @@ module Aws::DynamoDB
     #
     #   * `AES256` - server-side encryption with Amazon S3 managed keys
     #
-    #   * `KMS` - server-side encryption with AWS KMS managed keys
+    #   * `KMS` - server-side encryption with KMS managed keys
     #   @return [String]
     #
     # @!attribute [rw] s3_sse_kms_key_id
-    #   The ID of the AWS KMS managed key used to encrypt the S3 bucket
-    #   where export data will be stored (if applicable).
+    #   The ID of the KMS managed key used to encrypt the S3 bucket where
+    #   export data will be stored (if applicable).
     #   @return [String]
     #
     # @!attribute [rw] export_format
@@ -5857,12 +5857,12 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Your request rate is too high. The AWS SDKs for DynamoDB automatically
-    # retry requests that receive this exception. Your request is eventually
-    # successful, unless your retry queue is too large to finish. Reduce the
-    # frequency of requests and use exponential backoff. For more
-    # information, go to [Error Retries and Exponential Backoff][1] in the
-    # *Amazon DynamoDB Developer Guide*.
+    # Your request rate is too high. The Amazon Web Services SDKs for
+    # DynamoDB automatically retry requests that receive this exception.
+    # Your request is eventually successful, unless your retry queue is too
+    # large to finish. Reduce the frequency of requests and use exponential
+    # backoff. For more information, go to [Error Retries and Exponential
+    # Backoff][1] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
@@ -6055,6 +6055,8 @@ module Aws::DynamoDB
     #
     #   * `ALL_OLD` - If `PutItem` overwrote an attribute name-value pair,
     #     then the content of the old item is returned.
+    #
+    #   The values returned are strongly consistent.
     #
     #   <note markdown="1"> The `ReturnValues` parameter is used by several DynamoDB operations;
     #   however, `PutItem` does not recognize any values other than `NONE`
@@ -6997,20 +6999,20 @@ module Aws::DynamoDB
     #
     #   * `ACTIVE` - The replica is ready for use.
     #
-    #   * `REGION_DISABLED` - The replica is inaccessible because the AWS
-    #     Region has been disabled.
+    #   * `REGION_DISABLED` - The replica is inaccessible because the Amazon
+    #     Web Services Region has been disabled.
     #
-    #     <note markdown="1"> If the AWS Region remains inaccessible for more than 20 hours,
-    #     DynamoDB will remove this replica from the replication group. The
-    #     replica will not be deleted and replication will stop from and to
-    #     this region.
+    #     <note markdown="1"> If the Amazon Web Services Region remains inaccessible for more
+    #     than 20 hours, DynamoDB will remove this replica from the
+    #     replication group. The replica will not be deleted and replication
+    #     will stop from and to this region.
     #
     #      </note>
     #
-    #   * `INACCESSIBLE_ENCRYPTION_CREDENTIALS ` - The AWS KMS key used to
+    #   * `INACCESSIBLE_ENCRYPTION_CREDENTIALS ` - The KMS key used to
     #     encrypt the table is inaccessible.
     #
-    #     <note markdown="1"> If the AWS KMS key remains inaccessible for more than 20 hours,
+    #     <note markdown="1"> If the KMS key remains inaccessible for more than 20 hours,
     #     DynamoDB will remove this replica from the replication group. The
     #     replica will not be deleted and replication will stop from and to
     #     this region.
@@ -7028,8 +7030,7 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
-    #   The AWS KMS customer master key (CMK) of the replica that will be
-    #   used for AWS KMS encryption.
+    #   The KMS key of the replica that will be used for KMS encryption.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_override
@@ -7580,7 +7581,7 @@ module Aws::DynamoDB
     end
 
     # Throughput exceeds the current throughput quota for your account.
-    # Please contact AWS Support at [AWS Support][1] to request a quota
+    # Please contact [Amazon Web Services Support][1] to request a quota
     # increase.
     #
     #
@@ -7916,25 +7917,24 @@ module Aws::DynamoDB
     # @!attribute [rw] sse_type
     #   Server-side encryption type. The only supported value is:
     #
-    #   * `KMS` - Server-side encryption that uses AWS Key Management
-    #     Service. The key is stored in your account and is managed by AWS
-    #     KMS (AWS KMS charges apply).
+    #   * `KMS` - Server-side encryption that uses Key Management Service.
+    #     The key is stored in your account and is managed by KMS (KMS
+    #     charges apply).
     #
     #   ^
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_arn
-    #   The AWS KMS customer master key (CMK) ARN used for the AWS KMS
-    #   encryption.
+    #   The KMS key ARN used for the KMS encryption.
     #   @return [String]
     #
     # @!attribute [rw] inaccessible_encryption_date_time
     #   Indicates the time, in UNIX epoch date format, when DynamoDB
-    #   detected that the table's AWS KMS key was inaccessible. This
-    #   attribute will automatically be cleared when DynamoDB detects that
-    #   the table's AWS KMS key is accessible again. DynamoDB will initiate
-    #   the table archival process when table's AWS KMS key remains
-    #   inaccessible for more than seven days from this date.
+    #   detected that the table's KMS key was inaccessible. This attribute
+    #   will automatically be cleared when DynamoDB detects that the
+    #   table's KMS key is accessible again. DynamoDB will initiate the
+    #   table archival process when table's KMS key remains inaccessible
+    #   for more than seven days from this date.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSEDescription AWS API Documentation
@@ -7960,29 +7960,29 @@ module Aws::DynamoDB
     #       }
     #
     # @!attribute [rw] enabled
-    #   Indicates whether server-side encryption is done using an AWS
-    #   managed CMK or an AWS owned CMK. If enabled (true), server-side
-    #   encryption type is set to `KMS` and an AWS managed CMK is used (AWS
-    #   KMS charges apply). If disabled (false) or not specified,
-    #   server-side encryption is set to AWS owned CMK.
+    #   Indicates whether server-side encryption is done using an Amazon Web
+    #   Services managed key or an Amazon Web Services owned key. If enabled
+    #   (true), server-side encryption type is set to `KMS` and an Amazon
+    #   Web Services managed key is used (KMS charges apply). If disabled
+    #   (false) or not specified, server-side encryption is set to Amazon
+    #   Web Services owned key.
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_type
     #   Server-side encryption type. The only supported value is:
     #
-    #   * `KMS` - Server-side encryption that uses AWS Key Management
-    #     Service. The key is stored in your account and is managed by AWS
-    #     KMS (AWS KMS charges apply).
+    #   * `KMS` - Server-side encryption that uses Key Management Service.
+    #     The key is stored in your account and is managed by KMS (KMS
+    #     charges apply).
     #
     #   ^
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
-    #   The AWS KMS customer master key (CMK) that should be used for the
-    #   AWS KMS encryption. To specify a CMK, use its key ID, Amazon
-    #   Resource Name (ARN), alias name, or alias ARN. Note that you should
-    #   only provide this parameter if the key is different from the default
-    #   DynamoDB customer master key alias/aws/dynamodb.
+    #   The KMS key that should be used for the KMS encryption. To specify a
+    #   key, use its key ID, Amazon Resource Name (ARN), alias name, or
+    #   alias ARN. Note that you should only provide this parameter if the
+    #   key is different from the default DynamoDB key `alias/aws/dynamodb`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSESpecification AWS API Documentation
@@ -8695,11 +8695,11 @@ module Aws::DynamoDB
     #
     #   * `ACTIVE` - The table is ready for use.
     #
-    #   * `INACCESSIBLE_ENCRYPTION_CREDENTIALS` - The AWS KMS key used to
+    #   * `INACCESSIBLE_ENCRYPTION_CREDENTIALS` - The KMS key used to
     #     encrypt the table in inaccessible. Table operations may fail due
-    #     to failure to use the AWS KMS key. DynamoDB will initiate the
-    #     table archival process when a table's AWS KMS key remains
-    #     inaccessible for more than seven days.
+    #     to failure to use the KMS key. DynamoDB will initiate the table
+    #     archival process when a table's KMS key remains inaccessible for
+    #     more than seven days.
     #
     #   * `ARCHIVING` - The table is being archived. Operations are not
     #     allowed until archival is complete.
@@ -8886,7 +8886,7 @@ module Aws::DynamoDB
     #   might have the same timestamp. However, the combination of the
     #   following three elements is guaranteed to be unique:
     #
-    #   * AWS customer ID
+    #   * Amazon Web Services customer ID
     #
     #   * Table name
     #
@@ -8900,7 +8900,7 @@ module Aws::DynamoDB
     #
     # @!attribute [rw] global_table_version
     #   Represents the version of [global tables][1] in use, if the table is
-    #   replicated across AWS Regions.
+    #   replicated across Amazon Web Services Regions.
     #
     #
     #
@@ -8983,11 +8983,11 @@ module Aws::DynamoDB
     # Describes a tag. A tag is a key-value pair. You can add up to 50 tags
     # to a single DynamoDB table.
     #
-    # AWS-assigned tag names and values are automatically assigned the
-    # `aws:` prefix, which the user cannot assign. AWS-assigned tag names do
-    # not count towards the tag limit of 50. User-assigned tag names have
-    # the prefix `user:` in the Cost Allocation Report. You cannot backdate
-    # the application of a tag.
+    # Amazon Web Services-assigned tag names and values are automatically
+    # assigned the `aws:` prefix, which the user cannot assign. Amazon Web
+    # Services-assigned tag names do not count towards the tag limit of 50.
+    # User-assigned tag names have the prefix `user:` in the Cost Allocation
+    # Report. You cannot backdate the application of a tag.
     #
     # For an overview on tagging DynamoDB resources, see [Tagging for
     # DynamoDB][1] in the *Amazon DynamoDB Developer Guide*.
@@ -9375,8 +9375,8 @@ module Aws::DynamoDB
     #   An ordered array of up to 25 `TransactWriteItem` objects, each of
     #   which contains a `ConditionCheck`, `Put`, `Update`, or `Delete`
     #   object. These can operate on items in different tables, but the
-    #   tables must reside in the same AWS account and Region, and no two of
-    #   them can operate on the same item.
+    #   tables must reside in the same Amazon Web Services account and
+    #   Region, and no two of them can operate on the same item.
     #   @return [Array<Types::TransactWriteItem>]
     #
     # @!attribute [rw] return_consumed_capacity
@@ -10545,11 +10545,11 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] kms_master_key_id
-    #   The AWS KMS customer master key (CMK) of the replica that should be
-    #   used for AWS KMS encryption. To specify a CMK, use its key ID,
-    #   Amazon Resource Name (ARN), alias name, or alias ARN. Note that you
-    #   should only provide this parameter if the key is different from the
-    #   default DynamoDB KMS master key alias/aws/dynamodb.
+    #   The KMS key of the replica that should be used for KMS encryption.
+    #   To specify a key, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. Note that you should only provide this parameter
+    #   if the key is different from the default DynamoDB KMS key
+    #   `alias/aws/dynamodb`.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput_override

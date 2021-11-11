@@ -8767,6 +8767,8 @@ module Aws::EC2
     # @option params [String] :vpc_peering_connection_id
     #   The ID of a VPC peering connection.
     #
+    # @option params [String] :core_network_arn
+    #
     # @return [Types::CreateRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRouteResult#return #return} => Boolean
@@ -8801,6 +8803,7 @@ module Aws::EC2
     #     network_interface_id: "NetworkInterfaceId",
     #     route_table_id: "RouteTableId", # required
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
+    #     core_network_arn: "CoreNetworkArn",
     #   })
     #
     # @example Response structure
@@ -8919,6 +8922,7 @@ module Aws::EC2
     #   resp.route_table.routes[0].origin #=> String, one of "CreateRouteTable", "CreateRoute", "EnableVgwRoutePropagation"
     #   resp.route_table.routes[0].state #=> String, one of "active", "blackhole"
     #   resp.route_table.routes[0].vpc_peering_connection_id #=> String
+    #   resp.route_table.routes[0].core_network_arn #=> String
     #   resp.route_table.tags #=> Array
     #   resp.route_table.tags[0].key #=> String
     #   resp.route_table.tags[0].value #=> String
@@ -24576,6 +24580,7 @@ module Aws::EC2
     #   resp.route_tables[0].routes[0].origin #=> String, one of "CreateRouteTable", "CreateRoute", "EnableVgwRoutePropagation"
     #   resp.route_tables[0].routes[0].state #=> String, one of "active", "blackhole"
     #   resp.route_tables[0].routes[0].vpc_peering_connection_id #=> String
+    #   resp.route_tables[0].routes[0].core_network_arn #=> String
     #   resp.route_tables[0].tags #=> Array
     #   resp.route_tables[0].tags[0].key #=> String
     #   resp.route_tables[0].tags[0].value #=> String
@@ -39392,7 +39397,7 @@ module Aws::EC2
     #   The tags to apply to the address pool.
     #
     # @option params [Boolean] :multi_region
-    #   <para>Reserved.</para>
+    #   Reserved.
     #
     # @return [Types::ProvisionByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -40808,6 +40813,8 @@ module Aws::EC2
     # @option params [String] :vpc_peering_connection_id
     #   The ID of a VPC peering connection.
     #
+    # @option params [String] :core_network_arn
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -40841,6 +40848,7 @@ module Aws::EC2
     #     network_interface_id: "NetworkInterfaceId",
     #     route_table_id: "RouteTableId", # required
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
+    #     core_network_arn: "CoreNetworkArn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRoute AWS API Documentation
@@ -45228,7 +45236,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.278.0'
+      context[:gem_version] = '1.279.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
