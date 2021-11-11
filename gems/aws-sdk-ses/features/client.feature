@@ -12,5 +12,5 @@ Feature: Amazon Simple Email Service
     Then I expect the response error code to be "InvalidParameterValue"
     And I expect the response error message to include:
     """
-    Invalid email address fake_email.
+    Invalid email address<fake_email>.
     """
