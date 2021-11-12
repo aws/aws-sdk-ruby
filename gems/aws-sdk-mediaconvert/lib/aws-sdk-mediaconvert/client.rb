@@ -1383,7 +1383,7 @@ module Aws::MediaConvert
     #                     gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
     #                     gop_closed_cadence: 1,
     #                     gop_size: 1.0,
-    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
     #                     hrd_buffer_initial_fill_percentage: 1,
     #                     hrd_buffer_size: 1,
     #                     interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -1428,7 +1428,7 @@ module Aws::MediaConvert
     #                     gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
     #                     gop_closed_cadence: 1,
     #                     gop_size: 1.0,
-    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
     #                     hrd_buffer_initial_fill_percentage: 1,
     #                     hrd_buffer_size: 1,
     #                     interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -2402,7 +2402,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_closed_cadence #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size #=> Float
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -2443,7 +2443,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_closed_cadence #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size #=> Float
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -3642,7 +3642,7 @@ module Aws::MediaConvert
     #                     gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
     #                     gop_closed_cadence: 1,
     #                     gop_size: 1.0,
-    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
     #                     hrd_buffer_initial_fill_percentage: 1,
     #                     hrd_buffer_size: 1,
     #                     interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -3687,7 +3687,7 @@ module Aws::MediaConvert
     #                     gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
     #                     gop_closed_cadence: 1,
     #                     gop_size: 1.0,
-    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
     #                     hrd_buffer_initial_fill_percentage: 1,
     #                     hrd_buffer_size: 1,
     #                     interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -4631,7 +4631,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_closed_cadence #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size #=> Float
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -4672,7 +4672,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_closed_cadence #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size #=> Float
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -5331,7 +5331,7 @@ module Aws::MediaConvert
     #             gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
     #             gop_closed_cadence: 1,
     #             gop_size: 1.0,
-    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
     #             hrd_buffer_initial_fill_percentage: 1,
     #             hrd_buffer_size: 1,
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -5376,7 +5376,7 @@ module Aws::MediaConvert
     #             gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
     #             gop_closed_cadence: 1,
     #             gop_size: 1.0,
-    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
     #             hrd_buffer_initial_fill_percentage: 1,
     #             hrd_buffer_size: 1,
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -5969,7 +5969,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_closed_cadence #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_size #=> Float
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.hrd_buffer_size #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -6010,7 +6010,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_closed_cadence #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_size #=> Float
-    #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.hrd_buffer_size #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -7148,7 +7148,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_closed_cadence #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size #=> Float
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -7189,7 +7189,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_closed_cadence #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size #=> Float
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_size #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -8084,7 +8084,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_closed_cadence #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size #=> Float
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -8125,7 +8125,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_closed_cadence #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size #=> Float
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -8703,7 +8703,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_closed_cadence #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_size #=> Float
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.hrd_buffer_size #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -8744,7 +8744,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_closed_cadence #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_size #=> Float
-    #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.hrd_buffer_size #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -9698,7 +9698,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_closed_cadence #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size #=> Float
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -9739,7 +9739,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_closed_cadence #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size #=> Float
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_size #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -10684,7 +10684,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_closed_cadence #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size #=> Float
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_size #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -10725,7 +10725,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_closed_cadence #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size #=> Float
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_size #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -11320,7 +11320,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.gop_closed_cadence #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.gop_size #=> Float
-    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.hrd_buffer_size #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -11361,7 +11361,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.gop_closed_cadence #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.gop_size #=> Float
-    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.hrd_buffer_size #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -12734,7 +12734,7 @@ module Aws::MediaConvert
     #                     gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
     #                     gop_closed_cadence: 1,
     #                     gop_size: 1.0,
-    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
     #                     hrd_buffer_initial_fill_percentage: 1,
     #                     hrd_buffer_size: 1,
     #                     interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -12779,7 +12779,7 @@ module Aws::MediaConvert
     #                     gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
     #                     gop_closed_cadence: 1,
     #                     gop_size: 1.0,
-    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #                     gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
     #                     hrd_buffer_initial_fill_percentage: 1,
     #                     hrd_buffer_size: 1,
     #                     interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -13720,7 +13720,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_closed_cadence #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size #=> Float
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.hrd_buffer_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -13761,7 +13761,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_closed_cadence #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size #=> Float
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.hrd_buffer_size #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -14414,7 +14414,7 @@ module Aws::MediaConvert
     #             gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
     #             gop_closed_cadence: 1,
     #             gop_size: 1.0,
-    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
     #             hrd_buffer_initial_fill_percentage: 1,
     #             hrd_buffer_size: 1,
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -14459,7 +14459,7 @@ module Aws::MediaConvert
     #             gop_b_reference: "DISABLED", # accepts DISABLED, ENABLED
     #             gop_closed_cadence: 1,
     #             gop_size: 1.0,
-    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS
+    #             gop_size_units: "FRAMES", # accepts FRAMES, SECONDS, AUTO
     #             hrd_buffer_initial_fill_percentage: 1,
     #             hrd_buffer_size: 1,
     #             interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
@@ -15049,7 +15049,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_closed_cadence #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_size #=> Float
-    #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.hrd_buffer_size #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -15090,7 +15090,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_b_reference #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_closed_cadence #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_size #=> Float
-    #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS"
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.gop_size_units #=> String, one of "FRAMES", "SECONDS", "AUTO"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.hrd_buffer_initial_fill_percentage #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.hrd_buffer_size #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
@@ -15392,7 +15392,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

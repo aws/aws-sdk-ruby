@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2021-11-12)
+------------------
+
+* Feature - This release adds APIs for creating and managing scheduled tasks. Additionally, adds APIs to describe and update a contact and list associated references.
+
 1.56.0 (2021-11-04)
 ------------------
 

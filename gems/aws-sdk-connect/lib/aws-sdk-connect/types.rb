@@ -23,6 +23,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the agent who accepted the contact.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the agent who accepted the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_to_agent_timestamp
+    #   The timestamp when the contact was connected to the agent.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentInfo AWS API Documentation
+    #
+    class AgentInfo < Struct.new(
+      :id,
+      :connected_to_agent_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about an agent status.
     #
     # @!attribute [rw] agent_status_arn
@@ -54,8 +73,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatus AWS API Documentation
@@ -432,6 +450,31 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the attachment reference if the `referenceType` is
+    # `ATTACHMENT`. Otherwise, null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the attachment reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Contains the location path of the attachment reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of an attachment reference type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AttachmentReference AWS API Documentation
+    #
+    class AttachmentReference < Struct.new(
+      :name,
+      :value,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A toggle for an individual feature at the instance level.
     #
     # @!attribute [rw] attribute_type
@@ -498,6 +541,95 @@ module Aws::Connect
     #
     class ChatStreamingConfiguration < Struct.new(
       :streaming_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a contact.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier for the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_contact_id
+    #   If this contact is related to other contacts, this is the ID of the
+    #   initial contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_contact_id
+    #   If this contact is not the first contact, this is the ID of the
+    #   previous contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiation_method
+    #   Indicates how the contact was initiated.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel
+    #   How the contact reached your contact center.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_info
+    #   If this contact was queued, this contains information about the
+    #   queue.
+    #   @return [Types::QueueInfo]
+    #
+    # @!attribute [rw] agent_info
+    #   Information about the agent who accepted the contact.
+    #   @return [Types::AgentInfo]
+    #
+    # @!attribute [rw] initiation_timestamp
+    #   The date and time this contact was initiated, in UTC time. For
+    #   `INBOUND`, this is when the contact arrived. For `OUTBOUND`, this is
+    #   when the agent began dialing. For `CALLBACK`, this is when the
+    #   callback contact was created. For `TRANSFER` and `QUEUE_TRANSFER`,
+    #   this is when the transfer was initiated. For `API`, this is when the
+    #   request arrived.
+    #   @return [Time]
+    #
+    # @!attribute [rw] disconnect_timestamp
+    #   The timestamp when the customer endpoint disconnected from Amazon
+    #   Connect.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_timestamp
+    #   The timestamp when contact was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scheduled_timestamp
+    #   The timestamp, in Unix epoch time format, at which to start running
+    #   the inbound flow.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Contact AWS API Documentation
+    #
+    class Contact < Struct.new(
+      :arn,
+      :id,
+      :initial_contact_id,
+      :previous_contact_id,
+      :initiation_method,
+      :name,
+      :description,
+      :channel,
+      :queue_info,
+      :agent_info,
+      :initiation_timestamp,
+      :disconnect_timestamp,
+      :last_update_timestamp,
+      :scheduled_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -651,8 +783,7 @@ module Aws::Connect
     #   @return [Integer]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAgentStatusRequest AWS API Documentation
@@ -808,8 +939,7 @@ module Aws::Connect
     #   @return [Array<Types::HoursOfOperationConfig>]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateHoursOfOperationRequest AWS API Documentation
@@ -952,8 +1082,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateIntegrationAssociationRequest AWS API Documentation
@@ -1038,8 +1167,7 @@ module Aws::Connect
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQueueRequest AWS API Documentation
@@ -1118,8 +1246,7 @@ module Aws::Connect
     #   @return [Types::QuickConnectConfig]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQuickConnectRequest AWS API Documentation
@@ -1275,8 +1402,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateSecurityProfileRequest AWS API Documentation
@@ -1336,8 +1462,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUseCaseRequest AWS API Documentation
@@ -1919,6 +2044,44 @@ module Aws::Connect
     #
     class DescribeContactFlowResponse < Struct.new(
       :contact_flow)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the initial contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactRequest AWS API Documentation
+    #
+    class DescribeContactRequest < Struct.new(
+      :instance_id,
+      :contact_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact
+    #   Information about the contact.
+    #   @return [Types::Contact]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactResponse AWS API Documentation
+    #
+    class DescribeContactResponse < Struct.new(
+      :contact)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3611,8 +3774,7 @@ module Aws::Connect
     #   @return [Array<Types::HoursOfOperationConfig>]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperation AWS API Documentation
@@ -4416,6 +4578,69 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListContactReferencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #         reference_types: ["URL"], # required, accepts URL, ATTACHMENT
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the initial contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_types
+    #   The type of reference.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    #   This is not expected to be set since the value returned in the
+    #   previous response is always null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactReferencesRequest AWS API Documentation
+    #
+    class ListContactReferencesRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :reference_types,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reference_summary_list
+    #   Information about the contact flows.
+    #   @return [Array<Types::ReferenceSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #
+    #   This is always returned as null in the response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactReferencesResponse AWS API Documentation
+    #
+    class ListContactReferencesResponse < Struct.new(
+      :reference_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListHoursOfOperationsRequest
     #   data as a hash:
     #
@@ -4639,7 +4864,6 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] integration_type
-    #   The type of integration.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4716,7 +4940,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] lambda_functions
-    #   The Lambda function ARNs associated with the specified instance.
+    #   The Lambdafunction ARNs associated with the specified instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -5781,8 +6005,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Queue AWS API Documentation
@@ -5797,6 +6020,25 @@ module Aws::Connect
       :max_contacts,
       :status,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # If this contact was queued, this contains information about the queue.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the agent who accepted the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] enqueue_timestamp
+    #   The timestamp when the contact was added to the queue.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueInfo AWS API Documentation
+    #
+    class QueueInfo < Struct.new(
+      :id,
+      :enqueue_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5901,8 +6143,7 @@ module Aws::Connect
     #   @return [Types::QuickConnectConfig]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnect AWS API Documentation
@@ -6011,16 +6252,18 @@ module Aws::Connect
     #
     #       {
     #         value: "ReferenceValue", # required
-    #         type: "URL", # required, accepts URL
+    #         type: "URL", # required, accepts URL, ATTACHMENT
     #       }
     #
     # @!attribute [rw] value
-    #   A formatted URL that displays to an agent in the Contact Control
-    #   Panel (CCP)
+    #   A valid value for the reference. For example, for a URL reference, a
+    #   formatted URL that is displayed to an agent in the Contact Control
+    #   Panel (CCP).
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   A valid URL.
+    #   The type of the reference. Only `URL` type can be added or updated
+    #   on a contact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Reference AWS API Documentation
@@ -6030,6 +6273,37 @@ module Aws::Connect
       :type)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains summary information about a reference. `ReferenceSummary`
+    # contains only one non null field between the URL and attachment based
+    # on the reference type.
+    #
+    # @note ReferenceSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ReferenceSummary corresponding to the set member.
+    #
+    # @!attribute [rw] url
+    #   Information about Url reference if the `referenceType` is `URL`.
+    #   Otherwise, null.
+    #   @return [Types::UrlReference]
+    #
+    # @!attribute [rw] attachment
+    #   Information about the attachment reference if the `referenceType` is
+    #   `ATTACHMENT`. Otherwise, null.
+    #   @return [Types::AttachmentReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReferenceSummary AWS API Documentation
+    #
+    class ReferenceSummary < Struct.new(
+      :url,
+      :attachment,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Url < ReferenceSummary; end
+      class Attachment < ReferenceSummary; end
+      class Unknown < ReferenceSummary; end
     end
 
     # A resource already has that name.
@@ -6407,8 +6681,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags used to organize, track, or control access for this
-    #   resource.
+    #   One or more tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfile AWS API Documentation
@@ -6801,11 +7074,12 @@ module Aws::Connect
     #         references: {
     #           "ReferenceKey" => {
     #             value: "ReferenceValue", # required
-    #             type: "URL", # required, accepts URL
+    #             type: "URL", # required, accepts URL, ATTACHMENT
     #           },
     #         },
     #         description: "Description",
     #         client_token: "ClientToken",
+    #         scheduled_time: Time.now,
     #       }
     #
     # @!attribute [rw] instance_id
@@ -6861,6 +7135,12 @@ module Aws::Connect
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] scheduled_time
+    #   The timestamp, in Unix Epoch seconds format, at which to start
+    #   running the inbound contact flow. The scheduled time cannot be in
+    #   the past. It must be within up to 6 days in future.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartTaskContactRequest AWS API Documentation
     #
     class StartTaskContactRequest < Struct.new(
@@ -6871,7 +7151,8 @@ module Aws::Connect
       :name,
       :references,
       :description,
-      :client_token)
+      :client_token,
+      :scheduled_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7298,6 +7579,99 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #         name: "Name",
+    #         description: "Description",
+    #         references: {
+    #           "ReferenceKey" => {
+    #             value: "ReferenceValue", # required
+    #             type: "URL", # required, accepts URL, ATTACHMENT
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact. This is the identifier of the contact
+    #   associated with the first interaction with your contact center.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A formatted URL that is shown to an agent in the Contact Control
+    #   Panel (CCP).
+    #   @return [Hash<String,Types::Reference>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactRequest AWS API Documentation
+    #
+    class UpdateContactRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :name,
+      :description,
+      :references)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactResponse AWS API Documentation
+    #
+    class UpdateContactResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateContactScheduleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #         scheduled_time: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_time
+    #   The timestamp, in Unix Epoch seconds format, at which to start
+    #   running the inbound contact flow. The scheduled time cannot be in
+    #   the past. It must be within up to 6 days in future.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactScheduleRequest AWS API Documentation
+    #
+    class UpdateContactScheduleRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :scheduled_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactScheduleResponse AWS API Documentation
+    #
+    class UpdateContactScheduleResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateHoursOfOperationRequest
     #   data as a hash:
     #
@@ -7378,8 +7752,7 @@ module Aws::Connect
     #   The type of attribute.
     #
     #   <note markdown="1"> Only allowlisted customers can consume USE\_CUSTOM\_TTS\_VOICES. To
-    #   access this feature, contact Amazon Web Services Support for
-    #   allowlisting.
+    #   access this feature, contact AWS Support for allowlisting.
     #
     #    </note>
     #   @return [String]
@@ -8147,6 +8520,25 @@ module Aws::Connect
       :security_profile_ids,
       :user_id,
       :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The URL reference.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the URL reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A valid URL.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UrlReference AWS API Documentation
+    #
+    class UrlReference < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

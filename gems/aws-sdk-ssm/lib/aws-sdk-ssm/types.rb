@@ -360,10 +360,10 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] automation_target_parameter_name
-    #   Specify the target for the association. This target is required for
-    #   associations that use an Automation runbook and target resources by
-    #   using rate controls. Automation is a capability of Amazon Web
-    #   Services Systems Manager.
+    #   Choose the parameter that will define how your automation will
+    #   branch out. This target is required for associations that use an
+    #   Automation runbook and target resources by using rate controls.
+    #   Automation is a capability of Amazon Web Services Systems Manager.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -1556,7 +1556,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
     #         global_filters: {
     #           patch_filters: [ # required
     #             {
@@ -3195,10 +3195,10 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] automation_target_parameter_name
-    #   Specify the target for the association. This target is required for
-    #   associations that use an Automation runbook and target resources by
-    #   using rate controls. Automation is a capability of Amazon Web
-    #   Services Systems Manager.
+    #   Choose the parameter that will define how your automation will
+    #   branch out. This target is required for associations that use an
+    #   Automation runbook and target resources by using rate controls.
+    #   Automation is a capability of Amazon Web Services Systems Manager.
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -3901,7 +3901,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
     #         name: "BaselineName", # required
     #         global_filters: {
     #           patch_filters: [ # required
@@ -6888,7 +6888,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
+    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
     #         property: "PRODUCT", # required, accepts PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PRIORITY, SEVERITY
     #         patch_set: "OS", # accepts OS, APPLICATION
     #         max_results: 1,
@@ -8305,7 +8305,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
     #       }
     #
     # @!attribute [rw] operating_system
@@ -8345,7 +8345,7 @@ module Aws::SSM
     #         instance_id: "InstanceId", # required
     #         snapshot_id: "SnapshotId", # required
     #         baseline_override: {
-    #           operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
+    #           operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
     #           global_filters: {
     #             patch_filters: [ # required
     #               {
@@ -9733,7 +9733,7 @@ module Aws::SSM
     #
     #       {
     #         patch_group: "PatchGroup", # required
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
     #       }
     #
     # @!attribute [rw] patch_group
@@ -19718,10 +19718,10 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] automation_target_parameter_name
-    #   Specify the target for the association. This target is required for
-    #   associations that use an Automation runbook and target resources by
-    #   using rate controls. Automation is a capability of Amazon Web
-    #   Services Systems Manager.
+    #   Choose the parameter that will define how your automation will
+    #   branch out. This target is required for associations that use an
+    #   Automation runbook and target resources by using rate controls.
+    #   Automation is a capability of Amazon Web Services Systems Manager.
     #   @return [String]
     #
     # @!attribute [rw] max_errors

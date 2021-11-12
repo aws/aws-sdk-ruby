@@ -30,6 +30,52 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Returns the number of open reactive insights, the number of open
+    # proactive insights, and the number of metrics analyzed in your Amazon
+    # Web Services account. Use these numbers to gauge the health of
+    # operations in your Amazon Web Services account.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight
+    #   Information about the health of the Amazon Web Services resources in
+    #   your account, including the number of open proactive, open reactive
+    #   insights, and the Mean Time to Recover (MTTR) of closed insights.
+    #   @return [Types::AccountInsightHealth]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AccountHealth AWS API Documentation
+    #
+    class AccountHealth < Struct.new(
+      :account_id,
+      :insight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the number of open reactive and proactive insights
+    # that can be used to gauge the health of your system.
+    #
+    # @!attribute [rw] open_proactive_insights
+    #   An integer that specifies the number of open proactive insights in
+    #   your Amazon Web Services account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] open_reactive_insights
+    #   An integer that specifies the number of open reactive insights in
+    #   your Amazon Web Services account.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AccountInsightHealth AWS API Documentation
+    #
+    class AccountInsightHealth < Struct.new(
+      :open_proactive_insights,
+      :open_reactive_insights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddNotificationChannelRequest
     #   data as a hash:
     #
@@ -129,10 +175,10 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Information about AWS CloudFormation stacks. You can use up to 500
-    # stacks to specify which AWS resources in your account to analyze. For
-    # more information, see [Stacks][1] in the *AWS CloudFormation User
-    # Guide*.
+    # Information about Amazon Web Services CloudFormation stacks. You can
+    # use up to 500 stacks to specify which Amazon Web Services resources in
+    # your account to analyze. For more information, see [Stacks][1] in the
+    # *Amazon Web Services CloudFormation User Guide*.
     #
     #
     #
@@ -157,10 +203,10 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Information about AWS CloudFormation stacks. You can use up to 500
-    # stacks to specify which AWS resources in your account to analyze. For
-    # more information, see [Stacks][1] in the *AWS CloudFormation User
-    # Guide*.
+    # Information about Amazon Web Services CloudFormation stacks. You can
+    # use up to 500 stacks to specify which Amazon Web Services resources in
+    # your account to analyze. For more information, see [Stacks][1] in the
+    # *Amazon Web Services CloudFormation User Guide*.
     #
     #
     #
@@ -178,11 +224,12 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Information about an AWS CloudFormation stack used to create a monthly
-    # cost estimate for DevOps Guru to analyze AWS resources. The maximum
-    # number of stacks you can specify for a cost estimate is one. The
-    # estimate created is for the cost to analyze the AWS resources defined
-    # by the stack. For more information, see [Stacks][1] in the *AWS
+    # Information about an Amazon Web Services CloudFormation stack used to
+    # create a monthly cost estimate for DevOps Guru to analyze Amazon Web
+    # Services resources. The maximum number of stacks you can specify for a
+    # cost estimate is one. The estimate created is for the cost to analyze
+    # the Amazon Web Services resources defined by the stack. For more
+    # information, see [Stacks][1] in the *Amazon Web Services
     # CloudFormation User Guide*.
     #
     #
@@ -208,18 +255,20 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Information about the health of AWS resources in your account that are
-    # specified by an AWS CloudFormation stack.
+    # Information about the health of Amazon Web Services resources in your
+    # account that are specified by an Amazon Web Services CloudFormation
+    # stack.
     #
     # @!attribute [rw] stack_name
     #   The name of the CloudFormation stack.
     #   @return [String]
     #
     # @!attribute [rw] insight
-    #   Information about the health of the AWS resources in your account
-    #   that are specified by an AWS CloudFormation stack, including the
-    #   number of open proactive, open reactive insights, and the Mean Time
-    #   to Recover (MTTR) of closed insights.
+    #   Information about the health of the Amazon Web Services resources in
+    #   your account that are specified by an Amazon Web Services
+    #   CloudFormation stack, including the number of open proactive, open
+    #   reactive insights, and the Mean Time to Recover (MTTR) of closed
+    #   insights.
     #   @return [Types::InsightHealth]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudFormationHealth AWS API Documentation
@@ -227,6 +276,27 @@ module Aws::DevOpsGuru
     class CloudFormationHealth < Struct.new(
       :stack_name,
       :insight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the analyzed metrics that displayed
+    # anomalous behavior.
+    #
+    # @!attribute [rw] timestamp_metric_value_pair_list
+    #   This is a list of cloudwatch metric values at given timestamp.
+    #   @return [Array<Types::TimestampMetricValuePair>]
+    #
+    # @!attribute [rw] status_code
+    #   This is enum of the status showing whether the metric value pair
+    #   list has Partial or Complete data or there was an error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudWatchMetricsDataSummary AWS API Documentation
+    #
+    class CloudWatchMetricsDataSummary < Struct.new(
+      :timestamp_metric_value_pair_list,
+      :status_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -266,6 +336,10 @@ module Aws::DevOpsGuru
     #   of seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] metric_data_summary
+    #   This object returns anomaly metric data.
+    #   @return [Types::CloudWatchMetricsDataSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudWatchMetricsDetail AWS API Documentation
     #
     class CloudWatchMetricsDetail < Struct.new(
@@ -274,7 +348,8 @@ module Aws::DevOpsGuru
       :dimensions,
       :stat,
       :unit,
-      :period)
+      :period,
+      :metric_data_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -313,11 +388,13 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The ID of the AWS resource in which a conflict occurred.
+    #   The ID of the Amazon Web Services resource in which a conflict
+    #   occurred.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the AWS resource in which a conflict occurred.
+    #   The type of the Amazon Web Services resource in which a conflict
+    #   occurred.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ConflictException AWS API Documentation
@@ -330,10 +407,10 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Information about a filter used to specify which AWS resources are
-    # analyzed to create a monthly DevOps Guru cost estimate. For more
-    # information, see [Estimate your Amazon DevOps Guru costs][1] and
-    # [Amazon DevOps Guru pricing][2].
+    # Information about a filter used to specify which Amazon Web Services
+    # resources are analyzed to create a monthly DevOps Guru cost estimate.
+    # For more information, see [Estimate your Amazon DevOps Guru costs][1]
+    # and [Amazon DevOps Guru pricing][2].
     #
     #
     #
@@ -351,7 +428,8 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] cloud_formation
     #   An object that specifies the CloudFormation stack that defines the
-    #   AWS resources used to create a monthly estimate for DevOps Guru.
+    #   Amazon Web Services resources used to create a monthly estimate for
+    #   DevOps Guru.
     #   @return [Types::CloudFormationCostEstimationResourceCollectionFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CostEstimationResourceCollectionFilter AWS API Documentation
@@ -389,22 +467,22 @@ module Aws::DevOpsGuru
 
     # @!attribute [rw] open_reactive_insights
     #   An integer that specifies the number of open reactive insights in
-    #   your AWS account.
+    #   your Amazon Web Services account.
     #   @return [Integer]
     #
     # @!attribute [rw] open_proactive_insights
     #   An integer that specifies the number of open proactive insights in
-    #   your AWS account.
+    #   your Amazon Web Services account.
     #   @return [Integer]
     #
     # @!attribute [rw] metrics_analyzed
     #   An integer that specifies the number of metrics that have been
-    #   analyzed in your AWS account.
+    #   analyzed in your Amazon Web Services account.
     #   @return [Integer]
     #
     # @!attribute [rw] resource_hours
     #   The number of Amazon DevOps Guru resource analysis hours billed to
-    #   the current AWS account in the last hour.
+    #   the current Amazon Web Services account in the last hour.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountHealthResponse AWS API Documentation
@@ -450,12 +528,14 @@ module Aws::DevOpsGuru
 
     # @!attribute [rw] reactive_insights
     #   An integer that specifies the number of open reactive insights in
-    #   your AWS account that were created during the time range passed in.
+    #   your Amazon Web Services account that were created during the time
+    #   range passed in.
     #   @return [Integer]
     #
     # @!attribute [rw] proactive_insights
     #   An integer that specifies the number of open proactive insights in
-    #   your AWS account that were created during the time range passed in.
+    #   your Amazon Web Services account that were created during the time
+    #   range passed in.
     #   @return [Integer]
     #
     # @!attribute [rw] mean_time_to_recover_in_milliseconds
@@ -478,16 +558,22 @@ module Aws::DevOpsGuru
     #
     #       {
     #         id: "AnomalyId", # required
+    #         account_id: "AwsAccountId",
     #       }
     #
     # @!attribute [rw] id
     #   The ID of the anomaly.
     #   @return [String]
     #
+    # @!attribute [rw] account_id
+    #   The ID of the member account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAnomalyRequest AWS API Documentation
     #
     class DescribeAnomalyRequest < Struct.new(
-      :id)
+      :id,
+      :account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -545,16 +631,22 @@ module Aws::DevOpsGuru
     #
     #       {
     #         id: "InsightId", # required
+    #         account_id: "AwsAccountId",
     #       }
     #
     # @!attribute [rw] id
     #   The ID of the insight.
     #   @return [String]
     #
+    # @!attribute [rw] account_id
+    #   The ID of the member account in the organization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeInsightRequest AWS API Documentation
     #
     class DescribeInsightRequest < Struct.new(
-      :id)
+      :id,
+      :account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -576,6 +668,207 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeOrganizationHealthRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_ids: ["AwsAccountId"],
+    #         organizational_unit_ids: ["OrganizationalUnitId"],
+    #       }
+    #
+    # @!attribute [rw] account_ids
+    #   The ID of the Amazon Web Services account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organizational_unit_ids
+    #   The ID of the organizational unit.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeOrganizationHealthRequest AWS API Documentation
+    #
+    class DescribeOrganizationHealthRequest < Struct.new(
+      :account_ids,
+      :organizational_unit_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] open_reactive_insights
+    #   An integer that specifies the number of open reactive insights in
+    #   your Amazon Web Services account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] open_proactive_insights
+    #   An integer that specifies the number of open proactive insights in
+    #   your Amazon Web Services account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] metrics_analyzed
+    #   An integer that specifies the number of metrics that have been
+    #   analyzed in your organization.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_hours
+    #   The number of Amazon DevOps Guru resource analysis hours billed to
+    #   the current Amazon Web Services account in the last hour.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeOrganizationHealthResponse AWS API Documentation
+    #
+    class DescribeOrganizationHealthResponse < Struct.new(
+      :open_reactive_insights,
+      :open_proactive_insights,
+      :metrics_analyzed,
+      :resource_hours)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeOrganizationOverviewRequest
+    #   data as a hash:
+    #
+    #       {
+    #         from_time: Time.now, # required
+    #         to_time: Time.now,
+    #         account_ids: ["AwsAccountId"],
+    #         organizational_unit_ids: ["OrganizationalUnitId"],
+    #       }
+    #
+    # @!attribute [rw] from_time
+    #   The start of the time range passed in. The start time granularity is
+    #   at the day level. The floor of the start time is used. Returned
+    #   information occurred after this day.
+    #   @return [Time]
+    #
+    # @!attribute [rw] to_time
+    #   The end of the time range passed in. The start time granularity is
+    #   at the day level. The floor of the start time is used. Returned
+    #   information occurred before this day. If this is not specified, then
+    #   the current day is used.
+    #   @return [Time]
+    #
+    # @!attribute [rw] account_ids
+    #   The ID of the Amazon Web Services account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organizational_unit_ids
+    #   The ID of the organizational unit.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeOrganizationOverviewRequest AWS API Documentation
+    #
+    class DescribeOrganizationOverviewRequest < Struct.new(
+      :from_time,
+      :to_time,
+      :account_ids,
+      :organizational_unit_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reactive_insights
+    #   An integer that specifies the number of open reactive insights in
+    #   your Amazon Web Services account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] proactive_insights
+    #   An integer that specifies the number of open proactive insights in
+    #   your Amazon Web Services account.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeOrganizationOverviewResponse AWS API Documentation
+    #
+    class DescribeOrganizationOverviewResponse < Struct.new(
+      :reactive_insights,
+      :proactive_insights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeOrganizationResourceCollectionHealthRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE, AWS_ACCOUNT
+    #         account_ids: ["AwsAccountId"],
+    #         organizational_unit_ids: ["OrganizationalUnitId"],
+    #         next_token: "UuidNextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] organization_resource_collection_type
+    #   An Amazon Web Services resource collection type. This type specifies
+    #   how analyzed Amazon Web Services resources are defined. The one type
+    #   of Amazon Web Services resource collection supported is Amazon Web
+    #   Services CloudFormation stacks. DevOps Guru can be configured to
+    #   analyze only the Amazon Web Services resources that are defined in
+    #   the stacks. You can specify up to 500 Amazon Web Services
+    #   CloudFormation stacks.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_ids
+    #   The ID of the Amazon Web Services account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organizational_unit_ids
+    #   The ID of the organizational unit.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeOrganizationResourceCollectionHealthRequest AWS API Documentation
+    #
+    class DescribeOrganizationResourceCollectionHealthRequest < Struct.new(
+      :organization_resource_collection_type,
+      :account_ids,
+      :organizational_unit_ids,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_formation
+    #   The returned `CloudFormationHealthOverview` object that contains an
+    #   `InsightHealthOverview` object with the requested system health
+    #   information.
+    #   @return [Array<Types::CloudFormationHealth>]
+    #
+    # @!attribute [rw] service
+    #   An array of `ServiceHealth` objects that describes the health of the
+    #   Amazon Web Services services associated with the resources in the
+    #   collection.
+    #   @return [Array<Types::ServiceHealth>]
+    #
+    # @!attribute [rw] account
+    #   The name of the organization's account.
+    #   @return [Array<Types::AccountHealth>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeOrganizationResourceCollectionHealthResponse AWS API Documentation
+    #
+    class DescribeOrganizationResourceCollectionHealthResponse < Struct.new(
+      :cloud_formation,
+      :service,
+      :account,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeResourceCollectionHealthRequest
     #   data as a hash:
     #
@@ -585,11 +878,13 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] resource_collection_type
-    #   An AWS resource collection type. This type specifies how analyzed
-    #   AWS resources are defined. The one type of AWS resource collection
-    #   supported is AWS CloudFormation stacks. DevOps Guru can be
-    #   configured to analyze only the AWS resources that are defined in the
-    #   stacks. You can specify up to 500 AWS CloudFormation stacks.
+    #   An Amazon Web Services resource collection type. This type specifies
+    #   how analyzed Amazon Web Services resources are defined. The one type
+    #   of Amazon Web Services resource collection supported is Amazon Web
+    #   Services CloudFormation stacks. DevOps Guru can be configured to
+    #   analyze only the Amazon Web Services resources that are defined in
+    #   the stacks. You can specify up to 500 Amazon Web Services
+    #   CloudFormation stacks.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -614,7 +909,8 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] service
     #   An array of `ServiceHealth` objects that describes the health of the
-    #   AWS services associated with the resources in the collection.
+    #   Amazon Web Services services associated with the resources in the
+    #   collection.
     #   @return [Array<Types::ServiceHealth>]
     #
     # @!attribute [rw] next_token
@@ -639,8 +935,8 @@ module Aws::DevOpsGuru
     class DescribeServiceIntegrationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] service_integration
-    #   Information about the integration of DevOps Guru with another AWS
-    #   service, such as AWS Systems Manager.
+    #   Information about the integration of DevOps Guru with another Amazon
+    #   Web Services service, such as Amazon Web Services Systems Manager.
     #   @return [Types::ServiceIntegrationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeServiceIntegrationResponse AWS API Documentation
@@ -679,16 +975,18 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # An AWS resource event. AWS resource events and metrics are analyzed by
-    # DevOps Guru to find anomalous behavior and provide recommendations to
-    # improve your operational solutions.
+    # An Amazon Web Services resource event. Amazon Web Services resource
+    # events and metrics are analyzed by DevOps Guru to find anomalous
+    # behavior and provide recommendations to improve your operational
+    # solutions.
     #
     # @!attribute [rw] resource_collection
-    #   A collection of AWS resources supported by DevOps Guru. The one type
-    #   of AWS resource collection supported is AWS CloudFormation stacks.
-    #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] id
@@ -700,7 +998,7 @@ module Aws::DevOpsGuru
     #   @return [Time]
     #
     # @!attribute [rw] event_source
-    #   The AWS source that emitted the event.
+    #   The Amazon Web Services source that emitted the event.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -738,9 +1036,10 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # The AWS resource that emitted an event. AWS resource events and
-    # metrics are analyzed by DevOps Guru to find anomalous behavior and
-    # provide recommendations to improve your operational solutions.
+    # The Amazon Web Services resource that emitted an event. Amazon Web
+    # Services resource events and metrics are analyzed by DevOps Guru to
+    # find anomalous behavior and provide recommendations to improve your
+    # operational solutions.
     #
     # @!attribute [rw] type
     #   The type of resource that emitted an event.
@@ -765,9 +1064,10 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # The time range during which an AWS event occurred. AWS resource events
-    # and metrics are analyzed by DevOps Guru to find anomalous behavior and
-    # provide recommendations to improve your operational solutions.
+    # The time range during which an Amazon Web Services event occurred.
+    # Amazon Web Services resource events and metrics are analyzed by DevOps
+    # Guru to find anomalous behavior and provide recommendations to improve
+    # your operational solutions.
     #
     # @note When making an API call, you may pass EventTimeRange
     #   data as a hash:
@@ -815,8 +1115,8 @@ module Aws::DevOpsGuru
     end
 
     # @!attribute [rw] resource_collection
-    #   The collection of the AWS resources used to create your monthly
-    #   DevOps Guru cost estimate.
+    #   The collection of the Amazon Web Services resources used to create
+    #   your monthly DevOps Guru cost estimate.
     #   @return [Types::CostEstimationResourceCollectionFilter]
     #
     # @!attribute [rw] status
@@ -827,7 +1127,8 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] costs
     #   An array of `ResourceCost` objects that each contains details about
-    #   the monthly cost estimate to analyze one of your AWS resources.
+    #   the monthly cost estimate to analyze one of your Amazon Web Services
+    #   resources.
     #   @return [Array<Types::ServiceResourceCost>]
     #
     # @!attribute [rw] time_range
@@ -835,9 +1136,9 @@ module Aws::DevOpsGuru
     #   @return [Types::CostEstimationTimeRange]
     #
     # @!attribute [rw] total_cost
-    #   The estimated monthly cost to analyze the AWS resources. This value
-    #   is the sum of the estimated costs to analyze each resource in the
-    #   `Costs` object in this response.
+    #   The estimated monthly cost to analyze the Amazon Web Services
+    #   resources. This value is the sum of the estimated costs to analyze
+    #   each resource in the `Costs` object in this response.
     #   @return [Float]
     #
     # @!attribute [rw] next_token
@@ -867,8 +1168,9 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] resource_collection_type
-    #   The type of AWS resource collections to return. The one valid value
-    #   is `CLOUD_FORMATION` for AWS CloudFormation stacks.
+    #   The type of Amazon Web Services resource collections to return. The
+    #   one valid value is `CLOUD_FORMATION` for Amazon Web Services
+    #   CloudFormation stacks.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -886,11 +1188,12 @@ module Aws::DevOpsGuru
     end
 
     # @!attribute [rw] resource_collection
-    #   The requested list of AWS resource collections. The one type of AWS
-    #   resource collection supported is AWS CloudFormation stacks. DevOps
-    #   Guru can be configured to analyze only the AWS resources that are
-    #   defined in the stacks. You can specify up to 500 AWS CloudFormation
-    #   stacks.
+    #   The requested list of Amazon Web Services resource collections. The
+    #   one type of Amazon Web Services resource collection supported is
+    #   Amazon Web Services CloudFormation stacks. DevOps Guru can be
+    #   configured to analyze only the Amazon Web Services resources that
+    #   are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollectionFilter]
     #
     # @!attribute [rw] next_token
@@ -1009,6 +1312,7 @@ module Aws::DevOpsGuru
     #         },
     #         max_results: 1,
     #         next_token: "UuidNextToken",
+    #         account_id: "AwsAccountId",
     #       }
     #
     # @!attribute [rw] insight_id
@@ -1032,13 +1336,18 @@ module Aws::DevOpsGuru
     #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListAnomaliesForInsightRequest AWS API Documentation
     #
     class ListAnomaliesForInsightRequest < Struct.new(
       :insight_id,
       :start_time_range,
       :max_results,
-      :next_token)
+      :next_token,
+      :account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1106,7 +1415,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] event_source
-    #   The AWS source that emitted the events you want to filter for.
+    #   The Amazon Web Services source that emitted the events you want to
+    #   filter for.
     #   @return [String]
     #
     # @!attribute [rw] data_source
@@ -1115,11 +1425,12 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] resource_collection
-    #   A collection of AWS resources supported by DevOps Guru. The one type
-    #   of AWS resource collection supported is AWS CloudFormation stacks.
-    #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListEventsFilters AWS API Documentation
@@ -1156,6 +1467,7 @@ module Aws::DevOpsGuru
     #         },
     #         max_results: 1,
     #         next_token: "UuidNextToken",
+    #         account_id: "AwsAccountId",
     #       }
     #
     # @!attribute [rw] filters
@@ -1173,12 +1485,17 @@ module Aws::DevOpsGuru
     #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListEventsRequest AWS API Documentation
     #
     class ListEventsRequest < Struct.new(
       :filters,
       :max_results,
-      :next_token)
+      :next_token,
+      :account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1448,6 +1765,95 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListOrganizationInsightsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         status_filter: { # required
+    #           ongoing: {
+    #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
+    #           },
+    #           closed: {
+    #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
+    #             end_time_range: { # required
+    #               from_time: Time.now,
+    #               to_time: Time.now,
+    #             },
+    #           },
+    #           any: {
+    #             type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
+    #             start_time_range: { # required
+    #               from_time: Time.now,
+    #               to_time: Time.now,
+    #             },
+    #           },
+    #         },
+    #         max_results: 1,
+    #         account_ids: ["AwsAccountId"],
+    #         organizational_unit_ids: ["OrganizationalUnitId"],
+    #         next_token: "UuidNextToken",
+    #       }
+    #
+    # @!attribute [rw] status_filter
+    #   A filter used by `ListInsights` to specify which insights to return.
+    #   @return [Types::ListInsightsStatusFilter]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] account_ids
+    #   The ID of the Amazon Web Services account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organizational_unit_ids
+    #   The ID of the organizational unit.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListOrganizationInsightsRequest AWS API Documentation
+    #
+    class ListOrganizationInsightsRequest < Struct.new(
+      :status_filter,
+      :max_results,
+      :account_ids,
+      :organizational_unit_ids,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] proactive_insights
+    #   An integer that specifies the number of open proactive insights in
+    #   your Amazon Web Services account.
+    #   @return [Array<Types::ProactiveOrganizationInsightSummary>]
+    #
+    # @!attribute [rw] reactive_insights
+    #   An integer that specifies the number of open reactive insights in
+    #   your Amazon Web Services account.
+    #   @return [Array<Types::ReactiveOrganizationInsightSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListOrganizationInsightsResponse AWS API Documentation
+    #
+    class ListOrganizationInsightsResponse < Struct.new(
+      :proactive_insights,
+      :reactive_insights,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRecommendationsRequest
     #   data as a hash:
     #
@@ -1455,6 +1861,7 @@ module Aws::DevOpsGuru
     #         insight_id: "InsightId", # required
     #         next_token: "UuidNextToken",
     #         locale: "DE_DE", # accepts DE_DE, EN_US, EN_GB, ES_ES, FR_FR, IT_IT, JA_JP, KO_KR, PT_BR, ZH_CN, ZH_TW
+    #         account_id: "AwsAccountId",
     #       }
     #
     # @!attribute [rw] insight_id
@@ -1470,12 +1877,17 @@ module Aws::DevOpsGuru
     #   A locale that specifies the language to use for recommendations.
     #   @return [String]
     #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListRecommendationsRequest AWS API Documentation
     #
     class ListRecommendationsRequest < Struct.new(
       :insight_id,
       :next_token,
-      :locale)
+      :locale,
+      :account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1509,10 +1921,11 @@ module Aws::DevOpsGuru
     # notifications using Amazon SNS in your account. For more information,
     # see [Permissions for cross account Amazon SNS topics][1].
     #
-    # If you use an Amazon SNS topic that is encrypted by an AWS Key
-    # Management Service customer-managed key (CMK), then you must add
-    # permissions to the CMK. For more information, see [Permissions for AWS
-    # KMS–encrypted Amazon SNS topics][2].
+    # If you use an Amazon SNS topic that is encrypted by an Amazon Web
+    # Services Key Management Service customer-managed key (CMK), then you
+    # must add permissions to the CMK. For more information, see
+    # [Permissions for Amazon Web Services KMS–encrypted Amazon SNS
+    # topics][2].
     #
     #
     #
@@ -1561,10 +1974,11 @@ module Aws::DevOpsGuru
     #   information, see [Permissions for cross account Amazon SNS
     #   topics][1].
     #
-    #   If you use an Amazon SNS topic that is encrypted by an AWS Key
-    #   Management Service customer-managed key (CMK), then you must add
-    #   permissions to the CMK. For more information, see [Permissions for
-    #   AWS KMS–encrypted Amazon SNS topics][2].
+    #   If you use an Amazon SNS topic that is encrypted by an Amazon Web
+    #   Services Key Management Service customer-managed key (CMK), then you
+    #   must add permissions to the CMK. For more information, see
+    #   [Permissions for Amazon Web Services KMS–encrypted Amazon SNS
+    #   topics][2].
     #
     #
     #
@@ -1581,11 +1995,12 @@ module Aws::DevOpsGuru
     end
 
     # Information about whether DevOps Guru is configured to create an
-    # OpsItem in AWS Systems Manager OpsCenter for each created insight.
+    # OpsItem in Amazon Web Services Systems Manager OpsCenter for each
+    # created insight.
     #
     # @!attribute [rw] opt_in_status
-    #   Specifies if DevOps Guru is enabled to create an AWS Systems Manager
-    #   OpsItem for each created insight.
+    #   Specifies if DevOps Guru is enabled to create an Amazon Web Services
+    #   Systems Manager OpsItem for each created insight.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/OpsCenterIntegration AWS API Documentation
@@ -1597,7 +2012,8 @@ module Aws::DevOpsGuru
     end
 
     # Information about whether DevOps Guru is configured to create an
-    # OpsItem in AWS Systems Manager OpsCenter for each created insight.
+    # OpsItem in Amazon Web Services Systems Manager OpsCenter for each
+    # created insight.
     #
     # @note When making an API call, you may pass OpsCenterIntegrationConfig
     #   data as a hash:
@@ -1607,8 +2023,8 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] opt_in_status
-    #   Specifies if DevOps Guru is enabled to create an AWS Systems Manager
-    #   OpsItem for each created insight.
+    #   Specifies if DevOps Guru is enabled to create an Amazon Web Services
+    #   Systems Manager OpsItem for each created insight.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/OpsCenterIntegrationConfig AWS API Documentation
@@ -1689,11 +2105,12 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] resource_collection
-    #   A collection of AWS resources supported by DevOps Guru. The one type
-    #   of AWS resource collection supported is AWS CloudFormation stacks.
-    #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] limit
@@ -1768,11 +2185,12 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] resource_collection
-    #   A collection of AWS resources supported by DevOps Guru. The one type
-    #   of AWS resource collection supported is AWS CloudFormation stacks.
-    #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] limit
@@ -1829,17 +2247,18 @@ module Aws::DevOpsGuru
     #   @return [Types::PredictionTimeRange]
     #
     # @!attribute [rw] resource_collection
-    #   A collection of AWS resources supported by DevOps Guru. The one type
-    #   of AWS resource collection supported is AWS CloudFormation stacks.
-    #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] ssm_ops_item_id
-    #   The ID of the AWS System Manager OpsItem created for this insight.
-    #   You must enable the creation of OpstItems insights before they are
-    #   created for each insight.
+    #   The ID of the Amazon Web Services System Manager OpsItem created for
+    #   this insight. You must enable the creation of OpstItems insights
+    #   before they are created for each insight.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveInsight AWS API Documentation
@@ -1887,21 +2306,89 @@ module Aws::DevOpsGuru
     #   @return [Types::PredictionTimeRange]
     #
     # @!attribute [rw] resource_collection
-    #   A collection of AWS resources supported by DevOps Guru. The one type
-    #   of AWS resource collection supported is AWS CloudFormation stacks.
-    #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] service_collection
-    #   A collection of the names of AWS services.
+    #   A collection of the names of Amazon Web Services services.
     #   @return [Types::ServiceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveInsightSummary AWS API Documentation
     #
     class ProactiveInsightSummary < Struct.new(
       :id,
+      :name,
+      :severity,
+      :status,
+      :insight_time_range,
+      :prediction_time_range,
+      :resource_collection,
+      :service_collection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a proactive insight. This object is returned by
+    # `DescribeInsight`.
+    #
+    # @!attribute [rw] id
+    #   The ID of the insight summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The ID of the organizational unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the insight summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   An array of severity values used to search for insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   An array of status values used to search for insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_time_range
+    #   A time ranged that specifies when the observed behavior in an
+    #   insight started and ended.
+    #   @return [Types::InsightTimeRange]
+    #
+    # @!attribute [rw] prediction_time_range
+    #   The time range during which anomalous behavior in a proactive
+    #   anomaly or an insight is expected to occur.
+    #   @return [Types::PredictionTimeRange]
+    #
+    # @!attribute [rw] resource_collection
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
+    #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] service_collection
+    #   A collection of the names of Amazon Web Services services.
+    #   @return [Types::ServiceCollection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveOrganizationInsightSummary AWS API Documentation
+    #
+    class ProactiveOrganizationInsightSummary < Struct.new(
+      :id,
+      :account_id,
+      :organizational_unit_id,
       :name,
       :severity,
       :status,
@@ -1979,11 +2466,12 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] resource_collection
-    #   A collection of AWS resources supported by DevOps Guru. The one type
-    #   of AWS resource collection supported is AWS CloudFormation stacks.
-    #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveAnomaly AWS API Documentation
@@ -2040,11 +2528,12 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] resource_collection
-    #   A collection of AWS resources supported by DevOps Guru. The one type
-    #   of AWS resource collection supported is AWS CloudFormation stacks.
-    #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveAnomalySummary AWS API Documentation
@@ -2087,17 +2576,18 @@ module Aws::DevOpsGuru
     #   @return [Types::InsightTimeRange]
     #
     # @!attribute [rw] resource_collection
-    #   A collection of AWS resources supported by DevOps Guru. The one type
-    #   of AWS resource collection supported is AWS CloudFormation stacks.
-    #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] ssm_ops_item_id
-    #   The ID of the AWS System Manager OpsItem created for this insight.
-    #   You must enable the creation of OpstItems insights before they are
-    #   created for each insight.
+    #   The ID of the Amazon Web Services System Manager OpsItem created for
+    #   this insight. You must enable the creation of OpstItems insights
+    #   before they are created for each insight.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveInsight AWS API Documentation
@@ -2139,21 +2629,83 @@ module Aws::DevOpsGuru
     #   @return [Types::InsightTimeRange]
     #
     # @!attribute [rw] resource_collection
-    #   A collection of AWS resources supported by DevOps Guru. The one type
-    #   of AWS resource collection supported is AWS CloudFormation stacks.
-    #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] service_collection
-    #   A collection of the names of AWS services.
+    #   A collection of the names of Amazon Web Services services.
     #   @return [Types::ServiceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveInsightSummary AWS API Documentation
     #
     class ReactiveInsightSummary < Struct.new(
       :id,
+      :name,
+      :severity,
+      :status,
+      :insight_time_range,
+      :resource_collection,
+      :service_collection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a reactive insight. This object is returned by
+    # `DescribeInsight`.
+    #
+    # @!attribute [rw] id
+    #   The ID of the insight summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The ID of the organizational unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the insight summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   An array of severity values used to search for insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   An array of status values used to search for insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_time_range
+    #   A time ranged that specifies when the observed behavior in an
+    #   insight started and ended.
+    #   @return [Types::InsightTimeRange]
+    #
+    # @!attribute [rw] resource_collection
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
+    #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] service_collection
+    #   A collection of the names of Amazon Web Services services.
+    #   @return [Types::ServiceCollection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveOrganizationInsightSummary AWS API Documentation
+    #
+    class ReactiveOrganizationInsightSummary < Struct.new(
+      :id,
+      :account_id,
+      :organizational_unit_id,
       :name,
       :severity,
       :status,
@@ -2298,8 +2850,8 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resources
     #   A `ResourceCollection` object that contains arrays of the names of
-    #   AWS CloudFormation stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   Amazon Web Services CloudFormation stacks. You can specify up to 500
+    #   Amazon Web Services CloudFormation stacks.
     #   @return [Array<Types::RecommendationRelatedEventResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/RecommendationRelatedEvent AWS API Documentation
@@ -2311,8 +2863,8 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Information about an AWS resource that emitted and event that is
-    # related to a recommendation in an insight.
+    # Information about an Amazon Web Services resource that emitted and
+    # event that is related to a recommendation in an insight.
     #
     # @!attribute [rw] name
     #   The name of the resource that emitted the event. This corresponds to
@@ -2356,11 +2908,12 @@ module Aws::DevOpsGuru
     #
     class RemoveNotificationChannelResponse < Aws::EmptyStructure; end
 
-    # A collection of AWS resources supported by DevOps Guru. The one type
-    # of AWS resource collection supported is AWS CloudFormation stacks.
-    # DevOps Guru can be configured to analyze only the AWS resources that
-    # are defined in the stacks. You can specify up to 500 AWS
-    # CloudFormation stacks.
+    # A collection of Amazon Web Services resources supported by DevOps
+    # Guru. The one type of Amazon Web Services resource collection
+    # supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    # can be configured to analyze only the Amazon Web Services resources
+    # that are defined in the stacks. You can specify up to 500 Amazon Web
+    # Services CloudFormation stacks.
     #
     # @note When making an API call, you may pass ResourceCollection
     #   data as a hash:
@@ -2372,9 +2925,10 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] cloud_formation
-    #   An array of the names of AWS CloudFormation stacks. The stacks
-    #   define AWS resources that DevOps Guru analyzes. You can specify up
-    #   to 500 AWS CloudFormation stacks.
+    #   An array of the names of Amazon Web Services CloudFormation stacks.
+    #   The stacks define Amazon Web Services resources that DevOps Guru
+    #   analyzes. You can specify up to 500 Amazon Web Services
+    #   CloudFormation stacks.
     #   @return [Types::CloudFormationCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ResourceCollection AWS API Documentation
@@ -2385,14 +2939,14 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Information about a filter used to specify which AWS resources are
-    # analyzed for anomalous behavior by DevOps Guru.
+    # Information about a filter used to specify which Amazon Web Services
+    # resources are analyzed for anomalous behavior by DevOps Guru.
     #
     # @!attribute [rw] cloud_formation
-    #   Information about AWS CloudFormation stacks. You can use up to 500
-    #   stacks to specify which AWS resources in your account to analyze.
-    #   For more information, see [Stacks][1] in the *AWS CloudFormation
-    #   User Guide*.
+    #   Information about Amazon Web Services CloudFormation stacks. You can
+    #   use up to 500 stacks to specify which Amazon Web Services resources
+    #   in your account to analyze. For more information, see [Stacks][1] in
+    #   the *Amazon Web Services CloudFormation User Guide*.
     #
     #
     #
@@ -2413,11 +2967,12 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The ID of the AWS resource that could not be found.
+    #   The ID of the Amazon Web Services resource that could not be found.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of the AWS resource that could not be found.
+    #   The type of the Amazon Web Services resource that could not be
+    #   found.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ResourceNotFoundException AWS API Documentation
@@ -2458,15 +3013,16 @@ module Aws::DevOpsGuru
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_collection
-    #   A collection of AWS resources supported by DevOps Guru. The one type
-    #   of AWS resource collection supported is AWS CloudFormation stacks.
-    #   DevOps Guru can be configured to analyze only the AWS resources that
-    #   are defined in the stacks. You can specify up to 500 AWS
-    #   CloudFormation stacks.
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] service_collection
-    #   A collection of the names of AWS services.
+    #   A collection of the names of Amazon Web Services services.
     #   @return [Types::ServiceCollection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SearchInsightsFilters AWS API Documentation
@@ -2566,7 +3122,152 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # A collection of the names of AWS services.
+    # Filters you can use to specify which events are returned when
+    # `ListEvents` is called.
+    #
+    # @note When making an API call, you may pass SearchOrganizationInsightsFilters
+    #   data as a hash:
+    #
+    #       {
+    #         severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
+    #         statuses: ["ONGOING"], # accepts ONGOING, CLOSED
+    #         resource_collection: {
+    #           cloud_formation: {
+    #             stack_names: ["StackName"],
+    #           },
+    #         },
+    #         service_collection: {
+    #           service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
+    #         },
+    #       }
+    #
+    # @!attribute [rw] severities
+    #   An array of severity values used to search for insights.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] statuses
+    #   An array of status values used to search for insights.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resource_collection
+    #   A collection of Amazon Web Services resources supported by DevOps
+    #   Guru. The one type of Amazon Web Services resource collection
+    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
+    #   can be configured to analyze only the Amazon Web Services resources
+    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Services CloudFormation stacks.
+    #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] service_collection
+    #   A collection of the names of Amazon Web Services services.
+    #   @return [Types::ServiceCollection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SearchOrganizationInsightsFilters AWS API Documentation
+    #
+    class SearchOrganizationInsightsFilters < Struct.new(
+      :severities,
+      :statuses,
+      :resource_collection,
+      :service_collection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchOrganizationInsightsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_ids: ["AwsAccountId"], # required
+    #         start_time_range: { # required
+    #           from_time: Time.now,
+    #           to_time: Time.now,
+    #         },
+    #         filters: {
+    #           severities: ["LOW"], # accepts LOW, MEDIUM, HIGH
+    #           statuses: ["ONGOING"], # accepts ONGOING, CLOSED
+    #           resource_collection: {
+    #             cloud_formation: {
+    #               stack_names: ["StackName"],
+    #             },
+    #           },
+    #           service_collection: {
+    #             service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
+    #           },
+    #         },
+    #         max_results: 1,
+    #         next_token: "UuidNextToken",
+    #         type: "REACTIVE", # required, accepts REACTIVE, PROACTIVE
+    #       }
+    #
+    # @!attribute [rw] account_ids
+    #   The ID of the Amazon Web Services account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] start_time_range
+    #   A time range used to specify when the behavior of an insight or
+    #   anomaly started.
+    #   @return [Types::StartTimeRange]
+    #
+    # @!attribute [rw] filters
+    #   A `SearchOrganizationInsightsFilters` object that is used to set the
+    #   severity and status filters on your insight search.
+    #   @return [Types::SearchOrganizationInsightsFilters]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of insights you are searching for (`REACTIVE` or
+    #   `PROACTIVE`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SearchOrganizationInsightsRequest AWS API Documentation
+    #
+    class SearchOrganizationInsightsRequest < Struct.new(
+      :account_ids,
+      :start_time_range,
+      :filters,
+      :max_results,
+      :next_token,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] proactive_insights
+    #   An integer that specifies the number of open proactive insights in
+    #   your Amazon Web Services account.
+    #   @return [Array<Types::ProactiveInsightSummary>]
+    #
+    # @!attribute [rw] reactive_insights
+    #   An integer that specifies the number of open reactive insights in
+    #   your Amazon Web Services account.
+    #   @return [Array<Types::ReactiveInsightSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SearchOrganizationInsightsResponse AWS API Documentation
+    #
+    class SearchOrganizationInsightsResponse < Struct.new(
+      :proactive_insights,
+      :reactive_insights,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of the names of Amazon Web Services services.
     #
     # @note When making an API call, you may pass ServiceCollection
     #   data as a hash:
@@ -2576,7 +3277,8 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] service_names
-    #   An array of strings that each specifies the name of an AWS service.
+    #   An array of strings that each specifies the name of an Amazon Web
+    #   Services service.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ServiceCollection AWS API Documentation
@@ -2587,14 +3289,14 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Represents the health of an AWS service.
+    # Represents the health of an Amazon Web Services service.
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS service.
+    #   The name of the Amazon Web Services service.
     #   @return [String]
     #
     # @!attribute [rw] insight
-    #   Represents the health of an AWS service. This is a
+    #   Represents the health of an Amazon Web Services service. This is a
     #   `ServiceInsightHealth` that contains the number of open proactive
     #   and reactive insights for this service.
     #   @return [Types::ServiceInsightHealth]
@@ -2609,14 +3311,16 @@ module Aws::DevOpsGuru
     end
 
     # Contains the number of open proactive and reactive insights in an
-    # analyzed AWS service.
+    # analyzed Amazon Web Services service.
     #
     # @!attribute [rw] open_proactive_insights
-    #   The number of open proactive insights in the AWS service
+    #   The number of open proactive insights in the Amazon Web Services
+    #   service
     #   @return [Integer]
     #
     # @!attribute [rw] open_reactive_insights
-    #   The number of open reactive insights in the AWS service
+    #   The number of open reactive insights in the Amazon Web Services
+    #   service
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ServiceInsightHealth AWS API Documentation
@@ -2628,12 +3332,13 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Information about the integration of DevOps Guru with another AWS
-    # service, such as AWS Systems Manager.
+    # Information about the integration of DevOps Guru with another Amazon
+    # Web Services service, such as Amazon Web Services Systems Manager.
     #
     # @!attribute [rw] ops_center
     #   Information about whether DevOps Guru is configured to create an
-    #   OpsItem in AWS Systems Manager OpsCenter for each created insight.
+    #   OpsItem in Amazon Web Services Systems Manager OpsCenter for each
+    #   created insight.
     #   @return [Types::OpsCenterIntegration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ServiceIntegrationConfig AWS API Documentation
@@ -2658,8 +3363,9 @@ module Aws::DevOpsGuru
     end
 
     # An object that contains information about the estimated monthly cost
-    # to analyze an AWS resource. For more information, see [Estimate your
-    # Amazon DevOps Guru costs][1] and [Amazon DevOps Guru pricing][2].
+    # to analyze an Amazon Web Services resource. For more information, see
+    # [Estimate your Amazon DevOps Guru costs][1] and [Amazon DevOps Guru
+    # pricing][2].
     #
     #
     #
@@ -2667,14 +3373,14 @@ module Aws::DevOpsGuru
     # [2]: http://aws.amazon.com/devops-guru/pricing/
     #
     # @!attribute [rw] type
-    #   The type of the AWS resource.
+    #   The type of the Amazon Web Services resource.
     #   @return [String]
     #
     # @!attribute [rw] state
     #   The state of the resource. The resource is `ACTIVE` if it produces
     #   metrics, events, or logs within an hour, otherwise it is `INACTIVE`.
-    #   You pay for the number of active AWS resource hours analyzed for
-    #   each resource. Inactive resources are not charged.
+    #   You pay for the number of active Amazon Web Services resource hours
+    #   analyzed for each resource. Inactive resources are not charged.
     #   @return [String]
     #
     # @!attribute [rw] count
@@ -2719,10 +3425,11 @@ module Aws::DevOpsGuru
     # notifications using Amazon SNS in your account. For more information,
     # see [Permissions for cross account Amazon SNS topics][1].
     #
-    # If you use an Amazon SNS topic that is encrypted by an AWS Key
-    # Management Service customer-managed key (CMK), then you must add
-    # permissions to the CMK. For more information, see [Permissions for AWS
-    # KMS–encrypted Amazon SNS topics][2].
+    # If you use an Amazon SNS topic that is encrypted by an Amazon Web
+    # Services Key Management Service customer-managed key (CMK), then you
+    # must add permissions to the CMK. For more information, see
+    # [Permissions for Amazon Web Services KMS–encrypted Amazon SNS
+    # topics][2].
     #
     #
     #
@@ -2762,8 +3469,8 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] resource_collection
-    #   The collection of AWS resources used to create a monthly DevOps Guru
-    #   cost estimate.
+    #   The collection of Amazon Web Services resources used to create a
+    #   monthly DevOps Guru cost estimate.
     #   @return [Types::CostEstimationResourceCollectionFilter]
     #
     # @!attribute [rw] client_token
@@ -2844,9 +3551,28 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Contains the names of AWS CloudFormation stacks used to update a
-    # collection of stacks. You can specify up to 500 AWS CloudFormation
-    # stacks.
+    # A pair that contains metric values at the respective timestamp.
+    #
+    # @!attribute [rw] timestamp
+    #   A `Timestamp` that specifies the time the event occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metric_value
+    #   Value of the anomalous metric data point at respective Timestamp.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/TimestampMetricValuePair AWS API Documentation
+    #
+    class TimestampMetricValuePair < Struct.new(
+      :timestamp,
+      :metric_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the names of Amazon Web Services CloudFormation stacks used
+    # to update a collection of stacks. You can specify up to 500 Amazon Web
+    # Services CloudFormation stacks.
     #
     # @note When making an API call, you may pass UpdateCloudFormationCollectionFilter
     #   data as a hash:
@@ -2856,8 +3582,9 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] stack_names
-    #   An array of the names of the AWS CloudFormation stacks to update.
-    #   You can specify up to 500 AWS CloudFormation stacks.
+    #   An array of the names of the Amazon Web Services CloudFormation
+    #   stacks to update. You can specify up to 500 Amazon Web Services
+    #   CloudFormation stacks.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateCloudFormationCollectionFilter AWS API Documentation
@@ -2868,7 +3595,8 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Contains information used to update a collection of AWS resources.
+    # Contains information used to update a collection of Amazon Web
+    # Services resources.
     #
     # @note When making an API call, you may pass UpdateResourceCollectionFilter
     #   data as a hash:
@@ -2880,8 +3608,8 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] cloud_formation
-    #   An collection of AWS CloudFormation stacks. You can specify up to
-    #   500 AWS CloudFormation stacks.
+    #   An collection of Amazon Web Services CloudFormation stacks. You can
+    #   specify up to 500 Amazon Web Services CloudFormation stacks.
     #   @return [Types::UpdateCloudFormationCollectionFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateResourceCollectionFilter AWS API Documentation
@@ -2910,7 +3638,8 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] resource_collection
-    #   Contains information used to update a collection of AWS resources.
+    #   Contains information used to update a collection of Amazon Web
+    #   Services resources.
     #   @return [Types::UpdateResourceCollectionFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateResourceCollectionRequest AWS API Documentation
@@ -2926,8 +3655,9 @@ module Aws::DevOpsGuru
     #
     class UpdateResourceCollectionResponse < Aws::EmptyStructure; end
 
-    # Information about updating the integration status of an AWS service,
-    # such as AWS Systems Manager, with DevOps Guru.
+    # Information about updating the integration status of an Amazon Web
+    # Services service, such as Amazon Web Services Systems Manager, with
+    # DevOps Guru.
     #
     # @note When making an API call, you may pass UpdateServiceIntegrationConfig
     #   data as a hash:
@@ -2940,7 +3670,8 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] ops_center
     #   Information about whether DevOps Guru is configured to create an
-    #   OpsItem in AWS Systems Manager OpsCenter for each created insight.
+    #   OpsItem in Amazon Web Services Systems Manager OpsCenter for each
+    #   created insight.
     #   @return [Types::OpsCenterIntegrationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateServiceIntegrationConfig AWS API Documentation

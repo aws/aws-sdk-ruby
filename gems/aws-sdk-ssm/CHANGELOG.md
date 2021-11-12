@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2021-11-12)
+------------------
+
+* Feature - This Patch Manager release supports creating Patch Baselines for RaspberryPi OS (formerly Raspbian)
+
 1.121.0 (2021-11-04)
 ------------------
 

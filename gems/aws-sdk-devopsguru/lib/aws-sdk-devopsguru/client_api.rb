@@ -14,6 +14,10 @@ module Aws::DevOpsGuru
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountHealth = Shapes::StructureShape.new(name: 'AccountHealth')
+    AccountHealths = Shapes::ListShape.new(name: 'AccountHealths')
+    AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
+    AccountInsightHealth = Shapes::StructureShape.new(name: 'AccountInsightHealth')
     AddNotificationChannelRequest = Shapes::StructureShape.new(name: 'AddNotificationChannelRequest')
     AddNotificationChannelResponse = Shapes::StructureShape.new(name: 'AddNotificationChannelResponse')
     AnomalyId = Shapes::StringShape.new(name: 'AnomalyId')
@@ -23,6 +27,7 @@ module Aws::DevOpsGuru
     AnomalySourceDetails = Shapes::StructureShape.new(name: 'AnomalySourceDetails')
     AnomalyStatus = Shapes::StringShape.new(name: 'AnomalyStatus')
     AnomalyTimeRange = Shapes::StructureShape.new(name: 'AnomalyTimeRange')
+    AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     Channels = Shapes::ListShape.new(name: 'Channels')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudFormationCollection = Shapes::StructureShape.new(name: 'CloudFormationCollection')
@@ -30,6 +35,8 @@ module Aws::DevOpsGuru
     CloudFormationCostEstimationResourceCollectionFilter = Shapes::StructureShape.new(name: 'CloudFormationCostEstimationResourceCollectionFilter')
     CloudFormationHealth = Shapes::StructureShape.new(name: 'CloudFormationHealth')
     CloudFormationHealths = Shapes::ListShape.new(name: 'CloudFormationHealths')
+    CloudWatchMetricDataStatusCode = Shapes::StringShape.new(name: 'CloudWatchMetricDataStatusCode')
+    CloudWatchMetricsDataSummary = Shapes::StructureShape.new(name: 'CloudWatchMetricsDataSummary')
     CloudWatchMetricsDetail = Shapes::StructureShape.new(name: 'CloudWatchMetricsDetail')
     CloudWatchMetricsDetails = Shapes::ListShape.new(name: 'CloudWatchMetricsDetails')
     CloudWatchMetricsDimension = Shapes::StructureShape.new(name: 'CloudWatchMetricsDimension')
@@ -59,6 +66,12 @@ module Aws::DevOpsGuru
     DescribeFeedbackResponse = Shapes::StructureShape.new(name: 'DescribeFeedbackResponse')
     DescribeInsightRequest = Shapes::StructureShape.new(name: 'DescribeInsightRequest')
     DescribeInsightResponse = Shapes::StructureShape.new(name: 'DescribeInsightResponse')
+    DescribeOrganizationHealthRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationHealthRequest')
+    DescribeOrganizationHealthResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationHealthResponse')
+    DescribeOrganizationOverviewRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationOverviewRequest')
+    DescribeOrganizationOverviewResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationOverviewResponse')
+    DescribeOrganizationResourceCollectionHealthRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationResourceCollectionHealthRequest')
+    DescribeOrganizationResourceCollectionHealthResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationResourceCollectionHealthResponse')
     DescribeResourceCollectionHealthRequest = Shapes::StructureShape.new(name: 'DescribeResourceCollectionHealthRequest')
     DescribeResourceCollectionHealthResponse = Shapes::StructureShape.new(name: 'DescribeResourceCollectionHealthResponse')
     DescribeServiceIntegrationRequest = Shapes::StructureShape.new(name: 'DescribeServiceIntegrationRequest')
@@ -104,19 +117,24 @@ module Aws::DevOpsGuru
     ListEventsMaxResults = Shapes::IntegerShape.new(name: 'ListEventsMaxResults')
     ListEventsRequest = Shapes::StructureShape.new(name: 'ListEventsRequest')
     ListEventsResponse = Shapes::StructureShape.new(name: 'ListEventsResponse')
+    ListInsightsAccountIdList = Shapes::ListShape.new(name: 'ListInsightsAccountIdList')
     ListInsightsAnyStatusFilter = Shapes::StructureShape.new(name: 'ListInsightsAnyStatusFilter')
     ListInsightsClosedStatusFilter = Shapes::StructureShape.new(name: 'ListInsightsClosedStatusFilter')
     ListInsightsMaxResults = Shapes::IntegerShape.new(name: 'ListInsightsMaxResults')
     ListInsightsOngoingStatusFilter = Shapes::StructureShape.new(name: 'ListInsightsOngoingStatusFilter')
+    ListInsightsOrganizationalUnitIdList = Shapes::ListShape.new(name: 'ListInsightsOrganizationalUnitIdList')
     ListInsightsRequest = Shapes::StructureShape.new(name: 'ListInsightsRequest')
     ListInsightsResponse = Shapes::StructureShape.new(name: 'ListInsightsResponse')
     ListInsightsStatusFilter = Shapes::StructureShape.new(name: 'ListInsightsStatusFilter')
     ListNotificationChannelsRequest = Shapes::StructureShape.new(name: 'ListNotificationChannelsRequest')
     ListNotificationChannelsResponse = Shapes::StructureShape.new(name: 'ListNotificationChannelsResponse')
+    ListOrganizationInsightsRequest = Shapes::StructureShape.new(name: 'ListOrganizationInsightsRequest')
+    ListOrganizationInsightsResponse = Shapes::StructureShape.new(name: 'ListOrganizationInsightsResponse')
     ListRecommendationsRequest = Shapes::StructureShape.new(name: 'ListRecommendationsRequest')
     ListRecommendationsResponse = Shapes::StructureShape.new(name: 'ListRecommendationsResponse')
     Locale = Shapes::StringShape.new(name: 'Locale')
     MeanTimeToRecoverInMilliseconds = Shapes::IntegerShape.new(name: 'MeanTimeToRecoverInMilliseconds')
+    MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
     NotificationChannelConfig = Shapes::StructureShape.new(name: 'NotificationChannelConfig')
     NotificationChannelId = Shapes::StringShape.new(name: 'NotificationChannelId')
@@ -128,6 +146,10 @@ module Aws::DevOpsGuru
     OpsCenterIntegration = Shapes::StructureShape.new(name: 'OpsCenterIntegration')
     OpsCenterIntegrationConfig = Shapes::StructureShape.new(name: 'OpsCenterIntegrationConfig')
     OptInStatus = Shapes::StringShape.new(name: 'OptInStatus')
+    OrganizationResourceCollectionMaxResults = Shapes::IntegerShape.new(name: 'OrganizationResourceCollectionMaxResults')
+    OrganizationResourceCollectionType = Shapes::StringShape.new(name: 'OrganizationResourceCollectionType')
+    OrganizationalUnitId = Shapes::StringShape.new(name: 'OrganizationalUnitId')
+    OrganizationalUnitIdList = Shapes::ListShape.new(name: 'OrganizationalUnitIdList')
     PredictionTimeRange = Shapes::StructureShape.new(name: 'PredictionTimeRange')
     ProactiveAnomalies = Shapes::ListShape.new(name: 'ProactiveAnomalies')
     ProactiveAnomaly = Shapes::StructureShape.new(name: 'ProactiveAnomaly')
@@ -135,6 +157,8 @@ module Aws::DevOpsGuru
     ProactiveInsight = Shapes::StructureShape.new(name: 'ProactiveInsight')
     ProactiveInsightSummary = Shapes::StructureShape.new(name: 'ProactiveInsightSummary')
     ProactiveInsights = Shapes::ListShape.new(name: 'ProactiveInsights')
+    ProactiveOrganizationInsightSummary = Shapes::StructureShape.new(name: 'ProactiveOrganizationInsightSummary')
+    ProactiveOrganizationInsights = Shapes::ListShape.new(name: 'ProactiveOrganizationInsights')
     PutFeedbackRequest = Shapes::StructureShape.new(name: 'PutFeedbackRequest')
     PutFeedbackResponse = Shapes::StructureShape.new(name: 'PutFeedbackResponse')
     ReactiveAnomalies = Shapes::ListShape.new(name: 'ReactiveAnomalies')
@@ -143,6 +167,8 @@ module Aws::DevOpsGuru
     ReactiveInsight = Shapes::StructureShape.new(name: 'ReactiveInsight')
     ReactiveInsightSummary = Shapes::StructureShape.new(name: 'ReactiveInsightSummary')
     ReactiveInsights = Shapes::ListShape.new(name: 'ReactiveInsights')
+    ReactiveOrganizationInsightSummary = Shapes::StructureShape.new(name: 'ReactiveOrganizationInsightSummary')
+    ReactiveOrganizationInsights = Shapes::ListShape.new(name: 'ReactiveOrganizationInsights')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     RecommendationDescription = Shapes::StringShape.new(name: 'RecommendationDescription')
     RecommendationLink = Shapes::StringShape.new(name: 'RecommendationLink')
@@ -179,10 +205,15 @@ module Aws::DevOpsGuru
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
+    SearchInsightsAccountIdList = Shapes::ListShape.new(name: 'SearchInsightsAccountIdList')
     SearchInsightsFilters = Shapes::StructureShape.new(name: 'SearchInsightsFilters')
     SearchInsightsMaxResults = Shapes::IntegerShape.new(name: 'SearchInsightsMaxResults')
     SearchInsightsRequest = Shapes::StructureShape.new(name: 'SearchInsightsRequest')
     SearchInsightsResponse = Shapes::StructureShape.new(name: 'SearchInsightsResponse')
+    SearchOrganizationInsightsFilters = Shapes::StructureShape.new(name: 'SearchOrganizationInsightsFilters')
+    SearchOrganizationInsightsMaxResults = Shapes::IntegerShape.new(name: 'SearchOrganizationInsightsMaxResults')
+    SearchOrganizationInsightsRequest = Shapes::StructureShape.new(name: 'SearchOrganizationInsightsRequest')
+    SearchOrganizationInsightsResponse = Shapes::StructureShape.new(name: 'SearchOrganizationInsightsResponse')
     ServiceCollection = Shapes::StructureShape.new(name: 'ServiceCollection')
     ServiceHealth = Shapes::StructureShape.new(name: 'ServiceHealth')
     ServiceHealths = Shapes::ListShape.new(name: 'ServiceHealths')
@@ -202,6 +233,8 @@ module Aws::DevOpsGuru
     StartTimeRange = Shapes::StructureShape.new(name: 'StartTimeRange')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TimestampMetricValuePair = Shapes::StructureShape.new(name: 'TimestampMetricValuePair')
+    TimestampMetricValuePairList = Shapes::ListShape.new(name: 'TimestampMetricValuePairList')
     TopicArn = Shapes::StringShape.new(name: 'TopicArn')
     UpdateCloudFormationCollectionFilter = Shapes::StructureShape.new(name: 'UpdateCloudFormationCollectionFilter')
     UpdateResourceCollectionAction = Shapes::StringShape.new(name: 'UpdateResourceCollectionAction')
@@ -220,6 +253,18 @@ module Aws::DevOpsGuru
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageString, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountHealth.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AccountId"))
+    AccountHealth.add_member(:insight, Shapes::ShapeRef.new(shape: AccountInsightHealth, location_name: "Insight"))
+    AccountHealth.struct_class = Types::AccountHealth
+
+    AccountHealths.member = Shapes::ShapeRef.new(shape: AccountHealth)
+
+    AccountIdList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
+
+    AccountInsightHealth.add_member(:open_proactive_insights, Shapes::ShapeRef.new(shape: NumOpenProactiveInsights, location_name: "OpenProactiveInsights"))
+    AccountInsightHealth.add_member(:open_reactive_insights, Shapes::ShapeRef.new(shape: NumOpenReactiveInsights, location_name: "OpenReactiveInsights"))
+    AccountInsightHealth.struct_class = Types::AccountInsightHealth
 
     AddNotificationChannelRequest.add_member(:config, Shapes::ShapeRef.new(shape: NotificationChannelConfig, required: true, location_name: "Config"))
     AddNotificationChannelRequest.struct_class = Types::AddNotificationChannelRequest
@@ -255,12 +300,17 @@ module Aws::DevOpsGuru
 
     CloudFormationHealths.member = Shapes::ShapeRef.new(shape: CloudFormationHealth)
 
+    CloudWatchMetricsDataSummary.add_member(:timestamp_metric_value_pair_list, Shapes::ShapeRef.new(shape: TimestampMetricValuePairList, location_name: "TimestampMetricValuePairList"))
+    CloudWatchMetricsDataSummary.add_member(:status_code, Shapes::ShapeRef.new(shape: CloudWatchMetricDataStatusCode, location_name: "StatusCode"))
+    CloudWatchMetricsDataSummary.struct_class = Types::CloudWatchMetricsDataSummary
+
     CloudWatchMetricsDetail.add_member(:metric_name, Shapes::ShapeRef.new(shape: CloudWatchMetricsMetricName, location_name: "MetricName"))
     CloudWatchMetricsDetail.add_member(:namespace, Shapes::ShapeRef.new(shape: CloudWatchMetricsNamespace, location_name: "Namespace"))
     CloudWatchMetricsDetail.add_member(:dimensions, Shapes::ShapeRef.new(shape: CloudWatchMetricsDimensions, location_name: "Dimensions"))
     CloudWatchMetricsDetail.add_member(:stat, Shapes::ShapeRef.new(shape: CloudWatchMetricsStat, location_name: "Stat"))
     CloudWatchMetricsDetail.add_member(:unit, Shapes::ShapeRef.new(shape: CloudWatchMetricsUnit, location_name: "Unit"))
     CloudWatchMetricsDetail.add_member(:period, Shapes::ShapeRef.new(shape: CloudWatchMetricsPeriod, location_name: "Period"))
+    CloudWatchMetricsDetail.add_member(:metric_data_summary, Shapes::ShapeRef.new(shape: CloudWatchMetricsDataSummary, location_name: "MetricDataSummary"))
     CloudWatchMetricsDetail.struct_class = Types::CloudWatchMetricsDetail
 
     CloudWatchMetricsDetails.member = Shapes::ShapeRef.new(shape: CloudWatchMetricsDetail)
@@ -303,6 +353,7 @@ module Aws::DevOpsGuru
     DescribeAccountOverviewResponse.struct_class = Types::DescribeAccountOverviewResponse
 
     DescribeAnomalyRequest.add_member(:id, Shapes::ShapeRef.new(shape: AnomalyId, required: true, location: "uri", location_name: "Id"))
+    DescribeAnomalyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location: "querystring", location_name: "AccountId"))
     DescribeAnomalyRequest.struct_class = Types::DescribeAnomalyRequest
 
     DescribeAnomalyResponse.add_member(:proactive_anomaly, Shapes::ShapeRef.new(shape: ProactiveAnomaly, location_name: "ProactiveAnomaly"))
@@ -316,11 +367,45 @@ module Aws::DevOpsGuru
     DescribeFeedbackResponse.struct_class = Types::DescribeFeedbackResponse
 
     DescribeInsightRequest.add_member(:id, Shapes::ShapeRef.new(shape: InsightId, required: true, location: "uri", location_name: "Id"))
+    DescribeInsightRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location: "querystring", location_name: "AccountId"))
     DescribeInsightRequest.struct_class = Types::DescribeInsightRequest
 
     DescribeInsightResponse.add_member(:proactive_insight, Shapes::ShapeRef.new(shape: ProactiveInsight, location_name: "ProactiveInsight"))
     DescribeInsightResponse.add_member(:reactive_insight, Shapes::ShapeRef.new(shape: ReactiveInsight, location_name: "ReactiveInsight"))
     DescribeInsightResponse.struct_class = Types::DescribeInsightResponse
+
+    DescribeOrganizationHealthRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIds"))
+    DescribeOrganizationHealthRequest.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
+    DescribeOrganizationHealthRequest.struct_class = Types::DescribeOrganizationHealthRequest
+
+    DescribeOrganizationHealthResponse.add_member(:open_reactive_insights, Shapes::ShapeRef.new(shape: NumOpenReactiveInsights, required: true, location_name: "OpenReactiveInsights"))
+    DescribeOrganizationHealthResponse.add_member(:open_proactive_insights, Shapes::ShapeRef.new(shape: NumOpenProactiveInsights, required: true, location_name: "OpenProactiveInsights"))
+    DescribeOrganizationHealthResponse.add_member(:metrics_analyzed, Shapes::ShapeRef.new(shape: NumMetricsAnalyzed, required: true, location_name: "MetricsAnalyzed"))
+    DescribeOrganizationHealthResponse.add_member(:resource_hours, Shapes::ShapeRef.new(shape: ResourceHours, required: true, location_name: "ResourceHours"))
+    DescribeOrganizationHealthResponse.struct_class = Types::DescribeOrganizationHealthResponse
+
+    DescribeOrganizationOverviewRequest.add_member(:from_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "FromTime"))
+    DescribeOrganizationOverviewRequest.add_member(:to_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ToTime"))
+    DescribeOrganizationOverviewRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIds"))
+    DescribeOrganizationOverviewRequest.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
+    DescribeOrganizationOverviewRequest.struct_class = Types::DescribeOrganizationOverviewRequest
+
+    DescribeOrganizationOverviewResponse.add_member(:reactive_insights, Shapes::ShapeRef.new(shape: NumReactiveInsights, required: true, location_name: "ReactiveInsights"))
+    DescribeOrganizationOverviewResponse.add_member(:proactive_insights, Shapes::ShapeRef.new(shape: NumProactiveInsights, required: true, location_name: "ProactiveInsights"))
+    DescribeOrganizationOverviewResponse.struct_class = Types::DescribeOrganizationOverviewResponse
+
+    DescribeOrganizationResourceCollectionHealthRequest.add_member(:organization_resource_collection_type, Shapes::ShapeRef.new(shape: OrganizationResourceCollectionType, required: true, location_name: "OrganizationResourceCollectionType"))
+    DescribeOrganizationResourceCollectionHealthRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIds"))
+    DescribeOrganizationResourceCollectionHealthRequest.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
+    DescribeOrganizationResourceCollectionHealthRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    DescribeOrganizationResourceCollectionHealthRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: OrganizationResourceCollectionMaxResults, location_name: "MaxResults"))
+    DescribeOrganizationResourceCollectionHealthRequest.struct_class = Types::DescribeOrganizationResourceCollectionHealthRequest
+
+    DescribeOrganizationResourceCollectionHealthResponse.add_member(:cloud_formation, Shapes::ShapeRef.new(shape: CloudFormationHealths, location_name: "CloudFormation"))
+    DescribeOrganizationResourceCollectionHealthResponse.add_member(:service, Shapes::ShapeRef.new(shape: ServiceHealths, location_name: "Service"))
+    DescribeOrganizationResourceCollectionHealthResponse.add_member(:account, Shapes::ShapeRef.new(shape: AccountHealths, location_name: "Account"))
+    DescribeOrganizationResourceCollectionHealthResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    DescribeOrganizationResourceCollectionHealthResponse.struct_class = Types::DescribeOrganizationResourceCollectionHealthResponse
 
     DescribeResourceCollectionHealthRequest.add_member(:resource_collection_type, Shapes::ShapeRef.new(shape: ResourceCollectionType, required: true, location: "uri", location_name: "ResourceCollectionType"))
     DescribeResourceCollectionHealthRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location: "querystring", location_name: "NextToken"))
@@ -407,6 +492,7 @@ module Aws::DevOpsGuru
     ListAnomaliesForInsightRequest.add_member(:start_time_range, Shapes::ShapeRef.new(shape: StartTimeRange, location_name: "StartTimeRange"))
     ListAnomaliesForInsightRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListAnomaliesForInsightMaxResults, location_name: "MaxResults"))
     ListAnomaliesForInsightRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    ListAnomaliesForInsightRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AccountId"))
     ListAnomaliesForInsightRequest.struct_class = Types::ListAnomaliesForInsightRequest
 
     ListAnomaliesForInsightResponse.add_member(:proactive_anomalies, Shapes::ShapeRef.new(shape: ProactiveAnomalies, location_name: "ProactiveAnomalies"))
@@ -425,11 +511,14 @@ module Aws::DevOpsGuru
     ListEventsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListEventsFilters, required: true, location_name: "Filters"))
     ListEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEventsMaxResults, location_name: "MaxResults"))
     ListEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    ListEventsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AccountId"))
     ListEventsRequest.struct_class = Types::ListEventsRequest
 
     ListEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: Events, required: true, location_name: "Events"))
     ListEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
     ListEventsResponse.struct_class = Types::ListEventsResponse
+
+    ListInsightsAccountIdList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
 
     ListInsightsAnyStatusFilter.add_member(:type, Shapes::ShapeRef.new(shape: InsightType, required: true, location_name: "Type"))
     ListInsightsAnyStatusFilter.add_member(:start_time_range, Shapes::ShapeRef.new(shape: StartTimeRange, required: true, location_name: "StartTimeRange"))
@@ -441,6 +530,8 @@ module Aws::DevOpsGuru
 
     ListInsightsOngoingStatusFilter.add_member(:type, Shapes::ShapeRef.new(shape: InsightType, required: true, location_name: "Type"))
     ListInsightsOngoingStatusFilter.struct_class = Types::ListInsightsOngoingStatusFilter
+
+    ListInsightsOrganizationalUnitIdList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
 
     ListInsightsRequest.add_member(:status_filter, Shapes::ShapeRef.new(shape: ListInsightsStatusFilter, required: true, location_name: "StatusFilter"))
     ListInsightsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListInsightsMaxResults, location_name: "MaxResults"))
@@ -464,9 +555,22 @@ module Aws::DevOpsGuru
     ListNotificationChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
     ListNotificationChannelsResponse.struct_class = Types::ListNotificationChannelsResponse
 
+    ListOrganizationInsightsRequest.add_member(:status_filter, Shapes::ShapeRef.new(shape: ListInsightsStatusFilter, required: true, location_name: "StatusFilter"))
+    ListOrganizationInsightsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListInsightsMaxResults, location_name: "MaxResults"))
+    ListOrganizationInsightsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: ListInsightsAccountIdList, location_name: "AccountIds"))
+    ListOrganizationInsightsRequest.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: ListInsightsOrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
+    ListOrganizationInsightsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    ListOrganizationInsightsRequest.struct_class = Types::ListOrganizationInsightsRequest
+
+    ListOrganizationInsightsResponse.add_member(:proactive_insights, Shapes::ShapeRef.new(shape: ProactiveOrganizationInsights, location_name: "ProactiveInsights"))
+    ListOrganizationInsightsResponse.add_member(:reactive_insights, Shapes::ShapeRef.new(shape: ReactiveOrganizationInsights, location_name: "ReactiveInsights"))
+    ListOrganizationInsightsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    ListOrganizationInsightsResponse.struct_class = Types::ListOrganizationInsightsResponse
+
     ListRecommendationsRequest.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, required: true, location_name: "InsightId"))
     ListRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
     ListRecommendationsRequest.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "Locale"))
+    ListRecommendationsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AccountId"))
     ListRecommendationsRequest.struct_class = Types::ListRecommendationsRequest
 
     ListRecommendationsResponse.add_member(:recommendations, Shapes::ShapeRef.new(shape: Recommendations, location_name: "Recommendations"))
@@ -485,6 +589,8 @@ module Aws::DevOpsGuru
 
     OpsCenterIntegrationConfig.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: OptInStatus, location_name: "OptInStatus"))
     OpsCenterIntegrationConfig.struct_class = Types::OpsCenterIntegrationConfig
+
+    OrganizationalUnitIdList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
 
     PredictionTimeRange.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     PredictionTimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
@@ -540,6 +646,20 @@ module Aws::DevOpsGuru
 
     ProactiveInsights.member = Shapes::ShapeRef.new(shape: ProactiveInsightSummary)
 
+    ProactiveOrganizationInsightSummary.add_member(:id, Shapes::ShapeRef.new(shape: InsightId, location_name: "Id"))
+    ProactiveOrganizationInsightSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AccountId"))
+    ProactiveOrganizationInsightSummary.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
+    ProactiveOrganizationInsightSummary.add_member(:name, Shapes::ShapeRef.new(shape: InsightName, location_name: "Name"))
+    ProactiveOrganizationInsightSummary.add_member(:severity, Shapes::ShapeRef.new(shape: InsightSeverity, location_name: "Severity"))
+    ProactiveOrganizationInsightSummary.add_member(:status, Shapes::ShapeRef.new(shape: InsightStatus, location_name: "Status"))
+    ProactiveOrganizationInsightSummary.add_member(:insight_time_range, Shapes::ShapeRef.new(shape: InsightTimeRange, location_name: "InsightTimeRange"))
+    ProactiveOrganizationInsightSummary.add_member(:prediction_time_range, Shapes::ShapeRef.new(shape: PredictionTimeRange, location_name: "PredictionTimeRange"))
+    ProactiveOrganizationInsightSummary.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
+    ProactiveOrganizationInsightSummary.add_member(:service_collection, Shapes::ShapeRef.new(shape: ServiceCollection, location_name: "ServiceCollection"))
+    ProactiveOrganizationInsightSummary.struct_class = Types::ProactiveOrganizationInsightSummary
+
+    ProactiveOrganizationInsights.member = Shapes::ShapeRef.new(shape: ProactiveOrganizationInsightSummary)
+
     PutFeedbackRequest.add_member(:insight_feedback, Shapes::ShapeRef.new(shape: InsightFeedback, location_name: "InsightFeedback"))
     PutFeedbackRequest.struct_class = Types::PutFeedbackRequest
 
@@ -586,6 +706,19 @@ module Aws::DevOpsGuru
     ReactiveInsightSummary.struct_class = Types::ReactiveInsightSummary
 
     ReactiveInsights.member = Shapes::ShapeRef.new(shape: ReactiveInsightSummary)
+
+    ReactiveOrganizationInsightSummary.add_member(:id, Shapes::ShapeRef.new(shape: InsightId, location_name: "Id"))
+    ReactiveOrganizationInsightSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "AccountId"))
+    ReactiveOrganizationInsightSummary.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
+    ReactiveOrganizationInsightSummary.add_member(:name, Shapes::ShapeRef.new(shape: InsightName, location_name: "Name"))
+    ReactiveOrganizationInsightSummary.add_member(:severity, Shapes::ShapeRef.new(shape: InsightSeverity, location_name: "Severity"))
+    ReactiveOrganizationInsightSummary.add_member(:status, Shapes::ShapeRef.new(shape: InsightStatus, location_name: "Status"))
+    ReactiveOrganizationInsightSummary.add_member(:insight_time_range, Shapes::ShapeRef.new(shape: InsightTimeRange, location_name: "InsightTimeRange"))
+    ReactiveOrganizationInsightSummary.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
+    ReactiveOrganizationInsightSummary.add_member(:service_collection, Shapes::ShapeRef.new(shape: ServiceCollection, location_name: "ServiceCollection"))
+    ReactiveOrganizationInsightSummary.struct_class = Types::ReactiveOrganizationInsightSummary
+
+    ReactiveOrganizationInsights.member = Shapes::ShapeRef.new(shape: ReactiveOrganizationInsightSummary)
 
     Recommendation.add_member(:description, Shapes::ShapeRef.new(shape: RecommendationDescription, location_name: "Description"))
     Recommendation.add_member(:link, Shapes::ShapeRef.new(shape: RecommendationLink, location_name: "Link"))
@@ -648,6 +781,8 @@ module Aws::DevOpsGuru
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location_name: "ResourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    SearchInsightsAccountIdList.member = Shapes::ShapeRef.new(shape: AwsAccountId)
+
     SearchInsightsFilters.add_member(:severities, Shapes::ShapeRef.new(shape: InsightSeverities, location_name: "Severities"))
     SearchInsightsFilters.add_member(:statuses, Shapes::ShapeRef.new(shape: InsightStatuses, location_name: "Statuses"))
     SearchInsightsFilters.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
@@ -665,6 +800,25 @@ module Aws::DevOpsGuru
     SearchInsightsResponse.add_member(:reactive_insights, Shapes::ShapeRef.new(shape: ReactiveInsights, location_name: "ReactiveInsights"))
     SearchInsightsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
     SearchInsightsResponse.struct_class = Types::SearchInsightsResponse
+
+    SearchOrganizationInsightsFilters.add_member(:severities, Shapes::ShapeRef.new(shape: InsightSeverities, location_name: "Severities"))
+    SearchOrganizationInsightsFilters.add_member(:statuses, Shapes::ShapeRef.new(shape: InsightStatuses, location_name: "Statuses"))
+    SearchOrganizationInsightsFilters.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
+    SearchOrganizationInsightsFilters.add_member(:service_collection, Shapes::ShapeRef.new(shape: ServiceCollection, location_name: "ServiceCollection"))
+    SearchOrganizationInsightsFilters.struct_class = Types::SearchOrganizationInsightsFilters
+
+    SearchOrganizationInsightsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: SearchInsightsAccountIdList, required: true, location_name: "AccountIds"))
+    SearchOrganizationInsightsRequest.add_member(:start_time_range, Shapes::ShapeRef.new(shape: StartTimeRange, required: true, location_name: "StartTimeRange"))
+    SearchOrganizationInsightsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SearchOrganizationInsightsFilters, location_name: "Filters"))
+    SearchOrganizationInsightsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchOrganizationInsightsMaxResults, location_name: "MaxResults"))
+    SearchOrganizationInsightsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    SearchOrganizationInsightsRequest.add_member(:type, Shapes::ShapeRef.new(shape: InsightType, required: true, location_name: "Type"))
+    SearchOrganizationInsightsRequest.struct_class = Types::SearchOrganizationInsightsRequest
+
+    SearchOrganizationInsightsResponse.add_member(:proactive_insights, Shapes::ShapeRef.new(shape: ProactiveInsights, location_name: "ProactiveInsights"))
+    SearchOrganizationInsightsResponse.add_member(:reactive_insights, Shapes::ShapeRef.new(shape: ReactiveInsights, location_name: "ReactiveInsights"))
+    SearchOrganizationInsightsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    SearchOrganizationInsightsResponse.struct_class = Types::SearchOrganizationInsightsResponse
 
     ServiceCollection.add_member(:service_names, Shapes::ShapeRef.new(shape: ServiceNames, location_name: "ServiceNames"))
     ServiceCollection.struct_class = Types::ServiceCollection
@@ -716,6 +870,12 @@ module Aws::DevOpsGuru
     ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: ErrorServiceCodeString, location_name: "ServiceCode"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TimestampMetricValuePair.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    TimestampMetricValuePair.add_member(:metric_value, Shapes::ShapeRef.new(shape: MetricValue, location_name: "MetricValue"))
+    TimestampMetricValuePair.struct_class = Types::TimestampMetricValuePair
+
+    TimestampMetricValuePairList.member = Shapes::ShapeRef.new(shape: TimestampMetricValuePair)
 
     UpdateCloudFormationCollectionFilter.add_member(:stack_names, Shapes::ShapeRef.new(shape: UpdateStackNames, location_name: "StackNames"))
     UpdateCloudFormationCollectionFilter.struct_class = Types::UpdateCloudFormationCollectionFilter
@@ -844,6 +1004,47 @@ module Aws::DevOpsGuru
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_organization_health, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOrganizationHealth"
+        o.http_method = "POST"
+        o.http_request_uri = "/organization/health"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOrganizationHealthRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOrganizationHealthResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_organization_overview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOrganizationOverview"
+        o.http_method = "POST"
+        o.http_request_uri = "/organization/overview"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOrganizationOverviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOrganizationOverviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_organization_resource_collection_health, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOrganizationResourceCollectionHealth"
+        o.http_method = "POST"
+        o.http_request_uri = "/organization/health/resource-collection/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOrganizationResourceCollectionHealthRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOrganizationResourceCollectionHealthResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_resource_collection_health, Seahorse::Model::Operation.new.tap do |o|
@@ -984,6 +1185,24 @@ module Aws::DevOpsGuru
         )
       end)
 
+      api.add_operation(:list_organization_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOrganizationInsights"
+        o.http_method = "POST"
+        o.http_request_uri = "/organization/insights"
+        o.input = Shapes::ShapeRef.new(shape: ListOrganizationInsightsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOrganizationInsightsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_recommendations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRecommendations"
         o.http_method = "POST"
@@ -1036,6 +1255,24 @@ module Aws::DevOpsGuru
         o.http_request_uri = "/insights/search"
         o.input = Shapes::ShapeRef.new(shape: SearchInsightsRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchInsightsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_organization_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchOrganizationInsights"
+        o.http_method = "POST"
+        o.http_request_uri = "/organization/insights/search"
+        o.input = Shapes::ShapeRef.new(shape: SearchOrganizationInsightsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchOrganizationInsightsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

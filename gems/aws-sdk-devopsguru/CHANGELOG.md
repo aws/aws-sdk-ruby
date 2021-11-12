@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2021-11-12)
+------------------
+
+* Feature - Add support for cross account APIs.
+
 1.13.0 (2021-11-04)
 ------------------
 
