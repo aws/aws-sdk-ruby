@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-11-15)
+------------------
+
+* Feature - Your options for logging web ACL traffic now include Amazon CloudWatch Logs log groups and Amazon S3 buckets.
+
 1.30.0 (2021-11-08)
 ------------------
 

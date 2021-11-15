@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-11-15)
+------------------
+
+* Feature - AWS Transfer Family now supports integrating a custom identity provider using AWS Lambda
+
 1.42.0 (2021-11-04)
 ------------------
 

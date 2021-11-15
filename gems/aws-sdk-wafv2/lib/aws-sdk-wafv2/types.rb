@@ -5563,11 +5563,18 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Defines an association between Amazon Kinesis Data Firehose
-    # destinations and a web ACL resource, for logging from WAF. As part of
-    # the association, you can specify parts of the standard logging fields
-    # to keep out of the logs and you can specify filters so that you log
-    # only a subset of the logging records.
+    # Defines an association between logging destinations and a web ACL
+    # resource, for logging from WAF. As part of the association, you can
+    # specify parts of the standard logging fields to keep out of the logs
+    # and you can specify filters so that you log only a subset of the
+    # logging records.
+    #
+    # For information about configuring web ACL logging destinations, see
+    # [Logging web ACL traffic information][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
     #
     # @note When making an API call, you may pass LoggingConfiguration
     #   data as a hash:
@@ -5632,14 +5639,14 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] log_destination_configs
-    #   The Amazon Kinesis Data Firehose Amazon Resource Name (ARNs) that
+    #   The Amazon Resource Names (ARNs) of the logging destinations that
     #   you want to associate with the web ACL.
     #   @return [Array<String>]
     #
     # @!attribute [rw] redacted_fields
     #   The parts of the request that you want to keep out of the logs. For
     #   example, if you redact the `SingleHeader` field, the `HEADER` field
-    #   in the firehose will be `xxx`.
+    #   in the logs will be `xxx`.
     #
     #   <note markdown="1"> You can specify only the following fields for redaction: `UriPath`,
     #   `QueryString`, `SingleHeader`, `Method`, and `JsonBody`.
@@ -12935,6 +12942,25 @@ module Aws::WAFV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFLimitsExceededException AWS API Documentation
     #
     class WAFLimitsExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The operation failed because you don't have the permissions that your
+    # logging configuration requires. For information, see [Logging web ACL
+    # traffic information][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFLogDestinationPermissionIssueException AWS API Documentation
+    #
+    class WAFLogDestinationPermissionIssueException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure

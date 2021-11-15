@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-11-15)
+------------------
+
+* Feature - This release includes support for images of AmazonLinux2 platform type.
+
 1.57.0 (2021-11-04)
 ------------------
 

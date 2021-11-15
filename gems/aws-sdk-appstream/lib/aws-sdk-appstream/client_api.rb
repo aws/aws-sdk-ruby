@@ -1349,6 +1349,7 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: DescribeUsersResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:disable_user, Seahorse::Model::Operation.new.tap do |o|

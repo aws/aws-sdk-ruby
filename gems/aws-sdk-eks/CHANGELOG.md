@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2021-11-15)
+------------------
+
+* Feature - Adding Tags support to Cluster Registrations.
+
 1.66.0 (2021-11-04)
 ------------------
 

@@ -76,6 +76,7 @@ module Aws::Transfer
     ExternalId = Shapes::StringShape.new(name: 'ExternalId')
     FileLocation = Shapes::StructureShape.new(name: 'FileLocation')
     Fips = Shapes::BooleanShape.new(name: 'Fips')
+    Function = Shapes::StringShape.new(name: 'Function')
     HomeDirectory = Shapes::StringShape.new(name: 'HomeDirectory')
     HomeDirectoryMapEntry = Shapes::StructureShape.new(name: 'HomeDirectoryMapEntry')
     HomeDirectoryMappings = Shapes::ListShape.new(name: 'HomeDirectoryMappings')
@@ -451,6 +452,7 @@ module Aws::Transfer
     IdentityProviderDetails.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "Url"))
     IdentityProviderDetails.add_member(:invocation_role, Shapes::ShapeRef.new(shape: Role, location_name: "InvocationRole"))
     IdentityProviderDetails.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+    IdentityProviderDetails.add_member(:function, Shapes::ShapeRef.new(shape: Function, location_name: "Function"))
     IdentityProviderDetails.struct_class = Types::IdentityProviderDetails
 
     ImportSshPublicKeyRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))

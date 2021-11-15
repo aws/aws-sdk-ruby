@@ -4479,28 +4479,22 @@ module Aws::WAFV2
     # You can access information about all traffic that WAF inspects using
     # the following steps:
     #
-    # 1.  Create an Amazon Kinesis Data Firehose.
+    # 1.  Create your logging destination. You can use an Amazon CloudWatch
+    #     Logs log group, an Amazon Simple Storage Service (Amazon S3)
+    #     bucket, or an Amazon Kinesis Data Firehose. For information about
+    #     configuring logging destinations and the permissions that are
+    #     required for each, see [Logging web ACL traffic information][1] in
+    #     the *WAF Developer Guide*.
     #
-    #     Create the data firehose with a PUT source and in the Region that
-    #     you are operating. If you are capturing logs for Amazon
-    #     CloudFront, always create the firehose in US East (N. Virginia).
-    #
-    #     Give the data firehose a name that starts with the prefix
-    #     `aws-waf-logs-`. For example, `aws-waf-logs-us-east-2-analytics`.
-    #
-    #     <note markdown="1"> Do not create the data firehose using a `Kinesis stream` as your
-    #     source.
-    #
-    #      </note>
-    #
-    # 2.  Associate that firehose to your web ACL using a
+    # 2.  Associate your logging destination to your web ACL using a
     #     `PutLoggingConfiguration` request.
     #
     # When you successfully enable logging using a `PutLoggingConfiguration`
-    # request, WAF will create a service linked role with the necessary
-    # permissions to write logs to the Amazon Kinesis Data Firehose. For
-    # more information, see [Logging Web ACL Traffic Information][1] in the
-    # *WAF Developer Guide*.
+    # request, WAF creates an additional role or policy that is required to
+    # write logs to the logging destination. For an Amazon CloudWatch Logs
+    # log group, WAF creates a resource policy on the log group. For an
+    # Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis
+    # Data Firehose, WAF creates a service-linked role.
     #
     # <note markdown="1"> This operation completely replaces the mutable specifications that you
     # already have for the logging configuration with the ones that you
@@ -6156,7 +6150,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

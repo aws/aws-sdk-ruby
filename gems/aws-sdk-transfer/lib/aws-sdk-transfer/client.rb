@@ -641,6 +641,11 @@ module Aws::Transfer
     #   API Gateway endpoint URL to call for authentication using the
     #   `IdentityProviderDetails` parameter.
     #
+    #   Use the `LAMBDA` value to directly use a Lambda function as your
+    #   identity provider. If you choose this value, you must specify the ARN
+    #   for the lambda function in the `Function` parameter for the
+    #   `IdentityProviderDetails` data type.
+    #
     # @option params [String] :logging_role
     #   Specifies the Amazon Resource Name (ARN) of the Amazon Web Services
     #   Identity and Access Management (IAM) role that allows a server to turn
@@ -710,8 +715,9 @@ module Aws::Transfer
     #       url: "Url",
     #       invocation_role: "Role",
     #       directory_id: "DirectoryId",
+    #       function: "Function",
     #     },
-    #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE
+    #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
     #     logging_role: "Role",
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #     security_policy_name: "SecurityPolicyName",
@@ -1431,7 +1437,8 @@ module Aws::Transfer
     #   resp.server.identity_provider_details.url #=> String
     #   resp.server.identity_provider_details.invocation_role #=> String
     #   resp.server.identity_provider_details.directory_id #=> String
-    #   resp.server.identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY", "AWS_DIRECTORY_SERVICE"
+    #   resp.server.identity_provider_details.function #=> String
+    #   resp.server.identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY", "AWS_DIRECTORY_SERVICE", "AWS_LAMBDA"
     #   resp.server.logging_role #=> String
     #   resp.server.protocols #=> Array
     #   resp.server.protocols[0] #=> String, one of "SFTP", "FTP", "FTPS"
@@ -1822,7 +1829,7 @@ module Aws::Transfer
     #   resp.servers #=> Array
     #   resp.servers[0].arn #=> String
     #   resp.servers[0].domain #=> String, one of "S3", "EFS"
-    #   resp.servers[0].identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY", "AWS_DIRECTORY_SERVICE"
+    #   resp.servers[0].identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY", "AWS_DIRECTORY_SERVICE", "AWS_LAMBDA"
     #   resp.servers[0].endpoint_type #=> String, one of "PUBLIC", "VPC", "VPC_ENDPOINT"
     #   resp.servers[0].logging_role #=> String
     #   resp.servers[0].server_id #=> String
@@ -2593,6 +2600,7 @@ module Aws::Transfer
     #       url: "Url",
     #       invocation_role: "Role",
     #       directory_id: "DirectoryId",
+    #       function: "Function",
     #     },
     #     logging_role: "NullableRole",
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
@@ -2789,7 +2797,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

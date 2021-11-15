@@ -15325,8 +15325,8 @@ module Aws::SSM
     #   and GetParametersByPath API operations. However, not all of the
     #   pattern values listed for `Key` can be used with both operations.
     #
-    #   For `DescribeActions`, all of the listed patterns are valid except
-    #   `Label`.
+    #   For `DescribeParameters`, all of the listed patterns are valid
+    #   except `Label`.
     #
     #   For `GetParametersByPath`, the following patterns listed for `Key`
     #   aren't valid: `tag`, `DataType`, `Name`, `Path`, and `Tier`.
@@ -18347,6 +18347,10 @@ module Aws::SSM
     #   session.
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   The reason for connecting to the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] details
     #   Reserved for future use.
     #   @return [String]
@@ -18354,6 +18358,10 @@ module Aws::SSM
     # @!attribute [rw] output_url
     #   Reserved for future use.
     #   @return [Types::SessionManagerOutputUrl]
+    #
+    # @!attribute [rw] max_session_duration
+    #   The maximum duration of a session before it terminates.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Session AWS API Documentation
     #
@@ -18365,8 +18373,10 @@ module Aws::SSM
       :end_date,
       :document_name,
       :owner,
+      :reason,
       :details,
-      :output_url)
+      :output_url,
+      :max_session_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18877,6 +18887,7 @@ module Aws::SSM
     #       {
     #         target: "SessionTarget", # required
     #         document_name: "DocumentARN",
+    #         reason: "SessionReason",
     #         parameters: {
     #           "SessionManagerParameterName" => ["SessionManagerParameterValue"],
     #         },
@@ -18894,6 +18905,12 @@ module Aws::SSM
     #   provided, a shell to the instance is launched by default.
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   The reason for connecting to the instance. This value is included in
+    #   the details for the Amazon CloudWatch Events event created when you
+    #   start the session.
+    #   @return [String]
+    #
     # @!attribute [rw] parameters
     #   Reserved for future use.
     #   @return [Hash<String,Array<String>>]
@@ -18903,6 +18920,7 @@ module Aws::SSM
     class StartSessionRequest < Struct.new(
       :target,
       :document_name,
+      :reason,
       :parameters)
       SENSITIVE = []
       include Aws::Structure

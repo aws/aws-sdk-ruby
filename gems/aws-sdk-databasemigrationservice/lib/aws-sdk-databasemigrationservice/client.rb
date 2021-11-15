@@ -536,10 +536,10 @@ module Aws::DatabaseMigrationService
     # @option params [required, String] :engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
     #   `EndpointType` value, include `"mysql"`, `"oracle"`, `"postgres"`,
-    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`, `"s3"`,
-    #   `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
-    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"docdb"`, `"sqlserver"`,
-    #   and `"neptune"`.
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"opensearch"`,
+    #   `"redshift"`, `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`,
+    #   `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"docdb"`,
+    #   `"sqlserver"`, and `"neptune"`.
     #
     # @option params [String] :username
     #   The user name to be used to log in to the endpoint database.
@@ -667,9 +667,9 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping
     #
     # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
-    #   Settings in JSON format for the target Elasticsearch endpoint. For
-    #   more information about the available settings, see [Extra Connection
-    #   Attributes When Using Elasticsearch as a Target for DMS][1] in the
+    #   Settings in JSON format for the target OpenSearch endpoint. For more
+    #   information about the available settings, see [Extra Connection
+    #   Attributes When Using OpenSearch as a Target for DMS][1] in the
     #   *Database Migration Service User Guide*.
     #
     #
@@ -777,6 +777,9 @@ module Aws::DatabaseMigrationService
     # @option params [Types::RedisSettings] :redis_settings
     #   Settings in JSON format for the target Redis endpoint.
     #
+    # @option params [Types::GcpMySQLSettings] :gcp_my_sql_settings
+    #   Settings in JSON format for the source GCP MySQL endpoint.
+    #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -878,6 +881,7 @@ module Aws::DatabaseMigrationService
     #       csv_no_sup_value: "String",
     #       preserve_transactions: false,
     #       cdc_path: "String",
+    #       use_task_start_time_for_full_load_timestamp: false,
     #       canned_acl_for_objects: "none", # accepts none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
     #       add_column_name: false,
     #       cdc_max_batch_interval: 1,
@@ -1124,6 +1128,22 @@ module Aws::DatabaseMigrationService
     #       auth_password: "SecretString",
     #       ssl_ca_certificate_arn: "String",
     #     },
+    #     gcp_my_sql_settings: {
+    #       after_connect_script: "String",
+    #       clean_source_metadata_on_mismatch: false,
+    #       database_name: "String",
+    #       events_poll_interval: 1,
+    #       target_db_type: "specific-database", # accepts specific-database, multiple-databases
+    #       max_file_size: 1,
+    #       parallel_load_threads: 1,
+    #       password: "SecretString",
+    #       port: 1,
+    #       server_name: "String",
+    #       server_timezone: "String",
+    #       username: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1174,6 +1194,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.csv_no_sup_value #=> String
     #   resp.endpoint.s3_settings.preserve_transactions #=> Boolean
     #   resp.endpoint.s3_settings.cdc_path #=> String
+    #   resp.endpoint.s3_settings.use_task_start_time_for_full_load_timestamp #=> Boolean
     #   resp.endpoint.s3_settings.canned_acl_for_objects #=> String, one of "none", "private", "public-read", "public-read-write", "authenticated-read", "aws-exec-read", "bucket-owner-read", "bucket-owner-full-control"
     #   resp.endpoint.s3_settings.add_column_name #=> Boolean
     #   resp.endpoint.s3_settings.cdc_max_batch_interval #=> Integer
@@ -1389,6 +1410,20 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redis_settings.auth_user_name #=> String
     #   resp.endpoint.redis_settings.auth_password #=> String
     #   resp.endpoint.redis_settings.ssl_ca_certificate_arn #=> String
+    #   resp.endpoint.gcp_my_sql_settings.after_connect_script #=> String
+    #   resp.endpoint.gcp_my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
+    #   resp.endpoint.gcp_my_sql_settings.database_name #=> String
+    #   resp.endpoint.gcp_my_sql_settings.events_poll_interval #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
+    #   resp.endpoint.gcp_my_sql_settings.max_file_size #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.parallel_load_threads #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.password #=> String
+    #   resp.endpoint.gcp_my_sql_settings.port #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.server_name #=> String
+    #   resp.endpoint.gcp_my_sql_settings.server_timezone #=> String
+    #   resp.endpoint.gcp_my_sql_settings.username #=> String
+    #   resp.endpoint.gcp_my_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.gcp_my_sql_settings.secrets_manager_secret_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -2116,7 +2151,7 @@ module Aws::DatabaseMigrationService
     # Deletes the specified certificate.
     #
     # @option params [required, String] :certificate_arn
-    #   The Amazon Resource Name (ARN) of the deleted certificate.
+    #   The Amazon Resource Name (ARN) of the certificate.
     #
     # @return [Types::DeleteCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2313,6 +2348,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.csv_no_sup_value #=> String
     #   resp.endpoint.s3_settings.preserve_transactions #=> Boolean
     #   resp.endpoint.s3_settings.cdc_path #=> String
+    #   resp.endpoint.s3_settings.use_task_start_time_for_full_load_timestamp #=> Boolean
     #   resp.endpoint.s3_settings.canned_acl_for_objects #=> String, one of "none", "private", "public-read", "public-read-write", "authenticated-read", "aws-exec-read", "bucket-owner-read", "bucket-owner-full-control"
     #   resp.endpoint.s3_settings.add_column_name #=> Boolean
     #   resp.endpoint.s3_settings.cdc_max_batch_interval #=> Integer
@@ -2528,6 +2564,20 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redis_settings.auth_user_name #=> String
     #   resp.endpoint.redis_settings.auth_password #=> String
     #   resp.endpoint.redis_settings.ssl_ca_certificate_arn #=> String
+    #   resp.endpoint.gcp_my_sql_settings.after_connect_script #=> String
+    #   resp.endpoint.gcp_my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
+    #   resp.endpoint.gcp_my_sql_settings.database_name #=> String
+    #   resp.endpoint.gcp_my_sql_settings.events_poll_interval #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
+    #   resp.endpoint.gcp_my_sql_settings.max_file_size #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.parallel_load_threads #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.password #=> String
+    #   resp.endpoint.gcp_my_sql_settings.port #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.server_name #=> String
+    #   resp.endpoint.gcp_my_sql_settings.server_timezone #=> String
+    #   resp.endpoint.gcp_my_sql_settings.username #=> String
+    #   resp.endpoint.gcp_my_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.gcp_my_sql_settings.secrets_manager_secret_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -3028,7 +3078,7 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to the certificates described in the form of key-value
-    #   pairs.
+    #   pairs. Valid values are `certificate-arn` and `certificate-id`.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -3479,6 +3529,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].s3_settings.csv_no_sup_value #=> String
     #   resp.endpoints[0].s3_settings.preserve_transactions #=> Boolean
     #   resp.endpoints[0].s3_settings.cdc_path #=> String
+    #   resp.endpoints[0].s3_settings.use_task_start_time_for_full_load_timestamp #=> Boolean
     #   resp.endpoints[0].s3_settings.canned_acl_for_objects #=> String, one of "none", "private", "public-read", "public-read-write", "authenticated-read", "aws-exec-read", "bucket-owner-read", "bucket-owner-full-control"
     #   resp.endpoints[0].s3_settings.add_column_name #=> Boolean
     #   resp.endpoints[0].s3_settings.cdc_max_batch_interval #=> Integer
@@ -3694,6 +3745,20 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].redis_settings.auth_user_name #=> String
     #   resp.endpoints[0].redis_settings.auth_password #=> String
     #   resp.endpoints[0].redis_settings.ssl_ca_certificate_arn #=> String
+    #   resp.endpoints[0].gcp_my_sql_settings.after_connect_script #=> String
+    #   resp.endpoints[0].gcp_my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
+    #   resp.endpoints[0].gcp_my_sql_settings.database_name #=> String
+    #   resp.endpoints[0].gcp_my_sql_settings.events_poll_interval #=> Integer
+    #   resp.endpoints[0].gcp_my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
+    #   resp.endpoints[0].gcp_my_sql_settings.max_file_size #=> Integer
+    #   resp.endpoints[0].gcp_my_sql_settings.parallel_load_threads #=> Integer
+    #   resp.endpoints[0].gcp_my_sql_settings.password #=> String
+    #   resp.endpoints[0].gcp_my_sql_settings.port #=> Integer
+    #   resp.endpoints[0].gcp_my_sql_settings.server_name #=> String
+    #   resp.endpoints[0].gcp_my_sql_settings.server_timezone #=> String
+    #   resp.endpoints[0].gcp_my_sql_settings.username #=> String
+    #   resp.endpoints[0].gcp_my_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoints[0].gcp_my_sql_settings.secrets_manager_secret_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3771,6 +3836,8 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to event subscriptions.
+    #
+    #   Valid filter names: event-subscription-arn \| event-subscription-id
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -3863,7 +3930,8 @@ module Aws::DatabaseMigrationService
     #   A list of event categories for the source type that you've chosen.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters applied to events.
+    #   Filters applied to events. The only valid filter is
+    #   `replication-instance-id`.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -4389,13 +4457,11 @@ module Aws::DatabaseMigrationService
     # returns the latest results.
     #
     # For more information about DMS task assessments, see [Creating a task
-    # assessment report][1] in the [ Database Migration Service User
-    # Guide][2].
+    # assessment report][1] in the *Database Migration Service User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html
-    # [2]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/Welcome.html
     #
     # @option params [String] :replication_task_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -4918,6 +4984,8 @@ module Aws::DatabaseMigrationService
     #   SSL. Provide the name of a `.sso` file using the `fileb://` prefix.
     #   You can't provide the certificate inline.
     #
+    #   Example: `filebase64("$\{path.root\}/rds-ca-2019-root.sso")`
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The tags associated with the certificate.
     #
@@ -5066,10 +5134,10 @@ module Aws::DatabaseMigrationService
     # @option params [String] :engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
     #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
-    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`, `"s3"`,
-    #   `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
-    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`,
-    #   `"sqlserver"`, and `"neptune"`.
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"opensearch"`,
+    #   `"redshift"`, `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`,
+    #   `"mongodb"`, `"kinesis"`, `"kafka"`, `"elasticsearch"`,
+    #   `"documentdb"`, `"sqlserver"`, and `"neptune"`.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -5176,9 +5244,9 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping
     #
     # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
-    #   Settings in JSON format for the target Elasticsearch endpoint. For
-    #   more information about the available settings, see [Extra Connection
-    #   Attributes When Using Elasticsearch as a Target for DMS][1] in the
+    #   Settings in JSON format for the target OpenSearch endpoint. For more
+    #   information about the available settings, see [Extra Connection
+    #   Attributes When Using OpenSearch as a Target for DMS][1] in the
     #   *Database Migration Service User Guide.*
     #
     #
@@ -5305,6 +5373,9 @@ module Aws::DatabaseMigrationService
     #   `'\{"b":2\}'`. All existing settings are replaced with the exact
     #   settings that you specify.
     #
+    # @option params [Types::GcpMySQLSettings] :gcp_my_sql_settings
+    #   Settings in JSON format for the source GCP MySQL endpoint.
+    #
     # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyEndpointResponse#endpoint #endpoint} => Types::Endpoint
@@ -5384,6 +5455,7 @@ module Aws::DatabaseMigrationService
     #       csv_no_sup_value: "String",
     #       preserve_transactions: false,
     #       cdc_path: "String",
+    #       use_task_start_time_for_full_load_timestamp: false,
     #       canned_acl_for_objects: "none", # accepts none, private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
     #       add_column_name: false,
     #       cdc_max_batch_interval: 1,
@@ -5630,6 +5702,22 @@ module Aws::DatabaseMigrationService
     #       ssl_ca_certificate_arn: "String",
     #     },
     #     exact_settings: false,
+    #     gcp_my_sql_settings: {
+    #       after_connect_script: "String",
+    #       clean_source_metadata_on_mismatch: false,
+    #       database_name: "String",
+    #       events_poll_interval: 1,
+    #       target_db_type: "specific-database", # accepts specific-database, multiple-databases
+    #       max_file_size: 1,
+    #       parallel_load_threads: 1,
+    #       password: "SecretString",
+    #       port: 1,
+    #       server_name: "String",
+    #       server_timezone: "String",
+    #       username: "String",
+    #       secrets_manager_access_role_arn: "String",
+    #       secrets_manager_secret_id: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -5680,6 +5768,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.csv_no_sup_value #=> String
     #   resp.endpoint.s3_settings.preserve_transactions #=> Boolean
     #   resp.endpoint.s3_settings.cdc_path #=> String
+    #   resp.endpoint.s3_settings.use_task_start_time_for_full_load_timestamp #=> Boolean
     #   resp.endpoint.s3_settings.canned_acl_for_objects #=> String, one of "none", "private", "public-read", "public-read-write", "authenticated-read", "aws-exec-read", "bucket-owner-read", "bucket-owner-full-control"
     #   resp.endpoint.s3_settings.add_column_name #=> Boolean
     #   resp.endpoint.s3_settings.cdc_max_batch_interval #=> Integer
@@ -5895,6 +5984,20 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.redis_settings.auth_user_name #=> String
     #   resp.endpoint.redis_settings.auth_password #=> String
     #   resp.endpoint.redis_settings.ssl_ca_certificate_arn #=> String
+    #   resp.endpoint.gcp_my_sql_settings.after_connect_script #=> String
+    #   resp.endpoint.gcp_my_sql_settings.clean_source_metadata_on_mismatch #=> Boolean
+    #   resp.endpoint.gcp_my_sql_settings.database_name #=> String
+    #   resp.endpoint.gcp_my_sql_settings.events_poll_interval #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.target_db_type #=> String, one of "specific-database", "multiple-databases"
+    #   resp.endpoint.gcp_my_sql_settings.max_file_size #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.parallel_load_threads #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.password #=> String
+    #   resp.endpoint.gcp_my_sql_settings.port #=> Integer
+    #   resp.endpoint.gcp_my_sql_settings.server_name #=> String
+    #   resp.endpoint.gcp_my_sql_settings.server_timezone #=> String
+    #   resp.endpoint.gcp_my_sql_settings.username #=> String
+    #   resp.endpoint.gcp_my_sql_settings.secrets_manager_access_role_arn #=> String
+    #   resp.endpoint.gcp_my_sql_settings.secrets_manager_secret_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -6731,7 +6834,17 @@ module Aws::DatabaseMigrationService
     #   The Amazon Resource Name (ARN) of the replication task to be started.
     #
     # @option params [required, String] :start_replication_task_type
-    #   A type of replication task.
+    #   The type of replication task to start.
+    #
+    #   When the migration type is `full-load` or `full-load-and-cdc`, the
+    #   only valid value for the first run of the task is `start-replication`.
+    #   You use `reload-target` to restart the task and `resume-processing` to
+    #   resume the task.
+    #
+    #   When the migration type is `cdc`, you use `start-replication` to start
+    #   or restart the task, and `resume-processing` to resume the task.
+    #   `reload-target` is not a valid value for a task with migration type of
+    #   `cdc`.
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
     #   Indicates the start time for a change data capture (CDC) operation.
@@ -7187,7 +7300,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

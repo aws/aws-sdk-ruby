@@ -10,7 +10,32 @@
 module Aws::EKS
   module Types
 
-    # An Amazon EKS add-on.
+    # You don't have permissions to perform the requested operation. The
+    # user or role that is making the request must have at least one IAM
+    # permissions policy attached that grants the required permissions. For
+    # more information, see [Access Management][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Amazon EKS add-on. For more information, see [Amazon EKS
+    # add-ons][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html
     #
     # @!attribute [rw] addon_name
     #   The name of the add-on.
@@ -556,9 +581,8 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the role that is used by the EKS
-    #   connector to communicate with AWS services from the connected
-    #   Kubernetes cluster.
+    #   The Amazon Resource Name (ARN) of the role to communicate with
+    #   services from the connected Kubernetes cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ConnectorConfigResponse AWS API Documentation
@@ -665,7 +689,12 @@ module Aws::EKS
     end
 
     # @!attribute [rw] addon
-    #   An Amazon EKS add-on.
+    #   An Amazon EKS add-on. For more information, see [Amazon EKS
+    #   add-ons][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html
     #   @return [Types::Addon]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAddonResponse AWS API Documentation
@@ -1224,7 +1253,12 @@ module Aws::EKS
     end
 
     # @!attribute [rw] addon
-    #   An Amazon EKS add-on.
+    #   An Amazon EKS add-on. For more information, see [Amazon EKS
+    #   add-ons][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html
     #   @return [Types::Addon]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteAddonResponse AWS API Documentation
@@ -1404,7 +1438,12 @@ module Aws::EKS
     end
 
     # @!attribute [rw] addon
-    #   An Amazon EKS add-on.
+    #   An Amazon EKS add-on. For more information, see [Amazon EKS
+    #   add-ons][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html
     #   @return [Types::Addon]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonResponse AWS API Documentation
@@ -2118,7 +2157,7 @@ module Aws::EKS
     #
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
-    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html
+    #   [2]: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -2157,7 +2196,7 @@ module Aws::EKS
     #   meet the following requirements:
     #
     #   * Within one of the following private IP address blocks: 10.0.0.0/8,
-    #     172.16.0.0.0/12, or 192.168.0.0/16.
+    #     172.16.0.0/12, or 192.168.0.0/16.
     #
     #   * Doesn't overlap with any CIDR block assigned to the VPC that you
     #     selected for VPC.
@@ -2983,6 +3022,26 @@ module Aws::EKS
     # @!attribute [rw] desired_size
     #   The current number of nodes that the managed node group should
     #   maintain.
+    #
+    #   If you use Cluster Autoscaler, you shouldn't change the desiredSize
+    #   value directly, as this can cause the Cluster Autoscaler to suddenly
+    #   scale up or scale down.
+    #
+    #   Whenever this parameter changes, the number of worker nodes in the
+    #   node group is updated to the specified size. If this parameter is
+    #   given a value that is smaller than the current number of running
+    #   worker nodes, the necessary number of worker nodes are terminated to
+    #   match the given value. When using CloudFormation, no action occurs
+    #   if you remove this parameter from your CFN template.
+    #
+    #   This parameter can be different from minSize in some cases, such as
+    #   when starting with extra hosts for testing. This parameter can also
+    #   be different when you want to start with an estimated number of
+    #   needed hosts, but let Cluster Autoscaler reduce the number if there
+    #   are too many. When Cluster Autoscaler is used, the desiredSize
+    #   parameter is altered by Cluster Autoscaler (but can be out-of-date
+    #   for short periods of time). Cluster Autoscaler doesn't scale a
+    #   managed node group lower than minSize or higher than maxSize.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/NodegroupScalingConfig AWS API Documentation
@@ -3283,10 +3342,13 @@ module Aws::EKS
     #           provider: "EKS_ANYWHERE", # required, accepts EKS_ANYWHERE, ANTHOS, GKE, AKS, OPENSHIFT, TANZU, RANCHER, EC2, OTHER
     #         },
     #         client_request_token: "String",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
-    #   Define a unique name for this cluster within your AWS account.
+    #   Define a unique name for this cluster for your Region.
     #   @return [String]
     #
     # @!attribute [rw] connector_config
@@ -3302,12 +3364,20 @@ module Aws::EKS
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the cluster to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define. Cluster tags do not
+    #   propagate to any other resources associated with the cluster.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/RegisterClusterRequest AWS API Documentation
     #
     class RegisterClusterRequest < Struct.new(
       :name,
       :connector_config,
-      :client_request_token)
+      :client_request_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -8909,6 +8909,7 @@ module Aws::EC2
     ModifySubnetAttributeRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "subnetId"))
     ModifySubnetAttributeRequest.add_member(:map_customer_owned_ip_on_launch, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "MapCustomerOwnedIpOnLaunch"))
     ModifySubnetAttributeRequest.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: CoipPoolId, location_name: "CustomerOwnedIpv4Pool"))
+    ModifySubnetAttributeRequest.add_member(:enable_dns_64, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "EnableDns64"))
     ModifySubnetAttributeRequest.struct_class = Types::ModifySubnetAttributeRequest
 
     ModifyTrafficMirrorFilterNetworkServicesRequest.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: TrafficMirrorFilterId, required: true, location_name: "TrafficMirrorFilterId"))
@@ -11038,6 +11039,7 @@ module Aws::EC2
     Subnet.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Subnet.add_member(:subnet_arn, Shapes::ShapeRef.new(shape: String, location_name: "subnetArn"))
     Subnet.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
+    Subnet.add_member(:enable_dns_64, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableDns64"))
     Subnet.struct_class = Types::Subnet
 
     SubnetAssociation.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))

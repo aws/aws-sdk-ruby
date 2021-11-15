@@ -285,8 +285,9 @@ module Aws::Transfer
     #           url: "Url",
     #           invocation_role: "Role",
     #           directory_id: "DirectoryId",
+    #           function: "Function",
     #         },
-    #         identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE
+    #         identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
     #         logging_role: "Role",
     #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #         security_policy_name: "SecurityPolicyName",
@@ -437,6 +438,11 @@ module Aws::Transfer
     #   of your choosing. The `API_GATEWAY` setting requires you to provide
     #   an API Gateway endpoint URL to call for authentication using the
     #   `IdentityProviderDetails` parameter.
+    #
+    #   Use the `LAMBDA` value to directly use a Lambda function as your
+    #   identity provider. If you choose this value, you must specify the
+    #   ARN for the lambda function in the `Function` parameter for the
+    #   `IdentityProviderDetails` data type.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
@@ -1583,6 +1589,11 @@ module Aws::Transfer
     #   of your choosing. The `API_GATEWAY` setting requires you to provide
     #   an API Gateway endpoint URL to call for authentication using the
     #   `IdentityProviderDetails` parameter.
+    #
+    #   Use the `LAMBDA` value to directly use a Lambda function as your
+    #   identity provider. If you choose this value, you must specify the
+    #   ARN for the lambda function in the `Function` parameter for the
+    #   `IdentityProviderDetails` data type.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
@@ -2095,6 +2106,7 @@ module Aws::Transfer
     #         url: "Url",
     #         invocation_role: "Role",
     #         directory_id: "DirectoryId",
+    #         function: "Function",
     #       }
     #
     # @!attribute [rw] url
@@ -2112,12 +2124,17 @@ module Aws::Transfer
     #   that you want to stop sharing.
     #   @return [String]
     #
+    # @!attribute [rw] function
+    #   The ARN for a lambda function to use for the Identity provider.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/IdentityProviderDetails AWS API Documentation
     #
     class IdentityProviderDetails < Struct.new(
       :url,
       :invocation_role,
-      :directory_id)
+      :directory_id,
+      :function)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2798,6 +2815,11 @@ module Aws::Transfer
     #   of your choosing. The `API_GATEWAY` setting requires you to provide
     #   an API Gateway endpoint URL to call for authentication using the
     #   `IdentityProviderDetails` parameter.
+    #
+    #   Use the `LAMBDA` value to directly use a Lambda function as your
+    #   identity provider. If you choose this value, you must specify the
+    #   ARN for the lambda function in the `Function` parameter for the
+    #   `IdentityProviderDetails` data type.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
@@ -3768,6 +3790,7 @@ module Aws::Transfer
     #           url: "Url",
     #           invocation_role: "Role",
     #           directory_id: "DirectoryId",
+    #           function: "Function",
     #         },
     #         logging_role: "NullableRole",
     #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS

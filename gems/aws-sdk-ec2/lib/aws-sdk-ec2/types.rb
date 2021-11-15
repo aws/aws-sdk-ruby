@@ -44432,6 +44432,9 @@ module Aws::EC2
     #           value: false,
     #         },
     #         customer_owned_ipv_4_pool: "CoipPoolId",
+    #         enable_dns_64: {
+    #           value: false,
+    #         },
     #       }
     #
     # @!attribute [rw] assign_ipv_6_address_on_creation
@@ -44471,6 +44474,12 @@ module Aws::EC2
     #   `MapCustomerOwnedIpOnLaunch`.
     #   @return [String]
     #
+    # @!attribute [rw] enable_dns_64
+    #   Indicates whether DNS queries made to the Amazon-provided DNS
+    #   Resolver in this subnet should return synthetic IPv6 addresses for
+    #   IPv4-only destinations.
+    #   @return [Types::AttributeBooleanValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttributeRequest AWS API Documentation
     #
     class ModifySubnetAttributeRequest < Struct.new(
@@ -44478,7 +44487,8 @@ module Aws::EC2
       :map_public_ip_on_launch,
       :subnet_id,
       :map_customer_owned_ip_on_launch,
-      :customer_owned_ipv_4_pool)
+      :customer_owned_ipv_4_pool,
+      :enable_dns_64)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -58341,6 +58351,12 @@ module Aws::EC2
     #   The Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
     #
+    # @!attribute [rw] enable_dns_64
+    #   Indicates whether DNS queries made to the Amazon-provided DNS
+    #   Resolver in this subnet should return synthetic IPv6 addresses for
+    #   IPv4-only destinations.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Subnet AWS API Documentation
     #
     class Subnet < Struct.new(
@@ -58360,7 +58376,8 @@ module Aws::EC2
       :ipv_6_cidr_block_association_set,
       :tags,
       :subnet_arn,
-      :outpost_arn)
+      :outpost_arn,
+      :enable_dns_64)
       SENSITIVE = []
       include Aws::Structure
     end

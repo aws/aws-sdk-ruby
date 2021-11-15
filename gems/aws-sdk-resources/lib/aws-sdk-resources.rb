@@ -198,6 +198,7 @@ module Aws
   autoload :Mgn, 'aws-sdk-mgn'
   autoload :MigrationHub, 'aws-sdk-migrationhub'
   autoload :MigrationHubConfig, 'aws-sdk-migrationhubconfig'
+  autoload :MigrationHubStrategyRecommendations, 'aws-sdk-migrationhubstrategyrecommendations'
   autoload :Mobile, 'aws-sdk-mobile'
   autoload :Neptune, 'aws-sdk-neptune'
   autoload :NetworkFirewall, 'aws-sdk-networkfirewall'

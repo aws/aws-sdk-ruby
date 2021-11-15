@@ -135,6 +135,7 @@ module Aws::DatabaseMigrationService
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
+    GcpMySQLSettings = Shapes::StructureShape.new(name: 'GcpMySQLSettings')
     IBMDb2Settings = Shapes::StructureShape.new(name: 'IBMDb2Settings')
     ImportCertificateMessage = Shapes::StructureShape.new(name: 'ImportCertificateMessage')
     ImportCertificateResponse = Shapes::StructureShape.new(name: 'ImportCertificateResponse')
@@ -368,6 +369,7 @@ module Aws::DatabaseMigrationService
     CreateEndpointMessage.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ResourceIdentifier"))
     CreateEndpointMessage.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbSettings, location_name: "DocDbSettings"))
     CreateEndpointMessage.add_member(:redis_settings, Shapes::ShapeRef.new(shape: RedisSettings, location_name: "RedisSettings"))
+    CreateEndpointMessage.add_member(:gcp_my_sql_settings, Shapes::ShapeRef.new(shape: GcpMySQLSettings, location_name: "GcpMySQLSettings"))
     CreateEndpointMessage.struct_class = Types::CreateEndpointMessage
 
     CreateEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -746,6 +748,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:ibm_db_2_settings, Shapes::ShapeRef.new(shape: IBMDb2Settings, location_name: "IBMDb2Settings"))
     Endpoint.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbSettings, location_name: "DocDbSettings"))
     Endpoint.add_member(:redis_settings, Shapes::ShapeRef.new(shape: RedisSettings, location_name: "RedisSettings"))
+    Endpoint.add_member(:gcp_my_sql_settings, Shapes::ShapeRef.new(shape: GcpMySQLSettings, location_name: "GcpMySQLSettings"))
     Endpoint.struct_class = Types::Endpoint
 
     EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint)
@@ -804,6 +807,22 @@ module Aws::DatabaseMigrationService
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
     FilterValueList.member = Shapes::ShapeRef.new(shape: String)
+
+    GcpMySQLSettings.add_member(:after_connect_script, Shapes::ShapeRef.new(shape: String, location_name: "AfterConnectScript"))
+    GcpMySQLSettings.add_member(:clean_source_metadata_on_mismatch, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CleanSourceMetadataOnMismatch"))
+    GcpMySQLSettings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
+    GcpMySQLSettings.add_member(:events_poll_interval, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "EventsPollInterval"))
+    GcpMySQLSettings.add_member(:target_db_type, Shapes::ShapeRef.new(shape: TargetDbType, location_name: "TargetDbType"))
+    GcpMySQLSettings.add_member(:max_file_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxFileSize"))
+    GcpMySQLSettings.add_member(:parallel_load_threads, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ParallelLoadThreads"))
+    GcpMySQLSettings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
+    GcpMySQLSettings.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
+    GcpMySQLSettings.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    GcpMySQLSettings.add_member(:server_timezone, Shapes::ShapeRef.new(shape: String, location_name: "ServerTimezone"))
+    GcpMySQLSettings.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    GcpMySQLSettings.add_member(:secrets_manager_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerAccessRoleArn"))
+    GcpMySQLSettings.add_member(:secrets_manager_secret_id, Shapes::ShapeRef.new(shape: String, location_name: "SecretsManagerSecretId"))
+    GcpMySQLSettings.struct_class = Types::GcpMySQLSettings
 
     IBMDb2Settings.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     IBMDb2Settings.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
@@ -954,6 +973,7 @@ module Aws::DatabaseMigrationService
     ModifyEndpointMessage.add_member(:doc_db_settings, Shapes::ShapeRef.new(shape: DocDbSettings, location_name: "DocDbSettings"))
     ModifyEndpointMessage.add_member(:redis_settings, Shapes::ShapeRef.new(shape: RedisSettings, location_name: "RedisSettings"))
     ModifyEndpointMessage.add_member(:exact_settings, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ExactSettings"))
+    ModifyEndpointMessage.add_member(:gcp_my_sql_settings, Shapes::ShapeRef.new(shape: GcpMySQLSettings, location_name: "GcpMySQLSettings"))
     ModifyEndpointMessage.struct_class = Types::ModifyEndpointMessage
 
     ModifyEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -1399,6 +1419,7 @@ module Aws::DatabaseMigrationService
     S3Settings.add_member(:csv_no_sup_value, Shapes::ShapeRef.new(shape: String, location_name: "CsvNoSupValue"))
     S3Settings.add_member(:preserve_transactions, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PreserveTransactions"))
     S3Settings.add_member(:cdc_path, Shapes::ShapeRef.new(shape: String, location_name: "CdcPath"))
+    S3Settings.add_member(:use_task_start_time_for_full_load_timestamp, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseTaskStartTimeForFullLoadTimestamp"))
     S3Settings.add_member(:canned_acl_for_objects, Shapes::ShapeRef.new(shape: CannedAclForObjectsValue, location_name: "CannedAclForObjects"))
     S3Settings.add_member(:add_column_name, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AddColumnName"))
     S3Settings.add_member(:cdc_max_batch_interval, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "CdcMaxBatchInterval"))

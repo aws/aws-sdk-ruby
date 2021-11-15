@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2021-11-15)
+------------------
+
+* Feature - Adds support for Session Reason and Max Session Duration for Systems Manager Session Manager.
+
 1.122.0 (2021-11-12)
 ------------------
 

@@ -490,10 +490,15 @@ module Aws::EKS
     #
     # Amazon EKS add-ons help to automate the provisioning and lifecycle
     # management of common operational software for Amazon EKS clusters.
-    # Amazon EKS add-ons can only be used with Amazon EKS clusters running
-    # version 1.18 with platform version `eks.3` or later because add-ons
-    # rely on the Server-side Apply Kubernetes feature, which is only
-    # available in Kubernetes 1.18 and later.
+    # Amazon EKS add-ons require clusters running version 1.18 or later
+    # because Amazon EKS add-ons rely on the Server-side Apply Kubernetes
+    # feature, which is only available in Kubernetes 1.18 and later. For
+    # more information, see [Amazon EKS add-ons][1] in the *Amazon EKS User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html
     #
     # @option params [required, String] :cluster_name
     #   The name of the cluster to create the add-on for.
@@ -2545,15 +2550,15 @@ module Aws::EKS
     #
     # After the Manifest is updated and applied, then the connected cluster
     # is visible to the Amazon EKS control plane. If the Manifest is not
-    # applied within a set amount of time, then the connected cluster will
-    # no longer be visible and must be deregistered. See DeregisterCluster.
+    # applied within three days, then the connected cluster will no longer
+    # be visible and must be deregistered. See DeregisterCluster.
     #
     #
     #
     # [1]: https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml
     #
     # @option params [required, String] :name
-    #   Define a unique name for this cluster within your AWS account.
+    #   Define a unique name for this cluster for your Region.
     #
     # @option params [required, Types::ConnectorConfigRequest] :connector_config
     #   The configuration settings required to connect the Kubernetes cluster
@@ -2565,6 +2570,12 @@ module Aws::EKS
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata that you apply to the cluster to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define. Cluster tags do not
+    #   propagate to any other resources associated with the cluster.
     #
     # @return [Types::RegisterClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2579,6 +2590,9 @@ module Aws::EKS
     #       provider: "EKS_ANYWHERE", # required, accepts EKS_ANYWHERE, ANTHOS, GKE, AKS, OPENSHIFT, TANZU, RANCHER, EC2, OTHER
     #     },
     #     client_request_token: "String",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3217,7 +3231,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

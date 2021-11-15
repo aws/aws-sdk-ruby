@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.530.0 (2021-11-15)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MigrationHubStrategyRecommendations`.
+
 1.529.0 (2021-11-12)
 ------------------
 

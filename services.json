@@ -625,6 +625,9 @@
   "MigrationHubConfig": {
     "models": "migrationhub-config/2019-06-30"
   },
+  "MigrationHubStrategyRecommendations": {
+    "models": "migrationhubstrategy/2020-02-19"
+  },
   "Mobile": {
     "models": "mobile/2017-07-01"
   },

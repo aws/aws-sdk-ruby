@@ -292,6 +292,7 @@ module Aws::WAFV2
     WAFInvalidPermissionPolicyException = Shapes::StructureShape.new(name: 'WAFInvalidPermissionPolicyException')
     WAFInvalidResourceException = Shapes::StructureShape.new(name: 'WAFInvalidResourceException')
     WAFLimitsExceededException = Shapes::StructureShape.new(name: 'WAFLimitsExceededException')
+    WAFLogDestinationPermissionIssueException = Shapes::StructureShape.new(name: 'WAFLogDestinationPermissionIssueException')
     WAFNonexistentItemException = Shapes::StructureShape.new(name: 'WAFNonexistentItemException')
     WAFOptimisticLockException = Shapes::StructureShape.new(name: 'WAFOptimisticLockException')
     WAFServiceLinkedRoleErrorException = Shapes::StructureShape.new(name: 'WAFServiceLinkedRoleErrorException')
@@ -1186,6 +1187,9 @@ module Aws::WAFV2
     WAFLimitsExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFLimitsExceededException.struct_class = Types::WAFLimitsExceededException
 
+    WAFLogDestinationPermissionIssueException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    WAFLogDestinationPermissionIssueException.struct_class = Types::WAFLogDestinationPermissionIssueException
+
     WAFNonexistentItemException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFNonexistentItemException.struct_class = Types::WAFNonexistentItemException
 
@@ -1728,6 +1732,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFLogDestinationPermissionIssueException)
       end)
 
       api.add_operation(:put_managed_rule_set_versions, Seahorse::Model::Operation.new.tap do |o|

@@ -138,6 +138,14 @@ module Aws::EC2
       data[:outpost_arn]
     end
 
+    # Indicates whether DNS queries made to the Amazon-provided DNS Resolver
+    # in this subnet should return synthetic IPv6 addresses for IPv4-only
+    # destinations.
+    # @return [Boolean]
+    def enable_dns_64
+      data[:enable_dns_64]
+    end
+
     # @!endgroup
 
     # @return [Client]

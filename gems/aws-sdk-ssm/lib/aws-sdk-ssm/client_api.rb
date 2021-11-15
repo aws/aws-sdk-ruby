@@ -688,6 +688,7 @@ module Aws::SSM
     MaxErrors = Shapes::StringShape.new(name: 'MaxErrors')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxResultsEC2Compatible = Shapes::IntegerShape.new(name: 'MaxResultsEC2Compatible')
+    MaxSessionDuration = Shapes::StringShape.new(name: 'MaxSessionDuration')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetadataKeysToDeleteList = Shapes::ListShape.new(name: 'MetadataKeysToDeleteList')
     MetadataMap = Shapes::MapShape.new(name: 'MetadataMap')
@@ -1049,6 +1050,7 @@ module Aws::SSM
     SessionManagerS3OutputUrl = Shapes::StringShape.new(name: 'SessionManagerS3OutputUrl')
     SessionMaxResults = Shapes::IntegerShape.new(name: 'SessionMaxResults')
     SessionOwner = Shapes::StringShape.new(name: 'SessionOwner')
+    SessionReason = Shapes::StringShape.new(name: 'SessionReason')
     SessionState = Shapes::StringShape.new(name: 'SessionState')
     SessionStatus = Shapes::StringShape.new(name: 'SessionStatus')
     SessionTarget = Shapes::StringShape.new(name: 'SessionTarget')
@@ -4101,8 +4103,10 @@ module Aws::SSM
     Session.add_member(:end_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "EndDate"))
     Session.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "DocumentName"))
     Session.add_member(:owner, Shapes::ShapeRef.new(shape: SessionOwner, location_name: "Owner"))
+    Session.add_member(:reason, Shapes::ShapeRef.new(shape: SessionReason, location_name: "Reason"))
     Session.add_member(:details, Shapes::ShapeRef.new(shape: SessionDetails, location_name: "Details"))
     Session.add_member(:output_url, Shapes::ShapeRef.new(shape: SessionManagerOutputUrl, location_name: "OutputUrl"))
+    Session.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: MaxSessionDuration, location_name: "MaxSessionDuration"))
     Session.struct_class = Types::Session
 
     SessionFilter.add_member(:key, Shapes::ShapeRef.new(shape: SessionFilterKey, required: true, location_name: "key"))
@@ -4170,6 +4174,7 @@ module Aws::SSM
 
     StartSessionRequest.add_member(:target, Shapes::ShapeRef.new(shape: SessionTarget, required: true, location_name: "Target"))
     StartSessionRequest.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "DocumentName"))
+    StartSessionRequest.add_member(:reason, Shapes::ShapeRef.new(shape: SessionReason, location_name: "Reason"))
     StartSessionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: SessionManagerParameters, location_name: "Parameters"))
     StartSessionRequest.struct_class = Types::StartSessionRequest
 

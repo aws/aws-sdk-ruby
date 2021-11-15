@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.119.0 (2021-11-15)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-migrationhubstrategyrecommendations` gem.
+
 3.118.0 (2021-11-10)
 ------------------
 

@@ -4895,9 +4895,11 @@ module Aws::SSM
     #   resp.sessions[0].end_date #=> Time
     #   resp.sessions[0].document_name #=> String
     #   resp.sessions[0].owner #=> String
+    #   resp.sessions[0].reason #=> String
     #   resp.sessions[0].details #=> String
     #   resp.sessions[0].output_url.s3_output_url #=> String
     #   resp.sessions[0].output_url.cloud_watch_output_url #=> String
+    #   resp.sessions[0].max_session_duration #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeSessions AWS API Documentation
@@ -9572,6 +9574,11 @@ module Aws::SSM
     #   attempting to start a session. If no document name is provided, a
     #   shell to the instance is launched by default.
     #
+    # @option params [String] :reason
+    #   The reason for connecting to the instance. This value is included in
+    #   the details for the Amazon CloudWatch Events event created when you
+    #   start the session.
+    #
     # @option params [Hash<String,Array>] :parameters
     #   Reserved for future use.
     #
@@ -9586,6 +9593,7 @@ module Aws::SSM
     #   resp = client.start_session({
     #     target: "SessionTarget", # required
     #     document_name: "DocumentARN",
+    #     reason: "SessionReason",
     #     parameters: {
     #       "SessionManagerParameterName" => ["SessionManagerParameterValue"],
     #     },
@@ -11382,7 +11390,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.122.0'
+      context[:gem_version] = '1.123.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

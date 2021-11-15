@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-11-15)
+------------------
+
+* Feature - Add Settings in JSON format for the source GCP MySQL endpoint
+
 1.61.0 (2021-11-04)
 ------------------
 

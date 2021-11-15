@@ -1030,7 +1030,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -1378,7 +1378,7 @@ module Aws::AppStream
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
-    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
     #   resp.image.description #=> String
     #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.image.state_change_reason.message #=> String
@@ -1560,7 +1560,7 @@ module Aws::AppStream
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
-    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
     #   resp.image.description #=> String
     #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.image.state_change_reason.message #=> String
@@ -1619,7 +1619,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -1910,7 +1910,7 @@ module Aws::AppStream
     #   resp.image_builders[0].vpc_config.security_group_ids #=> Array
     #   resp.image_builders[0].vpc_config.security_group_ids[0] #=> String
     #   resp.image_builders[0].instance_type #=> String
-    #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
     #   resp.image_builders[0].iam_role_arn #=> String
     #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -2041,7 +2041,7 @@ module Aws::AppStream
     #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.images[0].image_builder_supported #=> Boolean
     #   resp.images[0].image_builder_name #=> String
-    #   resp.images[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.images[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
     #   resp.images[0].description #=> String
     #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.images[0].state_change_reason.message #=> String
@@ -2641,7 +2641,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -2719,7 +2719,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -3317,7 +3317,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

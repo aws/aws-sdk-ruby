@@ -14,6 +14,7 @@ module Aws::EKS
     include Seahorse::Model
 
     AMITypes = Shapes::StringShape.new(name: 'AMITypes')
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Addon = Shapes::StructureShape.new(name: 'Addon')
     AddonHealth = Shapes::StructureShape.new(name: 'AddonHealth')
     AddonInfo = Shapes::StructureShape.new(name: 'AddonInfo')
@@ -198,6 +199,9 @@ module Aws::EKS
     taintKey = Shapes::StringShape.new(name: 'taintKey')
     taintValue = Shapes::StringShape.new(name: 'taintValue')
     taintsList = Shapes::ListShape.new(name: 'taintsList')
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     Addon.add_member(:addon_name, Shapes::ShapeRef.new(shape: String, location_name: "addonName"))
     Addon.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, location_name: "clusterName"))
@@ -691,6 +695,7 @@ module Aws::EKS
     RegisterClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location_name: "name"))
     RegisterClusterRequest.add_member(:connector_config, Shapes::ShapeRef.new(shape: ConnectorConfigRequest, required: true, location_name: "connectorConfig"))
     RegisterClusterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    RegisterClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     RegisterClusterRequest.struct_class = Types::RegisterClusterRequest
 
     RegisterClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
@@ -1025,6 +1030,7 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_addon, Seahorse::Model::Operation.new.tap do |o|
@@ -1265,6 +1271,7 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

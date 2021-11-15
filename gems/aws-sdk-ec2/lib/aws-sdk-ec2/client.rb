@@ -4987,6 +4987,7 @@ module Aws::EC2
     #   resp.subnet.tags[0].value #=> String
     #   resp.subnet.subnet_arn #=> String
     #   resp.subnet.outpost_arn #=> String
+    #   resp.subnet.enable_dns_64 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnet AWS API Documentation
     #
@@ -9641,6 +9642,7 @@ module Aws::EC2
     #   resp.subnet.tags[0].value #=> String
     #   resp.subnet.subnet_arn #=> String
     #   resp.subnet.outpost_arn #=> String
+    #   resp.subnet.enable_dns_64 #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnet AWS API Documentation
     #
@@ -27039,6 +27041,7 @@ module Aws::EC2
     #   resp.subnets[0].tags[0].value #=> String
     #   resp.subnets[0].subnet_arn #=> String
     #   resp.subnets[0].outpost_arn #=> String
+    #   resp.subnets[0].enable_dns_64 #=> Boolean
     #   resp.next_token #=> String
     #
     #
@@ -37493,6 +37496,11 @@ module Aws::EC2
     #   You must set this value when you specify `true` for
     #   `MapCustomerOwnedIpOnLaunch`.
     #
+    # @option params [Types::AttributeBooleanValue] :enable_dns_64
+    #   Indicates whether DNS queries made to the Amazon-provided DNS Resolver
+    #   in this subnet should return synthetic IPv6 addresses for IPv4-only
+    #   destinations.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -37522,6 +37530,9 @@ module Aws::EC2
     #       value: false,
     #     },
     #     customer_owned_ipv_4_pool: "CoipPoolId",
+    #     enable_dns_64: {
+    #       value: false,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttribute AWS API Documentation
@@ -45236,7 +45247,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.280.0'
+      context[:gem_version] = '1.281.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

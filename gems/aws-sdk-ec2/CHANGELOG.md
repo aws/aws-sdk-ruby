@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.281.0 (2021-11-15)
+------------------
+
+* Feature - Adds a new VPC Subnet attribute "EnableDns64." When enabled on IPv6 Subnets, the Amazon-Provided DNS Resolver returns synthetic IPv6 addresses for IPv4-only destinations.
+
 1.280.0 (2021-11-12)
 ------------------
 

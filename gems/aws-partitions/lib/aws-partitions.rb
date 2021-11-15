@@ -415,6 +415,7 @@ module Aws
             'Mgn' => 'mgn',
             'MigrationHub' => 'mgh',
             'MigrationHubConfig' => 'migrationhub-config',
+            'MigrationHubStrategyRecommendations' => 'migrationhub-strategy',
             'Mobile' => 'mobile',
             'Neptune' => 'rds',
             'NetworkFirewall' => 'network-firewall',
