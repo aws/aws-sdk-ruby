@@ -152,16 +152,31 @@ module Aws::CloudTrail
     #
     #   * <b> <code>resources.type</code> </b> - This ﬁeld is required.
     #     `resources.type` can only use the `Equals` operator, and the value
-    #     can be one of the following: `AWS::S3::Object`,
-    #     `AWS::S3::AccessPoint`, `AWS::Lambda::Function`,
-    #     `AWS::DynamoDB::Table`, `AWS::S3Outposts::Object`,
-    #     `AWS::ManagedBlockchain::Node`,
-    #     `AWS::S3ObjectLambda::AccessPoint`, or `AWS::EC2::Snapshot`. You
-    #     can have only one `resources.type` ﬁeld per selector. To log data
-    #     events on more than one resource type, add another selector.
+    #     can be one of the following:
+    #
+    #     * `AWS::S3::Object`
+    #
+    #     * `AWS::Lambda::Function`
+    #
+    #     * `AWS::DynamoDB::Table`
+    #
+    #     * `AWS::S3Outposts::Object`
+    #
+    #     * `AWS::ManagedBlockchain::Node`
+    #
+    #     * `AWS::S3ObjectLambda::AccessPoint`
+    #
+    #     * `AWS::EC2::Snapshot`
+    #
+    #     * `AWS::S3::AccessPoint`
+    #
+    #     * `AWS::DynamoDB::Stream`
+    #
+    #     You can have only one `resources.type` ﬁeld per selector. To log
+    #     data events on more than one resource type, add another selector.
     #
     #   * <b> <code>resources.ARN</code> </b> - You can use any operator
-    #     with resources.ARN, but if you use `Equals` or `NotEquals`, the
+    #     with `resources.ARN`, but if you use `Equals` or `NotEquals`, the
     #     value must exactly match the ARN of a valid resource of the type
     #     you've speciﬁed in the template as the value of resources.type.
     #     For example, if resources.type equals `AWS::S3::Object`, the ARN
@@ -200,7 +215,7 @@ module Aws::CloudTrail
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
-    #     * `arn:<partition>:dynamodb:<region>:<account_ID>:table:<table_name>`
+    #     * `arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name>`
     #
     #     ^
     #
@@ -233,6 +248,14 @@ module Aws::CloudTrail
     #     following format:
     #
     #     * `arn:<partition>:ec2:<region>::snapshot/<snapshot_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::DynamoDB::Stream`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name>/stream/<date_time>`
     #
     #     ^
     #   @return [String]
@@ -658,13 +681,31 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] type
     #   The resource type in which you want to log data events. You can
-    #   specify `AWS::S3::Object`, `AWS::Lambda::Function`, or
-    #   `AWS::DynamoDB::Table` resources.
+    #   specify the following *basic* event selector resource types:
     #
-    #   The `AWS::S3Outposts::Object`, `AWS::ManagedBlockchain::Node`,
-    #   `AWS::S3ObjectLambda::AccessPoint`, and `AWS::EC2::Snapshot`
-    #   resource types are not valid in basic event selectors. To log data
-    #   events on these resource types, use advanced event selectors.
+    #   * `AWS::S3::Object`
+    #
+    #   * `AWS::Lambda::Function`
+    #
+    #   * `AWS::DynamoDB::Table`
+    #
+    #   The following resource types are also availble through *advanced*
+    #   event selectors. Basic event selector resource types are valid in
+    #   advanced event selectors, but advanced event selector resource types
+    #   are not valid in basic event selectors. For more information, see
+    #   AdvancedFieldSelector$Field.
+    #
+    #   * `AWS::S3Outposts::Object`
+    #
+    #   * `AWS::ManagedBlockchain::Node`
+    #
+    #   * `AWS::S3ObjectLambda::AccessPoint`
+    #
+    #   * `AWS::EC2::Snapshot`
+    #
+    #   * `AWS::S3::AccessPoint`
+    #
+    #   * `AWS::DynamoDB::Stream`
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -1313,7 +1354,7 @@ module Aws::CloudTrail
     #   data as a hash:
     #
     #       {
-    #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight
+    #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight, ApiErrorRateInsight
     #       }
     #
     # @!attribute [rw] insight_type
@@ -2029,7 +2070,7 @@ module Aws::CloudTrail
     #         trail_name: "String", # required
     #         insight_selectors: [ # required
     #           {
-    #             insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight
+    #             insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight, ApiErrorRateInsight
     #           },
     #         ],
     #       }

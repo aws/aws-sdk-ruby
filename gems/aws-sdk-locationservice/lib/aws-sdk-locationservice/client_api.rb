@@ -128,9 +128,11 @@ module Aws::LocationService
     GetMapTileRequestZString = Shapes::StringShape.new(name: 'GetMapTileRequestZString')
     GetMapTileResponse = Shapes::StructureShape.new(name: 'GetMapTileResponse')
     Id = Shapes::StringShape.new(name: 'Id')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntendedUse = Shapes::StringShape.new(name: 'IntendedUse')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    LanguageTag = Shapes::StringShape.new(name: 'LanguageTag')
     Leg = Shapes::StructureShape.new(name: 'Leg')
     LegDistanceDouble = Shapes::FloatShape.new(name: 'LegDistanceDouble')
     LegDurationSecondsDouble = Shapes::FloatShape.new(name: 'LegDurationSecondsDouble')
@@ -192,9 +194,12 @@ module Aws::LocationService
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     SearchForPositionResult = Shapes::StructureShape.new(name: 'SearchForPositionResult')
+    SearchForPositionResultDistanceDouble = Shapes::FloatShape.new(name: 'SearchForPositionResultDistanceDouble')
     SearchForPositionResultList = Shapes::ListShape.new(name: 'SearchForPositionResultList')
     SearchForTextResult = Shapes::StructureShape.new(name: 'SearchForTextResult')
+    SearchForTextResultDistanceDouble = Shapes::FloatShape.new(name: 'SearchForTextResultDistanceDouble')
     SearchForTextResultList = Shapes::ListShape.new(name: 'SearchForTextResultList')
+    SearchForTextResultRelevanceDouble = Shapes::FloatShape.new(name: 'SearchForTextResultRelevanceDouble')
     SearchPlaceIndexForPositionRequest = Shapes::StructureShape.new(name: 'SearchPlaceIndexForPositionRequest')
     SearchPlaceIndexForPositionResponse = Shapes::StructureShape.new(name: 'SearchPlaceIndexForPositionResponse')
     SearchPlaceIndexForPositionSummary = Shapes::StructureShape.new(name: 'SearchPlaceIndexForPositionSummary')
@@ -217,6 +222,7 @@ module Aws::LocationService
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimeZone = Shapes::StructureShape.new(name: 'TimeZone')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     Token = Shapes::StringShape.new(name: 'Token')
     TravelMode = Shapes::StringShape.new(name: 'TravelMode')
@@ -831,6 +837,7 @@ module Aws::LocationService
     Place.add_member(:address_number, Shapes::ShapeRef.new(shape: String, location_name: "AddressNumber"))
     Place.add_member(:country, Shapes::ShapeRef.new(shape: String, location_name: "Country"))
     Place.add_member(:geometry, Shapes::ShapeRef.new(shape: PlaceGeometry, required: true, location_name: "Geometry"))
+    Place.add_member(:interpolated, Shapes::ShapeRef.new(shape: Boolean, location_name: "Interpolated"))
     Place.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "Label"))
     Place.add_member(:municipality, Shapes::ShapeRef.new(shape: String, location_name: "Municipality"))
     Place.add_member(:neighborhood, Shapes::ShapeRef.new(shape: String, location_name: "Neighborhood"))
@@ -838,6 +845,7 @@ module Aws::LocationService
     Place.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "Region"))
     Place.add_member(:street, Shapes::ShapeRef.new(shape: String, location_name: "Street"))
     Place.add_member(:sub_region, Shapes::ShapeRef.new(shape: String, location_name: "SubRegion"))
+    Place.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
     Place.struct_class = Types::Place
 
     PlaceGeometry.add_member(:point, Shapes::ShapeRef.new(shape: Position, location_name: "Point"))
@@ -858,17 +866,21 @@ module Aws::LocationService
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    SearchForPositionResult.add_member(:distance, Shapes::ShapeRef.new(shape: SearchForPositionResultDistanceDouble, required: true, location_name: "Distance"))
     SearchForPositionResult.add_member(:place, Shapes::ShapeRef.new(shape: Place, required: true, location_name: "Place"))
     SearchForPositionResult.struct_class = Types::SearchForPositionResult
 
     SearchForPositionResultList.member = Shapes::ShapeRef.new(shape: SearchForPositionResult)
 
+    SearchForTextResult.add_member(:distance, Shapes::ShapeRef.new(shape: SearchForTextResultDistanceDouble, location_name: "Distance"))
     SearchForTextResult.add_member(:place, Shapes::ShapeRef.new(shape: Place, required: true, location_name: "Place"))
+    SearchForTextResult.add_member(:relevance, Shapes::ShapeRef.new(shape: SearchForTextResultRelevanceDouble, location_name: "Relevance"))
     SearchForTextResult.struct_class = Types::SearchForTextResult
 
     SearchForTextResultList.member = Shapes::ShapeRef.new(shape: SearchForTextResult)
 
     SearchPlaceIndexForPositionRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
+    SearchPlaceIndexForPositionRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SearchPlaceIndexForPositionRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PlaceIndexSearchResultLimit, location_name: "MaxResults"))
     SearchPlaceIndexForPositionRequest.add_member(:position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Position"))
     SearchPlaceIndexForPositionRequest.struct_class = Types::SearchPlaceIndexForPositionRequest
@@ -878,6 +890,7 @@ module Aws::LocationService
     SearchPlaceIndexForPositionResponse.struct_class = Types::SearchPlaceIndexForPositionResponse
 
     SearchPlaceIndexForPositionSummary.add_member(:data_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataSource"))
+    SearchPlaceIndexForPositionSummary.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SearchPlaceIndexForPositionSummary.add_member(:max_results, Shapes::ShapeRef.new(shape: PlaceIndexSearchResultLimit, location_name: "MaxResults"))
     SearchPlaceIndexForPositionSummary.add_member(:position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Position"))
     SearchPlaceIndexForPositionSummary.struct_class = Types::SearchPlaceIndexForPositionSummary
@@ -886,6 +899,7 @@ module Aws::LocationService
     SearchPlaceIndexForTextRequest.add_member(:filter_b_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "FilterBBox"))
     SearchPlaceIndexForTextRequest.add_member(:filter_countries, Shapes::ShapeRef.new(shape: CountryCodeList, location_name: "FilterCountries"))
     SearchPlaceIndexForTextRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
+    SearchPlaceIndexForTextRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SearchPlaceIndexForTextRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PlaceIndexSearchResultLimit, location_name: "MaxResults"))
     SearchPlaceIndexForTextRequest.add_member(:text, Shapes::ShapeRef.new(shape: SyntheticSearchPlaceIndexForTextRequestString, required: true, location_name: "Text"))
     SearchPlaceIndexForTextRequest.struct_class = Types::SearchPlaceIndexForTextRequest
@@ -898,6 +912,7 @@ module Aws::LocationService
     SearchPlaceIndexForTextSummary.add_member(:data_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataSource"))
     SearchPlaceIndexForTextSummary.add_member(:filter_b_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "FilterBBox"))
     SearchPlaceIndexForTextSummary.add_member(:filter_countries, Shapes::ShapeRef.new(shape: CountryCodeList, location_name: "FilterCountries"))
+    SearchPlaceIndexForTextSummary.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
     SearchPlaceIndexForTextSummary.add_member(:max_results, Shapes::ShapeRef.new(shape: PlaceIndexSearchResultLimit, location_name: "MaxResults"))
     SearchPlaceIndexForTextSummary.add_member(:result_b_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "ResultBBox"))
     SearchPlaceIndexForTextSummary.add_member(:text, Shapes::ShapeRef.new(shape: SyntheticSearchPlaceIndexForTextSummaryString, required: true, location_name: "Text"))
@@ -928,6 +943,10 @@ module Aws::LocationService
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TimeZone.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    TimeZone.add_member(:offset, Shapes::ShapeRef.new(shape: Integer, location_name: "Offset"))
+    TimeZone.struct_class = Types::TimeZone
 
     TruckDimensions.add_member(:height, Shapes::ShapeRef.new(shape: TruckDimensionsHeightDouble, location_name: "Height"))
     TruckDimensions.add_member(:length, Shapes::ShapeRef.new(shape: TruckDimensionsLengthDouble, location_name: "Length"))

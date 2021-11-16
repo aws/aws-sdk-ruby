@@ -682,7 +682,7 @@ module Aws::LocationService
 
     # [Calculates a route][1] given the following required parameters:
     # `DeparturePostiton` and `DestinationPosition`. Requires that you first
-    # [create a route calculator resource][2]
+    # [create a route calculator resource][2].
     #
     # By default, a request that doesn't specify a departure time uses the
     # best time of day to travel with the best traffic conditions when
@@ -695,7 +695,8 @@ module Aws::LocationService
     #   data at the given time.
     #
     #   <note markdown="1"> You can't specify both `DepartureTime` and `DepartureNow` in a
-    #   single request. Specifying both parameters returns an error message.
+    #   single request. Specifying both parameters returns a validation
+    #   error.
     #
     #    </note>
     #
@@ -714,7 +715,7 @@ module Aws::LocationService
     #
     # @option params [required, String] :calculator_name
     #   The name of the route calculator resource that you want to use to
-    #   calculate a route.
+    #   calculate the route.
     #
     # @option params [Types::CalculateRouteCarModeOptions] :car_mode_options
     #   Specifies route preferences when traveling by `Car`, such as avoiding
@@ -755,8 +756,8 @@ module Aws::LocationService
     #
     # @option params [Time,DateTime,Date,Integer,String] :departure_time
     #   Specifies the desired time of departure. Uses the given time to
-    #   calculate a route. Otherwise, the best time of day to travel with the
-    #   best traffic conditions is used to calculate the route.
+    #   calculate the route. Otherwise, the best time of day to travel with
+    #   the best traffic conditions is used to calculate the route.
     #
     #   <note markdown="1"> Setting a departure time in the past returns a `400
     #   ValidationException` error.
@@ -1009,6 +1010,8 @@ module Aws::LocationService
     #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
     #     characters: + - = . \_ : / @.
     #
+    #   * Cannot use "aws:" as a prefix for a key.
+    #
     # @return [Types::CreateGeofenceCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGeofenceCollectionResponse#collection_arn #collection_arn} => String
@@ -1094,6 +1097,8 @@ module Aws::LocationService
     #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
     #     characters: + - = . \_ : / @.
     #
+    #   * Cannot use "aws:" as a prefix for a key.
+    #
     # @return [Types::CreateMapResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMapResponse#create_time #create_time} => Time
@@ -1129,11 +1134,13 @@ module Aws::LocationService
       req.send_request(options)
     end
 
-    # Creates a place index resource in your AWS account, which supports
-    # functions with geospatial data sourced from your chosen data provider.
+    # Creates a place index resource in your AWS account. Use a place index
+    # resource to geocode addresses and other text queries by using the
+    # `SearchPlaceIndexForText` operation, and reverse geocode coordinates
+    # by using the `SearchPlaceIndexForPosition` operation.
     #
     # @option params [required, String] :data_source
-    #   Specifies the data provider of geospatial data.
+    #   Specifies the geospatial data provider for the new place index.
     #
     #   <note markdown="1"> This field is case-sensitive. Enter the valid values as shown. For
     #   example, entering `HERE` returns an error.
@@ -1150,8 +1157,8 @@ module Aws::LocationService
     #     coverage in your region of interest, see [HERE details on goecoding
     #     coverage][4].
     #
-    #     Place index resources using HERE Technologies as a data provider
-    #     can't [store results][5] for locations in Japan. For more
+    #     If you specify HERE Technologies (`Here`) as the data provider, you
+    #     may not [store results][5] for locations in Japan. For more
     #     information, see the [AWS Service Terms][6] for Amazon Location
     #     Service.
     #
@@ -1198,23 +1205,26 @@ module Aws::LocationService
     #
     # @option params [Hash<String,String>] :tags
     #   Applies one or more tags to the place index resource. A tag is a
-    #   key-value pair helps manage, identify, search, and filter your
-    #   resources by labelling them.
+    #   key-value pair that helps you manage, identify, search, and filter
+    #   your resources.
     #
     #   Format: `"key" : "value"`
     #
     #   Restrictions:
     #
-    #   * Maximum 50 tags per resource
+    #   * Maximum 50 tags per resource.
     #
-    #   * Each resource tag must be unique with a maximum of one value.
+    #   * Each tag key must be unique and must have exactly one associated
+    #     value.
     #
-    #   * Maximum key length: 128 Unicode characters in UTF-8
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
     #
-    #   * Maximum value length: 256 Unicode characters in UTF-8
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
     #
     #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-    #     characters: + - = . \_ : / @.
+    #     characters: + - = . \_ : / @
+    #
+    #   * Cannot use "aws:" as a prefix for a key.
     #
     # @return [Types::CreatePlaceIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1339,6 +1349,8 @@ module Aws::LocationService
     #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
     #     characters: + - = . \_ : / @.
     #
+    #   * Cannot use "aws:" as a prefix for a key.
+    #
     # @return [Types::CreateRouteCalculatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRouteCalculatorResponse#calculator_arn #calculator_arn} => String
@@ -1397,12 +1409,12 @@ module Aws::LocationService
     #     seconds is stored for each unique device ID.
     #
     #   * `DistanceBased` - If the device has moved less than 30 m (98.4 ft),
-    #     location updates are ignored. Location updates within this distance
-    #     are neither evaluated against linked geofence collections, nor
-    #     stored. This helps control costs by reducing the number of geofence
-    #     evaluations and device positions to retrieve. Distance-based
-    #     filtering can also reduce the jitter effect when displaying device
-    #     trajectory on a map.
+    #     location updates are ignored. Location updates within this area are
+    #     neither evaluated against linked geofence collections, nor stored.
+    #     This helps control costs by reducing the number of geofence
+    #     evaluations and historical device positions to paginate through.
+    #     Distance-based filtering can also reduce the effects of GPS noise
+    #     when displaying device trajectories on a map.
     #
     #   This field is optional. If not specified, the default value is
     #   `TimeBased`.
@@ -1462,6 +1474,8 @@ module Aws::LocationService
     #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
     #     characters: + - = . \_ : / @.
     #
+    #   * Cannot use "aws:" as a prefix for a key.
+    #
     # @option params [required, String] :tracker_name
     #   The name for the tracker resource.
     #
@@ -1485,7 +1499,7 @@ module Aws::LocationService
     #   resp = client.create_tracker({
     #     description: "ResourceDescription",
     #     kms_key_id: "KmsKeyId",
-    #     position_filtering: "TimeBased", # accepts TimeBased, DistanceBased
+    #     position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
     #     pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #     pricing_plan_data_source: "String",
     #     tags: {
@@ -1851,7 +1865,7 @@ module Aws::LocationService
     #   resp.create_time #=> Time
     #   resp.description #=> String
     #   resp.kms_key_id #=> String
-    #   resp.position_filtering #=> String, one of "TimeBased", "DistanceBased"
+    #   resp.position_filtering #=> String, one of "TimeBased", "DistanceBased", "AccuracyBased"
     #   resp.pricing_plan #=> String, one of "RequestBasedUsage", "MobileAssetTracking", "MobileAssetManagement"
     #   resp.pricing_plan_data_source #=> String
     #   resp.tags #=> Hash
@@ -2770,21 +2784,34 @@ module Aws::LocationService
     # @option params [required, String] :index_name
     #   The name of the place index resource you want to use for the search.
     #
+    # @option params [String] :language
+    #   The preferred language used to return results. The value must be a
+    #   valid [BCP 47][1] language tag, for example, `en` for English.
+    #
+    #   This setting affects the languages used in the results. It does not
+    #   change which results are returned. If the language is not specified,
+    #   or not supported for a particular result, the partner automatically
+    #   chooses a language for the result.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/search/bcp47
+    #
     # @option params [Integer] :max_results
-    #   An optional paramer. The maximum number of results returned per
+    #   An optional parameter. The maximum number of results returned per
     #   request.
     #
     #   Default value: `50`
     #
     # @option params [required, Array<Float>] :position
-    #   Specifies a coordinate for the query defined by a longitude, and
-    #   latitude.
+    #   Specifies the longitude and latitude of the position to query.
     #
-    #   * The first position is the X coordinate, or longitude.
+    #   This parameter must contain a pair of numbers. The first number
+    #   represents the X coordinate, or longitude; the second number
+    #   represents the Y coordinate, or latitude.
     #
-    #   * The second position is the Y coordinate, or latitude.
-    #
-    #   For example, `position=xLongitude&position=yLatitude` .
+    #   For example, `[-123.1174, 49.2847]` represents a position with
+    #   longitude `-123.1174` and latitude `49.2847`.
     #
     # @return [Types::SearchPlaceIndexForPositionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2795,6 +2822,7 @@ module Aws::LocationService
     #
     #   resp = client.search_place_index_for_position({
     #     index_name: "ResourceName", # required
+    #     language: "LanguageTag",
     #     max_results: 1,
     #     position: [1.0], # required
     #   })
@@ -2802,10 +2830,12 @@ module Aws::LocationService
     # @example Response structure
     #
     #   resp.results #=> Array
+    #   resp.results[0].distance #=> Float
     #   resp.results[0].place.address_number #=> String
     #   resp.results[0].place.country #=> String
     #   resp.results[0].place.geometry.point #=> Array
     #   resp.results[0].place.geometry.point[0] #=> Float
+    #   resp.results[0].place.interpolated #=> Boolean
     #   resp.results[0].place.label #=> String
     #   resp.results[0].place.municipality #=> String
     #   resp.results[0].place.neighborhood #=> String
@@ -2813,7 +2843,10 @@ module Aws::LocationService
     #   resp.results[0].place.region #=> String
     #   resp.results[0].place.street #=> String
     #   resp.results[0].place.sub_region #=> String
+    #   resp.results[0].place.time_zone.name #=> String
+    #   resp.results[0].place.time_zone.offset #=> Integer
     #   resp.summary.data_source #=> String
+    #   resp.summary.language #=> String
     #   resp.summary.max_results #=> Integer
     #   resp.summary.position #=> Array
     #   resp.summary.position[0] #=> Float
@@ -2830,8 +2863,9 @@ module Aws::LocationService
     # Geocodes free-form text, such as an address, name, city, or region to
     # allow you to search for Places or points of interest.
     #
-    # Includes the option to apply additional parameters to narrow your list
-    # of results.
+    # Optional parameters let you narrow your search results by bounding box
+    # or country, or bias your search toward a specific position on the
+    # globe.
     #
     # <note markdown="1"> You can search for places near a given position using `BiasPosition`,
     # or filter results within a bounding box using `FilterBBox`. Providing
@@ -2839,46 +2873,51 @@ module Aws::LocationService
     #
     #  </note>
     #
+    # Search results are returned in order of highest to lowest relevance.
+    #
     # @option params [Array<Float>] :bias_position
-    #   Searches for results closest to the given position. An optional
-    #   parameter defined by longitude, and latitude.
+    #   An optional parameter that indicates a preference for places that are
+    #   closer to a specified position.
     #
-    #   * The first `bias` position is the X coordinate, or longitude.
+    #   If provided, this parameter must contain a pair of numbers. The first
+    #   number represents the X coordinate, or longitude; the second number
+    #   represents the Y coordinate, or latitude.
     #
-    #   * The second `bias` position is the Y coordinate, or latitude.
+    #   For example, `[-123.1174, 49.2847]` represents the position with
+    #   longitude `-123.1174` and latitude `49.2847`.
     #
-    #   For example, `bias=xLongitude&bias=yLatitude`.
+    #   <note markdown="1"> `BiasPosition` and `FilterBBox` are mutually exclusive. Specifying
+    #   both options results in an error.
+    #
+    #    </note>
     #
     # @option params [Array<Float>] :filter_b_box
-    #   Filters the results by returning only Places within the provided
-    #   bounding box. An optional parameter.
+    #   An optional parameter that limits the search results by returning only
+    #   places that are within the provided bounding box.
     #
-    #   The first 2 `bbox` parameters describe the lower southwest corner:
+    #   If provided, this parameter must contain a total of four consecutive
+    #   numbers in two pairs. The first pair of numbers represents the X and Y
+    #   coordinates (longitude and latitude, respectively) of the southwest
+    #   corner of the bounding box; the second pair of numbers represents the
+    #   X and Y coordinates (longitude and latitude, respectively) of the
+    #   northeast corner of the bounding box.
     #
-    #   * The first `bbox` position is the X coordinate or longitude of the
-    #     lower southwest corner.
+    #   For example, `[-12.7935, -37.4835, -12.0684, -36.9542]` represents a
+    #   bounding box where the southwest corner has longitude `-12.7935` and
+    #   latitude `-37.4835`, and the northeast corner has longitude `-12.0684`
+    #   and latitude `-36.9542`.
     #
-    #   * The second `bbox` position is the Y coordinate or latitude of the
-    #     lower southwest corner.
+    #   <note markdown="1"> `FilterBBox` and `BiasPosition` are mutually exclusive. Specifying
+    #   both options results in an error.
     #
-    #   For example, `bbox=xLongitudeSW&bbox=yLatitudeSW`.
-    #
-    #   The next `bbox` parameters describe the upper northeast corner:
-    #
-    #   * The third `bbox` position is the X coordinate, or longitude of the
-    #     upper northeast corner.
-    #
-    #   * The fourth `bbox` position is the Y coordinate, or longitude of the
-    #     upper northeast corner.
-    #
-    #   For example, `bbox=xLongitudeNE&bbox=yLatitudeNE`
+    #    </note>
     #
     # @option params [Array<String>] :filter_countries
-    #   Limits the search to the given a list of countries/regions. An
-    #   optional parameter.
+    #   An optional parameter that limits the search results by returning only
+    #   places that are in a specified list of countries.
     #
-    #   * Use the [ISO 3166][1] 3-digit country code. For example, Australia
-    #     uses three upper-case characters: `AUS`.
+    #   * Valid values include [ISO 3166][1] 3-digit country codes. For
+    #     example, Australia uses three upper-case characters: `AUS`.
     #
     #   ^
     #
@@ -2889,6 +2928,19 @@ module Aws::LocationService
     # @option params [required, String] :index_name
     #   The name of the place index resource you want to use for the search.
     #
+    # @option params [String] :language
+    #   The preferred language used to return results. The value must be a
+    #   valid [BCP 47][1] language tag, for example, `en` for English.
+    #
+    #   This setting affects the languages used in the results. It does not
+    #   change which results are returned. If the language is not specified,
+    #   or not supported for a particular result, the partner automatically
+    #   chooses a language for the result.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/search/bcp47
+    #
     # @option params [Integer] :max_results
     #   An optional parameter. The maximum number of results returned per
     #   request.
@@ -2896,7 +2948,7 @@ module Aws::LocationService
     #   The default: `50`
     #
     # @option params [required, String] :text
-    #   The address, name, city, or region to be used in the search. In
+    #   The address, name, city, or region to be used in the search in
     #   free-form text format. For example, `123 Any Street`.
     #
     # @return [Types::SearchPlaceIndexForTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2911,6 +2963,7 @@ module Aws::LocationService
     #     filter_b_box: [1.0],
     #     filter_countries: ["CountryCode"],
     #     index_name: "ResourceName", # required
+    #     language: "LanguageTag",
     #     max_results: 1,
     #     text: "SyntheticSearchPlaceIndexForTextRequestString", # required
     #   })
@@ -2918,10 +2971,12 @@ module Aws::LocationService
     # @example Response structure
     #
     #   resp.results #=> Array
+    #   resp.results[0].distance #=> Float
     #   resp.results[0].place.address_number #=> String
     #   resp.results[0].place.country #=> String
     #   resp.results[0].place.geometry.point #=> Array
     #   resp.results[0].place.geometry.point[0] #=> Float
+    #   resp.results[0].place.interpolated #=> Boolean
     #   resp.results[0].place.label #=> String
     #   resp.results[0].place.municipality #=> String
     #   resp.results[0].place.neighborhood #=> String
@@ -2929,6 +2984,9 @@ module Aws::LocationService
     #   resp.results[0].place.region #=> String
     #   resp.results[0].place.street #=> String
     #   resp.results[0].place.sub_region #=> String
+    #   resp.results[0].place.time_zone.name #=> String
+    #   resp.results[0].place.time_zone.offset #=> Integer
+    #   resp.results[0].relevance #=> Float
     #   resp.summary.bias_position #=> Array
     #   resp.summary.bias_position[0] #=> Float
     #   resp.summary.data_source #=> String
@@ -2936,6 +2994,7 @@ module Aws::LocationService
     #   resp.summary.filter_b_box[0] #=> Float
     #   resp.summary.filter_countries #=> Array
     #   resp.summary.filter_countries[0] #=> String
+    #   resp.summary.language #=> String
     #   resp.summary.max_results #=> Integer
     #   resp.summary.result_b_box #=> Array
     #   resp.summary.result_b_box[0] #=> Float
@@ -2965,12 +3024,27 @@ module Aws::LocationService
     #   ^
     #
     # @option params [required, Hash<String,String>] :tags
-    #   Tags that have been applied to the specified resource. Tags are mapped
-    #   from the tag key to the tag value: `"TagKey" : "TagValue"`.
+    #   Applies one or more tags to specific resource. A tag is a key-value
+    #   pair that helps you manage, identify, search, and filter your
+    #   resources.
     #
-    #   * Format example: `\{"tag1" : "value1", "tag2" : "value2"\} `
+    #   Format: `"key" : "value"`
     #
-    #   ^
+    #   Restrictions:
+    #
+    #   * Maximum 50 tags per resource.
+    #
+    #   * Each tag key must be unique and must have exactly one associated
+    #     value.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
+    #
+    #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+    #     characters: + - = . \_ : / @
+    #
+    #   * Cannot use "aws:" as a prefix for a key.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3314,7 +3388,7 @@ module Aws::LocationService
     #
     #   resp = client.update_tracker({
     #     description: "ResourceDescription",
-    #     position_filtering: "TimeBased", # accepts TimeBased, DistanceBased
+    #     position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
     #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #     pricing_plan_data_source: "String",
     #     tracker_name: "ResourceName", # required
@@ -3348,7 +3422,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -646,7 +646,7 @@ module Aws::LocationService
     #
     # @!attribute [rw] calculator_name
     #   The name of the route calculator resource that you want to use to
-    #   calculate a route.
+    #   calculate the route.
     #   @return [String]
     #
     # @!attribute [rw] car_mode_options
@@ -691,7 +691,7 @@ module Aws::LocationService
     #
     # @!attribute [rw] departure_time
     #   Specifies the desired time of departure. Uses the given time to
-    #   calculate a route. Otherwise, the best time of day to travel with
+    #   calculate the route. Otherwise, the best time of day to travel with
     #   the best traffic conditions is used to calculate the route.
     #
     #   <note markdown="1"> Setting a departure time in the past returns a `400
@@ -892,7 +892,7 @@ module Aws::LocationService
     #   @return [Float]
     #
     # @!attribute [rw] distance_unit
-    #   The unit of measurement for the distance.
+    #   The unit of measurement for route distances.
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
@@ -1103,6 +1103,8 @@ module Aws::LocationService
     #
     #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
     #     characters: + - = . \_ : / @.
+    #
+    #   * Cannot use "aws:" as a prefix for a key.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateGeofenceCollectionRequest AWS API Documentation
@@ -1217,6 +1219,8 @@ module Aws::LocationService
     #
     #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
     #     characters: + - = . \_ : / @.
+    #
+    #   * Cannot use "aws:" as a prefix for a key.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateMapRequest AWS API Documentation
@@ -1280,7 +1284,7 @@ module Aws::LocationService
     #       }
     #
     # @!attribute [rw] data_source
-    #   Specifies the data provider of geospatial data.
+    #   Specifies the geospatial data provider for the new place index.
     #
     #   <note markdown="1"> This field is case-sensitive. Enter the valid values as shown. For
     #   example, entering `HERE` returns an error.
@@ -1297,8 +1301,8 @@ module Aws::LocationService
     #     coverage in your region of interest, see [HERE details on
     #     goecoding coverage][4].
     #
-    #     Place index resources using HERE Technologies as a data provider
-    #     can't [store results][5] for locations in Japan. For more
+    #     If you specify HERE Technologies (`Here`) as the data provider,
+    #     you may not [store results][5] for locations in Japan. For more
     #     information, see the [AWS Service Terms][6] for Amazon Location
     #     Service.
     #
@@ -1350,23 +1354,26 @@ module Aws::LocationService
     #
     # @!attribute [rw] tags
     #   Applies one or more tags to the place index resource. A tag is a
-    #   key-value pair helps manage, identify, search, and filter your
-    #   resources by labelling them.
+    #   key-value pair that helps you manage, identify, search, and filter
+    #   your resources.
     #
     #   Format: `"key" : "value"`
     #
     #   Restrictions:
     #
-    #   * Maximum 50 tags per resource
+    #   * Maximum 50 tags per resource.
     #
-    #   * Each resource tag must be unique with a maximum of one value.
+    #   * Each tag key must be unique and must have exactly one associated
+    #     value.
     #
-    #   * Maximum key length: 128 Unicode characters in UTF-8
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
     #
-    #   * Maximum value length: 256 Unicode characters in UTF-8
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
     #
     #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-    #     characters: + - = . \_ : / @.
+    #     characters: + - = . \_ : / @
+    #
+    #   * Cannot use "aws:" as a prefix for a key.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreatePlaceIndexRequest AWS API Documentation
@@ -1512,6 +1519,8 @@ module Aws::LocationService
     #
     #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
     #     characters: + - = . \_ : / @.
+    #
+    #   * Cannot use "aws:" as a prefix for a key.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateRouteCalculatorRequest AWS API Documentation
@@ -1573,7 +1582,7 @@ module Aws::LocationService
     #       {
     #         description: "ResourceDescription",
     #         kms_key_id: "KmsKeyId",
-    #         position_filtering: "TimeBased", # accepts TimeBased, DistanceBased
+    #         position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
     #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #         pricing_plan_data_source: "String",
     #         tags: {
@@ -1607,11 +1616,11 @@ module Aws::LocationService
     #
     #   * `DistanceBased` - If the device has moved less than 30 m (98.4
     #     ft), location updates are ignored. Location updates within this
-    #     distance are neither evaluated against linked geofence
-    #     collections, nor stored. This helps control costs by reducing the
-    #     number of geofence evaluations and device positions to retrieve.
-    #     Distance-based filtering can also reduce the jitter effect when
-    #     displaying device trajectory on a map.
+    #     area are neither evaluated against linked geofence collections,
+    #     nor stored. This helps control costs by reducing the number of
+    #     geofence evaluations and historical device positions to paginate
+    #     through. Distance-based filtering can also reduce the effects of
+    #     GPS noise when displaying device trajectories on a map.
     #
     #   This field is optional. If not specified, the default value is
     #   `TimeBased`.
@@ -1673,6 +1682,8 @@ module Aws::LocationService
     #
     #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
     #     characters: + - = . \_ : / @.
+    #
+    #   * Cannot use "aws:" as a prefix for a key.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tracker_name
@@ -2115,14 +2126,14 @@ module Aws::LocationService
     #   @return [Time]
     #
     # @!attribute [rw] data_source
-    #   The data provider of geospatial data. Indicates one of the available
-    #   providers:
+    #   The data provider of geospatial data. Values can be one of the
+    #   following:
     #
     #   * `Esri`
     #
     #   * `Here`
     #
-    #   For additional details on data providers, see [Amazon Location
+    #   For more information about data providers, see [Amazon Location
     #   Service data providers][1].
     #
     #
@@ -3603,9 +3614,9 @@ module Aws::LocationService
     #   @return [Array<Types::ListPlaceIndexesResponseEntry>]
     #
     # @!attribute [rw] next_token
-    #   A pagination token indicating there are additional pages available.
-    #   You can use the token in a following request to fetch the next set
-    #   of results.
+    #   A pagination token indicating that there are additional pages
+    #   available. You can use the token in a new request to fetch the next
+    #   page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListPlaceIndexesResponse AWS API Documentation
@@ -3629,14 +3640,14 @@ module Aws::LocationService
     #   @return [Time]
     #
     # @!attribute [rw] data_source
-    #   The data provider of geospatial data. Indicates one of the available
-    #   providers:
+    #   The data provider of geospatial data. Values can be one of the
+    #   following:
     #
     #   * `Esri`
     #
     #   * `Here`
     #
-    #   For additional details on data providers, see [Amazon Location
+    #   For more information about data providers, see [Amazon Location
     #   Service data providers][1].
     #
     #
@@ -4110,6 +4121,19 @@ module Aws::LocationService
     #   Places uses a point geometry to specify a location or a Place.
     #   @return [Types::PlaceGeometry]
     #
+    # @!attribute [rw] interpolated
+    #   `True` if the result is interpolated from other known places.
+    #
+    #   `False` if the Place is a known place.
+    #
+    #   Not returned when the partner does not provide the information.
+    #
+    #   For example, returns `False` for an address location that is found
+    #   in the partner data, but returns `True` if an address does not exist
+    #   in the partner data and its location is calculated by interpolating
+    #   between other known addresses.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] label
     #   The full name and address of the point of interest such as a city,
     #   region, or country. For example, `123 Any Street, Any Town, USA`.
@@ -4140,9 +4164,14 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] sub_region
-    #   A country, or an area that's part of a larger region . For example,
+    #   A country, or an area that's part of a larger region. For example,
     #   `Metro Vancouver`.
     #   @return [String]
+    #
+    # @!attribute [rw] time_zone
+    #   The time zone in which the `Place` is located. Returned only when
+    #   using Here as the selected partner.
+    #   @return [Types::TimeZone]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/Place AWS API Documentation
     #
@@ -4150,13 +4179,15 @@ module Aws::LocationService
       :address_number,
       :country,
       :geometry,
+      :interpolated,
       :label,
       :municipality,
       :neighborhood,
       :postal_code,
       :region,
       :street,
-      :sub_region)
+      :sub_region,
+      :time_zone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4275,32 +4306,65 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # Specifies a single point of interest, or Place as a result of a search
-    # query obtained from a dataset configured in the place index resource.
+    # Contains a search result from a position search query that is run on a
+    # place index resource.
+    #
+    # @!attribute [rw] distance
+    #   The distance in meters of a great-circle arc between the query
+    #   position and the result.
+    #
+    #   <note markdown="1"> A great-circle arc is the shortest path on a sphere, in this case
+    #   the Earth. This returns the shortest distance between two locations.
+    #
+    #    </note>
+    #   @return [Float]
     #
     # @!attribute [rw] place
-    #   Contains details about the relevant point of interest.
+    #   Details about the search result, such as its address and position.
     #   @return [Types::Place]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchForPositionResult AWS API Documentation
     #
     class SearchForPositionResult < Struct.new(
+      :distance,
       :place)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Contains relevant Places returned by calling
-    # `SearchPlaceIndexForText`.
+    # Contains a search result from a text search query that is run on a
+    # place index resource.
+    #
+    # @!attribute [rw] distance
+    #   The distance in meters of a great-circle arc between the bias
+    #   position specified and the result. `Distance` will be returned only
+    #   if a bias position was specified in the query.
+    #
+    #   <note markdown="1"> A great-circle arc is the shortest path on a sphere, in this case
+    #   the Earth. This returns the shortest distance between two locations.
+    #
+    #    </note>
+    #   @return [Float]
     #
     # @!attribute [rw] place
-    #   Contains details about the relevant point of interest.
+    #   Details about the search result, such as its address and position.
     #   @return [Types::Place]
+    #
+    # @!attribute [rw] relevance
+    #   The relative confidence in the match for a result among the results
+    #   returned. For example, if more fields for an address match
+    #   (including house number, street, city, country/region, and postal
+    #   code), the relevance score is closer to 1.
+    #
+    #   Returned only when the partner selected is Esri.
+    #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchForTextResult AWS API Documentation
     #
     class SearchForTextResult < Struct.new(
-      :place)
+      :distance,
+      :place,
+      :relevance)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4310,6 +4374,7 @@ module Aws::LocationService
     #
     #       {
     #         index_name: "ResourceName", # required
+    #         language: "LanguageTag",
     #         max_results: 1,
     #         position: [1.0], # required
     #       }
@@ -4318,28 +4383,43 @@ module Aws::LocationService
     #   The name of the place index resource you want to use for the search.
     #   @return [String]
     #
+    # @!attribute [rw] language
+    #   The preferred language used to return results. The value must be a
+    #   valid [BCP 47][1] language tag, for example, `en` for English.
+    #
+    #   This setting affects the languages used in the results. It does not
+    #   change which results are returned. If the language is not specified,
+    #   or not supported for a particular result, the partner automatically
+    #   chooses a language for the result.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/search/bcp47
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
-    #   An optional paramer. The maximum number of results returned per
+    #   An optional parameter. The maximum number of results returned per
     #   request.
     #
     #   Default value: `50`
     #   @return [Integer]
     #
     # @!attribute [rw] position
-    #   Specifies a coordinate for the query defined by a longitude, and
-    #   latitude.
+    #   Specifies the longitude and latitude of the position to query.
     #
-    #   * The first position is the X coordinate, or longitude.
+    #   This parameter must contain a pair of numbers. The first number
+    #   represents the X coordinate, or longitude; the second number
+    #   represents the Y coordinate, or latitude.
     #
-    #   * The second position is the Y coordinate, or latitude.
-    #
-    #   For example, `position=xLongitude&position=yLatitude` .
+    #   For example, `[-123.1174, 49.2847]` represents a position with
+    #   longitude `-123.1174` and latitude `49.2847`.
     #   @return [Array<Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForPositionRequest AWS API Documentation
     #
     class SearchPlaceIndexForPositionRequest < Struct.new(
       :index_name,
+      :language,
       :max_results,
       :position)
       SENSITIVE = [:position]
@@ -4352,7 +4432,9 @@ module Aws::LocationService
     #   @return [Array<Types::SearchForPositionResult>]
     #
     # @!attribute [rw] summary
-    #   Contains a summary of the request.
+    #   Contains a summary of the request. Echoes the input values for
+    #   `Position`, `Language`, `MaxResults`, and the `DataSource` of the
+    #   place index.
     #   @return [Types::SearchPlaceIndexForPositionSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForPositionResponse AWS API Documentation
@@ -4364,18 +4446,17 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # A summary of the reverse geocoding request sent using
-    # `SearchPlaceIndexForPosition`.
+    # A summary of the request sent by using `SearchPlaceIndexForPosition`.
     #
     # @!attribute [rw] data_source
-    #   The data provider of geospatial data. Indicates one of the available
-    #   providers:
+    #   The geospatial data provider attached to the place index resource
+    #   specified in the request. Values can be one of the following:
     #
     #   * Esri
     #
-    #   * HERE
+    #   * Here
     #
-    #   For additional details on data providers, see [Amazon Location
+    #   For more information about data providers, see [Amazon Location
     #   Service data providers][1].
     #
     #
@@ -4383,21 +4464,32 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
+    # @!attribute [rw] language
+    #   The preferred language used to return results. Matches the language
+    #   in the request. The value is a valid [BCP 47][1] language tag, for
+    #   example, `en` for English.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/search/bcp47
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
-    #   An optional parameter. The maximum number of results returned per
+    #   Contains the optional result count limit that is specified in the
     #   request.
     #
     #   Default value: `50`
     #   @return [Integer]
     #
     # @!attribute [rw] position
-    #   The position given in the reverse geocoding request.
+    #   The position specified in the request.
     #   @return [Array<Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForPositionSummary AWS API Documentation
     #
     class SearchPlaceIndexForPositionSummary < Struct.new(
       :data_source,
+      :language,
       :max_results,
       :position)
       SENSITIVE = [:position]
@@ -4412,52 +4504,56 @@ module Aws::LocationService
     #         filter_b_box: [1.0],
     #         filter_countries: ["CountryCode"],
     #         index_name: "ResourceName", # required
+    #         language: "LanguageTag",
     #         max_results: 1,
     #         text: "SyntheticSearchPlaceIndexForTextRequestString", # required
     #       }
     #
     # @!attribute [rw] bias_position
-    #   Searches for results closest to the given position. An optional
-    #   parameter defined by longitude, and latitude.
+    #   An optional parameter that indicates a preference for places that
+    #   are closer to a specified position.
     #
-    #   * The first `bias` position is the X coordinate, or longitude.
+    #   If provided, this parameter must contain a pair of numbers. The
+    #   first number represents the X coordinate, or longitude; the second
+    #   number represents the Y coordinate, or latitude.
     #
-    #   * The second `bias` position is the Y coordinate, or latitude.
+    #   For example, `[-123.1174, 49.2847]` represents the position with
+    #   longitude `-123.1174` and latitude `49.2847`.
     #
-    #   For example, `bias=xLongitude&bias=yLatitude`.
+    #   <note markdown="1"> `BiasPosition` and `FilterBBox` are mutually exclusive. Specifying
+    #   both options results in an error.
+    #
+    #    </note>
     #   @return [Array<Float>]
     #
     # @!attribute [rw] filter_b_box
-    #   Filters the results by returning only Places within the provided
-    #   bounding box. An optional parameter.
+    #   An optional parameter that limits the search results by returning
+    #   only places that are within the provided bounding box.
     #
-    #   The first 2 `bbox` parameters describe the lower southwest corner:
+    #   If provided, this parameter must contain a total of four consecutive
+    #   numbers in two pairs. The first pair of numbers represents the X and
+    #   Y coordinates (longitude and latitude, respectively) of the
+    #   southwest corner of the bounding box; the second pair of numbers
+    #   represents the X and Y coordinates (longitude and latitude,
+    #   respectively) of the northeast corner of the bounding box.
     #
-    #   * The first `bbox` position is the X coordinate or longitude of the
-    #     lower southwest corner.
+    #   For example, `[-12.7935, -37.4835, -12.0684, -36.9542]` represents a
+    #   bounding box where the southwest corner has longitude `-12.7935` and
+    #   latitude `-37.4835`, and the northeast corner has longitude
+    #   `-12.0684` and latitude `-36.9542`.
     #
-    #   * The second `bbox` position is the Y coordinate or latitude of the
-    #     lower southwest corner.
+    #   <note markdown="1"> `FilterBBox` and `BiasPosition` are mutually exclusive. Specifying
+    #   both options results in an error.
     #
-    #   For example, `bbox=xLongitudeSW&bbox=yLatitudeSW`.
-    #
-    #   The next `bbox` parameters describe the upper northeast corner:
-    #
-    #   * The third `bbox` position is the X coordinate, or longitude of the
-    #     upper northeast corner.
-    #
-    #   * The fourth `bbox` position is the Y coordinate, or longitude of
-    #     the upper northeast corner.
-    #
-    #   For example, `bbox=xLongitudeNE&bbox=yLatitudeNE`
+    #    </note>
     #   @return [Array<Float>]
     #
     # @!attribute [rw] filter_countries
-    #   Limits the search to the given a list of countries/regions. An
-    #   optional parameter.
+    #   An optional parameter that limits the search results by returning
+    #   only places that are in a specified list of countries.
     #
-    #   * Use the [ISO 3166][1] 3-digit country code. For example, Australia
-    #     uses three upper-case characters: `AUS`.
+    #   * Valid values include [ISO 3166][1] 3-digit country codes. For
+    #     example, Australia uses three upper-case characters: `AUS`.
     #
     #   ^
     #
@@ -4470,6 +4566,20 @@ module Aws::LocationService
     #   The name of the place index resource you want to use for the search.
     #   @return [String]
     #
+    # @!attribute [rw] language
+    #   The preferred language used to return results. The value must be a
+    #   valid [BCP 47][1] language tag, for example, `en` for English.
+    #
+    #   This setting affects the languages used in the results. It does not
+    #   change which results are returned. If the language is not specified,
+    #   or not supported for a particular result, the partner automatically
+    #   chooses a language for the result.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/search/bcp47
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   An optional parameter. The maximum number of results returned per
     #   request.
@@ -4478,7 +4588,7 @@ module Aws::LocationService
     #   @return [Integer]
     #
     # @!attribute [rw] text
-    #   The address, name, city, or region to be used in the search. In
+    #   The address, name, city, or region to be used in the search in
     #   free-form text format. For example, `123 Any Street`.
     #   @return [String]
     #
@@ -4489,6 +4599,7 @@ module Aws::LocationService
       :filter_b_box,
       :filter_countries,
       :index_name,
+      :language,
       :max_results,
       :text)
       SENSITIVE = [:bias_position, :filter_b_box, :text]
@@ -4496,15 +4607,16 @@ module Aws::LocationService
     end
 
     # @!attribute [rw] results
-    #   A list of Places closest to the specified position. Each result
-    #   contains additional information about the specific point of
-    #   interest.
+    #   A list of Places matching the input text. Each result contains
+    #   additional information about the specific point of interest.
     #   @return [Array<Types::SearchForTextResult>]
     #
     # @!attribute [rw] summary
-    #   Contains a summary of the request. Contains the `BiasPosition`,
-    #   `DataSource`, `FilterBBox`, `FilterCountries`, `MaxResults`,
-    #   `ResultBBox`, and `Text`.
+    #   Contains a summary of the request. Echoes the input values for
+    #   `BiasPosition`, `FilterBBox`, `FilterCountries`, `Language`,
+    #   `MaxResults`, and `Text`. Also includes the `DataSource` of the
+    #   place index and the bounding box, `ResultBBox`, which surrounds the
+    #   search results.
     #   @return [Types::SearchPlaceIndexForTextSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForTextResponse AWS API Documentation
@@ -4516,23 +4628,22 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # A summary of the geocoding request sent using
-    # `SearchPlaceIndexForText`.
+    # A summary of the request sent by using `SearchPlaceIndexForText`.
     #
     # @!attribute [rw] bias_position
-    #   Contains the coordinates for the bias position entered in the
-    #   geocoding request.
+    #   Contains the coordinates for the optional bias position specified in
+    #   the request.
     #   @return [Array<Float>]
     #
     # @!attribute [rw] data_source
-    #   The data provider of geospatial data. Indicates one of the available
-    #   providers:
+    #   The geospatial data provider attached to the place index resource
+    #   specified in the request. Values can be one of the following:
     #
     #   * Esri
     #
-    #   * HERE
+    #   * Here
     #
-    #   For additional details on data providers, see [Amazon Location
+    #   For more information about data providers, see [Amazon Location
     #   Service data providers][1].
     #
     #
@@ -4541,27 +4652,39 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] filter_b_box
-    #   Contains the coordinates for the optional bounding box coordinated
-    #   entered in the geocoding request.
+    #   Contains the coordinates for the optional bounding box specified in
+    #   the request.
     #   @return [Array<Float>]
     #
     # @!attribute [rw] filter_countries
-    #   Contains the country filter entered in the geocoding request.
+    #   Contains the optional country filter specified in the request.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] language
+    #   The preferred language used to return results. Matches the language
+    #   in the request. The value is a valid [BCP 47][1] language tag, for
+    #   example, `en` for English.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/search/bcp47
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
-    #   Contains the maximum number of results indicated for the request.
+    #   Contains the optional result count limit specified in the request.
     #   @return [Integer]
     #
     # @!attribute [rw] result_b_box
-    #   A bounding box that contains the search results within the specified
-    #   area indicated by `FilterBBox`. A subset of bounding box specified
-    #   using `FilterBBox`.
+    #   The bounding box that fully contains all search results.
+    #
+    #   <note markdown="1"> If you specified the optional `FilterBBox` parameter in the request,
+    #   `ResultBBox` is contained within `FilterBBox`.
+    #
+    #    </note>
     #   @return [Array<Float>]
     #
     # @!attribute [rw] text
-    #   The address, name, city or region to be used in the geocoding
-    #   request. In free-form text format. For example, `Vancouver`.
+    #   The search text specified in the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForTextSummary AWS API Documentation
@@ -4571,6 +4694,7 @@ module Aws::LocationService
       :data_source,
       :filter_b_box,
       :filter_countries,
+      :language,
       :max_results,
       :result_b_box,
       :text)
@@ -4666,12 +4790,27 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags that have been applied to the specified resource. Tags are
-    #   mapped from the tag key to the tag value: `"TagKey" : "TagValue"`.
+    #   Applies one or more tags to specific resource. A tag is a key-value
+    #   pair that helps you manage, identify, search, and filter your
+    #   resources.
     #
-    #   * Format example: `\{"tag1" : "value1", "tag2" : "value2"\} `
+    #   Format: `"key" : "value"`
     #
-    #   ^
+    #   Restrictions:
+    #
+    #   * Maximum 50 tags per resource.
+    #
+    #   * Each tag key must be unique and must have exactly one associated
+    #     value.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
+    #
+    #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+    #     characters: + - = . \_ : / @
+    #
+    #   * Cannot use "aws:" as a prefix for a key.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/TagResourceRequest AWS API Documentation
@@ -4696,6 +4835,31 @@ module Aws::LocationService
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a time zone. Includes the name of the time zone and
+    # the offset from UTC in seconds.
+    #
+    # @!attribute [rw] name
+    #   The name of the time zone, following the [ IANA time zone
+    #   standard][1]. For example, `America/Los_Angeles`.
+    #
+    #
+    #
+    #   [1]: https://www.iana.org/time-zones
+    #   @return [String]
+    #
+    # @!attribute [rw] offset
+    #   The time zone's offset, in seconds, from UTC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/TimeZone AWS API Documentation
+    #
+    class TimeZone < Struct.new(
+      :name,
+      :offset)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5149,7 +5313,7 @@ module Aws::LocationService
     #
     #       {
     #         description: "ResourceDescription",
-    #         position_filtering: "TimeBased", # accepts TimeBased, DistanceBased
+    #         position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
     #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #         pricing_plan_data_source: "String",
     #         tracker_name: "ResourceName", # required

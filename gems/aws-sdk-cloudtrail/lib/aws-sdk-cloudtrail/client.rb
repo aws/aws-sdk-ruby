@@ -801,7 +801,7 @@ module Aws::CloudTrail
     #
     #   resp.trail_arn #=> String
     #   resp.insight_selectors #=> Array
-    #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight"
+    #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight", "ApiErrorRateInsight"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectors AWS API Documentation
     #
@@ -1383,7 +1383,7 @@ module Aws::CloudTrail
     #     trail_name: "String", # required
     #     insight_selectors: [ # required
     #       {
-    #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight
+    #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight, ApiErrorRateInsight
     #       },
     #     ],
     #   })
@@ -1392,7 +1392,7 @@ module Aws::CloudTrail
     #
     #   resp.trail_arn #=> String
     #   resp.insight_selectors #=> Array
-    #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight"
+    #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight", "ApiErrorRateInsight"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectors AWS API Documentation
     #
@@ -1698,7 +1698,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

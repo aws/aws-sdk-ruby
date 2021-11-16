@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2021-11-16)
+------------------
+
+* Feature - This release adds the support for Relevance, Distance, Time Zone, Language and Interpolated Address for Geocoding and Reverse Geocoding.
+
 1.11.0 (2021-11-04)
 ------------------
 
