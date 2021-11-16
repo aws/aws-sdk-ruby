@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `presigned_request` method to `Aws::S3::Object`.
+
 1.105.1 (2021-11-05)
 ------------------
 
