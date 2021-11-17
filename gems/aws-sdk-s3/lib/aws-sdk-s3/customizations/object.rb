@@ -161,7 +161,7 @@ module Aws
       #
       # @param [Symbol] method
       #   The S3 operation to generate a presigned URL for. Valid values
-      #   are `:get`, `:put`, `:head`, `:delete`, `:create_multipart_upload`, 
+      #   are `:get`, `:put`, `:head`, `:delete`, `:create_multipart_upload`,
       #   `:list_multipart_uploads`, `:complete_multipart_upload`,
       #   `:abort_multipart_upload`, `:list_parts`, and `:upload_part`.
       #
@@ -210,6 +210,79 @@ module Aws
         end
 
         presigner.presigned_url(
+          method.downcase,
+          params.merge(bucket: bucket_name, key: key)
+        )
+      end
+
+      # Allows you to create presigned URL requests for S3 operations. This
+      # method returns a tuple containing the URL and the signed X-amz-* headers
+      # to be used with the presigned url.
+      #
+      # @example Pre-signed GET URL, valid for one hour
+      #
+      #     obj.presigned_request(:get, expires_in: 3600)
+      #     #=> ["https://bucket-name.s3.amazonaws.com/object-key?...", {}]
+      #
+      # @example Pre-signed PUT with a canned ACL
+      #
+      #     # the object uploaded using this URL will be publicly accessible
+      #     obj.presigned_request(:put, acl: 'public-read')
+      #     #=> ["https://bucket-name.s3.amazonaws.com/object-key?...",
+      #      {"x-amz-acl"=>"public-read"}]
+      #
+      # @param [Symbol] method
+      #   The S3 operation to generate a presigned request for. Valid values
+      #   are `:get`, `:put`, `:head`, `:delete`, `:create_multipart_upload`,
+      #   `:list_multipart_uploads`, `:complete_multipart_upload`,
+      #   `:abort_multipart_upload`, `:list_parts`, and `:upload_part`.
+      #
+      # @param [Hash] params
+      #   Additional request parameters to use when generating the pre-signed
+      #   request. See the related documentation in {Client} for accepted
+      #   params.
+      #
+      #   | Method                       | Client Method                      |
+      #   |------------------------------|------------------------------------|
+      #   | `:get`                       | {Client#get_object}                |
+      #   | `:put`                       | {Client#put_object}                |
+      #   | `:head`                      | {Client#head_object}               |
+      #   | `:delete`                    | {Client#delete_object}             |
+      #   | `:create_multipart_upload`   | {Client#create_multipart_upload}   |
+      #   | `:list_multipart_uploads`    | {Client#list_multipart_uploads}    |
+      #   | `:complete_multipart_upload` | {Client#complete_multipart_upload} |
+      #   | `:abort_multipart_upload`    | {Client#abort_multipart_upload}    |
+      #   | `:list_parts`                | {Client#list_parts}                |
+      #   | `:upload_part`               | {Client#upload_part}               |
+      #
+      # @option params [Boolean] :virtual_host (false) When `true` the
+      #   presigned URL will use the bucket name as a virtual host.
+      #
+      #     bucket = Aws::S3::Bucket.new('my.bucket.com')
+      #     bucket.object('key').presigned_request(virtual_host: true)
+      #     #=> ["http://my.bucket.com/key?...", {}]
+      #
+      # @option params [Integer] :expires_in (900) Number of seconds before
+      #   the pre-signed URL expires. This may not exceed one week (604800
+      #   seconds). Note that the pre-signed URL is also only valid as long as
+      #   credentials used to sign it are. For example, when using IAM roles,
+      #   temporary tokens generated for signing also have a default expiration
+      #   which will affect the effective expiration of the pre-signed URL.
+      #
+      # @raise [ArgumentError] Raised if `:expires_in` exceeds one week
+      #   (604800 seconds).
+      #
+      # @return [String, Hash] A tuple with a presigned URL and headers that
+      #   should be included with the request.
+      #
+      def presigned_request(method, params = {})
+        presigner = Presigner.new(client: client)
+
+        if %w(delete head get put).include?(method.to_s)
+          method = "#{method}_object".to_sym
+        end
+
+        presigner.presigned_request(
           method.downcase,
           params.merge(bucket: bucket_name, key: key)
         )
