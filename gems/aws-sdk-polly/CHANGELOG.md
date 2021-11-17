@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Allow `Aws::Polly::Presigner` to take a `:client` with FIPS or Dualstack configuration.
+
 1.48.0 (2021-11-04)
 ------------------
 
