@@ -545,6 +545,65 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
+    # Describes the read, write, and delete permissions users have against
+    # your storage S3 bucket.
+    #
+    # @note When making an API call, you may pass BackendStoragePermissions
+    #   data as a hash:
+    #
+    #       {
+    #         authenticated: ["READ"], # required, accepts READ, CREATE_AND_UPDATE, DELETE
+    #         un_authenticated: ["READ"], # accepts READ, CREATE_AND_UPDATE, DELETE
+    #       }
+    #
+    # @!attribute [rw] authenticated
+    #   Lists all authenticated user read, write, and delete permissions for
+    #   your S3 bucket.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] un_authenticated
+    #   Lists all unauthenticated user read, write, and delete permissions
+    #   for your S3 bucket.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/BackendStoragePermissions AWS API Documentation
+    #
+    class BackendStoragePermissions < Struct.new(
+      :authenticated,
+      :un_authenticated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object for this operation.
+    #
+    # @!attribute [rw] app_id
+    #   The app ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   The name of the backend environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The ID for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/BackendStorageRespObj AWS API Documentation
+    #
+    class BackendStorageRespObj < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :job_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error returned if a request is not formed properly.
     #
     # @!attribute [rw] message
@@ -1468,7 +1527,7 @@ module Aws::AmplifyBackend
     #   @return [String]
     #
     # @!attribute [rw] resource_config
-    #   The resource configuration for the create backend request.
+    #   The resource configuration for creating backend storage.
     #   @return [Types::ResourceConfig]
     #
     # @!attribute [rw] resource_name
@@ -1591,6 +1650,130 @@ module Aws::AmplifyBackend
       :error,
       :job_id,
       :operation,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request object for this operation.
+    #
+    # @!attribute [rw] backend_environment_name
+    #   The name of the backend environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_config
+    #   The resource configuration for creating backend storage.
+    #   @return [Types::CreateBackendStorageResourceConfig]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the storage resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendStorageReqObj AWS API Documentation
+    #
+    class CreateBackendStorageReqObj < Struct.new(
+      :backend_environment_name,
+      :resource_config,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateBackendStorageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "__string", # required
+    #         backend_environment_name: "__string", # required
+    #         resource_config: { # required
+    #           bucket_name: "__string",
+    #           permissions: { # required
+    #             authenticated: ["READ"], # required, accepts READ, CREATE_AND_UPDATE, DELETE
+    #             un_authenticated: ["READ"], # accepts READ, CREATE_AND_UPDATE, DELETE
+    #           },
+    #           service_name: "S3", # required, accepts S3
+    #         },
+    #         resource_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_config
+    #   The resource configuration for creating backend storage.
+    #   @return [Types::CreateBackendStorageResourceConfig]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendStorageRequest AWS API Documentation
+    #
+    class CreateBackendStorageRequest < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :resource_config,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource configuration for creating backend storage.
+    #
+    # @note When making an API call, you may pass CreateBackendStorageResourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "__string",
+    #         permissions: { # required
+    #           authenticated: ["READ"], # required, accepts READ, CREATE_AND_UPDATE, DELETE
+    #           un_authenticated: ["READ"], # accepts READ, CREATE_AND_UPDATE, DELETE
+    #         },
+    #         service_name: "S3", # required, accepts S3
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   The authorization configuration for the storage S3 bucket.
+    #   @return [Types::BackendStoragePermissions]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the storage service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendStorageResourceConfig AWS API Documentation
+    #
+    class CreateBackendStorageResourceConfig < Struct.new(
+      :bucket_name,
+      :permissions,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_id
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendStorageResponse AWS API Documentation
+    #
+    class CreateBackendStorageResponse < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :job_id,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -1915,6 +2098,62 @@ module Aws::AmplifyBackend
       :error,
       :job_id,
       :operation,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteBackendStorageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "__string", # required
+    #         backend_environment_name: "__string", # required
+    #         resource_name: "__string", # required
+    #         service_name: "S3", # required, accepts S3
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/DeleteBackendStorageRequest AWS API Documentation
+    #
+    class DeleteBackendStorageRequest < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :resource_name,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_id
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/DeleteBackendStorageResponse AWS API Documentation
+    #
+    class DeleteBackendStorageResponse < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :job_id,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -2550,6 +2789,130 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
+    # The request object for this operation.
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the storage resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendStorageReqObj AWS API Documentation
+    #
+    class GetBackendStorageReqObj < Struct.new(
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetBackendStorageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "__string", # required
+    #         backend_environment_name: "__string", # required
+    #         resource_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendStorageRequest AWS API Documentation
+    #
+    class GetBackendStorageRequest < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details for a backend storage resource.
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] imported
+    #   Returns True if the storage resource has been imported.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] permissions
+    #   The authorization configuration for the storage S3 bucket.
+    #   @return [Types::BackendStoragePermissions]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the storage service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendStorageResourceConfig AWS API Documentation
+    #
+    class GetBackendStorageResourceConfig < Struct.new(
+      :bucket_name,
+      :imported,
+      :permissions,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object for this operation.
+    #
+    # @!attribute [rw] app_id
+    #   The app ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   The name of the backend environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_config
+    #   The resource configuration for the backend storage resource.
+    #   @return [Types::GetBackendStorageResourceConfig]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the storage resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendStorageRespObj AWS API Documentation
+    #
+    class GetBackendStorageRespObj < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :resource_config,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_id
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_config
+    #   The details for a backend storage resource.
+    #   @return [Types::GetBackendStorageResourceConfig]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendStorageResponse AWS API Documentation
+    #
+    class GetBackendStorageResponse < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :resource_config,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetTokenRequest
     #   data as a hash:
     #
@@ -2729,6 +3092,81 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
+    # The request object for this operation.
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the storage service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ImportBackendStorageReqObj AWS API Documentation
+    #
+    class ImportBackendStorageReqObj < Struct.new(
+      :bucket_name,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ImportBackendStorageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "__string", # required
+    #         backend_environment_name: "__string", # required
+    #         bucket_name: "__string",
+    #         service_name: "S3", # required, accepts S3
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_name
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ImportBackendStorageRequest AWS API Documentation
+    #
+    class ImportBackendStorageRequest < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :bucket_name,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_id
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ImportBackendStorageResponse AWS API Documentation
+    #
+    class ImportBackendStorageResponse < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :job_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error returned if there's a temporary issue with the service.
     #
     # @!attribute [rw] message
@@ -2876,6 +3314,72 @@ module Aws::AmplifyBackend
     #
     class ListBackendJobsResponse < Struct.new(
       :jobs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request object for this operation.
+    #
+    # @!attribute [rw] next_token
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ListS3BucketsReqObj AWS API Documentation
+    #
+    class ListS3BucketsReqObj < Struct.new(
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListS3BucketsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ListS3BucketsRequest AWS API Documentation
+    #
+    class ListS3BucketsRequest < Struct.new(
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response object for this operation.
+    #
+    # @!attribute [rw] buckets
+    #   The list of S3 buckets.
+    #   @return [Array<Types::S3BucketInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ListS3BucketsRespObj AWS API Documentation
+    #
+    class ListS3BucketsRespObj < Struct.new(
+      :buckets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] buckets
+    #   @return [Array<Types::S3BucketInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ListS3BucketsResponse AWS API Documentation
+    #
+    class ListS3BucketsResponse < Struct.new(
+      :buckets,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3096,11 +3600,49 @@ module Aws::AmplifyBackend
       include Aws::Structure
     end
 
+    # The request object for this operation.
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the storage resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the storage service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/RemoveBackendStorageReqObj AWS API Documentation
+    #
+    class RemoveBackendStorageReqObj < Struct.new(
+      :resource_name,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ResourceConfig AWS API Documentation
     #
     class ResourceConfig < Aws::EmptyStructure; end
+
+    # Describes the metadata of the S3 bucket.
+    #
+    # @!attribute [rw] creation_date
+    #   The creation date of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/S3BucketInfo AWS API Documentation
+    #
+    class S3BucketInfo < Struct.new(
+      :creation_date,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass Settings
     #   data as a hash:
@@ -3992,6 +4534,118 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request object for this operation.
+    #
+    # @!attribute [rw] resource_config
+    #   The resource configuration for updating backend storage.
+    #   @return [Types::UpdateBackendStorageResourceConfig]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the storage resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendStorageReqObj AWS API Documentation
+    #
+    class UpdateBackendStorageReqObj < Struct.new(
+      :resource_config,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateBackendStorageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         app_id: "__string", # required
+    #         backend_environment_name: "__string", # required
+    #         resource_config: { # required
+    #           permissions: { # required
+    #             authenticated: ["READ"], # required, accepts READ, CREATE_AND_UPDATE, DELETE
+    #             un_authenticated: ["READ"], # accepts READ, CREATE_AND_UPDATE, DELETE
+    #           },
+    #           service_name: "S3", # required, accepts S3
+    #         },
+    #         resource_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] app_id
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_config
+    #   The resource configuration for updating backend storage.
+    #   @return [Types::UpdateBackendStorageResourceConfig]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendStorageRequest AWS API Documentation
+    #
+    class UpdateBackendStorageRequest < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :resource_config,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource configuration for updating backend storage.
+    #
+    # @note When making an API call, you may pass UpdateBackendStorageResourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         permissions: { # required
+    #           authenticated: ["READ"], # required, accepts READ, CREATE_AND_UPDATE, DELETE
+    #           un_authenticated: ["READ"], # accepts READ, CREATE_AND_UPDATE, DELETE
+    #         },
+    #         service_name: "S3", # required, accepts S3
+    #       }
+    #
+    # @!attribute [rw] permissions
+    #   The authorization configuration for the storage S3 bucket.
+    #   @return [Types::BackendStoragePermissions]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the storage service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendStorageResourceConfig AWS API Documentation
+    #
+    class UpdateBackendStorageResourceConfig < Struct.new(
+      :permissions,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] app_id
+    #   @return [String]
+    #
+    # @!attribute [rw] backend_environment_name
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendStorageResponse AWS API Documentation
+    #
+    class UpdateBackendStorageResponse < Struct.new(
+      :app_id,
+      :backend_environment_name,
+      :job_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.120.0 (2021-11-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-drs` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-appconfigdata` gem.
+
 3.119.0 (2021-11-15)
 ------------------
 

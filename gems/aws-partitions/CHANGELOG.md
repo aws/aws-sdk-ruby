@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.532.0 (2021-11-17)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Drs`.
+
+* Feature - Added support for enumerating regions for `Aws::AppConfigData`.
+
 1.531.0 (2021-11-16)
 ------------------
 

@@ -51,7 +51,8 @@ module Aws::SNS
     #   subscription. For more information, see [Amazon SNS Message
     #   Filtering][1] in the *Amazon SNS Developer Guide*.
     #
-    # * `Owner` – The account ID of the subscription's owner.
+    # * `Owner` – The Amazon Web Services account ID of the subscription's
+    #   owner.
     #
     # * `PendingConfirmation` – `true` if the subscription hasn't been
     #   confirmed. To confirm a pending subscription, call the

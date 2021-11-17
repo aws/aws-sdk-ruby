@@ -657,6 +657,56 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
+    # Creates a backend storage resource.
+    #
+    # @option params [required, String] :app_id
+    #
+    # @option params [required, String] :backend_environment_name
+    #
+    # @option params [required, Types::CreateBackendStorageResourceConfig] :resource_config
+    #   The resource configuration for creating backend storage.
+    #
+    # @option params [required, String] :resource_name
+    #
+    # @return [Types::CreateBackendStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBackendStorageResponse#app_id #app_id} => String
+    #   * {Types::CreateBackendStorageResponse#backend_environment_name #backend_environment_name} => String
+    #   * {Types::CreateBackendStorageResponse#job_id #job_id} => String
+    #   * {Types::CreateBackendStorageResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_backend_storage({
+    #     app_id: "__string", # required
+    #     backend_environment_name: "__string", # required
+    #     resource_config: { # required
+    #       bucket_name: "__string",
+    #       permissions: { # required
+    #         authenticated: ["READ"], # required, accepts READ, CREATE_AND_UPDATE, DELETE
+    #         un_authenticated: ["READ"], # accepts READ, CREATE_AND_UPDATE, DELETE
+    #       },
+    #       service_name: "S3", # required, accepts S3
+    #     },
+    #     resource_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_id #=> String
+    #   resp.backend_environment_name #=> String
+    #   resp.job_id #=> String
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendStorage AWS API Documentation
+    #
+    # @overload create_backend_storage(params = {})
+    # @param [Hash] params ({})
+    def create_backend_storage(params = {}, options = {})
+      req = build_request(:create_backend_storage, params)
+      req.send_request(options)
+    end
+
     # Generates a one-time challenge code to authenticate a user into your
     # Amplify Admin UI.
     #
@@ -854,6 +904,48 @@ module Aws::AmplifyBackend
     # @param [Hash] params ({})
     def delete_backend_auth(params = {}, options = {})
       req = build_request(:delete_backend_auth, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified backend storage resource.
+    #
+    # @option params [required, String] :app_id
+    #
+    # @option params [required, String] :backend_environment_name
+    #
+    # @option params [required, String] :resource_name
+    #
+    # @option params [required, String] :service_name
+    #
+    # @return [Types::DeleteBackendStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBackendStorageResponse#app_id #app_id} => String
+    #   * {Types::DeleteBackendStorageResponse#backend_environment_name #backend_environment_name} => String
+    #   * {Types::DeleteBackendStorageResponse#job_id #job_id} => String
+    #   * {Types::DeleteBackendStorageResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_backend_storage({
+    #     app_id: "__string", # required
+    #     backend_environment_name: "__string", # required
+    #     resource_name: "__string", # required
+    #     service_name: "S3", # required, accepts S3
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_id #=> String
+    #   resp.backend_environment_name #=> String
+    #   resp.job_id #=> String
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/DeleteBackendStorage AWS API Documentation
+    #
+    # @overload delete_backend_storage(params = {})
+    # @param [Hash] params ({})
+    def delete_backend_storage(params = {}, options = {})
+      req = build_request(:delete_backend_storage, params)
       req.send_request(options)
     end
 
@@ -1235,6 +1327,51 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
+    # Gets details for a backend storage resource.
+    #
+    # @option params [required, String] :app_id
+    #
+    # @option params [required, String] :backend_environment_name
+    #
+    # @option params [required, String] :resource_name
+    #
+    # @return [Types::GetBackendStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBackendStorageResponse#app_id #app_id} => String
+    #   * {Types::GetBackendStorageResponse#backend_environment_name #backend_environment_name} => String
+    #   * {Types::GetBackendStorageResponse#resource_config #resource_config} => Types::GetBackendStorageResourceConfig
+    #   * {Types::GetBackendStorageResponse#resource_name #resource_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_backend_storage({
+    #     app_id: "__string", # required
+    #     backend_environment_name: "__string", # required
+    #     resource_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_id #=> String
+    #   resp.backend_environment_name #=> String
+    #   resp.resource_config.bucket_name #=> String
+    #   resp.resource_config.imported #=> Boolean
+    #   resp.resource_config.permissions.authenticated #=> Array
+    #   resp.resource_config.permissions.authenticated[0] #=> String, one of "READ", "CREATE_AND_UPDATE", "DELETE"
+    #   resp.resource_config.permissions.un_authenticated #=> Array
+    #   resp.resource_config.permissions.un_authenticated[0] #=> String, one of "READ", "CREATE_AND_UPDATE", "DELETE"
+    #   resp.resource_config.service_name #=> String, one of "S3"
+    #   resp.resource_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendStorage AWS API Documentation
+    #
+    # @overload get_backend_storage(params = {})
+    # @param [Hash] params ({})
+    def get_backend_storage(params = {}, options = {})
+      req = build_request(:get_backend_storage, params)
+      req.send_request(options)
+    end
+
     # Gets the challenge token based on the given appId and sessionId.
     #
     # @option params [required, String] :app_id
@@ -1323,6 +1460,48 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
+    # Imports an existing backend storage resource.
+    #
+    # @option params [required, String] :app_id
+    #
+    # @option params [required, String] :backend_environment_name
+    #
+    # @option params [String] :bucket_name
+    #
+    # @option params [required, String] :service_name
+    #
+    # @return [Types::ImportBackendStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportBackendStorageResponse#app_id #app_id} => String
+    #   * {Types::ImportBackendStorageResponse#backend_environment_name #backend_environment_name} => String
+    #   * {Types::ImportBackendStorageResponse#job_id #job_id} => String
+    #   * {Types::ImportBackendStorageResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_backend_storage({
+    #     app_id: "__string", # required
+    #     backend_environment_name: "__string", # required
+    #     bucket_name: "__string",
+    #     service_name: "S3", # required, accepts S3
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_id #=> String
+    #   resp.backend_environment_name #=> String
+    #   resp.job_id #=> String
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ImportBackendStorage AWS API Documentation
+    #
+    # @overload import_backend_storage(params = {})
+    # @param [Hash] params ({})
+    def import_backend_storage(params = {}, options = {})
+      req = build_request(:import_backend_storage, params)
+      req.send_request(options)
+    end
+
     # Lists the jobs for the backend of an Amplify app.
     #
     # @option params [required, String] :app_id
@@ -1377,6 +1556,37 @@ module Aws::AmplifyBackend
     # @param [Hash] params ({})
     def list_backend_jobs(params = {}, options = {})
       req = build_request(:list_backend_jobs, params)
+      req.send_request(options)
+    end
+
+    # The list of S3 buckets in your account.
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListS3BucketsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListS3BucketsResponse#buckets #buckets} => Array&lt;Types::S3BucketInfo&gt;
+    #   * {Types::ListS3BucketsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_s3_buckets({
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.buckets #=> Array
+    #   resp.buckets[0].creation_date #=> String
+    #   resp.buckets[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ListS3Buckets AWS API Documentation
+    #
+    # @overload list_s3_buckets(params = {})
+    # @param [Hash] params ({})
+    def list_s3_buckets(params = {}, options = {})
+      req = build_request(:list_s3_buckets, params)
       req.send_request(options)
     end
 
@@ -1730,6 +1940,55 @@ module Aws::AmplifyBackend
       req.send_request(options)
     end
 
+    # Updates an existing backend storage resource.
+    #
+    # @option params [required, String] :app_id
+    #
+    # @option params [required, String] :backend_environment_name
+    #
+    # @option params [required, Types::UpdateBackendStorageResourceConfig] :resource_config
+    #   The resource configuration for updating backend storage.
+    #
+    # @option params [required, String] :resource_name
+    #
+    # @return [Types::UpdateBackendStorageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBackendStorageResponse#app_id #app_id} => String
+    #   * {Types::UpdateBackendStorageResponse#backend_environment_name #backend_environment_name} => String
+    #   * {Types::UpdateBackendStorageResponse#job_id #job_id} => String
+    #   * {Types::UpdateBackendStorageResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_backend_storage({
+    #     app_id: "__string", # required
+    #     backend_environment_name: "__string", # required
+    #     resource_config: { # required
+    #       permissions: { # required
+    #         authenticated: ["READ"], # required, accepts READ, CREATE_AND_UPDATE, DELETE
+    #         un_authenticated: ["READ"], # accepts READ, CREATE_AND_UPDATE, DELETE
+    #       },
+    #       service_name: "S3", # required, accepts S3
+    #     },
+    #     resource_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_id #=> String
+    #   resp.backend_environment_name #=> String
+    #   resp.job_id #=> String
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendStorage AWS API Documentation
+    #
+    # @overload update_backend_storage(params = {})
+    # @param [Hash] params ({})
+    def update_backend_storage(params = {}, options = {})
+      req = build_request(:update_backend_storage, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1743,7 +2002,7 @@ module Aws::AmplifyBackend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifybackend'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

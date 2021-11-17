@@ -35,6 +35,9 @@
   "AppConfig": {
     "models": "appconfig/2019-10-09"
   },
+  "AppConfigData": {
+    "models": "appconfigdata/2021-11-11"
+  },
   "AppIntegrationsService": {
     "models": "appintegrations/2020-07-29"
   },
@@ -267,6 +270,9 @@
     "addPlugins": [
       "Aws::DocDB::Plugins::CrossRegionCopying"
     ]
+  },
+  "Drs": {
+    "models": "drs/2020-02-26"
   },
   "DynamoDB": {
     "models": "dynamodb/2012-08-10",

@@ -15,6 +15,7 @@ module Aws::AmplifyBackend
 
     AdditionalConstraintsElement = Shapes::StringShape.new(name: 'AdditionalConstraintsElement')
     AuthResources = Shapes::StringShape.new(name: 'AuthResources')
+    AuthenticatedElement = Shapes::StringShape.new(name: 'AuthenticatedElement')
     BackendAPIAppSyncAuthSettings = Shapes::StructureShape.new(name: 'BackendAPIAppSyncAuthSettings')
     BackendAPIAuthType = Shapes::StructureShape.new(name: 'BackendAPIAuthType')
     BackendAPICodegenReqObj = Shapes::StructureShape.new(name: 'BackendAPICodegenReqObj')
@@ -29,6 +30,8 @@ module Aws::AmplifyBackend
     BackendConfigRespObj = Shapes::StructureShape.new(name: 'BackendConfigRespObj')
     BackendJobReqObj = Shapes::StructureShape.new(name: 'BackendJobReqObj')
     BackendJobRespObj = Shapes::StructureShape.new(name: 'BackendJobRespObj')
+    BackendStoragePermissions = Shapes::StructureShape.new(name: 'BackendStoragePermissions')
+    BackendStorageRespObj = Shapes::StructureShape.new(name: 'BackendStorageRespObj')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     CloneBackendReqObj = Shapes::StructureShape.new(name: 'CloneBackendReqObj')
     CloneBackendRequest = Shapes::StructureShape.new(name: 'CloneBackendRequest')
@@ -55,6 +58,10 @@ module Aws::AmplifyBackend
     CreateBackendRequest = Shapes::StructureShape.new(name: 'CreateBackendRequest')
     CreateBackendRespObj = Shapes::StructureShape.new(name: 'CreateBackendRespObj')
     CreateBackendResponse = Shapes::StructureShape.new(name: 'CreateBackendResponse')
+    CreateBackendStorageReqObj = Shapes::StructureShape.new(name: 'CreateBackendStorageReqObj')
+    CreateBackendStorageRequest = Shapes::StructureShape.new(name: 'CreateBackendStorageRequest')
+    CreateBackendStorageResourceConfig = Shapes::StructureShape.new(name: 'CreateBackendStorageResourceConfig')
+    CreateBackendStorageResponse = Shapes::StructureShape.new(name: 'CreateBackendStorageResponse')
     CreateTokenRequest = Shapes::StructureShape.new(name: 'CreateTokenRequest')
     CreateTokenRespObj = Shapes::StructureShape.new(name: 'CreateTokenRespObj')
     CreateTokenResponse = Shapes::StructureShape.new(name: 'CreateTokenResponse')
@@ -65,6 +72,8 @@ module Aws::AmplifyBackend
     DeleteBackendRequest = Shapes::StructureShape.new(name: 'DeleteBackendRequest')
     DeleteBackendRespObj = Shapes::StructureShape.new(name: 'DeleteBackendRespObj')
     DeleteBackendResponse = Shapes::StructureShape.new(name: 'DeleteBackendResponse')
+    DeleteBackendStorageRequest = Shapes::StructureShape.new(name: 'DeleteBackendStorageRequest')
+    DeleteBackendStorageResponse = Shapes::StructureShape.new(name: 'DeleteBackendStorageResponse')
     DeleteTokenRequest = Shapes::StructureShape.new(name: 'DeleteTokenRequest')
     DeleteTokenRespObj = Shapes::StructureShape.new(name: 'DeleteTokenRespObj')
     DeleteTokenResponse = Shapes::StructureShape.new(name: 'DeleteTokenResponse')
@@ -89,12 +98,20 @@ module Aws::AmplifyBackend
     GetBackendRequest = Shapes::StructureShape.new(name: 'GetBackendRequest')
     GetBackendRespObj = Shapes::StructureShape.new(name: 'GetBackendRespObj')
     GetBackendResponse = Shapes::StructureShape.new(name: 'GetBackendResponse')
+    GetBackendStorageReqObj = Shapes::StructureShape.new(name: 'GetBackendStorageReqObj')
+    GetBackendStorageRequest = Shapes::StructureShape.new(name: 'GetBackendStorageRequest')
+    GetBackendStorageResourceConfig = Shapes::StructureShape.new(name: 'GetBackendStorageResourceConfig')
+    GetBackendStorageRespObj = Shapes::StructureShape.new(name: 'GetBackendStorageRespObj')
+    GetBackendStorageResponse = Shapes::StructureShape.new(name: 'GetBackendStorageResponse')
     GetTokenRequest = Shapes::StructureShape.new(name: 'GetTokenRequest')
     GetTokenRespObj = Shapes::StructureShape.new(name: 'GetTokenRespObj')
     GetTokenResponse = Shapes::StructureShape.new(name: 'GetTokenResponse')
     ImportBackendAuthReqObj = Shapes::StructureShape.new(name: 'ImportBackendAuthReqObj')
     ImportBackendAuthRequest = Shapes::StructureShape.new(name: 'ImportBackendAuthRequest')
     ImportBackendAuthResponse = Shapes::StructureShape.new(name: 'ImportBackendAuthResponse')
+    ImportBackendStorageReqObj = Shapes::StructureShape.new(name: 'ImportBackendStorageReqObj')
+    ImportBackendStorageRequest = Shapes::StructureShape.new(name: 'ImportBackendStorageRequest')
+    ImportBackendStorageResponse = Shapes::StructureShape.new(name: 'ImportBackendStorageResponse')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListBackendJobReqObj = Shapes::StructureShape.new(name: 'ListBackendJobReqObj')
@@ -102,12 +119,19 @@ module Aws::AmplifyBackend
     ListBackendJobsRequest = Shapes::StructureShape.new(name: 'ListBackendJobsRequest')
     ListBackendJobsResponse = Shapes::StructureShape.new(name: 'ListBackendJobsResponse')
     ListOfAdditionalConstraintsElement = Shapes::ListShape.new(name: 'ListOfAdditionalConstraintsElement')
+    ListOfAuthenticatedElement = Shapes::ListShape.new(name: 'ListOfAuthenticatedElement')
     ListOfBackendAPIAuthType = Shapes::ListShape.new(name: 'ListOfBackendAPIAuthType')
     ListOfBackendJobRespObj = Shapes::ListShape.new(name: 'ListOfBackendJobRespObj')
     ListOfMfaTypesElement = Shapes::ListShape.new(name: 'ListOfMfaTypesElement')
     ListOfOAuthScopesElement = Shapes::ListShape.new(name: 'ListOfOAuthScopesElement')
     ListOfRequiredSignUpAttributesElement = Shapes::ListShape.new(name: 'ListOfRequiredSignUpAttributesElement')
+    ListOfS3BucketInfo = Shapes::ListShape.new(name: 'ListOfS3BucketInfo')
+    ListOfUnAuthenticatedElement = Shapes::ListShape.new(name: 'ListOfUnAuthenticatedElement')
     ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
+    ListS3BucketsReqObj = Shapes::StructureShape.new(name: 'ListS3BucketsReqObj')
+    ListS3BucketsRequest = Shapes::StructureShape.new(name: 'ListS3BucketsRequest')
+    ListS3BucketsRespObj = Shapes::StructureShape.new(name: 'ListS3BucketsRespObj')
+    ListS3BucketsResponse = Shapes::StructureShape.new(name: 'ListS3BucketsResponse')
     LoginAuthConfigReqObj = Shapes::StructureShape.new(name: 'LoginAuthConfigReqObj')
     MFAMode = Shapes::StringShape.new(name: 'MFAMode')
     MfaTypesElement = Shapes::StringShape.new(name: 'MfaTypesElement')
@@ -123,16 +147,20 @@ module Aws::AmplifyBackend
     RemoveBackendConfigRequest = Shapes::StructureShape.new(name: 'RemoveBackendConfigRequest')
     RemoveBackendConfigRespObj = Shapes::StructureShape.new(name: 'RemoveBackendConfigRespObj')
     RemoveBackendConfigResponse = Shapes::StructureShape.new(name: 'RemoveBackendConfigResponse')
+    RemoveBackendStorageReqObj = Shapes::StructureShape.new(name: 'RemoveBackendStorageReqObj')
     RequiredSignUpAttributesElement = Shapes::StringShape.new(name: 'RequiredSignUpAttributesElement')
     ResolutionStrategy = Shapes::StringShape.new(name: 'ResolutionStrategy')
     ResourceConfig = Shapes::StructureShape.new(name: 'ResourceConfig')
+    S3BucketInfo = Shapes::StructureShape.new(name: 'S3BucketInfo')
     Service = Shapes::StringShape.new(name: 'Service')
+    ServiceName = Shapes::StringShape.new(name: 'ServiceName')
     Settings = Shapes::StructureShape.new(name: 'Settings')
     SignInMethod = Shapes::StringShape.new(name: 'SignInMethod')
     SmsSettings = Shapes::StructureShape.new(name: 'SmsSettings')
     SocialProviderSettings = Shapes::StructureShape.new(name: 'SocialProviderSettings')
     Status = Shapes::StringShape.new(name: 'Status')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    UnAuthenticatedElement = Shapes::StringShape.new(name: 'UnAuthenticatedElement')
     UpdateBackendAPIRequest = Shapes::StructureShape.new(name: 'UpdateBackendAPIRequest')
     UpdateBackendAPIResponse = Shapes::StructureShape.new(name: 'UpdateBackendAPIResponse')
     UpdateBackendAuthForgotPasswordConfig = Shapes::StructureShape.new(name: 'UpdateBackendAuthForgotPasswordConfig')
@@ -150,6 +178,10 @@ module Aws::AmplifyBackend
     UpdateBackendConfigResponse = Shapes::StructureShape.new(name: 'UpdateBackendConfigResponse')
     UpdateBackendJobRequest = Shapes::StructureShape.new(name: 'UpdateBackendJobRequest')
     UpdateBackendJobResponse = Shapes::StructureShape.new(name: 'UpdateBackendJobResponse')
+    UpdateBackendStorageReqObj = Shapes::StructureShape.new(name: 'UpdateBackendStorageReqObj')
+    UpdateBackendStorageRequest = Shapes::StructureShape.new(name: 'UpdateBackendStorageRequest')
+    UpdateBackendStorageResourceConfig = Shapes::StructureShape.new(name: 'UpdateBackendStorageResourceConfig')
+    UpdateBackendStorageResponse = Shapes::StructureShape.new(name: 'UpdateBackendStorageResponse')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
@@ -244,6 +276,16 @@ module Aws::AmplifyBackend
     BackendJobRespObj.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
     BackendJobRespObj.add_member(:update_time, Shapes::ShapeRef.new(shape: __string, location_name: "updateTime"))
     BackendJobRespObj.struct_class = Types::BackendJobRespObj
+
+    BackendStoragePermissions.add_member(:authenticated, Shapes::ShapeRef.new(shape: ListOfAuthenticatedElement, required: true, location_name: "authenticated"))
+    BackendStoragePermissions.add_member(:un_authenticated, Shapes::ShapeRef.new(shape: ListOfUnAuthenticatedElement, location_name: "unAuthenticated"))
+    BackendStoragePermissions.struct_class = Types::BackendStoragePermissions
+
+    BackendStorageRespObj.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "appId"))
+    BackendStorageRespObj.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "backendEnvironmentName"))
+    BackendStorageRespObj.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "jobId"))
+    BackendStorageRespObj.add_member(:status, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "status"))
+    BackendStorageRespObj.struct_class = Types::BackendStorageRespObj
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
@@ -399,6 +441,28 @@ module Aws::AmplifyBackend
     CreateBackendResponse.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
     CreateBackendResponse.struct_class = Types::CreateBackendResponse
 
+    CreateBackendStorageReqObj.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "backendEnvironmentName"))
+    CreateBackendStorageReqObj.add_member(:resource_config, Shapes::ShapeRef.new(shape: CreateBackendStorageResourceConfig, required: true, location_name: "resourceConfig"))
+    CreateBackendStorageReqObj.add_member(:resource_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceName"))
+    CreateBackendStorageReqObj.struct_class = Types::CreateBackendStorageReqObj
+
+    CreateBackendStorageRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))
+    CreateBackendStorageRequest.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "backendEnvironmentName"))
+    CreateBackendStorageRequest.add_member(:resource_config, Shapes::ShapeRef.new(shape: CreateBackendStorageResourceConfig, required: true, location_name: "resourceConfig"))
+    CreateBackendStorageRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceName"))
+    CreateBackendStorageRequest.struct_class = Types::CreateBackendStorageRequest
+
+    CreateBackendStorageResourceConfig.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
+    CreateBackendStorageResourceConfig.add_member(:permissions, Shapes::ShapeRef.new(shape: BackendStoragePermissions, required: true, location_name: "permissions"))
+    CreateBackendStorageResourceConfig.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "serviceName"))
+    CreateBackendStorageResourceConfig.struct_class = Types::CreateBackendStorageResourceConfig
+
+    CreateBackendStorageResponse.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, location_name: "appId"))
+    CreateBackendStorageResponse.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, location_name: "backendEnvironmentName"))
+    CreateBackendStorageResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
+    CreateBackendStorageResponse.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
+    CreateBackendStorageResponse.struct_class = Types::CreateBackendStorageResponse
+
     CreateTokenRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))
     CreateTokenRequest.struct_class = Types::CreateTokenRequest
 
@@ -460,6 +524,18 @@ module Aws::AmplifyBackend
     DeleteBackendResponse.add_member(:operation, Shapes::ShapeRef.new(shape: __string, location_name: "operation"))
     DeleteBackendResponse.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
     DeleteBackendResponse.struct_class = Types::DeleteBackendResponse
+
+    DeleteBackendStorageRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))
+    DeleteBackendStorageRequest.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "backendEnvironmentName"))
+    DeleteBackendStorageRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceName"))
+    DeleteBackendStorageRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "serviceName"))
+    DeleteBackendStorageRequest.struct_class = Types::DeleteBackendStorageRequest
+
+    DeleteBackendStorageResponse.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, location_name: "appId"))
+    DeleteBackendStorageResponse.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, location_name: "backendEnvironmentName"))
+    DeleteBackendStorageResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
+    DeleteBackendStorageResponse.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
+    DeleteBackendStorageResponse.struct_class = Types::DeleteBackendStorageResponse
 
     DeleteTokenRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))
     DeleteTokenRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sessionId"))
@@ -586,6 +662,32 @@ module Aws::AmplifyBackend
     GetBackendResponse.add_member(:error, Shapes::ShapeRef.new(shape: __string, location_name: "error"))
     GetBackendResponse.struct_class = Types::GetBackendResponse
 
+    GetBackendStorageReqObj.add_member(:resource_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceName"))
+    GetBackendStorageReqObj.struct_class = Types::GetBackendStorageReqObj
+
+    GetBackendStorageRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))
+    GetBackendStorageRequest.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "backendEnvironmentName"))
+    GetBackendStorageRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceName"))
+    GetBackendStorageRequest.struct_class = Types::GetBackendStorageRequest
+
+    GetBackendStorageResourceConfig.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
+    GetBackendStorageResourceConfig.add_member(:imported, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "imported"))
+    GetBackendStorageResourceConfig.add_member(:permissions, Shapes::ShapeRef.new(shape: BackendStoragePermissions, location_name: "permissions"))
+    GetBackendStorageResourceConfig.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "serviceName"))
+    GetBackendStorageResourceConfig.struct_class = Types::GetBackendStorageResourceConfig
+
+    GetBackendStorageRespObj.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "appId"))
+    GetBackendStorageRespObj.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "backendEnvironmentName"))
+    GetBackendStorageRespObj.add_member(:resource_config, Shapes::ShapeRef.new(shape: GetBackendStorageResourceConfig, location_name: "resourceConfig"))
+    GetBackendStorageRespObj.add_member(:resource_name, Shapes::ShapeRef.new(shape: __string, location_name: "resourceName"))
+    GetBackendStorageRespObj.struct_class = Types::GetBackendStorageRespObj
+
+    GetBackendStorageResponse.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, location_name: "appId"))
+    GetBackendStorageResponse.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, location_name: "backendEnvironmentName"))
+    GetBackendStorageResponse.add_member(:resource_config, Shapes::ShapeRef.new(shape: GetBackendStorageResourceConfig, location_name: "resourceConfig"))
+    GetBackendStorageResponse.add_member(:resource_name, Shapes::ShapeRef.new(shape: __string, location_name: "resourceName"))
+    GetBackendStorageResponse.struct_class = Types::GetBackendStorageResponse
+
     GetTokenRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))
     GetTokenRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sessionId"))
     GetTokenRequest.struct_class = Types::GetTokenRequest
@@ -624,6 +726,22 @@ module Aws::AmplifyBackend
     ImportBackendAuthResponse.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
     ImportBackendAuthResponse.struct_class = Types::ImportBackendAuthResponse
 
+    ImportBackendStorageReqObj.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
+    ImportBackendStorageReqObj.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "serviceName"))
+    ImportBackendStorageReqObj.struct_class = Types::ImportBackendStorageReqObj
+
+    ImportBackendStorageRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))
+    ImportBackendStorageRequest.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "backendEnvironmentName"))
+    ImportBackendStorageRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
+    ImportBackendStorageRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "serviceName"))
+    ImportBackendStorageRequest.struct_class = Types::ImportBackendStorageRequest
+
+    ImportBackendStorageResponse.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, location_name: "appId"))
+    ImportBackendStorageResponse.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, location_name: "backendEnvironmentName"))
+    ImportBackendStorageResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
+    ImportBackendStorageResponse.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
+    ImportBackendStorageResponse.struct_class = Types::ImportBackendStorageResponse
+
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     InternalServiceException.struct_class = Types::InternalServiceException
 
@@ -657,6 +775,8 @@ module Aws::AmplifyBackend
 
     ListOfAdditionalConstraintsElement.member = Shapes::ShapeRef.new(shape: AdditionalConstraintsElement)
 
+    ListOfAuthenticatedElement.member = Shapes::ShapeRef.new(shape: AuthenticatedElement)
+
     ListOfBackendAPIAuthType.member = Shapes::ShapeRef.new(shape: BackendAPIAuthType)
 
     ListOfBackendJobRespObj.member = Shapes::ShapeRef.new(shape: BackendJobRespObj)
@@ -667,7 +787,25 @@ module Aws::AmplifyBackend
 
     ListOfRequiredSignUpAttributesElement.member = Shapes::ShapeRef.new(shape: RequiredSignUpAttributesElement)
 
+    ListOfS3BucketInfo.member = Shapes::ShapeRef.new(shape: S3BucketInfo)
+
+    ListOfUnAuthenticatedElement.member = Shapes::ShapeRef.new(shape: UnAuthenticatedElement)
+
     ListOf__string.member = Shapes::ShapeRef.new(shape: __string)
+
+    ListS3BucketsReqObj.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListS3BucketsReqObj.struct_class = Types::ListS3BucketsReqObj
+
+    ListS3BucketsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListS3BucketsRequest.struct_class = Types::ListS3BucketsRequest
+
+    ListS3BucketsRespObj.add_member(:buckets, Shapes::ShapeRef.new(shape: ListOfS3BucketInfo, required: true, location_name: "buckets"))
+    ListS3BucketsRespObj.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListS3BucketsRespObj.struct_class = Types::ListS3BucketsRespObj
+
+    ListS3BucketsResponse.add_member(:buckets, Shapes::ShapeRef.new(shape: ListOfS3BucketInfo, location_name: "buckets"))
+    ListS3BucketsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListS3BucketsResponse.struct_class = Types::ListS3BucketsResponse
 
     LoginAuthConfigReqObj.add_member(:aws_cognito_identity_pool_id, Shapes::ShapeRef.new(shape: __string, location_name: "aws_cognito_identity_pool_id"))
     LoginAuthConfigReqObj.add_member(:aws_cognito_region, Shapes::ShapeRef.new(shape: __string, location_name: "aws_cognito_region"))
@@ -712,7 +850,15 @@ module Aws::AmplifyBackend
     RemoveBackendConfigResponse.add_member(:error, Shapes::ShapeRef.new(shape: __string, location_name: "error"))
     RemoveBackendConfigResponse.struct_class = Types::RemoveBackendConfigResponse
 
+    RemoveBackendStorageReqObj.add_member(:resource_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceName"))
+    RemoveBackendStorageReqObj.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "serviceName"))
+    RemoveBackendStorageReqObj.struct_class = Types::RemoveBackendStorageReqObj
+
     ResourceConfig.struct_class = Types::ResourceConfig
+
+    S3BucketInfo.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "creationDate"))
+    S3BucketInfo.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    S3BucketInfo.struct_class = Types::S3BucketInfo
 
     Settings.add_member(:mfa_types, Shapes::ShapeRef.new(shape: ListOfMfaTypesElement, location_name: "mfaTypes"))
     Settings.add_member(:sms_message, Shapes::ShapeRef.new(shape: __string, location_name: "smsMessage"))
@@ -829,6 +975,26 @@ module Aws::AmplifyBackend
     UpdateBackendJobResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: __string, location_name: "updateTime"))
     UpdateBackendJobResponse.struct_class = Types::UpdateBackendJobResponse
 
+    UpdateBackendStorageReqObj.add_member(:resource_config, Shapes::ShapeRef.new(shape: UpdateBackendStorageResourceConfig, required: true, location_name: "resourceConfig"))
+    UpdateBackendStorageReqObj.add_member(:resource_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceName"))
+    UpdateBackendStorageReqObj.struct_class = Types::UpdateBackendStorageReqObj
+
+    UpdateBackendStorageRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "appId"))
+    UpdateBackendStorageRequest.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "backendEnvironmentName"))
+    UpdateBackendStorageRequest.add_member(:resource_config, Shapes::ShapeRef.new(shape: UpdateBackendStorageResourceConfig, required: true, location_name: "resourceConfig"))
+    UpdateBackendStorageRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceName"))
+    UpdateBackendStorageRequest.struct_class = Types::UpdateBackendStorageRequest
+
+    UpdateBackendStorageResourceConfig.add_member(:permissions, Shapes::ShapeRef.new(shape: BackendStoragePermissions, required: true, location_name: "permissions"))
+    UpdateBackendStorageResourceConfig.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "serviceName"))
+    UpdateBackendStorageResourceConfig.struct_class = Types::UpdateBackendStorageResourceConfig
+
+    UpdateBackendStorageResponse.add_member(:app_id, Shapes::ShapeRef.new(shape: __string, location_name: "appId"))
+    UpdateBackendStorageResponse.add_member(:backend_environment_name, Shapes::ShapeRef.new(shape: __string, location_name: "backendEnvironmentName"))
+    UpdateBackendStorageResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
+    UpdateBackendStorageResponse.add_member(:status, Shapes::ShapeRef.new(shape: __string, location_name: "status"))
+    UpdateBackendStorageResponse.struct_class = Types::UpdateBackendStorageResponse
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -907,6 +1073,18 @@ module Aws::AmplifyBackend
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:create_backend_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBackendStorage"
+        o.http_method = "POST"
+        o.http_request_uri = "/backend/{appId}/storage"
+        o.input = Shapes::ShapeRef.new(shape: CreateBackendStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBackendStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:create_token, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateToken"
         o.http_method = "POST"
@@ -949,6 +1127,18 @@ module Aws::AmplifyBackend
         o.http_request_uri = "/backend/{appId}/auth/{backendEnvironmentName}/remove"
         o.input = Shapes::ShapeRef.new(shape: DeleteBackendAuthRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteBackendAuthResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:delete_backend_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBackendStorage"
+        o.http_method = "POST"
+        o.http_request_uri = "/backend/{appId}/storage/{backendEnvironmentName}/remove"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBackendStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBackendStorageResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -1039,6 +1229,18 @@ module Aws::AmplifyBackend
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:get_backend_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBackendStorage"
+        o.http_method = "POST"
+        o.http_request_uri = "/backend/{appId}/storage/{backendEnvironmentName}/details"
+        o.input = Shapes::ShapeRef.new(shape: GetBackendStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetBackendStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:get_token, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetToken"
         o.http_method = "GET"
@@ -1063,6 +1265,18 @@ module Aws::AmplifyBackend
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:import_backend_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportBackendStorage"
+        o.http_method = "POST"
+        o.http_request_uri = "/backend/{appId}/storage/{backendEnvironmentName}/import"
+        o.input = Shapes::ShapeRef.new(shape: ImportBackendStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportBackendStorageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:list_backend_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBackendJobs"
         o.http_method = "POST"
@@ -1079,6 +1293,18 @@ module Aws::AmplifyBackend
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_s3_buckets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListS3Buckets"
+        o.http_method = "POST"
+        o.http_request_uri = "/s3Buckets"
+        o.input = Shapes::ShapeRef.new(shape: ListS3BucketsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListS3BucketsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:remove_all_backends, Seahorse::Model::Operation.new.tap do |o|
@@ -1147,6 +1373,18 @@ module Aws::AmplifyBackend
         o.http_request_uri = "/backend/{appId}/job/{backendEnvironmentName}/{jobId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateBackendJobRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateBackendJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:update_backend_storage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateBackendStorage"
+        o.http_method = "POST"
+        o.http_request_uri = "/backend/{appId}/storage/{backendEnvironmentName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateBackendStorageRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateBackendStorageResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)

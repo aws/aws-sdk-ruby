@@ -17,6 +17,10 @@ module Aws::SNS
     AddPermissionInput = Shapes::StructureShape.new(name: 'AddPermissionInput')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AuthorizationErrorException = Shapes::StructureShape.new(name: 'AuthorizationErrorException')
+    BatchEntryIdsNotDistinctException = Shapes::StructureShape.new(name: 'BatchEntryIdsNotDistinctException')
+    BatchRequestTooLongException = Shapes::StructureShape.new(name: 'BatchRequestTooLongException')
+    BatchResultErrorEntry = Shapes::StructureShape.new(name: 'BatchResultErrorEntry')
+    BatchResultErrorEntryList = Shapes::ListShape.new(name: 'BatchResultErrorEntryList')
     Binary = Shapes::BlobShape.new(name: 'Binary')
     CheckIfPhoneNumberIsOptedOutInput = Shapes::StructureShape.new(name: 'CheckIfPhoneNumberIsOptedOutInput')
     CheckIfPhoneNumberIsOptedOutResponse = Shapes::StructureShape.new(name: 'CheckIfPhoneNumberIsOptedOutResponse')
@@ -37,6 +41,7 @@ module Aws::SNS
     DeleteSMSSandboxPhoneNumberInput = Shapes::StructureShape.new(name: 'DeleteSMSSandboxPhoneNumberInput')
     DeleteSMSSandboxPhoneNumberResult = Shapes::StructureShape.new(name: 'DeleteSMSSandboxPhoneNumberResult')
     DeleteTopicInput = Shapes::StructureShape.new(name: 'DeleteTopicInput')
+    EmptyBatchRequestException = Shapes::StructureShape.new(name: 'EmptyBatchRequestException')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointDisabledException = Shapes::StructureShape.new(name: 'EndpointDisabledException')
     FilterPolicyLimitExceededException = Shapes::StructureShape.new(name: 'FilterPolicyLimitExceededException')
@@ -53,6 +58,7 @@ module Aws::SNS
     GetTopicAttributesInput = Shapes::StructureShape.new(name: 'GetTopicAttributesInput')
     GetTopicAttributesResponse = Shapes::StructureShape.new(name: 'GetTopicAttributesResponse')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
+    InvalidBatchEntryIdException = Shapes::StructureShape.new(name: 'InvalidBatchEntryIdException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     InvalidSecurityException = Shapes::StructureShape.new(name: 'InvalidSecurityException')
@@ -104,6 +110,12 @@ module Aws::SNS
     PhoneNumberString = Shapes::StringShape.new(name: 'PhoneNumberString')
     PlatformApplication = Shapes::StructureShape.new(name: 'PlatformApplication')
     PlatformApplicationDisabledException = Shapes::StructureShape.new(name: 'PlatformApplicationDisabledException')
+    PublishBatchInput = Shapes::StructureShape.new(name: 'PublishBatchInput')
+    PublishBatchRequestEntry = Shapes::StructureShape.new(name: 'PublishBatchRequestEntry')
+    PublishBatchRequestEntryList = Shapes::ListShape.new(name: 'PublishBatchRequestEntryList')
+    PublishBatchResponse = Shapes::StructureShape.new(name: 'PublishBatchResponse')
+    PublishBatchResultEntry = Shapes::StructureShape.new(name: 'PublishBatchResultEntry')
+    PublishBatchResultEntryList = Shapes::ListShape.new(name: 'PublishBatchResultEntryList')
     PublishInput = Shapes::StructureShape.new(name: 'PublishInput')
     PublishResponse = Shapes::StructureShape.new(name: 'PublishResponse')
     RemovePermissionInput = Shapes::StructureShape.new(name: 'RemovePermissionInput')
@@ -137,6 +149,7 @@ module Aws::SNS
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottledException = Shapes::StructureShape.new(name: 'ThrottledException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyEntriesInBatchRequestException = Shapes::StructureShape.new(name: 'TooManyEntriesInBatchRequestException')
     Topic = Shapes::StructureShape.new(name: 'Topic')
     TopicAttributesMap = Shapes::MapShape.new(name: 'TopicAttributesMap')
     TopicLimitExceededException = Shapes::StructureShape.new(name: 'TopicLimitExceededException')
@@ -180,6 +193,20 @@ module Aws::SNS
 
     AuthorizationErrorException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     AuthorizationErrorException.struct_class = Types::AuthorizationErrorException
+
+    BatchEntryIdsNotDistinctException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    BatchEntryIdsNotDistinctException.struct_class = Types::BatchEntryIdsNotDistinctException
+
+    BatchRequestTooLongException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    BatchRequestTooLongException.struct_class = Types::BatchRequestTooLongException
+
+    BatchResultErrorEntry.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
+    BatchResultErrorEntry.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Code"))
+    BatchResultErrorEntry.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    BatchResultErrorEntry.add_member(:sender_fault, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "SenderFault"))
+    BatchResultErrorEntry.struct_class = Types::BatchResultErrorEntry
+
+    BatchResultErrorEntryList.member = Shapes::ShapeRef.new(shape: BatchResultErrorEntry)
 
     CheckIfPhoneNumberIsOptedOutInput.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "phoneNumber"))
     CheckIfPhoneNumberIsOptedOutInput.struct_class = Types::CheckIfPhoneNumberIsOptedOutInput
@@ -245,6 +272,9 @@ module Aws::SNS
     DeleteTopicInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
     DeleteTopicInput.struct_class = Types::DeleteTopicInput
 
+    EmptyBatchRequestException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    EmptyBatchRequestException.struct_class = Types::EmptyBatchRequestException
+
     Endpoint.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, location_name: "EndpointArn"))
     Endpoint.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, location_name: "Attributes"))
     Endpoint.struct_class = Types::Endpoint
@@ -292,6 +322,9 @@ module Aws::SNS
 
     InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidBatchEntryIdException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidBatchEntryIdException.struct_class = Types::InvalidBatchEntryIdException
 
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
@@ -435,6 +468,32 @@ module Aws::SNS
     PlatformApplicationDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     PlatformApplicationDisabledException.struct_class = Types::PlatformApplicationDisabledException
 
+    PublishBatchInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
+    PublishBatchInput.add_member(:publish_batch_request_entries, Shapes::ShapeRef.new(shape: PublishBatchRequestEntryList, required: true, location_name: "PublishBatchRequestEntries"))
+    PublishBatchInput.struct_class = Types::PublishBatchInput
+
+    PublishBatchRequestEntry.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
+    PublishBatchRequestEntry.add_member(:message, Shapes::ShapeRef.new(shape: message, required: true, location_name: "Message"))
+    PublishBatchRequestEntry.add_member(:subject, Shapes::ShapeRef.new(shape: subject, location_name: "Subject"))
+    PublishBatchRequestEntry.add_member(:message_structure, Shapes::ShapeRef.new(shape: messageStructure, location_name: "MessageStructure"))
+    PublishBatchRequestEntry.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageAttributeMap, location_name: "MessageAttributes"))
+    PublishBatchRequestEntry.add_member(:message_deduplication_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageDeduplicationId"))
+    PublishBatchRequestEntry.add_member(:message_group_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageGroupId"))
+    PublishBatchRequestEntry.struct_class = Types::PublishBatchRequestEntry
+
+    PublishBatchRequestEntryList.member = Shapes::ShapeRef.new(shape: PublishBatchRequestEntry)
+
+    PublishBatchResponse.add_member(:successful, Shapes::ShapeRef.new(shape: PublishBatchResultEntryList, location_name: "Successful"))
+    PublishBatchResponse.add_member(:failed, Shapes::ShapeRef.new(shape: BatchResultErrorEntryList, location_name: "Failed"))
+    PublishBatchResponse.struct_class = Types::PublishBatchResponse
+
+    PublishBatchResultEntry.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
+    PublishBatchResultEntry.add_member(:message_id, Shapes::ShapeRef.new(shape: messageId, location_name: "MessageId"))
+    PublishBatchResultEntry.add_member(:sequence_number, Shapes::ShapeRef.new(shape: String, location_name: "SequenceNumber"))
+    PublishBatchResultEntry.struct_class = Types::PublishBatchResultEntry
+
+    PublishBatchResultEntryList.member = Shapes::ShapeRef.new(shape: PublishBatchResultEntry)
+
     PublishInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, location_name: "TopicArn"))
     PublishInput.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetArn"))
     PublishInput.add_member(:phone_number, Shapes::ShapeRef.new(shape: String, location_name: "PhoneNumber"))
@@ -536,6 +595,9 @@ module Aws::SNS
 
     ThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     ThrottledException.struct_class = Types::ThrottledException
+
+    TooManyEntriesInBatchRequestException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    TooManyEntriesInBatchRequestException.struct_class = Types::TooManyEntriesInBatchRequestException
 
     Topic.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, location_name: "TopicArn"))
     Topic.struct_class = Types::Topic
@@ -981,6 +1043,33 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: EndpointDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: PlatformApplicationDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
+        o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityException)
+      end)
+
+      api.add_operation(:publish_batch, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PublishBatch"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PublishBatchInput)
+        o.output = Shapes::ShapeRef.new(shape: PublishBatchResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EndpointDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformApplicationDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: BatchEntryIdsNotDistinctException)
+        o.errors << Shapes::ShapeRef.new(shape: BatchRequestTooLongException)
+        o.errors << Shapes::ShapeRef.new(shape: EmptyBatchRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidBatchEntryIdException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyEntriesInBatchRequestException)
         o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)

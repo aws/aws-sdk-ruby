@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2021-11-17)
+------------------
+
+* Feature - Add paginator for DescribeResourceCollectionHealth
+
 1.14.0 (2021-11-12)
 ------------------
 

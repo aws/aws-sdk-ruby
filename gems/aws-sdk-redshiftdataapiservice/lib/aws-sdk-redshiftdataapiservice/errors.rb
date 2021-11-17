@@ -29,6 +29,7 @@ module Aws::RedshiftDataAPIService
   # ## Error Classes
   # * {ActiveStatementsExceededException}
   # * {BatchExecuteStatementException}
+  # * {DatabaseConnectionException}
   # * {ExecuteStatementException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
@@ -72,6 +73,21 @@ module Aws::RedshiftDataAPIService
       # @return [String]
       def statement_id
         @data[:statement_id]
+      end
+    end
+
+    class DatabaseConnectionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RedshiftDataAPIService::Types::DatabaseConnectionException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

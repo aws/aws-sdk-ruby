@@ -296,6 +296,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Amplify                                           | Aws::Amplify                             | aws-sdk-amplify                             | 2017-07-25  |
 | AWS App Mesh                                          | Aws::AppMesh                             | aws-sdk-appmesh                             | 2019-01-25  |
 | AWS App Runner                                        | Aws::AppRunner                           | aws-sdk-apprunner                           | 2020-05-15  |
+| AWS AppConfig Data                                    | Aws::AppConfigData                       | aws-sdk-appconfigdata                       | 2021-11-11  |
 | AWS AppSync                                           | Aws::AppSync                             | aws-sdk-appsync                             | 2017-07-25  |
 | AWS Application Cost Profiler                         | Aws::ApplicationCostProfiler             | aws-sdk-applicationcostprofiler             | 2020-09-10  |
 | AWS Application Discovery Service                     | Aws::ApplicationDiscoveryService         | aws-sdk-applicationdiscoveryservice         | 2015-11-01  |
@@ -569,6 +570,7 @@ RubyGems.org page under "LINKS" section.
 | Braket                                                | Aws::Braket                              | aws-sdk-braket                              | 2019-09-01  |
 | CodeArtifact                                          | Aws::CodeArtifact                        | aws-sdk-codeartifact                        | 2018-09-22  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                        | aws-sdk-imagebuilder                        | 2019-12-02  |
+| Elastic Disaster Recovery Service                     | Aws::Drs                                 | aws-sdk-drs                                 | 2020-02-26  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing                | aws-sdk-elasticloadbalancing                | 2012-06-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2              | aws-sdk-elasticloadbalancingv2              | 2015-12-01  |
 | FinSpace Public API                                   | Aws::FinSpaceData                        | aws-sdk-finspacedata                        | 2020-07-13  |

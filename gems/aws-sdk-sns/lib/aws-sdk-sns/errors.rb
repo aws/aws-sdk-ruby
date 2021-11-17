@@ -28,10 +28,14 @@ module Aws::SNS
   #
   # ## Error Classes
   # * {AuthorizationErrorException}
+  # * {BatchEntryIdsNotDistinctException}
+  # * {BatchRequestTooLongException}
   # * {ConcurrentAccessException}
+  # * {EmptyBatchRequestException}
   # * {EndpointDisabledException}
   # * {FilterPolicyLimitExceededException}
   # * {InternalErrorException}
+  # * {InvalidBatchEntryIdException}
   # * {InvalidParameterException}
   # * {InvalidParameterValueException}
   # * {InvalidSecurityException}
@@ -50,6 +54,7 @@ module Aws::SNS
   # * {TagLimitExceededException}
   # * {TagPolicyException}
   # * {ThrottledException}
+  # * {TooManyEntriesInBatchRequestException}
   # * {TopicLimitExceededException}
   # * {UserErrorException}
   # * {ValidationException}
@@ -76,11 +81,56 @@ module Aws::SNS
       end
     end
 
+    class BatchEntryIdsNotDistinctException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SNS::Types::BatchEntryIdsNotDistinctException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class BatchRequestTooLongException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SNS::Types::BatchRequestTooLongException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ConcurrentAccessException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SNS::Types::ConcurrentAccessException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class EmptyBatchRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SNS::Types::EmptyBatchRequestException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -126,6 +176,21 @@ module Aws::SNS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SNS::Types::InternalErrorException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidBatchEntryIdException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SNS::Types::InvalidBatchEntryIdException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -396,6 +461,21 @@ module Aws::SNS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SNS::Types::ThrottledException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyEntriesInBatchRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SNS::Types::TooManyEntriesInBatchRequestException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

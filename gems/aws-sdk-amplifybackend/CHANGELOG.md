@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2021-11-17)
+------------------
+
+* Feature - New APIs to support the Amplify Storage category. Add and manage file storage in your Amplify app backend.
+
 1.11.0 (2021-11-04)
 ------------------
 

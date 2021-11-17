@@ -43,7 +43,7 @@ module Aws::SNS
     # * `DisplayName` – The human-readable name used in the `From` field for
     #   notifications to `email` and `email-json` endpoints.
     #
-    # * `Owner` – The account ID of the topic's owner.
+    # * `Owner` – The Amazon Web Services account ID of the topic's owner.
     #
     # * `Policy` – The JSON serialization of the topic's access control
     #   policy.
@@ -151,9 +151,10 @@ module Aws::SNS
     # @option options [required, String] :label
     #   A unique identifier for the new policy statement.
     # @option options [required, Array<String>] :aws_account_id
-    #   The account IDs of the users (principals) who will be given access to
-    #   the specified actions. The users must have account, but do not need to
-    #   be signed up for this service.
+    #   The Amazon Web Services account IDs of the users (principals) who will
+    #   be given access to the specified actions. The users must have Amazon
+    #   Web Services account, but do not need to be signed up for this
+    #   service.
     # @option options [required, Array<String>] :action_name
     #   The action you want to allow for the specified principal(s).
     #
@@ -313,7 +314,7 @@ module Aws::SNS
     # @option options [String] :message_deduplication_id
     #   This parameter applies only to FIFO (first-in-first-out) topics. The
     #   `MessageDeduplicationId` can contain up to 128 alphanumeric characters
-    #   (a-z, A-Z, 0-9) and punctuation ``
+    #   `(a-z, A-Z, 0-9)` and punctuation ``
     #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
     #   Every message must have a unique `MessageDeduplicationId`, which is a
@@ -327,8 +328,8 @@ module Aws::SNS
     #   `MessageDeduplicationId` overrides the generated one.
     # @option options [String] :message_group_id
     #   This parameter applies only to FIFO (first-in-first-out) topics. The
-    #   `MessageGroupId` can contain up to 128 alphanumeric characters (a-z,
-    #   A-Z, 0-9) and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+    #   `MessageGroupId` can contain up to 128 alphanumeric characters `(a-z,
+    #   A-Z, 0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
     #   The `MessageGroupId` is a tag that specifies that a message belongs to
     #   a specific message group. Messages that belong to the same message

@@ -29,9 +29,10 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The account IDs of the users (principals) who will be given access
-    #   to the specified actions. The users must have account, but do not
-    #   need to be signed up for this service.
+    #   The Amazon Web Services account IDs of the users (principals) who
+    #   will be given access to the specified actions. The users must have
+    #   Amazon Web Services account, but do not need to be signed up for
+    #   this service.
     #   @return [Array<String>]
     #
     # @!attribute [rw] action_name
@@ -61,6 +62,63 @@ module Aws::SNS
     #
     class AuthorizationErrorException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Two or more batch entries in the request have the same `Id`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/BatchEntryIdsNotDistinctException AWS API Documentation
+    #
+    class BatchEntryIdsNotDistinctException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The length of all the batch messages put together is more than the
+    # limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/BatchRequestTooLongException AWS API Documentation
+    #
+    class BatchRequestTooLongException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Gives a detailed description of failed messages in the batch.
+    #
+    # @!attribute [rw] id
+    #   The `Id` of an entry in a batch request
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   An error code representing why the action failed on this entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message explaining why the action failed on this entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_fault
+    #   Specifies whether the error happened due to the caller of the batch
+    #   API action.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/BatchResultErrorEntry AWS API Documentation
+    #
+    class BatchResultErrorEntry < Struct.new(
+      :id,
+      :code,
+      :message,
+      :sender_fault)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -531,10 +589,23 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Endpoint for mobile app and device.
+    # The batch request doesn't contain any entries.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/EmptyBatchRequestException AWS API Documentation
+    #
+    class EmptyBatchRequestException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The endpoint for mobile app and device.
     #
     # @!attribute [rw] endpoint_arn
-    #   EndpointArn for mobile app and device.
+    #   The `EndpointArn` for mobile app and device.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -564,9 +635,10 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Indicates that the number of filter polices in your account exceeds
-    # the limit. To add more filter polices, submit an SNS Limit Increase
-    # case in the Amazon Web Services Support Center.
+    # Indicates that the number of filter polices in your Amazon Web
+    # Services account exceeds the limit. To add more filter polices, submit
+    # an Amazon SNS Limit Increase case in the Amazon Web Services Support
+    # Center.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -658,6 +730,15 @@ module Aws::SNS
     # @!attribute [rw] attributes
     #   Attributes include the following:
     #
+    #   * `AppleCertificateExpiryDate` – The expiry date of the SSL
+    #     certificate used to configure certificate-based authentication.
+    #
+    #   * `ApplePlatformTeamID` – The Apple developer account ID used to
+    #     configure token-based authentication.
+    #
+    #   * `ApplePlatformBundleID` – The app identifier used to configure
+    #     token-based authentication.
+    #
     #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #     notifications should be sent.
     #
@@ -732,7 +813,8 @@ module Aws::SNS
     class GetSMSSandboxAccountStatusInput < Aws::EmptyStructure; end
 
     # @!attribute [rw] is_in_sandbox
-    #   Indicates whether the calling account is in the SMS sandbox.
+    #   Indicates whether the calling Amazon Web Services account is in the
+    #   SMS sandbox.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSSandboxAccountStatusResult AWS API Documentation
@@ -784,7 +866,8 @@ module Aws::SNS
     #     subscription. For more information, see [Amazon SNS Message
     #     Filtering][1] in the *Amazon SNS Developer Guide*.
     #
-    #   * `Owner` – The account ID of the subscription's owner.
+    #   * `Owner` – The Amazon Web Services account ID of the
+    #     subscription's owner.
     #
     #   * `PendingConfirmation` – `true` if the subscription hasn't been
     #     confirmed. To confirm a pending subscription, call the
@@ -869,7 +952,8 @@ module Aws::SNS
     #   * `DisplayName` – The human-readable name used in the `From` field
     #     for notifications to `email` and `email-json` endpoints.
     #
-    #   * `Owner` – The account ID of the topic's owner.
+    #   * `Owner` – The Amazon Web Services account ID of the topic's
+    #     owner.
     #
     #   * `Policy` – The JSON serialization of the topic's access control
     #     policy.
@@ -949,6 +1033,20 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # The `Id` of a batch entry in a batch request doesn't abide by the
+    # specification.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InvalidBatchEntryIdException AWS API Documentation
+    #
+    class InvalidBatchEntryIdException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Indicates that a request parameter does not comply with the associated
     # constraints.
     #
@@ -967,7 +1065,8 @@ module Aws::SNS
     # constraints.
     #
     # @!attribute [rw] message
-    #   The parameter value is invalid.
+    #   The parameter of an entry in a request doesn't abide by the
+    #   specification.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InvalidParameterValueException AWS API Documentation
@@ -1579,8 +1678,8 @@ module Aws::SNS
     class OptInPhoneNumberResponse < Aws::EmptyStructure; end
 
     # Indicates that the specified phone number opted out of receiving SMS
-    # messages from your account. You can't send SMS messages to phone
-    # numbers that opt out.
+    # messages from your Amazon Web Services account. You can't send SMS
+    # messages to phone numbers that opt out.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1662,6 +1761,260 @@ module Aws::SNS
     #
     class PlatformApplicationDisabledException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PublishBatchInput
+    #   data as a hash:
+    #
+    #       {
+    #         topic_arn: "topicARN", # required
+    #         publish_batch_request_entries: [ # required
+    #           {
+    #             id: "String", # required
+    #             message: "message", # required
+    #             subject: "subject",
+    #             message_structure: "messageStructure",
+    #             message_attributes: {
+    #               "String" => {
+    #                 data_type: "String", # required
+    #                 string_value: "String",
+    #                 binary_value: "data",
+    #               },
+    #             },
+    #             message_deduplication_id: "String",
+    #             message_group_id: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] topic_arn
+    #   The Amazon resource name (ARN) of the topic you want to batch
+    #   publish to.
+    #   @return [String]
+    #
+    # @!attribute [rw] publish_batch_request_entries
+    #   A list of `PublishBatch` request entries to be sent to the SNS
+    #   topic.
+    #   @return [Array<Types::PublishBatchRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishBatchInput AWS API Documentation
+    #
+    class PublishBatchInput < Struct.new(
+      :topic_arn,
+      :publish_batch_request_entries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the details of a single Amazon SNS message along with an `Id`
+    # that identifies a message within the batch.
+    #
+    # @note When making an API call, you may pass PublishBatchRequestEntry
+    #   data as a hash:
+    #
+    #       {
+    #         id: "String", # required
+    #         message: "message", # required
+    #         subject: "subject",
+    #         message_structure: "messageStructure",
+    #         message_attributes: {
+    #           "String" => {
+    #             data_type: "String", # required
+    #             string_value: "String",
+    #             binary_value: "data",
+    #           },
+    #         },
+    #         message_deduplication_id: "String",
+    #         message_group_id: "String",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   An identifier for the message in this batch.
+    #
+    #   <note markdown="1"> The `Ids` of a batch request must be unique within a request.
+    #
+    #    This identifier can have up to 80 characters. The following
+    #   characters are accepted: alphanumeric characters, hyphens(-), and
+    #   underscores (\_).
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The body of the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The subject of the batch message.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_structure
+    #   Set `MessageStructure` to `json` if you want to send a different
+    #   message for each protocol. For example, using one publish action,
+    #   you can send a short message to your SMS subscribers and a longer
+    #   message to your email subscribers. If you set `MessageStructure` to
+    #   `json`, the value of the `Message` parameter must:
+    #
+    #   * be a syntactically valid JSON object; and
+    #
+    #   * contain at least a top-level JSON key of "default" with a value
+    #     that is a string.
+    #
+    #   You can define other top-level keys that define the message you want
+    #   to send to a specific transport protocol (e.g. http).
+    #   @return [String]
+    #
+    # @!attribute [rw] message_attributes
+    #   Each message attribute consists of a `Name`, `Type`, and `Value`.
+    #   For more information, see [Amazon SNS message attributes][1] in the
+    #   Amazon SNS Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-message-attributes.html
+    #   @return [Hash<String,Types::MessageAttributeValue>]
+    #
+    # @!attribute [rw] message_deduplication_id
+    #   This parameter applies only to FIFO (first-in-first-out) topics.
+    #
+    #   The token used for deduplication of messages within a 5-minute
+    #   minimum deduplication interval. If a message with a particular
+    #   `MessageDeduplicationId` is sent successfully, subsequent messages
+    #   with the same `MessageDeduplicationId` are accepted successfully but
+    #   aren't delivered.
+    #
+    #   * Every message must have a unique `MessageDeduplicationId`.
+    #
+    #     * You may provide a `MessageDeduplicationId` explicitly.
+    #
+    #     * If you aren't able to provide a `MessageDeduplicationId` and
+    #       you enable `ContentBasedDeduplication` for your topic, Amazon
+    #       SNS uses a SHA-256 hash to generate the `MessageDeduplicationId`
+    #       using the body of the message (but not the attributes of the
+    #       message).
+    #
+    #     * If you don't provide a `MessageDeduplicationId` and the topic
+    #       doesn't have `ContentBasedDeduplication` set, the action fails
+    #       with an error.
+    #
+    #     * If the topic has a `ContentBasedDeduplication` set, your
+    #       `MessageDeduplicationId` overrides the generated one.
+    #
+    #   * When `ContentBasedDeduplication` is in effect, messages with
+    #     identical content sent within the deduplication interval are
+    #     treated as duplicates and only one copy of the message is
+    #     delivered.
+    #
+    #   * If you send one message with `ContentBasedDeduplication` enabled,
+    #     and then another message with a `MessageDeduplicationId` that is
+    #     the same as the one generated for the first
+    #     `MessageDeduplicationId`, the two messages are treated as
+    #     duplicates and only one copy of the message is delivered.
+    #
+    #   <note markdown="1"> The `MessageDeduplicationId` is available to the consumer of the
+    #   message (this can be useful for troubleshooting delivery issues).
+    #
+    #    If a message is sent successfully but the acknowledgement is lost
+    #   and the message is resent with the same `MessageDeduplicationId`
+    #   after the deduplication interval, Amazon SNS can't detect duplicate
+    #   messages.
+    #
+    #    Amazon SNS continues to keep track of the message deduplication ID
+    #   even after the message is received and deleted.
+    #
+    #    </note>
+    #
+    #   The length of `MessageDeduplicationId` is 128 characters.
+    #
+    #   `MessageDeduplicationId` can contain alphanumeric characters `(a-z,
+    #   A-Z, 0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~)
+    #   ``.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_group_id
+    #   This parameter applies only to FIFO (first-in-first-out) topics.
+    #
+    #   The tag that specifies that a message belongs to a specific message
+    #   group. Messages that belong to the same message group are processed
+    #   in a FIFO manner (however, messages in different message groups
+    #   might be processed out of order). To interleave multiple ordered
+    #   streams within a single topic, use `MessageGroupId` values (for
+    #   example, session data for multiple users). In this scenario,
+    #   multiple consumers can process the topic, but the session data of
+    #   each user is processed in a FIFO fashion.
+    #
+    #   You must associate a non-empty `MessageGroupId` with a message. If
+    #   you don't provide a `MessageGroupId`, the action fails.
+    #
+    #   The length of `MessageGroupId` is 128 characters.
+    #
+    #   `MessageGroupId` can contain alphanumeric characters `(a-z, A-Z,
+    #   0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+    #
+    #   `MessageGroupId` is required for FIFO topics. You can't use it for
+    #   standard topics.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishBatchRequestEntry AWS API Documentation
+    #
+    class PublishBatchRequestEntry < Struct.new(
+      :id,
+      :message,
+      :subject,
+      :message_structure,
+      :message_attributes,
+      :message_deduplication_id,
+      :message_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful
+    #   A list of successful `PublishBatch` responses.
+    #   @return [Array<Types::PublishBatchResultEntry>]
+    #
+    # @!attribute [rw] failed
+    #   A list of failed `PublishBatch` responses.
+    #   @return [Array<Types::BatchResultErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishBatchResponse AWS API Documentation
+    #
+    class PublishBatchResponse < Struct.new(
+      :successful,
+      :failed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Encloses data related to a successful message in a batch request for
+    # topic.
+    #
+    # @!attribute [rw] id
+    #   The `Id` of an entry in a batch request.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   An identifier for the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] sequence_number
+    #   This parameter applies only to FIFO (first-in-first-out) topics.
+    #
+    #   The large, non-consecutive number that Amazon SNS assigns to each
+    #   message.
+    #
+    #   The length of `SequenceNumber` is 128 bits. `SequenceNumber`
+    #   continues to increase for a particular `MessageGroupId`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishBatchResultEntry AWS API Documentation
+    #
+    class PublishBatchResultEntry < Struct.new(
+      :id,
+      :message_id,
+      :sequence_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1804,7 +2157,7 @@ module Aws::SNS
     # @!attribute [rw] message_deduplication_id
     #   This parameter applies only to FIFO (first-in-first-out) topics. The
     #   `MessageDeduplicationId` can contain up to 128 alphanumeric
-    #   characters (a-z, A-Z, 0-9) and punctuation ``
+    #   characters `(a-z, A-Z, 0-9)` and punctuation ``
     #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
     #   Every message must have a unique `MessageDeduplicationId`, which is
@@ -1820,9 +2173,9 @@ module Aws::SNS
     #
     # @!attribute [rw] message_group_id
     #   This parameter applies only to FIFO (first-in-first-out) topics. The
-    #   `MessageGroupId` can contain up to 128 alphanumeric characters (a-z,
-    #   A-Z, 0-9) and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~)
-    #   ``.
+    #   `MessageGroupId` can contain up to 128 alphanumeric characters
+    #   `(a-z, A-Z, 0-9)` and punctuation ``
+    #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
     #   The `MessageGroupId` is a tag that specifies that a message belongs
     #   to a specific message group. Messages that belong to the same
@@ -1917,14 +2270,15 @@ module Aws::SNS
 
     # A verified or pending destination phone number in the SMS sandbox.
     #
-    # When you start using Amazon SNS to send SMS messages, your account is
-    # in the *SMS sandbox*. The SMS sandbox provides a safe environment for
-    # you to try Amazon SNS features without risking your reputation as an
-    # SMS sender. While your account is in the SMS sandbox, you can use all
-    # of the features of Amazon SNS. However, you can send SMS messages only
-    # to verified destination phone numbers. For more information, including
-    # how to move out of the sandbox to send messages without restrictions,
-    # see [SMS sandbox][1] in the *Amazon SNS Developer Guide*.
+    # When you start using Amazon SNS to send SMS messages, your Amazon Web
+    # Services account is in the *SMS sandbox*. The SMS sandbox provides a
+    # safe environment for you to try Amazon SNS features without risking
+    # your reputation as an SMS sender. While your Amazon Web Services
+    # account is in the SMS sandbox, you can use all of the features of
+    # Amazon SNS. However, you can send SMS messages only to verified
+    # destination phone numbers. For more information, including how to move
+    # out of the sandbox to send messages without restrictions, see [SMS
+    # sandbox][1] in the *Amazon SNS Developer Guide*.
     #
     #
     #
@@ -2012,16 +2366,34 @@ module Aws::SNS
     #   include the following:
     #
     #   * `PlatformCredential` – The credential received from the
-    #     notification service. For `APNS` and `APNS_SANDBOX`,
-    #     `PlatformCredential` is `private key`. For `GCM` (Firebase Cloud
-    #     Messaging), `PlatformCredential` is `API key`. For `ADM`,
-    #     `PlatformCredential` is `client secret`.
+    #     notification service.
+    #
+    #     * For ADM, `PlatformCredential`is client secret.
+    #
+    #     * For Apple Services using certificate credentials,
+    #       `PlatformCredential` is private key.
+    #
+    #     * For Apple Services using token credentials, `PlatformCredential`
+    #       is signing key.
+    #
+    #     * For GCM (Firebase Cloud Messaging), `PlatformCredential` is API
+    #       key.
+    #   ^
     #
     #   * `PlatformPrincipal` – The principal received from the notification
-    #     service. For `APNS` and `APNS_SANDBOX`, `PlatformPrincipal` is
-    #     `SSL certificate`. For `GCM` (Firebase Cloud Messaging), there is
-    #     no `PlatformPrincipal`. For `ADM`, `PlatformPrincipal` is `client
-    #     id`.
+    #     service.
+    #
+    #     * For ADM, `PlatformPrincipal`is client id.
+    #
+    #     * For Apple Services using certificate credentials,
+    #       `PlatformPrincipal` is SSL certificate.
+    #
+    #     * For Apple Services using token credentials, `PlatformPrincipal`
+    #       is signing key ID.
+    #
+    #     * For GCM (Firebase Cloud Messaging), there is no
+    #       `PlatformPrincipal`.
+    #   ^
     #
     #   * `EventEndpointCreated` – Topic ARN to which `EndpointCreated`
     #     event notifications are sent.
@@ -2044,6 +2416,15 @@ module Aws::SNS
     #
     #   * `SuccessFeedbackSampleRate` – Sample rate percentage (0-100) of
     #     successfully delivered messages.
+    #
+    #   The following attributes only apply to `APNs` token-based
+    #   authentication:
+    #
+    #   * `ApplePlatformTeamID` – The identifier that's assigned to your
+    #     Apple developer account team.
+    #
+    #   * `ApplePlatformBundleID` – The bundle identifier that's assigned
+    #     to your iOS app.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetPlatformApplicationAttributesInput AWS API Documentation
@@ -2067,8 +2448,9 @@ module Aws::SNS
     #       }
     #
     # @!attribute [rw] attributes
-    #   The default settings for sending SMS messages from your account. You
-    #   can set values for the following attribute names:
+    #   The default settings for sending SMS messages from your Amazon Web
+    #   Services account. You can set values for the following attribute
+    #   names:
     #
     #   `MonthlySpendLimit` – The maximum amount in USD that you are willing
     #   to spend each month to send SMS messages. When Amazon SNS determines
@@ -2119,7 +2501,7 @@ module Aws::SNS
     #   daily SMS usage reports from Amazon SNS. Each day, Amazon SNS will
     #   deliver a usage report as a CSV file to the bucket. The report
     #   includes the following information for each SMS message that was
-    #   successfully delivered by your account:
+    #   successfully delivered by your Amazon Web Services account:
     #
     #   * Time that the message was published (in UTC)
     #
@@ -2642,7 +3024,7 @@ module Aws::SNS
     class TagResourceResponse < Aws::EmptyStructure; end
 
     # Indicates that the rate at which requests have been submitted for this
-    # action exceeds the limit for your account.
+    # action exceeds the limit for your Amazon Web Services account.
     #
     # @!attribute [rw] message
     #   Throttled request.
@@ -2651,6 +3033,19 @@ module Aws::SNS
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ThrottledException AWS API Documentation
     #
     class ThrottledException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The batch request contains more entries than permissible.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TooManyEntriesInBatchRequestException AWS API Documentation
+    #
+    class TooManyEntriesInBatchRequestException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure

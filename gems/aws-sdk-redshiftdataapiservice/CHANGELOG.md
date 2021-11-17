@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2021-11-17)
+------------------
+
+* Feature - Data API now supports serverless requests.
+
 1.13.0 (2021-11-04)
 ------------------
 

@@ -36,6 +36,15 @@ module Aws::SNS
 
     # Attributes include the following:
     #
+    # * `AppleCertificateExpiryDate` – The expiry date of the SSL
+    #   certificate used to configure certificate-based authentication.
+    #
+    # * `ApplePlatformTeamID` – The Apple developer account ID used to
+    #   configure token-based authentication.
+    #
+    # * `ApplePlatformBundleID` – The app identifier used to configure
+    #   token-based authentication.
+    #
     # * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #   notifications should be sent.
     #
@@ -150,15 +159,34 @@ module Aws::SNS
     #   include the following:
     #
     #   * `PlatformCredential` – The credential received from the notification
-    #     service. For `APNS` and `APNS_SANDBOX`, `PlatformCredential` is
-    #     `private key`. For `GCM` (Firebase Cloud Messaging),
-    #     `PlatformCredential` is `API key`. For `ADM`, `PlatformCredential`
-    #     is `client secret`.
+    #     service.
+    #
+    #     * For ADM, `PlatformCredential`is client secret.
+    #
+    #     * For Apple Services using certificate credentials,
+    #       `PlatformCredential` is private key.
+    #
+    #     * For Apple Services using token credentials, `PlatformCredential`
+    #       is signing key.
+    #
+    #     * For GCM (Firebase Cloud Messaging), `PlatformCredential` is API
+    #       key.
+    #   ^
     #
     #   * `PlatformPrincipal` – The principal received from the notification
-    #     service. For `APNS` and `APNS_SANDBOX`, `PlatformPrincipal` is `SSL
-    #     certificate`. For `GCM` (Firebase Cloud Messaging), there is no
-    #     `PlatformPrincipal`. For `ADM`, `PlatformPrincipal` is `client id`.
+    #     service.
+    #
+    #     * For ADM, `PlatformPrincipal`is client id.
+    #
+    #     * For Apple Services using certificate credentials,
+    #       `PlatformPrincipal` is SSL certificate.
+    #
+    #     * For Apple Services using token credentials, `PlatformPrincipal` is
+    #       signing key ID.
+    #
+    #     * For GCM (Firebase Cloud Messaging), there is no
+    #       `PlatformPrincipal`.
+    #   ^
     #
     #   * `EventEndpointCreated` – Topic ARN to which `EndpointCreated` event
     #     notifications are sent.
@@ -181,6 +209,15 @@ module Aws::SNS
     #
     #   * `SuccessFeedbackSampleRate` – Sample rate percentage (0-100) of
     #     successfully delivered messages.
+    #
+    #   The following attributes only apply to `APNs` token-based
+    #   authentication:
+    #
+    #   * `ApplePlatformTeamID` – The identifier that's assigned to your
+    #     Apple developer account team.
+    #
+    #   * `ApplePlatformBundleID` – The bundle identifier that's assigned to
+    #     your iOS app.
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(platform_application_arn: @arn)

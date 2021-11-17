@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2021-11-17)
+------------------
+
+* Feature - Documentation updates for Amazon API Gateway.
+
 1.69.0 (2021-11-04)
 ------------------
 

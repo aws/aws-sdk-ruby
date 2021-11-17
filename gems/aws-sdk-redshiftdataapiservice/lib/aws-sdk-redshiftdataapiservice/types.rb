@@ -45,7 +45,7 @@ module Aws::RedshiftDataAPIService
     #   data as a hash:
     #
     #       {
-    #         cluster_identifier: "Location", # required
+    #         cluster_identifier: "Location",
     #         database: "String", # required
     #         db_user: "String",
     #         secret_arn: "SecretArn",
@@ -55,9 +55,9 @@ module Aws::RedshiftDataAPIService
     #       }
     #
     # @!attribute [rw] cluster_identifier
-    #   The cluster identifier. This parameter is required when
-    #   authenticating using either Secrets Manager or temporary
-    #   credentials.
+    #   The cluster identifier. This parameter is required when connecting
+    #   to a cluster and authenticating using either Secrets Manager or
+    #   temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] database
@@ -67,8 +67,8 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] db_user
-    #   The database user name. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The database user name. This parameter is required when connecting
+    #   to a cluster and authenticating using temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -106,7 +106,8 @@ module Aws::RedshiftDataAPIService
     end
 
     # @!attribute [rw] cluster_identifier
-    #   The cluster identifier.
+    #   The cluster identifier. This parameter is not returned when
+    #   connecting to a serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -255,6 +256,19 @@ module Aws::RedshiftDataAPIService
       include Aws::Structure
     end
 
+    # Connection to a database failed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-data-2019-12-20/DatabaseConnectionException AWS API Documentation
+    #
+    class DatabaseConnectionException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeStatementRequest
     #   data as a hash:
     #
@@ -307,7 +321,8 @@ module Aws::RedshiftDataAPIService
     #
     # @!attribute [rw] has_result_set
     #   A value that indicates whether the statement has a result set. The
-    #   result set can be empty.
+    #   result set can be empty. The value is true for an empty result set.
+    #   The value is true if any substatement returns a result set.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
@@ -410,7 +425,7 @@ module Aws::RedshiftDataAPIService
     #   data as a hash:
     #
     #       {
-    #         cluster_identifier: "Location", # required
+    #         cluster_identifier: "Location",
     #         connected_database: "String",
     #         database: "String", # required
     #         db_user: "String",
@@ -422,9 +437,9 @@ module Aws::RedshiftDataAPIService
     #       }
     #
     # @!attribute [rw] cluster_identifier
-    #   The cluster identifier. This parameter is required when
-    #   authenticating using either Secrets Manager or temporary
-    #   credentials.
+    #   The cluster identifier. This parameter is required when connecting
+    #   to a cluster and authenticating using either Secrets Manager or
+    #   temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] connected_database
@@ -439,8 +454,8 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] db_user
-    #   The database user name. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The database user name. This parameter is required when connecting
+    #   to a cluster and authenticating using temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -542,7 +557,7 @@ module Aws::RedshiftDataAPIService
     #   data as a hash:
     #
     #       {
-    #         cluster_identifier: "Location", # required
+    #         cluster_identifier: "Location",
     #         database: "String", # required
     #         db_user: "String",
     #         parameters: [
@@ -558,9 +573,9 @@ module Aws::RedshiftDataAPIService
     #       }
     #
     # @!attribute [rw] cluster_identifier
-    #   The cluster identifier. This parameter is required when
-    #   authenticating using either Secrets Manager or temporary
-    #   credentials.
+    #   The cluster identifier. This parameter is required when connecting
+    #   to a cluster and authenticating using either Secrets Manager or
+    #   temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] database
@@ -570,8 +585,8 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] db_user
-    #   The database user name. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The database user name. This parameter is required when connecting
+    #   to a cluster and authenticating using temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -614,7 +629,8 @@ module Aws::RedshiftDataAPIService
     end
 
     # @!attribute [rw] cluster_identifier
-    #   The cluster identifier.
+    #   The cluster identifier. This parameter is not returned when
+    #   connecting to a serverless endpoint.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -791,7 +807,7 @@ module Aws::RedshiftDataAPIService
     #   data as a hash:
     #
     #       {
-    #         cluster_identifier: "Location", # required
+    #         cluster_identifier: "Location",
     #         database: "String", # required
     #         db_user: "String",
     #         max_results: 1,
@@ -800,9 +816,9 @@ module Aws::RedshiftDataAPIService
     #       }
     #
     # @!attribute [rw] cluster_identifier
-    #   The cluster identifier. This parameter is required when
-    #   authenticating using either Secrets Manager or temporary
-    #   credentials.
+    #   The cluster identifier. This parameter is required when connecting
+    #   to a cluster and authenticating using either Secrets Manager or
+    #   temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] database
@@ -812,8 +828,8 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] db_user
-    #   The database user name. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The database user name. This parameter is required when connecting
+    #   to a cluster and authenticating using temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -876,7 +892,7 @@ module Aws::RedshiftDataAPIService
     #   data as a hash:
     #
     #       {
-    #         cluster_identifier: "Location", # required
+    #         cluster_identifier: "Location",
     #         connected_database: "String",
     #         database: "String", # required
     #         db_user: "String",
@@ -887,9 +903,9 @@ module Aws::RedshiftDataAPIService
     #       }
     #
     # @!attribute [rw] cluster_identifier
-    #   The cluster identifier. This parameter is required when
-    #   authenticating using either Secrets Manager or temporary
-    #   credentials.
+    #   The cluster identifier. This parameter is required when connecting
+    #   to a cluster and authenticating using either Secrets Manager or
+    #   temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] connected_database
@@ -904,8 +920,8 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] db_user
-    #   The database user name. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The database user name. This parameter is required when connecting
+    #   to a cluster and authenticating using temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1074,7 +1090,7 @@ module Aws::RedshiftDataAPIService
     #   data as a hash:
     #
     #       {
-    #         cluster_identifier: "Location", # required
+    #         cluster_identifier: "Location",
     #         connected_database: "String",
     #         database: "String", # required
     #         db_user: "String",
@@ -1086,9 +1102,9 @@ module Aws::RedshiftDataAPIService
     #       }
     #
     # @!attribute [rw] cluster_identifier
-    #   The cluster identifier. This parameter is required when
-    #   authenticating using either Secrets Manager or temporary
-    #   credentials.
+    #   The cluster identifier. This parameter is required when connecting
+    #   to a cluster and authenticating using either Secrets Manager or
+    #   temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] connected_database
@@ -1103,8 +1119,8 @@ module Aws::RedshiftDataAPIService
     #   @return [String]
     #
     # @!attribute [rw] db_user
-    #   The database user name. This parameter is required when
-    #   authenticating using temporary credentials.
+    #   The database user name. This parameter is required when connecting
+    #   to a cluster and authenticating using temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1321,7 +1337,7 @@ module Aws::RedshiftDataAPIService
     #
     # @!attribute [rw] has_result_set
     #   A value that indicates whether the statement has a result set. The
-    #   result set can be empty.
+    #   result set can be empty. The value is true for an empty result set.
     #   @return [Boolean]
     #
     # @!attribute [rw] id

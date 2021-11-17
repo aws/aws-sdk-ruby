@@ -337,7 +337,8 @@ module Aws::SNS
     # @!group API Operations
 
     # Adds a statement to a topic's access control policy, granting access
-    # for the specified accounts to the specified actions.
+    # for the specified Amazon Web Services accounts to the specified
+    # actions.
     #
     # @option params [required, String] :topic_arn
     #   The ARN of the topic whose access control policy you wish to modify.
@@ -346,9 +347,10 @@ module Aws::SNS
     #   A unique identifier for the new policy statement.
     #
     # @option params [required, Array<String>] :aws_account_id
-    #   The account IDs of the users (principals) who will be given access to
-    #   the specified actions. The users must have account, but do not need to
-    #   be signed up for this service.
+    #   The Amazon Web Services account IDs of the users (principals) who will
+    #   be given access to the specified actions. The users must have Amazon
+    #   Web Services account, but do not need to be signed up for this
+    #   service.
     #
     # @option params [required, Array<String>] :action_name
     #   The action you want to allow for the specified principal(s).
@@ -376,8 +378,8 @@ module Aws::SNS
     end
 
     # Accepts a phone number and indicates whether the phone holder has
-    # opted out of receiving SMS messages from your account. You cannot send
-    # SMS messages to a number that is opted out.
+    # opted out of receiving SMS messages from your Amazon Web Services
+    # account. You cannot send SMS messages to a number that is opted out.
     #
     # To resume sending messages, you can opt in the number by using the
     # `OptInPhoneNumber` action.
@@ -467,8 +469,13 @@ module Aws::SNS
     # * For `Baidu`, `PlatformPrincipal` is `API key` and
     #   `PlatformCredential` is `secret key`.
     #
-    # * For `APNS` and `APNS_SANDBOX`, `PlatformPrincipal` is `SSL
-    #   certificate` and `PlatformCredential` is `private key`.
+    # * For `APNS` and `APNS_SANDBOX` using certificate credentials,
+    #   `PlatformPrincipal` is `SSL certificate` and `PlatformCredential` is
+    #   `private key`.
+    #
+    # * For `APNS` and `APNS_SANDBOX` using token credentials,
+    #   `PlatformPrincipal` is `signing key ID` and `PlatformCredential` is
+    #   `signing key`.
     #
     # * For `GCM` (Firebase Cloud Messaging), there is no
     #   `PlatformPrincipal` and the `PlatformCredential` is `API key`.
@@ -599,17 +606,19 @@ module Aws::SNS
       req.send_request(options)
     end
 
-    # Adds a destination phone number to an account in the SMS sandbox and
-    # sends a one-time password (OTP) to that phone number.
+    # Adds a destination phone number to an Amazon Web Services account in
+    # the SMS sandbox and sends a one-time password (OTP) to that phone
+    # number.
     #
-    # When you start using Amazon SNS to send SMS messages, your account is
-    # in the *SMS sandbox*. The SMS sandbox provides a safe environment for
-    # you to try Amazon SNS features without risking your reputation as an
-    # SMS sender. While your account is in the SMS sandbox, you can use all
-    # of the features of Amazon SNS. However, you can send SMS messages only
-    # to verified destination phone numbers. For more information, including
-    # how to move out of the sandbox to send messages without restrictions,
-    # see [SMS sandbox][1] in the *Amazon SNS Developer Guide*.
+    # When you start using Amazon SNS to send SMS messages, your Amazon Web
+    # Services account is in the *SMS sandbox*. The SMS sandbox provides a
+    # safe environment for you to try Amazon SNS features without risking
+    # your reputation as an SMS sender. While your Amazon Web Services
+    # account is in the SMS sandbox, you can use all of the features of
+    # Amazon SNS. However, you can send SMS messages only to verified
+    # destination phone numbers. For more information, including how to move
+    # out of the sandbox to send messages without restrictions, see [SMS
+    # sandbox][1] in the *Amazon SNS Developer Guide*.
     #
     #
     #
@@ -816,17 +825,18 @@ module Aws::SNS
       req.send_request(options)
     end
 
-    # Deletes an account's verified or pending phone number from the SMS
-    # sandbox.
+    # Deletes an Amazon Web Services account's verified or pending phone
+    # number from the SMS sandbox.
     #
-    # When you start using Amazon SNS to send SMS messages, your account is
-    # in the *SMS sandbox*. The SMS sandbox provides a safe environment for
-    # you to try Amazon SNS features without risking your reputation as an
-    # SMS sender. While your account is in the SMS sandbox, you can use all
-    # of the features of Amazon SNS. However, you can send SMS messages only
-    # to verified destination phone numbers. For more information, including
-    # how to move out of the sandbox to send messages without restrictions,
-    # see [SMS sandbox][1] in the *Amazon SNS Developer Guide*.
+    # When you start using Amazon SNS to send SMS messages, your Amazon Web
+    # Services account is in the *SMS sandbox*. The SMS sandbox provides a
+    # safe environment for you to try Amazon SNS features without risking
+    # your reputation as an SMS sender. While your Amazon Web Services
+    # account is in the SMS sandbox, you can use all of the features of
+    # Amazon SNS. However, you can send SMS messages only to verified
+    # destination phone numbers. For more information, including how to move
+    # out of the sandbox to send messages without restrictions, see [SMS
+    # sandbox][1] in the *Amazon SNS Developer Guide*.
     #
     #
     #
@@ -949,7 +959,8 @@ module Aws::SNS
       req.send_request(options)
     end
 
-    # Returns the settings for sending SMS messages from your account.
+    # Returns the settings for sending SMS messages from your Amazon Web
+    # Services account.
     #
     # These settings are set with the `SetSMSAttributes` action.
     #
@@ -990,17 +1001,18 @@ module Aws::SNS
       req.send_request(options)
     end
 
-    # Retrieves the SMS sandbox status for the calling account in the target
-    # Region.
+    # Retrieves the SMS sandbox status for the calling Amazon Web Services
+    # account in the target Amazon Web Services Region.
     #
-    # When you start using Amazon SNS to send SMS messages, your account is
-    # in the *SMS sandbox*. The SMS sandbox provides a safe environment for
-    # you to try Amazon SNS features without risking your reputation as an
-    # SMS sender. While your account is in the SMS sandbox, you can use all
-    # of the features of Amazon SNS. However, you can send SMS messages only
-    # to verified destination phone numbers. For more information, including
-    # how to move out of the sandbox to send messages without restrictions,
-    # see [SMS sandbox][1] in the *Amazon SNS Developer Guide*.
+    # When you start using Amazon SNS to send SMS messages, your Amazon Web
+    # Services account is in the *SMS sandbox*. The SMS sandbox provides a
+    # safe environment for you to try Amazon SNS features without risking
+    # your reputation as an SMS sender. While your Amazon Web Services
+    # account is in the SMS sandbox, you can use all of the features of
+    # Amazon SNS. However, you can send SMS messages only to verified
+    # destination phone numbers. For more information, including how to move
+    # out of the sandbox to send messages without restrictions, see [SMS
+    # sandbox][1] in the *Amazon SNS Developer Guide*.
     #
     #
     #
@@ -1139,9 +1151,10 @@ module Aws::SNS
       req.send_request(options)
     end
 
-    # Lists the calling account's dedicated origination numbers and their
-    # metadata. For more information about origination numbers, see
-    # [Origination numbers][1] in the *Amazon SNS Developer Guide*.
+    # Lists the calling Amazon Web Services account's dedicated origination
+    # numbers and their metadata. For more information about origination
+    # numbers, see [Origination numbers][1] in the *Amazon SNS Developer
+    # Guide*.
     #
     #
     #
@@ -1284,17 +1297,18 @@ module Aws::SNS
       req.send_request(options)
     end
 
-    # Lists the calling account's current verified and pending destination
-    # phone numbers in the SMS sandbox.
+    # Lists the calling Amazon Web Services account's current verified and
+    # pending destination phone numbers in the SMS sandbox.
     #
-    # When you start using Amazon SNS to send SMS messages, your account is
-    # in the *SMS sandbox*. The SMS sandbox provides a safe environment for
-    # you to try Amazon SNS features without risking your reputation as an
-    # SMS sender. While your account is in the SMS sandbox, you can use all
-    # of the features of Amazon SNS. However, you can send SMS messages only
-    # to verified destination phone numbers. For more information, including
-    # how to move out of the sandbox to send messages without restrictions,
-    # see [SMS sandbox][1] in the *Amazon SNS Developer Guide*.
+    # When you start using Amazon SNS to send SMS messages, your Amazon Web
+    # Services account is in the *SMS sandbox*. The SMS sandbox provides a
+    # safe environment for you to try Amazon SNS features without risking
+    # your reputation as an SMS sender. While your Amazon Web Services
+    # account is in the SMS sandbox, you can use all of the features of
+    # Amazon SNS. However, you can send SMS messages only to verified
+    # destination phone numbers. For more information, including how to move
+    # out of the sandbox to send messages without restrictions, see [SMS
+    # sandbox][1] in the *Amazon SNS Developer Guide*.
     #
     #
     #
@@ -1534,10 +1548,10 @@ module Aws::SNS
     # message depends on the notification protocol for each subscribed
     # endpoint.
     #
-    # When a `messageId` is returned, the message has been saved and Amazon
-    # SNS will attempt to deliver it shortly.
+    # When a `messageId` is returned, the message is saved and Amazon SNS
+    # immediately deliverers it to subscribers.
     #
-    # To use the `Publish` action for sending a message to a mobile
+    # To use the `Publish` action for publishing a message to a mobile
     # endpoint, such as an app on a Kindle device or mobile phone, you must
     # specify the EndpointArn for the TargetArn parameter. The EndpointArn
     # is returned when making a call with the `CreatePlatformEndpoint`
@@ -1547,7 +1561,7 @@ module Aws::SNS
     # Platform-Specific Payloads in Messages to Mobile Devices][1].
     #
     # You can publish messages only to topics and endpoints in the same
-    # Region.
+    # Amazon Web Services Region.
     #
     #
     #
@@ -1658,7 +1672,7 @@ module Aws::SNS
     # @option params [String] :message_deduplication_id
     #   This parameter applies only to FIFO (first-in-first-out) topics. The
     #   `MessageDeduplicationId` can contain up to 128 alphanumeric characters
-    #   (a-z, A-Z, 0-9) and punctuation ``
+    #   `(a-z, A-Z, 0-9)` and punctuation ``
     #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
     #   Every message must have a unique `MessageDeduplicationId`, which is a
@@ -1673,8 +1687,8 @@ module Aws::SNS
     #
     # @option params [String] :message_group_id
     #   This parameter applies only to FIFO (first-in-first-out) topics. The
-    #   `MessageGroupId` can contain up to 128 alphanumeric characters (a-z,
-    #   A-Z, 0-9) and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+    #   `MessageGroupId` can contain up to 128 alphanumeric characters `(a-z,
+    #   A-Z, 0-9)` and punctuation `` (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
     #   The `MessageGroupId` is a tag that specifies that a message belongs to
     #   a specific message group. Messages that belong to the same message
@@ -1718,6 +1732,92 @@ module Aws::SNS
     # @param [Hash] params ({})
     def publish(params = {}, options = {})
       req = build_request(:publish, params)
+      req.send_request(options)
+    end
+
+    # Publishes up to ten messages to the specified topic. This is a batch
+    # version of `Publish`. For FIFO topics, multiple messages within a
+    # single batch are published in the order they are sent, and messages
+    # are deduplicated within the batch and across batches for 5 minutes.
+    #
+    # The result of publishing each message is reported individually in the
+    # response. Because the batch request can result in a combination of
+    # successful and unsuccessful actions, you should check for batch errors
+    # even when the call returns an HTTP status code of `200`.
+    #
+    # The maximum allowed individual message size and the maximum total
+    # payload size (the sum of the individual lengths of all of the batched
+    # messages) are both 256 KB (262,144 bytes).
+    #
+    # Some actions take lists of parameters. These lists are specified using
+    # the `param.n` notation. Values of `n` are integers starting from 1.
+    # For example, a parameter list with two elements looks like this:
+    #
+    # &amp;AttributeName.1=first
+    #
+    # &amp;AttributeName.2=second
+    #
+    # If you send a batch message to a topic, Amazon SNS publishes the batch
+    # message to each endpoint that is subscribed to the topic. The format
+    # of the batch message depends on the notification protocol for each
+    # subscribed endpoint.
+    #
+    # When a `messageId` is returned, the batch message is saved and Amazon
+    # SNS immediately delivers the message to subscribers.
+    #
+    # @option params [required, String] :topic_arn
+    #   The Amazon resource name (ARN) of the topic you want to batch publish
+    #   to.
+    #
+    # @option params [required, Array<Types::PublishBatchRequestEntry>] :publish_batch_request_entries
+    #   A list of `PublishBatch` request entries to be sent to the SNS topic.
+    #
+    # @return [Types::PublishBatchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PublishBatchResponse#successful #successful} => Array&lt;Types::PublishBatchResultEntry&gt;
+    #   * {Types::PublishBatchResponse#failed #failed} => Array&lt;Types::BatchResultErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.publish_batch({
+    #     topic_arn: "topicARN", # required
+    #     publish_batch_request_entries: [ # required
+    #       {
+    #         id: "String", # required
+    #         message: "message", # required
+    #         subject: "subject",
+    #         message_structure: "messageStructure",
+    #         message_attributes: {
+    #           "String" => {
+    #             data_type: "String", # required
+    #             string_value: "String",
+    #             binary_value: "data",
+    #           },
+    #         },
+    #         message_deduplication_id: "String",
+    #         message_group_id: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0].id #=> String
+    #   resp.successful[0].message_id #=> String
+    #   resp.successful[0].sequence_number #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].id #=> String
+    #   resp.failed[0].code #=> String
+    #   resp.failed[0].message #=> String
+    #   resp.failed[0].sender_fault #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishBatch AWS API Documentation
+    #
+    # @overload publish_batch(params = {})
+    # @param [Hash] params ({})
+    def publish_batch(params = {}, options = {})
+      req = build_request(:publish_batch, params)
       req.send_request(options)
     end
 
@@ -1817,15 +1917,34 @@ module Aws::SNS
     #   include the following:
     #
     #   * `PlatformCredential` – The credential received from the notification
-    #     service. For `APNS` and `APNS_SANDBOX`, `PlatformCredential` is
-    #     `private key`. For `GCM` (Firebase Cloud Messaging),
-    #     `PlatformCredential` is `API key`. For `ADM`, `PlatformCredential`
-    #     is `client secret`.
+    #     service.
+    #
+    #     * For ADM, `PlatformCredential`is client secret.
+    #
+    #     * For Apple Services using certificate credentials,
+    #       `PlatformCredential` is private key.
+    #
+    #     * For Apple Services using token credentials, `PlatformCredential`
+    #       is signing key.
+    #
+    #     * For GCM (Firebase Cloud Messaging), `PlatformCredential` is API
+    #       key.
+    #   ^
     #
     #   * `PlatformPrincipal` – The principal received from the notification
-    #     service. For `APNS` and `APNS_SANDBOX`, `PlatformPrincipal` is `SSL
-    #     certificate`. For `GCM` (Firebase Cloud Messaging), there is no
-    #     `PlatformPrincipal`. For `ADM`, `PlatformPrincipal` is `client id`.
+    #     service.
+    #
+    #     * For ADM, `PlatformPrincipal`is client id.
+    #
+    #     * For Apple Services using certificate credentials,
+    #       `PlatformPrincipal` is SSL certificate.
+    #
+    #     * For Apple Services using token credentials, `PlatformPrincipal` is
+    #       signing key ID.
+    #
+    #     * For GCM (Firebase Cloud Messaging), there is no
+    #       `PlatformPrincipal`.
+    #   ^
     #
     #   * `EventEndpointCreated` – Topic ARN to which `EndpointCreated` event
     #     notifications are sent.
@@ -1848,6 +1967,15 @@ module Aws::SNS
     #
     #   * `SuccessFeedbackSampleRate` – Sample rate percentage (0-100) of
     #     successfully delivered messages.
+    #
+    #   The following attributes only apply to `APNs` token-based
+    #   authentication:
+    #
+    #   * `ApplePlatformTeamID` – The identifier that's assigned to your
+    #     Apple developer account team.
+    #
+    #   * `ApplePlatformBundleID` – The bundle identifier that's assigned to
+    #     your iOS app.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1888,8 +2016,9 @@ module Aws::SNS
     # [1]: https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html
     #
     # @option params [required, Hash<String,String>] :attributes
-    #   The default settings for sending SMS messages from your account. You
-    #   can set values for the following attribute names:
+    #   The default settings for sending SMS messages from your Amazon Web
+    #   Services account. You can set values for the following attribute
+    #   names:
     #
     #   `MonthlySpendLimit` – The maximum amount in USD that you are willing
     #   to spend each month to send SMS messages. When Amazon SNS determines
@@ -1940,7 +2069,7 @@ module Aws::SNS
     #   daily SMS usage reports from Amazon SNS. Each day, Amazon SNS will
     #   deliver a usage report as a CSV file to the bucket. The report
     #   includes the following information for each SMS message that was
-    #   successfully delivered by your account:
+    #   successfully delivered by your Amazon Web Services account:
     #
     #   * Time that the message was published (in UTC)
     #
@@ -2141,8 +2270,8 @@ module Aws::SNS
 
     # Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is
     # HTTP/S or email, or if the endpoint and the topic are not in the same
-    # account, the endpoint owner must run the `ConfirmSubscription` action
-    # to confirm the subscription.
+    # Amazon Web Services account, the endpoint owner must run the
+    # `ConfirmSubscription` action to confirm the subscription.
     #
     # You call the `ConfirmSubscription` action with the token from the
     # subscription response. Confirmation tokens are valid for three days.
@@ -2307,9 +2436,9 @@ module Aws::SNS
     # * A new tag with a key identical to that of an existing tag overwrites
     #   the existing tag.
     #
-    # * Tagging actions are limited to 10 TPS per account, per Region. If
-    #   your application requires a higher throughput, file a [technical
-    #   support request][2].
+    # * Tagging actions are limited to 10 TPS per Amazon Web Services
+    #   account, per Amazon Web Services Region. If your application
+    #   requires a higher throughput, file a [technical support request][2].
     #
     #
     #
@@ -2408,16 +2537,17 @@ module Aws::SNS
     end
 
     # Verifies a destination phone number with a one-time password (OTP) for
-    # the calling account.
+    # the calling Amazon Web Services account.
     #
-    # When you start using Amazon SNS to send SMS messages, your account is
-    # in the *SMS sandbox*. The SMS sandbox provides a safe environment for
-    # you to try Amazon SNS features without risking your reputation as an
-    # SMS sender. While your account is in the SMS sandbox, you can use all
-    # of the features of Amazon SNS. However, you can send SMS messages only
-    # to verified destination phone numbers. For more information, including
-    # how to move out of the sandbox to send messages without restrictions,
-    # see [SMS sandbox][1] in the *Amazon SNS Developer Guide*.
+    # When you start using Amazon SNS to send SMS messages, your Amazon Web
+    # Services account is in the *SMS sandbox*. The SMS sandbox provides a
+    # safe environment for you to try Amazon SNS features without risking
+    # your reputation as an SMS sender. While your Amazon Web Services
+    # account is in the SMS sandbox, you can use all of the features of
+    # Amazon SNS. However, you can send SMS messages only to verified
+    # destination phone numbers. For more information, including how to move
+    # out of the sandbox to send messages without restrictions, see [SMS
+    # sandbox][1] in the *Amazon SNS Developer Guide*.
     #
     #
     #
@@ -2461,7 +2591,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
