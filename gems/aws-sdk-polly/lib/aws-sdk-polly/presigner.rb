@@ -39,8 +39,8 @@ module Aws
       def initialize(options = {})
         if !(options.keys - [:credentials, :region, :client]).empty?
           raise ArgumentError,
-                ':options may only contain :region and :credentials keys. '\
-                'Please use the :client option instead.'
+                ':options may only contain :client, :region, :credentials '\
+                'keys. Please use the :client option instead.'
         end
         @client = options[:client] || Aws::Polly::Client.new(options)
       end
