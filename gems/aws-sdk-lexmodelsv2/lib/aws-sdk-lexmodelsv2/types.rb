@@ -145,8 +145,12 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] s3_bucket
     #   The Amazon S3 bucket where the audio log files are stored. The IAM
-    #   role specified in the `roleArn` parameter of the CreateBot operation
-    #   must have permission to write to this bucket.
+    #   role specified in the `roleArn` parameter of the [CreateBot][1]
+    #   operation must have permission to write to this bucket.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html
     #   @return [Types::S3BucketLogDestination]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AudioLogDestination AWS API Documentation
@@ -252,13 +256,21 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Summary information about bot aliases returned from the ListBotAliases
-    # operation.
+    # Summary information about bot aliases returned from the
+    # [ListBotAliases][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotAliases.html
     #
     # @!attribute [rw] bot_alias_id
     #   The unique identifier assigned to the bot alias. You can use this ID
     #   to get detailed information about the alias using the
-    #   DescribeBotAlias operation.
+    #   [DescribeBotAlias][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBotAlias.html
     #   @return [String]
     #
     # @!attribute [rw] bot_alias_name
@@ -541,6 +553,7 @@ module Aws::LexModelsV2
     #         nlu_intent_confidence_threshold: 1.0,
     #         voice_settings: {
     #           voice_id: "VoiceId", # required
+    #           engine: "standard", # accepts standard, neural
     #         },
     #       }
     #
@@ -631,8 +644,12 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Summary information about bot locales returned by the ListBotLocales
-    # operation.
+    # Summary information about bot locales returned by the
+    # [ListBotLocales][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotLocales.html
     #
     # @!attribute [rw] locale_id
     #   The language and locale of the bot locale.
@@ -700,11 +717,21 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Summary information about a bot returned by the ListBots operation.
+    # Summary information about a bot returned by the [ListBots][1]
+    # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBots.html
     #
     # @!attribute [rw] bot_id
     #   The unique identifier assigned to the bot. Use this ID to get
-    #   detailed information about the bot with the DescribeBot operation.
+    #   detailed information about the bot with the [DescribeBot][1]
+    #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBot.html
     #   @return [String]
     #
     # @!attribute [rw] bot_name
@@ -791,7 +818,11 @@ module Aws::LexModelsV2
     end
 
     # Summary information about a bot version returned by the
-    # ListBotVersions operation.
+    # [ListBotVersions][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotVersions.html
     #
     # @!attribute [rw] bot_name
     #   The name of the bot associated with the version.
@@ -838,7 +869,11 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] bot_id
     #   The identifier of the bot to build. The identifier is returned in
-    #   the response from the operation.
+    #   the response from the [CreateBot][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html
     #   @return [String]
     #
     # @!attribute [rw] bot_version
@@ -932,8 +967,12 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Provides summary information about a built-in intent for the
-    # ListBuiltInIntents operation.
+    # Provides summary information about a built-in intent for the [
+    # ListBuiltInIntents ][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInIntents.html
     #
     # @!attribute [rw] intent_signature
     #   The signature of the built-in intent. Use this to specify the parent
@@ -980,8 +1019,12 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Provides summary information about a built-in slot type for the
-    # ListBuiltInSlotTypes operation.
+    # Provides summary information about a built-in slot type for the [
+    # ListBuiltInSlotTypes ][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInSlotTypes.html
     #
     # @!attribute [rw] slot_type_signature
     #   The signature of the built-in slot type. Use this to specify the
@@ -1214,7 +1257,12 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] bot_version
     #   The version of the bot that this alias points to. You can use the
-    #   operation to change the bot version associated with the alias.
+    #   [UpdateBotAlias][1] operation to change the bot version associated
+    #   with the alias.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_UpdateBotAlias.html
     #   @return [String]
     #
     # @!attribute [rw] bot_alias_locale_settings
@@ -1339,6 +1387,7 @@ module Aws::LexModelsV2
     #         nlu_intent_confidence_threshold: 1.0, # required
     #         voice_settings: {
     #           voice_id: "VoiceId", # required
+    #           engine: "standard", # accepts standard, neural
     #         },
     #       }
     #
@@ -1750,8 +1799,12 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] export_status
     #   The status of the export. When the status is `Completed`, you can
-    #   use the operation to get the pre-signed S3 URL link to your exported
-    #   bot or bot locale.
+    #   use the [DescribeExport][1] operation to get the pre-signed S3 URL
+    #   link to your exported bot or bot locale.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/latest/dg/API_DescribeExport.html
     #   @return [String]
     #
     # @!attribute [rw] creation_date_time
@@ -3232,7 +3285,11 @@ module Aws::LexModelsV2
 
     # @!attribute [rw] import_id
     #   An identifier for a unique import job. Use it when you call the
-    #   operation.
+    #   [StartImport][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_StartImport.html
     #   @return [String]
     #
     # @!attribute [rw] upload_url
@@ -3572,8 +3629,14 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] export_status
     #   The current status of the deletion. When the deletion is complete,
-    #   the export will no longer be returned by the operation and calls to
-    #   the with the export identifier will fail.
+    #   the export will no longer be returned by the [ListExports][1]
+    #   operation and calls to the [ DescribeExport][2] operation with the
+    #   export identifier will fail.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html
+    #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteExportResponse AWS API Documentation
@@ -3610,8 +3673,14 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] import_status
     #   The current status of the deletion. When the deletion is complete,
-    #   the import will no longer be returned by the operation and calls to
-    #   the with the import identifier will fail.
+    #   the import will no longer be returned by the [ListImports][1]
+    #   operation and calls to the [DescribeImport][2] operation with the
+    #   import identifier will fail.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html
+    #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeImport.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteImportResponse AWS API Documentation
@@ -3901,7 +3970,13 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] session_id
     #   The unique identifier of the session with the user. The ID is
-    #   returned in the response from the and operations.
+    #   returned in the response from the [RecognizeText][1] and
+    #   [RecognizeUtterance][2] operations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeText.html
+    #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeUtterance.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteUtterancesRequest AWS API Documentation
@@ -4906,7 +4981,11 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Filters the response form the operation
+    # Filters the response form the [ListExports][1] operation
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html
     #
     # @note When making an API call, you may pass ExportFilter
     #   data as a hash:
@@ -5737,7 +5816,11 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
-    # Filters the response from the operation.
+    # Filters the response from the [ListImports][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html
     #
     # @note When making an API call, you may pass ImportFilter
     #   data as a hash:
@@ -5802,6 +5885,7 @@ module Aws::LexModelsV2
     #           nlu_intent_confidence_threshold: 1.0,
     #           voice_settings: {
     #             voice_id: "VoiceId", # required
+    #             engine: "standard", # accepts standard, neural
     #           },
     #         },
     #       }
@@ -9179,6 +9263,7 @@ module Aws::LexModelsV2
     #             nlu_intent_confidence_threshold: 1.0,
     #             voice_settings: {
     #               voice_id: "VoiceId", # required
+    #               engine: "standard", # accepts standard, neural
     #             },
     #           },
     #         },
@@ -9188,7 +9273,11 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] import_id
     #   The unique identifier for the import. It is included in the response
-    #   from the operation.
+    #   from the [CreateUploadUrl][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateUploadUrl.html
     #   @return [String]
     #
     # @!attribute [rw] resource_specification
@@ -9664,6 +9753,7 @@ module Aws::LexModelsV2
     #         nlu_intent_confidence_threshold: 1.0, # required
     #         voice_settings: {
     #           voice_id: "VoiceId", # required
+    #           engine: "standard", # accepts standard, neural
     #         },
     #       }
     #
@@ -9797,7 +9887,11 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] bot_id
     #   The unique identifier of the bot to update. This identifier is
-    #   returned by the CreateBot operation.
+    #   returned by the [CreateBot][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html
     #   @return [String]
     #
     # @!attribute [rw] bot_name
@@ -11337,16 +11431,28 @@ module Aws::LexModelsV2
     #
     #       {
     #         voice_id: "VoiceId", # required
+    #         engine: "standard", # accepts standard, neural
     #       }
     #
     # @!attribute [rw] voice_id
     #   The identifier of the Amazon Polly voice to use.
     #   @return [String]
     #
+    # @!attribute [rw] engine
+    #   Indicates the type of Amazon Polly voice that Amazon Lex should use
+    #   for voice interaction with the user. For more information, see
+    #   [Voices in Amazon Polly][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/voicelist.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/VoiceSettings AWS API Documentation
     #
     class VoiceSettings < Struct.new(
-      :voice_id)
+      :voice_id,
+      :engine)
       SENSITIVE = []
       include Aws::Structure
     end

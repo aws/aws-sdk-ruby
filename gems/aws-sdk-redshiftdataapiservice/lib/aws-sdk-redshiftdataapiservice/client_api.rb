@@ -27,7 +27,6 @@ module Aws::RedshiftDataAPIService
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnMetadata = Shapes::StructureShape.new(name: 'ColumnMetadata')
     ColumnMetadataList = Shapes::ListShape.new(name: 'ColumnMetadataList')
-    DatabaseConnectionException = Shapes::StructureShape.new(name: 'DatabaseConnectionException')
     DatabaseList = Shapes::ListShape.new(name: 'DatabaseList')
     DescribeStatementRequest = Shapes::StructureShape.new(name: 'DescribeStatementRequest')
     DescribeStatementResponse = Shapes::StructureShape.new(name: 'DescribeStatementResponse')
@@ -87,7 +86,7 @@ module Aws::RedshiftDataAPIService
     BatchExecuteStatementException.add_member(:statement_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StatementId"))
     BatchExecuteStatementException.struct_class = Types::BatchExecuteStatementException
 
-    BatchExecuteStatementInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, location_name: "ClusterIdentifier"))
+    BatchExecuteStatementInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "ClusterIdentifier"))
     BatchExecuteStatementInput.add_member(:database, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Database"))
     BatchExecuteStatementInput.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     BatchExecuteStatementInput.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
@@ -129,9 +128,6 @@ module Aws::RedshiftDataAPIService
 
     ColumnMetadataList.member = Shapes::ShapeRef.new(shape: ColumnMetadata)
 
-    DatabaseConnectionException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    DatabaseConnectionException.struct_class = Types::DatabaseConnectionException
-
     DatabaseList.member = Shapes::ShapeRef.new(shape: String)
 
     DescribeStatementRequest.add_member(:id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "Id"))
@@ -157,7 +153,7 @@ module Aws::RedshiftDataAPIService
     DescribeStatementResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     DescribeStatementResponse.struct_class = Types::DescribeStatementResponse
 
-    DescribeTableRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, location_name: "ClusterIdentifier"))
+    DescribeTableRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "ClusterIdentifier"))
     DescribeTableRequest.add_member(:connected_database, Shapes::ShapeRef.new(shape: String, location_name: "ConnectedDatabase"))
     DescribeTableRequest.add_member(:database, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Database"))
     DescribeTableRequest.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
@@ -177,7 +173,7 @@ module Aws::RedshiftDataAPIService
     ExecuteStatementException.add_member(:statement_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StatementId"))
     ExecuteStatementException.struct_class = Types::ExecuteStatementException
 
-    ExecuteStatementInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, location_name: "ClusterIdentifier"))
+    ExecuteStatementInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "ClusterIdentifier"))
     ExecuteStatementInput.add_member(:database, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Database"))
     ExecuteStatementInput.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     ExecuteStatementInput.add_member(:parameters, Shapes::ShapeRef.new(shape: SqlParametersList, location_name: "Parameters"))
@@ -226,7 +222,7 @@ module Aws::RedshiftDataAPIService
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
-    ListDatabasesRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, location_name: "ClusterIdentifier"))
+    ListDatabasesRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "ClusterIdentifier"))
     ListDatabasesRequest.add_member(:database, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Database"))
     ListDatabasesRequest.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
     ListDatabasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -238,7 +234,7 @@ module Aws::RedshiftDataAPIService
     ListDatabasesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListDatabasesResponse.struct_class = Types::ListDatabasesResponse
 
-    ListSchemasRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, location_name: "ClusterIdentifier"))
+    ListSchemasRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "ClusterIdentifier"))
     ListSchemasRequest.add_member(:connected_database, Shapes::ShapeRef.new(shape: String, location_name: "ConnectedDatabase"))
     ListSchemasRequest.add_member(:database, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Database"))
     ListSchemasRequest.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
@@ -263,7 +259,7 @@ module Aws::RedshiftDataAPIService
     ListStatementsResponse.add_member(:statements, Shapes::ShapeRef.new(shape: StatementList, required: true, location_name: "Statements"))
     ListStatementsResponse.struct_class = Types::ListStatementsResponse
 
-    ListTablesRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, location_name: "ClusterIdentifier"))
+    ListTablesRequest.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: Location, required: true, location_name: "ClusterIdentifier"))
     ListTablesRequest.add_member(:connected_database, Shapes::ShapeRef.new(shape: String, location_name: "ConnectedDatabase"))
     ListTablesRequest.add_member(:database, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Database"))
     ListTablesRequest.add_member(:db_user, Shapes::ShapeRef.new(shape: String, location_name: "DbUser"))
@@ -374,7 +370,6 @@ module Aws::RedshiftDataAPIService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: DatabaseConnectionException)
       end)
 
       api.add_operation(:describe_statement, Seahorse::Model::Operation.new.tap do |o|
@@ -396,7 +391,6 @@ module Aws::RedshiftDataAPIService
         o.output = Shapes::ShapeRef.new(shape: DescribeTableResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: DatabaseConnectionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -440,7 +434,6 @@ module Aws::RedshiftDataAPIService
         o.output = Shapes::ShapeRef.new(shape: ListDatabasesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: DatabaseConnectionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -457,7 +450,6 @@ module Aws::RedshiftDataAPIService
         o.output = Shapes::ShapeRef.new(shape: ListSchemasResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: DatabaseConnectionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -490,7 +482,6 @@ module Aws::RedshiftDataAPIService
         o.output = Shapes::ShapeRef.new(shape: ListTablesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: DatabaseConnectionException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

@@ -14,6 +14,7 @@ module Aws::IVS
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AudioConfiguration = Shapes::StructureShape.new(name: 'AudioConfiguration')
     BatchError = Shapes::StructureShape.new(name: 'BatchError')
     BatchErrors = Shapes::ListShape.new(name: 'BatchErrors')
     BatchGetChannelRequest = Shapes::StructureShape.new(name: 'BatchGetChannelRequest')
@@ -55,9 +56,13 @@ module Aws::IVS
     GetStreamKeyResponse = Shapes::StructureShape.new(name: 'GetStreamKeyResponse')
     GetStreamRequest = Shapes::StructureShape.new(name: 'GetStreamRequest')
     GetStreamResponse = Shapes::StructureShape.new(name: 'GetStreamResponse')
+    GetStreamSessionRequest = Shapes::StructureShape.new(name: 'GetStreamSessionRequest')
+    GetStreamSessionResponse = Shapes::StructureShape.new(name: 'GetStreamSessionResponse')
     ImportPlaybackKeyPairRequest = Shapes::StructureShape.new(name: 'ImportPlaybackKeyPairRequest')
     ImportPlaybackKeyPairResponse = Shapes::StructureShape.new(name: 'ImportPlaybackKeyPairResponse')
+    IngestConfiguration = Shapes::StructureShape.new(name: 'IngestConfiguration')
     IngestEndpoint = Shapes::StringShape.new(name: 'IngestEndpoint')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IsAuthorized = Shapes::BooleanShape.new(name: 'IsAuthorized')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
@@ -68,6 +73,8 @@ module Aws::IVS
     ListRecordingConfigurationsResponse = Shapes::StructureShape.new(name: 'ListRecordingConfigurationsResponse')
     ListStreamKeysRequest = Shapes::StructureShape.new(name: 'ListStreamKeysRequest')
     ListStreamKeysResponse = Shapes::StructureShape.new(name: 'ListStreamKeysResponse')
+    ListStreamSessionsRequest = Shapes::StructureShape.new(name: 'ListStreamSessionsRequest')
+    ListStreamSessionsResponse = Shapes::StructureShape.new(name: 'ListStreamSessionsResponse')
     ListStreamsRequest = Shapes::StructureShape.new(name: 'ListStreamsRequest')
     ListStreamsResponse = Shapes::StructureShape.new(name: 'ListStreamsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -102,7 +109,11 @@ module Aws::IVS
     StopStreamRequest = Shapes::StructureShape.new(name: 'StopStreamRequest')
     StopStreamResponse = Shapes::StructureShape.new(name: 'StopStreamResponse')
     Stream = Shapes::StructureShape.new(name: 'Stream')
+    StreamEvent = Shapes::StructureShape.new(name: 'StreamEvent')
+    StreamEvents = Shapes::ListShape.new(name: 'StreamEvents')
+    StreamFilters = Shapes::StructureShape.new(name: 'StreamFilters')
     StreamHealth = Shapes::StringShape.new(name: 'StreamHealth')
+    StreamId = Shapes::StringShape.new(name: 'StreamId')
     StreamKey = Shapes::StructureShape.new(name: 'StreamKey')
     StreamKeyArn = Shapes::StringShape.new(name: 'StreamKeyArn')
     StreamKeyArnList = Shapes::ListShape.new(name: 'StreamKeyArnList')
@@ -112,11 +123,15 @@ module Aws::IVS
     StreamKeys = Shapes::ListShape.new(name: 'StreamKeys')
     StreamList = Shapes::ListShape.new(name: 'StreamList')
     StreamMetadata = Shapes::StringShape.new(name: 'StreamMetadata')
+    StreamSession = Shapes::StructureShape.new(name: 'StreamSession')
+    StreamSessionList = Shapes::ListShape.new(name: 'StreamSessionList')
+    StreamSessionSummary = Shapes::StructureShape.new(name: 'StreamSessionSummary')
     StreamStartTime = Shapes::TimestampShape.new(name: 'StreamStartTime', timestampFormat: "iso8601")
     StreamState = Shapes::StringShape.new(name: 'StreamState')
     StreamSummary = Shapes::StructureShape.new(name: 'StreamSummary')
     StreamUnavailable = Shapes::StructureShape.new(name: 'StreamUnavailable')
     StreamViewerCount = Shapes::IntegerShape.new(name: 'StreamViewerCount')
+    String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -124,16 +139,24 @@ module Aws::IVS
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Time = Shapes::TimestampShape.new(name: 'Time', timestampFormat: "iso8601")
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VideoConfiguration = Shapes::StructureShape.new(name: 'VideoConfiguration')
     errorCode = Shapes::StringShape.new(name: 'errorCode')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     AccessDeniedException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AudioConfiguration.add_member(:channels, Shapes::ShapeRef.new(shape: Integer, location_name: "channels"))
+    AudioConfiguration.add_member(:codec, Shapes::ShapeRef.new(shape: String, location_name: "codec"))
+    AudioConfiguration.add_member(:sample_rate, Shapes::ShapeRef.new(shape: Integer, location_name: "sampleRate"))
+    AudioConfiguration.add_member(:target_bitrate, Shapes::ShapeRef.new(shape: Integer, location_name: "targetBitrate"))
+    AudioConfiguration.struct_class = Types::AudioConfiguration
 
     BatchError.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "arn"))
     BatchError.add_member(:code, Shapes::ShapeRef.new(shape: errorCode, location_name: "code"))
@@ -261,6 +284,13 @@ module Aws::IVS
     GetStreamResponse.add_member(:stream, Shapes::ShapeRef.new(shape: Stream, location_name: "stream"))
     GetStreamResponse.struct_class = Types::GetStreamResponse
 
+    GetStreamSessionRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
+    GetStreamSessionRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
+    GetStreamSessionRequest.struct_class = Types::GetStreamSessionRequest
+
+    GetStreamSessionResponse.add_member(:stream_session, Shapes::ShapeRef.new(shape: StreamSession, location_name: "streamSession"))
+    GetStreamSessionResponse.struct_class = Types::GetStreamSessionResponse
+
     ImportPlaybackKeyPairRequest.add_member(:name, Shapes::ShapeRef.new(shape: PlaybackKeyPairName, location_name: "name"))
     ImportPlaybackKeyPairRequest.add_member(:public_key_material, Shapes::ShapeRef.new(shape: PlaybackPublicKeyMaterial, required: true, location_name: "publicKeyMaterial"))
     ImportPlaybackKeyPairRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -268,6 +298,10 @@ module Aws::IVS
 
     ImportPlaybackKeyPairResponse.add_member(:key_pair, Shapes::ShapeRef.new(shape: PlaybackKeyPair, location_name: "keyPair"))
     ImportPlaybackKeyPairResponse.struct_class = Types::ImportPlaybackKeyPairResponse
+
+    IngestConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioConfiguration, location_name: "audio"))
+    IngestConfiguration.add_member(:video, Shapes::ShapeRef.new(shape: VideoConfiguration, location_name: "video"))
+    IngestConfiguration.struct_class = Types::IngestConfiguration
 
     InternalServerException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     InternalServerException.struct_class = Types::InternalServerException
@@ -307,6 +341,16 @@ module Aws::IVS
     ListStreamKeysResponse.add_member(:stream_keys, Shapes::ShapeRef.new(shape: StreamKeyList, required: true, location_name: "streamKeys"))
     ListStreamKeysResponse.struct_class = Types::ListStreamKeysResponse
 
+    ListStreamSessionsRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
+    ListStreamSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStreamResults, location_name: "maxResults"))
+    ListStreamSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStreamSessionsRequest.struct_class = Types::ListStreamSessionsRequest
+
+    ListStreamSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStreamSessionsResponse.add_member(:stream_sessions, Shapes::ShapeRef.new(shape: StreamSessionList, required: true, location_name: "streamSessions"))
+    ListStreamSessionsResponse.struct_class = Types::ListStreamSessionsResponse
+
+    ListStreamsRequest.add_member(:filter_by, Shapes::ShapeRef.new(shape: StreamFilters, location_name: "filterBy"))
     ListStreamsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStreamResults, location_name: "maxResults"))
     ListStreamsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStreamsRequest.struct_class = Types::ListStreamsRequest
@@ -376,8 +420,19 @@ module Aws::IVS
     Stream.add_member(:playback_url, Shapes::ShapeRef.new(shape: PlaybackURL, location_name: "playbackUrl"))
     Stream.add_member(:start_time, Shapes::ShapeRef.new(shape: StreamStartTime, location_name: "startTime"))
     Stream.add_member(:state, Shapes::ShapeRef.new(shape: StreamState, location_name: "state"))
+    Stream.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
     Stream.add_member(:viewer_count, Shapes::ShapeRef.new(shape: StreamViewerCount, location_name: "viewerCount"))
     Stream.struct_class = Types::Stream
+
+    StreamEvent.add_member(:event_time, Shapes::ShapeRef.new(shape: Time, location_name: "eventTime"))
+    StreamEvent.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    StreamEvent.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    StreamEvent.struct_class = Types::StreamEvent
+
+    StreamEvents.member = Shapes::ShapeRef.new(shape: StreamEvent)
+
+    StreamFilters.add_member(:health, Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
+    StreamFilters.struct_class = Types::StreamFilters
 
     StreamKey.add_member(:arn, Shapes::ShapeRef.new(shape: StreamKeyArn, location_name: "arn"))
     StreamKey.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
@@ -398,10 +453,28 @@ module Aws::IVS
 
     StreamList.member = Shapes::ShapeRef.new(shape: StreamSummary)
 
+    StreamSession.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
+    StreamSession.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
+    StreamSession.add_member(:ingest_configuration, Shapes::ShapeRef.new(shape: IngestConfiguration, location_name: "ingestConfiguration"))
+    StreamSession.add_member(:recording_configuration, Shapes::ShapeRef.new(shape: RecordingConfiguration, location_name: "recordingConfiguration"))
+    StreamSession.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
+    StreamSession.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
+    StreamSession.add_member(:truncated_events, Shapes::ShapeRef.new(shape: StreamEvents, location_name: "truncatedEvents"))
+    StreamSession.struct_class = Types::StreamSession
+
+    StreamSessionList.member = Shapes::ShapeRef.new(shape: StreamSessionSummary)
+
+    StreamSessionSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
+    StreamSessionSummary.add_member(:has_error_event, Shapes::ShapeRef.new(shape: Boolean, location_name: "hasErrorEvent"))
+    StreamSessionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
+    StreamSessionSummary.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
+    StreamSessionSummary.struct_class = Types::StreamSessionSummary
+
     StreamSummary.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, location_name: "channelArn"))
     StreamSummary.add_member(:health, Shapes::ShapeRef.new(shape: StreamHealth, location_name: "health"))
     StreamSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: StreamStartTime, location_name: "startTime"))
     StreamSummary.add_member(:state, Shapes::ShapeRef.new(shape: StreamState, location_name: "state"))
+    StreamSummary.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "streamId"))
     StreamSummary.add_member(:viewer_count, Shapes::ShapeRef.new(shape: StreamViewerCount, location_name: "viewerCount"))
     StreamSummary.struct_class = Types::StreamSummary
 
@@ -441,6 +514,16 @@ module Aws::IVS
 
     ValidationException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ValidationException.struct_class = Types::ValidationException
+
+    VideoConfiguration.add_member(:avc_level, Shapes::ShapeRef.new(shape: String, location_name: "avcLevel"))
+    VideoConfiguration.add_member(:avc_profile, Shapes::ShapeRef.new(shape: String, location_name: "avcProfile"))
+    VideoConfiguration.add_member(:codec, Shapes::ShapeRef.new(shape: String, location_name: "codec"))
+    VideoConfiguration.add_member(:encoder, Shapes::ShapeRef.new(shape: String, location_name: "encoder"))
+    VideoConfiguration.add_member(:target_bitrate, Shapes::ShapeRef.new(shape: Integer, location_name: "targetBitrate"))
+    VideoConfiguration.add_member(:target_framerate, Shapes::ShapeRef.new(shape: Integer, location_name: "targetFramerate"))
+    VideoConfiguration.add_member(:video_height, Shapes::ShapeRef.new(shape: Integer, location_name: "videoHeight"))
+    VideoConfiguration.add_member(:video_width, Shapes::ShapeRef.new(shape: Integer, location_name: "videoWidth"))
+    VideoConfiguration.struct_class = Types::VideoConfiguration
 
 
     # @api private
@@ -624,6 +707,17 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_stream_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStreamSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetStreamSession"
+        o.input = Shapes::ShapeRef.new(shape: GetStreamSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetStreamSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:import_playback_key_pair, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ImportPlaybackKeyPair"
         o.http_method = "POST"
@@ -693,6 +787,23 @@ module Aws::IVS
         o.http_request_uri = "/ListStreamKeys"
         o.input = Shapes::ShapeRef.new(shape: ListStreamKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: ListStreamKeysResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_stream_sessions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStreamSessions"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListStreamSessions"
+        o.input = Shapes::ShapeRef.new(shape: ListStreamSessionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListStreamSessionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

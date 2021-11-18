@@ -663,19 +663,20 @@ module Aws::Lambda
     # Creates a mapping between an event source and an Lambda function.
     # Lambda reads items from the event source and triggers the function.
     #
-    # For details about each event source type, see the following topics.
+    # For details about how to configure different event sources, see the
+    # following topics.
     #
-    # * [ Configuring a Dynamo DB stream as an event source][1]
+    # * [ Amazon DynamoDB Streams][1]
     #
-    # * [ Configuring a Kinesis stream as an event source][2]
+    # * [ Amazon Kinesis][2]
     #
-    # * [ Configuring an Amazon SQS queue as an event source][3]
+    # * [ Amazon SQS][3]
     #
-    # * [ Configuring an MQ broker as an event source][4]
+    # * [ Amazon MQ and RabbitMQ][4]
     #
-    # * [ Configuring MSK as an event source][5]
+    # * [ Amazon MSK][5]
     #
-    # * [ Configuring Self-Managed Apache Kafka as an event source][6]
+    # * [ Apache Kafka][6]
     #
     # The following error handling options are only available for stream
     # sources (DynamoDB and Kinesis):
@@ -697,6 +698,21 @@ module Aws::Lambda
     # * `ParallelizationFactor` - Process multiple batches from each shard
     #   concurrently.
     #
+    # For information about which configuration parameters apply to each
+    # event source, see the following topics.
+    #
+    # * [ Amazon DynamoDB Streams][7]
+    #
+    # * [ Amazon Kinesis][8]
+    #
+    # * [ Amazon SQS][9]
+    #
+    # * [ Amazon MQ and RabbitMQ][10]
+    #
+    # * [ Amazon MSK][11]
+    #
+    # * [ Apache Kafka][12]
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping
@@ -705,6 +721,12 @@ module Aws::Lambda
     # [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping
     # [5]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
     # [6]: https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html
+    # [7]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params
+    # [8]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params
+    # [9]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params
+    # [10]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
+    # [11]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms
+    # [12]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
     #
     # @option params [String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
@@ -760,6 +782,8 @@ module Aws::Lambda
     #     10,000.
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #
+    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #
     # @option params [Integer] :maximum_batching_window_in_seconds
     #   (Streams and Amazon SQS standard queues) The maximum amount of time,
@@ -874,7 +898,7 @@ module Aws::Lambda
     #     queues: ["Queue"],
     #     source_access_configurations: [
     #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
     #         uri: "URI",
     #       },
     #     ],
@@ -907,7 +931,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -1041,10 +1065,10 @@ module Aws::Lambda
     #   A description of the function.
     #
     # @option params [Integer] :timeout
-    #   The amount of time that Lambda allows a function to run before
-    #   stopping it. The default is 3 seconds. The maximum allowed value is
-    #   900 seconds. For additional information, see [Lambda execution
-    #   environment][1].
+    #   The amount of time (in seconds) that Lambda allows a function to run
+    #   before stopping it. The default is 3 seconds. The maximum allowed
+    #   value is 900 seconds. For additional information, see [Lambda
+    #   execution environment][1].
     #
     #
     #
@@ -1138,8 +1162,8 @@ module Aws::Lambda
     #
     # @option params [Array<String>] :architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values. The default value is
-    #   `x86_64`.
+    #   string array with one of the valid values (arm64 or x86\_64). The
+    #   default value is `x86_64`.
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1424,7 +1448,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -1857,7 +1881,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -2631,6 +2655,10 @@ module Aws::Lambda
     # @option params [String, StringIO, File] :payload
     #   The JSON that you want to provide to your Lambda function as input.
     #
+    #   You can enter the JSON directly. For example, `--payload '\{ "key":
+    #   "value" \}'`. You can also specify a file path. For example,
+    #   `--payload file://payload.json`.
+    #
     # @option params [String] :qualifier
     #   Specify a version or alias to invoke a published version of the
     #   function.
@@ -2917,7 +2945,7 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].queues #=> Array
     #   resp.event_source_mappings[0].queues[0] #=> String
     #   resp.event_source_mappings[0].source_access_configurations #=> Array
-    #   resp.event_source_mappings[0].source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST"
+    #   resp.event_source_mappings[0].source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
     #   resp.event_source_mappings[0].source_access_configurations[0].uri #=> String
     #   resp.event_source_mappings[0].self_managed_event_source.endpoints #=> Hash
     #   resp.event_source_mappings[0].self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -4344,6 +4372,21 @@ module Aws::Lambda
     # Lambda invokes, or pause invocation and resume later from the same
     # location.
     #
+    # For details about how to configure different event sources, see the
+    # following topics.
+    #
+    # * [ Amazon DynamoDB Streams][1]
+    #
+    # * [ Amazon Kinesis][2]
+    #
+    # * [ Amazon SQS][3]
+    #
+    # * [ Amazon MQ and RabbitMQ][4]
+    #
+    # * [ Amazon MSK][5]
+    #
+    # * [ Apache Kafka][6]
+    #
     # The following error handling options are only available for stream
     # sources (DynamoDB and Kinesis):
     #
@@ -4363,6 +4406,36 @@ module Aws::Lambda
     #
     # * `ParallelizationFactor` - Process multiple batches from each shard
     #   concurrently.
+    #
+    # For information about which configuration parameters apply to each
+    # event source, see the following topics.
+    #
+    # * [ Amazon DynamoDB Streams][7]
+    #
+    # * [ Amazon Kinesis][8]
+    #
+    # * [ Amazon SQS][9]
+    #
+    # * [ Amazon MQ and RabbitMQ][10]
+    #
+    # * [ Amazon MSK][11]
+    #
+    # * [ Apache Kafka][12]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping
+    # [2]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping
+    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource
+    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping
+    # [5]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html
+    # [6]: https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html
+    # [7]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params
+    # [8]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params
+    # [9]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params
+    # [10]: https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params
+    # [11]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms
+    # [12]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms
     #
     # @option params [required, String] :uuid
     #   The identifier of the event source mapping.
@@ -4408,6 +4481,8 @@ module Aws::Lambda
     #     10,000.
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #
+    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #
     # @option params [Integer] :maximum_batching_window_in_seconds
     #   (Streams and Amazon SQS standard queues) The maximum amount of time,
@@ -4499,7 +4574,7 @@ module Aws::Lambda
     #     parallelization_factor: 1,
     #     source_access_configurations: [
     #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
     #         uri: "URI",
     #       },
     #     ],
@@ -4528,7 +4603,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -4617,8 +4692,8 @@ module Aws::Lambda
     #
     # @option params [Array<String>] :architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values. The default value is
-    #   `x86_64`.
+    #   string array with one of the valid values (arm64 or x86\_64). The
+    #   default value is `x86_64`.
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4790,10 +4865,10 @@ module Aws::Lambda
     #   A description of the function.
     #
     # @option params [Integer] :timeout
-    #   The amount of time that Lambda allows a function to run before
-    #   stopping it. The default is 3 seconds. The maximum allowed value is
-    #   900 seconds. For additional information, see [Lambda execution
-    #   environment][1].
+    #   The amount of time (in seconds) that Lambda allows a function to run
+    #   before stopping it. The default is 3 seconds. The maximum allowed
+    #   value is 900 seconds. For additional information, see [Lambda
+    #   execution environment][1].
     #
     #
     #
@@ -5120,7 +5195,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

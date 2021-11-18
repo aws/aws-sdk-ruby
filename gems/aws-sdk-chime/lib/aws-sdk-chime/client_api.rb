@@ -561,11 +561,17 @@ module Aws::Chime
     ThrottledClientException = Shapes::StructureShape.new(name: 'ThrottledClientException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TollFreePrefix = Shapes::StringShape.new(name: 'TollFreePrefix')
+    TranscribeContentIdentificationType = Shapes::StringShape.new(name: 'TranscribeContentIdentificationType')
+    TranscribeContentRedactionType = Shapes::StringShape.new(name: 'TranscribeContentRedactionType')
     TranscribeLanguageCode = Shapes::StringShape.new(name: 'TranscribeLanguageCode')
+    TranscribeLanguageModelName = Shapes::StringShape.new(name: 'TranscribeLanguageModelName')
+    TranscribeMedicalContentIdentificationType = Shapes::StringShape.new(name: 'TranscribeMedicalContentIdentificationType')
     TranscribeMedicalLanguageCode = Shapes::StringShape.new(name: 'TranscribeMedicalLanguageCode')
     TranscribeMedicalRegion = Shapes::StringShape.new(name: 'TranscribeMedicalRegion')
     TranscribeMedicalSpecialty = Shapes::StringShape.new(name: 'TranscribeMedicalSpecialty')
     TranscribeMedicalType = Shapes::StringShape.new(name: 'TranscribeMedicalType')
+    TranscribePartialResultsStability = Shapes::StringShape.new(name: 'TranscribePartialResultsStability')
+    TranscribePiiEntityTypes = Shapes::StringShape.new(name: 'TranscribePiiEntityTypes')
     TranscribeRegion = Shapes::StringShape.new(name: 'TranscribeRegion')
     TranscribeVocabularyFilterMethod = Shapes::StringShape.new(name: 'TranscribeVocabularyFilterMethod')
     TranscriptionConfiguration = Shapes::StructureShape.new(name: 'TranscriptionConfiguration')
@@ -1435,6 +1441,7 @@ module Aws::Chime
     EngineTranscribeMedicalSettings.add_member(:type, Shapes::ShapeRef.new(shape: TranscribeMedicalType, required: true, location_name: "Type"))
     EngineTranscribeMedicalSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyName"))
     EngineTranscribeMedicalSettings.add_member(:region, Shapes::ShapeRef.new(shape: TranscribeMedicalRegion, location_name: "Region"))
+    EngineTranscribeMedicalSettings.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: TranscribeMedicalContentIdentificationType, location_name: "ContentIdentificationType"))
     EngineTranscribeMedicalSettings.struct_class = Types::EngineTranscribeMedicalSettings
 
     EngineTranscribeSettings.add_member(:language_code, Shapes::ShapeRef.new(shape: TranscribeLanguageCode, required: true, location_name: "LanguageCode"))
@@ -1442,6 +1449,12 @@ module Aws::Chime
     EngineTranscribeSettings.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyFilterName"))
     EngineTranscribeSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyName"))
     EngineTranscribeSettings.add_member(:region, Shapes::ShapeRef.new(shape: TranscribeRegion, location_name: "Region"))
+    EngineTranscribeSettings.add_member(:enable_partial_results_stabilization, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnablePartialResultsStabilization"))
+    EngineTranscribeSettings.add_member(:partial_results_stability, Shapes::ShapeRef.new(shape: TranscribePartialResultsStability, location_name: "PartialResultsStability"))
+    EngineTranscribeSettings.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: TranscribeContentIdentificationType, location_name: "ContentIdentificationType"))
+    EngineTranscribeSettings.add_member(:content_redaction_type, Shapes::ShapeRef.new(shape: TranscribeContentRedactionType, location_name: "ContentRedactionType"))
+    EngineTranscribeSettings.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: TranscribePiiEntityTypes, location_name: "PiiEntityTypes"))
+    EngineTranscribeSettings.add_member(:language_model_name, Shapes::ShapeRef.new(shape: TranscribeLanguageModelName, location_name: "LanguageModelName"))
     EngineTranscribeSettings.struct_class = Types::EngineTranscribeSettings
 
     EventsConfiguration.add_member(:bot_id, Shapes::ShapeRef.new(shape: String, location_name: "BotId"))

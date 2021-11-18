@@ -50,22 +50,61 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
-    # The input fails to satisfy the constraints specified by an AWS
-    # service.
+    # Detailed information about the input that failed to satisfy the
+    # constraints specified by an AWS service.
+    #
+    # @!attribute [rw] invalid_configuration
+    #   Detailed information about the bad request exception error when
+    #   creating a hosted configuration version.
+    #   @return [Array<Types::InvalidConfigurationDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/BadRequestDetails AWS API Documentation
+    #
+    class BadRequestDetails < Struct.new(
+      :invalid_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class InvalidConfiguration < BadRequestDetails; end
+      class Unknown < BadRequestDetails; end
+    end
+
+    # The input fails to satisfy the constraints specified by an Amazon Web
+    # Services service.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Detailed information about the input that failed to satisfy the
+    #   constraints specified by an AWS service.
+    #   @return [Types::BadRequestDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/BadRequestException AWS API Documentation
     #
     class BadRequestException < Struct.new(
-      :message)
+      :message,
+      :reason,
+      :details)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] content
     #   The content of the configuration or the configuration data.
+    #
+    #   Compare the configuration version numbers of the configuration
+    #   cached locally on your machine and the configuration number in the
+    #   the header. If the configuration numbers are the same, the content
+    #   can be ignored. The `Content` section only appears if the system
+    #   finds new or updated configuration data. If the system doesn't find
+    #   new or updated configuration data, then the `Content` section is not
+    #   returned.
     #   @return [String]
     #
     # @!attribute [rw] configuration_version
@@ -113,12 +152,19 @@ module Aws::AppConfig
     #
     # @!attribute [rw] retrieval_role_arn
     #   The ARN of an IAM role with permission to access the configuration
-    #   at the specified LocationUri.
+    #   at the specified `LocationUri`.
     #   @return [String]
     #
     # @!attribute [rw] validators
     #   A list of methods for validating the configuration.
     #   @return [Array<Types::Validator>]
+    #
+    # @!attribute [rw] type
+    #   The type of configurations that the configuration profile contains.
+    #   A configuration can be a feature flag used for enabling or disabling
+    #   new features or a free-form configuration used for distributing
+    #   configurations to your application.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ConfigurationProfile AWS API Documentation
     #
@@ -129,7 +175,8 @@ module Aws::AppConfig
       :description,
       :location_uri,
       :retrieval_role_arn,
-      :validators)
+      :validators,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -156,6 +203,13 @@ module Aws::AppConfig
     #   The types of validators in the configuration profile.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] type
+    #   The type of configurations that the configuration profile contains.
+    #   A configuration can be a feature flag used for enabling or disabling
+    #   new features or a free-form configuration used to introduce changes
+    #   to your application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ConfigurationProfileSummary AWS API Documentation
     #
     class ConfigurationProfileSummary < Struct.new(
@@ -163,7 +217,8 @@ module Aws::AppConfig
       :id,
       :name,
       :location_uri,
-      :validator_types)
+      :validator_types,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -253,6 +308,7 @@ module Aws::AppConfig
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         type: "ConfigurationProfileType",
     #       }
     #
     # @!attribute [rw] application_id
@@ -268,20 +324,26 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   A URI to locate the configuration. You can specify a Systems Manager
-    #   (SSM) document, an SSM Parameter Store parameter, or an Amazon S3
-    #   object. For an SSM document, specify either the document name in the
-    #   format `ssm-document://<Document_name>` or the Amazon Resource Name
-    #   (ARN). For a parameter, specify either the parameter name in the
-    #   format `ssm-parameter://<Parameter_name>` or the ARN. For an Amazon
-    #   S3 object, specify the URI in the following format:
+    #   A URI to locate the configuration. You can specify the AppConfig
+    #   hosted configuration store, Systems Manager (SSM) document, an SSM
+    #   Parameter Store parameter, or an Amazon S3 object. For the hosted
+    #   configuration store and for feature flags, specify `hosted`. For an
+    #   SSM document, specify either the document name in the format
+    #   `ssm-document://<Document_name>` or the Amazon Resource Name (ARN).
+    #   For a parameter, specify either the parameter name in the format
+    #   `ssm-parameter://<Parameter_name>` or the ARN. For an Amazon S3
+    #   object, specify the URI in the following format:
     #   `s3://<bucket>/<objectKey> `. Here is an example:
-    #   s3://my-bucket/my-app/us-east-1/my-config.json
+    #   `s3://my-bucket/my-app/us-east-1/my-config.json`
     #   @return [String]
     #
     # @!attribute [rw] retrieval_role_arn
     #   The ARN of an IAM role with permission to access the configuration
-    #   at the specified LocationUri.
+    #   at the specified `LocationUri`.
+    #
+    #   A retrieval role ARN is not required for configurations stored in
+    #   the AppConfig hosted configuration store. It is required for all
+    #   other sources that store your configuration.
     #   @return [String]
     #
     # @!attribute [rw] validators
@@ -294,6 +356,13 @@ module Aws::AppConfig
     #   and an optional value, both of which you define.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] type
+    #   The type of configurations that the configuration profile contains.
+    #   A configuration can be a feature flag used for enabling or disabling
+    #   new features or a free-form configuration used for distributing
+    #   configurations to your application.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateConfigurationProfileRequest AWS API Documentation
     #
     class CreateConfigurationProfileRequest < Struct.new(
@@ -303,7 +372,8 @@ module Aws::AppConfig
       :location_uri,
       :retrieval_role_arn,
       :validators,
-      :tags)
+      :tags,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -348,7 +418,7 @@ module Aws::AppConfig
     #   @return [Float]
     #
     # @!attribute [rw] growth_type
-    #   The algorithm used to define how percentage grows over time. AWS
+    #   The algorithm used to define how percentage grows over time.
     #   AppConfig supports the following growth types:
     #
     #   **Linear**\: For this type, AppConfig processes the deployment by
@@ -411,7 +481,7 @@ module Aws::AppConfig
     #         description: "Description",
     #         monitors: [
     #           {
-    #             alarm_arn: "Arn",
+    #             alarm_arn: "StringWithLengthBetween1And2048", # required
     #             alarm_role_arn: "RoleArn",
     #           },
     #         ],
@@ -488,15 +558,15 @@ module Aws::AppConfig
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+    #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
     #   @return [String]
     #
     # @!attribute [rw] latest_version_number
     #   An optional locking token used to prevent race conditions from
     #   overwriting configuration updates when creating a new version. To
     #   ensure your data is not overwritten when creating multiple hosted
-    #   configuration versions in rapid succession, specify the version of
-    #   the latest hosted configuration version.
+    #   configuration versions in rapid succession, specify the version
+    #   number of the latest hosted configuration version.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateHostedConfigurationVersionRequest AWS API Documentation
@@ -585,11 +655,12 @@ module Aws::AppConfig
     #       }
     #
     # @!attribute [rw] application_id
-    #   The application ID that includes the environment you want to delete.
+    #   The application ID that includes the environment that you want to
+    #   delete.
     #   @return [String]
     #
     # @!attribute [rw] environment_id
-    #   The ID of the environment you want to delete.
+    #   The ID of the environment that you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteEnvironmentRequest AWS API Documentation
@@ -682,9 +753,9 @@ module Aws::AppConfig
     #   @return [Float]
     #
     # @!attribute [rw] final_bake_time_in_minutes
-    #   The amount of time AppConfig monitored for alarms before considering
-    #   the deployment to be complete and no longer eligible for automatic
-    #   roll back.
+    #   The amount of time that AppConfig monitored for alarms before
+    #   considering the deployment to be complete and no longer eligible for
+    #   automatic rollback.
     #   @return [Integer]
     #
     # @!attribute [rw] state
@@ -738,20 +809,20 @@ module Aws::AppConfig
     # @!attribute [rw] event_type
     #   The type of deployment event. Deployment event types include the
     #   start, stop, or completion of a deployment; a percentage update; the
-    #   start or stop of a bake period; the start or completion of a
+    #   start or stop of a bake period; and the start or completion of a
     #   rollback.
     #   @return [String]
     #
     # @!attribute [rw] triggered_by
     #   The entity that triggered the deployment event. Events can be
-    #   triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or
-    #   an internal error.
+    #   triggered by a user, AppConfig, an Amazon CloudWatch alarm, or an
+    #   internal error.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   A description of the deployment event. Descriptions include, but are
-    #   not limited to, the user account or the CloudWatch alarm ARN that
-    #   initiated a rollback, the percentage of hosts that received the
+    #   not limited to, the user account or the Amazon CloudWatch alarm ARN
+    #   that initiated a rollback, the percentage of hosts that received the
     #   deployment, or in the case of an internal error, a recommendation to
     #   attempt a new deployment.
     #   @return [String]
@@ -815,9 +886,9 @@ module Aws::AppConfig
     #   @return [Float]
     #
     # @!attribute [rw] final_bake_time_in_minutes
-    #   The amount of time AppConfig monitored for alarms before considering
-    #   the deployment to be complete and no longer eligible for automatic
-    #   roll back.
+    #   The amount of time that AppConfig monitored for alarms before
+    #   considering the deployment to be complete and no longer eligible for
+    #   automatic rollback.
     #   @return [Integer]
     #
     # @!attribute [rw] replicate_to
@@ -867,9 +938,9 @@ module Aws::AppConfig
     #   @return [Float]
     #
     # @!attribute [rw] final_bake_time_in_minutes
-    #   The amount of time AppConfig monitors for alarms before considering
-    #   the deployment to be complete and no longer eligible for automatic
-    #   roll back.
+    #   The amount of time that AppConfig monitors for alarms before
+    #   considering the deployment to be complete and no longer eligible for
+    #   automatic rollback.
     #   @return [Integer]
     #
     # @!attribute [rw] state
@@ -1014,7 +1085,7 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] configuration_profile_id
-    #   The ID of the configuration profile you want to get.
+    #   The ID of the configuration profile that you want to get.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetConfigurationProfileRequest AWS API Documentation
@@ -1053,8 +1124,9 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] client_id
-    #   A unique ID to identify the client for the configuration. This ID
-    #   enables AppConfig to deploy the configuration in intervals, as
+    #   The clientId parameter in the following command is a unique,
+    #   user-specified ID to identify the client for the configuration. This
+    #   ID enables AppConfig to deploy the configuration in intervals, as
     #   defined in the deployment strategy.
     #   @return [String]
     #
@@ -1062,7 +1134,7 @@ module Aws::AppConfig
     #   The configuration version returned in the most recent
     #   `GetConfiguration` response.
     #
-    #   AWS AppConfig uses the value of the `ClientConfigurationVersion`
+    #   AppConfig uses the value of the `ClientConfigurationVersion`
     #   parameter to identify the configuration version on your clients. If
     #   you don’t send `ClientConfigurationVersion` with each call to
     #   `GetConfiguration`, your clients receive the current configuration.
@@ -1075,11 +1147,11 @@ module Aws::AppConfig
     #   the `ClientConfigurationVersion` parameter.
     #
     #   For more information about working with configurations, see
-    #   [Retrieving the Configuration][1] in the *AWS AppConfig User Guide*.
+    #   [Retrieving the Configuration][1] in the *AppConfig User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-retrieving-the-configuration.html
+    #   [1]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetConfigurationRequest AWS API Documentation
@@ -1160,7 +1232,7 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] environment_id
-    #   The ID of the environment you wnat to get.
+    #   The ID of the environment that you want to get.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetEnvironmentRequest AWS API Documentation
@@ -1229,7 +1301,7 @@ module Aws::AppConfig
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+    #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/HostedConfigurationVersion AWS API Documentation
@@ -1269,7 +1341,7 @@ module Aws::AppConfig
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+    #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/HostedConfigurationVersionSummary AWS API Documentation
@@ -1315,6 +1387,38 @@ module Aws::AppConfig
       include Aws::Structure
     end
 
+    # Detailed information about the bad request exception error when
+    # creating a hosted configuration version.
+    #
+    # @!attribute [rw] constraint
+    #   The invalid or out-of-range validation constraint in your JSON
+    #   schema that failed validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   Location of the validation constraint in the configuration JSON
+    #   schema that failed validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for an invalid configuration error.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of error for an invalid configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/InvalidConfigurationDetail AWS API Documentation
+    #
+    class InvalidConfigurationDetail < Struct.new(
+      :constraint,
+      :location,
+      :reason,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListApplicationsRequest
     #   data as a hash:
     #
@@ -1330,8 +1434,12 @@ module Aws::AppConfig
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to start the list. Use this token to get the next set of
-    #   results.
+    #   A token to start the list. Next token is a pagination token
+    #   generated by AppConfig to describe what page the previous List call
+    #   ended on. For the first List request, the nextToken should not be
+    #   set. On subsequent calls, the nextToken parameter should be set to
+    #   the previous responses nextToken value. Use this token to get the
+    #   next set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListApplicationsRequest AWS API Documentation
@@ -1350,6 +1458,7 @@ module Aws::AppConfig
     #         application_id: "Id", # required
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         type: "ConfigurationProfileType",
     #       }
     #
     # @!attribute [rw] application_id
@@ -1367,12 +1476,19 @@ module Aws::AppConfig
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   A filter based on the type of configurations that the configuration
+    #   profile contains. A configuration can be a feature flag or a
+    #   free-form configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListConfigurationProfilesRequest AWS API Documentation
     #
     class ListConfigurationProfilesRequest < Struct.new(
       :application_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1544,16 +1660,17 @@ module Aws::AppConfig
     #   data as a hash:
     #
     #       {
-    #         alarm_arn: "Arn",
+    #         alarm_arn: "StringWithLengthBetween1And2048", # required
     #         alarm_role_arn: "RoleArn",
     #       }
     #
     # @!attribute [rw] alarm_arn
-    #   ARN of the Amazon CloudWatch alarm.
+    #   Amazon Resource Name (ARN) of the Amazon CloudWatch alarm.
     #   @return [String]
     #
     # @!attribute [rw] alarm_role_arn
-    #   ARN of an IAM role for AppConfig to monitor `AlarmArn`.
+    #   ARN of an Identity and Access Management (IAM) role for AppConfig to
+    #   monitor `AlarmArn`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Monitor AWS API Documentation
@@ -1622,8 +1739,8 @@ module Aws::AppConfig
     end
 
     # The number of hosted configuration versions exceeds the limit for the
-    # AppConfig configuration store. Delete one or more versions and try
-    # again.
+    # AppConfig hosted configuration store. Delete one or more versions and
+    # try again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1846,7 +1963,7 @@ module Aws::AppConfig
     #
     # @!attribute [rw] retrieval_role_arn
     #   The ARN of an IAM role with permission to access the configuration
-    #   at the specified LocationUri.
+    #   at the specified `LocationUri`.
     #   @return [String]
     #
     # @!attribute [rw] validators
@@ -1891,9 +2008,9 @@ module Aws::AppConfig
     #   @return [Integer]
     #
     # @!attribute [rw] final_bake_time_in_minutes
-    #   The amount of time AppConfig monitors for alarms before considering
-    #   the deployment to be complete and no longer eligible for automatic
-    #   roll back.
+    #   The amount of time that AppConfig monitors for alarms before
+    #   considering the deployment to be complete and no longer eligible for
+    #   automatic rollback.
     #   @return [Integer]
     #
     # @!attribute [rw] growth_factor
@@ -1902,7 +2019,7 @@ module Aws::AppConfig
     #   @return [Float]
     #
     # @!attribute [rw] growth_type
-    #   The algorithm used to define how percentage grows over time. AWS
+    #   The algorithm used to define how percentage grows over time.
     #   AppConfig supports the following growth types:
     #
     #   **Linear**\: For this type, AppConfig processes the deployment by
@@ -1955,7 +2072,7 @@ module Aws::AppConfig
     #         description: "Description",
     #         monitors: [
     #           {
-    #             alarm_arn: "Arn",
+    #             alarm_arn: "StringWithLengthBetween1And2048", # required
     #             alarm_role_arn: "RoleArn",
     #           },
     #         ],
@@ -2025,11 +2142,11 @@ module Aws::AppConfig
     end
 
     # A validator provides a syntactic or semantic check to ensure the
-    # configuration you want to deploy functions as intended. To validate
-    # your application configuration data, you provide a schema or a Lambda
-    # function that runs against the configuration. The configuration
-    # deployment or update can only proceed when the configuration data is
-    # valid.
+    # configuration that you want to deploy functions as intended. To
+    # validate your application configuration data, you provide a schema or
+    # a Lambda function that runs against the configuration. The
+    # configuration deployment or update can only proceed when the
+    # configuration data is valid.
     #
     # @note When making an API call, you may pass Validator
     #   data as a hash:
@@ -2045,7 +2162,7 @@ module Aws::AppConfig
     #
     # @!attribute [rw] content
     #   Either the JSON Schema content or the Amazon Resource Name (ARN) of
-    #   an AWS Lambda function.
+    #   an Lambda function.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Validator AWS API Documentation

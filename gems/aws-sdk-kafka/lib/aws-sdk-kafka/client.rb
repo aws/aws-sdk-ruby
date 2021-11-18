@@ -401,7 +401,7 @@ module Aws::Kafka
     #   LoggingInfo details.
     #
     # @option params [required, Integer] :number_of_broker_nodes
-    #   The number of Kafka broker nodes in the Amazon MSK cluster.
+    #   The number of Apache Kafka broker nodes in the Amazon MSK cluster.
     #
     # @option params [Types::OpenMonitoringInfo] :open_monitoring
     #   The settings for open monitoring.
@@ -426,6 +426,11 @@ module Aws::Kafka
     #       storage_info: {
     #         ebs_storage_info: {
     #           volume_size: 1,
+    #         },
+    #       },
+    #       connectivity_info: {
+    #         public_access: {
+    #           type: "__string",
     #         },
     #       },
     #     },
@@ -650,6 +655,7 @@ module Aws::Kafka
     #   resp.cluster_info.broker_node_group_info.security_groups #=> Array
     #   resp.cluster_info.broker_node_group_info.security_groups[0] #=> String
     #   resp.cluster_info.broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
+    #   resp.cluster_info.broker_node_group_info.connectivity_info.public_access.type #=> String
     #   resp.cluster_info.client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info.client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info.client_authentication.tls.certificate_authority_arn_list #=> Array
@@ -749,6 +755,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
     #   resp.cluster_operation_info.source_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info.source_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.connectivity_info.public_access.type #=> String
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
@@ -776,6 +783,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.target_cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
     #   resp.cluster_operation_info.target_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info.target_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.connectivity_info.public_access.type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperation AWS API Documentation
     #
@@ -909,6 +917,9 @@ module Aws::Kafka
     # @return [Types::GetBootstrapBrokersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string #bootstrap_broker_string} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_public_sasl_iam #bootstrap_broker_string_public_sasl_iam} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_public_sasl_scram #bootstrap_broker_string_public_sasl_scram} => String
+    #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_public_tls #bootstrap_broker_string_public_tls} => String
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_tls #bootstrap_broker_string_tls} => String
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_sasl_scram #bootstrap_broker_string_sasl_scram} => String
     #   * {Types::GetBootstrapBrokersResponse#bootstrap_broker_string_sasl_iam #bootstrap_broker_string_sasl_iam} => String
@@ -922,6 +933,9 @@ module Aws::Kafka
     # @example Response structure
     #
     #   resp.bootstrap_broker_string #=> String
+    #   resp.bootstrap_broker_string_public_sasl_iam #=> String
+    #   resp.bootstrap_broker_string_public_sasl_scram #=> String
+    #   resp.bootstrap_broker_string_public_tls #=> String
     #   resp.bootstrap_broker_string_tls #=> String
     #   resp.bootstrap_broker_string_sasl_scram #=> String
     #   resp.bootstrap_broker_string_sasl_iam #=> String
@@ -1032,6 +1046,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
     #   resp.cluster_operation_info_list[0].source_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info_list[0].source_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.connectivity_info.public_access.type #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
@@ -1059,6 +1074,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].target_cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
     #   resp.cluster_operation_info_list[0].target_cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.connectivity_info.public_access.type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperations AWS API Documentation
@@ -1104,6 +1120,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].broker_node_group_info.security_groups #=> Array
     #   resp.cluster_info_list[0].broker_node_group_info.security_groups[0] #=> String
     #   resp.cluster_info_list[0].broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
+    #   resp.cluster_info_list[0].broker_node_group_info.connectivity_info.public_access.type #=> String
     #   resp.cluster_info_list[0].client_authentication.sasl.scram.enabled #=> Boolean
     #   resp.cluster_info_list[0].client_authentication.sasl.iam.enabled #=> Boolean
     #   resp.cluster_info_list[0].client_authentication.tls.certificate_authority_arn_list #=> Array
@@ -1233,7 +1250,7 @@ module Aws::Kafka
       req.send_request(options)
     end
 
-    # Returns a list of Kafka versions.
+    # Returns a list of Apache Kafka versions.
     #
     # @option params [Integer] :max_results
     #
@@ -1697,7 +1714,7 @@ module Aws::Kafka
     #   Current cluster version.
     #
     # @option params [required, String] :target_kafka_version
-    #   Target Kafka version.
+    #   Target Apache Kafka version.
     #
     # @return [Types::UpdateClusterKafkaVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1727,6 +1744,47 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def update_cluster_kafka_version(params = {}, options = {})
       req = build_request(:update_cluster_kafka_version, params)
+      req.send_request(options)
+    end
+
+    # Updates the connectivity configuration for the cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, Types::ConnectivityInfo] :connectivity_info
+    #   Information about the broker access configuration.
+    #
+    # @option params [required, String] :current_version
+    #   The current version of the cluster.
+    #
+    # @return [Types::UpdateConnectivityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConnectivityResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::UpdateConnectivityResponse#cluster_operation_arn #cluster_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connectivity({
+    #     cluster_arn: "__string", # required
+    #     connectivity_info: { # required
+    #       public_access: {
+    #         type: "__string",
+    #       },
+    #     },
+    #     current_version: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.cluster_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateConnectivity AWS API Documentation
+    #
+    # @overload update_connectivity(params = {})
+    # @param [Hash] params ({})
+    def update_connectivity(params = {}, options = {})
+      req = build_request(:update_connectivity, params)
       req.send_request(options)
     end
 
@@ -1886,7 +1944,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

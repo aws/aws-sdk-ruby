@@ -346,6 +346,190 @@ module Aws::ForecastService
 
     # @!group API Operations
 
+    # Creates an Amazon Forecast predictor.
+    #
+    # Amazon Forecast creates predictors with AutoPredictor, which involves
+    # applying the optimal combination of algorithms to each time series in
+    # your datasets. You can use CreateAutoPredictor to create new
+    # predictors or upgrade/retrain existing predictors.
+    #
+    # **Creating new predictors**
+    #
+    # The following parameters are required when creating a new predictor:
+    #
+    # * `PredictorName` - A unique name for the predictor.
+    #
+    # * `DatasetGroupArn` - The ARN of the dataset group used to train the
+    #   predictor.
+    #
+    # * `ForecastFrequency` - The granularity of your forecasts (hourly,
+    #   daily, weekly, etc).
+    #
+    # * `ForecastHorizon` - The number of time steps being forecasted.
+    #
+    # When creating a new predictor, do not specify a value for
+    # `ReferencePredictorArn`.
+    #
+    # **Upgrading and retraining predictors**
+    #
+    # The following parameters are required when retraining or upgrading a
+    # predictor:
+    #
+    # * `PredictorName` - A unique name for the predictor.
+    #
+    # * `ReferencePredictorArn` - The ARN of the predictor to retrain or
+    #   upgrade.
+    #
+    # When upgrading or retraining a predictor, only specify values for the
+    # `ReferencePredictorArn` and `PredictorName`.
+    #
+    # @option params [required, String] :predictor_name
+    #   A unique name for the predictor
+    #
+    # @option params [Integer] :forecast_horizon
+    #   The number of time-steps that the model predicts. The forecast horizon
+    #   is also called the prediction length.
+    #
+    # @option params [Array<String>] :forecast_types
+    #   The forecast types used to train a predictor. You can specify up to
+    #   five forecast types. Forecast types can be quantiles from 0.01 to
+    #   0.99, by increments of 0.01 or higher. You can also specify the mean
+    #   forecast with `mean`.
+    #
+    # @option params [Array<String>] :forecast_dimensions
+    #   An array of dimension (field) names that specify how to group the
+    #   generated forecast.
+    #
+    #   For example, if you are generating forecasts for item sales across all
+    #   your stores, and your dataset contains a `store_id` field, you would
+    #   specify `store_id` as a dimension to group sales forecasts for each
+    #   store.
+    #
+    # @option params [String] :forecast_frequency
+    #   The frequency of predictions in a forecast.
+    #
+    #   Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour),
+    #   30min (30 minutes), 15min (15 minutes), 10min (10 minutes), 5min (5
+    #   minutes), and 1min (1 minute). For example, "Y" indicates every year
+    #   and "5min" indicates every five minutes.
+    #
+    #   The frequency must be greater than or equal to the
+    #   TARGET\_TIME\_SERIES dataset frequency.
+    #
+    #   When a RELATED\_TIME\_SERIES dataset is provided, the frequency must
+    #   be equal to the RELATED\_TIME\_SERIES dataset frequency.
+    #
+    # @option params [Types::DataConfig] :data_config
+    #   The data configuration for your dataset group and any additional
+    #   datasets.
+    #
+    # @option params [Types::EncryptionConfig] :encryption_config
+    #   An AWS Key Management Service (KMS) key and an AWS Identity and Access
+    #   Management (IAM) role that Amazon Forecast can assume to access the
+    #   key. You can specify this optional object in the CreateDataset and
+    #   CreatePredictor requests.
+    #
+    # @option params [String] :reference_predictor_arn
+    #   The ARN of the predictor to retrain or upgrade. This parameter is only
+    #   used when retraining or upgrading a predictor. When creating a new
+    #   predictor, do not specify a value for this parameter.
+    #
+    #   When upgrading or retraining a predictor, only specify values for the
+    #   `ReferencePredictorArn` and `PredictorName`. The value for
+    #   `PredictorName` must be a unique predictor name.
+    #
+    # @option params [String] :optimization_metric
+    #   The accuracy metric used to optimize the predictor.
+    #
+    # @option params [Boolean] :explain_predictor
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata to help you categorize and organize your predictors.
+    #   Each tag consists of a key and an optional value, both of which you
+    #   define. Tag keys and values are case sensitive.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * For each resource, each tag key must be unique and each tag key must
+    #     have one value.
+    #
+    #   * Maximum number of tags per resource: 50.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
+    #
+    #   * Accepted characters: all letters and numbers, spaces representable
+    #     in UTF-8, and + - = . \_ : / @. If your tagging schema is used
+    #     across other services and resources, the character restrictions of
+    #     those services also apply.
+    #
+    #   * Key prefixes cannot include any upper or lowercase combination of
+    #     `aws:` or `AWS:`. Values can have this prefix. If a tag value has
+    #     `aws` as its prefix but the key does not, Forecast considers it to
+    #     be a user tag and will count against the limit of 50 tags. Tags with
+    #     only the key prefix of `aws` do not count against your tags per
+    #     resource limit. You cannot edit or delete tag keys with this prefix.
+    #
+    # @return [Types::CreateAutoPredictorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAutoPredictorResponse#predictor_arn #predictor_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_auto_predictor({
+    #     predictor_name: "Name", # required
+    #     forecast_horizon: 1,
+    #     forecast_types: ["ForecastType"],
+    #     forecast_dimensions: ["Name"],
+    #     forecast_frequency: "Frequency",
+    #     data_config: {
+    #       dataset_group_arn: "Arn", # required
+    #       attribute_configs: [
+    #         {
+    #           attribute_name: "Name", # required
+    #           transformations: { # required
+    #             "Name" => "Value",
+    #           },
+    #         },
+    #       ],
+    #       additional_datasets: [
+    #         {
+    #           name: "Name", # required
+    #           configuration: {
+    #             "Name" => ["Value"],
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     encryption_config: {
+    #       role_arn: "Arn", # required
+    #       kms_key_arn: "KMSKeyArn", # required
+    #     },
+    #     reference_predictor_arn: "Arn",
+    #     optimization_metric: "WAPE", # accepts WAPE, RMSE, AverageWeightedQuantileLoss, MASE, MAPE
+    #     explain_predictor: false,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.predictor_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateAutoPredictor AWS API Documentation
+    #
+    # @overload create_auto_predictor(params = {})
+    # @param [Hash] params ({})
+    def create_auto_predictor(params = {}, options = {})
+      req = build_request(:create_auto_predictor, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Forecast dataset. The information about the dataset
     # that you provide helps Forecast understand how to consume the data for
     # model training. This includes the following:
@@ -762,6 +946,293 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # <note markdown="1"> Explainability is only available for Forecasts and Predictors
+    # generated from an AutoPredictor (CreateAutoPredictor)
+    #
+    #  </note>
+    #
+    # Creates an Amazon Forecast Explainability.
+    #
+    # Explainability helps you better understand how the attributes in your
+    # datasets impact forecast. Amazon Forecast uses a metric called Impact
+    # scores to quantify the relative impact of each attribute and determine
+    # whether they increase or decrease forecast values.
+    #
+    # To enable Forecast Explainability, your predictor must include at
+    # least one of the following: related time series, item metadata, or
+    # additional datasets like Holidays and the Weather Index.
+    #
+    # CreateExplainability accepts either a Predictor ARN or Forecast ARN.
+    # To receive aggregated Impact scores for all time series and time
+    # points in your datasets, provide a Predictor ARN. To receive Impact
+    # scores for specific time series and time points, provide a Forecast
+    # ARN.
+    #
+    # **CreateExplainability with a Predictor ARN**
+    #
+    # <note markdown="1"> You can only have one Explainability resource per predictor. If you
+    # already enabled `ExplainPredictor` in CreateAutoPredictor, that
+    # predictor already has an Explainability resource.
+    #
+    #  </note>
+    #
+    # The following parameters are required when providing a Predictor ARN:
+    #
+    # * `ExplainabilityName` - A unique name for the Explainability.
+    #
+    # * `ResourceArn` - The Arn of the predictor.
+    #
+    # * `TimePointGranularity` - Must be set to “ALL”.
+    #
+    # * `TimeSeriesGranularity` - Must be set to “ALL”.
+    #
+    # Do not specify a value for the following parameters:
+    #
+    # * `DataSource` - Only valid when TimeSeriesGranularity is “SPECIFIC”.
+    #
+    # * `Schema` - Only valid when TimeSeriesGranularity is “SPECIFIC”.
+    #
+    # * `StartDateTime` - Only valid when TimePointGranularity is
+    #   “SPECIFIC”.
+    #
+    # * `EndDateTime` - Only valid when TimePointGranularity is “SPECIFIC”.
+    #
+    # **CreateExplainability with a Forecast ARN**
+    #
+    # <note markdown="1"> You can specify a maximum of 50 time series and 1500 time points.
+    #
+    #  </note>
+    #
+    # The following parameters are required when providing a Predictor ARN:
+    #
+    # * `ExplainabilityName` - A unique name for the Explainability.
+    #
+    # * `ResourceArn` - The Arn of the forecast.
+    #
+    # * `TimePointGranularity` - Either “ALL” or “SPECIFIC”.
+    #
+    # * `TimeSeriesGranularity` - Either “ALL” or “SPECIFIC”.
+    #
+    # If you set TimeSeriesGranularity to “SPECIFIC”, you must also provide
+    # the following:
+    #
+    # * `DataSource` - The S3 location of the CSV file specifying your time
+    #   series.
+    #
+    # * `Schema` - The Schema defines the attributes and attribute types
+    #   listed in the Data Source.
+    #
+    # If you set TimePointGranularity to “SPECIFIC”, you must also provide
+    # the following:
+    #
+    # * `StartDateTime` - The first timestamp in the range of time points.
+    #
+    # * `EndDateTime` - The last timestamp in the range of time points.
+    #
+    # @option params [required, String] :explainability_name
+    #   A unique name for the Explainability.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Predictor or Forecast used to
+    #   create the Explainability.
+    #
+    # @option params [required, Types::ExplainabilityConfig] :explainability_config
+    #   The configuration settings that define the granularity of time series
+    #   and time points for the Explainability.
+    #
+    # @option params [Types::DataSource] :data_source
+    #   The source of your training data, an AWS Identity and Access
+    #   Management (IAM) role that allows Amazon Forecast to access the data
+    #   and, optionally, an AWS Key Management Service (KMS) key. This object
+    #   is submitted in the CreateDatasetImportJob request.
+    #
+    # @option params [Types::Schema] :schema
+    #   Defines the fields of a dataset. You specify this object in the
+    #   CreateDataset request.
+    #
+    # @option params [Boolean] :enable_visualization
+    #   Create an Expainability visualization that is viewable within the AWS
+    #   console.
+    #
+    # @option params [String] :start_date_time
+    #   If `TimePointGranularity` is set to `SPECIFIC`, define the first point
+    #   for the Explainability.
+    #
+    # @option params [String] :end_date_time
+    #   If `TimePointGranularity` is set to `SPECIFIC`, define the last time
+    #   point for the Explainability.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata to help you categorize and organize your resources.
+    #   Each tag consists of a key and an optional value, both of which you
+    #   define. Tag keys and values are case sensitive.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * For each resource, each tag key must be unique and each tag key must
+    #     have one value.
+    #
+    #   * Maximum number of tags per resource: 50.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
+    #
+    #   * Accepted characters: all letters and numbers, spaces representable
+    #     in UTF-8, and + - = . \_ : / @. If your tagging schema is used
+    #     across other services and resources, the character restrictions of
+    #     those services also apply.
+    #
+    #   * Key prefixes cannot include any upper or lowercase combination of
+    #     `aws:` or `AWS:`. Values can have this prefix. If a tag value has
+    #     `aws` as its prefix but the key does not, Forecast considers it to
+    #     be a user tag and will count against the limit of 50 tags. Tags with
+    #     only the key prefix of `aws` do not count against your tags per
+    #     resource limit. You cannot edit or delete tag keys with this prefix.
+    #
+    # @return [Types::CreateExplainabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExplainabilityResponse#explainability_arn #explainability_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_explainability({
+    #     explainability_name: "Name", # required
+    #     resource_arn: "Arn", # required
+    #     explainability_config: { # required
+    #       time_series_granularity: "ALL", # required, accepts ALL, SPECIFIC
+    #       time_point_granularity: "ALL", # required, accepts ALL, SPECIFIC
+    #     },
+    #     data_source: {
+    #       s3_config: { # required
+    #         path: "S3Path", # required
+    #         role_arn: "Arn", # required
+    #         kms_key_arn: "KMSKeyArn",
+    #       },
+    #     },
+    #     schema: {
+    #       attributes: [
+    #         {
+    #           attribute_name: "Name",
+    #           attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
+    #         },
+    #       ],
+    #     },
+    #     enable_visualization: false,
+    #     start_date_time: "LocalDateTime",
+    #     end_date_time: "LocalDateTime",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.explainability_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateExplainability AWS API Documentation
+    #
+    # @overload create_explainability(params = {})
+    # @param [Hash] params ({})
+    def create_explainability(params = {}, options = {})
+      req = build_request(:create_explainability, params)
+      req.send_request(options)
+    end
+
+    # Exports an Explainability resource created by the CreateExplainability
+    # operation. Exported files are exported to an Amazon Simple Storage
+    # Service (Amazon S3) bucket.
+    #
+    # You must specify a DataDestination object that includes an Amazon S3
+    # bucket and an AWS Identity and Access Management (IAM) role that
+    # Amazon Forecast can assume to access the Amazon S3 bucket. For more
+    # information, see aws-forecast-iam-roles.
+    #
+    # <note markdown="1"> The `Status` of the export job must be `ACTIVE` before you can access
+    # the export in your Amazon S3 bucket. To get the status, use the
+    # DescribeExplainabilityExport operation.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :explainability_export_name
+    #   A unique name for the Explainability export.
+    #
+    # @option params [required, String] :explainability_arn
+    #   The Amazon Resource Name (ARN) of the Explainability to export.
+    #
+    # @option params [required, Types::DataDestination] :destination
+    #   The destination for an export job. Provide an S3 path, an AWS Identity
+    #   and Access Management (IAM) role that allows Amazon Forecast to access
+    #   the location, and an AWS Key Management Service (KMS) key (optional).
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata to help you categorize and organize your resources.
+    #   Each tag consists of a key and an optional value, both of which you
+    #   define. Tag keys and values are case sensitive.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * For each resource, each tag key must be unique and each tag key must
+    #     have one value.
+    #
+    #   * Maximum number of tags per resource: 50.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
+    #
+    #   * Accepted characters: all letters and numbers, spaces representable
+    #     in UTF-8, and + - = . \_ : / @. If your tagging schema is used
+    #     across other services and resources, the character restrictions of
+    #     those services also apply.
+    #
+    #   * Key prefixes cannot include any upper or lowercase combination of
+    #     `aws:` or `AWS:`. Values can have this prefix. If a tag value has
+    #     `aws` as its prefix but the key does not, Forecast considers it to
+    #     be a user tag and will count against the limit of 50 tags. Tags with
+    #     only the key prefix of `aws` do not count against your tags per
+    #     resource limit. You cannot edit or delete tag keys with this prefix.
+    #
+    # @return [Types::CreateExplainabilityExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExplainabilityExportResponse#explainability_export_arn #explainability_export_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_explainability_export({
+    #     explainability_export_name: "Name", # required
+    #     explainability_arn: "Arn", # required
+    #     destination: { # required
+    #       s3_config: { # required
+    #         path: "S3Path", # required
+    #         role_arn: "Arn", # required
+    #         kms_key_arn: "KMSKeyArn",
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.explainability_export_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateExplainabilityExport AWS API Documentation
+    #
+    # @overload create_explainability_export(params = {})
+    # @param [Hash] params ({})
+    def create_explainability_export(params = {}, options = {})
+      req = build_request(:create_explainability_export, params)
+      req.send_request(options)
+    end
+
     # Creates a forecast for each item in the `TARGET_TIME_SERIES` dataset
     # that was used to train the predictor. This is known as inference. To
     # retrieve the forecast for a single item at low latency, use the
@@ -978,6 +1449,13 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation creates a legacy predictor that does not include all
+    # the predictor functionalities provided by Amazon Forecast. To create a
+    # predictor that is compatible with all aspects of Forecast, use
+    # CreateAutoPredictor.
+    #
+    #  </note>
+    #
     # Creates an Amazon Forecast predictor.
     #
     # In the request, provide a dataset group and either specify an
@@ -1201,7 +1679,7 @@ module Aws::ForecastService
     #     forecast_horizon: 1, # required
     #     forecast_types: ["ForecastType"],
     #     perform_auto_ml: false,
-    #     auto_ml_override_strategy: "LatencyOptimized", # accepts LatencyOptimized
+    #     auto_ml_override_strategy: "LatencyOptimized", # accepts LatencyOptimized, AccuracyOptimized
     #     perform_hpo: false,
     #     training_parameters: {
     #       "ParameterKey" => "ParameterValue",
@@ -1471,6 +1949,55 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Deletes an Explainability resource.
+    #
+    # You can delete only predictor that have a status of `ACTIVE` or
+    # `CREATE_FAILED`. To get the status, use the DescribeExplainability
+    # operation.
+    #
+    # @option params [required, String] :explainability_arn
+    #   The Amazon Resource Name (ARN) of the Explainability resource to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_explainability({
+    #     explainability_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteExplainability AWS API Documentation
+    #
+    # @overload delete_explainability(params = {})
+    # @param [Hash] params ({})
+    def delete_explainability(params = {}, options = {})
+      req = build_request(:delete_explainability, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Explainability export job.
+    #
+    # @option params [required, String] :explainability_export_arn
+    #   The Amazon Resource Name (ARN) of the Explainability export to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_explainability_export({
+    #     explainability_export_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteExplainabilityExport AWS API Documentation
+    #
+    # @overload delete_explainability_export(params = {})
+    # @param [Hash] params ({})
+    def delete_explainability_export(params = {}, options = {})
+      req = build_request(:delete_explainability_export, params)
+      req.send_request(options)
+    end
+
     # Deletes a forecast created using the CreateForecast operation. You can
     # delete only forecasts that have a status of `ACTIVE` or
     # `CREATE_FAILED`. To get the status, use the DescribeForecast
@@ -1616,6 +2143,78 @@ module Aws::ForecastService
     # @param [Hash] params ({})
     def delete_resource_tree(params = {}, options = {})
       req = build_request(:delete_resource_tree, params)
+      req.send_request(options)
+    end
+
+    # Describes a predictor created using the CreateAutoPredictor operation.
+    #
+    # @option params [required, String] :predictor_arn
+    #   The Amazon Resource Name (ARN) of the predictor.
+    #
+    # @return [Types::DescribeAutoPredictorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAutoPredictorResponse#predictor_arn #predictor_arn} => String
+    #   * {Types::DescribeAutoPredictorResponse#predictor_name #predictor_name} => String
+    #   * {Types::DescribeAutoPredictorResponse#forecast_horizon #forecast_horizon} => Integer
+    #   * {Types::DescribeAutoPredictorResponse#forecast_types #forecast_types} => Array&lt;String&gt;
+    #   * {Types::DescribeAutoPredictorResponse#forecast_frequency #forecast_frequency} => String
+    #   * {Types::DescribeAutoPredictorResponse#dataset_import_job_arns #dataset_import_job_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeAutoPredictorResponse#data_config #data_config} => Types::DataConfig
+    #   * {Types::DescribeAutoPredictorResponse#encryption_config #encryption_config} => Types::EncryptionConfig
+    #   * {Types::DescribeAutoPredictorResponse#reference_predictor_summary #reference_predictor_summary} => Types::ReferencePredictorSummary
+    #   * {Types::DescribeAutoPredictorResponse#estimated_time_remaining_in_minutes #estimated_time_remaining_in_minutes} => Integer
+    #   * {Types::DescribeAutoPredictorResponse#status #status} => String
+    #   * {Types::DescribeAutoPredictorResponse#message #message} => String
+    #   * {Types::DescribeAutoPredictorResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeAutoPredictorResponse#last_modification_time #last_modification_time} => Time
+    #   * {Types::DescribeAutoPredictorResponse#optimization_metric #optimization_metric} => String
+    #   * {Types::DescribeAutoPredictorResponse#explainability_info #explainability_info} => Types::ExplainabilityInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_auto_predictor({
+    #     predictor_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.predictor_arn #=> String
+    #   resp.predictor_name #=> String
+    #   resp.forecast_horizon #=> Integer
+    #   resp.forecast_types #=> Array
+    #   resp.forecast_types[0] #=> String
+    #   resp.forecast_frequency #=> String
+    #   resp.dataset_import_job_arns #=> Array
+    #   resp.dataset_import_job_arns[0] #=> String
+    #   resp.data_config.dataset_group_arn #=> String
+    #   resp.data_config.attribute_configs #=> Array
+    #   resp.data_config.attribute_configs[0].attribute_name #=> String
+    #   resp.data_config.attribute_configs[0].transformations #=> Hash
+    #   resp.data_config.attribute_configs[0].transformations["Name"] #=> String
+    #   resp.data_config.additional_datasets #=> Array
+    #   resp.data_config.additional_datasets[0].name #=> String
+    #   resp.data_config.additional_datasets[0].configuration #=> Hash
+    #   resp.data_config.additional_datasets[0].configuration["Name"] #=> Array
+    #   resp.data_config.additional_datasets[0].configuration["Name"][0] #=> String
+    #   resp.encryption_config.role_arn #=> String
+    #   resp.encryption_config.kms_key_arn #=> String
+    #   resp.reference_predictor_summary.arn #=> String
+    #   resp.reference_predictor_summary.state #=> String, one of "Active", "Deleted"
+    #   resp.estimated_time_remaining_in_minutes #=> Integer
+    #   resp.status #=> String
+    #   resp.message #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modification_time #=> Time
+    #   resp.optimization_metric #=> String, one of "WAPE", "RMSE", "AverageWeightedQuantileLoss", "MASE", "MAPE"
+    #   resp.explainability_info.explainability_arn #=> String
+    #   resp.explainability_info.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeAutoPredictor AWS API Documentation
+    #
+    # @overload describe_auto_predictor(params = {})
+    # @param [Hash] params ({})
+    def describe_auto_predictor(params = {}, options = {})
+      req = build_request(:describe_auto_predictor, params)
       req.send_request(options)
     end
 
@@ -1819,6 +2418,111 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Describes an Explainability resource created using the
+    # CreateExplainability operation.
+    #
+    # @option params [required, String] :explainability_arn
+    #   The Amazon Resource Name (ARN) of the Explaianability to describe.
+    #
+    # @return [Types::DescribeExplainabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExplainabilityResponse#explainability_arn #explainability_arn} => String
+    #   * {Types::DescribeExplainabilityResponse#explainability_name #explainability_name} => String
+    #   * {Types::DescribeExplainabilityResponse#resource_arn #resource_arn} => String
+    #   * {Types::DescribeExplainabilityResponse#explainability_config #explainability_config} => Types::ExplainabilityConfig
+    #   * {Types::DescribeExplainabilityResponse#enable_visualization #enable_visualization} => Boolean
+    #   * {Types::DescribeExplainabilityResponse#data_source #data_source} => Types::DataSource
+    #   * {Types::DescribeExplainabilityResponse#schema #schema} => Types::Schema
+    #   * {Types::DescribeExplainabilityResponse#start_date_time #start_date_time} => String
+    #   * {Types::DescribeExplainabilityResponse#end_date_time #end_date_time} => String
+    #   * {Types::DescribeExplainabilityResponse#estimated_time_remaining_in_minutes #estimated_time_remaining_in_minutes} => Integer
+    #   * {Types::DescribeExplainabilityResponse#message #message} => String
+    #   * {Types::DescribeExplainabilityResponse#status #status} => String
+    #   * {Types::DescribeExplainabilityResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeExplainabilityResponse#last_modification_time #last_modification_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_explainability({
+    #     explainability_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.explainability_arn #=> String
+    #   resp.explainability_name #=> String
+    #   resp.resource_arn #=> String
+    #   resp.explainability_config.time_series_granularity #=> String, one of "ALL", "SPECIFIC"
+    #   resp.explainability_config.time_point_granularity #=> String, one of "ALL", "SPECIFIC"
+    #   resp.enable_visualization #=> Boolean
+    #   resp.data_source.s3_config.path #=> String
+    #   resp.data_source.s3_config.role_arn #=> String
+    #   resp.data_source.s3_config.kms_key_arn #=> String
+    #   resp.schema.attributes #=> Array
+    #   resp.schema.attributes[0].attribute_name #=> String
+    #   resp.schema.attributes[0].attribute_type #=> String, one of "string", "integer", "float", "timestamp", "geolocation"
+    #   resp.start_date_time #=> String
+    #   resp.end_date_time #=> String
+    #   resp.estimated_time_remaining_in_minutes #=> Integer
+    #   resp.message #=> String
+    #   resp.status #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modification_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeExplainability AWS API Documentation
+    #
+    # @overload describe_explainability(params = {})
+    # @param [Hash] params ({})
+    def describe_explainability(params = {}, options = {})
+      req = build_request(:describe_explainability, params)
+      req.send_request(options)
+    end
+
+    # Describes an Explainability export created using the
+    # CreateExplainabilityExport operation.
+    #
+    # @option params [required, String] :explainability_export_arn
+    #   The Amazon Resource Name (ARN) of the Explainability export.
+    #
+    # @return [Types::DescribeExplainabilityExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExplainabilityExportResponse#explainability_export_arn #explainability_export_arn} => String
+    #   * {Types::DescribeExplainabilityExportResponse#explainability_export_name #explainability_export_name} => String
+    #   * {Types::DescribeExplainabilityExportResponse#explainability_arn #explainability_arn} => String
+    #   * {Types::DescribeExplainabilityExportResponse#destination #destination} => Types::DataDestination
+    #   * {Types::DescribeExplainabilityExportResponse#message #message} => String
+    #   * {Types::DescribeExplainabilityExportResponse#status #status} => String
+    #   * {Types::DescribeExplainabilityExportResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeExplainabilityExportResponse#last_modification_time #last_modification_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_explainability_export({
+    #     explainability_export_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.explainability_export_arn #=> String
+    #   resp.explainability_export_name #=> String
+    #   resp.explainability_arn #=> String
+    #   resp.destination.s3_config.path #=> String
+    #   resp.destination.s3_config.role_arn #=> String
+    #   resp.destination.s3_config.kms_key_arn #=> String
+    #   resp.message #=> String
+    #   resp.status #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modification_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeExplainabilityExport AWS API Documentation
+    #
+    # @overload describe_explainability_export(params = {})
+    # @param [Hash] params ({})
+    def describe_explainability_export(params = {}, options = {})
+      req = build_request(:describe_explainability_export, params)
+      req.send_request(options)
+    end
+
     # Describes a forecast created using the CreateForecast operation.
     #
     # In addition to listing the properties provided in the `CreateForecast`
@@ -1937,6 +2641,15 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # <note markdown="1"> This operation is only valid for legacy predictors created with
+    # CreatePredictor. If you are not using a legacy predictor, use
+    # DescribeAutoPredictor.
+    #
+    #  To upgrade a legacy predictor to AutoPredictor, see Upgrading to
+    # AutoPredictor.
+    #
+    #  </note>
+    #
     # Describes a predictor created using the CreatePredictor operation.
     #
     # In addition to listing the properties provided in the
@@ -1966,6 +2679,7 @@ module Aws::ForecastService
     #   * {Types::DescribePredictorResponse#predictor_arn #predictor_arn} => String
     #   * {Types::DescribePredictorResponse#predictor_name #predictor_name} => String
     #   * {Types::DescribePredictorResponse#algorithm_arn #algorithm_arn} => String
+    #   * {Types::DescribePredictorResponse#auto_ml_algorithm_arns #auto_ml_algorithm_arns} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#forecast_horizon #forecast_horizon} => Integer
     #   * {Types::DescribePredictorResponse#forecast_types #forecast_types} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#perform_auto_ml #perform_auto_ml} => Boolean
@@ -1979,8 +2693,8 @@ module Aws::ForecastService
     #   * {Types::DescribePredictorResponse#encryption_config #encryption_config} => Types::EncryptionConfig
     #   * {Types::DescribePredictorResponse#predictor_execution_details #predictor_execution_details} => Types::PredictorExecutionDetails
     #   * {Types::DescribePredictorResponse#estimated_time_remaining_in_minutes #estimated_time_remaining_in_minutes} => Integer
+    #   * {Types::DescribePredictorResponse#is_auto_predictor #is_auto_predictor} => Boolean
     #   * {Types::DescribePredictorResponse#dataset_import_job_arns #dataset_import_job_arns} => Array&lt;String&gt;
-    #   * {Types::DescribePredictorResponse#auto_ml_algorithm_arns #auto_ml_algorithm_arns} => Array&lt;String&gt;
     #   * {Types::DescribePredictorResponse#status #status} => String
     #   * {Types::DescribePredictorResponse#message #message} => String
     #   * {Types::DescribePredictorResponse#creation_time #creation_time} => Time
@@ -1998,11 +2712,13 @@ module Aws::ForecastService
     #   resp.predictor_arn #=> String
     #   resp.predictor_name #=> String
     #   resp.algorithm_arn #=> String
+    #   resp.auto_ml_algorithm_arns #=> Array
+    #   resp.auto_ml_algorithm_arns[0] #=> String
     #   resp.forecast_horizon #=> Integer
     #   resp.forecast_types #=> Array
     #   resp.forecast_types[0] #=> String
     #   resp.perform_auto_ml #=> Boolean
-    #   resp.auto_ml_override_strategy #=> String, one of "LatencyOptimized"
+    #   resp.auto_ml_override_strategy #=> String, one of "LatencyOptimized", "AccuracyOptimized"
     #   resp.perform_hpo #=> Boolean
     #   resp.training_parameters #=> Hash
     #   resp.training_parameters["ParameterKey"] #=> String
@@ -2045,10 +2761,9 @@ module Aws::ForecastService
     #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].status #=> String
     #   resp.predictor_execution_details.predictor_executions[0].test_windows[0].message #=> String
     #   resp.estimated_time_remaining_in_minutes #=> Integer
+    #   resp.is_auto_predictor #=> Boolean
     #   resp.dataset_import_job_arns #=> Array
     #   resp.dataset_import_job_arns[0] #=> String
-    #   resp.auto_ml_algorithm_arns #=> Array
-    #   resp.auto_ml_algorithm_arns[0] #=> String
     #   resp.status #=> String
     #   resp.message #=> String
     #   resp.creation_time #=> Time
@@ -2155,6 +2870,7 @@ module Aws::ForecastService
     # @return [Types::GetAccuracyMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAccuracyMetricsResponse#predictor_evaluation_results #predictor_evaluation_results} => Array&lt;Types::EvaluationResult&gt;
+    #   * {Types::GetAccuracyMetricsResponse#is_auto_predictor #is_auto_predictor} => Boolean
     #   * {Types::GetAccuracyMetricsResponse#auto_ml_override_strategy #auto_ml_override_strategy} => String
     #   * {Types::GetAccuracyMetricsResponse#optimization_metric #optimization_metric} => String
     #
@@ -2184,7 +2900,8 @@ module Aws::ForecastService
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].mase #=> Float
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.error_metrics[0].mape #=> Float
     #   resp.predictor_evaluation_results[0].test_windows[0].metrics.average_weighted_quantile_loss #=> Float
-    #   resp.auto_ml_override_strategy #=> String, one of "LatencyOptimized"
+    #   resp.is_auto_predictor #=> Boolean
+    #   resp.auto_ml_override_strategy #=> String, one of "LatencyOptimized", "AccuracyOptimized"
     #   resp.optimization_metric #=> String, one of "WAPE", "RMSE", "AverageWeightedQuantileLoss", "MASE", "MAPE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/GetAccuracyMetrics AWS API Documentation
@@ -2372,6 +3089,156 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Returns a list of Explainability resources created using the
+    # CreateExplainability operation. This operation returns a summary for
+    # each Explainability. You can filter the list using an array of Filter
+    # objects.
+    #
+    # To retrieve the complete set of properties for a particular
+    # Explainability resource, use the ARN with the DescribeExplainability
+    # operation.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a NextToken. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #
+    # @option params [Integer] :max_results
+    #   The number of items returned in the response.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   An array of filters. For each filter, provide a condition and a match
+    #   statement. The condition is either `IS` or `IS_NOT`, which specifies
+    #   whether to include or exclude the resources that match the statement
+    #   from the list. The match statement consists of a key and a value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `PredictorArn` and `Status`.
+    #
+    #   * `Value` - The value to match.
+    #
+    # @return [Types::ListExplainabilitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExplainabilitiesResponse#explainabilities #explainabilities} => Array&lt;Types::ExplainabilitySummary&gt;
+    #   * {Types::ListExplainabilitiesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_explainabilities({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         key: "String", # required
+    #         value: "Arn", # required
+    #         condition: "IS", # required, accepts IS, IS_NOT
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.explainabilities #=> Array
+    #   resp.explainabilities[0].explainability_arn #=> String
+    #   resp.explainabilities[0].explainability_name #=> String
+    #   resp.explainabilities[0].resource_arn #=> String
+    #   resp.explainabilities[0].explainability_config.time_series_granularity #=> String, one of "ALL", "SPECIFIC"
+    #   resp.explainabilities[0].explainability_config.time_point_granularity #=> String, one of "ALL", "SPECIFIC"
+    #   resp.explainabilities[0].status #=> String
+    #   resp.explainabilities[0].message #=> String
+    #   resp.explainabilities[0].creation_time #=> Time
+    #   resp.explainabilities[0].last_modification_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListExplainabilities AWS API Documentation
+    #
+    # @overload list_explainabilities(params = {})
+    # @param [Hash] params ({})
+    def list_explainabilities(params = {}, options = {})
+      req = build_request(:list_explainabilities, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of Explainability exports created using the
+    # CreateExplainabilityExport operation. This operation returns a summary
+    # for each Explainability export. You can filter the list using an array
+    # of Filter objects.
+    #
+    # To retrieve the complete set of properties for a particular
+    # Explainability export, use the ARN with the DescribeExplainability
+    # operation.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a NextToken. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #
+    # @option params [Integer] :max_results
+    #   The number of items to return in the response.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   An array of filters. For each filter, provide a condition and a match
+    #   statement. The condition is either `IS` or `IS_NOT`, which specifies
+    #   whether to include or exclude resources that match the statement from
+    #   the list. The match statement consists of a key and a value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `PredictorArn` and `Status`.
+    #
+    #   * `Value` - The value to match.
+    #
+    # @return [Types::ListExplainabilityExportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExplainabilityExportsResponse#explainability_exports #explainability_exports} => Array&lt;Types::ExplainabilityExportSummary&gt;
+    #   * {Types::ListExplainabilityExportsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_explainability_exports({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         key: "String", # required
+    #         value: "Arn", # required
+    #         condition: "IS", # required, accepts IS, IS_NOT
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.explainability_exports #=> Array
+    #   resp.explainability_exports[0].explainability_export_arn #=> String
+    #   resp.explainability_exports[0].explainability_export_name #=> String
+    #   resp.explainability_exports[0].destination.s3_config.path #=> String
+    #   resp.explainability_exports[0].destination.s3_config.role_arn #=> String
+    #   resp.explainability_exports[0].destination.s3_config.kms_key_arn #=> String
+    #   resp.explainability_exports[0].status #=> String
+    #   resp.explainability_exports[0].message #=> String
+    #   resp.explainability_exports[0].creation_time #=> Time
+    #   resp.explainability_exports[0].last_modification_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListExplainabilityExports AWS API Documentation
+    #
+    # @overload list_explainability_exports(params = {})
+    # @param [Hash] params ({})
+    def list_explainability_exports(params = {}, options = {})
+      req = build_request(:list_explainability_exports, params)
+      req.send_request(options)
+    end
+
     # Returns a list of forecast export jobs created using the
     # CreateForecastExportJob operation. For each forecast export job, this
     # operation returns a summary of its properties, including its Amazon
@@ -2522,6 +3389,7 @@ module Aws::ForecastService
     #   resp.forecasts[0].forecast_arn #=> String
     #   resp.forecasts[0].forecast_name #=> String
     #   resp.forecasts[0].predictor_arn #=> String
+    #   resp.forecasts[0].created_using_auto_predictor #=> Boolean
     #   resp.forecasts[0].dataset_group_arn #=> String
     #   resp.forecasts[0].status #=> String
     #   resp.forecasts[0].message #=> String
@@ -2684,6 +3552,9 @@ module Aws::ForecastService
     #   resp.predictors[0].predictor_arn #=> String
     #   resp.predictors[0].predictor_name #=> String
     #   resp.predictors[0].dataset_group_arn #=> String
+    #   resp.predictors[0].is_auto_predictor #=> Boolean
+    #   resp.predictors[0].reference_predictor_summary.arn #=> String
+    #   resp.predictors[0].reference_predictor_summary.state #=> String, one of "Active", "Deleted"
     #   resp.predictors[0].status #=> String
     #   resp.predictors[0].message #=> String
     #   resp.predictors[0].creation_time #=> Time
@@ -2913,7 +3784,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

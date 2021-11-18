@@ -650,7 +650,7 @@ module Aws::Lambda
     #         queues: ["Queue"],
     #         source_access_configurations: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
     #             uri: "URI",
     #           },
     #         ],
@@ -719,6 +719,8 @@ module Aws::Lambda
     #     10,000.
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #
+    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
@@ -924,10 +926,10 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] timeout
-    #   The amount of time that Lambda allows a function to run before
-    #   stopping it. The default is 3 seconds. The maximum allowed value is
-    #   900 seconds. For additional information, see [Lambda execution
-    #   environment][1].
+    #   The amount of time (in seconds) that Lambda allows a function to run
+    #   before stopping it. The default is 3 seconds. The maximum allowed
+    #   value is 900 seconds. For additional information, see [Lambda
+    #   execution environment][1].
     #
     #
     #
@@ -1035,8 +1037,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values. The default value is
-    #   `x86_64`.
+    #   string array with one of the valid values (arm64 or x86\_64). The
+    #   default value is `x86_64`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
@@ -1978,7 +1980,7 @@ module Aws::Lambda
     # @!attribute [rw] kms_key_arn
     #   The KMS key that's used to encrypt the function's environment
     #   variables. This key is only returned if you've configured a
-    #   customer managed CMK.
+    #   customer managed key.
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
@@ -1986,7 +1988,7 @@ module Aws::Lambda
     #   @return [Types::TracingConfigResponse]
     #
     # @!attribute [rw] master_arn
-    #   For Lambda@Edge functions, the ARN of the master function.
+    #   For Lambda@Edge functions, the ARN of the main function.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
@@ -3060,6 +3062,10 @@ module Aws::Lambda
     #
     # @!attribute [rw] payload
     #   The JSON that you want to provide to your Lambda function as input.
+    #
+    #   You can enter the JSON directly. For example, `--payload '\{ "key":
+    #   "value" \}'`. You can also specify a file path. For example,
+    #   `--payload file://payload.json`.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
@@ -4946,7 +4952,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
     #         uri: "URI",
     #       }
     #
@@ -4978,7 +4984,19 @@ module Aws::Lambda
     #
     #   * `VIRTUAL_HOST` - (Amazon MQ) The name of the virtual host in your
     #     RabbitMQ broker. Lambda uses this RabbitMQ host as the event
-    #     source.
+    #     source. This property cannot be specified in an
+    #     UpdateEventSourceMapping API call.
+    #
+    #   * `CLIENT_CERTIFICATE_TLS_AUTH` - (Amazon MSK, Self-managed Apache
+    #     Kafka) The Secrets Manager ARN of your secret key containing the
+    #     certificate chain (X.509 PEM), private key (PKCS#8 PEM), and
+    #     private key password (optional) used for mutual TLS authentication
+    #     of your MSK/Apache Kafka brokers.
+    #
+    #   * `SERVER_ROOT_CA_CERTIFICATE` - (Self-managed Apache Kafka) The
+    #     Secrets Manager ARN of your secret key containing the root CA
+    #     certificate (X.509 PEM) used for TLS encryption of your Apache
+    #     Kafka brokers.
     #   @return [String]
     #
     # @!attribute [rw] uri
@@ -5297,7 +5315,7 @@ module Aws::Lambda
     #         parallelization_factor: 1,
     #         source_access_configurations: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
     #             uri: "URI",
     #           },
     #         ],
@@ -5352,6 +5370,8 @@ module Aws::Lambda
     #     10,000.
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #
+    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
@@ -5502,8 +5522,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values. The default value is
-    #   `x86_64`.
+    #   string array with one of the valid values (arm64 or x86\_64). The
+    #   default value is `x86_64`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest AWS API Documentation
@@ -5601,10 +5621,10 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] timeout
-    #   The amount of time that Lambda allows a function to run before
-    #   stopping it. The default is 3 seconds. The maximum allowed value is
-    #   900 seconds. For additional information, see [Lambda execution
-    #   environment][1].
+    #   The amount of time (in seconds) that Lambda allows a function to run
+    #   before stopping it. The default is 3 seconds. The maximum allowed
+    #   value is 900 seconds. For additional information, see [Lambda
+    #   execution environment][1].
     #
     #
     #

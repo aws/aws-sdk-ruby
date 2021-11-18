@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-11-18)
+------------------
+
+* Feature - CloudWatch Anomaly Detection now supports anomaly detectors that use metric math as input.
+
 1.57.0 (2021-11-04)
 ------------------
 

@@ -336,7 +336,13 @@ module Aws::ChimeSDKMeetings
 
     # @!group API Operations
 
-    # Creates a group of meeting attendees.
+    # Creates up to 100 attendees for an active Amazon Chime SDK meeting.
+    # For more information about the Amazon Chime SDK, see [Using the Amazon
+    # Chime SDK][1] in the *Amazon Chime Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
     #
     # @option params [required, String] :meeting_id
     #   The Amazon Chime SDK ID of the meeting to which you're adding
@@ -813,6 +819,12 @@ module Aws::ChimeSDKMeetings
     #         vocabulary_filter_name: "String",
     #         vocabulary_name: "String",
     #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #         enable_partial_results_stabilization: false,
+    #         partial_results_stability: "low", # accepts low, medium, high
+    #         content_identification_type: "PII", # accepts PII
+    #         content_redaction_type: "PII", # accepts PII
+    #         pii_entity_types: "TranscribePiiEntityTypes",
+    #         language_model_name: "TranscribeLanguageModelName",
     #       },
     #       engine_transcribe_medical_settings: {
     #         language_code: "en-US", # required, accepts en-US
@@ -820,6 +832,7 @@ module Aws::ChimeSDKMeetings
     #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
     #         vocabulary_name: "String",
     #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
+    #         content_identification_type: "PHI", # accepts PHI
     #       },
     #     },
     #   })
@@ -868,7 +881,7 @@ module Aws::ChimeSDKMeetings
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

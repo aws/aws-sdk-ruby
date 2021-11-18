@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2021-11-18)
+------------------
+
+* Feature - Rolling back Data API serverless features until dependencies are live.
+
 1.14.0 (2021-11-17)
 ------------------
 

@@ -16,6 +16,9 @@ module Aws::GlueDataBrew
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     ActionId = Shapes::IntegerShape.new(name: 'ActionId')
+    AllowedStatisticList = Shapes::ListShape.new(name: 'AllowedStatisticList')
+    AllowedStatistics = Shapes::StructureShape.new(name: 'AllowedStatistics')
+    AnalyticsMode = Shapes::StringShape.new(name: 'AnalyticsMode')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssumeControl = Shapes::BooleanShape.new(name: 'AssumeControl')
     Attempt = Shapes::IntegerShape.new(name: 'Attempt')
@@ -48,6 +51,8 @@ module Aws::GlueDataBrew
     CreateRecipeJobResponse = Shapes::StructureShape.new(name: 'CreateRecipeJobResponse')
     CreateRecipeRequest = Shapes::StructureShape.new(name: 'CreateRecipeRequest')
     CreateRecipeResponse = Shapes::StructureShape.new(name: 'CreateRecipeResponse')
+    CreateRulesetRequest = Shapes::StructureShape.new(name: 'CreateRulesetRequest')
+    CreateRulesetResponse = Shapes::StructureShape.new(name: 'CreateRulesetResponse')
     CreateScheduleRequest = Shapes::StructureShape.new(name: 'CreateScheduleRequest')
     CreateScheduleResponse = Shapes::StructureShape.new(name: 'CreateScheduleResponse')
     CreatedBy = Shapes::StringShape.new(name: 'CreatedBy')
@@ -79,6 +84,8 @@ module Aws::GlueDataBrew
     DeleteProjectResponse = Shapes::StructureShape.new(name: 'DeleteProjectResponse')
     DeleteRecipeVersionRequest = Shapes::StructureShape.new(name: 'DeleteRecipeVersionRequest')
     DeleteRecipeVersionResponse = Shapes::StructureShape.new(name: 'DeleteRecipeVersionResponse')
+    DeleteRulesetRequest = Shapes::StructureShape.new(name: 'DeleteRulesetRequest')
+    DeleteRulesetResponse = Shapes::StructureShape.new(name: 'DeleteRulesetResponse')
     DeleteScheduleRequest = Shapes::StructureShape.new(name: 'DeleteScheduleRequest')
     DeleteScheduleResponse = Shapes::StructureShape.new(name: 'DeleteScheduleResponse')
     Delimiter = Shapes::StringShape.new(name: 'Delimiter')
@@ -92,10 +99,16 @@ module Aws::GlueDataBrew
     DescribeProjectResponse = Shapes::StructureShape.new(name: 'DescribeProjectResponse')
     DescribeRecipeRequest = Shapes::StructureShape.new(name: 'DescribeRecipeRequest')
     DescribeRecipeResponse = Shapes::StructureShape.new(name: 'DescribeRecipeResponse')
+    DescribeRulesetRequest = Shapes::StructureShape.new(name: 'DescribeRulesetRequest')
+    DescribeRulesetResponse = Shapes::StructureShape.new(name: 'DescribeRulesetResponse')
     DescribeScheduleRequest = Shapes::StructureShape.new(name: 'DescribeScheduleRequest')
     DescribeScheduleResponse = Shapes::StructureShape.new(name: 'DescribeScheduleResponse')
+    Disabled = Shapes::BooleanShape.new(name: 'Disabled')
     EncryptionKeyArn = Shapes::StringShape.new(name: 'EncryptionKeyArn')
     EncryptionMode = Shapes::StringShape.new(name: 'EncryptionMode')
+    EntityDetectorConfiguration = Shapes::StructureShape.new(name: 'EntityDetectorConfiguration')
+    EntityType = Shapes::StringShape.new(name: 'EntityType')
+    EntityTypeList = Shapes::ListShape.new(name: 'EntityTypeList')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ExcelOptions = Shapes::StructureShape.new(name: 'ExcelOptions')
     ExecutionTime = Shapes::IntegerShape.new(name: 'ExecutionTime')
@@ -136,6 +149,8 @@ module Aws::GlueDataBrew
     ListRecipeVersionsResponse = Shapes::StructureShape.new(name: 'ListRecipeVersionsResponse')
     ListRecipesRequest = Shapes::StructureShape.new(name: 'ListRecipesRequest')
     ListRecipesResponse = Shapes::StructureShape.new(name: 'ListRecipesResponse')
+    ListRulesetsRequest = Shapes::StructureShape.new(name: 'ListRulesetsRequest')
+    ListRulesetsResponse = Shapes::StructureShape.new(name: 'ListRulesetsResponse')
     ListSchedulesRequest = Shapes::StructureShape.new(name: 'ListSchedulesRequest')
     ListSchedulesResponse = Shapes::StructureShape.new(name: 'ListSchedulesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -148,6 +163,7 @@ module Aws::GlueDataBrew
     MaxResults100 = Shapes::IntegerShape.new(name: 'MaxResults100')
     MaxRetries = Shapes::IntegerShape.new(name: 'MaxRetries')
     Message = Shapes::StringShape.new(name: 'Message')
+    Metadata = Shapes::StructureShape.new(name: 'Metadata')
     MultiLine = Shapes::BooleanShape.new(name: 'MultiLine')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OpenedBy = Shapes::StringShape.new(name: 'OpenedBy')
@@ -174,6 +190,7 @@ module Aws::GlueDataBrew
     PublishRecipeRequest = Shapes::StructureShape.new(name: 'PublishRecipeRequest')
     PublishRecipeResponse = Shapes::StructureShape.new(name: 'PublishRecipeResponse')
     PublishedBy = Shapes::StringShape.new(name: 'PublishedBy')
+    QueryString = Shapes::StringShape.new(name: 'QueryString')
     Recipe = Shapes::StructureShape.new(name: 'Recipe')
     RecipeAction = Shapes::StructureShape.new(name: 'RecipeAction')
     RecipeDescription = Shapes::StringShape.new(name: 'RecipeDescription')
@@ -189,6 +206,15 @@ module Aws::GlueDataBrew
     RecipeVersionList = Shapes::ListShape.new(name: 'RecipeVersionList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Result = Shapes::StringShape.new(name: 'Result')
+    RowRange = Shapes::IntegerShape.new(name: 'RowRange')
+    Rule = Shapes::StructureShape.new(name: 'Rule')
+    RuleCount = Shapes::IntegerShape.new(name: 'RuleCount')
+    RuleList = Shapes::ListShape.new(name: 'RuleList')
+    RuleName = Shapes::StringShape.new(name: 'RuleName')
+    RulesetDescription = Shapes::StringShape.new(name: 'RulesetDescription')
+    RulesetItem = Shapes::StructureShape.new(name: 'RulesetItem')
+    RulesetItemList = Shapes::ListShape.new(name: 'RulesetItemList')
+    RulesetName = Shapes::StringShape.new(name: 'RulesetName')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     S3TableOutputOptions = Shapes::StructureShape.new(name: 'S3TableOutputOptions')
     Sample = Shapes::StructureShape.new(name: 'Sample')
@@ -212,6 +238,7 @@ module Aws::GlueDataBrew
     StartJobRunResponse = Shapes::StructureShape.new(name: 'StartJobRunResponse')
     StartProjectSessionRequest = Shapes::StructureShape.new(name: 'StartProjectSessionRequest')
     StartProjectSessionResponse = Shapes::StructureShape.new(name: 'StartProjectSessionResponse')
+    StartRowIndex = Shapes::IntegerShape.new(name: 'StartRowIndex')
     StartedBy = Shapes::StringShape.new(name: 'StartedBy')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     StatisticList = Shapes::ListShape.new(name: 'StatisticList')
@@ -229,6 +256,10 @@ module Aws::GlueDataBrew
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetColumn = Shapes::StringShape.new(name: 'TargetColumn')
+    Threshold = Shapes::StructureShape.new(name: 'Threshold')
+    ThresholdType = Shapes::StringShape.new(name: 'ThresholdType')
+    ThresholdUnit = Shapes::StringShape.new(name: 'ThresholdUnit')
+    ThresholdValue = Shapes::FloatShape.new(name: 'ThresholdValue')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
     TimezoneOffset = Shapes::StringShape.new(name: 'TimezoneOffset')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -243,15 +274,25 @@ module Aws::GlueDataBrew
     UpdateRecipeJobResponse = Shapes::StructureShape.new(name: 'UpdateRecipeJobResponse')
     UpdateRecipeRequest = Shapes::StructureShape.new(name: 'UpdateRecipeRequest')
     UpdateRecipeResponse = Shapes::StructureShape.new(name: 'UpdateRecipeResponse')
+    UpdateRulesetRequest = Shapes::StructureShape.new(name: 'UpdateRulesetRequest')
+    UpdateRulesetResponse = Shapes::StructureShape.new(name: 'UpdateRulesetResponse')
     UpdateScheduleRequest = Shapes::StructureShape.new(name: 'UpdateScheduleRequest')
     UpdateScheduleResponse = Shapes::StructureShape.new(name: 'UpdateScheduleResponse')
+    ValidationConfiguration = Shapes::StructureShape.new(name: 'ValidationConfiguration')
+    ValidationConfigurationList = Shapes::ListShape.new(name: 'ValidationConfigurationList')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValidationMode = Shapes::StringShape.new(name: 'ValidationMode')
     ValueReference = Shapes::StringShape.new(name: 'ValueReference')
     ValuesMap = Shapes::MapShape.new(name: 'ValuesMap')
     ViewFrame = Shapes::StructureShape.new(name: 'ViewFrame')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AllowedStatisticList.member = Shapes::ShapeRef.new(shape: AllowedStatistics)
+
+    AllowedStatistics.add_member(:statistics, Shapes::ShapeRef.new(shape: StatisticList, required: true, location_name: "Statistics"))
+    AllowedStatistics.struct_class = Types::AllowedStatistics
 
     BatchDeleteRecipeVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: RecipeName, required: true, location: "uri", location_name: "name"))
     BatchDeleteRecipeVersionRequest.add_member(:recipe_versions, Shapes::ShapeRef.new(shape: RecipeVersionList, required: true, location_name: "RecipeVersions"))
@@ -305,6 +346,7 @@ module Aws::GlueDataBrew
     CreateProfileJobRequest.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, location_name: "MaxRetries"))
     CreateProfileJobRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "OutputLocation"))
     CreateProfileJobRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ProfileConfiguration, location_name: "Configuration"))
+    CreateProfileJobRequest.add_member(:validation_configurations, Shapes::ShapeRef.new(shape: ValidationConfigurationList, location_name: "ValidationConfigurations"))
     CreateProfileJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
     CreateProfileJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateProfileJobRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
@@ -354,6 +396,16 @@ module Aws::GlueDataBrew
     CreateRecipeResponse.add_member(:name, Shapes::ShapeRef.new(shape: RecipeName, required: true, location_name: "Name"))
     CreateRecipeResponse.struct_class = Types::CreateRecipeResponse
 
+    CreateRulesetRequest.add_member(:name, Shapes::ShapeRef.new(shape: RulesetName, required: true, location_name: "Name"))
+    CreateRulesetRequest.add_member(:description, Shapes::ShapeRef.new(shape: RulesetDescription, location_name: "Description"))
+    CreateRulesetRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "TargetArn"))
+    CreateRulesetRequest.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, required: true, location_name: "Rules"))
+    CreateRulesetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateRulesetRequest.struct_class = Types::CreateRulesetRequest
+
+    CreateRulesetResponse.add_member(:name, Shapes::ShapeRef.new(shape: RulesetName, required: true, location_name: "Name"))
+    CreateRulesetResponse.struct_class = Types::CreateRulesetResponse
+
     CreateScheduleRequest.add_member(:job_names, Shapes::ShapeRef.new(shape: JobNameList, location_name: "JobNames"))
     CreateScheduleRequest.add_member(:cron_expression, Shapes::ShapeRef.new(shape: CronExpression, required: true, location_name: "CronExpression"))
     CreateScheduleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -387,8 +439,9 @@ module Aws::GlueDataBrew
     DataCatalogOutputList.member = Shapes::ShapeRef.new(shape: DataCatalogOutput)
 
     DatabaseInputDefinition.add_member(:glue_connection_name, Shapes::ShapeRef.new(shape: GlueConnectionName, required: true, location_name: "GlueConnectionName"))
-    DatabaseInputDefinition.add_member(:database_table_name, Shapes::ShapeRef.new(shape: DatabaseTableName, required: true, location_name: "DatabaseTableName"))
+    DatabaseInputDefinition.add_member(:database_table_name, Shapes::ShapeRef.new(shape: DatabaseTableName, location_name: "DatabaseTableName"))
     DatabaseInputDefinition.add_member(:temp_directory, Shapes::ShapeRef.new(shape: S3Location, location_name: "TempDirectory"))
+    DatabaseInputDefinition.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, location_name: "QueryString"))
     DatabaseInputDefinition.struct_class = Types::DatabaseInputDefinition
 
     DatabaseOutput.add_member(:glue_connection_name, Shapes::ShapeRef.new(shape: GlueConnectionName, required: true, location_name: "GlueConnectionName"))
@@ -457,6 +510,12 @@ module Aws::GlueDataBrew
     DeleteRecipeVersionResponse.add_member(:recipe_version, Shapes::ShapeRef.new(shape: RecipeVersion, required: true, location_name: "RecipeVersion"))
     DeleteRecipeVersionResponse.struct_class = Types::DeleteRecipeVersionResponse
 
+    DeleteRulesetRequest.add_member(:name, Shapes::ShapeRef.new(shape: RulesetName, required: true, location: "uri", location_name: "name"))
+    DeleteRulesetRequest.struct_class = Types::DeleteRulesetRequest
+
+    DeleteRulesetResponse.add_member(:name, Shapes::ShapeRef.new(shape: RulesetName, required: true, location_name: "Name"))
+    DeleteRulesetResponse.struct_class = Types::DeleteRulesetResponse
+
     DeleteScheduleRequest.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleName, required: true, location: "uri", location_name: "name"))
     DeleteScheduleRequest.struct_class = Types::DeleteScheduleRequest
 
@@ -500,6 +559,7 @@ module Aws::GlueDataBrew
     DescribeJobResponse.add_member(:database_outputs, Shapes::ShapeRef.new(shape: DatabaseOutputList, location_name: "DatabaseOutputs"))
     DescribeJobResponse.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, location_name: "ProjectName"))
     DescribeJobResponse.add_member(:profile_configuration, Shapes::ShapeRef.new(shape: ProfileConfiguration, location_name: "ProfileConfiguration"))
+    DescribeJobResponse.add_member(:validation_configurations, Shapes::ShapeRef.new(shape: ValidationConfigurationList, location_name: "ValidationConfigurations"))
     DescribeJobResponse.add_member(:recipe_reference, Shapes::ShapeRef.new(shape: RecipeReference, location_name: "RecipeReference"))
     DescribeJobResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn"))
     DescribeJobResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoleArn"))
@@ -519,6 +579,7 @@ module Aws::GlueDataBrew
     DescribeJobRunResponse.add_member(:execution_time, Shapes::ShapeRef.new(shape: ExecutionTime, location_name: "ExecutionTime"))
     DescribeJobRunResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, required: true, location_name: "JobName"))
     DescribeJobRunResponse.add_member(:profile_configuration, Shapes::ShapeRef.new(shape: ProfileConfiguration, location_name: "ProfileConfiguration"))
+    DescribeJobRunResponse.add_member(:validation_configurations, Shapes::ShapeRef.new(shape: ValidationConfigurationList, location_name: "ValidationConfigurations"))
     DescribeJobRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: JobRunId, location_name: "RunId"))
     DescribeJobRunResponse.add_member(:state, Shapes::ShapeRef.new(shape: JobRunState, location_name: "State"))
     DescribeJobRunResponse.add_member(:log_subscription, Shapes::ShapeRef.new(shape: LogSubscription, location_name: "LogSubscription"))
@@ -570,6 +631,21 @@ module Aws::GlueDataBrew
     DescribeRecipeResponse.add_member(:recipe_version, Shapes::ShapeRef.new(shape: RecipeVersion, location_name: "RecipeVersion"))
     DescribeRecipeResponse.struct_class = Types::DescribeRecipeResponse
 
+    DescribeRulesetRequest.add_member(:name, Shapes::ShapeRef.new(shape: RulesetName, required: true, location: "uri", location_name: "name"))
+    DescribeRulesetRequest.struct_class = Types::DescribeRulesetRequest
+
+    DescribeRulesetResponse.add_member(:name, Shapes::ShapeRef.new(shape: RulesetName, required: true, location_name: "Name"))
+    DescribeRulesetResponse.add_member(:description, Shapes::ShapeRef.new(shape: RulesetDescription, location_name: "Description"))
+    DescribeRulesetResponse.add_member(:target_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "TargetArn"))
+    DescribeRulesetResponse.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, location_name: "Rules"))
+    DescribeRulesetResponse.add_member(:create_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreateDate"))
+    DescribeRulesetResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "CreatedBy"))
+    DescribeRulesetResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: LastModifiedBy, location_name: "LastModifiedBy"))
+    DescribeRulesetResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedDate"))
+    DescribeRulesetResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn"))
+    DescribeRulesetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    DescribeRulesetResponse.struct_class = Types::DescribeRulesetResponse
+
     DescribeScheduleRequest.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleName, required: true, location: "uri", location_name: "name"))
     DescribeScheduleRequest.struct_class = Types::DescribeScheduleRequest
 
@@ -583,6 +659,12 @@ module Aws::GlueDataBrew
     DescribeScheduleResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     DescribeScheduleResponse.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleName, required: true, location_name: "Name"))
     DescribeScheduleResponse.struct_class = Types::DescribeScheduleResponse
+
+    EntityDetectorConfiguration.add_member(:entity_types, Shapes::ShapeRef.new(shape: EntityTypeList, required: true, location_name: "EntityTypes"))
+    EntityDetectorConfiguration.add_member(:allowed_statistics, Shapes::ShapeRef.new(shape: AllowedStatisticList, location_name: "AllowedStatistics"))
+    EntityDetectorConfiguration.struct_class = Types::EntityDetectorConfiguration
+
+    EntityTypeList.member = Shapes::ShapeRef.new(shape: EntityType)
 
     ExcelOptions.add_member(:sheet_names, Shapes::ShapeRef.new(shape: SheetNameList, location_name: "SheetNames"))
     ExcelOptions.add_member(:sheet_indexes, Shapes::ShapeRef.new(shape: SheetIndexList, location_name: "SheetIndexes"))
@@ -608,6 +690,7 @@ module Aws::GlueDataBrew
     Input.add_member(:s3_input_definition, Shapes::ShapeRef.new(shape: S3Location, location_name: "S3InputDefinition"))
     Input.add_member(:data_catalog_input_definition, Shapes::ShapeRef.new(shape: DataCatalogInputDefinition, location_name: "DataCatalogInputDefinition"))
     Input.add_member(:database_input_definition, Shapes::ShapeRef.new(shape: DatabaseInputDefinition, location_name: "DatabaseInputDefinition"))
+    Input.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     Input.struct_class = Types::Input
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
@@ -636,6 +719,7 @@ module Aws::GlueDataBrew
     Job.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     Job.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Job.add_member(:job_sample, Shapes::ShapeRef.new(shape: JobSample, location_name: "JobSample"))
+    Job.add_member(:validation_configurations, Shapes::ShapeRef.new(shape: ValidationConfigurationList, location_name: "ValidationConfigurations"))
     Job.struct_class = Types::Job
 
     JobList.member = Shapes::ShapeRef.new(shape: Job)
@@ -659,6 +743,7 @@ module Aws::GlueDataBrew
     JobRun.add_member(:started_by, Shapes::ShapeRef.new(shape: StartedBy, location_name: "StartedBy"))
     JobRun.add_member(:started_on, Shapes::ShapeRef.new(shape: Date, location_name: "StartedOn"))
     JobRun.add_member(:job_sample, Shapes::ShapeRef.new(shape: JobSample, location_name: "JobSample"))
+    JobRun.add_member(:validation_configurations, Shapes::ShapeRef.new(shape: ValidationConfigurationList, location_name: "ValidationConfigurations"))
     JobRun.struct_class = Types::JobRun
 
     JobRunList.member = Shapes::ShapeRef.new(shape: JobRun)
@@ -723,6 +808,15 @@ module Aws::GlueDataBrew
     ListRecipesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListRecipesResponse.struct_class = Types::ListRecipesResponse
 
+    ListRulesetsRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "targetArn"))
+    ListRulesetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults100, location: "querystring", location_name: "maxResults"))
+    ListRulesetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListRulesetsRequest.struct_class = Types::ListRulesetsRequest
+
+    ListRulesetsResponse.add_member(:rulesets, Shapes::ShapeRef.new(shape: RulesetItemList, required: true, location_name: "Rulesets"))
+    ListRulesetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListRulesetsResponse.struct_class = Types::ListRulesetsResponse
+
     ListSchedulesRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location: "querystring", location_name: "jobName"))
     ListSchedulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults100, location: "querystring", location_name: "maxResults"))
     ListSchedulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -737,6 +831,9 @@ module Aws::GlueDataBrew
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    Metadata.add_member(:source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SourceArn"))
+    Metadata.struct_class = Types::Metadata
 
     Output.add_member(:compression_format, Shapes::ShapeRef.new(shape: CompressionFormat, location_name: "CompressionFormat"))
     Output.add_member(:format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "Format"))
@@ -765,6 +862,7 @@ module Aws::GlueDataBrew
     ProfileConfiguration.add_member(:dataset_statistics_configuration, Shapes::ShapeRef.new(shape: StatisticsConfiguration, location_name: "DatasetStatisticsConfiguration"))
     ProfileConfiguration.add_member(:profile_columns, Shapes::ShapeRef.new(shape: ColumnSelectorList, location_name: "ProfileColumns"))
     ProfileConfiguration.add_member(:column_statistics_configurations, Shapes::ShapeRef.new(shape: ColumnStatisticsConfigurationList, location_name: "ColumnStatisticsConfigurations"))
+    ProfileConfiguration.add_member(:entity_detector_configuration, Shapes::ShapeRef.new(shape: EntityDetectorConfiguration, location_name: "EntityDetectorConfiguration"))
     ProfileConfiguration.struct_class = Types::ProfileConfiguration
 
     Project.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
@@ -834,6 +932,31 @@ module Aws::GlueDataBrew
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    Rule.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
+    Rule.add_member(:disabled, Shapes::ShapeRef.new(shape: Disabled, location_name: "Disabled"))
+    Rule.add_member(:check_expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "CheckExpression"))
+    Rule.add_member(:substitution_map, Shapes::ShapeRef.new(shape: ValuesMap, location_name: "SubstitutionMap"))
+    Rule.add_member(:threshold, Shapes::ShapeRef.new(shape: Threshold, location_name: "Threshold"))
+    Rule.add_member(:column_selectors, Shapes::ShapeRef.new(shape: ColumnSelectorList, location_name: "ColumnSelectors"))
+    Rule.struct_class = Types::Rule
+
+    RuleList.member = Shapes::ShapeRef.new(shape: Rule)
+
+    RulesetItem.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    RulesetItem.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "CreatedBy"))
+    RulesetItem.add_member(:create_date, Shapes::ShapeRef.new(shape: Date, location_name: "CreateDate"))
+    RulesetItem.add_member(:description, Shapes::ShapeRef.new(shape: RulesetDescription, location_name: "Description"))
+    RulesetItem.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: LastModifiedBy, location_name: "LastModifiedBy"))
+    RulesetItem.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Date, location_name: "LastModifiedDate"))
+    RulesetItem.add_member(:name, Shapes::ShapeRef.new(shape: RulesetName, required: true, location_name: "Name"))
+    RulesetItem.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceArn"))
+    RulesetItem.add_member(:rule_count, Shapes::ShapeRef.new(shape: RuleCount, location_name: "RuleCount"))
+    RulesetItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    RulesetItem.add_member(:target_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "TargetArn"))
+    RulesetItem.struct_class = Types::RulesetItem
+
+    RulesetItemList.member = Shapes::ShapeRef.new(shape: RulesetItem)
 
     S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: Bucket, required: true, location_name: "Bucket"))
     S3Location.add_member(:key, Shapes::ShapeRef.new(shape: Key, location_name: "Key"))
@@ -924,6 +1047,11 @@ module Aws::GlueDataBrew
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    Threshold.add_member(:value, Shapes::ShapeRef.new(shape: ThresholdValue, required: true, location_name: "Value"))
+    Threshold.add_member(:type, Shapes::ShapeRef.new(shape: ThresholdType, location_name: "Type"))
+    Threshold.add_member(:unit, Shapes::ShapeRef.new(shape: ThresholdUnit, location_name: "Unit"))
+    Threshold.struct_class = Types::Threshold
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -948,6 +1076,7 @@ module Aws::GlueDataBrew
     UpdateProfileJobRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: MaxCapacity, location_name: "MaxCapacity"))
     UpdateProfileJobRequest.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, location_name: "MaxRetries"))
     UpdateProfileJobRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "OutputLocation"))
+    UpdateProfileJobRequest.add_member(:validation_configurations, Shapes::ShapeRef.new(shape: ValidationConfigurationList, location_name: "ValidationConfigurations"))
     UpdateProfileJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
     UpdateProfileJobRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     UpdateProfileJobRequest.add_member(:job_sample, Shapes::ShapeRef.new(shape: JobSample, location_name: "JobSample"))
@@ -989,6 +1118,14 @@ module Aws::GlueDataBrew
     UpdateRecipeResponse.add_member(:name, Shapes::ShapeRef.new(shape: RecipeName, required: true, location_name: "Name"))
     UpdateRecipeResponse.struct_class = Types::UpdateRecipeResponse
 
+    UpdateRulesetRequest.add_member(:name, Shapes::ShapeRef.new(shape: RulesetName, required: true, location: "uri", location_name: "name"))
+    UpdateRulesetRequest.add_member(:description, Shapes::ShapeRef.new(shape: RulesetDescription, location_name: "Description"))
+    UpdateRulesetRequest.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, required: true, location_name: "Rules"))
+    UpdateRulesetRequest.struct_class = Types::UpdateRulesetRequest
+
+    UpdateRulesetResponse.add_member(:name, Shapes::ShapeRef.new(shape: RulesetName, required: true, location_name: "Name"))
+    UpdateRulesetResponse.struct_class = Types::UpdateRulesetResponse
+
     UpdateScheduleRequest.add_member(:job_names, Shapes::ShapeRef.new(shape: JobNameList, location_name: "JobNames"))
     UpdateScheduleRequest.add_member(:cron_expression, Shapes::ShapeRef.new(shape: CronExpression, required: true, location_name: "CronExpression"))
     UpdateScheduleRequest.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleName, required: true, location: "uri", location_name: "name"))
@@ -996,6 +1133,12 @@ module Aws::GlueDataBrew
 
     UpdateScheduleResponse.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleName, required: true, location_name: "Name"))
     UpdateScheduleResponse.struct_class = Types::UpdateScheduleResponse
+
+    ValidationConfiguration.add_member(:ruleset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RulesetArn"))
+    ValidationConfiguration.add_member(:validation_mode, Shapes::ShapeRef.new(shape: ValidationMode, location_name: "ValidationMode"))
+    ValidationConfiguration.struct_class = Types::ValidationConfiguration
+
+    ValidationConfigurationList.member = Shapes::ShapeRef.new(shape: ValidationConfiguration)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
@@ -1006,6 +1149,9 @@ module Aws::GlueDataBrew
     ViewFrame.add_member(:start_column_index, Shapes::ShapeRef.new(shape: StartColumnIndex, required: true, location_name: "StartColumnIndex"))
     ViewFrame.add_member(:column_range, Shapes::ShapeRef.new(shape: ColumnRange, location_name: "ColumnRange"))
     ViewFrame.add_member(:hidden_columns, Shapes::ShapeRef.new(shape: HiddenColumnList, location_name: "HiddenColumns"))
+    ViewFrame.add_member(:start_row_index, Shapes::ShapeRef.new(shape: StartRowIndex, location_name: "StartRowIndex"))
+    ViewFrame.add_member(:row_range, Shapes::ShapeRef.new(shape: RowRange, location_name: "RowRange"))
+    ViewFrame.add_member(:analytics, Shapes::ShapeRef.new(shape: AnalyticsMode, location_name: "Analytics"))
     ViewFrame.struct_class = Types::ViewFrame
 
 
@@ -1098,6 +1244,17 @@ module Aws::GlueDataBrew
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:create_ruleset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRuleset"
+        o.http_method = "POST"
+        o.http_request_uri = "/rulesets"
+        o.input = Shapes::ShapeRef.new(shape: CreateRulesetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRulesetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:create_schedule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSchedule"
         o.http_method = "POST"
@@ -1151,6 +1308,17 @@ module Aws::GlueDataBrew
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_ruleset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRuleset"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/rulesets/{name}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRulesetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRulesetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_schedule, Seahorse::Model::Operation.new.tap do |o|
@@ -1209,6 +1377,16 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/recipes/{name}"
         o.input = Shapes::ShapeRef.new(shape: DescribeRecipeRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeRecipeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_ruleset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRuleset"
+        o.http_method = "GET"
+        o.http_request_uri = "/rulesets/{name}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRulesetRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRulesetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -1305,6 +1483,22 @@ module Aws::GlueDataBrew
         o.http_request_uri = "/recipes"
         o.input = Shapes::ShapeRef.new(shape: ListRecipesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRecipesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_rulesets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRulesets"
+        o.http_method = "GET"
+        o.http_request_uri = "/rulesets"
+        o.input = Shapes::ShapeRef.new(shape: ListRulesetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRulesetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1467,6 +1661,16 @@ module Aws::GlueDataBrew
         o.input = Shapes::ShapeRef.new(shape: UpdateRecipeJobRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateRecipeJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_ruleset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRuleset"
+        o.http_method = "PUT"
+        o.http_request_uri = "/rulesets/{name}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRulesetRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRulesetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)

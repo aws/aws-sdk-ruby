@@ -384,33 +384,111 @@ module Aws::CloudWatch
 
     # Deletes the specified anomaly detection model from your account.
     #
-    # @option params [required, String] :namespace
+    # @option params [String] :namespace
     #   The namespace associated with the anomaly detection model to delete.
     #
-    # @option params [required, String] :metric_name
+    # @option params [String] :metric_name
     #   The metric name associated with the anomaly detection model to delete.
     #
     # @option params [Array<Types::Dimension>] :dimensions
     #   The metric dimensions associated with the anomaly detection model to
     #   delete.
     #
-    # @option params [required, String] :stat
+    # @option params [String] :stat
     #   The statistic associated with the anomaly detection model to delete.
+    #
+    # @option params [Types::SingleMetricAnomalyDetector] :single_metric_anomaly_detector
+    #   A single metric anomaly detector to be deleted.
+    #
+    #   When using `SingleMetricAnomalyDetector`, you cannot include the
+    #   following parameters in the same operation:
+    #
+    #   * `Dimensions`,
+    #
+    #   * `MetricName`
+    #
+    #   * `Namespace`
+    #
+    #   * `Stat`
+    #
+    #   * the `MetricMathAnomalyDetector` parameters of
+    #     `DeleteAnomalyDetectorInput`
+    #
+    #   Instead, specify the single metric anomaly detector attributes as part
+    #   of the `SingleMetricAnomalyDetector` property.
+    #
+    # @option params [Types::MetricMathAnomalyDetector] :metric_math_anomaly_detector
+    #   The metric math anomaly detector to be deleted.
+    #
+    #   When using `MetricMathAnomalyDetector`, you cannot include following
+    #   parameters in the same operation:
+    #
+    #   * `Dimensions`,
+    #
+    #   * `MetricName`
+    #
+    #   * `Namespace`
+    #
+    #   * `Stat`
+    #
+    #   * the `SingleMetricAnomalyDetector` parameters of
+    #     `DeleteAnomalyDetectorInput`
+    #
+    #   Instead, specify the metric math anomaly detector attributes as part
+    #   of the `MetricMathAnomalyDetector` property.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_anomaly_detector({
-    #     namespace: "Namespace", # required
-    #     metric_name: "MetricName", # required
+    #     namespace: "Namespace",
+    #     metric_name: "MetricName",
     #     dimensions: [
     #       {
     #         name: "DimensionName", # required
     #         value: "DimensionValue", # required
     #       },
     #     ],
-    #     stat: "AnomalyDetectorMetricStat", # required
+    #     stat: "AnomalyDetectorMetricStat",
+    #     single_metric_anomaly_detector: {
+    #       namespace: "Namespace",
+    #       metric_name: "MetricName",
+    #       dimensions: [
+    #         {
+    #           name: "DimensionName", # required
+    #           value: "DimensionValue", # required
+    #         },
+    #       ],
+    #       stat: "AnomalyDetectorMetricStat",
+    #     },
+    #     metric_math_anomaly_detector: {
+    #       metric_data_queries: [
+    #         {
+    #           id: "MetricId", # required
+    #           metric_stat: {
+    #             metric: { # required
+    #               namespace: "Namespace",
+    #               metric_name: "MetricName",
+    #               dimensions: [
+    #                 {
+    #                   name: "DimensionName", # required
+    #                   value: "DimensionValue", # required
+    #                 },
+    #               ],
+    #             },
+    #             period: 1, # required
+    #             stat: "Stat", # required
+    #             unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #           },
+    #           expression: "MetricExpression",
+    #           label: "MetricLabel",
+    #           return_data: false,
+    #           period: 1,
+    #           account_id: "AccountId",
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAnomalyDetector AWS API Documentation
@@ -517,6 +595,12 @@ module Aws::CloudWatch
     # CloudWatch retains the history of an alarm even if you delete the
     # alarm.
     #
+    # To use this operation and return information about a composite alarm,
+    # you must be signed on with the `cloudwatch:DescribeAlarmHistory`
+    # permission that is scoped to `*`. You can't return information about
+    # composite alarms if your `cloudwatch:DescribeAlarmHistory` permission
+    # has a narrower scope.
+    #
     # @option params [String] :alarm_name
     #   The name of the alarm.
     #
@@ -590,6 +674,12 @@ module Aws::CloudWatch
     # Retrieves the specified alarms. You can filter the results by
     # specifying a prefix for the alarm name, the alarm state, or a prefix
     # for any action.
+    #
+    # To use this operation and return information about composite alarms,
+    # you must be signed on with the `cloudwatch:DescribeAlarms` permission
+    # that is scoped to `*`. You can't return information about composite
+    # alarms if your `cloudwatch:DescribeAlarms` permission has a narrower
+    # scope.
     #
     # @option params [Array<String>] :alarm_names
     #   The names of the alarms to retrieve information about.
@@ -882,9 +972,12 @@ module Aws::CloudWatch
     end
 
     # Lists the anomaly detection models that you have created in your
-    # account. You can list all models in your account or filter the results
-    # to only the models that are related to a certain namespace, metric
-    # name, or metric dimension.
+    # account. For single metric anomaly detectors, you can list all of the
+    # models in your account or filter the results to only the models that
+    # are related to a certain namespace, metric name, or metric dimension.
+    # For metric math anomaly detectors, you can list them by adding
+    # `METRIC_MATH` to the `AnomalyDetectorTypes` array. This will return
+    # all metric math anomaly detectors in your account.
     #
     # @option params [String] :next_token
     #   Use the token returned by the previous operation to request the next
@@ -913,6 +1006,11 @@ module Aws::CloudWatch
     #   metrics that have these dimensions and have anomaly detection models
     #   associated, they're all returned.
     #
+    # @option params [Array<String>] :anomaly_detector_types
+    #   The anomaly detector types to request when using
+    #   `DescribeAnomalyDetectorsInput`. If empty, defaults to
+    #   `SINGLE_METRIC`.
+    #
     # @return [Types::DescribeAnomalyDetectorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAnomalyDetectorsOutput#anomaly_detectors #anomaly_detectors} => Array&lt;Types::AnomalyDetector&gt;
@@ -931,6 +1029,7 @@ module Aws::CloudWatch
     #         value: "DimensionValue", # required
     #       },
     #     ],
+    #     anomaly_detector_types: ["SINGLE_METRIC"], # accepts SINGLE_METRIC, METRIC_MATH
     #   })
     #
     # @example Response structure
@@ -947,6 +1046,27 @@ module Aws::CloudWatch
     #   resp.anomaly_detectors[0].configuration.excluded_time_ranges[0].end_time #=> Time
     #   resp.anomaly_detectors[0].configuration.metric_timezone #=> String
     #   resp.anomaly_detectors[0].state_value #=> String, one of "PENDING_TRAINING", "TRAINED_INSUFFICIENT_DATA", "TRAINED"
+    #   resp.anomaly_detectors[0].single_metric_anomaly_detector.namespace #=> String
+    #   resp.anomaly_detectors[0].single_metric_anomaly_detector.metric_name #=> String
+    #   resp.anomaly_detectors[0].single_metric_anomaly_detector.dimensions #=> Array
+    #   resp.anomaly_detectors[0].single_metric_anomaly_detector.dimensions[0].name #=> String
+    #   resp.anomaly_detectors[0].single_metric_anomaly_detector.dimensions[0].value #=> String
+    #   resp.anomaly_detectors[0].single_metric_anomaly_detector.stat #=> String
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries #=> Array
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].id #=> String
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].metric_stat.metric.namespace #=> String
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].metric_stat.metric.metric_name #=> String
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].metric_stat.metric.dimensions #=> Array
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].metric_stat.period #=> Integer
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].metric_stat.stat #=> String
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].metric_stat.unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].expression #=> String
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].label #=> String
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].return_data #=> Boolean
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].period #=> Integer
+    #   resp.anomaly_detectors[0].metric_math_anomaly_detector.metric_data_queries[0].account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAnomalyDetectors AWS API Documentation
@@ -2096,16 +2216,16 @@ module Aws::CloudWatch
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html
     #
-    # @option params [required, String] :namespace
+    # @option params [String] :namespace
     #   The namespace of the metric to create the anomaly detection model for.
     #
-    # @option params [required, String] :metric_name
+    # @option params [String] :metric_name
     #   The name of the metric to create the anomaly detection model for.
     #
     # @option params [Array<Types::Dimension>] :dimensions
     #   The metric dimensions to create the anomaly detection model for.
     #
-    # @option params [required, String] :stat
+    # @option params [String] :stat
     #   The statistic to use for the metric and the anomaly detection model.
     #
     # @option params [Types::AnomalyDetectorConfiguration] :configuration
@@ -2116,20 +2236,60 @@ module Aws::CloudWatch
     #   The configuration can also include the time zone to use for the
     #   metric.
     #
+    # @option params [Types::SingleMetricAnomalyDetector] :single_metric_anomaly_detector
+    #   A single metric anomaly detector to be created.
+    #
+    #   When using `SingleMetricAnomalyDetector`, you cannot include the
+    #   following parameters in the same operation:
+    #
+    #   * `Dimensions`
+    #
+    #   * `MetricName`
+    #
+    #   * `Namespace`
+    #
+    #   * `Stat`
+    #
+    #   * the `MetricMatchAnomalyDetector` parameters of
+    #     `PutAnomalyDetectorInput`
+    #
+    #   Instead, specify the single metric anomaly detector attributes as part
+    #   of the property `SingleMetricAnomalyDetector`.
+    #
+    # @option params [Types::MetricMathAnomalyDetector] :metric_math_anomaly_detector
+    #   The metric math anomaly detector to be created.
+    #
+    #   When using `MetricMathAnomalyDetector`, you cannot include the
+    #   following parameters in the same operation:
+    #
+    #   * `Dimensions`
+    #
+    #   * `MetricName`
+    #
+    #   * `Namespace`
+    #
+    #   * `Stat`
+    #
+    #   * the `SingleMetricAnomalyDetector` parameters of
+    #     `PutAnomalyDetectorInput`
+    #
+    #   Instead, specify the metric math anomaly detector attributes as part
+    #   of the property `MetricMathAnomalyDetector`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_anomaly_detector({
-    #     namespace: "Namespace", # required
-    #     metric_name: "MetricName", # required
+    #     namespace: "Namespace",
+    #     metric_name: "MetricName",
     #     dimensions: [
     #       {
     #         name: "DimensionName", # required
     #         value: "DimensionValue", # required
     #       },
     #     ],
-    #     stat: "AnomalyDetectorMetricStat", # required
+    #     stat: "AnomalyDetectorMetricStat",
     #     configuration: {
     #       excluded_time_ranges: [
     #         {
@@ -2138,6 +2298,44 @@ module Aws::CloudWatch
     #         },
     #       ],
     #       metric_timezone: "AnomalyDetectorMetricTimezone",
+    #     },
+    #     single_metric_anomaly_detector: {
+    #       namespace: "Namespace",
+    #       metric_name: "MetricName",
+    #       dimensions: [
+    #         {
+    #           name: "DimensionName", # required
+    #           value: "DimensionValue", # required
+    #         },
+    #       ],
+    #       stat: "AnomalyDetectorMetricStat",
+    #     },
+    #     metric_math_anomaly_detector: {
+    #       metric_data_queries: [
+    #         {
+    #           id: "MetricId", # required
+    #           metric_stat: {
+    #             metric: { # required
+    #               namespace: "Namespace",
+    #               metric_name: "MetricName",
+    #               dimensions: [
+    #                 {
+    #                   name: "DimensionName", # required
+    #                   value: "DimensionValue", # required
+    #                 },
+    #               ],
+    #             },
+    #             period: 1, # required
+    #             stat: "Stat", # required
+    #             unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #           },
+    #           expression: "MetricExpression",
+    #           label: "MetricLabel",
+    #           return_data: false,
+    #           period: 1,
+    #           account_id: "AccountId",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -2195,6 +2393,11 @@ module Aws::CloudWatch
     # When you update an existing alarm, its state is left unchanged, but
     # the update completely overwrites the previous configuration of the
     # alarm.
+    #
+    # To use this operation, you must be signed on with the
+    # `cloudwatch:PutCompositeAlarm` permission that is scoped to `*`. You
+    # can't create a composite alarms if your
+    # `cloudwatch:PutCompositeAlarm` permission has a narrower scope.
     #
     # If you are an IAM user, you must have `iam:CreateServiceLinkedRole` to
     # create a composite alarm that has Systems Manager OpsItem actions.
@@ -2488,12 +2691,12 @@ module Aws::CloudWatch
     # * The `iam:CreateServiceLinkedRole` to create an alarm with Systems
     #   Manager OpsItem actions.
     #
-    # The first time you create an alarm in the Management Console, the CLI,
-    # or by using the PutMetricAlarm API, CloudWatch creates the necessary
-    # service-linked role for you. The service-linked roles are called
-    # `AWSServiceRoleForCloudWatchEvents` and
-    # `AWSServiceRoleForCloudWatchAlarms_ActionSSM`. For more information,
-    # see [Amazon Web Services service-linked role][1].
+    # The first time you create an alarm in the Amazon Web Services
+    # Management Console, the CLI, or by using the PutMetricAlarm API,
+    # CloudWatch creates the necessary service-linked role for you. The
+    # service-linked roles are called `AWSServiceRoleForCloudWatchEvents`
+    # and `AWSServiceRoleForCloudWatchAlarms_ActionSSM`. For more
+    # information, see [Amazon Web Services service-linked role][1].
     #
     # **Cross-account alarms**
     #
@@ -2995,7 +3198,7 @@ module Aws::CloudWatch
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Metric-Streams.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
     #
     # @option params [required, String] :name
     #   If you are creating a new metric stream, this is the name for the new
@@ -3336,7 +3539,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

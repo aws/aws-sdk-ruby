@@ -23,6 +23,30 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # Configuration of statistics that are allowed to be run on columns that
+    # contain detected entities. When undefined, no statistics will be
+    # computed on columns that contain detected entities.
+    #
+    # @note When making an API call, you may pass AllowedStatistics
+    #   data as a hash:
+    #
+    #       {
+    #         statistics: ["Statistic"], # required
+    #       }
+    #
+    # @!attribute [rw] statistics
+    #   One or more column statistics to allow for columns that contain
+    #   detected entities.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/AllowedStatistics AWS API Documentation
+    #
+    class AllowedStatistics < Struct.new(
+      :statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchDeleteRecipeVersionRequest
     #   data as a hash:
     #
@@ -240,11 +264,15 @@ module Aws::GlueDataBrew
     #           },
     #           database_input_definition: {
     #             glue_connection_name: "GlueConnectionName", # required
-    #             database_table_name: "DatabaseTableName", # required
+    #             database_table_name: "DatabaseTableName",
     #             temp_directory: {
     #               bucket: "Bucket", # required
     #               key: "Key",
     #             },
+    #             query_string: "QueryString",
+    #           },
+    #           metadata: {
+    #             source_arn: "Arn",
     #           },
     #         },
     #         path_options: {
@@ -391,7 +419,21 @@ module Aws::GlueDataBrew
     #               },
     #             },
     #           ],
+    #           entity_detector_configuration: {
+    #             entity_types: ["EntityType"], # required
+    #             allowed_statistics: [
+    #               {
+    #                 statistics: ["Statistic"], # required
+    #               },
+    #             ],
+    #           },
     #         },
+    #         validation_configurations: [
+    #           {
+    #             ruleset_arn: "Arn", # required
+    #             validation_mode: "CHECK_ALL", # accepts CHECK_ALL
+    #           },
+    #         ],
     #         role_arn: "Arn", # required
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -453,6 +495,11 @@ module Aws::GlueDataBrew
     #   settings.
     #   @return [Types::ProfileConfiguration]
     #
+    # @!attribute [rw] validation_configurations
+    #   List of validation configurations that are applied to the profile
+    #   job.
+    #   @return [Array<Types::ValidationConfiguration>]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
     #   (IAM) role to be assumed when DataBrew runs the job.
@@ -487,6 +534,7 @@ module Aws::GlueDataBrew
       :max_retries,
       :output_location,
       :configuration,
+      :validation_configurations,
       :role_arn,
       :tags,
       :timeout,
@@ -829,6 +877,86 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateRulesetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "RulesetName", # required
+    #         description: "RulesetDescription",
+    #         target_arn: "Arn", # required
+    #         rules: [ # required
+    #           {
+    #             name: "RuleName", # required
+    #             disabled: false,
+    #             check_expression: "Expression", # required
+    #             substitution_map: {
+    #               "ValueReference" => "ConditionValue",
+    #             },
+    #             threshold: {
+    #               value: 1.0, # required
+    #               type: "GREATER_THAN_OR_EQUAL", # accepts GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN
+    #               unit: "COUNT", # accepts COUNT, PERCENTAGE
+    #             },
+    #             column_selectors: [
+    #               {
+    #                 regex: "ColumnName",
+    #                 name: "ColumnName",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the ruleset to be created. Valid characters are
+    #   alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) of a resource (dataset) that the
+    #   ruleset is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   A list of rules that are defined with the ruleset. A rule includes
+    #   one or more checks to be validated on a DataBrew dataset.
+    #   @return [Array<Types::Rule>]
+    #
+    # @!attribute [rw] tags
+    #   Metadata tags to apply to the ruleset.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/CreateRulesetRequest AWS API Documentation
+    #
+    class CreateRulesetRequest < Struct.new(
+      :name,
+      :description,
+      :target_arn,
+      :rules,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The unique name of the created ruleset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/CreateRulesetResponse AWS API Documentation
+    #
+    class CreateRulesetResponse < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateScheduleRequest
     #   data as a hash:
     #
@@ -1063,11 +1191,12 @@ module Aws::GlueDataBrew
     #
     #       {
     #         glue_connection_name: "GlueConnectionName", # required
-    #         database_table_name: "DatabaseTableName", # required
+    #         database_table_name: "DatabaseTableName",
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
     #         },
+    #         query_string: "QueryString",
     #       }
     #
     # @!attribute [rw] glue_connection_name
@@ -1084,12 +1213,18 @@ module Aws::GlueDataBrew
     #   DataBrew can read input data, or write output from a job.
     #   @return [Types::S3Location]
     #
+    # @!attribute [rw] query_string
+    #   Custom SQL to run against the provided Glue connection. This SQL
+    #   will be used as the input for DataBrew projects and jobs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DatabaseInputDefinition AWS API Documentation
     #
     class DatabaseInputDefinition < Struct.new(
       :glue_connection_name,
       :database_table_name,
-      :temp_directory)
+      :temp_directory,
+      :query_string)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1489,6 +1624,37 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteRulesetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "RulesetName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the ruleset to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DeleteRulesetRequest AWS API Documentation
+    #
+    class DeleteRulesetRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the deleted ruleset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DeleteRulesetResponse AWS API Documentation
+    #
+    class DeleteRulesetResponse < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteScheduleRequest
     #   data as a hash:
     #
@@ -1718,6 +1884,11 @@ module Aws::GlueDataBrew
     #   settings.
     #   @return [Types::ProfileConfiguration]
     #
+    # @!attribute [rw] validation_configurations
+    #   List of validation configurations that are applied to the profile
+    #   job.
+    #   @return [Array<Types::ValidationConfiguration>]
+    #
     # @!attribute [rw] recipe_reference
     #   Represents the name and version of a DataBrew recipe.
     #   @return [Types::RecipeReference]
@@ -1765,6 +1936,7 @@ module Aws::GlueDataBrew
       :database_outputs,
       :project_name,
       :profile_configuration,
+      :validation_configurations,
       :recipe_reference,
       :resource_arn,
       :role_arn,
@@ -1833,6 +2005,11 @@ module Aws::GlueDataBrew
     #   settings.
     #   @return [Types::ProfileConfiguration]
     #
+    # @!attribute [rw] validation_configurations
+    #   List of validation configurations that are applied to the profile
+    #   job.
+    #   @return [Array<Types::ValidationConfiguration>]
+    #
     # @!attribute [rw] run_id
     #   The unique identifier of the job run.
     #   @return [String]
@@ -1894,6 +2071,7 @@ module Aws::GlueDataBrew
       :execution_time,
       :job_name,
       :profile_configuration,
+      :validation_configurations,
       :run_id,
       :state,
       :log_subscription,
@@ -2116,6 +2294,85 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeRulesetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "RulesetName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the ruleset to be described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DescribeRulesetRequest AWS API Documentation
+    #
+    class DescribeRulesetRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) of a resource (dataset) that the
+    #   ruleset is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   A list of rules that are defined with the ruleset. A rule includes
+    #   one or more checks to be validated on a DataBrew dataset.
+    #   @return [Array<Types::Rule>]
+    #
+    # @!attribute [rw] create_date
+    #   The date and time that the ruleset was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The Amazon Resource Name (ARN) of the user who created the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last modified the
+    #   ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The modification date and time of the ruleset.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Metadata tags that have been applied to the ruleset.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DescribeRulesetResponse AWS API Documentation
+    #
+    class DescribeRulesetResponse < Struct.new(
+      :name,
+      :description,
+      :target_arn,
+      :rules,
+      :create_date,
+      :created_by,
+      :last_modified_by,
+      :last_modified_date,
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeScheduleRequest
     #   data as a hash:
     #
@@ -2191,6 +2448,81 @@ module Aws::GlueDataBrew
       :cron_expression,
       :tags,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration of entity detection for a profile job. When undefined,
+    # entity detection is disabled.
+    #
+    # @note When making an API call, you may pass EntityDetectorConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         entity_types: ["EntityType"], # required
+    #         allowed_statistics: [
+    #           {
+    #             statistics: ["Statistic"], # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] entity_types
+    #   Entity types to detect. Can be any of the following:
+    #
+    #   * USA\_SSN
+    #
+    #   * EMAIL
+    #
+    #   * USA\_ITIN
+    #
+    #   * USA\_PASSPORT\_NUMBER
+    #
+    #   * PHONE\_NUMBER
+    #
+    #   * USA\_DRIVING\_LICENSE
+    #
+    #   * BANK\_ACCOUNT
+    #
+    #   * CREDIT\_CARD
+    #
+    #   * IP\_ADDRESS
+    #
+    #   * MAC\_ADDRESS
+    #
+    #   * USA\_DEA\_NUMBER
+    #
+    #   * USA\_HCPCS\_CODE
+    #
+    #   * USA\_NATIONAL\_PROVIDER\_IDENTIFIER
+    #
+    #   * USA\_NATIONAL\_DRUG\_CODE
+    #
+    #   * USA\_HEALTH\_INSURANCE\_CLAIM\_NUMBER
+    #
+    #   * USA\_MEDICARE\_BENEFICIARY\_IDENTIFIER
+    #
+    #   * USA\_CPT\_CODE
+    #
+    #   * PERSON\_NAME
+    #
+    #   * DATE
+    #
+    #   The Entity type group USA\_ALL is also supported, and includes all
+    #   of the above entity types except PERSON\_NAME and DATE.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_statistics
+    #   Configuration of statistics that are allowed to be run on columns
+    #   that contain detected entities. When undefined, no statistics will
+    #   be computed on columns that contain detected entities.
+    #   @return [Array<Types::AllowedStatistics>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/EntityDetectorConfiguration AWS API Documentation
+    #
+    class EntityDetectorConfiguration < Struct.new(
+      :entity_types,
+      :allowed_statistics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2277,7 +2609,7 @@ module Aws::GlueDataBrew
     #
     #
     #
-    # [1]: https://docs-aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets
+    # [1]: https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets
     #
     # @note When making an API call, you may pass FilterExpression
     #   data as a hash:
@@ -2377,11 +2709,15 @@ module Aws::GlueDataBrew
     #         },
     #         database_input_definition: {
     #           glue_connection_name: "GlueConnectionName", # required
-    #           database_table_name: "DatabaseTableName", # required
+    #           database_table_name: "DatabaseTableName",
     #           temp_directory: {
     #             bucket: "Bucket", # required
     #             key: "Key",
     #           },
+    #           query_string: "QueryString",
+    #         },
+    #         metadata: {
+    #           source_arn: "Arn",
     #         },
     #       }
     #
@@ -2397,12 +2733,18 @@ module Aws::GlueDataBrew
     #   Connection information for dataset input files stored in a database.
     #   @return [Types::DatabaseInputDefinition]
     #
+    # @!attribute [rw] metadata
+    #   Contains additional resource information needed for specific
+    #   datasets.
+    #   @return [Types::Metadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/Input AWS API Documentation
     #
     class Input < Struct.new(
       :s3_input_definition,
       :data_catalog_input_definition,
-      :database_input_definition)
+      :database_input_definition,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2540,6 +2882,11 @@ module Aws::GlueDataBrew
     #   parameter.
     #   @return [Types::JobSample]
     #
+    # @!attribute [rw] validation_configurations
+    #   List of validation configurations that are applied to the profile
+    #   job.
+    #   @return [Array<Types::ValidationConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -2565,7 +2912,8 @@ module Aws::GlueDataBrew
       :role_arn,
       :timeout,
       :tags,
-      :job_sample)
+      :job_sample,
+      :validation_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2650,6 +2998,11 @@ module Aws::GlueDataBrew
     #   parameter.
     #   @return [Types::JobSample]
     #
+    # @!attribute [rw] validation_configurations
+    #   List of validation configurations that are applied to the profile
+    #   job run.
+    #   @return [Array<Types::ValidationConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -2669,7 +3022,8 @@ module Aws::GlueDataBrew
       :recipe_reference,
       :started_by,
       :started_on,
-      :job_sample)
+      :job_sample,
+      :validation_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3041,6 +3395,60 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListRulesetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target_arn: "Arn",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) of a resource (dataset). Using this
+    #   parameter indicates to return only those rulesets that are
+    #   associated with the specified resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by DataBrew that specifies where to continue
+    #   pagination if a previous request was truncated. To get the next set
+    #   of pages, pass in the NextToken value from the response object of
+    #   the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListRulesetsRequest AWS API Documentation
+    #
+    class ListRulesetsRequest < Struct.new(
+      :target_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rulesets
+    #   A list of RulesetItem. RulesetItem contains meta data of a ruleset.
+    #   @return [Array<Types::RulesetItem>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that you can use in a subsequent call to retrieve the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListRulesetsResponse AWS API Documentation
+    #
+    class ListRulesetsResponse < Struct.new(
+      :rulesets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSchedulesRequest
     #   data as a hash:
     #
@@ -3119,6 +3527,28 @@ module Aws::GlueDataBrew
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains additional resource information needed for specific datasets.
+    #
+    # @note When making an API call, you may pass Metadata
+    #   data as a hash:
+    #
+    #       {
+    #         source_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) associated with the dataset.
+    #   Currently, DataBrew only supports ARNs from Amazon AppFlow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/Metadata AWS API Documentation
+    #
+    class Metadata < Struct.new(
+      :source_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3321,6 +3751,14 @@ module Aws::GlueDataBrew
     #             },
     #           },
     #         ],
+    #         entity_detector_configuration: {
+    #           entity_types: ["EntityType"], # required
+    #           allowed_statistics: [
+    #             {
+    #               statistics: ["Statistic"], # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] dataset_statistics_configuration
@@ -3344,12 +3782,18 @@ module Aws::GlueDataBrew
     #   profile all supported columns and run all supported evaluations.
     #   @return [Array<Types::ColumnStatisticsConfiguration>]
     #
+    # @!attribute [rw] entity_detector_configuration
+    #   Configuration of entity detection for a profile job. When undefined,
+    #   entity detection is disabled.
+    #   @return [Types::EntityDetectorConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ProfileConfiguration AWS API Documentation
     #
     class ProfileConfiguration < Struct.new(
       :dataset_statistics_configuration,
       :profile_columns,
-      :column_statistics_configurations)
+      :column_statistics_configurations,
+      :entity_detector_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3708,6 +4152,158 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # Represents a single data quality requirement that should be validated
+    # in the scope of this dataset.
+    #
+    # @note When making an API call, you may pass Rule
+    #   data as a hash:
+    #
+    #       {
+    #         name: "RuleName", # required
+    #         disabled: false,
+    #         check_expression: "Expression", # required
+    #         substitution_map: {
+    #           "ValueReference" => "ConditionValue",
+    #         },
+    #         threshold: {
+    #           value: 1.0, # required
+    #           type: "GREATER_THAN_OR_EQUAL", # accepts GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN
+    #           unit: "COUNT", # accepts COUNT, PERCENTAGE
+    #         },
+    #         column_selectors: [
+    #           {
+    #             regex: "ColumnName",
+    #             name: "ColumnName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] disabled
+    #   A value that specifies whether the rule is disabled. Once a rule is
+    #   disabled, a profile job will not validate it during a job run.
+    #   Default value is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] check_expression
+    #   The expression which includes column references, condition names
+    #   followed by variable references, possibly grouped and combined with
+    #   other conditions. For example, `(:col1 starts_with :prefix1 or :col1
+    #   starts_with :prefix2) and (:col1 ends_with :suffix1 or :col1
+    #   ends_with :suffix2)`. Column and value references are substitution
+    #   variables that should start with the ':' symbol. Depending on the
+    #   context, substitution variables' values can be either an actual
+    #   value or a column name. These values are defined in the
+    #   SubstitutionMap. If a CheckExpression starts with a column
+    #   reference, then ColumnSelectors in the rule should be null. If
+    #   ColumnSelectors has been defined, then there should be no columnn
+    #   reference in the left side of a condition, for example, `is_between
+    #   :val1 and :val2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] substitution_map
+    #   The map of substitution variable names to their values used in a
+    #   check expression. Variable names should start with a ':' (colon).
+    #   Variable values can either be actual values or column names. To
+    #   differentiate between the two, column names should be enclosed in
+    #   backticks, for example, `` ":col1": "`Column A`". ``
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] threshold
+    #   The threshold used with a non-aggregate check expression.
+    #   Non-aggregate check expressions will be applied to each row in a
+    #   specific column, and the threshold will be used to determine whether
+    #   the validation succeeds.
+    #   @return [Types::Threshold]
+    #
+    # @!attribute [rw] column_selectors
+    #   List of column selectors. Selectors can be used to select columns
+    #   using a name or regular expression from the dataset. Rule will be
+    #   applied to selected columns.
+    #   @return [Array<Types::ColumnSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/Rule AWS API Documentation
+    #
+    class Rule < Struct.new(
+      :name,
+      :disabled,
+      :check_expression,
+      :substitution_map,
+      :threshold,
+      :column_selectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about the ruleset.
+    #
+    # @!attribute [rw] account_id
+    #   The ID of the Amazon Web Services account that owns the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   The Amazon Resource Name (ARN) of the user who created the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_date
+    #   The date and time that the ruleset was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_by
+    #   The Amazon Resource Name (ARN) of the user who last modified the
+    #   ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The modification date and time of the ruleset.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_count
+    #   The number of rules that are defined in the ruleset.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   Metadata tags that have been applied to the ruleset.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) of a resource (dataset) that the
+    #   ruleset is associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/RulesetItem AWS API Documentation
+    #
+    class RulesetItem < Struct.new(
+      :account_id,
+      :created_by,
+      :create_date,
+      :description,
+      :last_modified_by,
+      :last_modified_date,
+      :name,
+      :resource_arn,
+      :rule_count,
+      :tags,
+      :target_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents an Amazon S3 location (bucket name and object key) where
     # DataBrew can read input data, or write output from a job.
     #
@@ -3882,6 +4478,9 @@ module Aws::GlueDataBrew
     #           start_column_index: 1, # required
     #           column_range: 1,
     #           hidden_columns: ["ColumnName"],
+    #           start_row_index: 1,
+    #           row_range: 1,
+    #           analytics: "ENABLE", # accepts ENABLE, DISABLE
     #         },
     #       }
     #
@@ -3923,7 +4522,7 @@ module Aws::GlueDataBrew
       :step_index,
       :client_session_id,
       :view_frame)
-      SENSITIVE = []
+      SENSITIVE = [:client_session_id]
       include Aws::Structure
     end
 
@@ -4032,7 +4631,7 @@ module Aws::GlueDataBrew
     class StartProjectSessionResponse < Struct.new(
       :name,
       :client_session_id)
-      SENSITIVE = []
+      SENSITIVE = [:client_session_id]
       include Aws::Structure
     end
 
@@ -4172,6 +4771,44 @@ module Aws::GlueDataBrew
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The threshold used with a non-aggregate check expression. The
+    # non-aggregate check expression will be applied to each row in a
+    # specific column. Then the threshold will be used to determine whether
+    # the validation succeeds.
+    #
+    # @note When making an API call, you may pass Threshold
+    #   data as a hash:
+    #
+    #       {
+    #         value: 1.0, # required
+    #         type: "GREATER_THAN_OR_EQUAL", # accepts GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN
+    #         unit: "COUNT", # accepts COUNT, PERCENTAGE
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value of a threshold.
+    #   @return [Float]
+    #
+    # @!attribute [rw] type
+    #   The type of a threshold. Used for comparison of an actual count of
+    #   rows that satisfy the rule to the threshold value.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   Unit of threshold value. Can be either a COUNT or PERCENTAGE of the
+    #   full sample size used for validation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/Threshold AWS API Documentation
+    #
+    class Threshold < Struct.new(
+      :value,
+      :type,
+      :unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -4238,11 +4875,15 @@ module Aws::GlueDataBrew
     #           },
     #           database_input_definition: {
     #             glue_connection_name: "GlueConnectionName", # required
-    #             database_table_name: "DatabaseTableName", # required
+    #             database_table_name: "DatabaseTableName",
     #             temp_directory: {
     #               bucket: "Bucket", # required
     #               key: "Key",
     #             },
+    #             query_string: "QueryString",
+    #           },
+    #           metadata: {
+    #             source_arn: "Arn",
     #           },
     #         },
     #         path_options: {
@@ -4369,6 +5010,14 @@ module Aws::GlueDataBrew
     #               },
     #             },
     #           ],
+    #           entity_detector_configuration: {
+    #             entity_types: ["EntityType"], # required
+    #             allowed_statistics: [
+    #               {
+    #                 statistics: ["Statistic"], # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         encryption_key_arn: "EncryptionKeyArn",
     #         encryption_mode: "SSE-KMS", # accepts SSE-KMS, SSE-S3
@@ -4380,6 +5029,12 @@ module Aws::GlueDataBrew
     #           bucket: "Bucket", # required
     #           key: "Key",
     #         },
+    #         validation_configurations: [
+    #           {
+    #             ruleset_arn: "Arn", # required
+    #             validation_mode: "CHECK_ALL", # accepts CHECK_ALL
+    #           },
+    #         ],
     #         role_arn: "Arn", # required
     #         timeout: 1,
     #         job_sample: {
@@ -4432,6 +5087,11 @@ module Aws::GlueDataBrew
     #   DataBrew can read input data, or write output from a job.
     #   @return [Types::S3Location]
     #
+    # @!attribute [rw] validation_configurations
+    #   List of validation configurations that are applied to the profile
+    #   job.
+    #   @return [Array<Types::ValidationConfiguration>]
+    #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
     #   (IAM) role to be assumed when DataBrew runs the job.
@@ -4461,6 +5121,7 @@ module Aws::GlueDataBrew
       :max_capacity,
       :max_retries,
       :output_location,
+      :validation_configurations,
       :role_arn,
       :timeout,
       :job_sample)
@@ -4746,6 +5407,70 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateRulesetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "RulesetName", # required
+    #         description: "RulesetDescription",
+    #         rules: [ # required
+    #           {
+    #             name: "RuleName", # required
+    #             disabled: false,
+    #             check_expression: "Expression", # required
+    #             substitution_map: {
+    #               "ValueReference" => "ConditionValue",
+    #             },
+    #             threshold: {
+    #               value: 1.0, # required
+    #               type: "GREATER_THAN_OR_EQUAL", # accepts GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN
+    #               unit: "COUNT", # accepts COUNT, PERCENTAGE
+    #             },
+    #             column_selectors: [
+    #               {
+    #                 regex: "ColumnName",
+    #                 name: "ColumnName",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the ruleset to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the ruleset.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   A list of rules that are defined with the ruleset. A rule includes
+    #   one or more checks to be validated on a DataBrew dataset.
+    #   @return [Array<Types::Rule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/UpdateRulesetRequest AWS API Documentation
+    #
+    class UpdateRulesetRequest < Struct.new(
+      :name,
+      :description,
+      :rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the updated ruleset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/UpdateRulesetResponse AWS API Documentation
+    #
+    class UpdateRulesetResponse < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateScheduleRequest
     #   data as a hash:
     #
@@ -4795,6 +5520,40 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
+    # Configuration for data quality validation. Used to select the Rulesets
+    # and Validation Mode to be used in the profile job. When
+    # ValidationConfiguration is null, the profile job will run without data
+    # quality validation.
+    #
+    # @note When making an API call, you may pass ValidationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         ruleset_arn: "Arn", # required
+    #         validation_mode: "CHECK_ALL", # accepts CHECK_ALL
+    #       }
+    #
+    # @!attribute [rw] ruleset_arn
+    #   The Amazon Resource Name (ARN) for the ruleset to be validated in
+    #   the profile job. The TargetArn of the selected ruleset should be the
+    #   same as the Amazon Resource Name (ARN) of the dataset that is
+    #   associated with the profile job.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_mode
+    #   Mode of data quality validation. Default mode is “CHECK\_ALL” which
+    #   verifies all rules defined in the selected ruleset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ValidationConfiguration AWS API Documentation
+    #
+    class ValidationConfiguration < Struct.new(
+      :ruleset_arn,
+      :validation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input parameters for this request failed validation.
     #
     # @!attribute [rw] message
@@ -4817,6 +5576,9 @@ module Aws::GlueDataBrew
     #         start_column_index: 1, # required
     #         column_range: 1,
     #         hidden_columns: ["ColumnName"],
+    #         start_row_index: 1,
+    #         row_range: 1,
+    #         analytics: "ENABLE", # accepts ENABLE, DISABLE
     #       }
     #
     # @!attribute [rw] start_column_index
@@ -4834,12 +5596,30 @@ module Aws::GlueDataBrew
     #   A list of columns to hide in the view frame.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] start_row_index
+    #   The starting index for the range of rows to return in the view
+    #   frame.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] row_range
+    #   The number of rows to include in the view frame, beginning with the
+    #   `StartRowIndex` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] analytics
+    #   Controls if analytics computation is enabled or disabled. Enabled by
+    #   default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ViewFrame AWS API Documentation
     #
     class ViewFrame < Struct.new(
       :start_column_index,
       :column_range,
-      :hidden_columns)
+      :hidden_columns,
+      :start_row_index,
+      :row_range,
+      :analytics)
       SENSITIVE = []
       include Aws::Structure
     end

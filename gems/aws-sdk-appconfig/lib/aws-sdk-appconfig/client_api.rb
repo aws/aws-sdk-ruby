@@ -17,13 +17,16 @@ module Aws::AppConfig
     ApplicationList = Shapes::ListShape.new(name: 'ApplicationList')
     Applications = Shapes::StructureShape.new(name: 'Applications')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    BadRequestDetails = Shapes::UnionShape.new(name: 'BadRequestDetails')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BadRequestReason = Shapes::StringShape.new(name: 'BadRequestReason')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     BytesMeasure = Shapes::StringShape.new(name: 'BytesMeasure')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationProfile = Shapes::StructureShape.new(name: 'ConfigurationProfile')
     ConfigurationProfileSummary = Shapes::StructureShape.new(name: 'ConfigurationProfileSummary')
     ConfigurationProfileSummaryList = Shapes::ListShape.new(name: 'ConfigurationProfileSummaryList')
+    ConfigurationProfileType = Shapes::StringShape.new(name: 'ConfigurationProfileType')
     ConfigurationProfiles = Shapes::StructureShape.new(name: 'ConfigurationProfiles')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
@@ -70,6 +73,8 @@ module Aws::AppConfig
     Id = Shapes::StringShape.new(name: 'Id')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InvalidConfigurationDetail = Shapes::StructureShape.new(name: 'InvalidConfigurationDetail')
+    InvalidConfigurationDetailList = Shapes::ListShape.new(name: 'InvalidConfigurationDetailList')
     Iso8601DateTime = Shapes::TimestampShape.new(name: 'Iso8601DateTime', timestampFormat: "iso8601")
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
     ListConfigurationProfilesRequest = Shapes::StructureShape.new(name: 'ListConfigurationProfilesRequest')
@@ -95,6 +100,7 @@ module Aws::AppConfig
     StopDeploymentRequest = Shapes::StructureShape.new(name: 'StopDeploymentRequest')
     String = Shapes::StringShape.new(name: 'String')
     StringWithLengthBetween0And32768 = Shapes::StringShape.new(name: 'StringWithLengthBetween0And32768')
+    StringWithLengthBetween1And2048 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And2048')
     StringWithLengthBetween1And255 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And255')
     StringWithLengthBetween1And64 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And64')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -127,7 +133,15 @@ module Aws::AppConfig
     Applications.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     Applications.struct_class = Types::Applications
 
+    BadRequestDetails.add_member(:invalid_configuration, Shapes::ShapeRef.new(shape: InvalidConfigurationDetailList, location_name: "InvalidConfiguration"))
+    BadRequestDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    BadRequestDetails.add_member_subclass(:invalid_configuration, Types::BadRequestDetails::InvalidConfiguration)
+    BadRequestDetails.add_member_subclass(:unknown, Types::BadRequestDetails::Unknown)
+    BadRequestDetails.struct_class = Types::BadRequestDetails
+
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    BadRequestException.add_member(:reason, Shapes::ShapeRef.new(shape: BadRequestReason, location_name: "Reason"))
+    BadRequestException.add_member(:details, Shapes::ShapeRef.new(shape: BadRequestDetails, location_name: "Details"))
     BadRequestException.struct_class = Types::BadRequestException
 
     Configuration.add_member(:content, Shapes::ShapeRef.new(shape: Blob, location_name: "Content"))
@@ -144,6 +158,7 @@ module Aws::AppConfig
     ConfigurationProfile.add_member(:location_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "LocationUri"))
     ConfigurationProfile.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RetrievalRoleArn"))
     ConfigurationProfile.add_member(:validators, Shapes::ShapeRef.new(shape: ValidatorList, location_name: "Validators"))
+    ConfigurationProfile.add_member(:type, Shapes::ShapeRef.new(shape: ConfigurationProfileType, location_name: "Type"))
     ConfigurationProfile.struct_class = Types::ConfigurationProfile
 
     ConfigurationProfileSummary.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, location_name: "ApplicationId"))
@@ -151,6 +166,7 @@ module Aws::AppConfig
     ConfigurationProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     ConfigurationProfileSummary.add_member(:location_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "LocationUri"))
     ConfigurationProfileSummary.add_member(:validator_types, Shapes::ShapeRef.new(shape: ValidatorTypeList, location_name: "ValidatorTypes"))
+    ConfigurationProfileSummary.add_member(:type, Shapes::ShapeRef.new(shape: ConfigurationProfileType, location_name: "Type"))
     ConfigurationProfileSummary.struct_class = Types::ConfigurationProfileSummary
 
     ConfigurationProfileSummaryList.member = Shapes::ShapeRef.new(shape: ConfigurationProfileSummary)
@@ -174,6 +190,7 @@ module Aws::AppConfig
     CreateConfigurationProfileRequest.add_member(:retrieval_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RetrievalRoleArn"))
     CreateConfigurationProfileRequest.add_member(:validators, Shapes::ShapeRef.new(shape: ValidatorList, location_name: "Validators"))
     CreateConfigurationProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateConfigurationProfileRequest.add_member(:type, Shapes::ShapeRef.new(shape: ConfigurationProfileType, location_name: "Type"))
     CreateConfigurationProfileRequest.struct_class = Types::CreateConfigurationProfileRequest
 
     CreateDeploymentStrategyRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
@@ -356,6 +373,14 @@ module Aws::AppConfig
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    InvalidConfigurationDetail.add_member(:constraint, Shapes::ShapeRef.new(shape: String, location_name: "Constraint"))
+    InvalidConfigurationDetail.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "Location"))
+    InvalidConfigurationDetail.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "Reason"))
+    InvalidConfigurationDetail.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    InvalidConfigurationDetail.struct_class = Types::InvalidConfigurationDetail
+
+    InvalidConfigurationDetailList.member = Shapes::ShapeRef.new(shape: InvalidConfigurationDetail)
+
     ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
     ListApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
     ListApplicationsRequest.struct_class = Types::ListApplicationsRequest
@@ -363,6 +388,7 @@ module Aws::AppConfig
     ListConfigurationProfilesRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "ApplicationId"))
     ListConfigurationProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
     ListConfigurationProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
+    ListConfigurationProfilesRequest.add_member(:type, Shapes::ShapeRef.new(shape: ConfigurationProfileType, location: "querystring", location_name: "type"))
     ListConfigurationProfilesRequest.struct_class = Types::ListConfigurationProfilesRequest
 
     ListDeploymentStrategiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results", metadata: {"box"=>true}))
@@ -389,7 +415,7 @@ module Aws::AppConfig
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
-    Monitor.add_member(:alarm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AlarmArn"))
+    Monitor.add_member(:alarm_arn, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And2048, required: true, location_name: "AlarmArn"))
     Monitor.add_member(:alarm_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "AlarmRoleArn"))
     Monitor.struct_class = Types::Monitor
 

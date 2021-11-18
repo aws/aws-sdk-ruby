@@ -379,6 +379,7 @@ module Aws::LexModelsV2
     UtteranceAggregationDuration = Shapes::StructureShape.new(name: 'UtteranceAggregationDuration')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
+    VoiceEngine = Shapes::StringShape.new(name: 'VoiceEngine')
     VoiceId = Shapes::StringShape.new(name: 'VoiceId')
     VoiceSettings = Shapes::StructureShape.new(name: 'VoiceSettings')
     WaitAndContinueSpecification = Shapes::StructureShape.new(name: 'WaitAndContinueSpecification')
@@ -1758,6 +1759,7 @@ module Aws::LexModelsV2
     ValidationException.struct_class = Types::ValidationException
 
     VoiceSettings.add_member(:voice_id, Shapes::ShapeRef.new(shape: VoiceId, required: true, location_name: "voiceId"))
+    VoiceSettings.add_member(:engine, Shapes::ShapeRef.new(shape: VoiceEngine, location_name: "engine"))
     VoiceSettings.struct_class = Types::VoiceSettings
 
     WaitAndContinueSpecification.add_member(:waiting_response, Shapes::ShapeRef.new(shape: ResponseSpecification, required: true, location_name: "waitingResponse"))

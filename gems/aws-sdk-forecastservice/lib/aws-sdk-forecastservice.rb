@@ -28,7 +28,7 @@ require_relative 'aws-sdk-forecastservice/customizations'
 # structure.
 #
 #     forecast_service = Aws::ForecastService::Client.new
-#     resp = forecast_service.create_dataset(params)
+#     resp = forecast_service.create_auto_predictor(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-forecastservice/customizations'
 # @!group service
 module Aws::ForecastService
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.28.0'
 
 end

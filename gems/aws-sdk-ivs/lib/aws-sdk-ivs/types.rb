@@ -22,6 +22,36 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Object specifying a stream’s audio configuration.
+    #
+    # @!attribute [rw] channels
+    #   Number of audio channels.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] codec
+    #   Codec used for the audio encoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_rate
+    #   Number of audio samples recorded per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_bitrate
+    #   The expected ingest bitrate (bits per second). This is configured in
+    #   the encoder.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/AudioConfiguration AWS API Documentation
+    #
+    class AudioConfiguration < Struct.new(
+      :channels,
+      :codec,
+      :sample_rate,
+      :target_bitrate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Error related to a specific channel, specified by its ARN.
     #
     # @!attribute [rw] arn
@@ -699,6 +729,45 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetStreamSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChannelArn", # required
+    #         stream_id: "StreamId",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   ARN of the channel resource
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_id
+    #   Unique identifier for a live or previously live stream in the
+    #   specified channel. If no `streamId` is provided, this returns the
+    #   most recent stream session for the channel, if it exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStreamSessionRequest AWS API Documentation
+    #
+    class GetStreamSessionRequest < Struct.new(
+      :channel_arn,
+      :stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_session
+    #   List of stream details.
+    #   @return [Types::StreamSession]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStreamSessionResponse AWS API Documentation
+    #
+    class GetStreamSessionResponse < Struct.new(
+      :stream_session)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportPlaybackKeyPairRequest
     #   data as a hash:
     #
@@ -740,6 +809,26 @@ module Aws::IVS
     #
     class ImportPlaybackKeyPairResponse < Struct.new(
       :key_pair)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object specifying the ingest configuration set up by the broadcaster,
+    # usually in an encoder.
+    #
+    # @!attribute [rw] audio
+    #   Encoder settings for audio.
+    #   @return [Types::AudioConfiguration]
+    #
+    # @!attribute [rw] video
+    #   Encoder settings for video.
+    #   @return [Types::VideoConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/IngestConfiguration AWS API Documentation
+    #
+    class IngestConfiguration < Struct.new(
+      :audio,
+      :video)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -951,13 +1040,69 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListStreamSessionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ChannelArn", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   Channel ARN used to filter the list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of streams to return. Default: 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The first stream to retrieve. This is used for pagination; see the
+    #   `nextToken` response field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamSessionsRequest AWS API Documentation
+    #
+    class ListStreamSessionsRequest < Struct.new(
+      :channel_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are more streams than `maxResults`, use `nextToken` in the
+    #   request to get the next set.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_sessions
+    #   @return [Array<Types::StreamSessionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamSessionsResponse AWS API Documentation
+    #
+    class ListStreamSessionsResponse < Struct.new(
+      :next_token,
+      :stream_sessions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListStreamsRequest
     #   data as a hash:
     #
     #       {
+    #         filter_by: {
+    #           health: "HEALTHY", # accepts HEALTHY, STARVING, UNKNOWN
+    #         },
     #         max_results: 1,
     #         next_token: "PaginationToken",
     #       }
+    #
+    # @!attribute [rw] filter_by
+    #   Filters the stream list to match the specified criterion.
+    #   @return [Types::StreamFilters]
     #
     # @!attribute [rw] max_results
     #   Maximum number of streams to return. Default: 50.
@@ -971,6 +1116,7 @@ module Aws::IVS
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamsRequest AWS API Documentation
     #
     class ListStreamsRequest < Struct.new(
+      :filter_by,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -1283,6 +1429,11 @@ module Aws::IVS
     #   The stream’s state.
     #   @return [String]
     #
+    # @!attribute [rw] stream_id
+    #   Unique identifier for a live or previously live stream in the
+    #   specified channel.
+    #   @return [String]
+    #
     # @!attribute [rw] viewer_count
     #   A count of concurrent views of the stream. Typically, a new view
     #   appears in `viewerCount` within 15 seconds of when video playback
@@ -1299,7 +1450,58 @@ module Aws::IVS
       :playback_url,
       :start_time,
       :state,
+      :stream_id,
       :viewer_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object specifying a stream’s events. For a list of events, see [Using
+    # Amazon EventBridge with Amazon IVS][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html
+    #
+    # @!attribute [rw] event_time
+    #   UTC ISO-8601 formatted timestamp of when the event occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   Name that identifies the stream event within a `type`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Logical group for certain events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamEvent AWS API Documentation
+    #
+    class StreamEvent < Struct.new(
+      :event_time,
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object specifying the stream attribute on which to filter.
+    #
+    # @note When making an API call, you may pass StreamFilters
+    #   data as a hash:
+    #
+    #       {
+    #         health: "HEALTHY", # accepts HEALTHY, STARVING, UNKNOWN
+    #       }
+    #
+    # @!attribute [rw] health
+    #   The stream’s health.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamFilters AWS API Documentation
+    #
+    class StreamFilters < Struct.new(
+      :health)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1357,6 +1559,92 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # Object that captures the Amazon IVS configuration that the customer
+    # provisioned, the ingest configurations that the broadcaster used, and
+    # the most recent Amazon IVS stream events it encountered.
+    #
+    # @!attribute [rw] channel
+    #   The properties of the channel at the time of going live.
+    #   @return [Types::Channel]
+    #
+    # @!attribute [rw] end_time
+    #   UTC ISO-8601 formatted timestamp of when the channel went offline.
+    #   For live streams, this is `NULL`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ingest_configuration
+    #   The properties of the incoming RTMP stream for the stream.
+    #   @return [Types::IngestConfiguration]
+    #
+    # @!attribute [rw] recording_configuration
+    #   The properties of recording the live stream.
+    #   @return [Types::RecordingConfiguration]
+    #
+    # @!attribute [rw] start_time
+    #   UTC ISO-8601 formatted timestamp of when the channel went live.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stream_id
+    #   Unique identifier for a live or previously live stream in the
+    #   specified channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] truncated_events
+    #   List of Amazon IVS events that the stream encountered. The list is
+    #   sorted by most recent events and contains up to 500 events. For
+    #   Amazon IVS events, see [Using Amazon EventBridge with Amazon
+    #   IVS][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html
+    #   @return [Array<Types::StreamEvent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamSession AWS API Documentation
+    #
+    class StreamSession < Struct.new(
+      :channel,
+      :end_time,
+      :ingest_configuration,
+      :recording_configuration,
+      :start_time,
+      :stream_id,
+      :truncated_events)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a stream session.
+    #
+    # @!attribute [rw] end_time
+    #   UTC ISO-8601 formatted timestamp of when the channel went offline.
+    #   For live streams, this is `NULL`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] has_error_event
+    #   If `true`, this stream encountered a quota breach or failure.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] start_time
+    #   UTC ISO-8601 formatted timestamp of when the channel went live.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stream_id
+    #   Unique identifier for a live or previously live stream in the
+    #   specified channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StreamSessionSummary AWS API Documentation
+    #
+    class StreamSessionSummary < Struct.new(
+      :end_time,
+      :has_error_event,
+      :start_time,
+      :stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary information about a stream.
     #
     # @!attribute [rw] channel_arn
@@ -1376,6 +1664,11 @@ module Aws::IVS
     #   The stream’s state.
     #   @return [String]
     #
+    # @!attribute [rw] stream_id
+    #   Unique identifier for a live or previously live stream in the
+    #   specified channel.
+    #   @return [String]
+    #
     # @!attribute [rw] viewer_count
     #   A count of concurrent views of the stream. Typically, a new view
     #   appears in `viewerCount` within 15 seconds of when video playback
@@ -1391,6 +1684,7 @@ module Aws::IVS
       :health,
       :start_time,
       :state,
+      :stream_id,
       :viewer_count)
       SENSITIVE = []
       include Aws::Structure
@@ -1567,6 +1861,59 @@ module Aws::IVS
     #
     class ValidationException < Struct.new(
       :exception_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object specifying a stream’s video configuration.
+    #
+    # @!attribute [rw] avc_level
+    #   Indicates the degree of required decoder performance for a profile.
+    #   Normally this is set automatically by the encoder. For details, see
+    #   the H.264 specification.
+    #   @return [String]
+    #
+    # @!attribute [rw] avc_profile
+    #   Indicates to the decoder the requirements for decoding the stream.
+    #   For definitions of the valid values, see the H.264 specification.
+    #   @return [String]
+    #
+    # @!attribute [rw] codec
+    #   Codec used for the video encoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] encoder
+    #   Software or hardware used to encode the video.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_bitrate
+    #   The expected ingest bitrate (bits per second). This is configured in
+    #   the encoder.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_framerate
+    #   The expected ingest framerate. This is configured in the encoder.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] video_height
+    #   Video-resolution height in pixels.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] video_width
+    #   Video-resolution width in pixels.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/VideoConfiguration AWS API Documentation
+    #
+    class VideoConfiguration < Struct.new(
+      :avc_level,
+      :avc_profile,
+      :codec,
+      :encoder,
+      :target_bitrate,
+      :target_framerate,
+      :video_height,
+      :video_width)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1300,6 +1300,124 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
+    # A summary of the latest analytics data for a specific control domain.
+    #
+    # Control domain insights are grouped by control domain, and ranked by
+    # the highest total count of non-compliant evidence.
+    #
+    # @!attribute [rw] name
+    #   The name of the control domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the control domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] controls_count_by_noncompliant_evidence
+    #   The number of controls in the control domain that collected
+    #   non-compliant evidence on the `lastUpdated` date.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_controls_count
+    #   The total number of controls in the control domain.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] evidence_insights
+    #   A breakdown of the compliance check status for the evidence that’s
+    #   associated with the control domain.
+    #   @return [Types::EvidenceInsights]
+    #
+    # @!attribute [rw] last_updated
+    #   The time when the control domain insights were last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ControlDomainInsights AWS API Documentation
+    #
+    class ControlDomainInsights < Struct.new(
+      :name,
+      :id,
+      :controls_count_by_noncompliant_evidence,
+      :total_controls_count,
+      :evidence_insights,
+      :last_updated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the latest analytics data for a specific control in a
+    # specific active assessment.
+    #
+    # Control insights are grouped by control domain, and ranked by the
+    # highest total count of non-compliant evidence.
+    #
+    # @!attribute [rw] name
+    #   The name of the assessment control.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the assessment control.
+    #   @return [String]
+    #
+    # @!attribute [rw] evidence_insights
+    #   A breakdown of the compliance check status for the evidence that’s
+    #   associated with the assessment control.
+    #   @return [Types::EvidenceInsights]
+    #
+    # @!attribute [rw] control_set_name
+    #   The name of the control set that the assessment control belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated
+    #   The time when the assessment control insights were last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ControlInsightsMetadataByAssessmentItem AWS API Documentation
+    #
+    class ControlInsightsMetadataByAssessmentItem < Struct.new(
+      :name,
+      :id,
+      :evidence_insights,
+      :control_set_name,
+      :last_updated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the latest analytics data for a specific control.
+    #
+    # This data reflects the total counts for the specified control across
+    # all active assessments. Control insights are grouped by control
+    # domain, and ranked by the highest total count of non-compliant
+    # evidence.
+    #
+    # @!attribute [rw] name
+    #   The name of the control.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the control.
+    #   @return [String]
+    #
+    # @!attribute [rw] evidence_insights
+    #   A breakdown of the compliance check status for the evidence that’s
+    #   associated with the control.
+    #   @return [Types::EvidenceInsights]
+    #
+    # @!attribute [rw] last_updated
+    #   The time when the control insights were last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ControlInsightsMetadataItem AWS API Documentation
+    #
+    class ControlInsightsMetadataItem < Struct.new(
+      :name,
+      :id,
+      :evidence_insights,
+      :last_updated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The data source that determines where Audit Manager collects evidence
     # from for the control.
     #
@@ -2023,7 +2141,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] framework_id
-    #   The identifier for the framework.
+    #   The identifier for the custom framework.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DeleteAssessmentFrameworkRequest AWS API Documentation
@@ -2077,7 +2195,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] assessment_report_id
@@ -2128,7 +2246,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] control_id
-    #   The identifier for the control.
+    #   The unique identifier for the control.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DeleteControlRequest AWS API Documentation
@@ -2193,11 +2311,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
-    #   The identifier for the folder in which evidence is stored.
+    #   The unique identifier for the folder that the evidence is stored in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/DisassociateAssessmentReportEvidenceFolderRequest AWS API Documentation
@@ -2303,6 +2421,48 @@ module Aws::AuditManager
       :evidence_folder_id,
       :id,
       :assessment_report_selection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A breakdown of the latest compliance check status for the evidence in
+    # your Audit Manager assessments.
+    #
+    # @!attribute [rw] noncompliant_evidence_count
+    #   The number of compliance check evidence that Audit Manager
+    #   classified as non-compliant. This includes evidence that was
+    #   collected from Security Hub with a *Fail* ruling, or collected from
+    #   Config with a *Non-compliant* ruling.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_evidence_count
+    #   The number of compliance check evidence that Audit Manager
+    #   classified as compliant. This includes evidence that was collected
+    #   from Security Hub with a *Pass* ruling, or collected from Config
+    #   with a *Compliant* ruling.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] inconclusive_evidence_count
+    #   The number of evidence that a compliance check ruling isn't
+    #   available for. Evidence is inconclusive when the associated control
+    #   uses Security Hub or Config as a data source but you didn't enable
+    #   those services. This is also the case when a control uses a data
+    #   source that doesn’t support compliance checks (for example, manual
+    #   evidence, API calls, or CloudTrail).
+    #
+    #   <note markdown="1"> If evidence has a compliance check status of *not applicable* in the
+    #   console, it's classified as *inconclusive* in `EvidenceInsights`
+    #   data.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/EvidenceInsights AWS API Documentation
+    #
+    class EvidenceInsights < Struct.new(
+      :noncompliant_evidence_count,
+      :compliant_evidence_count,
+      :inconclusive_evidence_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2478,11 +2638,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_report_id
-    #   The identifier for the assessment report.
+    #   The unique identifier for the assessment report.
     #   @return [String]
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessmentReportUrlRequest AWS API Documentation
@@ -2515,7 +2675,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetAssessmentRequest AWS API Documentation
@@ -2559,15 +2719,15 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the control set.
+    #   The unique identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] control_id
-    #   The identifier for the control.
+    #   The unique identifier for the control.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2754,15 +2914,15 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the control set.
+    #   The unique identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
-    #   The identifier for the folder that the evidence is stored in.
+    #   The unique identifier for the folder that the evidence is stored in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetEvidenceFolderRequest AWS API Documentation
@@ -2859,7 +3019,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2910,19 +3070,19 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the control set.
+    #   The unique identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] evidence_folder_id
-    #   The identifier for the folder that the evidence is stored in.
+    #   The unique identifier for the folder that the evidence is stored in.
     #   @return [String]
     #
     # @!attribute [rw] evidence_id
-    #   The identifier for the evidence.
+    #   The unique identifier for the evidence.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetEvidenceRequest AWS API Documentation
@@ -2944,6 +3104,56 @@ module Aws::AuditManager
     #
     class GetEvidenceResponse < Struct.new(
       :evidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetInsightsByAssessmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         assessment_id: "UUID", # required
+    #       }
+    #
+    # @!attribute [rw] assessment_id
+    #   The unique identifier for the assessment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetInsightsByAssessmentRequest AWS API Documentation
+    #
+    class GetInsightsByAssessmentRequest < Struct.new(
+      :assessment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] insights
+    #   The assessment analytics data that the `GetInsightsByAssessment` API
+    #   returned.
+    #   @return [Types::InsightsByAssessment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetInsightsByAssessmentResponse AWS API Documentation
+    #
+    class GetInsightsByAssessmentResponse < Struct.new(
+      :insights)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetInsightsRequest AWS API Documentation
+    #
+    class GetInsightsRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] insights
+    #   The analytics data that the `GetInsights` API returned.
+    #   @return [Types::Insights]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetInsightsResponse AWS API Documentation
+    #
+    class GetInsightsResponse < Struct.new(
+      :insights)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3020,6 +3230,173 @@ module Aws::AuditManager
       include Aws::Structure
     end
 
+    # A summary of the latest analytics data for all your active
+    # assessments.
+    #
+    # This summary is a snapshot of the data that your active assessments
+    # collected on the `lastUpdated` date. It’s important to understand that
+    # the following totals are daily counts based on this date — they aren’t
+    # a total sum to date.
+    #
+    # The `Insights` data is eventually consistent. This means that, when
+    # you read data from `Insights`, the response might not instantly
+    # reflect the results of a recently completed write or update operation.
+    # If you repeat your read request after a few hours, the response should
+    # return the latest data.
+    #
+    # <note markdown="1"> If you delete an assessment or change its status to inactive,
+    # `InsightsByAssessment` includes data for that assessment as follows.
+    #
+    #  * **Inactive assessments** - If Audit Manager collected evidence for
+    #   your assessment before you changed it inactive, that evidence is
+    #   included in the `InsightsByAssessment` counts for that day.
+    #
+    # * **Deleted assessments** - If Audit Manager collected evidence for
+    #   your assessment before you deleted it, that evidence isn't included
+    #   in the `InsightsByAssessment` counts for that day.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] active_assessments_count
+    #   The number of active assessments in Audit Manager.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] noncompliant_evidence_count
+    #   The number of compliance check evidence that Audit Manager
+    #   classified as non-compliant on the `lastUpdated` date. This includes
+    #   evidence that was collected from Security Hub with a *Fail* ruling,
+    #   or collected from Config with a *Non-compliant* ruling.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_evidence_count
+    #   The number of compliance check evidence that Audit Manager
+    #   classified as compliant on the `lastUpdated` date. This includes
+    #   evidence that was collected from Security Hub with a *Pass* ruling,
+    #   or collected from Config with a *Compliant* ruling.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] inconclusive_evidence_count
+    #   The number of evidence without a compliance check ruling. Evidence
+    #   is inconclusive when the associated control uses Security Hub or
+    #   Config as a data source but you didn't enable those services. This
+    #   is also the case when a control uses a data source that doesn’t
+    #   support compliance checks (for example: manual evidence, API calls,
+    #   or CloudTrail).
+    #
+    #   <note markdown="1"> If evidence has a compliance check status of *not applicable*, it's
+    #   classed as *inconclusive* in `Insights` data.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] assessment_controls_count_by_noncompliant_evidence
+    #   The number of assessment controls that collected non-compliant
+    #   evidence on the `lastUpdated` date.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_assessment_controls_count
+    #   The total number of controls across all active assessments.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated
+    #   The time when the cross-assessment insights were last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/Insights AWS API Documentation
+    #
+    class Insights < Struct.new(
+      :active_assessments_count,
+      :noncompliant_evidence_count,
+      :compliant_evidence_count,
+      :inconclusive_evidence_count,
+      :assessment_controls_count_by_noncompliant_evidence,
+      :total_assessment_controls_count,
+      :last_updated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the latest analytics data for a specific active
+    # assessment.
+    #
+    # This summary is a snapshot of the data that was collected on the
+    # `lastUpdated` date. It’s important to understand that the totals in
+    # `InsightsByAssessment` are daily counts based on this date — they
+    # aren’t a total sum to date.
+    #
+    # The `InsightsByAssessment` data is eventually consistent. This means
+    # that when you read data from `InsightsByAssessment`, the response
+    # might not instantly reflect the results of a recently completed write
+    # or update operation. If you repeat your read request after a few
+    # hours, the response returns the latest data.
+    #
+    # <note markdown="1"> If you delete an assessment or change its status to inactive,
+    # `InsightsByAssessment` includes data for that assessment as follows.
+    #
+    #  * **Inactive assessments** - If Audit Manager collected evidence for
+    #   your assessment before you changed it inactive, that evidence is
+    #   included in the `InsightsByAssessment` counts for that day.
+    #
+    # * **Deleted assessments** - If Audit Manager collected evidence for
+    #   your assessment before you deleted it, that evidence isn't included
+    #   in the `InsightsByAssessment` counts for that day.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] noncompliant_evidence_count
+    #   The number of compliance check evidence that Audit Manager
+    #   classified as non-compliant. This includes evidence that was
+    #   collected from Security Hub with a *Fail* ruling, or collected from
+    #   Config with a *Non-compliant* ruling.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compliant_evidence_count
+    #   The number of compliance check evidence that Audit Manager
+    #   classified as compliant. This includes evidence that was collected
+    #   from Security Hub with a *Pass* ruling, or collected from Config
+    #   with a *Compliant* ruling.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] inconclusive_evidence_count
+    #   The amount of evidence without a compliance check ruling. Evidence
+    #   is inconclusive if the associated control uses Security Hub or
+    #   Config as a data source and you didn't enable those services. This
+    #   is also the case if a control uses a data source that doesn’t
+    #   support compliance checks (for example, manual evidence, API calls,
+    #   or CloudTrail).
+    #
+    #   <note markdown="1"> If evidence has a compliance check status of *not applicable*, it's
+    #   classified as *inconclusive* in `InsightsByAssessment` data.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] assessment_controls_count_by_noncompliant_evidence
+    #   The number of assessment controls that collected non-compliant
+    #   evidence on the `lastUpdated` date.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_assessment_controls_count
+    #   The total number of controls in the assessment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated
+    #   The time when the assessment insights were last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/InsightsByAssessment AWS API Documentation
+    #
+    class InsightsByAssessment < Struct.new(
+      :noncompliant_evidence_count,
+      :compliant_evidence_count,
+      :inconclusive_evidence_count,
+      :assessment_controls_count_by_noncompliant_evidence,
+      :total_assessment_controls_count,
+      :last_updated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal service error occurred during the processing of your
     # request. Try again later.
     #
@@ -3030,6 +3407,62 @@ module Aws::AuditManager
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAssessmentControlInsightsByControlDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         control_domain_id: "UUID", # required
+    #         assessment_id: "UUID", # required
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] control_domain_id
+    #   The unique identifier for the control domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_id
+    #   The unique identifier for the active assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Represents the maximum number of results on a page or for an API
+    #   request call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListAssessmentControlInsightsByControlDomainRequest AWS API Documentation
+    #
+    class ListAssessmentControlInsightsByControlDomainRequest < Struct.new(
+      :control_domain_id,
+      :assessment_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] control_insights_by_assessment
+    #   The assessment control analytics data that the
+    #   `ListAssessmentControlInsightsByControlDomain` API returned.
+    #   @return [Array<Types::ControlInsightsMetadataByAssessmentItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListAssessmentControlInsightsByControlDomainResponse AWS API Documentation
+    #
+    class ListAssessmentControlInsightsByControlDomainResponse < Struct.new(
+      :control_insights_by_assessment,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3183,9 +3616,14 @@ module Aws::AuditManager
     #   data as a hash:
     #
     #       {
+    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
     #         next_token: "Token",
     #         max_results: 1,
     #       }
+    #
+    # @!attribute [rw] status
+    #   The current status of the assessment.
+    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   The pagination token that's used to fetch the next set of results.
@@ -3199,6 +3637,7 @@ module Aws::AuditManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListAssessmentsRequest AWS API Documentation
     #
     class ListAssessmentsRequest < Struct.new(
+      :status,
       :next_token,
       :max_results)
       SENSITIVE = []
@@ -3217,6 +3656,150 @@ module Aws::AuditManager
     #
     class ListAssessmentsResponse < Struct.new(
       :assessment_metadata,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListControlDomainInsightsByAssessmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         assessment_id: "UUID", # required
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] assessment_id
+    #   The unique identifier for the active assessment.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Represents the maximum number of results on a page or for an API
+    #   request call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListControlDomainInsightsByAssessmentRequest AWS API Documentation
+    #
+    class ListControlDomainInsightsByAssessmentRequest < Struct.new(
+      :assessment_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] control_domain_insights
+    #   The control domain analytics data that the
+    #   `ListControlDomainInsightsByAssessment` API returned.
+    #   @return [Array<Types::ControlDomainInsights>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListControlDomainInsightsByAssessmentResponse AWS API Documentation
+    #
+    class ListControlDomainInsightsByAssessmentResponse < Struct.new(
+      :control_domain_insights,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListControlDomainInsightsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Represents the maximum number of results on a page or for an API
+    #   request call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListControlDomainInsightsRequest AWS API Documentation
+    #
+    class ListControlDomainInsightsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] control_domain_insights
+    #   The control domain analytics data that the
+    #   `ListControlDomainInsights` API returned.
+    #   @return [Array<Types::ControlDomainInsights>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListControlDomainInsightsResponse AWS API Documentation
+    #
+    class ListControlDomainInsightsResponse < Struct.new(
+      :control_domain_insights,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListControlInsightsByControlDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         control_domain_id: "UUID", # required
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] control_domain_id
+    #   The unique identifier for the control domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Represents the maximum number of results on a page or for an API
+    #   request call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListControlInsightsByControlDomainRequest AWS API Documentation
+    #
+    class ListControlInsightsByControlDomainRequest < Struct.new(
+      :control_domain_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] control_insights_metadata
+    #   The control analytics data that the
+    #   `ListControlInsightsByControlDomain` API returned.
+    #   @return [Array<Types::ControlInsightsMetadataItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListControlInsightsByControlDomainResponse AWS API Documentation
+    #
+    class ListControlInsightsByControlDomainResponse < Struct.new(
+      :control_insights_metadata,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3898,15 +4481,15 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the control set.
+    #   The unique identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] control_id
-    #   The identifier for the control.
+    #   The unique identifier for the control.
     #   @return [String]
     #
     # @!attribute [rw] control_status
@@ -3953,11 +4536,11 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] control_set_id
-    #   The identifier for the control set.
+    #   The unique identifier for the control set.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4052,7 +4635,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] framework_id
-    #   The identifier for the framework.
+    #   The unique identifier for the framework.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4175,7 +4758,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] assessment_name
@@ -4234,7 +4817,7 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #   @return [String]
     #
     # @!attribute [rw] status

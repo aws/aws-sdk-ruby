@@ -416,6 +416,7 @@ module Aws::ChimeSDKMeetings
     #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
     #         vocabulary_name: "String",
     #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
+    #         content_identification_type: "PHI", # accepts PHI
     #       }
     #
     # @!attribute [rw] language_code
@@ -440,6 +441,11 @@ module Aws::ChimeSDKMeetings
     #   specify a Region, Amazon Chime uses the meeting's Region.
     #   @return [String]
     #
+    # @!attribute [rw] content_identification_type
+    #   Set this field to `PHI` to identify personal health information in
+    #   the transcription output.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/EngineTranscribeMedicalSettings AWS API Documentation
     #
     class EngineTranscribeMedicalSettings < Struct.new(
@@ -447,7 +453,8 @@ module Aws::ChimeSDKMeetings
       :specialty,
       :type,
       :vocabulary_name,
-      :region)
+      :region,
+      :content_identification_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -463,6 +470,12 @@ module Aws::ChimeSDKMeetings
     #         vocabulary_filter_name: "String",
     #         vocabulary_name: "String",
     #         region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #         enable_partial_results_stabilization: false,
+    #         partial_results_stability: "low", # accepts low, medium, high
+    #         content_identification_type: "PII", # accepts PII
+    #         content_redaction_type: "PII", # accepts PII
+    #         pii_entity_types: "TranscribePiiEntityTypes",
+    #         language_model_name: "TranscribeLanguageModelName",
     #       }
     #
     # @!attribute [rw] language_code
@@ -486,6 +499,51 @@ module Aws::ChimeSDKMeetings
     #   Region, Amazon Chime uses the meeting's Region.
     #   @return [String]
     #
+    # @!attribute [rw] enable_partial_results_stabilization
+    #   Generates partial transcription results that are less likely to
+    #   change as meeting attendees speak. It does so by only allowing the
+    #   last few words from the partial results to change.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] partial_results_stability
+    #   The stabity level of a partial results transcription. Determines how
+    #   stable you want the transcription results to be. A higher level
+    #   means the transcription results are less likely to change.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_identification_type
+    #   Set this field to `PII` to identify personal health information in
+    #   the transcription output.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_redaction_type
+    #   Set this field to `PII` to redact personally identifiable
+    #   information in the transcription output. Content redaction is
+    #   performed only upon complete transcription of the audio segments.
+    #
+    #   You can’t set both `ContentRedactionType` and
+    #   `ContentIdentificationType` in the same request. If you set both,
+    #   your request returns a `BadRequestException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pii_entity_types
+    #   Lists the PII entity types you want to identify or redact. To
+    #   specify entity types, you must enable `ContentIdentificationType` or
+    #   `ContentRedactionType`.
+    #
+    #   `PIIEntityTypes` must be comma-separated. The available values are:
+    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING, CREDIT_DEBIT_NUMBER`,
+    #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`,
+    #   `ADDRESS`, `NAME`, `PHONE`, `SSN`, and `ALL`.
+    #
+    #   `PiiEntityTypes` is an optional parameter with a default value of
+    #   `ALL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_model_name
+    #   The name of the language model used during transcription.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/EngineTranscribeSettings AWS API Documentation
     #
     class EngineTranscribeSettings < Struct.new(
@@ -493,7 +551,13 @@ module Aws::ChimeSDKMeetings
       :vocabulary_filter_method,
       :vocabulary_filter_name,
       :vocabulary_name,
-      :region)
+      :region,
+      :enable_partial_results_stabilization,
+      :partial_results_stability,
+      :content_identification_type,
+      :content_redaction_type,
+      :pii_entity_types,
+      :language_model_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -847,6 +911,12 @@ module Aws::ChimeSDKMeetings
     #             vocabulary_filter_name: "String",
     #             vocabulary_name: "String",
     #             region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #             enable_partial_results_stabilization: false,
+    #             partial_results_stability: "low", # accepts low, medium, high
+    #             content_identification_type: "PII", # accepts PII
+    #             content_redaction_type: "PII", # accepts PII
+    #             pii_entity_types: "TranscribePiiEntityTypes",
+    #             language_model_name: "TranscribeLanguageModelName",
     #           },
     #           engine_transcribe_medical_settings: {
     #             language_code: "en-US", # required, accepts en-US
@@ -854,6 +924,7 @@ module Aws::ChimeSDKMeetings
     #             type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
     #             vocabulary_name: "String",
     #             region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
+    #             content_identification_type: "PHI", # accepts PHI
     #           },
     #         },
     #       }
@@ -910,6 +981,12 @@ module Aws::ChimeSDKMeetings
     #           vocabulary_filter_name: "String",
     #           vocabulary_name: "String",
     #           region: "us-east-2", # accepts us-east-2, us-east-1, us-west-2, ap-northeast-2, ap-southeast-2, ap-northeast-1, ca-central-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1, auto
+    #           enable_partial_results_stabilization: false,
+    #           partial_results_stability: "low", # accepts low, medium, high
+    #           content_identification_type: "PII", # accepts PII
+    #           content_redaction_type: "PII", # accepts PII
+    #           pii_entity_types: "TranscribePiiEntityTypes",
+    #           language_model_name: "TranscribeLanguageModelName",
     #         },
     #         engine_transcribe_medical_settings: {
     #           language_code: "en-US", # required, accepts en-US
@@ -917,6 +994,7 @@ module Aws::ChimeSDKMeetings
     #           type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
     #           vocabulary_name: "String",
     #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-2, ap-southeast-2, ca-central-1, eu-west-1, auto
+    #           content_identification_type: "PHI", # accepts PHI
     #         },
     #       }
     #

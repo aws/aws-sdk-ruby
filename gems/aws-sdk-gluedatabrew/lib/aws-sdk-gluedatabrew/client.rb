@@ -466,11 +466,15 @@ module Aws::GlueDataBrew
     #       },
     #       database_input_definition: {
     #         glue_connection_name: "GlueConnectionName", # required
-    #         database_table_name: "DatabaseTableName", # required
+    #         database_table_name: "DatabaseTableName",
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
     #         },
+    #         query_string: "QueryString",
+    #       },
+    #       metadata: {
+    #         source_arn: "Arn",
     #       },
     #     },
     #     path_options: {
@@ -563,6 +567,9 @@ module Aws::GlueDataBrew
     #   evaluations, and override default parameters of evaluations. When
     #   configuration is null, the profile job will run with default settings.
     #
+    # @option params [Array<Types::ValidationConfiguration>] :validation_configurations
+    #   List of validation configurations that are applied to the profile job.
+    #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
     #   (IAM) role to be assumed when DataBrew runs the job.
@@ -637,7 +644,21 @@ module Aws::GlueDataBrew
     #           },
     #         },
     #       ],
+    #       entity_detector_configuration: {
+    #         entity_types: ["EntityType"], # required
+    #         allowed_statistics: [
+    #           {
+    #             statistics: ["Statistic"], # required
+    #           },
+    #         ],
+    #       },
     #     },
+    #     validation_configurations: [
+    #       {
+    #         ruleset_arn: "Arn", # required
+    #         validation_mode: "CHECK_ALL", # accepts CHECK_ALL
+    #       },
+    #     ],
     #     role_arn: "Arn", # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -930,6 +951,76 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
+    # Creates a new ruleset that can be used in a profile job to validate
+    # the data quality of a dataset.
+    #
+    # @option params [required, String] :name
+    #   The name of the ruleset to be created. Valid characters are
+    #   alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.
+    #
+    # @option params [String] :description
+    #   The description of the ruleset.
+    #
+    # @option params [required, String] :target_arn
+    #   The Amazon Resource Name (ARN) of a resource (dataset) that the
+    #   ruleset is associated with.
+    #
+    # @option params [required, Array<Types::Rule>] :rules
+    #   A list of rules that are defined with the ruleset. A rule includes one
+    #   or more checks to be validated on a DataBrew dataset.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Metadata tags to apply to the ruleset.
+    #
+    # @return [Types::CreateRulesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRulesetResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ruleset({
+    #     name: "RulesetName", # required
+    #     description: "RulesetDescription",
+    #     target_arn: "Arn", # required
+    #     rules: [ # required
+    #       {
+    #         name: "RuleName", # required
+    #         disabled: false,
+    #         check_expression: "Expression", # required
+    #         substitution_map: {
+    #           "ValueReference" => "ConditionValue",
+    #         },
+    #         threshold: {
+    #           value: 1.0, # required
+    #           type: "GREATER_THAN_OR_EQUAL", # accepts GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN
+    #           unit: "COUNT", # accepts COUNT, PERCENTAGE
+    #         },
+    #         column_selectors: [
+    #           {
+    #             regex: "ColumnName",
+    #             name: "ColumnName",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/CreateRuleset AWS API Documentation
+    #
+    # @overload create_ruleset(params = {})
+    # @param [Hash] params ({})
+    def create_ruleset(params = {}, options = {})
+      req = build_request(:create_ruleset, params)
+      req.send_request(options)
+    end
+
     # Creates a new schedule for one or more DataBrew jobs. Jobs can be run
     # at a specific date and time, or at regular intervals.
     #
@@ -1100,6 +1191,34 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
+    # Deletes a ruleset.
+    #
+    # @option params [required, String] :name
+    #   The name of the ruleset to be deleted.
+    #
+    # @return [Types::DeleteRulesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRulesetResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ruleset({
+    #     name: "RulesetName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DeleteRuleset AWS API Documentation
+    #
+    # @overload delete_ruleset(params = {})
+    # @param [Hash] params ({})
+    def delete_ruleset(params = {}, options = {})
+      req = build_request(:delete_ruleset, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified DataBrew schedule.
     #
     # @option params [required, String] :name
@@ -1179,6 +1298,8 @@ module Aws::GlueDataBrew
     #   resp.input.database_input_definition.database_table_name #=> String
     #   resp.input.database_input_definition.temp_directory.bucket #=> String
     #   resp.input.database_input_definition.temp_directory.key #=> String
+    #   resp.input.database_input_definition.query_string #=> String
+    #   resp.input.metadata.source_arn #=> String
     #   resp.last_modified_date #=> Time
     #   resp.last_modified_by #=> String
     #   resp.source #=> String, one of "S3", "DATA-CATALOG", "DATABASE"
@@ -1235,6 +1356,7 @@ module Aws::GlueDataBrew
     #   * {Types::DescribeJobResponse#database_outputs #database_outputs} => Array&lt;Types::DatabaseOutput&gt;
     #   * {Types::DescribeJobResponse#project_name #project_name} => String
     #   * {Types::DescribeJobResponse#profile_configuration #profile_configuration} => Types::ProfileConfiguration
+    #   * {Types::DescribeJobResponse#validation_configurations #validation_configurations} => Array&lt;Types::ValidationConfiguration&gt;
     #   * {Types::DescribeJobResponse#recipe_reference #recipe_reference} => Types::RecipeReference
     #   * {Types::DescribeJobResponse#resource_arn #resource_arn} => String
     #   * {Types::DescribeJobResponse#role_arn #role_arn} => String
@@ -1307,6 +1429,14 @@ module Aws::GlueDataBrew
     #   resp.profile_configuration.column_statistics_configurations[0].statistics.overrides[0].statistic #=> String
     #   resp.profile_configuration.column_statistics_configurations[0].statistics.overrides[0].parameters #=> Hash
     #   resp.profile_configuration.column_statistics_configurations[0].statistics.overrides[0].parameters["ParameterName"] #=> String
+    #   resp.profile_configuration.entity_detector_configuration.entity_types #=> Array
+    #   resp.profile_configuration.entity_detector_configuration.entity_types[0] #=> String
+    #   resp.profile_configuration.entity_detector_configuration.allowed_statistics #=> Array
+    #   resp.profile_configuration.entity_detector_configuration.allowed_statistics[0].statistics #=> Array
+    #   resp.profile_configuration.entity_detector_configuration.allowed_statistics[0].statistics[0] #=> String
+    #   resp.validation_configurations #=> Array
+    #   resp.validation_configurations[0].ruleset_arn #=> String
+    #   resp.validation_configurations[0].validation_mode #=> String, one of "CHECK_ALL"
     #   resp.recipe_reference.name #=> String
     #   resp.recipe_reference.recipe_version #=> String
     #   resp.resource_arn #=> String
@@ -1343,6 +1473,7 @@ module Aws::GlueDataBrew
     #   * {Types::DescribeJobRunResponse#execution_time #execution_time} => Integer
     #   * {Types::DescribeJobRunResponse#job_name #job_name} => String
     #   * {Types::DescribeJobRunResponse#profile_configuration #profile_configuration} => Types::ProfileConfiguration
+    #   * {Types::DescribeJobRunResponse#validation_configurations #validation_configurations} => Array&lt;Types::ValidationConfiguration&gt;
     #   * {Types::DescribeJobRunResponse#run_id #run_id} => String
     #   * {Types::DescribeJobRunResponse#state #state} => String
     #   * {Types::DescribeJobRunResponse#log_subscription #log_subscription} => String
@@ -1389,6 +1520,14 @@ module Aws::GlueDataBrew
     #   resp.profile_configuration.column_statistics_configurations[0].statistics.overrides[0].statistic #=> String
     #   resp.profile_configuration.column_statistics_configurations[0].statistics.overrides[0].parameters #=> Hash
     #   resp.profile_configuration.column_statistics_configurations[0].statistics.overrides[0].parameters["ParameterName"] #=> String
+    #   resp.profile_configuration.entity_detector_configuration.entity_types #=> Array
+    #   resp.profile_configuration.entity_detector_configuration.entity_types[0] #=> String
+    #   resp.profile_configuration.entity_detector_configuration.allowed_statistics #=> Array
+    #   resp.profile_configuration.entity_detector_configuration.allowed_statistics[0].statistics #=> Array
+    #   resp.profile_configuration.entity_detector_configuration.allowed_statistics[0].statistics[0] #=> String
+    #   resp.validation_configurations #=> Array
+    #   resp.validation_configurations[0].ruleset_arn #=> String
+    #   resp.validation_configurations[0].validation_mode #=> String, one of "CHECK_ALL"
     #   resp.run_id #=> String
     #   resp.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.log_subscription #=> String, one of "ENABLE", "DISABLE"
@@ -1556,6 +1695,64 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
+    # Retrieves detailed information about the ruleset.
+    #
+    # @option params [required, String] :name
+    #   The name of the ruleset to be described.
+    #
+    # @return [Types::DescribeRulesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRulesetResponse#name #name} => String
+    #   * {Types::DescribeRulesetResponse#description #description} => String
+    #   * {Types::DescribeRulesetResponse#target_arn #target_arn} => String
+    #   * {Types::DescribeRulesetResponse#rules #rules} => Array&lt;Types::Rule&gt;
+    #   * {Types::DescribeRulesetResponse#create_date #create_date} => Time
+    #   * {Types::DescribeRulesetResponse#created_by #created_by} => String
+    #   * {Types::DescribeRulesetResponse#last_modified_by #last_modified_by} => String
+    #   * {Types::DescribeRulesetResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::DescribeRulesetResponse#resource_arn #resource_arn} => String
+    #   * {Types::DescribeRulesetResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_ruleset({
+    #     name: "RulesetName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.target_arn #=> String
+    #   resp.rules #=> Array
+    #   resp.rules[0].name #=> String
+    #   resp.rules[0].disabled #=> Boolean
+    #   resp.rules[0].check_expression #=> String
+    #   resp.rules[0].substitution_map #=> Hash
+    #   resp.rules[0].substitution_map["ValueReference"] #=> String
+    #   resp.rules[0].threshold.value #=> Float
+    #   resp.rules[0].threshold.type #=> String, one of "GREATER_THAN_OR_EQUAL", "LESS_THAN_OR_EQUAL", "GREATER_THAN", "LESS_THAN"
+    #   resp.rules[0].threshold.unit #=> String, one of "COUNT", "PERCENTAGE"
+    #   resp.rules[0].column_selectors #=> Array
+    #   resp.rules[0].column_selectors[0].regex #=> String
+    #   resp.rules[0].column_selectors[0].name #=> String
+    #   resp.create_date #=> Time
+    #   resp.created_by #=> String
+    #   resp.last_modified_by #=> String
+    #   resp.last_modified_date #=> Time
+    #   resp.resource_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/DescribeRuleset AWS API Documentation
+    #
+    # @overload describe_ruleset(params = {})
+    # @param [Hash] params ({})
+    def describe_ruleset(params = {}, options = {})
+      req = build_request(:describe_ruleset, params)
+      req.send_request(options)
+    end
+
     # Returns the definition of a specific DataBrew schedule.
     #
     # @option params [required, String] :name
@@ -1652,6 +1849,8 @@ module Aws::GlueDataBrew
     #   resp.datasets[0].input.database_input_definition.database_table_name #=> String
     #   resp.datasets[0].input.database_input_definition.temp_directory.bucket #=> String
     #   resp.datasets[0].input.database_input_definition.temp_directory.key #=> String
+    #   resp.datasets[0].input.database_input_definition.query_string #=> String
+    #   resp.datasets[0].input.metadata.source_arn #=> String
     #   resp.datasets[0].last_modified_date #=> Time
     #   resp.datasets[0].last_modified_by #=> String
     #   resp.datasets[0].source #=> String, one of "S3", "DATA-CATALOG", "DATABASE"
@@ -1756,6 +1955,9 @@ module Aws::GlueDataBrew
     #   resp.job_runs[0].started_on #=> Time
     #   resp.job_runs[0].job_sample.mode #=> String, one of "FULL_DATASET", "CUSTOM_ROWS"
     #   resp.job_runs[0].job_sample.size #=> Integer
+    #   resp.job_runs[0].validation_configurations #=> Array
+    #   resp.job_runs[0].validation_configurations[0].ruleset_arn #=> String
+    #   resp.job_runs[0].validation_configurations[0].validation_mode #=> String, one of "CHECK_ALL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListJobRuns AWS API Documentation
@@ -1853,6 +2055,9 @@ module Aws::GlueDataBrew
     #   resp.jobs[0].tags["TagKey"] #=> String
     #   resp.jobs[0].job_sample.mode #=> String, one of "FULL_DATASET", "CUSTOM_ROWS"
     #   resp.jobs[0].job_sample.size #=> Integer
+    #   resp.jobs[0].validation_configurations #=> Array
+    #   resp.jobs[0].validation_configurations[0].ruleset_arn #=> String
+    #   resp.jobs[0].validation_configurations[0].validation_mode #=> String, one of "CHECK_ALL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListJobs AWS API Documentation
@@ -2046,6 +2251,64 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
+    # List all rulesets available in the current account or rulesets
+    # associated with a specific resource (dataset).
+    #
+    # @option params [String] :target_arn
+    #   The Amazon Resource Name (ARN) of a resource (dataset). Using this
+    #   parameter indicates to return only those rulesets that are associated
+    #   with the specified resource.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this request.
+    #
+    # @option params [String] :next_token
+    #   A token generated by DataBrew that specifies where to continue
+    #   pagination if a previous request was truncated. To get the next set of
+    #   pages, pass in the NextToken value from the response object of the
+    #   previous page call.
+    #
+    # @return [Types::ListRulesetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRulesetsResponse#rulesets #rulesets} => Array&lt;Types::RulesetItem&gt;
+    #   * {Types::ListRulesetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_rulesets({
+    #     target_arn: "Arn",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rulesets #=> Array
+    #   resp.rulesets[0].account_id #=> String
+    #   resp.rulesets[0].created_by #=> String
+    #   resp.rulesets[0].create_date #=> Time
+    #   resp.rulesets[0].description #=> String
+    #   resp.rulesets[0].last_modified_by #=> String
+    #   resp.rulesets[0].last_modified_date #=> Time
+    #   resp.rulesets[0].name #=> String
+    #   resp.rulesets[0].resource_arn #=> String
+    #   resp.rulesets[0].rule_count #=> Integer
+    #   resp.rulesets[0].tags #=> Hash
+    #   resp.rulesets[0].tags["TagKey"] #=> String
+    #   resp.rulesets[0].target_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/ListRulesets AWS API Documentation
+    #
+    # @overload list_rulesets(params = {})
+    # @param [Hash] params ({})
+    def list_rulesets(params = {}, options = {})
+      req = build_request(:list_rulesets, params)
+      req.send_request(options)
+    end
+
     # Lists the DataBrew schedules that are defined.
     #
     # @option params [String] :job_name
@@ -2219,6 +2482,9 @@ module Aws::GlueDataBrew
     #       start_column_index: 1, # required
     #       column_range: 1,
     #       hidden_columns: ["ColumnName"],
+    #       start_row_index: 1,
+    #       row_range: 1,
+    #       analytics: "ENABLE", # accepts ENABLE, DISABLE
     #     },
     #   })
     #
@@ -2451,11 +2717,15 @@ module Aws::GlueDataBrew
     #       },
     #       database_input_definition: {
     #         glue_connection_name: "GlueConnectionName", # required
-    #         database_table_name: "DatabaseTableName", # required
+    #         database_table_name: "DatabaseTableName",
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
     #         },
+    #         query_string: "QueryString",
+    #       },
+    #       metadata: {
+    #         source_arn: "Arn",
     #       },
     #     },
     #     path_options: {
@@ -2540,6 +2810,9 @@ module Aws::GlueDataBrew
     #   Represents an Amazon S3 location (bucket name and object key) where
     #   DataBrew can read input data, or write output from a job.
     #
+    # @option params [Array<Types::ValidationConfiguration>] :validation_configurations
+    #   List of validation configurations that are applied to the profile job.
+    #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
     #   (IAM) role to be assumed when DataBrew runs the job.
@@ -2601,6 +2874,14 @@ module Aws::GlueDataBrew
     #           },
     #         },
     #       ],
+    #       entity_detector_configuration: {
+    #         entity_types: ["EntityType"], # required
+    #         allowed_statistics: [
+    #           {
+    #             statistics: ["Statistic"], # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     encryption_key_arn: "EncryptionKeyArn",
     #     encryption_mode: "SSE-KMS", # accepts SSE-KMS, SSE-S3
@@ -2612,6 +2893,12 @@ module Aws::GlueDataBrew
     #       bucket: "Bucket", # required
     #       key: "Key",
     #     },
+    #     validation_configurations: [
+    #       {
+    #         ruleset_arn: "Arn", # required
+    #         validation_mode: "CHECK_ALL", # accepts CHECK_ALL
+    #       },
+    #     ],
     #     role_arn: "Arn", # required
     #     timeout: 1,
     #     job_sample: {
@@ -2857,6 +3144,63 @@ module Aws::GlueDataBrew
       req.send_request(options)
     end
 
+    # Updates specified ruleset.
+    #
+    # @option params [required, String] :name
+    #   The name of the ruleset to be updated.
+    #
+    # @option params [String] :description
+    #   The description of the ruleset.
+    #
+    # @option params [required, Array<Types::Rule>] :rules
+    #   A list of rules that are defined with the ruleset. A rule includes one
+    #   or more checks to be validated on a DataBrew dataset.
+    #
+    # @return [Types::UpdateRulesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRulesetResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_ruleset({
+    #     name: "RulesetName", # required
+    #     description: "RulesetDescription",
+    #     rules: [ # required
+    #       {
+    #         name: "RuleName", # required
+    #         disabled: false,
+    #         check_expression: "Expression", # required
+    #         substitution_map: {
+    #           "ValueReference" => "ConditionValue",
+    #         },
+    #         threshold: {
+    #           value: 1.0, # required
+    #           type: "GREATER_THAN_OR_EQUAL", # accepts GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN
+    #           unit: "COUNT", # accepts COUNT, PERCENTAGE
+    #         },
+    #         column_selectors: [
+    #           {
+    #             regex: "ColumnName",
+    #             name: "ColumnName",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/UpdateRuleset AWS API Documentation
+    #
+    # @overload update_ruleset(params = {})
+    # @param [Hash] params ({})
+    def update_ruleset(params = {}, options = {})
+      req = build_request(:update_ruleset, params)
+      req.send_request(options)
+    end
+
     # Modifies the definition of an existing DataBrew schedule.
     #
     # @option params [Array<String>] :job_names
@@ -2912,7 +3256,7 @@ module Aws::GlueDataBrew
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

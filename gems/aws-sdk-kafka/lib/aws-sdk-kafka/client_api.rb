@@ -38,6 +38,7 @@ module Aws::Kafka
     ConfigurationRevision = Shapes::StructureShape.new(name: 'ConfigurationRevision')
     ConfigurationState = Shapes::StringShape.new(name: 'ConfigurationState')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectivityInfo = Shapes::StructureShape.new(name: 'ConnectivityInfo')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
     CreateConfigurationRequest = Shapes::StructureShape.new(name: 'CreateConfigurationRequest')
@@ -101,6 +102,7 @@ module Aws::Kafka
     OpenMonitoringInfo = Shapes::StructureShape.new(name: 'OpenMonitoringInfo')
     Prometheus = Shapes::StructureShape.new(name: 'Prometheus')
     PrometheusInfo = Shapes::StructureShape.new(name: 'PrometheusInfo')
+    PublicAccess = Shapes::StructureShape.new(name: 'PublicAccess')
     RebootBrokerRequest = Shapes::StructureShape.new(name: 'RebootBrokerRequest')
     RebootBrokerResponse = Shapes::StructureShape.new(name: 'RebootBrokerResponse')
     S3 = Shapes::StructureShape.new(name: 'S3')
@@ -128,6 +130,8 @@ module Aws::Kafka
     UpdateClusterKafkaVersionResponse = Shapes::StructureShape.new(name: 'UpdateClusterKafkaVersionResponse')
     UpdateConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationRequest')
     UpdateConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationResponse')
+    UpdateConnectivityRequest = Shapes::StructureShape.new(name: 'UpdateConnectivityRequest')
+    UpdateConnectivityResponse = Shapes::StructureShape.new(name: 'UpdateConnectivityResponse')
     UpdateMonitoringRequest = Shapes::StructureShape.new(name: 'UpdateMonitoringRequest')
     UpdateMonitoringResponse = Shapes::StructureShape.new(name: 'UpdateMonitoringResponse')
     UpdateSecurityRequest = Shapes::StructureShape.new(name: 'UpdateSecurityRequest')
@@ -192,6 +196,7 @@ module Aws::Kafka
     BrokerNodeGroupInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: __stringMin5Max32, required: true, location_name: "instanceType"))
     BrokerNodeGroupInfo.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
     BrokerNodeGroupInfo.add_member(:storage_info, Shapes::ShapeRef.new(shape: StorageInfo, location_name: "storageInfo"))
+    BrokerNodeGroupInfo.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: ConnectivityInfo, location_name: "connectivityInfo"))
     BrokerNodeGroupInfo.struct_class = Types::BrokerNodeGroupInfo
 
     BrokerNodeInfo.add_member(:attached_eni_id, Shapes::ShapeRef.new(shape: __string, location_name: "attachedENIId"))
@@ -281,6 +286,9 @@ module Aws::Kafka
     ConflictException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    ConnectivityInfo.add_member(:public_access, Shapes::ShapeRef.new(shape: PublicAccess, location_name: "publicAccess"))
+    ConnectivityInfo.struct_class = Types::ConnectivityInfo
 
     CreateClusterRequest.add_member(:broker_node_group_info, Shapes::ShapeRef.new(shape: BrokerNodeGroupInfo, required: true, location_name: "brokerNodeGroupInfo"))
     CreateClusterRequest.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ClientAuthentication, location_name: "clientAuthentication"))
@@ -397,6 +405,9 @@ module Aws::Kafka
     GetBootstrapBrokersRequest.struct_class = Types::GetBootstrapBrokersRequest
 
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerString"))
+    GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_public_sasl_iam, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringPublicSaslIam"))
+    GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_public_sasl_scram, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringPublicSaslScram"))
+    GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_public_tls, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringPublicTls"))
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringTls"))
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_sasl_scram, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringSaslScram"))
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_sasl_iam, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringSaslIam"))
@@ -505,6 +516,7 @@ module Aws::Kafka
     MutableClusterInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "instanceType"))
     MutableClusterInfo.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ClientAuthentication, location_name: "clientAuthentication"))
     MutableClusterInfo.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
+    MutableClusterInfo.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: ConnectivityInfo, location_name: "connectivityInfo"))
     MutableClusterInfo.struct_class = Types::MutableClusterInfo
 
     NodeExporter.add_member(:enabled_in_broker, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabledInBroker"))
@@ -538,6 +550,9 @@ module Aws::Kafka
     PrometheusInfo.add_member(:jmx_exporter, Shapes::ShapeRef.new(shape: JmxExporterInfo, location_name: "jmxExporter"))
     PrometheusInfo.add_member(:node_exporter, Shapes::ShapeRef.new(shape: NodeExporterInfo, location_name: "nodeExporter"))
     PrometheusInfo.struct_class = Types::PrometheusInfo
+
+    PublicAccess.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "type"))
+    PublicAccess.struct_class = Types::PublicAccess
 
     RebootBrokerRequest.add_member(:broker_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "brokerIds"))
     RebootBrokerRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
@@ -652,6 +667,15 @@ module Aws::Kafka
     UpdateConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     UpdateConfigurationResponse.add_member(:latest_revision, Shapes::ShapeRef.new(shape: ConfigurationRevision, location_name: "latestRevision"))
     UpdateConfigurationResponse.struct_class = Types::UpdateConfigurationResponse
+
+    UpdateConnectivityRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    UpdateConnectivityRequest.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: ConnectivityInfo, required: true, location_name: "connectivityInfo"))
+    UpdateConnectivityRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
+    UpdateConnectivityRequest.struct_class = Types::UpdateConnectivityRequest
+
+    UpdateConnectivityResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    UpdateConnectivityResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
+    UpdateConnectivityResponse.struct_class = Types::UpdateConnectivityResponse
 
     UpdateMonitoringRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     UpdateMonitoringRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
@@ -1145,6 +1169,21 @@ module Aws::Kafka
         o.http_request_uri = "/v1/clusters/{clusterArn}/version"
         o.input = Shapes::ShapeRef.new(shape: UpdateClusterKafkaVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateClusterKafkaVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_connectivity, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConnectivity"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/connectivity"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConnectivityRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConnectivityResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)

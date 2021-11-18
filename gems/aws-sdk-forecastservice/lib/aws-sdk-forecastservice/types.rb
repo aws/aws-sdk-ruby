@@ -10,6 +10,274 @@
 module Aws::ForecastService
   module Types
 
+    # Describes an additional dataset. This object is part of the DataConfig
+    # object. Forecast supports the Weather Index and Holidays additional
+    # datasets.
+    #
+    # **Weather Index**
+    #
+    # The Amazon Forecast Weather Index is a built-in dataset that
+    # incorporates historical and projected weather information into your
+    # model. The Weather Index supplements your datasets with over two years
+    # of historical weather data and up to 14 days of projected weather
+    # data. For more information, see [Amazon Forecast Weather Index][1].
+    #
+    # **Holidays**
+    #
+    # Holidays is a built-in dataset that incorporates national holiday
+    # information into your model. It provides native support for the
+    # holiday calendars of 66 countries. To view the holiday calendars,
+    # refer to the [Jollyday][2] library. For more information, see
+    # [Holidays Featurization][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/weather.html
+    # [2]: http://jollyday.sourceforge.net/data.html
+    # [3]: https://docs.aws.amazon.com/forecast/latest/dg/holidays.html
+    #
+    # @note When making an API call, you may pass AdditionalDataset
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         configuration: {
+    #           "Name" => ["Value"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the additional dataset. Valid names: `"holiday"` and
+    #   `"weather"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   **Weather Index**
+    #
+    #   To enable the Weather Index, do not specify a value for
+    #   `Configuration`.
+    #
+    #   **Holidays**
+    #
+    #   To enable Holidays, specify a country with one of the following
+    #   two-letter country codes:
+    #
+    #   * "AL" - ALBANIA
+    #
+    #   * "AR" - ARGENTINA
+    #
+    #   * "AT" - AUSTRIA
+    #
+    #   * "AU" - AUSTRALIA
+    #
+    #   * "BA" - BOSNIA HERZEGOVINA
+    #
+    #   * "BE" - BELGIUM
+    #
+    #   * "BG" - BULGARIA
+    #
+    #   * "BO" - BOLIVIA
+    #
+    #   * "BR" - BRAZIL
+    #
+    #   * "BY" - BELARUS
+    #
+    #   * "CA" - CANADA
+    #
+    #   * "CL" - CHILE
+    #
+    #   * "CO" - COLOMBIA
+    #
+    #   * "CR" - COSTA RICA
+    #
+    #   * "HR" - CROATIA
+    #
+    #   * "CZ" - CZECH REPUBLIC
+    #
+    #   * "DK" - DENMARK
+    #
+    #   * "EC" - ECUADOR
+    #
+    #   * "EE" - ESTONIA
+    #
+    #   * "ET" - ETHIOPIA
+    #
+    #   * "FI" - FINLAND
+    #
+    #   * "FR" - FRANCE
+    #
+    #   * "DE" - GERMANY
+    #
+    #   * "GR" - GREECE
+    #
+    #   * "HU" - HUNGARY
+    #
+    #   * "IS" - ICELAND
+    #
+    #   * "IN" - INDIA
+    #
+    #   * "IE" - IRELAND
+    #
+    #   * "IT" - ITALY
+    #
+    #   * "JP" - JAPAN
+    #
+    #   * "KZ" - KAZAKHSTAN
+    #
+    #   * "KR" - KOREA
+    #
+    #   * "LV" - LATVIA
+    #
+    #   * "LI" - LIECHTENSTEIN
+    #
+    #   * "LT" - LITHUANIA
+    #
+    #   * "LU" - LUXEMBOURG
+    #
+    #   * "MK" - MACEDONIA
+    #
+    #   * "MT" - MALTA
+    #
+    #   * "MX" - MEXICO
+    #
+    #   * "MD" - MOLDOVA
+    #
+    #   * "ME" - MONTENEGRO
+    #
+    #   * "NL" - NETHERLANDS
+    #
+    #   * "NZ" - NEW ZEALAND
+    #
+    #   * "NI" - NICARAGUA
+    #
+    #   * "NG" - NIGERIA
+    #
+    #   * "NO" - NORWAY
+    #
+    #   * "PA" - PANAMA
+    #
+    #   * "PY" - PARAGUAY
+    #
+    #   * "PE" - PERU
+    #
+    #   * "PL" - POLAND
+    #
+    #   * "PT" - PORTUGAL
+    #
+    #   * "RO" - ROMANIA
+    #
+    #   * "RU" - RUSSIA
+    #
+    #   * "RS" - SERBIA
+    #
+    #   * "SK" - SLOVAKIA
+    #
+    #   * "SI" - SLOVENIA
+    #
+    #   * "ZA" - SOUTH AFRICA
+    #
+    #   * "ES" - SPAIN
+    #
+    #   * "SE" - SWEDEN
+    #
+    #   * "CH" - SWITZERLAND
+    #
+    #   * "UA" - UKRAINE
+    #
+    #   * "AE" - UNITED ARAB EMIRATES
+    #
+    #   * "US" - UNITED STATES
+    #
+    #   * "UK" - UNITED KINGDOM
+    #
+    #   * "UY" - URUGUAY
+    #
+    #   * "VE" - VENEZUELA
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/AdditionalDataset AWS API Documentation
+    #
+    class AdditionalDataset < Struct.new(
+      :name,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the method used to transform attributes.
+    #
+    # The following is an example using the RETAIL domain:
+    #
+    # `\{`
+    #
+    # `"AttributeName": "demand",`
+    #
+    # `"Transformations": \{"aggregation": "sum", "middlefill": "zero",
+    # "backfill": "zero"\}`
+    #
+    # `\}`
+    #
+    # @note When making an API call, you may pass AttributeConfig
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_name: "Name", # required
+    #         transformations: { # required
+    #           "Name" => "Value",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the attribute as specified in the schema. Amazon
+    #   Forecast supports the target field of the target time series and the
+    #   related time series datasets. For example, for the RETAIL domain,
+    #   the target is `demand`.
+    #   @return [String]
+    #
+    # @!attribute [rw] transformations
+    #   The method parameters (key-value pairs), which are a map of override
+    #   parameters. Specify these parameters to override the default values.
+    #   Related Time Series attributes do not accept aggregation parameters.
+    #
+    #   The following list shows the parameters and their valid values for
+    #   the "filling" featurization method for a **Target Time Series**
+    #   dataset. Default values are bolded.
+    #
+    #   * `aggregation`\: **sum**, `avg`, `first`, `min`, `max`
+    #
+    #   * `frontfill`\: **none**
+    #
+    #   * `middlefill`\: **zero**, `nan` (not a number), `value`, `median`,
+    #     `mean`, `min`, `max`
+    #
+    #   * `backfill`\: **zero**, `nan`, `value`, `median`, `mean`, `min`,
+    #     `max`
+    #
+    #   The following list shows the parameters and their valid values for a
+    #   **Related Time Series** featurization method (there are no
+    #   defaults):
+    #
+    #   * `middlefill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #
+    #   * `backfill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #
+    #   * `futurefill`\: `zero`, `value`, `median`, `mean`, `min`, `max`
+    #
+    #   To set a filling method to a specific value, set the fill parameter
+    #   to `value` and define the value in a corresponding `_value`
+    #   parameter. For example, to set backfilling to a value of 2, include
+    #   the following: `"backfill": "value"` and `"backfill_value":"2"`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/AttributeConfig AWS API Documentation
+    #
+    class AttributeConfig < Struct.new(
+      :attribute_name,
+      :transformations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a categorical hyperparameter and it's range of tunable
     # values. This object is part of the ParameterRanges object.
     #
@@ -108,6 +376,179 @@ module Aws::ForecastService
       :max_value,
       :min_value,
       :scaling_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAutoPredictorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         predictor_name: "Name", # required
+    #         forecast_horizon: 1,
+    #         forecast_types: ["ForecastType"],
+    #         forecast_dimensions: ["Name"],
+    #         forecast_frequency: "Frequency",
+    #         data_config: {
+    #           dataset_group_arn: "Arn", # required
+    #           attribute_configs: [
+    #             {
+    #               attribute_name: "Name", # required
+    #               transformations: { # required
+    #                 "Name" => "Value",
+    #               },
+    #             },
+    #           ],
+    #           additional_datasets: [
+    #             {
+    #               name: "Name", # required
+    #               configuration: {
+    #                 "Name" => ["Value"],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         encryption_config: {
+    #           role_arn: "Arn", # required
+    #           kms_key_arn: "KMSKeyArn", # required
+    #         },
+    #         reference_predictor_arn: "Arn",
+    #         optimization_metric: "WAPE", # accepts WAPE, RMSE, AverageWeightedQuantileLoss, MASE, MAPE
+    #         explain_predictor: false,
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] predictor_name
+    #   A unique name for the predictor
+    #   @return [String]
+    #
+    # @!attribute [rw] forecast_horizon
+    #   The number of time-steps that the model predicts. The forecast
+    #   horizon is also called the prediction length.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] forecast_types
+    #   The forecast types used to train a predictor. You can specify up to
+    #   five forecast types. Forecast types can be quantiles from 0.01 to
+    #   0.99, by increments of 0.01 or higher. You can also specify the mean
+    #   forecast with `mean`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] forecast_dimensions
+    #   An array of dimension (field) names that specify how to group the
+    #   generated forecast.
+    #
+    #   For example, if you are generating forecasts for item sales across
+    #   all your stores, and your dataset contains a `store_id` field, you
+    #   would specify `store_id` as a dimension to group sales forecasts for
+    #   each store.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] forecast_frequency
+    #   The frequency of predictions in a forecast.
+    #
+    #   Valid intervals are Y (Year), M (Month), W (Week), D (Day), H
+    #   (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes),
+    #   5min (5 minutes), and 1min (1 minute). For example, "Y" indicates
+    #   every year and "5min" indicates every five minutes.
+    #
+    #   The frequency must be greater than or equal to the
+    #   TARGET\_TIME\_SERIES dataset frequency.
+    #
+    #   When a RELATED\_TIME\_SERIES dataset is provided, the frequency must
+    #   be equal to the RELATED\_TIME\_SERIES dataset frequency.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_config
+    #   The data configuration for your dataset group and any additional
+    #   datasets.
+    #   @return [Types::DataConfig]
+    #
+    # @!attribute [rw] encryption_config
+    #   An AWS Key Management Service (KMS) key and an AWS Identity and
+    #   Access Management (IAM) role that Amazon Forecast can assume to
+    #   access the key. You can specify this optional object in the
+    #   CreateDataset and CreatePredictor requests.
+    #   @return [Types::EncryptionConfig]
+    #
+    # @!attribute [rw] reference_predictor_arn
+    #   The ARN of the predictor to retrain or upgrade. This parameter is
+    #   only used when retraining or upgrading a predictor. When creating a
+    #   new predictor, do not specify a value for this parameter.
+    #
+    #   When upgrading or retraining a predictor, only specify values for
+    #   the `ReferencePredictorArn` and `PredictorName`. The value for
+    #   `PredictorName` must be a unique predictor name.
+    #   @return [String]
+    #
+    # @!attribute [rw] optimization_metric
+    #   The accuracy metric used to optimize the predictor.
+    #   @return [String]
+    #
+    # @!attribute [rw] explain_predictor
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata to help you categorize and organize your
+    #   predictors. Each tag consists of a key and an optional value, both
+    #   of which you define. Tag keys and values are case sensitive.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * For each resource, each tag key must be unique and each tag key
+    #     must have one value.
+    #
+    #   * Maximum number of tags per resource: 50.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
+    #
+    #   * Accepted characters: all letters and numbers, spaces representable
+    #     in UTF-8, and + - = . \_ : / @. If your tagging schema is used
+    #     across other services and resources, the character restrictions of
+    #     those services also apply.
+    #
+    #   * Key prefixes cannot include any upper or lowercase combination of
+    #     `aws:` or `AWS:`. Values can have this prefix. If a tag value has
+    #     `aws` as its prefix but the key does not, Forecast considers it to
+    #     be a user tag and will count against the limit of 50 tags. Tags
+    #     with only the key prefix of `aws` do not count against your tags
+    #     per resource limit. You cannot edit or delete tag keys with this
+    #     prefix.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateAutoPredictorRequest AWS API Documentation
+    #
+    class CreateAutoPredictorRequest < Struct.new(
+      :predictor_name,
+      :forecast_horizon,
+      :forecast_types,
+      :forecast_dimensions,
+      :forecast_frequency,
+      :data_config,
+      :encryption_config,
+      :reference_predictor_arn,
+      :optimization_metric,
+      :explain_predictor,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] predictor_arn
+    #   The Amazon Resource Name (ARN) of the predictor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateAutoPredictorResponse AWS API Documentation
+    #
+    class CreateAutoPredictorResponse < Struct.new(
+      :predictor_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -496,6 +937,230 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateExplainabilityExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         explainability_export_name: "Name", # required
+    #         explainability_arn: "Arn", # required
+    #         destination: { # required
+    #           s3_config: { # required
+    #             path: "S3Path", # required
+    #             role_arn: "Arn", # required
+    #             kms_key_arn: "KMSKeyArn",
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] explainability_export_name
+    #   A unique name for the Explainability export.
+    #   @return [String]
+    #
+    # @!attribute [rw] explainability_arn
+    #   The Amazon Resource Name (ARN) of the Explainability to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination for an export job. Provide an S3 path, an AWS
+    #   Identity and Access Management (IAM) role that allows Amazon
+    #   Forecast to access the location, and an AWS Key Management Service
+    #   (KMS) key (optional).
+    #   @return [Types::DataDestination]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata to help you categorize and organize your
+    #   resources. Each tag consists of a key and an optional value, both of
+    #   which you define. Tag keys and values are case sensitive.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * For each resource, each tag key must be unique and each tag key
+    #     must have one value.
+    #
+    #   * Maximum number of tags per resource: 50.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
+    #
+    #   * Accepted characters: all letters and numbers, spaces representable
+    #     in UTF-8, and + - = . \_ : / @. If your tagging schema is used
+    #     across other services and resources, the character restrictions of
+    #     those services also apply.
+    #
+    #   * Key prefixes cannot include any upper or lowercase combination of
+    #     `aws:` or `AWS:`. Values can have this prefix. If a tag value has
+    #     `aws` as its prefix but the key does not, Forecast considers it to
+    #     be a user tag and will count against the limit of 50 tags. Tags
+    #     with only the key prefix of `aws` do not count against your tags
+    #     per resource limit. You cannot edit or delete tag keys with this
+    #     prefix.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateExplainabilityExportRequest AWS API Documentation
+    #
+    class CreateExplainabilityExportRequest < Struct.new(
+      :explainability_export_name,
+      :explainability_arn,
+      :destination,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] explainability_export_arn
+    #   The Amazon Resource Name (ARN) of the export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateExplainabilityExportResponse AWS API Documentation
+    #
+    class CreateExplainabilityExportResponse < Struct.new(
+      :explainability_export_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateExplainabilityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         explainability_name: "Name", # required
+    #         resource_arn: "Arn", # required
+    #         explainability_config: { # required
+    #           time_series_granularity: "ALL", # required, accepts ALL, SPECIFIC
+    #           time_point_granularity: "ALL", # required, accepts ALL, SPECIFIC
+    #         },
+    #         data_source: {
+    #           s3_config: { # required
+    #             path: "S3Path", # required
+    #             role_arn: "Arn", # required
+    #             kms_key_arn: "KMSKeyArn",
+    #           },
+    #         },
+    #         schema: {
+    #           attributes: [
+    #             {
+    #               attribute_name: "Name",
+    #               attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
+    #             },
+    #           ],
+    #         },
+    #         enable_visualization: false,
+    #         start_date_time: "LocalDateTime",
+    #         end_date_time: "LocalDateTime",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] explainability_name
+    #   A unique name for the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Predictor or Forecast used to
+    #   create the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] explainability_config
+    #   The configuration settings that define the granularity of time
+    #   series and time points for the Explainability.
+    #   @return [Types::ExplainabilityConfig]
+    #
+    # @!attribute [rw] data_source
+    #   The source of your training data, an AWS Identity and Access
+    #   Management (IAM) role that allows Amazon Forecast to access the data
+    #   and, optionally, an AWS Key Management Service (KMS) key. This
+    #   object is submitted in the CreateDatasetImportJob request.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] schema
+    #   Defines the fields of a dataset. You specify this object in the
+    #   CreateDataset request.
+    #   @return [Types::Schema]
+    #
+    # @!attribute [rw] enable_visualization
+    #   Create an Expainability visualization that is viewable within the
+    #   AWS console.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] start_date_time
+    #   If `TimePointGranularity` is set to `SPECIFIC`, define the first
+    #   point for the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date_time
+    #   If `TimePointGranularity` is set to `SPECIFIC`, define the last time
+    #   point for the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Optional metadata to help you categorize and organize your
+    #   resources. Each tag consists of a key and an optional value, both of
+    #   which you define. Tag keys and values are case sensitive.
+    #
+    #   The following restrictions apply to tags:
+    #
+    #   * For each resource, each tag key must be unique and each tag key
+    #     must have one value.
+    #
+    #   * Maximum number of tags per resource: 50.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8.
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8.
+    #
+    #   * Accepted characters: all letters and numbers, spaces representable
+    #     in UTF-8, and + - = . \_ : / @. If your tagging schema is used
+    #     across other services and resources, the character restrictions of
+    #     those services also apply.
+    #
+    #   * Key prefixes cannot include any upper or lowercase combination of
+    #     `aws:` or `AWS:`. Values can have this prefix. If a tag value has
+    #     `aws` as its prefix but the key does not, Forecast considers it to
+    #     be a user tag and will count against the limit of 50 tags. Tags
+    #     with only the key prefix of `aws` do not count against your tags
+    #     per resource limit. You cannot edit or delete tag keys with this
+    #     prefix.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateExplainabilityRequest AWS API Documentation
+    #
+    class CreateExplainabilityRequest < Struct.new(
+      :explainability_name,
+      :resource_arn,
+      :explainability_config,
+      :data_source,
+      :schema,
+      :enable_visualization,
+      :start_date_time,
+      :end_date_time,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] explainability_arn
+    #   The Amazon Resource Name (ARN) of the Explainability.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateExplainabilityResponse AWS API Documentation
+    #
+    class CreateExplainabilityResponse < Struct.new(
+      :explainability_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateForecastExportJobRequest
     #   data as a hash:
     #
@@ -782,7 +1447,7 @@ module Aws::ForecastService
     #         forecast_horizon: 1, # required
     #         forecast_types: ["ForecastType"],
     #         perform_auto_ml: false,
-    #         auto_ml_override_strategy: "LatencyOptimized", # accepts LatencyOptimized
+    #         auto_ml_override_strategy: "LatencyOptimized", # accepts LatencyOptimized, AccuracyOptimized
     #         perform_hpo: false,
     #         training_parameters: {
     #           "ParameterKey" => "ParameterValue",
@@ -1063,6 +1728,55 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # The data configuration for your dataset group and any additional
+    # datasets.
+    #
+    # @note When making an API call, you may pass DataConfig
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_group_arn: "Arn", # required
+    #         attribute_configs: [
+    #           {
+    #             attribute_name: "Name", # required
+    #             transformations: { # required
+    #               "Name" => "Value",
+    #             },
+    #           },
+    #         ],
+    #         additional_datasets: [
+    #           {
+    #             name: "Name", # required
+    #             configuration: {
+    #               "Name" => ["Value"],
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dataset_group_arn
+    #   The ARN of the dataset group used to train the predictor.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_configs
+    #   Aggregation and filling options for attributes in your dataset
+    #   group.
+    #   @return [Array<Types::AttributeConfig>]
+    #
+    # @!attribute [rw] additional_datasets
+    #   Additional built-in datasets like Holidays and the Weather Index.
+    #   @return [Array<Types::AdditionalDataset>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DataConfig AWS API Documentation
+    #
+    class DataConfig < Struct.new(
+      :dataset_group_arn,
+      :attribute_configs,
+      :additional_datasets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The destination for an export job. Provide an S3 path, an AWS Identity
     # and Access Management (IAM) role that allows Amazon Forecast to access
     # the location, and an AWS Key Management Service (KMS) key (optional).
@@ -1330,6 +2044,46 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteExplainabilityExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         explainability_export_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] explainability_export_arn
+    #   The Amazon Resource Name (ARN) of the Explainability export to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteExplainabilityExportRequest AWS API Documentation
+    #
+    class DeleteExplainabilityExportRequest < Struct.new(
+      :explainability_export_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteExplainabilityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         explainability_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] explainability_arn
+    #   The Amazon Resource Name (ARN) of the Explainability resource to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteExplainabilityRequest AWS API Documentation
+    #
+    class DeleteExplainabilityRequest < Struct.new(
+      :explainability_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteForecastExportJobRequest
     #   data as a hash:
     #
@@ -1423,6 +2177,145 @@ module Aws::ForecastService
     #
     class DeleteResourceTreeRequest < Struct.new(
       :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAutoPredictorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         predictor_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] predictor_arn
+    #   The Amazon Resource Name (ARN) of the predictor.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeAutoPredictorRequest AWS API Documentation
+    #
+    class DescribeAutoPredictorRequest < Struct.new(
+      :predictor_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] predictor_arn
+    #   The Amazon Resource Name (ARN) of the predictor
+    #   @return [String]
+    #
+    # @!attribute [rw] predictor_name
+    #   The name of the predictor.
+    #   @return [String]
+    #
+    # @!attribute [rw] forecast_horizon
+    #   The number of time-steps that the model predicts. The forecast
+    #   horizon is also called the prediction length.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] forecast_types
+    #   The forecast types used during predictor training. Default value is
+    #   \["0.1","0.5","0.9"\].
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] forecast_frequency
+    #   The frequency of predictions in a forecast.
+    #
+    #   Valid intervals are Y (Year), M (Month), W (Week), D (Day), H
+    #   (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes),
+    #   5min (5 minutes), and 1min (1 minute). For example, "Y" indicates
+    #   every year and "5min" indicates every five minutes.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_import_job_arns
+    #   An array of the ARNs of the dataset import jobs used to import
+    #   training data for the predictor.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] data_config
+    #   The data configuration for your dataset group and any additional
+    #   datasets.
+    #   @return [Types::DataConfig]
+    #
+    # @!attribute [rw] encryption_config
+    #   An AWS Key Management Service (KMS) key and an AWS Identity and
+    #   Access Management (IAM) role that Amazon Forecast can assume to
+    #   access the key. You can specify this optional object in the
+    #   CreateDataset and CreatePredictor requests.
+    #   @return [Types::EncryptionConfig]
+    #
+    # @!attribute [rw] reference_predictor_summary
+    #   The ARN and state of the reference predictor. This parameter is only
+    #   valid for retrained or upgraded predictors.
+    #   @return [Types::ReferencePredictorSummary]
+    #
+    # @!attribute [rw] estimated_time_remaining_in_minutes
+    #   The estimated time remaining in minutes for the predictor training
+    #   job to complete.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the predictor. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   In the event of an error, a message detailing the cause of the
+    #   error.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp of the CreateAutoPredictor request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] optimization_metric
+    #   The accuracy metric used to optimize the predictor.
+    #   @return [String]
+    #
+    # @!attribute [rw] explainability_info
+    #   @return [Types::ExplainabilityInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeAutoPredictorResponse AWS API Documentation
+    #
+    class DescribeAutoPredictorResponse < Struct.new(
+      :predictor_arn,
+      :predictor_name,
+      :forecast_horizon,
+      :forecast_types,
+      :forecast_frequency,
+      :dataset_import_job_arns,
+      :data_config,
+      :encryption_config,
+      :reference_predictor_summary,
+      :estimated_time_remaining_in_minutes,
+      :status,
+      :message,
+      :creation_time,
+      :last_modification_time,
+      :optimization_metric,
+      :explainability_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1757,6 +2650,219 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeExplainabilityExportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         explainability_export_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] explainability_export_arn
+    #   The Amazon Resource Name (ARN) of the Explainability export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeExplainabilityExportRequest AWS API Documentation
+    #
+    class DescribeExplainabilityExportRequest < Struct.new(
+      :explainability_export_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] explainability_export_arn
+    #   The Amazon Resource Name (ARN) of the Explainability export.
+    #   @return [String]
+    #
+    # @!attribute [rw] explainability_export_name
+    #   The name of the Explainability export.
+    #   @return [String]
+    #
+    # @!attribute [rw] explainability_arn
+    #   The Amazon Resource Name (ARN) of the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination for an export job. Provide an S3 path, an AWS
+    #   Identity and Access Management (IAM) role that allows Amazon
+    #   Forecast to access the location, and an AWS Key Management Service
+    #   (KMS) key (optional).
+    #   @return [Types::DataDestination]
+    #
+    # @!attribute [rw] message
+    #   Information about any errors that occurred during the export.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Explainability export. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the Explainability export was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeExplainabilityExportResponse AWS API Documentation
+    #
+    class DescribeExplainabilityExportResponse < Struct.new(
+      :explainability_export_arn,
+      :explainability_export_name,
+      :explainability_arn,
+      :destination,
+      :message,
+      :status,
+      :creation_time,
+      :last_modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeExplainabilityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         explainability_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] explainability_arn
+    #   The Amazon Resource Name (ARN) of the Explaianability to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeExplainabilityRequest AWS API Documentation
+    #
+    class DescribeExplainabilityRequest < Struct.new(
+      :explainability_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] explainability_arn
+    #   The Amazon Resource Name (ARN) of the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] explainability_name
+    #   The name of the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Predictor or Forecast used to
+    #   create the Explainability resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] explainability_config
+    #   The configuration settings that define the granularity of time
+    #   series and time points for the Explainability.
+    #   @return [Types::ExplainabilityConfig]
+    #
+    # @!attribute [rw] enable_visualization
+    #   Whether the visualization was enabled for the Explainability
+    #   resource.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] data_source
+    #   The source of your training data, an AWS Identity and Access
+    #   Management (IAM) role that allows Amazon Forecast to access the data
+    #   and, optionally, an AWS Key Management Service (KMS) key. This
+    #   object is submitted in the CreateDatasetImportJob request.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] schema
+    #   Defines the fields of a dataset. You specify this object in the
+    #   CreateDataset request.
+    #   @return [Types::Schema]
+    #
+    # @!attribute [rw] start_date_time
+    #   If `TimePointGranularity` is set to `SPECIFIC`, the first time point
+    #   in the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_date_time
+    #   If `TimePointGranularity` is set to `SPECIFIC`, the last time point
+    #   in the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_time_remaining_in_minutes
+    #   The estimated time remaining in minutes for the CreateExplainability
+    #   job to complete.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message
+    #   If an error occurred, a message about the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Explainability resource. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the Explainability resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeExplainabilityResponse AWS API Documentation
+    #
+    class DescribeExplainabilityResponse < Struct.new(
+      :explainability_arn,
+      :explainability_name,
+      :resource_arn,
+      :explainability_config,
+      :enable_visualization,
+      :data_source,
+      :schema,
+      :start_date_time,
+      :end_date_time,
+      :estimated_time_remaining_in_minutes,
+      :message,
+      :status,
+      :creation_time,
+      :last_modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeForecastExportJobRequest
     #   data as a hash:
     #
@@ -2072,6 +3178,10 @@ module Aws::ForecastService
     #   training.
     #   @return [String]
     #
+    # @!attribute [rw] auto_ml_algorithm_arns
+    #   When `PerformAutoML` is specified, the ARN of the chosen algorithm.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] forecast_horizon
     #   The number of time-steps of the forecast. The forecast horizon is
     #   also called the prediction length.
@@ -2150,13 +3260,13 @@ module Aws::ForecastService
     #   job to complete.
     #   @return [Integer]
     #
+    # @!attribute [rw] is_auto_predictor
+    #   Whether the predictor was created with CreateAutoPredictor.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dataset_import_job_arns
     #   An array of the ARNs of the dataset import jobs used to import
     #   training data for the predictor.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] auto_ml_algorithm_arns
-    #   When `PerformAutoML` is specified, the ARN of the chosen algorithm.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status
@@ -2209,6 +3319,7 @@ module Aws::ForecastService
       :predictor_arn,
       :predictor_name,
       :algorithm_arn,
+      :auto_ml_algorithm_arns,
       :forecast_horizon,
       :forecast_types,
       :perform_auto_ml,
@@ -2222,8 +3333,8 @@ module Aws::ForecastService
       :encryption_config,
       :predictor_execution_details,
       :estimated_time_remaining_in_minutes,
+      :is_auto_predictor,
       :dataset_import_job_arns,
-      :auto_ml_algorithm_arns,
       :status,
       :message,
       :creation_time,
@@ -2361,6 +3472,212 @@ module Aws::ForecastService
     class EvaluationResult < Struct.new(
       :algorithm_arn,
       :test_windows)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The ExplainabilityConfig data type defines the number of time series
+    # and time points included in CreateExplainability.
+    #
+    # If you provide a predictor ARN for `ResourceArn`, you must set both
+    # `TimePointGranularity` and `TimeSeriesGranularity` to “ALL”. When
+    # creating Predictor Explainability, Amazon Forecast considers all time
+    # series and time points.
+    #
+    # If you provide a forecast ARN for `ResourceArn`, you can set
+    # `TimePointGranularity` and `TimeSeriesGranularity` to either “ALL” or
+    # “Specific”.
+    #
+    # @note When making an API call, you may pass ExplainabilityConfig
+    #   data as a hash:
+    #
+    #       {
+    #         time_series_granularity: "ALL", # required, accepts ALL, SPECIFIC
+    #         time_point_granularity: "ALL", # required, accepts ALL, SPECIFIC
+    #       }
+    #
+    # @!attribute [rw] time_series_granularity
+    #   To create an Explainability for all time series in your datasets,
+    #   use `ALL`. To create an Explainability for specific time series in
+    #   your datasets, use `SPECIFIC`.
+    #
+    #   Specify time series by uploading a CSV file to an Amazon S3 bucket
+    #   and set the location within the DataDestination data type.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_point_granularity
+    #   To create an Explainability for all time points in your forecast
+    #   horizon, use `ALL`. To create an Explainability for specific time
+    #   points in your forecast horizon, use `SPECIFIC`.
+    #
+    #   Specify time points with the `StartDateTime` and `EndDateTime`
+    #   parameters within the CreateExplainability operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ExplainabilityConfig AWS API Documentation
+    #
+    class ExplainabilityConfig < Struct.new(
+      :time_series_granularity,
+      :time_point_granularity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the Explainability export properties used in the
+    # ListExplainabilityExports operation. To get a complete set of
+    # properties, call the DescribeExplainabilityExport operation, and
+    # provide the `ExplainabilityExportArn`.
+    #
+    # @!attribute [rw] explainability_export_arn
+    #   The Amazon Resource Name (ARN) of the Explainability export.
+    #   @return [String]
+    #
+    # @!attribute [rw] explainability_export_name
+    #   The name of the Explainability export
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination for an export job. Provide an S3 path, an AWS
+    #   Identity and Access Management (IAM) role that allows Amazon
+    #   Forecast to access the location, and an AWS Key Management Service
+    #   (KMS) key (optional).
+    #   @return [Types::DataDestination]
+    #
+    # @!attribute [rw] status
+    #   The status of the Explainability export. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Information about any errors that may have occurred during the
+    #   Explainability export.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the Explainability was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ExplainabilityExportSummary AWS API Documentation
+    #
+    class ExplainabilityExportSummary < Struct.new(
+      :explainability_export_arn,
+      :explainability_export_name,
+      :destination,
+      :status,
+      :message,
+      :creation_time,
+      :last_modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] explainability_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ExplainabilityInfo AWS API Documentation
+    #
+    class ExplainabilityInfo < Struct.new(
+      :explainability_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the Explainability properties used in the
+    # ListExplainabilities operation. To get a complete set of properties,
+    # call the DescribeExplainability operation, and provide the listed
+    # `ExplainabilityArn`.
+    #
+    # @!attribute [rw] explainability_arn
+    #   The Amazon Resource Name (ARN) of the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] explainability_name
+    #   The name of the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Predictor or Forecast used to
+    #   create the Explainability.
+    #   @return [String]
+    #
+    # @!attribute [rw] explainability_config
+    #   The configuration settings that define the granularity of time
+    #   series and time points for the Explainability.
+    #   @return [Types::ExplainabilityConfig]
+    #
+    # @!attribute [rw] status
+    #   The status of the Explainability. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Information about any errors that may have occurred during the
+    #   Explainability creation process.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the Explainability was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the resource was modified. The timestamp depends on
+    #   the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `CREATE_STOPPING` - The current timestamp.
+    #
+    #   * `CREATE_STOPPED` - When the job stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ExplainabilitySummary AWS API Documentation
+    #
+    class ExplainabilitySummary < Struct.new(
+      :explainability_arn,
+      :explainability_name,
+      :resource_arn,
+      :explainability_config,
+      :status,
+      :message,
+      :creation_time,
+      :last_modification_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2709,6 +4026,9 @@ module Aws::ForecastService
     #   The ARN of the predictor used to generate the forecast.
     #   @return [String]
     #
+    # @!attribute [rw] created_using_auto_predictor
+    #   @return [Boolean]
+    #
     # @!attribute [rw] dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group that provided
     #   the data used to train the predictor.
@@ -2760,6 +4080,7 @@ module Aws::ForecastService
       :forecast_arn,
       :forecast_name,
       :predictor_arn,
+      :created_using_auto_predictor,
       :dataset_group_arn,
       :status,
       :message,
@@ -2792,6 +4113,10 @@ module Aws::ForecastService
     #   An array of results from evaluating the predictor.
     #   @return [Array<Types::EvaluationResult>]
     #
+    # @!attribute [rw] is_auto_predictor
+    #   Whether the predictor was created with CreateAutoPredictor.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] auto_ml_override_strategy
     #   <note markdown="1"> The `LatencyOptimized` AutoML override strategy is only available in
     #   private beta. Contact AWS Support or your account manager to learn
@@ -2814,6 +4139,7 @@ module Aws::ForecastService
     #
     class GetAccuracyMetricsResponse < Struct.new(
       :predictor_evaluation_results,
+      :is_auto_predictor,
       :auto_ml_override_strategy,
       :optimization_metric)
       SENSITIVE = []
@@ -3189,6 +4515,150 @@ module Aws::ForecastService
     #
     class ListDatasetsResponse < Struct.new(
       :datasets,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListExplainabilitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             key: "String", # required
+    #             value: "Arn", # required
+    #             condition: "IS", # required, accepts IS, IS_NOT
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a NextToken. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of items returned in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   An array of filters. For each filter, provide a condition and a
+    #   match statement. The condition is either `IS` or `IS_NOT`, which
+    #   specifies whether to include or exclude the resources that match the
+    #   statement from the list. The match statement consists of a key and a
+    #   value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `PredictorArn` and `Status`.
+    #
+    #   * `Value` - The value to match.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListExplainabilitiesRequest AWS API Documentation
+    #
+    class ListExplainabilitiesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] explainabilities
+    #   An array of objects that summarize the properties of each
+    #   Explainability resource.
+    #   @return [Array<Types::ExplainabilitySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Returns this token if the response is truncated. To retrieve the
+    #   next set of results, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListExplainabilitiesResponse AWS API Documentation
+    #
+    class ListExplainabilitiesResponse < Struct.new(
+      :explainabilities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListExplainabilityExportsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             key: "String", # required
+    #             value: "Arn", # required
+    #             condition: "IS", # required, accepts IS, IS_NOT
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a NextToken. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of items to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   An array of filters. For each filter, provide a condition and a
+    #   match statement. The condition is either `IS` or `IS_NOT`, which
+    #   specifies whether to include or exclude resources that match the
+    #   statement from the list. The match statement consists of a key and a
+    #   value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. Valid values are
+    #     `PredictorArn` and `Status`.
+    #
+    #   * `Value` - The value to match.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListExplainabilityExportsRequest AWS API Documentation
+    #
+    class ListExplainabilityExportsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] explainability_exports
+    #   An array of objects that summarize the properties of each
+    #   Explainability export.
+    #   @return [Array<Types::ExplainabilityExportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Returns this token if the response is truncated. To retrieve the
+    #   next set of results, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListExplainabilityExportsResponse AWS API Documentation
+    #
+    class ListExplainabilityExportsResponse < Struct.new(
+      :explainability_exports,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3760,6 +5230,15 @@ module Aws::ForecastService
     #   the data used to train the predictor.
     #   @return [String]
     #
+    # @!attribute [rw] is_auto_predictor
+    #   Whether AutoPredictor was used to create the predictor.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] reference_predictor_summary
+    #   A summary of the reference predictor used if the predictor was
+    #   retrained or upgraded.
+    #   @return [Types::ReferencePredictorSummary]
+    #
     # @!attribute [rw] status
     #   The status of the predictor. States include:
     #
@@ -3806,10 +5285,32 @@ module Aws::ForecastService
       :predictor_arn,
       :predictor_name,
       :dataset_group_arn,
+      :is_auto_predictor,
+      :reference_predictor_summary,
       :status,
       :message,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the reference predictor used when retraining or
+    # upgrading a predictor.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the reference predictor.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Whether the reference predictor is `Active` or `Deleted`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ReferencePredictorSummary AWS API Documentation
+    #
+    class ReferencePredictorSummary < Struct.new(
+      :arn,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end

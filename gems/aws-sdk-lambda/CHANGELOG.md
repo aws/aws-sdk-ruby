@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2021-11-18)
+------------------
+
+* Feature - Added support for CLIENT_CERTIFICATE_TLS_AUTH and SERVER_ROOT_CA_CERTIFICATE as SourceAccessType for MSK and Kafka event source mappings.
+
 1.71.0 (2021-11-04)
 ------------------
 

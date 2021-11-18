@@ -342,7 +342,11 @@ module Aws::LexModelsV2
     #
     # @option params [required, String] :bot_id
     #   The identifier of the bot to build. The identifier is returned in the
-    #   response from the operation.
+    #   response from the [CreateBot][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html
     #
     # @option params [required, String] :bot_version
     #   The version of the bot to build. This can only be the draft version of
@@ -501,7 +505,12 @@ module Aws::LexModelsV2
     #
     # @option params [String] :bot_version
     #   The version of the bot that this alias points to. You can use the
-    #   operation to change the bot version associated with the alias.
+    #   [UpdateBotAlias][1] operation to change the bot version associated
+    #   with the alias.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_UpdateBotAlias.html
     #
     # @option params [Hash<String,Types::BotAliasLocaleSettings>] :bot_alias_locale_settings
     #   Maps configuration information to a specific locale. You can use this
@@ -700,6 +709,7 @@ module Aws::LexModelsV2
     #     nlu_intent_confidence_threshold: 1.0, # required
     #     voice_settings: {
     #       voice_id: "VoiceId", # required
+    #       engine: "standard", # accepts standard, neural
     #     },
     #   })
     #
@@ -712,6 +722,7 @@ module Aws::LexModelsV2
     #   resp.description #=> String
     #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.voice_settings.voice_id #=> String
+    #   resp.voice_settings.engine #=> String, one of "standard", "neural"
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
     #   resp.creation_date_time #=> Time
     #
@@ -2570,7 +2581,11 @@ module Aws::LexModelsV2
     end
 
     # Deletes a specific version of a bot. To delete all version of a bot,
-    # use the DeleteBot operation.
+    # use the [DeleteBot][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DeleteBot.html
     #
     # @option params [required, String] :bot_id
     #   The identifier of the bot that contains the version.
@@ -2904,15 +2919,20 @@ module Aws::LexModelsV2
     # Deletes stored utterances.
     #
     # Amazon Lex stores the utterances that users send to your bot.
-    # Utterances are stored for 15 days for use with the operation, and then
-    # stored indefinitely for use in improving the ability of your bot to
-    # respond to user input..
+    # Utterances are stored for 15 days for use with the
+    # [ListAggregatedUtterances][1] operation, and then stored indefinitely
+    # for use in improving the ability of your bot to respond to user
+    # input..
     #
     # Use the `DeleteUtterances` operation to manually delete utterances for
     # a specific session. When you use the `DeleteUtterances` operation,
     # utterances stored for improving your bot's ability to respond to user
     # input are deleted immediately. Utterances stored for use with the
     # `ListAggregatedUtterances` operation are deleted after 15 days.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_ListAggregatedUtterances.html
     #
     # @option params [required, String] :bot_id
     #   The unique identifier of the bot that contains the utterances.
@@ -2928,7 +2948,13 @@ module Aws::LexModelsV2
     #
     # @option params [String] :session_id
     #   The unique identifier of the session with the user. The ID is returned
-    #   in the response from the and operations.
+    #   in the response from the [RecognizeText][1] and
+    #   [RecognizeUtterance][2] operations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeText.html
+    #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeUtterance.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3123,6 +3149,7 @@ module Aws::LexModelsV2
     #   resp.description #=> String
     #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.voice_settings.voice_id #=> String
+    #   resp.voice_settings.engine #=> String, one of "standard", "neural"
     #   resp.intents_count #=> Integer
     #   resp.slot_types_count #=> Integer
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
@@ -3299,6 +3326,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.locale_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
+    #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural"
     #   resp.imported_resource_id #=> String
     #   resp.imported_resource_name #=> String
     #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict"
@@ -4268,7 +4296,11 @@ module Aws::LexModelsV2
     # To use a built-in intent as a the base for your own intent, include
     # the built-in intent signature in the `parentIntentSignature` parameter
     # when you call the `CreateIntent` operation. For more information, see
-    # CreateIntent.
+    # [CreateIntent][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateIntent.html
     #
     # @option params [required, String] :locale_id
     #   The identifier of the language and locale of the intents to list. The
@@ -4907,7 +4939,11 @@ module Aws::LexModelsV2
     #
     # @option params [required, String] :import_id
     #   The unique identifier for the import. It is included in the response
-    #   from the operation.
+    #   from the [CreateUploadUrl][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateUploadUrl.html
     #
     # @option params [required, Types::ImportResourceSpecification] :resource_specification
     #   Parameters for creating the bot or bot locale.
@@ -4957,6 +4993,7 @@ module Aws::LexModelsV2
     #         nlu_intent_confidence_threshold: 1.0,
     #         voice_settings: {
     #           voice_id: "VoiceId", # required
+    #           engine: "standard", # accepts standard, neural
     #         },
     #       },
     #     },
@@ -4980,6 +5017,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.locale_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
+    #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural"
     #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict"
     #   resp.import_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.creation_date_time #=> Time
@@ -5056,7 +5094,11 @@ module Aws::LexModelsV2
     #
     # @option params [required, String] :bot_id
     #   The unique identifier of the bot to update. This identifier is
-    #   returned by the CreateBot operation.
+    #   returned by the [CreateBot][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html
     #
     # @option params [required, String] :bot_name
     #   The new name of the bot. The name must be unique in the account that
@@ -5308,6 +5350,7 @@ module Aws::LexModelsV2
     #     nlu_intent_confidence_threshold: 1.0, # required
     #     voice_settings: {
     #       voice_id: "VoiceId", # required
+    #       engine: "standard", # accepts standard, neural
     #     },
     #   })
     #
@@ -5320,6 +5363,7 @@ module Aws::LexModelsV2
     #   resp.description #=> String
     #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.voice_settings.voice_id #=> String
+    #   resp.voice_settings.engine #=> String, one of "standard", "neural"
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
@@ -5340,7 +5384,11 @@ module Aws::LexModelsV2
     # The password is not required. If you don't supply a password, Amazon
     # Lex generates a zip file that is not protected by a password. This is
     # the archive that is available at the pre-signed S3 URL provided by the
-    # operation.
+    # [DescribeExport][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html
     #
     # @option params [required, String] :export_id
     #   The unique identifier Amazon Lex assigned to the export.
@@ -6781,7 +6829,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

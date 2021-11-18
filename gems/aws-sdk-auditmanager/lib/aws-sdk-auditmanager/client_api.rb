@@ -81,6 +81,12 @@ module Aws::AuditManager
     ControlCommentBody = Shapes::StringShape.new(name: 'ControlCommentBody')
     ControlComments = Shapes::ListShape.new(name: 'ControlComments')
     ControlDescription = Shapes::StringShape.new(name: 'ControlDescription')
+    ControlDomainInsights = Shapes::StructureShape.new(name: 'ControlDomainInsights')
+    ControlDomainInsightsList = Shapes::ListShape.new(name: 'ControlDomainInsightsList')
+    ControlInsightsMetadata = Shapes::ListShape.new(name: 'ControlInsightsMetadata')
+    ControlInsightsMetadataByAssessment = Shapes::ListShape.new(name: 'ControlInsightsMetadataByAssessment')
+    ControlInsightsMetadataByAssessmentItem = Shapes::StructureShape.new(name: 'ControlInsightsMetadataByAssessmentItem')
+    ControlInsightsMetadataItem = Shapes::StructureShape.new(name: 'ControlInsightsMetadataItem')
     ControlMappingSource = Shapes::StructureShape.new(name: 'ControlMappingSource')
     ControlMappingSources = Shapes::ListShape.new(name: 'ControlMappingSources')
     ControlMetadata = Shapes::StructureShape.new(name: 'ControlMetadata')
@@ -147,6 +153,7 @@ module Aws::AuditManager
     EvidenceAttributeValue = Shapes::StringShape.new(name: 'EvidenceAttributeValue')
     EvidenceAttributes = Shapes::MapShape.new(name: 'EvidenceAttributes')
     EvidenceIds = Shapes::ListShape.new(name: 'EvidenceIds')
+    EvidenceInsights = Shapes::StructureShape.new(name: 'EvidenceInsights')
     EvidenceList = Shapes::ListShape.new(name: 'EvidenceList')
     EvidenceSources = Shapes::ListShape.new(name: 'EvidenceSources')
     Filename = Shapes::StringShape.new(name: 'Filename')
@@ -181,6 +188,10 @@ module Aws::AuditManager
     GetEvidenceFoldersByAssessmentResponse = Shapes::StructureShape.new(name: 'GetEvidenceFoldersByAssessmentResponse')
     GetEvidenceRequest = Shapes::StructureShape.new(name: 'GetEvidenceRequest')
     GetEvidenceResponse = Shapes::StructureShape.new(name: 'GetEvidenceResponse')
+    GetInsightsByAssessmentRequest = Shapes::StructureShape.new(name: 'GetInsightsByAssessmentRequest')
+    GetInsightsByAssessmentResponse = Shapes::StructureShape.new(name: 'GetInsightsByAssessmentResponse')
+    GetInsightsRequest = Shapes::StructureShape.new(name: 'GetInsightsRequest')
+    GetInsightsResponse = Shapes::StructureShape.new(name: 'GetInsightsResponse')
     GetOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'GetOrganizationAdminAccountRequest')
     GetOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'GetOrganizationAdminAccountResponse')
     GetServicesInScopeRequest = Shapes::StructureShape.new(name: 'GetServicesInScopeRequest')
@@ -189,6 +200,8 @@ module Aws::AuditManager
     GetSettingsResponse = Shapes::StructureShape.new(name: 'GetSettingsResponse')
     HyperlinkName = Shapes::StringShape.new(name: 'HyperlinkName')
     IamArn = Shapes::StringShape.new(name: 'IamArn')
+    Insights = Shapes::StructureShape.new(name: 'Insights')
+    InsightsByAssessment = Shapes::StructureShape.new(name: 'InsightsByAssessment')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KeywordInputType = Shapes::StringShape.new(name: 'KeywordInputType')
@@ -196,6 +209,8 @@ module Aws::AuditManager
     Keywords = Shapes::ListShape.new(name: 'Keywords')
     KmsKey = Shapes::StringShape.new(name: 'KmsKey')
     LastUpdatedBy = Shapes::StringShape.new(name: 'LastUpdatedBy')
+    ListAssessmentControlInsightsByControlDomainRequest = Shapes::StructureShape.new(name: 'ListAssessmentControlInsightsByControlDomainRequest')
+    ListAssessmentControlInsightsByControlDomainResponse = Shapes::StructureShape.new(name: 'ListAssessmentControlInsightsByControlDomainResponse')
     ListAssessmentFrameworkShareRequestsRequest = Shapes::StructureShape.new(name: 'ListAssessmentFrameworkShareRequestsRequest')
     ListAssessmentFrameworkShareRequestsResponse = Shapes::StructureShape.new(name: 'ListAssessmentFrameworkShareRequestsResponse')
     ListAssessmentFrameworksRequest = Shapes::StructureShape.new(name: 'ListAssessmentFrameworksRequest')
@@ -205,6 +220,12 @@ module Aws::AuditManager
     ListAssessmentReportsResponse = Shapes::StructureShape.new(name: 'ListAssessmentReportsResponse')
     ListAssessmentsRequest = Shapes::StructureShape.new(name: 'ListAssessmentsRequest')
     ListAssessmentsResponse = Shapes::StructureShape.new(name: 'ListAssessmentsResponse')
+    ListControlDomainInsightsByAssessmentRequest = Shapes::StructureShape.new(name: 'ListControlDomainInsightsByAssessmentRequest')
+    ListControlDomainInsightsByAssessmentResponse = Shapes::StructureShape.new(name: 'ListControlDomainInsightsByAssessmentResponse')
+    ListControlDomainInsightsRequest = Shapes::StructureShape.new(name: 'ListControlDomainInsightsRequest')
+    ListControlDomainInsightsResponse = Shapes::StructureShape.new(name: 'ListControlDomainInsightsResponse')
+    ListControlInsightsByControlDomainRequest = Shapes::StructureShape.new(name: 'ListControlInsightsByControlDomainRequest')
+    ListControlInsightsByControlDomainResponse = Shapes::StructureShape.new(name: 'ListControlInsightsByControlDomainResponse')
     ListControlsRequest = Shapes::StructureShape.new(name: 'ListControlsRequest')
     ListControlsResponse = Shapes::StructureShape.new(name: 'ListControlsResponse')
     ListKeywordsForDataSourceRequest = Shapes::StructureShape.new(name: 'ListKeywordsForDataSourceRequest')
@@ -563,6 +584,33 @@ module Aws::AuditManager
 
     ControlComments.member = Shapes::ShapeRef.new(shape: ControlComment)
 
+    ControlDomainInsights.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
+    ControlDomainInsights.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
+    ControlDomainInsights.add_member(:controls_count_by_noncompliant_evidence, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "controlsCountByNoncompliantEvidence"))
+    ControlDomainInsights.add_member(:total_controls_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "totalControlsCount"))
+    ControlDomainInsights.add_member(:evidence_insights, Shapes::ShapeRef.new(shape: EvidenceInsights, location_name: "evidenceInsights"))
+    ControlDomainInsights.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdated"))
+    ControlDomainInsights.struct_class = Types::ControlDomainInsights
+
+    ControlDomainInsightsList.member = Shapes::ShapeRef.new(shape: ControlDomainInsights)
+
+    ControlInsightsMetadata.member = Shapes::ShapeRef.new(shape: ControlInsightsMetadataItem)
+
+    ControlInsightsMetadataByAssessment.member = Shapes::ShapeRef.new(shape: ControlInsightsMetadataByAssessmentItem)
+
+    ControlInsightsMetadataByAssessmentItem.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
+    ControlInsightsMetadataByAssessmentItem.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
+    ControlInsightsMetadataByAssessmentItem.add_member(:evidence_insights, Shapes::ShapeRef.new(shape: EvidenceInsights, location_name: "evidenceInsights"))
+    ControlInsightsMetadataByAssessmentItem.add_member(:control_set_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "controlSetName"))
+    ControlInsightsMetadataByAssessmentItem.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdated"))
+    ControlInsightsMetadataByAssessmentItem.struct_class = Types::ControlInsightsMetadataByAssessmentItem
+
+    ControlInsightsMetadataItem.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
+    ControlInsightsMetadataItem.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
+    ControlInsightsMetadataItem.add_member(:evidence_insights, Shapes::ShapeRef.new(shape: EvidenceInsights, location_name: "evidenceInsights"))
+    ControlInsightsMetadataItem.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdated"))
+    ControlInsightsMetadataItem.struct_class = Types::ControlInsightsMetadataItem
+
     ControlMappingSource.add_member(:source_id, Shapes::ShapeRef.new(shape: UUID, location_name: "sourceId"))
     ControlMappingSource.add_member(:source_name, Shapes::ShapeRef.new(shape: SourceName, location_name: "sourceName"))
     ControlMappingSource.add_member(:source_description, Shapes::ShapeRef.new(shape: SourceDescription, location_name: "sourceDescription"))
@@ -759,6 +807,11 @@ module Aws::AuditManager
 
     EvidenceIds.member = Shapes::ShapeRef.new(shape: UUID)
 
+    EvidenceInsights.add_member(:noncompliant_evidence_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "noncompliantEvidenceCount"))
+    EvidenceInsights.add_member(:compliant_evidence_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "compliantEvidenceCount"))
+    EvidenceInsights.add_member(:inconclusive_evidence_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "inconclusiveEvidenceCount"))
+    EvidenceInsights.struct_class = Types::EvidenceInsights
+
     EvidenceList.member = Shapes::ShapeRef.new(shape: Evidence)
 
     EvidenceSources.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -885,6 +938,17 @@ module Aws::AuditManager
     GetEvidenceResponse.add_member(:evidence, Shapes::ShapeRef.new(shape: Evidence, location_name: "evidence"))
     GetEvidenceResponse.struct_class = Types::GetEvidenceResponse
 
+    GetInsightsByAssessmentRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "assessmentId"))
+    GetInsightsByAssessmentRequest.struct_class = Types::GetInsightsByAssessmentRequest
+
+    GetInsightsByAssessmentResponse.add_member(:insights, Shapes::ShapeRef.new(shape: InsightsByAssessment, location_name: "insights"))
+    GetInsightsByAssessmentResponse.struct_class = Types::GetInsightsByAssessmentResponse
+
+    GetInsightsRequest.struct_class = Types::GetInsightsRequest
+
+    GetInsightsResponse.add_member(:insights, Shapes::ShapeRef.new(shape: Insights, location_name: "insights"))
+    GetInsightsResponse.struct_class = Types::GetInsightsResponse
+
     GetOrganizationAdminAccountRequest.struct_class = Types::GetOrganizationAdminAccountRequest
 
     GetOrganizationAdminAccountResponse.add_member(:admin_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "adminAccountId"))
@@ -902,10 +966,37 @@ module Aws::AuditManager
     GetSettingsResponse.add_member(:settings, Shapes::ShapeRef.new(shape: Settings, location_name: "settings"))
     GetSettingsResponse.struct_class = Types::GetSettingsResponse
 
+    Insights.add_member(:active_assessments_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "activeAssessmentsCount"))
+    Insights.add_member(:noncompliant_evidence_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "noncompliantEvidenceCount"))
+    Insights.add_member(:compliant_evidence_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "compliantEvidenceCount"))
+    Insights.add_member(:inconclusive_evidence_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "inconclusiveEvidenceCount"))
+    Insights.add_member(:assessment_controls_count_by_noncompliant_evidence, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "assessmentControlsCountByNoncompliantEvidence"))
+    Insights.add_member(:total_assessment_controls_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "totalAssessmentControlsCount"))
+    Insights.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdated"))
+    Insights.struct_class = Types::Insights
+
+    InsightsByAssessment.add_member(:noncompliant_evidence_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "noncompliantEvidenceCount"))
+    InsightsByAssessment.add_member(:compliant_evidence_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "compliantEvidenceCount"))
+    InsightsByAssessment.add_member(:inconclusive_evidence_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "inconclusiveEvidenceCount"))
+    InsightsByAssessment.add_member(:assessment_controls_count_by_noncompliant_evidence, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "assessmentControlsCountByNoncompliantEvidence"))
+    InsightsByAssessment.add_member(:total_assessment_controls_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "totalAssessmentControlsCount"))
+    InsightsByAssessment.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdated"))
+    InsightsByAssessment.struct_class = Types::InsightsByAssessment
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
     Keywords.member = Shapes::ShapeRef.new(shape: KeywordValue)
+
+    ListAssessmentControlInsightsByControlDomainRequest.add_member(:control_domain_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "querystring", location_name: "controlDomainId"))
+    ListAssessmentControlInsightsByControlDomainRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "querystring", location_name: "assessmentId"))
+    ListAssessmentControlInsightsByControlDomainRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
+    ListAssessmentControlInsightsByControlDomainRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAssessmentControlInsightsByControlDomainRequest.struct_class = Types::ListAssessmentControlInsightsByControlDomainRequest
+
+    ListAssessmentControlInsightsByControlDomainResponse.add_member(:control_insights_by_assessment, Shapes::ShapeRef.new(shape: ControlInsightsMetadataByAssessment, location_name: "controlInsightsByAssessment"))
+    ListAssessmentControlInsightsByControlDomainResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
+    ListAssessmentControlInsightsByControlDomainResponse.struct_class = Types::ListAssessmentControlInsightsByControlDomainResponse
 
     ListAssessmentFrameworkShareRequestsRequest.add_member(:request_type, Shapes::ShapeRef.new(shape: ShareRequestType, required: true, location: "querystring", location_name: "requestType"))
     ListAssessmentFrameworkShareRequestsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
@@ -935,6 +1026,7 @@ module Aws::AuditManager
     ListAssessmentReportsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
     ListAssessmentReportsResponse.struct_class = Types::ListAssessmentReportsResponse
 
+    ListAssessmentsRequest.add_member(:status, Shapes::ShapeRef.new(shape: AssessmentStatus, location: "querystring", location_name: "status"))
     ListAssessmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
     ListAssessmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListAssessmentsRequest.struct_class = Types::ListAssessmentsRequest
@@ -942,6 +1034,32 @@ module Aws::AuditManager
     ListAssessmentsResponse.add_member(:assessment_metadata, Shapes::ShapeRef.new(shape: ListAssessmentMetadata, location_name: "assessmentMetadata"))
     ListAssessmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
     ListAssessmentsResponse.struct_class = Types::ListAssessmentsResponse
+
+    ListControlDomainInsightsByAssessmentRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "querystring", location_name: "assessmentId"))
+    ListControlDomainInsightsByAssessmentRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
+    ListControlDomainInsightsByAssessmentRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListControlDomainInsightsByAssessmentRequest.struct_class = Types::ListControlDomainInsightsByAssessmentRequest
+
+    ListControlDomainInsightsByAssessmentResponse.add_member(:control_domain_insights, Shapes::ShapeRef.new(shape: ControlDomainInsightsList, location_name: "controlDomainInsights"))
+    ListControlDomainInsightsByAssessmentResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
+    ListControlDomainInsightsByAssessmentResponse.struct_class = Types::ListControlDomainInsightsByAssessmentResponse
+
+    ListControlDomainInsightsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
+    ListControlDomainInsightsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListControlDomainInsightsRequest.struct_class = Types::ListControlDomainInsightsRequest
+
+    ListControlDomainInsightsResponse.add_member(:control_domain_insights, Shapes::ShapeRef.new(shape: ControlDomainInsightsList, location_name: "controlDomainInsights"))
+    ListControlDomainInsightsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
+    ListControlDomainInsightsResponse.struct_class = Types::ListControlDomainInsightsResponse
+
+    ListControlInsightsByControlDomainRequest.add_member(:control_domain_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "querystring", location_name: "controlDomainId"))
+    ListControlInsightsByControlDomainRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
+    ListControlInsightsByControlDomainRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListControlInsightsByControlDomainRequest.struct_class = Types::ListControlInsightsByControlDomainRequest
+
+    ListControlInsightsByControlDomainResponse.add_member(:control_insights_metadata, Shapes::ShapeRef.new(shape: ControlInsightsMetadata, location_name: "controlInsightsMetadata"))
+    ListControlInsightsByControlDomainResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
+    ListControlInsightsByControlDomainResponse.struct_class = Types::ListControlInsightsByControlDomainResponse
 
     ListControlsRequest.add_member(:control_type, Shapes::ShapeRef.new(shape: ControlType, required: true, location: "querystring", location_name: "controlType"))
     ListControlsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
@@ -1586,6 +1704,28 @@ module Aws::AuditManager
         )
       end)
 
+      api.add_operation(:get_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInsights"
+        o.http_method = "GET"
+        o.http_request_uri = "/insights"
+        o.input = Shapes::ShapeRef.new(shape: GetInsightsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInsightsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_insights_by_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInsightsByAssessment"
+        o.http_method = "GET"
+        o.http_request_uri = "/insights/assessments/{assessmentId}"
+        o.input = Shapes::ShapeRef.new(shape: GetInsightsByAssessmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInsightsByAssessmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_organization_admin_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetOrganizationAdminAccount"
         o.http_method = "GET"
@@ -1617,6 +1757,24 @@ module Aws::AuditManager
         o.output = Shapes::ShapeRef.new(shape: GetSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_assessment_control_insights_by_control_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAssessmentControlInsightsByControlDomain"
+        o.http_method = "GET"
+        o.http_request_uri = "/insights/controls-by-assessment"
+        o.input = Shapes::ShapeRef.new(shape: ListAssessmentControlInsightsByControlDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAssessmentControlInsightsByControlDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_assessment_framework_share_requests, Seahorse::Model::Operation.new.tap do |o|
@@ -1679,6 +1837,60 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_control_domain_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListControlDomainInsights"
+        o.http_method = "GET"
+        o.http_request_uri = "/insights/control-domains"
+        o.input = Shapes::ShapeRef.new(shape: ListControlDomainInsightsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListControlDomainInsightsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_control_domain_insights_by_assessment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListControlDomainInsightsByAssessment"
+        o.http_method = "GET"
+        o.http_request_uri = "/insights/control-domains-by-assessment"
+        o.input = Shapes::ShapeRef.new(shape: ListControlDomainInsightsByAssessmentRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListControlDomainInsightsByAssessmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_control_insights_by_control_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListControlInsightsByControlDomain"
+        o.http_method = "GET"
+        o.http_request_uri = "/insights/controls"
+        o.input = Shapes::ShapeRef.new(shape: ListControlInsightsByControlDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListControlInsightsByControlDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

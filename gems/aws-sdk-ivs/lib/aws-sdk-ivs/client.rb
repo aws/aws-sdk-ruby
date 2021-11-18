@@ -853,6 +853,7 @@ module Aws::IVS
     #   resp.stream.playback_url #=> String
     #   resp.stream.start_time #=> Time
     #   resp.stream.state #=> String, one of "LIVE", "OFFLINE"
+    #   resp.stream.stream_id #=> String
     #   resp.stream.viewer_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStream AWS API Documentation
@@ -893,6 +894,74 @@ module Aws::IVS
     # @param [Hash] params ({})
     def get_stream_key(params = {}, options = {})
       req = build_request(:get_stream_key, params)
+      req.send_request(options)
+    end
+
+    # Gets metadata on a specified stream.
+    #
+    # @option params [required, String] :channel_arn
+    #   ARN of the channel resource
+    #
+    # @option params [String] :stream_id
+    #   Unique identifier for a live or previously live stream in the
+    #   specified channel. If no `streamId` is provided, this returns the most
+    #   recent stream session for the channel, if it exists.
+    #
+    # @return [Types::GetStreamSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStreamSessionResponse#stream_session #stream_session} => Types::StreamSession
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_stream_session({
+    #     channel_arn: "ChannelArn", # required
+    #     stream_id: "StreamId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_session.channel.arn #=> String
+    #   resp.stream_session.channel.authorized #=> Boolean
+    #   resp.stream_session.channel.ingest_endpoint #=> String
+    #   resp.stream_session.channel.latency_mode #=> String, one of "NORMAL", "LOW"
+    #   resp.stream_session.channel.name #=> String
+    #   resp.stream_session.channel.playback_url #=> String
+    #   resp.stream_session.channel.recording_configuration_arn #=> String
+    #   resp.stream_session.channel.tags #=> Hash
+    #   resp.stream_session.channel.tags["TagKey"] #=> String
+    #   resp.stream_session.channel.type #=> String, one of "BASIC", "STANDARD"
+    #   resp.stream_session.end_time #=> Time
+    #   resp.stream_session.ingest_configuration.audio.channels #=> Integer
+    #   resp.stream_session.ingest_configuration.audio.codec #=> String
+    #   resp.stream_session.ingest_configuration.audio.sample_rate #=> Integer
+    #   resp.stream_session.ingest_configuration.audio.target_bitrate #=> Integer
+    #   resp.stream_session.ingest_configuration.video.avc_level #=> String
+    #   resp.stream_session.ingest_configuration.video.avc_profile #=> String
+    #   resp.stream_session.ingest_configuration.video.codec #=> String
+    #   resp.stream_session.ingest_configuration.video.encoder #=> String
+    #   resp.stream_session.ingest_configuration.video.target_bitrate #=> Integer
+    #   resp.stream_session.ingest_configuration.video.target_framerate #=> Integer
+    #   resp.stream_session.ingest_configuration.video.video_height #=> Integer
+    #   resp.stream_session.ingest_configuration.video.video_width #=> Integer
+    #   resp.stream_session.recording_configuration.arn #=> String
+    #   resp.stream_session.recording_configuration.destination_configuration.s3.bucket_name #=> String
+    #   resp.stream_session.recording_configuration.name #=> String
+    #   resp.stream_session.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
+    #   resp.stream_session.recording_configuration.tags #=> Hash
+    #   resp.stream_session.recording_configuration.tags["TagKey"] #=> String
+    #   resp.stream_session.start_time #=> Time
+    #   resp.stream_session.stream_id #=> String
+    #   resp.stream_session.truncated_events #=> Array
+    #   resp.stream_session.truncated_events[0].event_time #=> Time
+    #   resp.stream_session.truncated_events[0].name #=> String
+    #   resp.stream_session.truncated_events[0].type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStreamSession AWS API Documentation
+    #
+    # @overload get_stream_session(params = {})
+    # @param [Hash] params ({})
+    def get_stream_session(params = {}, options = {})
+      req = build_request(:get_stream_session, params)
       req.send_request(options)
     end
 
@@ -1142,8 +1211,57 @@ module Aws::IVS
       req.send_request(options)
     end
 
+    # Gets a summary of current and previous streams for a specified channel
+    # in your account, in the AWS region where the API request is processed.
+    #
+    # @option params [required, String] :channel_arn
+    #   Channel ARN used to filter the list.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of streams to return. Default: 50.
+    #
+    # @option params [String] :next_token
+    #   The first stream to retrieve. This is used for pagination; see the
+    #   `nextToken` response field.
+    #
+    # @return [Types::ListStreamSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStreamSessionsResponse#next_token #next_token} => String
+    #   * {Types::ListStreamSessionsResponse#stream_sessions #stream_sessions} => Array&lt;Types::StreamSessionSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_stream_sessions({
+    #     channel_arn: "ChannelArn", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.stream_sessions #=> Array
+    #   resp.stream_sessions[0].end_time #=> Time
+    #   resp.stream_sessions[0].has_error_event #=> Boolean
+    #   resp.stream_sessions[0].start_time #=> Time
+    #   resp.stream_sessions[0].stream_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamSessions AWS API Documentation
+    #
+    # @overload list_stream_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_stream_sessions(params = {}, options = {})
+      req = build_request(:list_stream_sessions, params)
+      req.send_request(options)
+    end
+
     # Gets summary information about live streams in your account, in the
     # Amazon Web Services region where the API request is processed.
+    #
+    # @option params [Types::StreamFilters] :filter_by
+    #   Filters the stream list to match the specified criterion.
     #
     # @option params [Integer] :max_results
     #   Maximum number of streams to return. Default: 50.
@@ -1162,6 +1280,9 @@ module Aws::IVS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_streams({
+    #     filter_by: {
+    #       health: "HEALTHY", # accepts HEALTHY, STARVING, UNKNOWN
+    #     },
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -1174,6 +1295,7 @@ module Aws::IVS
     #   resp.streams[0].health #=> String, one of "HEALTHY", "STARVING", "UNKNOWN"
     #   resp.streams[0].start_time #=> Time
     #   resp.streams[0].state #=> String, one of "LIVE", "OFFLINE"
+    #   resp.streams[0].stream_id #=> String
     #   resp.streams[0].viewer_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreams AWS API Documentation
@@ -1424,7 +1546,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

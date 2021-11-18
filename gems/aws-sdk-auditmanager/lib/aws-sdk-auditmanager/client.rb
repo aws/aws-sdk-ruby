@@ -1002,7 +1002,7 @@ module Aws::AuditManager
     # Deletes a custom framework in Audit Manager.
     #
     # @option params [required, String] :framework_id
-    #   The identifier for the framework.
+    #   The identifier for the custom framework.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1051,7 +1051,7 @@ module Aws::AuditManager
     # Deletes an assessment report from an assessment in Audit Manager.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @option params [required, String] :assessment_report_id
     #   The unique identifier for the assessment report.
@@ -1077,7 +1077,7 @@ module Aws::AuditManager
     # Deletes a custom control in Audit Manager.
     #
     # @option params [required, String] :control_id
-    #   The identifier for the control.
+    #   The unique identifier for the control.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1149,10 +1149,10 @@ module Aws::AuditManager
     # in Audit Manager.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @option params [required, String] :evidence_folder_id
-    #   The identifier for the folder in which evidence is stored.
+    #   The unique identifier for the folder that the evidence is stored in.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1194,7 +1194,7 @@ module Aws::AuditManager
     # Returns an assessment from Audit Manager.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @return [Types::GetAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1371,10 +1371,10 @@ module Aws::AuditManager
     # Returns the URL of an assessment report in Audit Manager.
     #
     # @option params [required, String] :assessment_report_id
-    #   The identifier for the assessment report.
+    #   The unique identifier for the assessment report.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @return [Types::GetAssessmentReportUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1404,13 +1404,13 @@ module Aws::AuditManager
     # Returns a list of changelogs from Audit Manager.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @option params [String] :control_set_id
-    #   The identifier for the control set.
+    #   The unique identifier for the control set.
     #
     # @option params [String] :control_id
-    #   The identifier for the control.
+    #   The unique identifier for the control.
     #
     # @option params [String] :next_token
     #   The pagination token that's used to fetch the next set of results.
@@ -1554,16 +1554,16 @@ module Aws::AuditManager
     # Returns evidence from Audit Manager.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @option params [required, String] :control_set_id
-    #   The identifier for the control set.
+    #   The unique identifier for the control set.
     #
     # @option params [required, String] :evidence_folder_id
-    #   The identifier for the folder that the evidence is stored in.
+    #   The unique identifier for the folder that the evidence is stored in.
     #
     # @option params [required, String] :evidence_id
-    #   The identifier for the evidence.
+    #   The unique identifier for the evidence.
     #
     # @return [Types::GetEvidenceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1680,13 +1680,13 @@ module Aws::AuditManager
     # Manager.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @option params [required, String] :control_set_id
-    #   The identifier for the control set.
+    #   The unique identifier for the control set.
     #
     # @option params [required, String] :evidence_folder_id
-    #   The identifier for the folder that the evidence is stored in.
+    #   The unique identifier for the folder that the evidence is stored in.
     #
     # @return [Types::GetEvidenceFolderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1734,7 +1734,7 @@ module Aws::AuditManager
     # Manager.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @option params [String] :next_token
     #   The pagination token that's used to fetch the next set of results.
@@ -1858,6 +1858,65 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
+    # Gets the latest analytics data for all your current active
+    # assessments.
+    #
+    # @return [Types::GetInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInsightsResponse#insights #insights} => Types::Insights
+    #
+    # @example Response structure
+    #
+    #   resp.insights.active_assessments_count #=> Integer
+    #   resp.insights.noncompliant_evidence_count #=> Integer
+    #   resp.insights.compliant_evidence_count #=> Integer
+    #   resp.insights.inconclusive_evidence_count #=> Integer
+    #   resp.insights.assessment_controls_count_by_noncompliant_evidence #=> Integer
+    #   resp.insights.total_assessment_controls_count #=> Integer
+    #   resp.insights.last_updated #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetInsights AWS API Documentation
+    #
+    # @overload get_insights(params = {})
+    # @param [Hash] params ({})
+    def get_insights(params = {}, options = {})
+      req = build_request(:get_insights, params)
+      req.send_request(options)
+    end
+
+    # Gets the latest analytics data for a specific active assessment.
+    #
+    # @option params [required, String] :assessment_id
+    #   The unique identifier for the assessment.
+    #
+    # @return [Types::GetInsightsByAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInsightsByAssessmentResponse#insights #insights} => Types::InsightsByAssessment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_insights_by_assessment({
+    #     assessment_id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.insights.noncompliant_evidence_count #=> Integer
+    #   resp.insights.compliant_evidence_count #=> Integer
+    #   resp.insights.inconclusive_evidence_count #=> Integer
+    #   resp.insights.assessment_controls_count_by_noncompliant_evidence #=> Integer
+    #   resp.insights.total_assessment_controls_count #=> Integer
+    #   resp.insights.last_updated #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/GetInsightsByAssessment AWS API Documentation
+    #
+    # @overload get_insights_by_assessment(params = {})
+    # @param [Hash] params ({})
+    def get_insights_by_assessment(params = {}, options = {})
+      req = build_request(:get_insights_by_assessment, params)
+      req.send_request(options)
+    end
+
     # Returns the name of the delegated Amazon Web Services administrator
     # account for the organization.
     #
@@ -1936,6 +1995,67 @@ module Aws::AuditManager
     # @param [Hash] params ({})
     def get_settings(params = {}, options = {})
       req = build_request(:get_settings, params)
+      req.send_request(options)
+    end
+
+    # Lists the latest analytics data for controls within a specific control
+    # domain and a specific active assessment.
+    #
+    # <note markdown="1"> Control insights are listed only if the control belongs to the control
+    # domain and assessment that was specified. Moreover, the control must
+    # have collected evidence on the `lastUpdated` date of
+    # `controlInsightsByAssessment`. If neither of these conditions are met,
+    # no data is listed for that control.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :control_domain_id
+    #   The unique identifier for the control domain.
+    #
+    # @option params [required, String] :assessment_id
+    #   The unique identifier for the active assessment.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   Represents the maximum number of results on a page or for an API
+    #   request call.
+    #
+    # @return [Types::ListAssessmentControlInsightsByControlDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssessmentControlInsightsByControlDomainResponse#control_insights_by_assessment #control_insights_by_assessment} => Array&lt;Types::ControlInsightsMetadataByAssessmentItem&gt;
+    #   * {Types::ListAssessmentControlInsightsByControlDomainResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_assessment_control_insights_by_control_domain({
+    #     control_domain_id: "UUID", # required
+    #     assessment_id: "UUID", # required
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.control_insights_by_assessment #=> Array
+    #   resp.control_insights_by_assessment[0].name #=> String
+    #   resp.control_insights_by_assessment[0].id #=> String
+    #   resp.control_insights_by_assessment[0].evidence_insights.noncompliant_evidence_count #=> Integer
+    #   resp.control_insights_by_assessment[0].evidence_insights.compliant_evidence_count #=> Integer
+    #   resp.control_insights_by_assessment[0].evidence_insights.inconclusive_evidence_count #=> Integer
+    #   resp.control_insights_by_assessment[0].control_set_name #=> String
+    #   resp.control_insights_by_assessment[0].last_updated #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListAssessmentControlInsightsByControlDomain AWS API Documentation
+    #
+    # @overload list_assessment_control_insights_by_control_domain(params = {})
+    # @param [Hash] params ({})
+    def list_assessment_control_insights_by_control_domain(params = {}, options = {})
+      req = build_request(:list_assessment_control_insights_by_control_domain, params)
       req.send_request(options)
     end
 
@@ -2098,6 +2218,9 @@ module Aws::AuditManager
 
     # Returns a list of current and past assessments from Audit Manager.
     #
+    # @option params [String] :status
+    #   The current status of the assessment.
+    #
     # @option params [String] :next_token
     #   The pagination token that's used to fetch the next set of results.
     #
@@ -2115,6 +2238,7 @@ module Aws::AuditManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_assessments({
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
     #     next_token: "Token",
     #     max_results: 1,
     #   })
@@ -2151,6 +2275,171 @@ module Aws::AuditManager
     # @param [Hash] params ({})
     def list_assessments(params = {}, options = {})
       req = build_request(:list_assessments, params)
+      req.send_request(options)
+    end
+
+    # Lists the latest analytics data for control domains across all of your
+    # active assessments.
+    #
+    # <note markdown="1"> A control domain is listed only if at least one of the controls within
+    # that domain collected evidence on the `lastUpdated` date of
+    # `controlDomainInsights`. If this condition isn’t met, no data is
+    # listed for that control domain.
+    #
+    #  </note>
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   Represents the maximum number of results on a page or for an API
+    #   request call.
+    #
+    # @return [Types::ListControlDomainInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListControlDomainInsightsResponse#control_domain_insights #control_domain_insights} => Array&lt;Types::ControlDomainInsights&gt;
+    #   * {Types::ListControlDomainInsightsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_control_domain_insights({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.control_domain_insights #=> Array
+    #   resp.control_domain_insights[0].name #=> String
+    #   resp.control_domain_insights[0].id #=> String
+    #   resp.control_domain_insights[0].controls_count_by_noncompliant_evidence #=> Integer
+    #   resp.control_domain_insights[0].total_controls_count #=> Integer
+    #   resp.control_domain_insights[0].evidence_insights.noncompliant_evidence_count #=> Integer
+    #   resp.control_domain_insights[0].evidence_insights.compliant_evidence_count #=> Integer
+    #   resp.control_domain_insights[0].evidence_insights.inconclusive_evidence_count #=> Integer
+    #   resp.control_domain_insights[0].last_updated #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListControlDomainInsights AWS API Documentation
+    #
+    # @overload list_control_domain_insights(params = {})
+    # @param [Hash] params ({})
+    def list_control_domain_insights(params = {}, options = {})
+      req = build_request(:list_control_domain_insights, params)
+      req.send_request(options)
+    end
+
+    # Lists analytics data for control domains within a specified active
+    # assessment.
+    #
+    # <note markdown="1"> A control domain is listed only if at least one of the controls within
+    # that domain collected evidence on the `lastUpdated` date of
+    # `controlDomainInsights`. If this condition isn’t met, no data is
+    # listed for that domain.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :assessment_id
+    #   The unique identifier for the active assessment.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   Represents the maximum number of results on a page or for an API
+    #   request call.
+    #
+    # @return [Types::ListControlDomainInsightsByAssessmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListControlDomainInsightsByAssessmentResponse#control_domain_insights #control_domain_insights} => Array&lt;Types::ControlDomainInsights&gt;
+    #   * {Types::ListControlDomainInsightsByAssessmentResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_control_domain_insights_by_assessment({
+    #     assessment_id: "UUID", # required
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.control_domain_insights #=> Array
+    #   resp.control_domain_insights[0].name #=> String
+    #   resp.control_domain_insights[0].id #=> String
+    #   resp.control_domain_insights[0].controls_count_by_noncompliant_evidence #=> Integer
+    #   resp.control_domain_insights[0].total_controls_count #=> Integer
+    #   resp.control_domain_insights[0].evidence_insights.noncompliant_evidence_count #=> Integer
+    #   resp.control_domain_insights[0].evidence_insights.compliant_evidence_count #=> Integer
+    #   resp.control_domain_insights[0].evidence_insights.inconclusive_evidence_count #=> Integer
+    #   resp.control_domain_insights[0].last_updated #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListControlDomainInsightsByAssessment AWS API Documentation
+    #
+    # @overload list_control_domain_insights_by_assessment(params = {})
+    # @param [Hash] params ({})
+    def list_control_domain_insights_by_assessment(params = {}, options = {})
+      req = build_request(:list_control_domain_insights_by_assessment, params)
+      req.send_request(options)
+    end
+
+    # Lists the latest analytics data for controls within a specific control
+    # domain across all active assessments.
+    #
+    # <note markdown="1"> Control insights are listed only if the control belongs to the control
+    # domain that was specified and the control collected evidence on the
+    # `lastUpdated` date of `controlInsightsMetadata`. If neither of these
+    # conditions are met, no data is listed for that control.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :control_domain_id
+    #   The unique identifier for the control domain.
+    #
+    # @option params [String] :next_token
+    #   The pagination token that's used to fetch the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   Represents the maximum number of results on a page or for an API
+    #   request call.
+    #
+    # @return [Types::ListControlInsightsByControlDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListControlInsightsByControlDomainResponse#control_insights_metadata #control_insights_metadata} => Array&lt;Types::ControlInsightsMetadataItem&gt;
+    #   * {Types::ListControlInsightsByControlDomainResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_control_insights_by_control_domain({
+    #     control_domain_id: "UUID", # required
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.control_insights_metadata #=> Array
+    #   resp.control_insights_metadata[0].name #=> String
+    #   resp.control_insights_metadata[0].id #=> String
+    #   resp.control_insights_metadata[0].evidence_insights.noncompliant_evidence_count #=> Integer
+    #   resp.control_insights_metadata[0].evidence_insights.compliant_evidence_count #=> Integer
+    #   resp.control_insights_metadata[0].evidence_insights.inconclusive_evidence_count #=> Integer
+    #   resp.control_insights_metadata[0].last_updated #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/ListControlInsightsByControlDomain AWS API Documentation
+    #
+    # @overload list_control_insights_by_control_domain(params = {})
+    # @param [Hash] params ({})
+    def list_control_insights_by_control_domain(params = {}, options = {})
+      req = build_request(:list_control_insights_by_control_domain, params)
       req.send_request(options)
     end
 
@@ -2509,7 +2798,7 @@ module Aws::AuditManager
     # Edits an Audit Manager assessment.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @option params [String] :assessment_name
     #   The name of the assessment to be updated.
@@ -2655,13 +2944,13 @@ module Aws::AuditManager
     # Updates a control within an assessment in Audit Manager.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @option params [required, String] :control_set_id
-    #   The identifier for the control set.
+    #   The unique identifier for the control set.
     #
     # @option params [required, String] :control_id
-    #   The identifier for the control.
+    #   The unique identifier for the control.
     #
     # @option params [String] :control_status
     #   The status of the control.
@@ -2711,10 +3000,10 @@ module Aws::AuditManager
     # Updates the status of a control set in an Audit Manager assessment.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @option params [required, String] :control_set_id
-    #   The identifier for the control set.
+    #   The unique identifier for the control set.
     #
     # @option params [required, String] :status
     #   The status of the control set that's being updated.
@@ -2784,7 +3073,7 @@ module Aws::AuditManager
     # Updates a custom framework in Audit Manager.
     #
     # @option params [required, String] :framework_id
-    #   The identifier for the framework.
+    #   The unique identifier for the framework.
     #
     # @option params [required, String] :name
     #   The name of the framework to be updated.
@@ -2932,7 +3221,7 @@ module Aws::AuditManager
     # Updates the status of an assessment in Audit Manager.
     #
     # @option params [required, String] :assessment_id
-    #   The identifier for the assessment.
+    #   The unique identifier for the assessment.
     #
     # @option params [required, String] :status
     #   The current status of the assessment.
@@ -3234,7 +3523,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

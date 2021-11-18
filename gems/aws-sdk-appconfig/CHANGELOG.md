@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2021-11-18)
+------------------
+
+* Feature - Add Type to support feature flag configuration profiles
+
 1.19.0 (2021-11-04)
 ------------------
 

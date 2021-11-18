@@ -336,11 +336,12 @@ module Aws::AppConfig
 
     # @!group API Operations
 
-    # An application in AppConfig is a logical unit of code that provides
-    # capabilities for your customers. For example, an application can be a
-    # microservice that runs on Amazon EC2 instances, a mobile application
-    # installed by your users, a serverless application using Amazon API
-    # Gateway and AWS Lambda, or any system you run on behalf of others.
+    # Creates an application. An application in AppConfig is a logical unit
+    # of code that provides capabilities for your customers. For example, an
+    # application can be a microservice that runs on Amazon EC2 instances, a
+    # mobile application installed by your users, a serverless application
+    # using Amazon API Gateway and Lambda, or any system you run on behalf
+    # of others.
     #
     # @option params [required, String] :name
     #   A name for the application.
@@ -358,6 +359,23 @@ module Aws::AppConfig
     #   * {Types::Application#id #id} => String
     #   * {Types::Application#name #name} => String
     #   * {Types::Application#description #description} => String
+    #
+    #
+    # @example Example: To create an application
+    #
+    #   # The following create-application example creates an application in AWS AppConfig.
+    #
+    #   resp = client.create_application({
+    #     description: "An application used for creating an example.", 
+    #     name: "example-application", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     description: "An application used for creating an example.", 
+    #     id: "339ohji", 
+    #     name: "example-application", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -384,25 +402,29 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Information that enables AppConfig to access the configuration source.
-    # Valid configuration sources include Systems Manager (SSM) documents,
-    # SSM Parameter Store parameters, and Amazon S3 objects. A configuration
-    # profile includes the following information.
+    # Creates a configuration profile, which is information that enables
+    # AppConfig to access the configuration source. Valid configuration
+    # sources include the AppConfig hosted configuration store, Amazon Web
+    # Services Systems Manager (SSM) documents, SSM Parameter Store
+    # parameters, Amazon S3 objects, or any [integration source action][1]
+    # supported by CodePipeline. A configuration profile includes the
+    # following information:
     #
-    # * The Uri location of the configuration data.
+    # * The URI location of the configuration data.
     #
-    # * The AWS Identity and Access Management (IAM) role that provides
-    #   access to the configuration data.
+    # * The Identity and Access Management (IAM) role that provides access
+    #   to the configuration data.
     #
     # * A validator for the configuration data. Available validators include
-    #   either a JSON Schema or an AWS Lambda function.
+    #   either a JSON Schema or an Lambda function.
     #
     # For more information, see [Create a Configuration and a Configuration
-    # Profile][1] in the *AWS AppConfig User Guide*.
+    # Profile][2] in the *AppConfig User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-creating-configuration-and-profile.html
+    # [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html#integrations-source
+    # [2]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -414,19 +436,25 @@ module Aws::AppConfig
     #   A description of the configuration profile.
     #
     # @option params [required, String] :location_uri
-    #   A URI to locate the configuration. You can specify a Systems Manager
-    #   (SSM) document, an SSM Parameter Store parameter, or an Amazon S3
-    #   object. For an SSM document, specify either the document name in the
-    #   format `ssm-document://<Document_name>` or the Amazon Resource Name
-    #   (ARN). For a parameter, specify either the parameter name in the
-    #   format `ssm-parameter://<Parameter_name>` or the ARN. For an Amazon S3
+    #   A URI to locate the configuration. You can specify the AppConfig
+    #   hosted configuration store, Systems Manager (SSM) document, an SSM
+    #   Parameter Store parameter, or an Amazon S3 object. For the hosted
+    #   configuration store and for feature flags, specify `hosted`. For an
+    #   SSM document, specify either the document name in the format
+    #   `ssm-document://<Document_name>` or the Amazon Resource Name (ARN).
+    #   For a parameter, specify either the parameter name in the format
+    #   `ssm-parameter://<Parameter_name>` or the ARN. For an Amazon S3
     #   object, specify the URI in the following format:
     #   `s3://<bucket>/<objectKey> `. Here is an example:
-    #   s3://my-bucket/my-app/us-east-1/my-config.json
+    #   `s3://my-bucket/my-app/us-east-1/my-config.json`
     #
     # @option params [String] :retrieval_role_arn
     #   The ARN of an IAM role with permission to access the configuration at
-    #   the specified LocationUri.
+    #   the specified `LocationUri`.
+    #
+    #   A retrieval role ARN is not required for configurations stored in the
+    #   AppConfig hosted configuration store. It is required for all other
+    #   sources that store your configuration.
     #
     # @option params [Array<Types::Validator>] :validators
     #   A list of methods for validating the configuration.
@@ -435,6 +463,12 @@ module Aws::AppConfig
     #   Metadata to assign to the configuration profile. Tags help organize
     #   and categorize your AppConfig resources. Each tag consists of a key
     #   and an optional value, both of which you define.
+    #
+    # @option params [String] :type
+    #   The type of configurations that the configuration profile contains. A
+    #   configuration can be a feature flag used for enabling or disabling new
+    #   features or a free-form configuration used for distributing
+    #   configurations to your application.
     #
     # @return [Types::ConfigurationProfile] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -445,6 +479,29 @@ module Aws::AppConfig
     #   * {Types::ConfigurationProfile#location_uri #location_uri} => String
     #   * {Types::ConfigurationProfile#retrieval_role_arn #retrieval_role_arn} => String
     #   * {Types::ConfigurationProfile#validators #validators} => Array&lt;Types::Validator&gt;
+    #   * {Types::ConfigurationProfile#type #type} => String
+    #
+    #
+    # @example Example: To create a configuration profile
+    #
+    #   # The following create-configuration-profile example creates a configuration profile using a configuration stored in
+    #   # Parameter Store, a capability of Systems Manager.
+    #
+    #   resp = client.create_configuration_profile({
+    #     application_id: "339ohji", 
+    #     location_uri: "ssm-parameter://Example-Parameter", 
+    #     name: "Example-Configuration-Profile", 
+    #     retrieval_role_arn: "arn:aws:iam::111122223333:role/Example-App-Config-Role", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     id: "ur8hx2f", 
+    #     location_uri: "ssm-parameter://Example-Parameter", 
+    #     name: "Example-Configuration-Profile", 
+    #     retrieval_role_arn: "arn:aws:iam::111122223333:role/Example-App-Config-Role", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -463,6 +520,7 @@ module Aws::AppConfig
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     type: "ConfigurationProfileType",
     #   })
     #
     # @example Response structure
@@ -476,6 +534,7 @@ module Aws::AppConfig
     #   resp.validators #=> Array
     #   resp.validators[0].type #=> String, one of "JSON_SCHEMA", "LAMBDA"
     #   resp.validators[0].content #=> String
+    #   resp.type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateConfigurationProfile AWS API Documentation
     #
@@ -486,11 +545,11 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # A deployment strategy defines important criteria for rolling out your
-    # configuration to the designated targets. A deployment strategy
-    # includes: the overall duration required, a percentage of targets to
-    # receive the deployment during each interval, an algorithm that defines
-    # how percentage grows, and bake time.
+    # Creates a deployment strategy that defines important criteria for
+    # rolling out your configuration to the designated targets. A deployment
+    # strategy includes the overall duration required, a percentage of
+    # targets to receive the deployment during each interval, an algorithm
+    # that defines how percentage grows, and bake time.
     #
     # @option params [required, String] :name
     #   A name for the deployment strategy.
@@ -511,8 +570,8 @@ module Aws::AppConfig
     #   each interval.
     #
     # @option params [String] :growth_type
-    #   The algorithm used to define how percentage grows over time. AWS
-    #   AppConfig supports the following growth types:
+    #   The algorithm used to define how percentage grows over time. AppConfig
+    #   supports the following growth types:
     #
     #   **Linear**\: For this type, AppConfig processes the deployment by
     #   dividing the total number of targets by the value specified for `Step
@@ -558,6 +617,31 @@ module Aws::AppConfig
     #   * {Types::DeploymentStrategy#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::DeploymentStrategy#replicate_to #replicate_to} => String
     #
+    #
+    # @example Example: To create a deployment strategy
+    #
+    #   # The following create-deployment-strategy example creates a deployment strategy called Example-Deployment that takes 15
+    #   # minutes and deploys the configuration to 25% of the application at a time. The strategy is also copied to an SSM
+    #   # Document.
+    #
+    #   resp = client.create_deployment_strategy({
+    #     deployment_duration_in_minutes: 15, 
+    #     growth_factor: 25, 
+    #     name: "Example-Deployment", 
+    #     replicate_to: "SSM_DOCUMENT", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment_duration_in_minutes: 15, 
+    #     final_bake_time_in_minutes: 0, 
+    #     growth_factor: 25, 
+    #     growth_type: "LINEAR", 
+    #     id: "1225qzk", 
+    #     name: "Example-Deployment", 
+    #     replicate_to: "SSM_DOCUMENT", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_deployment_strategy({
@@ -593,14 +677,15 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # For each application, you define one or more environments. An
-    # environment is a logical deployment group of AppConfig targets, such
-    # as applications in a `Beta` or `Production` environment. You can also
-    # define environments for application subcomponents such as the `Web`,
-    # `Mobile` and `Back-end` components for your application. You can
-    # configure Amazon CloudWatch alarms for each environment. The system
-    # monitors alarms during a configuration deployment. If an alarm is
-    # triggered, the system rolls back the configuration.
+    # Creates an environment. For each application, you define one or more
+    # environments. An environment is a logical deployment group of
+    # AppConfig targets, such as applications in a `Beta` or `Production`
+    # environment. You can also define environments for application
+    # subcomponents such as the `Web`, `Mobile` and `Back-end` components
+    # for your application. You can configure Amazon CloudWatch alarms for
+    # each environment. The system monitors alarms during a configuration
+    # deployment. If an alarm is triggered, the system rolls back the
+    # configuration.
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -628,6 +713,25 @@ module Aws::AppConfig
     #   * {Types::Environment#state #state} => String
     #   * {Types::Environment#monitors #monitors} => Array&lt;Types::Monitor&gt;
     #
+    #
+    # @example Example: To create an environment
+    #
+    #   # The following create-environment example creates an AWS AppConfig environment named Example-Environment using the
+    #   # application you created using create-application
+    #
+    #   resp = client.create_environment({
+    #     application_id: "339ohji", 
+    #     name: "Example-Environment", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     id: "54j1r29", 
+    #     name: "Example-Environment", 
+    #     state: "READY_FOR_DEPLOYMENT", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_environment({
@@ -636,7 +740,7 @@ module Aws::AppConfig
     #     description: "Description",
     #     monitors: [
     #       {
-    #         alarm_arn: "Arn",
+    #         alarm_arn: "StringWithLengthBetween1And2048", # required
     #         alarm_role_arn: "RoleArn",
     #       },
     #     ],
@@ -665,7 +769,8 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Create a new configuration in the AppConfig configuration store.
+    # Creates a new configuration in the AppConfig hosted configuration
+    # store.
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -685,14 +790,14 @@ module Aws::AppConfig
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+    #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
     #
     # @option params [Integer] :latest_version_number
     #   An optional locking token used to prevent race conditions from
     #   overwriting configuration updates when creating a new version. To
     #   ensure your data is not overwritten when creating multiple hosted
-    #   configuration versions in rapid succession, specify the version of the
-    #   latest hosted configuration version.
+    #   configuration versions in rapid succession, specify the version number
+    #   of the latest hosted configuration version.
     #
     # @return [Types::HostedConfigurationVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -702,6 +807,28 @@ module Aws::AppConfig
     #   * {Types::HostedConfigurationVersion#description #description} => String
     #   * {Types::HostedConfigurationVersion#content #content} => String
     #   * {Types::HostedConfigurationVersion#content_type #content_type} => String
+    #
+    #
+    # @example Example: To create a hosted configuration version
+    #
+    #   # The following create-hosted-configuration-version example creates a new configuration in the AWS AppConfig configuration
+    #   # store.
+    #
+    #   resp = client.create_hosted_configuration_version({
+    #     application_id: "339ohji", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     content: "eyAiTmFtZSI6ICJFeGFtcGxlQXBwbGljYXRpb24iLCAiSWQiOiBFeGFtcGxlSUQsICJSYW5rIjogNyB9", 
+    #     content_type: "text", 
+    #     latest_version_number: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     content_type: "text", 
+    #     version_number: 1, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -732,13 +859,22 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Delete an application. Deleting an application does not delete a
+    # Deletes an application. Deleting an application does not delete a
     # configuration from a host.
     #
     # @option params [required, String] :application_id
     #   The ID of the application to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete an application
+    #
+    #   # The following delete-application example deletes the specified application. 
+    #
+    #   resp = client.delete_application({
+    #     application_id: "339ohji", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -755,7 +891,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Delete a configuration profile. Deleting a configuration profile does
+    # Deletes a configuration profile. Deleting a configuration profile does
     # not delete a configuration from a host.
     #
     # @option params [required, String] :application_id
@@ -766,6 +902,16 @@ module Aws::AppConfig
     #   The ID of the configuration profile you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a configuration profile
+    #
+    #   # The following delete-configuration-profile example deletes the specified configuration profile.
+    #
+    #   resp = client.delete_configuration_profile({
+    #     application_id: "339ohji", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -783,13 +929,22 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Delete a deployment strategy. Deleting a deployment strategy does not
+    # Deletes a deployment strategy. Deleting a deployment strategy does not
     # delete a configuration from a host.
     #
     # @option params [required, String] :deployment_strategy_id
     #   The ID of the deployment strategy you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a deployment strategy
+    #
+    #   # The following delete-deployment-strategy example deletes the specified deployment strategy.
+    #
+    #   resp = client.delete_deployment_strategy({
+    #     deployment_strategy_id: "1225qzk", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -806,16 +961,27 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Delete an environment. Deleting an environment does not delete a
+    # Deletes an environment. Deleting an environment does not delete a
     # configuration from a host.
     #
     # @option params [required, String] :application_id
-    #   The application ID that includes the environment you want to delete.
+    #   The application ID that includes the environment that you want to
+    #   delete.
     #
     # @option params [required, String] :environment_id
-    #   The ID of the environment you want to delete.
+    #   The ID of the environment that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete an environment
+    #
+    #   # The following delete-environment example deletes the specified application environment.
+    #
+    #   resp = client.delete_environment({
+    #     application_id: "339ohji", 
+    #     environment_id: "54j1r29", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -833,8 +999,8 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Delete a version of a configuration from the AppConfig configuration
-    # store.
+    # Deletes a version of a configuration from the AppConfig hosted
+    # configuration store.
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -846,6 +1012,18 @@ module Aws::AppConfig
     #   The versions number to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a hosted configuration version
+    #
+    #   # The following delete-hosted-configuration-version example deletes a configuration version hosted in the AWS AppConfig
+    #   # configuration store.
+    #
+    #   resp = client.delete_hosted_configuration_version({
+    #     application_id: "339ohji", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     version_number: 1, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -864,7 +1042,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Retrieve information about an application.
+    # Retrieves information about an application.
     #
     # @option params [required, String] :application_id
     #   The ID of the application you want to get.
@@ -874,6 +1052,21 @@ module Aws::AppConfig
     #   * {Types::Application#id #id} => String
     #   * {Types::Application#name #name} => String
     #   * {Types::Application#description #description} => String
+    #
+    #
+    # @example Example: To list details of an application
+    #
+    #   # The following get-application example lists the details of the specified application.
+    #
+    #   resp = client.get_application({
+    #     application_id: "339ohji", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     id: "339ohji", 
+    #     name: "example-application", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -896,11 +1089,11 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Receive information about a configuration.
+    # Retrieves information about a configuration.
     #
-    # AWS AppConfig uses the value of the `ClientConfigurationVersion`
-    # parameter to identify the configuration version on your clients. If
-    # you don’t send `ClientConfigurationVersion` with each call to
+    # AppConfig uses the value of the `ClientConfigurationVersion` parameter
+    # to identify the configuration version on your clients. If you don’t
+    # send `ClientConfigurationVersion` with each call to
     # `GetConfiguration`, your clients receive the current configuration.
     # You are charged each time your clients receive a configuration.
     #
@@ -923,17 +1116,18 @@ module Aws::AppConfig
     #   configuration ID.
     #
     # @option params [required, String] :client_id
-    #   A unique ID to identify the client for the configuration. This ID
-    #   enables AppConfig to deploy the configuration in intervals, as defined
-    #   in the deployment strategy.
+    #   The clientId parameter in the following command is a unique,
+    #   user-specified ID to identify the client for the configuration. This
+    #   ID enables AppConfig to deploy the configuration in intervals, as
+    #   defined in the deployment strategy.
     #
     # @option params [String] :client_configuration_version
     #   The configuration version returned in the most recent
     #   `GetConfiguration` response.
     #
-    #   AWS AppConfig uses the value of the `ClientConfigurationVersion`
-    #   parameter to identify the configuration version on your clients. If
-    #   you don’t send `ClientConfigurationVersion` with each call to
+    #   AppConfig uses the value of the `ClientConfigurationVersion` parameter
+    #   to identify the configuration version on your clients. If you don’t
+    #   send `ClientConfigurationVersion` with each call to
     #   `GetConfiguration`, your clients receive the current configuration.
     #   You are charged each time your clients receive a configuration.
     #
@@ -944,17 +1138,38 @@ module Aws::AppConfig
     #   the `ClientConfigurationVersion` parameter.
     #
     #   For more information about working with configurations, see
-    #   [Retrieving the Configuration][1] in the *AWS AppConfig User Guide*.
+    #   [Retrieving the Configuration][1] in the *AppConfig User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-retrieving-the-configuration.html
+    #   [1]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html
     #
     # @return [Types::Configuration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Configuration#content #content} => String
     #   * {Types::Configuration#configuration_version #configuration_version} => String
     #   * {Types::Configuration#content_type #content_type} => String
+    #
+    #
+    # @example Example: To retrieve configuration details
+    #
+    #   # The following get-configuration example returns the configuration details of the example application. On subsequent
+    #   # calls to get-configuration, use the client-configuration-version parameter to only update the configuration of your
+    #   # application if the version has changed. Only updating the configuration when the version has changed avoids excess
+    #   # charges incurred by calling get-configuration.
+    #
+    #   resp = client.get_configuration({
+    #     application: "example-application", 
+    #     client_id: "example-id", 
+    #     configuration: "Example-Configuration-Profile", 
+    #     environment: "Example-Environment", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     configuration_version: "1", 
+    #     content_type: "application/octet-stream", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -981,14 +1196,14 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Retrieve information about a configuration profile.
+    # Retrieves information about a configuration profile.
     #
     # @option params [required, String] :application_id
     #   The ID of the application that includes the configuration profile you
     #   want to get.
     #
     # @option params [required, String] :configuration_profile_id
-    #   The ID of the configuration profile you want to get.
+    #   The ID of the configuration profile that you want to get.
     #
     # @return [Types::ConfigurationProfile] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -999,6 +1214,26 @@ module Aws::AppConfig
     #   * {Types::ConfigurationProfile#location_uri #location_uri} => String
     #   * {Types::ConfigurationProfile#retrieval_role_arn #retrieval_role_arn} => String
     #   * {Types::ConfigurationProfile#validators #validators} => Array&lt;Types::Validator&gt;
+    #   * {Types::ConfigurationProfile#type #type} => String
+    #
+    #
+    # @example Example: To retrieve configuration profile details
+    #
+    #   # The following get-configuration-profile example returns the details of the specified configuration profile.
+    #
+    #   resp = client.get_configuration_profile({
+    #     application_id: "339ohji", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     id: "ur8hx2f", 
+    #     location_uri: "ssm-parameter://Example-Parameter", 
+    #     name: "Example-Configuration-Profile", 
+    #     retrieval_role_arn: "arn:aws:iam::111122223333:role/Example-App-Config-Role", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1018,6 +1253,7 @@ module Aws::AppConfig
     #   resp.validators #=> Array
     #   resp.validators[0].type #=> String, one of "JSON_SCHEMA", "LAMBDA"
     #   resp.validators[0].content #=> String
+    #   resp.type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetConfigurationProfile AWS API Documentation
     #
@@ -1028,7 +1264,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Retrieve information about a configuration deployment.
+    # Retrieves information about a configuration deployment.
     #
     # @option params [required, String] :application_id
     #   The ID of the application that includes the deployment you want to
@@ -1061,6 +1297,82 @@ module Aws::AppConfig
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
+    #
+    #
+    # @example Example: To retrieve deployment details
+    #
+    #   # The following get-deployment example lists details of the deployment to the application in the specified environment and
+    #   # deployment.
+    #
+    #   resp = client.get_deployment({
+    #     application_id: "339ohji", 
+    #     deployment_number: 1, 
+    #     environment_id: "54j1r29", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     completed_at: Time.parse("2021-09-17T21:59:03.888000+00:00"), 
+    #     configuration_location_uri: "ssm-parameter://Example-Parameter", 
+    #     configuration_name: "Example-Configuration-Profile", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     configuration_version: "1", 
+    #     deployment_duration_in_minutes: 15, 
+    #     deployment_number: 1, 
+    #     deployment_strategy_id: "1225qzk", 
+    #     environment_id: "54j1r29", 
+    #     event_log: [
+    #       {
+    #         description: "Deployment completed", 
+    #         event_type: "DEPLOYMENT_COMPLETED", 
+    #         occurred_at: Time.parse("2021-09-17T21:59:03.888000+00:00"), 
+    #         triggered_by: "APPCONFIG", 
+    #       }, 
+    #       {
+    #         description: "Deployment bake time started", 
+    #         event_type: "BAKE_TIME_STARTED", 
+    #         occurred_at: Time.parse("2021-09-17T21:58:57.722000+00:00"), 
+    #         triggered_by: "APPCONFIG", 
+    #       }, 
+    #       {
+    #         description: "Configuration available to 100.00% of clients", 
+    #         event_type: "PERCENTAGE_UPDATED", 
+    #         occurred_at: Time.parse("2021-09-17T21:55:56.816000+00:00"), 
+    #         triggered_by: "APPCONFIG", 
+    #       }, 
+    #       {
+    #         description: "Configuration available to 75.00% of clients", 
+    #         event_type: "PERCENTAGE_UPDATED", 
+    #         occurred_at: Time.parse("2021-09-17T21:52:56.567000+00:00"), 
+    #         triggered_by: "APPCONFIG", 
+    #       }, 
+    #       {
+    #         description: "Configuration available to 50.00% of clients", 
+    #         event_type: "PERCENTAGE_UPDATED", 
+    #         occurred_at: Time.parse("2021-09-17T21:49:55.737000+00:00"), 
+    #         triggered_by: "APPCONFIG", 
+    #       }, 
+    #       {
+    #         description: "Configuration available to 25.00% of clients", 
+    #         event_type: "PERCENTAGE_UPDATED", 
+    #         occurred_at: Time.parse("2021-09-17T21:46:55.187000+00:00"), 
+    #         triggered_by: "APPCONFIG", 
+    #       }, 
+    #       {
+    #         description: "Deployment started", 
+    #         event_type: "DEPLOYMENT_STARTED", 
+    #         occurred_at: Time.parse("2021-09-17T21:43:54.205000+00:00"), 
+    #         triggered_by: "USER", 
+    #       }, 
+    #     ], 
+    #     final_bake_time_in_minutes: 0, 
+    #     growth_factor: 25, 
+    #     growth_type: "LINEAR", 
+    #     percentage_complete: 100, 
+    #     started_at: Time.parse("2021-09-17T21:43:54.205000+00:00"), 
+    #     state: "COMPLETE", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1104,9 +1416,9 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Retrieve information about a deployment strategy. A deployment
+    # Retrieves information about a deployment strategy. A deployment
     # strategy defines important criteria for rolling out your configuration
-    # to the designated targets. A deployment strategy includes: the overall
+    # to the designated targets. A deployment strategy includes the overall
     # duration required, a percentage of targets to receive the deployment
     # during each interval, an algorithm that defines how percentage grows,
     # and bake time.
@@ -1124,6 +1436,26 @@ module Aws::AppConfig
     #   * {Types::DeploymentStrategy#growth_factor #growth_factor} => Float
     #   * {Types::DeploymentStrategy#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::DeploymentStrategy#replicate_to #replicate_to} => String
+    #
+    #
+    # @example Example: To retrieve details of a deployment strategy
+    #
+    #   # The following get-deployment-strategy example lists the details of the specified deployment strategy.
+    #
+    #   resp = client.get_deployment_strategy({
+    #     deployment_strategy_id: "1225qzk", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment_duration_in_minutes: 15, 
+    #     final_bake_time_in_minutes: 0, 
+    #     growth_factor: 25, 
+    #     growth_type: "LINEAR", 
+    #     id: "1225qzk", 
+    #     name: "Example-Deployment", 
+    #     replicate_to: "SSM_DOCUMENT", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1151,19 +1483,20 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Retrieve information about an environment. An environment is a logical
-    # deployment group of AppConfig applications, such as applications in a
-    # `Production` environment or in an `EU_Region` environment. Each
-    # configuration deployment targets an environment. You can enable one or
-    # more Amazon CloudWatch alarms for an environment. If an alarm is
-    # triggered during a deployment, AppConfig roles back the configuration.
+    # Retrieves information about an environment. An environment is a
+    # logical deployment group of AppConfig applications, such as
+    # applications in a `Production` environment or in an `EU_Region`
+    # environment. Each configuration deployment targets an environment. You
+    # can enable one or more Amazon CloudWatch alarms for an environment. If
+    # an alarm is triggered during a deployment, AppConfig roles back the
+    # configuration.
     #
     # @option params [required, String] :application_id
     #   The ID of the application that includes the environment you want to
     #   get.
     #
     # @option params [required, String] :environment_id
-    #   The ID of the environment you wnat to get.
+    #   The ID of the environment that you want to get.
     #
     # @return [Types::Environment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1173,6 +1506,24 @@ module Aws::AppConfig
     #   * {Types::Environment#description #description} => String
     #   * {Types::Environment#state #state} => String
     #   * {Types::Environment#monitors #monitors} => Array&lt;Types::Monitor&gt;
+    #
+    #
+    # @example Example: To retrieve environment details
+    #
+    #   # The following get-environment example returns the details and state of the specified environment.
+    #
+    #   resp = client.get_environment({
+    #     application_id: "339ohji", 
+    #     environment_id: "54j1r29", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     id: "54j1r29", 
+    #     name: "Example-Environment", 
+    #     state: "READY_FOR_DEPLOYMENT", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1201,7 +1552,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Get information about a specific configuration version.
+    # Retrieves information about a specific configuration version.
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -1220,6 +1571,26 @@ module Aws::AppConfig
     #   * {Types::HostedConfigurationVersion#description #description} => String
     #   * {Types::HostedConfigurationVersion#content #content} => String
     #   * {Types::HostedConfigurationVersion#content_type #content_type} => String
+    #
+    #
+    # @example Example: To retrieve hosted configuration details
+    #
+    #   # The following get-hosted-configuration-version example retrieves the configuration details of the AWS AppConfig hosted
+    #   # configuration.
+    #
+    #   resp = client.get_hosted_configuration_version({
+    #     application_id: "339ohji", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     version_number: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     content_type: "application/json", 
+    #     version_number: 1, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1247,7 +1618,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # List all applications in your AWS account.
+    # Lists all applications in your Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -1255,8 +1626,12 @@ module Aws::AppConfig
     #   next set of results.
     #
     # @option params [String] :next_token
-    #   A token to start the list. Use this token to get the next set of
-    #   results.
+    #   A token to start the list. Next token is a pagination token generated
+    #   by AppConfig to describe what page the previous List call ended on.
+    #   For the first List request, the nextToken should not be set. On
+    #   subsequent calls, the nextToken parameter should be set to the
+    #   previous responses nextToken value. Use this token to get the next set
+    #   of results.
     #
     # @return [Types::Applications] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1264,6 +1639,29 @@ module Aws::AppConfig
     #   * {Types::Applications#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the available applications
+    #
+    #   # The following list-applications example lists the available applications in your AWS account.
+    #
+    #   resp = client.list_applications({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         description: "An application used for creating an example.", 
+    #         id: "339ohji", 
+    #         name: "test-application", 
+    #       }, 
+    #       {
+    #         id: "rwalwu7", 
+    #         name: "Test-Application", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1303,6 +1701,11 @@ module Aws::AppConfig
     #   A token to start the list. Use this token to get the next set of
     #   results.
     #
+    # @option params [String] :type
+    #   A filter based on the type of configurations that the configuration
+    #   profile contains. A configuration can be a feature flag or a free-form
+    #   configuration.
+    #
     # @return [Types::ConfigurationProfiles] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConfigurationProfiles#items #items} => Array&lt;Types::ConfigurationProfileSummary&gt;
@@ -1310,12 +1713,35 @@ module Aws::AppConfig
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list the available configuration profiles
+    #
+    #   # The following list-configuration-profiles example lists the available configuration profiles for the specified
+    #   # application.
+    #
+    #   resp = client.list_configuration_profiles({
+    #     application_id: "339ohji", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         application_id: "339ohji", 
+    #         id: "ur8hx2f", 
+    #         location_uri: "ssm-parameter://Example-Parameter", 
+    #         name: "Example-Configuration-Profile", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configuration_profiles({
     #     application_id: "Id", # required
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     type: "ConfigurationProfileType",
     #   })
     #
     # @example Response structure
@@ -1327,6 +1753,7 @@ module Aws::AppConfig
     #   resp.items[0].location_uri #=> String
     #   resp.items[0].validator_types #=> Array
     #   resp.items[0].validator_types[0] #=> String, one of "JSON_SCHEMA", "LAMBDA"
+    #   resp.items[0].type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListConfigurationProfiles AWS API Documentation
@@ -1338,7 +1765,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # List deployment strategies.
+    # Lists deployment strategies.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -1355,6 +1782,29 @@ module Aws::AppConfig
     #   * {Types::DeploymentStrategies#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the available deployment strategies
+    #
+    #   # The following list-deployment-strategies example lists the available deployment strategies in your AWS account.
+    #
+    #   resp = client.list_deployment_strategies({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         deployment_duration_in_minutes: 15, 
+    #         final_bake_time_in_minutes: 0, 
+    #         growth_factor: 25, 
+    #         growth_type: "LINEAR", 
+    #         id: "1225qzk", 
+    #         name: "Example-Deployment", 
+    #         replicate_to: "SSM_DOCUMENT", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1409,6 +1859,36 @@ module Aws::AppConfig
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: To list the available deployments
+    #
+    #   # The following list-deployments example lists the available deployments in your AWS account for the specified application
+    #   # and environment.
+    #
+    #   resp = client.list_deployments({
+    #     application_id: "339ohji", 
+    #     environment_id: "54j1r29", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         completed_at: Time.parse("2021-09-17T21:59:03.888000+00:00"), 
+    #         configuration_name: "Example-Configuration-Profile", 
+    #         configuration_version: "1", 
+    #         deployment_duration_in_minutes: 15, 
+    #         deployment_number: 1, 
+    #         final_bake_time_in_minutes: 0, 
+    #         growth_factor: 25, 
+    #         growth_type: "LINEAR", 
+    #         percentage_complete: 100, 
+    #         started_at: Time.parse("2021-09-17T21:43:54.205000+00:00"), 
+    #         state: "COMPLETE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_deployments({
@@ -1443,7 +1923,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # List the environments for an application.
+    # Lists the environments for an application.
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -1463,6 +1943,28 @@ module Aws::AppConfig
     #   * {Types::Environments#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the available environments
+    #
+    #   # The following list-environments example lists the available environments in your AWS account for the specified
+    #   # application.
+    #
+    #   resp = client.list_environments({
+    #     application_id: "339ohji", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         application_id: "339ohji", 
+    #         id: "54j1r29", 
+    #         name: "Example-Environment", 
+    #         state: "READY_FOR_DEPLOYMENT", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1494,7 +1996,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # View a list of configurations stored in the AppConfig configuration
+    # Lists configurations stored in the AppConfig hosted configuration
     # store by version.
     #
     # @option params [required, String] :application_id
@@ -1518,6 +2020,29 @@ module Aws::AppConfig
     #   * {Types::HostedConfigurationVersions#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the available hosted configuration versions
+    #
+    #   # The following list-hosted-configuration-versions example lists the configurations versions hosted in the AWS AppConfig
+    #   # hosted configuration store for the specified application and configuration profile.
+    #
+    #   resp = client.list_hosted_configuration_versions({
+    #     application_id: "339ohji", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         application_id: "339ohji", 
+    #         configuration_profile_id: "ur8hx2f", 
+    #         content_type: "application/json", 
+    #         version_number: 1, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1555,6 +2080,22 @@ module Aws::AppConfig
     # @return [Types::ResourceTags] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ResourceTags#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: To list the tags of an application
+    #
+    #   # The following list-tags-for-resource example lists the tags of a specified application.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:appconfig:us-east-1:111122223333:application/339ohji", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "group1" => "1", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1621,6 +2162,50 @@ module Aws::AppConfig
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
+    #
+    #
+    # @example Example: To start a configuration deployment
+    #
+    #   # The following start-deployment example starts a deployment to the application using the specified environment,
+    #   # deployment strategy, and configuration profile.
+    #
+    #   resp = client.start_deployment({
+    #     application_id: "339ohji", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     configuration_version: "1", 
+    #     deployment_strategy_id: "1225qzk", 
+    #     description: "", 
+    #     environment_id: "54j1r29", 
+    #     tags: {
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     configuration_location_uri: "ssm-parameter://Example-Parameter", 
+    #     configuration_name: "Example-Configuration-Profile", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     configuration_version: "1", 
+    #     deployment_duration_in_minutes: 15, 
+    #     deployment_number: 1, 
+    #     deployment_strategy_id: "1225qzk", 
+    #     environment_id: "54j1r29", 
+    #     event_log: [
+    #       {
+    #         description: "Deployment started", 
+    #         event_type: "DEPLOYMENT_STARTED", 
+    #         occurred_at: Time.parse("2021-09-17T21:43:54.205000+00:00"), 
+    #         triggered_by: "USER", 
+    #       }, 
+    #     ], 
+    #     final_bake_time_in_minutes: 0, 
+    #     growth_factor: 25, 
+    #     growth_type: "LINEAR", 
+    #     percentage_complete: 1.0, 
+    #     started_at: Time.parse("2021-09-17T21:43:54.205000+00:00"), 
+    #     state: "DEPLOYING", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1704,6 +2289,26 @@ module Aws::AppConfig
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
     #
+    #
+    # @example Example: To stop configuration deployment
+    #
+    #   # The following stop-deployment example stops the deployment of an application configuration to the specified environment.
+    #
+    #   resp = client.stop_deployment({
+    #     application_id: "339ohji", 
+    #     deployment_number: 2, 
+    #     environment_id: "54j1r29", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment_duration_in_minutes: 15, 
+    #     deployment_number: 2, 
+    #     final_bake_time_in_minutes: 0, 
+    #     growth_factor: 25.0, 
+    #     percentage_complete: 1.0, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_deployment({
@@ -1746,7 +2351,7 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Metadata to assign to an AppConfig resource. Tags help organize and
+    # Assigns metadata to an AppConfig resource. Tags help organize and
     # categorize your AppConfig resources. Each tag consists of a key and an
     # optional value, both of which you define. You can specify a maximum of
     # 50 tags for a resource.
@@ -1760,6 +2365,18 @@ module Aws::AppConfig
     #   not start with `aws:`. The tag value can be up to 256 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To tag an application
+    #
+    #   # The following tag-resource example tags an application resource.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:appconfig:us-east-1:111122223333:application/339ohji", 
+    #     tags: {
+    #       "group1" => "1", 
+    #     }, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1788,6 +2405,18 @@ module Aws::AppConfig
     #   The tag keys to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove a tag from an application
+    #
+    #   # The following untag-resource example removes the group1 tag from the specified application.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:appconfig:us-east-1:111122223333:application/339ohji", 
+    #     tag_keys: [
+    #       "group1", 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1821,6 +2450,24 @@ module Aws::AppConfig
     #   * {Types::Application#id #id} => String
     #   * {Types::Application#name #name} => String
     #   * {Types::Application#description #description} => String
+    #
+    #
+    # @example Example: To update an application
+    #
+    #   # The following update-application example updates the name of the specified application.
+    #
+    #   resp = client.update_application({
+    #     application_id: "339ohji", 
+    #     description: "", 
+    #     name: "Example-Application", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     description: "An application used for creating an example.", 
+    #     id: "339ohji", 
+    #     name: "Example-Application", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1861,7 +2508,7 @@ module Aws::AppConfig
     #
     # @option params [String] :retrieval_role_arn
     #   The ARN of an IAM role with permission to access the configuration at
-    #   the specified LocationUri.
+    #   the specified `LocationUri`.
     #
     # @option params [Array<Types::Validator>] :validators
     #   A list of methods for validating the configuration.
@@ -1875,6 +2522,28 @@ module Aws::AppConfig
     #   * {Types::ConfigurationProfile#location_uri #location_uri} => String
     #   * {Types::ConfigurationProfile#retrieval_role_arn #retrieval_role_arn} => String
     #   * {Types::ConfigurationProfile#validators #validators} => Array&lt;Types::Validator&gt;
+    #   * {Types::ConfigurationProfile#type #type} => String
+    #
+    #
+    # @example Example: To update a configuration profile
+    #
+    #   # The following update-configuration-profile example updates the description of the specified configuration profile.
+    #
+    #   resp = client.update_configuration_profile({
+    #     application_id: "339ohji", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     description: "Configuration profile used for examples.", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     description: "Configuration profile used for examples.", 
+    #     id: "ur8hx2f", 
+    #     location_uri: "ssm-parameter://Example-Parameter", 
+    #     name: "Example-Configuration-Profile", 
+    #     retrieval_role_arn: "arn:aws:iam::111122223333:role/Example-App-Config-Role", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1903,6 +2572,7 @@ module Aws::AppConfig
     #   resp.validators #=> Array
     #   resp.validators[0].type #=> String, one of "JSON_SCHEMA", "LAMBDA"
     #   resp.validators[0].content #=> String
+    #   resp.type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateConfigurationProfile AWS API Documentation
     #
@@ -1925,17 +2595,17 @@ module Aws::AppConfig
     #   Total amount of time for a deployment to last.
     #
     # @option params [Integer] :final_bake_time_in_minutes
-    #   The amount of time AppConfig monitors for alarms before considering
-    #   the deployment to be complete and no longer eligible for automatic
-    #   roll back.
+    #   The amount of time that AppConfig monitors for alarms before
+    #   considering the deployment to be complete and no longer eligible for
+    #   automatic rollback.
     #
     # @option params [Float] :growth_factor
     #   The percentage of targets to receive a deployed configuration during
     #   each interval.
     #
     # @option params [String] :growth_type
-    #   The algorithm used to define how percentage grows over time. AWS
-    #   AppConfig supports the following growth types:
+    #   The algorithm used to define how percentage grows over time. AppConfig
+    #   supports the following growth types:
     #
     #   **Linear**\: For this type, AppConfig processes the deployment by
     #   increments of the growth factor evenly distributed over the deployment
@@ -1972,6 +2642,28 @@ module Aws::AppConfig
     #   * {Types::DeploymentStrategy#growth_factor #growth_factor} => Float
     #   * {Types::DeploymentStrategy#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::DeploymentStrategy#replicate_to #replicate_to} => String
+    #
+    #
+    # @example Example: To update a deployment strategy
+    #
+    #   # The following update-deployment-strategy example updates final bake time to 20 minutes in the specified deployment
+    #   # strategy. ::
+    #
+    #   resp = client.update_deployment_strategy({
+    #     deployment_strategy_id: "1225qzk", 
+    #     final_bake_time_in_minutes: 20, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     deployment_duration_in_minutes: 15, 
+    #     final_bake_time_in_minutes: 20, 
+    #     growth_factor: 25, 
+    #     growth_type: "LINEAR", 
+    #     id: "1225qzk", 
+    #     name: "Example-Deployment", 
+    #     replicate_to: "SSM_DOCUMENT", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2030,6 +2722,26 @@ module Aws::AppConfig
     #   * {Types::Environment#state #state} => String
     #   * {Types::Environment#monitors #monitors} => Array&lt;Types::Monitor&gt;
     #
+    #
+    # @example Example: To update an environment
+    #
+    #   # The following update-environment example updates an environment's description.
+    #
+    #   resp = client.update_environment({
+    #     application_id: "339ohji", 
+    #     description: "An environment for examples.", 
+    #     environment_id: "54j1r29", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_id: "339ohji", 
+    #     description: "An environment for examples.", 
+    #     id: "54j1r29", 
+    #     name: "Example-Environment", 
+    #     state: "ROLLED_BACK", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_environment({
@@ -2039,7 +2751,7 @@ module Aws::AppConfig
     #     description: "Description",
     #     monitors: [
     #       {
-    #         alarm_arn: "Arn",
+    #         alarm_arn: "StringWithLengthBetween1And2048", # required
     #         alarm_role_arn: "RoleArn",
     #       },
     #     ],
@@ -2079,6 +2791,17 @@ module Aws::AppConfig
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To validate a configuration
+    #
+    #   # The following validate-configuration example uses the validators in a configuration profile to validate a configuration.
+    #
+    #   resp = client.validate_configuration({
+    #     application_id: "abc1234", 
+    #     configuration_profile_id: "ur8hx2f", 
+    #     configuration_version: "1", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.validate_configuration({
@@ -2109,7 +2832,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

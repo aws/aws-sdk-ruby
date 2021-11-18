@@ -145,7 +145,8 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # Describes the setup to be used for Kafka broker nodes in the cluster.
+    # Describes the setup to be used for Apache Kafka broker nodes in the
+    # cluster.
     #
     # @note When making an API call, you may pass BrokerNodeGroupInfo
     #   data as a hash:
@@ -158,6 +159,11 @@ module Aws::Kafka
     #         storage_info: {
     #           ebs_storage_info: {
     #             volume_size: 1,
+    #           },
+    #         },
+    #         connectivity_info: {
+    #           public_access: {
+    #             type: "__string",
     #           },
     #         },
     #       }
@@ -193,6 +199,10 @@ module Aws::Kafka
     #   nodes.
     #   @return [Types::StorageInfo]
     #
+    # @!attribute [rw] connectivity_info
+    #   Information about the broker access configuration.
+    #   @return [Types::ConnectivityInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BrokerNodeGroupInfo AWS API Documentation
     #
     class BrokerNodeGroupInfo < Struct.new(
@@ -200,7 +210,8 @@ module Aws::Kafka
       :client_subnets,
       :instance_type,
       :security_groups,
-      :storage_info)
+      :storage_info,
+      :connectivity_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -225,7 +236,7 @@ module Aws::Kafka
     #
     # @!attribute [rw] current_broker_software_info
     #   Information about the version of software currently deployed on the
-    #   Kafka brokers in the cluster.
+    #   Apache Kafka brokers in the cluster.
     #   @return [Types::BrokerSoftwareInfo]
     #
     # @!attribute [rw] endpoints
@@ -371,7 +382,7 @@ module Aws::Kafka
     #
     # @!attribute [rw] current_broker_software_info
     #   Information about the version of software currently deployed on the
-    #   Kafka brokers in the cluster.
+    #   Apache Kafka brokers in the cluster.
     #   @return [Types::BrokerSoftwareInfo]
     #
     # @!attribute [rw] logging_info
@@ -556,7 +567,8 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # Contains source Kafka versions and compatible target Kafka versions.
+    # Contains source Apache Kafka versions and compatible target Apache
+    # Kafka versions.
     #
     # @!attribute [rw] source_version
     #   @return [String]
@@ -688,6 +700,29 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Information about the broker access configuration.
+    #
+    # @note When making an API call, you may pass ConnectivityInfo
+    #   data as a hash:
+    #
+    #       {
+    #         public_access: {
+    #           type: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] public_access
+    #   Public access control for brokers.
+    #   @return [Types::PublicAccess]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ConnectivityInfo AWS API Documentation
+    #
+    class ConnectivityInfo < Struct.new(
+      :public_access)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Creates a cluster.
     #
     # @note When making an API call, you may pass CreateClusterRequest
@@ -702,6 +737,11 @@ module Aws::Kafka
     #           storage_info: {
     #             ebs_storage_info: {
     #               volume_size: 1,
+    #             },
+    #           },
+    #           connectivity_info: {
+    #             public_access: {
+    #               type: "__string",
     #             },
     #           },
     #         },
@@ -807,7 +847,7 @@ module Aws::Kafka
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] number_of_broker_nodes
-    #   The number of Kafka broker nodes in the Amazon MSK cluster.
+    #   The number of Apache Kafka broker nodes in the Amazon MSK cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] open_monitoring
@@ -1253,8 +1293,8 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # Contains information about the EBS storage volumes attached to Kafka
-    # broker nodes.
+    # Contains information about the EBS storage volumes attached to Apache
+    # Kafka broker nodes.
     #
     # @note When making an API call, you may pass EBSStorageInfo
     #   data as a hash:
@@ -1482,16 +1522,37 @@ module Aws::Kafka
     #   A string containing one or more hostname:port pairs.
     #   @return [String]
     #
+    # @!attribute [rw] bootstrap_broker_string_public_sasl_iam
+    #   A string that contains one or more DNS names (or IP addresses) and
+    #   SASL IAM port pairs. The following is an example.
+    #
+    #   <programlisting>\{ "BootstrapBrokerStringSaslIam": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9198" \}</programlisting>
+    #   @return [String]
+    #
+    # @!attribute [rw] bootstrap_broker_string_public_sasl_scram
+    #   A string containing one or more DNS names (or IP addresses) and SASL
+    #   SCRAM port pairs. The following is an example.
+    #
+    #   <programlisting>\{ "BootstrapBrokerStringSaslScram": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9196" \}</programlisting>
+    #   @return [String]
+    #
+    # @!attribute [rw] bootstrap_broker_string_public_tls
+    #   A string containing one or more DNS names (or IP addresses) and TLS
+    #   port pairs. The following is an example.
+    #
+    #   <programlisting>\{ "BootstrapBrokerStringTls": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9194" \}</programlisting>
+    #   @return [String]
+    #
     # @!attribute [rw] bootstrap_broker_string_tls
-    #   A string containing one or more DNS names (or IP) and TLS port
-    #   pairs. The following is an example.
+    #   A string containing one or more DNS names (or IP addresses) and TLS
+    #   port pairs. The following is an example.
     #
     #   <programlisting>\{ "BootstrapBrokerStringTls": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9094" \}</programlisting>
     #   @return [String]
     #
     # @!attribute [rw] bootstrap_broker_string_sasl_scram
-    #   A string containing one or more DNS names (or IP) and SASL SCRAM
-    #   port pairs. The following is an example.
+    #   A string containing one or more DNS names (or IP addresses) and SASL
+    #   SCRAM port pairs. The following is an example.
     #
     #   <programlisting>\{ "BootstrapBrokerStringSaslScram": "b-3.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-1.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096,b-2.exampleClusterName.abcde.c2.kafka.us-east-1.amazonaws.com:9096" \}</programlisting>
     #   @return [String]
@@ -1507,6 +1568,9 @@ module Aws::Kafka
     #
     class GetBootstrapBrokersResponse < Struct.new(
       :bootstrap_broker_string,
+      :bootstrap_broker_string_public_sasl_iam,
+      :bootstrap_broker_string_public_sasl_scram,
+      :bootstrap_broker_string_public_tls,
       :bootstrap_broker_string_tls,
       :bootstrap_broker_string_sasl_scram,
       :bootstrap_broker_string_sasl_iam)
@@ -1563,10 +1627,10 @@ module Aws::Kafka
       include Aws::Structure
     end
 
-    # Information about a Kafka version.
+    # Information about a Apache Kafka version.
     #
     # @!attribute [rw] version
-    #   The Kafka version.
+    #   The Apache Kafka version.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1802,7 +1866,7 @@ module Aws::Kafka
     # Response for ListKafkaVersions.
     #
     # @!attribute [rw] kafka_versions
-    #   An array of Kafka version objects.
+    #   An array of Apache Kafka version objects.
     #   @return [Array<Types::KafkaVersion>]
     #
     # @!attribute [rw] next_token
@@ -2031,6 +2095,10 @@ module Aws::Kafka
     #   Includes all encryption-related information.
     #   @return [Types::EncryptionInfo]
     #
+    # @!attribute [rw] connectivity_info
+    #   Information about the broker access configuration.
+    #   @return [Types::ConnectivityInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/MutableClusterInfo AWS API Documentation
     #
     class MutableClusterInfo < Struct.new(
@@ -2043,7 +2111,8 @@ module Aws::Kafka
       :logging_info,
       :instance_type,
       :client_authentication,
-      :encryption_info)
+      :encryption_info,
+      :connectivity_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2633,7 +2702,7 @@ module Aws::Kafka
     #   @return [String]
     #
     # @!attribute [rw] target_kafka_version
-    #   Target Kafka version.
+    #   Target Apache Kafka version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateClusterKafkaVersionRequest AWS API Documentation
@@ -2713,6 +2782,61 @@ module Aws::Kafka
     class UpdateConfigurationResponse < Struct.new(
       :arn,
       :latest_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request body for UpdateConnectivity.
+    #
+    # @note When making an API call, you may pass UpdateConnectivityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #         connectivity_info: { # required
+    #           public_access: {
+    #             type: "__string",
+    #           },
+    #         },
+    #         current_version: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] connectivity_info
+    #   Information about the broker access configuration.
+    #   @return [Types::ConnectivityInfo]
+    #
+    # @!attribute [rw] current_version
+    #   The current version of the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateConnectivityRequest AWS API Documentation
+    #
+    class UpdateConnectivityRequest < Struct.new(
+      :cluster_arn,
+      :connectivity_info,
+      :current_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response body for UpdateConnectivity.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_arn
+    #   The Amazon Resource Name (ARN) of the cluster operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateConnectivityResponse AWS API Documentation
+    #
+    class UpdateConnectivityResponse < Struct.new(
+      :cluster_arn,
+      :cluster_operation_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3012,6 +3136,28 @@ module Aws::Kafka
     class PrometheusInfo < Struct.new(
       :jmx_exporter,
       :node_exporter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Broker public access control.
+    #
+    # @note When making an API call, you may pass PublicAccess
+    #   data as a hash:
+    #
+    #       {
+    #         type: "__string",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The value DISABLED indicates that public access is disabled.
+    #   SERVICE\_PROVIDED\_EIPS indicates that public access is enabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/PublicAccess AWS API Documentation
+    #
+    class PublicAccess < Struct.new(
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2021-11-18)
+------------------
+
+* Feature - Amazon MSK has added a new API that allows you to update the connectivity settings for an existing cluster to enable public accessibility.
+
 1.43.0 (2021-11-04)
 ------------------
 

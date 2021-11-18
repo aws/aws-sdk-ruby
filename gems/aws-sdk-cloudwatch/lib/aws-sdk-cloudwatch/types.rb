@@ -50,8 +50,8 @@ module Aws::CloudWatch
     end
 
     # An anomaly detection model associated with a particular CloudWatch
-    # metric and statistic. You can use the model to display a band of
-    # expected normal values when the metric is graphed.
+    # metric, statistic, or metric math expression. You can use the model to
+    # display a band of expected, normal values when the metric is graphed.
     #
     # @!attribute [rw] namespace
     #   The namespace of the metric associated with the anomaly detection
@@ -81,6 +81,14 @@ module Aws::CloudWatch
     #   values are `TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA`
     #   @return [String]
     #
+    # @!attribute [rw] single_metric_anomaly_detector
+    #   The CloudWatch metric and statistic for this anomaly detector.
+    #   @return [Types::SingleMetricAnomalyDetector]
+    #
+    # @!attribute [rw] metric_math_anomaly_detector
+    #   The CloudWatch metric math expression for this anomaly detector.
+    #   @return [Types::MetricMathAnomalyDetector]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AnomalyDetector AWS API Documentation
     #
     class AnomalyDetector < Struct.new(
@@ -89,7 +97,9 @@ module Aws::CloudWatch
       :dimensions,
       :stat,
       :configuration,
-      :state_value)
+      :state_value,
+      :single_metric_anomaly_detector,
+      :metric_math_anomaly_detector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -382,15 +392,53 @@ module Aws::CloudWatch
     #   data as a hash:
     #
     #       {
-    #         namespace: "Namespace", # required
-    #         metric_name: "MetricName", # required
+    #         namespace: "Namespace",
+    #         metric_name: "MetricName",
     #         dimensions: [
     #           {
     #             name: "DimensionName", # required
     #             value: "DimensionValue", # required
     #           },
     #         ],
-    #         stat: "AnomalyDetectorMetricStat", # required
+    #         stat: "AnomalyDetectorMetricStat",
+    #         single_metric_anomaly_detector: {
+    #           namespace: "Namespace",
+    #           metric_name: "MetricName",
+    #           dimensions: [
+    #             {
+    #               name: "DimensionName", # required
+    #               value: "DimensionValue", # required
+    #             },
+    #           ],
+    #           stat: "AnomalyDetectorMetricStat",
+    #         },
+    #         metric_math_anomaly_detector: {
+    #           metric_data_queries: [
+    #             {
+    #               id: "MetricId", # required
+    #               metric_stat: {
+    #                 metric: { # required
+    #                   namespace: "Namespace",
+    #                   metric_name: "MetricName",
+    #                   dimensions: [
+    #                     {
+    #                       name: "DimensionName", # required
+    #                       value: "DimensionValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 period: 1, # required
+    #                 stat: "Stat", # required
+    #                 unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #               },
+    #               expression: "MetricExpression",
+    #               label: "MetricLabel",
+    #               return_data: false,
+    #               period: 1,
+    #               account_id: "AccountId",
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] namespace
@@ -411,13 +459,57 @@ module Aws::CloudWatch
     #   The statistic associated with the anomaly detection model to delete.
     #   @return [String]
     #
+    # @!attribute [rw] single_metric_anomaly_detector
+    #   A single metric anomaly detector to be deleted.
+    #
+    #   When using `SingleMetricAnomalyDetector`, you cannot include the
+    #   following parameters in the same operation:
+    #
+    #   * `Dimensions`,
+    #
+    #   * `MetricName`
+    #
+    #   * `Namespace`
+    #
+    #   * `Stat`
+    #
+    #   * the `MetricMathAnomalyDetector` parameters of
+    #     `DeleteAnomalyDetectorInput`
+    #
+    #   Instead, specify the single metric anomaly detector attributes as
+    #   part of the `SingleMetricAnomalyDetector` property.
+    #   @return [Types::SingleMetricAnomalyDetector]
+    #
+    # @!attribute [rw] metric_math_anomaly_detector
+    #   The metric math anomaly detector to be deleted.
+    #
+    #   When using `MetricMathAnomalyDetector`, you cannot include following
+    #   parameters in the same operation:
+    #
+    #   * `Dimensions`,
+    #
+    #   * `MetricName`
+    #
+    #   * `Namespace`
+    #
+    #   * `Stat`
+    #
+    #   * the `SingleMetricAnomalyDetector` parameters of
+    #     `DeleteAnomalyDetectorInput`
+    #
+    #   Instead, specify the metric math anomaly detector attributes as part
+    #   of the `MetricMathAnomalyDetector` property.
+    #   @return [Types::MetricMathAnomalyDetector]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAnomalyDetectorInput AWS API Documentation
     #
     class DeleteAnomalyDetectorInput < Struct.new(
       :namespace,
       :metric_name,
       :dimensions,
-      :stat)
+      :stat,
+      :single_metric_anomaly_detector,
+      :metric_math_anomaly_detector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -821,6 +913,7 @@ module Aws::CloudWatch
     #             value: "DimensionValue", # required
     #           },
     #         ],
+    #         anomaly_detector_types: ["SINGLE_METRIC"], # accepts SINGLE_METRIC, METRIC_MATH
     #       }
     #
     # @!attribute [rw] next_token
@@ -855,6 +948,12 @@ module Aws::CloudWatch
     #   detection models associated, they're all returned.
     #   @return [Array<Types::Dimension>]
     #
+    # @!attribute [rw] anomaly_detector_types
+    #   The anomaly detector types to request when using
+    #   `DescribeAnomalyDetectorsInput`. If empty, defaults to
+    #   `SINGLE_METRIC`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAnomalyDetectorsInput AWS API Documentation
     #
     class DescribeAnomalyDetectorsInput < Struct.new(
@@ -862,7 +961,8 @@ module Aws::CloudWatch
       :max_results,
       :namespace,
       :metric_name,
-      :dimensions)
+      :dimensions,
+      :anomaly_detector_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1786,7 +1886,13 @@ module Aws::CloudWatch
     end
 
     # This structure contains the definition for a Contributor Insights
-    # rule.
+    # rule. For more information about this rule, see[ Using Constributor
+    # Insights to analyze high-cardinality data][1] in the *Amazon
+    # CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html
     #
     # @!attribute [rw] name
     #   The name of the rule.
@@ -1798,7 +1904,7 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] schema
     #   For rules that you create, this is always `\{"Name":
-    #   "CloudWatchLogRule", "Version": 1\}`. For built-in rules, this is
+    #   "CloudWatchLogRule", "Version": 1\}`. For managed rules, this is
     #   `\{"Name": "ServiceLogRule", "Version": 1\}`
     #   @return [String]
     #
@@ -2876,6 +2982,61 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # Indicates the CloudWatch math expression that provides the time series
+    # the anomaly detector uses as input. The designated math expression
+    # must return a single time series.
+    #
+    # @note When making an API call, you may pass MetricMathAnomalyDetector
+    #   data as a hash:
+    #
+    #       {
+    #         metric_data_queries: [
+    #           {
+    #             id: "MetricId", # required
+    #             metric_stat: {
+    #               metric: { # required
+    #                 namespace: "Namespace",
+    #                 metric_name: "MetricName",
+    #                 dimensions: [
+    #                   {
+    #                     name: "DimensionName", # required
+    #                     value: "DimensionValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #               period: 1, # required
+    #               stat: "Stat", # required
+    #               unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #             },
+    #             expression: "MetricExpression",
+    #             label: "MetricLabel",
+    #             return_data: false,
+    #             period: 1,
+    #             account_id: "AccountId",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] metric_data_queries
+    #   An array of metric data query structures that enables you to create
+    #   an anomaly detector based on the result of a metric math expression.
+    #   Each item in `MetricDataQueries` gets a metric or performs a math
+    #   expression. One item in `MetricDataQueries` is the expression that
+    #   provides the time series that the anomaly detector uses as input.
+    #   Designate the expression by setting `ReturnData` to `True` for this
+    #   object in the array. For all other expressions and metrics, set
+    #   `ReturnData` to `False`. The designated expression must return a
+    #   single time series.
+    #   @return [Array<Types::MetricDataQuery>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricMathAnomalyDetector AWS API Documentation
+    #
+    class MetricMathAnomalyDetector < Struct.new(
+      :metric_data_queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This structure defines the metric to be returned, along with the
     # statistics, period, and units.
     #
@@ -3075,15 +3236,15 @@ module Aws::CloudWatch
     #   data as a hash:
     #
     #       {
-    #         namespace: "Namespace", # required
-    #         metric_name: "MetricName", # required
+    #         namespace: "Namespace",
+    #         metric_name: "MetricName",
     #         dimensions: [
     #           {
     #             name: "DimensionName", # required
     #             value: "DimensionValue", # required
     #           },
     #         ],
-    #         stat: "AnomalyDetectorMetricStat", # required
+    #         stat: "AnomalyDetectorMetricStat",
     #         configuration: {
     #           excluded_time_ranges: [
     #             {
@@ -3092,6 +3253,44 @@ module Aws::CloudWatch
     #             },
     #           ],
     #           metric_timezone: "AnomalyDetectorMetricTimezone",
+    #         },
+    #         single_metric_anomaly_detector: {
+    #           namespace: "Namespace",
+    #           metric_name: "MetricName",
+    #           dimensions: [
+    #             {
+    #               name: "DimensionName", # required
+    #               value: "DimensionValue", # required
+    #             },
+    #           ],
+    #           stat: "AnomalyDetectorMetricStat",
+    #         },
+    #         metric_math_anomaly_detector: {
+    #           metric_data_queries: [
+    #             {
+    #               id: "MetricId", # required
+    #               metric_stat: {
+    #                 metric: { # required
+    #                   namespace: "Namespace",
+    #                   metric_name: "MetricName",
+    #                   dimensions: [
+    #                     {
+    #                       name: "DimensionName", # required
+    #                       value: "DimensionValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 period: 1, # required
+    #                 stat: "Stat", # required
+    #                 unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #               },
+    #               expression: "MetricExpression",
+    #               label: "MetricLabel",
+    #               return_data: false,
+    #               period: 1,
+    #               account_id: "AccountId",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -3122,6 +3321,48 @@ module Aws::CloudWatch
     #   metric.
     #   @return [Types::AnomalyDetectorConfiguration]
     #
+    # @!attribute [rw] single_metric_anomaly_detector
+    #   A single metric anomaly detector to be created.
+    #
+    #   When using `SingleMetricAnomalyDetector`, you cannot include the
+    #   following parameters in the same operation:
+    #
+    #   * `Dimensions`
+    #
+    #   * `MetricName`
+    #
+    #   * `Namespace`
+    #
+    #   * `Stat`
+    #
+    #   * the `MetricMatchAnomalyDetector` parameters of
+    #     `PutAnomalyDetectorInput`
+    #
+    #   Instead, specify the single metric anomaly detector attributes as
+    #   part of the property `SingleMetricAnomalyDetector`.
+    #   @return [Types::SingleMetricAnomalyDetector]
+    #
+    # @!attribute [rw] metric_math_anomaly_detector
+    #   The metric math anomaly detector to be created.
+    #
+    #   When using `MetricMathAnomalyDetector`, you cannot include the
+    #   following parameters in the same operation:
+    #
+    #   * `Dimensions`
+    #
+    #   * `MetricName`
+    #
+    #   * `Namespace`
+    #
+    #   * `Stat`
+    #
+    #   * the `SingleMetricAnomalyDetector` parameters of
+    #     `PutAnomalyDetectorInput`
+    #
+    #   Instead, specify the metric math anomaly detector attributes as part
+    #   of the property `MetricMathAnomalyDetector`.
+    #   @return [Types::MetricMathAnomalyDetector]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutAnomalyDetectorInput AWS API Documentation
     #
     class PutAnomalyDetectorInput < Struct.new(
@@ -3129,7 +3370,9 @@ module Aws::CloudWatch
       :metric_name,
       :dimensions,
       :stat,
-      :configuration)
+      :configuration,
+      :single_metric_anomaly_detector,
+      :metric_math_anomaly_detector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4070,6 +4313,52 @@ module Aws::CloudWatch
       :state_value,
       :state_reason,
       :state_reason_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Designates the CloudWatch metric and statistic that provides the time
+    # series the anomaly detector uses as input.
+    #
+    # @note When making an API call, you may pass SingleMetricAnomalyDetector
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "Namespace",
+    #         metric_name: "MetricName",
+    #         dimensions: [
+    #           {
+    #             name: "DimensionName", # required
+    #             value: "DimensionValue", # required
+    #           },
+    #         ],
+    #         stat: "AnomalyDetectorMetricStat",
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the metric to create the anomaly detection model
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric to create the anomaly detection model for.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   The metric dimensions to create the anomaly detection model for.
+    #   @return [Array<Types::Dimension>]
+    #
+    # @!attribute [rw] stat
+    #   The statistic to use for the metric and anomaly detection model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/SingleMetricAnomalyDetector AWS API Documentation
+    #
+    class SingleMetricAnomalyDetector < Struct.new(
+      :namespace,
+      :metric_name,
+      :dimensions,
+      :stat)
       SENSITIVE = []
       include Aws::Structure
     end

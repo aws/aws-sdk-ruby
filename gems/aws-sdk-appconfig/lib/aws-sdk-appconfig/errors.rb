@@ -53,6 +53,16 @@ module Aws::AppConfig
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
+
+      # @return [String]
+      def details
+        @data[:details]
+      end
     end
 
     class ConflictException < ServiceError
