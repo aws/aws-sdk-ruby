@@ -29,7 +29,7 @@ require_relative 'aws-sdk-appstream/customizations'
 # structure.
 #
 #     app_stream = Aws::AppStream::Client.new
-#     resp = app_stream.associate_fleet(params)
+#     resp = app_stream.associate_application_fleet(params)
 #
 # See {Client} for more information.
 #
@@ -49,6 +49,6 @@ require_relative 'aws-sdk-appstream/customizations'
 # @!group service
 module Aws::AppStream
 
-  GEM_VERSION = '1.58.0'
+  GEM_VERSION = '1.59.0'
 
 end

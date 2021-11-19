@@ -346,6 +346,40 @@ module Aws::AppStream
 
     # @!group API Operations
 
+    # Associates the specified application with the specified fleet. This is
+    # only supported for Elastic fleets.
+    #
+    # @option params [required, String] :fleet_name
+    #   The name of the fleet.
+    #
+    # @option params [required, String] :application_arn
+    #   The ARN of the application.
+    #
+    # @return [Types::AssociateApplicationFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateApplicationFleetResult#application_fleet_association #application_fleet_association} => Types::ApplicationFleetAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_application_fleet({
+    #     fleet_name: "Name", # required
+    #     application_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_fleet_association.fleet_name #=> String
+    #   resp.application_fleet_association.application_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateApplicationFleet AWS API Documentation
+    #
+    # @overload associate_application_fleet(params = {})
+    # @param [Hash] params ({})
+    def associate_application_fleet(params = {}, options = {})
+      req = build_request(:associate_application_fleet, params)
+      req.send_request(options)
+    end
+
     # Associates the specified fleet with the specified stack.
     #
     # @option params [required, String] :fleet_name
@@ -502,6 +536,191 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Creates an app block.
+    #
+    # App blocks are an Amazon AppStream 2.0 resource that stores the
+    # details about the virtual hard disk in an S3 bucket. It also stores
+    # the setup script with details about how to mount the virtual hard
+    # disk. The virtual hard disk includes the application binaries and
+    # other files necessary to launch your applications. Multiple
+    # applications can be assigned to a single app block.
+    #
+    # This is only supported for Elastic fleets.
+    #
+    # @option params [required, String] :name
+    #   The name of the app block.
+    #
+    # @option params [String] :description
+    #   The description of the app block.
+    #
+    # @option params [String] :display_name
+    #   The display name of the app block. This is not displayed to the user.
+    #
+    # @option params [required, Types::S3Location] :source_s3_location
+    #   The source S3 location of the app block.
+    #
+    # @option params [required, Types::ScriptDetails] :setup_script_details
+    #   The setup script details of the app block.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags assigned to the app block.
+    #
+    # @return [Types::CreateAppBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAppBlockResult#app_block #app_block} => Types::AppBlock
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_app_block({
+    #     name: "Name", # required
+    #     description: "Description",
+    #     display_name: "DisplayName",
+    #     source_s3_location: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key", # required
+    #     },
+    #     setup_script_details: { # required
+    #       script_s3_location: { # required
+    #         s3_bucket: "S3Bucket", # required
+    #         s3_key: "S3Key", # required
+    #       },
+    #       executable_path: "String", # required
+    #       executable_parameters: "String",
+    #       timeout_in_seconds: 1, # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_block.name #=> String
+    #   resp.app_block.arn #=> String
+    #   resp.app_block.description #=> String
+    #   resp.app_block.display_name #=> String
+    #   resp.app_block.source_s3_location.s3_bucket #=> String
+    #   resp.app_block.source_s3_location.s3_key #=> String
+    #   resp.app_block.setup_script_details.script_s3_location.s3_bucket #=> String
+    #   resp.app_block.setup_script_details.script_s3_location.s3_key #=> String
+    #   resp.app_block.setup_script_details.executable_path #=> String
+    #   resp.app_block.setup_script_details.executable_parameters #=> String
+    #   resp.app_block.setup_script_details.timeout_in_seconds #=> Integer
+    #   resp.app_block.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateAppBlock AWS API Documentation
+    #
+    # @overload create_app_block(params = {})
+    # @param [Hash] params ({})
+    def create_app_block(params = {}, options = {})
+      req = build_request(:create_app_block, params)
+      req.send_request(options)
+    end
+
+    # Creates an application.
+    #
+    # Applications are an Amazon AppStream 2.0 resource that stores the
+    # details about how to launch applications on Elastic fleet streaming
+    # instances. An application consists of the launch details, icon, and
+    # display name. Applications are associated with an app block that
+    # contains the application binaries and other files. The applications
+    # assigned to an Elastic fleet are the applications users can launch.
+    #
+    # This is only supported for Elastic fleets.
+    #
+    # @option params [required, String] :name
+    #   The name of the application. This name is visible to users when
+    #   display name is not specified.
+    #
+    # @option params [String] :display_name
+    #   The display name of the application. This name is visible to users in
+    #   the application catalog.
+    #
+    # @option params [String] :description
+    #   The description of the application.
+    #
+    # @option params [required, Types::S3Location] :icon_s3_location
+    #   The location in S3 of the application icon.
+    #
+    # @option params [required, String] :launch_path
+    #   The launch path of the application.
+    #
+    # @option params [String] :working_directory
+    #   The working directory of the application.
+    #
+    # @option params [String] :launch_parameters
+    #   The launch parameters of the application.
+    #
+    # @option params [required, Array<String>] :platforms
+    #   The platforms the application supports. WINDOWS\_SERVER\_2019 and
+    #   AMAZON\_LINUX2 are supported for Elastic fleets.
+    #
+    # @option params [required, Array<String>] :instance_families
+    #   The instance families the application supports. Valid values are
+    #   GENERAL\_PURPOSE and GRAPHICS\_G4.
+    #
+    # @option params [required, String] :app_block_arn
+    #   The app block ARN to which the application should be associated
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags assigned to the application.
+    #
+    # @return [Types::CreateApplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateApplicationResult#application #application} => Types::Application
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_application({
+    #     name: "Name", # required
+    #     display_name: "DisplayName",
+    #     description: "Description",
+    #     icon_s3_location: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key", # required
+    #     },
+    #     launch_path: "String", # required
+    #     working_directory: "String",
+    #     launch_parameters: "String",
+    #     platforms: ["WINDOWS"], # required, accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
+    #     instance_families: ["String"], # required
+    #     app_block_arn: "Arn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application.name #=> String
+    #   resp.application.display_name #=> String
+    #   resp.application.icon_url #=> String
+    #   resp.application.launch_path #=> String
+    #   resp.application.launch_parameters #=> String
+    #   resp.application.enabled #=> Boolean
+    #   resp.application.metadata #=> Hash
+    #   resp.application.metadata["String"] #=> String
+    #   resp.application.working_directory #=> String
+    #   resp.application.description #=> String
+    #   resp.application.arn #=> String
+    #   resp.application.app_block_arn #=> String
+    #   resp.application.icon_s3_location.s3_bucket #=> String
+    #   resp.application.icon_s3_location.s3_key #=> String
+    #   resp.application.platforms #=> Array
+    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.application.instance_families #=> Array
+    #   resp.application.instance_families[0] #=> String
+    #   resp.application.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateApplication AWS API Documentation
+    #
+    # @overload create_application(params = {})
+    # @param [Hash] params ({})
+    def create_application(params = {}, options = {})
+      req = build_request(:create_application, params)
+      req.send_request(options)
+    end
+
     # Creates a Directory Config object in AppStream 2.0. This object
     # includes the configuration information required to join fleets and
     # image builders to Microsoft Active Directory domains.
@@ -552,7 +771,7 @@ module Aws::AppStream
     end
 
     # Creates a fleet. A fleet consists of streaming instances that run a
-    # specified image.
+    # specified image when using Always-On or On-Demand.
     #
     # @option params [required, String] :name
     #   A unique name for the fleet.
@@ -633,6 +852,12 @@ module Aws::AppStream
     #
     #   * stream.graphics-pro.16xlarge
     #
+    #   The following instance types are available for Elastic fleets:
+    #
+    #   * stream.standard.small
+    #
+    #   * stream.standard.medium
+    #
     # @option params [String] :fleet_type
     #   The fleet type.
     #
@@ -649,11 +874,14 @@ module Aws::AppStream
     #     when users are connected and a small hourly fee for instances that
     #     are not streaming apps.
     #
-    # @option params [required, Types::ComputeCapacity] :compute_capacity
-    #   The desired capacity for the fleet.
+    # @option params [Types::ComputeCapacity] :compute_capacity
+    #   The desired capacity for the fleet. This is not allowed for Elastic
+    #   fleets. For Elastic fleets, specify MaxConcurrentSessions instead.
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   The VPC configuration for the fleet.
+    #   The VPC configuration for the fleet. This is required for Elastic
+    #   fleets, but not required for other fleet types. Elastic fleets require
+    #   that you specify at least two subnets in different availability zones.
     #
     # @option params [Integer] :max_user_duration_in_seconds
     #   The maximum amount of time that a streaming session can remain active,
@@ -684,7 +912,8 @@ module Aws::AppStream
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
     #   The name of the directory and organizational unit (OU) to use to join
-    #   the fleet to a Microsoft Active Directory domain.
+    #   the fleet to a Microsoft Active Directory domain. This is not allowed
+    #   for Elastic fleets.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to associate with the fleet. A tag is a key-value pair, and
@@ -758,6 +987,19 @@ module Aws::AppStream
     #
     #   The default value is `APP`.
     #
+    # @option params [String] :platform
+    #   The fleet platform. WINDOWS\_SERVER\_2019 and AMAZON\_LINUX2 are
+    #   supported for Elastic fleets.
+    #
+    # @option params [Integer] :max_concurrent_sessions
+    #   The maximum concurrent sessions of the Elastic fleet. This is required
+    #   for Elastic fleets, and not allowed for other fleet types.
+    #
+    # @option params [Array<String>] :usb_device_filter_strings
+    #   The USB device filter strings that specify which USB devices a user
+    #   can redirect to the fleet streaming session, when using the Windows
+    #   native client. This is allowed but not required for Elastic fleets.
+    #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetResult#fleet #fleet} => Types::Fleet
@@ -769,8 +1011,8 @@ module Aws::AppStream
     #     image_name: "String",
     #     image_arn: "Arn",
     #     instance_type: "String", # required
-    #     fleet_type: "ALWAYS_ON", # accepts ALWAYS_ON, ON_DEMAND
-    #     compute_capacity: { # required
+    #     fleet_type: "ALWAYS_ON", # accepts ALWAYS_ON, ON_DEMAND, ELASTIC
+    #     compute_capacity: {
     #       desired_instances: 1, # required
     #     },
     #     vpc_config: {
@@ -792,6 +1034,9 @@ module Aws::AppStream
     #     idle_disconnect_timeout_in_seconds: 1,
     #     iam_role_arn: "Arn",
     #     stream_view: "APP", # accepts APP, DESKTOP
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
+    #     max_concurrent_sessions: 1,
+    #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #   })
     #
     # @example Response structure
@@ -803,7 +1048,7 @@ module Aws::AppStream
     #   resp.fleet.image_name #=> String
     #   resp.fleet.image_arn #=> String
     #   resp.fleet.instance_type #=> String
-    #   resp.fleet.fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND"
+    #   resp.fleet.fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND", "ELASTIC"
     #   resp.fleet.compute_capacity_status.desired #=> Integer
     #   resp.fleet.compute_capacity_status.running #=> Integer
     #   resp.fleet.compute_capacity_status.in_use #=> Integer
@@ -825,6 +1070,10 @@ module Aws::AppStream
     #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.iam_role_arn #=> String
     #   resp.fleet.stream_view #=> String, one of "APP", "DESKTOP"
+    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.fleet.max_concurrent_sessions #=> Integer
+    #   resp.fleet.usb_device_filter_strings #=> Array
+    #   resp.fleet.usb_device_filter_strings[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -1391,6 +1640,17 @@ module Aws::AppStream
     #   resp.image.applications[0].enabled #=> Boolean
     #   resp.image.applications[0].metadata #=> Hash
     #   resp.image.applications[0].metadata["String"] #=> String
+    #   resp.image.applications[0].working_directory #=> String
+    #   resp.image.applications[0].description #=> String
+    #   resp.image.applications[0].arn #=> String
+    #   resp.image.applications[0].app_block_arn #=> String
+    #   resp.image.applications[0].icon_s3_location.s3_bucket #=> String
+    #   resp.image.applications[0].icon_s3_location.s3_key #=> String
+    #   resp.image.applications[0].platforms #=> Array
+    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.image.applications[0].instance_families #=> Array
+    #   resp.image.applications[0].instance_families[0] #=> String
+    #   resp.image.applications[0].created_time #=> Time
     #   resp.image.created_time #=> Time
     #   resp.image.public_base_image_released_date #=> Time
     #   resp.image.appstream_agent_version #=> String
@@ -1487,6 +1747,50 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Deletes an app block.
+    #
+    # @option params [required, String] :name
+    #   The name of the app block.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_app_block({
+    #     name: "Name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteAppBlock AWS API Documentation
+    #
+    # @overload delete_app_block(params = {})
+    # @param [Hash] params ({})
+    def delete_app_block(params = {}, options = {})
+      req = build_request(:delete_app_block, params)
+      req.send_request(options)
+    end
+
+    # Deletes an application.
+    #
+    # @option params [required, String] :name
+    #   The name of the application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_application({
+    #     name: "Name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteApplication AWS API Documentation
+    #
+    # @overload delete_application(params = {})
+    # @param [Hash] params ({})
+    def delete_application(params = {}, options = {})
+      req = build_request(:delete_application, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified Directory Config object from AppStream 2.0. This
     # object includes the information required to join streaming instances
     # to an Active Directory domain.
@@ -1573,6 +1877,17 @@ module Aws::AppStream
     #   resp.image.applications[0].enabled #=> Boolean
     #   resp.image.applications[0].metadata #=> Hash
     #   resp.image.applications[0].metadata["String"] #=> String
+    #   resp.image.applications[0].working_directory #=> String
+    #   resp.image.applications[0].description #=> String
+    #   resp.image.applications[0].arn #=> String
+    #   resp.image.applications[0].app_block_arn #=> String
+    #   resp.image.applications[0].icon_s3_location.s3_bucket #=> String
+    #   resp.image.applications[0].icon_s3_location.s3_key #=> String
+    #   resp.image.applications[0].platforms #=> Array
+    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.image.applications[0].instance_families #=> Array
+    #   resp.image.applications[0].instance_families[0] #=> String
+    #   resp.image.applications[0].created_time #=> Time
     #   resp.image.created_time #=> Time
     #   resp.image.public_base_image_released_date #=> Time
     #   resp.image.appstream_agent_version #=> String
@@ -1745,6 +2060,161 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Retrieves a list that describes one or more app blocks.
+    #
+    # @option params [Array<String>] :arns
+    #   The ARNs of the app blocks.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @return [Types::DescribeAppBlocksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAppBlocksResult#app_blocks #app_blocks} => Array&lt;Types::AppBlock&gt;
+    #   * {Types::DescribeAppBlocksResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_app_blocks({
+    #     arns: ["Arn"],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.app_blocks #=> Array
+    #   resp.app_blocks[0].name #=> String
+    #   resp.app_blocks[0].arn #=> String
+    #   resp.app_blocks[0].description #=> String
+    #   resp.app_blocks[0].display_name #=> String
+    #   resp.app_blocks[0].source_s3_location.s3_bucket #=> String
+    #   resp.app_blocks[0].source_s3_location.s3_key #=> String
+    #   resp.app_blocks[0].setup_script_details.script_s3_location.s3_bucket #=> String
+    #   resp.app_blocks[0].setup_script_details.script_s3_location.s3_key #=> String
+    #   resp.app_blocks[0].setup_script_details.executable_path #=> String
+    #   resp.app_blocks[0].setup_script_details.executable_parameters #=> String
+    #   resp.app_blocks[0].setup_script_details.timeout_in_seconds #=> Integer
+    #   resp.app_blocks[0].created_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeAppBlocks AWS API Documentation
+    #
+    # @overload describe_app_blocks(params = {})
+    # @param [Hash] params ({})
+    def describe_app_blocks(params = {}, options = {})
+      req = build_request(:describe_app_blocks, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes one or more application fleet
+    # associations. Either ApplicationArn or FleetName must be specified.
+    #
+    # @option params [String] :fleet_name
+    #   The name of the fleet.
+    #
+    # @option params [String] :application_arn
+    #   The ARN of the application.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @return [Types::DescribeApplicationFleetAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeApplicationFleetAssociationsResult#application_fleet_associations #application_fleet_associations} => Array&lt;Types::ApplicationFleetAssociation&gt;
+    #   * {Types::DescribeApplicationFleetAssociationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_application_fleet_associations({
+    #     fleet_name: "Name",
+    #     application_arn: "Arn",
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_fleet_associations #=> Array
+    #   resp.application_fleet_associations[0].fleet_name #=> String
+    #   resp.application_fleet_associations[0].application_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeApplicationFleetAssociations AWS API Documentation
+    #
+    # @overload describe_application_fleet_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_application_fleet_associations(params = {}, options = {})
+      req = build_request(:describe_application_fleet_associations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes one or more applications.
+    #
+    # @option params [Array<String>] :arns
+    #   The ARNs for the applications.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @return [Types::DescribeApplicationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeApplicationsResult#applications #applications} => Array&lt;Types::Application&gt;
+    #   * {Types::DescribeApplicationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_applications({
+    #     arns: ["Arn"],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.applications #=> Array
+    #   resp.applications[0].name #=> String
+    #   resp.applications[0].display_name #=> String
+    #   resp.applications[0].icon_url #=> String
+    #   resp.applications[0].launch_path #=> String
+    #   resp.applications[0].launch_parameters #=> String
+    #   resp.applications[0].enabled #=> Boolean
+    #   resp.applications[0].metadata #=> Hash
+    #   resp.applications[0].metadata["String"] #=> String
+    #   resp.applications[0].working_directory #=> String
+    #   resp.applications[0].description #=> String
+    #   resp.applications[0].arn #=> String
+    #   resp.applications[0].app_block_arn #=> String
+    #   resp.applications[0].icon_s3_location.s3_bucket #=> String
+    #   resp.applications[0].icon_s3_location.s3_key #=> String
+    #   resp.applications[0].platforms #=> Array
+    #   resp.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.applications[0].instance_families #=> Array
+    #   resp.applications[0].instance_families[0] #=> String
+    #   resp.applications[0].created_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeApplications AWS API Documentation
+    #
+    # @overload describe_applications(params = {})
+    # @param [Hash] params ({})
+    def describe_applications(params = {}, options = {})
+      req = build_request(:describe_applications, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list that describes one or more specified Directory Config
     # objects for AppStream 2.0, if the names for these objects are
     # provided. Otherwise, all Directory Config objects in the account are
@@ -1831,7 +2301,7 @@ module Aws::AppStream
     #   resp.fleets[0].image_name #=> String
     #   resp.fleets[0].image_arn #=> String
     #   resp.fleets[0].instance_type #=> String
-    #   resp.fleets[0].fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND"
+    #   resp.fleets[0].fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND", "ELASTIC"
     #   resp.fleets[0].compute_capacity_status.desired #=> Integer
     #   resp.fleets[0].compute_capacity_status.running #=> Integer
     #   resp.fleets[0].compute_capacity_status.in_use #=> Integer
@@ -1853,6 +2323,10 @@ module Aws::AppStream
     #   resp.fleets[0].idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleets[0].iam_role_arn #=> String
     #   resp.fleets[0].stream_view #=> String, one of "APP", "DESKTOP"
+    #   resp.fleets[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.fleets[0].max_concurrent_sessions #=> Integer
+    #   resp.fleets[0].usb_device_filter_strings #=> Array
+    #   resp.fleets[0].usb_device_filter_strings[0] #=> String
     #   resp.next_token #=> String
     #
     #
@@ -2054,6 +2528,17 @@ module Aws::AppStream
     #   resp.images[0].applications[0].enabled #=> Boolean
     #   resp.images[0].applications[0].metadata #=> Hash
     #   resp.images[0].applications[0].metadata["String"] #=> String
+    #   resp.images[0].applications[0].working_directory #=> String
+    #   resp.images[0].applications[0].description #=> String
+    #   resp.images[0].applications[0].arn #=> String
+    #   resp.images[0].applications[0].app_block_arn #=> String
+    #   resp.images[0].applications[0].icon_s3_location.s3_bucket #=> String
+    #   resp.images[0].applications[0].icon_s3_location.s3_key #=> String
+    #   resp.images[0].applications[0].platforms #=> Array
+    #   resp.images[0].applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.images[0].applications[0].instance_families #=> Array
+    #   resp.images[0].applications[0].instance_families[0] #=> String
+    #   resp.images[0].applications[0].created_time #=> Time
     #   resp.images[0].created_time #=> Time
     #   resp.images[0].public_base_image_released_date #=> Time
     #   resp.images[0].appstream_agent_version #=> String
@@ -2389,6 +2874,32 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def disable_user(params = {}, options = {})
       req = build_request(:disable_user, params)
+      req.send_request(options)
+    end
+
+    # Disassociates the specified application from the fleet.
+    #
+    # @option params [required, String] :fleet_name
+    #   The name of the fleet.
+    #
+    # @option params [required, String] :application_arn
+    #   The ARN of the application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_application_fleet({
+    #     fleet_name: "Name", # required
+    #     application_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateApplicationFleet AWS API Documentation
+    #
+    # @overload disassociate_application_fleet(params = {})
+    # @param [Hash] params ({})
+    def disassociate_application_fleet(params = {}, options = {})
+      req = build_request(:disassociate_application_fleet, params)
       req.send_request(options)
     end
 
@@ -2836,6 +3347,89 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Updates the specified application.
+    #
+    # @option params [required, String] :name
+    #   The name of the application. This name is visible to users when
+    #   display name is not specified.
+    #
+    # @option params [String] :display_name
+    #   The display name of the application. This name is visible to users in
+    #   the application catalog.
+    #
+    # @option params [String] :description
+    #   The description of the application.
+    #
+    # @option params [Types::S3Location] :icon_s3_location
+    #   The icon S3 location of the application.
+    #
+    # @option params [String] :launch_path
+    #   The launch path of the application.
+    #
+    # @option params [String] :working_directory
+    #   The working directory of the application.
+    #
+    # @option params [String] :launch_parameters
+    #   The launch parameters of the application.
+    #
+    # @option params [String] :app_block_arn
+    #   The ARN of the app block.
+    #
+    # @option params [Array<String>] :attributes_to_delete
+    #   The attributes to delete for an application.
+    #
+    # @return [Types::UpdateApplicationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApplicationResult#application #application} => Types::Application
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_application({
+    #     name: "Name", # required
+    #     display_name: "DisplayName",
+    #     description: "Description",
+    #     icon_s3_location: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key", # required
+    #     },
+    #     launch_path: "String",
+    #     working_directory: "String",
+    #     launch_parameters: "String",
+    #     app_block_arn: "Arn",
+    #     attributes_to_delete: ["LAUNCH_PARAMETERS"], # accepts LAUNCH_PARAMETERS, WORKING_DIRECTORY
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application.name #=> String
+    #   resp.application.display_name #=> String
+    #   resp.application.icon_url #=> String
+    #   resp.application.launch_path #=> String
+    #   resp.application.launch_parameters #=> String
+    #   resp.application.enabled #=> Boolean
+    #   resp.application.metadata #=> Hash
+    #   resp.application.metadata["String"] #=> String
+    #   resp.application.working_directory #=> String
+    #   resp.application.description #=> String
+    #   resp.application.arn #=> String
+    #   resp.application.app_block_arn #=> String
+    #   resp.application.icon_s3_location.s3_bucket #=> String
+    #   resp.application.icon_s3_location.s3_key #=> String
+    #   resp.application.platforms #=> Array
+    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.application.instance_families #=> Array
+    #   resp.application.instance_families[0] #=> String
+    #   resp.application.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateApplication AWS API Documentation
+    #
+    # @overload update_application(params = {})
+    # @param [Hash] params ({})
+    def update_application(params = {}, options = {})
+      req = build_request(:update_application, params)
+      req.send_request(options)
+    end
+
     # Updates the specified Directory Config object in AppStream 2.0. This
     # object includes the configuration information required to join fleets
     # and image builders to Microsoft Active Directory domains.
@@ -2887,11 +3481,25 @@ module Aws::AppStream
     # Updates the specified fleet.
     #
     # If the fleet is in the `STOPPED` state, you can update any attribute
-    # except the fleet name. If the fleet is in the `RUNNING` state, you can
-    # update the `DisplayName`, `ComputeCapacity`, `ImageARN`, `ImageName`,
-    # `IdleDisconnectTimeoutInSeconds`, and `DisconnectTimeoutInSeconds`
-    # attributes. If the fleet is in the `STARTING` or `STOPPING` state, you
-    # can't update it.
+    # except the fleet name.
+    #
+    # If the fleet is in the `RUNNING` state, you can update the following
+    # based on the fleet type:
+    #
+    # * Always-On and On-Demand fleet types
+    #
+    #   You can update the `DisplayName`, `ComputeCapacity`, `ImageARN`,
+    #   `ImageName`, `IdleDisconnectTimeoutInSeconds`, and
+    #   `DisconnectTimeoutInSeconds` attributes.
+    #
+    # * Elastic fleet type
+    #
+    #   You can update the `DisplayName`, `IdleDisconnectTimeoutInSeconds`,
+    #   `DisconnectTimeoutInSeconds`, `MaxConcurrentSessions`, and
+    #   `UsbDeviceFilterStrings` attributes.
+    #
+    # If the fleet is in the `STARTING` or `STOPPED` state, you can't
+    # update it.
     #
     # @option params [String] :image_name
     #   The name of the image used to create the fleet.
@@ -2972,11 +3580,20 @@ module Aws::AppStream
     #
     #   * stream.graphics-pro.16xlarge
     #
+    #   The following instance types are available for Elastic fleets:
+    #
+    #   * stream.standard.small
+    #
+    #   * stream.standard.medium
+    #
     # @option params [Types::ComputeCapacity] :compute_capacity
-    #   The desired capacity for the fleet.
+    #   The desired capacity for the fleet. This is not allowed for Elastic
+    #   fleets.
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   The VPC configuration for the fleet.
+    #   The VPC configuration for the fleet. This is required for Elastic
+    #   fleets, but not required for other fleet types. Elastic fleets require
+    #   that you specify at least two subnets in different availability zones.
     #
     # @option params [Integer] :max_user_duration_in_seconds
     #   The maximum amount of time that a streaming session can remain active,
@@ -3068,6 +3685,18 @@ module Aws::AppStream
     #
     #   The default value is `APP`.
     #
+    # @option params [String] :platform
+    #   The platform of the fleet. WINDOWS\_SERVER\_2019 and AMAZON\_LINUX2
+    #   are supported for Elastic fleets.
+    #
+    # @option params [Integer] :max_concurrent_sessions
+    #   The maximum number of concurrent sessions for a fleet.
+    #
+    # @option params [Array<String>] :usb_device_filter_strings
+    #   The USB device filter strings that specify which USB devices a user
+    #   can redirect to the fleet streaming session, when using the Windows
+    #   native client. This is allowed but not required for Elastic fleets.
+    #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFleetResult#fleet #fleet} => Types::Fleet
@@ -3097,9 +3726,12 @@ module Aws::AppStream
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #     },
     #     idle_disconnect_timeout_in_seconds: 1,
-    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN
+    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS
     #     iam_role_arn: "Arn",
     #     stream_view: "APP", # accepts APP, DESKTOP
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
+    #     max_concurrent_sessions: 1,
+    #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #   })
     #
     # @example Response structure
@@ -3111,7 +3743,7 @@ module Aws::AppStream
     #   resp.fleet.image_name #=> String
     #   resp.fleet.image_arn #=> String
     #   resp.fleet.instance_type #=> String
-    #   resp.fleet.fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND"
+    #   resp.fleet.fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND", "ELASTIC"
     #   resp.fleet.compute_capacity_status.desired #=> Integer
     #   resp.fleet.compute_capacity_status.running #=> Integer
     #   resp.fleet.compute_capacity_status.in_use #=> Integer
@@ -3133,6 +3765,10 @@ module Aws::AppStream
     #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.iam_role_arn #=> String
     #   resp.fleet.stream_view #=> String, one of "APP", "DESKTOP"
+    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.fleet.max_concurrent_sessions #=> Integer
+    #   resp.fleet.usb_device_filter_strings #=> Array
+    #   resp.fleet.usb_device_filter_strings[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -3317,7 +3953,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

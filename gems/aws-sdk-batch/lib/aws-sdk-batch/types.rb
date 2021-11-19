@@ -214,8 +214,9 @@ module Aws::Batch
     # An object representing an Batch compute environment.
     #
     # @!attribute [rw] compute_environment_name
-    #   The name of the compute environment. Up to 128 letters (uppercase
-    #   and lowercase), numbers, hyphens, and underscores are allowed.
+    #   The name of the compute environment. It can be up to 128 letters
+    #   long. It can contain uppercase and lowercase letters, numbers,
+    #   hyphens (-), and underscores (\_).
     #   @return [String]
     #
     # @!attribute [rw] compute_environment_arn
@@ -1705,8 +1706,9 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] compute_environment_name
-    #   The name for your compute environment. Up to 128 letters (uppercase
-    #   and lowercase), numbers, hyphens, and underscores are allowed.
+    #   The name for your compute environment. It can be up to 128 letters
+    #   long. It can contain uppercase and lowercase letters, numbers,
+    #   hyphens (-), and underscores (\_).
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1740,9 +1742,8 @@ module Aws::Batch
     # @!attribute [rw] unmanagedv_cpus
     #   The maximum number of vCPUs for an unmanaged compute environment.
     #   This parameter is only used for fair share scheduling to reserve
-    #   vCPU capacity for new share identifiers. If this parameter is not
-    #   provided for a fair share job queue, no vCPU capacity will be
-    #   reserved.
+    #   vCPU capacity for new share identifiers. If this parameter isn't
+    #   provided for a fair share job queue, no vCPU capacity is reserved.
     #
     #   <note markdown="1"> This parameter is only supported when the `type` parameter is set to
     #   `UNMANAGED`/
@@ -1828,8 +1829,9 @@ module Aws::Batch
     end
 
     # @!attribute [rw] compute_environment_name
-    #   The name of the compute environment. Up to 128 letters (uppercase
-    #   and lowercase), numbers, hyphens, and underscores are allowed.
+    #   The name of the compute environment. It can be up to 128 letters
+    #   long. It can contain uppercase and lowercase letters, numbers,
+    #   hyphens (-), and underscores (\_).
     #   @return [String]
     #
     # @!attribute [rw] compute_environment_arn
@@ -1867,8 +1869,9 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_queue_name
-    #   The name of the job queue. Up to 128 letters (uppercase and
-    #   lowercase), numbers, and underscores are allowed.
+    #   The name of the job queue. It can be up to 128 letters long. It can
+    #   contain uppercase and lowercase letters, numbers, hyphens (-), and
+    #   underscores (\_).
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1879,14 +1882,14 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] scheduling_policy_arn
-    #   Amazon Resource Name (ARN) of the fair share scheduling policy. If
-    #   this parameter is specified, the job queue will use a fair share
-    #   scheduling policy. If this parameter is not specified, the job queue
-    #   will use a first in, first out (FIFO) scheduling policy. Once a job
-    #   queue is created, the fair share scheduling policy can be replaced
-    #   but not removed. The format is
-    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
-    #   example,
+    #   The Amazon Resource Name (ARN) of the fair share scheduling policy.
+    #   If this parameter is specified, the job queue uses a fair share
+    #   scheduling policy. If this parameter isn't specified, the job queue
+    #   uses a first in, first out (FIFO) scheduling policy. After a job
+    #   queue is created, you can replace but can't remove the fair share
+    #   scheduling policy. The format is
+    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. An
+    #   example is
     #   `aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy`.
     #   @return [String]
     #
@@ -1982,8 +1985,9 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the scheduling policy. Up to 128 letters (uppercase and
-    #   lowercase), numbers, hyphens, and underscores are allowed.
+    #   The name of the scheduling policy. It can be up to 128 letters long.
+    #   It can contain uppercase and lowercase letters, numbers, hyphens
+    #   (-), and underscores (\_).
     #   @return [String]
     #
     # @!attribute [rw] fairshare_policy
@@ -2225,7 +2229,7 @@ module Aws::Batch
     #
     # @!attribute [rw] job_definitions
     #   A list of up to 100 job definitions. Each entry in the list can
-    #   either be an ARN of the form
+    #   either be an ARN in the format
     #   `arn:aws:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`
     #   or a short version using the form
     #   `$\{JobDefinitionName\}:$\{Revision\}`.
@@ -2754,12 +2758,9 @@ module Aws::Batch
     # @!attribute [rw] share_decay_seconds
     #   The time period to use to calculate a fair share percentage for each
     #   fair share identifier in use, in seconds. A value of zero (0)
-    #   indicates that only current usage should be measured; if there are
-    #   four evenly weighted fair share identifiers then each can only use
-    #   up to 25% of the available CPU resources, even if some of the fair
-    #   share identifiers have no currently running jobs. The decay allows
-    #   for more recently run jobs to have more weight than jobs that ran
-    #   earlier. The maximum supported value is 604800 (1 week).
+    #   indicates that only current usage should be measured. The decay
+    #   allows for more recently run jobs to have more weight than jobs that
+    #   ran earlier. The maximum supported value is 604800 (1 week).
     #   @return [Integer]
     #
     # @!attribute [rw] compute_reservation
@@ -2783,9 +2784,9 @@ module Aws::Batch
     #   @return [Integer]
     #
     # @!attribute [rw] share_distribution
-    #   Array of `SharedIdentifier` objects that contain the weights for the
-    #   fair share identifiers for the fair share policy. Fair share
-    #   identifiers that are not included have a default weight of `1.0`.
+    #   An array of `SharedIdentifier` objects that contain the weights for
+    #   the fair share identifiers for the fair share policy. Fair share
+    #   identifiers that aren't included have a default weight of `1.0`.
     #   @return [Array<Types::ShareAttributes>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/FairsharePolicy AWS API Documentation
@@ -2899,9 +2900,9 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] scheduling_priority
-    #   The scheduling priority of the job definition. This will only affect
+    #   The scheduling priority of the job definition. This only affects
     #   jobs in job queues with a fair share policy. Jobs with a higher
-    #   scheduling priority will be scheduled before jobs with a lower
+    #   scheduling priority are scheduled before jobs with a lower
     #   scheduling priority.
     #   @return [Integer]
     #
@@ -3049,9 +3050,9 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] scheduling_priority
-    #   The scheduling policy of the job definition. This will only affect
-    #   jobs in job queues with a fair share policy. Jobs with a higher
-    #   scheduling priority will be scheduled before jobs with a lower
+    #   The scheduling policy of the job definition. This only affects jobs
+    #   in job queues with a fair share policy. Jobs with a higher
+    #   scheduling priority are scheduled before jobs with a lower
     #   scheduling priority.
     #   @return [Integer]
     #
@@ -3200,8 +3201,8 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] scheduling_policy_arn
-    #   Amazon Resource Name (ARN) of the scheduling policy. The format is
-    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
+    #   The Amazon Resource Name (ARN) of the scheduling policy. The format
+    #   is `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
     #   example,
     #   `aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy`.
     #   @return [String]
@@ -3273,11 +3274,11 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix timestamp for when the job was created. For non-array jobs
-    #   and parent array jobs, this is when the job entered the `SUBMITTED`
-    #   state (at the time SubmitJob was called). For array child jobs, this
-    #   is when the child job was spawned by its parent and entered the
-    #   `PENDING` state.
+    #   The Unix timestamp (in milliseconds) for when the job was created.
+    #   For non-array jobs and parent array jobs, this is when the job
+    #   entered the `SUBMITTED` state (at the time SubmitJob was called).
+    #   For array child jobs, this is when the child job was spawned by its
+    #   parent and entered the `PENDING` state.
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -3760,15 +3761,15 @@ module Aws::Batch
     #
     #   : The value for the filter is the time that's before the job was
     #     created. This corresponds to the `createdAt` value. The value is a
-    #     string representation of the number of seconds since 00:00:00 UTC
-    #     (midnight) on January 1, 1970.
+    #     string representation of the number of milliseconds since 00:00:00
+    #     UTC (midnight) on January 1, 1970.
     #
     #   AFTER\_CREATED\_AT
     #
     #   : The value for the filter is the time that's after the job was
     #     created. This corresponds to the `createdAt` value. The value is a
-    #     string representation of the number of seconds since 00:00:00 UTC
-    #     (midnight) on January 1, 1970.
+    #     string representation of the number of milliseconds since 00:00:00
+    #     UTC (midnight) on January 1, 1970.
     #   @return [Array<Types::KeyValuesPair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobsRequest AWS API Documentation
@@ -3814,19 +3815,19 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results returned by `ListSchedulingPolicies`
-    #   in paginated output. When this parameter is used,
-    #   `ListSchedulingPolicies` only returns `maxResults` results in a
-    #   single page and a `nextToken` response element. The remaining
-    #   results of the initial request can be seen by sending another
+    #   The maximum number of results that's returned by
+    #   `ListSchedulingPolicies` in paginated output. When this parameter is
+    #   used, `ListSchedulingPolicies` only returns `maxResults` results in
+    #   a single page and a `nextToken` response element. You can see the
+    #   remaining results of the initial request by sending another
     #   `ListSchedulingPolicies` request with the returned `nextToken`
     #   value. This value can be between 1 and 100. If this parameter isn't
-    #   used, then `ListSchedulingPolicies` returns up to 100 results and a
+    #   used, `ListSchedulingPolicies` returns up to 100 results and a
     #   `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` value returned from a previous paginated
+    #   The `nextToken` value that's returned from a previous paginated
     #   `ListSchedulingPolicies` request where `maxResults` was used and the
     #   results exceeded the value of that parameter. Pagination continues
     #   from the end of the previous results that returned the `nextToken`
@@ -4819,9 +4820,9 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_definition_name
-    #   The name of the job definition to register. Up to 128 letters
-    #   (uppercase and lowercase), numbers, hyphens, and underscores are
-    #   allowed.
+    #   The name of the job definition to register. It can be up to 128
+    #   letters long. It can contain uppercase and lowercase letters,
+    #   numbers, hyphens (-), and underscores (\_).
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -5167,17 +5168,17 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # An object representing a scheduling policy.
+    # An object that represents a scheduling policy.
     #
     # @!attribute [rw] name
     #   The name of the scheduling policy.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   Amazon Resource Name (ARN) of the scheduling policy. An example
-    #   would be
+    #   The Amazon Resource Name (ARN) of the scheduling policy. An example
+    #   is
     #   `arn:aws:batch:us-east-1:123456789012:scheduling-policy/HighPriority
-    #   `
+    #   `.
     #   @return [String]
     #
     # @!attribute [rw] fairshare_policy
@@ -5185,10 +5186,10 @@ module Aws::Batch
     #   @return [Types::FairsharePolicy]
     #
     # @!attribute [rw] tags
-    #   The tags that you apply to the scheduling policy to help you
-    #   categorize and organize your resources. Each tag consists of a key
-    #   and an optional value. For more information, see [Tagging Amazon Web
-    #   Services Resources][1] in *Amazon Web Services General Reference*.
+    #   The tags that you apply to the scheduling policy to categorize and
+    #   organize your resources. Each tag consists of a key and an optional
+    #   value. For more information, see [Tagging Amazon Web Services
+    #   Resources][1] in *Amazon Web Services General Reference*.
     #
     #
     #
@@ -5206,8 +5207,8 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # An object containing the details of a scheduling policy returned in a
-    # `ListSchedulingPolicy` action.
+    # An object that contains the details of a scheduling policy that's
+    # returned in a `ListSchedulingPolicy` action.
     #
     # @!attribute [rw] arn
     #   Amazon Resource Name (ARN) of the scheduling policy.
@@ -5286,7 +5287,7 @@ module Aws::Batch
     end
 
     # Specifies the weights for the fair share identifiers for the fair
-    # share policy. Fair share identifiers that are not included have a
+    # share policy. Fair share identifiers that aren't included have a
     # default weight of `1.0`.
     #
     # @note When making an API call, you may pass ShareAttributes
@@ -5299,10 +5300,10 @@ module Aws::Batch
     #
     # @!attribute [rw] share_identifier
     #   A fair share identifier or fair share identifier prefix. If the
-    #   string ends with '*' then this entry specifies the weight factor
-    #   to use for fair share identifiers that begin with that prefix. The
-    #   list of fair share identifiers in a fair share policy cannot
-    #   overlap. For example you cannot have one that specifies a
+    #   string ends with an asterisk (*), this entry specifies the weight
+    #   factor to use for fair share identifiers that start with that
+    #   prefix. The list of fair share identifiers in a fair share policy
+    #   cannot overlap. For example, you can't have one that specifies a
     #   `shareIdentifier` of `UserA*` and another that specifies a
     #   `shareIdentifier` of `UserA-1`.
     #
@@ -5310,17 +5311,17 @@ module Aws::Batch
     #   queue.
     #
     #   The string is limited to 255 alphanumeric characters, optionally
-    #   followed by '*'.
+    #   followed by an asterisk (*).
     #   @return [String]
     #
     # @!attribute [rw] weight_factor
     #   The weight factor for the fair share identifier. The default value
     #   is 1.0. A lower value has a higher priority for compute resources.
-    #   For example, jobs using a share identifier with a weight factor of
-    #   0.125 (1/8) will get 8 times the compute resources of jobs using a
+    #   For example, jobs that use a share identifier with a weight factor
+    #   of 0.125 (1/8) get 8 times the compute resources of jobs that use a
     #   share identifier with a weight factor of 1.
     #
-    #   The smallest supported value is 0.0001 and the largest supported
+    #   The smallest supported value is 0.0001, and the largest supported
     #   value is 999.9999.
     #   @return [Float]
     #
@@ -5421,9 +5422,9 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] job_name
-    #   The name of the job. The first character must be alphanumeric, and
-    #   up to 128 letters (uppercase and lowercase), numbers, hyphens, and
-    #   underscores are allowed.
+    #   The name of the job. It can be up to 128 letters long. The first
+    #   character must be alphanumeric, can contain uppercase and lowercase
+    #   letters, numbers, hyphens (-), and underscores (\_).
     #   @return [String]
     #
     # @!attribute [rw] job_queue
@@ -5889,8 +5890,9 @@ module Aws::Batch
     end
 
     # @!attribute [rw] compute_environment_name
-    #   The name of the compute environment. Up to 128 letters (uppercase
-    #   and lowercase), numbers, hyphens, and underscores are allowed.
+    #   The name of the compute environment. It can be up to 128 letters
+    #   long. It can contain uppercase and lowercase letters, numbers,
+    #   hyphens (-), and underscores (\_).
     #   @return [String]
     #
     # @!attribute [rw] compute_environment_arn
@@ -6077,10 +6079,10 @@ module Aws::Batch
     #   @return [Types::Host]
     #
     # @!attribute [rw] name
-    #   The name of the volume. Up to 255 letters (uppercase and lowercase),
-    #   numbers, hyphens, and underscores are allowed. This name is
-    #   referenced in the `sourceVolume` parameter of container definition
-    #   `mountPoints`.
+    #   The name of the volume. It can be up to 255 letters long. It can
+    #   contain uppercase and lowercase letters, numbers, hyphens (-), and
+    #   underscores (\_). This name is referenced in the `sourceVolume`
+    #   parameter of container definition `mountPoints`.
     #   @return [String]
     #
     # @!attribute [rw] efs_volume_configuration

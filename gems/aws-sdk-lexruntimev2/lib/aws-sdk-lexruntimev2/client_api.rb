@@ -94,6 +94,7 @@ module Aws::LexRuntimeV2
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
+    StyleType = Shapes::StringShape.new(name: 'StyleType')
     Text = Shapes::StringShape.new(name: 'Text')
     TextInputEvent = Shapes::StructureShape.new(name: 'TextInputEvent')
     TextResponseEvent = Shapes::StructureShape.new(name: 'TextResponseEvent')
@@ -177,6 +178,7 @@ module Aws::LexRuntimeV2
 
     DialogAction.add_member(:type, Shapes::ShapeRef.new(shape: DialogActionType, required: true, location_name: "type"))
     DialogAction.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "slotToElicit"))
+    DialogAction.add_member(:slot_elicitation_style, Shapes::ShapeRef.new(shape: StyleType, location_name: "slotElicitationStyle"))
     DialogAction.struct_class = Types::DialogAction
 
     DisconnectionEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: EventId, location_name: "eventId"))

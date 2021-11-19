@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2021-11-19)
+------------------
+
+* Feature - Add support for Lambda Function URLs. Customers can use Function URLs to create built-in HTTPS endpoints on their functions.
+
 1.72.0 (2021-11-18)
 ------------------
 

@@ -582,7 +582,7 @@ module Aws::Redshift
     #
     # @option params [required, String] :consumer_identifier
     #   The identifier of the data consumer that is authorized to access the
-    #   datashare. This identifier is an AWS account ID.
+    #   datashare. This identifier is an Amazon Web Services account ID.
     #
     # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1429,6 +1429,10 @@ module Aws::Redshift
     #
     #   * auto - Amazon Redshift determines whether to use AQUA.
     #
+    # @option params [String] :default_iam_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that was set as
+    #   default for the cluster when the cluster was created.
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster #cluster} => Types::Cluster
@@ -1473,6 +1477,7 @@ module Aws::Redshift
     #     snapshot_schedule_identifier: "String",
     #     availability_zone_relocation: false,
     #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
+    #     default_iam_role_arn: "String",
     #   })
     #
     # @example Response structure
@@ -1585,6 +1590,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -2688,7 +2694,8 @@ module Aws::Redshift
     #
     # @option params [required, String] :consumer_identifier
     #   The identifier of the data consumer that is to have authorization
-    #   removed from the datashare. This identifier is an AWS account ID.
+    #   removed from the datashare. This identifier is an Amazon Web Services
+    #   account ID.
     #
     # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2945,6 +2952,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -4496,6 +4504,7 @@ module Aws::Redshift
     #   resp.clusters[0].total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.clusters[0].aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.clusters[0].aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.clusters[0].default_iam_role_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4529,10 +4538,11 @@ module Aws::Redshift
     # @option params [String] :marker
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a DescribeDataShares
-    #   request exceed the value specified in `MaxRecords`, AWS returns a
-    #   value in the `Marker` field of the response. You can retrieve the next
-    #   set of response records by providing the returned marker value in the
-    #   `Marker` parameter and retrying the request.
+    #   request exceed the value specified in `MaxRecords`, Amazon Web
+    #   Services returns a value in the `Marker` field of the response. You
+    #   can retrieve the next set of response records by providing the
+    #   returned marker value in the `Marker` parameter and retrying the
+    #   request.
     #
     # @return [Types::DescribeDataSharesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4592,10 +4602,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeDataSharesForConsumer request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @return [Types::DescribeDataSharesForConsumerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4656,10 +4666,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeDataSharesForProducer request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #
     # @return [Types::DescribeDataSharesForProducerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6648,6 +6658,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -6948,6 +6959,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -7676,6 +7688,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -7820,6 +7833,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -7850,6 +7864,10 @@ module Aws::Redshift
     #   You can disassociate up to 10 IAM roles from a single cluster in a
     #   single request.
     #
+    # @option params [String] :default_iam_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that was set as
+    #   default for the cluster when the cluster was last modified.
+    #
     # @return [Types::ModifyClusterIamRolesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClusterIamRolesResult#cluster #cluster} => Types::Cluster
@@ -7860,6 +7878,7 @@ module Aws::Redshift
     #     cluster_identifier: "String", # required
     #     add_iam_roles: ["String"],
     #     remove_iam_roles: ["String"],
+    #     default_iam_role_arn: "String",
     #   })
     #
     # @example Response structure
@@ -7972,6 +7991,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -8132,6 +8152,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -8792,6 +8813,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -9035,6 +9057,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -9241,6 +9264,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -9524,6 +9548,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -9789,6 +9814,11 @@ module Aws::Redshift
     #
     #   * auto - Amazon Redshift determines whether to use AQUA.
     #
+    # @option params [String] :default_iam_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that was set as
+    #   default for the cluster when the cluster was last modified while it
+    #   was restored from a snapshot.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -9824,6 +9854,7 @@ module Aws::Redshift
     #     number_of_nodes: 1,
     #     availability_zone_relocation: false,
     #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
+    #     default_iam_role_arn: "String",
     #   })
     #
     # @example Response structure
@@ -9936,6 +9967,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -10164,6 +10196,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -10528,6 +10561,7 @@ module Aws::Redshift
     #   resp.cluster.total_storage_capacity_in_mega_bytes #=> Integer
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
+    #   resp.cluster.default_iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -10603,7 +10637,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -4141,6 +4141,7 @@ module Aws::MediaLive
     #                 },
     #                 server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #               },
+    #               scte_35_pid: 1,
     #               smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #               source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #               video_selector: {
@@ -9909,6 +9910,7 @@ module Aws::MediaLive
     #             },
     #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #           },
+    #           scte_35_pid: 1,
     #           smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #           source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #           video_selector: {
@@ -10794,6 +10796,7 @@ module Aws::MediaLive
     #           },
     #           server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #         },
+    #         scte_35_pid: 1,
     #         smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #         source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #         video_selector: {
@@ -10851,6 +10854,11 @@ module Aws::MediaLive
     #   Input settings.
     #   @return [Types::NetworkInputSettings]
     #
+    # @!attribute [rw] scte_35_pid
+    #   PID from which to read SCTE-35 messages. If left undefined, EML will
+    #   select the first SCTE-35 PID found in the input.
+    #   @return [Integer]
+    #
     # @!attribute [rw] smpte_2038_data_preference
     #   Specifies whether to extract applicable ancillary data from a
     #   SMPTE-2038 source in this input. Applicable data types are captions,
@@ -10880,6 +10888,7 @@ module Aws::MediaLive
       :filter_strength,
       :input_filter,
       :network_input_settings,
+      :scte_35_pid,
       :smpte_2038_data_preference,
       :source_end_behavior,
       :video_selector)
@@ -18678,6 +18687,7 @@ module Aws::MediaLive
     #                 },
     #                 server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #               },
+    #               scte_35_pid: 1,
     #               smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #               source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #               video_selector: {

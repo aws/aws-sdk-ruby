@@ -514,6 +514,7 @@ module Aws::LexRuntimeV2
     #   event.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   event.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot", "None"
     #   event.session_state.dialog_action.slot_to_elicit #=> String
+    #   event.session_state.dialog_action.slot_elicitation_style #=> String, one of "Default", "SpellByLetter", "SpellByWord"
     #   event.session_state.intent.name #=> String
     #   event.session_state.intent.slots #=> Hash
     #   event.session_state.intent.slots["NonEmptyString"].value.original_value #=> String
@@ -626,7 +627,7 @@ module Aws::LexRuntimeV2
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

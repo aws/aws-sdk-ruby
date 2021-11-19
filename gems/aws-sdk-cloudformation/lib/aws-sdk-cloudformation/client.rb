@@ -1674,6 +1674,10 @@ module Aws::CloudFormation
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::ManagedExecution] :managed_execution
+    #   Describes whether StackSets performs non-conflicting operations
+    #   concurrently and queues conflicting operations.
+    #
     # @return [Types::CreateStackSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackSetOutput#stack_set_id #stack_set_id} => String
@@ -1710,6 +1714,9 @@ module Aws::CloudFormation
     #     },
     #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
     #     client_request_token: "ClientRequestToken",
+    #     managed_execution: {
+    #       active: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2851,6 +2858,7 @@ module Aws::CloudFormation
     #   resp.stack_set.permission_model #=> String, one of "SERVICE_MANAGED", "SELF_MANAGED"
     #   resp.stack_set.organizational_unit_ids #=> Array
     #   resp.stack_set.organizational_unit_ids[0] #=> String
+    #   resp.stack_set.managed_execution.active #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSet AWS API Documentation
     #
@@ -4456,6 +4464,7 @@ module Aws::CloudFormation
     #   resp.summaries[0].permission_model #=> String, one of "SERVICE_MANAGED", "SELF_MANAGED"
     #   resp.summaries[0].drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.summaries[0].last_drift_check_timestamp #=> Time
+    #   resp.summaries[0].managed_execution.active #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSets AWS API Documentation
@@ -4749,8 +4758,10 @@ module Aws::CloudFormation
     # @option params [Types::TypeFilters] :filters
     #   Filter criteria to use in determining which extensions to return.
     #
-    #   If you specify a filter, CloudFormation ignores any specified
-    #   `Visibility` value when returning the list of types.
+    #   Filters must be compatible with `Visibility` to return valid results.
+    #   For example, specifying `AWS_TYPES` for `Category` and `PRIVATE` for
+    #   `Visibility` returns an empty list of types, but specifying `PUBLIC`
+    #   for `Visibility` returns the desired list.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned with a single call. If
@@ -4858,8 +4869,9 @@ module Aws::CloudFormation
     #   If you do not specify a version number, CloudFormation increments the
     #   version number by one minor version release.
     #
-    #   The first time you publish a type, CloudFormation sets the version
-    #   number to `1.0.0`, regardless of the value you specify.
+    #   You cannot specify a version number the first time you publish a type.
+    #   CloudFormation automatically sets the first version number to be
+    #   `1.0.0`.
     #
     #
     #
@@ -6454,6 +6466,10 @@ module Aws::CloudFormation
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
     #
+    # @option params [Types::ManagedExecution] :managed_execution
+    #   Describes whether StackSets performs non-conflicting operations
+    #   concurrently and queues conflicting operations.
+    #
     # @return [Types::UpdateStackSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackSetOutput#operation_id #operation_id} => String
@@ -6505,6 +6521,9 @@ module Aws::CloudFormation
     #     accounts: ["Account"],
     #     regions: ["Region"],
     #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
+    #     managed_execution: {
+    #       active: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -6646,7 +6665,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

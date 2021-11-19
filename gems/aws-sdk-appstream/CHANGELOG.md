@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-11-19)
+------------------
+
+* Feature - Includes APIs for managing resources for Elastic fleets: applications, app blocks, and application-fleet associations.
+
 1.58.0 (2021-11-15)
 ------------------
 

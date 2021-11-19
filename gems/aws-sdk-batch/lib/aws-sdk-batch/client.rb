@@ -439,8 +439,9 @@ module Aws::Batch
     # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
     #
     # @option params [required, String] :compute_environment_name
-    #   The name for your compute environment. Up to 128 letters (uppercase
-    #   and lowercase), numbers, hyphens, and underscores are allowed.
+    #   The name for your compute environment. It can be up to 128 letters
+    #   long. It can contain uppercase and lowercase letters, numbers, hyphens
+    #   (-), and underscores (\_).
     #
     # @option params [required, String] :type
     #   The type of the compute environment: `MANAGED` or `UNMANAGED`. For
@@ -471,8 +472,8 @@ module Aws::Batch
     # @option params [Integer] :unmanagedv_cpus
     #   The maximum number of vCPUs for an unmanaged compute environment. This
     #   parameter is only used for fair share scheduling to reserve vCPU
-    #   capacity for new share identifiers. If this parameter is not provided
-    #   for a fair share job queue, no vCPU capacity will be reserved.
+    #   capacity for new share identifiers. If this parameter isn't provided
+    #   for a fair share job queue, no vCPU capacity is reserved.
     #
     #   <note markdown="1"> This parameter is only supported when the `type` parameter is set to
     #   `UNMANAGED`/
@@ -699,8 +700,9 @@ module Aws::Batch
     # preference for scheduling jobs to that compute environment.
     #
     # @option params [required, String] :job_queue_name
-    #   The name of the job queue. Up to 128 letters (uppercase and
-    #   lowercase), numbers, and underscores are allowed.
+    #   The name of the job queue. It can be up to 128 letters long. It can
+    #   contain uppercase and lowercase letters, numbers, hyphens (-), and
+    #   underscores (\_).
     #
     # @option params [String] :state
     #   The state of the job queue. If the job queue state is `ENABLED`, it is
@@ -709,14 +711,14 @@ module Aws::Batch
     #   finish.
     #
     # @option params [String] :scheduling_policy_arn
-    #   Amazon Resource Name (ARN) of the fair share scheduling policy. If
-    #   this parameter is specified, the job queue will use a fair share
-    #   scheduling policy. If this parameter is not specified, the job queue
-    #   will use a first in, first out (FIFO) scheduling policy. Once a job
-    #   queue is created, the fair share scheduling policy can be replaced but
-    #   not removed. The format is
-    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. For
-    #   example,
+    #   The Amazon Resource Name (ARN) of the fair share scheduling policy. If
+    #   this parameter is specified, the job queue uses a fair share
+    #   scheduling policy. If this parameter isn't specified, the job queue
+    #   uses a first in, first out (FIFO) scheduling policy. After a job queue
+    #   is created, you can replace but can't remove the fair share
+    #   scheduling policy. The format is
+    #   `aws:Partition:batch:Region:Account:scheduling-policy/Name `. An
+    #   example is
     #   `aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy`.
     #
     # @option params [required, Integer] :priority
@@ -845,8 +847,9 @@ module Aws::Batch
     # Creates an Batch scheduling policy.
     #
     # @option params [required, String] :name
-    #   The name of the scheduling policy. Up to 128 letters (uppercase and
-    #   lowercase), numbers, hyphens, and underscores are allowed.
+    #   The name of the scheduling policy. It can be up to 128 letters long.
+    #   It can contain uppercase and lowercase letters, numbers, hyphens (-),
+    #   and underscores (\_).
     #
     # @option params [Types::FairsharePolicy] :fairshare_policy
     #   The fair share policy of the scheduling policy.
@@ -992,7 +995,7 @@ module Aws::Batch
 
     # Deletes the specified scheduling policy.
     #
-    # You can't delete a scheduling policy that is used in any job queues.
+    # You can't delete a scheduling policy that's used in any job queues.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the scheduling policy to delete.
@@ -1205,7 +1208,7 @@ module Aws::Batch
     #
     # @option params [Array<String>] :job_definitions
     #   A list of up to 100 job definitions. Each entry in the list can either
-    #   be an ARN of the form
+    #   be an ARN in the format
     #   `arn:aws:batch:$\{Region\}:$\{Account\}:job-definition/$\{JobDefinitionName\}:$\{Revision\}`
     #   or a short version using the form
     #   `$\{JobDefinitionName\}:$\{Revision\}`.
@@ -1950,15 +1953,15 @@ module Aws::Batch
     #
     #   : The value for the filter is the time that's before the job was
     #     created. This corresponds to the `createdAt` value. The value is a
-    #     string representation of the number of seconds since 00:00:00 UTC
-    #     (midnight) on January 1, 1970.
+    #     string representation of the number of milliseconds since 00:00:00
+    #     UTC (midnight) on January 1, 1970.
     #
     #   AFTER\_CREATED\_AT
     #
     #   : The value for the filter is the time that's after the job was
     #     created. This corresponds to the `createdAt` value. The value is a
-    #     string representation of the number of seconds since 00:00:00 UTC
-    #     (midnight) on January 1, 1970.
+    #     string representation of the number of milliseconds since 00:00:00
+    #     UTC (midnight) on January 1, 1970.
     #
     # @return [Types::ListJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2055,18 +2058,18 @@ module Aws::Batch
     # Returns a list of Batch scheduling policies.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results returned by `ListSchedulingPolicies` in
-    #   paginated output. When this parameter is used,
-    #   `ListSchedulingPolicies` only returns `maxResults` results in a single
-    #   page and a `nextToken` response element. The remaining results of the
-    #   initial request can be seen by sending another
+    #   The maximum number of results that's returned by
+    #   `ListSchedulingPolicies` in paginated output. When this parameter is
+    #   used, `ListSchedulingPolicies` only returns `maxResults` results in a
+    #   single page and a `nextToken` response element. You can see the
+    #   remaining results of the initial request by sending another
     #   `ListSchedulingPolicies` request with the returned `nextToken` value.
     #   This value can be between 1 and 100. If this parameter isn't used,
-    #   then `ListSchedulingPolicies` returns up to 100 results and a
-    #   `nextToken` value if applicable.
+    #   `ListSchedulingPolicies` returns up to 100 results and a `nextToken`
+    #   value if applicable.
     #
     # @option params [String] :next_token
-    #   The `nextToken` value returned from a previous paginated
+    #   The `nextToken` value that's returned from a previous paginated
     #   `ListSchedulingPolicies` request where `maxResults` was used and the
     #   results exceeded the value of that parameter. Pagination continues
     #   from the end of the previous results that returned the `nextToken`
@@ -2164,9 +2167,9 @@ module Aws::Batch
     # Registers an Batch job definition.
     #
     # @option params [required, String] :job_definition_name
-    #   The name of the job definition to register. Up to 128 letters
-    #   (uppercase and lowercase), numbers, hyphens, and underscores are
-    #   allowed.
+    #   The name of the job definition to register. It can be up to 128
+    #   letters long. It can contain uppercase and lowercase letters, numbers,
+    #   hyphens (-), and underscores (\_).
     #
     # @option params [required, String] :type
     #   The type of job definition. For more information about multi-node
@@ -2618,9 +2621,9 @@ module Aws::Batch
     # might become unavailable and job might be terminated.
     #
     # @option params [required, String] :job_name
-    #   The name of the job. The first character must be alphanumeric, and up
-    #   to 128 letters (uppercase and lowercase), numbers, hyphens, and
-    #   underscores are allowed.
+    #   The name of the job. It can be up to 128 letters long. The first
+    #   character must be alphanumeric, can contain uppercase and lowercase
+    #   letters, numbers, hyphens (-), and underscores (\_).
     #
     # @option params [required, String] :job_queue
     #   The job queue where the job is submitted. You can specify either the
@@ -3264,7 +3267,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

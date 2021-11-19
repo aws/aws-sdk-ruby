@@ -258,6 +258,7 @@ module Aws::LexRuntimeV2
     #           dialog_action: {
     #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #             slot_to_elicit: "NonEmptyString",
+    #             slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
     #           },
     #           intent: {
     #             name: "NonEmptyString", # required
@@ -538,6 +539,7 @@ module Aws::LexRuntimeV2
     #       {
     #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #         slot_to_elicit: "NonEmptyString",
+    #         slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
     #       }
     #
     # @!attribute [rw] type
@@ -562,11 +564,29 @@ module Aws::LexRuntimeV2
     #   The name of the slot that should be elicited from the user.
     #   @return [String]
     #
+    # @!attribute [rw] slot_elicitation_style
+    #   Configures the slot to use spell-by-letter or spell-by-word style.
+    #   When you use a style on a slot, users can spell out their input to
+    #   make it clear to your bot.
+    #
+    #   * Spell by letter - "b" "o" "b"
+    #
+    #   * Spell by word - "b as in boy" "o as in oscar" "b as in boy"
+    #
+    #   For more information, see [ Using spelling to enter slot values
+    #   ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-spelling.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/DialogAction AWS API Documentation
     #
     class DialogAction < Struct.new(
       :type,
-      :slot_to_elicit)
+      :slot_to_elicit,
+      :slot_elicitation_style)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1047,6 +1067,7 @@ module Aws::LexRuntimeV2
     #           dialog_action: {
     #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #             slot_to_elicit: "NonEmptyString",
+    #             slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
     #           },
     #           intent: {
     #             name: "NonEmptyString", # required
@@ -1212,6 +1233,7 @@ module Aws::LexRuntimeV2
     #           dialog_action: {
     #             type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #             slot_to_elicit: "NonEmptyString",
+    #             slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
     #           },
     #           intent: {
     #             name: "NonEmptyString", # required
@@ -1664,6 +1686,7 @@ module Aws::LexRuntimeV2
     #         dialog_action: {
     #           type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #           slot_to_elicit: "NonEmptyString",
+    #           slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
     #         },
     #         intent: {
     #           name: "NonEmptyString", # required
@@ -2024,6 +2047,7 @@ module Aws::LexRuntimeV2
     #             dialog_action: {
     #               type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #               slot_to_elicit: "NonEmptyString",
+    #               slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
     #             },
     #             intent: {
     #               name: "NonEmptyString", # required

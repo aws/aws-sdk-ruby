@@ -1500,6 +1500,9 @@ module Aws::CloudFormation
     #         },
     #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
     #         client_request_token: "ClientRequestToken",
+    #         managed_execution: {
+    #           active: false,
+    #         },
     #       }
     #
     # @!attribute [rw] stack_set_name
@@ -1742,6 +1745,11 @@ module Aws::CloudFormation
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] managed_execution
+    #   Describes whether StackSets performs non-conflicting operations
+    #   concurrently and queues conflicting operations.
+    #   @return [Types::ManagedExecution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackSetInput AWS API Documentation
     #
     class CreateStackSetInput < Struct.new(
@@ -1758,7 +1766,8 @@ module Aws::CloudFormation
       :permission_model,
       :auto_deployment,
       :call_as,
-      :client_request_token)
+      :client_request_token,
+      :managed_execution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5211,8 +5220,10 @@ module Aws::CloudFormation
     # @!attribute [rw] filters
     #   Filter criteria to use in determining which extensions to return.
     #
-    #   If you specify a filter, CloudFormation ignores any specified
-    #   `Visibility` value when returning the list of types.
+    #   Filters must be compatible with `Visibility` to return valid
+    #   results. For example, specifying `AWS_TYPES` for `Category` and
+    #   `PRIVATE` for `Visibility` returns an empty list of types, but
+    #   specifying `PUBLIC` for `Visibility` returns the desired list.
     #   @return [Types::TypeFilters]
     #
     # @!attribute [rw] max_results
@@ -5292,6 +5303,42 @@ module Aws::CloudFormation
     class LoggingConfig < Struct.new(
       :log_role_arn,
       :log_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether StackSets performs non-conflicting operations
+    # concurrently and queues conflicting operations.
+    #
+    # @note When making an API call, you may pass ManagedExecution
+    #   data as a hash:
+    #
+    #       {
+    #         active: false,
+    #       }
+    #
+    # @!attribute [rw] active
+    #   When `true`, StackSets performs non-conflicting operations
+    #   concurrently and queues conflicting operations. After conflicting
+    #   operations finish, StackSets starts queued operations in request
+    #   order.
+    #
+    #   <note markdown="1"> If there are already running or queued operations, StackSets queues
+    #   all incoming operations even if they are non-conflicting.
+    #
+    #    You can't modify your stack set's execution configuration while
+    #   there are running or queued operations for that stack set.
+    #
+    #    </note>
+    #
+    #   When `false` (default), StackSets performs one operation at a time
+    #   in request order.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ManagedExecution AWS API Documentation
+    #
+    class ManagedExecution < Struct.new(
+      :active)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5624,8 +5671,9 @@ module Aws::CloudFormation
     #   If you do not specify a version number, CloudFormation increments
     #   the version number by one minor version release.
     #
-    #   The first time you publish a type, CloudFormation sets the version
-    #   number to `1.0.0`, regardless of the value you specify.
+    #   You cannot specify a version number the first time you publish a
+    #   type. CloudFormation automatically sets the first version number to
+    #   be `1.0.0`.
     #
     #
     #
@@ -7861,6 +7909,11 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] managed_execution
+    #   Describes whether StackSets performs non-conflicting operations
+    #   concurrently and queues conflicting operations.
+    #   @return [Types::ManagedExecution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSet AWS API Documentation
     #
     class StackSet < Struct.new(
@@ -7878,7 +7931,8 @@ module Aws::CloudFormation
       :stack_set_drift_detection_details,
       :auto_deployment,
       :permission_model,
-      :organizational_unit_ids)
+      :organizational_unit_ids,
+      :managed_execution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8481,6 +8535,11 @@ module Aws::CloudFormation
     #   set on which drift detection has not yet been performed.
     #   @return [Time]
     #
+    # @!attribute [rw] managed_execution
+    #   Describes whether StackSets performs non-conflicting operations
+    #   concurrently and queues conflicting operations.
+    #   @return [Types::ManagedExecution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetSummary AWS API Documentation
     #
     class StackSetSummary < Struct.new(
@@ -8491,7 +8550,8 @@ module Aws::CloudFormation
       :auto_deployment,
       :permission_model,
       :drift_status,
-      :last_drift_check_timestamp)
+      :last_drift_check_timestamp,
+      :managed_execution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9816,6 +9876,9 @@ module Aws::CloudFormation
     #         accounts: ["Account"],
     #         regions: ["Region"],
     #         call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
+    #         managed_execution: {
+    #           active: false,
+    #         },
     #       }
     #
     # @!attribute [rw] stack_set_name
@@ -10152,6 +10215,11 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
     #   @return [String]
     #
+    # @!attribute [rw] managed_execution
+    #   Describes whether StackSets performs non-conflicting operations
+    #   concurrently and queues conflicting operations.
+    #   @return [Types::ManagedExecution]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackSetInput AWS API Documentation
     #
     class UpdateStackSetInput < Struct.new(
@@ -10172,7 +10240,8 @@ module Aws::CloudFormation
       :operation_id,
       :accounts,
       :regions,
-      :call_as)
+      :call_as,
+      :managed_execution)
       SENSITIVE = []
       include Aws::Structure
     end

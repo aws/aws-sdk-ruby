@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2021-11-19)
+------------------
+
+* Feature - Added support of default IAM role for CreateCluster, RestoreFromClusterSnapshot and ModifyClusterIamRoles APIs
+
 1.71.0 (2021-11-04)
 ------------------
 

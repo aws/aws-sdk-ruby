@@ -201,6 +201,8 @@ module Aws::CloudFormation
     LogicalResourceId = Shapes::StringShape.new(name: 'LogicalResourceId')
     LogicalResourceIds = Shapes::ListShape.new(name: 'LogicalResourceIds')
     MajorVersion = Shapes::IntegerShape.new(name: 'MajorVersion')
+    ManagedExecution = Shapes::StructureShape.new(name: 'ManagedExecution')
+    ManagedExecutionNullable = Shapes::BooleanShape.new(name: 'ManagedExecutionNullable')
     MaxConcurrentCount = Shapes::IntegerShape.new(name: 'MaxConcurrentCount')
     MaxConcurrentPercentage = Shapes::IntegerShape.new(name: 'MaxConcurrentPercentage')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -614,6 +616,7 @@ module Aws::CloudFormation
     CreateStackSetInput.add_member(:auto_deployment, Shapes::ShapeRef.new(shape: AutoDeployment, location_name: "AutoDeployment"))
     CreateStackSetInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
     CreateStackSetInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateStackSetInput.add_member(:managed_execution, Shapes::ShapeRef.new(shape: ManagedExecution, location_name: "ManagedExecution"))
     CreateStackSetInput.struct_class = Types::CreateStackSetInput
 
     CreateStackSetOutput.add_member(:stack_set_id, Shapes::ShapeRef.new(shape: StackSetId, location_name: "StackSetId"))
@@ -1065,6 +1068,9 @@ module Aws::CloudFormation
 
     LogicalResourceIds.member = Shapes::ShapeRef.new(shape: LogicalResourceId)
 
+    ManagedExecution.add_member(:active, Shapes::ShapeRef.new(shape: ManagedExecutionNullable, location_name: "Active"))
+    ManagedExecution.struct_class = Types::ManagedExecution
+
     ModuleInfo.add_member(:type_hierarchy, Shapes::ShapeRef.new(shape: TypeHierarchy, location_name: "TypeHierarchy"))
     ModuleInfo.add_member(:logical_id_hierarchy, Shapes::ShapeRef.new(shape: LogicalIdHierarchy, location_name: "LogicalIdHierarchy"))
     ModuleInfo.struct_class = Types::ModuleInfo
@@ -1444,6 +1450,7 @@ module Aws::CloudFormation
     StackSet.add_member(:auto_deployment, Shapes::ShapeRef.new(shape: AutoDeployment, location_name: "AutoDeployment"))
     StackSet.add_member(:permission_model, Shapes::ShapeRef.new(shape: PermissionModels, location_name: "PermissionModel"))
     StackSet.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
+    StackSet.add_member(:managed_execution, Shapes::ShapeRef.new(shape: ManagedExecution, location_name: "ManagedExecution"))
     StackSet.struct_class = Types::StackSet
 
     StackSetDriftDetectionDetails.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackSetDriftStatus, location_name: "DriftStatus"))
@@ -1511,6 +1518,7 @@ module Aws::CloudFormation
     StackSetSummary.add_member(:permission_model, Shapes::ShapeRef.new(shape: PermissionModels, location_name: "PermissionModel"))
     StackSetSummary.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
     StackSetSummary.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
+    StackSetSummary.add_member(:managed_execution, Shapes::ShapeRef.new(shape: ManagedExecution, location_name: "ManagedExecution"))
     StackSetSummary.struct_class = Types::StackSetSummary
 
     StackStatusFilter.member = Shapes::ShapeRef.new(shape: StackStatus)
@@ -1686,6 +1694,7 @@ module Aws::CloudFormation
     UpdateStackSetInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
     UpdateStackSetInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "Regions"))
     UpdateStackSetInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))
+    UpdateStackSetInput.add_member(:managed_execution, Shapes::ShapeRef.new(shape: ManagedExecution, location_name: "ManagedExecution"))
     UpdateStackSetInput.struct_class = Types::UpdateStackSetInput
 
     UpdateStackSetOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))

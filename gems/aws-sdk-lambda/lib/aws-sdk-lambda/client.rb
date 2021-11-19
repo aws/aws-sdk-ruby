@@ -783,8 +783,6 @@ module Aws::Lambda
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
     #
-    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
-    #
     # @option params [Integer] :maximum_batching_window_in_seconds
     #   (Streams and Amazon SQS standard queues) The maximum amount of time,
     #   in seconds, that Lambda spends gathering records before invoking the
@@ -1162,8 +1160,8 @@ module Aws::Lambda
     #
     # @option params [Array<String>] :architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values (arm64 or x86\_64). The
-    #   default value is `x86_64`.
+    #   string array with one of the valid values. The default value is
+    #   `x86_64`.
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1315,6 +1313,64 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def create_function(params = {}, options = {})
       req = build_request(:create_function, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :function_name
+    #
+    # @option params [String] :qualifier
+    #
+    # @option params [required, String] :authorization_type
+    #
+    # @option params [Types::Cors] :cors
+    #
+    # @return [Types::CreateFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFunctionUrlConfigResponse#function_url #function_url} => String
+    #   * {Types::CreateFunctionUrlConfigResponse#function_arn #function_arn} => String
+    #   * {Types::CreateFunctionUrlConfigResponse#authorization_type #authorization_type} => String
+    #   * {Types::CreateFunctionUrlConfigResponse#cors #cors} => Types::Cors
+    #   * {Types::CreateFunctionUrlConfigResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #     authorization_type: "NONE", # required, accepts NONE, AWS_IAM
+    #     cors: {
+    #       allow_credentials: false,
+    #       allow_headers: ["Header"],
+    #       allow_methods: ["Method"],
+    #       allow_origins: ["Origin"],
+    #       expose_headers: ["Header"],
+    #       max_age: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url #=> String
+    #   resp.function_arn #=> String
+    #   resp.authorization_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.cors.allow_credentials #=> Boolean
+    #   resp.cors.allow_headers #=> Array
+    #   resp.cors.allow_headers[0] #=> String
+    #   resp.cors.allow_methods #=> Array
+    #   resp.cors.allow_methods[0] #=> String
+    #   resp.cors.allow_origins #=> Array
+    #   resp.cors.allow_origins[0] #=> String
+    #   resp.cors.expose_headers #=> Array
+    #   resp.cors.expose_headers[0] #=> String
+    #   resp.cors.max_age #=> Integer
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionUrlConfig AWS API Documentation
+    #
+    # @overload create_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def create_function_url_config(params = {}, options = {})
+      req = build_request(:create_function_url_config, params)
       req.send_request(options)
     end
 
@@ -1626,6 +1682,28 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def delete_function_event_invoke_config(params = {}, options = {})
       req = build_request(:delete_function_event_invoke_config, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :function_name
+    #
+    # @option params [String] :qualifier
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionUrlConfig AWS API Documentation
+    #
+    # @overload delete_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def delete_function_url_config(params = {}, options = {})
+      req = build_request(:delete_function_url_config, params)
       req.send_request(options)
     end
 
@@ -2301,6 +2379,53 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # @option params [required, String] :function_name
+    #
+    # @option params [String] :qualifier
+    #
+    # @return [Types::GetFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFunctionUrlConfigResponse#function_url #function_url} => String
+    #   * {Types::GetFunctionUrlConfigResponse#function_arn #function_arn} => String
+    #   * {Types::GetFunctionUrlConfigResponse#authorization_type #authorization_type} => String
+    #   * {Types::GetFunctionUrlConfigResponse#cors #cors} => Types::Cors
+    #   * {Types::GetFunctionUrlConfigResponse#creation_time #creation_time} => Time
+    #   * {Types::GetFunctionUrlConfigResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url #=> String
+    #   resp.function_arn #=> String
+    #   resp.authorization_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.cors.allow_credentials #=> Boolean
+    #   resp.cors.allow_headers #=> Array
+    #   resp.cors.allow_headers[0] #=> String
+    #   resp.cors.allow_methods #=> Array
+    #   resp.cors.allow_methods[0] #=> String
+    #   resp.cors.allow_origins #=> Array
+    #   resp.cors.allow_origins[0] #=> String
+    #   resp.cors.expose_headers #=> Array
+    #   resp.cors.expose_headers[0] #=> String
+    #   resp.cors.max_age #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionUrlConfig AWS API Documentation
+    #
+    # @overload get_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def get_function_url_config(params = {}, options = {})
+      req = build_request(:get_function_url_config, params)
+      req.send_request(options)
+    end
+
     # Returns information about a version of an [Lambda layer][1], with a
     # link to download the layer archive that's valid for 10 minutes.
     #
@@ -2654,10 +2779,6 @@ module Aws::Lambda
     #
     # @option params [String, StringIO, File] :payload
     #   The JSON that you want to provide to your Lambda function as input.
-    #
-    #   You can enter the JSON directly. For example, `--payload '\{ "key":
-    #   "value" \}'`. You can also specify a file path. For example,
-    #   `--payload file://payload.json`.
     #
     # @option params [String] :qualifier
     #   Specify a version or alias to invoke a published version of the
@@ -3026,6 +3147,56 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def list_function_event_invoke_configs(params = {}, options = {})
       req = build_request(:list_function_event_invoke_configs, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :function_name
+    #
+    # @option params [String] :marker
+    #
+    # @option params [Integer] :max_items
+    #
+    # @return [Types::ListFunctionUrlConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFunctionUrlConfigsResponse#function_url_configs #function_url_configs} => Array&lt;Types::FunctionUrlConfig&gt;
+    #   * {Types::ListFunctionUrlConfigsResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_function_url_configs({
+    #     function_name: "FunctionName", # required
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url_configs #=> Array
+    #   resp.function_url_configs[0].function_url #=> String
+    #   resp.function_url_configs[0].function_arn #=> String
+    #   resp.function_url_configs[0].creation_time #=> Time
+    #   resp.function_url_configs[0].last_modified_time #=> Time
+    #   resp.function_url_configs[0].cors.allow_credentials #=> Boolean
+    #   resp.function_url_configs[0].cors.allow_headers #=> Array
+    #   resp.function_url_configs[0].cors.allow_headers[0] #=> String
+    #   resp.function_url_configs[0].cors.allow_methods #=> Array
+    #   resp.function_url_configs[0].cors.allow_methods[0] #=> String
+    #   resp.function_url_configs[0].cors.allow_origins #=> Array
+    #   resp.function_url_configs[0].cors.allow_origins[0] #=> String
+    #   resp.function_url_configs[0].cors.expose_headers #=> Array
+    #   resp.function_url_configs[0].cors.expose_headers[0] #=> String
+    #   resp.function_url_configs[0].cors.max_age #=> Integer
+    #   resp.function_url_configs[0].authorization_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionUrlConfigs AWS API Documentation
+    #
+    # @overload list_function_url_configs(params = {})
+    # @param [Hash] params ({})
+    def list_function_url_configs(params = {}, options = {})
+      req = build_request(:list_function_url_configs, params)
       req.send_request(options)
     end
 
@@ -4482,8 +4653,6 @@ module Aws::Lambda
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
     #
-    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
-    #
     # @option params [Integer] :maximum_batching_window_in_seconds
     #   (Streams and Amazon SQS standard queues) The maximum amount of time,
     #   in seconds, that Lambda spends gathering records before invoking the
@@ -4692,8 +4861,8 @@ module Aws::Lambda
     #
     # @option params [Array<String>] :architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values (arm64 or x86\_64). The
-    #   default value is `x86_64`.
+    #   string array with one of the valid values. The default value is
+    #   `x86_64`.
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5182,6 +5351,66 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # @option params [required, String] :function_name
+    #
+    # @option params [String] :qualifier
+    #
+    # @option params [String] :authorization_type
+    #
+    # @option params [Types::Cors] :cors
+    #
+    # @return [Types::UpdateFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFunctionUrlConfigResponse#function_url #function_url} => String
+    #   * {Types::UpdateFunctionUrlConfigResponse#function_arn #function_arn} => String
+    #   * {Types::UpdateFunctionUrlConfigResponse#authorization_type #authorization_type} => String
+    #   * {Types::UpdateFunctionUrlConfigResponse#cors #cors} => Types::Cors
+    #   * {Types::UpdateFunctionUrlConfigResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateFunctionUrlConfigResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #     authorization_type: "NONE", # accepts NONE, AWS_IAM
+    #     cors: {
+    #       allow_credentials: false,
+    #       allow_headers: ["Header"],
+    #       allow_methods: ["Method"],
+    #       allow_origins: ["Origin"],
+    #       expose_headers: ["Header"],
+    #       max_age: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url #=> String
+    #   resp.function_arn #=> String
+    #   resp.authorization_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.cors.allow_credentials #=> Boolean
+    #   resp.cors.allow_headers #=> Array
+    #   resp.cors.allow_headers[0] #=> String
+    #   resp.cors.allow_methods #=> Array
+    #   resp.cors.allow_methods[0] #=> String
+    #   resp.cors.allow_origins #=> Array
+    #   resp.cors.allow_origins[0] #=> String
+    #   resp.cors.expose_headers #=> Array
+    #   resp.cors.expose_headers[0] #=> String
+    #   resp.cors.max_age #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionUrlConfig AWS API Documentation
+    #
+    # @overload update_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def update_function_url_config(params = {}, options = {})
+      req = build_request(:update_function_url_config, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5195,7 +5424,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

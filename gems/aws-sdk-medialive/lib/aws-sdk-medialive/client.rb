@@ -1764,6 +1764,7 @@ module Aws::MediaLive
     #             },
     #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #           },
+    #           scte_35_pid: 1,
     #           smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #           source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #           video_selector: {
@@ -2390,6 +2391,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.channel.input_attachments[0].input_settings.scte_35_pid #=> Integer
     #   resp.channel.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channel.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.channel.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "HDR10", "HLG_2020", "REC_601", "REC_709"
@@ -3445,6 +3447,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.input_attachments[0].input_settings.scte_35_pid #=> Integer
     #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "HDR10", "HLG_2020", "REC_601", "REC_709"
@@ -4370,6 +4373,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.input_attachments[0].input_settings.scte_35_pid #=> Integer
     #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "HDR10", "HLG_2020", "REC_601", "REC_709"
@@ -5074,6 +5078,7 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.channels[0].input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.channels[0].input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.channels[0].input_attachments[0].input_settings.scte_35_pid #=> Integer
     #   resp.channels[0].input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channels[0].input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.channels[0].input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "HDR10", "HLG_2020", "REC_601", "REC_709"
@@ -6309,6 +6314,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.input_attachments[0].input_settings.scte_35_pid #=> Integer
     #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "HDR10", "HLG_2020", "REC_601", "REC_709"
@@ -7016,6 +7022,7 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.input_attachments[0].input_settings.scte_35_pid #=> Integer
     #   resp.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "HDR10", "HLG_2020", "REC_601", "REC_709"
@@ -8088,6 +8095,7 @@ module Aws::MediaLive
     #             },
     #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
     #           },
+    #           scte_35_pid: 1,
     #           smpte_2038_data_preference: "IGNORE", # accepts IGNORE, PREFER
     #           source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
     #           video_selector: {
@@ -8704,6 +8712,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.channel.input_attachments[0].input_settings.scte_35_pid #=> Integer
     #   resp.channel.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channel.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.channel.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "HDR10", "HLG_2020", "REC_601", "REC_709"
@@ -9372,6 +9381,7 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.retry_interval #=> Integer
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.hls_input_settings.scte_35_source #=> String, one of "MANIFEST", "SEGMENTS"
     #   resp.channel.input_attachments[0].input_settings.network_input_settings.server_validation #=> String, one of "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY"
+    #   resp.channel.input_attachments[0].input_settings.scte_35_pid #=> Integer
     #   resp.channel.input_attachments[0].input_settings.smpte_2038_data_preference #=> String, one of "IGNORE", "PREFER"
     #   resp.channel.input_attachments[0].input_settings.source_end_behavior #=> String, one of "CONTINUE", "LOOP"
     #   resp.channel.input_attachments[0].input_settings.video_selector.color_space #=> String, one of "FOLLOW", "HDR10", "HLG_2020", "REC_601", "REC_709"
@@ -9841,7 +9851,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

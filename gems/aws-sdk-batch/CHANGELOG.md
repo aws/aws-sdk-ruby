@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-11-19)
+------------------
+
+* Feature - Documentation updates for AWS Batch.
+
 1.54.0 (2021-11-09)
 ------------------
 

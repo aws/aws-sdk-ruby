@@ -329,7 +329,7 @@ module Aws::Redshift
     #
     # @!attribute [rw] consumer_identifier
     #   The identifier of the data consumer that is authorized to access the
-    #   datashare. This identifier is an AWS account ID.
+    #   datashare. This identifier is an Amazon Web Services account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeDataShareMessage AWS API Documentation
@@ -895,6 +895,11 @@ module Aws::Redshift
     #   The AQUA (Advanced Query Accelerator) configuration of the cluster.
     #   @return [Types::AquaConfiguration]
     #
+    # @!attribute [rw] default_iam_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role set as default for
+    #   the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -947,7 +952,8 @@ module Aws::Redshift
       :availability_zone_relocation_status,
       :cluster_namespace_arn,
       :total_storage_capacity_in_mega_bytes,
-      :aqua_configuration)
+      :aqua_configuration,
+      :default_iam_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1858,6 +1864,7 @@ module Aws::Redshift
     #         snapshot_schedule_identifier: "String",
     #         availability_zone_relocation: false,
     #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
+    #         default_iam_role_arn: "String",
     #       }
     #
     # @!attribute [rw] db_name
@@ -2233,6 +2240,11 @@ module Aws::Redshift
     #   * auto - Amazon Redshift determines whether to use AQUA.
     #   @return [String]
     #
+    # @!attribute [rw] default_iam_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that was set as
+    #   default for the cluster when the cluster was created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2267,7 +2279,8 @@ module Aws::Redshift
       :maintenance_track_name,
       :snapshot_schedule_identifier,
       :availability_zone_relocation,
-      :aqua_configuration_status)
+      :aqua_configuration_status,
+      :default_iam_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3319,7 +3332,8 @@ module Aws::Redshift
     #
     # @!attribute [rw] consumer_identifier
     #   The identifier of the data consumer that is to have authorization
-    #   removed from the datashare. This identifier is an AWS account ID.
+    #   removed from the datashare. This identifier is an Amazon Web
+    #   Services account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeauthorizeDataShareMessage AWS API Documentation
@@ -4553,10 +4567,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeDataSharesForConsumer request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForConsumerMessage AWS API Documentation
@@ -4578,10 +4592,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeDataSharesForConsumer request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForConsumerResult AWS API Documentation
@@ -4626,10 +4640,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeDataSharesForProducer request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForProducerMessage AWS API Documentation
@@ -4651,10 +4665,10 @@ module Aws::Redshift
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
     #   DescribeDataSharesForProducer request exceed the value specified in
-    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
-    #   response. You can retrieve the next set of response records by
-    #   providing the returned marker value in the `Marker` parameter and
-    #   retrying the request.
+    #   `MaxRecords`, Amazon Web Services returns a value in the `Marker`
+    #   field of the response. You can retrieve the next set of response
+    #   records by providing the returned marker value in the `Marker`
+    #   parameter and retrying the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForProducerResult AWS API Documentation
@@ -4690,10 +4704,11 @@ module Aws::Redshift
     # @!attribute [rw] marker
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a DescribeDataShares
-    #   request exceed the value specified in `MaxRecords`, AWS returns a
-    #   value in the `Marker` field of the response. You can retrieve the
-    #   next set of response records by providing the returned marker value
-    #   in the `Marker` parameter and retrying the request.
+    #   request exceed the value specified in `MaxRecords`, Amazon Web
+    #   Services returns a value in the `Marker` field of the response. You
+    #   can retrieve the next set of response records by providing the
+    #   returned marker value in the `Marker` parameter and retrying the
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesMessage AWS API Documentation
@@ -4713,10 +4728,11 @@ module Aws::Redshift
     # @!attribute [rw] marker
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a DescribeDataShares
-    #   request exceed the value specified in `MaxRecords`, AWS returns a
-    #   value in the `Marker` field of the response. You can retrieve the
-    #   next set of response records by providing the returned marker value
-    #   in the `Marker` parameter and retrying the request.
+    #   request exceed the value specified in `MaxRecords`, Amazon Web
+    #   Services returns a value in the `Marker` field of the response. You
+    #   can retrieve the next set of response records by providing the
+    #   returned marker value in the `Marker` parameter and retrying the
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesResult AWS API Documentation
@@ -7668,6 +7684,7 @@ module Aws::Redshift
     #         cluster_identifier: "String", # required
     #         add_iam_roles: ["String"],
     #         remove_iam_roles: ["String"],
+    #         default_iam_role_arn: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -7687,12 +7704,18 @@ module Aws::Redshift
     #   cluster in a single request.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] default_iam_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that was set as
+    #   default for the cluster when the cluster was last modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRolesMessage AWS API Documentation
     #
     class ModifyClusterIamRolesMessage < Struct.new(
       :cluster_identifier,
       :add_iam_roles,
-      :remove_iam_roles)
+      :remove_iam_roles,
+      :default_iam_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9785,6 +9808,7 @@ module Aws::Redshift
     #         number_of_nodes: 1,
     #         availability_zone_relocation: false,
     #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
+    #         default_iam_role_arn: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -10051,6 +10075,12 @@ module Aws::Redshift
     #   * auto - Amazon Redshift determines whether to use AQUA.
     #   @return [String]
     #
+    # @!attribute [rw] default_iam_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that was set as
+    #   default for the cluster when the cluster was last modified while it
+    #   was restored from a snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -10081,7 +10111,8 @@ module Aws::Redshift
       :snapshot_schedule_identifier,
       :number_of_nodes,
       :availability_zone_relocation,
-      :aqua_configuration_status)
+      :aqua_configuration_status,
+      :default_iam_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

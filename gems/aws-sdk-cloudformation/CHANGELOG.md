@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2021-11-19)
+------------------
+
+* Feature - The StackSets ManagedExecution feature will allow concurrency for non-conflicting StackSet operations and queuing the StackSet operations that conflict at a given time for later execution.
+
 1.60.0 (2021-11-04)
 ------------------
 

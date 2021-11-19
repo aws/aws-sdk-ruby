@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2021-11-19)
+------------------
+
+* Feature - This release adds support for specifying a SCTE-35 PID on input. MediaLive now supports SCTE-35 PID selection on inputs containing one or more active SCTE-35 PIDs.
+
 1.79.0 (2021-11-04)
 ------------------
 

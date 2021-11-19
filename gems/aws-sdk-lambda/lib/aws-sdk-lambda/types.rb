@@ -511,6 +511,49 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass Cors
+    #   data as a hash:
+    #
+    #       {
+    #         allow_credentials: false,
+    #         allow_headers: ["Header"],
+    #         allow_methods: ["Method"],
+    #         allow_origins: ["Origin"],
+    #         expose_headers: ["Header"],
+    #         max_age: 1,
+    #       }
+    #
+    # @!attribute [rw] allow_credentials
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allow_headers
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allow_methods
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allow_origins
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] expose_headers
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_age
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Cors AWS API Documentation
+    #
+    class Cors < Struct.new(
+      :allow_credentials,
+      :allow_headers,
+      :allow_methods,
+      :allow_origins,
+      :expose_headers,
+      :max_age)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateAliasRequest
     #   data as a hash:
     #
@@ -719,8 +762,6 @@ module Aws::Lambda
     #     10,000.
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
-    #
-    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
@@ -1037,8 +1078,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values (arm64 or x86\_64). The
-    #   default value is `x86_64`.
+    #   string array with one of the valid values. The default value is
+    #   `x86_64`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
@@ -1065,6 +1106,73 @@ module Aws::Lambda
       :image_config,
       :code_signing_config_arn,
       :architectures)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFunctionUrlConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "FunctionUrlQualifier",
+    #         authorization_type: "NONE", # required, accepts NONE, AWS_IAM
+    #         cors: {
+    #           allow_credentials: false,
+    #           allow_headers: ["Header"],
+    #           allow_methods: ["Method"],
+    #           allow_origins: ["Origin"],
+    #           expose_headers: ["Header"],
+    #           max_age: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_type
+    #   @return [String]
+    #
+    # @!attribute [rw] cors
+    #   @return [Types::Cors]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionUrlConfigRequest AWS API Documentation
+    #
+    class CreateFunctionUrlConfigRequest < Struct.new(
+      :function_name,
+      :qualifier,
+      :authorization_type,
+      :cors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_url
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_type
+    #   @return [String]
+    #
+    # @!attribute [rw] cors
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] creation_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionUrlConfigResponse AWS API Documentation
+    #
+    class CreateFunctionUrlConfigResponse < Struct.new(
+      :function_url,
+      :function_arn,
+      :authorization_type,
+      :cors,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1310,6 +1418,29 @@ module Aws::Lambda
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionRequest AWS API Documentation
     #
     class DeleteFunctionRequest < Struct.new(
+      :function_name,
+      :qualifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFunctionUrlConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "FunctionUrlQualifier",
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionUrlConfigRequest AWS API Documentation
+    #
+    class DeleteFunctionUrlConfigRequest < Struct.new(
       :function_name,
       :qualifier)
       SENSITIVE = []
@@ -2147,6 +2278,37 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @!attribute [rw] function_url
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] cors
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] authorization_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionUrlConfig AWS API Documentation
+    #
+    class FunctionUrlConfig < Struct.new(
+      :function_url,
+      :function_arn,
+      :creation_time,
+      :last_modified_time,
+      :cors,
+      :authorization_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsRequest AWS API Documentation
@@ -2513,6 +2675,60 @@ module Aws::Lambda
       :code,
       :tags,
       :concurrency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFunctionUrlConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "FunctionUrlQualifier",
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionUrlConfigRequest AWS API Documentation
+    #
+    class GetFunctionUrlConfigRequest < Struct.new(
+      :function_name,
+      :qualifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_url
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_type
+    #   @return [String]
+    #
+    # @!attribute [rw] cors
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] creation_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionUrlConfigResponse AWS API Documentation
+    #
+    class GetFunctionUrlConfigResponse < Struct.new(
+      :function_url,
+      :function_arn,
+      :authorization_type,
+      :cors,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3062,10 +3278,6 @@ module Aws::Lambda
     #
     # @!attribute [rw] payload
     #   The JSON that you want to provide to your Lambda function as input.
-    #
-    #   You can enter the JSON directly. For example, `--payload '\{ "key":
-    #   "value" \}'`. You can also specify a file path. For example,
-    #   `--payload file://payload.json`.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
@@ -3700,6 +3912,49 @@ module Aws::Lambda
     #
     class ListFunctionEventInvokeConfigsResponse < Struct.new(
       :function_event_invoke_configs,
+      :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFunctionUrlConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         marker: "String",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionUrlConfigsRequest AWS API Documentation
+    #
+    class ListFunctionUrlConfigsRequest < Struct.new(
+      :function_name,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_url_configs
+    #   @return [Array<Types::FunctionUrlConfig>]
+    #
+    # @!attribute [rw] next_marker
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionUrlConfigsResponse AWS API Documentation
+    #
+    class ListFunctionUrlConfigsResponse < Struct.new(
+      :function_url_configs,
       :next_marker)
       SENSITIVE = []
       include Aws::Structure
@@ -4984,19 +5239,7 @@ module Aws::Lambda
     #
     #   * `VIRTUAL_HOST` - (Amazon MQ) The name of the virtual host in your
     #     RabbitMQ broker. Lambda uses this RabbitMQ host as the event
-    #     source. This property cannot be specified in an
-    #     UpdateEventSourceMapping API call.
-    #
-    #   * `CLIENT_CERTIFICATE_TLS_AUTH` - (Amazon MSK, Self-managed Apache
-    #     Kafka) The Secrets Manager ARN of your secret key containing the
-    #     certificate chain (X.509 PEM), private key (PKCS#8 PEM), and
-    #     private key password (optional) used for mutual TLS authentication
-    #     of your MSK/Apache Kafka brokers.
-    #
-    #   * `SERVER_ROOT_CA_CERTIFICATE` - (Self-managed Apache Kafka) The
-    #     Secrets Manager ARN of your secret key containing the root CA
-    #     certificate (X.509 PEM) used for TLS encryption of your Apache
-    #     Kafka brokers.
+    #     source.
     #   @return [String]
     #
     # @!attribute [rw] uri
@@ -5370,8 +5613,6 @@ module Aws::Lambda
     #     10,000.
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
-    #
-    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
@@ -5522,8 +5763,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values (arm64 or x86\_64). The
-    #   default value is `x86_64`.
+    #   string array with one of the valid values. The default value is
+    #   `x86_64`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest AWS API Documentation
@@ -5816,6 +6057,77 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFunctionUrlConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "FunctionUrlQualifier",
+    #         authorization_type: "NONE", # accepts NONE, AWS_IAM
+    #         cors: {
+    #           allow_credentials: false,
+    #           allow_headers: ["Header"],
+    #           allow_methods: ["Method"],
+    #           allow_origins: ["Origin"],
+    #           expose_headers: ["Header"],
+    #           max_age: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_type
+    #   @return [String]
+    #
+    # @!attribute [rw] cors
+    #   @return [Types::Cors]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionUrlConfigRequest AWS API Documentation
+    #
+    class UpdateFunctionUrlConfigRequest < Struct.new(
+      :function_name,
+      :qualifier,
+      :authorization_type,
+      :cors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_url
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_type
+    #   @return [String]
+    #
+    # @!attribute [rw] cors
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] creation_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionUrlConfigResponse AWS API Documentation
+    #
+    class UpdateFunctionUrlConfigResponse < Struct.new(
+      :function_url,
+      :function_arn,
+      :authorization_type,
+      :cors,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end

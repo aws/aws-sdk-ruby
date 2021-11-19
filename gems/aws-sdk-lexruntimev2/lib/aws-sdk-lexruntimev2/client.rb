@@ -479,6 +479,7 @@ module Aws::LexRuntimeV2
     #   resp.interpretations[0].intent.confirmation_state #=> String, one of "Confirmed", "Denied", "None"
     #   resp.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot", "None"
     #   resp.session_state.dialog_action.slot_to_elicit #=> String
+    #   resp.session_state.dialog_action.slot_elicitation_style #=> String, one of "Default", "SpellByLetter", "SpellByWord"
     #   resp.session_state.intent.name #=> String
     #   resp.session_state.intent.slots #=> Hash
     #   resp.session_state.intent.slots["NonEmptyString"].value.original_value #=> String
@@ -588,6 +589,7 @@ module Aws::LexRuntimeV2
     #       dialog_action: {
     #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #         slot_to_elicit: "NonEmptyString",
+    #         slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
     #       },
     #       intent: {
     #         name: "NonEmptyString", # required
@@ -727,6 +729,7 @@ module Aws::LexRuntimeV2
     #       dialog_action: {
     #         type: "Close", # required, accepts Close, ConfirmIntent, Delegate, ElicitIntent, ElicitSlot, None
     #         slot_to_elicit: "NonEmptyString",
+    #         slot_elicitation_style: "Default", # accepts Default, SpellByLetter, SpellByWord
     #       },
     #       intent: {
     #         name: "NonEmptyString", # required
@@ -783,6 +786,7 @@ module Aws::LexRuntimeV2
     #   resp.messages[0].image_response_card.buttons[0].value #=> String
     #   resp.session_state.dialog_action.type #=> String, one of "Close", "ConfirmIntent", "Delegate", "ElicitIntent", "ElicitSlot", "None"
     #   resp.session_state.dialog_action.slot_to_elicit #=> String
+    #   resp.session_state.dialog_action.slot_elicitation_style #=> String, one of "Default", "SpellByLetter", "SpellByWord"
     #   resp.session_state.intent.name #=> String
     #   resp.session_state.intent.slots #=> Hash
     #   resp.session_state.intent.slots["NonEmptyString"].value.original_value #=> String
@@ -1038,7 +1042,7 @@ module Aws::LexRuntimeV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

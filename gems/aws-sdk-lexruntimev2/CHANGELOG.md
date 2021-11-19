@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2021-11-19)
+------------------
+
+* Feature - Now supports styled slots in Lex V2 runtime. Customers can provide inputs like "a as in apple b for beta" which will be resolved to "ab" as slot value.
+
 1.9.0 (2021-11-04)
 ------------------
 

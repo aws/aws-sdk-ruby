@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-11-19)
+------------------
+
+* Feature - Application Insights now supports monitoring for HANA
+
 1.24.0 (2021-11-04)
 ------------------
 
