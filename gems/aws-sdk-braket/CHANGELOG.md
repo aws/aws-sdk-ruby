@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2021-11-22)
+------------------
+
+* Feature - This release adds support for Amazon Braket Hybrid Jobs.
+
 1.13.0 (2021-11-04)
 ------------------
 

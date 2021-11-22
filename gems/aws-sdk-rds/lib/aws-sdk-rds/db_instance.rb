@@ -670,6 +670,13 @@ module Aws::RDS
       data[:custom_iam_instance_profile]
     end
 
+    # Specifies where automated backups and manual snapshots are stored:
+    # Amazon Web Services Outposts or the Amazon Web Services Region.
+    # @return [String]
+    def backup_target
+      data[:backup_target]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -865,6 +872,7 @@ module Aws::RDS
     #     max_allocated_storage: 1,
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
+    #     backup_target: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1131,59 +1139,13 @@ module Aws::RDS
     #   Not applicable. The name for the master user is managed by the DB
     #   cluster.
     #
-    #   **MariaDB**
+    #   **Amazon RDS**
     #
     #   Constraints:
     #
-    #   * Required for MariaDB.
+    #   * Required.
     #
-    #   * Must be 1 to 16 letters or numbers.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **Microsoft SQL Server**
-    #
-    #   Constraints:
-    #
-    #   * Required for SQL Server.
-    #
-    #   * Must be 1 to 128 letters or numbers.
-    #
-    #   * The first character must be a letter.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **MySQL**
-    #
-    #   Constraints:
-    #
-    #   * Required for MySQL.
-    #
-    #   * Must be 1 to 16 letters or numbers.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **Oracle**
-    #
-    #   Constraints:
-    #
-    #   * Required for Oracle.
-    #
-    #   * Must be 1 to 30 letters or numbers.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **PostgreSQL**
-    #
-    #   Constraints:
-    #
-    #   * Required for PostgreSQL.
-    #
-    #   * Must be 1 to 63 letters or numbers.
+    #   * Must be 1 to 16 letters, numbers, or underscores.
     #
     #   * First character must be a letter.
     #
@@ -1830,6 +1792,18 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
+    # @option options [String] :backup_target
+    #   Specifies where automated backups and manual snapshots are stored.
+    #
+    #   Possible values are `outposts` (Amazon Web Services Outposts) and
+    #   `region` (Amazon Web Services Region). The default is `region`.
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -3347,6 +3321,7 @@ module Aws::RDS
     #     source_db_instance_automated_backups_arn: "String",
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
+    #     backup_target: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -3688,6 +3663,19 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
+    # @option options [String] :backup_target
+    #   Specifies where automated backups and manual snapshots are stored for
+    #   the restored DB instance.
+    #
+    #   Possible values are `outposts` (Amazon Web Services Outposts) and
+    #   `region` (Amazon Web Services Region). The default is `region`.
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

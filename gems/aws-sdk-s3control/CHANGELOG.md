@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2021-11-22)
+------------------
+
+* Feature - Added Amazon CloudWatch publishing option for S3 Storage Lens metrics.
+
 1.42.0 (2021-11-04)
 ------------------
 

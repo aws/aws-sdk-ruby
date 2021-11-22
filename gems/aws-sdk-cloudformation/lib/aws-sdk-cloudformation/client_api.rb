@@ -327,6 +327,7 @@ module Aws::CloudFormation
     StackEvents = Shapes::ListShape.new(name: 'StackEvents')
     StackId = Shapes::StringShape.new(name: 'StackId')
     StackIdList = Shapes::ListShape.new(name: 'StackIdList')
+    StackIdsUrl = Shapes::StringShape.new(name: 'StackIdsUrl')
     StackInstance = Shapes::StructureShape.new(name: 'StackInstance')
     StackInstanceComprehensiveStatus = Shapes::StructureShape.new(name: 'StackInstanceComprehensiveStatus')
     StackInstanceDetailedStatus = Shapes::StringShape.new(name: 'StackInstanceDetailedStatus')
@@ -920,7 +921,9 @@ module Aws::CloudFormation
     GetTemplateSummaryOutput.struct_class = Types::GetTemplateSummaryOutput
 
     ImportStacksToStackSetInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
-    ImportStacksToStackSetInput.add_member(:stack_ids, Shapes::ShapeRef.new(shape: StackIdList, required: true, location_name: "StackIds"))
+    ImportStacksToStackSetInput.add_member(:stack_ids, Shapes::ShapeRef.new(shape: StackIdList, location_name: "StackIds"))
+    ImportStacksToStackSetInput.add_member(:stack_ids_url, Shapes::ShapeRef.new(shape: StackIdsUrl, location_name: "StackIdsUrl"))
+    ImportStacksToStackSetInput.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
     ImportStacksToStackSetInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
     ImportStacksToStackSetInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
     ImportStacksToStackSetInput.add_member(:call_as, Shapes::ShapeRef.new(shape: CallAs, location_name: "CallAs"))

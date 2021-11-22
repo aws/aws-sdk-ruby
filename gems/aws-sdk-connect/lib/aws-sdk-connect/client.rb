@@ -677,7 +677,7 @@ module Aws::Connect
     #   The display order of the status.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateAgentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -776,6 +776,67 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Creates a contact flow module for the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the contact flow module.
+    #
+    # @option params [String] :description
+    #   The description of the contact flow module.
+    #
+    # @option params [required, String] :content
+    #   The content of the contact flow module.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateContactFlowModuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContactFlowModuleResponse#id #id} => String
+    #   * {Types::CreateContactFlowModuleResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_contact_flow_module({
+    #     instance_id: "InstanceId", # required
+    #     name: "ContactFlowModuleName", # required
+    #     description: "ContactFlowModuleDescription",
+    #     content: "ContactFlowModuleContent", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowModule AWS API Documentation
+    #
+    # @overload create_contact_flow_module(params = {})
+    # @param [Hash] params ({})
+    def create_contact_flow_module(params = {}, options = {})
+      req = build_request(:create_contact_flow_module, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Creates hours of operation.
     #
     # @option params [required, String] :instance_id
@@ -796,7 +857,7 @@ module Aws::Connect
     #   and end time.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateHoursOfOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -930,7 +991,7 @@ module Aws::Connect
     #   integration type.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateIntegrationAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -994,7 +1055,7 @@ module Aws::Connect
     #   The quick connects available to agents who are working the queue.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1050,7 +1111,7 @@ module Aws::Connect
     #   Configuration settings for the quick connect.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateQuickConnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1189,7 +1250,7 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1236,7 +1297,7 @@ module Aws::Connect
     #   integration association can have only one of each use case type.
     #
     # @option params [Hash<String,String>] :tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateUseCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1410,6 +1471,63 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Deletes a contact flow for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the contact flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_contact_flow({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlow AWS API Documentation
+    #
+    # @overload delete_contact_flow(params = {})
+    # @param [Hash] params ({})
+    def delete_contact_flow(params = {}, options = {})
+      req = build_request(:delete_contact_flow, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified contact flow module.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the contact flow module.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_contact_flow_module({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_module_id: "ContactFlowModuleId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowModule AWS API Documentation
+    #
+    # @overload delete_contact_flow_module(params = {})
+    # @param [Hash] params ({})
+    def delete_contact_flow_module(params = {}, options = {})
+      req = build_request(:delete_contact_flow_module, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Deletes an hours of operation.
     #
     # @option params [required, String] :instance_id
@@ -1698,15 +1816,15 @@ module Aws::Connect
     #
     # Describes the specified contact.
     #
-    # Contact information is available in Amazon Connect for 24 months, and
-    # then it is deleted.
+    # Contact information remains available in Amazon Connect for 24 months,
+    # and then it is deleted.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_id
-    #   The identifier of the initial contact.
+    #   The identifier of the contact.
     #
     # @return [Types::DescribeContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1779,6 +1897,7 @@ module Aws::Connect
     #   resp.contact_flow.id #=> String
     #   resp.contact_flow.name #=> String
     #   resp.contact_flow.type #=> String, one of "CONTACT_FLOW", "CUSTOMER_QUEUE", "CUSTOMER_HOLD", "CUSTOMER_WHISPER", "AGENT_HOLD", "AGENT_WHISPER", "OUTBOUND_WHISPER", "AGENT_TRANSFER", "QUEUE_TRANSFER"
+    #   resp.contact_flow.state #=> String, one of "ACTIVE", "ARCHIVED"
     #   resp.contact_flow.description #=> String
     #   resp.contact_flow.content #=> String
     #   resp.contact_flow.tags #=> Hash
@@ -1793,6 +1912,50 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Describes the specified contact flow module.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the contact flow module.
+    #
+    # @return [Types::DescribeContactFlowModuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeContactFlowModuleResponse#contact_flow_module #contact_flow_module} => Types::ContactFlowModule
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_contact_flow_module({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_module_id: "ContactFlowModuleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_flow_module.arn #=> String
+    #   resp.contact_flow_module.id #=> String
+    #   resp.contact_flow_module.name #=> String
+    #   resp.contact_flow_module.content #=> String
+    #   resp.contact_flow_module.description #=> String
+    #   resp.contact_flow_module.state #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.contact_flow_module.status #=> String, one of "PUBLISHED", "SAVED"
+    #   resp.contact_flow_module.tags #=> Hash
+    #   resp.contact_flow_module.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowModule AWS API Documentation
+    #
+    # @overload describe_contact_flow_module(params = {})
+    # @param [Hash] params ({})
+    def describe_contact_flow_module(params = {}, options = {})
+      req = build_request(:describe_contact_flow_module, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Describes the hours of operation.
     #
     # @option params [required, String] :instance_id
@@ -3296,6 +3459,58 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Provides information about the contact flow modules for the specified
+    # Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :contact_flow_module_state
+    #   The state of the contact flow module.
+    #
+    # @return [Types::ListContactFlowModulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContactFlowModulesResponse#contact_flow_modules_summary_list #contact_flow_modules_summary_list} => Array&lt;Types::ContactFlowModuleSummary&gt;
+    #   * {Types::ListContactFlowModulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contact_flow_modules({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     contact_flow_module_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_flow_modules_summary_list #=> Array
+    #   resp.contact_flow_modules_summary_list[0].id #=> String
+    #   resp.contact_flow_modules_summary_list[0].arn #=> String
+    #   resp.contact_flow_modules_summary_list[0].name #=> String
+    #   resp.contact_flow_modules_summary_list[0].state #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowModules AWS API Documentation
+    #
+    # @overload list_contact_flow_modules(params = {})
+    # @param [Hash] params ({})
+    def list_contact_flow_modules(params = {}, options = {})
+      req = build_request(:list_contact_flow_modules, params)
+      req.send_request(options)
+    end
+
     # Provides information about the contact flows for the specified Amazon
     # Connect instance.
     #
@@ -3348,6 +3563,7 @@ module Aws::Connect
     #   resp.contact_flow_summary_list[0].arn #=> String
     #   resp.contact_flow_summary_list[0].name #=> String
     #   resp.contact_flow_summary_list[0].contact_flow_type #=> String, one of "CONTACT_FLOW", "CUSTOMER_QUEUE", "CUSTOMER_HOLD", "CUSTOMER_WHISPER", "AGENT_HOLD", "AGENT_WHISPER", "OUTBOUND_WHISPER", "AGENT_TRANSFER", "QUEUE_TRANSFER"
+    #   resp.contact_flow_summary_list[0].contact_flow_state #=> String, one of "ACTIVE", "ARCHIVED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlows AWS API Documentation
@@ -3380,7 +3596,7 @@ module Aws::Connect
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
-    #   This is not expected to be set since the value returned in the
+    #   This is not expected to be set, because the value returned in the
     #   previous response is always null.
     #
     # @return [Types::ListContactReferencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3645,6 +3861,7 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #
     # @option params [String] :integration_type
+    #   The integration type.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -4898,8 +5115,7 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Initiates a contact flow to start a new task immediately or at a
-    # future date and time.
+    # Initiates a contact flow to start a new task.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -5251,7 +5467,7 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
-    # Adds or updates user defined contact information associated with the
+    # Adds or updates user-defined contact information associated with the
     # specified contact. At least one field to be updated must be present in
     # the request.
     #
@@ -5413,6 +5629,116 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates metadata about specified contact flow.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the contact flow.
+    #
+    # @option params [String] :name
+    #   TThe name of the contact flow.
+    #
+    # @option params [String] :description
+    #   The description of the contact flow.
+    #
+    # @option params [String] :contact_flow_state
+    #   The state of contact flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact_flow_metadata({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId", # required
+    #     name: "ContactFlowName",
+    #     description: "ContactFlowDescription",
+    #     contact_flow_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowMetadata AWS API Documentation
+    #
+    # @overload update_contact_flow_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_contact_flow_metadata(params = {}, options = {})
+      req = build_request(:update_contact_flow_metadata, params)
+      req.send_request(options)
+    end
+
+    # Updates specified contact flow module for the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the contact flow module.
+    #
+    # @option params [required, String] :content
+    #   The content of the contact flow module.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact_flow_module_content({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_module_id: "ContactFlowModuleId", # required
+    #     content: "ContactFlowModuleContent", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleContent AWS API Documentation
+    #
+    # @overload update_contact_flow_module_content(params = {})
+    # @param [Hash] params ({})
+    def update_contact_flow_module_content(params = {}, options = {})
+      req = build_request(:update_contact_flow_module_content, params)
+      req.send_request(options)
+    end
+
+    # Updates metadata about specified contact flow module.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_flow_module_id
+    #   The identifier of the contact flow module.
+    #
+    # @option params [String] :name
+    #   The name of the contact flow module.
+    #
+    # @option params [String] :description
+    #   The description of the contact flow module.
+    #
+    # @option params [String] :state
+    #   The state of contact flow module.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact_flow_module_metadata({
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_module_id: "ContactFlowModuleId", # required
+    #     name: "ContactFlowModuleName",
+    #     description: "ContactFlowModuleDescription",
+    #     state: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleMetadata AWS API Documentation
+    #
+    # @overload update_contact_flow_module_metadata(params = {})
+    # @param [Hash] params ({})
+    def update_contact_flow_module_metadata(params = {}, options = {})
+      req = build_request(:update_contact_flow_module_metadata, params)
+      req.send_request(options)
+    end
+
     # The name of the contact flow.
     #
     # You can also create and update contact flows using the [Amazon Connect
@@ -5488,6 +5814,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Updates the hours of operation.
     #
     # @option params [required, String] :instance_id
@@ -6362,7 +6691,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

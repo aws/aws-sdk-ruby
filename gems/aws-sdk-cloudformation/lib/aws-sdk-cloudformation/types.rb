@@ -4189,7 +4189,9 @@ module Aws::CloudFormation
     #
     #       {
     #         stack_set_name: "StackSetNameOrId", # required
-    #         stack_ids: ["StackId"], # required
+    #         stack_ids: ["StackId"],
+    #         stack_ids_url: "StackIdsUrl",
+    #         organizational_unit_ids: ["OrganizationalUnitId"],
     #         operation_preferences: {
     #           region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #           region_order: ["Region"],
@@ -4210,6 +4212,19 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_ids
     #   The IDs of the stacks you are importing into a stack set. You import
     #   up to 10 stacks per stack set at a time.
+    #
+    #   Specify either `StackIds` or `StackIdsUrl`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stack_ids_url
+    #   The Amazon S3 URL which contains list of stack ids to be inputted.
+    #
+    #   Specify either `StackIds` or `StackIdsUrl`.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_ids
+    #   The list of OU ID’s to which the stacks being imported has to be
+    #   mapped as deployment target.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operation_preferences
@@ -4245,6 +4260,8 @@ module Aws::CloudFormation
     class ImportStacksToStackSetInput < Struct.new(
       :stack_set_name,
       :stack_ids,
+      :stack_ids_url,
+      :organizational_unit_ids,
       :operation_preferences,
       :operation_id,
       :call_as)
@@ -5482,8 +5499,8 @@ module Aws::CloudFormation
     #   @return [Boolean]
     #
     # @!attribute [rw] resolved_value
-    #   Read-only. The value that corresponds to a Systems Manager parameter
-    #   key. This field is returned only for [ `SSM` parameter types][1] in
+    #   Read-only. Read-only. The value that corresponds to a SSM parameter
+    #   key. This field is returned only for [ `SSM` ][1] parameter types in
     #   the template.
     #
     #
@@ -6462,12 +6479,14 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The resource type of the rollback trigger. Currently,
-    #   [AWS::CloudWatch::Alarm][1] is the only supported resource type.
+    #   The resource type of the rollback trigger. Specify either
+    #   [AWS::CloudWatch::Alarm][1] or [AWS::CloudWatch::CompositeAlarm][2]
+    #   resource types.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-compositealarm.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger AWS API Documentation
@@ -9023,7 +9042,7 @@ module Aws::CloudFormation
     #   * `ACTIVATED`\: Public extensions that have been activated for this
     #     account and region.
     #
-    #   * `THIRD-PARTY`\: Extensions available for use from publishers other
+    #   * `THIRD_PARTY`\: Extensions available for use from publishers other
     #     than Amazon. This includes:
     #
     #     * Private extensions registered in the account.
@@ -9031,14 +9050,14 @@ module Aws::CloudFormation
     #     * Public extensions from publishers other than Amazon, whether
     #       activated or not.
     #
-    #   * `AWS-TYPES`\: Extensions available for use from Amazon.
+    #   * `AWS_TYPES`\: Extensions available for use from Amazon.
     #   @return [String]
     #
     # @!attribute [rw] publisher_id
     #   The id of the publisher of the extension.
     #
     #   Extensions published by Amazon are not assigned a publisher ID. Use
-    #   the `AWS-TYPES` category to specify a list of types published by
+    #   the `AWS_TYPE` category to specify a list of types published by
     #   Amazon.
     #   @return [String]
     #

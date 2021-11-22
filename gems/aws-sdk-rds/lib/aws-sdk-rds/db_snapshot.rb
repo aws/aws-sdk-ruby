@@ -237,6 +237,13 @@ module Aws::RDS
       data[:original_snapshot_create_time]
     end
 
+    # Specifies where manual snapshots are stored: Amazon Web Services
+    # Outposts or the Amazon Web Services Region.
+    # @return [String]
+    def snapshot_target
+      data[:snapshot_target]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -623,6 +630,7 @@ module Aws::RDS
     #     deletion_protection: false,
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
+    #     backup_target: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -934,6 +942,19 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
+    # @option options [String] :backup_target
+    #   Specifies where automated backups and manual snapshots are stored for
+    #   the restored DB instance.
+    #
+    #   Possible values are `outposts` (Amazon Web Services Outposts) and
+    #   `region` (Amazon Web Services Region). The default is `region`.
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)

@@ -28,7 +28,7 @@ require_relative 'aws-sdk-braket/customizations'
 # structure.
 #
 #     braket = Aws::Braket::Client.new
-#     resp = braket.cancel_quantum_task(params)
+#     resp = braket.cancel_job(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-braket/customizations'
 # @!group service
 module Aws::Braket
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end

@@ -16,6 +16,7 @@ module Aws::ChimeSDKMeetings
     Arn = Shapes::StringShape.new(name: 'Arn')
     Attendee = Shapes::StructureShape.new(name: 'Attendee')
     AttendeeList = Shapes::ListShape.new(name: 'AttendeeList')
+    AudioFeatures = Shapes::StructureShape.new(name: 'AudioFeatures')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BatchCreateAttendeeErrorList = Shapes::ListShape.new(name: 'BatchCreateAttendeeErrorList')
     BatchCreateAttendeeRequest = Shapes::StructureShape.new(name: 'BatchCreateAttendeeRequest')
@@ -51,6 +52,8 @@ module Aws::ChimeSDKMeetings
     MediaPlacement = Shapes::StructureShape.new(name: 'MediaPlacement')
     MediaRegion = Shapes::StringShape.new(name: 'MediaRegion')
     Meeting = Shapes::StructureShape.new(name: 'Meeting')
+    MeetingFeatureStatus = Shapes::StringShape.new(name: 'MeetingFeatureStatus')
+    MeetingFeaturesConfiguration = Shapes::StructureShape.new(name: 'MeetingFeaturesConfiguration')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NotificationsConfiguration = Shapes::StructureShape.new(name: 'NotificationsConfiguration')
     ResultMax = Shapes::IntegerShape.new(name: 'ResultMax')
@@ -82,6 +85,9 @@ module Aws::ChimeSDKMeetings
     Attendee.struct_class = Types::Attendee
 
     AttendeeList.member = Shapes::ShapeRef.new(shape: Attendee)
+
+    AudioFeatures.add_member(:echo_reduction, Shapes::ShapeRef.new(shape: MeetingFeatureStatus, location_name: "EchoReduction"))
+    AudioFeatures.struct_class = Types::AudioFeatures
 
     BadRequestException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -120,6 +126,7 @@ module Aws::ChimeSDKMeetings
     CreateMeetingRequest.add_member(:meeting_host_id, Shapes::ShapeRef.new(shape: ExternalUserId, location_name: "MeetingHostId"))
     CreateMeetingRequest.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingId, required: true, location_name: "ExternalMeetingId"))
     CreateMeetingRequest.add_member(:notifications_configuration, Shapes::ShapeRef.new(shape: NotificationsConfiguration, location_name: "NotificationsConfiguration"))
+    CreateMeetingRequest.add_member(:meeting_features, Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: "MeetingFeatures"))
     CreateMeetingRequest.struct_class = Types::CreateMeetingRequest
 
     CreateMeetingResponse.add_member(:meeting, Shapes::ShapeRef.new(shape: Meeting, location_name: "Meeting"))
@@ -129,6 +136,7 @@ module Aws::ChimeSDKMeetings
     CreateMeetingWithAttendeesRequest.add_member(:media_region, Shapes::ShapeRef.new(shape: MediaRegion, required: true, location_name: "MediaRegion"))
     CreateMeetingWithAttendeesRequest.add_member(:meeting_host_id, Shapes::ShapeRef.new(shape: ExternalUserId, location_name: "MeetingHostId"))
     CreateMeetingWithAttendeesRequest.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingId, required: true, location_name: "ExternalMeetingId"))
+    CreateMeetingWithAttendeesRequest.add_member(:meeting_features, Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: "MeetingFeatures"))
     CreateMeetingWithAttendeesRequest.add_member(:notifications_configuration, Shapes::ShapeRef.new(shape: NotificationsConfiguration, location_name: "NotificationsConfiguration"))
     CreateMeetingWithAttendeesRequest.add_member(:attendees, Shapes::ShapeRef.new(shape: CreateMeetingWithAttendeesRequestItemList, required: true, location_name: "Attendees"))
     CreateMeetingWithAttendeesRequest.struct_class = Types::CreateMeetingWithAttendeesRequest
@@ -215,7 +223,11 @@ module Aws::ChimeSDKMeetings
     Meeting.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingId, location_name: "ExternalMeetingId"))
     Meeting.add_member(:media_region, Shapes::ShapeRef.new(shape: MediaRegion, location_name: "MediaRegion"))
     Meeting.add_member(:media_placement, Shapes::ShapeRef.new(shape: MediaPlacement, location_name: "MediaPlacement"))
+    Meeting.add_member(:meeting_features, Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: "MeetingFeatures"))
     Meeting.struct_class = Types::Meeting
+
+    MeetingFeaturesConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioFeatures, location_name: "Audio"))
+    MeetingFeaturesConfiguration.struct_class = Types::MeetingFeaturesConfiguration
 
     NotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2021-11-22)
+------------------
+
+* Feature - Adds new parameter to CreateActivation API . This parameter is for "internal use only".
+
 1.123.0 (2021-11-15)
 ------------------
 

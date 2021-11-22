@@ -1973,6 +1973,28 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # @!attribute [rw] deployment_type
+    #   Specifies the deployment mechanism through which the update shall be
+    #   applied on the domain. Possible responses are `Blue/Green` (The
+    #   update will require a blue/green deployment.) `DynamicUpdate` (The
+    #   update can be applied in-place without a Blue/Green deployment
+    #   required.) `Undetermined` (The domain is undergoing an update which
+    #   needs to complete before the deployment type can be predicted.)
+    #   `None` (The configuration change matches the current configuration
+    #   and will not result in any update.)
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Contains an optional message associated with the DryRunResults.
+    #   @return [String]
+    #
+    class DryRunResults < Struct.new(
+      :deployment_type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies maintenance schedule duration: duration value and duration
     # unit. See the [Developer Guide][1] for more information.
     #
@@ -4259,6 +4281,7 @@ module Aws::ElasticsearchService
     #             },
     #           ],
     #         },
+    #         dry_run: false,
     #       }
     #
     # @!attribute [rw] domain_name
@@ -4340,6 +4363,15 @@ module Aws::ElasticsearchService
     #   Specifies Auto-Tune options.
     #   @return [Types::AutoTuneOptions]
     #
+    # @!attribute [rw] dry_run
+    #   This flag, when set to True, specifies whether the
+    #   `UpdateElasticsearchDomain` request should return the results of
+    #   validation checks without actually applying the change. This flag,
+    #   when set to True, specifies the deployment mechanism through which
+    #   the update shall be applied on the domain. This will not actually
+    #   perform the Update.
+    #   @return [Boolean]
+    #
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
       :elasticsearch_cluster_config,
@@ -4354,7 +4386,8 @@ module Aws::ElasticsearchService
       :advanced_security_options,
       :node_to_node_encryption_options,
       :encryption_at_rest_options,
-      :auto_tune_options)
+      :auto_tune_options,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4366,8 +4399,13 @@ module Aws::ElasticsearchService
     #   The status of the updated Elasticsearch domain.
     #   @return [Types::ElasticsearchDomainConfig]
     #
+    # @!attribute [rw] dry_run_results
+    #   Contains result of DryRun.
+    #   @return [Types::DryRunResults]
+    #
     class UpdateElasticsearchDomainConfigResponse < Struct.new(
-      :domain_config)
+      :domain_config,
+      :dry_run_results)
       SENSITIVE = []
       include Aws::Structure
     end

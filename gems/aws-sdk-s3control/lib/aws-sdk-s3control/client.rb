@@ -3100,6 +3100,7 @@ module Aws::S3Control
     #   resp.storage_lens_configuration.data_export.s3_bucket_destination.arn #=> String
     #   resp.storage_lens_configuration.data_export.s3_bucket_destination.prefix #=> String
     #   resp.storage_lens_configuration.data_export.s3_bucket_destination.encryption.ssekms.key_id #=> String
+    #   resp.storage_lens_configuration.data_export.cloud_watch_metrics.is_enabled #=> Boolean
     #   resp.storage_lens_configuration.is_enabled #=> Boolean
     #   resp.storage_lens_configuration.aws_org.arn #=> String
     #   resp.storage_lens_configuration.storage_lens_arn #=> String
@@ -4422,7 +4423,7 @@ module Aws::S3Control
     #         regions: ["S3AWSRegion"],
     #       },
     #       data_export: {
-    #         s3_bucket_destination: { # required
+    #         s3_bucket_destination: {
     #           format: "CSV", # required, accepts CSV, Parquet
     #           output_schema_version: "V_1", # required, accepts V_1
     #           account_id: "AccountId", # required
@@ -4435,6 +4436,9 @@ module Aws::S3Control
     #               key_id: "SSEKMSKeyId", # required
     #             },
     #           },
+    #         },
+    #         cloud_watch_metrics: {
+    #           is_enabled: false, # required
     #         },
     #       },
     #       is_enabled: false, # required
@@ -4657,7 +4661,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

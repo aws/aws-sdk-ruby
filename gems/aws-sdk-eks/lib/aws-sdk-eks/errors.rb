@@ -36,6 +36,7 @@ module Aws::EKS
   # * {ResourceInUseException}
   # * {ResourceLimitExceededException}
   # * {ResourceNotFoundException}
+  # * {ResourcePropagationDelayException}
   # * {ServerException}
   # * {ServiceUnavailableException}
   # * {UnsupportedAvailabilityZoneException}
@@ -268,6 +269,21 @@ module Aws::EKS
       # @return [String]
       def addon_name
         @data[:addon_name]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResourcePropagationDelayException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EKS::Types::ResourcePropagationDelayException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
       # @return [String]

@@ -33,24 +33,30 @@ module Aws::QuickSight
     end
 
     # The Amazon QuickSight customizations associated with your Amazon Web
-    # Services account or a Amazon QuickSight namespace in a specific Amazon
-    # Web Services Region.
+    # Services account or a QuickSight namespace in a specific Amazon Web
+    # Services Region.
     #
     # @note When making an API call, you may pass AccountCustomization
     #   data as a hash:
     #
     #       {
     #         default_theme: "Arn",
+    #         default_email_customization_template: "Arn",
     #       }
     #
     # @!attribute [rw] default_theme
     #   The default theme for this Amazon QuickSight subscription.
     #   @return [String]
     #
+    # @!attribute [rw] default_email_customization_template
+    #   The default email customization template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccountCustomization AWS API Documentation
     #
     class AccountCustomization < Struct.new(
-      :default_theme)
+      :default_theme,
+      :default_email_customization_template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -93,7 +99,7 @@ module Aws::QuickSight
     # The active Identity and Access Management (IAM) policy assignment.
     #
     # @!attribute [rw] assignment_name
-    #   A name for the IAMpolicy assignment.
+    #   A name for the IAM policy assignment.
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
@@ -151,6 +157,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The parameters for OpenSearch.
+    #
     # @note When making an API call, you may pass AmazonOpenSearchParameters
     #   data as a hash:
     #
@@ -159,6 +167,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] domain
+    #   The OpenSearch domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AmazonOpenSearchParameters AWS API Documentation
@@ -415,7 +424,7 @@ module Aws::QuickSight
     end
 
     # The type of experience you want to embed. For anonymous users, you can
-    # embed an Amazon QuickSight dashboard.
+    # embed Amazon QuickSight dashboards.
     #
     # @note When making an API call, you may pass AnonymousUserEmbeddingExperienceConfiguration
     #   data as a hash:
@@ -427,8 +436,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] dashboard
-    #   The type of embedding experience. In this case, an Amazon QuickSight
-    #   dashboard.
+    #   The type of embedding experience. In this case, Amazon QuickSight
+    #   dashboards.
     #   @return [Types::AnonymousUserDashboardEmbeddingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnonymousUserEmbeddingExperienceConfiguration AWS API Documentation
@@ -835,7 +844,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A tag for a column in a TagColumnOperation structure. This is a
+    # A tag for a column in a ` TagColumnOperation ` structure. This is a
     # variant type structure. For this structure to be valid, only one of
     # the attributes can be non-null.
     #
@@ -910,6 +919,7 @@ module Aws::QuickSight
     #         namespace: "Namespace",
     #         account_customization: { # required
     #           default_theme: "Arn",
+    #           default_email_customization_template: "Arn",
     #         },
     #         tags: [
     #           {
@@ -932,7 +942,7 @@ module Aws::QuickSight
     # @!attribute [rw] account_customization
     #   The Amazon QuickSight customizations you're adding in the current
     #   Amazon Web Services Region. You can add these to an Amazon Web
-    #   Services account and a Amazon QuickSight namespace.
+    #   Services account and a QuickSight namespace.
     #
     #   For example, you can add a default theme by setting
     #   `AccountCustomization` to the midnight theme:
@@ -1258,7 +1268,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
-    #   The ID for the dashboard, also added to the IAMpolicy.
+    #   The ID for the dashboard, also added to the IAM policy.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1274,7 +1284,7 @@ module Aws::QuickSight
     # @!attribute [rw] permissions
     #   A structure that contains the permissions of the dashboard. You can
     #   use this structure for granting permissions by providing a list of
-    #   IAMaction information for each principal ARN.
+    #   IAM action information for each principal ARN.
     #
     #   To specify no permissions, omit the permissions list.
     #   @return [Array<Types::ResourcePermission>]
@@ -1285,8 +1295,8 @@ module Aws::QuickSight
     #   using as source. You can only create a dashboard from a template, so
     #   you use a `SourceTemplate` entity. If you need to create a dashboard
     #   from an analysis, first convert the analysis to a template by using
-    #   the CreateTemplate API operation. For `SourceTemplate`, specify the
-    #   Amazon Resource Name (ARN) of the source template. The
+    #   the ` CreateTemplate ` API operation. For `SourceTemplate`, specify
+    #   the Amazon Resource Name (ARN) of the source template. The
     #   `SourceTemplate`ARN can contain any Amazon Web Services account and
     #   any Amazon QuickSight-supported Amazon Web Services Region.
     #
@@ -1691,7 +1701,7 @@ module Aws::QuickSight
     #         aws_account_id: "AwsAccountId", # required
     #         data_source_id: "ResourceId", # required
     #         name: "ResourceName", # required
-    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM, AMAZON_OPENSEARCH
+    #         type: "ADOBE_ANALYTICS", # required, accepts ADOBE_ANALYTICS, AMAZON_ELASTICSEARCH, ATHENA, AURORA, AURORA_POSTGRESQL, AWS_IOT_ANALYTICS, GITHUB, JIRA, MARIADB, MYSQL, ORACLE, POSTGRESQL, PRESTO, REDSHIFT, S3, SALESFORCE, SERVICENOW, SNOWFLAKE, SPARK, SQLSERVER, TERADATA, TWITTER, TIMESTREAM, AMAZON_OPENSEARCH, EXASOL
     #         data_source_parameters: {
     #           amazon_elasticsearch_parameters: {
     #             domain: "Domain", # required
@@ -1784,6 +1794,10 @@ module Aws::QuickSight
     #           },
     #           amazon_open_search_parameters: {
     #             domain: "Domain", # required
+    #           },
+    #           exasol_parameters: {
+    #             host: "Host", # required
+    #             port: 1, # required
     #           },
     #         },
     #         credentials: {
@@ -1883,6 +1897,10 @@ module Aws::QuickSight
     #                 },
     #                 amazon_open_search_parameters: {
     #                   domain: "Domain", # required
+    #                 },
+    #                 exasol_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
     #                 },
     #               },
     #             ],
@@ -2020,11 +2038,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID.
+    #   The ID for the Amazon Web Services account that contains the folder.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] member_id
@@ -2048,8 +2066,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status of the folder membership. If succeeded, the status is
-    #   `SC_OK (200)`.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] folder_member
@@ -2057,7 +2074,7 @@ module Aws::QuickSight
     #   @return [Types::FolderMember]
     #
     # @!attribute [rw] request_id
-    #   The request ID.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateFolderMembershipResponse AWS API Documentation
@@ -2094,11 +2111,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID.
+    #   The ID for the Amazon Web Services account where you want to create
+    #   the folder.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2142,8 +2160,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status of the newly created folder. If succeeded, the status is
-    #   `SC_OK (200)`.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] arn
@@ -2311,7 +2328,7 @@ module Aws::QuickSight
     #
     # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account where you want to assign
-    #   an IAMpolicy to Amazon QuickSight users or groups.
+    #   an IAM policy to Amazon QuickSight users or groups.
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
@@ -2333,7 +2350,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
-    #   The ARN for the IAMpolicy to apply to the Amazon QuickSight users
+    #   The ARN for the IAM policy to apply to the Amazon QuickSight users
     #   and groups specified in this assignment.
     #   @return [String]
     #
@@ -2382,12 +2399,12 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
-    #   The ARN for the IAMpolicy that is applied to the Amazon QuickSight
+    #   The ARN for the IAM policy that is applied to the Amazon QuickSight
     #   users and groups specified in this assignment.
     #   @return [String]
     #
     # @!attribute [rw] identities
-    #   The Amazon QuickSight users, groups, or both that the IAMpolicy is
+    #   The Amazon QuickSight users, groups, or both that the IAM policy is
     #   assigned to.
     #   @return [Hash<String,Array<String>>]
     #
@@ -2918,7 +2935,7 @@ module Aws::QuickSight
     #   The ID of the theme that a custom theme will inherit from. All
     #   themes inherit from one of the starting themes defined by Amazon
     #   QuickSight. For a list of the starting themes, use `ListThemes` or
-    #   choose **Themes** from within a Amazon QuickSight analysis.
+    #   choose **Themes** from within an analysis.
     #   @return [String]
     #
     # @!attribute [rw] version_description
@@ -3096,6 +3113,10 @@ module Aws::QuickSight
     #             },
     #             amazon_open_search_parameters: {
     #               domain: "Domain", # required
+    #             },
+    #             exasol_parameters: {
+    #               host: "Host", # required
+    #               port: 1, # required
     #             },
     #           },
     #         ],
@@ -3997,6 +4018,10 @@ module Aws::QuickSight
     #               amazon_open_search_parameters: {
     #                 domain: "Domain", # required
     #               },
+    #               exasol_parameters: {
+    #                 host: "Host", # required
+    #                 port: 1, # required
+    #               },
     #             },
     #           ],
     #         },
@@ -4004,7 +4029,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] credential_pair
-    #   Credential pair. For more information, see CredentialPair.
+    #   Credential pair. For more information, see ` CredentialPair `.
     #   @return [Types::CredentialPair]
     #
     # @!attribute [rw] copy_source_arn
@@ -4142,6 +4167,10 @@ module Aws::QuickSight
     #         amazon_open_search_parameters: {
     #           domain: "Domain", # required
     #         },
+    #         exasol_parameters: {
+    #           host: "Host", # required
+    #           port: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] amazon_elasticsearch_parameters
@@ -4225,7 +4254,12 @@ module Aws::QuickSight
     #   @return [Types::TwitterParameters]
     #
     # @!attribute [rw] amazon_open_search_parameters
+    #   The parameters for OpenSearch.
     #   @return [Types::AmazonOpenSearchParameters]
+    #
+    # @!attribute [rw] exasol_parameters
+    #   The parameters for Exasol.
+    #   @return [Types::ExasolParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceParameters AWS API Documentation
     #
@@ -4250,7 +4284,8 @@ module Aws::QuickSight
       :sql_server_parameters,
       :teradata_parameters,
       :twitter_parameters,
-      :amazon_open_search_parameters)
+      :amazon_open_search_parameters,
+      :exasol_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4610,7 +4645,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID.
+    #   The ID for the Amazon Web Services account that contains the folder.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
@@ -4639,12 +4674,11 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status of deleting the asset. If succeeded, the status is `SC_OK
-    #   (200)`.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
-    #   The request ID.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderMembershipResponse AWS API Documentation
@@ -4665,11 +4699,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID for the folder.
+    #   The ID for the Amazon Web Services account that contains the folder.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderRequest AWS API Documentation
@@ -4682,8 +4716,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status of deleting the folder. If succeeded, the status is
-    #   `SC_OK (200)`.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] arn
@@ -4691,11 +4724,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The request ID.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteFolderResponse AWS API Documentation
@@ -4826,8 +4859,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account ID where you want to delete the
-    #   IAMpolicy assignment.
+    #   The Amazon Web Services account ID where you want to delete the IAM
+    #   policy assignment.
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
@@ -5369,13 +5402,13 @@ module Aws::QuickSight
     #   The Amazon QuickSight settings for this Amazon Web Services account.
     #   This information includes the edition of Amazon Amazon QuickSight
     #   that you subscribed to (Standard or Enterprise) and the notification
-    #   email for the Amazon QuickSight subscription. In the Amazon
-    #   QuickSight console, the Amazon QuickSight subscription is sometimes
-    #   referred to as a Amazon QuickSight "account" even though it's
-    #   technically not an account by itself. Instead, it's a subscription
-    #   to the Amazon QuickSight service for your Amazon Web Services
-    #   account. The edition that you subscribe to applies to Amazon
-    #   QuickSight in every Amazon Web Services Region where you use it.
+    #   email for the Amazon QuickSight subscription. In the QuickSight
+    #   console, the Amazon QuickSight subscription is sometimes referred to
+    #   as a QuickSight "account" even though it's technically not an
+    #   account by itself. Instead, it's a subscription to the Amazon
+    #   QuickSight service for your Amazon Web Services account. The edition
+    #   that you subscribe to applies to Amazon QuickSight in every Amazon
+    #   Web Services Region where you use it.
     #   @return [Types::AccountSettings]
     #
     # @!attribute [rw] request_id
@@ -5523,7 +5556,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
-    #   The ID for the dashboard, also added to the IAMpolicy.
+    #   The ID for the dashboard, also added to the IAM policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardPermissionsRequest AWS API Documentation
@@ -5555,6 +5588,18 @@ module Aws::QuickSight
     #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
+    # @!attribute [rw] link_sharing_configuration
+    #   A structure that contains the configuration of a shareable link that
+    #   grants access to the dashboard. Your users can use the link to view
+    #   and interact with the dashboard, if the dashboard has been shared
+    #   with them. For more information about sharing dashboards, see
+    #   [Sharing Dashboards][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sharing-a-dashboard.html
+    #   @return [Types::LinkSharingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardPermissionsResponse AWS API Documentation
     #
     class DescribeDashboardPermissionsResponse < Struct.new(
@@ -5562,7 +5607,8 @@ module Aws::QuickSight
       :dashboard_arn,
       :permissions,
       :status,
-      :request_id)
+      :request_id,
+      :link_sharing_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5851,11 +5897,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID.
+    #   The ID for the Amazon Web Services account that contains the folder.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderPermissionsRequest AWS API Documentation
@@ -5868,11 +5914,11 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status. If succeeded, the status is `SC_OK`.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -5884,7 +5930,7 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] request_id
-    #   The request ID.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderPermissionsResponse AWS API Documentation
@@ -5908,11 +5954,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID.
+    #   The ID for the Amazon Web Services account that contains the folder.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderRequest AWS API Documentation
@@ -5933,11 +5979,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID.
+    #   The ID for the Amazon Web Services account that contains the folder.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResolvedPermissionsRequest AWS API Documentation
@@ -5950,23 +5996,23 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status. If succeeded, the status is `SC_OK`
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the folder.
     #   @return [String]
     #
     # @!attribute [rw] permissions
-    #   Information about the permissions on the dashboard.
+    #   Information about the permissions for the folder.
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] request_id
-    #   The request ID.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResolvedPermissionsResponse AWS API Documentation
@@ -5982,7 +6028,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status. If succeeded, the status is `SC_OK (200)`.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] folder
@@ -5990,7 +6036,7 @@ module Aws::QuickSight
     #   @return [Types::Folder]
     #
     # @!attribute [rw] request_id
-    #   The request ID.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeFolderResponse AWS API Documentation
@@ -6091,7 +6137,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] iam_policy_assignment
-    #   Information describing the IAMpolicy assignment.
+    #   Information describing the IAM policy assignment.
     #   @return [Types::IAMPolicyAssignment]
     #
     # @!attribute [rw] request_id
@@ -6173,7 +6219,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   Your AWS account ID.
+    #   The ID of the Amazon Web Services account that contains the IP
+    #   rules.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeIpRestrictionRequest AWS API Documentation
@@ -6185,24 +6232,24 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
-    #   Your AWS account ID.
+    #   The ID of the Amazon Web Services account that contains the IP
+    #   rules.
     #   @return [String]
     #
     # @!attribute [rw] ip_restriction_rule_map
-    #   Describes the IP rules with CIDR range and description.
+    #   A map that describes the IP rules with CIDR range and description.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] enabled
-    #   Whether or not IP rules are enabled.
+    #   A value that specifies whether IP rules are turned on.
     #   @return [Boolean]
     #
     # @!attribute [rw] request_id
-    #   The ID of the describe request.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a set of IP restrictions. A successful request returns
-    #   a 200 status code.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeIpRestrictionResponse AWS API Documentation
@@ -6724,6 +6771,33 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The required parameters for connecting to an Exasol data source.
+    #
+    # @note When making an API call, you may pass ExasolParameters
+    #   data as a hash:
+    #
+    #       {
+    #         host: "Host", # required
+    #         port: 1, # required
+    #       }
+    #
+    # @!attribute [rw] host
+    #   The hostname or IP address of the Exasol data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port for the Exasol data source.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ExasolParameters AWS API Documentation
+    #
+    class ExasolParameters < Struct.new(
+      :host,
+      :port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Export to .csv option.
     #
     # @note When making an API call, you may pass ExportToCSVOption
@@ -6795,14 +6869,14 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A folder.
+    # A folder in Amazon QuickSight.
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The folder Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) for the folder.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -6810,11 +6884,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] folder_type
-    #   The type of the folder.
+    #   The type of folder it is.
     #   @return [String]
     #
     # @!attribute [rw] folder_path
-    #   An array of ancestor folder ARN strings.
+    #   An array of ancestor ARN strings for the folder.
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_time
@@ -6839,14 +6913,15 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # An asset in a folder, such as a dashboard, analysis, or dataset.
+    # An asset in a Amazon QuickSight folder, such as a dashboard, analysis,
+    # or dataset.
     #
     # @!attribute [rw] member_id
-    #   The ID of the asset.
+    #   The ID of an asset in the folder.
     #   @return [String]
     #
     # @!attribute [rw] member_type
-    #   The type of the asset.
+    #   The type of asset that it is.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FolderMember AWS API Documentation
@@ -6858,7 +6933,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Searches a folder by a filter.
+    # A filter to use to search a Amazon QuickSight folder.
     #
     # @note When making an API call, you may pass FolderSearchFilter
     #   data as a hash:
@@ -6870,12 +6945,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] operator
-    #   The comparison operator that you want to use as a filter. For
+    #   The comparison operator that you want to use in the filter. For
     #   example, `"Operator": "StringEquals"`.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the value that you want to use as a filter. For example,
+    #   The name of a value that you want to use in the filter. For example,
     #   `"Name": "PARENT_FOLDER_ARN"`.
     #   @return [String]
     #
@@ -6895,14 +6970,14 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A summary of the folder.
+    # A summary of information about an existing Amazon QuickSight folder.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the folder.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -7069,8 +7144,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] experience_configuration
     #   The experience you are embedding. For registered users, you can
-    #   embed Amazon QuickSight dashboards, the entire Amazon QuickSight
-    #   console, or the Amazon QuickSight Q search bar.
+    #   embed Amazon QuickSight dashboards or the entire Amazon QuickSight
+    #   console.
     #   @return [Types::RegisteredUserEmbeddingExperienceConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GenerateEmbedUrlForRegisteredUserRequest AWS API Documentation
@@ -7085,8 +7160,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] embed_url
-    #   The embed URL for the Amazon QuickSight dashboard, console, or Q
-    #   search bar.
+    #   The embed URL for the Amazon QuickSight dashboard or console.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -7206,11 +7280,11 @@ module Aws::QuickSight
     #
     #   * Invited nonfederated users
     #
-    #   * IAMusers and IAMrole-based sessions authenticated through
-    #     Federated Single Sign-On using SAML, OpenID Connect, or
-    #     IAMfederation.
+    #   * IAM users and IAM role-based sessions authenticated through
+    #     Federated Single Sign-On using SAML, OpenID Connect, or IAM
+    #     federation.
     #
-    #   Omit this parameter for users in the third group – IAMusers and IAM
+    #   Omit this parameter for users in the third group – IAM users and IAM
     #   role-based sessions.
     #   @return [String]
     #
@@ -7224,10 +7298,10 @@ module Aws::QuickSight
     #   A list of one or more dashboard IDs that you want to add to a
     #   session that includes anonymous users. The `IdentityType` parameter
     #   must be set to `ANONYMOUS` for this to work, because other identity
-    #   types authenticate as Amazon QuickSight or IAMusers. For example, if
-    #   you set "`--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3
-    #   identity-type ANONYMOUS`", the session can access all three
-    #   dashboards.
+    #   types authenticate as Amazon QuickSight or IAM users. For example,
+    #   if you set "`--dashboard-id dash_id1 --dashboard-id dash_id2
+    #   dash_id3 identity-type ANONYMOUS`", the session can access all
+    #   three dashboards.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlRequest AWS API Documentation
@@ -7456,7 +7530,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
-    #   The Amazon Resource Name (ARN) for the IAMpolicy.
+    #   The Amazon Resource Name (ARN) for the IAM policy.
     #   @return [String]
     #
     # @!attribute [rw] identities
@@ -7480,7 +7554,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # IAMpolicy assignment summary.
+    # IAM policy assignment summary.
     #
     # @!attribute [rw] assignment_name
     #   Assignment name.
@@ -7813,6 +7887,21 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A structure that contains the configuration of a shareable link to the
+    # dashboard.
+    #
+    # @!attribute [rw] permissions
+    #   A structure that contains the permissions of a shareable link.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LinkSharingConfiguration AWS API Documentation
+    #
+    class LinkSharingConfiguration < Struct.new(
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAnalysesRequest
     #   data as a hash:
     #
@@ -8134,11 +8223,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID.
+    #   The ID for the Amazon Web Services account that contains the folder.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8162,7 +8251,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status. If succeeded, the status is `SC_OK`
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] folder_member_list
@@ -8176,7 +8265,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The request ID.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFolderMembersResponse AWS API Documentation
@@ -8200,7 +8289,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID.
+    #   The ID for the Amazon Web Services account that contains the folder.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -8223,12 +8312,13 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status. If succeeded, the status is `SC_OK`
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] folder_summary_list
-    #   A structure that contains all of the folders in your AWS account.
-    #   This structure provides basic information about the folders.
+    #   A structure that contains all of the folders in the Amazon Web
+    #   Services account. This structure provides basic information about
+    #   the folders.
     #   @return [Array<Types::FolderSummary>]
     #
     # @!attribute [rw] next_token
@@ -8237,7 +8327,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The request ID.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListFoldersResponse AWS API Documentation
@@ -8474,8 +8564,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account that contains these
-    #   IAMpolicy assignments.
+    #   The ID of the Amazon Web Services account that contains these IAM
+    #   policy assignments.
     #   @return [String]
     #
     # @!attribute [rw] assignment_status
@@ -8508,7 +8598,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] iam_policy_assignments
-    #   Information describing the IAMpolicy assignments.
+    #   Information describing the IAM policy assignments.
     #   @return [Array<Types::IAMPolicyAssignmentSummary>]
     #
     # @!attribute [rw] next_token
@@ -9473,7 +9563,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # An object that consists of the member Amazon Resource Name (ARN) and
+    # An object that consists of a member Amazon Resource Name (ARN) and a
     # member ID.
     #
     # @!attribute [rw] member_id
@@ -10012,7 +10102,8 @@ module Aws::QuickSight
     #   Amazon QuickSight supports several ways of managing the identity of
     #   users. This parameter accepts two values:
     #
-    #   * `IAM`\: A user whose identity maps to an existing IAMuser or role.
+    #   * `IAM`\: A user whose identity maps to an existing IAM user or
+    #     role.
     #
     #   * `QUICKSIGHT`\: A user whose identity is owned and managed
     #     internally by Amazon QuickSight.
@@ -10042,18 +10133,18 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] iam_arn
-    #   The ARN of the IAMuser or role that you are registering with Amazon
+    #   The ARN of the IAM user or role that you are registering with Amazon
     #   QuickSight.
     #   @return [String]
     #
     # @!attribute [rw] session_name
     #   You need to use this parameter only when you register one or more
-    #   users using an assumed IAMrole. You don't need to provide the
+    #   users using an assumed IAM role. You don't need to provide the
     #   session name for other scenarios, for example when you are
-    #   registering an IAMuser or an Amazon QuickSight user. You can
-    #   register multiple users using the same IAMrole if each user has a
-    #   different session name. For more information on assuming IAMroles,
-    #   see [ `assume-role` ][1] in the *AWS CLI Reference.*
+    #   registering an IAM user or an Amazon QuickSight user. You can
+    #   register multiple users using the same IAM role if each user has a
+    #   different session name. For more information on assuming IAM roles,
+    #   see [ `assume-role` ][1] in the *CLI Reference.*
     #
     #
     #
@@ -10096,12 +10187,12 @@ module Aws::QuickSight
     #   restrictions. Currently, you need to create the profile names for
     #   custom permission sets by using the Amazon QuickSight console. Then,
     #   you use the `RegisterUser` API operation to assign the named set of
-    #   permissions to a Amazon QuickSight user.
+    #   permissions to a QuickSight user.
     #
-    #   Amazon QuickSight custom permissions are applied through
-    #   IAMpolicies. Therefore, they override the permissions typically
-    #   granted by assigning Amazon QuickSight users to one of the default
-    #   security cohorts in Amazon QuickSight (admin, author, reader).
+    #   Amazon QuickSight custom permissions are applied through IAM
+    #   policies. Therefore, they override the permissions typically granted
+    #   by assigning Amazon QuickSight users to one of the default security
+    #   cohorts in Amazon QuickSight (admin, author, reader).
     #
     #   This feature is available only to Amazon QuickSight Enterprise
     #   edition subscriptions.
@@ -10212,12 +10303,12 @@ module Aws::QuickSight
     end
 
     # The type of experience you want to embed. For registered users, you
-    # can embed an Amazon QuickSight dashboard or the Amazon QuickSight
+    # can embed Amazon QuickSight dashboards or the Amazon QuickSight
     # console.
     #
     # <note markdown="1"> Exactly one of the experience configurations is required. You can
     # choose `Dashboard` or `QuickSightConsole`. You cannot choose more than
-    # one experience configuraton.
+    # one experience configuration.
     #
     #  </note>
     #
@@ -10242,22 +10333,22 @@ module Aws::QuickSight
     #   @return [Types::RegisteredUserDashboardEmbeddingConfiguration]
     #
     # @!attribute [rw] quick_sight_console
-    #   The configuration details for providing an Amazon QuickSight console
-    #   embedding experience. This can be used along with custom permissions
-    #   to restrict access to certain features. For more information, see
-    #   [Customizing Access to the Amazon QuickSight Console][1] in the
-    #   *Amazon QuickSight User Guide*.
+    #   The configuration details for providing each Amazon QuickSight
+    #   console embedding experience. This can be used along with custom
+    #   permissions to restrict access to certain features. For more
+    #   information, see [Customizing Access to the Amazon QuickSight
+    #   Console][1] in the *Amazon QuickSight User Guide*.
     #
-    #   Use `GenerateEmbedUrlForRegisteredUser` where you want to provide an
-    #   authoring portal that allows users to create data sources, datasets,
-    #   analyses, and dashboards. The users who accesses an embedded Amazon
-    #   QuickSight console needs to belong to the author or admin security
-    #   cohort. If you want to restrict permissions to some of these
-    #   features, add a custom permissions profile to the user with the `
-    #   UpdateUser ` API operation. Use ` RegisterUser ` API operation to
-    #   add a new user with a custom permission profile attached. For more
-    #   information, see the following sections in the *Amazon QuickSight
-    #   User Guide*\:
+    #   Use ` GenerateEmbedUrlForRegisteredUser ` where you want to provide
+    #   an authoring portal that allows users to create data sources,
+    #   datasets, analyses, and dashboards. The users who accesses an
+    #   embedded Amazon QuickSight console needs to belong to the author or
+    #   admin security cohort. If you want to restrict permissions to some
+    #   of these features, add a custom permissions profile to the user with
+    #   the ` UpdateUser ` API operation. Use the ` RegisterUser ` API
+    #   operation to add a new user with a custom permission profile
+    #   attached. For more information, see the following sections in the
+    #   *Amazon QuickSight User Guide*\:
     #
     #   * [Embedding the Full Functionality of the Amazon QuickSight Console
     #     for Authenticated Users][2]
@@ -10509,14 +10600,14 @@ module Aws::QuickSight
     #     associated with an analysis, dashboard, template, or theme. (This
     #     is common.)
     #
-    #   * The ARN of an Amazon Web Services account root: This is an IAMARN
-    #     rather than a Amazon QuickSight ARN. Use this option only to share
+    #   * The ARN of an Amazon Web Services account root: This is an IAM ARN
+    #     rather than a QuickSight ARN. Use this option only to share
     #     resources (templates) across Amazon Web Services accounts. (This
     #     is less common.)
     #   @return [String]
     #
     # @!attribute [rw] actions
-    #   The IAMaction to grant or revoke permissions on.
+    #   The IAM action to grant or revoke permissions on.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ResourcePermission AWS API Documentation
@@ -11014,7 +11105,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID.
+    #   The ID for the Amazon Web Services account that contains the folder.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -11045,12 +11136,13 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status. If succeeded, the status is `SC_OK`.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] folder_summary_list
-    #   A structure that contains all of the folders in your AWS account.
-    #   This structure provides basic information about the folders.
+    #   A structure that contains all of the folders in the Amazon Web
+    #   Services account. This structure provides basic information about
+    #   the folders.
     #   @return [Array<Types::FolderSummary>]
     #
     # @!attribute [rw] next_token
@@ -11059,7 +11151,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The request ID.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchFoldersResponse AWS API Documentation
@@ -12444,12 +12536,12 @@ module Aws::QuickSight
     # This error indicates that you are calling an embedding operation in
     # Amazon QuickSight without the required pricing plan on your Amazon Web
     # Services account. Before you can use embedding for anonymous users, a
-    # Amazon QuickSight administrator needs to add capacity pricing to
-    # Amazon QuickSight. You can do this on the **Manage Amazon QuickSight**
-    # page.
+    # QuickSight administrator needs to add capacity pricing to Amazon
+    # QuickSight. You can do this on the **Manage Amazon QuickSight** page.
     #
-    # After capacity pricing is added, you can use the GetDashboardEmbedUrl
-    # API operation with the `--identity-type ANONYMOUS` option.
+    # After capacity pricing is added, you can use the `
+    # GetDashboardEmbedUrl ` API operation with the `--identity-type
+    # ANONYMOUS` option.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -12568,6 +12660,7 @@ module Aws::QuickSight
     #         namespace: "Namespace",
     #         account_customization: { # required
     #           default_theme: "Arn",
+    #           default_email_customization_template: "Arn",
     #         },
     #       }
     #
@@ -12919,6 +13012,18 @@ module Aws::QuickSight
     #             actions: ["String"], # required
     #           },
     #         ],
+    #         grant_link_permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
+    #         revoke_link_permissions: [
+    #           {
+    #             principal: "Principal", # required
+    #             actions: ["String"], # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] aws_account_id
@@ -12938,13 +13043,23 @@ module Aws::QuickSight
     #   The permissions that you want to revoke from this resource.
     #   @return [Array<Types::ResourcePermission>]
     #
+    # @!attribute [rw] grant_link_permissions
+    #   Grants link permissions to all users in a defined namespace.
+    #   @return [Array<Types::ResourcePermission>]
+    #
+    # @!attribute [rw] revoke_link_permissions
+    #   Revokes link permissions from all users in a defined namespace.
+    #   @return [Array<Types::ResourcePermission>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardPermissionsRequest AWS API Documentation
     #
     class UpdateDashboardPermissionsRequest < Struct.new(
       :aws_account_id,
       :dashboard_id,
       :grant_permissions,
-      :revoke_permissions)
+      :revoke_permissions,
+      :grant_link_permissions,
+      :revoke_link_permissions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12969,6 +13084,11 @@ module Aws::QuickSight
     #   The HTTP status of the request.
     #   @return [Integer]
     #
+    # @!attribute [rw] link_sharing_configuration
+    #   Updates the permissions of a shared link to an Amazon QuickSight
+    #   dashboard.
+    #   @return [Types::LinkSharingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardPermissionsResponse AWS API Documentation
     #
     class UpdateDashboardPermissionsResponse < Struct.new(
@@ -12976,7 +13096,8 @@ module Aws::QuickSight
       :dashboard_id,
       :permissions,
       :request_id,
-      :status)
+      :status,
+      :link_sharing_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13118,8 +13239,8 @@ module Aws::QuickSight
     #   using as source. You can only update a dashboard from a template, so
     #   you use a `SourceTemplate` entity. If you need to update a dashboard
     #   from an analysis, first convert the analysis to a template by using
-    #   the CreateTemplate API operation. For `SourceTemplate`, specify the
-    #   Amazon Resource Name (ARN) of the source template. The
+    #   the ` CreateTemplate ` API operation. For `SourceTemplate`, specify
+    #   the Amazon Resource Name (ARN) of the source template. The
     #   `SourceTemplate` ARN can contain any Amazon Web Services account and
     #   any Amazon QuickSight-supported Amazon Web Services Region.
     #
@@ -13749,6 +13870,10 @@ module Aws::QuickSight
     #           amazon_open_search_parameters: {
     #             domain: "Domain", # required
     #           },
+    #           exasol_parameters: {
+    #             host: "Host", # required
+    #             port: 1, # required
+    #           },
     #         },
     #         credentials: {
     #           credential_pair: {
@@ -13847,6 +13972,10 @@ module Aws::QuickSight
     #                 },
     #                 amazon_open_search_parameters: {
     #                   domain: "Domain", # required
+    #                 },
+    #                 exasol_parameters: {
+    #                   host: "Host", # required
+    #                   port: 1, # required
     #                 },
     #               },
     #             ],
@@ -13963,11 +14092,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID.
+    #   The ID for the Amazon Web Services account that contains the folder
+    #   to update.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] grant_permissions
@@ -13990,23 +14120,23 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status. If succeeded, the status is `SC_OK`.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the folder.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] permissions
-    #   Information about the permissions on the dashboard.
+    #   Information about the permissions for the folder.
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] request_id
-    #   The request ID.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderPermissionsResponse AWS API Documentation
@@ -14031,11 +14161,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID.
+    #   The ID for the Amazon Web Services account that contains the folder
+    #   to update.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -14053,19 +14184,19 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] status
-    #   The status. If succeeded, the status is `SC_OK`.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the folder.
     #   @return [String]
     #
     # @!attribute [rw] folder_id
-    #   The folder ID.
+    #   The ID of the folder.
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The request ID.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderResponse AWS API Documentation
@@ -14155,8 +14286,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The ID of the Amazon Web Services account that contains the
-    #   IAMpolicy assignment.
+    #   The ID of the Amazon Web Services account that contains the IAM
+    #   policy assignment.
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
@@ -14182,7 +14313,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
-    #   The ARN for the IAMpolicy to apply to the Amazon QuickSight users
+    #   The ARN for the IAM policy to apply to the Amazon QuickSight users
     #   and groups specified in this assignment.
     #   @return [String]
     #
@@ -14213,12 +14344,12 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
-    #   The ARN for the IAMpolicy applied to the Amazon QuickSight users and
-    #   groups specified in this assignment.
+    #   The ARN for the IAM policy applied to the Amazon QuickSight users
+    #   and groups specified in this assignment.
     #   @return [String]
     #
     # @!attribute [rw] identities
-    #   The Amazon QuickSight users, groups, or both that the IAMpolicy is
+    #   The Amazon QuickSight users, groups, or both that the IAM policy is
     #   assigned to.
     #   @return [Hash<String,Array<String>>]
     #
@@ -14269,15 +14400,17 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   Your AWS account ID.
+    #   The ID of the Amazon Web Services account that contains the IP
+    #   rules.
     #   @return [String]
     #
     # @!attribute [rw] ip_restriction_rule_map
-    #   Describes updated IP rules.
+    #   A map that describes the updated IP rules with CIDR ranges and
+    #   descriptions.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] enabled
-    #   Whether or not IP rules are enabled.
+    #   A value that specifies whether IP rules are turned on.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateIpRestrictionRequest AWS API Documentation
@@ -14291,16 +14424,16 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
-    #   Your AWS account ID.
+    #   The ID of the Amazon Web Services account that contains the IP
+    #   rules.
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The ID of the update request.
+    #   The Amazon Web Services request ID for this operation.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the updated IP rules. A successful request returns a
-    #   200 code.
+    #   The HTTP status of the request.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateIpRestrictionResponse AWS API Documentation
@@ -14906,12 +15039,12 @@ module Aws::QuickSight
     #   restrictions. Currently, you need to create the profile names for
     #   custom permission sets by using the Amazon QuickSight console. Then,
     #   you use the `RegisterUser` API operation to assign the named set of
-    #   permissions to a Amazon QuickSight user.
+    #   permissions to a QuickSight user.
     #
-    #   Amazon QuickSight custom permissions are applied through
-    #   IAMpolicies. Therefore, they override the permissions typically
-    #   granted by assigning Amazon QuickSight users to one of the default
-    #   security cohorts in Amazon QuickSight (admin, author, reader).
+    #   Amazon QuickSight custom permissions are applied through IAM
+    #   policies. Therefore, they override the permissions typically granted
+    #   by assigning Amazon QuickSight users to one of the default security
+    #   cohorts in Amazon QuickSight (admin, author, reader).
     #
     #   This feature is available only to Amazon QuickSight Enterprise
     #   edition subscriptions.
@@ -14942,8 +15075,8 @@ module Aws::QuickSight
     #     parameter to provide the custom OIDC provider URL.
     #
     #   * `NONE`\: This clears all the previously saved external login
-    #     information for a user. Use ` DescribeUser ` API to check the
-    #     external login information.
+    #     information for a user. Use the ` DescribeUser ` API operation to
+    #     check the external login information.
     #   @return [String]
     #
     # @!attribute [rw] custom_federation_provider_url
@@ -15050,7 +15183,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The user's user name.
+    #   The user's user name. In the output, the value for `UserName` is
+    #   `N/A` when the value for `IdentityType` is `IAM` and the
+    #   corresponding IAM user is deleted.
     #   @return [String]
     #
     # @!attribute [rw] email
@@ -15097,7 +15232,7 @@ module Aws::QuickSight
     # @!attribute [rw] external_login_federation_provider_type
     #   The type of supported external login provider that provides identity
     #   to let the user federate into Amazon QuickSight with an associated
-    #   IAMrole. The type can be one of the following.
+    #   IAM role. The type can be one of the following.
     #
     #   * `COGNITO`\: Amazon Cognito. The provider URL is
     #     cognito-identity.amazonaws.com.

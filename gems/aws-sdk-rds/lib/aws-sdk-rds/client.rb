@@ -1666,6 +1666,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
+    #   resp.db_snapshot.snapshot_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -1858,15 +1859,13 @@ module Aws::RDS
     # Creates a custom DB engine version (CEV). A CEV is a binary volume
     # snapshot of a database engine and specific AMI. The only supported
     # engine is Oracle Database 19c Enterprise Edition with the January 2021
-    # or later RU/RUR. For more information, see [ Amazon RDS Custom
-    # requirements and limitations][1] in the *Amazon RDS User Guide*.
+    # or later RU/RUR.
     #
     # Amazon RDS, which is a fully managed service, supplies the Amazon
     # Machine Image (AMI) and database software. The Amazon RDS database
     # software is preinstalled, so you need only select a DB engine and
     # version, and create your database. With Amazon RDS Custom, you upload
-    # your database installation files in Amazon S3. For more information,
-    # see [ Preparing to create a CEV][2] in the *Amazon RDS User Guide*.
+    # your database installation files in Amazon S3.
     #
     # When you create a custom engine version, you specify the files in a
     # JSON document called a CEV manifest. This document describes
@@ -1894,14 +1893,12 @@ module Aws::RDS
     #
     #  </note>
     #
-    # For more information, see [ Creating a CEV][3] in the *Amazon RDS User
+    # For more information, see [ Creating a CEV][1] in the *Amazon RDS User
     # Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.preparing.manifest
-    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.html#custom-cev.preparing
-    # [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.create
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.create
     #
     # @option params [required, String] :engine
     #   The database engine to use for your custom engine version (CEV). The
@@ -3346,59 +3343,13 @@ module Aws::RDS
     #   Not applicable. The name for the master user is managed by the DB
     #   cluster.
     #
-    #   **MariaDB**
+    #   **Amazon RDS**
     #
     #   Constraints:
     #
-    #   * Required for MariaDB.
+    #   * Required.
     #
-    #   * Must be 1 to 16 letters or numbers.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **Microsoft SQL Server**
-    #
-    #   Constraints:
-    #
-    #   * Required for SQL Server.
-    #
-    #   * Must be 1 to 128 letters or numbers.
-    #
-    #   * The first character must be a letter.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **MySQL**
-    #
-    #   Constraints:
-    #
-    #   * Required for MySQL.
-    #
-    #   * Must be 1 to 16 letters or numbers.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **Oracle**
-    #
-    #   Constraints:
-    #
-    #   * Required for Oracle.
-    #
-    #   * Must be 1 to 30 letters or numbers.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **PostgreSQL**
-    #
-    #   Constraints:
-    #
-    #   * Required for PostgreSQL.
-    #
-    #   * Must be 1 to 63 letters or numbers.
+    #   * Must be 1 to 16 letters, numbers, or underscores.
     #
     #   * First character must be a letter.
     #
@@ -4089,6 +4040,19 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     #
+    # @option params [String] :backup_target
+    #   Specifies where automated backups and manual snapshots are stored.
+    #
+    #   Possible values are `outposts` (Amazon Web Services Outposts) and
+    #   `region` (Amazon Web Services Region). The default is `region`.
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -4175,6 +4139,7 @@ module Aws::RDS
     #     max_allocated_storage: 1,
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
+    #     backup_target: "String",
     #   })
     #
     # @example Response structure
@@ -4314,6 +4279,7 @@ module Aws::RDS
     #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -5055,6 +5021,7 @@ module Aws::RDS
     #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -5609,6 +5576,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
+    #   resp.db_snapshot.snapshot_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -6903,6 +6871,7 @@ module Aws::RDS
     #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -6969,6 +6938,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance_automated_backup.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceAutomatedBackup AWS API Documentation
     #
@@ -7236,6 +7206,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
+    #   resp.db_snapshot.snapshot_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -8938,6 +8909,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backups[0].db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backups[0].db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backups[0].db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance_automated_backups[0].backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstanceAutomatedBackups AWS API Documentation
     #
@@ -9181,6 +9153,7 @@ module Aws::RDS
     #   resp.db_instances[0].automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instances[0].resume_full_automation_mode_time #=> Time
     #   resp.db_instances[0].custom_iam_instance_profile #=> String
+    #   resp.db_instances[0].backup_target #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10141,6 +10114,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].tag_list[0].key #=> String
     #   resp.db_snapshots[0].tag_list[0].value #=> String
     #   resp.db_snapshots[0].original_snapshot_create_time #=> Time
+    #   resp.db_snapshots[0].snapshot_target #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10774,6 +10748,8 @@ module Aws::RDS
     #     * `complete`
     #
     #     * `failed`
+    #
+    #     * `in_progress`
     #
     #     * `starting`
     #
@@ -12727,7 +12703,7 @@ module Aws::RDS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.preparing.manifest
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.modify
     #
     # @option params [required, String] :engine
     #   The DB engine. The only supported value is `custom-oracle-ee`.
@@ -14628,6 +14604,7 @@ module Aws::RDS
     #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -15063,6 +15040,7 @@ module Aws::RDS
     #   resp.db_snapshot.tag_list[0].key #=> String
     #   resp.db_snapshot.tag_list[0].value #=> String
     #   resp.db_snapshot.original_snapshot_create_time #=> Time
+    #   resp.db_snapshot.snapshot_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -15838,6 +15816,7 @@ module Aws::RDS
     #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -16266,6 +16245,7 @@ module Aws::RDS
     #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -18425,6 +18405,20 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     #
+    # @option params [String] :backup_target
+    #   Specifies where automated backups and manual snapshots are stored for
+    #   the restored DB instance.
+    #
+    #   Possible values are `outposts` (Amazon Web Services Outposts) and
+    #   `region` (Amazon Web Services Region). The default is `region`.
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -18567,6 +18561,7 @@ module Aws::RDS
     #     deletion_protection: false,
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
+    #     backup_target: "String",
     #   })
     #
     # @example Response structure
@@ -18706,6 +18701,7 @@ module Aws::RDS
     #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -19303,6 +19299,7 @@ module Aws::RDS
     #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -19714,6 +19711,20 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     #
+    # @option params [String] :backup_target
+    #   Specifies where automated backups and manual snapshots are stored for
+    #   the restored DB instance.
+    #
+    #   Possible values are `outposts` (Amazon Web Services Outposts) and
+    #   `region` (Amazon Web Services Region). The default is `region`.
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -19862,6 +19873,7 @@ module Aws::RDS
     #     source_db_instance_automated_backups_arn: "String",
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
+    #     backup_target: "String",
     #   })
     #
     # @example Response structure
@@ -20001,6 +20013,7 @@ module Aws::RDS
     #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -20468,6 +20481,7 @@ module Aws::RDS
     #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -20562,6 +20576,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance_automated_backup.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -21053,6 +21068,7 @@ module Aws::RDS
     #   resp.db_instance.automation_mode #=> String, one of "full", "all-paused"
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
+    #   resp.db_instance.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -21119,6 +21135,7 @@ module Aws::RDS
     #   resp.db_instance_automated_backup.db_instance_automated_backups_arn #=> String
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications #=> Array
     #   resp.db_instance_automated_backup.db_instance_automated_backups_replications[0].db_instance_automated_backups_arn #=> String
+    #   resp.db_instance_automated_backup.backup_target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstanceAutomatedBackupsReplication AWS API Documentation
     #
@@ -21142,7 +21159,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

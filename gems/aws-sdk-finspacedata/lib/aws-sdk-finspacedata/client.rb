@@ -338,84 +338,74 @@ module Aws::FinSpaceData
 
     # @!group API Operations
 
-    # Creates a new changeset in a FinSpace dataset.
+    # Creates a new Changeset in a FinSpace Dataset.
+    #
+    # @option params [String] :client_token
+    #   A token used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [required, String] :dataset_id
-    #   The unique identifier for the FinSpace dataset in which the changeset
+    #   The unique identifier for the FinSpace Dataset where the Changeset
     #   will be created.
     #
     # @option params [required, String] :change_type
-    #   Option to indicate how a changeset will be applied to a dataset.
+    #   Option to indicate how a Changeset will be applied to a Dataset.
     #
     #   * `REPLACE` - Changeset will be considered as a replacement to all
-    #     prior loaded changesets.
+    #     prior loaded Changesets.
     #
     #   * `APPEND` - Changeset will be considered as an addition to the end of
-    #     all prior loaded changesets.
+    #     all prior loaded Changesets.
     #
-    # @option params [required, String] :source_type
-    #   Type of the data source from which the files to create the changeset
-    #   will be sourced.
-    #
-    #   * `S3` - Amazon S3.
-    #
-    #   ^
+    #   * `MODIFY` - Changeset is considered as a replacement to a specific
+    #     prior ingested Changeset.
     #
     # @option params [required, Hash<String,String>] :source_params
-    #   Source path from which the files to create the changeset will be
-    #   sourced.
+    #   Options that define the location of the data being ingested.
     #
-    # @option params [String] :format_type
-    #   Format type of the input files being loaded into the changeset.
+    # @option params [required, Hash<String,String>] :format_params
+    #   Options that define the structure of the source file(s) including the
+    #   format type (`formatType`), header row (`withHeader`), data separation
+    #   character (`separator`) and the type of compression (`compression`).
     #
-    # @option params [Hash<String,String>] :format_params
-    #   Options that define the structure of the source file(s).
+    #   `formatType` is a required attribute and can have the following
+    #   values:
     #
-    # @option params [Hash<String,String>] :tags
-    #   Metadata tags to apply to this changeset.
+    #   * `PARQUET` - Parquet source file format.
+    #
+    #   * `CSV` - CSV source file format.
+    #
+    #   * `JSON` - JSON source file format.
+    #
+    #   * `XML` - XML source file format.
+    #
+    #   For example, you could specify the following for `formatParams`\:
     #
     # @return [Types::CreateChangesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateChangesetResponse#changeset #changeset} => Types::ChangesetInfo
+    #   * {Types::CreateChangesetResponse#dataset_id #dataset_id} => String
+    #   * {Types::CreateChangesetResponse#changeset_id #changeset_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_changeset({
-    #     dataset_id: "IdType", # required
+    #     client_token: "ClientToken",
+    #     dataset_id: "DatasetId", # required
     #     change_type: "REPLACE", # required, accepts REPLACE, APPEND, MODIFY
-    #     source_type: "S3", # required, accepts S3
     #     source_params: { # required
-    #       "stringMapKey" => "stringMapValue",
+    #       "StringMapKey" => "StringMapValue",
     #     },
-    #     format_type: "CSV", # accepts CSV, JSON, PARQUET, XML
-    #     format_params: {
-    #       "stringMapKey" => "stringMapValue",
-    #     },
-    #     tags: {
-    #       "stringMapKey" => "stringMapValue",
+    #     format_params: { # required
+    #       "StringMapKey" => "StringMapValue",
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.changeset.id #=> String
-    #   resp.changeset.changeset_arn #=> String
-    #   resp.changeset.dataset_id #=> String
-    #   resp.changeset.change_type #=> String, one of "REPLACE", "APPEND", "MODIFY"
-    #   resp.changeset.source_type #=> String, one of "S3"
-    #   resp.changeset.source_params #=> Hash
-    #   resp.changeset.source_params["stringMapKey"] #=> String
-    #   resp.changeset.format_type #=> String, one of "CSV", "JSON", "PARQUET", "XML"
-    #   resp.changeset.format_params #=> Hash
-    #   resp.changeset.format_params["stringMapKey"] #=> String
-    #   resp.changeset.create_timestamp #=> Time
-    #   resp.changeset.status #=> String, one of "PENDING", "FAILED", "SUCCESS", "RUNNING", "STOP_REQUESTED"
-    #   resp.changeset.error_info.error_message #=> String
-    #   resp.changeset.error_info.error_category #=> String, one of "The_inputs_to_this_request_are_invalid", "Service_limits_have_been_exceeded", "Missing_required_permission_to_perform_this_request", "One_or_more_inputs_to_this_request_were_not_found", "The_system_temporarily_lacks_sufficient_resources_to_process_the_request", "An_internal_error_has_occurred", "Cancelled", "A_user_recoverable_error_has_occurred"
-    #   resp.changeset.changeset_labels #=> Hash
-    #   resp.changeset.changeset_labels["stringMapKey"] #=> String
-    #   resp.changeset.updates_changeset_id #=> String
-    #   resp.changeset.updated_by_changeset_id #=> String
+    #   resp.dataset_id #=> String
+    #   resp.changeset_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreateChangeset AWS API Documentation
     #
@@ -426,13 +416,360 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
-    # Request programmatic credentials to use with Habanero SDK.
+    # Creates a Dataview for a Dataset.
+    #
+    # @option params [String] :client_token
+    #   A token used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique Dataset identifier that is used to create a Dataview.
+    #
+    # @option params [Boolean] :auto_update
+    #   Flag to indicate Dataview should be updated automatically.
+    #
+    # @option params [Array<String>] :sort_columns
+    #   Columns to be used for sorting the data.
+    #
+    # @option params [Array<String>] :partition_columns
+    #   Ordered set of column names used to partition data.
+    #
+    # @option params [Integer] :as_of_timestamp
+    #   Beginning time to use for the Dataview. The value is determined as
+    #   Epoch time in milliseconds. For example, the value for Monday,
+    #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+    #
+    # @option params [required, Types::DataViewDestinationTypeParams] :destination_type_params
+    #   Options that define the destination type for the Dataview.
+    #
+    # @return [Types::CreateDataViewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataViewResponse#dataset_id #dataset_id} => String
+    #   * {Types::CreateDataViewResponse#data_view_id #data_view_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_view({
+    #     client_token: "ClientToken",
+    #     dataset_id: "DatasetId", # required
+    #     auto_update: false,
+    #     sort_columns: ["StringValueLength1to255"],
+    #     partition_columns: ["StringValueLength1to255"],
+    #     as_of_timestamp: 1,
+    #     destination_type_params: { # required
+    #       destination_type: "DataViewDestinationType", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_id #=> String
+    #   resp.data_view_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreateDataView AWS API Documentation
+    #
+    # @overload create_data_view(params = {})
+    # @param [Hash] params ({})
+    def create_data_view(params = {}, options = {})
+      req = build_request(:create_data_view, params)
+      req.send_request(options)
+    end
+
+    # Creates a new FinSpace Dataset.
+    #
+    # @option params [String] :client_token
+    #   A token used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :dataset_title
+    #   Display title for a FinSpace Dataset.
+    #
+    # @option params [required, String] :kind
+    #   The format in which Dataset data is structured.
+    #
+    #   * `TABULAR` - Data is structured in a tabular format.
+    #
+    #   * `NON_TABULAR` - Data is structured in a non-tabular format.
+    #
+    # @option params [required, String] :dataset_description
+    #   Description of a Dataset.
+    #
+    # @option params [Types::DatasetOwnerInfo] :owner_info
+    #   Contact information for a Dataset owner.
+    #
+    # @option params [required, Types::PermissionGroupParams] :permission_group_params
+    #   Permission group parameters for Dataset permissions.
+    #
+    # @option params [required, String] :alias
+    #   The unique resource identifier for a Dataset.
+    #
+    # @option params [Types::SchemaUnion] :schema_definition
+    #   Definition for a schema on a tabular Dataset.
+    #
+    # @return [Types::CreateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDatasetResponse#dataset_id #dataset_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_dataset({
+    #     client_token: "ClientToken",
+    #     dataset_title: "DatasetTitle", # required
+    #     kind: "TABULAR", # required, accepts TABULAR, NON_TABULAR
+    #     dataset_description: "DatasetDescription", # required
+    #     owner_info: {
+    #       name: "OwnerName",
+    #       phone_number: "PhoneNumber",
+    #       email: "Email",
+    #     },
+    #     permission_group_params: { # required
+    #       permission_group_id: "PermissionGroupId",
+    #       dataset_permissions: [
+    #         {
+    #           permission: "StringValueLength1to250",
+    #         },
+    #       ],
+    #     },
+    #     alias: "AliasString", # required
+    #     schema_definition: {
+    #       tabular_schema_config: {
+    #         columns: [
+    #           {
+    #             data_type: "STRING", # accepts STRING, CHAR, INTEGER, TINYINT, SMALLINT, BIGINT, FLOAT, DOUBLE, DATE, DATETIME, BOOLEAN, BINARY
+    #             column_name: "ColumnName",
+    #             column_description: "ColumnDescription",
+    #           },
+    #         ],
+    #         primary_key_columns: ["ColumnName"],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreateDataset AWS API Documentation
+    #
+    # @overload create_dataset(params = {})
+    # @param [Hash] params ({})
+    def create_dataset(params = {}, options = {})
+      req = build_request(:create_dataset, params)
+      req.send_request(options)
+    end
+
+    # Deletes a FinSpace Dataset.
+    #
+    # @option params [String] :client_token
+    #   A token used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier of the Dataset to be deleted.
+    #
+    # @return [Types::DeleteDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDatasetResponse#dataset_id #dataset_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_dataset({
+    #     client_token: "ClientToken",
+    #     dataset_id: "DatasetId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DeleteDataset AWS API Documentation
+    #
+    # @overload delete_dataset(params = {})
+    # @param [Hash] params ({})
+    def delete_dataset(params = {}, options = {})
+      req = build_request(:delete_dataset, params)
+      req.send_request(options)
+    end
+
+    # Get information about a Changeset.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier for the FinSpace Dataset where the Changeset is
+    #   created.
+    #
+    # @option params [required, String] :changeset_id
+    #   The unique identifier of the Changeset for which to get data.
+    #
+    # @return [Types::GetChangesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetChangesetResponse#changeset_id #changeset_id} => String
+    #   * {Types::GetChangesetResponse#changeset_arn #changeset_arn} => String
+    #   * {Types::GetChangesetResponse#dataset_id #dataset_id} => String
+    #   * {Types::GetChangesetResponse#change_type #change_type} => String
+    #   * {Types::GetChangesetResponse#source_params #source_params} => Hash&lt;String,String&gt;
+    #   * {Types::GetChangesetResponse#format_params #format_params} => Hash&lt;String,String&gt;
+    #   * {Types::GetChangesetResponse#create_time #create_time} => Integer
+    #   * {Types::GetChangesetResponse#status #status} => String
+    #   * {Types::GetChangesetResponse#error_info #error_info} => Types::ChangesetErrorInfo
+    #   * {Types::GetChangesetResponse#active_until_timestamp #active_until_timestamp} => Integer
+    #   * {Types::GetChangesetResponse#updates_changeset_id #updates_changeset_id} => String
+    #   * {Types::GetChangesetResponse#updated_by_changeset_id #updated_by_changeset_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_changeset({
+    #     dataset_id: "DatasetId", # required
+    #     changeset_id: "ChangesetId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.changeset_id #=> String
+    #   resp.changeset_arn #=> String
+    #   resp.dataset_id #=> String
+    #   resp.change_type #=> String, one of "REPLACE", "APPEND", "MODIFY"
+    #   resp.source_params #=> Hash
+    #   resp.source_params["StringMapKey"] #=> String
+    #   resp.format_params #=> Hash
+    #   resp.format_params["StringMapKey"] #=> String
+    #   resp.create_time #=> Integer
+    #   resp.status #=> String, one of "PENDING", "FAILED", "SUCCESS", "RUNNING", "STOP_REQUESTED"
+    #   resp.error_info.error_message #=> String
+    #   resp.error_info.error_category #=> String, one of "VALIDATION", "SERVICE_QUOTA_EXCEEDED", "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "THROTTLING", "INTERNAL_SERVICE_EXCEPTION", "CANCELLED", "USER_RECOVERABLE"
+    #   resp.active_until_timestamp #=> Integer
+    #   resp.updates_changeset_id #=> String
+    #   resp.updated_by_changeset_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetChangeset AWS API Documentation
+    #
+    # @overload get_changeset(params = {})
+    # @param [Hash] params ({})
+    def get_changeset(params = {}, options = {})
+      req = build_request(:get_changeset, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a Dataview.
+    #
+    # @option params [required, String] :data_view_id
+    #   The unique identifier for the Dataview.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier for the Dataset used in the Dataview.
+    #
+    # @return [Types::GetDataViewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataViewResponse#auto_update #auto_update} => Boolean
+    #   * {Types::GetDataViewResponse#partition_columns #partition_columns} => Array&lt;String&gt;
+    #   * {Types::GetDataViewResponse#dataset_id #dataset_id} => String
+    #   * {Types::GetDataViewResponse#as_of_timestamp #as_of_timestamp} => Integer
+    #   * {Types::GetDataViewResponse#error_info #error_info} => Types::DataViewErrorInfo
+    #   * {Types::GetDataViewResponse#last_modified_time #last_modified_time} => Integer
+    #   * {Types::GetDataViewResponse#create_time #create_time} => Integer
+    #   * {Types::GetDataViewResponse#sort_columns #sort_columns} => Array&lt;String&gt;
+    #   * {Types::GetDataViewResponse#data_view_id #data_view_id} => String
+    #   * {Types::GetDataViewResponse#data_view_arn #data_view_arn} => String
+    #   * {Types::GetDataViewResponse#destination_type_params #destination_type_params} => Types::DataViewDestinationTypeParams
+    #   * {Types::GetDataViewResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_view({
+    #     data_view_id: "DataViewId", # required
+    #     dataset_id: "DatasetId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.auto_update #=> Boolean
+    #   resp.partition_columns #=> Array
+    #   resp.partition_columns[0] #=> String
+    #   resp.dataset_id #=> String
+    #   resp.as_of_timestamp #=> Integer
+    #   resp.error_info.error_message #=> String
+    #   resp.error_info.error_category #=> String, one of "VALIDATION", "SERVICE_QUOTA_EXCEEDED", "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "THROTTLING", "INTERNAL_SERVICE_EXCEPTION", "CANCELLED", "USER_RECOVERABLE"
+    #   resp.last_modified_time #=> Integer
+    #   resp.create_time #=> Integer
+    #   resp.sort_columns #=> Array
+    #   resp.sort_columns[0] #=> String
+    #   resp.data_view_id #=> String
+    #   resp.data_view_arn #=> String
+    #   resp.destination_type_params.destination_type #=> String
+    #   resp.status #=> String, one of "RUNNING", "STARTING", "FAILED", "CANCELLED", "TIMEOUT", "SUCCESS", "PENDING", "FAILED_CLEANUP_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetDataView AWS API Documentation
+    #
+    # @overload get_data_view(params = {})
+    # @param [Hash] params ({})
+    def get_data_view(params = {}, options = {})
+      req = build_request(:get_data_view, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a Dataset.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier for a Dataset.
+    #
+    # @return [Types::GetDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDatasetResponse#dataset_id #dataset_id} => String
+    #   * {Types::GetDatasetResponse#dataset_arn #dataset_arn} => String
+    #   * {Types::GetDatasetResponse#dataset_title #dataset_title} => String
+    #   * {Types::GetDatasetResponse#kind #kind} => String
+    #   * {Types::GetDatasetResponse#dataset_description #dataset_description} => String
+    #   * {Types::GetDatasetResponse#create_time #create_time} => Integer
+    #   * {Types::GetDatasetResponse#last_modified_time #last_modified_time} => Integer
+    #   * {Types::GetDatasetResponse#schema_definition #schema_definition} => Types::SchemaUnion
+    #   * {Types::GetDatasetResponse#alias #alias} => String
+    #   * {Types::GetDatasetResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_dataset({
+    #     dataset_id: "StringValueLength1to255", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_id #=> String
+    #   resp.dataset_arn #=> String
+    #   resp.dataset_title #=> String
+    #   resp.kind #=> String, one of "TABULAR", "NON_TABULAR"
+    #   resp.dataset_description #=> String
+    #   resp.create_time #=> Integer
+    #   resp.last_modified_time #=> Integer
+    #   resp.schema_definition.tabular_schema_config.columns #=> Array
+    #   resp.schema_definition.tabular_schema_config.columns[0].data_type #=> String, one of "STRING", "CHAR", "INTEGER", "TINYINT", "SMALLINT", "BIGINT", "FLOAT", "DOUBLE", "DATE", "DATETIME", "BOOLEAN", "BINARY"
+    #   resp.schema_definition.tabular_schema_config.columns[0].column_name #=> String
+    #   resp.schema_definition.tabular_schema_config.columns[0].column_description #=> String
+    #   resp.schema_definition.tabular_schema_config.primary_key_columns #=> Array
+    #   resp.schema_definition.tabular_schema_config.primary_key_columns[0] #=> String
+    #   resp.alias #=> String
+    #   resp.status #=> String, one of "PENDING", "FAILED", "SUCCESS", "RUNNING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetDataset AWS API Documentation
+    #
+    # @overload get_dataset(params = {})
+    # @param [Hash] params ({})
+    def get_dataset(params = {}, options = {})
+      req = build_request(:get_dataset, params)
+      req.send_request(options)
+    end
+
+    # Request programmatic credentials to use with FinSpace SDK.
     #
     # @option params [Integer] :duration_in_minutes
     #   The time duration in which the credentials remain valid.
     #
     # @option params [required, String] :environment_id
-    #   The habanero environment identifier.
+    #   The FinSpace environment identifier.
     #
     # @return [Types::GetProgrammaticAccessCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -462,8 +799,9 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
-    # A temporary Amazon S3 location to copy your files from a source
-    # location to stage or use as a scratch space in Habanero notebook.
+    # A temporary Amazon S3 location, where you can copy your files from a
+    # source location to stage or use as a scratch space in FinSpace
+    # notebook.
     #
     # @option params [String] :location_type
     #   Specify the type of the working location.
@@ -473,7 +811,7 @@ module Aws::FinSpaceData
     #     SageMaker studio.
     #
     #   * `INGESTION` - Use the Amazon S3 location as a staging location to
-    #     copy your data content and then use the location with the changeset
+    #     copy your data content and then use the location with the Changeset
     #     creation operation.
     #
     # @return [Types::GetWorkingLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -503,6 +841,294 @@ module Aws::FinSpaceData
       req.send_request(options)
     end
 
+    # Lists the FinSpace Changesets for a Dataset.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier for the FinSpace Dataset to which the Changeset
+    #   belongs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results per page.
+    #
+    # @option params [String] :next_token
+    #   A token indicating where a results page should begin.
+    #
+    # @return [Types::ListChangesetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListChangesetsResponse#changesets #changesets} => Array&lt;Types::ChangesetSummary&gt;
+    #   * {Types::ListChangesetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_changesets({
+    #     dataset_id: "DatasetId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.changesets #=> Array
+    #   resp.changesets[0].changeset_id #=> String
+    #   resp.changesets[0].changeset_arn #=> String
+    #   resp.changesets[0].dataset_id #=> String
+    #   resp.changesets[0].change_type #=> String, one of "REPLACE", "APPEND", "MODIFY"
+    #   resp.changesets[0].source_params #=> Hash
+    #   resp.changesets[0].source_params["StringMapKey"] #=> String
+    #   resp.changesets[0].format_params #=> Hash
+    #   resp.changesets[0].format_params["StringMapKey"] #=> String
+    #   resp.changesets[0].create_time #=> Integer
+    #   resp.changesets[0].status #=> String, one of "PENDING", "FAILED", "SUCCESS", "RUNNING", "STOP_REQUESTED"
+    #   resp.changesets[0].error_info.error_message #=> String
+    #   resp.changesets[0].error_info.error_category #=> String, one of "VALIDATION", "SERVICE_QUOTA_EXCEEDED", "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "THROTTLING", "INTERNAL_SERVICE_EXCEPTION", "CANCELLED", "USER_RECOVERABLE"
+    #   resp.changesets[0].active_until_timestamp #=> Integer
+    #   resp.changesets[0].updates_changeset_id #=> String
+    #   resp.changesets[0].updated_by_changeset_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListChangesets AWS API Documentation
+    #
+    # @overload list_changesets(params = {})
+    # @param [Hash] params ({})
+    def list_changesets(params = {}, options = {})
+      req = build_request(:list_changesets, params)
+      req.send_request(options)
+    end
+
+    # Lists all available Dataviews for a Dataset.
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier of the Dataset for which to retrieve Dataviews.
+    #
+    # @option params [String] :next_token
+    #   A token indicating where a results page should begin.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results per page.
+    #
+    # @return [Types::ListDataViewsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataViewsResponse#next_token #next_token} => String
+    #   * {Types::ListDataViewsResponse#data_views #data_views} => Array&lt;Types::DataViewSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_views({
+    #     dataset_id: "DatasetId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.data_views #=> Array
+    #   resp.data_views[0].data_view_id #=> String
+    #   resp.data_views[0].data_view_arn #=> String
+    #   resp.data_views[0].dataset_id #=> String
+    #   resp.data_views[0].as_of_timestamp #=> Integer
+    #   resp.data_views[0].partition_columns #=> Array
+    #   resp.data_views[0].partition_columns[0] #=> String
+    #   resp.data_views[0].sort_columns #=> Array
+    #   resp.data_views[0].sort_columns[0] #=> String
+    #   resp.data_views[0].status #=> String, one of "RUNNING", "STARTING", "FAILED", "CANCELLED", "TIMEOUT", "SUCCESS", "PENDING", "FAILED_CLEANUP_FAILED"
+    #   resp.data_views[0].error_info.error_message #=> String
+    #   resp.data_views[0].error_info.error_category #=> String, one of "VALIDATION", "SERVICE_QUOTA_EXCEEDED", "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "THROTTLING", "INTERNAL_SERVICE_EXCEPTION", "CANCELLED", "USER_RECOVERABLE"
+    #   resp.data_views[0].destination_type_properties.destination_type #=> String
+    #   resp.data_views[0].auto_update #=> Boolean
+    #   resp.data_views[0].create_time #=> Integer
+    #   resp.data_views[0].last_modified_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListDataViews AWS API Documentation
+    #
+    # @overload list_data_views(params = {})
+    # @param [Hash] params ({})
+    def list_data_views(params = {}, options = {})
+      req = build_request(:list_data_views, params)
+      req.send_request(options)
+    end
+
+    # Lists all of the active Datasets that a user has access to.
+    #
+    # @option params [String] :next_token
+    #   A token indicating where a results page should begin.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results per page.
+    #
+    # @return [Types::ListDatasetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDatasetsResponse#datasets #datasets} => Array&lt;Types::Dataset&gt;
+    #   * {Types::ListDatasetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_datasets({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.datasets #=> Array
+    #   resp.datasets[0].dataset_id #=> String
+    #   resp.datasets[0].dataset_arn #=> String
+    #   resp.datasets[0].dataset_title #=> String
+    #   resp.datasets[0].kind #=> String, one of "TABULAR", "NON_TABULAR"
+    #   resp.datasets[0].dataset_description #=> String
+    #   resp.datasets[0].owner_info.name #=> String
+    #   resp.datasets[0].owner_info.phone_number #=> String
+    #   resp.datasets[0].owner_info.email #=> String
+    #   resp.datasets[0].create_time #=> Integer
+    #   resp.datasets[0].last_modified_time #=> Integer
+    #   resp.datasets[0].schema_definition.tabular_schema_config.columns #=> Array
+    #   resp.datasets[0].schema_definition.tabular_schema_config.columns[0].data_type #=> String, one of "STRING", "CHAR", "INTEGER", "TINYINT", "SMALLINT", "BIGINT", "FLOAT", "DOUBLE", "DATE", "DATETIME", "BOOLEAN", "BINARY"
+    #   resp.datasets[0].schema_definition.tabular_schema_config.columns[0].column_name #=> String
+    #   resp.datasets[0].schema_definition.tabular_schema_config.columns[0].column_description #=> String
+    #   resp.datasets[0].schema_definition.tabular_schema_config.primary_key_columns #=> Array
+    #   resp.datasets[0].schema_definition.tabular_schema_config.primary_key_columns[0] #=> String
+    #   resp.datasets[0].alias #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListDatasets AWS API Documentation
+    #
+    # @overload list_datasets(params = {})
+    # @param [Hash] params ({})
+    def list_datasets(params = {}, options = {})
+      req = build_request(:list_datasets, params)
+      req.send_request(options)
+    end
+
+    # Updates a FinSpace Changeset.
+    #
+    # @option params [String] :client_token
+    #   A token used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier for the FinSpace Dataset in which the Changeset
+    #   is created.
+    #
+    # @option params [required, String] :changeset_id
+    #   The unique identifier for the Changeset to update.
+    #
+    # @option params [required, Hash<String,String>] :source_params
+    #   Options that define the location of the data being ingested.
+    #
+    # @option params [required, Hash<String,String>] :format_params
+    #   Options that define the structure of the source file(s).
+    #
+    # @return [Types::UpdateChangesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateChangesetResponse#changeset_id #changeset_id} => String
+    #   * {Types::UpdateChangesetResponse#dataset_id #dataset_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_changeset({
+    #     client_token: "ClientToken",
+    #     dataset_id: "DatasetId", # required
+    #     changeset_id: "ChangesetId", # required
+    #     source_params: { # required
+    #       "StringMapKey" => "StringMapValue",
+    #     },
+    #     format_params: { # required
+    #       "StringMapKey" => "StringMapValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.changeset_id #=> String
+    #   resp.dataset_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/UpdateChangeset AWS API Documentation
+    #
+    # @overload update_changeset(params = {})
+    # @param [Hash] params ({})
+    def update_changeset(params = {}, options = {})
+      req = build_request(:update_changeset, params)
+      req.send_request(options)
+    end
+
+    # Updates a FinSpace Dataset.
+    #
+    # @option params [String] :client_token
+    #   A token used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :dataset_id
+    #   The unique identifier for the Dataset to update.
+    #
+    # @option params [required, String] :dataset_title
+    #   A display title for the Dataset.
+    #
+    # @option params [required, String] :kind
+    #   The format in which the Dataset data is structured.
+    #
+    #   * `TABULAR` - Data is structured in a tabular format.
+    #
+    #   * `NON_TABULAR` - Data is structured in a non-tabular format.
+    #
+    # @option params [String] :dataset_description
+    #   A description for the Dataset.
+    #
+    # @option params [required, String] :alias
+    #   The unique resource identifier for a Dataset.
+    #
+    # @option params [Types::SchemaUnion] :schema_definition
+    #   Definition for a schema on a tabular Dataset.
+    #
+    # @return [Types::UpdateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDatasetResponse#dataset_id #dataset_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_dataset({
+    #     client_token: "ClientToken",
+    #     dataset_id: "DatasetId", # required
+    #     dataset_title: "DatasetTitle", # required
+    #     kind: "TABULAR", # required, accepts TABULAR, NON_TABULAR
+    #     dataset_description: "DatasetDescription",
+    #     alias: "AliasString", # required
+    #     schema_definition: {
+    #       tabular_schema_config: {
+    #         columns: [
+    #           {
+    #             data_type: "STRING", # accepts STRING, CHAR, INTEGER, TINYINT, SMALLINT, BIGINT, FLOAT, DOUBLE, DATE, DATETIME, BOOLEAN, BINARY
+    #             column_name: "ColumnName",
+    #             column_description: "ColumnDescription",
+    #           },
+    #         ],
+    #         primary_key_columns: ["ColumnName"],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dataset_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/UpdateDataset AWS API Documentation
+    #
+    # @overload update_dataset(params = {})
+    # @param [Hash] params ({})
+    def update_dataset(params = {}, options = {})
+      req = build_request(:update_dataset, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -516,7 +1142,7 @@ module Aws::FinSpaceData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspacedata'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

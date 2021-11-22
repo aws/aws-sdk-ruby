@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2021-11-22)
+------------------
+
+* Feature - Added new APIs for enabling Echo Reduction with Voice Focus.
+
 1.2.0 (2021-11-18)
 ------------------
 

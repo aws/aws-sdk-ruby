@@ -370,6 +370,38 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # A container for enabling Amazon CloudWatch publishing for S3 Storage
+    # Lens metrics.
+    #
+    # For more information about publishing S3 Storage Lens metrics to
+    # CloudWatch, see [Monitor S3 Storage Lens metrics in CloudWatch][1] in
+    # the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_view_metrics_cloudwatch.html
+    #
+    # @note When making an API call, you may pass CloudWatchMetrics
+    #   data as a hash:
+    #
+    #       {
+    #         is_enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] is_enabled
+    #   A container that indicates whether CloudWatch publishing for S3
+    #   Storage Lens metrics is enabled. A value of `true` indicates that
+    #   CloudWatch publishing for S3 Storage Lens metrics is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CloudWatchMetrics AWS API Documentation
+    #
+    class CloudWatchMetrics < Struct.new(
+      :is_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateAccessPointForObjectLambdaRequest
     #   data as a hash:
     #
@@ -4932,7 +4964,7 @@ module Aws::S3Control
     #             regions: ["S3AWSRegion"],
     #           },
     #           data_export: {
-    #             s3_bucket_destination: { # required
+    #             s3_bucket_destination: {
     #               format: "CSV", # required, accepts CSV, Parquet
     #               output_schema_version: "V_1", # required, accepts V_1
     #               account_id: "AccountId", # required
@@ -4945,6 +4977,9 @@ module Aws::S3Control
     #                   key_id: "SSEKMSKeyId", # required
     #                 },
     #               },
+    #             },
+    #             cloud_watch_metrics: {
+    #               is_enabled: false, # required
     #             },
     #           },
     #           is_enabled: false, # required
@@ -5980,7 +6015,7 @@ module Aws::S3Control
     #           regions: ["S3AWSRegion"],
     #         },
     #         data_export: {
-    #           s3_bucket_destination: { # required
+    #           s3_bucket_destination: {
     #             format: "CSV", # required, accepts CSV, Parquet
     #             output_schema_version: "V_1", # required, accepts V_1
     #             account_id: "AccountId", # required
@@ -5993,6 +6028,9 @@ module Aws::S3Control
     #                 key_id: "SSEKMSKeyId", # required
     #               },
     #             },
+    #           },
+    #           cloud_watch_metrics: {
+    #             is_enabled: false, # required
     #           },
     #         },
     #         is_enabled: false, # required
@@ -6067,7 +6105,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         s3_bucket_destination: { # required
+    #         s3_bucket_destination: {
     #           format: "CSV", # required, accepts CSV, Parquet
     #           output_schema_version: "V_1", # required, accepts V_1
     #           account_id: "AccountId", # required
@@ -6081,6 +6119,9 @@ module Aws::S3Control
     #             },
     #           },
     #         },
+    #         cloud_watch_metrics: {
+    #           is_enabled: false, # required
+    #         },
     #       }
     #
     # @!attribute [rw] s3_bucket_destination
@@ -6093,10 +6134,16 @@ module Aws::S3Control
     #    </note>
     #   @return [Types::S3BucketDestination]
     #
+    # @!attribute [rw] cloud_watch_metrics
+    #   A container for enabling Amazon CloudWatch publishing for S3 Storage
+    #   Lens metrics.
+    #   @return [Types::CloudWatchMetrics]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/StorageLensDataExport AWS API Documentation
     #
     class StorageLensDataExport < Struct.new(
-      :s3_bucket_destination)
+      :s3_bucket_destination,
+      :cloud_watch_metrics)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -890,6 +890,7 @@ module Aws::DatabaseMigrationService
     #       ignore_header_rows: 1,
     #       max_file_size: 1,
     #       rfc_4180: false,
+    #       date_partition_timezone: "String",
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -1203,6 +1204,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.ignore_header_rows #=> Integer
     #   resp.endpoint.s3_settings.max_file_size #=> Integer
     #   resp.endpoint.s3_settings.rfc_4180 #=> Boolean
+    #   resp.endpoint.s3_settings.date_partition_timezone #=> String
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -2357,6 +2359,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.ignore_header_rows #=> Integer
     #   resp.endpoint.s3_settings.max_file_size #=> Integer
     #   resp.endpoint.s3_settings.rfc_4180 #=> Boolean
+    #   resp.endpoint.s3_settings.date_partition_timezone #=> String
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -3538,6 +3541,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].s3_settings.ignore_header_rows #=> Integer
     #   resp.endpoints[0].s3_settings.max_file_size #=> Integer
     #   resp.endpoints[0].s3_settings.rfc_4180 #=> Boolean
+    #   resp.endpoints[0].s3_settings.date_partition_timezone #=> String
     #   resp.endpoints[0].dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].dms_transfer_settings.bucket_name #=> String
     #   resp.endpoints[0].mongo_db_settings.username #=> String
@@ -5464,6 +5468,7 @@ module Aws::DatabaseMigrationService
     #       ignore_header_rows: 1,
     #       max_file_size: 1,
     #       rfc_4180: false,
+    #       date_partition_timezone: "String",
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -5777,6 +5782,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.ignore_header_rows #=> Integer
     #   resp.endpoint.s3_settings.max_file_size #=> Integer
     #   resp.endpoint.s3_settings.rfc_4180 #=> Boolean
+    #   resp.endpoint.s3_settings.date_partition_timezone #=> String
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -6976,6 +6982,23 @@ module Aws::DatabaseMigrationService
     # Starts the replication task assessment for unsupported data types in
     # the source database.
     #
+    # You can only use this operation for a task if the following conditions
+    # are true:
+    #
+    # * The task must be in the `stopped` state.
+    #
+    # * The task must have successful connections to the source and target.
+    #
+    # If either of these conditions are not met, an
+    # `InvalidResourceStateFault` error will result.
+    #
+    # For information about DMS task assessments, see [Creating a task
+    # assessment report][1] in the *Database Migration Service User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html
+    #
     # @option params [required, String] :replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
     #
@@ -7300,7 +7323,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

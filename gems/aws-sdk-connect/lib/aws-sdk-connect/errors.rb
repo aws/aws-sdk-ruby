@@ -32,8 +32,10 @@ module Aws::Connect
   # * {ContactNotFoundException}
   # * {DestinationNotAllowedException}
   # * {DuplicateResourceException}
+  # * {IdempotencyException}
   # * {InternalServiceException}
   # * {InvalidContactFlowException}
+  # * {InvalidContactFlowModuleException}
   # * {InvalidParameterException}
   # * {InvalidRequestException}
   # * {LimitExceededException}
@@ -126,6 +128,21 @@ module Aws::Connect
       end
     end
 
+    class IdempotencyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::IdempotencyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class InternalServiceException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -146,6 +163,21 @@ module Aws::Connect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Connect::Types::InvalidContactFlowException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def problems
+        @data[:problems]
+      end
+    end
+
+    class InvalidContactFlowModuleException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::InvalidContactFlowModuleException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

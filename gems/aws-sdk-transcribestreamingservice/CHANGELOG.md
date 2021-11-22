@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-11-22)
+------------------
+
+* Feature - This release adds language identification support for streaming transcription.
+
 1.36.0 (2021-11-04)
 ------------------
 

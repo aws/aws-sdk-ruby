@@ -43,6 +43,29 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
+    # An optional category of meeting features that contains audio-specific
+    # configurations, such as operating parameters for Amazon Voice Focus.
+    #
+    # @note When making an API call, you may pass AudioFeatures
+    #   data as a hash:
+    #
+    #       {
+    #         echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
+    #       }
+    #
+    # @!attribute [rw] echo_reduction
+    #   Makes echo reduction available to clients who connect to the
+    #   meeting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/AudioFeatures AWS API Documentation
+    #
+    class AudioFeatures < Struct.new(
+      :echo_reduction)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input parameters don't match the service's restrictions.
     #
     # @!attribute [rw] code
@@ -216,6 +239,11 @@ module Aws::ChimeSDKMeetings
     #           sns_topic_arn: "Arn",
     #           sqs_queue_arn: "Arn",
     #         },
+    #         meeting_features: {
+    #           audio: {
+    #             echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -249,6 +277,11 @@ module Aws::ChimeSDKMeetings
     #   meeting and attendee events occur.
     #   @return [Types::NotificationsConfiguration]
     #
+    # @!attribute [rw] meeting_features
+    #   Lists the audio and video features enabled for a meeting, such as
+    #   echo reduction.
+    #   @return [Types::MeetingFeaturesConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeetingRequest AWS API Documentation
     #
     class CreateMeetingRequest < Struct.new(
@@ -256,7 +289,8 @@ module Aws::ChimeSDKMeetings
       :media_region,
       :meeting_host_id,
       :external_meeting_id,
-      :notifications_configuration)
+      :notifications_configuration,
+      :meeting_features)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -282,6 +316,11 @@ module Aws::ChimeSDKMeetings
     #         media_region: "MediaRegion", # required
     #         meeting_host_id: "ExternalUserId",
     #         external_meeting_id: "ExternalMeetingId", # required
+    #         meeting_features: {
+    #           audio: {
+    #             echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
+    #           },
+    #         },
     #         notifications_configuration: {
     #           lambda_function_arn: "Arn",
     #           sns_topic_arn: "Arn",
@@ -314,6 +353,11 @@ module Aws::ChimeSDKMeetings
     #   The external meeting ID.
     #   @return [String]
     #
+    # @!attribute [rw] meeting_features
+    #   Lists the audio and video features enabled for a meeting, such as
+    #   echo reduction.
+    #   @return [Types::MeetingFeaturesConfiguration]
+    #
     # @!attribute [rw] notifications_configuration
     #   The configuration for resource targets to receive notifications when
     #   meeting and attendee events occur.
@@ -330,6 +374,7 @@ module Aws::ChimeSDKMeetings
       :media_region,
       :meeting_host_id,
       :external_meeting_id,
+      :meeting_features,
       :notifications_configuration,
       :attendees)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
@@ -512,8 +557,8 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     #
     # @!attribute [rw] content_identification_type
-    #   Set this field to `PII` to identify personal health information in
-    #   the transcription output.
+    #   Set this field to `PII` to identify personally identifiable
+    #   information in the transcription output.
     #   @return [String]
     #
     # @!attribute [rw] content_redaction_type
@@ -521,9 +566,9 @@ module Aws::ChimeSDKMeetings
     #   information in the transcription output. Content redaction is
     #   performed only upon complete transcription of the audio segments.
     #
-    #   You can’t set both `ContentRedactionType` and
-    #   `ContentIdentificationType` in the same request. If you set both,
-    #   your request returns a `BadRequestException`.
+    #   You can’t set `ContentRedactionType` and `ContentIdentificationType`
+    #   in the same request. If you set both, your request returns a
+    #   `BadRequestException`.
     #   @return [String]
     #
     # @!attribute [rw] pii_entity_types
@@ -531,7 +576,7 @@ module Aws::ChimeSDKMeetings
     #   specify entity types, you must enable `ContentIdentificationType` or
     #   `ContentRedactionType`.
     #
-    #   `PIIEntityTypes` must be comma-separated. The available values are:
+    #   PIIEntityTypes must be comma-separated. The available values are:
     #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING, CREDIT_DEBIT_NUMBER`,
     #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`,
     #   `ADDRESS`, `NAME`, `PHONE`, `SSN`, and `ALL`.
@@ -800,6 +845,10 @@ module Aws::ChimeSDKMeetings
     #   The media placement for the meeting.
     #   @return [Types::MediaPlacement]
     #
+    # @!attribute [rw] meeting_features
+    #   The features available to a meeting, such as Amazon Voice Focus.
+    #   @return [Types::MeetingFeaturesConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/Meeting AWS API Documentation
     #
     class Meeting < Struct.new(
@@ -807,8 +856,33 @@ module Aws::ChimeSDKMeetings
       :meeting_host_id,
       :external_meeting_id,
       :media_region,
-      :media_placement)
+      :media_placement,
+      :meeting_features)
       SENSITIVE = [:meeting_host_id, :external_meeting_id]
+      include Aws::Structure
+    end
+
+    # The configuration settings of the features available to a meeting.
+    #
+    # @note When making an API call, you may pass MeetingFeaturesConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         audio: {
+    #           echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
+    #         },
+    #       }
+    #
+    # @!attribute [rw] audio
+    #   The configuration settings for the audio features available to a
+    #   meeting.
+    #   @return [Types::AudioFeatures]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/MeetingFeaturesConfiguration AWS API Documentation
+    #
+    class MeetingFeaturesConfiguration < Struct.new(
+      :audio)
+      SENSITIVE = []
       include Aws::Structure
     end
 

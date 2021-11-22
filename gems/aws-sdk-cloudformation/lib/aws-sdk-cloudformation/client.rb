@@ -3828,24 +3828,33 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Import existing stacks into a new stack sets. Use the stack import
-    # operation to import up to 10 stacks into a new stack set in the same
-    # account as the source stack or in a different administrator account
-    # and Region, by specifying the stack ID of the stack you intend to
-    # import.
-    #
-    # <note markdown="1"> `ImportStacksToStackSet` is only supported by self-managed
-    # permissions.
-    #
-    #  </note>
+    # Use the stack import operations for self-managed or service-managed
+    # StackSets. For self-managed StackSets, the import operation can import
+    # stacks in the administrator account or in different target accounts
+    # and Amazon Web Services Regions. For service-managed StackSets, the
+    # import operation can import any stack in the same AWS Organizations as
+    # the management account. The import operation can import up to 10
+    # stacks using inline stack IDs or up to 10,000 stacks using an Amazon
+    # S3 object.
     #
     # @option params [required, String] :stack_set_name
     #   The name of the stack set. The name must be unique in the Region where
     #   you create your stack set.
     #
-    # @option params [required, Array<String>] :stack_ids
+    # @option params [Array<String>] :stack_ids
     #   The IDs of the stacks you are importing into a stack set. You import
     #   up to 10 stacks per stack set at a time.
+    #
+    #   Specify either `StackIds` or `StackIdsUrl`.
+    #
+    # @option params [String] :stack_ids_url
+    #   The Amazon S3 URL which contains list of stack ids to be inputted.
+    #
+    #   Specify either `StackIds` or `StackIdsUrl`.
+    #
+    # @option params [Array<String>] :organizational_unit_ids
+    #   The list of OU ID’s to which the stacks being imported has to be
+    #   mapped as deployment target.
     #
     # @option params [Types::StackSetOperationPreferences] :operation_preferences
     #   The user-specified preferences for how CloudFormation performs a stack
@@ -3880,7 +3889,9 @@ module Aws::CloudFormation
     #
     #   resp = client.import_stacks_to_stack_set({
     #     stack_set_name: "StackSetNameOrId", # required
-    #     stack_ids: ["StackId"], # required
+    #     stack_ids: ["StackId"],
+    #     stack_ids_url: "StackIdsUrl",
+    #     organizational_unit_ids: ["OrganizationalUnitId"],
     #     operation_preferences: {
     #       region_concurrency_type: "SEQUENTIAL", # accepts SEQUENTIAL, PARALLEL
     #       region_order: ["Region"],
@@ -6665,7 +6676,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

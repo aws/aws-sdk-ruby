@@ -258,6 +258,7 @@ module Aws::QuickSight
     EntryPath = Shapes::StringShape.new(name: 'EntryPath')
     EntryPoint = Shapes::StringShape.new(name: 'EntryPoint')
     ErrorInfo = Shapes::StructureShape.new(name: 'ErrorInfo')
+    ExasolParameters = Shapes::StructureShape.new(name: 'ExasolParameters')
     ExceptionResourceType = Shapes::StringShape.new(name: 'ExceptionResourceType')
     ExportToCSVOption = Shapes::StructureShape.new(name: 'ExportToCSVOption')
     Expression = Shapes::StringShape.new(name: 'Expression')
@@ -335,6 +336,7 @@ module Aws::QuickSight
     JoinKeyProperties = Shapes::StructureShape.new(name: 'JoinKeyProperties')
     JoinType = Shapes::StringShape.new(name: 'JoinType')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    LinkSharingConfiguration = Shapes::StructureShape.new(name: 'LinkSharingConfiguration')
     ListAnalysesRequest = Shapes::StructureShape.new(name: 'ListAnalysesRequest')
     ListAnalysesResponse = Shapes::StructureShape.new(name: 'ListAnalysesResponse')
     ListDashboardVersionsRequest = Shapes::StructureShape.new(name: 'ListDashboardVersionsRequest')
@@ -578,6 +580,7 @@ module Aws::QuickSight
     UpdateIAMPolicyAssignmentResponse = Shapes::StructureShape.new(name: 'UpdateIAMPolicyAssignmentResponse')
     UpdateIpRestrictionRequest = Shapes::StructureShape.new(name: 'UpdateIpRestrictionRequest')
     UpdateIpRestrictionResponse = Shapes::StructureShape.new(name: 'UpdateIpRestrictionResponse')
+    UpdateLinkPermissionList = Shapes::ListShape.new(name: 'UpdateLinkPermissionList')
     UpdateResourcePermissionList = Shapes::ListShape.new(name: 'UpdateResourcePermissionList')
     UpdateTemplateAliasRequest = Shapes::StructureShape.new(name: 'UpdateTemplateAliasRequest')
     UpdateTemplateAliasResponse = Shapes::StructureShape.new(name: 'UpdateTemplateAliasResponse')
@@ -611,6 +614,7 @@ module Aws::QuickSight
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AccountCustomization.add_member(:default_theme, Shapes::ShapeRef.new(shape: Arn, location_name: "DefaultTheme"))
+    AccountCustomization.add_member(:default_email_customization_template, Shapes::ShapeRef.new(shape: Arn, location_name: "DefaultEmailCustomizationTemplate"))
     AccountCustomization.struct_class = Types::AccountCustomization
 
     AccountSettings.add_member(:account_name, Shapes::ShapeRef.new(shape: String, location_name: "AccountName"))
@@ -1212,6 +1216,7 @@ module Aws::QuickSight
     DataSourceParameters.add_member(:teradata_parameters, Shapes::ShapeRef.new(shape: TeradataParameters, location_name: "TeradataParameters"))
     DataSourceParameters.add_member(:twitter_parameters, Shapes::ShapeRef.new(shape: TwitterParameters, location_name: "TwitterParameters"))
     DataSourceParameters.add_member(:amazon_open_search_parameters, Shapes::ShapeRef.new(shape: AmazonOpenSearchParameters, location_name: "AmazonOpenSearchParameters"))
+    DataSourceParameters.add_member(:exasol_parameters, Shapes::ShapeRef.new(shape: ExasolParameters, location_name: "ExasolParameters"))
     DataSourceParameters.struct_class = Types::DataSourceParameters
 
     DataSourceParametersList.member = Shapes::ShapeRef.new(shape: DataSourceParameters)
@@ -1451,6 +1456,7 @@ module Aws::QuickSight
     DescribeDashboardPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
     DescribeDashboardPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     DescribeDashboardPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeDashboardPermissionsResponse.add_member(:link_sharing_configuration, Shapes::ShapeRef.new(shape: LinkSharingConfiguration, location_name: "LinkSharingConfiguration"))
     DescribeDashboardPermissionsResponse.struct_class = Types::DescribeDashboardPermissionsResponse
 
     DescribeDashboardRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -1668,6 +1674,10 @@ module Aws::QuickSight
     ErrorInfo.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ErrorInfo.struct_class = Types::ErrorInfo
 
+    ExasolParameters.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
+    ExasolParameters.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
+    ExasolParameters.struct_class = Types::ExasolParameters
+
     ExportToCSVOption.add_member(:availability_status, Shapes::ShapeRef.new(shape: DashboardBehavior, location_name: "AvailabilityStatus"))
     ExportToCSVOption.struct_class = Types::ExportToCSVOption
 
@@ -1872,6 +1882,9 @@ module Aws::QuickSight
     LimitExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ExceptionResourceType, location_name: "ResourceType"))
     LimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    LinkSharingConfiguration.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
+    LinkSharingConfiguration.struct_class = Types::LinkSharingConfiguration
 
     ListAnalysesRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     ListAnalysesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
@@ -2705,6 +2718,8 @@ module Aws::QuickSight
     UpdateDashboardPermissionsRequest.add_member(:dashboard_id, Shapes::ShapeRef.new(shape: RestrictiveResourceId, required: true, location: "uri", location_name: "DashboardId"))
     UpdateDashboardPermissionsRequest.add_member(:grant_permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "GrantPermissions"))
     UpdateDashboardPermissionsRequest.add_member(:revoke_permissions, Shapes::ShapeRef.new(shape: UpdateResourcePermissionList, location_name: "RevokePermissions"))
+    UpdateDashboardPermissionsRequest.add_member(:grant_link_permissions, Shapes::ShapeRef.new(shape: UpdateLinkPermissionList, location_name: "GrantLinkPermissions"))
+    UpdateDashboardPermissionsRequest.add_member(:revoke_link_permissions, Shapes::ShapeRef.new(shape: UpdateLinkPermissionList, location_name: "RevokeLinkPermissions"))
     UpdateDashboardPermissionsRequest.struct_class = Types::UpdateDashboardPermissionsRequest
 
     UpdateDashboardPermissionsResponse.add_member(:dashboard_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DashboardArn"))
@@ -2712,6 +2727,7 @@ module Aws::QuickSight
     UpdateDashboardPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourcePermissionList, location_name: "Permissions"))
     UpdateDashboardPermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateDashboardPermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateDashboardPermissionsResponse.add_member(:link_sharing_configuration, Shapes::ShapeRef.new(shape: LinkSharingConfiguration, location_name: "LinkSharingConfiguration"))
     UpdateDashboardPermissionsResponse.struct_class = Types::UpdateDashboardPermissionsResponse
 
     UpdateDashboardPublishedVersionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -2866,6 +2882,8 @@ module Aws::QuickSight
     UpdateIpRestrictionResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     UpdateIpRestrictionResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
     UpdateIpRestrictionResponse.struct_class = Types::UpdateIpRestrictionResponse
+
+    UpdateLinkPermissionList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
 
     UpdateResourcePermissionList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
 
@@ -3028,6 +3046,7 @@ module Aws::QuickSight
         o.input = Shapes::ShapeRef.new(shape: CreateAccountCustomizationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateAccountCustomizationResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -3284,6 +3303,7 @@ module Aws::QuickSight
         o.input = Shapes::ShapeRef.new(shape: DeleteAccountCustomizationRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteAccountCustomizationResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -4446,6 +4466,7 @@ module Aws::QuickSight
         o.input = Shapes::ShapeRef.new(shape: UpdateAccountCustomizationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAccountCustomizationResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

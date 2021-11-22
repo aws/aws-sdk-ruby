@@ -645,6 +645,9 @@ module Aws::SSM
     #   AddTagsToResource. For information about how to remove tags from your
     #   managed instances, see RemoveTagsFromResource.
     #
+    # @option params [Array<Types::RegistrationMetadataItem>] :registration_metadata
+    #   Reserved for internal use.
+    #
     # @return [Types::CreateActivationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateActivationResult#activation_id #activation_id} => String
@@ -662,6 +665,12 @@ module Aws::SSM
     #       {
     #         key: "TagKey", # required
     #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     registration_metadata: [
+    #       {
+    #         key: "RegistrationMetadataKey", # required
+    #         value: "RegistrationMetadataValue", # required
     #       },
     #     ],
     #   })
@@ -8277,12 +8286,12 @@ module Aws::SSM
     #   *parameter* doesn't affect the expiration date and time. When the
     #   expiration time is reached, Parameter Store deletes the parameter.
     #
-    #   ExpirationNotification: This policy triggers an event in Amazon
+    #   ExpirationNotification: This policy initiates an event in Amazon
     #   CloudWatch Events that notifies you about the expiration. By using
     #   this policy, you can receive notification before or after the
     #   expiration time is reached, in units of days or hours.
     #
-    #   NoChangeNotification: This policy triggers a CloudWatch Events event
+    #   NoChangeNotification: This policy initiates a CloudWatch Events event
     #   if a parameter hasn't been modified for a specified period of time.
     #   This policy type is useful when, for example, a secret needs to be
     #   changed within a period of time, but it hasn't been changed.
@@ -11390,7 +11399,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.123.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

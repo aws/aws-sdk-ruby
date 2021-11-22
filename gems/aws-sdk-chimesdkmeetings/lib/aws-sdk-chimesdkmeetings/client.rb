@@ -465,6 +465,10 @@ module Aws::ChimeSDKMeetings
     #   The configuration for resource targets to receive notifications when
     #   meeting and attendee events occur.
     #
+    # @option params [Types::MeetingFeaturesConfiguration] :meeting_features
+    #   Lists the audio and video features enabled for a meeting, such as echo
+    #   reduction.
+    #
     # @return [Types::CreateMeetingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMeetingResponse#meeting #meeting} => Types::Meeting
@@ -480,6 +484,11 @@ module Aws::ChimeSDKMeetings
     #       lambda_function_arn: "Arn",
     #       sns_topic_arn: "Arn",
     #       sqs_queue_arn: "Arn",
+    #     },
+    #     meeting_features: {
+    #       audio: {
+    #         echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
+    #       },
     #     },
     #   })
     #
@@ -497,6 +506,7 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.screen_viewing_url #=> String
     #   resp.meeting.media_placement.screen_sharing_url #=> String
     #   resp.meeting.media_placement.event_ingestion_url #=> String
+    #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeeting AWS API Documentation
     #
@@ -534,6 +544,10 @@ module Aws::ChimeSDKMeetings
     # @option params [required, String] :external_meeting_id
     #   The external meeting ID.
     #
+    # @option params [Types::MeetingFeaturesConfiguration] :meeting_features
+    #   Lists the audio and video features enabled for a meeting, such as echo
+    #   reduction.
+    #
     # @option params [Types::NotificationsConfiguration] :notifications_configuration
     #   The configuration for resource targets to receive notifications when
     #   meeting and attendee events occur.
@@ -554,6 +568,11 @@ module Aws::ChimeSDKMeetings
     #     media_region: "MediaRegion", # required
     #     meeting_host_id: "ExternalUserId",
     #     external_meeting_id: "ExternalMeetingId", # required
+    #     meeting_features: {
+    #       audio: {
+    #         echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
+    #       },
+    #     },
     #     notifications_configuration: {
     #       lambda_function_arn: "Arn",
     #       sns_topic_arn: "Arn",
@@ -580,6 +599,7 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.screen_viewing_url #=> String
     #   resp.meeting.media_placement.screen_sharing_url #=> String
     #   resp.meeting.media_placement.event_ingestion_url #=> String
+    #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
     #   resp.attendees #=> Array
     #   resp.attendees[0].external_user_id #=> String
     #   resp.attendees[0].attendee_id #=> String
@@ -737,6 +757,7 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.screen_viewing_url #=> String
     #   resp.meeting.media_placement.screen_sharing_url #=> String
     #   resp.meeting.media_placement.event_ingestion_url #=> String
+    #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/GetMeeting AWS API Documentation
     #
@@ -881,7 +902,7 @@ module Aws::ChimeSDKMeetings
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

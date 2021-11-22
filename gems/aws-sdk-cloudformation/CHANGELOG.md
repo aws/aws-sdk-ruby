@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2021-11-22)
+------------------
+
+* Feature - This release include SDK changes for the feature launch of Stack Import to Service Managed StackSet.
+
 1.61.0 (2021-11-19)
 ------------------
 

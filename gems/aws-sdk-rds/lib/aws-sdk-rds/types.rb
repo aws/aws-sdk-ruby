@@ -2666,6 +2666,7 @@ module Aws::RDS
     #         max_allocated_storage: 1,
     #         enable_customer_owned_ip: false,
     #         custom_iam_instance_profile: "String",
+    #         backup_target: "String",
     #       }
     #
     # @!attribute [rw] db_name
@@ -2956,59 +2957,13 @@ module Aws::RDS
     #   Not applicable. The name for the master user is managed by the DB
     #   cluster.
     #
-    #   **MariaDB**
+    #   **Amazon RDS**
     #
     #   Constraints:
     #
-    #   * Required for MariaDB.
+    #   * Required.
     #
-    #   * Must be 1 to 16 letters or numbers.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **Microsoft SQL Server**
-    #
-    #   Constraints:
-    #
-    #   * Required for SQL Server.
-    #
-    #   * Must be 1 to 128 letters or numbers.
-    #
-    #   * The first character must be a letter.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **MySQL**
-    #
-    #   Constraints:
-    #
-    #   * Required for MySQL.
-    #
-    #   * Must be 1 to 16 letters or numbers.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **Oracle**
-    #
-    #   Constraints:
-    #
-    #   * Required for Oracle.
-    #
-    #   * Must be 1 to 30 letters or numbers.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Can't be a reserved word for the chosen database engine.
-    #
-    #   **PostgreSQL**
-    #
-    #   Constraints:
-    #
-    #   * Required for PostgreSQL.
-    #
-    #   * Must be 1 to 63 letters or numbers.
+    #   * Must be 1 to 16 letters, numbers, or underscores.
     #
     #   * First character must be a letter.
     #
@@ -3750,6 +3705,20 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     #   @return [String]
     #
+    # @!attribute [rw] backup_target
+    #   Specifies where automated backups and manual snapshots are stored.
+    #
+    #   Possible values are `outposts` (Amazon Web Services Outposts) and
+    #   `region` (Amazon Web Services Region). The default is `region`.
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -3801,7 +3770,8 @@ module Aws::RDS
       :deletion_protection,
       :max_allocated_storage,
       :enable_customer_owned_ip,
-      :custom_iam_instance_profile)
+      :custom_iam_instance_profile,
+      :backup_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7243,6 +7213,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     #   @return [String]
     #
+    # @!attribute [rw] backup_target
+    #   Specifies where automated backups and manual snapshots are stored:
+    #   Amazon Web Services Outposts or the Amazon Web Services Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -7318,7 +7293,8 @@ module Aws::RDS
       :activity_stream_engine_native_audit_fields_included,
       :automation_mode,
       :resume_full_automation_mode_time,
-      :custom_iam_instance_profile)
+      :custom_iam_instance_profile,
+      :backup_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7466,6 +7442,11 @@ module Aws::RDS
     #   associated with the automated backup.
     #   @return [Array<Types::DBInstanceAutomatedBackupsReplication>]
     #
+    # @!attribute [rw] backup_target
+    #   Specifies where automated backups are stored: Amazon Web Services
+    #   Outposts or the Amazon Web Services Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackup AWS API Documentation
     #
     class DBInstanceAutomatedBackup < Struct.new(
@@ -7494,7 +7475,8 @@ module Aws::RDS
       :iam_database_authentication_enabled,
       :backup_retention_period,
       :db_instance_automated_backups_arn,
-      :db_instance_automated_backups_replications)
+      :db_instance_automated_backups_replications,
+      :backup_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8489,6 +8471,11 @@ module Aws::RDS
     #   Universal Time (UTC). Doesn't change when the snapshot is copied.
     #   @return [Time]
     #
+    # @!attribute [rw] snapshot_target
+    #   Specifies where manual snapshots are stored: Amazon Web Services
+    #   Outposts or the Amazon Web Services Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
     class DBSnapshot < Struct.new(
@@ -8521,7 +8508,8 @@ module Aws::RDS
       :processor_features,
       :dbi_resource_id,
       :tag_list,
-      :original_snapshot_create_time)
+      :original_snapshot_create_time,
+      :snapshot_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11714,6 +11702,8 @@ module Aws::RDS
     #     * `complete`
     #
     #     * `failed`
+    #
+    #     * `in_progress`
     #
     #     * `starting`
     #   @return [Array<Types::Filter>]
@@ -19538,6 +19528,7 @@ module Aws::RDS
     #         deletion_protection: false,
     #         enable_customer_owned_ip: false,
     #         custom_iam_instance_profile: "String",
+    #         backup_target: "String",
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -19923,6 +19914,21 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     #   @return [String]
     #
+    # @!attribute [rw] backup_target
+    #   Specifies where automated backups and manual snapshots are stored
+    #   for the restored DB instance.
+    #
+    #   Possible values are `outposts` (Amazon Web Services Outposts) and
+    #   `region` (Amazon Web Services Region). The default is `region`.
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
@@ -19955,7 +19961,8 @@ module Aws::RDS
       :db_parameter_group_name,
       :deletion_protection,
       :enable_customer_owned_ip,
-      :custom_iam_instance_profile)
+      :custom_iam_instance_profile,
+      :backup_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20574,6 +20581,7 @@ module Aws::RDS
     #         source_db_instance_automated_backups_arn: "String",
     #         enable_customer_owned_ip: false,
     #         custom_iam_instance_profile: "String",
+    #         backup_target: "String",
     #       }
     #
     # @!attribute [rw] source_db_instance_identifier
@@ -20998,6 +21006,21 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     #   @return [String]
     #
+    # @!attribute [rw] backup_target
+    #   Specifies where automated backups and manual snapshots are stored
+    #   for the restored DB instance.
+    #
+    #   Possible values are `outposts` (Amazon Web Services Outposts) and
+    #   `region` (Amazon Web Services Region). The default is `region`.
+    #
+    #   For more information, see [Working with Amazon RDS on Amazon Web
+    #   Services Outposts][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
@@ -21035,7 +21058,8 @@ module Aws::RDS
       :max_allocated_storage,
       :source_db_instance_automated_backups_arn,
       :enable_customer_owned_ip,
-      :custom_iam_instance_profile)
+      :custom_iam_instance_profile,
+      :backup_target)
       SENSITIVE = []
       include Aws::Structure
     end

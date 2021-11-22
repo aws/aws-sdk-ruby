@@ -2490,9 +2490,18 @@ module Aws::ElasticsearchService
     # @option params [Types::AutoTuneOptions] :auto_tune_options
     #   Specifies Auto-Tune options.
     #
+    # @option params [Boolean] :dry_run
+    #   This flag, when set to True, specifies whether the
+    #   `UpdateElasticsearchDomain` request should return the results of
+    #   validation checks without actually applying the change. This flag,
+    #   when set to True, specifies the deployment mechanism through which the
+    #   update shall be applied on the domain. This will not actually perform
+    #   the Update.
+    #
     # @return [Types::UpdateElasticsearchDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateElasticsearchDomainConfigResponse#domain_config #domain_config} => Types::ElasticsearchDomainConfig
+    #   * {Types::UpdateElasticsearchDomainConfigResponse#dry_run_results #dry_run_results} => Types::DryRunResults
     #
     # @example Request syntax with placeholder values
     #
@@ -2593,6 +2602,7 @@ module Aws::ElasticsearchService
     #         },
     #       ],
     #     },
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -2725,6 +2735,8 @@ module Aws::ElasticsearchService
     #   resp.domain_config.auto_tune_options.status.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_config.auto_tune_options.status.error_message #=> String
     #   resp.domain_config.auto_tune_options.status.pending_deletion #=> Boolean
+    #   resp.dry_run_results.deployment_type #=> String
+    #   resp.dry_run_results.message #=> String
     #
     # @overload update_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -2842,7 +2854,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

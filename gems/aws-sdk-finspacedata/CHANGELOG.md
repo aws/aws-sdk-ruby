@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2021-11-22)
+------------------
+
+* Feature - Add new APIs for managing Datasets, Changesets, and Dataviews.
+
 1.5.0 (2021-11-04)
 ------------------
 

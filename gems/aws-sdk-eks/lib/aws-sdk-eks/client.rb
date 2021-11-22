@@ -424,7 +424,7 @@ module Aws::EKS
     # @option params [Hash<String,String>] :tags
     #   The metadata to apply to the configuration to assist with
     #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define.
+    #   optional value. You define both.
     #
     # @option params [String] :client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -552,8 +552,8 @@ module Aws::EKS
     #
     # @option params [Hash<String,String>] :tags
     #   The metadata to apply to the cluster to assist with categorization and
-    #   organization. Each tag consists of a key and an optional value, both
-    #   of which you define.
+    #   organization. Each tag consists of a key and an optional value. You
+    #   define both.
     #
     # @return [Types::CreateAddonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -605,8 +605,8 @@ module Aws::EKS
     # The Amazon EKS control plane consists of control plane instances that
     # run the Kubernetes software, such as `etcd` and the API server. The
     # control plane runs in an account managed by Amazon Web Services, and
-    # the Kubernetes API is exposed via the Amazon EKS API server endpoint.
-    # Each Amazon EKS cluster control plane is single-tenant and unique and
+    # the Kubernetes API is exposed by the Amazon EKS API server endpoint.
+    # Each Amazon EKS cluster control plane is single tenant and unique. It
     # runs on its own set of Amazon EC2 instances.
     #
     # The cluster control plane is provisioned across multiple Availability
@@ -617,14 +617,15 @@ module Aws::EKS
     # data flows).
     #
     # Amazon EKS nodes run in your Amazon Web Services account and connect
-    # to your cluster's control plane via the Kubernetes API server
+    # to your cluster's control plane over the Kubernetes API server
     # endpoint and a certificate file that is created for your cluster.
     #
-    # Cluster creation typically takes several minutes. After you create an
-    # Amazon EKS cluster, you must configure your Kubernetes tooling to
-    # communicate with the API server and launch nodes into your cluster.
-    # For more information, see [Managing Cluster Authentication][1] and
-    # [Launching Amazon EKS nodes][2] in the *Amazon EKS User Guide*.
+    # In most cases, it takes several minutes to create a cluster. After you
+    # create an Amazon EKS cluster, you must configure your Kubernetes
+    # tooling to communicate with the API server and launch nodes into your
+    # cluster. For more information, see [Managing Cluster
+    # Authentication][1] and [Launching Amazon EKS nodes][2] in the *Amazon
+    # EKS User Guide*.
     #
     #
     #
@@ -650,13 +651,13 @@ module Aws::EKS
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html
     #
     # @option params [required, Types::VpcConfigRequest] :resources_vpc_config
-    #   The VPC configuration used by the cluster control plane. Amazon EKS
-    #   VPC resources have specific requirements to work properly with
-    #   Kubernetes. For more information, see [Cluster VPC Considerations][1]
-    #   and [Cluster Security Group Considerations][2] in the *Amazon EKS User
-    #   Guide*. You must specify at least two subnets. You can specify up to
-    #   five security groups, but we recommend that you use a dedicated
-    #   security group for your cluster control plane.
+    #   The VPC configuration that's used by the cluster control plane.
+    #   Amazon EKS VPC resources have specific requirements to work properly
+    #   with Kubernetes. For more information, see [Cluster VPC
+    #   Considerations][1] and [Cluster Security Group Considerations][2] in
+    #   the *Amazon EKS User Guide*. You must specify at least two subnets.
+    #   You can specify up to five security groups. However, we recommend that
+    #   you use a dedicated security group for your cluster control plane.
     #
     #
     #
@@ -693,8 +694,8 @@ module Aws::EKS
     #
     # @option params [Hash<String,String>] :tags
     #   The metadata to apply to the cluster to assist with categorization and
-    #   organization. Each tag consists of a key and an optional value, both
-    #   of which you define.
+    #   organization. Each tag consists of a key and an optional value. You
+    #   define both.
     #
     # @option params [Array<Types::EncryptionConfig>] :encryption_config
     #   The encryption configuration for the cluster.
@@ -896,9 +897,9 @@ module Aws::EKS
     # @option params [Hash<String,String>] :tags
     #   The metadata to apply to the Fargate profile to assist with
     #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define. Fargate profile tags do not
-    #   propagate to any other resources associated with the Fargate profile,
-    #   such as the pods that are scheduled with it.
+    #   optional value. You define both. Fargate profile tags do not propagate
+    #   to any other resources associated with the Fargate profile, such as
+    #   the pods that are scheduled with it.
     #
     # @return [Types::CreateFargateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1078,9 +1079,9 @@ module Aws::EKS
     #
     # @option params [Hash<String,String>] :tags
     #   The metadata to apply to the node group to assist with categorization
-    #   and organization. Each tag consists of a key and an optional value,
-    #   both of which you define. Node group tags do not propagate to any
-    #   other resources associated with the node group, such as the Amazon EC2
+    #   and organization. Each tag consists of a key and an optional value.
+    #   You define both. Node group tags do not propagate to any other
+    #   resources associated with the node group, such as the Amazon EC2
     #   instances or subnets.
     #
     # @option params [String] :client_request_token
@@ -2215,8 +2216,10 @@ module Aws::EKS
     #    </note>
     #
     # @option params [Array<String>] :include
-    #   Indicates whether connected clusters are included in the returned
-    #   list. Default value is 'ALL'.
+    #   Indicates whether external clusters are included in the returned list.
+    #   Use '`all`' to return connected clusters, or blank to return only
+    #   Amazon EKS clusters. '`all`' must be in lowercase otherwise an error
+    #   occurs.
     #
     # @return [Types::ListClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3231,7 +3234,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

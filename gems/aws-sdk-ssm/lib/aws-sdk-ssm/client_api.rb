@@ -955,6 +955,10 @@ module Aws::SSM
     RegisterTaskWithMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'RegisterTaskWithMaintenanceWindowRequest')
     RegisterTaskWithMaintenanceWindowResult = Shapes::StructureShape.new(name: 'RegisterTaskWithMaintenanceWindowResult')
     RegistrationLimit = Shapes::IntegerShape.new(name: 'RegistrationLimit')
+    RegistrationMetadataItem = Shapes::StructureShape.new(name: 'RegistrationMetadataItem')
+    RegistrationMetadataKey = Shapes::StringShape.new(name: 'RegistrationMetadataKey')
+    RegistrationMetadataList = Shapes::ListShape.new(name: 'RegistrationMetadataList')
+    RegistrationMetadataValue = Shapes::StringShape.new(name: 'RegistrationMetadataValue')
     RegistrationsCount = Shapes::IntegerShape.new(name: 'RegistrationsCount')
     RelatedOpsItem = Shapes::StructureShape.new(name: 'RelatedOpsItem')
     RelatedOpsItems = Shapes::ListShape.new(name: 'RelatedOpsItems')
@@ -1623,6 +1627,7 @@ module Aws::SSM
     CreateActivationRequest.add_member(:registration_limit, Shapes::ShapeRef.new(shape: RegistrationLimit, location_name: "RegistrationLimit", metadata: {"box"=>true}))
     CreateActivationRequest.add_member(:expiration_date, Shapes::ShapeRef.new(shape: ExpirationDate, location_name: "ExpirationDate"))
     CreateActivationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateActivationRequest.add_member(:registration_metadata, Shapes::ShapeRef.new(shape: RegistrationMetadataList, location_name: "RegistrationMetadata"))
     CreateActivationRequest.struct_class = Types::CreateActivationRequest
 
     CreateActivationResult.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, location_name: "ActivationId"))
@@ -3901,6 +3906,12 @@ module Aws::SSM
     RegisterTaskWithMaintenanceWindowResult.add_member(:window_task_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTaskId, location_name: "WindowTaskId"))
     RegisterTaskWithMaintenanceWindowResult.struct_class = Types::RegisterTaskWithMaintenanceWindowResult
 
+    RegistrationMetadataItem.add_member(:key, Shapes::ShapeRef.new(shape: RegistrationMetadataKey, required: true, location_name: "Key"))
+    RegistrationMetadataItem.add_member(:value, Shapes::ShapeRef.new(shape: RegistrationMetadataValue, required: true, location_name: "Value"))
+    RegistrationMetadataItem.struct_class = Types::RegistrationMetadataItem
+
+    RegistrationMetadataList.member = Shapes::ShapeRef.new(shape: RegistrationMetadataItem)
+
     RelatedOpsItem.add_member(:ops_item_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OpsItemId"))
     RelatedOpsItem.struct_class = Types::RelatedOpsItem
 
@@ -4600,6 +4611,7 @@ module Aws::SSM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateActivationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateActivationResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameters)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

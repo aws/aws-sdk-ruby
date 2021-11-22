@@ -10,7 +10,7 @@
 module Aws::Connect
   module Types
 
-    # You do not have sufficient access to perform this action.
+    # You do not have sufficient permissions to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -73,7 +73,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatus AWS API Documentation
@@ -658,6 +659,10 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
     #   @return [String]
     #
+    # @!attribute [rw] state
+    #   The type of contact flow.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the contact flow.
     #   @return [String]
@@ -677,9 +682,89 @@ module Aws::Connect
       :id,
       :name,
       :type,
+      :state,
       :description,
       :content,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a contact flow module.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The type of contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowModule AWS API Documentation
+    #
+    class ContactFlowModule < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :content,
+      :description,
+      :state,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a contact flow.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The type of contact flow module.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowModuleSummary AWS API Documentation
+    #
+    class ContactFlowModuleSummary < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -722,13 +807,18 @@ module Aws::Connect
     #   The type of contact flow.
     #   @return [String]
     #
+    # @!attribute [rw] contact_flow_state
+    #   The type of contact flow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFlowSummary AWS API Documentation
     #
     class ContactFlowSummary < Struct.new(
       :id,
       :arn,
       :name,
-      :contact_flow_type)
+      :contact_flow_type,
+      :contact_flow_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -783,7 +873,8 @@ module Aws::Connect
     #   @return [Integer]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateAgentStatusRequest AWS API Documentation
@@ -812,6 +903,80 @@ module Aws::Connect
     class CreateAgentStatusResponse < Struct.new(
       :agent_status_arn,
       :agent_status_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateContactFlowModuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         name: "ContactFlowModuleName", # required
+    #         description: "ContactFlowModuleDescription",
+    #         content: "ContactFlowModuleContent", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowModuleRequest AWS API Documentation
+    #
+    class CreateContactFlowModuleRequest < Struct.new(
+      :instance_id,
+      :name,
+      :description,
+      :content,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the contact flow module.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateContactFlowModuleResponse AWS API Documentation
+    #
+    class CreateContactFlowModuleResponse < Struct.new(
+      :id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -939,7 +1104,8 @@ module Aws::Connect
     #   @return [Array<Types::HoursOfOperationConfig>]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateHoursOfOperationRequest AWS API Documentation
@@ -1082,7 +1248,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateIntegrationAssociationRequest AWS API Documentation
@@ -1167,7 +1334,8 @@ module Aws::Connect
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQueueRequest AWS API Documentation
@@ -1246,7 +1414,8 @@ module Aws::Connect
     #   @return [Types::QuickConnectConfig]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateQuickConnectRequest AWS API Documentation
@@ -1402,7 +1571,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateSecurityProfileRequest AWS API Documentation
@@ -1462,7 +1632,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUseCaseRequest AWS API Documentation
@@ -1765,6 +1936,62 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteContactFlowModuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_module_id: "ContactFlowModuleId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_module_id
+    #   The identifier of the contact flow module.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowModuleRequest AWS API Documentation
+    #
+    class DeleteContactFlowModuleRequest < Struct.new(
+      :instance_id,
+      :contact_flow_module_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowModuleResponse AWS API Documentation
+    #
+    class DeleteContactFlowModuleResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteContactFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteContactFlowRequest AWS API Documentation
+    #
+    class DeleteContactFlowRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteHoursOfOperationRequest
     #   data as a hash:
     #
@@ -2011,6 +2238,44 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeContactFlowModuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_module_id: "ContactFlowModuleId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_module_id
+    #   The identifier of the contact flow module.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowModuleRequest AWS API Documentation
+    #
+    class DescribeContactFlowModuleRequest < Struct.new(
+      :instance_id,
+      :contact_flow_module_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flow_module
+    #   Information about the contact flow module.
+    #   @return [Types::ContactFlowModule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactFlowModuleResponse AWS API Documentation
+    #
+    class DescribeContactFlowModuleResponse < Struct.new(
+      :contact_flow_module)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeContactFlowRequest
     #   data as a hash:
     #
@@ -2062,7 +2327,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the initial contact.
+    #   The identifier of the contact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContactRequest AWS API Documentation
@@ -3774,7 +4039,8 @@ module Aws::Connect
     #   @return [Array<Types::HoursOfOperationConfig>]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HoursOfOperation AWS API Documentation
@@ -3878,6 +4144,19 @@ module Aws::Connect
     class HoursOfOperationTimeSlice < Struct.new(
       :hours,
       :minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An entity with the same name already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/IdempotencyException AWS API Documentation
+    #
+    class IdempotencyException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4154,6 +4433,19 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidContactFlowException AWS API Documentation
     #
     class InvalidContactFlowException < Struct.new(
+      :problems)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The problems with the module. Please fix before trying again.
+    #
+    # @!attribute [rw] problems
+    #   @return [Array<Types::ProblemDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvalidContactFlowModuleException AWS API Documentation
+    #
+    class InvalidContactFlowModuleException < Struct.new(
       :problems)
       SENSITIVE = []
       include Aws::Structure
@@ -4520,6 +4812,64 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListContactFlowModulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         contact_flow_module_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] contact_flow_module_state
+    #   The state of the contact flow module.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowModulesRequest AWS API Documentation
+    #
+    class ListContactFlowModulesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :contact_flow_module_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_flow_modules_summary_list
+    #   Information about the contact flow module.
+    #   @return [Array<Types::ContactFlowModuleSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactFlowModulesResponse AWS API Documentation
+    #
+    class ListContactFlowModulesResponse < Struct.new(
+      :contact_flow_modules_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListContactFlowsRequest
     #   data as a hash:
     #
@@ -4606,7 +4956,7 @@ module Aws::Connect
     #   previous response in the next request to retrieve the next set of
     #   results.
     #
-    #   This is not expected to be set since the value returned in the
+    #   This is not expected to be set, because the value returned in the
     #   previous response is always null.
     #   @return [String]
     #
@@ -4864,6 +5214,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] integration_type
+    #   The integration type.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -6005,7 +6356,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Queue AWS API Documentation
@@ -6143,7 +6495,8 @@ module Aws::Connect
     #   @return [Types::QuickConnectConfig]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QuickConnect AWS API Documentation
@@ -6282,7 +6635,7 @@ module Aws::Connect
     # @note ReferenceSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ReferenceSummary corresponding to the set member.
     #
     # @!attribute [rw] url
-    #   Information about Url reference if the `referenceType` is `URL`.
+    #   Information about the URL reference if the `referenceType` is `URL`.
     #   Otherwise, null.
     #   @return [Types::UrlReference]
     #
@@ -6681,7 +7034,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   The tags used to organize, track, or control access for this
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfile AWS API Documentation
@@ -7541,6 +7895,134 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateContactFlowMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #         name: "ContactFlowName",
+    #         description: "ContactFlowDescription",
+    #         contact_flow_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   TThe name of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_state
+    #   The state of contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowMetadataRequest AWS API Documentation
+    #
+    class UpdateContactFlowMetadataRequest < Struct.new(
+      :instance_id,
+      :contact_flow_id,
+      :name,
+      :description,
+      :contact_flow_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateContactFlowModuleContentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_module_id: "ContactFlowModuleId", # required
+    #         content: "ContactFlowModuleContent", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_module_id
+    #   The identifier of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the contact flow module.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleContentRequest AWS API Documentation
+    #
+    class UpdateContactFlowModuleContentRequest < Struct.new(
+      :instance_id,
+      :contact_flow_module_id,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleContentResponse AWS API Documentation
+    #
+    class UpdateContactFlowModuleContentResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateContactFlowModuleMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_module_id: "ContactFlowModuleId", # required
+    #         name: "ContactFlowModuleName",
+    #         description: "ContactFlowModuleDescription",
+    #         state: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_module_id
+    #   The identifier of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the contact flow module.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of contact flow module.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleMetadataRequest AWS API Documentation
+    #
+    class UpdateContactFlowModuleMetadataRequest < Struct.new(
+      :instance_id,
+      :contact_flow_module_id,
+      :name,
+      :description,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactFlowModuleMetadataResponse AWS API Documentation
+    #
+    class UpdateContactFlowModuleMetadataResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateContactFlowNameRequest
     #   data as a hash:

@@ -75,6 +75,7 @@ module Aws::ElasticsearchService
     DeletePackageResponse = Shapes::StructureShape.new(name: 'DeletePackageResponse')
     DeploymentCloseDateTimeStamp = Shapes::TimestampShape.new(name: 'DeploymentCloseDateTimeStamp')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
+    DeploymentType = Shapes::StringShape.new(name: 'DeploymentType')
     DescribeDomainAutoTunesRequest = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesRequest')
     DescribeDomainAutoTunesResponse = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesResponse')
     DescribeElasticsearchDomainConfigRequest = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainConfigRequest')
@@ -116,6 +117,8 @@ module Aws::ElasticsearchService
     DomainPackageDetailsList = Shapes::ListShape.new(name: 'DomainPackageDetailsList')
     DomainPackageStatus = Shapes::StringShape.new(name: 'DomainPackageStatus')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DryRun = Shapes::BooleanShape.new(name: 'DryRun')
+    DryRunResults = Shapes::StructureShape.new(name: 'DryRunResults')
     Duration = Shapes::StructureShape.new(name: 'Duration')
     DurationValue = Shapes::IntegerShape.new(name: 'DurationValue')
     EBSOptions = Shapes::StructureShape.new(name: 'EBSOptions')
@@ -192,6 +195,7 @@ module Aws::ElasticsearchService
     MasterUserOptions = Shapes::StructureShape.new(name: 'MasterUserOptions')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumInstanceCount = Shapes::IntegerShape.new(name: 'MaximumInstanceCount')
+    Message = Shapes::StringShape.new(name: 'Message')
     MinimumInstanceCount = Shapes::IntegerShape.new(name: 'MinimumInstanceCount')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NodeToNodeEncryptionOptions = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptions')
@@ -615,6 +619,10 @@ module Aws::ElasticsearchService
     DomainPackageDetails.struct_class = Types::DomainPackageDetails
 
     DomainPackageDetailsList.member = Shapes::ShapeRef.new(shape: DomainPackageDetails)
+
+    DryRunResults.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "DeploymentType"))
+    DryRunResults.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    DryRunResults.struct_class = Types::DryRunResults
 
     Duration.add_member(:value, Shapes::ShapeRef.new(shape: DurationValue, location_name: "Value"))
     Duration.add_member(:unit, Shapes::ShapeRef.new(shape: TimeUnit, location_name: "Unit"))
@@ -1049,9 +1057,11 @@ module Aws::ElasticsearchService
     UpdateElasticsearchDomainConfigRequest.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptions, location_name: "AutoTuneOptions"))
+    UpdateElasticsearchDomainConfigRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
     UpdateElasticsearchDomainConfigRequest.struct_class = Types::UpdateElasticsearchDomainConfigRequest
 
     UpdateElasticsearchDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: ElasticsearchDomainConfig, required: true, location_name: "DomainConfig"))
+    UpdateElasticsearchDomainConfigResponse.add_member(:dry_run_results, Shapes::ShapeRef.new(shape: DryRunResults, location_name: "DryRunResults"))
     UpdateElasticsearchDomainConfigResponse.struct_class = Types::UpdateElasticsearchDomainConfigResponse
 
     UpdatePackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location_name: "PackageID"))

@@ -111,8 +111,8 @@ module Aws::TranscribeStreamingService
     #   @return [Float]
     #
     # @!attribute [rw] category
-    #   The category of of information identified in this entity; for
-    #   example, PII.
+    #   The category of information identified in this entity; for example,
+    #   PII.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -185,18 +185,18 @@ module Aws::TranscribeStreamingService
     #
     # @!attribute [rw] vocabulary_filter_match
     #   Indicates whether a word in the item matches a word in the
-    #   vocabulary filter you've chosen for your real-time stream. If
-    #   `true` then a word in the item matches your vocabulary filter.
+    #   vocabulary filter you've chosen for your media stream. If `true`
+    #   then a word in the item matches your vocabulary filter.
     #   @return [Boolean]
     #
     # @!attribute [rw] speaker
     #   If speaker identification is enabled, shows the speakers identified
-    #   in the real-time stream.
+    #   in the media stream.
     #   @return [String]
     #
     # @!attribute [rw] confidence
-    #   A value between 0 and 1 for an item that is a confidence score that
-    #   Amazon Transcribe assigns to each word or phrase that it
+    #   A value between zero and one for an item that is a confidence score
+    #   that Amazon Transcribe assigns to each word or phrase that it
     #   transcribes.
     #   @return [Float]
     #
@@ -217,6 +217,30 @@ module Aws::TranscribeStreamingService
       :speaker,
       :confidence,
       :stable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The language codes of the identified languages and their associated
+    # confidence scores. The confidence score is a value between zero and
+    # one; a larger value indicates a higher confidence in the identified
+    # language.
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the language identified by Amazon Transcribe.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The confidence score for the associated language code. Confidence
+    #   scores are values between zero and one; larger values indicate a
+    #   higher confidence in the identified language.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/LanguageWithScore AWS API Documentation
+    #
+    class LanguageWithScore < Struct.new(
+      :language_code,
+      :score)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -482,6 +506,14 @@ module Aws::TranscribeStreamingService
     #   single channel in your audio stream.
     #   @return [String]
     #
+    # @!attribute [rw] language_code
+    #   The language code of the identified language in your media stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_identification
+    #   The language code of the dominant language identified in your media.
+    #   @return [Array<Types::LanguageWithScore>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/Result AWS API Documentation
     #
     class Result < Struct.new(
@@ -490,7 +522,9 @@ module Aws::TranscribeStreamingService
       :end_time,
       :is_partial,
       :alternatives,
-      :channel_id)
+      :channel_id,
+      :language_code,
+      :language_identification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -694,7 +728,7 @@ module Aws::TranscribeStreamingService
     #   data as a hash:
     #
     #       {
-    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #         language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #         media_sample_rate_hertz: 1, # required
     #         media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
     #         vocabulary_name: "VocabularyName",
@@ -711,16 +745,19 @@ module Aws::TranscribeStreamingService
     #         content_redaction_type: "PII", # accepts PII
     #         pii_entity_types: "PiiEntityTypes",
     #         language_model_name: "ModelName",
+    #         identify_language: false,
+    #         language_options: "LanguageOptions",
+    #         preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #       }
     #
     # @!attribute [rw] language_code
-    #   Indicates the source language used in the input audio stream.
+    #   The language code of the input audio stream.
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the input audio. We suggest that you
-    #   use 8,000 Hz for low quality audio and 16,000 Hz for high quality
-    #   audio.
+    #   The sample rate, in Hertz (Hz), of the input audio. We suggest that
+    #   you use 8,000 Hz for low quality audio and 16,000 Hz or higher for
+    #   high quality audio.
     #   @return [Integer]
     #
     # @!attribute [rw] media_encoding
@@ -756,17 +793,16 @@ module Aws::TranscribeStreamingService
     #   transcription results. `Mask` masks filtered words with a `***` in
     #   your transcription results. `Tag` keeps the filtered words in your
     #   transcription results and tags them. The tag appears as
-    #   `VocabularyFilterMatch` equal to `True`
+    #   `VocabularyFilterMatch` equal to `True`.
     #   @return [String]
     #
     # @!attribute [rw] show_speaker_label
-    #   When `true`, enables speaker identification in your real-time
-    #   stream.
+    #   When `true`, enables speaker identification in your media stream.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_channel_identification
     #   When `true`, instructs Amazon Transcribe to process each audio
-    #   channel separately and then merge the transcription output of each
+    #   channel separately, then merges the transcription output of each
     #   channel into a single transcription.
     #
     #   Amazon Transcribe also produces a transcription of each item. An
@@ -824,12 +860,45 @@ module Aws::TranscribeStreamingService
     #   to specify entity types, you must have either
     #   `ContentIdentificationType` or `ContentRedactionType` enabled.
     #
+    #   `PIIEntityTypes` must be comma-separated; the available values are:
+    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_NUMBER`,
+    #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`,
+    #   `ADDRESS`, `NAME`, `PHONE`, `SSN`, and `ALL`.
+    #
     #   `PiiEntityTypes` is an optional parameter with a default value of
     #   `ALL`.
     #   @return [String]
     #
     # @!attribute [rw] language_model_name
     #   The name of the language model you want to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] identify_language
+    #   Optional. Set this value to `true` to enable language identification
+    #   for your media stream.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] language_options
+    #   An object containing a list of languages that might be present in
+    #   your audio.
+    #
+    #   You must provide two or more language codes to help Amazon
+    #   Transcribe identify the correct language of your media stream with
+    #   the highest possible accuracy. You can only select one variant per
+    #   language; for example, you can't include both `en-US` and `en-UK`
+    #   in the same request.
+    #
+    #   You can only use this parameter if you've set `IdentifyLanguage` to
+    #   `true`in your request.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_language
+    #   Optional. From the subset of languages codes you provided for
+    #   `LanguageOptions`, you can select one preferred language for your
+    #   transcription.
+    #
+    #   You can only use this parameter if you've set `IdentifyLanguage` to
+    #   `true`in your request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionRequest AWS API Documentation
@@ -851,7 +920,10 @@ module Aws::TranscribeStreamingService
       :content_identification_type,
       :content_redaction_type,
       :pii_entity_types,
-      :language_model_name)
+      :language_model_name,
+      :identify_language,
+      :language_options,
+      :preferred_language)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -861,12 +933,13 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code for the input audio stream.
+    #   The language code of the input audio stream.
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate for the input audio stream. Use 8,000 Hz for low
-    #   quality audio and 16,000 Hz for high quality audio.
+    #   The sample rate, in Hertz (Hz), for the input audio stream. Use
+    #   8,000 Hz for low quality audio and 16,000 Hz or higher for high
+    #   quality audio.
     #   @return [Integer]
     #
     # @!attribute [rw] media_encoding
@@ -887,11 +960,11 @@ module Aws::TranscribeStreamingService
     #   @return [Types::TranscriptResultStream]
     #
     # @!attribute [rw] vocabulary_filter_name
-    #   The name of the vocabulary filter used in your real-time stream.
+    #   The name of the vocabulary filter used in your media stream.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_filter_method
-    #   The vocabulary filtering method used in the real-time stream.
+    #   The vocabulary filtering method used in the media stream.
     #   @return [String]
     #
     # @!attribute [rw] show_speaker_label
@@ -929,6 +1002,20 @@ module Aws::TranscribeStreamingService
     #   @return [String]
     #
     # @!attribute [rw] language_model_name
+    #   The name of the language model used in your media stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] identify_language
+    #   The language code of the language identified in your media stream.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] language_options
+    #   The language codes used in the identification of your media
+    #   stream's predominant language.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_language
+    #   The preferred language you specified in your request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscriptionResponse AWS API Documentation
@@ -951,7 +1038,10 @@ module Aws::TranscribeStreamingService
       :content_identification_type,
       :content_redaction_type,
       :pii_entity_types,
-      :language_model_name)
+      :language_model_name,
+      :identify_language,
+      :language_options,
+      :preferred_language)
       SENSITIVE = []
       include Aws::Structure
     end

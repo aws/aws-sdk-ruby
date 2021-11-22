@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-11-22)
+------------------
+
+* Feature - Add support for Exasol data source, 1 click enterprise embedding and email customization.
+
 1.57.0 (2021-11-04)
 ------------------
 

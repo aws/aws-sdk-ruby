@@ -77,8 +77,8 @@ module Aws::EKS
     # @!attribute [rw] tags
     #   The metadata that you apply to the add-on to assist with
     #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define. Add-on tags do not
-    #   propagate to any other resources associated with the cluster.
+    #   optional value. You define both. Add-on tags do not propagate to any
+    #   other resources associated with the cluster.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Addon AWS API Documentation
@@ -276,7 +276,7 @@ module Aws::EKS
     # @!attribute [rw] tags
     #   The metadata to apply to the configuration to assist with
     #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define.
+    #   optional value. You define both.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_request_token
@@ -473,8 +473,8 @@ module Aws::EKS
     # @!attribute [rw] tags
     #   The metadata that you apply to the cluster to assist with
     #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define. Cluster tags do not
-    #   propagate to any other resources associated with the cluster.
+    #   optional value. You define both. Cluster tags do not propagate to
+    #   any other resources associated with the cluster.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] encryption_config
@@ -670,8 +670,8 @@ module Aws::EKS
     #
     # @!attribute [rw] tags
     #   The metadata to apply to the cluster to assist with categorization
-    #   and organization. Each tag consists of a key and an optional value,
-    #   both of which you define.
+    #   and organization. Each tag consists of a key and an optional value.
+    #   You define both.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAddonRequest AWS API Documentation
@@ -767,13 +767,14 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] resources_vpc_config
-    #   The VPC configuration used by the cluster control plane. Amazon EKS
-    #   VPC resources have specific requirements to work properly with
-    #   Kubernetes. For more information, see [Cluster VPC
+    #   The VPC configuration that's used by the cluster control plane.
+    #   Amazon EKS VPC resources have specific requirements to work properly
+    #   with Kubernetes. For more information, see [Cluster VPC
     #   Considerations][1] and [Cluster Security Group Considerations][2] in
     #   the *Amazon EKS User Guide*. You must specify at least two subnets.
-    #   You can specify up to five security groups, but we recommend that
-    #   you use a dedicated security group for your cluster control plane.
+    #   You can specify up to five security groups. However, we recommend
+    #   that you use a dedicated security group for your cluster control
+    #   plane.
     #
     #
     #
@@ -814,8 +815,8 @@ module Aws::EKS
     #
     # @!attribute [rw] tags
     #   The metadata to apply to the cluster to assist with categorization
-    #   and organization. Each tag consists of a key and an optional value,
-    #   both of which you define.
+    #   and organization. Each tag consists of a key and an optional value.
+    #   You define both.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] encryption_config
@@ -918,8 +919,8 @@ module Aws::EKS
     # @!attribute [rw] tags
     #   The metadata to apply to the Fargate profile to assist with
     #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define. Fargate profile tags do
-    #   not propagate to any other resources associated with the Fargate
+    #   optional value. You define both. Fargate profile tags do not
+    #   propagate to any other resources associated with the Fargate
     #   profile, such as the pods that are scheduled with it.
     #   @return [Hash<String,String>]
     #
@@ -1118,9 +1119,9 @@ module Aws::EKS
     # @!attribute [rw] tags
     #   The metadata to apply to the node group to assist with
     #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define. Node group tags do not
-    #   propagate to any other resources associated with the node group,
-    #   such as the Amazon EC2 instances or subnets.
+    #   optional value. You define both. Node group tags do not propagate to
+    #   any other resources associated with the node group, such as the
+    #   Amazon EC2 instances or subnets.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_request_token
@@ -1910,8 +1911,8 @@ module Aws::EKS
     # @!attribute [rw] tags
     #   The metadata applied to the Fargate profile to assist with
     #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you define. Fargate profile tags do
-    #   not propagate to any other resources associated with the Fargate
+    #   optional value. You define both. Fargate profile tags do not
+    #   propagate to any other resources associated with the Fargate
     #   profile, such as the pods that are scheduled with it.
     #   @return [Hash<String,String>]
     #
@@ -2396,8 +2397,10 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] include
-    #   Indicates whether connected clusters are included in the returned
-    #   list. Default value is 'ALL'.
+    #   Indicates whether external clusters are included in the returned
+    #   list. Use '`all`' to return connected clusters, or blank to return
+    #   only Amazon EKS clusters. '`all`' must be in lowercase otherwise
+    #   an error occurs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListClustersRequest AWS API Documentation
@@ -2918,10 +2921,10 @@ module Aws::EKS
     #
     # @!attribute [rw] tags
     #   The metadata applied to the node group to assist with categorization
-    #   and organization. Each tag consists of a key and an optional value,
-    #   both of which you define. Node group tags do not propagate to any
-    #   other resources associated with the node group, such as the Amazon
-    #   EC2 instances or subnets.
+    #   and organization. Each tag consists of a key and an optional value.
+    #   You define both. Node group tags do not propagate to any other
+    #   resources associated with the node group, such as the Amazon EC2
+    #   instances or subnets.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Nodegroup AWS API Documentation
@@ -3175,7 +3178,7 @@ module Aws::EKS
     # @!attribute [rw] tags
     #   The metadata to apply to the provider configuration to assist with
     #   categorization and organization. Each tag consists of a key and an
-    #   optional value, both of which you defined.
+    #   optional value. You define both.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -3518,6 +3521,20 @@ module Aws::EKS
       :nodegroup_name,
       :fargate_profile_name,
       :addon_name,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Required resources (such as Service Linked Roles) were created and are
+    # still propagating. Retry later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ResourcePropagationDelayException AWS API Documentation
+    #
+    class ResourcePropagationDelayException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure

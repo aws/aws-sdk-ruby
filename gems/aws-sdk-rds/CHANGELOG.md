@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2021-11-22)
+------------------
+
+* Feature - Adds local backup support to Amazon RDS on AWS Outposts.
+
 1.130.0 (2021-11-04)
 ------------------
 

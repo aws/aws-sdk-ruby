@@ -531,12 +531,13 @@ module Aws::TranscribeStreamingService
     #
     # [1]: https://docs.aws.amazon.com/sdk-for-go/api/service/transcribestreamingservice/#TranscribeStreamingService.StartStreamTranscription
     #
-    # @option params [required, String] :language_code
-    #   Indicates the source language used in the input audio stream.
+    # @option params [String] :language_code
+    #   The language code of the input audio stream.
     #
     # @option params [required, Integer] :media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the input audio. We suggest that you use
-    #   8,000 Hz for low quality audio and 16,000 Hz for high quality audio.
+    #   The sample rate, in Hertz (Hz), of the input audio. We suggest that
+    #   you use 8,000 Hz for low quality audio and 16,000 Hz or higher for
+    #   high quality audio.
     #
     # @option params [required, String] :media_encoding
     #   The encoding used for the input audio.
@@ -562,15 +563,15 @@ module Aws::TranscribeStreamingService
     #   transcription results. `Mask` masks filtered words with a `***` in
     #   your transcription results. `Tag` keeps the filtered words in your
     #   transcription results and tags them. The tag appears as
-    #   `VocabularyFilterMatch` equal to `True`
+    #   `VocabularyFilterMatch` equal to `True`.
     #
     # @option params [Boolean] :show_speaker_label
-    #   When `true`, enables speaker identification in your real-time stream.
+    #   When `true`, enables speaker identification in your media stream.
     #
     # @option params [Boolean] :enable_channel_identification
     #   When `true`, instructs Amazon Transcribe to process each audio channel
-    #   separately and then merge the transcription output of each channel
-    #   into a single transcription.
+    #   separately, then merges the transcription output of each channel into
+    #   a single transcription.
     #
     #   Amazon Transcribe also produces a transcription of each item. An item
     #   includes the start time, end time, and any alternative transcriptions.
@@ -618,11 +619,41 @@ module Aws::TranscribeStreamingService
     #   specify entity types, you must have either `ContentIdentificationType`
     #   or `ContentRedactionType` enabled.
     #
+    #   `PIIEntityTypes` must be comma-separated; the available values are:
+    #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING`, `CREDIT_DEBIT_NUMBER`,
+    #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`, `ADDRESS`,
+    #   `NAME`, `PHONE`, `SSN`, and `ALL`.
+    #
     #   `PiiEntityTypes` is an optional parameter with a default value of
     #   `ALL`.
     #
     # @option params [String] :language_model_name
     #   The name of the language model you want to use.
+    #
+    # @option params [Boolean] :identify_language
+    #   Optional. Set this value to `true` to enable language identification
+    #   for your media stream.
+    #
+    # @option params [String] :language_options
+    #   An object containing a list of languages that might be present in your
+    #   audio.
+    #
+    #   You must provide two or more language codes to help Amazon Transcribe
+    #   identify the correct language of your media stream with the highest
+    #   possible accuracy. You can only select one variant per language; for
+    #   example, you can't include both `en-US` and `en-UK` in the same
+    #   request.
+    #
+    #   You can only use this parameter if you've set `IdentifyLanguage` to
+    #   `true`in your request.
+    #
+    # @option params [String] :preferred_language
+    #   Optional. From the subset of languages codes you provided for
+    #   `LanguageOptions`, you can select one preferred language for your
+    #   transcription.
+    #
+    #   You can only use this parameter if you've set `IdentifyLanguage` to
+    #   `true`in your request.
     #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -644,6 +675,9 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#content_redaction_type #content_redaction_type} => String
     #   * {Types::StartStreamTranscriptionResponse#pii_entity_types #pii_entity_types} => String
     #   * {Types::StartStreamTranscriptionResponse#language_model_name #language_model_name} => String
+    #   * {Types::StartStreamTranscriptionResponse#identify_language #identify_language} => Boolean
+    #   * {Types::StartStreamTranscriptionResponse#language_options #language_options} => String
+    #   * {Types::StartStreamTranscriptionResponse#preferred_language #preferred_language} => String
     #
     # @example Bi-directional EventStream Operation Example
     #
@@ -740,7 +774,7 @@ module Aws::TranscribeStreamingService
     # @example Request syntax with placeholder values
     #
     #   async_resp = async_client.start_stream_transcription({
-    #     language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #     language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #     media_sample_rate_hertz: 1, # required
     #     media_encoding: "pcm", # required, accepts pcm, ogg-opus, flac
     #     vocabulary_name: "VocabularyName",
@@ -757,6 +791,9 @@ module Aws::TranscribeStreamingService
     #     content_redaction_type: "PII", # accepts PII
     #     pii_entity_types: "PiiEntityTypes",
     #     language_model_name: "ModelName",
+    #     identify_language: false,
+    #     language_options: "LanguageOptions",
+    #     preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -800,6 +837,10 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].entities[0].content #=> String
     #   event.transcript.results[0].alternatives[0].entities[0].confidence #=> Float
     #   event.transcript.results[0].channel_id #=> String
+    #   event.transcript.results[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN"
+    #   event.transcript.results[0].language_identification #=> Array
+    #   event.transcript.results[0].language_identification[0].language_code #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN"
+    #   event.transcript.results[0].language_identification[0].score #=> Float
     #
     #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -827,6 +868,9 @@ module Aws::TranscribeStreamingService
     #   resp.content_redaction_type #=> String, one of "PII"
     #   resp.pii_entity_types #=> String
     #   resp.language_model_name #=> String
+    #   resp.identify_language #=> Boolean
+    #   resp.language_options #=> String
+    #   resp.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
     #
@@ -871,7 +915,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

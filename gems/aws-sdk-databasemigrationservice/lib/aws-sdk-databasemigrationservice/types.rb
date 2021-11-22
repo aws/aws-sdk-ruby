@@ -388,6 +388,7 @@ module Aws::DatabaseMigrationService
     #           ignore_header_rows: 1,
     #           max_file_size: 1,
     #           rfc_4180: false,
+    #           date_partition_timezone: "String",
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -4891,6 +4892,7 @@ module Aws::DatabaseMigrationService
     #           ignore_header_rows: 1,
     #           max_file_size: 1,
     #           rfc_4180: false,
+    #           date_partition_timezone: "String",
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -8725,6 +8727,7 @@ module Aws::DatabaseMigrationService
     #         ignore_header_rows: 1,
     #         max_file_size: 1,
     #         rfc_4180: false,
+    #         date_partition_timezone: "String",
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -9264,6 +9267,20 @@ module Aws::DatabaseMigrationService
     #   `y`, and `n`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] date_partition_timezone
+    #   When creating an S3 target endpoint, set `DatePartitionTimezone` to
+    #   convert the current UTC time into a specified time zone. The
+    #   conversion occurs when a date partition folder is created and a CDC
+    #   filename is generated. The time zone format is Area/Location. Use
+    #   this parameter when `DatePartitionedEnabled` is set to `true`, as
+    #   shown in the following example.
+    #
+    #   `s3-settings='\{"DatePartitionEnabled": true,
+    #   "DatePartitionSequence": "YYYYMMDDHH", "DatePartitionDelimiter":
+    #   "SLASH", "DatePartitionTimezone":"Asia/Seoul", "BucketName":
+    #   "dms-nattarat-test"\}'`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
     #
     class S3Settings < Struct.new(
@@ -9303,7 +9320,8 @@ module Aws::DatabaseMigrationService
       :csv_null_value,
       :ignore_header_rows,
       :max_file_size,
-      :rfc_4180)
+      :rfc_4180,
+      :date_partition_timezone)
       SENSITIVE = []
       include Aws::Structure
     end

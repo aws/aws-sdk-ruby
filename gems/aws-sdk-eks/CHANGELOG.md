@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2021-11-22)
+------------------
+
+* Feature - Adding missing exceptions to RegisterCluster operation
+
 1.67.0 (2021-11-15)
 ------------------
 

@@ -503,7 +503,7 @@ module Aws::SSM
       :apply_only_at_cron_interval,
       :calendar_names,
       :target_locations)
-      SENSITIVE = []
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
@@ -948,7 +948,7 @@ module Aws::SSM
       :apply_only_at_cron_interval,
       :calendar_names,
       :target_locations)
-      SENSITIVE = []
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
@@ -1979,7 +1979,7 @@ module Aws::SSM
       :notification_config,
       :cloud_watch_output_config,
       :timeout_seconds)
-      SENSITIVE = []
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
@@ -2000,6 +2000,11 @@ module Aws::SSM
     #
     # @!attribute [rw] key
     #   The name of the filter.
+    #
+    #   <note markdown="1"> The `ExecutionStage` filter can't be used with the
+    #   `ListCommandInvocations` operation, only with `ListCommands`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2078,7 +2083,8 @@ module Aws::SSM
     #     see command executions that used this SSM document to perform
     #     security patching operations on instances.
     #
-    #   * **ExecutionStage**\: Specify one of the following values:
+    #   * **ExecutionStage**\: Specify one of the following values
+    #     (`ListCommands` operations only):
     #
     #     * `Executing`\: Returns a list of command executions that are
     #       currently still running.
@@ -2680,6 +2686,12 @@ module Aws::SSM
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         registration_metadata: [
+    #           {
+    #             key: "RegistrationMetadataKey", # required
+    #             value: "RegistrationMetadataValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] description
@@ -2750,6 +2762,10 @@ module Aws::SSM
     #   your managed instances, see RemoveTagsFromResource.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] registration_metadata
+    #   Reserved for internal use.
+    #   @return [Array<Types::RegistrationMetadataItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateActivationRequest AWS API Documentation
     #
     class CreateActivationRequest < Struct.new(
@@ -2758,7 +2774,8 @@ module Aws::SSM
       :iam_role,
       :registration_limit,
       :expiration_date,
-      :tags)
+      :tags,
+      :registration_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3054,7 +3071,7 @@ module Aws::SSM
       :apply_only_at_cron_interval,
       :calendar_names,
       :target_locations)
-      SENSITIVE = []
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
@@ -3298,7 +3315,7 @@ module Aws::SSM
       :apply_only_at_cron_interval,
       :calendar_names,
       :target_locations)
-      SENSITIVE = []
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
@@ -13470,7 +13487,7 @@ module Aws::SSM
       :parameters,
       :service_role_arn,
       :timeout_seconds)
-      SENSITIVE = []
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
@@ -16435,15 +16452,15 @@ module Aws::SSM
     #   the expiration time is reached, Parameter Store deletes the
     #   parameter.
     #
-    #   ExpirationNotification: This policy triggers an event in Amazon
+    #   ExpirationNotification: This policy initiates an event in Amazon
     #   CloudWatch Events that notifies you about the expiration. By using
     #   this policy, you can receive notification before or after the
     #   expiration time is reached, in units of days or hours.
     #
-    #   NoChangeNotification: This policy triggers a CloudWatch Events event
-    #   if a parameter hasn't been modified for a specified period of time.
-    #   This policy type is useful when, for example, a secret needs to be
-    #   changed within a period of time, but it hasn't been changed.
+    #   NoChangeNotification: This policy initiates a CloudWatch Events
+    #   event if a parameter hasn't been modified for a specified period of
+    #   time. This policy type is useful when, for example, a secret needs
+    #   to be changed within a period of time, but it hasn't been changed.
     #
     #   All existing policies are preserved until you send new policies or
     #   an empty policy. For more information about parameter policies, see
@@ -16982,6 +16999,33 @@ module Aws::SSM
     #
     class RegisterTaskWithMaintenanceWindowResult < Struct.new(
       :window_task_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Reserved for internal use.
+    #
+    # @note When making an API call, you may pass RegistrationMetadataItem
+    #   data as a hash:
+    #
+    #       {
+    #         key: "RegistrationMetadataKey", # required
+    #         value: "RegistrationMetadataValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   Reserved for internal use.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Reserved for internal use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegistrationMetadataItem AWS API Documentation
+    #
+    class RegistrationMetadataItem < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18211,7 +18255,7 @@ module Aws::SSM
       :service_role_arn,
       :notification_config,
       :cloud_watch_output_config)
-      SENSITIVE = []
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 
@@ -19848,7 +19892,7 @@ module Aws::SSM
       :apply_only_at_cron_interval,
       :calendar_names,
       :target_locations)
-      SENSITIVE = []
+      SENSITIVE = [:parameters]
       include Aws::Structure
     end
 

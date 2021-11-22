@@ -41,6 +41,7 @@ module Aws::S3Control
     BucketLocationConstraint = Shapes::StringShape.new(name: 'BucketLocationConstraint')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     Buckets = Shapes::ListShape.new(name: 'Buckets')
+    CloudWatchMetrics = Shapes::StructureShape.new(name: 'CloudWatchMetrics')
     ConfigId = Shapes::StringShape.new(name: 'ConfigId')
     ConfirmRemoveSelfBucketAccess = Shapes::BooleanShape.new(name: 'ConfirmRemoveSelfBucketAccess')
     ConfirmationRequired = Shapes::BooleanShape.new(name: 'ConfirmationRequired')
@@ -398,6 +399,9 @@ module Aws::S3Control
     BucketLevel.struct_class = Types::BucketLevel
 
     Buckets.member = Shapes::ShapeRef.new(shape: S3BucketArnString, location_name: "Arn")
+
+    CloudWatchMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, required: true, location_name: "IsEnabled"))
+    CloudWatchMetrics.struct_class = Types::CloudWatchMetrics
 
     CreateAccessPointForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     CreateAccessPointForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
@@ -1186,7 +1190,8 @@ module Aws::S3Control
 
     StorageLensConfigurationList.member = Shapes::ShapeRef.new(shape: ListStorageLensConfigurationEntry, location_name: "StorageLensConfiguration")
 
-    StorageLensDataExport.add_member(:s3_bucket_destination, Shapes::ShapeRef.new(shape: S3BucketDestination, required: true, location_name: "S3BucketDestination"))
+    StorageLensDataExport.add_member(:s3_bucket_destination, Shapes::ShapeRef.new(shape: S3BucketDestination, location_name: "S3BucketDestination"))
+    StorageLensDataExport.add_member(:cloud_watch_metrics, Shapes::ShapeRef.new(shape: CloudWatchMetrics, location_name: "CloudWatchMetrics"))
     StorageLensDataExport.struct_class = Types::StorageLensDataExport
 
     StorageLensDataExportEncryption.add_member(:sses3, Shapes::ShapeRef.new(shape: SSES3, location_name: "SSE-S3"))
