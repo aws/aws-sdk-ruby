@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2021-11-23)
+------------------
+
+* Feature - Introduce two new Filters to S3 Lifecycle configurations - ObjectSizeGreaterThan and ObjectSizeLessThan. Introduce a new way to trigger actions on noncurrent versions by providing the number of newer noncurrent versions along with noncurrent days.
+
 1.106.0 (2021-11-17)
 ------------------
 

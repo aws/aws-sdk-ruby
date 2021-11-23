@@ -480,10 +480,11 @@ module Aws::EC2
     #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
-    #     cidr_block: "String", # required
+    #     cidr_block: "String",
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
     #     dry_run: false,
+    #     ipv_6_native: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::TagSpecification>] :tag_specifications
@@ -508,14 +509,18 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
     # @option options [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
-    # @option options [required, String] :cidr_block
+    # @option options [String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
     #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
     #   form; for example, if you specify `100.68.0.18/18`, we modify it to
     #   `100.68.0.0/18`.
+    #
+    #   This parameter is not supported for an IPv6 only subnet.
     # @option options [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
+    #
+    #   This parameter is required for an IPv6 only subnet.
     # @option options [String] :outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
     #   Outpost ARN, you must also specify the Availability Zone of the
@@ -525,6 +530,8 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Boolean] :ipv_6_native
+    #   Indicates whether to create an IPv6 only subnet.
     # @return [Subnet]
     def create_subnet(options = {})
       options = options.merge(vpc_id: @id)
@@ -1933,8 +1940,8 @@ module Aws::EC2
     #     `cidrBlock` as the filter names.
     #
     #   * `default-for-az` - Indicates whether this is the default subnet for
-    #     the Availability Zone. You can also use `defaultForAz` as the filter
-    #     name.
+    #     the Availability Zone (`true` \| `false`). You can also use
+    #     `defaultForAz` as the filter name.
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -1944,6 +1951,9 @@ module Aws::EC2
     #
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
+    #
+    #   * `ipv6-native` - Indicates whether this is an IPv6 only subnet
+    #     (`true` \| `false`).
     #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #

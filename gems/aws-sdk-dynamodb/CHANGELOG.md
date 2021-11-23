@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2021-11-23)
+------------------
+
+* Feature - DynamoDB PartiQL now supports ReturnConsumedCapacity, which returns capacity units consumed by PartiQL APIs if the request specified returnConsumedCapacity parameter. PartiQL APIs include ExecuteStatement, BatchExecuteStatement, and ExecuteTransaction.
+
 1.66.0 (2021-11-11)
 ------------------
 

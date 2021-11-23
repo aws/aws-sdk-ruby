@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2021-11-23)
+------------------
+
+* Feature - This release adds support for reserved node exchange with restore/resize
+
 1.72.0 (2021-11-19)
 ------------------
 

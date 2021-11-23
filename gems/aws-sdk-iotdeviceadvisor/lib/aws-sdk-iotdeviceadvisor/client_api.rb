@@ -21,8 +21,11 @@ module Aws::IoTDeviceAdvisor
     DeleteSuiteDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteSuiteDefinitionResponse')
     DeviceUnderTest = Shapes::StructureShape.new(name: 'DeviceUnderTest')
     DeviceUnderTestList = Shapes::ListShape.new(name: 'DeviceUnderTestList')
+    Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     ErrorReason = Shapes::StringShape.new(name: 'ErrorReason')
     Failure = Shapes::StringShape.new(name: 'Failure')
+    GetEndpointRequest = Shapes::StructureShape.new(name: 'GetEndpointRequest')
+    GetEndpointResponse = Shapes::StructureShape.new(name: 'GetEndpointResponse')
     GetSuiteDefinitionRequest = Shapes::StructureShape.new(name: 'GetSuiteDefinitionRequest')
     GetSuiteDefinitionResponse = Shapes::StructureShape.new(name: 'GetSuiteDefinitionResponse')
     GetSuiteRunReportRequest = Shapes::StructureShape.new(name: 'GetSuiteRunReportRequest')
@@ -43,6 +46,7 @@ module Aws::IoTDeviceAdvisor
     LogUrl = Shapes::StringShape.new(name: 'LogUrl')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Message = Shapes::StringShape.new(name: 'Message')
+    ParallelRun = Shapes::BooleanShape.new(name: 'ParallelRun')
     QualificationReportDownloadUrl = Shapes::StringShape.new(name: 'QualificationReportDownloadUrl')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RootGroup = Shapes::StringShape.new(name: 'RootGroup')
@@ -105,6 +109,13 @@ module Aws::IoTDeviceAdvisor
     DeviceUnderTest.struct_class = Types::DeviceUnderTest
 
     DeviceUnderTestList.member = Shapes::ShapeRef.new(shape: DeviceUnderTest)
+
+    GetEndpointRequest.add_member(:thing_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location: "querystring", location_name: "thingArn"))
+    GetEndpointRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location: "querystring", location_name: "certificateArn"))
+    GetEndpointRequest.struct_class = Types::GetEndpointRequest
+
+    GetEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
+    GetEndpointResponse.struct_class = Types::GetEndpointResponse
 
     GetSuiteDefinitionRequest.add_member(:suite_definition_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "uri", location_name: "suiteDefinitionId"))
     GetSuiteDefinitionRequest.add_member(:suite_definition_version, Shapes::ShapeRef.new(shape: SuiteDefinitionVersion, location: "querystring", location_name: "suiteDefinitionVersion"))
@@ -218,6 +229,7 @@ module Aws::IoTDeviceAdvisor
 
     SuiteRunConfiguration.add_member(:primary_device, Shapes::ShapeRef.new(shape: DeviceUnderTest, location_name: "primaryDevice"))
     SuiteRunConfiguration.add_member(:selected_test_list, Shapes::ShapeRef.new(shape: SelectedTestList, location_name: "selectedTestList"))
+    SuiteRunConfiguration.add_member(:parallel_run, Shapes::ShapeRef.new(shape: ParallelRun, location_name: "parallelRun"))
     SuiteRunConfiguration.struct_class = Types::SuiteRunConfiguration
 
     SuiteRunInformation.add_member(:suite_definition_id, Shapes::ShapeRef.new(shape: UUID, location_name: "suiteDefinitionId"))
@@ -319,6 +331,17 @@ module Aws::IoTDeviceAdvisor
         o.output = Shapes::ShapeRef.new(shape: DeleteSuiteDefinitionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEndpoint"
+        o.http_method = "GET"
+        o.http_request_uri = "/endpoint"
+        o.input = Shapes::ShapeRef.new(shape: GetEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_suite_definition, Seahorse::Model::Operation.new.tap do |o|

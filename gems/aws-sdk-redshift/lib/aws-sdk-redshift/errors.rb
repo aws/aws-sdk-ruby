@@ -112,6 +112,7 @@ module Aws::Redshift
   # * {PartnerNotFoundFault}
   # * {ReservedNodeAlreadyExistsFault}
   # * {ReservedNodeAlreadyMigratedFault}
+  # * {ReservedNodeExchangeNotFoundFault}
   # * {ReservedNodeNotFoundFault}
   # * {ReservedNodeOfferingNotFoundFault}
   # * {ReservedNodeQuotaExceededFault}
@@ -1004,6 +1005,16 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::ReservedNodeAlreadyMigratedFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ReservedNodeExchangeNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::ReservedNodeExchangeNotFoundFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

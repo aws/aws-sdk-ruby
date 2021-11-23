@@ -673,6 +673,13 @@ module Aws::Lambda
     #         function_name: "FunctionName", # required
     #         enabled: false,
     #         batch_size: 1,
+    #         filter_criteria: {
+    #           filters: [
+    #             {
+    #               pattern: "Pattern",
+    #             },
+    #           ],
+    #         },
     #         maximum_batching_window_in_seconds: 1,
     #         parallelization_factor: 1,
     #         starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
@@ -762,7 +769,19 @@ module Aws::Lambda
     #     10,000.
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #
+    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #   @return [Integer]
+    #
+    # @!attribute [rw] filter_criteria
+    #   (Streams and Amazon SQS) A object that defines the filter criteria
+    #   used to determine whether Lambda should process an event. For more
+    #   information, see [Lambda event filtering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html
+    #   @return [Types::FilterCriteria]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
     #   (Streams and Amazon SQS standard queues) The maximum amount of time,
@@ -846,6 +865,7 @@ module Aws::Lambda
       :function_name,
       :enabled,
       :batch_size,
+      :filter_criteria,
       :maximum_batching_window_in_seconds,
       :parallelization_factor,
       :starting_position,
@@ -1078,8 +1098,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values. The default value is
-    #   `x86_64`.
+    #   string array with one of the valid values (arm64 or x86\_64). The
+    #   default value is `x86_64`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
@@ -1813,6 +1833,12 @@ module Aws::Lambda
     #   The Amazon Resource Name (ARN) of the event source.
     #   @return [String]
     #
+    # @!attribute [rw] filter_criteria
+    #   (Streams and Amazon SQS) A object that defines the filter criteria
+    #   used to determine whether Lambda should process an event. For more
+    #   information, see Event filtering.
+    #   @return [Types::FilterCriteria]
+    #
     # @!attribute [rw] function_arn
     #   The ARN of the Lambda function.
     #   @return [String]
@@ -1898,6 +1924,7 @@ module Aws::Lambda
       :maximum_batching_window_in_seconds,
       :parallelization_factor,
       :event_source_arn,
+      :filter_criteria,
       :function_arn,
       :last_modified,
       :last_processing_result,
@@ -1947,6 +1974,57 @@ module Aws::Lambda
     class FileSystemConfig < Struct.new(
       :arn,
       :local_mount_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that specifies a filter criteria.
+    #
+    # @note When making an API call, you may pass Filter
+    #   data as a hash:
+    #
+    #       {
+    #         pattern: "Pattern",
+    #       }
+    #
+    # @!attribute [rw] pattern
+    #   A filter pattern. For more information on the syntax of a filter
+    #   pattern, see [ Filter criteria syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-syntax
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :pattern)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains the filters on the event source.
+    #
+    # @note When making an API call, you may pass FilterCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             pattern: "Pattern",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   A list of filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FilterCriteria AWS API Documentation
+    #
+    class FilterCriteria < Struct.new(
+      :filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3278,6 +3356,10 @@ module Aws::Lambda
     #
     # @!attribute [rw] payload
     #   The JSON that you want to provide to your Lambda function as input.
+    #
+    #   You can enter the JSON directly. For example, `--payload '\{ "key":
+    #   "value" \}'`. You can also specify a file path. For example,
+    #   `--payload file://payload.json`.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
@@ -5239,7 +5321,8 @@ module Aws::Lambda
     #
     #   * `VIRTUAL_HOST` - (Amazon MQ) The name of the virtual host in your
     #     RabbitMQ broker. Lambda uses this RabbitMQ host as the event
-    #     source.
+    #     source. This property cannot be specified in an
+    #     UpdateEventSourceMapping API call.
     #   @return [String]
     #
     # @!attribute [rw] uri
@@ -5543,6 +5626,13 @@ module Aws::Lambda
     #         function_name: "FunctionName",
     #         enabled: false,
     #         batch_size: 1,
+    #         filter_criteria: {
+    #           filters: [
+    #             {
+    #               pattern: "Pattern",
+    #             },
+    #           ],
+    #         },
     #         maximum_batching_window_in_seconds: 1,
     #         destination_config: {
     #           on_success: {
@@ -5613,7 +5703,19 @@ module Aws::Lambda
     #     10,000.
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
+    #
+    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
     #   @return [Integer]
+    #
+    # @!attribute [rw] filter_criteria
+    #   (Streams and Amazon SQS) A object that defines the filter criteria
+    #   used to determine whether Lambda should process an event. For more
+    #   information, see [Lambda event filtering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html
+    #   @return [Types::FilterCriteria]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
     #   (Streams and Amazon SQS standard queues) The maximum amount of time,
@@ -5674,6 +5776,7 @@ module Aws::Lambda
       :function_name,
       :enabled,
       :batch_size,
+      :filter_criteria,
       :maximum_batching_window_in_seconds,
       :destination_config,
       :maximum_record_age_in_seconds,
@@ -5763,8 +5866,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values. The default value is
-    #   `x86_64`.
+    #   string array with one of the valid values (arm64 or x86\_64). The
+    #   default value is `x86_64`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest AWS API Documentation

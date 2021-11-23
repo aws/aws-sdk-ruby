@@ -517,6 +517,8 @@ module Aws::S3
     #                 key: "ObjectKey", # required
     #                 value: "Value", # required
     #               },
+    #               object_size_greater_than: 1,
+    #               object_size_less_than: 1,
     #               and: {
     #                 prefix: "Prefix",
     #                 tags: [
@@ -525,6 +527,8 @@ module Aws::S3
     #                     value: "Value", # required
     #                   },
     #                 ],
+    #                 object_size_greater_than: 1,
+    #                 object_size_less_than: 1,
     #               },
     #             },
     #             status: "Enabled", # required, accepts Enabled, Disabled
@@ -539,10 +543,12 @@ module Aws::S3
     #               {
     #                 noncurrent_days: 1,
     #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #                 newer_noncurrent_versions: 1,
     #               },
     #             ],
     #             noncurrent_version_expiration: {
     #               noncurrent_days: 1,
+    #               newer_noncurrent_versions: 1,
     #             },
     #             abort_incomplete_multipart_upload: {
     #               days_after_initiation: 1,
@@ -1113,6 +1119,9 @@ module Aws::S3
     #
     # @!attribute [rw] parts
     #   Array of CompletedPart data types.
+    #
+    #   If you do not supply a valid `Part` with your request, the service
+    #   sends back an HTTP 400 response.
     #   @return [Array<Types::CompletedPart>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompletedMultipartUpload AWS API Documentation
@@ -7325,9 +7334,11 @@ module Aws::S3
     #             noncurrent_version_transition: {
     #               noncurrent_days: 1,
     #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #               newer_noncurrent_versions: 1,
     #             },
     #             noncurrent_version_expiration: {
     #               noncurrent_days: 1,
+    #               newer_noncurrent_versions: 1,
     #             },
     #             abort_incomplete_multipart_upload: {
     #               days_after_initiation: 1,
@@ -7405,6 +7416,8 @@ module Aws::S3
     #             key: "ObjectKey", # required
     #             value: "Value", # required
     #           },
+    #           object_size_greater_than: 1,
+    #           object_size_less_than: 1,
     #           and: {
     #             prefix: "Prefix",
     #             tags: [
@@ -7413,6 +7426,8 @@ module Aws::S3
     #                 value: "Value", # required
     #               },
     #             ],
+    #             object_size_greater_than: 1,
+    #             object_size_less_than: 1,
     #           },
     #         },
     #         status: "Enabled", # required, accepts Enabled, Disabled
@@ -7427,10 +7442,12 @@ module Aws::S3
     #           {
     #             noncurrent_days: 1,
     #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #             newer_noncurrent_versions: 1,
     #           },
     #         ],
     #         noncurrent_version_expiration: {
     #           noncurrent_days: 1,
+    #           newer_noncurrent_versions: 1,
     #         },
     #         abort_incomplete_multipart_upload: {
     #           days_after_initiation: 1,
@@ -7538,6 +7555,8 @@ module Aws::S3
     #             value: "Value", # required
     #           },
     #         ],
+    #         object_size_greater_than: 1,
+    #         object_size_less_than: 1,
     #       }
     #
     # @!attribute [rw] prefix
@@ -7549,11 +7568,21 @@ module Aws::S3
     #   the rule to apply.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] object_size_greater_than
+    #   Minimum object size to which the rule applies.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] object_size_less_than
+    #   Maximum object size to which the rule applies.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleRuleAndOperator AWS API Documentation
     #
     class LifecycleRuleAndOperator < Struct.new(
       :prefix,
-      :tags)
+      :tags,
+      :object_size_greater_than,
+      :object_size_less_than)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7571,6 +7600,8 @@ module Aws::S3
     #           key: "ObjectKey", # required
     #           value: "Value", # required
     #         },
+    #         object_size_greater_than: 1,
+    #         object_size_less_than: 1,
     #         and: {
     #           prefix: "Prefix",
     #           tags: [
@@ -7579,6 +7610,8 @@ module Aws::S3
     #               value: "Value", # required
     #             },
     #           ],
+    #           object_size_greater_than: 1,
+    #           object_size_less_than: 1,
     #         },
     #       }
     #
@@ -7599,6 +7632,14 @@ module Aws::S3
     #   to apply.
     #   @return [Types::Tag]
     #
+    # @!attribute [rw] object_size_greater_than
+    #   Minimum object size to which the rule applies.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] object_size_less_than
+    #   Maximum object size to which the rule applies.
+    #   @return [Integer]
+    #
     # @!attribute [rw] and
     #   This is used in a Lifecycle Rule Filter to apply a logical AND to
     #   two or more predicates. The Lifecycle Rule will apply to any object
@@ -7610,6 +7651,8 @@ module Aws::S3
     class LifecycleRuleFilter < Struct.new(
       :prefix,
       :tag,
+      :object_size_greater_than,
+      :object_size_less_than,
       :and)
       SENSITIVE = []
       include Aws::Structure
@@ -9261,6 +9304,7 @@ module Aws::S3
     #
     #       {
     #         noncurrent_days: 1,
+    #         newer_noncurrent_versions: 1,
     #       }
     #
     # @!attribute [rw] noncurrent_days
@@ -9274,10 +9318,23 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations
     #   @return [Integer]
     #
+    # @!attribute [rw] newer_noncurrent_versions
+    #   Specifies how many noncurrent versions Amazon S3 will retain. If
+    #   there are this many more recent noncurrent versions, Amazon S3 will
+    #   take the associated action. For more information about noncurrent
+    #   versions, see [Lifecycle configuration elements][1] in the *Amazon
+    #   S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoncurrentVersionExpiration AWS API Documentation
     #
     class NoncurrentVersionExpiration < Struct.new(
-      :noncurrent_days)
+      :noncurrent_days,
+      :newer_noncurrent_versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9297,6 +9354,7 @@ module Aws::S3
     #       {
     #         noncurrent_days: 1,
     #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #         newer_noncurrent_versions: 1,
     #       }
     #
     # @!attribute [rw] noncurrent_days
@@ -9314,11 +9372,24 @@ module Aws::S3
     #   The class of storage used to store the object.
     #   @return [String]
     #
+    # @!attribute [rw] newer_noncurrent_versions
+    #   Specifies how many noncurrent versions Amazon S3 will retain. If
+    #   there are this many more recent noncurrent versions, Amazon S3 will
+    #   take the associated action. For more information about noncurrent
+    #   versions, see [Lifecycle configuration elements][1] in the *Amazon
+    #   S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoncurrentVersionTransition AWS API Documentation
     #
     class NoncurrentVersionTransition < Struct.new(
       :noncurrent_days,
-      :storage_class)
+      :storage_class,
+      :newer_noncurrent_versions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10599,6 +10670,8 @@ module Aws::S3
     #                   key: "ObjectKey", # required
     #                   value: "Value", # required
     #                 },
+    #                 object_size_greater_than: 1,
+    #                 object_size_less_than: 1,
     #                 and: {
     #                   prefix: "Prefix",
     #                   tags: [
@@ -10607,6 +10680,8 @@ module Aws::S3
     #                       value: "Value", # required
     #                     },
     #                   ],
+    #                   object_size_greater_than: 1,
+    #                   object_size_less_than: 1,
     #                 },
     #               },
     #               status: "Enabled", # required, accepts Enabled, Disabled
@@ -10621,10 +10696,12 @@ module Aws::S3
     #                 {
     #                   noncurrent_days: 1,
     #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #                   newer_noncurrent_versions: 1,
     #                 },
     #               ],
     #               noncurrent_version_expiration: {
     #                 noncurrent_days: 1,
+    #                 newer_noncurrent_versions: 1,
     #               },
     #               abort_incomplete_multipart_upload: {
     #                 days_after_initiation: 1,
@@ -10684,9 +10761,11 @@ module Aws::S3
     #               noncurrent_version_transition: {
     #                 noncurrent_days: 1,
     #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #                 newer_noncurrent_versions: 1,
     #               },
     #               noncurrent_version_expiration: {
     #                 noncurrent_days: 1,
+    #                 newer_noncurrent_versions: 1,
     #               },
     #               abort_incomplete_multipart_upload: {
     #                 days_after_initiation: 1,
@@ -13700,9 +13779,11 @@ module Aws::S3
     #         noncurrent_version_transition: {
     #           noncurrent_days: 1,
     #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #           newer_noncurrent_versions: 1,
     #         },
     #         noncurrent_version_expiration: {
     #           noncurrent_days: 1,
+    #           newer_noncurrent_versions: 1,
     #         },
     #         abort_incomplete_multipart_upload: {
     #           days_after_initiation: 1,

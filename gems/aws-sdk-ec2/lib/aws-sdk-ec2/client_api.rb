@@ -1229,6 +1229,7 @@ module Aws::EC2
     HostReservationIdSet = Shapes::ListShape.new(name: 'HostReservationIdSet')
     HostReservationSet = Shapes::ListShape.new(name: 'HostReservationSet')
     HostTenancy = Shapes::StringShape.new(name: 'HostTenancy')
+    HostnameType = Shapes::StringShape.new(name: 'HostnameType')
     Hour = Shapes::IntegerShape.new(name: 'Hour')
     HttpTokensState = Shapes::StringShape.new(name: 'HttpTokensState')
     HypervisorType = Shapes::StringShape.new(name: 'HypervisorType')
@@ -1507,6 +1508,8 @@ module Aws::EC2
     LaunchTemplateOverridesList = Shapes::ListShape.new(name: 'LaunchTemplateOverridesList')
     LaunchTemplatePlacement = Shapes::StructureShape.new(name: 'LaunchTemplatePlacement')
     LaunchTemplatePlacementRequest = Shapes::StructureShape.new(name: 'LaunchTemplatePlacementRequest')
+    LaunchTemplatePrivateDnsNameOptions = Shapes::StructureShape.new(name: 'LaunchTemplatePrivateDnsNameOptions')
+    LaunchTemplatePrivateDnsNameOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplatePrivateDnsNameOptionsRequest')
     LaunchTemplateSet = Shapes::ListShape.new(name: 'LaunchTemplateSet')
     LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
     LaunchTemplateSpotMarketOptions = Shapes::StructureShape.new(name: 'LaunchTemplateSpotMarketOptions')
@@ -1629,6 +1632,8 @@ module Aws::EC2
     ModifyManagedPrefixListRequest = Shapes::StructureShape.new(name: 'ModifyManagedPrefixListRequest')
     ModifyManagedPrefixListResult = Shapes::StructureShape.new(name: 'ModifyManagedPrefixListResult')
     ModifyNetworkInterfaceAttributeRequest = Shapes::StructureShape.new(name: 'ModifyNetworkInterfaceAttributeRequest')
+    ModifyPrivateDnsNameOptionsRequest = Shapes::StructureShape.new(name: 'ModifyPrivateDnsNameOptionsRequest')
+    ModifyPrivateDnsNameOptionsResult = Shapes::StructureShape.new(name: 'ModifyPrivateDnsNameOptionsResult')
     ModifyReservedInstancesRequest = Shapes::StructureShape.new(name: 'ModifyReservedInstancesRequest')
     ModifyReservedInstancesResult = Shapes::StructureShape.new(name: 'ModifyReservedInstancesResult')
     ModifySecurityGroupRulesRequest = Shapes::StructureShape.new(name: 'ModifySecurityGroupRulesRequest')
@@ -1835,6 +1840,9 @@ module Aws::EC2
     PrivateDnsDetails = Shapes::StructureShape.new(name: 'PrivateDnsDetails')
     PrivateDnsDetailsSet = Shapes::ListShape.new(name: 'PrivateDnsDetailsSet')
     PrivateDnsNameConfiguration = Shapes::StructureShape.new(name: 'PrivateDnsNameConfiguration')
+    PrivateDnsNameOptionsOnLaunch = Shapes::StructureShape.new(name: 'PrivateDnsNameOptionsOnLaunch')
+    PrivateDnsNameOptionsRequest = Shapes::StructureShape.new(name: 'PrivateDnsNameOptionsRequest')
+    PrivateDnsNameOptionsResponse = Shapes::StructureShape.new(name: 'PrivateDnsNameOptionsResponse')
     PrivateIpAddressConfigSet = Shapes::ListShape.new(name: 'PrivateIpAddressConfigSet')
     PrivateIpAddressSpecification = Shapes::StructureShape.new(name: 'PrivateIpAddressSpecification')
     PrivateIpAddressSpecificationList = Shapes::ListShape.new(name: 'PrivateIpAddressSpecificationList')
@@ -3602,6 +3610,7 @@ module Aws::EC2
 
     CreateDefaultSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AvailabilityZone"))
     CreateDefaultSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateDefaultSubnetRequest.add_member(:ipv_6_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "Ipv6Native"))
     CreateDefaultSubnetRequest.struct_class = Types::CreateDefaultSubnetRequest
 
     CreateDefaultSubnetResult.add_member(:subnet, Shapes::ShapeRef.new(shape: Subnet, location_name: "subnet"))
@@ -4008,11 +4017,12 @@ module Aws::EC2
     CreateSubnetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     CreateSubnetRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZoneId"))
-    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
+    CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "CidrBlock"))
     CreateSubnetRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
     CreateSubnetRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "OutpostArn"))
     CreateSubnetRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     CreateSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    CreateSubnetRequest.add_member(:ipv_6_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "Ipv6Native"))
     CreateSubnetRequest.struct_class = Types::CreateSubnetRequest
 
     CreateSubnetResult.add_member(:subnet, Shapes::ShapeRef.new(shape: Subnet, location_name: "subnet"))
@@ -7658,6 +7668,8 @@ module Aws::EC2
     Instance.add_member(:platform_details, Shapes::ShapeRef.new(shape: String, location_name: "platformDetails"))
     Instance.add_member(:usage_operation, Shapes::ShapeRef.new(shape: String, location_name: "usageOperation"))
     Instance.add_member(:usage_operation_update_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "usageOperationUpdateTime"))
+    Instance.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: PrivateDnsNameOptionsResponse, location_name: "privateDnsNameOptions"))
+    Instance.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
     Instance.struct_class = Types::Instance
 
     InstanceAttribute.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "groupSet"))
@@ -8425,6 +8437,16 @@ module Aws::EC2
     LaunchTemplatePlacementRequest.add_member(:partition_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PartitionNumber"))
     LaunchTemplatePlacementRequest.struct_class = Types::LaunchTemplatePlacementRequest
 
+    LaunchTemplatePrivateDnsNameOptions.add_member(:hostname_type, Shapes::ShapeRef.new(shape: HostnameType, location_name: "hostnameType"))
+    LaunchTemplatePrivateDnsNameOptions.add_member(:enable_resource_name_dns_a_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableResourceNameDnsARecord"))
+    LaunchTemplatePrivateDnsNameOptions.add_member(:enable_resource_name_dns_aaaa_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableResourceNameDnsAAAARecord"))
+    LaunchTemplatePrivateDnsNameOptions.struct_class = Types::LaunchTemplatePrivateDnsNameOptions
+
+    LaunchTemplatePrivateDnsNameOptionsRequest.add_member(:hostname_type, Shapes::ShapeRef.new(shape: HostnameType, location_name: "HostnameType"))
+    LaunchTemplatePrivateDnsNameOptionsRequest.add_member(:enable_resource_name_dns_a_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableResourceNameDnsARecord"))
+    LaunchTemplatePrivateDnsNameOptionsRequest.add_member(:enable_resource_name_dns_aaaa_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableResourceNameDnsAAAARecord"))
+    LaunchTemplatePrivateDnsNameOptionsRequest.struct_class = Types::LaunchTemplatePrivateDnsNameOptionsRequest
+
     LaunchTemplateSet.member = Shapes::ShapeRef.new(shape: LaunchTemplate, location_name: "item")
 
     LaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: LaunchTemplateId, location_name: "LaunchTemplateId"))
@@ -8868,6 +8890,16 @@ module Aws::EC2
     ModifyNetworkInterfaceAttributeRequest.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "sourceDestCheck"))
     ModifyNetworkInterfaceAttributeRequest.struct_class = Types::ModifyNetworkInterfaceAttributeRequest
 
+    ModifyPrivateDnsNameOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyPrivateDnsNameOptionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+    ModifyPrivateDnsNameOptionsRequest.add_member(:private_dns_hostname_type, Shapes::ShapeRef.new(shape: HostnameType, location_name: "PrivateDnsHostnameType"))
+    ModifyPrivateDnsNameOptionsRequest.add_member(:enable_resource_name_dns_a_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableResourceNameDnsARecord"))
+    ModifyPrivateDnsNameOptionsRequest.add_member(:enable_resource_name_dns_aaaa_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableResourceNameDnsAAAARecord"))
+    ModifyPrivateDnsNameOptionsRequest.struct_class = Types::ModifyPrivateDnsNameOptionsRequest
+
+    ModifyPrivateDnsNameOptionsResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifyPrivateDnsNameOptionsResult.struct_class = Types::ModifyPrivateDnsNameOptionsResult
+
     ModifyReservedInstancesRequest.add_member(:reserved_instances_ids, Shapes::ShapeRef.new(shape: ReservedInstancesIdStringList, required: true, location_name: "ReservedInstancesId"))
     ModifyReservedInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     ModifyReservedInstancesRequest.add_member(:target_configurations, Shapes::ShapeRef.new(shape: ReservedInstancesConfigurationList, required: true, location_name: "ReservedInstancesConfigurationSetItemType"))
@@ -8910,6 +8942,9 @@ module Aws::EC2
     ModifySubnetAttributeRequest.add_member(:map_customer_owned_ip_on_launch, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "MapCustomerOwnedIpOnLaunch"))
     ModifySubnetAttributeRequest.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: CoipPoolId, location_name: "CustomerOwnedIpv4Pool"))
     ModifySubnetAttributeRequest.add_member(:enable_dns_64, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "EnableDns64"))
+    ModifySubnetAttributeRequest.add_member(:private_dns_hostname_type_on_launch, Shapes::ShapeRef.new(shape: HostnameType, location_name: "PrivateDnsHostnameTypeOnLaunch"))
+    ModifySubnetAttributeRequest.add_member(:enable_resource_name_dns_a_record_on_launch, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "EnableResourceNameDnsARecordOnLaunch"))
+    ModifySubnetAttributeRequest.add_member(:enable_resource_name_dns_aaaa_record_on_launch, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "EnableResourceNameDnsAAAARecordOnLaunch"))
     ModifySubnetAttributeRequest.struct_class = Types::ModifySubnetAttributeRequest
 
     ModifyTrafficMirrorFilterNetworkServicesRequest.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: TrafficMirrorFilterId, required: true, location_name: "TrafficMirrorFilterId"))
@@ -9305,6 +9340,8 @@ module Aws::EC2
     NetworkInterface.add_member(:tag_set, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     NetworkInterface.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     NetworkInterface.add_member(:deny_all_igw_traffic, Shapes::ShapeRef.new(shape: Boolean, location_name: "denyAllIgwTraffic"))
+    NetworkInterface.add_member(:ipv_6_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "ipv6Native"))
+    NetworkInterface.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
     NetworkInterface.struct_class = Types::NetworkInterface
 
     NetworkInterfaceAssociation.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "allocationId"))
@@ -9612,6 +9649,21 @@ module Aws::EC2
     PrivateDnsNameConfiguration.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     PrivateDnsNameConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     PrivateDnsNameConfiguration.struct_class = Types::PrivateDnsNameConfiguration
+
+    PrivateDnsNameOptionsOnLaunch.add_member(:hostname_type, Shapes::ShapeRef.new(shape: HostnameType, location_name: "hostnameType"))
+    PrivateDnsNameOptionsOnLaunch.add_member(:enable_resource_name_dns_a_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableResourceNameDnsARecord"))
+    PrivateDnsNameOptionsOnLaunch.add_member(:enable_resource_name_dns_aaaa_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableResourceNameDnsAAAARecord"))
+    PrivateDnsNameOptionsOnLaunch.struct_class = Types::PrivateDnsNameOptionsOnLaunch
+
+    PrivateDnsNameOptionsRequest.add_member(:hostname_type, Shapes::ShapeRef.new(shape: HostnameType, location_name: "HostnameType"))
+    PrivateDnsNameOptionsRequest.add_member(:enable_resource_name_dns_a_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableResourceNameDnsARecord"))
+    PrivateDnsNameOptionsRequest.add_member(:enable_resource_name_dns_aaaa_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableResourceNameDnsAAAARecord"))
+    PrivateDnsNameOptionsRequest.struct_class = Types::PrivateDnsNameOptionsRequest
+
+    PrivateDnsNameOptionsResponse.add_member(:hostname_type, Shapes::ShapeRef.new(shape: HostnameType, location_name: "hostnameType"))
+    PrivateDnsNameOptionsResponse.add_member(:enable_resource_name_dns_a_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableResourceNameDnsARecord"))
+    PrivateDnsNameOptionsResponse.add_member(:enable_resource_name_dns_aaaa_record, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableResourceNameDnsAAAARecord"))
+    PrivateDnsNameOptionsResponse.struct_class = Types::PrivateDnsNameOptionsResponse
 
     PrivateIpAddressConfigSet.member = Shapes::ShapeRef.new(shape: ScheduledInstancesPrivateIpAddressConfig, location_name: "PrivateIpAddressConfigSet")
 
@@ -9996,6 +10048,7 @@ module Aws::EC2
     RequestLaunchTemplateData.add_member(:metadata_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataOptionsRequest, location_name: "MetadataOptions"))
     RequestLaunchTemplateData.add_member(:enclave_options, Shapes::ShapeRef.new(shape: LaunchTemplateEnclaveOptionsRequest, location_name: "EnclaveOptions"))
     RequestLaunchTemplateData.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "InstanceRequirements"))
+    RequestLaunchTemplateData.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: LaunchTemplatePrivateDnsNameOptionsRequest, location_name: "PrivateDnsNameOptions"))
     RequestLaunchTemplateData.struct_class = Types::RequestLaunchTemplateData
 
     RequestSpotFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -10258,6 +10311,7 @@ module Aws::EC2
     ResponseLaunchTemplateData.add_member(:metadata_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataOptions, location_name: "metadataOptions"))
     ResponseLaunchTemplateData.add_member(:enclave_options, Shapes::ShapeRef.new(shape: LaunchTemplateEnclaveOptions, location_name: "enclaveOptions"))
     ResponseLaunchTemplateData.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirements, location_name: "instanceRequirements"))
+    ResponseLaunchTemplateData.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: LaunchTemplatePrivateDnsNameOptions, location_name: "privateDnsNameOptions"))
     ResponseLaunchTemplateData.struct_class = Types::ResponseLaunchTemplateData
 
     RestorableByStringList.member = Shapes::ShapeRef.new(shape: String)
@@ -10411,6 +10465,7 @@ module Aws::EC2
     RunInstancesRequest.add_member(:license_specifications, Shapes::ShapeRef.new(shape: LicenseSpecificationListRequest, location_name: "LicenseSpecification"))
     RunInstancesRequest.add_member(:metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptionsRequest, location_name: "MetadataOptions"))
     RunInstancesRequest.add_member(:enclave_options, Shapes::ShapeRef.new(shape: EnclaveOptionsRequest, location_name: "EnclaveOptions"))
+    RunInstancesRequest.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: PrivateDnsNameOptionsRequest, location_name: "PrivateDnsNameOptions"))
     RunInstancesRequest.struct_class = Types::RunInstancesRequest
 
     RunScheduledInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -11040,6 +11095,8 @@ module Aws::EC2
     Subnet.add_member(:subnet_arn, Shapes::ShapeRef.new(shape: String, location_name: "subnetArn"))
     Subnet.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     Subnet.add_member(:enable_dns_64, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableDns64"))
+    Subnet.add_member(:ipv_6_native, Shapes::ShapeRef.new(shape: Boolean, location_name: "ipv6Native"))
+    Subnet.add_member(:private_dns_name_options_on_launch, Shapes::ShapeRef.new(shape: PrivateDnsNameOptionsOnLaunch, location_name: "privateDnsNameOptionsOnLaunch"))
     Subnet.struct_class = Types::Subnet
 
     SubnetAssociation.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
@@ -15809,6 +15866,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyNetworkInterfaceAttributeRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:modify_private_dns_name_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyPrivateDnsNameOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyPrivateDnsNameOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyPrivateDnsNameOptionsResult)
       end)
 
       api.add_operation(:modify_reserved_instances, Seahorse::Model::Operation.new.tap do |o|

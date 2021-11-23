@@ -492,6 +492,11 @@ module Aws::IoT
     #
     # @!attribute [rw] billing_group_name
     #   The name of the billing group.
+    #
+    #   <note markdown="1"> This call is asynchronous. It might take several seconds for the
+    #   detachment to propagate.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] billing_group_arn
@@ -3501,6 +3506,9 @@ module Aws::IoT
     #         ],
     #         namespace_id: "NamespaceId",
     #         job_template_arn: "JobTemplateArn",
+    #         document_parameters: {
+    #           "ParameterKey" => "ParameterValue",
+    #         },
     #       }
     #
     # @!attribute [rw] job_id
@@ -3590,6 +3598,11 @@ module Aws::IoT
     #   The ARN of the job template used to create the job.
     #   @return [String]
     #
+    # @!attribute [rw] document_parameters
+    #   Parameters of a managed template that you can specify to create the
+    #   job document.
+    #   @return [Hash<String,String>]
+    #
     class CreateJobRequest < Struct.new(
       :job_id,
       :targets,
@@ -3603,7 +3616,8 @@ module Aws::IoT
       :timeout_config,
       :tags,
       :namespace_id,
-      :job_template_arn)
+      :job_template_arn,
+      :document_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4745,8 +4759,8 @@ module Aws::IoT
     #   @return [Array<Types::StreamFile>]
     #
     # @!attribute [rw] role_arn
-    #   An IAM role that allows the IoT service principal assumes to access
-    #   your S3 files.
+    #   An IAM role that allows the IoT service principal to access your S3
+    #   files.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7300,6 +7314,72 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeManagedJobTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "ManagedJobTemplateName", # required
+    #         template_version: "ManagedTemplateVersion",
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The unique name of a managed job template, which is required.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_version
+    #   An optional parameter to specify version of a managed template. If
+    #   not specified, the pre-defined default version is returned.
+    #   @return [String]
+    #
+    class DescribeManagedJobTemplateRequest < Struct.new(
+      :template_name,
+      :template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_name
+    #   The unique name of a managed template, such as `AWS-Reboot`.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_arn
+    #   The unique Amazon Resource Name (ARN) of the managed template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The unique description of a managed template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_version
+    #   The version for a managed template.
+    #   @return [String]
+    #
+    # @!attribute [rw] environments
+    #   A list of environments that are supported with the managed job
+    #   template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] document_parameters
+    #   A map of key-value pairs that you can use as guidance to specify the
+    #   inputs for creating a job from a managed template.
+    #   @return [Array<Types::DocumentParameter>]
+    #
+    # @!attribute [rw] document
+    #   The document schema for a managed job template.
+    #   @return [String]
+    #
+    class DescribeManagedJobTemplateResponse < Struct.new(
+      :template_name,
+      :template_arn,
+      :description,
+      :template_version,
+      :environments,
+      :document_parameters,
+      :document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeMitigationActionRequest
     #   data as a hash:
     #
@@ -8294,6 +8374,46 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # A map of key-value pairs containing the patterns that need to be
+    # replaced in a managed template job document schema. You can use the
+    # description of each key as a guidance to specify the inputs during
+    # runtime when creating a job.
+    #
+    # @!attribute [rw] key
+    #   Key of the map field containing the patterns that need to be
+    #   replaced in a managed template job document schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of the map field containing the patterns that need to be
+    #   replaced in a managed template job document schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex
+    #   A regular expression of the patterns that need to be replaced in a
+    #   managed template job document schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] example
+    #   An example illustrating a pattern that need to be replaced in a
+    #   managed template job document schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] optional
+    #   Specifies whether a pattern that needs to be replaced in a managed
+    #   template job document schema is optional or required.
+    #   @return [Boolean]
+    #
+    class DocumentParameter < Struct.new(
+      :key,
+      :description,
+      :regex,
+      :example,
+      :optional)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The summary of a domain configuration. A domain configuration
     # specifies custom IoT-specific information about a domain. A domain
     # configuration can be associated with an Amazon Web Services-managed
@@ -8865,8 +8985,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] total_count
-    #   The total number of documents that fit the query string criteria and
-    #   contain a value for the Aggregation field targeted in the request.
+    #   The total number of things that fit the query string criteria.
     #   @return [Integer]
     #
     # @!attribute [rw] buckets
@@ -9658,6 +9777,18 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Internal error from the service that indicates an unexpected error or
+    # that the service is unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The aggregation is invalid.
     #
     # @!attribute [rw] message
@@ -9980,6 +10111,13 @@ module Aws::IoT
     #   The ARN of the job template used to create the job.
     #   @return [String]
     #
+    # @!attribute [rw] document_parameters
+    #   A key-value map that pairs the patterns that need to be replaced in
+    #   a managed template job document schema. You can use the description
+    #   of each key as a guidance to specify the inputs during runtime when
+    #   creating a job.
+    #   @return [Hash<String,String>]
+    #
     class Job < Struct.new(
       :job_arn,
       :job_id,
@@ -9999,7 +10137,8 @@ module Aws::IoT
       :job_process_details,
       :timeout_config,
       :namespace_id,
-      :job_template_arn)
+      :job_template_arn,
+      :document_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11803,6 +11942,52 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListManagedJobTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "ManagedJobTemplateName",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   An optional parameter for template name. If specified, only the
+    #   versions of the managed job templates that have the specified
+    #   template name will be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of entries that can be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListManagedJobTemplatesRequest < Struct.new(
+      :template_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_job_templates
+    #   A list of managed job templates that are returned.
+    #   @return [Array<Types::ManagedJobTemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListManagedJobTemplatesResponse < Struct.new(
+      :managed_job_templates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListMitigationActionsRequest
     #   data as a hash:
     #
@@ -13450,6 +13635,39 @@ module Aws::IoT
     #
     class MalformedPolicyException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information about the managed template.
+    #
+    # @!attribute [rw] template_arn
+    #   The Amazon Resource Name (ARN) for a managed template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The unique Name for a managed template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for a managed template.
+    #   @return [String]
+    #
+    # @!attribute [rw] environments
+    #   A list of environments that are supported with the managed job
+    #   template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] template_version
+    #   The version for a managed template.
+    #   @return [String]
+    #
+    class ManagedJobTemplateSummary < Struct.new(
+      :template_arn,
+      :template_name,
+      :description,
+      :environments,
+      :template_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16280,11 +16498,17 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # A map of key-value pairs for all supported statistics. Currently, only
-    # count is supported.
+    # A map of key-value pairs for all supported statistics. For issues with
+    # missing or unexpected values for this API, consult [ Fleet indexing
+    # troubleshooting guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/fleet-indexing-troubleshooting.html
     #
     # @!attribute [rw] count
-    #   The count of things that match the query.
+    #   The count of things that match the query string criteria and contain
+    #   a valid aggregation field value.
     #   @return [Integer]
     #
     # @!attribute [rw] average

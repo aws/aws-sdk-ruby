@@ -132,16 +132,25 @@ module Aws::STS
     #
     # @!attribute [rw] duration_seconds
     #   The duration, in seconds, of the role session. The value specified
-    #   can can range from 900 seconds (15 minutes) up to the maximum
-    #   session duration that is set for the role. The maximum session
-    #   duration setting can have a value from 1 hour to 12 hours. If you
-    #   specify a value higher than this setting or the administrator
-    #   setting (whichever is lower), the operation fails. For example, if
-    #   you specify a session duration of 12 hours, but your administrator
-    #   set the maximum session duration to 6 hours, your operation fails.
-    #   To learn how to view the maximum value for your role, see [View the
-    #   Maximum Session Duration Setting for a Role][1] in the *IAM User
-    #   Guide*.
+    #   can range from 900 seconds (15 minutes) up to the maximum session
+    #   duration set for the role. The maximum session duration setting can
+    #   have a value from 1 hour to 12 hours. If you specify a value higher
+    #   than this setting or the administrator setting (whichever is lower),
+    #   the operation fails. For example, if you specify a session duration
+    #   of 12 hours, but your administrator set the maximum session duration
+    #   to 6 hours, your operation fails.
+    #
+    #   Role chaining limits your Amazon Web Services CLI or Amazon Web
+    #   Services API role session to a maximum of one hour. When you use the
+    #   `AssumeRole` API operation to assume a role, you can specify the
+    #   duration of your role session with the `DurationSeconds` parameter.
+    #   You can specify a parameter value of up to 43200 seconds (12 hours),
+    #   depending on the maximum session duration setting for your role.
+    #   However, if you assume a role using role chaining and provide a
+    #   `DurationSeconds` parameter value greater than one hour, the
+    #   operation fails. To learn how to view the maximum value for your
+    #   role, see [View the Maximum Session Duration Setting for a Role][1]
+    #   in the *IAM User Guide*.
     #
     #   By default, the value is set to `3600` seconds.
     #
@@ -150,8 +159,8 @@ module Aws::STS
     #   credentials. The request to the federation endpoint for a console
     #   sign-in token takes a `SessionDuration` parameter that specifies the
     #   maximum length of the console session. For more information, see
-    #   [Creating a URL that Enables Federated Users to Access the
-    #   Management Console][2] in the *IAM User Guide*.
+    #   [Creating a URL that Enables Federated Users to Access the Amazon
+    #   Web Services Management Console][2] in the *IAM User Guide*.
     #
     #    </note>
     #
@@ -164,8 +173,8 @@ module Aws::STS
     # @!attribute [rw] tags
     #   A list of session tags that you want to pass. Each session tag
     #   consists of a key name and an associated value. For more information
-    #   about session tags, see [Tagging STS Sessions][1] in the *IAM User
-    #   Guide*.
+    #   about session tags, see [Tagging Amazon Web Services STS
+    #   Sessions][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. You can pass up to 50 session tags. The
     #   plaintext session tag keys can’t exceed 128 characters, and the
@@ -516,8 +525,8 @@ module Aws::STS
     #   credentials. The request to the federation endpoint for a console
     #   sign-in token takes a `SessionDuration` parameter that specifies the
     #   maximum length of the console session. For more information, see
-    #   [Creating a URL that Enables Federated Users to Access the
-    #   Management Console][2] in the *IAM User Guide*.
+    #   [Creating a URL that Enables Federated Users to Access the Amazon
+    #   Web Services Management Console][2] in the *IAM User Guide*.
     #
     #    </note>
     #
@@ -802,8 +811,8 @@ module Aws::STS
     #   credentials. The request to the federation endpoint for a console
     #   sign-in token takes a `SessionDuration` parameter that specifies the
     #   maximum length of the console session. For more information, see
-    #   [Creating a URL that Enables Federated Users to Access the
-    #   Management Console][2] in the *IAM User Guide*.
+    #   [Creating a URL that Enables Federated Users to Access the Amazon
+    #   Web Services Management Console][2] in the *IAM User Guide*.
     #
     #    </note>
     #
@@ -1012,7 +1021,7 @@ module Aws::STS
     # returned in response to an Amazon Web Services request.
     #
     # @!attribute [rw] decoded_message
-    #   An XML document that contains the decoded message.
+    #   The API returns a response with the decoded message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/DecodeAuthorizationMessageResponse AWS API Documentation
@@ -1396,8 +1405,8 @@ module Aws::STS
     #   The value is either the serial number for a hardware device (such as
     #   `GAHT12345678`) or an Amazon Resource Name (ARN) for a virtual
     #   device (such as `arn:aws:iam::123456789012:mfa/user`). You can find
-    #   the device for an IAM user by going to the Management Console and
-    #   viewing the user's security credentials.
+    #   the device for an IAM user by going to the Amazon Web Services
+    #   Management Console and viewing the user's security credentials.
     #
     #   The regex used to validate this parameter is a string of characters
     #   consisting of upper- and lower-case alphanumeric characters with no
@@ -1546,7 +1555,7 @@ module Aws::STS
     #
     #
     # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-limits-entity-length
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1612,7 +1621,8 @@ module Aws::STS
     # You can pass custom key-value pair attributes when you assume a role
     # or federate a user. These are called session tags. You can then use
     # the session tags to control access to resources. For more information,
-    # see [Tagging STS Sessions][1] in the *IAM User Guide*.
+    # see [Tagging Amazon Web Services STS Sessions][1] in the *IAM User
+    # Guide*.
     #
     #
     #

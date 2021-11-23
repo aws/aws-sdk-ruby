@@ -1182,9 +1182,13 @@ module Aws::ECS
     #   available memory resources for the container instance where the
     #   container is placed. Otherwise, the value of `memory` is used.
     #
-    #   The Docker daemon reserves a minimum of 4 MiB of memory for a
-    #   container. Therefore, we recommend that you specify fewer than 4 MiB
+    #   The Docker 20.10.0 or later daemon reserves a minimum of 6 MiB of
+    #   memory for a container, so you should not specify fewer than 6 MiB
     #   of memory for your containers.
+    #
+    #   The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB
+    #   of memory for a container, so you should not specify fewer than 4
+    #   MiB of memory for your containers.
     #
     #
     #
@@ -8958,6 +8962,14 @@ module Aws::ECS
 
     # Information about the platform for the Amazon ECS service or task.
     #
+    # For more informataion about `RuntimePlatform`, see
+    # [RuntimePlatform][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#runtime-platform
+    #
     # @note When making an API call, you may pass RuntimePlatform
     #   data as a hash:
     #
@@ -8968,6 +8980,10 @@ module Aws::ECS
     #
     # @!attribute [rw] cpu_architecture
     #   The CPU architecture.
+    #
+    #   You can run your Linux tasks on an ARM-based platform by setting the
+    #   value to `ARM64`. This option is avaiable for tasks that run on
+    #   Linuc Amazon EC2 instance or Linux containers on Fargate.
     #   @return [String]
     #
     # @!attribute [rw] operating_system_family

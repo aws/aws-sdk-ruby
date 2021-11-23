@@ -261,7 +261,8 @@ module Aws::Backup
     # different selection of Amazon Web Services resources.
     #
     # @!attribute [rw] backup_plan_name
-    #   The display name of a backup plan.
+    #   The display name of a backup plan. Must contain 1 to 50 alphanumeric
+    #   or '-\_.' characters.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -329,7 +330,8 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] backup_plan_name
-    #   The optional display name of a backup plan.
+    #   The display name of a backup plan. Must contain 1 to 50 alphanumeric
+    #   or '-\_.' characters.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -410,7 +412,10 @@ module Aws::Backup
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
     #   requests to be retried without the risk of running the operation
-    #   twice.
+    #   twice. This parameter is optional.
+    #
+    #   If used, this parameter must contain 1 to 50 alphanumeric or
+    #   '-\_.' characters.
     #   @return [String]
     #
     # @!attribute [rw] last_execution_date
@@ -444,7 +449,8 @@ module Aws::Backup
     # Specifies a scheduled task used to back up a selection of resources.
     #
     # @!attribute [rw] rule_name
-    #   An optional display name for a backup rule.
+    #   A display name for a backup rule. Must contain 1 to 50 alphanumeric
+    #   or '-\_.' characters.
     #   @return [String]
     #
     # @!attribute [rw] target_backup_vault_name
@@ -456,11 +462,13 @@ module Aws::Backup
     #
     # @!attribute [rw] schedule_expression
     #   A cron expression in UTC specifying when Backup initiates a backup
-    #   job. For more information about cron expressions, see [Schedule
-    #   Expressions for Rules][1] in the *Amazon CloudWatch Events User
-    #   Guide.*. Prior to specifying a value for this parameter, we
-    #   recommend testing your cron expression using one of the many
-    #   available cron generator and testing tools.
+    #   job. For more information about Amazon Web Services cron
+    #   expressions, see [Schedule Expressions for Rules][1] in the *Amazon
+    #   CloudWatch Events User Guide.*. Two examples of Amazon Web Services
+    #   cron expressions are ` 15 * ? * * *` (take a backup every hour at 15
+    #   minutes past the hour) and `0 12 * * ? *` (take a backup every day
+    #   at 12 noon UTC). For a table of examples, click the preceding link
+    #   and scroll down the page.
     #
     #
     #
@@ -563,7 +571,8 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] rule_name
-    #   An optional display name for a backup rule.
+    #   A display name for a backup rule. Must contain 1 to 50 alphanumeric
+    #   or '-\_.' characters.
     #   @return [String]
     #
     # @!attribute [rw] target_backup_vault_name
@@ -683,7 +692,8 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] selection_name
-    #   The display name of a resource selection document.
+    #   The display name of a resource selection document. Must contain 1 to
+    #   50 alphanumeric or '-\_.' characters.
     #   @return [String]
     #
     # @!attribute [rw] iam_role_arn
@@ -693,21 +703,56 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   An array of strings that contain Amazon Resource Names (ARNs) of
-    #   resources to assign to a backup plan.
+    #   A list of Amazon Resource Names (ARNs) to assign to a backup plan.
+    #   The maximum number of ARNs is 500 without wildcards, or 30 ARNs with
+    #   wildcards.
+    #
+    #   If you need to assign many resources to a backup plan, consider a
+    #   different resource selection strategy, such as assigning all
+    #   resources of a resource type or refining your resource selection
+    #   using tags.
     #   @return [Array<String>]
     #
     # @!attribute [rw] list_of_tags
-    #   An array of conditions used to specify a set of resources to assign
-    #   to a backup plan; for example, `"StringEquals":
-    #   \{"ec2:ResourceTag/Department": "accounting"`. Assigns the backup
-    #   plan to every resource with at least one matching tag.
+    #   A list of conditions that you define to assign resources to your
+    #   backup plans using tags. For example, `"StringEquals":
+    #   \{"Department": "accounting"`. Condition operators are case
+    #   sensitive.
+    #
+    #   `ListOfTags` differs from `Conditions` as follows:
+    #
+    #   * When you specify more than one condition, you assign all resources
+    #     that match AT LEAST ONE condition (using OR logic).
+    #
+    #   * `ListOfTags` only supports `StringEquals`. `Conditions` supports
+    #     `StringEquals`, `StringLike`, `StringNotEquals`, and
+    #     `StringNotLike`.
     #   @return [Array<Types::Condition>]
     #
     # @!attribute [rw] not_resources
+    #   A list of Amazon Resource Names (ARNs) to exclude from a backup
+    #   plan. The maximum number of ARNs is 500 without wildcards, or 30
+    #   ARNs with wildcards.
+    #
+    #   If you need to exclude many resources from a backup plan, consider a
+    #   different resource selection strategy, such as assigning only one or
+    #   a few resource types or refining your resource selection using tags.
     #   @return [Array<String>]
     #
     # @!attribute [rw] conditions
+    #   A list of conditions that you define to assign resources to your
+    #   backup plans using tags. For example, `"StringEquals":
+    #   \{"Department": "accounting"`. Condition operators are case
+    #   sensitive.
+    #
+    #   `Conditions` differs from `ListOfTags` as follows:
+    #
+    #   * When you specify more than one condition, you only assign the
+    #     resources that match ALL conditions (using AND logic).
+    #
+    #   * `Conditions` supports `StringEquals`, `StringLike`,
+    #     `StringNotEquals`, and `StringNotLike`. `ListOfTags` only supports
+    #     `StringEquals`.
     #   @return [Types::Conditions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupSelection AWS API Documentation
@@ -748,7 +793,10 @@ module Aws::Backup
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
     #   requests to be retried without the risk of running the operation
-    #   twice.
+    #   twice. This parameter is optional.
+    #
+    #   If used, this parameter must contain 1 to 50 alphanumeric or
+    #   '-\_.' characters.
     #   @return [String]
     #
     # @!attribute [rw] iam_role_arn
@@ -801,7 +849,10 @@ module Aws::Backup
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
     #   requests to be retried without the risk of running the operation
-    #   twice.
+    #   twice. This parameter is optional.
+    #
+    #   If used, this parameter must contain 1 to 50 alphanumeric or
+    #   '-\_.' characters.
     #   @return [String]
     #
     # @!attribute [rw] number_of_recovery_points
@@ -910,8 +961,8 @@ module Aws::Backup
     end
 
     # Contains an array of triplets made up of a condition type (such as
-    # `StringEquals`), a key, and a value. Conditions are used to filter
-    # resources in a selection that is assigned to a backup plan.
+    # `StringEquals`), a key, and a value. Used to filter resources using
+    # their tags and assign them to a backup plan. Case sensitive.
     #
     # @note When making an API call, you may pass Condition
     #   data as a hash:
@@ -923,20 +974,25 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] condition_type
-    #   An operation, such as `StringEquals`, that is applied to a key-value
-    #   pair used to filter resources in a selection.
+    #   An operation applied to a key-value pair used to assign resources to
+    #   your backup plan. Condition only supports `StringEquals`. For more
+    #   flexible assignment options, incluidng `StringLike` and the ability
+    #   to exclude resources from your backup plan, use `Conditions` (with
+    #   an "s" on the end) for your [ `BackupSelection` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BackupSelection.html
     #   @return [String]
     #
     # @!attribute [rw] condition_key
-    #   The key in a key-value pair. For example, in
-    #   `"ec2:ResourceTag/Department": "accounting"`,
-    #   `"ec2:ResourceTag/Department"` is the key.
+    #   The key in a key-value pair. For example, in the tag `Department:
+    #   Accounting`, `Department` is the key.
     #   @return [String]
     #
     # @!attribute [rw] condition_value
-    #   The value in a key-value pair. For example, in
-    #   `"ec2:ResourceTag/Department": "accounting"`, `"accounting"` is the
-    #   value.
+    #   The value in a key-value pair. For example, in the tag `Department:
+    #   Accounting`, `Accounting` is the value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/Condition AWS API Documentation
@@ -949,6 +1005,9 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # Includes information about tags you define to assign tagged resources
+    # to a backup plan.
+    #
     # @note When making an API call, you may pass ConditionParameter
     #   data as a hash:
     #
@@ -958,9 +1017,13 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] condition_key
+    #   The key in a key-value pair. For example, in the tag `Department:
+    #   Accounting`, `Department` is the key.
     #   @return [String]
     #
     # @!attribute [rw] condition_value
+    #   The value in a key-value pair. For example, in the tag `Department:
+    #   Accounting`, `Accounting` is the value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ConditionParameter AWS API Documentation
@@ -972,6 +1035,9 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # Contains information about which resources to include or exclude from
+    # a backup plan using their tags. Conditions are case sensitive.
+    #
     # @note When making an API call, you may pass Conditions
     #   data as a hash:
     #
@@ -1003,15 +1069,27 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] string_equals
+    #   Filters the values of your tagged resources for only those resources
+    #   that you tagged with the same value. Also called "exact matching."
     #   @return [Array<Types::ConditionParameter>]
     #
     # @!attribute [rw] string_not_equals
+    #   Filters the values of your tagged resources for only those resources
+    #   that you tagged that do not have the same value. Also called
+    #   "negated matching."
     #   @return [Array<Types::ConditionParameter>]
     #
     # @!attribute [rw] string_like
+    #   Filters the values of your tagged resources for matching tag values
+    #   with the use of a wildcard character (*) anywhere in the string.
+    #   For example, "prod*" or "*rod*" matches the tag value
+    #   "production".
     #   @return [Array<Types::ConditionParameter>]
     #
     # @!attribute [rw] string_not_like
+    #   Filters the values of your tagged resources for non-matching tag
+    #   values with the use of a wildcard character (*) anywhere in the
+    #   string.
     #   @return [Array<Types::ConditionParameter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/Conditions AWS API Documentation
@@ -1083,9 +1161,11 @@ module Aws::Backup
     end
 
     # A framework consists of one or more controls. Each control has its own
-    # control scope. The control scope defines what the control will
-    # evaluate. Three examples of control scopes are: a specific backup
-    # plan, all backup plans with a specific tag, or all backup plans.
+    # control scope. The control scope can include one or more resource
+    # types, a combination of a tag key and value, or a combination of one
+    # resource type and one resource ID. If no scope is specified,
+    # evaluations for the rule are triggered when any resource in your
+    # recording group changes in configuration.
     #
     # <note markdown="1"> To set a control scope that includes all of a particular resource,
     # leave the `ControlScope` empty or do not pass it when calling
@@ -1115,8 +1195,11 @@ module Aws::Backup
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   Describes whether the control scope includes resources with one or
-    #   more tags. Each tag is a key-value pair.
+    #   The tag key-value pair applied to those Amazon Web Services
+    #   resources that you want to trigger an evaluation for a rule. A
+    #   maximum of one key-value pair can be provided. The tag value is
+    #   optional, but it cannot be an empty string. The structure to assign
+    #   a tag is: `[\{"Key":"string","Value":"string"\}]`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ControlScope AWS API Documentation
@@ -1341,6 +1424,9 @@ module Aws::Backup
     #   without the risk of running the operation twice. If the request
     #   includes a `CreatorRequestId` that matches an existing backup plan,
     #   that plan is returned. This parameter is optional.
+    #
+    #   If used, this parameter must contain 1 to 50 alphanumeric or
+    #   '-\_.' characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupPlanInput AWS API Documentation
@@ -1453,7 +1539,10 @@ module Aws::Backup
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
     #   requests to be retried without the risk of running the operation
-    #   twice.
+    #   twice. This parameter is optional.
+    #
+    #   If used, this parameter must contain 1 to 50 alphanumeric or
+    #   '-\_.' characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupSelectionInput AWS API Documentation
@@ -1525,7 +1614,10 @@ module Aws::Backup
     # @!attribute [rw] creator_request_id
     #   A unique string that identifies the request and allows failed
     #   requests to be retried without the risk of running the operation
-    #   twice.
+    #   twice. This parameter is optional.
+    #
+    #   If used, this parameter must contain 1 to 50 alphanumeric or
+    #   '-\_.' characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CreateBackupVaultInput AWS API Documentation
@@ -2715,10 +2807,20 @@ module Aws::Backup
     #   the Region.
     #   @return [Hash<String,Boolean>]
     #
+    # @!attribute [rw] resource_type_management_preference
+    #   Returns whether a DynamoDB recovery point was taken using [
+    #   Backup's advanced DynamoDB backup features][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html
+    #   @return [Hash<String,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRegionSettingsOutput AWS API Documentation
     #
     class DescribeRegionSettingsOutput < Struct.new(
-      :resource_type_opt_in_preference)
+      :resource_type_opt_in_preference,
+      :resource_type_management_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4833,21 +4935,26 @@ module Aws::Backup
     #   An array of events that indicate the status of jobs to back up
     #   resources to the backup vault.
     #
-    #   <note markdown="1"> The following events are supported:
+    #   For common use cases and code samples, see [Using Amazon SNS to
+    #   track Backup events][1].
     #
-    #    `BACKUP_JOB_STARTED`, `BACKUP_JOB_COMPLETED`,
+    #   The following events are supported:
     #
-    #    `COPY_JOB_STARTED`, `COPY_JOB_SUCCESSFUL`, `COPY_JOB_FAILED`,
+    #   * `BACKUP_JOB_STARTED` \| `BACKUP_JOB_COMPLETED`
     #
-    #    `RESTORE_JOB_STARTED`, `RESTORE_JOB_COMPLETED`, and
-    #   `RECOVERY_POINT_MODIFIED`.
+    #   * `COPY_JOB_STARTED` \| `COPY_JOB_SUCCESSFUL` \| `COPY_JOB_FAILED`
     #
-    #    To find failed backup jobs, use `BACKUP_JOB_COMPLETED` and filter
-    #   using event metadata.
+    #   * `RESTORE_JOB_STARTED` \| `RESTORE_JOB_COMPLETED` \|
+    #     `RECOVERY_POINT_MODIFIED`
     #
-    #    Other events in the following list are deprecated.
+    #   <note markdown="1"> Ignore the list below because it includes deprecated events. Refer
+    #   to the list above.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultNotificationsInput AWS API Documentation
@@ -5910,7 +6017,9 @@ module Aws::Backup
     #
     # @!attribute [rw] tags
     #   Key-value pairs that are used to help organize your resources. You
-    #   can assign your own metadata to the resources you create.
+    #   can assign your own metadata to the resources you create. For
+    #   clarity, this is the structure to assign tags:
+    #   `[\{"Key":"string","Value":"string"\}]`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/TagResourceInput AWS API Documentation
@@ -6260,6 +6369,9 @@ module Aws::Backup
     #         resource_type_opt_in_preference: {
     #           "ResourceType" => false,
     #         },
+    #         resource_type_management_preference: {
+    #           "ResourceType" => false,
+    #         },
     #       }
     #
     # @!attribute [rw] resource_type_opt_in_preference
@@ -6267,10 +6379,20 @@ module Aws::Backup
     #   the Region.
     #   @return [Hash<String,Boolean>]
     #
+    # @!attribute [rw] resource_type_management_preference
+    #   Enables or disables [ Backup's advanced DynamoDB backup
+    #   features][1] for the Region.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html
+    #   @return [Hash<String,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateRegionSettingsInput AWS API Documentation
     #
     class UpdateRegionSettingsInput < Struct.new(
-      :resource_type_opt_in_preference)
+      :resource_type_opt_in_preference,
+      :resource_type_management_preference)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -214,9 +214,11 @@ module Aws::S3
     #           noncurrent_version_transition: {
     #             noncurrent_days: 1,
     #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #             newer_noncurrent_versions: 1,
     #           },
     #           noncurrent_version_expiration: {
     #             noncurrent_days: 1,
+    #             newer_noncurrent_versions: 1,
     #           },
     #           abort_incomplete_multipart_upload: {
     #             days_after_initiation: 1,

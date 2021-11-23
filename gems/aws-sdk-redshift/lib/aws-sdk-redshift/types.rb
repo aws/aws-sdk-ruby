@@ -900,6 +900,11 @@ module Aws::Redshift
     #   the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] reserved_node_exchange_status
+    #   The status of the reserved-node exchange request. Statuses include
+    #   in-progress and requested.
+    #   @return [Types::ReservedNodeExchangeStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -953,7 +958,8 @@ module Aws::Redshift
       :cluster_namespace_arn,
       :total_storage_capacity_in_mega_bytes,
       :aqua_configuration,
-      :default_iam_role_arn)
+      :default_iam_role_arn,
+      :reserved_node_exchange_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2878,6 +2884,8 @@ module Aws::Redshift
     #             node_type: "String",
     #             number_of_nodes: 1,
     #             classic: false,
+    #             reserved_node_id: "String",
+    #             target_reserved_node_offering_id: "String",
     #           },
     #           pause_cluster: {
     #             cluster_identifier: "String", # required
@@ -5490,6 +5498,73 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeReservedNodeExchangeStatusInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         reserved_node_id: "String",
+    #         reserved_node_exchange_request_id: "String",
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] reserved_node_id
+    #   The identifier of the source reserved node in a reserved-node
+    #   exchange request.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_node_exchange_request_id
+    #   The identifier of the reserved-node exchange request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `Marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeReservedNodeExchangeStatus` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by the `MaxRecords` parameter. You can
+    #   retrieve the next set of response records by providing the returned
+    #   marker value in the `Marker` parameter and retrying the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodeExchangeStatusInputMessage AWS API Documentation
+    #
+    class DescribeReservedNodeExchangeStatusInputMessage < Struct.new(
+      :reserved_node_id,
+      :reserved_node_exchange_request_id,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reserved_node_exchange_status_details
+    #   The details of the reserved-node exchange request, including the
+    #   status, request time, source reserved-node identifier, and
+    #   additional details.
+    #   @return [Array<Types::ReservedNodeExchangeStatus>]
+    #
+    # @!attribute [rw] marker
+    #   A pagination token provided by a previous
+    #   `DescribeReservedNodeExchangeStatus` request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodeExchangeStatusOutputMessage AWS API Documentation
+    #
+    class DescribeReservedNodeExchangeStatusOutputMessage < Struct.new(
+      :reserved_node_exchange_status_details,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeReservedNodeOfferingsMessage
     #   data as a hash:
     #
@@ -6959,6 +7034,83 @@ module Aws::Redshift
       :duration_seconds,
       :auto_create,
       :db_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetReservedNodeExchangeConfigurationOptionsInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         action_type: "restore-cluster", # required, accepts restore-cluster, resize-cluster
+    #         cluster_identifier: "String",
+    #         snapshot_identifier: "String",
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] action_type
+    #   The action type of the reserved-node configuration. The action type
+    #   can be an exchange initiated from either a snapshot or a resize.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier for the cluster that is the source for a
+    #   reserved-node exchange.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_identifier
+    #   The identifier for the snapshot that is the source for the
+    #   reserved-node exchange.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `Marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `GetReservedNodeExchangeConfigurationOptions` request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by the `MaxRecords` parameter.
+    #   You can retrieve the next set of response records by providing the
+    #   returned marker value in the `Marker` parameter and retrying the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeConfigurationOptionsInputMessage AWS API Documentation
+    #
+    class GetReservedNodeExchangeConfigurationOptionsInputMessage < Struct.new(
+      :action_type,
+      :cluster_identifier,
+      :snapshot_identifier,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   A pagination token provided by a previous
+    #   `GetReservedNodeExchangeConfigurationOptions` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_node_configuration_option_list
+    #   the configuration options for the reserved-node exchange. These
+    #   options include information about the source reserved node and
+    #   target reserved node. Details include the node type, the price, the
+    #   node count, and the offering type.
+    #   @return [Array<Types::ReservedNodeConfigurationOption>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeConfigurationOptionsOutputMessage AWS API Documentation
+    #
+    class GetReservedNodeExchangeConfigurationOptionsOutputMessage < Struct.new(
+      :marker,
+      :reserved_node_configuration_option_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8470,6 +8622,8 @@ module Aws::Redshift
     #             node_type: "String",
     #             number_of_nodes: 1,
     #             classic: false,
+    #             reserved_node_id: "String",
+    #             target_reserved_node_offering_id: "String",
     #           },
     #           pause_cluster: {
     #             cluster_identifier: "String", # required
@@ -9384,6 +9538,98 @@ module Aws::Redshift
     #
     class ReservedNodeAlreadyMigratedFault < Aws::EmptyStructure; end
 
+    # Details for a reserved-node exchange. Examples include the node type
+    # for a reserved node, the price for a node, the node's state, and
+    # other details.
+    #
+    # @!attribute [rw] source_reserved_node
+    #   Describes a reserved node. You can call the
+    #   DescribeReservedNodeOfferings API to obtain the available reserved
+    #   node offerings.
+    #   @return [Types::ReservedNode]
+    #
+    # @!attribute [rw] target_reserved_node_count
+    #   The target reserved-node count.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_reserved_node_offering
+    #   Describes a reserved node offering.
+    #   @return [Types::ReservedNodeOffering]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeConfigurationOption AWS API Documentation
+    #
+    class ReservedNodeConfigurationOption < Struct.new(
+      :source_reserved_node,
+      :target_reserved_node_count,
+      :target_reserved_node_offering)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The reserved-node exchange status wasn't found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeExchangeNotFoundFault AWS API Documentation
+    #
+    class ReservedNodeExchangeNotFoundFault < Aws::EmptyStructure; end
+
+    # Reserved-node status details, such as the source reserved-node
+    # identifier, the target reserved-node identifier, the node type, the
+    # node count, and other details.
+    #
+    # @!attribute [rw] reserved_node_exchange_request_id
+    #   The identifier of the reserved-node exchange request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the reserved-node exchange request. Statuses include
+    #   in-progress and requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_time
+    #   A date and time that indicate when the reserved-node exchange was
+    #   requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_reserved_node_id
+    #   The identifier of the source reserved node.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_reserved_node_type
+    #   The source reserved-node type, for example ds2.xlarge.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_reserved_node_count
+    #   The source reserved-node count in the cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_reserved_node_offering_id
+    #   The identifier of the target reserved node offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_reserved_node_type
+    #   The node type of the target reserved node, for example ra3.4xlarge.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_reserved_node_count
+    #   The count of target reserved nodes in the cluster.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeExchangeStatus AWS API Documentation
+    #
+    class ReservedNodeExchangeStatus < Struct.new(
+      :reserved_node_exchange_request_id,
+      :status,
+      :request_time,
+      :source_reserved_node_id,
+      :source_reserved_node_type,
+      :source_reserved_node_count,
+      :target_reserved_node_offering_id,
+      :target_reserved_node_type,
+      :target_reserved_node_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified reserved compute node not found.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeNotFoundFault AWS API Documentation
@@ -9574,6 +9820,8 @@ module Aws::Redshift
     #         node_type: "String",
     #         number_of_nodes: 1,
     #         classic: false,
+    #         reserved_node_id: "String",
+    #         target_reserved_node_offering_id: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -9600,6 +9848,14 @@ module Aws::Redshift
     #   the value to `false`, the resize type is elastic.
     #   @return [Boolean]
     #
+    # @!attribute [rw] reserved_node_id
+    #   The identifier of the reserved node.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_reserved_node_offering_id
+    #   The identifier of the target reserved node offering.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterMessage AWS API Documentation
     #
     class ResizeClusterMessage < Struct.new(
@@ -9607,7 +9863,9 @@ module Aws::Redshift
       :cluster_type,
       :node_type,
       :number_of_nodes,
-      :classic)
+      :classic,
+      :reserved_node_id,
+      :target_reserved_node_offering_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9809,6 +10067,8 @@ module Aws::Redshift
     #         availability_zone_relocation: false,
     #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #         default_iam_role_arn: "String",
+    #         reserved_node_id: "String",
+    #         target_reserved_node_offering_id: "String",
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -10081,6 +10341,14 @@ module Aws::Redshift
     #   was restored from a snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] reserved_node_id
+    #   The identifier of the target reserved node offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_reserved_node_offering_id
+    #   The identifier of the target reserved node offering.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -10112,7 +10380,9 @@ module Aws::Redshift
       :number_of_nodes,
       :availability_zone_relocation,
       :aqua_configuration_status,
-      :default_iam_role_arn)
+      :default_iam_role_arn,
+      :reserved_node_id,
+      :target_reserved_node_offering_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10685,6 +10955,8 @@ module Aws::Redshift
     #           node_type: "String",
     #           number_of_nodes: 1,
     #           classic: false,
+    #           reserved_node_id: "String",
+    #           target_reserved_node_offering_id: "String",
     #         },
     #         pause_cluster: {
     #           cluster_identifier: "String", # required

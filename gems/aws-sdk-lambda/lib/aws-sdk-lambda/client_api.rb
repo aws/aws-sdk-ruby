@@ -101,6 +101,9 @@ module Aws::Lambda
     FileSystemArn = Shapes::StringShape.new(name: 'FileSystemArn')
     FileSystemConfig = Shapes::StructureShape.new(name: 'FileSystemConfig')
     FileSystemConfigList = Shapes::ListShape.new(name: 'FileSystemConfigList')
+    Filter = Shapes::StructureShape.new(name: 'Filter')
+    FilterCriteria = Shapes::StructureShape.new(name: 'FilterCriteria')
+    FilterList = Shapes::ListShape.new(name: 'FilterList')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     FunctionArnList = Shapes::ListShape.new(name: 'FunctionArnList')
     FunctionCode = Shapes::StructureShape.new(name: 'FunctionCode')
@@ -237,6 +240,7 @@ module Aws::Lambda
     Origin = Shapes::StringShape.new(name: 'Origin')
     PackageType = Shapes::StringShape.new(name: 'PackageType')
     ParallelizationFactor = Shapes::IntegerShape.new(name: 'ParallelizationFactor')
+    Pattern = Shapes::StringShape.new(name: 'Pattern')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
@@ -447,6 +451,7 @@ module Aws::Lambda
     CreateEventSourceMappingRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
     CreateEventSourceMappingRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
     CreateEventSourceMappingRequest.add_member(:batch_size, Shapes::ShapeRef.new(shape: BatchSize, location_name: "BatchSize"))
+    CreateEventSourceMappingRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: FilterCriteria, location_name: "FilterCriteria"))
     CreateEventSourceMappingRequest.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     CreateEventSourceMappingRequest.add_member(:parallelization_factor, Shapes::ShapeRef.new(shape: ParallelizationFactor, location_name: "ParallelizationFactor"))
     CreateEventSourceMappingRequest.add_member(:starting_position, Shapes::ShapeRef.new(shape: EventSourcePosition, location_name: "StartingPosition"))
@@ -603,6 +608,7 @@ module Aws::Lambda
     EventSourceMappingConfiguration.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     EventSourceMappingConfiguration.add_member(:parallelization_factor, Shapes::ShapeRef.new(shape: ParallelizationFactor, location_name: "ParallelizationFactor"))
     EventSourceMappingConfiguration.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "EventSourceArn"))
+    EventSourceMappingConfiguration.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: FilterCriteria, location_name: "FilterCriteria"))
     EventSourceMappingConfiguration.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArn, location_name: "FunctionArn"))
     EventSourceMappingConfiguration.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
     EventSourceMappingConfiguration.add_member(:last_processing_result, Shapes::ShapeRef.new(shape: String, location_name: "LastProcessingResult"))
@@ -627,6 +633,14 @@ module Aws::Lambda
     FileSystemConfig.struct_class = Types::FileSystemConfig
 
     FileSystemConfigList.member = Shapes::ShapeRef.new(shape: FileSystemConfig)
+
+    Filter.add_member(:pattern, Shapes::ShapeRef.new(shape: Pattern, location_name: "Pattern"))
+    Filter.struct_class = Types::Filter
+
+    FilterCriteria.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    FilterCriteria.struct_class = Types::FilterCriteria
+
+    FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
     FunctionArnList.member = Shapes::ShapeRef.new(shape: FunctionArn)
 
@@ -1243,6 +1257,7 @@ module Aws::Lambda
     UpdateEventSourceMappingRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, location_name: "FunctionName"))
     UpdateEventSourceMappingRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
     UpdateEventSourceMappingRequest.add_member(:batch_size, Shapes::ShapeRef.new(shape: BatchSize, location_name: "BatchSize"))
+    UpdateEventSourceMappingRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: FilterCriteria, location_name: "FilterCriteria"))
     UpdateEventSourceMappingRequest.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     UpdateEventSourceMappingRequest.add_member(:destination_config, Shapes::ShapeRef.new(shape: DestinationConfig, location_name: "DestinationConfig"))
     UpdateEventSourceMappingRequest.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))

@@ -217,6 +217,14 @@ module Aws::RDS
     #
     #   Example: `aurora-postgresql9.6`
     #
+    #   **RDS for MySQL**
+    #
+    #   Example: `mysql8.0`
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Example: `postgres12`
+    #
     #   To list all of the available parameter group families for a DB engine,
     #   use the following command:
     #
@@ -241,6 +249,10 @@ module Aws::RDS
     #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
     #
     #   * `aurora-postgresql`
+    #
+    #   * `mysql`
+    #
+    #   * `postgres`
     # @option options [required, String] :description
     #   The description for the DB cluster parameter group.
     # @option options [Array<Types::Tag>] :tags

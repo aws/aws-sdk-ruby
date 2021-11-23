@@ -86,16 +86,11 @@ module Aws::SQS
     #     for which a ` ReceiveMessage ` action waits for a message to arrive.
     #     Valid values: An integer from 0 to 20 (seconds). Default: 0.
     #
-    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
-    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
-    #     Default: 30. For more information about the visibility timeout, see
-    #     [Visibility Timeout][2] in the *Amazon SQS Developer Guide*.
-    #
-    #   The following attributes apply only to [dead-letter queues:][3]
-    #
     #   * `RedrivePolicy` – The string that includes the parameters for the
     #     dead-letter queue functionality of the source queue as a JSON
-    #     object. The parameters are as follows:
+    #     object. For more information about the redrive policy and
+    #     dead-letter queues, see [Using Amazon SQS Dead-Letter Queues][2] in
+    #     the *Amazon SQS Developer Guide*.
     #
     #     * `deadLetterTargetArn` – The Amazon Resource Name (ARN) of the
     #       dead-letter queue to which Amazon SQS moves messages after the
@@ -106,38 +101,16 @@ module Aws::SQS
     #       the `ReceiveCount` for a message exceeds the `maxReceiveCount` for
     #       a queue, Amazon SQS moves the message to the dead-letter-queue.
     #
-    #   * `RedriveAllowPolicy` – The string that includes the parameters for
-    #     the permissions for the dead-letter queue redrive permission and
-    #     which source queues can specify dead-letter queues as a JSON object.
-    #     The parameters are as follows:
+    #     <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
+    #     Similarly, the dead-letter queue of a standard queue must also be a
+    #     standard queue.
     #
-    #     * `redrivePermission` – The permission type that defines which
-    #       source queues can specify the current queue as the dead-letter
-    #       queue. Valid values are:
+    #      </note>
     #
-    #       * `allowAll` – (Default) Any source queues in this Amazon Web
-    #         Services account in the same Region can specify this queue as
-    #         the dead-letter queue.
-    #
-    #       * `denyAll` – No source queues can specify this queue as the
-    #         dead-letter queue.
-    #
-    #       * `byQueue` – Only queues specified by the `sourceQueueArns`
-    #         parameter can specify this queue as the dead-letter queue.
-    #
-    #     * `sourceQueueArns` – The Amazon Resource Names (ARN)s of the source
-    #       queues that can specify this queue as the dead-letter queue and
-    #       redrive messages. You can specify this parameter only when the
-    #       `redrivePermission` parameter is set to `byQueue`. You can specify
-    #       up to 10 source queue ARNs. To allow more than 10 source queues to
-    #       specify dead-letter queues, set the `redrivePermission` parameter
-    #       to `allowAll`.
-    #
-    #   <note markdown="1"> The dead-letter queue of a FIFO queue must also be a FIFO queue.
-    #   Similarly, the dead-letter queue of a standard queue must also be a
-    #   standard queue.
-    #
-    #    </note>
+    #   * `VisibilityTimeout` – The visibility timeout for the queue, in
+    #     seconds. Valid values: An integer from 0 to 43,200 (12 hours).
+    #     Default: 30. For more information about the visibility timeout, see
+    #     [Visibility Timeout][3] in the *Amazon SQS Developer Guide*.
     #
     #   The following attributes apply only to [server-side-encryption][4]\:
     #
@@ -158,8 +131,12 @@ module Aws::SQS
     #     after Free Tier. For more information, see [How Does the Data Key
     #     Reuse Period Work?][8].
     #
+    #   * `SqsManagedSseEnabled` – Enables server-side queue encryption using
+    #     SQS owned encryption keys. Only one server-side encryption option is
+    #     supported per queue (e.g. [SSE-KMS][9] or [SSE-SQS][10]).
+    #
     #   The following attributes apply only to [FIFO (first-in-first-out)
-    #   queues][9]\:
+    #   queues][11]\:
     #
     #   * `FifoQueue` – Designates a queue as FIFO. Valid values are `true`
     #     and `false`. If you don't specify the `FifoQueue` attribute, Amazon
@@ -168,12 +145,12 @@ module Aws::SQS
     #     When you set this attribute, you must also provide the
     #     `MessageGroupId` for your messages explicitly.
     #
-    #     For more information, see [FIFO queue logic][10] in the *Amazon SQS
+    #     For more information, see [FIFO queue logic][12] in the *Amazon SQS
     #     Developer Guide*.
     #
     #   * `ContentBasedDeduplication` – Enables content-based deduplication.
     #     Valid values are `true` and `false`. For more information, see
-    #     [Exactly-once processing][11] in the *Amazon SQS Developer Guide*.
+    #     [Exactly-once processing][13] in the *Amazon SQS Developer Guide*.
     #     Note the following:
     #
     #     * Every message must have a unique `MessageDeduplicationId`.
@@ -205,7 +182,7 @@ module Aws::SQS
     #       duplicates and only one copy of the message is delivered.
     #
     #   The following attributes apply only to [high throughput for FIFO
-    #   queues][12]\:
+    #   queues][14]\:
     #
     #   * `DeduplicationScope` – Specifies whether message deduplication
     #     occurs at the message group or queue level. Valid values are
@@ -228,23 +205,25 @@ module Aws::SQS
     #   deduplication occurs as specified.
     #
     #   For information on throughput quotas, see [Quotas related to
-    #   messages][13] in the *Amazon SQS Developer Guide*.
+    #   messages][15] in the *Amazon SQS Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
-    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
-    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
     #   [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
     #   [5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
     #   [6]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #   [7]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys
     #   [8]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work
-    #   [9]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
-    #   [10]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-understanding-logic.html
-    #   [11]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-exactly-once-processing.html
-    #   [12]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/high-throughput-fifo.html
-    #   [13]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html
+    #   [9]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html
+    #   [10]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html
+    #   [11]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
+    #   [12]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-understanding-logic.html
+    #   [13]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-exactly-once-processing.html
+    #   [14]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/high-throughput-fifo.html
+    #   [15]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html
     # @option options [Hash<String,String>] :tags
     #   Add cost allocation tags to the specified Amazon SQS queue. For an
     #   overview, see [Tagging Your Amazon SQS Queues][1] in the *Amazon SQS
@@ -302,7 +281,8 @@ module Aws::SQS
     #
     #   Queue URLs and names are case-sensitive.
     # @option options [String] :queue_owner_aws_account_id
-    #   The account ID of the account that created the queue.
+    #   The Amazon Web Services account ID of the account that created the
+    #   queue.
     # @return [Queue]
     def get_queue_by_name(options = {})
       resp = @client.get_queue_url(options)

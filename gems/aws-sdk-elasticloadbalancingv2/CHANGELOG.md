@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2021-11-23)
+------------------
+
+* Feature - This release allows you to create internal Application and Network Load Balancers in dualstack mode. This release also adds an attribute to block internet gateway (IGW) access to the load balancer, preventing unintended access to your internal load balancers through an internet gateway.
+
 1.72.0 (2021-11-04)
 ------------------
 

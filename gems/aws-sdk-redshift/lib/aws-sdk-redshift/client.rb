@@ -1591,6 +1591,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
     #
@@ -2370,6 +2379,8 @@ module Aws::Redshift
     #         node_type: "String",
     #         number_of_nodes: 1,
     #         classic: false,
+    #         reserved_node_id: "String",
+    #         target_reserved_node_offering_id: "String",
     #       },
     #       pause_cluster: {
     #         cluster_identifier: "String", # required
@@ -2394,6 +2405,8 @@ module Aws::Redshift
     #   resp.target_action.resize_cluster.node_type #=> String
     #   resp.target_action.resize_cluster.number_of_nodes #=> Integer
     #   resp.target_action.resize_cluster.classic #=> Boolean
+    #   resp.target_action.resize_cluster.reserved_node_id #=> String
+    #   resp.target_action.resize_cluster.target_reserved_node_offering_id #=> String
     #   resp.target_action.pause_cluster.cluster_identifier #=> String
     #   resp.target_action.resume_cluster.cluster_identifier #=> String
     #   resp.schedule #=> String
@@ -2953,6 +2966,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
     #
@@ -4505,6 +4527,15 @@ module Aws::Redshift
     #   resp.clusters[0].aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.clusters[0].aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.clusters[0].default_iam_role_arn #=> String
+    #   resp.clusters[0].reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.clusters[0].reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.clusters[0].reserved_node_exchange_status.request_time #=> Time
+    #   resp.clusters[0].reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.clusters[0].reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.clusters[0].reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.clusters[0].reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.clusters[0].reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.clusters[0].reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4548,6 +4579,8 @@ module Aws::Redshift
     #
     #   * {Types::DescribeDataSharesResult#data_shares #data_shares} => Array&lt;Types::DataShare&gt;
     #   * {Types::DescribeDataSharesResult#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4612,6 +4645,8 @@ module Aws::Redshift
     #   * {Types::DescribeDataSharesForConsumerResult#data_shares #data_shares} => Array&lt;Types::DataShare&gt;
     #   * {Types::DescribeDataSharesForConsumerResult#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_data_shares_for_consumer({
@@ -4675,6 +4710,8 @@ module Aws::Redshift
     #
     #   * {Types::DescribeDataSharesForProducerResult#data_shares #data_shares} => Array&lt;Types::DataShare&gt;
     #   * {Types::DescribeDataSharesForProducerResult#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5666,6 +5703,71 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Returns exchange status details and associated metadata for a
+    # reserved-node exchange. Statuses include such values as in progress
+    # and requested.
+    #
+    # @option params [String] :reserved_node_id
+    #   The identifier of the source reserved node in a reserved-node exchange
+    #   request.
+    #
+    # @option params [String] :reserved_node_exchange_request_id
+    #   The identifier of the reserved-node exchange request.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `Marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeReservedNodeExchangeStatus` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by the `MaxRecords` parameter. You can retrieve
+    #   the next set of response records by providing the returned marker
+    #   value in the `Marker` parameter and retrying the request.
+    #
+    # @return [Types::DescribeReservedNodeExchangeStatusOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReservedNodeExchangeStatusOutputMessage#reserved_node_exchange_status_details #reserved_node_exchange_status_details} => Array&lt;Types::ReservedNodeExchangeStatus&gt;
+    #   * {Types::DescribeReservedNodeExchangeStatusOutputMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_reserved_node_exchange_status({
+    #     reserved_node_id: "String",
+    #     reserved_node_exchange_request_id: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reserved_node_exchange_status_details #=> Array
+    #   resp.reserved_node_exchange_status_details[0].reserved_node_exchange_request_id #=> String
+    #   resp.reserved_node_exchange_status_details[0].status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.reserved_node_exchange_status_details[0].request_time #=> Time
+    #   resp.reserved_node_exchange_status_details[0].source_reserved_node_id #=> String
+    #   resp.reserved_node_exchange_status_details[0].source_reserved_node_type #=> String
+    #   resp.reserved_node_exchange_status_details[0].source_reserved_node_count #=> Integer
+    #   resp.reserved_node_exchange_status_details[0].target_reserved_node_offering_id #=> String
+    #   resp.reserved_node_exchange_status_details[0].target_reserved_node_type #=> String
+    #   resp.reserved_node_exchange_status_details[0].target_reserved_node_count #=> Integer
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodeExchangeStatus AWS API Documentation
+    #
+    # @overload describe_reserved_node_exchange_status(params = {})
+    # @param [Hash] params ({})
+    def describe_reserved_node_exchange_status(params = {}, options = {})
+      req = build_request(:describe_reserved_node_exchange_status, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the available reserved node offerings by Amazon
     # Redshift with their descriptions including the node type, the fixed
     # and recurring costs of reserving the node and duration the node will
@@ -5965,6 +6067,8 @@ module Aws::Redshift
     #   resp.scheduled_actions[0].target_action.resize_cluster.node_type #=> String
     #   resp.scheduled_actions[0].target_action.resize_cluster.number_of_nodes #=> Integer
     #   resp.scheduled_actions[0].target_action.resize_cluster.classic #=> Boolean
+    #   resp.scheduled_actions[0].target_action.resize_cluster.reserved_node_id #=> String
+    #   resp.scheduled_actions[0].target_action.resize_cluster.target_reserved_node_offering_id #=> String
     #   resp.scheduled_actions[0].target_action.pause_cluster.cluster_identifier #=> String
     #   resp.scheduled_actions[0].target_action.resume_cluster.cluster_identifier #=> String
     #   resp.scheduled_actions[0].schedule #=> String
@@ -6659,6 +6763,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
     #
@@ -6960,6 +7073,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
@@ -7127,6 +7249,97 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def get_cluster_credentials(params = {}, options = {})
       req = build_request(:get_cluster_credentials, params)
+      req.send_request(options)
+    end
+
+    # Gets the configuration options for the reserved-node exchange. These
+    # options include information about the source reserved node and target
+    # reserved node offering. Details include the node type, the price, the
+    # node count, and the offering type.
+    #
+    # @option params [required, String] :action_type
+    #   The action type of the reserved-node configuration. The action type
+    #   can be an exchange initiated from either a snapshot or a resize.
+    #
+    # @option params [String] :cluster_identifier
+    #   The identifier for the cluster that is the source for a reserved-node
+    #   exchange.
+    #
+    # @option params [String] :snapshot_identifier
+    #   The identifier for the snapshot that is the source for the
+    #   reserved-node exchange.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `Marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `GetReservedNodeExchangeConfigurationOptions` request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by the `MaxRecords` parameter. You
+    #   can retrieve the next set of response records by providing the
+    #   returned marker value in the `Marker` parameter and retrying the
+    #   request.
+    #
+    # @return [Types::GetReservedNodeExchangeConfigurationOptionsOutputMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetReservedNodeExchangeConfigurationOptionsOutputMessage#marker #marker} => String
+    #   * {Types::GetReservedNodeExchangeConfigurationOptionsOutputMessage#reserved_node_configuration_option_list #reserved_node_configuration_option_list} => Array&lt;Types::ReservedNodeConfigurationOption&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_reserved_node_exchange_configuration_options({
+    #     action_type: "restore-cluster", # required, accepts restore-cluster, resize-cluster
+    #     cluster_identifier: "String",
+    #     snapshot_identifier: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.reserved_node_configuration_option_list #=> Array
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.reserved_node_id #=> String
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.reserved_node_offering_id #=> String
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.node_type #=> String
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.start_time #=> Time
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.duration #=> Integer
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.fixed_price #=> Float
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.usage_price #=> Float
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.currency_code #=> String
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.node_count #=> Integer
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.state #=> String
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.offering_type #=> String
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.recurring_charges #=> Array
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.recurring_charges[0].recurring_charge_amount #=> Float
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.recurring_charges[0].recurring_charge_frequency #=> String
+    #   resp.reserved_node_configuration_option_list[0].source_reserved_node.reserved_node_offering_type #=> String, one of "Regular", "Upgradable"
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_count #=> Integer
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_offering.reserved_node_offering_id #=> String
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_offering.node_type #=> String
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_offering.duration #=> Integer
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_offering.fixed_price #=> Float
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_offering.usage_price #=> Float
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_offering.currency_code #=> String
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_offering.offering_type #=> String
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_offering.recurring_charges #=> Array
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_offering.recurring_charges[0].recurring_charge_amount #=> Float
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_offering.recurring_charges[0].recurring_charge_frequency #=> String
+    #   resp.reserved_node_configuration_option_list[0].target_reserved_node_offering.reserved_node_offering_type #=> String, one of "Regular", "Upgradable"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeConfigurationOptions AWS API Documentation
+    #
+    # @overload get_reserved_node_exchange_configuration_options(params = {})
+    # @param [Hash] params ({})
+    def get_reserved_node_exchange_configuration_options(params = {}, options = {})
+      req = build_request(:get_reserved_node_exchange_configuration_options, params)
       req.send_request(options)
     end
 
@@ -7689,6 +7902,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
     #
@@ -7834,6 +8056,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision AWS API Documentation
     #
@@ -7992,6 +8223,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
     #
@@ -8153,6 +8393,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance AWS API Documentation
     #
@@ -8599,6 +8848,8 @@ module Aws::Redshift
     #         node_type: "String",
     #         number_of_nodes: 1,
     #         classic: false,
+    #         reserved_node_id: "String",
+    #         target_reserved_node_offering_id: "String",
     #       },
     #       pause_cluster: {
     #         cluster_identifier: "String", # required
@@ -8623,6 +8874,8 @@ module Aws::Redshift
     #   resp.target_action.resize_cluster.node_type #=> String
     #   resp.target_action.resize_cluster.number_of_nodes #=> Integer
     #   resp.target_action.resize_cluster.classic #=> Boolean
+    #   resp.target_action.resize_cluster.reserved_node_id #=> String
+    #   resp.target_action.resize_cluster.target_reserved_node_offering_id #=> String
     #   resp.target_action.pause_cluster.cluster_identifier #=> String
     #   resp.target_action.resume_cluster.cluster_identifier #=> String
     #   resp.schedule #=> String
@@ -8814,6 +9067,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
     #
@@ -9058,6 +9320,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
     #
@@ -9265,6 +9536,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
     #
@@ -9424,6 +9704,12 @@ module Aws::Redshift
     #   classic resize process. If you don't provide this parameter or set
     #   the value to `false`, the resize type is elastic.
     #
+    # @option params [String] :reserved_node_id
+    #   The identifier of the reserved node.
+    #
+    # @option params [String] :target_reserved_node_offering_id
+    #   The identifier of the target reserved node offering.
+    #
     # @return [Types::ResizeClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ResizeClusterResult#cluster #cluster} => Types::Cluster
@@ -9436,6 +9722,8 @@ module Aws::Redshift
     #     node_type: "String",
     #     number_of_nodes: 1,
     #     classic: false,
+    #     reserved_node_id: "String",
+    #     target_reserved_node_offering_id: "String",
     #   })
     #
     # @example Response structure
@@ -9549,6 +9837,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster AWS API Documentation
     #
@@ -9819,6 +10116,12 @@ module Aws::Redshift
     #   default for the cluster when the cluster was last modified while it
     #   was restored from a snapshot.
     #
+    # @option params [String] :reserved_node_id
+    #   The identifier of the target reserved node offering.
+    #
+    # @option params [String] :target_reserved_node_offering_id
+    #   The identifier of the target reserved node offering.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -9855,6 +10158,8 @@ module Aws::Redshift
     #     availability_zone_relocation: false,
     #     aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #     default_iam_role_arn: "String",
+    #     reserved_node_id: "String",
+    #     target_reserved_node_offering_id: "String",
     #   })
     #
     # @example Response structure
@@ -9968,6 +10273,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
     #
@@ -10197,6 +10511,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
     #
@@ -10562,6 +10885,15 @@ module Aws::Redshift
     #   resp.cluster.aqua_configuration.aqua_status #=> String, one of "enabled", "disabled", "applying"
     #   resp.cluster.aqua_configuration.aqua_configuration_status #=> String, one of "enabled", "disabled", "auto"
     #   resp.cluster.default_iam_role_arn #=> String
+    #   resp.cluster.reserved_node_exchange_status.reserved_node_exchange_request_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.status #=> String, one of "REQUESTED", "PENDING", "IN_PROGRESS", "RETRYING", "SUCCEEDED", "FAILED"
+    #   resp.cluster.reserved_node_exchange_status.request_time #=> Time
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.source_reserved_node_count #=> Integer
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_offering_id #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_type #=> String
+    #   resp.cluster.reserved_node_exchange_status.target_reserved_node_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
@@ -10637,7 +10969,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

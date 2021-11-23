@@ -767,16 +767,38 @@ module Aws::DynamoDB
     #             consistent_read: false,
     #           },
     #         ],
+    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
     #       }
     #
     # @!attribute [rw] statements
     #   The list of PartiQL statements representing the batch to run.
     #   @return [Array<Types::BatchStatementRequest>]
     #
+    # @!attribute [rw] return_consumed_capacity
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
+    #
+    #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
+    #     for the operation, together with `ConsumedCapacity` for each table
+    #     and secondary index that was accessed.
+    #
+    #     Note that some operations, such as `GetItem` and `BatchGetItem`,
+    #     do not access any indexes at all. In these cases, specifying
+    #     `INDEXES` will only return `ConsumedCapacity` information for
+    #     table(s).
+    #
+    #   * `TOTAL` - The response includes only the aggregate
+    #     `ConsumedCapacity` for the operation.
+    #
+    #   * `NONE` - No `ConsumedCapacity` details are included in the
+    #     response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchExecuteStatementInput AWS API Documentation
     #
     class BatchExecuteStatementInput < Struct.new(
-      :statements)
+      :statements,
+      :return_consumed_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -785,10 +807,16 @@ module Aws::DynamoDB
     #   The response to each PartiQL statement in the batch.
     #   @return [Array<Types::BatchStatementResponse>]
     #
+    # @!attribute [rw] consumed_capacity
+    #   The capacity units consumed by the entire operation. The values of
+    #   the list are ordered according to the ordering of the statements.
+    #   @return [Array<Types::ConsumedCapacity>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchExecuteStatementOutput AWS API Documentation
     #
     class BatchExecuteStatementOutput < Struct.new(
-      :responses)
+      :responses,
+      :consumed_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -908,8 +936,8 @@ module Aws::DynamoDB
     #   @return [Hash<String,Types::KeysAndAttributes>]
     #
     # @!attribute [rw] return_consumed_capacity
-    #   Determines the level of detail about provisioned throughput
-    #   consumption that is returned in the response:
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
     #
     #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
     #     for the operation, together with `ConsumedCapacity` for each table
@@ -1128,8 +1156,8 @@ module Aws::DynamoDB
     #   @return [Hash<String,Array<Types::WriteRequest>>]
     #
     # @!attribute [rw] return_consumed_capacity
-    #   Determines the level of detail about provisioned throughput
-    #   consumption that is returned in the response:
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
     #
     #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
     #     for the operation, together with `ConsumedCapacity` for each table
@@ -2488,8 +2516,8 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] return_consumed_capacity
-    #   Determines the level of detail about provisioned throughput
-    #   consumption that is returned in the response:
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
     #
     #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
     #     for the operation, together with `ConsumedCapacity` for each table
@@ -3273,6 +3301,7 @@ module Aws::DynamoDB
     #         parameters: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #         consistent_read: false,
     #         next_token: "PartiQLNextToken",
+    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
     #       }
     #
     # @!attribute [rw] statement
@@ -3294,13 +3323,34 @@ module Aws::DynamoDB
     #   in the statement response.
     #   @return [String]
     #
+    # @!attribute [rw] return_consumed_capacity
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
+    #
+    #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
+    #     for the operation, together with `ConsumedCapacity` for each table
+    #     and secondary index that was accessed.
+    #
+    #     Note that some operations, such as `GetItem` and `BatchGetItem`,
+    #     do not access any indexes at all. In these cases, specifying
+    #     `INDEXES` will only return `ConsumedCapacity` information for
+    #     table(s).
+    #
+    #   * `TOTAL` - The response includes only the aggregate
+    #     `ConsumedCapacity` for the operation.
+    #
+    #   * `NONE` - No `ConsumedCapacity` details are included in the
+    #     response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatementInput AWS API Documentation
     #
     class ExecuteStatementInput < Struct.new(
       :statement,
       :parameters,
       :consistent_read,
-      :next_token)
+      :next_token,
+      :return_consumed_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3318,11 +3368,25 @@ module Aws::DynamoDB
     #   results.
     #   @return [String]
     #
+    # @!attribute [rw] consumed_capacity
+    #   The capacity units consumed by an operation. The data returned
+    #   includes the total provisioned throughput consumed, along with
+    #   statistics for the table and any indexes involved in the operation.
+    #   `ConsumedCapacity` is only returned if the request asked for it. For
+    #   more information, see [Provisioned Throughput][1] in the *Amazon
+    #   DynamoDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   @return [Types::ConsumedCapacity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatementOutput AWS API Documentation
     #
     class ExecuteStatementOutput < Struct.new(
       :items,
-      :next_token)
+      :next_token,
+      :consumed_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3338,6 +3402,7 @@ module Aws::DynamoDB
     #           },
     #         ],
     #         client_request_token: "ClientRequestToken",
+    #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
     #       }
     #
     # @!attribute [rw] transact_statements
@@ -3352,11 +3417,23 @@ module Aws::DynamoDB
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] return_consumed_capacity
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response. For more
+    #   information, see [TransactGetItems][1] and [TransactWriteItems][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactGetItems.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactWriteItems.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteTransactionInput AWS API Documentation
     #
     class ExecuteTransactionInput < Struct.new(
       :transact_statements,
-      :client_request_token)
+      :client_request_token,
+      :return_consumed_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3365,10 +3442,16 @@ module Aws::DynamoDB
     #   The response to a PartiQL transaction.
     #   @return [Array<Types::ItemResponse>]
     #
+    # @!attribute [rw] consumed_capacity
+    #   The capacity units consumed by the entire operation. The values of
+    #   the list are ordered according to the ordering of the statements.
+    #   @return [Array<Types::ConsumedCapacity>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteTransactionOutput AWS API Documentation
     #
     class ExecuteTransactionOutput < Struct.new(
-      :responses)
+      :responses,
+      :consumed_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4038,8 +4121,8 @@ module Aws::DynamoDB
     #   @return [Boolean]
     #
     # @!attribute [rw] return_consumed_capacity
-    #   Determines the level of detail about provisioned throughput
-    #   consumption that is returned in the response:
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
     #
     #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
     #     for the operation, together with `ConsumedCapacity` for each table
@@ -6066,8 +6149,8 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] return_consumed_capacity
-    #   Determines the level of detail about provisioned throughput
-    #   consumption that is returned in the response:
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
     #
     #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
     #     for the operation, together with `ConsumedCapacity` for each table
@@ -6509,8 +6592,8 @@ module Aws::DynamoDB
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] return_consumed_capacity
-    #   Determines the level of detail about provisioned throughput
-    #   consumption that is returned in the response:
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
     #
     #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
     #     for the operation, together with `ConsumedCapacity` for each table
@@ -8156,8 +8239,8 @@ module Aws::DynamoDB
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] return_consumed_capacity
-    #   Determines the level of detail about provisioned throughput
-    #   consumption that is returned in the response:
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
     #
     #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
     #     for the operation, together with `ConsumedCapacity` for each table
@@ -9380,8 +9463,8 @@ module Aws::DynamoDB
     #   @return [Array<Types::TransactWriteItem>]
     #
     # @!attribute [rw] return_consumed_capacity
-    #   Determines the level of detail about provisioned throughput
-    #   consumption that is returned in the response:
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
     #
     #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
     #     for the operation, together with `ConsumedCapacity` for each table
@@ -10213,8 +10296,8 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] return_consumed_capacity
-    #   Determines the level of detail about provisioned throughput
-    #   consumption that is returned in the response:
+    #   Determines the level of detail about either provisioned or on-demand
+    #   throughput consumption that is returned in the response:
     #
     #   * `INDEXES` - The response includes the aggregate `ConsumedCapacity`
     #     for the operation, together with `ConsumedCapacity` for each table

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-11-23)
+------------------
+
+* Feature - This release adds new opt-in settings for advanced features for DynamoDB backups
+
 1.37.0 (2021-11-10)
 ------------------
 

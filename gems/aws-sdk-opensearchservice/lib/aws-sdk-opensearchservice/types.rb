@@ -2491,6 +2491,29 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # @!attribute [rw] deployment_type
+    #   Specifies the way in which Amazon OpenSearch Service applies the
+    #   update. Possible responses are `Blue/Green` (the update requires a
+    #   blue/green deployment), `DynamicUpdate` (no blue/green required),
+    #   `Undetermined` (the domain is undergoing an update and can't
+    #   predict the deployment type; try again after the update is
+    #   complete), and `None` (the request doesn't include any
+    #   configuration changes).
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Contains an optional message associated with the DryRunResults.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DryRunResults AWS API Documentation
+    #
+    class DryRunResults < Struct.new(
+      :deployment_type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The maintenance schedule duration: duration value and duration unit.
     # See [ Auto-Tune for Amazon OpenSearch Service ][1] for more
     # information.
@@ -4529,6 +4552,7 @@ module Aws::OpenSearchService
     #             },
     #           ],
     #         },
+    #         dry_run: false,
     #       }
     #
     # @!attribute [rw] domain_name
@@ -4611,6 +4635,12 @@ module Aws::OpenSearchService
     #   Specifies Auto-Tune options.
     #   @return [Types::AutoTuneOptions]
     #
+    # @!attribute [rw] dry_run
+    #   This flag, when set to True, specifies whether the `UpdateDomain`
+    #   request should return the results of validation checks
+    #   (DryRunResults) without actually applying the change.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigRequest AWS API Documentation
     #
     class UpdateDomainConfigRequest < Struct.new(
@@ -4627,7 +4657,8 @@ module Aws::OpenSearchService
       :domain_endpoint_options,
       :node_to_node_encryption_options,
       :advanced_security_options,
-      :auto_tune_options)
+      :auto_tune_options,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4639,10 +4670,15 @@ module Aws::OpenSearchService
     #   The status of the updated domain.
     #   @return [Types::DomainConfig]
     #
+    # @!attribute [rw] dry_run_results
+    #   Contains result of DryRun.
+    #   @return [Types::DryRunResults]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigResponse AWS API Documentation
     #
     class UpdateDomainConfigResponse < Struct.new(
-      :domain_config)
+      :domain_config,
+      :dry_run_results)
       SENSITIVE = []
       include Aws::Structure
     end

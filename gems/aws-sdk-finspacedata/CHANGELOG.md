@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2021-11-23)
+------------------
+
+* Feature - Update documentation for createChangeset API.
+
 1.6.0 (2021-11-22)
 ------------------
 

@@ -225,9 +225,10 @@ module Aws::RDS
 
     # Contains one or more identifiers of Aurora DB clusters to which the
     # RDS DB instance is replicated as a read replica. For example, when you
-    # create an Aurora read replica of an RDS MySQL DB instance, the Aurora
-    # MySQL DB cluster for the Aurora read replica is shown. This output
-    # does not contain information about cross region Aurora read replicas.
+    # create an Aurora read replica of an RDS for MySQL DB instance, the
+    # Aurora MySQL DB cluster for the Aurora read replica is shown. This
+    # output doesn't contain information about cross-Region Aurora read
+    # replicas.
     #
     # <note markdown="1"> Currently, each RDS DB instance can have only one Aurora read replica.
     #
@@ -296,12 +297,13 @@ module Aws::RDS
 
     # Specifies the accessibility options for the DB instance.
     #
-    # When the DB instance is publicly accessible, its DNS endpoint resolves
-    # to the private IP address from within the DB instance's VPC, and to
-    # the public IP address from outside of the DB instance's VPC. Access
-    # to the DB instance is ultimately controlled by the security group it
-    # uses, and that public access is not permitted if the security group
-    # assigned to the DB instance doesn't permit it.
+    # When the DB cluster is publicly accessible, its Domain Name System
+    # (DNS) endpoint resolves to the private IP address from within the DB
+    # cluster's virtual private cloud (VPC). It resolves to the public IP
+    # address from outside of the DB cluster's VPC. Access to the DB
+    # cluster is ultimately controlled by the security group it uses. That
+    # public access isn't permitted if the security group assigned to the
+    # DB cluster doesn't permit it.
     #
     # When the DB instance isn't publicly accessible, it is an internal DB
     # instance with a DNS name that resolves to a private IP address.
@@ -1085,8 +1087,8 @@ module Aws::RDS
     #
     #     * Web and Express editions: Must be an integer from 20 to 1024.
     # @option options [required, String] :db_instance_class
-    #   The compute and memory capacity of the DB instance, for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all Amazon
+    #   The compute and memory capacity of the DB instance, for example
+    #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
     #   Instance Class][1] in the *Amazon RDS User Guide.*
@@ -1380,27 +1382,28 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
-    #   See [MariaDB on Amazon RDS Versions][2] in the *Amazon RDS User
-    #   Guide.*
+    #   For information, see [MariaDB on Amazon RDS Versions][2] in the
+    #   *Amazon RDS User Guide.*
     #
     #   **Microsoft SQL Server**
     #
-    #   See [Microsoft SQL Server Versions on Amazon RDS][3] in the *Amazon
-    #   RDS User Guide.*
+    #   For information, see [Microsoft SQL Server Versions on Amazon RDS][3]
+    #   in the *Amazon RDS User Guide.*
     #
     #   **MySQL**
     #
-    #   See [MySQL on Amazon RDS Versions][4] in the *Amazon RDS User Guide.*
+    #   For information, see [MySQL on Amazon RDS Versions][4] in the *Amazon
+    #   RDS User Guide.*
     #
     #   **Oracle**
     #
-    #   See [Oracle Database Engine Release Notes][5] in the *Amazon RDS User
-    #   Guide.*
+    #   For information, see [Oracle Database Engine Release Notes][5] in the
+    #   *Amazon RDS User Guide.*
     #
     #   **PostgreSQL**
     #
-    #   See [Amazon RDS for PostgreSQL versions and extensions][6] in the
-    #   *Amazon RDS User Guide.*
+    #   For information, see [Amazon RDS for PostgreSQL versions and
+    #   extensions][6] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -1427,8 +1430,8 @@ module Aws::RDS
     # @option options [Integer] :iops
     #   The amount of Provisioned IOPS (input/output operations per second) to
     #   be initially allocated for the DB instance. For information about
-    #   valid Iops values, see [Amazon RDS Provisioned IOPS Storage to Improve
-    #   Performance][1] in the *Amazon RDS User Guide*.
+    #   valid `Iops` values, see [Amazon RDS Provisioned IOPS storage to
+    #   improve performance][1] in the *Amazon RDS User Guide*.
     #
     #   Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL DB instances,
     #   must be a multiple between .5 and 50 of the storage amount for the DB
@@ -1466,12 +1469,13 @@ module Aws::RDS
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
     #
-    #   When the DB instance is publicly accessible, its DNS endpoint resolves
-    #   to the private IP address from within the DB instance's VPC, and to
-    #   the public IP address from outside of the DB instance's VPC. Access
-    #   to the DB instance is ultimately controlled by the security group it
-    #   uses, and that public access is not permitted if the security group
-    #   assigned to the DB instance doesn't permit it.
+    #   When the DB instance is publicly accessible, its Domain Name System
+    #   (DNS) endpoint resolves to the private IP address from within the DB
+    #   instance's virtual private cloud (VPC). It resolves to the public IP
+    #   address from outside of the DB instance's VPC. Access to the DB
+    #   instance is ultimately controlled by the security group it uses. That
+    #   public access is not permitted if the security group assigned to the
+    #   DB instance doesn't permit it.
     #
     #   When the DB instance isn't publicly accessible, it is an internal DB
     #   instance with a DNS name that resolves to a private IP address.
@@ -1482,19 +1486,19 @@ module Aws::RDS
     #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
     #   isn't specified, the following applies:
     #
-    #   * If the default VPC in the target region doesn’t have an Internet
+    #   * If the default VPC in the target Region doesn’t have an internet
     #     gateway attached to it, the DB instance is private.
     #
-    #   * If the default VPC in the target region has an Internet gateway
+    #   * If the default VPC in the target Region has an internet gateway
     #     attached to it, the DB instance is public.
     #
     #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
     #   specified, the following applies:
     #
-    #   * If the subnets are part of a VPC that doesn’t have an Internet
+    #   * If the subnets are part of a VPC that doesn’t have an internet
     #     gateway attached to it, the DB instance is private.
     #
-    #   * If the subnets are part of a VPC that has an Internet gateway
+    #   * If the subnets are part of a VPC that has an internet gateway
     #     attached to it, the DB instance is public.
     # @option options [Array<Types::Tag>] :tags
     #   Tags to assign to the DB instance.
@@ -1638,7 +1642,7 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of Amazon Web
     #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping is disabled.
+    #   accounts. By default, mapping isn't enabled.
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora. In Aurora,
     #   mapping Amazon Web Services IAM accounts to database accounts is
@@ -1724,7 +1728,7 @@ module Aws::RDS
     # @option options [Boolean] :deletion_protection
     #   A value that indicates whether the DB instance has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection is disabled. For more
+    #   enabled. By default, deletion protection isn't enabled. For more
     #   information, see [ Deleting a DB Instance][1].
     #
     #   **Amazon Aurora**
@@ -1868,8 +1872,8 @@ module Aws::RDS
     #   unique key that identifies a DB instance. This parameter is stored as
     #   a lowercase string.
     # @option options [String] :db_instance_class
-    #   The compute and memory capacity of the read replica, for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all Amazon
+    #   The compute and memory capacity of the read replica, for example
+    #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
     #   Instance Class][1] in the *Amazon RDS User Guide.*
@@ -1928,8 +1932,8 @@ module Aws::RDS
     #
     #   If you do not specify a value for `DBParameterGroupName`, then Amazon
     #   RDS uses the `DBParameterGroup` of source DB instance for a same
-    #   region read replica, or the default `DBParameterGroup` for the
-    #   specified DB engine for a cross region read replica.
+    #   Region read replica, or the default `DBParameterGroup` for the
+    #   specified DB engine for a cross-Region read replica.
     #
     #   Specifying a parameter group for this operation is only supported for
     #   Oracle DB instances. It isn't supported for RDS Custom.
@@ -1944,12 +1948,13 @@ module Aws::RDS
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
     #
-    #   When the DB instance is publicly accessible, its DNS endpoint resolves
-    #   to the private IP address from within the DB instance's VPC, and to
-    #   the public IP address from outside of the DB instance's VPC. Access
-    #   to the DB instance is ultimately controlled by the security group it
-    #   uses, and that public access is not permitted if the security group
-    #   assigned to the DB instance doesn't permit it.
+    #   When the DB cluster is publicly accessible, its Domain Name System
+    #   (DNS) endpoint resolves to the private IP address from within the DB
+    #   cluster's virtual private cloud (VPC). It resolves to the public IP
+    #   address from outside of the DB cluster's VPC. Access to the DB
+    #   cluster is ultimately controlled by the security group it uses. That
+    #   public access isn't permitted if the security group assigned to the
+    #   DB cluster doesn't permit it.
     #
     #   When the DB instance isn't publicly accessible, it is an internal DB
     #   instance with a DNS name that resolves to a private IP address.
@@ -2118,7 +2123,7 @@ module Aws::RDS
     #   Region.
     #
     #    `SourceRegion` isn't supported for SQL Server, because SQL Server on
-    #   Amazon RDS doesn't support cross-region read replicas.
+    #   Amazon RDS doesn't support cross-Region read replicas.
     #
     #    </note>
     #
@@ -2131,7 +2136,7 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of Amazon Web
     #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping is disabled.
+    #   accounts. By default, mapping isn't enabled.
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
@@ -2196,7 +2201,7 @@ module Aws::RDS
     # @option options [Boolean] :deletion_protection
     #   A value that indicates whether the DB instance has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection is disabled. For more
+    #   enabled. By default, deletion protection isn't enabled. For more
     #   information, see [ Deleting a DB Instance][1].
     #
     #
@@ -2474,8 +2479,8 @@ module Aws::RDS
     #   For the valid values for allocated storage for each engine, see
     #   `CreateDBInstance`.
     # @option options [String] :db_instance_class
-    #   The new compute and memory capacity of the DB instance, for example,
-    #   `db.m4.large`. Not all DB instance classes are available in all Amazon
+    #   The new compute and memory capacity of the DB instance, for example
+    #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
     #   Instance Class][1] in the *Amazon RDS User Guide*.
@@ -2961,12 +2966,13 @@ module Aws::RDS
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
     #
-    #   When the DB instance is publicly accessible, its DNS endpoint resolves
-    #   to the private IP address from within the DB instance's VPC, and to
-    #   the public IP address from outside of the DB instance's VPC. Access
-    #   to the DB instance is ultimately controlled by the security group it
-    #   uses, and that public access is not permitted if the security group
-    #   assigned to the DB instance doesn't permit it.
+    #   When the DB cluster is publicly accessible, its Domain Name System
+    #   (DNS) endpoint resolves to the private IP address from within the DB
+    #   cluster's virtual private cloud (VPC). It resolves to the public IP
+    #   address from outside of the DB cluster's VPC. Access to the DB
+    #   cluster is ultimately controlled by the security group it uses. That
+    #   public access isn't permitted if the security group assigned to the
+    #   DB cluster doesn't permit it.
     #
     #   When the DB instance isn't publicly accessible, it is an internal DB
     #   instance with a DNS name that resolves to a private IP address.
@@ -3017,7 +3023,7 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of Amazon Web
     #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping is disabled.
+    #   accounts. By default, mapping isn't enabled.
     #
     #   This setting doesn't apply to Amazon Aurora. Mapping Amazon Web
     #   Services IAM accounts to database accounts is managed by the DB
@@ -3084,7 +3090,7 @@ module Aws::RDS
     # @option options [Boolean] :deletion_protection
     #   A value that indicates whether the DB instance has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection is disabled. For more
+    #   enabled. By default, deletion protection isn't enabled. For more
     #   information, see [ Deleting a DB Instance][1].
     #
     #
@@ -3357,10 +3363,10 @@ module Aws::RDS
     #   provided.
     # @option options [String] :db_instance_class
     #   The compute and memory capacity of the Amazon RDS DB instance, for
-    #   example, `db.m4.large`. Not all DB instance classes are available in
-    #   all Amazon Web Services Regions, or for all database engines. For the
-    #   full list of DB instance classes, and availability for your engine,
-    #   see [DB Instance Class][1] in the *Amazon RDS User Guide.*
+    #   example db.m4.large. Not all DB instance classes are available in all
+    #   Amazon Web Services Regions, or for all database engines. For the full
+    #   list of DB instance classes, and availability for your engine, see [DB
+    #   Instance Class][1] in the *Amazon RDS User Guide.*
     #
     #   Default: The same DBInstanceClass as the original DB instance.
     #
@@ -3400,12 +3406,13 @@ module Aws::RDS
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
     #
-    #   When the DB instance is publicly accessible, its DNS endpoint resolves
-    #   to the private IP address from within the DB instance's VPC, and to
-    #   the public IP address from outside of the DB instance's VPC. Access
-    #   to the DB instance is ultimately controlled by the security group it
-    #   uses, and that public access is not permitted if the security group
-    #   assigned to the DB instance doesn't permit it.
+    #   When the DB cluster is publicly accessible, its Domain Name System
+    #   (DNS) endpoint resolves to the private IP address from within the DB
+    #   cluster's virtual private cloud (VPC). It resolves to the public IP
+    #   address from outside of the DB cluster's VPC. Access to the DB
+    #   cluster is ultimately controlled by the security group it uses. That
+    #   public access isn't permitted if the security group assigned to the
+    #   DB cluster doesn't permit it.
     #
     #   When the DB instance isn't publicly accessible, it is an internal DB
     #   instance with a DNS name that resolves to a private IP address.
@@ -3540,7 +3547,7 @@ module Aws::RDS
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of Amazon Web
     #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping is disabled.
+    #   accounts. By default, mapping isn't enabled.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -3592,7 +3599,7 @@ module Aws::RDS
     # @option options [Boolean] :deletion_protection
     #   A value that indicates whether the DB instance has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection is disabled. For more
+    #   enabled. By default, deletion protection isn't enabled. For more
     #   information, see [ Deleting a DB Instance][1].
     #
     #

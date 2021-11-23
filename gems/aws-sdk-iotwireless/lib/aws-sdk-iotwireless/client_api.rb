@@ -162,6 +162,8 @@ module Aws::IoTWireless
     GetMulticastGroupResponse = Shapes::StructureShape.new(name: 'GetMulticastGroupResponse')
     GetMulticastGroupSessionRequest = Shapes::StructureShape.new(name: 'GetMulticastGroupSessionRequest')
     GetMulticastGroupSessionResponse = Shapes::StructureShape.new(name: 'GetMulticastGroupSessionResponse')
+    GetNetworkAnalyzerConfigurationRequest = Shapes::StructureShape.new(name: 'GetNetworkAnalyzerConfigurationRequest')
+    GetNetworkAnalyzerConfigurationResponse = Shapes::StructureShape.new(name: 'GetNetworkAnalyzerConfigurationResponse')
     GetPartnerAccountRequest = Shapes::StructureShape.new(name: 'GetPartnerAccountRequest')
     GetPartnerAccountResponse = Shapes::StructureShape.new(name: 'GetPartnerAccountResponse')
     GetResourceEventConfigurationRequest = Shapes::StructureShape.new(name: 'GetResourceEventConfigurationRequest')
@@ -266,6 +268,7 @@ module Aws::IoTWireless
     MulticastWirelessMetadata = Shapes::StructureShape.new(name: 'MulticastWirelessMetadata')
     NetId = Shapes::StringShape.new(name: 'NetId')
     NetIdFilters = Shapes::ListShape.new(name: 'NetIdFilters')
+    NetworkAnalyzerConfigurationName = Shapes::StringShape.new(name: 'NetworkAnalyzerConfigurationName')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NumberOfDevicesInGroup = Shapes::IntegerShape.new(name: 'NumberOfDevicesInGroup')
     NumberOfDevicesRequested = Shapes::IntegerShape.new(name: 'NumberOfDevicesRequested')
@@ -366,6 +369,7 @@ module Aws::IoTWireless
     ThingName = Shapes::StringShape.new(name: 'ThingName')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    TraceContent = Shapes::StructureShape.new(name: 'TraceContent')
     TransmitMode = Shapes::IntegerShape.new(name: 'TransmitMode')
     UlBucketSize = Shapes::IntegerShape.new(name: 'UlBucketSize')
     UlRate = Shapes::IntegerShape.new(name: 'UlRate')
@@ -381,6 +385,8 @@ module Aws::IoTWireless
     UpdateLogLevelsByResourceTypesResponse = Shapes::StructureShape.new(name: 'UpdateLogLevelsByResourceTypesResponse')
     UpdateMulticastGroupRequest = Shapes::StructureShape.new(name: 'UpdateMulticastGroupRequest')
     UpdateMulticastGroupResponse = Shapes::StructureShape.new(name: 'UpdateMulticastGroupResponse')
+    UpdateNetworkAnalyzerConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateNetworkAnalyzerConfigurationRequest')
+    UpdateNetworkAnalyzerConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateNetworkAnalyzerConfigurationResponse')
     UpdatePartnerAccountRequest = Shapes::StructureShape.new(name: 'UpdatePartnerAccountRequest')
     UpdatePartnerAccountResponse = Shapes::StructureShape.new(name: 'UpdatePartnerAccountResponse')
     UpdateResourceEventConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateResourceEventConfigurationRequest')
@@ -397,8 +403,10 @@ module Aws::IoTWireless
     WirelessDeviceEvent = Shapes::StringShape.new(name: 'WirelessDeviceEvent')
     WirelessDeviceEventLogOption = Shapes::StructureShape.new(name: 'WirelessDeviceEventLogOption')
     WirelessDeviceEventLogOptionList = Shapes::ListShape.new(name: 'WirelessDeviceEventLogOptionList')
+    WirelessDeviceFrameInfo = Shapes::StringShape.new(name: 'WirelessDeviceFrameInfo')
     WirelessDeviceId = Shapes::StringShape.new(name: 'WirelessDeviceId')
     WirelessDeviceIdType = Shapes::StringShape.new(name: 'WirelessDeviceIdType')
+    WirelessDeviceList = Shapes::ListShape.new(name: 'WirelessDeviceList')
     WirelessDeviceLogOption = Shapes::StructureShape.new(name: 'WirelessDeviceLogOption')
     WirelessDeviceLogOptionList = Shapes::ListShape.new(name: 'WirelessDeviceLogOptionList')
     WirelessDeviceName = Shapes::StringShape.new(name: 'WirelessDeviceName')
@@ -411,6 +419,7 @@ module Aws::IoTWireless
     WirelessGatewayEventLogOptionList = Shapes::ListShape.new(name: 'WirelessGatewayEventLogOptionList')
     WirelessGatewayId = Shapes::StringShape.new(name: 'WirelessGatewayId')
     WirelessGatewayIdType = Shapes::StringShape.new(name: 'WirelessGatewayIdType')
+    WirelessGatewayList = Shapes::ListShape.new(name: 'WirelessGatewayList')
     WirelessGatewayLogOption = Shapes::StructureShape.new(name: 'WirelessGatewayLogOption')
     WirelessGatewayLogOptionList = Shapes::ListShape.new(name: 'WirelessGatewayLogOptionList')
     WirelessGatewayName = Shapes::StringShape.new(name: 'WirelessGatewayName')
@@ -775,6 +784,14 @@ module Aws::IoTWireless
 
     GetMulticastGroupSessionResponse.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANMulticastSession, location_name: "LoRaWAN"))
     GetMulticastGroupSessionResponse.struct_class = Types::GetMulticastGroupSessionResponse
+
+    GetNetworkAnalyzerConfigurationRequest.add_member(:configuration_name, Shapes::ShapeRef.new(shape: NetworkAnalyzerConfigurationName, required: true, location: "uri", location_name: "ConfigurationName"))
+    GetNetworkAnalyzerConfigurationRequest.struct_class = Types::GetNetworkAnalyzerConfigurationRequest
+
+    GetNetworkAnalyzerConfigurationResponse.add_member(:trace_content, Shapes::ShapeRef.new(shape: TraceContent, location_name: "TraceContent"))
+    GetNetworkAnalyzerConfigurationResponse.add_member(:wireless_devices, Shapes::ShapeRef.new(shape: WirelessDeviceList, location_name: "WirelessDevices"))
+    GetNetworkAnalyzerConfigurationResponse.add_member(:wireless_gateways, Shapes::ShapeRef.new(shape: WirelessGatewayList, location_name: "WirelessGateways"))
+    GetNetworkAnalyzerConfigurationResponse.struct_class = Types::GetNetworkAnalyzerConfigurationResponse
 
     GetPartnerAccountRequest.add_member(:partner_account_id, Shapes::ShapeRef.new(shape: PartnerAccountId, required: true, location: "uri", location_name: "PartnerAccountId"))
     GetPartnerAccountRequest.add_member(:partner_type, Shapes::ShapeRef.new(shape: PartnerType, required: true, location: "querystring", location_name: "partnerType"))
@@ -1310,6 +1327,10 @@ module Aws::IoTWireless
     TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
+    TraceContent.add_member(:wireless_device_frame_info, Shapes::ShapeRef.new(shape: WirelessDeviceFrameInfo, location_name: "WirelessDeviceFrameInfo"))
+    TraceContent.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "LogLevel"))
+    TraceContent.struct_class = Types::TraceContent
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "querystring", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -1349,6 +1370,16 @@ module Aws::IoTWireless
     UpdateMulticastGroupRequest.struct_class = Types::UpdateMulticastGroupRequest
 
     UpdateMulticastGroupResponse.struct_class = Types::UpdateMulticastGroupResponse
+
+    UpdateNetworkAnalyzerConfigurationRequest.add_member(:configuration_name, Shapes::ShapeRef.new(shape: NetworkAnalyzerConfigurationName, required: true, location: "uri", location_name: "ConfigurationName"))
+    UpdateNetworkAnalyzerConfigurationRequest.add_member(:trace_content, Shapes::ShapeRef.new(shape: TraceContent, location_name: "TraceContent"))
+    UpdateNetworkAnalyzerConfigurationRequest.add_member(:wireless_devices_to_add, Shapes::ShapeRef.new(shape: WirelessDeviceList, location_name: "WirelessDevicesToAdd"))
+    UpdateNetworkAnalyzerConfigurationRequest.add_member(:wireless_devices_to_remove, Shapes::ShapeRef.new(shape: WirelessDeviceList, location_name: "WirelessDevicesToRemove"))
+    UpdateNetworkAnalyzerConfigurationRequest.add_member(:wireless_gateways_to_add, Shapes::ShapeRef.new(shape: WirelessGatewayList, location_name: "WirelessGatewaysToAdd"))
+    UpdateNetworkAnalyzerConfigurationRequest.add_member(:wireless_gateways_to_remove, Shapes::ShapeRef.new(shape: WirelessGatewayList, location_name: "WirelessGatewaysToRemove"))
+    UpdateNetworkAnalyzerConfigurationRequest.struct_class = Types::UpdateNetworkAnalyzerConfigurationRequest
+
+    UpdateNetworkAnalyzerConfigurationResponse.struct_class = Types::UpdateNetworkAnalyzerConfigurationResponse
 
     UpdatePartnerAccountRequest.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkUpdateAccount, required: true, location_name: "Sidewalk"))
     UpdatePartnerAccountRequest.add_member(:partner_account_id, Shapes::ShapeRef.new(shape: PartnerAccountId, required: true, location: "uri", location_name: "PartnerAccountId"))
@@ -1403,6 +1434,8 @@ module Aws::IoTWireless
 
     WirelessDeviceEventLogOptionList.member = Shapes::ShapeRef.new(shape: WirelessDeviceEventLogOption)
 
+    WirelessDeviceList.member = Shapes::ShapeRef.new(shape: WirelessDeviceId)
+
     WirelessDeviceLogOption.add_member(:type, Shapes::ShapeRef.new(shape: WirelessDeviceType, required: true, location_name: "Type"))
     WirelessDeviceLogOption.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "LogLevel"))
     WirelessDeviceLogOption.add_member(:events, Shapes::ShapeRef.new(shape: WirelessDeviceEventLogOptionList, location_name: "Events"))
@@ -1430,6 +1463,8 @@ module Aws::IoTWireless
     WirelessGatewayEventLogOption.struct_class = Types::WirelessGatewayEventLogOption
 
     WirelessGatewayEventLogOptionList.member = Shapes::ShapeRef.new(shape: WirelessGatewayEventLogOption)
+
+    WirelessGatewayList.member = Shapes::ShapeRef.new(shape: WirelessGatewayId)
 
     WirelessGatewayLogOption.add_member(:type, Shapes::ShapeRef.new(shape: WirelessGatewayType, required: true, location_name: "Type"))
     WirelessGatewayLogOption.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "LogLevel"))
@@ -1998,6 +2033,19 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_network_analyzer_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNetworkAnalyzerConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/network-analyzer-configurations/{ConfigurationName}"
+        o.input = Shapes::ShapeRef.new(shape: GetNetworkAnalyzerConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetNetworkAnalyzerConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_partner_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPartnerAccount"
         o.http_method = "GET"
@@ -2556,6 +2604,19 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:update_network_analyzer_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNetworkAnalyzerConfiguration"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/network-analyzer-configurations/{ConfigurationName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNetworkAnalyzerConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNetworkAnalyzerConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)

@@ -1788,6 +1788,43 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetNetworkAnalyzerConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_name: "NetworkAnalyzerConfigurationName", # required
+    #       }
+    #
+    # @!attribute [rw] configuration_name
+    #   NetworkAnalyzer configuration name.
+    #   @return [String]
+    #
+    class GetNetworkAnalyzerConfigurationRequest < Struct.new(
+      :configuration_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] trace_content
+    #   Trace Content for resources.
+    #   @return [Types::TraceContent]
+    #
+    # @!attribute [rw] wireless_devices
+    #   List of WirelessDevices in the NetworkAnalyzerConfiguration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] wireless_gateways
+    #   List of WirelessGateways in the NetworkAnalyzerConfiguration.
+    #   @return [Array<String>]
+    #
+    class GetNetworkAnalyzerConfigurationResponse < Struct.new(
+      :trace_content,
+      :wireless_devices,
+      :wireless_gateways)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetPartnerAccountRequest
     #   data as a hash:
     #
@@ -4487,6 +4524,31 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Trace Content for resources.
+    #
+    # @note When making an API call, you may pass TraceContent
+    #   data as a hash:
+    #
+    #       {
+    #         wireless_device_frame_info: "ENABLED", # accepts ENABLED, DISABLED
+    #         log_level: "INFO", # accepts INFO, ERROR, DISABLED
+    #       }
+    #
+    # @!attribute [rw] wireless_device_frame_info
+    #   WirelessDevice FrameInfo for trace content.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_level
+    #   The log level for a log message.
+    #   @return [String]
+    #
+    class TraceContent < Struct.new(
+      :wireless_device_frame_info,
+      :log_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -4699,6 +4761,58 @@ module Aws::IoTWireless
     end
 
     class UpdateMulticastGroupResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateNetworkAnalyzerConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_name: "NetworkAnalyzerConfigurationName", # required
+    #         trace_content: {
+    #           wireless_device_frame_info: "ENABLED", # accepts ENABLED, DISABLED
+    #           log_level: "INFO", # accepts INFO, ERROR, DISABLED
+    #         },
+    #         wireless_devices_to_add: ["WirelessDeviceId"],
+    #         wireless_devices_to_remove: ["WirelessDeviceId"],
+    #         wireless_gateways_to_add: ["WirelessGatewayId"],
+    #         wireless_gateways_to_remove: ["WirelessGatewayId"],
+    #       }
+    #
+    # @!attribute [rw] configuration_name
+    #   NetworkAnalyzer configuration name.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_content
+    #   Trace Content for resources.
+    #   @return [Types::TraceContent]
+    #
+    # @!attribute [rw] wireless_devices_to_add
+    #   WirelessDevices to add into NetworkAnalyzerConfiguration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] wireless_devices_to_remove
+    #   WirelessDevices to remove from NetworkAnalyzerConfiguration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] wireless_gateways_to_add
+    #   WirelessGateways to add into NetworkAnalyzerConfiguration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] wireless_gateways_to_remove
+    #   WirelessGateways to remove from NetworkAnalyzerConfiguration.
+    #   @return [Array<String>]
+    #
+    class UpdateNetworkAnalyzerConfigurationRequest < Struct.new(
+      :configuration_name,
+      :trace_content,
+      :wireless_devices_to_add,
+      :wireless_devices_to_remove,
+      :wireless_gateways_to_add,
+      :wireless_gateways_to_remove)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateNetworkAnalyzerConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdatePartnerAccountRequest
     #   data as a hash:

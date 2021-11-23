@@ -4951,6 +4951,11 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Boolean] :ipv_6_native
+    #   Indicates whether to create an IPv6 only subnet. If you already have a
+    #   default subnet for this Availability Zone, you must delete it before
+    #   you can create an IPv6 only subnet.
+    #
     # @return [Types::CreateDefaultSubnetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDefaultSubnetResult#subnet #subnet} => Types::Subnet
@@ -4960,6 +4965,7 @@ module Aws::EC2
     #   resp = client.create_default_subnet({
     #     availability_zone: "String", # required
     #     dry_run: false,
+    #     ipv_6_native: false,
     #   })
     #
     # @example Response structure
@@ -4988,6 +4994,10 @@ module Aws::EC2
     #   resp.subnet.subnet_arn #=> String
     #   resp.subnet.outpost_arn #=> String
     #   resp.subnet.enable_dns_64 #=> Boolean
+    #   resp.subnet.ipv_6_native #=> Boolean
+    #   resp.subnet.private_dns_name_options_on_launch.hostname_type #=> String, one of "ip-name", "resource-name"
+    #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_a_record #=> Boolean
+    #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnet AWS API Documentation
     #
@@ -6778,6 +6788,11 @@ module Aws::EC2
     #           max: 1,
     #         },
     #       },
+    #       private_dns_name_options: {
+    #         hostname_type: "ip-name", # accepts ip-name, resource-name
+    #         enable_resource_name_dns_a_record: false,
+    #         enable_resource_name_dns_aaaa_record: false,
+    #       },
     #     },
     #     tag_specifications: [
     #       {
@@ -7124,6 +7139,11 @@ module Aws::EC2
     #           max: 1,
     #         },
     #       },
+    #       private_dns_name_options: {
+    #         hostname_type: "ip-name", # accepts ip-name, resource-name
+    #         enable_resource_name_dns_a_record: false,
+    #         enable_resource_name_dns_aaaa_record: false,
+    #       },
     #     },
     #   })
     #
@@ -7265,6 +7285,9 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_version.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.launch_template_version.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
+    #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
+    #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.warning.errors #=> Array
     #   resp.warning.errors[0].code #=> String
     #   resp.warning.errors[0].message #=> String
@@ -8245,6 +8268,8 @@ module Aws::EC2
     #   resp.network_interface.tag_set[0].value #=> String
     #   resp.network_interface.vpc_id #=> String
     #   resp.network_interface.deny_all_igw_traffic #=> Boolean
+    #   resp.network_interface.ipv_6_native #=> Boolean
+    #   resp.network_interface.ipv_6_address #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterface AWS API Documentation
@@ -9543,15 +9568,19 @@ module Aws::EC2
     # @option params [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     #
-    # @option params [required, String] :cidr_block
+    # @option params [String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
     #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
     #   form; for example, if you specify `100.68.0.18/18`, we modify it to
     #   `100.68.0.0/18`.
     #
+    #   This parameter is not supported for an IPv6 only subnet.
+    #
     # @option params [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
+    #
+    #   This parameter is required for an IPv6 only subnet.
     #
     # @option params [String] :outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
@@ -9566,6 +9595,9 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Boolean] :ipv_6_native
+    #   Indicates whether to create an IPv6 only subnet.
     #
     # @return [Types::CreateSubnetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9610,11 +9642,12 @@ module Aws::EC2
     #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
-    #     cidr_block: "String", # required
+    #     cidr_block: "String",
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
+    #     ipv_6_native: false,
     #   })
     #
     # @example Response structure
@@ -9643,6 +9676,10 @@ module Aws::EC2
     #   resp.subnet.subnet_arn #=> String
     #   resp.subnet.outpost_arn #=> String
     #   resp.subnet.enable_dns_64 #=> Boolean
+    #   resp.subnet.ipv_6_native #=> Boolean
+    #   resp.subnet.private_dns_name_options_on_launch.hostname_type #=> String, one of "ip-name", "resource-name"
+    #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_a_record #=> Boolean
+    #   resp.subnet.private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnet AWS API Documentation
     #
@@ -19619,8 +19656,8 @@ module Aws::EC2
     # * **Status checks** - Amazon EC2 performs status checks on running EC2
     #   instances to identify hardware and software issues. For more
     #   information, see [Status checks for your instances][1] and
-    #   [Troubleshooting instances with failed status checks][2] in the
-    #   *Amazon EC2 User Guide*.
+    #   [Troubleshoot instances with failed status checks][2] in the *Amazon
+    #   EC2 User Guide*.
     #
     # * **Scheduled events** - Amazon EC2 can schedule events (such as
     #   reboot, stop, or terminate) for your instances related to hardware
@@ -20724,6 +20761,10 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].platform_details #=> String
     #   resp.reservations[0].instances[0].usage_operation #=> String
     #   resp.reservations[0].instances[0].usage_operation_update_time #=> Time
+    #   resp.reservations[0].instances[0].private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
+    #   resp.reservations[0].instances[0].private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
+    #   resp.reservations[0].instances[0].private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
+    #   resp.reservations[0].instances[0].ipv_6_address #=> String
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -21350,6 +21391,9 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
+    #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -23312,6 +23356,8 @@ module Aws::EC2
     #   resp.network_interfaces[0].tag_set[0].value #=> String
     #   resp.network_interfaces[0].vpc_id #=> String
     #   resp.network_interfaces[0].deny_all_igw_traffic #=> Boolean
+    #   resp.network_interfaces[0].ipv_6_native #=> Boolean
+    #   resp.network_interfaces[0].ipv_6_address #=> String
     #   resp.next_token #=> String
     #
     #
@@ -26907,8 +26953,8 @@ module Aws::EC2
     #     `cidrBlock` as the filter names.
     #
     #   * `default-for-az` - Indicates whether this is the default subnet for
-    #     the Availability Zone. You can also use `defaultForAz` as the filter
-    #     name.
+    #     the Availability Zone (`true` \| `false`). You can also use
+    #     `defaultForAz` as the filter name.
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -26918,6 +26964,9 @@ module Aws::EC2
     #
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
+    #
+    #   * `ipv6-native` - Indicates whether this is an IPv6 only subnet
+    #     (`true` \| `false`).
     #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
@@ -27042,6 +27091,10 @@ module Aws::EC2
     #   resp.subnets[0].subnet_arn #=> String
     #   resp.subnets[0].outpost_arn #=> String
     #   resp.subnets[0].enable_dns_64 #=> Boolean
+    #   resp.subnets[0].ipv_6_native #=> Boolean
+    #   resp.subnets[0].private_dns_name_options_on_launch.hostname_type #=> String, one of "ip-name", "resource-name"
+    #   resp.subnets[0].private_dns_name_options_on_launch.enable_resource_name_dns_a_record #=> Boolean
+    #   resp.subnets[0].private_dns_name_options_on_launch.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.next_token #=> String
     #
     #
@@ -33139,6 +33192,9 @@ module Aws::EC2
     #   resp.launch_template_data.instance_requirements.accelerator_names[0] #=> String, one of "a100", "v100", "k80", "t4", "m60", "radeon-pro-v520", "vu9p"
     #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.launch_template_data.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
+    #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
+    #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -36097,8 +36153,8 @@ module Aws::EC2
     # ModifyNetworkInterfaceAttribute action.
     #
     # To modify some attributes, the instance must be stopped. For more
-    # information, see [Modifying attributes of a stopped instance][1] in
-    # the *Amazon EC2 User Guide*.
+    # information, see [Modify a stopped instance][1] in the *Amazon EC2
+    # User Guide*.
     #
     #
     #
@@ -36123,8 +36179,8 @@ module Aws::EC2
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information, see
-    #   [Updating the block device mapping when launching an instance][1] in
-    #   the *Amazon EC2 User Guide*.
+    #   [Update the block device mapping when launching an instance][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #
     #
@@ -36618,14 +36674,11 @@ module Aws::EC2
     #   Possible values: Integers from 1 to 64
     #
     # @option params [String] :http_endpoint
-    #   This parameter enables or disables the HTTP metadata endpoint on your
-    #   instances. If the parameter is not specified, the existing state is
-    #   maintained.
+    #   Enables or disables the HTTP metadata endpoint on your instances. If
+    #   the parameter is not specified, the existing state is maintained.
     #
-    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
-    #   your instance metadata.
-    #
-    #    </note>
+    #   If you specify a value of `disabled`, you cannot access your instance
+    #   metadata.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -36635,7 +36688,8 @@ module Aws::EC2
     #
     # @option params [String] :http_protocol_ipv_6
     #   Enables or disables the IPv6 endpoint for the instance metadata
-    #   service.
+    #   service. This setting applies only if you have enabled the HTTP
+    #   metadata endpoint.
     #
     # @return [Types::ModifyInstanceMetadataOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -36728,7 +36782,8 @@ module Aws::EC2
     #    </note>
     #
     # @option params [Integer] :partition_number
-    #   Reserved for future use.
+    #   The number of the partition in which to place the instance. Valid only
+    #   if the placement group strategy is set to `partition`.
     #
     # @option params [String] :host_resource_group_arn
     #   The ARN of the host resource group in which to place the instance.
@@ -37048,6 +37103,60 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_network_interface_attribute(params = {}, options = {})
       req = build_request(:modify_network_interface_attribute, params)
+      req.send_request(options)
+    end
+
+    # Modifies the options for instance hostnames for the specified
+    # instance.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :instance_id
+    #   The ID of the instance.
+    #
+    # @option params [String] :private_dns_hostname_type
+    #   The type of hostname for EC2 instances. For IPv4 only subnets, an
+    #   instance DNS name must be based on the instance IPv4 address. For IPv6
+    #   only subnets, an instance DNS name must be based on the instance ID.
+    #   For dual-stack subnets, you can specify whether DNS names use the
+    #   instance IPv4 address or the instance ID.
+    #
+    # @option params [Boolean] :enable_resource_name_dns_a_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS A records.
+    #
+    # @option params [Boolean] :enable_resource_name_dns_aaaa_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS AAAA records.
+    #
+    # @return [Types::ModifyPrivateDnsNameOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyPrivateDnsNameOptionsResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_private_dns_name_options({
+    #     dry_run: false,
+    #     instance_id: "InstanceId",
+    #     private_dns_hostname_type: "ip-name", # accepts ip-name, resource-name
+    #     enable_resource_name_dns_a_record: false,
+    #     enable_resource_name_dns_aaaa_record: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyPrivateDnsNameOptions AWS API Documentation
+    #
+    # @overload modify_private_dns_name_options(params = {})
+    # @param [Hash] params ({})
+    def modify_private_dns_name_options(params = {}, options = {})
+      req = build_request(:modify_private_dns_name_options, params)
       req.send_request(options)
     end
 
@@ -37501,6 +37610,22 @@ module Aws::EC2
     #   in this subnet should return synthetic IPv6 addresses for IPv4-only
     #   destinations.
     #
+    # @option params [String] :private_dns_hostname_type_on_launch
+    #   The type of hostnames to assign to instances in the subnet at launch.
+    #   For IPv4 only subnets, an instance DNS name must be based on the
+    #   instance IPv4 address. For IPv6 only subnets, an instance DNS name
+    #   must be based on the instance ID. For dual-stack subnets, you can
+    #   specify whether DNS names use the instance IPv4 address or the
+    #   instance ID.
+    #
+    # @option params [Types::AttributeBooleanValue] :enable_resource_name_dns_a_record_on_launch
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS A records.
+    #
+    # @option params [Types::AttributeBooleanValue] :enable_resource_name_dns_aaaa_record_on_launch
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS AAAA records.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -37531,6 +37656,13 @@ module Aws::EC2
     #     },
     #     customer_owned_ipv_4_pool: "CoipPoolId",
     #     enable_dns_64: {
+    #       value: false,
+    #     },
+    #     private_dns_hostname_type_on_launch: "ip-name", # accepts ip-name, resource-name
+    #     enable_resource_name_dns_a_record_on_launch: {
+    #       value: false,
+    #     },
+    #     enable_resource_name_dns_aaaa_record_on_launch: {
     #       value: false,
     #     },
     #   })
@@ -39252,8 +39384,8 @@ module Aws::EC2
     end
 
     # Enables detailed monitoring for a running instance. Otherwise, basic
-    # monitoring is enabled. For more information, see [Monitoring your
-    # instances and volumes][1] in the *Amazon EC2 User Guide*.
+    # monitoring is enabled. For more information, see [Monitor your
+    # instances using CloudWatch][1] in the *Amazon EC2 User Guide*.
     #
     # To disable detailed monitoring, see .
     #
@@ -39754,8 +39886,8 @@ module Aws::EC2
     # If an instance does not cleanly shut down within a few minutes, Amazon
     # EC2 performs a hard reboot.
     #
-    # For more information about troubleshooting, see [Getting console
-    # output and rebooting instances][1] in the *Amazon EC2 User Guide*.
+    # For more information about troubleshooting, see [Troubleshoot an
+    # unreachable instance][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -42964,16 +43096,16 @@ module Aws::EC2
     #
     # @option params [String] :user_data
     #   The user data to make available to the instance. For more information,
-    #   see [Running commands on your Linux instance at launch][1] (Linux) and
-    #   [Adding User Data][2] (Windows). If you are using a command line tool,
-    #   base64-encoding is performed for you, and you can load the text from a
-    #   file. Otherwise, you must provide base64-encoded text. User data is
-    #   limited to 16 KB.
+    #   see [Run commands on your Linux instance at launch][1] and [Run
+    #   commands on your Windows instance at launch][2]. If you are using a
+    #   command line tool, base64-encoding is performed for you, and you can
+    #   load the text from a file. Otherwise, you must provide base64-encoded
+    #   text. User data is limited to 16 KB.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-windows-user-data.html
     #
     # @option params [String] :additional_info
     #   Reserved.
@@ -43112,8 +43244,8 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     #
     # @option params [Types::CpuOptionsRequest] :cpu_options
-    #   The CPU options for the instance. For more information, see
-    #   [Optimizing CPU options][1] in the *Amazon EC2 User Guide*.
+    #   The CPU options for the instance. For more information, see [Optimize
+    #   CPU options][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -43161,6 +43293,10 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
+    #
+    # @option params [Types::PrivateDnsNameOptionsRequest] :private_dns_name_options
+    #   The options for the instance hostname. The default values are
+    #   inherited from the subnet.
     #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -43381,6 +43517,11 @@ module Aws::EC2
     #     enclave_options: {
     #       enabled: false,
     #     },
+    #     private_dns_name_options: {
+    #       hostname_type: "ip-name", # accepts ip-name, resource-name
+    #       enable_resource_name_dns_a_record: false,
+    #       enable_resource_name_dns_aaaa_record: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -43518,6 +43659,10 @@ module Aws::EC2
     #   resp.instances[0].platform_details #=> String
     #   resp.instances[0].usage_operation #=> String
     #   resp.instances[0].usage_operation_update_time #=> Time
+    #   resp.instances[0].private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
+    #   resp.instances[0].private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
+    #   resp.instances[0].private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
+    #   resp.instances[0].ipv_6_address #=> String
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -43997,8 +44142,9 @@ module Aws::EC2
     #
     # For more information about configuring your operating system to
     # generate a crash dump when a kernel panic or stop error occurs, see
-    # [Send a diagnostic interrupt][1] (Linux instances) or [Send a
-    # Diagnostic Interrupt][2] (Windows instances).
+    # [Send a diagnostic interrupt (for advanced users)][1] (Linux
+    # instances) or [Send a diagnostic interrupt (for advanced users)][2]
+    # (Windows instances).
     #
     #
     #
@@ -44056,8 +44202,8 @@ module Aws::EC2
     # the instance, either change its CPU credit option to `standard`, or
     # change its tenancy to `default` or `dedicated`.
     #
-    # For more information, see [Stopping instances][1] in the *Amazon EC2
-    # User Guide*.
+    # For more information, see [Stop and start your instance][1] in the
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -44522,7 +44668,7 @@ module Aws::EC2
     # When you stop an instance, we attempt to shut it down forcibly after a
     # short while. If your instance appears stuck in the stopping state
     # after a period of time, there may be an issue with the underlying host
-    # computer. For more information, see [Troubleshooting stopping your
+    # computer. For more information, see [Troubleshoot stopping your
     # instance][6] in the *Amazon EC2 User Guide*.
     #
     #
@@ -45247,7 +45393,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.281.0'
+      context[:gem_version] = '1.282.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

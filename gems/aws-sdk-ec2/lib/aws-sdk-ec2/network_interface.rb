@@ -175,6 +175,19 @@ module Aws::EC2
       data[:deny_all_igw_traffic]
     end
 
+    # Indicates whether this is an IPv6 only network interface.
+    # @return [Boolean]
+    def ipv_6_native
+      data[:ipv_6_native]
+    end
+
+    # The IPv6 globally unique address associated with the network
+    # interface.
+    # @return [String]
+    def ipv_6_address
+      data[:ipv_6_address]
+    end
+
     # @!endgroup
 
     # @return [Client]

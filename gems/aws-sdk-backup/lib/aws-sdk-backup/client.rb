@@ -358,6 +358,9 @@ module Aws::Backup
     #   includes a `CreatorRequestId` that matches an existing backup plan,
     #   that plan is returned. This parameter is optional.
     #
+    #   If used, this parameter must contain 1 to 50 alphanumeric or '-\_.'
+    #   characters.
+    #
     # @return [Types::CreateBackupPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBackupPlanOutput#backup_plan_id #backup_plan_id} => String
@@ -433,35 +436,12 @@ module Aws::Backup
     end
 
     # Creates a JSON document that specifies a set of resources to assign to
-    # a backup plan. Resources can be included by specifying patterns for a
-    # `ListOfTags` and selected `Resources`.
+    # a backup plan. For examples, see [Assigning resources
+    # programmatically][1].
     #
-    # For example, consider the following patterns:
     #
-    # * `Resources: "arn:aws:ec2:region:account-id:volume/volume-id"`
     #
-    # * `ConditionKey:"department"`
-    #
-    #   `ConditionValue:"finance"`
-    #
-    #   `ConditionType:"StringEquals"`
-    #
-    # * `ConditionKey:"importance"`
-    #
-    #   `ConditionValue:"critical"`
-    #
-    #   `ConditionType:"StringEquals"`
-    #
-    # Using these patterns would back up all Amazon Elastic Block Store
-    # (Amazon EBS) volumes that are tagged as `"department=finance"`,
-    # `"importance=critical"`, in addition to an EBS volume with the
-    # specified volume ID.
-    #
-    # Resources and conditions are additive in that all resources that match
-    # the pattern are selected. This shouldn't be confused with a logical
-    # AND, where all conditions must match. The matching patterns are
-    # logically put together using the OR operator. In other words, all
-    # patterns that match are selected for backup.
+    # [1]: https://docs.aws.amazon.com/assigning-resources.html#assigning-resources-json
     #
     # @option params [required, String] :backup_plan_id
     #   Uniquely identifies the backup plan to be associated with the
@@ -473,7 +453,11 @@ module Aws::Backup
     #
     # @option params [String] :creator_request_id
     #   A unique string that identifies the request and allows failed requests
-    #   to be retried without the risk of running the operation twice.
+    #   to be retried without the risk of running the operation twice. This
+    #   parameter is optional.
+    #
+    #   If used, this parameter must contain 1 to 50 alphanumeric or '-\_.'
+    #   characters.
     #
     # @return [Types::CreateBackupSelectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -568,7 +552,11 @@ module Aws::Backup
     #
     # @option params [String] :creator_request_id
     #   A unique string that identifies the request and allows failed requests
-    #   to be retried without the risk of running the operation twice.
+    #   to be retried without the risk of running the operation twice. This
+    #   parameter is optional.
+    #
+    #   If used, this parameter must contain 1 to 50 alphanumeric or '-\_.'
+    #   characters.
     #
     # @return [Types::CreateBackupVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1386,11 +1374,14 @@ module Aws::Backup
     # @return [Types::DescribeRegionSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeRegionSettingsOutput#resource_type_opt_in_preference #resource_type_opt_in_preference} => Hash&lt;String,Boolean&gt;
+    #   * {Types::DescribeRegionSettingsOutput#resource_type_management_preference #resource_type_management_preference} => Hash&lt;String,Boolean&gt;
     #
     # @example Response structure
     #
     #   resp.resource_type_opt_in_preference #=> Hash
     #   resp.resource_type_opt_in_preference["ResourceType"] #=> Boolean
+    #   resp.resource_type_management_preference #=> Hash
+    #   resp.resource_type_management_preference["ResourceType"] #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRegionSettings AWS API Documentation
     #
@@ -2988,6 +2979,11 @@ module Aws::Backup
     # maximum retention period for future backup and copy jobs that target a
     # backup vault.
     #
+    # <note markdown="1"> Backup Vault Lock has yet to receive a third-party assessment for SEC
+    # 17a-4(f) and CFTC.
+    #
+    #  </note>
+    #
     # @option params [required, String] :backup_vault_name
     #   The Backup Vault Lock configuration that specifies the name of the
     #   backup vault it protects.
@@ -3089,21 +3085,26 @@ module Aws::Backup
     #   An array of events that indicate the status of jobs to back up
     #   resources to the backup vault.
     #
-    #   <note markdown="1"> The following events are supported:
+    #   For common use cases and code samples, see [Using Amazon SNS to track
+    #   Backup events][1].
     #
-    #    `BACKUP_JOB_STARTED`, `BACKUP_JOB_COMPLETED`,
+    #   The following events are supported:
     #
-    #    `COPY_JOB_STARTED`, `COPY_JOB_SUCCESSFUL`, `COPY_JOB_FAILED`,
+    #   * `BACKUP_JOB_STARTED` \| `BACKUP_JOB_COMPLETED`
     #
-    #    `RESTORE_JOB_STARTED`, `RESTORE_JOB_COMPLETED`, and
-    #   `RECOVERY_POINT_MODIFIED`.
+    #   * `COPY_JOB_STARTED` \| `COPY_JOB_SUCCESSFUL` \| `COPY_JOB_FAILED`
     #
-    #    To find failed backup jobs, use `BACKUP_JOB_COMPLETED` and filter
-    #   using event metadata.
+    #   * `RESTORE_JOB_STARTED` \| `RESTORE_JOB_COMPLETED` \|
+    #     `RECOVERY_POINT_MODIFIED`
     #
-    #    Other events in the following list are deprecated.
+    #   <note markdown="1"> Ignore the list below because it includes deprecated events. Refer to
+    #   the list above.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3478,7 +3479,9 @@ module Aws::Backup
     #
     # @option params [required, Hash<String,String>] :tags
     #   Key-value pairs that are used to help organize your resources. You can
-    #   assign your own metadata to the resources you create.
+    #   assign your own metadata to the resources you create. For clarity,
+    #   this is the structure to assign tags:
+    #   `[\{"Key":"string","Value":"string"\}]`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3799,12 +3802,23 @@ module Aws::Backup
     #   Updates the list of services along with the opt-in preferences for the
     #   Region.
     #
+    # @option params [Hash<String,Boolean>] :resource_type_management_preference
+    #   Enables or disables [ Backup's advanced DynamoDB backup features][1]
+    #   for the Region.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_region_settings({
     #     resource_type_opt_in_preference: {
+    #       "ResourceType" => false,
+    #     },
+    #     resource_type_management_preference: {
     #       "ResourceType" => false,
     #     },
     #   })
@@ -3907,7 +3921,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

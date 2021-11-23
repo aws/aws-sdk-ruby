@@ -383,6 +383,11 @@ module Aws::IoT
     # @option params [String] :billing_group_name
     #   The name of the billing group.
     #
+    #   <note markdown="1"> This call is asynchronous. It might take several seconds for the
+    #   detachment to propagate.
+    #
+    #    </note>
+    #
     # @option params [String] :billing_group_arn
     #   The ARN of the billing group.
     #
@@ -1147,13 +1152,14 @@ module Aws::IoT
     # request.
     #
     # **Note:** The CSR must include a public key that is either an RSA key
-    # with a length of at least 2048 bits or an ECC key from NIST P-256 or
-    # NIST P-384 curves.
+    # with a length of at least 2048 bits or an ECC key from NIST P-256,
+    # NIST P-384, or NIST P-512 curves. For supported certificates, consult
+    # [ Certificate signing algorithms supported by IoT][1].
     #
     # **Note:** Reusing the same certificate signing request (CSR) results
     # in a distinct certificate.
     #
-    # Requires permission to access the [CreateCertificateFromCsr][1]
+    # Requires permission to access the [CreateCertificateFromCsr][2]
     # action.
     #
     # You can create multiple certificates in a batch by creating a
@@ -1198,7 +1204,8 @@ module Aws::IoT
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :certificate_signing_request
     #   The certificate signing request (CSR).
@@ -1712,6 +1719,10 @@ module Aws::IoT
     # @option params [String] :job_template_arn
     #   The ARN of the job template used to create the job.
     #
+    # @option params [Hash<String,String>] :document_parameters
+    #   Parameters of a managed template that you can specify to create the
+    #   job document.
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#job_arn #job_arn} => String
@@ -1763,6 +1774,9 @@ module Aws::IoT
     #     ],
     #     namespace_id: "NamespaceId",
     #     job_template_arn: "JobTemplateArn",
+    #     document_parameters: {
+    #       "ParameterKey" => "ParameterValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2767,8 +2781,8 @@ module Aws::IoT
     #   The files to stream.
     #
     # @option params [required, String] :role_arn
-    #   An IAM role that allows the IoT service principal assumes to access
-    #   your S3 files.
+    #   An IAM role that allows the IoT service principal to access your S3
+    #   files.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage streams.
@@ -5451,6 +5465,8 @@ module Aws::IoT
     #   resp.job.timeout_config.in_progress_timeout_in_minutes #=> Integer
     #   resp.job.namespace_id #=> String
     #   resp.job.job_template_arn #=> String
+    #   resp.job.document_parameters #=> Hash
+    #   resp.job.document_parameters["ParameterKey"] #=> String
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -5561,6 +5577,55 @@ module Aws::IoT
     # @param [Hash] params ({})
     def describe_job_template(params = {}, options = {})
       req = build_request(:describe_job_template, params)
+      req.send_request(options)
+    end
+
+    # View details of a managed job template.
+    #
+    # @option params [required, String] :template_name
+    #   The unique name of a managed job template, which is required.
+    #
+    # @option params [String] :template_version
+    #   An optional parameter to specify version of a managed template. If not
+    #   specified, the pre-defined default version is returned.
+    #
+    # @return [Types::DescribeManagedJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeManagedJobTemplateResponse#template_name #template_name} => String
+    #   * {Types::DescribeManagedJobTemplateResponse#template_arn #template_arn} => String
+    #   * {Types::DescribeManagedJobTemplateResponse#description #description} => String
+    #   * {Types::DescribeManagedJobTemplateResponse#template_version #template_version} => String
+    #   * {Types::DescribeManagedJobTemplateResponse#environments #environments} => Array&lt;String&gt;
+    #   * {Types::DescribeManagedJobTemplateResponse#document_parameters #document_parameters} => Array&lt;Types::DocumentParameter&gt;
+    #   * {Types::DescribeManagedJobTemplateResponse#document #document} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_managed_job_template({
+    #     template_name: "ManagedJobTemplateName", # required
+    #     template_version: "ManagedTemplateVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_name #=> String
+    #   resp.template_arn #=> String
+    #   resp.description #=> String
+    #   resp.template_version #=> String
+    #   resp.environments #=> Array
+    #   resp.environments[0] #=> String
+    #   resp.document_parameters #=> Array
+    #   resp.document_parameters[0].key #=> String
+    #   resp.document_parameters[0].description #=> String
+    #   resp.document_parameters[0].regex #=> String
+    #   resp.document_parameters[0].example #=> String
+    #   resp.document_parameters[0].optional #=> Boolean
+    #   resp.document #=> String
+    #
+    # @overload describe_managed_job_template(params = {})
+    # @param [Hash] params ({})
+    def describe_managed_job_template(params = {}, options = {})
+      req = build_request(:describe_managed_job_template, params)
       req.send_request(options)
     end
 
@@ -8699,6 +8764,50 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Returns a list of managed job templates.
+    #
+    # @option params [String] :template_name
+    #   An optional parameter for template name. If specified, only the
+    #   versions of the managed job templates that have the specified template
+    #   name will be returned.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of entries that can be returned.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results.
+    #
+    # @return [Types::ListManagedJobTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListManagedJobTemplatesResponse#managed_job_templates #managed_job_templates} => Array&lt;Types::ManagedJobTemplateSummary&gt;
+    #   * {Types::ListManagedJobTemplatesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_managed_job_templates({
+    #     template_name: "ManagedJobTemplateName",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_job_templates #=> Array
+    #   resp.managed_job_templates[0].template_arn #=> String
+    #   resp.managed_job_templates[0].template_name #=> String
+    #   resp.managed_job_templates[0].description #=> String
+    #   resp.managed_job_templates[0].environments #=> Array
+    #   resp.managed_job_templates[0].environments[0] #=> String
+    #   resp.managed_job_templates[0].template_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_managed_job_templates(params = {})
+    # @param [Hash] params ({})
+    def list_managed_job_templates(params = {}, options = {})
+      req = build_request(:list_managed_job_templates, params)
+      req.send_request(options)
+    end
+
     # Gets a list of all mitigation actions that match the specified filter
     # criteria.
     #
@@ -10494,7 +10603,12 @@ module Aws::IoT
     end
 
     # Register a certificate that does not have a certificate authority
-    # (CA).
+    # (CA). For supported certificates, consult [ Certificate signing
+    # algorithms supported by IoT][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms
     #
     # @option params [required, String] :certificate_pem
     #   The certificate data, in PEM format.
@@ -10628,6 +10742,11 @@ module Aws::IoT
     #
     # Requires permission to access the [RemoveThingFromBillingGroup][1]
     # action.
+    #
+    # <note markdown="1"> This call is asynchronous. It might take several seconds for the
+    # detachment to propagate.
+    #
+    #  </note>
     #
     #
     #
@@ -13382,7 +13501,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

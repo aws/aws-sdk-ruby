@@ -146,6 +146,20 @@ module Aws::EC2
       data[:enable_dns_64]
     end
 
+    # Indicates whether this is an IPv6 only subnet.
+    # @return [Boolean]
+    def ipv_6_native
+      data[:ipv_6_native]
+    end
+
+    # The type of hostnames to assign to instances in the subnet at launch.
+    # An instance hostname is based on the IPv4 address or ID of the
+    # instance.
+    # @return [Types::PrivateDnsNameOptionsOnLaunch]
+    def private_dns_name_options_on_launch
+      data[:private_dns_name_options_on_launch]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -449,6 +463,11 @@ module Aws::EC2
     #     enclave_options: {
     #       enabled: false,
     #     },
+    #     private_dns_name_options: {
+    #       hostname_type: "ip-name", # accepts ip-name, resource-name
+    #       enable_resource_name_dns_a_record: false,
+    #       enable_resource_name_dns_aaaa_record: false,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -576,16 +595,16 @@ module Aws::EC2
     #   Default: Amazon EC2 uses the default security group.
     # @option options [String] :user_data
     #   The user data to make available to the instance. For more information,
-    #   see [Running commands on your Linux instance at launch][1] (Linux) and
-    #   [Adding User Data][2] (Windows). If you are using a command line tool,
-    #   base64-encoding is performed for you, and you can load the text from a
-    #   file. Otherwise, you must provide base64-encoded text. User data is
-    #   limited to 16 KB.
+    #   see [Run commands on your Linux instance at launch][1] and [Run
+    #   commands on your Windows instance at launch][2]. If you are using a
+    #   command line tool, base64-encoding is performed for you, and you can
+    #   load the text from a file. Otherwise, you must provide base64-encoded
+    #   text. User data is limited to 16 KB.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-windows-user-data.html
     # @option options [String] :additional_info
     #   Reserved.
     # @option options [String] :client_token
@@ -705,8 +724,8 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     # @option options [Types::CpuOptionsRequest] :cpu_options
-    #   The CPU options for the instance. For more information, see
-    #   [Optimizing CPU options][1] in the *Amazon EC2 User Guide*.
+    #   The CPU options for the instance. For more information, see [Optimize
+    #   CPU options][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -749,6 +768,9 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
+    # @option options [Types::PrivateDnsNameOptionsRequest] :private_dns_name_options
+    #   The options for the instance hostname. The default values are
+    #   inherited from the subnet.
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []

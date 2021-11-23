@@ -534,9 +534,11 @@ module Aws::DynamoDB
     BackupSummary.struct_class = Types::BackupSummary
 
     BatchExecuteStatementInput.add_member(:statements, Shapes::ShapeRef.new(shape: PartiQLBatchRequest, required: true, location_name: "Statements"))
+    BatchExecuteStatementInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
     BatchExecuteStatementInput.struct_class = Types::BatchExecuteStatementInput
 
     BatchExecuteStatementOutput.add_member(:responses, Shapes::ShapeRef.new(shape: PartiQLBatchResponse, location_name: "Responses"))
+    BatchExecuteStatementOutput.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: ConsumedCapacityMultiple, location_name: "ConsumedCapacity"))
     BatchExecuteStatementOutput.struct_class = Types::BatchExecuteStatementOutput
 
     BatchGetItemInput.add_member(:request_items, Shapes::ShapeRef.new(shape: BatchGetRequestMap, required: true, location_name: "RequestItems"))
@@ -828,17 +830,21 @@ module Aws::DynamoDB
     ExecuteStatementInput.add_member(:parameters, Shapes::ShapeRef.new(shape: PreparedStatementParameters, location_name: "Parameters"))
     ExecuteStatementInput.add_member(:consistent_read, Shapes::ShapeRef.new(shape: ConsistentRead, location_name: "ConsistentRead"))
     ExecuteStatementInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PartiQLNextToken, location_name: "NextToken"))
+    ExecuteStatementInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
     ExecuteStatementInput.struct_class = Types::ExecuteStatementInput
 
     ExecuteStatementOutput.add_member(:items, Shapes::ShapeRef.new(shape: ItemList, location_name: "Items"))
     ExecuteStatementOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PartiQLNextToken, location_name: "NextToken"))
+    ExecuteStatementOutput.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: ConsumedCapacity, location_name: "ConsumedCapacity"))
     ExecuteStatementOutput.struct_class = Types::ExecuteStatementOutput
 
     ExecuteTransactionInput.add_member(:transact_statements, Shapes::ShapeRef.new(shape: ParameterizedStatements, required: true, location_name: "TransactStatements"))
     ExecuteTransactionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    ExecuteTransactionInput.add_member(:return_consumed_capacity, Shapes::ShapeRef.new(shape: ReturnConsumedCapacity, location_name: "ReturnConsumedCapacity"))
     ExecuteTransactionInput.struct_class = Types::ExecuteTransactionInput
 
     ExecuteTransactionOutput.add_member(:responses, Shapes::ShapeRef.new(shape: ItemResponseList, location_name: "Responses"))
+    ExecuteTransactionOutput.add_member(:consumed_capacity, Shapes::ShapeRef.new(shape: ConsumedCapacityMultiple, location_name: "ConsumedCapacity"))
     ExecuteTransactionOutput.struct_class = Types::ExecuteTransactionOutput
 
     ExpectedAttributeMap.key = Shapes::ShapeRef.new(shape: AttributeName)

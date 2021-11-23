@@ -206,6 +206,8 @@ module Aws::Redshift
     DescribeOrderableClusterOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOrderableClusterOptionsMessage')
     DescribePartnersInputMessage = Shapes::StructureShape.new(name: 'DescribePartnersInputMessage')
     DescribePartnersOutputMessage = Shapes::StructureShape.new(name: 'DescribePartnersOutputMessage')
+    DescribeReservedNodeExchangeStatusInputMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodeExchangeStatusInputMessage')
+    DescribeReservedNodeExchangeStatusOutputMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodeExchangeStatusOutputMessage')
     DescribeReservedNodeOfferingsMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodeOfferingsMessage')
     DescribeReservedNodesMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodesMessage')
     DescribeResizeMessage = Shapes::StructureShape.new(name: 'DescribeResizeMessage')
@@ -257,6 +259,8 @@ module Aws::Redshift
     EventSubscriptionsMessage = Shapes::StructureShape.new(name: 'EventSubscriptionsMessage')
     EventsMessage = Shapes::StructureShape.new(name: 'EventsMessage')
     GetClusterCredentialsMessage = Shapes::StructureShape.new(name: 'GetClusterCredentialsMessage')
+    GetReservedNodeExchangeConfigurationOptionsInputMessage = Shapes::StructureShape.new(name: 'GetReservedNodeExchangeConfigurationOptionsInputMessage')
+    GetReservedNodeExchangeConfigurationOptionsOutputMessage = Shapes::StructureShape.new(name: 'GetReservedNodeExchangeConfigurationOptionsOutputMessage')
     GetReservedNodeExchangeOfferingsInputMessage = Shapes::StructureShape.new(name: 'GetReservedNodeExchangeOfferingsInputMessage')
     GetReservedNodeExchangeOfferingsOutputMessage = Shapes::StructureShape.new(name: 'GetReservedNodeExchangeOfferingsOutputMessage')
     HsmClientCertificate = Shapes::StructureShape.new(name: 'HsmClientCertificate')
@@ -389,6 +393,13 @@ module Aws::Redshift
     ReservedNode = Shapes::StructureShape.new(name: 'ReservedNode')
     ReservedNodeAlreadyExistsFault = Shapes::StructureShape.new(name: 'ReservedNodeAlreadyExistsFault')
     ReservedNodeAlreadyMigratedFault = Shapes::StructureShape.new(name: 'ReservedNodeAlreadyMigratedFault')
+    ReservedNodeConfigurationOption = Shapes::StructureShape.new(name: 'ReservedNodeConfigurationOption')
+    ReservedNodeConfigurationOptionList = Shapes::ListShape.new(name: 'ReservedNodeConfigurationOptionList')
+    ReservedNodeExchangeActionType = Shapes::StringShape.new(name: 'ReservedNodeExchangeActionType')
+    ReservedNodeExchangeNotFoundFault = Shapes::StructureShape.new(name: 'ReservedNodeExchangeNotFoundFault')
+    ReservedNodeExchangeStatus = Shapes::StructureShape.new(name: 'ReservedNodeExchangeStatus')
+    ReservedNodeExchangeStatusList = Shapes::ListShape.new(name: 'ReservedNodeExchangeStatusList')
+    ReservedNodeExchangeStatusType = Shapes::StringShape.new(name: 'ReservedNodeExchangeStatusType')
     ReservedNodeList = Shapes::ListShape.new(name: 'ReservedNodeList')
     ReservedNodeNotFoundFault = Shapes::StructureShape.new(name: 'ReservedNodeNotFoundFault')
     ReservedNodeOffering = Shapes::StructureShape.new(name: 'ReservedNodeOffering')
@@ -700,6 +711,7 @@ module Aws::Redshift
     Cluster.add_member(:total_storage_capacity_in_mega_bytes, Shapes::ShapeRef.new(shape: LongOptional, location_name: "TotalStorageCapacityInMegaBytes"))
     Cluster.add_member(:aqua_configuration, Shapes::ShapeRef.new(shape: AquaConfiguration, location_name: "AquaConfiguration"))
     Cluster.add_member(:default_iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "DefaultIamRoleArn"))
+    Cluster.add_member(:reserved_node_exchange_status, Shapes::ShapeRef.new(shape: ReservedNodeExchangeStatus, location_name: "ReservedNodeExchangeStatus"))
     Cluster.struct_class = Types::Cluster
 
     ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
@@ -1326,6 +1338,16 @@ module Aws::Redshift
     DescribePartnersOutputMessage.add_member(:partner_integration_info_list, Shapes::ShapeRef.new(shape: PartnerIntegrationInfoList, location_name: "PartnerIntegrationInfoList"))
     DescribePartnersOutputMessage.struct_class = Types::DescribePartnersOutputMessage
 
+    DescribeReservedNodeExchangeStatusInputMessage.add_member(:reserved_node_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeId"))
+    DescribeReservedNodeExchangeStatusInputMessage.add_member(:reserved_node_exchange_request_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeExchangeRequestId"))
+    DescribeReservedNodeExchangeStatusInputMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeReservedNodeExchangeStatusInputMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeReservedNodeExchangeStatusInputMessage.struct_class = Types::DescribeReservedNodeExchangeStatusInputMessage
+
+    DescribeReservedNodeExchangeStatusOutputMessage.add_member(:reserved_node_exchange_status_details, Shapes::ShapeRef.new(shape: ReservedNodeExchangeStatusList, location_name: "ReservedNodeExchangeStatusDetails"))
+    DescribeReservedNodeExchangeStatusOutputMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeReservedNodeExchangeStatusOutputMessage.struct_class = Types::DescribeReservedNodeExchangeStatusOutputMessage
+
     DescribeReservedNodeOfferingsMessage.add_member(:reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeOfferingId"))
     DescribeReservedNodeOfferingsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeReservedNodeOfferingsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -1550,6 +1572,17 @@ module Aws::Redshift
     GetClusterCredentialsMessage.add_member(:auto_create, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoCreate"))
     GetClusterCredentialsMessage.add_member(:db_groups, Shapes::ShapeRef.new(shape: DbGroupList, location_name: "DbGroups"))
     GetClusterCredentialsMessage.struct_class = Types::GetClusterCredentialsMessage
+
+    GetReservedNodeExchangeConfigurationOptionsInputMessage.add_member(:action_type, Shapes::ShapeRef.new(shape: ReservedNodeExchangeActionType, required: true, location_name: "ActionType"))
+    GetReservedNodeExchangeConfigurationOptionsInputMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    GetReservedNodeExchangeConfigurationOptionsInputMessage.add_member(:snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotIdentifier"))
+    GetReservedNodeExchangeConfigurationOptionsInputMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    GetReservedNodeExchangeConfigurationOptionsInputMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    GetReservedNodeExchangeConfigurationOptionsInputMessage.struct_class = Types::GetReservedNodeExchangeConfigurationOptionsInputMessage
+
+    GetReservedNodeExchangeConfigurationOptionsOutputMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    GetReservedNodeExchangeConfigurationOptionsOutputMessage.add_member(:reserved_node_configuration_option_list, Shapes::ShapeRef.new(shape: ReservedNodeConfigurationOptionList, location_name: "ReservedNodeConfigurationOptionList"))
+    GetReservedNodeExchangeConfigurationOptionsOutputMessage.struct_class = Types::GetReservedNodeExchangeConfigurationOptionsOutputMessage
 
     GetReservedNodeExchangeOfferingsInputMessage.add_member(:reserved_node_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReservedNodeId"))
     GetReservedNodeExchangeOfferingsInputMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -1981,6 +2014,28 @@ module Aws::Redshift
 
     ReservedNodeAlreadyMigratedFault.struct_class = Types::ReservedNodeAlreadyMigratedFault
 
+    ReservedNodeConfigurationOption.add_member(:source_reserved_node, Shapes::ShapeRef.new(shape: ReservedNode, location_name: "SourceReservedNode"))
+    ReservedNodeConfigurationOption.add_member(:target_reserved_node_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TargetReservedNodeCount"))
+    ReservedNodeConfigurationOption.add_member(:target_reserved_node_offering, Shapes::ShapeRef.new(shape: ReservedNodeOffering, location_name: "TargetReservedNodeOffering"))
+    ReservedNodeConfigurationOption.struct_class = Types::ReservedNodeConfigurationOption
+
+    ReservedNodeConfigurationOptionList.member = Shapes::ShapeRef.new(shape: ReservedNodeConfigurationOption, location_name: "ReservedNodeConfigurationOption")
+
+    ReservedNodeExchangeNotFoundFault.struct_class = Types::ReservedNodeExchangeNotFoundFault
+
+    ReservedNodeExchangeStatus.add_member(:reserved_node_exchange_request_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeExchangeRequestId"))
+    ReservedNodeExchangeStatus.add_member(:status, Shapes::ShapeRef.new(shape: ReservedNodeExchangeStatusType, location_name: "Status"))
+    ReservedNodeExchangeStatus.add_member(:request_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "RequestTime"))
+    ReservedNodeExchangeStatus.add_member(:source_reserved_node_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceReservedNodeId"))
+    ReservedNodeExchangeStatus.add_member(:source_reserved_node_type, Shapes::ShapeRef.new(shape: String, location_name: "SourceReservedNodeType"))
+    ReservedNodeExchangeStatus.add_member(:source_reserved_node_count, Shapes::ShapeRef.new(shape: Integer, location_name: "SourceReservedNodeCount"))
+    ReservedNodeExchangeStatus.add_member(:target_reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "TargetReservedNodeOfferingId"))
+    ReservedNodeExchangeStatus.add_member(:target_reserved_node_type, Shapes::ShapeRef.new(shape: String, location_name: "TargetReservedNodeType"))
+    ReservedNodeExchangeStatus.add_member(:target_reserved_node_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TargetReservedNodeCount"))
+    ReservedNodeExchangeStatus.struct_class = Types::ReservedNodeExchangeStatus
+
+    ReservedNodeExchangeStatusList.member = Shapes::ShapeRef.new(shape: ReservedNodeExchangeStatus, location_name: "ReservedNodeExchangeStatus")
+
     ReservedNodeList.member = Shapes::ShapeRef.new(shape: ReservedNode, location_name: "ReservedNode")
 
     ReservedNodeNotFoundFault.struct_class = Types::ReservedNodeNotFoundFault
@@ -2020,6 +2075,8 @@ module Aws::Redshift
     ResizeClusterMessage.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
     ResizeClusterMessage.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumberOfNodes"))
     ResizeClusterMessage.add_member(:classic, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Classic"))
+    ResizeClusterMessage.add_member(:reserved_node_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeId"))
+    ResizeClusterMessage.add_member(:target_reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "TargetReservedNodeOfferingId"))
     ResizeClusterMessage.struct_class = Types::ResizeClusterMessage
 
     ResizeClusterResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -2082,6 +2139,8 @@ module Aws::Redshift
     RestoreFromClusterSnapshotMessage.add_member(:availability_zone_relocation, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AvailabilityZoneRelocation"))
     RestoreFromClusterSnapshotMessage.add_member(:aqua_configuration_status, Shapes::ShapeRef.new(shape: AquaConfigurationStatus, location_name: "AquaConfigurationStatus"))
     RestoreFromClusterSnapshotMessage.add_member(:default_iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "DefaultIamRoleArn"))
+    RestoreFromClusterSnapshotMessage.add_member(:reserved_node_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeId"))
+    RestoreFromClusterSnapshotMessage.add_member(:target_reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "TargetReservedNodeOfferingId"))
     RestoreFromClusterSnapshotMessage.struct_class = Types::RestoreFromClusterSnapshotMessage
 
     RestoreFromClusterSnapshotResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -3167,6 +3226,12 @@ module Aws::Redshift
         o.input = Shapes::ShapeRef.new(shape: DescribeDataSharesMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeDataSharesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDataShareFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_data_shares_for_consumer, Seahorse::Model::Operation.new.tap do |o|
@@ -3176,6 +3241,12 @@ module Aws::Redshift
         o.input = Shapes::ShapeRef.new(shape: DescribeDataSharesForConsumerMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeDataSharesForConsumerResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNamespaceFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_data_shares_for_producer, Seahorse::Model::Operation.new.tap do |o|
@@ -3185,6 +3256,12 @@ module Aws::Redshift
         o.input = Shapes::ShapeRef.new(shape: DescribeDataSharesForProducerMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeDataSharesForProducerResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNamespaceFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_default_cluster_parameters, Seahorse::Model::Operation.new.tap do |o|
@@ -3353,6 +3430,23 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: DescribePartnersOutputMessage)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedPartnerIntegrationFault)
+      end)
+
+      api.add_operation(:describe_reserved_node_exchange_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReservedNodeExchangeStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReservedNodeExchangeStatusInputMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReservedNodeExchangeStatusOutputMessage)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeExchangeNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_reserved_node_offerings, Seahorse::Model::Operation.new.tap do |o|
@@ -3573,6 +3667,28 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: ClusterCredentials)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:get_reserved_node_exchange_configuration_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetReservedNodeExchangeConfigurationOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetReservedNodeExchangeConfigurationOptionsInputMessage)
+        o.output = Shapes::ShapeRef.new(shape: GetReservedNodeExchangeConfigurationOptionsOutputMessage)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReservedNodeStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeAlreadyMigratedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeOfferingNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterSnapshotNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:get_reserved_node_exchange_offerings, Seahorse::Model::Operation.new.tap do |o|
@@ -3866,6 +3982,12 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReservedNodeStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeAlreadyMigratedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeOfferingNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeAlreadyExistsFault)
       end)
 
       api.add_operation(:restore_from_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -3899,6 +4021,13 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: SnapshotScheduleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReservedNodeStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeAlreadyMigratedFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeOfferingNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DependentServiceUnavailableFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReservedNodeAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:restore_table_from_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|

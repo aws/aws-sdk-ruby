@@ -386,6 +386,8 @@ module Aws::S3
     ObjectLockToken = Shapes::StringShape.new(name: 'ObjectLockToken')
     ObjectNotInActiveTierError = Shapes::StructureShape.new(name: 'ObjectNotInActiveTierError')
     ObjectOwnership = Shapes::StringShape.new(name: 'ObjectOwnership')
+    ObjectSizeGreaterThanBytes = Shapes::IntegerShape.new(name: 'ObjectSizeGreaterThanBytes')
+    ObjectSizeLessThanBytes = Shapes::IntegerShape.new(name: 'ObjectSizeLessThanBytes')
     ObjectStorageClass = Shapes::StringShape.new(name: 'ObjectStorageClass')
     ObjectVersion = Shapes::StructureShape.new(name: 'ObjectVersion')
     ObjectVersionId = Shapes::StringShape.new(name: 'ObjectVersionId')
@@ -561,6 +563,7 @@ module Aws::S3
     UploadPartRequest = Shapes::StructureShape.new(name: 'UploadPartRequest')
     UserMetadata = Shapes::ListShape.new(name: 'UserMetadata')
     Value = Shapes::StringShape.new(name: 'Value')
+    VersionCount = Shapes::IntegerShape.new(name: 'VersionCount')
     VersionIdMarker = Shapes::StringShape.new(name: 'VersionIdMarker')
     VersioningConfiguration = Shapes::StructureShape.new(name: 'VersioningConfiguration')
     WebsiteConfiguration = Shapes::StructureShape.new(name: 'WebsiteConfiguration')
@@ -1491,10 +1494,14 @@ module Aws::S3
 
     LifecycleRuleAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     LifecycleRuleAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened"=>true}))
+    LifecycleRuleAndOperator.add_member(:object_size_greater_than, Shapes::ShapeRef.new(shape: ObjectSizeGreaterThanBytes, location_name: "ObjectSizeGreaterThan"))
+    LifecycleRuleAndOperator.add_member(:object_size_less_than, Shapes::ShapeRef.new(shape: ObjectSizeLessThanBytes, location_name: "ObjectSizeLessThan"))
     LifecycleRuleAndOperator.struct_class = Types::LifecycleRuleAndOperator
 
     LifecycleRuleFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     LifecycleRuleFilter.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+    LifecycleRuleFilter.add_member(:object_size_greater_than, Shapes::ShapeRef.new(shape: ObjectSizeGreaterThanBytes, location_name: "ObjectSizeGreaterThan"))
+    LifecycleRuleFilter.add_member(:object_size_less_than, Shapes::ShapeRef.new(shape: ObjectSizeLessThanBytes, location_name: "ObjectSizeLessThan"))
     LifecycleRuleFilter.add_member(:and, Shapes::ShapeRef.new(shape: LifecycleRuleAndOperator, location_name: "And"))
     LifecycleRuleFilter.struct_class = Types::LifecycleRuleFilter
 
@@ -1719,10 +1726,12 @@ module Aws::S3
     NoSuchUpload.struct_class = Types::NoSuchUpload
 
     NoncurrentVersionExpiration.add_member(:noncurrent_days, Shapes::ShapeRef.new(shape: Days, location_name: "NoncurrentDays"))
+    NoncurrentVersionExpiration.add_member(:newer_noncurrent_versions, Shapes::ShapeRef.new(shape: VersionCount, location_name: "NewerNoncurrentVersions"))
     NoncurrentVersionExpiration.struct_class = Types::NoncurrentVersionExpiration
 
     NoncurrentVersionTransition.add_member(:noncurrent_days, Shapes::ShapeRef.new(shape: Days, location_name: "NoncurrentDays"))
     NoncurrentVersionTransition.add_member(:storage_class, Shapes::ShapeRef.new(shape: TransitionStorageClass, location_name: "StorageClass"))
+    NoncurrentVersionTransition.add_member(:newer_noncurrent_versions, Shapes::ShapeRef.new(shape: VersionCount, location_name: "NewerNoncurrentVersions"))
     NoncurrentVersionTransition.struct_class = Types::NoncurrentVersionTransition
 
     NoncurrentVersionTransitionList.member = Shapes::ShapeRef.new(shape: NoncurrentVersionTransition)

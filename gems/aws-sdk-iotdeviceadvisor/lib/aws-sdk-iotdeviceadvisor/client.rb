@@ -338,6 +338,12 @@ module Aws::IoTDeviceAdvisor
 
     # Creates a Device Advisor test suite.
     #
+    # Requires permission to access the [CreateSuiteDefinition][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @option params [Types::SuiteDefinitionConfiguration] :suite_definition_configuration
     #   Creates a Device Advisor test suite with suite definition
     #   configuration.
@@ -388,8 +394,14 @@ module Aws::IoTDeviceAdvisor
 
     # Deletes a Device Advisor test suite.
     #
+    # Requires permission to access the [DeleteSuiteDefinition][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite to be deleted.
+    #   Suite definition ID of the test suite to be deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -406,10 +418,42 @@ module Aws::IoTDeviceAdvisor
       req.send_request(options)
     end
 
+    # @option params [String] :thing_arn
+    #
+    # @option params [String] :certificate_arn
+    #
+    # @return [Types::GetEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEndpointResponse#endpoint #endpoint} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_endpoint({
+    #     thing_arn: "AmazonResourceName",
+    #     certificate_arn: "AmazonResourceName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint #=> String
+    #
+    # @overload get_endpoint(params = {})
+    # @param [Hash] params ({})
+    def get_endpoint(params = {}, options = {})
+      req = build_request(:get_endpoint, params)
+      req.send_request(options)
+    end
+
     # Gets information about a Device Advisor test suite.
     #
+    # Requires permission to access the [GetSuiteDefinition][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite to get.
+    #   Suite definition ID of the test suite to get.
     #
     # @option params [String] :suite_definition_version
     #   Suite definition version of the test suite to get.
@@ -459,11 +503,17 @@ module Aws::IoTDeviceAdvisor
 
     # Gets information about a Device Advisor test suite run.
     #
+    # Requires permission to access the [GetSuiteRun][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id for the test suite run.
+    #   Suite definition ID for the test suite run.
     #
     # @option params [required, String] :suite_run_id
-    #   Suite run Id for the test suite run.
+    #   Suite run ID for the test suite run.
     #
     # @return [Types::GetSuiteRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -496,6 +546,7 @@ module Aws::IoTDeviceAdvisor
     #   resp.suite_run_configuration.primary_device.certificate_arn #=> String
     #   resp.suite_run_configuration.selected_test_list #=> Array
     #   resp.suite_run_configuration.selected_test_list[0] #=> String
+    #   resp.suite_run_configuration.parallel_run #=> Boolean
     #   resp.test_result.groups #=> Array
     #   resp.test_result.groups[0].group_id #=> String
     #   resp.test_result.groups[0].group_name #=> String
@@ -526,11 +577,17 @@ module Aws::IoTDeviceAdvisor
     # Gets a report download link for a successful Device Advisor qualifying
     # test suite run.
     #
+    # Requires permission to access the [GetSuiteRunReport][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite.
+    #   Suite definition ID of the test suite.
     #
     # @option params [required, String] :suite_run_id
-    #   Suite run Id of the test suite run.
+    #   Suite run ID of the test suite run.
     #
     # @return [Types::GetSuiteRunReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -555,6 +612,12 @@ module Aws::IoTDeviceAdvisor
     end
 
     # Lists the Device Advisor test suites you have created.
+    #
+    # Requires permission to access the [ListSuiteDefinitions][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at once.
@@ -599,9 +662,15 @@ module Aws::IoTDeviceAdvisor
     # list all runs of the test suite, or the runs of a specific version of
     # the test suite.
     #
+    # Requires permission to access the [ListSuiteRuns][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @option params [String] :suite_definition_id
     #   Lists the test suite runs of the specified test suite based on suite
-    #   definition Id.
+    #   definition ID.
     #
     # @option params [String] :suite_definition_version
     #   Must be passed along with suiteDefinitionId. Lists the test suite runs
@@ -653,6 +722,12 @@ module Aws::IoTDeviceAdvisor
 
     # Lists the tags attached to an IoT Device Advisor resource.
     #
+    # Requires permission to access the [ListTagsForResource][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @option params [required, String] :resource_arn
     #   The ARN of the IoT Device Advisor resource.
     #
@@ -680,8 +755,14 @@ module Aws::IoTDeviceAdvisor
 
     # Starts a Device Advisor test suite run.
     #
+    # Requires permission to access the [StartSuiteRun][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite.
+    #   Suite definition ID of the test suite.
     #
     # @option params [String] :suite_definition_version
     #   Suite definition version of the test suite.
@@ -709,6 +790,7 @@ module Aws::IoTDeviceAdvisor
     #         certificate_arn: "AmazonResourceName",
     #       },
     #       selected_test_list: ["UUID"],
+    #       parallel_run: false,
     #     },
     #     tags: {
     #       "String128" => "String256",
@@ -730,11 +812,17 @@ module Aws::IoTDeviceAdvisor
 
     # Stops a Device Advisor test suite run that is currently running.
     #
+    # Requires permission to access the [StopSuiteRun][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite run to be stopped.
+    #   Suite definition ID of the test suite run to be stopped.
     #
     # @option params [required, String] :suite_run_id
-    #   Suite run Id of the test suite run to be stopped.
+    #   Suite run ID of the test suite run to be stopped.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -753,6 +841,12 @@ module Aws::IoTDeviceAdvisor
     end
 
     # Adds to and modifies existing tags of an IoT Device Advisor resource.
+    #
+    # Requires permission to access the [TagResource][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
     #
     # @option params [required, String] :resource_arn
     #   The resource ARN of an IoT Device Advisor resource.
@@ -780,6 +874,12 @@ module Aws::IoTDeviceAdvisor
 
     # Removes tags from an IoT Device Advisor resource.
     #
+    # Requires permission to access the [UntagResource][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @option params [required, String] :resource_arn
     #   The resource ARN of an IoT Device Advisor resource.
     #
@@ -804,8 +904,14 @@ module Aws::IoTDeviceAdvisor
 
     # Updates a Device Advisor test suite.
     #
+    # Requires permission to access the [UpdateSuiteDefinition][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
     # @option params [required, String] :suite_definition_id
-    #   Suite definition Id of the test suite to be updated.
+    #   Suite definition ID of the test suite to be updated.
     #
     # @option params [Types::SuiteDefinitionConfiguration] :suite_definition_configuration
     #   Updates a Device Advisor test suite with suite definition
@@ -867,7 +973,7 @@ module Aws::IoTDeviceAdvisor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotdeviceadvisor'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2021-11-23)
+------------------
+
+* Feature - This release introduces a new feature, Managed Job Template, for AWS IoT Jobs Service. Customers can now use service provided managed job templates to easily create jobs for supported standard job actions.
+
 1.78.0 (2021-11-04)
 ------------------
 

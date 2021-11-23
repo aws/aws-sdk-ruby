@@ -1884,7 +1884,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] ipv_6_cidr_block_association
-    #   Information about the IPv6 CIDR block association.
+    #   Information about the IPv6 association.
     #   @return [Types::SubnetIpv6CidrBlockAssociation]
     #
     # @!attribute [rw] subnet_id
@@ -6933,6 +6933,7 @@ module Aws::EC2
     #       {
     #         availability_zone: "String", # required
     #         dry_run: false,
+    #         ipv_6_native: false,
     #       }
     #
     # @!attribute [rw] availability_zone
@@ -6946,11 +6947,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ipv_6_native
+    #   Indicates whether to create an IPv6 only subnet. If you already have
+    #   a default subnet for this Availability Zone, you must delete it
+    #   before you can create an IPv6 only subnet.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDefaultSubnetRequest AWS API Documentation
     #
     class CreateDefaultSubnetRequest < Struct.new(
       :availability_zone,
-      :dry_run)
+      :dry_run,
+      :ipv_6_native)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8420,6 +8428,11 @@ module Aws::EC2
     #               max: 1,
     #             },
     #           },
+    #           private_dns_name_options: {
+    #             hostname_type: "ip-name", # accepts ip-name, resource-name
+    #             enable_resource_name_dns_a_record: false,
+    #             enable_resource_name_dns_aaaa_record: false,
+    #           },
     #         },
     #         tag_specifications: [
     #           {
@@ -8706,6 +8719,11 @@ module Aws::EC2
     #               min: 1,
     #               max: 1,
     #             },
+    #           },
+    #           private_dns_name_options: {
+    #             hostname_type: "ip-name", # accepts ip-name, resource-name
+    #             enable_resource_name_dns_a_record: false,
+    #             enable_resource_name_dns_aaaa_record: false,
     #           },
     #         },
     #       }
@@ -10614,11 +10632,12 @@ module Aws::EC2
     #         ],
     #         availability_zone: "String",
     #         availability_zone_id: "String",
-    #         cidr_block: "String", # required
+    #         cidr_block: "String",
     #         ipv_6_cidr_block: "String",
     #         outpost_arn: "String",
     #         vpc_id: "VpcId", # required
     #         dry_run: false,
+    #         ipv_6_native: false,
     #       }
     #
     # @!attribute [rw] tag_specifications
@@ -10654,11 +10673,15 @@ module Aws::EC2
     #   example, `10.0.0.0/24`. We modify the specified CIDR block to its
     #   canonical form; for example, if you specify `100.68.0.18/18`, we
     #   modify it to `100.68.0.0/18`.
+    #
+    #   This parameter is not supported for an IPv6 only subnet.
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
+    #
+    #   This parameter is required for an IPv6 only subnet.
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
@@ -10678,6 +10701,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ipv_6_native
+    #   Indicates whether to create an IPv6 only subnet.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
     #
     class CreateSubnetRequest < Struct.new(
@@ -10688,7 +10715,8 @@ module Aws::EC2
       :ipv_6_cidr_block,
       :outpost_arn,
       :vpc_id,
-      :dry_run)
+      :dry_run,
+      :ipv_6_native)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24489,8 +24517,8 @@ module Aws::EC2
     #     or `cidrBlock` as the filter names.
     #
     #   * `default-for-az` - Indicates whether this is the default subnet
-    #     for the Availability Zone. You can also use `defaultForAz` as the
-    #     filter name.
+    #     for the Availability Zone (`true` \| `false`). You can also use
+    #     `defaultForAz` as the filter name.
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -24500,6 +24528,9 @@ module Aws::EC2
     #
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
+    #
+    #   * `ipv6-native` - Indicates whether this is an IPv6 only subnet
+    #     (`true` \| `false`).
     #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
@@ -31567,6 +31598,12 @@ module Aws::EC2
     #   The amount of time (in seconds) that Amazon EC2 waits before
     #   terminating the old Spot Instance after launching a new replacement
     #   Spot Instance.
+    #
+    #   Valid only when `replacementStrategy` is set to
+    #   `launch-before-terminate`.
+    #
+    #   Valid values: Minimum value of `120` seconds. Maximum value of
+    #   `7200` seconds.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotCapacityRebalance AWS API Documentation
@@ -31617,6 +31654,12 @@ module Aws::EC2
     #   The amount of time (in seconds) that Amazon EC2 waits before
     #   terminating the old Spot Instance after launching a new replacement
     #   Spot Instance.
+    #
+    #   Valid only when `ReplacementStrategy` is set to
+    #   `launch-before-terminate`.
+    #
+    #   Valid values: Minimum value of `120` seconds. Maximum value of
+    #   `7200` seconds.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetSpotCapacityRebalanceRequest AWS API Documentation
@@ -36373,6 +36416,14 @@ module Aws::EC2
     #   The time that the usage operation was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] private_dns_name_options
+    #   The options for the instance hostname.
+    #   @return [Types::PrivateDnsNameOptionsResponse]
+    #
+    # @!attribute [rw] ipv_6_address
+    #   The IPv6 address assigned to the instance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -36427,7 +36478,9 @@ module Aws::EC2
       :boot_mode,
       :platform_details,
       :usage_operation,
-      :usage_operation_update_time)
+      :usage_operation_update_time,
+      :private_dns_name_options,
+      :ipv_6_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41227,6 +41280,71 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the options for instance hostnames.
+    #
+    # @!attribute [rw] hostname_type
+    #   The type of hostname to assign to an instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_resource_name_dns_a_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS A records.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_resource_name_dns_aaaa_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS AAAA records.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatePrivateDnsNameOptions AWS API Documentation
+    #
+    class LaunchTemplatePrivateDnsNameOptions < Struct.new(
+      :hostname_type,
+      :enable_resource_name_dns_a_record,
+      :enable_resource_name_dns_aaaa_record)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the options for instance hostnames.
+    #
+    # @note When making an API call, you may pass LaunchTemplatePrivateDnsNameOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hostname_type: "ip-name", # accepts ip-name, resource-name
+    #         enable_resource_name_dns_a_record: false,
+    #         enable_resource_name_dns_aaaa_record: false,
+    #       }
+    #
+    # @!attribute [rw] hostname_type
+    #   The type of hostname for Amazon EC2 instances. For IPv4 only
+    #   subnets, an instance DNS name must be based on the instance IPv4
+    #   address. For IPv6 native subnets, an instance DNS name must be based
+    #   on the instance ID. For dual-stack subnets, you can specify whether
+    #   DNS names use the instance IPv4 address or the instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_resource_name_dns_a_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS A records.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_resource_name_dns_aaaa_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS AAAA records.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatePrivateDnsNameOptionsRequest AWS API Documentation
+    #
+    class LaunchTemplatePrivateDnsNameOptionsRequest < Struct.new(
+      :hostname_type,
+      :enable_resource_name_dns_a_record,
+      :enable_resource_name_dns_aaaa_record)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The launch template to use. You must specify either the launch
     # template ID or launch template name in the request, but not both.
     #
@@ -43295,8 +43413,8 @@ module Aws::EC2
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information,
-    #   see [Updating the block device mapping when launching an
-    #   instance][1] in the *Amazon EC2 User Guide*.
+    #   see [Update the block device mapping when launching an instance][1]
+    #   in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -43732,14 +43850,11 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] http_endpoint
-    #   This parameter enables or disables the HTTP metadata endpoint on
-    #   your instances. If the parameter is not specified, the existing
-    #   state is maintained.
+    #   Enables or disables the HTTP metadata endpoint on your instances. If
+    #   the parameter is not specified, the existing state is maintained.
     #
-    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
-    #   your instance metadata.
-    #
-    #    </note>
+    #   If you specify a value of `disabled`, you cannot access your
+    #   instance metadata.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -43751,7 +43866,8 @@ module Aws::EC2
     #
     # @!attribute [rw] http_protocol_ipv_6
     #   Enables or disables the IPv6 endpoint for the instance metadata
-    #   service.
+    #   service. This setting applies only if you have enabled the HTTP
+    #   metadata endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataOptionsRequest AWS API Documentation
@@ -43831,7 +43947,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] partition_number
-    #   Reserved for future use.
+    #   The number of the partition in which to place the instance. Valid
+    #   only if the placement group strategy is set to `partition`.
     #   @return [Integer]
     #
     # @!attribute [rw] host_resource_group_arn
@@ -44085,6 +44202,71 @@ module Aws::EC2
       :groups,
       :network_interface_id,
       :source_dest_check)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyPrivateDnsNameOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         instance_id: "InstanceId",
+    #         private_dns_hostname_type: "ip-name", # accepts ip-name, resource-name
+    #         enable_resource_name_dns_a_record: false,
+    #         enable_resource_name_dns_aaaa_record: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_dns_hostname_type
+    #   The type of hostname for EC2 instances. For IPv4 only subnets, an
+    #   instance DNS name must be based on the instance IPv4 address. For
+    #   IPv6 only subnets, an instance DNS name must be based on the
+    #   instance ID. For dual-stack subnets, you can specify whether DNS
+    #   names use the instance IPv4 address or the instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_resource_name_dns_a_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS A records.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_resource_name_dns_aaaa_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS AAAA records.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyPrivateDnsNameOptionsRequest AWS API Documentation
+    #
+    class ModifyPrivateDnsNameOptionsRequest < Struct.new(
+      :dry_run,
+      :instance_id,
+      :private_dns_hostname_type,
+      :enable_resource_name_dns_a_record,
+      :enable_resource_name_dns_aaaa_record)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyPrivateDnsNameOptionsResult AWS API Documentation
+    #
+    class ModifyPrivateDnsNameOptionsResult < Struct.new(
+      :return)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44435,6 +44617,13 @@ module Aws::EC2
     #         enable_dns_64: {
     #           value: false,
     #         },
+    #         private_dns_hostname_type_on_launch: "ip-name", # accepts ip-name, resource-name
+    #         enable_resource_name_dns_a_record_on_launch: {
+    #           value: false,
+    #         },
+    #         enable_resource_name_dns_aaaa_record_on_launch: {
+    #           value: false,
+    #         },
     #       }
     #
     # @!attribute [rw] assign_ipv_6_address_on_creation
@@ -44480,6 +44669,25 @@ module Aws::EC2
     #   IPv4-only destinations.
     #   @return [Types::AttributeBooleanValue]
     #
+    # @!attribute [rw] private_dns_hostname_type_on_launch
+    #   The type of hostnames to assign to instances in the subnet at
+    #   launch. For IPv4 only subnets, an instance DNS name must be based on
+    #   the instance IPv4 address. For IPv6 only subnets, an instance DNS
+    #   name must be based on the instance ID. For dual-stack subnets, you
+    #   can specify whether DNS names use the instance IPv4 address or the
+    #   instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_resource_name_dns_a_record_on_launch
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS A records.
+    #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] enable_resource_name_dns_aaaa_record_on_launch
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS AAAA records.
+    #   @return [Types::AttributeBooleanValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttributeRequest AWS API Documentation
     #
     class ModifySubnetAttributeRequest < Struct.new(
@@ -44488,7 +44696,10 @@ module Aws::EC2
       :subnet_id,
       :map_customer_owned_ip_on_launch,
       :customer_owned_ipv_4_pool,
-      :enable_dns_64)
+      :enable_dns_64,
+      :private_dns_hostname_type_on_launch,
+      :enable_resource_name_dns_a_record_on_launch,
+      :enable_resource_name_dns_aaaa_record_on_launch)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46933,6 +47144,15 @@ module Aws::EC2
     #   through a transit gateway, including on-premises networks.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ipv_6_native
+    #   Indicates whether this is an IPv6 only network interface.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipv_6_address
+    #   The IPv6 globally unique address associated with the network
+    #   interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterface AWS API Documentation
     #
     class NetworkInterface < Struct.new(
@@ -46959,7 +47179,9 @@ module Aws::EC2
       :subnet_id,
       :tag_set,
       :vpc_id,
-      :deny_all_igw_traffic)
+      :deny_all_igw_traffic,
+      :ipv_6_native,
+      :ipv_6_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47280,36 +47502,48 @@ module Aws::EC2
     # Describes the configuration of On-Demand Instances in an EC2 Fleet.
     #
     # @!attribute [rw] allocation_strategy
-    #   The order of the launch template overrides to use in fulfilling
-    #   On-Demand capacity. If you specify `lowest-price`, EC2 Fleet uses
-    #   price to determine the order, launching the lowest price first. If
-    #   you specify `prioritized`, EC2 Fleet uses the priority that you
-    #   assigned to each launch template override, launching the highest
-    #   priority first. If you do not specify a value, EC2 Fleet defaults to
-    #   `lowest-price`.
+    #   The strategy that determines the order of the launch template
+    #   overrides to use in fulfilling On-Demand capacity.
+    #
+    #   `lowest-price` - EC2 Fleet uses price to determine the order,
+    #   launching the lowest price first.
+    #
+    #   `prioritized` - EC2 Fleet uses the priority that you assigned to
+    #   each launch template override, launching the highest priority first.
+    #
+    #   Default: `lowest-price`
     #   @return [String]
     #
     # @!attribute [rw] capacity_reservation_options
     #   The strategy for using unused Capacity Reservations for fulfilling
-    #   On-Demand capacity. Supported only for fleets of type `instant`.
+    #   On-Demand capacity.
+    #
+    #   Supported only for fleets of type `instant`.
     #   @return [Types::CapacityReservationOptions]
     #
     # @!attribute [rw] single_instance_type
     #   Indicates that the fleet uses a single instance type to launch all
-    #   On-Demand Instances in the fleet. Supported only for fleets of type
-    #   `instant`.
+    #   On-Demand Instances in the fleet.
+    #
+    #   Supported only for fleets of type `instant`.
     #   @return [Boolean]
     #
     # @!attribute [rw] single_availability_zone
     #   Indicates that the fleet launches all On-Demand Instances into a
-    #   single Availability Zone. Supported only for fleets of type
-    #   `instant`.
+    #   single Availability Zone.
+    #
+    #   Supported only for fleets of type `instant`.
     #   @return [Boolean]
     #
     # @!attribute [rw] min_target_capacity
     #   The minimum target capacity for On-Demand Instances in the fleet. If
     #   the minimum target capacity is not reached, the fleet launches no
     #   instances.
+    #
+    #   Supported only for fleets of type `instant`.
+    #
+    #   At least one of the following must be specified:
+    #   `SingleAvailabilityZone` \| `SingleInstanceType`
     #   @return [Integer]
     #
     # @!attribute [rw] max_total_price
@@ -47347,36 +47581,48 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] allocation_strategy
-    #   The order of the launch template overrides to use in fulfilling
-    #   On-Demand capacity. If you specify `lowest-price`, EC2 Fleet uses
-    #   price to determine the order, launching the lowest price first. If
-    #   you specify `prioritized`, EC2 Fleet uses the priority that you
-    #   assigned to each launch template override, launching the highest
-    #   priority first. If you do not specify a value, EC2 Fleet defaults to
-    #   `lowest-price`.
+    #   The strategy that determines the order of the launch template
+    #   overrides to use in fulfilling On-Demand capacity.
+    #
+    #   `lowest-price` - EC2 Fleet uses price to determine the order,
+    #   launching the lowest price first.
+    #
+    #   `prioritized` - EC2 Fleet uses the priority that you assigned to
+    #   each launch template override, launching the highest priority first.
+    #
+    #   Default: `lowest-price`
     #   @return [String]
     #
     # @!attribute [rw] capacity_reservation_options
     #   The strategy for using unused Capacity Reservations for fulfilling
-    #   On-Demand capacity. Supported only for fleets of type `instant`.
+    #   On-Demand capacity.
+    #
+    #   Supported only for fleets of type `instant`.
     #   @return [Types::CapacityReservationOptionsRequest]
     #
     # @!attribute [rw] single_instance_type
     #   Indicates that the fleet uses a single instance type to launch all
-    #   On-Demand Instances in the fleet. Supported only for fleets of type
-    #   `instant`.
+    #   On-Demand Instances in the fleet.
+    #
+    #   Supported only for fleets of type `instant`.
     #   @return [Boolean]
     #
     # @!attribute [rw] single_availability_zone
     #   Indicates that the fleet launches all On-Demand Instances into a
-    #   single Availability Zone. Supported only for fleets of type
-    #   `instant`.
+    #   single Availability Zone.
+    #
+    #   Supported only for fleets of type `instant`.
     #   @return [Boolean]
     #
     # @!attribute [rw] min_target_capacity
     #   The minimum target capacity for On-Demand Instances in the fleet. If
     #   the minimum target capacity is not reached, the fleet launches no
     #   instances.
+    #
+    #   Supported only for fleets of type `instant`.
+    #
+    #   At least one of the following must be specified:
+    #   `SingleAvailabilityZone` \| `SingleInstanceType`
     #   @return [Integer]
     #
     # @!attribute [rw] max_total_price
@@ -47865,8 +48111,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] partition_number
-    #   The number of the partition the instance is in. Valid only if the
-    #   placement group strategy is set to `partition`.
+    #   The number of the partition that the instance is in. Valid only if
+    #   the placement group strategy is set to `partition`.
     #
     #   This parameter is not supported by [CreateFleet][1].
     #
@@ -48310,6 +48556,101 @@ module Aws::EC2
       :type,
       :value,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the options for instance hostnames.
+    #
+    # @!attribute [rw] hostname_type
+    #   The type of hostname for EC2 instances. For IPv4 only subnets, an
+    #   instance DNS name must be based on the instance IPv4 address. For
+    #   IPv6 only subnets, an instance DNS name must be based on the
+    #   instance ID. For dual-stack subnets, you can specify whether DNS
+    #   names use the instance IPv4 address or the instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_resource_name_dns_a_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS A records.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_resource_name_dns_aaaa_record
+    #   Indicates whether to respond to DNS queries for instance hostname
+    #   with DNS AAAA records.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrivateDnsNameOptionsOnLaunch AWS API Documentation
+    #
+    class PrivateDnsNameOptionsOnLaunch < Struct.new(
+      :hostname_type,
+      :enable_resource_name_dns_a_record,
+      :enable_resource_name_dns_aaaa_record)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the options for instance hostnames.
+    #
+    # @note When making an API call, you may pass PrivateDnsNameOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hostname_type: "ip-name", # accepts ip-name, resource-name
+    #         enable_resource_name_dns_a_record: false,
+    #         enable_resource_name_dns_aaaa_record: false,
+    #       }
+    #
+    # @!attribute [rw] hostname_type
+    #   The type of hostname for EC2 instances. For IPv4 only subnets, an
+    #   instance DNS name must be based on the instance IPv4 address. For
+    #   IPv6 only subnets, an instance DNS name must be based on the
+    #   instance ID. For dual-stack subnets, you can specify whether DNS
+    #   names use the instance IPv4 address or the instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_resource_name_dns_a_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS A records.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_resource_name_dns_aaaa_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS AAAA records.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrivateDnsNameOptionsRequest AWS API Documentation
+    #
+    class PrivateDnsNameOptionsRequest < Struct.new(
+      :hostname_type,
+      :enable_resource_name_dns_a_record,
+      :enable_resource_name_dns_aaaa_record)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the options for instance hostnames.
+    #
+    # @!attribute [rw] hostname_type
+    #   The type of hostname to assign to an instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_resource_name_dns_a_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS A records.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_resource_name_dns_aaaa_record
+    #   Indicates whether to respond to DNS queries for instance hostnames
+    #   with DNS AAAA records.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrivateDnsNameOptionsResponse AWS API Documentation
+    #
+    class PrivateDnsNameOptionsResponse < Struct.new(
+      :hostname_type,
+      :enable_resource_name_dns_a_record,
+      :enable_resource_name_dns_aaaa_record)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50546,6 +50887,11 @@ module Aws::EC2
     #             max: 1,
     #           },
     #         },
+    #         private_dns_name_options: {
+    #           hostname_type: "ip-name", # accepts ip-name, resource-name
+    #           enable_resource_name_dns_a_record: false,
+    #           enable_resource_name_dns_aaaa_record: false,
+    #         },
     #       }
     #
     # @!attribute [rw] kernel_id
@@ -50786,6 +51132,11 @@ module Aws::EC2
     #   `InstanceTypes`.
     #   @return [Types::InstanceRequirementsRequest]
     #
+    # @!attribute [rw] private_dns_name_options
+    #   The options for the instance hostname. The default values are
+    #   inherited from the subnet.
+    #   @return [Types::LaunchTemplatePrivateDnsNameOptionsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
     class RequestLaunchTemplateData < Struct.new(
@@ -50816,7 +51167,8 @@ module Aws::EC2
       :hibernation_options,
       :metadata_options,
       :enclave_options,
-      :instance_requirements)
+      :instance_requirements,
+      :private_dns_name_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52640,6 +52992,10 @@ module Aws::EC2
     #   `InstanceTypes`.
     #   @return [Types::InstanceRequirements]
     #
+    # @!attribute [rw] private_dns_name_options
+    #   The options for the instance hostname.
+    #   @return [Types::LaunchTemplatePrivateDnsNameOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
     class ResponseLaunchTemplateData < Struct.new(
@@ -52670,7 +53026,8 @@ module Aws::EC2
       :hibernation_options,
       :metadata_options,
       :enclave_options,
-      :instance_requirements)
+      :instance_requirements,
+      :private_dns_name_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -53528,6 +53885,11 @@ module Aws::EC2
     #         enclave_options: {
     #           enabled: false,
     #         },
+    #         private_dns_name_options: {
+    #           hostname_type: "ip-name", # accepts ip-name, resource-name
+    #           enable_resource_name_dns_a_record: false,
+    #           enable_resource_name_dns_aaaa_record: false,
+    #         },
     #       }
     #
     # @!attribute [rw] block_device_mappings
@@ -53692,8 +54054,8 @@ module Aws::EC2
     #
     # @!attribute [rw] user_data
     #   The user data to make available to the instance. For more
-    #   information, see [Running commands on your Linux instance at
-    #   launch][1] (Linux) and [Adding User Data][2] (Windows). If you are
+    #   information, see [Run commands on your Linux instance at launch][1]
+    #   and [Run commands on your Windows instance at launch][2]. If you are
     #   using a command line tool, base64-encoding is performed for you, and
     #   you can load the text from a file. Otherwise, you must provide
     #   base64-encoded text. User data is limited to 16 KB.
@@ -53701,7 +54063,7 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-windows-user-data.html
     #   @return [String]
     #
     # @!attribute [rw] additional_info
@@ -53859,7 +54221,7 @@ module Aws::EC2
     #
     # @!attribute [rw] cpu_options
     #   The CPU options for the instance. For more information, see
-    #   [Optimizing CPU options][1] in the *Amazon EC2 User Guide*.
+    #   [Optimize CPU options][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -53914,6 +54276,11 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
     #   @return [Types::EnclaveOptionsRequest]
     #
+    # @!attribute [rw] private_dns_name_options
+    #   The options for the instance hostname. The default values are
+    #   inherited from the subnet.
+    #   @return [Types::PrivateDnsNameOptionsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
     #
     class RunInstancesRequest < Struct.new(
@@ -53953,7 +54320,8 @@ module Aws::EC2
       :hibernation_options,
       :license_specifications,
       :metadata_options,
-      :enclave_options)
+      :enclave_options,
+      :private_dns_name_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -56204,6 +56572,12 @@ module Aws::EC2
     #   The amount of time (in seconds) that Amazon EC2 waits before
     #   terminating the old Spot Instance after launching a new replacement
     #   Spot Instance.
+    #
+    #   Valid only when `ReplacementStrategy` is set to
+    #   `launch-before-terminate`.
+    #
+    #   Valid values: Minimum value of `120` seconds. Maximum value of
+    #   `7200` seconds.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotCapacityRebalance AWS API Documentation
@@ -57486,20 +57860,20 @@ module Aws::EC2
     # Describes the configuration of Spot Instances in an EC2 Fleet.
     #
     # @!attribute [rw] allocation_strategy
-    #   Indicates how to allocate the target Spot Instance capacity across
-    #   the Spot Instance pools specified by the EC2 Fleet.
+    #   The strategy that determines how to allocate the target Spot
+    #   Instance capacity across the Spot Instance pools specified by the
+    #   EC2 Fleet.
     #
-    #   If the allocation strategy is `lowest-price`, EC2 Fleet launches
-    #   instances from the Spot Instance pools with the lowest price. This
-    #   is the default allocation strategy.
+    #   `lowest-price` - EC2 Fleet launches instances from the Spot Instance
+    #   pools with the lowest price.
     #
-    #   If the allocation strategy is `diversified`, EC2 Fleet launches
-    #   instances from all of the Spot Instance pools that you specify.
+    #   `diversified` - EC2 Fleet launches instances from all of the Spot
+    #   Instance pools that you specify.
     #
-    #   If the allocation strategy is `capacity-optimized` (recommended),
-    #   EC2 Fleet launches instances from Spot Instance pools with optimal
-    #   capacity for the number of instances that are launching. To give
-    #   certain instance types a higher chance of launching first, use
+    #   `capacity-optimized` (recommended) - EC2 Fleet launches instances
+    #   from Spot Instance pools with optimal capacity for the number of
+    #   instances that are launching. To give certain instance types a
+    #   higher chance of launching first, use
     #   `capacity-optimized-prioritized`. Set a priority for each instance
     #   type by using the `Priority` parameter for
     #   `LaunchTemplateOverrides`. You can assign the same priority to
@@ -57509,6 +57883,8 @@ module Aws::EC2
     #   uses a launch template. Note that if the On-Demand
     #   `AllocationStrategy` is set to `prioritized`, the same priority is
     #   applied when fulfilling On-Demand capacity.
+    #
+    #   Default: `lowest-price`
     #   @return [String]
     #
     # @!attribute [rw] maintenance_strategies
@@ -57518,13 +57894,14 @@ module Aws::EC2
     #   @return [Types::FleetSpotMaintenanceStrategies]
     #
     # @!attribute [rw] instance_interruption_behavior
-    #   The behavior when a Spot Instance is interrupted. The default is
-    #   `terminate`.
+    #   The behavior when a Spot Instance is interrupted.
+    #
+    #   Default: `terminate`
     #   @return [String]
     #
     # @!attribute [rw] instance_pools_to_use_count
     #   The number of Spot pools across which to allocate your target Spot
-    #   capacity. Valid only when **AllocationStrategy** is set to
+    #   capacity. Supported only when `AllocationStrategy` is set to
     #   `lowest-price`. EC2 Fleet selects the cheapest Spot pools and evenly
     #   allocates your target Spot capacity across the number of Spot pools
     #   that you specify.
@@ -57542,19 +57919,27 @@ module Aws::EC2
     #
     # @!attribute [rw] single_instance_type
     #   Indicates that the fleet uses a single instance type to launch all
-    #   Spot Instances in the fleet. Supported only for fleets of type
-    #   `instant`.
+    #   Spot Instances in the fleet.
+    #
+    #   Supported only for fleets of type `instant`.
     #   @return [Boolean]
     #
     # @!attribute [rw] single_availability_zone
     #   Indicates that the fleet launches all Spot Instances into a single
-    #   Availability Zone. Supported only for fleets of type `instant`.
+    #   Availability Zone.
+    #
+    #   Supported only for fleets of type `instant`.
     #   @return [Boolean]
     #
     # @!attribute [rw] min_target_capacity
     #   The minimum target capacity for Spot Instances in the fleet. If the
     #   minimum target capacity is not reached, the fleet launches no
     #   instances.
+    #
+    #   Supported only for fleets of type `instant`.
+    #
+    #   At least one of the following must be specified:
+    #   `SingleAvailabilityZone` \| `SingleInstanceType`
     #   @return [Integer]
     #
     # @!attribute [rw] max_total_price
@@ -57599,20 +57984,20 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] allocation_strategy
-    #   Indicates how to allocate the target Spot Instance capacity across
-    #   the Spot Instance pools specified by the EC2 Fleet.
+    #   The strategy that determines how to allocate the target Spot
+    #   Instance capacity across the Spot Instance pools specified by the
+    #   EC2 Fleet.
     #
-    #   If the allocation strategy is `lowest-price`, EC2 Fleet launches
-    #   instances from the Spot Instance pools with the lowest price. This
-    #   is the default allocation strategy.
+    #   `lowest-price` - EC2 Fleet launches instances from the Spot Instance
+    #   pools with the lowest price.
     #
-    #   If the allocation strategy is `diversified`, EC2 Fleet launches
-    #   instances from all of the Spot Instance pools that you specify.
+    #   `diversified` - EC2 Fleet launches instances from all of the Spot
+    #   Instance pools that you specify.
     #
-    #   If the allocation strategy is `capacity-optimized` (recommended),
-    #   EC2 Fleet launches instances from Spot Instance pools with optimal
-    #   capacity for the number of instances that are launching. To give
-    #   certain instance types a higher chance of launching first, use
+    #   `capacity-optimized` (recommended) - EC2 Fleet launches instances
+    #   from Spot Instance pools with optimal capacity for the number of
+    #   instances that are launching. To give certain instance types a
+    #   higher chance of launching first, use
     #   `capacity-optimized-prioritized`. Set a priority for each instance
     #   type by using the `Priority` parameter for
     #   `LaunchTemplateOverrides`. You can assign the same priority to
@@ -57622,6 +58007,8 @@ module Aws::EC2
     #   uses a launch template. Note that if the On-Demand
     #   `AllocationStrategy` is set to `prioritized`, the same priority is
     #   applied when fulfilling On-Demand capacity.
+    #
+    #   Default: `lowest-price`
     #   @return [String]
     #
     # @!attribute [rw] maintenance_strategies
@@ -57630,13 +58017,14 @@ module Aws::EC2
     #   @return [Types::FleetSpotMaintenanceStrategiesRequest]
     #
     # @!attribute [rw] instance_interruption_behavior
-    #   The behavior when a Spot Instance is interrupted. The default is
-    #   `terminate`.
+    #   The behavior when a Spot Instance is interrupted.
+    #
+    #   Default: `terminate`
     #   @return [String]
     #
     # @!attribute [rw] instance_pools_to_use_count
     #   The number of Spot pools across which to allocate your target Spot
-    #   capacity. Valid only when Spot **AllocationStrategy** is set to
+    #   capacity. Supported only when Spot `AllocationStrategy` is set to
     #   `lowest-price`. EC2 Fleet selects the cheapest Spot pools and evenly
     #   allocates your target Spot capacity across the number of Spot pools
     #   that you specify.
@@ -57654,19 +58042,27 @@ module Aws::EC2
     #
     # @!attribute [rw] single_instance_type
     #   Indicates that the fleet uses a single instance type to launch all
-    #   Spot Instances in the fleet. Supported only for fleets of type
-    #   `instant`.
+    #   Spot Instances in the fleet.
+    #
+    #   Supported only for fleets of type `instant`.
     #   @return [Boolean]
     #
     # @!attribute [rw] single_availability_zone
     #   Indicates that the fleet launches all Spot Instances into a single
-    #   Availability Zone. Supported only for fleets of type `instant`.
+    #   Availability Zone.
+    #
+    #   Supported only for fleets of type `instant`.
     #   @return [Boolean]
     #
     # @!attribute [rw] min_target_capacity
     #   The minimum target capacity for Spot Instances in the fleet. If the
     #   minimum target capacity is not reached, the fleet launches no
     #   instances.
+    #
+    #   Supported only for fleets of type `instant`.
+    #
+    #   At least one of the following must be specified:
+    #   `SingleAvailabilityZone` \| `SingleInstanceType`
     #   @return [Integer]
     #
     # @!attribute [rw] max_total_price
@@ -58357,6 +58753,16 @@ module Aws::EC2
     #   IPv4-only destinations.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ipv_6_native
+    #   Indicates whether this is an IPv6 only subnet.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] private_dns_name_options_on_launch
+    #   The type of hostnames to assign to instances in the subnet at
+    #   launch. An instance hostname is based on the IPv4 address or ID of
+    #   the instance.
+    #   @return [Types::PrivateDnsNameOptionsOnLaunch]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Subnet AWS API Documentation
     #
     class Subnet < Struct.new(
@@ -58377,7 +58783,9 @@ module Aws::EC2
       :tags,
       :subnet_arn,
       :outpost_arn,
-      :enable_dns_64)
+      :enable_dns_64,
+      :ipv_6_native,
+      :private_dns_name_options_on_launch)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -58465,10 +58873,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an IPv6 CIDR block associated with a subnet.
+    # Describes an association between a subnet and an IPv6 CIDR block.
     #
     # @!attribute [rw] association_id
-    #   The association ID for the CIDR block.
+    #   The ID of the association.
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
@@ -58476,7 +58884,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block_state
-    #   Information about the state of the CIDR block.
+    #   The state of the CIDR block.
     #   @return [Types::SubnetCidrBlockState]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SubnetIpv6CidrBlockAssociation AWS API Documentation

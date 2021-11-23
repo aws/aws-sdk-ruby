@@ -867,8 +867,7 @@ module Aws::ElasticLoadBalancingV2
     # @option params [String] :ip_address_type
     #   The type of IP addresses used by the subnets for your load balancer.
     #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
-    #   (for IPv4 and IPv6 addresses). Internal load balancers must use
-    #   `ipv4`.
+    #   (for IPv4 and IPv6 addresses).
     #
     # @option params [String] :customer_owned_ipv_4_pool
     #   \[Application Load Balancers on Outposts\] The ID of the
@@ -3938,9 +3937,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [required, String] :ip_address_type
     #   The IP address type. The possible values are `ipv4` (for IPv4
-    #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). Internal
-    #   load balancers must use `ipv4`. You can’t specify `dualstack` for a
-    #   load balancer with a UDP or TCP\_UDP listener.
+    #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). You can’t
+    #   specify `dualstack` for a load balancer with a UDP or TCP\_UDP
+    #   listener.
     #
     # @return [Types::SetIpAddressTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4214,7 +4213,7 @@ module Aws::ElasticLoadBalancingV2
     #   subnets for your load balancer. The possible values are `ipv4` (for
     #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
     #   can’t specify `dualstack` for a load balancer with a UDP or TCP\_UDP
-    #   listener. Internal load balancers must use `ipv4`.
+    #   listener. .
     #
     # @return [Types::SetSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4299,7 +4298,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

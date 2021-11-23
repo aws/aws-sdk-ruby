@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2021-11-23)
+------------------
+
+* Feature - Documentation updates for Amazon WorkSpaces
+
 1.59.0 (2021-11-04)
 ------------------
 

@@ -1720,6 +1720,39 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Get NetworkAnalyzer configuration.
+    #
+    # @option params [required, String] :configuration_name
+    #   NetworkAnalyzer configuration name.
+    #
+    # @return [Types::GetNetworkAnalyzerConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNetworkAnalyzerConfigurationResponse#trace_content #trace_content} => Types::TraceContent
+    #   * {Types::GetNetworkAnalyzerConfigurationResponse#wireless_devices #wireless_devices} => Array&lt;String&gt;
+    #   * {Types::GetNetworkAnalyzerConfigurationResponse#wireless_gateways #wireless_gateways} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_network_analyzer_configuration({
+    #     configuration_name: "NetworkAnalyzerConfigurationName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.trace_content.wireless_device_frame_info #=> String, one of "ENABLED", "DISABLED"
+    #   resp.trace_content.log_level #=> String, one of "INFO", "ERROR", "DISABLED"
+    #   resp.wireless_devices #=> Array
+    #   resp.wireless_devices[0] #=> String
+    #   resp.wireless_gateways #=> Array
+    #   resp.wireless_gateways[0] #=> String
+    #
+    # @overload get_network_analyzer_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_network_analyzer_configuration(params = {}, options = {})
+      req = build_request(:get_network_analyzer_configuration, params)
+      req.send_request(options)
+    end
+
     # Gets information about a partner account. If `PartnerAccountId` and
     # `PartnerType` are `null`, returns all partner accounts.
     #
@@ -3254,6 +3287,49 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # Update NetworkAnalyzer configuration.
+    #
+    # @option params [required, String] :configuration_name
+    #   NetworkAnalyzer configuration name.
+    #
+    # @option params [Types::TraceContent] :trace_content
+    #   Trace Content for resources.
+    #
+    # @option params [Array<String>] :wireless_devices_to_add
+    #   WirelessDevices to add into NetworkAnalyzerConfiguration.
+    #
+    # @option params [Array<String>] :wireless_devices_to_remove
+    #   WirelessDevices to remove from NetworkAnalyzerConfiguration.
+    #
+    # @option params [Array<String>] :wireless_gateways_to_add
+    #   WirelessGateways to add into NetworkAnalyzerConfiguration.
+    #
+    # @option params [Array<String>] :wireless_gateways_to_remove
+    #   WirelessGateways to remove from NetworkAnalyzerConfiguration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_network_analyzer_configuration({
+    #     configuration_name: "NetworkAnalyzerConfigurationName", # required
+    #     trace_content: {
+    #       wireless_device_frame_info: "ENABLED", # accepts ENABLED, DISABLED
+    #       log_level: "INFO", # accepts INFO, ERROR, DISABLED
+    #     },
+    #     wireless_devices_to_add: ["WirelessDeviceId"],
+    #     wireless_devices_to_remove: ["WirelessDeviceId"],
+    #     wireless_gateways_to_add: ["WirelessGatewayId"],
+    #     wireless_gateways_to_remove: ["WirelessGatewayId"],
+    #   })
+    #
+    # @overload update_network_analyzer_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_network_analyzer_configuration(params = {}, options = {})
+      req = build_request(:update_network_analyzer_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates properties of a partner account.
     #
     # @option params [required, Types::SidewalkUpdateAccount] :sidewalk
@@ -3421,7 +3497,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

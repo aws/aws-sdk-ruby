@@ -1183,8 +1183,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves the Amazon Macie configuration settings for an Amazon Web
-    # Services organization.
+    # Retrieves the Amazon Macie configuration settings for an organization
+    # in Organizations.
     #
     # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1205,8 +1205,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Disables an Amazon Macie account and deletes Macie resources for the
-    # account.
+    # Disables Amazon Macie and deletes all settings and resources for a
+    # Macie account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1220,7 +1220,7 @@ module Aws::Macie2
     end
 
     # Disables an account as the delegated Amazon Macie administrator
-    # account for an Amazon Web Services organization.
+    # account for an organization in Organizations.
     #
     # @option params [required, String] :admin_account_id
     #
@@ -1335,7 +1335,7 @@ module Aws::Macie2
     end
 
     # Designates an account as the delegated Amazon Macie administrator
-    # account for an Amazon Web Services organization.
+    # account for an organization in Organizations.
     #
     # @option params [required, String] :admin_account_id
     #
@@ -1384,8 +1384,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves (queries) aggregated statistical data for all the S3 buckets
-    # that Amazon Macie monitors and analyzes.
+    # Retrieves (queries) aggregated statistical data about S3 buckets that
+    # Amazon Macie monitors and analyzes.
     #
     # @option params [String] :account_id
     #
@@ -2436,7 +2436,7 @@ module Aws::Macie2
     end
 
     # Retrieves information about the delegated Amazon Macie administrator
-    # account for an Amazon Web Services organization.
+    # account for an organization in Organizations.
     #
     # @option params [Integer] :max_results
     #
@@ -2880,8 +2880,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Suspends or re-enables an Amazon Macie account, or updates the
-    # configuration settings for a Macie account.
+    # Suspends or re-enables Amazon Macie, or updates the configuration
+    # settings for a Macie account.
     #
     # @option params [String] :finding_publishing_frequency
     #   The frequency with which Amazon Macie publishes updates to policy
@@ -2941,8 +2941,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Updates the Amazon Macie configuration settings for an Amazon Web
-    # Services organization.
+    # Updates the Amazon Macie configuration settings for an organization in
+    # Organizations.
     #
     # @option params [required, Boolean] :auto_enable
     #
@@ -2976,7 +2976,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

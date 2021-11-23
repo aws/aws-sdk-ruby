@@ -381,7 +381,9 @@ module Aws::FinSpaceData
     #
     #   * `XML` - XML source file format.
     #
-    #   For example, you could specify the following for `formatParams`\:
+    #   For example, you could specify the following for `formatParams`\: `
+    #   "formatParams": \{ "formatType": "CSV", "withHeader": "true",
+    #   "separator": ",", "compression":"None" \} `
     #
     # @return [Types::CreateChangesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1142,7 +1144,7 @@ module Aws::FinSpaceData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspacedata'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

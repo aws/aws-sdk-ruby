@@ -699,6 +699,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
+    #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigration AWS API Documentation
     #
@@ -926,6 +927,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
     #   resp.snapshot.kms_key_id #=> String
     #   resp.snapshot.arn #=> String
+    #   resp.snapshot.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshot AWS API Documentation
     #
@@ -1080,6 +1082,12 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`, `cache.r6gd.16xlarge`
+    #
     #       **R6g node types** (available only for Redis engine version 5.0.6
     #       onward and for Memcached engine version 1.5.16 onward).
     #
@@ -1219,7 +1227,9 @@ module Aws::ElastiCache
     #    </note>
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   This parameter is currently disabled.
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next minor version
+    #   upgrade campaign. This parameter is disabled for previous versions. 
     #
     # @option params [Integer] :snapshot_retention_limit
     #   The number of days for which ElastiCache retains automatic snapshots
@@ -1533,7 +1543,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
-    #   \| `redis6.x` \|
+    #   \| `redis6.0` \| `redis6.2`
     #
     # @option params [required, String] :description
     #   A user-specified description for the cache parameter group.
@@ -2076,6 +2086,12 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`, `cache.r6gd.16xlarge`
+    #
     #       **R6g node types** (available only for Redis engine version 5.0.6
     #       onward and for Memcached engine version 1.5.16 onward).
     #
@@ -2245,7 +2261,9 @@ module Aws::ElastiCache
     #    </note>
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   This parameter is currently disabled.
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next minor version
+    #   upgrade campaign. This parameter is disabled for previous versions. 
     #
     # @option params [Integer] :snapshot_retention_limit
     #   The number of days for which ElastiCache retains automatic snapshots
@@ -2336,6 +2354,15 @@ module Aws::ElastiCache
     #
     # @option params [Array<Types::LogDeliveryConfigurationRequest>] :log_delivery_configurations
     #   Specifies the destination, format and type of the logs.
+    #
+    # @option params [Boolean] :data_tiering_enabled
+    #   Enables data tiering. Data tiering is only supported for replication
+    #   groups using the r6gd node type. This parameter must be set to true
+    #   when using r6gd nodes. For more information, see [Data tiering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
     #
     # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2498,6 +2525,7 @@ module Aws::ElastiCache
     #         enabled: false,
     #       },
     #     ],
+    #     data_tiering_enabled: false,
     #   })
     #
     # @example Response structure
@@ -2567,6 +2595,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
+    #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -2791,6 +2820,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
     #   resp.snapshot.kms_key_id #=> String
     #   resp.snapshot.arn #=> String
+    #   resp.snapshot.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshot AWS API Documentation
     #
@@ -2801,7 +2831,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.x onwards: Creates a Redis user. For more
+    # For Redis engine version 6.0 onwards: Creates a Redis user. For more
     # information, see [Using Role Based Access Control (RBAC)][1].
     #
     #
@@ -2838,6 +2868,7 @@ module Aws::ElastiCache
     #   * {Types::User#user_name #user_name} => String
     #   * {Types::User#status #status} => String
     #   * {Types::User#engine #engine} => String
+    #   * {Types::User#minimum_engine_version #minimum_engine_version} => String
     #   * {Types::User#access_string #access_string} => String
     #   * {Types::User#user_group_ids #user_group_ids} => Array&lt;String&gt;
     #   * {Types::User#authentication #authentication} => Types::Authentication
@@ -2866,6 +2897,7 @@ module Aws::ElastiCache
     #   resp.user_name #=> String
     #   resp.status #=> String
     #   resp.engine #=> String
+    #   resp.minimum_engine_version #=> String
     #   resp.access_string #=> String
     #   resp.user_group_ids #=> Array
     #   resp.user_group_ids[0] #=> String
@@ -2882,7 +2914,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.x onwards: Creates a Redis user group. For
+    # For Redis engine version 6.0 onwards: Creates a Redis user group. For
     # more information, see [Using Role Based Access Control (RBAC)][1]
     #
     #
@@ -2909,6 +2941,7 @@ module Aws::ElastiCache
     #   * {Types::UserGroup#status #status} => String
     #   * {Types::UserGroup#engine #engine} => String
     #   * {Types::UserGroup#user_ids #user_ids} => Array&lt;String&gt;
+    #   * {Types::UserGroup#minimum_engine_version #minimum_engine_version} => String
     #   * {Types::UserGroup#pending_changes #pending_changes} => Types::UserGroupPendingChanges
     #   * {Types::UserGroup#replication_groups #replication_groups} => Array&lt;String&gt;
     #   * {Types::UserGroup#arn #arn} => String
@@ -2934,6 +2967,7 @@ module Aws::ElastiCache
     #   resp.engine #=> String
     #   resp.user_ids #=> Array
     #   resp.user_ids[0] #=> String
+    #   resp.minimum_engine_version #=> String
     #   resp.pending_changes.user_ids_to_remove #=> Array
     #   resp.pending_changes.user_ids_to_remove[0] #=> String
     #   resp.pending_changes.user_ids_to_add #=> Array
@@ -3154,6 +3188,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
+    #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount AWS API Documentation
     #
@@ -3642,6 +3677,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
+    #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -3758,6 +3794,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
     #   resp.snapshot.kms_key_id #=> String
     #   resp.snapshot.arn #=> String
+    #   resp.snapshot.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshot AWS API Documentation
     #
@@ -3768,7 +3805,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.x onwards: Deletes a user. The user will be
+    # For Redis engine version 6.0 onwards: Deletes a user. The user will be
     # removed from all user groups and in turn removed from all replication
     # groups. For more information, see [Using Role Based Access Control
     # (RBAC)][1].
@@ -3786,6 +3823,7 @@ module Aws::ElastiCache
     #   * {Types::User#user_name #user_name} => String
     #   * {Types::User#status #status} => String
     #   * {Types::User#engine #engine} => String
+    #   * {Types::User#minimum_engine_version #minimum_engine_version} => String
     #   * {Types::User#access_string #access_string} => String
     #   * {Types::User#user_group_ids #user_group_ids} => Array&lt;String&gt;
     #   * {Types::User#authentication #authentication} => Types::Authentication
@@ -3803,6 +3841,7 @@ module Aws::ElastiCache
     #   resp.user_name #=> String
     #   resp.status #=> String
     #   resp.engine #=> String
+    #   resp.minimum_engine_version #=> String
     #   resp.access_string #=> String
     #   resp.user_group_ids #=> Array
     #   resp.user_group_ids[0] #=> String
@@ -3819,7 +3858,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # For Redis engine version 6.x onwards: Deletes a user group. The user
+    # For Redis engine version 6.0 onwards: Deletes a user group. The user
     # group must first be disassociated from the replication group before it
     # can be deleted. For more information, see [Using Role Based Access
     # Control (RBAC)][1].
@@ -3837,6 +3876,7 @@ module Aws::ElastiCache
     #   * {Types::UserGroup#status #status} => String
     #   * {Types::UserGroup#engine #engine} => String
     #   * {Types::UserGroup#user_ids #user_ids} => Array&lt;String&gt;
+    #   * {Types::UserGroup#minimum_engine_version #minimum_engine_version} => String
     #   * {Types::UserGroup#pending_changes #pending_changes} => Types::UserGroupPendingChanges
     #   * {Types::UserGroup#replication_groups #replication_groups} => Array&lt;String&gt;
     #   * {Types::UserGroup#arn #arn} => String
@@ -3854,6 +3894,7 @@ module Aws::ElastiCache
     #   resp.engine #=> String
     #   resp.user_ids #=> Array
     #   resp.user_ids[0] #=> String
+    #   resp.minimum_engine_version #=> String
     #   resp.pending_changes.user_ids_to_remove #=> Array
     #   resp.pending_changes.user_ids_to_remove[0] #=> String
     #   resp.pending_changes.user_ids_to_add #=> Array
@@ -4155,7 +4196,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
-    #   \| `redis6.x` \|
+    #   \| `redis6.x` \| `redis6.2`
     #
     #   Constraints:
     #
@@ -5138,7 +5179,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0`
-    #   \| `redis6.x` \|
+    #   \| `redis6.x` \| `redis6.2`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -6251,6 +6292,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_groups[0].log_delivery_configurations[0].message #=> String
     #   resp.replication_groups[0].replication_group_create_time #=> Time
+    #   resp.replication_groups[0].data_tiering #=> String, one of "enabled", "disabled"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6334,6 +6376,12 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`, `cache.r6gd.16xlarge`
     #
     #       **R6g node types** (available only for Redis engine version 5.0.6
     #       onward and for Memcached engine version 1.5.16 onward).
@@ -6537,6 +6585,12 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`, `cache.r6gd.16xlarge`
     #
     #       **R6g node types** (available only for Redis engine version 5.0.6
     #       onward and for Memcached engine version 1.5.16 onward).
@@ -7195,6 +7249,7 @@ module Aws::ElastiCache
     #   resp.snapshots[0].node_snapshots[0].snapshot_create_time #=> Time
     #   resp.snapshots[0].kms_key_id #=> String
     #   resp.snapshots[0].arn #=> String
+    #   resp.snapshots[0].data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshots AWS API Documentation
     #
@@ -7357,6 +7412,7 @@ module Aws::ElastiCache
     #   resp.user_groups[0].engine #=> String
     #   resp.user_groups[0].user_ids #=> Array
     #   resp.user_groups[0].user_ids[0] #=> String
+    #   resp.user_groups[0].minimum_engine_version #=> String
     #   resp.user_groups[0].pending_changes.user_ids_to_remove #=> Array
     #   resp.user_groups[0].pending_changes.user_ids_to_remove[0] #=> String
     #   resp.user_groups[0].pending_changes.user_ids_to_add #=> Array
@@ -7427,6 +7483,7 @@ module Aws::ElastiCache
     #   resp.users[0].user_name #=> String
     #   resp.users[0].status #=> String
     #   resp.users[0].engine #=> String
+    #   resp.users[0].minimum_engine_version #=> String
     #   resp.users[0].access_string #=> String
     #   resp.users[0].user_group_ids #=> Array
     #   resp.users[0].user_group_ids[0] #=> String
@@ -7748,6 +7805,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
+    #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount AWS API Documentation
     #
@@ -8179,7 +8237,9 @@ module Aws::ElastiCache
     #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   This parameter is currently disabled.
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next minor version
+    #   upgrade campaign. This parameter is disabled for previous versions. 
     #
     # @option params [Integer] :snapshot_retention_limit
     #   The number of days for which ElastiCache retains automatic cluster
@@ -8785,7 +8845,9 @@ module Aws::ElastiCache
     #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   This parameter is currently disabled.
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next minor version
+    #   upgrade campaign. This parameter is disabled for previous versions. 
     #
     # @option params [Integer] :snapshot_retention_limit
     #   The number of days for which ElastiCache retains automatic node group
@@ -9045,6 +9107,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
+    #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -9188,6 +9251,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
+    #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfiguration AWS API Documentation
     #
@@ -9221,6 +9285,7 @@ module Aws::ElastiCache
     #   * {Types::User#user_name #user_name} => String
     #   * {Types::User#status #status} => String
     #   * {Types::User#engine #engine} => String
+    #   * {Types::User#minimum_engine_version #minimum_engine_version} => String
     #   * {Types::User#access_string #access_string} => String
     #   * {Types::User#user_group_ids #user_group_ids} => Array&lt;String&gt;
     #   * {Types::User#authentication #authentication} => Types::Authentication
@@ -9242,6 +9307,7 @@ module Aws::ElastiCache
     #   resp.user_name #=> String
     #   resp.status #=> String
     #   resp.engine #=> String
+    #   resp.minimum_engine_version #=> String
     #   resp.access_string #=> String
     #   resp.user_group_ids #=> Array
     #   resp.user_group_ids[0] #=> String
@@ -9275,6 +9341,7 @@ module Aws::ElastiCache
     #   * {Types::UserGroup#status #status} => String
     #   * {Types::UserGroup#engine #engine} => String
     #   * {Types::UserGroup#user_ids #user_ids} => Array&lt;String&gt;
+    #   * {Types::UserGroup#minimum_engine_version #minimum_engine_version} => String
     #   * {Types::UserGroup#pending_changes #pending_changes} => Types::UserGroupPendingChanges
     #   * {Types::UserGroup#replication_groups #replication_groups} => Array&lt;String&gt;
     #   * {Types::UserGroup#arn #arn} => String
@@ -9294,6 +9361,7 @@ module Aws::ElastiCache
     #   resp.engine #=> String
     #   resp.user_ids #=> Array
     #   resp.user_ids[0] #=> String
+    #   resp.minimum_engine_version #=> String
     #   resp.pending_changes.user_ids_to_remove #=> Array
     #   resp.pending_changes.user_ids_to_remove[0] #=> String
     #   resp.pending_changes.user_ids_to_add #=> Array
@@ -9932,6 +10000,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
+    #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigration AWS API Documentation
     #
@@ -9945,6 +10014,12 @@ module Aws::ElastiCache
     # Represents the input of a `TestFailover` operation which test
     # automatic failover on a specified node group (called shard in the
     # console) in a replication group (called cluster in the console).
+    #
+    # This API is designed for testing the behavior of your application in
+    # case of ElastiCache failover. It is not designed to be an operational
+    # tool for initiating a failover to overcome a problem you may have with
+    # the cluster. Moreover, in certain conditions such as large-scale
+    # operational events, Amazon may block this API.
     #
     # **Note the following**
     #
@@ -10083,6 +10158,7 @@ module Aws::ElastiCache
     #   resp.replication_group.log_delivery_configurations[0].status #=> String, one of "active", "enabling", "modifying", "disabling", "error"
     #   resp.replication_group.log_delivery_configurations[0].message #=> String
     #   resp.replication_group.replication_group_create_time #=> Time
+    #   resp.replication_group.data_tiering #=> String, one of "enabled", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
     #
@@ -10106,7 +10182,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

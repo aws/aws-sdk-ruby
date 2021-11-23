@@ -783,6 +783,17 @@ module Aws::Lambda
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
     #
+    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
+    #
+    # @option params [Types::FilterCriteria] :filter_criteria
+    #   (Streams and Amazon SQS) A object that defines the filter criteria
+    #   used to determine whether Lambda should process an event. For more
+    #   information, see [Lambda event filtering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html
+    #
     # @option params [Integer] :maximum_batching_window_in_seconds
     #   (Streams and Amazon SQS standard queues) The maximum amount of time,
     #   in seconds, that Lambda spends gathering records before invoking the
@@ -853,6 +864,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
+    #   * {Types::EventSourceMappingConfiguration#filter_criteria #filter_criteria} => Types::FilterCriteria
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
     #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
@@ -876,6 +888,13 @@ module Aws::Lambda
     #     function_name: "FunctionName", # required
     #     enabled: false,
     #     batch_size: 1,
+    #     filter_criteria: {
+    #       filters: [
+    #         {
+    #           pattern: "Pattern",
+    #         },
+    #       ],
+    #     },
     #     maximum_batching_window_in_seconds: 1,
     #     parallelization_factor: 1,
     #     starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
@@ -917,6 +936,8 @@ module Aws::Lambda
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
     #   resp.event_source_arn #=> String
+    #   resp.filter_criteria.filters #=> Array
+    #   resp.filter_criteria.filters[0].pattern #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
     #   resp.last_processing_result #=> String
@@ -1160,8 +1181,8 @@ module Aws::Lambda
     #
     # @option params [Array<String>] :architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values. The default value is
-    #   `x86_64`.
+    #   string array with one of the valid values (arm64 or x86\_64). The
+    #   default value is `x86_64`.
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1461,6 +1482,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
+    #   * {Types::EventSourceMappingConfiguration#filter_criteria #filter_criteria} => Types::FilterCriteria
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
     #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
@@ -1492,6 +1514,8 @@ module Aws::Lambda
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
     #   resp.event_source_arn #=> String
+    #   resp.filter_criteria.filters #=> Array
+    #   resp.filter_criteria.filters[0].pattern #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
     #   resp.last_processing_result #=> String
@@ -1916,6 +1940,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
+    #   * {Types::EventSourceMappingConfiguration#filter_criteria #filter_criteria} => Types::FilterCriteria
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
     #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
@@ -1947,6 +1972,8 @@ module Aws::Lambda
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
     #   resp.event_source_arn #=> String
+    #   resp.filter_criteria.filters #=> Array
+    #   resp.filter_criteria.filters[0].pattern #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
     #   resp.last_processing_result #=> String
@@ -2780,6 +2807,10 @@ module Aws::Lambda
     # @option params [String, StringIO, File] :payload
     #   The JSON that you want to provide to your Lambda function as input.
     #
+    #   You can enter the JSON directly. For example, `--payload '\{ "key":
+    #   "value" \}'`. You can also specify a file path. For example,
+    #   `--payload file://payload.json`.
+    #
     # @option params [String] :qualifier
     #   Specify a version or alias to invoke a published version of the
     #   function.
@@ -3054,6 +3085,8 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].maximum_batching_window_in_seconds #=> Integer
     #   resp.event_source_mappings[0].parallelization_factor #=> Integer
     #   resp.event_source_mappings[0].event_source_arn #=> String
+    #   resp.event_source_mappings[0].filter_criteria.filters #=> Array
+    #   resp.event_source_mappings[0].filter_criteria.filters[0].pattern #=> String
     #   resp.event_source_mappings[0].function_arn #=> String
     #   resp.event_source_mappings[0].last_modified #=> Time
     #   resp.event_source_mappings[0].last_processing_result #=> String
@@ -4653,6 +4686,17 @@ module Aws::Lambda
     #
     #   * **Self-Managed Apache Kafka** - Default 100. Max 10,000.
     #
+    #   * **Amazon MQ (ActiveMQ and RabbitMQ)** - Default 100. Max 10,000.
+    #
+    # @option params [Types::FilterCriteria] :filter_criteria
+    #   (Streams and Amazon SQS) A object that defines the filter criteria
+    #   used to determine whether Lambda should process an event. For more
+    #   information, see [Lambda event filtering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html
+    #
     # @option params [Integer] :maximum_batching_window_in_seconds
     #   (Streams and Amazon SQS standard queues) The maximum amount of time,
     #   in seconds, that Lambda spends gathering records before invoking the
@@ -4705,6 +4749,7 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
+    #   * {Types::EventSourceMappingConfiguration#filter_criteria #filter_criteria} => Types::FilterCriteria
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
     #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
@@ -4728,6 +4773,13 @@ module Aws::Lambda
     #     function_name: "FunctionName",
     #     enabled: false,
     #     batch_size: 1,
+    #     filter_criteria: {
+    #       filters: [
+    #         {
+    #           pattern: "Pattern",
+    #         },
+    #       ],
+    #     },
     #     maximum_batching_window_in_seconds: 1,
     #     destination_config: {
     #       on_success: {
@@ -4760,6 +4812,8 @@ module Aws::Lambda
     #   resp.maximum_batching_window_in_seconds #=> Integer
     #   resp.parallelization_factor #=> Integer
     #   resp.event_source_arn #=> String
+    #   resp.filter_criteria.filters #=> Array
+    #   resp.filter_criteria.filters[0].pattern #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
     #   resp.last_processing_result #=> String
@@ -4861,8 +4915,8 @@ module Aws::Lambda
     #
     # @option params [Array<String>] :architectures
     #   The instruction set architecture that the function supports. Enter a
-    #   string array with one of the valid values. The default value is
-    #   `x86_64`.
+    #   string array with one of the valid values (arm64 or x86\_64). The
+    #   default value is `x86_64`.
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5424,7 +5478,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

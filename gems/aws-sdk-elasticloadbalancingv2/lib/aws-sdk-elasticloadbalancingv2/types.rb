@@ -820,8 +820,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] ip_address_type
     #   The type of IP addresses used by the subnets for your load balancer.
     #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
-    #   (for IPv4 and IPv6 addresses). Internal load balancers must use
-    #   `ipv4`.
+    #   (for IPv4 and IPv6 addresses).
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ipv_4_pool
@@ -2388,6 +2387,12 @@ module Aws::ElasticLoadBalancingV2
     #   * `access_logs.s3.prefix` - The prefix for the location in the S3
     #     bucket for the access logs.
     #
+    #   * `ipv6.deny-all-igw-traffic` - Blocks internet gateway (IGW) access
+    #     to the load balancer. It is set to `false` for internet-facing
+    #     load balancers and `true` for internal load balancers, preventing
+    #     unintended access to your internal load balancer through an
+    #     internet gateway.
+    #
     #   The following attributes are supported by only Application Load
     #   Balancers:
     #
@@ -3552,9 +3557,9 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] ip_address_type
     #   The IP address type. The possible values are `ipv4` (for IPv4
-    #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). Internal
-    #   load balancers must use `ipv4`. You can’t specify `dualstack` for a
-    #   load balancer with a UDP or TCP\_UDP listener.
+    #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). You can’t
+    #   specify `dualstack` for a load balancer with a UDP or TCP\_UDP
+    #   listener.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetIpAddressTypeInput AWS API Documentation
@@ -3719,7 +3724,7 @@ module Aws::ElasticLoadBalancingV2
     #   subnets for your load balancer. The possible values are `ipv4` (for
     #   IPv4 addresses) and `dualstack` (for IPv4 and IPv6 addresses). You
     #   can’t specify `dualstack` for a load balancer with a UDP or TCP\_UDP
-    #   listener. Internal load balancers must use `ipv4`.
+    #   listener. .
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsInput AWS API Documentation

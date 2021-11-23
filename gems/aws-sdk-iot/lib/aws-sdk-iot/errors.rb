@@ -36,6 +36,7 @@ module Aws::IoT
   # * {IndexNotReadyException}
   # * {InternalException}
   # * {InternalFailureException}
+  # * {InternalServerException}
   # * {InvalidAggregationException}
   # * {InvalidQueryException}
   # * {InvalidRequestException}
@@ -189,6 +190,21 @@ module Aws::IoT
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::IoT::Types::InternalFailureException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InternalServerException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoT::Types::InternalServerException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

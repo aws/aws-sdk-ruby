@@ -2541,9 +2541,15 @@ module Aws::OpenSearchService
     # @option params [Types::AutoTuneOptions] :auto_tune_options
     #   Specifies Auto-Tune options.
     #
+    # @option params [Boolean] :dry_run
+    #   This flag, when set to True, specifies whether the `UpdateDomain`
+    #   request should return the results of validation checks (DryRunResults)
+    #   without actually applying the change.
+    #
     # @return [Types::UpdateDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigResponse#domain_config #domain_config} => Types::DomainConfig
+    #   * {Types::UpdateDomainConfigResponse#dry_run_results #dry_run_results} => Types::DryRunResults
     #
     # @example Request syntax with placeholder values
     #
@@ -2644,6 +2650,7 @@ module Aws::OpenSearchService
     #         },
     #       ],
     #     },
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -2776,6 +2783,8 @@ module Aws::OpenSearchService
     #   resp.domain_config.auto_tune_options.status.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_config.auto_tune_options.status.error_message #=> String
     #   resp.domain_config.auto_tune_options.status.pending_deletion #=> Boolean
+    #   resp.dry_run_results.deployment_type #=> String
+    #   resp.dry_run_results.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfig AWS API Documentation
     #
@@ -2925,7 +2934,7 @@ module Aws::OpenSearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

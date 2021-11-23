@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.282.0 (2021-11-23)
+------------------
+
+* Feature - This release adds a new parameter ipv6Native to the allow creation of IPv6-only subnets using the CreateSubnet operation, and the operation ModifySubnetAttribute includes new parameters to modify subnet attributes to use resource-based naming and enable DNS resolutions for Private DNS name.
+
 1.281.0 (2021-11-15)
 ------------------
 

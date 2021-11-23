@@ -132,15 +132,15 @@ module Aws::Macie2
     end
 
     # Provides information about the delegated Amazon Macie administrator
-    # account for an Amazon Web Services organization.
+    # account for an organization in Organizations.
     #
     # @!attribute [rw] account_id
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The current status of an account as the delegated Amazon Macie
-    #   administrator account for an Amazon Web Services organization.
-    #   Possible values are:
+    #   administrator account for an organization in Organizations. Possible
+    #   values are:
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/AdminAccount AWS API Documentation
@@ -1376,7 +1376,12 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Specifies the settings for an Amazon Macie membership invitation.
+    # Specifies the settings for an Amazon Macie membership invitation. When
+    # you send an invitation, Macie notifies the recipient by creating an
+    # Health event for the recipient's account and, if Macie is already
+    # enabled for the account, displaying an **Accounts** badge and
+    # notification on the recipient's console. You can optionally notify
+    # the recipient by also sending the invitation as an email message.
     #
     # @note When making an API call, you may pass CreateInvitationsRequest
     #   data as a hash:
@@ -2106,7 +2111,7 @@ module Aws::Macie2
     class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
 
     # Provides information about the Amazon Macie configuration settings for
-    # an Amazon Web Services organization.
+    # an organization in Organizations.
     #
     # @!attribute [rw] auto_enable
     #   @return [Boolean]
@@ -2266,10 +2271,10 @@ module Aws::Macie2
     #
     class EnableMacieResponse < Aws::EmptyStructure; end
 
-    # Specifies an account to designate as a delegated Amazon Macie
-    # administrator account for an Amazon Web Services organization. To
-    # submit this request, you must be a user of the management account for
-    # the Amazon Web Services organization.
+    # Specifies an account to designate as the delegated Amazon Macie
+    # administrator account for an organization in Organizations. To submit
+    # this request, you must be a user of the Organizations management
+    # account.
     #
     # @note When making an API call, you may pass EnableOrganizationAdminAccountRequest
     #   data as a hash:
@@ -2594,8 +2599,7 @@ module Aws::Macie2
     # invitation.
     #
     # @!attribute [rw] administrator
-    #   Provides information about an Amazon Macie membership invitation
-    #   that was received by an account.
+    #   Provides information about an Amazon Macie membership invitation.
     #   @return [Types::Invitation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetAdministratorAccountResponse AWS API Documentation
@@ -3129,8 +3133,7 @@ module Aws::Macie2
     # that invitation.
     #
     # @!attribute [rw] master
-    #   Provides information about an Amazon Macie membership invitation
-    #   that was received by an account.
+    #   Provides information about an Amazon Macie membership invitation.
     #   @return [Types::Invitation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetMasterAccountResponse AWS API Documentation
@@ -3182,8 +3185,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] relationship_status
     #   The current status of the relationship between an account and an
-    #   associated Amazon Macie administrator account (*inviter account*).
-    #   Possible values are:
+    #   associated Amazon Macie administrator account. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3386,8 +3388,7 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about an Amazon Macie membership invitation that
-    # was received by an account.
+    # Provides information about an Amazon Macie membership invitation.
     #
     # @!attribute [rw] account_id
     #   @return [String]
@@ -3400,8 +3401,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] relationship_status
     #   The current status of the relationship between an account and an
-    #   associated Amazon Macie administrator account (*inviter account*).
-    #   Possible values are:
+    #   associated Amazon Macie administrator account. Possible values are:
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Invitation AWS API Documentation
@@ -4273,7 +4273,7 @@ module Aws::Macie2
     end
 
     # Provides information about the delegated Amazon Macie administrator
-    # accounts for an Amazon Web Services organization.
+    # accounts for an organization in Organizations.
     #
     # @!attribute [rw] admin_accounts
     #   @return [Array<Types::AdminAccount>]
@@ -4490,8 +4490,7 @@ module Aws::Macie2
     #
     # @!attribute [rw] relationship_status
     #   The current status of the relationship between an account and an
-    #   associated Amazon Macie administrator account (*inviter account*).
-    #   Possible values are:
+    #   associated Amazon Macie administrator account. Possible values are:
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6560,7 +6559,7 @@ module Aws::Macie2
     class UpdateMemberSessionResponse < Aws::EmptyStructure; end
 
     # Specifies whether to enable Amazon Macie automatically for accounts
-    # that are added to an Amazon Web Services organization.
+    # that are added to an organization in Organizations.
     #
     # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
     #   data as a hash:

@@ -247,6 +247,11 @@ module Aws::EC2
     #     enclave_options: {
     #       enabled: false,
     #     },
+    #     private_dns_name_options: {
+    #       hostname_type: "ip-name", # accepts ip-name, resource-name
+    #       enable_resource_name_dns_a_record: false,
+    #       enable_resource_name_dns_aaaa_record: false,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -379,16 +384,16 @@ module Aws::EC2
     #   part of the network interface.
     # @option options [String] :user_data
     #   The user data to make available to the instance. For more information,
-    #   see [Running commands on your Linux instance at launch][1] (Linux) and
-    #   [Adding User Data][2] (Windows). If you are using a command line tool,
-    #   base64-encoding is performed for you, and you can load the text from a
-    #   file. Otherwise, you must provide base64-encoded text. User data is
-    #   limited to 16 KB.
+    #   see [Run commands on your Linux instance at launch][1] and [Run
+    #   commands on your Windows instance at launch][2]. If you are using a
+    #   command line tool, base64-encoding is performed for you, and you can
+    #   load the text from a file. Otherwise, you must provide base64-encoded
+    #   text. User data is limited to 16 KB.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-windows-user-data.html
     # @option options [String] :additional_info
     #   Reserved.
     # @option options [String] :client_token
@@ -508,8 +513,8 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     # @option options [Types::CpuOptionsRequest] :cpu_options
-    #   The CPU options for the instance. For more information, see
-    #   [Optimizing CPU options][1] in the *Amazon EC2 User Guide*.
+    #   The CPU options for the instance. For more information, see [Optimize
+    #   CPU options][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -552,6 +557,9 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html
+    # @option options [Types::PrivateDnsNameOptionsRequest] :private_dns_name_options
+    #   The options for the instance hostname. The default values are
+    #   inherited from the subnet.
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []
@@ -1096,11 +1104,12 @@ module Aws::EC2
     #     ],
     #     availability_zone: "String",
     #     availability_zone_id: "String",
-    #     cidr_block: "String", # required
+    #     cidr_block: "String",
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
+    #     ipv_6_native: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::TagSpecification>] :tag_specifications
@@ -1125,14 +1134,18 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
     # @option options [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
-    # @option options [required, String] :cidr_block
+    # @option options [String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
     #   `10.0.0.0/24`. We modify the specified CIDR block to its canonical
     #   form; for example, if you specify `100.68.0.18/18`, we modify it to
     #   `100.68.0.0/18`.
+    #
+    #   This parameter is not supported for an IPv6 only subnet.
     # @option options [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
+    #
+    #   This parameter is required for an IPv6 only subnet.
     # @option options [String] :outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
     #   Outpost ARN, you must also specify the Availability Zone of the
@@ -1144,6 +1157,8 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Boolean] :ipv_6_native
+    #   Indicates whether to create an IPv6 only subnet.
     # @return [Subnet]
     def create_subnet(options = {})
       resp = @client.create_subnet(options)
@@ -3336,8 +3351,8 @@ module Aws::EC2
     #     `cidrBlock` as the filter names.
     #
     #   * `default-for-az` - Indicates whether this is the default subnet for
-    #     the Availability Zone. You can also use `defaultForAz` as the filter
-    #     name.
+    #     the Availability Zone (`true` \| `false`). You can also use
+    #     `defaultForAz` as the filter name.
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -3347,6 +3362,9 @@ module Aws::EC2
     #
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
+    #
+    #   * `ipv6-native` - Indicates whether this is an IPv6 only subnet
+    #     (`true` \| `false`).
     #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #

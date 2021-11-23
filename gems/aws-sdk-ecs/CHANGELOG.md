@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2021-11-23)
+------------------
+
+* Feature - Documentation update for ARM support on Amazon ECS.
+
 1.90.0 (2021-11-10)
 ------------------
 

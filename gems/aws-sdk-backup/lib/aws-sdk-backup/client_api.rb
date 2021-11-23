@@ -211,6 +211,7 @@ module Aws::Backup
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
+    ResourceTypeManagementPreference = Shapes::MapShape.new(name: 'ResourceTypeManagementPreference')
     ResourceTypeOptInPreference = Shapes::MapShape.new(name: 'ResourceTypeOptInPreference')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
     RestoreJobId = Shapes::StringShape.new(name: 'RestoreJobId')
@@ -650,6 +651,7 @@ module Aws::Backup
     DescribeRegionSettingsInput.struct_class = Types::DescribeRegionSettingsInput
 
     DescribeRegionSettingsOutput.add_member(:resource_type_opt_in_preference, Shapes::ShapeRef.new(shape: ResourceTypeOptInPreference, location_name: "ResourceTypeOptInPreference"))
+    DescribeRegionSettingsOutput.add_member(:resource_type_management_preference, Shapes::ShapeRef.new(shape: ResourceTypeManagementPreference, location_name: "ResourceTypeManagementPreference"))
     DescribeRegionSettingsOutput.struct_class = Types::DescribeRegionSettingsOutput
 
     DescribeReportJobInput.add_member(:report_job_id, Shapes::ShapeRef.new(shape: ReportJobId, required: true, location: "uri", location_name: "reportJobId"))
@@ -1083,6 +1085,9 @@ module Aws::Backup
 
     ResourceTypeList.member = Shapes::ShapeRef.new(shape: ARN)
 
+    ResourceTypeManagementPreference.key = Shapes::ShapeRef.new(shape: ResourceType)
+    ResourceTypeManagementPreference.value = Shapes::ShapeRef.new(shape: IsEnabled)
+
     ResourceTypeOptInPreference.key = Shapes::ShapeRef.new(shape: ResourceType)
     ResourceTypeOptInPreference.value = Shapes::ShapeRef.new(shape: IsEnabled)
 
@@ -1209,6 +1214,7 @@ module Aws::Backup
     UpdateRecoveryPointLifecycleOutput.struct_class = Types::UpdateRecoveryPointLifecycleOutput
 
     UpdateRegionSettingsInput.add_member(:resource_type_opt_in_preference, Shapes::ShapeRef.new(shape: ResourceTypeOptInPreference, location_name: "ResourceTypeOptInPreference"))
+    UpdateRegionSettingsInput.add_member(:resource_type_management_preference, Shapes::ShapeRef.new(shape: ResourceTypeManagementPreference, location_name: "ResourceTypeManagementPreference"))
     UpdateRegionSettingsInput.struct_class = Types::UpdateRegionSettingsInput
 
     UpdateReportPlanInput.add_member(:report_plan_name, Shapes::ShapeRef.new(shape: ReportPlanName, required: true, location: "uri", location_name: "reportPlanName"))
@@ -2105,6 +2111,7 @@ module Aws::Backup
         o.output = Shapes::ShapeRef.new(shape: UpdateRecoveryPointLifecycleOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)

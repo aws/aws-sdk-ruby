@@ -331,6 +331,13 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
+    #       `cache.r6gd.16xlarge`
+    #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
     #
@@ -468,7 +475,9 @@ module Aws::ElastiCache
     #   @return [Array<Types::CacheNode>]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   This parameter is currently disabled.
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next minor version
+    #   upgrade campaign. This parameter is disabled for previous versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
@@ -634,7 +643,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.x` \|
+    #   `redis5.0` \| `redis6.0` \| `redis6.2`
     #   @return [String]
     #
     # @!attribute [rw] cache_engine_description
@@ -733,6 +742,12 @@ module Aws::ElastiCache
     # * Memory optimized:
     #
     #   * Current generation:
+    #
+    #     **R6gd node types** (available only for Redis engine version 6.2
+    #     onward).
+    #
+    #     `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #     `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`, `cache.r6gd.16xlarge`
     #
     #     **R6g node types** (available only for Redis engine version 5.0.6
     #     onward and for Memcached engine version 1.5.16 onward).
@@ -979,7 +994,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.x` \|
+    #   `redis5.0` \| `redis6.0` \|
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1733,6 +1748,13 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
+    #       `cache.r6gd.16xlarge`
+    #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
     #
@@ -1887,7 +1909,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   This parameter is currently disabled.
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next minor version
+    #   upgrade campaign. This parameter is disabled for previous versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_retention_limit
@@ -2031,7 +2055,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.x` \|
+    #   `redis5.0` \| `redis6.0` \| `redis6.2`
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2335,6 +2359,7 @@ module Aws::ElastiCache
     #             enabled: false,
     #           },
     #         ],
+    #         data_tiering_enabled: false,
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -2510,6 +2535,13 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
+    #       `cache.r6gd.16xlarge`
     #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
@@ -2694,7 +2726,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   This parameter is currently disabled.
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next minor version
+    #   upgrade campaign. This parameter is disabled for previous versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_retention_limit
@@ -2795,6 +2829,16 @@ module Aws::ElastiCache
     #   Specifies the destination, format and type of the logs.
     #   @return [Array<Types::LogDeliveryConfigurationRequest>]
     #
+    # @!attribute [rw] data_tiering_enabled
+    #   Enables data tiering. Data tiering is only supported for replication
+    #   groups using the r6gd node type. This parameter must be set to true
+    #   when using r6gd nodes. For more information, see [Data tiering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupMessage AWS API Documentation
     #
     class CreateReplicationGroupMessage < Struct.new(
@@ -2830,7 +2874,8 @@ module Aws::ElastiCache
       :at_rest_encryption_enabled,
       :kms_key_id,
       :user_group_ids,
-      :log_delivery_configurations)
+      :log_delivery_configurations,
+      :data_tiering_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3600,7 +3645,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.x` \|
+    #   `redis5.0` \| `redis6.x` \| `redis6.2`
     #
     #   Constraints:
     #
@@ -3843,7 +3888,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.x` \|
+    #   `redis5.0` \| `redis6.x` \| `redis6.2`
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -4158,6 +4203,13 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
+    #       `cache.r6gd.16xlarge`
+    #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
     #
@@ -4337,6 +4389,13 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
+    #       `cache.r6gd.16xlarge`
     #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
@@ -4933,7 +4992,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.x` \|
+    #   `redis5.0` \| `redis6.0` \| `redis6.2`
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -6046,7 +6105,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   This parameter is currently disabled.
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next minor version
+    #   upgrade campaign. This parameter is disabled for previous versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_retention_limit
@@ -6510,7 +6571,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   This parameter is currently disabled.
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next minor version
+    #   upgrade campaign. This parameter is disabled for previous versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_retention_limit
@@ -7767,6 +7830,16 @@ module Aws::ElastiCache
     #   The date and time when the cluster was created.
     #   @return [Time]
     #
+    # @!attribute [rw] data_tiering
+    #   Enables data tiering. Data tiering is only supported for replication
+    #   groups using the r6gd node type. This parameter must be set to true
+    #   when using r6gd nodes. For more information, see [Data tiering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
     #
     class ReplicationGroup < Struct.new(
@@ -7794,7 +7867,8 @@ module Aws::ElastiCache
       :arn,
       :user_group_ids,
       :log_delivery_configurations,
-      :replication_group_create_time)
+      :replication_group_create_time,
+      :data_tiering)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7952,6 +8026,13 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
+    #       `cache.r6gd.16xlarge`
     #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
@@ -8162,6 +8243,13 @@ module Aws::ElastiCache
     #   * Memory optimized:
     #
     #     * Current generation:
+    #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
+    #       `cache.r6gd.16xlarge`
     #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
@@ -8650,6 +8738,13 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **R6gd node types** (available only for Redis engine version 6.2
+    #       onward).
+    #
+    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
+    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
+    #       `cache.r6gd.16xlarge`
+    #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
     #
@@ -8776,7 +8871,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   This parameter is currently disabled.
+    #    If you are running Redis engine version 6.0 or later, set this
+    #   parameter to yes if you want to opt-in to the next minor version
+    #   upgrade campaign. This parameter is disabled for previous versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_retention_limit
@@ -8821,6 +8918,16 @@ module Aws::ElastiCache
     #   The ARN (Amazon Resource Name) of the snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] data_tiering
+    #   Enables data tiering. Data tiering is only supported for replication
+    #   groups using the r6gd node type. This parameter must be set to true
+    #   when using r6gd nodes. For more information, see [Data tiering][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Snapshot AWS API Documentation
     #
     class Snapshot < Struct.new(
@@ -8850,7 +8957,8 @@ module Aws::ElastiCache
       :automatic_failover,
       :node_snapshots,
       :kms_key_id,
-      :arn)
+      :arn,
+      :data_tiering)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9319,6 +9427,9 @@ module Aws::ElastiCache
     #   The current supported value is Redis.
     #   @return [String]
     #
+    # @!attribute [rw] minimum_engine_version
+    #   @return [String]
+    #
     # @!attribute [rw] access_string
     #   Access permissions string used for this user.
     #   @return [String]
@@ -9342,6 +9453,7 @@ module Aws::ElastiCache
       :user_name,
       :status,
       :engine,
+      :minimum_engine_version,
       :access_string,
       :user_group_ids,
       :authentication,
@@ -9373,6 +9485,9 @@ module Aws::ElastiCache
     #   The list of user IDs that belong to the user group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] minimum_engine_version
+    #   @return [String]
+    #
     # @!attribute [rw] pending_changes
     #   A list of updates being applied to the user group.
     #   @return [Types::UserGroupPendingChanges]
@@ -9392,6 +9507,7 @@ module Aws::ElastiCache
       :status,
       :engine,
       :user_ids,
+      :minimum_engine_version,
       :pending_changes,
       :replication_groups,
       :arn)

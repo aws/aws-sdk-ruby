@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.123.0 (2021-11-23)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 3.122.1 (2021-11-09)
 ------------------
 

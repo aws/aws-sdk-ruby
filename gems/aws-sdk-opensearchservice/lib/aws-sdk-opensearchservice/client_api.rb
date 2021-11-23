@@ -78,6 +78,7 @@ module Aws::OpenSearchService
     DeletePackageResponse = Shapes::StructureShape.new(name: 'DeletePackageResponse')
     DeploymentCloseDateTimeStamp = Shapes::TimestampShape.new(name: 'DeploymentCloseDateTimeStamp')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
+    DeploymentType = Shapes::StringShape.new(name: 'DeploymentType')
     DescribeDomainAutoTunesRequest = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesRequest')
     DescribeDomainAutoTunesResponse = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesResponse')
     DescribeDomainConfigRequest = Shapes::StructureShape.new(name: 'DescribeDomainConfigRequest')
@@ -122,6 +123,8 @@ module Aws::OpenSearchService
     DomainStatus = Shapes::StructureShape.new(name: 'DomainStatus')
     DomainStatusList = Shapes::ListShape.new(name: 'DomainStatusList')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DryRun = Shapes::BooleanShape.new(name: 'DryRun')
+    DryRunResults = Shapes::StructureShape.new(name: 'DryRunResults')
     Duration = Shapes::StructureShape.new(name: 'Duration')
     DurationValue = Shapes::IntegerShape.new(name: 'DurationValue')
     EBSOptions = Shapes::StructureShape.new(name: 'EBSOptions')
@@ -191,6 +194,7 @@ module Aws::OpenSearchService
     MasterUserOptions = Shapes::StructureShape.new(name: 'MasterUserOptions')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumInstanceCount = Shapes::IntegerShape.new(name: 'MaximumInstanceCount')
+    Message = Shapes::StringShape.new(name: 'Message')
     MinimumInstanceCount = Shapes::IntegerShape.new(name: 'MinimumInstanceCount')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NodeToNodeEncryptionOptions = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptions')
@@ -684,6 +688,10 @@ module Aws::OpenSearchService
 
     DomainStatusList.member = Shapes::ShapeRef.new(shape: DomainStatus)
 
+    DryRunResults.add_member(:deployment_type, Shapes::ShapeRef.new(shape: DeploymentType, location_name: "DeploymentType"))
+    DryRunResults.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    DryRunResults.struct_class = Types::DryRunResults
+
     Duration.add_member(:value, Shapes::ShapeRef.new(shape: DurationValue, location_name: "Value"))
     Duration.add_member(:unit, Shapes::ShapeRef.new(shape: TimeUnit, location_name: "Unit"))
     Duration.struct_class = Types::Duration
@@ -1062,9 +1070,11 @@ module Aws::OpenSearchService
     UpdateDomainConfigRequest.add_member(:node_to_node_encryption_options, Shapes::ShapeRef.new(shape: NodeToNodeEncryptionOptions, location_name: "NodeToNodeEncryptionOptions"))
     UpdateDomainConfigRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
     UpdateDomainConfigRequest.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptions, location_name: "AutoTuneOptions"))
+    UpdateDomainConfigRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
     UpdateDomainConfigRequest.struct_class = Types::UpdateDomainConfigRequest
 
     UpdateDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: DomainConfig, required: true, location_name: "DomainConfig"))
+    UpdateDomainConfigResponse.add_member(:dry_run_results, Shapes::ShapeRef.new(shape: DryRunResults, location_name: "DryRunResults"))
     UpdateDomainConfigResponse.struct_class = Types::UpdateDomainConfigResponse
 
     UpdatePackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location_name: "PackageID"))

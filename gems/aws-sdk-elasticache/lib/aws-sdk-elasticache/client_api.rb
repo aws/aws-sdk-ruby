@@ -106,6 +106,7 @@ module Aws::ElastiCache
     CreateUserMessage = Shapes::StructureShape.new(name: 'CreateUserMessage')
     CustomerNodeEndpoint = Shapes::StructureShape.new(name: 'CustomerNodeEndpoint')
     CustomerNodeEndpointList = Shapes::ListShape.new(name: 'CustomerNodeEndpointList')
+    DataTieringStatus = Shapes::StringShape.new(name: 'DataTieringStatus')
     DecreaseNodeGroupsInGlobalReplicationGroupMessage = Shapes::StructureShape.new(name: 'DecreaseNodeGroupsInGlobalReplicationGroupMessage')
     DecreaseNodeGroupsInGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'DecreaseNodeGroupsInGlobalReplicationGroupResult')
     DecreaseReplicaCountMessage = Shapes::StructureShape.new(name: 'DecreaseReplicaCountMessage')
@@ -725,6 +726,7 @@ module Aws::ElastiCache
     CreateReplicationGroupMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     CreateReplicationGroupMessage.add_member(:user_group_ids, Shapes::ShapeRef.new(shape: UserGroupIdListInput, location_name: "UserGroupIds"))
     CreateReplicationGroupMessage.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationRequestList, location_name: "LogDeliveryConfigurations"))
+    CreateReplicationGroupMessage.add_member(:data_tiering_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DataTieringEnabled"))
     CreateReplicationGroupMessage.struct_class = Types::CreateReplicationGroupMessage
 
     CreateReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -1451,6 +1453,7 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:user_group_ids, Shapes::ShapeRef.new(shape: UserGroupIdList, location_name: "UserGroupIds"))
     ReplicationGroup.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationList, location_name: "LogDeliveryConfigurations"))
     ReplicationGroup.add_member(:replication_group_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationGroupCreateTime"))
+    ReplicationGroup.add_member(:data_tiering, Shapes::ShapeRef.new(shape: DataTieringStatus, location_name: "DataTiering"))
     ReplicationGroup.struct_class = Types::ReplicationGroup
 
     ReplicationGroupAlreadyExistsFault.struct_class = Types::ReplicationGroupAlreadyExistsFault
@@ -1610,6 +1613,7 @@ module Aws::ElastiCache
     Snapshot.add_member(:node_snapshots, Shapes::ShapeRef.new(shape: NodeSnapshotList, location_name: "NodeSnapshots"))
     Snapshot.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     Snapshot.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    Snapshot.add_member(:data_tiering, Shapes::ShapeRef.new(shape: DataTieringStatus, location_name: "DataTiering"))
     Snapshot.struct_class = Types::Snapshot
 
     SnapshotAlreadyExistsFault.struct_class = Types::SnapshotAlreadyExistsFault
@@ -1719,6 +1723,7 @@ module Aws::ElastiCache
     User.add_member(:user_name, Shapes::ShapeRef.new(shape: String, location_name: "UserName"))
     User.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     User.add_member(:engine, Shapes::ShapeRef.new(shape: EngineType, location_name: "Engine"))
+    User.add_member(:minimum_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MinimumEngineVersion"))
     User.add_member(:access_string, Shapes::ShapeRef.new(shape: String, location_name: "AccessString"))
     User.add_member(:user_group_ids, Shapes::ShapeRef.new(shape: UserGroupIdList, location_name: "UserGroupIds"))
     User.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
@@ -1731,6 +1736,7 @@ module Aws::ElastiCache
     UserGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     UserGroup.add_member(:engine, Shapes::ShapeRef.new(shape: EngineType, location_name: "Engine"))
     UserGroup.add_member(:user_ids, Shapes::ShapeRef.new(shape: UserIdList, location_name: "UserIds"))
+    UserGroup.add_member(:minimum_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MinimumEngineVersion"))
     UserGroup.add_member(:pending_changes, Shapes::ShapeRef.new(shape: UserGroupPendingChanges, location_name: "PendingChanges"))
     UserGroup.add_member(:replication_groups, Shapes::ShapeRef.new(shape: UGReplicationGroupIdList, location_name: "ReplicationGroups"))
     UserGroup.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
@@ -1992,6 +1998,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: UserAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: UserQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateUserNameFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
@@ -2006,6 +2013,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateUserNameFault)
         o.errors << Shapes::ShapeRef.new(shape: UserGroupAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DefaultUserRequired)
         o.errors << Shapes::ShapeRef.new(shape: UserGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
@@ -2139,6 +2147,7 @@ module Aws::ElastiCache
         o.output = Shapes::ShapeRef.new(shape: User)
         o.errors << Shapes::ShapeRef.new(shape: InvalidUserStateFault)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: DefaultUserAssociatedToUserGroupFault)
       end)
@@ -2151,6 +2160,7 @@ module Aws::ElastiCache
         o.output = Shapes::ShapeRef.new(shape: UserGroup)
         o.errors << Shapes::ShapeRef.new(shape: UserGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidUserGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
@@ -2409,6 +2419,7 @@ module Aws::ElastiCache
         o.input = Shapes::ShapeRef.new(shape: DescribeUserGroupsMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeUserGroupsResult)
         o.errors << Shapes::ShapeRef.new(shape: UserGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
@@ -2425,6 +2436,7 @@ module Aws::ElastiCache
         o.input = Shapes::ShapeRef.new(shape: DescribeUsersMessage)
         o.output = Shapes::ShapeRef.new(shape: DescribeUsersResult)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
@@ -2626,6 +2638,7 @@ module Aws::ElastiCache
         o.output = Shapes::ShapeRef.new(shape: User)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidUserStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -2639,6 +2652,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: UserGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateUserNameFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DefaultUserRequired)
         o.errors << Shapes::ShapeRef.new(shape: InvalidUserGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)

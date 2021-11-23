@@ -290,7 +290,9 @@ module Aws::FinSpaceData
     #
     #   * `XML` - XML source file format.
     #
-    #   For example, you could specify the following for `formatParams`\:
+    #   For example, you could specify the following for `formatParams`\: `
+    #   "formatParams": \{ "formatType": "CSV", "withHeader": "true",
+    #   "separator": ",", "compression":"None" \} `
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreateChangesetRequest AWS API Documentation

@@ -377,6 +377,18 @@ module Aws::EC2
       data[:usage_operation_update_time]
     end
 
+    # The options for the instance hostname.
+    # @return [Types::PrivateDnsNameOptionsResponse]
+    def private_dns_name_options
+      data[:private_dns_name_options]
+    end
+
+    # The IPv6 address assigned to the instance.
+    # @return [String]
+    def ipv_6_address
+      data[:ipv_6_address]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -977,8 +989,8 @@ module Aws::EC2
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information, see
-    #   [Updating the block device mapping when launching an instance][1] in
-    #   the *Amazon EC2 User Guide*.
+    #   [Update the block device mapping when launching an instance][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #
     #

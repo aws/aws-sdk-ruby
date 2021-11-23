@@ -530,11 +530,17 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     db_cluster_instance_class: "String",
+    #     storage_type: "String",
+    #     iops: 1,
+    #     publicly_accessible: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
     #   Provides the list of Availability Zones (AZs) where instances in the
     #   restored DB cluster can be created.
+    #
+    #   Valid for: Aurora DB clusters only
     # @option options [required, String] :db_cluster_identifier
     #   The name of the DB cluster to create from the DB snapshot or DB
     #   cluster snapshot. This parameter isn't case-sensitive.
@@ -548,52 +554,84 @@ module Aws::RDS
     #   * Can't end with a hyphen or contain two consecutive hyphens
     #
     #   Example: `my-snapshot-id`
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [required, String] :engine
     #   The database engine to use for the new DB cluster.
     #
     #   Default: The same as source
     #
     #   Constraint: Must be compatible with the engine of the source
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :engine_version
     #   The version of the database engine to use for the new DB cluster.
     #
-    #   To list all of the available engine versions for `aurora` (for MySQL
-    #   5.6-compatible Aurora), use the following command:
+    #   To list all of the available engine versions for MySQL 5.6-compatible
+    #   Aurora, use the following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora --query
     #   "DBEngineVersions[].EngineVersion"`
     #
-    #   To list all of the available engine versions for `aurora-mysql` (for
-    #   MySQL 5.7-compatible Aurora), use the following command:
+    #   To list all of the available engine versions for MySQL 5.7-compatible
+    #   Aurora, use the following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
     #
-    #   To list all of the available engine versions for `aurora-postgresql`,
+    #   To list all of the available engine versions for Aurora PostgreSQL,
     #   use the following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-postgresql
     #   --query "DBEngineVersions[].EngineVersion"`
     #
-    #   <note markdown="1"> If you aren't using the default engine version, then you must specify
-    #   the engine version.
+    #   To list all of the available engine versions for RDS for MySQL, use
+    #   the following command:
     #
-    #    </note>
+    #   `aws rds describe-db-engine-versions --engine mysql --query
+    #   "DBEngineVersions[].EngineVersion"`
+    #
+    #   To list all of the available engine versions for RDS for PostgreSQL,
+    #   use the following command:
+    #
+    #   `aws rds describe-db-engine-versions --engine postgres --query
+    #   "DBEngineVersions[].EngineVersion"`
     #
     #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
-    #   `5.7.mysql_aurora.2.04.5`
+    #   See [MySQL on Amazon RDS Versions][1] in the *Amazon Aurora User
+    #   Guide.*
     #
     #   **Aurora PostgreSQL**
     #
-    #   Example: `9.6.3`, `10.7`
+    #   See [Amazon Aurora PostgreSQL releases and engine versions][2] in the
+    #   *Amazon Aurora User Guide.*
+    #
+    #   **MySQL**
+    #
+    #   See [MySQL on Amazon RDS Versions][3] in the *Amazon RDS User Guide.*
+    #
+    #   **PostgreSQL**
+    #
+    #   See [Amazon RDS for PostgreSQL versions and extensions][4] in the
+    #   *Amazon RDS User Guide.*
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
     # @option options [Integer] :port
     #   The port number on which the new DB cluster accepts connections.
     #
     #   Constraints: This value must be `1150-65535`
     #
     #   Default: The same port as the original DB cluster.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :db_subnet_group_name
     #   The name of the DB subnet group to use for the new DB cluster.
     #
@@ -601,14 +639,25 @@ module Aws::RDS
     #   group.
     #
     #   Example: `mySubnetgroup`
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :database_name
     #   The database name for the restored DB cluster.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :option_group_name
     #   The name of the option group to use for the restored DB cluster.
+    #
+    #   DB clusters are associated with a default option group that can't be
+    #   modified.
     # @option options [Array<String>] :vpc_security_group_ids
     #   A list of VPC security groups that the new DB cluster will belong to.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Array<Types::Tag>] :tags
     #   The tags to be assigned to the restored DB cluster.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :kms_key_id
     #   The Amazon Web Services KMS key identifier to use when restoring an
     #   encrypted DB cluster from a DB snapshot or DB cluster snapshot.
@@ -627,13 +676,17 @@ module Aws::RDS
     #
     #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
     #     isn't encrypted, then the restored DB cluster isn't encrypted.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :enable_iam_database_authentication
     #   A value that indicates whether to enable mapping of Amazon Web
     #   Services Identity and Access Management (IAM) accounts to database
-    #   accounts. By default, mapping is disabled.
+    #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
     #   *Amazon Aurora User Guide.*
+    #
+    #   Valid for: Aurora DB clusters only
     #
     #
     #
@@ -654,11 +707,17 @@ module Aws::RDS
     #     (72 hours).
     #
     #   ^
+    #
+    #   Valid for: Aurora DB clusters only
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to Amazon
     #   CloudWatch Logs. The values in the list depend on the DB engine being
-    #   used. For more information, see [Publishing Database Logs to Amazon
+    #   used.
+    #
+    #   For more information, see [Publishing Database Logs to Amazon
     #   CloudWatch Logs ][1] in the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters only
     #
     #
     #
@@ -669,12 +728,16 @@ module Aws::RDS
     #
     #   For more information, see [ CreateDBCluster][1].
     #
+    #   Valid for: Aurora DB clusters only
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
+    #
+    #   Valid for: Aurora DB clusters only
     # @option options [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
     #   cluster. If this argument is omitted, the default DB cluster parameter
@@ -690,14 +753,20 @@ module Aws::RDS
     #   * First character must be a letter.
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :deletion_protection
     #   A value that indicates whether the DB cluster has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection is disabled.
+    #   enabled. By default, deletion protection isn't enabled.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the restored DB
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
+    #
+    #   Valid for: Aurora DB clusters only
     # @option options [String] :domain
     #   Specify the Active Directory directory ID to restore the DB cluster
     #   in. The domain must be created prior to this operation. Currently,
@@ -707,12 +776,95 @@ module Aws::RDS
     #   For more information, see [ Kerberos Authentication][1] in the *Amazon
     #   RDS User Guide*.
     #
+    #   Valid for: Aurora DB clusters only
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
+    #
+    #   Valid for: Aurora DB clusters only
+    # @option options [String] :db_cluster_instance_class
+    #   The compute and memory capacity of the each DB instance in the
+    #   Multi-AZ DB cluster, for example db.m6g.xlarge. Not all DB instance
+    #   classes are available in all Amazon Web Services Regions, or for all
+    #   database engines.
+    #
+    #   For the full list of DB instance classes, and availability for your
+    #   engine, see [DB Instance Class][1] in the *Amazon RDS User Guide.*
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
+    # @option options [String] :storage_type
+    #   Specifies the storage type to be associated with the each DB instance
+    #   in the Multi-AZ DB cluster.
+    #
+    #   Valid values: `standard | gp2 | io1`
+    #
+    #   If you specify `io1`, you must also include a value for the `Iops`
+    #   parameter.
+    #
+    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    # @option options [Integer] :iops
+    #   The amount of Provisioned IOPS (input/output operations per second) to
+    #   be initially allocated for each DB instance in the Multi-AZ DB
+    #   cluster.
+    #
+    #   For information about valid Iops values, see [Amazon RDS Provisioned
+    #   IOPS Storage to Improve Performance][1] in the *Amazon RDS User
+    #   Guide*.
+    #
+    #   Constraints: Must be a multiple between .5 and 50 of the storage
+    #   amount for the DB instance.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
+    # @option options [Boolean] :publicly_accessible
+    #   A value that indicates whether the DB cluster is publicly accessible.
+    #
+    #   When the DB cluster is publicly accessible, its Domain Name System
+    #   (DNS) endpoint resolves to the private IP address from within the DB
+    #   cluster's virtual private cloud (VPC). It resolves to the public IP
+    #   address from outside of the DB cluster's VPC. Access to the DB
+    #   cluster is ultimately controlled by the security group it uses. That
+    #   public access is not permitted if the security group assigned to the
+    #   DB cluster doesn't permit it.
+    #
+    #   When the DB cluster isn't publicly accessible, it is an internal DB
+    #   cluster with a DNS name that resolves to a private IP address.
+    #
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
+    #
+    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
+    #   isn't specified, the following applies:
+    #
+    #   * If the default VPC in the target Region doesn’t have an internet
+    #     gateway attached to it, the DB cluster is private.
+    #
+    #   * If the default VPC in the target Region has an internet gateway
+    #     attached to it, the DB cluster is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an internet
+    #     gateway attached to it, the DB cluster is private.
+    #
+    #   * If the subnets are part of a VPC that has an internet gateway
+    #     attached to it, the DB cluster is public.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)

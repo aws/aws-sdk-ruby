@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2021-11-23)
+------------------
+
+* Feature - This release introduces a new feature for Device Advisor: ability to execute multiple test suites in parallel for given customer account. You can use GetEndpoint API to get the device-level test endpoint and call StartSuiteRun with "parallelRun=true" to run suites in parallel.
+
 1.8.0 (2021-11-04)
 ------------------
 

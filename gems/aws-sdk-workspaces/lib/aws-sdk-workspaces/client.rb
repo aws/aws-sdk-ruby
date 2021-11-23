@@ -676,8 +676,8 @@ module Aws::WorkSpaces
     # To determine which WorkSpace images need to be updated with the latest
     # Amazon WorkSpaces requirements, use [ DescribeWorkspaceImages][1].
     #
-    # <note markdown="1"> * Only Windows 10 WorkSpace images can be programmatically updated at
-    #   this time.
+    # <note markdown="1"> * Only Windows 10, Windows Sever 2016, and Windows Server 2019
+    #   WorkSpace images can be programmatically updated at this time.
     #
     # * Microsoft Windows updates and other application updates are not
     #   included in the update process.
@@ -2854,7 +2854,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

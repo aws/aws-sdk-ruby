@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2021-11-23)
+------------------
+
+* Feature - Release Lambda event source filtering for SQS, Kinesis Streams, and DynamoDB Streams.
+
 1.73.0 (2021-11-19)
 ------------------
 

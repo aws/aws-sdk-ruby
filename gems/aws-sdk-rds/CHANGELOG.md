@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2021-11-23)
+------------------
+
+* Feature - Adds support for Multi-AZ DB clusters for RDS for MySQL and RDS for PostgreSQL.
+
 1.131.0 (2021-11-22)
 ------------------
 
