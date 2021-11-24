@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Support list of integers in query params for rest-json services.
+
 3.123.0 (2021-11-23)
 ------------------
 

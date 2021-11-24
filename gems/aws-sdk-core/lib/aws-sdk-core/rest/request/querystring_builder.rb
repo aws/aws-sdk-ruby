@@ -49,8 +49,9 @@ module Aws
               raise NotImplementedError, msg
             end
           when ListShape
-            if StringShape === shape_ref.shape.member.shape
-              list_of_strings(shape_ref.location_name, param_value)
+            if StringShape === shape_ref.shape.member.shape ||
+               IntegerShape === shape_ref.shape.member.shape
+              list_of_strings_and_integers(shape_ref.location_name, param_value)
             else
               msg = "Only list of strings supported, got "\
                     "#{shape_ref.shape.member.shape.class.name}"
@@ -89,7 +90,7 @@ module Aws
           list
         end
 
-        def list_of_strings(name, values)
+        def list_of_strings_and_integers(name, values)
           values.map do |value|
             "#{name}=#{escape(value)}"
           end
