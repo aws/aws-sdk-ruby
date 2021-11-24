@@ -63,6 +63,7 @@ module Aws::IoTSiteWise
     AssetSummaries = Shapes::ListShape.new(name: 'AssetSummaries')
     AssetSummary = Shapes::StructureShape.new(name: 'AssetSummary')
     AssociateAssetsRequest = Shapes::StructureShape.new(name: 'AssociateAssetsRequest')
+    AssociateTimeSeriesToAssetPropertyRequest = Shapes::StructureShape.new(name: 'AssociateTimeSeriesToAssetPropertyRequest')
     AssociatedAssetsSummaries = Shapes::ListShape.new(name: 'AssociatedAssetsSummaries')
     AssociatedAssetsSummary = Shapes::StructureShape.new(name: 'AssociatedAssetsSummary')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
@@ -123,6 +124,7 @@ module Aws::IoTSiteWise
     DeletePortalResponse = Shapes::StructureShape.new(name: 'DeletePortalResponse')
     DeleteProjectRequest = Shapes::StructureShape.new(name: 'DeleteProjectRequest')
     DeleteProjectResponse = Shapes::StructureShape.new(name: 'DeleteProjectResponse')
+    DeleteTimeSeriesRequest = Shapes::StructureShape.new(name: 'DeleteTimeSeriesRequest')
     DescribeAccessPolicyRequest = Shapes::StructureShape.new(name: 'DescribeAccessPolicyRequest')
     DescribeAccessPolicyResponse = Shapes::StructureShape.new(name: 'DescribeAccessPolicyResponse')
     DescribeAssetModelRequest = Shapes::StructureShape.new(name: 'DescribeAssetModelRequest')
@@ -147,12 +149,16 @@ module Aws::IoTSiteWise
     DescribeProjectResponse = Shapes::StructureShape.new(name: 'DescribeProjectResponse')
     DescribeStorageConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeStorageConfigurationRequest')
     DescribeStorageConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeStorageConfigurationResponse')
+    DescribeTimeSeriesRequest = Shapes::StructureShape.new(name: 'DescribeTimeSeriesRequest')
+    DescribeTimeSeriesResponse = Shapes::StructureShape.new(name: 'DescribeTimeSeriesResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     DetailedError = Shapes::StructureShape.new(name: 'DetailedError')
     DetailedErrorCode = Shapes::StringShape.new(name: 'DetailedErrorCode')
     DetailedErrorMessage = Shapes::StringShape.new(name: 'DetailedErrorMessage')
     DetailedErrors = Shapes::ListShape.new(name: 'DetailedErrors')
     DisassociateAssetsRequest = Shapes::StructureShape.new(name: 'DisassociateAssetsRequest')
+    DisassociateTimeSeriesFromAssetPropertyRequest = Shapes::StructureShape.new(name: 'DisassociateTimeSeriesFromAssetPropertyRequest')
+    DisassociatedDataStorageState = Shapes::StringShape.new(name: 'DisassociatedDataStorageState')
     Email = Shapes::StringShape.new(name: 'Email')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EntryId = Shapes::StringShape.new(name: 'EntryId')
@@ -226,6 +232,9 @@ module Aws::IoTSiteWise
     ListProjectsResponse = Shapes::StructureShape.new(name: 'ListProjectsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTimeSeriesRequest = Shapes::StructureShape.new(name: 'ListTimeSeriesRequest')
+    ListTimeSeriesResponse = Shapes::StructureShape.new(name: 'ListTimeSeriesResponse')
+    ListTimeSeriesType = Shapes::StringShape.new(name: 'ListTimeSeriesType')
     LoggingLevel = Shapes::StringShape.new(name: 'LoggingLevel')
     LoggingOptions = Shapes::StructureShape.new(name: 'LoggingOptions')
     Macro = Shapes::StringShape.new(name: 'Macro')
@@ -296,6 +305,9 @@ module Aws::IoTSiteWise
     TimeInNanos = Shapes::StructureShape.new(name: 'TimeInNanos')
     TimeInSeconds = Shapes::IntegerShape.new(name: 'TimeInSeconds')
     TimeOrdering = Shapes::StringShape.new(name: 'TimeOrdering')
+    TimeSeriesId = Shapes::StringShape.new(name: 'TimeSeriesId')
+    TimeSeriesSummaries = Shapes::ListShape.new(name: 'TimeSeriesSummaries')
+    TimeSeriesSummary = Shapes::StructureShape.new(name: 'TimeSeriesSummary')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timestamps = Shapes::ListShape.new(name: 'Timestamps')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
@@ -495,6 +507,12 @@ module Aws::IoTSiteWise
     AssociateAssetsRequest.add_member(:child_asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "childAssetId"))
     AssociateAssetsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     AssociateAssetsRequest.struct_class = Types::AssociateAssetsRequest
+
+    AssociateTimeSeriesToAssetPropertyRequest.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, required: true, location: "querystring", location_name: "alias"))
+    AssociateTimeSeriesToAssetPropertyRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "querystring", location_name: "assetId"))
+    AssociateTimeSeriesToAssetPropertyRequest.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "querystring", location_name: "propertyId"))
+    AssociateTimeSeriesToAssetPropertyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    AssociateTimeSeriesToAssetPropertyRequest.struct_class = Types::AssociateTimeSeriesToAssetPropertyRequest
 
     AssociatedAssetsSummaries.member = Shapes::ShapeRef.new(shape: AssociatedAssetsSummary)
 
@@ -710,6 +728,12 @@ module Aws::IoTSiteWise
 
     DeleteProjectResponse.struct_class = Types::DeleteProjectResponse
 
+    DeleteTimeSeriesRequest.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, location: "querystring", location_name: "alias"))
+    DeleteTimeSeriesRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location: "querystring", location_name: "assetId"))
+    DeleteTimeSeriesRequest.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, location: "querystring", location_name: "propertyId"))
+    DeleteTimeSeriesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteTimeSeriesRequest.struct_class = Types::DeleteTimeSeriesRequest
+
     DescribeAccessPolicyRequest.add_member(:access_policy_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "uri", location_name: "accessPolicyId"))
     DescribeAccessPolicyRequest.struct_class = Types::DescribeAccessPolicyRequest
 
@@ -846,9 +870,25 @@ module Aws::IoTSiteWise
 
     DescribeStorageConfigurationResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, required: true, location_name: "storageType"))
     DescribeStorageConfigurationResponse.add_member(:multi_layer_storage, Shapes::ShapeRef.new(shape: MultiLayerStorage, location_name: "multiLayerStorage"))
+    DescribeStorageConfigurationResponse.add_member(:disassociated_data_storage, Shapes::ShapeRef.new(shape: DisassociatedDataStorageState, location_name: "disassociatedDataStorage"))
     DescribeStorageConfigurationResponse.add_member(:configuration_status, Shapes::ShapeRef.new(shape: ConfigurationStatus, required: true, location_name: "configurationStatus"))
     DescribeStorageConfigurationResponse.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateDate"))
     DescribeStorageConfigurationResponse.struct_class = Types::DescribeStorageConfigurationResponse
+
+    DescribeTimeSeriesRequest.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, location: "querystring", location_name: "alias"))
+    DescribeTimeSeriesRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location: "querystring", location_name: "assetId"))
+    DescribeTimeSeriesRequest.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, location: "querystring", location_name: "propertyId"))
+    DescribeTimeSeriesRequest.struct_class = Types::DescribeTimeSeriesRequest
+
+    DescribeTimeSeriesResponse.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetId"))
+    DescribeTimeSeriesResponse.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, location_name: "propertyId"))
+    DescribeTimeSeriesResponse.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, location_name: "alias"))
+    DescribeTimeSeriesResponse.add_member(:time_series_id, Shapes::ShapeRef.new(shape: TimeSeriesId, required: true, location_name: "timeSeriesId"))
+    DescribeTimeSeriesResponse.add_member(:data_type, Shapes::ShapeRef.new(shape: PropertyDataType, required: true, location_name: "dataType"))
+    DescribeTimeSeriesResponse.add_member(:data_type_spec, Shapes::ShapeRef.new(shape: Name, location_name: "dataTypeSpec"))
+    DescribeTimeSeriesResponse.add_member(:time_series_creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timeSeriesCreationDate"))
+    DescribeTimeSeriesResponse.add_member(:time_series_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timeSeriesLastUpdateDate"))
+    DescribeTimeSeriesResponse.struct_class = Types::DescribeTimeSeriesResponse
 
     DetailedError.add_member(:code, Shapes::ShapeRef.new(shape: DetailedErrorCode, required: true, location_name: "code"))
     DetailedError.add_member(:message, Shapes::ShapeRef.new(shape: DetailedErrorMessage, required: true, location_name: "message"))
@@ -861,6 +901,12 @@ module Aws::IoTSiteWise
     DisassociateAssetsRequest.add_member(:child_asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "childAssetId"))
     DisassociateAssetsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DisassociateAssetsRequest.struct_class = Types::DisassociateAssetsRequest
+
+    DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, required: true, location: "querystring", location_name: "alias"))
+    DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "querystring", location_name: "assetId"))
+    DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, required: true, location: "querystring", location_name: "propertyId"))
+    DisassociateTimeSeriesFromAssetPropertyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DisassociateTimeSeriesFromAssetPropertyRequest.struct_class = Types::DisassociateTimeSeriesFromAssetPropertyRequest
 
     ErrorDetails.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "code"))
     ErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -1106,6 +1152,17 @@ module Aws::IoTSiteWise
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListTimeSeriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListTimeSeriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListTimeSeriesRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location: "querystring", location_name: "assetId"))
+    ListTimeSeriesRequest.add_member(:alias_prefix, Shapes::ShapeRef.new(shape: PropertyAlias, location: "querystring", location_name: "aliasPrefix"))
+    ListTimeSeriesRequest.add_member(:time_series_type, Shapes::ShapeRef.new(shape: ListTimeSeriesType, location: "querystring", location_name: "timeSeriesType"))
+    ListTimeSeriesRequest.struct_class = Types::ListTimeSeriesRequest
+
+    ListTimeSeriesResponse.add_member(:time_series_summaries, Shapes::ShapeRef.new(shape: TimeSeriesSummaries, required: true, location_name: "TimeSeriesSummaries"))
+    ListTimeSeriesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTimeSeriesResponse.struct_class = Types::ListTimeSeriesResponse
+
     LoggingOptions.add_member(:level, Shapes::ShapeRef.new(shape: LoggingLevel, required: true, location_name: "level"))
     LoggingOptions.struct_class = Types::LoggingOptions
 
@@ -1209,10 +1266,12 @@ module Aws::IoTSiteWise
 
     PutStorageConfigurationRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, required: true, location_name: "storageType"))
     PutStorageConfigurationRequest.add_member(:multi_layer_storage, Shapes::ShapeRef.new(shape: MultiLayerStorage, location_name: "multiLayerStorage"))
+    PutStorageConfigurationRequest.add_member(:disassociated_data_storage, Shapes::ShapeRef.new(shape: DisassociatedDataStorageState, location_name: "disassociatedDataStorage"))
     PutStorageConfigurationRequest.struct_class = Types::PutStorageConfigurationRequest
 
     PutStorageConfigurationResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, required: true, location_name: "storageType"))
     PutStorageConfigurationResponse.add_member(:multi_layer_storage, Shapes::ShapeRef.new(shape: MultiLayerStorage, location_name: "multiLayerStorage"))
+    PutStorageConfigurationResponse.add_member(:disassociated_data_storage, Shapes::ShapeRef.new(shape: DisassociatedDataStorageState, location_name: "disassociatedDataStorage"))
     PutStorageConfigurationResponse.add_member(:configuration_status, Shapes::ShapeRef.new(shape: ConfigurationStatus, required: true, location_name: "configurationStatus"))
     PutStorageConfigurationResponse.struct_class = Types::PutStorageConfigurationResponse
 
@@ -1250,6 +1309,18 @@ module Aws::IoTSiteWise
     TimeInNanos.add_member(:time_in_seconds, Shapes::ShapeRef.new(shape: TimeInSeconds, required: true, location_name: "timeInSeconds"))
     TimeInNanos.add_member(:offset_in_nanos, Shapes::ShapeRef.new(shape: OffsetInNanos, location_name: "offsetInNanos"))
     TimeInNanos.struct_class = Types::TimeInNanos
+
+    TimeSeriesSummaries.member = Shapes::ShapeRef.new(shape: TimeSeriesSummary)
+
+    TimeSeriesSummary.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetId"))
+    TimeSeriesSummary.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, location_name: "propertyId"))
+    TimeSeriesSummary.add_member(:alias, Shapes::ShapeRef.new(shape: PropertyAlias, location_name: "alias"))
+    TimeSeriesSummary.add_member(:time_series_id, Shapes::ShapeRef.new(shape: TimeSeriesId, required: true, location_name: "timeSeriesId"))
+    TimeSeriesSummary.add_member(:data_type, Shapes::ShapeRef.new(shape: PropertyDataType, required: true, location_name: "dataType"))
+    TimeSeriesSummary.add_member(:data_type_spec, Shapes::ShapeRef.new(shape: Name, location_name: "dataTypeSpec"))
+    TimeSeriesSummary.add_member(:time_series_creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timeSeriesCreationDate"))
+    TimeSeriesSummary.add_member(:time_series_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timeSeriesLastUpdateDate"))
+    TimeSeriesSummary.struct_class = Types::TimeSeriesSummary
 
     Timestamps.member = Shapes::ShapeRef.new(shape: TimeInNanos)
 
@@ -1403,6 +1474,22 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+      end)
+
+      api.add_operation(:associate_time_series_to_asset_property, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateTimeSeriesToAssetProperty"
+        o.http_method = "POST"
+        o.http_request_uri = "/timeseries/associate/"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: AssociateTimeSeriesToAssetPropertyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
       end)
@@ -1680,6 +1767,22 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_time_series, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTimeSeries"
+        o.http_method = "POST"
+        o.http_request_uri = "/timeseries/delete/"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteTimeSeriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+      end)
+
       api.add_operation(:describe_access_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAccessPolicy"
         o.http_method = "GET"
@@ -1861,6 +1964,21 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
       end)
 
+      api.add_operation(:describe_time_series, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTimeSeries"
+        o.http_method = "GET"
+        o.http_request_uri = "/timeseries/describe/"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeTimeSeriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTimeSeriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:disassociate_assets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateAssets"
         o.http_method = "POST"
@@ -1869,6 +1987,22 @@ module Aws::IoTSiteWise
           "hostPrefix" => "api.",
         }
         o.input = Shapes::ShapeRef.new(shape: DisassociateAssetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
+      end)
+
+      api.add_operation(:disassociate_time_series_from_asset_property, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateTimeSeriesFromAssetProperty"
+        o.http_method = "POST"
+        o.http_request_uri = "/timeseries/disassociate/"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: DisassociateTimeSeriesFromAssetPropertyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2178,6 +2312,27 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ConflictingOperationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:list_time_series, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTimeSeries"
+        o.http_method = "GET"
+        o.http_request_uri = "/timeseries/"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListTimeSeriesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTimeSeriesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_default_encryption_configuration, Seahorse::Model::Operation.new.tap do |o|

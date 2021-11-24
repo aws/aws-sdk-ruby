@@ -679,6 +679,8 @@ module Aws::Imagebuilder
     #           launch_permission: {
     #             user_ids: ["AccountId"],
     #             user_groups: ["NonEmptyString"],
+    #             organization_arns: ["OrganizationArn"],
+    #             organizational_unit_arns: ["OrganizationalUnitArn"],
     #           },
     #         },
     #         container_distribution_configuration: {
@@ -1247,7 +1249,7 @@ module Aws::Imagebuilder
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/deregister-ami.html
-    # [3]: https://docs.aws.amazon.com/https:/docs.aws.amazon.comAmazonECR/latest/userguide/delete_image.html
+    # [3]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/delete_image.html
     #
     # @option params [required, String] :image_build_version_arn
     #   The Amazon Resource Name (ARN) of the Image Builder image resource to
@@ -1586,6 +1588,10 @@ module Aws::Imagebuilder
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_ids[0] #=> String
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_groups #=> Array
     #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_groups[0] #=> String
+    #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.organization_arns #=> Array
+    #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.organization_arns[0] #=> String
+    #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.organizational_unit_arns #=> Array
+    #   resp.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.organizational_unit_arns[0] #=> String
     #   resp.distribution_configuration.distributions[0].container_distribution_configuration.description #=> String
     #   resp.distribution_configuration.distributions[0].container_distribution_configuration.container_tags #=> Array
     #   resp.distribution_configuration.distributions[0].container_distribution_configuration.container_tags[0] #=> String
@@ -1748,6 +1754,10 @@ module Aws::Imagebuilder
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_ids[0] #=> String
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_groups #=> Array
     #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.user_groups[0] #=> String
+    #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.organization_arns #=> Array
+    #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.organization_arns[0] #=> String
+    #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.organizational_unit_arns #=> Array
+    #   resp.image.distribution_configuration.distributions[0].ami_distribution_configuration.launch_permission.organizational_unit_arns[0] #=> String
     #   resp.image.distribution_configuration.distributions[0].container_distribution_configuration.description #=> String
     #   resp.image.distribution_configuration.distributions[0].container_distribution_configuration.container_tags #=> Array
     #   resp.image.distribution_configuration.distributions[0].container_distribution_configuration.container_tags[0] #=> String
@@ -3002,11 +3012,11 @@ module Aws::Imagebuilder
 
     # Applies a policy to a container image. We recommend that you call the
     # RAM API CreateResourceShare
-    # (https://docs.aws.amazon.com/ram/latest/APIReference/API\_CreateResourceShare.html)
+    # (https://docs.aws.amazon.com//ram/latest/APIReference/API\_CreateResourceShare.html)
     # to share resources. If you call the Image Builder API
     # `PutContainerImagePolicy`, you must also call the RAM API
     # PromoteResourceShareCreatedFromPolicy
-    # (https://docs.aws.amazon.com/ram/latest/APIReference/API\_PromoteResourceShareCreatedFromPolicy.html)
+    # (https://docs.aws.amazon.com//ram/latest/APIReference/API\_PromoteResourceShareCreatedFromPolicy.html)
     # in order for the resource to be visible to all principals with whom
     # the resource is shared.
     #
@@ -3270,6 +3280,8 @@ module Aws::Imagebuilder
     #           launch_permission: {
     #             user_ids: ["AccountId"],
     #             user_groups: ["NonEmptyString"],
+    #             organization_arns: ["OrganizationArn"],
+    #             organizational_unit_arns: ["OrganizationalUnitArn"],
     #           },
     #         },
     #         container_distribution_configuration: {
@@ -3537,7 +3549,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2021-11-24)
+------------------
+
+* Feature - AWS IoT SiteWise now accepts data streams that aren't associated with any asset properties. You can organize data by updating data stream associations.
+
 1.34.0 (2021-11-04)
 ------------------
 

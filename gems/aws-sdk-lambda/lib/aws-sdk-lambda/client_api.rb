@@ -26,14 +26,10 @@ module Aws::Lambda
     AliasConfiguration = Shapes::StructureShape.new(name: 'AliasConfiguration')
     AliasList = Shapes::ListShape.new(name: 'AliasList')
     AliasRoutingConfiguration = Shapes::StructureShape.new(name: 'AliasRoutingConfiguration')
-    AllowCredentials = Shapes::BooleanShape.new(name: 'AllowCredentials')
-    AllowMethodsList = Shapes::ListShape.new(name: 'AllowMethodsList')
-    AllowOriginsList = Shapes::ListShape.new(name: 'AllowOriginsList')
     AllowedPublishers = Shapes::StructureShape.new(name: 'AllowedPublishers')
     Architecture = Shapes::StringShape.new(name: 'Architecture')
     ArchitecturesList = Shapes::ListShape.new(name: 'ArchitecturesList')
     Arn = Shapes::StringShape.new(name: 'Arn')
-    AuthorizationType = Shapes::StringShape.new(name: 'AuthorizationType')
     BatchSize = Shapes::IntegerShape.new(name: 'BatchSize')
     BisectBatchOnFunctionError = Shapes::BooleanShape.new(name: 'BisectBatchOnFunctionError')
     Blob = Shapes::BlobShape.new(name: 'Blob')
@@ -51,14 +47,11 @@ module Aws::Lambda
     CompatibleArchitectures = Shapes::ListShape.new(name: 'CompatibleArchitectures')
     CompatibleRuntimes = Shapes::ListShape.new(name: 'CompatibleRuntimes')
     Concurrency = Shapes::StructureShape.new(name: 'Concurrency')
-    Cors = Shapes::StructureShape.new(name: 'Cors')
     CreateAliasRequest = Shapes::StructureShape.new(name: 'CreateAliasRequest')
     CreateCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'CreateCodeSigningConfigRequest')
     CreateCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'CreateCodeSigningConfigResponse')
     CreateEventSourceMappingRequest = Shapes::StructureShape.new(name: 'CreateEventSourceMappingRequest')
     CreateFunctionRequest = Shapes::StructureShape.new(name: 'CreateFunctionRequest')
-    CreateFunctionUrlConfigRequest = Shapes::StructureShape.new(name: 'CreateFunctionUrlConfigRequest')
-    CreateFunctionUrlConfigResponse = Shapes::StructureShape.new(name: 'CreateFunctionUrlConfigResponse')
     Date = Shapes::TimestampShape.new(name: 'Date')
     DeadLetterConfig = Shapes::StructureShape.new(name: 'DeadLetterConfig')
     DeleteAliasRequest = Shapes::StructureShape.new(name: 'DeleteAliasRequest')
@@ -69,7 +62,6 @@ module Aws::Lambda
     DeleteFunctionConcurrencyRequest = Shapes::StructureShape.new(name: 'DeleteFunctionConcurrencyRequest')
     DeleteFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'DeleteFunctionEventInvokeConfigRequest')
     DeleteFunctionRequest = Shapes::StructureShape.new(name: 'DeleteFunctionRequest')
-    DeleteFunctionUrlConfigRequest = Shapes::StructureShape.new(name: 'DeleteFunctionUrlConfigRequest')
     DeleteLayerVersionRequest = Shapes::StructureShape.new(name: 'DeleteLayerVersionRequest')
     DeleteProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'DeleteProvisionedConcurrencyConfigRequest')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -115,10 +107,6 @@ module Aws::Lambda
     FunctionName = Shapes::StringShape.new(name: 'FunctionName')
     FunctionResponseType = Shapes::StringShape.new(name: 'FunctionResponseType')
     FunctionResponseTypeList = Shapes::ListShape.new(name: 'FunctionResponseTypeList')
-    FunctionUrl = Shapes::StringShape.new(name: 'FunctionUrl')
-    FunctionUrlConfig = Shapes::StructureShape.new(name: 'FunctionUrlConfig')
-    FunctionUrlConfigList = Shapes::ListShape.new(name: 'FunctionUrlConfigList')
-    FunctionUrlQualifier = Shapes::StringShape.new(name: 'FunctionUrlQualifier')
     FunctionVersion = Shapes::StringShape.new(name: 'FunctionVersion')
     GetAccountSettingsRequest = Shapes::StructureShape.new(name: 'GetAccountSettingsRequest')
     GetAccountSettingsResponse = Shapes::StructureShape.new(name: 'GetAccountSettingsResponse')
@@ -134,8 +122,6 @@ module Aws::Lambda
     GetFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'GetFunctionEventInvokeConfigRequest')
     GetFunctionRequest = Shapes::StructureShape.new(name: 'GetFunctionRequest')
     GetFunctionResponse = Shapes::StructureShape.new(name: 'GetFunctionResponse')
-    GetFunctionUrlConfigRequest = Shapes::StructureShape.new(name: 'GetFunctionUrlConfigRequest')
-    GetFunctionUrlConfigResponse = Shapes::StructureShape.new(name: 'GetFunctionUrlConfigResponse')
     GetLayerVersionByArnRequest = Shapes::StructureShape.new(name: 'GetLayerVersionByArnRequest')
     GetLayerVersionPolicyRequest = Shapes::StructureShape.new(name: 'GetLayerVersionPolicyRequest')
     GetLayerVersionPolicyResponse = Shapes::StructureShape.new(name: 'GetLayerVersionPolicyResponse')
@@ -146,8 +132,6 @@ module Aws::Lambda
     GetProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigRequest')
     GetProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigResponse')
     Handler = Shapes::StringShape.new(name: 'Handler')
-    Header = Shapes::StringShape.new(name: 'Header')
-    HeadersList = Shapes::ListShape.new(name: 'HeadersList')
     HttpStatus = Shapes::IntegerShape.new(name: 'HttpStatus')
     ImageConfig = Shapes::StructureShape.new(name: 'ImageConfig')
     ImageConfigError = Shapes::StructureShape.new(name: 'ImageConfigError')
@@ -197,8 +181,6 @@ module Aws::Lambda
     ListEventSourceMappingsResponse = Shapes::StructureShape.new(name: 'ListEventSourceMappingsResponse')
     ListFunctionEventInvokeConfigsRequest = Shapes::StructureShape.new(name: 'ListFunctionEventInvokeConfigsRequest')
     ListFunctionEventInvokeConfigsResponse = Shapes::StructureShape.new(name: 'ListFunctionEventInvokeConfigsResponse')
-    ListFunctionUrlConfigsRequest = Shapes::StructureShape.new(name: 'ListFunctionUrlConfigsRequest')
-    ListFunctionUrlConfigsResponse = Shapes::StructureShape.new(name: 'ListFunctionUrlConfigsResponse')
     ListFunctionsByCodeSigningConfigRequest = Shapes::StructureShape.new(name: 'ListFunctionsByCodeSigningConfigRequest')
     ListFunctionsByCodeSigningConfigResponse = Shapes::StructureShape.new(name: 'ListFunctionsByCodeSigningConfigResponse')
     ListFunctionsRequest = Shapes::StructureShape.new(name: 'ListFunctionsRequest')
@@ -217,9 +199,7 @@ module Aws::Lambda
     LogType = Shapes::StringShape.new(name: 'LogType')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MasterRegion = Shapes::StringShape.new(name: 'MasterRegion')
-    MaxAge = Shapes::IntegerShape.new(name: 'MaxAge')
     MaxFunctionEventInvokeConfigListItems = Shapes::IntegerShape.new(name: 'MaxFunctionEventInvokeConfigListItems')
-    MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
     MaxLayerListItems = Shapes::IntegerShape.new(name: 'MaxLayerListItems')
     MaxListItems = Shapes::IntegerShape.new(name: 'MaxListItems')
     MaxProvisionedConcurrencyConfigListItems = Shapes::IntegerShape.new(name: 'MaxProvisionedConcurrencyConfigListItems')
@@ -229,7 +209,6 @@ module Aws::Lambda
     MaximumRetryAttempts = Shapes::IntegerShape.new(name: 'MaximumRetryAttempts')
     MaximumRetryAttemptsEventSourceMapping = Shapes::IntegerShape.new(name: 'MaximumRetryAttemptsEventSourceMapping')
     MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
-    Method = Shapes::StringShape.new(name: 'Method')
     NameSpacedFunctionArn = Shapes::StringShape.new(name: 'NameSpacedFunctionArn')
     NamespacedFunctionName = Shapes::StringShape.new(name: 'NamespacedFunctionName')
     NamespacedStatementId = Shapes::StringShape.new(name: 'NamespacedStatementId')
@@ -237,7 +216,6 @@ module Aws::Lambda
     OnFailure = Shapes::StructureShape.new(name: 'OnFailure')
     OnSuccess = Shapes::StructureShape.new(name: 'OnSuccess')
     OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
-    Origin = Shapes::StringShape.new(name: 'Origin')
     PackageType = Shapes::StringShape.new(name: 'PackageType')
     ParallelizationFactor = Shapes::IntegerShape.new(name: 'ParallelizationFactor')
     Pattern = Shapes::StringShape.new(name: 'Pattern')
@@ -320,8 +298,6 @@ module Aws::Lambda
     UpdateFunctionCodeRequest = Shapes::StructureShape.new(name: 'UpdateFunctionCodeRequest')
     UpdateFunctionConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateFunctionConfigurationRequest')
     UpdateFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'UpdateFunctionEventInvokeConfigRequest')
-    UpdateFunctionUrlConfigRequest = Shapes::StructureShape.new(name: 'UpdateFunctionUrlConfigRequest')
-    UpdateFunctionUrlConfigResponse = Shapes::StructureShape.new(name: 'UpdateFunctionUrlConfigResponse')
     Version = Shapes::StringShape.new(name: 'Version')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
@@ -383,10 +359,6 @@ module Aws::Lambda
     AliasRoutingConfiguration.add_member(:additional_version_weights, Shapes::ShapeRef.new(shape: AdditionalVersionWeights, location_name: "AdditionalVersionWeights"))
     AliasRoutingConfiguration.struct_class = Types::AliasRoutingConfiguration
 
-    AllowMethodsList.member = Shapes::ShapeRef.new(shape: Method)
-
-    AllowOriginsList.member = Shapes::ShapeRef.new(shape: Origin)
-
     AllowedPublishers.add_member(:signing_profile_version_arns, Shapes::ShapeRef.new(shape: SigningProfileVersionArns, required: true, location_name: "SigningProfileVersionArns"))
     AllowedPublishers.struct_class = Types::AllowedPublishers
 
@@ -423,14 +395,6 @@ module Aws::Lambda
 
     Concurrency.add_member(:reserved_concurrent_executions, Shapes::ShapeRef.new(shape: ReservedConcurrentExecutions, location_name: "ReservedConcurrentExecutions"))
     Concurrency.struct_class = Types::Concurrency
-
-    Cors.add_member(:allow_credentials, Shapes::ShapeRef.new(shape: AllowCredentials, location_name: "AllowCredentials"))
-    Cors.add_member(:allow_headers, Shapes::ShapeRef.new(shape: HeadersList, location_name: "AllowHeaders"))
-    Cors.add_member(:allow_methods, Shapes::ShapeRef.new(shape: AllowMethodsList, location_name: "AllowMethods"))
-    Cors.add_member(:allow_origins, Shapes::ShapeRef.new(shape: AllowOriginsList, location_name: "AllowOrigins"))
-    Cors.add_member(:expose_headers, Shapes::ShapeRef.new(shape: HeadersList, location_name: "ExposeHeaders"))
-    Cors.add_member(:max_age, Shapes::ShapeRef.new(shape: MaxAge, location_name: "MaxAge"))
-    Cors.struct_class = Types::Cors
 
     CreateAliasRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     CreateAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Alias, required: true, location_name: "Name"))
@@ -491,19 +455,6 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
-    CreateFunctionUrlConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
-    CreateFunctionUrlConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: FunctionUrlQualifier, location: "querystring", location_name: "Qualifier"))
-    CreateFunctionUrlConfigRequest.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, required: true, location_name: "AuthorizationType"))
-    CreateFunctionUrlConfigRequest.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
-    CreateFunctionUrlConfigRequest.struct_class = Types::CreateFunctionUrlConfigRequest
-
-    CreateFunctionUrlConfigResponse.add_member(:function_url, Shapes::ShapeRef.new(shape: FunctionUrl, required: true, location_name: "FunctionUrl"))
-    CreateFunctionUrlConfigResponse.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location_name: "FunctionArn"))
-    CreateFunctionUrlConfigResponse.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, required: true, location_name: "AuthorizationType"))
-    CreateFunctionUrlConfigResponse.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
-    CreateFunctionUrlConfigResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
-    CreateFunctionUrlConfigResponse.struct_class = Types::CreateFunctionUrlConfigResponse
-
     DeadLetterConfig.add_member(:target_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TargetArn"))
     DeadLetterConfig.struct_class = Types::DeadLetterConfig
 
@@ -532,10 +483,6 @@ module Aws::Lambda
     DeleteFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     DeleteFunctionRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
     DeleteFunctionRequest.struct_class = Types::DeleteFunctionRequest
-
-    DeleteFunctionUrlConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
-    DeleteFunctionUrlConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: FunctionUrlQualifier, location: "querystring", location_name: "Qualifier"))
-    DeleteFunctionUrlConfigRequest.struct_class = Types::DeleteFunctionUrlConfigRequest
 
     DeleteLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
     DeleteLayerVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
@@ -704,16 +651,6 @@ module Aws::Lambda
 
     FunctionResponseTypeList.member = Shapes::ShapeRef.new(shape: FunctionResponseType)
 
-    FunctionUrlConfig.add_member(:function_url, Shapes::ShapeRef.new(shape: FunctionUrl, required: true, location_name: "FunctionUrl"))
-    FunctionUrlConfig.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location_name: "FunctionArn"))
-    FunctionUrlConfig.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
-    FunctionUrlConfig.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
-    FunctionUrlConfig.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
-    FunctionUrlConfig.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, required: true, location_name: "AuthorizationType"))
-    FunctionUrlConfig.struct_class = Types::FunctionUrlConfig
-
-    FunctionUrlConfigList.member = Shapes::ShapeRef.new(shape: FunctionUrlConfig)
-
     GetAccountSettingsRequest.struct_class = Types::GetAccountSettingsRequest
 
     GetAccountSettingsResponse.add_member(:account_limit, Shapes::ShapeRef.new(shape: AccountLimit, location_name: "AccountLimit"))
@@ -764,18 +701,6 @@ module Aws::Lambda
     GetFunctionResponse.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, location_name: "Concurrency"))
     GetFunctionResponse.struct_class = Types::GetFunctionResponse
 
-    GetFunctionUrlConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
-    GetFunctionUrlConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: FunctionUrlQualifier, location: "querystring", location_name: "Qualifier"))
-    GetFunctionUrlConfigRequest.struct_class = Types::GetFunctionUrlConfigRequest
-
-    GetFunctionUrlConfigResponse.add_member(:function_url, Shapes::ShapeRef.new(shape: FunctionUrl, required: true, location_name: "FunctionUrl"))
-    GetFunctionUrlConfigResponse.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location_name: "FunctionArn"))
-    GetFunctionUrlConfigResponse.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, required: true, location_name: "AuthorizationType"))
-    GetFunctionUrlConfigResponse.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
-    GetFunctionUrlConfigResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
-    GetFunctionUrlConfigResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
-    GetFunctionUrlConfigResponse.struct_class = Types::GetFunctionUrlConfigResponse
-
     GetLayerVersionByArnRequest.add_member(:arn, Shapes::ShapeRef.new(shape: LayerVersionArn, required: true, location: "querystring", location_name: "Arn"))
     GetLayerVersionByArnRequest.struct_class = Types::GetLayerVersionByArnRequest
 
@@ -821,8 +746,6 @@ module Aws::Lambda
     GetProvisionedConcurrencyConfigResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
     GetProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     GetProvisionedConcurrencyConfigResponse.struct_class = Types::GetProvisionedConcurrencyConfigResponse
-
-    HeadersList.member = Shapes::ShapeRef.new(shape: Header)
 
     ImageConfig.add_member(:entry_point, Shapes::ShapeRef.new(shape: StringList, location_name: "EntryPoint"))
     ImageConfig.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "Command"))
@@ -986,15 +909,6 @@ module Aws::Lambda
     ListFunctionEventInvokeConfigsResponse.add_member(:function_event_invoke_configs, Shapes::ShapeRef.new(shape: FunctionEventInvokeConfigList, location_name: "FunctionEventInvokeConfigs"))
     ListFunctionEventInvokeConfigsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
     ListFunctionEventInvokeConfigsResponse.struct_class = Types::ListFunctionEventInvokeConfigsResponse
-
-    ListFunctionUrlConfigsRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
-    ListFunctionUrlConfigsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
-    ListFunctionUrlConfigsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "MaxItems"))
-    ListFunctionUrlConfigsRequest.struct_class = Types::ListFunctionUrlConfigsRequest
-
-    ListFunctionUrlConfigsResponse.add_member(:function_url_configs, Shapes::ShapeRef.new(shape: FunctionUrlConfigList, required: true, location_name: "FunctionUrlConfigs"))
-    ListFunctionUrlConfigsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
-    ListFunctionUrlConfigsResponse.struct_class = Types::ListFunctionUrlConfigsResponse
 
     ListFunctionsByCodeSigningConfigRequest.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, required: true, location: "uri", location_name: "CodeSigningConfigArn"))
     ListFunctionsByCodeSigningConfigRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
@@ -1306,20 +1220,6 @@ module Aws::Lambda
     UpdateFunctionEventInvokeConfigRequest.add_member(:destination_config, Shapes::ShapeRef.new(shape: DestinationConfig, location_name: "DestinationConfig"))
     UpdateFunctionEventInvokeConfigRequest.struct_class = Types::UpdateFunctionEventInvokeConfigRequest
 
-    UpdateFunctionUrlConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
-    UpdateFunctionUrlConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: FunctionUrlQualifier, location: "querystring", location_name: "Qualifier"))
-    UpdateFunctionUrlConfigRequest.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, location_name: "AuthorizationType"))
-    UpdateFunctionUrlConfigRequest.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
-    UpdateFunctionUrlConfigRequest.struct_class = Types::UpdateFunctionUrlConfigRequest
-
-    UpdateFunctionUrlConfigResponse.add_member(:function_url, Shapes::ShapeRef.new(shape: FunctionUrl, required: true, location_name: "FunctionUrl"))
-    UpdateFunctionUrlConfigResponse.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location_name: "FunctionArn"))
-    UpdateFunctionUrlConfigResponse.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, required: true, location_name: "AuthorizationType"))
-    UpdateFunctionUrlConfigResponse.add_member(:cors, Shapes::ShapeRef.new(shape: Cors, location_name: "Cors"))
-    UpdateFunctionUrlConfigResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
-    UpdateFunctionUrlConfigResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastModifiedTime"))
-    UpdateFunctionUrlConfigResponse.struct_class = Types::UpdateFunctionUrlConfigResponse
-
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
     VpcConfig.struct_class = Types::VpcConfig
@@ -1428,19 +1328,6 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: CodeSigningConfigNotFoundException)
       end)
 
-      api.add_operation(:create_function_url_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateFunctionUrlConfig"
-        o.http_method = "POST"
-        o.http_request_uri = "/2021-10-31/functions/{FunctionName}/url"
-        o.input = Shapes::ShapeRef.new(shape: CreateFunctionUrlConfigRequest)
-        o.output = Shapes::ShapeRef.new(shape: CreateFunctionUrlConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-      end)
-
       api.add_operation(:delete_alias, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAlias"
         o.http_method = "DELETE"
@@ -1529,18 +1416,6 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-      end)
-
-      api.add_operation(:delete_function_url_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteFunctionUrlConfig"
-        o.http_method = "DELETE"
-        o.http_request_uri = "/2021-10-31/functions/{FunctionName}/url"
-        o.input = Shapes::ShapeRef.new(shape: DeleteFunctionUrlConfigRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:delete_layer_version, Seahorse::Model::Operation.new.tap do |o|
@@ -1668,18 +1543,6 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
-      end)
-
-      api.add_operation(:get_function_url_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetFunctionUrlConfig"
-        o.http_method = "GET"
-        o.http_request_uri = "/2021-10-31/functions/{FunctionName}/url"
-        o.input = Shapes::ShapeRef.new(shape: GetFunctionUrlConfigRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetFunctionUrlConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1854,24 +1717,6 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_items",
-          tokens: {
-            "next_marker" => "marker"
-          }
-        )
-      end)
-
-      api.add_operation(:list_function_url_configs, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListFunctionUrlConfigs"
-        o.http_method = "GET"
-        o.http_request_uri = "/2021-10-31/functions/{FunctionName}/urls"
-        o.input = Shapes::ShapeRef.new(shape: ListFunctionUrlConfigsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListFunctionUrlConfigsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_items",
           tokens: {
@@ -2215,19 +2060,6 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-      end)
-
-      api.add_operation(:update_function_url_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateFunctionUrlConfig"
-        o.http_method = "PUT"
-        o.http_request_uri = "/2021-10-31/functions/{FunctionName}/url"
-        o.input = Shapes::ShapeRef.new(shape: UpdateFunctionUrlConfigRequest)
-        o.output = Shapes::ShapeRef.new(shape: UpdateFunctionUrlConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
     end
 

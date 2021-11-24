@@ -287,9 +287,8 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **M6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
+    #       **M6g node types:** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
@@ -304,6 +303,10 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
     #       `cache.t3.medium`
@@ -327,7 +330,7 @@ module Aws::ElastiCache
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
-    #   * Memory optimized:
+    #   * Memory optimized with data tiering:
     #
     #     * Current generation:
     #
@@ -337,6 +340,10 @@ module Aws::ElastiCache
     #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
     #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
     #       `cache.r6gd.16xlarge`
+    #
+    #   * Memory optimized:
+    #
+    #     * Current generation:
     #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
@@ -476,8 +483,9 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #    If you are running Redis engine version 6.0 or later, set this
-    #   parameter to yes if you want to opt-in to the next minor version
-    #   upgrade campaign. This parameter is disabled for previous versions. 
+    #   parameter to yes if you want to opt-in to the next auto minor
+    #   version upgrade campaign. This parameter is disabled for previous
+    #   versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
@@ -699,9 +707,8 @@ module Aws::ElastiCache
     #
     #   * Current generation:
     #
-    #     **M6g node types** (available only for Redis engine version 5.0.6
-    #     onward and for Memcached engine version 1.5.16 onward).
-    #
+    #     **M6g node types:** (available only for Redis engine version 5.0.6
+    #     onward and for Memcached engine version 1.5.16 onward):
     #     `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #     `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #     `cache.m6g.16xlarge`
@@ -716,6 +723,10 @@ module Aws::ElastiCache
     #
     #     **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #     `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #     **T4g node types** (available only for Redis engine version 5.0.6
+    #     onward and for Memcached engine version 1.5.16 onward):
+    #     `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #     **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
     #     `cache.t3.medium`
@@ -739,7 +750,7 @@ module Aws::ElastiCache
     #
     #     **C1 node types:** `cache.c1.xlarge`
     #
-    # * Memory optimized:
+    # * Memory optimized with data tiering:
     #
     #   * Current generation:
     #
@@ -748,6 +759,10 @@ module Aws::ElastiCache
     #
     #     `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
     #     `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`, `cache.r6gd.16xlarge`
+    #
+    # * Memory optimized:
+    #
+    #   * Current generation:
     #
     #     **R6g node types** (available only for Redis engine version 5.0.6
     #     onward and for Memcached engine version 1.5.16 onward).
@@ -1705,8 +1720,7 @@ module Aws::ElastiCache
     #     * Current generation:
     #
     #       **M6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
@@ -1721,6 +1735,10 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
+    #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
     #       `cache.t3.medium`
@@ -1744,7 +1762,7 @@ module Aws::ElastiCache
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
-    #   * Memory optimized:
+    #   * Memory optimized with data tiering:
     #
     #     * Current generation:
     #
@@ -1754,6 +1772,10 @@ module Aws::ElastiCache
     #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
     #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
     #       `cache.r6gd.16xlarge`
+    #
+    #   * Memory optimized:
+    #
+    #     * Current generation:
     #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
@@ -1910,8 +1932,9 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #    If you are running Redis engine version 6.0 or later, set this
-    #   parameter to yes if you want to opt-in to the next minor version
-    #   upgrade campaign. This parameter is disabled for previous versions. 
+    #   parameter to yes if you want to opt-in to the next auto minor
+    #   version upgrade campaign. This parameter is disabled for previous
+    #   versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_retention_limit
@@ -2493,8 +2516,7 @@ module Aws::ElastiCache
     #     * Current generation:
     #
     #       **M6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
@@ -2509,6 +2531,10 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
+    #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
     #       `cache.t3.medium`
@@ -2532,7 +2558,7 @@ module Aws::ElastiCache
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
-    #   * Memory optimized:
+    #   * Memory optimized with data tiering:
     #
     #     * Current generation:
     #
@@ -2542,6 +2568,10 @@ module Aws::ElastiCache
     #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
     #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
     #       `cache.r6gd.16xlarge`
+    #
+    #   * Memory optimized:
+    #
+    #     * Current generation:
     #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
@@ -2727,8 +2757,9 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #    If you are running Redis engine version 6.0 or later, set this
-    #   parameter to yes if you want to opt-in to the next minor version
-    #   upgrade campaign. This parameter is disabled for previous versions. 
+    #   parameter to yes if you want to opt-in to the next auto minor
+    #   version upgrade campaign. This parameter is disabled for previous
+    #   versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_retention_limit
@@ -4159,9 +4190,8 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **M6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
+    #       **M6g node types:** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
@@ -4176,6 +4206,10 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
     #       `cache.t3.medium`
@@ -4199,7 +4233,7 @@ module Aws::ElastiCache
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
-    #   * Memory optimized:
+    #   * Memory optimized with data tiering:
     #
     #     * Current generation:
     #
@@ -4209,6 +4243,10 @@ module Aws::ElastiCache
     #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
     #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
     #       `cache.r6gd.16xlarge`
+    #
+    #   * Memory optimized:
+    #
+    #     * Current generation:
     #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
@@ -4346,9 +4384,8 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **M6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
+    #       **M6g node types:** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward)
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
@@ -4363,6 +4400,10 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
     #       `cache.t3.medium`
@@ -4386,7 +4427,7 @@ module Aws::ElastiCache
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
-    #   * Memory optimized:
+    #   * Memory optimized with data tiering:
     #
     #     * Current generation:
     #
@@ -4396,6 +4437,10 @@ module Aws::ElastiCache
     #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
     #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
     #       `cache.r6gd.16xlarge`
+    #
+    #   * Memory optimized:
+    #
+    #     * Current generation:
     #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
@@ -6106,8 +6151,9 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #    If you are running Redis engine version 6.0 or later, set this
-    #   parameter to yes if you want to opt-in to the next minor version
-    #   upgrade campaign. This parameter is disabled for previous versions. 
+    #   parameter to yes if you want to opt-in to the next auto minor
+    #   version upgrade campaign. This parameter is disabled for previous
+    #   versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_retention_limit
@@ -6572,8 +6618,9 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #    If you are running Redis engine version 6.0 or later, set this
-    #   parameter to yes if you want to opt-in to the next minor version
-    #   upgrade campaign. This parameter is disabled for previous versions. 
+    #   parameter to yes if you want to opt-in to the next auto minor
+    #   version upgrade campaign. This parameter is disabled for previous
+    #   versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_retention_limit
@@ -7983,9 +8030,8 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **M6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
+    #       **M6g node types:** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
@@ -8000,6 +8046,10 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
+    #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
     #       `cache.t3.medium`
@@ -8023,7 +8073,7 @@ module Aws::ElastiCache
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
-    #   * Memory optimized:
+    #   * Memory optimized with data tiering:
     #
     #     * Current generation:
     #
@@ -8033,6 +8083,10 @@ module Aws::ElastiCache
     #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
     #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
     #       `cache.r6gd.16xlarge`
+    #
+    #   * Memory optimized:
+    #
+    #     * Current generation:
     #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
@@ -8200,9 +8254,8 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **M6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
+    #       **M6g node types:** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
@@ -8217,6 +8270,10 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
+    #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
     #       `cache.t3.medium`
@@ -8240,7 +8297,7 @@ module Aws::ElastiCache
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
-    #   * Memory optimized:
+    #   * Memory optimized with data tiering:
     #
     #     * Current generation:
     #
@@ -8250,6 +8307,10 @@ module Aws::ElastiCache
     #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
     #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
     #       `cache.r6gd.16xlarge`
+    #
+    #   * Memory optimized:
+    #
+    #     * Current generation:
     #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
@@ -8712,6 +8773,11 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
+    #       **T4g node types** (available only for Redis engine version
+    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
+    #
+    #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
+    #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
     #       `cache.t3.medium`
     #
@@ -8734,7 +8800,7 @@ module Aws::ElastiCache
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
-    #   * Memory optimized:
+    #   * Memory optimized with data tiering:
     #
     #     * Current generation:
     #
@@ -8745,12 +8811,20 @@ module Aws::ElastiCache
     #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
     #       `cache.r6gd.16xlarge`
     #
+    #   * Memory optimized:
+    #
+    #     * Current generation:
+    #
     #       **R6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
     #
     #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
     #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
     #       `cache.r6g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
@@ -8872,8 +8946,9 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #    If you are running Redis engine version 6.0 or later, set this
-    #   parameter to yes if you want to opt-in to the next minor version
-    #   upgrade campaign. This parameter is disabled for previous versions. 
+    #   parameter to yes if you want to opt-in to the next auto minor
+    #   version upgrade campaign. This parameter is disabled for previous
+    #   versions. 
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_retention_limit
@@ -9428,6 +9503,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] minimum_engine_version
+    #   The minimum engine version required, which is Redis 6.0
     #   @return [String]
     #
     # @!attribute [rw] access_string
@@ -9486,6 +9562,7 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] minimum_engine_version
+    #   The minimum engine version required, which is Redis 6.0
     #   @return [String]
     #
     # @!attribute [rw] pending_changes

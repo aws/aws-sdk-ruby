@@ -30,8 +30,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment_account_connection
-    #   The environment account connection data that's returned by AWS
-    #   Proton.
+    #   The environment account connection data that's returned by Proton.
     #   @return [Types::EnvironmentAccountConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/AcceptEnvironmentAccountConnectionOutput AWS API Documentation
@@ -55,16 +54,29 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # The AWS Proton pipeline service role data.
+    # The Proton pipeline service role and repository data.
+    #
+    # @!attribute [rw] pipeline_provisioning_repository
+    #   The repository that you provide with pull request provisioning.
+    #
+    #   Provisioning by pull request is currently in feature preview and is
+    #   only usable with Terraform based Proton Templates. To learn more
+    #   about [Amazon Web Services Feature Preview terms][1], see section 2
+    #   on Beta and Previews.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
+    #   @return [Types::RepositoryBranch]
     #
     # @!attribute [rw] pipeline_service_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Proton pipeline service
-    #   role.
+    #   The Amazon Resource Name (ARN) of the Proton pipeline service role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/AccountSettings AWS API Documentation
     #
     class AccountSettings < Struct.new(
+      :pipeline_provisioning_repository,
       :pipeline_service_role_arn)
       SENSITIVE = []
       include Aws::Structure
@@ -90,7 +102,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment
-    #   The environment summary data that's returned by AWS Proton.
+    #   The environment summary data that's returned by Proton.
     #   @return [Types::Environment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CancelEnvironmentDeploymentOutput AWS API Documentation
@@ -128,7 +140,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service_instance
-    #   The service instance summary data that's returned by AWS Proton.
+    #   The service instance summary data that's returned by Proton.
     #   @return [Types::ServiceInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CancelServiceInstanceDeploymentOutput AWS API Documentation
@@ -160,7 +172,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] pipeline
-    #   The service pipeline detail data that's returned by AWS Proton.
+    #   The service pipeline detail data that's returned by Proton.
     #   @return [Types::ServicePipeline]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CancelServicePipelineDeploymentOutput AWS API Documentation
@@ -239,37 +251,53 @@ module Aws::Proton
     #         environment_name: "ResourceName", # required
     #         management_account_id: "AwsAccountId", # required
     #         role_arn: "Arn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] client_token
-    #   When included, if two identicial requests are made with the same
-    #   client token, AWS Proton returns the environment account connection
-    #   that the first request created.
+    #   When included, if two identical requests are made with the same
+    #   client token, Proton returns the environment account connection that
+    #   the first request created.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
-    #   The name of the AWS Proton environment that's created in the
-    #   associated management account.
+    #   The name of the Proton environment that's created in the associated
+    #   management account.
     #   @return [String]
     #
     # @!attribute [rw] management_account_id
     #   The ID of the management account that accepts or rejects the
-    #   environment account connection. You create an manage the AWS Proton
+    #   environment account connection. You create an manage the Proton
     #   environment in this account. If the management account accepts the
-    #   environment account connection, AWS Proton can use the associated
-    #   IAM role to provision environment infrastructure resources in the
+    #   environment account connection, Proton can use the associated IAM
+    #   role to provision environment infrastructure resources in the
     #   associated environment account.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM service role that's
-    #   created in the environment account. AWS Proton uses this role to
+    #   created in the environment account. Proton uses this role to
     #   provision infrastructure resources in the associated environment
     #   account.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags for your environment account connection. For more information,
+    #   see [Proton resources and tagging][1] in the *Proton Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateEnvironmentAccountConnectionInput AWS API Documentation
     #
@@ -277,14 +305,15 @@ module Aws::Proton
       :client_token,
       :environment_name,
       :management_account_id,
-      :role_arn)
+      :role_arn,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] environment_account_connection
     #   The environment account connection detail data that's returned by
-    #   AWS Proton.
+    #   Proton.
     #   @return [Types::EnvironmentAccountConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateEnvironmentAccountConnectionOutput AWS API Documentation
@@ -303,6 +332,11 @@ module Aws::Proton
     #         environment_account_connection_id: "EnvironmentAccountConnectionId",
     #         name: "ResourceName", # required
     #         proton_service_role_arn: "Arn",
+    #         provisioning_repository: {
+    #           branch: "GitBranchName", # required
+    #           name: "RepositoryName", # required
+    #           provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #         },
     #         spec: "SpecContents", # required
     #         tags: [
     #           {
@@ -324,8 +358,9 @@ module Aws::Proton
     #   you're provisioning your environment infrastructure resources to an
     #   environment account. You must include either the
     #   `environmentAccountConnectionId` or `protonServiceRoleArn` parameter
-    #   and value. For more information, see [Environment account
-    #   connections][1] in the *AWS Proton Administrator guide*.
+    #   and value and omit the `provisioningRepository` parameter and
+    #   values. For more information, see [Environment account
+    #   connections][1] in the *Proton Administrator guide*.
     #
     #
     #
@@ -337,16 +372,34 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] proton_service_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Proton service role that
-    #   allows AWS Proton to make calls to other services on your behalf.
-    #   You must include either the `environmentAccountConnectionId` or
-    #   `protonServiceRoleArn` parameter and value.
+    #   The Amazon Resource Name (ARN) of the Proton service role that
+    #   allows Proton to make calls to other services on your behalf. You
+    #   must include either the `environmentAccountConnectionId` or
+    #   `protonServiceRoleArn` parameter and value and omit the
+    #   `provisioningRepository` parameter when you use standard
+    #   provisioning.
     #   @return [String]
+    #
+    # @!attribute [rw] provisioning_repository
+    #   The repository that you provide with pull request provisioning. If
+    #   you provide this parameter, you must omit the
+    #   `environmentAccountConnectionId` and `protonServiceRoleArn`
+    #   parameters.
+    #
+    #   Provisioning by pull request is currently in feature preview and is
+    #   only usable with Terraform based Proton Templates. To learn more
+    #   about [Amazon Web Services Feature Preview terms][1], see section 2
+    #   on Beta and Previews.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
+    #   @return [Types::RepositoryBranchInput]
     #
     # @!attribute [rw] spec
     #   A link to a YAML formatted spec file that provides inputs as defined
     #   in the environment template bundle schema file. For more
-    #   information, see [Environments][1] in the *AWS Proton Administrator
+    #   information, see [Environments][1] in the *Proton Administrator
     #   Guide*.
     #
     #
@@ -355,9 +408,9 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Create tags for your environment. For more information, see *AWS
-    #   Proton resources and tagging* in the [AWS Proton Administrator
-    #   Guide][1] or [AWS Proton User Guide][2].
+    #   Create tags for your environment. For more information, see *Proton
+    #   resources and tagging* in the [Proton Administrator Guide][1] or
+    #   [Proton User Guide][2].
     #
     #
     #
@@ -366,16 +419,16 @@ module Aws::Proton
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] template_major_version
-    #   The ID of the major version of the environment template.
+    #   The major version of the environment template.
     #   @return [String]
     #
     # @!attribute [rw] template_minor_version
-    #   The ID of the minor version of the environment template.
+    #   The minor version of the environment template.
     #   @return [String]
     #
     # @!attribute [rw] template_name
     #   The name of the environment template. For more information, see
-    #   [Environment Templates][1] in the *AWS Proton Administrator Guide*.
+    #   [Environment Templates][1] in the *Proton Administrator Guide*.
     #
     #
     #
@@ -389,6 +442,7 @@ module Aws::Proton
       :environment_account_connection_id,
       :name,
       :proton_service_role_arn,
+      :provisioning_repository,
       :spec,
       :tags,
       :template_major_version,
@@ -399,7 +453,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment
-    #   The environment detail data that's returned by AWS Proton.
+    #   The environment detail data that's returned by Proton.
     #   @return [Types::Environment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateEnvironmentOutput AWS API Documentation
@@ -437,8 +491,7 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
-    #   A customer provided encryption key that AWS Proton uses to encrypt
-    #   data.
+    #   A customer provided encryption key that Proton uses to encrypt data.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -452,8 +505,8 @@ module Aws::Proton
     #
     # @!attribute [rw] tags
     #   Create tags for your environment template. For more information, see
-    #   *AWS Proton resources and tagging* in the [AWS Proton Administrator
-    #   Guide][1] or [AWS Proton User Guide][2].
+    #   *Proton resources and tagging* in the [Proton Administrator
+    #   Guide][1] or [Proton User Guide][2].
     #
     #
     #
@@ -475,7 +528,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment_template
-    #   The environment template detail data that's returned by AWS Proton.
+    #   The environment template detail data that's returned by Proton.
     #   @return [Types::EnvironmentTemplate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateEnvironmentTemplateOutput AWS API Documentation
@@ -509,9 +562,9 @@ module Aws::Proton
     #       }
     #
     # @!attribute [rw] client_token
-    #   When included, if two identicial requests are made with the same
-    #   client token, AWS Proton returns the environment template version
-    #   that the first request created.
+    #   When included, if two identical requests are made with the same
+    #   client token, Proton returns the environment template version that
+    #   the first request created.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -523,10 +576,10 @@ module Aws::Proton
     #
     # @!attribute [rw] major_version
     #   To create a new minor version of the environment template, include a
-    #   `majorVersion`.
+    #   `major Version`.
     #
     #   To create a new major and minor version of the environment template,
-    #   *exclude* `majorVersion`.
+    #   *exclude* `major Version`.
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -556,13 +609,69 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment_template_version
-    #   The environment template detail data that's returned by AWS Proton.
+    #   The environment template detail data that's returned by Proton.
     #   @return [Types::EnvironmentTemplateVersion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateEnvironmentTemplateVersionOutput AWS API Documentation
     #
     class CreateEnvironmentTemplateVersionOutput < Struct.new(
       :environment_template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateRepositoryInput
+    #   data as a hash:
+    #
+    #       {
+    #         connection_arn: "Arn", # required
+    #         encryption_key: "Arn",
+    #         name: "RepositoryName", # required
+    #         provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #       }
+    #
+    # @!attribute [rw] connection_arn
+    #   The Amazon Resource Name (ARN) of your Amazon Web Services CodeStar
+    #   connection. For more information, see [Setting up for Proton][1] in
+    #   the *Proton Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/setting-up-for-service
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key
+    #   The ARN of your customer Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The repository name, for example `myrepos/myrepo`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateRepositoryInput AWS API Documentation
+    #
+    class CreateRepositoryInput < Struct.new(
+      :connection_arn,
+      :encryption_key,
+      :name,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] repository
+    #   The repository detail data that's returned by Proton.
+    #   @return [Types::Repository]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateRepositoryOutput AWS API Documentation
+    #
+    class CreateRepositoryOutput < Struct.new(
+      :repository)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -590,12 +699,12 @@ module Aws::Proton
     #
     # @!attribute [rw] branch_name
     #   The name of the code repository branch that holds the code that's
-    #   deployed in AWS Proton. *Don't* include this parameter if your
-    #   service template *doesn't* include a service pipeline.
+    #   deployed in Proton. *Don't* include this parameter if your service
+    #   template *doesn't* include a service pipeline.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description of the AWS Proton service.
+    #   A description of the Proton service.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -604,10 +713,10 @@ module Aws::Proton
     #
     # @!attribute [rw] repository_connection_arn
     #   The Amazon Resource Name (ARN) of the repository connection. For
-    #   more information, see [Set up repository connection][1] in the *AWS
-    #   Proton Administrator Guide* and [Setting up with AWS Proton][2] in
-    #   the *AWS Proton User Guide*. *Don't* include this parameter if your
-    #   service template *doesn't* include a service pipeline.
+    #   more information, see [Set up repository connection][1] in the
+    #   *Proton Administrator Guide* and [Setting up with Proton][2] in the
+    #   *Proton User Guide*. *Don't* include this parameter if your service
+    #   template *doesn't* include a service pipeline.
     #
     #
     #
@@ -625,8 +734,8 @@ module Aws::Proton
     #   template bundle schema file. The spec file is in YAML format. Don’t
     #   include pipeline inputs in the spec if your service template
     #   *doesn’t* include a service pipeline. For more information, see
-    #   [Create a service][1] in the *AWS Proton Administrator Guide* and
-    #   [Create a service][2] in the *AWS Proton User Guide*.
+    #   [Create a service][1] in the *Proton Administrator Guide* and
+    #   [Create a service][2] in the *Proton User Guide*.
     #
     #
     #
@@ -635,9 +744,9 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Create tags for your service. For more information, see *AWS Proton
-    #   resources and tagging* in the [AWS Proton Administrator Guide][1] or
-    #   [AWS Proton User Guide][2].
+    #   Create tags for your service. For more information, see *Proton
+    #   resources and tagging* in the [Proton Administrator Guide][1] or
+    #   [Proton User Guide][2].
     #
     #
     #
@@ -646,13 +755,13 @@ module Aws::Proton
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] template_major_version
-    #   The ID of the major version of the service template that was used to
-    #   create the service.
+    #   The major version of the service template that was used to create
+    #   the service.
     #   @return [String]
     #
     # @!attribute [rw] template_minor_version
-    #   The ID of the minor version of the service template that was used to
-    #   create the service.
+    #   The minor version of the service template that was used to create
+    #   the service.
     #   @return [String]
     #
     # @!attribute [rw] template_name
@@ -677,7 +786,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service
-    #   The service detail data that's returned by AWS Proton.
+    #   The service detail data that's returned by Proton.
     #   @return [Types::Service]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateServiceOutput AWS API Documentation
@@ -723,11 +832,11 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] pipeline_provisioning
-    #   AWS Proton includes a service pipeline for your service by default.
-    #   When included, this parameter indicates that an AWS Proton service
-    #   pipeline *won't* be included for your service. Once specified, this
+    #   Proton includes a service pipeline for your service by default. When
+    #   included, this parameter indicates that an Proton service pipeline
+    #   *won't* be included for your service. Once specified, this
     #   parameter *can't* be changed. For more information, see [Service
-    #   template bundles][1] in the *AWS Proton Administrator Guide*.
+    #   template bundles][1] in the *Proton Administrator Guide*.
     #
     #
     #
@@ -736,8 +845,8 @@ module Aws::Proton
     #
     # @!attribute [rw] tags
     #   Create tags for your service template. For more information, see
-    #   *AWS Proton resources and tagging* in the [AWS Proton Administrator
-    #   Guide][1] or [AWS Proton User Guide][2].
+    #   *Proton resources and tagging* in the [Proton Administrator
+    #   Guide][1] or [Proton User Guide][2].
     #
     #
     #
@@ -759,7 +868,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service_template
-    #   The service template detail data that's returned by AWS Proton.
+    #   The service template detail data that's returned by Proton.
     #   @return [Types::ServiceTemplate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateServiceTemplateOutput AWS API Documentation
@@ -799,9 +908,9 @@ module Aws::Proton
     #       }
     #
     # @!attribute [rw] client_token
-    #   When included, if two identicial requests are made with the same
-    #   client token, AWS Proton returns the service template version that
-    #   the first request created.
+    #   When included, if two identical requests are made with the same
+    #   client token, Proton returns the service template version that the
+    #   first request created.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -818,10 +927,10 @@ module Aws::Proton
     #
     # @!attribute [rw] major_version
     #   To create a new minor version of the service template, include a
-    #   `majorVersion`.
+    #   `major Version`.
     #
     #   To create a new major and minor version of the service template,
-    #   *exclude* `majorVersion`.
+    #   *exclude* `major Version`.
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -853,13 +962,77 @@ module Aws::Proton
 
     # @!attribute [rw] service_template_version
     #   The service template version summary of detail data that's returned
-    #   by AWS Proton.
+    #   by Proton.
     #   @return [Types::ServiceTemplateVersion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateServiceTemplateVersionOutput AWS API Documentation
     #
     class CreateServiceTemplateVersionOutput < Struct.new(
       :service_template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateTemplateSyncConfigInput
+    #   data as a hash:
+    #
+    #       {
+    #         branch: "GitBranchName", # required
+    #         repository_name: "RepositoryName", # required
+    #         repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #         subdirectory: "Subdirectory",
+    #         template_name: "ResourceName", # required
+    #         template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
+    #       }
+    #
+    # @!attribute [rw] branch
+    #   The branch of the registered repository for your template.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of your repository, for example `myrepos/myrepo`.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_provider
+    #   The provider type for your repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdirectory
+    #   A repository subdirectory path to your template bundle directory.
+    #   When included, Proton limits the template bundle search to this
+    #   repository directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of your registered template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of the registered template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateTemplateSyncConfigInput AWS API Documentation
+    #
+    class CreateTemplateSyncConfigInput < Struct.new(
+      :branch,
+      :repository_name,
+      :repository_provider,
+      :subdirectory,
+      :template_name,
+      :template_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_sync_config
+    #   The template sync configuration detail data that's returned by
+    #   Proton.
+    #   @return [Types::TemplateSyncConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateTemplateSyncConfigOutput AWS API Documentation
+    #
+    class CreateTemplateSyncConfigOutput < Struct.new(
+      :template_sync_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -885,7 +1058,7 @@ module Aws::Proton
 
     # @!attribute [rw] environment_account_connection
     #   The environment account connection detail data that's returned by
-    #   AWS Proton.
+    #   Proton.
     #   @return [Types::EnvironmentAccountConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteEnvironmentAccountConnectionOutput AWS API Documentation
@@ -916,7 +1089,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment
-    #   The environment detail data that's returned by AWS Proton.
+    #   The environment detail data that's returned by Proton.
     #   @return [Types::Environment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteEnvironmentOutput AWS API Documentation
@@ -947,7 +1120,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment_template
-    #   The environment template detail data that's returned by AWS Proton.
+    #   The environment template detail data that's returned by Proton.
     #   @return [Types::EnvironmentTemplate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteEnvironmentTemplateOutput AWS API Documentation
@@ -990,7 +1163,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment_template_version
-    #   The environment template version detail data that's returned by AWS
+    #   The environment template version detail data that's returned by
     #   Proton.
     #   @return [Types::EnvironmentTemplateVersion]
     #
@@ -998,6 +1171,43 @@ module Aws::Proton
     #
     class DeleteEnvironmentTemplateVersionOutput < Struct.new(
       :environment_template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteRepositoryInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "RepositoryName", # required
+    #         provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteRepositoryInput AWS API Documentation
+    #
+    class DeleteRepositoryInput < Struct.new(
+      :name,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] repository
+    #   The repository detail data that's returned by Proton.
+    #   @return [Types::Repository]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteRepositoryOutput AWS API Documentation
+    #
+    class DeleteRepositoryOutput < Struct.new(
+      :repository)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1022,7 +1232,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service
-    #   The service detail data that's returned by AWS Proton.
+    #   The service detail data that's returned by Proton.
     #   @return [Types::Service]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteServiceOutput AWS API Documentation
@@ -1053,7 +1263,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service_template
-    #   The service template detail data that's returned by AWS Proton.
+    #   The service template detail data that's returned by Proton.
     #   @return [Types::ServiceTemplate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteServiceTemplateOutput AWS API Documentation
@@ -1096,8 +1306,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service_template_version
-    #   The service template version detail data that's returned by AWS
-    #   Proton.
+    #   The service template version detail data that's returned by Proton.
     #   @return [Types::ServiceTemplateVersion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteServiceTemplateVersionOutput AWS API Documentation
@@ -1108,8 +1317,46 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # The environment detail data. An AWS Proton environment is a set
-    # resources shared across an AWS Proton service.
+    # @note When making an API call, you may pass DeleteTemplateSyncConfigInput
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "ResourceName", # required
+    #         template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The template name.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The template type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteTemplateSyncConfigInput AWS API Documentation
+    #
+    class DeleteTemplateSyncConfigInput < Struct.new(
+      :template_name,
+      :template_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_sync_config
+    #   The template sync configuration detail data that's returned by
+    #   Proton.
+    #   @return [Types::TemplateSyncConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteTemplateSyncConfigOutput AWS API Documentation
+    #
+    class DeleteTemplateSyncConfigOutput < Struct.new(
+      :template_sync_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The environment detail data. An Proton environment is a set resources
+    # shared across an Proton service.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the environment.
@@ -1154,14 +1401,27 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] proton_service_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Proton service role that
-    #   allows AWS Proton to make calls to other services on your behalf.
+    #   The Amazon Resource Name (ARN) of the Proton service role that
+    #   allows Proton to make calls to other services on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] provisioning
     #   When included, indicates that the environment template is for
     #   customer provisioned and managed infrastructure.
     #   @return [String]
+    #
+    # @!attribute [rw] provisioning_repository
+    #   The repository that you provide with pull request provisioning.
+    #
+    #   Provisioning by pull request is currently in feature preview and is
+    #   only usable with Terraform based Proton Templates. To learn more
+    #   about [Amazon Web Services Feature Preview terms][1], see section 2
+    #   on Beta and Previews.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
+    #   @return [Types::RepositoryBranch]
     #
     # @!attribute [rw] spec
     #   The environment spec.
@@ -1194,6 +1454,7 @@ module Aws::Proton
       :name,
       :proton_service_role_arn,
       :provisioning,
+      :provisioning_repository,
       :spec,
       :template_major_version,
       :template_minor_version,
@@ -1365,8 +1626,8 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] proton_service_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Proton service role that
-    #   allows AWS Proton to make calls to other services on your behalf.
+    #   The Amazon Resource Name (ARN) of the Proton service role that
+    #   allows Proton to make calls to other services on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] provisioning
@@ -1375,11 +1636,11 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] template_major_version
-    #   The ID of the major version of the environment template.
+    #   The major version of the environment template.
     #   @return [String]
     #
     # @!attribute [rw] template_minor_version
-    #   The ID of the minor version of the environment template.
+    #   The minor version of the environment template.
     #   @return [String]
     #
     # @!attribute [rw] template_name
@@ -1524,7 +1785,7 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] recommended_version
-    #   The ID of the recommended version of the environment template.
+    #   The recommended version of the environment template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/EnvironmentTemplateSummary AWS API Documentation
@@ -1563,16 +1824,16 @@ module Aws::Proton
     #   @return [Time]
     #
     # @!attribute [rw] major_version
-    #   The ID of the latest major version that's associated with the
-    #   version of an environment template.
+    #   The latest major version that's associated with the version of an
+    #   environment template.
     #   @return [String]
     #
     # @!attribute [rw] minor_version
-    #   The ID of the minor version of an environment template.
+    #   The minor version of an environment template.
     #   @return [String]
     #
     # @!attribute [rw] recommended_minor_version
-    #   The ID of the recommended minor version of the environment template.
+    #   The recommended minor version of the environment template.
     #   @return [String]
     #
     # @!attribute [rw] schema
@@ -1630,16 +1891,16 @@ module Aws::Proton
     #   @return [Time]
     #
     # @!attribute [rw] major_version
-    #   The ID of the latest major version that's associated with the
-    #   version of an environment template.
+    #   The latest major version that's associated with the version of an
+    #   environment template.
     #   @return [String]
     #
     # @!attribute [rw] minor_version
-    #   The ID of the version of an environment template.
+    #   The version of an environment template.
     #   @return [String]
     #
     # @!attribute [rw] recommended_minor_version
-    #   The ID of the recommended minor version of the environment template.
+    #   The recommended minor version of the environment template.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1678,8 +1939,8 @@ module Aws::Proton
     class GetAccountSettingsInput < Aws::EmptyStructure; end
 
     # @!attribute [rw] account_settings
-    #   The AWS Proton pipeline service role detail data that's returned by
-    #   AWS Proton.
+    #   The Proton pipeline service role detail data that's returned by
+    #   Proton.
     #   @return [Types::AccountSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetAccountSettingsOutput AWS API Documentation
@@ -1711,7 +1972,7 @@ module Aws::Proton
 
     # @!attribute [rw] environment_account_connection
     #   The environment account connection detail data that's returned by
-    #   AWS Proton.
+    #   Proton.
     #   @return [Types::EnvironmentAccountConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetEnvironmentAccountConnectionOutput AWS API Documentation
@@ -1743,7 +2004,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment
-    #   The environment detail data that's returned by AWS Proton.
+    #   The environment detail data that's returned by Proton.
     #   @return [Types::Environment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetEnvironmentOutput AWS API Documentation
@@ -1775,7 +2036,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment_template
-    #   The environment template detail data that's returned by AWS Proton.
+    #   The environment template detail data that's returned by Proton.
     #   @return [Types::EnvironmentTemplate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetEnvironmentTemplateOutput AWS API Documentation
@@ -1797,7 +2058,7 @@ module Aws::Proton
     #
     # @!attribute [rw] major_version
     #   To view environment template major version detail data, include
-    #   `majorVersion`.
+    #   `major Version`.
     #   @return [String]
     #
     # @!attribute [rw] minor_version
@@ -1820,7 +2081,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment_template_version
-    #   The environment template version detail data that's returned by AWS
+    #   The environment template version detail data that's returned by
     #   Proton.
     #   @return [Types::EnvironmentTemplateVersion]
     #
@@ -1828,6 +2089,92 @@ module Aws::Proton
     #
     class GetEnvironmentTemplateVersionOutput < Struct.new(
       :environment_template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRepositoryInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "RepositoryName", # required
+    #         provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The repository name, for example `myrepos/myrepo`.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetRepositoryInput AWS API Documentation
+    #
+    class GetRepositoryInput < Struct.new(
+      :name,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] repository
+    #   The repository detail data that's returned by Proton.
+    #   @return [Types::Repository]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetRepositoryOutput AWS API Documentation
+    #
+    class GetRepositoryOutput < Struct.new(
+      :repository)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRepositorySyncStatusInput
+    #   data as a hash:
+    #
+    #       {
+    #         branch: "GitBranchName", # required
+    #         repository_name: "RepositoryName", # required
+    #         repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #         sync_type: "TEMPLATE_SYNC", # required, accepts TEMPLATE_SYNC
+    #       }
+    #
+    # @!attribute [rw] branch
+    #   The repository branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_type
+    #   The repository sync type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetRepositorySyncStatusInput AWS API Documentation
+    #
+    class GetRepositorySyncStatusInput < Struct.new(
+      :branch,
+      :repository_name,
+      :repository_provider,
+      :sync_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] latest_sync
+    #   The repository sync status detail data that's returned by Proton.
+    #   @return [Types::RepositorySyncAttempt]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetRepositorySyncStatusOutput AWS API Documentation
+    #
+    class GetRepositorySyncStatusOutput < Struct.new(
+      :latest_sync)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1878,7 +2225,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service_instance
-    #   The service instance detail data that's returned by AWS Proton.
+    #   The service instance detail data that's returned by Proton.
     #   @return [Types::ServiceInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceInstanceOutput AWS API Documentation
@@ -1890,7 +2237,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service
-    #   The service detail data that's returned by AWS Proton.
+    #   The service detail data that's returned by Proton.
     #   @return [Types::Service]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceOutput AWS API Documentation
@@ -1922,7 +2269,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service_template
-    #   The service template detail data that's returned by AWS Proton.
+    #   The service template detail data that's returned by Proton.
     #   @return [Types::ServiceTemplate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceTemplateOutput AWS API Documentation
@@ -1943,8 +2290,8 @@ module Aws::Proton
     #       }
     #
     # @!attribute [rw] major_version
-    #   To view service template major version detail data, include
-    #   `majorVersion`.
+    #   To view service template major version detail data, include `major
+    #   Version`.
     #   @return [String]
     #
     # @!attribute [rw] minor_version
@@ -1967,14 +2314,104 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service_template_version
-    #   The service template version detail data that's returned by AWS
-    #   Proton.
+    #   The service template version detail data that's returned by Proton.
     #   @return [Types::ServiceTemplateVersion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetServiceTemplateVersionOutput AWS API Documentation
     #
     class GetServiceTemplateVersionOutput < Struct.new(
       :service_template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTemplateSyncConfigInput
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "ResourceName", # required
+    #         template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The template name.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The template type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetTemplateSyncConfigInput AWS API Documentation
+    #
+    class GetTemplateSyncConfigInput < Struct.new(
+      :template_name,
+      :template_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_sync_config
+    #   The template sync configuration detail data that's returned by
+    #   Proton.
+    #   @return [Types::TemplateSyncConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetTemplateSyncConfigOutput AWS API Documentation
+    #
+    class GetTemplateSyncConfigOutput < Struct.new(
+      :template_sync_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTemplateSyncStatusInput
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "ResourceName", # required
+    #         template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
+    #         template_version: "TemplateVersionPart", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The template name.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The template type.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_version
+    #   The template version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetTemplateSyncStatusInput AWS API Documentation
+    #
+    class GetTemplateSyncStatusInput < Struct.new(
+      :template_name,
+      :template_type,
+      :template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] desired_state
+    #   The template sync desired state that's returned by Proton.
+    #   @return [Types::Revision]
+    #
+    # @!attribute [rw] latest_successful_sync
+    #   The details of the last successful sync that's returned by Proton.
+    #   @return [Types::ResourceSyncAttempt]
+    #
+    # @!attribute [rw] latest_sync
+    #   The details of the last sync that's returned by Proton.
+    #   @return [Types::ResourceSyncAttempt]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetTemplateSyncStatusOutput AWS API Documentation
+    #
+    class GetTemplateSyncStatusOutput < Struct.new(
+      :desired_state,
+      :latest_successful_sync,
+      :latest_sync)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2042,7 +2479,7 @@ module Aws::Proton
 
     # @!attribute [rw] environment_account_connections
     #   An array of environment account connections with details that's
-    #   returned by AWS Proton.
+    #   returned by Proton.
     #   @return [Array<Types::EnvironmentAccountConnectionSummary>]
     #
     # @!attribute [rw] next_token
@@ -2060,6 +2497,99 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListEnvironmentOutputsInput
+    #   data as a hash:
+    #
+    #       {
+    #         environment_name: "ResourceName", # required
+    #         next_token: "EmptyNextToken",
+    #       }
+    #
+    # @!attribute [rw] environment_name
+    #   The environment name.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next environment output in
+    #   the array of environment outputs, after the list of environment
+    #   outputs that was previously requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListEnvironmentOutputsInput AWS API Documentation
+    #
+    class ListEnvironmentOutputsInput < Struct.new(
+      :environment_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next environment output in
+    #   the array of environment outputs, after the current requested list
+    #   of environment outputs.
+    #   @return [String]
+    #
+    # @!attribute [rw] outputs
+    #   An array of environment outputs with detail data.
+    #   @return [Array<Types::Output>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListEnvironmentOutputsOutput AWS API Documentation
+    #
+    class ListEnvironmentOutputsOutput < Struct.new(
+      :next_token,
+      :outputs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListEnvironmentProvisionedResourcesInput
+    #   data as a hash:
+    #
+    #       {
+    #         environment_name: "ResourceName", # required
+    #         next_token: "EmptyNextToken",
+    #       }
+    #
+    # @!attribute [rw] environment_name
+    #   The environment name.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next environment provisioned
+    #   resource in the array of environment provisioned resources, after
+    #   the list of environment provisioned resources that was previously
+    #   requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListEnvironmentProvisionedResourcesInput AWS API Documentation
+    #
+    class ListEnvironmentProvisionedResourcesInput < Struct.new(
+      :environment_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next environment provisioned
+    #   resource in the array of provisioned resources, after the current
+    #   requested list of environment provisioned resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_resources
+    #   An array of environment provisioned resources.
+    #   @return [Array<Types::ProvisionedResource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListEnvironmentProvisionedResourcesOutput AWS API Documentation
+    #
+    class ListEnvironmentProvisionedResourcesOutput < Struct.new(
+      :next_token,
+      :provisioned_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListEnvironmentTemplateVersionsInput
     #   data as a hash:
     #
@@ -2072,10 +2602,10 @@ module Aws::Proton
     #
     # @!attribute [rw] major_version
     #   To view a list of minor of versions under a major version of an
-    #   environment template, include `majorVersion`.
+    #   environment template, include `major Version`.
     #
     #   To view a list of major versions of an environment template,
-    #   *exclude* `majorVersion`.
+    #   *exclude* `major Version`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2229,6 +2759,211 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListRepositoriesInput
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of repositories to list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next repository in the array
+    #   of repositories, after the list of repositories previously
+    #   requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListRepositoriesInput AWS API Documentation
+    #
+    class ListRepositoriesInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next repository in the array
+    #   of repositories, after the current requested list of repositories.
+    #   @return [String]
+    #
+    # @!attribute [rw] repositories
+    #   An array of repositories.
+    #   @return [Array<Types::RepositorySummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListRepositoriesOutput AWS API Documentation
+    #
+    class ListRepositoriesOutput < Struct.new(
+      :next_token,
+      :repositories)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRepositorySyncDefinitionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "EmptyNextToken",
+    #         repository_name: "RepositoryName", # required
+    #         repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #         sync_type: "TEMPLATE_SYNC", # required, accepts TEMPLATE_SYNC
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next repository sync
+    #   definition in the array of repository sync definitions, after the
+    #   list of repository sync definitions previously requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_type
+    #   The sync type. The only supported value is `TEMPLATE_SYNC`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListRepositorySyncDefinitionsInput AWS API Documentation
+    #
+    class ListRepositorySyncDefinitionsInput < Struct.new(
+      :next_token,
+      :repository_name,
+      :repository_provider,
+      :sync_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next repository sync
+    #   definition in the array of repository sync definitions, after the
+    #   current requested list of repository sync definitions.
+    #   @return [String]
+    #
+    # @!attribute [rw] sync_definitions
+    #   An array of repository sync definitions.
+    #   @return [Array<Types::RepositorySyncDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListRepositorySyncDefinitionsOutput AWS API Documentation
+    #
+    class ListRepositorySyncDefinitionsOutput < Struct.new(
+      :next_token,
+      :sync_definitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListServiceInstanceOutputsInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "EmptyNextToken",
+    #         service_instance_name: "ResourceName", # required
+    #         service_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next output in the array of
+    #   outputs, after the list of outputs that was previously requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_instance_name
+    #   The service instance name.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The service name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServiceInstanceOutputsInput AWS API Documentation
+    #
+    class ListServiceInstanceOutputsInput < Struct.new(
+      :next_token,
+      :service_instance_name,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next output in the array of
+    #   outputs, after the current requested list of outputs.
+    #   @return [String]
+    #
+    # @!attribute [rw] outputs
+    #   An array of service instance infrastructure as code outputs.
+    #   @return [Array<Types::Output>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServiceInstanceOutputsOutput AWS API Documentation
+    #
+    class ListServiceInstanceOutputsOutput < Struct.new(
+      :next_token,
+      :outputs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListServiceInstanceProvisionedResourcesInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "EmptyNextToken",
+    #         service_instance_name: "ResourceName", # required
+    #         service_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next provisioned resource in
+    #   the array of provisioned resources, after the list of provisioned
+    #   resources that was previously requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_instance_name
+    #   The service instance name.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The service name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServiceInstanceProvisionedResourcesInput AWS API Documentation
+    #
+    class ListServiceInstanceProvisionedResourcesInput < Struct.new(
+      :next_token,
+      :service_instance_name,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next provisioned resource in
+    #   the array of provisioned resources, after the current requested list
+    #   of provisioned resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_resources
+    #   An array of provisioned resources for a service instance.
+    #   @return [Array<Types::ProvisionedResource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServiceInstanceProvisionedResourcesOutput AWS API Documentation
+    #
+    class ListServiceInstanceProvisionedResourcesOutput < Struct.new(
+      :next_token,
+      :provisioned_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListServiceInstancesInput
     #   data as a hash:
     #
@@ -2281,6 +3016,96 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListServicePipelineOutputsInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "EmptyNextToken",
+    #         service_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next output in the array of
+    #   outputs, after the list of outputs that was previously requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The service name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServicePipelineOutputsInput AWS API Documentation
+    #
+    class ListServicePipelineOutputsInput < Struct.new(
+      :next_token,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next output in the array of
+    #   outputs, after the current requested list of outputs.
+    #   @return [String]
+    #
+    # @!attribute [rw] outputs
+    #   An array of outputs.
+    #   @return [Array<Types::Output>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServicePipelineOutputsOutput AWS API Documentation
+    #
+    class ListServicePipelineOutputsOutput < Struct.new(
+      :next_token,
+      :outputs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListServicePipelineProvisionedResourcesInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "EmptyNextToken",
+    #         service_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next provisioned resource in
+    #   the array of provisioned resources, after the list of provisioned
+    #   resources that was previously requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The service name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServicePipelineProvisionedResourcesInput AWS API Documentation
+    #
+    class ListServicePipelineProvisionedResourcesInput < Struct.new(
+      :next_token,
+      :service_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token to indicate the location of the next provisioned resource in
+    #   the array of provisioned resources, after the current requested list
+    #   of provisioned resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_resources
+    #   An array of provisioned resources for a service and pipeline.
+    #   @return [Array<Types::ProvisionedResource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServicePipelineProvisionedResourcesOutput AWS API Documentation
+    #
+    class ListServicePipelineProvisionedResourcesOutput < Struct.new(
+      :next_token,
+      :provisioned_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListServiceTemplateVersionsInput
     #   data as a hash:
     #
@@ -2293,10 +3118,10 @@ module Aws::Proton
     #
     # @!attribute [rw] major_version
     #   To view a list of minor of versions under a major version of a
-    #   service template, include `majorVersion`.
+    #   service template, include `major Version`.
     #
     #   To view a list of major versions of a service template, *exclude*
-    #   `majorVersion`.
+    #   `major Version`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2328,7 +3153,7 @@ module Aws::Proton
     # @!attribute [rw] next_token
     #   A token to indicate the location of the next major or minor version
     #   in the array of major or minor versions of a service template, after
-    #   the list of major or minor versions that was previously requested.
+    #   the current requested list of service major or minor versions.
     #   @return [String]
     #
     # @!attribute [rw] template_versions
@@ -2487,6 +3312,119 @@ module Aws::Proton
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass NotifyResourceDeploymentStatusChangeInput
+    #   data as a hash:
+    #
+    #       {
+    #         deployment_id: "DeploymentId",
+    #         outputs: [
+    #           {
+    #             key: "OutputKey",
+    #             value_string: "OutputValueString",
+    #           },
+    #         ],
+    #         resource_arn: "Arn", # required
+    #         status: "IN_PROGRESS", # required, accepts IN_PROGRESS, FAILED, SUCCEEDED
+    #         status_message: "SyntheticNotifyResourceDeploymentStatusChangeInputString",
+    #       }
+    #
+    # @!attribute [rw] deployment_id
+    #   The deployment ID for your provisioned resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] outputs
+    #   The provisioned resource state change detail data that's returned
+    #   by Proton.
+    #   @return [Array<Types::Output>]
+    #
+    # @!attribute [rw] resource_arn
+    #   The provisioned resource Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of your provisioned resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The deployment status message for your provisioned resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/NotifyResourceDeploymentStatusChangeInput AWS API Documentation
+    #
+    class NotifyResourceDeploymentStatusChangeInput < Struct.new(
+      :deployment_id,
+      :outputs,
+      :resource_arn,
+      :status,
+      :status_message)
+      SENSITIVE = [:status_message]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/NotifyResourceDeploymentStatusChangeOutput AWS API Documentation
+    #
+    class NotifyResourceDeploymentStatusChangeOutput < Aws::EmptyStructure; end
+
+    # An infrastructure as code defined resource output.
+    #
+    # @note When making an API call, you may pass Output
+    #   data as a hash:
+    #
+    #       {
+    #         key: "OutputKey",
+    #         value_string: "OutputValueString",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The output key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_string
+    #   The output value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/Output AWS API Documentation
+    #
+    class Output < Struct.new(
+      :key,
+      :value_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detail data for a provisioned resource.
+    #
+    # @!attribute [rw] identifier
+    #   The provisioned resource identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The provisioned resource name.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_engine
+    #   The resource provisioning engine.
+    #
+    #   Provisioning by pull request is currently in feature preview and is
+    #   only usable with Terraform based Proton Templates. To learn more
+    #   about [Amazon Web Services Feature Preview terms][1], see section 2
+    #   on Beta and Previews.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ProvisionedResource AWS API Documentation
+    #
+    class ProvisionedResource < Struct.new(
+      :identifier,
+      :name,
+      :provisioning_engine)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RejectEnvironmentAccountConnectionInput
     #   data as a hash:
     #
@@ -2508,13 +3446,235 @@ module Aws::Proton
 
     # @!attribute [rw] environment_account_connection
     #   The environment connection account detail data that's returned by
-    #   AWS Proton.
+    #   Proton.
     #   @return [Types::EnvironmentAccountConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/RejectEnvironmentAccountConnectionOutput AWS API Documentation
     #
     class RejectEnvironmentAccountConnectionOutput < Struct.new(
       :environment_account_connection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detail date for a repository that has been registered with Proton.
+    #
+    # @!attribute [rw] arn
+    #   The repository Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_arn
+    #   The repository Amazon Web Services CodeStar connection that connects
+    #   Proton to your repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key
+    #   Your customer Amazon Web Services KMS encryption key.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The repository name.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/Repository AWS API Documentation
+    #
+    class Repository < Struct.new(
+      :arn,
+      :connection_arn,
+      :encryption_key,
+      :name,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detail data for a repository branch.
+    #
+    # Provisioning by pull request is currently in feature preview and is
+    # only usable with Terraform based Proton Templates. To learn more about
+    # [Amazon Web Services Feature Preview terms][1], see section 2 on Beta
+    # and Previews.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/service-terms
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the repository branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch
+    #   The repository branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The repository name.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/RepositoryBranch AWS API Documentation
+    #
+    class RepositoryBranch < Struct.new(
+      :arn,
+      :branch,
+      :name,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detail input data for a repository branch.
+    #
+    # Provisioning by pull request is currently in feature preview and is
+    # only usable with Terraform based Proton Templates. To learn more about
+    # [Amazon Web Services Feature Preview terms][1], see section 2 on Beta
+    # and Previews.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/service-terms
+    #
+    # @note When making an API call, you may pass RepositoryBranchInput
+    #   data as a hash:
+    #
+    #       {
+    #         branch: "GitBranchName", # required
+    #         name: "RepositoryName", # required
+    #         provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #       }
+    #
+    # @!attribute [rw] branch
+    #   The repository branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The repository name.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/RepositoryBranchInput AWS API Documentation
+    #
+    class RepositoryBranchInput < Struct.new(
+      :branch,
+      :name,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of detail data for a registered repository.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for a repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The repository name.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/RepositorySummary AWS API Documentation
+    #
+    class RepositorySummary < Struct.new(
+      :arn,
+      :name,
+      :provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detail data for a repository sync attempt activated by a push to a
+    # repository.
+    #
+    # @!attribute [rw] events
+    #   Detail data for sync attempt events.
+    #   @return [Array<Types::RepositorySyncEvent>]
+    #
+    # @!attribute [rw] started_at
+    #   The time when the sync attempt started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The sync attempt status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/RepositorySyncAttempt AWS API Documentation
+    #
+    class RepositorySyncAttempt < Struct.new(
+      :events,
+      :started_at,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The repository sync definition.
+    #
+    # @!attribute [rw] branch
+    #   The repository branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory
+    #   The directory in the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent
+    #   The resource that is synced from.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The resource that is synced to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/RepositorySyncDefinition AWS API Documentation
+    #
+    class RepositorySyncDefinition < Struct.new(
+      :branch,
+      :directory,
+      :parent,
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Repository sync event detail data for a sync attempt.
+    #
+    # @!attribute [rw] event
+    #   Event detail for a repository sync attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID of the sync event.
+    #   @return [String]
+    #
+    # @!attribute [rw] time
+    #   The time that the sync event occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type
+    #   The type of event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/RepositorySyncEvent AWS API Documentation
+    #
+    class RepositorySyncEvent < Struct.new(
+      :event,
+      :external_id,
+      :time,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2529,6 +3689,111 @@ module Aws::Proton
     class ResourceNotFoundException < Struct.new(
       :message)
       SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
+    # Detail data for a resource sync attempt activated by a push to a
+    # repository.
+    #
+    # @!attribute [rw] events
+    #   An array of events with detail data.
+    #   @return [Array<Types::ResourceSyncEvent>]
+    #
+    # @!attribute [rw] initial_revision
+    #   Detail data for the initial repository commit, path and push.
+    #   @return [Types::Revision]
+    #
+    # @!attribute [rw] started_at
+    #   The time when the sync attempt started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the sync attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The resource that is synced to.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_revision
+    #   Detail data for the target revision.
+    #   @return [Types::Revision]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ResourceSyncAttempt AWS API Documentation
+    #
+    class ResourceSyncAttempt < Struct.new(
+      :events,
+      :initial_revision,
+      :started_at,
+      :status,
+      :target,
+      :target_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detail data for a resource sync event.
+    #
+    # @!attribute [rw] event
+    #   A resource sync event.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID for the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] time
+    #   The time when the event occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type
+    #   The type of event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ResourceSyncEvent AWS API Documentation
+    #
+    class ResourceSyncEvent < Struct.new(
+      :event,
+      :external_id,
+      :time,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Revision detail data for a commit and push that activates a sync
+    # attempt
+    #
+    # @!attribute [rw] branch
+    #   The repository branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory
+    #   The repository directory changed by a commit and push that activated
+    #   the sync attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The repository name.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] sha
+    #   The secure hash algorithm (SHA) hash for the revision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/Revision AWS API Documentation
+    #
+    class Revision < Struct.new(
+      :branch,
+      :directory,
+      :repository_name,
+      :repository_provider,
+      :sha)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2567,7 +3832,7 @@ module Aws::Proton
     #
     # @!attribute [rw] branch_name
     #   The name of the code repository branch that holds the code that's
-    #   deployed in AWS Proton.
+    #   deployed in Proton.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -2593,8 +3858,8 @@ module Aws::Proton
     # @!attribute [rw] repository_connection_arn
     #   The Amazon Resource Name (ARN) of the repository connection. For
     #   more information, see [Set up a repository connection][1] in the
-    #   *AWS Proton Administrator Guide* and [Setting up with AWS Proton][2]
-    #   in the *AWS Proton User Guide*.
+    #   *Proton Administrator Guide* and [Setting up with Proton][2] in the
+    #   *Proton User Guide*.
     #
     #
     #
@@ -2603,7 +3868,7 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] repository_id
-    #   The ID of the code repository.
+    #   The ID of the source code repository.
     #   @return [String]
     #
     # @!attribute [rw] spec
@@ -2687,13 +3952,13 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] template_major_version
-    #   The ID of the major version of the service template that was used to
-    #   create the service instance.
+    #   The major version of the service template that was used to create
+    #   the service instance.
     #   @return [String]
     #
     # @!attribute [rw] template_minor_version
-    #   The ID of the minor version of the service template that was used to
-    #   create the service instance.
+    #   The minor version of the service template that was used to create
+    #   the service instance.
     #   @return [String]
     #
     # @!attribute [rw] template_name
@@ -2761,11 +4026,11 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] template_major_version
-    #   The ID of the major version of a service template.
+    #   The service instance template major version.
     #   @return [String]
     #
     # @!attribute [rw] template_minor_version
-    #   The ID of the minor version of a service template.
+    #   The service instance template minor version.
     #   @return [String]
     #
     # @!attribute [rw] template_name
@@ -2823,13 +4088,13 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] template_major_version
-    #   The ID of the major version of the service template that was used to
-    #   create the service pipeline.
+    #   The major version of the service template that was used to create
+    #   the service pipeline.
     #   @return [String]
     #
     # @!attribute [rw] template_minor_version
-    #   The ID of the minor version of the service template that was used to
-    #   create the service pipeline.
+    #   The minor version of the service template that was used to create
+    #   the service pipeline.
     #   @return [String]
     #
     # @!attribute [rw] template_name
@@ -2854,8 +4119,8 @@ module Aws::Proton
       include Aws::Structure
     end
 
-    # A quota was exceeded. For more information, see [AWS Proton Quotas][1]
-    # in the *AWS Proton Administrator Guide*.
+    # A quota was exceeded. For more information, see [Proton Quotas][1] in
+    # the *Proton Administrator Guide*.
     #
     #
     #
@@ -2959,7 +4224,7 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] recommended_version
-    #   The ID of the recommended version of the service template.
+    #   The recommended version of the service template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ServiceTemplate AWS API Documentation
@@ -3011,7 +4276,7 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] recommended_version
-    #   The ID of the recommended version of the service template.
+    #   The recommended version of the service template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ServiceTemplateSummary AWS API Documentation
@@ -3053,16 +4318,16 @@ module Aws::Proton
     #   @return [Time]
     #
     # @!attribute [rw] major_version
-    #   The ID of the latest major version that's associated with the
-    #   version of a service template.
+    #   The latest major version that's associated with the version of a
+    #   service template.
     #   @return [String]
     #
     # @!attribute [rw] minor_version
-    #   The ID of the minor version of a service template.
+    #   The minor version of a service template.
     #   @return [String]
     #
     # @!attribute [rw] recommended_minor_version
-    #   The ID of the recommended minor version of the service template.
+    #   The recommended minor version of the service template.
     #   @return [String]
     #
     # @!attribute [rw] schema
@@ -3119,16 +4384,16 @@ module Aws::Proton
     #   @return [Time]
     #
     # @!attribute [rw] major_version
-    #   The ID of the latest major version that's associated with the
-    #   version of a service template.
+    #   The latest major version that's associated with the version of a
+    #   service template.
     #   @return [String]
     #
     # @!attribute [rw] minor_version
-    #   The ID of the minor version of a service template.
+    #   The minor version of a service template.
     #   @return [String]
     #
     # @!attribute [rw] recommended_minor_version
-    #   The ID of the recommended minor version of the service template.
+    #   The recommended minor version of the service template.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3222,6 +4487,45 @@ module Aws::Proton
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
+    # The detail data for a template sync configuration.
+    #
+    # @!attribute [rw] branch
+    #   The repository branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository, for example `myrepos/myrepo`.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdirectory
+    #   A subdirectory path to your template bundle version.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The template name.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The template type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/TemplateSyncConfig AWS API Documentation
+    #
+    class TemplateSyncConfig < Struct.new(
+      :branch,
+      :repository_name,
+      :repository_provider,
+      :subdirectory,
+      :template_name,
+      :template_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Template version source data.
     #
     # @note TemplateVersionSourceInput is a union - when making an API calls you must set exactly one of the members.
@@ -3292,25 +4596,52 @@ module Aws::Proton
     #   data as a hash:
     #
     #       {
-    #         pipeline_service_role_arn: "Arn",
+    #         pipeline_provisioning_repository: {
+    #           branch: "GitBranchName", # required
+    #           name: "RepositoryName", # required
+    #           provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #         },
+    #         pipeline_service_role_arn: "PipelineRoleArn",
     #       }
     #
+    # @!attribute [rw] pipeline_provisioning_repository
+    #   The repository that you provide with pull request provisioning.
+    #
+    #   Provisioning by pull request is currently in feature preview and is
+    #   only usable with Terraform based Proton Templates. To learn more
+    #   about [Amazon Web Services Feature Preview terms][1], see section 2
+    #   on Beta and Previews.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
+    #   @return [Types::RepositoryBranchInput]
+    #
     # @!attribute [rw] pipeline_service_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Proton pipeline service
-    #   role.
+    #   The Amazon Resource Name (ARN) of the Proton pipeline service role.
+    #
+    #   Provisioning by pull request is currently in feature preview and is
+    #   only usable with Terraform based Proton Templates. To learn more
+    #   about [Amazon Web Services Feature Preview terms][1], see section 2
+    #   on Beta and Previews.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateAccountSettingsInput AWS API Documentation
     #
     class UpdateAccountSettingsInput < Struct.new(
+      :pipeline_provisioning_repository,
       :pipeline_service_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] account_settings
-    #   The AWS Proton pipeline service role detail data that's returned by
-    #   AWS Proton.
+    #   The Proton pipeline service role repository detail data that's
+    #   returned by Proton.
     #   @return [Types::AccountSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateAccountSettingsOutput AWS API Documentation
@@ -3349,7 +4680,7 @@ module Aws::Proton
 
     # @!attribute [rw] environment_account_connection
     #   The environment account connection detail data that's returned by
-    #   AWS Proton.
+    #   Proton.
     #   @return [Types::EnvironmentAccountConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateEnvironmentAccountConnectionOutput AWS API Documentation
@@ -3369,6 +4700,11 @@ module Aws::Proton
     #         environment_account_connection_id: "EnvironmentAccountConnectionId",
     #         name: "ResourceName", # required
     #         proton_service_role_arn: "Arn",
+    #         provisioning_repository: {
+    #           branch: "GitBranchName", # required
+    #           name: "RepositoryName", # required
+    #           provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #         },
     #         spec: "SpecContents",
     #         template_major_version: "TemplateVersionPart",
     #         template_minor_version: "TemplateVersionPart",
@@ -3432,20 +4768,33 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] proton_service_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Proton service role that
-    #   allows AWS Proton to make API calls to other services your behalf.
+    #   The Amazon Resource Name (ARN) of the Proton service role that
+    #   allows Proton to make API calls to other services your behalf.
     #   @return [String]
+    #
+    # @!attribute [rw] provisioning_repository
+    #   The repository that you provide with pull request provisioning.
+    #
+    #   Provisioning by pull request is currently in feature preview and is
+    #   only usable with Terraform based Proton Templates. To learn more
+    #   about [Amazon Web Services Feature Preview terms][1], see section 2
+    #   on Beta and Previews.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
+    #   @return [Types::RepositoryBranchInput]
     #
     # @!attribute [rw] spec
     #   The formatted specification that defines the update.
     #   @return [String]
     #
     # @!attribute [rw] template_major_version
-    #   The ID of the major version of the environment to update.
+    #   The major version of the environment to update.
     #   @return [String]
     #
     # @!attribute [rw] template_minor_version
-    #   The ID of the minor version of the environment to update.
+    #   The minor version of the environment to update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateEnvironmentInput AWS API Documentation
@@ -3456,6 +4805,7 @@ module Aws::Proton
       :environment_account_connection_id,
       :name,
       :proton_service_role_arn,
+      :provisioning_repository,
       :spec,
       :template_major_version,
       :template_minor_version)
@@ -3464,7 +4814,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment
-    #   The environment detail data that's returned by AWS Proton.
+    #   The environment detail data that's returned by Proton.
     #   @return [Types::Environment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateEnvironmentOutput AWS API Documentation
@@ -3508,7 +4858,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment_template
-    #   The environment template detail data that's returned by AWS Proton.
+    #   The environment template detail data that's returned by Proton.
     #   @return [Types::EnvironmentTemplate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateEnvironmentTemplateOutput AWS API Documentation
@@ -3535,8 +4885,8 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] major_version
-    #   To update a major version of an environment template, include
-    #   `majorVersion`.
+    #   To update a major version of an environment template, include `major
+    #   Version`.
     #   @return [String]
     #
     # @!attribute [rw] minor_version
@@ -3565,7 +4915,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] environment_template_version
-    #   The environment template version detail data that's returned by AWS
+    #   The environment template version detail data that's returned by
     #   Proton.
     #   @return [Types::EnvironmentTemplateVersion]
     #
@@ -3599,8 +4949,7 @@ module Aws::Proton
     #   instances to remain. Omit the existing service instances to delete
     #   from the list. *Don't* include edits to the existing service
     #   instances or pipeline. For more information, see *Edit a service* in
-    #   the [AWS Proton Administrator Guide][1] or the [AWS Proton User
-    #   Guide][2].
+    #   the [Proton Administrator Guide][1] or the [Proton User Guide][2].
     #
     #
     #
@@ -3707,7 +5056,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service_instance
-    #   The service instance summary data returned by AWS Proton.
+    #   The service instance summary data returned by Proton.
     #   @return [Types::ServiceInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceInstanceOutput AWS API Documentation
@@ -3719,7 +5068,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service
-    #   The service detail data that's returned by AWS Proton.
+    #   The service detail data that's returned by Proton.
     #   @return [Types::Service]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceOutput AWS API Documentation
@@ -3814,7 +5163,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] pipeline
-    #   The pipeline details returned by AWS Proton.
+    #   The pipeline details returned by Proton.
     #   @return [Types::ServicePipeline]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServicePipelineOutput AWS API Documentation
@@ -3858,7 +5207,7 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service_template
-    #   The service template detail data that's returned by AWS Proton.
+    #   The service template detail data that's returned by Proton.
     #   @return [Types::ServiceTemplate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceTemplateOutput AWS API Documentation
@@ -3896,8 +5245,8 @@ module Aws::Proton
     #   @return [String]
     #
     # @!attribute [rw] major_version
-    #   To update a major version of a service template, include
-    #   `majorVersion`.
+    #   To update a major version of a service template, include `major
+    #   Version`.
     #   @return [String]
     #
     # @!attribute [rw] minor_version
@@ -3927,14 +5276,76 @@ module Aws::Proton
     end
 
     # @!attribute [rw] service_template_version
-    #   The service template version detail data that's returned by AWS
-    #   Proton.
+    #   The service template version detail data that's returned by Proton.
     #   @return [Types::ServiceTemplateVersion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateServiceTemplateVersionOutput AWS API Documentation
     #
     class UpdateServiceTemplateVersionOutput < Struct.new(
       :service_template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateTemplateSyncConfigInput
+    #   data as a hash:
+    #
+    #       {
+    #         branch: "GitBranchName", # required
+    #         repository_name: "RepositoryName", # required
+    #         repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #         subdirectory: "Subdirectory",
+    #         template_name: "ResourceName", # required
+    #         template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
+    #       }
+    #
+    # @!attribute [rw] branch
+    #   The repository branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository, for example `myrepos/myrepo`.
+    #   @return [String]
+    #
+    # @!attribute [rw] repository_provider
+    #   The repository provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] subdirectory
+    #   A subdirectory path to your template bundle version. When included,
+    #   limits the template bundle search to this repository directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The synced template name.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The synced template type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateTemplateSyncConfigInput AWS API Documentation
+    #
+    class UpdateTemplateSyncConfigInput < Struct.new(
+      :branch,
+      :repository_name,
+      :repository_provider,
+      :subdirectory,
+      :template_name,
+      :template_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_sync_config
+    #   The template sync configuration detail data that's returned by
+    #   Proton.
+    #   @return [Types::TemplateSyncConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateTemplateSyncConfigOutput AWS API Documentation
+    #
+    class UpdateTemplateSyncConfigOutput < Struct.new(
+      :template_sync_config)
       SENSITIVE = []
       include Aws::Structure
     end

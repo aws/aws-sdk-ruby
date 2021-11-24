@@ -916,7 +916,7 @@ module Aws::AutoScaling
     # data points.
     #
     # @!attribute [rw] timestamps
-    #   The time stamps for the data points, in UTC format.
+    #   The timestamps for the data points, in UTC format.
     #   @return [Array<Time>]
     #
     # @!attribute [rw] values
@@ -5273,7 +5273,7 @@ module Aws::AutoScaling
     # the metric specification.
     #
     # @!attribute [rw] timestamps
-    #   The time stamps for the data points, in UTC format.
+    #   The timestamps for the data points, in UTC format.
     #   @return [Array<Time>]
     #
     # @!attribute [rw] values
@@ -5350,6 +5350,60 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Represents a specific metric.
+    #
+    # @note When making an API call, you may pass Metric
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "MetricNamespace", # required
+    #         metric_name: "MetricName", # required
+    #         dimensions: [
+    #           {
+    #             name: "MetricDimensionName", # required
+    #             value: "MetricDimensionValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the metric. For more information, see the table in
+    #   [Amazon Web Services services that publish CloudWatch metrics ][1]
+    #   in the *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   The dimensions for the metric. For the list of available dimensions,
+    #   see the Amazon Web Services documentation available from the table
+    #   in [Amazon Web Services services that publish CloudWatch metrics
+    #   ][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #   Conditional: If you published your metric with dimensions, you must
+    #   specify the same dimensions in your scaling policy.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
+    #   @return [Array<Types::MetricDimension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Metric AWS API Documentation
+    #
+    class Metric < Struct.new(
+      :namespace,
+      :metric_name,
+      :dimensions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a metric.
     #
     # @!attribute [rw] metric
@@ -5404,6 +5458,107 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # The metric data to return. Also defines whether this call is returning
+    # data for one metric only, or whether it is performing a math
+    # expression on the values of returned metric statistics to create a new
+    # time series. A time series is a series of data points, each of which
+    # is associated with a timestamp.
+    #
+    # For more information and examples, see [Advanced predictive scaling
+    # policy configurations using customized metrics][1] in the *Amazon EC2
+    # Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/predictive-scaling-customized-metric-specification.html
+    #
+    # @note When making an API call, you may pass MetricDataQuery
+    #   data as a hash:
+    #
+    #       {
+    #         id: "XmlStringMaxLen255", # required
+    #         expression: "XmlStringMaxLen1023",
+    #         metric_stat: {
+    #           metric: { # required
+    #             namespace: "MetricNamespace", # required
+    #             metric_name: "MetricName", # required
+    #             dimensions: [
+    #               {
+    #                 name: "MetricDimensionName", # required
+    #                 value: "MetricDimensionValue", # required
+    #               },
+    #             ],
+    #           },
+    #           stat: "XmlStringMetricStat", # required
+    #           unit: "MetricUnit",
+    #         },
+    #         label: "XmlStringMetricLabel",
+    #         return_data: false,
+    #       }
+    #
+    # @!attribute [rw] id
+    #   A short name that identifies the object's results in the response.
+    #   This name must be unique among all `MetricDataQuery` objects
+    #   specified for a single scaling policy. If you are performing math
+    #   expressions on this set of data, this name represents that data and
+    #   can serve as a variable in the mathematical expression. The valid
+    #   characters are letters, numbers, and underscores. The first
+    #   character must be a lowercase letter.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The math expression to perform on the returned data, if this object
+    #   is performing a math expression. This expression can use the `Id` of
+    #   the other metrics to refer to those metrics, and can also use the
+    #   `Id` of other expressions to use the result of those expressions.
+    #
+    #   For example, to use search expressions, use the SEARCH() function in
+    #   your metric math expression to combine multiple metrics from Auto
+    #   Scaling groups that use a specific name prefix.
+    #
+    #   Conditional: Within each `MetricDataQuery` object, you must specify
+    #   either `Expression` or `MetricStat`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_stat
+    #   Information about the metric data to return.
+    #
+    #   Conditional: Within each `MetricDataQuery` object, you must specify
+    #   either `Expression` or `MetricStat`, but not both.
+    #   @return [Types::MetricStat]
+    #
+    # @!attribute [rw] label
+    #   A human-readable label for this metric or expression. This is
+    #   especially useful if this is a math expression, so that you know
+    #   what the value represents.
+    #   @return [String]
+    #
+    # @!attribute [rw] return_data
+    #   Indicates whether to return the timestamps and raw data values of
+    #   this metric.
+    #
+    #   If you use any math expressions, specify `True` for this value for
+    #   only the final math expression that the metric specification is
+    #   based on. You must specify `False` for `ReturnData` for all the
+    #   other metrics and expressions used in the metric specification.
+    #
+    #   If you are only retrieving metrics and not performing any math
+    #   expressions, do not specify anything for `ReturnData`. This sets it
+    #   to its default (`True`).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricDataQuery AWS API Documentation
+    #
+    class MetricDataQuery < Struct.new(
+      :id,
+      :expression,
+      :metric_stat,
+      :label,
+      :return_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the dimension of a metric.
     #
     # @note When making an API call, you may pass MetricDimension
@@ -5441,6 +5596,79 @@ module Aws::AutoScaling
     #
     class MetricGranularityType < Struct.new(
       :granularity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure defines the CloudWatch metric to return, along with the
+    # statistic, period, and unit.
+    #
+    # For more information about the CloudWatch terminology below, see
+    # [Amazon CloudWatch concepts][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
+    #
+    # @note When making an API call, you may pass MetricStat
+    #   data as a hash:
+    #
+    #       {
+    #         metric: { # required
+    #           namespace: "MetricNamespace", # required
+    #           metric_name: "MetricName", # required
+    #           dimensions: [
+    #             {
+    #               name: "MetricDimensionName", # required
+    #               value: "MetricDimensionValue", # required
+    #             },
+    #           ],
+    #         },
+    #         stat: "XmlStringMetricStat", # required
+    #         unit: "MetricUnit",
+    #       }
+    #
+    # @!attribute [rw] metric
+    #   The CloudWatch metric to return, including the metric name,
+    #   namespace, and dimensions. To get the exact metric name, namespace,
+    #   and dimensions, inspect the [Metric][1] object that is returned by a
+    #   call to [ListMetrics][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html
+    #   @return [Types::Metric]
+    #
+    # @!attribute [rw] stat
+    #   The statistic to return. It can include any CloudWatch statistic or
+    #   extended statistic. For a list of valid values, see the table in
+    #   [Statistics][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #   The most commonly used metrics for predictive scaling are `Average`
+    #   and `Sum`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit to use for the returned data points. For a complete list of
+    #   the units that CloudWatch supports, see the [MetricDatum][1] data
+    #   type in the *Amazon CloudWatch API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricStat AWS API Documentation
+    #
+    class MetricStat < Struct.new(
+      :metric,
+      :stat,
+      :unit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5750,6 +5978,78 @@ module Aws::AutoScaling
     #               predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
     #               resource_label: "XmlStringMaxLen1023",
     #             },
+    #             customized_scaling_metric_specification: {
+    #               metric_data_queries: [ # required
+    #                 {
+    #                   id: "XmlStringMaxLen255", # required
+    #                   expression: "XmlStringMaxLen1023",
+    #                   metric_stat: {
+    #                     metric: { # required
+    #                       namespace: "MetricNamespace", # required
+    #                       metric_name: "MetricName", # required
+    #                       dimensions: [
+    #                         {
+    #                           name: "MetricDimensionName", # required
+    #                           value: "MetricDimensionValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                     stat: "XmlStringMetricStat", # required
+    #                     unit: "MetricUnit",
+    #                   },
+    #                   label: "XmlStringMetricLabel",
+    #                   return_data: false,
+    #                 },
+    #               ],
+    #             },
+    #             customized_load_metric_specification: {
+    #               metric_data_queries: [ # required
+    #                 {
+    #                   id: "XmlStringMaxLen255", # required
+    #                   expression: "XmlStringMaxLen1023",
+    #                   metric_stat: {
+    #                     metric: { # required
+    #                       namespace: "MetricNamespace", # required
+    #                       metric_name: "MetricName", # required
+    #                       dimensions: [
+    #                         {
+    #                           name: "MetricDimensionName", # required
+    #                           value: "MetricDimensionValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                     stat: "XmlStringMetricStat", # required
+    #                     unit: "MetricUnit",
+    #                   },
+    #                   label: "XmlStringMetricLabel",
+    #                   return_data: false,
+    #                 },
+    #               ],
+    #             },
+    #             customized_capacity_metric_specification: {
+    #               metric_data_queries: [ # required
+    #                 {
+    #                   id: "XmlStringMaxLen255", # required
+    #                   expression: "XmlStringMaxLen1023",
+    #                   metric_stat: {
+    #                     metric: { # required
+    #                       namespace: "MetricNamespace", # required
+    #                       metric_name: "MetricName", # required
+    #                       dimensions: [
+    #                         {
+    #                           name: "MetricDimensionName", # required
+    #                           value: "MetricDimensionValue", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                     stat: "XmlStringMetricStat", # required
+    #                     unit: "MetricUnit",
+    #                   },
+    #                   label: "XmlStringMetricLabel",
+    #                   return_data: false,
+    #                 },
+    #               ],
+    #             },
     #           },
     #         ],
     #         mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly
@@ -5832,6 +6132,139 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # Describes a customized capacity metric for a predictive scaling
+    # policy.
+    #
+    # @note When making an API call, you may pass PredictiveScalingCustomizedCapacityMetric
+    #   data as a hash:
+    #
+    #       {
+    #         metric_data_queries: [ # required
+    #           {
+    #             id: "XmlStringMaxLen255", # required
+    #             expression: "XmlStringMaxLen1023",
+    #             metric_stat: {
+    #               metric: { # required
+    #                 namespace: "MetricNamespace", # required
+    #                 metric_name: "MetricName", # required
+    #                 dimensions: [
+    #                   {
+    #                     name: "MetricDimensionName", # required
+    #                     value: "MetricDimensionValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #               stat: "XmlStringMetricStat", # required
+    #               unit: "MetricUnit",
+    #             },
+    #             label: "XmlStringMetricLabel",
+    #             return_data: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] metric_data_queries
+    #   One or more metric data queries to provide the data points for a
+    #   capacity metric. Use multiple metric data queries only if you are
+    #   performing a math expression on returned data.
+    #   @return [Array<Types::MetricDataQuery>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PredictiveScalingCustomizedCapacityMetric AWS API Documentation
+    #
+    class PredictiveScalingCustomizedCapacityMetric < Struct.new(
+      :metric_data_queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a customized load metric for a predictive scaling policy.
+    #
+    # @note When making an API call, you may pass PredictiveScalingCustomizedLoadMetric
+    #   data as a hash:
+    #
+    #       {
+    #         metric_data_queries: [ # required
+    #           {
+    #             id: "XmlStringMaxLen255", # required
+    #             expression: "XmlStringMaxLen1023",
+    #             metric_stat: {
+    #               metric: { # required
+    #                 namespace: "MetricNamespace", # required
+    #                 metric_name: "MetricName", # required
+    #                 dimensions: [
+    #                   {
+    #                     name: "MetricDimensionName", # required
+    #                     value: "MetricDimensionValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #               stat: "XmlStringMetricStat", # required
+    #               unit: "MetricUnit",
+    #             },
+    #             label: "XmlStringMetricLabel",
+    #             return_data: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] metric_data_queries
+    #   One or more metric data queries to provide the data points for a
+    #   load metric. Use multiple metric data queries only if you are
+    #   performing a math expression on returned data.
+    #   @return [Array<Types::MetricDataQuery>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PredictiveScalingCustomizedLoadMetric AWS API Documentation
+    #
+    class PredictiveScalingCustomizedLoadMetric < Struct.new(
+      :metric_data_queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a customized scaling metric for a predictive scaling policy.
+    #
+    # @note When making an API call, you may pass PredictiveScalingCustomizedScalingMetric
+    #   data as a hash:
+    #
+    #       {
+    #         metric_data_queries: [ # required
+    #           {
+    #             id: "XmlStringMaxLen255", # required
+    #             expression: "XmlStringMaxLen1023",
+    #             metric_stat: {
+    #               metric: { # required
+    #                 namespace: "MetricNamespace", # required
+    #                 metric_name: "MetricName", # required
+    #                 dimensions: [
+    #                   {
+    #                     name: "MetricDimensionName", # required
+    #                     value: "MetricDimensionValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #               stat: "XmlStringMetricStat", # required
+    #               unit: "MetricUnit",
+    #             },
+    #             label: "XmlStringMetricLabel",
+    #             return_data: false,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] metric_data_queries
+    #   One or more metric data queries to provide the data points for a
+    #   scaling metric. Use multiple metric data queries only if you are
+    #   performing a math expression on returned data.
+    #   @return [Array<Types::MetricDataQuery>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PredictiveScalingCustomizedScalingMetric AWS API Documentation
+    #
+    class PredictiveScalingCustomizedScalingMetric < Struct.new(
+      :metric_data_queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This structure specifies the metrics and target utilization settings
     # for a predictive scaling policy.
     #
@@ -5872,6 +6305,14 @@ module Aws::AutoScaling
     #   requests received by each instance is as close to 1000 requests per
     #   minute as possible at all times.
     #
+    # For information about using customized metrics with predictive
+    # scaling, see [Advanced predictive scaling policy configurations using
+    # customized metrics][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/predictive-scaling-customized-metric-specification.html
+    #
     # @note When making an API call, you may pass PredictiveScalingMetricSpecification
     #   data as a hash:
     #
@@ -5889,24 +6330,118 @@ module Aws::AutoScaling
     #           predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
     #           resource_label: "XmlStringMaxLen1023",
     #         },
+    #         customized_scaling_metric_specification: {
+    #           metric_data_queries: [ # required
+    #             {
+    #               id: "XmlStringMaxLen255", # required
+    #               expression: "XmlStringMaxLen1023",
+    #               metric_stat: {
+    #                 metric: { # required
+    #                   namespace: "MetricNamespace", # required
+    #                   metric_name: "MetricName", # required
+    #                   dimensions: [
+    #                     {
+    #                       name: "MetricDimensionName", # required
+    #                       value: "MetricDimensionValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 stat: "XmlStringMetricStat", # required
+    #                 unit: "MetricUnit",
+    #               },
+    #               label: "XmlStringMetricLabel",
+    #               return_data: false,
+    #             },
+    #           ],
+    #         },
+    #         customized_load_metric_specification: {
+    #           metric_data_queries: [ # required
+    #             {
+    #               id: "XmlStringMaxLen255", # required
+    #               expression: "XmlStringMaxLen1023",
+    #               metric_stat: {
+    #                 metric: { # required
+    #                   namespace: "MetricNamespace", # required
+    #                   metric_name: "MetricName", # required
+    #                   dimensions: [
+    #                     {
+    #                       name: "MetricDimensionName", # required
+    #                       value: "MetricDimensionValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 stat: "XmlStringMetricStat", # required
+    #                 unit: "MetricUnit",
+    #               },
+    #               label: "XmlStringMetricLabel",
+    #               return_data: false,
+    #             },
+    #           ],
+    #         },
+    #         customized_capacity_metric_specification: {
+    #           metric_data_queries: [ # required
+    #             {
+    #               id: "XmlStringMaxLen255", # required
+    #               expression: "XmlStringMaxLen1023",
+    #               metric_stat: {
+    #                 metric: { # required
+    #                   namespace: "MetricNamespace", # required
+    #                   metric_name: "MetricName", # required
+    #                   dimensions: [
+    #                     {
+    #                       name: "MetricDimensionName", # required
+    #                       value: "MetricDimensionValue", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 stat: "XmlStringMetricStat", # required
+    #                 unit: "MetricUnit",
+    #               },
+    #               label: "XmlStringMetricLabel",
+    #               return_data: false,
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] target_value
     #   Specifies the target utilization.
+    #
+    #   <note markdown="1"> Some metrics are based on a count instead of a percentage, such as
+    #   the request count for an Application Load Balancer or the number of
+    #   messages in an SQS queue. If the scaling policy specifies one of
+    #   these metrics, specify the target utilization as the optimal average
+    #   request or message count per instance during any one-minute
+    #   interval.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @!attribute [rw] predefined_metric_pair_specification
-    #   The metric pair specification from which Amazon EC2 Auto Scaling
-    #   determines the appropriate scaling metric and load metric to use.
+    #   The predefined metric pair specification from which Amazon EC2 Auto
+    #   Scaling determines the appropriate scaling metric and load metric to
+    #   use.
     #   @return [Types::PredictiveScalingPredefinedMetricPair]
     #
     # @!attribute [rw] predefined_scaling_metric_specification
-    #   The scaling metric specification.
+    #   The predefined scaling metric specification.
     #   @return [Types::PredictiveScalingPredefinedScalingMetric]
     #
     # @!attribute [rw] predefined_load_metric_specification
-    #   The load metric specification.
+    #   The predefined load metric specification.
     #   @return [Types::PredictiveScalingPredefinedLoadMetric]
+    #
+    # @!attribute [rw] customized_scaling_metric_specification
+    #   The customized scaling metric specification.
+    #   @return [Types::PredictiveScalingCustomizedScalingMetric]
+    #
+    # @!attribute [rw] customized_load_metric_specification
+    #   The customized load metric specification.
+    #   @return [Types::PredictiveScalingCustomizedLoadMetric]
+    #
+    # @!attribute [rw] customized_capacity_metric_specification
+    #   The customized capacity metric specification.
+    #   @return [Types::PredictiveScalingCustomizedCapacityMetric]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PredictiveScalingMetricSpecification AWS API Documentation
     #
@@ -5914,7 +6449,10 @@ module Aws::AutoScaling
       :target_value,
       :predefined_metric_pair_specification,
       :predefined_scaling_metric_specification,
-      :predefined_load_metric_specification)
+      :predefined_load_metric_specification,
+      :customized_scaling_metric_specification,
+      :customized_load_metric_specification,
+      :customized_capacity_metric_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6341,6 +6879,78 @@ module Aws::AutoScaling
     #               predefined_load_metric_specification: {
     #                 predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
     #                 resource_label: "XmlStringMaxLen1023",
+    #               },
+    #               customized_scaling_metric_specification: {
+    #                 metric_data_queries: [ # required
+    #                   {
+    #                     id: "XmlStringMaxLen255", # required
+    #                     expression: "XmlStringMaxLen1023",
+    #                     metric_stat: {
+    #                       metric: { # required
+    #                         namespace: "MetricNamespace", # required
+    #                         metric_name: "MetricName", # required
+    #                         dimensions: [
+    #                           {
+    #                             name: "MetricDimensionName", # required
+    #                             value: "MetricDimensionValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                       stat: "XmlStringMetricStat", # required
+    #                       unit: "MetricUnit",
+    #                     },
+    #                     label: "XmlStringMetricLabel",
+    #                     return_data: false,
+    #                   },
+    #                 ],
+    #               },
+    #               customized_load_metric_specification: {
+    #                 metric_data_queries: [ # required
+    #                   {
+    #                     id: "XmlStringMaxLen255", # required
+    #                     expression: "XmlStringMaxLen1023",
+    #                     metric_stat: {
+    #                       metric: { # required
+    #                         namespace: "MetricNamespace", # required
+    #                         metric_name: "MetricName", # required
+    #                         dimensions: [
+    #                           {
+    #                             name: "MetricDimensionName", # required
+    #                             value: "MetricDimensionValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                       stat: "XmlStringMetricStat", # required
+    #                       unit: "MetricUnit",
+    #                     },
+    #                     label: "XmlStringMetricLabel",
+    #                     return_data: false,
+    #                   },
+    #                 ],
+    #               },
+    #               customized_capacity_metric_specification: {
+    #                 metric_data_queries: [ # required
+    #                   {
+    #                     id: "XmlStringMaxLen255", # required
+    #                     expression: "XmlStringMaxLen1023",
+    #                     metric_stat: {
+    #                       metric: { # required
+    #                         namespace: "MetricNamespace", # required
+    #                         metric_name: "MetricName", # required
+    #                         dimensions: [
+    #                           {
+    #                             name: "MetricDimensionName", # required
+    #                             value: "MetricDimensionValue", # required
+    #                           },
+    #                         ],
+    #                       },
+    #                       stat: "XmlStringMetricStat", # required
+    #                       unit: "MetricUnit",
+    #                     },
+    #                     label: "XmlStringMetricLabel",
+    #                     return_data: false,
+    #                   },
+    #                 ],
     #               },
     #             },
     #           ],

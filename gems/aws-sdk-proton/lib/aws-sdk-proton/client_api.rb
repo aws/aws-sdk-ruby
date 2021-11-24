@@ -39,12 +39,16 @@ module Aws::Proton
     CreateEnvironmentTemplateOutput = Shapes::StructureShape.new(name: 'CreateEnvironmentTemplateOutput')
     CreateEnvironmentTemplateVersionInput = Shapes::StructureShape.new(name: 'CreateEnvironmentTemplateVersionInput')
     CreateEnvironmentTemplateVersionOutput = Shapes::StructureShape.new(name: 'CreateEnvironmentTemplateVersionOutput')
+    CreateRepositoryInput = Shapes::StructureShape.new(name: 'CreateRepositoryInput')
+    CreateRepositoryOutput = Shapes::StructureShape.new(name: 'CreateRepositoryOutput')
     CreateServiceInput = Shapes::StructureShape.new(name: 'CreateServiceInput')
     CreateServiceOutput = Shapes::StructureShape.new(name: 'CreateServiceOutput')
     CreateServiceTemplateInput = Shapes::StructureShape.new(name: 'CreateServiceTemplateInput')
     CreateServiceTemplateOutput = Shapes::StructureShape.new(name: 'CreateServiceTemplateOutput')
     CreateServiceTemplateVersionInput = Shapes::StructureShape.new(name: 'CreateServiceTemplateVersionInput')
     CreateServiceTemplateVersionOutput = Shapes::StructureShape.new(name: 'CreateServiceTemplateVersionOutput')
+    CreateTemplateSyncConfigInput = Shapes::StructureShape.new(name: 'CreateTemplateSyncConfigInput')
+    CreateTemplateSyncConfigOutput = Shapes::StructureShape.new(name: 'CreateTemplateSyncConfigOutput')
     DeleteEnvironmentAccountConnectionInput = Shapes::StructureShape.new(name: 'DeleteEnvironmentAccountConnectionInput')
     DeleteEnvironmentAccountConnectionOutput = Shapes::StructureShape.new(name: 'DeleteEnvironmentAccountConnectionOutput')
     DeleteEnvironmentInput = Shapes::StructureShape.new(name: 'DeleteEnvironmentInput')
@@ -53,16 +57,22 @@ module Aws::Proton
     DeleteEnvironmentTemplateOutput = Shapes::StructureShape.new(name: 'DeleteEnvironmentTemplateOutput')
     DeleteEnvironmentTemplateVersionInput = Shapes::StructureShape.new(name: 'DeleteEnvironmentTemplateVersionInput')
     DeleteEnvironmentTemplateVersionOutput = Shapes::StructureShape.new(name: 'DeleteEnvironmentTemplateVersionOutput')
+    DeleteRepositoryInput = Shapes::StructureShape.new(name: 'DeleteRepositoryInput')
+    DeleteRepositoryOutput = Shapes::StructureShape.new(name: 'DeleteRepositoryOutput')
     DeleteServiceInput = Shapes::StructureShape.new(name: 'DeleteServiceInput')
     DeleteServiceOutput = Shapes::StructureShape.new(name: 'DeleteServiceOutput')
     DeleteServiceTemplateInput = Shapes::StructureShape.new(name: 'DeleteServiceTemplateInput')
     DeleteServiceTemplateOutput = Shapes::StructureShape.new(name: 'DeleteServiceTemplateOutput')
     DeleteServiceTemplateVersionInput = Shapes::StructureShape.new(name: 'DeleteServiceTemplateVersionInput')
     DeleteServiceTemplateVersionOutput = Shapes::StructureShape.new(name: 'DeleteServiceTemplateVersionOutput')
+    DeleteTemplateSyncConfigInput = Shapes::StructureShape.new(name: 'DeleteTemplateSyncConfigInput')
+    DeleteTemplateSyncConfigOutput = Shapes::StructureShape.new(name: 'DeleteTemplateSyncConfigOutput')
+    DeploymentId = Shapes::StringShape.new(name: 'DeploymentId')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
     DeploymentUpdateType = Shapes::StringShape.new(name: 'DeploymentUpdateType')
     Description = Shapes::StringShape.new(name: 'Description')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
+    EmptyNextToken = Shapes::StringShape.new(name: 'EmptyNextToken')
     Environment = Shapes::StructureShape.new(name: 'Environment')
     EnvironmentAccountConnection = Shapes::StructureShape.new(name: 'EnvironmentAccountConnection')
     EnvironmentAccountConnectionArn = Shapes::StringShape.new(name: 'EnvironmentAccountConnectionArn')
@@ -97,6 +107,10 @@ module Aws::Proton
     GetEnvironmentTemplateOutput = Shapes::StructureShape.new(name: 'GetEnvironmentTemplateOutput')
     GetEnvironmentTemplateVersionInput = Shapes::StructureShape.new(name: 'GetEnvironmentTemplateVersionInput')
     GetEnvironmentTemplateVersionOutput = Shapes::StructureShape.new(name: 'GetEnvironmentTemplateVersionOutput')
+    GetRepositoryInput = Shapes::StructureShape.new(name: 'GetRepositoryInput')
+    GetRepositoryOutput = Shapes::StructureShape.new(name: 'GetRepositoryOutput')
+    GetRepositorySyncStatusInput = Shapes::StructureShape.new(name: 'GetRepositorySyncStatusInput')
+    GetRepositorySyncStatusOutput = Shapes::StructureShape.new(name: 'GetRepositorySyncStatusOutput')
     GetServiceInput = Shapes::StructureShape.new(name: 'GetServiceInput')
     GetServiceInstanceInput = Shapes::StructureShape.new(name: 'GetServiceInstanceInput')
     GetServiceInstanceOutput = Shapes::StructureShape.new(name: 'GetServiceInstanceOutput')
@@ -105,18 +119,38 @@ module Aws::Proton
     GetServiceTemplateOutput = Shapes::StructureShape.new(name: 'GetServiceTemplateOutput')
     GetServiceTemplateVersionInput = Shapes::StructureShape.new(name: 'GetServiceTemplateVersionInput')
     GetServiceTemplateVersionOutput = Shapes::StructureShape.new(name: 'GetServiceTemplateVersionOutput')
+    GetTemplateSyncConfigInput = Shapes::StructureShape.new(name: 'GetTemplateSyncConfigInput')
+    GetTemplateSyncConfigOutput = Shapes::StructureShape.new(name: 'GetTemplateSyncConfigOutput')
+    GetTemplateSyncStatusInput = Shapes::StructureShape.new(name: 'GetTemplateSyncStatusInput')
+    GetTemplateSyncStatusOutput = Shapes::StructureShape.new(name: 'GetTemplateSyncStatusOutput')
     GitBranchName = Shapes::StringShape.new(name: 'GitBranchName')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListEnvironmentAccountConnectionsInput = Shapes::StructureShape.new(name: 'ListEnvironmentAccountConnectionsInput')
     ListEnvironmentAccountConnectionsOutput = Shapes::StructureShape.new(name: 'ListEnvironmentAccountConnectionsOutput')
+    ListEnvironmentOutputsInput = Shapes::StructureShape.new(name: 'ListEnvironmentOutputsInput')
+    ListEnvironmentOutputsOutput = Shapes::StructureShape.new(name: 'ListEnvironmentOutputsOutput')
+    ListEnvironmentProvisionedResourcesInput = Shapes::StructureShape.new(name: 'ListEnvironmentProvisionedResourcesInput')
+    ListEnvironmentProvisionedResourcesOutput = Shapes::StructureShape.new(name: 'ListEnvironmentProvisionedResourcesOutput')
     ListEnvironmentTemplateVersionsInput = Shapes::StructureShape.new(name: 'ListEnvironmentTemplateVersionsInput')
     ListEnvironmentTemplateVersionsOutput = Shapes::StructureShape.new(name: 'ListEnvironmentTemplateVersionsOutput')
     ListEnvironmentTemplatesInput = Shapes::StructureShape.new(name: 'ListEnvironmentTemplatesInput')
     ListEnvironmentTemplatesOutput = Shapes::StructureShape.new(name: 'ListEnvironmentTemplatesOutput')
     ListEnvironmentsInput = Shapes::StructureShape.new(name: 'ListEnvironmentsInput')
     ListEnvironmentsOutput = Shapes::StructureShape.new(name: 'ListEnvironmentsOutput')
+    ListRepositoriesInput = Shapes::StructureShape.new(name: 'ListRepositoriesInput')
+    ListRepositoriesOutput = Shapes::StructureShape.new(name: 'ListRepositoriesOutput')
+    ListRepositorySyncDefinitionsInput = Shapes::StructureShape.new(name: 'ListRepositorySyncDefinitionsInput')
+    ListRepositorySyncDefinitionsOutput = Shapes::StructureShape.new(name: 'ListRepositorySyncDefinitionsOutput')
+    ListServiceInstanceOutputsInput = Shapes::StructureShape.new(name: 'ListServiceInstanceOutputsInput')
+    ListServiceInstanceOutputsOutput = Shapes::StructureShape.new(name: 'ListServiceInstanceOutputsOutput')
+    ListServiceInstanceProvisionedResourcesInput = Shapes::StructureShape.new(name: 'ListServiceInstanceProvisionedResourcesInput')
+    ListServiceInstanceProvisionedResourcesOutput = Shapes::StructureShape.new(name: 'ListServiceInstanceProvisionedResourcesOutput')
     ListServiceInstancesInput = Shapes::StructureShape.new(name: 'ListServiceInstancesInput')
     ListServiceInstancesOutput = Shapes::StructureShape.new(name: 'ListServiceInstancesOutput')
+    ListServicePipelineOutputsInput = Shapes::StructureShape.new(name: 'ListServicePipelineOutputsInput')
+    ListServicePipelineOutputsOutput = Shapes::StructureShape.new(name: 'ListServicePipelineOutputsOutput')
+    ListServicePipelineProvisionedResourcesInput = Shapes::StructureShape.new(name: 'ListServicePipelineProvisionedResourcesInput')
+    ListServicePipelineProvisionedResourcesOutput = Shapes::StructureShape.new(name: 'ListServicePipelineProvisionedResourcesOutput')
     ListServiceTemplateVersionsInput = Shapes::StructureShape.new(name: 'ListServiceTemplateVersionsInput')
     ListServiceTemplateVersionsOutput = Shapes::StructureShape.new(name: 'ListServiceTemplateVersionsOutput')
     ListServiceTemplatesInput = Shapes::StructureShape.new(name: 'ListServiceTemplatesInput')
@@ -127,15 +161,49 @@ module Aws::Proton
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     MaxPageResults = Shapes::IntegerShape.new(name: 'MaxPageResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NotifyResourceDeploymentStatusChangeInput = Shapes::StructureShape.new(name: 'NotifyResourceDeploymentStatusChangeInput')
+    NotifyResourceDeploymentStatusChangeInputOutputsList = Shapes::ListShape.new(name: 'NotifyResourceDeploymentStatusChangeInputOutputsList')
+    NotifyResourceDeploymentStatusChangeOutput = Shapes::StructureShape.new(name: 'NotifyResourceDeploymentStatusChangeOutput')
+    Output = Shapes::StructureShape.new(name: 'Output')
+    OutputKey = Shapes::StringShape.new(name: 'OutputKey')
+    OutputValueString = Shapes::StringShape.new(name: 'OutputValueString')
+    OutputsList = Shapes::ListShape.new(name: 'OutputsList')
+    PipelineRoleArn = Shapes::StringShape.new(name: 'PipelineRoleArn')
+    ProvisionedResource = Shapes::StructureShape.new(name: 'ProvisionedResource')
+    ProvisionedResourceEngine = Shapes::StringShape.new(name: 'ProvisionedResourceEngine')
+    ProvisionedResourceIdentifier = Shapes::StringShape.new(name: 'ProvisionedResourceIdentifier')
+    ProvisionedResourceList = Shapes::ListShape.new(name: 'ProvisionedResourceList')
+    ProvisionedResourceName = Shapes::StringShape.new(name: 'ProvisionedResourceName')
     Provisioning = Shapes::StringShape.new(name: 'Provisioning')
     RejectEnvironmentAccountConnectionInput = Shapes::StructureShape.new(name: 'RejectEnvironmentAccountConnectionInput')
     RejectEnvironmentAccountConnectionOutput = Shapes::StructureShape.new(name: 'RejectEnvironmentAccountConnectionOutput')
+    Repository = Shapes::StructureShape.new(name: 'Repository')
+    RepositoryArn = Shapes::StringShape.new(name: 'RepositoryArn')
+    RepositoryBranch = Shapes::StructureShape.new(name: 'RepositoryBranch')
+    RepositoryBranchInput = Shapes::StructureShape.new(name: 'RepositoryBranchInput')
     RepositoryId = Shapes::StringShape.new(name: 'RepositoryId')
+    RepositoryName = Shapes::StringShape.new(name: 'RepositoryName')
+    RepositoryProvider = Shapes::StringShape.new(name: 'RepositoryProvider')
+    RepositorySummary = Shapes::StructureShape.new(name: 'RepositorySummary')
+    RepositorySummaryList = Shapes::ListShape.new(name: 'RepositorySummaryList')
+    RepositorySyncAttempt = Shapes::StructureShape.new(name: 'RepositorySyncAttempt')
+    RepositorySyncDefinition = Shapes::StructureShape.new(name: 'RepositorySyncDefinition')
+    RepositorySyncDefinitionList = Shapes::ListShape.new(name: 'RepositorySyncDefinitionList')
+    RepositorySyncEvent = Shapes::StructureShape.new(name: 'RepositorySyncEvent')
+    RepositorySyncEvents = Shapes::ListShape.new(name: 'RepositorySyncEvents')
+    RepositorySyncStatus = Shapes::StringShape.new(name: 'RepositorySyncStatus')
+    ResourceDeploymentStatus = Shapes::StringShape.new(name: 'ResourceDeploymentStatus')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceSyncAttempt = Shapes::StructureShape.new(name: 'ResourceSyncAttempt')
+    ResourceSyncEvent = Shapes::StructureShape.new(name: 'ResourceSyncEvent')
+    ResourceSyncEvents = Shapes::ListShape.new(name: 'ResourceSyncEvents')
+    ResourceSyncStatus = Shapes::StringShape.new(name: 'ResourceSyncStatus')
+    Revision = Shapes::StructureShape.new(name: 'Revision')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3ObjectSource = Shapes::StructureShape.new(name: 'S3ObjectSource')
+    SHA = Shapes::StringShape.new(name: 'SHA')
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceArn = Shapes::StringShape.new(name: 'ServiceArn')
     ServiceInstance = Shapes::StructureShape.new(name: 'ServiceInstance')
@@ -158,6 +226,9 @@ module Aws::Proton
     SpecContents = Shapes::StringShape.new(name: 'SpecContents')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
     String = Shapes::StringShape.new(name: 'String')
+    Subdirectory = Shapes::StringShape.new(name: 'Subdirectory')
+    SyncType = Shapes::StringShape.new(name: 'SyncType')
+    SyntheticNotifyResourceDeploymentStatusChangeInputString = Shapes::StringShape.new(name: 'SyntheticNotifyResourceDeploymentStatusChangeInputString')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -166,6 +237,8 @@ module Aws::Proton
     TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TemplateSchema = Shapes::StringShape.new(name: 'TemplateSchema')
+    TemplateSyncConfig = Shapes::StructureShape.new(name: 'TemplateSyncConfig')
+    TemplateType = Shapes::StringShape.new(name: 'TemplateType')
     TemplateVersionPart = Shapes::StringShape.new(name: 'TemplateVersionPart')
     TemplateVersionSourceInput = Shapes::UnionShape.new(name: 'TemplateVersionSourceInput')
     TemplateVersionStatus = Shapes::StringShape.new(name: 'TemplateVersionStatus')
@@ -193,6 +266,8 @@ module Aws::Proton
     UpdateServiceTemplateOutput = Shapes::StructureShape.new(name: 'UpdateServiceTemplateOutput')
     UpdateServiceTemplateVersionInput = Shapes::StructureShape.new(name: 'UpdateServiceTemplateVersionInput')
     UpdateServiceTemplateVersionOutput = Shapes::StructureShape.new(name: 'UpdateServiceTemplateVersionOutput')
+    UpdateTemplateSyncConfigInput = Shapes::StructureShape.new(name: 'UpdateTemplateSyncConfigInput')
+    UpdateTemplateSyncConfigOutput = Shapes::StructureShape.new(name: 'UpdateTemplateSyncConfigOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AcceptEnvironmentAccountConnectionInput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, required: true, location_name: "id"))
@@ -204,7 +279,8 @@ module Aws::Proton
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    AccountSettings.add_member(:pipeline_service_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "pipelineServiceRoleArn"))
+    AccountSettings.add_member(:pipeline_provisioning_repository, Shapes::ShapeRef.new(shape: RepositoryBranch, location_name: "pipelineProvisioningRepository"))
+    AccountSettings.add_member(:pipeline_service_role_arn, Shapes::ShapeRef.new(shape: PipelineRoleArn, location_name: "pipelineServiceRoleArn"))
     AccountSettings.struct_class = Types::AccountSettings
 
     CancelEnvironmentDeploymentInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
@@ -245,6 +321,7 @@ module Aws::Proton
     CreateEnvironmentAccountConnectionInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
     CreateEnvironmentAccountConnectionInput.add_member(:management_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location_name: "managementAccountId"))
     CreateEnvironmentAccountConnectionInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
+    CreateEnvironmentAccountConnectionInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateEnvironmentAccountConnectionInput.struct_class = Types::CreateEnvironmentAccountConnectionInput
 
     CreateEnvironmentAccountConnectionOutput.add_member(:environment_account_connection, Shapes::ShapeRef.new(shape: EnvironmentAccountConnection, required: true, location_name: "environmentAccountConnection"))
@@ -254,6 +331,7 @@ module Aws::Proton
     CreateEnvironmentInput.add_member(:environment_account_connection_id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, location_name: "environmentAccountConnectionId"))
     CreateEnvironmentInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateEnvironmentInput.add_member(:proton_service_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "protonServiceRoleArn"))
+    CreateEnvironmentInput.add_member(:provisioning_repository, Shapes::ShapeRef.new(shape: RepositoryBranchInput, location_name: "provisioningRepository"))
     CreateEnvironmentInput.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, required: true, location_name: "spec"))
     CreateEnvironmentInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateEnvironmentInput.add_member(:template_major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMajorVersion"))
@@ -285,6 +363,15 @@ module Aws::Proton
 
     CreateEnvironmentTemplateVersionOutput.add_member(:environment_template_version, Shapes::ShapeRef.new(shape: EnvironmentTemplateVersion, required: true, location_name: "environmentTemplateVersion"))
     CreateEnvironmentTemplateVersionOutput.struct_class = Types::CreateEnvironmentTemplateVersionOutput
+
+    CreateRepositoryInput.add_member(:connection_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "connectionArn"))
+    CreateRepositoryInput.add_member(:encryption_key, Shapes::ShapeRef.new(shape: Arn, location_name: "encryptionKey"))
+    CreateRepositoryInput.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "name"))
+    CreateRepositoryInput.add_member(:provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "provider"))
+    CreateRepositoryInput.struct_class = Types::CreateRepositoryInput
+
+    CreateRepositoryOutput.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, required: true, location_name: "repository"))
+    CreateRepositoryOutput.struct_class = Types::CreateRepositoryOutput
 
     CreateServiceInput.add_member(:branch_name, Shapes::ShapeRef.new(shape: GitBranchName, location_name: "branchName"))
     CreateServiceInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -324,6 +411,17 @@ module Aws::Proton
     CreateServiceTemplateVersionOutput.add_member(:service_template_version, Shapes::ShapeRef.new(shape: ServiceTemplateVersion, required: true, location_name: "serviceTemplateVersion"))
     CreateServiceTemplateVersionOutput.struct_class = Types::CreateServiceTemplateVersionOutput
 
+    CreateTemplateSyncConfigInput.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranchName, required: true, location_name: "branch"))
+    CreateTemplateSyncConfigInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    CreateTemplateSyncConfigInput.add_member(:repository_provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "repositoryProvider"))
+    CreateTemplateSyncConfigInput.add_member(:subdirectory, Shapes::ShapeRef.new(shape: Subdirectory, location_name: "subdirectory"))
+    CreateTemplateSyncConfigInput.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
+    CreateTemplateSyncConfigInput.add_member(:template_type, Shapes::ShapeRef.new(shape: TemplateType, required: true, location_name: "templateType"))
+    CreateTemplateSyncConfigInput.struct_class = Types::CreateTemplateSyncConfigInput
+
+    CreateTemplateSyncConfigOutput.add_member(:template_sync_config, Shapes::ShapeRef.new(shape: TemplateSyncConfig, location_name: "templateSyncConfig"))
+    CreateTemplateSyncConfigOutput.struct_class = Types::CreateTemplateSyncConfigOutput
+
     DeleteEnvironmentAccountConnectionInput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, required: true, location_name: "id"))
     DeleteEnvironmentAccountConnectionInput.struct_class = Types::DeleteEnvironmentAccountConnectionInput
 
@@ -350,6 +448,13 @@ module Aws::Proton
     DeleteEnvironmentTemplateVersionOutput.add_member(:environment_template_version, Shapes::ShapeRef.new(shape: EnvironmentTemplateVersion, location_name: "environmentTemplateVersion"))
     DeleteEnvironmentTemplateVersionOutput.struct_class = Types::DeleteEnvironmentTemplateVersionOutput
 
+    DeleteRepositoryInput.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "name"))
+    DeleteRepositoryInput.add_member(:provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "provider"))
+    DeleteRepositoryInput.struct_class = Types::DeleteRepositoryInput
+
+    DeleteRepositoryOutput.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
+    DeleteRepositoryOutput.struct_class = Types::DeleteRepositoryOutput
+
     DeleteServiceInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     DeleteServiceInput.struct_class = Types::DeleteServiceInput
 
@@ -370,6 +475,13 @@ module Aws::Proton
     DeleteServiceTemplateVersionOutput.add_member(:service_template_version, Shapes::ShapeRef.new(shape: ServiceTemplateVersion, location_name: "serviceTemplateVersion"))
     DeleteServiceTemplateVersionOutput.struct_class = Types::DeleteServiceTemplateVersionOutput
 
+    DeleteTemplateSyncConfigInput.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
+    DeleteTemplateSyncConfigInput.add_member(:template_type, Shapes::ShapeRef.new(shape: TemplateType, required: true, location_name: "templateType"))
+    DeleteTemplateSyncConfigInput.struct_class = Types::DeleteTemplateSyncConfigInput
+
+    DeleteTemplateSyncConfigOutput.add_member(:template_sync_config, Shapes::ShapeRef.new(shape: TemplateSyncConfig, location_name: "templateSyncConfig"))
+    DeleteTemplateSyncConfigOutput.struct_class = Types::DeleteTemplateSyncConfigOutput
+
     Environment.add_member(:arn, Shapes::ShapeRef.new(shape: EnvironmentArn, required: true, location_name: "arn"))
     Environment.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     Environment.add_member(:deployment_status, Shapes::ShapeRef.new(shape: DeploymentStatus, required: true, location_name: "deploymentStatus"))
@@ -382,6 +494,7 @@ module Aws::Proton
     Environment.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     Environment.add_member(:proton_service_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "protonServiceRoleArn"))
     Environment.add_member(:provisioning, Shapes::ShapeRef.new(shape: Provisioning, location_name: "provisioning"))
+    Environment.add_member(:provisioning_repository, Shapes::ShapeRef.new(shape: RepositoryBranch, location_name: "provisioningRepository"))
     Environment.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, location_name: "spec"))
     Environment.add_member(:template_major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMajorVersion"))
     Environment.add_member(:template_minor_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateMinorVersion"))
@@ -520,6 +633,22 @@ module Aws::Proton
     GetEnvironmentTemplateVersionOutput.add_member(:environment_template_version, Shapes::ShapeRef.new(shape: EnvironmentTemplateVersion, required: true, location_name: "environmentTemplateVersion"))
     GetEnvironmentTemplateVersionOutput.struct_class = Types::GetEnvironmentTemplateVersionOutput
 
+    GetRepositoryInput.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "name"))
+    GetRepositoryInput.add_member(:provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "provider"))
+    GetRepositoryInput.struct_class = Types::GetRepositoryInput
+
+    GetRepositoryOutput.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, required: true, location_name: "repository"))
+    GetRepositoryOutput.struct_class = Types::GetRepositoryOutput
+
+    GetRepositorySyncStatusInput.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranchName, required: true, location_name: "branch"))
+    GetRepositorySyncStatusInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    GetRepositorySyncStatusInput.add_member(:repository_provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "repositoryProvider"))
+    GetRepositorySyncStatusInput.add_member(:sync_type, Shapes::ShapeRef.new(shape: SyncType, required: true, location_name: "syncType"))
+    GetRepositorySyncStatusInput.struct_class = Types::GetRepositorySyncStatusInput
+
+    GetRepositorySyncStatusOutput.add_member(:latest_sync, Shapes::ShapeRef.new(shape: RepositorySyncAttempt, location_name: "latestSync"))
+    GetRepositorySyncStatusOutput.struct_class = Types::GetRepositorySyncStatusOutput
+
     GetServiceInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     GetServiceInput.struct_class = Types::GetServiceInput
 
@@ -547,6 +676,23 @@ module Aws::Proton
     GetServiceTemplateVersionOutput.add_member(:service_template_version, Shapes::ShapeRef.new(shape: ServiceTemplateVersion, required: true, location_name: "serviceTemplateVersion"))
     GetServiceTemplateVersionOutput.struct_class = Types::GetServiceTemplateVersionOutput
 
+    GetTemplateSyncConfigInput.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
+    GetTemplateSyncConfigInput.add_member(:template_type, Shapes::ShapeRef.new(shape: TemplateType, required: true, location_name: "templateType"))
+    GetTemplateSyncConfigInput.struct_class = Types::GetTemplateSyncConfigInput
+
+    GetTemplateSyncConfigOutput.add_member(:template_sync_config, Shapes::ShapeRef.new(shape: TemplateSyncConfig, location_name: "templateSyncConfig"))
+    GetTemplateSyncConfigOutput.struct_class = Types::GetTemplateSyncConfigOutput
+
+    GetTemplateSyncStatusInput.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
+    GetTemplateSyncStatusInput.add_member(:template_type, Shapes::ShapeRef.new(shape: TemplateType, required: true, location_name: "templateType"))
+    GetTemplateSyncStatusInput.add_member(:template_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, required: true, location_name: "templateVersion"))
+    GetTemplateSyncStatusInput.struct_class = Types::GetTemplateSyncStatusInput
+
+    GetTemplateSyncStatusOutput.add_member(:desired_state, Shapes::ShapeRef.new(shape: Revision, location_name: "desiredState"))
+    GetTemplateSyncStatusOutput.add_member(:latest_successful_sync, Shapes::ShapeRef.new(shape: ResourceSyncAttempt, location_name: "latestSuccessfulSync"))
+    GetTemplateSyncStatusOutput.add_member(:latest_sync, Shapes::ShapeRef.new(shape: ResourceSyncAttempt, location_name: "latestSync"))
+    GetTemplateSyncStatusOutput.struct_class = Types::GetTemplateSyncStatusOutput
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -560,6 +706,22 @@ module Aws::Proton
     ListEnvironmentAccountConnectionsOutput.add_member(:environment_account_connections, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionSummaryList, required: true, location_name: "environmentAccountConnections"))
     ListEnvironmentAccountConnectionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListEnvironmentAccountConnectionsOutput.struct_class = Types::ListEnvironmentAccountConnectionsOutput
+
+    ListEnvironmentOutputsInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
+    ListEnvironmentOutputsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListEnvironmentOutputsInput.struct_class = Types::ListEnvironmentOutputsInput
+
+    ListEnvironmentOutputsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListEnvironmentOutputsOutput.add_member(:outputs, Shapes::ShapeRef.new(shape: OutputsList, required: true, location_name: "outputs"))
+    ListEnvironmentOutputsOutput.struct_class = Types::ListEnvironmentOutputsOutput
+
+    ListEnvironmentProvisionedResourcesInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "environmentName"))
+    ListEnvironmentProvisionedResourcesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListEnvironmentProvisionedResourcesInput.struct_class = Types::ListEnvironmentProvisionedResourcesInput
+
+    ListEnvironmentProvisionedResourcesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListEnvironmentProvisionedResourcesOutput.add_member(:provisioned_resources, Shapes::ShapeRef.new(shape: ProvisionedResourceList, required: true, location_name: "provisionedResources"))
+    ListEnvironmentProvisionedResourcesOutput.struct_class = Types::ListEnvironmentProvisionedResourcesOutput
 
     ListEnvironmentTemplateVersionsInput.add_member(:major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, location_name: "majorVersion"))
     ListEnvironmentTemplateVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPageResults, location_name: "maxResults"))
@@ -588,6 +750,42 @@ module Aws::Proton
     ListEnvironmentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListEnvironmentsOutput.struct_class = Types::ListEnvironmentsOutput
 
+    ListRepositoriesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPageResults, location_name: "maxResults"))
+    ListRepositoriesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRepositoriesInput.struct_class = Types::ListRepositoriesInput
+
+    ListRepositoriesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRepositoriesOutput.add_member(:repositories, Shapes::ShapeRef.new(shape: RepositorySummaryList, required: true, location_name: "repositories"))
+    ListRepositoriesOutput.struct_class = Types::ListRepositoriesOutput
+
+    ListRepositorySyncDefinitionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListRepositorySyncDefinitionsInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    ListRepositorySyncDefinitionsInput.add_member(:repository_provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "repositoryProvider"))
+    ListRepositorySyncDefinitionsInput.add_member(:sync_type, Shapes::ShapeRef.new(shape: SyncType, required: true, location_name: "syncType"))
+    ListRepositorySyncDefinitionsInput.struct_class = Types::ListRepositorySyncDefinitionsInput
+
+    ListRepositorySyncDefinitionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListRepositorySyncDefinitionsOutput.add_member(:sync_definitions, Shapes::ShapeRef.new(shape: RepositorySyncDefinitionList, required: true, location_name: "syncDefinitions"))
+    ListRepositorySyncDefinitionsOutput.struct_class = Types::ListRepositorySyncDefinitionsOutput
+
+    ListServiceInstanceOutputsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListServiceInstanceOutputsInput.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceInstanceName"))
+    ListServiceInstanceOutputsInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    ListServiceInstanceOutputsInput.struct_class = Types::ListServiceInstanceOutputsInput
+
+    ListServiceInstanceOutputsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListServiceInstanceOutputsOutput.add_member(:outputs, Shapes::ShapeRef.new(shape: OutputsList, required: true, location_name: "outputs"))
+    ListServiceInstanceOutputsOutput.struct_class = Types::ListServiceInstanceOutputsOutput
+
+    ListServiceInstanceProvisionedResourcesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListServiceInstanceProvisionedResourcesInput.add_member(:service_instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceInstanceName"))
+    ListServiceInstanceProvisionedResourcesInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    ListServiceInstanceProvisionedResourcesInput.struct_class = Types::ListServiceInstanceProvisionedResourcesInput
+
+    ListServiceInstanceProvisionedResourcesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListServiceInstanceProvisionedResourcesOutput.add_member(:provisioned_resources, Shapes::ShapeRef.new(shape: ProvisionedResourceList, required: true, location_name: "provisionedResources"))
+    ListServiceInstanceProvisionedResourcesOutput.struct_class = Types::ListServiceInstanceProvisionedResourcesOutput
+
     ListServiceInstancesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPageResults, location_name: "maxResults"))
     ListServiceInstancesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListServiceInstancesInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "serviceName"))
@@ -596,6 +794,22 @@ module Aws::Proton
     ListServiceInstancesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListServiceInstancesOutput.add_member(:service_instances, Shapes::ShapeRef.new(shape: ServiceInstanceSummaryList, required: true, location_name: "serviceInstances"))
     ListServiceInstancesOutput.struct_class = Types::ListServiceInstancesOutput
+
+    ListServicePipelineOutputsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListServicePipelineOutputsInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    ListServicePipelineOutputsInput.struct_class = Types::ListServicePipelineOutputsInput
+
+    ListServicePipelineOutputsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListServicePipelineOutputsOutput.add_member(:outputs, Shapes::ShapeRef.new(shape: OutputsList, required: true, location_name: "outputs"))
+    ListServicePipelineOutputsOutput.struct_class = Types::ListServicePipelineOutputsOutput
+
+    ListServicePipelineProvisionedResourcesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListServicePipelineProvisionedResourcesInput.add_member(:service_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "serviceName"))
+    ListServicePipelineProvisionedResourcesInput.struct_class = Types::ListServicePipelineProvisionedResourcesInput
+
+    ListServicePipelineProvisionedResourcesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: EmptyNextToken, location_name: "nextToken"))
+    ListServicePipelineProvisionedResourcesOutput.add_member(:provisioned_resources, Shapes::ShapeRef.new(shape: ProvisionedResourceList, required: true, location_name: "provisionedResources"))
+    ListServicePipelineProvisionedResourcesOutput.struct_class = Types::ListServicePipelineProvisionedResourcesOutput
 
     ListServiceTemplateVersionsInput.add_member(:major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, location_name: "majorVersion"))
     ListServiceTemplateVersionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPageResults, location_name: "maxResults"))
@@ -632,14 +846,107 @@ module Aws::Proton
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
 
+    NotifyResourceDeploymentStatusChangeInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
+    NotifyResourceDeploymentStatusChangeInput.add_member(:outputs, Shapes::ShapeRef.new(shape: NotifyResourceDeploymentStatusChangeInputOutputsList, location_name: "outputs"))
+    NotifyResourceDeploymentStatusChangeInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    NotifyResourceDeploymentStatusChangeInput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceDeploymentStatus, required: true, location_name: "status"))
+    NotifyResourceDeploymentStatusChangeInput.add_member(:status_message, Shapes::ShapeRef.new(shape: SyntheticNotifyResourceDeploymentStatusChangeInputString, location_name: "statusMessage"))
+    NotifyResourceDeploymentStatusChangeInput.struct_class = Types::NotifyResourceDeploymentStatusChangeInput
+
+    NotifyResourceDeploymentStatusChangeInputOutputsList.member = Shapes::ShapeRef.new(shape: Output)
+
+    NotifyResourceDeploymentStatusChangeOutput.struct_class = Types::NotifyResourceDeploymentStatusChangeOutput
+
+    Output.add_member(:key, Shapes::ShapeRef.new(shape: OutputKey, location_name: "key"))
+    Output.add_member(:value_string, Shapes::ShapeRef.new(shape: OutputValueString, location_name: "valueString"))
+    Output.struct_class = Types::Output
+
+    OutputsList.member = Shapes::ShapeRef.new(shape: Output)
+
+    ProvisionedResource.add_member(:identifier, Shapes::ShapeRef.new(shape: ProvisionedResourceIdentifier, location_name: "identifier"))
+    ProvisionedResource.add_member(:name, Shapes::ShapeRef.new(shape: ProvisionedResourceName, location_name: "name"))
+    ProvisionedResource.add_member(:provisioning_engine, Shapes::ShapeRef.new(shape: ProvisionedResourceEngine, location_name: "provisioningEngine"))
+    ProvisionedResource.struct_class = Types::ProvisionedResource
+
+    ProvisionedResourceList.member = Shapes::ShapeRef.new(shape: ProvisionedResource)
+
     RejectEnvironmentAccountConnectionInput.add_member(:id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, required: true, location_name: "id"))
     RejectEnvironmentAccountConnectionInput.struct_class = Types::RejectEnvironmentAccountConnectionInput
 
     RejectEnvironmentAccountConnectionOutput.add_member(:environment_account_connection, Shapes::ShapeRef.new(shape: EnvironmentAccountConnection, required: true, location_name: "environmentAccountConnection"))
     RejectEnvironmentAccountConnectionOutput.struct_class = Types::RejectEnvironmentAccountConnectionOutput
 
+    Repository.add_member(:arn, Shapes::ShapeRef.new(shape: RepositoryArn, required: true, location_name: "arn"))
+    Repository.add_member(:connection_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "connectionArn"))
+    Repository.add_member(:encryption_key, Shapes::ShapeRef.new(shape: Arn, location_name: "encryptionKey"))
+    Repository.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "name"))
+    Repository.add_member(:provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "provider"))
+    Repository.struct_class = Types::Repository
+
+    RepositoryBranch.add_member(:arn, Shapes::ShapeRef.new(shape: RepositoryArn, required: true, location_name: "arn"))
+    RepositoryBranch.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranchName, required: true, location_name: "branch"))
+    RepositoryBranch.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "name"))
+    RepositoryBranch.add_member(:provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "provider"))
+    RepositoryBranch.struct_class = Types::RepositoryBranch
+
+    RepositoryBranchInput.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranchName, required: true, location_name: "branch"))
+    RepositoryBranchInput.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "name"))
+    RepositoryBranchInput.add_member(:provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "provider"))
+    RepositoryBranchInput.struct_class = Types::RepositoryBranchInput
+
+    RepositorySummary.add_member(:arn, Shapes::ShapeRef.new(shape: RepositoryArn, required: true, location_name: "arn"))
+    RepositorySummary.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "name"))
+    RepositorySummary.add_member(:provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "provider"))
+    RepositorySummary.struct_class = Types::RepositorySummary
+
+    RepositorySummaryList.member = Shapes::ShapeRef.new(shape: RepositorySummary)
+
+    RepositorySyncAttempt.add_member(:events, Shapes::ShapeRef.new(shape: RepositorySyncEvents, required: true, location_name: "events"))
+    RepositorySyncAttempt.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startedAt"))
+    RepositorySyncAttempt.add_member(:status, Shapes::ShapeRef.new(shape: RepositorySyncStatus, required: true, location_name: "status"))
+    RepositorySyncAttempt.struct_class = Types::RepositorySyncAttempt
+
+    RepositorySyncDefinition.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranchName, required: true, location_name: "branch"))
+    RepositorySyncDefinition.add_member(:directory, Shapes::ShapeRef.new(shape: String, required: true, location_name: "directory"))
+    RepositorySyncDefinition.add_member(:parent, Shapes::ShapeRef.new(shape: String, required: true, location_name: "parent"))
+    RepositorySyncDefinition.add_member(:target, Shapes::ShapeRef.new(shape: String, required: true, location_name: "target"))
+    RepositorySyncDefinition.struct_class = Types::RepositorySyncDefinition
+
+    RepositorySyncDefinitionList.member = Shapes::ShapeRef.new(shape: RepositorySyncDefinition)
+
+    RepositorySyncEvent.add_member(:event, Shapes::ShapeRef.new(shape: String, required: true, location_name: "event"))
+    RepositorySyncEvent.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    RepositorySyncEvent.add_member(:time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "time"))
+    RepositorySyncEvent.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
+    RepositorySyncEvent.struct_class = Types::RepositorySyncEvent
+
+    RepositorySyncEvents.member = Shapes::ShapeRef.new(shape: RepositorySyncEvent)
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceSyncAttempt.add_member(:events, Shapes::ShapeRef.new(shape: ResourceSyncEvents, required: true, location_name: "events"))
+    ResourceSyncAttempt.add_member(:initial_revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "initialRevision"))
+    ResourceSyncAttempt.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startedAt"))
+    ResourceSyncAttempt.add_member(:status, Shapes::ShapeRef.new(shape: ResourceSyncStatus, required: true, location_name: "status"))
+    ResourceSyncAttempt.add_member(:target, Shapes::ShapeRef.new(shape: String, required: true, location_name: "target"))
+    ResourceSyncAttempt.add_member(:target_revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "targetRevision"))
+    ResourceSyncAttempt.struct_class = Types::ResourceSyncAttempt
+
+    ResourceSyncEvent.add_member(:event, Shapes::ShapeRef.new(shape: String, required: true, location_name: "event"))
+    ResourceSyncEvent.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    ResourceSyncEvent.add_member(:time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "time"))
+    ResourceSyncEvent.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
+    ResourceSyncEvent.struct_class = Types::ResourceSyncEvent
+
+    ResourceSyncEvents.member = Shapes::ShapeRef.new(shape: ResourceSyncEvent)
+
+    Revision.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranchName, required: true, location_name: "branch"))
+    Revision.add_member(:directory, Shapes::ShapeRef.new(shape: String, required: true, location_name: "directory"))
+    Revision.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    Revision.add_member(:repository_provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "repositoryProvider"))
+    Revision.add_member(:sha, Shapes::ShapeRef.new(shape: SHA, required: true, location_name: "sha"))
+    Revision.struct_class = Types::Revision
 
     S3ObjectSource.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "bucket"))
     S3ObjectSource.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "key"))
@@ -783,6 +1090,14 @@ module Aws::Proton
 
     TagResourceOutput.struct_class = Types::TagResourceOutput
 
+    TemplateSyncConfig.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranchName, required: true, location_name: "branch"))
+    TemplateSyncConfig.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    TemplateSyncConfig.add_member(:repository_provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "repositoryProvider"))
+    TemplateSyncConfig.add_member(:subdirectory, Shapes::ShapeRef.new(shape: Subdirectory, location_name: "subdirectory"))
+    TemplateSyncConfig.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
+    TemplateSyncConfig.add_member(:template_type, Shapes::ShapeRef.new(shape: TemplateType, required: true, location_name: "templateType"))
+    TemplateSyncConfig.struct_class = Types::TemplateSyncConfig
+
     TemplateVersionSourceInput.add_member(:s3, Shapes::ShapeRef.new(shape: S3ObjectSource, location_name: "s3"))
     TemplateVersionSourceInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     TemplateVersionSourceInput.add_member_subclass(:s3, Types::TemplateVersionSourceInput::S3)
@@ -798,7 +1113,8 @@ module Aws::Proton
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
-    UpdateAccountSettingsInput.add_member(:pipeline_service_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "pipelineServiceRoleArn"))
+    UpdateAccountSettingsInput.add_member(:pipeline_provisioning_repository, Shapes::ShapeRef.new(shape: RepositoryBranchInput, location_name: "pipelineProvisioningRepository"))
+    UpdateAccountSettingsInput.add_member(:pipeline_service_role_arn, Shapes::ShapeRef.new(shape: PipelineRoleArn, location_name: "pipelineServiceRoleArn"))
     UpdateAccountSettingsInput.struct_class = Types::UpdateAccountSettingsInput
 
     UpdateAccountSettingsOutput.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, required: true, location_name: "accountSettings"))
@@ -816,6 +1132,7 @@ module Aws::Proton
     UpdateEnvironmentInput.add_member(:environment_account_connection_id, Shapes::ShapeRef.new(shape: EnvironmentAccountConnectionId, location_name: "environmentAccountConnectionId"))
     UpdateEnvironmentInput.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     UpdateEnvironmentInput.add_member(:proton_service_role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "protonServiceRoleArn"))
+    UpdateEnvironmentInput.add_member(:provisioning_repository, Shapes::ShapeRef.new(shape: RepositoryBranchInput, location_name: "provisioningRepository"))
     UpdateEnvironmentInput.add_member(:spec, Shapes::ShapeRef.new(shape: SpecContents, location_name: "spec"))
     UpdateEnvironmentInput.add_member(:template_major_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, location_name: "templateMajorVersion"))
     UpdateEnvironmentInput.add_member(:template_minor_version, Shapes::ShapeRef.new(shape: TemplateVersionPart, location_name: "templateMinorVersion"))
@@ -889,6 +1206,17 @@ module Aws::Proton
 
     UpdateServiceTemplateVersionOutput.add_member(:service_template_version, Shapes::ShapeRef.new(shape: ServiceTemplateVersion, required: true, location_name: "serviceTemplateVersion"))
     UpdateServiceTemplateVersionOutput.struct_class = Types::UpdateServiceTemplateVersionOutput
+
+    UpdateTemplateSyncConfigInput.add_member(:branch, Shapes::ShapeRef.new(shape: GitBranchName, required: true, location_name: "branch"))
+    UpdateTemplateSyncConfigInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    UpdateTemplateSyncConfigInput.add_member(:repository_provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "repositoryProvider"))
+    UpdateTemplateSyncConfigInput.add_member(:subdirectory, Shapes::ShapeRef.new(shape: Subdirectory, location_name: "subdirectory"))
+    UpdateTemplateSyncConfigInput.add_member(:template_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "templateName"))
+    UpdateTemplateSyncConfigInput.add_member(:template_type, Shapes::ShapeRef.new(shape: TemplateType, required: true, location_name: "templateType"))
+    UpdateTemplateSyncConfigInput.struct_class = Types::UpdateTemplateSyncConfigInput
+
+    UpdateTemplateSyncConfigOutput.add_member(:template_sync_config, Shapes::ShapeRef.new(shape: TemplateSyncConfig, location_name: "templateSyncConfig"))
+    UpdateTemplateSyncConfigOutput.struct_class = Types::UpdateTemplateSyncConfigOutput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
@@ -1026,6 +1354,20 @@ module Aws::Proton
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_repository, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRepository"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRepositoryInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateRepositoryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_service, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateService"
         o.http_method = "POST"
@@ -1067,6 +1409,20 @@ module Aws::Proton
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_template_sync_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTemplateSyncConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateTemplateSyncConfigInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateTemplateSyncConfigOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1126,6 +1482,20 @@ module Aws::Proton
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_repository, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRepository"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRepositoryInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRepositoryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_service, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteService"
         o.http_method = "POST"
@@ -1160,6 +1530,20 @@ module Aws::Proton
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteServiceTemplateVersionInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteServiceTemplateVersionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_template_sync_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTemplateSyncConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTemplateSyncConfigInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTemplateSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1233,6 +1617,32 @@ module Aws::Proton
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_repository, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRepository"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRepositoryInput)
+        o.output = Shapes::ShapeRef.new(shape: GetRepositoryOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_repository_sync_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRepositorySyncStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRepositorySyncStatusInput)
+        o.output = Shapes::ShapeRef.new(shape: GetRepositorySyncStatusOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_service, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetService"
         o.http_method = "POST"
@@ -1285,6 +1695,32 @@ module Aws::Proton
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_template_sync_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTemplateSyncConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTemplateSyncConfigInput)
+        o.output = Shapes::ShapeRef.new(shape: GetTemplateSyncConfigOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_template_sync_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTemplateSyncStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTemplateSyncStatusInput)
+        o.output = Shapes::ShapeRef.new(shape: GetTemplateSyncStatusOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:list_environment_account_connections, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEnvironmentAccountConnections"
         o.http_method = "POST"
@@ -1297,6 +1733,42 @@ module Aws::Proton
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_environment_outputs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEnvironmentOutputs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEnvironmentOutputsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListEnvironmentOutputsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_environment_provisioned_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEnvironmentProvisionedResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEnvironmentProvisionedResourcesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListEnvironmentProvisionedResourcesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"
           }
@@ -1359,6 +1831,78 @@ module Aws::Proton
         )
       end)
 
+      api.add_operation(:list_repositories, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRepositories"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRepositoriesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListRepositoriesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_repository_sync_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRepositorySyncDefinitions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRepositorySyncDefinitionsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListRepositorySyncDefinitionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_service_instance_outputs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServiceInstanceOutputs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListServiceInstanceOutputsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListServiceInstanceOutputsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_service_instance_provisioned_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServiceInstanceProvisionedResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListServiceInstanceProvisionedResourcesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListServiceInstanceProvisionedResourcesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_service_instances, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListServiceInstances"
         o.http_method = "POST"
@@ -1372,6 +1916,42 @@ module Aws::Proton
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_service_pipeline_outputs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServicePipelineOutputs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListServicePipelineOutputsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListServicePipelineOutputsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_service_pipeline_provisioned_resources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServicePipelineProvisionedResources"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListServicePipelineProvisionedResourcesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListServicePipelineProvisionedResourcesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"
           }
@@ -1450,6 +2030,21 @@ module Aws::Proton
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:notify_resource_deployment_status_change, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "NotifyResourceDeploymentStatusChange"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: NotifyResourceDeploymentStatusChangeInput)
+        o.output = Shapes::ShapeRef.new(shape: NotifyResourceDeploymentStatusChangeOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:reject_environment_account_connection, Seahorse::Model::Operation.new.tap do |o|
@@ -1626,6 +2221,20 @@ module Aws::Proton
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateServiceTemplateVersionInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateServiceTemplateVersionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_template_sync_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTemplateSyncConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTemplateSyncConfigInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTemplateSyncConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

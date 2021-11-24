@@ -386,6 +386,43 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Associates a time series (data stream) with an asset property.
+    #
+    # @option params [required, String] :alias
+    #   The alias that identifies the time series.
+    #
+    # @option params [required, String] :asset_id
+    #   The ID of the asset in which the asset property was created.
+    #
+    # @option params [required, String] :property_id
+    #   The ID of the asset property.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_time_series_to_asset_property({
+    #     alias: "PropertyAlias", # required
+    #     asset_id: "ID", # required
+    #     property_id: "ID", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @overload associate_time_series_to_asset_property(params = {})
+    # @param [Hash] params ({})
+    def associate_time_series_to_asset_property(params = {}, options = {})
+      req = build_request(:associate_time_series_to_asset_property, params)
+      req.send_request(options)
+    end
+
     # Associates a group (batch) of assets with an IoT SiteWise Monitor
     # project.
     #
@@ -1218,6 +1255,11 @@ module Aws::IoTSiteWise
 
     # Creates a project in the specified portal.
     #
+    # <note markdown="1"> Make sure that the project name and description don't contain
+    # confidential information.
+    #
+    #  </note>
+    #
     # @option params [required, String] :portal_id
     #   The ID of the portal in which to create the project.
     #
@@ -1517,6 +1559,58 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def delete_project(params = {}, options = {})
       req = build_request(:delete_project, params)
+      req.send_request(options)
+    end
+
+    # Deletes a time series (data stream). If you delete a time series
+    # that's associated with an asset property, the asset property still
+    # exists, but the time series will no longer be associated with this
+    # asset property.
+    #
+    # To identify a time series, do one of the following:
+    #
+    # * If the time series isn't associated with an asset property, specify
+    #   the `alias` of the time series.
+    #
+    # * If the time series is associated with an asset property, specify one
+    #   of the following:
+    #
+    #   * The `alias` of the time series.
+    #
+    #   * The `assetId` and `propertyId` that identifies the asset property.
+    #
+    # @option params [String] :alias
+    #   The alias that identifies the time series.
+    #
+    # @option params [String] :asset_id
+    #   The ID of the asset in which the asset property was created.
+    #
+    # @option params [String] :property_id
+    #   The ID of the asset property.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_time_series({
+    #     alias: "PropertyAlias",
+    #     asset_id: "ID",
+    #     property_id: "ID",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @overload delete_time_series(params = {})
+    # @param [Hash] params ({})
+    def delete_time_series(params = {}, options = {})
+      req = build_request(:delete_time_series, params)
       req.send_request(options)
     end
 
@@ -2133,6 +2227,7 @@ module Aws::IoTSiteWise
     #
     #   * {Types::DescribeStorageConfigurationResponse#storage_type #storage_type} => String
     #   * {Types::DescribeStorageConfigurationResponse#multi_layer_storage #multi_layer_storage} => Types::MultiLayerStorage
+    #   * {Types::DescribeStorageConfigurationResponse#disassociated_data_storage #disassociated_data_storage} => String
     #   * {Types::DescribeStorageConfigurationResponse#configuration_status #configuration_status} => Types::ConfigurationStatus
     #   * {Types::DescribeStorageConfigurationResponse#last_update_date #last_update_date} => Time
     #
@@ -2141,6 +2236,7 @@ module Aws::IoTSiteWise
     #   resp.storage_type #=> String, one of "SITEWISE_DEFAULT_STORAGE", "MULTI_LAYER_STORAGE"
     #   resp.multi_layer_storage.customer_managed_s3_storage.s3_resource_arn #=> String
     #   resp.multi_layer_storage.customer_managed_s3_storage.role_arn #=> String
+    #   resp.disassociated_data_storage #=> String, one of "ENABLED", "DISABLED"
     #   resp.configuration_status.state #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.configuration_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.configuration_status.error.message #=> String
@@ -2150,6 +2246,66 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def describe_storage_configuration(params = {}, options = {})
       req = build_request(:describe_storage_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a time series (data stream).
+    #
+    # To identify a time series, do one of the following:
+    #
+    # * If the time series isn't associated with an asset property, specify
+    #   the `alias` of the time series.
+    #
+    # * If the time series is associated with an asset property, specify one
+    #   of the following:
+    #
+    #   * The `alias` of the time series.
+    #
+    #   * The `assetId` and `propertyId` that identifies the asset property.
+    #
+    # @option params [String] :alias
+    #   The alias that identifies the time series.
+    #
+    # @option params [String] :asset_id
+    #   The ID of the asset in which the asset property was created.
+    #
+    # @option params [String] :property_id
+    #   The ID of the asset property.
+    #
+    # @return [Types::DescribeTimeSeriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTimeSeriesResponse#asset_id #asset_id} => String
+    #   * {Types::DescribeTimeSeriesResponse#property_id #property_id} => String
+    #   * {Types::DescribeTimeSeriesResponse#alias #alias} => String
+    #   * {Types::DescribeTimeSeriesResponse#time_series_id #time_series_id} => String
+    #   * {Types::DescribeTimeSeriesResponse#data_type #data_type} => String
+    #   * {Types::DescribeTimeSeriesResponse#data_type_spec #data_type_spec} => String
+    #   * {Types::DescribeTimeSeriesResponse#time_series_creation_date #time_series_creation_date} => Time
+    #   * {Types::DescribeTimeSeriesResponse#time_series_last_update_date #time_series_last_update_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_time_series({
+    #     alias: "PropertyAlias",
+    #     asset_id: "ID",
+    #     property_id: "ID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.asset_id #=> String
+    #   resp.property_id #=> String
+    #   resp.alias #=> String
+    #   resp.time_series_id #=> String
+    #   resp.data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
+    #   resp.data_type_spec #=> String
+    #   resp.time_series_creation_date #=> Time
+    #   resp.time_series_last_update_date #=> Time
+    #
+    # @overload describe_time_series(params = {})
+    # @param [Hash] params ({})
+    def describe_time_series(params = {}, options = {})
+      req = build_request(:describe_time_series, params)
       req.send_request(options)
     end
 
@@ -2196,6 +2352,43 @@ module Aws::IoTSiteWise
     # @param [Hash] params ({})
     def disassociate_assets(params = {}, options = {})
       req = build_request(:disassociate_assets, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a time series (data stream) from an asset property.
+    #
+    # @option params [required, String] :alias
+    #   The alias that identifies the time series.
+    #
+    # @option params [required, String] :asset_id
+    #   The ID of the asset in which the asset property was created.
+    #
+    # @option params [required, String] :property_id
+    #   The ID of the asset property.
+    #
+    # @option params [String] :client_token
+    #   A unique case-sensitive identifier that you can provide to ensure the
+    #   idempotency of the request. Don't reuse this client token if a new
+    #   idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_time_series_from_asset_property({
+    #     alias: "PropertyAlias", # required
+    #     asset_id: "ID", # required
+    #     property_id: "ID", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @overload disassociate_time_series_from_asset_property(params = {})
+    # @param [Hash] params ({})
+    def disassociate_time_series_from_asset_property(params = {}, options = {})
+      req = build_request(:disassociate_time_series_from_asset_property, params)
       req.send_request(options)
     end
 
@@ -2542,7 +2735,7 @@ module Aws::IoTSiteWise
     #
     #     For example, you can use this operation to return the interpolated
     #     temperature values for a wind turbine every 24 hours over a duration
-    #     of 7 days. If the interpolation starts on July 1, 2021, at 9 AM, IoT
+    #     of 7 days. If the interpolation starts July 1, 2021, at 9 AM, IoT
     #     SiteWise returns the first interpolated value on July 2, 2021, at 9
     #     AM, the second interpolated value on July 3, 2021, at 9 AM, and so
     #     on.
@@ -2555,28 +2748,28 @@ module Aws::IoTSiteWise
     #     forward this interpolated value until a new data point is found.
     #
     #     For example, you can get the state of an on-off valve every 24 hours
-    #     over a duration of 7 days. If the interpolation starts on July 1,
-    #     2021, at 9 AM, IoT SiteWise returns the last observed data point
-    #     between July 1, 2021, at 9 AM and July 2, 2021, at 9 AM as the first
-    #     interpolated value. If no data point is found after 9 AM on July 2,
-    #     2021, IoT SiteWise uses the same interpolated value for the rest of
-    #     the days.
+    #     over a duration of 7 days. If the interpolation starts July 1, 2021,
+    #     at 9 AM, IoT SiteWise returns the last observed data point between
+    #     July 1, 2021, at 9 AM and July 2, 2021, at 9 AM as the first
+    #     interpolated value. If a data point isn't found after 9 AM on July
+    #     2, 2021, IoT SiteWise uses the same interpolated value for the rest
+    #     of the days.
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Linear_interpolation
     #
     # @option params [Integer] :interval_window_in_seconds
-    #   The query interval for the window in seconds. IoT SiteWise computes
+    #   The query interval for the window, in seconds. IoT SiteWise computes
     #   each interpolated value by using data points from the timestamp of
-    #   each interval minus the window to the timestamp of each interval plus
-    #   the window. If not specified, the window is between the start time
+    #   each interval, minus the window to the timestamp of each interval plus
+    #   the window. If not specified, the window ranges between the start time
     #   minus the interval and the end time plus the interval.
     #
     #   <note markdown="1"> * If you specify a value for the `intervalWindowInSeconds` parameter,
-    #     the `type` parameter must be `LINEAR_INTERPOLATION`.
+    #     the value for the `type` parameter must be `LINEAR_INTERPOLATION`.
     #
-    #   * If no data point is found during the specified query window, IoT
+    #   * If a data point isn't found during the specified query window, IoT
     #     SiteWise won't return an interpolated value for the interval. This
     #     indicates that there's a gap in the ingested data points.
     #
@@ -2585,11 +2778,11 @@ module Aws::IoTSiteWise
     #   For example, you can get the interpolated temperature values for a
     #   wind turbine every 24 hours over a duration of 7 days. If the
     #   interpolation starts on July 1, 2021, at 9 AM with a window of 2
-    #   hours, IoT SiteWise uses the data points from 7 AM (9 AM - 2 hours) to
-    #   11 AM (9 AM + 2 hours) on July 2, 2021 to compute the first
-    #   interpolated value, uses the data points from 7 AM (9 AM - 2 hours) to
-    #   11 AM (9 AM + 2 hours) on July 3, 2021 to compute the second
-    #   interpolated value, and so on.
+    #   hours, IoT SiteWise uses the data points from 7 AM (9 AM minus 2
+    #   hours) to 11 AM (9 AM plus 2 hours) on July 2, 2021 to compute the
+    #   first interpolated value. Next, IoT SiteWise uses the data points from
+    #   7 AM (9 AM minus 2 hours) to 11 AM (9 AM plus 2 hours) on July 3, 2021
+    #   to compute the second interpolated value, and so on.
     #
     # @return [Types::GetInterpolatedAssetPropertyValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3247,6 +3440,66 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Retrieves a paginated list of time series (data streams).
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request.
+    #
+    # @option params [String] :asset_id
+    #   The ID of the asset in which the asset property was created.
+    #
+    # @option params [String] :alias_prefix
+    #   The alias prefix of the time series.
+    #
+    # @option params [String] :time_series_type
+    #   The type of the time series. The time series type can be one of the
+    #   following values:
+    #
+    #   * `ASSOCIATED` – The time series is associated with an asset property.
+    #
+    #   * `DISASSOCIATED` – The time series isn't associated with any asset
+    #     property.
+    #
+    # @return [Types::ListTimeSeriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTimeSeriesResponse#time_series_summaries #time_series_summaries} => Array&lt;Types::TimeSeriesSummary&gt;
+    #   * {Types::ListTimeSeriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_time_series({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     asset_id: "ID",
+    #     alias_prefix: "PropertyAlias",
+    #     time_series_type: "ASSOCIATED", # accepts ASSOCIATED, DISASSOCIATED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.time_series_summaries #=> Array
+    #   resp.time_series_summaries[0].asset_id #=> String
+    #   resp.time_series_summaries[0].property_id #=> String
+    #   resp.time_series_summaries[0].alias #=> String
+    #   resp.time_series_summaries[0].time_series_id #=> String
+    #   resp.time_series_summaries[0].data_type #=> String, one of "STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"
+    #   resp.time_series_summaries[0].data_type_spec #=> String
+    #   resp.time_series_summaries[0].time_series_creation_date #=> Time
+    #   resp.time_series_summaries[0].time_series_last_update_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_time_series(params = {})
+    # @param [Hash] params ({})
+    def list_time_series(params = {}, options = {})
+      req = build_request(:list_time_series, params)
+      req.send_request(options)
+    end
+
     # Sets the default encryption configuration for the Amazon Web Services
     # account. For more information, see [Key management][1] in the *IoT
     # SiteWise User Guide*.
@@ -3259,8 +3512,8 @@ module Aws::IoTSiteWise
     #   The type of encryption used for the encryption configuration.
     #
     # @option params [String] :kms_key_id
-    #   The Key ID of the customer managed customer master key (CMK) used for
-    #   KMS encryption. This is required if you use `KMS_BASED_ENCRYPTION`.
+    #   The Key ID of the customer managed key used for KMS encryption. This
+    #   is required if you use `KMS_BASED_ENCRYPTION`.
     #
     # @return [Types::PutDefaultEncryptionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3330,10 +3583,32 @@ module Aws::IoTSiteWise
     #   `MULTI_LAYER_STORAGE` for the storage type, you must specify a
     #   `MultiLayerStorage` object.
     #
+    # @option params [String] :disassociated_data_storage
+    #   Contains the storage configuration for time series (data streams) that
+    #   aren't associated with asset properties. The
+    #   `disassociatedDataStorage` can be one of the following values:
+    #
+    #   * `ENABLED` – IoT SiteWise accepts time series that aren't associated
+    #     with asset properties.
+    #
+    #     After the `disassociatedDataStorage` is enabled, you can't disable
+    #     it.
+    #
+    #   * `DISABLED` – IoT SiteWise doesn't accept time series (data streams)
+    #     that aren't associated with asset properties.
+    #
+    #   For more information, see [Data streams][1] in the *IoT SiteWise User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html
+    #
     # @return [Types::PutStorageConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutStorageConfigurationResponse#storage_type #storage_type} => String
     #   * {Types::PutStorageConfigurationResponse#multi_layer_storage #multi_layer_storage} => Types::MultiLayerStorage
+    #   * {Types::PutStorageConfigurationResponse#disassociated_data_storage #disassociated_data_storage} => String
     #   * {Types::PutStorageConfigurationResponse#configuration_status #configuration_status} => Types::ConfigurationStatus
     #
     # @example Request syntax with placeholder values
@@ -3346,6 +3621,7 @@ module Aws::IoTSiteWise
     #         role_arn: "ARN", # required
     #       },
     #     },
+    #     disassociated_data_storage: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -3353,6 +3629,7 @@ module Aws::IoTSiteWise
     #   resp.storage_type #=> String, one of "SITEWISE_DEFAULT_STORAGE", "MULTI_LAYER_STORAGE"
     #   resp.multi_layer_storage.customer_managed_s3_storage.s3_resource_arn #=> String
     #   resp.multi_layer_storage.customer_managed_s3_storage.role_arn #=> String
+    #   resp.disassociated_data_storage #=> String, one of "ENABLED", "DISABLED"
     #   resp.configuration_status.state #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.configuration_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.configuration_status.error.message #=> String
@@ -4124,7 +4401,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -15,6 +15,7 @@ module Aws::TimestreamWrite
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateDatabaseRequest = Shapes::StructureShape.new(name: 'CreateDatabaseRequest')
     CreateDatabaseResponse = Shapes::StructureShape.new(name: 'CreateDatabaseResponse')
@@ -37,6 +38,7 @@ module Aws::TimestreamWrite
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidEndpointException = Shapes::StructureShape.new(name: 'InvalidEndpointException')
     ListDatabasesRequest = Shapes::StructureShape.new(name: 'ListDatabasesRequest')
@@ -46,20 +48,32 @@ module Aws::TimestreamWrite
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MagneticStoreRejectedDataLocation = Shapes::StructureShape.new(name: 'MagneticStoreRejectedDataLocation')
     MagneticStoreRetentionPeriodInDays = Shapes::IntegerShape.new(name: 'MagneticStoreRetentionPeriodInDays')
+    MagneticStoreWriteProperties = Shapes::StructureShape.new(name: 'MagneticStoreWriteProperties')
+    MeasureValue = Shapes::StructureShape.new(name: 'MeasureValue')
     MeasureValueType = Shapes::StringShape.new(name: 'MeasureValueType')
+    MeasureValues = Shapes::ListShape.new(name: 'MeasureValues')
     MemoryStoreRetentionPeriodInHours = Shapes::IntegerShape.new(name: 'MemoryStoreRetentionPeriodInHours')
     PaginationLimit = Shapes::IntegerShape.new(name: 'PaginationLimit')
     Record = Shapes::StructureShape.new(name: 'Record')
     RecordIndex = Shapes::IntegerShape.new(name: 'RecordIndex')
     RecordVersion = Shapes::IntegerShape.new(name: 'RecordVersion')
     Records = Shapes::ListShape.new(name: 'Records')
+    RecordsIngested = Shapes::StructureShape.new(name: 'RecordsIngested')
     RejectedRecord = Shapes::StructureShape.new(name: 'RejectedRecord')
     RejectedRecords = Shapes::ListShape.new(name: 'RejectedRecords')
     RejectedRecordsException = Shapes::StructureShape.new(name: 'RejectedRecordsException')
+    ResourceCreateAPIName = Shapes::StringShape.new(name: 'ResourceCreateAPIName')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetentionProperties = Shapes::StructureShape.new(name: 'RetentionProperties')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
+    S3EncryptionOption = Shapes::StringShape.new(name: 'S3EncryptionOption')
+    S3ObjectKeyPrefix = Shapes::StringShape.new(name: 'S3ObjectKeyPrefix')
+    SchemaName = Shapes::StringShape.new(name: 'SchemaName')
+    SchemaValue = Shapes::StringShape.new(name: 'SchemaValue')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     String = Shapes::StringShape.new(name: 'String')
     StringValue2048 = Shapes::StringShape.new(name: 'StringValue2048')
@@ -84,6 +98,7 @@ module Aws::TimestreamWrite
     UpdateTableResponse = Shapes::StructureShape.new(name: 'UpdateTableResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     WriteRecordsRequest = Shapes::StructureShape.new(name: 'WriteRecordsRequest')
+    WriteRecordsResponse = Shapes::StructureShape.new(name: 'WriteRecordsResponse')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -91,7 +106,7 @@ module Aws::TimestreamWrite
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
-    CreateDatabaseRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "DatabaseName"))
+    CreateDatabaseRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: ResourceCreateAPIName, required: true, location_name: "DatabaseName"))
     CreateDatabaseRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: StringValue2048, location_name: "KmsKeyId"))
     CreateDatabaseRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDatabaseRequest.struct_class = Types::CreateDatabaseRequest
@@ -99,10 +114,11 @@ module Aws::TimestreamWrite
     CreateDatabaseResponse.add_member(:database, Shapes::ShapeRef.new(shape: Database, location_name: "Database"))
     CreateDatabaseResponse.struct_class = Types::CreateDatabaseResponse
 
-    CreateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "DatabaseName"))
-    CreateTableRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "TableName"))
+    CreateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: ResourceCreateAPIName, required: true, location_name: "DatabaseName"))
+    CreateTableRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: ResourceCreateAPIName, required: true, location_name: "TableName"))
     CreateTableRequest.add_member(:retention_properties, Shapes::ShapeRef.new(shape: RetentionProperties, location_name: "RetentionProperties"))
     CreateTableRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTableRequest.add_member(:magnetic_store_write_properties, Shapes::ShapeRef.new(shape: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
     CreateTableRequest.struct_class = Types::CreateTableRequest
 
     CreateTableResponse.add_member(:table, Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
@@ -143,8 +159,8 @@ module Aws::TimestreamWrite
     DescribeTableResponse.add_member(:table, Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
     DescribeTableResponse.struct_class = Types::DescribeTableResponse
 
-    Dimension.add_member(:name, Shapes::ShapeRef.new(shape: StringValue256, required: true, location_name: "Name"))
-    Dimension.add_member(:value, Shapes::ShapeRef.new(shape: StringValue2048, required: true, location_name: "Value"))
+    Dimension.add_member(:name, Shapes::ShapeRef.new(shape: SchemaName, required: true, location_name: "Name"))
+    Dimension.add_member(:value, Shapes::ShapeRef.new(shape: SchemaValue, required: true, location_name: "Value"))
     Dimension.add_member(:dimension_value_type, Shapes::ShapeRef.new(shape: DimensionValueType, location_name: "DimensionValueType"))
     Dimension.struct_class = Types::Dimension
 
@@ -185,16 +201,36 @@ module Aws::TimestreamWrite
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MagneticStoreRejectedDataLocation.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3Configuration, location_name: "S3Configuration"))
+    MagneticStoreRejectedDataLocation.struct_class = Types::MagneticStoreRejectedDataLocation
+
+    MagneticStoreWriteProperties.add_member(:enable_magnetic_store_writes, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EnableMagneticStoreWrites"))
+    MagneticStoreWriteProperties.add_member(:magnetic_store_rejected_data_location, Shapes::ShapeRef.new(shape: MagneticStoreRejectedDataLocation, location_name: "MagneticStoreRejectedDataLocation"))
+    MagneticStoreWriteProperties.struct_class = Types::MagneticStoreWriteProperties
+
+    MeasureValue.add_member(:name, Shapes::ShapeRef.new(shape: SchemaName, required: true, location_name: "Name"))
+    MeasureValue.add_member(:value, Shapes::ShapeRef.new(shape: StringValue2048, required: true, location_name: "Value"))
+    MeasureValue.add_member(:type, Shapes::ShapeRef.new(shape: MeasureValueType, required: true, location_name: "Type"))
+    MeasureValue.struct_class = Types::MeasureValue
+
+    MeasureValues.member = Shapes::ShapeRef.new(shape: MeasureValue)
+
     Record.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
-    Record.add_member(:measure_name, Shapes::ShapeRef.new(shape: StringValue256, location_name: "MeasureName"))
+    Record.add_member(:measure_name, Shapes::ShapeRef.new(shape: SchemaName, location_name: "MeasureName"))
     Record.add_member(:measure_value, Shapes::ShapeRef.new(shape: StringValue2048, location_name: "MeasureValue"))
     Record.add_member(:measure_value_type, Shapes::ShapeRef.new(shape: MeasureValueType, location_name: "MeasureValueType"))
     Record.add_member(:time, Shapes::ShapeRef.new(shape: StringValue256, location_name: "Time"))
     Record.add_member(:time_unit, Shapes::ShapeRef.new(shape: TimeUnit, location_name: "TimeUnit"))
     Record.add_member(:version, Shapes::ShapeRef.new(shape: RecordVersion, location_name: "Version", metadata: {"box"=>true}))
+    Record.add_member(:measure_values, Shapes::ShapeRef.new(shape: MeasureValues, location_name: "MeasureValues"))
     Record.struct_class = Types::Record
 
     Records.member = Shapes::ShapeRef.new(shape: Record)
+
+    RecordsIngested.add_member(:total, Shapes::ShapeRef.new(shape: Integer, location_name: "Total"))
+    RecordsIngested.add_member(:memory_store, Shapes::ShapeRef.new(shape: Integer, location_name: "MemoryStore"))
+    RecordsIngested.add_member(:magnetic_store, Shapes::ShapeRef.new(shape: Integer, location_name: "MagneticStore"))
+    RecordsIngested.struct_class = Types::RecordsIngested
 
     RejectedRecord.add_member(:record_index, Shapes::ShapeRef.new(shape: RecordIndex, location_name: "RecordIndex"))
     RejectedRecord.add_member(:reason, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Reason"))
@@ -214,6 +250,12 @@ module Aws::TimestreamWrite
     RetentionProperties.add_member(:magnetic_store_retention_period_in_days, Shapes::ShapeRef.new(shape: MagneticStoreRetentionPeriodInDays, required: true, location_name: "MagneticStoreRetentionPeriodInDays"))
     RetentionProperties.struct_class = Types::RetentionProperties
 
+    S3Configuration.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "BucketName"))
+    S3Configuration.add_member(:object_key_prefix, Shapes::ShapeRef.new(shape: S3ObjectKeyPrefix, location_name: "ObjectKeyPrefix"))
+    S3Configuration.add_member(:encryption_option, Shapes::ShapeRef.new(shape: S3EncryptionOption, location_name: "EncryptionOption"))
+    S3Configuration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: StringValue2048, location_name: "KmsKeyId"))
+    S3Configuration.struct_class = Types::S3Configuration
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
@@ -224,6 +266,7 @@ module Aws::TimestreamWrite
     Table.add_member(:retention_properties, Shapes::ShapeRef.new(shape: RetentionProperties, location_name: "RetentionProperties"))
     Table.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
     Table.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
+    Table.add_member(:magnetic_store_write_properties, Shapes::ShapeRef.new(shape: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
     Table.struct_class = Types::Table
 
     TableList.member = Shapes::ShapeRef.new(shape: Table)
@@ -260,7 +303,8 @@ module Aws::TimestreamWrite
 
     UpdateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "DatabaseName"))
     UpdateTableRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "TableName"))
-    UpdateTableRequest.add_member(:retention_properties, Shapes::ShapeRef.new(shape: RetentionProperties, required: true, location_name: "RetentionProperties"))
+    UpdateTableRequest.add_member(:retention_properties, Shapes::ShapeRef.new(shape: RetentionProperties, location_name: "RetentionProperties"))
+    UpdateTableRequest.add_member(:magnetic_store_write_properties, Shapes::ShapeRef.new(shape: MagneticStoreWriteProperties, location_name: "MagneticStoreWriteProperties"))
     UpdateTableRequest.struct_class = Types::UpdateTableRequest
 
     UpdateTableResponse.add_member(:table, Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
@@ -274,6 +318,9 @@ module Aws::TimestreamWrite
     WriteRecordsRequest.add_member(:common_attributes, Shapes::ShapeRef.new(shape: Record, location_name: "CommonAttributes"))
     WriteRecordsRequest.add_member(:records, Shapes::ShapeRef.new(shape: Records, required: true, location_name: "Records"))
     WriteRecordsRequest.struct_class = Types::WriteRecordsRequest
+
+    WriteRecordsResponse.add_member(:records_ingested, Shapes::ShapeRef.new(shape: RecordsIngested, location_name: "RecordsIngested"))
+    WriteRecordsResponse.struct_class = Types::WriteRecordsResponse
 
 
     # @api private
@@ -313,6 +360,7 @@ module Aws::TimestreamWrite
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointException)
       end)
 
       api.add_operation(:create_table, Seahorse::Model::Operation.new.tap do |o|
@@ -330,6 +378,7 @@ module Aws::TimestreamWrite
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointException)
       end)
@@ -549,7 +598,7 @@ module Aws::TimestreamWrite
           "required" => true,
         }
         o.input = Shapes::ShapeRef.new(shape: WriteRecordsRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: WriteRecordsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

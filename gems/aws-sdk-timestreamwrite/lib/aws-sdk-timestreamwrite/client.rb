@@ -348,14 +348,15 @@ module Aws::TimestreamWrite
 
     # Creates a new Timestream database. If the KMS key is not specified,
     # the database will be encrypted with a Timestream managed KMS key
-    # located in your account. Refer to [AWS managed KMS keys][1] for more
-    # info. Service quotas apply. For more information, see [Access
-    # Management][2] in the Timestream Developer Guide.
+    # located in your account. Refer to [Amazon Web Services managed KMS
+    # keys][1] for more info. [Service quotas apply][2]. See [code
+    # sample][3] for details.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
     # [2]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+    # [3]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-db.html
     #
     # @option params [required, String] :database_name
     #   The name of the Timestream database.
@@ -363,7 +364,8 @@ module Aws::TimestreamWrite
     # @option params [String] :kms_key_id
     #   The KMS key for the database. If the KMS key is not specified, the
     #   database will be encrypted with a Timestream managed KMS key located
-    #   in your account. Refer to [AWS managed KMS keys][1] for more info.
+    #   in your account. Refer to [Amazon Web Services managed KMS keys][1]
+    #   for more info.
     #
     #
     #
@@ -379,7 +381,7 @@ module Aws::TimestreamWrite
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_database({
-    #     database_name: "ResourceName", # required
+    #     database_name: "ResourceCreateAPIName", # required
     #     kms_key_id: "StringValue2048",
     #     tags: [
     #       {
@@ -408,17 +410,17 @@ module Aws::TimestreamWrite
     end
 
     # The CreateTable operation adds a new table to an existing database in
-    # your account. In an AWS account, table names must be at least unique
-    # within each Region if they are in the same database. You may have
-    # identical table names in the same Region if the tables are in seperate
-    # databases. While creating the table, you must specify the table name,
-    # database name, and the retention properties. Service quotas apply. For
-    # more information, see [Access Management][1] in the Timestream
-    # Developer Guide.
+    # your account. In an Amazon Web Services account, table names must be
+    # at least unique within each Region if they are in the same database.
+    # You may have identical table names in the same Region if the tables
+    # are in separate databases. While creating the table, you must specify
+    # the table name, database name, and the retention properties. [Service
+    # quotas apply][1]. See [code sample][2] for details.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+    # [2]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html
     #
     # @option params [required, String] :database_name
     #   The name of the Timestream database.
@@ -433,6 +435,10 @@ module Aws::TimestreamWrite
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs to label the table.
     #
+    # @option params [Types::MagneticStoreWriteProperties] :magnetic_store_write_properties
+    #   Contains properties to set on the table when enabling magnetic store
+    #   writes.
+    #
     # @return [Types::CreateTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableResponse#table #table} => Types::Table
@@ -440,8 +446,8 @@ module Aws::TimestreamWrite
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_table({
-    #     database_name: "ResourceName", # required
-    #     table_name: "ResourceName", # required
+    #     database_name: "ResourceCreateAPIName", # required
+    #     table_name: "ResourceCreateAPIName", # required
     #     retention_properties: {
     #       memory_store_retention_period_in_hours: 1, # required
     #       magnetic_store_retention_period_in_days: 1, # required
@@ -452,6 +458,17 @@ module Aws::TimestreamWrite
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     magnetic_store_write_properties: {
+    #       enable_magnetic_store_writes: false, # required
+    #       magnetic_store_rejected_data_location: {
+    #         s3_configuration: {
+    #           bucket_name: "S3BucketName",
+    #           object_key_prefix: "S3ObjectKeyPrefix",
+    #           encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #           kms_key_id: "StringValue2048",
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -464,6 +481,11 @@ module Aws::TimestreamWrite
     #   resp.table.retention_properties.magnetic_store_retention_period_in_days #=> Integer
     #   resp.table.creation_time #=> Time
     #   resp.table.last_updated_time #=> Time
+    #   resp.table.magnetic_store_write_properties.enable_magnetic_store_writes #=> Boolean
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.bucket_name #=> String
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.object_key_prefix #=> String
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS"
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/CreateTable AWS API Documentation
     #
@@ -478,12 +500,20 @@ module Aws::TimestreamWrite
     # operation. After a database is deleted, the time series data from its
     # tables cannot be recovered.*
     #
-    # All tables in the database must be deleted first, or a
+    # <note markdown="1"> All tables in the database must be deleted first, or a
     # ValidationException error will be thrown.
     #
-    # Due to the nature of distributed retries, the operation can return
+    #  Due to the nature of distributed retries, the operation can return
     # either success or a ResourceNotFoundException. Clients should consider
     # them equivalent.
+    #
+    #  </note>
+    #
+    # See [code sample][1] for details.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-db.html
     #
     # @option params [required, String] :database_name
     #   The name of the Timestream database to be deleted.
@@ -509,9 +539,17 @@ module Aws::TimestreamWrite
     # After a Timestream database table is deleted, the time series data
     # stored in the table cannot be recovered.
     #
-    # Due to the nature of distributed retries, the operation can return
+    # <note markdown="1"> Due to the nature of distributed retries, the operation can return
     # either success or a ResourceNotFoundException. Clients should consider
     # them equivalent.
+    #
+    #  </note>
+    #
+    # See [code sample][1] for details.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-table.html
     #
     # @option params [required, String] :database_name
     #   The name of the database where the Timestream database is to be
@@ -540,12 +578,13 @@ module Aws::TimestreamWrite
 
     # Returns information about the database, including the database name,
     # time that the database was created, and the total number of tables
-    # found within the database. Service quotas apply. For more information,
-    # see [Access Management][1] in the Timestream Developer Guide.
+    # found within the database. [Service quotas apply][1]. See [code
+    # sample][2] for details.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+    # [2]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-db.html
     #
     # @option params [required, String] :database_name
     #   The name of the Timestream database.
@@ -582,22 +621,26 @@ module Aws::TimestreamWrite
     # Timestream API calls against. This API is available through both Write
     # and Query.
     #
-    # Because Timestream’s SDKs are designed to transparently work with the
-    # service’s architecture, including the management and mapping of the
-    # service endpoints, *it is not recommended that you use this API
+    # Because the Timestream SDKs are designed to transparently work with
+    # the service’s architecture, including the management and mapping of
+    # the service endpoints, *it is not recommended that you use this API
     # unless*\:
+    #
+    # * You are using [VPC endpoints (Amazon Web Services PrivateLink) with
+    #   Timestream][1]
     #
     # * Your application uses a programming language that does not yet have
     #   SDK support
     #
     # * You require better control over the client-side implementation
     #
-    # For detailed information on how to use DescribeEndpoints, see [The
-    # Endpoint Discovery Pattern and REST APIs][1].
+    # For detailed information on how and when to use and implement
+    # DescribeEndpoints, see [The Endpoint Discovery Pattern][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/Using-API.endpoint-discovery.html
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints
+    # [2]: https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery
     #
     # @return [Types::DescribeEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -620,12 +663,12 @@ module Aws::TimestreamWrite
 
     # Returns information about the table, including the table name,
     # database name, retention duration of the memory store and the magnetic
-    # store. Service quotas apply. For more information, see [Access
-    # Management][1] in the Timestream Developer Guide.
+    # store. [Service quotas apply][1]. See [code sample][2] for details.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+    # [2]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-table.html
     #
     # @option params [required, String] :database_name
     #   The name of the Timestream database.
@@ -654,6 +697,11 @@ module Aws::TimestreamWrite
     #   resp.table.retention_properties.magnetic_store_retention_period_in_days #=> Integer
     #   resp.table.creation_time #=> Time
     #   resp.table.last_updated_time #=> Time
+    #   resp.table.magnetic_store_write_properties.enable_magnetic_store_writes #=> Boolean
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.bucket_name #=> String
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.object_key_prefix #=> String
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS"
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DescribeTable AWS API Documentation
     #
@@ -664,13 +712,13 @@ module Aws::TimestreamWrite
       req.send_request(options)
     end
 
-    # Returns a list of your Timestream databases. Service quotas apply. For
-    # more information, see [Access Management][1] in the Timestream
-    # Developer Guide.
+    # Returns a list of your Timestream databases. [Service quotas
+    # apply][1]. See [code sample][2] for details.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+    # [2]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-db.html
     #
     # @option params [String] :next_token
     #   The pagination token. To resume pagination, provide the NextToken
@@ -717,7 +765,11 @@ module Aws::TimestreamWrite
     end
 
     # A list of tables, along with the name, status and retention properties
-    # of each table.
+    # of each table. See [code sample][1] for details.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-table.html
     #
     # @option params [String] :database_name
     #   The name of the Timestream database.
@@ -758,6 +810,11 @@ module Aws::TimestreamWrite
     #   resp.tables[0].retention_properties.magnetic_store_retention_period_in_days #=> Integer
     #   resp.tables[0].creation_time #=> Time
     #   resp.tables[0].last_updated_time #=> Time
+    #   resp.tables[0].magnetic_store_write_properties.enable_magnetic_store_writes #=> Boolean
+    #   resp.tables[0].magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.bucket_name #=> String
+    #   resp.tables[0].magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.object_key_prefix #=> String
+    #   resp.tables[0].magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS"
+    #   resp.tables[0].magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.kms_key_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/ListTables AWS API Documentation
@@ -867,6 +924,12 @@ module Aws::TimestreamWrite
     # new KMS key to be used (`KmsKeyId`). If there are any concurrent
     # `UpdateDatabase` requests, first writer wins.
     #
+    # See [code sample][1] for details.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.update-db.html
+    #
     # @option params [required, String] :database_name
     #   The name of the database.
     #
@@ -925,21 +988,24 @@ module Aws::TimestreamWrite
     # was made. Timestream does not retrieve data from the magnetic store to
     # populate the memory store.
     #
-    # Service quotas apply. For more information, see [Access Management][1]
-    # in the Timestream Developer Guide.
+    # See [code sample][1] for details.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.update-table.html
     #
     # @option params [required, String] :database_name
     #   The name of the Timestream database.
     #
     # @option params [required, String] :table_name
-    #   The name of the Timesream table.
+    #   The name of the Timestream table.
     #
-    # @option params [required, Types::RetentionProperties] :retention_properties
+    # @option params [Types::RetentionProperties] :retention_properties
     #   The retention duration of the memory store and the magnetic store.
+    #
+    # @option params [Types::MagneticStoreWriteProperties] :magnetic_store_write_properties
+    #   Contains properties to set on the table when enabling magnetic store
+    #   writes.
     #
     # @return [Types::UpdateTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -950,9 +1016,20 @@ module Aws::TimestreamWrite
     #   resp = client.update_table({
     #     database_name: "ResourceName", # required
     #     table_name: "ResourceName", # required
-    #     retention_properties: { # required
+    #     retention_properties: {
     #       memory_store_retention_period_in_hours: 1, # required
     #       magnetic_store_retention_period_in_days: 1, # required
+    #     },
+    #     magnetic_store_write_properties: {
+    #       enable_magnetic_store_writes: false, # required
+    #       magnetic_store_rejected_data_location: {
+    #         s3_configuration: {
+    #           bucket_name: "S3BucketName",
+    #           object_key_prefix: "S3ObjectKeyPrefix",
+    #           encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #           kms_key_id: "StringValue2048",
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -966,6 +1043,11 @@ module Aws::TimestreamWrite
     #   resp.table.retention_properties.magnetic_store_retention_period_in_days #=> Integer
     #   resp.table.creation_time #=> Time
     #   resp.table.last_updated_time #=> Time
+    #   resp.table.magnetic_store_write_properties.enable_magnetic_store_writes #=> Boolean
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.bucket_name #=> String
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.object_key_prefix #=> String
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS"
+    #   resp.table.magnetic_store_write_properties.magnetic_store_rejected_data_location.s3_configuration.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/UpdateTable AWS API Documentation
     #
@@ -987,32 +1069,66 @@ module Aws::TimestreamWrite
     # into Timestream, the query results might not reflect the results of a
     # recently completed write operation. The results may also include some
     # stale data. If you repeat the query request after a short time, the
-    # results should return the latest data. Service quotas apply. For more
-    # information, see [Access Management][1] in the Timestream Developer
-    # Guide.
+    # results should return the latest data. [Service quotas apply][1].
+    #
+    # See [code sample][2] for details.
+    #
+    # **Upserts**
+    #
+    # You can use the `Version` parameter in a `WriteRecords` request to
+    # update data points. Timestream tracks a version number with each
+    # record. `Version` defaults to `1` when not specified for the record in
+    # the request. Timestream will update an existing record’s measure value
+    # along with its `Version` upon receiving a write request with a higher
+    # `Version` number for that record. Upon receiving an update request
+    # where the measure value is the same as that of the existing record,
+    # Timestream still updates `Version`, if it is greater than the existing
+    # value of `Version`. You can update a data point as many times as
+    # desired, as long as the value of `Version` continuously increases.
+    #
+    # For example, suppose you write a new record without indicating
+    # `Version` in the request. Timestream will store this record, and set
+    # `Version` to `1`. Now, suppose you try to update this record with a
+    # `WriteRecords` request of the same record with a different measure
+    # value but, like before, do not provide `Version`. In this case,
+    # Timestream will reject this update with a `RejectedRecordsException`
+    # since the updated record’s version is not greater than the existing
+    # value of Version. However, if you were to resend the update request
+    # with `Version` set to `2`, Timestream would then succeed in updating
+    # the record’s value, and the `Version` would be set to `2`. Next,
+    # suppose you sent a `WriteRecords` request with this same record and an
+    # identical measure value, but with `Version` set to `3`. In this case,
+    # Timestream would only update `Version` to `3`. Any further updates
+    # would need to send a version number greater than `3`, or the update
+    # requests would receive a `RejectedRecordsException`.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+    # [2]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.write.html
     #
     # @option params [required, String] :database_name
     #   The name of the Timestream database.
     #
     # @option params [required, String] :table_name
-    #   The name of the Timesream table.
+    #   The name of the Timestream table.
     #
     # @option params [Types::Record] :common_attributes
-    #   A record containing the common measure and dimension attributes shared
-    #   across all the records in the request. The measure and dimension
-    #   attributes specified in here will be merged with the measure and
+    #   A record containing the common measure, dimension, time, and version
+    #   attributes shared across all the records in the request. The measure
+    #   and dimension attributes specified will be merged with the measure and
     #   dimension attributes in the records object when the data is written
-    #   into Timestream.
+    #   into Timestream. Dimensions may not overlap, or a
+    #   `ValidationException` will be thrown. In other words, a record must
+    #   contain dimensions with unique names.
     #
     # @option params [required, Array<Types::Record>] :records
-    #   An array of records containing the unique dimension and measure
-    #   attributes for each time series data point.
+    #   An array of records containing the unique measure, dimension, time,
+    #   and version attributes for each time series data point.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::WriteRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::WriteRecordsResponse#records_ingested #records_ingested} => Types::RecordsIngested
     #
     # @example Request syntax with placeholder values
     #
@@ -1022,36 +1138,56 @@ module Aws::TimestreamWrite
     #     common_attributes: {
     #       dimensions: [
     #         {
-    #           name: "StringValue256", # required
-    #           value: "StringValue2048", # required
+    #           name: "SchemaName", # required
+    #           value: "SchemaValue", # required
     #           dimension_value_type: "VARCHAR", # accepts VARCHAR
     #         },
     #       ],
-    #       measure_name: "StringValue256",
+    #       measure_name: "SchemaName",
     #       measure_value: "StringValue2048",
-    #       measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN
+    #       measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
     #       time: "StringValue256",
     #       time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
     #       version: 1,
+    #       measure_values: [
+    #         {
+    #           name: "SchemaName", # required
+    #           value: "StringValue2048", # required
+    #           type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
+    #         },
+    #       ],
     #     },
     #     records: [ # required
     #       {
     #         dimensions: [
     #           {
-    #             name: "StringValue256", # required
-    #             value: "StringValue2048", # required
+    #             name: "SchemaName", # required
+    #             value: "SchemaValue", # required
     #             dimension_value_type: "VARCHAR", # accepts VARCHAR
     #           },
     #         ],
-    #         measure_name: "StringValue256",
+    #         measure_name: "SchemaName",
     #         measure_value: "StringValue2048",
-    #         measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN
+    #         measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
     #         time: "StringValue256",
     #         time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
     #         version: 1,
+    #         measure_values: [
+    #           {
+    #             name: "SchemaName", # required
+    #             value: "StringValue2048", # required
+    #             type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.records_ingested.total #=> Integer
+    #   resp.records_ingested.memory_store #=> Integer
+    #   resp.records_ingested.magnetic_store #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/WriteRecords AWS API Documentation
     #
@@ -1075,7 +1211,7 @@ module Aws::TimestreamWrite
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-timestreamwrite'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

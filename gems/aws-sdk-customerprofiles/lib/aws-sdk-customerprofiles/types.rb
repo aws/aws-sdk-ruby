@@ -153,6 +153,52 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Configuration settings for how to perform the auto-merging of
+    # profiles.
+    #
+    # @note When making an API call, you may pass AutoMerging
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         consolidation: {
+    #           matching_attributes_list: [ # required
+    #             ["string1To255"],
+    #           ],
+    #         },
+    #         conflict_resolution: {
+    #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
+    #           source_name: "string1To255",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   The flag that enables the auto-merging of duplicate profiles.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] consolidation
+    #   A list of matching attributes that represent matching criteria. If
+    #   two profiles meet at least one of the requirements in the matching
+    #   attributes list, they will be merged.
+    #   @return [Types::Consolidation]
+    #
+    # @!attribute [rw] conflict_resolution
+    #   How the auto-merging process should resolve conflicts between
+    #   different profiles. For example, if Profile A and Profile B have the
+    #   same `FirstName` and `LastName` (and that is the matching criteria),
+    #   which `EmailAddress` should be used?
+    #   @return [Types::ConflictResolution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/AutoMerging AWS API Documentation
+    #
+    class AutoMerging < Struct.new(
+      :enabled,
+      :consolidation,
+      :conflict_resolution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input you provided is invalid.
     #
     # @!attribute [rw] message
@@ -162,6 +208,43 @@ module Aws::CustomerProfiles
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # How the auto-merging process should resolve conflicts between
+    # different profiles.
+    #
+    # @note When making an API call, you may pass ConflictResolution
+    #   data as a hash:
+    #
+    #       {
+    #         conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
+    #         source_name: "string1To255",
+    #       }
+    #
+    # @!attribute [rw] conflict_resolving_model
+    #   How the auto-merging process should resolve conflicts between
+    #   different profiles.
+    #
+    #   * `RECENCY`\: Uses the data that was most recently updated.
+    #
+    #   * `SOURCE`\: Uses the data from a specific source. For example, if a
+    #     company has been aquired or two departments have merged, data from
+    #     the specified source is used. If two duplicate profiles are from
+    #     the same source, then `RECENCY` is used again.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_name
+    #   The `ObjectType` name that is used to resolve profile merging
+    #   conflicts when choosing `SOURCE` as the `ConflictResolvingModel`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ConflictResolution AWS API Documentation
+    #
+    class ConflictResolution < Struct.new(
+      :conflict_resolving_model,
+      :source_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -214,6 +297,29 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # The matching criteria to be used during the auto-merging process.
+    #
+    # @note When making an API call, you may pass Consolidation
+    #   data as a hash:
+    #
+    #       {
+    #         matching_attributes_list: [ # required
+    #           ["string1To255"],
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] matching_attributes_list
+    #   A list of matching criteria.
+    #   @return [Array<Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/Consolidation AWS API Documentation
+    #
+    class Consolidation < Struct.new(
+      :matching_attributes_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDomainRequest
     #   data as a hash:
     #
@@ -224,6 +330,28 @@ module Aws::CustomerProfiles
     #         dead_letter_queue_url: "sqsQueueUrl",
     #         matching: {
     #           enabled: false, # required
+    #           job_schedule: {
+    #             day_of_the_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #             time: "JobScheduleTime", # required
+    #           },
+    #           auto_merging: {
+    #             enabled: false, # required
+    #             consolidation: {
+    #               matching_attributes_list: [ # required
+    #                 ["string1To255"],
+    #               ],
+    #             },
+    #             conflict_resolution: {
+    #               conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
+    #               source_name: "string1To255",
+    #             },
+    #           },
+    #           exporting_config: {
+    #             s3_exporting: {
+    #               s3_bucket_name: "s3BucketName", # required
+    #               s3_key_name: "s3KeyNameCustomerOutputConfig",
+    #             },
+    #           },
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -254,11 +382,16 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] matching
-    #   The process of matching duplicate profiles. If Matching = true,
-    #   Amazon Connect Customer Profiles starts a weekly batch process every
+    #   The process of matching duplicate profiles. If `Matching` = `true`,
+    #   Amazon Connect Customer Profiles starts a weekly batch process
+    #   called Identity Resolution Job. If you do not specify a date and
+    #   time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains.
-    #   After that batch process completes, use the [GetMatches][1] API to
-    #   return and review the results.
+    #
+    #   After the Identity Resolution Job completes, use the [GetMatches][1]
+    #   API to return and review the results. Or, if you have configured
+    #   `ExportingConfig` in the `MatchingRequest`, you can download the
+    #   results from S3.
     #
     #
     #
@@ -304,11 +437,16 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] matching
-    #   The process of matching duplicate profiles. If Matching = true,
-    #   Amazon Connect Customer Profiles starts a weekly batch process every
+    #   The process of matching duplicate profiles. If `Matching` = `true`,
+    #   Amazon Connect Customer Profiles starts a weekly batch process
+    #   called Identity Resolution Job. If you do not specify a date and
+    #   time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains.
-    #   After that batch process completes, use the [GetMatches][1] API to
-    #   return and review the results.
+    #
+    #   After the Identity Resolution Job completes, use the [GetMatches][1]
+    #   API to return and review the results. Or, if you have configured
+    #   `ExportingConfig` in the `MatchingRequest`, you can download the
+    #   results from S3.
     #
     #
     #
@@ -822,6 +960,57 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # Configuration information about the S3 bucket where Identity
+    # Resolution Jobs writes result files.
+    #
+    # <note markdown="1"> You need to give Customer Profiles service principal write permission
+    # to your S3 bucket. Otherwise, you'll get an exception in the API
+    # response. For an example policy, see [Amazon Connect Customer Profiles
+    # cross-service confused deputy prevention][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service
+    #
+    # @note When making an API call, you may pass ExportingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_exporting: {
+    #           s3_bucket_name: "s3BucketName", # required
+    #           s3_key_name: "s3KeyNameCustomerOutputConfig",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_exporting
+    #   The S3 location where Identity Resolution Jobs write result files.
+    #   @return [Types::S3ExportingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ExportingConfig AWS API Documentation
+    #
+    class ExportingConfig < Struct.new(
+      :s3_exporting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 location where Identity Resolution Jobs write result files.
+    #
+    # @!attribute [rw] s3_exporting
+    #   Information about the S3 location where Identity Resolution Jobs
+    #   write result files.
+    #   @return [Types::S3ExportingLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ExportingLocation AWS API Documentation
+    #
+    class ExportingLocation < Struct.new(
+      :s3_exporting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A duplicate customer profile that is to be merged into a main profile.
     #
     # @note When making an API call, you may pass FieldSourceProfileIds
@@ -1080,6 +1269,74 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAutoMergingPreviewRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "name", # required
+    #         consolidation: { # required
+    #           matching_attributes_list: [ # required
+    #             ["string1To255"],
+    #           ],
+    #         },
+    #         conflict_resolution: { # required
+    #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
+    #           source_name: "string1To255",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] consolidation
+    #   A list of matching attributes that represent matching criteria.
+    #   @return [Types::Consolidation]
+    #
+    # @!attribute [rw] conflict_resolution
+    #   How the auto-merging process should resolve conflicts between
+    #   different profiles.
+    #   @return [Types::ConflictResolution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetAutoMergingPreviewRequest AWS API Documentation
+    #
+    class GetAutoMergingPreviewRequest < Struct.new(
+      :domain_name,
+      :consolidation,
+      :conflict_resolution)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_matches_in_sample
+    #   The number of match groups in the domain that have been reviewed in
+    #   this preview dry run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_profiles_in_sample
+    #   The number of profiles found in this preview dry run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_profiles_will_be_merged
+    #   The number of profiles that would be merged if this wasn't a
+    #   preview dry run.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetAutoMergingPreviewResponse AWS API Documentation
+    #
+    class GetAutoMergingPreviewResponse < Struct.new(
+      :domain_name,
+      :number_of_matches_in_sample,
+      :number_of_profiles_in_sample,
+      :number_of_profiles_will_be_merged)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDomainRequest
     #   data as a hash:
     #
@@ -1124,11 +1381,16 @@ module Aws::CustomerProfiles
     #   @return [Types::DomainStats]
     #
     # @!attribute [rw] matching
-    #   The process of matching duplicate profiles. If Matching = true,
-    #   Amazon Connect Customer Profiles starts a weekly batch process every
+    #   The process of matching duplicate profiles. If `Matching` = `true`,
+    #   Amazon Connect Customer Profiles starts a weekly batch process
+    #   called Identity Resolution Job. If you do not specify a date and
+    #   time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains.
-    #   After that batch process completes, use the [GetMatches][1] API to
-    #   return and review the results.
+    #
+    #   After the Identity Resolution Job completes, use the [GetMatches][1]
+    #   API to return and review the results. Or, if you have configured
+    #   `ExportingConfig` in the `MatchingRequest`, you can download the
+    #   results from S3.
     #
     #
     #
@@ -1160,6 +1422,121 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetIdentityResolutionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "name", # required
+    #         job_id: "uuid", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the Identity Resolution Job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIdentityResolutionJobRequest AWS API Documentation
+    #
+    class GetIdentityResolutionJobRequest < Struct.new(
+      :domain_name,
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the Identity Resolution Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Identity Resolution Job.
+    #
+    #   * `PENDING`\: The Identity Resolution Job is scheduled but has not
+    #     started yet. If you turn off the Identity Resolution feature in
+    #     your domain, jobs in the `PENDING` state are deleted.
+    #
+    #   * `PREPROCESSING`\: The Identity Resolution Job is loading your
+    #     data.
+    #
+    #   * `FIND_MATCHING`\: The Identity Resolution Job is using the machine
+    #     learning model to identify profiles that belong to the same
+    #     matching group.
+    #
+    #   * `MERGING`\: The Identity Resolution Job is merging duplicate
+    #     profiles.
+    #
+    #   * `COMPLETED`\: The Identity Resolution Job completed successfully.
+    #
+    #   * `PARTIAL_SUCCESS`\: There's a system error and not all of the
+    #     data is merged. The Identity Resolution Job writes a message
+    #     indicating the source of the problem.
+    #
+    #   * `FAILED`\: The Identity Resolution Job did not merge any data. It
+    #     writes a message indicating the source of the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error messages that are generated when the Identity Resolution
+    #   Job runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_start_time
+    #   The timestamp of when the Identity Resolution Job was started or
+    #   will be started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_end_time
+    #   The timestamp of when the Identity Resolution Job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp of when the Identity Resolution Job was most recently
+    #   edited.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_expiration_time
+    #   The timestamp of when the Identity Resolution Job will expire.
+    #   @return [Time]
+    #
+    # @!attribute [rw] auto_merging
+    #   Configuration settings for how to perform the auto-merging of
+    #   profiles.
+    #   @return [Types::AutoMerging]
+    #
+    # @!attribute [rw] exporting_location
+    #   The S3 location where the Identity Resolution Job writes result
+    #   files.
+    #   @return [Types::ExportingLocation]
+    #
+    # @!attribute [rw] job_stats
+    #   Statistics about the Identity Resolution Job.
+    #   @return [Types::JobStats]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIdentityResolutionJobResponse AWS API Documentation
+    #
+    class GetIdentityResolutionJobResponse < Struct.new(
+      :domain_name,
+      :job_id,
+      :status,
+      :message,
+      :job_start_time,
+      :job_end_time,
+      :last_updated_at,
+      :job_expiration_time,
+      :auto_merging,
+      :exporting_location,
+      :job_stats)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1343,6 +1720,11 @@ module Aws::CustomerProfiles
     #   found, then the service creates a new standard profile.
     #   @return [Boolean]
     #
+    # @!attribute [rw] source_last_updated_timestamp_format
+    #   The format of your `sourceLastUpdatedTimestamp` that was previously
+    #   set up.
+    #   @return [String]
+    #
     # @!attribute [rw] fields
     #   A map of the name and ObjectType field.
     #   @return [Hash<String,Types::ObjectTypeField>]
@@ -1373,6 +1755,7 @@ module Aws::CustomerProfiles
       :expiration_days,
       :encryption_key,
       :allow_profile_creation,
+      :source_last_updated_timestamp_format,
       :fields,
       :keys,
       :created_at,
@@ -1422,6 +1805,11 @@ module Aws::CustomerProfiles
     #   found, then the service creates a new standard profile.
     #   @return [Boolean]
     #
+    # @!attribute [rw] source_last_updated_timestamp_format
+    #   The format of your `sourceLastUpdatedTimestamp` that was previously
+    #   set up.
+    #   @return [String]
+    #
     # @!attribute [rw] fields
     #   A map of the name and ObjectType field.
     #   @return [Hash<String,Types::ObjectTypeField>]
@@ -1437,8 +1825,83 @@ module Aws::CustomerProfiles
       :source_name,
       :source_object,
       :allow_profile_creation,
+      :source_last_updated_timestamp_format,
       :fields,
       :keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the Identity Resolution Job.
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The unique identifier of the Identity Resolution Job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Identity Resolution Job.
+    #
+    #   * `PENDING`\: The Identity Resolution Job is scheduled but has not
+    #     started yet. If you turn off the Identity Resolution feature in
+    #     your domain, jobs in the `PENDING` state are deleted.
+    #
+    #   * `PREPROCESSING`\: The Identity Resolution Job is loading your
+    #     data.
+    #
+    #   * `FIND_MATCHING`\: The Identity Resolution Job is using the machine
+    #     learning model to identify profiles that belong to the same
+    #     matching group.
+    #
+    #   * `MERGING`\: The Identity Resolution Job is merging duplicate
+    #     profiles.
+    #
+    #   * `COMPLETED`\: The Identity Resolution Job completed successfully.
+    #
+    #   * `PARTIAL_SUCCESS`\: There's a system error and not all of the
+    #     data is merged. The Identity Resolution Job writes a message
+    #     indicating the source of the problem.
+    #
+    #   * `FAILED`\: The Identity Resolution Job did not merge any data. It
+    #     writes a message indicating the source of the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_start_time
+    #   The timestamp of when the job was started or will be started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_end_time
+    #   The timestamp of when the job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] job_stats
+    #   Statistics about an Identity Resolution Job.
+    #   @return [Types::JobStats]
+    #
+    # @!attribute [rw] exporting_location
+    #   The S3 location where the Identity Resolution Job writes result
+    #   files.
+    #   @return [Types::ExportingLocation]
+    #
+    # @!attribute [rw] message
+    #   The error messages that are generated when the Identity Resolution
+    #   Job runs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/IdentityResolutionJob AWS API Documentation
+    #
+    class IdentityResolutionJob < Struct.new(
+      :domain_name,
+      :job_id,
+      :status,
+      :job_start_time,
+      :job_end_time,
+      :job_stats,
+      :exporting_location,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1475,6 +1938,58 @@ module Aws::CustomerProfiles
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The day and time when do you want to start the Identity Resolution Job
+    # every week.
+    #
+    # @note When making an API call, you may pass JobSchedule
+    #   data as a hash:
+    #
+    #       {
+    #         day_of_the_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #         time: "JobScheduleTime", # required
+    #       }
+    #
+    # @!attribute [rw] day_of_the_week
+    #   The day when the Identity Resolution Job should run every week.
+    #   @return [String]
+    #
+    # @!attribute [rw] time
+    #   The time when the Identity Resolution Job should run every week.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/JobSchedule AWS API Documentation
+    #
+    class JobSchedule < Struct.new(
+      :day_of_the_week,
+      :time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics about the Identity Resolution Job.
+    #
+    # @!attribute [rw] number_of_profiles_reviewed
+    #   The number of profiles reviewed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_matches_found
+    #   The number of matches found.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_of_merges_done
+    #   The number of merges completed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/JobStats AWS API Documentation
+    #
+    class JobStats < Struct.new(
+      :number_of_profiles_reviewed,
+      :number_of_matches_found,
+      :number_of_merges_done)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1596,6 +2111,57 @@ module Aws::CustomerProfiles
     #
     class ListDomainsResponse < Struct.new(
       :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListIdentityResolutionJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "name", # required
+    #         next_token: "token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIdentityResolutionJobsRequest AWS API Documentation
+    #
+    class ListIdentityResolutionJobsRequest < Struct.new(
+      :domain_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identity_resolution_jobs_list
+    #   A list of Identity Resolution Jobs.
+    #   @return [Array<Types::IdentityResolutionJob>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIdentityResolutionJobsResponse AWS API Documentation
+    #
+    class ListIdentityResolutionJobsResponse < Struct.new(
+      :identity_resolution_jobs_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2000,11 +2566,18 @@ module Aws::CustomerProfiles
     #   A list of identifiers for profiles that match.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] confidence_score
+    #   A number between 0 and 1 that represents the confidence level of
+    #   assigning profiles to a matching group. A score of 1 likely
+    #   indicates an exact match.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MatchItem AWS API Documentation
     #
     class MatchItem < Struct.new(
       :match_id,
-      :profile_ids)
+      :profile_ids,
+      :confidence_score)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2016,16 +2589,55 @@ module Aws::CustomerProfiles
     #
     #       {
     #         enabled: false, # required
+    #         job_schedule: {
+    #           day_of_the_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #           time: "JobScheduleTime", # required
+    #         },
+    #         auto_merging: {
+    #           enabled: false, # required
+    #           consolidation: {
+    #             matching_attributes_list: [ # required
+    #               ["string1To255"],
+    #             ],
+    #           },
+    #           conflict_resolution: {
+    #             conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
+    #             source_name: "string1To255",
+    #           },
+    #         },
+    #         exporting_config: {
+    #           s3_exporting: {
+    #             s3_bucket_name: "s3BucketName", # required
+    #             s3_key_name: "s3KeyNameCustomerOutputConfig",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] enabled
     #   The flag that enables the matching process of duplicate profiles.
     #   @return [Boolean]
     #
+    # @!attribute [rw] job_schedule
+    #   The day and time when do you want to start the Identity Resolution
+    #   Job every week.
+    #   @return [Types::JobSchedule]
+    #
+    # @!attribute [rw] auto_merging
+    #   Configuration information about the auto-merging process.
+    #   @return [Types::AutoMerging]
+    #
+    # @!attribute [rw] exporting_config
+    #   Configuration information for exporting Identity Resolution results,
+    #   for example, to an S3 bucket.
+    #   @return [Types::ExportingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MatchingRequest AWS API Documentation
     #
     class MatchingRequest < Struct.new(
-      :enabled)
+      :enabled,
+      :job_schedule,
+      :auto_merging,
+      :exporting_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2036,10 +2648,27 @@ module Aws::CustomerProfiles
     #   The flag that enables the matching process of duplicate profiles.
     #   @return [Boolean]
     #
+    # @!attribute [rw] job_schedule
+    #   The day and time when do you want to start the Identity Resolution
+    #   Job every week.
+    #   @return [Types::JobSchedule]
+    #
+    # @!attribute [rw] auto_merging
+    #   Configuration information about the auto-merging process.
+    #   @return [Types::AutoMerging]
+    #
+    # @!attribute [rw] exporting_config
+    #   Configuration information for exporting Identity Resolution results,
+    #   for example, to an S3 bucket.
+    #   @return [Types::ExportingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/MatchingResponse AWS API Documentation
     #
     class MatchingResponse < Struct.new(
-      :enabled)
+      :enabled,
+      :job_schedule,
+      :auto_merging,
+      :exporting_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2551,6 +3180,7 @@ module Aws::CustomerProfiles
     #         expiration_days: 1,
     #         encryption_key: "encryptionKey",
     #         allow_profile_creation: false,
+    #         source_last_updated_timestamp_format: "string1To255",
     #         fields: {
     #           "name" => {
     #             source: "text",
@@ -2605,6 +3235,11 @@ module Aws::CustomerProfiles
     #   found, then the service creates a new standard profile.
     #   @return [Boolean]
     #
+    # @!attribute [rw] source_last_updated_timestamp_format
+    #   The format of your `sourceLastUpdatedTimestamp` that was previously
+    #   set up.
+    #   @return [String]
+    #
     # @!attribute [rw] fields
     #   A map of the name and ObjectType field.
     #   @return [Hash<String,Types::ObjectTypeField>]
@@ -2628,6 +3263,7 @@ module Aws::CustomerProfiles
       :expiration_days,
       :encryption_key,
       :allow_profile_creation,
+      :source_last_updated_timestamp_format,
       :fields,
       :keys,
       :tags)
@@ -2665,6 +3301,17 @@ module Aws::CustomerProfiles
     #   found, then the service creates a new standard profile.
     #   @return [Boolean]
     #
+    # @!attribute [rw] source_last_updated_timestamp_format
+    #   The format of your `sourceLastUpdatedTimestamp` that was previously
+    #   set up in fields that were parsed using [SimpleDateFormat][1]. If
+    #   you have `sourceLastUpdatedTimestamp` in your field, you must set up
+    #   `sourceLastUpdatedTimestampFormat`.
+    #
+    #
+    #
+    #   [1]: https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html
+    #   @return [String]
+    #
     # @!attribute [rw] fields
     #   A map of the name and ObjectType field.
     #   @return [Hash<String,Types::ObjectTypeField>]
@@ -2695,6 +3342,7 @@ module Aws::CustomerProfiles
       :expiration_days,
       :encryption_key,
       :allow_profile_creation,
+      :source_last_updated_timestamp_format,
       :fields,
       :keys,
       :created_at,
@@ -2713,6 +3361,57 @@ module Aws::CustomerProfiles
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information about the S3 bucket where Identity
+    # Resolution Jobs write result files.
+    #
+    # @note When making an API call, you may pass S3ExportingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket_name: "s3BucketName", # required
+    #         s3_key_name: "s3KeyNameCustomerOutputConfig",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket where Identity Resolution Jobs write
+    #   result files.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_name
+    #   The S3 key name of the location where Identity Resolution Jobs write
+    #   result files.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/S3ExportingConfig AWS API Documentation
+    #
+    class S3ExportingConfig < Struct.new(
+      :s3_bucket_name,
+      :s3_key_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 location where Identity Resolution Jobs write result files.
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket name where Identity Resolution Jobs write
+    #   result files.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_name
+    #   The S3 key name of the location where Identity Resolution Jobs write
+    #   result files.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/S3ExportingLocation AWS API Documentation
+    #
+    class S3ExportingLocation < Struct.new(
+      :s3_bucket_name,
+      :s3_key_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3350,6 +4049,28 @@ module Aws::CustomerProfiles
     #         dead_letter_queue_url: "sqsQueueUrl",
     #         matching: {
     #           enabled: false, # required
+    #           job_schedule: {
+    #             day_of_the_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #             time: "JobScheduleTime", # required
+    #           },
+    #           auto_merging: {
+    #             enabled: false, # required
+    #             consolidation: {
+    #               matching_attributes_list: [ # required
+    #                 ["string1To255"],
+    #               ],
+    #             },
+    #             conflict_resolution: {
+    #               conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
+    #               source_name: "string1To255",
+    #             },
+    #           },
+    #           exporting_config: {
+    #             s3_exporting: {
+    #               s3_bucket_name: "s3BucketName", # required
+    #               s3_key_name: "s3KeyNameCustomerOutputConfig",
+    #             },
+    #           },
     #         },
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -3382,11 +4103,16 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] matching
-    #   The process of matching duplicate profiles. If Matching = true,
-    #   Amazon Connect Customer Profiles starts a weekly batch process every
+    #   The process of matching duplicate profiles. If `Matching` = `true`,
+    #   Amazon Connect Customer Profiles starts a weekly batch process
+    #   called Identity Resolution Job. If you do not specify a date and
+    #   time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains.
-    #   After that batch process completes, use the [GetMatches][1] API to
-    #   return and review the results.
+    #
+    #   After the Identity Resolution Job completes, use the [GetMatches][1]
+    #   API to return and review the results. Or, if you have configured
+    #   `ExportingConfig` in the `MatchingRequest`, you can download the
+    #   results from S3.
     #
     #
     #
@@ -3432,11 +4158,16 @@ module Aws::CustomerProfiles
     #   @return [String]
     #
     # @!attribute [rw] matching
-    #   The process of matching duplicate profiles. If Matching = true,
-    #   Amazon Connect Customer Profiles starts a weekly batch process every
+    #   The process of matching duplicate profiles. If `Matching` = `true`,
+    #   Amazon Connect Customer Profiles starts a weekly batch process
+    #   called Identity Resolution Job. If you do not specify a date and
+    #   time for Identity Resolution Job to run, by default it runs every
     #   Saturday at 12AM UTC to detect duplicate profiles in your domains.
-    #   After that batch process completes, use the [GetMatches][1] API to
-    #   return and review the results.
+    #
+    #   After the Identity Resolution Job completes, use the [GetMatches][1]
+    #   API to return and review the results. Or, if you have configured
+    #   `ExportingConfig` in the `MatchingRequest`, you can download the
+    #   results from S3.
     #
     #
     #

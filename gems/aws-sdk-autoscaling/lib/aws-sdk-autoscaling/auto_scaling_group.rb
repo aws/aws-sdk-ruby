@@ -676,6 +676,78 @@ module Aws::AutoScaling
     #             predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
     #             resource_label: "XmlStringMaxLen1023",
     #           },
+    #           customized_scaling_metric_specification: {
+    #             metric_data_queries: [ # required
+    #               {
+    #                 id: "XmlStringMaxLen255", # required
+    #                 expression: "XmlStringMaxLen1023",
+    #                 metric_stat: {
+    #                   metric: { # required
+    #                     namespace: "MetricNamespace", # required
+    #                     metric_name: "MetricName", # required
+    #                     dimensions: [
+    #                       {
+    #                         name: "MetricDimensionName", # required
+    #                         value: "MetricDimensionValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                   stat: "XmlStringMetricStat", # required
+    #                   unit: "MetricUnit",
+    #                 },
+    #                 label: "XmlStringMetricLabel",
+    #                 return_data: false,
+    #               },
+    #             ],
+    #           },
+    #           customized_load_metric_specification: {
+    #             metric_data_queries: [ # required
+    #               {
+    #                 id: "XmlStringMaxLen255", # required
+    #                 expression: "XmlStringMaxLen1023",
+    #                 metric_stat: {
+    #                   metric: { # required
+    #                     namespace: "MetricNamespace", # required
+    #                     metric_name: "MetricName", # required
+    #                     dimensions: [
+    #                       {
+    #                         name: "MetricDimensionName", # required
+    #                         value: "MetricDimensionValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                   stat: "XmlStringMetricStat", # required
+    #                   unit: "MetricUnit",
+    #                 },
+    #                 label: "XmlStringMetricLabel",
+    #                 return_data: false,
+    #               },
+    #             ],
+    #           },
+    #           customized_capacity_metric_specification: {
+    #             metric_data_queries: [ # required
+    #               {
+    #                 id: "XmlStringMaxLen255", # required
+    #                 expression: "XmlStringMaxLen1023",
+    #                 metric_stat: {
+    #                   metric: { # required
+    #                     namespace: "MetricNamespace", # required
+    #                     metric_name: "MetricName", # required
+    #                     dimensions: [
+    #                       {
+    #                         name: "MetricDimensionName", # required
+    #                         value: "MetricDimensionValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                   stat: "XmlStringMetricStat", # required
+    #                   unit: "MetricUnit",
+    #                 },
+    #                 label: "XmlStringMetricLabel",
+    #                 return_data: false,
+    #               },
+    #             ],
+    #           },
     #         },
     #       ],
     #       mode: "ForecastAndScale", # accepts ForecastAndScale, ForecastOnly

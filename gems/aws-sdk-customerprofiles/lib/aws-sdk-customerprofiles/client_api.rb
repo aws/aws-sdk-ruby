@@ -19,11 +19,15 @@ module Aws::CustomerProfiles
     Address = Shapes::StructureShape.new(name: 'Address')
     AttributeSourceIdMap = Shapes::MapShape.new(name: 'AttributeSourceIdMap')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
+    AutoMerging = Shapes::StructureShape.new(name: 'AutoMerging')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     BucketPrefix = Shapes::StringShape.new(name: 'BucketPrefix')
+    ConflictResolution = Shapes::StructureShape.new(name: 'ConflictResolution')
+    ConflictResolvingModel = Shapes::StringShape.new(name: 'ConflictResolvingModel')
     ConnectorOperator = Shapes::StructureShape.new(name: 'ConnectorOperator')
     ConnectorProfileName = Shapes::StringShape.new(name: 'ConnectorProfileName')
+    Consolidation = Shapes::StructureShape.new(name: 'Consolidation')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
     CreateDomainResponse = Shapes::StructureShape.new(name: 'CreateDomainResponse')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
@@ -46,6 +50,9 @@ module Aws::CustomerProfiles
     DestinationField = Shapes::StringShape.new(name: 'DestinationField')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
     DomainStats = Shapes::StructureShape.new(name: 'DomainStats')
+    Double = Shapes::FloatShape.new(name: 'Double')
+    ExportingConfig = Shapes::StructureShape.new(name: 'ExportingConfig')
+    ExportingLocation = Shapes::StructureShape.new(name: 'ExportingLocation')
     FieldContentType = Shapes::StringShape.new(name: 'FieldContentType')
     FieldMap = Shapes::MapShape.new(name: 'FieldMap')
     FieldNameList = Shapes::ListShape.new(name: 'FieldNameList')
@@ -54,8 +61,12 @@ module Aws::CustomerProfiles
     FlowDescription = Shapes::StringShape.new(name: 'FlowDescription')
     FlowName = Shapes::StringShape.new(name: 'FlowName')
     Gender = Shapes::StringShape.new(name: 'Gender')
+    GetAutoMergingPreviewRequest = Shapes::StructureShape.new(name: 'GetAutoMergingPreviewRequest')
+    GetAutoMergingPreviewResponse = Shapes::StructureShape.new(name: 'GetAutoMergingPreviewResponse')
     GetDomainRequest = Shapes::StructureShape.new(name: 'GetDomainRequest')
     GetDomainResponse = Shapes::StructureShape.new(name: 'GetDomainResponse')
+    GetIdentityResolutionJobRequest = Shapes::StructureShape.new(name: 'GetIdentityResolutionJobRequest')
+    GetIdentityResolutionJobResponse = Shapes::StructureShape.new(name: 'GetIdentityResolutionJobResponse')
     GetIntegrationRequest = Shapes::StructureShape.new(name: 'GetIntegrationRequest')
     GetIntegrationResponse = Shapes::StructureShape.new(name: 'GetIntegrationResponse')
     GetMatchesRequest = Shapes::StructureShape.new(name: 'GetMatchesRequest')
@@ -64,9 +75,16 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'GetProfileObjectTypeResponse')
     GetProfileObjectTypeTemplateRequest = Shapes::StructureShape.new(name: 'GetProfileObjectTypeTemplateRequest')
     GetProfileObjectTypeTemplateResponse = Shapes::StructureShape.new(name: 'GetProfileObjectTypeTemplateResponse')
+    IdentityResolutionJob = Shapes::StructureShape.new(name: 'IdentityResolutionJob')
+    IdentityResolutionJobStatus = Shapes::StringShape.new(name: 'IdentityResolutionJobStatus')
+    IdentityResolutionJobsList = Shapes::ListShape.new(name: 'IdentityResolutionJobsList')
     IncrementalPullConfig = Shapes::StructureShape.new(name: 'IncrementalPullConfig')
     IntegrationList = Shapes::ListShape.new(name: 'IntegrationList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    JobSchedule = Shapes::StructureShape.new(name: 'JobSchedule')
+    JobScheduleDayOfTheWeek = Shapes::StringShape.new(name: 'JobScheduleDayOfTheWeek')
+    JobScheduleTime = Shapes::StringShape.new(name: 'JobScheduleTime')
+    JobStats = Shapes::StructureShape.new(name: 'JobStats')
     KeyMap = Shapes::MapShape.new(name: 'KeyMap')
     KmsArn = Shapes::StringShape.new(name: 'KmsArn')
     ListAccountIntegrationsRequest = Shapes::StructureShape.new(name: 'ListAccountIntegrationsRequest')
@@ -74,6 +92,8 @@ module Aws::CustomerProfiles
     ListDomainItem = Shapes::StructureShape.new(name: 'ListDomainItem')
     ListDomainsRequest = Shapes::StructureShape.new(name: 'ListDomainsRequest')
     ListDomainsResponse = Shapes::StructureShape.new(name: 'ListDomainsResponse')
+    ListIdentityResolutionJobsRequest = Shapes::StructureShape.new(name: 'ListIdentityResolutionJobsRequest')
+    ListIdentityResolutionJobsResponse = Shapes::StructureShape.new(name: 'ListIdentityResolutionJobsResponse')
     ListIntegrationItem = Shapes::StructureShape.new(name: 'ListIntegrationItem')
     ListIntegrationsRequest = Shapes::StructureShape.new(name: 'ListIntegrationsRequest')
     ListIntegrationsResponse = Shapes::StructureShape.new(name: 'ListIntegrationsResponse')
@@ -92,6 +112,8 @@ module Aws::CustomerProfiles
     MarketoSourceProperties = Shapes::StructureShape.new(name: 'MarketoSourceProperties')
     MatchItem = Shapes::StructureShape.new(name: 'MatchItem')
     MatchesList = Shapes::ListShape.new(name: 'MatchesList')
+    MatchingAttributes = Shapes::ListShape.new(name: 'MatchingAttributes')
+    MatchingAttributesList = Shapes::ListShape.new(name: 'MatchingAttributesList')
     MatchingRequest = Shapes::StructureShape.new(name: 'MatchingRequest')
     MatchingResponse = Shapes::StructureShape.new(name: 'MatchingResponse')
     MergeProfilesRequest = Shapes::StructureShape.new(name: 'MergeProfilesRequest')
@@ -119,6 +141,8 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'PutProfileObjectTypeResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3ConnectorOperator = Shapes::StringShape.new(name: 'S3ConnectorOperator')
+    S3ExportingConfig = Shapes::StructureShape.new(name: 'S3ExportingConfig')
+    S3ExportingLocation = Shapes::StructureShape.new(name: 'S3ExportingLocation')
     S3SourceProperties = Shapes::StructureShape.new(name: 'S3SourceProperties')
     SalesforceConnectorOperator = Shapes::StringShape.new(name: 'SalesforceConnectorOperator')
     SalesforceSourceProperties = Shapes::StructureShape.new(name: 'SalesforceSourceProperties')
@@ -171,6 +195,9 @@ module Aws::CustomerProfiles
     name = Shapes::StringShape.new(name: 'name')
     optionalBoolean = Shapes::BooleanShape.new(name: 'optionalBoolean')
     requestValueList = Shapes::ListShape.new(name: 'requestValueList')
+    s3BucketName = Shapes::StringShape.new(name: 's3BucketName')
+    s3KeyName = Shapes::StringShape.new(name: 's3KeyName')
+    s3KeyNameCustomerOutputConfig = Shapes::StringShape.new(name: 's3KeyNameCustomerOutputConfig')
     sqsQueueUrl = Shapes::StringShape.new(name: 'sqsQueueUrl')
     string0To1000 = Shapes::StringShape.new(name: 'string0To1000')
     string0To255 = Shapes::StringShape.new(name: 'string0To255')
@@ -215,8 +242,17 @@ module Aws::CustomerProfiles
     Attributes.key = Shapes::ShapeRef.new(shape: string1To255)
     Attributes.value = Shapes::ShapeRef.new(shape: string1To255)
 
+    AutoMerging.add_member(:enabled, Shapes::ShapeRef.new(shape: optionalBoolean, required: true, location_name: "Enabled"))
+    AutoMerging.add_member(:consolidation, Shapes::ShapeRef.new(shape: Consolidation, location_name: "Consolidation"))
+    AutoMerging.add_member(:conflict_resolution, Shapes::ShapeRef.new(shape: ConflictResolution, location_name: "ConflictResolution"))
+    AutoMerging.struct_class = Types::AutoMerging
+
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    ConflictResolution.add_member(:conflict_resolving_model, Shapes::ShapeRef.new(shape: ConflictResolvingModel, required: true, location_name: "ConflictResolvingModel"))
+    ConflictResolution.add_member(:source_name, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceName"))
+    ConflictResolution.struct_class = Types::ConflictResolution
 
     ConnectorOperator.add_member(:marketo, Shapes::ShapeRef.new(shape: MarketoConnectorOperator, location_name: "Marketo"))
     ConnectorOperator.add_member(:s3, Shapes::ShapeRef.new(shape: S3ConnectorOperator, location_name: "S3"))
@@ -224,6 +260,9 @@ module Aws::CustomerProfiles
     ConnectorOperator.add_member(:service_now, Shapes::ShapeRef.new(shape: ServiceNowConnectorOperator, location_name: "ServiceNow"))
     ConnectorOperator.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskConnectorOperator, location_name: "Zendesk"))
     ConnectorOperator.struct_class = Types::ConnectorOperator
+
+    Consolidation.add_member(:matching_attributes_list, Shapes::ShapeRef.new(shape: MatchingAttributesList, required: true, location_name: "MatchingAttributesList"))
+    Consolidation.struct_class = Types::Consolidation
 
     CreateDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     CreateDomainRequest.add_member(:default_expiration_days, Shapes::ShapeRef.new(shape: expirationDaysInteger, required: true, location_name: "DefaultExpirationDays"))
@@ -323,6 +362,12 @@ module Aws::CustomerProfiles
     DomainStats.add_member(:total_size, Shapes::ShapeRef.new(shape: long, location_name: "TotalSize"))
     DomainStats.struct_class = Types::DomainStats
 
+    ExportingConfig.add_member(:s3_exporting, Shapes::ShapeRef.new(shape: S3ExportingConfig, location_name: "S3Exporting"))
+    ExportingConfig.struct_class = Types::ExportingConfig
+
+    ExportingLocation.add_member(:s3_exporting, Shapes::ShapeRef.new(shape: S3ExportingLocation, location_name: "S3Exporting"))
+    ExportingLocation.struct_class = Types::ExportingLocation
+
     FieldMap.key = Shapes::ShapeRef.new(shape: name)
     FieldMap.value = Shapes::ShapeRef.new(shape: ObjectTypeField)
 
@@ -359,6 +404,17 @@ module Aws::CustomerProfiles
     FlowDefinition.add_member(:trigger_config, Shapes::ShapeRef.new(shape: TriggerConfig, required: true, location_name: "TriggerConfig"))
     FlowDefinition.struct_class = Types::FlowDefinition
 
+    GetAutoMergingPreviewRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetAutoMergingPreviewRequest.add_member(:consolidation, Shapes::ShapeRef.new(shape: Consolidation, required: true, location_name: "Consolidation"))
+    GetAutoMergingPreviewRequest.add_member(:conflict_resolution, Shapes::ShapeRef.new(shape: ConflictResolution, required: true, location_name: "ConflictResolution"))
+    GetAutoMergingPreviewRequest.struct_class = Types::GetAutoMergingPreviewRequest
+
+    GetAutoMergingPreviewResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "DomainName"))
+    GetAutoMergingPreviewResponse.add_member(:number_of_matches_in_sample, Shapes::ShapeRef.new(shape: long, location_name: "NumberOfMatchesInSample"))
+    GetAutoMergingPreviewResponse.add_member(:number_of_profiles_in_sample, Shapes::ShapeRef.new(shape: long, location_name: "NumberOfProfilesInSample"))
+    GetAutoMergingPreviewResponse.add_member(:number_of_profiles_will_be_merged, Shapes::ShapeRef.new(shape: long, location_name: "NumberOfProfilesWillBeMerged"))
+    GetAutoMergingPreviewResponse.struct_class = Types::GetAutoMergingPreviewResponse
+
     GetDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetDomainRequest.struct_class = Types::GetDomainRequest
 
@@ -372,6 +428,23 @@ module Aws::CustomerProfiles
     GetDomainResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     GetDomainResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetDomainResponse.struct_class = Types::GetDomainResponse
+
+    GetIdentityResolutionJobRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetIdentityResolutionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: uuid, required: true, location: "uri", location_name: "JobId"))
+    GetIdentityResolutionJobRequest.struct_class = Types::GetIdentityResolutionJobRequest
+
+    GetIdentityResolutionJobResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, location_name: "DomainName"))
+    GetIdentityResolutionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: uuid, location_name: "JobId"))
+    GetIdentityResolutionJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: IdentityResolutionJobStatus, location_name: "Status"))
+    GetIdentityResolutionJobResponse.add_member(:message, Shapes::ShapeRef.new(shape: stringTo2048, location_name: "Message"))
+    GetIdentityResolutionJobResponse.add_member(:job_start_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "JobStartTime"))
+    GetIdentityResolutionJobResponse.add_member(:job_end_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "JobEndTime"))
+    GetIdentityResolutionJobResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
+    GetIdentityResolutionJobResponse.add_member(:job_expiration_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "JobExpirationTime"))
+    GetIdentityResolutionJobResponse.add_member(:auto_merging, Shapes::ShapeRef.new(shape: AutoMerging, location_name: "AutoMerging"))
+    GetIdentityResolutionJobResponse.add_member(:exporting_location, Shapes::ShapeRef.new(shape: ExportingLocation, location_name: "ExportingLocation"))
+    GetIdentityResolutionJobResponse.add_member(:job_stats, Shapes::ShapeRef.new(shape: JobStats, location_name: "JobStats"))
+    GetIdentityResolutionJobResponse.struct_class = Types::GetIdentityResolutionJobResponse
 
     GetIntegrationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     GetIntegrationRequest.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
@@ -406,6 +479,7 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeResponse.add_member(:expiration_days, Shapes::ShapeRef.new(shape: expirationDaysInteger, location_name: "ExpirationDays"))
     GetProfileObjectTypeResponse.add_member(:encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "EncryptionKey"))
     GetProfileObjectTypeResponse.add_member(:allow_profile_creation, Shapes::ShapeRef.new(shape: boolean, location_name: "AllowProfileCreation"))
+    GetProfileObjectTypeResponse.add_member(:source_last_updated_timestamp_format, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceLastUpdatedTimestampFormat"))
     GetProfileObjectTypeResponse.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     GetProfileObjectTypeResponse.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     GetProfileObjectTypeResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
@@ -420,9 +494,22 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeTemplateResponse.add_member(:source_name, Shapes::ShapeRef.new(shape: name, location_name: "SourceName"))
     GetProfileObjectTypeTemplateResponse.add_member(:source_object, Shapes::ShapeRef.new(shape: name, location_name: "SourceObject"))
     GetProfileObjectTypeTemplateResponse.add_member(:allow_profile_creation, Shapes::ShapeRef.new(shape: boolean, location_name: "AllowProfileCreation"))
+    GetProfileObjectTypeTemplateResponse.add_member(:source_last_updated_timestamp_format, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceLastUpdatedTimestampFormat"))
     GetProfileObjectTypeTemplateResponse.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     GetProfileObjectTypeTemplateResponse.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     GetProfileObjectTypeTemplateResponse.struct_class = Types::GetProfileObjectTypeTemplateResponse
+
+    IdentityResolutionJob.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, location_name: "DomainName"))
+    IdentityResolutionJob.add_member(:job_id, Shapes::ShapeRef.new(shape: uuid, location_name: "JobId"))
+    IdentityResolutionJob.add_member(:status, Shapes::ShapeRef.new(shape: IdentityResolutionJobStatus, location_name: "Status"))
+    IdentityResolutionJob.add_member(:job_start_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "JobStartTime"))
+    IdentityResolutionJob.add_member(:job_end_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "JobEndTime"))
+    IdentityResolutionJob.add_member(:job_stats, Shapes::ShapeRef.new(shape: JobStats, location_name: "JobStats"))
+    IdentityResolutionJob.add_member(:exporting_location, Shapes::ShapeRef.new(shape: ExportingLocation, location_name: "ExportingLocation"))
+    IdentityResolutionJob.add_member(:message, Shapes::ShapeRef.new(shape: stringTo2048, location_name: "Message"))
+    IdentityResolutionJob.struct_class = Types::IdentityResolutionJob
+
+    IdentityResolutionJobsList.member = Shapes::ShapeRef.new(shape: IdentityResolutionJob)
 
     IncrementalPullConfig.add_member(:datetime_type_field_name, Shapes::ShapeRef.new(shape: DatetimeTypeFieldName, location_name: "DatetimeTypeFieldName"))
     IncrementalPullConfig.struct_class = Types::IncrementalPullConfig
@@ -431,6 +518,15 @@ module Aws::CustomerProfiles
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    JobSchedule.add_member(:day_of_the_week, Shapes::ShapeRef.new(shape: JobScheduleDayOfTheWeek, required: true, location_name: "DayOfTheWeek"))
+    JobSchedule.add_member(:time, Shapes::ShapeRef.new(shape: JobScheduleTime, required: true, location_name: "Time"))
+    JobSchedule.struct_class = Types::JobSchedule
+
+    JobStats.add_member(:number_of_profiles_reviewed, Shapes::ShapeRef.new(shape: long, location_name: "NumberOfProfilesReviewed"))
+    JobStats.add_member(:number_of_matches_found, Shapes::ShapeRef.new(shape: long, location_name: "NumberOfMatchesFound"))
+    JobStats.add_member(:number_of_merges_done, Shapes::ShapeRef.new(shape: long, location_name: "NumberOfMergesDone"))
+    JobStats.struct_class = Types::JobStats
 
     KeyMap.key = Shapes::ShapeRef.new(shape: name)
     KeyMap.value = Shapes::ShapeRef.new(shape: ObjectTypeKeyList)
@@ -457,6 +553,15 @@ module Aws::CustomerProfiles
     ListDomainsResponse.add_member(:items, Shapes::ShapeRef.new(shape: DomainList, location_name: "Items"))
     ListDomainsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     ListDomainsResponse.struct_class = Types::ListDomainsResponse
+
+    ListIdentityResolutionJobsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    ListIdentityResolutionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    ListIdentityResolutionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    ListIdentityResolutionJobsRequest.struct_class = Types::ListIdentityResolutionJobsRequest
+
+    ListIdentityResolutionJobsResponse.add_member(:identity_resolution_jobs_list, Shapes::ShapeRef.new(shape: IdentityResolutionJobsList, location_name: "IdentityResolutionJobsList"))
+    ListIdentityResolutionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    ListIdentityResolutionJobsResponse.struct_class = Types::ListIdentityResolutionJobsResponse
 
     ListIntegrationItem.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "DomainName"))
     ListIntegrationItem.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
@@ -532,14 +637,25 @@ module Aws::CustomerProfiles
 
     MatchItem.add_member(:match_id, Shapes::ShapeRef.new(shape: string1To255, location_name: "MatchId"))
     MatchItem.add_member(:profile_ids, Shapes::ShapeRef.new(shape: ProfileIdList, location_name: "ProfileIds"))
+    MatchItem.add_member(:confidence_score, Shapes::ShapeRef.new(shape: Double, location_name: "ConfidenceScore"))
     MatchItem.struct_class = Types::MatchItem
 
     MatchesList.member = Shapes::ShapeRef.new(shape: MatchItem)
 
+    MatchingAttributes.member = Shapes::ShapeRef.new(shape: string1To255)
+
+    MatchingAttributesList.member = Shapes::ShapeRef.new(shape: MatchingAttributes)
+
     MatchingRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: optionalBoolean, required: true, location_name: "Enabled"))
+    MatchingRequest.add_member(:job_schedule, Shapes::ShapeRef.new(shape: JobSchedule, location_name: "JobSchedule"))
+    MatchingRequest.add_member(:auto_merging, Shapes::ShapeRef.new(shape: AutoMerging, location_name: "AutoMerging"))
+    MatchingRequest.add_member(:exporting_config, Shapes::ShapeRef.new(shape: ExportingConfig, location_name: "ExportingConfig"))
     MatchingRequest.struct_class = Types::MatchingRequest
 
     MatchingResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: optionalBoolean, location_name: "Enabled"))
+    MatchingResponse.add_member(:job_schedule, Shapes::ShapeRef.new(shape: JobSchedule, location_name: "JobSchedule"))
+    MatchingResponse.add_member(:auto_merging, Shapes::ShapeRef.new(shape: AutoMerging, location_name: "AutoMerging"))
+    MatchingResponse.add_member(:exporting_config, Shapes::ShapeRef.new(shape: ExportingConfig, location_name: "ExportingConfig"))
     MatchingResponse.struct_class = Types::MatchingResponse
 
     MergeProfilesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
@@ -632,6 +748,7 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeRequest.add_member(:expiration_days, Shapes::ShapeRef.new(shape: expirationDaysInteger, location_name: "ExpirationDays"))
     PutProfileObjectTypeRequest.add_member(:encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "EncryptionKey"))
     PutProfileObjectTypeRequest.add_member(:allow_profile_creation, Shapes::ShapeRef.new(shape: boolean, location_name: "AllowProfileCreation"))
+    PutProfileObjectTypeRequest.add_member(:source_last_updated_timestamp_format, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceLastUpdatedTimestampFormat"))
     PutProfileObjectTypeRequest.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     PutProfileObjectTypeRequest.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     PutProfileObjectTypeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -643,6 +760,7 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeResponse.add_member(:expiration_days, Shapes::ShapeRef.new(shape: expirationDaysInteger, location_name: "ExpirationDays"))
     PutProfileObjectTypeResponse.add_member(:encryption_key, Shapes::ShapeRef.new(shape: encryptionKey, location_name: "EncryptionKey"))
     PutProfileObjectTypeResponse.add_member(:allow_profile_creation, Shapes::ShapeRef.new(shape: boolean, location_name: "AllowProfileCreation"))
+    PutProfileObjectTypeResponse.add_member(:source_last_updated_timestamp_format, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceLastUpdatedTimestampFormat"))
     PutProfileObjectTypeResponse.add_member(:fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "Fields"))
     PutProfileObjectTypeResponse.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     PutProfileObjectTypeResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreatedAt"))
@@ -652,6 +770,14 @@ module Aws::CustomerProfiles
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    S3ExportingConfig.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: s3BucketName, required: true, location_name: "S3BucketName"))
+    S3ExportingConfig.add_member(:s3_key_name, Shapes::ShapeRef.new(shape: s3KeyNameCustomerOutputConfig, location_name: "S3KeyName"))
+    S3ExportingConfig.struct_class = Types::S3ExportingConfig
+
+    S3ExportingLocation.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: s3BucketName, location_name: "S3BucketName"))
+    S3ExportingLocation.add_member(:s3_key_name, Shapes::ShapeRef.new(shape: s3KeyName, location_name: "S3KeyName"))
+    S3ExportingLocation.struct_class = Types::S3ExportingLocation
 
     S3SourceProperties.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "BucketName"))
     S3SourceProperties.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: BucketPrefix, location_name: "BucketPrefix"))
@@ -943,12 +1069,38 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_auto_merging_preview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAutoMergingPreview"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/identity-resolution-jobs/auto-merging-preview"
+        o.input = Shapes::ShapeRef.new(shape: GetAutoMergingPreviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAutoMergingPreviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDomain"
         o.http_method = "GET"
         o.http_request_uri = "/domains/{DomainName}"
         o.input = Shapes::ShapeRef.new(shape: GetDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_identity_resolution_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIdentityResolutionJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/identity-resolution-jobs/{JobId}"
+        o.input = Shapes::ShapeRef.new(shape: GetIdentityResolutionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetIdentityResolutionJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1027,6 +1179,19 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains"
         o.input = Shapes::ShapeRef.new(shape: ListDomainsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDomainsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_identity_resolution_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIdentityResolutionJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/identity-resolution-jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListIdentityResolutionJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIdentityResolutionJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

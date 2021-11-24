@@ -110,6 +110,8 @@ module Aws::Imagebuilder
     #         launch_permission: {
     #           user_ids: ["AccountId"],
     #           user_groups: ["NonEmptyString"],
+    #           organization_arns: ["OrganizationArn"],
+    #           organizational_unit_arns: ["OrganizationalUnitArn"],
     #         },
     #       }
     #
@@ -118,7 +120,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the distribution configuration. Minimum and
+    #   The description of the AMI distribution configuration. Minimum and
     #   maximum length are in characters.
     #   @return [String]
     #
@@ -1197,6 +1199,8 @@ module Aws::Imagebuilder
     #               launch_permission: {
     #                 user_ids: ["AccountId"],
     #                 user_groups: ["NonEmptyString"],
+    #                 organization_arns: ["OrganizationArn"],
+    #                 organizational_unit_arns: ["OrganizationalUnitArn"],
     #               },
     #             },
     #             container_distribution_configuration: {
@@ -2091,6 +2095,8 @@ module Aws::Imagebuilder
     #           launch_permission: {
     #             user_ids: ["AccountId"],
     #             user_groups: ["NonEmptyString"],
+    #             organization_arns: ["OrganizationArn"],
+    #             organizational_unit_arns: ["OrganizationalUnitArn"],
     #           },
     #         },
     #         container_distribution_configuration: {
@@ -3899,6 +3905,8 @@ module Aws::Imagebuilder
     #       {
     #         user_ids: ["AccountId"],
     #         user_groups: ["NonEmptyString"],
+    #         organization_arns: ["OrganizationArn"],
+    #         organizational_unit_arns: ["OrganizationalUnitArn"],
     #       }
     #
     # @!attribute [rw] user_ids
@@ -3909,11 +3917,33 @@ module Aws::Imagebuilder
     #   The name of the group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] organization_arns
+    #   The ARN for an Amazon Web Services Organization that you want to
+    #   share your AMI with. For more information, see [What is
+    #   Organizations?][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organizational_unit_arns
+    #   The ARN for an Organizations organizational unit (OU) that you want
+    #   to share your AMI with. For more information about key concepts for
+    #   Organizations, see [Organizations terminology and concepts][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/LaunchPermissionConfiguration AWS API Documentation
     #
     class LaunchPermissionConfiguration < Struct.new(
       :user_ids,
-      :user_groups)
+      :user_groups,
+      :organization_arns,
+      :organizational_unit_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5406,6 +5436,8 @@ module Aws::Imagebuilder
     #               launch_permission: {
     #                 user_ids: ["AccountId"],
     #                 user_groups: ["NonEmptyString"],
+    #                 organization_arns: ["OrganizationArn"],
+    #                 organizational_unit_arns: ["OrganizationalUnitArn"],
     #               },
     #             },
     #             container_distribution_configuration: {

@@ -346,15 +346,20 @@ module Aws::TimestreamQuery
 
     # @!group API Operations
 
-    # Cancels a query that has been issued. Cancellation is guaranteed only
-    # if the query has not completed execution before the cancellation
-    # request was issued. Because cancellation is an idempotent operation,
+    # Cancels a query that has been issued. Cancellation is provided only if
+    # the query has not completed running before the cancellation request
+    # was issued. Because cancellation is an idempotent operation,
     # subsequent cancellation requests will return a `CancellationMessage`,
-    # indicating that the query has already been canceled.
+    # indicating that the query has already been canceled. See [code
+    # sample][1] for details.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Timestream/latest/developerguide/code-samples.cancel-query.html
     #
     # @option params [required, String] :query_id
-    #   The id of the query that needs to be cancelled. `QueryID` is returned
-    #   as part of QueryResult.
+    #   The ID of the query that needs to be cancelled. `QueryID` is returned
+    #   as part of the query result.
     #
     # @return [Types::CancelQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -379,26 +384,208 @@ module Aws::TimestreamQuery
       req.send_request(options)
     end
 
+    # Create a scheduled query that will be run on your behalf at the
+    # configured schedule. Timestream assumes the execution role provided as
+    # part of the `ScheduledQueryExecutionRoleArn` parameter to run the
+    # query. You can use the `NotificationConfiguration` parameter to
+    # configure notification for your scheduled query operations.
+    #
+    # @option params [required, String] :name
+    #   Name of the scheduled query.
+    #
+    # @option params [required, String] :query_string
+    #   The query string to run. Parameter names can be specified in the query
+    #   string `@` character followed by an identifier. The named Parameter
+    #   `@scheduled_runtime` is reserved and can be used in the query to get
+    #   the time at which the query is scheduled to run.
+    #
+    #   The timestamp calculated according to the ScheduleConfiguration
+    #   parameter, will be the value of `@scheduled_runtime` paramater for
+    #   each query run. For example, consider an instance of a scheduled query
+    #   executing on 2021-12-01 00:00:00. For this instance, the
+    #   `@scheduled_runtime` parameter is initialized to the timestamp
+    #   2021-12-01 00:00:00 when invoking the query.
+    #
+    # @option params [required, Types::ScheduleConfiguration] :schedule_configuration
+    #   The schedule configuration for the query.
+    #
+    # @option params [required, Types::NotificationConfiguration] :notification_configuration
+    #   Notification configuration for the scheduled query. A notification is
+    #   sent by Timestream when a query run finishes, when the state is
+    #   updated or when you delete it.
+    #
+    # @option params [Types::TargetConfiguration] :target_configuration
+    #   Configuration used for writing the result of a query.
+    #
+    # @option params [String] :client_token
+    #   Using a ClientToken makes the call to CreateScheduledQuery idempotent,
+    #   in other words, making the same request repeatedly will produce the
+    #   same result. Making multiple identical CreateScheduledQuery requests
+    #   has the same effect as making a single request.
+    #
+    #   * If CreateScheduledQuery is called without a `ClientToken`, the Query
+    #     SDK generates a `ClientToken` on your behalf.
+    #
+    #   * After 8 hours, any request with the same `ClientToken` is treated as
+    #     a new request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :scheduled_query_execution_role_arn
+    #   The ARN for the IAM role that Timestream will assume when running the
+    #   scheduled query.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to label the scheduled query.
+    #
+    # @option params [String] :kms_key_id
+    #   The Amazon KMS key used to encrypt the scheduled query resource,
+    #   at-rest. If the Amazon KMS key is not specified, the scheduled query
+    #   resource will be encrypted with a Timestream owned Amazon KMS key. To
+    #   specify a KMS key, use the key ID, key ARN, alias name, or alias ARN.
+    #   When using an alias name, prefix the name with *alias/*
+    #
+    #   If ErrorReportConfiguration uses `SSE_KMS` as encryption type, the
+    #   same KmsKeyId is used to encrypt the error report at rest.
+    #
+    # @option params [required, Types::ErrorReportConfiguration] :error_report_configuration
+    #   Configuration for error reporting. Error reports will be generated
+    #   when a problem is encountered when writing the query results.
+    #
+    # @return [Types::CreateScheduledQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateScheduledQueryResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_scheduled_query({
+    #     name: "ScheduledQueryName", # required
+    #     query_string: "QueryString", # required
+    #     schedule_configuration: { # required
+    #       schedule_expression: "ScheduleExpression", # required
+    #     },
+    #     notification_configuration: { # required
+    #       sns_configuration: { # required
+    #         topic_arn: "AmazonResourceName", # required
+    #       },
+    #     },
+    #     target_configuration: {
+    #       timestream_configuration: { # required
+    #         database_name: "ResourceName", # required
+    #         table_name: "ResourceName", # required
+    #         time_column: "SchemaName", # required
+    #         dimension_mappings: [ # required
+    #           {
+    #             name: "SchemaName", # required
+    #             dimension_value_type: "VARCHAR", # required, accepts VARCHAR
+    #           },
+    #         ],
+    #         multi_measure_mappings: {
+    #           target_multi_measure_name: "SchemaName",
+    #           multi_measure_attribute_mappings: [ # required
+    #             {
+    #               source_column: "SchemaName", # required
+    #               target_multi_measure_attribute_name: "SchemaName",
+    #               measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #             },
+    #           ],
+    #         },
+    #         mixed_measure_mappings: [
+    #           {
+    #             measure_name: "SchemaName",
+    #             source_column: "SchemaName",
+    #             target_measure_name: "SchemaName",
+    #             measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, MULTI
+    #             multi_measure_attribute_mappings: [
+    #               {
+    #                 source_column: "SchemaName", # required
+    #                 target_multi_measure_attribute_name: "SchemaName",
+    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         measure_name_column: "SchemaName",
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #     scheduled_query_execution_role_arn: "AmazonResourceName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     kms_key_id: "StringValue2048",
+    #     error_report_configuration: { # required
+    #       s3_configuration: { # required
+    #         bucket_name: "S3BucketName", # required
+    #         object_key_prefix: "S3ObjectKeyPrefix",
+    #         encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/CreateScheduledQuery AWS API Documentation
+    #
+    # @overload create_scheduled_query(params = {})
+    # @param [Hash] params ({})
+    def create_scheduled_query(params = {}, options = {})
+      req = build_request(:create_scheduled_query, params)
+      req.send_request(options)
+    end
+
+    # Deletes a given scheduled query. This is an irreversible operation.
+    #
+    # @option params [required, String] :scheduled_query_arn
+    #   The ARN of the scheduled query.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_scheduled_query({
+    #     scheduled_query_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/DeleteScheduledQuery AWS API Documentation
+    #
+    # @overload delete_scheduled_query(params = {})
+    # @param [Hash] params ({})
+    def delete_scheduled_query(params = {}, options = {})
+      req = build_request(:delete_scheduled_query, params)
+      req.send_request(options)
+    end
+
     # DescribeEndpoints returns a list of available endpoints to make
     # Timestream API calls against. This API is available through both Write
     # and Query.
     #
-    # Because Timestream’s SDKs are designed to transparently work with the
-    # service’s architecture, including the management and mapping of the
-    # service endpoints, *it is not recommended that you use this API
+    # Because the Timestream SDKs are designed to transparently work with
+    # the service’s architecture, including the management and mapping of
+    # the service endpoints, *it is not recommended that you use this API
     # unless*\:
+    #
+    # * You are using [VPC endpoints (Amazon Web Services PrivateLink) with
+    #   Timestream ][1]
     #
     # * Your application uses a programming language that does not yet have
     #   SDK support
     #
     # * You require better control over the client-side implementation
     #
-    # For detailed information on how to use DescribeEndpoints, see [The
-    # Endpoint Discovery Pattern and REST APIs][1].
+    # For detailed information on how and when to use and implement
+    # DescribeEndpoints, see [The Endpoint Discovery Pattern][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/Using-API.endpoint-discovery.html
+    # [1]: https://docs.aws.amazon.com/Timestream/latest/developerguide/VPCEndpoints
+    # [2]: https://docs.aws.amazon.com/Timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery
     #
     # @return [Types::DescribeEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -419,44 +606,393 @@ module Aws::TimestreamQuery
       req.send_request(options)
     end
 
-    # Query is a synchronous operation that enables you to execute a query.
-    # Query will timeout after 60 seconds. You must update the default
-    # timeout in the SDK to support a timeout of 60 seconds. The result set
-    # will be truncated to 1MB. Service quotas apply. For more information,
-    # see Quotas in the Timestream Developer Guide.
+    # Provides detailed information about a scheduled query.
     #
-    # @option params [required, String] :query_string
-    #   The query to be executed by Timestream.
+    # @option params [required, String] :scheduled_query_arn
+    #   The ARN of the scheduled query.
+    #
+    # @return [Types::DescribeScheduledQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeScheduledQueryResponse#scheduled_query #scheduled_query} => Types::ScheduledQueryDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_scheduled_query({
+    #     scheduled_query_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_query.arn #=> String
+    #   resp.scheduled_query.name #=> String
+    #   resp.scheduled_query.query_string #=> String
+    #   resp.scheduled_query.creation_time #=> Time
+    #   resp.scheduled_query.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.scheduled_query.previous_invocation_time #=> Time
+    #   resp.scheduled_query.next_invocation_time #=> Time
+    #   resp.scheduled_query.schedule_configuration.schedule_expression #=> String
+    #   resp.scheduled_query.notification_configuration.sns_configuration.topic_arn #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.database_name #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.table_name #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.time_column #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.dimension_mappings #=> Array
+    #   resp.scheduled_query.target_configuration.timestream_configuration.dimension_mappings[0].name #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.dimension_mappings[0].dimension_value_type #=> String, one of "VARCHAR"
+    #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.target_multi_measure_name #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings #=> Array
+    #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings[0].source_column #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings[0].target_multi_measure_attribute_name #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings[0].measure_value_type #=> String, one of "BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR"
+    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings #=> Array
+    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].measure_name #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].source_column #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].target_measure_name #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].measure_value_type #=> String, one of "BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR", "MULTI"
+    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings #=> Array
+    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings[0].source_column #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings[0].target_multi_measure_attribute_name #=> String
+    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings[0].measure_value_type #=> String, one of "BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR"
+    #   resp.scheduled_query.target_configuration.timestream_configuration.measure_name_column #=> String
+    #   resp.scheduled_query.scheduled_query_execution_role_arn #=> String
+    #   resp.scheduled_query.kms_key_id #=> String
+    #   resp.scheduled_query.error_report_configuration.s3_configuration.bucket_name #=> String
+    #   resp.scheduled_query.error_report_configuration.s3_configuration.object_key_prefix #=> String
+    #   resp.scheduled_query.error_report_configuration.s3_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS"
+    #   resp.scheduled_query.last_run_summary.invocation_time #=> Time
+    #   resp.scheduled_query.last_run_summary.trigger_time #=> Time
+    #   resp.scheduled_query.last_run_summary.run_status #=> String, one of "AUTO_TRIGGER_SUCCESS", "AUTO_TRIGGER_FAILURE", "MANUAL_TRIGGER_SUCCESS", "MANUAL_TRIGGER_FAILURE"
+    #   resp.scheduled_query.last_run_summary.execution_stats.execution_time_in_millis #=> Integer
+    #   resp.scheduled_query.last_run_summary.execution_stats.data_writes #=> Integer
+    #   resp.scheduled_query.last_run_summary.execution_stats.bytes_metered #=> Integer
+    #   resp.scheduled_query.last_run_summary.execution_stats.records_ingested #=> Integer
+    #   resp.scheduled_query.last_run_summary.execution_stats.query_result_rows #=> Integer
+    #   resp.scheduled_query.last_run_summary.error_report_location.s3_report_location.bucket_name #=> String
+    #   resp.scheduled_query.last_run_summary.error_report_location.s3_report_location.object_key #=> String
+    #   resp.scheduled_query.last_run_summary.failure_reason #=> String
+    #   resp.scheduled_query.recently_failed_runs #=> Array
+    #   resp.scheduled_query.recently_failed_runs[0].invocation_time #=> Time
+    #   resp.scheduled_query.recently_failed_runs[0].trigger_time #=> Time
+    #   resp.scheduled_query.recently_failed_runs[0].run_status #=> String, one of "AUTO_TRIGGER_SUCCESS", "AUTO_TRIGGER_FAILURE", "MANUAL_TRIGGER_SUCCESS", "MANUAL_TRIGGER_FAILURE"
+    #   resp.scheduled_query.recently_failed_runs[0].execution_stats.execution_time_in_millis #=> Integer
+    #   resp.scheduled_query.recently_failed_runs[0].execution_stats.data_writes #=> Integer
+    #   resp.scheduled_query.recently_failed_runs[0].execution_stats.bytes_metered #=> Integer
+    #   resp.scheduled_query.recently_failed_runs[0].execution_stats.records_ingested #=> Integer
+    #   resp.scheduled_query.recently_failed_runs[0].execution_stats.query_result_rows #=> Integer
+    #   resp.scheduled_query.recently_failed_runs[0].error_report_location.s3_report_location.bucket_name #=> String
+    #   resp.scheduled_query.recently_failed_runs[0].error_report_location.s3_report_location.object_key #=> String
+    #   resp.scheduled_query.recently_failed_runs[0].failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/DescribeScheduledQuery AWS API Documentation
+    #
+    # @overload describe_scheduled_query(params = {})
+    # @param [Hash] params ({})
+    def describe_scheduled_query(params = {}, options = {})
+      req = build_request(:describe_scheduled_query, params)
+      req.send_request(options)
+    end
+
+    # You can use this API to run a scheduled query manually.
+    #
+    # @option params [required, String] :scheduled_query_arn
+    #   ARN of the scheduled query.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :invocation_time
+    #   The timestamp in UTC. Query will be run as if it was invoked at this
+    #   timestamp.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive string of up to 64 ASCII characters that you
-    #   specify when you make a Query request. Providing a `ClientToken` makes
-    #   the call to `Query` idempotent, meaning that multiple identical calls
-    #   have the same effect as one single call.
+    #   Not used.
     #
-    #   Your query request will fail in the following cases:
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
-    #   * If you submit a request with the same client token outside the
-    #     5-minute idepotency window.
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
-    #   * If you submit a request with the same client token but a change in
-    #     other parameters within the 5-minute idempotency window.
+    # @example Request syntax with placeholder values
     #
-    #   After 4 hours, any request with the same client token is treated as a
-    #   new request.
+    #   resp = client.execute_scheduled_query({
+    #     scheduled_query_arn: "AmazonResourceName", # required
+    #     invocation_time: Time.now, # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/ExecuteScheduledQuery AWS API Documentation
+    #
+    # @overload execute_scheduled_query(params = {})
+    # @param [Hash] params ({})
+    def execute_scheduled_query(params = {}, options = {})
+      req = build_request(:execute_scheduled_query, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of all scheduled queries in the caller's Amazon account
+    # and Region. `ListScheduledQueries` is eventually consistent.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the output. If the total
+    #   number of items available is more than the value specified, a
+    #   `NextToken` is provided in the output. To resume pagination, provide
+    #   the `NextToken` value as the argument to the subsequent call to
+    #   `ListScheduledQueriesRequest`.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to resume pagination.
+    #
+    # @return [Types::ListScheduledQueriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListScheduledQueriesResponse#scheduled_queries #scheduled_queries} => Array&lt;Types::ScheduledQuery&gt;
+    #   * {Types::ListScheduledQueriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_scheduled_queries({
+    #     max_results: 1,
+    #     next_token: "NextScheduledQueriesResultsToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_queries #=> Array
+    #   resp.scheduled_queries[0].arn #=> String
+    #   resp.scheduled_queries[0].name #=> String
+    #   resp.scheduled_queries[0].creation_time #=> Time
+    #   resp.scheduled_queries[0].state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.scheduled_queries[0].previous_invocation_time #=> Time
+    #   resp.scheduled_queries[0].next_invocation_time #=> Time
+    #   resp.scheduled_queries[0].error_report_configuration.s3_configuration.bucket_name #=> String
+    #   resp.scheduled_queries[0].error_report_configuration.s3_configuration.object_key_prefix #=> String
+    #   resp.scheduled_queries[0].error_report_configuration.s3_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS"
+    #   resp.scheduled_queries[0].target_destination.timestream_destination.database_name #=> String
+    #   resp.scheduled_queries[0].target_destination.timestream_destination.table_name #=> String
+    #   resp.scheduled_queries[0].last_run_status #=> String, one of "AUTO_TRIGGER_SUCCESS", "AUTO_TRIGGER_FAILURE", "MANUAL_TRIGGER_SUCCESS", "MANUAL_TRIGGER_FAILURE"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/ListScheduledQueries AWS API Documentation
+    #
+    # @overload list_scheduled_queries(params = {})
+    # @param [Hash] params ({})
+    def list_scheduled_queries(params = {}, options = {})
+      req = build_request(:list_scheduled_queries, params)
+      req.send_request(options)
+    end
+
+    # List all tags on a Timestream query resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Timestream resource with tags to be listed. This value is an
+    #   Amazon Resource Name (ARN).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of tags to return.
+    #
+    # @option params [String] :next_token
+    #   A pagination token to resume pagination.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     max_results: 1,
+    #     next_token: "NextTagsForResourceResultsToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # A synchronous operation that allows you to submit a query with
+    # parameters to be stored by Timestream for later running. Timestream
+    # only supports using this operation with the
+    # `PrepareQueryRequest$ValidateOnly` set to `true`.
+    #
+    # @option params [required, String] :query_string
+    #   The Timestream query string that you want to use as a prepared
+    #   statement. Parameter names can be specified in the query string `@`
+    #   character followed by an identifier.
+    #
+    # @option params [Boolean] :validate_only
+    #   By setting this value to `true`, Timestream will only validate that
+    #   the query string is a valid Timestream query, and not store the
+    #   prepared query for later use.
+    #
+    # @return [Types::PrepareQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PrepareQueryResponse#query_string #query_string} => String
+    #   * {Types::PrepareQueryResponse#columns #columns} => Array&lt;Types::SelectColumn&gt;
+    #   * {Types::PrepareQueryResponse#parameters #parameters} => Array&lt;Types::ParameterMapping&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.prepare_query({
+    #     query_string: "QueryString", # required
+    #     validate_only: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_string #=> String
+    #   resp.columns #=> Array
+    #   resp.columns[0].name #=> String
+    #   resp.columns[0].type.scalar_type #=> String, one of "VARCHAR", "BOOLEAN", "BIGINT", "DOUBLE", "TIMESTAMP", "DATE", "TIME", "INTERVAL_DAY_TO_SECOND", "INTERVAL_YEAR_TO_MONTH", "UNKNOWN", "INTEGER"
+    #   resp.columns[0].type.array_column_info.name #=> String
+    #   resp.columns[0].type.array_column_info.type #=> Types::Type
+    #   resp.columns[0].type.time_series_measure_value_column_info.name #=> String
+    #   resp.columns[0].type.time_series_measure_value_column_info.type #=> Types::Type
+    #   resp.columns[0].type.row_column_info #=> Array
+    #   resp.columns[0].type.row_column_info[0].name #=> String
+    #   resp.columns[0].type.row_column_info[0].type #=> Types::Type
+    #   resp.columns[0].database_name #=> String
+    #   resp.columns[0].table_name #=> String
+    #   resp.columns[0].aliased #=> Boolean
+    #   resp.parameters #=> Array
+    #   resp.parameters[0].name #=> String
+    #   resp.parameters[0].type.scalar_type #=> String, one of "VARCHAR", "BOOLEAN", "BIGINT", "DOUBLE", "TIMESTAMP", "DATE", "TIME", "INTERVAL_DAY_TO_SECOND", "INTERVAL_YEAR_TO_MONTH", "UNKNOWN", "INTEGER"
+    #   resp.parameters[0].type.array_column_info.name #=> String
+    #   resp.parameters[0].type.array_column_info.type #=> Types::Type
+    #   resp.parameters[0].type.time_series_measure_value_column_info.name #=> String
+    #   resp.parameters[0].type.time_series_measure_value_column_info.type #=> Types::Type
+    #   resp.parameters[0].type.row_column_info #=> Array
+    #   resp.parameters[0].type.row_column_info[0].name #=> String
+    #   resp.parameters[0].type.row_column_info[0].type #=> Types::Type
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/PrepareQuery AWS API Documentation
+    #
+    # @overload prepare_query(params = {})
+    # @param [Hash] params ({})
+    def prepare_query(params = {}, options = {})
+      req = build_request(:prepare_query, params)
+      req.send_request(options)
+    end
+
+    # `Query` is a synchronous operation that enables you to run a query
+    # against your Amazon Timestream data. `Query` will time out after 60
+    # seconds. You must update the default timeout in the SDK to support a
+    # timeout of 60 seconds. See the [code sample][1] for details.
+    #
+    # Your query request will fail in the following cases:
+    #
+    # * If you submit a `Query` request with the same client token outside
+    #   of the 5-minute idempotency window.
+    #
+    # * If you submit a `Query` request with the same client token, but
+    #   change other parameters, within the 5-minute idempotency window.
+    #
+    # * If the size of the row (including the query metadata) exceeds 1 MB,
+    #   then the query will fail with the following error message:
+    #
+    #   `Query aborted as max page response size has been exceeded by the
+    #   output result row`
+    #
+    # * If the IAM principal of the query initiator and the result reader
+    #   are not the same and/or the query initiator and the result reader do
+    #   not have the same query string in the query requests, the query will
+    #   fail with an `Invalid pagination token` error.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Timestream/latest/developerguide/code-samples.run-query.html
+    #
+    # @option params [required, String] :query_string
+    #   The query to be run by Timestream.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive string of up to 64 ASCII characters specified
+    #   when a `Query` request is made. Providing a `ClientToken` makes the
+    #   call to `Query` *idempotent*. This means that running the same query
+    #   repeatedly will produce the same result. In other words, making
+    #   multiple identical `Query` requests has the same effect as making a
+    #   single request. When using `ClientToken` in a query, note the
+    #   following:
+    #
+    #   * If the Query API is instantiated without a `ClientToken`, the Query
+    #     SDK generates a `ClientToken` on your behalf.
+    #
+    #   * If the `Query` invocation only contains the `ClientToken` but does
+    #     not include a `NextToken`, that invocation of `Query` is assumed to
+    #     be a new query run.
+    #
+    #   * If the invocation contains `NextToken`, that particular invocation
+    #     is assumed to be a subsequent invocation of a prior call to the
+    #     Query API, and a result set is returned.
+    #
+    #   * After 4 hours, any request with the same `ClientToken` is treated as
+    #     a new request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [String] :next_token
-    #   A pagination token passed to get a set of results.
+    #   A pagination token used to return a set of results. When the `Query`
+    #   API is invoked using `NextToken`, that particular invocation is
+    #   assumed to be a subsequent invocation of a prior call to `Query`, and
+    #   a result set is returned. However, if the `Query` invocation only
+    #   contains the `ClientToken`, that invocation of `Query` is assumed to
+    #   be a new query run.
+    #
+    #   Note the following when using NextToken in a query:
+    #
+    #   * A pagination token can be used for up to five `Query` invocations,
+    #     OR for a duration of up to 1 hour – whichever comes first.
+    #
+    #   * Using the same `NextToken` will return the same set of records. To
+    #     keep paginating through the result set, you must to use the most
+    #     recent `nextToken`.
+    #
+    #   * Suppose a `Query` invocation returns two `NextToken` values,
+    #     `TokenA` and `TokenB`. If `TokenB` is used in a subsequent `Query`
+    #     invocation, then `TokenA` is invalidated and cannot be reused.
+    #
+    #   * To request a previous result set from a query after pagination has
+    #     begun, you must re-invoke the Query API.
+    #
+    #   * The latest `NextToken` should be used to paginate until `null` is
+    #     returned, at which point a new `NextToken` should be used.
+    #
+    #   * If the IAM principal of the query initiator and the result reader
+    #     are not the same and/or the query initiator and the result reader do
+    #     not have the same query string in the query requests, the query will
+    #     fail with an `Invalid pagination token` error.
     #
     # @option params [Integer] :max_rows
-    #   The total number of rows to return in the output. If the total number
-    #   of rows available is more than the value specified, a NextToken is
-    #   provided in the command's output. To resume pagination, provide the
-    #   NextToken value in the starting-token argument of a subsequent
-    #   command.
+    #   The total number of rows to be returned in the `Query` output. The
+    #   initial run of `Query` with a `MaxRows` value specified will return
+    #   the result set of the query in two cases:
+    #
+    #   * The size of the result is less than `1MB`.
+    #
+    #   * The number of rows in the result set is less than the value of
+    #     `maxRows`.
+    #
+    #   Otherwise, the initial invocation of `Query` only returns a
+    #   `NextToken`, which can then be used in subsequent calls to fetch the
+    #   result set. To resume pagination, provide the `NextToken` value in the
+    #   subsequent command.
+    #
+    #   If the row size is large (e.g. a row has many columns), Timestream may
+    #   return fewer rows to keep the response size from exceeding the 1 MB
+    #   limit. If `MaxRows` is not provided, Timestream will send the
+    #   necessary number of rows to meet the 1 MB limit.
     #
     # @return [Types::QueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -473,7 +1009,7 @@ module Aws::TimestreamQuery
     #   resp = client.query({
     #     query_string: "QueryString", # required
     #     client_token: "ClientRequestToken",
-    #     next_token: "String",
+    #     next_token: "PaginationToken",
     #     max_rows: 1,
     #   })
     #
@@ -509,6 +1045,94 @@ module Aws::TimestreamQuery
       req.send_request(options)
     end
 
+    # Associate a set of tags with a Timestream resource. You can then
+    # activate these user-defined tags so that they appear on the Billing
+    # and Cost Management console for cost allocation tracking.
+    #
+    # @option params [required, String] :resource_arn
+    #   Identifies the Timestream resource to which tags should be added. This
+    #   value is an Amazon Resource Name (ARN).
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to be assigned to the Timestream resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the association of tags from a Timestream query resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Timestream resource that the tags will be removed from. This value
+    #   is an Amazon Resource Name (ARN).
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tags keys. Existing tags of the resource whose keys are
+    #   members of this list will be removed from the Timestream resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Update a scheduled query.
+    #
+    # @option params [required, String] :scheduled_query_arn
+    #   ARN of the scheuled query.
+    #
+    # @option params [required, String] :state
+    #   State of the scheduled query.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_scheduled_query({
+    #     scheduled_query_arn: "AmazonResourceName", # required
+    #     state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/UpdateScheduledQuery AWS API Documentation
+    #
+    # @overload update_scheduled_query(params = {})
+    # @param [Hash] params ({})
+    def update_scheduled_query(params = {}, options = {})
+      req = build_request(:update_scheduled_query, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -522,7 +1146,7 @@ module Aws::TimestreamQuery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-timestreamquery'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

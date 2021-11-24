@@ -348,11 +348,11 @@ module Aws::Proton
 
     # In a management account, an environment account connection request is
     # accepted. When the environment account connection request is accepted,
-    # AWS Proton can use the associated IAM role to provision environment
+    # Proton can use the associated IAM role to provision environment
     # infrastructure resources in the associated environment account.
     #
     # For more information, see [Environment account connections][1] in the
-    # *AWS Proton Administrator guide*.
+    # *Proton Administrator guide*.
     #
     #
     #
@@ -394,7 +394,7 @@ module Aws::Proton
 
     # Attempts to cancel an environment deployment on an UpdateEnvironment
     # action, if the deployment is `IN_PROGRESS`. For more information, see
-    # [Update an environment][1] in the *AWS Proton Administrator guide*.
+    # [Update an environment][1] in the *Proton Administrator guide*.
     #
     # The following list includes potential cancellation scenarios.
     #
@@ -439,6 +439,10 @@ module Aws::Proton
     #   resp.environment.name #=> String
     #   resp.environment.proton_service_role_arn #=> String
     #   resp.environment.provisioning #=> String, one of "CUSTOMER_MANAGED"
+    #   resp.environment.provisioning_repository.arn #=> String
+    #   resp.environment.provisioning_repository.branch #=> String
+    #   resp.environment.provisioning_repository.name #=> String
+    #   resp.environment.provisioning_repository.provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
     #   resp.environment.spec #=> String
     #   resp.environment.template_major_version #=> String
     #   resp.environment.template_minor_version #=> String
@@ -455,8 +459,8 @@ module Aws::Proton
 
     # Attempts to cancel a service instance deployment on an
     # UpdateServiceInstance action, if the deployment is `IN_PROGRESS`. For
-    # more information, see *Update a service instance* in the [AWS Proton
-    # Administrator guide][1] or the [AWS Proton User guide][2].
+    # more information, see *Update a service instance* in the [Proton
+    # Administrator guide][1] or the [Proton User guide][2].
     #
     # The following list includes potential cancellation scenarios.
     #
@@ -520,8 +524,8 @@ module Aws::Proton
 
     # Attempts to cancel a service pipeline deployment on an
     # UpdateServicePipeline action, if the deployment is `IN_PROGRESS`. For
-    # more information, see *Update a service pipeline* in the [AWS Proton
-    # Administrator guide][1] or the [AWS Proton User guide][2].
+    # more information, see *Update a service pipeline* in the [Proton
+    # Administrator guide][1] or the [Proton User guide][2].
     #
     # The following list includes potential cancellation scenarios.
     #
@@ -576,10 +580,21 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Deploy a new environment. An AWS Proton environment is created from an
+    # Deploy a new environment. An Proton environment is created from an
     # environment template that defines infrastructure and resources that
-    # can be shared across services. For more information, see the
-    # [Environments][1] in the *AWS Proton Administrator Guide.*
+    # can be shared across services.
+    #
+    # **You can provision environments using the following methods:**
+    #
+    # * Standard provisioning: Proton makes direct calls to provision your
+    #   resources.
+    #
+    # * Pull request provisioning: Proton makes pull requests on your
+    #   repository to provide compiled infrastructure as code (IaC) files
+    #   that your IaC engine uses to provision resources.
+    #
+    # For more information, see the [Environments][1] in the *Proton
+    # Administrator Guide.*
     #
     #
     #
@@ -593,8 +608,9 @@ module Aws::Proton
     #   you're provisioning your environment infrastructure resources to an
     #   environment account. You must include either the
     #   `environmentAccountConnectionId` or `protonServiceRoleArn` parameter
-    #   and value. For more information, see [Environment account
-    #   connections][1] in the *AWS Proton Administrator guide*.
+    #   and value and omit the `provisioningRepository` parameter and values.
+    #   For more information, see [Environment account connections][1] in the
+    #   *Proton Administrator guide*.
     #
     #
     #
@@ -604,24 +620,40 @@ module Aws::Proton
     #   The name of the environment.
     #
     # @option params [String] :proton_service_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Proton service role that
-    #   allows AWS Proton to make calls to other services on your behalf. You
-    #   must include either the `environmentAccountConnectionId` or
-    #   `protonServiceRoleArn` parameter and value.
+    #   The Amazon Resource Name (ARN) of the Proton service role that allows
+    #   Proton to make calls to other services on your behalf. You must
+    #   include either the `environmentAccountConnectionId` or
+    #   `protonServiceRoleArn` parameter and value and omit the
+    #   `provisioningRepository` parameter when you use standard provisioning.
+    #
+    # @option params [Types::RepositoryBranchInput] :provisioning_repository
+    #   The repository that you provide with pull request provisioning. If you
+    #   provide this parameter, you must omit the
+    #   `environmentAccountConnectionId` and `protonServiceRoleArn`
+    #   parameters.
+    #
+    #   Provisioning by pull request is currently in feature preview and is
+    #   only usable with Terraform based Proton Templates. To learn more about
+    #   [Amazon Web Services Feature Preview terms][1], see section 2 on Beta
+    #   and Previews.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
     #
     # @option params [required, String] :spec
     #   A link to a YAML formatted spec file that provides inputs as defined
     #   in the environment template bundle schema file. For more information,
-    #   see [Environments][1] in the *AWS Proton Administrator Guide*.
+    #   see [Environments][1] in the *Proton Administrator Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Create tags for your environment. For more information, see *AWS
-    #   Proton resources and tagging* in the [AWS Proton Administrator
-    #   Guide][1] or [AWS Proton User Guide][2].
+    #   Create tags for your environment. For more information, see *Proton
+    #   resources and tagging* in the [Proton Administrator Guide][1] or
+    #   [Proton User Guide][2].
     #
     #
     #
@@ -629,14 +661,14 @@ module Aws::Proton
     #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #
     # @option params [required, String] :template_major_version
-    #   The ID of the major version of the environment template.
+    #   The major version of the environment template.
     #
     # @option params [String] :template_minor_version
-    #   The ID of the minor version of the environment template.
+    #   The minor version of the environment template.
     #
     # @option params [required, String] :template_name
     #   The name of the environment template. For more information, see
-    #   [Environment Templates][1] in the *AWS Proton Administrator Guide*.
+    #   [Environment Templates][1] in the *Proton Administrator Guide*.
     #
     #
     #
@@ -653,6 +685,11 @@ module Aws::Proton
     #     environment_account_connection_id: "EnvironmentAccountConnectionId",
     #     name: "ResourceName", # required
     #     proton_service_role_arn: "Arn",
+    #     provisioning_repository: {
+    #       branch: "GitBranchName", # required
+    #       name: "RepositoryName", # required
+    #       provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #     },
     #     spec: "SpecContents", # required
     #     tags: [
     #       {
@@ -679,6 +716,10 @@ module Aws::Proton
     #   resp.environment.name #=> String
     #   resp.environment.proton_service_role_arn #=> String
     #   resp.environment.provisioning #=> String, one of "CUSTOMER_MANAGED"
+    #   resp.environment.provisioning_repository.arn #=> String
+    #   resp.environment.provisioning_repository.branch #=> String
+    #   resp.environment.provisioning_repository.name #=> String
+    #   resp.environment.provisioning_repository.provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
     #   resp.environment.spec #=> String
     #   resp.environment.template_major_version #=> String
     #   resp.environment.template_minor_version #=> String
@@ -700,37 +741,46 @@ module Aws::Proton
     # An environment account connection is a secure bi-directional
     # connection between a *management account* and an *environment account*
     # that maintains authorization and permissions. For more information,
-    # see [Environment account connections][1] in the *AWS Proton
-    # Administrator guide*.
+    # see [Environment account connections][1] in the *Proton Administrator
+    # guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html
     #
     # @option params [String] :client_token
-    #   When included, if two identicial requests are made with the same
-    #   client token, AWS Proton returns the environment account connection
-    #   that the first request created.
+    #   When included, if two identical requests are made with the same client
+    #   token, Proton returns the environment account connection that the
+    #   first request created.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :environment_name
-    #   The name of the AWS Proton environment that's created in the
-    #   associated management account.
+    #   The name of the Proton environment that's created in the associated
+    #   management account.
     #
     # @option params [required, String] :management_account_id
     #   The ID of the management account that accepts or rejects the
-    #   environment account connection. You create an manage the AWS Proton
+    #   environment account connection. You create an manage the Proton
     #   environment in this account. If the management account accepts the
-    #   environment account connection, AWS Proton can use the associated IAM
-    #   role to provision environment infrastructure resources in the
-    #   associated environment account.
+    #   environment account connection, Proton can use the associated IAM role
+    #   to provision environment infrastructure resources in the associated
+    #   environment account.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM service role that's created
-    #   in the environment account. AWS Proton uses this role to provision
+    #   in the environment account. Proton uses this role to provision
     #   infrastructure resources in the associated environment account.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags for your environment account connection. For more information,
+    #   see [Proton resources and tagging][1] in the *Proton Administrator
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
     #
     # @return [Types::CreateEnvironmentAccountConnectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -743,6 +793,12 @@ module Aws::Proton
     #     environment_name: "ResourceName", # required
     #     management_account_id: "AwsAccountId", # required
     #     role_arn: "Arn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -766,25 +822,23 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Create an environment template for AWS Proton. For more information,
-    # see [Environment Templates][1] in the *AWS Proton Administrator
-    # Guide*.
+    # Create an environment template for Proton. For more information, see
+    # [Environment Templates][1] in the *Proton Administrator Guide*.
     #
     # You can create an environment template in one of the two following
     # ways:
     #
     # * Register and publish a *standard* environment template that
-    #   instructs AWS Proton to deploy and manage environment
-    #   infrastructure.
+    #   instructs Proton to deploy and manage environment infrastructure.
     #
     # * Register and publish a *customer managed* environment template that
-    #   connects AWS Proton to your existing provisioned infrastructure that
-    #   you manage. AWS Proton *doesn't* manage your existing provisioned
+    #   connects Proton to your existing provisioned infrastructure that you
+    #   manage. Proton *doesn't* manage your existing provisioned
     #   infrastructure. To create an environment template for customer
     #   provisioned and managed infrastructure, include the `provisioning`
     #   parameter and set the value to `CUSTOMER_MANAGED`. For more
     #   information, see [Register and publish an environment template][2]
-    #   in the *AWS Proton Administrator Guide*.
+    #   in the *Proton Administrator Guide*.
     #
     #
     #
@@ -798,8 +852,7 @@ module Aws::Proton
     #   The environment template name as displayed in the developer interface.
     #
     # @option params [String] :encryption_key
-    #   A customer provided encryption key that AWS Proton uses to encrypt
-    #   data.
+    #   A customer provided encryption key that Proton uses to encrypt data.
     #
     # @option params [required, String] :name
     #   The name of the environment template.
@@ -810,8 +863,8 @@ module Aws::Proton
     #
     # @option params [Array<Types::Tag>] :tags
     #   Create tags for your environment template. For more information, see
-    #   *AWS Proton resources and tagging* in the [AWS Proton Administrator
-    #   Guide][1] or [AWS Proton User Guide][2].
+    #   *Proton resources and tagging* in the [Proton Administrator Guide][1]
+    #   or [Proton User Guide][2].
     #
     #
     #
@@ -865,9 +918,9 @@ module Aws::Proton
     # version that's backwards compatible within its major version.
     #
     # @option params [String] :client_token
-    #   When included, if two identicial requests are made with the same
-    #   client token, AWS Proton returns the environment template version that
-    #   the first request created.
+    #   When included, if two identical requests are made with the same client
+    #   token, Proton returns the environment template version that the first
+    #   request created.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -877,10 +930,10 @@ module Aws::Proton
     #
     # @option params [String] :major_version
     #   To create a new minor version of the environment template, include a
-    #   `majorVersion`.
+    #   `major Version`.
     #
     #   To create a new major and minor version of the environment template,
-    #   *exclude* `majorVersion`.
+    #   *exclude* `major Version`.
     #
     # @option params [required, Types::TemplateVersionSourceInput] :source
     #   An object that includes the template bundle S3 bucket path and name
@@ -940,11 +993,69 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Create an AWS Proton service. An AWS Proton service is an
-    # instantiation of a service template and often includes several service
-    # instances and pipeline. For more information, see [Services][1] in the
-    # *AWS Proton Administrator Guide* and [Services][2] in the *AWS Proton
-    # User Guide*.
+    # Create and register a link to a repository that can be used with pull
+    # request provisioning or template sync configurations. For more
+    # information, see [Template bundles][1] and [Template sync
+    # configurations][2] in the *Proton Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html
+    # [2]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-sync-configs.html
+    #
+    # @option params [required, String] :connection_arn
+    #   The Amazon Resource Name (ARN) of your Amazon Web Services CodeStar
+    #   connection. For more information, see [Setting up for Proton][1] in
+    #   the *Proton Administrator Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/setting-up-for-service
+    #
+    # @option params [String] :encryption_key
+    #   The ARN of your customer Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) key.
+    #
+    # @option params [required, String] :name
+    #   The repository name, for example `myrepos/myrepo`.
+    #
+    # @option params [required, String] :provider
+    #   The repository provider.
+    #
+    # @return [Types::CreateRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRepositoryOutput#repository #repository} => Types::Repository
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_repository({
+    #     connection_arn: "Arn", # required
+    #     encryption_key: "Arn",
+    #     name: "RepositoryName", # required
+    #     provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository.arn #=> String
+    #   resp.repository.connection_arn #=> String
+    #   resp.repository.encryption_key #=> String
+    #   resp.repository.name #=> String
+    #   resp.repository.provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateRepository AWS API Documentation
+    #
+    # @overload create_repository(params = {})
+    # @param [Hash] params ({})
+    def create_repository(params = {}, options = {})
+      req = build_request(:create_repository, params)
+      req.send_request(options)
+    end
+
+    # Create an Proton service. An Proton service is an instantiation of a
+    # service template and often includes several service instances and
+    # pipeline. For more information, see [Services][1] in the *Proton
+    # Administrator Guide* and [Services][2] in the *Proton User Guide*.
     #
     #
     #
@@ -953,21 +1064,21 @@ module Aws::Proton
     #
     # @option params [String] :branch_name
     #   The name of the code repository branch that holds the code that's
-    #   deployed in AWS Proton. *Don't* include this parameter if your
-    #   service template *doesn't* include a service pipeline.
+    #   deployed in Proton. *Don't* include this parameter if your service
+    #   template *doesn't* include a service pipeline.
     #
     # @option params [String] :description
-    #   A description of the AWS Proton service.
+    #   A description of the Proton service.
     #
     # @option params [required, String] :name
     #   The service name.
     #
     # @option params [String] :repository_connection_arn
     #   The Amazon Resource Name (ARN) of the repository connection. For more
-    #   information, see [Set up repository connection][1] in the *AWS Proton
-    #   Administrator Guide* and [Setting up with AWS Proton][2] in the *AWS
-    #   Proton User Guide*. *Don't* include this parameter if your service
-    #   template *doesn't* include a service pipeline.
+    #   information, see [Set up repository connection][1] in the *Proton
+    #   Administrator Guide* and [Setting up with Proton][2] in the *Proton
+    #   User Guide*. *Don't* include this parameter if your service template
+    #   *doesn't* include a service pipeline.
     #
     #
     #
@@ -983,8 +1094,8 @@ module Aws::Proton
     #   template bundle schema file. The spec file is in YAML format. Don’t
     #   include pipeline inputs in the spec if your service template *doesn’t*
     #   include a service pipeline. For more information, see [Create a
-    #   service][1] in the *AWS Proton Administrator Guide* and [Create a
-    #   service][2] in the *AWS Proton User Guide*.
+    #   service][1] in the *Proton Administrator Guide* and [Create a
+    #   service][2] in the *Proton User Guide*.
     #
     #
     #
@@ -992,9 +1103,9 @@ module Aws::Proton
     #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-create.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Create tags for your service. For more information, see *AWS Proton
-    #   resources and tagging* in the [AWS Proton Administrator Guide][1] or
-    #   [AWS Proton User Guide][2].
+    #   Create tags for your service. For more information, see *Proton
+    #   resources and tagging* in the [Proton Administrator Guide][1] or
+    #   [Proton User Guide][2].
     #
     #
     #
@@ -1002,12 +1113,12 @@ module Aws::Proton
     #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #
     # @option params [required, String] :template_major_version
-    #   The ID of the major version of the service template that was used to
-    #   create the service.
+    #   The major version of the service template that was used to create the
+    #   service.
     #
     # @option params [String] :template_minor_version
-    #   The ID of the minor version of the service template that was used to
-    #   create the service.
+    #   The minor version of the service template that was used to create the
+    #   service.
     #
     # @option params [required, String] :template_name
     #   The name of the service template that's used to create the service.
@@ -1073,11 +1184,11 @@ module Aws::Proton
     # Create a service template. The administrator creates a service
     # template to define standardized infrastructure and an optional CICD
     # service pipeline. Developers, in turn, select the service template
-    # from AWS Proton. If the selected service template includes a service
+    # from Proton. If the selected service template includes a service
     # pipeline definition, they provide a link to their source code
-    # repository. AWS Proton then deploys and manages the infrastructure
-    # defined by the selected service template. For more information, see
-    # [Service Templates][1] in the *AWS Proton Administrator Guide*.
+    # repository. Proton then deploys and manages the infrastructure defined
+    # by the selected service template. For more information, see [Service
+    # Templates][1] in the *Proton Administrator Guide*.
     #
     #
     #
@@ -1097,20 +1208,20 @@ module Aws::Proton
     #   The name of the service template.
     #
     # @option params [String] :pipeline_provisioning
-    #   AWS Proton includes a service pipeline for your service by default.
-    #   When included, this parameter indicates that an AWS Proton service
-    #   pipeline *won't* be included for your service. Once specified, this
-    #   parameter *can't* be changed. For more information, see [Service
-    #   template bundles][1] in the *AWS Proton Administrator Guide*.
+    #   Proton includes a service pipeline for your service by default. When
+    #   included, this parameter indicates that an Proton service pipeline
+    #   *won't* be included for your service. Once specified, this parameter
+    #   *can't* be changed. For more information, see [Service template
+    #   bundles][1] in the *Proton Administrator Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Create tags for your service template. For more information, see *AWS
-    #   Proton resources and tagging* in the [AWS Proton Administrator
-    #   Guide][1] or [AWS Proton User Guide][2].
+    #   Create tags for your service template. For more information, see
+    #   *Proton resources and tagging* in the [Proton Administrator Guide][1]
+    #   or [Proton User Guide][2].
     #
     #
     #
@@ -1159,14 +1270,14 @@ module Aws::Proton
     end
 
     # Create a new major or minor version of a service template. A major
-    # version of a service template is a version that *isn't* backwards
+    # version of a service template is a version that *isn't* backward
     # compatible. A minor version of a service template is a version that's
-    # backwards compatible within its major version.
+    # backward compatible within its major version.
     #
     # @option params [String] :client_token
-    #   When included, if two identicial requests are made with the same
-    #   client token, AWS Proton returns the service template version that the
-    #   first request created.
+    #   When included, if two identical requests are made with the same client
+    #   token, Proton returns the service template version that the first
+    #   request created.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1180,10 +1291,10 @@ module Aws::Proton
     #
     # @option params [String] :major_version
     #   To create a new minor version of the service template, include a
-    #   `majorVersion`.
+    #   `major Version`.
     #
     #   To create a new major and minor version of the service template,
-    #   *exclude* `majorVersion`.
+    #   *exclude* `major Version`.
     #
     # @option params [required, Types::TemplateVersionSourceInput] :source
     #   An object that includes the template bundle S3 bucket path and name
@@ -1252,6 +1363,72 @@ module Aws::Proton
       req.send_request(options)
     end
 
+    # Set up a template for automated template version creation. When a
+    # commit is pushed to your registered [repository][1], Proton checks for
+    # changes to your repository template bundles. If it detects a template
+    # bundle change, a new minor or major version of its template is
+    # created, if the version doesn’t already exist. For more information,
+    # see [Template sync configurations][2] in the *Proton Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/APIReference/API_Repository.html
+    # [2]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-sync-configs.html
+    #
+    # @option params [required, String] :branch
+    #   The branch of the registered repository for your template.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of your repository, for example `myrepos/myrepo`.
+    #
+    # @option params [required, String] :repository_provider
+    #   The provider type for your repository.
+    #
+    # @option params [String] :subdirectory
+    #   A repository subdirectory path to your template bundle directory. When
+    #   included, Proton limits the template bundle search to this repository
+    #   directory.
+    #
+    # @option params [required, String] :template_name
+    #   The name of your registered template.
+    #
+    # @option params [required, String] :template_type
+    #   The type of the registered template.
+    #
+    # @return [Types::CreateTemplateSyncConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTemplateSyncConfigOutput#template_sync_config #template_sync_config} => Types::TemplateSyncConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_template_sync_config({
+    #     branch: "GitBranchName", # required
+    #     repository_name: "RepositoryName", # required
+    #     repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #     subdirectory: "Subdirectory",
+    #     template_name: "ResourceName", # required
+    #     template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_sync_config.branch #=> String
+    #   resp.template_sync_config.repository_name #=> String
+    #   resp.template_sync_config.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.template_sync_config.subdirectory #=> String
+    #   resp.template_sync_config.template_name #=> String
+    #   resp.template_sync_config.template_type #=> String, one of "ENVIRONMENT", "SERVICE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/CreateTemplateSyncConfig AWS API Documentation
+    #
+    # @overload create_template_sync_config(params = {})
+    # @param [Hash] params ({})
+    def create_template_sync_config(params = {}, options = {})
+      req = build_request(:create_template_sync_config, params)
+      req.send_request(options)
+    end
+
     # Delete an environment.
     #
     # @option params [required, String] :name
@@ -1281,6 +1458,10 @@ module Aws::Proton
     #   resp.environment.name #=> String
     #   resp.environment.proton_service_role_arn #=> String
     #   resp.environment.provisioning #=> String, one of "CUSTOMER_MANAGED"
+    #   resp.environment.provisioning_repository.arn #=> String
+    #   resp.environment.provisioning_repository.branch #=> String
+    #   resp.environment.provisioning_repository.name #=> String
+    #   resp.environment.provisioning_repository.provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
     #   resp.environment.spec #=> String
     #   resp.environment.template_major_version #=> String
     #   resp.environment.template_minor_version #=> String
@@ -1298,14 +1479,14 @@ module Aws::Proton
     # In an environment account, delete an environment account connection.
     #
     # After you delete an environment account connection that’s in use by an
-    # AWS Proton environment, AWS Proton *can’t* manage the environment
+    # Proton environment, Proton *can’t* manage the environment
     # infrastructure resources until a new environment account connection is
     # accepted for the environment account and associated environment.
     # You're responsible for cleaning up provisioned resources that remain
     # without an environment connection.
     #
     # For more information, see [Environment account connections][1] in the
-    # *AWS Proton Administrator guide*.
+    # *Proton Administrator guide*.
     #
     #
     #
@@ -1387,13 +1568,13 @@ module Aws::Proton
     # `Recommended` version. Delete the `Recommended` version of the
     # environment template if no other major versions or minor versions of
     # the environment template exist. A major version of an environment
-    # template is a version that's not backwards compatible.
+    # template is a version that's not backward compatible.
     #
     # Delete a minor version of an environment template if it *isn't* the
     # `Recommended` version. Delete a `Recommended` minor version of the
     # environment template if no other minor versions of the environment
     # template exist. A minor version of an environment template is a
-    # version that's backwards compatible.
+    # version that's backward compatible.
     #
     # @option params [required, String] :major_version
     #   The environment template major version to delete.
@@ -1436,6 +1617,42 @@ module Aws::Proton
     # @param [Hash] params ({})
     def delete_environment_template_version(params = {}, options = {})
       req = build_request(:delete_environment_template_version, params)
+      req.send_request(options)
+    end
+
+    # De-register and unlink your repository.
+    #
+    # @option params [required, String] :name
+    #   The name of the repository.
+    #
+    # @option params [required, String] :provider
+    #   The repository provider.
+    #
+    # @return [Types::DeleteRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRepositoryOutput#repository #repository} => Types::Repository
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_repository({
+    #     name: "RepositoryName", # required
+    #     provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository.arn #=> String
+    #   resp.repository.connection_arn #=> String
+    #   resp.repository.encryption_key #=> String
+    #   resp.repository.name #=> String
+    #   resp.repository.provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteRepository AWS API Documentation
+    #
+    # @overload delete_repository(params = {})
+    # @param [Hash] params ({})
+    def delete_repository(params = {}, options = {})
+      req = build_request(:delete_repository, params)
       req.send_request(options)
     end
 
@@ -1585,7 +1802,44 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Get detail data for the AWS Proton pipeline service role.
+    # Delete a template sync configuration.
+    #
+    # @option params [required, String] :template_name
+    #   The template name.
+    #
+    # @option params [required, String] :template_type
+    #   The template type.
+    #
+    # @return [Types::DeleteTemplateSyncConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteTemplateSyncConfigOutput#template_sync_config #template_sync_config} => Types::TemplateSyncConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_template_sync_config({
+    #     template_name: "ResourceName", # required
+    #     template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_sync_config.branch #=> String
+    #   resp.template_sync_config.repository_name #=> String
+    #   resp.template_sync_config.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.template_sync_config.subdirectory #=> String
+    #   resp.template_sync_config.template_name #=> String
+    #   resp.template_sync_config.template_type #=> String, one of "ENVIRONMENT", "SERVICE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/DeleteTemplateSyncConfig AWS API Documentation
+    #
+    # @overload delete_template_sync_config(params = {})
+    # @param [Hash] params ({})
+    def delete_template_sync_config(params = {}, options = {})
+      req = build_request(:delete_template_sync_config, params)
+      req.send_request(options)
+    end
+
+    # Get detail data for the Proton pipeline service role.
     #
     # @return [Types::GetAccountSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1593,6 +1847,10 @@ module Aws::Proton
     #
     # @example Response structure
     #
+    #   resp.account_settings.pipeline_provisioning_repository.arn #=> String
+    #   resp.account_settings.pipeline_provisioning_repository.branch #=> String
+    #   resp.account_settings.pipeline_provisioning_repository.name #=> String
+    #   resp.account_settings.pipeline_provisioning_repository.provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
     #   resp.account_settings.pipeline_service_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetAccountSettings AWS API Documentation
@@ -1633,6 +1891,10 @@ module Aws::Proton
     #   resp.environment.name #=> String
     #   resp.environment.proton_service_role_arn #=> String
     #   resp.environment.provisioning #=> String, one of "CUSTOMER_MANAGED"
+    #   resp.environment.provisioning_repository.arn #=> String
+    #   resp.environment.provisioning_repository.branch #=> String
+    #   resp.environment.provisioning_repository.name #=> String
+    #   resp.environment.provisioning_repository.provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
     #   resp.environment.spec #=> String
     #   resp.environment.template_major_version #=> String
     #   resp.environment.template_minor_version #=> String
@@ -1656,7 +1918,7 @@ module Aws::Proton
     # account connection.
     #
     # For more information, see [Environment account connections][1] in the
-    # *AWS Proton Administrator guide*.
+    # *Proton Administrator guide*.
     #
     #
     #
@@ -1737,8 +1999,8 @@ module Aws::Proton
     # template.
     #
     # @option params [required, String] :major_version
-    #   To view environment template major version detail data, include
-    #   `majorVersion`.
+    #   To view environment template major version detail data, include `major
+    #   Version`.
     #
     # @option params [required, String] :minor_version
     #   To view environment template minor version detail data, include
@@ -1784,6 +2046,88 @@ module Aws::Proton
     # @param [Hash] params ({})
     def get_environment_template_version(params = {}, options = {})
       req = build_request(:get_environment_template_version, params)
+      req.send_request(options)
+    end
+
+    # Get detail data for a repository.
+    #
+    # @option params [required, String] :name
+    #   The repository name, for example `myrepos/myrepo`.
+    #
+    # @option params [required, String] :provider
+    #   The repository provider.
+    #
+    # @return [Types::GetRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRepositoryOutput#repository #repository} => Types::Repository
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_repository({
+    #     name: "RepositoryName", # required
+    #     provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository.arn #=> String
+    #   resp.repository.connection_arn #=> String
+    #   resp.repository.encryption_key #=> String
+    #   resp.repository.name #=> String
+    #   resp.repository.provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetRepository AWS API Documentation
+    #
+    # @overload get_repository(params = {})
+    # @param [Hash] params ({})
+    def get_repository(params = {}, options = {})
+      req = build_request(:get_repository, params)
+      req.send_request(options)
+    end
+
+    # Get the repository sync status.
+    #
+    # @option params [required, String] :branch
+    #   The repository branch.
+    #
+    # @option params [required, String] :repository_name
+    #   The repository name.
+    #
+    # @option params [required, String] :repository_provider
+    #   The repository provider.
+    #
+    # @option params [required, String] :sync_type
+    #   The repository sync type.
+    #
+    # @return [Types::GetRepositorySyncStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRepositorySyncStatusOutput#latest_sync #latest_sync} => Types::RepositorySyncAttempt
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_repository_sync_status({
+    #     branch: "GitBranchName", # required
+    #     repository_name: "RepositoryName", # required
+    #     repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #     sync_type: "TEMPLATE_SYNC", # required, accepts TEMPLATE_SYNC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.latest_sync.events #=> Array
+    #   resp.latest_sync.events[0].event #=> String
+    #   resp.latest_sync.events[0].external_id #=> String
+    #   resp.latest_sync.events[0].time #=> Time
+    #   resp.latest_sync.events[0].type #=> String
+    #   resp.latest_sync.started_at #=> Time
+    #   resp.latest_sync.status #=> String, one of "INITIATED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "QUEUED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetRepositorySyncStatus AWS API Documentation
+    #
+    # @overload get_repository_sync_status(params = {})
+    # @param [Hash] params ({})
+    def get_repository_sync_status(params = {}, options = {})
+      req = build_request(:get_repository_sync_status, params)
       req.send_request(options)
     end
 
@@ -1935,8 +2279,8 @@ module Aws::Proton
     # View detail data for a major or minor version of a service template.
     #
     # @option params [required, String] :major_version
-    #   To view service template major version detail data, include
-    #   `majorVersion`.
+    #   To view service template major version detail data, include `major
+    #   Version`.
     #
     # @option params [required, String] :minor_version
     #   To view service template minor version detail data, include
@@ -1988,10 +2332,125 @@ module Aws::Proton
       req.send_request(options)
     end
 
+    # Get detail data for a template sync configuration.
+    #
+    # @option params [required, String] :template_name
+    #   The template name.
+    #
+    # @option params [required, String] :template_type
+    #   The template type.
+    #
+    # @return [Types::GetTemplateSyncConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTemplateSyncConfigOutput#template_sync_config #template_sync_config} => Types::TemplateSyncConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_template_sync_config({
+    #     template_name: "ResourceName", # required
+    #     template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_sync_config.branch #=> String
+    #   resp.template_sync_config.repository_name #=> String
+    #   resp.template_sync_config.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.template_sync_config.subdirectory #=> String
+    #   resp.template_sync_config.template_name #=> String
+    #   resp.template_sync_config.template_type #=> String, one of "ENVIRONMENT", "SERVICE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetTemplateSyncConfig AWS API Documentation
+    #
+    # @overload get_template_sync_config(params = {})
+    # @param [Hash] params ({})
+    def get_template_sync_config(params = {}, options = {})
+      req = build_request(:get_template_sync_config, params)
+      req.send_request(options)
+    end
+
+    # Get the status of a template sync.
+    #
+    # @option params [required, String] :template_name
+    #   The template name.
+    #
+    # @option params [required, String] :template_type
+    #   The template type.
+    #
+    # @option params [required, String] :template_version
+    #   The template version.
+    #
+    # @return [Types::GetTemplateSyncStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTemplateSyncStatusOutput#desired_state #desired_state} => Types::Revision
+    #   * {Types::GetTemplateSyncStatusOutput#latest_successful_sync #latest_successful_sync} => Types::ResourceSyncAttempt
+    #   * {Types::GetTemplateSyncStatusOutput#latest_sync #latest_sync} => Types::ResourceSyncAttempt
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_template_sync_status({
+    #     template_name: "ResourceName", # required
+    #     template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
+    #     template_version: "TemplateVersionPart", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.desired_state.branch #=> String
+    #   resp.desired_state.directory #=> String
+    #   resp.desired_state.repository_name #=> String
+    #   resp.desired_state.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.desired_state.sha #=> String
+    #   resp.latest_successful_sync.events #=> Array
+    #   resp.latest_successful_sync.events[0].event #=> String
+    #   resp.latest_successful_sync.events[0].external_id #=> String
+    #   resp.latest_successful_sync.events[0].time #=> Time
+    #   resp.latest_successful_sync.events[0].type #=> String
+    #   resp.latest_successful_sync.initial_revision.branch #=> String
+    #   resp.latest_successful_sync.initial_revision.directory #=> String
+    #   resp.latest_successful_sync.initial_revision.repository_name #=> String
+    #   resp.latest_successful_sync.initial_revision.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.latest_successful_sync.initial_revision.sha #=> String
+    #   resp.latest_successful_sync.started_at #=> Time
+    #   resp.latest_successful_sync.status #=> String, one of "INITIATED", "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.latest_successful_sync.target #=> String
+    #   resp.latest_successful_sync.target_revision.branch #=> String
+    #   resp.latest_successful_sync.target_revision.directory #=> String
+    #   resp.latest_successful_sync.target_revision.repository_name #=> String
+    #   resp.latest_successful_sync.target_revision.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.latest_successful_sync.target_revision.sha #=> String
+    #   resp.latest_sync.events #=> Array
+    #   resp.latest_sync.events[0].event #=> String
+    #   resp.latest_sync.events[0].external_id #=> String
+    #   resp.latest_sync.events[0].time #=> Time
+    #   resp.latest_sync.events[0].type #=> String
+    #   resp.latest_sync.initial_revision.branch #=> String
+    #   resp.latest_sync.initial_revision.directory #=> String
+    #   resp.latest_sync.initial_revision.repository_name #=> String
+    #   resp.latest_sync.initial_revision.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.latest_sync.initial_revision.sha #=> String
+    #   resp.latest_sync.started_at #=> Time
+    #   resp.latest_sync.status #=> String, one of "INITIATED", "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.latest_sync.target #=> String
+    #   resp.latest_sync.target_revision.branch #=> String
+    #   resp.latest_sync.target_revision.directory #=> String
+    #   resp.latest_sync.target_revision.repository_name #=> String
+    #   resp.latest_sync.target_revision.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.latest_sync.target_revision.sha #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/GetTemplateSyncStatus AWS API Documentation
+    #
+    # @overload get_template_sync_status(params = {})
+    # @param [Hash] params ({})
+    def get_template_sync_status(params = {}, options = {})
+      req = build_request(:get_template_sync_status, params)
+      req.send_request(options)
+    end
+
     # View a list of environment account connections.
     #
     # For more information, see [Environment account connections][1] in the
-    # *AWS Proton Administrator guide*.
+    # *Proton Administrator guide*.
     #
     #
     #
@@ -2056,15 +2515,97 @@ module Aws::Proton
       req.send_request(options)
     end
 
+    # List the infrastructure as code outputs for your environment.
+    #
+    # @option params [required, String] :environment_name
+    #   The environment name.
+    #
+    # @option params [String] :next_token
+    #   A token to indicate the location of the next environment output in the
+    #   array of environment outputs, after the list of environment outputs
+    #   that was previously requested.
+    #
+    # @return [Types::ListEnvironmentOutputsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEnvironmentOutputsOutput#next_token #next_token} => String
+    #   * {Types::ListEnvironmentOutputsOutput#outputs #outputs} => Array&lt;Types::Output&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_environment_outputs({
+    #     environment_name: "ResourceName", # required
+    #     next_token: "EmptyNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.outputs #=> Array
+    #   resp.outputs[0].key #=> String
+    #   resp.outputs[0].value_string #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListEnvironmentOutputs AWS API Documentation
+    #
+    # @overload list_environment_outputs(params = {})
+    # @param [Hash] params ({})
+    def list_environment_outputs(params = {}, options = {})
+      req = build_request(:list_environment_outputs, params)
+      req.send_request(options)
+    end
+
+    # List the provisioned resources for your environment.
+    #
+    # @option params [required, String] :environment_name
+    #   The environment name.
+    #
+    # @option params [String] :next_token
+    #   A token to indicate the location of the next environment provisioned
+    #   resource in the array of environment provisioned resources, after the
+    #   list of environment provisioned resources that was previously
+    #   requested.
+    #
+    # @return [Types::ListEnvironmentProvisionedResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEnvironmentProvisionedResourcesOutput#next_token #next_token} => String
+    #   * {Types::ListEnvironmentProvisionedResourcesOutput#provisioned_resources #provisioned_resources} => Array&lt;Types::ProvisionedResource&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_environment_provisioned_resources({
+    #     environment_name: "ResourceName", # required
+    #     next_token: "EmptyNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.provisioned_resources #=> Array
+    #   resp.provisioned_resources[0].identifier #=> String
+    #   resp.provisioned_resources[0].name #=> String
+    #   resp.provisioned_resources[0].provisioning_engine #=> String, one of "CLOUDFORMATION", "TERRAFORM"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListEnvironmentProvisionedResources AWS API Documentation
+    #
+    # @overload list_environment_provisioned_resources(params = {})
+    # @param [Hash] params ({})
+    def list_environment_provisioned_resources(params = {}, options = {})
+      req = build_request(:list_environment_provisioned_resources, params)
+      req.send_request(options)
+    end
+
     # List major or minor versions of an environment template with detail
     # data.
     #
     # @option params [String] :major_version
     #   To view a list of minor of versions under a major version of an
-    #   environment template, include `majorVersion`.
+    #   environment template, include `major Version`.
     #
     #   To view a list of major versions of an environment template, *exclude*
-    #   `majorVersion`.
+    #   `major Version`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of major or minor versions of an environment
@@ -2226,6 +2767,185 @@ module Aws::Proton
       req.send_request(options)
     end
 
+    # List repositories with detail data.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of repositories to list.
+    #
+    # @option params [String] :next_token
+    #   A token to indicate the location of the next repository in the array
+    #   of repositories, after the list of repositories previously requested.
+    #
+    # @return [Types::ListRepositoriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRepositoriesOutput#next_token #next_token} => String
+    #   * {Types::ListRepositoriesOutput#repositories #repositories} => Array&lt;Types::RepositorySummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_repositories({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.repositories #=> Array
+    #   resp.repositories[0].arn #=> String
+    #   resp.repositories[0].name #=> String
+    #   resp.repositories[0].provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListRepositories AWS API Documentation
+    #
+    # @overload list_repositories(params = {})
+    # @param [Hash] params ({})
+    def list_repositories(params = {}, options = {})
+      req = build_request(:list_repositories, params)
+      req.send_request(options)
+    end
+
+    # List repository sync definitions with detail data.
+    #
+    # @option params [String] :next_token
+    #   A token to indicate the location of the next repository sync
+    #   definition in the array of repository sync definitions, after the list
+    #   of repository sync definitions previously requested.
+    #
+    # @option params [required, String] :repository_name
+    #   The repository name.
+    #
+    # @option params [required, String] :repository_provider
+    #   The repository provider.
+    #
+    # @option params [required, String] :sync_type
+    #   The sync type. The only supported value is `TEMPLATE_SYNC`.
+    #
+    # @return [Types::ListRepositorySyncDefinitionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRepositorySyncDefinitionsOutput#next_token #next_token} => String
+    #   * {Types::ListRepositorySyncDefinitionsOutput#sync_definitions #sync_definitions} => Array&lt;Types::RepositorySyncDefinition&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_repository_sync_definitions({
+    #     next_token: "EmptyNextToken",
+    #     repository_name: "RepositoryName", # required
+    #     repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #     sync_type: "TEMPLATE_SYNC", # required, accepts TEMPLATE_SYNC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.sync_definitions #=> Array
+    #   resp.sync_definitions[0].branch #=> String
+    #   resp.sync_definitions[0].directory #=> String
+    #   resp.sync_definitions[0].parent #=> String
+    #   resp.sync_definitions[0].target #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListRepositorySyncDefinitions AWS API Documentation
+    #
+    # @overload list_repository_sync_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_repository_sync_definitions(params = {}, options = {})
+      req = build_request(:list_repository_sync_definitions, params)
+      req.send_request(options)
+    end
+
+    # View a list service instance infrastructure as code outputs with
+    # detail data.
+    #
+    # @option params [String] :next_token
+    #   A token to indicate the location of the next output in the array of
+    #   outputs, after the list of outputs that was previously requested.
+    #
+    # @option params [required, String] :service_instance_name
+    #   The service instance name.
+    #
+    # @option params [required, String] :service_name
+    #   The service name.
+    #
+    # @return [Types::ListServiceInstanceOutputsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServiceInstanceOutputsOutput#next_token #next_token} => String
+    #   * {Types::ListServiceInstanceOutputsOutput#outputs #outputs} => Array&lt;Types::Output&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_instance_outputs({
+    #     next_token: "EmptyNextToken",
+    #     service_instance_name: "ResourceName", # required
+    #     service_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.outputs #=> Array
+    #   resp.outputs[0].key #=> String
+    #   resp.outputs[0].value_string #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServiceInstanceOutputs AWS API Documentation
+    #
+    # @overload list_service_instance_outputs(params = {})
+    # @param [Hash] params ({})
+    def list_service_instance_outputs(params = {}, options = {})
+      req = build_request(:list_service_instance_outputs, params)
+      req.send_request(options)
+    end
+
+    # List provisioned resources for a service instance with details.
+    #
+    # @option params [String] :next_token
+    #   A token to indicate the location of the next provisioned resource in
+    #   the array of provisioned resources, after the list of provisioned
+    #   resources that was previously requested.
+    #
+    # @option params [required, String] :service_instance_name
+    #   The service instance name.
+    #
+    # @option params [required, String] :service_name
+    #   The service name.
+    #
+    # @return [Types::ListServiceInstanceProvisionedResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServiceInstanceProvisionedResourcesOutput#next_token #next_token} => String
+    #   * {Types::ListServiceInstanceProvisionedResourcesOutput#provisioned_resources #provisioned_resources} => Array&lt;Types::ProvisionedResource&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_instance_provisioned_resources({
+    #     next_token: "EmptyNextToken",
+    #     service_instance_name: "ResourceName", # required
+    #     service_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.provisioned_resources #=> Array
+    #   resp.provisioned_resources[0].identifier #=> String
+    #   resp.provisioned_resources[0].name #=> String
+    #   resp.provisioned_resources[0].provisioning_engine #=> String, one of "CLOUDFORMATION", "TERRAFORM"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServiceInstanceProvisionedResources AWS API Documentation
+    #
+    # @overload list_service_instance_provisioned_resources(params = {})
+    # @param [Hash] params ({})
+    def list_service_instance_provisioned_resources(params = {}, options = {})
+      req = build_request(:list_service_instance_provisioned_resources, params)
+      req.send_request(options)
+    end
+
     # List service instances with summaries of detail data.
     #
     # @option params [Integer] :max_results
@@ -2280,14 +3000,95 @@ module Aws::Proton
       req.send_request(options)
     end
 
+    # View a list service pipeline infrastructure as code outputs with
+    # detail.
+    #
+    # @option params [String] :next_token
+    #   A token to indicate the location of the next output in the array of
+    #   outputs, after the list of outputs that was previously requested.
+    #
+    # @option params [required, String] :service_name
+    #   The service name.
+    #
+    # @return [Types::ListServicePipelineOutputsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServicePipelineOutputsOutput#next_token #next_token} => String
+    #   * {Types::ListServicePipelineOutputsOutput#outputs #outputs} => Array&lt;Types::Output&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_pipeline_outputs({
+    #     next_token: "EmptyNextToken",
+    #     service_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.outputs #=> Array
+    #   resp.outputs[0].key #=> String
+    #   resp.outputs[0].value_string #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServicePipelineOutputs AWS API Documentation
+    #
+    # @overload list_service_pipeline_outputs(params = {})
+    # @param [Hash] params ({})
+    def list_service_pipeline_outputs(params = {}, options = {})
+      req = build_request(:list_service_pipeline_outputs, params)
+      req.send_request(options)
+    end
+
+    # List provisioned resources for a service and pipeline with details.
+    #
+    # @option params [String] :next_token
+    #   A token to indicate the location of the next provisioned resource in
+    #   the array of provisioned resources, after the list of provisioned
+    #   resources that was previously requested.
+    #
+    # @option params [required, String] :service_name
+    #   The service name.
+    #
+    # @return [Types::ListServicePipelineProvisionedResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServicePipelineProvisionedResourcesOutput#next_token #next_token} => String
+    #   * {Types::ListServicePipelineProvisionedResourcesOutput#provisioned_resources #provisioned_resources} => Array&lt;Types::ProvisionedResource&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_service_pipeline_provisioned_resources({
+    #     next_token: "EmptyNextToken",
+    #     service_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.provisioned_resources #=> Array
+    #   resp.provisioned_resources[0].identifier #=> String
+    #   resp.provisioned_resources[0].name #=> String
+    #   resp.provisioned_resources[0].provisioning_engine #=> String, one of "CLOUDFORMATION", "TERRAFORM"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/ListServicePipelineProvisionedResources AWS API Documentation
+    #
+    # @overload list_service_pipeline_provisioned_resources(params = {})
+    # @param [Hash] params ({})
+    def list_service_pipeline_provisioned_resources(params = {}, options = {})
+      req = build_request(:list_service_pipeline_provisioned_resources, params)
+      req.send_request(options)
+    end
+
     # List major or minor versions of a service template with detail data.
     #
     # @option params [String] :major_version
     #   To view a list of minor of versions under a major version of a service
-    #   template, include `majorVersion`.
+    #   template, include `major Version`.
     #
     #   To view a list of major versions of a service template, *exclude*
-    #   `majorVersion`.
+    #   `major Version`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of major or minor versions of a service template to
@@ -2432,9 +3233,9 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # List tags for a resource. For more information, see *AWS Proton
-    # resources and tagging* in the [AWS Proton Administrator Guide][1] or
-    # [AWS Proton User Guide][2].
+    # List tags for a resource. For more information, see *Proton resources
+    # and tagging* in the [Proton Administrator Guide][1] or [Proton User
+    # Guide][2].
     #
     #
     #
@@ -2483,6 +3284,62 @@ module Aws::Proton
       req.send_request(options)
     end
 
+    # Notify Proton of status changes to a provisioned resource when you use
+    # pull request provisioning. For more information, see [Template
+    # bundles][1].
+    #
+    # Provisioning by pull request is currently in feature preview and is
+    # only usable with Terraform based Proton Templates. To learn more about
+    # [Amazon Web Services Feature Preview terms][2], see section 2 on Beta
+    # and Previews.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html
+    # [2]: https://aws.amazon.com/service-terms
+    #
+    # @option params [String] :deployment_id
+    #   The deployment ID for your provisioned resource.
+    #
+    # @option params [Array<Types::Output>] :outputs
+    #   The provisioned resource state change detail data that's returned by
+    #   Proton.
+    #
+    # @option params [required, String] :resource_arn
+    #   The provisioned resource Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :status
+    #   The status of your provisioned resource.
+    #
+    # @option params [String] :status_message
+    #   The deployment status message for your provisioned resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.notify_resource_deployment_status_change({
+    #     deployment_id: "DeploymentId",
+    #     outputs: [
+    #       {
+    #         key: "OutputKey",
+    #         value_string: "OutputValueString",
+    #       },
+    #     ],
+    #     resource_arn: "Arn", # required
+    #     status: "IN_PROGRESS", # required, accepts IN_PROGRESS, FAILED, SUCCEEDED
+    #     status_message: "SyntheticNotifyResourceDeploymentStatusChangeInputString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/NotifyResourceDeploymentStatusChange AWS API Documentation
+    #
+    # @overload notify_resource_deployment_status_change(params = {})
+    # @param [Hash] params ({})
+    def notify_resource_deployment_status_change(params = {}, options = {})
+      req = build_request(:notify_resource_deployment_status_change, params)
+      req.send_request(options)
+    end
+
     # In a management account, reject an environment account connection from
     # another environment account.
     #
@@ -2494,7 +3351,7 @@ module Aws::Proton
     # to an environment.
     #
     # For more information, see [Environment account connections][1] in the
-    # *AWS Proton Administrator guide*.
+    # *Proton Administrator guide*.
     #
     #
     #
@@ -2534,9 +3391,9 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Tag a resource. For more information, see *AWS Proton resources and
-    # tagging* in the [AWS Proton Administrator Guide][1] or [AWS Proton
-    # User Guide][2].
+    # Tag a resource. For more information, see *Proton resources and
+    # tagging* in the [Proton Administrator Guide][1] or [Proton User
+    # Guide][2].
     #
     #
     #
@@ -2573,9 +3430,9 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Remove a tag from a resource. For more information, see *AWS Proton
-    # resources and tagging* in the [AWS Proton Administrator Guide][1] or
-    # [AWS Proton User Guide][2].
+    # Remove a tag from a resource. For more information, see *Proton
+    # resources and tagging* in the [Proton Administrator Guide][1] or
+    # [Proton User Guide][2].
     #
     #
     #
@@ -2608,11 +3465,31 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Update the AWS Proton pipeline service account settings.
+    # Update the Proton service pipeline role or repository settings.
+    #
+    # @option params [Types::RepositoryBranchInput] :pipeline_provisioning_repository
+    #   The repository that you provide with pull request provisioning.
+    #
+    #   Provisioning by pull request is currently in feature preview and is
+    #   only usable with Terraform based Proton Templates. To learn more about
+    #   [Amazon Web Services Feature Preview terms][1], see section 2 on Beta
+    #   and Previews.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
     #
     # @option params [String] :pipeline_service_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Proton pipeline service
-    #   role.
+    #   The Amazon Resource Name (ARN) of the Proton pipeline service role.
+    #
+    #   Provisioning by pull request is currently in feature preview and is
+    #   only usable with Terraform based Proton Templates. To learn more about
+    #   [Amazon Web Services Feature Preview terms][1], see section 2 on Beta
+    #   and Previews.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
     #
     # @return [Types::UpdateAccountSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2621,11 +3498,20 @@ module Aws::Proton
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_account_settings({
-    #     pipeline_service_role_arn: "Arn",
+    #     pipeline_provisioning_repository: {
+    #       branch: "GitBranchName", # required
+    #       name: "RepositoryName", # required
+    #       provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #     },
+    #     pipeline_service_role_arn: "PipelineRoleArn",
     #   })
     #
     # @example Response structure
     #
+    #   resp.account_settings.pipeline_provisioning_repository.arn #=> String
+    #   resp.account_settings.pipeline_provisioning_repository.branch #=> String
+    #   resp.account_settings.pipeline_provisioning_repository.name #=> String
+    #   resp.account_settings.pipeline_provisioning_repository.provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
     #   resp.account_settings.pipeline_service_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateAccountSettings AWS API Documentation
@@ -2640,8 +3526,9 @@ module Aws::Proton
     # Update an environment.
     #
     # If the environment is associated with an environment account
-    # connection, *don't* update or include the `protonServiceRoleArn`
-    # parameter to update or connect to an environment account connection.
+    # connection, *don't* update or include the `protonServiceRoleArn` and
+    # `provisioningRepository` parameter to update or connect to an
+    # environment account connection.
     #
     # You can only update to a new environment account connection if it was
     # created in the same environment account that the current environment
@@ -2655,6 +3542,14 @@ module Aws::Proton
     #
     # You can update either the `environmentAccountConnectionId` or
     # `protonServiceRoleArn` parameter and value. You can’t update both.
+    #
+    # If the environment was provisioned with pull request provisioning,
+    # include the `provisioningRepository` parameter and omit the
+    # `protonServiceRoleArn` and `environmentAccountConnectionId`
+    # parameters.
+    #
+    # If the environment wasn't provisioned with pull request provisioning,
+    # omit the `provisioningRepository` parameter.
     #
     # There are four modes for updating an environment as described in the
     # following. The `deploymentType` field defines the mode.
@@ -2748,17 +3643,29 @@ module Aws::Proton
     #   The name of the environment to update.
     #
     # @option params [String] :proton_service_role_arn
-    #   The Amazon Resource Name (ARN) of the AWS Proton service role that
-    #   allows AWS Proton to make API calls to other services your behalf.
+    #   The Amazon Resource Name (ARN) of the Proton service role that allows
+    #   Proton to make API calls to other services your behalf.
+    #
+    # @option params [Types::RepositoryBranchInput] :provisioning_repository
+    #   The repository that you provide with pull request provisioning.
+    #
+    #   Provisioning by pull request is currently in feature preview and is
+    #   only usable with Terraform based Proton Templates. To learn more about
+    #   [Amazon Web Services Feature Preview terms][1], see section 2 on Beta
+    #   and Previews.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
     #
     # @option params [String] :spec
     #   The formatted specification that defines the update.
     #
     # @option params [String] :template_major_version
-    #   The ID of the major version of the environment to update.
+    #   The major version of the environment to update.
     #
     # @option params [String] :template_minor_version
-    #   The ID of the minor version of the environment to update.
+    #   The minor version of the environment to update.
     #
     # @return [Types::UpdateEnvironmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2772,6 +3679,11 @@ module Aws::Proton
     #     environment_account_connection_id: "EnvironmentAccountConnectionId",
     #     name: "ResourceName", # required
     #     proton_service_role_arn: "Arn",
+    #     provisioning_repository: {
+    #       branch: "GitBranchName", # required
+    #       name: "RepositoryName", # required
+    #       provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #     },
     #     spec: "SpecContents",
     #     template_major_version: "TemplateVersionPart",
     #     template_minor_version: "TemplateVersionPart",
@@ -2791,6 +3703,10 @@ module Aws::Proton
     #   resp.environment.name #=> String
     #   resp.environment.proton_service_role_arn #=> String
     #   resp.environment.provisioning #=> String, one of "CUSTOMER_MANAGED"
+    #   resp.environment.provisioning_repository.arn #=> String
+    #   resp.environment.provisioning_repository.branch #=> String
+    #   resp.environment.provisioning_repository.name #=> String
+    #   resp.environment.provisioning_repository.provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
     #   resp.environment.spec #=> String
     #   resp.environment.template_major_version #=> String
     #   resp.environment.template_minor_version #=> String
@@ -2809,7 +3725,7 @@ module Aws::Proton
     # use a new IAM role.
     #
     # For more information, see [Environment account connections][1] in the
-    # *AWS Proton Administrator guide*.
+    # *Proton Administrator guide*.
     #
     #
     #
@@ -2905,8 +3821,8 @@ module Aws::Proton
     #   A description of environment template version to update.
     #
     # @option params [required, String] :major_version
-    #   To update a major version of an environment template, include
-    #   `majorVersion`.
+    #   To update a major version of an environment template, include `major
+    #   Version`.
     #
     # @option params [required, String] :minor_version
     #   To update a minor version of an environment template, include
@@ -2977,8 +3893,8 @@ module Aws::Proton
     #   Lists the service instances to add and the existing service instances
     #   to remain. Omit the existing service instances to delete from the
     #   list. *Don't* include edits to the existing service instances or
-    #   pipeline. For more information, see *Edit a service* in the [AWS
-    #   Proton Administrator Guide][1] or the [AWS Proton User Guide][2].
+    #   pipeline. For more information, see *Edit a service* in the [Proton
+    #   Administrator Guide][1] or the [Proton User Guide][2].
     #
     #
     #
@@ -3353,8 +4269,8 @@ module Aws::Proton
     #   A description of a service template version to update.
     #
     # @option params [required, String] :major_version
-    #   To update a major version of a service template, include
-    #   `majorVersion`.
+    #   To update a major version of a service template, include `major
+    #   Version`.
     #
     # @option params [required, String] :minor_version
     #   To update a minor version of a service template, include
@@ -3412,6 +4328,61 @@ module Aws::Proton
       req.send_request(options)
     end
 
+    # Update template sync configuration parameters, except for the
+    # `templateName` and `templateType`.
+    #
+    # @option params [required, String] :branch
+    #   The repository branch.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository, for example `myrepos/myrepo`.
+    #
+    # @option params [required, String] :repository_provider
+    #   The repository provider.
+    #
+    # @option params [String] :subdirectory
+    #   A subdirectory path to your template bundle version. When included,
+    #   limits the template bundle search to this repository directory.
+    #
+    # @option params [required, String] :template_name
+    #   The synced template name.
+    #
+    # @option params [required, String] :template_type
+    #   The synced template type.
+    #
+    # @return [Types::UpdateTemplateSyncConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTemplateSyncConfigOutput#template_sync_config #template_sync_config} => Types::TemplateSyncConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_template_sync_config({
+    #     branch: "GitBranchName", # required
+    #     repository_name: "RepositoryName", # required
+    #     repository_provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #     subdirectory: "Subdirectory",
+    #     template_name: "ResourceName", # required
+    #     template_type: "ENVIRONMENT", # required, accepts ENVIRONMENT, SERVICE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_sync_config.branch #=> String
+    #   resp.template_sync_config.repository_name #=> String
+    #   resp.template_sync_config.repository_provider #=> String, one of "GITHUB", "GITHUB_ENTERPRISE", "BITBUCKET"
+    #   resp.template_sync_config.subdirectory #=> String
+    #   resp.template_sync_config.template_name #=> String
+    #   resp.template_sync_config.template_type #=> String, one of "ENVIRONMENT", "SERVICE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/proton-2020-07-20/UpdateTemplateSyncConfig AWS API Documentation
+    #
+    # @overload update_template_sync_config(params = {})
+    # @param [Hash] params ({})
+    def update_template_sync_config(params = {}, options = {})
+      req = build_request(:update_template_sync_config, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3425,7 +4396,7 @@ module Aws::Proton
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-proton'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

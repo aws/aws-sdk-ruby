@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2021-11-24)
+------------------
+
+* Feature - Remove Lambda function url apis
+
 1.74.0 (2021-11-23)
 ------------------
 

@@ -1042,6 +1042,46 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateTimeSeriesToAssetPropertyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alias: "PropertyAlias", # required
+    #         asset_id: "ID", # required
+    #         property_id: "ID", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] alias
+    #   The alias that identifies the time series.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset in which the asset property was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset property.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class AssociateTimeSeriesToAssetPropertyRequest < Struct.new(
+      :alias,
+      :asset_id,
+      :property_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains a summary of an associated asset.
     #
     # @!attribute [rw] id
@@ -2511,6 +2551,46 @@ module Aws::IoTSiteWise
 
     class DeleteProjectResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteTimeSeriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alias: "PropertyAlias",
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] alias
+    #   The alias that identifies the time series.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset in which the asset property was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset property.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class DeleteTimeSeriesRequest < Struct.new(
+      :alias,
+      :asset_id,
+      :property_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeAccessPolicyRequest
     #   data as a hash:
     #
@@ -2887,8 +2967,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The key ARN of the customer managed customer master key (CMK) used
-    #   for KMS encryption if you use `KMS_BASED_ENCRYPTION`.
+    #   The key ARN of the customer managed key used for KMS encryption if
+    #   you use `KMS_BASED_ENCRYPTION`.
     #   @return [String]
     #
     # @!attribute [rw] configuration_status
@@ -3257,6 +3337,28 @@ module Aws::IoTSiteWise
     #   Contains information about the storage destination.
     #   @return [Types::MultiLayerStorage]
     #
+    # @!attribute [rw] disassociated_data_storage
+    #   Contains the storage configuration for time series (data streams)
+    #   that aren't associated with asset properties. The
+    #   `disassociatedDataStorage` can be one of the following values:
+    #
+    #   * `ENABLED` – IoT SiteWise accepts time series that aren't
+    #     associated with asset properties.
+    #
+    #     After the `disassociatedDataStorage` is enabled, you can't
+    #     disable it.
+    #
+    #   * `DISABLED` – IoT SiteWise doesn't accept time series (data
+    #     streams) that aren't associated with asset properties.
+    #
+    #   For more information, see [Data streams][1] in the *IoT SiteWise
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html
+    #   @return [String]
+    #
     # @!attribute [rw] configuration_status
     #   Contains current status information for the configuration.
     #   @return [Types::ConfigurationStatus]
@@ -3269,8 +3371,92 @@ module Aws::IoTSiteWise
     class DescribeStorageConfigurationResponse < Struct.new(
       :storage_type,
       :multi_layer_storage,
+      :disassociated_data_storage,
       :configuration_status,
       :last_update_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTimeSeriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alias: "PropertyAlias",
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #       }
+    #
+    # @!attribute [rw] alias
+    #   The alias that identifies the time series.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset in which the asset property was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset property.
+    #   @return [String]
+    #
+    class DescribeTimeSeriesRequest < Struct.new(
+      :alias,
+      :asset_id,
+      :property_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asset_id
+    #   The ID of the asset in which the asset property was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset property.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The alias that identifies the time series.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_series_id
+    #   The ID of the time series.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The data type of the time series.
+    #
+    #   If you specify `STRUCT`, you must also specify `dataTypeSpec` to
+    #   identify the type of the structure for this time series.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type_spec
+    #   The data type of the structure for this time series. This parameter
+    #   is required for time series that have the `STRUCT` data type.
+    #
+    #   The options for this parameter depend on the type of the composite
+    #   model in which you created the asset property that is associated
+    #   with your time series. Use `AWS/ALARM_STATE` for alarm state in
+    #   alarm composite models.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_series_creation_date
+    #   The date that the time series was created, in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] time_series_last_update_date
+    #   The date that the time series was last updated, in Unix epoch time.
+    #   @return [Time]
+    #
+    class DescribeTimeSeriesResponse < Struct.new(
+      :asset_id,
+      :property_id,
+      :alias,
+      :time_series_id,
+      :data_type,
+      :data_type_spec,
+      :time_series_creation_date,
+      :time_series_last_update_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3336,6 +3522,46 @@ module Aws::IoTSiteWise
       :asset_id,
       :hierarchy_id,
       :child_asset_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateTimeSeriesFromAssetPropertyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         alias: "PropertyAlias", # required
+    #         asset_id: "ID", # required
+    #         property_id: "ID", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] alias
+    #   The alias that identifies the time series.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset in which the asset property was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset property.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique case-sensitive identifier that you can provide to ensure
+    #   the idempotency of the request. Don't reuse this client token if a
+    #   new idempotent request is required.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class DisassociateTimeSeriesFromAssetPropertyRequest < Struct.new(
+      :alias,
+      :asset_id,
+      :property_id,
       :client_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3849,10 +4075,10 @@ module Aws::IoTSiteWise
     #
     #     For example, you can use this operation to return the interpolated
     #     temperature values for a wind turbine every 24 hours over a
-    #     duration of 7 days. If the interpolation starts on July 1, 2021,
-    #     at 9 AM, IoT SiteWise returns the first interpolated value on July
-    #     2, 2021, at 9 AM, the second interpolated value on July 3, 2021,
-    #     at 9 AM, and so on.
+    #     duration of 7 days. If the interpolation starts July 1, 2021, at 9
+    #     AM, IoT SiteWise returns the first interpolated value on July 2,
+    #     2021, at 9 AM, the second interpolated value on July 3, 2021, at 9
+    #     AM, and so on.
     #
     #   * `LOCF_INTERPOLATION` – Estimates missing data using last
     #     observation carried forward interpolation
@@ -3862,12 +4088,12 @@ module Aws::IoTSiteWise
     #     forward this interpolated value until a new data point is found.
     #
     #     For example, you can get the state of an on-off valve every 24
-    #     hours over a duration of 7 days. If the interpolation starts on
-    #     July 1, 2021, at 9 AM, IoT SiteWise returns the last observed data
+    #     hours over a duration of 7 days. If the interpolation starts July
+    #     1, 2021, at 9 AM, IoT SiteWise returns the last observed data
     #     point between July 1, 2021, at 9 AM and July 2, 2021, at 9 AM as
-    #     the first interpolated value. If no data point is found after 9 AM
-    #     on July 2, 2021, IoT SiteWise uses the same interpolated value for
-    #     the rest of the days.
+    #     the first interpolated value. If a data point isn't found after 9
+    #     AM on July 2, 2021, IoT SiteWise uses the same interpolated value
+    #     for the rest of the days.
     #
     #
     #
@@ -3875,17 +4101,18 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] interval_window_in_seconds
-    #   The query interval for the window in seconds. IoT SiteWise computes
+    #   The query interval for the window, in seconds. IoT SiteWise computes
     #   each interpolated value by using data points from the timestamp of
-    #   each interval minus the window to the timestamp of each interval
-    #   plus the window. If not specified, the window is between the start
-    #   time minus the interval and the end time plus the interval.
+    #   each interval, minus the window to the timestamp of each interval
+    #   plus the window. If not specified, the window ranges between the
+    #   start time minus the interval and the end time plus the interval.
     #
     #   <note markdown="1"> * If you specify a value for the `intervalWindowInSeconds`
-    #     parameter, the `type` parameter must be `LINEAR_INTERPOLATION`.
+    #     parameter, the value for the `type` parameter must be
+    #     `LINEAR_INTERPOLATION`.
     #
-    #   * If no data point is found during the specified query window, IoT
-    #     SiteWise won't return an interpolated value for the interval.
+    #   * If a data point isn't found during the specified query window,
+    #     IoT SiteWise won't return an interpolated value for the interval.
     #     This indicates that there's a gap in the ingested data points.
     #
     #    </note>
@@ -3893,11 +4120,11 @@ module Aws::IoTSiteWise
     #   For example, you can get the interpolated temperature values for a
     #   wind turbine every 24 hours over a duration of 7 days. If the
     #   interpolation starts on July 1, 2021, at 9 AM with a window of 2
-    #   hours, IoT SiteWise uses the data points from 7 AM (9 AM - 2 hours)
-    #   to 11 AM (9 AM + 2 hours) on July 2, 2021 to compute the first
-    #   interpolated value, uses the data points from 7 AM (9 AM - 2 hours)
-    #   to 11 AM (9 AM + 2 hours) on July 3, 2021 to compute the second
-    #   interpolated value, and so on.
+    #   hours, IoT SiteWise uses the data points from 7 AM (9 AM minus 2
+    #   hours) to 11 AM (9 AM plus 2 hours) on July 2, 2021 to compute the
+    #   first interpolated value. Next, IoT SiteWise uses the data points
+    #   from 7 AM (9 AM minus 2 hours) to 11 AM (9 AM plus 2 hours) on July
+    #   3, 2021 to compute the second interpolated value, and so on.
     #   @return [Integer]
     #
     class GetInterpolatedAssetPropertyValuesRequest < Struct.new(
@@ -4860,6 +5087,70 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTimeSeriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         asset_id: "ID",
+    #         alias_prefix: "PropertyAlias",
+    #         time_series_type: "ASSOCIATED", # accepts ASSOCIATED, DISASSOCIATED
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for each paginated request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset in which the asset property was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias_prefix
+    #   The alias prefix of the time series.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_series_type
+    #   The type of the time series. The time series type can be one of the
+    #   following values:
+    #
+    #   * `ASSOCIATED` – The time series is associated with an asset
+    #     property.
+    #
+    #   * `DISASSOCIATED` – The time series isn't associated with any asset
+    #     property.
+    #   @return [String]
+    #
+    class ListTimeSeriesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :asset_id,
+      :alias_prefix,
+      :time_series_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] time_series_summaries
+    #   One or more time series summaries to list.
+    #   @return [Array<Types::TimeSeriesSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class ListTimeSeriesResponse < Struct.new(
+      :time_series_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains logging options.
     #
     # @note When making an API call, you may pass LoggingOptions
@@ -5507,9 +5798,8 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Key ID of the customer managed customer master key (CMK) used
-    #   for KMS encryption. This is required if you use
-    #   `KMS_BASED_ENCRYPTION`.
+    #   The Key ID of the customer managed key used for KMS encryption. This
+    #   is required if you use `KMS_BASED_ENCRYPTION`.
     #   @return [String]
     #
     class PutDefaultEncryptionConfigurationRequest < Struct.new(
@@ -5524,7 +5814,7 @@ module Aws::IoTSiteWise
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Key ARN of the KMS CMK used for KMS encryption if you use
+    #   The Key ARN of the KMS key used for KMS encryption if you use
     #   `KMS_BASED_ENCRYPTION`.
     #   @return [String]
     #
@@ -5574,6 +5864,7 @@ module Aws::IoTSiteWise
     #             role_arn: "ARN", # required
     #           },
     #         },
+    #         disassociated_data_storage: "ENABLED", # accepts ENABLED, DISABLED
     #       }
     #
     # @!attribute [rw] storage_type
@@ -5594,9 +5885,32 @@ module Aws::IoTSiteWise
     #   `MultiLayerStorage` object.
     #   @return [Types::MultiLayerStorage]
     #
+    # @!attribute [rw] disassociated_data_storage
+    #   Contains the storage configuration for time series (data streams)
+    #   that aren't associated with asset properties. The
+    #   `disassociatedDataStorage` can be one of the following values:
+    #
+    #   * `ENABLED` – IoT SiteWise accepts time series that aren't
+    #     associated with asset properties.
+    #
+    #     After the `disassociatedDataStorage` is enabled, you can't
+    #     disable it.
+    #
+    #   * `DISABLED` – IoT SiteWise doesn't accept time series (data
+    #     streams) that aren't associated with asset properties.
+    #
+    #   For more information, see [Data streams][1] in the *IoT SiteWise
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html
+    #   @return [String]
+    #
     class PutStorageConfigurationRequest < Struct.new(
       :storage_type,
-      :multi_layer_storage)
+      :multi_layer_storage,
+      :disassociated_data_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5617,6 +5931,28 @@ module Aws::IoTSiteWise
     #   Contains information about the storage destination.
     #   @return [Types::MultiLayerStorage]
     #
+    # @!attribute [rw] disassociated_data_storage
+    #   Contains the storage configuration for time series (data streams)
+    #   that aren't associated with asset properties. The
+    #   `disassociatedDataStorage` can be one of the following values:
+    #
+    #   * `ENABLED` – IoT SiteWise accepts time series that aren't
+    #     associated with asset properties.
+    #
+    #     After the `disassociatedDataStorage` is enabled, you can't
+    #     disable it.
+    #
+    #   * `DISABLED` – IoT SiteWise doesn't accept time series (data
+    #     streams) that aren't associated with asset properties.
+    #
+    #   For more information, see [Data streams][1] in the *IoT SiteWise
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html
+    #   @return [String]
+    #
     # @!attribute [rw] configuration_status
     #   Contains current status information for the configuration.
     #   @return [Types::ConfigurationStatus]
@@ -5624,6 +5960,7 @@ module Aws::IoTSiteWise
     class PutStorageConfigurationResponse < Struct.new(
       :storage_type,
       :multi_layer_storage,
+      :disassociated_data_storage,
       :configuration_status)
       SENSITIVE = []
       include Aws::Structure
@@ -5784,6 +6121,62 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains a summary of a time series (data stream).
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset in which the asset property was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset property.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The alias that identifies the time series.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_series_id
+    #   The ID of the time series.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The data type of the time series.
+    #
+    #   If you specify `STRUCT`, you must also specify `dataTypeSpec` to
+    #   identify the type of the structure for this time series.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type_spec
+    #   The data type of the structure for this time series. This parameter
+    #   is required for time series that have the `STRUCT` data type.
+    #
+    #   The options for this parameter depend on the type of the composite
+    #   model in which you created the asset property that is associated
+    #   with your time series. Use `AWS/ALARM_STATE` for alarm state in
+    #   alarm composite models.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_series_creation_date
+    #   The date that the time series was created, in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] time_series_last_update_date
+    #   The date that the time series was last updated, in Unix epoch time.
+    #   @return [Time]
+    #
+    class TimeSeriesSummary < Struct.new(
+      :asset_id,
+      :property_id,
+      :alias,
+      :time_series_id,
+      :data_type,
+      :data_type_spec,
+      :time_series_creation_date,
+      :time_series_last_update_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You've reached the limit for the number of tags allowed for a
     # resource. For more information, see [Tag naming limits and
     # requirements][1] in the *Amazon Web Services General Reference*.
@@ -5906,16 +6299,17 @@ module Aws::IoTSiteWise
     end
 
     # Contains a tumbling window, which is a repeating fixed-sized,
-    # non-overlapping, and contiguous time window. You use this window in
-    # metrics to aggregate data from properties and other assets.
+    # non-overlapping, and contiguous time window. You can use this window
+    # in metrics to aggregate data from properties and other assets.
     #
     # You can use `m`, `h`, `d`, and `w` when you specify an interval or
-    # offset. Note that `m` represents minutes, and `w` represents weeks.
-    # You can also use `s` to represent seconds in `offset`.
+    # offset. Note that `m` represents minutes, `h` represents hours, `d`
+    # represents days, and `w` represents weeks. You can also use `s` to
+    # represent seconds in `offset`.
     #
     # The `interval` and `offset` parameters support the [ISO 8601
-    # format][1]. For example, `PT5S` represents five seconds, `PT5M`
-    # represents five minutes, and `PT5H` represents five hours.
+    # format][1]. For example, `PT5S` represents 5 seconds, `PT5M`
+    # represents 5 minutes, and `PT5H` represents 5 hours.
     #
     #
     #
@@ -5954,11 +6348,11 @@ module Aws::IoTSiteWise
     #     `interval`, IoT SiteWise aggregates data in one of the following
     #     ways:
     #
-    #     * If you create the metric before or at 6:00 PM (UTC), you get the
+    #     * If you create the metric before or at 6 PM (UTC), you get the
     #       first aggregation result at 6 PM (UTC) on the day when you
     #       create the metric.
     #
-    #     * If you create the metric after 6:00 PM (UTC), you get the first
+    #     * If you create the metric after 6 PM (UTC), you get the first
     #       aggregation result at 6 PM (UTC) the next day.
     #
     #   * The ISO 8601 format.
@@ -5967,16 +6361,16 @@ module Aws::IoTSiteWise
     #     `interval`, IoT SiteWise aggregates data in one of the following
     #     ways:
     #
-    #     * If you create the metric before or at 6:00 PM (UTC), you get the
+    #     * If you create the metric before or at 6 PM (UTC), you get the
     #       first aggregation result at 6 PM (UTC) on the day when you
     #       create the metric.
     #
-    #     * If you create the metric after 6:00 PM (UTC), you get the first
+    #     * If you create the metric after 6 PM (UTC), you get the first
     #       aggregation result at 6 PM (UTC) the next day.
     #
     #   * The 24-hour clock.
     #
-    #     For example, if you specify `00:03:00` for `offset` and `5m` for
+    #     For example, if you specify `00:03:00` for `offset`, `5m` for
     #     `interval`, and you create the metric at 2 PM (UTC), you get the
     #     first aggregation result at 2:03 PM (UTC). You get the second
     #     aggregation result at 2:08 PM (UTC).
@@ -5987,11 +6381,11 @@ module Aws::IoTSiteWise
     #     `1d` for `interval`, IoT SiteWise aggregates data in one of the
     #     following ways:
     #
-    #     * If you create the metric before or at 6:00 PM (PST), you get the
+    #     * If you create the metric before or at 6 PM (PST), you get the
     #       first aggregation result at 6 PM (PST) on the day when you
     #       create the metric.
     #
-    #     * If you create the metric after 6:00 PM (PST), you get the first
+    #     * If you create the metric after 6 PM (PST), you get the first
     #       aggregation result at 6 PM (PST) the next day.
     #   @return [String]
     #

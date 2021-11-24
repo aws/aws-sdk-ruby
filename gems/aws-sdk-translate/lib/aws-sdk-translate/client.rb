@@ -503,6 +503,7 @@ module Aws::Translate
     #   resp.text_translation_job_properties.output_data_config.encryption_key.type #=> String, one of "KMS"
     #   resp.text_translation_job_properties.output_data_config.encryption_key.id #=> String
     #   resp.text_translation_job_properties.data_access_role_arn #=> String
+    #   resp.text_translation_job_properties.settings.profanity #=> String, one of "MASK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DescribeTextTranslationJob AWS API Documentation
     #
@@ -883,6 +884,7 @@ module Aws::Translate
     #   resp.text_translation_job_properties_list[0].output_data_config.encryption_key.type #=> String, one of "KMS"
     #   resp.text_translation_job_properties_list[0].output_data_config.encryption_key.id #=> String
     #   resp.text_translation_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.text_translation_job_properties_list[0].settings.profanity #=> String, one of "MASK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTextTranslationJobs AWS API Documentation
@@ -975,6 +977,10 @@ module Aws::Translate
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::TranslationSettings] :settings
+    #   Settings to configure your translation output, including the option to
+    #   mask profane words and phrases.
+    #
     # @return [Types::StartTextTranslationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTextTranslationJobResponse#job_id #job_id} => String
@@ -1001,6 +1007,9 @@ module Aws::Translate
     #     terminology_names: ["ResourceName"],
     #     parallel_data_names: ["ResourceName"],
     #     client_token: "ClientTokenString", # required
+    #     settings: {
+    #       profanity: "MASK", # accepts MASK
+    #     },
     #   })
     #
     # @example Response structure
@@ -1089,12 +1098,17 @@ module Aws::Translate
     #   The language code requested for the language of the target text. The
     #   language must be a language supported by Amazon Translate.
     #
+    # @option params [Types::TranslationSettings] :settings
+    #   Settings to configure your translation output, including the option to
+    #   mask profane words and phrases.
+    #
     # @return [Types::TranslateTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TranslateTextResponse#translated_text #translated_text} => String
     #   * {Types::TranslateTextResponse#source_language_code #source_language_code} => String
     #   * {Types::TranslateTextResponse#target_language_code #target_language_code} => String
     #   * {Types::TranslateTextResponse#applied_terminologies #applied_terminologies} => Array&lt;Types::AppliedTerminology&gt;
+    #   * {Types::TranslateTextResponse#applied_settings #applied_settings} => Types::TranslationSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -1103,6 +1117,9 @@ module Aws::Translate
     #     terminology_names: ["ResourceName"],
     #     source_language_code: "LanguageCodeString", # required
     #     target_language_code: "LanguageCodeString", # required
+    #     settings: {
+    #       profanity: "MASK", # accepts MASK
+    #     },
     #   })
     #
     # @example Response structure
@@ -1115,6 +1132,7 @@ module Aws::Translate
     #   resp.applied_terminologies[0].terms #=> Array
     #   resp.applied_terminologies[0].terms[0].source_text #=> String
     #   resp.applied_terminologies[0].terms[0].target_text #=> String
+    #   resp.applied_settings.profanity #=> String, one of "MASK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateText AWS API Documentation
     #
@@ -1193,7 +1211,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

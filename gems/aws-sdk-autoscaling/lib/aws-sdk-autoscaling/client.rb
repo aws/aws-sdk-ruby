@@ -3298,6 +3298,42 @@ module Aws::AutoScaling
     #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].predefined_scaling_metric_specification.resource_label #=> String
     #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].predefined_load_metric_specification.predefined_metric_type #=> String, one of "ASGTotalCPUUtilization", "ASGTotalNetworkIn", "ASGTotalNetworkOut", "ALBTargetGroupRequestCount"
     #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].predefined_load_metric_specification.resource_label #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries #=> Array
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries[0].id #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries[0].expression #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries[0].metric_stat.metric.namespace #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries[0].metric_stat.metric.metric_name #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions #=> Array
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries[0].metric_stat.stat #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries[0].metric_stat.unit #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries[0].label #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_scaling_metric_specification.metric_data_queries[0].return_data #=> Boolean
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries #=> Array
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries[0].id #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries[0].expression #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries[0].metric_stat.metric.namespace #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries[0].metric_stat.metric.metric_name #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions #=> Array
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries[0].metric_stat.stat #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries[0].metric_stat.unit #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries[0].label #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_load_metric_specification.metric_data_queries[0].return_data #=> Boolean
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries #=> Array
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries[0].id #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries[0].expression #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries[0].metric_stat.metric.namespace #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries[0].metric_stat.metric.metric_name #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions #=> Array
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries[0].metric_stat.stat #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries[0].metric_stat.unit #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries[0].label #=> String
+    #   resp.scaling_policies[0].predictive_scaling_configuration.metric_specifications[0].customized_capacity_metric_specification.metric_data_queries[0].return_data #=> Boolean
     #   resp.scaling_policies[0].predictive_scaling_configuration.mode #=> String, one of "ForecastAndScale", "ForecastOnly"
     #   resp.scaling_policies[0].predictive_scaling_configuration.scheduling_buffer_time #=> Integer
     #   resp.scaling_policies[0].predictive_scaling_configuration.max_capacity_breach_behavior #=> String, one of "HonorMaxCapacity", "IncreaseMaxCapacity"
@@ -4481,6 +4517,42 @@ module Aws::AutoScaling
     #   resp.load_forecast[0].metric_specification.predefined_scaling_metric_specification.resource_label #=> String
     #   resp.load_forecast[0].metric_specification.predefined_load_metric_specification.predefined_metric_type #=> String, one of "ASGTotalCPUUtilization", "ASGTotalNetworkIn", "ASGTotalNetworkOut", "ALBTargetGroupRequestCount"
     #   resp.load_forecast[0].metric_specification.predefined_load_metric_specification.resource_label #=> String
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries #=> Array
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries[0].id #=> String
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries[0].expression #=> String
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries[0].metric_stat.metric.namespace #=> String
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries[0].metric_stat.metric.metric_name #=> String
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions #=> Array
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries[0].metric_stat.stat #=> String
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries[0].metric_stat.unit #=> String
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries[0].label #=> String
+    #   resp.load_forecast[0].metric_specification.customized_scaling_metric_specification.metric_data_queries[0].return_data #=> Boolean
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries #=> Array
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries[0].id #=> String
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries[0].expression #=> String
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries[0].metric_stat.metric.namespace #=> String
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries[0].metric_stat.metric.metric_name #=> String
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions #=> Array
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries[0].metric_stat.stat #=> String
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries[0].metric_stat.unit #=> String
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries[0].label #=> String
+    #   resp.load_forecast[0].metric_specification.customized_load_metric_specification.metric_data_queries[0].return_data #=> Boolean
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries #=> Array
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries[0].id #=> String
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries[0].expression #=> String
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries[0].metric_stat.metric.namespace #=> String
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries[0].metric_stat.metric.metric_name #=> String
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions #=> Array
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].name #=> String
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries[0].metric_stat.metric.dimensions[0].value #=> String
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries[0].metric_stat.stat #=> String
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries[0].metric_stat.unit #=> String
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries[0].label #=> String
+    #   resp.load_forecast[0].metric_specification.customized_capacity_metric_specification.metric_data_queries[0].return_data #=> Boolean
     #   resp.capacity_forecast.timestamps #=> Array
     #   resp.capacity_forecast.timestamps[0] #=> Time
     #   resp.capacity_forecast.values #=> Array
@@ -4972,6 +5044,78 @@ module Aws::AutoScaling
     #           predefined_load_metric_specification: {
     #             predefined_metric_type: "ASGTotalCPUUtilization", # required, accepts ASGTotalCPUUtilization, ASGTotalNetworkIn, ASGTotalNetworkOut, ALBTargetGroupRequestCount
     #             resource_label: "XmlStringMaxLen1023",
+    #           },
+    #           customized_scaling_metric_specification: {
+    #             metric_data_queries: [ # required
+    #               {
+    #                 id: "XmlStringMaxLen255", # required
+    #                 expression: "XmlStringMaxLen1023",
+    #                 metric_stat: {
+    #                   metric: { # required
+    #                     namespace: "MetricNamespace", # required
+    #                     metric_name: "MetricName", # required
+    #                     dimensions: [
+    #                       {
+    #                         name: "MetricDimensionName", # required
+    #                         value: "MetricDimensionValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                   stat: "XmlStringMetricStat", # required
+    #                   unit: "MetricUnit",
+    #                 },
+    #                 label: "XmlStringMetricLabel",
+    #                 return_data: false,
+    #               },
+    #             ],
+    #           },
+    #           customized_load_metric_specification: {
+    #             metric_data_queries: [ # required
+    #               {
+    #                 id: "XmlStringMaxLen255", # required
+    #                 expression: "XmlStringMaxLen1023",
+    #                 metric_stat: {
+    #                   metric: { # required
+    #                     namespace: "MetricNamespace", # required
+    #                     metric_name: "MetricName", # required
+    #                     dimensions: [
+    #                       {
+    #                         name: "MetricDimensionName", # required
+    #                         value: "MetricDimensionValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                   stat: "XmlStringMetricStat", # required
+    #                   unit: "MetricUnit",
+    #                 },
+    #                 label: "XmlStringMetricLabel",
+    #                 return_data: false,
+    #               },
+    #             ],
+    #           },
+    #           customized_capacity_metric_specification: {
+    #             metric_data_queries: [ # required
+    #               {
+    #                 id: "XmlStringMaxLen255", # required
+    #                 expression: "XmlStringMaxLen1023",
+    #                 metric_stat: {
+    #                   metric: { # required
+    #                     namespace: "MetricNamespace", # required
+    #                     metric_name: "MetricName", # required
+    #                     dimensions: [
+    #                       {
+    #                         name: "MetricDimensionName", # required
+    #                         value: "MetricDimensionValue", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                   stat: "XmlStringMetricStat", # required
+    #                   unit: "MetricUnit",
+    #                 },
+    #                 label: "XmlStringMetricLabel",
+    #                 return_data: false,
+    #               },
+    #             ],
     #           },
     #         },
     #       ],
@@ -6252,7 +6396,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

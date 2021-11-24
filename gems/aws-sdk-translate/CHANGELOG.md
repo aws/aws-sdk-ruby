@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2021-11-24)
+------------------
+
+* Feature - This release enables customers to use translation settings to mask profane words and phrases in their translation output.
+
 1.38.0 (2021-11-11)
 ------------------
 

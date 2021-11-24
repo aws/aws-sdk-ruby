@@ -212,6 +212,10 @@ module Aws::Imagebuilder
     Logging = Shapes::StructureShape.new(name: 'Logging')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
+    OrganizationArn = Shapes::StringShape.new(name: 'OrganizationArn')
+    OrganizationArnList = Shapes::ListShape.new(name: 'OrganizationArnList')
+    OrganizationalUnitArn = Shapes::StringShape.new(name: 'OrganizationalUnitArn')
+    OrganizationalUnitArnList = Shapes::ListShape.new(name: 'OrganizationalUnitArnList')
     OsVersion = Shapes::StringShape.new(name: 'OsVersion')
     OsVersionList = Shapes::ListShape.new(name: 'OsVersionList')
     OutputResources = Shapes::StructureShape.new(name: 'OutputResources')
@@ -924,6 +928,8 @@ module Aws::Imagebuilder
 
     LaunchPermissionConfiguration.add_member(:user_ids, Shapes::ShapeRef.new(shape: AccountList, location_name: "userIds"))
     LaunchPermissionConfiguration.add_member(:user_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "userGroups"))
+    LaunchPermissionConfiguration.add_member(:organization_arns, Shapes::ShapeRef.new(shape: OrganizationArnList, location_name: "organizationArns"))
+    LaunchPermissionConfiguration.add_member(:organizational_unit_arns, Shapes::ShapeRef.new(shape: OrganizationalUnitArnList, location_name: "organizationalUnitArns"))
     LaunchPermissionConfiguration.struct_class = Types::LaunchPermissionConfiguration
 
     LaunchTemplateConfiguration.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: LaunchTemplateId, required: true, location_name: "launchTemplateId"))
@@ -1062,6 +1068,10 @@ module Aws::Imagebuilder
 
     Logging.add_member(:s3_logs, Shapes::ShapeRef.new(shape: S3Logs, location_name: "s3Logs"))
     Logging.struct_class = Types::Logging
+
+    OrganizationArnList.member = Shapes::ShapeRef.new(shape: OrganizationArn)
+
+    OrganizationalUnitArnList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitArn)
 
     OsVersionList.member = Shapes::ShapeRef.new(shape: OsVersion)
 

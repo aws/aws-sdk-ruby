@@ -266,13 +266,13 @@ module Aws::Translate
     #       }
     #
     # @!attribute [rw] type
-    #   The type of encryption key used by Amazon Translate to encrypt
-    #   custom terminologies.
+    #   The type of encryption key used by Amazon Translate to encrypt this
+    #   object.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   The Amazon Resource Name (ARN) of the encryption key being used to
-    #   encrypt the custom terminology.
+    #   encrypt this object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/EncryptionKey AWS API Documentation
@@ -313,8 +313,8 @@ module Aws::Translate
     #   that was successfully imported into Amazon Translate. The location
     #   is returned as a presigned URL that has a 30 minute expiration.
     #
-    #   Amazon Translate doesn't scan parallel data input files for the
-    #   risk of CSV injection attacks.
+    #   Amazon Translate doesn't scan all input files for the risk of CSV
+    #   injection attacks.
     #
     #    CSV injection occurs when a .csv or .tsv file is altered so that a
     #   record contains malicious code. The record begins with a special
@@ -322,8 +322,8 @@ module Aws::Translate
     #   spreadsheet program, the program might interpret the record as a
     #   formula and run the code within it.
     #
-    #    Before you download a parallel data input file from Amazon S3,
-    #   ensure that you recognize the file and trust its creator.
+    #    Before you download an input file from Amazon S3, ensure that you
+    #   recognize the file and trust its creator.
     #   @return [Types::ParallelDataDataLocation]
     #
     # @!attribute [rw] auxiliary_data_location
@@ -392,9 +392,22 @@ module Aws::Translate
     #   @return [Types::TerminologyProperties]
     #
     # @!attribute [rw] terminology_data_location
-    #   The data location of the custom terminology being retrieved. The
-    #   custom terminology file is returned in a presigned url that has a 30
-    #   minute expiration.
+    #   The Amazon S3 location of the most recent custom terminology input
+    #   file that was successfully imported into Amazon Translate. The
+    #   location is returned as a presigned URL that has a 30 minute
+    #   expiration.
+    #
+    #   Amazon Translate doesn't scan all input files for the risk of CSV
+    #   injection attacks.
+    #
+    #    CSV injection occurs when a .csv or .tsv file is altered so that a
+    #   record contains malicious code. The record begins with a special
+    #   character, such as =, +, -, or @. When the file is opened in a
+    #   spreadsheet program, the program might interpret the record as a
+    #   formula and run the code within it.
+    #
+    #    Before you download an input file from Amazon S3, ensure that you
+    #   recognize the file and trust its creator.
     #   @return [Types::TerminologyDataLocation]
     #
     # @!attribute [rw] auxiliary_data_location
@@ -869,8 +882,8 @@ module Aws::Translate
     #   The Amazon S3 location of the parallel data input file. The location
     #   is returned as a presigned URL to that has a 30 minute expiration.
     #
-    #   Amazon Translate doesn't scan parallel data input files for the
-    #   risk of CSV injection attacks.
+    #   Amazon Translate doesn't scan all input files for the risk of CSV
+    #   injection attacks.
     #
     #    CSV injection occurs when a .csv or .tsv file is altered so that a
     #   record contains malicious code. The record begins with a special
@@ -878,8 +891,8 @@ module Aws::Translate
     #   spreadsheet program, the program might interpret the record as a
     #   formula and run the code within it.
     #
-    #    Before you download a parallel data input file from Amazon S3,
-    #   ensure that you recognize the file and trust its creator.
+    #    Before you download an input file from Amazon S3, ensure that you
+    #   recognize the file and trust its creator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ParallelDataDataLocation AWS API Documentation
@@ -1052,6 +1065,9 @@ module Aws::Translate
     #         terminology_names: ["ResourceName"],
     #         parallel_data_names: ["ResourceName"],
     #         client_token: "ClientTokenString", # required
+    #         settings: {
+    #           profanity: "MASK", # accepts MASK
+    #         },
     #       }
     #
     # @!attribute [rw] job_name
@@ -1131,6 +1147,11 @@ module Aws::Translate
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] settings
+    #   Settings to configure your translation output, including the option
+    #   to mask profane words and phrases.
+    #   @return [Types::TranslationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/StartTextTranslationJobRequest AWS API Documentation
     #
     class StartTextTranslationJobRequest < Struct.new(
@@ -1142,7 +1163,8 @@ module Aws::Translate
       :target_language_codes,
       :terminology_names,
       :parallel_data_names,
-      :client_token)
+      :client_token,
+      :settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1306,7 +1328,22 @@ module Aws::Translate
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The location of the custom terminology data.
+    #   The Amazon S3 location of the most recent custom terminology input
+    #   file that was successfully imported into Amazon Translate. The
+    #   location is returned as a presigned URL that has a 30 minute
+    #   expiration.
+    #
+    #   Amazon Translate doesn't scan all input files for the risk of CSV
+    #   injection attacks.
+    #
+    #    CSV injection occurs when a .csv or .tsv file is altered so that a
+    #   record contains malicious code. The record begins with a special
+    #   character, such as =, +, -, or @. When the file is opened in a
+    #   spreadsheet program, the program might interpret the record as a
+    #   formula and run the code within it.
+    #
+    #    Before you download an input file from Amazon S3, ensure that you
+    #   recognize the file and trust its creator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TerminologyDataLocation AWS API Documentation
@@ -1547,6 +1584,10 @@ module Aws::Translate
     #   the job's input data.
     #   @return [String]
     #
+    # @!attribute [rw] settings
+    #   Settings that configure the translation output.
+    #   @return [Types::TranslationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TextTranslationJobProperties AWS API Documentation
     #
     class TextTranslationJobProperties < Struct.new(
@@ -1563,7 +1604,8 @@ module Aws::Translate
       :end_time,
       :input_data_config,
       :output_data_config,
-      :data_access_role_arn)
+      :data_access_role_arn,
+      :settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1590,6 +1632,9 @@ module Aws::Translate
     #         terminology_names: ["ResourceName"],
     #         source_language_code: "LanguageCodeString", # required
     #         target_language_code: "LanguageCodeString", # required
+    #         settings: {
+    #           profanity: "MASK", # accepts MASK
+    #         },
     #       }
     #
     # @!attribute [rw] text
@@ -1625,13 +1670,19 @@ module Aws::Translate
     #   language must be a language supported by Amazon Translate.
     #   @return [String]
     #
+    # @!attribute [rw] settings
+    #   Settings to configure your translation output, including the option
+    #   to mask profane words and phrases.
+    #   @return [Types::TranslationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateTextRequest AWS API Documentation
     #
     class TranslateTextRequest < Struct.new(
       :text,
       :terminology_names,
       :source_language_code,
-      :target_language_code)
+      :target_language_code,
+      :settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1653,13 +1704,54 @@ module Aws::Translate
     #   Amazon Translate for the translated text response.
     #   @return [Array<Types::AppliedTerminology>]
     #
+    # @!attribute [rw] applied_settings
+    #   Settings that configure the translation output.
+    #   @return [Types::TranslationSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateTextResponse AWS API Documentation
     #
     class TranslateTextResponse < Struct.new(
       :translated_text,
       :source_language_code,
       :target_language_code,
-      :applied_terminologies)
+      :applied_terminologies,
+      :applied_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings that configure the translation output.
+    #
+    # @note When making an API call, you may pass TranslationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         profanity: "MASK", # accepts MASK
+    #       }
+    #
+    # @!attribute [rw] profanity
+    #   Enable the profanity setting if you want Amazon Translate to mask
+    #   profane words and phrases in your translation output.
+    #
+    #   To mask profane words and phrases, Amazon Translate replaces them
+    #   with the grawlix string “?$#@$“. This 5-character sequence is used
+    #   for each profane word or phrase, regardless of the length or number
+    #   of words.
+    #
+    #   Amazon Translate does not detect profanity in all of its supported
+    #   languages. For languages that support profanity detection, see
+    #   [Supported Languages and Language Codes in the Amazon Translate
+    #   Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/translate/latest/dg/what-is.html#what-is-languages
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslationSettings AWS API Documentation
+    #
+    class TranslationSettings < Struct.new(
+      :profanity)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -395,10 +395,15 @@ module Aws::CustomerProfiles
     # Use this API or [UpdateDomain][1] to enable [identity resolution][2]\:
     # set `Matching` to true.
     #
+    # To prevent cross-service impersonation when you call this API, see
+    # [Cross-service confused deputy prevention][3] for sample policies that
+    # you should apply.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html
     # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html
     #
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
@@ -419,11 +424,16 @@ module Aws::CustomerProfiles
     #   to the DeadLetterQueue.
     #
     # @option params [Types::MatchingRequest] :matching
-    #   The process of matching duplicate profiles. If Matching = true, Amazon
-    #   Connect Customer Profiles starts a weekly batch process every Saturday
-    #   at 12AM UTC to detect duplicate profiles in your domains. After that
-    #   batch process completes, use the [GetMatches][1] API to return and
-    #   review the results.
+    #   The process of matching duplicate profiles. If `Matching` = `true`,
+    #   Amazon Connect Customer Profiles starts a weekly batch process called
+    #   Identity Resolution Job. If you do not specify a date and time for
+    #   Identity Resolution Job to run, by default it runs every Saturday at
+    #   12AM UTC to detect duplicate profiles in your domains.
+    #
+    #   After the Identity Resolution Job completes, use the [GetMatches][1]
+    #   API to return and review the results. Or, if you have configured
+    #   `ExportingConfig` in the `MatchingRequest`, you can download the
+    #   results from S3.
     #
     #
     #
@@ -452,6 +462,28 @@ module Aws::CustomerProfiles
     #     dead_letter_queue_url: "sqsQueueUrl",
     #     matching: {
     #       enabled: false, # required
+    #       job_schedule: {
+    #         day_of_the_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #         time: "JobScheduleTime", # required
+    #       },
+    #       auto_merging: {
+    #         enabled: false, # required
+    #         consolidation: {
+    #           matching_attributes_list: [ # required
+    #             ["string1To255"],
+    #           ],
+    #         },
+    #         conflict_resolution: {
+    #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
+    #           source_name: "string1To255",
+    #         },
+    #       },
+    #       exporting_config: {
+    #         s3_exporting: {
+    #           s3_bucket_name: "s3BucketName", # required
+    #           s3_key_name: "s3KeyNameCustomerOutputConfig",
+    #         },
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -465,6 +497,16 @@ module Aws::CustomerProfiles
     #   resp.default_encryption_key #=> String
     #   resp.dead_letter_queue_url #=> String
     #   resp.matching.enabled #=> Boolean
+    #   resp.matching.job_schedule.day_of_the_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.matching.job_schedule.time #=> String
+    #   resp.matching.auto_merging.enabled #=> Boolean
+    #   resp.matching.auto_merging.consolidation.matching_attributes_list #=> Array
+    #   resp.matching.auto_merging.consolidation.matching_attributes_list[0] #=> Array
+    #   resp.matching.auto_merging.consolidation.matching_attributes_list[0][0] #=> String
+    #   resp.matching.auto_merging.conflict_resolution.conflict_resolving_model #=> String, one of "RECENCY", "SOURCE"
+    #   resp.matching.auto_merging.conflict_resolution.source_name #=> String
+    #   resp.matching.exporting_config.s3_exporting.s3_bucket_name #=> String
+    #   resp.matching.exporting_config.s3_exporting.s3_key_name #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
@@ -854,6 +896,71 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Tests the auto-merging settings of your Identity Resolution Job
+    # without merging your data. It randomly selects a sample of matching
+    # groups from the existing matching results, and applies the automerging
+    # settings that you provided. You can then view the number of profiles
+    # in the sample, the number of matches, and the number of profiles
+    # identified to be merged. This enables you to evaluate the accuracy of
+    # the attributes in your matching list.
+    #
+    # You can't view which profiles are matched and would be merged.
+    #
+    # We strongly recommend you use this API to do a dry run of the
+    # automerging process before running the Identity Resolution Job.
+    # Include **at least** two matching attributes. If your matching list
+    # includes too few attributes (such as only `FirstName` or only
+    # `LastName`), there may be a large number of matches. This increases
+    # the chances of erroneous merges.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, Types::Consolidation] :consolidation
+    #   A list of matching attributes that represent matching criteria.
+    #
+    # @option params [required, Types::ConflictResolution] :conflict_resolution
+    #   How the auto-merging process should resolve conflicts between
+    #   different profiles.
+    #
+    # @return [Types::GetAutoMergingPreviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAutoMergingPreviewResponse#domain_name #domain_name} => String
+    #   * {Types::GetAutoMergingPreviewResponse#number_of_matches_in_sample #number_of_matches_in_sample} => Integer
+    #   * {Types::GetAutoMergingPreviewResponse#number_of_profiles_in_sample #number_of_profiles_in_sample} => Integer
+    #   * {Types::GetAutoMergingPreviewResponse#number_of_profiles_will_be_merged #number_of_profiles_will_be_merged} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_auto_merging_preview({
+    #     domain_name: "name", # required
+    #     consolidation: { # required
+    #       matching_attributes_list: [ # required
+    #         ["string1To255"],
+    #       ],
+    #     },
+    #     conflict_resolution: { # required
+    #       conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
+    #       source_name: "string1To255",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.number_of_matches_in_sample #=> Integer
+    #   resp.number_of_profiles_in_sample #=> Integer
+    #   resp.number_of_profiles_will_be_merged #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetAutoMergingPreview AWS API Documentation
+    #
+    # @overload get_auto_merging_preview(params = {})
+    # @param [Hash] params ({})
+    def get_auto_merging_preview(params = {}, options = {})
+      req = build_request(:get_auto_merging_preview, params)
+      req.send_request(options)
+    end
+
     # Returns information about a specific domain.
     #
     # @option params [required, String] :domain_name
@@ -888,6 +995,16 @@ module Aws::CustomerProfiles
     #   resp.stats.object_count #=> Integer
     #   resp.stats.total_size #=> Integer
     #   resp.matching.enabled #=> Boolean
+    #   resp.matching.job_schedule.day_of_the_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.matching.job_schedule.time #=> String
+    #   resp.matching.auto_merging.enabled #=> Boolean
+    #   resp.matching.auto_merging.consolidation.matching_attributes_list #=> Array
+    #   resp.matching.auto_merging.consolidation.matching_attributes_list[0] #=> Array
+    #   resp.matching.auto_merging.consolidation.matching_attributes_list[0][0] #=> String
+    #   resp.matching.auto_merging.conflict_resolution.conflict_resolving_model #=> String, one of "RECENCY", "SOURCE"
+    #   resp.matching.auto_merging.conflict_resolution.source_name #=> String
+    #   resp.matching.exporting_config.s3_exporting.s3_bucket_name #=> String
+    #   resp.matching.exporting_config.s3_exporting.s3_key_name #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
@@ -899,6 +1016,75 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def get_domain(params = {}, options = {})
       req = build_request(:get_domain, params)
+      req.send_request(options)
+    end
+
+    # Returns information about an Identity Resolution Job in a specific
+    # domain.
+    #
+    # Identity Resolution Jobs are set up using the Amazon Connect admin
+    # console. For more information, see [Use Identity Resolution to
+    # consolidate similar profiles][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/use-identity-resolution.html
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier of the Identity Resolution Job.
+    #
+    # @return [Types::GetIdentityResolutionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIdentityResolutionJobResponse#domain_name #domain_name} => String
+    #   * {Types::GetIdentityResolutionJobResponse#job_id #job_id} => String
+    #   * {Types::GetIdentityResolutionJobResponse#status #status} => String
+    #   * {Types::GetIdentityResolutionJobResponse#message #message} => String
+    #   * {Types::GetIdentityResolutionJobResponse#job_start_time #job_start_time} => Time
+    #   * {Types::GetIdentityResolutionJobResponse#job_end_time #job_end_time} => Time
+    #   * {Types::GetIdentityResolutionJobResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetIdentityResolutionJobResponse#job_expiration_time #job_expiration_time} => Time
+    #   * {Types::GetIdentityResolutionJobResponse#auto_merging #auto_merging} => Types::AutoMerging
+    #   * {Types::GetIdentityResolutionJobResponse#exporting_location #exporting_location} => Types::ExportingLocation
+    #   * {Types::GetIdentityResolutionJobResponse#job_stats #job_stats} => Types::JobStats
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_identity_resolution_job({
+    #     domain_name: "name", # required
+    #     job_id: "uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.job_id #=> String
+    #   resp.status #=> String, one of "PENDING", "PREPROCESSING", "FIND_MATCHING", "MERGING", "COMPLETED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.message #=> String
+    #   resp.job_start_time #=> Time
+    #   resp.job_end_time #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.job_expiration_time #=> Time
+    #   resp.auto_merging.enabled #=> Boolean
+    #   resp.auto_merging.consolidation.matching_attributes_list #=> Array
+    #   resp.auto_merging.consolidation.matching_attributes_list[0] #=> Array
+    #   resp.auto_merging.consolidation.matching_attributes_list[0][0] #=> String
+    #   resp.auto_merging.conflict_resolution.conflict_resolving_model #=> String, one of "RECENCY", "SOURCE"
+    #   resp.auto_merging.conflict_resolution.source_name #=> String
+    #   resp.exporting_location.s3_exporting.s3_bucket_name #=> String
+    #   resp.exporting_location.s3_exporting.s3_key_name #=> String
+    #   resp.job_stats.number_of_profiles_reviewed #=> Integer
+    #   resp.job_stats.number_of_matches_found #=> Integer
+    #   resp.job_stats.number_of_merges_done #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIdentityResolutionJob AWS API Documentation
+    #
+    # @overload get_identity_resolution_job(params = {})
+    # @param [Hash] params ({})
+    def get_identity_resolution_job(params = {}, options = {})
+      req = build_request(:get_identity_resolution_job, params)
       req.send_request(options)
     end
 
@@ -954,9 +1140,16 @@ module Aws::CustomerProfiles
     # GetMatches returns potentially matching profiles, based on the results
     # of the latest run of a machine learning process.
     #
-    # Amazon Connect starts a batch process every Saturday at 12AM UTC to
-    # identify matching profiles. The results are returned up to seven days
-    # after the Saturday run.
+    # The process of matching duplicate profiles. If `Matching` = `true`,
+    # Amazon Connect Customer Profiles starts a weekly batch process called
+    # Identity Resolution Job. If you do not specify a date and time for
+    # Identity Resolution Job to run, by default it runs every Saturday at
+    # 12AM UTC to detect duplicate profiles in your domains.
+    #
+    #  After the Identity Resolution Job completes, use the [GetMatches][3]
+    # API to return and review the results. Or, if you have configured
+    # `ExportingConfig` in the `MatchingRequest`, you can download the
+    # results from S3.
     #
     # Amazon Connect uses the following profile attributes to identify
     # matches:
@@ -990,6 +1183,7 @@ module Aws::CustomerProfiles
     #
     # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html
     # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html
+    # [3]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
     #
     # @option params [String] :next_token
     #   The token for the next set of results. Use the value returned in the
@@ -1026,6 +1220,7 @@ module Aws::CustomerProfiles
     #   resp.matches[0].match_id #=> String
     #   resp.matches[0].profile_ids #=> Array
     #   resp.matches[0].profile_ids[0] #=> String
+    #   resp.matches[0].confidence_score #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetMatches AWS API Documentation
     #
@@ -1052,6 +1247,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetProfileObjectTypeResponse#expiration_days #expiration_days} => Integer
     #   * {Types::GetProfileObjectTypeResponse#encryption_key #encryption_key} => String
     #   * {Types::GetProfileObjectTypeResponse#allow_profile_creation #allow_profile_creation} => Boolean
+    #   * {Types::GetProfileObjectTypeResponse#source_last_updated_timestamp_format #source_last_updated_timestamp_format} => String
     #   * {Types::GetProfileObjectTypeResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
     #   * {Types::GetProfileObjectTypeResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
     #   * {Types::GetProfileObjectTypeResponse#created_at #created_at} => Time
@@ -1073,6 +1269,7 @@ module Aws::CustomerProfiles
     #   resp.expiration_days #=> Integer
     #   resp.encryption_key #=> String
     #   resp.allow_profile_creation #=> Boolean
+    #   resp.source_last_updated_timestamp_format #=> String
     #   resp.fields #=> Hash
     #   resp.fields["name"].source #=> String
     #   resp.fields["name"].target #=> String
@@ -1114,6 +1311,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetProfileObjectTypeTemplateResponse#source_name #source_name} => String
     #   * {Types::GetProfileObjectTypeTemplateResponse#source_object #source_object} => String
     #   * {Types::GetProfileObjectTypeTemplateResponse#allow_profile_creation #allow_profile_creation} => Boolean
+    #   * {Types::GetProfileObjectTypeTemplateResponse#source_last_updated_timestamp_format #source_last_updated_timestamp_format} => String
     #   * {Types::GetProfileObjectTypeTemplateResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
     #   * {Types::GetProfileObjectTypeTemplateResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
     #
@@ -1129,6 +1327,7 @@ module Aws::CustomerProfiles
     #   resp.source_name #=> String
     #   resp.source_object #=> String
     #   resp.allow_profile_creation #=> Boolean
+    #   resp.source_last_updated_timestamp_format #=> String
     #   resp.fields #=> Hash
     #   resp.fields["name"].source #=> String
     #   resp.fields["name"].target #=> String
@@ -1233,6 +1432,58 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def list_domains(params = {}, options = {})
       req = build_request(:list_domains, params)
+      req.send_request(options)
+    end
+
+    # Lists all of the Identity Resolution Jobs in your domain. The response
+    # sorts the list by `JobStartTime`.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListIdentityResolutionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIdentityResolutionJobsResponse#identity_resolution_jobs_list #identity_resolution_jobs_list} => Array&lt;Types::IdentityResolutionJob&gt;
+    #   * {Types::ListIdentityResolutionJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_identity_resolution_jobs({
+    #     domain_name: "name", # required
+    #     next_token: "token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_resolution_jobs_list #=> Array
+    #   resp.identity_resolution_jobs_list[0].domain_name #=> String
+    #   resp.identity_resolution_jobs_list[0].job_id #=> String
+    #   resp.identity_resolution_jobs_list[0].status #=> String, one of "PENDING", "PREPROCESSING", "FIND_MATCHING", "MERGING", "COMPLETED", "PARTIAL_SUCCESS", "FAILED"
+    #   resp.identity_resolution_jobs_list[0].job_start_time #=> Time
+    #   resp.identity_resolution_jobs_list[0].job_end_time #=> Time
+    #   resp.identity_resolution_jobs_list[0].job_stats.number_of_profiles_reviewed #=> Integer
+    #   resp.identity_resolution_jobs_list[0].job_stats.number_of_matches_found #=> Integer
+    #   resp.identity_resolution_jobs_list[0].job_stats.number_of_merges_done #=> Integer
+    #   resp.identity_resolution_jobs_list[0].exporting_location.s3_exporting.s3_bucket_name #=> String
+    #   resp.identity_resolution_jobs_list[0].exporting_location.s3_exporting.s3_key_name #=> String
+    #   resp.identity_resolution_jobs_list[0].message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIdentityResolutionJobs AWS API Documentation
+    #
+    # @overload list_identity_resolution_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_identity_resolution_jobs(params = {}, options = {})
+      req = build_request(:list_identity_resolution_jobs, params)
       req.send_request(options)
     end
 
@@ -1757,6 +2008,10 @@ module Aws::CustomerProfiles
     #   profile. If it is set to `TRUE`, and if no match is found, then the
     #   service creates a new standard profile.
     #
+    # @option params [String] :source_last_updated_timestamp_format
+    #   The format of your `sourceLastUpdatedTimestamp` that was previously
+    #   set up.
+    #
     # @option params [Hash<String,Types::ObjectTypeField>] :fields
     #   A map of the name and ObjectType field.
     #
@@ -1774,6 +2029,7 @@ module Aws::CustomerProfiles
     #   * {Types::PutProfileObjectTypeResponse#expiration_days #expiration_days} => Integer
     #   * {Types::PutProfileObjectTypeResponse#encryption_key #encryption_key} => String
     #   * {Types::PutProfileObjectTypeResponse#allow_profile_creation #allow_profile_creation} => Boolean
+    #   * {Types::PutProfileObjectTypeResponse#source_last_updated_timestamp_format #source_last_updated_timestamp_format} => String
     #   * {Types::PutProfileObjectTypeResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
     #   * {Types::PutProfileObjectTypeResponse#keys #keys} => Hash&lt;String,Array&lt;Types::ObjectTypeKey&gt;&gt;
     #   * {Types::PutProfileObjectTypeResponse#created_at #created_at} => Time
@@ -1790,6 +2046,7 @@ module Aws::CustomerProfiles
     #     expiration_days: 1,
     #     encryption_key: "encryptionKey",
     #     allow_profile_creation: false,
+    #     source_last_updated_timestamp_format: "string1To255",
     #     fields: {
     #       "name" => {
     #         source: "text",
@@ -1818,6 +2075,7 @@ module Aws::CustomerProfiles
     #   resp.expiration_days #=> Integer
     #   resp.encryption_key #=> String
     #   resp.allow_profile_creation #=> Boolean
+    #   resp.source_last_updated_timestamp_format #=> String
     #   resp.fields #=> Hash
     #   resp.fields["name"].source #=> String
     #   resp.fields["name"].target #=> String
@@ -2032,10 +2290,15 @@ module Aws::CustomerProfiles
     # Use this API or [CreateDomain][1] to enable [identity resolution][2]\:
     # set `Matching` to true.
     #
+    # To prevent cross-service impersonation when you call this API, see
+    # [Cross-service confused deputy prevention][3] for sample policies that
+    # you should apply.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html
     # [2]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
+    # [3]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html
     #
     # @option params [required, String] :domain_name
     #   The unique name of the domain.
@@ -2058,11 +2321,16 @@ module Aws::CustomerProfiles
     #   to the DeadLetterQueue.
     #
     # @option params [Types::MatchingRequest] :matching
-    #   The process of matching duplicate profiles. If Matching = true, Amazon
-    #   Connect Customer Profiles starts a weekly batch process every Saturday
-    #   at 12AM UTC to detect duplicate profiles in your domains. After that
-    #   batch process completes, use the [GetMatches][1] API to return and
-    #   review the results.
+    #   The process of matching duplicate profiles. If `Matching` = `true`,
+    #   Amazon Connect Customer Profiles starts a weekly batch process called
+    #   Identity Resolution Job. If you do not specify a date and time for
+    #   Identity Resolution Job to run, by default it runs every Saturday at
+    #   12AM UTC to detect duplicate profiles in your domains.
+    #
+    #   After the Identity Resolution Job completes, use the [GetMatches][1]
+    #   API to return and review the results. Or, if you have configured
+    #   `ExportingConfig` in the `MatchingRequest`, you can download the
+    #   results from S3.
     #
     #
     #
@@ -2091,6 +2359,28 @@ module Aws::CustomerProfiles
     #     dead_letter_queue_url: "sqsQueueUrl",
     #     matching: {
     #       enabled: false, # required
+    #       job_schedule: {
+    #         day_of_the_week: "SUNDAY", # required, accepts SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+    #         time: "JobScheduleTime", # required
+    #       },
+    #       auto_merging: {
+    #         enabled: false, # required
+    #         consolidation: {
+    #           matching_attributes_list: [ # required
+    #             ["string1To255"],
+    #           ],
+    #         },
+    #         conflict_resolution: {
+    #           conflict_resolving_model: "RECENCY", # required, accepts RECENCY, SOURCE
+    #           source_name: "string1To255",
+    #         },
+    #       },
+    #       exporting_config: {
+    #         s3_exporting: {
+    #           s3_bucket_name: "s3BucketName", # required
+    #           s3_key_name: "s3KeyNameCustomerOutputConfig",
+    #         },
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -2104,6 +2394,16 @@ module Aws::CustomerProfiles
     #   resp.default_encryption_key #=> String
     #   resp.dead_letter_queue_url #=> String
     #   resp.matching.enabled #=> Boolean
+    #   resp.matching.job_schedule.day_of_the_week #=> String, one of "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+    #   resp.matching.job_schedule.time #=> String
+    #   resp.matching.auto_merging.enabled #=> Boolean
+    #   resp.matching.auto_merging.consolidation.matching_attributes_list #=> Array
+    #   resp.matching.auto_merging.consolidation.matching_attributes_list[0] #=> Array
+    #   resp.matching.auto_merging.consolidation.matching_attributes_list[0][0] #=> String
+    #   resp.matching.auto_merging.conflict_resolution.conflict_resolving_model #=> String, one of "RECENCY", "SOURCE"
+    #   resp.matching.auto_merging.conflict_resolution.source_name #=> String
+    #   resp.matching.exporting_config.s3_exporting.s3_bucket_name #=> String
+    #   resp.matching.exporting_config.s3_exporting.s3_key_name #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
@@ -2301,7 +2601,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

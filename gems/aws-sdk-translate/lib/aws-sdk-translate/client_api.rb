@@ -71,6 +71,7 @@ module Aws::Translate
     ParallelDataProperties = Shapes::StructureShape.new(name: 'ParallelDataProperties')
     ParallelDataPropertiesList = Shapes::ListShape.new(name: 'ParallelDataPropertiesList')
     ParallelDataStatus = Shapes::StringShape.new(name: 'ParallelDataStatus')
+    Profanity = Shapes::StringShape.new(name: 'Profanity')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNameList = Shapes::ListShape.new(name: 'ResourceNameList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -99,6 +100,7 @@ module Aws::Translate
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TranslateTextRequest = Shapes::StructureShape.new(name: 'TranslateTextRequest')
     TranslateTextResponse = Shapes::StructureShape.new(name: 'TranslateTextResponse')
+    TranslationSettings = Shapes::StructureShape.new(name: 'TranslationSettings')
     UnboundedLengthString = Shapes::StringShape.new(name: 'UnboundedLengthString')
     UnsupportedLanguagePairException = Shapes::StructureShape.new(name: 'UnsupportedLanguagePairException')
     UpdateParallelDataRequest = Shapes::StructureShape.new(name: 'UpdateParallelDataRequest')
@@ -281,6 +283,7 @@ module Aws::Translate
     StartTextTranslationJobRequest.add_member(:terminology_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
     StartTextTranslationJobRequest.add_member(:parallel_data_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "ParallelDataNames"))
     StartTextTranslationJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartTextTranslationJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "Settings"))
     StartTextTranslationJobRequest.struct_class = Types::StartTextTranslationJobRequest
 
     StartTextTranslationJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -352,6 +355,7 @@ module Aws::Translate
     TextTranslationJobProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
     TextTranslationJobProperties.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
     TextTranslationJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
+    TextTranslationJobProperties.add_member(:settings, Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "Settings"))
     TextTranslationJobProperties.struct_class = Types::TextTranslationJobProperties
 
     TextTranslationJobPropertiesList.member = Shapes::ShapeRef.new(shape: TextTranslationJobProperties)
@@ -363,13 +367,18 @@ module Aws::Translate
     TranslateTextRequest.add_member(:terminology_names, Shapes::ShapeRef.new(shape: ResourceNameList, location_name: "TerminologyNames"))
     TranslateTextRequest.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "SourceLanguageCode"))
     TranslateTextRequest.add_member(:target_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "TargetLanguageCode"))
+    TranslateTextRequest.add_member(:settings, Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "Settings"))
     TranslateTextRequest.struct_class = Types::TranslateTextRequest
 
     TranslateTextResponse.add_member(:translated_text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TranslatedText"))
     TranslateTextResponse.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "SourceLanguageCode"))
     TranslateTextResponse.add_member(:target_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, required: true, location_name: "TargetLanguageCode"))
     TranslateTextResponse.add_member(:applied_terminologies, Shapes::ShapeRef.new(shape: AppliedTerminologyList, location_name: "AppliedTerminologies"))
+    TranslateTextResponse.add_member(:applied_settings, Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "AppliedSettings"))
     TranslateTextResponse.struct_class = Types::TranslateTextResponse
+
+    TranslationSettings.add_member(:profanity, Shapes::ShapeRef.new(shape: Profanity, location_name: "Profanity"))
+    TranslationSettings.struct_class = Types::TranslationSettings
 
     UnsupportedLanguagePairException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnsupportedLanguagePairException.add_member(:source_language_code, Shapes::ShapeRef.new(shape: LanguageCodeString, location_name: "SourceLanguageCode"))

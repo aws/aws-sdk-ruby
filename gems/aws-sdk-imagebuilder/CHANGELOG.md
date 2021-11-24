@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-11-24)
+------------------
+
+* Feature - This release adds support for sharing AMIs with Organizations within an EC2 Image Builder Distribution Configuration.
+
 1.33.0 (2021-11-04)
 ------------------
 

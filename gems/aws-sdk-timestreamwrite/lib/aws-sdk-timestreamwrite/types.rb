@@ -41,7 +41,7 @@ module Aws::TimestreamWrite
     #   data as a hash:
     #
     #       {
-    #         database_name: "ResourceName", # required
+    #         database_name: "ResourceCreateAPIName", # required
     #         kms_key_id: "StringValue2048",
     #         tags: [
     #           {
@@ -58,7 +58,8 @@ module Aws::TimestreamWrite
     # @!attribute [rw] kms_key_id
     #   The KMS key for the database. If the KMS key is not specified, the
     #   database will be encrypted with a Timestream managed KMS key located
-    #   in your account. Refer to [AWS managed KMS keys][1] for more info.
+    #   in your account. Refer to [Amazon Web Services managed KMS keys][1]
+    #   for more info.
     #
     #
     #
@@ -95,8 +96,8 @@ module Aws::TimestreamWrite
     #   data as a hash:
     #
     #       {
-    #         database_name: "ResourceName", # required
-    #         table_name: "ResourceName", # required
+    #         database_name: "ResourceCreateAPIName", # required
+    #         table_name: "ResourceCreateAPIName", # required
     #         retention_properties: {
     #           memory_store_retention_period_in_hours: 1, # required
     #           magnetic_store_retention_period_in_days: 1, # required
@@ -107,6 +108,17 @@ module Aws::TimestreamWrite
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         magnetic_store_write_properties: {
+    #           enable_magnetic_store_writes: false, # required
+    #           magnetic_store_rejected_data_location: {
+    #             s3_configuration: {
+    #               bucket_name: "S3BucketName",
+    #               object_key_prefix: "S3ObjectKeyPrefix",
+    #               encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #               kms_key_id: "StringValue2048",
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] database_name
@@ -126,13 +138,19 @@ module Aws::TimestreamWrite
     #   A list of key-value pairs to label the table.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] magnetic_store_write_properties
+    #   Contains properties to set on the table when enabling magnetic store
+    #   writes.
+    #   @return [Types::MagneticStoreWriteProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/CreateTableRequest AWS API Documentation
     #
     class CreateTableRequest < Struct.new(
       :database_name,
       :table_name,
       :retention_properties,
-      :tags)
+      :tags,
+      :magnetic_store_write_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -332,8 +350,8 @@ module Aws::TimestreamWrite
     #   data as a hash:
     #
     #       {
-    #         name: "StringValue256", # required
-    #         value: "StringValue2048", # required
+    #         name: "SchemaName", # required
+    #         value: "SchemaValue", # required
     #         dimension_value_type: "VARCHAR", # accepts VARCHAR
     #       }
     #
@@ -546,6 +564,117 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
+    # The location to write error reports for records rejected,
+    # asynchronously, during magnetic store writes.
+    #
+    # @note When making an API call, you may pass MagneticStoreRejectedDataLocation
+    #   data as a hash:
+    #
+    #       {
+    #         s3_configuration: {
+    #           bucket_name: "S3BucketName",
+    #           object_key_prefix: "S3ObjectKeyPrefix",
+    #           encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #           kms_key_id: "StringValue2048",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_configuration
+    #   Configuration of an S3 location to write error reports for records
+    #   rejected, asynchronously, during magnetic store writes.
+    #   @return [Types::S3Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/MagneticStoreRejectedDataLocation AWS API Documentation
+    #
+    class MagneticStoreRejectedDataLocation < Struct.new(
+      :s3_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The set of properties on a table for configuring magnetic store
+    # writes.
+    #
+    # @note When making an API call, you may pass MagneticStoreWriteProperties
+    #   data as a hash:
+    #
+    #       {
+    #         enable_magnetic_store_writes: false, # required
+    #         magnetic_store_rejected_data_location: {
+    #           s3_configuration: {
+    #             bucket_name: "S3BucketName",
+    #             object_key_prefix: "S3ObjectKeyPrefix",
+    #             encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #             kms_key_id: "StringValue2048",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] enable_magnetic_store_writes
+    #   A flag to enable magnetic store writes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] magnetic_store_rejected_data_location
+    #   The location to write error reports for records rejected
+    #   asynchronously during magnetic store writes.
+    #   @return [Types::MagneticStoreRejectedDataLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/MagneticStoreWriteProperties AWS API Documentation
+    #
+    class MagneticStoreWriteProperties < Struct.new(
+      :enable_magnetic_store_writes,
+      :magnetic_store_rejected_data_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # MeasureValue represents the data attribute of the time series. For
+    # example, the CPU utilization of an EC2 instance or the RPM of a wind
+    # turbine are measures. MeasureValue has both name and value.
+    #
+    # MeasureValue is only allowed for type `MULTI`. Using `MULTI` type, you
+    # can pass multiple data attributes associated with the same time series
+    # in a single record
+    #
+    # @note When making an API call, you may pass MeasureValue
+    #   data as a hash:
+    #
+    #       {
+    #         name: "SchemaName", # required
+    #         value: "StringValue2048", # required
+    #         type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the MeasureValue.
+    #
+    #   For constraints on MeasureValue names, refer to [ Naming
+    #   Constraints][1] in the Timestream developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Value for the MeasureValue.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Contains the data type of the MeasureValue for the time series data
+    #   point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/MeasureValue AWS API Documentation
+    #
+    class MeasureValue < Struct.new(
+      :name,
+      :value,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Record represents a time series data point being written into
     # Timestream. Each record contains an array of dimensions. Dimensions
     # represent the meta data attributes of a time series data point such as
@@ -557,23 +686,38 @@ module Aws::TimestreamWrite
     # timestamp when the measure was collected that the timestamp unit which
     # represents the granularity of the timestamp.
     #
+    # Records have a `Version` field, which is a 64-bit `long` that you can
+    # use for updating data points. Writes of a duplicate record with the
+    # same dimension, timestamp, and measure name but different measure
+    # value will only succeed if the `Version` attribute of the record in
+    # the write request is higher than that of the existing record.
+    # Timestream defaults to a `Version` of `1` for records without the
+    # `Version` field.
+    #
     # @note When making an API call, you may pass Record
     #   data as a hash:
     #
     #       {
     #         dimensions: [
     #           {
-    #             name: "StringValue256", # required
-    #             value: "StringValue2048", # required
+    #             name: "SchemaName", # required
+    #             value: "SchemaValue", # required
     #             dimension_value_type: "VARCHAR", # accepts VARCHAR
     #           },
     #         ],
-    #         measure_name: "StringValue256",
+    #         measure_name: "SchemaName",
     #         measure_value: "StringValue2048",
-    #         measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN
+    #         measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
     #         time: "StringValue256",
     #         time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
     #         version: 1,
+    #         measure_values: [
+    #           {
+    #             name: "SchemaName", # required
+    #             value: "StringValue2048", # required
+    #             type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dimensions
@@ -592,7 +736,7 @@ module Aws::TimestreamWrite
     #
     # @!attribute [rw] measure_value_type
     #   Contains the data type of the measure value for the time series data
-    #   point.
+    #   point. Default type is `DOUBLE`.
     #   @return [String]
     #
     # @!attribute [rw] time
@@ -605,15 +749,27 @@ module Aws::TimestreamWrite
     # @!attribute [rw] time_unit
     #   The granularity of the timestamp unit. It indicates if the time
     #   value is in seconds, milliseconds, nanoseconds or other supported
-    #   values.
+    #   values. Default is `MILLISECONDS`.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   64-bit attribute used for record updates. Write requests for
     #   duplicate data with a higher version number will update the existing
     #   measure value and version. In cases where the measure value is the
-    #   same, `Version` will still be updated . Default value is to 1.
+    #   same, `Version` will still be updated . Default value is `1`.
+    #
+    #   <note markdown="1"> `Version` must be `1` or greater, or you will receive a
+    #   `ValidationException` error.
+    #
+    #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] measure_values
+    #   Contains the list of MeasureValue for time series data points.
+    #
+    #   This is only allowed for type `MULTI`. For scalar values, use
+    #   `MeasureValue` attribute of the Record directly.
+    #   @return [Array<Types::MeasureValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/Record AWS API Documentation
     #
@@ -624,7 +780,32 @@ module Aws::TimestreamWrite
       :measure_value_type,
       :time,
       :time_unit,
-      :version)
+      :version,
+      :measure_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information on the records ingested by this request.
+    #
+    # @!attribute [rw] total
+    #   Total count of successfully ingested records.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory_store
+    #   Count of records ingested into the memory store.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] magnetic_store
+    #   Count of records ingested into the magnetic store.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/RecordsIngested AWS API Documentation
+    #
+    class RecordsIngested < Struct.new(
+      :total,
+      :memory_store,
+      :magnetic_store)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -643,8 +824,18 @@ module Aws::TimestreamWrite
     #   Timestream. Possible causes of failure include:
     #
     #   * Records with duplicate data where there are multiple records with
-    #     the same dimensions, timestamps, and measure names but different
-    #     measure values.
+    #     the same dimensions, timestamps, and measure names but:
+    #
+    #     * Measure values are different
+    #
+    #     * Version is not present in the request *or* the value of version
+    #       in the new record is equal to or lower than the existing value
+    #
+    #     If Timestream rejects data for this case, the `ExistingVersion`
+    #     field in the `RejectedRecords` response will indicate the current
+    #     record’s version. To force an update, you can resend the request
+    #     with a version for the record set to a value greater than the
+    #     `ExistingVersion`.
     #
     #   * Records with timestamps that lie outside the retention duration of
     #     the memory store
@@ -691,8 +882,18 @@ module Aws::TimestreamWrite
     # WriteRecords would throw this exception in the following cases:
     #
     # * Records with duplicate data where there are multiple records with
-    #   the same dimensions, timestamps, and measure names but different
-    #   measure values.
+    #   the same dimensions, timestamps, and measure names but:
+    #
+    #   * Measure values are different
+    #
+    #   * Version is not present in the request *or* the value of version in
+    #     the new record is equal to or lower than the existing value
+    #
+    #   In this case, if Timestream rejects data, the `ExistingVersion`
+    #   field in the `RejectedRecords` response will indicate the current
+    #   record’s version. To force an update, you can resend the request
+    #   with a version for the record set to a value greater than the
+    #   `ExistingVersion`.
     #
     # * Records with timestamps that lie outside the retention duration of
     #   the memory store
@@ -700,8 +901,8 @@ module Aws::TimestreamWrite
     # * Records with dimensions or measures that exceed the Timestream
     #   defined limits.
     #
-    # For more information, see [Access Management][1] in the Timestream
-    # Developer Guide.
+    # For more information, see [Quotas][1] in the Timestream Developer
+    # Guide.
     #
     #
     #
@@ -764,6 +965,47 @@ module Aws::TimestreamWrite
       include Aws::Structure
     end
 
+    # Configuration specifing an S3 location.
+    #
+    # @note When making an API call, you may pass S3Configuration
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "S3BucketName",
+    #         object_key_prefix: "S3ObjectKeyPrefix",
+    #         encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #         kms_key_id: "StringValue2048",
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   &gt;Bucket name of the customer S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key_prefix
+    #   Object key preview for the customer S3 location.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_option
+    #   Encryption option for the customer s3 location. Options are S3
+    #   server side encryption with an S3-managed key or KMS managed key.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   KMS key id for the customer s3 location when encrypting with a KMS
+    #   managed key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/S3Configuration AWS API Documentation
+    #
+    class S3Configuration < Struct.new(
+      :bucket_name,
+      :object_key_prefix,
+      :encryption_option,
+      :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Instance quota of resource exceeded for this account.
     #
     # @!attribute [rw] message
@@ -813,6 +1055,11 @@ module Aws::TimestreamWrite
     #   The time when the Timestream table was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] magnetic_store_write_properties
+    #   Contains properties to set on the table when enabling magnetic store
+    #   writes.
+    #   @return [Types::MagneticStoreWriteProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/Table AWS API Documentation
     #
     class Table < Struct.new(
@@ -822,7 +1069,8 @@ module Aws::TimestreamWrite
       :table_status,
       :retention_properties,
       :creation_time,
-      :last_updated_time)
+      :last_updated_time,
+      :magnetic_store_write_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -996,9 +1244,20 @@ module Aws::TimestreamWrite
     #       {
     #         database_name: "ResourceName", # required
     #         table_name: "ResourceName", # required
-    #         retention_properties: { # required
+    #         retention_properties: {
     #           memory_store_retention_period_in_hours: 1, # required
     #           magnetic_store_retention_period_in_days: 1, # required
+    #         },
+    #         magnetic_store_write_properties: {
+    #           enable_magnetic_store_writes: false, # required
+    #           magnetic_store_rejected_data_location: {
+    #             s3_configuration: {
+    #               bucket_name: "S3BucketName",
+    #               object_key_prefix: "S3ObjectKeyPrefix",
+    #               encryption_option: "SSE_S3", # accepts SSE_S3, SSE_KMS
+    #               kms_key_id: "StringValue2048",
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -1007,19 +1266,25 @@ module Aws::TimestreamWrite
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the Timesream table.
+    #   The name of the Timestream table.
     #   @return [String]
     #
     # @!attribute [rw] retention_properties
     #   The retention duration of the memory store and the magnetic store.
     #   @return [Types::RetentionProperties]
     #
+    # @!attribute [rw] magnetic_store_write_properties
+    #   Contains properties to set on the table when enabling magnetic store
+    #   writes.
+    #   @return [Types::MagneticStoreWriteProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/UpdateTableRequest AWS API Documentation
     #
     class UpdateTableRequest < Struct.new(
       :database_name,
       :table_name,
-      :retention_properties)
+      :retention_properties,
+      :magnetic_store_write_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1058,33 +1323,47 @@ module Aws::TimestreamWrite
     #         common_attributes: {
     #           dimensions: [
     #             {
-    #               name: "StringValue256", # required
-    #               value: "StringValue2048", # required
+    #               name: "SchemaName", # required
+    #               value: "SchemaValue", # required
     #               dimension_value_type: "VARCHAR", # accepts VARCHAR
     #             },
     #           ],
-    #           measure_name: "StringValue256",
+    #           measure_name: "SchemaName",
     #           measure_value: "StringValue2048",
-    #           measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN
+    #           measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
     #           time: "StringValue256",
     #           time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
     #           version: 1,
+    #           measure_values: [
+    #             {
+    #               name: "SchemaName", # required
+    #               value: "StringValue2048", # required
+    #               type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
+    #             },
+    #           ],
     #         },
     #         records: [ # required
     #           {
     #             dimensions: [
     #               {
-    #                 name: "StringValue256", # required
-    #                 value: "StringValue2048", # required
+    #                 name: "SchemaName", # required
+    #                 value: "SchemaValue", # required
     #                 dimension_value_type: "VARCHAR", # accepts VARCHAR
     #               },
     #             ],
-    #             measure_name: "StringValue256",
+    #             measure_name: "SchemaName",
     #             measure_value: "StringValue2048",
-    #             measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN
+    #             measure_value_type: "DOUBLE", # accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
     #             time: "StringValue256",
     #             time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
     #             version: 1,
+    #             measure_values: [
+    #               {
+    #                 name: "SchemaName", # required
+    #                 value: "StringValue2048", # required
+    #                 type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP, MULTI
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -1094,20 +1373,22 @@ module Aws::TimestreamWrite
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the Timesream table.
+    #   The name of the Timestream table.
     #   @return [String]
     #
     # @!attribute [rw] common_attributes
-    #   A record containing the common measure and dimension attributes
-    #   shared across all the records in the request. The measure and
-    #   dimension attributes specified in here will be merged with the
-    #   measure and dimension attributes in the records object when the data
-    #   is written into Timestream.
+    #   A record containing the common measure, dimension, time, and version
+    #   attributes shared across all the records in the request. The measure
+    #   and dimension attributes specified will be merged with the measure
+    #   and dimension attributes in the records object when the data is
+    #   written into Timestream. Dimensions may not overlap, or a
+    #   `ValidationException` will be thrown. In other words, a record must
+    #   contain dimensions with unique names.
     #   @return [Types::Record]
     #
     # @!attribute [rw] records
-    #   An array of records containing the unique dimension and measure
-    #   attributes for each time series data point.
+    #   An array of records containing the unique measure, dimension, time,
+    #   and version attributes for each time series data point.
     #   @return [Array<Types::Record>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/WriteRecordsRequest AWS API Documentation
@@ -1117,6 +1398,18 @@ module Aws::TimestreamWrite
       :table_name,
       :common_attributes,
       :records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] records_ingested
+    #   Information on the records ingested by this request.
+    #   @return [Types::RecordsIngested]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/WriteRecordsResponse AWS API Documentation
+    #
+    class WriteRecordsResponse < Struct.new(
+      :records_ingested)
       SENSITIVE = []
       include Aws::Structure
     end

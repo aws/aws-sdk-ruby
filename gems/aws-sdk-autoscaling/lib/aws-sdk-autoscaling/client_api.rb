@@ -213,8 +213,11 @@ module Aws::AutoScaling
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
     MemoryGiBPerVCpuRequest = Shapes::StructureShape.new(name: 'MemoryGiBPerVCpuRequest')
     MemoryMiBRequest = Shapes::StructureShape.new(name: 'MemoryMiBRequest')
+    Metric = Shapes::StructureShape.new(name: 'Metric')
     MetricCollectionType = Shapes::StructureShape.new(name: 'MetricCollectionType')
     MetricCollectionTypes = Shapes::ListShape.new(name: 'MetricCollectionTypes')
+    MetricDataQueries = Shapes::ListShape.new(name: 'MetricDataQueries')
+    MetricDataQuery = Shapes::StructureShape.new(name: 'MetricDataQuery')
     MetricDimension = Shapes::StructureShape.new(name: 'MetricDimension')
     MetricDimensionName = Shapes::StringShape.new(name: 'MetricDimensionName')
     MetricDimensionValue = Shapes::StringShape.new(name: 'MetricDimensionValue')
@@ -224,6 +227,7 @@ module Aws::AutoScaling
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricNamespace = Shapes::StringShape.new(name: 'MetricNamespace')
     MetricScale = Shapes::FloatShape.new(name: 'MetricScale')
+    MetricStat = Shapes::StructureShape.new(name: 'MetricStat')
     MetricStatistic = Shapes::StringShape.new(name: 'MetricStatistic')
     MetricType = Shapes::StringShape.new(name: 'MetricType')
     MetricUnit = Shapes::StringShape.new(name: 'MetricUnit')
@@ -257,6 +261,9 @@ module Aws::AutoScaling
     PredefinedMetricSpecification = Shapes::StructureShape.new(name: 'PredefinedMetricSpecification')
     PredefinedScalingMetricType = Shapes::StringShape.new(name: 'PredefinedScalingMetricType')
     PredictiveScalingConfiguration = Shapes::StructureShape.new(name: 'PredictiveScalingConfiguration')
+    PredictiveScalingCustomizedCapacityMetric = Shapes::StructureShape.new(name: 'PredictiveScalingCustomizedCapacityMetric')
+    PredictiveScalingCustomizedLoadMetric = Shapes::StructureShape.new(name: 'PredictiveScalingCustomizedLoadMetric')
+    PredictiveScalingCustomizedScalingMetric = Shapes::StructureShape.new(name: 'PredictiveScalingCustomizedScalingMetric')
     PredictiveScalingForecastTimestamps = Shapes::ListShape.new(name: 'PredictiveScalingForecastTimestamps')
     PredictiveScalingForecastValues = Shapes::ListShape.new(name: 'PredictiveScalingForecastValues')
     PredictiveScalingMaxCapacityBreachBehavior = Shapes::StringShape.new(name: 'PredictiveScalingMaxCapacityBreachBehavior')
@@ -290,6 +297,7 @@ module Aws::AutoScaling
     ResourceContentionFault = Shapes::StructureShape.new(name: 'ResourceContentionFault')
     ResourceInUseFault = Shapes::StructureShape.new(name: 'ResourceInUseFault')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
+    ReturnData = Shapes::BooleanShape.new(name: 'ReturnData')
     ScalingActivityInProgressFault = Shapes::StructureShape.new(name: 'ScalingActivityInProgressFault')
     ScalingActivityStatusCode = Shapes::StringShape.new(name: 'ScalingActivityStatusCode')
     ScalingPolicies = Shapes::ListShape.new(name: 'ScalingPolicies')
@@ -349,6 +357,8 @@ module Aws::AutoScaling
     XmlStringMaxLen32 = Shapes::StringShape.new(name: 'XmlStringMaxLen32')
     XmlStringMaxLen511 = Shapes::StringShape.new(name: 'XmlStringMaxLen511')
     XmlStringMaxLen64 = Shapes::StringShape.new(name: 'XmlStringMaxLen64')
+    XmlStringMetricLabel = Shapes::StringShape.new(name: 'XmlStringMetricLabel')
+    XmlStringMetricStat = Shapes::StringShape.new(name: 'XmlStringMetricStat')
     XmlStringUserData = Shapes::StringShape.new(name: 'XmlStringUserData')
 
     AcceleratorCountRequest.add_member(:min, Shapes::ShapeRef.new(shape: NullablePositiveInteger, location_name: "Min"))
@@ -1041,10 +1051,24 @@ module Aws::AutoScaling
     MemoryMiBRequest.add_member(:max, Shapes::ShapeRef.new(shape: NullablePositiveInteger, location_name: "Max"))
     MemoryMiBRequest.struct_class = Types::MemoryMiBRequest
 
+    Metric.add_member(:namespace, Shapes::ShapeRef.new(shape: MetricNamespace, required: true, location_name: "Namespace"))
+    Metric.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
+    Metric.add_member(:dimensions, Shapes::ShapeRef.new(shape: MetricDimensions, location_name: "Dimensions"))
+    Metric.struct_class = Types::Metric
+
     MetricCollectionType.add_member(:metric, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "Metric"))
     MetricCollectionType.struct_class = Types::MetricCollectionType
 
     MetricCollectionTypes.member = Shapes::ShapeRef.new(shape: MetricCollectionType)
+
+    MetricDataQueries.member = Shapes::ShapeRef.new(shape: MetricDataQuery)
+
+    MetricDataQuery.add_member(:id, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "Id"))
+    MetricDataQuery.add_member(:expression, Shapes::ShapeRef.new(shape: XmlStringMaxLen1023, location_name: "Expression"))
+    MetricDataQuery.add_member(:metric_stat, Shapes::ShapeRef.new(shape: MetricStat, location_name: "MetricStat"))
+    MetricDataQuery.add_member(:label, Shapes::ShapeRef.new(shape: XmlStringMetricLabel, location_name: "Label"))
+    MetricDataQuery.add_member(:return_data, Shapes::ShapeRef.new(shape: ReturnData, location_name: "ReturnData"))
+    MetricDataQuery.struct_class = Types::MetricDataQuery
 
     MetricDimension.add_member(:name, Shapes::ShapeRef.new(shape: MetricDimensionName, required: true, location_name: "Name"))
     MetricDimension.add_member(:value, Shapes::ShapeRef.new(shape: MetricDimensionValue, required: true, location_name: "Value"))
@@ -1056,6 +1080,11 @@ module Aws::AutoScaling
     MetricGranularityType.struct_class = Types::MetricGranularityType
 
     MetricGranularityTypes.member = Shapes::ShapeRef.new(shape: MetricGranularityType)
+
+    MetricStat.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
+    MetricStat.add_member(:stat, Shapes::ShapeRef.new(shape: XmlStringMetricStat, required: true, location_name: "Stat"))
+    MetricStat.add_member(:unit, Shapes::ShapeRef.new(shape: MetricUnit, location_name: "Unit"))
+    MetricStat.struct_class = Types::MetricStat
 
     Metrics.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen255)
 
@@ -1099,6 +1128,15 @@ module Aws::AutoScaling
     PredictiveScalingConfiguration.add_member(:max_capacity_buffer, Shapes::ShapeRef.new(shape: PredictiveScalingMaxCapacityBuffer, location_name: "MaxCapacityBuffer"))
     PredictiveScalingConfiguration.struct_class = Types::PredictiveScalingConfiguration
 
+    PredictiveScalingCustomizedCapacityMetric.add_member(:metric_data_queries, Shapes::ShapeRef.new(shape: MetricDataQueries, required: true, location_name: "MetricDataQueries"))
+    PredictiveScalingCustomizedCapacityMetric.struct_class = Types::PredictiveScalingCustomizedCapacityMetric
+
+    PredictiveScalingCustomizedLoadMetric.add_member(:metric_data_queries, Shapes::ShapeRef.new(shape: MetricDataQueries, required: true, location_name: "MetricDataQueries"))
+    PredictiveScalingCustomizedLoadMetric.struct_class = Types::PredictiveScalingCustomizedLoadMetric
+
+    PredictiveScalingCustomizedScalingMetric.add_member(:metric_data_queries, Shapes::ShapeRef.new(shape: MetricDataQueries, required: true, location_name: "MetricDataQueries"))
+    PredictiveScalingCustomizedScalingMetric.struct_class = Types::PredictiveScalingCustomizedScalingMetric
+
     PredictiveScalingForecastTimestamps.member = Shapes::ShapeRef.new(shape: TimestampType)
 
     PredictiveScalingForecastValues.member = Shapes::ShapeRef.new(shape: MetricScale)
@@ -1107,6 +1145,9 @@ module Aws::AutoScaling
     PredictiveScalingMetricSpecification.add_member(:predefined_metric_pair_specification, Shapes::ShapeRef.new(shape: PredictiveScalingPredefinedMetricPair, location_name: "PredefinedMetricPairSpecification"))
     PredictiveScalingMetricSpecification.add_member(:predefined_scaling_metric_specification, Shapes::ShapeRef.new(shape: PredictiveScalingPredefinedScalingMetric, location_name: "PredefinedScalingMetricSpecification"))
     PredictiveScalingMetricSpecification.add_member(:predefined_load_metric_specification, Shapes::ShapeRef.new(shape: PredictiveScalingPredefinedLoadMetric, location_name: "PredefinedLoadMetricSpecification"))
+    PredictiveScalingMetricSpecification.add_member(:customized_scaling_metric_specification, Shapes::ShapeRef.new(shape: PredictiveScalingCustomizedScalingMetric, location_name: "CustomizedScalingMetricSpecification"))
+    PredictiveScalingMetricSpecification.add_member(:customized_load_metric_specification, Shapes::ShapeRef.new(shape: PredictiveScalingCustomizedLoadMetric, location_name: "CustomizedLoadMetricSpecification"))
+    PredictiveScalingMetricSpecification.add_member(:customized_capacity_metric_specification, Shapes::ShapeRef.new(shape: PredictiveScalingCustomizedCapacityMetric, location_name: "CustomizedCapacityMetricSpecification"))
     PredictiveScalingMetricSpecification.struct_class = Types::PredictiveScalingMetricSpecification
 
     PredictiveScalingMetricSpecifications.member = Shapes::ShapeRef.new(shape: PredictiveScalingMetricSpecification)
