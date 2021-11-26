@@ -418,9 +418,13 @@ module Aws::IoTDeviceAdvisor
       req.send_request(options)
     end
 
+    # Gets information about an Device Advisor endpoint.
+    #
     # @option params [String] :thing_arn
+    #   The thing ARN of the device. This is an optional parameter.
     #
     # @option params [String] :certificate_arn
+    #   The certificate ARN of the device. This is an optional parameter.
     #
     # @return [Types::GetEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -658,9 +662,9 @@ module Aws::IoTDeviceAdvisor
       req.send_request(options)
     end
 
-    # Lists the runs of the specified Device Advisor test suite. You can
-    # list all runs of the test suite, or the runs of a specific version of
-    # the test suite.
+    # Lists runs of the specified Device Advisor test suite. You can list
+    # all runs of the test suite, or the runs of a specific version of the
+    # test suite.
     #
     # Requires permission to access the [ListSuiteRuns][1] action.
     #
@@ -673,8 +677,8 @@ module Aws::IoTDeviceAdvisor
     #   definition ID.
     #
     # @option params [String] :suite_definition_version
-    #   Must be passed along with suiteDefinitionId. Lists the test suite runs
-    #   of the specified test suite based on suite definition version.
+    #   Must be passed along with `suiteDefinitionId`. Lists the test suite
+    #   runs of the specified test suite based on suite definition version.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at once.
@@ -973,7 +977,7 @@ module Aws::IoTDeviceAdvisor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotdeviceadvisor'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

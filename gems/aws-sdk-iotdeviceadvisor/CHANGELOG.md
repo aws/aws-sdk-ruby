@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2021-11-26)
+------------------
+
+* Feature - Documentation update for Device Advisor GetEndpoint API
+
 1.9.0 (2021-11-23)
 ------------------
 

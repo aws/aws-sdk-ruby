@@ -336,6 +336,28 @@ module Aws::Outposts
 
     # @!group API Operations
 
+    # Cancels an order for an Outpost.
+    #
+    # @option params [required, String] :order_id
+    #   The ID of the order to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_order({
+    #     order_id: "OrderId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CancelOrder AWS API Documentation
+    #
+    # @overload cancel_order(params = {})
+    # @param [Hash] params ({})
+    def cancel_order(params = {}, options = {})
+      req = build_request(:cancel_order, params)
+      req.send_request(options)
+    end
+
     # Creates an order for an Outpost.
     #
     # @option params [required, String] :outpost_identifier
@@ -372,12 +394,12 @@ module Aws::Outposts
     #
     #   resp.order.outpost_id #=> String
     #   resp.order.order_id #=> String
-    #   resp.order.status #=> String, one of "RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED"
+    #   resp.order.status #=> String, one of "RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED", "PREPARING", "IN_PROGRESS", "COMPLETED", "ERROR"
     #   resp.order.line_items #=> Array
     #   resp.order.line_items[0].catalog_item_id #=> String
     #   resp.order.line_items[0].line_item_id #=> String
     #   resp.order.line_items[0].quantity #=> Integer
-    #   resp.order.line_items[0].status #=> String
+    #   resp.order.line_items[0].status #=> String, one of "PREPARING", "BUILDING", "SHIPPED", "DELIVERED", "INSTALLING", "INSTALLED", "ERROR", "CANCELLED"
     #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
     #   resp.order.order_submission_date #=> Time
     #   resp.order.order_fulfilled_date #=> Time
@@ -454,6 +476,125 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # Creates a site for an Outpost.
+    #
+    # @option params [required, String] :name
+    #   The name of the site.
+    #
+    # @option params [String] :description
+    #   The description of the site.
+    #
+    # @option params [String] :notes
+    #   Additional information that you provide about site access
+    #   requirements, electrician scheduling, personal protective equipment,
+    #   or regulation of equipment materials that could affect your
+    #   installation process.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to apply to a site.
+    #
+    # @option params [Types::Address] :operating_address
+    #   The location to install and power on the hardware. This address might
+    #   be different from the shipping address.
+    #
+    # @option params [Types::Address] :shipping_address
+    #   The location to ship the hardware. This address might be different
+    #   from the operating address.
+    #
+    # @option params [Types::RackPhysicalProperties] :rack_physical_properties
+    #   Information about the physical and logistical details for the rack at
+    #   this site. For more information about hardware requirements for racks,
+    #   see [Network readiness checklist][1] in the Amazon Web Services
+    #   Outposts User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist
+    #
+    # @return [Types::CreateSiteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSiteOutput#site #site} => Types::Site
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_site({
+    #     name: "SiteName", # required
+    #     description: "SiteDescription",
+    #     notes: "SiteNotes",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     operating_address: {
+    #       contact_name: "ContactName",
+    #       contact_phone_number: "ContactPhoneNumber",
+    #       address_line_1: "AddressLine1", # required
+    #       address_line_2: "AddressLine2",
+    #       address_line_3: "AddressLine3",
+    #       city: "City", # required
+    #       state_or_region: "StateOrRegion", # required
+    #       district_or_county: "DistrictOrCounty",
+    #       postal_code: "PostalCode", # required
+    #       country_code: "CountryCode", # required
+    #       municipality: "Municipality",
+    #     },
+    #     shipping_address: {
+    #       contact_name: "ContactName",
+    #       contact_phone_number: "ContactPhoneNumber",
+    #       address_line_1: "AddressLine1", # required
+    #       address_line_2: "AddressLine2",
+    #       address_line_3: "AddressLine3",
+    #       city: "City", # required
+    #       state_or_region: "StateOrRegion", # required
+    #       district_or_county: "DistrictOrCounty",
+    #       postal_code: "PostalCode", # required
+    #       country_code: "CountryCode", # required
+    #       municipality: "Municipality",
+    #     },
+    #     rack_physical_properties: {
+    #       power_draw_kva: "POWER_5_KVA", # accepts POWER_5_KVA, POWER_10_KVA, POWER_15_KVA
+    #       power_phase: "SINGLE_PHASE", # accepts SINGLE_PHASE, THREE_PHASE
+    #       power_connector: "L6_30P", # accepts L6_30P, IEC309, AH530P7W, AH532P6W
+    #       power_feed_drop: "ABOVE_RACK", # accepts ABOVE_RACK, BELOW_RACK
+    #       uplink_gbps: "UPLINK_1G", # accepts UPLINK_1G, UPLINK_10G, UPLINK_40G, UPLINK_100G
+    #       uplink_count: "UPLINK_COUNT_1", # accepts UPLINK_COUNT_1, UPLINK_COUNT_2, UPLINK_COUNT_3, UPLINK_COUNT_4, UPLINK_COUNT_5, UPLINK_COUNT_6, UPLINK_COUNT_7, UPLINK_COUNT_8, UPLINK_COUNT_12, UPLINK_COUNT_16
+    #       fiber_optic_cable_type: "SINGLE_MODE", # accepts SINGLE_MODE, MULTI_MODE
+    #       optical_standard: "OPTIC_10GBASE_SR", # accepts OPTIC_10GBASE_SR, OPTIC_10GBASE_IR, OPTIC_10GBASE_LR, OPTIC_40GBASE_SR, OPTIC_40GBASE_ESR, OPTIC_40GBASE_IR4_LR4L, OPTIC_40GBASE_LR4, OPTIC_100GBASE_SR4, OPTIC_100GBASE_CWDM4, OPTIC_100GBASE_LR4, OPTIC_100G_PSM4_MSA, OPTIC_1000BASE_LX, OPTIC_1000BASE_SX
+    #       maximum_supported_weight_lbs: "NO_LIMIT", # accepts NO_LIMIT, MAX_1400_LBS, MAX_1600_LBS, MAX_1800_LBS, MAX_2000_LBS
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.site.site_id #=> String
+    #   resp.site.account_id #=> String
+    #   resp.site.name #=> String
+    #   resp.site.description #=> String
+    #   resp.site.tags #=> Hash
+    #   resp.site.tags["TagKey"] #=> String
+    #   resp.site.site_arn #=> String
+    #   resp.site.notes #=> String
+    #   resp.site.operating_address_country_code #=> String
+    #   resp.site.operating_address_state_or_region #=> String
+    #   resp.site.operating_address_city #=> String
+    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA"
+    #   resp.site.rack_physical_properties.power_phase #=> String, one of "SINGLE_PHASE", "THREE_PHASE"
+    #   resp.site.rack_physical_properties.power_connector #=> String, one of "L6_30P", "IEC309", "AH530P7W", "AH532P6W"
+    #   resp.site.rack_physical_properties.power_feed_drop #=> String, one of "ABOVE_RACK", "BELOW_RACK"
+    #   resp.site.rack_physical_properties.uplink_gbps #=> String, one of "UPLINK_1G", "UPLINK_10G", "UPLINK_40G", "UPLINK_100G"
+    #   resp.site.rack_physical_properties.uplink_count #=> String, one of "UPLINK_COUNT_1", "UPLINK_COUNT_2", "UPLINK_COUNT_3", "UPLINK_COUNT_4", "UPLINK_COUNT_5", "UPLINK_COUNT_6", "UPLINK_COUNT_7", "UPLINK_COUNT_8", "UPLINK_COUNT_12", "UPLINK_COUNT_16"
+    #   resp.site.rack_physical_properties.fiber_optic_cable_type #=> String, one of "SINGLE_MODE", "MULTI_MODE"
+    #   resp.site.rack_physical_properties.optical_standard #=> String, one of "OPTIC_10GBASE_SR", "OPTIC_10GBASE_IR", "OPTIC_10GBASE_LR", "OPTIC_40GBASE_SR", "OPTIC_40GBASE_ESR", "OPTIC_40GBASE_IR4_LR4L", "OPTIC_40GBASE_LR4", "OPTIC_100GBASE_SR4", "OPTIC_100GBASE_CWDM4", "OPTIC_100GBASE_LR4", "OPTIC_100G_PSM4_MSA", "OPTIC_1000BASE_LX", "OPTIC_1000BASE_SX"
+    #   resp.site.rack_physical_properties.maximum_supported_weight_lbs #=> String, one of "NO_LIMIT", "MAX_1400_LBS", "MAX_1600_LBS", "MAX_1800_LBS", "MAX_2000_LBS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateSite AWS API Documentation
+    #
+    # @overload create_site(params = {})
+    # @param [Hash] params ({})
+    def create_site(params = {}, options = {})
+      req = build_request(:create_site, params)
+      req.send_request(options)
+    end
+
     # Deletes the Outpost.
     #
     # @option params [required, String] :outpost_id
@@ -495,6 +636,83 @@ module Aws::Outposts
     # @param [Hash] params ({})
     def delete_site(params = {}, options = {})
       req = build_request(:delete_site, params)
+      req.send_request(options)
+    end
+
+    # Gets information about a catalog item.
+    #
+    # @option params [required, String] :catalog_item_id
+    #   The ID of the catalog item.
+    #
+    # @return [Types::GetCatalogItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCatalogItemOutput#catalog_item #catalog_item} => Types::CatalogItem
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_catalog_item({
+    #     catalog_item_id: "SkuCode", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog_item.catalog_item_id #=> String
+    #   resp.catalog_item.item_status #=> String, one of "AVAILABLE", "DISCONTINUED"
+    #   resp.catalog_item.ec2_capacities #=> Array
+    #   resp.catalog_item.ec2_capacities[0].family #=> String
+    #   resp.catalog_item.ec2_capacities[0].max_size #=> String
+    #   resp.catalog_item.ec2_capacities[0].quantity #=> String
+    #   resp.catalog_item.power_kva #=> Float
+    #   resp.catalog_item.weight_lbs #=> Integer
+    #   resp.catalog_item.supported_uplink_gbps #=> Array
+    #   resp.catalog_item.supported_uplink_gbps[0] #=> Integer
+    #   resp.catalog_item.supported_storage #=> Array
+    #   resp.catalog_item.supported_storage[0] #=> String, one of "EBS", "S3"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetCatalogItem AWS API Documentation
+    #
+    # @overload get_catalog_item(params = {})
+    # @param [Hash] params ({})
+    def get_catalog_item(params = {}, options = {})
+      req = build_request(:get_catalog_item, params)
+      req.send_request(options)
+    end
+
+    # Gets an order.
+    #
+    # @option params [required, String] :order_id
+    #   The ID of the order.
+    #
+    # @return [Types::GetOrderOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOrderOutput#order #order} => Types::Order
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_order({
+    #     order_id: "OrderId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.order.outpost_id #=> String
+    #   resp.order.order_id #=> String
+    #   resp.order.status #=> String, one of "RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED", "PREPARING", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #   resp.order.line_items #=> Array
+    #   resp.order.line_items[0].catalog_item_id #=> String
+    #   resp.order.line_items[0].line_item_id #=> String
+    #   resp.order.line_items[0].quantity #=> Integer
+    #   resp.order.line_items[0].status #=> String, one of "PREPARING", "BUILDING", "SHIPPED", "DELIVERED", "INSTALLING", "INSTALLED", "ERROR", "CANCELLED"
+    #   resp.order.payment_option #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
+    #   resp.order.order_submission_date #=> Time
+    #   resp.order.order_fulfilled_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOrder AWS API Documentation
+    #
+    # @overload get_order(params = {})
+    # @param [Hash] params ({})
+    def get_order(params = {}, options = {})
+      req = build_request(:get_order, params)
       req.send_request(options)
     end
 
@@ -580,10 +798,231 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Create a list of the Outposts for your AWS account. Add filters to
-    # your request to return a more specific list of results. Use filters to
-    # match an Outpost lifecycle status, Availibility Zone (`us-east-1a`),
-    # and AZ ID (`use1-az1`).
+    # Gets information about the specified Outpost site.
+    #
+    # @option params [required, String] :site_id
+    #   The ID of the site.
+    #
+    # @return [Types::GetSiteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSiteOutput#site #site} => Types::Site
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_site({
+    #     site_id: "SiteId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.site.site_id #=> String
+    #   resp.site.account_id #=> String
+    #   resp.site.name #=> String
+    #   resp.site.description #=> String
+    #   resp.site.tags #=> Hash
+    #   resp.site.tags["TagKey"] #=> String
+    #   resp.site.site_arn #=> String
+    #   resp.site.notes #=> String
+    #   resp.site.operating_address_country_code #=> String
+    #   resp.site.operating_address_state_or_region #=> String
+    #   resp.site.operating_address_city #=> String
+    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA"
+    #   resp.site.rack_physical_properties.power_phase #=> String, one of "SINGLE_PHASE", "THREE_PHASE"
+    #   resp.site.rack_physical_properties.power_connector #=> String, one of "L6_30P", "IEC309", "AH530P7W", "AH532P6W"
+    #   resp.site.rack_physical_properties.power_feed_drop #=> String, one of "ABOVE_RACK", "BELOW_RACK"
+    #   resp.site.rack_physical_properties.uplink_gbps #=> String, one of "UPLINK_1G", "UPLINK_10G", "UPLINK_40G", "UPLINK_100G"
+    #   resp.site.rack_physical_properties.uplink_count #=> String, one of "UPLINK_COUNT_1", "UPLINK_COUNT_2", "UPLINK_COUNT_3", "UPLINK_COUNT_4", "UPLINK_COUNT_5", "UPLINK_COUNT_6", "UPLINK_COUNT_7", "UPLINK_COUNT_8", "UPLINK_COUNT_12", "UPLINK_COUNT_16"
+    #   resp.site.rack_physical_properties.fiber_optic_cable_type #=> String, one of "SINGLE_MODE", "MULTI_MODE"
+    #   resp.site.rack_physical_properties.optical_standard #=> String, one of "OPTIC_10GBASE_SR", "OPTIC_10GBASE_IR", "OPTIC_10GBASE_LR", "OPTIC_40GBASE_SR", "OPTIC_40GBASE_ESR", "OPTIC_40GBASE_IR4_LR4L", "OPTIC_40GBASE_LR4", "OPTIC_100GBASE_SR4", "OPTIC_100GBASE_CWDM4", "OPTIC_100GBASE_LR4", "OPTIC_100G_PSM4_MSA", "OPTIC_1000BASE_LX", "OPTIC_1000BASE_SX"
+    #   resp.site.rack_physical_properties.maximum_supported_weight_lbs #=> String, one of "NO_LIMIT", "MAX_1400_LBS", "MAX_1600_LBS", "MAX_1800_LBS", "MAX_2000_LBS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetSite AWS API Documentation
+    #
+    # @overload get_site(params = {})
+    # @param [Hash] params ({})
+    def get_site(params = {}, options = {})
+      req = build_request(:get_site, params)
+      req.send_request(options)
+    end
+
+    # Gets the site address.
+    #
+    # @option params [required, String] :site_id
+    #   The ID of the site.
+    #
+    # @option params [required, String] :address_type
+    #   The type of the address you request.
+    #
+    # @return [Types::GetSiteAddressOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSiteAddressOutput#site_id #site_id} => String
+    #   * {Types::GetSiteAddressOutput#address_type #address_type} => String
+    #   * {Types::GetSiteAddressOutput#address #address} => Types::Address
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_site_address({
+    #     site_id: "SiteId", # required
+    #     address_type: "SHIPPING_ADDRESS", # required, accepts SHIPPING_ADDRESS, OPERATING_ADDRESS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.site_id #=> String
+    #   resp.address_type #=> String, one of "SHIPPING_ADDRESS", "OPERATING_ADDRESS"
+    #   resp.address.contact_name #=> String
+    #   resp.address.contact_phone_number #=> String
+    #   resp.address.address_line_1 #=> String
+    #   resp.address.address_line_2 #=> String
+    #   resp.address.address_line_3 #=> String
+    #   resp.address.city #=> String
+    #   resp.address.state_or_region #=> String
+    #   resp.address.district_or_county #=> String
+    #   resp.address.postal_code #=> String
+    #   resp.address.country_code #=> String
+    #   resp.address.municipality #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetSiteAddress AWS API Documentation
+    #
+    # @overload get_site_address(params = {})
+    # @param [Hash] params ({})
+    def get_site_address(params = {}, options = {})
+      req = build_request(:get_site_address, params)
+      req.send_request(options)
+    end
+
+    # Use to create a list of every item in the catalog. Add filters to your
+    # request to return a more specific list of results. Use filters to
+    # match an item class, storage option, or EC2 family.
+    #
+    # If you specify multiple filters, the filters are joined with an `AND`,
+    # and the request returns only results that match all of the specified
+    # filters.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum page size.
+    #
+    # @option params [Array<String>] :item_class_filter
+    #   A filter for the class of items in the catalog.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
+    #
+    # @option params [Array<String>] :supported_storage_filter
+    #   A filter for the storage options of items in the catalog.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
+    #
+    # @option params [Array<String>] :ec2_family_filter
+    #   A filter for EC2 family options for items in the catalog.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
+    #
+    # @return [Types::ListCatalogItemsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCatalogItemsOutput#catalog_items #catalog_items} => Array&lt;Types::CatalogItem&gt;
+    #   * {Types::ListCatalogItemsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_catalog_items({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #     item_class_filter: ["RACK"], # accepts RACK, SERVER
+    #     supported_storage_filter: ["EBS"], # accepts EBS, S3
+    #     ec2_family_filter: ["Family"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog_items #=> Array
+    #   resp.catalog_items[0].catalog_item_id #=> String
+    #   resp.catalog_items[0].item_status #=> String, one of "AVAILABLE", "DISCONTINUED"
+    #   resp.catalog_items[0].ec2_capacities #=> Array
+    #   resp.catalog_items[0].ec2_capacities[0].family #=> String
+    #   resp.catalog_items[0].ec2_capacities[0].max_size #=> String
+    #   resp.catalog_items[0].ec2_capacities[0].quantity #=> String
+    #   resp.catalog_items[0].power_kva #=> Float
+    #   resp.catalog_items[0].weight_lbs #=> Integer
+    #   resp.catalog_items[0].supported_uplink_gbps #=> Array
+    #   resp.catalog_items[0].supported_uplink_gbps[0] #=> Integer
+    #   resp.catalog_items[0].supported_storage #=> Array
+    #   resp.catalog_items[0].supported_storage[0] #=> String, one of "EBS", "S3"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListCatalogItems AWS API Documentation
+    #
+    # @overload list_catalog_items(params = {})
+    # @param [Hash] params ({})
+    def list_catalog_items(params = {}, options = {})
+      req = build_request(:list_catalog_items, params)
+      req.send_request(options)
+    end
+
+    # Create a list of the Outpost orders for your Amazon Web Services
+    # account. You can filter your request by Outpost to return a more
+    # specific list of results.
+    #
+    # @option params [String] :outpost_identifier_filter
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum page size.
+    #
+    # @return [Types::ListOrdersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOrdersOutput#orders #orders} => Array&lt;Types::OrderSummary&gt;
+    #   * {Types::ListOrdersOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_orders({
+    #     outpost_identifier_filter: "OutpostIdentifier",
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.orders #=> Array
+    #   resp.orders[0].outpost_id #=> String
+    #   resp.orders[0].order_id #=> String
+    #   resp.orders[0].order_type #=> String, one of "OUTPOST", "REPLACEMENT"
+    #   resp.orders[0].status #=> String, one of "RECEIVED", "PENDING", "PROCESSING", "INSTALLING", "FULFILLED", "CANCELLED", "PREPARING", "IN_PROGRESS", "COMPLETED", "ERROR"
+    #   resp.orders[0].line_item_counts_by_status #=> Hash
+    #   resp.orders[0].line_item_counts_by_status["LineItemStatus"] #=> Integer
+    #   resp.orders[0].order_submission_date #=> Time
+    #   resp.orders[0].order_fulfilled_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListOrders AWS API Documentation
+    #
+    # @overload list_orders(params = {})
+    # @param [Hash] params ({})
+    def list_orders(params = {}, options = {})
+      req = build_request(:list_orders, params)
+      req.send_request(options)
+    end
+
+    # Create a list of the Outposts for your Amazon Web Services account.
+    # Add filters to your request to return a more specific list of results.
+    # Use filters to match an Outpost lifecycle status, Availability Zone
+    # (`us-east-1a`), and AZ ID (`use1-az1`).
     #
     # If you specify multiple filters, the filters are joined with an `AND`,
     # and the request returns only results that match all of the specified
@@ -603,7 +1042,7 @@ module Aws::Outposts
     #   all results that match any of the specified values.
     #
     # @option params [Array<String>] :availability_zone_filter
-    #   A filter for the Availibility Zone (`us-east-1a`) of the Outpost.
+    #   A filter for the Availability Zone (`us-east-1a`) of the Outpost.
     #
     #   Filter values are case sensitive. If you specify multiple values for a
     #   filter, the values are joined with an `OR`, and the request returns
@@ -659,7 +1098,7 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Lists the sites for the specified AWS account.
+    # Lists the sites for your Amazon Web Services account.
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -691,6 +1130,19 @@ module Aws::Outposts
     #   resp.sites[0].tags #=> Hash
     #   resp.sites[0].tags["TagKey"] #=> String
     #   resp.sites[0].site_arn #=> String
+    #   resp.sites[0].notes #=> String
+    #   resp.sites[0].operating_address_country_code #=> String
+    #   resp.sites[0].operating_address_state_or_region #=> String
+    #   resp.sites[0].operating_address_city #=> String
+    #   resp.sites[0].rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA"
+    #   resp.sites[0].rack_physical_properties.power_phase #=> String, one of "SINGLE_PHASE", "THREE_PHASE"
+    #   resp.sites[0].rack_physical_properties.power_connector #=> String, one of "L6_30P", "IEC309", "AH530P7W", "AH532P6W"
+    #   resp.sites[0].rack_physical_properties.power_feed_drop #=> String, one of "ABOVE_RACK", "BELOW_RACK"
+    #   resp.sites[0].rack_physical_properties.uplink_gbps #=> String, one of "UPLINK_1G", "UPLINK_10G", "UPLINK_40G", "UPLINK_100G"
+    #   resp.sites[0].rack_physical_properties.uplink_count #=> String, one of "UPLINK_COUNT_1", "UPLINK_COUNT_2", "UPLINK_COUNT_3", "UPLINK_COUNT_4", "UPLINK_COUNT_5", "UPLINK_COUNT_6", "UPLINK_COUNT_7", "UPLINK_COUNT_8", "UPLINK_COUNT_12", "UPLINK_COUNT_16"
+    #   resp.sites[0].rack_physical_properties.fiber_optic_cable_type #=> String, one of "SINGLE_MODE", "MULTI_MODE"
+    #   resp.sites[0].rack_physical_properties.optical_standard #=> String, one of "OPTIC_10GBASE_SR", "OPTIC_10GBASE_IR", "OPTIC_10GBASE_LR", "OPTIC_40GBASE_SR", "OPTIC_40GBASE_ESR", "OPTIC_40GBASE_IR4_LR4L", "OPTIC_40GBASE_LR4", "OPTIC_100GBASE_SR4", "OPTIC_100GBASE_CWDM4", "OPTIC_100GBASE_LR4", "OPTIC_100G_PSM4_MSA", "OPTIC_1000BASE_LX", "OPTIC_1000BASE_SX"
+    #   resp.sites[0].rack_physical_properties.maximum_supported_weight_lbs #=> String, one of "NO_LIMIT", "MAX_1400_LBS", "MAX_1600_LBS", "MAX_1800_LBS", "MAX_2000_LBS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListSites AWS API Documentation
@@ -785,6 +1237,292 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # Updates the site.
+    #
+    # @option params [required, String] :site_id
+    #   The ID of the site.
+    #
+    # @option params [String] :name
+    #   The name of the site.
+    #
+    # @option params [String] :description
+    #   The description of the site.
+    #
+    # @option params [String] :notes
+    #   Notes about a site.
+    #
+    # @return [Types::UpdateSiteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSiteOutput#site #site} => Types::Site
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_site({
+    #     site_id: "SiteId", # required
+    #     name: "SiteName",
+    #     description: "SiteDescription",
+    #     notes: "SiteNotes",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.site.site_id #=> String
+    #   resp.site.account_id #=> String
+    #   resp.site.name #=> String
+    #   resp.site.description #=> String
+    #   resp.site.tags #=> Hash
+    #   resp.site.tags["TagKey"] #=> String
+    #   resp.site.site_arn #=> String
+    #   resp.site.notes #=> String
+    #   resp.site.operating_address_country_code #=> String
+    #   resp.site.operating_address_state_or_region #=> String
+    #   resp.site.operating_address_city #=> String
+    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA"
+    #   resp.site.rack_physical_properties.power_phase #=> String, one of "SINGLE_PHASE", "THREE_PHASE"
+    #   resp.site.rack_physical_properties.power_connector #=> String, one of "L6_30P", "IEC309", "AH530P7W", "AH532P6W"
+    #   resp.site.rack_physical_properties.power_feed_drop #=> String, one of "ABOVE_RACK", "BELOW_RACK"
+    #   resp.site.rack_physical_properties.uplink_gbps #=> String, one of "UPLINK_1G", "UPLINK_10G", "UPLINK_40G", "UPLINK_100G"
+    #   resp.site.rack_physical_properties.uplink_count #=> String, one of "UPLINK_COUNT_1", "UPLINK_COUNT_2", "UPLINK_COUNT_3", "UPLINK_COUNT_4", "UPLINK_COUNT_5", "UPLINK_COUNT_6", "UPLINK_COUNT_7", "UPLINK_COUNT_8", "UPLINK_COUNT_12", "UPLINK_COUNT_16"
+    #   resp.site.rack_physical_properties.fiber_optic_cable_type #=> String, one of "SINGLE_MODE", "MULTI_MODE"
+    #   resp.site.rack_physical_properties.optical_standard #=> String, one of "OPTIC_10GBASE_SR", "OPTIC_10GBASE_IR", "OPTIC_10GBASE_LR", "OPTIC_40GBASE_SR", "OPTIC_40GBASE_ESR", "OPTIC_40GBASE_IR4_LR4L", "OPTIC_40GBASE_LR4", "OPTIC_100GBASE_SR4", "OPTIC_100GBASE_CWDM4", "OPTIC_100GBASE_LR4", "OPTIC_100G_PSM4_MSA", "OPTIC_1000BASE_LX", "OPTIC_1000BASE_SX"
+    #   resp.site.rack_physical_properties.maximum_supported_weight_lbs #=> String, one of "NO_LIMIT", "MAX_1400_LBS", "MAX_1600_LBS", "MAX_1800_LBS", "MAX_2000_LBS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UpdateSite AWS API Documentation
+    #
+    # @overload update_site(params = {})
+    # @param [Hash] params ({})
+    def update_site(params = {}, options = {})
+      req = build_request(:update_site, params)
+      req.send_request(options)
+    end
+
+    # Updates the site address.
+    #
+    # To update a site address with an order `IN_PROGRESS`, you must wait
+    # for the order to complete or cancel the order.
+    #
+    # You can update the operating address before you place an order at the
+    # site, or after all Outposts that belong to the site have been
+    # deactivated.
+    #
+    # @option params [required, String] :site_id
+    #   The ID of the site.
+    #
+    # @option params [required, String] :address_type
+    #   The type of the address.
+    #
+    # @option params [required, Types::Address] :address
+    #   The address for the site.
+    #
+    # @return [Types::UpdateSiteAddressOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSiteAddressOutput#address_type #address_type} => String
+    #   * {Types::UpdateSiteAddressOutput#address #address} => Types::Address
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_site_address({
+    #     site_id: "SiteId", # required
+    #     address_type: "SHIPPING_ADDRESS", # required, accepts SHIPPING_ADDRESS, OPERATING_ADDRESS
+    #     address: { # required
+    #       contact_name: "ContactName",
+    #       contact_phone_number: "ContactPhoneNumber",
+    #       address_line_1: "AddressLine1", # required
+    #       address_line_2: "AddressLine2",
+    #       address_line_3: "AddressLine3",
+    #       city: "City", # required
+    #       state_or_region: "StateOrRegion", # required
+    #       district_or_county: "DistrictOrCounty",
+    #       postal_code: "PostalCode", # required
+    #       country_code: "CountryCode", # required
+    #       municipality: "Municipality",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_type #=> String, one of "SHIPPING_ADDRESS", "OPERATING_ADDRESS"
+    #   resp.address.contact_name #=> String
+    #   resp.address.contact_phone_number #=> String
+    #   resp.address.address_line_1 #=> String
+    #   resp.address.address_line_2 #=> String
+    #   resp.address.address_line_3 #=> String
+    #   resp.address.city #=> String
+    #   resp.address.state_or_region #=> String
+    #   resp.address.district_or_county #=> String
+    #   resp.address.postal_code #=> String
+    #   resp.address.country_code #=> String
+    #   resp.address.municipality #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UpdateSiteAddress AWS API Documentation
+    #
+    # @overload update_site_address(params = {})
+    # @param [Hash] params ({})
+    def update_site_address(params = {}, options = {})
+      req = build_request(:update_site_address, params)
+      req.send_request(options)
+    end
+
+    # Update the physical and logistical details for a rack at a site. For
+    # more information about hardware requirements for racks, see [Network
+    # readiness checklist][1] in the Amazon Web Services Outposts User
+    # Guide.
+    #
+    # To update a rack at a site with an order of `IN_PROGRESS`, you must
+    # wait for the order to complete or cancel the order.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist
+    #
+    # @option params [required, String] :site_id
+    #   The ID of the site.
+    #
+    # @option params [String] :power_draw_kva
+    #   Specify in kVA the power draw available at the hardware placement
+    #   position for the rack.
+    #
+    # @option params [String] :power_phase
+    #   Specify the power option that you can provide for hardware.
+    #
+    #   * Single-phase AC feed: 200 V to 277 V, 50 Hz or 60 Hz
+    #
+    #   * Three-phase AC feed: 346 V to 480 V, 50 Hz or 60 Hz
+    #
+    # @option params [String] :power_connector
+    #   Specify the power connector that Amazon Web Services should plan to
+    #   provide for connections to the hardware. Note the correlation between
+    #   `PowerPhase` and `PowerConnector`.
+    #
+    #   * Single-phase AC feed
+    #
+    #     * **L6-30P** – (common in US); 30A; single phase
+    #
+    #     * **IEC309 (blue)** – P+N+E, 6hr; 32 A; single phase
+    #
+    #   * Three-phase AC feed
+    #
+    #     * **AH530P7W (red)** – 3P+N+E, 7hr; 30A; three phase
+    #
+    #     * **AH532P6W (red)** – 3P+N+E, 6hr; 32A; three phase
+    #
+    # @option params [String] :power_feed_drop
+    #   Specify whether the power feed comes above or below the rack.
+    #
+    # @option params [String] :uplink_gbps
+    #   Specify the uplink speed the rack should support for the connection to
+    #   the Region.
+    #
+    # @option params [String] :uplink_count
+    #   Racks come with two Outpost network devices. Depending on the
+    #   supported uplink speed at the site, the Outpost network devices
+    #   provide a variable number of uplinks. Specify the number of uplinks
+    #   for each Outpost network device that you intend to use to connect the
+    #   rack to your network. Note the correlation between `UplinkGbps` and
+    #   `UplinkCount`.
+    #
+    #   * 1Gbps - Uplinks available: 1, 2, 4, 6, 8
+    #
+    #   * 10Gbps - Uplinks available: 1, 2, 4, 8, 12, 16
+    #
+    #   * 40 and 100 Gbps- Uplinks available: 1, 2, 4
+    #
+    # @option params [String] :fiber_optic_cable_type
+    #   Specify the type of fiber that you will use to attach the Outpost to
+    #   your network.
+    #
+    # @option params [String] :optical_standard
+    #   Specify the type of optical standard that you will use to attach the
+    #   Outpost to your network. This field is dependent on uplink speed,
+    #   fiber type, and distance to the upstream device. For more information
+    #   about networking requirements for racks, see [Network][1] in the
+    #   Amazon Web Services Outposts User Guide.
+    #
+    #   * `OPTIC_10GBASE_SR`\: 10GBASE-SR
+    #
+    #   * `OPTIC_10GBASE_IR`\: 10GBASE-IR
+    #
+    #   * `OPTIC_10GBASE_LR`\: 10GBASE-LR
+    #
+    #   * `OPTIC_40GBASE_SR`\: 40GBASE-SR
+    #
+    #   * `OPTIC_40GBASE_ESR`\: 40GBASE-ESR
+    #
+    #   * `OPTIC_40GBASE_IR4_LR4L`\: 40GBASE-IR (LR4L)
+    #
+    #   * `OPTIC_40GBASE_LR4`\: 40GBASE-LR4
+    #
+    #   * `OPTIC_100GBASE_SR4`\: 100GBASE-SR4
+    #
+    #   * `OPTIC_100GBASE_CWDM4`\: 100GBASE-CWDM4
+    #
+    #   * `OPTIC_100GBASE_LR4`\: 100GBASE-LR4
+    #
+    #   * `OPTIC_100G_PSM4_MSA`\: 100G PSM4 MSA
+    #
+    #   * `OPTIC_1000BASE_LX`\: 1000Base-LX
+    #
+    #   * `OPTIC_1000BASE_SX`\: 1000Base-SX
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking
+    #
+    # @option params [String] :maximum_supported_weight_lbs
+    #   Specify the maximum rack weight that this site can support. `NO_LIMIT`
+    #   is over 2000lbs.
+    #
+    # @return [Types::UpdateSiteRackPhysicalPropertiesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSiteRackPhysicalPropertiesOutput#site #site} => Types::Site
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_site_rack_physical_properties({
+    #     site_id: "SiteId", # required
+    #     power_draw_kva: "POWER_5_KVA", # accepts POWER_5_KVA, POWER_10_KVA, POWER_15_KVA
+    #     power_phase: "SINGLE_PHASE", # accepts SINGLE_PHASE, THREE_PHASE
+    #     power_connector: "L6_30P", # accepts L6_30P, IEC309, AH530P7W, AH532P6W
+    #     power_feed_drop: "ABOVE_RACK", # accepts ABOVE_RACK, BELOW_RACK
+    #     uplink_gbps: "UPLINK_1G", # accepts UPLINK_1G, UPLINK_10G, UPLINK_40G, UPLINK_100G
+    #     uplink_count: "UPLINK_COUNT_1", # accepts UPLINK_COUNT_1, UPLINK_COUNT_2, UPLINK_COUNT_3, UPLINK_COUNT_4, UPLINK_COUNT_5, UPLINK_COUNT_6, UPLINK_COUNT_7, UPLINK_COUNT_8, UPLINK_COUNT_12, UPLINK_COUNT_16
+    #     fiber_optic_cable_type: "SINGLE_MODE", # accepts SINGLE_MODE, MULTI_MODE
+    #     optical_standard: "OPTIC_10GBASE_SR", # accepts OPTIC_10GBASE_SR, OPTIC_10GBASE_IR, OPTIC_10GBASE_LR, OPTIC_40GBASE_SR, OPTIC_40GBASE_ESR, OPTIC_40GBASE_IR4_LR4L, OPTIC_40GBASE_LR4, OPTIC_100GBASE_SR4, OPTIC_100GBASE_CWDM4, OPTIC_100GBASE_LR4, OPTIC_100G_PSM4_MSA, OPTIC_1000BASE_LX, OPTIC_1000BASE_SX
+    #     maximum_supported_weight_lbs: "NO_LIMIT", # accepts NO_LIMIT, MAX_1400_LBS, MAX_1600_LBS, MAX_1800_LBS, MAX_2000_LBS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.site.site_id #=> String
+    #   resp.site.account_id #=> String
+    #   resp.site.name #=> String
+    #   resp.site.description #=> String
+    #   resp.site.tags #=> Hash
+    #   resp.site.tags["TagKey"] #=> String
+    #   resp.site.site_arn #=> String
+    #   resp.site.notes #=> String
+    #   resp.site.operating_address_country_code #=> String
+    #   resp.site.operating_address_state_or_region #=> String
+    #   resp.site.operating_address_city #=> String
+    #   resp.site.rack_physical_properties.power_draw_kva #=> String, one of "POWER_5_KVA", "POWER_10_KVA", "POWER_15_KVA"
+    #   resp.site.rack_physical_properties.power_phase #=> String, one of "SINGLE_PHASE", "THREE_PHASE"
+    #   resp.site.rack_physical_properties.power_connector #=> String, one of "L6_30P", "IEC309", "AH530P7W", "AH532P6W"
+    #   resp.site.rack_physical_properties.power_feed_drop #=> String, one of "ABOVE_RACK", "BELOW_RACK"
+    #   resp.site.rack_physical_properties.uplink_gbps #=> String, one of "UPLINK_1G", "UPLINK_10G", "UPLINK_40G", "UPLINK_100G"
+    #   resp.site.rack_physical_properties.uplink_count #=> String, one of "UPLINK_COUNT_1", "UPLINK_COUNT_2", "UPLINK_COUNT_3", "UPLINK_COUNT_4", "UPLINK_COUNT_5", "UPLINK_COUNT_6", "UPLINK_COUNT_7", "UPLINK_COUNT_8", "UPLINK_COUNT_12", "UPLINK_COUNT_16"
+    #   resp.site.rack_physical_properties.fiber_optic_cable_type #=> String, one of "SINGLE_MODE", "MULTI_MODE"
+    #   resp.site.rack_physical_properties.optical_standard #=> String, one of "OPTIC_10GBASE_SR", "OPTIC_10GBASE_IR", "OPTIC_10GBASE_LR", "OPTIC_40GBASE_SR", "OPTIC_40GBASE_ESR", "OPTIC_40GBASE_IR4_LR4L", "OPTIC_40GBASE_LR4", "OPTIC_100GBASE_SR4", "OPTIC_100GBASE_CWDM4", "OPTIC_100GBASE_LR4", "OPTIC_100G_PSM4_MSA", "OPTIC_1000BASE_LX", "OPTIC_1000BASE_SX"
+    #   resp.site.rack_physical_properties.maximum_supported_weight_lbs #=> String, one of "NO_LIMIT", "MAX_1400_LBS", "MAX_1600_LBS", "MAX_1800_LBS", "MAX_2000_LBS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UpdateSiteRackPhysicalProperties AWS API Documentation
+    #
+    # @overload update_site_rack_physical_properties(params = {})
+    # @param [Hash] params ({})
+    def update_site_rack_physical_properties(params = {}, options = {})
+      req = build_request(:update_site_rack_physical_properties, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -798,7 +1536,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

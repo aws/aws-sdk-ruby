@@ -393,7 +393,7 @@ module Aws::AutoScaling
     # @!attribute [rw] health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service.
+    #   into service and marking it unhealthy due to a failed health check.
     #   @return [Integer]
     #
     # @!attribute [rw] instances
@@ -1152,7 +1152,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
     #   @return [Types::MixedInstancesPolicy]
     #
     # @!attribute [rw] instance_id
@@ -1255,10 +1255,9 @@ module Aws::AutoScaling
     # @!attribute [rw] health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service. During this time, any health check failures for the
-    #   instance are ignored. The default value is `0`. For more
-    #   information, see [Health check grace period][1] in the *Amazon EC2
-    #   Auto Scaling User Guide*.
+    #   into service and marking it unhealthy due to a failed health check.
+    #   The default value is `0`. For more information, see [Health check
+    #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Conditional: Required if you are adding an `ELB` health check.
     #
@@ -1307,12 +1306,12 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Amazon EC2 Auto Scaling when scaling in. For more
     #   information about preventing instances from terminating on scale in,
-    #   see [Instance scale-in protection][1] in the *Amazon EC2 Auto
+    #   see [Using instance scale-in protection][1] in the *Amazon EC2 Auto
     #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
     #   @return [Boolean]
     #
     # @!attribute [rw] capacity_rebalance
@@ -1327,7 +1326,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html
     #   @return [Boolean]
     #
     # @!attribute [rw] lifecycle_hook_specification_list
@@ -1806,7 +1805,7 @@ module Aws::AutoScaling
     # * Add values for each required parameter from CloudWatch. You can use
     #   an existing metric, or a new metric that you create. To use your own
     #   metric, you must first publish the metric to CloudWatch. For more
-    #   information, see [Publish Custom Metrics][1] in the *Amazon
+    #   information, see [Publish custom metrics][1] in the *Amazon
     #   CloudWatch User Guide*.
     #
     # * Choose a metric that changes proportionally with capacity. The value
@@ -1814,13 +1813,21 @@ module Aws::AutoScaling
     #   the number of capacity units. That is, the value of the metric
     #   should decrease when capacity increases.
     #
-    # For more information about CloudWatch, see [Amazon CloudWatch
-    # Concepts][2].
+    # For more information about the CloudWatch terminology below, see
+    # [Amazon CloudWatch concepts][2].
+    #
+    # <note markdown="1"> Each individual service provides information about the metrics,
+    # namespace, and dimensions they use. For more information, see [Amazon
+    # Web Services services that publish CloudWatch metrics][3] in the
+    # *Amazon CloudWatch User Guide*.
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
     #
     # @note When making an API call, you may pass CustomizedMetricSpecification
     #   data as a hash:
@@ -1839,7 +1846,14 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] metric_name
-    #   The name of the metric.
+    #   The name of the metric. To get the exact metric name, namespace, and
+    #   dimensions, inspect the [Metric][1] object that is returned by a
+    #   call to [ListMetrics][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1858,7 +1872,13 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] unit
-    #   The unit of the metric.
+    #   The unit of the metric. For a complete list of the units that
+    #   CloudWatch supports, see the [MetricDatum][1] data type in the
+    #   *Amazon CloudWatch API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CustomizedMetricSpecification AWS API Documentation
@@ -1943,8 +1963,7 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] topic_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
-    #   Service (Amazon SNS) topic.
+    #   The Amazon Resource Name (ARN) of the Amazon SNS topic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteNotificationConfigurationType AWS API Documentation
@@ -2827,7 +2846,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
     #   @return [Types::MixedInstancesPolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DesiredConfiguration AWS API Documentation
@@ -4790,7 +4809,7 @@ module Aws::AutoScaling
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-configuring-overrides.html
     #
     # @note When making an API call, you may pass LaunchTemplateOverrides
     #   data as a hash:
@@ -4880,7 +4899,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html
+    #   [1]: https://docs.aws.amazon.com/ec2-auto-scaling-mixed-instances-groups-instance-weighting.html
     #   @return [String]
     #
     # @!attribute [rw] launch_template_specification
@@ -4894,7 +4913,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-template-overrides.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups-launch-template-overrides.html
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] instance_requirements
@@ -4991,9 +5010,9 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes a lifecycle hook, which tells Amazon EC2 Auto Scaling that
-    # you want to perform an action whenever it launches instances or
-    # terminates instances.
+    # Describes a lifecycle hook, which enables an Auto Scaling group to be
+    # aware of events in the Auto Scaling instance lifecycle, and then
+    # perform a custom action when the corresponding lifecycle event occurs.
     #
     # @!attribute [rw] lifecycle_hook_name
     #   The name of the lifecycle hook.
@@ -5067,31 +5086,6 @@ module Aws::AutoScaling
 
     # Describes information used to specify a lifecycle hook for an Auto
     # Scaling group.
-    #
-    # A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on
-    # an instance when the instance launches (before it is put into service)
-    # or as the instance terminates (before it is fully terminated).
-    #
-    # This step is a part of the procedure for creating a lifecycle hook for
-    # an Auto Scaling group:
-    #
-    # 1.  (Optional) Create a Lambda function and a rule that allows
-    #     CloudWatch Events to invoke your Lambda function when Amazon EC2
-    #     Auto Scaling launches or terminates instances.
-    #
-    # 2.  (Optional) Create a notification target and an IAM role. The
-    #     target can be either an Amazon SQS queue or an Amazon SNS topic.
-    #     The role allows Amazon EC2 Auto Scaling to publish lifecycle
-    #     notifications to the target.
-    #
-    # 3.  **Create the lifecycle hook. Specify whether the hook is used when
-    #     the instances launch or terminate.**
-    #
-    # 4.  If you need more time, record the lifecycle action heartbeat to
-    #     keep the instance in a pending state.
-    #
-    # 5.  If you finish before the timeout period ends, complete the
-    #     lifecycle action.
     #
     # For more information, see [Amazon EC2 Auto Scaling lifecycle hooks][1]
     # in the *Amazon EC2 Auto Scaling User Guide*.
@@ -5465,8 +5459,8 @@ module Aws::AutoScaling
     # is associated with a timestamp.
     #
     # For more information and examples, see [Advanced predictive scaling
-    # policy configurations using customized metrics][1] in the *Amazon EC2
-    # Auto Scaling User Guide*.
+    # policy configurations using custom metrics][1] in the *Amazon EC2 Auto
+    # Scaling User Guide*.
     #
     #
     #
@@ -5512,10 +5506,6 @@ module Aws::AutoScaling
     #   the other metrics to refer to those metrics, and can also use the
     #   `Id` of other expressions to use the result of those expressions.
     #
-    #   For example, to use search expressions, use the SEARCH() function in
-    #   your metric math expression to combine multiple metrics from Auto
-    #   Scaling groups that use a specific name prefix.
-    #
     #   Conditional: Within each `MetricDataQuery` object, you must specify
     #   either `Expression` or `MetricStat`, but not both.
     #   @return [String]
@@ -5537,14 +5527,14 @@ module Aws::AutoScaling
     #   Indicates whether to return the timestamps and raw data values of
     #   this metric.
     #
-    #   If you use any math expressions, specify `True` for this value for
+    #   If you use any math expressions, specify `true` for this value for
     #   only the final math expression that the metric specification is
-    #   based on. You must specify `False` for `ReturnData` for all the
+    #   based on. You must specify `false` for `ReturnData` for all the
     #   other metrics and expressions used in the metric specification.
     #
     #   If you are only retrieving metrics and not performing any math
     #   expressions, do not specify anything for `ReturnData`. This sets it
-    #   to its default (`True`).
+    #   to its default (`true`).
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricDataQuery AWS API Documentation
@@ -5682,7 +5672,7 @@ module Aws::AutoScaling
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
     #
     # @note When making an API call, you may pass MixedInstancesPolicy
     #   data as a hash:
@@ -5819,8 +5809,7 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] topic_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
-    #   Service (Amazon SNS) topic.
+    #   The Amazon Resource Name (ARN) of the Amazon SNS topic.
     #   @return [String]
     #
     # @!attribute [rw] notification_type
@@ -6177,7 +6166,7 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes a customized load metric for a predictive scaling policy.
+    # Describes a custom load metric for a predictive scaling policy.
     #
     # @note When making an API call, you may pass PredictiveScalingCustomizedLoadMetric
     #   data as a hash:
@@ -6221,7 +6210,7 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes a customized scaling metric for a predictive scaling policy.
+    # Describes a custom scaling metric for a predictive scaling policy.
     #
     # @note When making an API call, you may pass PredictiveScalingCustomizedScalingMetric
     #   data as a hash:
@@ -6305,9 +6294,9 @@ module Aws::AutoScaling
     #   requests received by each instance is as close to 1000 requests per
     #   minute as possible at all times.
     #
-    # For information about using customized metrics with predictive
-    # scaling, see [Advanced predictive scaling policy configurations using
-    # customized metrics][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    # For information about using custom metrics with predictive scaling,
+    # see [Advanced predictive scaling policy configurations using custom
+    # metrics][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -6802,8 +6791,7 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] topic_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
-    #   Service (Amazon SNS) topic.
+    #   The Amazon Resource Name (ARN) of the Amazon SNS topic.
     #   @return [String]
     #
     # @!attribute [rw] notification_types
@@ -7076,7 +7064,7 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] target_tracking_configuration
     #   A target tracking scaling policy. Provides support for predefined or
-    #   customized metrics.
+    #   custom metrics.
     #
     #   The following predefined metrics are available:
     #
@@ -7114,11 +7102,11 @@ module Aws::AutoScaling
     #   @return [Boolean]
     #
     # @!attribute [rw] predictive_scaling_configuration
-    #   A predictive scaling policy. Provides support for only predefined
-    #   metrics.
+    #   A predictive scaling policy. Provides support for predefined and
+    #   custom metrics.
     #
-    #   Predictive scaling works with CPU utilization, network in/out, and
-    #   the Application Load Balancer request count.
+    #   Predefined metrics include CPU utilization, network in/out, and the
+    #   Application Load Balancer request count.
     #
     #   For more information, see [PredictiveScalingConfiguration][1] in the
     #   *Amazon EC2 Auto Scaling API Reference*.
@@ -8582,7 +8570,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
     #   @return [Types::MixedInstancesPolicy]
     #
     # @!attribute [rw] min_size
@@ -8637,9 +8625,9 @@ module Aws::AutoScaling
     # @!attribute [rw] health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service. The default value is `0`. For more information, see
-    #   [Health check grace period][1] in the *Amazon EC2 Auto Scaling User
-    #   Guide*.
+    #   into service and marking it unhealthy due to a failed health check.
+    #   The default value is `0`. For more information, see [Health check
+    #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Conditional: Required if you are adding an `ELB` health check.
     #
@@ -8684,12 +8672,12 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Amazon EC2 Auto Scaling when scaling in. For more
     #   information about preventing instances from terminating on scale in,
-    #   see [Instance scale-in protection][1] in the *Amazon EC2 Auto
+    #   see [Using instance scale-in protection][1] in the *Amazon EC2 Auto
     #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
     #   @return [Boolean]
     #
     # @!attribute [rw] service_linked_role_arn
@@ -8723,7 +8711,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html
     #   @return [Boolean]
     #
     # @!attribute [rw] context

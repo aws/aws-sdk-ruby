@@ -2530,7 +2530,7 @@ module Aws::EC2
     #
     # An outbound rule permits instances to send traffic to the specified
     # IPv4 or IPv6 CIDR address ranges, or to the instances that are
-    # associated with the specified destination security groups.
+    # associated with the specified source security groups.
     #
     # You specify a protocol for each rule (for example, TCP). For the TCP
     # and UDP protocols, you must also specify the destination port or port
@@ -8794,6 +8794,7 @@ module Aws::EC2
     #   The ID of a VPC peering connection.
     #
     # @option params [String] :core_network_arn
+    #   The Amazon Resource Name (ARN) of the core network.
     #
     # @return [Types::CreateRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13860,6 +13861,8 @@ module Aws::EC2
     #   If you omit this parameter, we delete all user-defined tags for the
     #   specified resources. We do not delete Amazon Web Services-generated
     #   tags (tags that have the `aws:` prefix).
+    #
+    #   Constraints: Up to 1000 tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -40957,6 +40960,7 @@ module Aws::EC2
     #   The ID of a VPC peering connection.
     #
     # @option params [String] :core_network_arn
+    #   The Amazon Resource Name (ARN) of the core network.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -45393,7 +45397,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.282.0'
+      context[:gem_version] = '1.283.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

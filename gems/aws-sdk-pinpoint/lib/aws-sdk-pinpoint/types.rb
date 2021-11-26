@@ -16109,6 +16109,141 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SendOTPMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         send_otp_message_request_parameters: { # required
+    #           allowed_attempts: 1,
+    #           brand_name: "__string", # required
+    #           channel: "__string", # required
+    #           code_length: 1,
+    #           destination_identity: "__string", # required
+    #           entity_id: "__string",
+    #           language: "__string",
+    #           origination_identity: "__string", # required
+    #           reference_id: "__string", # required
+    #           template_id: "__string",
+    #           validity_period: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] send_otp_message_request_parameters
+    #   Send OTP message request parameters.
+    #   @return [Types::SendOTPMessageRequestParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendOTPMessageRequest AWS API Documentation
+    #
+    class SendOTPMessageRequest < Struct.new(
+      :application_id,
+      :send_otp_message_request_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Send OTP message request parameters.
+    #
+    # @note When making an API call, you may pass SendOTPMessageRequestParameters
+    #   data as a hash:
+    #
+    #       {
+    #         allowed_attempts: 1,
+    #         brand_name: "__string", # required
+    #         channel: "__string", # required
+    #         code_length: 1,
+    #         destination_identity: "__string", # required
+    #         entity_id: "__string",
+    #         language: "__string",
+    #         origination_identity: "__string", # required
+    #         reference_id: "__string", # required
+    #         template_id: "__string",
+    #         validity_period: 1,
+    #       }
+    #
+    # @!attribute [rw] allowed_attempts
+    #   The attempts allowed to validate an OTP.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] brand_name
+    #   The brand name that will be substituted into the OTP message body.
+    #   Should be owned by calling AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel
+    #   Channel type for the OTP message. Supported values: \[SMS\].
+    #   @return [String]
+    #
+    # @!attribute [rw] code_length
+    #   The number of characters in the generated OTP.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_identity
+    #   The destination identity to send OTP to.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   A unique Entity ID received from DLT after entity registration is
+    #   approved.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language to be used for the outgoing message body containing the
+    #   OTP.
+    #   @return [String]
+    #
+    # @!attribute [rw] origination_identity
+    #   The origination identity used to send OTP from.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_id
+    #   Developer-specified reference identifier. Required to match during
+    #   OTP verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   A unique Template ID received from DLT after entity registration is
+    #   approved.
+    #   @return [String]
+    #
+    # @!attribute [rw] validity_period
+    #   The time in minutes before the OTP is no longer valid.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendOTPMessageRequestParameters AWS API Documentation
+    #
+    class SendOTPMessageRequestParameters < Struct.new(
+      :allowed_attempts,
+      :brand_name,
+      :channel,
+      :code_length,
+      :destination_identity,
+      :entity_id,
+      :language,
+      :origination_identity,
+      :reference_id,
+      :template_id,
+      :validity_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_response
+    #   Provides information about the results of a request to send a
+    #   message to an endpoint address.
+    #   @return [Types::MessageResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendOTPMessageResponse AWS API Documentation
+    #
+    class SendOTPMessageResponse < Struct.new(
+      :message_response)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the configuration and other settings for a message to send
     # to all the endpoints that are associated with a list of users.
     #
@@ -19857,6 +19992,72 @@ module Aws::Pinpoint
     #
     class UpdateVoiceTemplateResponse < Struct.new(
       :message_body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Verify OTP Message Response.
+    #
+    # @!attribute [rw] valid
+    #   Specifies whether the OTP is valid or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VerificationResponse AWS API Documentation
+    #
+    class VerificationResponse < Struct.new(
+      :valid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] verify_otp_message_request_parameters
+    #   Verify OTP message request.
+    #   @return [Types::VerifyOTPMessageRequestParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VerifyOTPMessageRequest AWS API Documentation
+    #
+    class VerifyOTPMessageRequest < Struct.new(
+      :application_id,
+      :verify_otp_message_request_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Verify OTP message request.
+    #
+    # @!attribute [rw] destination_identity
+    #   The destination identity to send OTP to.
+    #   @return [String]
+    #
+    # @!attribute [rw] otp
+    #   The OTP the end user provided for verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_id
+    #   The reference identifier provided when the OTP was previously sent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VerifyOTPMessageRequestParameters AWS API Documentation
+    #
+    class VerifyOTPMessageRequestParameters < Struct.new(
+      :destination_identity,
+      :otp,
+      :reference_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] verification_response
+    #   Verify OTP Message Response.
+    #   @return [Types::VerificationResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VerifyOTPMessageResponse AWS API Documentation
+    #
+    class VerifyOTPMessageResponse < Struct.new(
+      :verification_response)
       SENSITIVE = []
       include Aws::Structure
     end

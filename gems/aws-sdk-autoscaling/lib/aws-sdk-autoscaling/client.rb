@@ -410,6 +410,9 @@ module Aws::AutoScaling
     # DescribeLoadBalancerTargetGroups API. To detach the target group from
     # the Auto Scaling group, call the DetachLoadBalancerTargetGroups API.
     #
+    # This operation is additive and does not detach existing target groups
+    # or Classic Load Balancers from the Auto Scaling group.
+    #
     # For more information, see [Elastic Load Balancing and Amazon EC2 Auto
     # Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
@@ -472,6 +475,9 @@ module Aws::AutoScaling
     # To describe the load balancers for an Auto Scaling group, call the
     # DescribeLoadBalancers API. To detach the load balancer from the Auto
     # Scaling group, call the DetachLoadBalancers API.
+    #
+    # This operation is additive and does not detach existing Classic Load
+    # Balancers or target groups from the Auto Scaling group.
     #
     # For more information, see [Elastic Load Balancing and Amazon EC2 Auto
     # Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
@@ -659,9 +665,9 @@ module Aws::AutoScaling
     # This step is a part of the procedure for adding a lifecycle hook to an
     # Auto Scaling group:
     #
-    # 1.  (Optional) Create a Lambda function and a rule that allows
-    #     CloudWatch Events to invoke your Lambda function when Amazon EC2
-    #     Auto Scaling launches or terminates instances.
+    # 1.  (Optional) Create a Lambda function and a rule that allows Amazon
+    #     EventBridge to invoke your Lambda function when Amazon EC2 Auto
+    #     Scaling launches or terminates instances.
     #
     # 2.  (Optional) Create a notification target and an IAM role. The
     #     target can be either an Amazon SQS queue or an Amazon SNS topic.
@@ -674,8 +680,8 @@ module Aws::AutoScaling
     # 4.  If you need more time, record the lifecycle action heartbeat to
     #     keep the instance in a pending state.
     #
-    # 5.  **If you finish before the timeout period ends, complete the
-    #     lifecycle action.**
+    # 5.  **If you finish before the timeout period ends, send a callback by
+    #     using the CompleteLifecycleAction API call.**
     #
     # For more information, see [Amazon EC2 Auto Scaling lifecycle hooks][1]
     # in the *Amazon EC2 Auto Scaling User Guide*.
@@ -807,7 +813,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
     #
     # @option params [String] :instance_id
     #   The ID of the instance used to base the launch configuration on. If
@@ -898,10 +904,9 @@ module Aws::AutoScaling
     # @option params [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service. During this time, any health check failures for the
-    #   instance are ignored. The default value is `0`. For more information,
-    #   see [Health check grace period][1] in the *Amazon EC2 Auto Scaling
-    #   User Guide*.
+    #   into service and marking it unhealthy due to a failed health check.
+    #   The default value is `0`. For more information, see [Health check
+    #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Conditional: Required if you are adding an `ELB` health check.
     #
@@ -946,12 +951,12 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Amazon EC2 Auto Scaling when scaling in. For more
     #   information about preventing instances from terminating on scale in,
-    #   see [Instance scale-in protection][1] in the *Amazon EC2 Auto Scaling
-    #   User Guide*.
+    #   see [Using instance scale-in protection][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
     #
     # @option params [Boolean] :capacity_rebalance
     #   Indicates whether Capacity Rebalancing is enabled. Otherwise, Capacity
@@ -964,7 +969,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html
     #
     # @option params [Array<Types::LifecycleHookSpecification>] :lifecycle_hook_specification_list
     #   One or more lifecycle hooks for the group, which specify actions to
@@ -1782,8 +1787,7 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [required, String] :topic_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
-    #   Service (Amazon SNS) topic.
+    #   The Amazon Resource Name (ARN) of the Amazon SNS topic.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4571,16 +4575,16 @@ module Aws::AutoScaling
     # Creates or updates a lifecycle hook for the specified Auto Scaling
     # group.
     #
-    # A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on
-    # an instance when the instance launches (before it is put into service)
-    # or as the instance terminates (before it is fully terminated).
+    # A lifecycle hook enables an Auto Scaling group to be aware of events
+    # in the Auto Scaling instance lifecycle, and then perform a custom
+    # action when the corresponding lifecycle event occurs.
     #
     # This step is a part of the procedure for adding a lifecycle hook to an
     # Auto Scaling group:
     #
-    # 1.  (Optional) Create a Lambda function and a rule that allows
-    #     CloudWatch Events to invoke your Lambda function when Amazon EC2
-    #     Auto Scaling launches or terminates instances.
+    # 1.  (Optional) Create a Lambda function and a rule that allows Amazon
+    #     EventBridge to invoke your Lambda function when Amazon EC2 Auto
+    #     Scaling launches or terminates instances.
     #
     # 2.  (Optional) Create a notification target and an IAM role. The
     #     target can be either an Amazon SQS queue or an Amazon SNS topic.
@@ -4594,8 +4598,8 @@ module Aws::AutoScaling
     #     keep the instance in a pending state using the
     #     RecordLifecycleActionHeartbeat API call.
     #
-    # 5.  If you finish before the timeout period ends, complete the
-    #     lifecycle action using the CompleteLifecycleAction API call.
+    # 5.  If you finish before the timeout period ends, send a callback by
+    #     using the CompleteLifecycleAction API call.
     #
     # For more information, see [Amazon EC2 Auto Scaling lifecycle hooks][1]
     # in the *Amazon EC2 Auto Scaling User Guide*.
@@ -4732,8 +4736,7 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [required, String] :topic_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
-    #   Service (Amazon SNS) topic.
+    #   The Amazon Resource Name (ARN) of the Amazon SNS topic.
     #
     # @option params [required, Array<String>] :notification_types
     #   The type of event that causes the notification to be sent. To query
@@ -4899,7 +4902,7 @@ module Aws::AutoScaling
     #
     # @option params [Types::TargetTrackingConfiguration] :target_tracking_configuration
     #   A target tracking scaling policy. Provides support for predefined or
-    #   customized metrics.
+    #   custom metrics.
     #
     #   The following predefined metrics are available:
     #
@@ -4935,10 +4938,10 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html
     #
     # @option params [Types::PredictiveScalingConfiguration] :predictive_scaling_configuration
-    #   A predictive scaling policy. Provides support for only predefined
-    #   metrics.
+    #   A predictive scaling policy. Provides support for predefined and
+    #   custom metrics.
     #
-    #   Predictive scaling works with CPU utilization, network in/out, and the
+    #   Predefined metrics include CPU utilization, network in/out, and the
     #   Application Load Balancer request count.
     #
     #   For more information, see [PredictiveScalingConfiguration][1] in the
@@ -5358,9 +5361,9 @@ module Aws::AutoScaling
     # This step is a part of the procedure for adding a lifecycle hook to an
     # Auto Scaling group:
     #
-    # 1.  (Optional) Create a Lambda function and a rule that allows
-    #     CloudWatch Events to invoke your Lambda function when Amazon EC2
-    #     Auto Scaling launches or terminates instances.
+    # 1.  (Optional) Create a Lambda function and a rule that allows Amazon
+    #     EventBridge to invoke your Lambda function when Amazon EC2 Auto
+    #     Scaling launches or terminates instances.
     #
     # 2.  (Optional) Create a notification target and an IAM role. The
     #     target can be either an Amazon SQS queue or an Amazon SNS topic.
@@ -5373,8 +5376,8 @@ module Aws::AutoScaling
     # 4.  **If you need more time, record the lifecycle action heartbeat to
     #     keep the instance in a pending state.**
     #
-    # 5.  If you finish before the timeout period ends, complete the
-    #     lifecycle action.
+    # 5.  If you finish before the timeout period ends, send a callback by
+    #     using the CompleteLifecycleAction API call.
     #
     # For more information, see [Amazon EC2 Auto Scaling lifecycle hooks][1]
     # in the *Amazon EC2 Auto Scaling User Guide*.
@@ -5619,7 +5622,7 @@ module Aws::AutoScaling
     # This operation cannot be called on instances in a warm pool.
     #
     # For more information about preventing instances that are part of an
-    # Auto Scaling group from terminating on scale in, see [Instance
+    # Auto Scaling group from terminating on scale in, see [Using instance
     # scale-in protection][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     # If you exceed your maximum limit of instance IDs, which is 50 per Auto
@@ -5627,7 +5630,7 @@ module Aws::AutoScaling
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
     #
     # @option params [required, Array<String>] :instance_ids
     #   One or more instance IDs. You can specify up to 50 instances.
@@ -6092,7 +6095,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
     #
     # @option params [Integer] :min_size
     #   The minimum size of the Auto Scaling group.
@@ -6140,9 +6143,9 @@ module Aws::AutoScaling
     # @option params [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service. The default value is `0`. For more information, see
-    #   [Health check grace period][1] in the *Amazon EC2 Auto Scaling User
-    #   Guide*.
+    #   into service and marking it unhealthy due to a failed health check.
+    #   The default value is `0`. For more information, see [Health check
+    #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Conditional: Required if you are adding an `ELB` health check.
     #
@@ -6183,12 +6186,12 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Amazon EC2 Auto Scaling when scaling in. For more
     #   information about preventing instances from terminating on scale in,
-    #   see [Instance scale-in protection][1] in the *Amazon EC2 Auto Scaling
-    #   User Guide*.
+    #   see [Using instance scale-in protection][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
     #
     # @option params [String] :service_linked_role_arn
     #   The Amazon Resource Name (ARN) of the service-linked role that the
@@ -6219,7 +6222,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html
     #
     # @option params [String] :context
     #   Reserved.
@@ -6396,7 +6399,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

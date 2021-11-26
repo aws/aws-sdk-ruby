@@ -272,6 +272,10 @@ module Aws::Mgn
     #   Request to query data replication lag durating.
     #   @return [String]
     #
+    # @!attribute [rw] last_snapshot_date_time
+    #   Request to query data replication last snapshot time.
+    #   @return [String]
+    #
     # @!attribute [rw] replicated_disks
     #   Request to query disks replicated.
     #   @return [Array<Types::DataReplicationInfoReplicatedDisk>]
@@ -284,6 +288,7 @@ module Aws::Mgn
       :data_replication_state,
       :eta_date_time,
       :lag_duration,
+      :last_snapshot_date_time,
       :replicated_disks)
       SENSITIVE = []
       include Aws::Structure
@@ -435,6 +440,25 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteSourceServerResponse AWS API Documentation
     #
     class DeleteSourceServerResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteVcenterClientRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vcenter_client_id: "VcenterClientID", # required
+    #       }
+    #
+    # @!attribute [rw] vcenter_client_id
+    #   ID of resource to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteVcenterClientRequest AWS API Documentation
+    #
+    class DeleteVcenterClientRequest < Struct.new(
+      :vcenter_client_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DescribeJobLogItemsRequest
     #   data as a hash:
@@ -627,6 +651,8 @@ module Aws::Mgn
     #       {
     #         filters: { # required
     #           is_archived: false,
+    #           life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED
+    #           replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
     #           source_server_i_ds: ["SourceServerID"],
     #         },
     #         max_results: 1,
@@ -662,12 +688,22 @@ module Aws::Mgn
     #
     #       {
     #         is_archived: false,
+    #         life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED
+    #         replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
     #         source_server_i_ds: ["SourceServerID"],
     #       }
     #
     # @!attribute [rw] is_archived
     #   Request to filter Source Servers list by archived.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] life_cycle_states
+    #   Request to filter Source Servers list by life cycle states.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] replication_types
+    #   Request to filter Source Servers list by replication type.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] source_server_i_ds
     #   Request to filter Source Servers list by Source Server ID.
@@ -677,6 +713,8 @@ module Aws::Mgn
     #
     class DescribeSourceServersRequestFilters < Struct.new(
       :is_archived,
+      :life_cycle_states,
+      :replication_types,
       :source_server_i_ds)
       SENSITIVE = []
       include Aws::Structure
@@ -693,6 +731,48 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeSourceServersResponse AWS API Documentation
     #
     class DescribeSourceServersResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeVcenterClientsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   Maximum results to be returned in DescribeVcenterClients.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Next pagination token to be provided for DescribeVcenterClients.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeVcenterClientsRequest AWS API Documentation
+    #
+    class DescribeVcenterClientsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   List of items returned by DescribeVcenterClients.
+    #   @return [Array<Types::VcenterClient>]
+    #
+    # @!attribute [rw] next_token
+    #   Next pagination token returned from DescribeVcenterClients.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeVcenterClientsResponse AWS API Documentation
+    #
+    class DescribeVcenterClientsResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -808,6 +888,10 @@ module Aws::Mgn
     #   Hostname identification hint.
     #   @return [String]
     #
+    # @!attribute [rw] vm_path
+    #   vCenter VM path identification hint.
+    #   @return [String]
+    #
     # @!attribute [rw] vm_ware_uuid
     #   vmWare UUID identification hint.
     #   @return [String]
@@ -818,6 +902,7 @@ module Aws::Mgn
       :aws_instance_id,
       :fqdn,
       :hostname,
+      :vm_path,
       :vm_ware_uuid)
       SENSITIVE = []
       include Aws::Structure
@@ -1598,6 +1683,44 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # The request could not be completed because its exceeded the service
+    # quota.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   Exceeded the service quota code.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Exceeded the service quota resource Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Exceeded the service quota resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   Exceeded the service quota service code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :code,
+      :message,
+      :quota_code,
+      :resource_id,
+      :resource_type,
+      :service_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Source server properties.
     #
     # @!attribute [rw] cpus
@@ -1667,6 +1790,10 @@ module Aws::Mgn
     #   Source server lifecycle state.
     #   @return [Types::LifeCycle]
     #
+    # @!attribute [rw] replication_type
+    #   Source server replication type.
+    #   @return [String]
+    #
     # @!attribute [rw] source_properties
     #   Source server properties.
     #   @return [Types::SourceProperties]
@@ -1679,6 +1806,10 @@ module Aws::Mgn
     #   Source server Tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] vcenter_client_id
+    #   Source server vCenter client id.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/SourceServer AWS API Documentation
     #
     class SourceServer < Struct.new(
@@ -1687,9 +1818,11 @@ module Aws::Mgn
       :is_archived,
       :launched_instance,
       :life_cycle,
+      :replication_type,
       :source_properties,
       :source_server_id,
-      :tags)
+      :tags,
+      :vcenter_client_id)
       SENSITIVE = [:tags]
       include Aws::Structure
     end
@@ -1729,6 +1862,25 @@ module Aws::Mgn
     #
     class StartCutoverResponse < Struct.new(
       :job)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartReplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_server_id: "SourceServerID", # required
+    #       }
+    #
+    # @!attribute [rw] source_server_id
+    #   ID of source server on which to start replication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartReplicationRequest AWS API Documentation
+    #
+    class StartReplicationRequest < Struct.new(
+      :source_server_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2190,6 +2342,31 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateSourceServerReplicationTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         replication_type: "AGENT_BASED", # required, accepts AGENT_BASED, SNAPSHOT_SHIPPING
+    #         source_server_id: "SourceServerID", # required
+    #       }
+    #
+    # @!attribute [rw] replication_type
+    #   Replication type to which to update source server.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_server_id
+    #   ID of source server on which to update replication type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateSourceServerReplicationTypeRequest AWS API Documentation
+    #
+    class UpdateSourceServerReplicationTypeRequest < Struct.new(
+      :replication_type,
+      :source_server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Validate exception.
     #
     # @!attribute [rw] code
@@ -2233,6 +2410,55 @@ module Aws::Mgn
       :message,
       :name)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # vCenter client.
+    #
+    # @!attribute [rw] arn
+    #   Arn of vCenter client.
+    #   @return [String]
+    #
+    # @!attribute [rw] datacenter_name
+    #   Datacenter name of vCenter client.
+    #   @return [String]
+    #
+    # @!attribute [rw] hostname
+    #   Hostname of vCenter client .
+    #   @return [String]
+    #
+    # @!attribute [rw] last_seen_datetime
+    #   Last seen time of vCenter client.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_server_tags
+    #   Tags for Source Server of vCenter client.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   Tags for vCenter client.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vcenter_client_id
+    #   ID of vCenter client.
+    #   @return [String]
+    #
+    # @!attribute [rw] vcenter_uuid
+    #   Vcenter UUID of vCenter client.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/VcenterClient AWS API Documentation
+    #
+    class VcenterClient < Struct.new(
+      :arn,
+      :datacenter_name,
+      :hostname,
+      :last_seen_datetime,
+      :source_server_tags,
+      :tags,
+      :vcenter_client_id,
+      :vcenter_uuid)
+      SENSITIVE = [:source_server_tags, :tags]
       include Aws::Structure
     end
 

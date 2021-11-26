@@ -8640,6 +8640,63 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Send an OTP message
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, Types::SendOTPMessageRequestParameters] :send_otp_message_request_parameters
+    #   Send OTP message request parameters.
+    #
+    # @return [Types::SendOTPMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendOTPMessageResponse#message_response #message_response} => Types::MessageResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_otp_message({
+    #     application_id: "__string", # required
+    #     send_otp_message_request_parameters: { # required
+    #       allowed_attempts: 1,
+    #       brand_name: "__string", # required
+    #       channel: "__string", # required
+    #       code_length: 1,
+    #       destination_identity: "__string", # required
+    #       entity_id: "__string",
+    #       language: "__string",
+    #       origination_identity: "__string", # required
+    #       reference_id: "__string", # required
+    #       template_id: "__string",
+    #       validity_period: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_response.application_id #=> String
+    #   resp.message_response.endpoint_result #=> Hash
+    #   resp.message_response.endpoint_result["__string"].address #=> String
+    #   resp.message_response.endpoint_result["__string"].delivery_status #=> String, one of "SUCCESSFUL", "THROTTLED", "TEMPORARY_FAILURE", "PERMANENT_FAILURE", "UNKNOWN_FAILURE", "OPT_OUT", "DUPLICATE"
+    #   resp.message_response.endpoint_result["__string"].message_id #=> String
+    #   resp.message_response.endpoint_result["__string"].status_code #=> Integer
+    #   resp.message_response.endpoint_result["__string"].status_message #=> String
+    #   resp.message_response.endpoint_result["__string"].updated_token #=> String
+    #   resp.message_response.request_id #=> String
+    #   resp.message_response.result #=> Hash
+    #   resp.message_response.result["__string"].delivery_status #=> String, one of "SUCCESSFUL", "THROTTLED", "TEMPORARY_FAILURE", "PERMANENT_FAILURE", "UNKNOWN_FAILURE", "OPT_OUT", "DUPLICATE"
+    #   resp.message_response.result["__string"].message_id #=> String
+    #   resp.message_response.result["__string"].status_code #=> Integer
+    #   resp.message_response.result["__string"].status_message #=> String
+    #   resp.message_response.result["__string"].updated_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendOTPMessage AWS API Documentation
+    #
+    # @overload send_otp_message(params = {})
+    # @param [Hash] params ({})
+    def send_otp_message(params = {}, options = {})
+      req = build_request(:send_otp_message, params)
+      req.send_request(options)
+    end
+
     # Creates and sends a message to a list of users.
     #
     # @option params [required, String] :application_id
@@ -11945,7 +12002,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

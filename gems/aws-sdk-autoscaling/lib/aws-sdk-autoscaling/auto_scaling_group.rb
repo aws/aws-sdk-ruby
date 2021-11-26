@@ -120,7 +120,7 @@ module Aws::AutoScaling
 
     # The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     # before checking the health status of an EC2 instance that has come
-    # into service.
+    # into service and marking it unhealthy due to a failed health check.
     # @return [Integer]
     def health_check_grace_period
       data[:health_check_grace_period]
@@ -848,7 +848,7 @@ module Aws::AutoScaling
     #   `StepScaling`.
     # @option options [Types::TargetTrackingConfiguration] :target_tracking_configuration
     #   A target tracking scaling policy. Provides support for predefined or
-    #   customized metrics.
+    #   custom metrics.
     #
     #   The following predefined metrics are available:
     #
@@ -882,10 +882,10 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html
     # @option options [Types::PredictiveScalingConfiguration] :predictive_scaling_configuration
-    #   A predictive scaling policy. Provides support for only predefined
-    #   metrics.
+    #   A predictive scaling policy. Provides support for predefined and
+    #   custom metrics.
     #
-    #   Predictive scaling works with CPU utilization, network in/out, and the
+    #   Predefined metrics include CPU utilization, network in/out, and the
     #   Application Load Balancer request count.
     #
     #   For more information, see [PredictiveScalingConfiguration][1] in the
@@ -1194,7 +1194,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
     # @option options [Integer] :min_size
     #   The minimum size of the Auto Scaling group.
     # @option options [Integer] :max_size
@@ -1235,9 +1235,9 @@ module Aws::AutoScaling
     # @option options [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service. The default value is `0`. For more information, see
-    #   [Health check grace period][1] in the *Amazon EC2 Auto Scaling User
-    #   Guide*.
+    #   into service and marking it unhealthy due to a failed health check.
+    #   The default value is `0`. For more information, see [Health check
+    #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Conditional: Required if you are adding an `ELB` health check.
     #
@@ -1274,12 +1274,12 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Amazon EC2 Auto Scaling when scaling in. For more
     #   information about preventing instances from terminating on scale in,
-    #   see [Instance scale-in protection][1] in the *Amazon EC2 Auto Scaling
-    #   User Guide*.
+    #   see [Using instance scale-in protection][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
     # @option options [String] :service_linked_role_arn
     #   The Amazon Resource Name (ARN) of the service-linked role that the
     #   Auto Scaling group uses to call other Amazon Web Services on your
@@ -1307,7 +1307,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html
     # @option options [String] :context
     #   Reserved.
     # @option options [String] :desired_capacity_type

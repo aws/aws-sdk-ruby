@@ -10,10 +10,10 @@
 module Aws::IoTDeviceAdvisor
   module Types
 
-    # Sends Conflict Exception.
+    # Sends a Conflict Exception.
     #
     # @!attribute [rw] message
-    #   Sends Conflict Exception message.
+    #   Sends a Conflict Exception message.
     #   @return [String]
     #
     class ConflictException < Struct.new(
@@ -104,8 +104,8 @@ module Aws::IoTDeviceAdvisor
 
     class DeleteSuiteDefinitionResponse < Aws::EmptyStructure; end
 
-    # Information of a test device. Required to provide either a thing ARN
-    # or a certificate ARN.
+    # Information of a test device. A thing ARN or a certificate ARN is
+    # required.
     #
     # @note When making an API call, you may pass DeviceUnderTest
     #   data as a hash:
@@ -139,9 +139,11 @@ module Aws::IoTDeviceAdvisor
     #       }
     #
     # @!attribute [rw] thing_arn
+    #   The thing ARN of the device. This is an optional parameter.
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
+    #   The certificate ARN of the device. This is an optional parameter.
     #   @return [String]
     #
     class GetEndpointRequest < Struct.new(
@@ -152,6 +154,7 @@ module Aws::IoTDeviceAdvisor
     end
 
     # @!attribute [rw] endpoint
+    #   The response of an Device Advisor endpoint.
     #   @return [String]
     #
     class GetEndpointResponse < Struct.new(
@@ -310,7 +313,7 @@ module Aws::IoTDeviceAdvisor
     #   @return [Types::TestResult]
     #
     # @!attribute [rw] start_time
-    #   Date (in Unix epoch time) when the test suite run was started.
+    #   Date (in Unix epoch time) when the test suite run started.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
@@ -367,10 +370,10 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # Sends Internal Failure Exception.
+    # Sends an Internal Failure exception.
     #
     # @!attribute [rw] message
-    #   Sends Internal Failure Exception message.
+    #   Sends an Internal Failure Exception message.
     #   @return [String]
     #
     class InternalServerException < Struct.new(
@@ -434,7 +437,7 @@ module Aws::IoTDeviceAdvisor
     #   @return [String]
     #
     # @!attribute [rw] suite_definition_version
-    #   Must be passed along with suiteDefinitionId. Lists the test suite
+    #   Must be passed along with `suiteDefinitionId`. Lists the test suite
     #   runs of the specified test suite based on suite definition version.
     #   @return [String]
     #
@@ -498,10 +501,10 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # Sends Resource Not Found Exception.
+    # Sends a Resource Not Found exception.
     #
     # @!attribute [rw] message
-    #   Sends Resource Not Found Exception message.
+    #   Sends a Resource Not Found Exception message.
     #   @return [String]
     #
     class ResourceNotFoundException < Struct.new(
@@ -634,7 +637,7 @@ module Aws::IoTDeviceAdvisor
     #   @return [String]
     #
     # @!attribute [rw] device_permission_role_arn
-    #   Gets device permission ARN.
+    #   Gets the device permission ARN.
     #   @return [String]
     #
     class SuiteDefinitionConfiguration < Struct.new(
@@ -658,7 +661,7 @@ module Aws::IoTDeviceAdvisor
     #   @return [String]
     #
     # @!attribute [rw] default_devices
-    #   Specifies the devices under test for the test suite.
+    #   Specifies the devices that are under test for the test suite.
     #   @return [Array<Types::DeviceUnderTest>]
     #
     # @!attribute [rw] intended_for_qualification
@@ -702,6 +705,7 @@ module Aws::IoTDeviceAdvisor
     #   @return [Array<String>]
     #
     # @!attribute [rw] parallel_run
+    #   TRUE if multiple test suites run in parallel.
     #   @return [Boolean]
     #
     class SuiteRunConfiguration < Struct.new(
@@ -802,22 +806,22 @@ module Aws::IoTDeviceAdvisor
 
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # Provides test case run.
+    # Provides the test case run.
     #
     # @!attribute [rw] test_case_run_id
-    #   Provides test case run ID.
+    #   Provides the test case run ID.
     #   @return [String]
     #
     # @!attribute [rw] test_case_definition_id
-    #   Provides test case run definition ID.
+    #   Provides the test case run definition ID.
     #   @return [String]
     #
     # @!attribute [rw] test_case_definition_name
-    #   Provides test case run definition Name.
+    #   Provides the test case run definition name.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Provides test case run status.
+    #   Provides the test case run status. Status is one of the following:
     #
     #   * `PASS`\: Test passed.
     #
@@ -825,7 +829,7 @@ module Aws::IoTDeviceAdvisor
     #
     #   * `PENDING`\: Test has not started running but is scheduled.
     #
-    #   * `RUNNING`\: Test is running
+    #   * `RUNNING`\: Test is running.
     #
     #   * `STOPPING`\: Test is performing cleanup steps. You will see this
     #     status only if you stop a suite run.
@@ -848,7 +852,7 @@ module Aws::IoTDeviceAdvisor
     #   @return [Time]
     #
     # @!attribute [rw] log_url
-    #   Provides test case run log Url.
+    #   Provides test case run log URL.
     #   @return [String]
     #
     # @!attribute [rw] warnings
@@ -980,10 +984,10 @@ module Aws::IoTDeviceAdvisor
       include Aws::Structure
     end
 
-    # Sends invalid request exception.
+    # Sends a validation exception.
     #
     # @!attribute [rw] message
-    #   Sends invalid request exception message.
+    #   Sends a Validation Exception message.
     #   @return [String]
     #
     class ValidationException < Struct.new(

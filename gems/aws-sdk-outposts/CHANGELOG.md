@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-11-26)
+------------------
+
+* Feature - This release adds new APIs for working with Outpost sites and orders.
+
 1.23.0 (2021-11-04)
 ------------------
 

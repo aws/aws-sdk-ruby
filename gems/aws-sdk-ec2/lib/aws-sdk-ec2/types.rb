@@ -10050,6 +10050,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] core_network_arn
+    #   The Amazon Resource Name (ARN) of the core network.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteRequest AWS API Documentation
@@ -14545,6 +14546,8 @@ module Aws::EC2
     #   If you omit this parameter, we delete all user-defined tags for the
     #   specified resources. We do not delete Amazon Web Services-generated
     #   tags (tags that have the `aws:` prefix).
+    #
+    #   Constraints: Up to 1000 tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTagsRequest AWS API Documentation
@@ -50467,6 +50470,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] core_network_arn
+    #   The Amazon Resource Name (ARN) of the core network.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteRequest AWS API Documentation
@@ -53561,6 +53565,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] core_network_arn
+    #   The Amazon Resource Name (ARN) of the core network.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Route AWS API Documentation

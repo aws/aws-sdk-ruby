@@ -283,6 +283,7 @@ module Aws::EC2
     # @option options [String] :vpc_peering_connection_id
     #   The ID of a VPC peering connection.
     # @option options [String] :core_network_arn
+    #   The Amazon Resource Name (ARN) of the core network.
     # @return [Route]
     def create_route(options = {})
       options = options.merge(route_table_id: @id)
@@ -358,6 +359,8 @@ module Aws::EC2
     #   If you omit this parameter, we delete all user-defined tags for the
     #   specified resources. We do not delete Amazon Web Services-generated
     #   tags (tags that have the `aws:` prefix).
+    #
+    #   Constraints: Up to 1000 tags.
     # @return [Tag::Collection]
     def delete_tags(options = {})
       batch = []

@@ -355,9 +355,11 @@ module Aws::Mgn
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -371,16 +373,17 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED"
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.eta_date_time #=> String
     #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicated_disks #=> Array
     #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].device_name #=> String
@@ -403,7 +406,8 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
     #   resp.source_properties.cpus[0].model_name #=> String
@@ -413,6 +417,7 @@ module Aws::Mgn
     #   resp.source_properties.identification_hints.aws_instance_id #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
     #   resp.source_properties.last_updated_date_time #=> String
     #   resp.source_properties.network_interfaces #=> Array
@@ -426,6 +431,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ChangeServerLifeCycleState AWS API Documentation
     #
@@ -627,6 +633,28 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Deletes a single vCenter client by ID.
+    #
+    # @option params [required, String] :vcenter_client_id
+    #   ID of resource to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vcenter_client({
+    #     vcenter_client_id: "VcenterClientID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DeleteVcenterClient AWS API Documentation
+    #
+    # @overload delete_vcenter_client(params = {})
+    # @param [Hash] params ({})
+    def delete_vcenter_client(params = {}, options = {})
+      req = build_request(:delete_vcenter_client, params)
+      req.send_request(options)
+    end
+
     # Retrieves detailed Job log with paging.
     #
     # @option params [required, String] :job_id
@@ -818,6 +846,8 @@ module Aws::Mgn
     #   resp = client.describe_source_servers({
     #     filters: { # required
     #       is_archived: false,
+    #       life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED
+    #       replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
     #       source_server_i_ds: ["SourceServerID"],
     #     },
     #     max_results: 1,
@@ -828,16 +858,17 @@ module Aws::Mgn
     #
     #   resp.items #=> Array
     #   resp.items[0].arn #=> String
-    #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
+    #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.items[0].data_replication_info.data_replication_error.raw_error #=> String
     #   resp.items[0].data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.items[0].data_replication_info.data_replication_initiation.start_date_time #=> String
     #   resp.items[0].data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.items[0].data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.items[0].data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.items[0].data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED"
+    #   resp.items[0].data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.items[0].data_replication_info.eta_date_time #=> String
     #   resp.items[0].data_replication_info.lag_duration #=> String
+    #   resp.items[0].data_replication_info.last_snapshot_date_time #=> String
     #   resp.items[0].data_replication_info.replicated_disks #=> Array
     #   resp.items[0].data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].device_name #=> String
@@ -860,7 +891,8 @@ module Aws::Mgn
     #   resp.items[0].life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.items[0].life_cycle.last_test.initiated.job_id #=> String
     #   resp.items[0].life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.items[0].life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED"
+    #   resp.items[0].life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.items[0].replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.items[0].source_properties.cpus #=> Array
     #   resp.items[0].source_properties.cpus[0].cores #=> Integer
     #   resp.items[0].source_properties.cpus[0].model_name #=> String
@@ -870,6 +902,7 @@ module Aws::Mgn
     #   resp.items[0].source_properties.identification_hints.aws_instance_id #=> String
     #   resp.items[0].source_properties.identification_hints.fqdn #=> String
     #   resp.items[0].source_properties.identification_hints.hostname #=> String
+    #   resp.items[0].source_properties.identification_hints.vm_path #=> String
     #   resp.items[0].source_properties.identification_hints.vm_ware_uuid #=> String
     #   resp.items[0].source_properties.last_updated_date_time #=> String
     #   resp.items[0].source_properties.network_interfaces #=> Array
@@ -883,6 +916,7 @@ module Aws::Mgn
     #   resp.items[0].source_server_id #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].vcenter_client_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeSourceServers AWS API Documentation
@@ -891,6 +925,52 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def describe_source_servers(params = {}, options = {})
       req = build_request(:describe_source_servers, params)
+      req.send_request(options)
+    end
+
+    # Lists all vCenter clients.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum results to be returned in DescribeVcenterClients.
+    #
+    # @option params [String] :next_token
+    #   Next pagination token to be provided for DescribeVcenterClients.
+    #
+    # @return [Types::DescribeVcenterClientsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVcenterClientsResponse#items #items} => Array&lt;Types::VcenterClient&gt;
+    #   * {Types::DescribeVcenterClientsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vcenter_clients({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].datacenter_name #=> String
+    #   resp.items[0].hostname #=> String
+    #   resp.items[0].last_seen_datetime #=> String
+    #   resp.items[0].source_server_tags #=> Hash
+    #   resp.items[0].source_server_tags["TagKey"] #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].vcenter_client_id #=> String
+    #   resp.items[0].vcenter_uuid #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeVcenterClients AWS API Documentation
+    #
+    # @overload describe_vcenter_clients(params = {})
+    # @param [Hash] params ({})
+    def describe_vcenter_clients(params = {}, options = {})
+      req = build_request(:describe_vcenter_clients, params)
       req.send_request(options)
     end
 
@@ -919,9 +999,11 @@ module Aws::Mgn
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -932,16 +1014,17 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED"
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.eta_date_time #=> String
     #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicated_disks #=> Array
     #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].device_name #=> String
@@ -964,7 +1047,8 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
     #   resp.source_properties.cpus[0].model_name #=> String
@@ -974,6 +1058,7 @@ module Aws::Mgn
     #   resp.source_properties.identification_hints.aws_instance_id #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
     #   resp.source_properties.last_updated_date_time #=> String
     #   resp.source_properties.network_interfaces #=> Array
@@ -987,6 +1072,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DisconnectFromService AWS API Documentation
     #
@@ -1021,9 +1107,11 @@ module Aws::Mgn
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1034,16 +1122,17 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED"
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.eta_date_time #=> String
     #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicated_disks #=> Array
     #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].device_name #=> String
@@ -1066,7 +1155,8 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
     #   resp.source_properties.cpus[0].model_name #=> String
@@ -1076,6 +1166,7 @@ module Aws::Mgn
     #   resp.source_properties.identification_hints.aws_instance_id #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
     #   resp.source_properties.last_updated_date_time #=> String
     #   resp.source_properties.network_interfaces #=> Array
@@ -1089,6 +1180,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/FinalizeCutover AWS API Documentation
     #
@@ -1261,9 +1353,11 @@ module Aws::Mgn
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1274,16 +1368,17 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED"
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.eta_date_time #=> String
     #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicated_disks #=> Array
     #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].device_name #=> String
@@ -1306,7 +1401,8 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
     #   resp.source_properties.cpus[0].model_name #=> String
@@ -1316,6 +1412,7 @@ module Aws::Mgn
     #   resp.source_properties.identification_hints.aws_instance_id #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
     #   resp.source_properties.last_updated_date_time #=> String
     #   resp.source_properties.network_interfaces #=> Array
@@ -1329,6 +1426,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/MarkAsArchived AWS API Documentation
     #
@@ -1354,9 +1452,11 @@ module Aws::Mgn
     #   * {Types::SourceServer#is_archived #is_archived} => Boolean
     #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
     #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#replication_type #replication_type} => String
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1367,16 +1467,17 @@ module Aws::Mgn
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
     #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
     #   resp.data_replication_info.data_replication_initiation.steps #=> Array
     #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
-    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED"
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
     #   resp.data_replication_info.eta_date_time #=> String
     #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.last_snapshot_date_time #=> String
     #   resp.data_replication_info.replicated_disks #=> Array
     #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].device_name #=> String
@@ -1399,7 +1500,8 @@ module Aws::Mgn
     #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
     #   resp.life_cycle.last_test.initiated.job_id #=> String
     #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
-    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED"
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
     #   resp.source_properties.cpus[0].model_name #=> String
@@ -1409,6 +1511,7 @@ module Aws::Mgn
     #   resp.source_properties.identification_hints.aws_instance_id #=> String
     #   resp.source_properties.identification_hints.fqdn #=> String
     #   resp.source_properties.identification_hints.hostname #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
     #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
     #   resp.source_properties.last_updated_date_time #=> String
     #   resp.source_properties.network_interfaces #=> Array
@@ -1422,6 +1525,7 @@ module Aws::Mgn
     #   resp.source_server_id #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.vcenter_client_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/RetryDataReplication AWS API Documentation
     #
@@ -1476,6 +1580,102 @@ module Aws::Mgn
     # @param [Hash] params ({})
     def start_cutover(params = {}, options = {})
       req = build_request(:start_cutover, params)
+      req.send_request(options)
+    end
+
+    # Starts replication on source server by ID.
+    #
+    # @option params [required, String] :source_server_id
+    #   ID of source server on which to start replication.
+    #
+    # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#replication_type #replication_type} => String
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_replication({
+    #     source_server_id: "SourceServerID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.steps #=> Array
+    #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
+    #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.last_snapshot_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.is_archived #=> Boolean
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.launched_instance.job_id #=> String
+    #   resp.life_cycle.added_to_service_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
+    #   resp.life_cycle.first_byte_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_seen_by_service_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.job_id #=> String
+    #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.fqdn #=> String
+    #   resp.source_properties.identification_hints.hostname #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
+    #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].ips #=> Array
+    #   resp.source_properties.network_interfaces[0].ips[0] #=> String
+    #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.ram_bytes #=> Integer
+    #   resp.source_properties.recommended_instance_type #=> String
+    #   resp.source_server_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.vcenter_client_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/StartReplication AWS API Documentation
+    #
+    # @overload start_replication(params = {})
+    # @param [Hash] params ({})
+    def start_replication(params = {}, options = {})
+      req = build_request(:start_replication, params)
       req.send_request(options)
     end
 
@@ -1954,6 +2154,106 @@ module Aws::Mgn
       req.send_request(options)
     end
 
+    # Updates source server Replication Type by ID.
+    #
+    # @option params [required, String] :replication_type
+    #   Replication type to which to update source server.
+    #
+    # @option params [required, String] :source_server_id
+    #   ID of source server on which to update replication type.
+    #
+    # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SourceServer#arn #arn} => String
+    #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
+    #   * {Types::SourceServer#is_archived #is_archived} => Boolean
+    #   * {Types::SourceServer#launched_instance #launched_instance} => Types::LaunchedInstance
+    #   * {Types::SourceServer#life_cycle #life_cycle} => Types::LifeCycle
+    #   * {Types::SourceServer#replication_type #replication_type} => String
+    #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
+    #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::SourceServer#vcenter_client_id #vcenter_client_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_source_server_replication_type({
+    #     replication_type: "AGENT_BASED", # required, accepts AGENT_BASED, SNAPSHOT_SHIPPING
+    #     source_server_id: "SourceServerID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER", "UNSUPPORTED_VM_CONFIGURATION", "LAST_SNAPSHOT_JOB_FAILED"
+    #   resp.data_replication_info.data_replication_error.raw_error #=> String
+    #   resp.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.data_replication_info.data_replication_initiation.steps #=> Array
+    #   resp.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
+    #   resp.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
+    #   resp.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED", "PENDING_SNAPSHOT_SHIPPING", "SHIPPING_SNAPSHOT"
+    #   resp.data_replication_info.eta_date_time #=> String
+    #   resp.data_replication_info.lag_duration #=> String
+    #   resp.data_replication_info.last_snapshot_date_time #=> String
+    #   resp.data_replication_info.replicated_disks #=> Array
+    #   resp.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.is_archived #=> Boolean
+    #   resp.launched_instance.ec2_instance_id #=> String
+    #   resp.launched_instance.first_boot #=> String, one of "WAITING", "SUCCEEDED", "UNKNOWN", "STOPPED"
+    #   resp.launched_instance.job_id #=> String
+    #   resp.life_cycle.added_to_service_date_time #=> String
+    #   resp.life_cycle.elapsed_replication_duration #=> String
+    #   resp.life_cycle.first_byte_date_time #=> String
+    #   resp.life_cycle.last_cutover.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_cutover.initiated.job_id #=> String
+    #   resp.life_cycle.last_cutover.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.last_seen_by_service_date_time #=> String
+    #   resp.life_cycle.last_test.finalized.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.api_call_date_time #=> String
+    #   resp.life_cycle.last_test.initiated.job_id #=> String
+    #   resp.life_cycle.last_test.reverted.api_call_date_time #=> String
+    #   resp.life_cycle.state #=> String, one of "STOPPED", "NOT_READY", "READY_FOR_TEST", "TESTING", "READY_FOR_CUTOVER", "CUTTING_OVER", "CUTOVER", "DISCONNECTED", "DISCOVERED"
+    #   resp.replication_type #=> String, one of "AGENT_BASED", "SNAPSHOT_SHIPPING"
+    #   resp.source_properties.cpus #=> Array
+    #   resp.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_properties.cpus[0].model_name #=> String
+    #   resp.source_properties.disks #=> Array
+    #   resp.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_properties.disks[0].device_name #=> String
+    #   resp.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_properties.identification_hints.fqdn #=> String
+    #   resp.source_properties.identification_hints.hostname #=> String
+    #   resp.source_properties.identification_hints.vm_path #=> String
+    #   resp.source_properties.identification_hints.vm_ware_uuid #=> String
+    #   resp.source_properties.last_updated_date_time #=> String
+    #   resp.source_properties.network_interfaces #=> Array
+    #   resp.source_properties.network_interfaces[0].ips #=> Array
+    #   resp.source_properties.network_interfaces[0].ips[0] #=> String
+    #   resp.source_properties.network_interfaces[0].is_primary #=> Boolean
+    #   resp.source_properties.network_interfaces[0].mac_address #=> String
+    #   resp.source_properties.os.full_string #=> String
+    #   resp.source_properties.ram_bytes #=> Integer
+    #   resp.source_properties.recommended_instance_type #=> String
+    #   resp.source_server_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.vcenter_client_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateSourceServerReplicationType AWS API Documentation
+    #
+    # @overload update_source_server_replication_type(params = {})
+    # @param [Hash] params ({})
+    def update_source_server_replication_type(params = {}, options = {})
+      req = build_request(:update_source_server_replication_type, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1967,7 +2267,7 @@ module Aws::Mgn
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

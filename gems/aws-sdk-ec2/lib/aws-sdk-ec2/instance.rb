@@ -838,6 +838,8 @@ module Aws::EC2
     #   If you omit this parameter, we delete all user-defined tags for the
     #   specified resources. We do not delete Amazon Web Services-generated
     #   tags (tags that have the `aws:` prefix).
+    #
+    #   Constraints: Up to 1000 tags.
     # @return [Tag::Collection]
     def delete_tags(options = {})
       batch = []
@@ -1748,6 +1750,8 @@ module Aws::EC2
       #   If you omit this parameter, we delete all user-defined tags for the
       #   specified resources. We do not delete Amazon Web Services-generated
       #   tags (tags that have the `aws:` prefix).
+      #
+      #   Constraints: Up to 1000 tags.
       # @return [void]
       def batch_delete_tags!(options = {})
         batch_enum.each do |batch|

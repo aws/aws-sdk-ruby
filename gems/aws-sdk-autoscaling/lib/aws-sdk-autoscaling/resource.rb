@@ -197,7 +197,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
     # @option options [String] :instance_id
     #   The ID of the instance used to base the launch configuration on. If
     #   specified, Amazon EC2 Auto Scaling uses the configuration values from
@@ -278,10 +278,9 @@ module Aws::AutoScaling
     # @option options [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service. During this time, any health check failures for the
-    #   instance are ignored. The default value is `0`. For more information,
-    #   see [Health check grace period][1] in the *Amazon EC2 Auto Scaling
-    #   User Guide*.
+    #   into service and marking it unhealthy due to a failed health check.
+    #   The default value is `0`. For more information, see [Health check
+    #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   Conditional: Required if you are adding an `ELB` health check.
     #
@@ -322,12 +321,12 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Amazon EC2 Auto Scaling when scaling in. For more
     #   information about preventing instances from terminating on scale in,
-    #   see [Instance scale-in protection][1] in the *Amazon EC2 Auto Scaling
-    #   User Guide*.
+    #   see [Using instance scale-in protection][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
     # @option options [Boolean] :capacity_rebalance
     #   Indicates whether Capacity Rebalancing is enabled. Otherwise, Capacity
     #   Rebalancing is disabled. When you turn on Capacity Rebalancing, Amazon
@@ -339,7 +338,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html
     # @option options [Array<Types::LifecycleHookSpecification>] :lifecycle_hook_specification_list
     #   One or more lifecycle hooks for the group, which specify actions to
     #   perform when Amazon EC2 Auto Scaling launches or terminates instances.

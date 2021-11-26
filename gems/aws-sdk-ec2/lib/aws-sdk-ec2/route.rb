@@ -137,6 +137,7 @@ module Aws::EC2
       data[:vpc_peering_connection_id]
     end
 
+    # The Amazon Resource Name (ARN) of the core network.
     # @return [String]
     def core_network_arn
       data[:core_network_arn]
@@ -355,6 +356,7 @@ module Aws::EC2
     # @option options [String] :vpc_peering_connection_id
     #   The ID of a VPC peering connection.
     # @option options [String] :core_network_arn
+    #   The Amazon Resource Name (ARN) of the core network.
     # @return [EmptyStructure]
     def replace(options = {})
       options = options.merge(

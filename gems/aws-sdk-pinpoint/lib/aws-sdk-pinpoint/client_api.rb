@@ -425,6 +425,9 @@ module Aws::Pinpoint
     SegmentsResponse = Shapes::StructureShape.new(name: 'SegmentsResponse')
     SendMessagesRequest = Shapes::StructureShape.new(name: 'SendMessagesRequest')
     SendMessagesResponse = Shapes::StructureShape.new(name: 'SendMessagesResponse')
+    SendOTPMessageRequest = Shapes::StructureShape.new(name: 'SendOTPMessageRequest')
+    SendOTPMessageRequestParameters = Shapes::StructureShape.new(name: 'SendOTPMessageRequestParameters')
+    SendOTPMessageResponse = Shapes::StructureShape.new(name: 'SendOTPMessageResponse')
     SendUsersMessageRequest = Shapes::StructureShape.new(name: 'SendUsersMessageRequest')
     SendUsersMessageResponse = Shapes::StructureShape.new(name: 'SendUsersMessageResponse')
     SendUsersMessagesRequest = Shapes::StructureShape.new(name: 'SendUsersMessagesRequest')
@@ -502,6 +505,10 @@ module Aws::Pinpoint
     UpdateVoiceChannelResponse = Shapes::StructureShape.new(name: 'UpdateVoiceChannelResponse')
     UpdateVoiceTemplateRequest = Shapes::StructureShape.new(name: 'UpdateVoiceTemplateRequest')
     UpdateVoiceTemplateResponse = Shapes::StructureShape.new(name: 'UpdateVoiceTemplateResponse')
+    VerificationResponse = Shapes::StructureShape.new(name: 'VerificationResponse')
+    VerifyOTPMessageRequest = Shapes::StructureShape.new(name: 'VerifyOTPMessageRequest')
+    VerifyOTPMessageRequestParameters = Shapes::StructureShape.new(name: 'VerifyOTPMessageRequestParameters')
+    VerifyOTPMessageResponse = Shapes::StructureShape.new(name: 'VerifyOTPMessageResponse')
     VoiceChannelRequest = Shapes::StructureShape.new(name: 'VoiceChannelRequest')
     VoiceChannelResponse = Shapes::StructureShape.new(name: 'VoiceChannelResponse')
     VoiceMessage = Shapes::StructureShape.new(name: 'VoiceMessage')
@@ -2756,6 +2763,30 @@ module Aws::Pinpoint
     SendMessagesResponse[:payload] = :message_response
     SendMessagesResponse[:payload_member] = SendMessagesResponse.member(:message_response)
 
+    SendOTPMessageRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    SendOTPMessageRequest.add_member(:send_otp_message_request_parameters, Shapes::ShapeRef.new(shape: SendOTPMessageRequestParameters, required: true, location_name: "SendOTPMessageRequestParameters"))
+    SendOTPMessageRequest.struct_class = Types::SendOTPMessageRequest
+    SendOTPMessageRequest[:payload] = :send_otp_message_request_parameters
+    SendOTPMessageRequest[:payload_member] = SendOTPMessageRequest.member(:send_otp_message_request_parameters)
+
+    SendOTPMessageRequestParameters.add_member(:allowed_attempts, Shapes::ShapeRef.new(shape: __integer, location_name: "AllowedAttempts"))
+    SendOTPMessageRequestParameters.add_member(:brand_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "BrandName"))
+    SendOTPMessageRequestParameters.add_member(:channel, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Channel"))
+    SendOTPMessageRequestParameters.add_member(:code_length, Shapes::ShapeRef.new(shape: __integer, location_name: "CodeLength"))
+    SendOTPMessageRequestParameters.add_member(:destination_identity, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "DestinationIdentity"))
+    SendOTPMessageRequestParameters.add_member(:entity_id, Shapes::ShapeRef.new(shape: __string, location_name: "EntityId"))
+    SendOTPMessageRequestParameters.add_member(:language, Shapes::ShapeRef.new(shape: __string, location_name: "Language"))
+    SendOTPMessageRequestParameters.add_member(:origination_identity, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "OriginationIdentity"))
+    SendOTPMessageRequestParameters.add_member(:reference_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ReferenceId"))
+    SendOTPMessageRequestParameters.add_member(:template_id, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateId"))
+    SendOTPMessageRequestParameters.add_member(:validity_period, Shapes::ShapeRef.new(shape: __integer, location_name: "ValidityPeriod"))
+    SendOTPMessageRequestParameters.struct_class = Types::SendOTPMessageRequestParameters
+
+    SendOTPMessageResponse.add_member(:message_response, Shapes::ShapeRef.new(shape: MessageResponse, required: true, location_name: "MessageResponse"))
+    SendOTPMessageResponse.struct_class = Types::SendOTPMessageResponse
+    SendOTPMessageResponse[:payload] = :message_response
+    SendOTPMessageResponse[:payload_member] = SendOTPMessageResponse.member(:message_response)
+
     SendUsersMessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Context"))
     SendUsersMessageRequest.add_member(:message_configuration, Shapes::ShapeRef.new(shape: DirectMessageConfiguration, required: true, location_name: "MessageConfiguration"))
     SendUsersMessageRequest.add_member(:template_configuration, Shapes::ShapeRef.new(shape: TemplateConfiguration, location_name: "TemplateConfiguration"))
@@ -3177,6 +3208,25 @@ module Aws::Pinpoint
     UpdateVoiceTemplateResponse.struct_class = Types::UpdateVoiceTemplateResponse
     UpdateVoiceTemplateResponse[:payload] = :message_body
     UpdateVoiceTemplateResponse[:payload_member] = UpdateVoiceTemplateResponse.member(:message_body)
+
+    VerificationResponse.add_member(:valid, Shapes::ShapeRef.new(shape: __boolean, location_name: "Valid"))
+    VerificationResponse.struct_class = Types::VerificationResponse
+
+    VerifyOTPMessageRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    VerifyOTPMessageRequest.add_member(:verify_otp_message_request_parameters, Shapes::ShapeRef.new(shape: VerifyOTPMessageRequestParameters, required: true, location_name: "VerifyOTPMessageRequestParameters"))
+    VerifyOTPMessageRequest.struct_class = Types::VerifyOTPMessageRequest
+    VerifyOTPMessageRequest[:payload] = :verify_otp_message_request_parameters
+    VerifyOTPMessageRequest[:payload_member] = VerifyOTPMessageRequest.member(:verify_otp_message_request_parameters)
+
+    VerifyOTPMessageRequestParameters.add_member(:destination_identity, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "DestinationIdentity"))
+    VerifyOTPMessageRequestParameters.add_member(:otp, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Otp"))
+    VerifyOTPMessageRequestParameters.add_member(:reference_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ReferenceId"))
+    VerifyOTPMessageRequestParameters.struct_class = Types::VerifyOTPMessageRequestParameters
+
+    VerifyOTPMessageResponse.add_member(:verification_response, Shapes::ShapeRef.new(shape: VerificationResponse, required: true, location_name: "VerificationResponse"))
+    VerifyOTPMessageResponse.struct_class = Types::VerifyOTPMessageResponse
+    VerifyOTPMessageResponse[:payload] = :verification_response
+    VerifyOTPMessageResponse[:payload_member] = VerifyOTPMessageResponse.member(:verification_response)
 
     VoiceChannelRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
     VoiceChannelRequest.struct_class = Types::VoiceChannelRequest
@@ -4631,6 +4681,21 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/messages"
         o.input = Shapes::ShapeRef.new(shape: SendMessagesRequest)
         o.output = Shapes::ShapeRef.new(shape: SendMessagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:send_otp_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendOTPMessage"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/apps/{application-id}/otp"
+        o.input = Shapes::ShapeRef.new(shape: SendOTPMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendOTPMessageResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)

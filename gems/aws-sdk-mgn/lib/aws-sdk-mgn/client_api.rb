@@ -41,6 +41,7 @@ module Aws::Mgn
     DeleteReplicationConfigurationTemplateResponse = Shapes::StructureShape.new(name: 'DeleteReplicationConfigurationTemplateResponse')
     DeleteSourceServerRequest = Shapes::StructureShape.new(name: 'DeleteSourceServerRequest')
     DeleteSourceServerResponse = Shapes::StructureShape.new(name: 'DeleteSourceServerResponse')
+    DeleteVcenterClientRequest = Shapes::StructureShape.new(name: 'DeleteVcenterClientRequest')
     DescribeJobLogItemsRequest = Shapes::StructureShape.new(name: 'DescribeJobLogItemsRequest')
     DescribeJobLogItemsResponse = Shapes::StructureShape.new(name: 'DescribeJobLogItemsResponse')
     DescribeJobsRequest = Shapes::StructureShape.new(name: 'DescribeJobsRequest')
@@ -53,6 +54,8 @@ module Aws::Mgn
     DescribeSourceServersRequestFilters = Shapes::StructureShape.new(name: 'DescribeSourceServersRequestFilters')
     DescribeSourceServersRequestFiltersIDs = Shapes::ListShape.new(name: 'DescribeSourceServersRequestFiltersIDs')
     DescribeSourceServersResponse = Shapes::StructureShape.new(name: 'DescribeSourceServersResponse')
+    DescribeVcenterClientsRequest = Shapes::StructureShape.new(name: 'DescribeVcenterClientsRequest')
+    DescribeVcenterClientsResponse = Shapes::StructureShape.new(name: 'DescribeVcenterClientsResponse')
     DisconnectFromServiceRequest = Shapes::StructureShape.new(name: 'DisconnectFromServiceRequest')
     Disk = Shapes::StructureShape.new(name: 'Disk')
     Disks = Shapes::ListShape.new(name: 'Disks')
@@ -94,6 +97,7 @@ module Aws::Mgn
     LifeCycleLastTestInitiated = Shapes::StructureShape.new(name: 'LifeCycleLastTestInitiated')
     LifeCycleLastTestReverted = Shapes::StructureShape.new(name: 'LifeCycleLastTestReverted')
     LifeCycleState = Shapes::StringShape.new(name: 'LifeCycleState')
+    LifeCycleStates = Shapes::ListShape.new(name: 'LifeCycleStates')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MarkAsArchivedRequest = Shapes::StructureShape.new(name: 'MarkAsArchivedRequest')
@@ -116,9 +120,12 @@ module Aws::Mgn
     ReplicationConfigurationTemplateIDs = Shapes::ListShape.new(name: 'ReplicationConfigurationTemplateIDs')
     ReplicationConfigurationTemplates = Shapes::ListShape.new(name: 'ReplicationConfigurationTemplates')
     ReplicationServersSecurityGroupsIDs = Shapes::ListShape.new(name: 'ReplicationServersSecurityGroupsIDs')
+    ReplicationType = Shapes::StringShape.new(name: 'ReplicationType')
+    ReplicationTypes = Shapes::ListShape.new(name: 'ReplicationTypes')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetryDataReplicationRequest = Shapes::StructureShape.new(name: 'RetryDataReplicationRequest')
     SecurityGroupID = Shapes::StringShape.new(name: 'SecurityGroupID')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SmallBoundedString = Shapes::StringShape.new(name: 'SmallBoundedString')
     SourceProperties = Shapes::StructureShape.new(name: 'SourceProperties')
     SourceServer = Shapes::StructureShape.new(name: 'SourceServer')
@@ -127,6 +134,7 @@ module Aws::Mgn
     StartCutoverRequest = Shapes::StructureShape.new(name: 'StartCutoverRequest')
     StartCutoverRequestSourceServerIDs = Shapes::ListShape.new(name: 'StartCutoverRequestSourceServerIDs')
     StartCutoverResponse = Shapes::StructureShape.new(name: 'StartCutoverResponse')
+    StartReplicationRequest = Shapes::StructureShape.new(name: 'StartReplicationRequest')
     StartTestRequest = Shapes::StructureShape.new(name: 'StartTestRequest')
     StartTestRequestSourceServerIDs = Shapes::ListShape.new(name: 'StartTestRequestSourceServerIDs')
     StartTestResponse = Shapes::StructureShape.new(name: 'StartTestResponse')
@@ -147,10 +155,14 @@ module Aws::Mgn
     UpdateLaunchConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateLaunchConfigurationRequest')
     UpdateReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationRequest')
     UpdateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'UpdateReplicationConfigurationTemplateRequest')
+    UpdateSourceServerReplicationTypeRequest = Shapes::StructureShape.new(name: 'UpdateSourceServerReplicationTypeRequest')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VcenterClient = Shapes::StructureShape.new(name: 'VcenterClient')
+    VcenterClientID = Shapes::StringShape.new(name: 'VcenterClientID')
+    VcenterClientList = Shapes::ListShape.new(name: 'VcenterClientList')
 
     AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
@@ -199,6 +211,7 @@ module Aws::Mgn
     DataReplicationInfo.add_member(:data_replication_state, Shapes::ShapeRef.new(shape: DataReplicationState, location_name: "dataReplicationState"))
     DataReplicationInfo.add_member(:eta_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "etaDateTime"))
     DataReplicationInfo.add_member(:lag_duration, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "lagDuration"))
+    DataReplicationInfo.add_member(:last_snapshot_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "lastSnapshotDateTime"))
     DataReplicationInfo.add_member(:replicated_disks, Shapes::ShapeRef.new(shape: DataReplicationInfoReplicatedDisks, location_name: "replicatedDisks"))
     DataReplicationInfo.struct_class = Types::DataReplicationInfo
 
@@ -236,6 +249,9 @@ module Aws::Mgn
     DeleteSourceServerRequest.struct_class = Types::DeleteSourceServerRequest
 
     DeleteSourceServerResponse.struct_class = Types::DeleteSourceServerResponse
+
+    DeleteVcenterClientRequest.add_member(:vcenter_client_id, Shapes::ShapeRef.new(shape: VcenterClientID, required: true, location_name: "vcenterClientID"))
+    DeleteVcenterClientRequest.struct_class = Types::DeleteVcenterClientRequest
 
     DescribeJobLogItemsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobID, required: true, location_name: "jobID"))
     DescribeJobLogItemsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "maxResults"))
@@ -277,6 +293,8 @@ module Aws::Mgn
     DescribeSourceServersRequest.struct_class = Types::DescribeSourceServersRequest
 
     DescribeSourceServersRequestFilters.add_member(:is_archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "isArchived"))
+    DescribeSourceServersRequestFilters.add_member(:life_cycle_states, Shapes::ShapeRef.new(shape: LifeCycleStates, location_name: "lifeCycleStates"))
+    DescribeSourceServersRequestFilters.add_member(:replication_types, Shapes::ShapeRef.new(shape: ReplicationTypes, location_name: "replicationTypes"))
     DescribeSourceServersRequestFilters.add_member(:source_server_i_ds, Shapes::ShapeRef.new(shape: DescribeSourceServersRequestFiltersIDs, location_name: "sourceServerIDs"))
     DescribeSourceServersRequestFilters.struct_class = Types::DescribeSourceServersRequestFilters
 
@@ -285,6 +303,14 @@ module Aws::Mgn
     DescribeSourceServersResponse.add_member(:items, Shapes::ShapeRef.new(shape: SourceServersList, location_name: "items"))
     DescribeSourceServersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeSourceServersResponse.struct_class = Types::DescribeSourceServersResponse
+
+    DescribeVcenterClientsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location: "querystring", location_name: "maxResults"))
+    DescribeVcenterClientsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    DescribeVcenterClientsRequest.struct_class = Types::DescribeVcenterClientsRequest
+
+    DescribeVcenterClientsResponse.add_member(:items, Shapes::ShapeRef.new(shape: VcenterClientList, location_name: "items"))
+    DescribeVcenterClientsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    DescribeVcenterClientsResponse.struct_class = Types::DescribeVcenterClientsResponse
 
     DisconnectFromServiceRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     DisconnectFromServiceRequest.struct_class = Types::DisconnectFromServiceRequest
@@ -309,6 +335,7 @@ module Aws::Mgn
     IdentificationHints.add_member(:aws_instance_id, Shapes::ShapeRef.new(shape: EC2InstanceID, location_name: "awsInstanceID"))
     IdentificationHints.add_member(:fqdn, Shapes::ShapeRef.new(shape: BoundedString, location_name: "fqdn"))
     IdentificationHints.add_member(:hostname, Shapes::ShapeRef.new(shape: BoundedString, location_name: "hostname"))
+    IdentificationHints.add_member(:vm_path, Shapes::ShapeRef.new(shape: BoundedString, location_name: "vmPath"))
     IdentificationHints.add_member(:vm_ware_uuid, Shapes::ShapeRef.new(shape: BoundedString, location_name: "vmWareUuid"))
     IdentificationHints.struct_class = Types::IdentificationHints
 
@@ -403,6 +430,8 @@ module Aws::Mgn
     LifeCycleLastTestReverted.add_member(:api_call_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "apiCallDateTime"))
     LifeCycleLastTestReverted.struct_class = Types::LifeCycleLastTestReverted
 
+    LifeCycleStates.member = Shapes::ShapeRef.new(shape: LifeCycleState)
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -476,6 +505,8 @@ module Aws::Mgn
 
     ReplicationServersSecurityGroupsIDs.member = Shapes::ShapeRef.new(shape: SecurityGroupID)
 
+    ReplicationTypes.member = Shapes::ShapeRef.new(shape: ReplicationType)
+
     ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "resourceId"))
@@ -484,6 +515,14 @@ module Aws::Mgn
 
     RetryDataReplicationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
     RetryDataReplicationRequest.struct_class = Types::RetryDataReplicationRequest
+
+    ServiceQuotaExceededException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
+    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "quotaCode"))
+    ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "resourceId"))
+    ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "resourceType"))
+    ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "serviceCode"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     SourceProperties.add_member(:cpus, Shapes::ShapeRef.new(shape: Cpus, location_name: "cpus"))
     SourceProperties.add_member(:disks, Shapes::ShapeRef.new(shape: Disks, location_name: "disks"))
@@ -500,9 +539,11 @@ module Aws::Mgn
     SourceServer.add_member(:is_archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "isArchived"))
     SourceServer.add_member(:launched_instance, Shapes::ShapeRef.new(shape: LaunchedInstance, location_name: "launchedInstance"))
     SourceServer.add_member(:life_cycle, Shapes::ShapeRef.new(shape: LifeCycle, location_name: "lifeCycle"))
+    SourceServer.add_member(:replication_type, Shapes::ShapeRef.new(shape: ReplicationType, location_name: "replicationType"))
     SourceServer.add_member(:source_properties, Shapes::ShapeRef.new(shape: SourceProperties, location_name: "sourceProperties"))
     SourceServer.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
     SourceServer.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    SourceServer.add_member(:vcenter_client_id, Shapes::ShapeRef.new(shape: VcenterClientID, location_name: "vcenterClientID"))
     SourceServer.struct_class = Types::SourceServer
 
     SourceServersList.member = Shapes::ShapeRef.new(shape: SourceServer)
@@ -515,6 +556,9 @@ module Aws::Mgn
 
     StartCutoverResponse.add_member(:job, Shapes::ShapeRef.new(shape: Job, location_name: "job"))
     StartCutoverResponse.struct_class = Types::StartCutoverResponse
+
+    StartReplicationRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    StartReplicationRequest.struct_class = Types::StartReplicationRequest
 
     StartTestRequest.add_member(:source_server_i_ds, Shapes::ShapeRef.new(shape: StartTestRequestSourceServerIDs, required: true, location_name: "sourceServerIDs"))
     StartTestRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -599,6 +643,10 @@ module Aws::Mgn
     UpdateReplicationConfigurationTemplateRequest.add_member(:use_dedicated_replication_server, Shapes::ShapeRef.new(shape: Boolean, location_name: "useDedicatedReplicationServer"))
     UpdateReplicationConfigurationTemplateRequest.struct_class = Types::UpdateReplicationConfigurationTemplateRequest
 
+    UpdateSourceServerReplicationTypeRequest.add_member(:replication_type, Shapes::ShapeRef.new(shape: ReplicationType, required: true, location_name: "replicationType"))
+    UpdateSourceServerReplicationTypeRequest.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, required: true, location_name: "sourceServerID"))
+    UpdateSourceServerReplicationTypeRequest.struct_class = Types::UpdateSourceServerReplicationTypeRequest
+
     ValidationException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
     ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
@@ -610,6 +658,18 @@ module Aws::Mgn
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    VcenterClient.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    VcenterClient.add_member(:datacenter_name, Shapes::ShapeRef.new(shape: BoundedString, location_name: "datacenterName"))
+    VcenterClient.add_member(:hostname, Shapes::ShapeRef.new(shape: BoundedString, location_name: "hostname"))
+    VcenterClient.add_member(:last_seen_datetime, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "lastSeenDatetime"))
+    VcenterClient.add_member(:source_server_tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "sourceServerTags"))
+    VcenterClient.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    VcenterClient.add_member(:vcenter_client_id, Shapes::ShapeRef.new(shape: VcenterClientID, location_name: "vcenterClientID"))
+    VcenterClient.add_member(:vcenter_uuid, Shapes::ShapeRef.new(shape: BoundedString, location_name: "vcenterUUID"))
+    VcenterClient.struct_class = Types::VcenterClient
+
+    VcenterClientList.member = Shapes::ShapeRef.new(shape: VcenterClient)
 
 
     # @api private
@@ -686,6 +746,17 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_vcenter_client, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVcenterClient"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteVcenterClient"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVcenterClientRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:describe_job_log_items, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeJobLogItems"
         o.http_method = "POST"
@@ -742,6 +813,23 @@ module Aws::Mgn
         o.input = Shapes::ShapeRef.new(shape: DescribeSourceServersRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSourceServersResponse)
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_vcenter_clients, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVcenterClients"
+        o.http_method = "GET"
+        o.http_request_uri = "/DescribeVcenterClients"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVcenterClientsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVcenterClientsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -850,6 +938,19 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:start_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartReplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/StartReplication"
+        o.input = Shapes::ShapeRef.new(shape: StartReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: SourceServer)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:start_test, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartTest"
         o.http_method = "POST"
@@ -933,6 +1034,18 @@ module Aws::Mgn
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_source_server_replication_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSourceServerReplicationType"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateSourceServerReplicationType"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSourceServerReplicationTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: SourceServer)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 
