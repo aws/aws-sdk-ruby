@@ -52,7 +52,6 @@ module Aws
 
         def list(_ref, value)
           value
-          value
             .compact
             .map { |s| escape_header_list_string(s) }
             .join(",")
