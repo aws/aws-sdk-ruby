@@ -51,7 +51,15 @@ module Aws
         end
 
         def list(_ref, value)
-          value.compact.join(",")
+          value
+          value
+            .compact
+            .map { |s| escape_header_list_string(s) }
+            .join(",")
+        end
+
+        def escape_header_list_string(s)
+          (s.include?('"') || s.include?(",")) ? "\"#{s.gsub('"', '\"')}\"" : s
         end
 
         def apply_header_map(headers, ref, values)

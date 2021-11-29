@@ -166,6 +166,30 @@
             "x-amz-string-list": "value1,value2"
           }
         }
+      },
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "ListOfStrings": ["\"value1\"", "value2,value3", "'value4'"],
+          "String": "singleValue"
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path",
+          "headers": {
+            "x-amz-string": "singleValue",
+            "x-amz-string-list": "\"\\\"value1\\\"\",\"value2,value3\",'value4'"
+          }
+        }
       }
     ]
   },
