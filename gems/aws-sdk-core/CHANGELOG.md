@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Correctly serialize lists of strings in headers with quotes and commas.
+
+
 3.123.0 (2021-11-23)
 ------------------
 
