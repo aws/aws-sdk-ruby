@@ -593,6 +593,46 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Gets the scanning configuration for one or more repositories.
+    #
+    # @option params [required, Array<String>] :repository_names
+    #   One or more repository names to get the scanning configuration for.
+    #
+    # @return [Types::BatchGetRepositoryScanningConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetRepositoryScanningConfigurationResponse#scanning_configurations #scanning_configurations} => Array&lt;Types::RepositoryScanningConfiguration&gt;
+    #   * {Types::BatchGetRepositoryScanningConfigurationResponse#failures #failures} => Array&lt;Types::RepositoryScanningConfigurationFailure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_repository_scanning_configuration({
+    #     repository_names: ["RepositoryName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scanning_configurations #=> Array
+    #   resp.scanning_configurations[0].repository_arn #=> String
+    #   resp.scanning_configurations[0].repository_name #=> String
+    #   resp.scanning_configurations[0].scan_on_push #=> Boolean
+    #   resp.scanning_configurations[0].scan_frequency #=> String, one of "SCAN_ON_PUSH", "CONTINUOUS_SCAN", "MANUAL"
+    #   resp.scanning_configurations[0].applied_scan_filters #=> Array
+    #   resp.scanning_configurations[0].applied_scan_filters[0].filter #=> String
+    #   resp.scanning_configurations[0].applied_scan_filters[0].filter_type #=> String, one of "WILDCARD"
+    #   resp.failures #=> Array
+    #   resp.failures[0].repository_name #=> String
+    #   resp.failures[0].failure_code #=> String, one of "REPOSITORY_NOT_FOUND"
+    #   resp.failures[0].failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetRepositoryScanningConfiguration AWS API Documentation
+    #
+    # @overload batch_get_repository_scanning_configuration(params = {})
+    # @param [Hash] params ({})
+    def batch_get_repository_scanning_configuration(params = {}, options = {})
+      req = build_request(:batch_get_repository_scanning_configuration, params)
+      req.send_request(options)
+    end
+
     # Informs Amazon ECR that the image layer upload has completed for a
     # specified registry, repository name, and upload ID. You can optionally
     # provide a `sha256` digest of the image layer for data validation
@@ -654,6 +694,54 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Creates a pull through cache rule. A pull through cache rule provides
+    # a way to cache images from an external public registry in your Amazon
+    # ECR private registry.
+    #
+    # @option params [required, String] :ecr_repository_prefix
+    #   The repository name prefix to use when caching images from the source
+    #   registry.
+    #
+    # @option params [required, String] :upstream_registry_url
+    #   The registry URL of the upstream public registry to use as the source
+    #   for the pull through cache rule.
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry to
+    #   create the pull through cache rule for. If you do not specify a
+    #   registry, the default registry is assumed.
+    #
+    # @return [Types::CreatePullThroughCacheRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePullThroughCacheRuleResponse#ecr_repository_prefix #ecr_repository_prefix} => String
+    #   * {Types::CreatePullThroughCacheRuleResponse#upstream_registry_url #upstream_registry_url} => String
+    #   * {Types::CreatePullThroughCacheRuleResponse#created_at #created_at} => Time
+    #   * {Types::CreatePullThroughCacheRuleResponse#registry_id #registry_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_pull_through_cache_rule({
+    #     ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
+    #     upstream_registry_url: "Url", # required
+    #     registry_id: "RegistryId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ecr_repository_prefix #=> String
+    #   resp.upstream_registry_url #=> String
+    #   resp.created_at #=> Time
+    #   resp.registry_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreatePullThroughCacheRule AWS API Documentation
+    #
+    # @overload create_pull_through_cache_rule(params = {})
+    # @param [Hash] params ({})
+    def create_pull_through_cache_rule(params = {}, options = {})
+      req = build_request(:create_pull_through_cache_rule, params)
+      req.send_request(options)
+    end
+
     # Creates a repository. For more information, see [Amazon ECR
     # repositories][1] in the *Amazon Elastic Container Registry User
     # Guide*.
@@ -663,9 +751,9 @@ module Aws::ECR
     # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html
     #
     # @option params [String] :registry_id
-    #   The AWS account ID associated with the registry to create the
-    #   repository. If you do not specify a registry, the default registry is
-    #   assumed.
+    #   The Amazon Web Services account ID associated with the registry to
+    #   create the repository. If you do not specify a registry, the default
+    #   registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   The name to use for the repository. The repository name may be
@@ -798,6 +886,47 @@ module Aws::ECR
     # @param [Hash] params ({})
     def delete_lifecycle_policy(params = {}, options = {})
       req = build_request(:delete_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a pull through cache rule.
+    #
+    # @option params [required, String] :ecr_repository_prefix
+    #   The Amazon ECR repository prefix associated with the pull through
+    #   cache rule to delete.
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the pull through cache rule. If you do not specify a
+    #   registry, the default registry is assumed.
+    #
+    # @return [Types::DeletePullThroughCacheRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePullThroughCacheRuleResponse#ecr_repository_prefix #ecr_repository_prefix} => String
+    #   * {Types::DeletePullThroughCacheRuleResponse#upstream_registry_url #upstream_registry_url} => String
+    #   * {Types::DeletePullThroughCacheRuleResponse#created_at #created_at} => Time
+    #   * {Types::DeletePullThroughCacheRuleResponse#registry_id #registry_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_pull_through_cache_rule({
+    #     ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
+    #     registry_id: "RegistryId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ecr_repository_prefix #=> String
+    #   resp.upstream_registry_url #=> String
+    #   resp.created_at #=> Time
+    #   resp.registry_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeletePullThroughCacheRule AWS API Documentation
+    #
+    # @overload delete_pull_through_cache_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_pull_through_cache_rule(params = {}, options = {})
+      req = build_request(:delete_pull_through_cache_rule, params)
       req.send_request(options)
     end
 
@@ -1059,10 +1188,12 @@ module Aws::ECR
     #   resp.repository_name #=> String
     #   resp.image_id.image_digest #=> String
     #   resp.image_id.image_tag #=> String
-    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE"
     #   resp.image_scan_status.description #=> String
     #   resp.image_scan_findings.image_scan_completed_at #=> Time
     #   resp.image_scan_findings.vulnerability_source_updated_at #=> Time
+    #   resp.image_scan_findings.finding_severity_counts #=> Hash
+    #   resp.image_scan_findings.finding_severity_counts["FindingSeverity"] #=> Integer
     #   resp.image_scan_findings.findings #=> Array
     #   resp.image_scan_findings.findings[0].name #=> String
     #   resp.image_scan_findings.findings[0].description #=> String
@@ -1071,8 +1202,65 @@ module Aws::ECR
     #   resp.image_scan_findings.findings[0].attributes #=> Array
     #   resp.image_scan_findings.findings[0].attributes[0].key #=> String
     #   resp.image_scan_findings.findings[0].attributes[0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #   resp.image_scan_findings.finding_severity_counts #=> Hash
-    #   resp.image_scan_findings.finding_severity_counts["FindingSeverity"] #=> Integer
+    #   resp.image_scan_findings.enhanced_findings #=> Array
+    #   resp.image_scan_findings.enhanced_findings[0].aws_account_id #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].description #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].finding_arn #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].first_observed_at #=> Time
+    #   resp.image_scan_findings.enhanced_findings[0].last_observed_at #=> Time
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.cvss #=> Array
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.cvss[0].base_score #=> Float
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.cvss[0].scoring_vector #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.cvss[0].source #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.cvss[0].version #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.reference_urls #=> Array
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.reference_urls[0] #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.related_vulnerabilities #=> Array
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.related_vulnerabilities[0] #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.source #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.source_url #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vendor_created_at #=> Time
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vendor_severity #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vendor_updated_at #=> Time
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerability_id #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages #=> Array
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].arch #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].epoch #=> Integer
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].file_path #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].name #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].package_manager #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].release #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].source_layer_hash #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].package_vulnerability_details.vulnerable_packages[0].version #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].remediation.recommendation.url #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].remediation.recommendation.text #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].resources #=> Array
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.architecture #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.author #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.image_hash #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.image_tags #=> Array
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.image_tags[0] #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.platform #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.pushed_at #=> Time
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.registry #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].details.aws_ecr_container_image.repository_name #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].id #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].tags #=> Hash
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].tags["TagKey"] #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].resources[0].type #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].score #=> Float
+    #   resp.image_scan_findings.enhanced_findings[0].score_details.cvss.adjustments #=> Array
+    #   resp.image_scan_findings.enhanced_findings[0].score_details.cvss.adjustments[0].metric #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].score_details.cvss.adjustments[0].reason #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].score_details.cvss.score #=> Float
+    #   resp.image_scan_findings.enhanced_findings[0].score_details.cvss.score_source #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].score_details.cvss.scoring_vector #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].score_details.cvss.version #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].severity #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].status #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].title #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].type #=> String
+    #   resp.image_scan_findings.enhanced_findings[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
     #
@@ -1168,7 +1356,7 @@ module Aws::ECR
     #   resp.image_details[0].image_tags[0] #=> String
     #   resp.image_details[0].image_size_in_bytes #=> Integer
     #   resp.image_details[0].image_pushed_at #=> Time
-    #   resp.image_details[0].image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.image_details[0].image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE"
     #   resp.image_details[0].image_scan_status.description #=> String
     #   resp.image_details[0].image_scan_findings_summary.image_scan_completed_at #=> Time
     #   resp.image_details[0].image_scan_findings_summary.vulnerability_source_updated_at #=> Time
@@ -1184,6 +1372,72 @@ module Aws::ECR
     # @param [Hash] params ({})
     def describe_images(params = {}, options = {})
       req = build_request(:describe_images, params)
+      req.send_request(options)
+    end
+
+    # Returns the pull through cache rules for a registry.
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry to
+    #   return the pull through cache rules for. If you do not specify a
+    #   registry, the default registry is assumed.
+    #
+    # @option params [Array<String>] :ecr_repository_prefixes
+    #   The Amazon ECR repository prefixes associated with the pull through
+    #   cache rules to return. If no repository prefix value is specified, all
+    #   pull through cache rules are returned.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribePullThroughCacheRulesRequest` request where `maxResults` was
+    #   used and the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `nextToken` value. This value is null when there are no more results
+    #   to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of pull through cache rules returned by
+    #   `DescribePullThroughCacheRulesRequest` in paginated output. When this
+    #   parameter is used, `DescribePullThroughCacheRulesRequest` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `DescribePullThroughCacheRulesRequest` request
+    #   with the returned `nextToken` value. This value can be between 1 and
+    #   1000. If this parameter is not used, then
+    #   `DescribePullThroughCacheRulesRequest` returns up to 100 results and a
+    #   `nextToken` value, if applicable.
+    #
+    # @return [Types::DescribePullThroughCacheRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePullThroughCacheRulesResponse#pull_through_cache_rules #pull_through_cache_rules} => Array&lt;Types::PullThroughCacheRule&gt;
+    #   * {Types::DescribePullThroughCacheRulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_pull_through_cache_rules({
+    #     registry_id: "RegistryId",
+    #     ecr_repository_prefixes: ["PullThroughCacheRuleRepositoryPrefix"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pull_through_cache_rules #=> Array
+    #   resp.pull_through_cache_rules[0].ecr_repository_prefix #=> String
+    #   resp.pull_through_cache_rules[0].upstream_registry_url #=> String
+    #   resp.pull_through_cache_rules[0].created_at #=> Time
+    #   resp.pull_through_cache_rules[0].registry_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribePullThroughCacheRules AWS API Documentation
+    #
+    # @overload describe_pull_through_cache_rules(params = {})
+    # @param [Hash] params ({})
+    def describe_pull_through_cache_rules(params = {}, options = {})
+      req = build_request(:describe_pull_through_cache_rules, params)
       req.send_request(options)
     end
 
@@ -1594,6 +1848,32 @@ module Aws::ECR
     # @param [Hash] params ({})
     def get_registry_policy(params = {}, options = {})
       req = build_request(:get_registry_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the scanning configuration for a registry.
+    #
+    # @return [Types::GetRegistryScanningConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRegistryScanningConfigurationResponse#registry_id #registry_id} => String
+    #   * {Types::GetRegistryScanningConfigurationResponse#scanning_configuration #scanning_configuration} => Types::RegistryScanningConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.scanning_configuration.scan_type #=> String, one of "BASIC", "ENHANCED"
+    #   resp.scanning_configuration.rules #=> Array
+    #   resp.scanning_configuration.rules[0].scan_frequency #=> String, one of "SCAN_ON_PUSH", "CONTINUOUS_SCAN", "MANUAL"
+    #   resp.scanning_configuration.rules[0].repository_filters #=> Array
+    #   resp.scanning_configuration.rules[0].repository_filters[0].filter #=> String
+    #   resp.scanning_configuration.rules[0].repository_filters[0].filter_type #=> String, one of "WILDCARD"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRegistryScanningConfiguration AWS API Documentation
+    #
+    # @overload get_registry_scanning_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_registry_scanning_configuration(params = {}, options = {})
+      req = build_request(:get_registry_scanning_configuration, params)
       req.send_request(options)
     end
 
@@ -2092,6 +2372,64 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Creates or updates the scanning configuration for your private
+    # registry.
+    #
+    # @option params [String] :scan_type
+    #   The scanning type to set for the registry.
+    #
+    #   By default, the `BASIC` scan type is used. When basic scanning is set,
+    #   you may specify filters to determine which individual repositories, or
+    #   all repositories, are scanned when new images are pushed.
+    #   Alternatively, you can do manual scans of images with basic scanning.
+    #
+    #   When the `ENHANCED` scan type is set, Amazon Inspector provides
+    #   automated, continuous scanning of all repositories in your registry.
+    #
+    # @option params [Array<Types::RegistryScanningRule>] :rules
+    #   The scanning rules to use for the registry. A scanning rule is used to
+    #   determine which repository filters are used and at what frequency
+    #   scanning will occur.
+    #
+    # @return [Types::PutRegistryScanningConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutRegistryScanningConfigurationResponse#registry_scanning_configuration #registry_scanning_configuration} => Types::RegistryScanningConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_registry_scanning_configuration({
+    #     scan_type: "BASIC", # accepts BASIC, ENHANCED
+    #     rules: [
+    #       {
+    #         scan_frequency: "SCAN_ON_PUSH", # required, accepts SCAN_ON_PUSH, CONTINUOUS_SCAN, MANUAL
+    #         repository_filters: [ # required
+    #           {
+    #             filter: "ScanningRepositoryFilterValue", # required
+    #             filter_type: "WILDCARD", # required, accepts WILDCARD
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_scanning_configuration.scan_type #=> String, one of "BASIC", "ENHANCED"
+    #   resp.registry_scanning_configuration.rules #=> Array
+    #   resp.registry_scanning_configuration.rules[0].scan_frequency #=> String, one of "SCAN_ON_PUSH", "CONTINUOUS_SCAN", "MANUAL"
+    #   resp.registry_scanning_configuration.rules[0].repository_filters #=> Array
+    #   resp.registry_scanning_configuration.rules[0].repository_filters[0].filter #=> String
+    #   resp.registry_scanning_configuration.rules[0].repository_filters[0].filter_type #=> String, one of "WILDCARD"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutRegistryScanningConfiguration AWS API Documentation
+    #
+    # @overload put_registry_scanning_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_registry_scanning_configuration(params = {}, options = {})
+      req = build_request(:put_registry_scanning_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates or updates the replication configuration for a registry. The
     # existing replication configuration for a repository can be retrieved
     # with the DescribeRegistry API action. The first time the
@@ -2266,7 +2604,7 @@ module Aws::ECR
     #   resp.repository_name #=> String
     #   resp.image_id.image_digest #=> String
     #   resp.image_id.image_tag #=> String
-    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED", "UNSUPPORTED_IMAGE", "ACTIVE", "PENDING", "SCAN_ELIGIBILITY_EXPIRED", "FINDINGS_UNAVAILABLE"
     #   resp.image_scan_status.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartImageScan AWS API Documentation
@@ -2473,7 +2811,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

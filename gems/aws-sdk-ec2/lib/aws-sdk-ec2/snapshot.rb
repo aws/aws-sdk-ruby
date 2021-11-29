@@ -141,6 +141,23 @@ module Aws::EC2
       data[:tags]
     end
 
+    # The storage tier in which the snapshot is stored. `standard` indicates
+    # that the snapshot is stored in the standard snapshot storage tier and
+    # that it is ready for use. `archive` indicates that the snapshot is
+    # currently archived and that it must be restored before it can be used.
+    # @return [String]
+    def storage_tier
+      data[:storage_tier]
+    end
+
+    # Only for archived snapshots that are temporarily restored. Indicates
+    # the date and time when a temporarily restored snapshot will be
+    # automatically re-archived.
+    # @return [Time]
+    def restore_expiry_time
+      data[:restore_expiry_time]
+    end
+
     # @!endgroup
 
     # @return [Client]

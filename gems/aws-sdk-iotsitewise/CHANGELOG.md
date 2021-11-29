@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-11-29)
+------------------
+
+* Feature - AWS IoT SiteWise now supports retention configuration for the hot tier storage.
+
 1.35.0 (2021-11-24)
 ------------------
 

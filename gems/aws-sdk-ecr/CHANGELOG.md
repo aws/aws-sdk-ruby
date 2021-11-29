@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2021-11-29)
+------------------
+
+* Feature - This release adds supports for pull through cache rules and enhanced scanning.
+
 1.49.0 (2021-11-04)
 ------------------
 

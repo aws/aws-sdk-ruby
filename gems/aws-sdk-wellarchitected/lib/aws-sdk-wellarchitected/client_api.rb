@@ -27,8 +27,13 @@ module Aws::WellArchitected
     ChoiceAnswerSummaries = Shapes::ListShape.new(name: 'ChoiceAnswerSummaries')
     ChoiceAnswerSummary = Shapes::StructureShape.new(name: 'ChoiceAnswerSummary')
     ChoiceAnswers = Shapes::ListShape.new(name: 'ChoiceAnswers')
+    ChoiceContent = Shapes::StructureShape.new(name: 'ChoiceContent')
+    ChoiceContentDisplayText = Shapes::StringShape.new(name: 'ChoiceContentDisplayText')
+    ChoiceContentUrl = Shapes::StringShape.new(name: 'ChoiceContentUrl')
     ChoiceDescription = Shapes::StringShape.new(name: 'ChoiceDescription')
     ChoiceId = Shapes::StringShape.new(name: 'ChoiceId')
+    ChoiceImprovementPlan = Shapes::StructureShape.new(name: 'ChoiceImprovementPlan')
+    ChoiceImprovementPlans = Shapes::ListShape.new(name: 'ChoiceImprovementPlans')
     ChoiceNotes = Shapes::StringShape.new(name: 'ChoiceNotes')
     ChoiceReason = Shapes::StringShape.new(name: 'ChoiceReason')
     ChoiceStatus = Shapes::StringShape.new(name: 'ChoiceStatus')
@@ -39,21 +44,32 @@ module Aws::WellArchitected
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     Count = Shapes::IntegerShape.new(name: 'Count')
+    CreateLensShareInput = Shapes::StructureShape.new(name: 'CreateLensShareInput')
+    CreateLensShareOutput = Shapes::StructureShape.new(name: 'CreateLensShareOutput')
+    CreateLensVersionInput = Shapes::StructureShape.new(name: 'CreateLensVersionInput')
+    CreateLensVersionOutput = Shapes::StructureShape.new(name: 'CreateLensVersionOutput')
     CreateMilestoneInput = Shapes::StructureShape.new(name: 'CreateMilestoneInput')
     CreateMilestoneOutput = Shapes::StructureShape.new(name: 'CreateMilestoneOutput')
     CreateWorkloadInput = Shapes::StructureShape.new(name: 'CreateWorkloadInput')
     CreateWorkloadOutput = Shapes::StructureShape.new(name: 'CreateWorkloadOutput')
     CreateWorkloadShareInput = Shapes::StructureShape.new(name: 'CreateWorkloadShareInput')
     CreateWorkloadShareOutput = Shapes::StructureShape.new(name: 'CreateWorkloadShareOutput')
+    DeleteLensInput = Shapes::StructureShape.new(name: 'DeleteLensInput')
+    DeleteLensShareInput = Shapes::StructureShape.new(name: 'DeleteLensShareInput')
     DeleteWorkloadInput = Shapes::StructureShape.new(name: 'DeleteWorkloadInput')
     DeleteWorkloadShareInput = Shapes::StructureShape.new(name: 'DeleteWorkloadShareInput')
     DifferenceStatus = Shapes::StringShape.new(name: 'DifferenceStatus')
     DisassociateLensesInput = Shapes::StructureShape.new(name: 'DisassociateLensesInput')
+    DisplayText = Shapes::StringShape.new(name: 'DisplayText')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExceptionResourceId = Shapes::StringShape.new(name: 'ExceptionResourceId')
     ExceptionResourceType = Shapes::StringShape.new(name: 'ExceptionResourceType')
+    ExportLensInput = Shapes::StructureShape.new(name: 'ExportLensInput')
+    ExportLensOutput = Shapes::StructureShape.new(name: 'ExportLensOutput')
     GetAnswerInput = Shapes::StructureShape.new(name: 'GetAnswerInput')
     GetAnswerOutput = Shapes::StructureShape.new(name: 'GetAnswerOutput')
+    GetLensInput = Shapes::StructureShape.new(name: 'GetLensInput')
+    GetLensOutput = Shapes::StructureShape.new(name: 'GetLensOutput')
     GetLensReviewInput = Shapes::StructureShape.new(name: 'GetLensReviewInput')
     GetLensReviewOutput = Shapes::StructureShape.new(name: 'GetLensReviewOutput')
     GetLensReviewReportInput = Shapes::StructureShape.new(name: 'GetLensReviewReportInput')
@@ -65,23 +81,36 @@ module Aws::WellArchitected
     GetWorkloadInput = Shapes::StructureShape.new(name: 'GetWorkloadInput')
     GetWorkloadOutput = Shapes::StructureShape.new(name: 'GetWorkloadOutput')
     HelpfulResourceUrl = Shapes::StringShape.new(name: 'HelpfulResourceUrl')
+    ImportLensInput = Shapes::StructureShape.new(name: 'ImportLensInput')
+    ImportLensOutput = Shapes::StructureShape.new(name: 'ImportLensOutput')
+    ImportLensStatus = Shapes::StringShape.new(name: 'ImportLensStatus')
     ImprovementPlanUrl = Shapes::StringShape.new(name: 'ImprovementPlanUrl')
     ImprovementSummaries = Shapes::ListShape.new(name: 'ImprovementSummaries')
     ImprovementSummary = Shapes::StructureShape.new(name: 'ImprovementSummary')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IsApplicable = Shapes::BooleanShape.new(name: 'IsApplicable')
+    IsMajorVersion = Shapes::BooleanShape.new(name: 'IsMajorVersion')
     IsReviewOwnerUpdateAcknowledged = Shapes::BooleanShape.new(name: 'IsReviewOwnerUpdateAcknowledged')
+    Lens = Shapes::StructureShape.new(name: 'Lens')
     LensAlias = Shapes::StringShape.new(name: 'LensAlias')
     LensAliases = Shapes::ListShape.new(name: 'LensAliases')
+    LensArn = Shapes::StringShape.new(name: 'LensArn')
     LensDescription = Shapes::StringShape.new(name: 'LensDescription')
+    LensJSON = Shapes::StringShape.new(name: 'LensJSON')
     LensName = Shapes::StringShape.new(name: 'LensName')
+    LensNamePrefix = Shapes::StringShape.new(name: 'LensNamePrefix')
+    LensOwner = Shapes::StringShape.new(name: 'LensOwner')
     LensReview = Shapes::StructureShape.new(name: 'LensReview')
     LensReviewReport = Shapes::StructureShape.new(name: 'LensReviewReport')
     LensReviewSummaries = Shapes::ListShape.new(name: 'LensReviewSummaries')
     LensReviewSummary = Shapes::StructureShape.new(name: 'LensReviewSummary')
+    LensShareSummaries = Shapes::ListShape.new(name: 'LensShareSummaries')
+    LensShareSummary = Shapes::StructureShape.new(name: 'LensShareSummary')
     LensStatus = Shapes::StringShape.new(name: 'LensStatus')
+    LensStatusType = Shapes::StringShape.new(name: 'LensStatusType')
     LensSummaries = Shapes::ListShape.new(name: 'LensSummaries')
     LensSummary = Shapes::StructureShape.new(name: 'LensSummary')
+    LensType = Shapes::StringShape.new(name: 'LensType')
     LensUpgradeSummary = Shapes::StructureShape.new(name: 'LensUpgradeSummary')
     LensVersion = Shapes::StringShape.new(name: 'LensVersion')
     ListAnswersInput = Shapes::StructureShape.new(name: 'ListAnswersInput')
@@ -92,6 +121,8 @@ module Aws::WellArchitected
     ListLensReviewImprovementsOutput = Shapes::StructureShape.new(name: 'ListLensReviewImprovementsOutput')
     ListLensReviewsInput = Shapes::StructureShape.new(name: 'ListLensReviewsInput')
     ListLensReviewsOutput = Shapes::StructureShape.new(name: 'ListLensReviewsOutput')
+    ListLensSharesInput = Shapes::StructureShape.new(name: 'ListLensSharesInput')
+    ListLensSharesOutput = Shapes::StructureShape.new(name: 'ListLensSharesOutput')
     ListLensesInput = Shapes::StructureShape.new(name: 'ListLensesInput')
     ListLensesOutput = Shapes::StructureShape.new(name: 'ListLensesOutput')
     ListMilestonesInput = Shapes::StructureShape.new(name: 'ListMilestonesInput')
@@ -147,6 +178,7 @@ module Aws::WellArchitected
     ShareInvitationId = Shapes::StringShape.new(name: 'ShareInvitationId')
     ShareInvitationSummaries = Shapes::ListShape.new(name: 'ShareInvitationSummaries')
     ShareInvitationSummary = Shapes::StructureShape.new(name: 'ShareInvitationSummary')
+    ShareResourceType = Shapes::StringShape.new(name: 'ShareResourceType')
     ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
     SharedWith = Shapes::StringShape.new(name: 'SharedWith')
     SharedWithPrefix = Shapes::StringShape.new(name: 'SharedWithPrefix')
@@ -210,6 +242,7 @@ module Aws::WellArchitected
     Answer.add_member(:question_description, Shapes::ShapeRef.new(shape: QuestionDescription, location_name: "QuestionDescription"))
     Answer.add_member(:improvement_plan_url, Shapes::ShapeRef.new(shape: ImprovementPlanUrl, location_name: "ImprovementPlanUrl"))
     Answer.add_member(:helpful_resource_url, Shapes::ShapeRef.new(shape: HelpfulResourceUrl, location_name: "HelpfulResourceUrl"))
+    Answer.add_member(:helpful_resource_display_text, Shapes::ShapeRef.new(shape: DisplayText, location_name: "HelpfulResourceDisplayText"))
     Answer.add_member(:choices, Shapes::ShapeRef.new(shape: Choices, location_name: "Choices"))
     Answer.add_member(:selected_choices, Shapes::ShapeRef.new(shape: SelectedChoices, location_name: "SelectedChoices"))
     Answer.add_member(:choice_answers, Shapes::ShapeRef.new(shape: ChoiceAnswers, location_name: "ChoiceAnswers"))
@@ -239,6 +272,8 @@ module Aws::WellArchitected
     Choice.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, location_name: "ChoiceId"))
     Choice.add_member(:title, Shapes::ShapeRef.new(shape: ChoiceTitle, location_name: "Title"))
     Choice.add_member(:description, Shapes::ShapeRef.new(shape: ChoiceDescription, location_name: "Description"))
+    Choice.add_member(:helpful_resource, Shapes::ShapeRef.new(shape: ChoiceContent, location_name: "HelpfulResource"))
+    Choice.add_member(:improvement_plan, Shapes::ShapeRef.new(shape: ChoiceContent, location_name: "ImprovementPlan"))
     Choice.struct_class = Types::Choice
 
     ChoiceAnswer.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, location_name: "ChoiceId"))
@@ -256,6 +291,17 @@ module Aws::WellArchitected
 
     ChoiceAnswers.member = Shapes::ShapeRef.new(shape: ChoiceAnswer)
 
+    ChoiceContent.add_member(:display_text, Shapes::ShapeRef.new(shape: ChoiceContentDisplayText, location_name: "DisplayText"))
+    ChoiceContent.add_member(:url, Shapes::ShapeRef.new(shape: ChoiceContentUrl, location_name: "Url"))
+    ChoiceContent.struct_class = Types::ChoiceContent
+
+    ChoiceImprovementPlan.add_member(:choice_id, Shapes::ShapeRef.new(shape: ChoiceId, location_name: "ChoiceId"))
+    ChoiceImprovementPlan.add_member(:display_text, Shapes::ShapeRef.new(shape: DisplayText, location_name: "DisplayText"))
+    ChoiceImprovementPlan.add_member(:improvement_plan_url, Shapes::ShapeRef.new(shape: ImprovementPlanUrl, location_name: "ImprovementPlanUrl"))
+    ChoiceImprovementPlan.struct_class = Types::ChoiceImprovementPlan
+
+    ChoiceImprovementPlans.member = Shapes::ShapeRef.new(shape: ChoiceImprovementPlan)
+
     ChoiceUpdate.add_member(:status, Shapes::ShapeRef.new(shape: ChoiceStatus, required: true, location_name: "Status"))
     ChoiceUpdate.add_member(:reason, Shapes::ShapeRef.new(shape: ChoiceReason, location_name: "Reason"))
     ChoiceUpdate.add_member(:notes, Shapes::ShapeRef.new(shape: ChoiceNotes, location_name: "Notes"))
@@ -270,6 +316,24 @@ module Aws::WellArchitected
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ExceptionResourceId, required: true, location_name: "ResourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ExceptionResourceType, required: true, location_name: "ResourceType"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateLensShareInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    CreateLensShareInput.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, required: true, location_name: "SharedWith"))
+    CreateLensShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateLensShareInput.struct_class = Types::CreateLensShareInput
+
+    CreateLensShareOutput.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, location_name: "ShareId"))
+    CreateLensShareOutput.struct_class = Types::CreateLensShareOutput
+
+    CreateLensVersionInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    CreateLensVersionInput.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, required: true, location_name: "LensVersion"))
+    CreateLensVersionInput.add_member(:is_major_version, Shapes::ShapeRef.new(shape: IsMajorVersion, location_name: "IsMajorVersion"))
+    CreateLensVersionInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateLensVersionInput.struct_class = Types::CreateLensVersionInput
+
+    CreateLensVersionOutput.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
+    CreateLensVersionOutput.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "LensVersion"))
+    CreateLensVersionOutput.struct_class = Types::CreateLensVersionOutput
 
     CreateMilestoneInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     CreateMilestoneInput.add_member(:milestone_name, Shapes::ShapeRef.new(shape: MilestoneName, required: true, location_name: "MilestoneName"))
@@ -311,6 +375,16 @@ module Aws::WellArchitected
     CreateWorkloadShareOutput.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, location_name: "ShareId"))
     CreateWorkloadShareOutput.struct_class = Types::CreateWorkloadShareOutput
 
+    DeleteLensInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    DeleteLensInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteLensInput.add_member(:lens_status, Shapes::ShapeRef.new(shape: LensStatusType, required: true, location: "querystring", location_name: "LensStatus"))
+    DeleteLensInput.struct_class = Types::DeleteLensInput
+
+    DeleteLensShareInput.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, required: true, location: "uri", location_name: "ShareId"))
+    DeleteLensShareInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    DeleteLensShareInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteLensShareInput.struct_class = Types::DeleteLensShareInput
+
     DeleteWorkloadInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     DeleteWorkloadInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location: "querystring", location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     DeleteWorkloadInput.struct_class = Types::DeleteWorkloadInput
@@ -324,6 +398,13 @@ module Aws::WellArchitected
     DisassociateLensesInput.add_member(:lens_aliases, Shapes::ShapeRef.new(shape: LensAliases, required: true, location_name: "LensAliases"))
     DisassociateLensesInput.struct_class = Types::DisassociateLensesInput
 
+    ExportLensInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    ExportLensInput.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location: "querystring", location_name: "LensVersion"))
+    ExportLensInput.struct_class = Types::ExportLensInput
+
+    ExportLensOutput.add_member(:lens_json, Shapes::ShapeRef.new(shape: LensJSON, location_name: "LensJSON"))
+    ExportLensOutput.struct_class = Types::ExportLensOutput
+
     GetAnswerInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     GetAnswerInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
     GetAnswerInput.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, required: true, location: "uri", location_name: "QuestionId"))
@@ -333,8 +414,16 @@ module Aws::WellArchitected
     GetAnswerOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
     GetAnswerOutput.add_member(:milestone_number, Shapes::ShapeRef.new(shape: MilestoneNumber, location_name: "MilestoneNumber"))
     GetAnswerOutput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    GetAnswerOutput.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     GetAnswerOutput.add_member(:answer, Shapes::ShapeRef.new(shape: Answer, location_name: "Answer"))
     GetAnswerOutput.struct_class = Types::GetAnswerOutput
+
+    GetLensInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    GetLensInput.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location: "querystring", location_name: "LensVersion"))
+    GetLensInput.struct_class = Types::GetLensInput
+
+    GetLensOutput.add_member(:lens, Shapes::ShapeRef.new(shape: Lens, location_name: "Lens"))
+    GetLensOutput.struct_class = Types::GetLensOutput
 
     GetLensReviewInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     GetLensReviewInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
@@ -357,11 +446,14 @@ module Aws::WellArchitected
     GetLensReviewReportOutput.struct_class = Types::GetLensReviewReportOutput
 
     GetLensVersionDifferenceInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
-    GetLensVersionDifferenceInput.add_member(:base_lens_version, Shapes::ShapeRef.new(shape: LensVersion, required: true, location: "querystring", location_name: "BaseLensVersion"))
+    GetLensVersionDifferenceInput.add_member(:base_lens_version, Shapes::ShapeRef.new(shape: LensVersion, location: "querystring", location_name: "BaseLensVersion"))
+    GetLensVersionDifferenceInput.add_member(:target_lens_version, Shapes::ShapeRef.new(shape: LensVersion, location: "querystring", location_name: "TargetLensVersion"))
     GetLensVersionDifferenceInput.struct_class = Types::GetLensVersionDifferenceInput
 
     GetLensVersionDifferenceOutput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    GetLensVersionDifferenceOutput.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     GetLensVersionDifferenceOutput.add_member(:base_lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "BaseLensVersion"))
+    GetLensVersionDifferenceOutput.add_member(:target_lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "TargetLensVersion"))
     GetLensVersionDifferenceOutput.add_member(:latest_lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "LatestLensVersion"))
     GetLensVersionDifferenceOutput.add_member(:version_differences, Shapes::ShapeRef.new(shape: VersionDifferences, location_name: "VersionDifferences"))
     GetLensVersionDifferenceOutput.struct_class = Types::GetLensVersionDifferenceOutput
@@ -380,6 +472,16 @@ module Aws::WellArchitected
     GetWorkloadOutput.add_member(:workload, Shapes::ShapeRef.new(shape: Workload, location_name: "Workload"))
     GetWorkloadOutput.struct_class = Types::GetWorkloadOutput
 
+    ImportLensInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    ImportLensInput.add_member(:json_string, Shapes::ShapeRef.new(shape: LensJSON, required: true, location_name: "JSONString"))
+    ImportLensInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    ImportLensInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ImportLensInput.struct_class = Types::ImportLensInput
+
+    ImportLensOutput.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
+    ImportLensOutput.add_member(:status, Shapes::ShapeRef.new(shape: ImportLensStatus, location_name: "Status"))
+    ImportLensOutput.struct_class = Types::ImportLensOutput
+
     ImprovementSummaries.member = Shapes::ShapeRef.new(shape: ImprovementSummary)
 
     ImprovementSummary.add_member(:question_id, Shapes::ShapeRef.new(shape: QuestionId, location_name: "QuestionId"))
@@ -387,14 +489,24 @@ module Aws::WellArchitected
     ImprovementSummary.add_member(:question_title, Shapes::ShapeRef.new(shape: QuestionTitle, location_name: "QuestionTitle"))
     ImprovementSummary.add_member(:risk, Shapes::ShapeRef.new(shape: Risk, location_name: "Risk"))
     ImprovementSummary.add_member(:improvement_plan_url, Shapes::ShapeRef.new(shape: ImprovementPlanUrl, location_name: "ImprovementPlanUrl"))
+    ImprovementSummary.add_member(:improvement_plans, Shapes::ShapeRef.new(shape: ChoiceImprovementPlans, location_name: "ImprovementPlans"))
     ImprovementSummary.struct_class = Types::ImprovementSummary
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    Lens.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
+    Lens.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "LensVersion"))
+    Lens.add_member(:name, Shapes::ShapeRef.new(shape: LensName, location_name: "Name"))
+    Lens.add_member(:description, Shapes::ShapeRef.new(shape: LensDescription, location_name: "Description"))
+    Lens.add_member(:owner, Shapes::ShapeRef.new(shape: LensOwner, location_name: "Owner"))
+    Lens.add_member(:share_invitation_id, Shapes::ShapeRef.new(shape: ShareInvitationId, location_name: "ShareInvitationId"))
+    Lens.struct_class = Types::Lens
+
     LensAliases.member = Shapes::ShapeRef.new(shape: LensAlias)
 
     LensReview.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    LensReview.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     LensReview.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "LensVersion"))
     LensReview.add_member(:lens_name, Shapes::ShapeRef.new(shape: LensName, location_name: "LensName"))
     LensReview.add_member(:lens_status, Shapes::ShapeRef.new(shape: LensStatus, location_name: "LensStatus"))
@@ -406,12 +518,14 @@ module Aws::WellArchitected
     LensReview.struct_class = Types::LensReview
 
     LensReviewReport.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    LensReviewReport.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     LensReviewReport.add_member(:base_64_string, Shapes::ShapeRef.new(shape: Base64String, location_name: "Base64String"))
     LensReviewReport.struct_class = Types::LensReviewReport
 
     LensReviewSummaries.member = Shapes::ShapeRef.new(shape: LensReviewSummary)
 
     LensReviewSummary.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    LensReviewSummary.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     LensReviewSummary.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "LensVersion"))
     LensReviewSummary.add_member(:lens_name, Shapes::ShapeRef.new(shape: LensName, location_name: "LensName"))
     LensReviewSummary.add_member(:lens_status, Shapes::ShapeRef.new(shape: LensStatus, location_name: "LensStatus"))
@@ -419,17 +533,31 @@ module Aws::WellArchitected
     LensReviewSummary.add_member(:risk_counts, Shapes::ShapeRef.new(shape: RiskCounts, location_name: "RiskCounts"))
     LensReviewSummary.struct_class = Types::LensReviewSummary
 
+    LensShareSummaries.member = Shapes::ShapeRef.new(shape: LensShareSummary)
+
+    LensShareSummary.add_member(:share_id, Shapes::ShapeRef.new(shape: ShareId, location_name: "ShareId"))
+    LensShareSummary.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, location_name: "SharedWith"))
+    LensShareSummary.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "Status"))
+    LensShareSummary.struct_class = Types::LensShareSummary
+
     LensSummaries.member = Shapes::ShapeRef.new(shape: LensSummary)
 
+    LensSummary.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     LensSummary.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
-    LensSummary.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "LensVersion"))
     LensSummary.add_member(:lens_name, Shapes::ShapeRef.new(shape: LensName, location_name: "LensName"))
+    LensSummary.add_member(:lens_type, Shapes::ShapeRef.new(shape: LensType, location_name: "LensType"))
     LensSummary.add_member(:description, Shapes::ShapeRef.new(shape: LensDescription, location_name: "Description"))
+    LensSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    LensSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    LensSummary.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "LensVersion"))
+    LensSummary.add_member(:owner, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "Owner"))
+    LensSummary.add_member(:lens_status, Shapes::ShapeRef.new(shape: LensStatus, location_name: "LensStatus"))
     LensSummary.struct_class = Types::LensSummary
 
     LensUpgradeSummary.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
     LensUpgradeSummary.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "WorkloadName"))
     LensUpgradeSummary.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    LensUpgradeSummary.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     LensUpgradeSummary.add_member(:current_lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "CurrentLensVersion"))
     LensUpgradeSummary.add_member(:latest_lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "LatestLensVersion"))
     LensUpgradeSummary.struct_class = Types::LensUpgradeSummary
@@ -445,6 +573,7 @@ module Aws::WellArchitected
     ListAnswersOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
     ListAnswersOutput.add_member(:milestone_number, Shapes::ShapeRef.new(shape: MilestoneNumber, location_name: "MilestoneNumber"))
     ListAnswersOutput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    ListAnswersOutput.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     ListAnswersOutput.add_member(:answer_summaries, Shapes::ShapeRef.new(shape: AnswerSummaries, location_name: "AnswerSummaries"))
     ListAnswersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAnswersOutput.struct_class = Types::ListAnswersOutput
@@ -460,6 +589,7 @@ module Aws::WellArchitected
     ListLensReviewImprovementsOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
     ListLensReviewImprovementsOutput.add_member(:milestone_number, Shapes::ShapeRef.new(shape: MilestoneNumber, location_name: "MilestoneNumber"))
     ListLensReviewImprovementsOutput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    ListLensReviewImprovementsOutput.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     ListLensReviewImprovementsOutput.add_member(:improvement_summaries, Shapes::ShapeRef.new(shape: ImprovementSummaries, location_name: "ImprovementSummaries"))
     ListLensReviewImprovementsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListLensReviewImprovementsOutput.struct_class = Types::ListLensReviewImprovementsOutput
@@ -476,8 +606,21 @@ module Aws::WellArchitected
     ListLensReviewsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListLensReviewsOutput.struct_class = Types::ListLensReviewsOutput
 
+    ListLensSharesInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
+    ListLensSharesInput.add_member(:shared_with_prefix, Shapes::ShapeRef.new(shape: SharedWithPrefix, location: "querystring", location_name: "SharedWithPrefix"))
+    ListLensSharesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListLensSharesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkloadSharesMaxResults, location: "querystring", location_name: "MaxResults"))
+    ListLensSharesInput.struct_class = Types::ListLensSharesInput
+
+    ListLensSharesOutput.add_member(:lens_share_summaries, Shapes::ShapeRef.new(shape: LensShareSummaries, location_name: "LensShareSummaries"))
+    ListLensSharesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListLensSharesOutput.struct_class = Types::ListLensSharesOutput
+
     ListLensesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListLensesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListLensesInput.add_member(:lens_type, Shapes::ShapeRef.new(shape: LensType, location: "querystring", location_name: "LensType"))
+    ListLensesInput.add_member(:lens_status, Shapes::ShapeRef.new(shape: LensStatusType, location: "querystring", location_name: "LensStatus"))
+    ListLensesInput.add_member(:lens_name, Shapes::ShapeRef.new(shape: LensName, location: "querystring", location_name: "LensName"))
     ListLensesInput.struct_class = Types::ListLensesInput
 
     ListLensesOutput.add_member(:lens_summaries, Shapes::ShapeRef.new(shape: LensSummaries, location_name: "LensSummaries"))
@@ -504,6 +647,8 @@ module Aws::WellArchitected
     ListNotificationsOutput.struct_class = Types::ListNotificationsOutput
 
     ListShareInvitationsInput.add_member(:workload_name_prefix, Shapes::ShapeRef.new(shape: WorkloadNamePrefix, location: "querystring", location_name: "WorkloadNamePrefix"))
+    ListShareInvitationsInput.add_member(:lens_name_prefix, Shapes::ShapeRef.new(shape: LensNamePrefix, location: "querystring", location_name: "LensNamePrefix"))
+    ListShareInvitationsInput.add_member(:share_resource_type, Shapes::ShapeRef.new(shape: ShareResourceType, location: "querystring", location_name: "ShareResourceType"))
     ListShareInvitationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListShareInvitationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListShareInvitationsMaxResults, location: "querystring", location_name: "MaxResults"))
     ListShareInvitationsInput.struct_class = Types::ListShareInvitationsInput
@@ -559,6 +704,7 @@ module Aws::WellArchitected
     NotificationSummary.struct_class = Types::NotificationSummary
 
     PillarDifference.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location_name: "PillarId"))
+    PillarDifference.add_member(:pillar_name, Shapes::ShapeRef.new(shape: PillarName, location_name: "PillarName"))
     PillarDifference.add_member(:difference_status, Shapes::ShapeRef.new(shape: DifferenceStatus, location_name: "DifferenceStatus"))
     PillarDifference.add_member(:question_differences, Shapes::ShapeRef.new(shape: QuestionDifferences, location_name: "QuestionDifferences"))
     PillarDifference.struct_class = Types::PillarDifference
@@ -601,7 +747,10 @@ module Aws::WellArchitected
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     ShareInvitation.add_member(:share_invitation_id, Shapes::ShapeRef.new(shape: ShareInvitationId, location_name: "ShareInvitationId"))
+    ShareInvitation.add_member(:share_resource_type, Shapes::ShapeRef.new(shape: ShareResourceType, location_name: "ShareResourceType"))
     ShareInvitation.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
+    ShareInvitation.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    ShareInvitation.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     ShareInvitation.struct_class = Types::ShareInvitation
 
     ShareInvitationSummaries.member = Shapes::ShapeRef.new(shape: ShareInvitationSummary)
@@ -610,8 +759,11 @@ module Aws::WellArchitected
     ShareInvitationSummary.add_member(:shared_by, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "SharedBy"))
     ShareInvitationSummary.add_member(:shared_with, Shapes::ShapeRef.new(shape: SharedWith, location_name: "SharedWith"))
     ShareInvitationSummary.add_member(:permission_type, Shapes::ShapeRef.new(shape: PermissionType, location_name: "PermissionType"))
+    ShareInvitationSummary.add_member(:share_resource_type, Shapes::ShapeRef.new(shape: ShareResourceType, location_name: "ShareResourceType"))
     ShareInvitationSummary.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "WorkloadName"))
     ShareInvitationSummary.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
+    ShareInvitationSummary.add_member(:lens_name, Shapes::ShapeRef.new(shape: LensName, location_name: "LensName"))
+    ShareInvitationSummary.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     ShareInvitationSummary.struct_class = Types::ShareInvitationSummary
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
@@ -648,6 +800,7 @@ module Aws::WellArchitected
 
     UpdateAnswerOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
     UpdateAnswerOutput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, location_name: "LensAlias"))
+    UpdateAnswerOutput.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     UpdateAnswerOutput.add_member(:answer, Shapes::ShapeRef.new(shape: Answer, location_name: "Answer"))
     UpdateAnswerOutput.struct_class = Types::UpdateAnswerOutput
 
@@ -814,6 +967,36 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:create_lens_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLensShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/lenses/{LensAlias}/shares"
+        o.input = Shapes::ShapeRef.new(shape: CreateLensShareInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateLensShareOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_lens_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLensVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/lenses/{LensAlias}/versions"
+        o.input = Shapes::ShapeRef.new(shape: CreateLensVersionInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateLensVersionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_milestone, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMilestone"
         o.http_method = "POST"
@@ -854,6 +1037,34 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_lens, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLens"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/lenses/{LensAlias}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLensInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_lens_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLensShare"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/lenses/{LensAlias}/shares/{ShareId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLensShareInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -900,12 +1111,38 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:export_lens, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportLens"
+        o.http_method = "GET"
+        o.http_request_uri = "/lenses/{LensAlias}/export"
+        o.input = Shapes::ShapeRef.new(shape: ExportLensInput)
+        o.output = Shapes::ShapeRef.new(shape: ExportLensOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_answer, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAnswer"
         o.http_method = "GET"
         o.http_request_uri = "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers/{QuestionId}"
         o.input = Shapes::ShapeRef.new(shape: GetAnswerInput)
         o.output = Shapes::ShapeRef.new(shape: GetAnswerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_lens, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLens"
+        o.http_method = "GET"
+        o.http_request_uri = "/lenses/{LensAlias}"
+        o.input = Shapes::ShapeRef.new(shape: GetLensInput)
+        o.output = Shapes::ShapeRef.new(shape: GetLensOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -978,6 +1215,21 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:import_lens, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportLens"
+        o.http_method = "PUT"
+        o.http_request_uri = "/importLens"
+        o.input = Shapes::ShapeRef.new(shape: ImportLensInput)
+        o.output = Shapes::ShapeRef.new(shape: ImportLensOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:list_answers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAnswers"
         o.http_method = "GET"
@@ -1022,6 +1274,25 @@ module Aws::WellArchitected
         o.http_request_uri = "/workloads/{WorkloadId}/lensReviews"
         o.input = Shapes::ShapeRef.new(shape: ListLensReviewsInput)
         o.output = Shapes::ShapeRef.new(shape: ListLensReviewsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_lens_shares, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLensShares"
+        o.http_method = "GET"
+        o.http_request_uri = "/lenses/{LensAlias}/shares"
+        o.input = Shapes::ShapeRef.new(shape: ListLensSharesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListLensSharesOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

@@ -446,6 +446,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon CloudWatch                                     | Aws::CloudWatch                          | aws-sdk-cloudwatch                          | 2010-08-01  |
 | Amazon CloudWatch Application Insights                | Aws::ApplicationInsights                 | aws-sdk-applicationinsights                 | 2018-11-25  |
 | Amazon CloudWatch Events                              | Aws::CloudWatchEvents                    | aws-sdk-cloudwatchevents                    | 2015-10-07  |
+| Amazon CloudWatch Evidently                           | Aws::CloudWatchEvidently                 | aws-sdk-cloudwatchevidently                 | 2021-02-01  |
 | Amazon CloudWatch Logs                                | Aws::CloudWatchLogs                      | aws-sdk-cloudwatchlogs                      | 2014-03-28  |
 | Amazon CodeGuru Profiler                              | Aws::CodeGuruProfiler                    | aws-sdk-codeguruprofiler                    | 2019-07-18  |
 | Amazon CodeGuru Reviewer                              | Aws::CodeGuruReviewer                    | aws-sdk-codegurureviewer                    | 2019-09-19  |
@@ -528,6 +529,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon QLDB                                           | Aws::QLDB                                | aws-sdk-qldb                                | 2019-01-02  |
 | Amazon QLDB Session                                   | Aws::QLDBSession                         | aws-sdk-qldbsession                         | 2019-07-11  |
 | Amazon QuickSight                                     | Aws::QuickSight                          | aws-sdk-quicksight                          | 2018-04-01  |
+| Amazon Recycle Bin                                    | Aws::RecycleBin                          | aws-sdk-recyclebin                          | 2021-06-15  |
 | Amazon Redshift                                       | Aws::Redshift                            | aws-sdk-redshift                            | 2012-12-01  |
 | Amazon Rekognition                                    | Aws::Rekognition                         | aws-sdk-rekognition                         | 2016-06-27  |
 | Amazon Relational Database Service                    | Aws::RDS                                 | aws-sdk-rds                                 | 2014-10-31  |
@@ -569,6 +571,7 @@ RubyGems.org page under "LINKS" section.
 | Application Migration Service                         | Aws::Mgn                                 | aws-sdk-mgn                                 | 2020-02-26  |
 | Auto Scaling                                          | Aws::AutoScaling                         | aws-sdk-autoscaling                         | 2011-01-01  |
 | Braket                                                | Aws::Braket                              | aws-sdk-braket                              | 2019-09-01  |
+| CloudWatch RUM                                        | Aws::CloudWatchRUM                       | aws-sdk-cloudwatchrum                       | 2018-05-10  |
 | CodeArtifact                                          | Aws::CodeArtifact                        | aws-sdk-codeartifact                        | 2018-09-22  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                        | aws-sdk-imagebuilder                        | 2019-12-02  |
 | Elastic Disaster Recovery Service                     | Aws::Drs                                 | aws-sdk-drs                                 | 2020-02-26  |
@@ -577,6 +580,7 @@ RubyGems.org page under "LINKS" section.
 | FinSpace Public API                                   | Aws::FinSpaceData                        | aws-sdk-finspacedata                        | 2020-07-13  |
 | FinSpace User Environment Management service          | Aws::Finspace                            | aws-sdk-finspace                            | 2021-03-12  |
 | Firewall Management Service                           | Aws::FMS                                 | aws-sdk-fms                                 | 2018-01-01  |
+| Inspector2                                            | Aws::Inspector2                          | aws-sdk-inspector2                          | 2020-06-08  |
 | Managed Streaming for Kafka                           | Aws::Kafka                               | aws-sdk-kafka                               | 2018-11-14  |
 | Managed Streaming for Kafka Connect                   | Aws::KafkaConnect                        | aws-sdk-kafkaconnect                        | 2021-09-14  |
 | Migration Hub Strategy Recommendations                | Aws::MigrationHubStrategyRecommendations | aws-sdk-migrationhubstrategyrecommendations | 2020-02-19  |

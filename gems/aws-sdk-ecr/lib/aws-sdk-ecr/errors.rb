@@ -45,6 +45,8 @@ module Aws::ECR
   # * {LifecyclePolicyPreviewInProgressException}
   # * {LifecyclePolicyPreviewNotFoundException}
   # * {LimitExceededException}
+  # * {PullThroughCacheRuleAlreadyExistsException}
+  # * {PullThroughCacheRuleNotFoundException}
   # * {ReferencedImagesNotFoundException}
   # * {RegistryPolicyNotFoundException}
   # * {RepositoryAlreadyExistsException}
@@ -55,6 +57,7 @@ module Aws::ECR
   # * {ServerException}
   # * {TooManyTagsException}
   # * {UnsupportedImageTypeException}
+  # * {UnsupportedUpstreamRegistryException}
   # * {UploadNotFoundException}
   # * {ValidationException}
   #
@@ -359,6 +362,36 @@ module Aws::ECR
       end
     end
 
+    class PullThroughCacheRuleAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::PullThroughCacheRuleAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class PullThroughCacheRuleNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::PullThroughCacheRuleNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ReferencedImagesNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -499,6 +532,21 @@ module Aws::ECR
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECR::Types::UnsupportedImageTypeException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class UnsupportedUpstreamRegistryException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::UnsupportedUpstreamRegistryException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

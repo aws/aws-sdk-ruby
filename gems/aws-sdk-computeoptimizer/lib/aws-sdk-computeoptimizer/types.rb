@@ -143,8 +143,20 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] last_refresh_timestamp
     #   The timestamp of when the Auto Scaling group recommendation was last
-    #   refreshed.
+    #   generated.
     #   @return [Time]
+    #
+    # @!attribute [rw] current_performance_risk
+    #   The risk of the current Auto Scaling group not meeting the
+    #   performance needs of its workloads. The higher the risk, the more
+    #   likely the current Auto Scaling group configuration has insufficient
+    #   capacity and cannot meet workload requirements.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_recommendation_preferences
+    #   An object that describes the effective recommendation preferences
+    #   for the Auto Scaling group.
+    #   @return [Types::EffectiveRecommendationPreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupRecommendation AWS API Documentation
     #
@@ -157,7 +169,9 @@ module Aws::ComputeOptimizer
       :look_back_period_in_days,
       :current_configuration,
       :recommendation_options,
-      :last_refresh_timestamp)
+      :last_refresh_timestamp,
+      :current_performance_risk,
+      :effective_recommendation_preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -212,16 +226,119 @@ module Aws::ComputeOptimizer
     #   The top recommendation option is ranked as `1`.
     #   @return [Integer]
     #
+    # @!attribute [rw] savings_opportunity
+    #   An object that describes the savings opportunity for the Auto
+    #   Scaling group recommendation option. Savings opportunity includes
+    #   the estimated monthly savings amount and percentage.
+    #   @return [Types::SavingsOpportunity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupRecommendationOption AWS API Documentation
     #
     class AutoScalingGroupRecommendationOption < Struct.new(
       :configuration,
       :projected_utilization_metrics,
       :performance_risk,
-      :rank)
+      :rank,
+      :savings_opportunity)
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Describes the performance risk ratings for a given resource type.
+    #
+    # Resources with a `high` or `medium` rating are at risk of not meeting
+    # the performance needs of their workloads, while resources with a `low`
+    # rating are performing well in their workloads.
+    #
+    # @!attribute [rw] high
+    #   A count of the applicable resource types with a high performance
+    #   risk rating.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] medium
+    #   A count of the applicable resource types with a medium performance
+    #   risk rating.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] low
+    #   A count of the applicable resource types with a low performance risk
+    #   rating.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] very_low
+    #   A count of the applicable resource types with a very low performance
+    #   risk rating.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/CurrentPerformanceRiskRatings AWS API Documentation
+    #
+    class CurrentPerformanceRiskRatings < Struct.new(
+      :high,
+      :medium,
+      :low,
+      :very_low)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteRecommendationPreferencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction
+    #         scope: {
+    #           name: "Organization", # accepts Organization, AccountId, ResourceArn
+    #           value: "ScopeValue",
+    #         },
+    #         recommendation_preference_names: ["EnhancedInfrastructureMetrics"], # required, accepts EnhancedInfrastructureMetrics
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The target resource type of the recommendation preference to delete.
+    #
+    #   The `Ec2Instance` option encompasses standalone instances and
+    #   instances that are part of Auto Scaling groups. The
+    #   `AutoScalingGroup` option encompasses only instances that are part
+    #   of an Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   An object that describes the scope of the recommendation preference
+    #   to delete.
+    #
+    #   You can delete recommendation preferences that are created at the
+    #   organization level (for management accounts of an organization
+    #   only), account level, and resource level. For more information, see
+    #   [Activating enhanced infrastructure metrics][1] in the *Compute
+    #   Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+    #   @return [Types::Scope]
+    #
+    # @!attribute [rw] recommendation_preference_names
+    #   The name of the recommendation preference to delete.
+    #
+    #   Enhanced infrastructure metrics (`EnhancedInfrastructureMetrics`) is
+    #   the only feature that can be activated through preferences.
+    #   Therefore, it is also the only recommendation preference that can be
+    #   deleted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/DeleteRecommendationPreferencesRequest AWS API Documentation
+    #
+    class DeleteRecommendationPreferencesRequest < Struct.new(
+      :resource_type,
+      :scope,
+      :recommendation_preference_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/DeleteRecommendationPreferencesResponse AWS API Documentation
+    #
+    class DeleteRecommendationPreferencesResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeRecommendationExportJobsRequest
     #   data as a hash:
@@ -404,6 +521,47 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes the effective recommendation preferences for a resource.
+    #
+    # @!attribute [rw] cpu_vendor_architectures
+    #   Describes the CPU vendor and architecture for an instance or Auto
+    #   Scaling group recommendations.
+    #
+    #   For example, when you specify `AWS_ARM64` with:
+    #
+    #   * A GetEC2InstanceRecommendations or
+    #     GetAutoScalingGroupRecommendations request, Compute Optimizer
+    #     returns recommendations that consist of Graviton2 instance types
+    #     only.
+    #
+    #   * A GetEC2RecommendationProjectedMetrics request, Compute Optimizer
+    #     returns projected utilization metrics for Graviton2 instance type
+    #     recommendations only.
+    #
+    #   * A ExportEC2InstanceRecommendations or
+    #     ExportAutoScalingGroupRecommendations request, Compute Optimizer
+    #     exports recommendations that consist of Graviton2 instance types
+    #     only.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enhanced_infrastructure_metrics
+    #   Describes the activation status of the enhanced infrastructure
+    #   metrics preference.
+    #
+    #   A status of `Active` confirms that the preference is applied in the
+    #   latest recommendation refresh, and a status of `Inactive` confirms
+    #   that it's not yet applied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EffectiveRecommendationPreferences AWS API Documentation
+    #
+    class EffectiveRecommendationPreferences < Struct.new(
+      :cpu_vendor_architectures,
+      :enhanced_infrastructure_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a filter that returns a more specific list of account
     # enrollment statuses. Use this filter with the
     # GetEnrollmentStatusesForOrganization action.
@@ -438,6 +596,33 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes the estimated monthly savings amount possible for a given
+    # resource based on On-Demand instance pricing
+    #
+    # For more information, see [Estimated monthly savings and savings
+    # opportunities][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-ec2-recommendations.html#ec2-savings-calculation
+    #
+    # @!attribute [rw] currency
+    #   The currency of the estimated monthly savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the estimated monthly savings.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EstimatedMonthlySavings AWS API Documentation
+    #
+    class EstimatedMonthlySavings < Struct.new(
+      :currency,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ExportAutoScalingGroupRecommendationsRequest
     #   data as a hash:
     #
@@ -449,7 +634,7 @@ module Aws::ComputeOptimizer
     #             values: ["FilterValue"],
     #           },
     #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp
+    #         fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics
     #         s3_destination_config: { # required
     #           bucket: "DestinationBucket",
     #           key_prefix: "DestinationKeyPrefix",
@@ -612,7 +797,7 @@ module Aws::ComputeOptimizer
     #             values: ["FilterValue"],
     #           },
     #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, VolumeArn, Finding, UtilizationMetricsVolumeReadOpsPerSecondMaximum, UtilizationMetricsVolumeWriteOpsPerSecondMaximum, UtilizationMetricsVolumeReadBytesPerSecondMaximum, UtilizationMetricsVolumeWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationVolumeType, CurrentConfigurationVolumeBaselineIOPS, CurrentConfigurationVolumeBaselineThroughput, CurrentConfigurationVolumeBurstIOPS, CurrentConfigurationVolumeBurstThroughput, CurrentConfigurationVolumeSize, CurrentMonthlyPrice, RecommendationOptionsConfigurationVolumeType, RecommendationOptionsConfigurationVolumeBaselineIOPS, RecommendationOptionsConfigurationVolumeBaselineThroughput, RecommendationOptionsConfigurationVolumeBurstIOPS, RecommendationOptionsConfigurationVolumeBurstThroughput, RecommendationOptionsConfigurationVolumeSize, RecommendationOptionsMonthlyPrice, RecommendationOptionsPerformanceRisk, LastRefreshTimestamp
+    #         fields_to_export: ["AccountId"], # accepts AccountId, VolumeArn, Finding, UtilizationMetricsVolumeReadOpsPerSecondMaximum, UtilizationMetricsVolumeWriteOpsPerSecondMaximum, UtilizationMetricsVolumeReadBytesPerSecondMaximum, UtilizationMetricsVolumeWriteBytesPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationVolumeType, CurrentConfigurationVolumeBaselineIOPS, CurrentConfigurationVolumeBaselineThroughput, CurrentConfigurationVolumeBurstIOPS, CurrentConfigurationVolumeBurstThroughput, CurrentConfigurationVolumeSize, CurrentMonthlyPrice, RecommendationOptionsConfigurationVolumeType, RecommendationOptionsConfigurationVolumeBaselineIOPS, RecommendationOptionsConfigurationVolumeBaselineThroughput, RecommendationOptionsConfigurationVolumeBurstIOPS, RecommendationOptionsConfigurationVolumeBurstThroughput, RecommendationOptionsConfigurationVolumeSize, RecommendationOptionsMonthlyPrice, RecommendationOptionsPerformanceRisk, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue
     #         s3_destination_config: { # required
     #           bucket: "DestinationBucket",
     #           key_prefix: "DestinationKeyPrefix",
@@ -750,7 +935,7 @@ module Aws::ComputeOptimizer
     #             values: ["FilterValue"],
     #           },
     #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp
+    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics
     #         s3_destination_config: { # required
     #           bucket: "DestinationBucket",
     #           key_prefix: "DestinationKeyPrefix",
@@ -802,10 +987,10 @@ module Aws::ComputeOptimizer
     #   You must create the destination Amazon S3 bucket for your
     #   recommendations export before you create the export job. Compute
     #   Optimizer does not create the S3 bucket for you. After you create
-    #   the S3 bucket, ensure that it has the required permissions policy
-    #   policy to allow Compute Optimizer to write the export file to it. If
-    #   you plan to specify an object prefix when you create the export job,
-    #   you must include the object prefix in the that you add to the S3
+    #   the S3 bucket, ensure that it has the required permissions policy to
+    #   allow Compute Optimizer to write the export file to it. If you plan
+    #   to specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3
     #   bucket. For more information, see [Amazon S3 Bucket Policy for
     #   Compute Optimizer][1] in the *Compute Optimizer User Guide*.
     #
@@ -893,7 +1078,7 @@ module Aws::ComputeOptimizer
     #             values: ["FilterValue"],
     #           },
     #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, FunctionArn, FunctionVersion, Finding, FindingReasonCodes, NumberOfInvocations, UtilizationMetricsDurationMaximum, UtilizationMetricsDurationAverage, UtilizationMetricsMemoryMaximum, UtilizationMetricsMemoryAverage, LookbackPeriodInDays, CurrentConfigurationMemorySize, CurrentConfigurationTimeout, CurrentCostTotal, CurrentCostAverage, RecommendationOptionsConfigurationMemorySize, RecommendationOptionsCostLow, RecommendationOptionsCostHigh, RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound, RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound, RecommendationOptionsProjectedUtilizationMetricsDurationExpected, LastRefreshTimestamp
+    #         fields_to_export: ["AccountId"], # accepts AccountId, FunctionArn, FunctionVersion, Finding, FindingReasonCodes, NumberOfInvocations, UtilizationMetricsDurationMaximum, UtilizationMetricsDurationAverage, UtilizationMetricsMemoryMaximum, UtilizationMetricsMemoryAverage, LookbackPeriodInDays, CurrentConfigurationMemorySize, CurrentConfigurationTimeout, CurrentCostTotal, CurrentCostAverage, RecommendationOptionsConfigurationMemorySize, RecommendationOptionsCostLow, RecommendationOptionsCostHigh, RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound, RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound, RecommendationOptionsProjectedUtilizationMetricsDurationExpected, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue
     #         s3_destination_config: { # required
     #           bucket: "DestinationBucket",
     #           key_prefix: "DestinationKeyPrefix",
@@ -1516,6 +1701,51 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetEffectiveRecommendationPreferencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which to confirm
+    #   effective recommendation preferences. Only EC2 instance and Auto
+    #   Scaling group ARNs are currently supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEffectiveRecommendationPreferencesRequest AWS API Documentation
+    #
+    class GetEffectiveRecommendationPreferencesRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enhanced_infrastructure_metrics
+    #   The status of the enhanced infrastructure metrics recommendation
+    #   preference. Considers all applicable preferences that you might have
+    #   set at the resource, account, and organization level.
+    #
+    #   A status of `Active` confirms that the preference is applied in the
+    #   latest recommendation refresh, and a status of `Inactive` confirms
+    #   that it's not yet applied.
+    #
+    #   To validate whether the preference is applied to your last generated
+    #   set of recommendations, review the
+    #   `effectiveRecommendationPreferences` value in the response of the
+    #   GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations
+    #   actions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEffectiveRecommendationPreferencesResponse AWS API Documentation
+    #
+    class GetEffectiveRecommendationPreferencesResponse < Struct.new(
+      :enhanced_infrastructure_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEnrollmentStatusRequest AWS API Documentation
@@ -1745,6 +1975,88 @@ module Aws::ComputeOptimizer
       :identifier,
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRecommendationPreferencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction
+    #         scope: {
+    #           name: "Organization", # accepts Organization, AccountId, ResourceArn
+    #           value: "ScopeValue",
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The target resource type of the recommendation preference for which
+    #   to return preferences.
+    #
+    #   The `Ec2Instance` option encompasses standalone instances and
+    #   instances that are part of Auto Scaling groups. The
+    #   `AutoScalingGroup` option encompasses only instances that are part
+    #   of an Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   An object that describes the scope of the recommendation preference
+    #   to return.
+    #
+    #   You can return recommendation preferences that are created at the
+    #   organization level (for management accounts of an organization
+    #   only), account level, and resource level. For more information, see
+    #   [Activating enhanced infrastructure metrics][1] in the *Compute
+    #   Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+    #   @return [Types::Scope]
+    #
+    # @!attribute [rw] next_token
+    #   The token to advance to the next page of recommendation preferences.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of recommendation preferences to return with a
+    #   single request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `nextToken` value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetRecommendationPreferencesRequest AWS API Documentation
+    #
+    class GetRecommendationPreferencesRequest < Struct.new(
+      :resource_type,
+      :scope,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to advance to the next page of recommendation
+    #   preferences.
+    #
+    #   This value is null when there are no more pages of recommendation
+    #   preferences to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_preferences_details
+    #   An array of objects that describe recommendation preferences.
+    #   @return [Array<Types::RecommendationPreferencesDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetRecommendationPreferencesResponse AWS API Documentation
+    #
+    class GetRecommendationPreferencesResponse < Struct.new(
+      :next_token,
+      :recommendation_preferences_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2023,8 +2335,19 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] last_refresh_timestamp
     #   The timestamp of when the instance recommendation was last
-    #   refreshed.
+    #   generated.
     #   @return [Time]
+    #
+    # @!attribute [rw] current_performance_risk
+    #   The risk of the current instance not meeting the performance needs
+    #   of its workloads. The higher the risk, the more likely the current
+    #   Lambda function requires more memory.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_recommendation_preferences
+    #   An object that describes the effective recommendation preferences
+    #   for the instance.
+    #   @return [Types::EffectiveRecommendationPreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendation AWS API Documentation
     #
@@ -2039,7 +2362,9 @@ module Aws::ComputeOptimizer
       :look_back_period_in_days,
       :recommendation_options,
       :recommendation_sources,
-      :last_refresh_timestamp)
+      :last_refresh_timestamp,
+      :current_performance_risk,
+      :effective_recommendation_preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2191,6 +2516,12 @@ module Aws::ComputeOptimizer
     #   The top recommendation option is ranked as `1`.
     #   @return [Integer]
     #
+    # @!attribute [rw] savings_opportunity
+    #   An object that describes the savings opportunity for the instance
+    #   recommendation option. Savings opportunity includes the estimated
+    #   monthly savings amount and percentage.
+    #   @return [Types::SavingsOpportunity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendationOption AWS API Documentation
     #
     class InstanceRecommendationOption < Struct.new(
@@ -2198,7 +2529,8 @@ module Aws::ComputeOptimizer
       :projected_utilization_metrics,
       :platform_differences,
       :performance_risk,
-      :rank)
+      :rank,
+      :savings_opportunity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2324,12 +2656,19 @@ module Aws::ComputeOptimizer
     #   of the function recommendation option.
     #   @return [Array<Types::LambdaFunctionMemoryProjectedMetric>]
     #
+    # @!attribute [rw] savings_opportunity
+    #   An object that describes the savings opportunity for the Lambda
+    #   function recommendation option. Savings opportunity includes the
+    #   estimated monthly savings amount and percentage.
+    #   @return [Types::SavingsOpportunity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaFunctionMemoryRecommendationOption AWS API Documentation
     #
     class LambdaFunctionMemoryRecommendationOption < Struct.new(
       :rank,
       :memory_size,
-      :projected_utilization_metrics)
+      :projected_utilization_metrics,
+      :savings_opportunity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2370,7 +2709,7 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] last_refresh_timestamp
     #   The timestamp of when the function recommendation was last
-    #   refreshed.
+    #   generated.
     #   @return [Time]
     #
     # @!attribute [rw] finding
@@ -2452,6 +2791,13 @@ module Aws::ComputeOptimizer
     #   recommendation options for the function.
     #   @return [Array<Types::LambdaFunctionMemoryRecommendationOption>]
     #
+    # @!attribute [rw] current_performance_risk
+    #   The risk of the current Lambda function not meeting the performance
+    #   needs of its workloads. The higher the risk, the more likely the
+    #   current Lambda function configuration is underperforming in its
+    #   workload.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaFunctionRecommendation AWS API Documentation
     #
     class LambdaFunctionRecommendation < Struct.new(
@@ -2465,7 +2811,8 @@ module Aws::ComputeOptimizer
       :last_refresh_timestamp,
       :finding,
       :finding_reason_codes,
-      :memory_size_recommendation_options)
+      :memory_size_recommendation_options,
+      :current_performance_risk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2684,6 +3031,74 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutRecommendationPreferencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction
+    #         scope: {
+    #           name: "Organization", # accepts Organization, AccountId, ResourceArn
+    #           value: "ScopeValue",
+    #         },
+    #         enhanced_infrastructure_metrics: "Active", # accepts Active, Inactive
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The target resource type of the recommendation preference to create.
+    #
+    #   The `Ec2Instance` option encompasses standalone instances and
+    #   instances that are part of Auto Scaling groups. The
+    #   `AutoScalingGroup` option encompasses only instances that are part
+    #   of an Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   An object that describes the scope of the recommendation preference
+    #   to create.
+    #
+    #   You can create recommendation preferences at the organization level
+    #   (for management accounts of an organization only), account level,
+    #   and resource level. For more information, see [Activating enhanced
+    #   infrastructure metrics][1] in the *Compute Optimizer User Guide*.
+    #
+    #   <note markdown="1"> You cannot create recommendation preferences for Auto Scaling groups
+    #   at the organization and account levels. You can create
+    #   recommendation preferences for Auto Scaling groups only at the
+    #   resource level by specifying a scope name of `ResourceArn` and a
+    #   scope value of the Auto Scaling group Amazon Resource Name (ARN).
+    #   This will configure the preference for all instances that are part
+    #   of the specified the Auto Scaling group.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+    #   @return [Types::Scope]
+    #
+    # @!attribute [rw] enhanced_infrastructure_metrics
+    #   The status of the enhanced infrastructure metrics recommendation
+    #   preference to create or update.
+    #
+    #   A status of `Active` confirms that the preference is applied in the
+    #   latest recommendation refresh, and a status of `Inactive` confirms
+    #   that it's not yet applied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/PutRecommendationPreferencesRequest AWS API Documentation
+    #
+    class PutRecommendationPreferencesRequest < Struct.new(
+      :resource_type,
+      :scope,
+      :enhanced_infrastructure_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/PutRecommendationPreferencesResponse AWS API Documentation
+    #
+    class PutRecommendationPreferencesResponse < Aws::EmptyStructure; end
+
     # A summary of a finding reason code.
     #
     # @!attribute [rw] name
@@ -2754,7 +3169,9 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes preferences for recommendations.
+    # Describes the recommendation preferences to return in the response of
+    # a GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations,
+    # and GetEC2RecommendationProjectedMetrics request.
     #
     # @note When making an API call, you may pass RecommendationPreferences
     #   data as a hash:
@@ -2792,6 +3209,49 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes a recommendation preference.
+    #
+    # @!attribute [rw] scope
+    #   An object that describes the scope of the recommendation preference.
+    #
+    #   Recommendation preferences can be created at the organization level
+    #   (for management accounts of an organization only), account level,
+    #   and resource level. For more information, see [Activating enhanced
+    #   infrastructure metrics][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+    #   @return [Types::Scope]
+    #
+    # @!attribute [rw] resource_type
+    #   The target resource type of the recommendation preference to create.
+    #
+    #   The `Ec2Instance` option encompasses standalone instances and
+    #   instances that are part of Auto Scaling groups. The
+    #   `AutoScalingGroup` option encompasses only instances that are part
+    #   of an Auto Scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] enhanced_infrastructure_metrics
+    #   The status of the enhanced infrastructure metrics recommendation
+    #   preference.
+    #
+    #   A status of `Active` confirms that the preference is applied in the
+    #   latest recommendation refresh, and a status of `Inactive` confirms
+    #   that it's not yet applied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RecommendationPreferencesDetail AWS API Documentation
+    #
+    class RecommendationPreferencesDetail < Struct.new(
+      :scope,
+      :resource_type,
+      :enhanced_infrastructure_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the source of a recommendation, such as an Amazon EC2
     # instance or Auto Scaling group.
     #
@@ -2819,19 +3279,32 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::Summary>]
     #
     # @!attribute [rw] recommendation_resource_type
-    #   The resource type of the recommendation.
+    #   The resource type that the recommendation summary applies to.
     #   @return [String]
     #
     # @!attribute [rw] account_id
     #   The Amazon Web Services account ID of the recommendation summary.
     #   @return [String]
     #
+    # @!attribute [rw] savings_opportunity
+    #   An object that describes the savings opportunity for a given
+    #   resource type. Savings opportunity includes the estimated monthly
+    #   savings amount and percentage.
+    #   @return [Types::SavingsOpportunity]
+    #
+    # @!attribute [rw] current_performance_risk_ratings
+    #   An object that describes the performance risk ratings for a given
+    #   resource type.
+    #   @return [Types::CurrentPerformanceRiskRatings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RecommendationSummary AWS API Documentation
     #
     class RecommendationSummary < Struct.new(
       :summaries,
       :recommendation_resource_type,
-      :account_id)
+      :account_id,
+      :savings_opportunity,
+      :current_performance_risk_ratings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2965,6 +3438,121 @@ module Aws::ComputeOptimizer
     class S3DestinationConfig < Struct.new(
       :bucket,
       :key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings opportunity for recommendations of a given
+    # resource type or for the recommendation option of an individual
+    # resource.
+    #
+    # Savings opportunity represents the estimated monthly savings you can
+    # achieve by implementing a given Compute Optimizer recommendation.
+    #
+    # Savings opportunity data requires that you opt in to Cost Explorer, as
+    # well as activate **Receive Amazon EC2 resource recommendations** in
+    # the Cost Explorer preferences page. That creates a connection between
+    # Cost Explorer and Compute Optimizer. With this connection, Cost
+    # Explorer generates savings estimates considering the price of existing
+    # resources, the price of recommended resources, and historical usage
+    # data. Estimated monthly savings reflects the projected dollar savings
+    # associated with each of the recommendations generated. For more
+    # information, see [Enabling Cost Explorer][1] and [Optimizing your cost
+    # with Rightsizing Recommendations][2] in the *Cost Management User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+    # [2]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html
+    #
+    # @!attribute [rw] savings_opportunity_percentage
+    #   The estimated monthly savings possible as a percentage of monthly
+    #   cost.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_monthly_savings
+    #   An object that describes the estimated monthly savings amount
+    #   possible based on On-Demand instance pricing.
+    #   @return [Types::EstimatedMonthlySavings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/SavingsOpportunity AWS API Documentation
+    #
+    class SavingsOpportunity < Struct.new(
+      :savings_opportunity_percentage,
+      :estimated_monthly_savings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the scope of a recommendation preference.
+    #
+    # Recommendation preferences can be created at the organization level
+    # (for management accounts of an organization only), account level, and
+    # resource level. For more information, see [Activating enhanced
+    # infrastructure metrics][1] in the *Compute Optimizer User Guide*.
+    #
+    # <note markdown="1"> You cannot create recommendation preferences for Auto Scaling groups
+    # at the organization and account levels. You can create recommendation
+    # preferences for Auto Scaling groups only at the resource level by
+    # specifying a scope name of `ResourceArn` and a scope value of the Auto
+    # Scaling group Amazon Resource Name (ARN). This will configure the
+    # preference for all instances that are part of the specified the Auto
+    # Scaling group.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+    #
+    # @note When making an API call, you may pass Scope
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Organization", # accepts Organization, AccountId, ResourceArn
+    #         value: "ScopeValue",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the scope.
+    #
+    #   The following scopes are possible:
+    #
+    #   * `Organization` - Specifies that the recommendation preference
+    #     applies at the organization level, for all member accounts of an
+    #     organization.
+    #
+    #   * `AccountId` - Specifies that the recommendation preference applies
+    #     at the account level, for all resources of a given resource type
+    #     in an account.
+    #
+    #   * `ResourceArn` - Specifies that the recommendation preference
+    #     applies at the individual resource level.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the scope.
+    #
+    #   If you specified the `name` of the scope as:
+    #
+    #   * `Organization` - The `value` must be `ALL_ACCOUNTS`.
+    #
+    #   * `AccountId` - The `value` must be a 12-digit Amazon Web Services
+    #     account ID.
+    #
+    #   * `ResourceArn` - The `value` must be the Amazon Resource Name (ARN)
+    #     of an EC2 instance or an Auto Scaling group.
+    #
+    #   Only EC2 instance and Auto Scaling group ARNs are currently
+    #   supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/Scope AWS API Documentation
+    #
+    class Scope < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3324,8 +3912,14 @@ module Aws::ComputeOptimizer
     #   @return [Array<Types::VolumeRecommendationOption>]
     #
     # @!attribute [rw] last_refresh_timestamp
-    #   The timestamp of when the volume recommendation was last refreshed.
+    #   The timestamp of when the volume recommendation was last generated.
     #   @return [Time]
+    #
+    # @!attribute [rw] current_performance_risk
+    #   The risk of the current EBS volume not meeting the performance needs
+    #   of its workloads. The higher the risk, the more likely the current
+    #   EBS volume doesn't have sufficient capacity.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/VolumeRecommendation AWS API Documentation
     #
@@ -3337,7 +3931,8 @@ module Aws::ComputeOptimizer
       :utilization_metrics,
       :look_back_period_in_days,
       :volume_recommendation_options,
-      :last_refresh_timestamp)
+      :last_refresh_timestamp,
+      :current_performance_risk)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3368,12 +3963,19 @@ module Aws::ComputeOptimizer
     #   The top recommendation option is ranked as `1`.
     #   @return [Integer]
     #
+    # @!attribute [rw] savings_opportunity
+    #   An object that describes the savings opportunity for the EBS volume
+    #   recommendation option. Savings opportunity includes the estimated
+    #   monthly savings amount and percentage.
+    #   @return [Types::SavingsOpportunity]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/VolumeRecommendationOption AWS API Documentation
     #
     class VolumeRecommendationOption < Struct.new(
       :configuration,
       :performance_risk,
-      :rank)
+      :rank,
+      :savings_opportunity)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -54,6 +54,60 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # The API Gateway API that is the asset.
+    #
+    # @!attribute [rw] api_description
+    #   The API description of the API asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_endpoint
+    #   The API endpoint of the API asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_id
+    #   The unique identifier of the API asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_key
+    #   The API key of the API asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_name
+    #   The API name of the API asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_specification_download_url
+    #   The download URL of the API specification of the API asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_specification_download_url_expires_at
+    #   The date and time that the upload URL expires, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] protocol_type
+    #   The protocol type of the API asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The stage of the API asset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ApiGatewayApiAsset AWS API Documentation
+    #
+    class ApiGatewayApiAsset < Struct.new(
+      :api_description,
+      :api_endpoint,
+      :api_id,
+      :api_key,
+      :api_name,
+      :api_specification_download_url,
+      :api_specification_download_url_expires_at,
+      :protocol_type,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The destination for the asset.
     #
     # @note When making an API call, you may pass AssetDestinationEntry
@@ -97,20 +151,27 @@ module Aws::DataExchange
     #   The Amazon Redshift datashare that is the asset.
     #   @return [Types::RedshiftDataShareAsset]
     #
+    # @!attribute [rw] api_gateway_api_asset
+    #   Information about the API Gateway API asset.
+    #   @return [Types::ApiGatewayApiAsset]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/AssetDetails AWS API Documentation
     #
     class AssetDetails < Struct.new(
       :s3_snapshot_asset,
-      :redshift_data_share_asset)
+      :redshift_data_share_asset,
+      :api_gateway_api_asset)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # An asset in AWS Data Exchange is a piece of data. The asset can be a
-    # structured data file, an image file, or some other data file that can
-    # be stored as an S3 object, or an Amazon Redshift datashare (Preview).
-    # When you create an import job for your files, you create an asset in
-    # AWS Data Exchange for each of those files.
+    # An asset in AWS Data Exchange is a piece of data (S3 object) or a
+    # means of fulfilling data (Amazon Redshift datashare or Amazon API
+    # Gateway API). The asset can be a structured data file, an image file,
+    # or some other data file that can be stored as an S3 object, an Amazon
+    # API Gateway API, or an Amazon Redshift datashare (Preview). When you
+    # create an import job for your files, API Gateway APIs, or Amazon
+    # Redshift datashares, you create an asset in AWS Data Exchange.
     #
     # @!attribute [rw] arn
     #   The ARN for the asset.
@@ -139,7 +200,10 @@ module Aws::DataExchange
     # @!attribute [rw] name
     #   The name of the asset. When importing from Amazon S3, the S3 object
     #   key is used as the asset name. When exporting to Amazon S3, the
-    #   asset name is used as default target S3 object key.
+    #   asset name is used as default target S3 object key. When importing
+    #   from Amazon API Gateway API, the API name is used as the asset name.
+    #   When importing from Amazon Redshift, the datashare name is used as
+    #   the asset name.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
@@ -319,7 +383,7 @@ module Aws::DataExchange
     #   data as a hash:
     #
     #       {
-    #         asset_type: "S3_SNAPSHOT", # required, accepts S3_SNAPSHOT, REDSHIFT_DATA_SHARE
+    #         asset_type: "S3_SNAPSHOT", # required, accepts S3_SNAPSHOT, REDSHIFT_DATA_SHARE, API_GATEWAY_API
     #         description: "Description", # required
     #         name: "Name", # required
     #         tags: {
@@ -579,8 +643,19 @@ module Aws::DataExchange
     #             data_set_id: "Id", # required
     #             revision_id: "Id", # required
     #           },
+    #           import_asset_from_api_gateway_api: {
+    #             api_description: "ApiDescription",
+    #             api_id: "__string", # required
+    #             api_key: "__string",
+    #             api_name: "__string", # required
+    #             api_specification_md_5_hash: "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093", # required
+    #             data_set_id: "Id", # required
+    #             protocol_type: "REST", # required, accepts REST
+    #             revision_id: "Id", # required
+    #             stage: "__string", # required
+    #           },
     #         },
-    #         type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3, IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES
+    #         type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3, IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES, IMPORT_ASSET_FROM_API_GATEWAY_API
     #       }
     #
     # @!attribute [rw] details
@@ -1291,7 +1366,10 @@ module Aws::DataExchange
     # @!attribute [rw] name
     #   The name of the asset. When importing from Amazon S3, the S3 object
     #   key is used as the asset name. When exporting to Amazon S3, the
-    #   asset name is used as default target S3 object key.
+    #   asset name is used as default target S3 object key. When importing
+    #   from Amazon API Gateway API, the API name is used as the asset name.
+    #   When importing from Amazon Redshift, the datashare name is used as
+    #   the asset name.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
@@ -1604,6 +1682,141 @@ module Aws::DataExchange
       :source_id,
       :tags,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request details.
+    #
+    # @note When making an API call, you may pass ImportAssetFromApiGatewayApiRequestDetails
+    #   data as a hash:
+    #
+    #       {
+    #         api_description: "ApiDescription",
+    #         api_id: "__string", # required
+    #         api_key: "__string",
+    #         api_name: "__string", # required
+    #         api_specification_md_5_hash: "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093", # required
+    #         data_set_id: "Id", # required
+    #         protocol_type: "REST", # required, accepts REST
+    #         revision_id: "Id", # required
+    #         stage: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] api_description
+    #   The API description. Markdown supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_id
+    #   The API Gateway API ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_key
+    #   The API Gateway API key.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_name
+    #   The API name.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_specification_md_5_hash
+    #   The Base64-encoded MD5 hash of the OpenAPI 3.0 JSON API
+    #   specification file. It is used to ensure the integrity of the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
+    #   The data set ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol_type
+    #   The protocol type.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The API stage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ImportAssetFromApiGatewayApiRequestDetails AWS API Documentation
+    #
+    class ImportAssetFromApiGatewayApiRequestDetails < Struct.new(
+      :api_description,
+      :api_id,
+      :api_key,
+      :api_name,
+      :api_specification_md_5_hash,
+      :data_set_id,
+      :protocol_type,
+      :revision_id,
+      :stage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response details.
+    #
+    # @!attribute [rw] api_description
+    #   The API description.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_id
+    #   The API ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_key
+    #   The API key.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_name
+    #   The API name.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_specification_md_5_hash
+    #   The Base64-encoded Md5 hash for the API asset, used to ensure the
+    #   integrity of the API at that location.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_specification_upload_url
+    #   The upload URL of the API specification.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_specification_upload_url_expires_at
+    #   The date and time that the upload URL expires, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_set_id
+    #   The data set ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol_type
+    #   The protocol type.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage
+    #   The API stage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ImportAssetFromApiGatewayApiResponseDetails AWS API Documentation
+    #
+    class ImportAssetFromApiGatewayApiResponseDetails < Struct.new(
+      :api_description,
+      :api_id,
+      :api_key,
+      :api_name,
+      :api_specification_md_5_hash,
+      :api_specification_upload_url,
+      :api_specification_upload_url_expires_at,
+      :data_set_id,
+      :protocol_type,
+      :revision_id,
+      :stage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2329,6 +2542,17 @@ module Aws::DataExchange
     #           data_set_id: "Id", # required
     #           revision_id: "Id", # required
     #         },
+    #         import_asset_from_api_gateway_api: {
+    #           api_description: "ApiDescription",
+    #           api_id: "__string", # required
+    #           api_key: "__string",
+    #           api_name: "__string", # required
+    #           api_specification_md_5_hash: "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093", # required
+    #           data_set_id: "Id", # required
+    #           protocol_type: "REST", # required, accepts REST
+    #           revision_id: "Id", # required
+    #           stage: "__string", # required
+    #         },
     #       }
     #
     # @!attribute [rw] export_asset_to_signed_url
@@ -2355,6 +2579,10 @@ module Aws::DataExchange
     #   Details from an import from Amazon Redshift datashare request.
     #   @return [Types::ImportAssetsFromRedshiftDataSharesRequestDetails]
     #
+    # @!attribute [rw] import_asset_from_api_gateway_api
+    #   Information about the import asset from API Gateway API request.
+    #   @return [Types::ImportAssetFromApiGatewayApiRequestDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RequestDetails AWS API Documentation
     #
     class RequestDetails < Struct.new(
@@ -2363,7 +2591,8 @@ module Aws::DataExchange
       :export_revisions_to_s3,
       :import_asset_from_signed_url,
       :import_assets_from_s3,
-      :import_assets_from_redshift_data_shares)
+      :import_assets_from_redshift_data_shares,
+      :import_asset_from_api_gateway_api)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2418,6 +2647,10 @@ module Aws::DataExchange
     #   Details from an import from Amazon Redshift datashare response.
     #   @return [Types::ImportAssetsFromRedshiftDataSharesResponseDetails]
     #
+    # @!attribute [rw] import_asset_from_api_gateway_api
+    #   The response details.
+    #   @return [Types::ImportAssetFromApiGatewayApiResponseDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ResponseDetails AWS API Documentation
     #
     class ResponseDetails < Struct.new(
@@ -2426,7 +2659,8 @@ module Aws::DataExchange
       :export_revisions_to_s3,
       :import_asset_from_signed_url,
       :import_assets_from_s3,
-      :import_assets_from_redshift_data_shares)
+      :import_assets_from_redshift_data_shares,
+      :import_asset_from_api_gateway_api)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2568,6 +2802,83 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SendApiAssetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         body: "__string",
+    #         query_string_parameters: {
+    #           "__string" => "__string",
+    #         },
+    #         asset_id: "__string", # required
+    #         data_set_id: "__string", # required
+    #         request_headers: {
+    #           "__string" => "__string",
+    #         },
+    #         method: "__string",
+    #         path: "__string",
+    #         revision_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] body
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string_parameters
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] asset_id
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
+    #   @return [String]
+    #
+    # @!attribute [rw] request_headers
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] method
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/SendApiAssetRequest AWS API Documentation
+    #
+    class SendApiAssetRequest < Struct.new(
+      :body,
+      :query_string_parameters,
+      :asset_id,
+      :data_set_id,
+      :request_headers,
+      :method,
+      :path,
+      :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the send API asset response.
+    #
+    # @!attribute [rw] body
+    #   The response body from the underlying API tracked by the API asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_headers
+    #   The response headers from the underlying API tracked by the API
+    #   asset.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/SendApiAssetResponse AWS API Documentation
+    #
+    class SendApiAssetResponse < Struct.new(
+      :body,
+      :response_headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request has exceeded the quotas imposed by the service.
     #
     # @!attribute [rw] limit_name
@@ -2694,7 +3005,10 @@ module Aws::DataExchange
     # @!attribute [rw] name
     #   The name of the asset. When importing from Amazon S3, the S3 object
     #   key is used as the asset name. When exporting to Amazon S3, the
-    #   asset name is used as default target S3 object key.
+    #   asset name is used as default target S3 object key. When importing
+    #   from Amazon API Gateway API, the API name is used as the asset name.
+    #   When importing from Amazon Redshift, the datashare name is used as
+    #   the asset name.
     #   @return [String]
     #
     # @!attribute [rw] revision_id
@@ -2740,7 +3054,10 @@ module Aws::DataExchange
     # @!attribute [rw] name
     #   The name of the asset. When importing from Amazon S3, the S3 object
     #   key is used as the asset name. When exporting to Amazon S3, the
-    #   asset name is used as default target S3 object key.
+    #   asset name is used as default target S3 object key. When importing
+    #   from Amazon API Gateway API, the API name is used as the asset name.
+    #   When importing from Amazon Redshift, the datashare name is used as
+    #   the asset name.
     #   @return [String]
     #
     # @!attribute [rw] revision_id

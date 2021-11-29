@@ -28,7 +28,7 @@ require_relative 'aws-sdk-computeoptimizer/customizations'
 # structure.
 #
 #     compute_optimizer = Aws::ComputeOptimizer::Client.new
-#     resp = compute_optimizer.describe_recommendation_export_jobs(params)
+#     resp = compute_optimizer.delete_recommendation_preferences(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-computeoptimizer/customizations'
 # @!group service
 module Aws::ComputeOptimizer
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.27.0'
 
 end

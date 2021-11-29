@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.284.0 (2021-11-29)
+------------------
+
+* Feature - This release adds support for G5g and M6a instances. This release also adds support for Amazon EBS Snapshots Archive, a feature that enables you to archive your EBS snapshots; and Recycle Bin, a feature that enables you to protect your EBS snapshots against accidental deletion.
+
 1.283.0 (2021-11-26)
 ------------------
 

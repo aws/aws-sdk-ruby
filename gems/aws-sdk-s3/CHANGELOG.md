@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2021-11-29)
+------------------
+
+* Feature - Amazon S3 Event Notifications adds Amazon EventBridge as a destination and supports additional event types. The PutBucketNotificationConfiguration API can now skip validation of Amazon SQS, Amazon SNS and AWS Lambda destinations.
+
 1.107.0 (2021-11-23)
 ------------------
 

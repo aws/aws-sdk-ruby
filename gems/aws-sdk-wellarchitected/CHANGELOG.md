@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2021-11-29)
+------------------
+
+* Feature - This update provides support for Well-Architected API users to use custom lens features.
+
 1.10.0 (2021-11-04)
 ------------------
 

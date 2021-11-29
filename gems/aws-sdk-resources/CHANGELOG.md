@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+3.122.0 (2021-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-recyclebin` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-inspector2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-cloudwatchrum` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-cloudwatchevidently` gem.
+
 3.121.0 (2021-11-29)
 ------------------
 

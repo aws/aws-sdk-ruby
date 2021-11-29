@@ -157,8 +157,14 @@
   "CloudWatchEvents": {
     "models": "events/2015-10-07"
   },
+  "CloudWatchEvidently": {
+    "models": "evidently/2021-02-01"
+  },
   "CloudWatchLogs": {
     "models": "logs/2014-03-28"
+  },
+  "CloudWatchRUM": {
+    "models": "rum/2018-05-10"
   },
   "CodeArtifact": {
     "models": "codeartifact/2018-09-22"
@@ -440,6 +446,9 @@
   },
   "Inspector": {
     "models": "inspector/2016-02-16"
+  },
+  "Inspector2": {
+    "models": "inspector2/2020-06-08"
   },
   "IoT": {
     "models": "iot/2015-05-28"
@@ -729,6 +738,9 @@
   },
   "RDSDataService": {
     "models": "rds-data/2018-08-01"
+  },
+  "RecycleBin": {
+    "models": "rbin/2021-06-15"
   },
   "Redshift": {
     "models": "redshift/2012-12-01"

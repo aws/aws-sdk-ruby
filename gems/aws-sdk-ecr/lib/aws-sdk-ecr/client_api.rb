@@ -13,29 +13,45 @@ module Aws::ECR
 
     include Seahorse::Model
 
+    Arch = Shapes::StringShape.new(name: 'Arch')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
     AttributeKey = Shapes::StringShape.new(name: 'AttributeKey')
     AttributeList = Shapes::ListShape.new(name: 'AttributeList')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
+    Author = Shapes::StringShape.new(name: 'Author')
     AuthorizationData = Shapes::StructureShape.new(name: 'AuthorizationData')
     AuthorizationDataList = Shapes::ListShape.new(name: 'AuthorizationDataList')
+    AwsEcrContainerImageDetails = Shapes::StructureShape.new(name: 'AwsEcrContainerImageDetails')
     Base64 = Shapes::StringShape.new(name: 'Base64')
+    BaseScore = Shapes::FloatShape.new(name: 'BaseScore')
     BatchCheckLayerAvailabilityRequest = Shapes::StructureShape.new(name: 'BatchCheckLayerAvailabilityRequest')
     BatchCheckLayerAvailabilityResponse = Shapes::StructureShape.new(name: 'BatchCheckLayerAvailabilityResponse')
     BatchDeleteImageRequest = Shapes::StructureShape.new(name: 'BatchDeleteImageRequest')
     BatchDeleteImageResponse = Shapes::StructureShape.new(name: 'BatchDeleteImageResponse')
     BatchGetImageRequest = Shapes::StructureShape.new(name: 'BatchGetImageRequest')
     BatchGetImageResponse = Shapes::StructureShape.new(name: 'BatchGetImageResponse')
+    BatchGetRepositoryScanningConfigurationRequest = Shapes::StructureShape.new(name: 'BatchGetRepositoryScanningConfigurationRequest')
+    BatchGetRepositoryScanningConfigurationResponse = Shapes::StructureShape.new(name: 'BatchGetRepositoryScanningConfigurationResponse')
     BatchedOperationLayerDigest = Shapes::StringShape.new(name: 'BatchedOperationLayerDigest')
     BatchedOperationLayerDigestList = Shapes::ListShape.new(name: 'BatchedOperationLayerDigestList')
     CompleteLayerUploadRequest = Shapes::StructureShape.new(name: 'CompleteLayerUploadRequest')
     CompleteLayerUploadResponse = Shapes::StructureShape.new(name: 'CompleteLayerUploadResponse')
+    CreatePullThroughCacheRuleRequest = Shapes::StructureShape.new(name: 'CreatePullThroughCacheRuleRequest')
+    CreatePullThroughCacheRuleResponse = Shapes::StructureShape.new(name: 'CreatePullThroughCacheRuleResponse')
     CreateRepositoryRequest = Shapes::StructureShape.new(name: 'CreateRepositoryRequest')
     CreateRepositoryResponse = Shapes::StructureShape.new(name: 'CreateRepositoryResponse')
     CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
+    CvssScore = Shapes::StructureShape.new(name: 'CvssScore')
+    CvssScoreAdjustment = Shapes::StructureShape.new(name: 'CvssScoreAdjustment')
+    CvssScoreAdjustmentList = Shapes::ListShape.new(name: 'CvssScoreAdjustmentList')
+    CvssScoreDetails = Shapes::StructureShape.new(name: 'CvssScoreDetails')
+    CvssScoreList = Shapes::ListShape.new(name: 'CvssScoreList')
+    Date = Shapes::TimestampShape.new(name: 'Date')
     DeleteLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyRequest')
     DeleteLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyResponse')
+    DeletePullThroughCacheRuleRequest = Shapes::StructureShape.new(name: 'DeletePullThroughCacheRuleRequest')
+    DeletePullThroughCacheRuleResponse = Shapes::StructureShape.new(name: 'DeletePullThroughCacheRuleResponse')
     DeleteRegistryPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRegistryPolicyRequest')
     DeleteRegistryPolicyResponse = Shapes::StructureShape.new(name: 'DeleteRegistryPolicyResponse')
     DeleteRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryPolicyRequest')
@@ -49,6 +65,8 @@ module Aws::ECR
     DescribeImagesFilter = Shapes::StructureShape.new(name: 'DescribeImagesFilter')
     DescribeImagesRequest = Shapes::StructureShape.new(name: 'DescribeImagesRequest')
     DescribeImagesResponse = Shapes::StructureShape.new(name: 'DescribeImagesResponse')
+    DescribePullThroughCacheRulesRequest = Shapes::StructureShape.new(name: 'DescribePullThroughCacheRulesRequest')
+    DescribePullThroughCacheRulesResponse = Shapes::StructureShape.new(name: 'DescribePullThroughCacheRulesResponse')
     DescribeRegistryRequest = Shapes::StructureShape.new(name: 'DescribeRegistryRequest')
     DescribeRegistryResponse = Shapes::StructureShape.new(name: 'DescribeRegistryResponse')
     DescribeRepositoriesRequest = Shapes::StructureShape.new(name: 'DescribeRepositoriesRequest')
@@ -56,9 +74,14 @@ module Aws::ECR
     EmptyUploadException = Shapes::StructureShape.new(name: 'EmptyUploadException')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    EnhancedImageScanFinding = Shapes::StructureShape.new(name: 'EnhancedImageScanFinding')
+    EnhancedImageScanFindingList = Shapes::ListShape.new(name: 'EnhancedImageScanFindingList')
+    Epoch = Shapes::IntegerShape.new(name: 'Epoch')
     EvaluationTimestamp = Shapes::TimestampShape.new(name: 'EvaluationTimestamp')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExpirationTimestamp = Shapes::TimestampShape.new(name: 'ExpirationTimestamp')
+    FilePath = Shapes::StringShape.new(name: 'FilePath')
+    FindingArn = Shapes::StringShape.new(name: 'FindingArn')
     FindingDescription = Shapes::StringShape.new(name: 'FindingDescription')
     FindingName = Shapes::StringShape.new(name: 'FindingName')
     FindingSeverity = Shapes::StringShape.new(name: 'FindingSeverity')
@@ -75,6 +98,8 @@ module Aws::ECR
     GetLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'GetLifecyclePolicyResponse')
     GetRegistryPolicyRequest = Shapes::StructureShape.new(name: 'GetRegistryPolicyRequest')
     GetRegistryPolicyResponse = Shapes::StructureShape.new(name: 'GetRegistryPolicyResponse')
+    GetRegistryScanningConfigurationRequest = Shapes::StructureShape.new(name: 'GetRegistryScanningConfigurationRequest')
+    GetRegistryScanningConfigurationResponse = Shapes::StructureShape.new(name: 'GetRegistryScanningConfigurationResponse')
     GetRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'GetRepositoryPolicyRequest')
     GetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'GetRepositoryPolicyResponse')
     Image = Shapes::StructureShape.new(name: 'Image')
@@ -107,6 +132,7 @@ module Aws::ECR
     ImageTagAlreadyExistsException = Shapes::StructureShape.new(name: 'ImageTagAlreadyExistsException')
     ImageTagList = Shapes::ListShape.new(name: 'ImageTagList')
     ImageTagMutability = Shapes::StringShape.new(name: 'ImageTagMutability')
+    ImageTagsList = Shapes::ListShape.new(name: 'ImageTagsList')
     InitiateLayerUploadRequest = Shapes::StructureShape.new(name: 'InitiateLayerUploadRequest')
     InitiateLayerUploadResponse = Shapes::StructureShape.new(name: 'InitiateLayerUploadResponse')
     InvalidLayerException = Shapes::StructureShape.new(name: 'InvalidLayerException')
@@ -152,9 +178,19 @@ module Aws::ECR
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MediaType = Shapes::StringShape.new(name: 'MediaType')
     MediaTypeList = Shapes::ListShape.new(name: 'MediaTypeList')
+    Metric = Shapes::StringShape.new(name: 'Metric')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    PackageManager = Shapes::StringShape.new(name: 'PackageManager')
+    PackageVulnerabilityDetails = Shapes::StructureShape.new(name: 'PackageVulnerabilityDetails')
     PartSize = Shapes::IntegerShape.new(name: 'PartSize')
+    Platform = Shapes::StringShape.new(name: 'Platform')
     ProxyEndpoint = Shapes::StringShape.new(name: 'ProxyEndpoint')
+    PullThroughCacheRule = Shapes::StructureShape.new(name: 'PullThroughCacheRule')
+    PullThroughCacheRuleAlreadyExistsException = Shapes::StructureShape.new(name: 'PullThroughCacheRuleAlreadyExistsException')
+    PullThroughCacheRuleList = Shapes::ListShape.new(name: 'PullThroughCacheRuleList')
+    PullThroughCacheRuleNotFoundException = Shapes::StructureShape.new(name: 'PullThroughCacheRuleNotFoundException')
+    PullThroughCacheRuleRepositoryPrefix = Shapes::StringShape.new(name: 'PullThroughCacheRuleRepositoryPrefix')
+    PullThroughCacheRuleRepositoryPrefixList = Shapes::ListShape.new(name: 'PullThroughCacheRuleRepositoryPrefixList')
     PushTimestamp = Shapes::TimestampShape.new(name: 'PushTimestamp')
     PutImageRequest = Shapes::StructureShape.new(name: 'PutImageRequest')
     PutImageResponse = Shapes::StructureShape.new(name: 'PutImageResponse')
@@ -166,13 +202,26 @@ module Aws::ECR
     PutLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'PutLifecyclePolicyResponse')
     PutRegistryPolicyRequest = Shapes::StructureShape.new(name: 'PutRegistryPolicyRequest')
     PutRegistryPolicyResponse = Shapes::StructureShape.new(name: 'PutRegistryPolicyResponse')
+    PutRegistryScanningConfigurationRequest = Shapes::StructureShape.new(name: 'PutRegistryScanningConfigurationRequest')
+    PutRegistryScanningConfigurationResponse = Shapes::StructureShape.new(name: 'PutRegistryScanningConfigurationResponse')
     PutReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'PutReplicationConfigurationRequest')
     PutReplicationConfigurationResponse = Shapes::StructureShape.new(name: 'PutReplicationConfigurationResponse')
+    Reason = Shapes::StringShape.new(name: 'Reason')
+    Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
+    RecommendationText = Shapes::StringShape.new(name: 'RecommendationText')
+    ReferenceUrlsList = Shapes::ListShape.new(name: 'ReferenceUrlsList')
     ReferencedImagesNotFoundException = Shapes::StructureShape.new(name: 'ReferencedImagesNotFoundException')
     Region = Shapes::StringShape.new(name: 'Region')
     RegistryId = Shapes::StringShape.new(name: 'RegistryId')
     RegistryPolicyNotFoundException = Shapes::StructureShape.new(name: 'RegistryPolicyNotFoundException')
     RegistryPolicyText = Shapes::StringShape.new(name: 'RegistryPolicyText')
+    RegistryScanningConfiguration = Shapes::StructureShape.new(name: 'RegistryScanningConfiguration')
+    RegistryScanningRule = Shapes::StructureShape.new(name: 'RegistryScanningRule')
+    RegistryScanningRuleList = Shapes::ListShape.new(name: 'RegistryScanningRuleList')
+    RelatedVulnerabilitiesList = Shapes::ListShape.new(name: 'RelatedVulnerabilitiesList')
+    RelatedVulnerability = Shapes::StringShape.new(name: 'RelatedVulnerability')
+    Release = Shapes::StringShape.new(name: 'Release')
+    Remediation = Shapes::StructureShape.new(name: 'Remediation')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
     ReplicationDestination = Shapes::StructureShape.new(name: 'ReplicationDestination')
     ReplicationDestinationList = Shapes::ListShape.new(name: 'ReplicationDestinationList')
@@ -193,19 +242,43 @@ module Aws::ECR
     RepositoryNotFoundException = Shapes::StructureShape.new(name: 'RepositoryNotFoundException')
     RepositoryPolicyNotFoundException = Shapes::StructureShape.new(name: 'RepositoryPolicyNotFoundException')
     RepositoryPolicyText = Shapes::StringShape.new(name: 'RepositoryPolicyText')
+    RepositoryScanningConfiguration = Shapes::StructureShape.new(name: 'RepositoryScanningConfiguration')
+    RepositoryScanningConfigurationFailure = Shapes::StructureShape.new(name: 'RepositoryScanningConfigurationFailure')
+    RepositoryScanningConfigurationFailureList = Shapes::ListShape.new(name: 'RepositoryScanningConfigurationFailureList')
+    RepositoryScanningConfigurationList = Shapes::ListShape.new(name: 'RepositoryScanningConfigurationList')
+    Resource = Shapes::StructureShape.new(name: 'Resource')
+    ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
+    ResourceId = Shapes::StringShape.new(name: 'ResourceId')
+    ResourceList = Shapes::ListShape.new(name: 'ResourceList')
+    ScanFrequency = Shapes::StringShape.new(name: 'ScanFrequency')
     ScanNotFoundException = Shapes::StructureShape.new(name: 'ScanNotFoundException')
     ScanOnPushFlag = Shapes::BooleanShape.new(name: 'ScanOnPushFlag')
     ScanStatus = Shapes::StringShape.new(name: 'ScanStatus')
     ScanStatusDescription = Shapes::StringShape.new(name: 'ScanStatusDescription')
     ScanTimestamp = Shapes::TimestampShape.new(name: 'ScanTimestamp')
+    ScanType = Shapes::StringShape.new(name: 'ScanType')
+    ScanningConfigurationFailureCode = Shapes::StringShape.new(name: 'ScanningConfigurationFailureCode')
+    ScanningConfigurationFailureReason = Shapes::StringShape.new(name: 'ScanningConfigurationFailureReason')
+    ScanningConfigurationRepositoryNameList = Shapes::ListShape.new(name: 'ScanningConfigurationRepositoryNameList')
+    ScanningRepositoryFilter = Shapes::StructureShape.new(name: 'ScanningRepositoryFilter')
+    ScanningRepositoryFilterList = Shapes::ListShape.new(name: 'ScanningRepositoryFilterList')
+    ScanningRepositoryFilterType = Shapes::StringShape.new(name: 'ScanningRepositoryFilterType')
+    ScanningRepositoryFilterValue = Shapes::StringShape.new(name: 'ScanningRepositoryFilterValue')
+    Score = Shapes::FloatShape.new(name: 'Score')
+    ScoreDetails = Shapes::StructureShape.new(name: 'ScoreDetails')
+    ScoringVector = Shapes::StringShape.new(name: 'ScoringVector')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     SetRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'SetRepositoryPolicyRequest')
     SetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'SetRepositoryPolicyResponse')
+    Severity = Shapes::StringShape.new(name: 'Severity')
     SeverityCount = Shapes::IntegerShape.new(name: 'SeverityCount')
+    Source = Shapes::StringShape.new(name: 'Source')
+    SourceLayerHash = Shapes::StringShape.new(name: 'SourceLayerHash')
     StartImageScanRequest = Shapes::StructureShape.new(name: 'StartImageScanRequest')
     StartImageScanResponse = Shapes::StructureShape.new(name: 'StartImageScanResponse')
     StartLifecyclePolicyPreviewRequest = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewRequest')
     StartLifecyclePolicyPreviewResponse = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewResponse')
+    Status = Shapes::StringShape.new(name: 'Status')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -214,8 +287,12 @@ module Aws::ECR
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagStatus = Shapes::StringShape.new(name: 'TagStatus')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::MapShape.new(name: 'Tags')
+    Title = Shapes::StringShape.new(name: 'Title')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    Type = Shapes::StringShape.new(name: 'Type')
     UnsupportedImageTypeException = Shapes::StructureShape.new(name: 'UnsupportedImageTypeException')
+    UnsupportedUpstreamRegistryException = Shapes::StructureShape.new(name: 'UnsupportedUpstreamRegistryException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UploadId = Shapes::StringShape.new(name: 'UploadId')
@@ -224,7 +301,12 @@ module Aws::ECR
     UploadNotFoundException = Shapes::StructureShape.new(name: 'UploadNotFoundException')
     Url = Shapes::StringShape.new(name: 'Url')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    Version = Shapes::StringShape.new(name: 'Version')
+    VulnerabilityId = Shapes::StringShape.new(name: 'VulnerabilityId')
     VulnerabilitySourceUpdateTimestamp = Shapes::TimestampShape.new(name: 'VulnerabilitySourceUpdateTimestamp')
+    VulnerablePackage = Shapes::StructureShape.new(name: 'VulnerablePackage')
+    VulnerablePackageName = Shapes::StringShape.new(name: 'VulnerablePackageName')
+    VulnerablePackagesList = Shapes::ListShape.new(name: 'VulnerablePackagesList')
 
     Attribute.add_member(:key, Shapes::ShapeRef.new(shape: AttributeKey, required: true, location_name: "key"))
     Attribute.add_member(:value, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "value"))
@@ -238,6 +320,16 @@ module Aws::ECR
     AuthorizationData.struct_class = Types::AuthorizationData
 
     AuthorizationDataList.member = Shapes::ShapeRef.new(shape: AuthorizationData)
+
+    AwsEcrContainerImageDetails.add_member(:architecture, Shapes::ShapeRef.new(shape: Arch, location_name: "architecture"))
+    AwsEcrContainerImageDetails.add_member(:author, Shapes::ShapeRef.new(shape: Author, location_name: "author"))
+    AwsEcrContainerImageDetails.add_member(:image_hash, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "imageHash"))
+    AwsEcrContainerImageDetails.add_member(:image_tags, Shapes::ShapeRef.new(shape: ImageTagsList, location_name: "imageTags"))
+    AwsEcrContainerImageDetails.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    AwsEcrContainerImageDetails.add_member(:pushed_at, Shapes::ShapeRef.new(shape: Date, location_name: "pushedAt"))
+    AwsEcrContainerImageDetails.add_member(:registry, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registry"))
+    AwsEcrContainerImageDetails.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    AwsEcrContainerImageDetails.struct_class = Types::AwsEcrContainerImageDetails
 
     BatchCheckLayerAvailabilityRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     BatchCheckLayerAvailabilityRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -267,6 +359,13 @@ module Aws::ECR
     BatchGetImageResponse.add_member(:failures, Shapes::ShapeRef.new(shape: ImageFailureList, location_name: "failures"))
     BatchGetImageResponse.struct_class = Types::BatchGetImageResponse
 
+    BatchGetRepositoryScanningConfigurationRequest.add_member(:repository_names, Shapes::ShapeRef.new(shape: ScanningConfigurationRepositoryNameList, required: true, location_name: "repositoryNames"))
+    BatchGetRepositoryScanningConfigurationRequest.struct_class = Types::BatchGetRepositoryScanningConfigurationRequest
+
+    BatchGetRepositoryScanningConfigurationResponse.add_member(:scanning_configurations, Shapes::ShapeRef.new(shape: RepositoryScanningConfigurationList, location_name: "scanningConfigurations"))
+    BatchGetRepositoryScanningConfigurationResponse.add_member(:failures, Shapes::ShapeRef.new(shape: RepositoryScanningConfigurationFailureList, location_name: "failures"))
+    BatchGetRepositoryScanningConfigurationResponse.struct_class = Types::BatchGetRepositoryScanningConfigurationResponse
+
     BatchedOperationLayerDigestList.member = Shapes::ShapeRef.new(shape: BatchedOperationLayerDigest)
 
     CompleteLayerUploadRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -281,6 +380,17 @@ module Aws::ECR
     CompleteLayerUploadResponse.add_member(:layer_digest, Shapes::ShapeRef.new(shape: LayerDigest, location_name: "layerDigest"))
     CompleteLayerUploadResponse.struct_class = Types::CompleteLayerUploadResponse
 
+    CreatePullThroughCacheRuleRequest.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, required: true, location_name: "ecrRepositoryPrefix"))
+    CreatePullThroughCacheRuleRequest.add_member(:upstream_registry_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "upstreamRegistryUrl"))
+    CreatePullThroughCacheRuleRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    CreatePullThroughCacheRuleRequest.struct_class = Types::CreatePullThroughCacheRuleRequest
+
+    CreatePullThroughCacheRuleResponse.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, location_name: "ecrRepositoryPrefix"))
+    CreatePullThroughCacheRuleResponse.add_member(:upstream_registry_url, Shapes::ShapeRef.new(shape: Url, location_name: "upstreamRegistryUrl"))
+    CreatePullThroughCacheRuleResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
+    CreatePullThroughCacheRuleResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    CreatePullThroughCacheRuleResponse.struct_class = Types::CreatePullThroughCacheRuleResponse
+
     CreateRepositoryRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     CreateRepositoryRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     CreateRepositoryRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
@@ -292,6 +402,27 @@ module Aws::ECR
     CreateRepositoryResponse.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
     CreateRepositoryResponse.struct_class = Types::CreateRepositoryResponse
 
+    CvssScore.add_member(:base_score, Shapes::ShapeRef.new(shape: BaseScore, location_name: "baseScore"))
+    CvssScore.add_member(:scoring_vector, Shapes::ShapeRef.new(shape: ScoringVector, location_name: "scoringVector"))
+    CvssScore.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
+    CvssScore.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
+    CvssScore.struct_class = Types::CvssScore
+
+    CvssScoreAdjustment.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, location_name: "metric"))
+    CvssScoreAdjustment.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "reason"))
+    CvssScoreAdjustment.struct_class = Types::CvssScoreAdjustment
+
+    CvssScoreAdjustmentList.member = Shapes::ShapeRef.new(shape: CvssScoreAdjustment)
+
+    CvssScoreDetails.add_member(:adjustments, Shapes::ShapeRef.new(shape: CvssScoreAdjustmentList, location_name: "adjustments"))
+    CvssScoreDetails.add_member(:score, Shapes::ShapeRef.new(shape: Score, location_name: "score"))
+    CvssScoreDetails.add_member(:score_source, Shapes::ShapeRef.new(shape: Source, location_name: "scoreSource"))
+    CvssScoreDetails.add_member(:scoring_vector, Shapes::ShapeRef.new(shape: ScoringVector, location_name: "scoringVector"))
+    CvssScoreDetails.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
+    CvssScoreDetails.struct_class = Types::CvssScoreDetails
+
+    CvssScoreList.member = Shapes::ShapeRef.new(shape: CvssScore)
+
     DeleteLifecyclePolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     DeleteLifecyclePolicyRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     DeleteLifecyclePolicyRequest.struct_class = Types::DeleteLifecyclePolicyRequest
@@ -301,6 +432,16 @@ module Aws::ECR
     DeleteLifecyclePolicyResponse.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
     DeleteLifecyclePolicyResponse.add_member(:last_evaluated_at, Shapes::ShapeRef.new(shape: EvaluationTimestamp, location_name: "lastEvaluatedAt"))
     DeleteLifecyclePolicyResponse.struct_class = Types::DeleteLifecyclePolicyResponse
+
+    DeletePullThroughCacheRuleRequest.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, required: true, location_name: "ecrRepositoryPrefix"))
+    DeletePullThroughCacheRuleRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DeletePullThroughCacheRuleRequest.struct_class = Types::DeletePullThroughCacheRuleRequest
+
+    DeletePullThroughCacheRuleResponse.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, location_name: "ecrRepositoryPrefix"))
+    DeletePullThroughCacheRuleResponse.add_member(:upstream_registry_url, Shapes::ShapeRef.new(shape: Url, location_name: "upstreamRegistryUrl"))
+    DeletePullThroughCacheRuleResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
+    DeletePullThroughCacheRuleResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DeletePullThroughCacheRuleResponse.struct_class = Types::DeletePullThroughCacheRuleResponse
 
     DeleteRegistryPolicyRequest.struct_class = Types::DeleteRegistryPolicyRequest
 
@@ -365,6 +506,16 @@ module Aws::ECR
     DescribeImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeImagesResponse.struct_class = Types::DescribeImagesResponse
 
+    DescribePullThroughCacheRulesRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DescribePullThroughCacheRulesRequest.add_member(:ecr_repository_prefixes, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefixList, location_name: "ecrRepositoryPrefixes"))
+    DescribePullThroughCacheRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribePullThroughCacheRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    DescribePullThroughCacheRulesRequest.struct_class = Types::DescribePullThroughCacheRulesRequest
+
+    DescribePullThroughCacheRulesResponse.add_member(:pull_through_cache_rules, Shapes::ShapeRef.new(shape: PullThroughCacheRuleList, location_name: "pullThroughCacheRules"))
+    DescribePullThroughCacheRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribePullThroughCacheRulesResponse.struct_class = Types::DescribePullThroughCacheRulesResponse
+
     DescribeRegistryRequest.struct_class = Types::DescribeRegistryRequest
 
     DescribeRegistryResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -387,6 +538,25 @@ module Aws::ECR
     EncryptionConfiguration.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
     EncryptionConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "kmsKey"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
+    EnhancedImageScanFinding.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "awsAccountId"))
+    EnhancedImageScanFinding.add_member(:description, Shapes::ShapeRef.new(shape: FindingDescription, location_name: "description"))
+    EnhancedImageScanFinding.add_member(:finding_arn, Shapes::ShapeRef.new(shape: FindingArn, location_name: "findingArn"))
+    EnhancedImageScanFinding.add_member(:first_observed_at, Shapes::ShapeRef.new(shape: Date, location_name: "firstObservedAt"))
+    EnhancedImageScanFinding.add_member(:last_observed_at, Shapes::ShapeRef.new(shape: Date, location_name: "lastObservedAt"))
+    EnhancedImageScanFinding.add_member(:package_vulnerability_details, Shapes::ShapeRef.new(shape: PackageVulnerabilityDetails, location_name: "packageVulnerabilityDetails"))
+    EnhancedImageScanFinding.add_member(:remediation, Shapes::ShapeRef.new(shape: Remediation, location_name: "remediation"))
+    EnhancedImageScanFinding.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "resources"))
+    EnhancedImageScanFinding.add_member(:score, Shapes::ShapeRef.new(shape: Score, location_name: "score"))
+    EnhancedImageScanFinding.add_member(:score_details, Shapes::ShapeRef.new(shape: ScoreDetails, location_name: "scoreDetails"))
+    EnhancedImageScanFinding.add_member(:severity, Shapes::ShapeRef.new(shape: Severity, location_name: "severity"))
+    EnhancedImageScanFinding.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    EnhancedImageScanFinding.add_member(:title, Shapes::ShapeRef.new(shape: Title, location_name: "title"))
+    EnhancedImageScanFinding.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
+    EnhancedImageScanFinding.add_member(:updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "updatedAt"))
+    EnhancedImageScanFinding.struct_class = Types::EnhancedImageScanFinding
+
+    EnhancedImageScanFindingList.member = Shapes::ShapeRef.new(shape: EnhancedImageScanFinding)
 
     FindingSeverityCounts.key = Shapes::ShapeRef.new(shape: FindingSeverity)
     FindingSeverityCounts.value = Shapes::ShapeRef.new(shape: SeverityCount)
@@ -440,6 +610,12 @@ module Aws::ECR
     GetRegistryPolicyResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     GetRegistryPolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: RegistryPolicyText, location_name: "policyText"))
     GetRegistryPolicyResponse.struct_class = Types::GetRegistryPolicyResponse
+
+    GetRegistryScanningConfigurationRequest.struct_class = Types::GetRegistryScanningConfigurationRequest
+
+    GetRegistryScanningConfigurationResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    GetRegistryScanningConfigurationResponse.add_member(:scanning_configuration, Shapes::ShapeRef.new(shape: RegistryScanningConfiguration, location_name: "scanningConfiguration"))
+    GetRegistryScanningConfigurationResponse.struct_class = Types::GetRegistryScanningConfigurationResponse
 
     GetRepositoryPolicyRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     GetRepositoryPolicyRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -514,8 +690,9 @@ module Aws::ECR
 
     ImageScanFindings.add_member(:image_scan_completed_at, Shapes::ShapeRef.new(shape: ScanTimestamp, location_name: "imageScanCompletedAt"))
     ImageScanFindings.add_member(:vulnerability_source_updated_at, Shapes::ShapeRef.new(shape: VulnerabilitySourceUpdateTimestamp, location_name: "vulnerabilitySourceUpdatedAt"))
-    ImageScanFindings.add_member(:findings, Shapes::ShapeRef.new(shape: ImageScanFindingList, location_name: "findings"))
     ImageScanFindings.add_member(:finding_severity_counts, Shapes::ShapeRef.new(shape: FindingSeverityCounts, location_name: "findingSeverityCounts"))
+    ImageScanFindings.add_member(:findings, Shapes::ShapeRef.new(shape: ImageScanFindingList, location_name: "findings"))
+    ImageScanFindings.add_member(:enhanced_findings, Shapes::ShapeRef.new(shape: EnhancedImageScanFindingList, location_name: "enhancedFindings"))
     ImageScanFindings.struct_class = Types::ImageScanFindings
 
     ImageScanFindingsSummary.add_member(:image_scan_completed_at, Shapes::ShapeRef.new(shape: ScanTimestamp, location_name: "imageScanCompletedAt"))
@@ -534,6 +711,8 @@ module Aws::ECR
     ImageTagAlreadyExistsException.struct_class = Types::ImageTagAlreadyExistsException
 
     ImageTagList.member = Shapes::ShapeRef.new(shape: ImageTag)
+
+    ImageTagsList.member = Shapes::ShapeRef.new(shape: ImageTag)
 
     InitiateLayerUploadRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     InitiateLayerUploadRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -644,6 +823,34 @@ module Aws::ECR
 
     MediaTypeList.member = Shapes::ShapeRef.new(shape: MediaType)
 
+    PackageVulnerabilityDetails.add_member(:cvss, Shapes::ShapeRef.new(shape: CvssScoreList, location_name: "cvss"))
+    PackageVulnerabilityDetails.add_member(:reference_urls, Shapes::ShapeRef.new(shape: ReferenceUrlsList, location_name: "referenceUrls"))
+    PackageVulnerabilityDetails.add_member(:related_vulnerabilities, Shapes::ShapeRef.new(shape: RelatedVulnerabilitiesList, location_name: "relatedVulnerabilities"))
+    PackageVulnerabilityDetails.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
+    PackageVulnerabilityDetails.add_member(:source_url, Shapes::ShapeRef.new(shape: Url, location_name: "sourceUrl"))
+    PackageVulnerabilityDetails.add_member(:vendor_created_at, Shapes::ShapeRef.new(shape: Date, location_name: "vendorCreatedAt"))
+    PackageVulnerabilityDetails.add_member(:vendor_severity, Shapes::ShapeRef.new(shape: Severity, location_name: "vendorSeverity"))
+    PackageVulnerabilityDetails.add_member(:vendor_updated_at, Shapes::ShapeRef.new(shape: Date, location_name: "vendorUpdatedAt"))
+    PackageVulnerabilityDetails.add_member(:vulnerability_id, Shapes::ShapeRef.new(shape: VulnerabilityId, location_name: "vulnerabilityId"))
+    PackageVulnerabilityDetails.add_member(:vulnerable_packages, Shapes::ShapeRef.new(shape: VulnerablePackagesList, location_name: "vulnerablePackages"))
+    PackageVulnerabilityDetails.struct_class = Types::PackageVulnerabilityDetails
+
+    PullThroughCacheRule.add_member(:ecr_repository_prefix, Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix, location_name: "ecrRepositoryPrefix"))
+    PullThroughCacheRule.add_member(:upstream_registry_url, Shapes::ShapeRef.new(shape: Url, location_name: "upstreamRegistryUrl"))
+    PullThroughCacheRule.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
+    PullThroughCacheRule.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    PullThroughCacheRule.struct_class = Types::PullThroughCacheRule
+
+    PullThroughCacheRuleAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    PullThroughCacheRuleAlreadyExistsException.struct_class = Types::PullThroughCacheRuleAlreadyExistsException
+
+    PullThroughCacheRuleList.member = Shapes::ShapeRef.new(shape: PullThroughCacheRule)
+
+    PullThroughCacheRuleNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    PullThroughCacheRuleNotFoundException.struct_class = Types::PullThroughCacheRuleNotFoundException
+
+    PullThroughCacheRuleRepositoryPrefixList.member = Shapes::ShapeRef.new(shape: PullThroughCacheRuleRepositoryPrefix)
+
     PutImageRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     PutImageRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     PutImageRequest.add_member(:image_manifest, Shapes::ShapeRef.new(shape: ImageManifest, required: true, location_name: "imageManifest"))
@@ -692,17 +899,45 @@ module Aws::ECR
     PutRegistryPolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: RegistryPolicyText, location_name: "policyText"))
     PutRegistryPolicyResponse.struct_class = Types::PutRegistryPolicyResponse
 
+    PutRegistryScanningConfigurationRequest.add_member(:scan_type, Shapes::ShapeRef.new(shape: ScanType, location_name: "scanType"))
+    PutRegistryScanningConfigurationRequest.add_member(:rules, Shapes::ShapeRef.new(shape: RegistryScanningRuleList, location_name: "rules"))
+    PutRegistryScanningConfigurationRequest.struct_class = Types::PutRegistryScanningConfigurationRequest
+
+    PutRegistryScanningConfigurationResponse.add_member(:registry_scanning_configuration, Shapes::ShapeRef.new(shape: RegistryScanningConfiguration, location_name: "registryScanningConfiguration"))
+    PutRegistryScanningConfigurationResponse.struct_class = Types::PutRegistryScanningConfigurationResponse
+
     PutReplicationConfigurationRequest.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, required: true, location_name: "replicationConfiguration"))
     PutReplicationConfigurationRequest.struct_class = Types::PutReplicationConfigurationRequest
 
     PutReplicationConfigurationResponse.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, location_name: "replicationConfiguration"))
     PutReplicationConfigurationResponse.struct_class = Types::PutReplicationConfigurationResponse
 
+    Recommendation.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "url"))
+    Recommendation.add_member(:text, Shapes::ShapeRef.new(shape: RecommendationText, location_name: "text"))
+    Recommendation.struct_class = Types::Recommendation
+
+    ReferenceUrlsList.member = Shapes::ShapeRef.new(shape: Url)
+
     ReferencedImagesNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ReferencedImagesNotFoundException.struct_class = Types::ReferencedImagesNotFoundException
 
     RegistryPolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     RegistryPolicyNotFoundException.struct_class = Types::RegistryPolicyNotFoundException
+
+    RegistryScanningConfiguration.add_member(:scan_type, Shapes::ShapeRef.new(shape: ScanType, location_name: "scanType"))
+    RegistryScanningConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: RegistryScanningRuleList, location_name: "rules"))
+    RegistryScanningConfiguration.struct_class = Types::RegistryScanningConfiguration
+
+    RegistryScanningRule.add_member(:scan_frequency, Shapes::ShapeRef.new(shape: ScanFrequency, required: true, location_name: "scanFrequency"))
+    RegistryScanningRule.add_member(:repository_filters, Shapes::ShapeRef.new(shape: ScanningRepositoryFilterList, required: true, location_name: "repositoryFilters"))
+    RegistryScanningRule.struct_class = Types::RegistryScanningRule
+
+    RegistryScanningRuleList.member = Shapes::ShapeRef.new(shape: RegistryScanningRule)
+
+    RelatedVulnerabilitiesList.member = Shapes::ShapeRef.new(shape: RelatedVulnerability)
+
+    Remediation.add_member(:recommendation, Shapes::ShapeRef.new(shape: Recommendation, location_name: "recommendation"))
+    Remediation.struct_class = Types::Remediation
 
     ReplicationConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: ReplicationRuleList, required: true, location_name: "rules"))
     ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
@@ -751,8 +986,46 @@ module Aws::ECR
     RepositoryPolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     RepositoryPolicyNotFoundException.struct_class = Types::RepositoryPolicyNotFoundException
 
+    RepositoryScanningConfiguration.add_member(:repository_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "repositoryArn"))
+    RepositoryScanningConfiguration.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    RepositoryScanningConfiguration.add_member(:scan_on_push, Shapes::ShapeRef.new(shape: ScanOnPushFlag, location_name: "scanOnPush"))
+    RepositoryScanningConfiguration.add_member(:scan_frequency, Shapes::ShapeRef.new(shape: ScanFrequency, location_name: "scanFrequency"))
+    RepositoryScanningConfiguration.add_member(:applied_scan_filters, Shapes::ShapeRef.new(shape: ScanningRepositoryFilterList, location_name: "appliedScanFilters"))
+    RepositoryScanningConfiguration.struct_class = Types::RepositoryScanningConfiguration
+
+    RepositoryScanningConfigurationFailure.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    RepositoryScanningConfigurationFailure.add_member(:failure_code, Shapes::ShapeRef.new(shape: ScanningConfigurationFailureCode, location_name: "failureCode"))
+    RepositoryScanningConfigurationFailure.add_member(:failure_reason, Shapes::ShapeRef.new(shape: ScanningConfigurationFailureReason, location_name: "failureReason"))
+    RepositoryScanningConfigurationFailure.struct_class = Types::RepositoryScanningConfigurationFailure
+
+    RepositoryScanningConfigurationFailureList.member = Shapes::ShapeRef.new(shape: RepositoryScanningConfigurationFailure)
+
+    RepositoryScanningConfigurationList.member = Shapes::ShapeRef.new(shape: RepositoryScanningConfiguration)
+
+    Resource.add_member(:details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "details"))
+    Resource.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "id"))
+    Resource.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    Resource.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
+    Resource.struct_class = Types::Resource
+
+    ResourceDetails.add_member(:aws_ecr_container_image, Shapes::ShapeRef.new(shape: AwsEcrContainerImageDetails, location_name: "awsEcrContainerImage"))
+    ResourceDetails.struct_class = Types::ResourceDetails
+
+    ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
+
     ScanNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ScanNotFoundException.struct_class = Types::ScanNotFoundException
+
+    ScanningConfigurationRepositoryNameList.member = Shapes::ShapeRef.new(shape: RepositoryName)
+
+    ScanningRepositoryFilter.add_member(:filter, Shapes::ShapeRef.new(shape: ScanningRepositoryFilterValue, required: true, location_name: "filter"))
+    ScanningRepositoryFilter.add_member(:filter_type, Shapes::ShapeRef.new(shape: ScanningRepositoryFilterType, required: true, location_name: "filterType"))
+    ScanningRepositoryFilter.struct_class = Types::ScanningRepositoryFilter
+
+    ScanningRepositoryFilterList.member = Shapes::ShapeRef.new(shape: ScanningRepositoryFilter)
+
+    ScoreDetails.add_member(:cvss, Shapes::ShapeRef.new(shape: CvssScoreDetails, location_name: "cvss"))
+    ScoreDetails.struct_class = Types::ScoreDetails
 
     ServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ServerException.struct_class = Types::ServerException
@@ -804,11 +1077,17 @@ module Aws::ECR
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    Tags.key = Shapes::ShapeRef.new(shape: TagKey)
+    Tags.value = Shapes::ShapeRef.new(shape: TagValue)
+
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
 
     UnsupportedImageTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UnsupportedImageTypeException.struct_class = Types::UnsupportedImageTypeException
+
+    UnsupportedUpstreamRegistryException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UnsupportedUpstreamRegistryException.struct_class = Types::UnsupportedUpstreamRegistryException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
@@ -835,6 +1114,18 @@ module Aws::ECR
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
+
+    VulnerablePackage.add_member(:arch, Shapes::ShapeRef.new(shape: Arch, location_name: "arch"))
+    VulnerablePackage.add_member(:epoch, Shapes::ShapeRef.new(shape: Epoch, location_name: "epoch"))
+    VulnerablePackage.add_member(:file_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "filePath"))
+    VulnerablePackage.add_member(:name, Shapes::ShapeRef.new(shape: VulnerablePackageName, location_name: "name"))
+    VulnerablePackage.add_member(:package_manager, Shapes::ShapeRef.new(shape: PackageManager, location_name: "packageManager"))
+    VulnerablePackage.add_member(:release, Shapes::ShapeRef.new(shape: Release, location_name: "release"))
+    VulnerablePackage.add_member(:source_layer_hash, Shapes::ShapeRef.new(shape: SourceLayerHash, location_name: "sourceLayerHash"))
+    VulnerablePackage.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
+    VulnerablePackage.struct_class = Types::VulnerablePackage
+
+    VulnerablePackagesList.member = Shapes::ShapeRef.new(shape: VulnerablePackage)
 
 
     # @api private
@@ -889,6 +1180,18 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
       end)
 
+      api.add_operation(:batch_get_repository_scanning_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetRepositoryScanningConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetRepositoryScanningConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetRepositoryScanningConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:complete_layer_upload, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CompleteLayerUpload"
         o.http_method = "POST"
@@ -904,6 +1207,20 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: LayerAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: EmptyUploadException)
         o.errors << Shapes::ShapeRef.new(shape: KmsException)
+      end)
+
+      api.add_operation(:create_pull_through_cache_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePullThroughCacheRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreatePullThroughCacheRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePullThroughCacheRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PullThroughCacheRuleAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUpstreamRegistryException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:create_repository, Seahorse::Model::Operation.new.tap do |o|
@@ -931,6 +1248,18 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyNotFoundException)
+      end)
+
+      api.add_operation(:delete_pull_through_cache_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePullThroughCacheRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePullThroughCacheRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePullThroughCacheRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PullThroughCacheRuleNotFoundException)
       end)
 
       api.add_operation(:delete_registry_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -994,6 +1323,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ScanNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1012,6 +1342,24 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_pull_through_cache_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePullThroughCacheRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePullThroughCacheRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePullThroughCacheRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PullThroughCacheRuleNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1113,6 +1461,17 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_registry_scanning_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRegistryScanningConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRegistryScanningConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRegistryScanningConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_repository_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetRepositoryPolicy"
         o.http_method = "POST"
@@ -1192,6 +1551,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:put_image_tag_mutability, Seahorse::Model::Operation.new.tap do |o|
@@ -1222,6 +1582,17 @@ module Aws::ECR
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutRegistryPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: PutRegistryPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:put_registry_scanning_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRegistryScanningConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutRegistryScanningConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutRegistryScanningConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1261,6 +1632,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:start_lifecycle_policy_preview, Seahorse::Model::Operation.new.tap do |o|

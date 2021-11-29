@@ -251,6 +251,7 @@ module Aws::IoTSiteWise
     MultiLayerStorage = Shapes::StructureShape.new(name: 'MultiLayerStorage')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NumberOfDays = Shapes::IntegerShape.new(name: 'NumberOfDays')
     Offset = Shapes::StringShape.new(name: 'Offset')
     OffsetInNanos = Shapes::IntegerShape.new(name: 'OffsetInNanos')
     Permission = Shapes::StringShape.new(name: 'Permission')
@@ -292,6 +293,7 @@ module Aws::IoTSiteWise
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RetentionPeriod = Shapes::StructureShape.new(name: 'RetentionPeriod')
     SSOApplicationId = Shapes::StringShape.new(name: 'SSOApplicationId')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StorageType = Shapes::StringShape.new(name: 'StorageType')
@@ -317,6 +319,7 @@ module Aws::IoTSiteWise
     TraversalType = Shapes::StringShape.new(name: 'TraversalType')
     TumblingWindow = Shapes::StructureShape.new(name: 'TumblingWindow')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
+    Unlimited = Shapes::BooleanShape.new(name: 'Unlimited')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAccessPolicyRequest = Shapes::StructureShape.new(name: 'UpdateAccessPolicyRequest')
@@ -871,6 +874,7 @@ module Aws::IoTSiteWise
     DescribeStorageConfigurationResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, required: true, location_name: "storageType"))
     DescribeStorageConfigurationResponse.add_member(:multi_layer_storage, Shapes::ShapeRef.new(shape: MultiLayerStorage, location_name: "multiLayerStorage"))
     DescribeStorageConfigurationResponse.add_member(:disassociated_data_storage, Shapes::ShapeRef.new(shape: DisassociatedDataStorageState, location_name: "disassociatedDataStorage"))
+    DescribeStorageConfigurationResponse.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     DescribeStorageConfigurationResponse.add_member(:configuration_status, Shapes::ShapeRef.new(shape: ConfigurationStatus, required: true, location_name: "configurationStatus"))
     DescribeStorageConfigurationResponse.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateDate"))
     DescribeStorageConfigurationResponse.struct_class = Types::DescribeStorageConfigurationResponse
@@ -1267,11 +1271,13 @@ module Aws::IoTSiteWise
     PutStorageConfigurationRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, required: true, location_name: "storageType"))
     PutStorageConfigurationRequest.add_member(:multi_layer_storage, Shapes::ShapeRef.new(shape: MultiLayerStorage, location_name: "multiLayerStorage"))
     PutStorageConfigurationRequest.add_member(:disassociated_data_storage, Shapes::ShapeRef.new(shape: DisassociatedDataStorageState, location_name: "disassociatedDataStorage"))
+    PutStorageConfigurationRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     PutStorageConfigurationRequest.struct_class = Types::PutStorageConfigurationRequest
 
     PutStorageConfigurationResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, required: true, location_name: "storageType"))
     PutStorageConfigurationResponse.add_member(:multi_layer_storage, Shapes::ShapeRef.new(shape: MultiLayerStorage, location_name: "multiLayerStorage"))
     PutStorageConfigurationResponse.add_member(:disassociated_data_storage, Shapes::ShapeRef.new(shape: DisassociatedDataStorageState, location_name: "disassociatedDataStorage"))
+    PutStorageConfigurationResponse.add_member(:retention_period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "retentionPeriod"))
     PutStorageConfigurationResponse.add_member(:configuration_status, Shapes::ShapeRef.new(shape: ConfigurationStatus, required: true, location_name: "configurationStatus"))
     PutStorageConfigurationResponse.struct_class = Types::PutStorageConfigurationResponse
 
@@ -1288,6 +1294,10 @@ module Aws::IoTSiteWise
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RetentionPeriod.add_member(:number_of_days, Shapes::ShapeRef.new(shape: NumberOfDays, location_name: "numberOfDays"))
+    RetentionPeriod.add_member(:unlimited, Shapes::ShapeRef.new(shape: Unlimited, location_name: "unlimited"))
+    RetentionPeriod.struct_class = Types::RetentionPeriod
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException

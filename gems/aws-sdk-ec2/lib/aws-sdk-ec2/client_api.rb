@@ -801,6 +801,9 @@ module Aws::EC2
     DescribeSecurityGroupsResult = Shapes::StructureShape.new(name: 'DescribeSecurityGroupsResult')
     DescribeSnapshotAttributeRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotAttributeRequest')
     DescribeSnapshotAttributeResult = Shapes::StructureShape.new(name: 'DescribeSnapshotAttributeResult')
+    DescribeSnapshotTierStatusMaxResults = Shapes::IntegerShape.new(name: 'DescribeSnapshotTierStatusMaxResults')
+    DescribeSnapshotTierStatusRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotTierStatusRequest')
+    DescribeSnapshotTierStatusResult = Shapes::StructureShape.new(name: 'DescribeSnapshotTierStatusResult')
     DescribeSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotsRequest')
     DescribeSnapshotsResult = Shapes::StructureShape.new(name: 'DescribeSnapshotsResult')
     DescribeSpotDatafeedSubscriptionRequest = Shapes::StructureShape.new(name: 'DescribeSpotDatafeedSubscriptionRequest')
@@ -1526,6 +1529,9 @@ module Aws::EC2
     LicenseConfigurationRequest = Shapes::StructureShape.new(name: 'LicenseConfigurationRequest')
     LicenseList = Shapes::ListShape.new(name: 'LicenseList')
     LicenseSpecificationListRequest = Shapes::ListShape.new(name: 'LicenseSpecificationListRequest')
+    ListSnapshotsInRecycleBinMaxResults = Shapes::IntegerShape.new(name: 'ListSnapshotsInRecycleBinMaxResults')
+    ListSnapshotsInRecycleBinRequest = Shapes::StructureShape.new(name: 'ListSnapshotsInRecycleBinRequest')
+    ListSnapshotsInRecycleBinResult = Shapes::StructureShape.new(name: 'ListSnapshotsInRecycleBinResult')
     ListingState = Shapes::StringShape.new(name: 'ListingState')
     ListingStatus = Shapes::StringShape.new(name: 'ListingStatus')
     LoadBalancersConfig = Shapes::StructureShape.new(name: 'LoadBalancersConfig')
@@ -1639,6 +1645,8 @@ module Aws::EC2
     ModifySecurityGroupRulesRequest = Shapes::StructureShape.new(name: 'ModifySecurityGroupRulesRequest')
     ModifySecurityGroupRulesResult = Shapes::StructureShape.new(name: 'ModifySecurityGroupRulesResult')
     ModifySnapshotAttributeRequest = Shapes::StructureShape.new(name: 'ModifySnapshotAttributeRequest')
+    ModifySnapshotTierRequest = Shapes::StructureShape.new(name: 'ModifySnapshotTierRequest')
+    ModifySnapshotTierResult = Shapes::StructureShape.new(name: 'ModifySnapshotTierResult')
     ModifySpotFleetRequestRequest = Shapes::StructureShape.new(name: 'ModifySpotFleetRequestRequest')
     ModifySpotFleetRequestResponse = Shapes::StructureShape.new(name: 'ModifySpotFleetRequestResponse')
     ModifySubnetAttributeRequest = Shapes::StructureShape.new(name: 'ModifySubnetAttributeRequest')
@@ -2003,6 +2011,11 @@ module Aws::EC2
     RestoreAddressToClassicResult = Shapes::StructureShape.new(name: 'RestoreAddressToClassicResult')
     RestoreManagedPrefixListVersionRequest = Shapes::StructureShape.new(name: 'RestoreManagedPrefixListVersionRequest')
     RestoreManagedPrefixListVersionResult = Shapes::StructureShape.new(name: 'RestoreManagedPrefixListVersionResult')
+    RestoreSnapshotFromRecycleBinRequest = Shapes::StructureShape.new(name: 'RestoreSnapshotFromRecycleBinRequest')
+    RestoreSnapshotFromRecycleBinResult = Shapes::StructureShape.new(name: 'RestoreSnapshotFromRecycleBinResult')
+    RestoreSnapshotTierRequest = Shapes::StructureShape.new(name: 'RestoreSnapshotTierRequest')
+    RestoreSnapshotTierRequestTemporaryRestoreDays = Shapes::IntegerShape.new(name: 'RestoreSnapshotTierRequestTemporaryRestoreDays')
+    RestoreSnapshotTierResult = Shapes::StructureShape.new(name: 'RestoreSnapshotTierResult')
     ResultRange = Shapes::IntegerShape.new(name: 'ResultRange')
     RevokeClientVpnIngressRequest = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressRequest')
     RevokeClientVpnIngressResult = Shapes::StructureShape.new(name: 'RevokeClientVpnIngressResult')
@@ -2102,9 +2115,12 @@ module Aws::EC2
     SnapshotIdStringList = Shapes::ListShape.new(name: 'SnapshotIdStringList')
     SnapshotInfo = Shapes::StructureShape.new(name: 'SnapshotInfo')
     SnapshotList = Shapes::ListShape.new(name: 'SnapshotList')
+    SnapshotRecycleBinInfo = Shapes::StructureShape.new(name: 'SnapshotRecycleBinInfo')
+    SnapshotRecycleBinInfoList = Shapes::ListShape.new(name: 'SnapshotRecycleBinInfoList')
     SnapshotSet = Shapes::ListShape.new(name: 'SnapshotSet')
     SnapshotState = Shapes::StringShape.new(name: 'SnapshotState')
     SnapshotTaskDetail = Shapes::StructureShape.new(name: 'SnapshotTaskDetail')
+    SnapshotTierStatus = Shapes::StructureShape.new(name: 'SnapshotTierStatus')
     SpotAllocationStrategy = Shapes::StringShape.new(name: 'SpotAllocationStrategy')
     SpotCapacityRebalance = Shapes::StructureShape.new(name: 'SpotCapacityRebalance')
     SpotDatafeedSubscription = Shapes::StructureShape.new(name: 'SpotDatafeedSubscription')
@@ -2157,6 +2173,7 @@ module Aws::EC2
     StopInstancesResult = Shapes::StructureShape.new(name: 'StopInstancesResult')
     Storage = Shapes::StructureShape.new(name: 'Storage')
     StorageLocation = Shapes::StructureShape.new(name: 'StorageLocation')
+    StorageTier = Shapes::StringShape.new(name: 'StorageTier')
     StoreImageTaskResult = Shapes::StructureShape.new(name: 'StoreImageTaskResult')
     StoreImageTaskResultSet = Shapes::ListShape.new(name: 'StoreImageTaskResultSet')
     String = Shapes::StringShape.new(name: 'String')
@@ -2202,6 +2219,7 @@ module Aws::EC2
     TargetNetworkSet = Shapes::ListShape.new(name: 'TargetNetworkSet')
     TargetReservationValue = Shapes::StructureShape.new(name: 'TargetReservationValue')
     TargetReservationValueSet = Shapes::ListShape.new(name: 'TargetReservationValueSet')
+    TargetStorageTier = Shapes::StringShape.new(name: 'TargetStorageTier')
     TelemetryStatus = Shapes::StringShape.new(name: 'TelemetryStatus')
     Tenancy = Shapes::StringShape.new(name: 'Tenancy')
     TerminateClientVpnConnectionsRequest = Shapes::StructureShape.new(name: 'TerminateClientVpnConnectionsRequest')
@@ -2212,6 +2230,7 @@ module Aws::EC2
     TerminateInstancesResult = Shapes::StructureShape.new(name: 'TerminateInstancesResult')
     ThreadsPerCore = Shapes::IntegerShape.new(name: 'ThreadsPerCore')
     ThreadsPerCoreList = Shapes::ListShape.new(name: 'ThreadsPerCoreList')
+    TieringOperationStatus = Shapes::StringShape.new(name: 'TieringOperationStatus')
     TotalLocalStorageGB = Shapes::StructureShape.new(name: 'TotalLocalStorageGB')
     TotalLocalStorageGBRequest = Shapes::StructureShape.new(name: 'TotalLocalStorageGBRequest')
     TrafficDirection = Shapes::StringShape.new(name: 'TrafficDirection')
@@ -2464,6 +2483,7 @@ module Aws::EC2
     ZoneIdStringList = Shapes::ListShape.new(name: 'ZoneIdStringList')
     ZoneNameStringList = Shapes::ListShape.new(name: 'ZoneNameStringList')
     scope = Shapes::StringShape.new(name: 'scope')
+    snapshotTierStatusSet = Shapes::ListShape.new(name: 'snapshotTierStatusSet')
     totalFpgaMemory = Shapes::IntegerShape.new(name: 'totalFpgaMemory')
     totalGpuMemory = Shapes::IntegerShape.new(name: 'totalGpuMemory')
 
@@ -5695,6 +5715,16 @@ module Aws::EC2
     DescribeSnapshotAttributeResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     DescribeSnapshotAttributeResult.struct_class = Types::DescribeSnapshotAttributeResult
 
+    DescribeSnapshotTierStatusRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeSnapshotTierStatusRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeSnapshotTierStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeSnapshotTierStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeSnapshotTierStatusMaxResults, location_name: "MaxResults"))
+    DescribeSnapshotTierStatusRequest.struct_class = Types::DescribeSnapshotTierStatusRequest
+
+    DescribeSnapshotTierStatusResult.add_member(:snapshot_tier_statuses, Shapes::ShapeRef.new(shape: snapshotTierStatusSet, location_name: "snapshotTierStatusSet"))
+    DescribeSnapshotTierStatusResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeSnapshotTierStatusResult.struct_class = Types::DescribeSnapshotTierStatusResult
+
     DescribeSnapshotsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeSnapshotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
     DescribeSnapshotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -8508,6 +8538,16 @@ module Aws::EC2
 
     LicenseSpecificationListRequest.member = Shapes::ShapeRef.new(shape: LicenseConfigurationRequest, location_name: "item")
 
+    ListSnapshotsInRecycleBinRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListSnapshotsInRecycleBinMaxResults, location_name: "MaxResults"))
+    ListSnapshotsInRecycleBinRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListSnapshotsInRecycleBinRequest.add_member(:snapshot_ids, Shapes::ShapeRef.new(shape: SnapshotIdStringList, location_name: "SnapshotId"))
+    ListSnapshotsInRecycleBinRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ListSnapshotsInRecycleBinRequest.struct_class = Types::ListSnapshotsInRecycleBinRequest
+
+    ListSnapshotsInRecycleBinResult.add_member(:snapshots, Shapes::ShapeRef.new(shape: SnapshotRecycleBinInfoList, location_name: "snapshotSet"))
+    ListSnapshotsInRecycleBinResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListSnapshotsInRecycleBinResult.struct_class = Types::ListSnapshotsInRecycleBinResult
+
     LoadBalancersConfig.add_member(:classic_load_balancers_config, Shapes::ShapeRef.new(shape: ClassicLoadBalancersConfig, location_name: "classicLoadBalancersConfig"))
     LoadBalancersConfig.add_member(:target_groups_config, Shapes::ShapeRef.new(shape: TargetGroupsConfig, location_name: "targetGroupsConfig"))
     LoadBalancersConfig.struct_class = Types::LoadBalancersConfig
@@ -8924,6 +8964,15 @@ module Aws::EC2
     ModifySnapshotAttributeRequest.add_member(:user_ids, Shapes::ShapeRef.new(shape: UserIdStringList, location_name: "UserId"))
     ModifySnapshotAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     ModifySnapshotAttributeRequest.struct_class = Types::ModifySnapshotAttributeRequest
+
+    ModifySnapshotTierRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
+    ModifySnapshotTierRequest.add_member(:storage_tier, Shapes::ShapeRef.new(shape: TargetStorageTier, location_name: "StorageTier"))
+    ModifySnapshotTierRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifySnapshotTierRequest.struct_class = Types::ModifySnapshotTierRequest
+
+    ModifySnapshotTierResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    ModifySnapshotTierResult.add_member(:tiering_start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "tieringStartTime"))
+    ModifySnapshotTierResult.struct_class = Types::ModifySnapshotTierResult
 
     ModifySpotFleetRequestRequest.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: ExcessCapacityTerminationPolicy, location_name: "excessCapacityTerminationPolicy"))
     ModifySpotFleetRequestRequest.add_member(:launch_template_configs, Shapes::ShapeRef.new(shape: LaunchTemplateConfigList, location_name: "LaunchTemplateConfig"))
@@ -10333,6 +10382,34 @@ module Aws::EC2
     RestoreManagedPrefixListVersionResult.add_member(:prefix_list, Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "prefixList"))
     RestoreManagedPrefixListVersionResult.struct_class = Types::RestoreManagedPrefixListVersionResult
 
+    RestoreSnapshotFromRecycleBinRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
+    RestoreSnapshotFromRecycleBinRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    RestoreSnapshotFromRecycleBinRequest.struct_class = Types::RestoreSnapshotFromRecycleBinRequest
+
+    RestoreSnapshotFromRecycleBinResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    RestoreSnapshotFromRecycleBinResult.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
+    RestoreSnapshotFromRecycleBinResult.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    RestoreSnapshotFromRecycleBinResult.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
+    RestoreSnapshotFromRecycleBinResult.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    RestoreSnapshotFromRecycleBinResult.add_member(:progress, Shapes::ShapeRef.new(shape: String, location_name: "progress"))
+    RestoreSnapshotFromRecycleBinResult.add_member(:start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "startTime"))
+    RestoreSnapshotFromRecycleBinResult.add_member(:state, Shapes::ShapeRef.new(shape: SnapshotState, location_name: "status"))
+    RestoreSnapshotFromRecycleBinResult.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
+    RestoreSnapshotFromRecycleBinResult.add_member(:volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeSize"))
+    RestoreSnapshotFromRecycleBinResult.struct_class = Types::RestoreSnapshotFromRecycleBinResult
+
+    RestoreSnapshotTierRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
+    RestoreSnapshotTierRequest.add_member(:temporary_restore_days, Shapes::ShapeRef.new(shape: RestoreSnapshotTierRequestTemporaryRestoreDays, location_name: "TemporaryRestoreDays"))
+    RestoreSnapshotTierRequest.add_member(:permanent_restore, Shapes::ShapeRef.new(shape: Boolean, location_name: "PermanentRestore"))
+    RestoreSnapshotTierRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    RestoreSnapshotTierRequest.struct_class = Types::RestoreSnapshotTierRequest
+
+    RestoreSnapshotTierResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    RestoreSnapshotTierResult.add_member(:restore_start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "restoreStartTime"))
+    RestoreSnapshotTierResult.add_member(:restore_duration, Shapes::ShapeRef.new(shape: Integer, location_name: "restoreDuration"))
+    RestoreSnapshotTierResult.add_member(:is_permanent_restore, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPermanentRestore"))
+    RestoreSnapshotTierResult.struct_class = Types::RestoreSnapshotTierResult
+
     RevokeClientVpnIngressRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: ClientVpnEndpointId, required: true, location_name: "ClientVpnEndpointId"))
     RevokeClientVpnIngressRequest.add_member(:target_network_cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetNetworkCidr"))
     RevokeClientVpnIngressRequest.add_member(:access_group_id, Shapes::ShapeRef.new(shape: String, location_name: "AccessGroupId"))
@@ -10779,6 +10856,8 @@ module Aws::EC2
     Snapshot.add_member(:owner_alias, Shapes::ShapeRef.new(shape: String, location_name: "ownerAlias"))
     Snapshot.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     Snapshot.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    Snapshot.add_member(:storage_tier, Shapes::ShapeRef.new(shape: StorageTier, location_name: "storageTier"))
+    Snapshot.add_member(:restore_expiry_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "restoreExpiryTime"))
     Snapshot.struct_class = Types::Snapshot
 
     SnapshotDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -10818,6 +10897,15 @@ module Aws::EC2
 
     SnapshotList.member = Shapes::ShapeRef.new(shape: Snapshot, location_name: "item")
 
+    SnapshotRecycleBinInfo.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
+    SnapshotRecycleBinInfo.add_member(:recycle_bin_enter_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "recycleBinEnterTime"))
+    SnapshotRecycleBinInfo.add_member(:recycle_bin_exit_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "recycleBinExitTime"))
+    SnapshotRecycleBinInfo.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    SnapshotRecycleBinInfo.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
+    SnapshotRecycleBinInfo.struct_class = Types::SnapshotRecycleBinInfo
+
+    SnapshotRecycleBinInfoList.member = Shapes::ShapeRef.new(shape: SnapshotRecycleBinInfo, location_name: "item")
+
     SnapshotSet.member = Shapes::ShapeRef.new(shape: SnapshotInfo, location_name: "item")
 
     SnapshotTaskDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -10832,6 +10920,20 @@ module Aws::EC2
     SnapshotTaskDetail.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
     SnapshotTaskDetail.add_member(:user_bucket, Shapes::ShapeRef.new(shape: UserBucketDetails, location_name: "userBucket"))
     SnapshotTaskDetail.struct_class = Types::SnapshotTaskDetail
+
+    SnapshotTierStatus.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "snapshotId"))
+    SnapshotTierStatus.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "volumeId"))
+    SnapshotTierStatus.add_member(:status, Shapes::ShapeRef.new(shape: SnapshotState, location_name: "status"))
+    SnapshotTierStatus.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    SnapshotTierStatus.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    SnapshotTierStatus.add_member(:storage_tier, Shapes::ShapeRef.new(shape: StorageTier, location_name: "storageTier"))
+    SnapshotTierStatus.add_member(:last_tiering_start_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lastTieringStartTime"))
+    SnapshotTierStatus.add_member(:last_tiering_progress, Shapes::ShapeRef.new(shape: Integer, location_name: "lastTieringProgress"))
+    SnapshotTierStatus.add_member(:last_tiering_operation_status, Shapes::ShapeRef.new(shape: TieringOperationStatus, location_name: "lastTieringOperationStatus"))
+    SnapshotTierStatus.add_member(:last_tiering_operation_status_detail, Shapes::ShapeRef.new(shape: String, location_name: "lastTieringOperationStatusDetail"))
+    SnapshotTierStatus.add_member(:archival_complete_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "archivalCompleteTime"))
+    SnapshotTierStatus.add_member(:restore_expiry_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "restoreExpiryTime"))
+    SnapshotTierStatus.struct_class = Types::SnapshotTierStatus
 
     SpotCapacityRebalance.add_member(:replacement_strategy, Shapes::ShapeRef.new(shape: ReplacementStrategy, location_name: "replacementStrategy"))
     SpotCapacityRebalance.add_member(:termination_delay, Shapes::ShapeRef.new(shape: Integer, location_name: "terminationDelay"))
@@ -12096,6 +12198,8 @@ module Aws::EC2
     ZoneIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "ZoneId")
 
     ZoneNameStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "ZoneName")
+
+    snapshotTierStatusSet.member = Shapes::ShapeRef.new(shape: SnapshotTierStatus, location_name: "item")
 
 
     # @api private
@@ -14538,6 +14642,20 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeSnapshotAttributeResult)
       end)
 
+      api.add_operation(:describe_snapshot_tier_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSnapshotTierStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSnapshotTierStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSnapshotTierStatusResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_snapshots, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSnapshots"
         o.http_method = "POST"
@@ -15684,6 +15802,20 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: ImportVolumeResult)
       end)
 
+      api.add_operation(:list_snapshots_in_recycle_bin, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSnapshotsInRecycleBin"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSnapshotsInRecycleBinRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSnapshotsInRecycleBinResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:modify_address_attribute, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyAddressAttribute"
         o.http_method = "POST"
@@ -15898,6 +16030,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifySnapshotAttributeRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:modify_snapshot_tier, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifySnapshotTier"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifySnapshotTierRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifySnapshotTierResult)
       end)
 
       api.add_operation(:modify_spot_fleet_request, Seahorse::Model::Operation.new.tap do |o|
@@ -16354,6 +16494,22 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RestoreManagedPrefixListVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: RestoreManagedPrefixListVersionResult)
+      end)
+
+      api.add_operation(:restore_snapshot_from_recycle_bin, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreSnapshotFromRecycleBin"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreSnapshotFromRecycleBinRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreSnapshotFromRecycleBinResult)
+      end)
+
+      api.add_operation(:restore_snapshot_tier, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreSnapshotTier"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreSnapshotTierRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreSnapshotTierResult)
       end)
 
       api.add_operation(:revoke_client_vpn_ingress, Seahorse::Model::Operation.new.tap do |o|

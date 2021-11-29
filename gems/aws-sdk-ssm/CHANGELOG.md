@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2021-11-29)
+------------------
+
+* Feature - Added two new attributes to DescribeInstanceInformation called SourceId and SourceType along with new string filters SourceIds and SourceTypes to filter instance records.
+
 1.124.0 (2021-11-22)
 ------------------
 

@@ -2090,8 +2090,7 @@ module Aws::IoTSiteWise
     #     the China Regions.
     #
     #   * `IAM` – The portal uses Identity and Access Management to
-    #     authenticate users and manage user permissions. This option is
-    #     only available in the China Regions.
+    #     authenticate users and manage user permissions.
     #
     #   You can't change this value after you create a portal.
     #
@@ -3322,15 +3321,15 @@ module Aws::IoTSiteWise
     class DescribeStorageConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] storage_type
-    #   The type of storage that you specified for your data. The storage
-    #   type can be one of the following values:
+    #   The storage tier that you specified for your data. The `storageType`
+    #   parameter can be one of the following values:
     #
-    #   * `SITEWISE_DEFAULT_STORAGE` – IoT SiteWise replicates your data
-    #     into a service managed database.
+    #   * `SITEWISE_DEFAULT_STORAGE` – IoT SiteWise saves your data into the
+    #     hot tier. The hot tier is a service-managed database.
     #
-    #   * `MULTI_LAYER_STORAGE` – IoT SiteWise replicates your data into a
-    #     service managed database and saves a copy of your raw data and
-    #     metadata in an Amazon S3 object that you specified.
+    #   * `MULTI_LAYER_STORAGE` – IoT SiteWise saves your data in both the
+    #     cold tier and the cold tier. The cold tier is a customer-managed
+    #     Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] multi_layer_storage
@@ -3359,6 +3358,11 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html
     #   @return [String]
     #
+    # @!attribute [rw] retention_period
+    #   How many days your data is kept in the hot tier. By default, your
+    #   data is kept indefinitely in the hot tier.
+    #   @return [Types::RetentionPeriod]
+    #
     # @!attribute [rw] configuration_status
     #   Contains current status information for the configuration.
     #   @return [Types::ConfigurationStatus]
@@ -3372,6 +3376,7 @@ module Aws::IoTSiteWise
       :storage_type,
       :multi_layer_storage,
       :disassociated_data_storage,
+      :retention_period,
       :configuration_status,
       :last_update_date)
       SENSITIVE = []
@@ -5865,18 +5870,22 @@ module Aws::IoTSiteWise
     #           },
     #         },
     #         disassociated_data_storage: "ENABLED", # accepts ENABLED, DISABLED
+    #         retention_period: {
+    #           number_of_days: 1,
+    #           unlimited: false,
+    #         },
     #       }
     #
     # @!attribute [rw] storage_type
-    #   The type of storage that you specified for your data. The storage
-    #   type can be one of the following values:
+    #   The storage tier that you specified for your data. The `storageType`
+    #   parameter can be one of the following values:
     #
-    #   * `SITEWISE_DEFAULT_STORAGE` – IoT SiteWise replicates your data
-    #     into a service managed database.
+    #   * `SITEWISE_DEFAULT_STORAGE` – IoT SiteWise saves your data into the
+    #     hot tier. The hot tier is a service-managed database.
     #
-    #   * `MULTI_LAYER_STORAGE` – IoT SiteWise replicates your data into a
-    #     service managed database and saves a copy of your raw data and
-    #     metadata in an Amazon S3 object that you specified.
+    #   * `MULTI_LAYER_STORAGE` – IoT SiteWise saves your data in both the
+    #     cold tier and the cold tier. The cold tier is a customer-managed
+    #     Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] multi_layer_storage
@@ -5907,24 +5916,30 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html
     #   @return [String]
     #
+    # @!attribute [rw] retention_period
+    #   How many days your data is kept in the hot tier. By default, your
+    #   data is kept indefinitely in the hot tier.
+    #   @return [Types::RetentionPeriod]
+    #
     class PutStorageConfigurationRequest < Struct.new(
       :storage_type,
       :multi_layer_storage,
-      :disassociated_data_storage)
+      :disassociated_data_storage,
+      :retention_period)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] storage_type
-    #   The type of storage that you specified for your data. The storage
-    #   type can be one of the following values:
+    #   The storage tier that you specified for your data. The `storageType`
+    #   parameter can be one of the following values:
     #
-    #   * `SITEWISE_DEFAULT_STORAGE` – IoT SiteWise replicates your data
-    #     into a service managed database.
+    #   * `SITEWISE_DEFAULT_STORAGE` – IoT SiteWise saves your data into the
+    #     hot tier. The hot tier is a service-managed database.
     #
-    #   * `MULTI_LAYER_STORAGE` – IoT SiteWise replicates your data into a
-    #     service managed database and saves a copy of your raw data and
-    #     metadata in an Amazon S3 object that you specified.
+    #   * `MULTI_LAYER_STORAGE` – IoT SiteWise saves your data in both the
+    #     cold tier and the cold tier. The cold tier is a customer-managed
+    #     Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] multi_layer_storage
@@ -5953,6 +5968,11 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html
     #   @return [String]
     #
+    # @!attribute [rw] retention_period
+    #   How many days your data is kept in the hot tier. By default, your
+    #   data is kept indefinitely in the hot tier.
+    #   @return [Types::RetentionPeriod]
+    #
     # @!attribute [rw] configuration_status
     #   Contains current status information for the configuration.
     #   @return [Types::ConfigurationStatus]
@@ -5961,6 +5981,7 @@ module Aws::IoTSiteWise
       :storage_type,
       :multi_layer_storage,
       :disassociated_data_storage,
+      :retention_period,
       :configuration_status)
       SENSITIVE = []
       include Aws::Structure
@@ -6023,6 +6044,42 @@ module Aws::IoTSiteWise
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # How many days your data is kept in the hot tier. By default, your data
+    # is kept indefinitely in the hot tier.
+    #
+    # @note When making an API call, you may pass RetentionPeriod
+    #   data as a hash:
+    #
+    #       {
+    #         number_of_days: 1,
+    #         unlimited: false,
+    #       }
+    #
+    # @!attribute [rw] number_of_days
+    #   The number of days that your data is kept.
+    #
+    #   <note markdown="1"> If you specified a value for this parameter, the `unlimited`
+    #   parameter must be `false`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unlimited
+    #   If true, your data is kept indefinitely.
+    #
+    #   <note markdown="1"> If configured to `true`, you must not specify a value for the
+    #   `numberOfDays` parameter.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    class RetentionPeriod < Struct.new(
+      :number_of_days,
+      :unlimited)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -347,13 +347,13 @@ module Aws::SSM
     # @!group API Operations
 
     # Adds or overwrites one or more tags for the specified resource. Tags
-    # are metadata that you can assign to your documents, managed instances,
+    # are metadata that you can assign to your documents, managed nodes,
     # maintenance windows, Parameter Store parameters, and patch baselines.
     # Tags enable you to categorize your resources in different ways, for
     # example, by purpose, owner, or environment. Each tag consists of a key
     # and an optional value, both of which you define. For example, you
-    # could define a set of tags for your account's managed instances that
-    # helps you track each instance's owner and stack level. For example:
+    # could define a set of tags for your account's managed nodes that
+    # helps you track each node's owner and stack level. For example:
     #
     # * `Key=Owner,Value=DbAdmin`
     #
@@ -387,9 +387,8 @@ module Aws::SSM
     #   Specifies the type of resource you are tagging.
     #
     #   <note markdown="1"> The `ManagedInstance` type for this API operation is for on-premises
-    #   managed instances. You must specify the name of the managed instance
-    #   in the following format: `mi-ID_number `. For example,
-    #   `mi-1a2b3c4d5e6f`.
+    #   managed nodes. You must specify the name of the managed node in the
+    #   following format: `mi-ID_number `. For example, `mi-1a2b3c4d5e6f`.
     #
     #    </note>
     #
@@ -416,9 +415,9 @@ module Aws::SSM
     #   `ManagedInstance`\: `mi-012345abcde`
     #
     #   <note markdown="1"> The `ManagedInstance` type for this API operation is only for
-    #   on-premises managed instances. You must specify the name of the
-    #   managed instance in the following format: `mi-ID_number `. For
-    #   example, `mi-1a2b3c4d5e6f`.
+    #   on-premises managed nodes. You must specify the name of the managed
+    #   node in the following format: `mi-ID_number `. For example,
+    #   `mi-1a2b3c4d5e6f`.
     #
     #    </note>
     #
@@ -511,8 +510,8 @@ module Aws::SSM
     #   The ID of the command you want to cancel.
     #
     # @option params [Array<String>] :instance_ids
-    #   (Optional) A list of instance IDs on which you want to cancel the
-    #   command. If not provided, the command is canceled on every instance on
+    #   (Optional) A list of managed node IDs on which you want to cancel the
+    #   command. If not provided, the command is canceled on every node on
     #   which it was requested.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -564,19 +563,19 @@ module Aws::SSM
     end
 
     # Generates an activation code and activation ID you can use to register
-    # your on-premises server or virtual machine (VM) with Amazon Web
-    # Services Systems Manager. Registering these machines with Systems
-    # Manager makes it possible to manage them using Systems Manager
+    # your on-premises servers, edge devices, or virtual machine (VM) with
+    # Amazon Web Services Systems Manager. Registering these machines with
+    # Systems Manager makes it possible to manage them using Systems Manager
     # capabilities. You use the activation code and ID when installing SSM
     # Agent on machines in your hybrid environment. For more information
-    # about requirements for managing on-premises instances and VMs using
-    # Systems Manager, see [Setting up Amazon Web Services Systems Manager
-    # for hybrid environments][1] in the *Amazon Web Services Systems
-    # Manager User Guide*.
+    # about requirements for managing on-premises machines using Systems
+    # Manager, see [Setting up Amazon Web Services Systems Manager for
+    # hybrid environments][1] in the *Amazon Web Services Systems Manager
+    # User Guide*.
     #
-    # <note markdown="1"> On-premises servers or VMs that are registered with Systems Manager
-    # and Amazon Elastic Compute Cloud (Amazon EC2) instances that you
-    # manage with Systems Manager are all called *managed instances*.
+    # <note markdown="1"> Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and
+    # on-premises servers and VMs that are configured for Systems Manager
+    # are all called *managed nodes*.
     #
     #  </note>
     #
@@ -591,7 +590,7 @@ module Aws::SSM
     #   Don't enter personally identifiable information in this field.
     #
     # @option params [String] :default_instance_name
-    #   The name of the registered, managed instance as it will appear in the
+    #   The name of the registered, managed node as it will appear in the
     #   Amazon Web Services Systems Manager console or when you use the Amazon
     #   Web Services command line tools to list Systems Manager resources.
     #
@@ -599,7 +598,7 @@ module Aws::SSM
     #
     # @option params [required, String] :iam_role
     #   The name of the Identity and Access Management (IAM) role that you
-    #   want to assign to the managed instance. This IAM role must provide
+    #   want to assign to the managed node. This IAM role must provide
     #   AssumeRole permissions for the Amazon Web Services Systems Manager
     #   service principal `ssm.amazonaws.com`. For more information, see
     #   [Create an IAM service role for a hybrid environment][1] in the
@@ -610,8 +609,8 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
     #
     # @option params [Integer] :registration_limit
-    #   Specify the maximum number of managed instances you want to register.
-    #   The default value is `1`.
+    #   Specify the maximum number of managed nodes you want to register. The
+    #   default value is `1`.
     #
     # @option params [Time,DateTime,Date,Integer,String] :expiration_date
     #   The date by which this activation request should expire, in timestamp
@@ -637,13 +636,13 @@ module Aws::SSM
     #   the on-premises servers or VMs.
     #
     #   You can't add tags to or delete tags from an existing activation. You
-    #   can tag your on-premises servers and VMs after they connect to Systems
-    #   Manager for the first time and are assigned a managed instance ID.
-    #   This means they are listed in the Amazon Web Services Systems Manager
-    #   console with an ID that is prefixed with "mi-". For information
-    #   about how to add tags to your managed instances, see
+    #   can tag your on-premises servers, edge devices, and VMs after they
+    #   connect to Systems Manager for the first time and are assigned a
+    #   managed node ID. This means they are listed in the Amazon Web Services
+    #   Systems Manager console with an ID that is prefixed with "mi-". For
+    #   information about how to add tags to your managed nodes, see
     #   AddTagsToResource. For information about how to remove tags from your
-    #   managed instances, see RemoveTagsFromResource.
+    #   managed nodes, see RemoveTagsFromResource.
     #
     # @option params [Array<Types::RegistrationMetadataItem>] :registration_metadata
     #   Reserved for internal use.
@@ -690,16 +689,16 @@ module Aws::SSM
     end
 
     # A State Manager association defines the state that you want to
-    # maintain on your instances. For example, an association can specify
-    # that anti-virus software must be installed and running on your
-    # instances, or that certain ports must be closed. For static targets,
-    # the association specifies a schedule for when the configuration is
-    # reapplied. For dynamic targets, such as an Amazon Web Services
-    # resource group or an Amazon Web Services autoscaling group, State
-    # Manager, a capability of Amazon Web Services Systems Manager applies
-    # the configuration when new instances are added to the group. The
-    # association also specifies actions to take when applying the
-    # configuration. For example, an association for anti-virus software
+    # maintain on your managed nodes. For example, an association can
+    # specify that anti-virus software must be installed and running on your
+    # managed nodes, or that certain ports must be closed. For static
+    # targets, the association specifies a schedule for when the
+    # configuration is reapplied. For dynamic targets, such as an Amazon Web
+    # Services resource group or an Amazon Web Services autoscaling group,
+    # State Manager, a capability of Amazon Web Services Systems Manager
+    # applies the configuration when new managed nodes are added to the
+    # group. The association also specifies actions to take when applying
+    # the configuration. For example, an association for anti-virus software
     # might run once a day. If the software isn't installed, then State
     # Manager installs it. If the software is installed, but the service
     # isn't running, then the association might instruct State Manager to
@@ -707,7 +706,7 @@ module Aws::SSM
     #
     # @option params [required, String] :name
     #   The name of the SSM Command document or Automation runbook that
-    #   contains the configuration information for the instance.
+    #   contains the configuration information for the managed node.
     #
     #   You can specify Amazon Web Services-predefined documents, documents
     #   you created, or a document that is shared with you from another
@@ -732,9 +731,9 @@ module Aws::SSM
     #   a specific version or the default version.
     #
     # @option params [String] :instance_id
-    #   The instance ID.
+    #   The managed node ID.
     #
-    #   <note markdown="1"> `InstanceId` has been deprecated. To specify an instance ID for an
+    #   <note markdown="1"> `InstanceId` has been deprecated. To specify a managed node ID for an
     #   association, use the `Targets` parameter. Requests that include the
     #   parameter `InstanceID` with Systems Manager documents (SSM documents)
     #   that use schema version 2.0 or later will fail. In addition, if you
@@ -749,14 +748,14 @@ module Aws::SSM
     #   The parameters for the runtime configuration of the document.
     #
     # @option params [Array<Types::Target>] :targets
-    #   The targets for the association. You can target instances by using
-    #   tags, Amazon Web Services resource groups, all instances in an Amazon
-    #   Web Services account, or individual instance IDs. You can target all
-    #   instances in an Amazon Web Services account by specifying the
-    #   `InstanceIds` key with a value of `*`. For more information about
-    #   choosing targets for an association, see [Using targets and rate
-    #   controls with State Manager associations][1] in the *Amazon Web
-    #   Services Systems Manager User Guide*.
+    #   The targets for the association. You can target managed nodes by using
+    #   tags, Amazon Web Services resource groups, all managed nodes in an
+    #   Amazon Web Services account, or individual managed node IDs. You can
+    #   target all managed nodes in an Amazon Web Services account by
+    #   specifying the `InstanceIds` key with a value of `*`. For more
+    #   information about choosing targets for an association, see [Using
+    #   targets and rate controls with State Manager associations][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -786,9 +785,9 @@ module Aws::SSM
     #   of the target set, for example 10%. If you specify 3, for example, the
     #   system stops sending requests when the fourth error is received. If
     #   you specify 0, then the system stops sending requests after the first
-    #   error is returned. If you run an association on 50 instances and set
-    #   `MaxError` to 10%, then the system stops sending the request when the
-    #   sixth error is received.
+    #   error is returned. If you run an association on 50 managed nodes and
+    #   set `MaxError` to 10%, then the system stops sending the request when
+    #   the sixth error is received.
     #
     #   Executions that are already running an association when `MaxErrors` is
     #   reached are allowed to complete, but some of these executions may fail
@@ -802,10 +801,10 @@ module Aws::SSM
     #   of the target set, for example 10%. The default value is 100%, which
     #   means all targets run the association at the same time.
     #
-    #   If a new instance starts and attempts to run an association while
+    #   If a new managed node starts and attempts to run an association while
     #   Systems Manager is running `MaxConcurrency` associations, the
     #   association is allowed to run. During the next association interval,
-    #   the new instance will process its association within the limit
+    #   the new managed node will process its association within the limit
     #   specified for `MaxConcurrency`.
     #
     # @option params [String] :compliance_severity
@@ -953,14 +952,14 @@ module Aws::SSM
     end
 
     # Associates the specified Amazon Web Services Systems Manager document
-    # (SSM document) with the specified instances or targets.
+    # (SSM document) with the specified managed nodes or targets.
     #
-    # When you associate a document with one or more instances using
-    # instance IDs or tags, Amazon Web Services Systems Manager Agent (SSM
-    # Agent) running on the instance processes the document and configures
-    # the instance as specified.
+    # When you associate a document with one or more managed nodes using IDs
+    # or tags, Amazon Web Services Systems Manager Agent (SSM Agent) running
+    # on the managed node processes the document and configures the node as
+    # specified.
     #
-    # If you associate a document with an instance that already has an
+    # If you associate a document with a managed node that already has an
     # associated document, the system returns the AssociationAlreadyExists
     # exception.
     #
@@ -1112,7 +1111,7 @@ module Aws::SSM
 
     # Creates a Amazon Web Services Systems Manager (SSM document). An SSM
     # document defines the actions that Systems Manager performs on your
-    # managed instances. For more information about SSM documents, including
+    # managed nodes. For more information about SSM documents, including
     # information about supported schemas, features, and syntax, see [Amazon
     # Web Services Systems Manager Documents][1] in the *Amazon Web Services
     # Systems Manager User Guide*.
@@ -1273,7 +1272,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].description #=> String
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
-    #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
+    #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
     #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
@@ -1372,10 +1371,10 @@ module Aws::SSM
     #   execution.
     #
     # @option params [required, Boolean] :allow_unassociated_targets
-    #   Enables a maintenance window task to run on managed instances, even if
-    #   you haven't registered those instances as targets. If enabled, then
-    #   you must specify the unregistered instances (by instance ID) when you
-    #   register a task with the maintenance window.
+    #   Enables a maintenance window task to run on managed nodes, even if you
+    #   haven't registered those nodes as targets. If enabled, then you must
+    #   specify the unregistered managed nodes (by node ID) when you register
+    #   a task with the maintenance window.
     #
     #   If you don't enable this option, then you must specify
     #   previously-registered targets when you register a task with the
@@ -1716,8 +1715,8 @@ module Aws::SSM
     #
     # @option params [Boolean] :approved_patches_enable_non_security
     #   Indicates whether the list of approved patches includes non-security
-    #   updates that should be applied to the instances. The default value is
-    #   `false`. Applies to Linux instances only.
+    #   updates that should be applied to the managed nodes. The default value
+    #   is `false`. Applies to Linux managed nodes only.
     #
     # @option params [Array<String>] :rejected_patches
     #   A list of explicitly rejected patches for the baseline.
@@ -1752,9 +1751,9 @@ module Aws::SSM
     #   A description of the patch baseline.
     #
     # @option params [Array<Types::PatchSource>] :sources
-    #   Information about the patches to use to update the instances,
+    #   Information about the patches to use to update the managed nodes,
     #   including target operating systems and source repositories. Applies to
-    #   Linux instances only.
+    #   Linux managed nodes only.
     #
     # @option params [String] :client_token
     #   User-provided idempotency token.
@@ -1952,9 +1951,8 @@ module Aws::SSM
 
     # Deletes an activation. You aren't required to delete an activation.
     # If you delete an activation, you can no longer use it to register
-    # additional managed instances. Deleting an activation doesn't
-    # de-register managed instances. You must manually de-register managed
-    # instances.
+    # additional managed nodes. Deleting an activation doesn't de-register
+    # managed nodes. You must manually de-register managed nodes.
     #
     # @option params [required, String] :activation_id
     #   The ID of the activation that you want to delete.
@@ -1977,23 +1975,23 @@ module Aws::SSM
     end
 
     # Disassociates the specified Amazon Web Services Systems Manager
-    # document (SSM document) from the specified instance. If you created
-    # the association by using the `Targets` parameter, then you must delete
-    # the association by using the association ID.
+    # document (SSM document) from the specified managed node. If you
+    # created the association by using the `Targets` parameter, then you
+    # must delete the association by using the association ID.
     #
-    # When you disassociate a document from an instance, it doesn't change
-    # the configuration of the instance. To change the configuration state
-    # of an instance after you disassociate a document, you must create a
-    # new document with the desired configuration and associate it with the
-    # instance.
+    # When you disassociate a document from a managed node, it doesn't
+    # change the configuration of the node. To change the configuration
+    # state of a managed node after you disassociate a document, you must
+    # create a new document with the desired configuration and associate it
+    # with the node.
     #
     # @option params [String] :name
     #   The name of the SSM document.
     #
     # @option params [String] :instance_id
-    #   The instance ID.
+    #   The managed node ID.
     #
-    #   <note markdown="1"> `InstanceId` has been deprecated. To specify an instance ID for an
+    #   <note markdown="1"> `InstanceId` has been deprecated. To specify a managed node ID for an
     #   association, use the `Targets` parameter. Requests that include the
     #   parameter `InstanceID` with Systems Manager documents (SSM documents)
     #   that use schema version 2.0 or later will fail. In addition, if you
@@ -2027,11 +2025,11 @@ module Aws::SSM
     end
 
     # Deletes the Amazon Web Services Systems Manager document (SSM
-    # document) and all instance associations to the document.
+    # document) and all managed node associations to the document.
     #
     # Before you delete the document, we recommend that you use
-    # DeleteAssociation to disassociate all instances that are associated
-    # with the document.
+    # DeleteAssociation to disassociate all managed nodes that are
+    # associated with the document.
     #
     # @option params [required, String] :name
     #   The name of the document.
@@ -2277,9 +2275,8 @@ module Aws::SSM
     end
 
     # Deletes a resource data sync configuration. After the configuration is
-    # deleted, changes to data on managed instances are no longer synced to
-    # or from the target. Deleting a sync configuration doesn't delete
-    # data.
+    # deleted, changes to data on managed nodes are no longer synced to or
+    # from the target. Deleting a sync configuration doesn't delete data.
     #
     # @option params [required, String] :sync_name
     #   The name of the configuration to delete.
@@ -2306,13 +2303,13 @@ module Aws::SSM
     end
 
     # Removes the server or virtual machine from the list of registered
-    # servers. You can reregister the instance again at any time. If you
-    # don't plan to use Run Command on the server, we suggest uninstalling
-    # SSM Agent first.
+    # servers. You can reregister the node again at any time. If you don't
+    # plan to use Run Command on the server, we suggest uninstalling SSM
+    # Agent first.
     #
     # @option params [required, String] :instance_id
-    #   The ID assigned to the managed instance when you registered it using
-    #   the activation process.
+    #   The ID assigned to the managed node when you registered it using the
+    #   activation process.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2442,8 +2439,8 @@ module Aws::SSM
 
     # Describes details about the activation, such as the date and time the
     # activation was created, its expiration date, the Identity and Access
-    # Management (IAM) role assigned to the instances in the activation, and
-    # the number of instances registered by using this activation.
+    # Management (IAM) role assigned to the managed nodes in the activation,
+    # and the number of nodes registered by using this activation.
     #
     # @option params [Array<Types::DescribeActivationsFilter>] :filters
     #   A filter to view information about your activations.
@@ -2503,15 +2500,15 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Describes the association for the specified target or instance. If you
-    # created the association by using the `Targets` parameter, then you
+    # Describes the association for the specified target or managed node. If
+    # you created the association by using the `Targets` parameter, then you
     # must retrieve the association by using the association ID.
     #
     # @option params [String] :name
     #   The name of the SSM document.
     #
     # @option params [String] :instance_id
-    #   The instance ID.
+    #   The managed node ID.
     #
     # @option params [String] :association_id
     #   The association ID for which you want information.
@@ -2519,7 +2516,7 @@ module Aws::SSM
     # @option params [String] :association_version
     #   Specify the association version to retrieve. To view the latest
     #   version, either specify `$LATEST` for this parameter, or omit this
-    #   parameter. To view a list of all associations for an instance, use
+    #   parameter. To view a list of all associations for a managed node, use
     #   ListAssociations. To get a list of versions for a specific
     #   association, use ListAssociationVersions.
     #
@@ -2952,7 +2949,7 @@ module Aws::SSM
     #
     #   **Windows Server**
     #
-    #   Supported keys for Windows Server instance patches include the
+    #   Supported keys for Windows Server managed node patches include the
     #   following:
     #
     #   * <b> <code>PATCH_SET</code> </b>
@@ -2995,7 +2992,7 @@ module Aws::SSM
     #    `aws ssm describe-available-patches --filters
     #   Key=PRODUCT,Values=AmazonLinux2018.03 Key=CVE_ID,Values=CVE-2018-3615`
     #
-    #   Supported keys for Linux instance patches include the following:
+    #   Supported keys for Linux managed node patches include the following:
     #
     #   * <b> <code>PRODUCT</code> </b>
     #
@@ -3155,7 +3152,7 @@ module Aws::SSM
     #   resp.document.parameters[0].description #=> String
     #   resp.document.parameters[0].default_value #=> String
     #   resp.document.platform_types #=> Array
-    #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux"
+    #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
     #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
@@ -3243,10 +3240,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # All associations for the instance(s).
+    # All associations for the managed node(s).
     #
     # @option params [required, String] :instance_id
-    #   The instance ID for which you want to view all associations.
+    #   The managed node ID for which you want to view all associations.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -3362,10 +3359,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # The status of the associations for the instance(s).
+    # The status of the associations for the managed node(s).
     #
     # @option params [required, String] :instance_id
-    #   The instance IDs for which you want association status information.
+    #   The managed node IDs for which you want association status
+    #   information.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -3417,17 +3415,17 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Describes one or more of your instances, including information about
-    # the operating system platform, the version of SSM Agent installed on
-    # the instance, instance status, and so on.
+    # Describes one or more of your managed nodes, including information
+    # about the operating system platform, the version of SSM Agent
+    # installed on the managed node, node status, and so on.
     #
-    # If you specify one or more instance IDs, it returns information for
-    # those instances. If you don't specify instance IDs, it returns
-    # information for all your instances. If you specify an instance ID that
-    # isn't valid or an instance that you don't own, you receive an error.
+    # If you specify one or more managed node IDs, it returns information
+    # for those managed nodes. If you don't specify node IDs, it returns
+    # information for all your managed nodes. If you specify a node ID that
+    # isn't valid or a node that you don't own, you receive an error.
     #
     # <note markdown="1"> The `IamRole` field for this API operation is the Identity and Access
-    # Management (IAM) role assigned to on-premises instances. This call
+    # Management (IAM) role assigned to on-premises managed nodes. This call
     # doesn't return the IAM role for EC2 instances.
     #
     #  </note>
@@ -3435,8 +3433,7 @@ module Aws::SSM
     # @option params [Array<Types::InstanceInformationFilter>] :instance_information_filter_list
     #   This is a legacy method. We recommend that you don't use this method.
     #   Instead, use the `Filters` data type. `Filters` enables you to return
-    #   instance information by filtering based on tags applied to managed
-    #   instances.
+    #   node information by filtering based on tags applied to managed nodes.
     #
     #   <note markdown="1"> Attempting to use `InstanceInformationFilterList` and `Filters` leads
     #   to an exception error.
@@ -3445,9 +3442,9 @@ module Aws::SSM
     #
     # @option params [Array<Types::InstanceInformationStringFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
-    #   instances. You can filter based on tags applied to EC2 instances. Use
-    #   this `Filters` data type instead of `InstanceInformationFilterList`,
-    #   which is deprecated.
+    #   managed nodes. You can filter based on tags applied to EC2 instances.
+    #   Use this `Filters` data type instead of
+    #   `InstanceInformationFilterList`, which is deprecated.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -3492,7 +3489,7 @@ module Aws::SSM
     #   resp.instance_information_list[0].last_ping_date_time #=> Time
     #   resp.instance_information_list[0].agent_version #=> String
     #   resp.instance_information_list[0].is_latest_version #=> Boolean
-    #   resp.instance_information_list[0].platform_type #=> String, one of "Windows", "Linux"
+    #   resp.instance_information_list[0].platform_type #=> String, one of "Windows", "Linux", "MacOS"
     #   resp.instance_information_list[0].platform_name #=> String
     #   resp.instance_information_list[0].platform_version #=> String
     #   resp.instance_information_list[0].activation_id #=> String
@@ -3508,6 +3505,8 @@ module Aws::SSM
     #   resp.instance_information_list[0].association_overview.detailed_status #=> String
     #   resp.instance_information_list[0].association_overview.instance_association_status_aggregated_count #=> Hash
     #   resp.instance_information_list[0].association_overview.instance_association_status_aggregated_count["StatusName"] #=> Integer
+    #   resp.instance_information_list[0].source_id #=> String
+    #   resp.instance_information_list[0].source_type #=> String, one of "AWS::EC2::Instance", "AWS::IoT::Thing", "AWS::SSM::ManagedInstance"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceInformation AWS API Documentation
@@ -3519,10 +3518,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves the high-level patch state of one or more instances.
+    # Retrieves the high-level patch state of one or more managed nodes.
     #
     # @option params [required, Array<String>] :instance_ids
-    #   The ID of the instance for which patch state information should be
+    #   The ID of the managed node for which patch state information should be
     #   retrieved.
     #
     # @option params [String] :next_token
@@ -3530,7 +3529,7 @@ module Aws::SSM
     #   token from a previous call.)
     #
     # @option params [Integer] :max_results
-    #   The maximum number of instances to return (per page).
+    #   The maximum number of managed nodes to return (per page).
     #
     # @return [Types::DescribeInstancePatchStatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3583,7 +3582,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves the high-level patch state for the instances in the
+    # Retrieves the high-level patch state for the managed nodes in the
     # specified patch group.
     #
     # @option params [required, String] :patch_group
@@ -3664,12 +3663,12 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves information about the patches on the specified instance and
-    # their state relative to the patch baseline being used for the
-    # instance.
+    # Retrieves information about the patches on the specified managed node
+    # and their state relative to the patch baseline being used for the
+    # node.
     #
     # @option params [required, String] :instance_id
-    #   The ID of the instance whose patch state information should be
+    #   The ID of the managed node whose patch state information should be
     #   retrieved.
     #
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
@@ -4012,7 +4011,7 @@ module Aws::SSM
     #   The ID of the maintenance window to retrieve information about.
     #
     # @option params [Array<Types::Target>] :targets
-    #   The instance ID or key-value pair to retrieve information about.
+    #   The managed node ID or key-value pair to retrieve information about.
     #
     # @option params [String] :resource_type
     #   The type of resource you want to retrieve information about. For
@@ -4287,10 +4286,10 @@ module Aws::SSM
     end
 
     # Retrieves information about the maintenance window targets or tasks
-    # that an instance is associated with.
+    # that a managed node is associated with.
     #
     # @option params [required, Array<Types::Target>] :targets
-    #   The instance ID or key-value pair to retrieve information about.
+    #   The managed node ID or key-value pair to retrieve information about.
     #
     # @option params [required, String] :resource_type
     #   The type of resource you want to retrieve information about. For
@@ -5163,18 +5162,19 @@ module Aws::SSM
     # or plugin.
     #
     # `GetCommandInvocation` only gives the execution status of a plugin in
-    # a document. To get the command execution status on a specific
-    # instance, use ListCommandInvocations. To get the command execution
-    # status across instances, use ListCommands.
+    # a document. To get the command execution status on a specific managed
+    # node, use ListCommandInvocations. To get the command execution status
+    # across managed nodes, use ListCommands.
     #
     # @option params [required, String] :command_id
     #   (Required) The parent command ID of the invocation plugin.
     #
     # @option params [required, String] :instance_id
-    #   (Required) The ID of the managed instance targeted by the command. A
-    #   managed instance can be an Amazon Elastic Compute Cloud (Amazon EC2)
-    #   instance or an instance in your hybrid environment that is configured
-    #   for Amazon Web Services Systems Manager.
+    #   (Required) The ID of the managed node targeted by the command. A
+    #   *managed node* can be an Amazon Elastic Compute Cloud (Amazon EC2)
+    #   instance, edge device, and on-premises server or VM in your hybrid
+    #   environment that is configured for Amazon Web Services Systems
+    #   Manager.
     #
     # @option params [String] :plugin_name
     #   The name of the plugin for which you want detailed results. If the
@@ -5255,12 +5255,12 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves the Session Manager connection status for an instance to
+    # Retrieves the Session Manager connection status for a managed node to
     # determine whether it is running and ready to receive Session Manager
     # connections.
     #
     # @option params [required, String] :target
-    #   The instance ID.
+    #   The managed node ID.
     #
     # @return [Types::GetConnectionStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5323,7 +5323,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Retrieves the current snapshot for the patch baseline the instance
+    # Retrieves the current snapshot for the patch baseline the managed node
     # uses. This API is primarily used by the `AWS-RunPatchBaseline` Systems
     # Manager document (SSM document).
     #
@@ -5332,7 +5332,7 @@ module Aws::SSM
     # Services credentials and the operation fails. To avoid this, you can
     # run the command in the Amazon Web Services Systems Manager console.
     # Use Run Command, a capability of Amazon Web Services Systems Manager,
-    # with an SSM document that enables you to target an instance with a
+    # with an SSM document that enables you to target a managed node with a
     # script or command. For example, run the command using the
     # `AWS-RunShellScript` document or the `AWS-RunPowerShellScript`
     # document.
@@ -5340,8 +5340,8 @@ module Aws::SSM
     #  </note>
     #
     # @option params [required, String] :instance_id
-    #   The ID of the instance for which the appropriate patch snapshot should
-    #   be retrieved.
+    #   The ID of the managed node for which the appropriate patch snapshot
+    #   should be retrieved.
     #
     # @option params [required, String] :snapshot_id
     #   The snapshot ID provided by the user when running
@@ -5496,8 +5496,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Query inventory information. This includes instance status, such as
-    # `Stopped` or `Terminated`.
+    # Query inventory information. This includes managed node status, such
+    # as `Stopped` or `Terminated`.
     #
     # @option params [Array<Types::InventoryFilter>] :filters
     #   One or more filters. Use a filter to return a more specific list of
@@ -5507,7 +5507,8 @@ module Aws::SSM
     #   Returns counts of inventory types based on one or more expressions.
     #   For example, if you aggregate by using an expression that uses the
     #   `AWS:InstanceInformation.PlatformType` type, you can see a count of
-    #   how many Windows and Linux instances exist in your inventoried fleet.
+    #   how many Windows and Linux managed nodes exist in your inventoried
+    #   fleet.
     #
     # @option params [Array<Types::ResultAttribute>] :result_attributes
     #   The list of inventory item types to return.
@@ -6786,9 +6787,9 @@ module Aws::SSM
 
     # Returns all State Manager associations in the current Amazon Web
     # Services account and Amazon Web Services Region. You can limit the
-    # results to a specific State Manager association document or instance
-    # by specifying a filter. State Manager is a capability of Amazon Web
-    # Services Systems Manager.
+    # results to a specific State Manager association document or managed
+    # node by specifying a filter. State Manager is a capability of Amazon
+    # Web Services Systems Manager.
     #
     # @option params [Array<Types::AssociationFilter>] :association_filter_list
     #   One or more filters. Use a filter to return a more specific list of
@@ -6796,7 +6797,7 @@ module Aws::SSM
     #
     #   <note markdown="1"> Filtering associations using the `InstanceID` attribute only returns
     #   legacy associations created using the `InstanceID` attribute.
-    #   Associations targeting the instance that are part of the Target
+    #   Associations targeting the managed node that are part of the Target
     #   Attributes `ResourceGroup` or `Tags` aren't returned.
     #
     #    </note>
@@ -6860,18 +6861,19 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # An invocation is copy of a command sent to a specific instance. A
-    # command can apply to one or more instances. A command invocation
-    # applies to one instance. For example, if a user runs `SendCommand`
-    # against three instances, then a command invocation is created for each
-    # requested instance ID. `ListCommandInvocations` provide status about
-    # command execution.
+    # An invocation is copy of a command sent to a specific managed node. A
+    # command can apply to one or more managed nodes. A command invocation
+    # applies to one managed node. For example, if a user runs `SendCommand`
+    # against three managed nodes, then a command invocation is created for
+    # each requested managed node ID. `ListCommandInvocations` provide
+    # status about command execution.
     #
     # @option params [String] :command_id
     #   (Optional) The invocations for a specific command ID.
     #
     # @option params [String] :instance_id
-    #   (Optional) The command execution details for a specific instance ID.
+    #   (Optional) The command execution details for a specific managed node
+    #   ID.
     #
     # @option params [Integer] :max_results
     #   (Optional) The maximum number of items to return for this call. The
@@ -6966,11 +6968,11 @@ module Aws::SSM
     #   (Optional) If provided, lists only the specified command.
     #
     # @option params [String] :instance_id
-    #   (Optional) Lists commands issued against this instance ID.
+    #   (Optional) Lists commands issued against this managed node ID.
     #
-    #   <note markdown="1"> You can't specify an instance ID in the same command that you specify
-    #   `Status` = `Pending`. This is because the command hasn't reached the
-    #   instance yet.
+    #   <note markdown="1"> You can't specify a managed node ID in the same command that you
+    #   specify `Status` = `Pending`. This is because the command hasn't
+    #   reached the managed node yet.
     #
     #    </note>
     #
@@ -7384,7 +7386,7 @@ module Aws::SSM
     #   resp.document_identifiers[0].owner #=> String
     #   resp.document_identifiers[0].version_name #=> String
     #   resp.document_identifiers[0].platform_types #=> Array
-    #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux"
+    #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
     #   resp.document_identifiers[0].document_version #=> String
     #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
     #   resp.document_identifiers[0].schema_version #=> String
@@ -7412,7 +7414,7 @@ module Aws::SSM
     # A list of inventory items returned by the request.
     #
     # @option params [required, String] :instance_id
-    #   The instance ID for which you want inventory information.
+    #   The managed node ID for which you want inventory information.
     #
     # @option params [required, String] :type_name
     #   The type of inventory item for which you want information.
@@ -7912,7 +7914,7 @@ module Aws::SSM
     # * ExecutionType: Specify patch, association, or Custom:`string`.
     #
     # * ExecutionTime. The time the patch, association, or custom compliance
-    #   item was applied to the instance.
+    #   item was applied to the managed node.
     #
     # * Id: The patch, association, or custom compliance ID.
     #
@@ -7945,8 +7947,8 @@ module Aws::SSM
     #   following format: yyyy-MM-dd'T'HH:mm:ss'Z'
     #
     # @option params [required, String] :resource_id
-    #   Specify an ID for this resource. For a managed instance, this is the
-    #   instance ID.
+    #   Specify an ID for this resource. For a managed node, this is the node
+    #   ID.
     #
     # @option params [required, String] :resource_type
     #   Specify the type of resource. `ManagedInstance` is currently the only
@@ -8024,15 +8026,15 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Bulk update custom inventory items on one more instance. The request
-    # adds an inventory item, if it doesn't already exist, or updates an
-    # inventory item, if it does exist.
+    # Bulk update custom inventory items on one or more managed nodes. The
+    # request adds an inventory item, if it doesn't already exist, or
+    # updates an inventory item, if it does exist.
     #
     # @option params [required, String] :instance_id
-    #   An instance ID where you want to add or update inventory items.
+    #   An managed node ID where you want to add or update inventory items.
     #
     # @option params [required, Array<Types::InventoryItem>] :items
-    #   The inventory items that you want to add or update on instances.
+    #   The inventory items that you want to add or update on managed nodes.
     #
     # @return [Types::PutInventoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8445,7 +8447,7 @@ module Aws::SSM
     #
     # @option params [required, Array<Types::Target>] :targets
     #   The targets to register with the maintenance window. In other words,
-    #   the instances to run commands on when the maintenance window runs.
+    #   the managed nodes to run commands on when the maintenance window runs.
     #
     #   <note markdown="1"> If a single maintenance window task is registered with multiple
     #   targets, its task invocations occur sequentially and not in parallel.
@@ -8455,35 +8457,33 @@ module Aws::SSM
     #
     #    </note>
     #
-    #   You can specify targets using instance IDs, resource group names, or
-    #   tags that have been applied to instances.
+    #   You can specify targets using managed node IDs, resource group names,
+    #   or tags that have been applied to managed nodes.
     #
-    #   **Example 1**\: Specify instance IDs
+    #   **Example 1**\: Specify managed node IDs
     #
-    #   `Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3 `
+    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>,<instance-id-3>`
     #
-    #   **Example 2**\: Use tag key-pairs applied to instances
+    #   **Example 2**\: Use tag key-pairs applied to managed nodes
     #
-    #   `Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2 `
+    #   `Key=tag:<my-tag-key>,Values=<my-tag-value-1>,<my-tag-value-2>`
     #
-    #   **Example 3**\: Use tag-keys applied to instances
+    #   **Example 3**\: Use tag-keys applied to managed nodes
     #
-    #   `Key=tag-key,Values=my-tag-key-1,my-tag-key-2 `
+    #   `Key=tag-key,Values=<my-tag-key-1>,<my-tag-key-2>`
     #
     #   **Example 4**\: Use resource group names
     #
-    #   `Key=resource-groups:Name,Values=resource-group-name `
+    #   `Key=resource-groups:Name,Values=<resource-group-name>`
     #
     #   **Example 5**\: Use filters for resource group types
     #
-    #   `Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2
-    #   `
+    #   `Key=resource-groups:ResourceTypeFilters,Values=<resource-type-1>,<resource-type-2>`
     #
     #   <note markdown="1"> For `Key=resource-groups:ResourceTypeFilters`, specify resource types
     #   in the following format
     #
-    #    `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
-    #   `
+    #    `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC`
     #
     #    </note>
     #
@@ -8553,7 +8553,7 @@ module Aws::SSM
     #   The ID of the maintenance window the task should be added to.
     #
     # @option params [Array<Types::Target>] :targets
-    #   The targets (either instances or maintenance window targets).
+    #   The targets (either managed nodes or maintenance window targets).
     #
     #   <note markdown="1"> One or more targets must be specified for maintenance window Run
     #   Command-type tasks. Depending on the task, targets are optional for
@@ -8564,7 +8564,7 @@ module Aws::SSM
     #
     #    </note>
     #
-    #   Specify instances using the following format:
+    #   Specify managed nodes using the following format:
     #
     #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
     #
@@ -8648,7 +8648,7 @@ module Aws::SSM
     #
     # @option params [Types::LoggingInfo] :logging_info
     #   A structure containing information about an Amazon Simple Storage
-    #   Service (Amazon S3) bucket to write instance-level logs to.
+    #   Service (Amazon S3) bucket to write managed node-level logs to.
     #
     #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an Amazon Simple Storage
     #   Service (Amazon S3) bucket to contain logs, instead use the
@@ -8787,9 +8787,8 @@ module Aws::SSM
     #   The type of resource from which you want to remove a tag.
     #
     #   <note markdown="1"> The `ManagedInstance` type for this API operation is only for
-    #   on-premises managed instances. Specify the name of the managed
-    #   instance in the following format: `mi-ID_number `. For example,
-    #   `mi-1a2b3c4d5e6f`.
+    #   on-premises managed nodes. Specify the name of the managed node in the
+    #   following format: `mi-ID_number `. For example, `mi-1a2b3c4d5e6f`.
     #
     #    </note>
     #
@@ -8813,10 +8812,9 @@ module Aws::SSM
     #
     #   For the Document and Parameter values, use the name of the resource.
     #
-    #   <note markdown="1"> The ManagedInstance type for this API operation is only for
-    #   on-premises managed instances. Specify the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
+    #   <note markdown="1"> The `ManagedInstance` type for this API operation is only for
+    #   on-premises managed nodes. Specify the name of the managed node in the
+    #   following format: mi-ID\_number. For example, mi-1a2b3c4d5e6f.
     #
     #    </note>
     #
@@ -8906,7 +8904,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Reconnects a session to an instance after it has been disconnected.
+    # Reconnects a session to a managed node after it has been disconnected.
     # Connections can be resumed for disconnected sessions, but not
     # terminated sessions.
     #
@@ -8996,18 +8994,18 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Runs commands on one or more managed instances.
+    # Runs commands on one or more managed nodes.
     #
     # @option params [Array<String>] :instance_ids
-    #   The IDs of the instances where the command should run. Specifying
-    #   instance IDs is most useful when you are targeting a limited number of
-    #   instances, though you can specify up to 50 IDs.
+    #   The IDs of the managed nodes where the command should run. Specifying
+    #   managed node IDs is most useful when you are targeting a limited
+    #   number of managed nodes, though you can specify up to 50 IDs.
     #
-    #   To target a larger number of instances, or if you prefer not to list
-    #   individual instance IDs, we recommend using the `Targets` option
+    #   To target a larger number of managed nodes, or if you prefer not to
+    #   list individual node IDs, we recommend using the `Targets` option
     #   instead. Using `Targets`, which accepts tag key-value pairs to
-    #   identify the instances to send commands to, you can a send command to
-    #   tens, hundreds, or thousands of instances at once.
+    #   identify the managed nodes to send commands to, you can a send command
+    #   to tens, hundreds, or thousands of nodes at once.
     #
     #   For more information about how to use targets, see [Using targets and
     #   rate controls to send commands to a fleet][1] in the *Amazon Web
@@ -9018,15 +9016,15 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #
     # @option params [Array<Types::Target>] :targets
-    #   An array of search criteria that targets instances using a `Key,Value`
-    #   combination that you specify. Specifying targets is most useful when
-    #   you want to send a command to a large number of instances at once.
-    #   Using `Targets`, which accepts tag key-value pairs to identify
-    #   instances, you can send a command to tens, hundreds, or thousands of
-    #   instances at once.
+    #   An array of search criteria that targets managed nodes using a
+    #   `Key,Value` combination that you specify. Specifying targets is most
+    #   useful when you want to send a command to a large number of managed
+    #   nodes at once. Using `Targets`, which accepts tag key-value pairs to
+    #   identify managed nodes, you can send a command to tens, hundreds, or
+    #   thousands of nodes at once.
     #
-    #   To send a command to a smaller number of instances, you can use the
-    #   `InstanceIds` option instead.
+    #   To send a command to a smaller number of managed nodes, you can use
+    #   the `InstanceIds` option instead.
     #
     #   For more information about how to use targets, see [Sending commands
     #   to a fleet][1] in the *Amazon Web Services Systems Manager User
@@ -9108,8 +9106,8 @@ module Aws::SSM
     #   should be stored.
     #
     # @option params [String] :max_concurrency
-    #   (Optional) The maximum number of instances that are allowed to run the
-    #   command at the same time. You can specify a number such as 10 or a
+    #   (Optional) The maximum number of managed nodes that are allowed to run
+    #   the command at the same time. You can specify a number such as 10 or a
     #   percentage such as 10%. The default value is `50`. For more
     #   information about how to use `MaxConcurrency`, see [Using concurrency
     #   controls][1] in the *Amazon Web Services Systems Manager User Guide*.
@@ -9553,7 +9551,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Initiates a connection to a target (for example, an instance) for a
+    # Initiates a connection to a target (for example, a managed node) for a
     # Session Manager session. Returns a URL and token that can be used to
     # open a WebSocket connection for sending input and receiving outputs.
     #
@@ -9574,14 +9572,14 @@ module Aws::SSM
     # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html
     #
     # @option params [required, String] :target
-    #   The instance to connect to for the session.
+    #   The managed node to connect to for the session.
     #
     # @option params [String] :document_name
     #   The name of the SSM document to define the parameters and plugin
     #   settings for the session. For example, `SSM-SessionManagerRunShell`.
     #   You can call the GetDocument API to verify the document exists before
     #   attempting to start a session. If no document name is provided, a
-    #   shell to the instance is launched by default.
+    #   shell to the managed node is launched by default.
     #
     # @option params [String] :reason
     #   The reason for connecting to the instance. This value is included in
@@ -9651,7 +9649,7 @@ module Aws::SSM
     end
 
     # Permanently ends a session and closes the data connection between the
-    # Session Manager client and SSM Agent on the instance. A terminated
+    # Session Manager client and SSM Agent on the managed node. A terminated
     # session isn't be resumed.
     #
     # @option params [required, String] :session_id
@@ -9759,7 +9757,7 @@ module Aws::SSM
     #
     # @option params [String] :name
     #   The name of the SSM Command document or Automation runbook that
-    #   contains the configuration information for the instance.
+    #   contains the configuration information for the managed node.
     #
     #   You can specify Amazon Web Services-predefined documents, documents
     #   you created, or a document that is shared with you from another
@@ -9804,9 +9802,9 @@ module Aws::SSM
     #   of the target set, for example 10%. If you specify 3, for example, the
     #   system stops sending requests when the fourth error is received. If
     #   you specify 0, then the system stops sending requests after the first
-    #   error is returned. If you run an association on 50 instances and set
-    #   `MaxError` to 10%, then the system stops sending the request when the
-    #   sixth error is received.
+    #   error is returned. If you run an association on 50 managed nodes and
+    #   set `MaxError` to 10%, then the system stops sending the request when
+    #   the sixth error is received.
     #
     #   Executions that are already running an association when `MaxErrors` is
     #   reached are allowed to complete, but some of these executions may fail
@@ -9820,10 +9818,10 @@ module Aws::SSM
     #   of the target set, for example 10%. The default value is 100%, which
     #   means all targets run the association at the same time.
     #
-    #   If a new instance starts and attempts to run an association while
+    #   If a new managed node starts and attempts to run an association while
     #   Systems Manager is running `MaxConcurrency` associations, the
     #   association is allowed to run. During the next association interval,
-    #   the new instance will process its association within the limit
+    #   the new managed node will process its association within the limit
     #   specified for `MaxConcurrency`.
     #
     # @option params [String] :compliance_severity
@@ -9980,7 +9978,7 @@ module Aws::SSM
     end
 
     # Updates the status of the Amazon Web Services Systems Manager document
-    # (SSM document) associated with the specified instance.
+    # (SSM document) associated with the specified managed node.
     #
     # `UpdateAssociationStatus` is primarily used by the Amazon Web Services
     # Systems Manager Agent (SSM Agent) to report status updates about your
@@ -9991,7 +9989,7 @@ module Aws::SSM
     #   The name of the SSM document.
     #
     # @option params [required, String] :instance_id
-    #   The instance ID.
+    #   The managed node ID.
     #
     # @option params [required, Types::AssociationStatus] :association_status
     #   The association status.
@@ -10150,7 +10148,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].description #=> String
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
-    #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
+    #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux", "MacOS"
     #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar", "Automation.ChangeTemplate", "ProblemAnalysis", "ProblemAnalysisTemplate"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
@@ -10546,8 +10544,8 @@ module Aws::SSM
     #   The task ID to modify.
     #
     # @option params [Array<Types::Target>] :targets
-    #   The targets (either instances or tags) to modify. Instances are
-    #   specified using the format
+    #   The targets (either managed nodes or tags) to modify. Managed nodes
+    #   are specified using the format
     #   `Key=instanceids,Values=instanceID_1,instanceID_2`. Tags are specified
     #   using the format ` Key=tag_name,Values=tag_value`.
     #
@@ -10843,12 +10841,12 @@ module Aws::SSM
     end
 
     # Changes the Identity and Access Management (IAM) role that is assigned
-    # to the on-premises instance or virtual machines (VM). IAM roles are
-    # first assigned to these hybrid instances during the activation
+    # to the on-premises server, edge device, or virtual machines (VM). IAM
+    # roles are first assigned to these hybrid nodes during the activation
     # process. For more information, see CreateActivation.
     #
     # @option params [required, String] :instance_id
-    #   The ID of the managed instance where you want to update the role.
+    #   The ID of the managed node where you want to update the role.
     #
     # @option params [required, String] :iam_role
     #   The IAM role you want to assign or change.
@@ -11103,8 +11101,8 @@ module Aws::SSM
     #
     # @option params [Boolean] :approved_patches_enable_non_security
     #   Indicates whether the list of approved patches includes non-security
-    #   updates that should be applied to the instances. The default value is
-    #   `false`. Applies to Linux instances only.
+    #   updates that should be applied to the managed nodes. The default value
+    #   is `false`. Applies to Linux managed nodes only.
     #
     # @option params [Array<String>] :rejected_patches
     #   A list of explicitly rejected patches for the baseline.
@@ -11139,9 +11137,9 @@ module Aws::SSM
     #   A description of the patch baseline.
     #
     # @option params [Array<Types::PatchSource>] :sources
-    #   Information about the patches to use to update the instances,
+    #   Information about the patches to use to update the managed nodes,
     #   including target operating systems and source repositories. Applies to
-    #   Linux instances only.
+    #   Linux managed nodes only.
     #
     # @option params [Boolean] :replace
     #   If True, then all fields that are required by the CreatePatchBaseline
@@ -11399,7 +11397,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

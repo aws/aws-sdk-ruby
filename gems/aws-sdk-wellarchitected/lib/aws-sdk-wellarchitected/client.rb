@@ -338,12 +338,25 @@ module Aws::WellArchitected
 
     # Associate a lens to a workload.
     #
+    # Up to 10 lenses can be associated with a workload in a single API
+    # operation. A maximum of 20 lenses can be associated with a workload.
+    #
+    # <note markdown="1"> **Disclaimer**
+    #
+    #  By accessing and/or applying custom lenses created by another Amazon
+    # Web Services user or account, you acknowledge that custom lenses
+    # created by other users and shared with you are Third Party Content as
+    # defined in the Amazon Web Services Customer Agreement.
+    #
+    #  </note>
+    #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, Array<String>] :lens_aliases
-    #   List of lens aliases to associate or disassociate with a workload.
+    #   List of lens aliases to associate or disassociate with a workload. Up
+    #   to 10 lenses can be specified.
     #
     #   Identify a lens using its LensSummary$LensAlias.
     #
@@ -365,11 +378,144 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Create a lens share.
+    #
+    # The owner of a lens can share it with other Amazon Web Services
+    # accounts and IAM users in the same Amazon Web Services Region. Shared
+    # access to a lens is not removed until the lens invitation is deleted.
+    #
+    # <note markdown="1"> **Disclaimer**
+    #
+    #  By sharing your custom lenses with other Amazon Web Services accounts,
+    # you acknowledge that Amazon Web Services will make your custom lenses
+    # available to those other accounts. Those other accounts may continue
+    # to access and use your shared custom lenses even if you delete the
+    # custom lenses from your own Amazon Web Services account or terminate
+    # your Amazon Web Services account.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :lens_alias
+    #   The alias of the lens, for example, `serverless`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #
+    # @option params [required, String] :shared_with
+    #   The Amazon Web Services account ID or IAM role with which the workload
+    #   is shared.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after it has completed successfully, the result of the original
+    #   request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateLensShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLensShareOutput#share_id #share_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_lens_share({
+    #     lens_alias: "LensAlias", # required
+    #     shared_with: "SharedWith", # required
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.share_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateLensShare AWS API Documentation
+    #
+    # @overload create_lens_share(params = {})
+    # @param [Hash] params ({})
+    def create_lens_share(params = {}, options = {})
+      req = build_request(:create_lens_share, params)
+      req.send_request(options)
+    end
+
+    # Create a new lens version.
+    #
+    # A lens can have up to 100 versions.
+    #
+    # After a lens has been imported, create a new lens version to publish
+    # it. The owner of a lens can share the lens with other Amazon Web
+    # Services accounts and IAM users in the same Amazon Web Services
+    # Region. Only the owner of a lens can delete it.
+    #
+    # @option params [required, String] :lens_alias
+    #   The alias of the lens, for example, `serverless`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #
+    # @option params [required, String] :lens_version
+    #   The version of the lens being created.
+    #
+    # @option params [Boolean] :is_major_version
+    #   Set to true if this new major lens version.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after it has completed successfully, the result of the original
+    #   request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateLensVersionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLensVersionOutput#lens_arn #lens_arn} => String
+    #   * {Types::CreateLensVersionOutput#lens_version #lens_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_lens_version({
+    #     lens_alias: "LensAlias", # required
+    #     lens_version: "LensVersion", # required
+    #     is_major_version: false,
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lens_arn #=> String
+    #   resp.lens_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateLensVersion AWS API Documentation
+    #
+    # @overload create_lens_version(params = {})
+    # @param [Hash] params ({})
+    def create_lens_version(params = {}, options = {})
+      req = build_request(:create_lens_version, params)
+      req.send_request(options)
+    end
+
     # Create a milestone for an existing workload.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :milestone_name
     #   The name of the milestone in a workload.
@@ -386,9 +532,9 @@ module Aws::WellArchitected
     #   request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
-    #   the AWS SDKs automatically generate one for you. If you are not using
-    #   the AWS SDK or the AWS CLI, you must provide this token or the request
-    #   will fail.
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -422,12 +568,12 @@ module Aws::WellArchitected
 
     # Create a new workload.
     #
-    # The owner of a workload can share the workload with other AWS accounts
-    # and IAM users in the same AWS Region. Only the owner of a workload can
-    # delete it.
+    # The owner of a workload can share the workload with other Amazon Web
+    # Services accounts and IAM users in the same Amazon Web Services
+    # Region. Only the owner of a workload can delete it.
     #
-    # For more information, see [Defining a Workload][1] in the *AWS
-    # Well-Architected Tool User Guide*.
+    # For more information, see [Defining a Workload][1] in the
+    # *Well-Architected Tool User Guide*.
     #
     #
     #
@@ -436,8 +582,9 @@ module Aws::WellArchitected
     # @option params [required, String] :workload_name
     #   The name of the workload.
     #
-    #   The name must be unique within an account within a Region. Spaces and
-    #   capitalization are ignored when checking for uniqueness.
+    #   The name must be unique within an account within an Amazon Web
+    #   Services Region. Spaces and capitalization are ignored when checking
+    #   for uniqueness.
     #
     # @option params [required, String] :description
     #   The description for the workload.
@@ -446,14 +593,16 @@ module Aws::WellArchitected
     #   The environment for the workload.
     #
     # @option params [Array<String>] :account_ids
-    #   The list of AWS account IDs associated with the workload.
+    #   The list of Amazon Web Services account IDs associated with the
+    #   workload.
     #
     # @option params [Array<String>] :aws_regions
-    #   The list of AWS Regions associated with the workload, for example,
-    #   `us-east-2`, or `ca-central-1`.
+    #   The list of Amazon Web Services Regions associated with the workload,
+    #   for example, `us-east-2`, or `ca-central-1`.
     #
     # @option params [Array<String>] :non_aws_regions
-    #   The list of non-AWS Regions associated with the workload.
+    #   The list of non-Amazon Web Services Regions associated with the
+    #   workload.
     #
     # @option params [Array<String>] :pillar_priorities
     #   The priorities of the pillars, which are used to order items in the
@@ -547,9 +696,9 @@ module Aws::WellArchitected
     #   request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
-    #   the AWS SDKs automatically generate one for you. If you are not using
-    #   the AWS SDK or the AWS CLI, you must provide this token or the request
-    #   will fail.
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -600,23 +749,25 @@ module Aws::WellArchitected
 
     # Create a workload share.
     #
-    # The owner of a workload can share it with other AWS accounts and IAM
-    # users in the same AWS Region. Shared access to a workload is not
-    # removed until the workload invitation is deleted.
+    # The owner of a workload can share it with other Amazon Web Services
+    # accounts and IAM users in the same Amazon Web Services Region. Shared
+    # access to a workload is not removed until the workload invitation is
+    # deleted.
     #
-    # For more information, see [Sharing a Workload][1] in the *AWS
-    # Well-Architected Tool User Guide*.
+    # For more information, see [Sharing a Workload][1] in the
+    # *Well-Architected Tool User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :shared_with
-    #   The AWS account ID or IAM role with which the workload is shared.
+    #   The Amazon Web Services account ID or IAM role with which the workload
+    #   is shared.
     #
     # @option params [required, String] :permission_type
     #   Permission granted on a workload share.
@@ -631,9 +782,9 @@ module Aws::WellArchitected
     #   request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
-    #   the AWS SDKs automatically generate one for you. If you are not using
-    #   the AWS SDK or the AWS CLI, you must provide this token or the request
-    #   will fail.
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -666,11 +817,28 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
-    # Delete an existing workload.
+    # Delete an existing lens.
     #
-    # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    # Only the owner of a lens can delete it. After the lens is deleted,
+    # Amazon Web Services accounts and IAM users that you shared the lens
+    # with can continue to use it, but they will no longer be able to apply
+    # it to new workloads.
+    #
+    # <note markdown="1"> **Disclaimer**
+    #
+    #  By sharing your custom lenses with other Amazon Web Services accounts,
+    # you acknowledge that Amazon Web Services will make your custom lenses
+    # available to those other accounts. Those other accounts may continue
+    # to access and use your shared custom lenses even if you delete the
+    # custom lenses from your own Amazon Web Services account or terminate
+    # your Amazon Web Services account.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :lens_alias
+    #   The alias of the lens, for example, `serverless`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
     #
     # @option params [required, String] :client_request_token
     #   A unique case-sensitive string used to ensure that this request is
@@ -682,9 +850,115 @@ module Aws::WellArchitected
     #   request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
-    #   the AWS SDKs automatically generate one for you. If you are not using
-    #   the AWS SDK or the AWS CLI, you must provide this token or the request
-    #   will fail.
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :lens_status
+    #   The status of the lens to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lens({
+    #     lens_alias: "LensAlias", # required
+    #     client_request_token: "ClientRequestToken", # required
+    #     lens_status: "ALL", # required, accepts ALL, DRAFT, PUBLISHED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteLens AWS API Documentation
+    #
+    # @overload delete_lens(params = {})
+    # @param [Hash] params ({})
+    def delete_lens(params = {}, options = {})
+      req = build_request(:delete_lens, params)
+      req.send_request(options)
+    end
+
+    # Delete a lens share.
+    #
+    # After the lens share is deleted, Amazon Web Services accounts and IAM
+    # users that you shared the lens with can continue to use it, but they
+    # will no longer be able to apply it to new workloads.
+    #
+    # <note markdown="1"> **Disclaimer**
+    #
+    #  By sharing your custom lenses with other Amazon Web Services accounts,
+    # you acknowledge that Amazon Web Services will make your custom lenses
+    # available to those other accounts. Those other accounts may continue
+    # to access and use your shared custom lenses even if you delete the
+    # custom lenses from your own Amazon Web Services account or terminate
+    # your Amazon Web Services account.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :share_id
+    #   The ID associated with the workload share.
+    #
+    # @option params [required, String] :lens_alias
+    #   The alias of the lens, for example, `serverless`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after it has completed successfully, the result of the original
+    #   request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lens_share({
+    #     share_id: "ShareId", # required
+    #     lens_alias: "LensAlias", # required
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteLensShare AWS API Documentation
+    #
+    # @overload delete_lens_share(params = {})
+    # @param [Hash] params ({})
+    def delete_lens_share(params = {}, options = {})
+      req = build_request(:delete_lens_share, params)
+      req.send_request(options)
+    end
+
+    # Delete an existing workload.
+    #
+    # @option params [required, String] :workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after it has completed successfully, the result of the original
+    #   request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -713,8 +987,8 @@ module Aws::WellArchitected
     #   The ID associated with the workload share.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :client_request_token
     #   A unique case-sensitive string used to ensure that this request is
@@ -726,9 +1000,9 @@ module Aws::WellArchitected
     #   request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
-    #   the AWS SDKs automatically generate one for you. If you are not using
-    #   the AWS SDK or the AWS CLI, you must provide this token or the request
-    #   will fail.
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -754,17 +1028,21 @@ module Aws::WellArchitected
 
     # Disassociate a lens from a workload.
     #
-    # <note markdown="1"> The AWS Well-Architected Framework lens (`wellarchitected`) cannot be
-    # removed from a workload.
+    # Up to 10 lenses can be disassociated from a workload in a single API
+    # operation.
+    #
+    # <note markdown="1"> The Amazon Web Services Well-Architected Framework lens
+    # (`wellarchitected`) cannot be removed from a workload.
     #
     #  </note>
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, Array<String>] :lens_aliases
-    #   List of lens aliases to associate or disassociate with a workload.
+    #   List of lens aliases to associate or disassociate with a workload. Up
+    #   to 10 lenses can be specified.
     #
     #   Identify a lens using its LensSummary$LensAlias.
     #
@@ -786,11 +1064,65 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Export an existing lens.
+    #
+    # Lenses are defined in JSON. For more information, see [JSON format
+    # specification][1] in the *Well-Architected Tool User Guide*. Only the
+    # owner of a lens can export it.
+    #
+    # <note markdown="1"> **Disclaimer**
+    #
+    #  Do not include or gather personal identifiable information (PII) of
+    # end users or other identifiable individuals in or via your custom
+    # lenses. If your custom lens or those shared with you and used in your
+    # account do include or collect PII you are responsible for: ensuring
+    # that the included PII is processed in accordance with applicable law,
+    # providing adequate privacy notices, and obtaining necessary consents
+    # for processing such data.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html
+    #
+    # @option params [required, String] :lens_alias
+    #   The alias of the lens, for example, `serverless`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #
+    # @option params [String] :lens_version
+    #   The lens version to be exported.
+    #
+    # @return [Types::ExportLensOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportLensOutput#lens_json #lens_json} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_lens({
+    #     lens_alias: "LensAlias", # required
+    #     lens_version: "LensVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lens_json #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ExportLens AWS API Documentation
+    #
+    # @overload export_lens(params = {})
+    # @param [Hash] params ({})
+    def export_lens(params = {}, options = {})
+      req = build_request(:export_lens, params)
+      req.send_request(options)
+    end
+
     # Get the answer to a specific question in a workload review.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
     #   The alias of the lens, for example, `serverless`.
@@ -810,6 +1142,7 @@ module Aws::WellArchitected
     #   * {Types::GetAnswerOutput#workload_id #workload_id} => String
     #   * {Types::GetAnswerOutput#milestone_number #milestone_number} => Integer
     #   * {Types::GetAnswerOutput#lens_alias #lens_alias} => String
+    #   * {Types::GetAnswerOutput#lens_arn #lens_arn} => String
     #   * {Types::GetAnswerOutput#answer #answer} => Types::Answer
     #
     # @example Request syntax with placeholder values
@@ -826,16 +1159,22 @@ module Aws::WellArchitected
     #   resp.workload_id #=> String
     #   resp.milestone_number #=> Integer
     #   resp.lens_alias #=> String
+    #   resp.lens_arn #=> String
     #   resp.answer.question_id #=> String
     #   resp.answer.pillar_id #=> String
     #   resp.answer.question_title #=> String
     #   resp.answer.question_description #=> String
     #   resp.answer.improvement_plan_url #=> String
     #   resp.answer.helpful_resource_url #=> String
+    #   resp.answer.helpful_resource_display_text #=> String
     #   resp.answer.choices #=> Array
     #   resp.answer.choices[0].choice_id #=> String
     #   resp.answer.choices[0].title #=> String
     #   resp.answer.choices[0].description #=> String
+    #   resp.answer.choices[0].helpful_resource.display_text #=> String
+    #   resp.answer.choices[0].helpful_resource.url #=> String
+    #   resp.answer.choices[0].improvement_plan.display_text #=> String
+    #   resp.answer.choices[0].improvement_plan.url #=> String
     #   resp.answer.selected_choices #=> Array
     #   resp.answer.selected_choices[0] #=> String
     #   resp.answer.choice_answers #=> Array
@@ -857,11 +1196,50 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Get an existing lens.
+    #
+    # @option params [required, String] :lens_alias
+    #   The alias of the lens, for example, `serverless`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #
+    # @option params [String] :lens_version
+    #   The lens version to be retrieved.
+    #
+    # @return [Types::GetLensOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLensOutput#lens #lens} => Types::Lens
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lens({
+    #     lens_alias: "LensAlias", # required
+    #     lens_version: "LensVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lens.lens_arn #=> String
+    #   resp.lens.lens_version #=> String
+    #   resp.lens.name #=> String
+    #   resp.lens.description #=> String
+    #   resp.lens.owner #=> String
+    #   resp.lens.share_invitation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetLens AWS API Documentation
+    #
+    # @overload get_lens(params = {})
+    # @param [Hash] params ({})
+    def get_lens(params = {}, options = {})
+      req = build_request(:get_lens, params)
+      req.send_request(options)
+    end
+
     # Get lens review.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
     #   The alias of the lens, for example, `serverless`.
@@ -892,9 +1270,10 @@ module Aws::WellArchitected
     #   resp.workload_id #=> String
     #   resp.milestone_number #=> Integer
     #   resp.lens_review.lens_alias #=> String
+    #   resp.lens_review.lens_arn #=> String
     #   resp.lens_review.lens_version #=> String
     #   resp.lens_review.lens_name #=> String
-    #   resp.lens_review.lens_status #=> String, one of "CURRENT", "NOT_CURRENT", "DEPRECATED"
+    #   resp.lens_review.lens_status #=> String, one of "CURRENT", "NOT_CURRENT", "DEPRECATED", "DELETED", "UNSHARED"
     #   resp.lens_review.pillar_review_summaries #=> Array
     #   resp.lens_review.pillar_review_summaries[0].pillar_id #=> String
     #   resp.lens_review.pillar_review_summaries[0].pillar_name #=> String
@@ -919,8 +1298,8 @@ module Aws::WellArchitected
     # Get lens review report.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
     #   The alias of the lens, for example, `serverless`.
@@ -951,6 +1330,7 @@ module Aws::WellArchitected
     #   resp.workload_id #=> String
     #   resp.milestone_number #=> Integer
     #   resp.lens_review_report.lens_alias #=> String
+    #   resp.lens_review_report.lens_arn #=> String
     #   resp.lens_review_report.base_64_string #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetLensReviewReport AWS API Documentation
@@ -969,13 +1349,18 @@ module Aws::WellArchitected
     #
     #   Each lens is identified by its LensSummary$LensAlias.
     #
-    # @option params [required, String] :base_lens_version
+    # @option params [String] :base_lens_version
     #   The base version of the lens.
+    #
+    # @option params [String] :target_lens_version
+    #   The lens version to target a difference for.
     #
     # @return [Types::GetLensVersionDifferenceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLensVersionDifferenceOutput#lens_alias #lens_alias} => String
+    #   * {Types::GetLensVersionDifferenceOutput#lens_arn #lens_arn} => String
     #   * {Types::GetLensVersionDifferenceOutput#base_lens_version #base_lens_version} => String
+    #   * {Types::GetLensVersionDifferenceOutput#target_lens_version #target_lens_version} => String
     #   * {Types::GetLensVersionDifferenceOutput#latest_lens_version #latest_lens_version} => String
     #   * {Types::GetLensVersionDifferenceOutput#version_differences #version_differences} => Types::VersionDifferences
     #
@@ -983,16 +1368,20 @@ module Aws::WellArchitected
     #
     #   resp = client.get_lens_version_difference({
     #     lens_alias: "LensAlias", # required
-    #     base_lens_version: "LensVersion", # required
+    #     base_lens_version: "LensVersion",
+    #     target_lens_version: "LensVersion",
     #   })
     #
     # @example Response structure
     #
     #   resp.lens_alias #=> String
+    #   resp.lens_arn #=> String
     #   resp.base_lens_version #=> String
+    #   resp.target_lens_version #=> String
     #   resp.latest_lens_version #=> String
     #   resp.version_differences.pillar_differences #=> Array
     #   resp.version_differences.pillar_differences[0].pillar_id #=> String
+    #   resp.version_differences.pillar_differences[0].pillar_name #=> String
     #   resp.version_differences.pillar_differences[0].difference_status #=> String, one of "UPDATED", "NEW", "DELETED"
     #   resp.version_differences.pillar_differences[0].question_differences #=> Array
     #   resp.version_differences.pillar_differences[0].question_differences[0].question_id #=> String
@@ -1011,8 +1400,8 @@ module Aws::WellArchitected
     # Get a milestone for an existing workload.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, Integer] :milestone_number
     #   The milestone number.
@@ -1080,8 +1469,8 @@ module Aws::WellArchitected
     # Get an existing workload.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @return [Types::GetWorkloadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1135,11 +1524,95 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # Import a new lens.
+    #
+    # The lens cannot be applied to workloads or shared with other Amazon
+    # Web Services accounts until it's published with CreateLensVersion
+    #
+    # Lenses are defined in JSON. For more information, see [JSON format
+    # specification][1] in the *Well-Architected Tool User Guide*.
+    #
+    # A custom lens cannot exceed 500 KB in size.
+    #
+    # <note markdown="1"> **Disclaimer**
+    #
+    #  Do not include or gather personal identifiable information (PII) of
+    # end users or other identifiable individuals in or via your custom
+    # lenses. If your custom lens or those shared with you and used in your
+    # account do include or collect PII you are responsible for: ensuring
+    # that the included PII is processed in accordance with applicable law,
+    # providing adequate privacy notices, and obtaining necessary consents
+    # for processing such data.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html
+    #
+    # @option params [String] :lens_alias
+    #   The alias of the lens, for example, `serverless`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #
+    # @option params [required, String] :json_string
+    #   The JSON representation of a lens.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after it has completed successfully, the result of the original
+    #   request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags to associate to a lens.
+    #
+    # @return [Types::ImportLensOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportLensOutput#lens_arn #lens_arn} => String
+    #   * {Types::ImportLensOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_lens({
+    #     lens_alias: "LensAlias",
+    #     json_string: "LensJSON", # required
+    #     client_request_token: "ClientRequestToken", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lens_arn #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETE", "ERROR"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ImportLens AWS API Documentation
+    #
+    # @overload import_lens(params = {})
+    # @param [Hash] params ({})
+    def import_lens(params = {}, options = {})
+      req = build_request(:import_lens, params)
+      req.send_request(options)
+    end
+
     # List of answers.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
     #   The alias of the lens, for example, `serverless`.
@@ -1167,6 +1640,7 @@ module Aws::WellArchitected
     #   * {Types::ListAnswersOutput#workload_id #workload_id} => String
     #   * {Types::ListAnswersOutput#milestone_number #milestone_number} => Integer
     #   * {Types::ListAnswersOutput#lens_alias #lens_alias} => String
+    #   * {Types::ListAnswersOutput#lens_arn #lens_arn} => String
     #   * {Types::ListAnswersOutput#answer_summaries #answer_summaries} => Array&lt;Types::AnswerSummary&gt;
     #   * {Types::ListAnswersOutput#next_token #next_token} => String
     #
@@ -1188,6 +1662,7 @@ module Aws::WellArchitected
     #   resp.workload_id #=> String
     #   resp.milestone_number #=> Integer
     #   resp.lens_alias #=> String
+    #   resp.lens_arn #=> String
     #   resp.answer_summaries #=> Array
     #   resp.answer_summaries[0].question_id #=> String
     #   resp.answer_summaries[0].pillar_id #=> String
@@ -1196,6 +1671,10 @@ module Aws::WellArchitected
     #   resp.answer_summaries[0].choices[0].choice_id #=> String
     #   resp.answer_summaries[0].choices[0].title #=> String
     #   resp.answer_summaries[0].choices[0].description #=> String
+    #   resp.answer_summaries[0].choices[0].helpful_resource.display_text #=> String
+    #   resp.answer_summaries[0].choices[0].helpful_resource.url #=> String
+    #   resp.answer_summaries[0].choices[0].improvement_plan.display_text #=> String
+    #   resp.answer_summaries[0].choices[0].improvement_plan.url #=> String
     #   resp.answer_summaries[0].selected_choices #=> Array
     #   resp.answer_summaries[0].selected_choices[0] #=> String
     #   resp.answer_summaries[0].choice_answer_summaries #=> Array
@@ -1219,8 +1698,8 @@ module Aws::WellArchitected
     # List lens review improvements.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
     #   The alias of the lens, for example, `serverless`.
@@ -1248,6 +1727,7 @@ module Aws::WellArchitected
     #   * {Types::ListLensReviewImprovementsOutput#workload_id #workload_id} => String
     #   * {Types::ListLensReviewImprovementsOutput#milestone_number #milestone_number} => Integer
     #   * {Types::ListLensReviewImprovementsOutput#lens_alias #lens_alias} => String
+    #   * {Types::ListLensReviewImprovementsOutput#lens_arn #lens_arn} => String
     #   * {Types::ListLensReviewImprovementsOutput#improvement_summaries #improvement_summaries} => Array&lt;Types::ImprovementSummary&gt;
     #   * {Types::ListLensReviewImprovementsOutput#next_token #next_token} => String
     #
@@ -1269,12 +1749,17 @@ module Aws::WellArchitected
     #   resp.workload_id #=> String
     #   resp.milestone_number #=> Integer
     #   resp.lens_alias #=> String
+    #   resp.lens_arn #=> String
     #   resp.improvement_summaries #=> Array
     #   resp.improvement_summaries[0].question_id #=> String
     #   resp.improvement_summaries[0].pillar_id #=> String
     #   resp.improvement_summaries[0].question_title #=> String
     #   resp.improvement_summaries[0].risk #=> String, one of "UNANSWERED", "HIGH", "MEDIUM", "NONE", "NOT_APPLICABLE"
     #   resp.improvement_summaries[0].improvement_plan_url #=> String
+    #   resp.improvement_summaries[0].improvement_plans #=> Array
+    #   resp.improvement_summaries[0].improvement_plans[0].choice_id #=> String
+    #   resp.improvement_summaries[0].improvement_plans[0].display_text #=> String
+    #   resp.improvement_summaries[0].improvement_plans[0].improvement_plan_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensReviewImprovements AWS API Documentation
@@ -1289,8 +1774,8 @@ module Aws::WellArchitected
     # List lens reviews.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [Integer] :milestone_number
     #   The milestone number.
@@ -1327,9 +1812,10 @@ module Aws::WellArchitected
     #   resp.milestone_number #=> Integer
     #   resp.lens_review_summaries #=> Array
     #   resp.lens_review_summaries[0].lens_alias #=> String
+    #   resp.lens_review_summaries[0].lens_arn #=> String
     #   resp.lens_review_summaries[0].lens_version #=> String
     #   resp.lens_review_summaries[0].lens_name #=> String
-    #   resp.lens_review_summaries[0].lens_status #=> String, one of "CURRENT", "NOT_CURRENT", "DEPRECATED"
+    #   resp.lens_review_summaries[0].lens_status #=> String, one of "CURRENT", "NOT_CURRENT", "DEPRECATED", "DELETED", "UNSHARED"
     #   resp.lens_review_summaries[0].updated_at #=> Time
     #   resp.lens_review_summaries[0].risk_counts #=> Hash
     #   resp.lens_review_summaries[0].risk_counts["Risk"] #=> Integer
@@ -1344,6 +1830,56 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
+    # List the lens shares associated with the lens.
+    #
+    # @option params [required, String] :lens_alias
+    #   The alias of the lens, for example, `serverless`.
+    #
+    #   Each lens is identified by its LensSummary$LensAlias.
+    #
+    # @option params [String] :shared_with_prefix
+    #   The Amazon Web Services account ID or IAM role with which the lens is
+    #   shared.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for this request.
+    #
+    # @return [Types::ListLensSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLensSharesOutput#lens_share_summaries #lens_share_summaries} => Array&lt;Types::LensShareSummary&gt;
+    #   * {Types::ListLensSharesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_lens_shares({
+    #     lens_alias: "LensAlias", # required
+    #     shared_with_prefix: "SharedWithPrefix",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lens_share_summaries #=> Array
+    #   resp.lens_share_summaries[0].share_id #=> String
+    #   resp.lens_share_summaries[0].shared_with #=> String
+    #   resp.lens_share_summaries[0].status #=> String, one of "ACCEPTED", "REJECTED", "PENDING", "REVOKED", "EXPIRED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensShares AWS API Documentation
+    #
+    # @overload list_lens_shares(params = {})
+    # @param [Hash] params ({})
+    def list_lens_shares(params = {}, options = {})
+      req = build_request(:list_lens_shares, params)
+      req.send_request(options)
+    end
+
     # List the available lenses.
     #
     # @option params [String] :next_token
@@ -1351,6 +1887,15 @@ module Aws::WellArchitected
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for this request.
+    #
+    # @option params [String] :lens_type
+    #   The type of lenses to be returned.
+    #
+    # @option params [String] :lens_status
+    #   The status of lenses to be returned.
+    #
+    # @option params [String] :lens_name
+    #   The full name of the lens.
     #
     # @return [Types::ListLensesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1364,15 +1909,24 @@ module Aws::WellArchitected
     #   resp = client.list_lenses({
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     lens_type: "AWS_OFFICIAL", # accepts AWS_OFFICIAL, CUSTOM_SHARED, CUSTOM_SELF
+    #     lens_status: "ALL", # accepts ALL, DRAFT, PUBLISHED
+    #     lens_name: "LensName",
     #   })
     #
     # @example Response structure
     #
     #   resp.lens_summaries #=> Array
+    #   resp.lens_summaries[0].lens_arn #=> String
     #   resp.lens_summaries[0].lens_alias #=> String
-    #   resp.lens_summaries[0].lens_version #=> String
     #   resp.lens_summaries[0].lens_name #=> String
+    #   resp.lens_summaries[0].lens_type #=> String, one of "AWS_OFFICIAL", "CUSTOM_SHARED", "CUSTOM_SELF"
     #   resp.lens_summaries[0].description #=> String
+    #   resp.lens_summaries[0].created_at #=> Time
+    #   resp.lens_summaries[0].updated_at #=> Time
+    #   resp.lens_summaries[0].lens_version #=> String
+    #   resp.lens_summaries[0].owner #=> String
+    #   resp.lens_summaries[0].lens_status #=> String, one of "CURRENT", "NOT_CURRENT", "DEPRECATED", "DELETED", "UNSHARED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLenses AWS API Documentation
@@ -1387,8 +1941,8 @@ module Aws::WellArchitected
     # List all milestones for an existing workload.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next set of results.
@@ -1443,8 +1997,8 @@ module Aws::WellArchitected
     # List lens notifications.
     #
     # @option params [String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next set of results.
@@ -1474,6 +2028,7 @@ module Aws::WellArchitected
     #   resp.notification_summaries[0].lens_upgrade_summary.workload_id #=> String
     #   resp.notification_summaries[0].lens_upgrade_summary.workload_name #=> String
     #   resp.notification_summaries[0].lens_upgrade_summary.lens_alias #=> String
+    #   resp.notification_summaries[0].lens_upgrade_summary.lens_arn #=> String
     #   resp.notification_summaries[0].lens_upgrade_summary.current_lens_version #=> String
     #   resp.notification_summaries[0].lens_upgrade_summary.latest_lens_version #=> String
     #   resp.next_token #=> String
@@ -1493,6 +2048,13 @@ module Aws::WellArchitected
     #   An optional string added to the beginning of each workload name
     #   returned in the results.
     #
+    # @option params [String] :lens_name_prefix
+    #   An optional string added to the beginning of each lens name returned
+    #   in the results.
+    #
+    # @option params [String] :share_resource_type
+    #   The type of share invitations to be returned.
+    #
     # @option params [String] :next_token
     #   The token to use to retrieve the next set of results.
     #
@@ -1510,6 +2072,8 @@ module Aws::WellArchitected
     #
     #   resp = client.list_share_invitations({
     #     workload_name_prefix: "WorkloadNamePrefix",
+    #     lens_name_prefix: "LensNamePrefix",
+    #     share_resource_type: "WORKLOAD", # accepts WORKLOAD, LENS
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -1521,8 +2085,11 @@ module Aws::WellArchitected
     #   resp.share_invitation_summaries[0].shared_by #=> String
     #   resp.share_invitation_summaries[0].shared_with #=> String
     #   resp.share_invitation_summaries[0].permission_type #=> String, one of "READONLY", "CONTRIBUTOR"
+    #   resp.share_invitation_summaries[0].share_resource_type #=> String, one of "WORKLOAD", "LENS"
     #   resp.share_invitation_summaries[0].workload_name #=> String
     #   resp.share_invitation_summaries[0].workload_id #=> String
+    #   resp.share_invitation_summaries[0].lens_name #=> String
+    #   resp.share_invitation_summaries[0].lens_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListShareInvitations AWS API Documentation
@@ -1566,11 +2133,12 @@ module Aws::WellArchitected
     # List the workload shares associated with the workload.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [String] :shared_with_prefix
-    #   The AWS account ID or IAM role with which the workload is shared.
+    #   The Amazon Web Services account ID or IAM role with which the workload
+    #   is shared.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next set of results.
@@ -1728,8 +2296,8 @@ module Aws::WellArchitected
     # Update the answer to a specific question in a workload review.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
     #   The alias of the lens, for example, `serverless`.
@@ -1761,6 +2329,7 @@ module Aws::WellArchitected
     #
     #   * {Types::UpdateAnswerOutput#workload_id #workload_id} => String
     #   * {Types::UpdateAnswerOutput#lens_alias #lens_alias} => String
+    #   * {Types::UpdateAnswerOutput#lens_arn #lens_arn} => String
     #   * {Types::UpdateAnswerOutput#answer #answer} => Types::Answer
     #
     # @example Request syntax with placeholder values
@@ -1786,16 +2355,22 @@ module Aws::WellArchitected
     #
     #   resp.workload_id #=> String
     #   resp.lens_alias #=> String
+    #   resp.lens_arn #=> String
     #   resp.answer.question_id #=> String
     #   resp.answer.pillar_id #=> String
     #   resp.answer.question_title #=> String
     #   resp.answer.question_description #=> String
     #   resp.answer.improvement_plan_url #=> String
     #   resp.answer.helpful_resource_url #=> String
+    #   resp.answer.helpful_resource_display_text #=> String
     #   resp.answer.choices #=> Array
     #   resp.answer.choices[0].choice_id #=> String
     #   resp.answer.choices[0].title #=> String
     #   resp.answer.choices[0].description #=> String
+    #   resp.answer.choices[0].helpful_resource.display_text #=> String
+    #   resp.answer.choices[0].helpful_resource.url #=> String
+    #   resp.answer.choices[0].improvement_plan.display_text #=> String
+    #   resp.answer.choices[0].improvement_plan.url #=> String
     #   resp.answer.selected_choices #=> Array
     #   resp.answer.selected_choices[0] #=> String
     #   resp.answer.choice_answers #=> Array
@@ -1820,8 +2395,8 @@ module Aws::WellArchitected
     # Update lens review.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
     #   The alias of the lens, for example, `serverless`.
@@ -1854,9 +2429,10 @@ module Aws::WellArchitected
     #
     #   resp.workload_id #=> String
     #   resp.lens_review.lens_alias #=> String
+    #   resp.lens_review.lens_arn #=> String
     #   resp.lens_review.lens_version #=> String
     #   resp.lens_review.lens_name #=> String
-    #   resp.lens_review.lens_status #=> String, one of "CURRENT", "NOT_CURRENT", "DEPRECATED"
+    #   resp.lens_review.lens_status #=> String, one of "CURRENT", "NOT_CURRENT", "DEPRECATED", "DELETED", "UNSHARED"
     #   resp.lens_review.pillar_review_summaries #=> Array
     #   resp.lens_review.pillar_review_summaries[0].pillar_id #=> String
     #   resp.lens_review.pillar_review_summaries[0].pillar_name #=> String
@@ -1900,7 +2476,10 @@ module Aws::WellArchitected
     # @example Response structure
     #
     #   resp.share_invitation.share_invitation_id #=> String
+    #   resp.share_invitation.share_resource_type #=> String, one of "WORKLOAD", "LENS"
     #   resp.share_invitation.workload_id #=> String
+    #   resp.share_invitation.lens_alias #=> String
+    #   resp.share_invitation.lens_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateShareInvitation AWS API Documentation
     #
@@ -1914,14 +2493,15 @@ module Aws::WellArchitected
     # Update an existing workload.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [String] :workload_name
     #   The name of the workload.
     #
-    #   The name must be unique within an account within a Region. Spaces and
-    #   capitalization are ignored when checking for uniqueness.
+    #   The name must be unique within an account within an Amazon Web
+    #   Services Region. Spaces and capitalization are ignored when checking
+    #   for uniqueness.
     #
     # @option params [String] :description
     #   The description for the workload.
@@ -1930,14 +2510,16 @@ module Aws::WellArchitected
     #   The environment for the workload.
     #
     # @option params [Array<String>] :account_ids
-    #   The list of AWS account IDs associated with the workload.
+    #   The list of Amazon Web Services account IDs associated with the
+    #   workload.
     #
     # @option params [Array<String>] :aws_regions
-    #   The list of AWS Regions associated with the workload, for example,
-    #   `us-east-2`, or `ca-central-1`.
+    #   The list of Amazon Web Services Regions associated with the workload,
+    #   for example, `us-east-2`, or `ca-central-1`.
     #
     # @option params [Array<String>] :non_aws_regions
-    #   The list of non-AWS Regions associated with the workload.
+    #   The list of non-Amazon Web Services Regions associated with the
+    #   workload.
     #
     # @option params [Array<String>] :pillar_priorities
     #   The priorities of the pillars, which are used to order items in the
@@ -2100,8 +2682,8 @@ module Aws::WellArchitected
     #   The ID associated with the workload share.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :permission_type
     #   Permission granted on a workload share.
@@ -2142,8 +2724,8 @@ module Aws::WellArchitected
     # Upgrade lens review.
     #
     # @option params [required, String] :workload_id
-    #   The ID assigned to the workload. This ID is unique within an AWS
-    #   Region.
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
     #
     # @option params [required, String] :lens_alias
     #   The alias of the lens, for example, `serverless`.
@@ -2165,9 +2747,9 @@ module Aws::WellArchitected
     #   request is returned.
     #
     #   This token is listed as required, however, if you do not specify it,
-    #   the AWS SDKs automatically generate one for you. If you are not using
-    #   the AWS SDK or the AWS CLI, you must provide this token or the request
-    #   will fail.
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2202,7 +2784,7 @@ module Aws::WellArchitected
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

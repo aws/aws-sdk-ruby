@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.536.0 (2021-11-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::RecycleBin`.
+
+* Feature - Added support for enumerating regions for `Aws::Inspector2`.
+
+* Feature - Added support for enumerating regions for `Aws::CloudWatchRUM`.
+
+* Feature - Added support for enumerating regions for `Aws::CloudWatchEvidently`.
+
 1.535.0 (2021-11-29)
 ------------------
 
