@@ -27,6 +27,11 @@ module Aws::Personalize
     BatchInferenceJobOutput = Shapes::StructureShape.new(name: 'BatchInferenceJobOutput')
     BatchInferenceJobSummary = Shapes::StructureShape.new(name: 'BatchInferenceJobSummary')
     BatchInferenceJobs = Shapes::ListShape.new(name: 'BatchInferenceJobs')
+    BatchSegmentJob = Shapes::StructureShape.new(name: 'BatchSegmentJob')
+    BatchSegmentJobInput = Shapes::StructureShape.new(name: 'BatchSegmentJobInput')
+    BatchSegmentJobOutput = Shapes::StructureShape.new(name: 'BatchSegmentJobOutput')
+    BatchSegmentJobSummary = Shapes::StructureShape.new(name: 'BatchSegmentJobSummary')
+    BatchSegmentJobs = Shapes::ListShape.new(name: 'BatchSegmentJobs')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Campaign = Shapes::StructureShape.new(name: 'Campaign')
     CampaignConfig = Shapes::StructureShape.new(name: 'CampaignConfig')
@@ -43,6 +48,8 @@ module Aws::Personalize
     ContinuousMinValue = Shapes::FloatShape.new(name: 'ContinuousMinValue')
     CreateBatchInferenceJobRequest = Shapes::StructureShape.new(name: 'CreateBatchInferenceJobRequest')
     CreateBatchInferenceJobResponse = Shapes::StructureShape.new(name: 'CreateBatchInferenceJobResponse')
+    CreateBatchSegmentJobRequest = Shapes::StructureShape.new(name: 'CreateBatchSegmentJobRequest')
+    CreateBatchSegmentJobResponse = Shapes::StructureShape.new(name: 'CreateBatchSegmentJobResponse')
     CreateCampaignRequest = Shapes::StructureShape.new(name: 'CreateCampaignRequest')
     CreateCampaignResponse = Shapes::StructureShape.new(name: 'CreateCampaignResponse')
     CreateDatasetExportJobRequest = Shapes::StructureShape.new(name: 'CreateDatasetExportJobRequest')
@@ -57,6 +64,8 @@ module Aws::Personalize
     CreateEventTrackerResponse = Shapes::StructureShape.new(name: 'CreateEventTrackerResponse')
     CreateFilterRequest = Shapes::StructureShape.new(name: 'CreateFilterRequest')
     CreateFilterResponse = Shapes::StructureShape.new(name: 'CreateFilterResponse')
+    CreateRecommenderRequest = Shapes::StructureShape.new(name: 'CreateRecommenderRequest')
+    CreateRecommenderResponse = Shapes::StructureShape.new(name: 'CreateRecommenderResponse')
     CreateSchemaRequest = Shapes::StructureShape.new(name: 'CreateSchemaRequest')
     CreateSchemaResponse = Shapes::StructureShape.new(name: 'CreateSchemaResponse')
     CreateSolutionRequest = Shapes::StructureShape.new(name: 'CreateSolutionRequest')
@@ -93,12 +102,15 @@ module Aws::Personalize
     DeleteDatasetRequest = Shapes::StructureShape.new(name: 'DeleteDatasetRequest')
     DeleteEventTrackerRequest = Shapes::StructureShape.new(name: 'DeleteEventTrackerRequest')
     DeleteFilterRequest = Shapes::StructureShape.new(name: 'DeleteFilterRequest')
+    DeleteRecommenderRequest = Shapes::StructureShape.new(name: 'DeleteRecommenderRequest')
     DeleteSchemaRequest = Shapes::StructureShape.new(name: 'DeleteSchemaRequest')
     DeleteSolutionRequest = Shapes::StructureShape.new(name: 'DeleteSolutionRequest')
     DescribeAlgorithmRequest = Shapes::StructureShape.new(name: 'DescribeAlgorithmRequest')
     DescribeAlgorithmResponse = Shapes::StructureShape.new(name: 'DescribeAlgorithmResponse')
     DescribeBatchInferenceJobRequest = Shapes::StructureShape.new(name: 'DescribeBatchInferenceJobRequest')
     DescribeBatchInferenceJobResponse = Shapes::StructureShape.new(name: 'DescribeBatchInferenceJobResponse')
+    DescribeBatchSegmentJobRequest = Shapes::StructureShape.new(name: 'DescribeBatchSegmentJobRequest')
+    DescribeBatchSegmentJobResponse = Shapes::StructureShape.new(name: 'DescribeBatchSegmentJobResponse')
     DescribeCampaignRequest = Shapes::StructureShape.new(name: 'DescribeCampaignRequest')
     DescribeCampaignResponse = Shapes::StructureShape.new(name: 'DescribeCampaignResponse')
     DescribeDatasetExportJobRequest = Shapes::StructureShape.new(name: 'DescribeDatasetExportJobRequest')
@@ -117,6 +129,8 @@ module Aws::Personalize
     DescribeFilterResponse = Shapes::StructureShape.new(name: 'DescribeFilterResponse')
     DescribeRecipeRequest = Shapes::StructureShape.new(name: 'DescribeRecipeRequest')
     DescribeRecipeResponse = Shapes::StructureShape.new(name: 'DescribeRecipeResponse')
+    DescribeRecommenderRequest = Shapes::StructureShape.new(name: 'DescribeRecommenderRequest')
+    DescribeRecommenderResponse = Shapes::StructureShape.new(name: 'DescribeRecommenderResponse')
     DescribeSchemaRequest = Shapes::StructureShape.new(name: 'DescribeSchemaRequest')
     DescribeSchemaResponse = Shapes::StructureShape.new(name: 'DescribeSchemaResponse')
     DescribeSolutionRequest = Shapes::StructureShape.new(name: 'DescribeSolutionRequest')
@@ -125,6 +139,7 @@ module Aws::Personalize
     DescribeSolutionVersionResponse = Shapes::StructureShape.new(name: 'DescribeSolutionVersionResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     DockerURI = Shapes::StringShape.new(name: 'DockerURI')
+    Domain = Shapes::StringShape.new(name: 'Domain')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventTracker = Shapes::StructureShape.new(name: 'EventTracker')
     EventTrackerSummary = Shapes::StructureShape.new(name: 'EventTrackerSummary')
@@ -160,6 +175,8 @@ module Aws::Personalize
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListBatchInferenceJobsRequest = Shapes::StructureShape.new(name: 'ListBatchInferenceJobsRequest')
     ListBatchInferenceJobsResponse = Shapes::StructureShape.new(name: 'ListBatchInferenceJobsResponse')
+    ListBatchSegmentJobsRequest = Shapes::StructureShape.new(name: 'ListBatchSegmentJobsRequest')
+    ListBatchSegmentJobsResponse = Shapes::StructureShape.new(name: 'ListBatchSegmentJobsResponse')
     ListCampaignsRequest = Shapes::StructureShape.new(name: 'ListCampaignsRequest')
     ListCampaignsResponse = Shapes::StructureShape.new(name: 'ListCampaignsResponse')
     ListDatasetExportJobsRequest = Shapes::StructureShape.new(name: 'ListDatasetExportJobsRequest')
@@ -176,6 +193,8 @@ module Aws::Personalize
     ListFiltersResponse = Shapes::StructureShape.new(name: 'ListFiltersResponse')
     ListRecipesRequest = Shapes::StructureShape.new(name: 'ListRecipesRequest')
     ListRecipesResponse = Shapes::StructureShape.new(name: 'ListRecipesResponse')
+    ListRecommendersRequest = Shapes::StructureShape.new(name: 'ListRecommendersRequest')
+    ListRecommendersResponse = Shapes::StructureShape.new(name: 'ListRecommendersResponse')
     ListSchemasRequest = Shapes::StructureShape.new(name: 'ListSchemasRequest')
     ListSchemasResponse = Shapes::StructureShape.new(name: 'ListSchemasResponse')
     ListSolutionVersionsRequest = Shapes::StructureShape.new(name: 'ListSolutionVersionsRequest')
@@ -201,6 +220,11 @@ module Aws::Personalize
     RecipeSummary = Shapes::StructureShape.new(name: 'RecipeSummary')
     RecipeType = Shapes::StringShape.new(name: 'RecipeType')
     Recipes = Shapes::ListShape.new(name: 'Recipes')
+    Recommender = Shapes::StructureShape.new(name: 'Recommender')
+    RecommenderConfig = Shapes::StructureShape.new(name: 'RecommenderConfig')
+    RecommenderSummary = Shapes::StructureShape.new(name: 'RecommenderSummary')
+    RecommenderUpdateSummary = Shapes::StructureShape.new(name: 'RecommenderUpdateSummary')
+    Recommenders = Shapes::ListShape.new(name: 'Recommenders')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceConfig = Shapes::MapShape.new(name: 'ResourceConfig')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
@@ -227,6 +251,8 @@ module Aws::Personalize
     TunedHPOParams = Shapes::StructureShape.new(name: 'TunedHPOParams')
     UpdateCampaignRequest = Shapes::StructureShape.new(name: 'UpdateCampaignRequest')
     UpdateCampaignResponse = Shapes::StructureShape.new(name: 'UpdateCampaignResponse')
+    UpdateRecommenderRequest = Shapes::StructureShape.new(name: 'UpdateRecommenderRequest')
+    UpdateRecommenderResponse = Shapes::StructureShape.new(name: 'UpdateRecommenderResponse')
 
     Algorithm.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Algorithm.add_member(:algorithm_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "algorithmArn"))
@@ -287,6 +313,37 @@ module Aws::Personalize
     BatchInferenceJobSummary.struct_class = Types::BatchInferenceJobSummary
 
     BatchInferenceJobs.member = Shapes::ShapeRef.new(shape: BatchInferenceJobSummary)
+
+    BatchSegmentJob.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
+    BatchSegmentJob.add_member(:batch_segment_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchSegmentJobArn"))
+    BatchSegmentJob.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
+    BatchSegmentJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    BatchSegmentJob.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
+    BatchSegmentJob.add_member(:num_results, Shapes::ShapeRef.new(shape: NumBatchResults, location_name: "numResults"))
+    BatchSegmentJob.add_member(:job_input, Shapes::ShapeRef.new(shape: BatchSegmentJobInput, location_name: "jobInput"))
+    BatchSegmentJob.add_member(:job_output, Shapes::ShapeRef.new(shape: BatchSegmentJobOutput, location_name: "jobOutput"))
+    BatchSegmentJob.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    BatchSegmentJob.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    BatchSegmentJob.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    BatchSegmentJob.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    BatchSegmentJob.struct_class = Types::BatchSegmentJob
+
+    BatchSegmentJobInput.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: S3DataConfig, required: true, location_name: "s3DataSource"))
+    BatchSegmentJobInput.struct_class = Types::BatchSegmentJobInput
+
+    BatchSegmentJobOutput.add_member(:s3_data_destination, Shapes::ShapeRef.new(shape: S3DataConfig, required: true, location_name: "s3DataDestination"))
+    BatchSegmentJobOutput.struct_class = Types::BatchSegmentJobOutput
+
+    BatchSegmentJobSummary.add_member(:batch_segment_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchSegmentJobArn"))
+    BatchSegmentJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
+    BatchSegmentJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    BatchSegmentJobSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    BatchSegmentJobSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    BatchSegmentJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    BatchSegmentJobSummary.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
+    BatchSegmentJobSummary.struct_class = Types::BatchSegmentJobSummary
+
+    BatchSegmentJobs.member = Shapes::ShapeRef.new(shape: BatchSegmentJobSummary)
 
     Campaign.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Campaign.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
@@ -350,6 +407,18 @@ module Aws::Personalize
     CreateBatchInferenceJobResponse.add_member(:batch_inference_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchInferenceJobArn"))
     CreateBatchInferenceJobResponse.struct_class = Types::CreateBatchInferenceJobResponse
 
+    CreateBatchSegmentJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    CreateBatchSegmentJobRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
+    CreateBatchSegmentJobRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
+    CreateBatchSegmentJobRequest.add_member(:num_results, Shapes::ShapeRef.new(shape: NumBatchResults, location_name: "numResults"))
+    CreateBatchSegmentJobRequest.add_member(:job_input, Shapes::ShapeRef.new(shape: BatchSegmentJobInput, required: true, location_name: "jobInput"))
+    CreateBatchSegmentJobRequest.add_member(:job_output, Shapes::ShapeRef.new(shape: BatchSegmentJobOutput, required: true, location_name: "jobOutput"))
+    CreateBatchSegmentJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateBatchSegmentJobRequest.struct_class = Types::CreateBatchSegmentJobRequest
+
+    CreateBatchSegmentJobResponse.add_member(:batch_segment_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchSegmentJobArn"))
+    CreateBatchSegmentJobResponse.struct_class = Types::CreateBatchSegmentJobResponse
+
     CreateCampaignRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateCampaignRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
     CreateCampaignRequest.add_member(:min_provisioned_tps, Shapes::ShapeRef.new(shape: TransactionsPerSecond, location_name: "minProvisionedTPS"))
@@ -372,9 +441,11 @@ module Aws::Personalize
     CreateDatasetGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateDatasetGroupRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateDatasetGroupRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    CreateDatasetGroupRequest.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "domain"))
     CreateDatasetGroupRequest.struct_class = Types::CreateDatasetGroupRequest
 
     CreateDatasetGroupResponse.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    CreateDatasetGroupResponse.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "domain"))
     CreateDatasetGroupResponse.struct_class = Types::CreateDatasetGroupResponse
 
     CreateDatasetImportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
@@ -411,8 +482,18 @@ module Aws::Personalize
     CreateFilterResponse.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
     CreateFilterResponse.struct_class = Types::CreateFilterResponse
 
+    CreateRecommenderRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateRecommenderRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
+    CreateRecommenderRequest.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recipeArn"))
+    CreateRecommenderRequest.add_member(:recommender_config, Shapes::ShapeRef.new(shape: RecommenderConfig, location_name: "recommenderConfig"))
+    CreateRecommenderRequest.struct_class = Types::CreateRecommenderRequest
+
+    CreateRecommenderResponse.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recommenderArn"))
+    CreateRecommenderResponse.struct_class = Types::CreateRecommenderResponse
+
     CreateSchemaRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateSchemaRequest.add_member(:schema, Shapes::ShapeRef.new(shape: AvroSchema, required: true, location_name: "schema"))
+    CreateSchemaRequest.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "domain"))
     CreateSchemaRequest.struct_class = Types::CreateSchemaRequest
 
     CreateSchemaResponse.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "schemaArn"))
@@ -483,6 +564,7 @@ module Aws::Personalize
     DatasetGroup.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     DatasetGroup.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     DatasetGroup.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    DatasetGroup.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "domain"))
     DatasetGroup.struct_class = Types::DatasetGroup
 
     DatasetGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -491,6 +573,7 @@ module Aws::Personalize
     DatasetGroupSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     DatasetGroupSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     DatasetGroupSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    DatasetGroupSummary.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "domain"))
     DatasetGroupSummary.struct_class = Types::DatasetGroupSummary
 
     DatasetGroups.member = Shapes::ShapeRef.new(shape: DatasetGroupSummary)
@@ -521,12 +604,14 @@ module Aws::Personalize
     DatasetSchema.add_member(:schema, Shapes::ShapeRef.new(shape: AvroSchema, location_name: "schema"))
     DatasetSchema.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     DatasetSchema.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    DatasetSchema.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "domain"))
     DatasetSchema.struct_class = Types::DatasetSchema
 
     DatasetSchemaSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     DatasetSchemaSummary.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "schemaArn"))
     DatasetSchemaSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     DatasetSchemaSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    DatasetSchemaSummary.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "domain"))
     DatasetSchemaSummary.struct_class = Types::DatasetSchemaSummary
 
     DatasetSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -582,6 +667,9 @@ module Aws::Personalize
     DeleteFilterRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "filterArn"))
     DeleteFilterRequest.struct_class = Types::DeleteFilterRequest
 
+    DeleteRecommenderRequest.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recommenderArn"))
+    DeleteRecommenderRequest.struct_class = Types::DeleteRecommenderRequest
+
     DeleteSchemaRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "schemaArn"))
     DeleteSchemaRequest.struct_class = Types::DeleteSchemaRequest
 
@@ -599,6 +687,12 @@ module Aws::Personalize
 
     DescribeBatchInferenceJobResponse.add_member(:batch_inference_job, Shapes::ShapeRef.new(shape: BatchInferenceJob, location_name: "batchInferenceJob"))
     DescribeBatchInferenceJobResponse.struct_class = Types::DescribeBatchInferenceJobResponse
+
+    DescribeBatchSegmentJobRequest.add_member(:batch_segment_job_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "batchSegmentJobArn"))
+    DescribeBatchSegmentJobRequest.struct_class = Types::DescribeBatchSegmentJobRequest
+
+    DescribeBatchSegmentJobResponse.add_member(:batch_segment_job, Shapes::ShapeRef.new(shape: BatchSegmentJob, location_name: "batchSegmentJob"))
+    DescribeBatchSegmentJobResponse.struct_class = Types::DescribeBatchSegmentJobResponse
 
     DescribeCampaignRequest.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "campaignArn"))
     DescribeCampaignRequest.struct_class = Types::DescribeCampaignRequest
@@ -653,6 +747,12 @@ module Aws::Personalize
 
     DescribeRecipeResponse.add_member(:recipe, Shapes::ShapeRef.new(shape: Recipe, location_name: "recipe"))
     DescribeRecipeResponse.struct_class = Types::DescribeRecipeResponse
+
+    DescribeRecommenderRequest.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recommenderArn"))
+    DescribeRecommenderRequest.struct_class = Types::DescribeRecommenderRequest
+
+    DescribeRecommenderResponse.add_member(:recommender, Shapes::ShapeRef.new(shape: Recommender, location_name: "recommender"))
+    DescribeRecommenderResponse.struct_class = Types::DescribeRecommenderResponse
 
     DescribeSchemaRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "schemaArn"))
     DescribeSchemaRequest.struct_class = Types::DescribeSchemaRequest
@@ -780,6 +880,15 @@ module Aws::Personalize
     ListBatchInferenceJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListBatchInferenceJobsResponse.struct_class = Types::ListBatchInferenceJobsResponse
 
+    ListBatchSegmentJobsRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
+    ListBatchSegmentJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBatchSegmentJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBatchSegmentJobsRequest.struct_class = Types::ListBatchSegmentJobsRequest
+
+    ListBatchSegmentJobsResponse.add_member(:batch_segment_jobs, Shapes::ShapeRef.new(shape: BatchSegmentJobs, location_name: "batchSegmentJobs"))
+    ListBatchSegmentJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBatchSegmentJobsResponse.struct_class = Types::ListBatchSegmentJobsResponse
+
     ListCampaignsRequest.add_member(:solution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionArn"))
     ListCampaignsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListCampaignsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -845,11 +954,21 @@ module Aws::Personalize
     ListRecipesRequest.add_member(:recipe_provider, Shapes::ShapeRef.new(shape: RecipeProvider, location_name: "recipeProvider"))
     ListRecipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListRecipesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListRecipesRequest.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "domain"))
     ListRecipesRequest.struct_class = Types::ListRecipesRequest
 
     ListRecipesResponse.add_member(:recipes, Shapes::ShapeRef.new(shape: Recipes, location_name: "recipes"))
     ListRecipesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListRecipesResponse.struct_class = Types::ListRecipesResponse
+
+    ListRecommendersRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    ListRecommendersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRecommendersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListRecommendersRequest.struct_class = Types::ListRecommendersRequest
+
+    ListRecommendersResponse.add_member(:recommenders, Shapes::ShapeRef.new(shape: Recommenders, location_name: "recommenders"))
+    ListRecommendersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListRecommendersResponse.struct_class = Types::ListRecommendersResponse
 
     ListSchemasRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListSchemasRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -900,9 +1019,44 @@ module Aws::Personalize
     RecipeSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     RecipeSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     RecipeSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    RecipeSummary.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "domain"))
     RecipeSummary.struct_class = Types::RecipeSummary
 
     Recipes.member = Shapes::ShapeRef.new(shape: RecipeSummary)
+
+    Recommender.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recommenderArn"))
+    Recommender.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    Recommender.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    Recommender.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recipeArn"))
+    Recommender.add_member(:recommender_config, Shapes::ShapeRef.new(shape: RecommenderConfig, location_name: "recommenderConfig"))
+    Recommender.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    Recommender.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    Recommender.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    Recommender.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    Recommender.add_member(:latest_recommender_update, Shapes::ShapeRef.new(shape: RecommenderUpdateSummary, location_name: "latestRecommenderUpdate"))
+    Recommender.struct_class = Types::Recommender
+
+    RecommenderConfig.add_member(:item_exploration_config, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "itemExplorationConfig"))
+    RecommenderConfig.struct_class = Types::RecommenderConfig
+
+    RecommenderSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    RecommenderSummary.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recommenderArn"))
+    RecommenderSummary.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    RecommenderSummary.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recipeArn"))
+    RecommenderSummary.add_member(:recommender_config, Shapes::ShapeRef.new(shape: RecommenderConfig, location_name: "recommenderConfig"))
+    RecommenderSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    RecommenderSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    RecommenderSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    RecommenderSummary.struct_class = Types::RecommenderSummary
+
+    RecommenderUpdateSummary.add_member(:recommender_config, Shapes::ShapeRef.new(shape: RecommenderConfig, location_name: "recommenderConfig"))
+    RecommenderUpdateSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    RecommenderUpdateSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    RecommenderUpdateSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    RecommenderUpdateSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    RecommenderUpdateSummary.struct_class = Types::RecommenderUpdateSummary
+
+    Recommenders.member = Shapes::ShapeRef.new(shape: RecommenderSummary)
 
     ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
@@ -995,6 +1149,13 @@ module Aws::Personalize
     UpdateCampaignResponse.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
     UpdateCampaignResponse.struct_class = Types::UpdateCampaignResponse
 
+    UpdateRecommenderRequest.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recommenderArn"))
+    UpdateRecommenderRequest.add_member(:recommender_config, Shapes::ShapeRef.new(shape: RecommenderConfig, required: true, location_name: "recommenderConfig"))
+    UpdateRecommenderRequest.struct_class = Types::UpdateRecommenderRequest
+
+    UpdateRecommenderResponse.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recommenderArn"))
+    UpdateRecommenderResponse.struct_class = Types::UpdateRecommenderResponse
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -1020,6 +1181,19 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateBatchInferenceJobRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateBatchInferenceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:create_batch_segment_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBatchSegmentJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateBatchSegmentJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBatchSegmentJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1109,6 +1283,18 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateFilterRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFilterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:create_recommender, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRecommender"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateRecommenderRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateRecommenderResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1206,6 +1392,17 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
+      api.add_operation(:delete_recommender, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRecommender"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRecommenderRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:delete_schema, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSchema"
         o.http_method = "POST"
@@ -1244,6 +1441,16 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeBatchInferenceJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeBatchInferenceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_batch_segment_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBatchSegmentJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBatchSegmentJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBatchSegmentJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1338,6 +1545,16 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_recommender, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRecommender"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRecommenderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRecommenderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_schema, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSchema"
         o.http_method = "POST"
@@ -1385,6 +1602,22 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListBatchInferenceJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBatchInferenceJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_batch_segment_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBatchSegmentJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListBatchSegmentJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBatchSegmentJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
@@ -1513,6 +1746,23 @@ module Aws::Personalize
         o.input = Shapes::ShapeRef.new(shape: ListRecipesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRecipesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_recommenders, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRecommenders"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRecommendersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRecommendersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1586,6 +1836,17 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateCampaignRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateCampaignResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:update_recommender, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRecommender"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRecommenderRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRecommenderResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)

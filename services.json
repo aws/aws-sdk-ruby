@@ -631,6 +631,9 @@
   "MigrationHubConfig": {
     "models": "migrationhub-config/2019-06-30"
   },
+  "MigrationHubRefactorSpaces": {
+    "models": "migration-hub-refactor-spaces/2021-10-26"
+  },
   "MigrationHubStrategyRecommendations": {
     "models": "migrationhubstrategy/2020-02-19"
   },

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-11-29)
+------------------
+
+* Feature - This release adds API support for Recommenders and BatchSegmentJobs.
+
 1.33.0 (2021-11-04)
 ------------------
 

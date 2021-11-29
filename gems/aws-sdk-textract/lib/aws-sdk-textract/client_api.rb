@@ -18,6 +18,9 @@ module Aws::Textract
     AnalyzeDocumentResponse = Shapes::StructureShape.new(name: 'AnalyzeDocumentResponse')
     AnalyzeExpenseRequest = Shapes::StructureShape.new(name: 'AnalyzeExpenseRequest')
     AnalyzeExpenseResponse = Shapes::StructureShape.new(name: 'AnalyzeExpenseResponse')
+    AnalyzeIDDetections = Shapes::StructureShape.new(name: 'AnalyzeIDDetections')
+    AnalyzeIDRequest = Shapes::StructureShape.new(name: 'AnalyzeIDRequest')
+    AnalyzeIDResponse = Shapes::StructureShape.new(name: 'AnalyzeIDResponse')
     BadDocumentException = Shapes::StructureShape.new(name: 'BadDocumentException')
     Block = Shapes::StructureShape.new(name: 'Block')
     BlockList = Shapes::ListShape.new(name: 'BlockList')
@@ -31,6 +34,7 @@ module Aws::Textract
     Document = Shapes::StructureShape.new(name: 'Document')
     DocumentLocation = Shapes::StructureShape.new(name: 'DocumentLocation')
     DocumentMetadata = Shapes::StructureShape.new(name: 'DocumentMetadata')
+    DocumentPages = Shapes::ListShape.new(name: 'DocumentPages')
     DocumentTooLargeException = Shapes::StructureShape.new(name: 'DocumentTooLargeException')
     EntityType = Shapes::StringShape.new(name: 'EntityType')
     EntityTypes = Shapes::ListShape.new(name: 'EntityTypes')
@@ -63,6 +67,10 @@ module Aws::Textract
     HumanLoopQuotaExceededException = Shapes::StructureShape.new(name: 'HumanLoopQuotaExceededException')
     IdList = Shapes::ListShape.new(name: 'IdList')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
+    IdentityDocument = Shapes::StructureShape.new(name: 'IdentityDocument')
+    IdentityDocumentField = Shapes::StructureShape.new(name: 'IdentityDocumentField')
+    IdentityDocumentFieldList = Shapes::ListShape.new(name: 'IdentityDocumentFieldList')
+    IdentityDocumentList = Shapes::ListShape.new(name: 'IdentityDocumentList')
     ImageBlob = Shapes::BlobShape.new(name: 'ImageBlob')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidJobIdException = Shapes::StructureShape.new(name: 'InvalidJobIdException')
@@ -80,6 +88,7 @@ module Aws::Textract
     LineItemList = Shapes::ListShape.new(name: 'LineItemList')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    NormalizedValue = Shapes::StructureShape.new(name: 'NormalizedValue')
     NotificationChannel = Shapes::StructureShape.new(name: 'NotificationChannel')
     OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
     Pages = Shapes::ListShape.new(name: 'Pages')
@@ -110,6 +119,7 @@ module Aws::Textract
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UInteger = Shapes::IntegerShape.new(name: 'UInteger')
     UnsupportedDocumentException = Shapes::StructureShape.new(name: 'UnsupportedDocumentException')
+    ValueType = Shapes::StringShape.new(name: 'ValueType')
     Warning = Shapes::StructureShape.new(name: 'Warning')
     Warnings = Shapes::ListShape.new(name: 'Warnings')
 
@@ -132,6 +142,19 @@ module Aws::Textract
     AnalyzeExpenseResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
     AnalyzeExpenseResponse.add_member(:expense_documents, Shapes::ShapeRef.new(shape: ExpenseDocumentList, location_name: "ExpenseDocuments"))
     AnalyzeExpenseResponse.struct_class = Types::AnalyzeExpenseResponse
+
+    AnalyzeIDDetections.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
+    AnalyzeIDDetections.add_member(:normalized_value, Shapes::ShapeRef.new(shape: NormalizedValue, location_name: "NormalizedValue"))
+    AnalyzeIDDetections.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    AnalyzeIDDetections.struct_class = Types::AnalyzeIDDetections
+
+    AnalyzeIDRequest.add_member(:document_pages, Shapes::ShapeRef.new(shape: DocumentPages, required: true, location_name: "DocumentPages"))
+    AnalyzeIDRequest.struct_class = Types::AnalyzeIDRequest
+
+    AnalyzeIDResponse.add_member(:identity_documents, Shapes::ShapeRef.new(shape: IdentityDocumentList, location_name: "IdentityDocuments"))
+    AnalyzeIDResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
+    AnalyzeIDResponse.add_member(:analyze_id_model_version, Shapes::ShapeRef.new(shape: String, location_name: "AnalyzeIDModelVersion"))
+    AnalyzeIDResponse.struct_class = Types::AnalyzeIDResponse
 
     BadDocumentException.struct_class = Types::BadDocumentException
 
@@ -178,6 +201,8 @@ module Aws::Textract
 
     DocumentMetadata.add_member(:pages, Shapes::ShapeRef.new(shape: UInteger, location_name: "Pages"))
     DocumentMetadata.struct_class = Types::DocumentMetadata
+
+    DocumentPages.member = Shapes::ShapeRef.new(shape: Document)
 
     DocumentTooLargeException.struct_class = Types::DocumentTooLargeException
 
@@ -279,6 +304,18 @@ module Aws::Textract
 
     IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
 
+    IdentityDocument.add_member(:document_index, Shapes::ShapeRef.new(shape: UInteger, location_name: "DocumentIndex"))
+    IdentityDocument.add_member(:identity_document_fields, Shapes::ShapeRef.new(shape: IdentityDocumentFieldList, location_name: "IdentityDocumentFields"))
+    IdentityDocument.struct_class = Types::IdentityDocument
+
+    IdentityDocumentField.add_member(:type, Shapes::ShapeRef.new(shape: AnalyzeIDDetections, location_name: "Type"))
+    IdentityDocumentField.add_member(:value_detection, Shapes::ShapeRef.new(shape: AnalyzeIDDetections, location_name: "ValueDetection"))
+    IdentityDocumentField.struct_class = Types::IdentityDocumentField
+
+    IdentityDocumentFieldList.member = Shapes::ShapeRef.new(shape: IdentityDocumentField)
+
+    IdentityDocumentList.member = Shapes::ShapeRef.new(shape: IdentityDocument)
+
     InternalServerError.struct_class = Types::InternalServerError
 
     InvalidJobIdException.struct_class = Types::InvalidJobIdException
@@ -301,6 +338,10 @@ module Aws::Textract
     LineItemGroupList.member = Shapes::ShapeRef.new(shape: LineItemGroup)
 
     LineItemList.member = Shapes::ShapeRef.new(shape: LineItemFields)
+
+    NormalizedValue.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    NormalizedValue.add_member(:value_type, Shapes::ShapeRef.new(shape: ValueType, location_name: "ValueType"))
+    NormalizedValue.struct_class = Types::NormalizedValue
 
     NotificationChannel.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SNSTopicArn, required: true, location_name: "SNSTopicArn"))
     NotificationChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
@@ -417,6 +458,23 @@ module Aws::Textract
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AnalyzeExpenseRequest)
         o.output = Shapes::ShapeRef.new(shape: AnalyzeExpenseResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: DocumentTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: BadDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:analyze_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AnalyzeID"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AnalyzeIDRequest)
+        o.output = Shapes::ShapeRef.new(shape: AnalyzeIDResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedDocumentException)

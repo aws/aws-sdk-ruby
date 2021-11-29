@@ -54,13 +54,14 @@ module Aws::PersonalizeRuntime
     GetPersonalizedRankingResponse.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: RecommendationID, location_name: "recommendationId"))
     GetPersonalizedRankingResponse.struct_class = Types::GetPersonalizedRankingResponse
 
-    GetRecommendationsRequest.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "campaignArn"))
+    GetRecommendationsRequest.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
     GetRecommendationsRequest.add_member(:item_id, Shapes::ShapeRef.new(shape: ItemID, location_name: "itemId"))
     GetRecommendationsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserID, location_name: "userId"))
     GetRecommendationsRequest.add_member(:num_results, Shapes::ShapeRef.new(shape: NumResults, location_name: "numResults"))
     GetRecommendationsRequest.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "context"))
     GetRecommendationsRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
     GetRecommendationsRequest.add_member(:filter_values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "filterValues"))
+    GetRecommendationsRequest.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recommenderArn"))
     GetRecommendationsRequest.struct_class = Types::GetRecommendationsRequest
 
     GetRecommendationsResponse.add_member(:item_list, Shapes::ShapeRef.new(shape: ItemList, location_name: "itemList"))

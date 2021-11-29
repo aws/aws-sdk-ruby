@@ -210,6 +210,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-mgn', '~> 1')
   spec.add_dependency('aws-sdk-migrationhub', '~> 1')
   spec.add_dependency('aws-sdk-migrationhubconfig', '~> 1')
+  spec.add_dependency('aws-sdk-migrationhubrefactorspaces', '~> 1')
   spec.add_dependency('aws-sdk-migrationhubstrategyrecommendations', '~> 1')
   spec.add_dependency('aws-sdk-mobile', '~> 1')
   spec.add_dependency('aws-sdk-neptune', '~> 1')

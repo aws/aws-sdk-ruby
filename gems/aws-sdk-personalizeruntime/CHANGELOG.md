@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2021-11-29)
+------------------
+
+* Feature - This release adds inference support for Recommenders.
+
 1.27.0 (2021-11-04)
 ------------------
 

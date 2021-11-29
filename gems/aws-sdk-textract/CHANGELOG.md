@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2021-11-29)
+------------------
+
+* Feature - This release adds support for synchronously analyzing identity documents through a new API: AnalyzeID
+
 1.31.0 (2021-11-04)
 ------------------
 

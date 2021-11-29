@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.535.0 (2021-11-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MigrationHubRefactorSpaces`.
+
 1.534.0 (2021-11-22)
 ------------------
 

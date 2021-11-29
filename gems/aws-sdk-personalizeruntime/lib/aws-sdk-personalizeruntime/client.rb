@@ -428,20 +428,30 @@ module Aws::PersonalizeRuntime
       req.send_request(options)
     end
 
-    # Returns a list of recommended items. The required input depends on the
-    # recipe type used to create the solution backing the campaign, as
-    # follows:
+    # Returns a list of recommended items. For campaigns, the campaign's
+    # Amazon Resource Name (ARN) is required and the required user and item
+    # input depends on the recipe type used to create the solution backing
+    # the campaign as follows:
+    #
+    # * USER\_PERSONALIZATION - `userId` required, `itemId` not used
     #
     # * RELATED\_ITEMS - `itemId` required, `userId` not used
-    #
-    # * USER\_PERSONALIZATION - `itemId` optional, `userId` required
     #
     # <note markdown="1"> Campaigns that are backed by a solution created using a recipe of type
     # PERSONALIZED\_RANKING use the API.
     #
     #  </note>
     #
-    # @option params [required, String] :campaign_arn
+    # For recommenders, the recommender's ARN is required and the required
+    # item and user input depends on the use case (domain-based recipe)
+    # backing the recommender. For information on use case requirements see
+    # [Choosing recommender use cases][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/domain-use-cases.html
+    #
+    # @option params [String] :campaign_arn
     #   The Amazon Resource Name (ARN) of the campaign to use for getting
     #   recommendations.
     #
@@ -494,6 +504,11 @@ module Aws::PersonalizeRuntime
     #
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
     #
+    # @option params [String] :recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender to use to get
+    #   recommendations. Provide a recommender ARN if you created a Domain
+    #   dataset group with a recommender for a domain use case.
+    #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecommendationsResponse#item_list #item_list} => Array&lt;Types::PredictedItem&gt;
@@ -502,7 +517,7 @@ module Aws::PersonalizeRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_recommendations({
-    #     campaign_arn: "Arn", # required
+    #     campaign_arn: "Arn",
     #     item_id: "ItemID",
     #     user_id: "UserID",
     #     num_results: 1,
@@ -513,6 +528,7 @@ module Aws::PersonalizeRuntime
     #     filter_values: {
     #       "FilterAttributeName" => "FilterAttributeValue",
     #     },
+    #     recommender_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -544,7 +560,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

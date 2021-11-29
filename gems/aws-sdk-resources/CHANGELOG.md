@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.121.0 (2021-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-migrationhubrefactorspaces` gem.
+
 3.120.0 (2021-11-17)
 ------------------
 

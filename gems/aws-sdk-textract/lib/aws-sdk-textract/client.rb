@@ -476,8 +476,8 @@ module Aws::Textract
       req.send_request(options)
     end
 
-    # Analyzes an input document for financially related relationships
-    # between text.
+    # `AnalyzeExpense` synchronously analyzes an input document for
+    # financially related relationships between text.
     #
     # Information is returned as `ExpenseDocuments` and seperated as
     # follows.
@@ -591,6 +591,59 @@ module Aws::Textract
     # @param [Hash] params ({})
     def analyze_expense(params = {}, options = {})
       req = build_request(:analyze_expense, params)
+      req.send_request(options)
+    end
+
+    # Analyzes identity documents for relevant information. This information
+    # is extracted and returned as `IdentityDocumentFields`, which records
+    # both the normalized field and value of the extracted text.
+    #
+    # @option params [required, Array<Types::Document>] :document_pages
+    #   The document being passed to AnalyzeID.
+    #
+    # @return [Types::AnalyzeIDResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AnalyzeIDResponse#identity_documents #identity_documents} => Array&lt;Types::IdentityDocument&gt;
+    #   * {Types::AnalyzeIDResponse#document_metadata #document_metadata} => Types::DocumentMetadata
+    #   * {Types::AnalyzeIDResponse#analyze_id_model_version #analyze_id_model_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.analyze_id({
+    #     document_pages: [ # required
+    #       {
+    #         bytes: "data",
+    #         s3_object: {
+    #           bucket: "S3Bucket",
+    #           name: "S3ObjectName",
+    #           version: "S3ObjectVersion",
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identity_documents #=> Array
+    #   resp.identity_documents[0].document_index #=> Integer
+    #   resp.identity_documents[0].identity_document_fields #=> Array
+    #   resp.identity_documents[0].identity_document_fields[0].type.text #=> String
+    #   resp.identity_documents[0].identity_document_fields[0].type.normalized_value.value #=> String
+    #   resp.identity_documents[0].identity_document_fields[0].type.normalized_value.value_type #=> String, one of "DATE"
+    #   resp.identity_documents[0].identity_document_fields[0].type.confidence #=> Float
+    #   resp.identity_documents[0].identity_document_fields[0].value_detection.text #=> String
+    #   resp.identity_documents[0].identity_document_fields[0].value_detection.normalized_value.value #=> String
+    #   resp.identity_documents[0].identity_document_fields[0].value_detection.normalized_value.value_type #=> String, one of "DATE"
+    #   resp.identity_documents[0].identity_document_fields[0].value_detection.confidence #=> Float
+    #   resp.document_metadata.pages #=> Integer
+    #   resp.analyze_id_model_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeID AWS API Documentation
+    #
+    # @overload analyze_id(params = {})
+    # @param [Hash] params ({})
+    def analyze_id(params = {}, options = {})
+      req = build_request(:analyze_id, params)
       req.send_request(options)
     end
 
@@ -1392,7 +1445,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

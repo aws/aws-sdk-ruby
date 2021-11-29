@@ -168,6 +168,84 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # Used to contain the information detected by an AnalyzeID operation.
+    #
+    # @!attribute [rw] text
+    #   Text of either the normalized field or value associated with it.
+    #   @return [String]
+    #
+    # @!attribute [rw] normalized_value
+    #   Only returned for dates, returns the type of value detected and the
+    #   date written in a more machine readable way.
+    #   @return [Types::NormalizedValue]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence score of the detected text.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeIDDetections AWS API Documentation
+    #
+    class AnalyzeIDDetections < Struct.new(
+      :text,
+      :normalized_value,
+      :confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AnalyzeIDRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_pages: [ # required
+    #           {
+    #             bytes: "data",
+    #             s3_object: {
+    #               bucket: "S3Bucket",
+    #               name: "S3ObjectName",
+    #               version: "S3ObjectVersion",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] document_pages
+    #   The document being passed to AnalyzeID.
+    #   @return [Array<Types::Document>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeIDRequest AWS API Documentation
+    #
+    class AnalyzeIDRequest < Struct.new(
+      :document_pages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identity_documents
+    #   The list of documents processed by AnalyzeID. Includes a number
+    #   denoting their place in the list and the response structure for the
+    #   document.
+    #   @return [Array<Types::IdentityDocument>]
+    #
+    # @!attribute [rw] document_metadata
+    #   Information about the input document.
+    #   @return [Types::DocumentMetadata]
+    #
+    # @!attribute [rw] analyze_id_model_version
+    #   The version of the AnalyzeIdentity API being used to process
+    #   documents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeIDResponse AWS API Documentation
+    #
+    class AnalyzeIDResponse < Struct.new(
+      :identity_documents,
+      :document_metadata,
+      :analyze_id_model_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon Textract isn't able to read the document. For more information
     # on the document limits in Amazon Textract, see limits.
     #
@@ -619,7 +697,7 @@ module Aws::Textract
     end
 
     # Breakdown of detected information, seperated into the catagories Type,
-    # LableDetection, and ValueDetection
+    # LabelDetection, and ValueDetection
     #
     # @!attribute [rw] type
     #   The implied label of a detected element. Present alongside
@@ -1073,6 +1151,50 @@ module Aws::Textract
     #
     class IdempotentParameterMismatchException < Aws::EmptyStructure; end
 
+    # The structure that lists each document processed in an AnalyzeID
+    # operation.
+    #
+    # @!attribute [rw] document_index
+    #   Denotes the placement of a document in the IdentityDocument list.
+    #   The first document is marked 1, the second 2 and so on.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] identity_document_fields
+    #   The structure used to record information extracted from identity
+    #   documents. Contains both normalized field and value of the extracted
+    #   text.
+    #   @return [Array<Types::IdentityDocumentField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/IdentityDocument AWS API Documentation
+    #
+    class IdentityDocument < Struct.new(
+      :document_index,
+      :identity_document_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Structure containing both the normalized type of the extracted
+    # information and the text associated with it. These are extracted as
+    # Type and Value respectively.
+    #
+    # @!attribute [rw] type
+    #   Used to contain the information detected by an AnalyzeID operation.
+    #   @return [Types::AnalyzeIDDetections]
+    #
+    # @!attribute [rw] value_detection
+    #   Used to contain the information detected by an AnalyzeID operation.
+    #   @return [Types::AnalyzeIDDetections]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/IdentityDocumentField AWS API Documentation
+    #
+    class IdentityDocumentField < Struct.new(
+      :type,
+      :value_detection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon Textract experienced a service issue. Try your call again.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/InternalServerError AWS API Documentation
@@ -1161,6 +1283,26 @@ module Aws::Textract
     class LineItemGroup < Struct.new(
       :line_item_group_index,
       :line_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information relating to dates in a document, including the
+    # type of value, and the value.
+    #
+    # @!attribute [rw] value
+    #   The value of the date, written as Year-Month-DayTHour:Minute:Second.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_type
+    #   The normalized type of the value detected. In this case, DATE.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/NormalizedValue AWS API Documentation
+    #
+    class NormalizedValue < Struct.new(
+      :value,
+      :value_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1662,8 +1804,8 @@ module Aws::Textract
     class ThrottlingException < Aws::EmptyStructure; end
 
     # The format of the input document isn't supported. Documents for
-    # synchronous operations can be in PNG or JPEG format. Documents for
-    # asynchronous operations can also be in PDF format.
+    # synchronous operations can be in PNG or JPEG format only. Documents
+    # for asynchronous operations can be in PDF format.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UnsupportedDocumentException AWS API Documentation
     #

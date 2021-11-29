@@ -115,7 +115,7 @@ module Aws::PersonalizeRuntime
     #   data as a hash:
     #
     #       {
-    #         campaign_arn: "Arn", # required
+    #         campaign_arn: "Arn",
     #         item_id: "ItemID",
     #         user_id: "UserID",
     #         num_results: 1,
@@ -126,6 +126,7 @@ module Aws::PersonalizeRuntime
     #         filter_values: {
     #           "FilterAttributeName" => "FilterAttributeValue",
     #         },
+    #         recommender_arn: "Arn",
     #       }
     #
     # @!attribute [rw] campaign_arn
@@ -189,6 +190,12 @@ module Aws::PersonalizeRuntime
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender to use to get
+    #   recommendations. Provide a recommender ARN if you created a Domain
+    #   dataset group with a recommender for a domain use case.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendationsRequest AWS API Documentation
     #
     class GetRecommendationsRequest < Struct.new(
@@ -198,13 +205,14 @@ module Aws::PersonalizeRuntime
       :num_results,
       :context,
       :filter_arn,
-      :filter_values)
+      :filter_values,
+      :recommender_arn)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] item_list
-    #   A list of recommendations sorted in ascending order by prediction
+    #   A list of recommendations sorted in descending order by prediction
     #   score. There can be a maximum of 500 items in the list.
     #   @return [Array<Types::PredictedItem>]
     #
