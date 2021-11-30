@@ -377,6 +377,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString", # required
     #         tables_to_delete: ["NameString"], # required
+    #         transaction_id: "TransactionIdString",
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -393,12 +394,17 @@ module Aws::Glue
     #   A list of the table to delete.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] transaction_id
+    #   The transaction ID at which to delete the table contents.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteTableRequest AWS API Documentation
     #
     class BatchDeleteTableRequest < Struct.new(
       :catalog_id,
       :database_name,
-      :tables_to_delete)
+      :tables_to_delete,
+      :transaction_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4697,6 +4703,7 @@ module Aws::Glue
     #             index_name: "NameString", # required
     #           },
     #         ],
+    #         transaction_id: "TransactionIdString",
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -4719,13 +4726,18 @@ module Aws::Glue
     #   in the table.
     #   @return [Array<Types::PartitionIndex>]
     #
+    # @!attribute [rw] transaction_id
+    #   The ID of the transaction.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTableRequest AWS API Documentation
     #
     class CreateTableRequest < Struct.new(
       :catalog_id,
       :database_name,
       :table_input,
-      :partition_indexes)
+      :partition_indexes,
+      :transaction_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6001,6 +6013,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString", # required
     #         name: "NameString", # required
+    #         transaction_id: "TransactionIdString",
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -6018,12 +6031,17 @@ module Aws::Glue
     #   name is entirely lowercase.
     #   @return [String]
     #
+    # @!attribute [rw] transaction_id
+    #   The transaction ID at which to delete the table contents.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableRequest AWS API Documentation
     #
     class DeleteTableRequest < Struct.new(
       :catalog_id,
       :database_name,
-      :name)
+      :name,
+      :transaction_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8599,6 +8617,8 @@ module Aws::Glue
     #         },
     #         max_results: 1,
     #         exclude_column_schema: false,
+    #         transaction_id: "TransactionIdString",
+    #         query_as_of_time: Time.now,
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -8732,6 +8752,16 @@ module Aws::Glue
     #   problem of a large response by not returning duplicate data.
     #   @return [Boolean]
     #
+    # @!attribute [rw] transaction_id
+    #   The transaction ID at which to read the partition contents.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_as_of_time
+    #   The time as of when to read the partition contents. If not set, the
+    #   most recent transaction commit time will be used. Cannot be
+    #   specified along with `TransactionId`.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitionsRequest AWS API Documentation
     #
     class GetPartitionsRequest < Struct.new(
@@ -8742,7 +8772,9 @@ module Aws::Glue
       :next_token,
       :segment,
       :max_results,
-      :exclude_column_schema)
+      :exclude_column_schema,
+      :transaction_id,
+      :query_as_of_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9453,6 +9485,8 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString", # required
     #         name: "NameString", # required
+    #         transaction_id: "TransactionIdString",
+    #         query_as_of_time: Time.now,
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -9470,12 +9504,24 @@ module Aws::Glue
     #   compatibility, this name is entirely lowercase.
     #   @return [String]
     #
+    # @!attribute [rw] transaction_id
+    #   The transaction ID at which to read the table contents.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_as_of_time
+    #   The time as of when to read the table contents. If not set, the most
+    #   recent transaction commit time will be used. Cannot be specified
+    #   along with `TransactionId`.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableRequest AWS API Documentation
     #
     class GetTableRequest < Struct.new(
       :catalog_id,
       :database_name,
-      :name)
+      :name,
+      :transaction_id,
+      :query_as_of_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9620,6 +9666,8 @@ module Aws::Glue
     #         expression: "FilterString",
     #         next_token: "Token",
     #         max_results: 1,
+    #         transaction_id: "TransactionIdString",
+    #         query_as_of_time: Time.now,
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -9645,6 +9693,16 @@ module Aws::Glue
     #   The maximum number of tables to return in a single response.
     #   @return [Integer]
     #
+    # @!attribute [rw] transaction_id
+    #   The transaction ID at which to read the table contents.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_as_of_time
+    #   The time as of when to read the table contents. If not set, the most
+    #   recent transaction commit time will be used. Cannot be specified
+    #   along with `TransactionId`.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTablesRequest AWS API Documentation
     #
     class GetTablesRequest < Struct.new(
@@ -9652,7 +9710,9 @@ module Aws::Glue
       :database_name,
       :expression,
       :next_token,
-      :max_results)
+      :max_results,
+      :transaction_id,
+      :query_as_of_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10318,6 +10378,20 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/InvalidInputException AWS API Documentation
     #
     class InvalidInputException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An error that indicates your data is in an invalid state.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -13516,6 +13590,20 @@ module Aws::Glue
     #
     class ResetJobBookmarkResponse < Struct.new(
       :job_bookmark_entry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource was not ready for a transaction.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResourceNotReadyException AWS API Documentation
+    #
+    class ResourceNotReadyException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17409,6 +17497,7 @@ module Aws::Glue
     #           },
     #         },
     #         skip_archive: false,
+    #         transaction_id: "TransactionIdString",
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -17432,13 +17521,18 @@ module Aws::Glue
     #   `UpdateTable` does not create the archived version.
     #   @return [Boolean]
     #
+    # @!attribute [rw] transaction_id
+    #   The transaction ID at which to update the table contents.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableRequest AWS API Documentation
     #
     class UpdateTableRequest < Struct.new(
       :catalog_id,
       :database_name,
       :table_input,
-      :skip_archive)
+      :skip_archive,
+      :transaction_id)
       SENSITIVE = []
       include Aws::Structure
     end

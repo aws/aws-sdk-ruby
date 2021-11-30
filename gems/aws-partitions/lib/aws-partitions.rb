@@ -253,6 +253,7 @@ module Aws
             'AutoScaling' => 'autoscaling',
             'AutoScalingPlans' => 'autoscaling-plans',
             'Backup' => 'backup',
+            'BackupGateway' => 'backup-gateway',
             'Batch' => 'batch',
             'Braket' => 'braket',
             'Budgets' => 'budgets',
@@ -371,6 +372,7 @@ module Aws
             'IoTSecureTunneling' => 'api.tunneling.iot',
             'IoTSiteWise' => 'iotsitewise',
             'IoTThingsGraph' => 'iotthingsgraph',
+            'IoTTwinMaker' => 'iottwinmaker',
             'IoTWireless' => 'api.iotwireless',
             'KMS' => 'kms',
             'Kafka' => 'kafka',
@@ -518,6 +520,7 @@ module Aws
             'WorkMail' => 'workmail',
             'WorkMailMessageFlow' => 'workmailmessageflow',
             'WorkSpaces' => 'workspaces',
+            'WorkSpacesWeb' => 'workspaces-web',
             'XRay' => 'xray',
           }
           # end service ids

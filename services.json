@@ -90,6 +90,9 @@
   "Backup": {
     "models": "backup/2018-11-15"
   },
+  "BackupGateway": {
+    "models": "backup-gateway/2021-01-01"
+  },
   "Batch": {
     "models": "batch/2016-08-10"
   },
@@ -489,6 +492,9 @@
   },
   "IoTThingsGraph": {
     "models": "iotthingsgraph/2018-09-06"
+  },
+  "IoTTwinMaker": {
+    "models": "iottwinmaker/2021-11-29"
   },
   "IoTWireless": {
     "models": "iotwireless/2020-11-22"
@@ -996,6 +1002,9 @@
   },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08"
+  },
+  "WorkSpacesWeb": {
+    "models": "workspaces-web/2020-07-08"
   },
   "XRay": {
     "models": "xray/2016-04-12"

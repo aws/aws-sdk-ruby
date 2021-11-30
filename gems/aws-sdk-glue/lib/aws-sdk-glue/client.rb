@@ -119,7 +119,9 @@ module Aws::Glue
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -570,6 +572,9 @@ module Aws::Glue
     # @option params [required, Array<String>] :tables_to_delete
     #   A list of the table to delete.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to delete the table contents.
+    #
     # @return [Types::BatchDeleteTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchDeleteTableResponse#errors #errors} => Array&lt;Types::TableError&gt;
@@ -580,6 +585,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
     #     tables_to_delete: ["NameString"], # required
+    #     transaction_id: "TransactionIdString",
     #   })
     #
     # @example Response structure
@@ -2914,6 +2920,9 @@ module Aws::Glue
     #   A list of partition indexes, `PartitionIndex` structures, to create in
     #   the table.
     #
+    # @option params [String] :transaction_id
+    #   The ID of the transaction.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3007,6 +3016,7 @@ module Aws::Glue
     #         index_name: "NameString", # required
     #       },
     #     ],
+    #     transaction_id: "TransactionIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTable AWS API Documentation
@@ -3828,6 +3838,9 @@ module Aws::Glue
     #   The name of the table to be deleted. For Hive compatibility, this name
     #   is entirely lowercase.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to delete the table contents.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3836,6 +3849,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
     #     name: "NameString", # required
+    #     transaction_id: "TransactionIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTable AWS API Documentation
@@ -6046,6 +6060,14 @@ module Aws::Glue
     #   partition values or location. This approach avoids the problem of a
     #   large response by not returning duplicate data.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to read the partition contents.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :query_as_of_time
+    #   The time as of when to read the partition contents. If not set, the
+    #   most recent transaction commit time will be used. Cannot be specified
+    #   along with `TransactionId`.
+    #
     # @return [Types::GetPartitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPartitionsResponse#partitions #partitions} => Array&lt;Types::Partition&gt;
@@ -6067,6 +6089,8 @@ module Aws::Glue
     #     },
     #     max_results: 1,
     #     exclude_column_schema: false,
+    #     transaction_id: "TransactionIdString",
+    #     query_as_of_time: Time.now,
     #   })
     #
     # @example Response structure
@@ -6699,6 +6723,14 @@ module Aws::Glue
     #   The name of the table for which to retrieve the definition. For Hive
     #   compatibility, this name is entirely lowercase.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to read the table contents.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :query_as_of_time
+    #   The time as of when to read the table contents. If not set, the most
+    #   recent transaction commit time will be used. Cannot be specified along
+    #   with `TransactionId`.
+    #
     # @return [Types::GetTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTableResponse#table #table} => Types::Table
@@ -6709,6 +6741,8 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
     #     name: "NameString", # required
+    #     transaction_id: "TransactionIdString",
+    #     query_as_of_time: Time.now,
     #   })
     #
     # @example Response structure
@@ -7021,6 +7055,14 @@ module Aws::Glue
     # @option params [Integer] :max_results
     #   The maximum number of tables to return in a single response.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to read the table contents.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :query_as_of_time
+    #   The time as of when to read the table contents. If not set, the most
+    #   recent transaction commit time will be used. Cannot be specified along
+    #   with `TransactionId`.
+    #
     # @return [Types::GetTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTablesResponse#table_list #table_list} => Array&lt;Types::Table&gt;
@@ -7036,6 +7078,8 @@ module Aws::Glue
     #     expression: "FilterString",
     #     next_token: "Token",
     #     max_results: 1,
+    #     transaction_id: "TransactionIdString",
+    #     query_as_of_time: Time.now,
     #   })
     #
     # @example Response structure
@@ -10780,6 +10824,9 @@ module Aws::Glue
     #   table before updating it. However, if `skipArchive` is set to true,
     #   `UpdateTable` does not create the archived version.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to update the table contents.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -10868,6 +10915,7 @@ module Aws::Glue
     #       },
     #     },
     #     skip_archive: false,
+    #     transaction_id: "TransactionIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable AWS API Documentation
@@ -11077,7 +11125,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

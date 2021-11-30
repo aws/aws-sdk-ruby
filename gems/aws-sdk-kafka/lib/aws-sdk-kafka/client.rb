@@ -119,7 +119,9 @@ module Aws::Kafka
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -515,6 +517,146 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Creates a new Amazon MSK cluster of either the provisioned or the
+    # serverless type.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tags that you want the cluster to have.
+    #
+    # @option params [Types::ProvisionedRequest] :provisioned
+    #   Creates a provisioned cluster.
+    #
+    # @option params [Types::ServerlessRequest] :serverless
+    #   Creates a serverless cluster.
+    #
+    # @return [Types::CreateClusterV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateClusterV2Response#cluster_arn #cluster_arn} => String
+    #   * {Types::CreateClusterV2Response#cluster_name #cluster_name} => String
+    #   * {Types::CreateClusterV2Response#state #state} => String
+    #   * {Types::CreateClusterV2Response#cluster_type #cluster_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cluster_v2({
+    #     cluster_name: "__stringMin1Max64", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #     provisioned: {
+    #       broker_node_group_info: { # required
+    #         broker_az_distribution: "DEFAULT", # accepts DEFAULT
+    #         client_subnets: ["__string"], # required
+    #         instance_type: "__stringMin5Max32", # required
+    #         security_groups: ["__string"],
+    #         storage_info: {
+    #           ebs_storage_info: {
+    #             volume_size: 1,
+    #           },
+    #         },
+    #         connectivity_info: {
+    #           public_access: {
+    #             type: "__string",
+    #           },
+    #         },
+    #       },
+    #       client_authentication: {
+    #         sasl: {
+    #           scram: {
+    #             enabled: false,
+    #           },
+    #           iam: {
+    #             enabled: false,
+    #           },
+    #         },
+    #         tls: {
+    #           certificate_authority_arn_list: ["__string"],
+    #           enabled: false,
+    #         },
+    #         unauthenticated: {
+    #           enabled: false,
+    #         },
+    #       },
+    #       configuration_info: {
+    #         arn: "__string", # required
+    #         revision: 1, # required
+    #       },
+    #       encryption_info: {
+    #         encryption_at_rest: {
+    #           data_volume_kms_key_id: "__string", # required
+    #         },
+    #         encryption_in_transit: {
+    #           client_broker: "TLS", # accepts TLS, TLS_PLAINTEXT, PLAINTEXT
+    #           in_cluster: false,
+    #         },
+    #       },
+    #       enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
+    #       open_monitoring: {
+    #         prometheus: { # required
+    #           jmx_exporter: {
+    #             enabled_in_broker: false, # required
+    #           },
+    #           node_exporter: {
+    #             enabled_in_broker: false, # required
+    #           },
+    #         },
+    #       },
+    #       kafka_version: "__stringMin1Max128", # required
+    #       logging_info: {
+    #         broker_logs: { # required
+    #           cloud_watch_logs: {
+    #             enabled: false, # required
+    #             log_group: "__string",
+    #           },
+    #           firehose: {
+    #             delivery_stream: "__string",
+    #             enabled: false, # required
+    #           },
+    #           s3: {
+    #             bucket: "__string",
+    #             enabled: false, # required
+    #             prefix: "__string",
+    #           },
+    #         },
+    #       },
+    #       number_of_broker_nodes: 1, # required
+    #     },
+    #     serverless: {
+    #       vpc_configs: [ # required
+    #         {
+    #           subnet_ids: ["__string"], # required
+    #           security_group_ids: ["__string"],
+    #         },
+    #       ],
+    #       client_authentication: {
+    #         sasl: {
+    #           iam: {
+    #             enabled: false,
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.cluster_name #=> String
+    #   resp.state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "HEALING", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
+    #   resp.cluster_type #=> String, one of "PROVISIONED", "SERVERLESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateClusterV2 AWS API Documentation
+    #
+    # @overload create_cluster_v2(params = {})
+    # @param [Hash] params ({})
+    def create_cluster_v2(params = {}, options = {})
+      req = build_request(:create_cluster_v2, params)
+      req.send_request(options)
+    end
+
     # Creates a new MSK configuration.
     #
     # @option params [String] :description
@@ -697,6 +839,85 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def describe_cluster(params = {}, options = {})
       req = build_request(:describe_cluster, params)
+      req.send_request(options)
+    end
+
+    # Returns a description of the MSK cluster of either the provisioned or
+    # the serverless type whose Amazon Resource Name (ARN) is specified in
+    # the request.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+    #
+    # @return [Types::DescribeClusterV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClusterV2Response#cluster_info #cluster_info} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cluster_v2({
+    #     cluster_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_info.active_operation_arn #=> String
+    #   resp.cluster_info.cluster_type #=> String, one of "PROVISIONED", "SERVERLESS"
+    #   resp.cluster_info.cluster_arn #=> String
+    #   resp.cluster_info.cluster_name #=> String
+    #   resp.cluster_info.creation_time #=> Time
+    #   resp.cluster_info.current_version #=> String
+    #   resp.cluster_info.state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "HEALING", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
+    #   resp.cluster_info.state_info.code #=> String
+    #   resp.cluster_info.state_info.message #=> String
+    #   resp.cluster_info.tags #=> Hash
+    #   resp.cluster_info.tags["__string"] #=> String
+    #   resp.cluster_info.provisioned.broker_node_group_info.broker_az_distribution #=> String, one of "DEFAULT"
+    #   resp.cluster_info.provisioned.broker_node_group_info.client_subnets #=> Array
+    #   resp.cluster_info.provisioned.broker_node_group_info.client_subnets[0] #=> String
+    #   resp.cluster_info.provisioned.broker_node_group_info.instance_type #=> String
+    #   resp.cluster_info.provisioned.broker_node_group_info.security_groups #=> Array
+    #   resp.cluster_info.provisioned.broker_node_group_info.security_groups[0] #=> String
+    #   resp.cluster_info.provisioned.broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
+    #   resp.cluster_info.provisioned.broker_node_group_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_info.provisioned.current_broker_software_info.configuration_arn #=> String
+    #   resp.cluster_info.provisioned.current_broker_software_info.configuration_revision #=> Integer
+    #   resp.cluster_info.provisioned.current_broker_software_info.kafka_version #=> String
+    #   resp.cluster_info.provisioned.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_info.provisioned.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_info.provisioned.client_authentication.tls.certificate_authority_arn_list #=> Array
+    #   resp.cluster_info.provisioned.client_authentication.tls.certificate_authority_arn_list[0] #=> String
+    #   resp.cluster_info.provisioned.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info.provisioned.client_authentication.unauthenticated.enabled #=> Boolean
+    #   resp.cluster_info.provisioned.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
+    #   resp.cluster_info.provisioned.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
+    #   resp.cluster_info.provisioned.encryption_info.encryption_in_transit.in_cluster #=> Boolean
+    #   resp.cluster_info.provisioned.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
+    #   resp.cluster_info.provisioned.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_info.provisioned.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_info.provisioned.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
+    #   resp.cluster_info.provisioned.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
+    #   resp.cluster_info.provisioned.logging_info.broker_logs.firehose.delivery_stream #=> String
+    #   resp.cluster_info.provisioned.logging_info.broker_logs.firehose.enabled #=> Boolean
+    #   resp.cluster_info.provisioned.logging_info.broker_logs.s3.bucket #=> String
+    #   resp.cluster_info.provisioned.logging_info.broker_logs.s3.enabled #=> Boolean
+    #   resp.cluster_info.provisioned.logging_info.broker_logs.s3.prefix #=> String
+    #   resp.cluster_info.provisioned.number_of_broker_nodes #=> Integer
+    #   resp.cluster_info.provisioned.zookeeper_connect_string #=> String
+    #   resp.cluster_info.provisioned.zookeeper_connect_string_tls #=> String
+    #   resp.cluster_info.serverless.vpc_configs #=> Array
+    #   resp.cluster_info.serverless.vpc_configs[0].subnet_ids #=> Array
+    #   resp.cluster_info.serverless.vpc_configs[0].subnet_ids[0] #=> String
+    #   resp.cluster_info.serverless.vpc_configs[0].security_group_ids #=> Array
+    #   resp.cluster_info.serverless.vpc_configs[0].security_group_ids[0] #=> String
+    #   resp.cluster_info.serverless.client_authentication.sasl.iam.enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterV2 AWS API Documentation
+    #
+    # @overload describe_cluster_v2(params = {})
+    # @param [Hash] params ({})
+    def describe_cluster_v2(params = {}, options = {})
+      req = build_request(:describe_cluster_v2, params)
       req.send_request(options)
     end
 
@@ -1163,6 +1384,104 @@ module Aws::Kafka
     # @param [Hash] params ({})
     def list_clusters(params = {}, options = {})
       req = build_request(:list_clusters, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of all the MSK clusters in the current Region.
+    #
+    # @option params [String] :cluster_name_filter
+    #   Specify a prefix of the names of the clusters that you want to list.
+    #   The service lists all the clusters whose names start with this prefix.
+    #
+    # @option params [String] :cluster_type_filter
+    #   Specify either PROVISIONED or SERVERLESS.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If there are
+    #   more results, the response includes a NextToken parameter.
+    #
+    # @option params [String] :next_token
+    #   The paginated results marker. When the result of the operation is
+    #   truncated, the call returns NextToken in the response. To get the next
+    #   batch, provide this token in your next request.
+    #
+    # @return [Types::ListClustersV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListClustersV2Response#cluster_info_list #cluster_info_list} => Array&lt;Types::Cluster&gt;
+    #   * {Types::ListClustersV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_clusters_v2({
+    #     cluster_name_filter: "__string",
+    #     cluster_type_filter: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_info_list #=> Array
+    #   resp.cluster_info_list[0].active_operation_arn #=> String
+    #   resp.cluster_info_list[0].cluster_type #=> String, one of "PROVISIONED", "SERVERLESS"
+    #   resp.cluster_info_list[0].cluster_arn #=> String
+    #   resp.cluster_info_list[0].cluster_name #=> String
+    #   resp.cluster_info_list[0].creation_time #=> Time
+    #   resp.cluster_info_list[0].current_version #=> String
+    #   resp.cluster_info_list[0].state #=> String, one of "ACTIVE", "CREATING", "DELETING", "FAILED", "HEALING", "MAINTENANCE", "REBOOTING_BROKER", "UPDATING"
+    #   resp.cluster_info_list[0].state_info.code #=> String
+    #   resp.cluster_info_list[0].state_info.message #=> String
+    #   resp.cluster_info_list[0].tags #=> Hash
+    #   resp.cluster_info_list[0].tags["__string"] #=> String
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.broker_az_distribution #=> String, one of "DEFAULT"
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.client_subnets #=> Array
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.client_subnets[0] #=> String
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.instance_type #=> String
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.security_groups #=> Array
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.security_groups[0] #=> String
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.storage_info.ebs_storage_info.volume_size #=> Integer
+    #   resp.cluster_info_list[0].provisioned.broker_node_group_info.connectivity_info.public_access.type #=> String
+    #   resp.cluster_info_list[0].provisioned.current_broker_software_info.configuration_arn #=> String
+    #   resp.cluster_info_list[0].provisioned.current_broker_software_info.configuration_revision #=> Integer
+    #   resp.cluster_info_list[0].provisioned.current_broker_software_info.kafka_version #=> String
+    #   resp.cluster_info_list[0].provisioned.client_authentication.sasl.scram.enabled #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.client_authentication.tls.certificate_authority_arn_list #=> Array
+    #   resp.cluster_info_list[0].provisioned.client_authentication.tls.certificate_authority_arn_list[0] #=> String
+    #   resp.cluster_info_list[0].provisioned.client_authentication.tls.enabled #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.client_authentication.unauthenticated.enabled #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
+    #   resp.cluster_info_list[0].provisioned.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
+    #   resp.cluster_info_list[0].provisioned.encryption_info.encryption_in_transit.in_cluster #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER", "PER_TOPIC_PER_PARTITION"
+    #   resp.cluster_info_list[0].provisioned.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
+    #   resp.cluster_info_list[0].provisioned.logging_info.broker_logs.firehose.delivery_stream #=> String
+    #   resp.cluster_info_list[0].provisioned.logging_info.broker_logs.firehose.enabled #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.logging_info.broker_logs.s3.bucket #=> String
+    #   resp.cluster_info_list[0].provisioned.logging_info.broker_logs.s3.enabled #=> Boolean
+    #   resp.cluster_info_list[0].provisioned.logging_info.broker_logs.s3.prefix #=> String
+    #   resp.cluster_info_list[0].provisioned.number_of_broker_nodes #=> Integer
+    #   resp.cluster_info_list[0].provisioned.zookeeper_connect_string #=> String
+    #   resp.cluster_info_list[0].provisioned.zookeeper_connect_string_tls #=> String
+    #   resp.cluster_info_list[0].serverless.vpc_configs #=> Array
+    #   resp.cluster_info_list[0].serverless.vpc_configs[0].subnet_ids #=> Array
+    #   resp.cluster_info_list[0].serverless.vpc_configs[0].subnet_ids[0] #=> String
+    #   resp.cluster_info_list[0].serverless.vpc_configs[0].security_group_ids #=> Array
+    #   resp.cluster_info_list[0].serverless.vpc_configs[0].security_group_ids[0] #=> String
+    #   resp.cluster_info_list[0].serverless.client_authentication.sasl.iam.enabled #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClustersV2 AWS API Documentation
+    #
+    # @overload list_clusters_v2(params = {})
+    # @param [Hash] params ({})
+    def list_clusters_v2(params = {}, options = {})
+      req = build_request(:list_clusters_v2, params)
       req.send_request(options)
     end
 
@@ -1944,7 +2263,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

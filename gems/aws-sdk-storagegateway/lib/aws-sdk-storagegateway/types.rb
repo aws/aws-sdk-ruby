@@ -98,8 +98,8 @@ module Aws::StorageGateway
     #   specified is critical to all later functions of the gateway and
     #   cannot be changed after activation. The default value is `CACHED`.
     #
-    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `FILE_S3` \|
-    #   `FILE_FSX_SMB|`
+    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `VTL_SNOW` \|
+    #   `FILE_S3` \| `FILE_FSX_SMB`
     #   @return [String]
     #
     # @!attribute [rw] tape_drive_type
@@ -3324,7 +3324,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] host_environment
-    #   The type of hypervisor environment used by the host.
+    #   The type of hardware or software platform on which the gateway is
+    #   running.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
@@ -3352,6 +3353,12 @@ module Aws::StorageGateway
     #   based on its current hardware specifications.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] host_environment_id
+    #   A unique identifier for the specific instance of the host platform
+    #   running the gateway. This value is only available for certain host
+    #   environments, and its format depends on the host environment type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
     #
     class DescribeGatewayInformationOutput < Struct.new(
@@ -3374,7 +3381,8 @@ module Aws::StorageGateway
       :software_updates_end_date,
       :deprecation_date,
       :gateway_capacity,
-      :supported_gateway_capacities)
+      :supported_gateway_capacities,
+      :host_environment_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4643,6 +4651,17 @@ module Aws::StorageGateway
     #   located.
     #   @return [String]
     #
+    # @!attribute [rw] host_environment
+    #   The type of hardware or software platform on which the gateway is
+    #   running.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_environment_id
+    #   A unique identifier for the specific instance of the host platform
+    #   running the gateway. This value is only available for certain host
+    #   environments, and its format depends on the host environment type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/GatewayInfo AWS API Documentation
     #
     class GatewayInfo < Struct.new(
@@ -4652,7 +4671,9 @@ module Aws::StorageGateway
       :gateway_operational_state,
       :gateway_name,
       :ec2_instance_id,
-      :ec2_instance_region)
+      :ec2_instance_region,
+      :host_environment,
+      :host_environment_id)
       SENSITIVE = []
       include Aws::Structure
     end

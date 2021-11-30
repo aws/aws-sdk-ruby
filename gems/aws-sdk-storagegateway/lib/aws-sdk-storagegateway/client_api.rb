@@ -203,6 +203,7 @@ module Aws::StorageGateway
     Gateways = Shapes::ListShape.new(name: 'Gateways')
     Host = Shapes::StringShape.new(name: 'Host')
     HostEnvironment = Shapes::StringShape.new(name: 'HostEnvironment')
+    HostEnvironmentId = Shapes::StringShape.new(name: 'HostEnvironmentId')
     Hosts = Shapes::ListShape.new(name: 'Hosts')
     HourOfDay = Shapes::IntegerShape.new(name: 'HourOfDay')
     IPV4Address = Shapes::StringShape.new(name: 'IPV4Address')
@@ -829,6 +830,7 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput.add_member(:deprecation_date, Shapes::ShapeRef.new(shape: DeprecationDate, location_name: "DeprecationDate"))
     DescribeGatewayInformationOutput.add_member(:gateway_capacity, Shapes::ShapeRef.new(shape: GatewayCapacity, location_name: "GatewayCapacity"))
     DescribeGatewayInformationOutput.add_member(:supported_gateway_capacities, Shapes::ShapeRef.new(shape: SupportedGatewayCapacities, location_name: "SupportedGatewayCapacities"))
+    DescribeGatewayInformationOutput.add_member(:host_environment_id, Shapes::ShapeRef.new(shape: HostEnvironmentId, location_name: "HostEnvironmentId"))
     DescribeGatewayInformationOutput.struct_class = Types::DescribeGatewayInformationOutput
 
     DescribeMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
@@ -1036,6 +1038,8 @@ module Aws::StorageGateway
     GatewayInfo.add_member(:gateway_name, Shapes::ShapeRef.new(shape: string, location_name: "GatewayName"))
     GatewayInfo.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: Ec2InstanceId, location_name: "Ec2InstanceId"))
     GatewayInfo.add_member(:ec2_instance_region, Shapes::ShapeRef.new(shape: Ec2InstanceRegion, location_name: "Ec2InstanceRegion"))
+    GatewayInfo.add_member(:host_environment, Shapes::ShapeRef.new(shape: HostEnvironment, location_name: "HostEnvironment"))
+    GatewayInfo.add_member(:host_environment_id, Shapes::ShapeRef.new(shape: HostEnvironmentId, location_name: "HostEnvironmentId"))
     GatewayInfo.struct_class = Types::GatewayInfo
 
     GatewayNetworkInterfaces.member = Shapes::ShapeRef.new(shape: NetworkInterface)

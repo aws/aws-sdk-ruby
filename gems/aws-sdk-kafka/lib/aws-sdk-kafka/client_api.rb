@@ -27,11 +27,13 @@ module Aws::Kafka
     ClientAuthentication = Shapes::StructureShape.new(name: 'ClientAuthentication')
     ClientBroker = Shapes::StringShape.new(name: 'ClientBroker')
     CloudWatchLogs = Shapes::StructureShape.new(name: 'CloudWatchLogs')
+    Cluster = Shapes::StructureShape.new(name: 'Cluster')
     ClusterInfo = Shapes::StructureShape.new(name: 'ClusterInfo')
     ClusterOperationInfo = Shapes::StructureShape.new(name: 'ClusterOperationInfo')
     ClusterOperationStep = Shapes::StructureShape.new(name: 'ClusterOperationStep')
     ClusterOperationStepInfo = Shapes::StructureShape.new(name: 'ClusterOperationStepInfo')
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
+    ClusterType = Shapes::StringShape.new(name: 'ClusterType')
     CompatibleKafkaVersion = Shapes::StructureShape.new(name: 'CompatibleKafkaVersion')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationInfo = Shapes::StructureShape.new(name: 'ConfigurationInfo')
@@ -41,6 +43,8 @@ module Aws::Kafka
     ConnectivityInfo = Shapes::StructureShape.new(name: 'ConnectivityInfo')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
+    CreateClusterV2Request = Shapes::StructureShape.new(name: 'CreateClusterV2Request')
+    CreateClusterV2Response = Shapes::StructureShape.new(name: 'CreateClusterV2Response')
     CreateConfigurationRequest = Shapes::StructureShape.new(name: 'CreateConfigurationRequest')
     CreateConfigurationResponse = Shapes::StructureShape.new(name: 'CreateConfigurationResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
@@ -51,6 +55,8 @@ module Aws::Kafka
     DescribeClusterOperationResponse = Shapes::StructureShape.new(name: 'DescribeClusterOperationResponse')
     DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
     DescribeClusterResponse = Shapes::StructureShape.new(name: 'DescribeClusterResponse')
+    DescribeClusterV2Request = Shapes::StructureShape.new(name: 'DescribeClusterV2Request')
+    DescribeClusterV2Response = Shapes::StructureShape.new(name: 'DescribeClusterV2Response')
     DescribeConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationRequest')
     DescribeConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeConfigurationResponse')
     DescribeConfigurationRevisionRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationRevisionRequest')
@@ -78,6 +84,8 @@ module Aws::Kafka
     ListClusterOperationsResponse = Shapes::StructureShape.new(name: 'ListClusterOperationsResponse')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
+    ListClustersV2Request = Shapes::StructureShape.new(name: 'ListClustersV2Request')
+    ListClustersV2Response = Shapes::StructureShape.new(name: 'ListClustersV2Response')
     ListConfigurationRevisionsRequest = Shapes::StructureShape.new(name: 'ListConfigurationRevisionsRequest')
     ListConfigurationRevisionsResponse = Shapes::StructureShape.new(name: 'ListConfigurationRevisionsResponse')
     ListConfigurationsRequest = Shapes::StructureShape.new(name: 'ListConfigurationsRequest')
@@ -102,12 +110,18 @@ module Aws::Kafka
     OpenMonitoringInfo = Shapes::StructureShape.new(name: 'OpenMonitoringInfo')
     Prometheus = Shapes::StructureShape.new(name: 'Prometheus')
     PrometheusInfo = Shapes::StructureShape.new(name: 'PrometheusInfo')
+    Provisioned = Shapes::StructureShape.new(name: 'Provisioned')
+    ProvisionedRequest = Shapes::StructureShape.new(name: 'ProvisionedRequest')
     PublicAccess = Shapes::StructureShape.new(name: 'PublicAccess')
     RebootBrokerRequest = Shapes::StructureShape.new(name: 'RebootBrokerRequest')
     RebootBrokerResponse = Shapes::StructureShape.new(name: 'RebootBrokerResponse')
     S3 = Shapes::StructureShape.new(name: 'S3')
     Sasl = Shapes::StructureShape.new(name: 'Sasl')
     Scram = Shapes::StructureShape.new(name: 'Scram')
+    Serverless = Shapes::StructureShape.new(name: 'Serverless')
+    ServerlessClientAuthentication = Shapes::StructureShape.new(name: 'ServerlessClientAuthentication')
+    ServerlessRequest = Shapes::StructureShape.new(name: 'ServerlessRequest')
+    ServerlessSasl = Shapes::StructureShape.new(name: 'ServerlessSasl')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StateInfo = Shapes::StructureShape.new(name: 'StateInfo')
     StorageInfo = Shapes::StructureShape.new(name: 'StorageInfo')
@@ -136,6 +150,7 @@ module Aws::Kafka
     UpdateMonitoringResponse = Shapes::StructureShape.new(name: 'UpdateMonitoringResponse')
     UpdateSecurityRequest = Shapes::StructureShape.new(name: 'UpdateSecurityRequest')
     UpdateSecurityResponse = Shapes::StructureShape.new(name: 'UpdateSecurityResponse')
+    VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     ZookeeperNodeInfo = Shapes::StructureShape.new(name: 'ZookeeperNodeInfo')
     __blob = Shapes::BlobShape.new(name: '__blob')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
@@ -144,6 +159,7 @@ module Aws::Kafka
     __integerMin1Max15 = Shapes::IntegerShape.new(name: '__integerMin1Max15')
     __integerMin1Max16384 = Shapes::IntegerShape.new(name: '__integerMin1Max16384')
     __listOfBrokerEBSVolumeInfo = Shapes::ListShape.new(name: '__listOfBrokerEBSVolumeInfo')
+    __listOfCluster = Shapes::ListShape.new(name: '__listOfCluster')
     __listOfClusterInfo = Shapes::ListShape.new(name: '__listOfClusterInfo')
     __listOfClusterOperationInfo = Shapes::ListShape.new(name: '__listOfClusterOperationInfo')
     __listOfClusterOperationStep = Shapes::ListShape.new(name: '__listOfClusterOperationStep')
@@ -153,6 +169,7 @@ module Aws::Kafka
     __listOfKafkaVersion = Shapes::ListShape.new(name: '__listOfKafkaVersion')
     __listOfNodeInfo = Shapes::ListShape.new(name: '__listOfNodeInfo')
     __listOfUnprocessedScramSecret = Shapes::ListShape.new(name: '__listOfUnprocessedScramSecret')
+    __listOfVpcConfig = Shapes::ListShape.new(name: '__listOfVpcConfig')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
@@ -220,6 +237,19 @@ module Aws::Kafka
     CloudWatchLogs.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabled"))
     CloudWatchLogs.add_member(:log_group, Shapes::ShapeRef.new(shape: __string, location_name: "logGroup"))
     CloudWatchLogs.struct_class = Types::CloudWatchLogs
+
+    Cluster.add_member(:active_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "activeOperationArn"))
+    Cluster.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    Cluster.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    Cluster.add_member(:cluster_name, Shapes::ShapeRef.new(shape: __string, location_name: "clusterName"))
+    Cluster.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
+    Cluster.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, location_name: "currentVersion"))
+    Cluster.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
+    Cluster.add_member(:state_info, Shapes::ShapeRef.new(shape: StateInfo, location_name: "stateInfo"))
+    Cluster.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    Cluster.add_member(:provisioned, Shapes::ShapeRef.new(shape: Provisioned, location_name: "provisioned"))
+    Cluster.add_member(:serverless, Shapes::ShapeRef.new(shape: Serverless, location_name: "serverless"))
+    Cluster.struct_class = Types::Cluster
 
     ClusterInfo.add_member(:active_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "activeOperationArn"))
     ClusterInfo.add_member(:broker_node_group_info, Shapes::ShapeRef.new(shape: BrokerNodeGroupInfo, location_name: "brokerNodeGroupInfo"))
@@ -308,6 +338,18 @@ module Aws::Kafka
     CreateClusterResponse.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
     CreateClusterResponse.struct_class = Types::CreateClusterResponse
 
+    CreateClusterV2Request.add_member(:cluster_name, Shapes::ShapeRef.new(shape: __stringMin1Max64, required: true, location_name: "clusterName"))
+    CreateClusterV2Request.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    CreateClusterV2Request.add_member(:provisioned, Shapes::ShapeRef.new(shape: ProvisionedRequest, location_name: "provisioned"))
+    CreateClusterV2Request.add_member(:serverless, Shapes::ShapeRef.new(shape: ServerlessRequest, location_name: "serverless"))
+    CreateClusterV2Request.struct_class = Types::CreateClusterV2Request
+
+    CreateClusterV2Response.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    CreateClusterV2Response.add_member(:cluster_name, Shapes::ShapeRef.new(shape: __string, location_name: "clusterName"))
+    CreateClusterV2Response.add_member(:state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "state"))
+    CreateClusterV2Response.add_member(:cluster_type, Shapes::ShapeRef.new(shape: ClusterType, location_name: "clusterType"))
+    CreateClusterV2Response.struct_class = Types::CreateClusterV2Response
+
     CreateConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateConfigurationRequest.add_member(:kafka_versions, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "kafkaVersions"))
     CreateConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
@@ -347,6 +389,12 @@ module Aws::Kafka
 
     DescribeClusterResponse.add_member(:cluster_info, Shapes::ShapeRef.new(shape: ClusterInfo, location_name: "clusterInfo"))
     DescribeClusterResponse.struct_class = Types::DescribeClusterResponse
+
+    DescribeClusterV2Request.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    DescribeClusterV2Request.struct_class = Types::DescribeClusterV2Request
+
+    DescribeClusterV2Response.add_member(:cluster_info, Shapes::ShapeRef.new(shape: Cluster, location_name: "clusterInfo"))
+    DescribeClusterV2Response.struct_class = Types::DescribeClusterV2Response
 
     DescribeConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
     DescribeConfigurationRequest.struct_class = Types::DescribeConfigurationRequest
@@ -454,6 +502,16 @@ module Aws::Kafka
     ListClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListClustersResponse.struct_class = Types::ListClustersResponse
 
+    ListClustersV2Request.add_member(:cluster_name_filter, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "clusterNameFilter"))
+    ListClustersV2Request.add_member(:cluster_type_filter, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "clusterTypeFilter"))
+    ListClustersV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListClustersV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListClustersV2Request.struct_class = Types::ListClustersV2Request
+
+    ListClustersV2Response.add_member(:cluster_info_list, Shapes::ShapeRef.new(shape: __listOfCluster, location_name: "clusterInfoList"))
+    ListClustersV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListClustersV2Response.struct_class = Types::ListClustersV2Response
+
     ListConfigurationRevisionsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
     ListConfigurationRevisionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListConfigurationRevisionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -551,6 +609,29 @@ module Aws::Kafka
     PrometheusInfo.add_member(:node_exporter, Shapes::ShapeRef.new(shape: NodeExporterInfo, location_name: "nodeExporter"))
     PrometheusInfo.struct_class = Types::PrometheusInfo
 
+    Provisioned.add_member(:broker_node_group_info, Shapes::ShapeRef.new(shape: BrokerNodeGroupInfo, required: true, location_name: "brokerNodeGroupInfo"))
+    Provisioned.add_member(:current_broker_software_info, Shapes::ShapeRef.new(shape: BrokerSoftwareInfo, location_name: "currentBrokerSoftwareInfo"))
+    Provisioned.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ClientAuthentication, location_name: "clientAuthentication"))
+    Provisioned.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
+    Provisioned.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
+    Provisioned.add_member(:open_monitoring, Shapes::ShapeRef.new(shape: OpenMonitoringInfo, location_name: "openMonitoring"))
+    Provisioned.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
+    Provisioned.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integerMin1Max15, required: true, location_name: "numberOfBrokerNodes"))
+    Provisioned.add_member(:zookeeper_connect_string, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectString"))
+    Provisioned.add_member(:zookeeper_connect_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "zookeeperConnectStringTls"))
+    Provisioned.struct_class = Types::Provisioned
+
+    ProvisionedRequest.add_member(:broker_node_group_info, Shapes::ShapeRef.new(shape: BrokerNodeGroupInfo, required: true, location_name: "brokerNodeGroupInfo"))
+    ProvisionedRequest.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ClientAuthentication, location_name: "clientAuthentication"))
+    ProvisionedRequest.add_member(:configuration_info, Shapes::ShapeRef.new(shape: ConfigurationInfo, location_name: "configurationInfo"))
+    ProvisionedRequest.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
+    ProvisionedRequest.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
+    ProvisionedRequest.add_member(:open_monitoring, Shapes::ShapeRef.new(shape: OpenMonitoringInfo, location_name: "openMonitoring"))
+    ProvisionedRequest.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __stringMin1Max128, required: true, location_name: "kafkaVersion"))
+    ProvisionedRequest.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
+    ProvisionedRequest.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integerMin1Max15, required: true, location_name: "numberOfBrokerNodes"))
+    ProvisionedRequest.struct_class = Types::ProvisionedRequest
+
     PublicAccess.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "type"))
     PublicAccess.struct_class = Types::PublicAccess
 
@@ -573,6 +654,20 @@ module Aws::Kafka
 
     Scram.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))
     Scram.struct_class = Types::Scram
+
+    Serverless.add_member(:vpc_configs, Shapes::ShapeRef.new(shape: __listOfVpcConfig, required: true, location_name: "vpcConfigs"))
+    Serverless.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ServerlessClientAuthentication, location_name: "clientAuthentication"))
+    Serverless.struct_class = Types::Serverless
+
+    ServerlessClientAuthentication.add_member(:sasl, Shapes::ShapeRef.new(shape: ServerlessSasl, location_name: "sasl"))
+    ServerlessClientAuthentication.struct_class = Types::ServerlessClientAuthentication
+
+    ServerlessRequest.add_member(:vpc_configs, Shapes::ShapeRef.new(shape: __listOfVpcConfig, required: true, location_name: "vpcConfigs"))
+    ServerlessRequest.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ServerlessClientAuthentication, location_name: "clientAuthentication"))
+    ServerlessRequest.struct_class = Types::ServerlessRequest
+
+    ServerlessSasl.add_member(:iam, Shapes::ShapeRef.new(shape: Iam, location_name: "iam"))
+    ServerlessSasl.struct_class = Types::ServerlessSasl
 
     ServiceUnavailableException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -698,6 +793,10 @@ module Aws::Kafka
     UpdateSecurityResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
     UpdateSecurityResponse.struct_class = Types::UpdateSecurityResponse
 
+    VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "subnetIds"))
+    VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroupIds"))
+    VpcConfig.struct_class = Types::VpcConfig
+
     ZookeeperNodeInfo.add_member(:attached_eni_id, Shapes::ShapeRef.new(shape: __string, location_name: "attachedENIId"))
     ZookeeperNodeInfo.add_member(:client_vpc_ip_address, Shapes::ShapeRef.new(shape: __string, location_name: "clientVpcIpAddress"))
     ZookeeperNodeInfo.add_member(:endpoints, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "endpoints"))
@@ -706,6 +805,8 @@ module Aws::Kafka
     ZookeeperNodeInfo.struct_class = Types::ZookeeperNodeInfo
 
     __listOfBrokerEBSVolumeInfo.member = Shapes::ShapeRef.new(shape: BrokerEBSVolumeInfo)
+
+    __listOfCluster.member = Shapes::ShapeRef.new(shape: Cluster)
 
     __listOfClusterInfo.member = Shapes::ShapeRef.new(shape: ClusterInfo)
 
@@ -724,6 +825,8 @@ module Aws::Kafka
     __listOfNodeInfo.member = Shapes::ShapeRef.new(shape: NodeInfo)
 
     __listOfUnprocessedScramSecret.member = Shapes::ShapeRef.new(shape: UnprocessedScramSecret)
+
+    __listOfVpcConfig.member = Shapes::ShapeRef.new(shape: VpcConfig)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
@@ -779,6 +882,21 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:create_cluster_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateClusterV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/api/v2/clusters"
+        o.input = Shapes::ShapeRef.new(shape: CreateClusterV2Request)
+        o.output = Shapes::ShapeRef.new(shape: CreateClusterV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateConfiguration"
         o.http_method = "POST"
@@ -824,6 +942,19 @@ module Aws::Kafka
         o.http_request_uri = "/v1/clusters/{clusterArn}"
         o.input = Shapes::ShapeRef.new(shape: DescribeClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClusterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:describe_cluster_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClusterV2"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/v2/clusters/{clusterArn}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClusterV2Request)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClusterV2Response)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -939,6 +1070,24 @@ module Aws::Kafka
         o.http_request_uri = "/v1/clusters"
         o.input = Shapes::ShapeRef.new(shape: ListClustersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListClustersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_clusters_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListClustersV2"
+        o.http_method = "GET"
+        o.http_request_uri = "/api/v2/clusters"
+        o.input = Shapes::ShapeRef.new(shape: ListClustersV2Request)
+        o.output = Shapes::ShapeRef.new(shape: ListClustersV2Response)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2021-11-30)
+------------------
+
+* Feature - Added gateway type VTL_SNOW. Added new SNOWBALL HostEnvironment for gateways running on a Snowball device. Added new field HostEnvironmentId to serve as an identifier for the HostEnvironment on which the gateway is running.
+
 1.62.0 (2021-11-04)
 ------------------
 

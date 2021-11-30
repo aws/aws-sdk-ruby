@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2021-11-30)
+------------------
+
+* Feature - Introduce Amazon S3 Glacier Instant Retrieval storage class and a new setting in S3 Object Ownership to disable ACLs for bucket and the objects in it.
+
 1.108.0 (2021-11-29)
 ------------------
 

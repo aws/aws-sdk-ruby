@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.285.0 (2021-11-30)
+------------------
+
+* Feature - This release adds support for Is4gen and Im4gn instances. This release also adds a new subnet attribute, enableLniAtDeviceIndex, to support local network interfaces, which are logical networking components that connect an EC2 instance to your on-premises network.
+
 1.284.0 (2021-11-29)
 ------------------
 

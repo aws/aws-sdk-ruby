@@ -261,6 +261,7 @@ module Aws::Outposts
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         supported_hardware_type: "RACK", # accepts RACK, SERVER
     #       }
     #
     # @!attribute [rw] name
@@ -287,6 +288,10 @@ module Aws::Outposts
     #   The tags to apply to the Outpost.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] supported_hardware_type
+    #   The type of hardware for this Outpost.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOutpostInput AWS API Documentation
     #
     class CreateOutpostInput < Struct.new(
@@ -295,7 +300,8 @@ module Aws::Outposts
       :site_id,
       :availability_zone,
       :availability_zone_id,
-      :tags)
+      :tags,
+      :supported_hardware_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1253,6 +1259,10 @@ module Aws::Outposts
     #   The Amazon Resource Name (ARN) of the site.
     #   @return [String]
     #
+    # @!attribute [rw] supported_hardware_type
+    #   The hardware type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Outpost AWS API Documentation
     #
     class Outpost < Struct.new(
@@ -1266,7 +1276,8 @@ module Aws::Outposts
       :availability_zone,
       :availability_zone_id,
       :tags,
-      :site_arn)
+      :site_arn,
+      :supported_hardware_type)
       SENSITIVE = []
       include Aws::Structure
     end

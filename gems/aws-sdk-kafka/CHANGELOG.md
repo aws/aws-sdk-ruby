@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2021-11-30)
+------------------
+
+* Feature - This release adds three new V2 APIs. CreateClusterV2 for creating both provisioned and serverless clusters. DescribeClusterV2 for getting information about provisioned and serverless clusters and ListClustersV2 for listing all clusters (both provisioned and serverless) in your account.
+
 1.44.0 (2021-11-18)
 ------------------
 

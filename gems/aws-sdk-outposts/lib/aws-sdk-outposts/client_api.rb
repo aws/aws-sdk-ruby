@@ -133,6 +133,7 @@ module Aws::Outposts
     SkuCode = Shapes::StringShape.new(name: 'SkuCode')
     StateOrRegion = Shapes::StringShape.new(name: 'StateOrRegion')
     String = Shapes::StringShape.new(name: 'String')
+    SupportedHardwareType = Shapes::StringShape.new(name: 'SupportedHardwareType')
     SupportedStorageEnum = Shapes::StringShape.new(name: 'SupportedStorageEnum')
     SupportedStorageList = Shapes::ListShape.new(name: 'SupportedStorageList')
     SupportedUplinkGbps = Shapes::IntegerShape.new(name: 'SupportedUplinkGbps')
@@ -216,6 +217,7 @@ module Aws::Outposts
     CreateOutpostInput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone"))
     CreateOutpostInput.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     CreateOutpostInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateOutpostInput.add_member(:supported_hardware_type, Shapes::ShapeRef.new(shape: SupportedHardwareType, location_name: "SupportedHardwareType"))
     CreateOutpostInput.struct_class = Types::CreateOutpostInput
 
     CreateOutpostOutput.add_member(:outpost, Shapes::ShapeRef.new(shape: Outpost, location_name: "Outpost"))
@@ -402,6 +404,7 @@ module Aws::Outposts
     Outpost.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     Outpost.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Outpost.add_member(:site_arn, Shapes::ShapeRef.new(shape: SiteArn, location_name: "SiteArn"))
+    Outpost.add_member(:supported_hardware_type, Shapes::ShapeRef.new(shape: SupportedHardwareType, location_name: "SupportedHardwareType"))
     Outpost.struct_class = Types::Outpost
 
     RackPhysicalProperties.add_member(:power_draw_kva, Shapes::ShapeRef.new(shape: PowerDrawKva, location_name: "PowerDrawKva"))

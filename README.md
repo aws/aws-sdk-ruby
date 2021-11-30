@@ -303,6 +303,7 @@ RubyGems.org page under "LINKS" section.
 | AWS Audit Manager                                     | Aws::AuditManager                        | aws-sdk-auditmanager                        | 2017-07-25  |
 | AWS Auto Scaling Plans                                | Aws::AutoScalingPlans                    | aws-sdk-autoscalingplans                    | 2018-01-06  |
 | AWS Backup                                            | Aws::Backup                              | aws-sdk-backup                              | 2018-11-15  |
+| AWS Backup Gateway                                    | Aws::BackupGateway                       | aws-sdk-backupgateway                       | 2021-01-01  |
 | AWS Batch                                             | Aws::Batch                               | aws-sdk-batch                               | 2016-08-10  |
 | AWS Budgets                                           | Aws::Budgets                             | aws-sdk-budgets                             | 2016-10-20  |
 | AWS Certificate Manager                               | Aws::ACM                                 | aws-sdk-acm                                 | 2015-12-08  |
@@ -363,6 +364,7 @@ RubyGems.org page under "LINKS" section.
 | AWS IoT Secure Tunneling                              | Aws::IoTSecureTunneling                  | aws-sdk-iotsecuretunneling                  | 2018-10-05  |
 | AWS IoT SiteWise                                      | Aws::IoTSiteWise                         | aws-sdk-iotsitewise                         | 2019-12-02  |
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                      | aws-sdk-iotthingsgraph                      | 2018-09-06  |
+| AWS IoT TwinMaker                                     | Aws::IoTTwinMaker                        | aws-sdk-iottwinmaker                        | 2021-11-29  |
 | AWS IoT Wireless                                      | Aws::IoTWireless                         | aws-sdk-iotwireless                         | 2020-11-22  |
 | AWS Key Management Service                            | Aws::KMS                                 | aws-sdk-kms                                 | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                       | aws-sdk-lakeformation                       | 2017-03-31  |
@@ -561,6 +563,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon WorkMail                                       | Aws::WorkMail                            | aws-sdk-workmail                            | 2017-10-01  |
 | Amazon WorkMail Message Flow                          | Aws::WorkMailMessageFlow                 | aws-sdk-workmailmessageflow                 | 2019-05-01  |
 | Amazon WorkSpaces                                     | Aws::WorkSpaces                          | aws-sdk-workspaces                          | 2015-04-08  |
+| Amazon WorkSpaces Web                                 | Aws::WorkSpacesWeb                       | aws-sdk-workspacesweb                       | 2020-07-08  |
 | AmazonApiGatewayManagementApi                         | Aws::ApiGatewayManagementApi             | aws-sdk-apigatewaymanagementapi             | 2018-11-29  |
 | AmazonApiGatewayV2                                    | Aws::ApiGatewayV2                        | aws-sdk-apigatewayv2                        | 2018-11-29  |
 | AmazonMQ                                              | Aws::MQ                                  | aws-sdk-mq                                  | 2017-11-27  |

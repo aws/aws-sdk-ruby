@@ -2867,10 +2867,11 @@ module Aws::AccessAnalyzer
     # without a policy. To propose deletion of an existing policy, you can
     # specify an empty string. If the proposed configuration is for a new
     # secret and you do not specify the KMS key ID, the access preview uses
-    # the default CMK of the Amazon Web Services account. If you specify an
-    # empty string for the KMS key ID, the access preview uses the default
-    # CMK of the Amazon Web Services account. For more information about
-    # secret policy limits, see [Quotas for Secrets Manager.][2].
+    # the Amazon Web Services managed key `aws/secretsmanager`. If you
+    # specify an empty string for the KMS key ID, the access preview uses
+    # the Amazon Web Services managed key of the Amazon Web Services
+    # account. For more information about secret policy limits, see [Quotas
+    # for Secrets Manager.][2].
     #
     #
     #
@@ -2886,8 +2887,7 @@ module Aws::AccessAnalyzer
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The proposed ARN, key ID, or alias of the KMS customer master key
-    #   (CMK).
+    #   The proposed ARN, key ID, or alias of the KMS key.
     #   @return [String]
     #
     # @!attribute [rw] secret_policy
@@ -3467,6 +3467,7 @@ module Aws::AccessAnalyzer
     #         next_token: "Token",
     #         policy_document: "PolicyDocument", # required
     #         policy_type: "IDENTITY_POLICY", # required, accepts IDENTITY_POLICY, RESOURCE_POLICY, SERVICE_CONTROL_POLICY
+    #         validate_policy_resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::S3::AccessPoint, AWS::S3::MultiRegionAccessPoint, AWS::S3ObjectLambda::AccessPoint
     #       }
     #
     # @!attribute [rw] locale
@@ -3499,6 +3500,21 @@ module Aws::AccessAnalyzer
     #   such as managed policy or Amazon S3 bucket policy.
     #   @return [String]
     #
+    # @!attribute [rw] validate_policy_resource_type
+    #   The type of resource to attach to your resource policy. Specify a
+    #   value for the policy validation resource type only if the policy
+    #   type is `RESOURCE_POLICY`. For example, to validate a resource
+    #   policy to attach to an Amazon S3 bucket, you can choose
+    #   `AWS::S3::Bucket` for the policy validation resource type.
+    #
+    #   For resource types not supported as valid values, IAM Access
+    #   Analyzer runs policy checks that apply to all resource policies. For
+    #   example, to validate a resource policy to attach to a KMS key, do
+    #   not specify a value for the policy validation resource type and IAM
+    #   Access Analyzer will run policy checks that apply to all resource
+    #   policies.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ValidatePolicyRequest AWS API Documentation
     #
     class ValidatePolicyRequest < Struct.new(
@@ -3506,7 +3522,8 @@ module Aws::AccessAnalyzer
       :max_results,
       :next_token,
       :policy_document,
-      :policy_type)
+      :policy_type,
+      :validate_policy_resource_type)
       SENSITIVE = []
       include Aws::Structure
     end

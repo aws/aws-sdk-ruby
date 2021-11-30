@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2021-11-30)
+------------------
+
+* Feature - Support for DataLake transactions
+
 1.99.0 (2021-11-04)
 ------------------
 

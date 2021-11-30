@@ -34,6 +34,7 @@ module Aws
   autoload :AutoScaling, 'aws-sdk-autoscaling'
   autoload :AutoScalingPlans, 'aws-sdk-autoscalingplans'
   autoload :Backup, 'aws-sdk-backup'
+  autoload :BackupGateway, 'aws-sdk-backupgateway'
   autoload :Batch, 'aws-sdk-batch'
   autoload :Braket, 'aws-sdk-braket'
   autoload :Budgets, 'aws-sdk-budgets'
@@ -154,6 +155,7 @@ module Aws
   autoload :IoTSecureTunneling, 'aws-sdk-iotsecuretunneling'
   autoload :IoTSiteWise, 'aws-sdk-iotsitewise'
   autoload :IoTThingsGraph, 'aws-sdk-iotthingsgraph'
+  autoload :IoTTwinMaker, 'aws-sdk-iottwinmaker'
   autoload :IoTWireless, 'aws-sdk-iotwireless'
   autoload :KMS, 'aws-sdk-kms'
   autoload :Kafka, 'aws-sdk-kafka'
@@ -301,6 +303,7 @@ module Aws
   autoload :WorkMail, 'aws-sdk-workmail'
   autoload :WorkMailMessageFlow, 'aws-sdk-workmailmessageflow'
   autoload :WorkSpaces, 'aws-sdk-workspaces'
+  autoload :WorkSpacesWeb, 'aws-sdk-workspacesweb'
   autoload :XRay, 'aws-sdk-xray'
   # end service gems
 end

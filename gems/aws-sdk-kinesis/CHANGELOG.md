@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-11-30)
+------------------
+
+* Feature - Amazon Kinesis Data Streams now supports on demand streams.
+
 1.37.0 (2021-11-04)
 ------------------
 

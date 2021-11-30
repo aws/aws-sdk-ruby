@@ -536,13 +536,13 @@ module Aws::S3
     #               {
     #                 date: Time.now,
     #                 days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #               },
     #             ],
     #             noncurrent_version_transitions: [
     #               {
     #                 noncurrent_days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #                 newer_noncurrent_versions: 1,
     #               },
     #             ],
@@ -1323,7 +1323,7 @@ module Aws::S3
     #         metadata_directive: "COPY", # accepts COPY, REPLACE
     #         tagging_directive: "COPY", # accepts COPY, REPLACE
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -1786,6 +1786,7 @@ module Aws::S3
     #         grant_write: "GrantWrite",
     #         grant_write_acp: "GrantWriteACP",
     #         object_lock_enabled_for_bucket: false,
+    #         object_ownership: "BucketOwnerPreferred", # accepts BucketOwnerPreferred, ObjectWriter, BucketOwnerEnforced
     #       }
     #
     # @!attribute [rw] acl
@@ -1829,6 +1830,25 @@ module Aws::S3
     #   bucket.
     #   @return [Boolean]
     #
+    # @!attribute [rw] object_ownership
+    #   The container element for object ownership for a bucket's ownership
+    #   controls.
+    #
+    #   BucketOwnerPreferred - Objects uploaded to the bucket change
+    #   ownership to the bucket owner if the objects are uploaded with the
+    #   `bucket-owner-full-control` canned ACL.
+    #
+    #   ObjectWriter - The uploading account will own the object if the
+    #   object is uploaded with the `bucket-owner-full-control` canned ACL.
+    #
+    #   BucketOwnerEnforced - Access control lists (ACLs) are disabled and
+    #   no longer affect permissions. The bucket owner automatically owns
+    #   and has full control over every object in the bucket. The bucket
+    #   only accepts PUT requests that don't specify an ACL or bucket owner
+    #   full control ACLs, such as the `bucket-owner-full-control` canned
+    #   ACL or an equivalent form of this ACL expressed in the XML format.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketRequest AWS API Documentation
     #
     class CreateBucketRequest < Struct.new(
@@ -1840,7 +1860,8 @@ module Aws::S3
       :grant_read_acp,
       :grant_write,
       :grant_write_acp,
-      :object_lock_enabled_for_bucket)
+      :object_lock_enabled_for_bucket,
+      :object_ownership)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1986,7 +2007,7 @@ module Aws::S3
     #           "MetadataKey" => "MetadataValue",
     #         },
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -3162,7 +3183,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         account: "AccountId",
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #         access_control_translation: {
     #           owner: "Destination", # required, accepts Destination
     #         },
@@ -4816,8 +4837,8 @@ module Aws::S3
     end
 
     # @!attribute [rw] ownership_controls
-    #   The `OwnershipControls` (BucketOwnerPreferred or ObjectWriter)
-    #   currently in effect for this Amazon S3 bucket.
+    #   The `OwnershipControls` (BucketOwnerEnforced, BucketOwnerPreferred,
+    #   or ObjectWriter) currently in effect for this Amazon S3 bucket.
     #   @return [Types::OwnershipControls]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketOwnershipControlsOutput AWS API Documentation
@@ -7337,11 +7358,11 @@ module Aws::S3
     #             transition: {
     #               date: Time.now,
     #               days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #             },
     #             noncurrent_version_transition: {
     #               noncurrent_days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #               newer_noncurrent_versions: 1,
     #             },
     #             noncurrent_version_expiration: {
@@ -7443,13 +7464,13 @@ module Aws::S3
     #           {
     #             date: Time.now,
     #             days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #           },
     #         ],
     #         noncurrent_version_transitions: [
     #           {
     #             noncurrent_days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #             newer_noncurrent_versions: 1,
     #           },
     #         ],
@@ -9008,6 +9029,15 @@ module Aws::S3
     #
     # @!attribute [rw] target_grants
     #   Container for granting information.
+    #
+    #   Buckets that use the bucket owner enforced setting for Object
+    #   Ownership don't support target grants. For more information, see
+    #   [Permissions for server access log delivery][1] in the *Amazon S3
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general
     #   @return [Array<Types::TargetGrant>]
     #
     # @!attribute [rw] target_prefix
@@ -9349,19 +9379,20 @@ module Aws::S3
 
     # Container for the transition rule that describes when noncurrent
     # objects transition to the `STANDARD_IA`, `ONEZONE_IA`,
-    # `INTELLIGENT_TIERING`, `GLACIER`, or `DEEP_ARCHIVE` storage class. If
-    # your bucket is versioning-enabled (or versioning is suspended), you
-    # can set this action to request that Amazon S3 transition noncurrent
-    # object versions to the `STANDARD_IA`, `ONEZONE_IA`,
-    # `INTELLIGENT_TIERING`, `GLACIER`, or `DEEP_ARCHIVE` storage class at a
-    # specific period in the object's lifetime.
+    # `INTELLIGENT_TIERING`, `GLACIER_IR`, `GLACIER`, or `DEEP_ARCHIVE`
+    # storage class. If your bucket is versioning-enabled (or versioning is
+    # suspended), you can set this action to request that Amazon S3
+    # transition noncurrent object versions to the `STANDARD_IA`,
+    # `ONEZONE_IA`, `INTELLIGENT_TIERING`, `GLACIER_IR`, `GLACIER`, or
+    # `DEEP_ARCHIVE` storage class at a specific period in the object's
+    # lifetime.
     #
     # @note When making an API call, you may pass NoncurrentVersionTransition
     #   data as a hash:
     #
     #       {
     #         noncurrent_days: 1,
-    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #         newer_noncurrent_versions: 1,
     #       }
     #
@@ -9894,7 +9925,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #         },
     #       }
     #
@@ -9981,7 +10012,7 @@ module Aws::S3
     #       {
     #         rules: [ # required
     #           {
-    #             object_ownership: "BucketOwnerPreferred", # required, accepts BucketOwnerPreferred, ObjectWriter
+    #             object_ownership: "BucketOwnerPreferred", # required, accepts BucketOwnerPreferred, ObjectWriter, BucketOwnerEnforced
     #           },
     #         ],
     #       }
@@ -10004,7 +10035,7 @@ module Aws::S3
     #   data as a hash:
     #
     #       {
-    #         object_ownership: "BucketOwnerPreferred", # required, accepts BucketOwnerPreferred, ObjectWriter
+    #         object_ownership: "BucketOwnerPreferred", # required, accepts BucketOwnerPreferred, ObjectWriter, BucketOwnerEnforced
     #       }
     #
     # @!attribute [rw] object_ownership
@@ -10017,6 +10048,13 @@ module Aws::S3
     #
     #   ObjectWriter - The uploading account will own the object if the
     #   object is uploaded with the `bucket-owner-full-control` canned ACL.
+    #
+    #   BucketOwnerEnforced - Access control lists (ACLs) are disabled and
+    #   no longer affect permissions. The bucket owner automatically owns
+    #   and has full control over every object in the bucket. The bucket
+    #   only accepts PUT requests that don't specify an ACL or bucket owner
+    #   full control ACLs, such as the `bucket-owner-full-control` canned
+    #   ACL or an equivalent form of this ACL expressed in the XML format.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/OwnershipControlsRule AWS API Documentation
@@ -10704,13 +10742,13 @@ module Aws::S3
     #                 {
     #                   date: Time.now,
     #                   days: 1,
-    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #                 },
     #               ],
     #               noncurrent_version_transitions: [
     #                 {
     #                   noncurrent_days: 1,
-    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #                   newer_noncurrent_versions: 1,
     #                 },
     #               ],
@@ -10771,11 +10809,11 @@ module Aws::S3
     #               transition: {
     #                 date: Time.now,
     #                 days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #               },
     #               noncurrent_version_transition: {
     #                 noncurrent_days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #                 newer_noncurrent_versions: 1,
     #               },
     #               noncurrent_version_expiration: {
@@ -11108,7 +11146,7 @@ module Aws::S3
     #         ownership_controls: { # required
     #           rules: [ # required
     #             {
-    #               object_ownership: "BucketOwnerPreferred", # required, accepts BucketOwnerPreferred, ObjectWriter
+    #               object_ownership: "BucketOwnerPreferred", # required, accepts BucketOwnerPreferred, ObjectWriter, BucketOwnerEnforced
     #             },
     #           ],
     #         },
@@ -11134,8 +11172,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ownership_controls
-    #   The `OwnershipControls` (BucketOwnerPreferred or ObjectWriter) that
-    #   you want to apply to this Amazon S3 bucket.
+    #   The `OwnershipControls` (BucketOwnerEnforced, BucketOwnerPreferred,
+    #   or ObjectWriter) that you want to apply to this Amazon S3 bucket.
     #   @return [Types::OwnershipControls]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketOwnershipControlsRequest AWS API Documentation
@@ -11243,7 +11281,7 @@ module Aws::S3
     #               destination: { # required
     #                 bucket: "BucketName", # required
     #                 account: "AccountId",
-    #                 storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #                 storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #                 access_control_translation: {
     #                   owner: "Destination", # required, accepts Destination
     #                 },
@@ -12053,7 +12091,7 @@ module Aws::S3
     #           "MetadataKey" => "MetadataValue",
     #         },
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -12977,7 +13015,7 @@ module Aws::S3
     #             destination: { # required
     #               bucket: "BucketName", # required
     #               account: "AccountId",
-    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #               access_control_translation: {
     #                 owner: "Destination", # required, accepts Destination
     #               },
@@ -13071,7 +13109,7 @@ module Aws::S3
     #         destination: { # required
     #           bucket: "BucketName", # required
     #           account: "AccountId",
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #           access_control_translation: {
     #             owner: "Destination", # required, accepts Destination
     #           },
@@ -13513,7 +13551,7 @@ module Aws::S3
     #                   value: "MetadataValue",
     #                 },
     #               ],
-    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #             },
     #           },
     #         },
@@ -13673,7 +13711,7 @@ module Aws::S3
     #                 value: "MetadataValue",
     #               },
     #             ],
-    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #           },
     #         },
     #       }
@@ -13798,11 +13836,11 @@ module Aws::S3
     #         transition: {
     #           date: Time.now,
     #           days: 1,
-    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #         },
     #         noncurrent_version_transition: {
     #           noncurrent_days: 1,
-    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #           newer_noncurrent_versions: 1,
     #         },
     #         noncurrent_version_expiration: {
@@ -13855,12 +13893,13 @@ module Aws::S3
     # @!attribute [rw] noncurrent_version_transition
     #   Container for the transition rule that describes when noncurrent
     #   objects transition to the `STANDARD_IA`, `ONEZONE_IA`,
-    #   `INTELLIGENT_TIERING`, `GLACIER`, or `DEEP_ARCHIVE` storage class.
-    #   If your bucket is versioning-enabled (or versioning is suspended),
-    #   you can set this action to request that Amazon S3 transition
-    #   noncurrent object versions to the `STANDARD_IA`, `ONEZONE_IA`,
-    #   `INTELLIGENT_TIERING`, `GLACIER`, or `DEEP_ARCHIVE` storage class at
-    #   a specific period in the object's lifetime.
+    #   `INTELLIGENT_TIERING`, `GLACIER_IR`, `GLACIER`, or `DEEP_ARCHIVE`
+    #   storage class. If your bucket is versioning-enabled (or versioning
+    #   is suspended), you can set this action to request that Amazon S3
+    #   transition noncurrent object versions to the `STANDARD_IA`,
+    #   `ONEZONE_IA`, `INTELLIGENT_TIERING`, `GLACIER_IR`, `GLACIER`, or
+    #   `DEEP_ARCHIVE` storage class at a specific period in the object's
+    #   lifetime.
     #   @return [Types::NoncurrentVersionTransition]
     #
     # @!attribute [rw] noncurrent_version_expiration
@@ -13967,7 +14006,7 @@ module Aws::S3
     #             value: "MetadataValue",
     #           },
     #         ],
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #       }
     #
     # @!attribute [rw] bucket_name
@@ -14704,6 +14743,15 @@ module Aws::S3
 
     # Container for granting information.
     #
+    # Buckets that use the bucket owner enforced setting for Object
+    # Ownership don't support target grants. For more information, see
+    # [Permissions server access log delivery][1] in the *Amazon S3 User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general
+    #
     # @note When making an API call, you may pass TargetGrant
     #   data as a hash:
     #
@@ -14905,7 +14953,7 @@ module Aws::S3
     #       {
     #         date: Time.now,
     #         days: 1,
-    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #       }
     #
     # @!attribute [rw] date
@@ -15543,7 +15591,7 @@ module Aws::S3
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         ssekms_key_id: "SSEKMSKeyId",
     #         sse_customer_key_md5: "SSECustomerKeyMD5",
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #         tag_count: 1,
     #         version_id: "ObjectVersionId",
     #         bucket_key_enabled: false,

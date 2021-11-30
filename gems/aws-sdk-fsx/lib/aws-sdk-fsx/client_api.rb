@@ -31,6 +31,8 @@ module Aws::FSx
     ArchivePath = Shapes::StringShape.new(name: 'ArchivePath')
     AssociateFileSystemAliasesRequest = Shapes::StructureShape.new(name: 'AssociateFileSystemAliasesRequest')
     AssociateFileSystemAliasesResponse = Shapes::StructureShape.new(name: 'AssociateFileSystemAliasesResponse')
+    AutoExportPolicy = Shapes::StructureShape.new(name: 'AutoExportPolicy')
+    AutoImportPolicy = Shapes::StructureShape.new(name: 'AutoImportPolicy')
     AutoImportPolicyType = Shapes::StringShape.new(name: 'AutoImportPolicyType')
     AutomaticBackupRetentionDays = Shapes::IntegerShape.new(name: 'AutomaticBackupRetentionDays')
     Backup = Shapes::StructureShape.new(name: 'Backup')
@@ -45,6 +47,7 @@ module Aws::FSx
     BackupType = Shapes::StringShape.new(name: 'BackupType')
     Backups = Shapes::ListShape.new(name: 'Backups')
     BadRequest = Shapes::StructureShape.new(name: 'BadRequest')
+    BatchImportMetaDataOnCreate = Shapes::BooleanShape.new(name: 'BatchImportMetaDataOnCreate')
     CancelDataRepositoryTaskRequest = Shapes::StructureShape.new(name: 'CancelDataRepositoryTaskRequest')
     CancelDataRepositoryTaskResponse = Shapes::StructureShape.new(name: 'CancelDataRepositoryTaskResponse')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
@@ -54,16 +57,23 @@ module Aws::FSx
     CopyBackupResponse = Shapes::StructureShape.new(name: 'CopyBackupResponse')
     CreateBackupRequest = Shapes::StructureShape.new(name: 'CreateBackupRequest')
     CreateBackupResponse = Shapes::StructureShape.new(name: 'CreateBackupResponse')
+    CreateDataRepositoryAssociationRequest = Shapes::StructureShape.new(name: 'CreateDataRepositoryAssociationRequest')
+    CreateDataRepositoryAssociationResponse = Shapes::StructureShape.new(name: 'CreateDataRepositoryAssociationResponse')
     CreateDataRepositoryTaskRequest = Shapes::StructureShape.new(name: 'CreateDataRepositoryTaskRequest')
     CreateDataRepositoryTaskResponse = Shapes::StructureShape.new(name: 'CreateDataRepositoryTaskResponse')
     CreateFileSystemFromBackupRequest = Shapes::StructureShape.new(name: 'CreateFileSystemFromBackupRequest')
     CreateFileSystemFromBackupResponse = Shapes::StructureShape.new(name: 'CreateFileSystemFromBackupResponse')
     CreateFileSystemLustreConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemLustreConfiguration')
     CreateFileSystemOntapConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemOntapConfiguration')
+    CreateFileSystemOpenZFSConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemOpenZFSConfiguration')
     CreateFileSystemRequest = Shapes::StructureShape.new(name: 'CreateFileSystemRequest')
     CreateFileSystemResponse = Shapes::StructureShape.new(name: 'CreateFileSystemResponse')
     CreateFileSystemWindowsConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemWindowsConfiguration')
     CreateOntapVolumeConfiguration = Shapes::StructureShape.new(name: 'CreateOntapVolumeConfiguration')
+    CreateOpenZFSOriginSnapshotConfiguration = Shapes::StructureShape.new(name: 'CreateOpenZFSOriginSnapshotConfiguration')
+    CreateOpenZFSVolumeConfiguration = Shapes::StructureShape.new(name: 'CreateOpenZFSVolumeConfiguration')
+    CreateSnapshotRequest = Shapes::StructureShape.new(name: 'CreateSnapshotRequest')
+    CreateSnapshotResponse = Shapes::StructureShape.new(name: 'CreateSnapshotResponse')
     CreateStorageVirtualMachineRequest = Shapes::StructureShape.new(name: 'CreateStorageVirtualMachineRequest')
     CreateStorageVirtualMachineResponse = Shapes::StructureShape.new(name: 'CreateStorageVirtualMachineResponse')
     CreateSvmActiveDirectoryConfiguration = Shapes::StructureShape.new(name: 'CreateSvmActiveDirectoryConfiguration')
@@ -75,6 +85,11 @@ module Aws::FSx
     DNSName = Shapes::StringShape.new(name: 'DNSName')
     DailyTime = Shapes::StringShape.new(name: 'DailyTime')
     DataCompressionType = Shapes::StringShape.new(name: 'DataCompressionType')
+    DataRepositoryAssociation = Shapes::StructureShape.new(name: 'DataRepositoryAssociation')
+    DataRepositoryAssociationId = Shapes::StringShape.new(name: 'DataRepositoryAssociationId')
+    DataRepositoryAssociationIds = Shapes::ListShape.new(name: 'DataRepositoryAssociationIds')
+    DataRepositoryAssociationNotFound = Shapes::StructureShape.new(name: 'DataRepositoryAssociationNotFound')
+    DataRepositoryAssociations = Shapes::ListShape.new(name: 'DataRepositoryAssociations')
     DataRepositoryConfiguration = Shapes::StructureShape.new(name: 'DataRepositoryConfiguration')
     DataRepositoryFailureDetails = Shapes::StructureShape.new(name: 'DataRepositoryFailureDetails')
     DataRepositoryLifecycle = Shapes::StringShape.new(name: 'DataRepositoryLifecycle')
@@ -96,26 +111,40 @@ module Aws::FSx
     DataRepositoryTasks = Shapes::ListShape.new(name: 'DataRepositoryTasks')
     DeleteBackupRequest = Shapes::StructureShape.new(name: 'DeleteBackupRequest')
     DeleteBackupResponse = Shapes::StructureShape.new(name: 'DeleteBackupResponse')
+    DeleteDataInFileSystem = Shapes::BooleanShape.new(name: 'DeleteDataInFileSystem')
+    DeleteDataRepositoryAssociationRequest = Shapes::StructureShape.new(name: 'DeleteDataRepositoryAssociationRequest')
+    DeleteDataRepositoryAssociationResponse = Shapes::StructureShape.new(name: 'DeleteDataRepositoryAssociationResponse')
     DeleteFileSystemLustreConfiguration = Shapes::StructureShape.new(name: 'DeleteFileSystemLustreConfiguration')
     DeleteFileSystemLustreResponse = Shapes::StructureShape.new(name: 'DeleteFileSystemLustreResponse')
+    DeleteFileSystemOpenZFSConfiguration = Shapes::StructureShape.new(name: 'DeleteFileSystemOpenZFSConfiguration')
+    DeleteFileSystemOpenZFSResponse = Shapes::StructureShape.new(name: 'DeleteFileSystemOpenZFSResponse')
     DeleteFileSystemRequest = Shapes::StructureShape.new(name: 'DeleteFileSystemRequest')
     DeleteFileSystemResponse = Shapes::StructureShape.new(name: 'DeleteFileSystemResponse')
     DeleteFileSystemWindowsConfiguration = Shapes::StructureShape.new(name: 'DeleteFileSystemWindowsConfiguration')
     DeleteFileSystemWindowsResponse = Shapes::StructureShape.new(name: 'DeleteFileSystemWindowsResponse')
+    DeleteOpenZFSVolumeOption = Shapes::StringShape.new(name: 'DeleteOpenZFSVolumeOption')
+    DeleteOpenZFSVolumeOptions = Shapes::ListShape.new(name: 'DeleteOpenZFSVolumeOptions')
+    DeleteSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteSnapshotRequest')
+    DeleteSnapshotResponse = Shapes::StructureShape.new(name: 'DeleteSnapshotResponse')
     DeleteStorageVirtualMachineRequest = Shapes::StructureShape.new(name: 'DeleteStorageVirtualMachineRequest')
     DeleteStorageVirtualMachineResponse = Shapes::StructureShape.new(name: 'DeleteStorageVirtualMachineResponse')
     DeleteVolumeOntapConfiguration = Shapes::StructureShape.new(name: 'DeleteVolumeOntapConfiguration')
     DeleteVolumeOntapResponse = Shapes::StructureShape.new(name: 'DeleteVolumeOntapResponse')
+    DeleteVolumeOpenZFSConfiguration = Shapes::StructureShape.new(name: 'DeleteVolumeOpenZFSConfiguration')
     DeleteVolumeRequest = Shapes::StructureShape.new(name: 'DeleteVolumeRequest')
     DeleteVolumeResponse = Shapes::StructureShape.new(name: 'DeleteVolumeResponse')
     DescribeBackupsRequest = Shapes::StructureShape.new(name: 'DescribeBackupsRequest')
     DescribeBackupsResponse = Shapes::StructureShape.new(name: 'DescribeBackupsResponse')
+    DescribeDataRepositoryAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeDataRepositoryAssociationsRequest')
+    DescribeDataRepositoryAssociationsResponse = Shapes::StructureShape.new(name: 'DescribeDataRepositoryAssociationsResponse')
     DescribeDataRepositoryTasksRequest = Shapes::StructureShape.new(name: 'DescribeDataRepositoryTasksRequest')
     DescribeDataRepositoryTasksResponse = Shapes::StructureShape.new(name: 'DescribeDataRepositoryTasksResponse')
     DescribeFileSystemAliasesRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemAliasesRequest')
     DescribeFileSystemAliasesResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemAliasesResponse')
     DescribeFileSystemsRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemsRequest')
     DescribeFileSystemsResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemsResponse')
+    DescribeSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotsRequest')
+    DescribeSnapshotsResponse = Shapes::StructureShape.new(name: 'DescribeSnapshotsResponse')
     DescribeStorageVirtualMachinesRequest = Shapes::StructureShape.new(name: 'DescribeStorageVirtualMachinesRequest')
     DescribeStorageVirtualMachinesResponse = Shapes::StructureShape.new(name: 'DescribeStorageVirtualMachinesResponse')
     DescribeVolumesRequest = Shapes::StructureShape.new(name: 'DescribeVolumesRequest')
@@ -131,6 +160,8 @@ module Aws::FSx
     DriveCacheType = Shapes::StringShape.new(name: 'DriveCacheType')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    EventType = Shapes::StringShape.new(name: 'EventType')
+    EventTypes = Shapes::ListShape.new(name: 'EventTypes')
     FailedCount = Shapes::IntegerShape.new(name: 'FailedCount')
     FileSystem = Shapes::StructureShape.new(name: 'FileSystem')
     FileSystemAdministratorsGroupName = Shapes::StringShape.new(name: 'FileSystemAdministratorsGroupName')
@@ -156,7 +187,9 @@ module Aws::FSx
     GeneralARN = Shapes::StringShape.new(name: 'GeneralARN')
     IncompatibleParameterError = Shapes::StructureShape.new(name: 'IncompatibleParameterError')
     IncompatibleRegionForMultiAZ = Shapes::StructureShape.new(name: 'IncompatibleRegionForMultiAZ')
+    IntegerNoMax = Shapes::IntegerShape.new(name: 'IntegerNoMax')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
+    InvalidDataRepositoryType = Shapes::StructureShape.new(name: 'InvalidDataRepositoryType')
     InvalidDestinationKmsKey = Shapes::StructureShape.new(name: 'InvalidDestinationKmsKey')
     InvalidExportPath = Shapes::StructureShape.new(name: 'InvalidExportPath')
     InvalidImportPath = Shapes::StructureShape.new(name: 'InvalidImportPath')
@@ -171,16 +204,21 @@ module Aws::FSx
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
     LifecycleTransitionReason = Shapes::StructureShape.new(name: 'LifecycleTransitionReason')
+    LimitedMaxResults = Shapes::IntegerShape.new(name: 'LimitedMaxResults')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LustreAccessAuditLogLevel = Shapes::StringShape.new(name: 'LustreAccessAuditLogLevel')
     LustreDeploymentType = Shapes::StringShape.new(name: 'LustreDeploymentType')
     LustreFileSystemConfiguration = Shapes::StructureShape.new(name: 'LustreFileSystemConfiguration')
     LustreFileSystemMountName = Shapes::StringShape.new(name: 'LustreFileSystemMountName')
+    LustreLogConfiguration = Shapes::StructureShape.new(name: 'LustreLogConfiguration')
+    LustreLogCreateConfiguration = Shapes::StructureShape.new(name: 'LustreLogCreateConfiguration')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Megabytes = Shapes::IntegerShape.new(name: 'Megabytes')
     MegabytesPerSecond = Shapes::IntegerShape.new(name: 'MegabytesPerSecond')
     MissingFileSystemConfiguration = Shapes::StructureShape.new(name: 'MissingFileSystemConfiguration')
     MissingVolumeConfiguration = Shapes::StructureShape.new(name: 'MissingVolumeConfiguration')
+    Namespace = Shapes::StringShape.new(name: 'Namespace')
     NetBiosAlias = Shapes::StringShape.new(name: 'NetBiosAlias')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaceIds = Shapes::ListShape.new(name: 'NetworkInterfaceIds')
@@ -191,11 +229,31 @@ module Aws::FSx
     OntapFileSystemConfiguration = Shapes::StructureShape.new(name: 'OntapFileSystemConfiguration')
     OntapVolumeConfiguration = Shapes::StructureShape.new(name: 'OntapVolumeConfiguration')
     OntapVolumeType = Shapes::StringShape.new(name: 'OntapVolumeType')
+    OpenZFSClientConfiguration = Shapes::StructureShape.new(name: 'OpenZFSClientConfiguration')
+    OpenZFSClientConfigurations = Shapes::ListShape.new(name: 'OpenZFSClientConfigurations')
+    OpenZFSClients = Shapes::StringShape.new(name: 'OpenZFSClients')
+    OpenZFSCopyStrategy = Shapes::StringShape.new(name: 'OpenZFSCopyStrategy')
+    OpenZFSCreateRootVolumeConfiguration = Shapes::StructureShape.new(name: 'OpenZFSCreateRootVolumeConfiguration')
+    OpenZFSDataCompressionType = Shapes::StringShape.new(name: 'OpenZFSDataCompressionType')
+    OpenZFSDeploymentType = Shapes::StringShape.new(name: 'OpenZFSDeploymentType')
+    OpenZFSFileSystemConfiguration = Shapes::StructureShape.new(name: 'OpenZFSFileSystemConfiguration')
+    OpenZFSNfsExport = Shapes::StructureShape.new(name: 'OpenZFSNfsExport')
+    OpenZFSNfsExportOption = Shapes::StringShape.new(name: 'OpenZFSNfsExportOption')
+    OpenZFSNfsExportOptions = Shapes::ListShape.new(name: 'OpenZFSNfsExportOptions')
+    OpenZFSNfsExports = Shapes::ListShape.new(name: 'OpenZFSNfsExports')
+    OpenZFSOriginSnapshotConfiguration = Shapes::StructureShape.new(name: 'OpenZFSOriginSnapshotConfiguration')
+    OpenZFSQuotaType = Shapes::StringShape.new(name: 'OpenZFSQuotaType')
+    OpenZFSUserAndGroupQuotas = Shapes::ListShape.new(name: 'OpenZFSUserAndGroupQuotas')
+    OpenZFSUserOrGroupQuota = Shapes::StructureShape.new(name: 'OpenZFSUserOrGroupQuota')
+    OpenZFSVolumeConfiguration = Shapes::StructureShape.new(name: 'OpenZFSVolumeConfiguration')
     OrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'OrganizationalUnitDistinguishedName')
     Parameter = Shapes::StringShape.new(name: 'Parameter')
     PerUnitStorageThroughput = Shapes::IntegerShape.new(name: 'PerUnitStorageThroughput')
     ProgressPercent = Shapes::IntegerShape.new(name: 'ProgressPercent')
+    ReadOnly = Shapes::BooleanShape.new(name: 'ReadOnly')
     Region = Shapes::StringShape.new(name: 'Region')
+    ReleaseFileSystemNfsV3LocksRequest = Shapes::StructureShape.new(name: 'ReleaseFileSystemNfsV3LocksRequest')
+    ReleaseFileSystemNfsV3LocksResponse = Shapes::StructureShape.new(name: 'ReleaseFileSystemNfsV3LocksResponse')
     ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
     ReportScope = Shapes::StringShape.new(name: 'ReportScope')
     RequestTime = Shapes::TimestampShape.new(name: 'RequestTime')
@@ -203,8 +261,13 @@ module Aws::FSx
     ResourceDoesNotSupportTagging = Shapes::StructureShape.new(name: 'ResourceDoesNotSupportTagging')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    RestoreOpenZFSVolumeOption = Shapes::StringShape.new(name: 'RestoreOpenZFSVolumeOption')
+    RestoreOpenZFSVolumeOptions = Shapes::ListShape.new(name: 'RestoreOpenZFSVolumeOptions')
+    RestoreVolumeFromSnapshotRequest = Shapes::StructureShape.new(name: 'RestoreVolumeFromSnapshotRequest')
+    RestoreVolumeFromSnapshotResponse = Shapes::StructureShape.new(name: 'RestoreVolumeFromSnapshotResponse')
     RouteTableId = Shapes::StringShape.new(name: 'RouteTableId')
     RouteTableIds = Shapes::ListShape.new(name: 'RouteTableIds')
+    S3DataRepositoryConfiguration = Shapes::StructureShape.new(name: 'S3DataRepositoryConfiguration')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SecurityStyle = Shapes::StringShape.new(name: 'SecurityStyle')
@@ -213,6 +276,18 @@ module Aws::FSx
     SelfManagedActiveDirectoryConfigurationUpdates = Shapes::StructureShape.new(name: 'SelfManagedActiveDirectoryConfigurationUpdates')
     ServiceLimit = Shapes::StringShape.new(name: 'ServiceLimit')
     ServiceLimitExceeded = Shapes::StructureShape.new(name: 'ServiceLimitExceeded')
+    Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
+    SnapshotFilter = Shapes::StructureShape.new(name: 'SnapshotFilter')
+    SnapshotFilterName = Shapes::StringShape.new(name: 'SnapshotFilterName')
+    SnapshotFilterValue = Shapes::StringShape.new(name: 'SnapshotFilterValue')
+    SnapshotFilterValues = Shapes::ListShape.new(name: 'SnapshotFilterValues')
+    SnapshotFilters = Shapes::ListShape.new(name: 'SnapshotFilters')
+    SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
+    SnapshotIds = Shapes::ListShape.new(name: 'SnapshotIds')
+    SnapshotLifecycle = Shapes::StringShape.new(name: 'SnapshotLifecycle')
+    SnapshotName = Shapes::StringShape.new(name: 'SnapshotName')
+    SnapshotNotFound = Shapes::StructureShape.new(name: 'SnapshotNotFound')
+    Snapshots = Shapes::ListShape.new(name: 'Snapshots')
     SourceBackupId = Shapes::StringShape.new(name: 'SourceBackupId')
     SourceBackupUnavailable = Shapes::StructureShape.new(name: 'SourceBackupUnavailable')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
@@ -255,12 +330,18 @@ module Aws::FSx
     UnsupportedOperation = Shapes::StructureShape.new(name: 'UnsupportedOperation')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateDataRepositoryAssociationRequest = Shapes::StructureShape.new(name: 'UpdateDataRepositoryAssociationRequest')
+    UpdateDataRepositoryAssociationResponse = Shapes::StructureShape.new(name: 'UpdateDataRepositoryAssociationResponse')
     UpdateFileSystemLustreConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemLustreConfiguration')
     UpdateFileSystemOntapConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemOntapConfiguration')
+    UpdateFileSystemOpenZFSConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemOpenZFSConfiguration')
     UpdateFileSystemRequest = Shapes::StructureShape.new(name: 'UpdateFileSystemRequest')
     UpdateFileSystemResponse = Shapes::StructureShape.new(name: 'UpdateFileSystemResponse')
     UpdateFileSystemWindowsConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemWindowsConfiguration')
     UpdateOntapVolumeConfiguration = Shapes::StructureShape.new(name: 'UpdateOntapVolumeConfiguration')
+    UpdateOpenZFSVolumeConfiguration = Shapes::StructureShape.new(name: 'UpdateOpenZFSVolumeConfiguration')
+    UpdateSnapshotRequest = Shapes::StructureShape.new(name: 'UpdateSnapshotRequest')
+    UpdateSnapshotResponse = Shapes::StructureShape.new(name: 'UpdateSnapshotResponse')
     UpdateStorageVirtualMachineRequest = Shapes::StructureShape.new(name: 'UpdateStorageVirtualMachineRequest')
     UpdateStorageVirtualMachineResponse = Shapes::StructureShape.new(name: 'UpdateStorageVirtualMachineResponse')
     UpdateSvmActiveDirectoryConfiguration = Shapes::StructureShape.new(name: 'UpdateSvmActiveDirectoryConfiguration')
@@ -278,6 +359,7 @@ module Aws::FSx
     VolumeLifecycle = Shapes::StringShape.new(name: 'VolumeLifecycle')
     VolumeName = Shapes::StringShape.new(name: 'VolumeName')
     VolumeNotFound = Shapes::StructureShape.new(name: 'VolumeNotFound')
+    VolumePath = Shapes::StringShape.new(name: 'VolumePath')
     VolumeType = Shapes::StringShape.new(name: 'VolumeType')
     Volumes = Shapes::ListShape.new(name: 'Volumes')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
@@ -305,6 +387,7 @@ module Aws::FSx
     AdministrativeAction.add_member(:target_file_system_values, Shapes::ShapeRef.new(shape: FileSystem, location_name: "TargetFileSystemValues"))
     AdministrativeAction.add_member(:failure_details, Shapes::ShapeRef.new(shape: AdministrativeActionFailureDetails, location_name: "FailureDetails"))
     AdministrativeAction.add_member(:target_volume_values, Shapes::ShapeRef.new(shape: Volume, location_name: "TargetVolumeValues"))
+    AdministrativeAction.add_member(:target_snapshot_values, Shapes::ShapeRef.new(shape: Snapshot, location_name: "TargetSnapshotValues"))
     AdministrativeAction.struct_class = Types::AdministrativeAction
 
     AdministrativeActionFailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -327,6 +410,12 @@ module Aws::FSx
 
     AssociateFileSystemAliasesResponse.add_member(:aliases, Shapes::ShapeRef.new(shape: Aliases, location_name: "Aliases"))
     AssociateFileSystemAliasesResponse.struct_class = Types::AssociateFileSystemAliasesResponse
+
+    AutoExportPolicy.add_member(:events, Shapes::ShapeRef.new(shape: EventTypes, location_name: "Events"))
+    AutoExportPolicy.struct_class = Types::AutoExportPolicy
+
+    AutoImportPolicy.add_member(:events, Shapes::ShapeRef.new(shape: EventTypes, location_name: "Events"))
+    AutoImportPolicy.struct_class = Types::AutoImportPolicy
 
     Backup.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
     Backup.add_member(:lifecycle, Shapes::ShapeRef.new(shape: BackupLifecycle, required: true, location_name: "Lifecycle"))
@@ -403,6 +492,19 @@ module Aws::FSx
     CreateBackupResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
     CreateBackupResponse.struct_class = Types::CreateBackupResponse
 
+    CreateDataRepositoryAssociationRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    CreateDataRepositoryAssociationRequest.add_member(:file_system_path, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "FileSystemPath"))
+    CreateDataRepositoryAssociationRequest.add_member(:data_repository_path, Shapes::ShapeRef.new(shape: ArchivePath, required: true, location_name: "DataRepositoryPath"))
+    CreateDataRepositoryAssociationRequest.add_member(:batch_import_meta_data_on_create, Shapes::ShapeRef.new(shape: BatchImportMetaDataOnCreate, location_name: "BatchImportMetaDataOnCreate"))
+    CreateDataRepositoryAssociationRequest.add_member(:imported_file_chunk_size, Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
+    CreateDataRepositoryAssociationRequest.add_member(:s3, Shapes::ShapeRef.new(shape: S3DataRepositoryConfiguration, location_name: "S3"))
+    CreateDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateDataRepositoryAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateDataRepositoryAssociationRequest.struct_class = Types::CreateDataRepositoryAssociationRequest
+
+    CreateDataRepositoryAssociationResponse.add_member(:association, Shapes::ShapeRef.new(shape: DataRepositoryAssociation, location_name: "Association"))
+    CreateDataRepositoryAssociationResponse.struct_class = Types::CreateDataRepositoryAssociationResponse
+
     CreateDataRepositoryTaskRequest.add_member(:type, Shapes::ShapeRef.new(shape: DataRepositoryTaskType, required: true, location_name: "Type"))
     CreateDataRepositoryTaskRequest.add_member(:paths, Shapes::ShapeRef.new(shape: DataRepositoryTaskPaths, location_name: "Paths"))
     CreateDataRepositoryTaskRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
@@ -424,6 +526,7 @@ module Aws::FSx
     CreateFileSystemFromBackupRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
     CreateFileSystemFromBackupRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateFileSystemFromBackupRequest.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
+    CreateFileSystemFromBackupRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
     CreateFileSystemFromBackupRequest.struct_class = Types::CreateFileSystemFromBackupRequest
 
     CreateFileSystemFromBackupResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -441,6 +544,7 @@ module Aws::FSx
     CreateFileSystemLustreConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     CreateFileSystemLustreConfiguration.add_member(:drive_cache_type, Shapes::ShapeRef.new(shape: DriveCacheType, location_name: "DriveCacheType"))
     CreateFileSystemLustreConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
+    CreateFileSystemLustreConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LustreLogCreateConfiguration, location_name: "LogConfiguration"))
     CreateFileSystemLustreConfiguration.struct_class = Types::CreateFileSystemLustreConfiguration
 
     CreateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
@@ -455,6 +559,17 @@ module Aws::FSx
     CreateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     CreateFileSystemOntapConfiguration.struct_class = Types::CreateFileSystemOntapConfiguration
 
+    CreateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_volumes, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToVolumes"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: OpenZFSDeploymentType, required: true, location_name: "DeploymentType"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, required: true, location_name: "ThroughputCapacity"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    CreateFileSystemOpenZFSConfiguration.add_member(:root_volume_configuration, Shapes::ShapeRef.new(shape: OpenZFSCreateRootVolumeConfiguration, location_name: "RootVolumeConfiguration"))
+    CreateFileSystemOpenZFSConfiguration.struct_class = Types::CreateFileSystemOpenZFSConfiguration
+
     CreateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateFileSystemRequest.add_member(:file_system_type, Shapes::ShapeRef.new(shape: FileSystemType, required: true, location_name: "FileSystemType"))
     CreateFileSystemRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, required: true, location_name: "StorageCapacity"))
@@ -467,6 +582,7 @@ module Aws::FSx
     CreateFileSystemRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
     CreateFileSystemRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
     CreateFileSystemRequest.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
+    CreateFileSystemRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
     CreateFileSystemRequest.struct_class = Types::CreateFileSystemRequest
 
     CreateFileSystemResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -492,6 +608,30 @@ module Aws::FSx
     CreateOntapVolumeConfiguration.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
     CreateOntapVolumeConfiguration.add_member(:tiering_policy, Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
     CreateOntapVolumeConfiguration.struct_class = Types::CreateOntapVolumeConfiguration
+
+    CreateOpenZFSOriginSnapshotConfiguration.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "SnapshotARN"))
+    CreateOpenZFSOriginSnapshotConfiguration.add_member(:copy_strategy, Shapes::ShapeRef.new(shape: OpenZFSCopyStrategy, required: true, location_name: "CopyStrategy"))
+    CreateOpenZFSOriginSnapshotConfiguration.struct_class = Types::CreateOpenZFSOriginSnapshotConfiguration
+
+    CreateOpenZFSVolumeConfiguration.add_member(:parent_volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "ParentVolumeId"))
+    CreateOpenZFSVolumeConfiguration.add_member(:storage_capacity_reservation_gi_b, Shapes::ShapeRef.new(shape: IntegerNoMax, location_name: "StorageCapacityReservationGiB"))
+    CreateOpenZFSVolumeConfiguration.add_member(:storage_capacity_quota_gi_b, Shapes::ShapeRef.new(shape: IntegerNoMax, location_name: "StorageCapacityQuotaGiB"))
+    CreateOpenZFSVolumeConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
+    CreateOpenZFSVolumeConfiguration.add_member(:copy_tags_to_snapshots, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToSnapshots"))
+    CreateOpenZFSVolumeConfiguration.add_member(:origin_snapshot, Shapes::ShapeRef.new(shape: CreateOpenZFSOriginSnapshotConfiguration, location_name: "OriginSnapshot"))
+    CreateOpenZFSVolumeConfiguration.add_member(:read_only, Shapes::ShapeRef.new(shape: ReadOnly, location_name: "ReadOnly"))
+    CreateOpenZFSVolumeConfiguration.add_member(:nfs_exports, Shapes::ShapeRef.new(shape: OpenZFSNfsExports, location_name: "NfsExports"))
+    CreateOpenZFSVolumeConfiguration.add_member(:user_and_group_quotas, Shapes::ShapeRef.new(shape: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
+    CreateOpenZFSVolumeConfiguration.struct_class = Types::CreateOpenZFSVolumeConfiguration
+
+    CreateSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateSnapshotRequest.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotName, required: true, location_name: "Name"))
+    CreateSnapshotRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    CreateSnapshotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateSnapshotRequest.struct_class = Types::CreateSnapshotRequest
+
+    CreateSnapshotResponse.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
+    CreateSnapshotResponse.struct_class = Types::CreateSnapshotResponse
 
     CreateStorageVirtualMachineRequest.add_member(:active_directory_configuration, Shapes::ShapeRef.new(shape: CreateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
     CreateStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -524,10 +664,32 @@ module Aws::FSx
     CreateVolumeRequest.add_member(:name, Shapes::ShapeRef.new(shape: VolumeName, required: true, location_name: "Name"))
     CreateVolumeRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: CreateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
     CreateVolumeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateVolumeRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: CreateOpenZFSVolumeConfiguration, location_name: "OpenZFSConfiguration"))
     CreateVolumeRequest.struct_class = Types::CreateVolumeRequest
 
     CreateVolumeResponse.add_member(:volume, Shapes::ShapeRef.new(shape: Volume, location_name: "Volume"))
     CreateVolumeResponse.struct_class = Types::CreateVolumeResponse
+
+    DataRepositoryAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, location_name: "AssociationId"))
+    DataRepositoryAssociation.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    DataRepositoryAssociation.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    DataRepositoryAssociation.add_member(:lifecycle, Shapes::ShapeRef.new(shape: DataRepositoryLifecycle, location_name: "Lifecycle"))
+    DataRepositoryAssociation.add_member(:failure_details, Shapes::ShapeRef.new(shape: DataRepositoryFailureDetails, location_name: "FailureDetails"))
+    DataRepositoryAssociation.add_member(:file_system_path, Shapes::ShapeRef.new(shape: Namespace, location_name: "FileSystemPath"))
+    DataRepositoryAssociation.add_member(:data_repository_path, Shapes::ShapeRef.new(shape: ArchivePath, location_name: "DataRepositoryPath"))
+    DataRepositoryAssociation.add_member(:batch_import_meta_data_on_create, Shapes::ShapeRef.new(shape: BatchImportMetaDataOnCreate, location_name: "BatchImportMetaDataOnCreate"))
+    DataRepositoryAssociation.add_member(:imported_file_chunk_size, Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
+    DataRepositoryAssociation.add_member(:s3, Shapes::ShapeRef.new(shape: S3DataRepositoryConfiguration, location_name: "S3"))
+    DataRepositoryAssociation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    DataRepositoryAssociation.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
+    DataRepositoryAssociation.struct_class = Types::DataRepositoryAssociation
+
+    DataRepositoryAssociationIds.member = Shapes::ShapeRef.new(shape: DataRepositoryAssociationId)
+
+    DataRepositoryAssociationNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DataRepositoryAssociationNotFound.struct_class = Types::DataRepositoryAssociationNotFound
+
+    DataRepositoryAssociations.member = Shapes::ShapeRef.new(shape: DataRepositoryAssociation)
 
     DataRepositoryConfiguration.add_member(:lifecycle, Shapes::ShapeRef.new(shape: DataRepositoryLifecycle, location_name: "Lifecycle"))
     DataRepositoryConfiguration.add_member(:import_path, Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ImportPath"))
@@ -593,6 +755,16 @@ module Aws::FSx
     DeleteBackupResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: BackupLifecycle, location_name: "Lifecycle"))
     DeleteBackupResponse.struct_class = Types::DeleteBackupResponse
 
+    DeleteDataRepositoryAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, required: true, location_name: "AssociationId"))
+    DeleteDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteDataRepositoryAssociationRequest.add_member(:delete_data_in_file_system, Shapes::ShapeRef.new(shape: DeleteDataInFileSystem, required: true, location_name: "DeleteDataInFileSystem"))
+    DeleteDataRepositoryAssociationRequest.struct_class = Types::DeleteDataRepositoryAssociationRequest
+
+    DeleteDataRepositoryAssociationResponse.add_member(:association_id, Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, location_name: "AssociationId"))
+    DeleteDataRepositoryAssociationResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: DataRepositoryLifecycle, location_name: "Lifecycle"))
+    DeleteDataRepositoryAssociationResponse.add_member(:delete_data_in_file_system, Shapes::ShapeRef.new(shape: DeleteDataInFileSystem, location_name: "DeleteDataInFileSystem"))
+    DeleteDataRepositoryAssociationResponse.struct_class = Types::DeleteDataRepositoryAssociationResponse
+
     DeleteFileSystemLustreConfiguration.add_member(:skip_final_backup, Shapes::ShapeRef.new(shape: Flag, location_name: "SkipFinalBackup"))
     DeleteFileSystemLustreConfiguration.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
     DeleteFileSystemLustreConfiguration.struct_class = Types::DeleteFileSystemLustreConfiguration
@@ -601,16 +773,26 @@ module Aws::FSx
     DeleteFileSystemLustreResponse.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
     DeleteFileSystemLustreResponse.struct_class = Types::DeleteFileSystemLustreResponse
 
+    DeleteFileSystemOpenZFSConfiguration.add_member(:skip_final_backup, Shapes::ShapeRef.new(shape: Flag, location_name: "SkipFinalBackup"))
+    DeleteFileSystemOpenZFSConfiguration.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteFileSystemOpenZFSConfiguration.struct_class = Types::DeleteFileSystemOpenZFSConfiguration
+
+    DeleteFileSystemOpenZFSResponse.add_member(:final_backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "FinalBackupId"))
+    DeleteFileSystemOpenZFSResponse.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
+    DeleteFileSystemOpenZFSResponse.struct_class = Types::DeleteFileSystemOpenZFSResponse
+
     DeleteFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     DeleteFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     DeleteFileSystemRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: DeleteFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
     DeleteFileSystemRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: DeleteFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
+    DeleteFileSystemRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: DeleteFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
     DeleteFileSystemRequest.struct_class = Types::DeleteFileSystemRequest
 
     DeleteFileSystemResponse.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
     DeleteFileSystemResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: FileSystemLifecycle, location_name: "Lifecycle"))
     DeleteFileSystemResponse.add_member(:windows_response, Shapes::ShapeRef.new(shape: DeleteFileSystemWindowsResponse, location_name: "WindowsResponse"))
     DeleteFileSystemResponse.add_member(:lustre_response, Shapes::ShapeRef.new(shape: DeleteFileSystemLustreResponse, location_name: "LustreResponse"))
+    DeleteFileSystemResponse.add_member(:open_zfs_response, Shapes::ShapeRef.new(shape: DeleteFileSystemOpenZFSResponse, location_name: "OpenZFSResponse"))
     DeleteFileSystemResponse.struct_class = Types::DeleteFileSystemResponse
 
     DeleteFileSystemWindowsConfiguration.add_member(:skip_final_backup, Shapes::ShapeRef.new(shape: Flag, location_name: "SkipFinalBackup"))
@@ -620,6 +802,16 @@ module Aws::FSx
     DeleteFileSystemWindowsResponse.add_member(:final_backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "FinalBackupId"))
     DeleteFileSystemWindowsResponse.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
     DeleteFileSystemWindowsResponse.struct_class = Types::DeleteFileSystemWindowsResponse
+
+    DeleteOpenZFSVolumeOptions.member = Shapes::ShapeRef.new(shape: DeleteOpenZFSVolumeOption)
+
+    DeleteSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    DeleteSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
+    DeleteSnapshotRequest.struct_class = Types::DeleteSnapshotRequest
+
+    DeleteSnapshotResponse.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
+    DeleteSnapshotResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: SnapshotLifecycle, location_name: "Lifecycle"))
+    DeleteSnapshotResponse.struct_class = Types::DeleteSnapshotResponse
 
     DeleteStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     DeleteStorageVirtualMachineRequest.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
@@ -637,9 +829,13 @@ module Aws::FSx
     DeleteVolumeOntapResponse.add_member(:final_backup_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "FinalBackupTags"))
     DeleteVolumeOntapResponse.struct_class = Types::DeleteVolumeOntapResponse
 
+    DeleteVolumeOpenZFSConfiguration.add_member(:options, Shapes::ShapeRef.new(shape: DeleteOpenZFSVolumeOptions, location_name: "Options"))
+    DeleteVolumeOpenZFSConfiguration.struct_class = Types::DeleteVolumeOpenZFSConfiguration
+
     DeleteVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     DeleteVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     DeleteVolumeRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: DeleteVolumeOntapConfiguration, location_name: "OntapConfiguration"))
+    DeleteVolumeRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: DeleteVolumeOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
     DeleteVolumeRequest.struct_class = Types::DeleteVolumeRequest
 
     DeleteVolumeResponse.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
@@ -656,6 +852,16 @@ module Aws::FSx
     DescribeBackupsResponse.add_member(:backups, Shapes::ShapeRef.new(shape: Backups, location_name: "Backups"))
     DescribeBackupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeBackupsResponse.struct_class = Types::DescribeBackupsResponse
+
+    DescribeDataRepositoryAssociationsRequest.add_member(:association_ids, Shapes::ShapeRef.new(shape: DataRepositoryAssociationIds, location_name: "AssociationIds"))
+    DescribeDataRepositoryAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    DescribeDataRepositoryAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: LimitedMaxResults, location_name: "MaxResults"))
+    DescribeDataRepositoryAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDataRepositoryAssociationsRequest.struct_class = Types::DescribeDataRepositoryAssociationsRequest
+
+    DescribeDataRepositoryAssociationsResponse.add_member(:associations, Shapes::ShapeRef.new(shape: DataRepositoryAssociations, location_name: "Associations"))
+    DescribeDataRepositoryAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeDataRepositoryAssociationsResponse.struct_class = Types::DescribeDataRepositoryAssociationsResponse
 
     DescribeDataRepositoryTasksRequest.add_member(:task_ids, Shapes::ShapeRef.new(shape: TaskIds, location_name: "TaskIds"))
     DescribeDataRepositoryTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DataRepositoryTaskFilters, location_name: "Filters"))
@@ -685,6 +891,16 @@ module Aws::FSx
     DescribeFileSystemsResponse.add_member(:file_systems, Shapes::ShapeRef.new(shape: FileSystems, location_name: "FileSystems"))
     DescribeFileSystemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeFileSystemsResponse.struct_class = Types::DescribeFileSystemsResponse
+
+    DescribeSnapshotsRequest.add_member(:snapshot_ids, Shapes::ShapeRef.new(shape: SnapshotIds, location_name: "SnapshotIds"))
+    DescribeSnapshotsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SnapshotFilters, location_name: "Filters"))
+    DescribeSnapshotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeSnapshotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSnapshotsRequest.struct_class = Types::DescribeSnapshotsRequest
+
+    DescribeSnapshotsResponse.add_member(:snapshots, Shapes::ShapeRef.new(shape: Snapshots, location_name: "Snapshots"))
+    DescribeSnapshotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeSnapshotsResponse.struct_class = Types::DescribeSnapshotsResponse
 
     DescribeStorageVirtualMachinesRequest.add_member(:storage_virtual_machine_ids, Shapes::ShapeRef.new(shape: StorageVirtualMachineIds, location_name: "StorageVirtualMachineIds"))
     DescribeStorageVirtualMachinesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: StorageVirtualMachineFilters, location_name: "Filters"))
@@ -720,6 +936,8 @@ module Aws::FSx
 
     DnsIps.member = Shapes::ShapeRef.new(shape: IpAddress)
 
+    EventTypes.member = Shapes::ShapeRef.new(shape: EventType)
+
     FileSystem.add_member(:owner_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "OwnerId"))
     FileSystem.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
     FileSystem.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
@@ -740,6 +958,7 @@ module Aws::FSx
     FileSystem.add_member(:administrative_actions, Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
     FileSystem.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: OntapFileSystemConfiguration, location_name: "OntapConfiguration"))
     FileSystem.add_member(:file_system_type_version, Shapes::ShapeRef.new(shape: FileSystemTypeVersion, location_name: "FileSystemTypeVersion"))
+    FileSystem.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: OpenZFSFileSystemConfiguration, location_name: "OpenZFSConfiguration"))
     FileSystem.struct_class = Types::FileSystem
 
     FileSystemEndpoint.add_member(:dns_name, Shapes::ShapeRef.new(shape: DNSName, location_name: "DNSName"))
@@ -779,6 +998,9 @@ module Aws::FSx
 
     InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidDataRepositoryType.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidDataRepositoryType.struct_class = Types::InvalidDataRepositoryType
 
     InvalidDestinationKmsKey.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidDestinationKmsKey.struct_class = Types::InvalidDestinationKmsKey
@@ -826,7 +1048,16 @@ module Aws::FSx
     LustreFileSystemConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
     LustreFileSystemConfiguration.add_member(:drive_cache_type, Shapes::ShapeRef.new(shape: DriveCacheType, location_name: "DriveCacheType"))
     LustreFileSystemConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
+    LustreFileSystemConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LustreLogConfiguration, location_name: "LogConfiguration"))
     LustreFileSystemConfiguration.struct_class = Types::LustreFileSystemConfiguration
+
+    LustreLogConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: LustreAccessAuditLogLevel, required: true, location_name: "Level"))
+    LustreLogConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: GeneralARN, location_name: "Destination"))
+    LustreLogConfiguration.struct_class = Types::LustreLogConfiguration
+
+    LustreLogCreateConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: LustreAccessAuditLogLevel, required: true, location_name: "Level"))
+    LustreLogCreateConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: GeneralARN, location_name: "Destination"))
+    LustreLogCreateConfiguration.struct_class = Types::LustreLogCreateConfiguration
 
     MissingFileSystemConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     MissingFileSystemConfiguration.struct_class = Types::MissingFileSystemConfiguration
@@ -866,6 +1097,67 @@ module Aws::FSx
     OntapVolumeConfiguration.add_member(:ontap_volume_type, Shapes::ShapeRef.new(shape: OntapVolumeType, location_name: "OntapVolumeType"))
     OntapVolumeConfiguration.struct_class = Types::OntapVolumeConfiguration
 
+    OpenZFSClientConfiguration.add_member(:clients, Shapes::ShapeRef.new(shape: OpenZFSClients, required: true, location_name: "Clients"))
+    OpenZFSClientConfiguration.add_member(:options, Shapes::ShapeRef.new(shape: OpenZFSNfsExportOptions, required: true, location_name: "Options"))
+    OpenZFSClientConfiguration.struct_class = Types::OpenZFSClientConfiguration
+
+    OpenZFSClientConfigurations.member = Shapes::ShapeRef.new(shape: OpenZFSClientConfiguration)
+
+    OpenZFSCreateRootVolumeConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
+    OpenZFSCreateRootVolumeConfiguration.add_member(:nfs_exports, Shapes::ShapeRef.new(shape: OpenZFSNfsExports, location_name: "NfsExports"))
+    OpenZFSCreateRootVolumeConfiguration.add_member(:user_and_group_quotas, Shapes::ShapeRef.new(shape: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
+    OpenZFSCreateRootVolumeConfiguration.add_member(:copy_tags_to_snapshots, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToSnapshots"))
+    OpenZFSCreateRootVolumeConfiguration.add_member(:read_only, Shapes::ShapeRef.new(shape: ReadOnly, location_name: "ReadOnly"))
+    OpenZFSCreateRootVolumeConfiguration.struct_class = Types::OpenZFSCreateRootVolumeConfiguration
+
+    OpenZFSFileSystemConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    OpenZFSFileSystemConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
+    OpenZFSFileSystemConfiguration.add_member(:copy_tags_to_volumes, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToVolumes"))
+    OpenZFSFileSystemConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    OpenZFSFileSystemConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: OpenZFSDeploymentType, location_name: "DeploymentType"))
+    OpenZFSFileSystemConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
+    OpenZFSFileSystemConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    OpenZFSFileSystemConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    OpenZFSFileSystemConfiguration.add_member(:root_volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "RootVolumeId"))
+    OpenZFSFileSystemConfiguration.struct_class = Types::OpenZFSFileSystemConfiguration
+
+    OpenZFSNfsExport.add_member(:client_configurations, Shapes::ShapeRef.new(shape: OpenZFSClientConfigurations, required: true, location_name: "ClientConfigurations"))
+    OpenZFSNfsExport.struct_class = Types::OpenZFSNfsExport
+
+    OpenZFSNfsExportOptions.member = Shapes::ShapeRef.new(shape: OpenZFSNfsExportOption)
+
+    OpenZFSNfsExports.member = Shapes::ShapeRef.new(shape: OpenZFSNfsExport)
+
+    OpenZFSOriginSnapshotConfiguration.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "SnapshotARN"))
+    OpenZFSOriginSnapshotConfiguration.add_member(:copy_strategy, Shapes::ShapeRef.new(shape: OpenZFSCopyStrategy, location_name: "CopyStrategy"))
+    OpenZFSOriginSnapshotConfiguration.struct_class = Types::OpenZFSOriginSnapshotConfiguration
+
+    OpenZFSUserAndGroupQuotas.member = Shapes::ShapeRef.new(shape: OpenZFSUserOrGroupQuota)
+
+    OpenZFSUserOrGroupQuota.add_member(:type, Shapes::ShapeRef.new(shape: OpenZFSQuotaType, required: true, location_name: "Type"))
+    OpenZFSUserOrGroupQuota.add_member(:id, Shapes::ShapeRef.new(shape: IntegerNoMax, required: true, location_name: "Id"))
+    OpenZFSUserOrGroupQuota.add_member(:storage_capacity_quota_gi_b, Shapes::ShapeRef.new(shape: IntegerNoMax, required: true, location_name: "StorageCapacityQuotaGiB"))
+    OpenZFSUserOrGroupQuota.struct_class = Types::OpenZFSUserOrGroupQuota
+
+    OpenZFSVolumeConfiguration.add_member(:parent_volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "ParentVolumeId"))
+    OpenZFSVolumeConfiguration.add_member(:volume_path, Shapes::ShapeRef.new(shape: VolumePath, location_name: "VolumePath"))
+    OpenZFSVolumeConfiguration.add_member(:storage_capacity_reservation_gi_b, Shapes::ShapeRef.new(shape: IntegerNoMax, location_name: "StorageCapacityReservationGiB"))
+    OpenZFSVolumeConfiguration.add_member(:storage_capacity_quota_gi_b, Shapes::ShapeRef.new(shape: IntegerNoMax, location_name: "StorageCapacityQuotaGiB"))
+    OpenZFSVolumeConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
+    OpenZFSVolumeConfiguration.add_member(:copy_tags_to_snapshots, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToSnapshots"))
+    OpenZFSVolumeConfiguration.add_member(:origin_snapshot, Shapes::ShapeRef.new(shape: OpenZFSOriginSnapshotConfiguration, location_name: "OriginSnapshot"))
+    OpenZFSVolumeConfiguration.add_member(:read_only, Shapes::ShapeRef.new(shape: ReadOnly, location_name: "ReadOnly"))
+    OpenZFSVolumeConfiguration.add_member(:nfs_exports, Shapes::ShapeRef.new(shape: OpenZFSNfsExports, location_name: "NfsExports"))
+    OpenZFSVolumeConfiguration.add_member(:user_and_group_quotas, Shapes::ShapeRef.new(shape: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
+    OpenZFSVolumeConfiguration.struct_class = Types::OpenZFSVolumeConfiguration
+
+    ReleaseFileSystemNfsV3LocksRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    ReleaseFileSystemNfsV3LocksRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    ReleaseFileSystemNfsV3LocksRequest.struct_class = Types::ReleaseFileSystemNfsV3LocksRequest
+
+    ReleaseFileSystemNfsV3LocksResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
+    ReleaseFileSystemNfsV3LocksResponse.struct_class = Types::ReleaseFileSystemNfsV3LocksResponse
+
     ResourceDoesNotSupportTagging.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
     ResourceDoesNotSupportTagging.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceDoesNotSupportTagging.struct_class = Types::ResourceDoesNotSupportTagging
@@ -874,7 +1166,23 @@ module Aws::FSx
     ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFound.struct_class = Types::ResourceNotFound
 
+    RestoreOpenZFSVolumeOptions.member = Shapes::ShapeRef.new(shape: RestoreOpenZFSVolumeOption)
+
+    RestoreVolumeFromSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    RestoreVolumeFromSnapshotRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    RestoreVolumeFromSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
+    RestoreVolumeFromSnapshotRequest.add_member(:options, Shapes::ShapeRef.new(shape: RestoreOpenZFSVolumeOptions, location_name: "Options"))
+    RestoreVolumeFromSnapshotRequest.struct_class = Types::RestoreVolumeFromSnapshotRequest
+
+    RestoreVolumeFromSnapshotResponse.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
+    RestoreVolumeFromSnapshotResponse.add_member(:lifecycle, Shapes::ShapeRef.new(shape: VolumeLifecycle, location_name: "Lifecycle"))
+    RestoreVolumeFromSnapshotResponse.struct_class = Types::RestoreVolumeFromSnapshotResponse
+
     RouteTableIds.member = Shapes::ShapeRef.new(shape: RouteTableId)
+
+    S3DataRepositoryConfiguration.add_member(:auto_import_policy, Shapes::ShapeRef.new(shape: AutoImportPolicy, location_name: "AutoImportPolicy"))
+    S3DataRepositoryConfiguration.add_member(:auto_export_policy, Shapes::ShapeRef.new(shape: AutoExportPolicy, location_name: "AutoExportPolicy"))
+    S3DataRepositoryConfiguration.struct_class = Types::S3DataRepositoryConfiguration
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
@@ -901,6 +1209,31 @@ module Aws::FSx
     ServiceLimitExceeded.add_member(:limit, Shapes::ShapeRef.new(shape: ServiceLimit, required: true, location_name: "Limit"))
     ServiceLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceLimitExceeded.struct_class = Types::ServiceLimitExceeded
+
+    Snapshot.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    Snapshot.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
+    Snapshot.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotName, location_name: "Name"))
+    Snapshot.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
+    Snapshot.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, location_name: "CreationTime"))
+    Snapshot.add_member(:lifecycle, Shapes::ShapeRef.new(shape: SnapshotLifecycle, location_name: "Lifecycle"))
+    Snapshot.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    Snapshot.add_member(:administrative_actions, Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
+    Snapshot.struct_class = Types::Snapshot
+
+    SnapshotFilter.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotFilterName, location_name: "Name"))
+    SnapshotFilter.add_member(:values, Shapes::ShapeRef.new(shape: SnapshotFilterValues, location_name: "Values"))
+    SnapshotFilter.struct_class = Types::SnapshotFilter
+
+    SnapshotFilterValues.member = Shapes::ShapeRef.new(shape: SnapshotFilterValue)
+
+    SnapshotFilters.member = Shapes::ShapeRef.new(shape: SnapshotFilter)
+
+    SnapshotIds.member = Shapes::ShapeRef.new(shape: SnapshotId)
+
+    SnapshotNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    SnapshotNotFound.struct_class = Types::SnapshotNotFound
+
+    Snapshots.member = Shapes::ShapeRef.new(shape: Snapshot)
 
     SourceBackupUnavailable.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     SourceBackupUnavailable.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId"))
@@ -981,11 +1314,21 @@ module Aws::FSx
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateDataRepositoryAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DataRepositoryAssociationId, required: true, location_name: "AssociationId"))
+    UpdateDataRepositoryAssociationRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateDataRepositoryAssociationRequest.add_member(:imported_file_chunk_size, Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
+    UpdateDataRepositoryAssociationRequest.add_member(:s3, Shapes::ShapeRef.new(shape: S3DataRepositoryConfiguration, location_name: "S3"))
+    UpdateDataRepositoryAssociationRequest.struct_class = Types::UpdateDataRepositoryAssociationRequest
+
+    UpdateDataRepositoryAssociationResponse.add_member(:association, Shapes::ShapeRef.new(shape: DataRepositoryAssociation, location_name: "Association"))
+    UpdateDataRepositoryAssociationResponse.struct_class = Types::UpdateDataRepositoryAssociationResponse
+
     UpdateFileSystemLustreConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     UpdateFileSystemLustreConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
     UpdateFileSystemLustreConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     UpdateFileSystemLustreConfiguration.add_member(:auto_import_policy, Shapes::ShapeRef.new(shape: AutoImportPolicyType, location_name: "AutoImportPolicy"))
     UpdateFileSystemLustreConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
+    UpdateFileSystemLustreConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LustreLogCreateConfiguration, location_name: "LogConfiguration"))
     UpdateFileSystemLustreConfiguration.struct_class = Types::UpdateFileSystemLustreConfiguration
 
     UpdateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
@@ -994,12 +1337,22 @@ module Aws::FSx
     UpdateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     UpdateFileSystemOntapConfiguration.struct_class = Types::UpdateFileSystemOntapConfiguration
 
+    UpdateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_backups, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToBackups"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:copy_tags_to_volumes, Shapes::ShapeRef.new(shape: Flag, location_name: "CopyTagsToVolumes"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
+    UpdateFileSystemOpenZFSConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    UpdateFileSystemOpenZFSConfiguration.struct_class = Types::UpdateFileSystemOpenZFSConfiguration
+
     UpdateFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     UpdateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     UpdateFileSystemRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
     UpdateFileSystemRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
     UpdateFileSystemRequest.add_member(:lustre_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemLustreConfiguration, location_name: "LustreConfiguration"))
     UpdateFileSystemRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemOntapConfiguration, location_name: "OntapConfiguration"))
+    UpdateFileSystemRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemOpenZFSConfiguration, location_name: "OpenZFSConfiguration"))
     UpdateFileSystemRequest.struct_class = Types::UpdateFileSystemRequest
 
     UpdateFileSystemResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -1020,6 +1373,22 @@ module Aws::FSx
     UpdateOntapVolumeConfiguration.add_member(:tiering_policy, Shapes::ShapeRef.new(shape: TieringPolicy, location_name: "TieringPolicy"))
     UpdateOntapVolumeConfiguration.struct_class = Types::UpdateOntapVolumeConfiguration
 
+    UpdateOpenZFSVolumeConfiguration.add_member(:storage_capacity_reservation_gi_b, Shapes::ShapeRef.new(shape: IntegerNoMax, location_name: "StorageCapacityReservationGiB"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:storage_capacity_quota_gi_b, Shapes::ShapeRef.new(shape: IntegerNoMax, location_name: "StorageCapacityQuotaGiB"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: OpenZFSDataCompressionType, location_name: "DataCompressionType"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:nfs_exports, Shapes::ShapeRef.new(shape: OpenZFSNfsExports, location_name: "NfsExports"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:user_and_group_quotas, Shapes::ShapeRef.new(shape: OpenZFSUserAndGroupQuotas, location_name: "UserAndGroupQuotas"))
+    UpdateOpenZFSVolumeConfiguration.add_member(:read_only, Shapes::ShapeRef.new(shape: ReadOnly, location_name: "ReadOnly"))
+    UpdateOpenZFSVolumeConfiguration.struct_class = Types::UpdateOpenZFSVolumeConfiguration
+
+    UpdateSnapshotRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateSnapshotRequest.add_member(:name, Shapes::ShapeRef.new(shape: SnapshotName, required: true, location_name: "Name"))
+    UpdateSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
+    UpdateSnapshotRequest.struct_class = Types::UpdateSnapshotRequest
+
+    UpdateSnapshotResponse.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
+    UpdateSnapshotResponse.struct_class = Types::UpdateSnapshotResponse
+
     UpdateStorageVirtualMachineRequest.add_member(:active_directory_configuration, Shapes::ShapeRef.new(shape: UpdateSvmActiveDirectoryConfiguration, location_name: "ActiveDirectoryConfiguration"))
     UpdateStorageVirtualMachineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     UpdateStorageVirtualMachineRequest.add_member(:storage_virtual_machine_id, Shapes::ShapeRef.new(shape: StorageVirtualMachineId, required: true, location_name: "StorageVirtualMachineId"))
@@ -1035,6 +1404,8 @@ module Aws::FSx
     UpdateVolumeRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     UpdateVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     UpdateVolumeRequest.add_member(:ontap_configuration, Shapes::ShapeRef.new(shape: UpdateOntapVolumeConfiguration, location_name: "OntapConfiguration"))
+    UpdateVolumeRequest.add_member(:name, Shapes::ShapeRef.new(shape: VolumeName, location_name: "Name"))
+    UpdateVolumeRequest.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: UpdateOpenZFSVolumeConfiguration, location_name: "OpenZFSConfiguration"))
     UpdateVolumeRequest.struct_class = Types::UpdateVolumeRequest
 
     UpdateVolumeResponse.add_member(:volume, Shapes::ShapeRef.new(shape: Volume, location_name: "Volume"))
@@ -1050,6 +1421,8 @@ module Aws::FSx
     Volume.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
     Volume.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     Volume.add_member(:lifecycle_transition_reason, Shapes::ShapeRef.new(shape: LifecycleTransitionReason, location_name: "LifecycleTransitionReason"))
+    Volume.add_member(:administrative_actions, Shapes::ShapeRef.new(shape: AdministrativeActions, location_name: "AdministrativeActions"))
+    Volume.add_member(:open_zfs_configuration, Shapes::ShapeRef.new(shape: OpenZFSVolumeConfiguration, location_name: "OpenZFSConfiguration"))
     Volume.struct_class = Types::Volume
 
     VolumeFilter.add_member(:name, Shapes::ShapeRef.new(shape: VolumeFilterName, location_name: "Name"))
@@ -1171,6 +1544,20 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:create_data_repository_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataRepositoryAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDataRepositoryAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataRepositoryAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:create_data_repository_task, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDataRepositoryTask"
         o.http_method = "POST"
@@ -1219,6 +1606,18 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: BackupNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: MissingFileSystemConfiguration)
+      end)
+
+      api.add_operation(:create_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:create_storage_virtual_machine, Seahorse::Model::Operation.new.tap do |o|
@@ -1283,6 +1682,19 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: BackupBeingCopied)
       end)
 
+      api.add_operation(:delete_data_repository_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataRepositoryAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataRepositoryAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDataRepositoryAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: DataRepositoryAssociationNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:delete_file_system, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteFileSystem"
         o.http_method = "POST"
@@ -1294,6 +1706,17 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:delete_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFound)
       end)
 
       api.add_operation(:delete_storage_virtual_machine, Seahorse::Model::Operation.new.tap do |o|
@@ -1330,6 +1753,25 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
         o.errors << Shapes::ShapeRef.new(shape: BackupNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_data_repository_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDataRepositoryAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDataRepositoryAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDataRepositoryAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: DataRepositoryAssociationNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDataRepositoryType)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1383,6 +1825,23 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_snapshots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSnapshots"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSnapshotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSnapshotsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFound)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1455,6 +1914,30 @@ module Aws::FSx
         )
       end)
 
+      api.add_operation(:release_file_system_nfs_v3_locks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReleaseFileSystemNfsV3Locks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ReleaseFileSystemNfsV3LocksRequest)
+        o.output = Shapes::ShapeRef.new(shape: ReleaseFileSystemNfsV3LocksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:restore_volume_from_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreVolumeFromSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreVolumeFromSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreVolumeFromSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeNotFound)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -1481,6 +1964,19 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: ResourceDoesNotSupportTagging)
       end)
 
+      api.add_operation(:update_data_repository_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDataRepositoryAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDataRepositoryAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDataRepositoryAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleParameterError)
+        o.errors << Shapes::ShapeRef.new(shape: DataRepositoryAssociationNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:update_file_system, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateFileSystem"
         o.http_method = "POST"
@@ -1494,6 +1990,17 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: MissingFileSystemConfiguration)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
+      end)
+
+      api.add_operation(:update_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSnapshotResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: SnapshotNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:update_storage_virtual_machine, Seahorse::Model::Operation.new.tap do |o|

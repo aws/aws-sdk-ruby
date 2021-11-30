@@ -119,7 +119,9 @@ module Aws::IoT
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -6604,6 +6606,8 @@ module Aws::IoT
     #
     #   resp.thing_indexing_configuration.thing_indexing_mode #=> String, one of "OFF", "REGISTRY", "REGISTRY_AND_SHADOW"
     #   resp.thing_indexing_configuration.thing_connectivity_indexing_mode #=> String, one of "OFF", "STATUS"
+    #   resp.thing_indexing_configuration.device_defender_indexing_mode #=> String, one of "OFF", "VIOLATIONS"
+    #   resp.thing_indexing_configuration.named_shadow_indexing_mode #=> String, one of "OFF", "ON"
     #   resp.thing_indexing_configuration.managed_fields #=> Array
     #   resp.thing_indexing_configuration.managed_fields[0].name #=> String
     #   resp.thing_indexing_configuration.managed_fields[0].type #=> String, one of "Number", "String", "Boolean"
@@ -11267,6 +11271,7 @@ module Aws::IoT
     #   resp.things[0].attributes #=> Hash
     #   resp.things[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.things[0].shadow #=> String
+    #   resp.things[0].device_defender #=> String
     #   resp.things[0].connectivity.connected #=> Boolean
     #   resp.things[0].connectivity.timestamp #=> Integer
     #   resp.things[0].connectivity.disconnect_reason #=> String
@@ -12570,7 +12575,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
     #
     # @option params [Integer] :expected_version
     #   The expected version of the fleet metric record in the registry.
@@ -12625,6 +12630,8 @@ module Aws::IoT
     #     thing_indexing_configuration: {
     #       thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #       thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
+    #       device_defender_indexing_mode: "OFF", # accepts OFF, VIOLATIONS
+    #       named_shadow_indexing_mode: "OFF", # accepts OFF, ON
     #       managed_fields: [
     #         {
     #           name: "FieldName",
@@ -13501,7 +13508,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

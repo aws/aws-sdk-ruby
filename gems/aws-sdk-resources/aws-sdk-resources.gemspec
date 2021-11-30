@@ -44,6 +44,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-autoscaling', '~> 1')
   spec.add_dependency('aws-sdk-autoscalingplans', '~> 1')
   spec.add_dependency('aws-sdk-backup', '~> 1')
+  spec.add_dependency('aws-sdk-backupgateway', '~> 1')
   spec.add_dependency('aws-sdk-batch', '~> 1')
   spec.add_dependency('aws-sdk-braket', '~> 1')
   spec.add_dependency('aws-sdk-budgets', '~> 1')
@@ -164,6 +165,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-iotsecuretunneling', '~> 1')
   spec.add_dependency('aws-sdk-iotsitewise', '~> 1')
   spec.add_dependency('aws-sdk-iotthingsgraph', '~> 1')
+  spec.add_dependency('aws-sdk-iottwinmaker', '~> 1')
   spec.add_dependency('aws-sdk-iotwireless', '~> 1')
   spec.add_dependency('aws-sdk-kms', '~> 1')
   spec.add_dependency('aws-sdk-kafka', '~> 1')
@@ -309,6 +311,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-workmail', '~> 1')
   spec.add_dependency('aws-sdk-workmailmessageflow', '~> 1')
   spec.add_dependency('aws-sdk-workspaces', '~> 1')
+  spec.add_dependency('aws-sdk-workspacesweb', '~> 1')
   spec.add_dependency('aws-sdk-xray', '~> 1')
   # end service gems
 

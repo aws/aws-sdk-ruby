@@ -8994,6 +8994,8 @@ module Aws::EC2
     ModifySubnetAttributeRequest.add_member(:private_dns_hostname_type_on_launch, Shapes::ShapeRef.new(shape: HostnameType, location_name: "PrivateDnsHostnameTypeOnLaunch"))
     ModifySubnetAttributeRequest.add_member(:enable_resource_name_dns_a_record_on_launch, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "EnableResourceNameDnsARecordOnLaunch"))
     ModifySubnetAttributeRequest.add_member(:enable_resource_name_dns_aaaa_record_on_launch, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "EnableResourceNameDnsAAAARecordOnLaunch"))
+    ModifySubnetAttributeRequest.add_member(:enable_lni_at_device_index, Shapes::ShapeRef.new(shape: Integer, location_name: "EnableLniAtDeviceIndex"))
+    ModifySubnetAttributeRequest.add_member(:disable_lni_at_device_index, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "DisableLniAtDeviceIndex"))
     ModifySubnetAttributeRequest.struct_class = Types::ModifySubnetAttributeRequest
 
     ModifyTrafficMirrorFilterNetworkServicesRequest.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: TrafficMirrorFilterId, required: true, location_name: "TrafficMirrorFilterId"))
@@ -11184,6 +11186,7 @@ module Aws::EC2
     Subnet.add_member(:available_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "availableIpAddressCount"))
     Subnet.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
     Subnet.add_member(:default_for_az, Shapes::ShapeRef.new(shape: Boolean, location_name: "defaultForAz"))
+    Subnet.add_member(:enable_lni_at_device_index, Shapes::ShapeRef.new(shape: Integer, location_name: "enableLniAtDeviceIndex"))
     Subnet.add_member(:map_public_ip_on_launch, Shapes::ShapeRef.new(shape: Boolean, location_name: "mapPublicIpOnLaunch"))
     Subnet.add_member(:map_customer_owned_ip_on_launch, Shapes::ShapeRef.new(shape: Boolean, location_name: "mapCustomerOwnedIpOnLaunch"))
     Subnet.add_member(:customer_owned_ipv_4_pool, Shapes::ShapeRef.new(shape: CoipPoolId, location_name: "customerOwnedIpv4Pool"))

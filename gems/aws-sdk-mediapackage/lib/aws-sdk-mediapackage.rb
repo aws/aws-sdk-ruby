@@ -48,6 +48,6 @@ require_relative 'aws-sdk-mediapackage/customizations'
 # @!group service
 module Aws::MediaPackage
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end

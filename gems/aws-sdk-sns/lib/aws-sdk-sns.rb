@@ -52,6 +52,6 @@ require_relative 'aws-sdk-sns/customizations'
 # @!group service
 module Aws::SNS
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.49.0'
 
 end

@@ -451,6 +451,7 @@ module Aws::IoT
     DetectMitigationActionsTaskTarget = Shapes::StructureShape.new(name: 'DetectMitigationActionsTaskTarget')
     DetectMitigationActionsToExecuteList = Shapes::ListShape.new(name: 'DetectMitigationActionsToExecuteList')
     DeviceCertificateUpdateAction = Shapes::StringShape.new(name: 'DeviceCertificateUpdateAction')
+    DeviceDefenderIndexingMode = Shapes::StringShape.new(name: 'DeviceDefenderIndexingMode')
     DeviceDefenderThingName = Shapes::StringShape.new(name: 'DeviceDefenderThingName')
     DimensionArn = Shapes::StringShape.new(name: 'DimensionArn')
     DimensionName = Shapes::StringShape.new(name: 'DimensionName')
@@ -809,6 +810,7 @@ module Aws::IoT
     MqttContext = Shapes::StructureShape.new(name: 'MqttContext')
     MqttPassword = Shapes::BlobShape.new(name: 'MqttPassword')
     MqttUsername = Shapes::StringShape.new(name: 'MqttUsername')
+    NamedShadowIndexingMode = Shapes::StringShape.new(name: 'NamedShadowIndexingMode')
     NamespaceId = Shapes::StringShape.new(name: 'NamespaceId')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonCompliantChecksCount = Shapes::IntegerShape.new(name: 'NonCompliantChecksCount')
@@ -4313,6 +4315,7 @@ module Aws::IoT
     ThingDocument.add_member(:thing_group_names, Shapes::ShapeRef.new(shape: ThingGroupNameList, location_name: "thingGroupNames"))
     ThingDocument.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
     ThingDocument.add_member(:shadow, Shapes::ShapeRef.new(shape: JsonDocument, location_name: "shadow"))
+    ThingDocument.add_member(:device_defender, Shapes::ShapeRef.new(shape: JsonDocument, location_name: "deviceDefender"))
     ThingDocument.add_member(:connectivity, Shapes::ShapeRef.new(shape: ThingConnectivity, location_name: "connectivity"))
     ThingDocument.struct_class = Types::ThingDocument
 
@@ -4351,6 +4354,8 @@ module Aws::IoT
 
     ThingIndexingConfiguration.add_member(:thing_indexing_mode, Shapes::ShapeRef.new(shape: ThingIndexingMode, required: true, location_name: "thingIndexingMode"))
     ThingIndexingConfiguration.add_member(:thing_connectivity_indexing_mode, Shapes::ShapeRef.new(shape: ThingConnectivityIndexingMode, location_name: "thingConnectivityIndexingMode"))
+    ThingIndexingConfiguration.add_member(:device_defender_indexing_mode, Shapes::ShapeRef.new(shape: DeviceDefenderIndexingMode, location_name: "deviceDefenderIndexingMode"))
+    ThingIndexingConfiguration.add_member(:named_shadow_indexing_mode, Shapes::ShapeRef.new(shape: NamedShadowIndexingMode, location_name: "namedShadowIndexingMode"))
     ThingIndexingConfiguration.add_member(:managed_fields, Shapes::ShapeRef.new(shape: Fields, location_name: "managedFields"))
     ThingIndexingConfiguration.add_member(:custom_fields, Shapes::ShapeRef.new(shape: Fields, location_name: "customFields"))
     ThingIndexingConfiguration.struct_class = Types::ThingIndexingConfiguration

@@ -83,6 +83,8 @@ module Aws::Kinesis
     MetricsNameList = Shapes::ListShape.new(name: 'MetricsNameList')
     MillisBehindLatest = Shapes::IntegerShape.new(name: 'MillisBehindLatest')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OnDemandStreamCountLimitObject = Shapes::IntegerShape.new(name: 'OnDemandStreamCountLimitObject')
+    OnDemandStreamCountObject = Shapes::IntegerShape.new(name: 'OnDemandStreamCountObject')
     PartitionKey = Shapes::StringShape.new(name: 'PartitionKey')
     PositiveIntegerObject = Shapes::IntegerShape.new(name: 'PositiveIntegerObject')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
@@ -121,6 +123,8 @@ module Aws::Kinesis
     StreamARN = Shapes::StringShape.new(name: 'StreamARN')
     StreamDescription = Shapes::StructureShape.new(name: 'StreamDescription')
     StreamDescriptionSummary = Shapes::StructureShape.new(name: 'StreamDescriptionSummary')
+    StreamMode = Shapes::StringShape.new(name: 'StreamMode')
+    StreamModeDetails = Shapes::StructureShape.new(name: 'StreamModeDetails')
     StreamName = Shapes::StringShape.new(name: 'StreamName')
     StreamNameList = Shapes::ListShape.new(name: 'StreamNameList')
     StreamStatus = Shapes::StringShape.new(name: 'StreamStatus')
@@ -137,6 +141,8 @@ module Aws::Kinesis
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UpdateShardCountInput = Shapes::StructureShape.new(name: 'UpdateShardCountInput')
     UpdateShardCountOutput = Shapes::StructureShape.new(name: 'UpdateShardCountOutput')
+    UpdateStreamModeInput = Shapes::StructureShape.new(name: 'UpdateStreamModeInput')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AddTagsToStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     AddTagsToStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
@@ -165,7 +171,8 @@ module Aws::Kinesis
     ConsumerList.member = Shapes::ShapeRef.new(shape: Consumer)
 
     CreateStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
-    CreateStreamInput.add_member(:shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "ShardCount"))
+    CreateStreamInput.add_member(:shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "ShardCount"))
+    CreateStreamInput.add_member(:stream_mode_details, Shapes::ShapeRef.new(shape: StreamModeDetails, location_name: "StreamModeDetails"))
     CreateStreamInput.struct_class = Types::CreateStreamInput
 
     DecreaseStreamRetentionPeriodInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
@@ -185,6 +192,8 @@ module Aws::Kinesis
 
     DescribeLimitsOutput.add_member(:shard_limit, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "ShardLimit"))
     DescribeLimitsOutput.add_member(:open_shard_count, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "OpenShardCount"))
+    DescribeLimitsOutput.add_member(:on_demand_stream_count, Shapes::ShapeRef.new(shape: OnDemandStreamCountObject, required: true, location_name: "OnDemandStreamCount"))
+    DescribeLimitsOutput.add_member(:on_demand_stream_count_limit, Shapes::ShapeRef.new(shape: OnDemandStreamCountLimitObject, required: true, location_name: "OnDemandStreamCountLimit"))
     DescribeLimitsOutput.struct_class = Types::DescribeLimitsOutput
 
     DescribeStreamConsumerInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN"))
@@ -442,6 +451,7 @@ module Aws::Kinesis
     StreamDescription.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     StreamDescription.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
     StreamDescription.add_member(:stream_status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "StreamStatus"))
+    StreamDescription.add_member(:stream_mode_details, Shapes::ShapeRef.new(shape: StreamModeDetails, location_name: "StreamModeDetails"))
     StreamDescription.add_member(:shards, Shapes::ShapeRef.new(shape: ShardList, required: true, location_name: "Shards"))
     StreamDescription.add_member(:has_more_shards, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreShards"))
     StreamDescription.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: RetentionPeriodHours, required: true, location_name: "RetentionPeriodHours"))
@@ -454,6 +464,7 @@ module Aws::Kinesis
     StreamDescriptionSummary.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
     StreamDescriptionSummary.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
     StreamDescriptionSummary.add_member(:stream_status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "StreamStatus"))
+    StreamDescriptionSummary.add_member(:stream_mode_details, Shapes::ShapeRef.new(shape: StreamModeDetails, location_name: "StreamModeDetails"))
     StreamDescriptionSummary.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: RetentionPeriodHours, required: true, location_name: "RetentionPeriodHours"))
     StreamDescriptionSummary.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StreamCreationTimestamp"))
     StreamDescriptionSummary.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoringList, required: true, location_name: "EnhancedMonitoring"))
@@ -462,6 +473,9 @@ module Aws::Kinesis
     StreamDescriptionSummary.add_member(:open_shard_count, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "OpenShardCount"))
     StreamDescriptionSummary.add_member(:consumer_count, Shapes::ShapeRef.new(shape: ConsumerCountObject, location_name: "ConsumerCount"))
     StreamDescriptionSummary.struct_class = Types::StreamDescriptionSummary
+
+    StreamModeDetails.add_member(:stream_mode, Shapes::ShapeRef.new(shape: StreamMode, required: true, location_name: "StreamMode"))
+    StreamModeDetails.struct_class = Types::StreamModeDetails
 
     StreamNameList.member = Shapes::ShapeRef.new(shape: StreamName)
 
@@ -511,6 +525,13 @@ module Aws::Kinesis
     UpdateShardCountOutput.add_member(:current_shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "CurrentShardCount"))
     UpdateShardCountOutput.add_member(:target_shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "TargetShardCount"))
     UpdateShardCountOutput.struct_class = Types::UpdateShardCountOutput
+
+    UpdateStreamModeInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, required: true, location_name: "StreamARN"))
+    UpdateStreamModeInput.add_member(:stream_mode_details, Shapes::ShapeRef.new(shape: StreamModeDetails, required: true, location_name: "StreamModeDetails"))
+    UpdateStreamModeInput.struct_class = Types::UpdateStreamModeInput
+
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private
@@ -770,6 +791,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:put_record, Seahorse::Model::Operation.new.tap do |o|
@@ -840,6 +862,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:start_stream_encryption, Seahorse::Model::Operation.new.tap do |o|
@@ -891,6 +914,19 @@ module Aws::Kinesis
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateShardCountInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateShardCountOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_stream_mode, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStreamMode"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStreamModeInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)

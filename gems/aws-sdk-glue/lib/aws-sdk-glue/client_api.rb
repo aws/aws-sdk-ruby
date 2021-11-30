@@ -446,6 +446,7 @@ module Aws::Glue
     IntegerValue = Shapes::IntegerShape.new(name: 'IntegerValue')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
+    InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     IsVersionValid = Shapes::BooleanShape.new(name: 'IsVersionValid')
     JdbcTarget = Shapes::StructureShape.new(name: 'JdbcTarget')
     JdbcTargetList = Shapes::ListShape.new(name: 'JdbcTargetList')
@@ -611,6 +612,7 @@ module Aws::Glue
     ReplaceBoolean = Shapes::BooleanShape.new(name: 'ReplaceBoolean')
     ResetJobBookmarkRequest = Shapes::StructureShape.new(name: 'ResetJobBookmarkRequest')
     ResetJobBookmarkResponse = Shapes::StructureShape.new(name: 'ResetJobBookmarkResponse')
+    ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
     ResourceNumberLimitExceededException = Shapes::StructureShape.new(name: 'ResourceNumberLimitExceededException')
     ResourceShareType = Shapes::StringShape.new(name: 'ResourceShareType')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -733,6 +735,7 @@ module Aws::Glue
     TimestampValue = Shapes::TimestampShape.new(name: 'TimestampValue')
     Token = Shapes::StringShape.new(name: 'Token')
     TotalSegmentsInteger = Shapes::IntegerShape.new(name: 'TotalSegmentsInteger')
+    TransactionIdString = Shapes::StringShape.new(name: 'TransactionIdString')
     TransformEncryption = Shapes::StructureShape.new(name: 'TransformEncryption')
     TransformFilterCriteria = Shapes::StructureShape.new(name: 'TransformFilterCriteria')
     TransformIdList = Shapes::ListShape.new(name: 'TransformIdList')
@@ -882,6 +885,7 @@ module Aws::Glue
     BatchDeleteTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     BatchDeleteTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     BatchDeleteTableRequest.add_member(:tables_to_delete, Shapes::ShapeRef.new(shape: BatchDeleteTableNameList, required: true, location_name: "TablesToDelete"))
+    BatchDeleteTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     BatchDeleteTableRequest.struct_class = Types::BatchDeleteTableRequest
 
     BatchDeleteTableResponse.add_member(:errors, Shapes::ShapeRef.new(shape: TableErrors, location_name: "Errors"))
@@ -1505,6 +1509,7 @@ module Aws::Glue
     CreateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     CreateTableRequest.add_member(:table_input, Shapes::ShapeRef.new(shape: TableInput, required: true, location_name: "TableInput"))
     CreateTableRequest.add_member(:partition_indexes, Shapes::ShapeRef.new(shape: PartitionIndexList, location_name: "PartitionIndexes"))
+    CreateTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     CreateTableRequest.struct_class = Types::CreateTableRequest
 
     CreateTableResponse.struct_class = Types::CreateTableResponse
@@ -1728,6 +1733,7 @@ module Aws::Glue
     DeleteTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DeleteTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     DeleteTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    DeleteTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     DeleteTableRequest.struct_class = Types::DeleteTableRequest
 
     DeleteTableResponse.struct_class = Types::DeleteTableResponse
@@ -2165,6 +2171,8 @@ module Aws::Glue
     GetPartitionsRequest.add_member(:segment, Shapes::ShapeRef.new(shape: Segment, location_name: "Segment"))
     GetPartitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     GetPartitionsRequest.add_member(:exclude_column_schema, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "ExcludeColumnSchema"))
+    GetPartitionsRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
+    GetPartitionsRequest.add_member(:query_as_of_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "QueryAsOfTime"))
     GetPartitionsRequest.struct_class = Types::GetPartitionsRequest
 
     GetPartitionsResponse.add_member(:partitions, Shapes::ShapeRef.new(shape: PartitionList, location_name: "Partitions"))
@@ -2282,6 +2290,8 @@ module Aws::Glue
     GetTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    GetTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
+    GetTableRequest.add_member(:query_as_of_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "QueryAsOfTime"))
     GetTableRequest.struct_class = Types::GetTableRequest
 
     GetTableResponse.add_member(:table, Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
@@ -2314,6 +2324,8 @@ module Aws::Glue
     GetTablesRequest.add_member(:expression, Shapes::ShapeRef.new(shape: FilterString, location_name: "Expression"))
     GetTablesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetTablesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CatalogGetterPageSize, location_name: "MaxResults"))
+    GetTablesRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
+    GetTablesRequest.add_member(:query_as_of_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "QueryAsOfTime"))
     GetTablesRequest.struct_class = Types::GetTablesRequest
 
     GetTablesResponse.add_member(:table_list, Shapes::ShapeRef.new(shape: TableList, location_name: "TableList"))
@@ -2441,6 +2453,9 @@ module Aws::Glue
 
     InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     InvalidInputException.struct_class = Types::InvalidInputException
+
+    InvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    InvalidStateException.struct_class = Types::InvalidStateException
 
     JdbcTarget.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, location_name: "ConnectionName"))
     JdbcTarget.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
@@ -2963,6 +2978,9 @@ module Aws::Glue
 
     ResetJobBookmarkResponse.add_member(:job_bookmark_entry, Shapes::ShapeRef.new(shape: JobBookmarkEntry, location_name: "JobBookmarkEntry"))
     ResetJobBookmarkResponse.struct_class = Types::ResetJobBookmarkResponse
+
+    ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
 
     ResourceNumberLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     ResourceNumberLimitExceededException.struct_class = Types::ResourceNumberLimitExceededException
@@ -3549,6 +3567,7 @@ module Aws::Glue
     UpdateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     UpdateTableRequest.add_member(:table_input, Shapes::ShapeRef.new(shape: TableInput, required: true, location_name: "TableInput"))
     UpdateTableRequest.add_member(:skip_archive, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "SkipArchive"))
+    UpdateTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     UpdateTableRequest.struct_class = Types::UpdateTableRequest
 
     UpdateTableResponse.struct_class = Types::UpdateTableResponse
@@ -3727,6 +3746,8 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
       end)
 
       api.add_operation(:batch_delete_table_version, Seahorse::Model::Operation.new.tap do |o|
@@ -3796,6 +3817,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:batch_get_triggers, Seahorse::Model::Operation.new.tap do |o|
@@ -4072,6 +4094,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
       end)
 
       api.add_operation(:create_trigger, Seahorse::Model::Operation.new.tap do |o|
@@ -4334,6 +4357,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
       end)
 
       api.add_operation(:delete_table_version, Seahorse::Model::Operation.new.tap do |o|
@@ -4826,6 +4850,8 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -4976,6 +5002,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
       end)
 
       api.add_operation(:get_table_version, Seahorse::Model::Operation.new.tap do |o|
@@ -5874,6 +5901,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: GlueEncryptionException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotReadyException)
       end)
 
       api.add_operation(:update_trigger, Seahorse::Model::Operation.new.tap do |o|

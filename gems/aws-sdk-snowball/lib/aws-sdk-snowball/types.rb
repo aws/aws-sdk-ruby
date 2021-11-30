@@ -231,7 +231,7 @@ module Aws::Snowball
     # @!attribute [rw] kms_key_arn
     #   The `KmsKeyARN` Amazon Resource Name (ARN) associated with this
     #   cluster. This ARN was created using the [CreateKey][1] API action in
-    #   AWS Key Management Service (AWS KMS).
+    #   Key Management Service (KMS.
     #
     #
     #
@@ -240,7 +240,7 @@ module Aws::Snowball
     #
     # @!attribute [rw] role_arn
     #   The role ARN associated with this cluster. This ARN was created
-    #   using the [CreateRole][1] API action in AWS Identity and Access
+    #   using the [CreateRole][1] API action in Identity and Access
     #   Management (IAM).
     #
     #
@@ -258,10 +258,10 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snow device to use for this cluster.
+    #   The type of Snowcone device to use for this cluster.
     #
-    #   <note markdown="1"> For cluster jobs, AWS Snow Family currently supports only the `EDGE`
-    #   device type.
+    #   <note markdown="1"> For cluster jobs, Amazon Web Services Snow Family currently supports
+    #   only the `EDGE` device type.
     #
     #    </note>
     #   @return [String]
@@ -311,12 +311,12 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] tax_documents
-    #   The tax documents required in your AWS Region.
+    #   The tax documents required in your Amazon Web Services Region.
     #   @return [Types::TaxDocuments]
     #
     # @!attribute [rw] on_device_service_configuration
     #   Represents metadata and configuration settings for services on an
-    #   AWS Snow Family device.
+    #   Amazon Web Services Snow Family device.
     #   @return [Types::OnDeviceServiceConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ClusterMetadata AWS API Documentation
@@ -472,6 +472,10 @@ module Aws::Snowball
     #             storage_limit: 1,
     #             storage_unit: "TB", # accepts TB
     #           },
+    #           tgw_on_device_service: {
+    #             storage_limit: 1,
+    #             storage_unit: "TB", # accepts TB
+    #           },
     #         },
     #         description: "String",
     #         address_id: "AddressId", # required
@@ -506,14 +510,15 @@ module Aws::Snowball
     #
     # @!attribute [rw] resources
     #   The resources associated with the cluster job. These resources
-    #   include Amazon S3 buckets and optional AWS Lambda functions written
-    #   in the Python language.
+    #   include Amazon S3 buckets and optional Lambda functions written in
+    #   the Python language.
     #   @return [Types::JobResource]
     #
     # @!attribute [rw] on_device_service_configuration
     #   Specifies the service or services on the Snow Family device that
-    #   your transferred data will be exported from or imported into. AWS
-    #   Snow Family supports Amazon S3 and NFS (Network File System).
+    #   your transferred data will be exported from or imported into. Amazon
+    #   Web Services Snow Family device clusters support Amazon S3 and NFS
+    #   (Network File System).
     #   @return [Types::OnDeviceServiceConfiguration]
     #
     # @!attribute [rw] description
@@ -528,7 +533,7 @@ module Aws::Snowball
     # @!attribute [rw] kms_key_arn
     #   The `KmsKeyARN` value that you want to associate with this cluster.
     #   `KmsKeyARN` values are created by using the [CreateKey][1] API
-    #   action in AWS Key Management Service (AWS KMS).
+    #   action in Key Management Service (KMS).
     #
     #
     #
@@ -538,7 +543,7 @@ module Aws::Snowball
     # @!attribute [rw] role_arn
     #   The `RoleARN` that you want to associate with this cluster.
     #   `RoleArn` values are created by using the [CreateRole][1] API action
-    #   in AWS Identity and Access Management (IAM).
+    #   in Identity and Access Management (IAM).
     #
     #
     #
@@ -546,10 +551,10 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snow Family device to use for this cluster.
+    #   The type of Snow Family Devices to use for this cluster.
     #
-    #   <note markdown="1"> For cluster jobs, AWS Snow Family currently supports only the `EDGE`
-    #   device type.
+    #   <note markdown="1"> For cluster jobs, Amazon Web Services Snow Family currently supports
+    #   only the `EDGE` device type.
     #
     #    </note>
     #
@@ -606,7 +611,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] tax_documents
-    #   The tax documents required in your AWS Region.
+    #   The tax documents required in your Amazon Web Services Region.
     #   @return [Types::TaxDocuments]
     #
     # @!attribute [rw] remote_management
@@ -692,6 +697,10 @@ module Aws::Snowball
     #             storage_limit: 1,
     #             storage_unit: "TB", # accepts TB
     #           },
+    #           tgw_on_device_service: {
+    #             storage_limit: 1,
+    #             storage_unit: "TB", # accepts TB
+    #           },
     #         },
     #         description: "String",
     #         address_id: "AddressId",
@@ -743,8 +752,10 @@ module Aws::Snowball
     #
     # @!attribute [rw] on_device_service_configuration
     #   Specifies the service or services on the Snow Family device that
-    #   your transferred data will be exported from or imported into. AWS
-    #   Snow Family supports Amazon S3 and NFS (Network File System).
+    #   your transferred data will be exported from or imported into. Amazon
+    #   Web Services Snow Family supports Amazon S3 and NFS (Network File
+    #   System) and the Amazon Web Services Storage Gateway service Tape
+    #   Gateway type.
     #   @return [Types::OnDeviceServiceConfiguration]
     #
     # @!attribute [rw] description
@@ -758,7 +769,7 @@ module Aws::Snowball
     #
     # @!attribute [rw] kms_key_arn
     #   The `KmsKeyARN` that you want to associate with this job.
-    #   `KmsKeyARN`s are created using the [CreateKey][1] AWS Key Management
+    #   `KmsKeyARN`s are created using the [CreateKey][1] Key Management
     #   Service (KMS) API action.
     #
     #
@@ -768,8 +779,8 @@ module Aws::Snowball
     #
     # @!attribute [rw] role_arn
     #   The `RoleARN` that you want to associate with this job. `RoleArn`s
-    #   are created using the [CreateRole][1] AWS Identity and Access
-    #   Management (IAM) API action.
+    #   are created using the [CreateRole][1] Identity and Access Management
+    #   (IAM) API action.
     #
     #
     #
@@ -820,15 +831,16 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snow Family device to use for this job.
+    #   The type of Snow Family Devices to use for this job.
     #
-    #   <note markdown="1"> For cluster jobs, AWS Snow Family currently supports only the `EDGE`
-    #   device type.
+    #   <note markdown="1"> For cluster jobs, Amazon Web Services Snow Family currently supports
+    #   only the `EDGE` device type.
     #
     #    </note>
     #
-    #   The type of AWS Snow device to use for this job. Currently, the only
-    #   supported device type for cluster jobs is `EDGE`.
+    #   The type of Amazon Web Services Snow device to use for this job.
+    #   Currently, the only supported device type for cluster jobs is
+    #   `EDGE`.
     #
     #   For more information, see [Snowball Edge Device Options][1] in the
     #   Snowball Edge Developer Guide.
@@ -850,11 +862,11 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] tax_documents
-    #   The tax documents required in your AWS Region.
+    #   The tax documents required in your Amazon Web Services Region.
     #   @return [Types::TaxDocuments]
     #
     # @!attribute [rw] device_configuration
-    #   Defines the device configuration for an AWS Snowcone job.
+    #   Defines the device configuration for an Snowcone job.
     #
     #   For more information, see
     #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
@@ -932,7 +944,7 @@ module Aws::Snowball
     #   @return [Boolean]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snow Family device to use for the long-term pricing
+    #   The type of Snow Family Devices to use for the long-term pricing
     #   job.
     #   @return [String]
     #
@@ -973,9 +985,9 @@ module Aws::Snowball
     #
     # @!attribute [rw] shipping_option
     #   The shipping speed for a particular job. This speed doesn't dictate
-    #   how soon the device is returned to AWS. This speed represents how
-    #   quickly it moves to its destination while in transit. Regional
-    #   shipping speeds are as follows:
+    #   how soon the device is returned to Amazon Web Services. This speed
+    #   represents how quickly it moves to its destination while in transit.
+    #   Regional shipping speeds are as follows:
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateReturnShippingLabelRequest AWS API Documentation
@@ -989,7 +1001,7 @@ module Aws::Snowball
 
     # @!attribute [rw] status
     #   The status information of the task on a Snow device that is being
-    #   returned to AWS.
+    #   returned to Amazon Web Services.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateReturnShippingLabelResult AWS API Documentation
@@ -1001,8 +1013,9 @@ module Aws::Snowball
     end
 
     # Defines the real-time status of a Snow device's data transfer while
-    # the device is at AWS. This data is only available while a job has a
-    # `JobState` value of `InProgress`, for both import and export jobs.
+    # the device is at Amazon Web Services. This data is only available
+    # while a job has a `JobState` value of `InProgress`, for both import
+    # and export jobs.
     #
     # @!attribute [rw] bytes_transferred
     #   The number of bytes transferred between a Snow device and Amazon S3.
@@ -1210,18 +1223,24 @@ module Aws::Snowball
 
     # @!attribute [rw] status
     #   The status information of the task on a Snow device that is being
-    #   returned to AWS.
+    #   returned to Amazon Web Services.
     #   @return [String]
     #
     # @!attribute [rw] expiration_date
     #   The expiration date of the current return shipping label.
     #   @return [Time]
     #
+    # @!attribute [rw] return_shipping_label_uri
+    #   The pre-signed Amazon S3 URI used to download the return shipping
+    #   label.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeReturnShippingLabelResult AWS API Documentation
     #
     class DescribeReturnShippingLabelResult < Struct.new(
       :status,
-      :expiration_date)
+      :expiration_date,
+      :return_shipping_label_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1240,8 +1259,8 @@ module Aws::Snowball
     #       }
     #
     # @!attribute [rw] snowcone_device_configuration
-    #   Returns information about the device configuration for an AWS
-    #   Snowcone job.
+    #   Returns information about the device configuration for an Snowcone
+    #   job.
     #   @return [Types::SnowconeDeviceConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DeviceConfiguration AWS API Documentation
@@ -1255,7 +1274,7 @@ module Aws::Snowball
     # A JSON-formatted object that contains the IDs for an Amazon Machine
     # Image (AMI), including the Amazon EC2 AMI ID and the Snow device AMI
     # ID. Each AMI has these two IDs to simplify identifying the AMI in both
-    # the AWS Cloud and on the device.
+    # the Amazon Web Services Cloud and on the device.
     #
     # @note When making an API call, you may pass Ec2AmiResource
     #   data as a hash:
@@ -1307,7 +1326,7 @@ module Aws::Snowball
     #
     # @!attribute [rw] event_resource_arn
     #   The Amazon Resource Name (ARN) for any local Amazon S3 resource that
-    #   is an AWS Lambda function's event trigger associated with this job.
+    #   is an Lambda function's event trigger associated with this job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/EventTriggerDefinition AWS API Documentation
@@ -1444,7 +1463,7 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # The tax documents required in AWS Regions in India.
+    # The tax documents required in Amazon Web Services Region in India.
     #
     # @note When making an API call, you may pass INDTaxDocuments
     #   data as a hash:
@@ -1454,8 +1473,8 @@ module Aws::Snowball
     #       }
     #
     # @!attribute [rw] gstin
-    #   The Goods and Services Tax (GST) documents required in AWS Regions
-    #   in India.
+    #   The Goods and Services Tax (GST) documents required in Amazon Web
+    #   Services Region in India.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/INDTaxDocuments AWS API Documentation
@@ -1683,9 +1702,9 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) for the AWS Key Management Service
-    #   (AWS KMS) key associated with this job. This ARN was created using
-    #   the [CreateKey][1] API action in AWS KMS.
+    #   The Amazon Resource Name (ARN) for the Key Management Service (KMS)
+    #   key associated with this job. This ARN was created using the
+    #   [CreateKey][1] API action in KMS.
     #
     #
     #
@@ -1694,8 +1713,7 @@ module Aws::Snowball
     #
     # @!attribute [rw] role_arn
     #   The role ARN associated with this job. This ARN was created using
-    #   the [CreateRole][1] API action in AWS Identity and Access Management
-    #   (IAM).
+    #   the [CreateRole][1] API action in Identity and Access Management.
     #
     #
     #
@@ -1732,9 +1750,9 @@ module Aws::Snowball
     #
     # @!attribute [rw] data_transfer_progress
     #   A value that defines the real-time status of a Snow device's data
-    #   transfer while the device is at AWS. This data is only available
-    #   while a job has a `JobState` value of `InProgress`, for both import
-    #   and export jobs.
+    #   transfer while the device is at Amazon Web Services. This data is
+    #   only available while a job has a `JobState` value of `InProgress`,
+    #   for both import and export jobs.
     #   @return [Types::DataTransfer]
     #
     # @!attribute [rw] job_log_info
@@ -1757,8 +1775,8 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] tax_documents
-    #   The metadata associated with the tax documents required in your AWS
-    #   Region.
+    #   The metadata associated with the tax documents required in your
+    #   Amazon Web Services Region.
     #   @return [Types::TaxDocuments]
     #
     # @!attribute [rw] device_configuration
@@ -1779,7 +1797,7 @@ module Aws::Snowball
     #
     # @!attribute [rw] on_device_service_configuration
     #   Represents metadata and configuration settings for services on an
-    #   AWS Snow Family device.
+    #   Amazon Web Services Snow Family device.
     #   @return [Types::OnDeviceServiceConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobMetadata AWS API Documentation
@@ -1811,9 +1829,10 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # Contains an array of AWS resource objects. Each object represents an
-    # Amazon S3 bucket, an AWS Lambda function, or an Amazon Machine Image
-    # (AMI) based on Amazon EC2 that is associated with a particular job.
+    # Contains an array of Amazon Web Services resource objects. Each object
+    # represents an Amazon S3 bucket, an Lambda function, or an Amazon
+    # Machine Image (AMI) based on Amazon EC2 that is associated with a
+    # particular job.
     #
     # @note When making an API call, you may pass JobResource
     #   data as a hash:
@@ -1874,7 +1893,7 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # The provided AWS Key Management Service key lacks the permissions to
+    # The provided Key Management Service key lacks the permissions to
     # perform the specified CreateJob or UpdateJob action.
     #
     # @!attribute [rw] message
@@ -1935,9 +1954,9 @@ module Aws::Snowball
     #       }
     #
     # @!attribute [rw] lambda_arn
-    #   An Amazon Resource Name (ARN) that represents an AWS Lambda function
-    #   to be triggered by PUT object actions on the associated local Amazon
-    #   S3 resource.
+    #   An Amazon Resource Name (ARN) that represents an Lambda function to
+    #   be triggered by PUT object actions on the associated local Amazon S3
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] event_triggers
@@ -2235,7 +2254,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] snowball_type
-    #   The type of AWS Snow Family device associated with this long-term
+    #   The type of Snow Family Devices associated with this long-term
     #   pricing job.
     #   @return [String]
     #
@@ -2261,8 +2280,9 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # An object that represents metadata and configuration settings for NFS
-    # service on an AWS Snow Family device.
+    # An object that represents the metadata and configuration settings for
+    # the NFS (Network File System) service on an Amazon Web Services Snow
+    # Family device.
     #
     # @note When making an API call, you may pass NFSOnDeviceServiceConfiguration
     #   data as a hash:
@@ -2273,7 +2293,7 @@ module Aws::Snowball
     #       }
     #
     # @!attribute [rw] storage_limit
-    #   The maximum NFS storage for one Snowball Family device.
+    #   The maximum NFS storage for one Snow Family device.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_unit
@@ -2317,8 +2337,9 @@ module Aws::Snowball
     #   [CreateTopic][1] Amazon SNS API action.
     #
     #   You can subscribe email addresses to an Amazon SNS topic through the
-    #   AWS Management Console, or by using the [Subscribe][2] Amazon Simple
-    #   Notification Service (Amazon SNS) API action.
+    #   Amazon Web Services Management Console, or by using the
+    #   [Subscribe][2] Amazon Simple Notification Service (Amazon SNS) API
+    #   action.
     #
     #
     #
@@ -2345,8 +2366,8 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # An object that represents metadata and configuration settings for
-    # services on an AWS Snow Family device.
+    # An object that represents the metadata and configuration settings for
+    # services on an Amazon Web Services Snow Family device.
     #
     # @note When making an API call, you may pass OnDeviceServiceConfiguration
     #   data as a hash:
@@ -2356,23 +2377,34 @@ module Aws::Snowball
     #           storage_limit: 1,
     #           storage_unit: "TB", # accepts TB
     #         },
+    #         tgw_on_device_service: {
+    #           storage_limit: 1,
+    #           storage_unit: "TB", # accepts TB
+    #         },
     #       }
     #
     # @!attribute [rw] nfs_on_device_service
-    #   Represents the NFS service on a Snow Family device.
+    #   Represents the NFS (Network File System) service on a Snow Family
+    #   device.
     #   @return [Types::NFSOnDeviceServiceConfiguration]
+    #
+    # @!attribute [rw] tgw_on_device_service
+    #   Represents the Storage Gateway service Tape Gateway type on a Snow
+    #   Family device.
+    #   @return [Types::TGWOnDeviceServiceConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/OnDeviceServiceConfiguration AWS API Documentation
     #
     class OnDeviceServiceConfiguration < Struct.new(
-      :nfs_on_device_service)
+      :nfs_on_device_service,
+      :tgw_on_device_service)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # You get this exception if you call `CreateReturnShippingLabel` and a
     # valid return shipping label already exists. In this case, use
-    # `DescribeReturnShippingLabel` to get the url.
+    # `DescribeReturnShippingLabel` to get the URL.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2422,8 +2454,9 @@ module Aws::Snowball
     #
     # @!attribute [rw] target_on_device_services
     #   Specifies the service or services on the Snow Family device that
-    #   your transferred data will be exported from or imported into. AWS
-    #   Snow Family supports Amazon S3 and NFS (Network File System).
+    #   your transferred data will be exported from or imported into. Amazon
+    #   Web Services Snow Family supports Amazon S3 and NFS (Network File
+    #   System).
     #   @return [Array<Types::TargetOnDeviceService>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/S3Resource AWS API Documentation
@@ -2486,7 +2519,7 @@ module Aws::Snowball
     #
     # @!attribute [rw] inbound_shipment
     #   The `Status` and `TrackingNumber` values for a Snow device being
-    #   returned to AWS for a particular job.
+    #   returned to Amazon Web Services for a particular job.
     #   @return [Types::Shipment]
     #
     # @!attribute [rw] outbound_shipment
@@ -2504,7 +2537,7 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # Specifies the device configuration for an AWS Snowcone job.
+    # Specifies the device configuration for an Snowcone job.
     #
     # @note When making an API call, you may pass SnowconeDeviceConfiguration
     #   data as a hash:
@@ -2516,7 +2549,7 @@ module Aws::Snowball
     #       }
     #
     # @!attribute [rw] wireless_connection
-    #   Configures the wireless connection for the AWS Snowcone device.
+    #   Configures the wireless connection for the Snowcone device.
     #   @return [Types::WirelessConnection]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/SnowconeDeviceConfiguration AWS API Documentation
@@ -2527,10 +2560,41 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # An object that represents the metadata and configuration settings for
+    # the Storage Gateway service Tape Gateway type on an Amazon Web
+    # Services Snow Family device.
+    #
+    # @note When making an API call, you may pass TGWOnDeviceServiceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         storage_limit: 1,
+    #         storage_unit: "TB", # accepts TB
+    #       }
+    #
+    # @!attribute [rw] storage_limit
+    #   The maximum number of virtual tapes to store on one Snow Family
+    #   device. Due to physical resource limitations, this value must be set
+    #   to 80 for Snowball Edge.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_unit
+    #   The scale unit of the virtual tapes on the device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/TGWOnDeviceServiceConfiguration AWS API Documentation
+    #
+    class TGWOnDeviceServiceConfiguration < Struct.new(
+      :storage_limit,
+      :storage_unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents the service or services on the Snow Family
     # device that your transferred data will be exported from or imported
-    # into. AWS Snow Family supports Amazon S3 and NFS (Network File
-    # System).
+    # into. Amazon Web Services Snow Family supports Amazon S3 and NFS
+    # (Network File System).
     #
     # @note When making an API call, you may pass TargetOnDeviceService
     #   data as a hash:
@@ -2559,7 +2623,7 @@ module Aws::Snowball
       include Aws::Structure
     end
 
-    # The tax documents required in your AWS Region.
+    # The tax documents required in your Amazon Web Services Region.
     #
     # @note When making an API call, you may pass TaxDocuments
     #   data as a hash:
@@ -2571,7 +2635,7 @@ module Aws::Snowball
     #       }
     #
     # @!attribute [rw] ind
-    #   The tax documents required in AWS Regions in India.
+    #   The tax documents required in Amazon Web Services Region in India.
     #   @return [Types::INDTaxDocuments]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/TaxDocuments AWS API Documentation
@@ -2584,7 +2648,7 @@ module Aws::Snowball
 
     # The address is either outside the serviceable area for your region, or
     # an error occurred. Check the address with your region's carrier and
-    # try again. If the issue persists, contact AWS Support.
+    # try again. If the issue persists, contact Amazon Web Services Support.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2642,6 +2706,10 @@ module Aws::Snowball
     #             storage_limit: 1,
     #             storage_unit: "TB", # accepts TB
     #           },
+    #           tgw_on_device_service: {
+    #             storage_limit: 1,
+    #             storage_unit: "TB", # accepts TB
+    #           },
     #         },
     #         address_id: "AddressId",
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
@@ -2661,7 +2729,7 @@ module Aws::Snowball
     # @!attribute [rw] role_arn
     #   The new role Amazon Resource Name (ARN) that you want to associate
     #   with this cluster. To create a role ARN, use the [CreateRole][1] API
-    #   action in AWS Identity and Access Management (IAM).
+    #   action in Identity and Access Management (IAM).
     #
     #
     #
@@ -2679,8 +2747,9 @@ module Aws::Snowball
     #
     # @!attribute [rw] on_device_service_configuration
     #   Specifies the service or services on the Snow Family device that
-    #   your transferred data will be exported from or imported into. AWS
-    #   Snow Family supports Amazon S3 and NFS (Network File System).
+    #   your transferred data will be exported from or imported into. Amazon
+    #   Web Services Snow Family device clusters support Amazon S3 and NFS
+    #   (Network File System).
     #   @return [Types::OnDeviceServiceConfiguration]
     #
     # @!attribute [rw] address_id
@@ -2770,6 +2839,10 @@ module Aws::Snowball
     #             storage_limit: 1,
     #             storage_unit: "TB", # accepts TB
     #           },
+    #           tgw_on_device_service: {
+    #             storage_limit: 1,
+    #             storage_unit: "TB", # accepts TB
+    #           },
     #         },
     #         address_id: "AddressId",
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
@@ -2785,8 +2858,8 @@ module Aws::Snowball
     #
     # @!attribute [rw] role_arn
     #   The new role Amazon Resource Name (ARN) that you want to associate
-    #   with this job. To create a role ARN, use the [CreateRole][1]AWS
-    #   Identity and Access Management (IAM) API action.
+    #   with this job. To create a role ARN, use the [CreateRole][1]Identity
+    #   and Access Management (IAM) API action.
     #
     #
     #
@@ -2803,8 +2876,10 @@ module Aws::Snowball
     #
     # @!attribute [rw] on_device_service_configuration
     #   Specifies the service or services on the Snow Family device that
-    #   your transferred data will be exported from or imported into. AWS
-    #   Snow Family supports Amazon S3 and NFS (Network File System).
+    #   your transferred data will be exported from or imported into. Amazon
+    #   Web Services Snow Family supports Amazon S3 and NFS (Network File
+    #   System) and the Amazon Web Services Storage Gateway service Tape
+    #   Gateway type.
     #   @return [Types::OnDeviceServiceConfiguration]
     #
     # @!attribute [rw] address_id
@@ -2875,7 +2950,8 @@ module Aws::Snowball
     #
     #   Set to `RECEIVED` when the device arrives at your location.
     #
-    #   Set to `RETURNED` when you have returned the device to AWS.
+    #   Set to `RETURNED` when you have returned the device to Amazon Web
+    #   Services.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobShipmentStateRequest AWS API Documentation
@@ -2929,7 +3005,7 @@ module Aws::Snowball
     #
     class UpdateLongTermPricingResult < Aws::EmptyStructure; end
 
-    # Configures the wireless connection on an AWS Snowcone device.
+    # Configures the wireless connection on an Snowcone device.
     #
     # @note When making an API call, you may pass WirelessConnection
     #   data as a hash:
@@ -2939,7 +3015,7 @@ module Aws::Snowball
     #       }
     #
     # @!attribute [rw] is_wifi_enabled
-    #   Enables the Wi-Fi adapter on an AWS Snowcone device.
+    #   Enables the Wi-Fi adapter on an Snowcone device.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/WirelessConnection AWS API Documentation

@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.123.0 (2021-11-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-workspacesweb` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iottwinmaker` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-backupgateway` gem.
+
 3.122.0 (2021-11-29)
 ------------------
 

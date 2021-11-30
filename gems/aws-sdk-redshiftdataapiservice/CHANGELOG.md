@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2021-11-30)
+------------------
+
+* Feature - Data API now supports serverless queries.
+
 1.15.0 (2021-11-18)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2021-11-30)
+------------------
+
+* Feature - Added the ability to enable/disable IoT Fleet Indexing for Device Defender and Named Shadow information, and search them through IoT Fleet Indexing APIs.
+
 1.79.0 (2021-11-23)
 ------------------
 

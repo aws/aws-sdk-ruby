@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.537.0 (2021-11-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WorkSpacesWeb`.
+
+* Feature - Added support for enumerating regions for `Aws::IoTTwinMaker`.
+
+* Feature - Added support for enumerating regions for `Aws::BackupGateway`.
+
 1.536.0 (2021-11-29)
 ------------------
 

@@ -7155,6 +7155,13 @@ module Aws::IoT
     #   * REGISTRY\_AND\_SHADOW\_AND\_CONNECTIVITY\_STATUS - Your thing
     #     index contains registry data, shadow data, and thing connectivity
     #     status data.
+    #
+    #   * MULTI\_INDEXING\_MODE - Your thing index contains multiple data
+    #     sources. For more information, see [GetIndexingConfiguration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_GetIndexingConfiguration.html
     #   @return [String]
     #
     class DescribeIndexResponse < Struct.new(
@@ -17148,7 +17155,25 @@ module Aws::IoT
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] shadow
-    #   The shadow.
+    #   The unnamed shadow and named shadow.
+    #
+    #   For more information about shadows, see [IoT Device Shadow
+    #   service.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html
+    #   @return [String]
+    #
+    # @!attribute [rw] device_defender
+    #   Contains Device Defender data.
+    #
+    #   For more information about Device Defender, see [Device
+    #   Defender][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/device-defender.html
     #   @return [String]
     #
     # @!attribute [rw] connectivity
@@ -17163,6 +17188,7 @@ module Aws::IoT
       :thing_group_names,
       :attributes,
       :shadow,
+      :device_defender,
       :connectivity)
       SENSITIVE = []
       include Aws::Structure
@@ -17311,6 +17337,8 @@ module Aws::IoT
     #       {
     #         thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #         thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
+    #         device_defender_indexing_mode: "OFF", # accepts OFF, VIOLATIONS
+    #         named_shadow_indexing_mode: "OFF", # accepts OFF, ON
     #         managed_fields: [
     #           {
     #             name: "FieldName",
@@ -17346,6 +17374,39 @@ module Aws::IoT
     #   * OFF - Thing connectivity status indexing is disabled.
     #   @return [String]
     #
+    # @!attribute [rw] device_defender_indexing_mode
+    #   Device Defender indexing mode. Valid values are:
+    #
+    #   * VIOLATIONS – Your thing index contains Device Defender violations.
+    #     To enable Device Defender indexing, *deviceDefenderIndexingMode*
+    #     must not be set to OFF.
+    #
+    #   * OFF - Device Defender indexing is disabled.
+    #
+    #   For more information about Device Defender violations, see [Device
+    #   Defender Detect.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-detect.html
+    #   @return [String]
+    #
+    # @!attribute [rw] named_shadow_indexing_mode
+    #   Named shadow indexing mode. Valid values are:
+    #
+    #   * ON – Your thing index contains named shadow. To enable thing named
+    #     shadow indexing, *namedShadowIndexingMode* must not be set to OFF.
+    #
+    #   * OFF - Named shadow indexing is disabled.
+    #
+    #   For more information about Shadows, see [IoT Device Shadow
+    #   service.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html
+    #   @return [String]
+    #
     # @!attribute [rw] managed_fields
     #   Contains fields that are indexed and whose types are already known
     #   by the Fleet Indexing service.
@@ -17358,6 +17419,8 @@ module Aws::IoT
     class ThingIndexingConfiguration < Struct.new(
       :thing_indexing_mode,
       :thing_connectivity_indexing_mode,
+      :device_defender_indexing_mode,
+      :named_shadow_indexing_mode,
       :managed_fields,
       :custom_fields)
       SENSITIVE = []
@@ -19116,7 +19179,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
     #   @return [String]
     #
     # @!attribute [rw] expected_version
@@ -19145,6 +19208,8 @@ module Aws::IoT
     #         thing_indexing_configuration: {
     #           thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #           thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
+    #           device_defender_indexing_mode: "OFF", # accepts OFF, VIOLATIONS
+    #           named_shadow_indexing_mode: "OFF", # accepts OFF, ON
     #           managed_fields: [
     #             {
     #               name: "FieldName",

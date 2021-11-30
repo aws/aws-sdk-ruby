@@ -28,7 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
-require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
+require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:lakeformation)
 
@@ -74,7 +74,7 @@ module Aws::LakeFormation
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
-    add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::Plugins::Protocols::RestJson)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -119,7 +119,9 @@ module Aws::LakeFormation
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -266,16 +268,6 @@ module Aws::LakeFormation
     #
     #   @option options [String] :session_token
     #
-    #   @option options [Boolean] :simple_json (false)
-    #     Disables request parameter conversion, validation, and formatting.
-    #     Also disable response data type conversions. This option is useful
-    #     when you want to ensure the highest level of performance by
-    #     avoiding overhead of walking request parameters and response data
-    #     structures.
-    #
-    #     When `:simple_json` is enabled, the request parameters hash must
-    #     be formatted exactly as the DynamoDB API expects.
-    #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
     #     fake responses are generated and returned. You can specify
@@ -346,19 +338,19 @@ module Aws::LakeFormation
 
     # @!group API Operations
 
-    # Attaches one or more tags to an existing resource.
+    # Attaches one or more LF-tags to an existing resource.
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, Types::Resource] :resource
-    #   The resource to which to attach a tag.
+    #   The database, table, or column resource to which to attach an LF-tag.
     #
     # @option params [required, Array<Types::LFTagPair>] :lf_tags
-    #   The tags to attach to the resource.
+    #   The LF-tags to attach to the resource.
     #
     # @return [Types::AddLFTagsToResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -394,6 +386,12 @@ module Aws::LakeFormation
     #       data_location: {
     #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString",
     #       },
     #       lf_tag: {
     #         catalog_id: "CatalogIdString",
@@ -445,7 +443,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, Array<Types::BatchPermissionsRequestEntry>] :entries
     #   A list of up to 20 entries for resource permissions to be granted by
@@ -492,6 +490,12 @@ module Aws::LakeFormation
     #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
+    #           data_cells_filter: {
+    #             table_catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             name: "NameString",
+    #           },
     #           lf_tag: {
     #             catalog_id: "CatalogIdString",
     #             tag_key: "NameString", # required
@@ -533,6 +537,10 @@ module Aws::LakeFormation
     #   resp.failures[0].request_entry.resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
     #   resp.failures[0].request_entry.resource.data_location.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.data_location.resource_arn #=> String
+    #   resp.failures[0].request_entry.resource.data_cells_filter.table_catalog_id #=> String
+    #   resp.failures[0].request_entry.resource.data_cells_filter.database_name #=> String
+    #   resp.failures[0].request_entry.resource.data_cells_filter.table_name #=> String
+    #   resp.failures[0].request_entry.resource.data_cells_filter.name #=> String
     #   resp.failures[0].request_entry.resource.lf_tag.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.lf_tag.tag_key #=> String
     #   resp.failures[0].request_entry.resource.lf_tag.tag_values #=> Array
@@ -565,7 +573,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, Array<Types::BatchPermissionsRequestEntry>] :entries
     #   A list of up to 20 entries for resource permissions to be revoked by
@@ -612,6 +620,12 @@ module Aws::LakeFormation
     #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
+    #           data_cells_filter: {
+    #             table_catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             name: "NameString",
+    #           },
     #           lf_tag: {
     #             catalog_id: "CatalogIdString",
     #             tag_key: "NameString", # required
@@ -653,6 +667,10 @@ module Aws::LakeFormation
     #   resp.failures[0].request_entry.resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
     #   resp.failures[0].request_entry.resource.data_location.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.data_location.resource_arn #=> String
+    #   resp.failures[0].request_entry.resource.data_cells_filter.table_catalog_id #=> String
+    #   resp.failures[0].request_entry.resource.data_cells_filter.database_name #=> String
+    #   resp.failures[0].request_entry.resource.data_cells_filter.table_name #=> String
+    #   resp.failures[0].request_entry.resource.data_cells_filter.name #=> String
     #   resp.failures[0].request_entry.resource.lf_tag.catalog_id #=> String
     #   resp.failures[0].request_entry.resource.lf_tag.tag_key #=> String
     #   resp.failures[0].request_entry.resource.lf_tag.tag_values #=> Array
@@ -679,16 +697,107 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # Creates a tag with the specified name and values.
+    # Attempts to cancel the specified transaction. Returns an exception if
+    # the transaction was previously committed.
+    #
+    # @option params [required, String] :transaction_id
+    #   The transaction to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_transaction({
+    #     transaction_id: "TransactionIdString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CancelTransaction AWS API Documentation
+    #
+    # @overload cancel_transaction(params = {})
+    # @param [Hash] params ({})
+    def cancel_transaction(params = {}, options = {})
+      req = build_request(:cancel_transaction, params)
+      req.send_request(options)
+    end
+
+    # Attempts to commit the specified transaction. Returns an exception if
+    # the transaction was previously aborted. This API action is idempotent
+    # if called multiple times for the same transaction.
+    #
+    # @option params [required, String] :transaction_id
+    #   The transaction to commit.
+    #
+    # @return [Types::CommitTransactionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CommitTransactionResponse#transaction_status #transaction_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.commit_transaction({
+    #     transaction_id: "TransactionIdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transaction_status #=> String, one of "ACTIVE", "COMMITTED", "ABORTED", "COMMIT_IN_PROGRESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CommitTransaction AWS API Documentation
+    #
+    # @overload commit_transaction(params = {})
+    # @param [Hash] params ({})
+    def commit_transaction(params = {}, options = {})
+      req = build_request(:commit_transaction, params)
+      req.send_request(options)
+    end
+
+    # Creates a data cell filter to allow one to grant access to certain
+    # columns on certain rows.
+    #
+    # @option params [required, Types::DataCellsFilter] :table_data
+    #   A `DataCellsFilter` structure containing information about the data
+    #   cells filter.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_cells_filter({
+    #     table_data: { # required
+    #       table_catalog_id: "CatalogIdString", # required
+    #       database_name: "NameString", # required
+    #       table_name: "NameString", # required
+    #       name: "NameString", # required
+    #       row_filter: {
+    #         filter_expression: "PredicateString",
+    #         all_rows_wildcard: {
+    #         },
+    #       },
+    #       column_names: ["NameString"],
+    #       column_wildcard: {
+    #         excluded_column_names: ["NameString"],
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateDataCellsFilter AWS API Documentation
+    #
+    # @overload create_data_cells_filter(params = {})
+    # @param [Hash] params ({})
+    def create_data_cells_filter(params = {}, options = {})
+      req = build_request(:create_data_cells_filter, params)
+      req.send_request(options)
+    end
+
+    # Creates an LF-tag with the specified name and values.
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, String] :tag_key
-    #   The key-name for the tag.
+    #   The key-name for the LF-tag.
     #
     # @option params [required, Array<String>] :tag_values
     #   A list of possible values an attribute can take.
@@ -712,22 +821,56 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # Deletes the specified tag key name. If the attribute key does not
-    # exist or the tag does not exist, then the operation will not do
+    # Deletes a data cell filter.
+    #
+    # @option params [String] :table_catalog_id
+    #   The ID of the catalog to which the table belongs.
+    #
+    # @option params [String] :database_name
+    #   A database in the Glue Data Catalog.
+    #
+    # @option params [String] :table_name
+    #   A table in the database.
+    #
+    # @option params [String] :name
+    #   The name given by the user to the data filter cell.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_cells_filter({
+    #     table_catalog_id: "CatalogIdString",
+    #     database_name: "NameString",
+    #     table_name: "NameString",
+    #     name: "NameString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteDataCellsFilter AWS API Documentation
+    #
+    # @overload delete_data_cells_filter(params = {})
+    # @param [Hash] params ({})
+    def delete_data_cells_filter(params = {}, options = {})
+      req = build_request(:delete_data_cells_filter, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified LF-tag key name. If the attribute key does not
+    # exist or the LF-tag does not exist, then the operation will not do
     # anything. If the attribute key exists, then the operation checks if
     # any resources are tagged with this attribute key, if yes, the API
     # throws a 400 Exception with the message "Delete not allowed" as the
-    # tag key is still attached with resources. You can consider untagging
-    # resources with this tag key.
+    # LF-tag key is still attached with resources. You can consider
+    # untagging resources with this LF-tag key.
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, String] :tag_key
-    #   The key-name for the tag to delete.
+    #   The key-name for the LF-tag to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -744,6 +887,64 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def delete_lf_tag(params = {}, options = {})
       req = build_request(:delete_lf_tag, params)
+      req.send_request(options)
+    end
+
+    # For a specific governed table, provides a list of Amazon S3 objects
+    # that will be written during the current transaction and that can be
+    # automatically deleted if the transaction is canceled. Without this
+    # call, no Amazon S3 objects are automatically deleted when a
+    # transaction cancels.
+    #
+    # The Glue ETL library function `write_dynamic_frame.from_catalog()`
+    # includes an option to automatically call `DeleteObjectsOnCancel`
+    # before writes. For more information, see [Rolling Back Amazon S3
+    # Writes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/transactions-data-operations.html#rolling-back-writes
+    #
+    # @option params [String] :catalog_id
+    #   The Glue data catalog that contains the governed table. Defaults to
+    #   the current account ID.
+    #
+    # @option params [required, String] :database_name
+    #   The database that contains the governed table.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the governed table.
+    #
+    # @option params [required, String] :transaction_id
+    #   ID of the transaction that the writes occur in.
+    #
+    # @option params [required, Array<Types::VirtualObject>] :objects
+    #   A list of VirtualObject structures, which indicates the Amazon S3
+    #   objects to be deleted if the transaction cancels.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_objects_on_cancel({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     transaction_id: "TransactionIdString", # required
+    #     objects: [ # required
+    #       {
+    #         uri: "URI", # required
+    #         etag: "ETagString",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteObjectsOnCancel AWS API Documentation
+    #
+    # @overload delete_objects_on_cancel(params = {})
+    # @param [Hash] params ({})
+    def delete_objects_on_cancel(params = {}, options = {})
+      req = build_request(:delete_objects_on_cancel, params)
       req.send_request(options)
     end
 
@@ -774,7 +975,7 @@ module Aws::LakeFormation
     end
 
     # Retrieves the current data access role for the given resource
-    # registered in AWS Lake Formation.
+    # registered in Lake Formation.
     #
     # @option params [required, String] :resource_arn
     #   The resource ARN.
@@ -804,6 +1005,63 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Returns the details of a single transaction.
+    #
+    # @option params [required, String] :transaction_id
+    #   The transaction for which to return status.
+    #
+    # @return [Types::DescribeTransactionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTransactionResponse#transaction_description #transaction_description} => Types::TransactionDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_transaction({
+    #     transaction_id: "TransactionIdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transaction_description.transaction_id #=> String
+    #   resp.transaction_description.transaction_status #=> String, one of "ACTIVE", "COMMITTED", "ABORTED", "COMMIT_IN_PROGRESS"
+    #   resp.transaction_description.transaction_start_time #=> Time
+    #   resp.transaction_description.transaction_end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeTransaction AWS API Documentation
+    #
+    # @overload describe_transaction(params = {})
+    # @param [Hash] params ({})
+    def describe_transaction(params = {}, options = {})
+      req = build_request(:describe_transaction, params)
+      req.send_request(options)
+    end
+
+    # Indicates to the service that the specified transaction is still
+    # active and should not be treated as idle and aborted.
+    #
+    # Write transactions that remain idle for a long period are
+    # automatically aborted unless explicitly extended.
+    #
+    # @option params [String] :transaction_id
+    #   The transaction to extend.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.extend_transaction({
+    #     transaction_id: "TransactionIdString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ExtendTransaction AWS API Documentation
+    #
+    # @overload extend_transaction(params = {})
+    # @param [Hash] params ({})
+    def extend_transaction(params = {}, options = {})
+      req = build_request(:extend_transaction, params)
+      req.send_request(options)
+    end
+
     # Retrieves the list of the data lake administrators of a Lake
     # Formation-managed data lake.
     #
@@ -811,7 +1069,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @return [Types::GetDataLakeSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -856,7 +1114,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which you want to
@@ -903,6 +1161,10 @@ module Aws::LakeFormation
     #   resp.permissions[0].resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
     #   resp.permissions[0].resource.data_location.catalog_id #=> String
     #   resp.permissions[0].resource.data_location.resource_arn #=> String
+    #   resp.permissions[0].resource.data_cells_filter.table_catalog_id #=> String
+    #   resp.permissions[0].resource.data_cells_filter.database_name #=> String
+    #   resp.permissions[0].resource.data_cells_filter.table_name #=> String
+    #   resp.permissions[0].resource.data_cells_filter.name #=> String
     #   resp.permissions[0].resource.lf_tag.catalog_id #=> String
     #   resp.permissions[0].resource.lf_tag.tag_key #=> String
     #   resp.permissions[0].resource.lf_tag.tag_values #=> Array
@@ -930,16 +1192,16 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # Returns a tag definition.
+    # Returns an LF-tag definition.
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, String] :tag_key
-    #   The key-name for the tag.
+    #   The key-name for the LF-tag.
     #
     # @return [Types::GetLFTagResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -970,19 +1232,91 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # Returns the tags applied to a resource.
+    # Returns the state of a query previously submitted. Clients are
+    # expected to poll `GetQueryState` to monitor the current state of the
+    # planning before retrieving the work units. A query state is only
+    # visible to the principal that made the initial call to
+    # `StartQueryPlanning`.
+    #
+    # @option params [required, String] :query_id
+    #   The ID of the plan query operation.
+    #
+    # @return [Types::GetQueryStateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryStateResponse#error #error} => String
+    #   * {Types::GetQueryStateResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_state({
+    #     query_id: "GetQueryStateRequestQueryIdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error #=> String
+    #   resp.state #=> String, one of "PENDING", "WORKUNITS_AVAILABLE", "ERROR", "FINISHED", "EXPIRED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetQueryState AWS API Documentation
+    #
+    # @overload get_query_state(params = {})
+    # @param [Hash] params ({})
+    def get_query_state(params = {}, options = {})
+      req = build_request(:get_query_state, params)
+      req.send_request(options)
+    end
+
+    # Retrieves statistics on the planning and execution of a query.
+    #
+    # @option params [required, String] :query_id
+    #   The ID of the plan query operation.
+    #
+    # @return [Types::GetQueryStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryStatisticsResponse#execution_statistics #execution_statistics} => Types::ExecutionStatistics
+    #   * {Types::GetQueryStatisticsResponse#planning_statistics #planning_statistics} => Types::PlanningStatistics
+    #   * {Types::GetQueryStatisticsResponse#query_submission_time #query_submission_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_statistics({
+    #     query_id: "GetQueryStatisticsRequestQueryIdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_statistics.average_execution_time_millis #=> Integer
+    #   resp.execution_statistics.data_scanned_bytes #=> Integer
+    #   resp.execution_statistics.work_units_executed_count #=> Integer
+    #   resp.planning_statistics.estimated_data_to_scan_bytes #=> Integer
+    #   resp.planning_statistics.planning_time_millis #=> Integer
+    #   resp.planning_statistics.queue_time_millis #=> Integer
+    #   resp.planning_statistics.work_units_generated_count #=> Integer
+    #   resp.query_submission_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetQueryStatistics AWS API Documentation
+    #
+    # @overload get_query_statistics(params = {})
+    # @param [Hash] params ({})
+    def get_query_statistics(params = {}, options = {})
+      req = build_request(:get_query_statistics, params)
+      req.send_request(options)
+    end
+
+    # Returns the LF-tags applied to a resource.
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, Types::Resource] :resource
-    #   The resource for which you want to return tags.
+    #   The database, table, or column resource for which you want to return
+    #   LF-tags.
     #
     # @option params [Boolean] :show_assigned_lf_tags
-    #   Indicates whether to show the assigned tags.
+    #   Indicates whether to show the assigned LF-tags.
     #
     # @return [Types::GetResourceLFTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1020,6 +1354,12 @@ module Aws::LakeFormation
     #       data_location: {
     #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString",
     #       },
     #       lf_tag: {
     #         catalog_id: "CatalogIdString",
@@ -1069,6 +1409,181 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Returns the set of Amazon S3 objects that make up the specified
+    # governed table. A transaction ID or timestamp can be specified for
+    # time-travel queries.
+    #
+    # @option params [String] :catalog_id
+    #   The catalog containing the governed table. Defaults to the caller’s
+    #   account.
+    #
+    # @option params [required, String] :database_name
+    #   The database containing the governed table.
+    #
+    # @option params [required, String] :table_name
+    #   The governed table for which to retrieve objects.
+    #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to read the governed table contents. If
+    #   this transaction has aborted, an error is returned. If not set,
+    #   defaults to the most recent committed transaction. Cannot be specified
+    #   along with `QueryAsOfTime`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :query_as_of_time
+    #   The time as of when to read the governed table contents. If not set,
+    #   the most recent transaction commit time is used. Cannot be specified
+    #   along with `TransactionId`.
+    #
+    # @option params [String] :partition_predicate
+    #   A predicate to filter the objects returned based on the partition keys
+    #   defined in the governed table.
+    #
+    #   * The comparison operators supported are: =, &gt;, &lt;, &gt;=, &lt;=
+    #
+    #   * The logical operators supported are: AND
+    #
+    #   * The data types supported are integer, long, date(yyyy-MM-dd),
+    #     timestamp(yyyy-MM-dd HH:mm:ssXXX or yyyy-MM-dd HH:mm:ss"), string
+    #     and decimal.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies how many values to return in a page.
+    #
+    # @option params [String] :next_token
+    #   A continuation token if this is not the first call to retrieve these
+    #   objects.
+    #
+    # @return [Types::GetTableObjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTableObjectsResponse#objects #objects} => Array&lt;Types::PartitionObjects&gt;
+    #   * {Types::GetTableObjectsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_table_objects({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     transaction_id: "TransactionIdString",
+    #     query_as_of_time: Time.now,
+    #     partition_predicate: "PredicateString",
+    #     max_results: 1,
+    #     next_token: "TokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.objects #=> Array
+    #   resp.objects[0].partition_values #=> Array
+    #   resp.objects[0].partition_values[0] #=> String
+    #   resp.objects[0].objects #=> Array
+    #   resp.objects[0].objects[0].uri #=> String
+    #   resp.objects[0].objects[0].etag #=> String
+    #   resp.objects[0].objects[0].size #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTableObjects AWS API Documentation
+    #
+    # @overload get_table_objects(params = {})
+    # @param [Hash] params ({})
+    def get_table_objects(params = {}, options = {})
+      req = build_request(:get_table_objects, params)
+      req.send_request(options)
+    end
+
+    # Returns the work units resulting from the query. Work units can be
+    # executed in any order and in parallel.
+    #
+    # @option params [required, String] :query_id
+    #   The ID of the plan query operation for which to get results.
+    #
+    # @option params [required, Integer] :work_unit_id
+    #   The work unit ID for which to get results. Value generated by
+    #   enumerating `WorkUnitIdMin` to `WorkUnitIdMax` (inclusive) from the
+    #   `WorkUnitRange` in the output of `GetWorkUnits`.
+    #
+    # @option params [required, String] :work_unit_token
+    #   A work token used to query the execution service. Token output from
+    #   `GetWorkUnits`.
+    #
+    # @return [Types::GetWorkUnitResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkUnitResultsResponse#result_stream #result_stream} => IO
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_work_unit_results({
+    #     query_id: "GetWorkUnitResultsRequestQueryIdString", # required
+    #     work_unit_id: 1, # required
+    #     work_unit_token: "SyntheticGetWorkUnitResultsRequestWorkUnitTokenString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result_stream #=> IO
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetWorkUnitResults AWS API Documentation
+    #
+    # @overload get_work_unit_results(params = {})
+    # @param [Hash] params ({})
+    def get_work_unit_results(params = {}, options = {}, &block)
+      req = build_request(:get_work_unit_results, params)
+      req.send_request(options, &block)
+    end
+
+    # Retrieves the work units generated by the `StartQueryPlanning`
+    # operation.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @option params [Integer] :page_size
+    #   The size of each page to get in the Amazon Web Services service call.
+    #   This does not affect the number of items returned in the command's
+    #   output. Setting a smaller page size results in more calls to the
+    #   Amazon Web Services service, retrieving fewer items in each call. This
+    #   can help prevent the Amazon Web Services service calls from timing
+    #   out.
+    #
+    # @option params [required, String] :query_id
+    #   The ID of the plan query operation.
+    #
+    # @return [Types::GetWorkUnitsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkUnitsResponse#next_token #next_token} => String
+    #   * {Types::GetWorkUnitsResponse#query_id #query_id} => String
+    #   * {Types::GetWorkUnitsResponse#work_unit_ranges #work_unit_ranges} => Array&lt;Types::WorkUnitRange&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_work_units({
+    #     next_token: "Token",
+    #     page_size: 1,
+    #     query_id: "GetWorkUnitsRequestQueryIdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.query_id #=> String
+    #   resp.work_unit_ranges #=> Array
+    #   resp.work_unit_ranges[0].work_unit_id_max #=> Integer
+    #   resp.work_unit_ranges[0].work_unit_id_min #=> Integer
+    #   resp.work_unit_ranges[0].work_unit_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetWorkUnits AWS API Documentation
+    #
+    # @overload get_work_units(params = {})
+    # @param [Hash] params ({})
+    def get_work_units(params = {}, options = {})
+      req = build_request(:get_work_units, params)
+      req.send_request(options)
+    end
+
     # Grants permissions to the principal to access metadata in the Data
     # Catalog and data organized in underlying data storage such as Amazon
     # S3.
@@ -1084,7 +1599,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, Types::DataLakePrincipal] :principal
     #   The principal to be granted the permissions on the resource. Supported
@@ -1096,15 +1611,15 @@ module Aws::LakeFormation
     #   maintains the permissions already granted.
     #
     # @option params [required, Types::Resource] :resource
-    #   The resource to which permissions are to be granted. Resources in AWS
-    #   Lake Formation are the Data Catalog, databases, and tables.
+    #   The resource to which permissions are to be granted. Resources in Lake
+    #   Formation are the Data Catalog, databases, and tables.
     #
     # @option params [required, Array<String>] :permissions
-    #   The permissions granted to the principal on the resource. AWS Lake
+    #   The permissions granted to the principal on the resource. Lake
     #   Formation defines privileges to grant and revoke access to metadata in
     #   the Data Catalog and data organized in underlying data storage such as
-    #   Amazon S3. AWS Lake Formation requires that each principal be
-    #   authorized to perform a specific task on AWS Lake Formation resources.
+    #   Amazon S3. Lake Formation requires that each principal be authorized
+    #   to perform a specific task on Lake Formation resources.
     #
     # @option params [Array<String>] :permissions_with_grant_option
     #   Indicates a list of the granted permissions that the principal may
@@ -1147,6 +1662,12 @@ module Aws::LakeFormation
     #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
     #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString",
+    #       },
     #       lf_tag: {
     #         catalog_id: "CatalogIdString",
     #         tag_key: "NameString", # required
@@ -1176,20 +1697,75 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # Lists tags that the requester has permission to view.
+    # Lists all the data cell filters on a table.
+    #
+    # @option params [Types::TableResource] :table
+    #   A table in the Glue Data Catalog.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the response.
+    #
+    # @return [Types::ListDataCellsFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataCellsFilterResponse#data_cells_filters #data_cells_filters} => Array&lt;Types::DataCellsFilter&gt;
+    #   * {Types::ListDataCellsFilterResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_cells_filter({
+    #     table: {
+    #       catalog_id: "CatalogIdString",
+    #       database_name: "NameString", # required
+    #       name: "NameString",
+    #       table_wildcard: {
+    #       },
+    #     },
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_cells_filters #=> Array
+    #   resp.data_cells_filters[0].table_catalog_id #=> String
+    #   resp.data_cells_filters[0].database_name #=> String
+    #   resp.data_cells_filters[0].table_name #=> String
+    #   resp.data_cells_filters[0].name #=> String
+    #   resp.data_cells_filters[0].row_filter.filter_expression #=> String
+    #   resp.data_cells_filters[0].column_names #=> Array
+    #   resp.data_cells_filters[0].column_names[0] #=> String
+    #   resp.data_cells_filters[0].column_wildcard.excluded_column_names #=> Array
+    #   resp.data_cells_filters[0].column_wildcard.excluded_column_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListDataCellsFilter AWS API Documentation
+    #
+    # @overload list_data_cells_filter(params = {})
+    # @param [Hash] params ({})
+    def list_data_cells_filter(params = {}, options = {})
+      req = build_request(:list_data_cells_filter, params)
+      req.send_request(options)
+    end
+
+    # Lists LF-tags that the requester has permission to view.
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [String] :resource_share_type
-    #   If resource share type is `ALL`, returns both in-account tags and
-    #   shared tags that the requester has permission to view. If resource
-    #   share type is `FOREIGN`, returns all share tags that the requester can
-    #   view. If no resource share type is passed, lists tags in the given
-    #   catalog ID that the requester has permission to view.
+    #   If resource share type is `ALL`, returns both in-account LF-tags and
+    #   shared LF-tags that the requester has permission to view. If resource
+    #   share type is `FOREIGN`, returns all share LF-tags that the requester
+    #   can view. If no resource share type is passed, lists LF-tags in the
+    #   given catalog ID that the requester has permission to view.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -1202,6 +1778,8 @@ module Aws::LakeFormation
     #
     #   * {Types::ListLFTagsResponse#lf_tags #lf_tags} => Array&lt;Types::LFTagPair&gt;
     #   * {Types::ListLFTagsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1249,7 +1827,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [Types::DataLakePrincipal] :principal
     #   Specifies a principal to filter the permissions returned.
@@ -1270,6 +1848,9 @@ module Aws::LakeFormation
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
+    #
+    # @option params [String] :include_related
+    #   Indicates that related permissions should be included in the results.
     #
     # @return [Types::ListPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1313,6 +1894,12 @@ module Aws::LakeFormation
     #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
     #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString",
+    #       },
     #       lf_tag: {
     #         catalog_id: "CatalogIdString",
     #         tag_key: "NameString", # required
@@ -1331,6 +1918,7 @@ module Aws::LakeFormation
     #     },
     #     next_token: "Token",
     #     max_results: 1,
+    #     include_related: "TrueFalseString",
     #   })
     #
     # @example Response structure
@@ -1351,6 +1939,10 @@ module Aws::LakeFormation
     #   resp.principal_resource_permissions[0].resource.table_with_columns.column_wildcard.excluded_column_names[0] #=> String
     #   resp.principal_resource_permissions[0].resource.data_location.catalog_id #=> String
     #   resp.principal_resource_permissions[0].resource.data_location.resource_arn #=> String
+    #   resp.principal_resource_permissions[0].resource.data_cells_filter.table_catalog_id #=> String
+    #   resp.principal_resource_permissions[0].resource.data_cells_filter.database_name #=> String
+    #   resp.principal_resource_permissions[0].resource.data_cells_filter.table_name #=> String
+    #   resp.principal_resource_permissions[0].resource.data_cells_filter.name #=> String
     #   resp.principal_resource_permissions[0].resource.lf_tag.catalog_id #=> String
     #   resp.principal_resource_permissions[0].resource.lf_tag.tag_key #=> String
     #   resp.principal_resource_permissions[0].resource.lf_tag.tag_values #=> Array
@@ -1429,6 +2021,123 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Returns the configuration of all storage optimizers associated with a
+    # specified table.
+    #
+    # @option params [String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   Name of the database where the table is present.
+    #
+    # @option params [required, String] :table_name
+    #   Name of the table.
+    #
+    # @option params [String] :storage_optimizer_type
+    #   The specific type of storage optimizers to list. The supported value
+    #   is `compaction`.
+    #
+    # @option params [Integer] :max_results
+    #   The number of storage optimizers to return on each call.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListTableStorageOptimizersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTableStorageOptimizersResponse#storage_optimizer_list #storage_optimizer_list} => Array&lt;Types::StorageOptimizer&gt;
+    #   * {Types::ListTableStorageOptimizersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_table_storage_optimizers({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     storage_optimizer_type: "COMPACTION", # accepts COMPACTION, GARBAGE_COLLECTION, ALL
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.storage_optimizer_list #=> Array
+    #   resp.storage_optimizer_list[0].storage_optimizer_type #=> String, one of "COMPACTION", "GARBAGE_COLLECTION", "ALL"
+    #   resp.storage_optimizer_list[0].config #=> Hash
+    #   resp.storage_optimizer_list[0].config["StorageOptimizerConfigKey"] #=> String
+    #   resp.storage_optimizer_list[0].error_message #=> String
+    #   resp.storage_optimizer_list[0].warnings #=> String
+    #   resp.storage_optimizer_list[0].last_run_details #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListTableStorageOptimizers AWS API Documentation
+    #
+    # @overload list_table_storage_optimizers(params = {})
+    # @param [Hash] params ({})
+    def list_table_storage_optimizers(params = {}, options = {})
+      req = build_request(:list_table_storage_optimizers, params)
+      req.send_request(options)
+    end
+
+    # Returns metadata about transactions and their status. To prevent the
+    # response from growing indefinitely, only uncommitted transactions and
+    # those available for time-travel queries are returned.
+    #
+    # This operation can help you identify uncommitted transactions or to
+    # get information about transactions.
+    #
+    # @option params [String] :catalog_id
+    #   The catalog for which to list transactions. Defaults to the account ID
+    #   of the caller.
+    #
+    # @option params [String] :status_filter
+    #   A filter indicating the status of transactions to return. Options are
+    #   ALL \| COMPLETED \| COMMITTED \| ABORTED \| ACTIVE. The default is
+    #   `ALL`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of transactions to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   A continuation token if this is not the first call to retrieve
+    #   transactions.
+    #
+    # @return [Types::ListTransactionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTransactionsResponse#transactions #transactions} => Array&lt;Types::TransactionDescription&gt;
+    #   * {Types::ListTransactionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_transactions({
+    #     catalog_id: "CatalogIdString",
+    #     status_filter: "ALL", # accepts ALL, COMPLETED, ACTIVE, COMMITTED, ABORTED
+    #     max_results: 1,
+    #     next_token: "TokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transactions #=> Array
+    #   resp.transactions[0].transaction_id #=> String
+    #   resp.transactions[0].transaction_status #=> String, one of "ACTIVE", "COMMITTED", "ABORTED", "COMMIT_IN_PROGRESS"
+    #   resp.transactions[0].transaction_start_time #=> Time
+    #   resp.transactions[0].transaction_end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListTransactions AWS API Documentation
+    #
+    # @overload list_transactions(params = {})
+    # @param [Hash] params ({})
+    def list_transactions(params = {}, options = {})
+      req = build_request(:list_transactions, params)
+      req.send_request(options)
+    end
+
     # Sets the list of data lake administrators who have admin privileges on
     # all resources managed by Lake Formation. For more information on admin
     # privileges, see [Granting Lake Formation Permissions][1].
@@ -1445,10 +2154,10 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, Types::DataLakeSettings] :data_lake_settings
-    #   A structure representing a list of AWS Lake Formation principals
+    #   A structure representing a list of Lake Formation principals
     #   designated as data lake administrators.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1503,7 +2212,7 @@ module Aws::LakeFormation
     # attaches it to the service-linked role. When you register subsequent
     # paths, Lake Formation adds the path to the existing policy.
     #
-    # The following request registers a new location and gives AWS Lake
+    # The following request registers a new location and gives Lake
     # Formation permission to use the service-linked role to access that
     # location.
     #
@@ -1519,9 +2228,9 @@ module Aws::LakeFormation
     #   register.
     #
     # @option params [Boolean] :use_service_linked_role
-    #   Designates an AWS Identity and Access Management (IAM) service-linked
-    #   role by registering this role with the Data Catalog. A service-linked
-    #   role is a unique type of IAM role that is linked directly to Lake
+    #   Designates an Identity and Access Management (IAM) service-linked role
+    #   by registering this role with the Data Catalog. A service-linked role
+    #   is a unique type of IAM role that is linked directly to Lake
     #   Formation.
     #
     #   For more information, see [Using Service-Linked Roles for Lake
@@ -1553,7 +2262,7 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # Removes a tag from the resource. Only database, table, or
+    # Removes an LF-tag from the resource. Only database, table, or
     # tableWithColumns resource are allowed. To tag columns, use the column
     # inclusion list in `tableWithColumns` to specify column input.
     #
@@ -1561,13 +2270,14 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, Types::Resource] :resource
-    #   The resource where you want to remove a tag.
+    #   The database, table, or column resource where you want to remove an
+    #   LF-tag.
     #
     # @option params [required, Array<Types::LFTagPair>] :lf_tags
-    #   The tags to be removed from the resource.
+    #   The LF-tags to be removed from the resource.
     #
     # @return [Types::RemoveLFTagsFromResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1603,6 +2313,12 @@ module Aws::LakeFormation
     #       data_location: {
     #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString",
     #       },
     #       lf_tag: {
     #         catalog_id: "CatalogIdString",
@@ -1656,7 +2372,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, Types::DataLakePrincipal] :principal
     #   The principal to be revoked permissions on the resource.
@@ -1713,6 +2429,12 @@ module Aws::LakeFormation
     #         catalog_id: "CatalogIdString",
     #         resource_arn: "ResourceArnString", # required
     #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString",
+    #       },
     #       lf_tag: {
     #         catalog_id: "CatalogIdString",
     #         tag_key: "NameString", # required
@@ -1760,7 +2482,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, Array<Types::LFTag>] :expression
     #   A list of conditions (`LFTag` structures) to search for in database
@@ -1770,6 +2492,8 @@ module Aws::LakeFormation
     #
     #   * {Types::SearchDatabasesByLFTagsResponse#next_token #next_token} => String
     #   * {Types::SearchDatabasesByLFTagsResponse#database_list #database_list} => Array&lt;Types::TaggedDatabase&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1808,7 +2532,7 @@ module Aws::LakeFormation
 
     # This operation allows a search on `TABLE` resources by `LFTag`s. This
     # will be used by admins who want to grant user permissions on certain
-    # LFTags. Before making a grant, the admin can use
+    # LF-tags. Before making a grant, the admin can use
     # `SearchTablesByLFTags` to find all resources where the given `LFTag`s
     # are valid to verify whether the returned resources can be shared.
     #
@@ -1823,7 +2547,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, Array<Types::LFTag>] :expression
     #   A list of conditions (`LFTag` structures) to search for in table
@@ -1833,6 +2557,8 @@ module Aws::LakeFormation
     #
     #   * {Types::SearchTablesByLFTagsResponse#next_token #next_token} => String
     #   * {Types::SearchTablesByLFTagsResponse#table_list #table_list} => Array&lt;Types::TaggedTable&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1882,27 +2608,103 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
-    # Updates the list of possible values for the specified tag key. If the
-    # tag does not exist, the operation throws an EntityNotFoundException.
-    # The values in the delete key values will be deleted from list of
-    # possible values. If any value in the delete key values is attached to
-    # a resource, then API errors out with a 400 Exception - "Update not
-    # allowed". Untag the attribute before deleting the tag key's value.
+    # Submits a request to process a query statement.
+    #
+    # This operation generates work units that can be retrieved with the
+    # `GetWorkUnits` operation as soon as the query state is
+    # WORKUNITS\_AVAILABLE or FINISHED.
+    #
+    # @option params [required, Types::QueryPlanningContext] :query_planning_context
+    #   A structure containing information about the query plan.
+    #
+    # @option params [required, String] :query_string
+    #   A PartiQL query statement used as an input to the planner service.
+    #
+    # @return [Types::StartQueryPlanningResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartQueryPlanningResponse#query_id #query_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_query_planning({
+    #     query_planning_context: { # required
+    #       catalog_id: "CatalogIdString",
+    #       database_name: "QueryPlanningContextDatabaseNameString", # required
+    #       query_as_of_time: Time.now,
+    #       query_parameters: {
+    #         "String" => "String",
+    #       },
+    #       transaction_id: "TransactionIdString",
+    #     },
+    #     query_string: "SyntheticStartQueryPlanningRequestQueryString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/StartQueryPlanning AWS API Documentation
+    #
+    # @overload start_query_planning(params = {})
+    # @param [Hash] params ({})
+    def start_query_planning(params = {}, options = {})
+      req = build_request(:start_query_planning, params)
+      req.send_request(options)
+    end
+
+    # Starts a new transaction and returns its transaction ID. Transaction
+    # IDs are opaque objects that you can use to identify a transaction.
+    #
+    # @option params [String] :transaction_type
+    #   Indicates whether this transaction should be read only or read and
+    #   write. Writes made using a read-only transaction ID will be rejected.
+    #   Read-only transactions do not need to be committed.
+    #
+    # @return [Types::StartTransactionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTransactionResponse#transaction_id #transaction_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_transaction({
+    #     transaction_type: "READ_AND_WRITE", # accepts READ_AND_WRITE, READ_ONLY
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transaction_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/StartTransaction AWS API Documentation
+    #
+    # @overload start_transaction(params = {})
+    # @param [Hash] params ({})
+    def start_transaction(params = {}, options = {})
+      req = build_request(:start_transaction, params)
+      req.send_request(options)
+    end
+
+    # Updates the list of possible values for the specified LF-tag key. If
+    # the LF-tag does not exist, the operation throws an
+    # EntityNotFoundException. The values in the delete key values will be
+    # deleted from list of possible values. If any value in the delete key
+    # values is attached to a resource, then API errors out with a 400
+    # Exception - "Update not allowed". Untag the attribute before
+    # deleting the LF-tag key's value.
     #
     # @option params [String] :catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #
     # @option params [required, String] :tag_key
-    #   The key-name for the tag for which to add or delete values.
+    #   The key-name for the LF-tag for which to add or delete values.
     #
     # @option params [Array<String>] :tag_values_to_delete
-    #   A list of tag values to delete from the tag.
+    #   A list of LF-tag values to delete from the LF-tag.
     #
     # @option params [Array<String>] :tag_values_to_add
-    #   A list of tag values to add from the tag.
+    #   A list of LF-tag values to add from the LF-tag.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1925,10 +2727,10 @@ module Aws::LakeFormation
     end
 
     # Updates the data access role used for vending access to the given
-    # (registered) resource in AWS Lake Formation.
+    # (registered) resource in Lake Formation.
     #
     # @option params [required, String] :role_arn
-    #   The new role to use for the given resource registered in AWS Lake
+    #   The new role to use for the given resource registered in Lake
     #   Formation.
     #
     # @option params [required, String] :resource_arn
@@ -1952,6 +2754,105 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Updates the manifest of Amazon S3 objects that make up the specified
+    # governed table.
+    #
+    # @option params [String] :catalog_id
+    #   The catalog containing the governed table to update. Defaults to the
+    #   caller’s account ID.
+    #
+    # @option params [required, String] :database_name
+    #   The database containing the governed table to update.
+    #
+    # @option params [required, String] :table_name
+    #   The governed table to update.
+    #
+    # @option params [required, String] :transaction_id
+    #   The transaction at which to do the write.
+    #
+    # @option params [required, Array<Types::WriteOperation>] :write_operations
+    #   A list of `WriteOperation` objects that define an object to add to or
+    #   delete from the manifest for a governed table.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_table_objects({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     transaction_id: "TransactionIdString", # required
+    #     write_operations: [ # required
+    #       {
+    #         add_object: {
+    #           uri: "URI", # required
+    #           etag: "ETagString", # required
+    #           size: 1, # required
+    #           partition_values: ["PartitionValueString"],
+    #         },
+    #         delete_object: {
+    #           uri: "URI", # required
+    #           etag: "ETagString",
+    #           partition_values: ["PartitionValueString"],
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateTableObjects AWS API Documentation
+    #
+    # @overload update_table_objects(params = {})
+    # @param [Hash] params ({})
+    def update_table_objects(params = {}, options = {})
+      req = build_request(:update_table_objects, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of the storage optimizers for a table.
+    #
+    # @option params [String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   Name of the database where the table is present.
+    #
+    # @option params [required, String] :table_name
+    #   Name of the table for which to enable the storage optimizer.
+    #
+    # @option params [required, Hash<String,Hash>] :storage_optimizer_config
+    #   Name of the table for which to enable the storage optimizer.
+    #
+    # @return [Types::UpdateTableStorageOptimizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTableStorageOptimizerResponse#result #result} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_table_storage_optimizer({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     storage_optimizer_config: { # required
+    #       "COMPACTION" => {
+    #         "StorageOptimizerConfigKey" => "StorageOptimizerConfigValue",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateTableStorageOptimizer AWS API Documentation
+    #
+    # @overload update_table_storage_optimizer(params = {})
+    # @param [Hash] params ({})
+    def update_table_storage_optimizer(params = {}, options = {})
+      req = build_request(:update_table_storage_optimizer, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1965,7 +2866,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

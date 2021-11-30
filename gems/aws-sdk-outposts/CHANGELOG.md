@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2021-11-30)
+------------------
+
+* Feature - This release adds the SupportedHardwareType parameter to CreateOutpost.
+
 1.24.0 (2021-11-26)
 ------------------
 

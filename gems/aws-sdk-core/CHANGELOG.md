@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.124.0 (2021-11-30)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 3.123.0 (2021-11-23)
 ------------------
 

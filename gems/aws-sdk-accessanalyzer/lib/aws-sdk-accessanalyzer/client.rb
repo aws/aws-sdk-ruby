@@ -119,7 +119,9 @@ module Aws::AccessAnalyzer
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -1740,6 +1742,19 @@ module Aws::AccessAnalyzer
     #   as identity policy or resource policy or a specific input such as
     #   managed policy or Amazon S3 bucket policy.
     #
+    # @option params [String] :validate_policy_resource_type
+    #   The type of resource to attach to your resource policy. Specify a
+    #   value for the policy validation resource type only if the policy type
+    #   is `RESOURCE_POLICY`. For example, to validate a resource policy to
+    #   attach to an Amazon S3 bucket, you can choose `AWS::S3::Bucket` for
+    #   the policy validation resource type.
+    #
+    #   For resource types not supported as valid values, IAM Access Analyzer
+    #   runs policy checks that apply to all resource policies. For example,
+    #   to validate a resource policy to attach to a KMS key, do not specify a
+    #   value for the policy validation resource type and IAM Access Analyzer
+    #   will run policy checks that apply to all resource policies.
+    #
     # @return [Types::ValidatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ValidatePolicyResponse#findings #findings} => Array&lt;Types::ValidatePolicyFinding&gt;
@@ -1755,6 +1770,7 @@ module Aws::AccessAnalyzer
     #     next_token: "Token",
     #     policy_document: "PolicyDocument", # required
     #     policy_type: "IDENTITY_POLICY", # required, accepts IDENTITY_POLICY, RESOURCE_POLICY, SERVICE_CONTROL_POLICY
+    #     validate_policy_resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::S3::AccessPoint, AWS::S3::MultiRegionAccessPoint, AWS::S3ObjectLambda::AccessPoint
     #   })
     #
     # @example Response structure
@@ -1801,7 +1817,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

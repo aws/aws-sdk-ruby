@@ -129,6 +129,7 @@ module Aws::Snowball
     StorageLimit = Shapes::IntegerShape.new(name: 'StorageLimit')
     StorageUnit = Shapes::StringShape.new(name: 'StorageUnit')
     String = Shapes::StringShape.new(name: 'String')
+    TGWOnDeviceServiceConfiguration = Shapes::StructureShape.new(name: 'TGWOnDeviceServiceConfiguration')
     TargetOnDeviceService = Shapes::StructureShape.new(name: 'TargetOnDeviceService')
     TargetOnDeviceServiceList = Shapes::ListShape.new(name: 'TargetOnDeviceServiceList')
     TaxDocuments = Shapes::StructureShape.new(name: 'TaxDocuments')
@@ -310,6 +311,7 @@ module Aws::Snowball
 
     DescribeReturnShippingLabelResult.add_member(:status, Shapes::ShapeRef.new(shape: ShippingLabelStatus, location_name: "Status"))
     DescribeReturnShippingLabelResult.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationDate"))
+    DescribeReturnShippingLabelResult.add_member(:return_shipping_label_uri, Shapes::ShapeRef.new(shape: String, location_name: "ReturnShippingLabelURI"))
     DescribeReturnShippingLabelResult.struct_class = Types::DescribeReturnShippingLabelResult
 
     DeviceConfiguration.add_member(:snowcone_device_configuration, Shapes::ShapeRef.new(shape: SnowconeDeviceConfiguration, location_name: "SnowconeDeviceConfiguration"))
@@ -501,6 +503,7 @@ module Aws::Snowball
     Notification.struct_class = Types::Notification
 
     OnDeviceServiceConfiguration.add_member(:nfs_on_device_service, Shapes::ShapeRef.new(shape: NFSOnDeviceServiceConfiguration, location_name: "NFSOnDeviceService"))
+    OnDeviceServiceConfiguration.add_member(:tgw_on_device_service, Shapes::ShapeRef.new(shape: TGWOnDeviceServiceConfiguration, location_name: "TGWOnDeviceService"))
     OnDeviceServiceConfiguration.struct_class = Types::OnDeviceServiceConfiguration
 
     ReturnShippingLabelAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -524,6 +527,10 @@ module Aws::Snowball
 
     SnowconeDeviceConfiguration.add_member(:wireless_connection, Shapes::ShapeRef.new(shape: WirelessConnection, location_name: "WirelessConnection"))
     SnowconeDeviceConfiguration.struct_class = Types::SnowconeDeviceConfiguration
+
+    TGWOnDeviceServiceConfiguration.add_member(:storage_limit, Shapes::ShapeRef.new(shape: StorageLimit, location_name: "StorageLimit"))
+    TGWOnDeviceServiceConfiguration.add_member(:storage_unit, Shapes::ShapeRef.new(shape: StorageUnit, location_name: "StorageUnit"))
+    TGWOnDeviceServiceConfiguration.struct_class = Types::TGWOnDeviceServiceConfiguration
 
     TargetOnDeviceService.add_member(:service_name, Shapes::ShapeRef.new(shape: DeviceServiceName, location_name: "ServiceName"))
     TargetOnDeviceService.add_member(:transfer_option, Shapes::ShapeRef.new(shape: TransferOption, location_name: "TransferOption"))

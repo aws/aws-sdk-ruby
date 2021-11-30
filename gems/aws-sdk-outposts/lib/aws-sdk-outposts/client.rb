@@ -119,7 +119,9 @@ module Aws::Outposts
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -435,6 +437,9 @@ module Aws::Outposts
     # @option params [Hash<String,String>] :tags
     #   The tags to apply to the Outpost.
     #
+    # @option params [String] :supported_hardware_type
+    #   The type of hardware for this Outpost.
+    #
     # @return [Types::CreateOutpostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOutpostOutput#outpost #outpost} => Types::Outpost
@@ -450,6 +455,7 @@ module Aws::Outposts
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     supported_hardware_type: "RACK", # accepts RACK, SERVER
     #   })
     #
     # @example Response structure
@@ -466,6 +472,7 @@ module Aws::Outposts
     #   resp.outpost.tags #=> Hash
     #   resp.outpost.tags["TagKey"] #=> String
     #   resp.outpost.site_arn #=> String
+    #   resp.outpost.supported_hardware_type #=> String, one of "RACK", "SERVER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOutpost AWS API Documentation
     #
@@ -745,6 +752,7 @@ module Aws::Outposts
     #   resp.outpost.tags #=> Hash
     #   resp.outpost.tags["TagKey"] #=> String
     #   resp.outpost.site_arn #=> String
+    #   resp.outpost.supported_hardware_type #=> String, one of "RACK", "SERVER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpost AWS API Documentation
     #
@@ -1087,6 +1095,7 @@ module Aws::Outposts
     #   resp.outposts[0].tags #=> Hash
     #   resp.outposts[0].tags["TagKey"] #=> String
     #   resp.outposts[0].site_arn #=> String
+    #   resp.outposts[0].supported_hardware_type #=> String, one of "RACK", "SERVER"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListOutposts AWS API Documentation
@@ -1536,7 +1545,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

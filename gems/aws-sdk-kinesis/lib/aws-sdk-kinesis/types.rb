@@ -39,10 +39,15 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # Output parameter of the GetRecords API. The existing child shard of
+    # the current shard.
+    #
     # @!attribute [rw] shard_id
+    #   The shard ID of the existing child shard of the current shard.
     #   @return [String]
     #
     # @!attribute [rw] parent_shards
+    #   The current shard that is the parent of the existing child shard.
     #   @return [Array<String>]
     #
     # @!attribute [rw] hash_key_range
@@ -146,14 +151,18 @@ module Aws::Kinesis
     #
     #       {
     #         stream_name: "StreamName", # required
-    #         shard_count: 1, # required
+    #         shard_count: 1,
+    #         stream_mode_details: {
+    #           stream_mode: "PROVISIONED", # required, accepts PROVISIONED, ON_DEMAND
+    #         },
     #       }
     #
     # @!attribute [rw] stream_name
-    #   A name to identify the stream. The stream name is scoped to the AWS
-    #   account used by the application that creates the stream. It is also
-    #   scoped by AWS Region. That is, two streams in two different AWS
-    #   accounts can have the same name. Two streams in the same AWS account
+    #   A name to identify the stream. The stream name is scoped to the
+    #   Amazon Web Services account used by the application that creates the
+    #   stream. It is also scoped by Amazon Web Services Region. That is,
+    #   two streams in two different Amazon Web Services accounts can have
+    #   the same name. Two streams in the same Amazon Web Services account
     #   but in two different Regions can also have the same name.
     #   @return [String]
     #
@@ -163,11 +172,19 @@ module Aws::Kinesis
     #   required for greater provisioned throughput.
     #   @return [Integer]
     #
+    # @!attribute [rw] stream_mode_details
+    #   Indicates the capacity mode of the data stream. Currently, in
+    #   Kinesis Data Streams, you can choose between an **on-demand**
+    #   capacity mode and a **provisioned** capacity mode for your data
+    #   streams.
+    #   @return [Types::StreamModeDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStreamInput AWS API Documentation
     #
     class CreateStreamInput < Struct.new(
       :stream_name,
-      :shard_count)
+      :shard_count,
+      :stream_mode_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -241,7 +258,7 @@ module Aws::Kinesis
     # @!attribute [rw] stream_arn
     #   The ARN of the Kinesis data stream that the consumer is registered
     #   with. For more information, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -285,11 +302,22 @@ module Aws::Kinesis
     #   The number of open shards.
     #   @return [Integer]
     #
+    # @!attribute [rw] on_demand_stream_count
+    #   Indicates the number of data streams with the on-demand capacity
+    #   mode.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_demand_stream_count_limit
+    #   The maximum number of data streams with the on-demand capacity mode.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimitsOutput AWS API Documentation
     #
     class DescribeLimitsOutput < Struct.new(
       :shard_limit,
-      :open_shard_count)
+      :open_shard_count,
+      :on_demand_stream_count,
+      :on_demand_stream_count_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -306,7 +334,7 @@ module Aws::Kinesis
     # @!attribute [rw] stream_arn
     #   The ARN of the Kinesis data stream that the consumer is registered
     #   with. For more information, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -362,11 +390,19 @@ module Aws::Kinesis
     # @!attribute [rw] limit
     #   The maximum number of shards to return in a single call. The default
     #   value is 100. If you specify a value greater than 100, at most 100
-    #   shards are returned.
+    #   results are returned.
     #   @return [Integer]
     #
     # @!attribute [rw] exclusive_start_shard_id
     #   The shard ID of the shard to start with.
+    #
+    #   Specify this parameter to indicate that you want to describe the
+    #   stream starting with the shard whose ID immediately follows
+    #   `ExclusiveStartShardId`.
+    #
+    #   If you don't specify this parameter, the default behavior for
+    #   `DescribeStream` is to describe the stream starting with the first
+    #   shard in the stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamInput AWS API Documentation
@@ -682,6 +718,9 @@ module Aws::Kinesis
     #   @return [Integer]
     #
     # @!attribute [rw] child_shards
+    #   The list of the current shard's child shards, returned in the
+    #   `GetRecords` API's response only when the end of the current shard
+    #   is reached.
     #   @return [Array<Types::ChildShard>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecordsOutput AWS API Documentation
@@ -898,8 +937,8 @@ module Aws::Kinesis
 
     # The request was rejected because the state of the specified resource
     # isn't valid for this request. For more information, see [How Key
-    # State Affects Use of a Customer Master Key][1] in the *AWS Key
-    # Management Service Developer Guide*.
+    # State Affects Use of a Customer Master Key][1] in the *Amazon Web
+    # Services Key Management Service Developer Guide*.
     #
     #
     #
@@ -934,7 +973,8 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # The AWS access key ID needs a subscription for the service.
+    # The Amazon Web Services access key ID needs a subscription for the
+    # service.
     #
     # @!attribute [rw] message
     #   A message that provides information about the error.
@@ -950,8 +990,8 @@ module Aws::Kinesis
     end
 
     # The request was denied due to request throttling. For more information
-    # about throttling, see [Limits][1] in the *AWS Key Management Service
-    # Developer Guide*.
+    # about throttling, see [Limits][1] in the *Amazon Web Services Key
+    # Management Service Developer Guide*.
     #
     #
     #
@@ -1048,8 +1088,9 @@ module Aws::Kinesis
     #
     # @!attribute [rw] max_results
     #   The maximum number of shards to return in a single call to
-    #   `ListShards`. The minimum value you can specify for this parameter
-    #   is 1, and the maximum is 10,000, which is also the default.
+    #   `ListShards`. The maximum number of shards to return in a single
+    #   call. The default value is 1000. If you specify a value greater than
+    #   1000, at most 1000 results are returned.
     #
     #   When the number of shards to be listed is greater than the value of
     #   `MaxResults`, the response contains a `NextToken` value that you can
@@ -1069,6 +1110,28 @@ module Aws::Kinesis
     #   @return [Time]
     #
     # @!attribute [rw] shard_filter
+    #   Enables you to filter out the response of the `ListShards` API. You
+    #   can only specify one filter at a time.
+    #
+    #   If you use the `ShardFilter` parameter when invoking the ListShards
+    #   API, the `Type` is the required property and must be specified. If
+    #   you specify the `AT_TRIM_HORIZON`, `FROM_TRIM_HORIZON`, or
+    #   `AT_LATEST` types, you do not need to specify either the `ShardId`
+    #   or the `Timestamp` optional properties.
+    #
+    #   If you specify the `AFTER_SHARD_ID` type, you must also provide the
+    #   value for the optional `ShardId` property. The `ShardId` property is
+    #   identical in fuctionality to the `ExclusiveStartShardId` parameter
+    #   of the `ListShards` API. When `ShardId` property is specified, the
+    #   response includes the shards starting with the shard whose ID
+    #   immediately follows the `ShardId` that you provided.
+    #
+    #   If you specify the `AT_TIMESTAMP` or `FROM_TIMESTAMP_ID` type, you
+    #   must also provide the value for the optional `Timestamp` property.
+    #   If you specify the AT\_TIMESTAMP type, then all shards that were
+    #   open at the provided timestamp are returned. If you specify the
+    #   FROM\_TIMESTAMP type, then all shards starting from the provided
+    #   timestamp to TIP are returned.
     #   @return [Types::ShardFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListShardsInput AWS API Documentation
@@ -1130,7 +1193,7 @@ module Aws::Kinesis
     # @!attribute [rw] stream_arn
     #   The ARN of the Kinesis data stream for which you want to list the
     #   registered consumers. For more information, see [Amazon Resource
-    #   Names (ARNs) and AWS Service Namespaces][1].
+    #   Names (ARNs) and Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -1168,7 +1231,8 @@ module Aws::Kinesis
     #
     # @!attribute [rw] max_results
     #   The maximum number of consumers that you want a single call of
-    #   `ListStreamConsumers` to return.
+    #   `ListStreamConsumers` to return. The default value is 100. If you
+    #   specify a value greater than 100, at most 100 results are returned.
     #   @return [Integer]
     #
     # @!attribute [rw] stream_creation_timestamp
@@ -1237,7 +1301,9 @@ module Aws::Kinesis
     #       }
     #
     # @!attribute [rw] limit
-    #   The maximum number of streams to list.
+    #   The maximum number of streams to list. The default value is 100. If
+    #   you specify a value greater than 100, at most 100 results are
+    #   returned.
     #   @return [Integer]
     #
     # @!attribute [rw] exclusive_start_stream_name
@@ -1256,8 +1322,8 @@ module Aws::Kinesis
     # Represents the output for `ListStreams`.
     #
     # @!attribute [rw] stream_names
-    #   The names of the streams that are associated with the AWS account
-    #   making the `ListStreams` request.
+    #   The names of the streams that are associated with the Amazon Web
+    #   Services account making the `ListStreams` request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] has_more_streams
@@ -1371,7 +1437,8 @@ module Aws::Kinesis
     # too large for the available throughput. Reduce the frequency or size
     # of your requests. For more information, see [Streams Limits][1] in the
     # *Amazon Kinesis Data Streams Developer Guide*, and [Error Retries and
-    # Exponential Backoff in AWS][2] in the *AWS General Reference*.
+    # Exponential Backoff in Amazon Web Services][2] in the *Amazon Web
+    # Services General Reference*.
     #
     #
     #
@@ -1472,7 +1539,7 @@ module Aws::Kinesis
     #   * `NONE`\: Do not encrypt the records in the stream.
     #
     #   * `KMS`\: Use server-side encryption on the records in the stream
-    #     using a customer-managed AWS KMS key.
+    #     using a customer-managed Amazon Web Services KMS key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordOutput AWS API Documentation
@@ -1527,10 +1594,10 @@ module Aws::Kinesis
     #
     # @!attribute [rw] records
     #   An array of successfully and unsuccessfully processed record
-    #   results, correlated with the request by natural ordering. A record
-    #   that is successfully added to a stream includes `SequenceNumber` and
-    #   `ShardId` in the result. A record that fails to be added to a stream
-    #   includes `ErrorCode` and `ErrorMessage` in the result.
+    #   results. A record that is successfully added to a stream includes
+    #   `SequenceNumber` and `ShardId` in the result. A record that fails to
+    #   be added to a stream includes `ErrorCode` and `ErrorMessage` in the
+    #   result.
     #   @return [Array<Types::PutRecordsResultEntry>]
     #
     # @!attribute [rw] encryption_type
@@ -1540,7 +1607,7 @@ module Aws::Kinesis
     #   * `NONE`\: Do not encrypt the records.
     #
     #   * `KMS`\: Use server-side encryption on the records using a
-    #     customer-managed AWS KMS key.
+    #     customer-managed Amazon Web Services KMS key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsOutput AWS API Documentation
@@ -1667,7 +1734,7 @@ module Aws::Kinesis
     #   * `NONE`\: Do not encrypt the records in the stream.
     #
     #   * `KMS`\: Use server-side encryption on the records in the stream
-    #     using a customer-managed AWS KMS key.
+    #     using a customer-managed Amazon Web Services KMS key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Record AWS API Documentation
@@ -1693,7 +1760,7 @@ module Aws::Kinesis
     # @!attribute [rw] stream_arn
     #   The ARN of the Kinesis data stream that you want to register the
     #   consumer with. For more info, see [Amazon Resource Names (ARNs) and
-    #   AWS Service Namespaces][1].
+    #   Amazon Web Services Service Namespaces][1].
     #
     #
     #
@@ -1844,6 +1911,9 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # The request parameter used to filter out the response of the
+    # `ListShards` API.
+    #
     # @note When making an API call, you may pass ShardFilter
     #   data as a hash:
     #
@@ -1854,12 +1924,48 @@ module Aws::Kinesis
     #       }
     #
     # @!attribute [rw] type
+    #   The shard type specified in the `ShardFilter` parameter. This is a
+    #   required property of the `ShardFilter` parameter.
+    #
+    #   You can specify the following valid values:
+    #
+    #   * `AFTER_SHARD_ID` - the response includes all the shards, starting
+    #     with the shard whose ID immediately follows the `ShardId` that you
+    #     provided.
+    #
+    #   * `AT_TRIM_HORIZON` - the response includes all the shards that were
+    #     open at `TRIM_HORIZON`.
+    #
+    #   * `FROM_TRIM_HORIZON` - (default), the response includes all the
+    #     shards within the retention period of the data stream (trim to
+    #     tip).
+    #
+    #   * `AT_LATEST` - the response includes only the currently open shards
+    #     of the data stream.
+    #
+    #   * `AT_TIMESTAMP` - the response includes all shards whose start
+    #     timestamp is less than or equal to the given timestamp and end
+    #     timestamp is greater than or equal to the given timestamp or still
+    #     open.
+    #
+    #   * `FROM_TIMESTAMP` - the response incldues all closed shards whose
+    #     end timestamp is greater than or equal to the given timestamp and
+    #     also all open shards. Corrected to `TRIM_HORIZON` of the data
+    #     stream if `FROM_TIMESTAMP` is less than the `TRIM_HORIZON` value.
     #   @return [String]
     #
     # @!attribute [rw] shard_id
+    #   The exclusive start `shardID` speified in the `ShardFilter`
+    #   parameter. This property can only be used if the `AFTER_SHARD_ID`
+    #   shard type is specified.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
+    #   The timestamps specified in the `ShardFilter` parameter. A timestamp
+    #   is a Unix epoch date with precision in milliseconds. For example,
+    #   2016-04-04T19:58:46.480-00:00 or 1459799926.480. This property can
+    #   only be used if `FROM_TIMESTAMP` or `AT_TIMESTAMP` shard types are
+    #   specified.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ShardFilter AWS API Documentation
@@ -1930,11 +2036,12 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The GUID for the customer-managed AWS KMS key to use for encryption.
-    #   This value can be a globally unique identifier, a fully specified
-    #   Amazon Resource Name (ARN) to either an alias or a key, or an alias
-    #   name prefixed by "alias/".You can also use a master key owned by
-    #   Kinesis Data Streams by specifying the alias `aws/kinesis`.
+    #   The GUID for the customer-managed Amazon Web Services KMS key to use
+    #   for encryption. This value can be a globally unique identifier, a
+    #   fully specified Amazon Resource Name (ARN) to either an alias or a
+    #   key, or an alias name prefixed by "alias/".You can also use a
+    #   master key owned by Kinesis Data Streams by specifying the alias
+    #   `aws/kinesis`.
     #
     #   * Key ARN example:
     #     `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
@@ -1960,6 +2067,9 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # The starting position in the data stream from which to start
+    # streaming.
+    #
     # @note When making an API call, you may pass StartingPosition
     #   data as a hash:
     #
@@ -2035,11 +2145,12 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The GUID for the customer-managed AWS KMS key to use for encryption.
-    #   This value can be a globally unique identifier, a fully specified
-    #   Amazon Resource Name (ARN) to either an alias or a key, or an alias
-    #   name prefixed by "alias/".You can also use a master key owned by
-    #   Kinesis Data Streams by specifying the alias `aws/kinesis`.
+    #   The GUID for the customer-managed Amazon Web Services KMS key to use
+    #   for encryption. This value can be a globally unique identifier, a
+    #   fully specified Amazon Resource Name (ARN) to either an alias or a
+    #   key, or an alias name prefixed by "alias/".You can also use a
+    #   master key owned by Kinesis Data Streams by specifying the alias
+    #   `aws/kinesis`.
     #
     #   * Key ARN example:
     #     `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
@@ -2095,6 +2206,13 @@ module Aws::Kinesis
     #     `UPDATING` state.
     #   @return [String]
     #
+    # @!attribute [rw] stream_mode_details
+    #   Specifies the capacity mode to which you want to set your data
+    #   stream. Currently, in Kinesis Data Streams, you can choose between
+    #   an **on-demand** capacity mode and a **provisioned** capacity mode
+    #   for your data streams.
+    #   @return [Types::StreamModeDetails]
+    #
     # @!attribute [rw] shards
     #   The shards that comprise the stream.
     #   @return [Array<Types::Shard>]
@@ -2124,15 +2242,15 @@ module Aws::Kinesis
     #   * `NONE`\: Do not encrypt the records in the stream.
     #
     #   * `KMS`\: Use server-side encryption on the records in the stream
-    #     using a customer-managed AWS KMS key.
+    #     using a customer-managed Amazon Web Services KMS key.
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The GUID for the customer-managed AWS KMS key to use for encryption.
-    #   This value can be a globally unique identifier, a fully specified
-    #   ARN to either an alias or a key, or an alias name prefixed by
-    #   "alias/".You can also use a master key owned by Kinesis Data
-    #   Streams by specifying the alias `aws/kinesis`.
+    #   The GUID for the customer-managed Amazon Web Services KMS key to use
+    #   for encryption. This value can be a globally unique identifier, a
+    #   fully specified ARN to either an alias or a key, or an alias name
+    #   prefixed by "alias/".You can also use a master key owned by
+    #   Kinesis Data Streams by specifying the alias `aws/kinesis`.
     #
     #   * Key ARN example:
     #     `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
@@ -2154,6 +2272,7 @@ module Aws::Kinesis
       :stream_name,
       :stream_arn,
       :stream_status,
+      :stream_mode_details,
       :shards,
       :has_more_shards,
       :retention_period_hours,
@@ -2195,6 +2314,13 @@ module Aws::Kinesis
     #     `UPDATING` state.
     #   @return [String]
     #
+    # @!attribute [rw] stream_mode_details
+    #   Specifies the capacity mode to which you want to set your data
+    #   stream. Currently, in Kinesis Data Streams, you can choose between
+    #   an **on-demand** ycapacity mode and a **provisioned** capacity mode
+    #   for your data streams.
+    #   @return [Types::StreamModeDetails]
+    #
     # @!attribute [rw] retention_period_hours
     #   The current retention period, in hours.
     #   @return [Integer]
@@ -2216,11 +2342,11 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The GUID for the customer-managed AWS KMS key to use for encryption.
-    #   This value can be a globally unique identifier, a fully specified
-    #   ARN to either an alias or a key, or an alias name prefixed by
-    #   "alias/".You can also use a master key owned by Kinesis Data
-    #   Streams by specifying the alias `aws/kinesis`.
+    #   The GUID for the customer-managed Amazon Web Services KMS key to use
+    #   for encryption. This value can be a globally unique identifier, a
+    #   fully specified ARN to either an alias or a key, or an alias name
+    #   prefixed by "alias/".You can also use a master key owned by
+    #   Kinesis Data Streams by specifying the alias `aws/kinesis`.
     #
     #   * Key ARN example:
     #     `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
@@ -2250,6 +2376,7 @@ module Aws::Kinesis
       :stream_name,
       :stream_arn,
       :stream_status,
+      :stream_mode_details,
       :retention_period_hours,
       :stream_creation_timestamp,
       :enhanced_monitoring,
@@ -2257,6 +2384,33 @@ module Aws::Kinesis
       :key_id,
       :open_shard_count,
       :consumer_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the capacity mode to which you want to set your data stream.
+    # Currently, in Kinesis Data Streams, you can choose between an
+    # **on-demand** capacity mode and a **provisioned** capacity mode for
+    # your data streams.
+    #
+    # @note When making an API call, you may pass StreamModeDetails
+    #   data as a hash:
+    #
+    #       {
+    #         stream_mode: "PROVISIONED", # required, accepts PROVISIONED, ON_DEMAND
+    #       }
+    #
+    # @!attribute [rw] stream_mode
+    #   Specifies the capacity mode to which you want to set your data
+    #   stream. Currently, in Kinesis Data Streams, you can choose between
+    #   an **on-demand** capacity mode and a **provisioned** capacity mode
+    #   for your data streams.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamModeDetails AWS API Documentation
+    #
+    class StreamModeDetails < Struct.new(
+      :stream_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2283,6 +2437,8 @@ module Aws::Kinesis
     #   @return [Integer]
     #
     # @!attribute [rw] child_shards
+    #   The list of the child shards of the current shard, returned only at
+    #   the end of the current shard.
     #   @return [Array<Types::ChildShard>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SubscribeToShardEvent AWS API Documentation
@@ -2321,6 +2477,8 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] starting_position
+    #   The starting position in the data stream from which to start
+    #   streaming.
     #   @return [Types::StartingPosition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SubscribeToShardInput AWS API Documentation
@@ -2391,12 +2549,12 @@ module Aws::Kinesis
     #
     #   * Set this value below half your current shard count for a stream.
     #
-    #   * Set this value to more than 500 shards in a stream (the default
-    #     limit for shard count per stream is 500 per account per region),
+    #   * Set this value to more than 10000 shards in a stream (the default
+    #     limit for shard count per stream is 10000 per account per region),
     #     unless you request a limit increase.
     #
-    #   * Scale a stream with more than 500 shards down unless you set this
-    #     value to less than 500 shards.
+    #   * Scale a stream with more than 10000 shards down unless you set
+    #     this value to less than 10000 shards.
     #   @return [Integer]
     #
     # @!attribute [rw] scaling_type
@@ -2431,6 +2589,48 @@ module Aws::Kinesis
       :stream_name,
       :current_shard_count,
       :target_shard_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateStreamModeInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_arn: "StreamARN", # required
+    #         stream_mode_details: { # required
+    #           stream_mode: "PROVISIONED", # required, accepts PROVISIONED, ON_DEMAND
+    #         },
+    #       }
+    #
+    # @!attribute [rw] stream_arn
+    #   Specifies the ARN of the data stream whose capacity mode you want to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_mode_details
+    #   Specifies the capacity mode to which you want to set your data
+    #   stream. Currently, in Kinesis Data Streams, you can choose between
+    #   an **on-demand** capacity mode and a **provisioned** capacity mode
+    #   for your data streams.
+    #   @return [Types::StreamModeDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateStreamModeInput AWS API Documentation
+    #
+    class UpdateStreamModeInput < Struct.new(
+      :stream_arn,
+      :stream_mode_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

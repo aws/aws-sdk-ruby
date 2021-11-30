@@ -155,7 +155,9 @@ module Aws::S3
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -896,11 +898,28 @@ module Aws::S3
     # Control List (ACL) Overview][10] and [Managing ACLs Using the REST
     # API][11].
     #
+    # If the bucket that you're copying objects to uses the bucket owner
+    # enforced setting for S3 Object Ownership, ACLs are disabled and no
+    # longer affect permissions. Buckets that use this setting only accept
+    # PUT requests that don't specify an ACL or PUT requests that specify
+    # bucket owner full control ACLs, such as the
+    # `bucket-owner-full-control` canned ACL or an equivalent form of this
+    # ACL expressed in the XML format.
+    #
+    # For more information, see [ Controlling ownership of objects and
+    # disabling ACLs][12] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> If your bucket uses the bucket owner enforced setting for Object
+    # Ownership, all objects written to the bucket by any account will be
+    # owned by the bucket owner.
+    #
+    #  </note>
+    #
     # **Storage Class Options**
     #
     # You can use the `CopyObject` action to change the storage class of an
     # object that is already stored in Amazon S3 using the `StorageClass`
-    # parameter. For more information, see [Storage Classes][12] in the
+    # parameter. For more information, see [Storage Classes][13] in the
     # *Amazon S3 User Guide*.
     #
     # **Versioning**
@@ -921,15 +940,15 @@ module Aws::S3
     #
     # If the source object's storage class is GLACIER, you must restore a
     # copy of this object before you can use it as a source object for the
-    # copy operation. For more information, see [RestoreObject][13].
+    # copy operation. For more information, see [RestoreObject][14].
     #
     # The following operations are related to `CopyObject`\:
     #
-    # * [PutObject][14]
+    # * [PutObject][15]
     #
-    # * [GetObject][15]
+    # * [GetObject][16]
     #
-    # For more information, see [Copying Objects][16].
+    # For more information, see [Copying Objects][17].
     #
     #
     #
@@ -944,11 +963,12 @@ module Aws::S3
     # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
     # [10]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
     # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
-    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
-    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
-    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
-    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
+    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    # [13]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
+    # [14]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html
+    # [15]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [16]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [17]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object.
@@ -1270,7 +1290,7 @@ module Aws::S3
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -1343,22 +1363,33 @@ module Aws::S3
     #
     #  </note>
     #
+    # **Access control lists (ACLs)**
+    #
     # When creating a bucket using this operation, you can optionally
-    # specify the accounts or groups that should be granted specific
-    # permissions on the bucket. There are two ways to grant the appropriate
-    # permissions using the request headers.
+    # configure the bucket ACL to specify the accounts or groups that should
+    # be granted specific permissions on the bucket.
+    #
+    # If your CreateBucket request includes the `BucketOwnerEnforced` value
+    # for the `x-amz-object-ownership` header, your request can either not
+    # specify an ACL or specify bucket owner full control ACLs, such as the
+    # `bucket-owner-full-control` canned ACL or an equivalent ACL expressed
+    # in the XML format. For more information, see [Controlling object
+    # ownership][5] in the *Amazon S3 User Guide*.
+    #
+    # There are two ways to grant the appropriate permissions using the
+    # request headers.
     #
     # * Specify a canned ACL using the `x-amz-acl` request header. Amazon S3
     #   supports a set of predefined ACLs, known as *canned ACLs*. Each
     #   canned ACL has a predefined set of grantees and permissions. For
-    #   more information, see [Canned ACL][5].
+    #   more information, see [Canned ACL][6].
     #
     # * Specify access permissions explicitly using the `x-amz-grant-read`,
     #   `x-amz-grant-write`, `x-amz-grant-read-acp`,
     #   `x-amz-grant-write-acp`, and `x-amz-grant-full-control` headers.
     #   These headers map to the set of permissions Amazon S3 supports in an
     #   ACL. For more information, see [Access control list (ACL)
-    #   overview][6].
+    #   overview][7].
     #
     #   You specify each grantee as a type=value pair, where the type is one
     #   of the following:
@@ -1391,7 +1422,7 @@ module Aws::S3
     #     * South America (São Paulo)
     #
     #      For a list of all the Amazon S3 supported Regions and endpoints,
-    #     see [Regions and Endpoints][7] in the Amazon Web Services General
+    #     see [Regions and Endpoints][8] in the Amazon Web Services General
     #     Reference.
     #
     #      </note>
@@ -1409,22 +1440,29 @@ module Aws::S3
     #
     # **Permissions**
     #
-    # If your `CreateBucket` request specifies ACL permissions and the ACL
-    # is public-read, public-read-write, authenticated-read, or if you
-    # specify access permissions explicitly through any other ACL, both
-    # `s3:CreateBucket` and `s3:PutBucketAcl` permissions are needed. If the
-    # ACL the `CreateBucket` request is private, only `s3:CreateBucket`
-    # permission is needed.
+    # In addition to `s3:CreateBucket`, the following permissions are
+    # required when your CreateBucket includes specific headers:
     #
-    # If `ObjectLockEnabledForBucket` is set to true in your `CreateBucket`
-    # request, `s3:PutBucketObjectLockConfiguration` and
-    # `s3:PutBucketVersioning` permissions are required.
+    # * **ACLs** - If your `CreateBucket` request specifies ACL permissions
+    #   and the ACL is public-read, public-read-write, authenticated-read,
+    #   or if you specify access permissions explicitly through any other
+    #   ACL, both `s3:CreateBucket` and `s3:PutBucketAcl` permissions are
+    #   needed. If the ACL the `CreateBucket` request is private or doesn't
+    #   specify any ACLs, only `s3:CreateBucket` permission is needed.
+    #
+    # * **Object Lock** - If `ObjectLockEnabledForBucket` is set to true in
+    #   your `CreateBucket` request, `s3:PutBucketObjectLockConfiguration`
+    #   and `s3:PutBucketVersioning` permissions are required.
+    #
+    # * **S3 Object Ownership** - If your CreateBucket request includes the
+    #   the `x-amz-object-ownership` header, `s3:PutBucketOwnershipControls`
+    #   permission is required.
     #
     # The following operations are related to `CreateBucket`\:
     #
-    # * [PutObject][8]
+    # * [PutObject][9]
     #
-    # * [DeleteBucket][9]
+    # * [DeleteBucket][10]
     #
     #
     #
@@ -1432,11 +1470,12 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [7]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html
+    # [8]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the bucket.
@@ -1470,23 +1509,28 @@ module Aws::S3
     #   Specifies whether you want S3 Object Lock to be enabled for the new
     #   bucket.
     #
+    # @option params [String] :object_ownership
+    #   The container element for object ownership for a bucket's ownership
+    #   controls.
+    #
+    #   BucketOwnerPreferred - Objects uploaded to the bucket change ownership
+    #   to the bucket owner if the objects are uploaded with the
+    #   `bucket-owner-full-control` canned ACL.
+    #
+    #   ObjectWriter - The uploading account will own the object if the object
+    #   is uploaded with the `bucket-owner-full-control` canned ACL.
+    #
+    #   BucketOwnerEnforced - Access control lists (ACLs) are disabled and no
+    #   longer affect permissions. The bucket owner automatically owns and has
+    #   full control over every object in the bucket. The bucket only accepts
+    #   PUT requests that don't specify an ACL or bucket owner full control
+    #   ACLs, such as the `bucket-owner-full-control` canned ACL or an
+    #   equivalent form of this ACL expressed in the XML format.
+    #
     # @return [Types::CreateBucketOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBucketOutput#location #location} => String
     #
-    #
-    # @example Example: To create a bucket 
-    #
-    #   # The following example creates a bucket.
-    #
-    #   resp = client.create_bucket({
-    #     bucket: "examplebucket", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     location: "/examplebucket", 
-    #   }
     #
     # @example Example: To create a bucket in a specific region
     #
@@ -1504,6 +1548,19 @@ module Aws::S3
     #     location: "http://examplebucket.<Region>.s3.amazonaws.com/", 
     #   }
     #
+    # @example Example: To create a bucket 
+    #
+    #   # The following example creates a bucket.
+    #
+    #   resp = client.create_bucket({
+    #     bucket: "examplebucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     location: "/examplebucket", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_bucket({
@@ -1518,6 +1575,7 @@ module Aws::S3
     #     grant_write: "GrantWrite",
     #     grant_write_acp: "GrantWriteACP",
     #     object_lock_enabled_for_bucket: false,
+    #     object_ownership: "BucketOwnerPreferred", # accepts BucketOwnerPreferred, ObjectWriter, BucketOwnerEnforced
     #   })
     #
     # @example Response structure
@@ -1996,7 +2054,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -2265,18 +2323,17 @@ module Aws::S3
     # storage costs by automatically moving data to the most cost-effective
     # storage access tier, without performance impact or operational
     # overhead. S3 Intelligent-Tiering delivers automatic cost savings in
-    # two low latency and high throughput access tiers. For data that can be
-    # accessed asynchronously, you can choose to activate automatic
-    # archiving capabilities within the S3 Intelligent-Tiering storage
-    # class.
+    # three low latency and high throughput access tiers. To get the lowest
+    # storage cost on data that can be accessed in minutes to hours, you can
+    # choose to activate additional archiving capabilities.
     #
     # The S3 Intelligent-Tiering storage class is the ideal storage class
     # for data with unknown, changing, or unpredictable access patterns,
     # independent of object size or retention period. If the size of an
-    # object is less than 128 KB, it is not eligible for auto-tiering.
-    # Smaller objects can be stored, but they are always charged at the
-    # Frequent Access tier rates in the S3 Intelligent-Tiering storage
-    # class.
+    # object is less than 128 KB, it is not monitored and not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the Frequent Access tier rates in the S3
+    # Intelligent-Tiering storage class.
     #
     # For more information, see [Storage class for automatically optimizing
     # frequently and infrequently accessed objects][1].
@@ -2910,15 +2967,6 @@ module Aws::S3
     #   * {Types::DeleteObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To delete an object (from a non-versioned bucket)
-    #
-    #   # The following example deletes an object from a non-versioned bucket.
-    #
-    #   resp = client.delete_object({
-    #     bucket: "ExampleBucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
     # @example Example: To delete an object
     #
     #   # The following example deletes an object from an S3 bucket.
@@ -2931,6 +2979,15 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #   }
+    #
+    # @example Example: To delete an object (from a non-versioned bucket)
+    #
+    #   # The following example deletes an object from a non-versioned bucket.
+    #
+    #   resp = client.delete_object({
+    #     bucket: "ExampleBucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3437,15 +3494,24 @@ module Aws::S3
     # can return the ACL of the bucket without using an authorization
     # header.
     #
+    # <note markdown="1"> If your bucket uses the bucket owner enforced setting for S3 Object
+    # Ownership, requests to read ACLs are still supported and return the
+    # `bucket-owner-full-control` ACL with the owner being the account that
+    # created the bucket. For more information, see [ Controlling object
+    # ownership and disabling ACLs][1] in the *Amazon S3 User Guide*.
+    #
+    #  </note>
+    #
     # **Related Resources**
     #
-    # * [ListObjects][1]
+    # * [ListObjects][2]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html
     #
     # @option params [required, String] :bucket
     #   Specifies the S3 bucket whose ACL is being requested.
@@ -3731,18 +3797,17 @@ module Aws::S3
     # storage costs by automatically moving data to the most cost-effective
     # storage access tier, without performance impact or operational
     # overhead. S3 Intelligent-Tiering delivers automatic cost savings in
-    # two low latency and high throughput access tiers. For data that can be
-    # accessed asynchronously, you can choose to activate automatic
-    # archiving capabilities within the S3 Intelligent-Tiering storage
-    # class.
+    # three low latency and high throughput access tiers. To get the lowest
+    # storage cost on data that can be accessed in minutes to hours, you can
+    # choose to activate additional archiving capabilities.
     #
     # The S3 Intelligent-Tiering storage class is the ideal storage class
     # for data with unknown, changing, or unpredictable access patterns,
     # independent of object size or retention period. If the size of an
-    # object is less than 128 KB, it is not eligible for auto-tiering.
-    # Smaller objects can be stored, but they are always charged at the
-    # Frequent Access tier rates in the S3 Intelligent-Tiering storage
-    # class.
+    # object is less than 128 KB, it is not monitored and not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the Frequent Access tier rates in the S3
+    # Intelligent-Tiering storage class.
     #
     # For more information, see [Storage class for automatically optimizing
     # frequently and infrequently accessed objects][1].
@@ -3981,9 +4046,9 @@ module Aws::S3
     #   resp.rules[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.rules[0].transition.date #=> Time
     #   resp.rules[0].transition.days #=> Integer
-    #   resp.rules[0].transition.storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
+    #   resp.rules[0].transition.storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "GLACIER_IR"
     #   resp.rules[0].noncurrent_version_transition.noncurrent_days #=> Integer
-    #   resp.rules[0].noncurrent_version_transition.storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
+    #   resp.rules[0].noncurrent_version_transition.storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "GLACIER_IR"
     #   resp.rules[0].noncurrent_version_transition.newer_noncurrent_versions #=> Integer
     #   resp.rules[0].noncurrent_version_expiration.noncurrent_days #=> Integer
     #   resp.rules[0].noncurrent_version_expiration.newer_noncurrent_versions #=> Integer
@@ -4116,10 +4181,10 @@ module Aws::S3
     #   resp.rules[0].transitions #=> Array
     #   resp.rules[0].transitions[0].date #=> Time
     #   resp.rules[0].transitions[0].days #=> Integer
-    #   resp.rules[0].transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
+    #   resp.rules[0].transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "GLACIER_IR"
     #   resp.rules[0].noncurrent_version_transitions #=> Array
     #   resp.rules[0].noncurrent_version_transitions[0].noncurrent_days #=> Integer
-    #   resp.rules[0].noncurrent_version_transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
+    #   resp.rules[0].noncurrent_version_transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "GLACIER_IR"
     #   resp.rules[0].noncurrent_version_transitions[0].newer_noncurrent_versions #=> Integer
     #   resp.rules[0].noncurrent_version_expiration.noncurrent_days #=> Integer
     #   resp.rules[0].noncurrent_version_expiration.newer_noncurrent_versions #=> Integer
@@ -4538,7 +4603,7 @@ module Aws::S3
     # Retrieves `OwnershipControls` for an Amazon S3 bucket. To use this
     # operation, you must have the `s3:GetBucketOwnershipControls`
     # permission. For more information about Amazon S3 permissions, see
-    # [Specifying Permissions in a Policy][1].
+    # [Specifying permissions in a policy][1].
     #
     # For information about Amazon S3 Object Ownership, see [Using Object
     # Ownership][2].
@@ -4551,8 +4616,8 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
     #
     # @option params [required, String] :bucket
     #   The name of the Amazon S3 bucket whose `OwnershipControls` you want to
@@ -4577,7 +4642,7 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.ownership_controls.rules #=> Array
-    #   resp.ownership_controls.rules[0].object_ownership #=> String, one of "BucketOwnerPreferred", "ObjectWriter"
+    #   resp.ownership_controls.rules[0].object_ownership #=> String, one of "BucketOwnerPreferred", "ObjectWriter", "BucketOwnerEnforced"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketOwnershipControls AWS API Documentation
     #
@@ -4826,7 +4891,7 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].existing_object_replication.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
     #   resp.replication_configuration.rules[0].destination.account #=> String
-    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
+    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR"
     #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
     #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
     #   resp.replication_configuration.rules[0].destination.replication_time.status #=> String, one of "Enabled", "Disabled"
@@ -5597,7 +5662,7 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.bucket_key_enabled #=> Boolean
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
     #   resp.parts_count #=> Integer
@@ -5626,19 +5691,28 @@ module Aws::S3
     # an object. To return ACL information about a different version, use
     # the versionId subresource.
     #
+    # <note markdown="1"> If your bucket uses the bucket owner enforced setting for S3 Object
+    # Ownership, requests to read ACLs are still supported and return the
+    # `bucket-owner-full-control` ACL with the owner being the account that
+    # created the bucket. For more information, see [ Controlling object
+    # ownership and disabling ACLs][1] in the *Amazon S3 User Guide*.
+    #
+    #  </note>
+    #
     # The following operations are related to `GetObjectAcl`\:
     #
-    # * [GetObject][1]
+    # * [GetObject][2]
     #
-    # * [DeleteObject][2]
+    # * [DeleteObject][3]
     #
-    # * [PutObject][3]
+    # * [PutObject][4]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
     #
     # @option params [required, String] :bucket
     #   The bucket name that contains the object for which to get the ACL
@@ -6678,7 +6752,7 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.bucket_key_enabled #=> Boolean
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
     #   resp.parts_count #=> Integer
@@ -6805,18 +6879,17 @@ module Aws::S3
     # storage costs by automatically moving data to the most cost-effective
     # storage access tier, without performance impact or operational
     # overhead. S3 Intelligent-Tiering delivers automatic cost savings in
-    # two low latency and high throughput access tiers. For data that can be
-    # accessed asynchronously, you can choose to activate automatic
-    # archiving capabilities within the S3 Intelligent-Tiering storage
-    # class.
+    # three low latency and high throughput access tiers. To get the lowest
+    # storage cost on data that can be accessed in minutes to hours, you can
+    # choose to activate additional archiving capabilities.
     #
     # The S3 Intelligent-Tiering storage class is the ideal storage class
     # for data with unknown, changing, or unpredictable access patterns,
     # independent of object size or retention period. If the size of an
-    # object is less than 128 KB, it is not eligible for auto-tiering.
-    # Smaller objects can be stored, but they are always charged at the
-    # Frequent Access tier rates in the S3 Intelligent-Tiering storage
-    # class.
+    # object is less than 128 KB, it is not monitored and not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the Frequent Access tier rates in the S3
+    # Intelligent-Tiering storage class.
     #
     # For more information, see [Storage class for automatically optimizing
     # frequently and infrequently accessed objects][1].
@@ -7409,7 +7482,7 @@ module Aws::S3
     #   resp.uploads[0].upload_id #=> String
     #   resp.uploads[0].key #=> String
     #   resp.uploads[0].initiated #=> Time
-    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
+    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR"
     #   resp.uploads[0].owner.display_name #=> String
     #   resp.uploads[0].owner.id #=> String
     #   resp.uploads[0].initiator.id #=> String
@@ -7789,7 +7862,7 @@ module Aws::S3
     #   resp.contents[0].last_modified #=> Time
     #   resp.contents[0].etag #=> String
     #   resp.contents[0].size #=> Integer
-    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS"
+    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
     #   resp.name #=> String
@@ -7994,7 +8067,7 @@ module Aws::S3
     #   resp.contents[0].last_modified #=> Time
     #   resp.contents[0].etag #=> String
     #   resp.contents[0].size #=> Integer
-    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS"
+    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
     #   resp.name #=> String
@@ -8203,7 +8276,7 @@ module Aws::S3
     #   resp.initiator.display_name #=> String
     #   resp.owner.display_name #=> String
     #   resp.owner.id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA", "INTELLIGENT_TIERING", "GLACIER", "DEEP_ARCHIVE", "OUTPOSTS", "GLACIER_IR"
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListParts AWS API Documentation
@@ -8314,6 +8387,14 @@ module Aws::S3
     # you have an existing application that updates a bucket ACL using the
     # request body, then you can continue to use that approach.
     #
+    # If your bucket uses the bucket owner enforced setting for S3 Object
+    # Ownership, ACLs are disabled and no longer affect permissions. You
+    # must use policies to grant access to your bucket and the objects in
+    # it. Requests to set ACLs or update ACLs fail and return the
+    # `AccessControlListNotSupported` error code. Requests to read ACLs are
+    # still supported. For more information, see [Controlling object
+    # ownership][2] in the *Amazon S3 User Guide*.
+    #
     # **Access Permissions**
     #
     # You can set access permissions using one of the following methods:
@@ -8323,7 +8404,7 @@ module Aws::S3
     #   canned ACL has a predefined set of grantees and permissions. Specify
     #   the canned ACL name as the value of `x-amz-acl`. If you use this
     #   header, you cannot use other access control-specific headers in your
-    #   request. For more information, see [Canned ACL][2].
+    #   request. For more information, see [Canned ACL][3].
     #
     # * Specify access permissions explicitly with the `x-amz-grant-read`,
     #   `x-amz-grant-read-acp`, `x-amz-grant-write-acp`, and
@@ -8333,7 +8414,7 @@ module Aws::S3
     #   permission. If you use these ACL-specific headers, you cannot use
     #   the `x-amz-acl` header to set a canned ACL. These parameters map to
     #   the set of permissions that Amazon S3 supports in an ACL. For more
-    #   information, see [Access Control List (ACL) Overview][3].
+    #   information, see [Access Control List (ACL) Overview][4].
     #
     #   You specify each grantee as a type=value pair, where the type is one
     #   of the following:
@@ -8366,7 +8447,7 @@ module Aws::S3
     #     * South America (São Paulo)
     #
     #      For a list of all the Amazon S3 supported Regions and endpoints,
-    #     see [Regions and Endpoints][4] in the Amazon Web Services General
+    #     see [Regions and Endpoints][5] in the Amazon Web Services General
     #     Reference.
     #
     #      </note>
@@ -8429,28 +8510,29 @@ module Aws::S3
     #   * South America (São Paulo)
     #
     #    For a list of all the Amazon S3 supported Regions and endpoints, see
-    #   [Regions and Endpoints][4] in the Amazon Web Services General
+    #   [Regions and Endpoints][5] in the Amazon Web Services General
     #   Reference.
     #
     #    </note>
     #
     # **Related Resources**
     #
-    # * [CreateBucket][5]
+    # * [CreateBucket][6]
     #
-    # * [DeleteBucket][6]
+    # * [DeleteBucket][7]
     #
-    # * [GetObjectAcl][7]
+    # * [GetObjectAcl][8]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [4]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
+    # [5]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the bucket.
@@ -8950,18 +9032,17 @@ module Aws::S3
     # storage costs by automatically moving data to the most cost-effective
     # storage access tier, without performance impact or operational
     # overhead. S3 Intelligent-Tiering delivers automatic cost savings in
-    # two low latency and high throughput access tiers. For data that can be
-    # accessed asynchronously, you can choose to activate automatic
-    # archiving capabilities within the S3 Intelligent-Tiering storage
-    # class.
+    # three low latency and high throughput access tiers. To get the lowest
+    # storage cost on data that can be accessed in minutes to hours, you can
+    # choose to activate additional archiving capabilities.
     #
     # The S3 Intelligent-Tiering storage class is the ideal storage class
     # for data with unknown, changing, or unpredictable access patterns,
     # independent of object size or retention period. If the size of an
-    # object is less than 128 KB, it is not eligible for auto-tiering.
-    # Smaller objects can be stored, but they are always charged at the
-    # Frequent Access tier rates in the S3 Intelligent-Tiering storage
-    # class.
+    # object is less than 128 KB, it is not monitored and not eligible for
+    # auto-tiering. Smaller objects can be stored, but they are always
+    # charged at the Frequent Access tier rates in the S3
+    # Intelligent-Tiering storage class.
     #
     # For more information, see [Storage class for automatically optimizing
     # frequently and infrequently accessed objects][1].
@@ -9298,11 +9379,11 @@ module Aws::S3
     #           transition: {
     #             date: Time.now,
     #             days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #           },
     #           noncurrent_version_transition: {
     #             noncurrent_days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #             newer_noncurrent_versions: 1,
     #           },
     #           noncurrent_version_expiration: {
@@ -9488,13 +9569,13 @@ module Aws::S3
     #             {
     #               date: Time.now,
     #               days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #             },
     #           ],
     #           noncurrent_version_transitions: [
     #             {
     #               noncurrent_days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #               newer_noncurrent_versions: 1,
     #             },
     #           ],
@@ -9530,6 +9611,12 @@ module Aws::S3
     # The `Permissions` request element specifies the kind of access the
     # grantee has to the logs.
     #
+    # If the target bucket for log delivery uses the bucket owner enforced
+    # setting for S3 Object Ownership, you can't use the `Grantee` request
+    # element to grant access to others. Permissions can only be granted
+    # using policies. For more information, see [Permissions for server
+    # access log delivery][1] in the *Amazon S3 User Guide*.
+    #
     # **Grantee Values**
     #
     # You can specify the person (grantee) to whom you're assigning access
@@ -9564,29 +9651,30 @@ module Aws::S3
     # />`
     #
     # For more information about server access logging, see [Server Access
-    # Logging][1].
+    # Logging][2] in the *Amazon S3 User Guide*.
     #
-    # For more information about creating a bucket, see [CreateBucket][2].
+    # For more information about creating a bucket, see [CreateBucket][3].
     # For more information about returning the logging status of a bucket,
-    # see [GetBucketLogging][3].
+    # see [GetBucketLogging][4].
     #
     # The following operations are related to `PutBucketLogging`\:
     #
-    # * [PutObject][4]
+    # * [PutObject][5]
     #
-    # * [DeleteBucket][5]
+    # * [DeleteBucket][6]
     #
-    # * [CreateBucket][2]
+    # * [CreateBucket][3]
     #
-    # * [GetBucketLogging][3]
+    # * [GetBucketLogging][4]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerLogs.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
     #
     # @option params [required, String] :bucket
     #   The name of the bucket for which to set the logging parameters.
@@ -10011,10 +10099,10 @@ module Aws::S3
     # Creates or modifies `OwnershipControls` for an Amazon S3 bucket. To
     # use this operation, you must have the `s3:PutBucketOwnershipControls`
     # permission. For more information about Amazon S3 permissions, see
-    # [Specifying Permissions in a Policy][1].
+    # [Specifying permissions in a policy][1].
     #
-    # For information about Amazon S3 Object Ownership, see [Using Object
-    # Ownership][2].
+    # For information about Amazon S3 Object Ownership, see [Using object
+    # ownership][2].
     #
     # The following operations are related to `PutBucketOwnershipControls`\:
     #
@@ -10024,8 +10112,8 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/using-with-s3-actions.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/about-object-ownership.html
     #
     # @option params [required, String] :bucket
     #   The name of the Amazon S3 bucket whose `OwnershipControls` you want to
@@ -10044,8 +10132,8 @@ module Aws::S3
     #   Denied)` error.
     #
     # @option params [required, Types::OwnershipControls] :ownership_controls
-    #   The `OwnershipControls` (BucketOwnerPreferred or ObjectWriter) that
-    #   you want to apply to this Amazon S3 bucket.
+    #   The `OwnershipControls` (BucketOwnerEnforced, BucketOwnerPreferred, or
+    #   ObjectWriter) that you want to apply to this Amazon S3 bucket.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -10058,7 +10146,7 @@ module Aws::S3
     #     ownership_controls: { # required
     #       rules: [ # required
     #         {
-    #           object_ownership: "BucketOwnerPreferred", # required, accepts BucketOwnerPreferred, ObjectWriter
+    #           object_ownership: "BucketOwnerPreferred", # required, accepts BucketOwnerPreferred, ObjectWriter, BucketOwnerEnforced
     #         },
     #       ],
     #     },
@@ -10331,7 +10419,7 @@ module Aws::S3
     #           destination: { # required
     #             bucket: "BucketName", # required
     #             account: "AccountId",
-    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #             access_control_translation: {
     #               owner: "Destination", # required, accepts Destination
     #             },
@@ -10920,13 +11008,33 @@ module Aws::S3
     # information, see [Access Control List (ACL) Overview][4] and [Managing
     # ACLs Using the REST API][5].
     #
+    # If the bucket that you're uploading objects to uses the bucket owner
+    # enforced setting for S3 Object Ownership, ACLs are disabled and no
+    # longer affect permissions. Buckets that use this setting only accept
+    # PUT requests that don't specify an ACL or PUT requests that specify
+    # bucket owner full control ACLs, such as the
+    # `bucket-owner-full-control` canned ACL or an equivalent form of this
+    # ACL expressed in the XML format. PUT requests that contain other ACLs
+    # (for example, custom grants to certain Amazon Web Services accounts)
+    # fail and return a `400` error with the error code
+    # `AccessControlListNotSupported`.
+    #
+    # For more information, see [ Controlling ownership of objects and
+    # disabling ACLs][6] in the *Amazon S3 User Guide*.
+    #
+    # <note markdown="1"> If your bucket uses the bucket owner enforced setting for Object
+    # Ownership, all objects written to the bucket by any account will be
+    # owned by the bucket owner.
+    #
+    #  </note>
+    #
     # **Storage Class Options**
     #
     # By default, Amazon S3 uses the STANDARD Storage Class to store newly
     # created objects. The STANDARD storage class provides high durability
     # and high availability. Depending on performance needs, you can specify
     # a different Storage Class. Amazon S3 on Outposts only uses the
-    # OUTPOSTS Storage Class. For more information, see [Storage Classes][6]
+    # OUTPOSTS Storage Class. For more information, see [Storage Classes][7]
     # in the *Amazon S3 User Guide*.
     #
     # **Versioning**
@@ -10938,14 +11046,14 @@ module Aws::S3
     # object simultaneously, it stores all of the objects.
     #
     # For more information about versioning, see [Adding Objects to
-    # Versioning Enabled Buckets][7]. For information about returning the
-    # versioning state of a bucket, see [GetBucketVersioning][8].
+    # Versioning Enabled Buckets][8]. For information about returning the
+    # versioning state of a bucket, see [GetBucketVersioning][9].
     #
     # **Related Resources**
     #
-    # * [CopyObject][9]
+    # * [CopyObject][10]
     #
-    # * [DeleteObject][10]
+    # * [DeleteObject][11]
     #
     #
     #
@@ -10954,11 +11062,12 @@ module Aws::S3
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
-    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object. For more information, see
@@ -11228,22 +11337,24 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To upload an object and specify optional tags
+    # @example Example: To upload an object (specify optional headers)
     #
-    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
-    #   # S3 returns version ID of the newly created object.
+    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
+    #   # storage class and use server-side encryption.
     #
     #   resp = client.put_object({
-    #     body: "c:\\HappyFace.jpg", 
+    #     body: "HappyFace.jpg", 
     #     bucket: "examplebucket", 
     #     key: "HappyFace.jpg", 
-    #     tagging: "key1=value1&key2=value2", 
+    #     server_side_encryption: "AES256", 
+    #     storage_class: "STANDARD_IA", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
     #   }
     #
     # @example Example: To upload an object and specify canned ACL.
@@ -11262,6 +11373,62 @@ module Aws::S3
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #   }
+    #
+    # @example Example: To upload an object
+    #
+    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
+    #   # syntax. S3 returns VersionId of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
+    #   }
+    #
+    # @example Example: To upload an object and specify optional tags
+    #
+    #   # The following example uploads an object. The request specifies optional object tags. The bucket is versioned, therefore
+    #   # S3 returns version ID of the newly created object.
+    #
+    #   resp = client.put_object({
+    #     body: "c:\\HappyFace.jpg", 
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #     tagging: "key1=value1&key2=value2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
+    #   }
+    #
+    # @example Example: To upload object and specify user-defined metadata
+    #
+    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
+    #   # enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     metadata: {
+    #       "metadata1" => "value1", 
+    #       "metadata2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
     # @example Example: To upload an object and specify server-side encryption and object tags
@@ -11300,64 +11467,6 @@ module Aws::S3
     #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
-    # @example Example: To upload an object
-    #
-    #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
-    #   # syntax. S3 returns VersionId of the newly created object.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
-    #   }
-    #
-    # @example Example: To upload an object (specify optional headers)
-    #
-    #   # The following example uploads an object. The request specifies optional request headers to directs S3 to use specific
-    #   # storage class and use server-side encryption.
-    #
-    #   resp = client.put_object({
-    #     body: "HappyFace.jpg", 
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #     server_side_encryption: "AES256", 
-    #     storage_class: "STANDARD_IA", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "CG612hodqujkf8FaaNfp8U..FIhLROcp", 
-    #   }
-    #
-    # @example Example: To upload object and specify user-defined metadata
-    #
-    #   # The following example creates an object. The request also specifies optional metadata. If the bucket is versioning
-    #   # enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     metadata: {
-    #       "metadata1" => "value1", 
-    #       "metadata2" => "value2", 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
-    #   }
-    #
     # @example Streaming a file from disk
     #   # upload file from disk in a single request, may not exceed 5GB
     #   File.open('/source/file/path', 'rb') do |file|
@@ -11387,7 +11496,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -11440,6 +11549,14 @@ module Aws::S3
     # information, see [Access Control List (ACL) Overview][2] in the
     # *Amazon S3 User Guide*.
     #
+    # If your bucket uses the bucket owner enforced setting for S3 Object
+    # Ownership, ACLs are disabled and no longer affect permissions. You
+    # must use policies to grant access to your bucket and the objects in
+    # it. Requests to set ACLs or update ACLs fail and return the
+    # `AccessControlListNotSupported` error code. Requests to read ACLs are
+    # still supported. For more information, see [Controlling object
+    # ownership][3] in the *Amazon S3 User Guide*.
+    #
     # **Access Permissions**
     #
     # You can set access permissions using one of the following methods:
@@ -11449,7 +11566,7 @@ module Aws::S3
     #   ACL has a predefined set of grantees and permissions. Specify the
     #   canned ACL name as the value of `x-amz-ac`l. If you use this header,
     #   you cannot use other access control-specific headers in your
-    #   request. For more information, see [Canned ACL][3].
+    #   request. For more information, see [Canned ACL][4].
     #
     # * Specify access permissions explicitly with the `x-amz-grant-read`,
     #   `x-amz-grant-read-acp`, `x-amz-grant-write-acp`, and
@@ -11492,7 +11609,7 @@ module Aws::S3
     #     * South America (São Paulo)
     #
     #      For a list of all the Amazon S3 supported Regions and endpoints,
-    #     see [Regions and Endpoints][4] in the Amazon Web Services General
+    #     see [Regions and Endpoints][5] in the Amazon Web Services General
     #     Reference.
     #
     #      </note>
@@ -11553,7 +11670,7 @@ module Aws::S3
     #   * South America (São Paulo)
     #
     #    For a list of all the Amazon S3 supported Regions and endpoints, see
-    #   [Regions and Endpoints][4] in the Amazon Web Services General
+    #   [Regions and Endpoints][5] in the Amazon Web Services General
     #   Reference.
     #
     #    </note>
@@ -11566,18 +11683,19 @@ module Aws::S3
     #
     # **Related Resources**
     #
-    # * [CopyObject][5]
+    # * [CopyObject][6]
     #
-    # * [GetObject][6]
+    # * [GetObject][7]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#permissions
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
-    # [4]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
+    # [5]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object. For more information, see
@@ -12711,7 +12829,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #         },
     #       },
     #     },
@@ -14069,7 +14187,7 @@ module Aws::S3
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     ssekms_key_id: "SSEKMSKeyId",
     #     sse_customer_key_md5: "SSECustomerKeyMD5",
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #     tag_count: 1,
     #     version_id: "ObjectVersionId",
     #     bucket_key_enabled: false,
@@ -14097,7 +14215,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

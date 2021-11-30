@@ -31,11 +31,19 @@ module Aws::LakeFormation
   # * {AlreadyExistsException}
   # * {ConcurrentModificationException}
   # * {EntityNotFoundException}
+  # * {ExpiredException}
   # * {GlueEncryptionException}
   # * {InternalServiceException}
   # * {InvalidInputException}
   # * {OperationTimeoutException}
+  # * {ResourceNotReadyException}
   # * {ResourceNumberLimitExceededException}
+  # * {StatisticsNotReadyYetException}
+  # * {ThrottledException}
+  # * {TransactionCanceledException}
+  # * {TransactionCommitInProgressException}
+  # * {TransactionCommittedException}
+  # * {WorkUnitsNotReadyYetException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -93,6 +101,21 @@ module Aws::LakeFormation
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::LakeFormation::Types::EntityNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ExpiredException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LakeFormation::Types::ExpiredException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -163,11 +186,124 @@ module Aws::LakeFormation
       end
     end
 
+    class ResourceNotReadyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LakeFormation::Types::ResourceNotReadyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ResourceNumberLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::LakeFormation::Types::ResourceNumberLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class StatisticsNotReadyYetException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LakeFormation::Types::StatisticsNotReadyYetException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ThrottledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LakeFormation::Types::ThrottledException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
+      end
+
+      def throttling?
+        true
+      end
+    end
+
+    class TransactionCanceledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LakeFormation::Types::TransactionCanceledException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TransactionCommitInProgressException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LakeFormation::Types::TransactionCommitInProgressException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TransactionCommittedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LakeFormation::Types::TransactionCommittedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class WorkUnitsNotReadyYetException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LakeFormation::Types::WorkUnitsNotReadyYetException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

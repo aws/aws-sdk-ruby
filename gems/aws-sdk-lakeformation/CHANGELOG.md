@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2021-11-30)
+------------------
+
+* Feature - This release adds support for row and cell-based access control in Lake Formation. It also adds support for Lake Formation Governed Tables, which support ACID transactions and automatic storage optimizations.
+
 1.19.0 (2021-11-04)
 ------------------
 

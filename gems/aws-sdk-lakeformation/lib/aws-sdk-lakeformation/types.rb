@@ -56,6 +56,12 @@ module Aws::LakeFormation
     #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
+    #           data_cells_filter: {
+    #             table_catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             name: "NameString",
+    #           },
     #           lf_tag: {
     #             catalog_id: "CatalogIdString",
     #             tag_key: "NameString", # required
@@ -85,15 +91,16 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The resource to which to attach a tag.
+    #   The database, table, or column resource to which to attach an
+    #   LF-tag.
     #   @return [Types::Resource]
     #
     # @!attribute [rw] lf_tags
-    #   The tags to attach to the resource.
+    #   The LF-tags to attach to the resource.
     #   @return [Array<Types::LFTagPair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AddLFTagsToResourceRequest AWS API Documentation
@@ -117,6 +124,59 @@ module Aws::LakeFormation
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # A new object to add to the governed table.
+    #
+    # @note When making an API call, you may pass AddObjectInput
+    #   data as a hash:
+    #
+    #       {
+    #         uri: "URI", # required
+    #         etag: "ETagString", # required
+    #         size: 1, # required
+    #         partition_values: ["PartitionValueString"],
+    #       }
+    #
+    # @!attribute [rw] uri
+    #   The Amazon S3 location of the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The Amazon S3 ETag of the object. Returned by `GetTableObjects` for
+    #   validation and used to identify changes to the underlying data.
+    #   @return [String]
+    #
+    # @!attribute [rw] size
+    #   The size of the Amazon S3 object in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] partition_values
+    #   A list of partition values for the object. A value must be specified
+    #   for each partition key associated with the table.
+    #
+    #   The supported data types are integer, long, date(yyyy-MM-dd),
+    #   timestamp(yyyy-MM-dd HH:mm:ssXXX or yyyy-MM-dd HH:mm:ss"), string
+    #   and decimal.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AddObjectInput AWS API Documentation
+    #
+    class AddObjectInput < Struct.new(
+      :uri,
+      :etag,
+      :size,
+      :partition_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that you pass to indicate you want all rows in a filter.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AllRowsWildcard AWS API Documentation
+    #
+    class AllRowsWildcard < Aws::EmptyStructure; end
 
     # A resource to be created or added already exists.
     #
@@ -170,6 +230,12 @@ module Aws::LakeFormation
     #                 catalog_id: "CatalogIdString",
     #                 resource_arn: "ResourceArnString", # required
     #               },
+    #               data_cells_filter: {
+    #                 table_catalog_id: "CatalogIdString",
+    #                 database_name: "NameString",
+    #                 table_name: "NameString",
+    #                 name: "NameString",
+    #               },
     #               lf_tag: {
     #                 catalog_id: "CatalogIdString",
     #                 tag_key: "NameString", # required
@@ -196,7 +262,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] entries
@@ -282,6 +348,12 @@ module Aws::LakeFormation
     #           data_location: {
     #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
+    #           },
+    #           data_cells_filter: {
+    #             table_catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             name: "NameString",
     #           },
     #           lf_tag: {
     #             catalog_id: "CatalogIdString",
@@ -373,6 +445,12 @@ module Aws::LakeFormation
     #                 catalog_id: "CatalogIdString",
     #                 resource_arn: "ResourceArnString", # required
     #               },
+    #               data_cells_filter: {
+    #                 table_catalog_id: "CatalogIdString",
+    #                 database_name: "NameString",
+    #                 table_name: "NameString",
+    #                 name: "NameString",
+    #               },
     #               lf_tag: {
     #                 catalog_id: "CatalogIdString",
     #                 tag_key: "NameString", # required
@@ -399,7 +477,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] entries
@@ -428,6 +506,29 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelTransactionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transaction_id: "TransactionIdString", # required
+    #       }
+    #
+    # @!attribute [rw] transaction_id
+    #   The transaction to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CancelTransactionRequest AWS API Documentation
+    #
+    class CancelTransactionRequest < Struct.new(
+      :transaction_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CancelTransactionResponse AWS API Documentation
+    #
+    class CancelTransactionResponse < Aws::EmptyStructure; end
+
     # A structure for the catalog object.
     #
     # @api private
@@ -436,7 +537,7 @@ module Aws::LakeFormation
     #
     class CatalogResource < Aws::EmptyStructure; end
 
-    # A structure containing the name of a column resource and the tags
+    # A structure containing the name of a column resource and the LF-tags
     # attached to it.
     #
     # @!attribute [rw] name
@@ -444,7 +545,7 @@ module Aws::LakeFormation
     #   @return [String]
     #
     # @!attribute [rw] lf_tags
-    #   The tags attached to a column resource.
+    #   The LF-tags attached to a column resource.
     #   @return [Array<Types::LFTagPair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ColumnLFTag AWS API Documentation
@@ -478,6 +579,37 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CommitTransactionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transaction_id: "TransactionIdString", # required
+    #       }
+    #
+    # @!attribute [rw] transaction_id
+    #   The transaction to commit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CommitTransactionRequest AWS API Documentation
+    #
+    class CommitTransactionRequest < Struct.new(
+      :transaction_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transaction_status
+    #   The status of the transaction.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CommitTransactionResponse AWS API Documentation
+    #
+    class CommitTransactionResponse < Struct.new(
+      :transaction_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Two processes are trying to modify a resource simultaneously.
     #
     # @!attribute [rw] message
@@ -492,6 +624,44 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDataCellsFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         table_data: { # required
+    #           table_catalog_id: "CatalogIdString", # required
+    #           database_name: "NameString", # required
+    #           table_name: "NameString", # required
+    #           name: "NameString", # required
+    #           row_filter: {
+    #             filter_expression: "PredicateString",
+    #             all_rows_wildcard: {
+    #             },
+    #           },
+    #           column_names: ["NameString"],
+    #           column_wildcard: {
+    #             excluded_column_names: ["NameString"],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] table_data
+    #   A `DataCellsFilter` structure containing information about the data
+    #   cells filter.
+    #   @return [Types::DataCellsFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateDataCellsFilterRequest AWS API Documentation
+    #
+    class CreateDataCellsFilterRequest < Struct.new(
+      :table_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateDataCellsFilterResponse AWS API Documentation
+    #
+    class CreateDataCellsFilterResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CreateLFTagRequest
     #   data as a hash:
     #
@@ -505,11 +675,11 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] tag_key
-    #   The key-name for the tag.
+    #   The key-name for the LF-tag.
     #   @return [String]
     #
     # @!attribute [rw] tag_values
@@ -530,6 +700,108 @@ module Aws::LakeFormation
     #
     class CreateLFTagResponse < Aws::EmptyStructure; end
 
+    # A structure that describes certain columns on certain rows.
+    #
+    # @note When making an API call, you may pass DataCellsFilter
+    #   data as a hash:
+    #
+    #       {
+    #         table_catalog_id: "CatalogIdString", # required
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         name: "NameString", # required
+    #         row_filter: {
+    #           filter_expression: "PredicateString",
+    #           all_rows_wildcard: {
+    #           },
+    #         },
+    #         column_names: ["NameString"],
+    #         column_wildcard: {
+    #           excluded_column_names: ["NameString"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] table_catalog_id
+    #   The ID of the catalog to which the table belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   A database in the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   A table in the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name given by the user to the data filter cell.
+    #   @return [String]
+    #
+    # @!attribute [rw] row_filter
+    #   A PartiQL predicate.
+    #   @return [Types::RowFilter]
+    #
+    # @!attribute [rw] column_names
+    #   A list of column names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] column_wildcard
+    #   A wildcard with exclusions.
+    #   @return [Types::ColumnWildcard]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataCellsFilter AWS API Documentation
+    #
+    class DataCellsFilter < Struct.new(
+      :table_catalog_id,
+      :database_name,
+      :table_name,
+      :name,
+      :row_filter,
+      :column_names,
+      :column_wildcard)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure for a data cells filter resource.
+    #
+    # @note When making an API call, you may pass DataCellsFilterResource
+    #   data as a hash:
+    #
+    #       {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString",
+    #       }
+    #
+    # @!attribute [rw] table_catalog_id
+    #   The ID of the catalog to which the table belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   A database in the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data cells filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataCellsFilterResource AWS API Documentation
+    #
+    class DataCellsFilterResource < Struct.new(
+      :table_catalog_id,
+      :database_name,
+      :table_name,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The AWS Lake Formation principal. Supported principals are IAM users
     # or IAM roles.
     #
@@ -541,7 +813,7 @@ module Aws::LakeFormation
     #       }
     #
     # @!attribute [rw] data_lake_principal_identifier
-    #   An identifier for the AWS Lake Formation principal.
+    #   An identifier for the Lake Formation principal.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataLakePrincipal AWS API Documentation
@@ -552,7 +824,7 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # A structure representing a list of AWS Lake Formation principals
+    # A structure representing a list of Lake Formation principals
     # designated as data lake administrators and lists of principal
     # permission entries for default create database and default create
     # table permissions.
@@ -586,24 +858,62 @@ module Aws::LakeFormation
     #       }
     #
     # @!attribute [rw] data_lake_admins
-    #   A list of AWS Lake Formation principals. Supported principals are
-    #   IAM users or IAM roles.
+    #   A list of Lake Formation principals. Supported principals are IAM
+    #   users or IAM roles.
     #   @return [Array<Types::DataLakePrincipal>]
     #
     # @!attribute [rw] create_database_default_permissions
-    #   A structure representing a list of up to three principal permissions
-    #   entries for default create database permissions.
+    #   Specifies whether access control on newly created database is
+    #   managed by Lake Formation permissions or exclusively by IAM
+    #   permissions. You can override this default setting when you create a
+    #   database.
+    #
+    #   A null value indicates access control by Lake Formation permissions.
+    #   A value that assigns ALL to IAM\_ALLOWED\_PRINCIPALS indicates
+    #   access control by IAM permissions. This is referred to as the
+    #   setting "Use only IAM access control," and is for backward
+    #   compatibility with the Glue permission model implemented by IAM
+    #   permissions.
+    #
+    #   The only permitted values are an empty array or an array that
+    #   contains a single JSON object that grants ALL to
+    #   IAM\_ALLOWED\_PRINCIPALS.
+    #
+    #   For more information, see [Changing the Default Security Settings
+    #   for Your Data Lake][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html
     #   @return [Array<Types::PrincipalPermissions>]
     #
     # @!attribute [rw] create_table_default_permissions
-    #   A structure representing a list of up to three principal permissions
-    #   entries for default create table permissions.
+    #   Specifies whether access control on newly created table is managed
+    #   by Lake Formation permissions or exclusively by IAM permissions.
+    #
+    #   A null value indicates access control by Lake Formation permissions.
+    #   A value that assigns ALL to IAM\_ALLOWED\_PRINCIPALS indicates
+    #   access control by IAM permissions. This is referred to as the
+    #   setting "Use only IAM access control," and is for backward
+    #   compatibility with the Glue permission model implemented by IAM
+    #   permissions.
+    #
+    #   The only permitted values are an empty array or an array that
+    #   contains a single JSON object that grants ALL to
+    #   IAM\_ALLOWED\_PRINCIPALS.
+    #
+    #   For more information, see [Changing the Default Security Settings
+    #   for Your Data Lake][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html
     #   @return [Array<Types::PrincipalPermissions>]
     #
     # @!attribute [rw] trusted_resource_owners
     #   A list of the resource-owning account IDs that the caller's account
     #   can use to share their user access details (user ARNs). The user
-    #   ARNs can be logged in the resource owner's AWS CloudTrail log.
+    #   ARNs can be logged in the resource owner's CloudTrail log.
     #
     #   You may want to specify this property when you are in a high-trust
     #   boundary, such as the same team or company.
@@ -633,8 +943,7 @@ module Aws::LakeFormation
     #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog where the location is registered
-    #   with AWS Lake Formation. By default, it is the account ID of the
-    #   caller.
+    #   with Lake Formation. By default, it is the account ID of the caller.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -679,6 +988,47 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteDataCellsFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString",
+    #       }
+    #
+    # @!attribute [rw] table_catalog_id
+    #   The ID of the catalog to which the table belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   A database in the Glue Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   A table in the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name given by the user to the data filter cell.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteDataCellsFilterRequest AWS API Documentation
+    #
+    class DeleteDataCellsFilterRequest < Struct.new(
+      :table_catalog_id,
+      :database_name,
+      :table_name,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteDataCellsFilterResponse AWS API Documentation
+    #
+    class DeleteDataCellsFilterResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteLFTagRequest
     #   data as a hash:
     #
@@ -691,11 +1041,11 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] tag_key
-    #   The key-name for the tag to delete.
+    #   The key-name for the LF-tag to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLFTagRequest AWS API Documentation
@@ -710,6 +1060,95 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLFTagResponse AWS API Documentation
     #
     class DeleteLFTagResponse < Aws::EmptyStructure; end
+
+    # An object to delete from the governed table.
+    #
+    # @note When making an API call, you may pass DeleteObjectInput
+    #   data as a hash:
+    #
+    #       {
+    #         uri: "URI", # required
+    #         etag: "ETagString",
+    #         partition_values: ["PartitionValueString"],
+    #       }
+    #
+    # @!attribute [rw] uri
+    #   The Amazon S3 location of the object to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The Amazon S3 ETag of the object. Returned by `GetTableObjects` for
+    #   validation and used to identify changes to the underlying data.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_values
+    #   A list of partition values for the object. A value must be specified
+    #   for each partition key associated with the governed table.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteObjectInput AWS API Documentation
+    #
+    class DeleteObjectInput < Struct.new(
+      :uri,
+      :etag,
+      :partition_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteObjectsOnCancelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         transaction_id: "TransactionIdString", # required
+    #         objects: [ # required
+    #           {
+    #             uri: "URI", # required
+    #             etag: "ETagString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The Glue data catalog that contains the governed table. Defaults to
+    #   the current account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database that contains the governed table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the governed table.
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_id
+    #   ID of the transaction that the writes occur in.
+    #   @return [String]
+    #
+    # @!attribute [rw] objects
+    #   A list of VirtualObject structures, which indicates the Amazon S3
+    #   objects to be deleted if the transaction cancels.
+    #   @return [Array<Types::VirtualObject>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteObjectsOnCancelRequest AWS API Documentation
+    #
+    class DeleteObjectsOnCancelRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :transaction_id,
+      :objects)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteObjectsOnCancelResponse AWS API Documentation
+    #
+    class DeleteObjectsOnCancelResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeregisterResourceRequest
     #   data as a hash:
@@ -755,8 +1194,7 @@ module Aws::LakeFormation
     end
 
     # @!attribute [rw] resource_info
-    #   A structure containing information about an AWS Lake Formation
-    #   resource.
+    #   A structure containing information about an Lake Formation resource.
     #   @return [Types::ResourceInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeResourceResponse AWS API Documentation
@@ -767,16 +1205,46 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeTransactionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transaction_id: "TransactionIdString", # required
+    #       }
+    #
+    # @!attribute [rw] transaction_id
+    #   The transaction for which to return status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeTransactionRequest AWS API Documentation
+    #
+    class DescribeTransactionRequest < Struct.new(
+      :transaction_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transaction_description
+    #   Returns a `TransactionDescription` object containing information
+    #   about the transaction.
+    #   @return [Types::TransactionDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeTransactionResponse AWS API Documentation
+    #
+    class DescribeTransactionResponse < Struct.new(
+      :transaction_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure containing the additional details to be returned in the
     # `AdditionalDetails` attribute of `PrincipalResourcePermissions`.
     #
-    # If a catalog resource is shared through AWS Resource Access Manager
-    # (AWS RAM), then there will exist a corresponding RAM resource share
-    # ARN.
+    # If a catalog resource is shared through Resource Access Manager (RAM),
+    # then there will exist a corresponding RAM resource share ARN.
     #
     # @!attribute [rw] resource_share
-    #   A resource share ARN for a catalog resource shared through AWS
-    #   Resource Access Manager (AWS RAM).
+    #   A resource share ARN for a catalog resource shared through RAM.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DetailsMap AWS API Documentation
@@ -819,6 +1287,67 @@ module Aws::LakeFormation
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Statistics related to the processing of a query statement.
+    #
+    # @!attribute [rw] average_execution_time_millis
+    #   The average time the request took to be executed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_scanned_bytes
+    #   The amount of data that was scanned in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] work_units_executed_count
+    #   The number of work units executed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ExecutionStatistics AWS API Documentation
+    #
+    class ExecutionStatistics < Struct.new(
+      :average_execution_time_millis,
+      :data_scanned_bytes,
+      :work_units_executed_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an error where the query request expired.
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ExpiredException AWS API Documentation
+    #
+    class ExpiredException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExtendTransactionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transaction_id: "TransactionIdString",
+    #       }
+    #
+    # @!attribute [rw] transaction_id
+    #   The transaction to extend.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ExtendTransactionRequest AWS API Documentation
+    #
+    class ExtendTransactionRequest < Struct.new(
+      :transaction_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ExtendTransactionResponse AWS API Documentation
+    #
+    class ExtendTransactionResponse < Aws::EmptyStructure; end
 
     # This structure describes the filtering of columns in a table based on
     # a filter condition.
@@ -865,7 +1394,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataLakeSettingsRequest AWS API Documentation
@@ -877,7 +1406,7 @@ module Aws::LakeFormation
     end
 
     # @!attribute [rw] data_lake_settings
-    #   A structure representing a list of AWS Lake Formation principals
+    #   A structure representing a list of Lake Formation principals
     #   designated as data lake administrators.
     #   @return [Types::DataLakeSettings]
     #
@@ -903,7 +1432,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -962,11 +1491,11 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] tag_key
-    #   The key-name for the tag.
+    #   The key-name for the LF-tag.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetLFTagRequest AWS API Documentation
@@ -982,11 +1511,11 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] tag_key
-    #   The key-name for the tag.
+    #   The key-name for the LF-tag.
     #   @return [String]
     #
     # @!attribute [rw] tag_values
@@ -999,6 +1528,97 @@ module Aws::LakeFormation
       :catalog_id,
       :tag_key,
       :tag_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetQueryStateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         query_id: "GetQueryStateRequestQueryIdString", # required
+    #       }
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the plan query operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetQueryStateRequest AWS API Documentation
+    #
+    class GetQueryStateRequest < Struct.new(
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure for the output.
+    #
+    # @!attribute [rw] error
+    #   An error message when the operation fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of a query previously submitted. The possible states are:
+    #
+    #   * PENDING: the query is pending.
+    #
+    #   * WORKUNITS\_AVAILABLE: some work units are ready for retrieval and
+    #     execution.
+    #
+    #   * FINISHED: the query planning finished successfully, and all work
+    #     units are ready for retrieval and execution.
+    #
+    #   * ERROR: an error occurred with the query, such as an invalid query
+    #     ID or a backend error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetQueryStateResponse AWS API Documentation
+    #
+    class GetQueryStateResponse < Struct.new(
+      :error,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetQueryStatisticsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         query_id: "GetQueryStatisticsRequestQueryIdString", # required
+    #       }
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the plan query operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetQueryStatisticsRequest AWS API Documentation
+    #
+    class GetQueryStatisticsRequest < Struct.new(
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] execution_statistics
+    #   An `ExecutionStatistics` structure containing execution statistics.
+    #   @return [Types::ExecutionStatistics]
+    #
+    # @!attribute [rw] planning_statistics
+    #   A `PlanningStatistics` structure containing query planning
+    #   statistics.
+    #   @return [Types::PlanningStatistics]
+    #
+    # @!attribute [rw] query_submission_time
+    #   The time that the query was submitted.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetQueryStatisticsResponse AWS API Documentation
+    #
+    class GetQueryStatisticsResponse < Struct.new(
+      :execution_statistics,
+      :planning_statistics,
+      :query_submission_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1035,6 +1655,12 @@ module Aws::LakeFormation
     #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
+    #           data_cells_filter: {
+    #             table_catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             name: "NameString",
+    #           },
     #           lf_tag: {
     #             catalog_id: "CatalogIdString",
     #             tag_key: "NameString", # required
@@ -1058,15 +1684,16 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The resource for which you want to return tags.
+    #   The database, table, or column resource for which you want to return
+    #   LF-tags.
     #   @return [Types::Resource]
     #
     # @!attribute [rw] show_assigned_lf_tags
-    #   Indicates whether to show the assigned tags.
+    #   Indicates whether to show the assigned LF-tags.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetResourceLFTagsRequest AWS API Documentation
@@ -1080,15 +1707,15 @@ module Aws::LakeFormation
     end
 
     # @!attribute [rw] lf_tag_on_database
-    #   A list of tags applied to a database resource.
+    #   A list of LF-tags applied to a database resource.
     #   @return [Array<Types::LFTagPair>]
     #
     # @!attribute [rw] lf_tags_on_table
-    #   A list of tags applied to a table resource.
+    #   A list of LF-tags applied to a table resource.
     #   @return [Array<Types::LFTagPair>]
     #
     # @!attribute [rw] lf_tags_on_columns
-    #   A list of tags applied to a column resource.
+    #   A list of LF-tags applied to a column resource.
     #   @return [Array<Types::ColumnLFTag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetResourceLFTagsResponse AWS API Documentation
@@ -1097,6 +1724,213 @@ module Aws::LakeFormation
       :lf_tag_on_database,
       :lf_tags_on_table,
       :lf_tags_on_columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTableObjectsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         transaction_id: "TransactionIdString",
+    #         query_as_of_time: Time.now,
+    #         partition_predicate: "PredicateString",
+    #         max_results: 1,
+    #         next_token: "TokenString",
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The catalog containing the governed table. Defaults to the caller’s
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database containing the governed table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The governed table for which to retrieve objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_id
+    #   The transaction ID at which to read the governed table contents. If
+    #   this transaction has aborted, an error is returned. If not set,
+    #   defaults to the most recent committed transaction. Cannot be
+    #   specified along with `QueryAsOfTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_as_of_time
+    #   The time as of when to read the governed table contents. If not set,
+    #   the most recent transaction commit time is used. Cannot be specified
+    #   along with `TransactionId`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] partition_predicate
+    #   A predicate to filter the objects returned based on the partition
+    #   keys defined in the governed table.
+    #
+    #   * The comparison operators supported are: =, &gt;, &lt;, &gt;=,
+    #     &lt;=
+    #
+    #   * The logical operators supported are: AND
+    #
+    #   * The data types supported are integer, long, date(yyyy-MM-dd),
+    #     timestamp(yyyy-MM-dd HH:mm:ssXXX or yyyy-MM-dd HH:mm:ss"), string
+    #     and decimal.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies how many values to return in a page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token if this is not the first call to retrieve these
+    #   objects.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTableObjectsRequest AWS API Documentation
+    #
+    class GetTableObjectsRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :transaction_id,
+      :query_as_of_time,
+      :partition_predicate,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] objects
+    #   A list of objects organized by partition keys.
+    #   @return [Array<Types::PartitionObjects>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token indicating whether additional data is
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTableObjectsResponse AWS API Documentation
+    #
+    class GetTableObjectsResponse < Struct.new(
+      :objects,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetWorkUnitResultsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         query_id: "GetWorkUnitResultsRequestQueryIdString", # required
+    #         work_unit_id: 1, # required
+    #         work_unit_token: "SyntheticGetWorkUnitResultsRequestWorkUnitTokenString", # required
+    #       }
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the plan query operation for which to get results.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_unit_id
+    #   The work unit ID for which to get results. Value generated by
+    #   enumerating `WorkUnitIdMin` to `WorkUnitIdMax` (inclusive) from the
+    #   `WorkUnitRange` in the output of `GetWorkUnits`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] work_unit_token
+    #   A work token used to query the execution service. Token output from
+    #   `GetWorkUnits`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetWorkUnitResultsRequest AWS API Documentation
+    #
+    class GetWorkUnitResultsRequest < Struct.new(
+      :query_id,
+      :work_unit_id,
+      :work_unit_token)
+      SENSITIVE = [:work_unit_token]
+      include Aws::Structure
+    end
+
+    # A structure for the output.
+    #
+    # @!attribute [rw] result_stream
+    #   Rows returned from the `GetWorkUnitResults` operation as a stream of
+    #   Apache Arrow v1.0 messages.
+    #   @return [IO]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetWorkUnitResultsResponse AWS API Documentation
+    #
+    class GetWorkUnitResultsResponse < Struct.new(
+      :result_stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetWorkUnitsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "Token",
+    #         page_size: 1,
+    #         query_id: "GetWorkUnitsRequestQueryIdString", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The size of each page to get in the Amazon Web Services service
+    #   call. This does not affect the number of items returned in the
+    #   command's output. Setting a smaller page size results in more calls
+    #   to the Amazon Web Services service, retrieving fewer items in each
+    #   call. This can help prevent the Amazon Web Services service calls
+    #   from timing out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the plan query operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetWorkUnitsRequest AWS API Documentation
+    #
+    class GetWorkUnitsRequest < Struct.new(
+      :next_token,
+      :page_size,
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure for the output.
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token for paginating the returned list of tokens,
+    #   returned if the current segment of the list is not the last.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the plan query operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_unit_ranges
+    #   A `WorkUnitRangeList` object that specifies the valid range of work
+    #   unit IDs for querying the execution service.
+    #   @return [Array<Types::WorkUnitRange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetWorkUnitsResponse AWS API Documentation
+    #
+    class GetWorkUnitsResponse < Struct.new(
+      :next_token,
+      :query_id,
+      :work_unit_ranges)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1150,6 +1984,12 @@ module Aws::LakeFormation
     #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
+    #           data_cells_filter: {
+    #             table_catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             name: "NameString",
+    #           },
     #           lf_tag: {
     #             catalog_id: "CatalogIdString",
     #             tag_key: "NameString", # required
@@ -1174,7 +2014,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] principal
@@ -1189,16 +2029,15 @@ module Aws::LakeFormation
     #
     # @!attribute [rw] resource
     #   The resource to which permissions are to be granted. Resources in
-    #   AWS Lake Formation are the Data Catalog, databases, and tables.
+    #   Lake Formation are the Data Catalog, databases, and tables.
     #   @return [Types::Resource]
     #
     # @!attribute [rw] permissions
-    #   The permissions granted to the principal on the resource. AWS Lake
+    #   The permissions granted to the principal on the resource. Lake
     #   Formation defines privileges to grant and revoke access to metadata
     #   in the Data Catalog and data organized in underlying data storage
-    #   such as Amazon S3. AWS Lake Formation requires that each principal
-    #   be authorized to perform a specific task on AWS Lake Formation
-    #   resources.
+    #   such as Amazon S3. Lake Formation requires that each principal be
+    #   authorized to perform a specific task on Lake Formation resources.
     #   @return [Array<String>]
     #
     # @!attribute [rw] permissions_with_grant_option
@@ -1252,8 +2091,8 @@ module Aws::LakeFormation
     end
 
     # A structure that allows an admin to grant user permissions on certain
-    # conditions. For example, granting a role access to all columns not
-    # tagged 'PII' of tables tagged 'Prod'.
+    # conditions. For example, granting a role access to all columns that do
+    # not have the LF-tag 'PII' in tables that have the LF-tag 'Prod'.
     #
     # @note When making an API call, you may pass LFTag
     #   data as a hash:
@@ -1264,7 +2103,7 @@ module Aws::LakeFormation
     #       }
     #
     # @!attribute [rw] tag_key
-    #   The key-name for the tag.
+    #   The key-name for the LF-tag.
     #   @return [String]
     #
     # @!attribute [rw] tag_values
@@ -1284,11 +2123,12 @@ module Aws::LakeFormation
     # `UnTagResource` operation.
     #
     # @!attribute [rw] lf_tag
-    #   The key-name of the tag.
+    #   The key-name of the LF-tag.
     #   @return [Types::LFTagPair]
     #
     # @!attribute [rw] error
-    #   An error that occurred with the attachment or detachment of the tag.
+    #   An error that occurred with the attachment or detachment of the
+    #   LF-tag.
     #   @return [Types::ErrorDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/LFTagError AWS API Documentation
@@ -1300,7 +2140,7 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # A structure containing a tag key and values for a resource.
+    # A structure containing an LF-tag key and values for a resource.
     #
     # @note When making an API call, you may pass LFTagKeyResource
     #   data as a hash:
@@ -1315,11 +2155,11 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] tag_key
-    #   The key-name for the tag.
+    #   The key-name for the LF-tag.
     #   @return [String]
     #
     # @!attribute [rw] tag_values
@@ -1336,7 +2176,7 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # A structure containing a tag key-value pair.
+    # A structure containing an LF-tag key-value pair.
     #
     # @note When making an API call, you may pass LFTagPair
     #   data as a hash:
@@ -1351,11 +2191,11 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] tag_key
-    #   The key-name for the tag.
+    #   The key-name for the LF-tag.
     #   @return [String]
     #
     # @!attribute [rw] tag_values
@@ -1372,8 +2212,8 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # A structure containing a list of tag conditions that apply to a
-    # resource's tag policy.
+    # A structure containing a list of LF-tag conditions that apply to a
+    # resource's LF-tag policy.
     #
     # @note When making an API call, you may pass LFTagPolicyResource
     #   data as a hash:
@@ -1393,15 +2233,16 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type for which the tag policy applies.
+    #   The resource type for which the LF-tag policy applies.
     #   @return [String]
     #
     # @!attribute [rw] expression
-    #   A list of tag conditions that apply to the resource's tag policy.
+    #   A list of LF-tag conditions that apply to the resource's LF-tag
+    #   policy.
     #   @return [Array<Types::LFTag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/LFTagPolicyResource AWS API Documentation
@@ -1410,6 +2251,61 @@ module Aws::LakeFormation
       :catalog_id,
       :resource_type,
       :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDataCellsFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         table: {
+    #           catalog_id: "CatalogIdString",
+    #           database_name: "NameString", # required
+    #           name: "NameString",
+    #           table_wildcard: {
+    #           },
+    #         },
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] table
+    #   A table in the Glue Data Catalog.
+    #   @return [Types::TableResource]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListDataCellsFilterRequest AWS API Documentation
+    #
+    class ListDataCellsFilterRequest < Struct.new(
+      :table,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_cells_filters
+    #   A list of `DataCellFilter` structures.
+    #   @return [Array<Types::DataCellsFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if not all requested data cell filters have
+    #   been returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListDataCellsFilterResponse AWS API Documentation
+    #
+    class ListDataCellsFilterResponse < Struct.new(
+      :data_cells_filters,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1428,15 +2324,16 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] resource_share_type
-    #   If resource share type is `ALL`, returns both in-account tags and
-    #   shared tags that the requester has permission to view. If resource
-    #   share type is `FOREIGN`, returns all share tags that the requester
-    #   can view. If no resource share type is passed, lists tags in the
-    #   given catalog ID that the requester has permission to view.
+    #   If resource share type is `ALL`, returns both in-account LF-tags and
+    #   shared LF-tags that the requester has permission to view. If
+    #   resource share type is `FOREIGN`, returns all share LF-tags that the
+    #   requester can view. If no resource share type is passed, lists
+    #   LF-tags in the given catalog ID that the requester has permission to
+    #   view.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1460,7 +2357,7 @@ module Aws::LakeFormation
     end
 
     # @!attribute [rw] lf_tags
-    #   A list of tags that the requested has permission to view.
+    #   A list of LF-tags that the requested has permission to view.
     #   @return [Array<Types::LFTagPair>]
     #
     # @!attribute [rw] next_token
@@ -1513,6 +2410,12 @@ module Aws::LakeFormation
     #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
+    #           data_cells_filter: {
+    #             table_catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             name: "NameString",
+    #           },
     #           lf_tag: {
     #             catalog_id: "CatalogIdString",
     #             tag_key: "NameString", # required
@@ -1531,13 +2434,14 @@ module Aws::LakeFormation
     #         },
     #         next_token: "Token",
     #         max_results: 1,
+    #         include_related: "TrueFalseString",
     #       }
     #
     # @!attribute [rw] catalog_id
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] principal
@@ -1565,6 +2469,11 @@ module Aws::LakeFormation
     #   The maximum number of results to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] include_related
+    #   Indicates that related permissions should be included in the
+    #   results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListPermissionsRequest AWS API Documentation
     #
     class ListPermissionsRequest < Struct.new(
@@ -1573,7 +2482,8 @@ module Aws::LakeFormation
       :resource_type,
       :resource,
       :next_token,
-      :max_results)
+      :max_results,
+      :include_related)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1654,6 +2564,134 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTableStorageOptimizersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         storage_optimizer_type: "COMPACTION", # accepts COMPACTION, GARBAGE_COLLECTION, ALL
+    #         max_results: 1,
+    #         next_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   Name of the database where the table is present.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   Name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_optimizer_type
+    #   The specific type of storage optimizers to list. The supported value
+    #   is `compaction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of storage optimizers to return on each call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListTableStorageOptimizersRequest AWS API Documentation
+    #
+    class ListTableStorageOptimizersRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :storage_optimizer_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] storage_optimizer_list
+    #   A list of the storage optimizers associated with a table.
+    #   @return [Array<Types::StorageOptimizer>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token for paginating the returned list of tokens,
+    #   returned if the current segment of the list is not the last.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListTableStorageOptimizersResponse AWS API Documentation
+    #
+    class ListTableStorageOptimizersResponse < Struct.new(
+      :storage_optimizer_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTransactionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         status_filter: "ALL", # accepts ALL, COMPLETED, ACTIVE, COMMITTED, ABORTED
+    #         max_results: 1,
+    #         next_token: "TokenString",
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The catalog for which to list transactions. Defaults to the account
+    #   ID of the caller.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_filter
+    #   A filter indicating the status of transactions to return. Options
+    #   are ALL \| COMPLETED \| COMMITTED \| ABORTED \| ACTIVE. The default
+    #   is `ALL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of transactions to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token if this is not the first call to retrieve
+    #   transactions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListTransactionsRequest AWS API Documentation
+    #
+    class ListTransactionsRequest < Struct.new(
+      :catalog_id,
+      :status_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transactions
+    #   A list of transactions. The record for each transaction is a
+    #   `TransactionDescription` object.
+    #   @return [Array<Types::TransactionDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token indicating whether additional data is
+    #   available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ListTransactionsResponse AWS API Documentation
+    #
+    class ListTransactionsResponse < Struct.new(
+      :transactions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operation timed out.
     #
     # @!attribute [rw] message
@@ -1664,6 +2702,54 @@ module Aws::LakeFormation
     #
     class OperationTimeoutException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing a list of partition values and table objects.
+    #
+    # @!attribute [rw] partition_values
+    #   A list of partition values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] objects
+    #   A list of table objects
+    #   @return [Array<Types::TableObject>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/PartitionObjects AWS API Documentation
+    #
+    class PartitionObjects < Struct.new(
+      :partition_values,
+      :objects)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics related to the processing of a query statement.
+    #
+    # @!attribute [rw] estimated_data_to_scan_bytes
+    #   An estimate of the data that was scanned in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] planning_time_millis
+    #   The time that it took to process the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] queue_time_millis
+    #   The time the request was in queue to be processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] work_units_generated_count
+    #   The number of work units generated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/PlanningStatistics AWS API Documentation
+    #
+    class PlanningStatistics < Struct.new(
+      :estimated_data_to_scan_bytes,
+      :planning_time_millis,
+      :queue_time_millis,
+      :work_units_generated_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1769,11 +2855,11 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] data_lake_settings
-    #   A structure representing a list of AWS Lake Formation principals
+    #   A structure representing a list of Lake Formation principals
     #   designated as data lake administrators.
     #   @return [Types::DataLakeSettings]
     #
@@ -1790,6 +2876,62 @@ module Aws::LakeFormation
     #
     class PutDataLakeSettingsResponse < Aws::EmptyStructure; end
 
+    # A structure containing information about the query plan.
+    #
+    # @note When making an API call, you may pass QueryPlanningContext
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "QueryPlanningContextDatabaseNameString", # required
+    #         query_as_of_time: Time.now,
+    #         query_parameters: {
+    #           "String" => "String",
+    #         },
+    #         transaction_id: "TransactionIdString",
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the partition in question resides.
+    #   If none is provided, the Amazon Web Services account ID is used by
+    #   default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database containing the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_as_of_time
+    #   The time as of when to read the table contents. If not set, the most
+    #   recent transaction commit time will be used. Cannot be specified
+    #   along with `TransactionId`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] query_parameters
+    #   A map consisting of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] transaction_id
+    #   The transaction ID at which to read the table contents. If this
+    #   transaction is not committed, the read will be treated as part of
+    #   that transaction and will see its writes. If this transaction has
+    #   aborted, an error will be returned. If not set, defaults to the most
+    #   recent committed transaction. Cannot be specified along with
+    #   `QueryAsOfTime`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/QueryPlanningContext AWS API Documentation
+    #
+    class QueryPlanningContext < Struct.new(
+      :catalog_id,
+      :database_name,
+      :query_as_of_time,
+      :query_parameters,
+      :transaction_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RegisterResourceRequest
     #   data as a hash:
     #
@@ -1805,9 +2947,9 @@ module Aws::LakeFormation
     #   @return [String]
     #
     # @!attribute [rw] use_service_linked_role
-    #   Designates an AWS Identity and Access Management (IAM)
-    #   service-linked role by registering this role with the Data Catalog.
-    #   A service-linked role is a unique type of IAM role that is linked
+    #   Designates an Identity and Access Management (IAM) service-linked
+    #   role by registering this role with the Data Catalog. A
+    #   service-linked role is a unique type of IAM role that is linked
     #   directly to Lake Formation.
     #
     #   For more information, see [Using Service-Linked Roles for Lake
@@ -1868,6 +3010,12 @@ module Aws::LakeFormation
     #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
+    #           data_cells_filter: {
+    #             table_catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             name: "NameString",
+    #           },
     #           lf_tag: {
     #             catalog_id: "CatalogIdString",
     #             tag_key: "NameString", # required
@@ -1897,15 +3045,16 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The resource where you want to remove a tag.
+    #   The database, table, or column resource where you want to remove an
+    #   LF-tag.
     #   @return [Types::Resource]
     #
     # @!attribute [rw] lf_tags
-    #   The tags to be removed from the resource.
+    #   The LF-tags to be removed from the resource.
     #   @return [Array<Types::LFTagPair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RemoveLFTagsFromResourceRequest AWS API Documentation
@@ -1962,6 +3111,12 @@ module Aws::LakeFormation
     #           catalog_id: "CatalogIdString",
     #           resource_arn: "ResourceArnString", # required
     #         },
+    #         data_cells_filter: {
+    #           table_catalog_id: "CatalogIdString",
+    #           database_name: "NameString",
+    #           table_name: "NameString",
+    #           name: "NameString",
+    #         },
     #         lf_tag: {
     #           catalog_id: "CatalogIdString",
     #           tag_key: "NameString", # required
@@ -1983,7 +3138,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [Types::CatalogResource]
     #
     # @!attribute [rw] database
@@ -2010,12 +3165,16 @@ module Aws::LakeFormation
     #   revoked.
     #   @return [Types::DataLocationResource]
     #
+    # @!attribute [rw] data_cells_filter
+    #   A data cell filter.
+    #   @return [Types::DataCellsFilterResource]
+    #
     # @!attribute [rw] lf_tag
-    #   The tag key and values attached to a resource.
+    #   The LF-tag key and values attached to a resource.
     #   @return [Types::LFTagKeyResource]
     #
     # @!attribute [rw] lf_tag_policy
-    #   A list of tag conditions that define a resource's tag policy.
+    #   A list of LF-tag conditions that define a resource's LF-tag policy.
     #   @return [Types::LFTagPolicyResource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/Resource AWS API Documentation
@@ -2026,14 +3185,14 @@ module Aws::LakeFormation
       :table,
       :table_with_columns,
       :data_location,
+      :data_cells_filter,
       :lf_tag,
       :lf_tag_policy)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A structure containing information about an AWS Lake Formation
-    # resource.
+    # A structure containing information about an Lake Formation resource.
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -2053,6 +3212,21 @@ module Aws::LakeFormation
       :resource_arn,
       :role_arn,
       :last_modified)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an error related to a resource which is not
+    # ready for a transaction.
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ResourceNotReadyException AWS API Documentation
+    #
+    class ResourceNotReadyException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2106,6 +3280,12 @@ module Aws::LakeFormation
     #             catalog_id: "CatalogIdString",
     #             resource_arn: "ResourceArnString", # required
     #           },
+    #           data_cells_filter: {
+    #             table_catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             name: "NameString",
+    #           },
     #           lf_tag: {
     #             catalog_id: "CatalogIdString",
     #             tag_key: "NameString", # required
@@ -2130,7 +3310,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] principal
@@ -2172,6 +3352,34 @@ module Aws::LakeFormation
     #
     class RevokePermissionsResponse < Aws::EmptyStructure; end
 
+    # A PartiQL predicate.
+    #
+    # @note When making an API call, you may pass RowFilter
+    #   data as a hash:
+    #
+    #       {
+    #         filter_expression: "PredicateString",
+    #         all_rows_wildcard: {
+    #         },
+    #       }
+    #
+    # @!attribute [rw] filter_expression
+    #   A filter expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] all_rows_wildcard
+    #   A wildcard for all rows.
+    #   @return [Types::AllRowsWildcard]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/RowFilter AWS API Documentation
+    #
+    class RowFilter < Struct.new(
+      :filter_expression,
+      :all_rows_wildcard)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SearchDatabasesByLFTagsRequest
     #   data as a hash:
     #
@@ -2200,7 +3408,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] expression
@@ -2225,7 +3433,7 @@ module Aws::LakeFormation
     #   @return [String]
     #
     # @!attribute [rw] database_list
-    #   A list of databases that meet the tag conditions.
+    #   A list of databases that meet the LF-tag conditions.
     #   @return [Array<Types::TaggedDatabase>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/SearchDatabasesByLFTagsResponse AWS API Documentation
@@ -2265,7 +3473,7 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] expression
@@ -2290,7 +3498,7 @@ module Aws::LakeFormation
     #   @return [String]
     #
     # @!attribute [rw] table_list
-    #   A list of tables that meet the tag conditions.
+    #   A list of tables that meet the LF-tag conditions.
     #   @return [Array<Types::TaggedTable>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/SearchTablesByLFTagsResponse AWS API Documentation
@@ -2298,6 +3506,173 @@ module Aws::LakeFormation
     class SearchTablesByLFTagsResponse < Struct.new(
       :next_token,
       :table_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartQueryPlanningRequest
+    #   data as a hash:
+    #
+    #       {
+    #         query_planning_context: { # required
+    #           catalog_id: "CatalogIdString",
+    #           database_name: "QueryPlanningContextDatabaseNameString", # required
+    #           query_as_of_time: Time.now,
+    #           query_parameters: {
+    #             "String" => "String",
+    #           },
+    #           transaction_id: "TransactionIdString",
+    #         },
+    #         query_string: "SyntheticStartQueryPlanningRequestQueryString", # required
+    #       }
+    #
+    # @!attribute [rw] query_planning_context
+    #   A structure containing information about the query plan.
+    #   @return [Types::QueryPlanningContext]
+    #
+    # @!attribute [rw] query_string
+    #   A PartiQL query statement used as an input to the planner service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/StartQueryPlanningRequest AWS API Documentation
+    #
+    class StartQueryPlanningRequest < Struct.new(
+      :query_planning_context,
+      :query_string)
+      SENSITIVE = [:query_string]
+      include Aws::Structure
+    end
+
+    # A structure for the output.
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the plan query operation can be used to fetch the actual
+    #   work unit descriptors that are produced as the result of the
+    #   operation. The ID is also used to get the query state and as an
+    #   input to the `Execute` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/StartQueryPlanningResponse AWS API Documentation
+    #
+    class StartQueryPlanningResponse < Struct.new(
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartTransactionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         transaction_type: "READ_AND_WRITE", # accepts READ_AND_WRITE, READ_ONLY
+    #       }
+    #
+    # @!attribute [rw] transaction_type
+    #   Indicates whether this transaction should be read only or read and
+    #   write. Writes made using a read-only transaction ID will be
+    #   rejected. Read-only transactions do not need to be committed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/StartTransactionRequest AWS API Documentation
+    #
+    class StartTransactionRequest < Struct.new(
+      :transaction_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transaction_id
+    #   An opaque identifier for the transaction.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/StartTransactionResponse AWS API Documentation
+    #
+    class StartTransactionResponse < Struct.new(
+      :transaction_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an error related to statistics not being ready.
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/StatisticsNotReadyYetException AWS API Documentation
+    #
+    class StatisticsNotReadyYetException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure describing the configuration and details of a storage
+    # optimizer.
+    #
+    # @!attribute [rw] storage_optimizer_type
+    #   The specific type of storage optimizer. The supported value is
+    #   `compaction`.
+    #   @return [String]
+    #
+    # @!attribute [rw] config
+    #   A map of the storage optimizer configuration. Currently contains
+    #   only one key-value pair: `is_enabled` indicates true or false for
+    #   acceleration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] error_message
+    #   A message that contains information about any error (if present).
+    #
+    #   When an acceleration result has an enabled status, the error message
+    #   is empty.
+    #
+    #   When an acceleration result has a disabled status, the message
+    #   describes an error or simply indicates "disabled by the user".
+    #   @return [String]
+    #
+    # @!attribute [rw] warnings
+    #   A message that contains information about any warnings (if present).
+    #   @return [String]
+    #
+    # @!attribute [rw] last_run_details
+    #   When an acceleration result has an enabled status, contains the
+    #   details of the last job run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/StorageOptimizer AWS API Documentation
+    #
+    class StorageOptimizer < Struct.new(
+      :storage_optimizer_type,
+      :config,
+      :error_message,
+      :warnings,
+      :last_run_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the details of a governed table.
+    #
+    # @!attribute [rw] uri
+    #   The Amazon S3 location of the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The Amazon S3 ETag of the object. Returned by `GetTableObjects` for
+    #   validation and used to identify changes to the underlying data.
+    #   @return [String]
+    #
+    # @!attribute [rw] size
+    #   The size of the Amazon S3 object in bytes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TableObject AWS API Documentation
+    #
+    class TableObject < Struct.new(
+      :uri,
+      :etag,
+      :size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2418,14 +3793,14 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # A structure describing a database resource with tags.
+    # A structure describing a database resource with LF-tags.
     #
     # @!attribute [rw] database
-    #   A database that has tags attached to it.
+    #   A database that has LF-tags attached to it.
     #   @return [Types::DatabaseResource]
     #
     # @!attribute [rw] lf_tags
-    #   A list of tags attached to the database.
+    #   A list of LF-tags attached to the database.
     #   @return [Array<Types::LFTagPair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TaggedDatabase AWS API Documentation
@@ -2437,22 +3812,22 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # A structure describing a table resource with tags.
+    # A structure describing a table resource with LF-tags.
     #
     # @!attribute [rw] table
-    #   A table that has tags attached to it.
+    #   A table that has LF-tags attached to it.
     #   @return [Types::TableResource]
     #
     # @!attribute [rw] lf_tag_on_database
-    #   A list of tags attached to the database where the table resides.
+    #   A list of LF-tags attached to the database where the table resides.
     #   @return [Array<Types::LFTagPair>]
     #
     # @!attribute [rw] lf_tags_on_table
-    #   A list of tags attached to the table.
+    #   A list of LF-tags attached to the table.
     #   @return [Array<Types::LFTagPair>]
     #
     # @!attribute [rw] lf_tags_on_columns
-    #   A list of tags attached to columns in the table.
+    #   A list of LF-tags attached to columns in the table.
     #   @return [Array<Types::ColumnLFTag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TaggedTable AWS API Documentation
@@ -2462,6 +3837,95 @@ module Aws::LakeFormation
       :lf_tag_on_database,
       :lf_tags_on_table,
       :lf_tags_on_columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an error where the query request was throttled.
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ThrottledException AWS API Documentation
+    #
+    class ThrottledException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an error related to a transaction that was
+    # cancelled.
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TransactionCanceledException AWS API Documentation
+    #
+    class TransactionCanceledException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an error related to a transaction commit that
+    # was in progress.
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TransactionCommitInProgressException AWS API Documentation
+    #
+    class TransactionCommitInProgressException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an error where the specified transaction has
+    # already been committed and cannot be used for `UpdateTableObjects`.
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TransactionCommittedException AWS API Documentation
+    #
+    class TransactionCommittedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains information about a transaction.
+    #
+    # @!attribute [rw] transaction_id
+    #   The ID of the transaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_status
+    #   A status of ACTIVE, COMMITTED, or ABORTED.
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_start_time
+    #   The time when the transaction started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transaction_end_time
+    #   The time when the transaction committed or aborted, if it is not
+    #   currently active.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/TransactionDescription AWS API Documentation
+    #
+    class TransactionDescription < Struct.new(
+      :transaction_id,
+      :transaction_status,
+      :transaction_start_time,
+      :transaction_end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2480,19 +3944,19 @@ module Aws::LakeFormation
     #   The identifier for the Data Catalog. By default, the account ID. The
     #   Data Catalog is the persistent metadata store. It contains database
     #   definitions, table definitions, and other control information to
-    #   manage your AWS Lake Formation environment.
+    #   manage your Lake Formation environment.
     #   @return [String]
     #
     # @!attribute [rw] tag_key
-    #   The key-name for the tag for which to add or delete values.
+    #   The key-name for the LF-tag for which to add or delete values.
     #   @return [String]
     #
     # @!attribute [rw] tag_values_to_delete
-    #   A list of tag values to delete from the tag.
+    #   A list of LF-tag values to delete from the LF-tag.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tag_values_to_add
-    #   A list of tag values to add from the tag.
+    #   A list of LF-tag values to add from the LF-tag.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateLFTagRequest AWS API Documentation
@@ -2519,7 +3983,7 @@ module Aws::LakeFormation
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The new role to use for the given resource registered in AWS Lake
+    #   The new role to use for the given resource registered in Lake
     #   Formation.
     #   @return [String]
     #
@@ -2539,6 +4003,227 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateResourceResponse AWS API Documentation
     #
     class UpdateResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateTableObjectsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         transaction_id: "TransactionIdString", # required
+    #         write_operations: [ # required
+    #           {
+    #             add_object: {
+    #               uri: "URI", # required
+    #               etag: "ETagString", # required
+    #               size: 1, # required
+    #               partition_values: ["PartitionValueString"],
+    #             },
+    #             delete_object: {
+    #               uri: "URI", # required
+    #               etag: "ETagString",
+    #               partition_values: ["PartitionValueString"],
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The catalog containing the governed table to update. Defaults to the
+    #   caller’s account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database containing the governed table to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The governed table to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] transaction_id
+    #   The transaction at which to do the write.
+    #   @return [String]
+    #
+    # @!attribute [rw] write_operations
+    #   A list of `WriteOperation` objects that define an object to add to
+    #   or delete from the manifest for a governed table.
+    #   @return [Array<Types::WriteOperation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateTableObjectsRequest AWS API Documentation
+    #
+    class UpdateTableObjectsRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :transaction_id,
+      :write_operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateTableObjectsResponse AWS API Documentation
+    #
+    class UpdateTableObjectsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateTableStorageOptimizerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         storage_optimizer_config: { # required
+    #           "COMPACTION" => {
+    #             "StorageOptimizerConfigKey" => "StorageOptimizerConfigValue",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The Catalog ID of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   Name of the database where the table is present.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   Name of the table for which to enable the storage optimizer.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_optimizer_config
+    #   Name of the table for which to enable the storage optimizer.
+    #   @return [Hash<String,Hash<String,String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateTableStorageOptimizerRequest AWS API Documentation
+    #
+    class UpdateTableStorageOptimizerRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :storage_optimizer_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result
+    #   A response indicating the success of failure of the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateTableStorageOptimizerResponse AWS API Documentation
+    #
+    class UpdateTableStorageOptimizerResponse < Struct.new(
+      :result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that defines an Amazon S3 object to be deleted if a
+    # transaction cancels, provided that `VirtualPut` was called before
+    # writing the object.
+    #
+    # @note When making an API call, you may pass VirtualObject
+    #   data as a hash:
+    #
+    #       {
+    #         uri: "URI", # required
+    #         etag: "ETagString",
+    #       }
+    #
+    # @!attribute [rw] uri
+    #   The path to the Amazon S3 object. Must start with s3://
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The ETag of the Amazon S3 object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/VirtualObject AWS API Documentation
+    #
+    class VirtualObject < Struct.new(
+      :uri,
+      :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the valid range of work unit IDs for querying the execution
+    # service.
+    #
+    # @!attribute [rw] work_unit_id_max
+    #   Defines the maximum work unit ID in the range. The maximum value is
+    #   inclusive.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] work_unit_id_min
+    #   Defines the minimum work unit ID in the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] work_unit_token
+    #   A work token used to query the execution service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/WorkUnitRange AWS API Documentation
+    #
+    class WorkUnitRange < Struct.new(
+      :work_unit_id_max,
+      :work_unit_id_min,
+      :work_unit_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about an error related to work units not being ready.
+    #
+    # @!attribute [rw] message
+    #   A message describing the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/WorkUnitsNotReadyYetException AWS API Documentation
+    #
+    class WorkUnitsNotReadyYetException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines an object to add to or delete from a governed table.
+    #
+    # @note When making an API call, you may pass WriteOperation
+    #   data as a hash:
+    #
+    #       {
+    #         add_object: {
+    #           uri: "URI", # required
+    #           etag: "ETagString", # required
+    #           size: 1, # required
+    #           partition_values: ["PartitionValueString"],
+    #         },
+    #         delete_object: {
+    #           uri: "URI", # required
+    #           etag: "ETagString",
+    #           partition_values: ["PartitionValueString"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] add_object
+    #   A new object to add to the governed table.
+    #   @return [Types::AddObjectInput]
+    #
+    # @!attribute [rw] delete_object
+    #   An object to delete from the governed table.
+    #   @return [Types::DeleteObjectInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/WriteOperation AWS API Documentation
+    #
+    class WriteOperation < Struct.new(
+      :add_object,
+      :delete_object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
   end
 end

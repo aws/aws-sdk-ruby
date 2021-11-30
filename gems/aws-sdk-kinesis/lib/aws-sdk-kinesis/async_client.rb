@@ -98,7 +98,9 @@ module Aws::Kinesis
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -276,8 +278,9 @@ module Aws::Kinesis
     # If you call `SubscribeToShard` again with the same `ConsumerARN` and
     # `ShardId` within 5 seconds of a successful call, you'll get a
     # `ResourceInUseException`. If you call `SubscribeToShard` 5 seconds or
-    # more after a successful call, the first connection will expire and the
-    # second call will take over the subscription.
+    # more after a successful call, the second call takes over the
+    # subscription and the previous connection expires or fails with a
+    # `ResourceInUseException`.
     #
     # For an example of how to use this operations, see [Enhanced Fan-Out
     # Using the Kinesis Data Streams
@@ -292,6 +295,8 @@ module Aws::Kinesis
     #   shards for a given stream, use ListShards.
     #
     # @option params [required, Types::StartingPosition] :starting_position
+    #   The starting position in the data stream from which to start
+    #   streaming.
     #
     # @return [Types::SubscribeToShardOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -563,7 +568,7 @@ module Aws::Kinesis
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

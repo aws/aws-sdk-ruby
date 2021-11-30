@@ -801,6 +801,7 @@ module Aws::S3
     CreateBucketRequest.add_member(:grant_write, Shapes::ShapeRef.new(shape: GrantWrite, location: "header", location_name: "x-amz-grant-write"))
     CreateBucketRequest.add_member(:grant_write_acp, Shapes::ShapeRef.new(shape: GrantWriteACP, location: "header", location_name: "x-amz-grant-write-acp"))
     CreateBucketRequest.add_member(:object_lock_enabled_for_bucket, Shapes::ShapeRef.new(shape: ObjectLockEnabledForBucket, location: "header", location_name: "x-amz-bucket-object-lock-enabled"))
+    CreateBucketRequest.add_member(:object_ownership, Shapes::ShapeRef.new(shape: ObjectOwnership, location: "header", location_name: "x-amz-object-ownership"))
     CreateBucketRequest.struct_class = Types::CreateBucketRequest
     CreateBucketRequest[:payload] = :create_bucket_configuration
     CreateBucketRequest[:payload_member] = CreateBucketRequest.member(:create_bucket_configuration)
