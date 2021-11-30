@@ -88,6 +88,19 @@ module Aws
             "https://12345.s3-control.dualstack.cn-north-1.amazonaws.com.cn"
           )
         end
+
+        it 'works with operations that use a path' do
+          # from a prior bug
+          client = Client.new(
+            stub_responses: true,
+            region: 'us-east-1',
+            use_dualstack_endpoint: true
+          )
+          resp = client.get_access_point(name: 'accesspoint', account_id: '12345')
+          expect(resp.context.http_request.endpoint.to_s).to match(
+            'https://12345.s3-control.dualstack.us-east-1.amazonaws.com/v20180820/accesspoint/accesspoint'
+          )
+        end
       end
     end
   end
