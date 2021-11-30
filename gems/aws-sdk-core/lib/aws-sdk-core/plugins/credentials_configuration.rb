@@ -64,7 +64,9 @@ locations will be searched for credentials:
 * EC2/ECS IMDS instance profile - When used by default, the timeouts
   are very aggressive. Construct and pass an instance of
   `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-  enable retries and extended timeouts.
+  enable retries and extended timeouts. Instance profile credential
+  fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+  to true.
         DOCS
       ) do |config|
         CredentialProviderChain.new(config).resolve
