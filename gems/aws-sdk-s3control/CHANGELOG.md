@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix a bug where the dualstack plugin was dropping URI paths.
+
 1.43.0 (2021-11-22)
 ------------------
 
