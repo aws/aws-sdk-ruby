@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2021-12-01)
+------------------
+
+* Feature - Adding new exception types for InvokeEndpoint
+
 1.38.0 (2021-11-30)
 ------------------
 

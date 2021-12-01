@@ -1963,6 +1963,7 @@ module Aws::DynamoDB
     #             },
     #           },
     #         ],
+    #         table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #       }
     #
     # @!attribute [rw] region_name
@@ -1986,13 +1987,19 @@ module Aws::DynamoDB
     #   Replica-specific global secondary index settings.
     #   @return [Array<Types::ReplicaGlobalSecondaryIndex>]
     #
+    # @!attribute [rw] table_class_override
+    #   Replica-specific table class. If not specified, uses the source
+    #   table's table class.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateReplicationGroupMemberAction AWS API Documentation
     #
     class CreateReplicationGroupMemberAction < Struct.new(
       :region_name,
       :kms_master_key_id,
       :provisioned_throughput_override,
-      :global_secondary_indexes)
+      :global_secondary_indexes,
+      :table_class_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2070,6 +2077,7 @@ module Aws::DynamoDB
     #             value: "TagValueString", # required
     #           },
     #         ],
+    #         table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #       }
     #
     # @!attribute [rw] attribute_definitions
@@ -2285,6 +2293,11 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] table_class
+    #   The table class of the new table. Valid values are `STANDARD` and
+    #   `STANDARD_INFREQUENT_ACCESS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTableInput AWS API Documentation
     #
     class CreateTableInput < Struct.new(
@@ -2297,7 +2310,8 @@ module Aws::DynamoDB
       :provisioned_throughput,
       :stream_specification,
       :sse_specification,
-      :tags)
+      :tags,
+      :table_class)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7131,6 +7145,10 @@ module Aws::DynamoDB
     #   property.
     #   @return [Time]
     #
+    # @!attribute [rw] replica_table_class_summary
+    #   Contains details of the table class.
+    #   @return [Types::TableClassSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaDescription AWS API Documentation
     #
     class ReplicaDescription < Struct.new(
@@ -7141,7 +7159,8 @@ module Aws::DynamoDB
       :kms_master_key_id,
       :provisioned_throughput_override,
       :global_secondary_indexes,
-      :replica_inaccessible_date_time)
+      :replica_inaccessible_date_time,
+      :replica_table_class_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7453,6 +7472,10 @@ module Aws::DynamoDB
     #   Replica global secondary index settings for the global table.
     #   @return [Array<Types::ReplicaGlobalSecondaryIndexSettingsDescription>]
     #
+    # @!attribute [rw] replica_table_class_summary
+    #   Contains details of the table class.
+    #   @return [Types::TableClassSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaSettingsDescription AWS API Documentation
     #
     class ReplicaSettingsDescription < Struct.new(
@@ -7463,7 +7486,8 @@ module Aws::DynamoDB
       :replica_provisioned_read_capacity_auto_scaling_settings,
       :replica_provisioned_write_capacity_units,
       :replica_provisioned_write_capacity_auto_scaling_settings,
-      :replica_global_secondary_index_settings)
+      :replica_global_secondary_index_settings,
+      :replica_table_class_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7513,6 +7537,7 @@ module Aws::DynamoDB
     #             },
     #           },
     #         ],
+    #         replica_table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #       }
     #
     # @!attribute [rw] region_name
@@ -7540,13 +7565,19 @@ module Aws::DynamoDB
     #   table that will be modified.
     #   @return [Array<Types::ReplicaGlobalSecondaryIndexSettingsUpdate>]
     #
+    # @!attribute [rw] replica_table_class
+    #   Replica-specific table class. If not specified, uses the source
+    #   table's table class.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaSettingsUpdate AWS API Documentation
     #
     class ReplicaSettingsUpdate < Struct.new(
       :region_name,
       :replica_provisioned_read_capacity_units,
       :replica_provisioned_read_capacity_auto_scaling_settings_update,
-      :replica_global_secondary_index_settings_update)
+      :replica_global_secondary_index_settings_update,
+      :replica_table_class)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7620,6 +7651,7 @@ module Aws::DynamoDB
     #               },
     #             },
     #           ],
+    #           table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #         },
     #         update: {
     #           region_name: "RegionName", # required
@@ -7635,6 +7667,7 @@ module Aws::DynamoDB
     #               },
     #             },
     #           ],
+    #           table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #         },
     #         delete: {
     #           region_name: "RegionName", # required
@@ -8718,6 +8751,26 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Contains details of the table class.
+    #
+    # @!attribute [rw] table_class
+    #   The table class of the specified table. Valid values are `STANDARD`
+    #   and `STANDARD_INFREQUENT_ACCESS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_date_time
+    #   The date and time at which the table class was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableClassSummary AWS API Documentation
+    #
+    class TableClassSummary < Struct.new(
+      :table_class,
+      :last_update_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the properties of a table.
     #
     # @!attribute [rw] attribute_definitions
@@ -9007,6 +9060,10 @@ module Aws::DynamoDB
     #   Contains information about the table archive.
     #   @return [Types::ArchivalSummary]
     #
+    # @!attribute [rw] table_class_summary
+    #   Contains details of the table class.
+    #   @return [Types::TableClassSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableDescription AWS API Documentation
     #
     class TableDescription < Struct.new(
@@ -9030,7 +9087,8 @@ module Aws::DynamoDB
       :replicas,
       :restore_summary,
       :sse_description,
-      :archival_summary)
+      :archival_summary,
+      :table_class_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10108,6 +10166,7 @@ module Aws::DynamoDB
     #                 },
     #               },
     #             ],
+    #             replica_table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #           },
     #         ],
     #       }
@@ -10621,6 +10680,7 @@ module Aws::DynamoDB
     #             },
     #           },
     #         ],
+    #         table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #       }
     #
     # @!attribute [rw] region_name
@@ -10644,13 +10704,19 @@ module Aws::DynamoDB
     #   Replica-specific global secondary index settings.
     #   @return [Array<Types::ReplicaGlobalSecondaryIndex>]
     #
+    # @!attribute [rw] table_class_override
+    #   Replica-specific table class. If not specified, uses the source
+    #   table's table class.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateReplicationGroupMemberAction AWS API Documentation
     #
     class UpdateReplicationGroupMemberAction < Struct.new(
       :region_name,
       :kms_master_key_id,
       :provisioned_throughput_override,
-      :global_secondary_indexes)
+      :global_secondary_indexes,
+      :table_class_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10729,6 +10795,7 @@ module Aws::DynamoDB
     #                   },
     #                 },
     #               ],
+    #               table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #             },
     #             update: {
     #               region_name: "RegionName", # required
@@ -10744,12 +10811,14 @@ module Aws::DynamoDB
     #                   },
     #                 },
     #               ],
+    #               table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #             },
     #             delete: {
     #               region_name: "RegionName", # required
     #             },
     #           },
     #         ],
+    #         table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #       }
     #
     # @!attribute [rw] attribute_definitions
@@ -10840,6 +10909,11 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #   @return [Array<Types::ReplicationGroupUpdate>]
     #
+    # @!attribute [rw] table_class
+    #   The table class of the table to be updated. Valid values are
+    #   `STANDARD` and `STANDARD_INFREQUENT_ACCESS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableInput AWS API Documentation
     #
     class UpdateTableInput < Struct.new(
@@ -10850,7 +10924,8 @@ module Aws::DynamoDB
       :global_secondary_index_updates,
       :stream_specification,
       :sse_specification,
-      :replica_updates)
+      :replica_updates,
+      :table_class)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -203,6 +203,87 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A structure of additional Inference Specification. Additional
+    # Inference Specification specifies details about inference jobs that
+    # can be run with models based on this model package
+    #
+    # @note When making an API call, you may pass AdditionalInferenceSpecificationDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EntityName", # required
+    #         description: "EntityDescription",
+    #         containers: [ # required
+    #           {
+    #             container_hostname: "ContainerHostname",
+    #             image: "ContainerImage", # required
+    #             image_digest: "ImageDigest",
+    #             model_data_url: "Url",
+    #             product_id: "ProductId",
+    #             environment: {
+    #               "EnvironmentKey" => "EnvironmentValue",
+    #             },
+    #             model_input: {
+    #               data_input_config: "DataInputConfig", # required
+    #             },
+    #             framework: "String",
+    #             framework_version: "FrameworkVersion",
+    #             nearest_model_name: "String",
+    #           },
+    #         ],
+    #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
+    #         supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #         supported_content_types: ["ContentType"],
+    #         supported_response_mime_types: ["ResponseMIMEType"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A unique name to identify the additional inference specification.
+    #   The name must be unique within the list of your additional inference
+    #   specifications for a particular model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the additional Inference specification
+    #   @return [String]
+    #
+    # @!attribute [rw] containers
+    #   The Amazon ECR registry path of the Docker image that contains the
+    #   inference code.
+    #   @return [Array<Types::ModelPackageContainerDefinition>]
+    #
+    # @!attribute [rw] supported_transform_instance_types
+    #   A list of the instance types on which a transformation job can be
+    #   run or on which an endpoint can be deployed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_realtime_inference_instance_types
+    #   A list of the instance types that are used to generate inferences in
+    #   real-time.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_content_types
+    #   The supported MIME types for the input data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_response_mime_types
+    #   The supported MIME types for the output data.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AdditionalInferenceSpecificationDefinition AWS API Documentation
+    #
+    class AdditionalInferenceSpecificationDefinition < Struct.new(
+      :name,
+      :description,
+      :containers,
+      :supported_transform_instance_types,
+      :supported_realtime_inference_instance_types,
+      :supported_content_types,
+      :supported_response_mime_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Edge Manager agent version.
     #
     # @!attribute [rw] version
@@ -1642,7 +1723,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AssociationSummary AWS API Documentation
@@ -2547,16 +2628,34 @@ module Aws::SageMaker
     #           content_digest: "ContentDigest",
     #           s3_uri: "S3Uri", # required
     #         },
+    #         pre_training_report: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         post_training_report: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
     #       }
     #
     # @!attribute [rw] report
     #   The bias report for a model
     #   @return [Types::MetricsSource]
     #
+    # @!attribute [rw] pre_training_report
+    #   @return [Types::MetricsSource]
+    #
+    # @!attribute [rw] post_training_report
+    #   @return [Types::MetricsSource]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Bias AWS API Documentation
     #
     class Bias < Struct.new(
-      :report)
+      :report,
+      :pre_training_report,
+      :post_training_report)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2761,6 +2860,33 @@ module Aws::SageMaker
     #
     class CaptureOption < Struct.new(
       :capture_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Environment parameters you want to benchmark your load test against.
+    #
+    # @note When making an API call, you may pass CategoricalParameter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String64", # required
+    #         value: ["String128"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The Name of the environment variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The list of values you can pass.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CategoricalParameter AWS API Documentation
+    #
+    class CategoricalParameter < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3011,6 +3137,71 @@ module Aws::SageMaker
     class CheckpointConfig < Struct.new(
       :s3_uri,
       :local_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The container for the metadata for the ClarifyCheck step. For more
+    # information, see the topic on [ClarifyCheck step][1] in the *Amazon
+    # SageMaker Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-clarify-check
+    #
+    # @!attribute [rw] check_type
+    #   The type of the Clarify Check step
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_used_for_drift_check_constraints
+    #   The Amazon S3 URI of baseline constraints file to be used for the
+    #   drift check.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculated_baseline_constraints
+    #   The Amazon S3 URI of the newly calculated baseline constraints file.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_group_name
+    #   The model package group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] violation_report
+    #   The Amazon S3 URI of the violation report if violations are
+    #   detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] check_job_arn
+    #   The Amazon Resource Name (ARN) of the check processing job that was
+    #   run by this step's execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] skip_check
+    #   This flag indicates if the drift check against the previous baseline
+    #   will be skipped or not. If it is set to `False`, the previous
+    #   baseline of the configured check type must be available.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] register_new_baseline
+    #   This flag indicates if a newly calculated baseline can be accessed
+    #   through step properties `BaselineUsedForDriftCheckConstraints` and
+    #   `BaselineUsedForDriftCheckStatistics`. If it is set to `False`, the
+    #   previous baseline of the configured check type must also be
+    #   available. These can be accessed through the
+    #   `BaselineUsedForDriftCheckConstraints` property.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClarifyCheckStepMetadata AWS API Documentation
+    #
+    class ClarifyCheckStepMetadata < Struct.new(
+      :check_type,
+      :baseline_used_for_drift_check_constraints,
+      :calculated_baseline_constraints,
+      :model_package_group_name,
+      :violation_report,
+      :check_job_arn,
+      :skip_check,
+      :register_new_baseline)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3277,6 +3468,7 @@ module Aws::SageMaker
     #           "EnvironmentKey" => "EnvironmentValue",
     #         },
     #         model_package_name: "VersionedArnOrName",
+    #         inference_specification_name: "InferenceSpecificationName",
     #         multi_model_config: {
     #           model_cache_setting: "Enabled", # accepts Enabled, Disabled
     #         },
@@ -3379,6 +3571,10 @@ module Aws::SageMaker
     #   to create the model.
     #   @return [String]
     #
+    # @!attribute [rw] inference_specification_name
+    #   The inference specification name in the model package version.
+    #   @return [String]
+    #
     # @!attribute [rw] multi_model_config
     #   Specifies additional configuration for multi-model endpoints.
     #   @return [Types::MultiModelConfig]
@@ -3393,6 +3589,7 @@ module Aws::SageMaker
       :model_data_url,
       :environment,
       :model_package_name,
+      :inference_specification_name,
       :multi_model_config)
       SENSITIVE = []
       include Aws::Structure
@@ -3732,6 +3929,12 @@ module Aws::SageMaker
     #               environment: {
     #                 "EnvironmentKey" => "EnvironmentValue",
     #               },
+    #               model_input: {
+    #                 data_input_config: "DataInputConfig", # required
+    #               },
+    #               framework: "String",
+    #               framework_version: "FrameworkVersion",
+    #               nearest_model_name: "String",
     #             },
     #           ],
     #           supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -4355,7 +4558,8 @@ module Aws::SageMaker
     #       {
     #         compilation_job_name: "EntityName", # required
     #         role_arn: "RoleArn", # required
-    #         input_config: { # required
+    #         model_package_version_arn: "ModelPackageArn",
+    #         input_config: {
     #           s3_uri: "S3Uri", # required
     #           data_input_config: "DataInputConfig", # required
     #           framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET, SKLEARN
@@ -4418,6 +4622,13 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #   @return [String]
     #
+    # @!attribute [rw] model_package_version_arn
+    #   The Amazon Resource Name (ARN) of a versioned model package. Provide
+    #   either a `ModelPackageVersionArn` or an `InputConfig` object in the
+    #   request syntax. The presence of both objects in the
+    #   `CreateCompilationJob` request will return an exception.
+    #   @return [String]
+    #
     # @!attribute [rw] input_config
     #   Provides information about the location of input model artifacts,
     #   the name and shape of the expected data inputs, and the framework in
@@ -4462,6 +4673,7 @@ module Aws::SageMaker
     class CreateCompilationJobRequest < Struct.new(
       :compilation_job_name,
       :role_arn,
+      :model_package_version_arn,
       :input_config,
       :output_config,
       :vpc_config,
@@ -5057,13 +5269,17 @@ module Aws::SageMaker
     #           {
     #             variant_name: "VariantName", # required
     #             model_name: "ModelName", # required
-    #             initial_instance_count: 1, # required
-    #             instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #             initial_instance_count: 1,
+    #             instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
     #             initial_variant_weight: 1.0,
     #             accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
     #             core_dump_config: {
     #               destination_s3_uri: "DestinationS3Uri", # required
     #               kms_key_id: "KmsKeyId",
+    #             },
+    #             serverless_config: {
+    #               memory_size_in_mb: 1, # required
+    #               max_concurrency: 1, # required
     #             },
     #           },
     #         ],
@@ -6173,6 +6389,134 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateInferenceRecommendationsJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "RecommendationJobName", # required
+    #         job_type: "Default", # required, accepts Default, Advanced
+    #         role_arn: "RoleArn", # required
+    #         input_config: { # required
+    #           model_package_version_arn: "ModelPackageArn", # required
+    #           job_duration_in_seconds: 1,
+    #           traffic_pattern: {
+    #             traffic_type: "PHASES", # accepts PHASES
+    #             phases: [
+    #               {
+    #                 initial_number_of_users: 1,
+    #                 spawn_rate: 1,
+    #                 duration_in_seconds: 1,
+    #               },
+    #             ],
+    #           },
+    #           resource_limit: {
+    #             max_number_of_tests: 1,
+    #             max_parallel_of_tests: 1,
+    #           },
+    #           endpoint_configurations: [
+    #             {
+    #               instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #               inference_specification_name: "InferenceSpecificationName",
+    #               environment_parameter_ranges: {
+    #                 categorical_parameter_ranges: [
+    #                   {
+    #                     name: "String64", # required
+    #                     value: ["String128"], # required
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         job_description: "RecommendationJobDescription",
+    #         stopping_conditions: {
+    #           max_invocations: 1,
+    #           model_latency_thresholds: [
+    #             {
+    #               percentile: "String64",
+    #               value_in_milliseconds: 1,
+    #             },
+    #           ],
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   A name for the recommendation job. The name must be unique within
+    #   the Amazon Web Services Region and within your Amazon Web Services
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_type
+    #   Defines the type of recommendation job. Specify `Default` to
+    #   initiate an instance recommendation and `Advanced` to initiate a
+    #   load test. If left unspecified, Amazon SageMaker Inference
+    #   Recommender will run an instance recommendation (`DEFAULT`) job.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
+    #   SageMaker to perform tasks on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_config
+    #   Provides information about the versioned model package Amazon
+    #   Resource Name (ARN), the traffic pattern, and endpoint
+    #   configurations.
+    #   @return [Types::RecommendationJobInputConfig]
+    #
+    # @!attribute [rw] job_description
+    #   Description of the recommendation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] stopping_conditions
+    #   A set of conditions for stopping a recommendation job. If any of the
+    #   conditions are met, the job is automatically stopped.
+    #   @return [Types::RecommendationJobStoppingConditions]
+    #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to Amazon Web Services resources to help
+    #   you categorize and organize them. Each tag consists of a key and a
+    #   value, both of which you define. For more information, see [Tagging
+    #   Amazon Web Services Resources][1] in the Amazon Web Services General
+    #   Reference.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateInferenceRecommendationsJobRequest AWS API Documentation
+    #
+    class CreateInferenceRecommendationsJobRequest < Struct.new(
+      :job_name,
+      :job_type,
+      :role_arn,
+      :input_config,
+      :job_description,
+      :stopping_conditions,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the recommendation job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateInferenceRecommendationsJobResponse AWS API Documentation
+    #
+    class CreateInferenceRecommendationsJobResponse < Struct.new(
+      :job_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateLabelingJobRequest
     #   data as a hash:
     #
@@ -6780,6 +7124,7 @@ module Aws::SageMaker
     #             "EnvironmentKey" => "EnvironmentValue",
     #           },
     #           model_package_name: "VersionedArnOrName",
+    #           inference_specification_name: "InferenceSpecificationName",
     #           multi_model_config: {
     #             model_cache_setting: "Enabled", # accepts Enabled, Disabled
     #           },
@@ -6800,6 +7145,7 @@ module Aws::SageMaker
     #               "EnvironmentKey" => "EnvironmentValue",
     #             },
     #             model_package_name: "VersionedArnOrName",
+    #             inference_specification_name: "InferenceSpecificationName",
     #             multi_model_config: {
     #               model_cache_setting: "Enabled", # accepts Enabled, Disabled
     #             },
@@ -6987,6 +7333,12 @@ module Aws::SageMaker
     #               environment: {
     #                 "EnvironmentKey" => "EnvironmentValue",
     #               },
+    #               model_input: {
+    #                 data_input_config: "DataInputConfig", # required
+    #               },
+    #               framework: "String",
+    #               framework_version: "FrameworkVersion",
+    #               nearest_model_name: "String",
     #             },
     #           ],
     #           supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -7085,6 +7437,16 @@ module Aws::SageMaker
     #               content_digest: "ContentDigest",
     #               s3_uri: "S3Uri", # required
     #             },
+    #             pre_training_report: {
+    #               content_type: "ContentType", # required
+    #               content_digest: "ContentDigest",
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #             post_training_report: {
+    #               content_type: "ContentType", # required
+    #               content_digest: "ContentDigest",
+    #               s3_uri: "S3Uri", # required
+    #             },
     #           },
     #           explainability: {
     #             report: {
@@ -7098,6 +7460,92 @@ module Aws::SageMaker
     #         customer_metadata_properties: {
     #           "CustomerMetadataKey" => "CustomerMetadataValue",
     #         },
+    #         drift_check_baselines: {
+    #           bias: {
+    #             config_file: {
+    #               content_type: "ContentType",
+    #               content_digest: "ContentDigest",
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #             pre_training_constraints: {
+    #               content_type: "ContentType", # required
+    #               content_digest: "ContentDigest",
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #             post_training_constraints: {
+    #               content_type: "ContentType", # required
+    #               content_digest: "ContentDigest",
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #           },
+    #           explainability: {
+    #             constraints: {
+    #               content_type: "ContentType", # required
+    #               content_digest: "ContentDigest",
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #             config_file: {
+    #               content_type: "ContentType",
+    #               content_digest: "ContentDigest",
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #           },
+    #           model_quality: {
+    #             statistics: {
+    #               content_type: "ContentType", # required
+    #               content_digest: "ContentDigest",
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #             constraints: {
+    #               content_type: "ContentType", # required
+    #               content_digest: "ContentDigest",
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #           },
+    #           model_data_quality: {
+    #             statistics: {
+    #               content_type: "ContentType", # required
+    #               content_digest: "ContentDigest",
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #             constraints: {
+    #               content_type: "ContentType", # required
+    #               content_digest: "ContentDigest",
+    #               s3_uri: "S3Uri", # required
+    #             },
+    #           },
+    #         },
+    #         domain: "String",
+    #         task: "String",
+    #         sample_payload_url: "S3Uri",
+    #         additional_inference_specifications: [
+    #           {
+    #             name: "EntityName", # required
+    #             description: "EntityDescription",
+    #             containers: [ # required
+    #               {
+    #                 container_hostname: "ContainerHostname",
+    #                 image: "ContainerImage", # required
+    #                 image_digest: "ImageDigest",
+    #                 model_data_url: "Url",
+    #                 product_id: "ProductId",
+    #                 environment: {
+    #                   "EnvironmentKey" => "EnvironmentValue",
+    #                 },
+    #                 model_input: {
+    #                   data_input_config: "DataInputConfig", # required
+    #                 },
+    #                 framework: "String",
+    #                 framework_version: "FrameworkVersion",
+    #                 nearest_model_name: "String",
+    #               },
+    #             ],
+    #             supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
+    #             supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #             supported_content_types: ["ContentType"],
+    #             supported_response_mime_types: ["ResponseMIMEType"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] model_package_name
@@ -7193,6 +7641,42 @@ module Aws::SageMaker
     #   The metadata properties associated with the model package versions.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] drift_check_baselines
+    #   Represents the drift check baselines that can be used when the model
+    #   monitor is set using the model package. For more information, see
+    #   the topic on [Drift Detection against Previous Baselines in
+    #   SageMaker Pipelines][1] in the *Amazon SageMaker Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection
+    #   @return [Types::DriftCheckBaselines]
+    #
+    # @!attribute [rw] domain
+    #   The machine learning domain of your model package and its
+    #   components. Common machine learning domains include computer vision
+    #   and natural language processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] task
+    #   The machine learning task your model package accomplishes. Common
+    #   machine learning tasks include object detection and image
+    #   classification.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_payload_url
+    #   The Amazon Simple Storage Service (Amazon S3) path where the sample
+    #   payload are stored. This path must point to a single gzip compressed
+    #   tar archive (.tar.gz suffix).
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_inference_specifications
+    #   An array of additional Inference Specification objects. Each
+    #   additional Inference Specification specifies artifacts based on this
+    #   model package that can be used on inference endpoints. Generally
+    #   used with SageMaker Neo to store the compiled artifacts.
+    #   @return [Array<Types::AdditionalInferenceSpecificationDefinition>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput AWS API Documentation
     #
     class CreateModelPackageInput < Struct.new(
@@ -7208,7 +7692,12 @@ module Aws::SageMaker
       :metadata_properties,
       :model_metrics,
       :client_token,
-      :customer_metadata_properties)
+      :customer_metadata_properties,
+      :drift_check_baselines,
+      :domain,
+      :task,
+      :sample_payload_url,
+      :additional_inference_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11201,7 +11690,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -11210,13 +11699,17 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
     #   Metadata properties of the tracking entity, trial, or trial
     #   component.
     #   @return [Types::MetadataProperties]
+    #
+    # @!attribute [rw] lineage_group_arn
+    #   The Amazon Resource Name (ARN) of the lineage group.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeActionResponse AWS API Documentation
     #
@@ -11232,7 +11725,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by,
-      :metadata_properties)
+      :metadata_properties,
+      :lineage_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11519,7 +12013,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -11528,13 +12022,17 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
     #   Metadata properties of the tracking entity, trial, or trial
     #   component.
     #   @return [Types::MetadataProperties]
+    #
+    # @!attribute [rw] lineage_group_arn
+    #   The Amazon Resource Name (ARN) of the lineage group.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeArtifactResponse AWS API Documentation
     #
@@ -11548,7 +12046,8 @@ module Aws::SageMaker
       :created_by,
       :last_modified_time,
       :last_modified_by,
-      :metadata_properties)
+      :metadata_properties,
+      :lineage_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11808,6 +12307,11 @@ module Aws::SageMaker
     #   only if the target device is a cloud instance.
     #   @return [String]
     #
+    # @!attribute [rw] model_package_version_arn
+    #   The Amazon Resource Name (ARN) of the versioned model package that
+    #   was provided to SageMaker Neo when you initiated a compilation job.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   The time that the model compilation job was created.
     #   @return [Time]
@@ -11868,6 +12372,7 @@ module Aws::SageMaker
       :compilation_end_time,
       :stopping_condition,
       :inference_image,
+      :model_package_version_arn,
       :creation_time,
       :last_modified_time,
       :failure_reason,
@@ -11885,7 +12390,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         context_name: "ExperimentEntityName", # required
+    #         context_name: "ExperimentEntityNameOrArn", # required
     #       }
     #
     # @!attribute [rw] context_name
@@ -11930,7 +12435,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_time
@@ -11939,8 +12444,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] lineage_group_arn
+    #   The Amazon Resource Name (ARN) of the lineage group.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeContextResponse AWS API Documentation
     #
@@ -11954,7 +12463,8 @@ module Aws::SageMaker
       :creation_time,
       :created_by,
       :last_modified_time,
-      :last_modified_by)
+      :last_modified_by,
+      :lineage_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13250,6 +13760,104 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeInferenceRecommendationsJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "RecommendationJobName", # required
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job. The name must be unique within an Amazon Web
+    #   Services Region in the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceRecommendationsJobRequest AWS API Documentation
+    #
+    class DescribeInferenceRecommendationsJobRequest < Struct.new(
+      :job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_name
+    #   The name of the job. The name must be unique within an Amazon Web
+    #   Services Region in the Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_description
+    #   The job description that you provided when you initiated the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_type
+    #   The job type that you provided when you initiated the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Identity
+    #   and Access Management (IAM) role you provided when you initiated the
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that shows when the job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_time
+    #   A timestamp that shows when the job completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp that shows when the job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the job fails, provides information why the job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_config
+    #   Returns information about the versioned model package Amazon
+    #   Resource Name (ARN), the traffic pattern, and endpoint
+    #   configurations you provided when you initiated the job.
+    #   @return [Types::RecommendationJobInputConfig]
+    #
+    # @!attribute [rw] stopping_conditions
+    #   The stopping conditions that you provided when you initiated the
+    #   job.
+    #   @return [Types::RecommendationJobStoppingConditions]
+    #
+    # @!attribute [rw] inference_recommendations
+    #   The recommendations made by Inference Recommender.
+    #   @return [Array<Types::InferenceRecommendation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceRecommendationsJobResponse AWS API Documentation
+    #
+    class DescribeInferenceRecommendationsJobResponse < Struct.new(
+      :job_name,
+      :job_description,
+      :job_type,
+      :job_arn,
+      :role_arn,
+      :status,
+      :creation_time,
+      :completion_time,
+      :last_modified_time,
+      :failure_reason,
+      :input_config,
+      :stopping_conditions,
+      :inference_recommendations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeLabelingJobRequest
     #   data as a hash:
     #
@@ -13417,6 +14025,74 @@ module Aws::SageMaker
       :human_task_config,
       :tags,
       :labeling_job_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLineageGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         lineage_group_name: "ExperimentEntityName", # required
+    #       }
+    #
+    # @!attribute [rw] lineage_group_name
+    #   The name of the lineage group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeLineageGroupRequest AWS API Documentation
+    #
+    class DescribeLineageGroupRequest < Struct.new(
+      :lineage_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lineage_group_name
+    #   The name of the lineage group.
+    #   @return [String]
+    #
+    # @!attribute [rw] lineage_group_arn
+    #   The Amazon Resource Name (ARN) of the lineage group.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the lineage group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the lineage group.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of lineage group.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, lineage group, or project.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time of the lineage group.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, lineage group, or project.
+    #   @return [Types::UserContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeLineageGroupResponse AWS API Documentation
+    #
+    class DescribeLineageGroupResponse < Struct.new(
+      :lineage_group_name,
+      :lineage_group_arn,
+      :display_name,
+      :description,
+      :creation_time,
+      :created_by,
+      :last_modified_time,
+      :last_modified_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13719,7 +14395,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -13821,7 +14497,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -13839,7 +14515,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] approval_description
@@ -13849,6 +14525,42 @@ module Aws::SageMaker
     # @!attribute [rw] customer_metadata_properties
     #   The metadata properties associated with the model package versions.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] drift_check_baselines
+    #   Represents the drift check baselines that can be used when the model
+    #   monitor is set using the model package. For more information, see
+    #   the topic on [Drift Detection against Previous Baselines in
+    #   SageMaker Pipelines][1] in the *Amazon SageMaker Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection
+    #   @return [Types::DriftCheckBaselines]
+    #
+    # @!attribute [rw] domain
+    #   The machine learning domain of the model package you specified.
+    #   Common machine learning domains include computer vision and natural
+    #   language processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] task
+    #   The machine learning task you specified that your model package
+    #   accomplishes. Common machine learning tasks include object detection
+    #   and image classification.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_payload_url
+    #   The Amazon Simple Storage Service (Amazon S3) path where the sample
+    #   payload are stored. This path points to a single gzip compressed tar
+    #   archive (.tar.gz suffix).
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_inference_specifications
+    #   An array of additional Inference Specification objects. Each
+    #   additional Inference Specification specifies artifacts based on this
+    #   model package that can be used on inference endpoints. Generally
+    #   used with SageMaker Neo to store the compiled artifacts.
+    #   @return [Array<Types::AdditionalInferenceSpecificationDefinition>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput AWS API Documentation
     #
@@ -13872,7 +14584,12 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       :approval_description,
-      :customer_metadata_properties)
+      :customer_metadata_properties,
+      :drift_check_baselines,
+      :domain,
+      :task,
+      :sample_payload_url,
+      :additional_inference_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14403,12 +15120,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecutionResponse AWS API Documentation
@@ -14490,12 +15207,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineResponse AWS API Documentation
@@ -14710,7 +15427,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] creation_time
@@ -14723,7 +15440,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeProjectOutput AWS API Documentation
@@ -15387,7 +16104,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         trial_component_name: "ExperimentEntityName", # required
+    #         trial_component_name: "ExperimentEntityNameOrArn", # required
     #       }
     #
     # @!attribute [rw] trial_component_name
@@ -15475,6 +16192,10 @@ module Aws::SageMaker
     #   The metrics for the component.
     #   @return [Array<Types::TrialComponentMetricSummary>]
     #
+    # @!attribute [rw] lineage_group_arn
+    #   The Amazon Resource Name (ARN) of the lineage group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrialComponentResponse AWS API Documentation
     #
     class DescribeTrialComponentResponse < Struct.new(
@@ -15493,7 +16214,8 @@ module Aws::SageMaker
       :input_artifacts,
       :output_artifacts,
       :metadata_properties,
-      :metrics)
+      :metrics,
+      :lineage_group_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16074,6 +16796,274 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Represents the drift check baselines that can be used when the model
+    # monitor is set using the model package.
+    #
+    # @note When making an API call, you may pass DriftCheckBaselines
+    #   data as a hash:
+    #
+    #       {
+    #         bias: {
+    #           config_file: {
+    #             content_type: "ContentType",
+    #             content_digest: "ContentDigest",
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #           pre_training_constraints: {
+    #             content_type: "ContentType", # required
+    #             content_digest: "ContentDigest",
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #           post_training_constraints: {
+    #             content_type: "ContentType", # required
+    #             content_digest: "ContentDigest",
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #         },
+    #         explainability: {
+    #           constraints: {
+    #             content_type: "ContentType", # required
+    #             content_digest: "ContentDigest",
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #           config_file: {
+    #             content_type: "ContentType",
+    #             content_digest: "ContentDigest",
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #         },
+    #         model_quality: {
+    #           statistics: {
+    #             content_type: "ContentType", # required
+    #             content_digest: "ContentDigest",
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #           constraints: {
+    #             content_type: "ContentType", # required
+    #             content_digest: "ContentDigest",
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #         },
+    #         model_data_quality: {
+    #           statistics: {
+    #             content_type: "ContentType", # required
+    #             content_digest: "ContentDigest",
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #           constraints: {
+    #             content_type: "ContentType", # required
+    #             content_digest: "ContentDigest",
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bias
+    #   Represents the drift check bias baselines that can be used when the
+    #   model monitor is set using the model package.
+    #   @return [Types::DriftCheckBias]
+    #
+    # @!attribute [rw] explainability
+    #   Represents the drift check explainability baselines that can be used
+    #   when the model monitor is set using the model package.
+    #   @return [Types::DriftCheckExplainability]
+    #
+    # @!attribute [rw] model_quality
+    #   Represents the drift check model quality baselines that can be used
+    #   when the model monitor is set using the model package.
+    #   @return [Types::DriftCheckModelQuality]
+    #
+    # @!attribute [rw] model_data_quality
+    #   Represents the drift check model data quality baselines that can be
+    #   used when the model monitor is set using the model package.
+    #   @return [Types::DriftCheckModelDataQuality]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DriftCheckBaselines AWS API Documentation
+    #
+    class DriftCheckBaselines < Struct.new(
+      :bias,
+      :explainability,
+      :model_quality,
+      :model_data_quality)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the drift check bias baselines that can be used when the
+    # model monitor is set using the model package.
+    #
+    # @note When making an API call, you may pass DriftCheckBias
+    #   data as a hash:
+    #
+    #       {
+    #         config_file: {
+    #           content_type: "ContentType",
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         pre_training_constraints: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         post_training_constraints: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] config_file
+    #   The bias config file for a model.
+    #   @return [Types::FileSource]
+    #
+    # @!attribute [rw] pre_training_constraints
+    #   @return [Types::MetricsSource]
+    #
+    # @!attribute [rw] post_training_constraints
+    #   @return [Types::MetricsSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DriftCheckBias AWS API Documentation
+    #
+    class DriftCheckBias < Struct.new(
+      :config_file,
+      :pre_training_constraints,
+      :post_training_constraints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the drift check explainability baselines that can be used
+    # when the model monitor is set using the model package.
+    #
+    # @note When making an API call, you may pass DriftCheckExplainability
+    #   data as a hash:
+    #
+    #       {
+    #         constraints: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         config_file: {
+    #           content_type: "ContentType",
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] constraints
+    #   @return [Types::MetricsSource]
+    #
+    # @!attribute [rw] config_file
+    #   The explainability config file for the model.
+    #   @return [Types::FileSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DriftCheckExplainability AWS API Documentation
+    #
+    class DriftCheckExplainability < Struct.new(
+      :constraints,
+      :config_file)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the drift check data quality baselines that can be used
+    # when the model monitor is set using the model package.
+    #
+    # @note When making an API call, you may pass DriftCheckModelDataQuality
+    #   data as a hash:
+    #
+    #       {
+    #         statistics: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         constraints: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] statistics
+    #   @return [Types::MetricsSource]
+    #
+    # @!attribute [rw] constraints
+    #   @return [Types::MetricsSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DriftCheckModelDataQuality AWS API Documentation
+    #
+    class DriftCheckModelDataQuality < Struct.new(
+      :statistics,
+      :constraints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the drift check model quality baselines that can be used
+    # when the model monitor is set using the model package.
+    #
+    # @note When making an API call, you may pass DriftCheckModelQuality
+    #   data as a hash:
+    #
+    #       {
+    #         statistics: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         constraints: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] statistics
+    #   @return [Types::MetricsSource]
+    #
+    # @!attribute [rw] constraints
+    #   @return [Types::MetricsSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DriftCheckModelQuality AWS API Documentation
+    #
+    class DriftCheckModelQuality < Struct.new(
+      :statistics,
+      :constraints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A directed edge connecting two lineage entities.
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the source lineage entity of the
+    #   directed edge.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_arn
+    #   The Amazon Resource Name (ARN) of the destination lineage entity of
+    #   the directed edge.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_type
+    #   The type of the Association(Edge) between the source and
+    #   destination. For example `ContributedTo`, `Produced`, or
+    #   `DerivedFrom`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Edge AWS API Documentation
+    #
+    class Edge < Struct.new(
+      :source_arn,
+      :destination_arn,
+      :association_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The model on the edge device.
     #
     # @!attribute [rw] model_name
@@ -16530,6 +17520,78 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The endpoint configuration for the load test.
+    #
+    # @note When making an API call, you may pass EndpointInputConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #         inference_specification_name: "InferenceSpecificationName",
+    #         environment_parameter_ranges: {
+    #           categorical_parameter_ranges: [
+    #             {
+    #               name: "String64", # required
+    #               value: ["String128"], # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_type
+    #   The instance types to use for the load test.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_specification_name
+    #   The inference specification name in the model package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_parameter_ranges
+    #   The parameter you want to benchmark against.
+    #   @return [Types::EnvironmentParameterRanges]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointInputConfiguration AWS API Documentation
+    #
+    class EndpointInputConfiguration < Struct.new(
+      :instance_type,
+      :inference_specification_name,
+      :environment_parameter_ranges)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The endpoint configuration made by Inference Recommender during a
+    # recommendation job.
+    #
+    # @!attribute [rw] endpoint_name
+    #   The name of the endpoint made during a recommendation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] variant_name
+    #   The name of the production variant (deployed model) made during a
+    #   recommendation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type recommended by Amazon SageMaker Inference
+    #   Recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_instance_count
+    #   The number of instances recommended to launch initially.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EndpointOutputConfiguration AWS API Documentation
+    #
+    class EndpointOutputConfiguration < Struct.new(
+      :endpoint_name,
+      :variant_name,
+      :instance_type,
+      :initial_instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides summary information for an endpoint.
     #
     # @!attribute [rw] endpoint_name
@@ -16599,6 +17661,59 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A list of environment parameters suggested by the Amazon SageMaker
+    # Inference Recommender.
+    #
+    # @!attribute [rw] key
+    #   The environment key suggested by the Amazon SageMaker Inference
+    #   Recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_type
+    #   The value type suggested by the Amazon SageMaker Inference
+    #   Recommender.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value suggested by the Amazon SageMaker Inference Recommender.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EnvironmentParameter AWS API Documentation
+    #
+    class EnvironmentParameter < Struct.new(
+      :key,
+      :value_type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the range of environment parameters
+    #
+    # @note When making an API call, you may pass EnvironmentParameterRanges
+    #   data as a hash:
+    #
+    #       {
+    #         categorical_parameter_ranges: [
+    #           {
+    #             name: "String64", # required
+    #             value: ["String128"], # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] categorical_parameter_ranges
+    #   Specified a list of parameters for each category.
+    #   @return [Array<Types::CategoricalParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EnvironmentParameterRanges AWS API Documentation
+    #
+    class EnvironmentParameterRanges < Struct.new(
+      :categorical_parameter_ranges)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The properties of an experiment as returned by the Search API.
     #
     # @!attribute [rw] experiment_name
@@ -16636,7 +17751,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -16970,6 +18085,39 @@ module Aws::SageMaker
       :creation_time,
       :feature_group_status,
       :offline_store_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details regarding the file source.
+    #
+    # @note When making an API call, you may pass FileSource
+    #   data as a hash:
+    #
+    #       {
+    #         content_type: "ContentType",
+    #         content_digest: "ContentDigest",
+    #         s3_uri: "S3Uri", # required
+    #       }
+    #
+    # @!attribute [rw] content_type
+    #   The type of content stored in the file source.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_digest
+    #   The digest of the file source.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The Amazon S3 URI for the file source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FileSource AWS API Documentation
+    #
+    class FileSource < Struct.new(
+      :content_type,
+      :content_digest,
+      :s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17405,6 +18553,43 @@ module Aws::SageMaker
       :device_stats,
       :agent_versions,
       :model_stats)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLineageGroupPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         lineage_group_name: "LineageGroupNameOrArn", # required
+    #       }
+    #
+    # @!attribute [rw] lineage_group_name
+    #   The name or Amazon Resource Name (ARN) of the lineage group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetLineageGroupPolicyRequest AWS API Documentation
+    #
+    class GetLineageGroupPolicyRequest < Struct.new(
+      :lineage_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lineage_group_arn
+    #   The Amazon Resource Name (ARN) of the lineage group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_policy
+    #   The resource policy that gives access to the lineage group in
+    #   another account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetLineageGroupPolicyResponse AWS API Documentation
+    #
+    class GetLineageGroupPolicyResponse < Struct.new(
+      :lineage_group_arn,
+      :resource_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18682,8 +19867,7 @@ module Aws::SageMaker
     #
     #   * For [3D point cloud][4] and [video frame][5] labeling jobs, the
     #     maximum is 30 days (2952,000 seconds) for non-AL mode. For most
-    #     users, the maximum is also 30 days. If you want to change these
-    #     limits, contact Amazon Web Services Support.
+    #     users, the maximum is also 30 days.
     #
     #
     #
@@ -18705,8 +19889,7 @@ module Aws::SageMaker
     #
     #   * If you choose a private or vendor workforce, the default value is
     #     30 days (2592,000 seconds) for non-AL mode. For most users, the
-    #     maximum is also 30 days. If you want to change this limit, contact
-    #     Amazon Web Services Support.
+    #     maximum is also 30 days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_concurrent_task_count
@@ -19742,6 +20925,91 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A list of recommendations made by Amazon SageMaker Inference
+    # Recommender.
+    #
+    # @!attribute [rw] metrics
+    #   The metrics used to decide what recommendation to make.
+    #   @return [Types::RecommendationMetrics]
+    #
+    # @!attribute [rw] endpoint_configuration
+    #   Defines the endpoint configuration parameters.
+    #   @return [Types::EndpointOutputConfiguration]
+    #
+    # @!attribute [rw] model_configuration
+    #   Defines the model configuration.
+    #   @return [Types::ModelConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRecommendation AWS API Documentation
+    #
+    class InferenceRecommendation < Struct.new(
+      :metrics,
+      :endpoint_configuration,
+      :model_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains a list of recommendation jobs.
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_description
+    #   The job description.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_type
+    #   The recommendation job type.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the recommendation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that shows when the job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_time
+    #   A timestamp that shows when the job completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
+    #   SageMaker to perform tasks on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp that shows when the job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the job fails, provides information why the job failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceRecommendationsJob AWS API Documentation
+    #
+    class InferenceRecommendationsJob < Struct.new(
+      :job_name,
+      :job_description,
+      :job_type,
+      :job_arn,
+      :status,
+      :creation_time,
+      :completion_time,
+      :role_arn,
+      :last_modified_time,
+      :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines how to perform inference generation after a training job is
     # run.
     #
@@ -19759,6 +21027,12 @@ module Aws::SageMaker
     #             environment: {
     #               "EnvironmentKey" => "EnvironmentValue",
     #             },
+    #             model_input: {
+    #               data_input_config: "DataInputConfig", # required
+    #             },
+    #             framework: "String",
+    #             framework_version: "FrameworkVersion",
+    #             nearest_model_name: "String",
     #           },
     #         ],
     #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -20876,6 +22150,41 @@ module Aws::SageMaker
     class LambdaStepMetadata < Struct.new(
       :arn,
       :output_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Lists a summary of the properties of a lineage group. A lineage group
+    # provides a group of shareable lineage entity resources.
+    #
+    # @!attribute [rw] lineage_group_arn
+    #   The Amazon Resource Name (ARN) of the lineage group resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] lineage_group_name
+    #   The name or Amazon Resource Name (ARN) of the lineage group.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the lineage group summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the lineage group summary.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time of the lineage group summary.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LineageGroupSummary AWS API Documentation
+    #
+    class LineageGroupSummary < Struct.new(
+      :lineage_group_arn,
+      :lineage_group_name,
+      :display_name,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22997,6 +24306,107 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListInferenceRecommendationsJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         last_modified_time_after: Time.now,
+    #         last_modified_time_before: Time.now,
+    #         name_contains: "NameContains",
+    #         status_equals: "PENDING", # accepts PENDING, IN_PROGRESS, COMPLETED, FAILED, STOPPING, STOPPED
+    #         sort_by: "Name", # accepts Name, CreationTime, Status
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only jobs created after the specified time
+    #   (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only jobs created before the specified time
+    #   (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   A filter that returns only jobs that were last modified after the
+    #   specified time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   A filter that returns only jobs that were last modified before the
+    #   specified time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the job name. This filter returns only recommendations
+    #   whose name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_equals
+    #   A filter that retrieves only inference recommendations jobs with a
+    #   specific status.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The parameter by which to sort the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous
+    #   `ListInferenceRecommendationsJobsRequest` request was truncated, the
+    #   response includes a `NextToken`. To retrieve the next set of
+    #   recommendations, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of recommendations to return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRecommendationsJobsRequest AWS API Documentation
+    #
+    class ListInferenceRecommendationsJobsRequest < Struct.new(
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :name_contains,
+      :status_equals,
+      :sort_by,
+      :sort_order,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inference_recommendations_jobs
+    #   The recommendations created from the Amazon SageMaker Inference
+    #   Recommender job.
+    #   @return [Array<Types::InferenceRecommendationsJob>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of recommendations, if there are
+    #   any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRecommendationsJobsResponse AWS API Documentation
+    #
+    class ListInferenceRecommendationsJobsResponse < Struct.new(
+      :inference_recommendations_jobs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListLabelingJobsForWorkteamRequest
     #   data as a hash:
     #
@@ -23186,6 +24596,80 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListLineageGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         created_after: Time.now,
+    #         created_before: Time.now,
+    #         sort_by: "Name", # accepts Name, CreationTime
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] created_after
+    #   A timestamp to filter against lineage groups created after a certain
+    #   point in time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_before
+    #   A timestamp to filter against lineage groups created before a
+    #   certain point in time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] sort_by
+    #   The parameter by which to sort the results. The default is
+    #   `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for the results. The default is `Ascending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of algorithms, use it in the subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of endpoints to return in the response. This
+    #   value defaults to 10.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLineageGroupsRequest AWS API Documentation
+    #
+    class ListLineageGroupsRequest < Struct.new(
+      :created_after,
+      :created_before,
+      :sort_by,
+      :sort_order,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lineage_group_summaries
+    #   A list of lineage groups and their properties.
+    #   @return [Array<Types::LineageGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of algorithms, use it in the subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLineageGroupsResponse AWS API Documentation
+    #
+    class ListLineageGroupsResponse < Struct.new(
+      :lineage_group_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListModelBiasJobDefinitionsRequest
     #   data as a hash:
     #
@@ -23354,6 +24838,68 @@ module Aws::SageMaker
     #
     class ListModelExplainabilityJobDefinitionsResponse < Struct.new(
       :job_definition_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListModelMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         search_expression: {
+    #           filters: [
+    #             {
+    #               name: "Domain", # required, accepts Domain, Framework, Task, FrameworkVersion
+    #               value: "String256", # required
+    #             },
+    #           ],
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] search_expression
+    #   One or more filters that searches for the specified resource or
+    #   resources in a search. All resource objects that satisfy the
+    #   expression's condition are included in the search results. Specify
+    #   the Framework, FrameworkVersion, Domain or Task to filter supported.
+    #   Filter names and values are case-sensitive.
+    #   @return [Types::ModelMetadataSearchExpression]
+    #
+    # @!attribute [rw] next_token
+    #   If the response to a previous `ListModelMetadataResponse` request
+    #   was truncated, the response includes a NextToken. To retrieve the
+    #   next set of model metadata, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of models to return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelMetadataRequest AWS API Documentation
+    #
+    class ListModelMetadataRequest < Struct.new(
+      :search_expression,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_metadata_summaries
+    #   A structure that holds model metadata.
+    #   @return [Array<Types::ModelMetadataSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of recommendations, if there are
+    #   any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelMetadataResponse AWS API Documentation
+    #
+    class ListModelMetadataResponse < Struct.new(
+      :model_metadata_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -25867,6 +27413,27 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Defines the model configuration. Includes the specification name and
+    # environment parameters.
+    #
+    # @!attribute [rw] inference_specification_name
+    #   The inference specification name in the model package version.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_parameters
+    #   Defines the environment parameters that includes key, value types,
+    #   and values.
+    #   @return [Array<Types::EnvironmentParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelConfiguration AWS API Documentation
+    #
+    class ModelConfiguration < Struct.new(
+      :inference_specification_name,
+      :environment_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Data quality constraints and statistics for a model.
     #
     # @note When making an API call, you may pass ModelDataQuality
@@ -26081,6 +27648,144 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Input object for the model.
+    #
+    # @note When making an API call, you may pass ModelInput
+    #   data as a hash:
+    #
+    #       {
+    #         data_input_config: "DataInputConfig", # required
+    #       }
+    #
+    # @!attribute [rw] data_input_config
+    #   The input configuration object for the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelInput AWS API Documentation
+    #
+    class ModelInput < Struct.new(
+      :data_input_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The model latency threshold.
+    #
+    # @note When making an API call, you may pass ModelLatencyThreshold
+    #   data as a hash:
+    #
+    #       {
+    #         percentile: "String64",
+    #         value_in_milliseconds: 1,
+    #       }
+    #
+    # @!attribute [rw] percentile
+    #   The model latency percentile threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_in_milliseconds
+    #   The model latency percentile value in milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelLatencyThreshold AWS API Documentation
+    #
+    class ModelLatencyThreshold < Struct.new(
+      :percentile,
+      :value_in_milliseconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Part of the search expression. You can specify the name and value
+    # (domain, task, framework, framework version, task, and model).
+    #
+    # @note When making an API call, you may pass ModelMetadataFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Domain", # required, accepts Domain, Framework, Task, FrameworkVersion
+    #         value: "String256", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the of the model to filter by.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to filter the model metadata.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelMetadataFilter AWS API Documentation
+    #
+    class ModelMetadataFilter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One or more filters that searches for the specified resource or
+    # resources in a search. All resource objects that satisfy the
+    # expression's condition are included in the search results
+    #
+    # @note When making an API call, you may pass ModelMetadataSearchExpression
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "Domain", # required, accepts Domain, Framework, Task, FrameworkVersion
+    #             value: "String256", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   A list of filter objects.
+    #   @return [Array<Types::ModelMetadataFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelMetadataSearchExpression AWS API Documentation
+    #
+    class ModelMetadataSearchExpression < Struct.new(
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the model metadata.
+    #
+    # @!attribute [rw] domain
+    #   The machine learning domain of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] framework
+    #   The machine learning framework of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] task
+    #   The machine learning task of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] model
+    #   The name of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] framework_version
+    #   The framework version of the model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelMetadataSummary AWS API Documentation
+    #
+    class ModelMetadataSummary < Struct.new(
+      :domain,
+      :framework,
+      :task,
+      :model,
+      :framework_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains metrics captured from a model.
     #
     # @note When making an API call, you may pass ModelMetrics
@@ -26113,6 +27818,16 @@ module Aws::SageMaker
     #         },
     #         bias: {
     #           report: {
+    #             content_type: "ContentType", # required
+    #             content_digest: "ContentDigest",
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #           pre_training_report: {
+    #             content_type: "ContentType", # required
+    #             content_digest: "ContentDigest",
+    #             s3_uri: "S3Uri", # required
+    #           },
+    #           post_training_report: {
     #             content_type: "ContentType", # required
     #             content_digest: "ContentDigest",
     #             s3_uri: "S3Uri", # required
@@ -26240,7 +27955,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -26258,12 +27973,34 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] approval_description
     #   A description provided when the model approval is set.
     #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The machine learning domain of your model package and its
+    #   components. Common machine learning domains include computer vision
+    #   and natural language processing.
+    #   @return [String]
+    #
+    # @!attribute [rw] task
+    #   The machine learning task your model package accomplishes. Common
+    #   machine learning tasks include object detection and image
+    #   classification.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_payload_url
+    #   The Amazon Simple Storage Service path where the sample payload are
+    #   stored. This path must point to a single gzip compressed tar archive
+    #   (.tar.gz suffix).
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_inference_specifications
+    #   An array of additional Inference Specification objects.
+    #   @return [Array<Types::AdditionalInferenceSpecificationDefinition>]
     #
     # @!attribute [rw] tags
     #   A list of the tags associated with the model package. For more
@@ -26278,6 +28015,11 @@ module Aws::SageMaker
     # @!attribute [rw] customer_metadata_properties
     #   The metadata properties for the model package.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] drift_check_baselines
+    #   Represents the drift check baselines that can be used when the model
+    #   monitor is set using the model package.
+    #   @return [Types::DriftCheckBaselines]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackage AWS API Documentation
     #
@@ -26301,8 +28043,13 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       :approval_description,
+      :domain,
+      :task,
+      :sample_payload_url,
+      :additional_inference_specifications,
       :tags,
-      :customer_metadata_properties)
+      :customer_metadata_properties,
+      :drift_check_baselines)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26321,6 +28068,12 @@ module Aws::SageMaker
     #         environment: {
     #           "EnvironmentKey" => "EnvironmentValue",
     #         },
+    #         model_input: {
+    #           data_input_config: "DataInputConfig", # required
+    #         },
+    #         framework: "String",
+    #         framework_version: "FrameworkVersion",
+    #         nearest_model_name: "String",
     #       }
     #
     # @!attribute [rw] container_hostname
@@ -26369,6 +28122,25 @@ module Aws::SageMaker
     #   of up to 1024. We support up to 16 entries in the map.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] model_input
+    #   A structure with Model Input details.
+    #   @return [Types::ModelInput]
+    #
+    # @!attribute [rw] framework
+    #   The machine learning framework of the model package container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] framework_version
+    #   The framework version of the Model Package Container Image.
+    #   @return [String]
+    #
+    # @!attribute [rw] nearest_model_name
+    #   The name of a pre-trained machine learning benchmarked by Amazon
+    #   SageMaker Inference Recommender model that matches your model. You
+    #   can find a list of benchmarked models by calling
+    #   `ListModelMetadata`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageContainerDefinition AWS API Documentation
     #
     class ModelPackageContainerDefinition < Struct.new(
@@ -26377,7 +28149,11 @@ module Aws::SageMaker
       :image_digest,
       :model_data_url,
       :product_id,
-      :environment)
+      :environment,
+      :model_input,
+      :framework,
+      :framework_version,
+      :nearest_model_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26402,7 +28178,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] model_package_group_status
@@ -29114,6 +30890,27 @@ module Aws::SageMaker
     #   stage status or operational status.
     #   @return [Array<Types::ProductionVariantStatus>]
     #
+    # @!attribute [rw] current_serverless_config
+    #   The serverless configuration for the endpoint.
+    #
+    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
+    #   is subject to change. We do not recommend using this feature in
+    #   production environments.
+    #
+    #    </note>
+    #   @return [Types::ProductionVariantServerlessConfig]
+    #
+    # @!attribute [rw] desired_serverless_config
+    #   The serverless configuration requested for this deployment, as
+    #   specified in the endpoint configuration for the endpoint.
+    #
+    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
+    #   is subject to change. We do not recommend using this feature in
+    #   production environments.
+    #
+    #    </note>
+    #   @return [Types::ProductionVariantServerlessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PendingProductionVariantSummary AWS API Documentation
     #
     class PendingProductionVariantSummary < Struct.new(
@@ -29125,7 +30922,42 @@ module Aws::SageMaker
       :desired_instance_count,
       :instance_type,
       :accelerator_type,
-      :variant_status)
+      :variant_status,
+      :current_serverless_config,
+      :desired_serverless_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the traffic pattern.
+    #
+    # @note When making an API call, you may pass Phase
+    #   data as a hash:
+    #
+    #       {
+    #         initial_number_of_users: 1,
+    #         spawn_rate: 1,
+    #         duration_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] initial_number_of_users
+    #   Specifies how many concurrent users to start with.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spawn_rate
+    #   Specified how many new users to spawn in a minute.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   Specifies how long traffic phase should be.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Phase AWS API Documentation
+    #
+    class Phase < Struct.new(
+      :initial_number_of_users,
+      :spawn_rate,
+      :duration_in_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29171,12 +31003,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] tags
@@ -29243,12 +31075,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] pipeline_parameters
@@ -29367,6 +31199,57 @@ module Aws::SageMaker
     #   by this step execution and a list of output parameters.
     #   @return [Types::LambdaStepMetadata]
     #
+    # @!attribute [rw] quality_check
+    #   The configurations and outcomes of the check step execution. This
+    #   includes:
+    #
+    #   * The type of the check conducted,
+    #
+    #   * The Amazon S3 URIs of baseline constraints and statistics files to
+    #     be used for the drift check.
+    #
+    #   * The Amazon S3 URIs of newly calculated baseline constraints and
+    #     statistics.
+    #
+    #   * The model package group name provided.
+    #
+    #   * The Amazon S3 URI of the violation report if violations detected.
+    #
+    #   * The Amazon Resource Name (ARN) of check processing job initiated
+    #     by the step execution.
+    #
+    #   * The boolean flags indicating if the drift check is skipped.
+    #
+    #   * If step property `BaselineUsedForDriftCheck` is set the same as
+    #     `CalculatedBaseline`.
+    #   @return [Types::QualityCheckStepMetadata]
+    #
+    # @!attribute [rw] clarify_check
+    #   Container for the metadata for a Clarify check step. The
+    #   configurations and outcomes of the check step execution. This
+    #   includes:
+    #
+    #   * The type of the check conducted,
+    #
+    #   * The Amazon S3 URIs of baseline constraints and statistics files to
+    #     be used for the drift check.
+    #
+    #   * The Amazon S3 URIs of newly calculated baseline constraints and
+    #     statistics.
+    #
+    #   * The model package group name provided.
+    #
+    #   * The Amazon S3 URI of the violation report if violations detected.
+    #
+    #   * The Amazon Resource Name (ARN) of check processing job initiated
+    #     by the step execution.
+    #
+    #   * The boolean flags indicating if the drift check is skipped.
+    #
+    #   * If step property `BaselineUsedForDriftCheck` is set the same as
+    #     `CalculatedBaseline`.
+    #   @return [Types::ClarifyCheckStepMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStepMetadata AWS API Documentation
     #
     class PipelineExecutionStepMetadata < Struct.new(
@@ -29378,7 +31261,9 @@ module Aws::SageMaker
       :register_model,
       :condition,
       :callback,
-      :lambda)
+      :lambda,
+      :quality_check,
+      :clarify_check)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30153,13 +32038,17 @@ module Aws::SageMaker
     #       {
     #         variant_name: "VariantName", # required
     #         model_name: "ModelName", # required
-    #         initial_instance_count: 1, # required
-    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #         initial_instance_count: 1,
+    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
     #         initial_variant_weight: 1.0,
     #         accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
     #         core_dump_config: {
     #           destination_s3_uri: "DestinationS3Uri", # required
     #           kms_key_id: "KmsKeyId",
+    #         },
+    #         serverless_config: {
+    #           memory_size_in_mb: 1, # required
+    #           max_concurrency: 1, # required
     #         },
     #       }
     #
@@ -30204,6 +32093,18 @@ module Aws::SageMaker
     #   when the process crashes.
     #   @return [Types::ProductionVariantCoreDumpConfig]
     #
+    # @!attribute [rw] serverless_config
+    #   The serverless configuration for an endpoint. Specifies a serverless
+    #   endpoint configuration instead of an instance-based endpoint
+    #   configuration.
+    #
+    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
+    #   is subject to change. We do not recommend using this feature in
+    #   production environments.
+    #
+    #    </note>
+    #   @return [Types::ProductionVariantServerlessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
     #
     class ProductionVariant < Struct.new(
@@ -30213,7 +32114,8 @@ module Aws::SageMaker
       :instance_type,
       :initial_variant_weight,
       :accelerator_type,
-      :core_dump_config)
+      :core_dump_config,
+      :serverless_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30284,6 +32186,40 @@ module Aws::SageMaker
     class ProductionVariantCoreDumpConfig < Struct.new(
       :destination_s3_uri,
       :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Serverless Inference is in preview release for Amazon SageMaker and is
+    # subject to change. We do not recommend using this feature in
+    # production environments.
+    #
+    # Specifies the serverless configuration for an endpoint variant.
+    #
+    # @note When making an API call, you may pass ProductionVariantServerlessConfig
+    #   data as a hash:
+    #
+    #       {
+    #         memory_size_in_mb: 1, # required
+    #         max_concurrency: 1, # required
+    #       }
+    #
+    # @!attribute [rw] memory_size_in_mb
+    #   The memory size of your serverless endpoint. Valid values are in 1
+    #   GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144
+    #   MB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of concurrent invocations your serverless
+    #   endpoint can process.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantServerlessConfig AWS API Documentation
+    #
+    class ProductionVariantServerlessConfig < Struct.new(
+      :memory_size_in_mb,
+      :max_concurrency)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30365,6 +32301,26 @@ module Aws::SageMaker
     #   stage status or operational status.
     #   @return [Array<Types::ProductionVariantStatus>]
     #
+    # @!attribute [rw] current_serverless_config
+    #   The serverless configuration for the endpoint.
+    #
+    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
+    #   is subject to change. We do not recommend using this feature in
+    #   production environments.
+    #
+    #    </note>
+    #   @return [Types::ProductionVariantServerlessConfig]
+    #
+    # @!attribute [rw] desired_serverless_config
+    #   The serverless configuration requested for the endpoint update.
+    #
+    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
+    #   is subject to change. We do not recommend using this feature in
+    #   production environments.
+    #
+    #    </note>
+    #   @return [Types::ProductionVariantServerlessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantSummary AWS API Documentation
     #
     class ProductionVariantSummary < Struct.new(
@@ -30374,7 +32330,9 @@ module Aws::SageMaker
       :desired_weight,
       :current_instance_count,
       :desired_instance_count,
-      :variant_status)
+      :variant_status,
+      :current_serverless_config,
+      :desired_serverless_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30651,7 +32609,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Project AWS API Documentation
@@ -31050,6 +33008,266 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Container for the metadata for a Quality check step. For more
+    # information, see the topic on [QualityCheck step][1] in the *Amazon
+    # SageMaker Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-quality-check
+    #
+    # @!attribute [rw] check_type
+    #   The type of the Quality check step.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_used_for_drift_check_statistics
+    #   The Amazon S3 URI of the baseline statistics file used for the drift
+    #   check.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_used_for_drift_check_constraints
+    #   The Amazon S3 URI of the baseline constraints file used for the
+    #   drift check.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculated_baseline_statistics
+    #   The Amazon S3 URI of the newly calculated baseline statistics file.
+    #   @return [String]
+    #
+    # @!attribute [rw] calculated_baseline_constraints
+    #   The Amazon S3 URI of the newly calculated baseline constraints file.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_package_group_name
+    #   The model package group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] violation_report
+    #   The Amazon S3 URI of violation report if violations are detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] check_job_arn
+    #   The Amazon Resource Name (ARN) of the Quality check processing job
+    #   that was run by this step execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] skip_check
+    #   This flag indicates if the drift check against the previous baseline
+    #   will be skipped or not. If it is set to `False`, the previous
+    #   baseline of the configured check type must be available.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] register_new_baseline
+    #   This flag indicates if a newly calculated baseline can be accessed
+    #   through step properties `BaselineUsedForDriftCheckConstraints` and
+    #   `BaselineUsedForDriftCheckStatistics`. If it is set to `False`, the
+    #   previous baseline of the configured check type must also be
+    #   available. These can be accessed through the
+    #   `BaselineUsedForDriftCheckConstraints` and `
+    #   BaselineUsedForDriftCheckStatistics` properties.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/QualityCheckStepMetadata AWS API Documentation
+    #
+    class QualityCheckStepMetadata < Struct.new(
+      :check_type,
+      :baseline_used_for_drift_check_statistics,
+      :baseline_used_for_drift_check_constraints,
+      :calculated_baseline_statistics,
+      :calculated_baseline_constraints,
+      :model_package_group_name,
+      :violation_report,
+      :check_job_arn,
+      :skip_check,
+      :register_new_baseline)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of filters to narrow the set of lineage entities connected to
+    # the `StartArn`(s) returned by the `QueryLineage` API action.
+    #
+    # @note When making an API call, you may pass QueryFilters
+    #   data as a hash:
+    #
+    #       {
+    #         types: ["String40"],
+    #         lineage_types: ["TrialComponent"], # accepts TrialComponent, Artifact, Context, Action
+    #         created_before: Time.now,
+    #         created_after: Time.now,
+    #         modified_before: Time.now,
+    #         modified_after: Time.now,
+    #         properties: {
+    #           "String256" => "String256",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] types
+    #   Filter the lineage entities connected to the `StartArn` by type. For
+    #   example: `DataSet`, `Model`, `Endpoint`, or `ModelDeployment`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] lineage_types
+    #   Filter the lineage entities connected to the `StartArn`(s) by the
+    #   type of the lineage entity.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_before
+    #   Filter the lineage entities connected to the `StartArn`(s) by
+    #   created date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_after
+    #   Filter the lineage entities connected to the `StartArn`(s) after the
+    #   create date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_before
+    #   Filter the lineage entities connected to the `StartArn`(s) before
+    #   the last modified date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_after
+    #   Filter the lineage entities connected to the `StartArn`(s) after the
+    #   last modified date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] properties
+    #   Filter the lineage entities connected to the `StartArn`(s) by a set
+    #   if property key value pairs. If multiple pairs are provided, an
+    #   entity will be included in the results if it matches any of the
+    #   provided pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/QueryFilters AWS API Documentation
+    #
+    class QueryFilters < Struct.new(
+      :types,
+      :lineage_types,
+      :created_before,
+      :created_after,
+      :modified_before,
+      :modified_after,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass QueryLineageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         start_arns: ["AssociationEntityArn"], # required
+    #         direction: "Both", # accepts Both, Ascendants, Descendants
+    #         include_edges: false,
+    #         filters: {
+    #           types: ["String40"],
+    #           lineage_types: ["TrialComponent"], # accepts TrialComponent, Artifact, Context, Action
+    #           created_before: Time.now,
+    #           created_after: Time.now,
+    #           modified_before: Time.now,
+    #           modified_after: Time.now,
+    #           properties: {
+    #             "String256" => "String256",
+    #           },
+    #         },
+    #         max_depth: 1,
+    #         max_results: 1,
+    #         next_token: "String8192",
+    #       }
+    #
+    # @!attribute [rw] start_arns
+    #   A list of resource Amazon Resource Name (ARN) that represent the
+    #   starting point for your lineage query.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] direction
+    #   Associations between lineage entities are directed. This parameter
+    #   determines the direction from the StartArn(s) the query will look.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_edges
+    #   Setting this value to `True` will retrieve not only the entities of
+    #   interest but also the [Associations][1] and lineage entities on the
+    #   path. Set to `False` to only return lineage entities that match your
+    #   query.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   A set of filtering parameters that allow you to specify which
+    #   entities should be returned.
+    #
+    #   * Properties - Key-value pairs to match on the lineage entities'
+    #     properties.
+    #
+    #   * LineageTypes - A set of lineage entity types to match on. For
+    #     example: `TrialComponent`, `Artifact`, or `Context`.
+    #
+    #   * CreatedBefore - Filter entities created before this date.
+    #
+    #   * ModifiedBefore - Filter entities modified before this date.
+    #
+    #   * ModifiedAfter - Filter entities modified after this date.
+    #   @return [Types::QueryFilters]
+    #
+    # @!attribute [rw] max_depth
+    #   The maximum depth in lineage relationships from the `StartArns` that
+    #   will be traversed. Depth is a measure of the number of
+    #   `Associations` from the `StartArn` entity to the matched results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_results
+    #   Limits the number of vertices in the results. Use the `NextToken` in
+    #   a response to to retrieve the next page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Limits the number of vertices in the request. Use the `NextToken` in
+    #   a response to to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/QueryLineageRequest AWS API Documentation
+    #
+    class QueryLineageRequest < Struct.new(
+      :start_arns,
+      :direction,
+      :include_edges,
+      :filters,
+      :max_depth,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vertices
+    #   A list of vertices connected to the start entity(ies) in the lineage
+    #   graph.
+    #   @return [Array<Types::Vertex>]
+    #
+    # @!attribute [rw] edges
+    #   A list of edges that connect vertices in the response.
+    #   @return [Array<Types::Edge>]
+    #
+    # @!attribute [rw] next_token
+    #   Limits the number of vertices in the response. Use the `NextToken`
+    #   in a response to to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/QueryLineageResponse AWS API Documentation
+    #
+    class QueryLineageResponse < Struct.new(
+      :vertices,
+      :edges,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A collection of settings that apply to an `RSessionGateway` app.
     #
     # @api private
@@ -31169,6 +33387,171 @@ module Aws::SageMaker
     class RStudioServerProDomainSettingsForUpdate < Struct.new(
       :domain_execution_role_arn,
       :default_resource_spec)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input configuration of the recommendation job.
+    #
+    # @note When making an API call, you may pass RecommendationJobInputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         model_package_version_arn: "ModelPackageArn", # required
+    #         job_duration_in_seconds: 1,
+    #         traffic_pattern: {
+    #           traffic_type: "PHASES", # accepts PHASES
+    #           phases: [
+    #             {
+    #               initial_number_of_users: 1,
+    #               spawn_rate: 1,
+    #               duration_in_seconds: 1,
+    #             },
+    #           ],
+    #         },
+    #         resource_limit: {
+    #           max_number_of_tests: 1,
+    #           max_parallel_of_tests: 1,
+    #         },
+    #         endpoint_configurations: [
+    #           {
+    #             instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #             inference_specification_name: "InferenceSpecificationName",
+    #             environment_parameter_ranges: {
+    #               categorical_parameter_ranges: [
+    #                 {
+    #                   name: "String64", # required
+    #                   value: ["String128"], # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] model_package_version_arn
+    #   The Amazon Resource Name (ARN) of a versioned model package.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_duration_in_seconds
+    #   Specifies the maximum duration of the job, in seconds.&gt;
+    #   @return [Integer]
+    #
+    # @!attribute [rw] traffic_pattern
+    #   Specifies the traffic pattern of the job.
+    #   @return [Types::TrafficPattern]
+    #
+    # @!attribute [rw] resource_limit
+    #   Defines the resource limit of the job.
+    #   @return [Types::RecommendationJobResourceLimit]
+    #
+    # @!attribute [rw] endpoint_configurations
+    #   Specifies the endpoint configuration to use for a job.
+    #   @return [Array<Types::EndpointInputConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInputConfig AWS API Documentation
+    #
+    class RecommendationJobInputConfig < Struct.new(
+      :model_package_version_arn,
+      :job_duration_in_seconds,
+      :traffic_pattern,
+      :resource_limit,
+      :endpoint_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the maximum number of jobs that can run in parallel and the
+    # maximum number of jobs that can run.
+    #
+    # @note When making an API call, you may pass RecommendationJobResourceLimit
+    #   data as a hash:
+    #
+    #       {
+    #         max_number_of_tests: 1,
+    #         max_parallel_of_tests: 1,
+    #       }
+    #
+    # @!attribute [rw] max_number_of_tests
+    #   Defines the maximum number of load tests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_parallel_of_tests
+    #   Defines the maximum number of parallel load tests.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobResourceLimit AWS API Documentation
+    #
+    class RecommendationJobResourceLimit < Struct.new(
+      :max_number_of_tests,
+      :max_parallel_of_tests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies conditions for stopping a job. When a job reaches a stopping
+    # condition limit, SageMaker ends the job.
+    #
+    # @note When making an API call, you may pass RecommendationJobStoppingConditions
+    #   data as a hash:
+    #
+    #       {
+    #         max_invocations: 1,
+    #         model_latency_thresholds: [
+    #           {
+    #             percentile: "String64",
+    #             value_in_milliseconds: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] max_invocations
+    #   The maximum number of requests per minute expected for the endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_latency_thresholds
+    #   The interval of time taken by a model to respond as viewed from
+    #   SageMaker. The interval includes the local communication time taken
+    #   to send the request and to fetch the response from the container of
+    #   a model and the time taken to complete the inference in the
+    #   container.
+    #   @return [Array<Types::ModelLatencyThreshold>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobStoppingConditions AWS API Documentation
+    #
+    class RecommendationJobStoppingConditions < Struct.new(
+      :max_invocations,
+      :model_latency_thresholds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metrics of recommendations.
+    #
+    # @!attribute [rw] cost_per_hour
+    #   Defines the cost per hour for the instance.
+    #   @return [Float]
+    #
+    # @!attribute [rw] cost_per_inference
+    #   Defines the cost per inference for the instance .
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_invocations
+    #   The expected maximum number of requests per minute for the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] model_latency
+    #   The expected model latency at maximum invocation per minute for the
+    #   instance.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationMetrics AWS API Documentation
+    #
+    class RecommendationMetrics < Struct.new(
+      :cost_per_hour,
+      :cost_per_inference,
+      :max_invocations,
+      :model_latency)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33002,6 +35385,25 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopInferenceRecommendationsJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "RecommendationJobName", # required
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job you want to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopInferenceRecommendationsJobRequest AWS API Documentation
+    #
+    class StopInferenceRecommendationsJobRequest < Struct.new(
+      :job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopLabelingJobRequest
     #   data as a hash:
     #
@@ -33479,6 +35881,39 @@ module Aws::SageMaker
     class TensorBoardOutputConfig < Struct.new(
       :local_path,
       :s3_output_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the traffic pattern of the load test.
+    #
+    # @note When making an API call, you may pass TrafficPattern
+    #   data as a hash:
+    #
+    #       {
+    #         traffic_type: "PHASES", # accepts PHASES
+    #         phases: [
+    #           {
+    #             initial_number_of_users: 1,
+    #             spawn_rate: 1,
+    #             duration_in_seconds: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] traffic_type
+    #   Defines the traffic patterns.
+    #   @return [String]
+    #
+    # @!attribute [rw] phases
+    #   Defines the phases traffic specification.
+    #   @return [Array<Types::Phase>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrafficPattern AWS API Documentation
+    #
+    class TrafficPattern < Struct.new(
+      :traffic_type,
+      :phases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34953,7 +37388,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] metadata_properties
@@ -35036,7 +37471,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] last_modified_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @!attribute [rw] parameters
@@ -35063,6 +37498,10 @@ module Aws::SageMaker
     # @!attribute [rw] source_detail
     #   Details of the source of the component.
     #   @return [Types::TrialComponentSourceDetail]
+    #
+    # @!attribute [rw] lineage_group_arn
+    #   The Amazon Resource Name (ARN) of the lineage group resource.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   The list of tags that are associated with the component. You can use
@@ -35095,6 +37534,7 @@ module Aws::SageMaker
       :metrics,
       :metadata_properties,
       :source_detail,
+      :lineage_group_arn,
       :tags,
       :parents)
       SENSITIVE = []
@@ -35247,7 +37687,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] created_by
     #   Information about the user who created or modified an experiment,
-    #   trial, trial component, or project.
+    #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrialComponentSimpleSummary AWS API Documentation
@@ -36384,6 +38824,34 @@ module Aws::SageMaker
     #           "CustomerMetadataKey" => "CustomerMetadataValue",
     #         },
     #         customer_metadata_properties_to_remove: ["CustomerMetadataKey"],
+    #         additional_inference_specifications_to_add: [
+    #           {
+    #             name: "EntityName", # required
+    #             description: "EntityDescription",
+    #             containers: [ # required
+    #               {
+    #                 container_hostname: "ContainerHostname",
+    #                 image: "ContainerImage", # required
+    #                 image_digest: "ImageDigest",
+    #                 model_data_url: "Url",
+    #                 product_id: "ProductId",
+    #                 environment: {
+    #                   "EnvironmentKey" => "EnvironmentValue",
+    #                 },
+    #                 model_input: {
+    #                   data_input_config: "DataInputConfig", # required
+    #                 },
+    #                 framework: "String",
+    #                 framework_version: "FrameworkVersion",
+    #                 nearest_model_name: "String",
+    #               },
+    #             ],
+    #             supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
+    #             supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #             supported_content_types: ["ContentType"],
+    #             supported_response_mime_types: ["ResponseMIMEType"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] model_package_arn
@@ -36407,6 +38875,15 @@ module Aws::SageMaker
     #   to remove.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] additional_inference_specifications_to_add
+    #   An array of additional Inference Specification objects to be added
+    #   to the existing array additional Inference Specification. Total
+    #   number of additional Inference Specifications can not exceed 15.
+    #   Each additional Inference Specification specifies artifacts based on
+    #   this model package that can be used on inference endpoints.
+    #   Generally used with SageMaker Neo to store the compiled artifacts.
+    #   @return [Array<Types::AdditionalInferenceSpecificationDefinition>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateModelPackageInput AWS API Documentation
     #
     class UpdateModelPackageInput < Struct.new(
@@ -36414,7 +38891,8 @@ module Aws::SageMaker
       :model_approval_status,
       :approval_description,
       :customer_metadata_properties,
-      :customer_metadata_properties_to_remove)
+      :customer_metadata_properties_to_remove,
+      :additional_inference_specifications_to_add)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37406,7 +39884,7 @@ module Aws::SageMaker
     end
 
     # Information about the user who created or modified an experiment,
-    # trial, trial component, or project.
+    # trial, trial component, lineage group, or project.
     #
     # @!attribute [rw] user_profile_arn
     #   The Amazon Resource Name (ARN) of the user's profile.
@@ -37618,6 +40096,31 @@ module Aws::SageMaker
     #
     class VariantProperty < Struct.new(
       :variant_property_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A lineage entity connected to the starting entity(ies).
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the lineage entity resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the lineage entity resource. For example: `DataSet`,
+    #   `Model`, `Endpoint`, etc...
+    #   @return [String]
+    #
+    # @!attribute [rw] lineage_type
+    #   The type of resource of the lineage entity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Vertex AWS API Documentation
+    #
+    class Vertex < Struct.new(
+      :arn,
+      :type,
+      :lineage_type)
       SENSITIVE = []
       include Aws::Structure
     end

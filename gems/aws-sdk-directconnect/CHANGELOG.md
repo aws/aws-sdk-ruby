@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2021-12-01)
+------------------
+
+* Feature - Adds SiteLink support to private and transit virtual interfaces. SiteLink is a new Direct Connect feature that allows routing between Direct Connect points of presence.
+
 1.50.0 (2021-11-30)
 ------------------
 

@@ -19,6 +19,7 @@ module Aws::SageMakerRuntime
     Header = Shapes::StringShape.new(name: 'Header')
     InferenceId = Shapes::StringShape.new(name: 'InferenceId')
     InputLocationHeader = Shapes::StringShape.new(name: 'InputLocationHeader')
+    InternalDependencyException = Shapes::StructureShape.new(name: 'InternalDependencyException')
     InternalFailure = Shapes::StructureShape.new(name: 'InternalFailure')
     InvokeEndpointAsyncInput = Shapes::StructureShape.new(name: 'InvokeEndpointAsyncInput')
     InvokeEndpointAsyncOutput = Shapes::StructureShape.new(name: 'InvokeEndpointAsyncOutput')
@@ -27,6 +28,7 @@ module Aws::SageMakerRuntime
     LogStreamArn = Shapes::StringShape.new(name: 'LogStreamArn')
     Message = Shapes::StringShape.new(name: 'Message')
     ModelError = Shapes::StructureShape.new(name: 'ModelError')
+    ModelNotReadyException = Shapes::StructureShape.new(name: 'ModelNotReadyException')
     RequestTTLSecondsHeader = Shapes::IntegerShape.new(name: 'RequestTTLSecondsHeader')
     ServiceUnavailable = Shapes::StructureShape.new(name: 'ServiceUnavailable')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
@@ -34,6 +36,9 @@ module Aws::SageMakerRuntime
     TargetModelHeader = Shapes::StringShape.new(name: 'TargetModelHeader')
     TargetVariantHeader = Shapes::StringShape.new(name: 'TargetVariantHeader')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
+
+    InternalDependencyException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InternalDependencyException.struct_class = Types::InternalDependencyException
 
     InternalFailure.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InternalFailure.struct_class = Types::InternalFailure
@@ -78,6 +83,9 @@ module Aws::SageMakerRuntime
     ModelError.add_member(:log_stream_arn, Shapes::ShapeRef.new(shape: LogStreamArn, location_name: "LogStreamArn"))
     ModelError.struct_class = Types::ModelError
 
+    ModelNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ModelNotReadyException.struct_class = Types::ModelNotReadyException
+
     ServiceUnavailable.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ServiceUnavailable.struct_class = Types::ServiceUnavailable
 
@@ -112,6 +120,8 @@ module Aws::SageMakerRuntime
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailable)
         o.errors << Shapes::ShapeRef.new(shape: ValidationError)
         o.errors << Shapes::ShapeRef.new(shape: ModelError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalDependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ModelNotReadyException)
       end)
 
       api.add_operation(:invoke_endpoint_async, Seahorse::Model::Operation.new.tap do |o|

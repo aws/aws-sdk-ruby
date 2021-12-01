@@ -315,6 +315,7 @@ module Aws::DynamoDB
     #         value: "TagValueString", # required
     #       },
     #     ],
+    #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #   })
     # @param [Hash] options ({})
     # @option options [required, Array<Types::AttributeDefinition>] :attribute_definitions
@@ -508,6 +509,9 @@ module Aws::DynamoDB
     #
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
+    # @option options [String] :table_class
+    #   The table class of the new table. Valid values are `STANDARD` and
+    #   `STANDARD_INFREQUENT_ACCESS`.
     # @return [Table]
     def create_table(options = {})
       resp = @client.create_table(options)

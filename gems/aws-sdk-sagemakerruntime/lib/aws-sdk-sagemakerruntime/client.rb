@@ -349,9 +349,10 @@ module Aws::SageMakerRuntime
     # rely on the behavior of headers outside those enumerated in the
     # request syntax.
     #
-    # Calls to `InvokeEndpoint` are authenticated by using AWS Signature
-    # Version 4. For information, see [Authenticating Requests (AWS
-    # Signature Version 4)][2] in the *Amazon S3 API Reference*.
+    # Calls to `InvokeEndpoint` are authenticated by using Amazon Web
+    # Services Signature Version 4. For information, see [Authenticating
+    # Requests (Amazon Web Services Signature Version 4)][2] in the *Amazon
+    # S3 API Reference*.
     #
     # A customer's model containers must respond to requests within 60
     # seconds. The model itself can have a maximum processing time of 60
@@ -413,8 +414,8 @@ module Aws::SageMakerRuntime
     #   custom attribute represents the trace ID, your model can prepend the
     #   custom attribute with `Trace ID:` in your post-processing function.
     #
-    #   This feature is currently supported in the AWS SDKs but not in the
-    #   Amazon SageMaker Python SDK.
+    #   This feature is currently supported in the Amazon Web Services SDKs
+    #   but not in the Amazon SageMaker Python SDK.
     #
     #
     #
@@ -504,13 +505,14 @@ module Aws::SageMakerRuntime
     # rely on the behavior of headers outside those enumerated in the
     # request syntax.
     #
-    # Calls to `InvokeEndpointAsync` are authenticated by using AWS
-    # Signature Version 4. For information, see [Authenticating Requests
-    # (AWS Signature Version 4)][1] in the *Amazon S3 API Reference*.
+    # Calls to `InvokeEndpointAsync` are authenticated by using Amazon Web
+    # Services Signature Version 4. For information, see [Authenticating
+    # Requests (Amazon Web Services Signature Version 4)][1] in the *Amazon
+    # S3 API Reference*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
+    # [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint that you specified when you created the
@@ -542,8 +544,8 @@ module Aws::SageMakerRuntime
     #   custom attribute represents the trace ID, your model can prepend the
     #   custom attribute with `Trace ID`\: in your post-processing function.
     #
-    #   This feature is currently supported in the AWS SDKs but not in the
-    #   Amazon SageMaker Python SDK.
+    #   This feature is currently supported in the Amazon Web Services SDKs
+    #   but not in the Amazon SageMaker Python SDK.
     #
     #
     #
@@ -604,7 +606,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

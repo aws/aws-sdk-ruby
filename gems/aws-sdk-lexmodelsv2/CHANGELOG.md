@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2021-12-01)
+------------------
+
+* Feature - This release introduces a new feature, Automated Chatbot Designer, that helps customers automatically create a bot design from existing conversation transcripts. The feature uses machine learning to discover most common intents and the information needed to fulfill them.
+
 1.16.0 (2021-11-30)
 ------------------
 

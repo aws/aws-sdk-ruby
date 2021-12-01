@@ -348,6 +348,117 @@ module Aws::Kendra
 
     # @!group API Operations
 
+    # Grants users or groups in your Amazon Web Services SSO identity source
+    # access to your Amazon Kendra experience. You can create an Amazon
+    # Kendra experience such as a search application. For more information
+    # on creating a search application experience, see [Building a search
+    # experience with no code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @option params [required, String] :id
+    #   The identifier of your Amazon Kendra experience.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #
+    # @option params [required, Array<Types::EntityConfiguration>] :entity_list
+    #   Lists users or groups in your Amazon Web Services SSO identity source.
+    #
+    # @return [Types::AssociateEntitiesToExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateEntitiesToExperienceResponse#failed_entity_list #failed_entity_list} => Array&lt;Types::FailedEntity&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_entities_to_experience({
+    #     id: "ExperienceId", # required
+    #     index_id: "IndexId", # required
+    #     entity_list: [ # required
+    #       {
+    #         entity_id: "EntityId", # required
+    #         entity_type: "USER", # required, accepts USER, GROUP
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_entity_list #=> Array
+    #   resp.failed_entity_list[0].entity_id #=> String
+    #   resp.failed_entity_list[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AssociateEntitiesToExperience AWS API Documentation
+    #
+    # @overload associate_entities_to_experience(params = {})
+    # @param [Hash] params ({})
+    def associate_entities_to_experience(params = {}, options = {})
+      req = build_request(:associate_entities_to_experience, params)
+      req.send_request(options)
+    end
+
+    # Defines the specific permissions of users or groups in your Amazon Web
+    # Services SSO identity source with access to your Amazon Kendra
+    # experience. You can create an Amazon Kendra experience such as a
+    # search application. For more information on creating a search
+    # application experience, see [Building a search experience with no
+    # code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @option params [required, String] :id
+    #   The identifier of your Amazon Kendra experience.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #
+    # @option params [required, Array<Types::EntityPersonaConfiguration>] :personas
+    #   The personas that define the specific permissions of users or groups
+    #   in your Amazon Web Services SSO identity source. The available
+    #   personas or access roles are `Owner` and `Viewer`. For more
+    #   information on these personas, see [Providing access to your search
+    #   page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience
+    #
+    # @return [Types::AssociatePersonasToEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociatePersonasToEntitiesResponse#failed_entity_list #failed_entity_list} => Array&lt;Types::FailedEntity&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_personas_to_entities({
+    #     id: "ExperienceId", # required
+    #     index_id: "IndexId", # required
+    #     personas: [ # required
+    #       {
+    #         entity_id: "EntityId", # required
+    #         persona: "OWNER", # required, accepts OWNER, VIEWER
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_entity_list #=> Array
+    #   resp.failed_entity_list[0].entity_id #=> String
+    #   resp.failed_entity_list[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AssociatePersonasToEntities AWS API Documentation
+    #
+    # @overload associate_personas_to_entities(params = {})
+    # @param [Hash] params ({})
+    def associate_personas_to_entities(params = {}, options = {})
+      req = build_request(:associate_personas_to_entities, params)
+      req.send_request(options)
+    end
+
     # Removes one or more documents from an index. The documents must have
     # been added with the `BatchPutDocument` operation.
     #
@@ -525,6 +636,20 @@ module Aws::Kendra
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
     #
+    # @option params [Types::CustomDocumentEnrichmentConfiguration] :custom_document_enrichment_configuration
+    #   Configuration information for altering your document metadata and
+    #   content during the document ingestion process when you use the
+    #   `BatchPutDocument` operation.
+    #
+    #   For more information on how to create, modify and delete document
+    #   metadata, or make other content alterations when you ingest documents
+    #   into Amazon Kendra, see [Customizing document metadata during the
+    #   ingestion process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
+    #
     # @return [Types::BatchPutDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchPutDocumentResponse#failed_documents #failed_documents} => Array&lt;Types::BatchPutDocumentResponseFailedDocument&gt;
@@ -577,6 +702,62 @@ module Aws::Kendra
     #         content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
     #       },
     #     ],
+    #     custom_document_enrichment_configuration: {
+    #       inline_configurations: [
+    #         {
+    #           condition: {
+    #             condition_document_attribute_key: "DocumentAttributeKey", # required
+    #             operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #             condition_on_value: {
+    #               string_value: "DocumentAttributeStringValue",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
+    #             },
+    #           },
+    #           target: {
+    #             target_document_attribute_key: "DocumentAttributeKey",
+    #             target_document_attribute_value_deletion: false,
+    #             target_document_attribute_value: {
+    #               string_value: "DocumentAttributeStringValue",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
+    #             },
+    #           },
+    #           document_content_deletion: false,
+    #         },
+    #       ],
+    #       pre_extraction_hook_configuration: {
+    #         invocation_condition: {
+    #           condition_document_attribute_key: "DocumentAttributeKey", # required
+    #           operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #           condition_on_value: {
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         lambda_arn: "LambdaArn", # required
+    #         s3_bucket: "S3BucketName", # required
+    #       },
+    #       post_extraction_hook_configuration: {
+    #         invocation_condition: {
+    #           condition_document_attribute_key: "DocumentAttributeKey", # required
+    #           operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #           condition_on_value: {
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         lambda_arn: "LambdaArn", # required
+    #         s3_bucket: "S3BucketName", # required
+    #       },
+    #       role_arn: "RoleArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -602,6 +783,9 @@ module Aws::Kendra
     # based on new queries added to the query log from the time you cleared
     # suggestions. If you do not see any new suggestions, then please allow
     # Amazon Kendra to collect enough queries to learn new suggestions.
+    #
+    # `ClearQuerySuggestions` is currently not supported in the Amazon Web
+    # Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index you want to clear query suggestions from.
@@ -633,6 +817,13 @@ module Aws::Kendra
     # `CreateDataSource` is a synchronous operation. The operation returns
     # 200 if the data source was successfully created. Otherwise, an
     # exception is raised.
+    #
+    # Amazon S3 and [custom][1] data sources are the only supported data
+    # sources in the Amazon Web Services GovCloud (US-West) region.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html
     #
     # @option params [required, String] :name
     #   A unique name for the data source. A data source name can't be
@@ -705,6 +896,19 @@ module Aws::Kendra
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #
+    # @option params [Types::CustomDocumentEnrichmentConfiguration] :custom_document_enrichment_configuration
+    #   Configuration information for altering document metadata and content
+    #   during the document ingestion process when you create a data source.
+    #
+    #   For more information on how to create, modify and delete document
+    #   metadata, or make other content alterations when you ingest documents
+    #   into Amazon Kendra, see [Customizing document metadata during the
+    #   ingestion process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
     #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1039,6 +1243,62 @@ module Aws::Kendra
     #     ],
     #     client_token: "ClientTokenName",
     #     language_code: "LanguageCode",
+    #     custom_document_enrichment_configuration: {
+    #       inline_configurations: [
+    #         {
+    #           condition: {
+    #             condition_document_attribute_key: "DocumentAttributeKey", # required
+    #             operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #             condition_on_value: {
+    #               string_value: "DocumentAttributeStringValue",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
+    #             },
+    #           },
+    #           target: {
+    #             target_document_attribute_key: "DocumentAttributeKey",
+    #             target_document_attribute_value_deletion: false,
+    #             target_document_attribute_value: {
+    #               string_value: "DocumentAttributeStringValue",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
+    #             },
+    #           },
+    #           document_content_deletion: false,
+    #         },
+    #       ],
+    #       pre_extraction_hook_configuration: {
+    #         invocation_condition: {
+    #           condition_document_attribute_key: "DocumentAttributeKey", # required
+    #           operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #           condition_on_value: {
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         lambda_arn: "LambdaArn", # required
+    #         s3_bucket: "S3BucketName", # required
+    #       },
+    #       post_extraction_hook_configuration: {
+    #         invocation_condition: {
+    #           condition_document_attribute_key: "DocumentAttributeKey", # required
+    #           operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #           condition_on_value: {
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         lambda_arn: "LambdaArn", # required
+    #         s3_bucket: "S3BucketName", # required
+    #       },
+    #       role_arn: "RoleArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1051,6 +1311,86 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def create_data_source(params = {}, options = {})
       req = build_request(:create_data_source, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon Kendra experience such as a search application. For
+    # more information on creating a search application experience, see
+    # [Building a search experience with no code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @option params [required, String] :name
+    #   A name for your Amazon Kendra experience.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of a role with permission to access
+    #   `Query` operations, `QuerySuggestions` operations, `SubmitFeedback`
+    #   operations, and Amazon Web Services SSO that stores your user and
+    #   group information. For more information, see [IAM roles for Amazon
+    #   Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
+    #
+    # @option params [Types::ExperienceConfiguration] :configuration
+    #   Provides the configuration information for your Amazon Kendra
+    #   experience. This includes `ContentSourceConfiguration`, which
+    #   specifies the data source IDs and/or FAQ IDs, and
+    #   `UserIdentityConfiguration`, which specifies the user or group
+    #   information to grant access to your Amazon Kendra experience.
+    #
+    # @option params [String] :description
+    #   A description for your Amazon Kendra experience.
+    #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create your Amazon
+    #   Kendra experience. Multiple calls to the `CreateExperience` operation
+    #   with the same client token creates only one Amazon Kendra experience.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExperienceResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_experience({
+    #     name: "ExperienceName", # required
+    #     index_id: "IndexId", # required
+    #     role_arn: "RoleArn",
+    #     configuration: {
+    #       content_source_configuration: {
+    #         data_source_ids: ["DataSourceId"],
+    #         faq_ids: ["FaqId"],
+    #         direct_put_content: false,
+    #       },
+    #       user_identity_configuration: {
+    #         identity_attribute_name: "IdentityAttributeName",
+    #       },
+    #     },
+    #     description: "Description",
+    #     client_token: "ClientTokenName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateExperience AWS API Documentation
+    #
+    # @overload create_experience(params = {})
+    # @param [Hash] params ({})
+    def create_experience(params = {}, options = {})
+      req = build_request(:create_experience, params)
       req.send_request(options)
     end
 
@@ -1230,8 +1570,8 @@ module Aws::Kendra
     #     accessible to the user will be searchable and displayable.
     #
     # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
-    #   Enables fetching access levels of groups and users from an AWS Single
-    #   Sign-On identity source. To configure this, see
+    #   Enables fetching access levels of groups and users from an Amazon Web
+    #   Services Single Sign On identity source. To configure this, see
     #   [UserGroupResolutionConfiguration][1].
     #
     #
@@ -1306,6 +1646,9 @@ module Aws::Kendra
     #
     # For information on the current quota limits for block lists, see
     # [Quotas for Amazon Kendra][1].
+    #
+    # `CreateQuerySuggestionsBlockList` is currently not supported in the
+    # Amazon Web Services GovCloud (US-West) region.
     #
     #
     #
@@ -1409,9 +1752,8 @@ module Aws::Kendra
     #   The description for the new thesaurus.
     #
     # @option params [required, String] :role_arn
-    #   An AWS Identity and Access Management (IAM) role that gives Amazon
-    #   Kendra permissions to access thesaurus file specified in
-    #   `SourceS3Path`.
+    #   An IAM role that gives Amazon Kendra permissions to access thesaurus
+    #   file specified in `SourceS3Path`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs that identify the thesaurus. You can use the
@@ -1500,6 +1842,39 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Deletes your Amazon Kendra experience such as a search application.
+    # For more information on creating a search application experience, see
+    # [Building a search experience with no code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @option params [required, String] :id
+    #   The identifier of your Amazon Kendra experience you want to delete.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for your Amazon Kendra experience you want
+    #   to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_experience({
+    #     id: "ExperienceId", # required
+    #     index_id: "IndexId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteExperience AWS API Documentation
+    #
+    # @overload delete_experience(params = {})
+    # @param [Hash] params ({})
+    def delete_experience(params = {}, options = {})
+      req = build_request(:delete_experience, params)
+      req.send_request(options)
+    end
+
     # Removes an FAQ from an index.
     #
     # @option params [required, String] :id
@@ -1566,6 +1941,9 @@ module Aws::Kendra
     # `PutPrincipalMapping`. You can update your internal list of users or
     # sub groups and input this list when calling `PutPrincipalMapping`.
     #
+    # `DeletePrincipalMapping` is currently not supported in the Amazon Web
+    # Services GovCloud (US-West) region.
+    #
     # @option params [required, String] :index_id
     #   The identifier of the index you want to delete a group from.
     #
@@ -1628,6 +2006,9 @@ module Aws::Kendra
     # A deleted block list might not take effect right away. Amazon Kendra
     # needs to refresh the entire suggestions list to add back the queries
     # that were previously blocked.
+    #
+    # `DeleteQuerySuggestionsBlockList` is currently not supported in the
+    # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
     #   The identifier of the you want to delete a block list from.
@@ -1702,6 +2083,7 @@ module Aws::Kendra
     #   * {Types::DescribeDataSourceResponse#role_arn #role_arn} => String
     #   * {Types::DescribeDataSourceResponse#error_message #error_message} => String
     #   * {Types::DescribeDataSourceResponse#language_code #language_code} => String
+    #   * {Types::DescribeDataSourceResponse#custom_document_enrichment_configuration #custom_document_enrichment_configuration} => Types::CustomDocumentEnrichmentConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1942,6 +2324,41 @@ module Aws::Kendra
     #   resp.role_arn #=> String
     #   resp.error_message #=> String
     #   resp.language_code #=> String
+    #   resp.custom_document_enrichment_configuration.inline_configurations #=> Array
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].condition.condition_document_attribute_key #=> String
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].condition.operator #=> String, one of "GreaterThan", "GreaterThanOrEquals", "LessThan", "LessThanOrEquals", "Equals", "NotEquals", "Contains", "NotContains", "Exists", "NotExists", "BeginsWith"
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].condition.condition_on_value.string_value #=> String
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].condition.condition_on_value.string_list_value #=> Array
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].condition.condition_on_value.string_list_value[0] #=> String
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].condition.condition_on_value.long_value #=> Integer
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].condition.condition_on_value.date_value #=> Time
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].target.target_document_attribute_key #=> String
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].target.target_document_attribute_value_deletion #=> Boolean
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].target.target_document_attribute_value.string_value #=> String
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].target.target_document_attribute_value.string_list_value #=> Array
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].target.target_document_attribute_value.string_list_value[0] #=> String
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].target.target_document_attribute_value.long_value #=> Integer
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].target.target_document_attribute_value.date_value #=> Time
+    #   resp.custom_document_enrichment_configuration.inline_configurations[0].document_content_deletion #=> Boolean
+    #   resp.custom_document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.condition_document_attribute_key #=> String
+    #   resp.custom_document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.operator #=> String, one of "GreaterThan", "GreaterThanOrEquals", "LessThan", "LessThanOrEquals", "Equals", "NotEquals", "Contains", "NotContains", "Exists", "NotExists", "BeginsWith"
+    #   resp.custom_document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.condition_on_value.string_value #=> String
+    #   resp.custom_document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.condition_on_value.string_list_value #=> Array
+    #   resp.custom_document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.condition_on_value.string_list_value[0] #=> String
+    #   resp.custom_document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.condition_on_value.long_value #=> Integer
+    #   resp.custom_document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.condition_on_value.date_value #=> Time
+    #   resp.custom_document_enrichment_configuration.pre_extraction_hook_configuration.lambda_arn #=> String
+    #   resp.custom_document_enrichment_configuration.pre_extraction_hook_configuration.s3_bucket #=> String
+    #   resp.custom_document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.condition_document_attribute_key #=> String
+    #   resp.custom_document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.operator #=> String, one of "GreaterThan", "GreaterThanOrEquals", "LessThan", "LessThanOrEquals", "Equals", "NotEquals", "Contains", "NotContains", "Exists", "NotExists", "BeginsWith"
+    #   resp.custom_document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.condition_on_value.string_value #=> String
+    #   resp.custom_document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.condition_on_value.string_list_value #=> Array
+    #   resp.custom_document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.condition_on_value.string_list_value[0] #=> String
+    #   resp.custom_document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.condition_on_value.long_value #=> Integer
+    #   resp.custom_document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.condition_on_value.date_value #=> Time
+    #   resp.custom_document_enrichment_configuration.post_extraction_hook_configuration.lambda_arn #=> String
+    #   resp.custom_document_enrichment_configuration.post_extraction_hook_configuration.s3_bucket #=> String
+    #   resp.custom_document_enrichment_configuration.role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeDataSource AWS API Documentation
     #
@@ -1949,6 +2366,73 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def describe_data_source(params = {}, options = {})
       req = build_request(:describe_data_source, params)
+      req.send_request(options)
+    end
+
+    # Gets information about your Amazon Kendra experience such as a search
+    # application. For more information on creating a search application
+    # experience, see [Building a search experience with no code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @option params [required, String] :id
+    #   The identifier of your Amazon Kendra experience you want to get
+    #   information on.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for your Amazon Kendra experience you want
+    #   to get information on.
+    #
+    # @return [Types::DescribeExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExperienceResponse#id #id} => String
+    #   * {Types::DescribeExperienceResponse#index_id #index_id} => String
+    #   * {Types::DescribeExperienceResponse#name #name} => String
+    #   * {Types::DescribeExperienceResponse#endpoints #endpoints} => Array&lt;Types::ExperienceEndpoint&gt;
+    #   * {Types::DescribeExperienceResponse#configuration #configuration} => Types::ExperienceConfiguration
+    #   * {Types::DescribeExperienceResponse#created_at #created_at} => Time
+    #   * {Types::DescribeExperienceResponse#updated_at #updated_at} => Time
+    #   * {Types::DescribeExperienceResponse#description #description} => String
+    #   * {Types::DescribeExperienceResponse#status #status} => String
+    #   * {Types::DescribeExperienceResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeExperienceResponse#error_message #error_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_experience({
+    #     id: "ExperienceId", # required
+    #     index_id: "IndexId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.index_id #=> String
+    #   resp.name #=> String
+    #   resp.endpoints #=> Array
+    #   resp.endpoints[0].endpoint_type #=> String, one of "HOME"
+    #   resp.endpoints[0].endpoint #=> String
+    #   resp.configuration.content_source_configuration.data_source_ids #=> Array
+    #   resp.configuration.content_source_configuration.data_source_ids[0] #=> String
+    #   resp.configuration.content_source_configuration.faq_ids #=> Array
+    #   resp.configuration.content_source_configuration.faq_ids[0] #=> String
+    #   resp.configuration.content_source_configuration.direct_put_content #=> Boolean
+    #   resp.configuration.user_identity_configuration.identity_attribute_name #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.description #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.role_arn #=> String
+    #   resp.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeExperience AWS API Documentation
+    #
+    # @overload describe_experience(params = {})
+    # @param [Hash] params ({})
+    def describe_experience(params = {}, options = {})
+      req = build_request(:describe_experience, params)
       req.send_request(options)
     end
 
@@ -2096,6 +2580,9 @@ module Aws::Kendra
     # action that should process and apply after other actions, and useful
     # error messages if an action could not be processed.
     #
+    # `DescribePrincipalMapping` is currently not supported in the Amazon
+    # Web Services GovCloud (US-West) region.
+    #
     # @option params [required, String] :index_id
     #   The identifier of the index required to check the processing of `PUT`
     #   and `DELETE` actions for mapping users to their groups.
@@ -2148,6 +2635,9 @@ module Aws::Kendra
     #
     # This is used to check the current settings that are applied to a block
     # list.
+    #
+    # `DescribeQuerySuggestionsBlockList` is currently not supported in the
+    # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index for the block list.
@@ -2206,6 +2696,9 @@ module Aws::Kendra
     #
     # This is used to check the current settings applied to query
     # suggestions.
+    #
+    # `DescribeQuerySuggestionsConfig` is currently not supported in the
+    # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index you want to describe query suggestions
@@ -2307,7 +2800,109 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Prevents users or groups in your Amazon Web Services SSO identity
+    # source from accessing your Amazon Kendra experience. You can create an
+    # Amazon Kendra experience such as a search application. For more
+    # information on creating a search application experience, see [Building
+    # a search experience with no code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @option params [required, String] :id
+    #   The identifier of your Amazon Kendra experience.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #
+    # @option params [required, Array<Types::EntityConfiguration>] :entity_list
+    #   Lists users or groups in your Amazon Web Services SSO identity source.
+    #
+    # @return [Types::DisassociateEntitiesFromExperienceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateEntitiesFromExperienceResponse#failed_entity_list #failed_entity_list} => Array&lt;Types::FailedEntity&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_entities_from_experience({
+    #     id: "ExperienceId", # required
+    #     index_id: "IndexId", # required
+    #     entity_list: [ # required
+    #       {
+    #         entity_id: "EntityId", # required
+    #         entity_type: "USER", # required, accepts USER, GROUP
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_entity_list #=> Array
+    #   resp.failed_entity_list[0].entity_id #=> String
+    #   resp.failed_entity_list[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DisassociateEntitiesFromExperience AWS API Documentation
+    #
+    # @overload disassociate_entities_from_experience(params = {})
+    # @param [Hash] params ({})
+    def disassociate_entities_from_experience(params = {}, options = {})
+      req = build_request(:disassociate_entities_from_experience, params)
+      req.send_request(options)
+    end
+
+    # Removes the specific permissions of users or groups in your Amazon Web
+    # Services SSO identity source with access to your Amazon Kendra
+    # experience. You can create an Amazon Kendra experience such as a
+    # search application. For more information on creating a search
+    # application experience, see [Building a search experience with no
+    # code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @option params [required, String] :id
+    #   The identifier of your Amazon Kendra experience.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #
+    # @option params [required, Array<String>] :entity_ids
+    #   The identifiers of users or groups in your Amazon Web Services SSO
+    #   identity source. For example, user IDs could be user emails.
+    #
+    # @return [Types::DisassociatePersonasFromEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociatePersonasFromEntitiesResponse#failed_entity_list #failed_entity_list} => Array&lt;Types::FailedEntity&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_personas_from_entities({
+    #     id: "ExperienceId", # required
+    #     index_id: "IndexId", # required
+    #     entity_ids: ["EntityId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failed_entity_list #=> Array
+    #   resp.failed_entity_list[0].entity_id #=> String
+    #   resp.failed_entity_list[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DisassociatePersonasFromEntities AWS API Documentation
+    #
+    # @overload disassociate_personas_from_entities(params = {})
+    # @param [Hash] params ({})
+    def disassociate_personas_from_entities(params = {}, options = {})
+      req = build_request(:disassociate_personas_from_entities, params)
+      req.send_request(options)
+    end
+
     # Fetches the queries that are suggested to your users.
+    #
+    # `GetQuerySuggestions` is currently not supported in the Amazon Web
+    # Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index you want to get query suggestions from.
@@ -2356,6 +2951,93 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def get_query_suggestions(params = {}, options = {})
       req = build_request(:get_query_suggestions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves search metrics data. The data provides a snapshot of how
+    # your users interact with your search application and how effective the
+    # application is.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index to get search metrics data.
+    #
+    # @option params [required, String] :interval
+    #   The time interval or time window to get search metrics data. The time
+    #   interval uses the time zone of your index. You can view data in the
+    #   following time windows:
+    #
+    #   * `THIS_WEEK`\: The current week, starting on the Sunday and ending on
+    #     the day before the current date.
+    #
+    #   * `ONE_WEEK_AGO`\: The previous week, starting on the Sunday and
+    #     ending on the following Saturday.
+    #
+    #   * `TWO_WEEKS_AGO`\: The week before the previous week, starting on the
+    #     Sunday and ending on the following Saturday.
+    #
+    #   * `THIS_MONTH`\: The current month, starting on the first day of the
+    #     month and ending on the day before the current date.
+    #
+    #   * `ONE_MONTH_AGO`\: The previous month, starting on the first day of
+    #     the month and ending on the last day of the month.
+    #
+    #   * `TWO_MONTHS_AGO`\: The month before the previous month, starting on
+    #     the first day of the month and ending on last day of the month.
+    #
+    # @option params [required, String] :metric_type
+    #   The metric you want to retrieve. You can specify only one metric per
+    #   call.
+    #
+    #   For more information about the metrics you can view, see [Gaining
+    #   insights with search analytics][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/search-analytics.html
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more data to
+    #   retrieve), Amazon Kendra returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of search
+    #   metrics data.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of returned data for the metric.
+    #
+    # @return [Types::GetSnapshotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSnapshotsResponse#snap_shot_time_filter #snap_shot_time_filter} => Types::TimeRange
+    #   * {Types::GetSnapshotsResponse#snapshots_data_header #snapshots_data_header} => Array&lt;String&gt;
+    #   * {Types::GetSnapshotsResponse#snapshots_data #snapshots_data} => Array&lt;Array&lt;String&gt;&gt;
+    #   * {Types::GetSnapshotsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_snapshots({
+    #     index_id: "IndexId", # required
+    #     interval: "THIS_MONTH", # required, accepts THIS_MONTH, THIS_WEEK, ONE_WEEK_AGO, TWO_WEEKS_AGO, ONE_MONTH_AGO, TWO_MONTHS_AGO
+    #     metric_type: "QUERIES_BY_COUNT", # required, accepts QUERIES_BY_COUNT, QUERIES_BY_ZERO_CLICK_RATE, QUERIES_BY_ZERO_RESULT_RATE, DOCS_BY_CLICK_COUNT, AGG_QUERY_DOC_METRICS, TREND_QUERY_DOC_METRICS
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snap_shot_time_filter.start_time #=> Time
+    #   resp.snap_shot_time_filter.end_time #=> Time
+    #   resp.snapshots_data_header #=> Array
+    #   resp.snapshots_data_header[0] #=> String
+    #   resp.snapshots_data #=> Array
+    #   resp.snapshots_data[0] #=> Array
+    #   resp.snapshots_data[0][0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GetSnapshots AWS API Documentation
+    #
+    # @overload get_snapshots(params = {})
+    # @param [Hash] params ({})
+    def get_snapshots(params = {}, options = {})
+      req = build_request(:get_snapshots, params)
       req.send_request(options)
     end
 
@@ -2482,6 +3164,173 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Lists specific permissions of users and groups with access to your
+    # Amazon Kendra experience.
+    #
+    # @option params [required, String] :id
+    #   The identifier of your Amazon Kendra experience.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more data to
+    #   retrieve), Amazon Kendra returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of users or
+    #   groups.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of returned users or groups.
+    #
+    # @return [Types::ListEntityPersonasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEntityPersonasResponse#summary_items #summary_items} => Array&lt;Types::PersonasSummary&gt;
+    #   * {Types::ListEntityPersonasResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_entity_personas({
+    #     id: "ExperienceId", # required
+    #     index_id: "IndexId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.summary_items #=> Array
+    #   resp.summary_items[0].entity_id #=> String
+    #   resp.summary_items[0].persona #=> String, one of "OWNER", "VIEWER"
+    #   resp.summary_items[0].created_at #=> Time
+    #   resp.summary_items[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListEntityPersonas AWS API Documentation
+    #
+    # @overload list_entity_personas(params = {})
+    # @param [Hash] params ({})
+    def list_entity_personas(params = {}, options = {})
+      req = build_request(:list_entity_personas, params)
+      req.send_request(options)
+    end
+
+    # Lists users or groups in your Amazon Web Services SSO identity source
+    # that are granted access to your Amazon Kendra experience. You can
+    # create an Amazon Kendra experience such as a search application. For
+    # more information on creating a search application experience, see
+    # [Building a search experience with no code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @option params [required, String] :id
+    #   The identifier of your Amazon Kendra experience.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more data to
+    #   retrieve), Amazon Kendra returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of users or
+    #   groups.
+    #
+    # @return [Types::ListExperienceEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExperienceEntitiesResponse#summary_items #summary_items} => Array&lt;Types::ExperienceEntitiesSummary&gt;
+    #   * {Types::ListExperienceEntitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_experience_entities({
+    #     id: "ExperienceId", # required
+    #     index_id: "IndexId", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.summary_items #=> Array
+    #   resp.summary_items[0].entity_id #=> String
+    #   resp.summary_items[0].entity_type #=> String, one of "USER", "GROUP"
+    #   resp.summary_items[0].display_data.user_name #=> String
+    #   resp.summary_items[0].display_data.group_name #=> String
+    #   resp.summary_items[0].display_data.identified_user_name #=> String
+    #   resp.summary_items[0].display_data.first_name #=> String
+    #   resp.summary_items[0].display_data.last_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListExperienceEntities AWS API Documentation
+    #
+    # @overload list_experience_entities(params = {})
+    # @param [Hash] params ({})
+    def list_experience_entities(params = {}, options = {})
+      req = build_request(:list_experience_entities, params)
+      req.send_request(options)
+    end
+
+    # Lists one or more Amazon Kendra experiences. You can create an Amazon
+    # Kendra experience such as a search application. For more information
+    # on creating a search application experience, see [Building a search
+    # experience with no code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more data to
+    #   retrieve), Amazon Kendra returns a pagination token in the response.
+    #   You can use this pagination token to retrieve the next set of Amazon
+    #   Kendra experiences.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of returned Amazon Kendra experiences.
+    #
+    # @return [Types::ListExperiencesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExperiencesResponse#summary_items #summary_items} => Array&lt;Types::ExperiencesSummary&gt;
+    #   * {Types::ListExperiencesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_experiences({
+    #     index_id: "IndexId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.summary_items #=> Array
+    #   resp.summary_items[0].name #=> String
+    #   resp.summary_items[0].id #=> String
+    #   resp.summary_items[0].created_at #=> Time
+    #   resp.summary_items[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED"
+    #   resp.summary_items[0].endpoints #=> Array
+    #   resp.summary_items[0].endpoints[0].endpoint_type #=> String, one of "HOME"
+    #   resp.summary_items[0].endpoints[0].endpoint #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListExperiences AWS API Documentation
+    #
+    # @overload list_experiences(params = {})
+    # @param [Hash] params ({})
+    def list_experiences(params = {}, options = {})
+      req = build_request(:list_experiences, params)
+      req.send_request(options)
+    end
+
     # Gets a list of FAQ lists associated with an index.
     #
     # @option params [required, String] :index_id
@@ -2533,6 +3382,9 @@ module Aws::Kendra
 
     # Provides a list of groups that are mapped to users before a given
     # ordering or timestamp identifier.
+    #
+    # `ListGroupsOlderThanOrderingId` is currently not supported in the
+    # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index for getting a list of groups mapped to
@@ -2637,6 +3489,9 @@ module Aws::Kendra
     #
     # For information on the current quota limits for block lists, see
     # [Quotas for Amazon Kendra][1].
+    #
+    # `ListQuerySuggestionsBlockLists` is currently not supported in the
+    # Amazon Web Services GovCloud (US-West) region.
     #
     #
     #
@@ -2791,6 +3646,9 @@ module Aws::Kendra
     #
     # If more than five `PUT` actions for a group are currently processing,
     # a validation exception is thrown.
+    #
+    # `PutPrincipalMapping` is currently not supported in the Amazon Web
+    # Services GovCloud (US-West) region.
     #
     #
     #
@@ -3247,6 +4105,9 @@ module Aws::Kendra
     # Enables you to provide feedback to Amazon Kendra to improve the
     # performance of your index.
     #
+    # `SubmitFeedback` is currently not supported in the Amazon Web Services
+    # GovCloud (US-West) region.
+    #
     # @option params [required, String] :index_id
     #   The identifier of the index that was queried.
     #
@@ -3370,7 +4231,7 @@ module Aws::Kendra
     #   The identifier of the index that contains the data source to update.
     #
     # @option params [Types::DataSourceConfiguration] :configuration
-    #   Configuration information for a Amazon Kendra data source.
+    #   Configuration information for an Amazon Kendra data source.
     #
     # @option params [String] :description
     #   The new description for the data source.
@@ -3391,6 +4252,19 @@ module Aws::Kendra
     #
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
+    #
+    # @option params [Types::CustomDocumentEnrichmentConfiguration] :custom_document_enrichment_configuration
+    #   Configuration information for altering document metadata and content
+    #   during the document ingestion process when you update a data source.
+    #
+    #   For more information on how to create, modify and delete document
+    #   metadata, or make other content alterations when you ingest documents
+    #   into Amazon Kendra, see [Customizing document metadata during the
+    #   ingestion process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3716,6 +4590,62 @@ module Aws::Kendra
     #     schedule: "ScanSchedule",
     #     role_arn: "RoleArn",
     #     language_code: "LanguageCode",
+    #     custom_document_enrichment_configuration: {
+    #       inline_configurations: [
+    #         {
+    #           condition: {
+    #             condition_document_attribute_key: "DocumentAttributeKey", # required
+    #             operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #             condition_on_value: {
+    #               string_value: "DocumentAttributeStringValue",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
+    #             },
+    #           },
+    #           target: {
+    #             target_document_attribute_key: "DocumentAttributeKey",
+    #             target_document_attribute_value_deletion: false,
+    #             target_document_attribute_value: {
+    #               string_value: "DocumentAttributeStringValue",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
+    #             },
+    #           },
+    #           document_content_deletion: false,
+    #         },
+    #       ],
+    #       pre_extraction_hook_configuration: {
+    #         invocation_condition: {
+    #           condition_document_attribute_key: "DocumentAttributeKey", # required
+    #           operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #           condition_on_value: {
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         lambda_arn: "LambdaArn", # required
+    #         s3_bucket: "S3BucketName", # required
+    #       },
+    #       post_extraction_hook_configuration: {
+    #         invocation_condition: {
+    #           condition_document_attribute_key: "DocumentAttributeKey", # required
+    #           operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #           condition_on_value: {
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         lambda_arn: "LambdaArn", # required
+    #         s3_bucket: "S3BucketName", # required
+    #       },
+    #       role_arn: "RoleArn",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateDataSource AWS API Documentation
@@ -3724,6 +4654,74 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def update_data_source(params = {}, options = {})
       req = build_request(:update_data_source, params)
+      req.send_request(options)
+    end
+
+    # Updates your Amazon Kendra experience such as a search application.
+    # For more information on creating a search application experience, see
+    # [Building a search experience with no code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @option params [required, String] :id
+    #   The identifier of your Amazon Kendra experience you want to update.
+    #
+    # @option params [String] :name
+    #   The name of your Amazon Kendra experience you want to update.
+    #
+    # @option params [required, String] :index_id
+    #   The identifier of the index for your Amazon Kendra experience you want
+    #   to update.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of a role with permission to access
+    #   `Query` operations, `QuerySuggestions` operations, `SubmitFeedback`
+    #   operations, and Amazon Web Services SSO that stores your user and
+    #   group information. For more information, see [IAM roles for Amazon
+    #   Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
+    #
+    # @option params [Types::ExperienceConfiguration] :configuration
+    #   Provides the user configuration information. This includes the Amazon
+    #   Web Services SSO field name that contains the identifiers of your
+    #   users, such as their emails.
+    #
+    # @option params [String] :description
+    #   The description of your Amazon Kendra experience you want to update.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_experience({
+    #     id: "ExperienceId", # required
+    #     name: "ExperienceName",
+    #     index_id: "IndexId", # required
+    #     role_arn: "RoleArn",
+    #     configuration: {
+    #       content_source_configuration: {
+    #         data_source_ids: ["DataSourceId"],
+    #         faq_ids: ["FaqId"],
+    #         direct_put_content: false,
+    #       },
+    #       user_identity_configuration: {
+    #         identity_attribute_name: "IdentityAttributeName",
+    #       },
+    #     },
+    #     description: "Description",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateExperience AWS API Documentation
+    #
+    # @overload update_experience(params = {})
+    # @param [Hash] params ({})
+    def update_experience(params = {}, options = {})
+      req = build_request(:update_experience, params)
       req.send_request(options)
     end
 
@@ -3760,8 +4758,8 @@ module Aws::Kendra
     #   The user context policy.
     #
     # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
-    #   Enables fetching access levels of groups and users from an AWS Single
-    #   Sign-On identity source. To configure this, see
+    #   Enables fetching access levels of groups and users from an Amazon Web
+    #   Services Single Sign On identity source. To configure this, see
     #   [UserGroupResolutionConfiguration][1].
     #
     #
@@ -3847,6 +4845,9 @@ module Aws::Kendra
     # Amazon Kendra supports partial updates, so you only need to provide
     # the fields you want to update.
     #
+    # `UpdateQuerySuggestionsBlockList` is currently not supported in the
+    # Amazon Web Services GovCloud (US-West) region.
+    #
     # @option params [required, String] :index_id
     #   The identifier of the index for a block list.
     #
@@ -3914,6 +4915,9 @@ module Aws::Kendra
     # updates made and the number of search queries in your index.
     #
     # You can still enable/disable query suggestions at any time.
+    #
+    # `UpdateQuerySuggestionsConfig` is currently not supported in the
+    # Amazon Web Services GovCloud (US-West) region.
     #
     # @option params [required, String] :index_id
     #   The identifier of the index you want to update query suggestions
@@ -4053,7 +5057,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

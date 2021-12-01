@@ -27,8 +27,10 @@ module Aws::SageMakerRuntime
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {InternalDependencyException}
   # * {InternalFailure}
   # * {ModelError}
+  # * {ModelNotReadyException}
   # * {ServiceUnavailable}
   # * {ValidationError}
   #
@@ -37,6 +39,21 @@ module Aws::SageMakerRuntime
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class InternalDependencyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SageMakerRuntime::Types::InternalDependencyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class InternalFailure < ServiceError
 
@@ -80,6 +97,21 @@ module Aws::SageMakerRuntime
       # @return [String]
       def log_stream_arn
         @data[:log_stream_arn]
+      end
+    end
+
+    class ModelNotReadyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SageMakerRuntime::Types::ModelNotReadyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

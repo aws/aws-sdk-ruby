@@ -685,6 +685,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -749,6 +750,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.site_link_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterface AWS API Documentation
     #
@@ -814,6 +816,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -882,6 +885,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.site_link_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterface AWS API Documentation
     #
@@ -982,6 +986,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.tags #=> Array
     #   resp.virtual_interface.tags[0].key #=> String
     #   resp.virtual_interface.tags[0].value #=> String
+    #   resp.virtual_interface.site_link_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateTransitVirtualInterface AWS API Documentation
     #
@@ -1315,6 +1320,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1363,6 +1369,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.site_link_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterface AWS API Documentation
     #
@@ -1627,6 +1634,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.tags #=> Array
     #   resp.virtual_interface.tags[0].key #=> String
     #   resp.virtual_interface.tags[0].value #=> String
+    #   resp.virtual_interface.site_link_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeer AWS API Documentation
     #
@@ -2291,6 +2299,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2313,6 +2322,7 @@ module Aws::DirectConnect
     #           value: "TagValue",
     #         },
     #       ],
+    #       enable_site_link: false,
     #     },
     #   })
     #
@@ -2356,6 +2366,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.site_link_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterface AWS API Documentation
     #
@@ -2408,6 +2419,7 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2475,6 +2487,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.site_link_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterface AWS API Documentation
     #
@@ -2536,6 +2549,7 @@ module Aws::DirectConnect
     #           value: "TagValue",
     #         },
     #       ],
+    #       enable_site_link: false,
     #     },
     #   })
     #
@@ -2579,6 +2593,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.tags #=> Array
     #   resp.virtual_interface.tags[0].key #=> String
     #   resp.virtual_interface.tags[0].value #=> String
+    #   resp.virtual_interface.site_link_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateTransitVirtualInterface AWS API Documentation
     #
@@ -2660,6 +2675,7 @@ module Aws::DirectConnect
     #   resp.virtual_interface.tags #=> Array
     #   resp.virtual_interface.tags[0].key #=> String
     #   resp.virtual_interface.tags[0].value #=> String
+    #   resp.virtual_interface.site_link_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeer AWS API Documentation
     #
@@ -4010,6 +4026,7 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].tags #=> Array
     #   resp.virtual_interfaces[0].tags[0].key #=> String
     #   resp.virtual_interfaces[0].tags[0].value #=> String
+    #   resp.virtual_interfaces[0].site_link_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfaces AWS API Documentation
     #
@@ -4738,6 +4755,12 @@ module Aws::DirectConnect
     #   The maximum transmission unit (MTU), in bytes. The supported values
     #   are 1500 and 9001. The default value is 1500.
     #
+    # @option params [Boolean] :enable_site_link
+    #   Indicates whether to enable or disable SiteLink.
+    #
+    # @option params [String] :virtual_interface_name
+    #   The name of the virtual private interface.
+    #
     # @return [Types::VirtualInterface] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::VirtualInterface#owner_account #owner_account} => String
@@ -4765,12 +4788,15 @@ module Aws::DirectConnect
     #   * {Types::VirtualInterface#aws_device_v2 #aws_device_v2} => String
     #   * {Types::VirtualInterface#aws_logical_device_id #aws_logical_device_id} => String
     #   * {Types::VirtualInterface#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::VirtualInterface#site_link_enabled #site_link_enabled} => Boolean
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_virtual_interface_attributes({
     #     virtual_interface_id: "VirtualInterfaceId", # required
     #     mtu: 1,
+    #     enable_site_link: false,
+    #     virtual_interface_name: "VirtualInterfaceName",
     #   })
     #
     # @example Response structure
@@ -4813,6 +4839,7 @@ module Aws::DirectConnect
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.site_link_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateVirtualInterfaceAttributes AWS API Documentation
     #
@@ -4836,7 +4863,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

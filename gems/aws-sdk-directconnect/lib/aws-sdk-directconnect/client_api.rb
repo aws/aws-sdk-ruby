@@ -145,6 +145,7 @@ module Aws::DirectConnect
     DisassociateMacSecKeyRequest = Shapes::StructureShape.new(name: 'DisassociateMacSecKeyRequest')
     DisassociateMacSecKeyResponse = Shapes::StructureShape.new(name: 'DisassociateMacSecKeyResponse')
     DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException')
+    EnableSiteLink = Shapes::BooleanShape.new(name: 'EnableSiteLink')
     EncryptionMode = Shapes::StringShape.new(name: 'EncryptionMode')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -211,6 +212,7 @@ module Aws::DirectConnect
     RouterType = Shapes::StructureShape.new(name: 'RouterType')
     RouterTypeIdentifier = Shapes::StringShape.new(name: 'RouterTypeIdentifier')
     SecretARN = Shapes::StringShape.new(name: 'SecretARN')
+    SiteLinkEnabled = Shapes::BooleanShape.new(name: 'SiteLinkEnabled')
     Software = Shapes::StringShape.new(name: 'Software')
     StartBgpFailoverTestRequest = Shapes::StructureShape.new(name: 'StartBgpFailoverTestRequest')
     StartBgpFailoverTestResponse = Shapes::StructureShape.new(name: 'StartBgpFailoverTestResponse')
@@ -815,6 +817,7 @@ module Aws::DirectConnect
     NewPrivateVirtualInterface.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
     NewPrivateVirtualInterface.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
     NewPrivateVirtualInterface.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    NewPrivateVirtualInterface.add_member(:enable_site_link, Shapes::ShapeRef.new(shape: EnableSiteLink, location_name: "enableSiteLink"))
     NewPrivateVirtualInterface.struct_class = Types::NewPrivateVirtualInterface
 
     NewPrivateVirtualInterfaceAllocation.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
@@ -860,6 +863,7 @@ module Aws::DirectConnect
     NewTransitVirtualInterface.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
     NewTransitVirtualInterface.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, location_name: "directConnectGatewayId"))
     NewTransitVirtualInterface.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    NewTransitVirtualInterface.add_member(:enable_site_link, Shapes::ShapeRef.new(shape: EnableSiteLink, location_name: "enableSiteLink"))
     NewTransitVirtualInterface.struct_class = Types::NewTransitVirtualInterface
 
     NewTransitVirtualInterfaceAllocation.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: "virtualInterfaceName"))
@@ -960,6 +964,8 @@ module Aws::DirectConnect
 
     UpdateVirtualInterfaceAttributesRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
     UpdateVirtualInterfaceAttributesRequest.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
+    UpdateVirtualInterfaceAttributesRequest.add_member(:enable_site_link, Shapes::ShapeRef.new(shape: EnableSiteLink, location_name: "enableSiteLink"))
+    UpdateVirtualInterfaceAttributesRequest.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, location_name: "virtualInterfaceName"))
     UpdateVirtualInterfaceAttributesRequest.struct_class = Types::UpdateVirtualInterfaceAttributesRequest
 
     VirtualGateway.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
@@ -996,6 +1002,7 @@ module Aws::DirectConnect
     VirtualInterface.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     VirtualInterface.add_member(:aws_logical_device_id, Shapes::ShapeRef.new(shape: AwsLogicalDeviceId, location_name: "awsLogicalDeviceId"))
     VirtualInterface.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    VirtualInterface.add_member(:site_link_enabled, Shapes::ShapeRef.new(shape: SiteLinkEnabled, location_name: "siteLinkEnabled"))
     VirtualInterface.struct_class = Types::VirtualInterface
 
     VirtualInterfaceList.member = Shapes::ShapeRef.new(shape: VirtualInterface)

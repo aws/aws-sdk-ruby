@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.286.0 (2021-12-01)
+------------------
+
+* Feature - This release adds support for Amazon VPC IP Address Manager (IPAM), which enables you to plan, track, and monitor IP addresses for your workloads. This release also adds support for VPC Network Access Analyzer, which enables you to analyze network access to resources in your Virtual Private Clouds.
+
 1.285.0 (2021-11-30)
 ------------------
 

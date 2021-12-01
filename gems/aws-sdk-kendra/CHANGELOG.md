@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2021-12-01)
+------------------
+
+* Feature - Experience Builder allows customers to build search applications without writing code. Analytics Dashboard provides quality and usability metrics for Kendra indexes. Custom Document Enrichment allows customers to build a custom ingestion pipeline to pre-process documents and generate metadata.
+
 1.39.0 (2021-11-30)
 ------------------
 

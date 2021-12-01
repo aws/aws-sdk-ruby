@@ -135,20 +135,49 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # The Amazon Web Services resources in which DevOps Guru detected
+    # unusual behavior that resulted in the generation of an anomaly. When
+    # DevOps Guru detects multiple related anomalies, it creates and insight
+    # with details about the anomalous behavior and suggestions about how to
+    # correct the problem.
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon Web Services resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the Amazon Web Services resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AnomalyResource AWS API Documentation
+    #
+    class AnomalyResource < Struct.new(
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the source of the anomalous operational data that
-    # triggered the anomaly. The one supported source is Amazon CloudWatch
-    # metrics.
+    # triggered the anomaly.
     #
     # @!attribute [rw] cloud_watch_metrics
-    #   An array of `CloudWatchMetricsDetail` object that contains
-    #   information about the analyzed metrics that displayed anomalous
+    #   An array of `CloudWatchMetricsDetail` objects that contain
+    #   information about analyzed CloudWatch metrics that show anomalous
     #   behavior.
     #   @return [Array<Types::CloudWatchMetricsDetail>]
+    #
+    # @!attribute [rw] performance_insights_metrics
+    #   An array of `PerformanceInsightsMetricsDetail` objects that contain
+    #   information about analyzed Performance Insights metrics that show
+    #   anomalous behavior.
+    #   @return [Array<Types::PerformanceInsightsMetricsDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AnomalySourceDetails AWS API Documentation
     #
     class AnomalySourceDetails < Struct.new(
-      :cloud_watch_metrics)
+      :cloud_watch_metrics,
+      :performance_insights_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -284,12 +313,13 @@ module Aws::DevOpsGuru
     # anomalous behavior.
     #
     # @!attribute [rw] timestamp_metric_value_pair_list
-    #   This is a list of cloudwatch metric values at given timestamp.
+    #   This is a list of Amazon CloudWatch metric values at given
+    #   timestamp.
     #   @return [Array<Types::TimestampMetricValuePair>]
     #
     # @!attribute [rw] status_code
-    #   This is enum of the status showing whether the metric value pair
-    #   list has Partial or Complete data or there was an error.
+    #   This is an enum of the status showing whether the metric value pair
+    #   list has partial or complete data, or if there was an error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CloudWatchMetricsDataSummary AWS API Documentation
@@ -354,7 +384,7 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # The dimension of a Amazon CloudWatch metric that is used when DevOps
+    # The dimension of am Amazon CloudWatch metric that is used when DevOps
     # Guru analyzes the resources in your account for operational problems
     # and anomalous behavior. A dimension is a name/value pair that is part
     # of the identity of a metric. A metric can have up to 10 dimensions.
@@ -424,6 +454,12 @@ module Aws::DevOpsGuru
     #         cloud_formation: {
     #           stack_names: ["StackName"],
     #         },
+    #         tags: [
+    #           {
+    #             app_boundary_key: "AppBoundaryKey", # required
+    #             tag_values: ["TagValue"], # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cloud_formation
@@ -432,10 +468,50 @@ module Aws::DevOpsGuru
     #   DevOps Guru.
     #   @return [Types::CloudFormationCostEstimationResourceCollectionFilter]
     #
+    # @!attribute [rw] tags
+    #   The Amazon Web Services tags used to filter the resource collection
+    #   that is used for a cost estimate.
+    #
+    #   Tags help you identify and organize your Amazon Web Services
+    #   resources. Many Amazon Web Services services support tagging, so you
+    #   can assign the same tag to resources from different services to
+    #   indicate that the resources are related. For example, you can assign
+    #   the same tag to an Amazon DynamoDB table resource that you assign to
+    #   an Lambda function. For more information about using tags, see the
+    #   [Tagging best practices][1] whitepaper.
+    #
+    #   Each Amazon Web Services tag has two parts.
+    #
+    #   * A tag *key* (for example, `CostCenter`, `Environment`, `Project`,
+    #     or `Secret`). Tag *keys* are case-sensitive.
+    #
+    #   * An optional field known as a tag *value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     *value* is the same as using an empty string. Like tag *keys*, tag
+    #     *values* are case-sensitive.
+    #
+    #   Together these are known as *key*-*value* pairs.
+    #
+    #   The string used for a *key* in a tag that you use to define your
+    #   resource coverage must begin with the prefix `Devops-guru-`. The tag
+    #   *key* might be `Devops-guru-deployment-application` or
+    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
+    #   case of *key* characters don't matter to DevOps Guru. For example,
+    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
+    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
+    #   application might be `Devops-Guru-production-application/RDS` or
+    #   `Devops-Guru-production-application/containers`.
+    #
+    #
+    #
+    #   [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #   @return [Array<Types::TagCostEstimationResourceCollectionFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/CostEstimationResourceCollectionFilter AWS API Documentation
     #
     class CostEstimationResourceCollectionFilter < Struct.new(
-      :cloud_formation)
+      :cloud_formation,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -579,11 +655,11 @@ module Aws::DevOpsGuru
     end
 
     # @!attribute [rw] proactive_anomaly
-    #   A `ReactiveAnomaly` object that represents the requested anomaly.
+    #   A `ProactiveAnomaly` object that represents the requested anomaly.
     #   @return [Types::ProactiveAnomaly]
     #
     # @!attribute [rw] reactive_anomaly
-    #   A `ProactiveAnomaly` object that represents the requested anomaly.
+    #   A `ReactiveAnomaly` object that represents the requested anomaly.
     #   @return [Types::ReactiveAnomaly]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAnomalyResponse AWS API Documentation
@@ -798,12 +874,14 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] organization_resource_collection_type
     #   An Amazon Web Services resource collection type. This type specifies
-    #   how analyzed Amazon Web Services resources are defined. The one type
-    #   of Amazon Web Services resource collection supported is Amazon Web
-    #   Services CloudFormation stacks. DevOps Guru can be configured to
-    #   analyze only the Amazon Web Services resources that are defined in
-    #   the stacks. You can specify up to 500 Amazon Web Services
-    #   CloudFormation stacks.
+    #   how analyzed Amazon Web Services resources are defined. The two
+    #   types of Amazon Web Services resource collections supported are
+    #   Amazon Web Services CloudFormation stacks and Amazon Web Services
+    #   resources that contain the same Amazon Web Services tag. DevOps Guru
+    #   can be configured to analyze the Amazon Web Services resources that
+    #   are defined in the stacks or that are tagged using the same tag
+    #   *key*. You can specify up to 500 Amazon Web Services CloudFormation
+    #   stacks.
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -873,18 +951,20 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE
+    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE, AWS_TAGS
     #         next_token: "UuidNextToken",
     #       }
     #
     # @!attribute [rw] resource_collection_type
     #   An Amazon Web Services resource collection type. This type specifies
-    #   how analyzed Amazon Web Services resources are defined. The one type
-    #   of Amazon Web Services resource collection supported is Amazon Web
-    #   Services CloudFormation stacks. DevOps Guru can be configured to
-    #   analyze only the Amazon Web Services resources that are defined in
-    #   the stacks. You can specify up to 500 Amazon Web Services
-    #   CloudFormation stacks.
+    #   how analyzed Amazon Web Services resources are defined. The two
+    #   types of Amazon Web Services resource collections supported are
+    #   Amazon Web Services CloudFormation stacks and Amazon Web Services
+    #   resources that contain the same Amazon Web Services tag. DevOps Guru
+    #   can be configured to analyze the Amazon Web Services resources that
+    #   are defined in the stacks or that are tagged using the same tag
+    #   *key*. You can specify up to 500 Amazon Web Services CloudFormation
+    #   stacks.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -918,12 +998,52 @@ module Aws::DevOpsGuru
     #   this operation. If there are no more pages, this value is null.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The Amazon Web Services tags that are used by resources in the
+    #   resource collection.
+    #
+    #   Tags help you identify and organize your Amazon Web Services
+    #   resources. Many Amazon Web Services services support tagging, so you
+    #   can assign the same tag to resources from different services to
+    #   indicate that the resources are related. For example, you can assign
+    #   the same tag to an Amazon DynamoDB table resource that you assign to
+    #   an Lambda function. For more information about using tags, see the
+    #   [Tagging best practices][1] whitepaper.
+    #
+    #   Each Amazon Web Services tag has two parts.
+    #
+    #   * A tag *key* (for example, `CostCenter`, `Environment`, `Project`,
+    #     or `Secret`). Tag *keys* are case-sensitive.
+    #
+    #   * An optional field known as a tag *value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     *value* is the same as using an empty string. Like tag *keys*, tag
+    #     *values* are case-sensitive.
+    #
+    #   Together these are known as *key*-*value* pairs.
+    #
+    #   The string used for a *key* in a tag that you use to define your
+    #   resource coverage must begin with the prefix `Devops-guru-`. The tag
+    #   *key* might be `Devops-guru-deployment-application` or
+    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
+    #   case of *key* characters don't matter to DevOps Guru. For example,
+    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
+    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
+    #   application might be `Devops-Guru-production-application/RDS` or
+    #   `Devops-Guru-production-application/containers`.
+    #
+    #
+    #
+    #   [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #   @return [Array<Types::TagHealth>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeResourceCollectionHealthResponse AWS API Documentation
     #
     class DescribeResourceCollectionHealthResponse < Struct.new(
       :cloud_formation,
       :service,
-      :next_token)
+      :next_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -982,10 +1102,12 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
@@ -1163,7 +1285,7 @@ module Aws::DevOpsGuru
     #   data as a hash:
     #
     #       {
-    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE
+    #         resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE, AWS_TAGS
     #         next_token: "UuidNextToken",
     #       }
     #
@@ -1189,11 +1311,13 @@ module Aws::DevOpsGuru
 
     # @!attribute [rw] resource_collection
     #   The requested list of Amazon Web Services resource collections. The
-    #   one type of Amazon Web Services resource collection supported is
-    #   Amazon Web Services CloudFormation stacks. DevOps Guru can be
-    #   configured to analyze only the Amazon Web Services resources that
-    #   are defined in the stacks. You can specify up to 500 Amazon Web
-    #   Services CloudFormation stacks.
+    #   two types of Amazon Web Services resource collections supported are
+    #   Amazon Web Services CloudFormation stacks and Amazon Web Services
+    #   resources that contain the same Amazon Web Services tag. DevOps Guru
+    #   can be configured to analyze the Amazon Web Services resources that
+    #   are defined in the stacks or that are tagged using the same tag
+    #   *key*. You can specify up to 500 Amazon Web Services CloudFormation
+    #   stacks.
     #   @return [Types::ResourceCollectionFilter]
     #
     # @!attribute [rw] next_token
@@ -1396,6 +1520,12 @@ module Aws::DevOpsGuru
     #           cloud_formation: {
     #             stack_names: ["StackName"],
     #           },
+    #           tags: [
+    #             {
+    #               app_boundary_key: "AppBoundaryKey", # required
+    #               tag_values: ["TagValue"], # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -1426,10 +1556,12 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
@@ -1463,6 +1595,12 @@ module Aws::DevOpsGuru
     #             cloud_formation: {
     #               stack_names: ["StackName"],
     #             },
+    #             tags: [
+    #               {
+    #                 app_boundary_key: "AppBoundaryKey", # required
+    #                 tag_values: ["TagValue"], # required
+    #               },
+    #             ],
     #           },
     #         },
     #         max_results: 1,
@@ -2035,6 +2173,378 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # A logical grouping of Performance Insights metrics for a related
+    # subject area. For example, the `db.sql` dimension group consists of
+    # the following dimensions: `db.sql.id`, `db.sql.db_id`,
+    # `db.sql.statement`, and `db.sql.tokenized_id`.
+    #
+    # <note markdown="1"> Each response element returns a maximum of 500 bytes. For larger
+    # elements, such as SQL statements, only the first 500 bytes are
+    # returned.
+    #
+    #  </note>
+    #
+    # Amazon RDS Performance Insights enables you to monitor and explore
+    # different dimensions of database load based on data captured from a
+    # running DB instance. DB load is measured as average active sessions.
+    # Performance Insights provides the data to API consumers as a
+    # two-dimensional time-series dataset. The time dimension provides DB
+    # load data for each time point in the queried time range. Each time
+    # point decomposes overall load in relation to the requested dimensions,
+    # measured at that time point. Examples include SQL, Wait event, User,
+    # and Host.
+    #
+    # * To learn more about Performance Insights and Amazon Aurora DB
+    #   instances, go to the [ Amazon Aurora User Guide][1].
+    #
+    # * To learn more about Performance Insights and Amazon RDS DB
+    #   instances, go to the [ Amazon RDS User Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
+    #
+    # @!attribute [rw] group
+    #   The name of the dimension group. Its valid values are:
+    #
+    #   * `db` - The name of the database to which the client is connected
+    #     (only Aurora PostgreSQL, Amazon RDS PostgreSQL, Aurora MySQL,
+    #     Amazon RDS MySQL, and MariaDB)
+    #
+    #   * `db.application` - The name of the application that is connected
+    #     to the database (only Aurora PostgreSQL and RDS PostgreSQL)
+    #
+    #   * `db.host` - The host name of the connected client (all engines)
+    #
+    #   * `db.session_type` - The type of the current session (only Aurora
+    #     PostgreSQL and RDS PostgreSQL)
+    #
+    #   * `db.sql` - The SQL that is currently executing (all engines)
+    #
+    #   * `db.sql_tokenized` - The SQL digest (all engines)
+    #
+    #   * `db.wait_event` - The event for which the database backend is
+    #     waiting (all engines)
+    #
+    #   * `db.wait_event_type` - The type of event for which the database
+    #     backend is waiting (all engines)
+    #
+    #   * `db.user` - The user logged in to the database (all engines)
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   A list of specific dimensions from a dimension group. If this
+    #   parameter is not present, then it signifies that all of the
+    #   dimensions in the group were requested or are present in the
+    #   response.
+    #
+    #   Valid values for elements in the `Dimensions` array are:
+    #
+    #   * `db.application.name` - The name of the application that is
+    #     connected to the database (only Aurora PostgreSQL and RDS
+    #     PostgreSQL)
+    #
+    #   * `db.host.id` - The host ID of the connected client (all engines)
+    #
+    #   * `db.host.name` - The host name of the connected client (all
+    #     engines)
+    #
+    #   * `db.name` - The name of the database to which the client is
+    #     connected (only Aurora PostgreSQL, Amazon RDS PostgreSQL, Aurora
+    #     MySQL, Amazon RDS MySQL, and MariaDB)
+    #
+    #   * `db.session_type.name` - The type of the current session (only
+    #     Aurora PostgreSQL and RDS PostgreSQL)
+    #
+    #   * `db.sql.id` - The SQL ID generated by Performance Insights (all
+    #     engines)
+    #
+    #   * `db.sql.db_id` - The SQL ID generated by the database (all
+    #     engines)
+    #
+    #   * `db.sql.statement` - The SQL text that is being executed (all
+    #     engines)
+    #
+    #   * `db.sql.tokenized_id`
+    #
+    #   * `db.sql_tokenized.id` - The SQL digest ID generated by Performance
+    #     Insights (all engines)
+    #
+    #   * `db.sql_tokenized.db_id` - SQL digest ID generated by the database
+    #     (all engines)
+    #
+    #   * `db.sql_tokenized.statement` - The SQL digest text (all engines)
+    #
+    #   * `db.user.id` - The ID of the user logged in to the database (all
+    #     engines)
+    #
+    #   * `db.user.name` - The name of the user logged in to the database
+    #     (all engines)
+    #
+    #   * `db.wait_event.name` - The event for which the backend is waiting
+    #     (all engines)
+    #
+    #   * `db.wait_event.type` - The type of event for which the backend is
+    #     waiting (all engines)
+    #
+    #   * `db.wait_event_type.name` - The name of the event type for which
+    #     the backend is waiting (all engines)
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to fetch for this dimension group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/PerformanceInsightsMetricDimensionGroup AWS API Documentation
+    #
+    class PerformanceInsightsMetricDimensionGroup < Struct.new(
+      :group,
+      :dimensions,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single query to be processed. Use these parameters to query the
+    # Performance Insights `GetResourceMetrics` API to retrieve the metrics
+    # for an anomaly. For more information, see ` GetResourceMetrics ` in
+    # the *Amazon RDS Performance Insights API Reference*.
+    #
+    # Amazon RDS Performance Insights enables you to monitor and explore
+    # different dimensions of database load based on data captured from a
+    # running DB instance. DB load is measured as average active sessions.
+    # Performance Insights provides the data to API consumers as a
+    # two-dimensional time-series dataset. The time dimension provides DB
+    # load data for each time point in the queried time range. Each time
+    # point decomposes overall load in relation to the requested dimensions,
+    # measured at that time point. Examples include SQL, Wait event, User,
+    # and Host.
+    #
+    # * To learn more about Performance Insights and Amazon Aurora DB
+    #   instances, go to the [ Amazon Aurora User Guide][1].
+    #
+    # * To learn more about Performance Insights and Amazon RDS DB
+    #   instances, go to the [ Amazon RDS User Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
+    #
+    # @!attribute [rw] metric
+    #   The name of the meteric used used when querying an Performance
+    #   Insights `GetResourceMetrics` API for anomaly metrics.
+    #
+    #   Valid values for `Metric` are:
+    #
+    #   * `db.load.avg` - a scaled representation of the number of active
+    #     sessions for the database engine.
+    #
+    #   * `db.sampledload.avg` - the raw number of active sessions for the
+    #     database engine.
+    #
+    #   If the number of active sessions is less than an internal
+    #   Performance Insights threshold, `db.load.avg` and
+    #   `db.sampledload.avg` are the same value. If the number of active
+    #   sessions is greater than the internal threshold, Performance
+    #   Insights samples the active sessions, with `db.load.avg` showing the
+    #   scaled values, `db.sampledload.avg` showing the raw values, and
+    #   `db.sampledload.avg` less than `db.load.avg`. For most use cases,
+    #   you can query `db.load.avg` only.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_by
+    #   The specification for how to aggregate the data points from a
+    #   Performance Insights `GetResourceMetrics` API query. The Performance
+    #   Insights query returns all of the dimensions within that group,
+    #   unless you provide the names of specific dimensions within that
+    #   group. You can also request that Performance Insights return a
+    #   limited number of values for a dimension.
+    #   @return [Types::PerformanceInsightsMetricDimensionGroup]
+    #
+    # @!attribute [rw] filter
+    #   One or more filters to apply to a Performance Insights
+    #   `GetResourceMetrics` API query. Restrictions:
+    #
+    #   * Any number of filters by the same dimension, as specified in the
+    #     `GroupBy` parameter.
+    #
+    #   * A single filter for any other dimension in this dimension group.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/PerformanceInsightsMetricQuery AWS API Documentation
+    #
+    class PerformanceInsightsMetricQuery < Struct.new(
+      :metric,
+      :group_by,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about Performance Insights metrics.
+    #
+    # Amazon RDS Performance Insights enables you to monitor and explore
+    # different dimensions of database load based on data captured from a
+    # running DB instance. DB load is measured as average active sessions.
+    # Performance Insights provides the data to API consumers as a
+    # two-dimensional time-series dataset. The time dimension provides DB
+    # load data for each time point in the queried time range. Each time
+    # point decomposes overall load in relation to the requested dimensions,
+    # measured at that time point. Examples include SQL, Wait event, User,
+    # and Host.
+    #
+    # * To learn more about Performance Insights and Amazon Aurora DB
+    #   instances, go to the [ Amazon Aurora User Guide][1].
+    #
+    # * To learn more about Performance Insights and Amazon RDS DB
+    #   instances, go to the [ Amazon RDS User Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
+    #
+    # @!attribute [rw] metric_display_name
+    #   The name used for a specific Performance Insights metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit of measure for a metric. For example, a session or a
+    #   process.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_query
+    #   A single query to be processed for the metric. For more information,
+    #   see ` PerformanceInsightsMetricQuery `.
+    #   @return [Types::PerformanceInsightsMetricQuery]
+    #
+    # @!attribute [rw] reference_data
+    #   For more information, see ` PerformanceInsightsReferenceData `.
+    #   @return [Array<Types::PerformanceInsightsReferenceData>]
+    #
+    # @!attribute [rw] stats_at_anomaly
+    #   The metric statistics during the anomalous period detected by DevOps
+    #   Guru;
+    #   @return [Array<Types::PerformanceInsightsStat>]
+    #
+    # @!attribute [rw] stats_at_baseline
+    #   Typical metric statistics that are not considered anomalous. When
+    #   DevOps Guru analyzes metrics, it compares them to `StatsAtBaseline`
+    #   to help determine if they are anomalous.
+    #   @return [Array<Types::PerformanceInsightsStat>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/PerformanceInsightsMetricsDetail AWS API Documentation
+    #
+    class PerformanceInsightsMetricsDetail < Struct.new(
+      :metric_display_name,
+      :unit,
+      :metric_query,
+      :reference_data,
+      :stats_at_anomaly,
+      :stats_at_baseline)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Reference scalar values and other metrics that DevOps Guru displays on
+    # a graph in its console along with the actual metrics it analyzed.
+    # Compare these reference values to your actual metrics to help you
+    # understand anomalous behavior that DevOps Guru detected.
+    #
+    # @!attribute [rw] reference_scalar
+    #   A scalar value DevOps Guru for a metric that DevOps Guru compares to
+    #   actual metric values. This reference value is used to determine if
+    #   an actual metric value should be considered anomalous.
+    #   @return [Types::PerformanceInsightsReferenceScalar]
+    #
+    # @!attribute [rw] reference_metric
+    #   A metric that DevOps Guru compares to actual metric values. This
+    #   reference metric is used to determine if an actual metric should be
+    #   considered anomalous.
+    #   @return [Types::PerformanceInsightsReferenceMetric]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/PerformanceInsightsReferenceComparisonValues AWS API Documentation
+    #
+    class PerformanceInsightsReferenceComparisonValues < Struct.new(
+      :reference_scalar,
+      :reference_metric)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Reference data used to evaluate Performance Insights to determine if
+    # its performance is anomalous or not.
+    #
+    # @!attribute [rw] name
+    #   The name of the reference data.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_values
+    #   The specific reference values used to evaluate the Performance
+    #   Insights. For more information, see `
+    #   PerformanceInsightsReferenceComparisonValues `.
+    #   @return [Types::PerformanceInsightsReferenceComparisonValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/PerformanceInsightsReferenceData AWS API Documentation
+    #
+    class PerformanceInsightsReferenceData < Struct.new(
+      :name,
+      :comparison_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a reference metric used to evaluate Performance
+    # Insights.
+    #
+    # @!attribute [rw] metric_query
+    #   A query to be processed on the metric.
+    #   @return [Types::PerformanceInsightsMetricQuery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/PerformanceInsightsReferenceMetric AWS API Documentation
+    #
+    class PerformanceInsightsReferenceMetric < Struct.new(
+      :metric_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reference value to compare Performance Insights metrics against to
+    # determine if the metrics demonstrate anomalous behavior.
+    #
+    # @!attribute [rw] value
+    #   The reference value.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/PerformanceInsightsReferenceScalar AWS API Documentation
+    #
+    class PerformanceInsightsReferenceScalar < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A statistic in a Performance Insights collection.
+    #
+    # @!attribute [rw] type
+    #   The statistic type.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the statistic.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/PerformanceInsightsStat AWS API Documentation
+    #
+    class PerformanceInsightsStat < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The time range during which anomalous behavior in a proactive anomaly
     # or an insight is expected to occur.
     #
@@ -2065,7 +2575,14 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   The severity of a proactive anomaly.
+    #   The severity of the anomaly. The severity of anomalies that generate
+    #   an insight determine that insight's severity. For more information,
+    #   see [Understanding insight severities][1] in the *Amazon DevOps Guru
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2084,7 +2601,7 @@ module Aws::DevOpsGuru
     #   @return [Types::AnomalyTimeRange]
     #
     # @!attribute [rw] anomaly_reported_time_range
-    #   A `AnomalyReportedTimeRange` object that specifies the time range
+    #   An `AnomalyReportedTimeRange` object that specifies the time range
     #   between when the anomaly is opened and the time when it is closed.
     #   @return [Types::AnomalyReportedTimeRange]
     #
@@ -2106,10 +2623,12 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
@@ -2145,7 +2664,14 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   The severity of the anomaly.
+    #   The severity of the anomaly. The severity of anomalies that generate
+    #   an insight determine that insight's severity. For more information,
+    #   see [Understanding insight severities][1] in the *Amazon DevOps Guru
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2164,7 +2690,7 @@ module Aws::DevOpsGuru
     #   @return [Types::AnomalyTimeRange]
     #
     # @!attribute [rw] anomaly_reported_time_range
-    #   A `AnomalyReportedTimeRange` object that specifies the time range
+    #   An `AnomalyReportedTimeRange` object that specifies the time range
     #   between when the anomaly is opened and the time when it is closed.
     #   @return [Types::AnomalyReportedTimeRange]
     #
@@ -2186,10 +2712,12 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
@@ -2229,7 +2757,13 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   The severity of the proactive insight.
+    #   The severity of the insight. For more information, see
+    #   [Understanding insight severities][1] in the *Amazon DevOps Guru
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2248,10 +2782,12 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
@@ -2288,7 +2824,13 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   The severity of the proactive insight.
+    #   The severity of the insight. For more information, see
+    #   [Understanding insight severities][1] in the *Amazon DevOps Guru
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2307,16 +2849,23 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] service_collection
     #   A collection of the names of Amazon Web Services services.
     #   @return [Types::ServiceCollection]
+    #
+    # @!attribute [rw] associated_resource_arns
+    #   The Amazon Resource Names (ARNs) of the Amazon Web Services
+    #   resources that generated this insight.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveInsightSummary AWS API Documentation
     #
@@ -2328,7 +2877,8 @@ module Aws::DevOpsGuru
       :insight_time_range,
       :prediction_time_range,
       :resource_collection,
-      :service_collection)
+      :service_collection,
+      :associated_resource_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2353,7 +2903,13 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   An array of severity values used to search for insights.
+    #   An array of severity values used to search for insights. For more
+    #   information, see [Understanding insight severities][1] in the
+    #   *Amazon DevOps Guru User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2372,10 +2928,12 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
@@ -2435,7 +2993,14 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   The severity of the anomaly.
+    #   The severity of the anomaly. The severity of anomalies that generate
+    #   an insight determine that insight's severity. For more information,
+    #   see [Understanding insight severities][1] in the *Amazon DevOps Guru
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2450,7 +3015,7 @@ module Aws::DevOpsGuru
     #   @return [Types::AnomalyTimeRange]
     #
     # @!attribute [rw] anomaly_reported_time_range
-    #   A `AnomalyReportedTimeRange` object that specifies the time range
+    #   An `AnomalyReportedTimeRange` object that specifies the time range
     #   between when the anomaly is opened and the time when it is closed.
     #   @return [Types::AnomalyReportedTimeRange]
     #
@@ -2467,12 +3032,42 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] type
+    #   The type of the reactive anomaly. It can be one of the following
+    #   types.
+    #
+    #   * `CAUSAL` - the anomaly can cause a new insight.
+    #
+    #   * `CONTEXTUAL` - the anomaly contains additional information about
+    #     an insight or its causal anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the reactive anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the reactive anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] causal_anomaly_id
+    #   The ID of the causal anomaly that is associated with this reactive
+    #   anomaly. The ID of a `CAUSAL` anomaly is always `NULL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_resources
+    #   The Amazon Web Services resources in which anomalous behavior was
+    #   detected by DevOps Guru.
+    #   @return [Array<Types::AnomalyResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveAnomaly AWS API Documentation
     #
@@ -2484,7 +3079,12 @@ module Aws::DevOpsGuru
       :anomaly_reported_time_range,
       :source_details,
       :associated_insight_id,
-      :resource_collection)
+      :resource_collection,
+      :type,
+      :name,
+      :description,
+      :causal_anomaly_id,
+      :anomaly_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2497,7 +3097,14 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   The severity of the reactive anomaly.
+    #   The severity of the anomaly. The severity of anomalies that generate
+    #   an insight determine that insight's severity. For more information,
+    #   see [Understanding insight severities][1] in the *Amazon DevOps Guru
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2512,7 +3119,7 @@ module Aws::DevOpsGuru
     #   @return [Types::AnomalyTimeRange]
     #
     # @!attribute [rw] anomaly_reported_time_range
-    #   A `AnomalyReportedTimeRange` object that specifies the time range
+    #   An `AnomalyReportedTimeRange` object that specifies the time range
     #   between when the anomaly is opened and the time when it is closed.
     #   @return [Types::AnomalyReportedTimeRange]
     #
@@ -2529,12 +3136,42 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
+    #
+    # @!attribute [rw] type
+    #   The type of the reactive anomaly. It can be one of the following
+    #   types.
+    #
+    #   * `CAUSAL` - the anomaly can cause a new insight.
+    #
+    #   * `CONTEXTUAL` - the anomaly contains additional information about
+    #     an insight or its causal anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the reactive anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the reactive anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] causal_anomaly_id
+    #   The ID of the causal anomaly that is associated with this reactive
+    #   anomaly. The ID of a `CAUSAL` anomaly is always `NULL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_resources
+    #   The Amazon Web Services resources in which anomalous behavior was
+    #   detected by DevOps Guru.
+    #   @return [Array<Types::AnomalyResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveAnomalySummary AWS API Documentation
     #
@@ -2546,7 +3183,12 @@ module Aws::DevOpsGuru
       :anomaly_reported_time_range,
       :source_details,
       :associated_insight_id,
-      :resource_collection)
+      :resource_collection,
+      :type,
+      :name,
+      :description,
+      :causal_anomaly_id,
+      :anomaly_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2563,7 +3205,13 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   The severity of a reactive insight.
+    #   The severity of the insight. For more information, see
+    #   [Understanding insight severities][1] in the *Amazon DevOps Guru
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2577,10 +3225,12 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
@@ -2616,7 +3266,13 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   The severity of a reactive insight.
+    #   The severity of the insight. For more information, see
+    #   [Understanding insight severities][1] in the *Amazon DevOps Guru
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2630,16 +3286,23 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
     # @!attribute [rw] service_collection
     #   A collection of the names of Amazon Web Services services.
     #   @return [Types::ServiceCollection]
+    #
+    # @!attribute [rw] associated_resource_arns
+    #   The Amazon Resource Names (ARNs) of the Amazon Web Services
+    #   resources that generated this insight.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveInsightSummary AWS API Documentation
     #
@@ -2650,7 +3313,8 @@ module Aws::DevOpsGuru
       :status,
       :insight_time_range,
       :resource_collection,
-      :service_collection)
+      :service_collection,
+      :associated_resource_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2675,7 +3339,13 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   An array of severity values used to search for insights.
+    #   An array of severity values used to search for insights. For more
+    #   information, see [Understanding insight severities][1] in the
+    #   *Amazon DevOps Guru User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/devops-guru/latest/userguide/working-with-insights.html#understanding-insights-severities
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2689,10 +3359,12 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
@@ -2772,11 +3444,17 @@ module Aws::DevOpsGuru
     #   metrics.
     #   @return [Array<Types::RecommendationRelatedAnomalySourceDetail>]
     #
+    # @!attribute [rw] anomaly_id
+    #   The ID of an anomaly that generated the insight with this
+    #   recommendation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/RecommendationRelatedAnomaly AWS API Documentation
     #
     class RecommendationRelatedAnomaly < Struct.new(
       :resources,
-      :source_details)
+      :source_details,
+      :anomaly_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2789,7 +3467,16 @@ module Aws::DevOpsGuru
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the resource.
+    #   The type of the resource. Resource types take the same form that is
+    #   used by Amazon Web Services CloudFormation resource type
+    #   identifiers, `service-provider::service-name::data-type-name`. For
+    #   example, `AWS::RDS::DBCluster`. For more information, see [Amazon
+    #   Web Services resource and property types reference][1] in the
+    #   *Amazon Web Services CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/RecommendationRelatedAnomalyResource AWS API Documentation
@@ -2909,11 +3596,13 @@ module Aws::DevOpsGuru
     class RemoveNotificationChannelResponse < Aws::EmptyStructure; end
 
     # A collection of Amazon Web Services resources supported by DevOps
-    # Guru. The one type of Amazon Web Services resource collection
-    # supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    # can be configured to analyze only the Amazon Web Services resources
-    # that are defined in the stacks. You can specify up to 500 Amazon Web
-    # Services CloudFormation stacks.
+    # Guru. The two types of Amazon Web Services resource collections
+    # supported are Amazon Web Services CloudFormation stacks and Amazon Web
+    # Services resources that contain the same Amazon Web Services tag.
+    # DevOps Guru can be configured to analyze the Amazon Web Services
+    # resources that are defined in the stacks or that are tagged using the
+    # same tag *key*. You can specify up to 500 Amazon Web Services
+    # CloudFormation stacks.
     #
     # @note When making an API call, you may pass ResourceCollection
     #   data as a hash:
@@ -2922,6 +3611,12 @@ module Aws::DevOpsGuru
     #         cloud_formation: {
     #           stack_names: ["StackName"],
     #         },
+    #         tags: [
+    #           {
+    #             app_boundary_key: "AppBoundaryKey", # required
+    #             tag_values: ["TagValue"], # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cloud_formation
@@ -2931,10 +3626,50 @@ module Aws::DevOpsGuru
     #   CloudFormation stacks.
     #   @return [Types::CloudFormationCollection]
     #
+    # @!attribute [rw] tags
+    #   The Amazon Web Services tags that are used by resources in the
+    #   resource collection.
+    #
+    #   Tags help you identify and organize your Amazon Web Services
+    #   resources. Many Amazon Web Services services support tagging, so you
+    #   can assign the same tag to resources from different services to
+    #   indicate that the resources are related. For example, you can assign
+    #   the same tag to an Amazon DynamoDB table resource that you assign to
+    #   an Lambda function. For more information about using tags, see the
+    #   [Tagging best practices][1] whitepaper.
+    #
+    #   Each Amazon Web Services tag has two parts.
+    #
+    #   * A tag *key* (for example, `CostCenter`, `Environment`, `Project`,
+    #     or `Secret`). Tag *keys* are case-sensitive.
+    #
+    #   * An optional field known as a tag *value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     *value* is the same as using an empty string. Like tag *keys*, tag
+    #     *values* are case-sensitive.
+    #
+    #   Together these are known as *key*-*value* pairs.
+    #
+    #   The string used for a *key* in a tag that you use to define your
+    #   resource coverage must begin with the prefix `Devops-guru-`. The tag
+    #   *key* might be `Devops-guru-deployment-application` or
+    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
+    #   case of *key* characters don't matter to DevOps Guru. For example,
+    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
+    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
+    #   application might be `Devops-Guru-production-application/RDS` or
+    #   `Devops-Guru-production-application/containers`.
+    #
+    #
+    #
+    #   [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #   @return [Array<Types::TagCollection>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ResourceCollection AWS API Documentation
     #
     class ResourceCollection < Struct.new(
-      :cloud_formation)
+      :cloud_formation,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2953,10 +3688,50 @@ module Aws::DevOpsGuru
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
     #   @return [Types::CloudFormationCollectionFilter]
     #
+    # @!attribute [rw] tags
+    #   The Amazon Web Services tags used to filter the resources in the
+    #   resource collection.
+    #
+    #   Tags help you identify and organize your Amazon Web Services
+    #   resources. Many Amazon Web Services services support tagging, so you
+    #   can assign the same tag to resources from different services to
+    #   indicate that the resources are related. For example, you can assign
+    #   the same tag to an Amazon DynamoDB table resource that you assign to
+    #   an Lambda function. For more information about using tags, see the
+    #   [Tagging best practices][1] whitepaper.
+    #
+    #   Each Amazon Web Services tag has two parts.
+    #
+    #   * A tag *key* (for example, `CostCenter`, `Environment`, `Project`,
+    #     or `Secret`). Tag *keys* are case-sensitive.
+    #
+    #   * An optional field known as a tag *value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     *value* is the same as using an empty string. Like tag *keys*, tag
+    #     *values* are case-sensitive.
+    #
+    #   Together these are known as *key*-*value* pairs.
+    #
+    #   The string used for a *key* in a tag that you use to define your
+    #   resource coverage must begin with the prefix `Devops-guru-`. The tag
+    #   *key* might be `Devops-guru-deployment-application` or
+    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
+    #   case of *key* characters don't matter to DevOps Guru. For example,
+    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
+    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
+    #   application might be `Devops-Guru-production-application/RDS` or
+    #   `Devops-Guru-production-application/containers`.
+    #
+    #
+    #
+    #   [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #   @return [Array<Types::TagCollectionFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ResourceCollectionFilter AWS API Documentation
     #
     class ResourceCollectionFilter < Struct.new(
-      :cloud_formation)
+      :cloud_formation,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2998,6 +3773,12 @@ module Aws::DevOpsGuru
     #           cloud_formation: {
     #             stack_names: ["StackName"],
     #           },
+    #           tags: [
+    #             {
+    #               app_boundary_key: "AppBoundaryKey", # required
+    #               tag_values: ["TagValue"], # required
+    #             },
+    #           ],
     #         },
     #         service_collection: {
     #           service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
@@ -3014,10 +3795,12 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
@@ -3051,6 +3834,12 @@ module Aws::DevOpsGuru
     #             cloud_formation: {
     #               stack_names: ["StackName"],
     #             },
+    #             tags: [
+    #               {
+    #                 app_boundary_key: "AppBoundaryKey", # required
+    #                 tag_values: ["TagValue"], # required
+    #               },
+    #             ],
     #           },
     #           service_collection: {
     #             service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
@@ -3135,6 +3924,12 @@ module Aws::DevOpsGuru
     #           cloud_formation: {
     #             stack_names: ["StackName"],
     #           },
+    #           tags: [
+    #             {
+    #               app_boundary_key: "AppBoundaryKey", # required
+    #               tag_values: ["TagValue"], # required
+    #             },
+    #           ],
     #         },
     #         service_collection: {
     #           service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
@@ -3151,10 +3946,12 @@ module Aws::DevOpsGuru
     #
     # @!attribute [rw] resource_collection
     #   A collection of Amazon Web Services resources supported by DevOps
-    #   Guru. The one type of Amazon Web Services resource collection
-    #   supported is Amazon Web Services CloudFormation stacks. DevOps Guru
-    #   can be configured to analyze only the Amazon Web Services resources
-    #   that are defined in the stacks. You can specify up to 500 Amazon Web
+    #   Guru. The two types of Amazon Web Services resource collections
+    #   supported are Amazon Web Services CloudFormation stacks and Amazon
+    #   Web Services resources that contain the same Amazon Web Services
+    #   tag. DevOps Guru can be configured to analyze the Amazon Web
+    #   Services resources that are defined in the stacks or that are tagged
+    #   using the same tag *key*. You can specify up to 500 Amazon Web
     #   Services CloudFormation stacks.
     #   @return [Types::ResourceCollection]
     #
@@ -3189,6 +3986,12 @@ module Aws::DevOpsGuru
     #             cloud_formation: {
     #               stack_names: ["StackName"],
     #             },
+    #             tags: [
+    #               {
+    #                 app_boundary_key: "AppBoundaryKey", # required
+    #                 tag_values: ["TagValue"], # required
+    #               },
+    #             ],
     #           },
     #           service_collection: {
     #             service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
@@ -3464,6 +4267,12 @@ module Aws::DevOpsGuru
     #           cloud_formation: {
     #             stack_names: ["StackName"],
     #           },
+    #           tags: [
+    #             {
+    #               app_boundary_key: "AppBoundaryKey", # required
+    #               tag_values: ["TagValue"], # required
+    #             },
+    #           ],
     #         },
     #         client_token: "ClientToken",
     #       }
@@ -3517,6 +4326,234 @@ module Aws::DevOpsGuru
     class StartTimeRange < Struct.new(
       :from_time,
       :to_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of Amazon Web Services stags.
+    #
+    # Tags help you identify and organize your Amazon Web Services
+    # resources. Many Amazon Web Services services support tagging, so you
+    # can assign the same tag to resources from different services to
+    # indicate that the resources are related. For example, you can assign
+    # the same tag to an Amazon DynamoDB table resource that you assign to
+    # an Lambda function. For more information about using tags, see the
+    # [Tagging best practices][1] whitepaper.
+    #
+    # Each Amazon Web Services tag has two parts.
+    #
+    # * A tag *key* (for example, `CostCenter`, `Environment`, `Project`, or
+    #   `Secret`). Tag *keys* are case-sensitive.
+    #
+    # * An optional field known as a tag *value* (for example,
+    #   `111122223333`, `Production`, or a team name). Omitting the tag
+    #   *value* is the same as using an empty string. Like tag *keys*, tag
+    #   *values* are case-sensitive.
+    #
+    # Together these are known as *key*-*value* pairs.
+    #
+    # The string used for a *key* in a tag that you use to define your
+    # resource coverage must begin with the prefix `Devops-guru-`. The tag
+    # *key* might be `Devops-guru-deployment-application` or
+    # `Devops-guru-rds-application`. While *keys* are case-sensitive, the
+    # case of *key* characters don't matter to DevOps Guru. For example,
+    # DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
+    # named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
+    # application might be `Devops-Guru-production-application/RDS` or
+    # `Devops-Guru-production-application/containers`.
+    #
+    #
+    #
+    # [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #
+    # @note When making an API call, you may pass TagCollection
+    #   data as a hash:
+    #
+    #       {
+    #         app_boundary_key: "AppBoundaryKey", # required
+    #         tag_values: ["TagValue"], # required
+    #       }
+    #
+    # @!attribute [rw] app_boundary_key
+    #   An Amazon Web Services tag *key* that is used to identify the Amazon
+    #   Web Services resources that DevOps Guru analyzes. All Amazon Web
+    #   Services resources in your account and Region tagged with this *key*
+    #   make up your DevOps Guru application and analysis boundary.
+    #
+    #   The string used for a *key* in a tag that you use to define your
+    #   resource coverage must begin with the prefix `Devops-guru-`. The tag
+    #   *key* might be `Devops-guru-deployment-application` or
+    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
+    #   case of *key* characters don't matter to DevOps Guru. For example,
+    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
+    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
+    #   application might be `Devops-Guru-production-application/RDS` or
+    #   `Devops-Guru-production-application/containers`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_values
+    #   The values in an Amazon Web Services tag collection.
+    #
+    #   The tag's *value* is an optional field used to associate a string
+    #   with the tag *key* (for example, `111122223333`, `Production`, or a
+    #   team name). The *key* and *value* are the tag's *key* pair.
+    #   Omitting the tag *value* is the same as using an empty string. Like
+    #   tag *keys*, tag *values* are case-sensitive. You can specify a
+    #   maximum of 256 characters for a tag value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/TagCollection AWS API Documentation
+    #
+    class TagCollection < Struct.new(
+      :app_boundary_key,
+      :tag_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of Amazon Web Services tags used to filter insights. This
+    # is used to return insights generated from only resources that contain
+    # the tags in the tag collection.
+    #
+    # @!attribute [rw] app_boundary_key
+    #   An Amazon Web Services tag *key* that is used to identify the Amazon
+    #   Web Services resources that DevOps Guru analyzes. All Amazon Web
+    #   Services resources in your account and Region tagged with this *key*
+    #   make up your DevOps Guru application and analysis boundary.
+    #
+    #   The string used for a *key* in a tag that you use to define your
+    #   resource coverage must begin with the prefix `Devops-guru-`. The tag
+    #   *key* might be `Devops-guru-deployment-application` or
+    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
+    #   case of *key* characters don't matter to DevOps Guru. For example,
+    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
+    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
+    #   application might be `Devops-Guru-production-application/RDS` or
+    #   `Devops-Guru-production-application/containers`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_values
+    #   The values in an Amazon Web Services tag collection.
+    #
+    #   The tag's *value* is an optional field used to associate a string
+    #   with the tag *key* (for example, `111122223333`, `Production`, or a
+    #   team name). The *key* and *value* are the tag's *key* pair.
+    #   Omitting the tag *value* is the same as using an empty string. Like
+    #   tag *keys*, tag *values* are case-sensitive. You can specify a
+    #   maximum of 256 characters for a tag value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/TagCollectionFilter AWS API Documentation
+    #
+    class TagCollectionFilter < Struct.new(
+      :app_boundary_key,
+      :tag_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a collection of Amazon Web Services resources that
+    # are identified by an Amazon Web Services tag. This collection of
+    # resources is used to create a monthly cost estimate for DevOps Guru to
+    # analyze Amazon Web Services resources. The maximum number of tags you
+    # can specify for a cost estimate is one. The estimate created is for
+    # the cost to analyze the Amazon Web Services resources defined by the
+    # tag. For more information, see [Stacks][1] in the *Amazon Web Services
+    # CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html
+    #
+    # @note When making an API call, you may pass TagCostEstimationResourceCollectionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         app_boundary_key: "AppBoundaryKey", # required
+    #         tag_values: ["TagValue"], # required
+    #       }
+    #
+    # @!attribute [rw] app_boundary_key
+    #   An Amazon Web Services tag *key* that is used to identify the Amazon
+    #   Web Services resources that DevOps Guru analyzes. All Amazon Web
+    #   Services resources in your account and Region tagged with this *key*
+    #   make up your DevOps Guru application and analysis boundary.
+    #
+    #   The string used for a *key* in a tag that you use to define your
+    #   resource coverage must begin with the prefix `Devops-guru-`. The tag
+    #   *key* might be `Devops-guru-deployment-application` or
+    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
+    #   case of *key* characters don't matter to DevOps Guru. For example,
+    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
+    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
+    #   application might be `Devops-Guru-production-application/RDS` or
+    #   `Devops-Guru-production-application/containers`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_values
+    #   The values in an Amazon Web Services tag collection.
+    #
+    #   The tag's *value* is an optional field used to associate a string
+    #   with the tag *key* (for example, `111122223333`, `Production`, or a
+    #   team name). The *key* and *value* are the tag's *key* pair.
+    #   Omitting the tag *value* is the same as using an empty string. Like
+    #   tag *keys*, tag *values* are case-sensitive. You can specify a
+    #   maximum of 256 characters for a tag value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/TagCostEstimationResourceCollectionFilter AWS API Documentation
+    #
+    class TagCostEstimationResourceCollectionFilter < Struct.new(
+      :app_boundary_key,
+      :tag_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the health of Amazon Web Services resources in your
+    # account that are specified by an Amazon Web Services tag *key*.
+    #
+    # @!attribute [rw] app_boundary_key
+    #   An Amazon Web Services tag *key* that is used to identify the Amazon
+    #   Web Services resources that DevOps Guru analyzes. All Amazon Web
+    #   Services resources in your account and Region tagged with this *key*
+    #   make up your DevOps Guru application and analysis boundary.
+    #
+    #   The string used for a *key* in a tag that you use to define your
+    #   resource coverage must begin with the prefix `Devops-guru-`. The tag
+    #   *key* might be `Devops-guru-deployment-application` or
+    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
+    #   case of *key* characters don't matter to DevOps Guru. For example,
+    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
+    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
+    #   application might be `Devops-Guru-production-application/RDS` or
+    #   `Devops-Guru-production-application/containers`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The value in an Amazon Web Services tag.
+    #
+    #   The tag's *value* is an optional field used to associate a string
+    #   with the tag *key* (for example, `111122223333`, `Production`, or a
+    #   team name). The *key* and *value* are the tag's *key* pair.
+    #   Omitting the tag *value* is the same as using an empty string. Like
+    #   tag *keys*, tag *values* are case-sensitive. You can specify a
+    #   maximum of 256 characters for a tag value.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight
+    #   Information about the health of the Amazon Web Services resources in
+    #   your account that are specified by an Amazon Web Services tag,
+    #   including the number of open proactive, open reactive insights, and
+    #   the Mean Time to Recover (MTTR) of closed insights.
+    #   @return [Types::InsightHealth]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/TagHealth AWS API Documentation
+    #
+    class TagHealth < Struct.new(
+      :app_boundary_key,
+      :tag_value,
+      :insight)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3605,17 +4642,63 @@ module Aws::DevOpsGuru
     #         cloud_formation: {
     #           stack_names: ["StackName"],
     #         },
+    #         tags: [
+    #           {
+    #             app_boundary_key: "AppBoundaryKey", # required
+    #             tag_values: ["TagValue"], # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cloud_formation
-    #   An collection of Amazon Web Services CloudFormation stacks. You can
+    #   A collection of Amazon Web Services CloudFormation stacks. You can
     #   specify up to 500 Amazon Web Services CloudFormation stacks.
     #   @return [Types::UpdateCloudFormationCollectionFilter]
+    #
+    # @!attribute [rw] tags
+    #   The updated Amazon Web Services tags used to filter the resources in
+    #   the resource collection.
+    #
+    #   Tags help you identify and organize your Amazon Web Services
+    #   resources. Many Amazon Web Services services support tagging, so you
+    #   can assign the same tag to resources from different services to
+    #   indicate that the resources are related. For example, you can assign
+    #   the same tag to an Amazon DynamoDB table resource that you assign to
+    #   an Lambda function. For more information about using tags, see the
+    #   [Tagging best practices][1] whitepaper.
+    #
+    #   Each Amazon Web Services tag has two parts.
+    #
+    #   * A tag *key* (for example, `CostCenter`, `Environment`, `Project`,
+    #     or `Secret`). Tag *keys* are case-sensitive.
+    #
+    #   * An optional field known as a tag *value* (for example,
+    #     `111122223333`, `Production`, or a team name). Omitting the tag
+    #     *value* is the same as using an empty string. Like tag *keys*, tag
+    #     *values* are case-sensitive.
+    #
+    #   Together these are known as *key*-*value* pairs.
+    #
+    #   The string used for a *key* in a tag that you use to define your
+    #   resource coverage must begin with the prefix `Devops-guru-`. The tag
+    #   *key* might be `Devops-guru-deployment-application` or
+    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
+    #   case of *key* characters don't matter to DevOps Guru. For example,
+    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
+    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
+    #   application might be `Devops-Guru-production-application/RDS` or
+    #   `Devops-Guru-production-application/containers`.
+    #
+    #
+    #
+    #   [1]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+    #   @return [Array<Types::UpdateTagCollectionFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateResourceCollectionFilter AWS API Documentation
     #
     class UpdateResourceCollectionFilter < Struct.new(
-      :cloud_formation)
+      :cloud_formation,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3629,6 +4712,12 @@ module Aws::DevOpsGuru
     #           cloud_formation: {
     #             stack_names: ["StackName"],
     #           },
+    #           tags: [
+    #             {
+    #               app_boundary_key: "AppBoundaryKey", # required
+    #               tag_values: ["TagValue"], # required
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -3710,6 +4799,54 @@ module Aws::DevOpsGuru
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateServiceIntegrationResponse AWS API Documentation
     #
     class UpdateServiceIntegrationResponse < Aws::EmptyStructure; end
+
+    # A new collection of Amazon Web Services resources that are defined by
+    # an Amazon Web Services tag or tag *key*/*value* pair.
+    #
+    # @note When making an API call, you may pass UpdateTagCollectionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         app_boundary_key: "AppBoundaryKey", # required
+    #         tag_values: ["TagValue"], # required
+    #       }
+    #
+    # @!attribute [rw] app_boundary_key
+    #   An Amazon Web Services tag *key* that is used to identify the Amazon
+    #   Web Services resources that DevOps Guru analyzes. All Amazon Web
+    #   Services resources in your account and Region tagged with this *key*
+    #   make up your DevOps Guru application and analysis boundary.
+    #
+    #   The string used for a *key* in a tag that you use to define your
+    #   resource coverage must begin with the prefix `Devops-guru-`. The tag
+    #   *key* might be `Devops-guru-deployment-application` or
+    #   `Devops-guru-rds-application`. While *keys* are case-sensitive, the
+    #   case of *key* characters don't matter to DevOps Guru. For example,
+    #   DevOps Guru works with a *key* named `devops-guru-rds` and a *key*
+    #   named `DevOps-Guru-RDS`. Possible *key*/*value* pairs in your
+    #   application might be `Devops-Guru-production-application/RDS` or
+    #   `Devops-Guru-production-application/containers`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_values
+    #   The values in an Amazon Web Services tag collection.
+    #
+    #   The tag's *value* is an optional field used to associate a string
+    #   with the tag *key* (for example, `111122223333`, `Production`, or a
+    #   team name). The *key* and *value* are the tag's *key* pair.
+    #   Omitting the tag *value* is the same as using an empty string. Like
+    #   tag *keys*, tag *values* are case-sensitive. You can specify a
+    #   maximum of 256 characters for a tag value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateTagCollectionFilter AWS API Documentation
+    #
+    class UpdateTagCollectionFilter < Struct.new(
+      :app_boundary_key,
+      :tag_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains information about data passed in to a field during a request
     # that is not valid.

@@ -1136,6 +1136,8 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
+    #   resp.global_table_description.replication_group[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.global_table_description.replication_group[0].replica_table_class_summary.last_update_date_time #=> Time
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -1370,6 +1372,10 @@ module Aws::DynamoDB
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
     #
+    # @option params [String] :table_class
+    #   The table class of the new table. Valid values are `STANDARD` and
+    #   `STANDARD_INFREQUENT_ACCESS`.
+    #
     # @return [Types::CreateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableOutput#table_description #table_description} => Types::TableDescription
@@ -1512,6 +1518,7 @@ module Aws::DynamoDB
     #         value: "TagValueString", # required
     #       },
     #     ],
+    #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #   })
     #
     # @example Response structure
@@ -1581,6 +1588,8 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
+    #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -1592,6 +1601,8 @@ module Aws::DynamoDB
     #   resp.table_description.archival_summary.archival_date_time #=> Time
     #   resp.table_description.archival_summary.archival_reason #=> String
     #   resp.table_description.archival_summary.archival_backup_arn #=> String
+    #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable AWS API Documentation
     #
@@ -2076,6 +2087,8 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
+    #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -2087,6 +2100,8 @@ module Aws::DynamoDB
     #   resp.table_description.archival_summary.archival_date_time #=> Time
     #   resp.table_description.archival_summary.archival_reason #=> String
     #   resp.table_description.archival_summary.archival_backup_arn #=> String
+    #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable AWS API Documentation
     #
@@ -2370,6 +2385,8 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
+    #   resp.global_table_description.replication_group[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.global_table_description.replication_group[0].replica_table_class_summary.last_update_date_time #=> Time
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -2464,6 +2481,8 @@ module Aws::DynamoDB
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.replica_settings[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.replica_settings[0].replica_table_class_summary.last_update_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableSettings AWS API Documentation
     #
@@ -2755,6 +2774,8 @@ module Aws::DynamoDB
     #   resp.table.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table.replicas[0].replica_inaccessible_date_time #=> Time
+    #   resp.table.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
     #   resp.table.restore_summary.source_backup_arn #=> String
     #   resp.table.restore_summary.source_table_arn #=> String
     #   resp.table.restore_summary.restore_date_time #=> Time
@@ -2766,6 +2787,8 @@ module Aws::DynamoDB
     #   resp.table.archival_summary.archival_date_time #=> Time
     #   resp.table.archival_summary.archival_reason #=> String
     #   resp.table.archival_summary.archival_backup_arn #=> String
+    #   resp.table.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table.table_class_summary.last_update_date_time #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -4827,6 +4850,8 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
+    #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -4838,6 +4863,8 @@ module Aws::DynamoDB
     #   resp.table_description.archival_summary.archival_date_time #=> Time
     #   resp.table_description.archival_summary.archival_reason #=> String
     #   resp.table_description.archival_summary.archival_backup_arn #=> String
+    #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackup AWS API Documentation
     #
@@ -5050,6 +5077,8 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
+    #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -5061,6 +5090,8 @@ module Aws::DynamoDB
     #   resp.table_description.archival_summary.archival_date_time #=> Time
     #   resp.table_description.archival_summary.archival_reason #=> String
     #   resp.table_description.archival_summary.archival_backup_arn #=> String
+    #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTime AWS API Documentation
     #
@@ -6061,6 +6092,8 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
+    #   resp.global_table_description.replication_group[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.global_table_description.replication_group[0].replica_table_class_summary.last_update_date_time #=> Time
     #   resp.global_table_description.global_table_arn #=> String
     #   resp.global_table_description.creation_date_time #=> Time
     #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
@@ -6201,6 +6234,7 @@ module Aws::DynamoDB
     #             },
     #           },
     #         ],
+    #         replica_table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #       },
     #     ],
     #   })
@@ -6260,6 +6294,8 @@ module Aws::DynamoDB
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_in_cooldown #=> Integer
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.scale_out_cooldown #=> Integer
     #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_auto_scaling_settings.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
+    #   resp.replica_settings[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.replica_settings[0].replica_table_class_summary.last_update_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableSettings AWS API Documentation
     #
@@ -6765,6 +6801,10 @@ module Aws::DynamoDB
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #
+    # @option params [String] :table_class
+    #   The table class of the table to be updated. Valid values are
+    #   `STANDARD` and `STANDARD_INFREQUENT_ACCESS`.
+    #
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTableOutput#table_description #table_description} => Types::TableDescription
@@ -6890,6 +6930,7 @@ module Aws::DynamoDB
     #               },
     #             },
     #           ],
+    #           table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #         },
     #         update: {
     #           region_name: "RegionName", # required
@@ -6905,12 +6946,14 @@ module Aws::DynamoDB
     #               },
     #             },
     #           ],
+    #           table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #         },
     #         delete: {
     #           region_name: "RegionName", # required
     #         },
     #       },
     #     ],
+    #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #   })
     #
     # @example Response structure
@@ -6980,6 +7023,8 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
+    #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.restore_summary.source_backup_arn #=> String
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
@@ -6991,6 +7036,8 @@ module Aws::DynamoDB
     #   resp.table_description.archival_summary.archival_date_time #=> Time
     #   resp.table_description.archival_summary.archival_reason #=> String
     #   resp.table_description.archival_summary.archival_backup_arn #=> String
+    #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
+    #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable AWS API Documentation
     #
@@ -7257,7 +7304,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

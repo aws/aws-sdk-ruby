@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2021-12-01)
+------------------
+
+* Feature - This release enables - 1/ Inference endpoint configuration recommendations and ability to run custom load tests to meet performance needs. 2/ Deploy serverless inference endpoints. 3/ Query, filter and retrieve end-to-end ML lineage graph, and incorporate model quality/bias detection in ML workflow.
+
 1.109.0 (2021-11-30)
 ------------------
 

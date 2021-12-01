@@ -557,6 +557,10 @@ module Aws::SageMaker
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].product_id #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].environment #=> Hash
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].environment["EnvironmentKey"] #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_input.data_input_config #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].framework #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].framework_version #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].nearest_model_name #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_transform_instance_types #=> Array
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.supported_realtime_inference_instance_types #=> Array
@@ -796,6 +800,12 @@ module Aws::SageMaker
     #           environment: {
     #             "EnvironmentKey" => "EnvironmentValue",
     #           },
+    #           model_input: {
+    #             data_input_config: "DataInputConfig", # required
+    #           },
+    #           framework: "String",
+    #           framework_version: "FrameworkVersion",
+    #           nearest_model_name: "String",
     #         },
     #       ],
     #       supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -1364,7 +1374,13 @@ module Aws::SageMaker
     #
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
-    # @option params [required, Types::InputConfig] :input_config
+    # @option params [String] :model_package_version_arn
+    #   The Amazon Resource Name (ARN) of a versioned model package. Provide
+    #   either a `ModelPackageVersionArn` or an `InputConfig` object in the
+    #   request syntax. The presence of both objects in the
+    #   `CreateCompilationJob` request will return an exception.
+    #
+    # @option params [Types::InputConfig] :input_config
     #   Provides information about the location of input model artifacts, the
     #   name and shape of the expected data inputs, and the framework in which
     #   the model was trained.
@@ -1407,7 +1423,8 @@ module Aws::SageMaker
     #   resp = client.create_compilation_job({
     #     compilation_job_name: "EntityName", # required
     #     role_arn: "RoleArn", # required
-    #     input_config: { # required
+    #     model_package_version_arn: "ModelPackageArn",
+    #     input_config: {
     #       s3_uri: "S3Uri", # required
     #       data_input_config: "DataInputConfig", # required
     #       framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE, DARKNET, SKLEARN
@@ -2299,13 +2316,17 @@ module Aws::SageMaker
     #       {
     #         variant_name: "VariantName", # required
     #         model_name: "ModelName", # required
-    #         initial_instance_count: 1, # required
-    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #         initial_instance_count: 1,
+    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
     #         initial_variant_weight: 1.0,
     #         accelerator_type: "ml.eia1.medium", # accepts ml.eia1.medium, ml.eia1.large, ml.eia1.xlarge, ml.eia2.medium, ml.eia2.large, ml.eia2.xlarge
     #         core_dump_config: {
     #           destination_s3_uri: "DestinationS3Uri", # required
     #           kms_key_id: "KmsKeyId",
+    #         },
+    #         serverless_config: {
+    #           memory_size_in_mb: 1, # required
+    #           max_concurrency: 1, # required
     #         },
     #       },
     #     ],
@@ -3202,6 +3223,119 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Starts a recommendation job. You can create either an instance
+    # recommendation or load test job.
+    #
+    # @option params [required, String] :job_name
+    #   A name for the recommendation job. The name must be unique within the
+    #   Amazon Web Services Region and within your Amazon Web Services
+    #   account.
+    #
+    # @option params [required, String] :job_type
+    #   Defines the type of recommendation job. Specify `Default` to initiate
+    #   an instance recommendation and `Advanced` to initiate a load test. If
+    #   left unspecified, Amazon SageMaker Inference Recommender will run an
+    #   instance recommendation (`DEFAULT`) job.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role that enables Amazon
+    #   SageMaker to perform tasks on your behalf.
+    #
+    # @option params [required, Types::RecommendationJobInputConfig] :input_config
+    #   Provides information about the versioned model package Amazon Resource
+    #   Name (ARN), the traffic pattern, and endpoint configurations.
+    #
+    # @option params [String] :job_description
+    #   Description of the recommendation job.
+    #
+    # @option params [Types::RecommendationJobStoppingConditions] :stopping_conditions
+    #   A set of conditions for stopping a recommendation job. If any of the
+    #   conditions are met, the job is automatically stopped.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to Amazon Web Services resources to help
+    #   you categorize and organize them. Each tag consists of a key and a
+    #   value, both of which you define. For more information, see [Tagging
+    #   Amazon Web Services Resources][1] in the Amazon Web Services General
+    #   Reference.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #
+    # @return [Types::CreateInferenceRecommendationsJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInferenceRecommendationsJobResponse#job_arn #job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_inference_recommendations_job({
+    #     job_name: "RecommendationJobName", # required
+    #     job_type: "Default", # required, accepts Default, Advanced
+    #     role_arn: "RoleArn", # required
+    #     input_config: { # required
+    #       model_package_version_arn: "ModelPackageArn", # required
+    #       job_duration_in_seconds: 1,
+    #       traffic_pattern: {
+    #         traffic_type: "PHASES", # accepts PHASES
+    #         phases: [
+    #           {
+    #             initial_number_of_users: 1,
+    #             spawn_rate: 1,
+    #             duration_in_seconds: 1,
+    #           },
+    #         ],
+    #       },
+    #       resource_limit: {
+    #         max_number_of_tests: 1,
+    #         max_parallel_of_tests: 1,
+    #       },
+    #       endpoint_configurations: [
+    #         {
+    #           instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #           inference_specification_name: "InferenceSpecificationName",
+    #           environment_parameter_ranges: {
+    #             categorical_parameter_ranges: [
+    #               {
+    #                 name: "String64", # required
+    #                 value: ["String128"], # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     job_description: "RecommendationJobDescription",
+    #     stopping_conditions: {
+    #       max_invocations: 1,
+    #       model_latency_thresholds: [
+    #         {
+    #           percentile: "String64",
+    #           value_in_milliseconds: 1,
+    #         },
+    #       ],
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateInferenceRecommendationsJob AWS API Documentation
+    #
+    # @overload create_inference_recommendations_job(params = {})
+    # @param [Hash] params ({})
+    def create_inference_recommendations_job(params = {}, options = {})
+      req = build_request(:create_inference_recommendations_job, params)
+      req.send_request(options)
+    end
+
     # Creates a job that uses workers to label the data objects in your
     # input dataset. You can use the labeled data to train machine learning
     # models.
@@ -3625,6 +3759,7 @@ module Aws::SageMaker
     #         "EnvironmentKey" => "EnvironmentValue",
     #       },
     #       model_package_name: "VersionedArnOrName",
+    #       inference_specification_name: "InferenceSpecificationName",
     #       multi_model_config: {
     #         model_cache_setting: "Enabled", # accepts Enabled, Disabled
     #       },
@@ -3645,6 +3780,7 @@ module Aws::SageMaker
     #           "EnvironmentKey" => "EnvironmentValue",
     #         },
     #         model_package_name: "VersionedArnOrName",
+    #         inference_specification_name: "InferenceSpecificationName",
     #         multi_model_config: {
     #           model_cache_setting: "Enabled", # accepts Enabled, Disabled
     #         },
@@ -4044,6 +4180,37 @@ module Aws::SageMaker
     # @option params [Hash<String,String>] :customer_metadata_properties
     #   The metadata properties associated with the model package versions.
     #
+    # @option params [Types::DriftCheckBaselines] :drift_check_baselines
+    #   Represents the drift check baselines that can be used when the model
+    #   monitor is set using the model package. For more information, see the
+    #   topic on [Drift Detection against Previous Baselines in SageMaker
+    #   Pipelines][1] in the *Amazon SageMaker Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection
+    #
+    # @option params [String] :domain
+    #   The machine learning domain of your model package and its components.
+    #   Common machine learning domains include computer vision and natural
+    #   language processing.
+    #
+    # @option params [String] :task
+    #   The machine learning task your model package accomplishes. Common
+    #   machine learning tasks include object detection and image
+    #   classification.
+    #
+    # @option params [String] :sample_payload_url
+    #   The Amazon Simple Storage Service (Amazon S3) path where the sample
+    #   payload are stored. This path must point to a single gzip compressed
+    #   tar archive (.tar.gz suffix).
+    #
+    # @option params [Array<Types::AdditionalInferenceSpecificationDefinition>] :additional_inference_specifications
+    #   An array of additional Inference Specification objects. Each
+    #   additional Inference Specification specifies artifacts based on this
+    #   model package that can be used on inference endpoints. Generally used
+    #   with SageMaker Neo to store the compiled artifacts.
+    #
     # @return [Types::CreateModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateModelPackageOutput#model_package_arn #model_package_arn} => String
@@ -4065,6 +4232,12 @@ module Aws::SageMaker
     #           environment: {
     #             "EnvironmentKey" => "EnvironmentValue",
     #           },
+    #           model_input: {
+    #             data_input_config: "DataInputConfig", # required
+    #           },
+    #           framework: "String",
+    #           framework_version: "FrameworkVersion",
+    #           nearest_model_name: "String",
     #         },
     #       ],
     #       supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
@@ -4163,6 +4336,16 @@ module Aws::SageMaker
     #           content_digest: "ContentDigest",
     #           s3_uri: "S3Uri", # required
     #         },
+    #         pre_training_report: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         post_training_report: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
     #       },
     #       explainability: {
     #         report: {
@@ -4176,6 +4359,92 @@ module Aws::SageMaker
     #     customer_metadata_properties: {
     #       "CustomerMetadataKey" => "CustomerMetadataValue",
     #     },
+    #     drift_check_baselines: {
+    #       bias: {
+    #         config_file: {
+    #           content_type: "ContentType",
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         pre_training_constraints: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         post_training_constraints: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       },
+    #       explainability: {
+    #         constraints: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         config_file: {
+    #           content_type: "ContentType",
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       },
+    #       model_quality: {
+    #         statistics: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         constraints: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       },
+    #       model_data_quality: {
+    #         statistics: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #         constraints: {
+    #           content_type: "ContentType", # required
+    #           content_digest: "ContentDigest",
+    #           s3_uri: "S3Uri", # required
+    #         },
+    #       },
+    #     },
+    #     domain: "String",
+    #     task: "String",
+    #     sample_payload_url: "S3Uri",
+    #     additional_inference_specifications: [
+    #       {
+    #         name: "EntityName", # required
+    #         description: "EntityDescription",
+    #         containers: [ # required
+    #           {
+    #             container_hostname: "ContainerHostname",
+    #             image: "ContainerImage", # required
+    #             image_digest: "ImageDigest",
+    #             model_data_url: "Url",
+    #             product_id: "ProductId",
+    #             environment: {
+    #               "EnvironmentKey" => "EnvironmentValue",
+    #             },
+    #             model_input: {
+    #               data_input_config: "DataInputConfig", # required
+    #             },
+    #             framework: "String",
+    #             framework_version: "FrameworkVersion",
+    #             nearest_model_name: "String",
+    #           },
+    #         ],
+    #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
+    #         supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #         supported_content_types: ["ContentType"],
+    #         supported_response_mime_types: ["ResponseMIMEType"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7524,6 +7793,7 @@ module Aws::SageMaker
     #   * {Types::DescribeActionResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeActionResponse#last_modified_by #last_modified_by} => Types::UserContext
     #   * {Types::DescribeActionResponse#metadata_properties #metadata_properties} => Types::MetadataProperties
+    #   * {Types::DescribeActionResponse#lineage_group_arn #lineage_group_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7555,6 +7825,7 @@ module Aws::SageMaker
     #   resp.metadata_properties.repository #=> String
     #   resp.metadata_properties.generated_by #=> String
     #   resp.metadata_properties.project_id #=> String
+    #   resp.lineage_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAction AWS API Documentation
     #
@@ -7639,6 +7910,10 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].product_id #=> String
     #   resp.inference_specification.containers[0].environment #=> Hash
     #   resp.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
+    #   resp.inference_specification.containers[0].model_input.data_input_config #=> String
+    #   resp.inference_specification.containers[0].framework #=> String
+    #   resp.inference_specification.containers[0].framework_version #=> String
+    #   resp.inference_specification.containers[0].nearest_model_name #=> String
     #   resp.inference_specification.supported_transform_instance_types #=> Array
     #   resp.inference_specification.supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.inference_specification.supported_realtime_inference_instance_types #=> Array
@@ -7836,6 +8111,7 @@ module Aws::SageMaker
     #   * {Types::DescribeArtifactResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeArtifactResponse#last_modified_by #last_modified_by} => Types::UserContext
     #   * {Types::DescribeArtifactResponse#metadata_properties #metadata_properties} => Types::MetadataProperties
+    #   * {Types::DescribeArtifactResponse#lineage_group_arn #lineage_group_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -7866,6 +8142,7 @@ module Aws::SageMaker
     #   resp.metadata_properties.repository #=> String
     #   resp.metadata_properties.generated_by #=> String
     #   resp.metadata_properties.project_id #=> String
+    #   resp.lineage_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeArtifact AWS API Documentation
     #
@@ -8043,6 +8320,7 @@ module Aws::SageMaker
     #   * {Types::DescribeCompilationJobResponse#compilation_end_time #compilation_end_time} => Time
     #   * {Types::DescribeCompilationJobResponse#stopping_condition #stopping_condition} => Types::StoppingCondition
     #   * {Types::DescribeCompilationJobResponse#inference_image #inference_image} => String
+    #   * {Types::DescribeCompilationJobResponse#model_package_version_arn #model_package_version_arn} => String
     #   * {Types::DescribeCompilationJobResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeCompilationJobResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeCompilationJobResponse#failure_reason #failure_reason} => String
@@ -8069,6 +8347,7 @@ module Aws::SageMaker
     #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.stopping_condition.max_wait_time_in_seconds #=> Integer
     #   resp.inference_image #=> String
+    #   resp.model_package_version_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
@@ -8117,11 +8396,12 @@ module Aws::SageMaker
     #   * {Types::DescribeContextResponse#created_by #created_by} => Types::UserContext
     #   * {Types::DescribeContextResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeContextResponse#last_modified_by #last_modified_by} => Types::UserContext
+    #   * {Types::DescribeContextResponse#lineage_group_arn #lineage_group_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_context({
-    #     context_name: "ExperimentEntityName", # required
+    #     context_name: "ExperimentEntityNameOrArn", # required
     #   })
     #
     # @example Response structure
@@ -8143,6 +8423,7 @@ module Aws::SageMaker
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.lineage_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeContext AWS API Documentation
     #
@@ -8546,6 +8827,10 @@ module Aws::SageMaker
     #   resp.production_variants[0].variant_status[0].status #=> String, one of "Creating", "Updating", "Deleting", "ActivatingTraffic", "Baking"
     #   resp.production_variants[0].variant_status[0].status_message #=> String
     #   resp.production_variants[0].variant_status[0].start_time #=> Time
+    #   resp.production_variants[0].current_serverless_config.memory_size_in_mb #=> Integer
+    #   resp.production_variants[0].current_serverless_config.max_concurrency #=> Integer
+    #   resp.production_variants[0].desired_serverless_config.memory_size_in_mb #=> Integer
+    #   resp.production_variants[0].desired_serverless_config.max_concurrency #=> Integer
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.capture_status #=> String, one of "Started", "Stopped"
     #   resp.data_capture_config.current_sampling_percentage #=> Integer
@@ -8587,6 +8872,10 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.production_variants[0].variant_status[0].status #=> String, one of "Creating", "Updating", "Deleting", "ActivatingTraffic", "Baking"
     #   resp.pending_deployment_summary.production_variants[0].variant_status[0].status_message #=> String
     #   resp.pending_deployment_summary.production_variants[0].variant_status[0].start_time #=> Time
+    #   resp.pending_deployment_summary.production_variants[0].current_serverless_config.memory_size_in_mb #=> Integer
+    #   resp.pending_deployment_summary.production_variants[0].current_serverless_config.max_concurrency #=> Integer
+    #   resp.pending_deployment_summary.production_variants[0].desired_serverless_config.memory_size_in_mb #=> Integer
+    #   resp.pending_deployment_summary.production_variants[0].desired_serverless_config.max_concurrency #=> Integer
     #   resp.pending_deployment_summary.start_time #=> Time
     #
     #
@@ -8639,6 +8928,8 @@ module Aws::SageMaker
     #   resp.production_variants[0].accelerator_type #=> String, one of "ml.eia1.medium", "ml.eia1.large", "ml.eia1.xlarge", "ml.eia2.medium", "ml.eia2.large", "ml.eia2.xlarge"
     #   resp.production_variants[0].core_dump_config.destination_s3_uri #=> String
     #   resp.production_variants[0].core_dump_config.kms_key_id #=> String
+    #   resp.production_variants[0].serverless_config.memory_size_in_mb #=> Integer
+    #   resp.production_variants[0].serverless_config.max_concurrency #=> Integer
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.initial_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
@@ -9220,6 +9511,91 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Provides the results of the Inference Recommender job. One or more
+    # recommendation jobs are returned.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job. The name must be unique within an Amazon Web
+    #   Services Region in the Amazon Web Services account.
+    #
+    # @return [Types::DescribeInferenceRecommendationsJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#job_name #job_name} => String
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#job_description #job_description} => String
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#job_type #job_type} => String
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#job_arn #job_arn} => String
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#status #status} => String
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#completion_time #completion_time} => Time
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#input_config #input_config} => Types::RecommendationJobInputConfig
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#stopping_conditions #stopping_conditions} => Types::RecommendationJobStoppingConditions
+    #   * {Types::DescribeInferenceRecommendationsJobResponse#inference_recommendations #inference_recommendations} => Array&lt;Types::InferenceRecommendation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inference_recommendations_job({
+    #     job_name: "RecommendationJobName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_name #=> String
+    #   resp.job_description #=> String
+    #   resp.job_type #=> String, one of "Default", "Advanced"
+    #   resp.job_arn #=> String
+    #   resp.role_arn #=> String
+    #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "STOPPING", "STOPPED"
+    #   resp.creation_time #=> Time
+    #   resp.completion_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.failure_reason #=> String
+    #   resp.input_config.model_package_version_arn #=> String
+    #   resp.input_config.job_duration_in_seconds #=> Integer
+    #   resp.input_config.traffic_pattern.traffic_type #=> String, one of "PHASES"
+    #   resp.input_config.traffic_pattern.phases #=> Array
+    #   resp.input_config.traffic_pattern.phases[0].initial_number_of_users #=> Integer
+    #   resp.input_config.traffic_pattern.phases[0].spawn_rate #=> Integer
+    #   resp.input_config.traffic_pattern.phases[0].duration_in_seconds #=> Integer
+    #   resp.input_config.resource_limit.max_number_of_tests #=> Integer
+    #   resp.input_config.resource_limit.max_parallel_of_tests #=> Integer
+    #   resp.input_config.endpoint_configurations #=> Array
+    #   resp.input_config.endpoint_configurations[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge"
+    #   resp.input_config.endpoint_configurations[0].inference_specification_name #=> String
+    #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges #=> Array
+    #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges[0].name #=> String
+    #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges[0].value #=> Array
+    #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges[0].value[0] #=> String
+    #   resp.stopping_conditions.max_invocations #=> Integer
+    #   resp.stopping_conditions.model_latency_thresholds #=> Array
+    #   resp.stopping_conditions.model_latency_thresholds[0].percentile #=> String
+    #   resp.stopping_conditions.model_latency_thresholds[0].value_in_milliseconds #=> Integer
+    #   resp.inference_recommendations #=> Array
+    #   resp.inference_recommendations[0].metrics.cost_per_hour #=> Float
+    #   resp.inference_recommendations[0].metrics.cost_per_inference #=> Float
+    #   resp.inference_recommendations[0].metrics.max_invocations #=> Integer
+    #   resp.inference_recommendations[0].metrics.model_latency #=> Integer
+    #   resp.inference_recommendations[0].endpoint_configuration.endpoint_name #=> String
+    #   resp.inference_recommendations[0].endpoint_configuration.variant_name #=> String
+    #   resp.inference_recommendations[0].endpoint_configuration.instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge"
+    #   resp.inference_recommendations[0].endpoint_configuration.initial_instance_count #=> Integer
+    #   resp.inference_recommendations[0].model_configuration.inference_specification_name #=> String
+    #   resp.inference_recommendations[0].model_configuration.environment_parameters #=> Array
+    #   resp.inference_recommendations[0].model_configuration.environment_parameters[0].key #=> String
+    #   resp.inference_recommendations[0].model_configuration.environment_parameters[0].value_type #=> String
+    #   resp.inference_recommendations[0].model_configuration.environment_parameters[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeInferenceRecommendationsJob AWS API Documentation
+    #
+    # @overload describe_inference_recommendations_job(params = {})
+    # @param [Hash] params ({})
+    def describe_inference_recommendations_job(params = {}, options = {})
+      req = build_request(:describe_inference_recommendations_job, params)
+      req.send_request(options)
+    end
+
     # Gets information about a labeling job.
     #
     # @option params [required, String] :labeling_job_name
@@ -9312,6 +9688,58 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Provides a list of properties for the requested lineage group. For
+    # more information, see [ Cross-Account Lineage Tracking ][1] in the
+    # *Amazon SageMaker Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/xaccount-lineage-tracking.html
+    #
+    # @option params [required, String] :lineage_group_name
+    #   The name of the lineage group.
+    #
+    # @return [Types::DescribeLineageGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLineageGroupResponse#lineage_group_name #lineage_group_name} => String
+    #   * {Types::DescribeLineageGroupResponse#lineage_group_arn #lineage_group_arn} => String
+    #   * {Types::DescribeLineageGroupResponse#display_name #display_name} => String
+    #   * {Types::DescribeLineageGroupResponse#description #description} => String
+    #   * {Types::DescribeLineageGroupResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeLineageGroupResponse#created_by #created_by} => Types::UserContext
+    #   * {Types::DescribeLineageGroupResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeLineageGroupResponse#last_modified_by #last_modified_by} => Types::UserContext
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_lineage_group({
+    #     lineage_group_name: "ExperimentEntityName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lineage_group_name #=> String
+    #   resp.lineage_group_arn #=> String
+    #   resp.display_name #=> String
+    #   resp.description #=> String
+    #   resp.creation_time #=> Time
+    #   resp.created_by.user_profile_arn #=> String
+    #   resp.created_by.user_profile_name #=> String
+    #   resp.created_by.domain_id #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_by.user_profile_arn #=> String
+    #   resp.last_modified_by.user_profile_name #=> String
+    #   resp.last_modified_by.domain_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeLineageGroup AWS API Documentation
+    #
+    # @overload describe_lineage_group(params = {})
+    # @param [Hash] params ({})
+    def describe_lineage_group(params = {}, options = {})
+      req = build_request(:describe_lineage_group, params)
+      req.send_request(options)
+    end
+
     # Describes a model that you created using the `CreateModel` API.
     #
     # @option params [required, String] :model_name
@@ -9347,6 +9775,7 @@ module Aws::SageMaker
     #   resp.primary_container.environment #=> Hash
     #   resp.primary_container.environment["EnvironmentKey"] #=> String
     #   resp.primary_container.model_package_name #=> String
+    #   resp.primary_container.inference_specification_name #=> String
     #   resp.primary_container.multi_model_config.model_cache_setting #=> String, one of "Enabled", "Disabled"
     #   resp.containers #=> Array
     #   resp.containers[0].container_hostname #=> String
@@ -9358,6 +9787,7 @@ module Aws::SageMaker
     #   resp.containers[0].environment #=> Hash
     #   resp.containers[0].environment["EnvironmentKey"] #=> String
     #   resp.containers[0].model_package_name #=> String
+    #   resp.containers[0].inference_specification_name #=> String
     #   resp.containers[0].multi_model_config.model_cache_setting #=> String, one of "Enabled", "Disabled"
     #   resp.inference_execution_config.mode #=> String, one of "Serial", "Direct"
     #   resp.execution_role_arn #=> String
@@ -9565,6 +9995,11 @@ module Aws::SageMaker
     #   * {Types::DescribeModelPackageOutput#last_modified_by #last_modified_by} => Types::UserContext
     #   * {Types::DescribeModelPackageOutput#approval_description #approval_description} => String
     #   * {Types::DescribeModelPackageOutput#customer_metadata_properties #customer_metadata_properties} => Hash&lt;String,String&gt;
+    #   * {Types::DescribeModelPackageOutput#drift_check_baselines #drift_check_baselines} => Types::DriftCheckBaselines
+    #   * {Types::DescribeModelPackageOutput#domain #domain} => String
+    #   * {Types::DescribeModelPackageOutput#task #task} => String
+    #   * {Types::DescribeModelPackageOutput#sample_payload_url #sample_payload_url} => String
+    #   * {Types::DescribeModelPackageOutput#additional_inference_specifications #additional_inference_specifications} => Array&lt;Types::AdditionalInferenceSpecificationDefinition&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -9588,6 +10023,10 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].product_id #=> String
     #   resp.inference_specification.containers[0].environment #=> Hash
     #   resp.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
+    #   resp.inference_specification.containers[0].model_input.data_input_config #=> String
+    #   resp.inference_specification.containers[0].framework #=> String
+    #   resp.inference_specification.containers[0].framework_version #=> String
+    #   resp.inference_specification.containers[0].nearest_model_name #=> String
     #   resp.inference_specification.supported_transform_instance_types #=> Array
     #   resp.inference_specification.supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.inference_specification.supported_realtime_inference_instance_types #=> Array
@@ -9652,6 +10091,12 @@ module Aws::SageMaker
     #   resp.model_metrics.bias.report.content_type #=> String
     #   resp.model_metrics.bias.report.content_digest #=> String
     #   resp.model_metrics.bias.report.s3_uri #=> String
+    #   resp.model_metrics.bias.pre_training_report.content_type #=> String
+    #   resp.model_metrics.bias.pre_training_report.content_digest #=> String
+    #   resp.model_metrics.bias.pre_training_report.s3_uri #=> String
+    #   resp.model_metrics.bias.post_training_report.content_type #=> String
+    #   resp.model_metrics.bias.post_training_report.content_digest #=> String
+    #   resp.model_metrics.bias.post_training_report.s3_uri #=> String
     #   resp.model_metrics.explainability.report.content_type #=> String
     #   resp.model_metrics.explainability.report.content_digest #=> String
     #   resp.model_metrics.explainability.report.s3_uri #=> String
@@ -9662,6 +10107,59 @@ module Aws::SageMaker
     #   resp.approval_description #=> String
     #   resp.customer_metadata_properties #=> Hash
     #   resp.customer_metadata_properties["CustomerMetadataKey"] #=> String
+    #   resp.drift_check_baselines.bias.config_file.content_type #=> String
+    #   resp.drift_check_baselines.bias.config_file.content_digest #=> String
+    #   resp.drift_check_baselines.bias.config_file.s3_uri #=> String
+    #   resp.drift_check_baselines.bias.pre_training_constraints.content_type #=> String
+    #   resp.drift_check_baselines.bias.pre_training_constraints.content_digest #=> String
+    #   resp.drift_check_baselines.bias.pre_training_constraints.s3_uri #=> String
+    #   resp.drift_check_baselines.bias.post_training_constraints.content_type #=> String
+    #   resp.drift_check_baselines.bias.post_training_constraints.content_digest #=> String
+    #   resp.drift_check_baselines.bias.post_training_constraints.s3_uri #=> String
+    #   resp.drift_check_baselines.explainability.constraints.content_type #=> String
+    #   resp.drift_check_baselines.explainability.constraints.content_digest #=> String
+    #   resp.drift_check_baselines.explainability.constraints.s3_uri #=> String
+    #   resp.drift_check_baselines.explainability.config_file.content_type #=> String
+    #   resp.drift_check_baselines.explainability.config_file.content_digest #=> String
+    #   resp.drift_check_baselines.explainability.config_file.s3_uri #=> String
+    #   resp.drift_check_baselines.model_quality.statistics.content_type #=> String
+    #   resp.drift_check_baselines.model_quality.statistics.content_digest #=> String
+    #   resp.drift_check_baselines.model_quality.statistics.s3_uri #=> String
+    #   resp.drift_check_baselines.model_quality.constraints.content_type #=> String
+    #   resp.drift_check_baselines.model_quality.constraints.content_digest #=> String
+    #   resp.drift_check_baselines.model_quality.constraints.s3_uri #=> String
+    #   resp.drift_check_baselines.model_data_quality.statistics.content_type #=> String
+    #   resp.drift_check_baselines.model_data_quality.statistics.content_digest #=> String
+    #   resp.drift_check_baselines.model_data_quality.statistics.s3_uri #=> String
+    #   resp.drift_check_baselines.model_data_quality.constraints.content_type #=> String
+    #   resp.drift_check_baselines.model_data_quality.constraints.content_digest #=> String
+    #   resp.drift_check_baselines.model_data_quality.constraints.s3_uri #=> String
+    #   resp.domain #=> String
+    #   resp.task #=> String
+    #   resp.sample_payload_url #=> String
+    #   resp.additional_inference_specifications #=> Array
+    #   resp.additional_inference_specifications[0].name #=> String
+    #   resp.additional_inference_specifications[0].description #=> String
+    #   resp.additional_inference_specifications[0].containers #=> Array
+    #   resp.additional_inference_specifications[0].containers[0].container_hostname #=> String
+    #   resp.additional_inference_specifications[0].containers[0].image #=> String
+    #   resp.additional_inference_specifications[0].containers[0].image_digest #=> String
+    #   resp.additional_inference_specifications[0].containers[0].model_data_url #=> String
+    #   resp.additional_inference_specifications[0].containers[0].product_id #=> String
+    #   resp.additional_inference_specifications[0].containers[0].environment #=> Hash
+    #   resp.additional_inference_specifications[0].containers[0].environment["EnvironmentKey"] #=> String
+    #   resp.additional_inference_specifications[0].containers[0].model_input.data_input_config #=> String
+    #   resp.additional_inference_specifications[0].containers[0].framework #=> String
+    #   resp.additional_inference_specifications[0].containers[0].framework_version #=> String
+    #   resp.additional_inference_specifications[0].containers[0].nearest_model_name #=> String
+    #   resp.additional_inference_specifications[0].supported_transform_instance_types #=> Array
+    #   resp.additional_inference_specifications[0].supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
+    #   resp.additional_inference_specifications[0].supported_realtime_inference_instance_types #=> Array
+    #   resp.additional_inference_specifications[0].supported_realtime_inference_instance_types[0] #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge"
+    #   resp.additional_inference_specifications[0].supported_content_types #=> Array
+    #   resp.additional_inference_specifications[0].supported_content_types[0] #=> String
+    #   resp.additional_inference_specifications[0].supported_response_mime_types #=> Array
+    #   resp.additional_inference_specifications[0].supported_response_mime_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackage AWS API Documentation
     #
@@ -10765,11 +11263,12 @@ module Aws::SageMaker
     #   * {Types::DescribeTrialComponentResponse#output_artifacts #output_artifacts} => Hash&lt;String,Types::TrialComponentArtifact&gt;
     #   * {Types::DescribeTrialComponentResponse#metadata_properties #metadata_properties} => Types::MetadataProperties
     #   * {Types::DescribeTrialComponentResponse#metrics #metrics} => Array&lt;Types::TrialComponentMetricSummary&gt;
+    #   * {Types::DescribeTrialComponentResponse#lineage_group_arn #lineage_group_arn} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_trial_component({
-    #     trial_component_name: "ExperimentEntityName", # required
+    #     trial_component_name: "ExperimentEntityNameOrArn", # required
     #   })
     #
     # @example Response structure
@@ -10814,6 +11313,7 @@ module Aws::SageMaker
     #   resp.metrics[0].count #=> Integer
     #   resp.metrics[0].avg #=> Float
     #   resp.metrics[0].std_dev #=> Float
+    #   resp.lineage_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrialComponent AWS API Documentation
     #
@@ -11125,6 +11625,36 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def get_device_fleet_report(params = {}, options = {})
       req = build_request(:get_device_fleet_report, params)
+      req.send_request(options)
+    end
+
+    # The resource policy for the lineage group.
+    #
+    # @option params [required, String] :lineage_group_name
+    #   The name or Amazon Resource Name (ARN) of the lineage group.
+    #
+    # @return [Types::GetLineageGroupPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLineageGroupPolicyResponse#lineage_group_arn #lineage_group_arn} => String
+    #   * {Types::GetLineageGroupPolicyResponse#resource_policy #resource_policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_lineage_group_policy({
+    #     lineage_group_name: "LineageGroupNameOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lineage_group_arn #=> String
+    #   resp.resource_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetLineageGroupPolicy AWS API Documentation
+    #
+    # @overload get_lineage_group_policy(params = {})
+    # @param [Hash] params ({})
+    def get_lineage_group_policy(params = {}, options = {})
+      req = build_request(:get_lineage_group_policy, params)
       req.send_request(options)
     end
 
@@ -13066,6 +13596,93 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists recommendation jobs that satisfy various filters.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only jobs created after the specified time
+    #   (timestamp).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only jobs created before the specified time
+    #   (timestamp).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   A filter that returns only jobs that were last modified after the
+    #   specified time (timestamp).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   A filter that returns only jobs that were last modified before the
+    #   specified time (timestamp).
+    #
+    # @option params [String] :name_contains
+    #   A string in the job name. This filter returns only recommendations
+    #   whose name contains the specified string.
+    #
+    # @option params [String] :status_equals
+    #   A filter that retrieves only inference recommendations jobs with a
+    #   specific status.
+    #
+    # @option params [String] :sort_by
+    #   The parameter by which to sort the results.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for the results.
+    #
+    # @option params [String] :next_token
+    #   If the response to a previous
+    #   `ListInferenceRecommendationsJobsRequest` request was truncated, the
+    #   response includes a `NextToken`. To retrieve the next set of
+    #   recommendations, use the token in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of recommendations to return in the response.
+    #
+    # @return [Types::ListInferenceRecommendationsJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInferenceRecommendationsJobsResponse#inference_recommendations_jobs #inference_recommendations_jobs} => Array&lt;Types::InferenceRecommendationsJob&gt;
+    #   * {Types::ListInferenceRecommendationsJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_inference_recommendations_jobs({
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     name_contains: "NameContains",
+    #     status_equals: "PENDING", # accepts PENDING, IN_PROGRESS, COMPLETED, FAILED, STOPPING, STOPPED
+    #     sort_by: "Name", # accepts Name, CreationTime, Status
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inference_recommendations_jobs #=> Array
+    #   resp.inference_recommendations_jobs[0].job_name #=> String
+    #   resp.inference_recommendations_jobs[0].job_description #=> String
+    #   resp.inference_recommendations_jobs[0].job_type #=> String, one of "Default", "Advanced"
+    #   resp.inference_recommendations_jobs[0].job_arn #=> String
+    #   resp.inference_recommendations_jobs[0].status #=> String, one of "PENDING", "IN_PROGRESS", "COMPLETED", "FAILED", "STOPPING", "STOPPED"
+    #   resp.inference_recommendations_jobs[0].creation_time #=> Time
+    #   resp.inference_recommendations_jobs[0].completion_time #=> Time
+    #   resp.inference_recommendations_jobs[0].role_arn #=> String
+    #   resp.inference_recommendations_jobs[0].last_modified_time #=> Time
+    #   resp.inference_recommendations_jobs[0].failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListInferenceRecommendationsJobs AWS API Documentation
+    #
+    # @overload list_inference_recommendations_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_inference_recommendations_jobs(params = {}, options = {})
+      req = build_request(:list_inference_recommendations_jobs, params)
+      req.send_request(options)
+    end
+
     # Gets a list of labeling jobs.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
@@ -13237,6 +13854,74 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # A list of lineage groups shared with your Amazon Web Services account.
+    # For more information, see [ Cross-Account Lineage Tracking ][1] in the
+    # *Amazon SageMaker Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/xaccount-lineage-tracking.html
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_after
+    #   A timestamp to filter against lineage groups created after a certain
+    #   point in time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_before
+    #   A timestamp to filter against lineage groups created before a certain
+    #   point in time.
+    #
+    # @option params [String] :sort_by
+    #   The parameter by which to sort the results. The default is
+    #   `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for the results. The default is `Ascending`.
+    #
+    # @option params [String] :next_token
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of algorithms, use it in the subsequent request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of endpoints to return in the response. This value
+    #   defaults to 10.
+    #
+    # @return [Types::ListLineageGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLineageGroupsResponse#lineage_group_summaries #lineage_group_summaries} => Array&lt;Types::LineageGroupSummary&gt;
+    #   * {Types::ListLineageGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_lineage_groups({
+    #     created_after: Time.now,
+    #     created_before: Time.now,
+    #     sort_by: "Name", # accepts Name, CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lineage_group_summaries #=> Array
+    #   resp.lineage_group_summaries[0].lineage_group_arn #=> String
+    #   resp.lineage_group_summaries[0].lineage_group_name #=> String
+    #   resp.lineage_group_summaries[0].display_name #=> String
+    #   resp.lineage_group_summaries[0].creation_time #=> Time
+    #   resp.lineage_group_summaries[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLineageGroups AWS API Documentation
+    #
+    # @overload list_lineage_groups(params = {})
+    # @param [Hash] params ({})
+    def list_lineage_groups(params = {}, options = {})
+      req = build_request(:list_lineage_groups, params)
+      req.send_request(options)
+    end
+
     # Lists model bias jobs definitions that satisfy various filters.
     #
     # @option params [String] :endpoint_name
@@ -13376,6 +14061,65 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def list_model_explainability_job_definitions(params = {}, options = {})
       req = build_request(:list_model_explainability_job_definitions, params)
+      req.send_request(options)
+    end
+
+    # Lists the domain, framework, task, and model name of standard machine
+    # learning models found in common model zoos.
+    #
+    # @option params [Types::ModelMetadataSearchExpression] :search_expression
+    #   One or more filters that searches for the specified resource or
+    #   resources in a search. All resource objects that satisfy the
+    #   expression's condition are included in the search results. Specify
+    #   the Framework, FrameworkVersion, Domain or Task to filter supported.
+    #   Filter names and values are case-sensitive.
+    #
+    # @option params [String] :next_token
+    #   If the response to a previous `ListModelMetadataResponse` request was
+    #   truncated, the response includes a NextToken. To retrieve the next set
+    #   of model metadata, use the token in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of models to return in the response.
+    #
+    # @return [Types::ListModelMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelMetadataResponse#model_metadata_summaries #model_metadata_summaries} => Array&lt;Types::ModelMetadataSummary&gt;
+    #   * {Types::ListModelMetadataResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_metadata({
+    #     search_expression: {
+    #       filters: [
+    #         {
+    #           name: "Domain", # required, accepts Domain, Framework, Task, FrameworkVersion
+    #           value: "String256", # required
+    #         },
+    #       ],
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_metadata_summaries #=> Array
+    #   resp.model_metadata_summaries[0].domain #=> String
+    #   resp.model_metadata_summaries[0].framework #=> String
+    #   resp.model_metadata_summaries[0].task #=> String
+    #   resp.model_metadata_summaries[0].model #=> String
+    #   resp.model_metadata_summaries[0].framework_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelMetadata AWS API Documentation
+    #
+    # @overload list_model_metadata(params = {})
+    # @param [Hash] params ({})
+    def list_model_metadata(params = {}, options = {})
+      req = build_request(:list_model_metadata, params)
       req.send_request(options)
     end
 
@@ -14127,6 +14871,24 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.lambda.output_parameters #=> Array
     #   resp.pipeline_execution_steps[0].metadata.lambda.output_parameters[0].name #=> String
     #   resp.pipeline_execution_steps[0].metadata.lambda.output_parameters[0].value #=> String
+    #   resp.pipeline_execution_steps[0].metadata.quality_check.check_type #=> String
+    #   resp.pipeline_execution_steps[0].metadata.quality_check.baseline_used_for_drift_check_statistics #=> String
+    #   resp.pipeline_execution_steps[0].metadata.quality_check.baseline_used_for_drift_check_constraints #=> String
+    #   resp.pipeline_execution_steps[0].metadata.quality_check.calculated_baseline_statistics #=> String
+    #   resp.pipeline_execution_steps[0].metadata.quality_check.calculated_baseline_constraints #=> String
+    #   resp.pipeline_execution_steps[0].metadata.quality_check.model_package_group_name #=> String
+    #   resp.pipeline_execution_steps[0].metadata.quality_check.violation_report #=> String
+    #   resp.pipeline_execution_steps[0].metadata.quality_check.check_job_arn #=> String
+    #   resp.pipeline_execution_steps[0].metadata.quality_check.skip_check #=> Boolean
+    #   resp.pipeline_execution_steps[0].metadata.quality_check.register_new_baseline #=> Boolean
+    #   resp.pipeline_execution_steps[0].metadata.clarify_check.check_type #=> String
+    #   resp.pipeline_execution_steps[0].metadata.clarify_check.baseline_used_for_drift_check_constraints #=> String
+    #   resp.pipeline_execution_steps[0].metadata.clarify_check.calculated_baseline_constraints #=> String
+    #   resp.pipeline_execution_steps[0].metadata.clarify_check.model_package_group_name #=> String
+    #   resp.pipeline_execution_steps[0].metadata.clarify_check.violation_report #=> String
+    #   resp.pipeline_execution_steps[0].metadata.clarify_check.check_job_arn #=> String
+    #   resp.pipeline_execution_steps[0].metadata.clarify_check.skip_check #=> Boolean
+    #   resp.pipeline_execution_steps[0].metadata.clarify_check.register_new_baseline #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutionSteps AWS API Documentation
@@ -15321,6 +16083,112 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Use this action to inspect your lineage and discover relationships
+    # between entities. For more information, see [ Querying Lineage
+    # Entities][1] in the *Amazon SageMaker Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/querying-lineage-entities.html
+    #
+    # @option params [required, Array<String>] :start_arns
+    #   A list of resource Amazon Resource Name (ARN) that represent the
+    #   starting point for your lineage query.
+    #
+    # @option params [String] :direction
+    #   Associations between lineage entities are directed. This parameter
+    #   determines the direction from the StartArn(s) the query will look.
+    #
+    # @option params [Boolean] :include_edges
+    #   Setting this value to `True` will retrieve not only the entities of
+    #   interest but also the [Associations][1] and lineage entities on the
+    #   path. Set to `False` to only return lineage entities that match your
+    #   query.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html
+    #
+    # @option params [Types::QueryFilters] :filters
+    #   A set of filtering parameters that allow you to specify which entities
+    #   should be returned.
+    #
+    #   * Properties - Key-value pairs to match on the lineage entities'
+    #     properties.
+    #
+    #   * LineageTypes - A set of lineage entity types to match on. For
+    #     example: `TrialComponent`, `Artifact`, or `Context`.
+    #
+    #   * CreatedBefore - Filter entities created before this date.
+    #
+    #   * ModifiedBefore - Filter entities modified before this date.
+    #
+    #   * ModifiedAfter - Filter entities modified after this date.
+    #
+    # @option params [Integer] :max_depth
+    #   The maximum depth in lineage relationships from the `StartArns` that
+    #   will be traversed. Depth is a measure of the number of `Associations`
+    #   from the `StartArn` entity to the matched results.
+    #
+    # @option params [Integer] :max_results
+    #   Limits the number of vertices in the results. Use the `NextToken` in a
+    #   response to to retrieve the next page of results.
+    #
+    # @option params [String] :next_token
+    #   Limits the number of vertices in the request. Use the `NextToken` in a
+    #   response to to retrieve the next page of results.
+    #
+    # @return [Types::QueryLineageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::QueryLineageResponse#vertices #vertices} => Array&lt;Types::Vertex&gt;
+    #   * {Types::QueryLineageResponse#edges #edges} => Array&lt;Types::Edge&gt;
+    #   * {Types::QueryLineageResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.query_lineage({
+    #     start_arns: ["AssociationEntityArn"], # required
+    #     direction: "Both", # accepts Both, Ascendants, Descendants
+    #     include_edges: false,
+    #     filters: {
+    #       types: ["String40"],
+    #       lineage_types: ["TrialComponent"], # accepts TrialComponent, Artifact, Context, Action
+    #       created_before: Time.now,
+    #       created_after: Time.now,
+    #       modified_before: Time.now,
+    #       modified_after: Time.now,
+    #       properties: {
+    #         "String256" => "String256",
+    #       },
+    #     },
+    #     max_depth: 1,
+    #     max_results: 1,
+    #     next_token: "String8192",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vertices #=> Array
+    #   resp.vertices[0].arn #=> String
+    #   resp.vertices[0].type #=> String
+    #   resp.vertices[0].lineage_type #=> String, one of "TrialComponent", "Artifact", "Context", "Action"
+    #   resp.edges #=> Array
+    #   resp.edges[0].source_arn #=> String
+    #   resp.edges[0].destination_arn #=> String
+    #   resp.edges[0].association_type #=> String, one of "ContributedTo", "AssociatedWith", "DerivedFrom", "Produced"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/QueryLineage AWS API Documentation
+    #
+    # @overload query_lineage(params = {})
+    # @param [Hash] params ({})
+    def query_lineage(params = {}, options = {})
+      req = build_request(:query_lineage, params)
+      req.send_request(options)
+    end
+
     # Register devices.
     #
     # @option params [required, String] :device_fleet_name
@@ -15937,6 +16805,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.transform_job.tags #=> Array
     #   resp.results[0].trial_component.source_detail.transform_job.tags[0].key #=> String
     #   resp.results[0].trial_component.source_detail.transform_job.tags[0].value #=> String
+    #   resp.results[0].trial_component.lineage_group_arn #=> String
     #   resp.results[0].trial_component.tags #=> Array
     #   resp.results[0].trial_component.tags[0].key #=> String
     #   resp.results[0].trial_component.tags[0].value #=> String
@@ -15960,6 +16829,10 @@ module Aws::SageMaker
     #   resp.results[0].endpoint.production_variants[0].variant_status[0].status #=> String, one of "Creating", "Updating", "Deleting", "ActivatingTraffic", "Baking"
     #   resp.results[0].endpoint.production_variants[0].variant_status[0].status_message #=> String
     #   resp.results[0].endpoint.production_variants[0].variant_status[0].start_time #=> Time
+    #   resp.results[0].endpoint.production_variants[0].current_serverless_config.memory_size_in_mb #=> Integer
+    #   resp.results[0].endpoint.production_variants[0].current_serverless_config.max_concurrency #=> Integer
+    #   resp.results[0].endpoint.production_variants[0].desired_serverless_config.memory_size_in_mb #=> Integer
+    #   resp.results[0].endpoint.production_variants[0].desired_serverless_config.max_concurrency #=> Integer
     #   resp.results[0].endpoint.data_capture_config.enable_capture #=> Boolean
     #   resp.results[0].endpoint.data_capture_config.capture_status #=> String, one of "Started", "Stopped"
     #   resp.results[0].endpoint.data_capture_config.current_sampling_percentage #=> Integer
@@ -16051,6 +16924,10 @@ module Aws::SageMaker
     #   resp.results[0].model_package.inference_specification.containers[0].product_id #=> String
     #   resp.results[0].model_package.inference_specification.containers[0].environment #=> Hash
     #   resp.results[0].model_package.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
+    #   resp.results[0].model_package.inference_specification.containers[0].model_input.data_input_config #=> String
+    #   resp.results[0].model_package.inference_specification.containers[0].framework #=> String
+    #   resp.results[0].model_package.inference_specification.containers[0].framework_version #=> String
+    #   resp.results[0].model_package.inference_specification.containers[0].nearest_model_name #=> String
     #   resp.results[0].model_package.inference_specification.supported_transform_instance_types #=> Array
     #   resp.results[0].model_package.inference_specification.supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
     #   resp.results[0].model_package.inference_specification.supported_realtime_inference_instance_types #=> Array
@@ -16115,6 +16992,12 @@ module Aws::SageMaker
     #   resp.results[0].model_package.model_metrics.bias.report.content_type #=> String
     #   resp.results[0].model_package.model_metrics.bias.report.content_digest #=> String
     #   resp.results[0].model_package.model_metrics.bias.report.s3_uri #=> String
+    #   resp.results[0].model_package.model_metrics.bias.pre_training_report.content_type #=> String
+    #   resp.results[0].model_package.model_metrics.bias.pre_training_report.content_digest #=> String
+    #   resp.results[0].model_package.model_metrics.bias.pre_training_report.s3_uri #=> String
+    #   resp.results[0].model_package.model_metrics.bias.post_training_report.content_type #=> String
+    #   resp.results[0].model_package.model_metrics.bias.post_training_report.content_digest #=> String
+    #   resp.results[0].model_package.model_metrics.bias.post_training_report.s3_uri #=> String
     #   resp.results[0].model_package.model_metrics.explainability.report.content_type #=> String
     #   resp.results[0].model_package.model_metrics.explainability.report.content_digest #=> String
     #   resp.results[0].model_package.model_metrics.explainability.report.s3_uri #=> String
@@ -16123,11 +17006,64 @@ module Aws::SageMaker
     #   resp.results[0].model_package.last_modified_by.user_profile_name #=> String
     #   resp.results[0].model_package.last_modified_by.domain_id #=> String
     #   resp.results[0].model_package.approval_description #=> String
+    #   resp.results[0].model_package.domain #=> String
+    #   resp.results[0].model_package.task #=> String
+    #   resp.results[0].model_package.sample_payload_url #=> String
+    #   resp.results[0].model_package.additional_inference_specifications #=> Array
+    #   resp.results[0].model_package.additional_inference_specifications[0].name #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].description #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers #=> Array
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers[0].container_hostname #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers[0].image #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers[0].image_digest #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers[0].model_data_url #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers[0].product_id #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers[0].environment #=> Hash
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers[0].environment["EnvironmentKey"] #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers[0].model_input.data_input_config #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers[0].framework #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers[0].framework_version #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].containers[0].nearest_model_name #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].supported_transform_instance_types #=> Array
+    #   resp.results[0].model_package.additional_inference_specifications[0].supported_transform_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge"
+    #   resp.results[0].model_package.additional_inference_specifications[0].supported_realtime_inference_instance_types #=> Array
+    #   resp.results[0].model_package.additional_inference_specifications[0].supported_realtime_inference_instance_types[0] #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.m5d.large", "ml.m5d.xlarge", "ml.m5d.2xlarge", "ml.m5d.4xlarge", "ml.m5d.12xlarge", "ml.m5d.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5d.large", "ml.c5d.xlarge", "ml.c5d.2xlarge", "ml.c5d.4xlarge", "ml.c5d.9xlarge", "ml.c5d.18xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.12xlarge", "ml.r5.24xlarge", "ml.r5d.large", "ml.r5d.xlarge", "ml.r5d.2xlarge", "ml.r5d.4xlarge", "ml.r5d.12xlarge", "ml.r5d.24xlarge", "ml.inf1.xlarge", "ml.inf1.2xlarge", "ml.inf1.6xlarge", "ml.inf1.24xlarge"
+    #   resp.results[0].model_package.additional_inference_specifications[0].supported_content_types #=> Array
+    #   resp.results[0].model_package.additional_inference_specifications[0].supported_content_types[0] #=> String
+    #   resp.results[0].model_package.additional_inference_specifications[0].supported_response_mime_types #=> Array
+    #   resp.results[0].model_package.additional_inference_specifications[0].supported_response_mime_types[0] #=> String
     #   resp.results[0].model_package.tags #=> Array
     #   resp.results[0].model_package.tags[0].key #=> String
     #   resp.results[0].model_package.tags[0].value #=> String
     #   resp.results[0].model_package.customer_metadata_properties #=> Hash
     #   resp.results[0].model_package.customer_metadata_properties["CustomerMetadataKey"] #=> String
+    #   resp.results[0].model_package.drift_check_baselines.bias.config_file.content_type #=> String
+    #   resp.results[0].model_package.drift_check_baselines.bias.config_file.content_digest #=> String
+    #   resp.results[0].model_package.drift_check_baselines.bias.config_file.s3_uri #=> String
+    #   resp.results[0].model_package.drift_check_baselines.bias.pre_training_constraints.content_type #=> String
+    #   resp.results[0].model_package.drift_check_baselines.bias.pre_training_constraints.content_digest #=> String
+    #   resp.results[0].model_package.drift_check_baselines.bias.pre_training_constraints.s3_uri #=> String
+    #   resp.results[0].model_package.drift_check_baselines.bias.post_training_constraints.content_type #=> String
+    #   resp.results[0].model_package.drift_check_baselines.bias.post_training_constraints.content_digest #=> String
+    #   resp.results[0].model_package.drift_check_baselines.bias.post_training_constraints.s3_uri #=> String
+    #   resp.results[0].model_package.drift_check_baselines.explainability.constraints.content_type #=> String
+    #   resp.results[0].model_package.drift_check_baselines.explainability.constraints.content_digest #=> String
+    #   resp.results[0].model_package.drift_check_baselines.explainability.constraints.s3_uri #=> String
+    #   resp.results[0].model_package.drift_check_baselines.explainability.config_file.content_type #=> String
+    #   resp.results[0].model_package.drift_check_baselines.explainability.config_file.content_digest #=> String
+    #   resp.results[0].model_package.drift_check_baselines.explainability.config_file.s3_uri #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_quality.statistics.content_type #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_quality.statistics.content_digest #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_quality.statistics.s3_uri #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_quality.constraints.content_type #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_quality.constraints.content_digest #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_quality.constraints.s3_uri #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_data_quality.statistics.content_type #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_data_quality.statistics.content_digest #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_data_quality.statistics.s3_uri #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_data_quality.constraints.content_type #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_data_quality.constraints.content_digest #=> String
+    #   resp.results[0].model_package.drift_check_baselines.model_data_quality.constraints.s3_uri #=> String
     #   resp.results[0].model_package_group.model_package_group_name #=> String
     #   resp.results[0].model_package_group.model_package_group_arn #=> String
     #   resp.results[0].model_package_group.model_package_group_description #=> String
@@ -16538,6 +17474,28 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def stop_hyper_parameter_tuning_job(params = {}, options = {})
       req = build_request(:stop_hyper_parameter_tuning_job, params)
+      req.send_request(options)
+    end
+
+    # Stops an Inference Recommender job.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job you want to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_inference_recommendations_job({
+    #     job_name: "RecommendationJobName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopInferenceRecommendationsJob AWS API Documentation
+    #
+    # @overload stop_inference_recommendations_job(params = {})
+    # @param [Hash] params ({})
+    def stop_inference_recommendations_job(params = {}, options = {})
+      req = build_request(:stop_inference_recommendations_job, params)
       req.send_request(options)
     end
 
@@ -17409,6 +18367,14 @@ module Aws::SageMaker
     #   The metadata properties associated with the model package versions to
     #   remove.
     #
+    # @option params [Array<Types::AdditionalInferenceSpecificationDefinition>] :additional_inference_specifications_to_add
+    #   An array of additional Inference Specification objects to be added to
+    #   the existing array additional Inference Specification. Total number of
+    #   additional Inference Specifications can not exceed 15. Each additional
+    #   Inference Specification specifies artifacts based on this model
+    #   package that can be used on inference endpoints. Generally used with
+    #   SageMaker Neo to store the compiled artifacts.
+    #
     # @return [Types::UpdateModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateModelPackageOutput#model_package_arn #model_package_arn} => String
@@ -17423,6 +18389,34 @@ module Aws::SageMaker
     #       "CustomerMetadataKey" => "CustomerMetadataValue",
     #     },
     #     customer_metadata_properties_to_remove: ["CustomerMetadataKey"],
+    #     additional_inference_specifications_to_add: [
+    #       {
+    #         name: "EntityName", # required
+    #         description: "EntityDescription",
+    #         containers: [ # required
+    #           {
+    #             container_hostname: "ContainerHostname",
+    #             image: "ContainerImage", # required
+    #             image_digest: "ImageDigest",
+    #             model_data_url: "Url",
+    #             product_id: "ProductId",
+    #             environment: {
+    #               "EnvironmentKey" => "EnvironmentValue",
+    #             },
+    #             model_input: {
+    #               data_input_config: "DataInputConfig", # required
+    #             },
+    #             framework: "String",
+    #             framework_version: "FrameworkVersion",
+    #             nearest_model_name: "String",
+    #           },
+    #         ],
+    #         supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
+    #         supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge
+    #         supported_content_types: ["ContentType"],
+    #         supported_response_mime_types: ["ResponseMIMEType"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -18369,7 +19363,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -112,6 +112,115 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateEntitiesToExperienceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ExperienceId", # required
+    #         index_id: "IndexId", # required
+    #         entity_list: [ # required
+    #           {
+    #             entity_id: "EntityId", # required
+    #             entity_type: "USER", # required, accepts USER, GROUP
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_list
+    #   Lists users or groups in your Amazon Web Services SSO identity
+    #   source.
+    #   @return [Array<Types::EntityConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AssociateEntitiesToExperienceRequest AWS API Documentation
+    #
+    class AssociateEntitiesToExperienceRequest < Struct.new(
+      :id,
+      :index_id,
+      :entity_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_entity_list
+    #   Lists the users or groups in your Amazon Web Services SSO identity
+    #   source that failed to properly configure with your Amazon Kendra
+    #   experience.
+    #   @return [Array<Types::FailedEntity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AssociateEntitiesToExperienceResponse AWS API Documentation
+    #
+    class AssociateEntitiesToExperienceResponse < Struct.new(
+      :failed_entity_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociatePersonasToEntitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ExperienceId", # required
+    #         index_id: "IndexId", # required
+    #         personas: [ # required
+    #           {
+    #             entity_id: "EntityId", # required
+    #             persona: "OWNER", # required, accepts OWNER, VIEWER
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] personas
+    #   The personas that define the specific permissions of users or groups
+    #   in your Amazon Web Services SSO identity source. The available
+    #   personas or access roles are `Owner` and `Viewer`. For more
+    #   information on these personas, see [Providing access to your search
+    #   page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience
+    #   @return [Array<Types::EntityPersonaConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AssociatePersonasToEntitiesRequest AWS API Documentation
+    #
+    class AssociatePersonasToEntitiesRequest < Struct.new(
+      :id,
+      :index_id,
+      :personas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_entity_list
+    #   Lists the users or groups in your Amazon Web Services SSO identity
+    #   source that failed to properly configure with your Amazon Kendra
+    #   experience.
+    #   @return [Array<Types::FailedEntity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/AssociatePersonasToEntitiesResponse AWS API Documentation
+    #
+    class AssociatePersonasToEntitiesResponse < Struct.new(
+      :failed_entity_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides filtering the query results based on document attributes.
     #
     # When you use the `AndAllFilters` or `OrAllFilters`, filters you can
@@ -122,7 +231,7 @@ module Aws::Kendra
     #
     # 1.  ` <OrAllFilters>`
     #
-    # 2.  ` <EqualTo>`
+    # 2.  ` <EqualsTo>`
     #
     # If you use more than 2 layers, you receive a `ValidationException`
     # exception with the message "`AttributeFilter` cannot have a depth of
@@ -557,7 +666,7 @@ module Aws::Kendra
     #   @return [Integer]
     #
     # @!attribute [rw] credentials
-    #   Your secret ARN, which you can create in [AWS Secrets Manager][1]
+    #   Your secret ARN, which you can create in [Secrets Manager][1]
     #
     #   You use a secret if basic authentication credentials are required to
     #   connect to a website. The secret stores your credentials of user
@@ -800,6 +909,62 @@ module Aws::Kendra
     #             content_type: "PDF", # accepts PDF, HTML, MS_WORD, PLAIN_TEXT, PPT
     #           },
     #         ],
+    #         custom_document_enrichment_configuration: {
+    #           inline_configurations: [
+    #             {
+    #               condition: {
+    #                 condition_document_attribute_key: "DocumentAttributeKey", # required
+    #                 operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #                 condition_on_value: {
+    #                   string_value: "DocumentAttributeStringValue",
+    #                   string_list_value: ["String"],
+    #                   long_value: 1,
+    #                   date_value: Time.now,
+    #                 },
+    #               },
+    #               target: {
+    #                 target_document_attribute_key: "DocumentAttributeKey",
+    #                 target_document_attribute_value_deletion: false,
+    #                 target_document_attribute_value: {
+    #                   string_value: "DocumentAttributeStringValue",
+    #                   string_list_value: ["String"],
+    #                   long_value: 1,
+    #                   date_value: Time.now,
+    #                 },
+    #               },
+    #               document_content_deletion: false,
+    #             },
+    #           ],
+    #           pre_extraction_hook_configuration: {
+    #             invocation_condition: {
+    #               condition_document_attribute_key: "DocumentAttributeKey", # required
+    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #               condition_on_value: {
+    #                 string_value: "DocumentAttributeStringValue",
+    #                 string_list_value: ["String"],
+    #                 long_value: 1,
+    #                 date_value: Time.now,
+    #               },
+    #             },
+    #             lambda_arn: "LambdaArn", # required
+    #             s3_bucket: "S3BucketName", # required
+    #           },
+    #           post_extraction_hook_configuration: {
+    #             invocation_condition: {
+    #               condition_document_attribute_key: "DocumentAttributeKey", # required
+    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #               condition_on_value: {
+    #                 string_value: "DocumentAttributeStringValue",
+    #                 string_list_value: ["String"],
+    #                 long_value: 1,
+    #                 date_value: Time.now,
+    #               },
+    #             },
+    #             lambda_arn: "LambdaArn", # required
+    #             s3_bucket: "S3BucketName", # required
+    #           },
+    #           role_arn: "RoleArn",
+    #         },
     #       }
     #
     # @!attribute [rw] index_id
@@ -843,12 +1008,28 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
     #   @return [Array<Types::Document>]
     #
+    # @!attribute [rw] custom_document_enrichment_configuration
+    #   Configuration information for altering your document metadata and
+    #   content during the document ingestion process when you use the
+    #   `BatchPutDocument` operation.
+    #
+    #   For more information on how to create, modify and delete document
+    #   metadata, or make other content alterations when you ingest
+    #   documents into Amazon Kendra, see [Customizing document metadata
+    #   during the ingestion process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
+    #   @return [Types::CustomDocumentEnrichmentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BatchPutDocumentRequest AWS API Documentation
     #
     class BatchPutDocumentRequest < Struct.new(
       :index_id,
       :role_arn,
-      :documents)
+      :documents,
+      :custom_document_enrichment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1293,7 +1474,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
-    #   The Amazon Resource Name (ARN) of an Secrets Managersecret that
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
     #   contains the key/value pairs required to connect to your Confluence
     #   server. The secret must contain a JSON structure with the following
     #   keys:
@@ -1606,6 +1787,47 @@ module Aws::Kendra
       :database_name,
       :table_name,
       :secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information for your content sources, such as data
+    # sources, FAQs, and content indexed directly via [BatchPutDocument][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html
+    #
+    # @note When making an API call, you may pass ContentSourceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         data_source_ids: ["DataSourceId"],
+    #         faq_ids: ["FaqId"],
+    #         direct_put_content: false,
+    #       }
+    #
+    # @!attribute [rw] data_source_ids
+    #   The identifier of the data sources you want to use for your Amazon
+    #   Kendra experience.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] faq_ids
+    #   The identifier of the FAQs that you want to use for your Amazon
+    #   Kendra experience.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] direct_put_content
+    #   `TRUE` to use documents you indexed directly using the
+    #   `BatchPutDocument` operation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ContentSourceConfiguration AWS API Documentation
+    #
+    class ContentSourceConfiguration < Struct.new(
+      :data_source_ids,
+      :faq_ids,
+      :direct_put_content)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1940,6 +2162,62 @@ module Aws::Kendra
     #         ],
     #         client_token: "ClientTokenName",
     #         language_code: "LanguageCode",
+    #         custom_document_enrichment_configuration: {
+    #           inline_configurations: [
+    #             {
+    #               condition: {
+    #                 condition_document_attribute_key: "DocumentAttributeKey", # required
+    #                 operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #                 condition_on_value: {
+    #                   string_value: "DocumentAttributeStringValue",
+    #                   string_list_value: ["String"],
+    #                   long_value: 1,
+    #                   date_value: Time.now,
+    #                 },
+    #               },
+    #               target: {
+    #                 target_document_attribute_key: "DocumentAttributeKey",
+    #                 target_document_attribute_value_deletion: false,
+    #                 target_document_attribute_value: {
+    #                   string_value: "DocumentAttributeStringValue",
+    #                   string_list_value: ["String"],
+    #                   long_value: 1,
+    #                   date_value: Time.now,
+    #                 },
+    #               },
+    #               document_content_deletion: false,
+    #             },
+    #           ],
+    #           pre_extraction_hook_configuration: {
+    #             invocation_condition: {
+    #               condition_document_attribute_key: "DocumentAttributeKey", # required
+    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #               condition_on_value: {
+    #                 string_value: "DocumentAttributeStringValue",
+    #                 string_list_value: ["String"],
+    #                 long_value: 1,
+    #                 date_value: Time.now,
+    #               },
+    #             },
+    #             lambda_arn: "LambdaArn", # required
+    #             s3_bucket: "S3BucketName", # required
+    #           },
+    #           post_extraction_hook_configuration: {
+    #             invocation_condition: {
+    #               condition_document_attribute_key: "DocumentAttributeKey", # required
+    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #               condition_on_value: {
+    #                 string_value: "DocumentAttributeStringValue",
+    #                 string_list_value: ["String"],
+    #                 long_value: 1,
+    #                 date_value: Time.now,
+    #               },
+    #             },
+    #             lambda_arn: "LambdaArn", # required
+    #             s3_bucket: "S3BucketName", # required
+    #           },
+    #           role_arn: "RoleArn",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -2026,6 +2304,20 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
     #   @return [String]
     #
+    # @!attribute [rw] custom_document_enrichment_configuration
+    #   Configuration information for altering document metadata and content
+    #   during the document ingestion process when you create a data source.
+    #
+    #   For more information on how to create, modify and delete document
+    #   metadata, or make other content alterations when you ingest
+    #   documents into Amazon Kendra, see [Customizing document metadata
+    #   during the ingestion process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
+    #   @return [Types::CustomDocumentEnrichmentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateDataSourceRequest AWS API Documentation
     #
     class CreateDataSourceRequest < Struct.new(
@@ -2038,7 +2330,8 @@ module Aws::Kendra
       :role_arn,
       :tags,
       :client_token,
-      :language_code)
+      :language_code,
+      :custom_document_enrichment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2050,6 +2343,94 @@ module Aws::Kendra
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateDataSourceResponse AWS API Documentation
     #
     class CreateDataSourceResponse < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateExperienceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ExperienceName", # required
+    #         index_id: "IndexId", # required
+    #         role_arn: "RoleArn",
+    #         configuration: {
+    #           content_source_configuration: {
+    #             data_source_ids: ["DataSourceId"],
+    #             faq_ids: ["FaqId"],
+    #             direct_put_content: false,
+    #           },
+    #           user_identity_configuration: {
+    #             identity_attribute_name: "IdentityAttributeName",
+    #           },
+    #         },
+    #         description: "Description",
+    #         client_token: "ClientTokenName",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A name for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of a role with permission to access
+    #   `Query` operations, `QuerySuggestions` operations, `SubmitFeedback`
+    #   operations, and Amazon Web Services SSO that stores your user and
+    #   group information. For more information, see [IAM roles for Amazon
+    #   Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Provides the configuration information for your Amazon Kendra
+    #   experience. This includes `ContentSourceConfiguration`, which
+    #   specifies the data source IDs and/or FAQ IDs, and
+    #   `UserIdentityConfiguration`, which specifies the user or group
+    #   information to grant access to your Amazon Kendra experience.
+    #   @return [Types::ExperienceConfiguration]
+    #
+    # @!attribute [rw] description
+    #   A description for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that you provide to identify the request to create your
+    #   Amazon Kendra experience. Multiple calls to the `CreateExperience`
+    #   operation with the same client token creates only one Amazon Kendra
+    #   experience.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateExperienceRequest AWS API Documentation
+    #
+    class CreateExperienceRequest < Struct.new(
+      :name,
+      :index_id,
+      :role_arn,
+      :configuration,
+      :description,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier for your created Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateExperienceResponse AWS API Documentation
+    #
+    class CreateExperienceResponse < Struct.new(
       :id)
       SENSITIVE = []
       include Aws::Structure
@@ -2291,8 +2672,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] user_group_resolution_configuration
-    #   Enables fetching access levels of groups and users from an AWS
-    #   Single Sign-On identity source. To configure this, see
+    #   Enables fetching access levels of groups and users from an Amazon
+    #   Web Services Single Sign On identity source. To configure this, see
     #   [UserGroupResolutionConfiguration][1].
     #
     #
@@ -2468,9 +2849,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   An AWS Identity and Access Management (IAM) role that gives Amazon
-    #   Kendra permissions to access thesaurus file specified in
-    #   `SourceS3Path`.
+    #   An IAM role that gives Amazon Kendra permissions to access thesaurus
+    #   file specified in `SourceS3Path`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2518,7 +2898,129 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for a Amazon Kendra data source.
+    # Provides the configuration information for altering document metadata
+    # and content during the document ingestion process.
+    #
+    # For more information, see [Customizing document metadata during the
+    # ingestion process][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
+    #
+    # @note When making an API call, you may pass CustomDocumentEnrichmentConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         inline_configurations: [
+    #           {
+    #             condition: {
+    #               condition_document_attribute_key: "DocumentAttributeKey", # required
+    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #               condition_on_value: {
+    #                 string_value: "DocumentAttributeStringValue",
+    #                 string_list_value: ["String"],
+    #                 long_value: 1,
+    #                 date_value: Time.now,
+    #               },
+    #             },
+    #             target: {
+    #               target_document_attribute_key: "DocumentAttributeKey",
+    #               target_document_attribute_value_deletion: false,
+    #               target_document_attribute_value: {
+    #                 string_value: "DocumentAttributeStringValue",
+    #                 string_list_value: ["String"],
+    #                 long_value: 1,
+    #                 date_value: Time.now,
+    #               },
+    #             },
+    #             document_content_deletion: false,
+    #           },
+    #         ],
+    #         pre_extraction_hook_configuration: {
+    #           invocation_condition: {
+    #             condition_document_attribute_key: "DocumentAttributeKey", # required
+    #             operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #             condition_on_value: {
+    #               string_value: "DocumentAttributeStringValue",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
+    #             },
+    #           },
+    #           lambda_arn: "LambdaArn", # required
+    #           s3_bucket: "S3BucketName", # required
+    #         },
+    #         post_extraction_hook_configuration: {
+    #           invocation_condition: {
+    #             condition_document_attribute_key: "DocumentAttributeKey", # required
+    #             operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #             condition_on_value: {
+    #               string_value: "DocumentAttributeStringValue",
+    #               string_list_value: ["String"],
+    #               long_value: 1,
+    #               date_value: Time.now,
+    #             },
+    #           },
+    #           lambda_arn: "LambdaArn", # required
+    #           s3_bucket: "S3BucketName", # required
+    #         },
+    #         role_arn: "RoleArn",
+    #       }
+    #
+    # @!attribute [rw] inline_configurations
+    #   Configuration information to alter document attributes or metadata
+    #   fields and content when ingesting documents into Amazon Kendra.
+    #   @return [Array<Types::InlineCustomDocumentEnrichmentConfiguration>]
+    #
+    # @!attribute [rw] pre_extraction_hook_configuration
+    #   Configuration information for invoking a Lambda function in Lambda
+    #   on the original or raw documents before extracting their metadata
+    #   and text. You can use a Lambda function to apply advanced logic for
+    #   creating, modifying, or deleting document metadata and content. For
+    #   more information, see [Advanced data manipulation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation
+    #   @return [Types::HookConfiguration]
+    #
+    # @!attribute [rw] post_extraction_hook_configuration
+    #   Configuration information for invoking a Lambda function in Lambda
+    #   on the structured documents with their metadata and text extracted.
+    #   You can use a Lambda function to apply advanced logic for creating,
+    #   modifying, or deleting document metadata and content. For more
+    #   information, see [Advanced data manipulation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation
+    #   @return [Types::HookConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of a role with permission to run
+    #   `PreExtractionHookConfiguration` and
+    #   `PostExtractionHookConfiguration` for altering document metadata and
+    #   content during the document ingestion process. For more information,
+    #   see [IAM roles for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CustomDocumentEnrichmentConfiguration AWS API Documentation
+    #
+    class CustomDocumentEnrichmentConfiguration < Struct.new(
+      :inline_configurations,
+      :pre_extraction_hook_configuration,
+      :post_extraction_hook_configuration,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information for an Amazon Kendra data source.
     #
     # @note When making an API call, you may pass DataSourceConfiguration
     #   data as a hash:
@@ -2878,7 +3380,7 @@ module Aws::Kendra
     #
     # @!attribute [rw] web_crawler_configuration
     #   Provides the configuration information required for Amazon Kendra
-    #   web crawler.
+    #   Web Crawler.
     #   @return [Types::WebCrawlerConfiguration]
     #
     # @!attribute [rw] work_docs_configuration
@@ -3293,6 +3795,36 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteExperienceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ExperienceId", # required
+    #         index_id: "IndexId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of your Amazon Kendra experience you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for your Amazon Kendra experience you
+    #   want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteExperienceRequest AWS API Documentation
+    #
+    class DeleteExperienceRequest < Struct.new(
+      :id,
+      :index_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteExperienceResponse AWS API Documentation
+    #
+    class DeleteExperienceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteFaqRequest
     #   data as a hash:
     #
@@ -3541,6 +4073,21 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
     #   @return [String]
     #
+    # @!attribute [rw] custom_document_enrichment_configuration
+    #   Configuration information for altering document metadata and content
+    #   during the document ingestion process when you describe a data
+    #   source.
+    #
+    #   For more information on how to create, modify and delete document
+    #   metadata, or make other content alterations when you ingest
+    #   documents into Amazon Kendra, see [Customizing document metadata
+    #   during the ingestion process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
+    #   @return [Types::CustomDocumentEnrichmentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeDataSourceResponse AWS API Documentation
     #
     class DescribeDataSourceResponse < Struct.new(
@@ -3556,7 +4103,108 @@ module Aws::Kendra
       :schedule,
       :role_arn,
       :error_message,
-      :language_code)
+      :language_code,
+      :custom_document_enrichment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeExperienceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ExperienceId", # required
+    #         index_id: "IndexId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of your Amazon Kendra experience you want to get
+    #   information on.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for your Amazon Kendra experience you
+    #   want to get information on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeExperienceRequest AWS API Documentation
+    #
+    class DescribeExperienceRequest < Struct.new(
+      :id,
+      :index_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   Shows the identifier of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   Shows the identifier of the index for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Shows the name of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoints
+    #   Shows the endpoint URLs for your Amazon Kendra experiences. The URLs
+    #   are unique and fully hosted by Amazon Web Services.
+    #   @return [Array<Types::ExperienceEndpoint>]
+    #
+    # @!attribute [rw] configuration
+    #   Shows the configuration information for your Amazon Kendra
+    #   experience. This includes `ContentSourceConfiguration`, which
+    #   specifies the data source IDs and/or FAQ IDs, and
+    #   `UserIdentityConfiguration`, which specifies the user or group
+    #   information to grant access to your Amazon Kendra experience.
+    #   @return [Types::ExperienceConfiguration]
+    #
+    # @!attribute [rw] created_at
+    #   Shows the date-time your Amazon Kendra experience was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   Shows the date-time your Amazon Kendra experience was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   Shows the description for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current processing status of your Amazon Kendra experience. When
+    #   the status is `ACTIVE`, your Amazon Kendra experience is ready to
+    #   use. When the status is `FAILED`, the `ErrorMessage` field contains
+    #   the reason that this failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   Shows the Amazon Resource Name (ARN) of a role with permission to
+    #   access `Query` operations, `QuerySuggestions` operations,
+    #   `SubmitFeedback` operations, and Amazon Web Services SSO that stores
+    #   your user and group information.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The reason your Amazon Kendra experience could not properly process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeExperienceResponse AWS API Documentation
+    #
+    class DescribeExperienceResponse < Struct.new(
+      :id,
+      :index_id,
+      :name,
+      :endpoints,
+      :configuration,
+      :created_at,
+      :updated_at,
+      :description,
+      :status,
+      :role_arn,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3756,8 +4404,8 @@ module Aws::Kendra
     #
     # @!attribute [rw] user_group_resolution_configuration
     #   Shows whether you have enabled the configuration for fetching access
-    #   levels of groups and users from an AWS Single Sign-On identity
-    #   source.
+    #   levels of groups and users from an Amazon Web Services Single Sign
+    #   On identity source.
     #   @return [Types::UserGroupResolutionConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndexResponse AWS API Documentation
@@ -4141,9 +4789,8 @@ module Aws::Kendra
     #   @return [Time]
     #
     # @!attribute [rw] role_arn
-    #   An AWS Identity and Access Management (IAM) role that gives Amazon
-    #   Kendra permissions to access thesaurus file specified in
-    #   `SourceS3Path`.
+    #   An IAM role that gives Amazon Kendra permissions to access thesaurus
+    #   file specified in `SourceS3Path`.
     #   @return [String]
     #
     # @!attribute [rw] source_s3_path
@@ -4179,6 +4826,103 @@ module Aws::Kendra
       :file_size_bytes,
       :term_count,
       :synonym_rule_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateEntitiesFromExperienceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ExperienceId", # required
+    #         index_id: "IndexId", # required
+    #         entity_list: [ # required
+    #           {
+    #             entity_id: "EntityId", # required
+    #             entity_type: "USER", # required, accepts USER, GROUP
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_list
+    #   Lists users or groups in your Amazon Web Services SSO identity
+    #   source.
+    #   @return [Array<Types::EntityConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DisassociateEntitiesFromExperienceRequest AWS API Documentation
+    #
+    class DisassociateEntitiesFromExperienceRequest < Struct.new(
+      :id,
+      :index_id,
+      :entity_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_entity_list
+    #   Lists the users or groups in your Amazon Web Services SSO identity
+    #   source that failed to properly remove access to your Amazon Kendra
+    #   experience.
+    #   @return [Array<Types::FailedEntity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DisassociateEntitiesFromExperienceResponse AWS API Documentation
+    #
+    class DisassociateEntitiesFromExperienceResponse < Struct.new(
+      :failed_entity_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociatePersonasFromEntitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ExperienceId", # required
+    #         index_id: "IndexId", # required
+    #         entity_ids: ["EntityId"], # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_ids
+    #   The identifiers of users or groups in your Amazon Web Services SSO
+    #   identity source. For example, user IDs could be user emails.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DisassociatePersonasFromEntitiesRequest AWS API Documentation
+    #
+    class DisassociatePersonasFromEntitiesRequest < Struct.new(
+      :id,
+      :index_id,
+      :entity_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failed_entity_list
+    #   Lists the users or groups in your Amazon Web Services SSO identity
+    #   source that failed to properly remove access to your Amazon Kendra
+    #   experience.
+    #   @return [Array<Types::FailedEntity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DisassociatePersonasFromEntitiesResponse AWS API Documentation
+    #
+    class DisassociatePersonasFromEntitiesResponse < Struct.new(
+      :failed_entity_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4320,6 +5064,144 @@ module Aws::Kendra
     class DocumentAttribute < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The condition used for the target document attribute or metadata field
+    # when ingesting documents into Amazon Kendra. You use this with
+    # [DocumentAttributeTarget to apply the condition][1].
+    #
+    # For example, you can create the 'Department' target field and have
+    # it prefill department names associated with the documents based on
+    # information in the 'Source\_URI' field. Set the condition that if
+    # the 'Source\_URI' field contains 'financial' in its URI value,
+    # then prefill the target field 'Department' with the target value
+    # 'Finance' for the document.
+    #
+    # Amazon Kendra cannot create a target field if it has not already been
+    # created as an index field. After you create your index field, you can
+    # create a document metadata field using `DocumentAttributeTarget`.
+    # Amazon Kendra then will map your newly created metadata field to your
+    # index field.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeTarget.html
+    #
+    # @note When making an API call, you may pass DocumentAttributeCondition
+    #   data as a hash:
+    #
+    #       {
+    #         condition_document_attribute_key: "DocumentAttributeKey", # required
+    #         operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #         condition_on_value: {
+    #           string_value: "DocumentAttributeStringValue",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] condition_document_attribute_key
+    #   The identifier of the document attribute used for the condition.
+    #
+    #   For example, 'Source\_URI' could be an identifier for the
+    #   attribute or metadata field that contains source URIs associated
+    #   with the documents.
+    #
+    #   Amazon Kendra currently does not support `_document_body` as an
+    #   attribute key used for the condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The condition operator.
+    #
+    #   For example, you can use 'Contains' to partially match a string.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition_on_value
+    #   The value used by the operator.
+    #
+    #   For example, you can specify the value 'financial' for strings in
+    #   the 'Source\_URI' field that partially match or contain this
+    #   value.
+    #   @return [Types::DocumentAttributeValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentAttributeCondition AWS API Documentation
+    #
+    class DocumentAttributeCondition < Struct.new(
+      :condition_document_attribute_key,
+      :operator,
+      :condition_on_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target document attribute or metadata field you want to alter when
+    # ingesting documents into Amazon Kendra.
+    #
+    # For example, you can delete customer identification numbers associated
+    # with the documents, stored in the document metadata field called
+    # 'Customer\_ID'. You set the target key as 'Customer\_ID' and the
+    # deletion flag to `TRUE`. This removes all customer ID values in the
+    # field 'Customer\_ID'. This would scrub personally identifiable
+    # information from each document's metadata.
+    #
+    # Amazon Kendra cannot create a target field if it has not already been
+    # created as an index field. After you create your index field, you can
+    # create a document metadata field using `DocumentAttributeTarget`.
+    # Amazon Kendra then will map your newly created metadata field to your
+    # index field.
+    #
+    # You can also use this with [DocumentAttributeCondition][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeCondition.html
+    #
+    # @note When making an API call, you may pass DocumentAttributeTarget
+    #   data as a hash:
+    #
+    #       {
+    #         target_document_attribute_key: "DocumentAttributeKey",
+    #         target_document_attribute_value_deletion: false,
+    #         target_document_attribute_value: {
+    #           string_value: "DocumentAttributeStringValue",
+    #           string_list_value: ["String"],
+    #           long_value: 1,
+    #           date_value: Time.now,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target_document_attribute_key
+    #   The identifier of the target document attribute or metadata field.
+    #
+    #   For example, 'Department' could be an identifier for the target
+    #   attribute or metadata field that includes the department names
+    #   associated with the documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_document_attribute_value_deletion
+    #   `TRUE` to delete the existing target value for your specified target
+    #   attribute key. You cannot create a target value and set this to
+    #   `TRUE`. To create a target value (`TargetDocumentAttributeValue`),
+    #   set this to `FALSE`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] target_document_attribute_value
+    #   The target value you want to create for the target attribute.
+    #
+    #   For example, 'Finance' could be the target value for the target
+    #   attribute key 'Department'.
+    #   @return [Types::DocumentAttributeValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentAttributeTarget AWS API Documentation
+    #
+    class DocumentAttributeTarget < Struct.new(
+      :target_document_attribute_key,
+      :target_document_attribute_value_deletion,
+      :target_document_attribute_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4564,6 +5446,246 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information of users or groups in your
+    # Amazon Web Services SSO identity source to grant access your Amazon
+    # Kendra experience.
+    #
+    # @note When making an API call, you may pass EntityConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         entity_id: "EntityId", # required
+    #         entity_type: "USER", # required, accepts USER, GROUP
+    #       }
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of a user or group in your Amazon Web Services SSO
+    #   identity source. For example, a user ID could be an email.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   Specifies whether you are configuring a `User` or a `Group`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/EntityConfiguration AWS API Documentation
+    #
+    class EntityConfiguration < Struct.new(
+      :entity_id,
+      :entity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the user entity.
+    #
+    # @!attribute [rw] user_name
+    #   The name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] identified_user_name
+    #   The user name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/EntityDisplayData AWS API Documentation
+    #
+    class EntityDisplayData < Struct.new(
+      :user_name,
+      :group_name,
+      :identified_user_name,
+      :first_name,
+      :last_name)
+      SENSITIVE = [:user_name, :group_name, :identified_user_name, :first_name, :last_name]
+      include Aws::Structure
+    end
+
+    # Provides the configuration information of users or groups in your
+    # Amazon Web Services SSO identity source for access to your Amazon
+    # Kendra experience. Specific permissions are defined for each user or
+    # group once they are granted access to your Amazon Kendra experience.
+    #
+    # @note When making an API call, you may pass EntityPersonaConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         entity_id: "EntityId", # required
+    #         persona: "OWNER", # required, accepts OWNER, VIEWER
+    #       }
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of a user or group in your Amazon Web Services SSO
+    #   identity source. For example, a user ID could be an email.
+    #   @return [String]
+    #
+    # @!attribute [rw] persona
+    #   The persona that defines the specific permissions of the user or
+    #   group in your Amazon Web Services SSO identity source. The available
+    #   personas or access roles are `Owner` and `Viewer`. For more
+    #   information on these personas, see [Providing access to your search
+    #   page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/EntityPersonaConfiguration AWS API Documentation
+    #
+    class EntityPersonaConfiguration < Struct.new(
+      :entity_id,
+      :persona)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration information for your Amazon Kendra
+    # experience. This includes the data source IDs and/or FAQ IDs, and user
+    # or group information to grant access to your Amazon Kendra experience.
+    #
+    # @note When making an API call, you may pass ExperienceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         content_source_configuration: {
+    #           data_source_ids: ["DataSourceId"],
+    #           faq_ids: ["FaqId"],
+    #           direct_put_content: false,
+    #         },
+    #         user_identity_configuration: {
+    #           identity_attribute_name: "IdentityAttributeName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] content_source_configuration
+    #   The identifiers of your data sources and FAQs. Or, you can specify
+    #   that you want to use documents indexed via the `BatchPutDocument`
+    #   operation. This is the content you want to use for your Amazon
+    #   Kendra experience.
+    #   @return [Types::ContentSourceConfiguration]
+    #
+    # @!attribute [rw] user_identity_configuration
+    #   The Amazon Web Services SSO field name that contains the identifiers
+    #   of your users, such as their emails.
+    #   @return [Types::UserIdentityConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ExperienceConfiguration AWS API Documentation
+    #
+    class ExperienceConfiguration < Struct.new(
+      :content_source_configuration,
+      :user_identity_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information of the endpoint for your Amazon
+    # Kendra experience.
+    #
+    # @!attribute [rw] endpoint_type
+    #   The type of endpoint for your Amazon Kendra experience. The type
+    #   currently available is `HOME`, which is a unique and fully hosted
+    #   URL to the home page of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ExperienceEndpoint AWS API Documentation
+    #
+    class ExperienceEndpoint < Struct.new(
+      :endpoint_type,
+      :endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for users or groups in your Amazon Web Services
+    # SSO identity source with granted access to your Amazon Kendra
+    # experience. You can create an Amazon Kendra experience such as a
+    # search application. For more information on creating a search
+    # application experience, see [Building a search experience with no
+    # code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of a user or group in your Amazon Web Services SSO
+    #   identity source. For example, a user ID could be an email.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   Shows the type as `User` or `Group`.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_data
+    #   Information about the user entity.
+    #   @return [Types::EntityDisplayData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ExperienceEntitiesSummary AWS API Documentation
+    #
+    class ExperienceEntitiesSummary < Struct.new(
+      :entity_id,
+      :entity_type,
+      :display_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information for your Amazon Kendra experience. You can create
+    # an Amazon Kendra experience such as a search application. For more
+    # information on creating a search application experience, see [Building
+    # a search experience with no code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @!attribute [rw] name
+    #   The name of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date-time your Amazon Kendra experience was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The processing status of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoints
+    #   The endpoint URLs for your Amazon Kendra experiences. The URLs are
+    #   unique and fully hosted by Amazon Web Services.
+    #   @return [Array<Types::ExperienceEndpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ExperiencesSummary AWS API Documentation
+    #
+    class ExperiencesSummary < Struct.new(
+      :name,
+      :id,
+      :created_at,
+      :status,
+      :endpoints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a document attribute
     #
     # @note When making an API call, you may pass Facet
@@ -4609,6 +5731,30 @@ module Aws::Kendra
       :document_attribute_key,
       :document_attribute_value_type,
       :document_attribute_value_count_pairs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information on the users or groups in your Amazon Web Services SSO
+    # identity source that failed to properly configure with your Amazon
+    # Kendra experience.
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of the user or group in your Amazon Web Services SSO
+    #   identity source. For example, a user ID could be an email.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The reason the user or group in your Amazon Web Services SSO
+    #   identity source failed to properly configure with your Amazon Kendra
+    #   experience.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/FailedEntity AWS API Documentation
+    #
+    class FailedEntity < Struct.new(
+      :entity_id,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4737,6 +5883,111 @@ module Aws::Kendra
     class GetQuerySuggestionsResponse < Struct.new(
       :query_suggestions_id,
       :suggestions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSnapshotsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         interval: "THIS_MONTH", # required, accepts THIS_MONTH, THIS_WEEK, ONE_WEEK_AGO, TWO_WEEKS_AGO, ONE_MONTH_AGO, TWO_MONTHS_AGO
+    #         metric_type: "QUERIES_BY_COUNT", # required, accepts QUERIES_BY_COUNT, QUERIES_BY_ZERO_CLICK_RATE, QUERIES_BY_ZERO_RESULT_RATE, DOCS_BY_CLICK_COUNT, AGG_QUERY_DOC_METRICS, TREND_QUERY_DOC_METRICS
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index to get search metrics data.
+    #   @return [String]
+    #
+    # @!attribute [rw] interval
+    #   The time interval or time window to get search metrics data. The
+    #   time interval uses the time zone of your index. You can view data in
+    #   the following time windows:
+    #
+    #   * `THIS_WEEK`\: The current week, starting on the Sunday and ending
+    #     on the day before the current date.
+    #
+    #   * `ONE_WEEK_AGO`\: The previous week, starting on the Sunday and
+    #     ending on the following Saturday.
+    #
+    #   * `TWO_WEEKS_AGO`\: The week before the previous week, starting on
+    #     the Sunday and ending on the following Saturday.
+    #
+    #   * `THIS_MONTH`\: The current month, starting on the first day of the
+    #     month and ending on the day before the current date.
+    #
+    #   * `ONE_MONTH_AGO`\: The previous month, starting on the first day of
+    #     the month and ending on the last day of the month.
+    #
+    #   * `TWO_MONTHS_AGO`\: The month before the previous month, starting
+    #     on the first day of the month and ending on last day of the month.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_type
+    #   The metric you want to retrieve. You can specify only one metric per
+    #   call.
+    #
+    #   For more information about the metrics you can view, see [Gaining
+    #   insights with search analytics][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/search-analytics.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of search metrics data.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of returned data for the metric.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GetSnapshotsRequest AWS API Documentation
+    #
+    class GetSnapshotsRequest < Struct.new(
+      :index_id,
+      :interval,
+      :metric_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snap_shot_time_filter
+    #   The date-time for the beginning and end of the time window for the
+    #   search metrics data.
+    #   @return [Types::TimeRange]
+    #
+    # @!attribute [rw] snapshots_data_header
+    #   The column headers for the search metrics data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] snapshots_data
+    #   The search metrics data. The data returned depends on the metric
+    #   type you requested.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Kendra returns this token,
+    #   which you can use in a later request to retrieve the next set of
+    #   search metrics data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GetSnapshotsResponse AWS API Documentation
+    #
+    class GetSnapshotsResponse < Struct.new(
+      :snap_shot_time_filter,
+      :snapshots_data_header,
+      :snapshots_data,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5031,6 +6282,82 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information for invoking a Lambda function
+    # in Lambda to alter document metadata and content when ingesting
+    # documents into Amazon Kendra. You can configure your Lambda function
+    # using [PreExtractionHookConfiguration][1] if you want to apply
+    # advanced alterations on the original or raw documents. If you want to
+    # apply advanced alterations on the Amazon Kendra structured documents,
+    # you must configure your Lambda function using
+    # [PostExtractionHookConfiguration][2]. You can only invoke one Lambda
+    # function. However, this function can invoke other functions it
+    # requires.
+    #
+    # For more information, see [Customizing document metadata during the
+    # ingestion process][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_PreExtractionHookConfiguration.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/API_PostExtractionHookConfiguration.html
+    # [3]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
+    #
+    # @note When making an API call, you may pass HookConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         invocation_condition: {
+    #           condition_document_attribute_key: "DocumentAttributeKey", # required
+    #           operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #           condition_on_value: {
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         lambda_arn: "LambdaArn", # required
+    #         s3_bucket: "S3BucketName", # required
+    #       }
+    #
+    # @!attribute [rw] invocation_condition
+    #   The condition used for when a Lambda function should be invoked.
+    #
+    #   For example, you can specify a condition that if there are empty
+    #   date-time values, then Amazon Kendra should invoke a function that
+    #   inserts the current date-time.
+    #   @return [Types::DocumentAttributeCondition]
+    #
+    # @!attribute [rw] lambda_arn
+    #   The Amazon Resource Name (ARN) of a role with permission to run a
+    #   Lambda function during ingestion. For more information, see [IAM
+    #   roles for Amazon Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   Stores the original, raw documents or the structured, parsed
+    #   documents before and after altering them. For more information, see
+    #   [Data contracts for Lambda functions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#cde-data-contracts-lambda
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/HookConfiguration AWS API Documentation
+    #
+    class HookConfiguration < Struct.new(
+      :invocation_condition,
+      :lambda_arn,
+      :s3_bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A summary of information about an index.
     #
     # @!attribute [rw] name
@@ -5095,12 +6422,92 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information for applying basic logic to
+    # alter document metadata and content when ingesting documents into
+    # Amazon Kendra. To apply advanced logic, to go beyond what you can do
+    # with basic logic, see [HookConfiguration][1].
+    #
+    # For more information, see [Customizing document metadata during the
+    # ingestion process][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_HookConfiguration.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
+    #
+    # @note When making an API call, you may pass InlineCustomDocumentEnrichmentConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         condition: {
+    #           condition_document_attribute_key: "DocumentAttributeKey", # required
+    #           operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #           condition_on_value: {
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         target: {
+    #           target_document_attribute_key: "DocumentAttributeKey",
+    #           target_document_attribute_value_deletion: false,
+    #           target_document_attribute_value: {
+    #             string_value: "DocumentAttributeStringValue",
+    #             string_list_value: ["String"],
+    #             long_value: 1,
+    #             date_value: Time.now,
+    #           },
+    #         },
+    #         document_content_deletion: false,
+    #       }
+    #
+    # @!attribute [rw] condition
+    #   Configuration of the condition used for the target document
+    #   attribute or metadata field when ingesting documents into Amazon
+    #   Kendra.
+    #   @return [Types::DocumentAttributeCondition]
+    #
+    # @!attribute [rw] target
+    #   Configuration of the target document attribute or metadata field
+    #   when ingesting documents into Amazon Kendra. You can also include a
+    #   value.
+    #   @return [Types::DocumentAttributeTarget]
+    #
+    # @!attribute [rw] document_content_deletion
+    #   `TRUE` to delete content if the condition used for the target
+    #   attribute is met.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/InlineCustomDocumentEnrichmentConfiguration AWS API Documentation
+    #
+    class InlineCustomDocumentEnrichmentConfiguration < Struct.new(
+      :condition,
+      :target,
+      :document_content_deletion)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input to the request is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -5315,6 +6722,172 @@ module Aws::Kendra
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListDataSourcesResponse AWS API Documentation
     #
     class ListDataSourcesResponse < Struct.new(
+      :summary_items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListEntityPersonasRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ExperienceId", # required
+    #         index_id: "IndexId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of users or groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of returned users or groups.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListEntityPersonasRequest AWS API Documentation
+    #
+    class ListEntityPersonasRequest < Struct.new(
+      :id,
+      :index_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summary_items
+    #   An array of summary information for one or more users or groups.
+    #   @return [Array<Types::PersonasSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Kendra returns this token,
+    #   which you can use in a later request to retrieve the next set of
+    #   users or groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListEntityPersonasResponse AWS API Documentation
+    #
+    class ListEntityPersonasResponse < Struct.new(
+      :summary_items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListExperienceEntitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ExperienceId", # required
+    #         index_id: "IndexId", # required
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of users or groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListExperienceEntitiesRequest AWS API Documentation
+    #
+    class ListExperienceEntitiesRequest < Struct.new(
+      :id,
+      :index_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summary_items
+    #   An array of summary information for one or more users or groups.
+    #   @return [Array<Types::ExperienceEntitiesSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Kendra returns this token,
+    #   which you can use in a later request to retrieve the next set of
+    #   users or groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListExperienceEntitiesResponse AWS API Documentation
+    #
+    class ListExperienceEntitiesResponse < Struct.new(
+      :summary_items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListExperiencesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         index_id: "IndexId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for your Amazon Kendra experience.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Kendra returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of Amazon Kendra experiences.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of returned Amazon Kendra experiences.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListExperiencesRequest AWS API Documentation
+    #
+    class ListExperiencesRequest < Struct.new(
+      :index_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summary_items
+    #   An array of summary information for one or more Amazon Kendra
+    #   experiences.
+    #   @return [Array<Types::ExperiencesSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Kendra returns this token,
+    #   which you can use in a later request to retrieve the next set of
+    #   Amazon Kendra experiences.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListExperiencesResponse AWS API Documentation
+    #
+    class ListExperiencesResponse < Struct.new(
       :summary_items,
       :next_token)
       SENSITIVE = []
@@ -5824,6 +7397,54 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Summary information for users or groups in your Amazon Web Services
+    # SSO identity source. This applies to users and groups with specific
+    # permissions that define their level of access to your Amazon Kendra
+    # experience. You can create an Amazon Kendra experience such as a
+    # search application. For more information on creating a search
+    # application experience, see [Building a search experience with no
+    # code][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of a user or group in your Amazon Web Services SSO
+    #   identity source. For example, a user ID could be an email.
+    #   @return [String]
+    #
+    # @!attribute [rw] persona
+    #   The persona that defines the specific permissions of the user or
+    #   group in your Amazon Web Services SSO identity source. The available
+    #   personas or access roles are `Owner` and `Viewer`. For more
+    #   information on these personas, see [Providing access to your search
+    #   page][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date-time the summary information was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date-time the summary information was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/PersonasSummary AWS API Documentation
+    #
+    class PersonasSummary < Struct.new(
+      :entity_id,
+      :persona,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides user and group information for document access filtering.
     #
     # @note When making an API call, you may pass Principal
@@ -5893,7 +7514,7 @@ module Aws::Kendra
     #   @return [Integer]
     #
     # @!attribute [rw] credentials
-    #   Your secret ARN, which you can create in [AWS Secrets Manager][1]
+    #   Your secret ARN, which you can create in [Secrets Manager][1]
     #
     #   The credentials are optional. You use a secret if web proxy
     #   credentials are required to connect to a website host. Amazon Kendra
@@ -7241,7 +8862,7 @@ module Aws::Kendra
     #
     # *When selecting websites to index, you must adhere to the [Amazon
     # Acceptable Use Policy][1] and all other Amazon terms. Remember that
-    # you must only use the Amazon Kendra web crawler to index your own
+    # you must only use Amazon Kendra Web Crawler to index your own
     # webpages, or webpages that you have authorization to index.*
     #
     #
@@ -7385,7 +9006,7 @@ module Aws::Kendra
     # @!attribute [rw] authentication_type
     #   Determines the type of authentication used to connect to the
     #   ServiceNow instance. If you choose `HTTP_BASIC`, Amazon Kendra is
-    #   authenticated using the user name and password provided in the AWS
+    #   authenticated using the user name and password provided in the
     #   Secrets Manager secret in the `SecretArn` field. When you choose
     #   `OAUTH2`, Amazon Kendra is authenticated using the OAuth token and
     #   secret provided in the Secrets Manager secret, and the user name and
@@ -7630,7 +9251,7 @@ module Aws::Kendra
     #   SharePoint Server, you also need to provide the sever domain name as
     #   part of the credentials. For more information, see [Using a
     #   Microsoft SharePoint Data Source][1]. For more information about
-    #   Secrets Manager, see [ What Is Secrets Manager][2] in the <i>Secrets
+    #   Secrets Manager see [ What Is Secrets Manager][2] in the <i>Secrets
     #   Manager </i> user guide.
     #
     #
@@ -7726,7 +9347,7 @@ module Aws::Kendra
     #
     # *When selecting websites to index, you must adhere to the [Amazon
     # Acceptable Use Policy][1] and all other Amazon terms. Remember that
-    # you must only use the Amazon Kendra web crawler to index your own
+    # you must only use Amazon Kendra Web Crawler to index your own
     # webpages, or webpages that you have authorization to index.*
     #
     #
@@ -8609,6 +10230,62 @@ module Aws::Kendra
     #         schedule: "ScanSchedule",
     #         role_arn: "RoleArn",
     #         language_code: "LanguageCode",
+    #         custom_document_enrichment_configuration: {
+    #           inline_configurations: [
+    #             {
+    #               condition: {
+    #                 condition_document_attribute_key: "DocumentAttributeKey", # required
+    #                 operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #                 condition_on_value: {
+    #                   string_value: "DocumentAttributeStringValue",
+    #                   string_list_value: ["String"],
+    #                   long_value: 1,
+    #                   date_value: Time.now,
+    #                 },
+    #               },
+    #               target: {
+    #                 target_document_attribute_key: "DocumentAttributeKey",
+    #                 target_document_attribute_value_deletion: false,
+    #                 target_document_attribute_value: {
+    #                   string_value: "DocumentAttributeStringValue",
+    #                   string_list_value: ["String"],
+    #                   long_value: 1,
+    #                   date_value: Time.now,
+    #                 },
+    #               },
+    #               document_content_deletion: false,
+    #             },
+    #           ],
+    #           pre_extraction_hook_configuration: {
+    #             invocation_condition: {
+    #               condition_document_attribute_key: "DocumentAttributeKey", # required
+    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #               condition_on_value: {
+    #                 string_value: "DocumentAttributeStringValue",
+    #                 string_list_value: ["String"],
+    #                 long_value: 1,
+    #                 date_value: Time.now,
+    #               },
+    #             },
+    #             lambda_arn: "LambdaArn", # required
+    #             s3_bucket: "S3BucketName", # required
+    #           },
+    #           post_extraction_hook_configuration: {
+    #             invocation_condition: {
+    #               condition_document_attribute_key: "DocumentAttributeKey", # required
+    #               operator: "GreaterThan", # required, accepts GreaterThan, GreaterThanOrEquals, LessThan, LessThanOrEquals, Equals, NotEquals, Contains, NotContains, Exists, NotExists, BeginsWith
+    #               condition_on_value: {
+    #                 string_value: "DocumentAttributeStringValue",
+    #                 string_list_value: ["String"],
+    #                 long_value: 1,
+    #                 date_value: Time.now,
+    #               },
+    #             },
+    #             lambda_arn: "LambdaArn", # required
+    #             s3_bucket: "S3BucketName", # required
+    #           },
+    #           role_arn: "RoleArn",
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -8626,7 +10303,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Configuration information for a Amazon Kendra data source.
+    #   Configuration information for an Amazon Kendra data source.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] description
@@ -8654,6 +10331,20 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
     #   @return [String]
     #
+    # @!attribute [rw] custom_document_enrichment_configuration
+    #   Configuration information for altering document metadata and content
+    #   during the document ingestion process when you update a data source.
+    #
+    #   For more information on how to create, modify and delete document
+    #   metadata, or make other content alterations when you ingest
+    #   documents into Amazon Kendra, see [Customizing document metadata
+    #   during the ingestion process][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
+    #   @return [Types::CustomDocumentEnrichmentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateDataSourceRequest AWS API Documentation
     #
     class UpdateDataSourceRequest < Struct.new(
@@ -8664,7 +10355,77 @@ module Aws::Kendra
       :description,
       :schedule,
       :role_arn,
-      :language_code)
+      :language_code,
+      :custom_document_enrichment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateExperienceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ExperienceId", # required
+    #         name: "ExperienceName",
+    #         index_id: "IndexId", # required
+    #         role_arn: "RoleArn",
+    #         configuration: {
+    #           content_source_configuration: {
+    #             data_source_ids: ["DataSourceId"],
+    #             faq_ids: ["FaqId"],
+    #             direct_put_content: false,
+    #           },
+    #           user_identity_configuration: {
+    #             identity_attribute_name: "IdentityAttributeName",
+    #           },
+    #         },
+    #         description: "Description",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of your Amazon Kendra experience you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of your Amazon Kendra experience you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_id
+    #   The identifier of the index for your Amazon Kendra experience you
+    #   want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of a role with permission to access
+    #   `Query` operations, `QuerySuggestions` operations, `SubmitFeedback`
+    #   operations, and Amazon Web Services SSO that stores your user and
+    #   group information. For more information, see [IAM roles for Amazon
+    #   Kendra][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Provides the user configuration information. This includes the
+    #   Amazon Web Services SSO field name that contains the identifiers of
+    #   your users, such as their emails.
+    #   @return [Types::ExperienceConfiguration]
+    #
+    # @!attribute [rw] description
+    #   The description of your Amazon Kendra experience you want to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateExperienceRequest AWS API Documentation
+    #
+    class UpdateExperienceRequest < Struct.new(
+      :id,
+      :name,
+      :index_id,
+      :role_arn,
+      :configuration,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8765,8 +10526,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] user_group_resolution_configuration
-    #   Enables fetching access levels of groups and users from an AWS
-    #   Single Sign-On identity source. To configure this, see
+    #   Enables fetching access levels of groups and users from an Amazon
+    #   Web Services Single Sign On identity source. To configure this, see
     #   [UserGroupResolutionConfiguration][1].
     #
     #
@@ -9003,7 +10764,7 @@ module Aws::Kendra
     #
     # *When selecting websites to index, you must adhere to the [Amazon
     # Acceptable Use Policy][1] and all other Amazon terms. Remember that
-    # you must only use the Amazon Kendra web crawler to index your own
+    # you must only use Amazon Kendra Web Crawler to index your own
     # webpages, or webpages that you have authorization to index.*
     #
     #
@@ -9113,21 +10874,22 @@ module Aws::Kendra
     end
 
     # Provides the configuration information to fetch access levels of
-    # groups and users from an AWS Single Sign-On identity source. This is
-    # useful for setting up user context filtering, where Amazon Kendra
-    # filters search results for different users based on their group's
-    # access to documents. You can also map your users to their groups for
-    # user context filtering using the [PutPrincipalMapping operation][1].
+    # groups and users from an Amazon Web Services Single Sign On identity
+    # source. This is useful for setting up user context filtering, where
+    # Amazon Kendra filters search results for different users based on
+    # their group's access to documents. You can also map your users to
+    # their groups for user context filtering using the [PutPrincipalMapping
+    # operation][1].
     #
-    # To set up an AWS SSO identity source in the console to use with Amazon
-    # Kendra, see [Getting started with an AWS SSO identity source][2]. You
-    # must also grant the required permissions to use AWS SSO with Amazon
-    # Kendra. For more information, see [IAM roles for AWS Single
-    # Sign-On][3].
+    # To set up an Amazon Web Services SSO identity source in the console to
+    # use with Amazon Kendra, see [Getting started with an Amazon Web
+    # Services SSO identity source][2]. You must also grant the required
+    # permissions to use Amazon Web Services SSO with Amazon Kendra. For
+    # more information, see [IAM roles for Amazon Web Services SSO][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/latest/dg/API_PutPrincipalMapping.html
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html
     # [2]: https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html
     # [3]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso
     #
@@ -9140,15 +10902,49 @@ module Aws::Kendra
     #
     # @!attribute [rw] user_group_resolution_mode
     #   The identity store provider (mode) you want to use to fetch access
-    #   levels of groups and users. AWS Single Sign-On is currently the only
-    #   available mode. Your users and groups must exist in an AWS SSO
-    #   identity source in order to use this mode.
+    #   levels of groups and users. Amazon Web Services Single Sign On is
+    #   currently the only available mode. Your users and groups must exist
+    #   in an Amazon Web Services SSO identity source in order to use this
+    #   mode.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserGroupResolutionConfiguration AWS API Documentation
     #
     class UserGroupResolutionConfiguration < Struct.new(
       :user_group_resolution_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information for the identifiers of your users.
+    #
+    # @note When making an API call, you may pass UserIdentityConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         identity_attribute_name: "IdentityAttributeName",
+    #       }
+    #
+    # @!attribute [rw] identity_attribute_name
+    #   The Amazon Web Services SSO field name that contains the identifiers
+    #   of your users, such as their emails. This is used for [user context
+    #   filtering][1] and for granting access to your Amazon Kendra
+    #   experience. You must set up Amazon Web Services SSO with Amazon
+    #   Kendra. You must include your users and groups in your Access
+    #   Control List when you ingest documents into your index. For more
+    #   information, see [Getting started with an Amazon Web Services SSO
+    #   identity source][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html
+    #   [2]: https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UserIdentityConfiguration AWS API Documentation
+    #
+    class UserIdentityConfiguration < Struct.new(
+      :identity_attribute_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9202,8 +10998,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information required for Amazon Kendra web
-    # crawler.
+    # Provides the configuration information required for Amazon Kendra Web
+    # Crawler.
     #
     # @note When making an API call, you may pass WebCrawlerConfiguration
     #   data as a hash:
@@ -9254,7 +11050,7 @@ module Aws::Kendra
     #
     #   *When selecting websites to index, you must adhere to the [Amazon
     #   Acceptable Use Policy][1] and all other Amazon terms. Remember that
-    #   you must only use the Amazon Kendra web crawler to index your own
+    #   you must only use Amazon Kendra Web Crawler to index your own
     #   webpages, or webpages that you have authorization to index.*
     #
     #
@@ -9328,7 +11124,7 @@ module Aws::Kendra
     #
     #   Web proxy credentials are optional and you can use them to connect
     #   to a web proxy server that requires basic authentication. To store
-    #   web proxy credentials, you use a secret in [AWS Secrets Manager][1].
+    #   web proxy credentials, you use a secret in [Secrets Manager][1].
     #
     #
     #
@@ -9345,7 +11141,7 @@ module Aws::Kendra
     #   You must provide the website host name and port number. For example,
     #   the host name of https://a.example.com/page1.html is
     #   "a.example.com" and the port is 443, the standard port for HTTPS.
-    #   You use a secret in [AWS Secrets Manager][1] to store your
+    #   You use a secret in [Secrets Manager][1] to store your
     #   authentication credentials.
     #
     #
@@ -9397,10 +11193,10 @@ module Aws::Kendra
     #   The identifier of the directory corresponding to your Amazon
     #   WorkDocs site repository.
     #
-    #   You can find the organization ID in the [AWS Directory Service][1]
-    #   by going to **Active Directory**, then **Directories**. Your Amazon
+    #   You can find the organization ID in the [Directory Service][1] by
+    #   going to **Active Directory**, then **Directories**. Your Amazon
     #   WorkDocs site directory has an ID, which is the organization ID. You
-    #   can also set up a new Amazon WorkDocs directory in the AWS Directory
+    #   can also set up a new Amazon WorkDocs directory in the Directory
     #   Service console and enable a Amazon WorkDocs site for the directory
     #   in the Amazon WorkDocs console.
     #

@@ -508,9 +508,39 @@ module Aws::DevOpsGuru
     #   resp.proactive_anomaly.source_details.cloud_watch_metrics[0].metric_data_summary.timestamp_metric_value_pair_list[0].timestamp #=> Time
     #   resp.proactive_anomaly.source_details.cloud_watch_metrics[0].metric_data_summary.timestamp_metric_value_pair_list[0].metric_value #=> Float
     #   resp.proactive_anomaly.source_details.cloud_watch_metrics[0].metric_data_summary.status_code #=> String, one of "Complete", "InternalError", "PartialData"
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics #=> Array
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].metric_display_name #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].unit #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].metric_query.metric #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].metric_query.group_by.group #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].metric_query.group_by.dimensions #=> Array
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].metric_query.group_by.dimensions[0] #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].metric_query.group_by.limit #=> Integer
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].metric_query.filter #=> Hash
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].metric_query.filter["PerformanceInsightsMetricFilterKey"] #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].reference_data #=> Array
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].name #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_scalar.value #=> Float
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.metric #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.group #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.dimensions #=> Array
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.dimensions[0] #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.limit #=> Integer
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.filter #=> Hash
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.filter["PerformanceInsightsMetricFilterKey"] #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].stats_at_anomaly #=> Array
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].stats_at_anomaly[0].type #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].stats_at_anomaly[0].value #=> Float
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].stats_at_baseline #=> Array
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].stats_at_baseline[0].type #=> String
+    #   resp.proactive_anomaly.source_details.performance_insights_metrics[0].stats_at_baseline[0].value #=> Float
     #   resp.proactive_anomaly.associated_insight_id #=> String
     #   resp.proactive_anomaly.resource_collection.cloud_formation.stack_names #=> Array
     #   resp.proactive_anomaly.resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.proactive_anomaly.resource_collection.tags #=> Array
+    #   resp.proactive_anomaly.resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.proactive_anomaly.resource_collection.tags[0].tag_values #=> Array
+    #   resp.proactive_anomaly.resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_anomaly.limit #=> Float
     #   resp.reactive_anomaly.id #=> String
     #   resp.reactive_anomaly.severity #=> String, one of "LOW", "MEDIUM", "HIGH"
@@ -532,9 +562,46 @@ module Aws::DevOpsGuru
     #   resp.reactive_anomaly.source_details.cloud_watch_metrics[0].metric_data_summary.timestamp_metric_value_pair_list[0].timestamp #=> Time
     #   resp.reactive_anomaly.source_details.cloud_watch_metrics[0].metric_data_summary.timestamp_metric_value_pair_list[0].metric_value #=> Float
     #   resp.reactive_anomaly.source_details.cloud_watch_metrics[0].metric_data_summary.status_code #=> String, one of "Complete", "InternalError", "PartialData"
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics #=> Array
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].metric_display_name #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].unit #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].metric_query.metric #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].metric_query.group_by.group #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].metric_query.group_by.dimensions #=> Array
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].metric_query.group_by.dimensions[0] #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].metric_query.group_by.limit #=> Integer
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].metric_query.filter #=> Hash
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].metric_query.filter["PerformanceInsightsMetricFilterKey"] #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].reference_data #=> Array
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].name #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_scalar.value #=> Float
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.metric #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.group #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.dimensions #=> Array
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.dimensions[0] #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.limit #=> Integer
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.filter #=> Hash
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.filter["PerformanceInsightsMetricFilterKey"] #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].stats_at_anomaly #=> Array
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].stats_at_anomaly[0].type #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].stats_at_anomaly[0].value #=> Float
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].stats_at_baseline #=> Array
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].stats_at_baseline[0].type #=> String
+    #   resp.reactive_anomaly.source_details.performance_insights_metrics[0].stats_at_baseline[0].value #=> Float
     #   resp.reactive_anomaly.associated_insight_id #=> String
     #   resp.reactive_anomaly.resource_collection.cloud_formation.stack_names #=> Array
     #   resp.reactive_anomaly.resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.reactive_anomaly.resource_collection.tags #=> Array
+    #   resp.reactive_anomaly.resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.reactive_anomaly.resource_collection.tags[0].tag_values #=> Array
+    #   resp.reactive_anomaly.resource_collection.tags[0].tag_values[0] #=> String
+    #   resp.reactive_anomaly.type #=> String, one of "CAUSAL", "CONTEXTUAL"
+    #   resp.reactive_anomaly.name #=> String
+    #   resp.reactive_anomaly.description #=> String
+    #   resp.reactive_anomaly.causal_anomaly_id #=> String
+    #   resp.reactive_anomaly.anomaly_resources #=> Array
+    #   resp.reactive_anomaly.anomaly_resources[0].name #=> String
+    #   resp.reactive_anomaly.anomaly_resources[0].type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAnomaly AWS API Documentation
     #
@@ -607,6 +674,10 @@ module Aws::DevOpsGuru
     #   resp.proactive_insight.prediction_time_range.end_time #=> Time
     #   resp.proactive_insight.resource_collection.cloud_formation.stack_names #=> Array
     #   resp.proactive_insight.resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.proactive_insight.resource_collection.tags #=> Array
+    #   resp.proactive_insight.resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.proactive_insight.resource_collection.tags[0].tag_values #=> Array
+    #   resp.proactive_insight.resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_insight.ssm_ops_item_id #=> String
     #   resp.reactive_insight.id #=> String
     #   resp.reactive_insight.name #=> String
@@ -616,6 +687,10 @@ module Aws::DevOpsGuru
     #   resp.reactive_insight.insight_time_range.end_time #=> Time
     #   resp.reactive_insight.resource_collection.cloud_formation.stack_names #=> Array
     #   resp.reactive_insight.resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.reactive_insight.resource_collection.tags #=> Array
+    #   resp.reactive_insight.resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.reactive_insight.resource_collection.tags[0].tag_values #=> Array
+    #   resp.reactive_insight.resource_collection.tags[0].tag_values[0] #=> String
     #   resp.reactive_insight.ssm_ops_item_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeInsight AWS API Documentation
@@ -721,12 +796,13 @@ module Aws::DevOpsGuru
     #
     # @option params [required, String] :organization_resource_collection_type
     #   An Amazon Web Services resource collection type. This type specifies
-    #   how analyzed Amazon Web Services resources are defined. The one type
-    #   of Amazon Web Services resource collection supported is Amazon Web
-    #   Services CloudFormation stacks. DevOps Guru can be configured to
-    #   analyze only the Amazon Web Services resources that are defined in the
-    #   stacks. You can specify up to 500 Amazon Web Services CloudFormation
-    #   stacks.
+    #   how analyzed Amazon Web Services resources are defined. The two types
+    #   of Amazon Web Services resource collections supported are Amazon Web
+    #   Services CloudFormation stacks and Amazon Web Services resources that
+    #   contain the same Amazon Web Services tag. DevOps Guru can be
+    #   configured to analyze the Amazon Web Services resources that are
+    #   defined in the stacks or that are tagged using the same tag *key*. You
+    #   can specify up to 500 Amazon Web Services CloudFormation stacks.
     #
     # @option params [Array<String>] :account_ids
     #   The ID of the Amazon Web Services account.
@@ -791,20 +867,23 @@ module Aws::DevOpsGuru
     # Returns the number of open proactive insights, open reactive insights,
     # and the Mean Time to Recover (MTTR) for all closed insights in
     # resource collections in your account. You specify the type of Amazon
-    # Web Services resources collection. The one type of Amazon Web Services
-    # resource collection supported is Amazon Web Services CloudFormation
-    # stacks. DevOps Guru can be configured to analyze only the Amazon Web
-    # Services resources that are defined in the stacks. You can specify up
+    # Web Services resources collection. The two types of Amazon Web
+    # Services resource collections supported are Amazon Web Services
+    # CloudFormation stacks and Amazon Web Services resources that contain
+    # the same Amazon Web Services tag. DevOps Guru can be configured to
+    # analyze the Amazon Web Services resources that are defined in the
+    # stacks or that are tagged using the same tag *key*. You can specify up
     # to 500 Amazon Web Services CloudFormation stacks.
     #
     # @option params [required, String] :resource_collection_type
     #   An Amazon Web Services resource collection type. This type specifies
-    #   how analyzed Amazon Web Services resources are defined. The one type
-    #   of Amazon Web Services resource collection supported is Amazon Web
-    #   Services CloudFormation stacks. DevOps Guru can be configured to
-    #   analyze only the Amazon Web Services resources that are defined in the
-    #   stacks. You can specify up to 500 Amazon Web Services CloudFormation
-    #   stacks.
+    #   how analyzed Amazon Web Services resources are defined. The two types
+    #   of Amazon Web Services resource collections supported are Amazon Web
+    #   Services CloudFormation stacks and Amazon Web Services resources that
+    #   contain the same Amazon Web Services tag. DevOps Guru can be
+    #   configured to analyze the Amazon Web Services resources that are
+    #   defined in the stacks or that are tagged using the same tag *key*. You
+    #   can specify up to 500 Amazon Web Services CloudFormation stacks.
     #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results for
@@ -815,13 +894,14 @@ module Aws::DevOpsGuru
     #   * {Types::DescribeResourceCollectionHealthResponse#cloud_formation #cloud_formation} => Array&lt;Types::CloudFormationHealth&gt;
     #   * {Types::DescribeResourceCollectionHealthResponse#service #service} => Array&lt;Types::ServiceHealth&gt;
     #   * {Types::DescribeResourceCollectionHealthResponse#next_token #next_token} => String
+    #   * {Types::DescribeResourceCollectionHealthResponse#tags #tags} => Array&lt;Types::TagHealth&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_resource_collection_health({
-    #     resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE
+    #     resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE, AWS_TAGS
     #     next_token: "UuidNextToken",
     #   })
     #
@@ -837,6 +917,12 @@ module Aws::DevOpsGuru
     #   resp.service[0].insight.open_proactive_insights #=> Integer
     #   resp.service[0].insight.open_reactive_insights #=> Integer
     #   resp.next_token #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].app_boundary_key #=> String
+    #   resp.tags[0].tag_value #=> String
+    #   resp.tags[0].insight.open_proactive_insights #=> Integer
+    #   resp.tags[0].insight.open_reactive_insights #=> Integer
+    #   resp.tags[0].insight.mean_time_to_recover_in_milliseconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeResourceCollectionHealth AWS API Documentation
     #
@@ -904,6 +990,10 @@ module Aws::DevOpsGuru
     #
     #   resp.resource_collection.cloud_formation.stack_names #=> Array
     #   resp.resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.resource_collection.tags #=> Array
+    #   resp.resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.resource_collection.tags[0].tag_values #=> Array
+    #   resp.resource_collection.tags[0].tag_values[0] #=> String
     #   resp.status #=> String, one of "ONGOING", "COMPLETED"
     #   resp.costs #=> Array
     #   resp.costs[0].type #=> String
@@ -926,11 +1016,13 @@ module Aws::DevOpsGuru
     end
 
     # Returns lists Amazon Web Services resources that are of the specified
-    # resource collection type. The one type of Amazon Web Services resource
-    # collection supported is Amazon Web Services CloudFormation stacks.
-    # DevOps Guru can be configured to analyze only the Amazon Web Services
-    # resources that are defined in the stacks. You can specify up to 500
-    # Amazon Web Services CloudFormation stacks.
+    # resource collection type. The two types of Amazon Web Services
+    # resource collections supported are Amazon Web Services CloudFormation
+    # stacks and Amazon Web Services resources that contain the same Amazon
+    # Web Services tag. DevOps Guru can be configured to analyze the Amazon
+    # Web Services resources that are defined in the stacks or that are
+    # tagged using the same tag *key*. You can specify up to 500 Amazon Web
+    # Services CloudFormation stacks.
     #
     # @option params [required, String] :resource_collection_type
     #   The type of Amazon Web Services resource collections to return. The
@@ -951,7 +1043,7 @@ module Aws::DevOpsGuru
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_collection({
-    #     resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE
+    #     resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE, AWS_TAGS
     #     next_token: "UuidNextToken",
     #   })
     #
@@ -959,6 +1051,10 @@ module Aws::DevOpsGuru
     #
     #   resp.resource_collection.cloud_formation.stack_names #=> Array
     #   resp.resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.resource_collection.tags #=> Array
+    #   resp.resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.resource_collection.tags[0].tag_values #=> Array
+    #   resp.resource_collection.tags[0].tag_values[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/GetResourceCollection AWS API Documentation
@@ -1039,9 +1135,39 @@ module Aws::DevOpsGuru
     #   resp.proactive_anomalies[0].source_details.cloud_watch_metrics[0].metric_data_summary.timestamp_metric_value_pair_list[0].timestamp #=> Time
     #   resp.proactive_anomalies[0].source_details.cloud_watch_metrics[0].metric_data_summary.timestamp_metric_value_pair_list[0].metric_value #=> Float
     #   resp.proactive_anomalies[0].source_details.cloud_watch_metrics[0].metric_data_summary.status_code #=> String, one of "Complete", "InternalError", "PartialData"
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics #=> Array
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].metric_display_name #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].unit #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.metric #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.group_by.group #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.group_by.dimensions #=> Array
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.group_by.dimensions[0] #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.group_by.limit #=> Integer
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.filter #=> Hash
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.filter["PerformanceInsightsMetricFilterKey"] #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data #=> Array
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].name #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_scalar.value #=> Float
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.metric #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.group #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.dimensions #=> Array
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.dimensions[0] #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.limit #=> Integer
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.filter #=> Hash
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.filter["PerformanceInsightsMetricFilterKey"] #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_anomaly #=> Array
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_anomaly[0].type #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_anomaly[0].value #=> Float
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_baseline #=> Array
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_baseline[0].type #=> String
+    #   resp.proactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_baseline[0].value #=> Float
     #   resp.proactive_anomalies[0].associated_insight_id #=> String
     #   resp.proactive_anomalies[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.proactive_anomalies[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.proactive_anomalies[0].resource_collection.tags #=> Array
+    #   resp.proactive_anomalies[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.proactive_anomalies[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.proactive_anomalies[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_anomalies[0].limit #=> Float
     #   resp.reactive_anomalies #=> Array
     #   resp.reactive_anomalies[0].id #=> String
@@ -1064,9 +1190,46 @@ module Aws::DevOpsGuru
     #   resp.reactive_anomalies[0].source_details.cloud_watch_metrics[0].metric_data_summary.timestamp_metric_value_pair_list[0].timestamp #=> Time
     #   resp.reactive_anomalies[0].source_details.cloud_watch_metrics[0].metric_data_summary.timestamp_metric_value_pair_list[0].metric_value #=> Float
     #   resp.reactive_anomalies[0].source_details.cloud_watch_metrics[0].metric_data_summary.status_code #=> String, one of "Complete", "InternalError", "PartialData"
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics #=> Array
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].metric_display_name #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].unit #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.metric #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.group_by.group #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.group_by.dimensions #=> Array
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.group_by.dimensions[0] #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.group_by.limit #=> Integer
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.filter #=> Hash
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].metric_query.filter["PerformanceInsightsMetricFilterKey"] #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data #=> Array
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].name #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_scalar.value #=> Float
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.metric #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.group #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.dimensions #=> Array
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.dimensions[0] #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.group_by.limit #=> Integer
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.filter #=> Hash
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].reference_data[0].comparison_values.reference_metric.metric_query.filter["PerformanceInsightsMetricFilterKey"] #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_anomaly #=> Array
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_anomaly[0].type #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_anomaly[0].value #=> Float
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_baseline #=> Array
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_baseline[0].type #=> String
+    #   resp.reactive_anomalies[0].source_details.performance_insights_metrics[0].stats_at_baseline[0].value #=> Float
     #   resp.reactive_anomalies[0].associated_insight_id #=> String
     #   resp.reactive_anomalies[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.reactive_anomalies[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.reactive_anomalies[0].resource_collection.tags #=> Array
+    #   resp.reactive_anomalies[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.reactive_anomalies[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.reactive_anomalies[0].resource_collection.tags[0].tag_values[0] #=> String
+    #   resp.reactive_anomalies[0].type #=> String, one of "CAUSAL", "CONTEXTUAL"
+    #   resp.reactive_anomalies[0].name #=> String
+    #   resp.reactive_anomalies[0].description #=> String
+    #   resp.reactive_anomalies[0].causal_anomaly_id #=> String
+    #   resp.reactive_anomalies[0].anomaly_resources #=> Array
+    #   resp.reactive_anomalies[0].anomaly_resources[0].name #=> String
+    #   resp.reactive_anomalies[0].anomaly_resources[0].type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListAnomaliesForInsight AWS API Documentation
@@ -1120,6 +1283,12 @@ module Aws::DevOpsGuru
     #         cloud_formation: {
     #           stack_names: ["StackName"],
     #         },
+    #         tags: [
+    #           {
+    #             app_boundary_key: "AppBoundaryKey", # required
+    #             tag_values: ["TagValue"], # required
+    #           },
+    #         ],
     #       },
     #     },
     #     max_results: 1,
@@ -1132,6 +1301,10 @@ module Aws::DevOpsGuru
     #   resp.events #=> Array
     #   resp.events[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.events[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.events[0].resource_collection.tags #=> Array
+    #   resp.events[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.events[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.events[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.events[0].id #=> String
     #   resp.events[0].time #=> Time
     #   resp.events[0].event_source #=> String
@@ -1217,8 +1390,14 @@ module Aws::DevOpsGuru
     #   resp.proactive_insights[0].prediction_time_range.end_time #=> Time
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.proactive_insights[0].resource_collection.tags #=> Array
+    #   resp.proactive_insights[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.proactive_insights[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.proactive_insights[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_insights[0].service_collection.service_names #=> Array
     #   resp.proactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
+    #   resp.proactive_insights[0].associated_resource_arns #=> Array
+    #   resp.proactive_insights[0].associated_resource_arns[0] #=> String
     #   resp.reactive_insights #=> Array
     #   resp.reactive_insights[0].id #=> String
     #   resp.reactive_insights[0].name #=> String
@@ -1228,8 +1407,14 @@ module Aws::DevOpsGuru
     #   resp.reactive_insights[0].insight_time_range.end_time #=> Time
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.reactive_insights[0].resource_collection.tags #=> Array
+    #   resp.reactive_insights[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.reactive_insights[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.reactive_insights[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.reactive_insights[0].service_collection.service_names #=> Array
     #   resp.reactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
+    #   resp.reactive_insights[0].associated_resource_arns #=> Array
+    #   resp.reactive_insights[0].associated_resource_arns[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListInsights AWS API Documentation
@@ -1351,6 +1536,10 @@ module Aws::DevOpsGuru
     #   resp.proactive_insights[0].prediction_time_range.end_time #=> Time
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.proactive_insights[0].resource_collection.tags #=> Array
+    #   resp.proactive_insights[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.proactive_insights[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.proactive_insights[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_insights[0].service_collection.service_names #=> Array
     #   resp.proactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
     #   resp.reactive_insights #=> Array
@@ -1364,6 +1553,10 @@ module Aws::DevOpsGuru
     #   resp.reactive_insights[0].insight_time_range.end_time #=> Time
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.reactive_insights[0].resource_collection.tags #=> Array
+    #   resp.reactive_insights[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.reactive_insights[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.reactive_insights[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.reactive_insights[0].service_collection.service_names #=> Array
     #   resp.reactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
     #   resp.next_token #=> String
@@ -1430,6 +1623,7 @@ module Aws::DevOpsGuru
     #   resp.recommendations[0].related_anomalies[0].source_details[0].cloud_watch_metrics #=> Array
     #   resp.recommendations[0].related_anomalies[0].source_details[0].cloud_watch_metrics[0].metric_name #=> String
     #   resp.recommendations[0].related_anomalies[0].source_details[0].cloud_watch_metrics[0].namespace #=> String
+    #   resp.recommendations[0].related_anomalies[0].anomaly_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListRecommendations AWS API Documentation
@@ -1544,6 +1738,12 @@ module Aws::DevOpsGuru
     #         cloud_formation: {
     #           stack_names: ["StackName"],
     #         },
+    #         tags: [
+    #           {
+    #             app_boundary_key: "AppBoundaryKey", # required
+    #             tag_values: ["TagValue"], # required
+    #           },
+    #         ],
     #       },
     #       service_collection: {
     #         service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
@@ -1567,8 +1767,14 @@ module Aws::DevOpsGuru
     #   resp.proactive_insights[0].prediction_time_range.end_time #=> Time
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.proactive_insights[0].resource_collection.tags #=> Array
+    #   resp.proactive_insights[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.proactive_insights[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.proactive_insights[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_insights[0].service_collection.service_names #=> Array
     #   resp.proactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
+    #   resp.proactive_insights[0].associated_resource_arns #=> Array
+    #   resp.proactive_insights[0].associated_resource_arns[0] #=> String
     #   resp.reactive_insights #=> Array
     #   resp.reactive_insights[0].id #=> String
     #   resp.reactive_insights[0].name #=> String
@@ -1578,8 +1784,14 @@ module Aws::DevOpsGuru
     #   resp.reactive_insights[0].insight_time_range.end_time #=> Time
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.reactive_insights[0].resource_collection.tags #=> Array
+    #   resp.reactive_insights[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.reactive_insights[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.reactive_insights[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.reactive_insights[0].service_collection.service_names #=> Array
     #   resp.reactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
+    #   resp.reactive_insights[0].associated_resource_arns #=> Array
+    #   resp.reactive_insights[0].associated_resource_arns[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SearchInsights AWS API Documentation
@@ -1647,6 +1859,12 @@ module Aws::DevOpsGuru
     #         cloud_formation: {
     #           stack_names: ["StackName"],
     #         },
+    #         tags: [
+    #           {
+    #             app_boundary_key: "AppBoundaryKey", # required
+    #             tag_values: ["TagValue"], # required
+    #           },
+    #         ],
     #       },
     #       service_collection: {
     #         service_names: ["API_GATEWAY"], # accepts API_GATEWAY, APPLICATION_ELB, AUTO_SCALING_GROUP, CLOUD_FRONT, DYNAMO_DB, EC2, ECS, EKS, ELASTIC_BEANSTALK, ELASTI_CACHE, ELB, ES, KINESIS, LAMBDA, NAT_GATEWAY, NETWORK_ELB, RDS, REDSHIFT, ROUTE_53, S3, SAGE_MAKER, SNS, SQS, STEP_FUNCTIONS, SWF
@@ -1670,8 +1888,14 @@ module Aws::DevOpsGuru
     #   resp.proactive_insights[0].prediction_time_range.end_time #=> Time
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.proactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.proactive_insights[0].resource_collection.tags #=> Array
+    #   resp.proactive_insights[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.proactive_insights[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.proactive_insights[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_insights[0].service_collection.service_names #=> Array
     #   resp.proactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
+    #   resp.proactive_insights[0].associated_resource_arns #=> Array
+    #   resp.proactive_insights[0].associated_resource_arns[0] #=> String
     #   resp.reactive_insights #=> Array
     #   resp.reactive_insights[0].id #=> String
     #   resp.reactive_insights[0].name #=> String
@@ -1681,8 +1905,14 @@ module Aws::DevOpsGuru
     #   resp.reactive_insights[0].insight_time_range.end_time #=> Time
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names #=> Array
     #   resp.reactive_insights[0].resource_collection.cloud_formation.stack_names[0] #=> String
+    #   resp.reactive_insights[0].resource_collection.tags #=> Array
+    #   resp.reactive_insights[0].resource_collection.tags[0].app_boundary_key #=> String
+    #   resp.reactive_insights[0].resource_collection.tags[0].tag_values #=> Array
+    #   resp.reactive_insights[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.reactive_insights[0].service_collection.service_names #=> Array
     #   resp.reactive_insights[0].service_collection.service_names[0] #=> String, one of "API_GATEWAY", "APPLICATION_ELB", "AUTO_SCALING_GROUP", "CLOUD_FRONT", "DYNAMO_DB", "EC2", "ECS", "EKS", "ELASTIC_BEANSTALK", "ELASTI_CACHE", "ELB", "ES", "KINESIS", "LAMBDA", "NAT_GATEWAY", "NETWORK_ELB", "RDS", "REDSHIFT", "ROUTE_53", "S3", "SAGE_MAKER", "SNS", "SQS", "STEP_FUNCTIONS", "SWF"
+    #   resp.reactive_insights[0].associated_resource_arns #=> Array
+    #   resp.reactive_insights[0].associated_resource_arns[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/SearchOrganizationInsights AWS API Documentation
@@ -1716,6 +1946,12 @@ module Aws::DevOpsGuru
     #       cloud_formation: {
     #         stack_names: ["StackName"],
     #       },
+    #       tags: [
+    #         {
+    #           app_boundary_key: "AppBoundaryKey", # required
+    #           tag_values: ["TagValue"], # required
+    #         },
+    #       ],
     #     },
     #     client_token: "ClientToken",
     #   })
@@ -1729,13 +1965,14 @@ module Aws::DevOpsGuru
       req.send_request(options)
     end
 
-    # Updates the collection of resources that DevOps Guru analyzes. The one
-    # type of Amazon Web Services resource collection supported is Amazon
-    # Web Services CloudFormation stacks. DevOps Guru can be configured to
-    # analyze only the Amazon Web Services resources that are defined in the
-    # stacks. You can specify up to 500 Amazon Web Services CloudFormation
-    # stacks. This method also creates the IAM role required for you to use
-    # DevOps Guru.
+    # Updates the collection of resources that DevOps Guru analyzes. The two
+    # types of Amazon Web Services resource collections supported are Amazon
+    # Web Services CloudFormation stacks and Amazon Web Services resources
+    # that contain the same Amazon Web Services tag. DevOps Guru can be
+    # configured to analyze the Amazon Web Services resources that are
+    # defined in the stacks or that are tagged using the same tag *key*. You
+    # can specify up to 500 Amazon Web Services CloudFormation stacks. This
+    # method also creates the IAM role required for you to use DevOps Guru.
     #
     # @option params [required, String] :action
     #   Specifies if the resource collection in the request is added or
@@ -1755,6 +1992,12 @@ module Aws::DevOpsGuru
     #       cloud_formation: {
     #         stack_names: ["StackName"],
     #       },
+    #       tags: [
+    #         {
+    #           app_boundary_key: "AppBoundaryKey", # required
+    #           tag_values: ["TagValue"], # required
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1811,7 +2054,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

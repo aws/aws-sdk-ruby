@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2021-12-01)
+------------------
+
+* Feature - Add support for Table Classes and introduce the Standard Infrequent Access table class.
+
 1.68.0 (2021-11-30)
 ------------------
 

@@ -1526,6 +1526,7 @@ module Aws::DirectConnect
     #               value: "TagValue",
     #             },
     #           ],
+    #           enable_site_link: false,
     #         },
     #       }
     #
@@ -1611,6 +1612,7 @@ module Aws::DirectConnect
     #               value: "TagValue",
     #             },
     #           ],
+    #           enable_site_link: false,
     #         },
     #       }
     #
@@ -2512,7 +2514,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] virtual_interface_name
-    #   The name of the virtual interface assigned by the customer network.
+    #   Provides the details about a virtual interface's router.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeRouterConfigurationResponse AWS API Documentation
@@ -3474,6 +3476,7 @@ module Aws::DirectConnect
     #             value: "TagValue",
     #           },
     #         ],
+    #         enable_site_link: false,
     #       }
     #
     # @!attribute [rw] virtual_interface_name
@@ -3528,6 +3531,10 @@ module Aws::DirectConnect
     #   The tags associated with the private virtual interface.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] enable_site_link
+    #   Indicates whether to enable or disable SiteLink.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPrivateVirtualInterface AWS API Documentation
     #
     class NewPrivateVirtualInterface < Struct.new(
@@ -3541,7 +3548,8 @@ module Aws::DirectConnect
       :address_family,
       :virtual_gateway_id,
       :direct_connect_gateway_id,
-      :tags)
+      :tags,
+      :enable_site_link)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3823,6 +3831,7 @@ module Aws::DirectConnect
     #             value: "TagValue",
     #           },
     #         ],
+    #         enable_site_link: false,
     #       }
     #
     # @!attribute [rw] virtual_interface_name
@@ -3873,6 +3882,10 @@ module Aws::DirectConnect
     #   The tags associated with the transitive virtual interface.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] enable_site_link
+    #   Indicates whether to enable or disable SiteLink.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewTransitVirtualInterface AWS API Documentation
     #
     class NewTransitVirtualInterface < Struct.new(
@@ -3885,7 +3898,8 @@ module Aws::DirectConnect
       :customer_address,
       :address_family,
       :direct_connect_gateway_id,
-      :tags)
+      :tags,
+      :enable_site_link)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4407,6 +4421,8 @@ module Aws::DirectConnect
     #       {
     #         virtual_interface_id: "VirtualInterfaceId", # required
     #         mtu: 1,
+    #         enable_site_link: false,
+    #         virtual_interface_name: "VirtualInterfaceName",
     #       }
     #
     # @!attribute [rw] virtual_interface_id
@@ -4418,11 +4434,21 @@ module Aws::DirectConnect
     #   are 1500 and 9001. The default value is 1500.
     #   @return [Integer]
     #
+    # @!attribute [rw] enable_site_link
+    #   Indicates whether to enable or disable SiteLink.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] virtual_interface_name
+    #   The name of the virtual private interface.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateVirtualInterfaceAttributesRequest AWS API Documentation
     #
     class UpdateVirtualInterfaceAttributesRequest < Struct.new(
       :virtual_interface_id,
-      :mtu)
+      :mtu,
+      :enable_site_link,
+      :virtual_interface_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4621,6 +4647,10 @@ module Aws::DirectConnect
     #   The tags associated with the virtual interface.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] site_link_enabled
+    #   Indicates whether SiteLink is enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterface AWS API Documentation
     #
     class VirtualInterface < Struct.new(
@@ -4648,7 +4678,8 @@ module Aws::DirectConnect
       :region,
       :aws_device_v2,
       :aws_logical_device_id,
-      :tags)
+      :tags,
+      :site_link_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

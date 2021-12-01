@@ -356,6 +356,12 @@ module Aws::DynamoDB
       data[:archival_summary]
     end
 
+    # Contains details of the table class.
+    # @return [Types::TableClassSummary]
+    def table_class_summary
+      data[:table_class_summary]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1797,6 +1803,7 @@ module Aws::DynamoDB
     #               },
     #             },
     #           ],
+    #           table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #         },
     #         update: {
     #           region_name: "RegionName", # required
@@ -1812,12 +1819,14 @@ module Aws::DynamoDB
     #               },
     #             },
     #           ],
+    #           table_class_override: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #         },
     #         delete: {
     #           region_name: "RegionName", # required
     #         },
     #       },
     #     ],
+    #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::AttributeDefinition>] :attribute_definitions
@@ -1890,6 +1899,9 @@ module Aws::DynamoDB
     #
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+    # @option options [String] :table_class
+    #   The table class of the table to be updated. Valid values are
+    #   `STANDARD` and `STANDARD_INFREQUENT_ACCESS`.
     # @return [Table]
     def update(options = {})
       options = options.merge(table_name: @name)

@@ -28,7 +28,7 @@ require_relative 'aws-sdk-kendra/customizations'
 # structure.
 #
 #     kendra = Aws::Kendra::Client.new
-#     resp = kendra.batch_delete_document(params)
+#     resp = kendra.associate_entities_to_experience(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-kendra/customizations'
 # @!group service
 module Aws::Kendra
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end
