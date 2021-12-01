@@ -4,7 +4,6 @@
 require 'rubygems'
 require 'optparse'
 require 'logger'
-require 'byebug'
 
 def env_bool key, default
   if ENV.key?(key)

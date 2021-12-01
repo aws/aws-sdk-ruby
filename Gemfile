@@ -46,7 +46,6 @@ group :docs do
 end
 
 group :repl do
-  gem 'byebug'
   gem 'pry'
 end
 
