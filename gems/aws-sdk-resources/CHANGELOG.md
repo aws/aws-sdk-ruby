@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.124.0 (2021-12-02)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-amplifyuibuilder` gem.
+
 3.123.0 (2021-11-30)
 ------------------
 

@@ -294,6 +294,7 @@ RubyGems.org page under "LINKS" section.
 | ----------------------------------------------------- | ---------------------------------------- | ------------------------------------------- | ----------- |
 | AWS Account                                           | Aws::Account                             | aws-sdk-account                             | 2021-02-01  |
 | AWS Amplify                                           | Aws::Amplify                             | aws-sdk-amplify                             | 2017-07-25  |
+| AWS Amplify UI Builder                                | Aws::AmplifyUIBuilder                    | aws-sdk-amplifyuibuilder                    | 2021-08-11  |
 | AWS App Mesh                                          | Aws::AppMesh                             | aws-sdk-appmesh                             | 2019-01-25  |
 | AWS App Runner                                        | Aws::AppRunner                           | aws-sdk-apprunner                           | 2020-05-15  |
 | AWS AppConfig Data                                    | Aws::AppConfigData                       | aws-sdk-appconfigdata                       | 2021-11-11  |

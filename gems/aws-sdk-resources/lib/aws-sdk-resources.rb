@@ -13,6 +13,7 @@ module Aws
   autoload :AlexaForBusiness, 'aws-sdk-alexaforbusiness'
   autoload :Amplify, 'aws-sdk-amplify'
   autoload :AmplifyBackend, 'aws-sdk-amplifybackend'
+  autoload :AmplifyUIBuilder, 'aws-sdk-amplifyuibuilder'
   autoload :ApiGatewayManagementApi, 'aws-sdk-apigatewaymanagementapi'
   autoload :ApiGatewayV2, 'aws-sdk-apigatewayv2'
   autoload :AppConfig, 'aws-sdk-appconfig'

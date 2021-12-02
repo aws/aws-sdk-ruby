@@ -232,6 +232,7 @@ module Aws
             'AlexaForBusiness' => 'a4b',
             'Amplify' => 'amplify',
             'AmplifyBackend' => 'amplifybackend',
+            'AmplifyUIBuilder' => 'amplifyuibuilder',
             'ApiGatewayManagementApi' => 'execute-api',
             'ApiGatewayV2' => 'apigateway',
             'AppConfig' => 'appconfig',

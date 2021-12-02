@@ -28,7 +28,7 @@ require_relative 'aws-sdk-networkmanager/customizations'
 # structure.
 #
 #     network_manager = Aws::NetworkManager::Client.new
-#     resp = network_manager.associate_customer_gateway(params)
+#     resp = network_manager.accept_attachment(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-networkmanager/customizations'
 # @!group service
 module Aws::NetworkManager
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.19.0'
 
 end

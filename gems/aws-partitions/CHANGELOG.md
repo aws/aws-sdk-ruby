@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.539.0 (2021-12-02)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AmplifyUIBuilder`.
+
 1.538.0 (2021-12-01)
 ------------------
 

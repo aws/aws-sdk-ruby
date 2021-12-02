@@ -80,6 +80,8 @@ module Aws::RAM
     ResourceArnNotFoundException = Shapes::StructureShape.new(name: 'ResourceArnNotFoundException')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceOwner = Shapes::StringShape.new(name: 'ResourceOwner')
+    ResourceRegionScope = Shapes::StringShape.new(name: 'ResourceRegionScope')
+    ResourceRegionScopeFilter = Shapes::StringShape.new(name: 'ResourceRegionScopeFilter')
     ResourceShare = Shapes::StructureShape.new(name: 'ResourceShare')
     ResourceShareArnList = Shapes::ListShape.new(name: 'ResourceShareArnList')
     ResourceShareAssociation = Shapes::StructureShape.new(name: 'ResourceShareAssociation')
@@ -119,6 +121,7 @@ module Aws::RAM
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagValueList = Shapes::ListShape.new(name: 'TagValueList')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UnknownResourceException = Shapes::StructureShape.new(name: 'UnknownResourceException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -277,6 +280,7 @@ module Aws::RAM
     ListPendingInvitationResourcesRequest.add_member(:resource_share_invitation_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceShareInvitationArn"))
     ListPendingInvitationResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListPendingInvitationResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListPendingInvitationResourcesRequest.add_member(:resource_region_scope, Shapes::ShapeRef.new(shape: ResourceRegionScopeFilter, location_name: "resourceRegionScope"))
     ListPendingInvitationResourcesRequest.struct_class = Types::ListPendingInvitationResourcesRequest
 
     ListPendingInvitationResourcesResponse.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "resources"))
@@ -316,6 +320,7 @@ module Aws::RAM
 
     ListResourceTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListResourceTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListResourceTypesRequest.add_member(:resource_region_scope, Shapes::ShapeRef.new(shape: ResourceRegionScopeFilter, location_name: "resourceRegionScope"))
     ListResourceTypesRequest.struct_class = Types::ListResourceTypesRequest
 
     ListResourceTypesResponse.add_member(:resource_types, Shapes::ShapeRef.new(shape: ServiceNameAndResourceTypeList, location_name: "resourceTypes"))
@@ -329,6 +334,7 @@ module Aws::RAM
     ListResourcesRequest.add_member(:resource_share_arns, Shapes::ShapeRef.new(shape: ResourceShareArnList, location_name: "resourceShareArns"))
     ListResourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListResourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListResourcesRequest.add_member(:resource_region_scope, Shapes::ShapeRef.new(shape: ResourceRegionScopeFilter, location_name: "resourceRegionScope"))
     ListResourcesRequest.struct_class = Types::ListResourcesRequest
 
     ListResourcesResponse.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "resources"))
@@ -381,6 +387,7 @@ module Aws::RAM
     Resource.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
     Resource.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
     Resource.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "lastUpdatedTime"))
+    Resource.add_member(:resource_region_scope, Shapes::ShapeRef.new(shape: ResourceRegionScope, location_name: "resourceRegionScope"))
     Resource.struct_class = Types::Resource
 
     ResourceArnList.member = Shapes::ShapeRef.new(shape: String)
@@ -478,6 +485,7 @@ module Aws::RAM
 
     ServiceNameAndResourceType.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ServiceNameAndResourceType.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
+    ServiceNameAndResourceType.add_member(:resource_region_scope, Shapes::ShapeRef.new(shape: ResourceRegionScope, location_name: "resourceRegionScope"))
     ServiceNameAndResourceType.struct_class = Types::ServiceNameAndResourceType
 
     ServiceNameAndResourceTypeList.member = Shapes::ShapeRef.new(shape: ServiceNameAndResourceType)
@@ -512,6 +520,9 @@ module Aws::RAM
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     TagValueList.member = Shapes::ShapeRef.new(shape: TagValue)
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     UnknownResourceException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     UnknownResourceException.struct_class = Types::UnknownResourceException
@@ -586,6 +597,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnknownResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:associate_resource_share_permission, Seahorse::Model::Operation.new.tap do |o|

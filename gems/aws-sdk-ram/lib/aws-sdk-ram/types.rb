@@ -19,12 +19,28 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_invitation_arn
-    #   The Amazon Resource Name (ARN) of the invitation.
+    #   The [Amazon Resoure Name (ARN)][1] of the invitation that you want
+    #   to accept.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AcceptResourceShareInvitationRequest AWS API Documentation
@@ -37,12 +53,15 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_invitation
-    #   Information about the invitation.
+    #   An object that contains information about the specified invitation.
     #   @return [Types::ResourceShareInvitation]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AcceptResourceShareInvitationResponse AWS API Documentation
@@ -66,29 +85,62 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   to which you want to add or replace permissions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] permission_arn
-    #   The Amazon Resource Name (ARN) of the RAM permission to associate
-    #   with the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the RAM permission
+    #   to associate with the resource share. To find the ARN for a
+    #   permission, use either the ListPermissions operation or go to the
+    #   [Permissions library][2] page in the RAM console and then choose the
+    #   name of the permission. The ARN is displayed on the detail page.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://console.aws.amazon.com/ram/home#Permissions:
     #   @return [String]
     #
     # @!attribute [rw] replace
-    #   Indicates whether the permission should replace the permissions that
-    #   are currently associated with the resource share. Use `true` to
-    #   replace the current permissions. Use `false` to add the permission
-    #   to the current permission.
+    #   Specifies whether the specified permission should replace or add to
+    #   the existing permission associated with the resource share. Use
+    #   `true` to replace the current permissions. Use `false` to add the
+    #   permission to the current permission. The default value is `false`.
+    #
+    #   <note markdown="1"> A resource share can have only one permission per resource type. If
+    #   a resource share already has a permission for the specified resource
+    #   type and you don't set `replace` to `true` then the operation
+    #   returns an error. This helps prevent accidental overwriting of a
+    #   permission.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] permission_version
-    #   The version of the RAM permissions to associate with the resource
-    #   share.
+    #   Specifies the version of the RAM permission to associate with the
+    #   resource share. If you don't specify this parameter, the operation
+    #   uses the version designated as the default.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceSharePermissionRequest AWS API Documentation
@@ -104,12 +156,16 @@ module Aws::RAM
     end
 
     # @!attribute [rw] return_value
-    #   Indicates whether the request succeeded.
+    #   A return value of `true` indicates that the request succeeded. A
+    #   value of `false` indicates that the request failed.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceSharePermissionResponse AWS API Documentation
@@ -132,41 +188,76 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   that you want to add principals or resources to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The Amazon Resource Names (ARNs) of the resources.
+    #   Specifies a list of [Amazon Resource Names (ARNs)][1] of the
+    #   resources that you want to share. This can be `null` if you want to
+    #   add only principals.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
-    #   The principals to associate with the resource share. The possible
-    #   values are:
+    #   Specifies a list of principals to whom you want to the resource
+    #   share. This can be `null` if you want to add only resources.
     #
-    #   * An Amazon Web Services account ID
+    #   What the principals can do with the resources in the share is
+    #   determined by the RAM permissions that you associate with the
+    #   resource share. See AssociateResourceSharePermission.
     #
-    #   * An Amazon Resource Name (ARN) of an organization in Organizations
+    #   You can include the following values:
     #
-    #   * An ARN of an organizational unit (OU) in Organizations
+    #   * An Amazon Web Services account ID, for example: `123456789012`
     #
-    #   * An ARN of an IAM role
+    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #     Organizations, for example:
+    #     `organizations::123456789012:organization/o-exampleorgid`
     #
-    #   * An ARN of an IAM user
+    #   * An ARN of an organizational unit (OU) in Organizations, for
+    #     example:
+    #     `organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123`
     #
-    #   <note markdown="1"> Not all resource types can be shared with IAM roles and IAM users.
-    #   For more information, see [Sharing with IAM roles and IAM users][1]
-    #   in the *Resource Access Manager User Guide*.
+    #   * An ARN of an IAM role, for example:
+    #     `iam::123456789012:role/rolename`
+    #
+    #   * An ARN of an IAM user, for example:
+    #     `iam::123456789012user/username`
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
+    #   more information, see [Sharing with IAM roles and users][2] in the
+    #   *Resource Access Manager User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceShareRequest AWS API Documentation
@@ -181,12 +272,15 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_associations
-    #   Information about the associations.
+    #   An array of objects that contain information about the associations.
     #   @return [Array<Types::ResourceShareAssociation>]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceShareResponse AWS API Documentation
@@ -217,58 +311,90 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the resource share.
+    #   Specifies the name of the resource share.
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The ARNs of the resources to associate with the resource share.
+    #   Specifies a list of one or more ARNs of the resources to associate
+    #   with the resource share.
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
-    #   The principals to associate with the resource share. The possible
-    #   values are:
+    #   Specifies a list of one or more principals to associate with the
+    #   resource share.
     #
-    #   * An Amazon Web Services account ID
+    #   You can include the following values:
     #
-    #   * An Amazon Resource Name (ARN) of an organization in Organizations
+    #   * An Amazon Web Services account ID, for example: `123456789012`
     #
-    #   * An ARN of an organizational unit (OU) in Organizations
+    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #     Organizations, for example:
+    #     `organizations::123456789012:organization/o-exampleorgid`
     #
-    #   * An ARN of an IAM role
+    #   * An ARN of an organizational unit (OU) in Organizations, for
+    #     example:
+    #     `organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123`
     #
-    #   * An ARN of an IAM user
+    #   * An ARN of an IAM role, for example:
+    #     `iam::123456789012:role/rolename`
     #
-    #   <note markdown="1"> Not all resource types can be shared with IAM roles and IAM users.
-    #   For more information, see [Sharing with IAM roles and IAM users][1]
-    #   in the *Resource Access Manager User Guide*.
+    #   * An ARN of an IAM user, for example:
+    #     `iam::123456789012user/username`
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
+    #   more information, see [Sharing with IAM roles and users][2] in the
+    #   *Resource Access Manager User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   Specifies one or more tags to attach to the resource share itself.
+    #   It doesn't attach the tags to the resources associated with the
+    #   resource share.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] allow_external_principals
-    #   Indicates whether principals outside your organization in
-    #   Organizations can be associated with a resource share.
+    #   Specifies whether principals outside your organization in
+    #   Organizations can be associated with a resource share. A value of
+    #   `true` lets you share with individual Amazon Web Services accounts
+    #   that are *not* in your organization. A value of `false` only has
+    #   meaning if your account is a member of an Amazon Web Services
+    #   Organization. The default value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @!attribute [rw] permission_arns
-    #   The Amazon Resource Names (ARNs) of the permissions to associate
-    #   with the resource share. If you do not specify an ARN for the
-    #   permission, RAM automatically attaches the default version of the
-    #   permission for each resource type. Only one permission can be
-    #   associated with each resource type in a resource share.
+    #   Specifies the [Amazon Resource Names (ARNs)][1] of the RAM
+    #   permission to associate with the resource share. If you do not
+    #   specify an ARN for the permission, RAM automatically attaches the
+    #   default version of the permission for each resource type. You can
+    #   associate only one permission with each resource type included in
+    #   the resource share.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreateResourceShareRequest AWS API Documentation
@@ -286,12 +412,15 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share
-    #   Information about the resource share.
+    #   An object with information about the new resource share.
     #   @return [Types::ResourceShare]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreateResourceShareResponse AWS API Documentation
@@ -312,12 +441,28 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   to delete.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DeleteResourceShareRequest AWS API Documentation
@@ -330,12 +475,16 @@ module Aws::RAM
     end
 
     # @!attribute [rw] return_value
-    #   Indicates whether the request succeeded.
+    #   A return value of `true` indicates that the request succeeded. A
+    #   value of `false` indicates that the request failed.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DeleteResourceShareResponse AWS API Documentation
@@ -357,17 +506,38 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   The [Amazon Resoure Name (ARN)][1] of the resource share from which
+    #   you want to disassociate a permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] permission_arn
-    #   The Amazon Resource Name (ARN) of the permission to disassociate
-    #   from the resource share.
+    #   The [Amazon Resoure Name (ARN)][1] of the permission to disassociate
+    #   from the resource share. Changes to permissions take effect
+    #   immediately.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DisassociateResourceSharePermissionRequest AWS API Documentation
@@ -381,12 +551,16 @@ module Aws::RAM
     end
 
     # @!attribute [rw] return_value
-    #   Indicates whether the request succeeded.
+    #   A return value of `true` indicates that the request succeeded. A
+    #   value of `false` indicates that the request failed.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DisassociateResourceSharePermissionResponse AWS API Documentation
@@ -409,20 +583,74 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies [Amazon Resoure Name (ARN)][1] of the resource share that
+    #   you want to remove resources from.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The Amazon Resource Names (ARNs) of the resources.
+    #   Specifies a list of [Amazon Resource Names (ARNs)][1] for one or
+    #   more resources that you want to remove from the resource share.
+    #   After the operation runs, these resources are no longer shared with
+    #   principals outside of the Amazon Web Services account that created
+    #   the resources.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
-    #   The principals.
+    #   Specifies a list of one or more principals that no longer are to
+    #   have access to the resources in this resource share.
+    #
+    #   You can include the following values:
+    #
+    #   * An Amazon Web Services account ID, for example: `123456789012`
+    #
+    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #     Organizations, for example:
+    #     `organizations::123456789012:organization/o-exampleorgid`
+    #
+    #   * An ARN of an organizational unit (OU) in Organizations, for
+    #     example:
+    #     `organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123`
+    #
+    #   * An ARN of an IAM role, for example:
+    #     `iam::123456789012:role/rolename`
+    #
+    #   * An ARN of an IAM user, for example:
+    #     `iam::123456789012user/username`
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
+    #   more information, see [Sharing with IAM roles and users][2] in the
+    #   *Resource Access Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DisassociateResourceShareRequest AWS API Documentation
@@ -437,12 +665,16 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_associations
-    #   Information about the associations.
+    #   An array of objects that contain information about the updated
+    #   associations for this resource share.
     #   @return [Array<Types::ResourceShareAssociation>]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DisassociateResourceShareResponse AWS API Documentation
@@ -461,7 +693,8 @@ module Aws::RAM
     class EnableSharingWithAwsOrganizationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] return_value
-    #   Indicates whether the request succeeded.
+    #   A return value of `true` indicates that the request succeeded. A
+    #   value of `false` indicates that the request failed.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/EnableSharingWithAwsOrganizationResponse AWS API Documentation
@@ -481,11 +714,22 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] permission_arn
-    #   The Amazon Resource Name (ARN) of the permission.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the permission whose
+    #   contents you want to retrieve. To find the ARN for a permission, use
+    #   either the ListPermissions operation or go to the [Permissions
+    #   library][2] page in the RAM console and then choose the name of the
+    #   permission. The ARN is displayed on the detail page.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://console.aws.amazon.com/ram/home#Permissions:
     #   @return [String]
     #
     # @!attribute [rw] permission_version
-    #   The identifier for the version of the permission.
+    #   Specifies identifier for the version of the RAM permission to
+    #   retrieve. If you don't specify this parameter, the operation
+    #   retrieves the default version.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetPermissionRequest AWS API Documentation
@@ -498,7 +742,7 @@ module Aws::RAM
     end
 
     # @!attribute [rw] permission
-    #   Information about the permission.
+    #   An object that contains information about the permission.
     #   @return [Types::ResourceSharePermissionDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetPermissionResponse AWS API Documentation
@@ -520,21 +764,37 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_arns
-    #   The Amazon Resource Names (ARNs) of the resources.
+    #   Specifies the [Amazon Resource Names (ARNs)][1] of the resources
+    #   whose policies you want to retrieve.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] principal
-    #   The principal.
+    #   Specifies the principal.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourcePoliciesRequest AWS API Documentation
@@ -549,12 +809,16 @@ module Aws::RAM
     end
 
     # @!attribute [rw] policies
-    #   A key policy document, in JSON format.
+    #   An array of resource policy documents in JSON format.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourcePoliciesResponse AWS API Documentation
@@ -580,38 +844,75 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] association_type
-    #   The association type. Specify `PRINCIPAL` to list the principals
-    #   that are associated with the specified resource share. Specify
-    #   `RESOURCE` to list the resources that are associated with the
-    #   specified resource share.
+    #   Specifies whether you want to retrieve the associations that involve
+    #   a specified resource or principal.
+    #
+    #   * `PRINCIPAL` – list the principals that are associated with the
+    #     specified resource share.
+    #
+    #   * `RESOURCE` – list the resources that are associated with the
+    #     specified resource share.
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arns
-    #   The Amazon Resource Names (ARN) of the resource shares.
+    #   Specifies a list of [Amazon Resource Names (ARNs)][1] of the
+    #   resource share whose associations you want to retrieve.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource. You cannot specify
-    #   this parameter if the association type is `PRINCIPAL`.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource whose
+    #   resource shares you want to retrieve.
+    #
+    #   You cannot specify this parameter if the association type is
+    #   `PRINCIPAL`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   The principal. You cannot specify this parameter if the association
-    #   type is `RESOURCE`.
+    #   Specifies the ID of the principal whose resource shares you want to
+    #   retrieve. This can be an Amazon Web Services account ID, an
+    #   organization ID, an organizational unit ID, or the [Amazon Resoure
+    #   Name (ARN)][1] of an individual IAM user or role.
+    #
+    #   You cannot specify this parameter if the association type is
+    #   `RESOURCE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] association_status
-    #   The association status.
+    #   Specifies that you want to retrieve only associations with this
+    #   status.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShareAssociationsRequest AWS API Documentation
@@ -629,12 +930,16 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_associations
-    #   Information about the associations.
+    #   An array of objects that contain the details about the associations.
     #   @return [Array<Types::ResourceShareAssociation>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShareAssociationsResponse AWS API Documentation
@@ -657,21 +962,43 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_invitation_arns
-    #   The Amazon Resource Names (ARN) of the invitations.
+    #   Specifies the [Amazon Resource Names (ARNs)][1] of the resource
+    #   share invitations you want information about.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_share_arns
-    #   The Amazon Resource Names (ARN) of the resource shares.
+    #   Specifies that you want details about invitations only for the
+    #   resource shares described by this list of [Amazon Resource Names
+    #   (ARNs)][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShareInvitationsRequest AWS API Documentation
@@ -686,12 +1013,16 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_invitations
-    #   Information about the invitations.
+    #   An array of objects that contain the details about the invitations.
     #   @return [Array<Types::ResourceShareInvitation>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShareInvitationsResponse AWS API Documentation
@@ -723,38 +1054,68 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arns
-    #   The Amazon Resource Names (ARNs) of the resource shares.
+    #   Specifies the [Amazon Resource Names (ARNs)][1] of individual
+    #   resource shares that you want information about.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_share_status
-    #   The status of the resource share.
+    #   Specifies that you want to retrieve details of only those resource
+    #   shares that have this status.
     #   @return [String]
     #
     # @!attribute [rw] resource_owner
-    #   The type of owner.
+    #   Specifies that you want to retrieve details of only those resource
+    #   shares that match the following:
+    #
+    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #
+    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other
+    #     accounts share with you
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the resource share.
+    #   Specifies the name of an individual resource share that you want to
+    #   retrieve details about.
     #   @return [String]
     #
     # @!attribute [rw] tag_filters
-    #   One or more tag filters.
+    #   Specifies that you want to retrieve details of only those resource
+    #   shares that match the specified tag keys and values.
     #   @return [Array<Types::TagFilter>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @!attribute [rw] permission_arn
-    #   The Amazon Resource Name (ARN) of the RAM permission that is
-    #   associated with the resource share.
+    #   Specifies that you want to retrieve details of only those resource
+    #   shares that use the RAM permission with this [Amazon Resoure Name
+    #   (ARN)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceSharesRequest AWS API Documentation
@@ -773,12 +1134,17 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_shares
-    #   Information about the resource shares.
+    #   An array of objects that contain the information about the resource
+    #   shares.
     #   @return [Array<Types::ResourceShare>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceSharesResponse AWS API Documentation
@@ -790,9 +1156,9 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # A client token input parameter was reused with an operation, but at
-    # least one of the other input parameters is different from the previous
-    # call to the operation.
+    # The client token input parameter was matched one used with a previous
+    # call to the operation, but at least one of the other input parameters
+    # is different from the previous call.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -805,7 +1171,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # A client token is not valid.
+    # The client token is not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -818,7 +1184,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified value for MaxResults is not valid.
+    # The specified value for `MaxResults` is not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -831,7 +1197,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified value for NextToken is not valid.
+    # The specified value for `NextToken` is not valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -890,39 +1256,79 @@ module Aws::RAM
     #         resource_share_invitation_arn: "String", # required
     #         next_token: "String",
     #         max_results: 1,
+    #         resource_region_scope: "ALL", # accepts ALL, REGIONAL, GLOBAL
     #       }
     #
     # @!attribute [rw] resource_share_invitation_arn
-    #   The Amazon Resource Name (ARN) of the invitation.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the invitation. You
+    #   can use GetResourceShareInvitations to find the ARN of the
+    #   invitation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
+    #
+    # @!attribute [rw] resource_region_scope
+    #   Specifies that you want the results to include only resources that
+    #   have the specified scope.
+    #
+    #   * `ALL` – the results include both global and regional resources or
+    #     resource types.
+    #
+    #   * `GLOBAL` – the results include only global resources or resource
+    #     types.
+    #
+    #   * `REGIONAL` – the results include only regional resources or
+    #     resource types.
+    #
+    #   The default value is `ALL`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPendingInvitationResourcesRequest AWS API Documentation
     #
     class ListPendingInvitationResourcesRequest < Struct.new(
       :resource_share_invitation_arn,
       :next_token,
-      :max_results)
+      :max_results,
+      :resource_region_scope)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] resources
-    #   Information about the resources included the resource share.
+    #   An array of objects that contain the information about the resources
+    #   included the specified resource share.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPendingInvitationResourcesResponse AWS API Documentation
@@ -944,19 +1350,31 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_type
-    #   Specifies the resource type for which to list permissions. For
-    #   example, to list only permissions that apply to EC2 subnets, specify
-    #   `ec2:Subnet`.
+    #   Specifies that you want to list permissions for only the specified
+    #   resource type. For example, to list only permissions that apply to
+    #   EC2 subnets, specify `ec2:Subnet`. You can use the ListResourceTypes
+    #   operation to get the specific string required.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissionsRequest AWS API Documentation
@@ -970,12 +1388,16 @@ module Aws::RAM
     end
 
     # @!attribute [rw] permissions
-    #   Information about the permissions.
+    #   An array of objects with information about the permissions.
     #   @return [Array<Types::ResourceSharePermissionSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissionsResponse AWS API Documentation
@@ -1001,51 +1423,95 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_owner
-    #   The type of owner.
+    #   Specifies that you want to list information for only resource shares
+    #   that match the following:
+    #
+    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #
+    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other
+    #     accounts share with you
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource.
+    #   Specifies that you want to list principal information for the
+    #   resource share with the specified [Amazon Resoure Name (ARN)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] principals
-    #   The principals.
+    #   Specifies that you want to list information for only the listed
+    #   principals.
+    #
+    #   You can include the following values:
+    #
+    #   * An Amazon Web Services account ID, for example: `123456789012`
+    #
+    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #     Organizations, for example:
+    #     `organizations::123456789012:organization/o-exampleorgid`
+    #
+    #   * An ARN of an organizational unit (OU) in Organizations, for
+    #     example:
+    #     `organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123`
+    #
+    #   * An ARN of an IAM role, for example:
+    #     `iam::123456789012:role/rolename`
+    #
+    #   * An ARN of an IAM user, for example:
+    #     `iam::123456789012user/username`
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
+    #   more information, see [Sharing with IAM roles and users][2] in the
+    #   *Resource Access Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_type
-    #   The resource type.
+    #   Specifies that you want to list information for only principals
+    #   associated with resource shares that include the specified resource
+    #   type.
     #
-    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
-    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
-    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
-    #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
-    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
-    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
-    #   `license-manager:LicenseConfiguration` I
-    #   `network-firewall:FirewallPolicy` \|
-    #   `network-firewall:StatefulRuleGroup` \|
-    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
-    #   `resource-groups:Group` \| `rds:Cluster` \|
-    #   `route53resolver:FirewallRuleGroup`
-    #   \|`route53resolver:ResolverQueryLogConfig` \|
-    #   `route53resolver:ResolverRule` \| `s3-outposts:Outpost` \|
-    #   `ssm-contacts:Contact` \| `ssm-incidents:ResponsePlan`
+    #   For a list of valid values, query the ListResourceTypes operation.
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arns
-    #   The Amazon Resource Names (ARN) of the resource shares.
+    #   Specifies that you want to list information for only principals
+    #   associated with the resource shares specified by a list the [Amazon
+    #   Resource Names (ARNs)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPrincipalsRequest AWS API Documentation
@@ -1063,12 +1529,16 @@ module Aws::RAM
     end
 
     # @!attribute [rw] principals
-    #   The principals.
+    #   An array of objects that contain the details about the principals.
     #   @return [Array<Types::Principal>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPrincipalsResponse AWS API Documentation
@@ -1090,17 +1560,33 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   for which you want to retrieve the associated permissions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceSharePermissionsRequest AWS API Documentation
@@ -1114,12 +1600,17 @@ module Aws::RAM
     end
 
     # @!attribute [rw] permissions
-    #   The permissions associated with the resource share.
+    #   An array of objects that describe the permissions associated with
+    #   the resource share.
     #   @return [Array<Types::ResourceSharePermissionSummary>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceSharePermissionsResponse AWS API Documentation
@@ -1137,34 +1628,68 @@ module Aws::RAM
     #       {
     #         next_token: "String",
     #         max_results: 1,
+    #         resource_region_scope: "ALL", # accepts ALL, REGIONAL, GLOBAL
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
+    #
+    # @!attribute [rw] resource_region_scope
+    #   Specifies that you want the results to include only resources that
+    #   have the specified scope.
+    #
+    #   * `ALL` – the results include both global and regional resources or
+    #     resource types.
+    #
+    #   * `GLOBAL` – the results include only global resources or resource
+    #     types.
+    #
+    #   * `REGIONAL` – the results include only regional resources or
+    #     resource types.
+    #
+    #   The default value is `ALL`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceTypesRequest AWS API Documentation
     #
     class ListResourceTypesRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :resource_region_scope)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] resource_types
-    #   The shareable resource types supported by RAM.
+    #   An array of objects that contain information about the resource
+    #   types that can be shared using RAM.
     #   @return [Array<Types::ServiceNameAndResourceType>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceTypesResponse AWS API Documentation
@@ -1187,55 +1712,87 @@ module Aws::RAM
     #         resource_share_arns: ["String"],
     #         next_token: "String",
     #         max_results: 1,
+    #         resource_region_scope: "ALL", # accepts ALL, REGIONAL, GLOBAL
     #       }
     #
     # @!attribute [rw] resource_owner
-    #   The type of owner.
+    #   Specifies that you want to list only the resource shares that match
+    #   the following:
+    #
+    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #
+    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other
+    #     accounts share with you
     #   @return [String]
     #
     # @!attribute [rw] principal
-    #   The principal.
+    #   Specifies that you want to list only the resource shares that are
+    #   associated with the specified principal.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type.
+    #   Specifies that you want to list only the resource shares that
+    #   include resources of the specified resource type.
     #
-    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
-    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
-    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
-    #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
-    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
-    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
-    #   `license-manager:LicenseConfiguration` I
-    #   `network-firewall:FirewallPolicy` \|
-    #   `network-firewall:StatefulRuleGroup` \|
-    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
-    #   `resource-groups:Group` \| `rds:Cluster` \|
-    #   `route53resolver:FirewallRuleGroup`
-    #   \|`route53resolver:ResolverQueryLogConfig` \|
-    #   `route53resolver:ResolverRule` \| `s3-outposts:Outpost` \|
-    #   `ssm-contacts:Contact` \| `ssm-incidents:ResponsePlan`
+    #   For valid values, query the ListResourceTypes operation.
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
-    #   The Amazon Resource Names (ARNs) of the resources.
+    #   Specifies that you want to list only the resource shares that
+    #   include resources with the specified [Amazon Resource Names
+    #   (ARNs)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_share_arns
-    #   The Amazon Resource Names (ARN) of the resource shares.
+    #   Specifies that you want to list only resources in the resource
+    #   shares identified by the specified [Amazon Resource Names
+    #   (ARNs)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
+    #
+    # @!attribute [rw] resource_region_scope
+    #   Specifies that you want the results to include only resources that
+    #   have the specified scope.
+    #
+    #   * `ALL` – the results include both global and regional resources or
+    #     resource types.
+    #
+    #   * `GLOBAL` – the results include only global resources or resource
+    #     types.
+    #
+    #   * `REGIONAL` – the results include only regional resources or
+    #     resource types.
+    #
+    #   The default value is `ALL`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourcesRequest AWS API Documentation
     #
@@ -1246,18 +1803,23 @@ module Aws::RAM
       :resource_arns,
       :resource_share_arns,
       :next_token,
-      :max_results)
+      :max_results,
+      :resource_region_scope)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] resources
-    #   Information about the resources.
+    #   An array of objects that contain information about the resources.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results. This value is
-    #   `null` when there are no more results to return.
+    #   If present, this value indicates that more output is available than
+    #   is included in the current response. Use this value in the
+    #   `NextToken` request parameter in a subsequent call to the operation
+    #   to get the next part of the output. You should repeat this until the
+    #   `NextToken` response element comes back as `null`. This indicates
+    #   that this is the last page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourcesResponse AWS API Documentation
@@ -1315,15 +1877,21 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   The [Amazon Resoure Name (ARN)][1] of a resource share the principal
+    #   is associated with.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time when the principal was associated with the resource share.
+    #   The date and time when the principal was associated with the
+    #   resource share.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The time when the association was last updated.
+    #   The date and time when the association was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] external
@@ -1352,7 +1920,12 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share to promote.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   to promote.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PromoteResourceShareCreatedFromPolicyRequest AWS API Documentation
@@ -1364,7 +1937,8 @@ module Aws::RAM
     end
 
     # @!attribute [rw] return_value
-    #   Indicates whether the request succeeded.
+    #   A return value of `true` indicates that the request succeeded. A
+    #   value of `false` indicates that the request failed.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PromoteResourceShareCreatedFromPolicyResponse AWS API Documentation
@@ -1384,12 +1958,28 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_invitation_arn
-    #   The Amazon Resource Name (ARN) of the invitation.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the invitation that
+    #   you want to reject.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/RejectResourceShareInvitationRequest AWS API Documentation
@@ -1402,12 +1992,15 @@ module Aws::RAM
     end
 
     # @!attribute [rw] resource_share_invitation
-    #   Information about the invitation.
+    #   An object that contains the details about the rejected invitation.
     #   @return [Types::ResourceShareInvitation]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/RejectResourceShareInvitationResponse AWS API Documentation
@@ -1419,27 +2012,41 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Describes a resource associated with a resource share.
+    # Describes a resource associated with a resource share in RAM.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the resource.
+    #   The [Amazon Resoure Name (ARN)][1] of the resource.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The resource type.
+    #   The resource type. This takes the form of:
+    #   `service-code`\:`resource-code`
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   The [Amazon Resoure Name (ARN)][1] of the resource share this
+    #   resource is associated with.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] resource_group_arn
-    #   The Amazon Resource Name (ARN) of the resource group. This value is
-    #   returned only if the resource is a resource group.
+    #   The [Amazon Resoure Name (ARN)][1] of the resource group. This value
+    #   is available only if the resource is part of a resource group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the resource.
+    #   The current status of the resource.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -1447,12 +2054,24 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time when the resource was associated with the resource share.
+    #   The date and time when the resource was associated with the resource
+    #   share.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The time when the association was last updated.
+    #   The date an time when the association was last updated.
     #   @return [Time]
+    #
+    # @!attribute [rw] resource_region_scope
+    #   Specifies the scope of visibility of this resource:
+    #
+    #   * **REGIONAL** – The resource can be accessed only by using requests
+    #     that target the Amazon Web Services Region in which the resource
+    #     exists.
+    #
+    #   * **GLOBAL** – The resource can be accessed from any Amazon Web
+    #     Services Region.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/Resource AWS API Documentation
     #
@@ -1464,12 +2083,13 @@ module Aws::RAM
       :status,
       :status_message,
       :creation_time,
-      :last_updated_time)
+      :last_updated_time,
+      :resource_region_scope)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # An Amazon Resource Name (ARN) was not found.
+    # The specified Amazon Resource Name (ARN) was not found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1482,10 +2102,14 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Describes a resource share.
+    # Describes a resource share in RAM.
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   The [Amazon Resoure Name (ARN)][1] of the resource share
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1503,7 +2127,7 @@ module Aws::RAM
     #   @return [Boolean]
     #
     # @!attribute [rw] status
-    #   The status of the resource share.
+    #   The current status of the resource share.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -1511,15 +2135,15 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags for the resource share.
+    #   The tag key and value pairs attached to the resource share.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] creation_time
-    #   The time when the resource share was created.
+    #   The date and time when the resource share was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The time when the resource share was last updated.
+    #   The date and time when the resource share was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] feature_set
@@ -1527,10 +2151,12 @@ module Aws::RAM
     #   include:
     #
     #   * `CREATED_FROM_POLICY` - Indicates that the resource share was
-    #     created from an Amazon Web Services Identity and Access Management
-    #     (Amazon Web Services IAM) policy attached to a resource. These
-    #     resource shares are visible only to the Amazon Web Services
-    #     account that created it. They cannot be modified in RAM.
+    #     created from an Identity and Access Management (IAM)
+    #     resource-based permission policy attached to the resource. This
+    #     type of resource share is visible only to the Amazon Web Services
+    #     account that created it. You can't modify it in RAM unless you
+    #     promote it. For more information, see
+    #     PromoteResourceShareCreatedFromPolicy.
     #
     #   * `PROMOTING_TO_STANDARD` - The resource share is in the process of
     #     being promoted. For more information, see
@@ -1538,7 +2164,8 @@ module Aws::RAM
     #
     #   * `STANDARD` - Indicates that the resource share was created in RAM
     #     using the console or APIs. These resource shares are visible to
-    #     all principals. They can be modified in RAM.
+    #     all principals you share the resource share with. You can modify
+    #     these resource shares in RAM using the console or APIs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShare AWS API Documentation
@@ -1558,10 +2185,15 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Describes an association with a resource share.
+    # Describes an association with a resource share and either a principal
+    # or a resource.
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   The [Amazon Resoure Name (ARN)][1] of the resource share.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] resource_share_name
@@ -1569,27 +2201,35 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] associated_entity
-    #   The associated entity. For resource associations, this is the Amazon
-    #   Resource Name (ARN) of the resource. For principal associations,
-    #   this is one of the following:
+    #   The associated entity. This can be either of the following:
     #
-    #   * An Amazon Web Services account ID
+    #   * For a resource association, this is the [Amazon Resoure Name
+    #     (ARN)][1] of the resource.
     #
-    #   * An ARN of an organization in Organizations
+    #   * For principal associations, this is one of the following:
     #
-    #   * An ARN of an organizational unit (OU) in Organizations
+    #     * The ID of an Amazon Web Services account
     #
-    #   * An ARN of an IAM role
+    #     * The [Amazon Resoure Name (ARN)][1] of an organization in
+    #       Organizations
     #
-    #   * An ARN of an IAM user
+    #     * The ARN of an organizational unit (OU) in Organizations
+    #
+    #     * The ARN of an IAM role
+    #
+    #     * The ARN of an IAM user
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] association_type
-    #   The association type.
+    #   The type of entity included in this association.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the association.
+    #   The current status of the association.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -1597,11 +2237,11 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time when the association was created.
+    #   The date and time when the association was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The time when the association was last updated.
+    #   The date and time when the association was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] external
@@ -1626,10 +2266,15 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Describes an invitation to join a resource share.
+    # Describes an invitation for an Amazon Web Services account to join a
+    # resource share.
     #
     # @!attribute [rw] resource_share_invitation_arn
-    #   The Amazon Resource Name (ARN) of the invitation.
+    #   The [Amazon Resoure Name (ARN)][1] of the invitation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] resource_share_name
@@ -1637,7 +2282,11 @@ module Aws::RAM
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   The [Amazon Resoure Name (ARN)][1] of the resource share
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] sender_account_id
@@ -1654,21 +2303,21 @@ module Aws::RAM
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The status of the invitation.
+    #   The current status of the invitation.
     #   @return [String]
     #
     # @!attribute [rw] resource_share_associations
     #   To view the resources associated with a pending resource share
-    #   invitation, use [ ListPendingInvitationResources][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html
+    #   invitation, use ListPendingInvitationResources.
     #   @return [Array<Types::ResourceShareAssociation>]
     #
     # @!attribute [rw] receiver_arn
-    #   The Amazon Resource Name (ARN) of the IAM user or IAM role that
+    #   The [Amazon Resoure Name (ARN)][1] of the IAM user or role that
     #   received the invitation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceShareInvitation AWS API Documentation
@@ -1687,7 +2336,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The invitation was already accepted.
+    # The specified invitation was already accepted.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1700,7 +2349,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The invitation was already rejected.
+    # The specified invitation was already rejected.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1713,7 +2362,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The Amazon Resource Name (ARN) for an invitation was not found.
+    # The specified Amazon Resource Name (ARN) for an invitation was not
+    # found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1726,7 +2376,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The invitation is expired.
+    # The specified invitation is expired.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1739,7 +2389,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The requested resource share exceeds the limit for your account.
+    # This request would exceed the limit for resource shares for your
+    # account.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1755,31 +2406,35 @@ module Aws::RAM
     # Information about an RAM permission.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the permission.
+    #   The [Amazon Resoure Name (ARN)][1] of this RAM permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The identifier for the version of the permission.
+    #   The version of the permission represented in this structure.
     #   @return [String]
     #
     # @!attribute [rw] default_version
-    #   Specifies whether the version of the permission is set to the
-    #   default version for this permission.
+    #   Specifies whether the version of the permission represented in this
+    #   structure is the default version for this permission.
     #   @return [Boolean]
     #
     # @!attribute [rw] name
-    #   The name of the permission.
+    #   The name of this permission.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type to which the permission applies.
+    #   The resource type to which this permission applies.
     #   @return [String]
     #
     # @!attribute [rw] permission
     #   The permission's effect and actions in JSON format. The `effect`
-    #   indicates whether the actions are allowed or denied. The `actions`
-    #   list the API actions to which the principal is granted or denied
-    #   access.
+    #   indicates whether the specified actions are allowed or denied. The
+    #   `actions` list the operations to which the principal is granted or
+    #   denied access.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -1791,8 +2446,9 @@ module Aws::RAM
     #   @return [Time]
     #
     # @!attribute [rw] is_resource_type_default
-    #   Specifies whether the version of the permission is set to the
-    #   default version for this resource type.
+    #   Specifies whether the version of the permission represented in this
+    #   structure is the default version for all resources of this resource
+    #   type.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceSharePermissionDetail AWS API Documentation
@@ -1811,28 +2467,33 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Information about a permission that is associated with a resource
-    # share.
+    # Information about an RAM permission that is associated with a resource
+    # share and any of its resources of a specified type.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the permission.
+    #   The [Amazon Resoure Name (ARN)][1] of the permission you want
+    #   information about.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The identifier for the version of the permission.
+    #   The version of the permission represented in this structure.
     #   @return [String]
     #
     # @!attribute [rw] default_version
-    #   Specifies whether the version of the permission is set to the
-    #   default version for this permission.
+    #   Specifies whether the version of the permission represented in this
+    #   structure is the default version for this permission.
     #   @return [Boolean]
     #
     # @!attribute [rw] name
-    #   The name of the permission.
+    #   The name of this permission.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource to which the permission applies.
+    #   The type of resource to which this permission applies.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1848,8 +2509,9 @@ module Aws::RAM
     #   @return [Time]
     #
     # @!attribute [rw] is_resource_type_default
-    #   Specifies whether the version of the permission is set to the
-    #   default version for this resource type.
+    #   Specifies whether the version of the permission represented in this
+    #   structure is the default version for all resources of this resource
+    #   type.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ResourceSharePermissionSummary AWS API Documentation
@@ -1882,23 +2544,35 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Information about the shareable resource types and the Amazon Web
-    # Services services to which they belong.
+    # Information about a shareable resource type and the Amazon Web
+    # Services service to which resources of that type belong.
     #
     # @!attribute [rw] resource_type
-    #   The shareable resource types.
+    #   The type of the resource.
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the Amazon Web Services services to which the resources
-    #   belong.
+    #   The name of the Amazon Web Services service to which resources of
+    #   this type belong.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region_scope
+    #   Specifies the scope of visibility of resources of this type:
+    #
+    #   * **REGIONAL** – The resource can be accessed only by using requests
+    #     that target the Amazon Web Services Region in which the resource
+    #     exists.
+    #
+    #   * **GLOBAL** – The resource can be accessed from any Amazon Web
+    #     Services Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ServiceNameAndResourceType AWS API Documentation
     #
     class ServiceNameAndResourceType < Struct.new(
       :resource_type,
-      :service_name)
+      :service_name,
+      :resource_region_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1916,7 +2590,18 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Information about a tag.
+    # A structure containing a tag. A tag is metadata that you can attach to
+    # your resources to help organize and categorize them. You can also use
+    # them to help you secure your resources. For more information, see
+    # [Controlling access to Amazon Web Services resources using tags][1].
+    #
+    # For more information about tags, see [Tagging Amazon Web Services
+    # resources][2] in the *Amazon Web Services General Reference Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -1927,11 +2612,13 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] key
-    #   The key of the tag.
+    #   The key, or name, attached to the tag. Every tag must have a key.
+    #   Key names are case sensitive.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the tag.
+    #   The string value attached to the tag. The value can be an empty
+    #   string. Key values are case sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/Tag AWS API Documentation
@@ -1943,7 +2630,8 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # Used to filter information based on tags.
+    # A tag key and optional list of possible values that you can use to
+    # filter results for tagged resources.
     #
     # @note When making an API call, you may pass TagFilter
     #   data as a hash:
@@ -1954,11 +2642,14 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] tag_key
-    #   The tag key.
+    #   The tag key. This must have a valid string value and can't be
+    #   empty.
     #   @return [String]
     #
     # @!attribute [rw] tag_values
-    #   The tag values.
+    #   A list of zero or more tag values. If no values are provided, then
+    #   the filter matches any tag with the specified key, regardless of its
+    #   value.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/TagFilter AWS API Documentation
@@ -1970,7 +2661,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The requested tags exceed the limit for your account.
+    # This request would exceed the limit for tags for your account.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1983,7 +2674,7 @@ module Aws::RAM
       include Aws::Structure
     end
 
-    # The specified tag is a reserved word and cannot be used.
+    # The specified tag key is a reserved word and can't be used.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2010,11 +2701,18 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   that you want to add tags to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   A list of one or more tag key and value pairs. The tag key must be
+    #   present and not be an empty string. The tag value must be present
+    #   but can be an empty string.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/TagResourceRequest AWS API Documentation
@@ -2029,6 +2727,20 @@ module Aws::RAM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # You exceeded the rate at which you are allowed to perform this
+    # operation. Please try again later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A specified resource was not found.
     #
@@ -2052,11 +2764,17 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   that you want to remove tags from. The tags are removed from the
+    #   resource share, not the resources in the resource share.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The tag keys of the tags to remove.
+    #   Specifies a list of one or more tag keys that you want to remove.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UntagResourceRequest AWS API Documentation
@@ -2083,21 +2801,38 @@ module Aws::RAM
     #       }
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   that you want to modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the resource share.
+    #   If specified, the new name that you want to attach to the resource
+    #   share.
     #   @return [String]
     #
     # @!attribute [rw] allow_external_principals
-    #   Indicates whether principals outside your organization in
+    #   Specifies whether principals outside your organization in
     #   Organizations can be associated with a resource share.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UpdateResourceShareRequest AWS API Documentation
@@ -2116,8 +2851,11 @@ module Aws::RAM
     #   @return [Types::ResourceShare]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   The idempotency identifier associated with this request. If you want
+    #   to repeat the same operation in an idempotent manner then you must
+    #   include this value in the `clientToken` request parameter of that
+    #   later call. All other parameters must also have the same values that
+    #   you used in the first call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UpdateResourceShareResponse AWS API Documentation

@@ -26,6 +26,9 @@
   "AmplifyBackend": {
     "models": "amplifybackend/2020-08-11"
   },
+  "AmplifyUIBuilder": {
+    "models": "amplifyuibuilder/2021-08-11"
+  },
   "ApiGatewayManagementApi": {
     "models": "apigatewaymanagementapi/2018-11-29"
   },

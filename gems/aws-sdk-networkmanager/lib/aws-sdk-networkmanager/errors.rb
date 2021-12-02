@@ -29,6 +29,7 @@ module Aws::NetworkManager
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ConflictException}
+  # * {CoreNetworkPolicyException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
@@ -78,6 +79,26 @@ module Aws::NetworkManager
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+    end
+
+    class CoreNetworkPolicyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::NetworkManager::Types::CoreNetworkPolicyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def errors
+        @data[:errors]
       end
     end
 

@@ -47,6 +47,7 @@ module Aws::RAM
   # * {ServiceUnavailableException}
   # * {TagLimitExceededException}
   # * {TagPolicyViolationException}
+  # * {ThrottlingException}
   # * {UnknownResourceException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -345,6 +346,21 @@ module Aws::RAM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RAM::Types::TagPolicyViolationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RAM::Types::ThrottlingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

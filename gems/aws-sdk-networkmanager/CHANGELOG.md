@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-12-02)
+------------------
+
+* Feature - This release adds API support for AWS Cloud WAN.
+
 1.18.0 (2021-11-30)
 ------------------
 
