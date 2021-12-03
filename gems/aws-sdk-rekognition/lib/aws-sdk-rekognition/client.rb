@@ -375,7 +375,7 @@ module Aws::Rekognition
     # In response, the operation returns an array of face matches ordered by
     # similarity score in descending order. For each face match, the
     # response provides a bounding box of the face, facial landmarks, pose
-    # details (pitch, role, and yaw), quality (brightness and sharpness),
+    # details (pitch, roll, and yaw), quality (brightness and sharpness),
     # and confidence value (indicating the level of confidence that the
     # bounding box contains a face). The response also provides a similarity
     # score, which indicates how closely the faces match.
@@ -2224,9 +2224,8 @@ module Aws::Rekognition
     # information about a single word or line of text that was detected in
     # the image.
     #
-    # A word is one or more ISO basic latin script characters that are not
-    # separated by spaces. `DetectText` can detect up to 100 words in an
-    # image.
+    # A word is one or more script characters that are not separated by
+    # spaces. `DetectText` can detect up to 100 words in an image.
     #
     # A line is a string of equally spaced words. A line isn't necessarily
     # a complete sentence. For example, a driver's license number is
@@ -2397,7 +2396,7 @@ module Aws::Rekognition
     #   resp.urls #=> Array
     #   resp.urls[0] #=> String
     #   resp.name #=> String
-    #   resp.known_gender.type #=> String, one of "Male", "Female"
+    #   resp.known_gender.type #=> String, one of "Male", "Female", "Nonbinary", "Unlisted"
     #
     # @overload get_celebrity_info(params = {})
     # @param [Hash] params ({})
@@ -2559,7 +2558,7 @@ module Aws::Rekognition
     #   resp.celebrities[0].celebrity.face.quality.brightness #=> Float
     #   resp.celebrities[0].celebrity.face.quality.sharpness #=> Float
     #   resp.celebrities[0].celebrity.face.confidence #=> Float
-    #   resp.celebrities[0].celebrity.known_gender.type #=> String, one of "Male", "Female"
+    #   resp.celebrities[0].celebrity.known_gender.type #=> String, one of "Male", "Female", "Nonbinary", "Unlisted"
     #
     # @overload get_celebrity_recognition(params = {})
     # @param [Hash] params ({})
@@ -4411,7 +4410,7 @@ module Aws::Rekognition
     #   resp.celebrity_faces[0].face.smile.value #=> Boolean
     #   resp.celebrity_faces[0].face.smile.confidence #=> Float
     #   resp.celebrity_faces[0].match_confidence #=> Float
-    #   resp.celebrity_faces[0].known_gender.type #=> String, one of "Male", "Female"
+    #   resp.celebrity_faces[0].known_gender.type #=> String, one of "Male", "Female", "Nonbinary", "Unlisted"
     #   resp.unrecognized_faces #=> Array
     #   resp.unrecognized_faces[0].bounding_box.width #=> Float
     #   resp.unrecognized_faces[0].bounding_box.height #=> Float
@@ -5705,7 +5704,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

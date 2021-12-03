@@ -252,7 +252,8 @@ module Aws::Rekognition
     #
     # @!attribute [rw] known_gender
     #   The known gender identity for the celebrity that matches the
-    #   provided ID.
+    #   provided ID. The known gender identity can be Male, Female,
+    #   Nonbinary, or Unlisted.
     #   @return [Types::KnownGender]
     #
     class Celebrity < Struct.new(
@@ -3790,7 +3791,8 @@ module Aws::Rekognition
     end
 
     # The known gender identity for the celebrity that matches the provided
-    # ID.
+    # ID. The known gender identity can be Male, Female, Nonbinary, or
+    # Unlisted.
     #
     # @!attribute [rw] type
     #   A string value of the KnownGender info about the Celebrity.
