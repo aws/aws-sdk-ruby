@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2021-12-06)
+------------------
+
+* Feature - Add PriorRequestNotComplete exception to UpdateHostedZoneComment API
+
 1.58.0 (2021-11-30)
 ------------------
 

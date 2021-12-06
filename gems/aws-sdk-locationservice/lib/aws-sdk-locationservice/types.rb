@@ -219,8 +219,14 @@ module Aws::LocationService
     #         collection_name: "ResourceName", # required
     #         device_position_updates: [ # required
     #           {
+    #             accuracy: {
+    #               horizontal: 1.0, # required
+    #             },
     #             device_id: "Id", # required
     #             position: [1.0], # required
+    #             position_properties: {
+    #               "PropertyMapKeyString" => "PropertyMapValueString",
+    #             },
     #             sample_time: Time.now, # required
     #           },
     #         ],
@@ -536,8 +542,14 @@ module Aws::LocationService
     #         tracker_name: "ResourceName", # required
     #         updates: [ # required
     #           {
+    #             accuracy: {
+    #               horizontal: 1.0, # required
+    #             },
     #             device_id: "Id", # required
     #             position: [1.0], # required
+    #             position_properties: {
+    #               "PropertyMapKeyString" => "PropertyMapValueString",
+    #             },
     #             sample_time: Time.now, # required
     #           },
     #         ],
@@ -1622,6 +1634,16 @@ module Aws::LocationService
     #     through. Distance-based filtering can also reduce the effects of
     #     GPS noise when displaying device trajectories on a map.
     #
+    #   * `AccuracyBased` - If the device has moved less than the measured
+    #     accuracy, location updates are ignored. For example, if two
+    #     consecutive updates from a device have a horizontal accuracy of 5
+    #     m and 10 m, the second update is ignored if the device has moved
+    #     less than 15 m. Ignored location updates are neither evaluated
+    #     against linked geofence collections, nor stored. This can reduce
+    #     the effects of GPS noise when displaying device trajectories on a
+    #     map, and can help control your costs by reducing the number of
+    #     geofence evaluations.
+    #
     #   This field is optional. If not specified, the default value is
     #   `TimeBased`.
     #   @return [String]
@@ -2419,6 +2441,10 @@ module Aws::LocationService
 
     # Contains the device position details.
     #
+    # @!attribute [rw] accuracy
+    #   The accuracy of the device position.
+    #   @return [Types::PositionalAccuracy]
+    #
     # @!attribute [rw] device_id
     #   The device whose position you retrieved.
     #   @return [String]
@@ -2426,6 +2452,10 @@ module Aws::LocationService
     # @!attribute [rw] position
     #   The last known device position.
     #   @return [Array<Float>]
+    #
+    # @!attribute [rw] position_properties
+    #   The properties associated with the position.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] received_time
     #   The timestamp for when the tracker resource received the device
@@ -2448,11 +2478,13 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DevicePosition AWS API Documentation
     #
     class DevicePosition < Struct.new(
+      :accuracy,
       :device_id,
       :position,
+      :position_properties,
       :received_time,
       :sample_time)
-      SENSITIVE = [:position]
+      SENSITIVE = [:position, :position_properties]
       include Aws::Structure
     end
 
@@ -2462,10 +2494,20 @@ module Aws::LocationService
     #   data as a hash:
     #
     #       {
+    #         accuracy: {
+    #           horizontal: 1.0, # required
+    #         },
     #         device_id: "Id", # required
     #         position: [1.0], # required
+    #         position_properties: {
+    #           "PropertyMapKeyString" => "PropertyMapValueString",
+    #         },
     #         sample_time: Time.now, # required
     #       }
+    #
+    # @!attribute [rw] accuracy
+    #   The accuracy of the device position.
+    #   @return [Types::PositionalAccuracy]
     #
     # @!attribute [rw] device_id
     #   The device associated to the position update.
@@ -2480,6 +2522,14 @@ module Aws::LocationService
     #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
     #   @return [Array<Float>]
     #
+    # @!attribute [rw] position_properties
+    #   Associates one of more properties with the position update. A
+    #   property is a key-value pair stored with the position update and
+    #   added to any geofence event the update may trigger.
+    #
+    #   Format: `"key" : "value"`
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] sample_time
     #   The timestamp at which the device's position was determined. Uses
     #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
@@ -2492,10 +2542,12 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DevicePositionUpdate AWS API Documentation
     #
     class DevicePositionUpdate < Struct.new(
+      :accuracy,
       :device_id,
       :position,
+      :position_properties,
       :sample_time)
-      SENSITIVE = [:position]
+      SENSITIVE = [:position, :position_properties]
       include Aws::Structure
     end
 
@@ -2696,6 +2748,10 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] accuracy
+    #   The accuracy of the device position.
+    #   @return [Types::PositionalAccuracy]
+    #
     # @!attribute [rw] device_id
     #   The device whose position you retrieved.
     #   @return [String]
@@ -2703,6 +2759,10 @@ module Aws::LocationService
     # @!attribute [rw] position
     #   The last known device position.
     #   @return [Array<Float>]
+    #
+    # @!attribute [rw] position_properties
+    #   The properties associated with the position.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] received_time
     #   The timestamp for when the tracker resource received the device
@@ -2725,11 +2785,13 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetDevicePositionResponse AWS API Documentation
     #
     class GetDevicePositionResponse < Struct.new(
+      :accuracy,
       :device_id,
       :position,
+      :position_properties,
       :received_time,
       :sample_time)
-      SENSITIVE = [:position]
+      SENSITIVE = [:position, :position_properties]
       include Aws::Structure
     end
 
@@ -3232,6 +3294,10 @@ module Aws::LocationService
 
     # Contains the tracker resource details.
     #
+    # @!attribute [rw] accuracy
+    #   The accuracy of the device position.
+    #   @return [Types::PositionalAccuracy]
+    #
     # @!attribute [rw] device_id
     #   The ID of the device for this position.
     #   @return [String]
@@ -3240,6 +3306,10 @@ module Aws::LocationService
     #   The last known device position. Empty if no positions currently
     #   stored.
     #   @return [Array<Float>]
+    #
+    # @!attribute [rw] position_properties
+    #   The properties associated with the position.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] sample_time
     #   The timestamp at which the device position was determined. Uses [
@@ -3253,10 +3323,12 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListDevicePositionsResponseEntry AWS API Documentation
     #
     class ListDevicePositionsResponseEntry < Struct.new(
+      :accuracy,
       :device_id,
       :position,
+      :position_properties,
       :sample_time)
-      SENSITIVE = [:position]
+      SENSITIVE = [:position, :position_properties]
       include Aws::Structure
     end
 
@@ -4215,6 +4287,28 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # Defines the level of certainty of the position.
+    #
+    # @note When making an API call, you may pass PositionalAccuracy
+    #   data as a hash:
+    #
+    #       {
+    #         horizontal: 1.0, # required
+    #       }
+    #
+    # @!attribute [rw] horizontal
+    #   Estimated maximum distance, in meters, between the measured position
+    #   and the true position of a device, along the Earth's surface.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/PositionalAccuracy AWS API Documentation
+    #
+    class PositionalAccuracy < Struct.new(
+      :horizontal)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutGeofenceRequest
     #   data as a hash:
     #
@@ -4328,6 +4422,22 @@ module Aws::LocationService
     class SearchForPositionResult < Struct.new(
       :distance,
       :place)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains a place suggestion resulting from a place suggestion query
+    # that is run on a place index resource.
+    #
+    # @!attribute [rw] text
+    #   The text of the place suggestion, typically formatted as an address
+    #   string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchForSuggestionsResult AWS API Documentation
+    #
+    class SearchForSuggestionsResult < Struct.new(
+      :text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4496,6 +4606,210 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SearchPlaceIndexForSuggestionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bias_position: [1.0],
+    #         filter_b_box: [1.0],
+    #         filter_countries: ["CountryCode"],
+    #         index_name: "ResourceName", # required
+    #         language: "LanguageTag",
+    #         max_results: 1,
+    #         text: "SyntheticSearchPlaceIndexForSuggestionsRequestString", # required
+    #       }
+    #
+    # @!attribute [rw] bias_position
+    #   An optional parameter that indicates a preference for place
+    #   suggestions that are closer to a specified position.
+    #
+    #   If provided, this parameter must contain a pair of numbers. The
+    #   first number represents the X coordinate, or longitude; the second
+    #   number represents the Y coordinate, or latitude.
+    #
+    #   For example, `[-123.1174, 49.2847]` represents the position with
+    #   longitude `-123.1174` and latitude `49.2847`.
+    #
+    #   <note markdown="1"> `BiasPosition` and `FilterBBox` are mutually exclusive. Specifying
+    #   both options results in an error.
+    #
+    #    </note>
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] filter_b_box
+    #   An optional parameter that limits the search results by returning
+    #   only suggestions within a specified bounding box.
+    #
+    #   If provided, this parameter must contain a total of four consecutive
+    #   numbers in two pairs. The first pair of numbers represents the X and
+    #   Y coordinates (longitude and latitude, respectively) of the
+    #   southwest corner of the bounding box; the second pair of numbers
+    #   represents the X and Y coordinates (longitude and latitude,
+    #   respectively) of the northeast corner of the bounding box.
+    #
+    #   For example, `[-12.7935, -37.4835, -12.0684, -36.9542]` represents a
+    #   bounding box where the southwest corner has longitude `-12.7935` and
+    #   latitude `-37.4835`, and the northeast corner has longitude
+    #   `-12.0684` and latitude `-36.9542`.
+    #
+    #   <note markdown="1"> `FilterBBox` and `BiasPosition` are mutually exclusive. Specifying
+    #   both options results in an error.
+    #
+    #    </note>
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] filter_countries
+    #   An optional parameter that limits the search results by returning
+    #   only suggestions within the provided list of countries.
+    #
+    #   * Use the [ISO 3166][1] 3-digit country code. For example, Australia
+    #     uses three upper-case characters: `AUS`.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-3166-country-codes.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the place index resource you want to use for the search.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The preferred language used to return results. The value must be a
+    #   valid [BCP 47][1] language tag, for example, `en` for English.
+    #
+    #   This setting affects the languages used in the results. It does not
+    #   change which results are returned. If the language is not specified,
+    #   or not supported for a particular result, the partner automatically
+    #   chooses a language for the result.
+    #
+    #   Used only when the partner selected is Here.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/search/bcp47
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional parameter. The maximum number of results returned per
+    #   request.
+    #
+    #   The default: `5`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text
+    #   The free-form partial text to use to generate place suggestions. For
+    #   example, `eiffel tow`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForSuggestionsRequest AWS API Documentation
+    #
+    class SearchPlaceIndexForSuggestionsRequest < Struct.new(
+      :bias_position,
+      :filter_b_box,
+      :filter_countries,
+      :index_name,
+      :language,
+      :max_results,
+      :text)
+      SENSITIVE = [:bias_position, :filter_b_box, :text]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A list of place suggestions that best match the search text.
+    #   @return [Array<Types::SearchForSuggestionsResult>]
+    #
+    # @!attribute [rw] summary
+    #   Contains a summary of the request. Echoes the input values for
+    #   `BiasPosition`, `FilterBBox`, `FilterCountries`, `Language`,
+    #   `MaxResults`, and `Text`. Also includes the `DataSource` of the
+    #   place index.
+    #   @return [Types::SearchPlaceIndexForSuggestionsSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForSuggestionsResponse AWS API Documentation
+    #
+    class SearchPlaceIndexForSuggestionsResponse < Struct.new(
+      :results,
+      :summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the request sent by using
+    # `SearchPlaceIndexForSuggestions`.
+    #
+    # @!attribute [rw] bias_position
+    #   Contains the coordinates for the optional bias position specified in
+    #   the request.
+    #
+    #   This parameter contains a pair of numbers. The first number
+    #   represents the X coordinate, or longitude; the second number
+    #   represents the Y coordinate, or latitude.
+    #
+    #   For example, `[-123.1174, 49.2847]` represents the position with
+    #   longitude `-123.1174` and latitude `49.2847`.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] data_source
+    #   The geospatial data provider attached to the place index resource
+    #   specified in the request. Values can be one of the following:
+    #
+    #   * Esri
+    #
+    #   * Here
+    #
+    #   For more information about data providers, see [Amazon Location
+    #   Service data providers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_b_box
+    #   Contains the coordinates for the optional bounding box specified in
+    #   the request.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] filter_countries
+    #   Contains the optional country filter specified in the request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] language
+    #   The preferred language used to return results. Matches the language
+    #   in the request. The value is a valid [BCP 47][1] language tag, for
+    #   example, `en` for English.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/search/bcp47
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Contains the optional result count limit specified in the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text
+    #   The free-form partial text input specified in the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForSuggestionsSummary AWS API Documentation
+    #
+    class SearchPlaceIndexForSuggestionsSummary < Struct.new(
+      :bias_position,
+      :data_source,
+      :filter_b_box,
+      :filter_countries,
+      :language,
+      :max_results,
+      :text)
+      SENSITIVE = [:bias_position, :filter_b_box, :text]
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SearchPlaceIndexForTextRequest
     #   data as a hash:
     #
@@ -4633,6 +4947,13 @@ module Aws::LocationService
     # @!attribute [rw] bias_position
     #   Contains the coordinates for the optional bias position specified in
     #   the request.
+    #
+    #   This parameter contains a pair of numbers. The first number
+    #   represents the X coordinate, or longitude; the second number
+    #   represents the Y coordinate, or latitude.
+    #
+    #   For example, `[-123.1174, 49.2847]` represents the position with
+    #   longitude `-123.1174` and latitude `49.2847`.
     #   @return [Array<Float>]
     #
     # @!attribute [rw] data_source
@@ -5337,9 +5658,19 @@ module Aws::LocationService
     #     ft), location updates are ignored. Location updates within this
     #     distance are neither evaluated against linked geofence
     #     collections, nor stored. This helps control costs by reducing the
-    #     number of geofence evaluations and device positions to retrieve.
-    #     Distance-based filtering can also reduce the jitter effect when
-    #     displaying device trajectory on a map.
+    #     number of geofence evaluations and historical device positions to
+    #     paginate through. Distance-based filtering can also reduce the
+    #     effects of GPS noise when displaying device trajectories on a map.
+    #
+    #   * `AccuracyBased` - If the device has moved less than the measured
+    #     accuracy, location updates are ignored. For example, if two
+    #     consecutive updates from a device have a horizontal accuracy of 5
+    #     m and 10 m, the second update is ignored if the device has moved
+    #     less than 15 m. Ignored location updates are neither evaluated
+    #     against linked geofence collections, nor stored. This helps educe
+    #     the effects of GPS noise when displaying device trajectories on a
+    #     map, and can help control costs by reducing the number of geofence
+    #     evaluations.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan

@@ -28,7 +28,7 @@ require_relative 'aws-sdk-appsync/customizations'
 # structure.
 #
 #     app_sync = Aws::AppSync::Client.new
-#     resp = app_sync.create_api_cache(params)
+#     resp = app_sync.associate_api(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-appsync/customizations'
 # @!group service
 module Aws::AppSync
 
-  GEM_VERSION = '1.47.0'
+  GEM_VERSION = '1.48.0'
 
 end

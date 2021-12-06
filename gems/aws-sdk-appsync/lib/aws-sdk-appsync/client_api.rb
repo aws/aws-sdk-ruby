@@ -16,6 +16,7 @@ module Aws::AppSync
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AdditionalAuthenticationProvider = Shapes::StructureShape.new(name: 'AdditionalAuthenticationProvider')
     AdditionalAuthenticationProviders = Shapes::ListShape.new(name: 'AdditionalAuthenticationProviders')
+    ApiAssociation = Shapes::StructureShape.new(name: 'ApiAssociation')
     ApiCache = Shapes::StructureShape.new(name: 'ApiCache')
     ApiCacheStatus = Shapes::StringShape.new(name: 'ApiCacheStatus')
     ApiCacheType = Shapes::StringShape.new(name: 'ApiCacheType')
@@ -25,6 +26,9 @@ module Aws::AppSync
     ApiKeyValidityOutOfBoundsException = Shapes::StructureShape.new(name: 'ApiKeyValidityOutOfBoundsException')
     ApiKeys = Shapes::ListShape.new(name: 'ApiKeys')
     ApiLimitExceededException = Shapes::StructureShape.new(name: 'ApiLimitExceededException')
+    AssociateApiRequest = Shapes::StructureShape.new(name: 'AssociateApiRequest')
+    AssociateApiResponse = Shapes::StructureShape.new(name: 'AssociateApiResponse')
+    AssociationStatus = Shapes::StringShape.new(name: 'AssociationStatus')
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     AuthorizationConfig = Shapes::StructureShape.new(name: 'AuthorizationConfig')
     AuthorizationType = Shapes::StringShape.new(name: 'AuthorizationType')
@@ -35,6 +39,7 @@ module Aws::AppSync
     BooleanValue = Shapes::BooleanShape.new(name: 'BooleanValue')
     CachingConfig = Shapes::StructureShape.new(name: 'CachingConfig')
     CachingKeys = Shapes::ListShape.new(name: 'CachingKeys')
+    CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
     CognitoUserPoolConfig = Shapes::StructureShape.new(name: 'CognitoUserPoolConfig')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConflictDetectionType = Shapes::StringShape.new(name: 'ConflictDetectionType')
@@ -45,6 +50,8 @@ module Aws::AppSync
     CreateApiKeyResponse = Shapes::StructureShape.new(name: 'CreateApiKeyResponse')
     CreateDataSourceRequest = Shapes::StructureShape.new(name: 'CreateDataSourceRequest')
     CreateDataSourceResponse = Shapes::StructureShape.new(name: 'CreateDataSourceResponse')
+    CreateDomainNameRequest = Shapes::StructureShape.new(name: 'CreateDomainNameRequest')
+    CreateDomainNameResponse = Shapes::StructureShape.new(name: 'CreateDomainNameResponse')
     CreateFunctionRequest = Shapes::StructureShape.new(name: 'CreateFunctionRequest')
     CreateFunctionResponse = Shapes::StructureShape.new(name: 'CreateFunctionResponse')
     CreateGraphqlApiRequest = Shapes::StructureShape.new(name: 'CreateGraphqlApiRequest')
@@ -63,6 +70,8 @@ module Aws::AppSync
     DeleteApiKeyResponse = Shapes::StructureShape.new(name: 'DeleteApiKeyResponse')
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
     DeleteDataSourceResponse = Shapes::StructureShape.new(name: 'DeleteDataSourceResponse')
+    DeleteDomainNameRequest = Shapes::StructureShape.new(name: 'DeleteDomainNameRequest')
+    DeleteDomainNameResponse = Shapes::StructureShape.new(name: 'DeleteDomainNameResponse')
     DeleteFunctionRequest = Shapes::StructureShape.new(name: 'DeleteFunctionRequest')
     DeleteFunctionResponse = Shapes::StructureShape.new(name: 'DeleteFunctionResponse')
     DeleteGraphqlApiRequest = Shapes::StructureShape.new(name: 'DeleteGraphqlApiRequest')
@@ -72,6 +81,12 @@ module Aws::AppSync
     DeleteTypeRequest = Shapes::StructureShape.new(name: 'DeleteTypeRequest')
     DeleteTypeResponse = Shapes::StructureShape.new(name: 'DeleteTypeResponse')
     DeltaSyncConfig = Shapes::StructureShape.new(name: 'DeltaSyncConfig')
+    Description = Shapes::StringShape.new(name: 'Description')
+    DisassociateApiRequest = Shapes::StructureShape.new(name: 'DisassociateApiRequest')
+    DisassociateApiResponse = Shapes::StructureShape.new(name: 'DisassociateApiResponse')
+    DomainName = Shapes::StringShape.new(name: 'DomainName')
+    DomainNameConfig = Shapes::StructureShape.new(name: 'DomainNameConfig')
+    DomainNameConfigs = Shapes::ListShape.new(name: 'DomainNameConfigs')
     DynamodbDataSourceConfig = Shapes::StructureShape.new(name: 'DynamodbDataSourceConfig')
     ElasticsearchDataSourceConfig = Shapes::StructureShape.new(name: 'ElasticsearchDataSourceConfig')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -81,10 +96,14 @@ module Aws::AppSync
     FunctionConfiguration = Shapes::StructureShape.new(name: 'FunctionConfiguration')
     Functions = Shapes::ListShape.new(name: 'Functions')
     FunctionsIds = Shapes::ListShape.new(name: 'FunctionsIds')
+    GetApiAssociationRequest = Shapes::StructureShape.new(name: 'GetApiAssociationRequest')
+    GetApiAssociationResponse = Shapes::StructureShape.new(name: 'GetApiAssociationResponse')
     GetApiCacheRequest = Shapes::StructureShape.new(name: 'GetApiCacheRequest')
     GetApiCacheResponse = Shapes::StructureShape.new(name: 'GetApiCacheResponse')
     GetDataSourceRequest = Shapes::StructureShape.new(name: 'GetDataSourceRequest')
     GetDataSourceResponse = Shapes::StructureShape.new(name: 'GetDataSourceResponse')
+    GetDomainNameRequest = Shapes::StructureShape.new(name: 'GetDomainNameRequest')
+    GetDomainNameResponse = Shapes::StructureShape.new(name: 'GetDomainNameResponse')
     GetFunctionRequest = Shapes::StructureShape.new(name: 'GetFunctionRequest')
     GetFunctionResponse = Shapes::StructureShape.new(name: 'GetFunctionResponse')
     GetGraphqlApiRequest = Shapes::StructureShape.new(name: 'GetGraphqlApiRequest')
@@ -110,6 +129,8 @@ module Aws::AppSync
     ListApiKeysResponse = Shapes::StructureShape.new(name: 'ListApiKeysResponse')
     ListDataSourcesRequest = Shapes::StructureShape.new(name: 'ListDataSourcesRequest')
     ListDataSourcesResponse = Shapes::StructureShape.new(name: 'ListDataSourcesResponse')
+    ListDomainNamesRequest = Shapes::StructureShape.new(name: 'ListDomainNamesRequest')
+    ListDomainNamesResponse = Shapes::StructureShape.new(name: 'ListDomainNamesResponse')
     ListFunctionsRequest = Shapes::StructureShape.new(name: 'ListFunctionsRequest')
     ListFunctionsResponse = Shapes::StructureShape.new(name: 'ListFunctionsResponse')
     ListGraphqlApisRequest = Shapes::StructureShape.new(name: 'ListGraphqlApisRequest')
@@ -165,6 +186,8 @@ module Aws::AppSync
     UpdateApiKeyResponse = Shapes::StructureShape.new(name: 'UpdateApiKeyResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateDataSourceResponse = Shapes::StructureShape.new(name: 'UpdateDataSourceResponse')
+    UpdateDomainNameRequest = Shapes::StructureShape.new(name: 'UpdateDomainNameRequest')
+    UpdateDomainNameResponse = Shapes::StructureShape.new(name: 'UpdateDomainNameResponse')
     UpdateFunctionRequest = Shapes::StructureShape.new(name: 'UpdateFunctionRequest')
     UpdateFunctionResponse = Shapes::StructureShape.new(name: 'UpdateFunctionResponse')
     UpdateGraphqlApiRequest = Shapes::StructureShape.new(name: 'UpdateGraphqlApiRequest')
@@ -185,6 +208,12 @@ module Aws::AppSync
     AdditionalAuthenticationProvider.struct_class = Types::AdditionalAuthenticationProvider
 
     AdditionalAuthenticationProviders.member = Shapes::ShapeRef.new(shape: AdditionalAuthenticationProvider)
+
+    ApiAssociation.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
+    ApiAssociation.add_member(:api_id, Shapes::ShapeRef.new(shape: String, location_name: "apiId"))
+    ApiAssociation.add_member(:association_status, Shapes::ShapeRef.new(shape: AssociationStatus, location_name: "associationStatus"))
+    ApiAssociation.add_member(:deployment_detail, Shapes::ShapeRef.new(shape: String, location_name: "deploymentDetail"))
+    ApiAssociation.struct_class = Types::ApiAssociation
 
     ApiCache.add_member(:ttl, Shapes::ShapeRef.new(shape: Long, location_name: "ttl"))
     ApiCache.add_member(:api_caching_behavior, Shapes::ShapeRef.new(shape: ApiCachingBehavior, location_name: "apiCachingBehavior"))
@@ -210,6 +239,13 @@ module Aws::AppSync
 
     ApiLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ApiLimitExceededException.struct_class = Types::ApiLimitExceededException
+
+    AssociateApiRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "domainName"))
+    AssociateApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "apiId"))
+    AssociateApiRequest.struct_class = Types::AssociateApiRequest
+
+    AssociateApiResponse.add_member(:api_association, Shapes::ShapeRef.new(shape: ApiAssociation, location_name: "apiAssociation"))
+    AssociateApiResponse.struct_class = Types::AssociateApiResponse
 
     AuthorizationConfig.add_member(:authorization_type, Shapes::ShapeRef.new(shape: AuthorizationType, required: true, location_name: "authorizationType"))
     AuthorizationConfig.add_member(:aws_iam_config, Shapes::ShapeRef.new(shape: AwsIamConfig, location_name: "awsIamConfig"))
@@ -270,6 +306,14 @@ module Aws::AppSync
 
     CreateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
     CreateDataSourceResponse.struct_class = Types::CreateDataSourceResponse
+
+    CreateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "domainName"))
+    CreateDomainNameRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, required: true, location_name: "certificateArn"))
+    CreateDomainNameRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
+
+    CreateDomainNameResponse.add_member(:domain_name_config, Shapes::ShapeRef.new(shape: DomainNameConfig, location_name: "domainNameConfig"))
+    CreateDomainNameResponse.struct_class = Types::CreateDomainNameResponse
 
     CreateFunctionRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     CreateFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
@@ -353,6 +397,11 @@ module Aws::AppSync
 
     DeleteDataSourceResponse.struct_class = Types::DeleteDataSourceResponse
 
+    DeleteDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "domainName"))
+    DeleteDomainNameRequest.struct_class = Types::DeleteDomainNameRequest
+
+    DeleteDomainNameResponse.struct_class = Types::DeleteDomainNameResponse
+
     DeleteFunctionRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     DeleteFunctionRequest.add_member(:function_id, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "functionId"))
     DeleteFunctionRequest.struct_class = Types::DeleteFunctionRequest
@@ -381,6 +430,20 @@ module Aws::AppSync
     DeltaSyncConfig.add_member(:delta_sync_table_name, Shapes::ShapeRef.new(shape: String, location_name: "deltaSyncTableName"))
     DeltaSyncConfig.add_member(:delta_sync_table_ttl, Shapes::ShapeRef.new(shape: Long, location_name: "deltaSyncTableTTL"))
     DeltaSyncConfig.struct_class = Types::DeltaSyncConfig
+
+    DisassociateApiRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "domainName"))
+    DisassociateApiRequest.struct_class = Types::DisassociateApiRequest
+
+    DisassociateApiResponse.struct_class = Types::DisassociateApiResponse
+
+    DomainNameConfig.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
+    DomainNameConfig.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    DomainNameConfig.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
+    DomainNameConfig.add_member(:appsync_domain_name, Shapes::ShapeRef.new(shape: String, location_name: "appsyncDomainName"))
+    DomainNameConfig.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "hostedZoneId"))
+    DomainNameConfig.struct_class = Types::DomainNameConfig
+
+    DomainNameConfigs.member = Shapes::ShapeRef.new(shape: DomainNameConfig)
 
     DynamodbDataSourceConfig.add_member(:table_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "tableName"))
     DynamodbDataSourceConfig.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "awsRegion"))
@@ -413,6 +476,12 @@ module Aws::AppSync
 
     FunctionsIds.member = Shapes::ShapeRef.new(shape: String)
 
+    GetApiAssociationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "domainName"))
+    GetApiAssociationRequest.struct_class = Types::GetApiAssociationRequest
+
+    GetApiAssociationResponse.add_member(:api_association, Shapes::ShapeRef.new(shape: ApiAssociation, location_name: "apiAssociation"))
+    GetApiAssociationResponse.struct_class = Types::GetApiAssociationResponse
+
     GetApiCacheRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     GetApiCacheRequest.struct_class = Types::GetApiCacheRequest
 
@@ -425,6 +494,12 @@ module Aws::AppSync
 
     GetDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
     GetDataSourceResponse.struct_class = Types::GetDataSourceResponse
+
+    GetDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "domainName"))
+    GetDomainNameRequest.struct_class = Types::GetDomainNameRequest
+
+    GetDomainNameResponse.add_member(:domain_name_config, Shapes::ShapeRef.new(shape: DomainNameConfig, location_name: "domainNameConfig"))
+    GetDomainNameResponse.struct_class = Types::GetDomainNameResponse
 
     GetFunctionRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     GetFunctionRequest.add_member(:function_id, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "functionId"))
@@ -530,6 +605,14 @@ module Aws::AppSync
     ListDataSourcesResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
     ListDataSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListDataSourcesResponse.struct_class = Types::ListDataSourcesResponse
+
+    ListDomainNamesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListDomainNamesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListDomainNamesRequest.struct_class = Types::ListDomainNamesRequest
+
+    ListDomainNamesResponse.add_member(:domain_name_configs, Shapes::ShapeRef.new(shape: DomainNameConfigs, location_name: "domainNameConfigs"))
+    ListDomainNamesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListDomainNamesResponse.struct_class = Types::ListDomainNamesResponse
 
     ListFunctionsRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     ListFunctionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -708,6 +791,13 @@ module Aws::AppSync
     UpdateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
     UpdateDataSourceResponse.struct_class = Types::UpdateDataSourceResponse
 
+    UpdateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "domainName"))
+    UpdateDomainNameRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateDomainNameRequest.struct_class = Types::UpdateDomainNameRequest
+
+    UpdateDomainNameResponse.add_member(:domain_name_config, Shapes::ShapeRef.new(shape: DomainNameConfig, location_name: "domainNameConfig"))
+    UpdateDomainNameResponse.struct_class = Types::UpdateDomainNameResponse
+
     UpdateFunctionRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     UpdateFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     UpdateFunctionRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -785,6 +875,18 @@ module Aws::AppSync
         "uid" => "appsync-2017-07-25",
       }
 
+      api.add_operation(:associate_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateApi"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/domainnames/{domainName}/apiassociation"
+        o.input = Shapes::ShapeRef.new(shape: AssociateApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:create_api_cache, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateApiCache"
         o.http_method = "POST"
@@ -824,6 +926,17 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:create_domain_name, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDomainName"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/domainnames"
+        o.input = Shapes::ShapeRef.new(shape: CreateDomainNameRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDomainNameResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -916,6 +1029,19 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:delete_domain_name, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDomainName"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/domainnames/{domainName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDomainNameRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDomainNameResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:delete_function, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteFunction"
         o.http_method = "DELETE"
@@ -967,6 +1093,19 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:disassociate_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateApi"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/domainnames/{domainName}/apiassociation"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:flush_api_cache, Seahorse::Model::Operation.new.tap do |o|
         o.name = "FlushApiCache"
         o.http_method = "DELETE"
@@ -978,6 +1117,18 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:get_api_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApiAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/domainnames/{domainName}/apiassociation"
+        o.input = Shapes::ShapeRef.new(shape: GetApiAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetApiAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:get_api_cache, Seahorse::Model::Operation.new.tap do |o|
@@ -1004,6 +1155,18 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:get_domain_name, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDomainName"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/domainnames/{domainName}"
+        o.input = Shapes::ShapeRef.new(shape: GetDomainNameRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDomainNameResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:get_function, Seahorse::Model::Operation.new.tap do |o|
@@ -1099,6 +1262,17 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:list_domain_names, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDomainNames"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/domainnames"
+        o.input = Shapes::ShapeRef.new(shape: ListDomainNamesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDomainNamesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
@@ -1255,6 +1429,19 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_domain_name, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDomainName"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/domainnames/{domainName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDomainNameRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDomainNameResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:update_function, Seahorse::Model::Operation.new.tap do |o|

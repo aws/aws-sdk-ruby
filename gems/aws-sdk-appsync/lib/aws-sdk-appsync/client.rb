@@ -338,22 +338,57 @@ module Aws::AppSync
 
     # @!group API Operations
 
+    # Maps an endpoint to your custom domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain name.
+    #
+    # @option params [required, String] :api_id
+    #   The API ID.
+    #
+    # @return [Types::AssociateApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateApiResponse#api_association #api_association} => Types::ApiAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_api({
+    #     domain_name: "DomainName", # required
+    #     api_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_association.domain_name #=> String
+    #   resp.api_association.api_id #=> String
+    #   resp.api_association.association_status #=> String, one of "PROCESSING", "FAILED", "SUCCESS"
+    #   resp.api_association.deployment_detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AssociateApi AWS API Documentation
+    #
+    # @overload associate_api(params = {})
+    # @param [Hash] params ({})
+    def associate_api(params = {}, options = {})
+      req = build_request(:associate_api, params)
+      req.send_request(options)
+    end
+
     # Creates a cache for the GraphQL API.
     #
     # @option params [required, String] :api_id
-    #   The GraphQL API Id.
+    #   The GraphQL API ID.
     #
     # @option params [required, Integer] :ttl
     #   TTL in seconds for cache entries.
     #
-    #   Valid values are between 1 and 3600 seconds.
+    #   Valid values are 1–3,600 seconds.
     #
     # @option params [Boolean] :transit_encryption_enabled
-    #   Transit encryption flag when connecting to cache. This setting cannot
-    #   be updated after creation.
+    #   Transit encryption flag when connecting to cache. You cannot update
+    #   this setting after creation.
     #
     # @option params [Boolean] :at_rest_encryption_enabled
-    #   At rest encryption flag for cache. This setting cannot be updated
+    #   At-rest encryption flag for cache. You cannot update this setting
     #   after creation.
     #
     # @option params [required, String] :api_caching_behavior
@@ -437,8 +472,8 @@ module Aws::AppSync
       req.send_request(options)
     end
 
-    # Creates a unique key that you can distribute to clients who are
-    # executing your API.
+    # Creates a unique key that you can distribute to clients who invoke
+    # your API.
     #
     # @option params [required, String] :api_id
     #   The ID for your GraphQL API.
@@ -447,10 +482,10 @@ module Aws::AppSync
     #   A description of the purpose of the API key.
     #
     # @option params [Integer] :expires
-    #   The time from creation time after which the API key expires. The date
-    #   is represented as seconds since the epoch, rounded down to the nearest
-    #   hour. The default value for this parameter is 7 days from creation
-    #   time. For more information, see .
+    #   From the creation time, the time after which the API key expires. The
+    #   date is represented as seconds since the epoch, rounded down to the
+    #   nearest hour. The default value for this parameter is 7 days from
+    #   creation time. For more information, see .
     #
     # @return [Types::CreateApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -495,14 +530,15 @@ module Aws::AppSync
     #   The type of the `DataSource`.
     #
     # @option params [String] :service_role_arn
-    #   The Identity and Access Management service role ARN for the data
-    #   source. The system assumes this role when accessing the data source.
+    #   The Identity and Access Management (IAM) service role Amazon Resource
+    #   Name (ARN) for the data source. The system assumes this role when
+    #   accessing the data source.
     #
     # @option params [Types::DynamodbDataSourceConfig] :dynamodb_config
     #   Amazon DynamoDB settings.
     #
     # @option params [Types::LambdaDataSourceConfig] :lambda_config
-    #   Amazon Web Services Lambda settings.
+    #   Lambda settings.
     #
     # @option params [Types::ElasticsearchDataSourceConfig] :elasticsearch_config
     #   Amazon OpenSearch Service settings.
@@ -616,9 +652,51 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Creates a custom `DomainName` object.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain name.
+    #
+    # @option params [required, String] :certificate_arn
+    #   The Amazon Resource Name (ARN) of the certificate. This can be an
+    #   Certificate Manager (ACM) certificate or an Identity and Access
+    #   Management (IAM) server certificate.
+    #
+    # @option params [String] :description
+    #   A description of the `DomainName`.
+    #
+    # @return [Types::CreateDomainNameResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDomainNameResponse#domain_name_config #domain_name_config} => Types::DomainNameConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_domain_name({
+    #     domain_name: "DomainName", # required
+    #     certificate_arn: "CertificateArn", # required
+    #     description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name_config.domain_name #=> String
+    #   resp.domain_name_config.description #=> String
+    #   resp.domain_name_config.certificate_arn #=> String
+    #   resp.domain_name_config.appsync_domain_name #=> String
+    #   resp.domain_name_config.hosted_zone_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDomainName AWS API Documentation
+    #
+    # @overload create_domain_name(params = {})
+    # @param [Hash] params ({})
+    def create_domain_name(params = {}, options = {})
+      req = build_request(:create_domain_name, params)
+      req.send_request(options)
+    end
+
     # Creates a `Function` object.
     #
-    # A function is a reusable entity. Multiple functions can be used to
+    # A function is a reusable entity. You can use multiple functions to
     # compose the resolver logic.
     #
     # @option params [required, String] :api_id
@@ -641,14 +719,14 @@ module Aws::AppSync
     #   The `Function` response mapping template.
     #
     # @option params [required, String] :function_version
-    #   The `version` of the request mapping template. Currently the supported
-    #   value is 2018-05-29.
+    #   The `version` of the request mapping template. Currently, the
+    #   supported value is 2018-05-29.
     #
     # @option params [Types::SyncConfig] :sync_config
     #   Describes a Sync configuration for a resolver.
     #
-    #   Contains information on which Conflict Detection as well as Resolution
-    #   strategy should be performed when the resolver is invoked.
+    #   Specifies which Conflict Detection strategy and Resolution strategy to
+    #   use when the resolver is invoked.
     #
     # @return [Types::CreateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -705,14 +783,14 @@ module Aws::AppSync
     #   The Amazon CloudWatch Logs configuration.
     #
     # @option params [required, String] :authentication_type
-    #   The authentication type: API key, Identity and Access Management,
-    #   OIDC, Amazon Cognito user pools, or Amazon Web Services Lambda.
+    #   The authentication type: API key, Identity and Access Management
+    #   (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or Lambda.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
     #   The Amazon Cognito user pool configuration.
     #
     # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
-    #   The OpenID Connect configuration.
+    #   The OIDC configuration.
     #
     # @option params [Hash<String,String>] :tags
     #   A `TagMap` object.
@@ -722,11 +800,10 @@ module Aws::AppSync
     #   API.
     #
     # @option params [Boolean] :xray_enabled
-    #   A flag indicating whether to enable X-Ray tracing for the
-    #   `GraphqlApi`.
+    #   A flag indicating whether to use X-Ray tracing for the `GraphqlApi`.
     #
     # @option params [Types::LambdaAuthorizerConfig] :lambda_authorizer_config
-    #   Configuration for Amazon Web Services Lambda function authorization.
+    #   Configuration for Lambda function authorization.
     #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -837,7 +914,8 @@ module Aws::AppSync
     # Creates a `Resolver` object.
     #
     # A resolver converts incoming requests into a format that a data source
-    # can understand and converts the data source's responses into GraphQL.
+    # can understand, and converts the data source's responses into
+    # GraphQL.
     #
     # @option params [required, String] :api_id
     #   The ID for the GraphQL API for which the resolver is being created.
@@ -852,36 +930,36 @@ module Aws::AppSync
     #   The name of the data source for which the resolver is being created.
     #
     # @option params [String] :request_mapping_template
-    #   The mapping template to be used for requests.
+    #   The mapping template to use for requests.
     #
     #   A resolver uses a request mapping template to convert a GraphQL
     #   expression into a format that a data source can understand. Mapping
     #   templates are written in Apache Velocity Template Language (VTL).
     #
-    #   VTL request mapping templates are optional when using a Lambda data
+    #   VTL request mapping templates are optional when using an Lambda data
     #   source. For all other data sources, VTL request and response mapping
     #   templates are required.
     #
     # @option params [String] :response_mapping_template
-    #   The mapping template to be used for responses from the data source.
+    #   The mapping template to use for responses from the data source.
     #
     # @option params [String] :kind
     #   The resolver type.
     #
     #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
-    #     resolver type. A UNIT resolver enables you to execute a GraphQL
-    #     query against a single data source.
+    #     resolver type. You can use a UNIT resolver to run a GraphQL query
+    #     against a single data source.
     #
-    #   * **PIPELINE**\: A PIPELINE resolver type. A PIPELINE resolver enables
-    #     you to execute a series of `Function` in a serial manner. You can
-    #     use a pipeline resolver to execute a GraphQL query against multiple
-    #     data sources.
+    #   * **PIPELINE**\: A PIPELINE resolver type. You can use a PIPELINE
+    #     resolver to invoke a series of `Function` objects in a serial
+    #     manner. You can use a pipeline resolver to run a GraphQL query
+    #     against multiple data sources.
     #
     # @option params [Types::PipelineConfig] :pipeline_config
     #   The `PipelineConfig`.
     #
     # @option params [Types::SyncConfig] :sync_config
-    #   The `SyncConfig` for a resolver attached to a versioned datasource.
+    #   The `SyncConfig` for a resolver attached to a versioned data source.
     #
     # @option params [Types::CachingConfig] :caching_config
     #   The caching configuration for the resolver.
@@ -1064,6 +1142,28 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Deletes a custom `DomainName` object.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain name.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_domain_name({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteDomainName AWS API Documentation
+    #
+    # @overload delete_domain_name(params = {})
+    # @param [Hash] params ({})
+    def delete_domain_name(params = {}, options = {})
+      req = build_request(:delete_domain_name, params)
+      req.send_request(options)
+    end
+
     # Deletes a `Function`.
     #
     # @option params [required, String] :api_id
@@ -1168,6 +1268,28 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Removes an `ApiAssociation` object from a custom domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain name.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_api({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DisassociateApi AWS API Documentation
+    #
+    # @overload disassociate_api(params = {})
+    # @param [Hash] params ({})
+    def disassociate_api(params = {}, options = {})
+      req = build_request(:disassociate_api, params)
+      req.send_request(options)
+    end
+
     # Flushes an `ApiCache` object.
     #
     # @option params [required, String] :api_id
@@ -1187,6 +1309,37 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def flush_api_cache(params = {}, options = {})
       req = build_request(:flush_api_cache, params)
+      req.send_request(options)
+    end
+
+    # Retrieves an `ApiAssociation` object.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain name.
+    #
+    # @return [Types::GetApiAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApiAssociationResponse#api_association #api_association} => Types::ApiAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_api_association({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_association.domain_name #=> String
+    #   resp.api_association.api_id #=> String
+    #   resp.api_association.association_status #=> String, one of "PROCESSING", "FAILED", "SUCCESS"
+    #   resp.api_association.deployment_detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApiAssociation AWS API Documentation
+    #
+    # @overload get_api_association(params = {})
+    # @param [Hash] params ({})
+    def get_api_association(params = {}, options = {})
+      req = build_request(:get_api_association, params)
       req.send_request(options)
     end
 
@@ -1278,6 +1431,38 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def get_data_source(params = {}, options = {})
       req = build_request(:get_data_source, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a custom `DomainName` object.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain name.
+    #
+    # @return [Types::GetDomainNameResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDomainNameResponse#domain_name_config #domain_name_config} => Types::DomainNameConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_domain_name({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name_config.domain_name #=> String
+    #   resp.domain_name_config.description #=> String
+    #   resp.domain_name_config.certificate_arn #=> String
+    #   resp.domain_name_config.appsync_domain_name #=> String
+    #   resp.domain_name_config.hosted_zone_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDomainName AWS API Documentation
+    #
+    # @overload get_domain_name(params = {})
+    # @param [Hash] params ({})
+    def get_domain_name(params = {}, options = {})
+      req = build_request(:get_domain_name, params)
       req.send_request(options)
     end
 
@@ -1557,11 +1742,11 @@ module Aws::AppSync
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
-    #   operation, which can be used to return the next set of items in the
+    #   operation, which you can use to return the next set of items in the
     #   list.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results you want the request to return.
+    #   The maximum number of results that you want the request to return.
     #
     # @return [Types::ListApiKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1601,11 +1786,11 @@ module Aws::AppSync
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
-    #   operation, which can be used to return the next set of items in the
+    #   operation, which you can use to return the next set of items in the
     #   list.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results you want the request to return.
+    #   The maximum number of results that you want the request to return.
     #
     # @return [Types::ListDataSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1661,6 +1846,45 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Lists multiple custom domain names.
+    #
+    # @option params [String] :next_token
+    #   The API token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that you want the request to return.
+    #
+    # @return [Types::ListDomainNamesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainNamesResponse#domain_name_configs #domain_name_configs} => Array&lt;Types::DomainNameConfig&gt;
+    #   * {Types::ListDomainNamesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domain_names({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name_configs #=> Array
+    #   resp.domain_name_configs[0].domain_name #=> String
+    #   resp.domain_name_configs[0].description #=> String
+    #   resp.domain_name_configs[0].certificate_arn #=> String
+    #   resp.domain_name_configs[0].appsync_domain_name #=> String
+    #   resp.domain_name_configs[0].hosted_zone_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDomainNames AWS API Documentation
+    #
+    # @overload list_domain_names(params = {})
+    # @param [Hash] params ({})
+    def list_domain_names(params = {}, options = {})
+      req = build_request(:list_domain_names, params)
+      req.send_request(options)
+    end
+
     # List multiple functions.
     #
     # @option params [required, String] :api_id
@@ -1668,11 +1892,11 @@ module Aws::AppSync
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
-    #   operation, which can be used to return the next set of items in the
+    #   operation, which you can use to return the next set of items in the
     #   list.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results you want the request to return.
+    #   The maximum number of results that you want the request to return.
     #
     # @return [Types::ListFunctionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1716,11 +1940,11 @@ module Aws::AppSync
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
-    #   operation, which can be used to return the next set of items in the
+    #   operation, which you can use to return the next set of items in the
     #   list.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results you want the request to return.
+    #   The maximum number of results that you want the request to return.
     #
     # @return [Types::ListGraphqlApisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1794,11 +2018,11 @@ module Aws::AppSync
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
-    #   operation, which can be used to return the next set of items in the
+    #   operation, which you can use to return the next set of items in the
     #   list.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results you want the request to return.
+    #   The maximum number of results that you want the request to return.
     #
     # @return [Types::ListResolversResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1849,7 +2073,7 @@ module Aws::AppSync
     #   The API ID.
     #
     # @option params [required, String] :function_id
-    #   The Function ID.
+    #   The function ID.
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -1857,7 +2081,7 @@ module Aws::AppSync
     #   list.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results you want the request to return.
+    #   The maximum number of results that you want the request to return.
     #
     # @return [Types::ListResolversByFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1905,7 +2129,7 @@ module Aws::AppSync
     # Lists the tags for a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The `GraphqlApi` ARN.
+    #   The `GraphqlApi` Amazon Resource Name (ARN).
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1941,11 +2165,11 @@ module Aws::AppSync
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
-    #   operation, which can be used to return the next set of items in the
+    #   operation, which you can use to return the next set of items in the
     #   list.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results you want the request to return.
+    #   The maximum number of results that you want the request to return.
     #
     # @return [Types::ListTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2018,7 +2242,7 @@ module Aws::AppSync
     # Tags a resource with user-supplied tags.
     #
     # @option params [required, String] :resource_arn
-    #   The `GraphqlApi` ARN.
+    #   The `GraphqlApi` Amazon Resource Name (ARN).
     #
     # @option params [required, Hash<String,String>] :tags
     #   A `TagMap` object.
@@ -2046,7 +2270,7 @@ module Aws::AppSync
     # Untags a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The `GraphqlApi` ARN.
+    #   The `GraphqlApi` Amazon Resource Name (ARN).
     #
     # @option params [required, Array<String>] :tag_keys
     #   A list of `TagKey` objects.
@@ -2072,12 +2296,12 @@ module Aws::AppSync
     # Updates the cache for the GraphQL API.
     #
     # @option params [required, String] :api_id
-    #   The GraphQL API Id.
+    #   The GraphQL API ID.
     #
     # @option params [required, Integer] :ttl
     #   TTL in seconds for cache entries.
     #
-    #   Valid values are between 1 and 3600 seconds.
+    #   Valid values are 1–3,600 seconds.
     #
     # @option params [required, String] :api_caching_behavior
     #   Caching behavior.
@@ -2158,7 +2382,8 @@ module Aws::AppSync
       req.send_request(options)
     end
 
-    # Updates an API key. The key can be updated while it is not deleted.
+    # Updates an API key. You can update the key as long as it's not
+    # deleted.
     #
     # @option params [required, String] :api_id
     #   The ID for the GraphQL API.
@@ -2170,8 +2395,9 @@ module Aws::AppSync
     #   A description of the purpose of the API key.
     #
     # @option params [Integer] :expires
-    #   The time from update time after which the API key expires. The date is
-    #   represented as seconds since the epoch. For more information, see .
+    #   From the update time, the time after which the API key expires. The
+    #   date is represented as seconds since the epoch. For more information,
+    #   see .
     #
     # @return [Types::UpdateApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2217,13 +2443,13 @@ module Aws::AppSync
     #   The new data source type.
     #
     # @option params [String] :service_role_arn
-    #   The new service role ARN for the data source.
+    #   The new service role Amazon Resource Name (ARN) for the data source.
     #
     # @option params [Types::DynamodbDataSourceConfig] :dynamodb_config
     #   The new Amazon DynamoDB configuration.
     #
     # @option params [Types::LambdaDataSourceConfig] :lambda_config
-    #   The new Amazon Web Services Lambda configuration.
+    #   The new Lambda configuration.
     #
     # @option params [Types::ElasticsearchDataSourceConfig] :elasticsearch_config
     #   The new OpenSearch configuration.
@@ -2337,6 +2563,42 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Updates a custom `DomainName` object.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain name.
+    #
+    # @option params [String] :description
+    #   A description of the `DomainName`.
+    #
+    # @return [Types::UpdateDomainNameResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDomainNameResponse#domain_name_config #domain_name_config} => Types::DomainNameConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_domain_name({
+    #     domain_name: "DomainName", # required
+    #     description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name_config.domain_name #=> String
+    #   resp.domain_name_config.description #=> String
+    #   resp.domain_name_config.certificate_arn #=> String
+    #   resp.domain_name_config.appsync_domain_name #=> String
+    #   resp.domain_name_config.hosted_zone_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDomainName AWS API Documentation
+    #
+    # @overload update_domain_name(params = {})
+    # @param [Hash] params ({})
+    def update_domain_name(params = {}, options = {})
+      req = build_request(:update_domain_name, params)
+      req.send_request(options)
+    end
+
     # Updates a `Function` object.
     #
     # @option params [required, String] :api_id
@@ -2362,14 +2624,14 @@ module Aws::AppSync
     #   The `Function` request mapping template.
     #
     # @option params [required, String] :function_version
-    #   The `version` of the request mapping template. Currently the supported
-    #   value is 2018-05-29.
+    #   The `version` of the request mapping template. Currently, the
+    #   supported value is 2018-05-29.
     #
     # @option params [Types::SyncConfig] :sync_config
     #   Describes a Sync configuration for a resolver.
     #
-    #   Contains information on which Conflict Detection as well as Resolution
-    #   strategy should be performed when the resolver is invoked.
+    #   Specifies which Conflict Detection strategy and Resolution strategy to
+    #   use when the resolver is invoked.
     #
     # @return [Types::UpdateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2433,7 +2695,7 @@ module Aws::AppSync
     #   The new authentication type for the `GraphqlApi` object.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
-    #   The new Amazon Cognito user pool configuration for the `GraphqlApi`
+    #   The new Amazon Cognito user pool configuration for the `~GraphqlApi`
     #   object.
     #
     # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
@@ -2444,11 +2706,10 @@ module Aws::AppSync
     #   API.
     #
     # @option params [Boolean] :xray_enabled
-    #   A flag indicating whether to enable X-Ray tracing for the
-    #   `GraphqlApi`.
+    #   A flag indicating whether to use X-Ray tracing for the `GraphqlApi`.
     #
     # @option params [Types::LambdaAuthorizerConfig] :lambda_authorizer_config
-    #   Configuration for Amazon Web Services Lambda function authorization.
+    #   Configuration for Lambda function authorization.
     #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2575,7 +2836,7 @@ module Aws::AppSync
     #   expression into a format that a data source can understand. Mapping
     #   templates are written in Apache Velocity Template Language (VTL).
     #
-    #   VTL request mapping templates are optional when using a Lambda data
+    #   VTL request mapping templates are optional when using an Lambda data
     #   source. For all other data sources, VTL request and response mapping
     #   templates are required.
     #
@@ -2586,19 +2847,19 @@ module Aws::AppSync
     #   The resolver type.
     #
     #   * **UNIT**\: A UNIT resolver type. A UNIT resolver is the default
-    #     resolver type. A UNIT resolver enables you to execute a GraphQL
-    #     query against a single data source.
+    #     resolver type. You can use a UNIT resolver to run a GraphQL query
+    #     against a single data source.
     #
-    #   * **PIPELINE**\: A PIPELINE resolver type. A PIPELINE resolver enables
-    #     you to execute a series of `Function` in a serial manner. You can
-    #     use a pipeline resolver to execute a GraphQL query against multiple
-    #     data sources.
+    #   * **PIPELINE**\: A PIPELINE resolver type. You can use a PIPELINE
+    #     resolver to invoke a series of `Function` objects in a serial
+    #     manner. You can use a pipeline resolver to run a GraphQL query
+    #     against multiple data sources.
     #
     # @option params [Types::PipelineConfig] :pipeline_config
     #   The `PipelineConfig`.
     #
     # @option params [Types::SyncConfig] :sync_config
-    #   The `SyncConfig` for a resolver attached to a versioned datasource.
+    #   The `SyncConfig` for a resolver attached to a versioned data source.
     #
     # @option params [Types::CachingConfig] :caching_config
     #   The caching configuration for the resolver.
@@ -2717,7 +2978,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

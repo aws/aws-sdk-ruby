@@ -187,7 +187,12 @@ module Aws::LocationService
     PlaceIndexSearchResultLimit = Shapes::IntegerShape.new(name: 'PlaceIndexSearchResultLimit')
     Position = Shapes::ListShape.new(name: 'Position')
     PositionFiltering = Shapes::StringShape.new(name: 'PositionFiltering')
+    PositionalAccuracy = Shapes::StructureShape.new(name: 'PositionalAccuracy')
+    PositionalAccuracyHorizontalDouble = Shapes::FloatShape.new(name: 'PositionalAccuracyHorizontalDouble')
     PricingPlan = Shapes::StringShape.new(name: 'PricingPlan')
+    PropertyMap = Shapes::MapShape.new(name: 'PropertyMap')
+    PropertyMapKeyString = Shapes::StringShape.new(name: 'PropertyMapKeyString')
+    PropertyMapValueString = Shapes::StringShape.new(name: 'PropertyMapValueString')
     PutGeofenceRequest = Shapes::StructureShape.new(name: 'PutGeofenceRequest')
     PutGeofenceResponse = Shapes::StructureShape.new(name: 'PutGeofenceResponse')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
@@ -196,6 +201,8 @@ module Aws::LocationService
     SearchForPositionResult = Shapes::StructureShape.new(name: 'SearchForPositionResult')
     SearchForPositionResultDistanceDouble = Shapes::FloatShape.new(name: 'SearchForPositionResultDistanceDouble')
     SearchForPositionResultList = Shapes::ListShape.new(name: 'SearchForPositionResultList')
+    SearchForSuggestionsResult = Shapes::StructureShape.new(name: 'SearchForSuggestionsResult')
+    SearchForSuggestionsResultList = Shapes::ListShape.new(name: 'SearchForSuggestionsResultList')
     SearchForTextResult = Shapes::StructureShape.new(name: 'SearchForTextResult')
     SearchForTextResultDistanceDouble = Shapes::FloatShape.new(name: 'SearchForTextResultDistanceDouble')
     SearchForTextResultList = Shapes::ListShape.new(name: 'SearchForTextResultList')
@@ -203,6 +210,10 @@ module Aws::LocationService
     SearchPlaceIndexForPositionRequest = Shapes::StructureShape.new(name: 'SearchPlaceIndexForPositionRequest')
     SearchPlaceIndexForPositionResponse = Shapes::StructureShape.new(name: 'SearchPlaceIndexForPositionResponse')
     SearchPlaceIndexForPositionSummary = Shapes::StructureShape.new(name: 'SearchPlaceIndexForPositionSummary')
+    SearchPlaceIndexForSuggestionsRequest = Shapes::StructureShape.new(name: 'SearchPlaceIndexForSuggestionsRequest')
+    SearchPlaceIndexForSuggestionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'SearchPlaceIndexForSuggestionsRequestMaxResultsInteger')
+    SearchPlaceIndexForSuggestionsResponse = Shapes::StructureShape.new(name: 'SearchPlaceIndexForSuggestionsResponse')
+    SearchPlaceIndexForSuggestionsSummary = Shapes::StructureShape.new(name: 'SearchPlaceIndexForSuggestionsSummary')
     SearchPlaceIndexForTextRequest = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextRequest')
     SearchPlaceIndexForTextResponse = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextResponse')
     SearchPlaceIndexForTextSummary = Shapes::StructureShape.new(name: 'SearchPlaceIndexForTextSummary')
@@ -213,6 +224,8 @@ module Aws::LocationService
     StepGeometryOffsetInteger = Shapes::IntegerShape.new(name: 'StepGeometryOffsetInteger')
     StepList = Shapes::ListShape.new(name: 'StepList')
     String = Shapes::StringShape.new(name: 'String')
+    SyntheticSearchPlaceIndexForSuggestionsRequestString = Shapes::StringShape.new(name: 'SyntheticSearchPlaceIndexForSuggestionsRequestString')
+    SyntheticSearchPlaceIndexForSuggestionsSummaryString = Shapes::StringShape.new(name: 'SyntheticSearchPlaceIndexForSuggestionsSummaryString')
     SyntheticSearchPlaceIndexForTextRequestString = Shapes::StringShape.new(name: 'SyntheticSearchPlaceIndexForTextRequestString')
     SyntheticSearchPlaceIndexForTextSummaryString = Shapes::StringShape.new(name: 'SyntheticSearchPlaceIndexForTextSummaryString')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -575,16 +588,20 @@ module Aws::LocationService
     DescribeTrackerResponse.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdateTime"))
     DescribeTrackerResponse.struct_class = Types::DescribeTrackerResponse
 
+    DevicePosition.add_member(:accuracy, Shapes::ShapeRef.new(shape: PositionalAccuracy, location_name: "Accuracy"))
     DevicePosition.add_member(:device_id, Shapes::ShapeRef.new(shape: Id, location_name: "DeviceId"))
     DevicePosition.add_member(:position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Position"))
+    DevicePosition.add_member(:position_properties, Shapes::ShapeRef.new(shape: PropertyMap, location_name: "PositionProperties"))
     DevicePosition.add_member(:received_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ReceivedTime"))
     DevicePosition.add_member(:sample_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "SampleTime"))
     DevicePosition.struct_class = Types::DevicePosition
 
     DevicePositionList.member = Shapes::ShapeRef.new(shape: DevicePosition)
 
+    DevicePositionUpdate.add_member(:accuracy, Shapes::ShapeRef.new(shape: PositionalAccuracy, location_name: "Accuracy"))
     DevicePositionUpdate.add_member(:device_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DeviceId"))
     DevicePositionUpdate.add_member(:position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Position"))
+    DevicePositionUpdate.add_member(:position_properties, Shapes::ShapeRef.new(shape: PropertyMap, location_name: "PositionProperties"))
     DevicePositionUpdate.add_member(:sample_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "SampleTime"))
     DevicePositionUpdate.struct_class = Types::DevicePositionUpdate
 
@@ -612,8 +629,10 @@ module Aws::LocationService
     GetDevicePositionRequest.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "TrackerName"))
     GetDevicePositionRequest.struct_class = Types::GetDevicePositionRequest
 
+    GetDevicePositionResponse.add_member(:accuracy, Shapes::ShapeRef.new(shape: PositionalAccuracy, location_name: "Accuracy"))
     GetDevicePositionResponse.add_member(:device_id, Shapes::ShapeRef.new(shape: Id, location_name: "DeviceId"))
     GetDevicePositionResponse.add_member(:position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Position"))
+    GetDevicePositionResponse.add_member(:position_properties, Shapes::ShapeRef.new(shape: PropertyMap, location_name: "PositionProperties"))
     GetDevicePositionResponse.add_member(:received_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ReceivedTime"))
     GetDevicePositionResponse.add_member(:sample_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "SampleTime"))
     GetDevicePositionResponse.struct_class = Types::GetDevicePositionResponse
@@ -702,8 +721,10 @@ module Aws::LocationService
     ListDevicePositionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDevicePositionsResponse.struct_class = Types::ListDevicePositionsResponse
 
+    ListDevicePositionsResponseEntry.add_member(:accuracy, Shapes::ShapeRef.new(shape: PositionalAccuracy, location_name: "Accuracy"))
     ListDevicePositionsResponseEntry.add_member(:device_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DeviceId"))
     ListDevicePositionsResponseEntry.add_member(:position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Position"))
+    ListDevicePositionsResponseEntry.add_member(:position_properties, Shapes::ShapeRef.new(shape: PropertyMap, location_name: "PositionProperties"))
     ListDevicePositionsResponseEntry.add_member(:sample_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "SampleTime"))
     ListDevicePositionsResponseEntry.struct_class = Types::ListDevicePositionsResponseEntry
 
@@ -853,6 +874,12 @@ module Aws::LocationService
 
     Position.member = Shapes::ShapeRef.new(shape: Double)
 
+    PositionalAccuracy.add_member(:horizontal, Shapes::ShapeRef.new(shape: PositionalAccuracyHorizontalDouble, required: true, location_name: "Horizontal"))
+    PositionalAccuracy.struct_class = Types::PositionalAccuracy
+
+    PropertyMap.key = Shapes::ShapeRef.new(shape: PropertyMapKeyString)
+    PropertyMap.value = Shapes::ShapeRef.new(shape: PropertyMapValueString)
+
     PutGeofenceRequest.add_member(:collection_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "CollectionName"))
     PutGeofenceRequest.add_member(:geofence_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "GeofenceId"))
     PutGeofenceRequest.add_member(:geometry, Shapes::ShapeRef.new(shape: GeofenceGeometry, required: true, location_name: "Geometry"))
@@ -871,6 +898,11 @@ module Aws::LocationService
     SearchForPositionResult.struct_class = Types::SearchForPositionResult
 
     SearchForPositionResultList.member = Shapes::ShapeRef.new(shape: SearchForPositionResult)
+
+    SearchForSuggestionsResult.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
+    SearchForSuggestionsResult.struct_class = Types::SearchForSuggestionsResult
+
+    SearchForSuggestionsResultList.member = Shapes::ShapeRef.new(shape: SearchForSuggestionsResult)
 
     SearchForTextResult.add_member(:distance, Shapes::ShapeRef.new(shape: SearchForTextResultDistanceDouble, location_name: "Distance"))
     SearchForTextResult.add_member(:place, Shapes::ShapeRef.new(shape: Place, required: true, location_name: "Place"))
@@ -894,6 +926,28 @@ module Aws::LocationService
     SearchPlaceIndexForPositionSummary.add_member(:max_results, Shapes::ShapeRef.new(shape: PlaceIndexSearchResultLimit, location_name: "MaxResults"))
     SearchPlaceIndexForPositionSummary.add_member(:position, Shapes::ShapeRef.new(shape: Position, required: true, location_name: "Position"))
     SearchPlaceIndexForPositionSummary.struct_class = Types::SearchPlaceIndexForPositionSummary
+
+    SearchPlaceIndexForSuggestionsRequest.add_member(:bias_position, Shapes::ShapeRef.new(shape: Position, location_name: "BiasPosition"))
+    SearchPlaceIndexForSuggestionsRequest.add_member(:filter_b_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "FilterBBox"))
+    SearchPlaceIndexForSuggestionsRequest.add_member(:filter_countries, Shapes::ShapeRef.new(shape: CountryCodeList, location_name: "FilterCountries"))
+    SearchPlaceIndexForSuggestionsRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "IndexName"))
+    SearchPlaceIndexForSuggestionsRequest.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
+    SearchPlaceIndexForSuggestionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchPlaceIndexForSuggestionsRequestMaxResultsInteger, location_name: "MaxResults"))
+    SearchPlaceIndexForSuggestionsRequest.add_member(:text, Shapes::ShapeRef.new(shape: SyntheticSearchPlaceIndexForSuggestionsRequestString, required: true, location_name: "Text"))
+    SearchPlaceIndexForSuggestionsRequest.struct_class = Types::SearchPlaceIndexForSuggestionsRequest
+
+    SearchPlaceIndexForSuggestionsResponse.add_member(:results, Shapes::ShapeRef.new(shape: SearchForSuggestionsResultList, required: true, location_name: "Results"))
+    SearchPlaceIndexForSuggestionsResponse.add_member(:summary, Shapes::ShapeRef.new(shape: SearchPlaceIndexForSuggestionsSummary, required: true, location_name: "Summary"))
+    SearchPlaceIndexForSuggestionsResponse.struct_class = Types::SearchPlaceIndexForSuggestionsResponse
+
+    SearchPlaceIndexForSuggestionsSummary.add_member(:bias_position, Shapes::ShapeRef.new(shape: Position, location_name: "BiasPosition"))
+    SearchPlaceIndexForSuggestionsSummary.add_member(:data_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataSource"))
+    SearchPlaceIndexForSuggestionsSummary.add_member(:filter_b_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "FilterBBox"))
+    SearchPlaceIndexForSuggestionsSummary.add_member(:filter_countries, Shapes::ShapeRef.new(shape: CountryCodeList, location_name: "FilterCountries"))
+    SearchPlaceIndexForSuggestionsSummary.add_member(:language, Shapes::ShapeRef.new(shape: LanguageTag, location_name: "Language"))
+    SearchPlaceIndexForSuggestionsSummary.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    SearchPlaceIndexForSuggestionsSummary.add_member(:text, Shapes::ShapeRef.new(shape: SyntheticSearchPlaceIndexForSuggestionsSummaryString, required: true, location_name: "Text"))
+    SearchPlaceIndexForSuggestionsSummary.struct_class = Types::SearchPlaceIndexForSuggestionsSummary
 
     SearchPlaceIndexForTextRequest.add_member(:bias_position, Shapes::ShapeRef.new(shape: Position, location_name: "BiasPosition"))
     SearchPlaceIndexForTextRequest.add_member(:filter_b_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "FilterBBox"))
@@ -1761,6 +1815,22 @@ module Aws::LocationService
         }
         o.input = Shapes::ShapeRef.new(shape: SearchPlaceIndexForPositionRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchPlaceIndexForPositionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:search_place_index_for_suggestions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchPlaceIndexForSuggestions"
+        o.http_method = "POST"
+        o.http_request_uri = "/places/v0/indexes/{IndexName}/search/suggestions"
+        o.endpoint_pattern = {
+          "hostPrefix" => "places.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: SearchPlaceIndexForSuggestionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchPlaceIndexForSuggestionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

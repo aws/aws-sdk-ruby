@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2021-12-06)
+------------------
+
+* Feature - This release adds support for Accuracy position filtering, position metadata and autocomplete for addresses and points of interest based on partial or misspelled free-form text.
+
 1.13.0 (2021-11-30)
 ------------------
 

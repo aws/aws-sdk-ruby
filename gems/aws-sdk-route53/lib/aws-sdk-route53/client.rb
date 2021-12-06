@@ -440,7 +440,7 @@ module Aws::Route53
     #   resp = client.associate_vpc_with_hosted_zone({
     #     hosted_zone_id: "ResourceId", # required
     #     vpc: { # required
-    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #       vpc_id: "VPCId",
     #     },
     #     comment: "AssociateVPCComment",
@@ -1170,7 +1170,7 @@ module Aws::Route53
     #             type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #             set_identifier: "ResourceRecordSetIdentifier",
     #             weight: 1,
-    #             region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
+    #             region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
     #             geo_location: {
     #               continent_code: "GeoLocationContinentCode",
     #               country_code: "GeoLocationCountryCode",
@@ -1390,7 +1390,7 @@ module Aws::Route53
     #       enable_sni: false,
     #       regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #       alarm_identifier: {
-    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1
+    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
     #         name: "AlarmName", # required
     #       },
     #       insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -1421,7 +1421,7 @@ module Aws::Route53
     #   resp.health_check.health_check_config.enable_sni #=> Boolean
     #   resp.health_check.health_check_config.regions #=> Array
     #   resp.health_check.health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1"
+    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1"
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_check.health_check_config.routing_control_arn #=> String
@@ -1516,7 +1516,10 @@ module Aws::Route53
     #   about the Amazon VPC that you're associating with this hosted zone.
     #
     #   You can specify only one Amazon VPC when you create a private hosted
-    #   zone. To associate additional Amazon VPCs with the hosted zone, use
+    #   zone. If you are associating a VPC with a hosted zone with this
+    #   request, the paramaters `VPCId` and `VPCRegion` are also required.
+    #
+    #   To associate additional Amazon VPCs with the hosted zone, use
     #   [AssociateVPCWithHostedZone][1] after you create a hosted zone.
     #
     #
@@ -1564,7 +1567,7 @@ module Aws::Route53
     #   resp = client.create_hosted_zone({
     #     name: "DNSName", # required
     #     vpc: {
-    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #       vpc_id: "VPCId",
     #     },
     #     caller_reference: "Nonce", # required
@@ -1593,7 +1596,7 @@ module Aws::Route53
     #   resp.delegation_set.caller_reference #=> String
     #   resp.delegation_set.name_servers #=> Array
     #   resp.delegation_set.name_servers[0] #=> String
-    #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "af-south-1", "eu-south-1"
+    #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "af-south-1", "eu-south-1"
     #   resp.vpc.vpc_id #=> String
     #   resp.location #=> String
     #
@@ -1616,14 +1619,14 @@ module Aws::Route53
     #   The unique string (ID) used to identify a hosted zone.
     #
     # @option params [required, String] :key_management_service_arn
-    #   The Amazon resource name (ARN) for a customer managed customer master
-    #   key (CMK) in Key Management Service (KMS). The
-    #   `KeyManagementServiceArn` must be unique for each key-signing key
-    #   (KSK) in a single hosted zone. To see an example of
-    #   `KeyManagementServiceArn` that grants the correct permissions for
-    #   DNSSEC, scroll down to **Example**.
+    #   The Amazon resource name (ARN) for a customer managed key in Key
+    #   Management Service (KMS). The `KeyManagementServiceArn` must be unique
+    #   for each key-signing key (KSK) in a single hosted zone. To see an
+    #   example of `KeyManagementServiceArn` that grants the correct
+    #   permissions for DNSSEC, scroll down to **Example**.
     #
-    #   You must configure the customer managed CMK as follows:
+    #   You must configure the customer managed customer managed key as
+    #   follows:
     #
     #   Status
     #
@@ -1654,7 +1657,7 @@ module Aws::Route53
     #
     #     ^
     #
-    #   For more information about working with a customer managed CMK in KMS,
+    #   For more information about working with a customer managed key in KMS,
     #   see [Key Management Service concepts][1].
     #
     #
@@ -2203,7 +2206,7 @@ module Aws::Route53
     #   resp = client.create_vpc_association_authorization({
     #     hosted_zone_id: "ResourceId", # required
     #     vpc: { # required
-    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #       vpc_id: "VPCId",
     #     },
     #   })
@@ -2211,7 +2214,7 @@ module Aws::Route53
     # @example Response structure
     #
     #   resp.hosted_zone_id #=> String
-    #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "af-south-1", "eu-south-1"
+    #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "af-south-1", "eu-south-1"
     #   resp.vpc.vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateVPCAssociationAuthorization AWS API Documentation
@@ -2390,6 +2393,16 @@ module Aws::Route53
     # Deletes a key-signing key (KSK). Before you can delete a KSK, you must
     # deactivate it. The KSK must be deactivated before you can delete it
     # regardless of whether the hosted zone is enabled for DNSSEC signing.
+    #
+    # You can use [DeactivateKeySigningKey][1] to deactivate the key before
+    # you delete it.
+    #
+    # Use [GetDNSSEC][2] to verify that the KSK is in an `INACTIVE` status.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeactivateKeySigningKey.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetDNSSEC.html
     #
     # @option params [required, String] :hosted_zone_id
     #   A unique string used to identify a hosted zone.
@@ -2596,7 +2609,7 @@ module Aws::Route53
     #   resp = client.delete_vpc_association_authorization({
     #     hosted_zone_id: "ResourceId", # required
     #     vpc: { # required
-    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #       vpc_id: "VPCId",
     #     },
     #   })
@@ -2691,7 +2704,7 @@ module Aws::Route53
     #   resp = client.disassociate_vpc_from_hosted_zone({
     #     hosted_zone_id: "ResourceId", # required
     #     vpc: { # required
-    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #       vpc_id: "VPCId",
     #     },
     #     comment: "DisassociateVPCComment",
@@ -3068,7 +3081,7 @@ module Aws::Route53
     #   resp.health_check.health_check_config.enable_sni #=> Boolean
     #   resp.health_check.health_check_config.regions #=> Array
     #   resp.health_check.health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1"
+    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1"
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_check.health_check_config.routing_control_arn #=> String
@@ -3262,7 +3275,7 @@ module Aws::Route53
     #   resp.delegation_set.name_servers #=> Array
     #   resp.delegation_set.name_servers[0] #=> String
     #   resp.vp_cs #=> Array
-    #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "af-south-1", "eu-south-1"
+    #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "af-south-1", "eu-south-1"
     #   resp.vp_cs[0].vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZone AWS API Documentation
@@ -3737,7 +3750,7 @@ module Aws::Route53
     #   resp.health_checks[0].health_check_config.enable_sni #=> Boolean
     #   resp.health_checks[0].health_check_config.regions #=> Array
     #   resp.health_checks[0].health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-    #   resp.health_checks[0].health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1"
+    #   resp.health_checks[0].health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1"
     #   resp.health_checks[0].health_check_config.alarm_identifier.name #=> String
     #   resp.health_checks[0].health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_checks[0].health_check_config.routing_control_arn #=> String
@@ -4025,7 +4038,7 @@ module Aws::Route53
     #
     #   resp = client.list_hosted_zones_by_vpc({
     #     vpc_id: "VPCId", # required
-    #     vpc_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #     vpc_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #     max_items: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -4283,7 +4296,7 @@ module Aws::Route53
     #   resp.resource_record_sets[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
     #   resp.resource_record_sets[0].set_identifier #=> String
     #   resp.resource_record_sets[0].weight #=> Integer
-    #   resp.resource_record_sets[0].region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-north-1", "cn-northwest-1", "ap-east-1", "me-south-1", "ap-south-1", "af-south-1", "eu-south-1"
+    #   resp.resource_record_sets[0].region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-north-1", "cn-northwest-1", "ap-east-1", "me-south-1", "ap-south-1", "af-south-1", "eu-south-1"
     #   resp.resource_record_sets[0].geo_location.continent_code #=> String
     #   resp.resource_record_sets[0].geo_location.country_code #=> String
     #   resp.resource_record_sets[0].geo_location.subdivision_code #=> String
@@ -4961,7 +4974,7 @@ module Aws::Route53
     #   resp.hosted_zone_id #=> String
     #   resp.next_token #=> String
     #   resp.vp_cs #=> Array
-    #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "af-south-1", "eu-south-1"
+    #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "ap-east-1", "me-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "ca-central-1", "cn-north-1", "af-south-1", "eu-south-1"
     #   resp.vp_cs[0].vpc_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListVPCAssociationAuthorizations AWS API Documentation
@@ -5363,10 +5376,10 @@ module Aws::Route53
     #
     #   * `Unhealthy`\: Route 53 considers the health check to be unhealthy.
     #
-    #   * `LastKnownStatus`\: Route 53 uses the status of the health check
-    #     from the last time CloudWatch had sufficient data to determine the
-    #     alarm state. For new health checks that have no last known status,
-    #     the default status for the health check is healthy.
+    #   * `LastKnownStatus`\: By default, Route 53 uses the status of the
+    #     health check from the last time CloudWatch had sufficient data to
+    #     determine the alarm state. For new health checks that have no last
+    #     known status, the status for the health check is healthy.
     #
     # @option params [Array<String>] :reset_elements
     #   A complex type that contains one `ResettableElementName` element for
@@ -5413,7 +5426,7 @@ module Aws::Route53
     #     enable_sni: false,
     #     regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #     alarm_identifier: {
-    #       region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1
+    #       region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
     #       name: "AlarmName", # required
     #     },
     #     insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -5443,7 +5456,7 @@ module Aws::Route53
     #   resp.health_check.health_check_config.enable_sni #=> Boolean
     #   resp.health_check.health_check_config.regions #=> Array
     #   resp.health_check.health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-isob-east-1"
+    #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "ap-east-1", "me-south-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "eu-north-1", "sa-east-1", "cn-northwest-1", "cn-north-1", "af-south-1", "eu-south-1", "us-gov-west-1", "us-gov-east-1", "us-iso-east-1", "us-iso-west-1", "us-isob-east-1"
     #   resp.health_check.health_check_config.alarm_identifier.name #=> String
     #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
     #   resp.health_check.health_check_config.routing_control_arn #=> String
@@ -5636,7 +5649,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

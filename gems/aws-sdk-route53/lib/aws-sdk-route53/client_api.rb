@@ -2223,6 +2223,7 @@ module Aws::Route53
         o.output = Shapes::ShapeRef.new(shape: UpdateHostedZoneCommentResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
       end)
 
       api.add_operation(:update_traffic_policy_comment, Seahorse::Model::Operation.new.tap do |o|

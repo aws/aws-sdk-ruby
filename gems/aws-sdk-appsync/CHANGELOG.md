@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2021-12-06)
+------------------
+
+* Feature - AWS AppSync now supports custom domain names, allowing you to associate a domain name that you own with an AppSync API in your account.
+
 1.47.0 (2021-11-30)
 ------------------
 

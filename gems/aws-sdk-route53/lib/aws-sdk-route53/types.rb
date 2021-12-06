@@ -100,7 +100,7 @@ module Aws::Route53
     #   data as a hash:
     #
     #       {
-    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1
+    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
     #         name: "AlarmName", # required
     #       }
     #
@@ -563,7 +563,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #           vpc_id: "VPCId",
     #         },
     #         comment: "AssociateVPCComment",
@@ -623,7 +623,7 @@ module Aws::Route53
     #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #           set_identifier: "ResourceRecordSetIdentifier",
     #           weight: 1,
-    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
+    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
     #           geo_location: {
     #             continent_code: "GeoLocationContinentCode",
     #             country_code: "GeoLocationCountryCode",
@@ -701,7 +701,7 @@ module Aws::Route53
     #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #               set_identifier: "ResourceRecordSetIdentifier",
     #               weight: 1,
-    #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
+    #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
     #               geo_location: {
     #                 continent_code: "GeoLocationContinentCode",
     #                 country_code: "GeoLocationCountryCode",
@@ -806,7 +806,7 @@ module Aws::Route53
     #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #                 set_identifier: "ResourceRecordSetIdentifier",
     #                 weight: 1,
-    #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
+    #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
     #                 geo_location: {
     #                   continent_code: "GeoLocationContinentCode",
     #                   country_code: "GeoLocationCountryCode",
@@ -1094,7 +1094,7 @@ module Aws::Route53
     #           enable_sni: false,
     #           regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #           alarm_identifier: {
-    #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1
+    #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
     #             name: "AlarmName", # required
     #           },
     #           insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -1169,7 +1169,7 @@ module Aws::Route53
     #       {
     #         name: "DNSName", # required
     #         vpc: {
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #           vpc_id: "VPCId",
     #         },
     #         caller_reference: "Nonce", # required
@@ -1199,7 +1199,10 @@ module Aws::Route53
     #   about the Amazon VPC that you're associating with this hosted zone.
     #
     #   You can specify only one Amazon VPC when you create a private hosted
-    #   zone. To associate additional Amazon VPCs with the hosted zone, use
+    #   zone. If you are associating a VPC with a hosted zone with this
+    #   request, the paramaters `VPCId` and `VPCRegion` are also required.
+    #
+    #   To associate additional Amazon VPCs with the hosted zone, use
     #   [AssociateVPCWithHostedZone][1] after you create a hosted zone.
     #
     #
@@ -1309,14 +1312,14 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] key_management_service_arn
-    #   The Amazon resource name (ARN) for a customer managed customer
-    #   master key (CMK) in Key Management Service (KMS). The
-    #   `KeyManagementServiceArn` must be unique for each key-signing key
-    #   (KSK) in a single hosted zone. To see an example of
-    #   `KeyManagementServiceArn` that grants the correct permissions for
-    #   DNSSEC, scroll down to **Example**.
+    #   The Amazon resource name (ARN) for a customer managed key in Key
+    #   Management Service (KMS). The `KeyManagementServiceArn` must be
+    #   unique for each key-signing key (KSK) in a single hosted zone. To
+    #   see an example of `KeyManagementServiceArn` that grants the correct
+    #   permissions for DNSSEC, scroll down to **Example**.
     #
-    #   You must configure the customer managed CMK as follows:
+    #   You must configure the customer managed customer managed key as
+    #   follows:
     #
     #   Status
     #
@@ -1347,7 +1350,7 @@ module Aws::Route53
     #
     #     ^
     #
-    #   For more information about working with a customer managed CMK in
+    #   For more information about working with a customer managed key in
     #   KMS, see [Key Management Service concepts][1].
     #
     #
@@ -1720,7 +1723,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #           vpc_id: "VPCId",
     #         },
     #       }
@@ -1802,8 +1805,8 @@ module Aws::Route53
     #
     #   : There is a problem with signing in the hosted zone that requires
     #     you to take action to resolve. For example, the customer managed
-    #     customer master key (CMK) might have been deleted, or the
-    #     permissions for the customer managed CMK might have been changed.
+    #     key might have been deleted, or the permissions for the customer
+    #     managed key might have been changed.
     #
     #   INTERNAL\_FAILURE
     #
@@ -2192,7 +2195,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #           vpc_id: "VPCId",
     #         },
     #       }
@@ -2289,7 +2292,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #           vpc_id: "VPCId",
     #         },
     #         comment: "DisassociateVPCComment",
@@ -3353,7 +3356,7 @@ module Aws::Route53
     #         enable_sni: false,
     #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1
+    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -4276,11 +4279,10 @@ module Aws::Route53
     #
     # @!attribute [rw] kms_arn
     #   The Amazon resource name (ARN) used to identify the customer managed
-    #   customer master key (CMK) in Key Management Service (KMS). The
-    #   `KmsArn` must be unique for each key-signing key (KSK) in a single
-    #   hosted zone.
+    #   key in Key Management Service (KMS). The `KmsArn` must be unique for
+    #   each key-signing key (KSK) in a single hosted zone.
     #
-    #   You must configure the CMK as follows:
+    #   You must configure the customer managed key as follows:
     #
     #   Status
     #
@@ -4311,7 +4313,7 @@ module Aws::Route53
     #
     #     ^
     #
-    #   For more information about working with the customer managed CMK in
+    #   For more information about working with the customer managed key in
     #   KMS, see [Key Management Service concepts][1].
     #
     #
@@ -4416,9 +4418,9 @@ module Aws::Route53
     #   ACTION\_NEEDED
     #
     #   : There is a problem with the KSK that requires you to take action
-    #     to resolve. For example, the customer managed customer master key
-    #     (CMK) might have been deleted, or the permissions for the customer
-    #     managed CMK might have been changed.
+    #     to resolve. For example, the customer managed key might have been
+    #     deleted, or the permissions for the customer managed key might
+    #     have been changed.
     #
     #   INTERNAL\_FAILURE
     #
@@ -4467,7 +4469,7 @@ module Aws::Route53
     end
 
     # You've already created a key-signing key (KSK) with this name or with
-    # the same customer managed customer master key (CMK) ARN.
+    # the same customer managed key ARN.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4925,7 +4927,7 @@ module Aws::Route53
     #
     #       {
     #         vpc_id: "VPCId", # required
-    #         vpc_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #         vpc_region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #         max_items: 1,
     #         next_token: "PaginationToken",
     #       }
@@ -6419,7 +6421,7 @@ module Aws::Route53
     #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA, CAA, DS
     #         set_identifier: "ResourceRecordSetIdentifier",
     #         weight: 1,
-    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
+    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-north-1, cn-northwest-1, ap-east-1, me-south-1, ap-south-1, af-south-1, eu-south-1
     #         geo_location: {
     #           continent_code: "GeoLocationContinentCode",
     #           country_code: "GeoLocationCountryCode",
@@ -7692,7 +7694,7 @@ module Aws::Route53
     #         enable_sni: false,
     #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1
+    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, eu-west-3, ap-east-1, me-south-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, cn-northwest-1, cn-north-1, af-south-1, eu-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -8011,10 +8013,10 @@ module Aws::Route53
     #
     #   * `Unhealthy`\: Route 53 considers the health check to be unhealthy.
     #
-    #   * `LastKnownStatus`\: Route 53 uses the status of the health check
-    #     from the last time CloudWatch had sufficient data to determine the
-    #     alarm state. For new health checks that have no last known status,
-    #     the default status for the health check is healthy.
+    #   * `LastKnownStatus`\: By default, Route 53 uses the status of the
+    #     health check from the last time CloudWatch had sufficient data to
+    #     determine the alarm state. For new health checks that have no last
+    #     known status, the status for the health check is healthy.
     #   @return [String]
     #
     # @!attribute [rw] reset_elements
@@ -8243,11 +8245,19 @@ module Aws::Route53
     # (Private hosted zones only) A complex type that contains information
     # about an Amazon VPC.
     #
+    # If you associate a private hosted zone with an Amazon VPC when you
+    # make a [CreateHostedZone][1] request, the following parameters are
+    # also required.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html
+    #
     # @note When making an API call, you may pass VPC
     #   data as a hash:
     #
     #       {
-    #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
+    #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, ap-east-1, me-south-1, us-gov-west-1, us-gov-east-1, us-iso-east-1, us-iso-west-1, us-isob-east-1, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-south-1, ap-northeast-1, ap-northeast-2, ap-northeast-3, eu-north-1, sa-east-1, ca-central-1, cn-north-1, af-south-1, eu-south-1
     #         vpc_id: "VPCId",
     #       }
     #
