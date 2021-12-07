@@ -34,6 +34,7 @@ module Seahorse
           ssl_ca_bundle: nil,
           ssl_ca_directory: nil,
           ssl_ca_store: nil,
+          ssl_timeout: nil
         }
 
         # @api private
@@ -248,6 +249,7 @@ module Seahorse
               :ssl_ca_bundle => options[:ssl_ca_bundle],
               :ssl_ca_directory => options[:ssl_ca_directory],
               :ssl_ca_store => options[:ssl_ca_store],
+              :ssl_timeout => options[:ssl_timeout]
             }
           end
 
@@ -285,6 +287,8 @@ module Seahorse
 
           if endpoint.scheme == 'https'
             http.use_ssl = true
+            http.ssl_timeout = ssl_timeout
+
             if ssl_verify_peer?
               http.verify_mode = OpenSSL::SSL::VERIFY_PEER
               http.ca_file = ssl_ca_bundle if ssl_ca_bundle

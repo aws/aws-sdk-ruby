@@ -30,6 +30,8 @@ module Seahorse
 
         option(:ssl_ca_store, default: nil, doc_type: String, docstring: '')
 
+        option(:ssl_timeout, default: nil, doc_type: Float, docstring: '')
+
         option(:logger) # for backwards compat
 
         handler(Client::NetHttp::Handler, step: :send)
