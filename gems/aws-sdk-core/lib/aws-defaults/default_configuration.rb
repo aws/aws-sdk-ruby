@@ -9,7 +9,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-require_relative 'configuration-mode-defaults-resolver'
+require_relative 'configuration_mode_defaults_resolver'
 
 module Aws
   module ConfigurationDefaults
