@@ -5,6 +5,10 @@ module Aws
     #@api private
     class ConfigurationModeDefaultsResolver
 
+      @@current_region = nil
+      @@current_region_mutex = Mutex.new
+      @@imds_client = EC2Metadata.new(retries: 0)
+
       # mappings from Ruby SDK configuration names to the
       # sdk defaults option names and (optionally) scale modifiers
       CFG_OPTIONS = {
@@ -13,7 +17,7 @@ module Aws
         s3_us_east_1_regional_endpoint: { name: "s3UsEast1RegionalEndpoints" },
         http_open_timeout: { name: "connectTimeoutInMillis", scale: 0.001 },
         http_read_timeout: { name: "timeToFirstByteTimeoutInMillis", scale: 0.001 },
-        http_ssl_timeout: { name: "tlsNegotiationTimeoutInMillis", scale: 0.001 }
+        ssl_timeout: { name: "tlsNegotiationTimeoutInMillis", scale: 0.001 }
       }.freeze
 
       def initialize(sdk_defaults, cfg)
@@ -47,8 +51,39 @@ module Aws
       end
 
       def resolve_auto_mode
-        # TODO: implement logic
-        'standard'
+        return "mobile" if env_mobile?
+
+        region = current_region
+
+        if region
+          @cfg.region == region ? "in-region": "cross-region"
+        else
+          # We don't seem to be mobile, and we couldn't determine whether we're running within an AWS region. Fall back to standard.
+          'standard'
+        end
+      end
+
+      def current_region
+        resolved_region = @@current_region_mutex.synchronize do
+          return @@current_region unless @@current_region.nil?
+
+          region = nil
+          if ENV['AWS_EXECUTION_ENV']
+            region = ENV['AWS_REGION'] || ENV['AWS_DEFAULT_REGION']
+          end
+
+          if region.nil? && ENV['AWS_EC2_METADATA_DISABLED']&.downcase != "true"
+            begin
+              region = @@imds_client.get('/latest/meta-data/placement/region')
+            rescue
+              # unable to get region, leave it unset
+            end
+          end
+
+          # required so that we cache the unknown/nil result
+          @@current_region = region || :unknown
+        end
+        resolved_region == :unknown ? nil : resolved_region
       end
 
       def resolve_for_mode(name, mode)
@@ -65,6 +100,11 @@ module Aws
         return base_value * mode_value['multiply'] unless mode_value['multiply'].nil?
         return base_value
       end
+
+      def env_mobile?
+        false
+      end
+
     end
   end
 end
