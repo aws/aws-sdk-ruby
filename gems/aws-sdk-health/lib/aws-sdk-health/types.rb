@@ -1716,7 +1716,8 @@ module Aws::Health
     #
     #   * Your Amazon Web Services account doesn't include the Amazon Web
     #     Services Support plan required to use the Health API. You must
-    #     have either a Business or Enterprise Support plan.
+    #     have either a Business, Enterprise On-Ramp, or Enterprise Support
+    #     plan.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/OrganizationEventDetailsErrorItem AWS API Documentation

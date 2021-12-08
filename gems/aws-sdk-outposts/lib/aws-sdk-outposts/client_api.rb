@@ -147,6 +147,8 @@ module Aws::Outposts
     Token = Shapes::StringShape.new(name: 'Token')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateOutpostInput = Shapes::StructureShape.new(name: 'UpdateOutpostInput')
+    UpdateOutpostOutput = Shapes::StructureShape.new(name: 'UpdateOutpostOutput')
     UpdateSiteAddressInput = Shapes::StructureShape.new(name: 'UpdateSiteAddressInput')
     UpdateSiteAddressOutput = Shapes::StructureShape.new(name: 'UpdateSiteAddressOutput')
     UpdateSiteInput = Shapes::StructureShape.new(name: 'UpdateSiteInput')
@@ -454,6 +456,15 @@ module Aws::Outposts
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateOutpostInput.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, required: true, location: "uri", location_name: "OutpostId"))
+    UpdateOutpostInput.add_member(:name, Shapes::ShapeRef.new(shape: OutpostName, location_name: "Name"))
+    UpdateOutpostInput.add_member(:description, Shapes::ShapeRef.new(shape: OutpostDescription, location_name: "Description"))
+    UpdateOutpostInput.add_member(:supported_hardware_type, Shapes::ShapeRef.new(shape: SupportedHardwareType, location_name: "SupportedHardwareType"))
+    UpdateOutpostInput.struct_class = Types::UpdateOutpostInput
+
+    UpdateOutpostOutput.add_member(:outpost, Shapes::ShapeRef.new(shape: Outpost, location_name: "Outpost"))
+    UpdateOutpostOutput.struct_class = Types::UpdateOutpostOutput
 
     UpdateSiteAddressInput.add_member(:site_id, Shapes::ShapeRef.new(shape: SiteId, required: true, location: "uri", location_name: "SiteId"))
     UpdateSiteAddressInput.add_member(:address_type, Shapes::ShapeRef.new(shape: AddressType, required: true, location_name: "AddressType"))
@@ -764,6 +775,19 @@ module Aws::Outposts
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:update_outpost, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateOutpost"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/outposts/{OutpostId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateOutpostInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateOutpostOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:update_site, Seahorse::Model::Operation.new.tap do |o|

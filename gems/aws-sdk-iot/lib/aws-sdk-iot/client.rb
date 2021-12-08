@@ -1063,6 +1063,15 @@ module Aws::IoT
     #   Specifies whether IoT validates the token signature in an
     #   authorization request.
     #
+    # @option params [Boolean] :enable_caching_for_http
+    #   When `true`, the result from the authorizer’s Lambda function is
+    #   cached for clients that use persistent HTTP connections. The results
+    #   are cached for the time specified by the Lambda function in
+    #   `refreshAfterInSeconds`. This value does not affect authorization of
+    #   clients that use MQTT connections.
+    #
+    #   The default value is `false`.
+    #
     # @return [Types::CreateAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAuthorizerResponse#authorizer_name #authorizer_name} => String
@@ -1085,6 +1094,7 @@ module Aws::IoT
     #       },
     #     ],
     #     signing_disabled: false,
+    #     enable_caching_for_http: false,
     #   })
     #
     # @example Response structure
@@ -4845,6 +4855,7 @@ module Aws::IoT
     #   resp.authorizer_description.creation_date #=> Time
     #   resp.authorizer_description.last_modified_date #=> Time
     #   resp.authorizer_description.signing_disabled #=> Boolean
+    #   resp.authorizer_description.enable_caching_for_http #=> Boolean
     #
     # @overload describe_authorizer(params = {})
     # @param [Hash] params ({})
@@ -5059,6 +5070,7 @@ module Aws::IoT
     #   resp.authorizer_description.creation_date #=> Time
     #   resp.authorizer_description.last_modified_date #=> Time
     #   resp.authorizer_description.signing_disabled #=> Boolean
+    #   resp.authorizer_description.enable_caching_for_http #=> Boolean
     #
     # @overload describe_default_authorizer(params = {})
     # @param [Hash] params ({})
@@ -12115,6 +12127,11 @@ module Aws::IoT
     # @option params [String] :status
     #   The status of the update authorizer request.
     #
+    # @option params [Boolean] :enable_caching_for_http
+    #   When `true`, the result from the authorizer’s Lambda function is
+    #   cached for the time specified in `refreshAfterInSeconds`. The cached
+    #   result is used while the device reuses the same HTTP connection.
+    #
     # @return [Types::UpdateAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAuthorizerResponse#authorizer_name #authorizer_name} => String
@@ -12130,6 +12147,7 @@ module Aws::IoT
     #       "KeyName" => "KeyValue",
     #     },
     #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     enable_caching_for_http: false,
     #   })
     #
     # @example Response structure
@@ -13508,7 +13526,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

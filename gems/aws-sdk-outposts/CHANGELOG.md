@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2021-12-08)
+------------------
+
+* Feature - This release adds the UpdateOutpost API.
+
 1.25.0 (2021-11-30)
 ------------------
 

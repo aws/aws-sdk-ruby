@@ -485,6 +485,7 @@ module Aws::IoT
     ElasticsearchId = Shapes::StringShape.new(name: 'ElasticsearchId')
     ElasticsearchIndex = Shapes::StringShape.new(name: 'ElasticsearchIndex')
     ElasticsearchType = Shapes::StringShape.new(name: 'ElasticsearchType')
+    EnableCachingForHttp = Shapes::BooleanShape.new(name: 'EnableCachingForHttp')
     EnableIoTLoggingParams = Shapes::StructureShape.new(name: 'EnableIoTLoggingParams')
     EnableTopicRuleRequest = Shapes::StructureShape.new(name: 'EnableTopicRuleRequest')
     Enabled = Shapes::BooleanShape.new(name: 'Enabled')
@@ -1528,6 +1529,7 @@ module Aws::IoT
     AuthorizerDescription.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "creationDate"))
     AuthorizerDescription.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastModifiedDate"))
     AuthorizerDescription.add_member(:signing_disabled, Shapes::ShapeRef.new(shape: BooleanKey, location_name: "signingDisabled"))
+    AuthorizerDescription.add_member(:enable_caching_for_http, Shapes::ShapeRef.new(shape: EnableCachingForHttp, location_name: "enableCachingForHttp"))
     AuthorizerDescription.struct_class = Types::AuthorizerDescription
 
     AuthorizerSummary.add_member(:authorizer_name, Shapes::ShapeRef.new(shape: AuthorizerName, location_name: "authorizerName"))
@@ -1776,6 +1778,7 @@ module Aws::IoT
     CreateAuthorizerRequest.add_member(:status, Shapes::ShapeRef.new(shape: AuthorizerStatus, location_name: "status"))
     CreateAuthorizerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateAuthorizerRequest.add_member(:signing_disabled, Shapes::ShapeRef.new(shape: BooleanKey, location_name: "signingDisabled"))
+    CreateAuthorizerRequest.add_member(:enable_caching_for_http, Shapes::ShapeRef.new(shape: EnableCachingForHttp, location_name: "enableCachingForHttp"))
     CreateAuthorizerRequest.struct_class = Types::CreateAuthorizerRequest
 
     CreateAuthorizerResponse.add_member(:authorizer_name, Shapes::ShapeRef.new(shape: AuthorizerName, location_name: "authorizerName"))
@@ -4507,6 +4510,7 @@ module Aws::IoT
     UpdateAuthorizerRequest.add_member(:token_key_name, Shapes::ShapeRef.new(shape: TokenKeyName, location_name: "tokenKeyName"))
     UpdateAuthorizerRequest.add_member(:token_signing_public_keys, Shapes::ShapeRef.new(shape: PublicKeyMap, location_name: "tokenSigningPublicKeys"))
     UpdateAuthorizerRequest.add_member(:status, Shapes::ShapeRef.new(shape: AuthorizerStatus, location_name: "status"))
+    UpdateAuthorizerRequest.add_member(:enable_caching_for_http, Shapes::ShapeRef.new(shape: EnableCachingForHttp, location_name: "enableCachingForHttp"))
     UpdateAuthorizerRequest.struct_class = Types::UpdateAuthorizerRequest
 
     UpdateAuthorizerResponse.add_member(:authorizer_name, Shapes::ShapeRef.new(shape: AuthorizerName, location_name: "authorizerName"))

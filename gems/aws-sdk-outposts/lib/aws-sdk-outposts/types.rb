@@ -273,7 +273,7 @@ module Aws::Outposts
     #   @return [String]
     #
     # @!attribute [rw] site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -441,7 +441,7 @@ module Aws::Outposts
     #       }
     #
     # @!attribute [rw] outpost_id
-    #   The ID of the Outpost.
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteOutpostInput AWS API Documentation
@@ -464,7 +464,7 @@ module Aws::Outposts
     #       }
     #
     # @!attribute [rw] site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteSiteInput AWS API Documentation
@@ -573,7 +573,7 @@ module Aws::Outposts
     #       }
     #
     # @!attribute [rw] outpost_id
-    #   The ID of the Outpost.
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostInput AWS API Documentation
@@ -594,7 +594,7 @@ module Aws::Outposts
     #       }
     #
     # @!attribute [rw] outpost_id
-    #   The ID of the Outpost.
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -663,7 +663,7 @@ module Aws::Outposts
     #       }
     #
     # @!attribute [rw] site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
     #
     # @!attribute [rw] address_type
@@ -709,7 +709,7 @@ module Aws::Outposts
     #       }
     #
     # @!attribute [rw] site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetSiteInput AWS API Documentation
@@ -1507,6 +1507,55 @@ module Aws::Outposts
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateOutpostInput
+    #   data as a hash:
+    #
+    #       {
+    #         outpost_id: "OutpostId", # required
+    #         name: "OutpostName",
+    #         description: "OutpostDescription",
+    #         supported_hardware_type: "RACK", # accepts RACK, SERVER
+    #       }
+    #
+    # @!attribute [rw] outpost_id
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_hardware_type
+    #   The type of hardware for this Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UpdateOutpostInput AWS API Documentation
+    #
+    class UpdateOutpostInput < Struct.new(
+      :outpost_id,
+      :name,
+      :description,
+      :supported_hardware_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] outpost
+    #   Information about an Outpost.
+    #   @return [Types::Outpost]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UpdateOutpostOutput AWS API Documentation
+    #
+    class UpdateOutpostOutput < Struct.new(
+      :outpost)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateSiteAddressInput
     #   data as a hash:
     #
@@ -1529,7 +1578,7 @@ module Aws::Outposts
     #       }
     #
     # @!attribute [rw] site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
     #
     # @!attribute [rw] address_type
@@ -1578,7 +1627,7 @@ module Aws::Outposts
     #       }
     #
     # @!attribute [rw] site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1633,7 +1682,7 @@ module Aws::Outposts
     #       }
     #
     # @!attribute [rw] site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #   @return [String]
     #
     # @!attribute [rw] power_draw_kva

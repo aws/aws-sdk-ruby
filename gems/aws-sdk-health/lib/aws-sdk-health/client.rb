@@ -1302,11 +1302,11 @@ module Aws::Health
     #
     # <note markdown="1"> To call this operation, you must meet the following requirements:
     #
-    #  * You must have a Business or Enterprise Support plan from [Amazon Web
-    #   Services Support][1] to use the Health API. If you call the Health
-    #   API from an Amazon Web Services account that doesn't have a
-    #   Business or Enterprise Support plan, you receive a
-    #   `SubscriptionRequiredException` error.
+    #  * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan from [Amazon Web Services Support][1] to use the Health API. If
+    #   you call the Health API from an Amazon Web Services account that
+    #   doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, you receive a `SubscriptionRequiredException` error.
     #
     # * You must have permission to call this operation from the
     #   organization's management account. For example IAM policies, see
@@ -1349,7 +1349,7 @@ module Aws::Health
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

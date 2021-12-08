@@ -1869,6 +1869,23 @@ module Aws::CloudWatchLogs
     #   their log events to the associated destination. This can be up to 5120
     #   bytes.
     #
+    # @option params [Boolean] :force_update
+    #   Specify true if you are updating an existing destination policy to
+    #   grant permission to an organization ID instead of granting permission
+    #   to individual AWS accounts. Before you update a destination policy
+    #   this way, you must first update the subscription filters in the
+    #   accounts that send logs to this destination. If you do not, the
+    #   subscription filters might stop working. By specifying `true` for
+    #   `forceUpdate`, you are affirming that you have already updated the
+    #   subscription filters. For more information, see [ Updating an existing
+    #   cross-account subscription][1]
+    #
+    #   If you omit this parameter, the default of `false` is used.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Cross-Account-Log_Subscription-Update.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1876,6 +1893,7 @@ module Aws::CloudWatchLogs
     #   resp = client.put_destination_policy({
     #     destination_name: "DestinationName", # required
     #     access_policy: "AccessPolicy", # required
+    #     force_update: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationPolicy AWS API Documentation
@@ -2166,7 +2184,7 @@ module Aws::CloudWatchLogs
     #   [aws:SourceAccount][2] condition context keys.
     #
     #   In the example resource policy, you would replace the value of
-    #   `SourceArn` with the resource making the call from Route 53 to
+    #   `SourceArn` with the resource making the call from Route 53 to
     #   CloudWatch Logs and replace the value of `SourceAccount` with the
     #   Amazon Web Services account ID making that call.
     #
@@ -2602,7 +2620,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

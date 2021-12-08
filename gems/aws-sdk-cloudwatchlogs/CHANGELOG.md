@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2021-12-08)
+------------------
+
+* Feature - This release adds AWS Organizations support as condition key in destination policy for cross account Subscriptions in CloudWatch Logs.
+
 1.48.0 (2021-11-30)
 ------------------
 

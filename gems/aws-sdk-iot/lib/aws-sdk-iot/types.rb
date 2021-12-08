@@ -1463,6 +1463,12 @@ module Aws::IoT
     #   authorization request.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_caching_for_http
+    #   When `true`, the result from the authorizer’s Lambda function is
+    #   cached for the time specified in `refreshAfterInSeconds`. The cached
+    #   result is used while the device reuses the same HTTP connection.
+    #   @return [Boolean]
+    #
     class AuthorizerDescription < Struct.new(
       :authorizer_name,
       :authorizer_arn,
@@ -1472,7 +1478,8 @@ module Aws::IoT
       :status,
       :creation_date,
       :last_modified_date,
-      :signing_disabled)
+      :signing_disabled,
+      :enable_caching_for_http)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2828,6 +2835,7 @@ module Aws::IoT
     #           },
     #         ],
     #         signing_disabled: false,
+    #         enable_caching_for_http: false,
     #       }
     #
     # @!attribute [rw] authorizer_name
@@ -2872,6 +2880,16 @@ module Aws::IoT
     #   authorization request.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_caching_for_http
+    #   When `true`, the result from the authorizer’s Lambda function is
+    #   cached for clients that use persistent HTTP connections. The results
+    #   are cached for the time specified by the Lambda function in
+    #   `refreshAfterInSeconds`. This value does not affect authorization of
+    #   clients that use MQTT connections.
+    #
+    #   The default value is `false`.
+    #   @return [Boolean]
+    #
     class CreateAuthorizerRequest < Struct.new(
       :authorizer_name,
       :authorizer_function_arn,
@@ -2879,7 +2897,8 @@ module Aws::IoT
       :token_signing_public_keys,
       :status,
       :tags,
-      :signing_disabled)
+      :signing_disabled,
+      :enable_caching_for_http)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18626,6 +18645,7 @@ module Aws::IoT
     #           "KeyName" => "KeyValue",
     #         },
     #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #         enable_caching_for_http: false,
     #       }
     #
     # @!attribute [rw] authorizer_name
@@ -18648,12 +18668,19 @@ module Aws::IoT
     #   The status of the update authorizer request.
     #   @return [String]
     #
+    # @!attribute [rw] enable_caching_for_http
+    #   When `true`, the result from the authorizer’s Lambda function is
+    #   cached for the time specified in `refreshAfterInSeconds`. The cached
+    #   result is used while the device reuses the same HTTP connection.
+    #   @return [Boolean]
+    #
     class UpdateAuthorizerRequest < Struct.new(
       :authorizer_name,
       :authorizer_function_arn,
       :token_key_name,
       :token_signing_public_keys,
-      :status)
+      :status,
+      :enable_caching_for_http)
       SENSITIVE = []
       include Aws::Structure
     end

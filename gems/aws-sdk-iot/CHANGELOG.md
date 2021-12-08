@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2021-12-08)
+------------------
+
+* Feature - This release allows customer to enable caching of custom authorizer on HTTP protocol for clients that use persistent or Keep-Alive connection in order to reduce the number of Lambda invocations.
+
 1.80.0 (2021-11-30)
 ------------------
 
