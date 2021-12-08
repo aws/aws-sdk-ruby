@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 module Aws
   module ConfigurationDefaults
 
-    describe ConfigurationModeDefaultsResolver do
+    describe DefaultsModeConfigResolver do
       let(:test_case_defaults) do
         dir = File.expand_path('../../fixtures/defaults', __FILE__)
         Json.load_file("#{dir}/default-resolution.json")
@@ -20,7 +20,7 @@ module Aws
         )
       end
       let(:subject) do
-        ConfigurationModeDefaultsResolver.new(test_case_defaults, cfg)
+        DefaultsModeConfigResolver.new(test_case_defaults, cfg)
       end
 
       context 'defaults_mode is standard' do
@@ -90,8 +90,8 @@ module Aws
         let(:imds_client) { double('imds_client') }
         before do
           # bust the cache
-          ConfigurationModeDefaultsResolver.class_variable_set(:@@current_region, nil)
-          ConfigurationModeDefaultsResolver.class_variable_set(:@@imds_client, imds_client)
+          DefaultsModeConfigResolver.class_variable_set(:@@current_region, nil)
+          DefaultsModeConfigResolver.class_variable_set(:@@imds_client, imds_client)
         end
 
         context 'mobile' do

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `:defaults_mode` configuration - TBD.
+
 3.124.0 (2021-11-30)
 ------------------
 

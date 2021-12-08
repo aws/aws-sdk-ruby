@@ -43,7 +43,8 @@ module BuildTools
           'Aws::Plugins::RegionalEndpoint',
           'Aws::Plugins::EndpointDiscovery',
           'Aws::Plugins::EndpointPattern',
-          'Aws::Plugins::CredentialsConfiguration'
+          'Aws::Plugins::CredentialsConfiguration',
+          'Aws::Plugins::DefaultsMode'
         ]
       )
     end

@@ -20,6 +20,12 @@ module Aws
         expect(client.config.retry_mode).to eq('adaptive')
       end
 
+      it 'can configure retry_mode using defaults mode' do
+        allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+          .to receive(:resolve).with(:retry_mode).and_return('standard')
+        expect(client.config.retry_mode).to eq('standard')
+      end
+
       it 'raises when retry_mode is not legacy, standard, or adaptive' do
         ENV['AWS_RETRY_MODE'] = 'peccy'
         expect { client }.to raise_error(ArgumentError)

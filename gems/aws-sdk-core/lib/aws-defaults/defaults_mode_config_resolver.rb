@@ -3,7 +3,7 @@
 module Aws
   module ConfigurationDefaults
     #@api private
-    class ConfigurationModeDefaultsResolver
+    class DefaultsModeConfigResolver
 
       @@current_region = nil
       @@current_region_mutex = Mutex.new
@@ -31,7 +31,7 @@ module Aws
       # returns the ruby appropriate value or nil if none are resolved
       def resolve(option_name)
         return unless (std_option = CFG_OPTIONS[option_name])
-        mode = resolved_mode
+        mode = resolved_mode.downcase
 
         return nil if mode == 'legacy'
 
