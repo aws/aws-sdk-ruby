@@ -64,6 +64,19 @@ module Aws
             'https://sts.us-west-2.amazonaws.com')
         end
 
+        it 'can be set from defaults_mode' do
+          allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+            .to receive(:resolve).with(:sts_regional_endpoints).and_return('regional')
+          client = Client.new(
+            stub_responses: true,
+            region: 'us-west-2'
+          )
+          expect(client.config.sts_regional_endpoints).to eq('regional')
+          resp = client.get_caller_identity
+          expect(resp.context.http_request.endpoint.to_s).to eq(
+                                                               'https://sts.us-west-2.amazonaws.com')
+        end
+
         it 'has no effect on fips endpoint' do
           allow(Aws::Plugins::RegionalEndpoint).to receive(:warn)
 
