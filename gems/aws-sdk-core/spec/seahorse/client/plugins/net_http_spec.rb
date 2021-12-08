@@ -11,6 +11,7 @@ module Seahorse
           Configuration.new.tap do |config|
             config.add_option(:profile, nil)
             NetHttp.new.add_options(config)
+            Aws::Plugins::DefaultsMode.new.add_options(config)
           end.build!
         end
 
@@ -19,12 +20,28 @@ module Seahorse
             expect(config.http_proxy).to eq(nil)
           end
 
+          it 'uses defaults mode for http_open_timeout' do
+            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+              .to receive(:resolve)
+            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+              .to receive(:resolve).with(:http_open_timeout).and_return(10)
+            expect(config.http_open_timeout).to eq(10)
+          end
+
           it 'adds a :http_open_timeout option with default' do
             expect(config.http_open_timeout).to eq(15)
           end
 
           it 'adds a :http_read_timeout option with default' do
             expect(config.http_read_timeout).to eq(60)
+          end
+
+          it 'uses defaults mode for http_read_timeout' do
+            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+              .to receive(:resolve)
+            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+              .to receive(:resolve).with(:http_read_timeout).and_return(10)
+            expect(config.http_read_timeout).to eq(10)
           end
 
           it 'adds a :http_idle_timeout option with default' do
@@ -45,6 +62,18 @@ module Seahorse
 
           it 'adds a :ssl_verify_peer option with default' do
             expect(config.ssl_verify_peer).to eq(true)
+          end
+
+          it 'adds a :ssl_timeout option with no default' do
+            expect(config.ssl_timeout).to eq(nil)
+          end
+
+          it 'uses defaults mode for ssl_timeout' do
+            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+              .to receive(:resolve)
+            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+              .to receive(:resolve).with(:ssl_timeout).and_return(10)
+            expect(config.ssl_timeout).to eq(10)
           end
 
           context ':ssl_ca_bundle' do

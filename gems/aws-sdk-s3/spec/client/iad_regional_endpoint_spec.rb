@@ -73,9 +73,6 @@ module Aws
             defaults_mode: 'standard'
           )
           expect(client.config.s3_us_east_1_regional_endpoint).to eq('regional')
-          resp = client.list_buckets
-          expect(resp.context.http_request.endpoint.to_s).to eq(
-                                                               'https://s3.us-east-1.amazonaws.com/')
         end
 
         it 'is case insensitive' do
