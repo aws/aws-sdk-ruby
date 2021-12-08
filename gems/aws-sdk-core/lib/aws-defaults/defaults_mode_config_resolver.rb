@@ -7,7 +7,7 @@ module Aws
 
       @@current_region = nil
       @@current_region_mutex = Mutex.new
-      @@imds_client = EC2Metadata.new(retries: 0)
+      @@imds_client = EC2Metadata.new(retries: 0, http_open_timeout: 0.01)
 
       # mappings from Ruby SDK configuration names to the
       # sdk defaults option names and (optionally) scale modifiers

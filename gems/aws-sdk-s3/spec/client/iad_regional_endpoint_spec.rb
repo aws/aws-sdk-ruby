@@ -63,6 +63,21 @@ module Aws
             'https://s3.us-east-1.amazonaws.com/')
         end
 
+        it 'can be set through defaults mode' do
+          allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+            .to receive(:resolve).with(:s3_us_east_1_regional_endpoint).and_return('regional')
+          client = Client.new(
+            stub_responses: true,
+            region: 'us-west-2',
+            retry_mode: 'standard',
+            defaults_mode: 'standard'
+          )
+          expect(client.config.s3_us_east_1_regional_endpoint).to eq('regional')
+          resp = client.list_buckets
+          expect(resp.context.http_request.endpoint.to_s).to eq(
+                                                               'https://s3.us-east-1.amazonaws.com/')
+        end
+
         it 'is case insensitive' do
           ENV['AWS_S3_US_EAST_1_REGIONAL_ENDPOINT'] = 'LEGACY'
           client = Client.new(
