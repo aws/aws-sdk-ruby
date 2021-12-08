@@ -66,15 +66,14 @@ module Aws
 
         it 'can be set from defaults_mode' do
           allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
-            .to receive(:resolve).with(:sts_regional_endpoints).and_return('regional')
+            .to receive(:resolve).with(:sts_regional_endpoints).and_return('legacy')
           client = Client.new(
             stub_responses: true,
-            region: 'us-west-2'
+            region: 'us-west-2',
+            retry_mode: 'standard',
+            defaults_mode: 'standard'
           )
-          expect(client.config.sts_regional_endpoints).to eq('regional')
-          resp = client.get_caller_identity
-          expect(resp.context.http_request.endpoint.to_s).to eq(
-                                                               'https://sts.us-west-2.amazonaws.com')
+          expect(client.config.sts_regional_endpoints).to eq('legacy')
         end
 
         it 'has no effect on fips endpoint' do
