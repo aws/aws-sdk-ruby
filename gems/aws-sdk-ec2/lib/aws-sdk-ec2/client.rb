@@ -22151,6 +22151,11 @@ module Aws::EC2
     #   resp.internet_gateways[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * internet_gateway_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGateways AWS API Documentation
     #
     # @overload describe_internet_gateways(params = {})
@@ -48729,7 +48734,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.286.0'
+      context[:gem_version] = '1.287.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -48811,6 +48816,7 @@ module Aws::EC2
     # | instance_status_ok              | {Client#describe_instance_status}         | 15       | 40            |
     # | instance_stopped                | {Client#describe_instances}               | 15       | 40            |
     # | instance_terminated             | {Client#describe_instances}               | 15       | 40            |
+    # | internet_gateway_exists         | {Client#describe_internet_gateways}       | 5        | 6             |
     # | key_pair_exists                 | {Client#describe_key_pairs}               | 5        | 6             |
     # | nat_gateway_available           | {Client#describe_nat_gateways}            | 15       | 40            |
     # | network_interface_available     | {Client#describe_network_interfaces}      | 20       | 10            |
@@ -48893,6 +48899,7 @@ module Aws::EC2
         instance_status_ok: Waiters::InstanceStatusOk,
         instance_stopped: Waiters::InstanceStopped,
         instance_terminated: Waiters::InstanceTerminated,
+        internet_gateway_exists: Waiters::InternetGatewayExists,
         key_pair_exists: Waiters::KeyPairExists,
         nat_gateway_available: Waiters::NatGatewayAvailable,
         network_interface_available: Waiters::NetworkInterfaceAvailable,

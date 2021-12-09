@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2021-12-09)
+------------------
+
+* Feature - This release adds support for managed rule groups.
+
 1.11.0 (2021-11-30)
 ------------------
 

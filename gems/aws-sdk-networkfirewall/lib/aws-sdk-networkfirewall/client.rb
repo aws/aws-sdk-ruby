@@ -704,6 +704,9 @@ module Aws::NetworkFirewall
     #         {
     #           resource_arn: "ResourceArn", # required
     #           priority: 1,
+    #           override: {
+    #             action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
+    #           },
     #         },
     #       ],
     #       stateful_default_actions: ["CollectionMember_String"],
@@ -1319,6 +1322,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy.stateful_rule_group_references #=> Array
     #   resp.firewall_policy.stateful_rule_group_references[0].resource_arn #=> String
     #   resp.firewall_policy.stateful_rule_group_references[0].priority #=> Integer
+    #   resp.firewall_policy.stateful_rule_group_references[0].override.action #=> String, one of "DROP_TO_ALERT"
     #   resp.firewall_policy.stateful_default_actions #=> Array
     #   resp.firewall_policy.stateful_default_actions[0] #=> String
     #   resp.firewall_policy.stateful_engine_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
@@ -1517,6 +1521,68 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # High-level information about a rule group, returned by operations like
+    # create and describe. You can use the information provided in the
+    # metadata to retrieve and manage a rule group. You can retrieve all
+    # objects for a rule group by calling DescribeRuleGroup.
+    #
+    # @option params [String] :rule_group_name
+    #   The descriptive name of the rule group. You can't change the name of
+    #   a rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :rule_group_arn
+    #   The descriptive name of the rule group. You can't change the name of
+    #   a rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #
+    # @option params [String] :type
+    #   Indicates whether the rule group is stateless or stateful. If the rule
+    #   group is stateless, it contains stateless rules. If it is stateful, it
+    #   contains stateful rules.
+    #
+    #   <note markdown="1"> This setting is required for requests that do not include the
+    #   `RuleGroupARN`.
+    #
+    #    </note>
+    #
+    # @return [Types::DescribeRuleGroupMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRuleGroupMetadataResponse#rule_group_arn #rule_group_arn} => String
+    #   * {Types::DescribeRuleGroupMetadataResponse#rule_group_name #rule_group_name} => String
+    #   * {Types::DescribeRuleGroupMetadataResponse#description #description} => String
+    #   * {Types::DescribeRuleGroupMetadataResponse#type #type} => String
+    #   * {Types::DescribeRuleGroupMetadataResponse#capacity #capacity} => Integer
+    #   * {Types::DescribeRuleGroupMetadataResponse#stateful_rule_options #stateful_rule_options} => Types::StatefulRuleOptions
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_rule_group_metadata({
+    #     rule_group_name: "ResourceName",
+    #     rule_group_arn: "ResourceArn",
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_group_arn #=> String
+    #   resp.rule_group_name #=> String
+    #   resp.description #=> String
+    #   resp.type #=> String, one of "STATELESS", "STATEFUL"
+    #   resp.capacity #=> Integer
+    #   resp.stateful_rule_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupMetadata AWS API Documentation
+    #
+    # @overload describe_rule_group_metadata(params = {})
+    # @param [Hash] params ({})
+    def describe_rule_group_metadata(params = {}, options = {})
+      req = build_request(:describe_rule_group_metadata, params)
+      req.send_request(options)
+    end
+
     # Removes the specified subnet associations from the firewall. This
     # removes the firewall endpoints from the subnets and removes any
     # network filtering protections that the endpoints were providing.
@@ -1707,6 +1773,11 @@ module Aws::NetworkFirewall
     #   Network Firewall provides a `NextToken` value that you can use in a
     #   subsequent call to get the next batch of objects.
     #
+    # @option params [String] :scope
+    #   The scope of the request. The default setting of `ACCOUNT` or a
+    #   setting of `NULL` returns all of the rule groups in your account. A
+    #   setting of `MANAGED` returns all available managed rule groups.
+    #
     # @return [Types::ListRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRuleGroupsResponse#next_token #next_token} => String
@@ -1719,6 +1790,7 @@ module Aws::NetworkFirewall
     #   resp = client.list_rule_groups({
     #     next_token: "PaginationToken",
     #     max_results: 1,
+    #     scope: "MANAGED", # accepts MANAGED, ACCOUNT
     #   })
     #
     # @example Response structure
@@ -2176,6 +2248,9 @@ module Aws::NetworkFirewall
     #         {
     #           resource_arn: "ResourceArn", # required
     #           priority: 1,
+    #           override: {
+    #             action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
+    #           },
     #         },
     #       ],
     #       stateful_default_actions: ["CollectionMember_String"],
@@ -2211,6 +2286,11 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # Modifies the flag, `ChangeProtection`, which indicates whether it is
+    # possible to change the firewall. If the flag is set to `TRUE`, the
+    # firewall is protected from changes. This setting helps protect against
+    # accidentally changing a firewall that's in use.
+    #
     # @option params [String] :update_token
     #   An optional token that you can use for optimistic locking. Network
     #   Firewall returns a token to your requests that access the firewall.
@@ -2669,7 +2749,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

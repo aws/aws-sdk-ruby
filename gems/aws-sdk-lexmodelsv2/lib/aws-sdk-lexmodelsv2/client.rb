@@ -2318,7 +2318,7 @@ module Aws::LexModelsV2
     #   values that help train the machine learning model about the values
     #   that it resolves for a slot.
     #
-    # @option params [required, Types::SlotValueSelectionSetting] :value_selection_setting
+    # @option params [Types::SlotValueSelectionSetting] :value_selection_setting
     #   Determines the strategy that Amazon Lex uses to select a value from
     #   the list of possible values. The field can be set to one of the
     #   following values:
@@ -2356,6 +2356,9 @@ module Aws::LexModelsV2
     #
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
+    # @option params [Types::ExternalSourceSetting] :external_source_setting
+    #   Sets the type of external information used to create the slot type.
+    #
     # @return [Types::CreateSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSlotTypeResponse#slot_type_id #slot_type_id} => String
@@ -2368,6 +2371,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateSlotTypeResponse#bot_version #bot_version} => String
     #   * {Types::CreateSlotTypeResponse#locale_id #locale_id} => String
     #   * {Types::CreateSlotTypeResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::CreateSlotTypeResponse#external_source_setting #external_source_setting} => Types::ExternalSourceSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -2386,7 +2390,7 @@ module Aws::LexModelsV2
     #         ],
     #       },
     #     ],
-    #     value_selection_setting: { # required
+    #     value_selection_setting: {
     #       resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution
     #       regex_filter: {
     #         pattern: "RegexPattern", # required
@@ -2396,6 +2400,15 @@ module Aws::LexModelsV2
     #     bot_id: "Id", # required
     #     bot_version: "DraftBotVersion", # required
     #     locale_id: "LocaleId", # required
+    #     external_source_setting: {
+    #       grammar_slot_type_setting: {
+    #         source: {
+    #           s3_bucket_name: "S3BucketName", # required
+    #           s3_object_key: "S3ObjectPath", # required
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2414,6 +2427,9 @@ module Aws::LexModelsV2
     #   resp.bot_version #=> String
     #   resp.locale_id #=> String
     #   resp.creation_date_time #=> Time
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_bucket_name #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_object_key #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlotType AWS API Documentation
     #
@@ -3133,6 +3149,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeBotLocaleResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::DescribeBotLocaleResponse#last_build_submitted_date_time #last_build_submitted_date_time} => Time
     #   * {Types::DescribeBotLocaleResponse#bot_locale_history_events #bot_locale_history_events} => Array&lt;Types::BotLocaleHistoryEvent&gt;
+    #   * {Types::DescribeBotLocaleResponse#recommended_actions #recommended_actions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3163,6 +3180,8 @@ module Aws::LexModelsV2
     #   resp.bot_locale_history_events #=> Array
     #   resp.bot_locale_history_events[0].event #=> String
     #   resp.bot_locale_history_events[0].event_date #=> Time
+    #   resp.recommended_actions #=> Array
+    #   resp.recommended_actions[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3929,6 +3948,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeSlotTypeResponse#locale_id #locale_id} => String
     #   * {Types::DescribeSlotTypeResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::DescribeSlotTypeResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::DescribeSlotTypeResponse#external_source_setting #external_source_setting} => Types::ExternalSourceSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -3956,6 +3976,9 @@ module Aws::LexModelsV2
     #   resp.locale_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_bucket_name #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_object_key #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeSlotType AWS API Documentation
     #
@@ -4973,7 +4996,7 @@ module Aws::LexModelsV2
     #     },
     #     filters: [
     #       {
-    #         name: "SlotTypeName", # required, accepts SlotTypeName
+    #         name: "SlotTypeName", # required, accepts SlotTypeName, ExternalSourceType
     #         values: ["FilterValue"], # required
     #         operator: "CO", # required, accepts CO, EQ
     #       },
@@ -4993,6 +5016,7 @@ module Aws::LexModelsV2
     #   resp.slot_type_summaries[0].description #=> String
     #   resp.slot_type_summaries[0].parent_slot_type_signature #=> String
     #   resp.slot_type_summaries[0].last_updated_date_time #=> Time
+    #   resp.slot_type_summaries[0].slot_type_category #=> String, one of "Custom", "Extended", "ExternalGrammar"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListSlotTypes AWS API Documentation
@@ -5746,6 +5770,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateBotLocaleResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
     #   * {Types::UpdateBotLocaleResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateBotLocaleResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::UpdateBotLocaleResponse#recommended_actions #recommended_actions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5776,6 +5801,8 @@ module Aws::LexModelsV2
     #   resp.failure_reasons[0] #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.recommended_actions #=> Array
+    #   resp.recommended_actions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocale AWS API Documentation
     #
@@ -7211,7 +7238,7 @@ module Aws::LexModelsV2
     #   A new list of values and their optional synonyms that define the
     #   values that the slot type can take.
     #
-    # @option params [required, Types::SlotValueSelectionSetting] :value_selection_setting
+    # @option params [Types::SlotValueSelectionSetting] :value_selection_setting
     #   The strategy that Amazon Lex should use when deciding on a value from
     #   the list of slot type values.
     #
@@ -7234,6 +7261,10 @@ module Aws::LexModelsV2
     #
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
+    # @option params [Types::ExternalSourceSetting] :external_source_setting
+    #   Provides information about the external source of the slot type's
+    #   definition.
+    #
     # @return [Types::UpdateSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSlotTypeResponse#slot_type_id #slot_type_id} => String
@@ -7247,6 +7278,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateSlotTypeResponse#locale_id #locale_id} => String
     #   * {Types::UpdateSlotTypeResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateSlotTypeResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::UpdateSlotTypeResponse#external_source_setting #external_source_setting} => Types::ExternalSourceSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -7266,7 +7298,7 @@ module Aws::LexModelsV2
     #         ],
     #       },
     #     ],
-    #     value_selection_setting: { # required
+    #     value_selection_setting: {
     #       resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution
     #       regex_filter: {
     #         pattern: "RegexPattern", # required
@@ -7276,6 +7308,15 @@ module Aws::LexModelsV2
     #     bot_id: "Id", # required
     #     bot_version: "DraftBotVersion", # required
     #     locale_id: "LocaleId", # required
+    #     external_source_setting: {
+    #       grammar_slot_type_setting: {
+    #         source: {
+    #           s3_bucket_name: "S3BucketName", # required
+    #           s3_object_key: "S3ObjectPath", # required
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -7295,6 +7336,9 @@ module Aws::LexModelsV2
     #   resp.locale_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_bucket_name #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_object_key #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlotType AWS API Documentation
     #
@@ -7318,7 +7362,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

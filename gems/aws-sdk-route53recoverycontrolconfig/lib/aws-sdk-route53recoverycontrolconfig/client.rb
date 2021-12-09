@@ -343,17 +343,21 @@ module Aws::Route53RecoveryControlConfig
     # state of one or more routing controls. Each cluster has a name,
     # status, Amazon Resource Name (ARN), and an array of the five cluster
     # endpoints (one for each supported Amazon Web Services Region) that you
-    # can use with API calls to the Amazon Route 53 Application Recovery
-    # Controller cluster data plane.
+    # can use with API calls to the cluster data plane.
     #
     # @option params [String] :client_token
-    #   Unique client idempotency token.
+    #   A unique, case-sensitive string of up to 64 ASCII characters. To make
+    #   an idempotent API request with an action, specify a client token in
+    #   the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :cluster_name
     #   The name of the cluster.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags associated with the cluster.
     #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -362,8 +366,11 @@ module Aws::Route53RecoveryControlConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_cluster({
-    #     client_token: "__stringMax64",
+    #     client_token: "__stringMin1Max64PatternS",
     #     cluster_name: "__stringMin1Max64PatternS", # required
+    #     tags: {
+    #       "__string" => "__stringMin0Max256PatternS",
+    #     },
     #   })
     #
     # @example Response structure
@@ -389,10 +396,12 @@ module Aws::Route53RecoveryControlConfig
     # You can use a control panel to centrally view the operational status
     # of applications across your organization, and trigger multi-app
     # failovers in a single transaction, for example, to fail over an
-    # Availability Zone or AWS Region.
+    # Availability Zone or Amazon Web Services Region.
     #
     # @option params [String] :client_token
-    #   Unique client idempotency token.
+    #   A unique, case-sensitive string of up to 64 ASCII characters. To make
+    #   an idempotent API request with an action, specify a client token in
+    #   the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -403,6 +412,9 @@ module Aws::Route53RecoveryControlConfig
     # @option params [required, String] :control_panel_name
     #   The name of the control panel.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags associated with the control panel.
+    #
     # @return [Types::CreateControlPanelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateControlPanelResponse#control_panel #control_panel} => Types::ControlPanel
@@ -410,9 +422,12 @@ module Aws::Route53RecoveryControlConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_control_panel({
-    #     client_token: "__stringMax64",
-    #     cluster_arn: "__string", # required
+    #     client_token: "__stringMin1Max64PatternS",
+    #     cluster_arn: "__stringMin1Max256PatternAZaZ09", # required
     #     control_panel_name: "__stringMin1Max64PatternS", # required
+    #     tags: {
+    #       "__string" => "__stringMin0Max256PatternS",
+    #     },
     #   })
     #
     # @example Response structure
@@ -444,7 +459,9 @@ module Aws::Route53RecoveryControlConfig
     # Controller.
     #
     # @option params [String] :client_token
-    #   Unique client idempotency token.
+    #   A unique, case-sensitive string of up to 64 ASCII characters. To make
+    #   an idempotent API request with an action, specify a client token in
+    #   the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -467,9 +484,9 @@ module Aws::Route53RecoveryControlConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_routing_control({
-    #     client_token: "__stringMax64",
-    #     cluster_arn: "__string", # required
-    #     control_panel_arn: "__string",
+    #     client_token: "__stringMin1Max64PatternS",
+    #     cluster_arn: "__stringMin1Max256PatternAZaZ09", # required
+    #     control_panel_arn: "__stringMin1Max256PatternAZaZ09",
     #     routing_control_name: "__stringMin1Max64PatternS", # required
     #   })
     #
@@ -490,32 +507,46 @@ module Aws::Route53RecoveryControlConfig
     end
 
     # Creates a safety rule in a control panel. Safety rules let you add
-    # safeguards around enabling and disabling routing controls, to help
-    # prevent unexpected outcomes.
+    # safeguards around changing routing control states, and for enabling
+    # and disabling routing controls, to help prevent unexpected outcomes.
     #
     # There are two types of safety rules: assertion rules and gating rules.
     #
-    # Assertion rule: An assertion rule enforces that, when a routing
-    # control state is changed, the criteria set by the rule configuration
-    # is met. Otherwise, the change to the routing control is not accepted.
+    # Assertion rule: An assertion rule enforces that, when you change a
+    # routing control state, that a certain criteria is met. For example,
+    # the criteria might be that at least one routing control state is On
+    # after the transation so that traffic continues to flow to at least one
+    # cell for the application. This ensures that you avoid a fail-open
+    # scenario.
     #
-    # Gating rule: A gating rule verifies that a set of gating controls
-    # evaluates as true, based on a rule configuration that you specify. If
-    # the gating rule evaluates to true, Amazon Route 53 Application
-    # Recovery Controller allows a set of routing control state changes to
-    # run and complete against the set of target controls.
+    # Gating rule: A gating rule lets you configure a gating routing control
+    # as an overall "on/off" switch for a group of routing controls. Or,
+    # you can configure more complex gating scenarios, for example by
+    # configuring multiple gating routing controls.
+    #
+    # For more information, see [Safety rules][1] in the Amazon Route 53
+    # Application Recovery Controller Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.safety-rules.html
     #
     # @option params [Types::NewAssertionRule] :assertion_rule
-    #   A new assertion rule for a control panel.
+    #   The assertion rule requested.
     #
     # @option params [String] :client_token
-    #   Unique client idempotency token.
+    #   A unique, case-sensitive string of up to 64 ASCII characters. To make
+    #   an idempotent API request with an action, specify a client token in
+    #   the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Types::NewGatingRule] :gating_rule
-    #   A new gating rule for a control panel.
+    #   The gating rule requested.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags associated with the safety rule.
     #
     # @return [Types::CreateSafetyRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -526,8 +557,8 @@ module Aws::Route53RecoveryControlConfig
     #
     #   resp = client.create_safety_rule({
     #     assertion_rule: {
-    #       asserted_controls: ["__string"], # required
-    #       control_panel_arn: "__string", # required
+    #       asserted_controls: ["__stringMin1Max256PatternAZaZ09"], # required
+    #       control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
     #       name: "__stringMin1Max64PatternS", # required
     #       rule_config: { # required
     #         inverted: false, # required
@@ -536,18 +567,21 @@ module Aws::Route53RecoveryControlConfig
     #       },
     #       wait_period_ms: 1, # required
     #     },
-    #     client_token: "__stringMax64",
+    #     client_token: "__stringMin1Max64PatternS",
     #     gating_rule: {
-    #       control_panel_arn: "__string", # required
-    #       gating_controls: ["__string"], # required
+    #       control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
+    #       gating_controls: ["__stringMin1Max256PatternAZaZ09"], # required
     #       name: "__stringMin1Max64PatternS", # required
     #       rule_config: { # required
     #         inverted: false, # required
     #         threshold: 1, # required
     #         type: "ATLEAST", # required, accepts ATLEAST, AND, OR
     #       },
-    #       target_controls: ["__string"], # required
+    #       target_controls: ["__stringMin1Max256PatternAZaZ09"], # required
     #       wait_period_ms: 1, # required
+    #     },
+    #     tags: {
+    #       "__string" => "__stringMin0Max256PatternS",
     #     },
     #   })
     #
@@ -791,8 +825,7 @@ module Aws::Route53RecoveryControlConfig
       req.send_request(options)
     end
 
-    # Describes the safety rules (that is, the assertion rules and gating
-    # rules) for the routing controls in a control panel.
+    # Returns information about a safety rule.
     #
     # @option params [required, String] :safety_rule_arn
     #
@@ -920,7 +953,7 @@ module Aws::Route53RecoveryControlConfig
       req.send_request(options)
     end
 
-    # Returns an array of control panels for a cluster.
+    # Returns an array of control panels in an account or in a cluster.
     #
     # @option params [String] :cluster_arn
     #
@@ -1068,6 +1101,85 @@ module Aws::Route53RecoveryControlConfig
       req.send_request(options)
     end
 
+    # Lists the tags for a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds a tag to a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags associated with the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags: { # required
+    #       "__string" => "__stringMin0Max256PatternS",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes a tag from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates a control panel. The only update you can make to a control
     # panel is to change the name of the control panel.
     #
@@ -1084,7 +1196,7 @@ module Aws::Route53RecoveryControlConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_control_panel({
-    #     control_panel_arn: "__string", # required
+    #     control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
     #     control_panel_name: "__stringMin1Max64PatternS", # required
     #   })
     #
@@ -1124,7 +1236,7 @@ module Aws::Route53RecoveryControlConfig
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_routing_control({
-    #     routing_control_arn: "__string", # required
+    #     routing_control_arn: "__stringMin1Max256PatternAZaZ09", # required
     #     routing_control_name: "__stringMin1Max64PatternS", # required
     #   })
     #
@@ -1144,20 +1256,15 @@ module Aws::Route53RecoveryControlConfig
       req.send_request(options)
     end
 
-    # Update a safety rule (an assertion rule or gating rule) for the
-    # routing controls in a control panel. You can only update the name and
-    # the waiting period for a safety rule. To make other updates, delete
-    # the safety rule and create a new safety rule.
+    # Update a safety rule (an assertion rule or gating rule). You can only
+    # update the name and the waiting period for a safety rule. To make
+    # other updates, delete the safety rule and create a new one.
     #
     # @option params [Types::AssertionRuleUpdate] :assertion_rule_update
-    #   An update to an assertion rule. You can update the name or the
-    #   evaluation period (wait period). If you don't specify one of the
-    #   items to update, the item is unchanged.
+    #   The assertion rule to update.
     #
     # @option params [Types::GatingRuleUpdate] :gating_rule_update
-    #   Update to a gating rule. You can update the name or the evaluation
-    #   period (wait period). If you don't specify one of the items to
-    #   update, the item is unchanged.
+    #   The gating rule to update.
     #
     # @return [Types::UpdateSafetyRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1169,12 +1276,12 @@ module Aws::Route53RecoveryControlConfig
     #   resp = client.update_safety_rule({
     #     assertion_rule_update: {
     #       name: "__stringMin1Max64PatternS", # required
-    #       safety_rule_arn: "__string", # required
+    #       safety_rule_arn: "__stringMin1Max256PatternAZaZ09", # required
     #       wait_period_ms: 1, # required
     #     },
     #     gating_rule_update: {
     #       name: "__stringMin1Max64PatternS", # required
-    #       safety_rule_arn: "__string", # required
+    #       safety_rule_arn: "__stringMin1Max256PatternAZaZ09", # required
     #       wait_period_ms: 1, # required
     #     },
     #   })
@@ -1226,7 +1333,7 @@ module Aws::Route53RecoveryControlConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53recoverycontrolconfig'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.287.0 (2021-12-09)
+------------------
+
+* Feature - Adds waiters support for internet gateways.
+
 1.286.0 (2021-12-01)
 ------------------
 

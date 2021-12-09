@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-12-09)
+------------------
+
+* Feature - This release adds SMS discontinuation information to the API and CLI references.
+
 1.35.0 (2021-11-30)
 ------------------
 

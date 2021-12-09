@@ -361,6 +361,9 @@ module Aws::NetworkFirewall
     #             {
     #               resource_arn: "ResourceArn", # required
     #               priority: 1,
+    #               override: {
+    #                 action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
+    #               },
     #             },
     #           ],
     #           stateful_default_actions: ["CollectionMember_String"],
@@ -1291,6 +1294,109 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeRuleGroupMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rule_group_name: "ResourceName",
+    #         rule_group_arn: "ResourceArn",
+    #         type: "STATELESS", # accepts STATELESS, STATEFUL
+    #       }
+    #
+    # @!attribute [rw] rule_group_name
+    #   The descriptive name of the rule group. You can't change the name
+    #   of a rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_group_arn
+    #   The descriptive name of the rule group. You can't change the name
+    #   of a rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Indicates whether the rule group is stateless or stateful. If the
+    #   rule group is stateless, it contains stateless rules. If it is
+    #   stateful, it contains stateful rules.
+    #
+    #   <note markdown="1"> This setting is required for requests that do not include the
+    #   `RuleGroupARN`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupMetadataRequest AWS API Documentation
+    #
+    class DescribeRuleGroupMetadataRequest < Struct.new(
+      :rule_group_name,
+      :rule_group_arn,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_group_arn
+    #   The descriptive name of the rule group. You can't change the name
+    #   of a rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_group_name
+    #   The descriptive name of the rule group. You can't change the name
+    #   of a rule group after you create it.
+    #
+    #   You must specify the ARN or the name, and you can specify both.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Returns the metadata objects for the specified rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Indicates whether the rule group is stateless or stateful. If the
+    #   rule group is stateless, it contains stateless rules. If it is
+    #   stateful, it contains stateful rules.
+    #
+    #   <note markdown="1"> This setting is required for requests that do not include the
+    #   `RuleGroupARN`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity
+    #   The maximum operating resources that this rule group can use. Rule
+    #   group capacity is fixed at creation. When you update a rule group,
+    #   you are limited to this capacity. When you reference a rule group
+    #   from a firewall policy, Network Firewall reserves this capacity for
+    #   the rule group.
+    #
+    #   You can retrieve the capacity that would be required for a rule
+    #   group before you create the rule group by calling CreateRuleGroup
+    #   with `DryRun` set to `TRUE`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stateful_rule_options
+    #   Additional options governing how Network Firewall handles the rule
+    #   group. You can only use these for stateful rule groups.
+    #   @return [Types::StatefulRuleOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupMetadataResponse AWS API Documentation
+    #
+    class DescribeRuleGroupMetadataResponse < Struct.new(
+      :rule_group_arn,
+      :rule_group_name,
+      :description,
+      :type,
+      :capacity,
+      :stateful_rule_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeRuleGroupRequest
     #   data as a hash:
     #
@@ -1667,6 +1773,9 @@ module Aws::NetworkFirewall
     #           {
     #             resource_arn: "ResourceArn", # required
     #             priority: 1,
+    #             override: {
+    #               action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
+    #             },
     #           },
     #         ],
     #         stateful_default_actions: ["CollectionMember_String"],
@@ -1728,7 +1837,25 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] stateful_default_actions
     #   The default actions to take on a packet that doesn't match any
-    #   stateful rules.
+    #   stateful rules. The stateful default action is optional, and is only
+    #   valid when using the strict rule order.
+    #
+    #   Valid values of the stateful default action:
+    #
+    #   * aws:drop\_strict
+    #
+    #   * aws:drop\_established
+    #
+    #   * aws:alert\_strict
+    #
+    #   * aws:alert\_established
+    #
+    #   For more information, see [Strict evaluation order][1] in the *AWS
+    #   Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-strict-rule-evaluation-order.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] stateful_engine_options
@@ -2243,6 +2370,7 @@ module Aws::NetworkFirewall
     #       {
     #         next_token: "PaginationToken",
     #         max_results: 1,
+    #         scope: "MANAGED", # accepts MANAGED, ACCOUNT
     #       }
     #
     # @!attribute [rw] next_token
@@ -2260,11 +2388,18 @@ module Aws::NetworkFirewall
     #   use in a subsequent call to get the next batch of objects.
     #   @return [Integer]
     #
+    # @!attribute [rw] scope
+    #   The scope of the request. The default setting of `ACCOUNT` or a
+    #   setting of `NULL` returns all of the rule groups in your account. A
+    #   setting of `MANAGED` returns all available managed rule groups.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListRuleGroupsRequest AWS API Documentation
     #
     class ListRuleGroupsRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3309,9 +3444,8 @@ module Aws::NetworkFirewall
     #       }
     #
     # @!attribute [rw] targets
-    #   The domains that you want to inspect for in your traffic flows. To
-    #   provide multiple domains, separate them with commas. Valid domain
-    #   specifications are the following:
+    #   The domains that you want to inspect for in your traffic flows.
+    #   Valid domain specifications are the following:
     #
     #   * Explicit names. For example, `abc.example.com` matches only the
     #     domain `abc.example.com`.
@@ -3354,13 +3488,15 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] rule_order
     #   Indicates how to manage the order of stateful rule evaluation for
-    #   the policy. By default, Network Firewall leaves the rule evaluation
-    #   order up to the Suricata rule processing engine. If you set this to
-    #   `STRICT_ORDER`, your rules are evaluated in the exact order that you
-    #   provide them in the policy. With strict ordering, the rule groups
-    #   are evaluated by order of priority, starting from the lowest number,
-    #   and the rules in each rule group are processed in the order that
-    #   they're defined.
+    #   the policy. `DEFAULT_ACTION_ORDER` is the default behavior. Stateful
+    #   rules are provided to the rule engine as Suricata compatible
+    #   strings, and Suricata evaluates them based on certain settings. For
+    #   more information, see [Evaluation order for stateful rules][1] in
+    #   the *AWS Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulEngineOptions AWS API Documentation
@@ -3446,6 +3582,29 @@ module Aws::NetworkFirewall
       include Aws::Structure
     end
 
+    # The setting that allows the policy owner to change the behavior of the
+    # rule group within a policy.
+    #
+    # @note When making an API call, you may pass StatefulRuleGroupOverride
+    #   data as a hash:
+    #
+    #       {
+    #         action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that changes the rule group from `DROP` to `ALERT`. This
+    #   only applies to managed rule groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulRuleGroupOverride AWS API Documentation
+    #
+    class StatefulRuleGroupOverride < Struct.new(
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Identifier for a single stateful rule group, used in a firewall policy
     # to refer to a rule group.
     #
@@ -3455,6 +3614,9 @@ module Aws::NetworkFirewall
     #       {
     #         resource_arn: "ResourceArn", # required
     #         priority: 1,
+    #         override: {
+    #           action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
+    #         },
     #       }
     #
     # @!attribute [rw] resource_arn
@@ -3478,11 +3640,17 @@ module Aws::NetworkFirewall
     #   on.
     #   @return [Integer]
     #
+    # @!attribute [rw] override
+    #   The action that allows the policy owner to override the behavior of
+    #   the rule group within a policy.
+    #   @return [Types::StatefulRuleGroupOverride]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulRuleGroupReference AWS API Documentation
     #
     class StatefulRuleGroupReference < Struct.new(
       :resource_arn,
-      :priority)
+      :priority,
+      :override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3499,10 +3667,15 @@ module Aws::NetworkFirewall
     #
     # @!attribute [rw] rule_order
     #   Indicates how to manage the order of the rule evaluation for the
-    #   rule group. By default, Network Firewall leaves the rule evaluation
-    #   order up to the Suricata rule processing engine. If you set this to
-    #   `STRICT_ORDER`, your rules are evaluated in the exact order that
-    #   they're listed in your Suricata rules string.
+    #   rule group. `DEFAULT_ACTION_ORDER` is the default behavior. Stateful
+    #   rules are provided to the rule engine as Suricata compatible
+    #   strings, and Suricata evaluates them based on certain settings. For
+    #   more information, see [Evaluation order for stateful rules][1] in
+    #   the *AWS Network Firewall Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/StatefulRuleOptions AWS API Documentation
@@ -4009,6 +4182,11 @@ module Aws::NetworkFirewall
     #   @return [String]
     #
     # @!attribute [rw] delete_protection
+    #   A flag indicating whether it is possible to delete the firewall. A
+    #   setting of `TRUE` indicates that the firewall is protected against
+    #   deletion. Use this setting to protect against accidentally deleting
+    #   a firewall that is in use. When you create a firewall, the operation
+    #   initializes this flag to `TRUE`.
     #   @return [Boolean]
     #
     # @!attribute [rw] update_token
@@ -4289,6 +4467,9 @@ module Aws::NetworkFirewall
     #             {
     #               resource_arn: "ResourceArn", # required
     #               priority: 1,
+    #               override: {
+    #                 action: "DROP_TO_ALERT", # accepts DROP_TO_ALERT
+    #               },
     #             },
     #           ],
     #           stateful_default_actions: ["CollectionMember_String"],

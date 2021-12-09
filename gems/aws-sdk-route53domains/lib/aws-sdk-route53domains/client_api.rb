@@ -32,8 +32,11 @@ module Aws::Route53Domains
     ContactNumber = Shapes::StringShape.new(name: 'ContactNumber')
     ContactType = Shapes::StringShape.new(name: 'ContactType')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
+    Currency = Shapes::StringShape.new(name: 'Currency')
     CurrentExpiryYear = Shapes::IntegerShape.new(name: 'CurrentExpiryYear')
     DNSSec = Shapes::StringShape.new(name: 'DNSSec')
+    DeleteDomainRequest = Shapes::StructureShape.new(name: 'DeleteDomainRequest')
+    DeleteDomainResponse = Shapes::StructureShape.new(name: 'DeleteDomainResponse')
     DeleteTagsForDomainRequest = Shapes::StructureShape.new(name: 'DeleteTagsForDomainRequest')
     DeleteTagsForDomainResponse = Shapes::StructureShape.new(name: 'DeleteTagsForDomainResponse')
     DisableDomainAutoRenewRequest = Shapes::StructureShape.new(name: 'DisableDomainAutoRenewRequest')
@@ -44,6 +47,9 @@ module Aws::Route53Domains
     DomainAvailability = Shapes::StringShape.new(name: 'DomainAvailability')
     DomainLimitExceeded = Shapes::StructureShape.new(name: 'DomainLimitExceeded')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
+    DomainPrice = Shapes::StructureShape.new(name: 'DomainPrice')
+    DomainPriceList = Shapes::ListShape.new(name: 'DomainPriceList')
+    DomainPriceName = Shapes::StringShape.new(name: 'DomainPriceName')
     DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
     DomainStatusList = Shapes::ListShape.new(name: 'DomainStatusList')
     DomainSuggestion = Shapes::StructureShape.new(name: 'DomainSuggestion')
@@ -64,6 +70,8 @@ module Aws::Route53Domains
     ExtraParamName = Shapes::StringShape.new(name: 'ExtraParamName')
     ExtraParamValue = Shapes::StringShape.new(name: 'ExtraParamValue')
     FIAuthKey = Shapes::StringShape.new(name: 'FIAuthKey')
+    FilterCondition = Shapes::StructureShape.new(name: 'FilterCondition')
+    FilterConditions = Shapes::ListShape.new(name: 'FilterConditions')
     GetContactReachabilityStatusRequest = Shapes::StructureShape.new(name: 'GetContactReachabilityStatusRequest')
     GetContactReachabilityStatusResponse = Shapes::StructureShape.new(name: 'GetContactReachabilityStatusResponse')
     GetDomainDetailRequest = Shapes::StructureShape.new(name: 'GetDomainDetailRequest')
@@ -79,10 +87,13 @@ module Aws::Route53Domains
     InvalidInput = Shapes::StructureShape.new(name: 'InvalidInput')
     InvoiceId = Shapes::StringShape.new(name: 'InvoiceId')
     LangCode = Shapes::StringShape.new(name: 'LangCode')
+    ListDomainsAttributeName = Shapes::StringShape.new(name: 'ListDomainsAttributeName')
     ListDomainsRequest = Shapes::StructureShape.new(name: 'ListDomainsRequest')
     ListDomainsResponse = Shapes::StructureShape.new(name: 'ListDomainsResponse')
     ListOperationsRequest = Shapes::StructureShape.new(name: 'ListOperationsRequest')
     ListOperationsResponse = Shapes::StructureShape.new(name: 'ListOperationsResponse')
+    ListPricesRequest = Shapes::StructureShape.new(name: 'ListPricesRequest')
+    ListPricesResponse = Shapes::StructureShape.new(name: 'ListPricesResponse')
     ListTagsForDomainRequest = Shapes::StructureShape.new(name: 'ListTagsForDomainRequest')
     ListTagsForDomainResponse = Shapes::StructureShape.new(name: 'ListTagsForDomainResponse')
     Nameserver = Shapes::StructureShape.new(name: 'Nameserver')
@@ -93,9 +104,11 @@ module Aws::Route53Domains
     OperationSummary = Shapes::StructureShape.new(name: 'OperationSummary')
     OperationSummaryList = Shapes::ListShape.new(name: 'OperationSummaryList')
     OperationType = Shapes::StringShape.new(name: 'OperationType')
+    Operator = Shapes::StringShape.new(name: 'Operator')
     PageMarker = Shapes::StringShape.new(name: 'PageMarker')
     PageMaxItems = Shapes::IntegerShape.new(name: 'PageMaxItems')
     Price = Shapes::FloatShape.new(name: 'Price')
+    PriceWithCurrency = Shapes::StructureShape.new(name: 'PriceWithCurrency')
     ReachabilityStatus = Shapes::StringShape.new(name: 'ReachabilityStatus')
     RegisterDomainRequest = Shapes::StructureShape.new(name: 'RegisterDomainRequest')
     RegisterDomainResponse = Shapes::StructureShape.new(name: 'RegisterDomainResponse')
@@ -112,6 +125,8 @@ module Aws::Route53Domains
     ResendContactReachabilityEmailResponse = Shapes::StructureShape.new(name: 'ResendContactReachabilityEmailResponse')
     RetrieveDomainAuthCodeRequest = Shapes::StructureShape.new(name: 'RetrieveDomainAuthCodeRequest')
     RetrieveDomainAuthCodeResponse = Shapes::StructureShape.new(name: 'RetrieveDomainAuthCodeResponse')
+    SortCondition = Shapes::StructureShape.new(name: 'SortCondition')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     State = Shapes::StringShape.new(name: 'State')
     String = Shapes::StringShape.new(name: 'String')
     TLDRulesViolation = Shapes::StructureShape.new(name: 'TLDRulesViolation')
@@ -121,6 +136,7 @@ module Aws::Route53Domains
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TldName = Shapes::StringShape.new(name: 'TldName')
     TransferDomainRequest = Shapes::StructureShape.new(name: 'TransferDomainRequest')
     TransferDomainResponse = Shapes::StructureShape.new(name: 'TransferDomainResponse')
     TransferDomainToAnotherAwsAccountRequest = Shapes::StructureShape.new(name: 'TransferDomainToAnotherAwsAccountRequest')
@@ -135,6 +151,8 @@ module Aws::Route53Domains
     UpdateDomainNameserversResponse = Shapes::StructureShape.new(name: 'UpdateDomainNameserversResponse')
     UpdateTagsForDomainRequest = Shapes::StructureShape.new(name: 'UpdateTagsForDomainRequest')
     UpdateTagsForDomainResponse = Shapes::StructureShape.new(name: 'UpdateTagsForDomainResponse')
+    Value = Shapes::StringShape.new(name: 'Value')
+    Values = Shapes::ListShape.new(name: 'Values')
     ViewBillingRequest = Shapes::StructureShape.new(name: 'ViewBillingRequest')
     ViewBillingResponse = Shapes::StructureShape.new(name: 'ViewBillingResponse')
     ZipCode = Shapes::StringShape.new(name: 'ZipCode')
@@ -191,6 +209,12 @@ module Aws::Route53Domains
     ContactDetail.add_member(:extra_params, Shapes::ShapeRef.new(shape: ExtraParamList, location_name: "ExtraParams"))
     ContactDetail.struct_class = Types::ContactDetail
 
+    DeleteDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    DeleteDomainRequest.struct_class = Types::DeleteDomainRequest
+
+    DeleteDomainResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    DeleteDomainResponse.struct_class = Types::DeleteDomainResponse
+
     DeleteTagsForDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     DeleteTagsForDomainRequest.add_member(:tags_to_delete, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagsToDelete"))
     DeleteTagsForDomainRequest.struct_class = Types::DeleteTagsForDomainRequest
@@ -210,6 +234,16 @@ module Aws::Route53Domains
 
     DomainLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     DomainLimitExceeded.struct_class = Types::DomainLimitExceeded
+
+    DomainPrice.add_member(:name, Shapes::ShapeRef.new(shape: DomainPriceName, location_name: "Name"))
+    DomainPrice.add_member(:registration_price, Shapes::ShapeRef.new(shape: PriceWithCurrency, location_name: "RegistrationPrice"))
+    DomainPrice.add_member(:transfer_price, Shapes::ShapeRef.new(shape: PriceWithCurrency, location_name: "TransferPrice"))
+    DomainPrice.add_member(:renewal_price, Shapes::ShapeRef.new(shape: PriceWithCurrency, location_name: "RenewalPrice"))
+    DomainPrice.add_member(:change_ownership_price, Shapes::ShapeRef.new(shape: PriceWithCurrency, location_name: "ChangeOwnershipPrice"))
+    DomainPrice.add_member(:restoration_price, Shapes::ShapeRef.new(shape: PriceWithCurrency, location_name: "RestorationPrice"))
+    DomainPrice.struct_class = Types::DomainPrice
+
+    DomainPriceList.member = Shapes::ShapeRef.new(shape: DomainPrice)
 
     DomainStatusList.member = Shapes::ShapeRef.new(shape: DomainStatus)
 
@@ -249,6 +283,13 @@ module Aws::Route53Domains
     ExtraParam.struct_class = Types::ExtraParam
 
     ExtraParamList.member = Shapes::ShapeRef.new(shape: ExtraParam)
+
+    FilterCondition.add_member(:name, Shapes::ShapeRef.new(shape: ListDomainsAttributeName, required: true, location_name: "Name"))
+    FilterCondition.add_member(:operator, Shapes::ShapeRef.new(shape: Operator, required: true, location_name: "Operator"))
+    FilterCondition.add_member(:values, Shapes::ShapeRef.new(shape: Values, required: true, location_name: "Values"))
+    FilterCondition.struct_class = Types::FilterCondition
+
+    FilterConditions.member = Shapes::ShapeRef.new(shape: FilterCondition)
 
     GetContactReachabilityStatusRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
     GetContactReachabilityStatusRequest.struct_class = Types::GetContactReachabilityStatusRequest
@@ -307,6 +348,8 @@ module Aws::Route53Domains
     InvalidInput.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidInput.struct_class = Types::InvalidInput
 
+    ListDomainsRequest.add_member(:filter_conditions, Shapes::ShapeRef.new(shape: FilterConditions, location_name: "FilterConditions"))
+    ListDomainsRequest.add_member(:sort_condition, Shapes::ShapeRef.new(shape: SortCondition, location_name: "SortCondition"))
     ListDomainsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "Marker"))
     ListDomainsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location_name: "MaxItems"))
     ListDomainsRequest.struct_class = Types::ListDomainsRequest
@@ -323,6 +366,15 @@ module Aws::Route53Domains
     ListOperationsResponse.add_member(:operations, Shapes::ShapeRef.new(shape: OperationSummaryList, required: true, location_name: "Operations"))
     ListOperationsResponse.add_member(:next_page_marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "NextPageMarker"))
     ListOperationsResponse.struct_class = Types::ListOperationsResponse
+
+    ListPricesRequest.add_member(:tld, Shapes::ShapeRef.new(shape: TldName, location_name: "Tld"))
+    ListPricesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "Marker"))
+    ListPricesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location_name: "MaxItems"))
+    ListPricesRequest.struct_class = Types::ListPricesRequest
+
+    ListPricesResponse.add_member(:prices, Shapes::ShapeRef.new(shape: DomainPriceList, required: true, location_name: "Prices"))
+    ListPricesResponse.add_member(:next_page_marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "NextPageMarker"))
+    ListPricesResponse.struct_class = Types::ListPricesResponse
 
     ListTagsForDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     ListTagsForDomainRequest.struct_class = Types::ListTagsForDomainRequest
@@ -346,6 +398,10 @@ module Aws::Route53Domains
     OperationSummary.struct_class = Types::OperationSummary
 
     OperationSummaryList.member = Shapes::ShapeRef.new(shape: OperationSummary)
+
+    PriceWithCurrency.add_member(:price, Shapes::ShapeRef.new(shape: Price, required: true, location_name: "Price"))
+    PriceWithCurrency.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, required: true, location_name: "Currency"))
+    PriceWithCurrency.struct_class = Types::PriceWithCurrency
 
     RegisterDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     RegisterDomainRequest.add_member(:idn_lang_code, Shapes::ShapeRef.new(shape: LangCode, location_name: "IdnLangCode"))
@@ -389,6 +445,10 @@ module Aws::Route53Domains
 
     RetrieveDomainAuthCodeResponse.add_member(:auth_code, Shapes::ShapeRef.new(shape: DomainAuthCode, required: true, location_name: "AuthCode"))
     RetrieveDomainAuthCodeResponse.struct_class = Types::RetrieveDomainAuthCodeResponse
+
+    SortCondition.add_member(:name, Shapes::ShapeRef.new(shape: ListDomainsAttributeName, required: true, location_name: "Name"))
+    SortCondition.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
+    SortCondition.struct_class = Types::SortCondition
 
     TLDRulesViolation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TLDRulesViolation.struct_class = Types::TLDRulesViolation
@@ -461,6 +521,8 @@ module Aws::Route53Domains
 
     UpdateTagsForDomainResponse.struct_class = Types::UpdateTagsForDomainResponse
 
+    Values.member = Shapes::ShapeRef.new(shape: Value)
+
     ViewBillingRequest.add_member(:start, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Start"))
     ViewBillingRequest.add_member(:end, Shapes::ShapeRef.new(shape: Timestamp, location_name: "End"))
     ViewBillingRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "Marker"))
@@ -498,6 +560,7 @@ module Aws::Route53Domains
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: DomainLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
       end)
 
       api.add_operation(:cancel_domain_transfer_to_another_aws_account, Seahorse::Model::Operation.new.tap do |o|
@@ -508,6 +571,7 @@ module Aws::Route53Domains
         o.output = Shapes::ShapeRef.new(shape: CancelDomainTransferToAnotherAwsAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
       end)
 
       api.add_operation(:check_domain_availability, Seahorse::Model::Operation.new.tap do |o|
@@ -527,6 +591,18 @@ module Aws::Route53Domains
         o.input = Shapes::ShapeRef.new(shape: CheckDomainTransferabilityRequest)
         o.output = Shapes::ShapeRef.new(shape: CheckDomainTransferabilityResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
+      end)
+
+      api.add_operation(:delete_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
+        o.errors << Shapes::ShapeRef.new(shape: TLDRulesViolation)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
       end)
 
@@ -658,6 +734,22 @@ module Aws::Route53Domains
         )
       end)
 
+      api.add_operation(:list_prices, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPrices"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPricesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPricesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_page_marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForDomain"
         o.http_method = "POST"
@@ -691,6 +783,7 @@ module Aws::Route53Domains
         o.output = Shapes::ShapeRef.new(shape: RejectDomainTransferFromAnotherAwsAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
       end)
 
       api.add_operation(:renew_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -750,6 +843,7 @@ module Aws::Route53Domains
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
       end)
 
       api.add_operation(:update_domain_contact, Seahorse::Model::Operation.new.tap do |o|
@@ -809,6 +903,12 @@ module Aws::Route53Domains
         o.input = Shapes::ShapeRef.new(shape: ViewBillingRequest)
         o.output = Shapes::ShapeRef.new(shape: ViewBillingResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_page_marker" => "marker"
+          }
+        )
       end)
     end
 

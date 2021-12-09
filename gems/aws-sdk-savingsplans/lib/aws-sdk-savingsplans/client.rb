@@ -345,7 +345,7 @@ module Aws::SavingsPlans
     #
     # @option params [required, String] :commitment
     #   The hourly commitment, in USD. This is a value between 0.001 and 1
-    #   million. You cannot specify more than three digits after the decimal
+    #   million. You cannot specify more than five digits after the decimal
     #   point.
     #
     # @option params [String] :upfront_payment_amount
@@ -841,7 +841,7 @@ module Aws::SavingsPlans
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-savingsplans'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

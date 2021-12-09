@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2021-12-09)
+------------------
+
+* Feature - Adds the ability to specify Savings Plans hourly commitments using five digits after the decimal point.
+
 1.22.0 (2021-11-30)
 ------------------
 

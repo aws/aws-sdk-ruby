@@ -78,8 +78,8 @@ module Aws::SMS
     #   @return [Time]
     #
     # @!attribute [rw] role_name
-    #   The name of the service role in the customer's account used by AWS
-    #   SMS.
+    #   The name of the service role in the customer's account used by
+    #   Server Migration Service.
     #   @return [String]
     #
     # @!attribute [rw] total_server_groups
@@ -290,7 +290,7 @@ module Aws::SMS
     #
     # @!attribute [rw] role_name
     #   The name of the service role in the customer's account to be used
-    #   by AWS SMS.
+    #   by Server Migration Service.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -379,7 +379,7 @@ module Aws::SMS
     #   @return [String]
     #
     # @!attribute [rw] role_name
-    #   The name of the IAM role to be used by the AWS SMS.
+    #   The name of the IAM role to be used by the Server Migration Service.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -663,12 +663,12 @@ module Aws::SMS
     #       }
     #
     # @!attribute [rw] app_id
-    #   The ID of the application associated with the AWS CloudFormation
+    #   The ID of the application associated with the CloudFormation
     #   template.
     #   @return [String]
     #
     # @!attribute [rw] template_format
-    #   The format for generating the AWS CloudFormation template.
+    #   The format for generating the CloudFormation template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GenerateTemplateRequest AWS API Documentation
@@ -716,7 +716,7 @@ module Aws::SMS
     #   @return [String]
     #
     # @!attribute [rw] role_name
-    #   The name of the service role in the customer's account that AWS
+    #   The name of the service role in the customer's account that
     #   CloudFormation uses to launch the application.
     #   @return [String]
     #
@@ -1107,9 +1107,9 @@ module Aws::SMS
     #
     # @!attribute [rw] role_name
     #   The name of the service role. If you omit this parameter, we create
-    #   a service-linked role for AWS Migration Hub in your account.
-    #   Otherwise, the role that you provide must have the [policy and trust
-    #   policy][1] described in the *AWS Migration Hub User Guide*.
+    #   a service-linked role for Migration Hub in your account. Otherwise,
+    #   the role that you provide must have the [policy and trust policy][1]
+    #   described in the *Migration Hub User Guide*.
     #
     #
     #
@@ -1426,7 +1426,7 @@ module Aws::SMS
     #   @return [String]
     #
     # @!attribute [rw] role_name
-    #   The name of service role in the customer's account that AWS
+    #   The name of service role in the customer's account that
     #   CloudFormation uses to launch the application.
     #   @return [String]
     #
@@ -1648,7 +1648,7 @@ module Aws::SMS
     #   @return [String]
     #
     # @!attribute [rw] role_name
-    #   The name of the IAM role to be used by AWS SMS.
+    #   The name of the IAM role to be used by Server Migration Service.
     #   @return [String]
     #
     # @!attribute [rw] latest_ami_id
@@ -1932,7 +1932,7 @@ module Aws::SMS
     #   @return [String]
     #
     # @!attribute [rw] command
-    #   The command to run the validation script
+    #   The command to run the validation script.
     #   @return [String]
     #
     # @!attribute [rw] execution_timeout_seconds
@@ -2308,7 +2308,7 @@ module Aws::SMS
     #   @return [Types::Server]
     #
     # @!attribute [rw] logical_id
-    #   The logical ID of the server in the AWS CloudFormation template.
+    #   The logical ID of the server in the CloudFormation template.
     #   @return [String]
     #
     # @!attribute [rw] vpc
@@ -2835,8 +2835,8 @@ module Aws::SMS
     #   @return [String]
     #
     # @!attribute [rw] role_name
-    #   The name of the service role in the customer's account used by AWS
-    #   SMS.
+    #   The name of the service role in the customer's account used by
+    #   Server Migration Service.
     #   @return [String]
     #
     # @!attribute [rw] server_groups
@@ -2915,7 +2915,7 @@ module Aws::SMS
     #   @return [String]
     #
     # @!attribute [rw] role_name
-    #   The name of the IAM role to be used by AWS SMS.
+    #   The name of the IAM role to be used by Server Migration Service.
     #   @return [String]
     #
     # @!attribute [rw] description
