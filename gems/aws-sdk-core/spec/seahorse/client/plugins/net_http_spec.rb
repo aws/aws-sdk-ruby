@@ -21,9 +21,9 @@ module Seahorse
           end
 
           it 'uses defaults mode for http_open_timeout' do
-            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+            allow_any_instance_of(Aws::DefaultsModeConfigResolver)
               .to receive(:resolve)
-            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+            allow_any_instance_of(Aws::DefaultsModeConfigResolver)
               .to receive(:resolve).with(:http_open_timeout).and_return(10)
             expect(config.http_open_timeout).to eq(10)
           end
@@ -37,9 +37,9 @@ module Seahorse
           end
 
           it 'uses defaults mode for http_read_timeout' do
-            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+            allow_any_instance_of(Aws::DefaultsModeConfigResolver)
               .to receive(:resolve)
-            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+            allow_any_instance_of(Aws::DefaultsModeConfigResolver)
               .to receive(:resolve).with(:http_read_timeout).and_return(10)
             expect(config.http_read_timeout).to eq(10)
           end
@@ -69,9 +69,9 @@ module Seahorse
           end
 
           it 'uses defaults mode for ssl_timeout' do
-            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+            allow_any_instance_of(Aws::DefaultsModeConfigResolver)
               .to receive(:resolve)
-            allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+            allow_any_instance_of(Aws::DefaultsModeConfigResolver)
               .to receive(:resolve).with(:ssl_timeout).and_return(10)
             expect(config.ssl_timeout).to eq(10)
           end

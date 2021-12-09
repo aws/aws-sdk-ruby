@@ -22,7 +22,9 @@ module Aws
       end
 
       it 'can configure retry_mode using defaults mode' do
-        allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+        allow_any_instance_of(Aws::DefaultsModeConfigResolver)
+          .to receive(:resolve)
+        allow_any_instance_of(Aws::DefaultsModeConfigResolver)
           .to receive(:resolve).with(:retry_mode).and_return('standard')
         expect(client.config.retry_mode).to eq('standard')
       end

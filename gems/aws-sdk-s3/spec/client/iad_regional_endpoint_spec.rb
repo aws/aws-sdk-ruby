@@ -64,7 +64,9 @@ module Aws
         end
 
         it 'can be set through defaults mode' do
-          allow_any_instance_of(Aws::ConfigurationDefaults::DefaultsModeConfigResolver)
+          allow_any_instance_of(Aws::DefaultsModeConfigResolver)
+            .to receive(:resolve)
+          allow_any_instance_of(Aws::DefaultsModeConfigResolver)
             .to receive(:resolve).with(:s3_us_east_1_regional_endpoint).and_return('regional')
           client = Client.new(
             stub_responses: true,

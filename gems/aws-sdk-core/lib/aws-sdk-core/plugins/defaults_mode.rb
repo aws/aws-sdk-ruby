@@ -17,10 +17,10 @@ TODO: See Aws::ConfigurationDefaults Documentation
       end
 
       option(:defaults_mode_config_resolver,
-             doc_type: 'Aws::ConfigurationDefaults::DefaultsModeConfigResolver',
+             doc_type: 'Aws::DefaultsModeConfigResolver',
              docstring: '') do |cfg|
-        Aws::ConfigurationDefaults::DefaultsModeConfigResolver.new(
-          Aws::ConfigurationDefaults::Defaults::SDK_DEFAULT_CONFIGURATION, cfg)
+        Aws::DefaultsModeConfigResolver.new(
+          Aws::DefaultsModeConfiguration::SDK_DEFAULT_CONFIGURATION, cfg)
       end
 
       class << self

@@ -223,7 +223,7 @@ module Aws::S3
     #   @option options [String] :defaults_mode ("legacy")
     #     TODO: See Aws::ConfigurationDefaults Documentation
     #
-    #   @option options [Aws::ConfigurationDefaults::DefaultsModeConfigResolver] :defaults_mode_config_resolver
+    #   @option options [Aws::DefaultsModeConfigResolver] :defaults_mode_config_resolver
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
