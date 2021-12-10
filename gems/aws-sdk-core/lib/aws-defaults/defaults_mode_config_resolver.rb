@@ -90,8 +90,7 @@ module Aws
       mode_value = @sdk_defaults['modes'].fetch(mode, {})[name]
 
       if mode_value.nil?
-        return mode != 'standard' ?
-                 resolve_for_mode(name, 'standard') : base_value
+        return base_value
       end
 
       return mode_value['override'] unless mode_value['override'].nil?
