@@ -4,8 +4,8 @@ module Aws
   #@api private
   class DefaultsModeConfigResolver
 
-    @@current_region = nil
-    @@current_region_mutex = Mutex.new
+    @@application_region = nil
+    @@application_region_mutex = Mutex.new
     @@imds_client = EC2Metadata.new(retries: 0, http_open_timeout: 0.01)
 
     # mappings from Ruby SDK configuration names to the
@@ -52,7 +52,7 @@ module Aws
     def resolve_auto_mode
       return "mobile" if env_mobile?
 
-      region = current_region
+      region = application_current_region
 
       if region
         @cfg.region == region ? "in-region": "cross-region"
@@ -62,9 +62,9 @@ module Aws
       end
     end
 
-    def current_region
-      resolved_region = @@current_region_mutex.synchronize do
-        return @@current_region unless @@current_region.nil?
+    def application_current_region
+      resolved_region = @@application_region_mutex.synchronize do
+        return @@application_region unless @@application_region.nil?
 
         region = nil
         if ENV['AWS_EXECUTION_ENV']
@@ -80,7 +80,7 @@ module Aws
         end
 
         # required so that we cache the unknown/nil result
-        @@current_region = region || :unknown
+        @@application_region = region || :unknown
       end
       resolved_region == :unknown ? nil : resolved_region
     end
