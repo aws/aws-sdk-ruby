@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2021-12-13)
+------------------
+
+* Feature - Documentation updates for Secrets Manager
+
 1.53.0 (2021-11-30)
 ------------------
 
