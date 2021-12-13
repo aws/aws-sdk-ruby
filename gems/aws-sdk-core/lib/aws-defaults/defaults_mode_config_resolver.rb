@@ -4,10 +4,6 @@ module Aws
   #@api private
   class DefaultsModeConfigResolver
 
-    @@current_region = nil
-    @@current_region_mutex = Mutex.new
-    @@imds_client = EC2Metadata.new(retries: 0, http_open_timeout: 0.01)
-
     # mappings from Ruby SDK configuration names to the
     # sdk defaults option names and (optional) scale modifiers
     CFG_OPTIONS = {
@@ -52,7 +48,7 @@ module Aws
     def resolve_auto_mode
       return "mobile" if env_mobile?
 
-      region = current_region
+      region = Aws.application_region
 
       if region
         @cfg.region == region ? "in-region": "cross-region"
@@ -60,29 +56,6 @@ module Aws
         # We don't seem to be mobile, and we couldn't determine whether we're running within an AWS region. Fall back to standard.
         'standard'
       end
-    end
-
-    def current_region
-      resolved_region = @@current_region_mutex.synchronize do
-        return @@current_region unless @@current_region.nil?
-
-        region = nil
-        if ENV['AWS_EXECUTION_ENV']
-          region = ENV['AWS_REGION'] || ENV['AWS_DEFAULT_REGION']
-        end
-
-        if region.nil? && ENV['AWS_EC2_METADATA_DISABLED']&.downcase != "true"
-          begin
-            region = @@imds_client.get('/latest/meta-data/placement/region')
-          rescue
-            # unable to get region, leave it unset
-          end
-        end
-
-        # required so that we cache the unknown/nil result
-        @@current_region = region || :unknown
-      end
-      resolved_region == :unknown ? nil : resolved_region
     end
 
     def resolve_for_mode(name, mode)
@@ -103,5 +76,33 @@ module Aws
       false
     end
 
+  end
+
+  @@application_region = nil
+  @@application_region_mutex = Mutex.new
+  @@imds_client = EC2Metadata.new(retries: 0)
+
+  # @api private
+  def self.application_region
+    resolved_region = @@application_region_mutex.synchronize do
+      return @@application_region unless @@application_region.nil?
+
+      region = nil
+      if ENV['AWS_EXECUTION_ENV']
+        region = ENV['AWS_REGION'] || ENV['AWS_DEFAULT_REGION']
+      end
+
+      if region.nil? && ENV['AWS_EC2_METADATA_DISABLED']&.downcase != "true"
+        begin
+          region = @@imds_client.get('/latest/meta-data/placement/region')
+        rescue
+          # unable to get region, leave it unset
+        end
+      end
+
+      # required so that we cache the unknown/nil result
+      @@application_region = region || :unknown
+    end
+    resolved_region == :unknown ? nil : resolved_region
   end
 end

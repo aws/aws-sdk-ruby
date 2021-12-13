@@ -88,8 +88,8 @@ module Aws
       let(:imds_client) { double('imds_client') }
       before do
         # bust the cache
-        DefaultsModeConfigResolver.class_variable_set(:@@current_region, nil)
-        DefaultsModeConfigResolver.class_variable_set(:@@imds_client, imds_client)
+        Aws.class_variable_set(:@@application_region, nil)
+        Aws.class_variable_set(:@@imds_client, imds_client)
       end
 
       context 'mobile' do
