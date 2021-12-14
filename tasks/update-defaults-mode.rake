@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 # updates the defaults mode configuration
-# rake update-defaults-mode DEFAULTS_FILE=/Users/alexwoo/Downloads/sdk-default-configuration.json
-task 'update-defaults-mode' do
+task 'update-defaults-mode', [:defaults_file] do |t, args|
 
-  defaults_file = ENV['DEFAULTS_FILE']
+  defaults_file = args[:defaults_file]
   if defaults_file.nil? || defaults_file.empty?
-    raise ArgumentError, 'Missing required DEFAULTS_FILE'
+    raise ArgumentError, 'Missing required defaults_file, please provide one as a rake argument.'
   end
 
   puts "Loading defaults from: #{defaults_file}"
