@@ -66,6 +66,8 @@ module Aws
 
         it 'can be set from defaults_mode' do
           allow_any_instance_of(Aws::DefaultsModeConfigResolver)
+            .to receive(:resolve)
+          allow_any_instance_of(Aws::DefaultsModeConfigResolver)
             .to receive(:resolve).with(:sts_regional_endpoints).and_return('legacy')
           client = Client.new(
             stub_responses: true,
