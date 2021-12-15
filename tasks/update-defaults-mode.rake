@@ -11,26 +11,37 @@ task 'update-defaults-mode', [:defaults_file] do |t, args|
   puts "Loading defaults from: #{defaults_file}"
   defaults = JSON.load(File.read(defaults_file))
 
-  default_mode_docs = ["  # The following `:default_mode` values are supported: \n  #\n"]
+  default_mode_docs = ["<p>The following `:default_mode` values are supported: </p>"]
+  default_mode_docs << "<ul>"
   default_mode_docs += defaults['documentation']['modes'].map do |mode, docs|
-    "  # * `'#{mode}'` - #{docs}\n  #\n"
+    docs = "<li><code>'#{mode}'</code> - #{docs}</li>"
   end
+  default_mode_docs << "</ul>"
 
-  default_mode_docs << "  #\n  #  Based on the provided mode, the SDK will vend sensible default values tailored to the mode for the following settings: \n  #\n"
-
+  default_mode_docs << "<p>Based on the provided mode, the SDK will vend sensible default values tailored to the mode for the following settings:</p>"
+  default_mode_docs << "<ul>"
   cfg_name_map = Aws::DefaultsModeConfigResolver::CFG_OPTIONS.map { |k, v| [v[:name], k]}.to_h
   default_mode_docs += defaults['documentation']['configuration'].map do |cfg_name, docs|
     ruby_name = cfg_name_map[cfg_name]
-    "  # * `:#{ruby_name}` - #{docs}\n  #\n" if ruby_name
+    if ruby_name
+      "<li><code>:#{ruby_name}</code> - #{docs}</li>"
+    end
   end.compact
-  default_mode_docs << "  #\n  # All options above can be configured by users, and the overridden value will take precedence. \n"
+  default_mode_docs << "</ul>"
+  default_mode_docs << "All options above can be configured by users, and the overridden value will take precedence."
+  default_mode_docs << "\n"
+
+  docs = default_mode_docs.join("\n\n")
+  docs = AwsSdkCodeGenerator::Docstring.html_to_markdown(docs)
+  docs = AwsSdkCodeGenerator::Docstring.join_docstrings([docs])
+  docs = "  " + AwsSdkCodeGenerator::Docstring.indent(docs)
 
   puts "Updating DefaultsModeConfiguration documentation"
   BuildTools.replace_lines(
     filename: "#{$GEMS_DIR}/aws-sdk-core/lib/aws-defaults/default_configuration.rb",
     start: /# @code_generation START - documentation/,
     stop: /# @code_generation END - documentation/,
-    new_lines: default_mode_docs
+    new_lines: [docs, "\n"]
   )
 
   defaults.delete("documentation")
