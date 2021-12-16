@@ -190,9 +190,8 @@ module Aws::DynamoDB
     #     a clock skew correction and retry requests with skewed client clocks.
     #
     #   @option options [String] :defaults_mode ("legacy")
-    #     TODO: See Aws::ConfigurationDefaults Documentation
-    #
-    #   @option options [Aws::DefaultsModeConfigResolver] :defaults_mode_config_resolver
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix

@@ -20,9 +20,9 @@ module Aws
   #  * Globally via the "AWS_DEFAULTS_MODE" environment variable.
   #
   #
-  # @code_generation START - documentation
-  # The following `:default\_mode` values are supported:
+  # The following `:default_mode` values are supported:
   #
+  # @code_generation START - modes documentation
   # * `'standard'` -
   #   The STANDARD mode provides the latest recommended default values
   #   that should be safe to run in most scenarios
@@ -73,17 +73,24 @@ module Aws
   #   The LEGACY mode provides default settings that vary per SDK and were
   #   used prior to establishment of defaults\_mode
   #
+  #
+  #
+  # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+  #
+  # @code_generation END - modes documentation
+  #
   # Based on the provided mode, the SDK will vend sensible default values
   # tailored to the mode for the following settings:
   #
+  # @code_generation START - option documentation
   # * `:retry_mode` -
   #   A retry mode specifies how the SDK attempts retries. See [Retry
-  #   Mode][2]
+  #   Mode][1]
   #
   # * `:sts_regional_endpoints` -
   #   Specifies how the SDK determines the AWS service endpoint that it
   #   uses to talk to the AWS Security Token Service (AWS STS). See
-  #   [Setting STS Regional endpoints][3]
+  #   [Setting STS Regional endpoints][2]
   #
   # * `:s3_us_east_1_regional_endpoint` -
   #   Specifies how the SDK determines the AWS service endpoint that it
@@ -99,13 +106,19 @@ module Aws
   #   from the time the CLIENT HELLO message is sent to ethe time the
   #   client and server have fully negotiated ciphers and exchanged keys
   #
+  #
+  #
+  # [1]: https://docs.aws.amazon.com/sdkref/latest/guide/setting-global-retry_mode.html
+  # [2]: https://docs.aws.amazon.com/sdkref/latest/guide/setting-global-sts_regional_endpoints.html
+  #
+  # @code_generation END - option documentation
+  #
   #  All options above can be configured by users, and the overridden value will take precedence.
   #
   # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
   # [2]: https://docs.aws.amazon.com/sdkref/latest/guide/setting-global-retry_mode.html
   # [3]: https://docs.aws.amazon.com/sdkref/latest/guide/setting-global-sts_regional_endpoints.html
   #
-  # @code_generation END - documentation
   module DefaultsModeConfiguration
     # @api private
     # @code_generation START - configuration

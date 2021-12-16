@@ -169,9 +169,9 @@ a clock skew correction and retry requests with skewed client clocks.
           end
 
           value = ENV['AWS_RETRY_MODE'] ||
-                Aws.shared_config.retry_mode(profile: cfg.profile) ||
-                default_mode_value ||
-                'legacy'
+                  Aws.shared_config.retry_mode(profile: cfg.profile) ||
+                  default_mode_value ||
+                  'legacy'
         # Raise if provided value is not one of the retry modes
         if value != 'legacy' && value != 'standard' && value != 'adaptive'
           raise ArgumentError,
