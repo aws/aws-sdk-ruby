@@ -2048,6 +2048,7 @@ module Aws::SageMaker
     #         },
     #         compression_type: "None", # accepts None, Gzip
     #         target_attribute_name: "TargetAttributeName", # required
+    #         content_type: "ContentType",
     #       }
     #
     # @!attribute [rw] data_source
@@ -2063,12 +2064,19 @@ module Aws::SageMaker
     #   represented by 'y'.
     #   @return [String]
     #
+    # @!attribute [rw] content_type
+    #   The content type of the data from the input source. You can use
+    #   `text/csv;header=present` or `x-application/vnd.amazon+parquet`. The
+    #   default value is `text/csv;header=present`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLChannel AWS API Documentation
     #
     class AutoMLChannel < Struct.new(
       :data_source,
       :compression_type,
-      :target_attribute_name)
+      :target_attribute_name,
+      :content_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4361,6 +4369,7 @@ module Aws::SageMaker
     #             },
     #             compression_type: "None", # accepts None, Gzip
     #             target_attribute_name: "TargetAttributeName", # required
+    #             content_type: "ContentType",
     #           },
     #         ],
     #         output_data_config: { # required

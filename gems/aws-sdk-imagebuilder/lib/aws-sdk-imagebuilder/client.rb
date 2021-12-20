@@ -346,10 +346,16 @@ module Aws::Imagebuilder
     #   cancel.
     #
     # @option params [required, String] :client_token
-    #   The idempotency token used to make this request idempotent.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @return [Types::CancelImageCreationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -701,6 +707,12 @@ module Aws::Imagebuilder
     #             set_default_version: false,
     #           },
     #         ],
+    #         s3_export_configuration: {
+    #           role_name: "NonEmptyString", # required
+    #           disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
+    #           s3_bucket: "NonEmptyString", # required
+    #           s3_prefix: "NonEmptyString",
+    #         },
     #       },
     #     ],
     #     tags: {
@@ -1605,6 +1617,10 @@ module Aws::Imagebuilder
     #   resp.distribution_configuration.distributions[0].launch_template_configurations[0].launch_template_id #=> String
     #   resp.distribution_configuration.distributions[0].launch_template_configurations[0].account_id #=> String
     #   resp.distribution_configuration.distributions[0].launch_template_configurations[0].set_default_version #=> Boolean
+    #   resp.distribution_configuration.distributions[0].s3_export_configuration.role_name #=> String
+    #   resp.distribution_configuration.distributions[0].s3_export_configuration.disk_image_format #=> String, one of "VMDK", "RAW", "VHD"
+    #   resp.distribution_configuration.distributions[0].s3_export_configuration.s3_bucket #=> String
+    #   resp.distribution_configuration.distributions[0].s3_export_configuration.s3_prefix #=> String
     #   resp.distribution_configuration.timeout_minutes #=> Integer
     #   resp.distribution_configuration.date_created #=> String
     #   resp.distribution_configuration.date_updated #=> String
@@ -1771,6 +1787,10 @@ module Aws::Imagebuilder
     #   resp.image.distribution_configuration.distributions[0].launch_template_configurations[0].launch_template_id #=> String
     #   resp.image.distribution_configuration.distributions[0].launch_template_configurations[0].account_id #=> String
     #   resp.image.distribution_configuration.distributions[0].launch_template_configurations[0].set_default_version #=> Boolean
+    #   resp.image.distribution_configuration.distributions[0].s3_export_configuration.role_name #=> String
+    #   resp.image.distribution_configuration.distributions[0].s3_export_configuration.disk_image_format #=> String, one of "VMDK", "RAW", "VHD"
+    #   resp.image.distribution_configuration.distributions[0].s3_export_configuration.s3_bucket #=> String
+    #   resp.image.distribution_configuration.distributions[0].s3_export_configuration.s3_prefix #=> String
     #   resp.image.distribution_configuration.timeout_minutes #=> Integer
     #   resp.image.distribution_configuration.date_created #=> String
     #   resp.image.distribution_configuration.date_updated #=> String
@@ -1793,6 +1813,7 @@ module Aws::Imagebuilder
     #   resp.image.output_resources.containers[0].image_uris[0] #=> String
     #   resp.image.tags #=> Hash
     #   resp.image.tags["TagKey"] #=> String
+    #   resp.image.build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImage AWS API Documentation
     #
@@ -2129,6 +2150,113 @@ module Aws::Imagebuilder
     # @param [Hash] params ({})
     def import_component(params = {}, options = {})
       req = build_request(:import_component, params)
+      req.send_request(options)
+    end
+
+    # When you export your virtual machine (VM) from its virtualization
+    # environment, that process creates a set of one or more disk container
+    # files that act as snapshots of your VM’s environment, settings, and
+    # data. The Amazon EC2 API [ImportImage][1] action uses those files to
+    # import your VM and create an AMI. To import using the CLI command, see
+    # [import-image][2]
+    #
+    # You can reference the task ID from the VM import to pull in the AMI
+    # that the import created as the base image for your Image Builder
+    # recipe.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportImage.html
+    # [2]: https://docs.aws.amazon.com/cli/latest/reference/ec2/import-image.html
+    #
+    # @option params [required, String] :name
+    #   The name of the base image that is created by the import process.
+    #
+    # @option params [required, String] :semantic_version
+    #   The semantic version to attach to the base image that was created
+    #   during the import process. This version follows the semantic version
+    #   syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any positive
+    #   integer value, including zero, with an upper limit of 2^30-1, or
+    #   1073741823 for each node. Image Builder automatically assigns the
+    #   build number to the fourth node.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
+    #
+    # @option params [String] :description
+    #   The description for the base image that is created by the import
+    #   process.
+    #
+    # @option params [required, String] :platform
+    #   The operating system platform for the imported VM.
+    #
+    # @option params [String] :os_version
+    #   The operating system version for the imported VM.
+    #
+    # @option params [required, String] :vm_import_task_id
+    #   The `importTaskId` (API) or `ImportTaskId` (CLI) from the Amazon EC2
+    #   VM import process. Image Builder retrieves information from the import
+    #   process to pull in the AMI that is created from the VM source as the
+    #   base image for your recipe.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags that are attached to the import resources.
+    #
+    # @option params [required, String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency of
+    #   the request. For more information, see [Ensuring idempotency][1] in
+    #   the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::ImportVmImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportVmImageResponse#request_id #request_id} => String
+    #   * {Types::ImportVmImageResponse#image_arn #image_arn} => String
+    #   * {Types::ImportVmImageResponse#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_vm_image({
+    #     name: "NonEmptyString", # required
+    #     semantic_version: "VersionNumber", # required
+    #     description: "NonEmptyString",
+    #     platform: "Windows", # required, accepts Windows, Linux
+    #     os_version: "OsVersion",
+    #     vm_import_task_id: "NonEmptyString", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.image_arn #=> String
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImportVmImage AWS API Documentation
+    #
+    # @overload import_vm_image(params = {})
+    # @param [Hash] params ({})
+    def import_vm_image(params = {}, options = {})
+      req = build_request(:import_vm_image, params)
       req.send_request(options)
     end
 
@@ -2504,6 +2632,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.containers[0].image_uris[0] #=> String
     #   resp.image_summary_list[0].tags #=> Hash
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
+    #   resp.image_summary_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageBuildVersions AWS API Documentation
@@ -2634,6 +2763,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.containers[0].image_uris[0] #=> String
     #   resp.image_summary_list[0].tags #=> Hash
     #   resp.image_summary_list[0].tags["TagKey"] #=> String
+    #   resp.image_summary_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePipelineImages AWS API Documentation
@@ -2867,6 +2997,7 @@ module Aws::Imagebuilder
     #   resp.image_version_list[0].os_version #=> String
     #   resp.image_version_list[0].owner #=> String
     #   resp.image_version_list[0].date_created #=> String
+    #   resp.image_version_list[0].build_type #=> String, one of "USER_INITIATED", "SCHEDULED", "IMPORT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImages AWS API Documentation
@@ -3302,6 +3433,12 @@ module Aws::Imagebuilder
     #             set_default_version: false,
     #           },
     #         ],
+    #         s3_export_configuration: {
+    #           role_name: "NonEmptyString", # required
+    #           disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
+    #           s3_bucket: "NonEmptyString", # required
+    #           s3_prefix: "NonEmptyString",
+    #         },
     #       },
     #     ],
     #     client_token: "ClientToken", # required
@@ -3551,7 +3688,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

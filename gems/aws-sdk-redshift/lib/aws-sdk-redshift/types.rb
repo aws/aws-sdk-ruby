@@ -329,7 +329,8 @@ module Aws::Redshift
     #
     # @!attribute [rw] consumer_identifier
     #   The identifier of the data consumer that is authorized to access the
-    #   datashare. This identifier is an Amazon Web Services account ID.
+    #   datashare. This identifier is an Amazon Web Services account ID or a
+    #   keyword, such as ADX.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeDataShareMessage AWS API Documentation
@@ -3239,13 +3240,18 @@ module Aws::Redshift
     #   a producer and data consumers.
     #   @return [Array<Types::DataShareAssociation>]
     #
+    # @!attribute [rw] managed_by
+    #   The identifier of a datashare to show its managing entity.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DataShare AWS API Documentation
     #
     class DataShare < Struct.new(
       :data_share_arn,
       :producer_arn,
       :allow_publicly_accessible_consumers,
-      :data_share_associations)
+      :data_share_associations,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3341,7 +3347,7 @@ module Aws::Redshift
     # @!attribute [rw] consumer_identifier
     #   The identifier of the data consumer that is to have authorization
     #   removed from the datashare. This identifier is an Amazon Web
-    #   Services account ID.
+    #   Services account ID or a keyword, such as ADX.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeauthorizeDataShareMessage AWS API Documentation

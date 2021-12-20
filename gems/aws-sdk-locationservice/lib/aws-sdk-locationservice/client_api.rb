@@ -429,7 +429,7 @@ module Aws::LocationService
     CreateGeofenceCollectionRequest.add_member(:collection_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "CollectionName"))
     CreateGeofenceCollectionRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateGeofenceCollectionRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    CreateGeofenceCollectionRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, required: true, location_name: "PricingPlan"))
+    CreateGeofenceCollectionRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "PricingPlan"))
     CreateGeofenceCollectionRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, location_name: "PricingPlanDataSource"))
     CreateGeofenceCollectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateGeofenceCollectionRequest.struct_class = Types::CreateGeofenceCollectionRequest
@@ -442,7 +442,7 @@ module Aws::LocationService
     CreateMapRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: MapConfiguration, required: true, location_name: "Configuration"))
     CreateMapRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateMapRequest.add_member(:map_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "MapName"))
-    CreateMapRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, required: true, location_name: "PricingPlan"))
+    CreateMapRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "PricingPlan"))
     CreateMapRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateMapRequest.struct_class = Types::CreateMapRequest
 
@@ -455,7 +455,7 @@ module Aws::LocationService
     CreatePlaceIndexRequest.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "DataSourceConfiguration"))
     CreatePlaceIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreatePlaceIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "IndexName"))
-    CreatePlaceIndexRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, required: true, location_name: "PricingPlan"))
+    CreatePlaceIndexRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "PricingPlan"))
     CreatePlaceIndexRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreatePlaceIndexRequest.struct_class = Types::CreatePlaceIndexRequest
 
@@ -467,7 +467,7 @@ module Aws::LocationService
     CreateRouteCalculatorRequest.add_member(:calculator_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "CalculatorName"))
     CreateRouteCalculatorRequest.add_member(:data_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataSource"))
     CreateRouteCalculatorRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    CreateRouteCalculatorRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, required: true, location_name: "PricingPlan"))
+    CreateRouteCalculatorRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "PricingPlan"))
     CreateRouteCalculatorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateRouteCalculatorRequest.struct_class = Types::CreateRouteCalculatorRequest
 
@@ -479,7 +479,7 @@ module Aws::LocationService
     CreateTrackerRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateTrackerRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     CreateTrackerRequest.add_member(:position_filtering, Shapes::ShapeRef.new(shape: PositionFiltering, location_name: "PositionFiltering"))
-    CreateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, required: true, location_name: "PricingPlan"))
+    CreateTrackerRequest.add_member(:pricing_plan, Shapes::ShapeRef.new(shape: PricingPlan, location_name: "PricingPlan"))
     CreateTrackerRequest.add_member(:pricing_plan_data_source, Shapes::ShapeRef.new(shape: String, location_name: "PricingPlanDataSource"))
     CreateTrackerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateTrackerRequest.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "TrackerName"))

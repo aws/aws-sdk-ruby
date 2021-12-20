@@ -275,6 +275,67 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLocationFsxLustreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fsx_filesystem_arn: "FsxFilesystemArn", # required
+    #         security_group_arns: ["Ec2SecurityGroupArn"], # required
+    #         subdirectory: "FsxLustreSubdirectory",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] fsx_filesystem_arn
+    #   The Amazon Resource Name (ARN) for the FSx for Lustre file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_arns
+    #   The Amazon Resource Names (ARNs) of the security groups that are
+    #   used to configure the FSx for Lustre file system.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subdirectory
+    #   A subdirectory in the location's path. This subdirectory in the FSx
+    #   for Lustre file system is used to read data from the FSx for Lustre
+    #   source location or write data to the FSx for Lustre destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pair that represents a tag that you want to add to the
+    #   resource. The value can be an empty string. This value helps you
+    #   manage, filter, and search for your resources. We recommend that you
+    #   create a name tag for your location.
+    #   @return [Array<Types::TagListEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxLustreRequest AWS API Documentation
+    #
+    class CreateLocationFsxLustreRequest < Struct.new(
+      :fsx_filesystem_arn,
+      :security_group_arns,
+      :subdirectory,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the FSx for Lustre file system
+    #   location that's created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxLustreResponse AWS API Documentation
+    #
+    class CreateLocationFsxLustreResponse < Struct.new(
+      :location_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateLocationFsxWindowsRequest
     #   data as a hash:
     #
@@ -294,7 +355,7 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] subdirectory
-    #   A subdirectory in the location’s path. This subdirectory in the
+    #   A subdirectory in the location's path. This subdirectory in the
     #   Amazon FSx for Windows File Server file system is used to read data
     #   from the Amazon FSx for Windows File Server source location or write
     #   data to the FSx for Windows File Server destination.
@@ -306,8 +367,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
-    #   The Amazon Resource Names (ARNs) of the security groups that are to
-    #   use to configure the FSx for Windows File Server file system.
+    #   The Amazon Resource Names (ARNs) of the security groups that are
+    #   used to configure the FSx for Windows File Server file system.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1329,6 +1390,55 @@ module Aws::DataSync
       :location_arn,
       :location_uri,
       :ec2_config,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLocationFsxLustreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         location_arn: "LocationArn", # required
+    #       }
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the FSx for Lustre location to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxLustreRequest AWS API Documentation
+    #
+    class DescribeLocationFsxLustreRequest < Struct.new(
+      :location_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the FSx for Lustre location that
+    #   was described.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_uri
+    #   The URI of the FSx for Lustre location that was described.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_arns
+    #   The Amazon Resource Names (ARNs) of the security groups that are
+    #   configured for the FSx for Lustre file system.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the FSx for Lustre location was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxLustreResponse AWS API Documentation
+    #
+    class DescribeLocationFsxLustreResponse < Struct.new(
+      :location_arn,
+      :location_uri,
+      :security_group_arns,
       :creation_time)
       SENSITIVE = []
       include Aws::Structure
@@ -2535,7 +2645,7 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   Represents a list of URLs of a location. `LocationUri` returns an
+    #   Represents a list of URIs of a location. `LocationUri` returns an
     #   array that contains a list of locations when the [ListLocations][1]
     #   operation is called.
     #

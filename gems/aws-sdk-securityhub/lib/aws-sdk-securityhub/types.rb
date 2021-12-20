@@ -1414,6 +1414,27 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # An Availability Zone for the automatic scaling group.
+    #
+    # @note When making an API call, you may pass AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails
+    #   data as a hash:
+    #
+    #       {
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The name of the Availability Zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails AWS API Documentation
+    #
+    class AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides details about an auto scaling group.
     #
     # @note When making an API call, you may pass AwsAutoScalingAutoScalingGroupDetails
@@ -1425,6 +1446,34 @@ module Aws::SecurityHub
     #         health_check_type: "NonEmptyString",
     #         health_check_grace_period: 1,
     #         created_time: "NonEmptyString",
+    #         mixed_instances_policy: {
+    #           instances_distribution: {
+    #             on_demand_allocation_strategy: "NonEmptyString",
+    #             on_demand_base_capacity: 1,
+    #             on_demand_percentage_above_base_capacity: 1,
+    #             spot_allocation_strategy: "NonEmptyString",
+    #             spot_instance_pools: 1,
+    #             spot_max_price: "NonEmptyString",
+    #           },
+    #           launch_template: {
+    #             launch_template_specification: {
+    #               launch_template_id: "NonEmptyString",
+    #               launch_template_name: "NonEmptyString",
+    #               version: "NonEmptyString",
+    #             },
+    #             overrides: [
+    #               {
+    #                 instance_type: "NonEmptyString",
+    #                 weighted_capacity: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         availability_zones: [
+    #           {
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] launch_configuration_name
@@ -1457,6 +1506,14 @@ module Aws::SecurityHub
     #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [String]
     #
+    # @!attribute [rw] mixed_instances_policy
+    #   The mixed instances policy for the automatic scaling group.
+    #   @return [Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails]
+    #
+    # @!attribute [rw] availability_zones
+    #   The list of Availability Zones for the automatic scaling group.
+    #   @return [Array<Types::AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingAutoScalingGroupDetails AWS API Documentation
     #
     class AwsAutoScalingAutoScalingGroupDetails < Struct.new(
@@ -1464,7 +1521,217 @@ module Aws::SecurityHub
       :load_balancer_names,
       :health_check_type,
       :health_check_grace_period,
-      :created_time)
+      :created_time,
+      :mixed_instances_policy,
+      :availability_zones)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The mixed instances policy for the automatic scaling group.
+    #
+    # @note When making an API call, you may pass AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails
+    #   data as a hash:
+    #
+    #       {
+    #         instances_distribution: {
+    #           on_demand_allocation_strategy: "NonEmptyString",
+    #           on_demand_base_capacity: 1,
+    #           on_demand_percentage_above_base_capacity: 1,
+    #           spot_allocation_strategy: "NonEmptyString",
+    #           spot_instance_pools: 1,
+    #           spot_max_price: "NonEmptyString",
+    #         },
+    #         launch_template: {
+    #           launch_template_specification: {
+    #             launch_template_id: "NonEmptyString",
+    #             launch_template_name: "NonEmptyString",
+    #             version: "NonEmptyString",
+    #           },
+    #           overrides: [
+    #             {
+    #               instance_type: "NonEmptyString",
+    #               weighted_capacity: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instances_distribution
+    #   The instances distribution. The instances distribution specifies the
+    #   distribution of On-Demand Instances and Spot Instances, the maximum
+    #   price to pay for Spot Instances, and how the Auto Scaling group
+    #   allocates instance types to fulfill On-Demand and Spot capacity.
+    #   @return [Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails]
+    #
+    # @!attribute [rw] launch_template
+    #   The launch template to use and the instance types (overrides) to use
+    #   to provision EC2 instances to fulfill On-Demand and Spot capacities.
+    #   @return [Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails AWS API Documentation
+    #
+    class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails < Struct.new(
+      :instances_distribution,
+      :launch_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the instances distribution.
+    #
+    # @note When making an API call, you may pass AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails
+    #   data as a hash:
+    #
+    #       {
+    #         on_demand_allocation_strategy: "NonEmptyString",
+    #         on_demand_base_capacity: 1,
+    #         on_demand_percentage_above_base_capacity: 1,
+    #         spot_allocation_strategy: "NonEmptyString",
+    #         spot_instance_pools: 1,
+    #         spot_max_price: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] on_demand_allocation_strategy
+    #   How to allocate instance types to fulfill On-Demand capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_demand_base_capacity
+    #   The minimum amount of the Auto Scaling group's capacity that must
+    #   be fulfilled by On-Demand Instances.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_demand_percentage_above_base_capacity
+    #   The percentage of On-Demand Instances and Spot Instances for
+    #   additional capacity beyond `OnDemandBaseCapacity`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spot_allocation_strategy
+    #   How to allocate instances across Spot Instance pools.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_instance_pools
+    #   The number of Spot Instance pools across which to allocate your Spot
+    #   Instances.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spot_max_price
+    #   The maximum price per unit hour that you are willing to pay for a
+    #   Spot Instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails AWS API Documentation
+    #
+    class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails < Struct.new(
+      :on_demand_allocation_strategy,
+      :on_demand_base_capacity,
+      :on_demand_percentage_above_base_capacity,
+      :spot_allocation_strategy,
+      :spot_instance_pools,
+      :spot_max_price)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a launch template and overrides for a mixed instances
+    # policy.
+    #
+    # @note When making an API call, you may pass AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_specification: {
+    #           launch_template_id: "NonEmptyString",
+    #           launch_template_name: "NonEmptyString",
+    #           version: "NonEmptyString",
+    #         },
+    #         overrides: [
+    #           {
+    #             instance_type: "NonEmptyString",
+    #             weighted_capacity: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] launch_template_specification
+    #   The launch template to use.
+    #   @return [Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification]
+    #
+    # @!attribute [rw] overrides
+    #   Property values to use to override the values in the launch
+    #   template.
+    #   @return [Array<Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails AWS API Documentation
+    #
+    class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails < Struct.new(
+      :launch_template_specification,
+      :overrides)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the launch template to use.
+    #
+    # @note When making an API call, you may pass AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_id: "NonEmptyString",
+    #         launch_template_name: "NonEmptyString",
+    #         version: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] launch_template_id
+    #   The identifier of the launch template. You must specify either
+    #   `LaunchTemplateId` or `LaunchTemplateName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template. You must specify either
+    #   `LaunchTemplateId` or `LaunchTemplateName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Identifies the version of the launch template. You can specify a
+    #   version identifier, or use the values `$Latest` or `$Default`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification AWS API Documentation
+    #
+    class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Property values to use to override the values in the launch template.
+    #
+    # @note When making an API call, you may pass AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails
+    #   data as a hash:
+    #
+    #       {
+    #         instance_type: "NonEmptyString",
+    #         weighted_capacity: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type. For example, `m3.xlarge`.
+    #   @return [String]
+    #
+    # @!attribute [rw] weighted_capacity
+    #   The number of capacity units provided by the specified instance type
+    #   in terms of virtual CPUs, memory, storage, throughput, or other
+    #   relative performance characteristic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails AWS API Documentation
+    #
+    class AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails < Struct.new(
+      :instance_type,
+      :weighted_capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1633,6 +1900,11 @@ module Aws::SecurityHub
     #         security_groups: ["NonEmptyString"],
     #         spot_price: "NonEmptyString",
     #         user_data: "NonEmptyString",
+    #         metadata_options: {
+    #           http_endpoint: "NonEmptyString",
+    #           http_put_response_hop_limit: 1,
+    #           http_tokens: "NonEmptyString",
+    #         },
     #       }
     #
     # @!attribute [rw] associate_public_ip_address
@@ -1725,6 +1997,10 @@ module Aws::SecurityHub
     #   be base64-encoded text.
     #   @return [String]
     #
+    # @!attribute [rw] metadata_options
+    #   The metadata options for the instances.
+    #   @return [Types::AwsAutoScalingLaunchConfigurationMetadataOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingLaunchConfigurationDetails AWS API Documentation
     #
     class AwsAutoScalingLaunchConfigurationDetails < Struct.new(
@@ -1745,7 +2021,8 @@ module Aws::SecurityHub
       :ramdisk_id,
       :security_groups,
       :spot_price,
-      :user_data)
+      :user_data,
+      :metadata_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1771,6 +2048,43 @@ module Aws::SecurityHub
     #
     class AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails < Struct.new(
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata options for the instances.
+    #
+    # @note When making an API call, you may pass AwsAutoScalingLaunchConfigurationMetadataOptions
+    #   data as a hash:
+    #
+    #       {
+    #         http_endpoint: "NonEmptyString",
+    #         http_put_response_hop_limit: 1,
+    #         http_tokens: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] http_endpoint
+    #   Enables or disables the HTTP metadata endpoint on your instances. By
+    #   default, the metadata endpoint is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The HTTP `PUT` response hop limit for instance metadata requests.
+    #   The larger the number, the further instance metadata requests can
+    #   travel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_tokens
+    #   Indicates whether token usage is `required` or `optional` for
+    #   metadata requests. By default, token usage is `optional`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingLaunchConfigurationMetadataOptions AWS API Documentation
+    #
+    class AwsAutoScalingLaunchConfigurationMetadataOptions < Struct.new(
+      :http_endpoint,
+      :http_put_response_hop_limit,
+      :http_tokens)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12004,6 +12318,340 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Details about an Network Firewall firewall.
+    #
+    # @note When making an API call, you may pass AwsNetworkFirewallFirewallDetails
+    #   data as a hash:
+    #
+    #       {
+    #         delete_protection: false,
+    #         description: "NonEmptyString",
+    #         firewall_arn: "NonEmptyString",
+    #         firewall_id: "NonEmptyString",
+    #         firewall_name: "NonEmptyString",
+    #         firewall_policy_arn: "NonEmptyString",
+    #         firewall_policy_change_protection: false,
+    #         subnet_change_protection: false,
+    #         subnet_mappings: [
+    #           {
+    #             subnet_id: "NonEmptyString",
+    #           },
+    #         ],
+    #         vpc_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] delete_protection
+    #   Whether the firewall is protected from deletion. If set to `true`,
+    #   then the firewall cannot be deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   A description of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_arn
+    #   The ARN of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_id
+    #   The identifier of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_name
+    #   A descriptive name of the firewall.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_arn
+    #   The ARN of the firewall policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_change_protection
+    #   Whether the firewall is protected from a change to the firewall
+    #   policy. If set to `true`, you cannot associate a different policy
+    #   with the firewall.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] subnet_change_protection
+    #   Whether the firewall is protected from a change to the subnet
+    #   associations. If set to `true`, you cannot map different subnets to
+    #   the firewall.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] subnet_mappings
+    #   The public subnets that Network Firewall uses for the firewall. Each
+    #   subnet must belong to a different Availability Zone.
+    #   @return [Array<Types::AwsNetworkFirewallFirewallSubnetMappingsDetails>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The identifier of the VPC where the firewall is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsNetworkFirewallFirewallDetails AWS API Documentation
+    #
+    class AwsNetworkFirewallFirewallDetails < Struct.new(
+      :delete_protection,
+      :description,
+      :firewall_arn,
+      :firewall_id,
+      :firewall_name,
+      :firewall_policy_arn,
+      :firewall_policy_change_protection,
+      :subnet_change_protection,
+      :subnet_mappings,
+      :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a firewall policy. A firewall policy defines the
+    # behavior of a network firewall.
+    #
+    # @note When making an API call, you may pass AwsNetworkFirewallFirewallPolicyDetails
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_policy: {
+    #           stateful_rule_group_references: [
+    #             {
+    #               resource_arn: "NonEmptyString",
+    #             },
+    #           ],
+    #           stateless_custom_actions: [
+    #             {
+    #               action_definition: {
+    #                 publish_metric_action: {
+    #                   dimensions: [
+    #                     {
+    #                       value: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               action_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           stateless_default_actions: ["NonEmptyString"],
+    #           stateless_fragment_default_actions: ["NonEmptyString"],
+    #           stateless_rule_group_references: [
+    #             {
+    #               priority: 1,
+    #               resource_arn: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #         firewall_policy_arn: "NonEmptyString",
+    #         firewall_policy_id: "NonEmptyString",
+    #         firewall_policy_name: "NonEmptyString",
+    #         description: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] firewall_policy
+    #   The firewall policy configuration.
+    #   @return [Types::FirewallPolicyDetails]
+    #
+    # @!attribute [rw] firewall_policy_arn
+    #   The ARN of the firewall policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_id
+    #   The identifier of the firewall policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_policy_name
+    #   The name of the firewall policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the firewall policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsNetworkFirewallFirewallPolicyDetails AWS API Documentation
+    #
+    class AwsNetworkFirewallFirewallPolicyDetails < Struct.new(
+      :firewall_policy,
+      :firewall_policy_arn,
+      :firewall_policy_id,
+      :firewall_policy_name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A public subnet that Network Firewall uses for the firewall.
+    #
+    # @note When making an API call, you may pass AwsNetworkFirewallFirewallSubnetMappingsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         subnet_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] subnet_id
+    #   The identifier of the subnet
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsNetworkFirewallFirewallSubnetMappingsDetails AWS API Documentation
+    #
+    class AwsNetworkFirewallFirewallSubnetMappingsDetails < Struct.new(
+      :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an Network Firewall rule group. Rule groups are used to
+    # inspect and control network traffic. Stateless rule groups apply to
+    # individual packets. Stateful rule groups apply to packets in the
+    # context of their traffic flow.
+    #
+    # Rule groups are referenced in firewall policies.
+    #
+    # @note When making an API call, you may pass AwsNetworkFirewallRuleGroupDetails
+    #   data as a hash:
+    #
+    #       {
+    #         capacity: 1,
+    #         description: "NonEmptyString",
+    #         rule_group: {
+    #           rule_variables: {
+    #             ip_sets: {
+    #               definition: ["NonEmptyString"],
+    #             },
+    #             port_sets: {
+    #               definition: ["NonEmptyString"],
+    #             },
+    #           },
+    #           rules_source: {
+    #             rules_source_list: {
+    #               generated_rules_type: "NonEmptyString",
+    #               target_types: ["NonEmptyString"],
+    #               targets: ["NonEmptyString"],
+    #             },
+    #             rules_string: "NonEmptyString",
+    #             stateful_rules: [
+    #               {
+    #                 action: "NonEmptyString",
+    #                 header: {
+    #                   destination: "NonEmptyString",
+    #                   destination_port: "NonEmptyString",
+    #                   direction: "NonEmptyString",
+    #                   protocol: "NonEmptyString",
+    #                   source: "NonEmptyString",
+    #                   source_port: "NonEmptyString",
+    #                 },
+    #                 rule_options: [
+    #                   {
+    #                     keyword: "NonEmptyString",
+    #                     settings: ["NonEmptyString"],
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             stateless_rules_and_custom_actions: {
+    #               custom_actions: [
+    #                 {
+    #                   action_definition: {
+    #                     publish_metric_action: {
+    #                       dimensions: [
+    #                         {
+    #                           value: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   action_name: "NonEmptyString",
+    #                 },
+    #               ],
+    #               stateless_rules: [
+    #                 {
+    #                   priority: 1,
+    #                   rule_definition: {
+    #                     actions: ["NonEmptyString"],
+    #                     match_attributes: {
+    #                       destination_ports: [
+    #                         {
+    #                           from_port: 1,
+    #                           to_port: 1,
+    #                         },
+    #                       ],
+    #                       destinations: [
+    #                         {
+    #                           address_definition: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       protocols: [1],
+    #                       source_ports: [
+    #                         {
+    #                           from_port: 1,
+    #                           to_port: 1,
+    #                         },
+    #                       ],
+    #                       sources: [
+    #                         {
+    #                           address_definition: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       tcp_flags: [
+    #                         {
+    #                           flags: ["NonEmptyString"],
+    #                           masks: ["NonEmptyString"],
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         },
+    #         rule_group_arn: "NonEmptyString",
+    #         rule_group_id: "NonEmptyString",
+    #         rule_group_name: "NonEmptyString",
+    #         type: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] capacity
+    #   The maximum number of operating resources that this rule group can
+    #   use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_group
+    #   Details about the rule group.
+    #   @return [Types::RuleGroupDetails]
+    #
+    # @!attribute [rw] rule_group_arn
+    #   The ARN of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_group_id
+    #   The identifier of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_group_name
+    #   The descriptive name of the rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of rule group. A rule group can be stateful or stateless.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsNetworkFirewallRuleGroupDetails AWS API Documentation
+    #
+    class AwsNetworkFirewallRuleGroupDetails < Struct.new(
+      :capacity,
+      :description,
+      :rule_group,
+      :rule_group_arn,
+      :rule_group_id,
+      :rule_group_name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the configuration of an OpenSearch cluster.
     #
     # @note When making an API call, you may pass AwsOpenSearchServiceDomainClusterConfigDetails
@@ -15965,6 +16613,35 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Describes the versioning state of an S3 bucket.
+    #
+    # @note When making an API call, you may pass AwsS3BucketBucketVersioningConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         is_mfa_delete_enabled: false,
+    #         status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] is_mfa_delete_enabled
+    #   Specifies whether MFA delete is currently enabled in the S3 bucket
+    #   versioning configuration. If the S3 bucket was never configured with
+    #   MFA delete, then this attribute is not included.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The versioning status of the S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketBucketVersioningConfiguration AWS API Documentation
+    #
+    class AwsS3BucketBucketVersioningConfiguration < Struct.new(
+      :is_mfa_delete_enabled,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of an Amazon S3 bucket.
     #
     # @note When making an API call, you may pass AwsS3BucketDetails
@@ -16087,6 +16764,10 @@ module Aws::SecurityHub
     #             },
     #           ],
     #         },
+    #         bucket_versioning_configuration: {
+    #           is_mfa_delete_enabled: false,
+    #           status: "NonEmptyString",
+    #         },
     #       }
     #
     # @!attribute [rw] owner_id
@@ -16143,6 +16824,10 @@ module Aws::SecurityHub
     #   The notification configuration for the S3 bucket.
     #   @return [Types::AwsS3BucketNotificationConfiguration]
     #
+    # @!attribute [rw] bucket_versioning_configuration
+    #   The versioning state of an S3 bucket.
+    #   @return [Types::AwsS3BucketBucketVersioningConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketDetails AWS API Documentation
     #
     class AwsS3BucketDetails < Struct.new(
@@ -16156,7 +16841,8 @@ module Aws::SecurityHub
       :access_control_list,
       :bucket_logging_configuration,
       :bucket_website_configuration,
-      :bucket_notification_configuration)
+      :bucket_notification_configuration,
+      :bucket_versioning_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17077,6 +17763,34 @@ module Aws::SecurityHub
     #                 health_check_type: "NonEmptyString",
     #                 health_check_grace_period: 1,
     #                 created_time: "NonEmptyString",
+    #                 mixed_instances_policy: {
+    #                   instances_distribution: {
+    #                     on_demand_allocation_strategy: "NonEmptyString",
+    #                     on_demand_base_capacity: 1,
+    #                     on_demand_percentage_above_base_capacity: 1,
+    #                     spot_allocation_strategy: "NonEmptyString",
+    #                     spot_instance_pools: 1,
+    #                     spot_max_price: "NonEmptyString",
+    #                   },
+    #                   launch_template: {
+    #                     launch_template_specification: {
+    #                       launch_template_id: "NonEmptyString",
+    #                       launch_template_name: "NonEmptyString",
+    #                       version: "NonEmptyString",
+    #                     },
+    #                     overrides: [
+    #                       {
+    #                         instance_type: "NonEmptyString",
+    #                         weighted_capacity: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 availability_zones: [
+    #                   {
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
     #               },
     #               aws_code_build_project: {
     #                 encryption_key: "NonEmptyString",
@@ -17646,6 +18360,10 @@ module Aws::SecurityHub
     #                       type: "NonEmptyString",
     #                     },
     #                   ],
+    #                 },
+    #                 bucket_versioning_configuration: {
+    #                   is_mfa_delete_enabled: false,
+    #                   status: "NonEmptyString",
     #                 },
     #               },
     #               aws_s3_account_public_access_block: {
@@ -19061,6 +19779,11 @@ module Aws::SecurityHub
     #                 security_groups: ["NonEmptyString"],
     #                 spot_price: "NonEmptyString",
     #                 user_data: "NonEmptyString",
+    #                 metadata_options: {
+    #                   http_endpoint: "NonEmptyString",
+    #                   http_put_response_hop_limit: 1,
+    #                   http_tokens: "NonEmptyString",
+    #                 },
     #               },
     #               aws_ec2_vpn_connection: {
     #                 vpn_connection_id: "NonEmptyString",
@@ -19269,6 +19992,157 @@ module Aws::SecurityHub
     #                     },
     #                   ],
     #                 },
+    #               },
+    #               aws_network_firewall_firewall_policy: {
+    #                 firewall_policy: {
+    #                   stateful_rule_group_references: [
+    #                     {
+    #                       resource_arn: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   stateless_custom_actions: [
+    #                     {
+    #                       action_definition: {
+    #                         publish_metric_action: {
+    #                           dimensions: [
+    #                             {
+    #                               value: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       action_name: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   stateless_default_actions: ["NonEmptyString"],
+    #                   stateless_fragment_default_actions: ["NonEmptyString"],
+    #                   stateless_rule_group_references: [
+    #                     {
+    #                       priority: 1,
+    #                       resource_arn: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 firewall_policy_arn: "NonEmptyString",
+    #                 firewall_policy_id: "NonEmptyString",
+    #                 firewall_policy_name: "NonEmptyString",
+    #                 description: "NonEmptyString",
+    #               },
+    #               aws_network_firewall_firewall: {
+    #                 delete_protection: false,
+    #                 description: "NonEmptyString",
+    #                 firewall_arn: "NonEmptyString",
+    #                 firewall_id: "NonEmptyString",
+    #                 firewall_name: "NonEmptyString",
+    #                 firewall_policy_arn: "NonEmptyString",
+    #                 firewall_policy_change_protection: false,
+    #                 subnet_change_protection: false,
+    #                 subnet_mappings: [
+    #                   {
+    #                     subnet_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 vpc_id: "NonEmptyString",
+    #               },
+    #               aws_network_firewall_rule_group: {
+    #                 capacity: 1,
+    #                 description: "NonEmptyString",
+    #                 rule_group: {
+    #                   rule_variables: {
+    #                     ip_sets: {
+    #                       definition: ["NonEmptyString"],
+    #                     },
+    #                     port_sets: {
+    #                       definition: ["NonEmptyString"],
+    #                     },
+    #                   },
+    #                   rules_source: {
+    #                     rules_source_list: {
+    #                       generated_rules_type: "NonEmptyString",
+    #                       target_types: ["NonEmptyString"],
+    #                       targets: ["NonEmptyString"],
+    #                     },
+    #                     rules_string: "NonEmptyString",
+    #                     stateful_rules: [
+    #                       {
+    #                         action: "NonEmptyString",
+    #                         header: {
+    #                           destination: "NonEmptyString",
+    #                           destination_port: "NonEmptyString",
+    #                           direction: "NonEmptyString",
+    #                           protocol: "NonEmptyString",
+    #                           source: "NonEmptyString",
+    #                           source_port: "NonEmptyString",
+    #                         },
+    #                         rule_options: [
+    #                           {
+    #                             keyword: "NonEmptyString",
+    #                             settings: ["NonEmptyString"],
+    #                           },
+    #                         ],
+    #                       },
+    #                     ],
+    #                     stateless_rules_and_custom_actions: {
+    #                       custom_actions: [
+    #                         {
+    #                           action_definition: {
+    #                             publish_metric_action: {
+    #                               dimensions: [
+    #                                 {
+    #                                   value: "NonEmptyString",
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           action_name: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       stateless_rules: [
+    #                         {
+    #                           priority: 1,
+    #                           rule_definition: {
+    #                             actions: ["NonEmptyString"],
+    #                             match_attributes: {
+    #                               destination_ports: [
+    #                                 {
+    #                                   from_port: 1,
+    #                                   to_port: 1,
+    #                                 },
+    #                               ],
+    #                               destinations: [
+    #                                 {
+    #                                   address_definition: "NonEmptyString",
+    #                                 },
+    #                               ],
+    #                               protocols: [1],
+    #                               source_ports: [
+    #                                 {
+    #                                   from_port: 1,
+    #                                   to_port: 1,
+    #                                 },
+    #                               ],
+    #                               sources: [
+    #                                 {
+    #                                   address_definition: "NonEmptyString",
+    #                                 },
+    #                               ],
+    #                               tcp_flags: [
+    #                                 {
+    #                                   flags: ["NonEmptyString"],
+    #                                   masks: ["NonEmptyString"],
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                 },
+    #                 rule_group_arn: "NonEmptyString",
+    #                 rule_group_id: "NonEmptyString",
+    #                 rule_group_name: "NonEmptyString",
+    #                 type: "NonEmptyString",
     #               },
     #             },
     #           },
@@ -20805,9 +21679,9 @@ module Aws::SecurityHub
     #     Security Hub also resets the workflow status from `NOTIFIED` or
     #     `RESOLVED` to `NEW` in the following cases:
     #
-    #     * The record state changes from `ARCHIVED` to `ACTIVE`.
+    #     * `RecordState` changes from `ARCHIVED` to `ACTIVE`.
     #
-    #     * The compliance status changes from `PASSED` to either `WARNING`,
+    #     * `Compliance.Status` changes from `PASSED` to either `WARNING`,
     #       `FAILED`, or `NOT_AVAILABLE`.
     #
     #   * `NOTIFIED` - Indicates that the resource owner has been notified
@@ -20815,11 +21689,36 @@ module Aws::SecurityHub
     #     the resource owner, and needs intervention from the resource
     #     owner.
     #
-    #   * `SUPPRESSED` - The finding will not be reviewed again and will not
-    #     be acted upon.
+    #     If one of the following occurs, the workflow status is changed
+    #     automatically from `NOTIFIED` to `NEW`\:
+    #
+    #     * `RecordState` changes from `ARCHIVED` to `ACTIVE`.
+    #
+    #     * `Compliance.Status` changes from `PASSED` to `FAILED`,
+    #       `WARNING`, or `NOT_AVAILABLE`.
+    #
+    #   * `SUPPRESSED` - Indicates that you reviewed the finding and do not
+    #     believe that any action is needed.
+    #
+    #     The workflow status of a `SUPPRESSED` finding does not change if
+    #     `RecordState` changes from `ARCHIVED` to `ACTIVE`.
     #
     #   * `RESOLVED` - The finding was reviewed and remediated and is now
     #     considered resolved.
+    #
+    #     The finding remains `RESOLVED` unless one of the following occurs:
+    #
+    #     * `RecordState` changes from `ARCHIVED` to `ACTIVE`.
+    #
+    #     * `Compliance.Status` changes from `PASSED` to `FAILED`,
+    #       `WARNING`, or `NOT_AVAILABLE`.
+    #
+    #     In those cases, the workflow status is automatically reset to
+    #     `NEW`.
+    #
+    #     For findings from controls, if `Compliance.Status` is `PASSED`,
+    #     then Security Hub automatically sets the workflow status to
+    #     `RESOLVED`.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] record_state
@@ -22102,6 +23001,34 @@ module Aws::SecurityHub
     #                     health_check_type: "NonEmptyString",
     #                     health_check_grace_period: 1,
     #                     created_time: "NonEmptyString",
+    #                     mixed_instances_policy: {
+    #                       instances_distribution: {
+    #                         on_demand_allocation_strategy: "NonEmptyString",
+    #                         on_demand_base_capacity: 1,
+    #                         on_demand_percentage_above_base_capacity: 1,
+    #                         spot_allocation_strategy: "NonEmptyString",
+    #                         spot_instance_pools: 1,
+    #                         spot_max_price: "NonEmptyString",
+    #                       },
+    #                       launch_template: {
+    #                         launch_template_specification: {
+    #                           launch_template_id: "NonEmptyString",
+    #                           launch_template_name: "NonEmptyString",
+    #                           version: "NonEmptyString",
+    #                         },
+    #                         overrides: [
+    #                           {
+    #                             instance_type: "NonEmptyString",
+    #                             weighted_capacity: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     availability_zones: [
+    #                       {
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
     #                   },
     #                   aws_code_build_project: {
     #                     encryption_key: "NonEmptyString",
@@ -22671,6 +23598,10 @@ module Aws::SecurityHub
     #                           type: "NonEmptyString",
     #                         },
     #                       ],
+    #                     },
+    #                     bucket_versioning_configuration: {
+    #                       is_mfa_delete_enabled: false,
+    #                       status: "NonEmptyString",
     #                     },
     #                   },
     #                   aws_s3_account_public_access_block: {
@@ -24086,6 +25017,11 @@ module Aws::SecurityHub
     #                     security_groups: ["NonEmptyString"],
     #                     spot_price: "NonEmptyString",
     #                     user_data: "NonEmptyString",
+    #                     metadata_options: {
+    #                       http_endpoint: "NonEmptyString",
+    #                       http_put_response_hop_limit: 1,
+    #                       http_tokens: "NonEmptyString",
+    #                     },
     #                   },
     #                   aws_ec2_vpn_connection: {
     #                     vpn_connection_id: "NonEmptyString",
@@ -24294,6 +25230,157 @@ module Aws::SecurityHub
     #                         },
     #                       ],
     #                     },
+    #                   },
+    #                   aws_network_firewall_firewall_policy: {
+    #                     firewall_policy: {
+    #                       stateful_rule_group_references: [
+    #                         {
+    #                           resource_arn: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       stateless_custom_actions: [
+    #                         {
+    #                           action_definition: {
+    #                             publish_metric_action: {
+    #                               dimensions: [
+    #                                 {
+    #                                   value: "NonEmptyString",
+    #                                 },
+    #                               ],
+    #                             },
+    #                           },
+    #                           action_name: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                       stateless_default_actions: ["NonEmptyString"],
+    #                       stateless_fragment_default_actions: ["NonEmptyString"],
+    #                       stateless_rule_group_references: [
+    #                         {
+    #                           priority: 1,
+    #                           resource_arn: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                     firewall_policy_arn: "NonEmptyString",
+    #                     firewall_policy_id: "NonEmptyString",
+    #                     firewall_policy_name: "NonEmptyString",
+    #                     description: "NonEmptyString",
+    #                   },
+    #                   aws_network_firewall_firewall: {
+    #                     delete_protection: false,
+    #                     description: "NonEmptyString",
+    #                     firewall_arn: "NonEmptyString",
+    #                     firewall_id: "NonEmptyString",
+    #                     firewall_name: "NonEmptyString",
+    #                     firewall_policy_arn: "NonEmptyString",
+    #                     firewall_policy_change_protection: false,
+    #                     subnet_change_protection: false,
+    #                     subnet_mappings: [
+    #                       {
+    #                         subnet_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     vpc_id: "NonEmptyString",
+    #                   },
+    #                   aws_network_firewall_rule_group: {
+    #                     capacity: 1,
+    #                     description: "NonEmptyString",
+    #                     rule_group: {
+    #                       rule_variables: {
+    #                         ip_sets: {
+    #                           definition: ["NonEmptyString"],
+    #                         },
+    #                         port_sets: {
+    #                           definition: ["NonEmptyString"],
+    #                         },
+    #                       },
+    #                       rules_source: {
+    #                         rules_source_list: {
+    #                           generated_rules_type: "NonEmptyString",
+    #                           target_types: ["NonEmptyString"],
+    #                           targets: ["NonEmptyString"],
+    #                         },
+    #                         rules_string: "NonEmptyString",
+    #                         stateful_rules: [
+    #                           {
+    #                             action: "NonEmptyString",
+    #                             header: {
+    #                               destination: "NonEmptyString",
+    #                               destination_port: "NonEmptyString",
+    #                               direction: "NonEmptyString",
+    #                               protocol: "NonEmptyString",
+    #                               source: "NonEmptyString",
+    #                               source_port: "NonEmptyString",
+    #                             },
+    #                             rule_options: [
+    #                               {
+    #                                 keyword: "NonEmptyString",
+    #                                 settings: ["NonEmptyString"],
+    #                               },
+    #                             ],
+    #                           },
+    #                         ],
+    #                         stateless_rules_and_custom_actions: {
+    #                           custom_actions: [
+    #                             {
+    #                               action_definition: {
+    #                                 publish_metric_action: {
+    #                                   dimensions: [
+    #                                     {
+    #                                       value: "NonEmptyString",
+    #                                     },
+    #                                   ],
+    #                                 },
+    #                               },
+    #                               action_name: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                           stateless_rules: [
+    #                             {
+    #                               priority: 1,
+    #                               rule_definition: {
+    #                                 actions: ["NonEmptyString"],
+    #                                 match_attributes: {
+    #                                   destination_ports: [
+    #                                     {
+    #                                       from_port: 1,
+    #                                       to_port: 1,
+    #                                     },
+    #                                   ],
+    #                                   destinations: [
+    #                                     {
+    #                                       address_definition: "NonEmptyString",
+    #                                     },
+    #                                   ],
+    #                                   protocols: [1],
+    #                                   source_ports: [
+    #                                     {
+    #                                       from_port: 1,
+    #                                       to_port: 1,
+    #                                     },
+    #                                   ],
+    #                                   sources: [
+    #                                     {
+    #                                       address_definition: "NonEmptyString",
+    #                                     },
+    #                                   ],
+    #                                   tcp_flags: [
+    #                                     {
+    #                                       flags: ["NonEmptyString"],
+    #                                       masks: ["NonEmptyString"],
+    #                                     },
+    #                                   ],
+    #                                 },
+    #                               },
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                     rule_group_arn: "NonEmptyString",
+    #                     rule_group_id: "NonEmptyString",
+    #                     rule_group_name: "NonEmptyString",
+    #                     type: "NonEmptyString",
     #                   },
     #                 },
     #               },
@@ -27228,6 +28315,167 @@ module Aws::SecurityHub
     class FindingProviderSeverity < Struct.new(
       :label,
       :original)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the behavior of the firewall.
+    #
+    # @note When making an API call, you may pass FirewallPolicyDetails
+    #   data as a hash:
+    #
+    #       {
+    #         stateful_rule_group_references: [
+    #           {
+    #             resource_arn: "NonEmptyString",
+    #           },
+    #         ],
+    #         stateless_custom_actions: [
+    #           {
+    #             action_definition: {
+    #               publish_metric_action: {
+    #                 dimensions: [
+    #                   {
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             action_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         stateless_default_actions: ["NonEmptyString"],
+    #         stateless_fragment_default_actions: ["NonEmptyString"],
+    #         stateless_rule_group_references: [
+    #           {
+    #             priority: 1,
+    #             resource_arn: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] stateful_rule_group_references
+    #   The stateful rule groups that are used in the firewall policy.
+    #   @return [Array<Types::FirewallPolicyStatefulRuleGroupReferencesDetails>]
+    #
+    # @!attribute [rw] stateless_custom_actions
+    #   The custom action definitions that are available to use in the
+    #   firewall policy's `StatelessDefaultActions` setting.
+    #   @return [Array<Types::FirewallPolicyStatelessCustomActionsDetails>]
+    #
+    # @!attribute [rw] stateless_default_actions
+    #   The actions to take on a packet if it doesn't match any of the
+    #   stateless rules in the policy.
+    #
+    #   You must specify a standard action (`aws:pass`, `aws:drop`,
+    #   `aws:forward_to_sfe`), and can optionally include a custom action
+    #   from `StatelessCustomActions`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stateless_fragment_default_actions
+    #   The actions to take on a fragmented UDP packet if it doesn't match
+    #   any of the stateless rules in the policy.
+    #
+    #   You must specify a standard action (`aws:pass`, `aws:drop`,
+    #   `aws:forward_to_sfe`), and can optionally include a custom action
+    #   from `StatelessCustomActions`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] stateless_rule_group_references
+    #   The stateless rule groups that are used in the firewall policy.
+    #   @return [Array<Types::FirewallPolicyStatelessRuleGroupReferencesDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FirewallPolicyDetails AWS API Documentation
+    #
+    class FirewallPolicyDetails < Struct.new(
+      :stateful_rule_group_references,
+      :stateless_custom_actions,
+      :stateless_default_actions,
+      :stateless_fragment_default_actions,
+      :stateless_rule_group_references)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A stateful rule group that is used by the firewall policy.
+    #
+    # @note When making an API call, you may pass FirewallPolicyStatefulRuleGroupReferencesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the stateful rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FirewallPolicyStatefulRuleGroupReferencesDetails AWS API Documentation
+    #
+    class FirewallPolicyStatefulRuleGroupReferencesDetails < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom action that can be used for stateless packet handling.
+    #
+    # @note When making an API call, you may pass FirewallPolicyStatelessCustomActionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         action_definition: {
+    #           publish_metric_action: {
+    #             dimensions: [
+    #               {
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         action_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] action_definition
+    #   The definition of the custom action.
+    #   @return [Types::StatelessCustomActionDefinition]
+    #
+    # @!attribute [rw] action_name
+    #   The name of the custom action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FirewallPolicyStatelessCustomActionsDetails AWS API Documentation
+    #
+    class FirewallPolicyStatelessCustomActionsDetails < Struct.new(
+      :action_definition,
+      :action_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A stateless rule group that is used by the firewall policy.
+    #
+    # @note When making an API call, you may pass FirewallPolicyStatelessRuleGroupReferencesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         priority: 1,
+    #         resource_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] priority
+    #   The order in which to run the stateless rule group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the stateless rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FirewallPolicyStatelessRuleGroupReferencesDetails AWS API Documentation
+    #
+    class FirewallPolicyStatelessRuleGroupReferencesDetails < Struct.new(
+      :priority,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30408,6 +31656,34 @@ module Aws::SecurityHub
     #             health_check_type: "NonEmptyString",
     #             health_check_grace_period: 1,
     #             created_time: "NonEmptyString",
+    #             mixed_instances_policy: {
+    #               instances_distribution: {
+    #                 on_demand_allocation_strategy: "NonEmptyString",
+    #                 on_demand_base_capacity: 1,
+    #                 on_demand_percentage_above_base_capacity: 1,
+    #                 spot_allocation_strategy: "NonEmptyString",
+    #                 spot_instance_pools: 1,
+    #                 spot_max_price: "NonEmptyString",
+    #               },
+    #               launch_template: {
+    #                 launch_template_specification: {
+    #                   launch_template_id: "NonEmptyString",
+    #                   launch_template_name: "NonEmptyString",
+    #                   version: "NonEmptyString",
+    #                 },
+    #                 overrides: [
+    #                   {
+    #                     instance_type: "NonEmptyString",
+    #                     weighted_capacity: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             availability_zones: [
+    #               {
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
     #           },
     #           aws_code_build_project: {
     #             encryption_key: "NonEmptyString",
@@ -30977,6 +32253,10 @@ module Aws::SecurityHub
     #                   type: "NonEmptyString",
     #                 },
     #               ],
+    #             },
+    #             bucket_versioning_configuration: {
+    #               is_mfa_delete_enabled: false,
+    #               status: "NonEmptyString",
     #             },
     #           },
     #           aws_s3_account_public_access_block: {
@@ -32392,6 +33672,11 @@ module Aws::SecurityHub
     #             security_groups: ["NonEmptyString"],
     #             spot_price: "NonEmptyString",
     #             user_data: "NonEmptyString",
+    #             metadata_options: {
+    #               http_endpoint: "NonEmptyString",
+    #               http_put_response_hop_limit: 1,
+    #               http_tokens: "NonEmptyString",
+    #             },
     #           },
     #           aws_ec2_vpn_connection: {
     #             vpn_connection_id: "NonEmptyString",
@@ -32601,6 +33886,157 @@ module Aws::SecurityHub
     #               ],
     #             },
     #           },
+    #           aws_network_firewall_firewall_policy: {
+    #             firewall_policy: {
+    #               stateful_rule_group_references: [
+    #                 {
+    #                   resource_arn: "NonEmptyString",
+    #                 },
+    #               ],
+    #               stateless_custom_actions: [
+    #                 {
+    #                   action_definition: {
+    #                     publish_metric_action: {
+    #                       dimensions: [
+    #                         {
+    #                           value: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   action_name: "NonEmptyString",
+    #                 },
+    #               ],
+    #               stateless_default_actions: ["NonEmptyString"],
+    #               stateless_fragment_default_actions: ["NonEmptyString"],
+    #               stateless_rule_group_references: [
+    #                 {
+    #                   priority: 1,
+    #                   resource_arn: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #             firewall_policy_arn: "NonEmptyString",
+    #             firewall_policy_id: "NonEmptyString",
+    #             firewall_policy_name: "NonEmptyString",
+    #             description: "NonEmptyString",
+    #           },
+    #           aws_network_firewall_firewall: {
+    #             delete_protection: false,
+    #             description: "NonEmptyString",
+    #             firewall_arn: "NonEmptyString",
+    #             firewall_id: "NonEmptyString",
+    #             firewall_name: "NonEmptyString",
+    #             firewall_policy_arn: "NonEmptyString",
+    #             firewall_policy_change_protection: false,
+    #             subnet_change_protection: false,
+    #             subnet_mappings: [
+    #               {
+    #                 subnet_id: "NonEmptyString",
+    #               },
+    #             ],
+    #             vpc_id: "NonEmptyString",
+    #           },
+    #           aws_network_firewall_rule_group: {
+    #             capacity: 1,
+    #             description: "NonEmptyString",
+    #             rule_group: {
+    #               rule_variables: {
+    #                 ip_sets: {
+    #                   definition: ["NonEmptyString"],
+    #                 },
+    #                 port_sets: {
+    #                   definition: ["NonEmptyString"],
+    #                 },
+    #               },
+    #               rules_source: {
+    #                 rules_source_list: {
+    #                   generated_rules_type: "NonEmptyString",
+    #                   target_types: ["NonEmptyString"],
+    #                   targets: ["NonEmptyString"],
+    #                 },
+    #                 rules_string: "NonEmptyString",
+    #                 stateful_rules: [
+    #                   {
+    #                     action: "NonEmptyString",
+    #                     header: {
+    #                       destination: "NonEmptyString",
+    #                       destination_port: "NonEmptyString",
+    #                       direction: "NonEmptyString",
+    #                       protocol: "NonEmptyString",
+    #                       source: "NonEmptyString",
+    #                       source_port: "NonEmptyString",
+    #                     },
+    #                     rule_options: [
+    #                       {
+    #                         keyword: "NonEmptyString",
+    #                         settings: ["NonEmptyString"],
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 stateless_rules_and_custom_actions: {
+    #                   custom_actions: [
+    #                     {
+    #                       action_definition: {
+    #                         publish_metric_action: {
+    #                           dimensions: [
+    #                             {
+    #                               value: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                       action_name: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   stateless_rules: [
+    #                     {
+    #                       priority: 1,
+    #                       rule_definition: {
+    #                         actions: ["NonEmptyString"],
+    #                         match_attributes: {
+    #                           destination_ports: [
+    #                             {
+    #                               from_port: 1,
+    #                               to_port: 1,
+    #                             },
+    #                           ],
+    #                           destinations: [
+    #                             {
+    #                               address_definition: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                           protocols: [1],
+    #                           source_ports: [
+    #                             {
+    #                               from_port: 1,
+    #                               to_port: 1,
+    #                             },
+    #                           ],
+    #                           sources: [
+    #                             {
+    #                               address_definition: "NonEmptyString",
+    #                             },
+    #                           ],
+    #                           tcp_flags: [
+    #                             {
+    #                               flags: ["NonEmptyString"],
+    #                               masks: ["NonEmptyString"],
+    #                             },
+    #                           ],
+    #                         },
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #             rule_group_arn: "NonEmptyString",
+    #             rule_group_id: "NonEmptyString",
+    #             rule_group_name: "NonEmptyString",
+    #             type: "NonEmptyString",
+    #           },
     #         },
     #       }
     #
@@ -32703,6 +34139,34 @@ module Aws::SecurityHub
     #           health_check_type: "NonEmptyString",
     #           health_check_grace_period: 1,
     #           created_time: "NonEmptyString",
+    #           mixed_instances_policy: {
+    #             instances_distribution: {
+    #               on_demand_allocation_strategy: "NonEmptyString",
+    #               on_demand_base_capacity: 1,
+    #               on_demand_percentage_above_base_capacity: 1,
+    #               spot_allocation_strategy: "NonEmptyString",
+    #               spot_instance_pools: 1,
+    #               spot_max_price: "NonEmptyString",
+    #             },
+    #             launch_template: {
+    #               launch_template_specification: {
+    #                 launch_template_id: "NonEmptyString",
+    #                 launch_template_name: "NonEmptyString",
+    #                 version: "NonEmptyString",
+    #               },
+    #               overrides: [
+    #                 {
+    #                   instance_type: "NonEmptyString",
+    #                   weighted_capacity: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           availability_zones: [
+    #             {
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
     #         },
     #         aws_code_build_project: {
     #           encryption_key: "NonEmptyString",
@@ -33272,6 +34736,10 @@ module Aws::SecurityHub
     #                 type: "NonEmptyString",
     #               },
     #             ],
+    #           },
+    #           bucket_versioning_configuration: {
+    #             is_mfa_delete_enabled: false,
+    #             status: "NonEmptyString",
     #           },
     #         },
     #         aws_s3_account_public_access_block: {
@@ -34687,6 +36155,11 @@ module Aws::SecurityHub
     #           security_groups: ["NonEmptyString"],
     #           spot_price: "NonEmptyString",
     #           user_data: "NonEmptyString",
+    #           metadata_options: {
+    #             http_endpoint: "NonEmptyString",
+    #             http_put_response_hop_limit: 1,
+    #             http_tokens: "NonEmptyString",
+    #           },
     #         },
     #         aws_ec2_vpn_connection: {
     #           vpn_connection_id: "NonEmptyString",
@@ -34895,6 +36368,157 @@ module Aws::SecurityHub
     #               },
     #             ],
     #           },
+    #         },
+    #         aws_network_firewall_firewall_policy: {
+    #           firewall_policy: {
+    #             stateful_rule_group_references: [
+    #               {
+    #                 resource_arn: "NonEmptyString",
+    #               },
+    #             ],
+    #             stateless_custom_actions: [
+    #               {
+    #                 action_definition: {
+    #                   publish_metric_action: {
+    #                     dimensions: [
+    #                       {
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 action_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             stateless_default_actions: ["NonEmptyString"],
+    #             stateless_fragment_default_actions: ["NonEmptyString"],
+    #             stateless_rule_group_references: [
+    #               {
+    #                 priority: 1,
+    #                 resource_arn: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #           firewall_policy_arn: "NonEmptyString",
+    #           firewall_policy_id: "NonEmptyString",
+    #           firewall_policy_name: "NonEmptyString",
+    #           description: "NonEmptyString",
+    #         },
+    #         aws_network_firewall_firewall: {
+    #           delete_protection: false,
+    #           description: "NonEmptyString",
+    #           firewall_arn: "NonEmptyString",
+    #           firewall_id: "NonEmptyString",
+    #           firewall_name: "NonEmptyString",
+    #           firewall_policy_arn: "NonEmptyString",
+    #           firewall_policy_change_protection: false,
+    #           subnet_change_protection: false,
+    #           subnet_mappings: [
+    #             {
+    #               subnet_id: "NonEmptyString",
+    #             },
+    #           ],
+    #           vpc_id: "NonEmptyString",
+    #         },
+    #         aws_network_firewall_rule_group: {
+    #           capacity: 1,
+    #           description: "NonEmptyString",
+    #           rule_group: {
+    #             rule_variables: {
+    #               ip_sets: {
+    #                 definition: ["NonEmptyString"],
+    #               },
+    #               port_sets: {
+    #                 definition: ["NonEmptyString"],
+    #               },
+    #             },
+    #             rules_source: {
+    #               rules_source_list: {
+    #                 generated_rules_type: "NonEmptyString",
+    #                 target_types: ["NonEmptyString"],
+    #                 targets: ["NonEmptyString"],
+    #               },
+    #               rules_string: "NonEmptyString",
+    #               stateful_rules: [
+    #                 {
+    #                   action: "NonEmptyString",
+    #                   header: {
+    #                     destination: "NonEmptyString",
+    #                     destination_port: "NonEmptyString",
+    #                     direction: "NonEmptyString",
+    #                     protocol: "NonEmptyString",
+    #                     source: "NonEmptyString",
+    #                     source_port: "NonEmptyString",
+    #                   },
+    #                   rule_options: [
+    #                     {
+    #                       keyword: "NonEmptyString",
+    #                       settings: ["NonEmptyString"],
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               stateless_rules_and_custom_actions: {
+    #                 custom_actions: [
+    #                   {
+    #                     action_definition: {
+    #                       publish_metric_action: {
+    #                         dimensions: [
+    #                           {
+    #                             value: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                     action_name: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 stateless_rules: [
+    #                   {
+    #                     priority: 1,
+    #                     rule_definition: {
+    #                       actions: ["NonEmptyString"],
+    #                       match_attributes: {
+    #                         destination_ports: [
+    #                           {
+    #                             from_port: 1,
+    #                             to_port: 1,
+    #                           },
+    #                         ],
+    #                         destinations: [
+    #                           {
+    #                             address_definition: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         protocols: [1],
+    #                         source_ports: [
+    #                           {
+    #                             from_port: 1,
+    #                             to_port: 1,
+    #                           },
+    #                         ],
+    #                         sources: [
+    #                           {
+    #                             address_definition: "NonEmptyString",
+    #                           },
+    #                         ],
+    #                         tcp_flags: [
+    #                           {
+    #                             flags: ["NonEmptyString"],
+    #                             masks: ["NonEmptyString"],
+    #                           },
+    #                         ],
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #           rule_group_arn: "NonEmptyString",
+    #           rule_group_id: "NonEmptyString",
+    #           rule_group_name: "NonEmptyString",
+    #           type: "NonEmptyString",
     #         },
     #       }
     #
@@ -35149,6 +36773,18 @@ module Aws::SecurityHub
     #   Details about an Amazon EKS cluster.
     #   @return [Types::AwsEksClusterDetails]
     #
+    # @!attribute [rw] aws_network_firewall_firewall_policy
+    #   Details about an Network Firewall firewall policy.
+    #   @return [Types::AwsNetworkFirewallFirewallPolicyDetails]
+    #
+    # @!attribute [rw] aws_network_firewall_firewall
+    #   Details about an Network Firewall firewall.
+    #   @return [Types::AwsNetworkFirewallFirewallDetails]
+    #
+    # @!attribute [rw] aws_network_firewall_rule_group
+    #   Details about an Network Firewall rule group.
+    #   @return [Types::AwsNetworkFirewallRuleGroupDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -35210,7 +36846,10 @@ module Aws::SecurityHub
       :aws_waf_rate_based_rule,
       :aws_waf_regional_rate_based_rule,
       :aws_ecr_repository,
-      :aws_eks_cluster)
+      :aws_eks_cluster,
+      :aws_network_firewall_firewall_policy,
+      :aws_network_firewall_firewall,
+      :aws_network_firewall_rule_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35249,6 +36888,931 @@ module Aws::SecurityHub
     class Result < Struct.new(
       :account_id,
       :processing_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the rule group.
+    #
+    # @note When making an API call, you may pass RuleGroupDetails
+    #   data as a hash:
+    #
+    #       {
+    #         rule_variables: {
+    #           ip_sets: {
+    #             definition: ["NonEmptyString"],
+    #           },
+    #           port_sets: {
+    #             definition: ["NonEmptyString"],
+    #           },
+    #         },
+    #         rules_source: {
+    #           rules_source_list: {
+    #             generated_rules_type: "NonEmptyString",
+    #             target_types: ["NonEmptyString"],
+    #             targets: ["NonEmptyString"],
+    #           },
+    #           rules_string: "NonEmptyString",
+    #           stateful_rules: [
+    #             {
+    #               action: "NonEmptyString",
+    #               header: {
+    #                 destination: "NonEmptyString",
+    #                 destination_port: "NonEmptyString",
+    #                 direction: "NonEmptyString",
+    #                 protocol: "NonEmptyString",
+    #                 source: "NonEmptyString",
+    #                 source_port: "NonEmptyString",
+    #               },
+    #               rule_options: [
+    #                 {
+    #                   keyword: "NonEmptyString",
+    #                   settings: ["NonEmptyString"],
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           stateless_rules_and_custom_actions: {
+    #             custom_actions: [
+    #               {
+    #                 action_definition: {
+    #                   publish_metric_action: {
+    #                     dimensions: [
+    #                       {
+    #                         value: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #                 action_name: "NonEmptyString",
+    #               },
+    #             ],
+    #             stateless_rules: [
+    #               {
+    #                 priority: 1,
+    #                 rule_definition: {
+    #                   actions: ["NonEmptyString"],
+    #                   match_attributes: {
+    #                     destination_ports: [
+    #                       {
+    #                         from_port: 1,
+    #                         to_port: 1,
+    #                       },
+    #                     ],
+    #                     destinations: [
+    #                       {
+    #                         address_definition: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     protocols: [1],
+    #                     source_ports: [
+    #                       {
+    #                         from_port: 1,
+    #                         to_port: 1,
+    #                       },
+    #                     ],
+    #                     sources: [
+    #                       {
+    #                         address_definition: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     tcp_flags: [
+    #                       {
+    #                         flags: ["NonEmptyString"],
+    #                         masks: ["NonEmptyString"],
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] rule_variables
+    #   Additional settings to use in the specified rules.
+    #   @return [Types::RuleGroupVariables]
+    #
+    # @!attribute [rw] rules_source
+    #   The rules and actions for the rule group.
+    #
+    #   For stateful rule groups, can contain `RulesString`,
+    #   `RulesSourceList`, or `StatefulRules`.
+    #
+    #   For stateless rule groups, contains
+    #   `StatelessRulesAndCustomActions`.
+    #   @return [Types::RuleGroupSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupDetails AWS API Documentation
+    #
+    class RuleGroupDetails < Struct.new(
+      :rule_variables,
+      :rules_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The rules and actions for the rule group.
+    #
+    # @note When making an API call, you may pass RuleGroupSource
+    #   data as a hash:
+    #
+    #       {
+    #         rules_source_list: {
+    #           generated_rules_type: "NonEmptyString",
+    #           target_types: ["NonEmptyString"],
+    #           targets: ["NonEmptyString"],
+    #         },
+    #         rules_string: "NonEmptyString",
+    #         stateful_rules: [
+    #           {
+    #             action: "NonEmptyString",
+    #             header: {
+    #               destination: "NonEmptyString",
+    #               destination_port: "NonEmptyString",
+    #               direction: "NonEmptyString",
+    #               protocol: "NonEmptyString",
+    #               source: "NonEmptyString",
+    #               source_port: "NonEmptyString",
+    #             },
+    #             rule_options: [
+    #               {
+    #                 keyword: "NonEmptyString",
+    #                 settings: ["NonEmptyString"],
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         stateless_rules_and_custom_actions: {
+    #           custom_actions: [
+    #             {
+    #               action_definition: {
+    #                 publish_metric_action: {
+    #                   dimensions: [
+    #                     {
+    #                       value: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               action_name: "NonEmptyString",
+    #             },
+    #           ],
+    #           stateless_rules: [
+    #             {
+    #               priority: 1,
+    #               rule_definition: {
+    #                 actions: ["NonEmptyString"],
+    #                 match_attributes: {
+    #                   destination_ports: [
+    #                     {
+    #                       from_port: 1,
+    #                       to_port: 1,
+    #                     },
+    #                   ],
+    #                   destinations: [
+    #                     {
+    #                       address_definition: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   protocols: [1],
+    #                   source_ports: [
+    #                     {
+    #                       from_port: 1,
+    #                       to_port: 1,
+    #                     },
+    #                   ],
+    #                   sources: [
+    #                     {
+    #                       address_definition: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                   tcp_flags: [
+    #                     {
+    #                       flags: ["NonEmptyString"],
+    #                       masks: ["NonEmptyString"],
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] rules_source_list
+    #   Stateful inspection criteria for a domain list rule group. A domain
+    #   list rule group determines access by specific protocols to specific
+    #   domains.
+    #   @return [Types::RuleGroupSourceListDetails]
+    #
+    # @!attribute [rw] rules_string
+    #   Stateful inspection criteria, provided in Suricata compatible
+    #   intrusion prevention system (IPS) rules.
+    #   @return [String]
+    #
+    # @!attribute [rw] stateful_rules
+    #   Suricata rule specifications.
+    #   @return [Array<Types::RuleGroupSourceStatefulRulesDetails>]
+    #
+    # @!attribute [rw] stateless_rules_and_custom_actions
+    #   The stateless rules and custom actions used by a stateless rule
+    #   group.
+    #   @return [Types::RuleGroupSourceStatelessRulesAndCustomActionsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSource AWS API Documentation
+    #
+    class RuleGroupSource < Struct.new(
+      :rules_source_list,
+      :rules_string,
+      :stateful_rules,
+      :stateless_rules_and_custom_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom action definition. A custom action is an optional,
+    # non-standard action to use for stateless packet handling.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceCustomActionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         action_definition: {
+    #           publish_metric_action: {
+    #             dimensions: [
+    #               {
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         action_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] action_definition
+    #   The definition of a custom action.
+    #   @return [Types::StatelessCustomActionDefinition]
+    #
+    # @!attribute [rw] action_name
+    #   A descriptive name of the custom action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceCustomActionsDetails AWS API Documentation
+    #
+    class RuleGroupSourceCustomActionsDetails < Struct.new(
+      :action_definition,
+      :action_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Stateful inspection criteria for a domain list rule group.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceListDetails
+    #   data as a hash:
+    #
+    #       {
+    #         generated_rules_type: "NonEmptyString",
+    #         target_types: ["NonEmptyString"],
+    #         targets: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] generated_rules_type
+    #   Indicates whether to allow or deny access to the domains listed in
+    #   `Targets`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_types
+    #   The protocols that you want to inspect. Specify `LS_SNI` for HTTPS.
+    #   Specify `HTTP_HOST` for HTTP. You can specify either or both.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] targets
+    #   The domains that you want to inspect for in your traffic flows. You
+    #   can provide full domain names, or use the '.' prefix as a
+    #   wildcard. For example, `.example.com` matches all domains that end
+    #   with `example.com`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceListDetails AWS API Documentation
+    #
+    class RuleGroupSourceListDetails < Struct.new(
+      :generated_rules_type,
+      :target_types,
+      :targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A Suricata rule specification.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatefulRulesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         action: "NonEmptyString",
+    #         header: {
+    #           destination: "NonEmptyString",
+    #           destination_port: "NonEmptyString",
+    #           direction: "NonEmptyString",
+    #           protocol: "NonEmptyString",
+    #           source: "NonEmptyString",
+    #           source_port: "NonEmptyString",
+    #         },
+    #         rule_options: [
+    #           {
+    #             keyword: "NonEmptyString",
+    #             settings: ["NonEmptyString"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] action
+    #   Defines what Network Firewall should do with the packets in a
+    #   traffic flow when the flow matches the stateful rule criteria.
+    #   @return [String]
+    #
+    # @!attribute [rw] header
+    #   The stateful inspection criteria for the rule.
+    #   @return [Types::RuleGroupSourceStatefulRulesHeaderDetails]
+    #
+    # @!attribute [rw] rule_options
+    #   Additional options for the rule.
+    #   @return [Array<Types::RuleGroupSourceStatefulRulesOptionsDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatefulRulesDetails AWS API Documentation
+    #
+    class RuleGroupSourceStatefulRulesDetails < Struct.new(
+      :action,
+      :header,
+      :rule_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The inspection criteria for a stateful rule.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatefulRulesHeaderDetails
+    #   data as a hash:
+    #
+    #       {
+    #         destination: "NonEmptyString",
+    #         destination_port: "NonEmptyString",
+    #         direction: "NonEmptyString",
+    #         protocol: "NonEmptyString",
+    #         source: "NonEmptyString",
+    #         source_port: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] destination
+    #   The destination IP address or address range to inspect for, in CIDR
+    #   notation. To match with any address, specify `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port
+    #   The destination port to inspect for. You can specify an individual
+    #   port, such as `1994`. You also can specify a port range, such as
+    #   `1990:1994`. To match with any port, specify `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] direction
+    #   The direction of traffic flow to inspect. If set to `ANY`, the
+    #   inspection matches bidirectional traffic, both from the source to
+    #   the destination and from the destination to the source. If set to
+    #   `FORWARD`, the inspection only matches traffic going from the source
+    #   to the destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol to inspect for. To inspector for all protocols, use
+    #   `IP`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source IP address or address range to inspect for, in CIDR
+    #   notation. To match with any address, specify `ANY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_port
+    #   The source port to inspect for. You can specify an individual port,
+    #   such as `1994`. You also can specify a port range, such as
+    #   `1990:1994`. To match with any port, specify `ANY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatefulRulesHeaderDetails AWS API Documentation
+    #
+    class RuleGroupSourceStatefulRulesHeaderDetails < Struct.new(
+      :destination,
+      :destination_port,
+      :direction,
+      :protocol,
+      :source,
+      :source_port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule option for a stateful rule.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatefulRulesOptionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         keyword: "NonEmptyString",
+    #         settings: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] keyword
+    #   A keyword to look for.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   A list of settings.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatefulRulesOptionsDetails AWS API Documentation
+    #
+    class RuleGroupSourceStatefulRulesOptionsDetails < Struct.new(
+      :keyword,
+      :settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition of the stateless rule.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatelessRuleDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         actions: ["NonEmptyString"],
+    #         match_attributes: {
+    #           destination_ports: [
+    #             {
+    #               from_port: 1,
+    #               to_port: 1,
+    #             },
+    #           ],
+    #           destinations: [
+    #             {
+    #               address_definition: "NonEmptyString",
+    #             },
+    #           ],
+    #           protocols: [1],
+    #           source_ports: [
+    #             {
+    #               from_port: 1,
+    #               to_port: 1,
+    #             },
+    #           ],
+    #           sources: [
+    #             {
+    #               address_definition: "NonEmptyString",
+    #             },
+    #           ],
+    #           tcp_flags: [
+    #             {
+    #               flags: ["NonEmptyString"],
+    #               masks: ["NonEmptyString"],
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] actions
+    #   The actions to take on a packet that matches one of the stateless
+    #   rule definition's match attributes. You must specify a standard
+    #   action (`aws:pass`, `aws:drop`, or `aws:forward_to_sfe`). You can
+    #   then add custom actions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] match_attributes
+    #   The criteria for Network Firewall to use to inspect an individual
+    #   packet in a stateless rule inspection.
+    #   @return [Types::RuleGroupSourceStatelessRuleMatchAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatelessRuleDefinition AWS API Documentation
+    #
+    class RuleGroupSourceStatelessRuleDefinition < Struct.new(
+      :actions,
+      :match_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Criteria for the stateless rule.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatelessRuleMatchAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         destination_ports: [
+    #           {
+    #             from_port: 1,
+    #             to_port: 1,
+    #           },
+    #         ],
+    #         destinations: [
+    #           {
+    #             address_definition: "NonEmptyString",
+    #           },
+    #         ],
+    #         protocols: [1],
+    #         source_ports: [
+    #           {
+    #             from_port: 1,
+    #             to_port: 1,
+    #           },
+    #         ],
+    #         sources: [
+    #           {
+    #             address_definition: "NonEmptyString",
+    #           },
+    #         ],
+    #         tcp_flags: [
+    #           {
+    #             flags: ["NonEmptyString"],
+    #             masks: ["NonEmptyString"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] destination_ports
+    #   A list of port ranges to specify the destination ports to inspect
+    #   for.
+    #   @return [Array<Types::RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts>]
+    #
+    # @!attribute [rw] destinations
+    #   The destination IP addresses and address ranges to inspect for, in
+    #   CIDR notation.
+    #   @return [Array<Types::RuleGroupSourceStatelessRuleMatchAttributesDestinations>]
+    #
+    # @!attribute [rw] protocols
+    #   The protocols to inspect for.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] source_ports
+    #   A list of port ranges to specify the source ports to inspect for.
+    #   @return [Array<Types::RuleGroupSourceStatelessRuleMatchAttributesSourcePorts>]
+    #
+    # @!attribute [rw] sources
+    #   The source IP addresses and address ranges to inspect for, in CIDR
+    #   notation.
+    #   @return [Array<Types::RuleGroupSourceStatelessRuleMatchAttributesSources>]
+    #
+    # @!attribute [rw] tcp_flags
+    #   The TCP flags and masks to inspect for.
+    #   @return [Array<Types::RuleGroupSourceStatelessRuleMatchAttributesTcpFlags>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatelessRuleMatchAttributes AWS API Documentation
+    #
+    class RuleGroupSourceStatelessRuleMatchAttributes < Struct.new(
+      :destination_ports,
+      :destinations,
+      :protocols,
+      :source_ports,
+      :sources,
+      :tcp_flags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A port range to specify the destination ports to inspect for.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts
+    #   data as a hash:
+    #
+    #       {
+    #         from_port: 1,
+    #         to_port: 1,
+    #       }
+    #
+    # @!attribute [rw] from_port
+    #   The starting port value for the port range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The ending port value for the port range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts AWS API Documentation
+    #
+    class RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts < Struct.new(
+      :from_port,
+      :to_port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A destination IP address or range.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatelessRuleMatchAttributesDestinations
+    #   data as a hash:
+    #
+    #       {
+    #         address_definition: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] address_definition
+    #   An IP address or a block of IP addresses.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatelessRuleMatchAttributesDestinations AWS API Documentation
+    #
+    class RuleGroupSourceStatelessRuleMatchAttributesDestinations < Struct.new(
+      :address_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A port range to specify the source ports to inspect for.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatelessRuleMatchAttributesSourcePorts
+    #   data as a hash:
+    #
+    #       {
+    #         from_port: 1,
+    #         to_port: 1,
+    #       }
+    #
+    # @!attribute [rw] from_port
+    #   The starting port value for the port range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The ending port value for the port range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatelessRuleMatchAttributesSourcePorts AWS API Documentation
+    #
+    class RuleGroupSourceStatelessRuleMatchAttributesSourcePorts < Struct.new(
+      :from_port,
+      :to_port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A source IP addresses and address range to inspect for.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatelessRuleMatchAttributesSources
+    #   data as a hash:
+    #
+    #       {
+    #         address_definition: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] address_definition
+    #   An IP address or a block of IP addresses.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatelessRuleMatchAttributesSources AWS API Documentation
+    #
+    class RuleGroupSourceStatelessRuleMatchAttributesSources < Struct.new(
+      :address_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of TCP flags and masks to inspect for.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatelessRuleMatchAttributesTcpFlags
+    #   data as a hash:
+    #
+    #       {
+    #         flags: ["NonEmptyString"],
+    #         masks: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] flags
+    #   Defines the flags from the `Masks` setting that must be set in order
+    #   for the packet to match. Flags that are listed must be set. Flags
+    #   that are not listed must not be set.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] masks
+    #   The set of flags to consider in the inspection. If not specified,
+    #   then all flags are inspected.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatelessRuleMatchAttributesTcpFlags AWS API Documentation
+    #
+    class RuleGroupSourceStatelessRuleMatchAttributesTcpFlags < Struct.new(
+      :flags,
+      :masks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Stateless rules and custom actions for a stateless rule group.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatelessRulesAndCustomActionsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         custom_actions: [
+    #           {
+    #             action_definition: {
+    #               publish_metric_action: {
+    #                 dimensions: [
+    #                   {
+    #                     value: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             action_name: "NonEmptyString",
+    #           },
+    #         ],
+    #         stateless_rules: [
+    #           {
+    #             priority: 1,
+    #             rule_definition: {
+    #               actions: ["NonEmptyString"],
+    #               match_attributes: {
+    #                 destination_ports: [
+    #                   {
+    #                     from_port: 1,
+    #                     to_port: 1,
+    #                   },
+    #                 ],
+    #                 destinations: [
+    #                   {
+    #                     address_definition: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 protocols: [1],
+    #                 source_ports: [
+    #                   {
+    #                     from_port: 1,
+    #                     to_port: 1,
+    #                   },
+    #                 ],
+    #                 sources: [
+    #                   {
+    #                     address_definition: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 tcp_flags: [
+    #                   {
+    #                     flags: ["NonEmptyString"],
+    #                     masks: ["NonEmptyString"],
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] custom_actions
+    #   Custom actions for the rule group.
+    #   @return [Array<Types::RuleGroupSourceCustomActionsDetails>]
+    #
+    # @!attribute [rw] stateless_rules
+    #   Stateless rules for the rule group.
+    #   @return [Array<Types::RuleGroupSourceStatelessRulesDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatelessRulesAndCustomActionsDetails AWS API Documentation
+    #
+    class RuleGroupSourceStatelessRulesAndCustomActionsDetails < Struct.new(
+      :custom_actions,
+      :stateless_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A stateless rule in the rule group.
+    #
+    # @note When making an API call, you may pass RuleGroupSourceStatelessRulesDetails
+    #   data as a hash:
+    #
+    #       {
+    #         priority: 1,
+    #         rule_definition: {
+    #           actions: ["NonEmptyString"],
+    #           match_attributes: {
+    #             destination_ports: [
+    #               {
+    #                 from_port: 1,
+    #                 to_port: 1,
+    #               },
+    #             ],
+    #             destinations: [
+    #               {
+    #                 address_definition: "NonEmptyString",
+    #               },
+    #             ],
+    #             protocols: [1],
+    #             source_ports: [
+    #               {
+    #                 from_port: 1,
+    #                 to_port: 1,
+    #               },
+    #             ],
+    #             sources: [
+    #               {
+    #                 address_definition: "NonEmptyString",
+    #               },
+    #             ],
+    #             tcp_flags: [
+    #               {
+    #                 flags: ["NonEmptyString"],
+    #                 masks: ["NonEmptyString"],
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] priority
+    #   Indicates the order in which to run this rule relative to all of the
+    #   rules in the stateless rule group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rule_definition
+    #   Provides the definition of the stateless rule.
+    #   @return [Types::RuleGroupSourceStatelessRuleDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupSourceStatelessRulesDetails AWS API Documentation
+    #
+    class RuleGroupSourceStatelessRulesDetails < Struct.new(
+      :priority,
+      :rule_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional settings to use in the specified rules.
+    #
+    # @note When making an API call, you may pass RuleGroupVariables
+    #   data as a hash:
+    #
+    #       {
+    #         ip_sets: {
+    #           definition: ["NonEmptyString"],
+    #         },
+    #         port_sets: {
+    #           definition: ["NonEmptyString"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ip_sets
+    #   A list of IP addresses and address ranges, in CIDR notation.
+    #   @return [Types::RuleGroupVariablesIpSetsDetails]
+    #
+    # @!attribute [rw] port_sets
+    #   A list of port ranges.
+    #   @return [Types::RuleGroupVariablesPortSetsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupVariables AWS API Documentation
+    #
+    class RuleGroupVariables < Struct.new(
+      :ip_sets,
+      :port_sets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of IP addresses and address ranges, in CIDR notation.
+    #
+    # @note When making an API call, you may pass RuleGroupVariablesIpSetsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         definition: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] definition
+    #   The list of IP addresses and ranges.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupVariablesIpSetsDetails AWS API Documentation
+    #
+    class RuleGroupVariablesIpSetsDetails < Struct.new(
+      :definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of port ranges.
+    #
+    # @note When making an API call, you may pass RuleGroupVariablesPortSetsDetails
+    #   data as a hash:
+    #
+    #       {
+    #         definition: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] definition
+    #   The list of port ranges.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RuleGroupVariablesPortSetsDetails AWS API Documentation
+    #
+    class RuleGroupVariablesPortSetsDetails < Struct.new(
+      :definition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35761,6 +38325,21 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The reason for the current status of a standard subscription.
+    #
+    # @!attribute [rw] status_reason_code
+    #   The reason code that represents the reason for the current status of
+    #   a standard subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsStatusReason AWS API Documentation
+    #
+    class StandardsStatusReason < Struct.new(
+      :status_reason_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A resource that represents your subscription to a supported standard.
     #
     # @!attribute [rw] standards_subscription_arn
@@ -35793,13 +38372,18 @@ module Aws::SecurityHub
     #   * `FAILED` - Standard could not be disabled.
     #   @return [String]
     #
+    # @!attribute [rw] standards_status_reason
+    #   The reason for the current status.
+    #   @return [Types::StandardsStatusReason]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsSubscription AWS API Documentation
     #
     class StandardsSubscription < Struct.new(
       :standards_subscription_arn,
       :standards_arn,
       :standards_input,
-      :standards_status)
+      :standards_status,
+      :standards_status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35831,6 +38415,80 @@ module Aws::SecurityHub
     class StandardsSubscriptionRequest < Struct.new(
       :standards_arn,
       :standards_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The definition of a custom action that can be used for stateless
+    # packet handling.
+    #
+    # @note When making an API call, you may pass StatelessCustomActionDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         publish_metric_action: {
+    #           dimensions: [
+    #             {
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] publish_metric_action
+    #   Information about metrics to publish to CloudWatch.
+    #   @return [Types::StatelessCustomPublishMetricAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StatelessCustomActionDefinition AWS API Documentation
+    #
+    class StatelessCustomActionDefinition < Struct.new(
+      :publish_metric_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about metrics to publish to CloudWatch.
+    #
+    # @note When making an API call, you may pass StatelessCustomPublishMetricAction
+    #   data as a hash:
+    #
+    #       {
+    #         dimensions: [
+    #           {
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dimensions
+    #   Defines CloudWatch dimension values to publish.
+    #   @return [Array<Types::StatelessCustomPublishMetricActionDimension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StatelessCustomPublishMetricAction AWS API Documentation
+    #
+    class StatelessCustomPublishMetricAction < Struct.new(
+      :dimensions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines a CloudWatch dimension value to publish.
+    #
+    # @note When making an API call, you may pass StatelessCustomPublishMetricActionDimension
+    #   data as a hash:
+    #
+    #       {
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value to use for the custom metric dimension.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StatelessCustomPublishMetricActionDimension AWS API Documentation
+    #
+    class StatelessCustomPublishMetricActionDimension < Struct.new(
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

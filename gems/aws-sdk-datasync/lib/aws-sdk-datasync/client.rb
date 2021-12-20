@@ -574,22 +574,73 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Creates an endpoint for an Amazon FSx for Lustre file system.
+    #
+    # @option params [required, String] :fsx_filesystem_arn
+    #   The Amazon Resource Name (ARN) for the FSx for Lustre file system.
+    #
+    # @option params [required, Array<String>] :security_group_arns
+    #   The Amazon Resource Names (ARNs) of the security groups that are used
+    #   to configure the FSx for Lustre file system.
+    #
+    # @option params [String] :subdirectory
+    #   A subdirectory in the location's path. This subdirectory in the FSx
+    #   for Lustre file system is used to read data from the FSx for Lustre
+    #   source location or write data to the FSx for Lustre destination.
+    #
+    # @option params [Array<Types::TagListEntry>] :tags
+    #   The key-value pair that represents a tag that you want to add to the
+    #   resource. The value can be an empty string. This value helps you
+    #   manage, filter, and search for your resources. We recommend that you
+    #   create a name tag for your location.
+    #
+    # @return [Types::CreateLocationFsxLustreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLocationFsxLustreResponse#location_arn #location_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_location_fsx_lustre({
+    #     fsx_filesystem_arn: "FsxFilesystemArn", # required
+    #     security_group_arns: ["Ec2SecurityGroupArn"], # required
+    #     subdirectory: "FsxLustreSubdirectory",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxLustre AWS API Documentation
+    #
+    # @overload create_location_fsx_lustre(params = {})
+    # @param [Hash] params ({})
+    def create_location_fsx_lustre(params = {}, options = {})
+      req = build_request(:create_location_fsx_lustre, params)
+      req.send_request(options)
+    end
+
     # Creates an endpoint for an Amazon FSx for Windows File Server file
     # system.
     #
     # @option params [String] :subdirectory
-    #   A subdirectory in the location’s path. This subdirectory in the Amazon
-    #   FSx for Windows File Server file system is used to read data from the
-    #   Amazon FSx for Windows File Server source location or write data to
-    #   the FSx for Windows File Server destination.
+    #   A subdirectory in the location's path. This subdirectory in the
+    #   Amazon FSx for Windows File Server file system is used to read data
+    #   from the Amazon FSx for Windows File Server source location or write
+    #   data to the FSx for Windows File Server destination.
     #
     # @option params [required, String] :fsx_filesystem_arn
     #   The Amazon Resource Name (ARN) for the FSx for Windows File Server
     #   file system.
     #
     # @option params [required, Array<String>] :security_group_arns
-    #   The Amazon Resource Names (ARNs) of the security groups that are to
-    #   use to configure the FSx for Windows File Server file system.
+    #   The Amazon Resource Names (ARNs) of the security groups that are used
+    #   to configure the FSx for Windows File Server file system.
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents a tag that you want to add to the
@@ -1470,6 +1521,43 @@ module Aws::DataSync
     # @param [Hash] params ({})
     def describe_location_efs(params = {}, options = {})
       req = build_request(:describe_location_efs, params)
+      req.send_request(options)
+    end
+
+    # Returns metadata, such as the path information about an Amazon FSx for
+    # Lustre location.
+    #
+    # @option params [required, String] :location_arn
+    #   The Amazon Resource Name (ARN) of the FSx for Lustre location to
+    #   describe.
+    #
+    # @return [Types::DescribeLocationFsxLustreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLocationFsxLustreResponse#location_arn #location_arn} => String
+    #   * {Types::DescribeLocationFsxLustreResponse#location_uri #location_uri} => String
+    #   * {Types::DescribeLocationFsxLustreResponse#security_group_arns #security_group_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeLocationFsxLustreResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_location_fsx_lustre({
+    #     location_arn: "LocationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #   resp.location_uri #=> String
+    #   resp.security_group_arns #=> Array
+    #   resp.security_group_arns[0] #=> String
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxLustre AWS API Documentation
+    #
+    # @overload describe_location_fsx_lustre(params = {})
+    # @param [Hash] params ({})
+    def describe_location_fsx_lustre(params = {}, options = {})
+      req = build_request(:describe_location_fsx_lustre, params)
       req.send_request(options)
     end
 
@@ -2815,7 +2903,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

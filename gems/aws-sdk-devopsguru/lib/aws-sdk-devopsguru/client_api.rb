@@ -464,6 +464,7 @@ module Aws::DevOpsGuru
     DescribeOrganizationResourceCollectionHealthResponse.add_member(:service, Shapes::ShapeRef.new(shape: ServiceHealths, location_name: "Service"))
     DescribeOrganizationResourceCollectionHealthResponse.add_member(:account, Shapes::ShapeRef.new(shape: AccountHealths, location_name: "Account"))
     DescribeOrganizationResourceCollectionHealthResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: UuidNextToken, location_name: "NextToken"))
+    DescribeOrganizationResourceCollectionHealthResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagHealths, location_name: "Tags"))
     DescribeOrganizationResourceCollectionHealthResponse.struct_class = Types::DescribeOrganizationResourceCollectionHealthResponse
 
     DescribeResourceCollectionHealthRequest.add_member(:resource_collection_type, Shapes::ShapeRef.new(shape: ResourceCollectionType, required: true, location: "uri", location_name: "ResourceCollectionType"))

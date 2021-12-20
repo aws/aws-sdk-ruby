@@ -59,6 +59,7 @@ module Aws::FinSpaceData
     Email = Shapes::StringShape.new(name: 'Email')
     ErrorCategory = Shapes::StringShape.new(name: 'ErrorCategory')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExportFileFormat = Shapes::StringShape.new(name: 'ExportFileFormat')
     FormatParams = Shapes::MapShape.new(name: 'FormatParams')
     GetChangesetRequest = Shapes::StructureShape.new(name: 'GetChangesetRequest')
     GetChangesetResponse = Shapes::StructureShape.new(name: 'GetChangesetResponse')
@@ -90,6 +91,7 @@ module Aws::FinSpaceData
     ResourcePermission = Shapes::StructureShape.new(name: 'ResourcePermission')
     ResourcePermissionsList = Shapes::ListShape.new(name: 'ResourcePermissionsList')
     ResultLimit = Shapes::IntegerShape.new(name: 'ResultLimit')
+    S3DestinationFormatOptions = Shapes::MapShape.new(name: 'S3DestinationFormatOptions')
     SchemaDefinition = Shapes::StructureShape.new(name: 'SchemaDefinition')
     SchemaUnion = Shapes::StructureShape.new(name: 'SchemaUnion')
     SessionDuration = Shapes::IntegerShape.new(name: 'SessionDuration')
@@ -132,6 +134,7 @@ module Aws::FinSpaceData
     ChangesetSummary.add_member(:status, Shapes::ShapeRef.new(shape: IngestionStatus, location_name: "status"))
     ChangesetSummary.add_member(:error_info, Shapes::ShapeRef.new(shape: ChangesetErrorInfo, location_name: "errorInfo"))
     ChangesetSummary.add_member(:active_until_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeUntilTimestamp", metadata: {"box"=>true}))
+    ChangesetSummary.add_member(:active_from_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeFromTimestamp", metadata: {"box"=>true}))
     ChangesetSummary.add_member(:updates_changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "updatesChangesetId"))
     ChangesetSummary.add_member(:updated_by_changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "updatedByChangesetId"))
     ChangesetSummary.struct_class = Types::ChangesetSummary
@@ -175,10 +178,10 @@ module Aws::FinSpaceData
     CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateDatasetRequest.add_member(:dataset_title, Shapes::ShapeRef.new(shape: DatasetTitle, required: true, location_name: "datasetTitle"))
     CreateDatasetRequest.add_member(:kind, Shapes::ShapeRef.new(shape: DatasetKind, required: true, location_name: "kind"))
-    CreateDatasetRequest.add_member(:dataset_description, Shapes::ShapeRef.new(shape: DatasetDescription, required: true, location_name: "datasetDescription"))
+    CreateDatasetRequest.add_member(:dataset_description, Shapes::ShapeRef.new(shape: DatasetDescription, location_name: "datasetDescription"))
     CreateDatasetRequest.add_member(:owner_info, Shapes::ShapeRef.new(shape: DatasetOwnerInfo, location_name: "ownerInfo"))
     CreateDatasetRequest.add_member(:permission_group_params, Shapes::ShapeRef.new(shape: PermissionGroupParams, required: true, location_name: "permissionGroupParams"))
-    CreateDatasetRequest.add_member(:alias, Shapes::ShapeRef.new(shape: AliasString, required: true, location_name: "alias"))
+    CreateDatasetRequest.add_member(:alias, Shapes::ShapeRef.new(shape: AliasString, location_name: "alias"))
     CreateDatasetRequest.add_member(:schema_definition, Shapes::ShapeRef.new(shape: SchemaUnion, location_name: "schemaDefinition"))
     CreateDatasetRequest.struct_class = Types::CreateDatasetRequest
 
@@ -191,6 +194,8 @@ module Aws::FinSpaceData
     Credentials.struct_class = Types::Credentials
 
     DataViewDestinationTypeParams.add_member(:destination_type, Shapes::ShapeRef.new(shape: DataViewDestinationType, required: true, location_name: "destinationType"))
+    DataViewDestinationTypeParams.add_member(:s3_destination_export_file_format, Shapes::ShapeRef.new(shape: ExportFileFormat, location_name: "s3DestinationExportFileFormat"))
+    DataViewDestinationTypeParams.add_member(:s3_destination_export_file_format_options, Shapes::ShapeRef.new(shape: S3DestinationFormatOptions, location_name: "s3DestinationExportFileFormatOptions"))
     DataViewDestinationTypeParams.struct_class = Types::DataViewDestinationTypeParams
 
     DataViewErrorInfo.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
@@ -256,6 +261,7 @@ module Aws::FinSpaceData
     GetChangesetResponse.add_member(:status, Shapes::ShapeRef.new(shape: IngestionStatus, location_name: "status"))
     GetChangesetResponse.add_member(:error_info, Shapes::ShapeRef.new(shape: ChangesetErrorInfo, location_name: "errorInfo"))
     GetChangesetResponse.add_member(:active_until_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeUntilTimestamp", metadata: {"box"=>true}))
+    GetChangesetResponse.add_member(:active_from_timestamp, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "activeFromTimestamp", metadata: {"box"=>true}))
     GetChangesetResponse.add_member(:updates_changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "updatesChangesetId"))
     GetChangesetResponse.add_member(:updated_by_changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "updatedByChangesetId"))
     GetChangesetResponse.struct_class = Types::GetChangesetResponse
@@ -355,6 +361,9 @@ module Aws::FinSpaceData
 
     ResourcePermissionsList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
 
+    S3DestinationFormatOptions.key = Shapes::ShapeRef.new(shape: StringMapKey)
+    S3DestinationFormatOptions.value = Shapes::ShapeRef.new(shape: StringMapValue)
+
     SchemaDefinition.add_member(:columns, Shapes::ShapeRef.new(shape: ColumnList, location_name: "columns"))
     SchemaDefinition.add_member(:primary_key_columns, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "primaryKeyColumns"))
     SchemaDefinition.struct_class = Types::SchemaDefinition
@@ -385,7 +394,7 @@ module Aws::FinSpaceData
     UpdateDatasetRequest.add_member(:dataset_title, Shapes::ShapeRef.new(shape: DatasetTitle, required: true, location_name: "datasetTitle"))
     UpdateDatasetRequest.add_member(:kind, Shapes::ShapeRef.new(shape: DatasetKind, required: true, location_name: "kind"))
     UpdateDatasetRequest.add_member(:dataset_description, Shapes::ShapeRef.new(shape: DatasetDescription, location_name: "datasetDescription"))
-    UpdateDatasetRequest.add_member(:alias, Shapes::ShapeRef.new(shape: AliasString, required: true, location_name: "alias"))
+    UpdateDatasetRequest.add_member(:alias, Shapes::ShapeRef.new(shape: AliasString, location_name: "alias"))
     UpdateDatasetRequest.add_member(:schema_definition, Shapes::ShapeRef.new(shape: SchemaUnion, location_name: "schemaDefinition"))
     UpdateDatasetRequest.struct_class = Types::UpdateDatasetRequest
 

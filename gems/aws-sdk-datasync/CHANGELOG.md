@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2021-12-20)
+------------------
+
+* Feature - AWS DataSync now supports FSx Lustre Locations.
+
 1.40.0 (2021-11-30)
 ------------------
 

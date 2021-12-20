@@ -22,6 +22,7 @@ module Aws::Imagebuilder
     AmiNameString = Shapes::StringShape.new(name: 'AmiNameString')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BuildType = Shapes::StringShape.new(name: 'BuildType')
     CallRateLimitExceededException = Shapes::StructureShape.new(name: 'CallRateLimitExceededException')
     CancelImageCreationRequest = Shapes::StructureShape.new(name: 'CancelImageCreationRequest')
     CancelImageCreationResponse = Shapes::StructureShape.new(name: 'CancelImageCreationResponse')
@@ -89,6 +90,7 @@ module Aws::Imagebuilder
     DeleteImageResponse = Shapes::StructureShape.new(name: 'DeleteImageResponse')
     DeleteInfrastructureConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteInfrastructureConfigurationRequest')
     DeleteInfrastructureConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteInfrastructureConfigurationResponse')
+    DiskImageFormat = Shapes::StringShape.new(name: 'DiskImageFormat')
     Distribution = Shapes::StructureShape.new(name: 'Distribution')
     DistributionConfiguration = Shapes::StructureShape.new(name: 'DistributionConfiguration')
     DistributionConfigurationArn = Shapes::StringShape.new(name: 'DistributionConfigurationArn')
@@ -160,6 +162,8 @@ module Aws::Imagebuilder
     ImageVersionList = Shapes::ListShape.new(name: 'ImageVersionList')
     ImportComponentRequest = Shapes::StructureShape.new(name: 'ImportComponentRequest')
     ImportComponentResponse = Shapes::StructureShape.new(name: 'ImportComponentResponse')
+    ImportVmImageRequest = Shapes::StructureShape.new(name: 'ImportVmImageRequest')
+    ImportVmImageResponse = Shapes::StructureShape.new(name: 'ImportVmImageResponse')
     InfrastructureConfiguration = Shapes::StructureShape.new(name: 'InfrastructureConfiguration')
     InfrastructureConfigurationArn = Shapes::StringShape.new(name: 'InfrastructureConfigurationArn')
     InfrastructureConfigurationSummary = Shapes::StructureShape.new(name: 'InfrastructureConfigurationSummary')
@@ -241,6 +245,7 @@ module Aws::Imagebuilder
     ResourcePolicyDocument = Shapes::StringShape.new(name: 'ResourcePolicyDocument')
     ResourceTagMap = Shapes::MapShape.new(name: 'ResourceTagMap')
     RestrictedInteger = Shapes::IntegerShape.new(name: 'RestrictedInteger')
+    S3ExportConfiguration = Shapes::StructureShape.new(name: 'S3ExportConfiguration')
     S3Logs = Shapes::StructureShape.new(name: 'S3Logs')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
@@ -605,6 +610,7 @@ module Aws::Imagebuilder
     Distribution.add_member(:container_distribution_configuration, Shapes::ShapeRef.new(shape: ContainerDistributionConfiguration, location_name: "containerDistributionConfiguration"))
     Distribution.add_member(:license_configuration_arns, Shapes::ShapeRef.new(shape: LicenseConfigurationArnList, location_name: "licenseConfigurationArns"))
     Distribution.add_member(:launch_template_configurations, Shapes::ShapeRef.new(shape: LaunchTemplateConfigurationList, location_name: "launchTemplateConfigurations"))
+    Distribution.add_member(:s3_export_configuration, Shapes::ShapeRef.new(shape: S3ExportConfiguration, location_name: "s3ExportConfiguration"))
     Distribution.struct_class = Types::Distribution
 
     DistributionConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
@@ -749,6 +755,7 @@ module Aws::Imagebuilder
     Image.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     Image.add_member(:output_resources, Shapes::ShapeRef.new(shape: OutputResources, location_name: "outputResources"))
     Image.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Image.add_member(:build_type, Shapes::ShapeRef.new(shape: BuildType, location_name: "buildType"))
     Image.struct_class = Types::Image
 
     ImagePackage.add_member(:package_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "packageName"))
@@ -820,6 +827,7 @@ module Aws::Imagebuilder
     ImageSummary.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     ImageSummary.add_member(:output_resources, Shapes::ShapeRef.new(shape: OutputResources, location_name: "outputResources"))
     ImageSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ImageSummary.add_member(:build_type, Shapes::ShapeRef.new(shape: BuildType, location_name: "buildType"))
     ImageSummary.struct_class = Types::ImageSummary
 
     ImageSummaryList.member = Shapes::ShapeRef.new(shape: ImageSummary)
@@ -836,6 +844,7 @@ module Aws::Imagebuilder
     ImageVersion.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, location_name: "osVersion"))
     ImageVersion.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     ImageVersion.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
+    ImageVersion.add_member(:build_type, Shapes::ShapeRef.new(shape: BuildType, location_name: "buildType"))
     ImageVersion.struct_class = Types::ImageVersion
 
     ImageVersionList.member = Shapes::ShapeRef.new(shape: ImageVersion)
@@ -858,6 +867,21 @@ module Aws::Imagebuilder
     ImportComponentResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
     ImportComponentResponse.add_member(:component_build_version_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, location_name: "componentBuildVersionArn"))
     ImportComponentResponse.struct_class = Types::ImportComponentResponse
+
+    ImportVmImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
+    ImportVmImageRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "semanticVersion"))
+    ImportVmImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
+    ImportVmImageRequest.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, required: true, location_name: "platform"))
+    ImportVmImageRequest.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, location_name: "osVersion"))
+    ImportVmImageRequest.add_member(:vm_import_task_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "vmImportTaskId"))
+    ImportVmImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    ImportVmImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ImportVmImageRequest.struct_class = Types::ImportVmImageRequest
+
+    ImportVmImageResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
+    ImportVmImageResponse.add_member(:image_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "imageArn"))
+    ImportVmImageResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    ImportVmImageResponse.struct_class = Types::ImportVmImageResponse
 
     InfrastructureConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: ImageBuilderArn, location_name: "arn"))
     InfrastructureConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -1127,6 +1151,12 @@ module Aws::Imagebuilder
 
     ResourceTagMap.key = Shapes::ShapeRef.new(shape: TagKey)
     ResourceTagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    S3ExportConfiguration.add_member(:role_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "roleName"))
+    S3ExportConfiguration.add_member(:disk_image_format, Shapes::ShapeRef.new(shape: DiskImageFormat, required: true, location_name: "diskImageFormat"))
+    S3ExportConfiguration.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "s3Bucket"))
+    S3ExportConfiguration.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "s3Prefix"))
+    S3ExportConfiguration.struct_class = Types::S3ExportConfiguration
 
     S3Logs.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "s3BucketName"))
     S3Logs.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "s3KeyPrefix"))
@@ -1671,6 +1701,17 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: InvalidVersionNumberException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:import_vm_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportVmImage"
+        o.http_method = "PUT"
+        o.http_request_uri = "/ImportVmImage"
+        o.input = Shapes::ShapeRef.new(shape: ImportVmImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportVmImageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:list_component_build_versions, Seahorse::Model::Operation.new.tap do |o|

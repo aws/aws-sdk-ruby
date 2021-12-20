@@ -50,12 +50,21 @@ module Aws::SecurityHub
     AwsApiGatewayV2ApiDetails = Shapes::StructureShape.new(name: 'AwsApiGatewayV2ApiDetails')
     AwsApiGatewayV2RouteSettings = Shapes::StructureShape.new(name: 'AwsApiGatewayV2RouteSettings')
     AwsApiGatewayV2StageDetails = Shapes::StructureShape.new(name: 'AwsApiGatewayV2StageDetails')
+    AwsAutoScalingAutoScalingGroupAvailabilityZonesList = Shapes::ListShape.new(name: 'AwsAutoScalingAutoScalingGroupAvailabilityZonesList')
+    AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails')
     AwsAutoScalingAutoScalingGroupDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupDetails')
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails')
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails')
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails')
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification')
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesList = Shapes::ListShape.new(name: 'AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesList')
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails')
     AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails')
     AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails')
     AwsAutoScalingLaunchConfigurationBlockDeviceMappingsList = Shapes::ListShape.new(name: 'AwsAutoScalingLaunchConfigurationBlockDeviceMappingsList')
     AwsAutoScalingLaunchConfigurationDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingLaunchConfigurationDetails')
     AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails')
+    AwsAutoScalingLaunchConfigurationMetadataOptions = Shapes::StructureShape.new(name: 'AwsAutoScalingLaunchConfigurationMetadataOptions')
     AwsCertificateManagerCertificateDetails = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateDetails')
     AwsCertificateManagerCertificateDomainValidationOption = Shapes::StructureShape.new(name: 'AwsCertificateManagerCertificateDomainValidationOption')
     AwsCertificateManagerCertificateDomainValidationOptions = Shapes::ListShape.new(name: 'AwsCertificateManagerCertificateDomainValidationOptions')
@@ -320,6 +329,11 @@ module Aws::SecurityHub
     AwsLambdaFunctionVpcConfig = Shapes::StructureShape.new(name: 'AwsLambdaFunctionVpcConfig')
     AwsLambdaLayerVersionDetails = Shapes::StructureShape.new(name: 'AwsLambdaLayerVersionDetails')
     AwsLambdaLayerVersionNumber = Shapes::IntegerShape.new(name: 'AwsLambdaLayerVersionNumber')
+    AwsNetworkFirewallFirewallDetails = Shapes::StructureShape.new(name: 'AwsNetworkFirewallFirewallDetails')
+    AwsNetworkFirewallFirewallPolicyDetails = Shapes::StructureShape.new(name: 'AwsNetworkFirewallFirewallPolicyDetails')
+    AwsNetworkFirewallFirewallSubnetMappingsDetails = Shapes::StructureShape.new(name: 'AwsNetworkFirewallFirewallSubnetMappingsDetails')
+    AwsNetworkFirewallFirewallSubnetMappingsList = Shapes::ListShape.new(name: 'AwsNetworkFirewallFirewallSubnetMappingsList')
+    AwsNetworkFirewallRuleGroupDetails = Shapes::StructureShape.new(name: 'AwsNetworkFirewallRuleGroupDetails')
     AwsOpenSearchServiceDomainClusterConfigDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainClusterConfigDetails')
     AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails')
     AwsOpenSearchServiceDomainDetails = Shapes::StructureShape.new(name: 'AwsOpenSearchServiceDomainDetails')
@@ -399,6 +413,7 @@ module Aws::SecurityHub
     AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList = Shapes::ListShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList')
     AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails = Shapes::StructureShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails')
     AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList = Shapes::ListShape.new(name: 'AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList')
+    AwsS3BucketBucketVersioningConfiguration = Shapes::StructureShape.new(name: 'AwsS3BucketBucketVersioningConfiguration')
     AwsS3BucketDetails = Shapes::StructureShape.new(name: 'AwsS3BucketDetails')
     AwsS3BucketLoggingConfiguration = Shapes::StructureShape.new(name: 'AwsS3BucketLoggingConfiguration')
     AwsS3BucketNotificationConfiguration = Shapes::StructureShape.new(name: 'AwsS3BucketNotificationConfiguration')
@@ -538,6 +553,13 @@ module Aws::SecurityHub
     FindingAggregatorList = Shapes::ListShape.new(name: 'FindingAggregatorList')
     FindingProviderFields = Shapes::StructureShape.new(name: 'FindingProviderFields')
     FindingProviderSeverity = Shapes::StructureShape.new(name: 'FindingProviderSeverity')
+    FirewallPolicyDetails = Shapes::StructureShape.new(name: 'FirewallPolicyDetails')
+    FirewallPolicyStatefulRuleGroupReferencesDetails = Shapes::StructureShape.new(name: 'FirewallPolicyStatefulRuleGroupReferencesDetails')
+    FirewallPolicyStatefulRuleGroupReferencesList = Shapes::ListShape.new(name: 'FirewallPolicyStatefulRuleGroupReferencesList')
+    FirewallPolicyStatelessCustomActionsDetails = Shapes::StructureShape.new(name: 'FirewallPolicyStatelessCustomActionsDetails')
+    FirewallPolicyStatelessCustomActionsList = Shapes::ListShape.new(name: 'FirewallPolicyStatelessCustomActionsList')
+    FirewallPolicyStatelessRuleGroupReferencesDetails = Shapes::StructureShape.new(name: 'FirewallPolicyStatelessRuleGroupReferencesDetails')
+    FirewallPolicyStatelessRuleGroupReferencesList = Shapes::ListShape.new(name: 'FirewallPolicyStatelessRuleGroupReferencesList')
     GeoLocation = Shapes::StructureShape.new(name: 'GeoLocation')
     GetAdministratorAccountRequest = Shapes::StructureShape.new(name: 'GetAdministratorAccountRequest')
     GetAdministratorAccountResponse = Shapes::StructureShape.new(name: 'GetAdministratorAccountResponse')
@@ -656,6 +678,36 @@ module Aws::SecurityHub
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Result = Shapes::StructureShape.new(name: 'Result')
     ResultList = Shapes::ListShape.new(name: 'ResultList')
+    RuleGroupDetails = Shapes::StructureShape.new(name: 'RuleGroupDetails')
+    RuleGroupSource = Shapes::StructureShape.new(name: 'RuleGroupSource')
+    RuleGroupSourceCustomActionsDetails = Shapes::StructureShape.new(name: 'RuleGroupSourceCustomActionsDetails')
+    RuleGroupSourceCustomActionsList = Shapes::ListShape.new(name: 'RuleGroupSourceCustomActionsList')
+    RuleGroupSourceListDetails = Shapes::StructureShape.new(name: 'RuleGroupSourceListDetails')
+    RuleGroupSourceStatefulRulesDetails = Shapes::StructureShape.new(name: 'RuleGroupSourceStatefulRulesDetails')
+    RuleGroupSourceStatefulRulesHeaderDetails = Shapes::StructureShape.new(name: 'RuleGroupSourceStatefulRulesHeaderDetails')
+    RuleGroupSourceStatefulRulesList = Shapes::ListShape.new(name: 'RuleGroupSourceStatefulRulesList')
+    RuleGroupSourceStatefulRulesOptionsDetails = Shapes::StructureShape.new(name: 'RuleGroupSourceStatefulRulesOptionsDetails')
+    RuleGroupSourceStatefulRulesOptionsList = Shapes::ListShape.new(name: 'RuleGroupSourceStatefulRulesOptionsList')
+    RuleGroupSourceStatefulRulesRuleOptionsSettingsList = Shapes::ListShape.new(name: 'RuleGroupSourceStatefulRulesRuleOptionsSettingsList')
+    RuleGroupSourceStatelessRuleDefinition = Shapes::StructureShape.new(name: 'RuleGroupSourceStatelessRuleDefinition')
+    RuleGroupSourceStatelessRuleMatchAttributes = Shapes::StructureShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributes')
+    RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts = Shapes::StructureShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts')
+    RuleGroupSourceStatelessRuleMatchAttributesDestinationPortsList = Shapes::ListShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributesDestinationPortsList')
+    RuleGroupSourceStatelessRuleMatchAttributesDestinations = Shapes::StructureShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributesDestinations')
+    RuleGroupSourceStatelessRuleMatchAttributesDestinationsList = Shapes::ListShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributesDestinationsList')
+    RuleGroupSourceStatelessRuleMatchAttributesProtocolsList = Shapes::ListShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributesProtocolsList')
+    RuleGroupSourceStatelessRuleMatchAttributesSourcePorts = Shapes::StructureShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributesSourcePorts')
+    RuleGroupSourceStatelessRuleMatchAttributesSourcePortsList = Shapes::ListShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributesSourcePortsList')
+    RuleGroupSourceStatelessRuleMatchAttributesSources = Shapes::StructureShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributesSources')
+    RuleGroupSourceStatelessRuleMatchAttributesSourcesList = Shapes::ListShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributesSourcesList')
+    RuleGroupSourceStatelessRuleMatchAttributesTcpFlags = Shapes::StructureShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributesTcpFlags')
+    RuleGroupSourceStatelessRuleMatchAttributesTcpFlagsList = Shapes::ListShape.new(name: 'RuleGroupSourceStatelessRuleMatchAttributesTcpFlagsList')
+    RuleGroupSourceStatelessRulesAndCustomActionsDetails = Shapes::StructureShape.new(name: 'RuleGroupSourceStatelessRulesAndCustomActionsDetails')
+    RuleGroupSourceStatelessRulesDetails = Shapes::StructureShape.new(name: 'RuleGroupSourceStatelessRulesDetails')
+    RuleGroupSourceStatelessRulesList = Shapes::ListShape.new(name: 'RuleGroupSourceStatelessRulesList')
+    RuleGroupVariables = Shapes::StructureShape.new(name: 'RuleGroupVariables')
+    RuleGroupVariablesIpSetsDetails = Shapes::StructureShape.new(name: 'RuleGroupVariablesIpSetsDetails')
+    RuleGroupVariablesPortSetsDetails = Shapes::StructureShape.new(name: 'RuleGroupVariablesPortSetsDetails')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     SensitiveDataDetections = Shapes::StructureShape.new(name: 'SensitiveDataDetections')
     SensitiveDataDetectionsList = Shapes::ListShape.new(name: 'SensitiveDataDetectionsList')
@@ -677,12 +729,18 @@ module Aws::SecurityHub
     StandardsControls = Shapes::ListShape.new(name: 'StandardsControls')
     StandardsInputParameterMap = Shapes::MapShape.new(name: 'StandardsInputParameterMap')
     StandardsStatus = Shapes::StringShape.new(name: 'StandardsStatus')
+    StandardsStatusReason = Shapes::StructureShape.new(name: 'StandardsStatusReason')
     StandardsSubscription = Shapes::StructureShape.new(name: 'StandardsSubscription')
     StandardsSubscriptionArns = Shapes::ListShape.new(name: 'StandardsSubscriptionArns')
     StandardsSubscriptionRequest = Shapes::StructureShape.new(name: 'StandardsSubscriptionRequest')
     StandardsSubscriptionRequests = Shapes::ListShape.new(name: 'StandardsSubscriptionRequests')
     StandardsSubscriptions = Shapes::ListShape.new(name: 'StandardsSubscriptions')
+    StatelessCustomActionDefinition = Shapes::StructureShape.new(name: 'StatelessCustomActionDefinition')
+    StatelessCustomPublishMetricAction = Shapes::StructureShape.new(name: 'StatelessCustomPublishMetricAction')
+    StatelessCustomPublishMetricActionDimension = Shapes::StructureShape.new(name: 'StatelessCustomPublishMetricActionDimension')
+    StatelessCustomPublishMetricActionDimensionsList = Shapes::ListShape.new(name: 'StatelessCustomPublishMetricActionDimensionsList')
     StatusReason = Shapes::StructureShape.new(name: 'StatusReason')
+    StatusReasonCode = Shapes::StringShape.new(name: 'StatusReasonCode')
     StatusReasonsList = Shapes::ListShape.new(name: 'StatusReasonsList')
     StringFilter = Shapes::StructureShape.new(name: 'StringFilter')
     StringFilterComparison = Shapes::StringShape.new(name: 'StringFilterComparison')
@@ -910,12 +968,46 @@ module Aws::SecurityHub
     AwsApiGatewayV2StageDetails.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApiGatewayManaged"))
     AwsApiGatewayV2StageDetails.struct_class = Types::AwsApiGatewayV2StageDetails
 
+    AwsAutoScalingAutoScalingGroupAvailabilityZonesList.member = Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails)
+
+    AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails.struct_class = Types::AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails
+
     AwsAutoScalingAutoScalingGroupDetails.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LaunchConfigurationName"))
     AwsAutoScalingAutoScalingGroupDetails.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: StringList, location_name: "LoadBalancerNames"))
     AwsAutoScalingAutoScalingGroupDetails.add_member(:health_check_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HealthCheckType"))
     AwsAutoScalingAutoScalingGroupDetails.add_member(:health_check_grace_period, Shapes::ShapeRef.new(shape: Integer, location_name: "HealthCheckGracePeriod"))
     AwsAutoScalingAutoScalingGroupDetails.add_member(:created_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedTime"))
+    AwsAutoScalingAutoScalingGroupDetails.add_member(:mixed_instances_policy, Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails, location_name: "MixedInstancesPolicy"))
+    AwsAutoScalingAutoScalingGroupDetails.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupAvailabilityZonesList, location_name: "AvailabilityZones"))
     AwsAutoScalingAutoScalingGroupDetails.struct_class = Types::AwsAutoScalingAutoScalingGroupDetails
+
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails.add_member(:instances_distribution, Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails, location_name: "InstancesDistribution"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails.add_member(:launch_template, Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails, location_name: "LaunchTemplate"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails.struct_class = Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails
+
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails.add_member(:on_demand_allocation_strategy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OnDemandAllocationStrategy"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails.add_member(:on_demand_base_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "OnDemandBaseCapacity"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails.add_member(:on_demand_percentage_above_base_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "OnDemandPercentageAboveBaseCapacity"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails.add_member(:spot_allocation_strategy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SpotAllocationStrategy"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails.add_member(:spot_instance_pools, Shapes::ShapeRef.new(shape: Integer, location_name: "SpotInstancePools"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails.add_member(:spot_max_price, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SpotMaxPrice"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails.struct_class = Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails
+
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails.add_member(:launch_template_specification, Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification, location_name: "LaunchTemplateSpecification"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails.add_member(:overrides, Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesList, location_name: "Overrides"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails.struct_class = Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails
+
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LaunchTemplateId"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LaunchTemplateName"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Version"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification.struct_class = Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification
+
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesList.member = Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails)
+
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceType"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "WeightedCapacity"))
+    AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails.struct_class = Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails
 
     AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails.add_member(:device_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DeviceName"))
     AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails.add_member(:ebs, Shapes::ShapeRef.new(shape: AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails, location_name: "Ebs"))
@@ -951,10 +1043,16 @@ module Aws::SecurityHub
     AwsAutoScalingLaunchConfigurationDetails.add_member(:security_groups, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "SecurityGroups"))
     AwsAutoScalingLaunchConfigurationDetails.add_member(:spot_price, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SpotPrice"))
     AwsAutoScalingLaunchConfigurationDetails.add_member(:user_data, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UserData"))
+    AwsAutoScalingLaunchConfigurationDetails.add_member(:metadata_options, Shapes::ShapeRef.new(shape: AwsAutoScalingLaunchConfigurationMetadataOptions, location_name: "MetadataOptions"))
     AwsAutoScalingLaunchConfigurationDetails.struct_class = Types::AwsAutoScalingLaunchConfigurationDetails
 
     AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails.struct_class = Types::AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails
+
+    AwsAutoScalingLaunchConfigurationMetadataOptions.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpEndpoint"))
+    AwsAutoScalingLaunchConfigurationMetadataOptions.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
+    AwsAutoScalingLaunchConfigurationMetadataOptions.add_member(:http_tokens, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "HttpTokens"))
+    AwsAutoScalingLaunchConfigurationMetadataOptions.struct_class = Types::AwsAutoScalingLaunchConfigurationMetadataOptions
 
     AwsCertificateManagerCertificateDetails.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CertificateAuthorityArn"))
     AwsCertificateManagerCertificateDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedAt"))
@@ -2318,6 +2416,39 @@ module Aws::SecurityHub
     AwsLambdaLayerVersionDetails.add_member(:created_date, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedDate"))
     AwsLambdaLayerVersionDetails.struct_class = Types::AwsLambdaLayerVersionDetails
 
+    AwsNetworkFirewallFirewallDetails.add_member(:delete_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteProtection"))
+    AwsNetworkFirewallFirewallDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsNetworkFirewallFirewallDetails.add_member(:firewall_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FirewallArn"))
+    AwsNetworkFirewallFirewallDetails.add_member(:firewall_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FirewallId"))
+    AwsNetworkFirewallFirewallDetails.add_member(:firewall_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FirewallName"))
+    AwsNetworkFirewallFirewallDetails.add_member(:firewall_policy_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FirewallPolicyArn"))
+    AwsNetworkFirewallFirewallDetails.add_member(:firewall_policy_change_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "FirewallPolicyChangeProtection"))
+    AwsNetworkFirewallFirewallDetails.add_member(:subnet_change_protection, Shapes::ShapeRef.new(shape: Boolean, location_name: "SubnetChangeProtection"))
+    AwsNetworkFirewallFirewallDetails.add_member(:subnet_mappings, Shapes::ShapeRef.new(shape: AwsNetworkFirewallFirewallSubnetMappingsList, location_name: "SubnetMappings"))
+    AwsNetworkFirewallFirewallDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcId"))
+    AwsNetworkFirewallFirewallDetails.struct_class = Types::AwsNetworkFirewallFirewallDetails
+
+    AwsNetworkFirewallFirewallPolicyDetails.add_member(:firewall_policy, Shapes::ShapeRef.new(shape: FirewallPolicyDetails, location_name: "FirewallPolicy"))
+    AwsNetworkFirewallFirewallPolicyDetails.add_member(:firewall_policy_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FirewallPolicyArn"))
+    AwsNetworkFirewallFirewallPolicyDetails.add_member(:firewall_policy_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FirewallPolicyId"))
+    AwsNetworkFirewallFirewallPolicyDetails.add_member(:firewall_policy_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FirewallPolicyName"))
+    AwsNetworkFirewallFirewallPolicyDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsNetworkFirewallFirewallPolicyDetails.struct_class = Types::AwsNetworkFirewallFirewallPolicyDetails
+
+    AwsNetworkFirewallFirewallSubnetMappingsDetails.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SubnetId"))
+    AwsNetworkFirewallFirewallSubnetMappingsDetails.struct_class = Types::AwsNetworkFirewallFirewallSubnetMappingsDetails
+
+    AwsNetworkFirewallFirewallSubnetMappingsList.member = Shapes::ShapeRef.new(shape: AwsNetworkFirewallFirewallSubnetMappingsDetails)
+
+    AwsNetworkFirewallRuleGroupDetails.add_member(:capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "Capacity"))
+    AwsNetworkFirewallRuleGroupDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    AwsNetworkFirewallRuleGroupDetails.add_member(:rule_group, Shapes::ShapeRef.new(shape: RuleGroupDetails, location_name: "RuleGroup"))
+    AwsNetworkFirewallRuleGroupDetails.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleGroupArn"))
+    AwsNetworkFirewallRuleGroupDetails.add_member(:rule_group_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleGroupId"))
+    AwsNetworkFirewallRuleGroupDetails.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RuleGroupName"))
+    AwsNetworkFirewallRuleGroupDetails.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Type"))
+    AwsNetworkFirewallRuleGroupDetails.struct_class = Types::AwsNetworkFirewallRuleGroupDetails
+
     AwsOpenSearchServiceDomainClusterConfigDetails.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstanceCount"))
     AwsOpenSearchServiceDomainClusterConfigDetails.add_member(:warm_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "WarmEnabled"))
     AwsOpenSearchServiceDomainClusterConfigDetails.add_member(:warm_count, Shapes::ShapeRef.new(shape: Integer, location_name: "WarmCount"))
@@ -2855,6 +2986,10 @@ module Aws::SecurityHub
 
     AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList.member = Shapes::ShapeRef.new(shape: AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails)
 
+    AwsS3BucketBucketVersioningConfiguration.add_member(:is_mfa_delete_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsMfaDeleteEnabled"))
+    AwsS3BucketBucketVersioningConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsS3BucketBucketVersioningConfiguration.struct_class = Types::AwsS3BucketBucketVersioningConfiguration
+
     AwsS3BucketDetails.add_member(:owner_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerId"))
     AwsS3BucketDetails.add_member(:owner_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerName"))
     AwsS3BucketDetails.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerAccountId"))
@@ -2866,6 +3001,7 @@ module Aws::SecurityHub
     AwsS3BucketDetails.add_member(:bucket_logging_configuration, Shapes::ShapeRef.new(shape: AwsS3BucketLoggingConfiguration, location_name: "BucketLoggingConfiguration"))
     AwsS3BucketDetails.add_member(:bucket_website_configuration, Shapes::ShapeRef.new(shape: AwsS3BucketWebsiteConfiguration, location_name: "BucketWebsiteConfiguration"))
     AwsS3BucketDetails.add_member(:bucket_notification_configuration, Shapes::ShapeRef.new(shape: AwsS3BucketNotificationConfiguration, location_name: "BucketNotificationConfiguration"))
+    AwsS3BucketDetails.add_member(:bucket_versioning_configuration, Shapes::ShapeRef.new(shape: AwsS3BucketBucketVersioningConfiguration, location_name: "BucketVersioningConfiguration"))
     AwsS3BucketDetails.struct_class = Types::AwsS3BucketDetails
 
     AwsS3BucketLoggingConfiguration.add_member(:destination_bucket_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DestinationBucketName"))
@@ -3509,6 +3645,30 @@ module Aws::SecurityHub
     FindingProviderSeverity.add_member(:original, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Original"))
     FindingProviderSeverity.struct_class = Types::FindingProviderSeverity
 
+    FirewallPolicyDetails.add_member(:stateful_rule_group_references, Shapes::ShapeRef.new(shape: FirewallPolicyStatefulRuleGroupReferencesList, location_name: "StatefulRuleGroupReferences"))
+    FirewallPolicyDetails.add_member(:stateless_custom_actions, Shapes::ShapeRef.new(shape: FirewallPolicyStatelessCustomActionsList, location_name: "StatelessCustomActions"))
+    FirewallPolicyDetails.add_member(:stateless_default_actions, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "StatelessDefaultActions"))
+    FirewallPolicyDetails.add_member(:stateless_fragment_default_actions, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "StatelessFragmentDefaultActions"))
+    FirewallPolicyDetails.add_member(:stateless_rule_group_references, Shapes::ShapeRef.new(shape: FirewallPolicyStatelessRuleGroupReferencesList, location_name: "StatelessRuleGroupReferences"))
+    FirewallPolicyDetails.struct_class = Types::FirewallPolicyDetails
+
+    FirewallPolicyStatefulRuleGroupReferencesDetails.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceArn"))
+    FirewallPolicyStatefulRuleGroupReferencesDetails.struct_class = Types::FirewallPolicyStatefulRuleGroupReferencesDetails
+
+    FirewallPolicyStatefulRuleGroupReferencesList.member = Shapes::ShapeRef.new(shape: FirewallPolicyStatefulRuleGroupReferencesDetails)
+
+    FirewallPolicyStatelessCustomActionsDetails.add_member(:action_definition, Shapes::ShapeRef.new(shape: StatelessCustomActionDefinition, location_name: "ActionDefinition"))
+    FirewallPolicyStatelessCustomActionsDetails.add_member(:action_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ActionName"))
+    FirewallPolicyStatelessCustomActionsDetails.struct_class = Types::FirewallPolicyStatelessCustomActionsDetails
+
+    FirewallPolicyStatelessCustomActionsList.member = Shapes::ShapeRef.new(shape: FirewallPolicyStatelessCustomActionsDetails)
+
+    FirewallPolicyStatelessRuleGroupReferencesDetails.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, location_name: "Priority"))
+    FirewallPolicyStatelessRuleGroupReferencesDetails.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceArn"))
+    FirewallPolicyStatelessRuleGroupReferencesDetails.struct_class = Types::FirewallPolicyStatelessRuleGroupReferencesDetails
+
+    FirewallPolicyStatelessRuleGroupReferencesList.member = Shapes::ShapeRef.new(shape: FirewallPolicyStatelessRuleGroupReferencesDetails)
+
     GeoLocation.add_member(:lon, Shapes::ShapeRef.new(shape: Double, location_name: "Lon"))
     GeoLocation.add_member(:lat, Shapes::ShapeRef.new(shape: Double, location_name: "Lat"))
     GeoLocation.struct_class = Types::GeoLocation
@@ -3971,6 +4131,9 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_waf_regional_rate_based_rule, Shapes::ShapeRef.new(shape: AwsWafRegionalRateBasedRuleDetails, location_name: "AwsWafRegionalRateBasedRule"))
     ResourceDetails.add_member(:aws_ecr_repository, Shapes::ShapeRef.new(shape: AwsEcrRepositoryDetails, location_name: "AwsEcrRepository"))
     ResourceDetails.add_member(:aws_eks_cluster, Shapes::ShapeRef.new(shape: AwsEksClusterDetails, location_name: "AwsEksCluster"))
+    ResourceDetails.add_member(:aws_network_firewall_firewall_policy, Shapes::ShapeRef.new(shape: AwsNetworkFirewallFirewallPolicyDetails, location_name: "AwsNetworkFirewallFirewallPolicy"))
+    ResourceDetails.add_member(:aws_network_firewall_firewall, Shapes::ShapeRef.new(shape: AwsNetworkFirewallFirewallDetails, location_name: "AwsNetworkFirewallFirewall"))
+    ResourceDetails.add_member(:aws_network_firewall_rule_group, Shapes::ShapeRef.new(shape: AwsNetworkFirewallRuleGroupDetails, location_name: "AwsNetworkFirewallRuleGroup"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
@@ -3984,6 +4147,112 @@ module Aws::SecurityHub
     Result.struct_class = Types::Result
 
     ResultList.member = Shapes::ShapeRef.new(shape: Result)
+
+    RuleGroupDetails.add_member(:rule_variables, Shapes::ShapeRef.new(shape: RuleGroupVariables, location_name: "RuleVariables"))
+    RuleGroupDetails.add_member(:rules_source, Shapes::ShapeRef.new(shape: RuleGroupSource, location_name: "RulesSource"))
+    RuleGroupDetails.struct_class = Types::RuleGroupDetails
+
+    RuleGroupSource.add_member(:rules_source_list, Shapes::ShapeRef.new(shape: RuleGroupSourceListDetails, location_name: "RulesSourceList"))
+    RuleGroupSource.add_member(:rules_string, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RulesString"))
+    RuleGroupSource.add_member(:stateful_rules, Shapes::ShapeRef.new(shape: RuleGroupSourceStatefulRulesList, location_name: "StatefulRules"))
+    RuleGroupSource.add_member(:stateless_rules_and_custom_actions, Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRulesAndCustomActionsDetails, location_name: "StatelessRulesAndCustomActions"))
+    RuleGroupSource.struct_class = Types::RuleGroupSource
+
+    RuleGroupSourceCustomActionsDetails.add_member(:action_definition, Shapes::ShapeRef.new(shape: StatelessCustomActionDefinition, location_name: "ActionDefinition"))
+    RuleGroupSourceCustomActionsDetails.add_member(:action_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ActionName"))
+    RuleGroupSourceCustomActionsDetails.struct_class = Types::RuleGroupSourceCustomActionsDetails
+
+    RuleGroupSourceCustomActionsList.member = Shapes::ShapeRef.new(shape: RuleGroupSourceCustomActionsDetails)
+
+    RuleGroupSourceListDetails.add_member(:generated_rules_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "GeneratedRulesType"))
+    RuleGroupSourceListDetails.add_member(:target_types, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "TargetTypes"))
+    RuleGroupSourceListDetails.add_member(:targets, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Targets"))
+    RuleGroupSourceListDetails.struct_class = Types::RuleGroupSourceListDetails
+
+    RuleGroupSourceStatefulRulesDetails.add_member(:action, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Action"))
+    RuleGroupSourceStatefulRulesDetails.add_member(:header, Shapes::ShapeRef.new(shape: RuleGroupSourceStatefulRulesHeaderDetails, location_name: "Header"))
+    RuleGroupSourceStatefulRulesDetails.add_member(:rule_options, Shapes::ShapeRef.new(shape: RuleGroupSourceStatefulRulesOptionsList, location_name: "RuleOptions"))
+    RuleGroupSourceStatefulRulesDetails.struct_class = Types::RuleGroupSourceStatefulRulesDetails
+
+    RuleGroupSourceStatefulRulesHeaderDetails.add_member(:destination, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Destination"))
+    RuleGroupSourceStatefulRulesHeaderDetails.add_member(:destination_port, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DestinationPort"))
+    RuleGroupSourceStatefulRulesHeaderDetails.add_member(:direction, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Direction"))
+    RuleGroupSourceStatefulRulesHeaderDetails.add_member(:protocol, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Protocol"))
+    RuleGroupSourceStatefulRulesHeaderDetails.add_member(:source, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Source"))
+    RuleGroupSourceStatefulRulesHeaderDetails.add_member(:source_port, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SourcePort"))
+    RuleGroupSourceStatefulRulesHeaderDetails.struct_class = Types::RuleGroupSourceStatefulRulesHeaderDetails
+
+    RuleGroupSourceStatefulRulesList.member = Shapes::ShapeRef.new(shape: RuleGroupSourceStatefulRulesDetails)
+
+    RuleGroupSourceStatefulRulesOptionsDetails.add_member(:keyword, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Keyword"))
+    RuleGroupSourceStatefulRulesOptionsDetails.add_member(:settings, Shapes::ShapeRef.new(shape: RuleGroupSourceStatefulRulesRuleOptionsSettingsList, location_name: "Settings"))
+    RuleGroupSourceStatefulRulesOptionsDetails.struct_class = Types::RuleGroupSourceStatefulRulesOptionsDetails
+
+    RuleGroupSourceStatefulRulesOptionsList.member = Shapes::ShapeRef.new(shape: RuleGroupSourceStatefulRulesOptionsDetails)
+
+    RuleGroupSourceStatefulRulesRuleOptionsSettingsList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    RuleGroupSourceStatelessRuleDefinition.add_member(:actions, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Actions"))
+    RuleGroupSourceStatelessRuleDefinition.add_member(:match_attributes, Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributes, location_name: "MatchAttributes"))
+    RuleGroupSourceStatelessRuleDefinition.struct_class = Types::RuleGroupSourceStatelessRuleDefinition
+
+    RuleGroupSourceStatelessRuleMatchAttributes.add_member(:destination_ports, Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributesDestinationPortsList, location_name: "DestinationPorts"))
+    RuleGroupSourceStatelessRuleMatchAttributes.add_member(:destinations, Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributesDestinationsList, location_name: "Destinations"))
+    RuleGroupSourceStatelessRuleMatchAttributes.add_member(:protocols, Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributesProtocolsList, location_name: "Protocols"))
+    RuleGroupSourceStatelessRuleMatchAttributes.add_member(:source_ports, Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributesSourcePortsList, location_name: "SourcePorts"))
+    RuleGroupSourceStatelessRuleMatchAttributes.add_member(:sources, Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributesSourcesList, location_name: "Sources"))
+    RuleGroupSourceStatelessRuleMatchAttributes.add_member(:tcp_flags, Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributesTcpFlagsList, location_name: "TcpFlags"))
+    RuleGroupSourceStatelessRuleMatchAttributes.struct_class = Types::RuleGroupSourceStatelessRuleMatchAttributes
+
+    RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "FromPort"))
+    RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "ToPort"))
+    RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts.struct_class = Types::RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts
+
+    RuleGroupSourceStatelessRuleMatchAttributesDestinationPortsList.member = Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributesDestinationPorts)
+
+    RuleGroupSourceStatelessRuleMatchAttributesDestinations.add_member(:address_definition, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AddressDefinition"))
+    RuleGroupSourceStatelessRuleMatchAttributesDestinations.struct_class = Types::RuleGroupSourceStatelessRuleMatchAttributesDestinations
+
+    RuleGroupSourceStatelessRuleMatchAttributesDestinationsList.member = Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributesDestinations)
+
+    RuleGroupSourceStatelessRuleMatchAttributesProtocolsList.member = Shapes::ShapeRef.new(shape: Integer)
+
+    RuleGroupSourceStatelessRuleMatchAttributesSourcePorts.add_member(:from_port, Shapes::ShapeRef.new(shape: Integer, location_name: "FromPort"))
+    RuleGroupSourceStatelessRuleMatchAttributesSourcePorts.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "ToPort"))
+    RuleGroupSourceStatelessRuleMatchAttributesSourcePorts.struct_class = Types::RuleGroupSourceStatelessRuleMatchAttributesSourcePorts
+
+    RuleGroupSourceStatelessRuleMatchAttributesSourcePortsList.member = Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributesSourcePorts)
+
+    RuleGroupSourceStatelessRuleMatchAttributesSources.add_member(:address_definition, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AddressDefinition"))
+    RuleGroupSourceStatelessRuleMatchAttributesSources.struct_class = Types::RuleGroupSourceStatelessRuleMatchAttributesSources
+
+    RuleGroupSourceStatelessRuleMatchAttributesSourcesList.member = Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributesSources)
+
+    RuleGroupSourceStatelessRuleMatchAttributesTcpFlags.add_member(:flags, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Flags"))
+    RuleGroupSourceStatelessRuleMatchAttributesTcpFlags.add_member(:masks, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Masks"))
+    RuleGroupSourceStatelessRuleMatchAttributesTcpFlags.struct_class = Types::RuleGroupSourceStatelessRuleMatchAttributesTcpFlags
+
+    RuleGroupSourceStatelessRuleMatchAttributesTcpFlagsList.member = Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleMatchAttributesTcpFlags)
+
+    RuleGroupSourceStatelessRulesAndCustomActionsDetails.add_member(:custom_actions, Shapes::ShapeRef.new(shape: RuleGroupSourceCustomActionsList, location_name: "CustomActions"))
+    RuleGroupSourceStatelessRulesAndCustomActionsDetails.add_member(:stateless_rules, Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRulesList, location_name: "StatelessRules"))
+    RuleGroupSourceStatelessRulesAndCustomActionsDetails.struct_class = Types::RuleGroupSourceStatelessRulesAndCustomActionsDetails
+
+    RuleGroupSourceStatelessRulesDetails.add_member(:priority, Shapes::ShapeRef.new(shape: Integer, location_name: "Priority"))
+    RuleGroupSourceStatelessRulesDetails.add_member(:rule_definition, Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRuleDefinition, location_name: "RuleDefinition"))
+    RuleGroupSourceStatelessRulesDetails.struct_class = Types::RuleGroupSourceStatelessRulesDetails
+
+    RuleGroupSourceStatelessRulesList.member = Shapes::ShapeRef.new(shape: RuleGroupSourceStatelessRulesDetails)
+
+    RuleGroupVariables.add_member(:ip_sets, Shapes::ShapeRef.new(shape: RuleGroupVariablesIpSetsDetails, location_name: "IpSets"))
+    RuleGroupVariables.add_member(:port_sets, Shapes::ShapeRef.new(shape: RuleGroupVariablesPortSetsDetails, location_name: "PortSets"))
+    RuleGroupVariables.struct_class = Types::RuleGroupVariables
+
+    RuleGroupVariablesIpSetsDetails.add_member(:definition, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Definition"))
+    RuleGroupVariablesIpSetsDetails.struct_class = Types::RuleGroupVariablesIpSetsDetails
+
+    RuleGroupVariablesPortSetsDetails.add_member(:definition, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Definition"))
+    RuleGroupVariablesPortSetsDetails.struct_class = Types::RuleGroupVariablesPortSetsDetails
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -4054,10 +4323,14 @@ module Aws::SecurityHub
     StandardsInputParameterMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     StandardsInputParameterMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    StandardsStatusReason.add_member(:status_reason_code, Shapes::ShapeRef.new(shape: StatusReasonCode, required: true, location_name: "StatusReasonCode"))
+    StandardsStatusReason.struct_class = Types::StandardsStatusReason
+
     StandardsSubscription.add_member(:standards_subscription_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "StandardsSubscriptionArn"))
     StandardsSubscription.add_member(:standards_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "StandardsArn"))
     StandardsSubscription.add_member(:standards_input, Shapes::ShapeRef.new(shape: StandardsInputParameterMap, required: true, location_name: "StandardsInput"))
     StandardsSubscription.add_member(:standards_status, Shapes::ShapeRef.new(shape: StandardsStatus, required: true, location_name: "StandardsStatus"))
+    StandardsSubscription.add_member(:standards_status_reason, Shapes::ShapeRef.new(shape: StandardsStatusReason, location_name: "StandardsStatusReason"))
     StandardsSubscription.struct_class = Types::StandardsSubscription
 
     StandardsSubscriptionArns.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -4069,6 +4342,17 @@ module Aws::SecurityHub
     StandardsSubscriptionRequests.member = Shapes::ShapeRef.new(shape: StandardsSubscriptionRequest)
 
     StandardsSubscriptions.member = Shapes::ShapeRef.new(shape: StandardsSubscription)
+
+    StatelessCustomActionDefinition.add_member(:publish_metric_action, Shapes::ShapeRef.new(shape: StatelessCustomPublishMetricAction, location_name: "PublishMetricAction"))
+    StatelessCustomActionDefinition.struct_class = Types::StatelessCustomActionDefinition
+
+    StatelessCustomPublishMetricAction.add_member(:dimensions, Shapes::ShapeRef.new(shape: StatelessCustomPublishMetricActionDimensionsList, location_name: "Dimensions"))
+    StatelessCustomPublishMetricAction.struct_class = Types::StatelessCustomPublishMetricAction
+
+    StatelessCustomPublishMetricActionDimension.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    StatelessCustomPublishMetricActionDimension.struct_class = Types::StatelessCustomPublishMetricActionDimension
+
+    StatelessCustomPublishMetricActionDimensionsList.member = Shapes::ShapeRef.new(shape: StatelessCustomPublishMetricActionDimension)
 
     StatusReason.add_member(:reason_code, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ReasonCode"))
     StatusReason.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))

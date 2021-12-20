@@ -446,6 +446,7 @@ module Aws::ForecastService
     DescribeAutoPredictorResponse.add_member(:forecast_horizon, Shapes::ShapeRef.new(shape: Integer, location_name: "ForecastHorizon"))
     DescribeAutoPredictorResponse.add_member(:forecast_types, Shapes::ShapeRef.new(shape: ForecastTypes, location_name: "ForecastTypes"))
     DescribeAutoPredictorResponse.add_member(:forecast_frequency, Shapes::ShapeRef.new(shape: Frequency, location_name: "ForecastFrequency"))
+    DescribeAutoPredictorResponse.add_member(:forecast_dimensions, Shapes::ShapeRef.new(shape: ForecastDimensions, location_name: "ForecastDimensions"))
     DescribeAutoPredictorResponse.add_member(:dataset_import_job_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "DatasetImportJobArns"))
     DescribeAutoPredictorResponse.add_member(:data_config, Shapes::ShapeRef.new(shape: DataConfig, location_name: "DataConfig"))
     DescribeAutoPredictorResponse.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))

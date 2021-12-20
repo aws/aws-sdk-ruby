@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2021-12-20)
+------------------
+
+* Feature - This release adds support for importing and exporting VM Images as part of the Image Creation workflow via EC2 VM Import/Export.
+
 1.35.0 (2021-11-30)
 ------------------
 

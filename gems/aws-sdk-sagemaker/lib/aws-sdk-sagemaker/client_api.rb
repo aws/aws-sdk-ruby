@@ -1818,6 +1818,7 @@ module Aws::SageMaker
     AutoMLChannel.add_member(:data_source, Shapes::ShapeRef.new(shape: AutoMLDataSource, required: true, location_name: "DataSource"))
     AutoMLChannel.add_member(:compression_type, Shapes::ShapeRef.new(shape: CompressionType, location_name: "CompressionType"))
     AutoMLChannel.add_member(:target_attribute_name, Shapes::ShapeRef.new(shape: TargetAttributeName, required: true, location_name: "TargetAttributeName"))
+    AutoMLChannel.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
     AutoMLChannel.struct_class = Types::AutoMLChannel
 
     AutoMLContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "Image"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2021-12-20)
+------------------
+
+* Feature - This release adds a new ContentType field in AutoMLChannel for SageMaker CreateAutoMLJob InputDataConfig.
+
 1.111.0 (2021-12-08)
 ------------------
 

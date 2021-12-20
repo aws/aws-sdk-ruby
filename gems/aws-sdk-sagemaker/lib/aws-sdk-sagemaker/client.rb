@@ -1196,6 +1196,7 @@ module Aws::SageMaker
     #         },
     #         compression_type: "None", # accepts None, Gzip
     #         target_attribute_name: "TargetAttributeName", # required
+    #         content_type: "ContentType",
     #       },
     #     ],
     #     output_data_config: { # required
@@ -8197,6 +8198,7 @@ module Aws::SageMaker
     #   resp.input_data_config[0].data_source.s3_data_source.s3_uri #=> String
     #   resp.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.input_data_config[0].target_attribute_name #=> String
+    #   resp.input_data_config[0].content_type #=> String
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
     #   resp.role_arn #=> String
@@ -19364,7 +19366,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

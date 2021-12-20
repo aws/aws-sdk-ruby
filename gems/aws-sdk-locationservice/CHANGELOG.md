@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2021-12-20)
+------------------
+
+* Feature - Making PricingPlan optional as part of create resource API.
+
 1.14.0 (2021-12-06)
 ------------------
 

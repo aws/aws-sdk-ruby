@@ -464,6 +464,10 @@ module Aws::FinSpaceData
     #     as_of_timestamp: 1,
     #     destination_type_params: { # required
     #       destination_type: "DataViewDestinationType", # required
+    #       s3_destination_export_file_format: "PARQUET", # accepts PARQUET, DELIMITED_TEXT
+    #       s3_destination_export_file_format_options: {
+    #         "StringMapKey" => "StringMapValue",
+    #       },
     #     },
     #   })
     #
@@ -499,7 +503,7 @@ module Aws::FinSpaceData
     #
     #   * `NON_TABULAR` - Data is structured in a non-tabular format.
     #
-    # @option params [required, String] :dataset_description
+    # @option params [String] :dataset_description
     #   Description of a Dataset.
     #
     # @option params [Types::DatasetOwnerInfo] :owner_info
@@ -508,7 +512,7 @@ module Aws::FinSpaceData
     # @option params [required, Types::PermissionGroupParams] :permission_group_params
     #   Permission group parameters for Dataset permissions.
     #
-    # @option params [required, String] :alias
+    # @option params [String] :alias
     #   The unique resource identifier for a Dataset.
     #
     # @option params [Types::SchemaUnion] :schema_definition
@@ -524,7 +528,7 @@ module Aws::FinSpaceData
     #     client_token: "ClientToken",
     #     dataset_title: "DatasetTitle", # required
     #     kind: "TABULAR", # required, accepts TABULAR, NON_TABULAR
-    #     dataset_description: "DatasetDescription", # required
+    #     dataset_description: "DatasetDescription",
     #     owner_info: {
     #       name: "OwnerName",
     #       phone_number: "PhoneNumber",
@@ -538,7 +542,7 @@ module Aws::FinSpaceData
     #         },
     #       ],
     #     },
-    #     alias: "AliasString", # required
+    #     alias: "AliasString",
     #     schema_definition: {
     #       tabular_schema_config: {
     #         columns: [
@@ -622,6 +626,7 @@ module Aws::FinSpaceData
     #   * {Types::GetChangesetResponse#status #status} => String
     #   * {Types::GetChangesetResponse#error_info #error_info} => Types::ChangesetErrorInfo
     #   * {Types::GetChangesetResponse#active_until_timestamp #active_until_timestamp} => Integer
+    #   * {Types::GetChangesetResponse#active_from_timestamp #active_from_timestamp} => Integer
     #   * {Types::GetChangesetResponse#updates_changeset_id #updates_changeset_id} => String
     #   * {Types::GetChangesetResponse#updated_by_changeset_id #updated_by_changeset_id} => String
     #
@@ -647,6 +652,7 @@ module Aws::FinSpaceData
     #   resp.error_info.error_message #=> String
     #   resp.error_info.error_category #=> String, one of "VALIDATION", "SERVICE_QUOTA_EXCEEDED", "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "THROTTLING", "INTERNAL_SERVICE_EXCEPTION", "CANCELLED", "USER_RECOVERABLE"
     #   resp.active_until_timestamp #=> Integer
+    #   resp.active_from_timestamp #=> Integer
     #   resp.updates_changeset_id #=> String
     #   resp.updated_by_changeset_id #=> String
     #
@@ -705,6 +711,9 @@ module Aws::FinSpaceData
     #   resp.data_view_id #=> String
     #   resp.data_view_arn #=> String
     #   resp.destination_type_params.destination_type #=> String
+    #   resp.destination_type_params.s3_destination_export_file_format #=> String, one of "PARQUET", "DELIMITED_TEXT"
+    #   resp.destination_type_params.s3_destination_export_file_format_options #=> Hash
+    #   resp.destination_type_params.s3_destination_export_file_format_options["StringMapKey"] #=> String
     #   resp.status #=> String, one of "RUNNING", "STARTING", "FAILED", "CANCELLED", "TIMEOUT", "SUCCESS", "PENDING", "FAILED_CLEANUP_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetDataView AWS API Documentation
@@ -888,6 +897,7 @@ module Aws::FinSpaceData
     #   resp.changesets[0].error_info.error_message #=> String
     #   resp.changesets[0].error_info.error_category #=> String, one of "VALIDATION", "SERVICE_QUOTA_EXCEEDED", "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "THROTTLING", "INTERNAL_SERVICE_EXCEPTION", "CANCELLED", "USER_RECOVERABLE"
     #   resp.changesets[0].active_until_timestamp #=> Integer
+    #   resp.changesets[0].active_from_timestamp #=> Integer
     #   resp.changesets[0].updates_changeset_id #=> String
     #   resp.changesets[0].updated_by_changeset_id #=> String
     #   resp.next_token #=> String
@@ -943,6 +953,9 @@ module Aws::FinSpaceData
     #   resp.data_views[0].error_info.error_message #=> String
     #   resp.data_views[0].error_info.error_category #=> String, one of "VALIDATION", "SERVICE_QUOTA_EXCEEDED", "ACCESS_DENIED", "RESOURCE_NOT_FOUND", "THROTTLING", "INTERNAL_SERVICE_EXCEPTION", "CANCELLED", "USER_RECOVERABLE"
     #   resp.data_views[0].destination_type_properties.destination_type #=> String
+    #   resp.data_views[0].destination_type_properties.s3_destination_export_file_format #=> String, one of "PARQUET", "DELIMITED_TEXT"
+    #   resp.data_views[0].destination_type_properties.s3_destination_export_file_format_options #=> Hash
+    #   resp.data_views[0].destination_type_properties.s3_destination_export_file_format_options["StringMapKey"] #=> String
     #   resp.data_views[0].auto_update #=> Boolean
     #   resp.data_views[0].create_time #=> Integer
     #   resp.data_views[0].last_modified_time #=> Integer
@@ -1087,7 +1100,7 @@ module Aws::FinSpaceData
     # @option params [String] :dataset_description
     #   A description for the Dataset.
     #
-    # @option params [required, String] :alias
+    # @option params [String] :alias
     #   The unique resource identifier for a Dataset.
     #
     # @option params [Types::SchemaUnion] :schema_definition
@@ -1105,7 +1118,7 @@ module Aws::FinSpaceData
     #     dataset_title: "DatasetTitle", # required
     #     kind: "TABULAR", # required, accepts TABULAR, NON_TABULAR
     #     dataset_description: "DatasetDescription",
-    #     alias: "AliasString", # required
+    #     alias: "AliasString",
     #     schema_definition: {
     #       tabular_schema_config: {
     #         columns: [
@@ -1146,7 +1159,7 @@ module Aws::FinSpaceData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspacedata'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

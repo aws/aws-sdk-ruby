@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2021-12-20)
+------------------
+
+* Feature - Added new resource details objects to ASFF, including resources for Firewall, and RuleGroup, FirewallPolicy Added additional details for AutoScalingGroup, LaunchConfiguration, and S3 buckets.
+
 1.57.0 (2021-11-30)
 ------------------
 
