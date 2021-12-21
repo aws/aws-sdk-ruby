@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Add `:defaults_mode` configuration - TBD.
+* Feature - Add `:defaults_mode` configuration - that determines how certain default configuration options are resolved in the SDK.
 
 3.124.0 (2021-11-30)
 ------------------

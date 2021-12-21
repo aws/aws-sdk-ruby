@@ -188,6 +188,9 @@ module Seahorse
           #   disables this behaviour.  This value can safely be set per
           #   request on the session yielded by {#session_for}.
           #
+          # @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+          #   in seconds.
+          #
           # @option options [Boolean] :http_wire_trace (false) When `true`,
           #   HTTP debug output will be sent to the `:logger`.
           #
