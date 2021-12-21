@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::WorkMail
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -174,6 +176,10 @@ module Aws::WorkMail
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -307,7 +313,7 @@ module Aws::WorkMail
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -322,6 +328,9 @@ module Aws::WorkMail
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -826,6 +835,30 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Deletes the email monitoring configuration for a specified
+    # organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The ID of the organization from which the email monitoring
+    #   configuration is deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_email_monitoring_configuration({
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteEmailMonitoringConfiguration AWS API Documentation
+    #
+    # @overload delete_email_monitoring_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_email_monitoring_configuration(params = {}, options = {})
+      req = build_request(:delete_email_monitoring_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes a group from Amazon WorkMail.
     #
     # @option params [required, String] :organization_id
@@ -1157,6 +1190,38 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def deregister_mail_domain(params = {}, options = {})
       req = build_request(:deregister_mail_domain, params)
+      req.send_request(options)
+    end
+
+    # Describes the current email monitoring configuration for a specified
+    # organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The ID of the organization for which the email monitoring
+    #   configuration is described.
+    #
+    # @return [Types::DescribeEmailMonitoringConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEmailMonitoringConfigurationResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeEmailMonitoringConfigurationResponse#log_group_arn #log_group_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_email_monitoring_configuration({
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role_arn #=> String
+    #   resp.log_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeEmailMonitoringConfiguration AWS API Documentation
+    #
+    # @overload describe_email_monitoring_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_email_monitoring_configuration(params = {}, options = {})
+      req = build_request(:describe_email_monitoring_configuration, params)
       req.send_request(options)
     end
 
@@ -2494,6 +2559,40 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Creates or updates the email monitoring configuration for a specified
+    # organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The ID of the organization for which the email monitoring
+    #   configuration is set.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM Role associated with the
+    #   email monitoring configuration.
+    #
+    # @option params [required, String] :log_group_arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch Log group associated
+    #   with the email monitoring configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_email_monitoring_configuration({
+    #     organization_id: "OrganizationId", # required
+    #     role_arn: "RoleArn", # required
+    #     log_group_arn: "LogGroupArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutEmailMonitoringConfiguration AWS API Documentation
+    #
+    # @overload put_email_monitoring_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_email_monitoring_configuration(params = {}, options = {})
+      req = build_request(:put_email_monitoring_configuration, params)
+      req.send_request(options)
+    end
+
     # Enables or disables a DMARC policy for a given organization.
     #
     # @option params [required, String] :organization_id
@@ -3123,7 +3222,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

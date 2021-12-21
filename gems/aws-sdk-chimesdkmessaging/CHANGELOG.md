@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2021-12-21)
+------------------
+
+* Feature - The Amazon Chime SDK now supports updating message attributes via channel flows
+
 1.7.0 (2021-11-30)
 ------------------
 

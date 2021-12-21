@@ -319,6 +319,8 @@ module Aws::ChimeSDKMessaging
     ChannelMessageCallback.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location_name: "MessageId"))
     ChannelMessageCallback.add_member(:content, Shapes::ShapeRef.new(shape: NonEmptyContent, location_name: "Content"))
     ChannelMessageCallback.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+    ChannelMessageCallback.add_member(:push_notification, Shapes::ShapeRef.new(shape: PushNotificationConfiguration, location_name: "PushNotification"))
+    ChannelMessageCallback.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageAttributeMap, location_name: "MessageAttributes"))
     ChannelMessageCallback.struct_class = Types::ChannelMessageCallback
 
     ChannelMessageStatusStructure.add_member(:value, Shapes::ShapeRef.new(shape: ChannelMessageStatus, location_name: "Value"))
@@ -682,9 +684,9 @@ module Aws::ChimeSDKMessaging
 
     ProcessorList.member = Shapes::ShapeRef.new(shape: Processor)
 
-    PushNotificationConfiguration.add_member(:title, Shapes::ShapeRef.new(shape: PushNotificationTitle, required: true, location_name: "Title"))
-    PushNotificationConfiguration.add_member(:body, Shapes::ShapeRef.new(shape: PushNotificationBody, required: true, location_name: "Body"))
-    PushNotificationConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: PushNotificationType, required: true, location_name: "Type"))
+    PushNotificationConfiguration.add_member(:title, Shapes::ShapeRef.new(shape: PushNotificationTitle, location_name: "Title"))
+    PushNotificationConfiguration.add_member(:body, Shapes::ShapeRef.new(shape: PushNotificationBody, location_name: "Body"))
+    PushNotificationConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: PushNotificationType, location_name: "Type"))
     PushNotificationConfiguration.struct_class = Types::PushNotificationConfiguration
 
     PushNotificationPreferences.add_member(:allow_notifications, Shapes::ShapeRef.new(shape: AllowNotifications, required: true, location_name: "AllowNotifications"))

@@ -290,6 +290,10 @@ module Aws::Transfer
     #         identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
     #         logging_role: "Role",
     #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
+    #         protocol_details: {
+    #           passive_ip: "PassiveIp",
+    #           tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
+    #         },
     #         security_policy_name: "SecurityPolicyName",
     #         tags: [
     #           {
@@ -439,7 +443,7 @@ module Aws::Transfer
     #   an API Gateway endpoint URL to call for authentication using the
     #   `IdentityProviderDetails` parameter.
     #
-    #   Use the `LAMBDA` value to directly use a Lambda function as your
+    #   Use the `AWS_LAMBDA` value to directly use a Lambda function as your
     #   identity provider. If you choose this value, you must specify the
     #   ARN for the lambda function in the `Function` parameter for the
     #   `IdentityProviderDetails` data type.
@@ -484,6 +488,18 @@ module Aws::Transfer
     #    </note>
     #   @return [Array<String>]
     #
+    # @!attribute [rw] protocol_details
+    #   The protocol settings that are configured for your server.
+    #
+    #   Use the `PassiveIp` parameter to indicate passive mode (for FTP and
+    #   FTPS protocols). Enter a single dotted-quad IPv4 address, such as
+    #   the external IP address of a firewall, router, or load balancer.
+    #
+    #   Use the `TlsSessionResumptionMode` parameter to determine whether or
+    #   not your Transfer server resumes recent, negotiated sessions through
+    #   a unique session ID.
+    #   @return [Types::ProtocolDetails]
+    #
     # @!attribute [rw] security_policy_name
     #   Specifies the name of the security policy that is attached to the
     #   server.
@@ -510,6 +526,7 @@ module Aws::Transfer
       :identity_provider_type,
       :logging_role,
       :protocols,
+      :protocol_details,
       :security_policy_name,
       :tags,
       :workflow_details)
@@ -669,6 +686,11 @@ module Aws::Transfer
     # @!attribute [rw] ssh_public_key_body
     #   The public portion of the Secure Shell (SSH) key used to
     #   authenticate the user to the server.
+    #
+    #   <note markdown="1"> Currently, Transfer Family does not accept elliptical curve keys
+    #   (keys beginning with `ecdsa`).
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1590,7 +1612,7 @@ module Aws::Transfer
     #   an API Gateway endpoint URL to call for authentication using the
     #   `IdentityProviderDetails` parameter.
     #
-    #   Use the `LAMBDA` value to directly use a Lambda function as your
+    #   Use the `AWS_LAMBDA` value to directly use a Lambda function as your
     #   identity provider. If you choose this value, you must specify the
     #   ARN for the lambda function in the `Function` parameter for the
     #   `IdentityProviderDetails` data type.
@@ -2120,8 +2142,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] directory_id
-    #   The identifier of the Amazon Web ServicesDirectory Service directory
-    #   that you want to stop sharing.
+    #   The identifier of the Amazon Web Services Directory Service
+    #   directory that you want to stop sharing.
     #   @return [String]
     #
     # @!attribute [rw] function
@@ -2816,7 +2838,7 @@ module Aws::Transfer
     #   an API Gateway endpoint URL to call for authentication using the
     #   `IdentityProviderDetails` parameter.
     #
-    #   Use the `LAMBDA` value to directly use a Lambda function as your
+    #   Use the `AWS_LAMBDA` value to directly use a Lambda function as your
     #   identity provider. If you choose this value, you must specify the
     #   ARN for the lambda function in the `Function` parameter for the
     #   `IdentityProviderDetails` data type.
@@ -3031,15 +3053,12 @@ module Aws::Transfer
 
     # The protocol settings that are configured for your server.
     #
-    # <note markdown="1"> This type is only valid in the `UpdateServer` API.
-    #
-    #  </note>
-    #
     # @note When making an API call, you may pass ProtocolDetails
     #   data as a hash:
     #
     #       {
     #         passive_ip: "PassiveIp",
+    #         tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
     #       }
     #
     # @!attribute [rw] passive_ip
@@ -3065,10 +3084,44 @@ module Aws::Transfer
     #   [1]: http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/
     #   @return [String]
     #
+    # @!attribute [rw] tls_session_resumption_mode
+    #   A property used with Transfer servers that use the FTPS protocol.
+    #   TLS Session Resumption provides a mechanism to resume or share a
+    #   negotiated secret key between the control and data connection for an
+    #   FTPS session. `TlsSessionResumptionMode` determines whether or not
+    #   the server resumes recent, negotiated sessions through a unique
+    #   session ID. This property is available during `CreateServer` and
+    #   `UpdateServer` calls. If a `TlsSessionResumptionMode` value is not
+    #   specified during CreateServer, it is set to `ENFORCED` by default.
+    #
+    #   * `DISABLED`\: the server does not process TLS session resumption
+    #     client requests and creates a new TLS session for each request.
+    #
+    #   * `ENABLED`\: the server processes and accepts clients that are
+    #     performing TLS session resumption. The server doesn't reject
+    #     client data connections that do not perform the TLS session
+    #     resumption client processing.
+    #
+    #   * `ENFORCED`\: the server processes and accepts clients that are
+    #     performing TLS session resumption. The server rejects client data
+    #     connections that do not perform the TLS session resumption client
+    #     processing. Before you set the value to `ENFORCED`, test your
+    #     clients.
+    #
+    #     <note markdown="1"> Not all FTPS clients perform TLS session resumption. So, if you
+    #     choose to enforce TLS session resumption, you prevent any
+    #     connections from FTPS clients that don't perform the protocol
+    #     negotiation. To determine whether or not you can use the
+    #     `ENFORCED` value, you need to test your clients.
+    #
+    #      </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ProtocolDetails AWS API Documentation
     #
     class ProtocolDetails < Struct.new(
-      :passive_ip)
+      :passive_ip,
+      :tls_session_resumption_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3776,6 +3829,7 @@ module Aws::Transfer
     #         certificate: "Certificate",
     #         protocol_details: {
     #           passive_ip: "PassiveIp",
+    #           tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
     #         },
     #         endpoint_details: {
     #           address_allocation_ids: ["AddressAllocationId"],
@@ -3854,6 +3908,10 @@ module Aws::Transfer
     #   Use the `PassiveIp` parameter to indicate passive mode (for FTP and
     #   FTPS protocols). Enter a single dotted-quad IPv4 address, such as
     #   the external IP address of a firewall, router, or load balancer.
+    #
+    #   Use the `TlsSessionResumptionMode` parameter to determine whether or
+    #   not your Transfer server resumes recent, negotiated sessions through
+    #   a unique session ID.
     #   @return [Types::ProtocolDetails]
     #
     # @!attribute [rw] endpoint_details

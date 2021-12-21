@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::NimbleStudio
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -174,6 +176,10 @@ module Aws::NimbleStudio
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -297,7 +303,7 @@ module Aws::NimbleStudio
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -312,6 +318,9 @@ module Aws::NimbleStudio
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -442,6 +451,13 @@ module Aws::NimbleStudio
     #       ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
     #       max_session_length_in_minutes: 1,
     #       max_stopped_session_length_in_minutes: 1,
+    #       session_storage: {
+    #         mode: ["UPLOAD"], # required, accepts UPLOAD
+    #         root: {
+    #           linux: "StreamingSessionStorageRootPathLinux",
+    #           windows: "StreamingSessionStorageRootPathWindows",
+    #         },
+    #       },
     #       streaming_image_ids: ["StreamingImageId"], # required
     #     },
     #     studio_component_ids: ["String"], # required
@@ -471,6 +487,10 @@ module Aws::NimbleStudio
     #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
+    #   resp.launch_profile.stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
+    #   resp.launch_profile.stream_configuration.session_storage.root.linux #=> String
+    #   resp.launch_profile.stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profile.stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profile.stream_configuration.streaming_image_ids[0] #=> String
     #   resp.launch_profile.studio_component_ids #=> Array
@@ -547,7 +567,7 @@ module Aws::NimbleStudio
     #   resp.streaming_image.owner #=> String
     #   resp.streaming_image.platform #=> String
     #   resp.streaming_image.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETE_IN_PROGRESS", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "CREATE_FAILED", "DELETE_FAILED"
-    #   resp.streaming_image.status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR"
+    #   resp.streaming_image.status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR", "ACCESS_DENIED"
     #   resp.streaming_image.status_message #=> String
     #   resp.streaming_image.streaming_image_id #=> String
     #   resp.streaming_image.tags #=> Hash
@@ -1015,6 +1035,10 @@ module Aws::NimbleStudio
     #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
+    #   resp.launch_profile.stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
+    #   resp.launch_profile.stream_configuration.session_storage.root.linux #=> String
+    #   resp.launch_profile.stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profile.stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profile.stream_configuration.streaming_image_ids[0] #=> String
     #   resp.launch_profile.studio_component_ids #=> Array
@@ -1116,7 +1140,7 @@ module Aws::NimbleStudio
     #   resp.streaming_image.owner #=> String
     #   resp.streaming_image.platform #=> String
     #   resp.streaming_image.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETE_IN_PROGRESS", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "CREATE_FAILED", "DELETE_FAILED"
-    #   resp.streaming_image.status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR"
+    #   resp.streaming_image.status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR", "ACCESS_DENIED"
     #   resp.streaming_image.status_message #=> String
     #   resp.streaming_image.streaming_image_id #=> String
     #   resp.streaming_image.tags #=> Hash
@@ -1441,6 +1465,10 @@ module Aws::NimbleStudio
     #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
+    #   resp.launch_profile.stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
+    #   resp.launch_profile.stream_configuration.session_storage.root.linux #=> String
+    #   resp.launch_profile.stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profile.stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profile.stream_configuration.streaming_image_ids[0] #=> String
     #   resp.launch_profile.studio_component_ids #=> Array
@@ -1510,6 +1538,10 @@ module Aws::NimbleStudio
     #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
+    #   resp.launch_profile.stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
+    #   resp.launch_profile.stream_configuration.session_storage.root.linux #=> String
+    #   resp.launch_profile.stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profile.stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profile.stream_configuration.streaming_image_ids[0] #=> String
     #   resp.launch_profile.studio_component_ids #=> Array
@@ -1530,7 +1562,7 @@ module Aws::NimbleStudio
     #   resp.streaming_images[0].owner #=> String
     #   resp.streaming_images[0].platform #=> String
     #   resp.streaming_images[0].state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETE_IN_PROGRESS", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "CREATE_FAILED", "DELETE_FAILED"
-    #   resp.streaming_images[0].status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR"
+    #   resp.streaming_images[0].status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR", "ACCESS_DENIED"
     #   resp.streaming_images[0].status_message #=> String
     #   resp.streaming_images[0].streaming_image_id #=> String
     #   resp.streaming_images[0].tags #=> Hash
@@ -1696,7 +1728,7 @@ module Aws::NimbleStudio
     #   resp.streaming_image.owner #=> String
     #   resp.streaming_image.platform #=> String
     #   resp.streaming_image.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETE_IN_PROGRESS", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "CREATE_FAILED", "DELETE_FAILED"
-    #   resp.streaming_image.status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR"
+    #   resp.streaming_image.status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR", "ACCESS_DENIED"
     #   resp.streaming_image.status_message #=> String
     #   resp.streaming_image.streaming_image_id #=> String
     #   resp.streaming_image.tags #=> Hash
@@ -2186,6 +2218,10 @@ module Aws::NimbleStudio
     #   resp.launch_profiles[0].stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
     #   resp.launch_profiles[0].stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profiles[0].stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profiles[0].stream_configuration.session_storage.mode #=> Array
+    #   resp.launch_profiles[0].stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
+    #   resp.launch_profiles[0].stream_configuration.session_storage.root.linux #=> String
+    #   resp.launch_profiles[0].stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profiles[0].stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profiles[0].stream_configuration.streaming_image_ids[0] #=> String
     #   resp.launch_profiles[0].studio_component_ids #=> Array
@@ -2249,7 +2285,7 @@ module Aws::NimbleStudio
     #   resp.streaming_images[0].owner #=> String
     #   resp.streaming_images[0].platform #=> String
     #   resp.streaming_images[0].state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETE_IN_PROGRESS", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "CREATE_FAILED", "DELETE_FAILED"
-    #   resp.streaming_images[0].status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR"
+    #   resp.streaming_images[0].status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR", "ACCESS_DENIED"
     #   resp.streaming_images[0].status_message #=> String
     #   resp.streaming_images[0].streaming_image_id #=> String
     #   resp.streaming_images[0].tags #=> Hash
@@ -2422,6 +2458,10 @@ module Aws::NimbleStudio
     end
 
     # Get all users in a given studio membership.
+    #
+    # <note markdown="1"> `ListStudioMembers` only returns admin members.
+    #
+    #  </note>
     #
     # @option params [Integer] :max_results
     #   The max number of results to return in the response.
@@ -2950,6 +2990,13 @@ module Aws::NimbleStudio
     #       ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
     #       max_session_length_in_minutes: 1,
     #       max_stopped_session_length_in_minutes: 1,
+    #       session_storage: {
+    #         mode: ["UPLOAD"], # required, accepts UPLOAD
+    #         root: {
+    #           linux: "StreamingSessionStorageRootPathLinux",
+    #           windows: "StreamingSessionStorageRootPathWindows",
+    #         },
+    #       },
     #       streaming_image_ids: ["StreamingImageId"], # required
     #     },
     #     studio_component_ids: ["String"],
@@ -2976,6 +3023,10 @@ module Aws::NimbleStudio
     #   resp.launch_profile.stream_configuration.ec2_instance_types[0] #=> String, one of "g4dn.xlarge", "g4dn.2xlarge", "g4dn.4xlarge", "g4dn.8xlarge", "g4dn.12xlarge", "g4dn.16xlarge"
     #   resp.launch_profile.stream_configuration.max_session_length_in_minutes #=> Integer
     #   resp.launch_profile.stream_configuration.max_stopped_session_length_in_minutes #=> Integer
+    #   resp.launch_profile.stream_configuration.session_storage.mode #=> Array
+    #   resp.launch_profile.stream_configuration.session_storage.mode[0] #=> String, one of "UPLOAD"
+    #   resp.launch_profile.stream_configuration.session_storage.root.linux #=> String
+    #   resp.launch_profile.stream_configuration.session_storage.root.windows #=> String
     #   resp.launch_profile.stream_configuration.streaming_image_ids #=> Array
     #   resp.launch_profile.stream_configuration.streaming_image_ids[0] #=> String
     #   resp.launch_profile.studio_component_ids #=> Array
@@ -3098,7 +3149,7 @@ module Aws::NimbleStudio
     #   resp.streaming_image.owner #=> String
     #   resp.streaming_image.platform #=> String
     #   resp.streaming_image.state #=> String, one of "CREATE_IN_PROGRESS", "READY", "DELETE_IN_PROGRESS", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "CREATE_FAILED", "DELETE_FAILED"
-    #   resp.streaming_image.status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR"
+    #   resp.streaming_image.status_code #=> String, one of "STREAMING_IMAGE_CREATE_IN_PROGRESS", "STREAMING_IMAGE_READY", "STREAMING_IMAGE_DELETE_IN_PROGRESS", "STREAMING_IMAGE_DELETED", "STREAMING_IMAGE_UPDATE_IN_PROGRESS", "INTERNAL_ERROR", "ACCESS_DENIED"
     #   resp.streaming_image.status_message #=> String
     #   resp.streaming_image.streaming_image_id #=> String
     #   resp.streaming_image.tags #=> Hash
@@ -3346,7 +3397,7 @@ module Aws::NimbleStudio
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-nimblestudio'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

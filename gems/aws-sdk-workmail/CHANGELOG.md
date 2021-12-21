@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-12-21)
+------------------
+
+* Feature - This release allows customers to change their email monitoring configuration in Amazon WorkMail.
+
 1.46.0 (2021-11-30)
 ------------------
 

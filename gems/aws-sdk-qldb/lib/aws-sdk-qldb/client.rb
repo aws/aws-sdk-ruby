@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::QLDB
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -174,6 +176,10 @@ module Aws::QLDB
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -297,7 +303,7 @@ module Aws::QLDB
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -312,6 +318,9 @@ module Aws::QLDB
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -376,11 +385,13 @@ module Aws::QLDB
       req.send_request(options)
     end
 
-    # Creates a new ledger in your account in the current Region.
+    # Creates a new ledger in your Amazon Web Services account in the
+    # current Region.
     #
     # @option params [required, String] :name
     #   The name of the ledger that you want to create. The name must be
-    #   unique among all of the ledgers in your account in the current Region.
+    #   unique among all of the ledgers in your Amazon Web Services account in
+    #   the current Region.
     #
     #   Naming constraints for ledger names are defined in [Quotas in Amazon
     #   QLDB][1] in the *Amazon QLDB Developer Guide*.
@@ -460,7 +471,7 @@ module Aws::QLDB
     #   To specify a customer managed KMS key, you can use its key ID, Amazon
     #   Resource Name (ARN), alias name, or alias ARN. When using an alias
     #   name, prefix it with `"alias/"`. To specify a key in a different
-    #   account, you must use the key ARN or alias ARN.
+    #   Amazon Web Services account, you must use the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -653,6 +664,7 @@ module Aws::QLDB
     #   resp.export_description.s3_export_configuration.encryption_configuration.object_encryption_type #=> String, one of "SSE_KMS", "SSE_S3", "NO_ENCRYPTION"
     #   resp.export_description.s3_export_configuration.encryption_configuration.kms_key_arn #=> String
     #   resp.export_description.role_arn #=> String
+    #   resp.export_description.output_format #=> String, one of "ION_BINARY", "ION_TEXT", "JSON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeJournalS3Export AWS API Documentation
     #
@@ -707,8 +719,17 @@ module Aws::QLDB
     end
 
     # Exports journal contents within a date and time range from a ledger
-    # into a specified Amazon Simple Storage Service (Amazon S3) bucket. The
-    # data is written as files in Amazon Ion format.
+    # into a specified Amazon Simple Storage Service (Amazon S3) bucket. A
+    # journal export job can write the data objects in either the text or
+    # binary representation of Amazon Ion format, or in *JSON Lines* text
+    # format.
+    #
+    # In JSON Lines format, each journal block in the exported data object
+    # is a valid JSON object that is delimited by a newline. You can use
+    # this format to easily integrate JSON exports with analytics tools such
+    # as Glue and Amazon Athena because these services can parse
+    # newline-delimited JSON automatically. For more information about the
+    # format, see [JSON Lines][1].
     #
     # If the ledger with the given `Name` doesn't exist, then throws
     # `ResourceNotFoundException`.
@@ -719,6 +740,10 @@ module Aws::QLDB
     # You can initiate up to two concurrent journal export requests for each
     # ledger. Beyond this limit, journal export requests throw
     # `LimitExceededException`.
+    #
+    #
+    #
+    # [1]: https://jsonlines.org/
     #
     # @option params [required, String] :name
     #   The name of the ledger.
@@ -759,8 +784,16 @@ module Aws::QLDB
     #   * Write objects into your Amazon Simple Storage Service (Amazon S3)
     #     bucket.
     #
-    #   * (Optional) Use your customer master key (CMK) in Key Management
-    #     Service (KMS) for server-side encryption of your exported data.
+    #   * (Optional) Use your customer managed key in Key Management Service
+    #     (KMS) for server-side encryption of your exported data.
+    #
+    #   To pass a role to QLDB when requesting a journal export, you must have
+    #   permissions to perform the `iam:PassRole` action on the IAM role
+    #   resource. This is required for all journal export requests.
+    #
+    # @option params [String] :output_format
+    #   The output format of your exported journal data. If this parameter is
+    #   not specified, the exported data defaults to `ION_TEXT` format.
     #
     # @return [Types::ExportJournalToS3Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -781,6 +814,7 @@ module Aws::QLDB
     #       },
     #     },
     #     role_arn: "Arn", # required
+    #     output_format: "ION_BINARY", # accepts ION_BINARY, ION_TEXT, JSON
     #   })
     #
     # @example Response structure
@@ -1024,7 +1058,8 @@ module Aws::QLDB
     end
 
     # Returns an array of journal export job descriptions for all ledgers
-    # that are associated with the current account and Region.
+    # that are associated with the current Amazon Web Services account and
+    # Region.
     #
     # This action returns a maximum of `MaxResults` items, and is paginated
     # so that you can retrieve all the items by calling
@@ -1077,6 +1112,7 @@ module Aws::QLDB
     #   resp.journal_s3_exports[0].s3_export_configuration.encryption_configuration.object_encryption_type #=> String, one of "SSE_KMS", "SSE_S3", "NO_ENCRYPTION"
     #   resp.journal_s3_exports[0].s3_export_configuration.encryption_configuration.kms_key_arn #=> String
     #   resp.journal_s3_exports[0].role_arn #=> String
+    #   resp.journal_s3_exports[0].output_format #=> String, one of "ION_BINARY", "ION_TEXT", "JSON"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/ListJournalS3Exports AWS API Documentation
@@ -1146,6 +1182,7 @@ module Aws::QLDB
     #   resp.journal_s3_exports[0].s3_export_configuration.encryption_configuration.object_encryption_type #=> String, one of "SSE_KMS", "SSE_S3", "NO_ENCRYPTION"
     #   resp.journal_s3_exports[0].s3_export_configuration.encryption_configuration.kms_key_arn #=> String
     #   resp.journal_s3_exports[0].role_arn #=> String
+    #   resp.journal_s3_exports[0].output_format #=> String, one of "ION_BINARY", "ION_TEXT", "JSON"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/ListJournalS3ExportsForLedger AWS API Documentation
@@ -1158,7 +1195,7 @@ module Aws::QLDB
     end
 
     # Returns an array of ledger summaries that are associated with the
-    # current account and Region.
+    # current Amazon Web Services account and Region.
     #
     # This action returns a maximum of 100 items and is paginated so that
     # you can retrieve all the items by calling `ListLedgers` multiple
@@ -1249,6 +1286,10 @@ module Aws::QLDB
     #   The Amazon Resource Name (ARN) of the IAM role that grants QLDB
     #   permissions for a journal stream to write data records to a Kinesis
     #   Data Streams resource.
+    #
+    #   To pass a role to QLDB when requesting a journal stream, you must have
+    #   permissions to perform the `iam:PassRole` action on the IAM role
+    #   resource. This is required for all journal stream requests.
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value pairs to add as tags to the stream that you want to
@@ -1432,7 +1473,7 @@ module Aws::QLDB
     #   To specify a customer managed KMS key, you can use its key ID, Amazon
     #   Resource Name (ARN), alias name, or alias ARN. When using an alias
     #   name, prefix it with `"alias/"`. To specify a key in a different
-    #   account, you must use the key ARN or alias ARN.
+    #   Amazon Web Services account, you must use the key ARN or alias ARN.
     #
     #   For example:
     #
@@ -1580,7 +1621,7 @@ module Aws::QLDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qldb'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

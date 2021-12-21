@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.125.0 (2021-12-21)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Feature - Add `:defaults_mode` configuration - that determines how certain default configuration options are resolved in the SDK.
 
 3.124.0 (2021-11-30)

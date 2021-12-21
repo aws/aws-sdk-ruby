@@ -186,6 +186,7 @@ module Aws::Transfer
     TestIdentityProviderRequest = Shapes::StructureShape.new(name: 'TestIdentityProviderRequest')
     TestIdentityProviderResponse = Shapes::StructureShape.new(name: 'TestIdentityProviderResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TlsSessionResumptionMode = Shapes::StringShape.new(name: 'TlsSessionResumptionMode')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAccessRequest = Shapes::StructureShape.new(name: 'UpdateAccessRequest')
     UpdateAccessResponse = Shapes::StructureShape.new(name: 'UpdateAccessResponse')
@@ -245,6 +246,7 @@ module Aws::Transfer
     CreateServerRequest.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
     CreateServerRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     CreateServerRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: Protocols, location_name: "Protocols"))
+    CreateServerRequest.add_member(:protocol_details, Shapes::ShapeRef.new(shape: ProtocolDetails, location_name: "ProtocolDetails"))
     CreateServerRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: SecurityPolicyName, location_name: "SecurityPolicyName"))
     CreateServerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateServerRequest.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
@@ -599,6 +601,7 @@ module Aws::Transfer
     PosixProfile.struct_class = Types::PosixProfile
 
     ProtocolDetails.add_member(:passive_ip, Shapes::ShapeRef.new(shape: PassiveIp, location_name: "PassiveIp"))
+    ProtocolDetails.add_member(:tls_session_resumption_mode, Shapes::ShapeRef.new(shape: TlsSessionResumptionMode, location_name: "TlsSessionResumptionMode"))
     ProtocolDetails.struct_class = Types::ProtocolDetails
 
     Protocols.member = Shapes::ShapeRef.new(shape: Protocol)

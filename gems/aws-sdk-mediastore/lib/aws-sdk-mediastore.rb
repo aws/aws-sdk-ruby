@@ -48,6 +48,6 @@ require_relative 'aws-sdk-mediastore/customizations'
 # @!group service
 module Aws::MediaStore
 
-  GEM_VERSION = '1.38.0'
+  GEM_VERSION = '1.39.0'
 
 end

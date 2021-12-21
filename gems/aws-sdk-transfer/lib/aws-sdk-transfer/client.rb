@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::Transfer
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -174,6 +176,10 @@ module Aws::Transfer
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -307,7 +313,7 @@ module Aws::Transfer
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -322,6 +328,9 @@ module Aws::Transfer
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -643,7 +652,7 @@ module Aws::Transfer
     #   API Gateway endpoint URL to call for authentication using the
     #   `IdentityProviderDetails` parameter.
     #
-    #   Use the `LAMBDA` value to directly use a Lambda function as your
+    #   Use the `AWS_LAMBDA` value to directly use a Lambda function as your
     #   identity provider. If you choose this value, you must specify the ARN
     #   for the lambda function in the `Function` parameter for the
     #   `IdentityProviderDetails` data type.
@@ -684,6 +693,17 @@ module Aws::Transfer
     #
     #    </note>
     #
+    # @option params [Types::ProtocolDetails] :protocol_details
+    #   The protocol settings that are configured for your server.
+    #
+    #   Use the `PassiveIp` parameter to indicate passive mode (for FTP and
+    #   FTPS protocols). Enter a single dotted-quad IPv4 address, such as the
+    #   external IP address of a firewall, router, or load balancer.
+    #
+    #   Use the `TlsSessionResumptionMode` parameter to determine whether or
+    #   not your Transfer server resumes recent, negotiated sessions through a
+    #   unique session ID.
+    #
     # @option params [String] :security_policy_name
     #   Specifies the name of the security policy that is attached to the
     #   server.
@@ -722,6 +742,10 @@ module Aws::Transfer
     #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
     #     logging_role: "Role",
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
+    #     protocol_details: {
+    #       passive_ip: "PassiveIp",
+    #       tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
+    #     },
     #     security_policy_name: "SecurityPolicyName",
     #     tags: [
     #       {
@@ -862,6 +886,11 @@ module Aws::Transfer
     # @option params [String] :ssh_public_key_body
     #   The public portion of the Secure Shell (SSH) key used to authenticate
     #   the user to the server.
+    #
+    #   <note markdown="1"> Currently, Transfer Family does not accept elliptical curve keys (keys
+    #   beginning with `ecdsa`).
+    #
+    #    </note>
     #
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for users. Tags
@@ -1425,6 +1454,7 @@ module Aws::Transfer
     #   resp.server.arn #=> String
     #   resp.server.certificate #=> String
     #   resp.server.protocol_details.passive_ip #=> String
+    #   resp.server.protocol_details.tls_session_resumption_mode #=> String, one of "DISABLED", "ENABLED", "ENFORCED"
     #   resp.server.domain #=> String, one of "S3", "EFS"
     #   resp.server.endpoint_details.address_allocation_ids #=> Array
     #   resp.server.endpoint_details.address_allocation_ids[0] #=> String
@@ -2476,6 +2506,10 @@ module Aws::Transfer
     #   FTPS protocols). Enter a single dotted-quad IPv4 address, such as the
     #   external IP address of a firewall, router, or load balancer.
     #
+    #   Use the `TlsSessionResumptionMode` parameter to determine whether or
+    #   not your Transfer server resumes recent, negotiated sessions through a
+    #   unique session ID.
+    #
     # @option params [Types::EndpointDetails] :endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are configured
     #   for your server. When you host your endpoint within your VPC, you can
@@ -2588,6 +2622,7 @@ module Aws::Transfer
     #     certificate: "Certificate",
     #     protocol_details: {
     #       passive_ip: "PassiveIp",
+    #       tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
     #     },
     #     endpoint_details: {
     #       address_allocation_ids: ["AddressAllocationId"],
@@ -2799,7 +2834,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -139,8 +139,9 @@ module Aws::MediaConnect
     #             min_latency: 1,
     #             name: "__string",
     #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
     #             remote_id: "__string",
+    #             sender_control_port: 1,
     #             smoothing_latency: 1,
     #             stream_id: "__string",
     #             vpc_interface_attachment: {
@@ -228,7 +229,9 @@ module Aws::MediaConnect
     #             ],
     #             min_latency: 1,
     #             name: "__string",
-    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #             sender_control_port: 1,
+    #             sender_ip_address: "__string",
     #             stream_id: "__string",
     #             vpc_interface_name: "__string",
     #             whitelist_cidr: "__string",
@@ -440,8 +443,9 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         name: "__string",
     #         port: 1,
-    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
+    #         protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
     #         remote_id: "__string",
+    #         sender_control_port: 1,
     #         smoothing_latency: 1,
     #         stream_id: "__string",
     #         vpc_interface_attachment: {
@@ -468,11 +472,13 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] encryption
     #   The type of key used for the encryption. If no keyType is provided,
-    #   the service will use the default setting (static-key).
+    #   the service will use the default setting (static-key). Allowable
+    #   encryption types: static-key.
     #   @return [Types::Encryption]
     #
     # @!attribute [rw] max_latency
-    #   The maximum latency in milliseconds for Zixi-based streams.
+    #   The maximum latency in milliseconds. This parameter applies only to
+    #   RIST-based, Zixi-based, and Fujitsu-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] media_stream_output_configurations
@@ -506,6 +512,11 @@ module Aws::MediaConnect
     #   The remote ID for the Zixi-pull output stream.
     #   @return [String]
     #
+    # @!attribute [rw] sender_control_port
+    #   The port that the flow uses to send outbound requests to initiate
+    #   connection with the sender.
+    #   @return [Integer]
+    #
     # @!attribute [rw] smoothing_latency
     #   The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC
     #   streams.
@@ -534,6 +545,7 @@ module Aws::MediaConnect
       :port,
       :protocol,
       :remote_id,
+      :sender_control_port,
       :smoothing_latency,
       :stream_id,
       :vpc_interface_attachment)
@@ -661,8 +673,9 @@ module Aws::MediaConnect
     #             min_latency: 1,
     #             name: "__string",
     #             port: 1,
-    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
+    #             protocol: "zixi-push", # required, accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
     #             remote_id: "__string",
+    #             sender_control_port: 1,
     #             smoothing_latency: 1,
     #             stream_id: "__string",
     #             vpc_interface_attachment: {
@@ -704,7 +717,9 @@ module Aws::MediaConnect
     #           ],
     #           min_latency: 1,
     #           name: "__string",
-    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
+    #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #           sender_control_port: 1,
+    #           sender_ip_address: "__string",
     #           stream_id: "__string",
     #           vpc_interface_name: "__string",
     #           whitelist_cidr: "__string",
@@ -752,7 +767,9 @@ module Aws::MediaConnect
     #             ],
     #             min_latency: 1,
     #             name: "__string",
-    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #             sender_control_port: 1,
+    #             sender_ip_address: "__string",
     #             stream_id: "__string",
     #             vpc_interface_name: "__string",
     #             whitelist_cidr: "__string",
@@ -797,7 +814,7 @@ module Aws::MediaConnect
     #   @return [Types::SetSourceRequest]
     #
     # @!attribute [rw] source_failover_config
-    #   The settings for source failover
+    #   The settings for source failover.
     #   @return [Types::FailoverConfig]
     #
     # @!attribute [rw] sources
@@ -1258,7 +1275,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The settings for source failover
+    # The settings for source failover.
     #
     # @note When making an API call, you may pass FailoverConfig
     #   data as a hash:
@@ -1348,7 +1365,7 @@ module Aws::MediaConnect
     #   @return [Types::Source]
     #
     # @!attribute [rw] source_failover_config
-    #   The settings for source failover
+    #   The settings for source failover.
     #   @return [Types::FailoverConfig]
     #
     # @!attribute [rw] sources
@@ -1543,7 +1560,8 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] encryption
     #   The type of encryption that will be used on the output that is
-    #   associated with this entitlement.
+    #   associated with this entitlement. Allowable encryption types:
+    #   static-key, speke.
     #   @return [Types::Encryption]
     #
     # @!attribute [rw] entitlement_status
@@ -2992,7 +3010,9 @@ module Aws::MediaConnect
     #         ],
     #         min_latency: 1,
     #         name: "__string",
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #         sender_control_port: 1,
+    #         sender_ip_address: "__string",
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
@@ -3000,7 +3020,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] decryption
     #   The type of encryption that is used on the content ingested from
-    #   this source.
+    #   this source. Allowable encryption types: static-key.
     #   @return [Types::Encryption]
     #
     # @!attribute [rw] description
@@ -3024,7 +3044,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds. This parameter applies only to
-    #   RIST-based and Zixi-based streams.
+    #   RIST-based, Zixi-based, and Fujitsu-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_sync_buffer
@@ -3052,6 +3072,16 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The protocol that is used by the source.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_control_port
+    #   The port that the flow uses to send outbound requests to initiate
+    #   connection with the sender.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sender_ip_address
+    #   The IP address that the flow communicates with to initiate
+    #   connection with the sender.
     #   @return [String]
     #
     # @!attribute [rw] stream_id
@@ -3084,6 +3114,8 @@ module Aws::MediaConnect
       :min_latency,
       :name,
       :protocol,
+      :sender_control_port,
+      :sender_ip_address,
       :stream_id,
       :vpc_interface_name,
       :whitelist_cidr)
@@ -3133,6 +3165,16 @@ module Aws::MediaConnect
     #   The name of the source.
     #   @return [String]
     #
+    # @!attribute [rw] sender_control_port
+    #   The port that the flow uses to send outbound requests to initiate
+    #   connection with the sender.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sender_ip_address
+    #   The IP address that the flow communicates with to initiate
+    #   connection with the sender.
+    #   @return [String]
+    #
     # @!attribute [rw] source_arn
     #   The ARN of the source.
     #   @return [String]
@@ -3164,6 +3206,8 @@ module Aws::MediaConnect
       :ingest_port,
       :media_stream_source_configurations,
       :name,
+      :sender_control_port,
+      :sender_ip_address,
       :source_arn,
       :transport,
       :vpc_interface_name,
@@ -3332,7 +3376,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds. This parameter applies only to
-    #   RIST-based and Zixi-based streams.
+    #   RIST-based, Zixi-based, and Fujitsu-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_sync_buffer
@@ -3357,6 +3401,16 @@ module Aws::MediaConnect
     #   The remote ID for the Zixi-pull stream.
     #   @return [String]
     #
+    # @!attribute [rw] sender_control_port
+    #   The port that the flow uses to send outbound requests to initiate
+    #   connection with the sender.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sender_ip_address
+    #   The IP address that the flow communicates with to initiate
+    #   connection with the sender.
+    #   @return [String]
+    #
     # @!attribute [rw] smoothing_latency
     #   The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC
     #   streams.
@@ -3377,6 +3431,8 @@ module Aws::MediaConnect
       :min_latency,
       :protocol,
       :remote_id,
+      :sender_control_port,
+      :sender_ip_address,
       :smoothing_latency,
       :stream_id)
       SENSITIVE = []
@@ -3492,7 +3548,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # The settings for source failover
+    # The settings for source failover.
     #
     # @note When making an API call, you may pass UpdateFailoverConfig
     #   data as a hash:
@@ -3568,7 +3624,8 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] encryption
     #   The type of encryption that will be used on the output associated
-    #   with this entitlement.
+    #   with this entitlement. Allowable encryption types: static-key,
+    #   speke.
     #   @return [Types::UpdateEncryption]
     #
     # @!attribute [rw] entitlement_arn
@@ -3757,8 +3814,10 @@ module Aws::MediaConnect
     #         min_latency: 1,
     #         output_arn: "__string", # required
     #         port: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
     #         remote_id: "__string",
+    #         sender_control_port: 1,
+    #         sender_ip_address: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
     #         vpc_interface_attachment: {
@@ -3785,7 +3844,8 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] encryption
     #   The type of key used for the encryption. If no keyType is provided,
-    #   the service will use the default setting (static-key).
+    #   the service will use the default setting (static-key). Allowable
+    #   encryption types: static-key.
     #   @return [Types::UpdateEncryption]
     #
     # @!attribute [rw] flow_arn
@@ -3824,6 +3884,16 @@ module Aws::MediaConnect
     #   The remote ID for the Zixi-pull stream.
     #   @return [String]
     #
+    # @!attribute [rw] sender_control_port
+    #   The port that the flow uses to send outbound requests to initiate
+    #   connection with the sender.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sender_ip_address
+    #   The IP address that the flow communicates with to initiate
+    #   connection with the sender.
+    #   @return [String]
+    #
     # @!attribute [rw] smoothing_latency
     #   The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC
     #   streams.
@@ -3853,6 +3923,8 @@ module Aws::MediaConnect
       :port,
       :protocol,
       :remote_id,
+      :sender_control_port,
+      :sender_ip_address,
       :smoothing_latency,
       :stream_id,
       :vpc_interface_attachment)
@@ -3901,7 +3973,7 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] source_failover_config
-    #   The settings for source failover
+    #   The settings for source failover.
     #   @return [Types::UpdateFailoverConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowRequest AWS API Documentation
@@ -3968,7 +4040,9 @@ module Aws::MediaConnect
     #           },
     #         ],
     #         min_latency: 1,
-    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist, st2110-jpegxs, cdi, srt-listener, fujitsu-qos
+    #         sender_control_port: 1,
+    #         sender_ip_address: "__string",
     #         source_arn: "__string", # required
     #         stream_id: "__string",
     #         vpc_interface_name: "__string",
@@ -3977,7 +4051,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] decryption
     #   The type of encryption used on the content ingested from this
-    #   source.
+    #   source. Allowable encryption types: static-key.
     #   @return [Types::UpdateEncryption]
     #
     # @!attribute [rw] description
@@ -4004,7 +4078,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] max_latency
     #   The maximum latency in milliseconds. This parameter applies only to
-    #   RIST-based and Zixi-based streams.
+    #   RIST-based, Zixi-based, and Fujitsu-based streams.
     #   @return [Integer]
     #
     # @!attribute [rw] max_sync_buffer
@@ -4028,6 +4102,14 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] protocol
     #   The protocol that is used by the source.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_control_port
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sender_ip_address
+    #   The IP address that the flow communicates with to initiate
+    #   connection with the sender.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
@@ -4063,6 +4145,8 @@ module Aws::MediaConnect
       :media_stream_source_configurations,
       :min_latency,
       :protocol,
+      :sender_control_port,
+      :sender_ip_address,
       :source_arn,
       :stream_id,
       :vpc_interface_name,
@@ -4096,7 +4180,7 @@ module Aws::MediaConnect
     #
     # @!attribute [rw] name
     #   Immutable and has to be a unique against other VpcInterfaces in this
-    #   Flow
+    #   Flow.
     #   @return [String]
     #
     # @!attribute [rw] network_interface_ids

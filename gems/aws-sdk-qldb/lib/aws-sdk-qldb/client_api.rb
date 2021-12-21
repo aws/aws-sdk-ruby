@@ -66,6 +66,7 @@ module Aws::QLDB
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OutputFormat = Shapes::StringShape.new(name: 'OutputFormat')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     PermissionsMode = Shapes::StringShape.new(name: 'PermissionsMode')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
@@ -156,6 +157,7 @@ module Aws::QLDB
     ExportJournalToS3Request.add_member(:exclusive_end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ExclusiveEndTime"))
     ExportJournalToS3Request.add_member(:s3_export_configuration, Shapes::ShapeRef.new(shape: S3ExportConfiguration, required: true, location_name: "S3ExportConfiguration"))
     ExportJournalToS3Request.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
+    ExportJournalToS3Request.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "OutputFormat"))
     ExportJournalToS3Request.struct_class = Types::ExportJournalToS3Request
 
     ExportJournalToS3Response.add_member(:export_id, Shapes::ShapeRef.new(shape: UniqueId, required: true, location_name: "ExportId"))
@@ -214,6 +216,7 @@ module Aws::QLDB
     JournalS3ExportDescription.add_member(:exclusive_end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ExclusiveEndTime"))
     JournalS3ExportDescription.add_member(:s3_export_configuration, Shapes::ShapeRef.new(shape: S3ExportConfiguration, required: true, location_name: "S3ExportConfiguration"))
     JournalS3ExportDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
+    JournalS3ExportDescription.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, location_name: "OutputFormat"))
     JournalS3ExportDescription.struct_class = Types::JournalS3ExportDescription
 
     JournalS3ExportList.member = Shapes::ShapeRef.new(shape: JournalS3ExportDescription)

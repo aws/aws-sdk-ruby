@@ -48,6 +48,6 @@ require_relative 'aws-sdk-appsync/customizations'
 # @!group service
 module Aws::AppSync
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.49.0'
 
 end

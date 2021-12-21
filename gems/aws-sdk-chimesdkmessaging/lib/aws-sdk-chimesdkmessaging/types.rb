@@ -374,6 +374,16 @@ module Aws::ChimeSDKMessaging
     #           message_id: "MessageId", # required
     #           content: "NonEmptyContent",
     #           metadata: "Metadata",
+    #           push_notification: {
+    #             title: "PushNotificationTitle",
+    #             body: "PushNotificationBody",
+    #             type: "DEFAULT", # accepts DEFAULT, VOIP
+    #           },
+    #           message_attributes: {
+    #             "MessageAttributeName" => {
+    #               string_values: ["MessageAttributeStringValue"],
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -630,6 +640,16 @@ module Aws::ChimeSDKMessaging
     #         message_id: "MessageId", # required
     #         content: "NonEmptyContent",
     #         metadata: "Metadata",
+    #         push_notification: {
+    #           title: "PushNotificationTitle",
+    #           body: "PushNotificationBody",
+    #           type: "DEFAULT", # accepts DEFAULT, VOIP
+    #         },
+    #         message_attributes: {
+    #           "MessageAttributeName" => {
+    #             string_values: ["MessageAttributeStringValue"],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] message_id
@@ -644,12 +664,23 @@ module Aws::ChimeSDKMessaging
     #   The message metadata.
     #   @return [String]
     #
+    # @!attribute [rw] push_notification
+    #   The push notification configuration of the message.
+    #   @return [Types::PushNotificationConfiguration]
+    #
+    # @!attribute [rw] message_attributes
+    #   The attributes for the message, used for message filtering along
+    #   with a `FilterRule` defined in the `PushNotificationPreferences`.
+    #   @return [Hash<String,Types::MessageAttributeValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-messaging-2021-05-15/ChannelMessageCallback AWS API Documentation
     #
     class ChannelMessageCallback < Struct.new(
       :message_id,
       :content,
-      :metadata)
+      :metadata,
+      :push_notification,
+      :message_attributes)
       SENSITIVE = [:content, :metadata]
       include Aws::Structure
     end
@@ -2055,10 +2086,9 @@ module Aws::ChimeSDKMessaging
     #
     # @!attribute [rw] type
     #   The membership type of a user, `DEFAULT` or `HIDDEN`. Default
-    #   members are always returned as part of `ListChannelMemberships`.
-    #   Hidden members are only returned if the type filter in
-    #   `ListChannelMemberships` equals `HIDDEN`. Otherwise hidden members
-    #   are not returned.
+    #   members are returned as part of `ListChannelMemberships` if no type
+    #   is specified. Hidden members are only returned if the type filter in
+    #   `ListChannelMemberships` equals `HIDDEN`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2588,9 +2618,9 @@ module Aws::ChimeSDKMessaging
     #   data as a hash:
     #
     #       {
-    #         title: "PushNotificationTitle", # required
-    #         body: "PushNotificationBody", # required
-    #         type: "DEFAULT", # required, accepts DEFAULT, VOIP
+    #         title: "PushNotificationTitle",
+    #         body: "PushNotificationBody",
+    #         type: "DEFAULT", # accepts DEFAULT, VOIP
     #       }
     #
     # @!attribute [rw] title
@@ -2791,9 +2821,9 @@ module Aws::ChimeSDKMessaging
     #         client_request_token: "ClientRequestToken", # required
     #         chime_bearer: "ChimeArn", # required
     #         push_notification: {
-    #           title: "PushNotificationTitle", # required
-    #           body: "PushNotificationBody", # required
-    #           type: "DEFAULT", # required, accepts DEFAULT, VOIP
+    #           title: "PushNotificationTitle",
+    #           body: "PushNotificationBody",
+    #           type: "DEFAULT", # accepts DEFAULT, VOIP
     #         },
     #         message_attributes: {
     #           "MessageAttributeName" => {

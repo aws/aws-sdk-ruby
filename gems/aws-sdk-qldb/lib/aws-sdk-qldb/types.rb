@@ -63,8 +63,8 @@ module Aws::QLDB
     #
     # @!attribute [rw] name
     #   The name of the ledger that you want to create. The name must be
-    #   unique among all of the ledgers in your account in the current
-    #   Region.
+    #   unique among all of the ledgers in your Amazon Web Services account
+    #   in the current Region.
     #
     #   Naming constraints for ledger names are defined in [Quotas in Amazon
     #   QLDB][1] in the *Amazon QLDB Developer Guide*.
@@ -148,7 +148,8 @@ module Aws::QLDB
     #   To specify a customer managed KMS key, you can use its key ID,
     #   Amazon Resource Name (ARN), alias name, or alias ARN. When using an
     #   alias name, prefix it with `"alias/"`. To specify a key in a
-    #   different account, you must use the key ARN or alias ARN.
+    #   different Amazon Web Services account, you must use the key ARN or
+    #   alias ARN.
     #
     #   For example:
     #
@@ -419,6 +420,7 @@ module Aws::QLDB
     #           },
     #         },
     #         role_arn: "Arn", # required
+    #         output_format: "ION_BINARY", # accepts ION_BINARY, ION_TEXT, JSON
     #       }
     #
     # @!attribute [rw] name
@@ -464,8 +466,17 @@ module Aws::QLDB
     #   * Write objects into your Amazon Simple Storage Service (Amazon S3)
     #     bucket.
     #
-    #   * (Optional) Use your customer master key (CMK) in Key Management
-    #     Service (KMS) for server-side encryption of your exported data.
+    #   * (Optional) Use your customer managed key in Key Management Service
+    #     (KMS) for server-side encryption of your exported data.
+    #
+    #   To pass a role to QLDB when requesting a journal export, you must
+    #   have permissions to perform the `iam:PassRole` action on the IAM
+    #   role resource. This is required for all journal export requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The output format of your exported journal data. If this parameter
+    #   is not specified, the exported data defaults to `ION_TEXT` format.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/ExportJournalToS3Request AWS API Documentation
@@ -475,7 +486,8 @@ module Aws::QLDB
       :inclusive_start_time,
       :exclusive_end_time,
       :s3_export_configuration,
-      :role_arn)
+      :role_arn,
+      :output_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -788,12 +800,12 @@ module Aws::QLDB
     #
     # @!attribute [rw] inclusive_start_time
     #   The inclusive start date and time for the range of journal contents
-    #   that are specified in the original export request.
+    #   that was specified in the original export request.
     #   @return [Time]
     #
     # @!attribute [rw] exclusive_end_time
     #   The exclusive end date and time for the range of journal contents
-    #   that are specified in the original export request.
+    #   that was specified in the original export request.
     #   @return [Time]
     #
     # @!attribute [rw] s3_export_configuration
@@ -808,8 +820,12 @@ module Aws::QLDB
     #   * Write objects into your Amazon Simple Storage Service (Amazon S3)
     #     bucket.
     #
-    #   * (Optional) Use your customer master key (CMK) in Key Management
-    #     Service (KMS) for server-side encryption of your exported data.
+    #   * (Optional) Use your customer managed key in Key Management Service
+    #     (KMS) for server-side encryption of your exported data.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_format
+    #   The output format of the exported journal data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/JournalS3ExportDescription AWS API Documentation
@@ -822,7 +838,8 @@ module Aws::QLDB
       :inclusive_start_time,
       :exclusive_end_time,
       :s3_export_configuration,
-      :role_arn)
+      :role_arn,
+      :output_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1129,7 +1146,8 @@ module Aws::QLDB
 
     # @!attribute [rw] journal_s3_exports
     #   The array of journal export job descriptions for all ledgers that
-    #   are associated with the current account and Region.
+    #   are associated with the current Amazon Web Services account and
+    #   Region.
     #   @return [Array<Types::JournalS3ExportDescription>]
     #
     # @!attribute [rw] next_token
@@ -1181,7 +1199,7 @@ module Aws::QLDB
 
     # @!attribute [rw] ledgers
     #   The array of ledger summaries that are associated with the current
-    #   account and Region.
+    #   Amazon Web Services account and Region.
     #   @return [Array<Types::LedgerSummary>]
     #
     # @!attribute [rw] next_token
@@ -1356,9 +1374,8 @@ module Aws::QLDB
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of a symmetric customer master key
-    #   (CMK) in Key Management Service (KMS). Amazon S3 does not support
-    #   asymmetric CMKs.
+    #   The Amazon Resource Name (ARN) of a symmetric key in Key Management
+    #   Service (KMS). Amazon S3 does not support asymmetric KMS keys.
     #
     #   You must provide a `KmsKeyArn` if you specify `SSE_KMS` as the
     #   `ObjectEncryptionType`.
@@ -1466,6 +1483,10 @@ module Aws::QLDB
     #   The Amazon Resource Name (ARN) of the IAM role that grants QLDB
     #   permissions for a journal stream to write data records to a Kinesis
     #   Data Streams resource.
+    #
+    #   To pass a role to QLDB when requesting a journal stream, you must
+    #   have permissions to perform the `iam:PassRole` action on the IAM
+    #   role resource. This is required for all journal stream requests.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1737,7 +1758,8 @@ module Aws::QLDB
     #   To specify a customer managed KMS key, you can use its key ID,
     #   Amazon Resource Name (ARN), alias name, or alias ARN. When using an
     #   alias name, prefix it with `"alias/"`. To specify a key in a
-    #   different account, you must use the key ARN or alias ARN.
+    #   different Amazon Web Services account, you must use the key ARN or
+    #   alias ARN.
     #
     #   For example:
     #

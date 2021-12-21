@@ -1760,7 +1760,15 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn
-    #   The SNS topic on which to send image build events.
+    #   The Amazon Resource Name (ARN) for the SNS topic to which we send
+    #   image build event notifications.
+    #
+    #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
+    #   are encrypted using keys from other accounts. The key that is used
+    #   to encrypt the SNS topic must reside in the account that the Image
+    #   Builder service runs under.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] resource_tags
@@ -3746,8 +3754,15 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn
-    #   The SNS topic Amazon Resource Name (ARN) of the infrastructure
-    #   configuration.
+    #   The Amazon Resource Name (ARN) for the SNS topic to which we send
+    #   image build event notifications.
+    #
+    #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
+    #   are encrypted using keys from other accounts. The key that is used
+    #   to encrypt the SNS topic must reside in the account that the Image
+    #   Builder service runs under.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] date_created
@@ -5957,7 +5972,15 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn
-    #   The SNS topic on which to send image build events.
+    #   The Amazon Resource Name (ARN) for the SNS topic to which we send
+    #   image build event notifications.
+    #
+    #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
+    #   are encrypted using keys from other accounts. The key that is used
+    #   to encrypt the SNS topic must reside in the account that the Image
+    #   Builder service runs under.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] client_token
