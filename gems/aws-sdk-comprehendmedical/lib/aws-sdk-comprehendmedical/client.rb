@@ -352,9 +352,9 @@ module Aws::ComprehendMedical
     # Use this operation to get the status of a detection job.
     #
     # @option params [required, String] :job_id
-    #   The identifier that Amazon Comprehend Medical generated for the job.
-    #   The `StartEntitiesDetectionV2Job` operation returns this identifier in
-    #   its response.
+    #   The identifier that Comprehend Medical; generated for the job. The
+    #   `StartEntitiesDetectionV2Job` operation returns this identifier in its
+    #   response.
     #
     # @return [Types::DescribeEntitiesDetectionV2JobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -445,8 +445,8 @@ module Aws::ComprehendMedical
     # detection job.
     #
     # @option params [required, String] :job_id
-    #   The identifier that Amazon Comprehend Medical generated for the job.
-    #   The `StartPHIDetectionJob` operation returns this identifier in its
+    #   The identifier that Comprehend Medical; generated for the job. The
+    #   `StartPHIDetectionJob` operation returns this identifier in its
     #   response.
     #
     # @return [Types::DescribePHIDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -533,6 +533,52 @@ module Aws::ComprehendMedical
       req.send_request(options)
     end
 
+    # Gets the properties associated with an InferSNOMEDCT job. Use this
+    # operation to get the status of an inference job.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier that Amazon Comprehend Medical generated for the job.
+    #   The StartSNOMEDCTInferenceJob operation returns this identifier in its
+    #   response.
+    #
+    # @return [Types::DescribeSNOMEDCTInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSNOMEDCTInferenceJobResponse#comprehend_medical_async_job_properties #comprehend_medical_async_job_properties} => Types::ComprehendMedicalAsyncJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_snomedct_inference_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comprehend_medical_async_job_properties.job_id #=> String
+    #   resp.comprehend_medical_async_job_properties.job_name #=> String
+    #   resp.comprehend_medical_async_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "PARTIAL_SUCCESS", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.comprehend_medical_async_job_properties.message #=> String
+    #   resp.comprehend_medical_async_job_properties.submit_time #=> Time
+    #   resp.comprehend_medical_async_job_properties.end_time #=> Time
+    #   resp.comprehend_medical_async_job_properties.expiration_time #=> Time
+    #   resp.comprehend_medical_async_job_properties.input_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties.input_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties.output_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties.output_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties.language_code #=> String, one of "en"
+    #   resp.comprehend_medical_async_job_properties.data_access_role_arn #=> String
+    #   resp.comprehend_medical_async_job_properties.manifest_file_path #=> String
+    #   resp.comprehend_medical_async_job_properties.kms_key #=> String
+    #   resp.comprehend_medical_async_job_properties.model_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribeSNOMEDCTInferenceJob AWS API Documentation
+    #
+    # @overload describe_snomedct_inference_job(params = {})
+    # @param [Hash] params ({})
+    def describe_snomedct_inference_job(params = {}, options = {})
+      req = build_request(:describe_snomedct_inference_job, params)
+      req.send_request(options)
+    end
+
     # The `DetectEntities` operation is deprecated. You should use the
     # DetectEntitiesV2 operation instead.
     #
@@ -567,15 +613,15 @@ module Aws::ComprehendMedical
     #   resp.entities[0].score #=> Float
     #   resp.entities[0].text #=> String
     #   resp.entities[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
-    #   resp.entities[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
+    #   resp.entities[0].type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].traits #=> Array
     #   resp.entities[0].traits[0].name #=> String, one of "SIGN", "SYMPTOM", "DIAGNOSIS", "NEGATION"
     #   resp.entities[0].traits[0].score #=> Float
     #   resp.entities[0].attributes #=> Array
-    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
+    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].attributes[0].score #=> Float
     #   resp.entities[0].attributes[0].relationship_score #=> Float
-    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION", "SYSTEM_ORGAN_SITE"
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE"
     #   resp.entities[0].attributes[0].id #=> Integer
     #   resp.entities[0].attributes[0].begin_offset #=> Integer
     #   resp.entities[0].attributes[0].end_offset #=> Integer
@@ -586,10 +632,10 @@ module Aws::ComprehendMedical
     #   resp.entities[0].attributes[0].traits[0].score #=> Float
     #   resp.unmapped_attributes #=> Array
     #   resp.unmapped_attributes[0].type #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
-    #   resp.unmapped_attributes[0].attribute.type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
+    #   resp.unmapped_attributes[0].attribute.type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.unmapped_attributes[0].attribute.score #=> Float
     #   resp.unmapped_attributes[0].attribute.relationship_score #=> Float
-    #   resp.unmapped_attributes[0].attribute.relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION", "SYSTEM_ORGAN_SITE"
+    #   resp.unmapped_attributes[0].attribute.relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE"
     #   resp.unmapped_attributes[0].attribute.id #=> Integer
     #   resp.unmapped_attributes[0].attribute.begin_offset #=> Integer
     #   resp.unmapped_attributes[0].attribute.end_offset #=> Integer
@@ -651,15 +697,15 @@ module Aws::ComprehendMedical
     #   resp.entities[0].score #=> Float
     #   resp.entities[0].text #=> String
     #   resp.entities[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
-    #   resp.entities[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
+    #   resp.entities[0].type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].traits #=> Array
     #   resp.entities[0].traits[0].name #=> String, one of "SIGN", "SYMPTOM", "DIAGNOSIS", "NEGATION"
     #   resp.entities[0].traits[0].score #=> Float
     #   resp.entities[0].attributes #=> Array
-    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
+    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].attributes[0].score #=> Float
     #   resp.entities[0].attributes[0].relationship_score #=> Float
-    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION", "SYSTEM_ORGAN_SITE"
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE"
     #   resp.entities[0].attributes[0].id #=> Integer
     #   resp.entities[0].attributes[0].begin_offset #=> Integer
     #   resp.entities[0].attributes[0].end_offset #=> Integer
@@ -670,10 +716,10 @@ module Aws::ComprehendMedical
     #   resp.entities[0].attributes[0].traits[0].score #=> Float
     #   resp.unmapped_attributes #=> Array
     #   resp.unmapped_attributes[0].type #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
-    #   resp.unmapped_attributes[0].attribute.type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
+    #   resp.unmapped_attributes[0].attribute.type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.unmapped_attributes[0].attribute.score #=> Float
     #   resp.unmapped_attributes[0].attribute.relationship_score #=> Float
-    #   resp.unmapped_attributes[0].attribute.relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION", "SYSTEM_ORGAN_SITE"
+    #   resp.unmapped_attributes[0].attribute.relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE"
     #   resp.unmapped_attributes[0].attribute.id #=> Integer
     #   resp.unmapped_attributes[0].attribute.begin_offset #=> Integer
     #   resp.unmapped_attributes[0].attribute.end_offset #=> Integer
@@ -725,15 +771,15 @@ module Aws::ComprehendMedical
     #   resp.entities[0].score #=> Float
     #   resp.entities[0].text #=> String
     #   resp.entities[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
-    #   resp.entities[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
+    #   resp.entities[0].type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].traits #=> Array
     #   resp.entities[0].traits[0].name #=> String, one of "SIGN", "SYMPTOM", "DIAGNOSIS", "NEGATION"
     #   resp.entities[0].traits[0].score #=> Float
     #   resp.entities[0].attributes #=> Array
-    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
+    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DX_NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "PHONE_OR_FAX", "EMAIL", "IDENTIFIER", "ID", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].attributes[0].score #=> Float
     #   resp.entities[0].attributes[0].relationship_score #=> Float
-    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION", "SYSTEM_ORGAN_SITE"
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "TEST_UNIT", "DIRECTION", "SYSTEM_ORGAN_SITE"
     #   resp.entities[0].attributes[0].id #=> Integer
     #   resp.entities[0].attributes[0].begin_offset #=> Integer
     #   resp.entities[0].attributes[0].end_offset #=> Integer
@@ -876,6 +922,78 @@ module Aws::ComprehendMedical
     # @param [Hash] params ({})
     def infer_rx_norm(params = {}, options = {})
       req = build_request(:infer_rx_norm, params)
+      req.send_request(options)
+    end
+
+    # InferSNOMEDCT detects possible medical concepts as entities and links
+    # them to codes from the Systematized Nomenclature of Medicine, Clinical
+    # Terms (SNOMED-CT) ontology
+    #
+    # @option params [required, String] :text
+    #   The input text to be analyzed using InferSNOMEDCT. The text should be
+    #   a string with 1 to 10000 characters.
+    #
+    # @return [Types::InferSNOMEDCTResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InferSNOMEDCTResponse#entities #entities} => Array&lt;Types::SNOMEDCTEntity&gt;
+    #   * {Types::InferSNOMEDCTResponse#pagination_token #pagination_token} => String
+    #   * {Types::InferSNOMEDCTResponse#model_version #model_version} => String
+    #   * {Types::InferSNOMEDCTResponse#snomedct_details #snomedct_details} => Types::SNOMEDCTDetails
+    #   * {Types::InferSNOMEDCTResponse#characters #characters} => Types::Characters
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.infer_snomedct({
+    #     text: "OntologyLinkingBoundedLengthString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].id #=> Integer
+    #   resp.entities[0].text #=> String
+    #   resp.entities[0].category #=> String, one of "MEDICAL_CONDITION", "ANATOMY", "TEST_TREATMENT_PROCEDURE"
+    #   resp.entities[0].type #=> String, one of "DX_NAME", "TEST_NAME", "PROCEDURE_NAME", "TREATMENT_NAME"
+    #   resp.entities[0].score #=> Float
+    #   resp.entities[0].begin_offset #=> Integer
+    #   resp.entities[0].end_offset #=> Integer
+    #   resp.entities[0].attributes #=> Array
+    #   resp.entities[0].attributes[0].category #=> String, one of "MEDICAL_CONDITION", "ANATOMY", "TEST_TREATMENT_PROCEDURE"
+    #   resp.entities[0].attributes[0].type #=> String, one of "ACUITY", "QUALITY", "DIRECTION", "SYSTEM_ORGAN_SITE", "TEST_VALUE", "TEST_UNIT"
+    #   resp.entities[0].attributes[0].score #=> Float
+    #   resp.entities[0].attributes[0].relationship_score #=> Float
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "ACUITY", "QUALITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION", "SYSTEM_ORGAN_SITE"
+    #   resp.entities[0].attributes[0].id #=> Integer
+    #   resp.entities[0].attributes[0].begin_offset #=> Integer
+    #   resp.entities[0].attributes[0].end_offset #=> Integer
+    #   resp.entities[0].attributes[0].text #=> String
+    #   resp.entities[0].attributes[0].traits #=> Array
+    #   resp.entities[0].attributes[0].traits[0].name #=> String, one of "NEGATION", "DIAGNOSIS", "SIGN", "SYMPTOM"
+    #   resp.entities[0].attributes[0].traits[0].score #=> Float
+    #   resp.entities[0].attributes[0].snomedct_concepts #=> Array
+    #   resp.entities[0].attributes[0].snomedct_concepts[0].description #=> String
+    #   resp.entities[0].attributes[0].snomedct_concepts[0].code #=> String
+    #   resp.entities[0].attributes[0].snomedct_concepts[0].score #=> Float
+    #   resp.entities[0].traits #=> Array
+    #   resp.entities[0].traits[0].name #=> String, one of "NEGATION", "DIAGNOSIS", "SIGN", "SYMPTOM"
+    #   resp.entities[0].traits[0].score #=> Float
+    #   resp.entities[0].snomedct_concepts #=> Array
+    #   resp.entities[0].snomedct_concepts[0].description #=> String
+    #   resp.entities[0].snomedct_concepts[0].code #=> String
+    #   resp.entities[0].snomedct_concepts[0].score #=> Float
+    #   resp.pagination_token #=> String
+    #   resp.model_version #=> String
+    #   resp.snomedct_details.edition #=> String
+    #   resp.snomedct_details.language #=> String
+    #   resp.snomedct_details.version_date #=> String
+    #   resp.characters.original_text_characters #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InferSNOMEDCT AWS API Documentation
+    #
+    # @overload infer_snomedct(params = {})
+    # @param [Hash] params ({})
+    def infer_snomedct(params = {}, options = {})
+      req = build_request(:infer_snomedct, params)
       req.send_request(options)
     end
 
@@ -1127,21 +1245,83 @@ module Aws::ComprehendMedical
       req.send_request(options)
     end
 
+    # Gets a list of InferSNOMEDCT jobs a user has submitted.
+    #
+    # @option params [Types::ComprehendMedicalAsyncJobFilter] :filter
+    #   Provides information for filtering a list of detection jobs.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of InferSNOMEDCT results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #
+    # @return [Types::ListSNOMEDCTInferenceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSNOMEDCTInferenceJobsResponse#comprehend_medical_async_job_properties_list #comprehend_medical_async_job_properties_list} => Array&lt;Types::ComprehendMedicalAsyncJobProperties&gt;
+    #   * {Types::ListSNOMEDCTInferenceJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_snomedct_inference_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comprehend_medical_async_job_properties_list #=> Array
+    #   resp.comprehend_medical_async_job_properties_list[0].job_id #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].job_name #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "PARTIAL_SUCCESS", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.comprehend_medical_async_job_properties_list[0].message #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].submit_time #=> Time
+    #   resp.comprehend_medical_async_job_properties_list[0].end_time #=> Time
+    #   resp.comprehend_medical_async_job_properties_list[0].expiration_time #=> Time
+    #   resp.comprehend_medical_async_job_properties_list[0].input_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].input_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].output_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].output_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].language_code #=> String, one of "en"
+    #   resp.comprehend_medical_async_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].manifest_file_path #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].kms_key #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].model_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ListSNOMEDCTInferenceJobs AWS API Documentation
+    #
+    # @overload list_snomedct_inference_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_snomedct_inference_jobs(params = {}, options = {})
+      req = build_request(:list_snomedct_inference_jobs, params)
+      req.send_request(options)
+    end
+
     # Starts an asynchronous medical entity detection job for a collection
     # of documents. Use the `DescribeEntitiesDetectionV2Job` operation to
     # track the status of a job.
     #
     # @option params [required, Types::InputDataConfig] :input_data_config
-    #   Specifies the format and location of the input data for the job.
+    #   The input configuration that specifies the format and location of the
+    #   input data for the job.
     #
     # @option params [required, Types::OutputDataConfig] :output_data_config
-    #   Specifies where to send the output files.
+    #   The output configuration that specifies where to send the output
+    #   files.
     #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend Medical read
-    #   access to your input data. For more information, see [ Role-Based
-    #   Permissions Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Comprehend Medical; read access to
+    #   your input data. For more information, see [ Role-Based Permissions
+    #   Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1152,7 +1332,7 @@ module Aws::ComprehendMedical
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Amazon Comprehend Medical generates one.
+    #   request token, Comprehend Medical; generates one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1163,7 +1343,7 @@ module Aws::ComprehendMedical
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. All documents must be in the same
-    #   language.
+    #   language. Comprehend Medical; processes files in US English (en).
     #
     # @return [Types::StartEntitiesDetectionV2JobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1212,9 +1392,9 @@ module Aws::ComprehendMedical
     #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend Medical read
-    #   access to your input data. For more information, see [ Role-Based
-    #   Permissions Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Comprehend Medical; read access to
+    #   your input data. For more information, see [ Role-Based Permissions
+    #   Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1225,7 +1405,7 @@ module Aws::ComprehendMedical
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Amazon Comprehend Medical generates one.
+    #   request token, Comprehend Medical; generates one.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1285,9 +1465,9 @@ module Aws::ComprehendMedical
     #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend Medical read
-    #   access to your input data. For more information, see [ Role-Based
-    #   Permissions Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Comprehend Medical; read access to
+    #   your input data. For more information, see [ Role-Based Permissions
+    #   Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1298,7 +1478,7 @@ module Aws::ComprehendMedical
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Amazon Comprehend Medical generates one.
+    #   request token, Comprehend Medical; generates one.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1358,9 +1538,9 @@ module Aws::ComprehendMedical
     #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend Medical read
-    #   access to your input data. For more information, see [ Role-Based
-    #   Permissions Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Comprehend Medical; read access to
+    #   your input data. For more information, see [ Role-Based Permissions
+    #   Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1371,7 +1551,7 @@ module Aws::ComprehendMedical
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Amazon Comprehend Medical generates one.
+    #   request token, Comprehend Medical; generates one.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1416,6 +1596,75 @@ module Aws::ComprehendMedical
     # @param [Hash] params ({})
     def start_rx_norm_inference_job(params = {}, options = {})
       req = build_request(:start_rx_norm_inference_job, params)
+      req.send_request(options)
+    end
+
+    # Starts an asynchronous job to detect medical concepts and link them to
+    # the SNOMED-CT ontology. Use the DescribeSNOMEDCTInferenceJob operation
+    # to track the status of a job.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   The input properties for an entities detection job. This includes the
+    #   name of the S3 bucket and the path to the files to be analyzed.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   The output properties for a detection job.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend Medical read
+    #   access to your input data.
+    #
+    # @option params [String] :job_name
+    #   The user generated name the asynchronous InferSNOMEDCT job.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend Medical generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :kms_key
+    #   An AWS Key Management Service key used to encrypt your output files.
+    #   If you do not specify a key, the files are written in plain text.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. All documents must be in the same
+    #   language.
+    #
+    # @return [Types::StartSNOMEDCTInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSNOMEDCTInferenceJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_snomedct_inference_job({
+    #     input_data_config: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key",
+    #     },
+    #     output_data_config: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key",
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     job_name: "JobName",
+    #     client_request_token: "ClientRequestTokenString",
+    #     kms_key: "KMSKey",
+    #     language_code: "en", # required, accepts en
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StartSNOMEDCTInferenceJob AWS API Documentation
+    #
+    # @overload start_snomedct_inference_job(params = {})
+    # @param [Hash] params ({})
+    def start_snomedct_inference_job(params = {}, options = {})
+      req = build_request(:start_snomedct_inference_job, params)
       req.send_request(options)
     end
 
@@ -1531,6 +1780,34 @@ module Aws::ComprehendMedical
       req.send_request(options)
     end
 
+    # Stops an InferSNOMEDCT inference job in progress.
+    #
+    # @option params [required, String] :job_id
+    #   The job id of the asynchronous InferSNOMEDCT job to be stopped.
+    #
+    # @return [Types::StopSNOMEDCTInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopSNOMEDCTInferenceJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_snomedct_inference_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopSNOMEDCTInferenceJob AWS API Documentation
+    #
+    # @overload stop_snomedct_inference_job(params = {})
+    # @param [Hash] params ({})
+    def stop_snomedct_inference_job(params = {}, options = {})
+      req = build_request(:stop_snomedct_inference_job, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1544,7 +1821,7 @@ module Aws::ComprehendMedical
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehendmedical'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

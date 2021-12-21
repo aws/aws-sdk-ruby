@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2021-12-20)
+------------------
+
+* Feature - Make dataset description optional and allow s3 export for dataviews
+
 1.8.0 (2021-11-30)
 ------------------
 

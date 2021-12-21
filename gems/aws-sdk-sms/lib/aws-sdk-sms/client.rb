@@ -359,7 +359,7 @@ module Aws::SMS
     #
     # @option params [String] :role_name
     #   The name of the service role in the customer's account to be used by
-    #   AWS SMS.
+    #   Server Migration Service.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -467,8 +467,8 @@ module Aws::SMS
     end
 
     # Creates a replication job. The replication job schedules periodic
-    # replication runs to replicate your server to AWS. Each replication run
-    # creates an Amazon Machine Image (AMI).
+    # replication runs to replicate your server to Amazon Web Services. Each
+    # replication run creates an Amazon Machine Image (AMI).
     #
     # @option params [required, String] :server_id
     #   The ID of the server.
@@ -487,7 +487,7 @@ module Aws::SMS
     #   replication run.
     #
     # @option params [String] :role_name
-    #   The name of the IAM role to be used by the AWS SMS.
+    #   The name of the IAM role to be used by the Server Migration Service.
     #
     # @option params [String] :description
     #   The description of the replication job.
@@ -547,8 +547,8 @@ module Aws::SMS
     end
 
     # Deletes the specified application. Optionally deletes the launched
-    # stack associated with the application and all AWS SMS replication jobs
-    # for servers in the application.
+    # stack associated with the application and all Server Migration Service
+    # replication jobs for servers in the application.
     #
     # @option params [String] :app_id
     #   The ID of the application.
@@ -649,9 +649,9 @@ module Aws::SMS
     # Deletes the specified replication job.
     #
     # After you delete a replication job, there are no further replication
-    # runs. AWS deletes the contents of the Amazon S3 bucket used to store
-    # AWS SMS artifacts. The AMIs created by the replication runs are not
-    # deleted.
+    # runs. Amazon Web Services deletes the contents of the Amazon S3 bucket
+    # used to store Server Migration Service artifacts. The AMIs created by
+    # the replication runs are not deleted.
     #
     # @option params [required, String] :replication_job_id
     #   The ID of the replication job.
@@ -686,7 +686,7 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Disassociates the specified connector from AWS SMS.
+    # Disassociates the specified connector from Server Migration Service.
     #
     # After you disassociate a connector, it is no longer available to
     # support replication jobs.
@@ -745,16 +745,15 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Generates an AWS CloudFormation template based on the current launch
+    # Generates an CloudFormation template based on the current launch
     # configuration and writes it to an Amazon S3 object in the customer’s
     # Amazon S3 bucket.
     #
     # @option params [String] :app_id
-    #   The ID of the application associated with the AWS CloudFormation
-    #   template.
+    #   The ID of the application associated with the CloudFormation template.
     #
     # @option params [String] :template_format
-    #   The format for generating the AWS CloudFormation template.
+    #   The format for generating the CloudFormation template.
     #
     # @return [Types::GenerateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1061,7 +1060,7 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Describes the connectors registered with the AWS SMS.
+    # Describes the connectors registered with the Server Migration Service.
     #
     # @option params [String] :next_token
     #   The token for the next set of results.
@@ -1342,13 +1341,13 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Allows application import from AWS Migration Hub.
+    # Allows application import from Migration Hub.
     #
     # @option params [String] :role_name
     #   The name of the service role. If you omit this parameter, we create a
-    #   service-linked role for AWS Migration Hub in your account. Otherwise,
-    #   the role that you provide must have the [policy and trust policy][1]
-    #   described in the *AWS Migration Hub User Guide*.
+    #   service-linked role for Migration Hub in your account. Otherwise, the
+    #   role that you provide must have the [policy and trust policy][1]
+    #   described in the *Migration Hub User Guide*.
     #
     #
     #
@@ -1388,7 +1387,7 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Launches the specified application as a stack in AWS CloudFormation.
+    # Launches the specified application as a stack in CloudFormation.
     #
     # @option params [String] :app_id
     #   The ID of the application.
@@ -1471,8 +1470,8 @@ module Aws::SMS
       req.send_request(options)
     end
 
-    # Provides information to AWS SMS about whether application validation
-    # is successful.
+    # Provides information to Server Migration Service about whether
+    # application validation is successful.
     #
     # @option params [required, String] :app_id
     #   The ID of the application.
@@ -1509,7 +1508,7 @@ module Aws::SMS
     #   The ID of the application.
     #
     # @option params [String] :role_name
-    #   The name of service role in the customer's account that AWS
+    #   The name of service role in the customer's account that
     #   CloudFormation uses to launch the application.
     #
     # @option params [Boolean] :auto_launch
@@ -1874,8 +1873,8 @@ module Aws::SMS
     #   The new description of the application.
     #
     # @option params [String] :role_name
-    #   The name of the service role in the customer's account used by AWS
-    #   SMS.
+    #   The name of the service role in the customer's account used by Server
+    #   Migration Service.
     #
     # @option params [Array<Types::ServerGroup>] :server_groups
     #   The server groups in the application to update.
@@ -1994,7 +1993,7 @@ module Aws::SMS
     #   replication run.
     #
     # @option params [String] :role_name
-    #   The name of the IAM role to be used by AWS SMS.
+    #   The name of the IAM role to be used by Server Migration Service.
     #
     # @option params [String] :description
     #   The description of the replication job.
@@ -2060,7 +2059,7 @@ module Aws::SMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sms'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

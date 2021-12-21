@@ -21,12 +21,12 @@ module Aws::ComprehendMedical
     #   @return [String]
     #
     # @!attribute [rw] score
-    #   The level of confidence that Amazon Comprehend Medical has that the
+    #   The level of confidence that Comprehend Medical; has that the
     #   segment of text is correctly recognized as an attribute.
     #   @return [Float]
     #
     # @!attribute [rw] relationship_score
-    #   The level of confidence that Amazon Comprehend Medical has that this
+    #   The level of confidence that Comprehend Medical; has that this
     #   attribute is correctly related to this entity.
     #   @return [Float]
     #
@@ -79,6 +79,21 @@ module Aws::ComprehendMedical
       :text,
       :category,
       :traits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of characters in the input text to be analyzed.
+    #
+    # @!attribute [rw] original_text_characters
+    #   The number of characters present in the input text document as
+    #   processed by Comprehend Medical.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/Characters AWS API Documentation
+    #
+    class Characters < Struct.new(
+      :original_text_characters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -179,8 +194,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     #
     # @!attribute [rw] data_access_role_arn
-    #   The Amazon Resource Name (ARN) that gives Amazon Comprehend Medical
-    #   read access to your input data.
+    #   The Amazon Resource Name (ARN) that gives Comprehend Medical; read
+    #   access to your input data.
     #   @return [String]
     #
     # @!attribute [rw] manifest_file_path
@@ -227,9 +242,9 @@ module Aws::ComprehendMedical
     #       }
     #
     # @!attribute [rw] job_id
-    #   The identifier that Amazon Comprehend Medical generated for the job.
-    #   The `StartEntitiesDetectionV2Job` operation returns this identifier
-    #   in its response.
+    #   The identifier that Comprehend Medical; generated for the job. The
+    #   `StartEntitiesDetectionV2Job` operation returns this identifier in
+    #   its response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribeEntitiesDetectionV2JobRequest AWS API Documentation
@@ -295,8 +310,8 @@ module Aws::ComprehendMedical
     #       }
     #
     # @!attribute [rw] job_id
-    #   The identifier that Amazon Comprehend Medical generated for the job.
-    #   The `StartPHIDetectionJob` operation returns this identifier in its
+    #   The identifier that Comprehend Medical; generated for the job. The
+    #   `StartPHIDetectionJob` operation returns this identifier in its
     #   response.
     #   @return [String]
     #
@@ -355,6 +370,39 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeSNOMEDCTInferenceJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier that Amazon Comprehend Medical generated for the job.
+    #   The StartSNOMEDCTInferenceJob operation returns this identifier in
+    #   its response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribeSNOMEDCTInferenceJobRequest AWS API Documentation
+    #
+    class DescribeSNOMEDCTInferenceJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comprehend_medical_async_job_properties
+    #   Provides information about a detection job.
+    #   @return [Types::ComprehendMedicalAsyncJobProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribeSNOMEDCTInferenceJobResponse AWS API Documentation
+    #
+    class DescribeSNOMEDCTInferenceJobResponse < Struct.new(
+      :comprehend_medical_async_job_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DetectEntitiesRequest
     #   data as a hash:
     #
@@ -380,9 +428,9 @@ module Aws::ComprehendMedical
     #   The collection of medical entities extracted from the input text and
     #   their associated information. For each entity, the response provides
     #   the entity text, the entity category, where the entity text begins
-    #   and ends, and the level of confidence that Amazon Comprehend Medical
-    #   has in the detection and analysis. Attributes and traits of the
-    #   entity are also returned.
+    #   and ends, and the level of confidence that Comprehend Medical; has
+    #   in the detection and analysis. Attributes and traits of the entity
+    #   are also returned.
     #   @return [Array<Types::Entity>]
     #
     # @!attribute [rw] unmapped_attributes
@@ -494,8 +542,8 @@ module Aws::ComprehendMedical
     #   The collection of PHI entities extracted from the input text and
     #   their associated information. For each entity, the response provides
     #   the entity text, the entity category, where the entity text begins
-    #   and ends, and the level of confidence that Amazon Comprehend Medical
-    #   has in its detection.
+    #   and ends, and the level of confidence that Comprehend Medical; has
+    #   in its detection.
     #   @return [Array<Types::Entity>]
     #
     # @!attribute [rw] pagination_token
@@ -540,8 +588,8 @@ module Aws::ComprehendMedical
     #   @return [Integer]
     #
     # @!attribute [rw] score
-    #   The level of confidence that Amazon Comprehend Medical has in the
-    #   accuracy of the detection.
+    #   The level of confidence that Comprehend Medical; has in the accuracy
+    #   of the detection.
     #   @return [Float]
     #
     # @!attribute [rw] text
@@ -767,7 +815,7 @@ module Aws::ComprehendMedical
     #   @return [String]
     #
     # @!attribute [rw] score
-    #   The level of confidence that Amazon Comprehend Medical has that the
+    #   The level of confidence that Comprehend Medical; has that the
     #   segment of text is correctly recognized as a trait.
     #   @return [Float]
     #
@@ -872,6 +920,67 @@ module Aws::ComprehendMedical
       :entities,
       :pagination_token,
       :model_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass InferSNOMEDCTRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text: "OntologyLinkingBoundedLengthString", # required
+    #       }
+    #
+    # @!attribute [rw] text
+    #   The input text to be analyzed using InferSNOMEDCT. The text should
+    #   be a string with 1 to 10000 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InferSNOMEDCTRequest AWS API Documentation
+    #
+    class InferSNOMEDCTRequest < Struct.new(
+      :text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   The collection of medical concept entities extracted from the input
+    #   text and their associated information. For each entity, the response
+    #   provides the entity text, the entity category, where the entity text
+    #   begins and ends, and the level of confidence that Comprehend Medical
+    #   has in the detection and analysis. Attributes and traits of the
+    #   entity are also returned.
+    #   @return [Array<Types::SNOMEDCTEntity>]
+    #
+    # @!attribute [rw] pagination_token
+    #   If the result of the request is truncated, the pagination token can
+    #   be used to fetch the next page of entities.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model used to analyze the documents, in the
+    #   format n.n.n You can use this information to track the model used
+    #   for a particular batch of documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] snomedct_details
+    #   The details of the SNOMED-CT revision, including the edition,
+    #   language, and version date.
+    #   @return [Types::SNOMEDCTDetails]
+    #
+    # @!attribute [rw] characters
+    #   The number of characters in the input request documentation.
+    #   @return [Types::Characters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InferSNOMEDCTResponse AWS API Documentation
+    #
+    class InferSNOMEDCTResponse < Struct.new(
+      :entities,
+      :pagination_token,
+      :model_version,
+      :snomedct_details,
+      :characters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1173,6 +1282,60 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListSNOMEDCTInferenceJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           job_name: "JobName",
+    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
+    #           submit_time_before: Time.now,
+    #           submit_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Provides information for filtering a list of detection jobs.
+    #   @return [Types::ComprehendMedicalAsyncJobFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of InferSNOMEDCT results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ListSNOMEDCTInferenceJobsRequest AWS API Documentation
+    #
+    class ListSNOMEDCTInferenceJobsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comprehend_medical_async_job_properties_list
+    #   A list containing the properties of each job that is returned.
+    #   @return [Array<Types::ComprehendMedicalAsyncJobProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ListSNOMEDCTInferenceJobsResponse AWS API Documentation
+    #
+    class ListSNOMEDCTInferenceJobsResponse < Struct.new(
+      :comprehend_medical_async_job_properties_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The output properties for a detection job.
     #
     # @note When making an API call, you may pass OutputDataConfig
@@ -1192,10 +1355,9 @@ module Aws::ComprehendMedical
     #   @return [String]
     #
     # @!attribute [rw] s3_key
-    #   The path to the output data files in the S3 bucket. Amazon
-    #   Comprehend Medical creates an output directory using the job ID so
-    #   that the output from one job does not overwrite the output of
-    #   another.
+    #   The path to the output data files in the S3 bucket. Comprehend
+    #   Medical; creates an output directory using the job ID so that the
+    #   output from one job does not overwrite the output of another.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/OutputDataConfig AWS API Documentation
@@ -1408,8 +1570,239 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # The Amazon Comprehend Medical service is temporarily unavailable.
-    # Please wait and then retry your request.
+    # The extracted attributes that relate to an entity. An extracted
+    # segment of the text that is an attribute of an entity, or otherwise
+    # related to an entity, such as the dosage of a medication taken.
+    #
+    # @!attribute [rw] category
+    #   The category of the detected attribute. Possible categories include
+    #   MEDICAL\_CONDITION, ANATOMY, and TEST\_TREATMENT\_PROCEDURE.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of attribute. Possible types include DX\_NAME, ACUITY,
+    #   DIRECTION, SYSTEM\_ORGAN\_SITE,TEST\_NAME, TEST\_VALUE, TEST\_UNIT,
+    #   PROCEDURE\_NAME, and TREATMENT\_NAME.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Comprehend Medical has that the segment
+    #   of text is correctly recognized as an attribute.
+    #   @return [Float]
+    #
+    # @!attribute [rw] relationship_score
+    #   The level of confidence that Comprehend Medical has that this
+    #   attribute is correctly related to this entity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] relationship_type
+    #   The type of relationship that exists between the entity and the
+    #   related attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The numeric identifier for this attribute. This is a monotonically
+    #   increasing id unique within this response rather than a global
+    #   unique identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] begin_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   attribute begins. The offset returns the UTF-8 code point in the
+    #   string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   attribute ends. The offset returns the UTF-8 code point in the
+    #   string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text
+    #   The segment of input text extracted as this attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] traits
+    #   Contextual information for an attribute. Examples include signs,
+    #   symptoms, diagnosis, and negation.
+    #   @return [Array<Types::SNOMEDCTTrait>]
+    #
+    # @!attribute [rw] snomedct_concepts
+    #   The SNOMED-CT concepts specific to an attribute, along with a score
+    #   indicating the likelihood of the match.
+    #   @return [Array<Types::SNOMEDCTConcept>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/SNOMEDCTAttribute AWS API Documentation
+    #
+    class SNOMEDCTAttribute < Struct.new(
+      :category,
+      :type,
+      :score,
+      :relationship_score,
+      :relationship_type,
+      :id,
+      :begin_offset,
+      :end_offset,
+      :text,
+      :traits,
+      :snomedct_concepts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The SNOMED-CT concepts that the entity could refer to, along with a
+    # score indicating the likelihood of the match.
+    #
+    # @!attribute [rw] description
+    #   The description of the SNOMED-CT concept.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The numeric ID for the SNOMED-CT concept.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence Comprehend Medical has that the entity
+    #   should be linked to the identified SNOMED-CT concept.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/SNOMEDCTConcept AWS API Documentation
+    #
+    class SNOMEDCTConcept < Struct.new(
+      :description,
+      :code,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information about the revision of the SNOMED-CT ontology in the
+    # response. Specifically, the details include the SNOMED-CT edition,
+    # language, and version date.
+    #
+    # @!attribute [rw] edition
+    #   The edition of SNOMED-CT used. The edition used for the
+    #   InferSNOMEDCT editions is the US edition.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language used in the SNOMED-CT ontology. All Amazon Comprehend
+    #   Medical operations are US English (en).
+    #   @return [String]
+    #
+    # @!attribute [rw] version_date
+    #   The version date of the SNOMED-CT ontology used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/SNOMEDCTDetails AWS API Documentation
+    #
+    class SNOMEDCTDetails < Struct.new(
+      :edition,
+      :language,
+      :version_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The collection of medical entities extracted from the input text and
+    # their associated information. For each entity, the response provides
+    # the entity text, the entity category, where the entity text begins and
+    # ends, and the level of confidence that Comprehend Medical has in the
+    # detection and analysis. Attributes and traits of the entity are also
+    # returned.
+    #
+    # @!attribute [rw] id
+    #   The numeric identifier for the entity. This is a monotonically
+    #   increasing id unique within this response rather than a global
+    #   unique identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text
+    #   The segment of input text extracted as this entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the detected entity. Possible categories are
+    #   MEDICAL\_CONDITION, ANATOMY, or TEST\_TREATMENT\_PROCEDURE.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Describes the specific type of entity with category of entities.
+    #   Possible types include DX\_NAME, ACUITY, DIRECTION,
+    #   SYSTEM\_ORGAN\_SITE, TEST\_NAME, TEST\_VALUE, TEST\_UNIT,
+    #   PROCEDURE\_NAME, or TREATMENT\_NAME.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Comprehend Medical has in the accuracy
+    #   of the detected entity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] begin_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   entity begins. The offset returns the UTF-8 code point in the
+    #   string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   entity ends. The offset returns the UTF-8 code point in the string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attributes
+    #   An extracted segment of the text that is an attribute of an entity,
+    #   or otherwise related to an entity, such as the dosage of a
+    #   medication taken.
+    #   @return [Array<Types::SNOMEDCTAttribute>]
+    #
+    # @!attribute [rw] traits
+    #   Contextual information for the entity.
+    #   @return [Array<Types::SNOMEDCTTrait>]
+    #
+    # @!attribute [rw] snomedct_concepts
+    #   The SNOMED concepts that the entity could refer to, along with a
+    #   score indicating the likelihood of the match.
+    #   @return [Array<Types::SNOMEDCTConcept>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/SNOMEDCTEntity AWS API Documentation
+    #
+    class SNOMEDCTEntity < Struct.new(
+      :id,
+      :text,
+      :category,
+      :type,
+      :score,
+      :begin_offset,
+      :end_offset,
+      :attributes,
+      :traits,
+      :snomedct_concepts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contextual information for an entity.
+    #
+    # @!attribute [rw] name
+    #   The name or contextual description of a detected trait.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Comprehend Medical has in the accuracy
+    #   of a detected trait.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/SNOMEDCTTrait AWS API Documentation
+    #
+    class SNOMEDCTTrait < Struct.new(
+      :name,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Comprehend Medical; service is temporarily unavailable. Please
+    # wait and then retry your request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1442,18 +1835,20 @@ module Aws::ComprehendMedical
     #       }
     #
     # @!attribute [rw] input_data_config
-    #   Specifies the format and location of the input data for the job.
+    #   The input configuration that specifies the format and location of
+    #   the input data for the job.
     #   @return [Types::InputDataConfig]
     #
     # @!attribute [rw] output_data_config
-    #   Specifies where to send the output files.
+    #   The output configuration that specifies where to send the output
+    #   files.
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend Medical read
-    #   access to your input data. For more information, see [ Role-Based
-    #   Permissions Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Comprehend Medical; read access to
+    #   your input data. For more information, see [ Role-Based Permissions
+    #   Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1466,7 +1861,7 @@ module Aws::ComprehendMedical
     #
     # @!attribute [rw] client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Amazon Comprehend Medical generates one.
+    #   request token, Comprehend Medical; generates one for you.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1479,7 +1874,8 @@ module Aws::ComprehendMedical
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. All documents must be in the
-    #   same language.
+    #   same language. Comprehend Medical; processes files in US English
+    #   (en).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StartEntitiesDetectionV2JobRequest AWS API Documentation
@@ -1539,9 +1935,9 @@ module Aws::ComprehendMedical
     #
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend Medical read
-    #   access to your input data. For more information, see [ Role-Based
-    #   Permissions Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Comprehend Medical; read access to
+    #   your input data. For more information, see [ Role-Based Permissions
+    #   Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1554,7 +1950,7 @@ module Aws::ComprehendMedical
     #
     # @!attribute [rw] client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Amazon Comprehend Medical generates one.
+    #   request token, Comprehend Medical; generates one.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1626,9 +2022,9 @@ module Aws::ComprehendMedical
     #
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend Medical read
-    #   access to your input data. For more information, see [ Role-Based
-    #   Permissions Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Comprehend Medical; read access to
+    #   your input data. For more information, see [ Role-Based Permissions
+    #   Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1641,7 +2037,7 @@ module Aws::ComprehendMedical
     #
     # @!attribute [rw] client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Amazon Comprehend Medical generates one.
+    #   request token, Comprehend Medical; generates one.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1713,9 +2109,9 @@ module Aws::ComprehendMedical
     #
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that grants Amazon Comprehend Medical read
-    #   access to your input data. For more information, see [ Role-Based
-    #   Permissions Required for Asynchronous Operations][1].
+    #   Management (IAM) role that grants Comprehend Medical; read access to
+    #   your input data. For more information, see [ Role-Based Permissions
+    #   Required for Asynchronous Operations][1].
     #
     #
     #
@@ -1728,7 +2124,7 @@ module Aws::ComprehendMedical
     #
     # @!attribute [rw] client_request_token
     #   A unique identifier for the request. If you don't set the client
-    #   request token, Amazon Comprehend Medical generates one.
+    #   request token, Comprehend Medical; generates one.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1765,6 +2161,89 @@ module Aws::ComprehendMedical
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StartRxNormInferenceJobResponse AWS API Documentation
     #
     class StartRxNormInferenceJobResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartSNOMEDCTInferenceJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_data_config: { # required
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key",
+    #         },
+    #         output_data_config: { # required
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key",
+    #         },
+    #         data_access_role_arn: "IamRoleArn", # required
+    #         job_name: "JobName",
+    #         client_request_token: "ClientRequestTokenString",
+    #         kms_key: "KMSKey",
+    #         language_code: "en", # required, accepts en
+    #       }
+    #
+    # @!attribute [rw] input_data_config
+    #   The input properties for an entities detection job. This includes
+    #   the name of the S3 bucket and the path to the files to be analyzed.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   The output properties for a detection job.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend Medical read
+    #   access to your input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The user generated name the asynchronous InferSNOMEDCT job.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend Medical generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key
+    #   An AWS Key Management Service key used to encrypt your output files.
+    #   If you do not specify a key, the files are written in plain text.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents. All documents must be in the
+    #   same language.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StartSNOMEDCTInferenceJobRequest AWS API Documentation
+    #
+    class StartSNOMEDCTInferenceJobRequest < Struct.new(
+      :input_data_config,
+      :output_data_config,
+      :data_access_role_arn,
+      :job_name,
+      :client_request_token,
+      :kms_key,
+      :language_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier generated for the job. To get the status of a job,
+    #   use this identifier with the StartSNOMEDCTInferenceJob operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StartSNOMEDCTInferenceJobResponse AWS API Documentation
+    #
+    class StartSNOMEDCTInferenceJobResponse < Struct.new(
       :job_id)
       SENSITIVE = []
       include Aws::Structure
@@ -1897,6 +2376,38 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopSNOMEDCTInferenceJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The job id of the asynchronous InferSNOMEDCT job to be stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopSNOMEDCTInferenceJobRequest AWS API Documentation
+    #
+    class StopSNOMEDCTInferenceJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier generated for the job. To get the status of job, use
+    #   this identifier with the DescribeSNOMEDCTInferenceJob operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopSNOMEDCTInferenceJobResponse AWS API Documentation
+    #
+    class StopSNOMEDCTInferenceJobResponse < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The size of the text you submitted exceeds the size limit. Reduce the
     # size of the text or use a smaller document and then retry your
     # request.
@@ -1934,8 +2445,8 @@ module Aws::ComprehendMedical
     #   @return [String]
     #
     # @!attribute [rw] score
-    #   The level of confidence that Amazon Comprehend Medical has in the
-    #   accuracy of this trait.
+    #   The level of confidence that Comprehend Medical; has in the accuracy
+    #   of this trait.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/Trait AWS API Documentation
@@ -1947,12 +2458,12 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # An attribute that we extracted, but were unable to relate to an
-    # entity.
+    # An attribute that was extracted, but Comprehend Medical; was unable to
+    # relate to an entity.
     #
     # @!attribute [rw] type
-    #   The type of the attribute, could be one of the following values:
-    #   "MEDICATION", "MEDICAL\_CONDITION", "ANATOMY",
+    #   The type of the unmapped attribute, could be one of the following
+    #   values: "MEDICATION", "MEDICAL\_CONDITION", "ANATOMY",
     #   "TEST\_AND\_TREATMENT\_PROCEDURE" or
     #   "PROTECTED\_HEALTH\_INFORMATION".
     #   @return [String]

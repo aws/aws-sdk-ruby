@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2021-12-20)
+------------------
+
+* Feature - This release adds API support for managed Redshift datashares. Customers can now interact with a Redshift datashare that is managed by a different service, such as AWS Data Exchange.
+
 1.74.0 (2021-11-30)
 ------------------
 

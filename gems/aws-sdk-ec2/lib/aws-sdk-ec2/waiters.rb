@@ -83,6 +83,7 @@ module Aws::EC2
   # | instance_status_ok              | {Client#describe_instance_status}         | 15       | 40            |
   # | instance_stopped                | {Client#describe_instances}               | 15       | 40            |
   # | instance_terminated             | {Client#describe_instances}               | 15       | 40            |
+  # | internet_gateway_exists         | {Client#describe_internet_gateways}       | 5        | 6             |
   # | key_pair_exists                 | {Client#describe_key_pairs}               | 5        | 6             |
   # | nat_gateway_available           | {Client#describe_nat_gateways}            | 15       | 40            |
   # | network_interface_available     | {Client#describe_network_interfaces}      | 20       | 10            |
@@ -717,6 +718,49 @@ module Aws::EC2
 
       # @option (see Client#describe_instances)
       # @return (see Client#describe_instances)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class InternetGatewayExists
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (6)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 6,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_internet_gateways,
+            acceptors: [
+              {
+                "expected" => true,
+                "matcher" => "path",
+                "state" => "success",
+                "argument" => "length(internet_gateways[].internet_gateway_id) > `0`"
+              },
+              {
+                "expected" => "InvalidInternetGateway.NotFound",
+                "matcher" => "error",
+                "state" => "retry"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_internet_gateways)
+      # @return (see Client#describe_internet_gateways)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

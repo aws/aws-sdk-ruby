@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-12-08)
+------------------
+
+* Feature - Documentation updates for AWS Support.
+
 1.37.0 (2021-11-30)
 ------------------
 

@@ -10,8 +10,8 @@
 module Aws::Route53RecoveryControlConfig
   module Types
 
-    # 403 response - AccessDeniedException. You do not have sufficient
-    # access to perform this action.
+    # 403 response - You do not have sufficient access to perform this
+    # action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -24,9 +24,13 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # An assertion rule enforces that, when a routing control state is
-    # changed, the criteria set by the rule configuration is met. Otherwise,
-    # the change to the routing control is not accepted.
+    # An assertion rule enforces that, when you change a routing control
+    # state, that the criteria that you set in the rule configuration is
+    # met. Otherwise, the change to the routing control is not accepted. For
+    # example, the criteria might be that at least one routing control state
+    # is On after the transation so that traffic continues to flow to at
+    # least one cell for the application. This ensures that you avoid a
+    # fail-open scenario.
     #
     # @!attribute [rw] asserted_controls
     #   The routing controls that are part of transactions that are
@@ -45,12 +49,13 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     #
     # @!attribute [rw] rule_config
-    #   The criteria that you set for specific assertion controls (routing
-    #   controls) that designate how many controls must be enabled as the
-    #   result of a transaction. For example, if you have three assertion
-    #   controls, you might specify atleast 2 for your rule configuration.
-    #   This means that at least two assertion controls must be enabled, so
-    #   that at least two Amazon Web Services Regions are enabled.
+    #   The criteria that you set for specific assertion routing controls
+    #   (AssertedControls) that designate how many routing control states
+    #   must be ON as the result of a transaction. For example, if you have
+    #   three assertion routing controls, you might specify atleast 2 for
+    #   your rule configuration. This means that at least two assertion
+    #   routing control states must be ON, so that at least two Amazon Web
+    #   Services Regions have traffic flowing to them.
     #   @return [Types::RuleConfig]
     #
     # @!attribute [rw] safety_rule_arn
@@ -92,7 +97,7 @@ module Aws::Route53RecoveryControlConfig
     #
     #       {
     #         name: "__stringMin1Max64PatternS", # required
-    #         safety_rule_arn: "__string", # required
+    #         safety_rule_arn: "__stringMin1Max256PatternAZaZ09", # required
     #         wait_period_ms: 1, # required
     #       }
     #
@@ -122,10 +127,9 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # A cluster is a set of five consensus-forming Regional endpoints that
-    # represent the infrastructure that hosts your routing controls.
-    # Typically, you host together on one cluster all of the routing
-    # controls for your applications.
+    # A set of five redundant Regional endpoints against which you can
+    # execute API calls to update or get the state of routing controls. You
+    # can host multiple control panels and routing controls on one cluster.
     #
     # @!attribute [rw] cluster_arn
     #   The Amazon Resource Name (ARN) of the cluster.
@@ -136,7 +140,7 @@ module Aws::Route53RecoveryControlConfig
     #   want to set or retrieve a routing control state in the cluster.
     #
     #   To get or update the routing control state, see the Amazon Route 53
-    #   Application Recovery Controller Cluster (Data Plane) Actions.
+    #   Application Recovery Controller Routing Control Actions.
     #   @return [Array<Types::ClusterEndpoint>]
     #
     # @!attribute [rw] name
@@ -168,7 +172,7 @@ module Aws::Route53RecoveryControlConfig
     #   the cluster.
     #
     #   To get or update the routing control state, see the Amazon Route 53
-    #   Application Recovery Controller Cluster (Data Plane) Actions.
+    #   Application Recovery Controller Routing Control Actions.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -184,7 +188,8 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # 409 response - ConflictException.
+    # 409 response - ConflictException. You might be using a predefined
+    # variable.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -250,12 +255,17 @@ module Aws::Route53RecoveryControlConfig
     #   data as a hash:
     #
     #       {
-    #         client_token: "__stringMax64",
+    #         client_token: "__stringMin1Max64PatternS",
     #         cluster_name: "__stringMin1Max64PatternS", # required
+    #         tags: {
+    #           "__string" => "__stringMin0Max256PatternS",
+    #         },
     #       }
     #
     # @!attribute [rw] client_token
-    #   Unique client idempotency token.
+    #   A unique, case-sensitive string of up to 64 ASCII characters. To
+    #   make an idempotent API request with an action, specify a client
+    #   token in the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -265,11 +275,16 @@ module Aws::Route53RecoveryControlConfig
     #   The name of the cluster.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags associated with the cluster.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
       :client_token,
-      :cluster_name)
+      :cluster_name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -294,13 +309,18 @@ module Aws::Route53RecoveryControlConfig
     #   data as a hash:
     #
     #       {
-    #         client_token: "__stringMax64",
-    #         cluster_arn: "__string", # required
+    #         client_token: "__stringMin1Max64PatternS",
+    #         cluster_arn: "__stringMin1Max256PatternAZaZ09", # required
     #         control_panel_name: "__stringMin1Max64PatternS", # required
+    #         tags: {
+    #           "__string" => "__stringMin0Max256PatternS",
+    #         },
     #       }
     #
     # @!attribute [rw] client_token
-    #   Unique client idempotency token.
+    #   A unique, case-sensitive string of up to 64 ASCII characters. To
+    #   make an idempotent API request with an action, specify a client
+    #   token in the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -314,12 +334,17 @@ module Aws::Route53RecoveryControlConfig
     #   The name of the control panel.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags associated with the control panel.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateControlPanelRequest AWS API Documentation
     #
     class CreateControlPanelRequest < Struct.new(
       :client_token,
       :cluster_arn,
-      :control_panel_name)
+      :control_panel_name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -346,14 +371,16 @@ module Aws::Route53RecoveryControlConfig
     #   data as a hash:
     #
     #       {
-    #         client_token: "__stringMax64",
-    #         cluster_arn: "__string", # required
-    #         control_panel_arn: "__string",
+    #         client_token: "__stringMin1Max64PatternS",
+    #         cluster_arn: "__stringMin1Max256PatternAZaZ09", # required
+    #         control_panel_arn: "__stringMin1Max256PatternAZaZ09",
     #         routing_control_name: "__stringMin1Max64PatternS", # required
     #       }
     #
     # @!attribute [rw] client_token
-    #   Unique client idempotency token.
+    #   A unique, case-sensitive string of up to 64 ASCII characters. To
+    #   make an idempotent API request with an action, specify a client
+    #   token in the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -406,8 +433,8 @@ module Aws::Route53RecoveryControlConfig
     #
     #       {
     #         assertion_rule: {
-    #           asserted_controls: ["__string"], # required
-    #           control_panel_arn: "__string", # required
+    #           asserted_controls: ["__stringMin1Max256PatternAZaZ09"], # required
+    #           control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
     #           name: "__stringMin1Max64PatternS", # required
     #           rule_config: { # required
     #             inverted: false, # required
@@ -416,42 +443,52 @@ module Aws::Route53RecoveryControlConfig
     #           },
     #           wait_period_ms: 1, # required
     #         },
-    #         client_token: "__stringMax64",
+    #         client_token: "__stringMin1Max64PatternS",
     #         gating_rule: {
-    #           control_panel_arn: "__string", # required
-    #           gating_controls: ["__string"], # required
+    #           control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
+    #           gating_controls: ["__stringMin1Max256PatternAZaZ09"], # required
     #           name: "__stringMin1Max64PatternS", # required
     #           rule_config: { # required
     #             inverted: false, # required
     #             threshold: 1, # required
     #             type: "ATLEAST", # required, accepts ATLEAST, AND, OR
     #           },
-    #           target_controls: ["__string"], # required
+    #           target_controls: ["__stringMin1Max256PatternAZaZ09"], # required
     #           wait_period_ms: 1, # required
+    #         },
+    #         tags: {
+    #           "__string" => "__stringMin0Max256PatternS",
     #         },
     #       }
     #
     # @!attribute [rw] assertion_rule
-    #   A new assertion rule for a control panel.
+    #   The assertion rule requested.
     #   @return [Types::NewAssertionRule]
     #
     # @!attribute [rw] client_token
-    #   Unique client idempotency token.
+    #   A unique, case-sensitive string of up to 64 ASCII characters. To
+    #   make an idempotent API request with an action, specify a client
+    #   token in the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] gating_rule
-    #   A new gating rule for a control panel.
+    #   The gating rule requested.
     #   @return [Types::NewGatingRule]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the safety rule.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateSafetyRuleRequest AWS API Documentation
     #
     class CreateSafetyRuleRequest < Struct.new(
       :assertion_rule,
       :client_token,
-      :gating_rule)
+      :gating_rule,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -459,17 +496,11 @@ module Aws::Route53RecoveryControlConfig
     # The result of a successful CreateSafetyRule request.
     #
     # @!attribute [rw] assertion_rule
-    #   An assertion rule enforces that, when a routing control state is
-    #   changed, the criteria set by the rule configuration is met.
-    #   Otherwise, the change to the routing control is not accepted.
+    #   The assertion rule created.
     #   @return [Types::AssertionRule]
     #
     # @!attribute [rw] gating_rule
-    #   A gating rule verifies that a set of gating controls evaluates as
-    #   true, based on a rule configuration that you specify. If the gating
-    #   rule evaluates to true, Amazon Route 53 Application Recovery
-    #   Controller allows a set of routing control state changes to run and
-    #   complete against the set of target controls.
+    #   The gating rule created.
     #   @return [Types::GatingRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateSafetyRuleResponse AWS API Documentation
@@ -696,17 +727,11 @@ module Aws::Route53RecoveryControlConfig
     # The response when you send a DescribeSafetyRuleResponse request.
     #
     # @!attribute [rw] assertion_rule
-    #   An assertion rule enforces that, when a routing control state is
-    #   changed, the criteria set by the rule configuration is met.
-    #   Otherwise, the change to the routing control is not accepted.
+    #   The assertion rule in the response.
     #   @return [Types::AssertionRule]
     #
     # @!attribute [rw] gating_rule
-    #   A gating rule verifies that a set of gating controls evaluates as
-    #   true, based on a rule configuration that you specify. If the gating
-    #   rule evaluates to true, Amazon Route 53 Application Recovery
-    #   Controller allows a set of routing control state changes to run and
-    #   complete against the set of target controls.
+    #   The gating rule in the response.
     #   @return [Types::GatingRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/DescribeSafetyRuleResponse AWS API Documentation
@@ -718,29 +743,39 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # A gating rule verifies that a set of gating controls evaluates as
-    # true, based on a rule configuration that you specify. If the gating
-    # rule evaluates to true, Amazon Route 53 Application Recovery
-    # Controller allows a set of routing control state changes to run and
-    # complete against the set of target controls.
+    # A gating rule verifies that a gating routing control or set of gating
+    # rounting controls, evaluates as true, based on a rule configuration
+    # that you specify, which allows a set of routing control state changes
+    # to complete.
+    #
+    # For example, if you specify one gating routing control and you set the
+    # Type in the rule configuration to OR, that indicates that you must set
+    # the gating routing control to On for the rule to evaluate as true;
+    # that is, for the gating control "switch" to be "On". When you do
+    # that, then you can update the routing control states for the target
+    # routing controls that you specify in the gating rule.
     #
     # @!attribute [rw] control_panel_arn
     #   The Amazon Resource Name (ARN) of the control panel.
     #   @return [String]
     #
     # @!attribute [rw] gating_controls
-    #   The gating controls for the gating rule. That is, routing controls
-    #   that are evaluated by the rule configuration that you specify.
+    #   An array of gating routing control Amazon Resource Names (ARNs). For
+    #   a simple "on/off" switch, specify the ARN for one routing control.
+    #   The gating routing controls are evaluated by the rule configuration
+    #   that you specify to determine if the target routing control states
+    #   can be changed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
-    #   The name for the gating rule.
+    #   The name for the gating rule. You can use any non-white space
+    #   character in the name.
     #   @return [String]
     #
     # @!attribute [rw] rule_config
-    #   The criteria that you set for specific gating controls (routing
-    #   controls) that designates how many controls must be enabled to allow
-    #   you to change (set or unset) the target controls.
+    #   The criteria that you set for gating routing controls that
+    #   designates how many of the routing control states must be ON to
+    #   allow you to update target routing control states.
     #   @return [Types::RuleConfig]
     #
     # @!attribute [rw] safety_rule_arn
@@ -753,17 +788,12 @@ module Aws::Route53RecoveryControlConfig
     #   @return [String]
     #
     # @!attribute [rw] target_controls
-    #   Routing controls that can only be set or unset if the specified
-    #   RuleConfig evaluates to true for the specified GatingControls. For
-    #   example, say you have three gating controls, one for each of three
-    #   Amazon Web Services Regions. Now you specify ATLEAST 2 as your
-    #   RuleConfig. With these settings, you can only change (set or unset)
-    #   the routing controls that you have specified as TargetControls if
-    #   that rule evaluates to true.
-    #
-    #   In other words, your ability to change the routing controls that you
-    #   have specified as TargetControls is gated by the rule that you set
-    #   for the routing controls in GatingControls.
+    #   An array of target routing control Amazon Resource Names (ARNs) for
+    #   which the states can only be updated if the rule configuration that
+    #   you specify evaluates to true for the gating routing control. As a
+    #   simple example, if you have a single gating control, it acts as an
+    #   overall "on/off" switch for a set of target routing controls. You
+    #   can use this to manually override automated fail over, for example.
     #   @return [Array<String>]
     #
     # @!attribute [rw] wait_period_ms
@@ -797,12 +827,13 @@ module Aws::Route53RecoveryControlConfig
     #
     #       {
     #         name: "__stringMin1Max64PatternS", # required
-    #         safety_rule_arn: "__string", # required
+    #         safety_rule_arn: "__stringMin1Max256PatternAZaZ09", # required
     #         wait_period_ms: 1, # required
     #       }
     #
     # @!attribute [rw] name
-    #   The name for the gating rule.
+    #   The name for the gating rule. You can use any non-white space
+    #   character in the name.
     #   @return [String]
     #
     # @!attribute [rw] safety_rule_arn
@@ -875,7 +906,7 @@ module Aws::Route53RecoveryControlConfig
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token that identifies which batch of results you want to see.
+    #   Next token for listing health checks.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListAssociatedRoute53HealthChecksResponse AWS API Documentation
@@ -1070,14 +1101,46 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful ListTagsForResource request.
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A new assertion rule for a control panel.
     #
     # @note When making an API call, you may pass NewAssertionRule
     #   data as a hash:
     #
     #       {
-    #         asserted_controls: ["__string"], # required
-    #         control_panel_arn: "__string", # required
+    #         asserted_controls: ["__stringMin1Max256PatternAZaZ09"], # required
+    #         control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
     #         name: "__stringMin1Max64PatternS", # required
     #         rule_config: { # required
     #           inverted: false, # required
@@ -1105,11 +1168,12 @@ module Aws::Route53RecoveryControlConfig
     #
     # @!attribute [rw] rule_config
     #   The criteria that you set for specific assertion controls (routing
-    #   controls) that designate how many controls must be enabled as the
+    #   controls) that designate how many control states must be ON as the
     #   result of a transaction. For example, if you have three assertion
-    #   controls, you might specify atleast 2 for your rule configuration.
-    #   This means that at least two assertion controls must be enabled, so
-    #   that at least two Amazon Web Services Regions are enabled.
+    #   controls, you might specify ATLEAST 2for your rule configuration.
+    #   This means that at least two assertion controls must be ON, so that
+    #   at least two Amazon Web Services Regions have traffic flowing to
+    #   them.
     #   @return [Types::RuleConfig]
     #
     # @!attribute [rw] wait_period_ms
@@ -1137,15 +1201,15 @@ module Aws::Route53RecoveryControlConfig
     #   data as a hash:
     #
     #       {
-    #         control_panel_arn: "__string", # required
-    #         gating_controls: ["__string"], # required
+    #         control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
+    #         gating_controls: ["__stringMin1Max256PatternAZaZ09"], # required
     #         name: "__stringMin1Max64PatternS", # required
     #         rule_config: { # required
     #           inverted: false, # required
     #           threshold: 1, # required
     #           type: "ATLEAST", # required, accepts ATLEAST, AND, OR
     #         },
-    #         target_controls: ["__string"], # required
+    #         target_controls: ["__stringMin1Max256PatternAZaZ09"], # required
     #         wait_period_ms: 1, # required
     #       }
     #
@@ -1165,8 +1229,8 @@ module Aws::Route53RecoveryControlConfig
     #
     # @!attribute [rw] rule_config
     #   The criteria that you set for specific gating controls (routing
-    #   controls) that designates how many controls must be enabled to allow
-    #   you to change (set or unset) the target controls.
+    #   controls) that designates how many control states must be ON to
+    #   allow you to change (set or unset) the target control states.
     #   @return [Types::RuleConfig]
     #
     # @!attribute [rw] target_controls
@@ -1203,8 +1267,8 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # 404 response - The query string contains a syntax error or resource
-    # not found.
+    # 404 response - MalformedQueryString. The query string contains a
+    # syntax error or resource not found..
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1256,15 +1320,25 @@ module Aws::Route53RecoveryControlConfig
     # @!attribute [rw] assertion
     #   An assertion rule enforces that, when a routing control state is
     #   changed, the criteria set by the rule configuration is met.
-    #   Otherwise, the change to the routing control is not accepted.
+    #   Otherwise, the change to the routing control state is not accepted.
+    #   For example, the criteria might be that at least one routing control
+    #   state is On after the transation so that traffic continues to flow
+    #   to at least one cell for the application. This ensures that you
+    #   avoid a fail-open scenario.
     #   @return [Types::AssertionRule]
     #
     # @!attribute [rw] gating
-    #   A gating rule verifies that a set of gating controls evaluates as
-    #   true, based on a rule configuration that you specify. If the gating
-    #   rule evaluates to true, Amazon Route 53 Application Recovery
-    #   Controller allows a set of routing control state changes to run and
-    #   complete against the set of target controls.
+    #   A gating rule verifies that a gating routing control or set of
+    #   gating rounting controls, evaluates as true, based on a rule
+    #   configuration that you specify, which allows a set of routing
+    #   control state changes to complete.
+    #
+    #   For example, if you specify one gating routing control and you set
+    #   the Type in the rule configuration to OR, that indicates that you
+    #   must set the gating routing control to On for the rule to evaluate
+    #   as true; that is, for the gating control "switch" to be "On".
+    #   When you do that, then you can update the routing control states for
+    #   the target routing controls that you specify in the gating rule.
     #   @return [Types::GatingRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/Rule AWS API Documentation
@@ -1278,7 +1352,7 @@ module Aws::Route53RecoveryControlConfig
 
     # The rule configuration for an assertion rule. That is, the criteria
     # that you set for specific assertion controls (routing controls) that
-    # specify how many controls must be enabled after a transaction
+    # specify how many control states must be ON after a transaction
     # completes.
     #
     # @note When making an API call, you may pass RuleConfig
@@ -1315,7 +1389,8 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # 402 response
+    # 402 response - You attempted to create more resources than the service
+    # allows based on service quotas.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1328,7 +1403,41 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
-    # 429 response - ThrottlingException.
+    # Request to tag a resource.
+    #
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: { # required
+    #           "__string" => "__stringMin0Max256PatternS",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful TagResource request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # 429 response - LimitExceededException or TooManyRequestsException.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1341,13 +1450,42 @@ module Aws::Route53RecoveryControlConfig
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a successful UntagResource request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # Updates an existing control panel.
     #
     # @note When making an API call, you may pass UpdateControlPanelRequest
     #   data as a hash:
     #
     #       {
-    #         control_panel_arn: "__string", # required
+    #         control_panel_arn: "__stringMin1Max256PatternAZaZ09", # required
     #         control_panel_name: "__stringMin1Max64PatternS", # required
     #       }
     #
@@ -1388,7 +1526,7 @@ module Aws::Route53RecoveryControlConfig
     #   data as a hash:
     #
     #       {
-    #         routing_control_arn: "__string", # required
+    #         routing_control_arn: "__stringMin1Max256PatternAZaZ09", # required
     #         routing_control_name: "__stringMin1Max64PatternS", # required
     #       }
     #
@@ -1432,26 +1570,22 @@ module Aws::Route53RecoveryControlConfig
     #       {
     #         assertion_rule_update: {
     #           name: "__stringMin1Max64PatternS", # required
-    #           safety_rule_arn: "__string", # required
+    #           safety_rule_arn: "__stringMin1Max256PatternAZaZ09", # required
     #           wait_period_ms: 1, # required
     #         },
     #         gating_rule_update: {
     #           name: "__stringMin1Max64PatternS", # required
-    #           safety_rule_arn: "__string", # required
+    #           safety_rule_arn: "__stringMin1Max256PatternAZaZ09", # required
     #           wait_period_ms: 1, # required
     #         },
     #       }
     #
     # @!attribute [rw] assertion_rule_update
-    #   An update to an assertion rule. You can update the name or the
-    #   evaluation period (wait period). If you don't specify one of the
-    #   items to update, the item is unchanged.
+    #   The assertion rule to update.
     #   @return [Types::AssertionRuleUpdate]
     #
     # @!attribute [rw] gating_rule_update
-    #   Update to a gating rule. You can update the name or the evaluation
-    #   period (wait period). If you don't specify one of the items to
-    #   update, the item is unchanged.
+    #   The gating rule to update.
     #   @return [Types::GatingRuleUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UpdateSafetyRuleRequest AWS API Documentation
@@ -1466,17 +1600,11 @@ module Aws::Route53RecoveryControlConfig
     # The result of a successful UpdateSafetyRule request.
     #
     # @!attribute [rw] assertion_rule
-    #   An assertion rule enforces that, when a routing control state is
-    #   changed, the criteria set by the rule configuration is met.
-    #   Otherwise, the change to the routing control is not accepted.
+    #   The assertion rule updated.
     #   @return [Types::AssertionRule]
     #
     # @!attribute [rw] gating_rule
-    #   A gating rule verifies that a set of gating controls evaluates as
-    #   true, based on a rule configuration that you specify. If the gating
-    #   rule evaluates to true, Amazon Route 53 Application Recovery
-    #   Controller allows a set of routing control state changes to run and
-    #   complete against the set of target controls.
+    #   The gating rule updated.
     #   @return [Types::GatingRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UpdateSafetyRuleResponse AWS API Documentation
@@ -1490,7 +1618,7 @@ module Aws::Route53RecoveryControlConfig
 
     # 400 response - Multiple causes. For example, you might have a
     # malformed query string and input parameter might be out of range, or
-    # you used parameters together incorrectly.
+    # you might have used parameters together incorrectly.
     #
     # @!attribute [rw] message
     #   @return [String]

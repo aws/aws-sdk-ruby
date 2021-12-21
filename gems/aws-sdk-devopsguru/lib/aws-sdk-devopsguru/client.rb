@@ -825,13 +825,14 @@ module Aws::DevOpsGuru
     #   * {Types::DescribeOrganizationResourceCollectionHealthResponse#service #service} => Array&lt;Types::ServiceHealth&gt;
     #   * {Types::DescribeOrganizationResourceCollectionHealthResponse#account #account} => Array&lt;Types::AccountHealth&gt;
     #   * {Types::DescribeOrganizationResourceCollectionHealthResponse#next_token #next_token} => String
+    #   * {Types::DescribeOrganizationResourceCollectionHealthResponse#tags #tags} => Array&lt;Types::TagHealth&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_organization_resource_collection_health({
-    #     organization_resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE, AWS_ACCOUNT
+    #     organization_resource_collection_type: "AWS_CLOUD_FORMATION", # required, accepts AWS_CLOUD_FORMATION, AWS_SERVICE, AWS_ACCOUNT, AWS_TAGS
     #     account_ids: ["AwsAccountId"],
     #     organizational_unit_ids: ["OrganizationalUnitId"],
     #     next_token: "UuidNextToken",
@@ -854,6 +855,12 @@ module Aws::DevOpsGuru
     #   resp.account[0].insight.open_proactive_insights #=> Integer
     #   resp.account[0].insight.open_reactive_insights #=> Integer
     #   resp.next_token #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].app_boundary_key #=> String
+    #   resp.tags[0].tag_value #=> String
+    #   resp.tags[0].insight.open_proactive_insights #=> Integer
+    #   resp.tags[0].insight.open_reactive_insights #=> Integer
+    #   resp.tags[0].insight.mean_time_to_recover_in_milliseconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeOrganizationResourceCollectionHealth AWS API Documentation
     #
@@ -2054,7 +2061,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

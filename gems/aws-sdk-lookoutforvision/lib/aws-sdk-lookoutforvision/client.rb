@@ -377,11 +377,17 @@ module Aws::LookoutforVision
     # @option params [String] :client_token
     #   ClientToken is an idempotency token that ensures a call to
     #   `CreateDataset` completes only once. You choose the value to pass. For
-    #   example, An issue, such as an network outage, might prevent you from
-    #   getting a response from `CreateDataset`. In this case, safely retry
-    #   your call to `CreateDataset` by using the same `ClientToken` parameter
-    #   value. An error occurs if the other input parameters are not the same
-    #   as in the first request. Using a different value for `ClientToken` is
+    #   example, An issue might prevent you from getting a response from
+    #   `CreateDataset`. In this case, safely retry your call to
+    #   `CreateDataset` by using the same `ClientToken` parameter value.
+    #
+    #   If you don't supply a value for `ClientToken`, the AWS SDK you are
+    #   using inserts a value for you. This prevents retries after a network
+    #   error from making multiple dataset creation requests. You'll need to
+    #   provide your own value for other use cases.
+    #
+    #   An error occurs if the other input parameters are not the same as in
+    #   the first request. Using a different value for `ClientToken` is
     #   considered a new call to `CreateDataset`. An idempotency token is
     #   active for 8 hours.
     #
@@ -455,9 +461,15 @@ module Aws::LookoutforVision
     # @option params [String] :client_token
     #   ClientToken is an idempotency token that ensures a call to
     #   `CreateModel` completes only once. You choose the value to pass. For
-    #   example, An issue, such as an network outage, might prevent you from
-    #   getting a response from `CreateModel`. In this case, safely retry your
-    #   call to `CreateModel` by using the same `ClientToken` parameter value.
+    #   example, An issue might prevent you from getting a response from
+    #   `CreateModel`. In this case, safely retry your call to `CreateModel`
+    #   by using the same `ClientToken` parameter value.
+    #
+    #   If you don't supply a value for `ClientToken`, the AWS SDK you are
+    #   using inserts a value for you. This prevents retries after a network
+    #   error from starting multiple training jobs. You'll need to provide
+    #   your own value for other use cases.
+    #
     #   An error occurs if the other input parameters are not the same as in
     #   the first request. Using a different value for `ClientToken` is
     #   considered a new call to `CreateModel`. An idempotency token is active
@@ -471,11 +483,10 @@ module Aws::LookoutforVision
     #   results.
     #
     # @option params [String] :kms_key_id
-    #   The identifier for your AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK). The key is used to encrypt training and test images
-    #   copied into the service for model training. Your source images are
-    #   unaffected. If this parameter is not specified, the copied images are
-    #   encrypted by a key that AWS owns and manages.
+    #   The identifier for your AWS KMS key. The key is used to encrypt
+    #   training and test images copied into the service for model training.
+    #   Your source images are unaffected. If this parameter is not specified,
+    #   the copied images are encrypted by a key that AWS owns and manages.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A set of tags (key-value pairs) that you want to attach to the model.
@@ -538,11 +549,17 @@ module Aws::LookoutforVision
     # @option params [String] :client_token
     #   ClientToken is an idempotency token that ensures a call to
     #   `CreateProject` completes only once. You choose the value to pass. For
-    #   example, An issue, such as an network outage, might prevent you from
-    #   getting a response from `CreateProject`. In this case, safely retry
-    #   your call to `CreateProject` by using the same `ClientToken` parameter
-    #   value. An error occurs if the other input parameters are not the same
-    #   as in the first request. Using a different value for `ClientToken` is
+    #   example, An issue might prevent you from getting a response from
+    #   `CreateProject`. In this case, safely retry your call to
+    #   `CreateProject` by using the same `ClientToken` parameter value.
+    #
+    #   If you don't supply a value for `ClientToken`, the AWS SDK you are
+    #   using inserts a value for you. This prevents retries after a network
+    #   error from making multiple project creation requests. You'll need to
+    #   provide your own value for other use cases.
+    #
+    #   An error occurs if the other input parameters are not the same as in
+    #   the first request. Using a different value for `ClientToken` is
     #   considered a new call to `CreateProject`. An idempotency token is
     #   active for 8 hours.
     #
@@ -606,11 +623,17 @@ module Aws::LookoutforVision
     # @option params [String] :client_token
     #   ClientToken is an idempotency token that ensures a call to
     #   `DeleteDataset` completes only once. You choose the value to pass. For
-    #   example, An issue, such as an network outage, might prevent you from
-    #   getting a response from `DeleteDataset`. In this case, safely retry
-    #   your call to `DeleteDataset` by using the same `ClientToken` parameter
-    #   value. An error occurs if the other input parameters are not the same
-    #   as in the first request. Using a different value for `ClientToken` is
+    #   example, An issue might prevent you from getting a response from
+    #   `DeleteDataset`. In this case, safely retry your call to
+    #   `DeleteDataset` by using the same `ClientToken` parameter value.
+    #
+    #   If you don't supply a value for `ClientToken`, the AWS SDK you are
+    #   using inserts a value for you. This prevents retries after a network
+    #   error from making multiple deletetion requests. You'll need to
+    #   provide your own value for other use cases.
+    #
+    #   An error occurs if the other input parameters are not the same as in
+    #   the first request. Using a different value for `ClientToken` is
     #   considered a new call to `DeleteDataset`. An idempotency token is
     #   active for 8 hours.
     #
@@ -640,8 +663,10 @@ module Aws::LookoutforVision
     # running model. To stop a running model, use the StopModel operation.
     #
     # It might take a few seconds to delete a model. To determine if a model
-    # has been deleted, call ListProjects and check if the version of the
+    # has been deleted, call ListModels and check if the version of the
     # model (`ModelVersion`) is in the `Models` array.
+    #
+    #
     #
     # This operation requires permissions to perform the
     # `lookoutvision:DeleteModel` operation.
@@ -656,9 +681,15 @@ module Aws::LookoutforVision
     # @option params [String] :client_token
     #   ClientToken is an idempotency token that ensures a call to
     #   `DeleteModel` completes only once. You choose the value to pass. For
-    #   example, An issue, such as an network outage, might prevent you from
-    #   getting a response from `DeleteModel`. In this case, safely retry your
-    #   call to `DeleteModel` by using the same `ClientToken` parameter value.
+    #   example, an issue might prevent you from getting a response from
+    #   `DeleteModel`. In this case, safely retry your call to `DeleteModel`
+    #   by using the same `ClientToken` parameter value.
+    #
+    #   If you don't supply a value for ClientToken, the AWS SDK you are
+    #   using inserts a value for you. This prevents retries after a network
+    #   error from making multiple model deletion requests. You'll need to
+    #   provide your own value for other use cases.
+    #
     #   An error occurs if the other input parameters are not the same as in
     #   the first request. Using a different value for `ClientToken` is
     #   considered a new call to `DeleteModel`. An idempotency token is active
@@ -675,7 +706,7 @@ module Aws::LookoutforVision
     #
     #   resp = client.delete_model({
     #     project_name: "ProjectName", # required
-    #     model_version: "ModelVersion", # required
+    #     model_version: "ModelVersionNoLatest", # required
     #     client_token: "ClientToken",
     #   })
     #
@@ -711,11 +742,17 @@ module Aws::LookoutforVision
     # @option params [String] :client_token
     #   ClientToken is an idempotency token that ensures a call to
     #   `DeleteProject` completes only once. You choose the value to pass. For
-    #   example, An issue, such as an network outage, might prevent you from
-    #   getting a response from `DeleteProject`. In this case, safely retry
-    #   your call to `DeleteProject` by using the same `ClientToken` parameter
-    #   value. An error occurs if the other input parameters are not the same
-    #   as in the first request. Using a different value for `ClientToken` is
+    #   example, An issue might prevent you from getting a response from
+    #   `DeleteProject`. In this case, safely retry your call to
+    #   `DeleteProject` by using the same `ClientToken` parameter value.
+    #
+    #   If you don't supply a value for `ClientToken`, the AWS SDK you are
+    #   using inserts a value for you. This prevents retries after a network
+    #   error from making multiple project deletion requests. You'll need to
+    #   provide your own value for other use cases.
+    #
+    #   An error occurs if the other input parameters are not the same as in
+    #   the first request. Using a different value for `ClientToken` is
     #   considered a new call to `DeleteProject`. An idempotency token is
     #   active for 8 hours.
     #
@@ -842,6 +879,69 @@ module Aws::LookoutforVision
     # @param [Hash] params ({})
     def describe_model(params = {}, options = {})
       req = build_request(:describe_model, params)
+      req.send_request(options)
+    end
+
+    # Describes an Amazon Lookout for Vision model packaging job.
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:DescribeModelPackagingJob` operation.
+    #
+    # For more information, see *Using your Amazon Lookout for Vision model
+    # on an edge device* in the Amazon Lookout for Vision Developer Guide.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project that contains the model packaging job that you
+    #   want to describe.
+    #
+    # @option params [required, String] :job_name
+    #   The job name for the model packaging job.
+    #
+    # @return [Types::DescribeModelPackagingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeModelPackagingJobResponse#model_packaging_description #model_packaging_description} => Types::ModelPackagingDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_model_packaging_job({
+    #     project_name: "ProjectName", # required
+    #     job_name: "ModelPackagingJobName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_packaging_description.job_name #=> String
+    #   resp.model_packaging_description.project_name #=> String
+    #   resp.model_packaging_description.model_version #=> String
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.compiler_options #=> String
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.target_device #=> String, one of "jetson_xavier"
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.target_platform.os #=> String, one of "LINUX"
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.target_platform.arch #=> String, one of "ARM64", "X86_64"
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.target_platform.accelerator #=> String, one of "NVIDIA"
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.s3_output_location.bucket #=> String
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.s3_output_location.prefix #=> String
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.component_name #=> String
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.component_version #=> String
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.component_description #=> String
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.tags #=> Array
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.tags[0].key #=> String
+    #   resp.model_packaging_description.model_packaging_configuration.greengrass.tags[0].value #=> String
+    #   resp.model_packaging_description.model_packaging_job_description #=> String
+    #   resp.model_packaging_description.model_packaging_method #=> String
+    #   resp.model_packaging_description.model_packaging_output_details.greengrass.component_version_arn #=> String
+    #   resp.model_packaging_description.model_packaging_output_details.greengrass.component_name #=> String
+    #   resp.model_packaging_description.model_packaging_output_details.greengrass.component_version #=> String
+    #   resp.model_packaging_description.status #=> String, one of "CREATED", "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.model_packaging_description.status_message #=> String
+    #   resp.model_packaging_description.creation_timestamp #=> Time
+    #   resp.model_packaging_description.last_updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeModelPackagingJob AWS API Documentation
+    #
+    # @overload describe_model_packaging_job(params = {})
+    # @param [Hash] params ({})
+    def describe_model_packaging_job(params = {}, options = {})
+      req = build_request(:describe_model_packaging_job, params)
       req.send_request(options)
     end
 
@@ -1028,7 +1128,74 @@ module Aws::LookoutforVision
       req.send_request(options)
     end
 
+    # Lists the model packaging jobs created for an Amazon Lookout for
+    # Vision project.
+    #
+    # This operation requires permissions to perform the
+    # `lookoutvision:ListModelPackagingJobs` operation.
+    #
+    # For more information, see *Using your Amazon Lookout for Vision model
+    # on an edge device* in the Amazon Lookout for Vision Developer Guide.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project for which you want to list the model packaging
+    #   jobs.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more results
+    #   to retrieve), Amazon Lookout for Vision returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #
+    # @return [Types::ListModelPackagingJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelPackagingJobsResponse#model_packaging_jobs #model_packaging_jobs} => Array&lt;Types::ModelPackagingJobMetadata&gt;
+    #   * {Types::ListModelPackagingJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_model_packaging_jobs({
+    #     project_name: "ProjectName", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_packaging_jobs #=> Array
+    #   resp.model_packaging_jobs[0].job_name #=> String
+    #   resp.model_packaging_jobs[0].project_name #=> String
+    #   resp.model_packaging_jobs[0].model_version #=> String
+    #   resp.model_packaging_jobs[0].model_packaging_job_description #=> String
+    #   resp.model_packaging_jobs[0].model_packaging_method #=> String
+    #   resp.model_packaging_jobs[0].status #=> String, one of "CREATED", "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.model_packaging_jobs[0].status_message #=> String
+    #   resp.model_packaging_jobs[0].creation_timestamp #=> Time
+    #   resp.model_packaging_jobs[0].last_updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListModelPackagingJobs AWS API Documentation
+    #
+    # @overload list_model_packaging_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_model_packaging_jobs(params = {}, options = {})
+      req = build_request(:list_model_packaging_jobs, params)
+      req.send_request(options)
+    end
+
     # Lists the versions of a model in an Amazon Lookout for Vision project.
+    #
+    # The `ListModels` operation is eventually consistent. Recent calls to
+    # `CreateModel` might take a while to appear in the response from
+    # `ListProjects`.
     #
     # This operation requires permissions to perform the
     # `lookoutvision:ListModels` operation.
@@ -1088,6 +1255,10 @@ module Aws::LookoutforVision
     end
 
     # Lists the Amazon Lookout for Vision projects in your AWS account.
+    #
+    # The `ListProjects` operation is eventually consistent. Recent calls to
+    # `CreateProject` and `DeleteProject` might take a while to appear in
+    # the response from `ListProjects`.
     #
     # This operation requires permissions to perform the
     # `lookoutvision:ListProjects` operation.
@@ -1196,17 +1367,22 @@ module Aws::LookoutforVision
     #
     # @option params [required, Integer] :min_inference_units
     #   The minimum number of inference units to use. A single inference unit
-    #   represents 1 hour of processing and can support up to 5 Transaction
-    #   Pers Second (TPS). Use a higher number to increase the TPS throughput
-    #   of your model. You are charged for the number of inference units that
-    #   you use.
+    #   represents 1 hour of processing. Use a higher number to increase the
+    #   TPS throughput of your model. You are charged for the number of
+    #   inference units that you use.
     #
     # @option params [String] :client_token
     #   ClientToken is an idempotency token that ensures a call to
     #   `StartModel` completes only once. You choose the value to pass. For
-    #   example, An issue, such as an network outage, might prevent you from
-    #   getting a response from `StartModel`. In this case, safely retry your
-    #   call to `StartModel` by using the same `ClientToken` parameter value.
+    #   example, An issue might prevent you from getting a response from
+    #   `StartModel`. In this case, safely retry your call to `StartModel` by
+    #   using the same `ClientToken` parameter value.
+    #
+    #   If you don't supply a value for `ClientToken`, the AWS SDK you are
+    #   using inserts a value for you. This prevents retries after a network
+    #   error from making multiple start requests. You'll need to provide
+    #   your own value for other use cases.
+    #
     #   An error occurs if the other input parameters are not the same as in
     #   the first request. Using a different value for `ClientToken` is
     #   considered a new call to `StartModel`. An idempotency token is active
@@ -1241,6 +1417,130 @@ module Aws::LookoutforVision
       req.send_request(options)
     end
 
+    # Starts an Amazon Lookout for Vision model packaging job. A model
+    # packaging job creates an AWS IoT Greengrass component for a Lookout
+    # for Vision model. You can use the component to deploy your model to an
+    # edge device managed by Greengrass.
+    #
+    # Use the DescribeModelPackagingJob API to determine the current status
+    # of the job. The model packaging job is complete if the value of
+    # `Status` is `SUCCEEDED`.
+    #
+    # To deploy the component to the target device, use the component name
+    # and component version with the AWS IoT Greengrass
+    # [CreateDeployment][1] API.
+    #
+    # This operation requires the following permissions:
+    #
+    # * `lookoutvision:StartModelPackagingJobs`
+    #
+    # * `s3:PutObject`
+    #
+    # * `s3:GetBucketLocation`
+    #
+    # * `greengrass:CreateComponentVersion`
+    #
+    # * `greengrass:DescribeComponent`
+    #
+    # * (Optional) `greengrass:TagResource`. Only required if you want to
+    #   tag the component.
+    #
+    # For more information, see *Using your Amazon Lookout for Vision model
+    # on an edge device* in the Amazon Lookout for Vision Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_CreateDeployment.html
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project which contains the version of the model that
+    #   you want to package.
+    #
+    # @option params [required, String] :model_version
+    #   The version of the model within the project that you want to package.
+    #
+    # @option params [String] :job_name
+    #   A name for the model packaging job. If you don't supply a value, the
+    #   service creates a job name for you.
+    #
+    # @option params [required, Types::ModelPackagingConfiguration] :configuration
+    #   The configuration for the model packaging job.
+    #
+    # @option params [String] :description
+    #   A description for the model packaging job.
+    #
+    # @option params [String] :client_token
+    #   ClientToken is an idempotency token that ensures a call to
+    #   `StartModelPackagingJob` completes only once. You choose the value to
+    #   pass. For example, An issue might prevent you from getting a response
+    #   from `StartModelPackagingJob`. In this case, safely retry your call to
+    #   `StartModelPackagingJob` by using the same `ClientToken` parameter
+    #   value.
+    #
+    #   If you don't supply a value for `ClientToken`, the AWS SDK you are
+    #   using inserts a value for you. This prevents retries after a network
+    #   error from making multiple dataset creation requests. You'll need to
+    #   provide your own value for other use cases.
+    #
+    #   An error occurs if the other input parameters are not the same as in
+    #   the first request. Using a different value for `ClientToken` is
+    #   considered a new call to `StartModelPackagingJob`. An idempotency
+    #   token is active for 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartModelPackagingJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartModelPackagingJobResponse#job_name #job_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_model_packaging_job({
+    #     project_name: "ProjectName", # required
+    #     model_version: "ModelVersion", # required
+    #     job_name: "ModelPackagingJobName",
+    #     configuration: { # required
+    #       greengrass: { # required
+    #         compiler_options: "CompilerOptions", # required
+    #         target_device: "jetson_xavier", # accepts jetson_xavier
+    #         target_platform: {
+    #           os: "LINUX", # required, accepts LINUX
+    #           arch: "ARM64", # required, accepts ARM64, X86_64
+    #           accelerator: "NVIDIA", # required, accepts NVIDIA
+    #         },
+    #         s3_output_location: { # required
+    #           bucket: "S3BucketName", # required
+    #           prefix: "S3KeyPrefix",
+    #         },
+    #         component_name: "ComponentName", # required
+    #         component_version: "ComponentVersion",
+    #         component_description: "ComponentDescription",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     description: "ModelPackagingJobDescription",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/StartModelPackagingJob AWS API Documentation
+    #
+    # @overload start_model_packaging_job(params = {})
+    # @param [Hash] params ({})
+    def start_model_packaging_job(params = {}, options = {})
+      req = build_request(:start_model_packaging_job, params)
+      req.send_request(options)
+    end
+
     # Stops the hosting of a running model. The operation might take a while
     # to complete. To check the current status, call DescribeModel.
     #
@@ -1258,12 +1558,19 @@ module Aws::LookoutforVision
     # @option params [String] :client_token
     #   ClientToken is an idempotency token that ensures a call to `StopModel`
     #   completes only once. You choose the value to pass. For example, An
-    #   issue, such as an network outage, might prevent you from getting a
-    #   response from `StopModel`. In this case, safely retry your call to
-    #   `StopModel` by using the same `ClientToken` parameter value. An error
-    #   occurs if the other input parameters are not the same as in the first
-    #   request. Using a different value for `ClientToken` is considered a new
-    #   call to `StopModel`. An idempotency token is active for 8 hours.
+    #   issue might prevent you from getting a response from `StopModel`. In
+    #   this case, safely retry your call to `StopModel` by using the same
+    #   `ClientToken` parameter value.
+    #
+    #   If you don't supply a value for `ClientToken`, the AWS SDK you are
+    #   using inserts a value for you. This prevents retries after a network
+    #   error from making multiple stop requests. You'll need to provide your
+    #   own value for other use cases.
+    #
+    #   An error occurs if the other input parameters are not the same as in
+    #   the first request. Using a different value for `ClientToken` is
+    #   considered a new call to `StopModel`. An idempotency token is active
+    #   for 8 hours.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1361,9 +1668,22 @@ module Aws::LookoutforVision
       req.send_request(options)
     end
 
-    # Adds one or more JSON Line entries to a dataset. A JSON Line includes
-    # information about an image used for training or testing an Amazon
-    # Lookout for Vision model. The following is an example JSON Line.
+    # Adds or updates one or more JSON Line entries in a dataset. A JSON
+    # Line includes information about an image used for training or testing
+    # an Amazon Lookout for Vision model.
+    #
+    # To update an existing JSON Line, use the `source-ref` field to
+    # identify the JSON Line. The JSON line that you supply replaces the
+    # existing JSON line. Any existing annotations that are not in the new
+    # JSON line are removed from the dataset.
+    #
+    # For more information, see *Defining JSON lines for anomaly
+    # classification* in the Amazon Lookout for Vision Developer Guide.
+    #
+    # <note markdown="1"> The images you reference in the `source-ref` field of a JSON line,
+    # must be in the same S3 bucket as the existing images in the dataset.
+    #
+    #  </note>
     #
     # Updating a dataset might take a while to complete. To check the
     # current status, call DescribeDataset and check the `Status` field in
@@ -1387,13 +1707,20 @@ module Aws::LookoutforVision
     # @option params [String] :client_token
     #   ClientToken is an idempotency token that ensures a call to
     #   `UpdateDatasetEntries` completes only once. You choose the value to
-    #   pass. For example, An issue, such as an network outage, might prevent
-    #   you from getting a response from `UpdateDatasetEntries`. In this case,
-    #   safely retry your call to `UpdateDatasetEntries` by using the same
-    #   `ClientToken` parameter value. An error occurs if the other input
-    #   parameters are not the same as in the first request. Using a different
-    #   value for `ClientToken` is considered a new call to
-    #   `UpdateDatasetEntries`. An idempotency token is active for 8 hours.
+    #   pass. For example, An issue might prevent you from getting a response
+    #   from `UpdateDatasetEntries`. In this case, safely retry your call to
+    #   `UpdateDatasetEntries` by using the same `ClientToken` parameter
+    #   value.
+    #
+    #   If you don't supply a value for `ClientToken`, the AWS SDK you are
+    #   using inserts a value for you. This prevents retries after a network
+    #   error from making multiple updates with the same dataset entries.
+    #   You'll need to provide your own value for other use cases.
+    #
+    #   An error occurs if the other input parameters are not the same as in
+    #   the first request. Using a different value for `ClientToken` is
+    #   considered a new call to `UpdateDatasetEntries`. An idempotency token
+    #   is active for 8 hours.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1437,7 +1764,7 @@ module Aws::LookoutforVision
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutforvision'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

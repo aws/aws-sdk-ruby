@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2021-12-20)
+------------------
+
+* Feature - Adds ForecastDimensions field to the DescribeAutoPredictorResponse
+
 1.29.0 (2021-11-30)
 ------------------
 

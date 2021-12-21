@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2021-12-08)
+------------------
+
+* Feature - This release adds a new set of APIs (synchronous and batch) to support the SNOMED-CT ontology.
+
 1.32.0 (2021-11-30)
 ------------------
 

@@ -3260,7 +3260,7 @@ module Aws::LexModelsV2
     #             ],
     #           },
     #         ],
-    #         value_selection_setting: { # required
+    #         value_selection_setting: {
     #           resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution
     #           regex_filter: {
     #             pattern: "RegexPattern", # required
@@ -3270,6 +3270,15 @@ module Aws::LexModelsV2
     #         bot_id: "Id", # required
     #         bot_version: "DraftBotVersion", # required
     #         locale_id: "LocaleId", # required
+    #         external_source_setting: {
+    #           grammar_slot_type_setting: {
+    #             source: {
+    #               s3_bucket_name: "S3BucketName", # required
+    #               s3_object_key: "S3ObjectPath", # required
+    #               kms_key_arn: "KmsKeyArn",
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] slot_type_name
@@ -3332,6 +3341,10 @@ module Aws::LexModelsV2
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
+    # @!attribute [rw] external_source_setting
+    #   Sets the type of external information used to create the slot type.
+    #   @return [Types::ExternalSourceSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlotTypeRequest AWS API Documentation
     #
     class CreateSlotTypeRequest < Struct.new(
@@ -3342,7 +3355,8 @@ module Aws::LexModelsV2
       :parent_slot_type_signature,
       :bot_id,
       :bot_version,
-      :locale_id)
+      :locale_id,
+      :external_source_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3390,6 +3404,10 @@ module Aws::LexModelsV2
     #   A timestamp of the date and time that the slot type was created.
     #   @return [Time]
     #
+    # @!attribute [rw] external_source_setting
+    #   The type of external information used to create the slot type.
+    #   @return [Types::ExternalSourceSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlotTypeResponse AWS API Documentation
     #
     class CreateSlotTypeResponse < Struct.new(
@@ -3402,7 +3420,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      :creation_date_time)
+      :creation_date_time,
+      :external_source_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4350,6 +4369,11 @@ module Aws::LexModelsV2
     #   have taken place for the locale.
     #   @return [Array<Types::BotLocaleHistoryEvent>]
     #
+    # @!attribute [rw] recommended_actions
+    #   Recommended actions to take to resolve an error in the
+    #   `failureReasons` field.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotLocaleResponse AWS API Documentation
     #
     class DescribeBotLocaleResponse < Struct.new(
@@ -4367,7 +4391,8 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       :last_build_submitted_date_time,
-      :bot_locale_history_events)
+      :bot_locale_history_events,
+      :recommended_actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5212,6 +5237,11 @@ module Aws::LexModelsV2
     #   updated.
     #   @return [Time]
     #
+    # @!attribute [rw] external_source_setting
+    #   Provides information about the external source of the slot type's
+    #   definition.
+    #   @return [Types::ExternalSourceSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeSlotTypeResponse AWS API Documentation
     #
     class DescribeSlotTypeResponse < Struct.new(
@@ -5225,7 +5255,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :external_source_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5428,6 +5459,35 @@ module Aws::LexModelsV2
       :export_status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the external source of the slot type's
+    # definition.
+    #
+    # @note When making an API call, you may pass ExternalSourceSetting
+    #   data as a hash:
+    #
+    #       {
+    #         grammar_slot_type_setting: {
+    #           source: {
+    #             s3_bucket_name: "S3BucketName", # required
+    #             s3_object_key: "S3ObjectPath", # required
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] grammar_slot_type_setting
+    #   Settings required for a slot type based on a grammar that you
+    #   provide.
+    #   @return [Types::GrammarSlotTypeSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ExternalSourceSetting AWS API Documentation
+    #
+    class ExternalSourceSetting < Struct.new(
+      :grammar_slot_type_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6066,6 +6126,66 @@ module Aws::LexModelsV2
       :start_response,
       :update_response,
       :timeout_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings requried for a slot type based on a grammar that you provide.
+    #
+    # @note When making an API call, you may pass GrammarSlotTypeSetting
+    #   data as a hash:
+    #
+    #       {
+    #         source: {
+    #           s3_bucket_name: "S3BucketName", # required
+    #           s3_object_key: "S3ObjectPath", # required
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] source
+    #   The source of the grammar used to create the slot type.
+    #   @return [Types::GrammarSlotTypeSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GrammarSlotTypeSetting AWS API Documentation
+    #
+    class GrammarSlotTypeSetting < Struct.new(
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the Amazon S3 bucket name and location for the grammar that
+    # is the source for the slot type.
+    #
+    # @note When making an API call, you may pass GrammarSlotTypeSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket_name: "S3BucketName", # required
+    #         s3_object_key: "S3ObjectPath", # required
+    #         kms_key_arn: "KmsKeyArn",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket that contains the grammar source.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_key
+    #   The path to the grammar in the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon KMS key required to decrypt the contents of the grammar,
+    #   if any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GrammarSlotTypeSource AWS API Documentation
+    #
+    class GrammarSlotTypeSource < Struct.new(
+      :s3_bucket_name,
+      :s3_object_key,
+      :kms_key_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7988,7 +8108,7 @@ module Aws::LexModelsV2
     #         },
     #         filters: [
     #           {
-    #             name: "SlotTypeName", # required, accepts SlotTypeName
+    #             name: "SlotTypeName", # required, accepts SlotTypeName, ExternalSourceType
     #             values: ["FilterValue"], # required
     #             operator: "CO", # required, accepts CO, EQ
     #           },
@@ -9558,7 +9678,7 @@ module Aws::LexModelsV2
     #   data as a hash:
     #
     #       {
-    #         name: "SlotTypeName", # required, accepts SlotTypeName
+    #         name: "SlotTypeName", # required, accepts SlotTypeName, ExternalSourceType
     #         values: ["FilterValue"], # required
     #         operator: "CO", # required, accepts CO, EQ
     #       }
@@ -9655,6 +9775,27 @@ module Aws::LexModelsV2
     #   updated.
     #   @return [Time]
     #
+    # @!attribute [rw] slot_type_category
+    #   Indicates the type of the slot type.
+    #
+    #   * `Custom` - A slot type that you created using custom values. For
+    #     more information, see [Creating custom slot types][1].
+    #
+    #   * `Extended` - A slot type created by extending the
+    #     AMAZON.AlphaNumeric built-in slot type. For more information, see
+    #     [AMAZON.AlphaNumeric][2].
+    #
+    #   * `ExternalGrammar` - A slot type using a custom GRXML grammar to
+    #     define values. For more information, see [Using a custom grammar
+    #     slot type][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html
+    #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html
+    #   [3]: https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotTypeSummary AWS API Documentation
     #
     class SlotTypeSummary < Struct.new(
@@ -9662,7 +9803,8 @@ module Aws::LexModelsV2
       :slot_type_name,
       :description,
       :parent_slot_type_signature,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :slot_type_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10876,6 +11018,11 @@ module Aws::LexModelsV2
     #   A timestamp of the date and time that the locale was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] recommended_actions
+    #   Recommended actions to take to resolve an error in the
+    #   `failureReasons` field.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocaleResponse AWS API Documentation
     #
     class UpdateBotLocaleResponse < Struct.new(
@@ -10889,7 +11036,8 @@ module Aws::LexModelsV2
       :bot_locale_status,
       :failure_reasons,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :recommended_actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12393,7 +12541,7 @@ module Aws::LexModelsV2
     #             ],
     #           },
     #         ],
-    #         value_selection_setting: { # required
+    #         value_selection_setting: {
     #           resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution
     #           regex_filter: {
     #             pattern: "RegexPattern", # required
@@ -12403,6 +12551,15 @@ module Aws::LexModelsV2
     #         bot_id: "Id", # required
     #         bot_version: "DraftBotVersion", # required
     #         locale_id: "LocaleId", # required
+    #         external_source_setting: {
+    #           grammar_slot_type_setting: {
+    #             source: {
+    #               s3_bucket_name: "S3BucketName", # required
+    #               s3_object_key: "S3ObjectPath", # required
+    #               kms_key_arn: "KmsKeyArn",
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] slot_type_id
@@ -12450,6 +12607,11 @@ module Aws::LexModelsV2
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
+    # @!attribute [rw] external_source_setting
+    #   Provides information about the external source of the slot type's
+    #   definition.
+    #   @return [Types::ExternalSourceSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlotTypeRequest AWS API Documentation
     #
     class UpdateSlotTypeRequest < Struct.new(
@@ -12461,7 +12623,8 @@ module Aws::LexModelsV2
       :parent_slot_type_signature,
       :bot_id,
       :bot_version,
-      :locale_id)
+      :locale_id,
+      :external_source_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12514,6 +12677,11 @@ module Aws::LexModelsV2
     #   updated.
     #   @return [Time]
     #
+    # @!attribute [rw] external_source_setting
+    #   Provides information about the external source of the slot type's
+    #   definition.
+    #   @return [Types::ExternalSourceSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlotTypeResponse AWS API Documentation
     #
     class UpdateSlotTypeResponse < Struct.new(
@@ -12527,7 +12695,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :external_source_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12588,12 +12757,15 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] engine
     #   Indicates the type of Amazon Polly voice that Amazon Lex should use
-    #   for voice interaction with the user. For more information, see
-    #   [Voices in Amazon Polly][1].
+    #   for voice interaction with the user. For more information, see the [
+    #   `engine` parameter of the `SynthesizeSpeech` operation][1] in the
+    #   *Amazon Polly developer guide*.
+    #
+    #   If you do not specify a value, the default is `standard`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/voicelist.html
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/VoiceSettings AWS API Documentation

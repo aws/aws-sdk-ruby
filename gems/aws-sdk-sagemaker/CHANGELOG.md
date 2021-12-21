@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2021-12-20)
+------------------
+
+* Feature - This release adds a new ContentType field in AutoMLChannel for SageMaker CreateAutoMLJob InputDataConfig.
+
+1.111.0 (2021-12-08)
+------------------
+
+* Feature - This release added a new Ambarella device(amba_cv2) compilation support for Sagemaker Neo.
+
 1.110.0 (2021-12-01)
 ------------------
 

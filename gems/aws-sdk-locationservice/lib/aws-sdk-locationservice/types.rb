@@ -1026,7 +1026,7 @@ module Aws::LocationService
     #         collection_name: "ResourceName", # required
     #         description: "ResourceDescription",
     #         kms_key_id: "KmsKeyId",
-    #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #         pricing_plan_data_source: "String",
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -1060,7 +1060,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for the geofence collection.
+    #   Optionally specifies the pricing plan for the geofence collection.
+    #   Defaults to `RequestBasedUsage`.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
@@ -1174,7 +1175,7 @@ module Aws::LocationService
     #         },
     #         description: "ResourceDescription",
     #         map_name: "ResourceName", # required
-    #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -1202,7 +1203,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for your map resource.
+    #   Optionally specifies the pricing plan for the map resource. Defaults
+    #   to `RequestBasedUsage`.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see [Amazon Location Service pricing][1].
@@ -1289,7 +1291,7 @@ module Aws::LocationService
     #         },
     #         description: "ResourceDescription",
     #         index_name: "ResourceName", # required
-    #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -1354,7 +1356,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for your place index resource.
+    #   Optionally specifies the pricing plan for the place index resource.
+    #   Defaults to `RequestBasedUsage`.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see [Amazon Location Service pricing][1].
@@ -1441,7 +1444,7 @@ module Aws::LocationService
     #         calculator_name: "ResourceName", # required
     #         data_source: "String", # required
     #         description: "ResourceDescription",
-    #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -1498,7 +1501,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for your route calculator resource.
+    #   Optionally specifies the pricing plan for the route calculator
+    #   resource. Defaults to `RequestBasedUsage`.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see [Amazon Location Service pricing][1].
@@ -1595,7 +1599,7 @@ module Aws::LocationService
     #         description: "ResourceDescription",
     #         kms_key_id: "KmsKeyId",
     #         position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
-    #         pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #         pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #         pricing_plan_data_source: "String",
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -1649,7 +1653,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Specifies the pricing plan for the tracker resource.
+    #   Optionally specifies the pricing plan for the tracker resource.
+    #   Defaults to `RequestBasedUsage`.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see [Amazon Location Service pricing][1].

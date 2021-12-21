@@ -2048,6 +2048,7 @@ module Aws::SageMaker
     #         },
     #         compression_type: "None", # accepts None, Gzip
     #         target_attribute_name: "TargetAttributeName", # required
+    #         content_type: "ContentType",
     #       }
     #
     # @!attribute [rw] data_source
@@ -2063,12 +2064,19 @@ module Aws::SageMaker
     #   represented by 'y'.
     #   @return [String]
     #
+    # @!attribute [rw] content_type
+    #   The content type of the data from the input source. You can use
+    #   `text/csv;header=present` or `x-application/vnd.amazon+parquet`. The
+    #   default value is `text/csv;header=present`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLChannel AWS API Documentation
     #
     class AutoMLChannel < Struct.new(
       :data_source,
       :compression_type,
-      :target_attribute_name)
+      :target_attribute_name,
+      :content_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4361,6 +4369,7 @@ module Aws::SageMaker
     #             },
     #             compression_type: "None", # accepts None, Gzip
     #             target_attribute_name: "TargetAttributeName", # required
+    #             content_type: "ContentType",
     #           },
     #         ],
     #         output_data_config: { # required
@@ -4567,7 +4576,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
+    #           target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv2, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
     #           target_platform: {
     #             os: "ANDROID", # required, accepts ANDROID, LINUX
     #             arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -30319,7 +30328,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
+    #         target_device: "lambda", # accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_g4dn, ml_inf1, ml_eia2, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv2, amba_cv22, amba_cv25, x86_win32, x86_win64, coreml, jacinto_tda4vm, imx8mplus
     #         target_platform: {
     #           os: "ANDROID", # required, accepts ANDROID, LINUX
     #           arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
@@ -31129,6 +31138,9 @@ module Aws::SageMaker
     #   hit.
     #   @return [Types::CacheHitResult]
     #
+    # @!attribute [rw] attempt_count
+    #   @return [Integer]
+    #
     # @!attribute [rw] failure_reason
     #   The reason why the step failed execution. This is only returned if
     #   the step failed its execution.
@@ -31146,6 +31158,7 @@ module Aws::SageMaker
       :end_time,
       :step_status,
       :cache_hit_result,
+      :attempt_count,
       :failure_reason,
       :metadata)
       SENSITIVE = []

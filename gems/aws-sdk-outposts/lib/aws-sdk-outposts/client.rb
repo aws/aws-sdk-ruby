@@ -426,7 +426,7 @@ module Aws::Outposts
     #   The description of the Outpost.
     #
     # @option params [required, String] :site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #
     # @option params [String] :availability_zone
     #   The Availability Zone.
@@ -605,7 +605,7 @@ module Aws::Outposts
     # Deletes the Outpost.
     #
     # @option params [required, String] :outpost_id
-    #   The ID of the Outpost.
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -627,7 +627,7 @@ module Aws::Outposts
     # Deletes the site.
     #
     # @option params [required, String] :site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -726,7 +726,7 @@ module Aws::Outposts
     # Gets information about the specified Outpost.
     #
     # @option params [required, String] :outpost_id
-    #   The ID of the Outpost.
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #
     # @return [Types::GetOutpostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -766,7 +766,7 @@ module Aws::Outposts
     # Lists the instance types for the specified Outpost.
     #
     # @option params [required, String] :outpost_id
-    #   The ID of the Outpost.
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -809,7 +809,7 @@ module Aws::Outposts
     # Gets information about the specified Outpost site.
     #
     # @option params [required, String] :site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #
     # @return [Types::GetSiteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -856,7 +856,7 @@ module Aws::Outposts
     # Gets the site address.
     #
     # @option params [required, String] :site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #
     # @option params [required, String] :address_type
     #   The type of the address you request.
@@ -1246,10 +1246,62 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # Updates an Outpost.
+    #
+    # @option params [required, String] :outpost_id
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    # @option params [String] :name
+    #   The name of the Outpost.
+    #
+    # @option params [String] :description
+    #   The description of the Outpost.
+    #
+    # @option params [String] :supported_hardware_type
+    #   The type of hardware for this Outpost.
+    #
+    # @return [Types::UpdateOutpostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateOutpostOutput#outpost #outpost} => Types::Outpost
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_outpost({
+    #     outpost_id: "OutpostId", # required
+    #     name: "OutpostName",
+    #     description: "OutpostDescription",
+    #     supported_hardware_type: "RACK", # accepts RACK, SERVER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.outpost.outpost_id #=> String
+    #   resp.outpost.owner_id #=> String
+    #   resp.outpost.outpost_arn #=> String
+    #   resp.outpost.site_id #=> String
+    #   resp.outpost.name #=> String
+    #   resp.outpost.description #=> String
+    #   resp.outpost.life_cycle_status #=> String
+    #   resp.outpost.availability_zone #=> String
+    #   resp.outpost.availability_zone_id #=> String
+    #   resp.outpost.tags #=> Hash
+    #   resp.outpost.tags["TagKey"] #=> String
+    #   resp.outpost.site_arn #=> String
+    #   resp.outpost.supported_hardware_type #=> String, one of "RACK", "SERVER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UpdateOutpost AWS API Documentation
+    #
+    # @overload update_outpost(params = {})
+    # @param [Hash] params ({})
+    def update_outpost(params = {}, options = {})
+      req = build_request(:update_outpost, params)
+      req.send_request(options)
+    end
+
     # Updates the site.
     #
     # @option params [required, String] :site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #
     # @option params [String] :name
     #   The name of the site.
@@ -1315,7 +1367,7 @@ module Aws::Outposts
     # deactivated.
     #
     # @option params [required, String] :site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #
     # @option params [required, String] :address_type
     #   The type of the address.
@@ -1385,7 +1437,7 @@ module Aws::Outposts
     # [1]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist
     #
     # @option params [required, String] :site_id
-    #   The ID of the site.
+    #   The ID or the Amazon Resource Name (ARN) of the site.
     #
     # @option params [String] :power_draw_kva
     #   Specify in kVA the power draw available at the hardware placement
@@ -1545,7 +1597,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

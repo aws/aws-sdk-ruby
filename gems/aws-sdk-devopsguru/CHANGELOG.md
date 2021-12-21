@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2021-12-20)
+------------------
+
+* Feature - Adds Tags support to DescribeOrganizationResourceCollectionHealth
+
 1.17.0 (2021-12-01)
 ------------------
 
