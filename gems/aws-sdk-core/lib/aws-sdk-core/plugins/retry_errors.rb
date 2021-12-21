@@ -163,9 +163,15 @@ a clock skew correction and retry requests with skewed client clocks.
       option(:clock_skew) { Retries::ClockSkew.new }
 
       def self.resolve_retry_mode(cfg)
-        value = ENV['AWS_RETRY_MODE'] ||
-                Aws.shared_config.retry_mode(profile: cfg.profile) ||
-                'legacy'
+        default_mode_value =
+          if cfg.respond_to?(:defaults_mode_config_resolver)
+            cfg.defaults_mode_config_resolver.resolve(:retry_mode)
+          end
+
+          value = ENV['AWS_RETRY_MODE'] ||
+                  Aws.shared_config.retry_mode(profile: cfg.profile) ||
+                  default_mode_value ||
+                  'legacy'
         # Raise if provided value is not one of the retry modes
         if value != 'legacy' && value != 'standard' && value != 'adaptive'
           raise ArgumentError,

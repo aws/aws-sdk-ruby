@@ -64,6 +64,20 @@ module Aws
             'https://sts.us-west-2.amazonaws.com')
         end
 
+        it 'can be set from defaults_mode' do
+          allow_any_instance_of(Aws::DefaultsModeConfigResolver)
+            .to receive(:resolve)
+          allow_any_instance_of(Aws::DefaultsModeConfigResolver)
+            .to receive(:resolve).with(:sts_regional_endpoints).and_return('legacy')
+          client = Client.new(
+            stub_responses: true,
+            region: 'us-west-2',
+            retry_mode: 'standard',
+            defaults_mode: 'standard'
+          )
+          expect(client.config.sts_regional_endpoints).to eq('legacy')
+        end
+
         it 'has no effect on fips endpoint' do
           allow(Aws::Plugins::RegionalEndpoint).to receive(:warn)
 

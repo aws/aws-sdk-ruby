@@ -88,6 +88,9 @@ require_relative 'aws-sdk-core/arn'
 require_relative 'aws-sdk-core/arn_parser'
 require_relative 'aws-sdk-core/ec2_metadata'
 
+# defaults
+require_relative 'aws-defaults'
+
 # plugins
 # loaded through building STS or SSO ..
 
