@@ -189,7 +189,7 @@ module Aws
           post.server_side_encryption_customer_key(key)
           expect(
             post.fields['x-amz-server-side-encryption-customer-key']
-          ).to eq(encoded_key)
+          ).to eq(decoded_key)
           expect(
             post.fields['x-amz-server-side-encryption-customer-key-MD5']
           ).to eq(md5)
